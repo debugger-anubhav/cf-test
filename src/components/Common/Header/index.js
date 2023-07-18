@@ -1,8 +1,7 @@
-import styles from './style.module.css'
+import React from "react";
+import styles from "./style.module.css";
 
-const Header =()=>{
-    return(<div className={styles.header_wrapper}>
-        Header
-    </div>)
-}
+const Header = () => {
+  return <div className={styles.header_wrapper}>Header</div>;
+};
 export default Header;
