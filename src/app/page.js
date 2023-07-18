@@ -18,22 +18,22 @@ import Image from 'next/image'
 
 export default function Home() {
   return (<div>
-      <AnnouncementBar/>
-      <Header/>
-      <MenuList/>
-      <HeroBanner/>
-      <RentFurnitureAndAppliances/>
-      <TrendingProducts/>
-      <WhyCityfurnish/>
-      <HowProductsLook/>
-      <MediaCoverage/>
-      <FurnishingGuaranteed/>
-      <BackedBy/>
-      <HappySubscribers/>
-      <ThreeSteps/>
-      <CTA/>
-      <FrequentlyAskedQuestions/>
-      <Footer/> 
+    <AnnouncementBar />
+    <Header />
+    <MenuList />
+    <HeroBanner />
+    <RentFurnitureAndAppliances />
+    <TrendingProducts />
+    <WhyCityfurnish />
+    <HowProductsLook />
+    <MediaCoverage />
+    <FurnishingGuaranteed />
+    <BackedBy />
+    <HappySubscribers />
+    <ThreeSteps />
+    <CTA />
+    <FrequentlyAskedQuestions />
+    <Footer />
   </div>
   )
 }
