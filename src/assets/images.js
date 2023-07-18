@@ -1,5 +1,5 @@
-import Demo from './demo.png'
+import Demo from "./demo.png";
 
-export default Images = {
-    Demo
+export const Images = {
+  Demo,
 };
