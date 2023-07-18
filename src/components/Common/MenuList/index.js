@@ -1,7 +1,7 @@
-import styles from './style.module.css'
- const MenuList =()=>{
-    return(
-        <div className={styles.menu_list_wrapper}>MenuList</div>
-    )
- }
- export default MenuList;
+import React from "react";
+import styles from "./style.module.css";
+
+const MenuList = () => {
+  return <div className={styles.menu_list_wrapper}>MenuList</div>;
+};
+export default MenuList;
