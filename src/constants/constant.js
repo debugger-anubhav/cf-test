@@ -1,12 +1,11 @@
-export const HeroBannerText = {
-  heading: "Make your picture perfect home with us",
-  btnText: "Explore",
-  subscriberCount: "100K",
-  subscriber: "Subscribers",
-  Google: "Google",
-  stars: "4.5",
-};
+// home page
+import {HomePageImages} from "@/assets/images";
 
-export const TrendingProduct = {
-  heading: "Trending Products",
-};
+export const RentFurniture = [
+  {img: HomePageImages.bedroom, label: "Bedroom"},
+  {img: HomePageImages.studyrooom, label: "Study room"},
+  {img: HomePageImages.livingroom, label: "Living room"},
+  {img: HomePageImages.appliances, label: "Appliances"},
+  {img: HomePageImages.office, label: "Office"},
+  {img: HomePageImages.diningroom, label: "Dining room"},
+];
