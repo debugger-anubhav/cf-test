@@ -21,6 +21,7 @@ module.exports = {
         "btn-primary-hover": "#FACC15",
         "3A3A3A": "#3A3A3A",
         "6A6A6A": "#6A6A6A",
+        fff: "#ffffff",
       },
       fontSize: {
         "main-head": "40px",
