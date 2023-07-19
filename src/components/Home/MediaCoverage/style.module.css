@@ -1,3 +1,15 @@
 .media_coverage_wrapper {
-  @apply flex;
+  @apply pb-8 pt-2 mt-6;
+}
+.label {
+  @apply text-14 pl-4 font-medium leading-5 tracking-desc font-Poppins text-9A9AA2;
+}
+.heading {
+  @apply text-20 font-medium pl-4 leading-8 tracking-heading font-Poppins text-45454A;
+}
+.icons_div {
+  @apply mt-4 pt-4 pl-4 w-full overflow-scroll items-center flex gap-8 bg-[#E5EFF4];
+}
+.icon {
+  @apply h-5 w-fit;
 }
