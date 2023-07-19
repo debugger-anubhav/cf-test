@@ -1,4 +1,4 @@
-import {HeroBannerText} from "@/constant/constant";
+import {HeroBannerText} from "@/constants/constant";
 import styles from "./style.module.css";
 import React from "react";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {TrendingProduct} from "@/constant/constant";
+import {TrendingProduct} from "@/constants/constant";
 import {BiChevronLeft, BiChevronRight} from "react-icons/bi";
 
 const TrendingProducts = () => {
