@@ -8,7 +8,7 @@
     "start": "next start",
     "prepare": "husky install",
     "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
+    "lintAll": "eslint --fix .",
     "prettier": "prettier --write ."
   },
   "dependencies": {

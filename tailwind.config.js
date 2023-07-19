@@ -33,6 +33,11 @@ module.exports = {
       lineHeight: {
         "main-head": "140%",
       },
+      screens: {
+        xs: "428px",
+        desktop: "1440px",
+        "last-screen": "2000px",
+      },
     },
   },
   plugins: [],
