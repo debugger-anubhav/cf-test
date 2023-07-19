@@ -12,12 +12,12 @@
 
 .heading_text {
   /* @apply relative text-2.5xl leading-10 md:text-5.5xl md:leading-74 lg:leading-72 font-bold text-white max-w-md md:max-w-[906px] mx-auto mt-6 md:mt-0 */
-  @apply relative text-[3.5rem] leading-[4.625rem] font-bold text-white font-Poppins max-w-md md:max-w-[906px] mx-auto mt-6 md:mt-0;
+  @apply relative text-[1.75rem] sm:text-[1.75rem] md:text-[3.5rem] xl:text-[3.5rem] leading-[2.5rem] sm:leading-[2.5rem] md:leading-[4.625rem] xl:leading-[4.625rem] font-bold text-white font-Poppins max-w-md md:max-w-[906px] mx-auto mt-6 md:mt-0;
 }
 
 .explor_button {
   /* @apply bg-white inline-block rounded-full py-2 px-14 md:py-3 md:px-20 mt-6 mb-[5px] md:mt-9 md:mb-0 text-lg leading-6 font-semibold md:text-2xl md:leading-8 md:font-bold text-[#333333] hover:bg-ruby-delta; */
-  @apply bg-white inline-block rounded-full py-2 px-14 md:py-3 md:px-20 mt-6 mb-[5px] md:mt-9 md:mb-0 text-lg leading-6 font-semibold md:text-2xl md:leading-8 md:font-bold text-[#333333];
+  @apply bg-white inline-block rounded-full py-2 px-14 md:py-3 md:px-20 mt-6 mb-[5px] md:mt-9 md:mb-0 text-lg leading-6 font-bold xl:font-semibold md:text-2xl md:leading-8 md:font-bold text-[#333333];
   --tw-bg-opacity: 1;
   background-color: rgb(227 227 227 / var(--tw-bg-opacity));
 }

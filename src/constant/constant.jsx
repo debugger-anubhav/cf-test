@@ -6,3 +6,7 @@ export const HeroBannerText = {
   Google: "Google",
   stars: "4.5",
 };
+
+export const TrendingProduct = {
+  heading: "Trending Products",
+};
