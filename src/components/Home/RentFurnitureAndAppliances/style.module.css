@@ -2,7 +2,7 @@
   @apply mx-4 mt-6;
 }
 .head {
-  @apply text-20 font-medium leading-8 text-454545 tracking-heading font-Poppins;
+  @apply text-20 font-medium leading-8 text-45454A tracking-heading font-Poppins;
 }
 .card_div {
   @apply mt-4 flex flex-wrap gap-4;
@@ -11,5 +11,5 @@
   @apply min-w-[98px] max-w-[98px] min-h-[98px] rounded-lg;
 }
 .label {
-  @apply mt-1 text-454545 text-14 font-medium tracking-desc font-Poppins;
+  @apply mt-1 text-45454A text-14 font-medium tracking-desc font-Poppins;
 }

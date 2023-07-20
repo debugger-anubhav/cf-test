@@ -10,7 +10,7 @@ import MenuList from "@/components/Common/MenuList";
 // import HappySubscribers from "@/components/Home/HappySubscribers";
 // // import HeroBanner from "@/components/Home/HeroBanner";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
-// import MediaCoverage from "@/components/Home/MediaCoverage";
+import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
@@ -27,7 +27,7 @@ export default function Home() {
       {/* <TrendingProducts /> */}
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
-      {/* <MediaCoverage /> */}
+      <MediaCoverage />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
