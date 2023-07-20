@@ -1,3 +1,9 @@
-.announcement_bar_wrapper{
-    @apply flex;
+.announcement_bar_wrapper {
+  @apply flex justify-center items-center bg-primary relative;
+}
+.announcement_bar_text {
+  @apply flex font-Poppins text-white md:text-base text-xs font-medium py-3 text-center pl-4 pr-6;
+}
+.announcement_close_icon {
+  @apply absolute sm:right-4 right-2 text-white;
 }

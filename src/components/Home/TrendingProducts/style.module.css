@@ -1,3 +1,19 @@
-.trending_products_wrapper{
-    @apply flex font-Poppins;
+.trending_products_wrapper {
+  @apply flex font-Poppins;
+}
+
+.Heading {
+  @apply sm:text-[2rem] sm:leading-[3.5rem] sm:text-left text-center font-bold text-2xl leading-6;
+}
+
+.heading_container {
+  @apply flex justify-between w-full xl:max-w-[1228px] items-center mb-10;
+}
+
+.arrow_container {
+  @apply flex justify-between;
+}
+
+.LeftArrow {
+  @apply flex bg-[#f6b704] rounded-full p-[0.12rem] ml-2 items-center justify-center font-bold;
 }

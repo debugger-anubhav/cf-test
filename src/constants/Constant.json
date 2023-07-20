@@ -1,0 +1,20 @@
+{
+  "landing_page": {
+    "announcement_bar": " Exclusive Offer - Additional 20% OFF. Use Code 'RENT20'",
+    "header": {},
+    "hero_banner": {
+      "heading": "Make your picture perfect home with us",
+      "btnText": "Explore",
+      "subscriberCount": "100K",
+      "subscriber": "Subscribers",
+      "Google": "Google",
+      "stars": "4.5"
+    },
+    "Rent_furni": "Rent furniture & appliances",
+    "Media_coverage": {
+      "label": "Media coverage",
+      "desc": "Brand that is build on the trust"
+    },
+    "TrendingProduct": {}
+  }
+}
