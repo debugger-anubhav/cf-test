@@ -1,0 +1,18 @@
+.wrapper {
+  @apply pl-4;
+}
+.heading {
+  @apply text-20 leading-8 tracking-heading text-45454A;
+}
+.cards_wrapper {
+  @apply w-full overflow-scroll flex gap-3;
+}
+.card {
+  @apply w-[309px] h-[100px] rounded-xl mt-4 flex py-4 gap-4 pl-5 pr-[17px] bg-[#7E6DD5];
+}
+.desc {
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px];
+}
+.code {
+  @apply mt-2 text-[16px] -tracking-[0.32px] w-[10rem] leading-normal text-white;
+}
