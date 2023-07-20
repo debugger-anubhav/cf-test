@@ -1,5 +1,5 @@
 .wrapper {
-  @apply pl-4;
+  @apply pl-4 mt-8;
 }
 .heading {
   @apply text-20 font-medium leading-8 tracking-heading text-45454A;
@@ -8,22 +8,19 @@
   @apply w-full overflow-scroll flex gap-3 mt-4;
 }
 .card {
-  @apply cursor-pointer w-[309px] h-[100px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] bg-[#3D2D95];
+  @apply cursor-pointer h-[100px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px] bg-[#3D2D95];
 }
 .desc {
   @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px];
 }
 .code {
-  @apply mt-2 text-[16px] -tracking-[0.32px] w-[10rem] leading-normal text-white;
+  @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;
 }
 .copy_div {
   @apply text-14 tracking-desc flex w-24 h-9 bg-white rounded-[20px] justify-center gap-1 items-center;
 }
 .line {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 60%;
+  @apply right-32 absolute top-0 bottom-0;
   border-left: 2px dashed #7e6dd5;
 }
 .ellipse {
