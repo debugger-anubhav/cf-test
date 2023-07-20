@@ -12,8 +12,9 @@ import MenuList from "@/components/Common/MenuList";
 // import HappySubscribers from "@/components/Home/HappySubscribers";
 // // import HeroBanner from "@/components/Home/HeroBanner";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
-import MediaCoverage from "@/components/Home/MediaCoverage";
-import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+// import MediaCoverage from "@/components/Home/MediaCoverage";
+// import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import TrendingProducts from "@/components/Home/TrendingProducts";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
 // import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
@@ -25,11 +26,11 @@ export default function Home() {
       <Header />
       <MenuList />
       {/* <HeroBanner /> */}
-      <RentFurnitureAndAppliances />
-      {/* <TrendingProducts /> */}
+      {/* <RentFurnitureAndAppliances /> */}
+      <TrendingProducts />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
-      <MediaCoverage />
+      {/* <MediaCoverage /> */}
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
