@@ -3,8 +3,8 @@ import {HomePageImages, HomePageMediaCoverage} from "@/assets/images";
 
 export const RentFurniture = [
   {img: HomePageImages.bedroom, label: "Bedroom"},
-  {img: HomePageImages.livingroom, label: "Study room"},
-  {img: HomePageImages.studyroom, label: "Living room"},
+  {img: HomePageImages.studyroom, label: "Study room"},
+  {img: HomePageImages.livingroom, label: "Living room"},
   {img: HomePageImages.appliances, label: "Appliances"},
   {img: HomePageImages.office, label: "Office"},
   {img: HomePageImages.diningroom, label: "Dining room"},
