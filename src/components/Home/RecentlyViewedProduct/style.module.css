@@ -1,0 +1,7 @@
+.main_container {
+  @apply flex flex-col px-4;
+}
+
+.heading {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-4;
+}
