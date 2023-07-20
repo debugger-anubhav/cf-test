@@ -15,6 +15,7 @@ import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndApplia
 import ThreeSteps from "@/components/Home/ThreeSteps";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
+import ChatWithUs from "@/components/Home/ChatWithUs";
 
 export default function Home() {
   return (
@@ -35,6 +36,7 @@ export default function Home() {
       <CTA />
       <FrequentlyAskedQuestions />
       <Footer />
+      <ChatWithUs />
     </div>
   );
 }
