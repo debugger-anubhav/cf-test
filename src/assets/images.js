@@ -7,6 +7,7 @@ import diningroom from "./home_page_assets/rentFurniture/diningroom.svg";
 import livingroom from "./home_page_assets/rentFurniture/livingRoom.svg";
 import office from "./home_page_assets/rentFurniture/office.svg";
 import studyroom from "./home_page_assets/rentFurniture/studyroom.svg";
+import cardThumbnail from "./home_page_assets/commonCard/thumbnail.svg";
 
 // home page mediaa coverage images
 import icon1 from "./home_page_assets/mediaCoverag/icon1.svg";
@@ -30,6 +31,7 @@ export const HomePageImages = {
   diningroom,
   office,
   studyroom,
+  cardThumbnail,
 };
 
 export const HomePageMediaCoverage = {
