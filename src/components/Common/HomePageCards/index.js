@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./card.module.css";
+import styles from "./style.module.css";
 import Image from "next/image";
 import {HomePageImages} from "@/assets/images";
 import {Heart} from "@/assets/icon";
