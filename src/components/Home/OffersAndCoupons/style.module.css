@@ -8,7 +8,7 @@
   @apply w-full overflow-scroll flex gap-3 mt-4;
 }
 .card {
-  @apply w-[309px] h-[100px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] bg-[#3D2D95];
+  @apply cursor-pointer w-[309px] h-[100px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] bg-[#3D2D95];
 }
 .desc {
   @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px];
@@ -27,11 +27,11 @@
   border-left: 2px dashed #7e6dd5;
 }
 .ellipse {
-  @apply w-4 h-4 bg-F7F7F8 rounded-full absolute;
+  @apply w-4 h-4 bg-F7F7F8 rounded-full absolute top-[42px];
 }
 .left {
-  @apply -left-2 top-[45px];
+  @apply -left-2;
 }
 .right {
-  @apply right-0 top-[45px];
+  @apply right-0;
 }

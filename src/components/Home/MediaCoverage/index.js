@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
-  console.log(string, "strtyku");
+
   return (
     <div className={styles.media_coverage_wrapper}>
       <p className={styles.label}>{str.label}</p>
