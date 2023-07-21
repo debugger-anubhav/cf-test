@@ -8,7 +8,10 @@
   @apply w-full overflow-scroll flex gap-3 mt-4;
 }
 .card {
-  @apply cursor-pointer h-[100px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px] bg-[#3D2D95];
+  @apply cursor-pointer h-[100px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px];
+  background: url("../../../assets/home_page_assets//offers/card_bg.svg")
+    no-repeat;
+  background-size: cover;
 }
 .desc {
   @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px];
