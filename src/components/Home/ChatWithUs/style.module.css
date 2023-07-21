@@ -1,5 +1,6 @@
 .main_container {
-  @apply flex-col w-[328px] h-[356px] rounded-s border border-s border-slate-500 outline-none py-6 text-gray-300 px-4;
+  @apply flex-col w-[328px] h-[356px] rounded-s border border-s border-slate-500 
+  outline-none py-6 text-gray-300 px-4 items-start;
 }
 .sub_container {
   @apply flex-col w-[288px] h-[52px];
@@ -29,8 +30,8 @@
   @apply flex w-[288px] rounded-lg border-2 p-2.5 mt-5 justify-center items-center bg-[#F6B704];
 }
 .message_icon{
-  @apply w-[20px] h-[21px] text-[#222];
+  @apply w-[20px] h-[21px] text-[#222] ;
 }
 .chat_now_text{
-  @apply text-[#222] font-Poppins font-medium text-sm leading-5;
+  @apply text-[#222] w-[78px] font-Poppins font-medium text-sm leading-5 justify-center items-center;
 }
