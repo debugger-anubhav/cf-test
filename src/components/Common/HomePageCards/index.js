@@ -4,15 +4,27 @@ import Image from "next/image";
 import {HomePageImages} from "@/assets/images";
 import {Heart} from "@/assets/icon";
 
-const Card = ({desc, currentPrice, originalPrice, discount}) => {
+const Card = ({
+  desc,
+  currentPrice,
+  originalPrice,
+  discount,
+  showincludedItem,
+}) => {
   return (
     <div className={styles.wrapper}>
-      <div>
+      <div className="relative">
         <Image
           src={HomePageImages.cardThumbnail}
           alt="thumbnail image"
           className={styles.thumbnail}
         />
+        {/* ----------- */}
+        {showincludedItem && (
+          <div className={styles.item_included_container}>
+            <p className={styles.item_icluded_text}>5 items included</p>
+          </div>
+        )}
       </div>
       <div className={styles.desc_div}>
         <h3 className={styles.desc}>{desc}</h3>

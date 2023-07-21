@@ -41,7 +41,7 @@ const CustomerRating = () => {
                 <div className="flex gap-2">
                   {[{}, {}, {}, {}, {}].map((item, index) => (
                     <div key={index}>
-                      <RatingStar size={20} color={"#FFCB45"} />
+                      <RatingStar size={16} color={"#FFCB45"} />
                     </div>
                   ))}
                 </div>
