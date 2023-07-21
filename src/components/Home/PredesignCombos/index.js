@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
-import Card from "@/components/Common/HomePageCards/Card";
 import string from "@/constants/Constant.json";
+import Card from "@/components/Common/HomePageCards";
 
 const PreDesignCombos = () => {
   const str = string.landing_page.Common_card;

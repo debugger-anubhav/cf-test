@@ -14,12 +14,11 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import PreDesignCombos from "@/components/Home/PredesignCombos";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
-// import TrendingProducts from "@/components/Home/TrendingProducts";
-// import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
 
 export default function Home() {
   return (
@@ -35,6 +34,7 @@ export default function Home() {
       {/* <HowProductsLook /> */}
       <LimetedPreiodDiscount />
       <MediaCoverage />
+      <OffersAndCoupons />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}

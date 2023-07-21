@@ -1,4 +1,4 @@
-import Card from "@/components/Common/HomePageCards/Card";
+import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import React from "react";
