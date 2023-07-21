@@ -14,9 +14,11 @@ import MenuList from "@/components/Common/MenuList";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import Card from "@/components/Common/HomePageCards/Card";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
 // import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
+import string from "@/constants/Constant.json";
 
 export default function Home() {
   return (
@@ -30,6 +32,14 @@ export default function Home() {
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
       <MediaCoverage />
+      <div>
+        <Card
+          desc={string.landing_page.Common_card.desc}
+          currentPrice={string.landing_page.Common_card.currentPrice}
+          originalPrice={string.landing_page.Common_card.originalPrice}
+          discount={string.landing_page.Common_card.discount}
+        />
+      </div>
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
