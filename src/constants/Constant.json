@@ -66,6 +66,10 @@
         "discount": "-60% OFF"
       }
     ],
+    "Four_steps": {
+      "heading": "How it works",
+      "subhead": "You are just 4 steps away..."
+    },
     "TrendingProduct": {}
   }
 }
