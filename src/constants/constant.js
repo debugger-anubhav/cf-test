@@ -3,6 +3,7 @@ import {
   HomePageImages,
   HomePageMediaCoverage,
   NewProducts,
+  HomePageFourSteps,
 } from "@/assets/images";
 
 export const RentFurniture = [
@@ -32,4 +33,81 @@ export const Newlylaunched = [
   {img: NewProducts.product2, price: "₹1699/mo"},
   {img: NewProducts.product3, price: "₹1699/mo"},
   {img: NewProducts.product4, price: "₹1699/mo"},
+];
+
+export const CustomerRatingsCard = [
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+  {
+    img: "",
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great delivery experience. Mr. Dilip Maurya servicing my delivery order was very polite and co-ordinated very well for delivery even when i was not at home at the time of call and took a few minutes to reach. Assembly was quick and without noise or hassles.",
+  },
+];
+
+export const FourStepsCardData = [
+  {
+    head: "STEP 1",
+    content: "Select a product & tenure to start renting",
+    img: HomePageFourSteps.card1,
+  },
+  {
+    head: "STEP 2",
+    content: "Pay the amount & do KYC",
+    img: HomePageFourSteps.card2,
+  },
+  {
+    head: "STEP 3",
+    content: `Get items delivered
+& assembled
+within 72 hrs`,
+    img: HomePageFourSteps.card3,
+  },
+  {
+    head: "STEP 4",
+    content: "Experience the firsthand magic of furniture",
+    img: HomePageFourSteps.card4,
+  },
 ];

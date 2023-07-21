@@ -26,6 +26,14 @@ import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
 import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
 import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
 
+// home page four steps  section
+import card1 from "./home_page_assets/fourSteps/card1.svg";
+import card2 from "./home_page_assets/fourSteps/card2.svg";
+import card3 from "./home_page_assets/fourSteps/card3.svg";
+import card4 from "./home_page_assets/fourSteps/card4.svg";
+
+import editIcon from "./home_page_assets/rating/editIcon.svg";
+
 export const Images = {
   Demo,
 };
@@ -38,6 +46,7 @@ export const HomePageImages = {
   office,
   studyroom,
   cardThumbnail,
+  editIcon,
 };
 
 export const HomePageMediaCoverage = {
@@ -57,4 +66,11 @@ export const NewProducts = {
   product2,
   product3,
   product4,
+};
+
+export const HomePageFourSteps = {
+  card1,
+  card2,
+  card3,
+  card4,
 };
