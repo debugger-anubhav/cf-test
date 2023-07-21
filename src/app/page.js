@@ -14,6 +14,7 @@ import MenuList from "@/components/Common/MenuList";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
 // import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
@@ -29,6 +30,7 @@ export default function Home() {
       {/* <TrendingProducts /> */}
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
+      <LimetedPreiodDiscount />
       <MediaCoverage />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
