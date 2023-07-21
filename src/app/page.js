@@ -14,11 +14,13 @@ import MenuList from "@/components/Common/MenuList";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
-import Card from "@/components/Common/HomePageCards/Card";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
 // import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
-import string from "@/constants/Constant.json";
+import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
+import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
+
+import CustomerRating from "@/components/Home/Rating";
 
 export default function Home() {
   return (
@@ -31,15 +33,10 @@ export default function Home() {
       {/* <TrendingProducts /> */}
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
+      <LimetedPreiodDiscount />
       <MediaCoverage />
-      <div>
-        <Card
-          desc={string.landing_page.Common_card.desc}
-          currentPrice={string.landing_page.Common_card.currentPrice}
-          originalPrice={string.landing_page.Common_card.originalPrice}
-          discount={string.landing_page.Common_card.discount}
-        />
-      </div>
+      <OffersAndCoupons />
+      <CustomerRating />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}

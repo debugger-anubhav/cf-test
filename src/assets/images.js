@@ -20,6 +20,8 @@ import icon7 from "./home_page_assets/mediaCoverag/icon7.svg";
 import icon8 from "./home_page_assets/mediaCoverag/icon8.svg";
 import icon9 from "./home_page_assets/mediaCoverag/icon9.svg";
 
+import editIcon from "./home_page_assets/rating/editIcon.svg";
+
 export const Images = {
   Demo,
 };
@@ -32,6 +34,7 @@ export const HomePageImages = {
   office,
   studyroom,
   cardThumbnail,
+  editIcon,
 };
 
 export const HomePageMediaCoverage = {
