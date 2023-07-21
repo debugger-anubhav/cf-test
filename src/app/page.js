@@ -27,7 +27,7 @@ export default function Home() {
       <Header />
       <MenuList />
       {/* <HeroBanner /> */}
-      {/* <RentFurnitureAndAppliances /> */}
+      <RentFurnitureAndAppliances />
       <TrendingProducts />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
