@@ -1,14 +1,14 @@
-import React from "react";
+import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-import Card from "@/components/Common/HomePageCards/Card";
 import string from "@/constants/Constant.json";
+import React from "react";
 
-const TrendingProducts = () => {
+const LimetedPreiodDiscount = () => {
   const str = string.landing_page.Common_card;
   return (
     <div className={styles.main_container}>
-      <h2 className={styles.heading}>Crowd Favourite</h2>
-      <h3 className={styles.subHeading}>Best Selling Products</h3>
+      <h2 className={styles.heading}>Limited period discounts</h2>
+      <h3 className={styles.subHeading}>Hurry before it ends</h3>
       <div className="flex overflow-x-scroll">
         {str.map((item, index) => (
           <div key={index} className="mr-4">
@@ -24,4 +24,5 @@ const TrendingProducts = () => {
     </div>
   );
 };
-export default TrendingProducts;
+
+export default LimetedPreiodDiscount;

@@ -1,19 +1,10 @@
-.trending_products_wrapper {
-  @apply flex font-Poppins;
+.main_container {
+  @apply flex flex-col w-[360px] bg-gradient-to-r from-yellow-100 via-white to-yellow-100 px-4 py-4;
 }
 
-.Heading {
-  @apply sm:text-[2rem] sm:leading-[3.5rem] sm:text-left text-center font-bold text-2xl leading-6;
+.heading {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading;
 }
-
-.heading_container {
-  @apply flex justify-between w-full xl:max-w-[1228px] items-center mb-10;
-}
-
-.arrow_container {
-  @apply flex justify-between;
-}
-
-.LeftArrow {
-  @apply flex bg-[#f6b704] rounded-full p-[0.12rem] ml-2 items-center justify-center font-bold;
+.subHeading {
+  @apply text-9A9AA2 font-Poppins text-14 font-medium leading-5 tracking-desc pb-4;
 }
