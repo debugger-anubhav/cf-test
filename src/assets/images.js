@@ -20,6 +20,12 @@ import icon7 from "./home_page_assets/mediaCoverag/icon7.svg";
 import icon8 from "./home_page_assets/mediaCoverag/icon8.svg";
 import icon9 from "./home_page_assets/mediaCoverag/icon9.svg";
 
+// home page four steps  section
+import card1 from "./home_page_assets/fourSteps/card1.svg";
+import card2 from "./home_page_assets/fourSteps/card2.svg";
+import card3 from "./home_page_assets/fourSteps/card3.svg";
+import card4 from "./home_page_assets/fourSteps/card4.svg";
+
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
 export const Images = {
@@ -47,4 +53,11 @@ export const HomePageMediaCoverage = {
   icon7,
   icon8,
   icon9,
+};
+
+export const HomePageFourSteps = {
+  card1,
+  card2,
+  card3,
+  card4,
 };

@@ -22,6 +22,7 @@ import ChatWithUs from "@/components/Home/ChatWithUs";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import FourSteps from "@/components/Home/FourSteps";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -44,7 +45,7 @@ export default function Home() {
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
-      {/* <ThreeSteps /> */}
+      <FourSteps />
       {/* <CTA /> */}
       {/* <FrequentlyAskedQuestions /> */}
       {/* <Footer /> */}
