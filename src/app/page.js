@@ -16,6 +16,7 @@ import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
 import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
 import TrendingProducts from "@/components/Home/TrendingProducts";
+import PreDesignCombos from "@/components/Home/PredesignCombos";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 // import TrendingProducts from "@/components/Home/TrendingProducts";
 // import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
@@ -29,6 +30,7 @@ export default function Home() {
       {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
       <TrendingProducts />
+      <PreDesignCombos />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
       <LimetedPreiodDiscount />

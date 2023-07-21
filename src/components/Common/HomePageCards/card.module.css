@@ -8,7 +8,7 @@
   @apply mt-1 flex gap-2;
 }
 .desc {
-  @apply text-14 font-medium tracking-desc text-71717A w-[15.3rem] font-Poppins;
+  @apply text-14 font-medium leading-normal tracking-desc text-71717A w-[15.3rem] font-Poppins;
 }
 .price_div {
   @apply mt-1 flex justify-between items-center;

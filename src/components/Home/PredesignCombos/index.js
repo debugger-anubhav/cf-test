@@ -10,7 +10,7 @@ const PreDesignCombos = () => {
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box}>
         {str.map((item, index) => (
-          <div key={index} className="mr-4">
+          <div key={index}>
             <Card
               desc={item.desc}
               originalPrice={item.originalPrice}

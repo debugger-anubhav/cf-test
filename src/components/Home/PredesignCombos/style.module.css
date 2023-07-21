@@ -1,5 +1,9 @@
 .main_container {
-  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading;
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading px-4 py-8;
+}
+
+.heading {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-4;
 }
 
 .item_included_container {
@@ -10,5 +14,5 @@
   @apply text-45454A font-Poppins text-12 font-medium leading-normal;
 }
 .card_box {
-  @apply flex overflow-x-scroll;
+  @apply flex w-full gap-4 overflow-y-hidden overflow-x-scroll;
 }
