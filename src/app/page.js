@@ -17,7 +17,7 @@ import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndApplia
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
-// import TrendingProducts from "@/components/Home/TrendingProducts";
+import TrendingProducts from "@/components/Home/TrendingProducts";
 
 export default function Home() {
   return (
@@ -27,7 +27,7 @@ export default function Home() {
       <MenuList />
       {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
-      {/* <TrendingProducts /> */}
+      <TrendingProducts />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
       <LimetedPreiodDiscount />
