@@ -70,6 +70,10 @@
       "heading": "How it works",
       "subhead": "You are just 4 steps away..."
     },
-    "TrendingProduct": {}
+    "TrendingProduct": {},
+    "Newlylaunced": {
+      "heading": "Newly Launched",
+      "productRent": "products to rent"
+    }
   }
 }

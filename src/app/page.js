@@ -23,6 +23,7 @@ import TrendingProducts from "@/components/Home/TrendingProducts";
 import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import FourSteps from "@/components/Home/FourSteps";
+import NewlyLaunched from "@/components/Home/NewlyLaunched";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -41,6 +42,7 @@ export default function Home() {
       <LimetedPreiodDiscount />
       <MediaCoverage />
       <OffersAndCoupons />
+      <NewlyLaunched />
       <CustomerRating />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
