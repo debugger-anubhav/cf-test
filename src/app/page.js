@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
@@ -18,6 +16,7 @@ import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import ChatWithUs from "@/components/Home/ChatWithUs";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
@@ -46,6 +45,7 @@ export default function Home() {
       {/* <CTA /> */}
       {/* <FrequentlyAskedQuestions /> */}
       {/* <Footer /> */}
+      <ChatWithUs />
     </div>
   );
 }

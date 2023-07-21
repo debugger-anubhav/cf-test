@@ -1,7 +1,7 @@
 import React from "react";
+import {BiSolidMessage} from "react-icons/bi";
 import {IoClose} from "react-icons/io5";
-
-// home page icons
+import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
 
@@ -11,6 +11,12 @@ export const Close = ({size, color, className}) => (
 
 export const Heart = ({size, color, className}) => (
   <VscHeartFilled size={size} color={color} className={className} />
+);
+export const Mail = ({size, color, className}) => (
+  <TbMailFilled size={size} color={color} className={className} />
+);
+export const Message = ({size, color, className}) => (
+  <BiSolidMessage size={size} color={color} className={className} />
 );
 
 export const CopyIcon = ({size, color, className}) => (
