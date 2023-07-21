@@ -1,37 +1,40 @@
 .main_container {
-  @apply flex-col w-[328px] h-[356px] rounded-s border border-s border-slate-500 
-  outline-none py-6 text-gray-300 px-4 items-start;
+  @apply flex-col w-[328px] h-[356px] rounded border border-s border-[#DDDDDF] 
+  outline-none py-6 text-gray-300 px-4 items-start m-4;
 }
 .sub_container {
   @apply flex-col w-[288px] h-[52px];
 }
 .sub_paragraph {
-  @apply font-Poppins font-medium text-sm leading-5 tracking-tighter text-gray-500;
+  @apply font-Poppins font-medium text-sm leading-5 tracking-tighter text-[#9A9AA2];
 }
 .sub_heading {
-  @apply self-stretch text-gray-700 font-Poppins text-xl not-italic font-medium leading-8 tracking-tighter;
+  @apply self-stretch text-[#45454A] font-Poppins text-xl not-italic font-medium leading-8 tracking-tighter;
 }
 .mid_section {
   @apply flex-col;
 }
 .sub_paragraph_details {
-  @apply font-Poppins font-normal text-base leading-6 text-[#48678B] w-[288px] mt-4 gap-12;
+  @apply font-Poppins font-normal text-base leading-6 text-[#71717A] w-[288px] mt-4;
+}
+.mail_address {
+  @apply text-[#48678B];
 }
 .write_to_us_wrapper {
-  @apply flex w-[288px] rounded-lg border-2 p-2.5 mt-5 justify-center bg-[#FFF;] ;
+  @apply flex w-[288px] rounded-lg border-2 p-2.5 mt-5 justify-center border-[#71717A] bg-[#FFF];
 }
-.tbMail_icon{
+.tbMail_icon {
   @apply w-[20px] h-[21px] text-[#71717A];
 }
-.write_to_us_text{
-  @apply font-Poppins w-[86px] h-[20px] text-[#71717A] text-sm leading-5;  
+.write_to_us_text {
+  @apply font-Poppins w-[86px] h-[20px] text-[#71717A] text-sm leading-5;
 }
-.chat_now_wrapper{
-  @apply flex w-[288px] rounded-lg border-2 p-2.5 mt-5 justify-center items-center bg-[#F6B704];
+.chat_now_wrapper {
+  @apply flex w-[288px] rounded-lg p-2.5 mt-5 justify-center items-center bg-[#F6B704];
 }
-.message_icon{
-  @apply w-[20px] h-[21px] text-[#222] ;
+.message_icon {
+  @apply w-[20px] h-[21px] text-[#222];
 }
-.chat_now_text{
+.chat_now_text {
   @apply text-[#222] w-[78px] font-Poppins font-medium text-sm leading-5 justify-center items-center;
 }

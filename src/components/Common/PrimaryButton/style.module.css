@@ -1,0 +1,4 @@
+.btn {
+  @apply w-[249.5px] h-[3.5rem] flex justify-center items-center rounded-[9999px] font-medium bg-btn-primary hover:bg-btn-primary-hover
+  text-3A3A3A text-18;
+}

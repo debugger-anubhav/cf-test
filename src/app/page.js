@@ -1,21 +1,21 @@
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import CTA from "@/components/Common/CTA";
-import Footer from "@/components/Common/Footer";
-import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
+// import CTA from "@/components/Common/CTA";
+// import Footer from "@/components/Common/Footer";
+// import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import BackedBy from "@/components/Home/BackedBy";
-import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
-import HappySubscribers from "@/components/Home/HappySubscribers";
-import HeroBanner from "@/components/Home/HeroBanner";
-import HowProductsLook from "@/components/Home/HowProductsLook";
+// import BackedBy from "@/components/Home/BackedBy";
+// import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
+// import HappySubscribers from "@/components/Home/HappySubscribers";
+// // import HeroBanner from "@/components/Home/HeroBanner";
+// import HowProductsLook from "@/components/Home/HowProductsLook";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
-import ThreeSteps from "@/components/Home/ThreeSteps";
-import TrendingProducts from "@/components/Home/TrendingProducts";
-import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
 import ChatWithUs from "@/components/Home/ChatWithUs";
+// import ThreeSteps from "@/components/Home/ThreeSteps";
+// import TrendingProducts from "@/components/Home/TrendingProducts";
+// import WhyCityfurnish from "@/components/Home/WhyCityfurnish";
 
 export default function Home() {
   return (
@@ -23,19 +23,19 @@ export default function Home() {
       <AnnouncementBar />
       <Header />
       <MenuList />
-      <HeroBanner />
+      {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
-      <TrendingProducts />
-      <WhyCityfurnish />
-      <HowProductsLook />
+      {/* <TrendingProducts /> */}
+      {/* <WhyCityfurnish /> */}
+      {/* <HowProductsLook /> */}
       <MediaCoverage />
-      <FurnishingGuaranteed />
-      <BackedBy />
-      <HappySubscribers />
-      <ThreeSteps />
-      <CTA />
-      <FrequentlyAskedQuestions />
-      <Footer />
+      {/* <FurnishingGuaranteed /> */}
+      {/* <BackedBy /> */}
+      {/* <HappySubscribers /> */}
+      {/* <ThreeSteps /> */}
+      {/* <CTA /> */}
+      {/* <FrequentlyAskedQuestions /> */}
+      {/* <Footer /> */}
       <ChatWithUs />
     </div>
   );
