@@ -16,20 +16,23 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
-import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
+import TrendingProducts from "@/components/Home/TrendingProducts";
+import PreDesignCombos from "@/components/Home/PredesignCombos";
+import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
-// import TrendingProducts from "@/components/Home/TrendingProducts";
 
 export default function Home() {
   return (
     <div>
       <AnnouncementBar />
-      {/* <Header /> */}
+      {/* <Header />
+      <MenuList /> */}
       {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
-      {/* <TrendingProducts /> */}
+      <TrendingProducts />
+      <PreDesignCombos />
       <RecentlyViewedProduct />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
