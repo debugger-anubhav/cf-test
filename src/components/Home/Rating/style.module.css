@@ -1,0 +1,48 @@
+.wrapper {
+  @apply py-8 bg-[#F5F5F5] pl-4;
+}
+.head {
+  @apply font-medium text-9A9AA2 text-20 tracking-desc font-Poppins;
+}
+
+.rating_div {
+  @apply w-[152px] h-[40px] flex text-24 text-fff rounded-sm;
+  padding: 3.804px 5px 4.196px 5px;
+  justify-content: center;
+  align-items: center;
+  background: var(--green-green-700, #45a07a);
+  box-shadow:
+    1.2000000476837158px 1.2000000476837158px 0px 0px #ffffff,
+    3.200000047683716px 3.200000047683716px 0px 0px #2d9469;
+}
+.star {
+  @apply ml-1 mr-2;
+}
+.upper_div {
+  @apply flex gap-[121px] items-center mt-3;
+}
+.editIcon {
+  @apply w-10 h-10;
+}
+.subhead {
+  @apply text-71717A leading-normal font-Poppins mt-1;
+}
+.card_wrapper {
+  @apply mt-6 flex gap-4 w-full overflow-scroll;
+}
+.card {
+  @apply p-6 rounded-lg bg-fff min-w-[290px] h-[300px];
+  border: 1px solid var(--offwhite-offwhite-3, #e3e1dc);
+}
+.img {
+  @apply min-w-[3rem] h-12 rounded-full bg-red-400;
+}
+.row {
+  @apply flex items-center;
+}
+.content {
+  @apply mt-6;
+}
+.contentP {
+  @apply text-14 leading-5 text-71717A font-Poppins;
+}
