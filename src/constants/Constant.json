@@ -66,6 +66,10 @@
         "discount": "-60% OFF"
       }
     ],
-    "TrendingProduct": {}
+    "TrendingProduct": {},
+    "Newlylaunced": {
+      "heading": "Newly Launched",
+      "productRent": "products to rent"
+    }
   }
 }

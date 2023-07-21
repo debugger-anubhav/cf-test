@@ -20,6 +20,12 @@ import icon7 from "./home_page_assets/mediaCoverag/icon7.svg";
 import icon8 from "./home_page_assets/mediaCoverag/icon8.svg";
 import icon9 from "./home_page_assets/mediaCoverag/icon9.svg";
 
+// New launched Product
+import product1 from "./home_page_assets/newlyLuanched/newSofa.svg";
+import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
+import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
+import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
+
 export const Images = {
   Demo,
 };
@@ -44,4 +50,11 @@ export const HomePageMediaCoverage = {
   icon7,
   icon8,
   icon9,
+};
+
+export const NewProducts = {
+  product1,
+  product2,
+  product3,
+  product4,
 };
