@@ -9,7 +9,7 @@ const TrendingProducts = () => {
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className="flex overflow-x-scroll">
+      <div className={styles.card_box}>
         {str.map((item, index) => (
           <div key={index.toString()} className="mr-4">
             <Card
