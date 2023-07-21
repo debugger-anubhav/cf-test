@@ -15,6 +15,31 @@
       "label": "Media coverage",
       "desc": "Brand that is build on the trust"
     },
+    "OffersAndDiscount": {
+      "heading": "Offers & coupons",
+      "card_data": [
+        {
+          "desc": "Flat 20% Off on Rent (up to Rs 3000)*",
+          "code": "Use Code “RENT20”",
+          "copy": "COPY"
+        },
+        {
+          "desc": "Flat 20% Off on Rent (up to Rs 3000)*",
+          "code": "Use Code “RENT20”",
+          "copy": "COPY"
+        },
+        {
+          "desc": "Flat 20% Off on Rent (up to Rs 3000)*",
+          "code": "Use Code “RENT20”",
+          "copy": "COPY"
+        },
+        {
+          "desc": "Flat 20% Off on Rent (up to Rs 3000)*",
+          "code": "Use Code “RENT20”",
+          "copy": "COPY"
+        }
+      ]
+    },
     "Common_card": [
       {
         "desc": "Alexa 6 Seater Dining Table with 4 Chairs and Bench",
