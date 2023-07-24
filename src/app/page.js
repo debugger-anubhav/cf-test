@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
