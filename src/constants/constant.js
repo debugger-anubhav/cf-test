@@ -1,5 +1,9 @@
 // home page
-import {HomePageImages, HomePageMediaCoverage} from "@/assets/images";
+import {
+  HomePageImages,
+  HomePageMediaCoverage,
+  HomePageRentNowBanner,
+} from "@/assets/images";
 
 export const RentFurniture = [
   {img: HomePageImages.bedroom, label: "Bedroom"},
@@ -20,4 +24,12 @@ export const MediaCoverageImages = [
   {img: HomePageMediaCoverage.icon7},
   {img: HomePageMediaCoverage.icon8},
   {img: HomePageMediaCoverage.icon9},
+];
+export const RentNowBannerImages = [
+  {img: HomePageRentNowBanner.branded},
+  {img: HomePageRentNowBanner.doubleBed},
+  {img: HomePageRentNowBanner.studyTable},
+  {img: HomePageRentNowBanner.clearanceSale},
+  {img: HomePageRentNowBanner.workfromHome},
+  {img: HomePageRentNowBanner.checkOut},
 ];

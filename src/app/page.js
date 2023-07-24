@@ -20,6 +20,7 @@ import ChatWithUs from "@/components/Home/ChatWithUs";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import RentNowBanner from "@/components/Home/RentNowBanner";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -46,6 +47,7 @@ export default function Home() {
       {/* <FrequentlyAskedQuestions /> */}
       {/* <Footer /> */}
       <ChatWithUs />
+      <RentNowBanner />
     </div>
   );
 }
