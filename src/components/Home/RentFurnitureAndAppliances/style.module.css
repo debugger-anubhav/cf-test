@@ -5,7 +5,7 @@
   @apply text-20 font-medium leading-8 text-45454A tracking-heading font-Poppins;
 }
 .card_div {
-  @apply mt-4 flex flex-wrap gap-4;
+  @apply mt-4 flex flex-wrap gap-4 justify-evenly;
 }
 .img {
   @apply min-w-[98px] max-w-[98px] min-h-[98px] rounded-lg;

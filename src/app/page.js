@@ -4,7 +4,7 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
 // import Footer from "@/components/Common/Footer";
-// import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
+import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 // import Header from "@/components/Common/Header";
 // import MenuList from "@/components/Common/MenuList";
 // import BackedBy from "@/components/Home/BackedBy";
@@ -53,9 +53,9 @@ export default function Home() {
       <FourSteps />
       <HappySubscribers />
       {/* <CTA /> */}
-      {/* <FrequentlyAskedQuestions /> */}
       {/* <Footer /> */}
       <ChatWithUs />
+      <FrequentlyAskedQuestions />
     </div>
   );
 }
