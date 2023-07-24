@@ -75,5 +75,40 @@
       "heading": "Newly Launched",
       "productRent": "products to rent"
     }
+  },
+  "common_components": {
+    "FAQ": {
+      "header": "Frequently Asked Questions",
+      "QuesAnsArray": [
+        {
+          "ques": "How can I rent from Cityfurnish?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "What is the minimum tenure to avail furniture rental from Cityfurnish?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "What is the minimum monthly rental to avail the services?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "Is there a deposit amount",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "Can I get the actual product picture?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "What happens after my tenure is over?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        },
+        {
+          "ques": "Are there any charges for subscription cancellation?",
+          "ans": "Yes, you can easily swap or upgrade your rented furniture with Cityfurnish. Furniture swap is free of cost after completion of 6 months of tenure with us, transport changes will be applicable for swap within 6 months. Upgrade can be availed anytime, only difference in rental will be applicable for upgraded products."
+        }
+      ]
+    }
   }
 }
