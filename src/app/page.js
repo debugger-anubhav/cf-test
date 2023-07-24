@@ -28,6 +28,7 @@ import FourSteps from "@/components/Home/FourSteps";
 import NewlyLaunched from "@/components/Home/NewlyLaunched";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import DownloadForMobile from "@/components/Home/DownloadForMobile";
+import RentNowBanner from "@/components/Home/RentNowBanner";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -53,6 +54,7 @@ export default function Home() {
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
       <FourSteps />
+      <RentNowBanner />
       <HappySubscribers />
       {/* <CTA /> */}
       {/* <FrequentlyAskedQuestions /> */}
