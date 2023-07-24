@@ -1,4 +1,5 @@
 import Demo from "./demo.png";
+import partner from "./partnership.svg";
 
 // home page images
 import bedroom from "./home_page_assets/rentFurniture/bedroom.svg";
@@ -9,7 +10,7 @@ import office from "./home_page_assets/rentFurniture/office.svg";
 import cardThumbnail from "./home_page_assets/commonCard/thumbnail.svg";
 import studyroom from "./home_page_assets/rentFurniture/study-room.svg";
 
-// home page mediaa coverage images
+// home page media coverage images
 import icon1 from "./home_page_assets/mediaCoverag/icon1.svg";
 import icon2 from "./home_page_assets/mediaCoverag/icon2.svg";
 import icon3 from "./home_page_assets/mediaCoverag/icon3.svg";
@@ -19,6 +20,14 @@ import icon6 from "./home_page_assets/mediaCoverag/icon6.svg";
 import icon7 from "./home_page_assets/mediaCoverag/icon7.svg";
 import icon8 from "./home_page_assets/mediaCoverag/icon8.svg";
 import icon9 from "./home_page_assets/mediaCoverag/icon9.svg";
+
+// rent now banner images
+import branded from "./home_page_assets/rentNowBanners/branded.svg";
+import doubleBed from "./home_page_assets/rentNowBanners/doubleBed.svg";
+import studyTable from "./home_page_assets/rentNowBanners/studyTable.svg";
+import clearanceSale from "./home_page_assets/rentNowBanners/clearanceSale.svg";
+import workfromHome from "./home_page_assets/rentNowBanners/workfromHome.svg";
+import checkOut from "./home_page_assets/rentNowBanners/checkOut.svg";
 
 // New launched Product
 import product1 from "./home_page_assets/newlyLuanched/newSofa.svg";
@@ -44,6 +53,7 @@ import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.sv
 
 export const Images = {
   Demo,
+  partner,
 };
 
 export const HomePageImages = {
@@ -69,6 +79,14 @@ export const HomePageMediaCoverage = {
   icon9,
 };
 
+export const HomePageRentNowBanner = {
+  branded,
+  doubleBed,
+  studyTable,
+  clearanceSale,
+  workfromHome,
+  checkOut,
+};
 export const NewProducts = {
   product1,
   product2,

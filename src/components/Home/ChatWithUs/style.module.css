@@ -1,3 +1,6 @@
+.partnership_banner {
+  @apply rounded flex-col items-start;
+}
 .main_container {
   @apply flex-col w-[328px] h-[356px] rounded border border-s border-[#DDDDDF] 
   outline-none py-6 text-gray-300 px-4 items-start m-4;

@@ -53,6 +53,7 @@ module.exports = {
         desc: "-0.28px",
         subHeading: "-0.32px",
         desktop_sub_heading: "-0.64px",
+        0.3: "-0.32px",
       },
     },
   },
