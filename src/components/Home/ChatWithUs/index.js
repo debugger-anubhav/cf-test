@@ -1,10 +1,15 @@
 import React from "react";
 import styles from "./style.module.css";
 import {Mail, Message} from "@/assets/icon";
+import partner from "../../../assets/partnership.svg";
+import Image from "next/image";
 
 const ChatWithUs = () => {
   return (
     <>
+      <div className={styles.partnership_banner}>
+        <Image src={partner} alt="partnership" />
+      </div>
       <div className={styles.main_container}>
         <div className={styles.sub_container}>
           <h2 className={styles.sub_paragraph}>Have a query? Need help?</h2>
