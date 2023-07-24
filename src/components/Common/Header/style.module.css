@@ -10,10 +10,6 @@
   @apply flex items-center;
 }
 
-.menu_icon {
-  @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6;
-}
-
 .cityfurnish_logo {
   @apply flex lg:mr-6 mr-4 lg:w-full h-full w-24;
 }

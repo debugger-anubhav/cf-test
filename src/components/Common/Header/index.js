@@ -1,13 +1,16 @@
+"use client";
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow} from "@/assets/icon";
+import CommonDrawer from "../Drawer";
 
 const Header = () => {
   return (
     <div className={styles.header_wrapper}>
       <div className={styles.header_left_wrapper}>
-        <Image src={Icons.Menu} alt="menu-icon" className={styles.menu_icon} />
+        <CommonDrawer />
+        {/* <Image src={Icons.Menu} alt="menu-icon"  /> */}
         <Image
           src={Icons.CityFurnishLogo}
           alt="City-furnish-logo"
@@ -46,6 +49,7 @@ const Header = () => {
           alt="profile-icon"
           className={styles.header_profile_icon}
         />
+        {/* <CommonDrawer/> */}
       </div>
     </div>
   );
