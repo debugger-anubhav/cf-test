@@ -74,6 +74,11 @@
     "Newlylaunced": {
       "heading": "Newly Launched",
       "productRent": "products to rent"
+    },
+    "HappySubscriber": {
+      "label": "Hear directly from those who have chosen us",
+      "head": "Happy customer stories",
+      "desc": "At CityFurnish, we believe in the power of genuine feedback and customer satisfaction. Discover their unfiltered testimonials and get a glimpse into how CityFurnish has transformed their homes."
     }
   }
 }
