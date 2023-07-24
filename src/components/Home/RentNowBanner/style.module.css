@@ -1,0 +1,6 @@
+.rentNow_Banner_wrapper {
+  @apply w-[100%] h-[316px] rounded px-4 overflow-x-auto overflow-y-hidden;
+}
+.banner_card {
+  @apply flex flex-row gap-x-3 w-[100%];
+}
