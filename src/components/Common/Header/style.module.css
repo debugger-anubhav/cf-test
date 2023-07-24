@@ -1,3 +1,45 @@
 .header_wrapper {
-  @apply flex;
+  @apply flex w-full xl:px-[122px] lg:px-[90px] px-4 justify-between lg:py-10 py-5;
+}
+
+.header_left_wrapper {
+  @apply flex items-center;
+}
+
+.header_right_wrapper {
+  @apply flex items-center;
+}
+
+.cityfurnish_logo {
+  @apply flex lg:mr-6 mr-4 lg:w-full h-full w-24;
+}
+
+.header_city_wrapper {
+  @apply flex items-center;
+}
+
+.header_city_name {
+  @apply flex lg:text-base text-sm font-medium font-Poppins leading-[24px] items-center text-45454A;
+}
+
+.search_wrapper {
+  @apply hidden lg:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
+}
+.search_input {
+  @apply flex w-full;
+}
+.header_search_icon {
+  @apply ml-2;
+}
+
+.header_favorite {
+  @apply flex lg:mr-8 mr-4 w-6 h-6;
+}
+
+.header_shopping_card {
+  @apply flex lg:mr-8 w-6 h-6;
+}
+
+.header_profile_icon {
+  @apply lg:flex hidden;
 }

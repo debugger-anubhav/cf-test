@@ -1,7 +1,28 @@
 {
   "landing_page": {
     "announcement_bar": " Exclusive Offer - Additional 20% OFF. Use Code 'RENT20'",
-    "header": {},
+    "header": {
+      "menuList1": [
+        {"item": "All", "link": "link"},
+        {"item": "Bedroom", "link": "link"},
+        {"item": "Living room", "link": "link"},
+        {"item": "Study room", "link": "link"},
+        {"item": "Dining room", "link": "link"},
+        {"item": "Office", "link": "link"},
+        {"item": "Appliances", "link": "link"},
+        {"item": "Combos", "link": "link"}
+      ],
+      "menuList2": [
+        {"item": "Furniture Sale", "link": "link"},
+        {"item": "CF For Businesses", "link": "link"},
+        {"item": "Pay your dues", "link": "link"}
+      ],
+      "menuList3": [
+        {"item": "Help", "link": "link"},
+        {"item": "Profile", "link": "link"}
+      ]
+    },
+
     "hero_banner": {
       "heading": "Make your picture perfect home with us",
       "btnText": "Explore",
@@ -74,6 +95,13 @@
     "Newlylaunced": {
       "heading": "Newly Launched",
       "productRent": "products to rent"
+    },
+    "DownloadForMobile": {
+      "download": "Download cityfurnish",
+      "rent": "Rent smart. Rent fast. Download our mobile app today",
+      "getFreeApp": "Get the free Cityfurnish app on your phone:",
+      "ios": "IOS app",
+      "android": "Android app"
     },
     "HappySubscriber": {
       "label": "Hear directly from those who have chosen us",

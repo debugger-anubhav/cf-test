@@ -1,0 +1,47 @@
+.main_container {
+  /* @apply flex lg:flex-row xl:flex-row md:flex-row flex-col xl:px-[140px] lg:px-[100px] md:px-[90px] sm:px-0 px-0 xl:pt-[64px] lg:pt-[64px] md:pt-[40px] bg-offwhite sm:pt-0 xs:pt-0 pt-0; */
+  @apply flex lg:flex-row xl:flex-row md:flex-row flex-col xl:pl-[140px] lg:pl-[100px] md:pl-[90px] sm:pl-0 pl-0 bg-offwhite sm:pt-0 xs:pt-0 pt-0;
+}
+.bar_code {
+  @apply flex;
+  /* @apply flex  xl:mt-[42px] lg:mt-[42px] md:mt-[42px] sm:px-0 px-0; */
+}
+.qr_code {
+  @apply flex mt-[36px] mb-[50px];
+}
+.bakgroungimage {
+  @apply relative xl:hidden lg:hidden md:hidden sm:block xs:block block;
+}
+.bannerimageDesktop {
+  @apply absolute top-7;
+}
+.bannerimage {
+  @apply absolute left-3 top-2;
+}
+.bakgroungimage_desktop {
+  @apply justify-end relative w-1/2 xl:block lg:block md:block sm:hidden xs:hidden hidden;
+}
+.destop_heading_container {
+  @apply flex-col xl:pt-[64px] lg:pt-[64px] md:pt-[40px]   xl:block lg:block md:block sm:hidden xs:hidden hidden w-1/2;
+}
+.headingContainer {
+  @apply flex-col px-4 pt-8  bg-offwhite pb-6 xl:hidden lg:hidden md:hidden sm:block xs:block block;
+}
+.heading {
+  @apply font-Poppins text-9A9AA2 text-16 font-medium leading-5 tracking-subHeading pb-2 xl:pb-3 lg:pb-3 md:pb-3;
+}
+.sub_heading {
+  @apply font-Poppins text-20 lg:text-32 xl:text-32 md:text-20 sm:text-20 font-medium xl:leading-10 lg:leading-10 md:leading-6 sm:leading-6 xs:leading-6 leading-6 xl:tracking-desktop_sub_heading lg:tracking-desktop_sub_heading md:tracking-heading tracking-heading;
+}
+.get_free_text {
+  @apply pt-6 xl:pt-[48px] lg:pt-[48px] md:pt-[30px] sm:pt-6 xs:pt-6 pb-4 text-71717A font-Poppins text-12 lg:text-14 xl:text-14 font-medium leading-5;
+}
+.btn_container {
+  @apply flex gap-[6px] xl:gap-[16px] lg:gap-[16px] md:gap-[6px] sm:gap-[6px] xs:gap-[6px] xl:w-full lg:w-full;
+}
+.btn_style {
+  @apply flex justify-center items-center xl:w-[163px] lg:w-[163px] md:w-[163px] w-[156px] xl:h-[56px] lg:h-[56px] md:h-[56px] h-[48px] xl:px-8 lg:px-8 md:px-8 px-3 bg-F6B704 rounded-lg;
+}
+.btn_text {
+  @apply text-[#222] font-Poppins text-14 lg:text-16 xl:text-16 md:text-16 font-medium leading-5 pl-[6px] whitespace-nowrap;
+}

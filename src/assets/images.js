@@ -43,6 +43,14 @@ import card4 from "./home_page_assets/fourSteps/card4.svg";
 
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
+import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
+import DownloadBackgroundImage from "./home_page_assets/downloadForMobile/DownloadBackgroundImage.svg";
+import appleIcon from "./home_page_assets/downloadForMobile/appleIcon.svg";
+import androidIcon from "./home_page_assets/downloadForMobile/androidIcon.svg";
+import QrCode from "./home_page_assets/downloadForMobile/QrCode.svg";
+import backgroungImageDesk from "./home_page_assets/downloadForMobile/backgroungImageDesk.svg";
+import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.svg";
+
 export const Images = {
   Demo,
   partner,
@@ -91,4 +99,14 @@ export const HomePageFourSteps = {
   card2,
   card3,
   card4,
+};
+
+export const downloadBannersImages = {
+  downloadBanner,
+  DownloadBackgroundImage,
+  appleIcon,
+  androidIcon,
+  QrCode,
+  backgroungImageDesk,
+  mobileDesktop,
 };

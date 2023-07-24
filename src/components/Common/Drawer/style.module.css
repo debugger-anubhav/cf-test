@@ -1,0 +1,27 @@
+.drawer_wrapper {
+  @apply flex w-[430px] pt-16;
+}
+.drawer_close {
+  @apply flex mx-8 flex-col;
+}
+.drawer_content {
+  @apply flex flex-col;
+}
+.close_icon {
+  @apply cursor-pointer;
+}
+.drawer_logo {
+  @apply flex w-[55%];
+}
+.menu_list {
+  @apply flex flex-col mt-8;
+}
+.menu_item {
+  @apply mb-4 flex sm:text-base text-14 text-45454A font-medium font-Poppins cursor-pointer;
+}
+.divider {
+  @apply flex w-[225px] h-[2px] bg-EDEDEE mt-4;
+}
+.menu_icon {
+  @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6 items-center;
+}
