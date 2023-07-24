@@ -75,6 +75,13 @@
       "heading": "Newly Launched",
       "productRent": "products to rent"
     },
+    "DownloadForMobile": {
+      "download": "Download cityfurnish",
+      "rent": "Rent smart. Rent fast. Download our mobile app today",
+      "getFreeApp": "Get the free Cityfurnish app on your phone:",
+      "ios": "IOS app",
+      "android": "Android app"
+    },
     "HappySubscriber": {
       "label": "Hear directly from those who have chosen us",
       "head": "Happy customer stories",
