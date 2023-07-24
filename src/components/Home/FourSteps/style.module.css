@@ -1,0 +1,21 @@
+.three_steps_wrapper {
+  @apply px-4 py-6 mt-4 mx-4 border border-solid border-[#DDDDDF] rounded-[4px];
+}
+.head {
+  @apply text-14 font-Poppins text-9A9AA2 font-medium leading-5 tracking-desc;
+}
+.subhead {
+  @apply text-20 leading-8 text-45454A font-Poppins font-medium tracking-heading;
+}
+.card_wrapper {
+  @apply flex gap-[23.5px] w-full overflow-scroll mt-8;
+}
+.img {
+  @apply min-w-[171px] min-h-[171px] max-h-[171px];
+}
+.head1 {
+  @apply font-Poppins leading-normal text-[#48678B] font-semibold -tracking-[0.32px] mt-[4.56px];
+}
+.content1 {
+  @apply font-Poppins w-[131px] text-14 text-71717A tracking-desc leading-normal mt-2;
+}

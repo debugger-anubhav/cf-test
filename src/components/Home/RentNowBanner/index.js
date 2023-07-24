@@ -1,9 +1,17 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import {RentNowBannerImages} from "@/constants/constant";
+import {HomePageRentNowBanner} from "@/assets/images";
 
 const RentNowBanner = () => {
+  const RentNowBannerImages = [
+    {img: HomePageRentNowBanner.branded},
+    {img: HomePageRentNowBanner.doubleBed},
+    {img: HomePageRentNowBanner.studyTable},
+    {img: HomePageRentNowBanner.clearanceSale},
+    {img: HomePageRentNowBanner.workfromHome},
+    {img: HomePageRentNowBanner.checkOut},
+  ];
   return (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card}>

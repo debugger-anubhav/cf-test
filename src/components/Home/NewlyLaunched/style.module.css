@@ -1,0 +1,16 @@
+.main_container {
+  @apply px-4 py-8 flex justify-center;
+}
+.brown_box {
+  @apply flex flex-col bg-[#9B4A4A] rounded-lg px-6 py-[26px] max-h-[181px] justify-center border;
+}
+.heading {
+  @apply font-Poppins text-20 font-medium leading-8 tracking-heading text-white w-1/3 pb-4;
+}
+
+.subHeading {
+  @apply font-Poppins text-14 font-medium leading-5 tracking-desc text-white w-1/2;
+}
+.price_tag {
+  @apply absolute bg-[#ffffffcc] px-[12px] py-[6px] border top-2 left-2;
+}
