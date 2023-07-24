@@ -1,4 +1,4 @@
-import {HeroBannerText} from "@/constants/constant";
+// import {HeroBannerText} from "@/constants/constant";
 import styles from "./style.module.css";
 import React from "react";
 
@@ -7,10 +7,10 @@ const HeroBanner = () => {
     <div className={styles.hero_banner_wrapper}>
       <div className={styles.banner_container}>
         <div className={styles.heading_container}>
-          <h1 className={styles.heading_text}>{HeroBannerText.heading}</h1>
+          {/* <h1 className={styles.heading_text}>{HeroBannerText.heading}</h1> */}
           <div>
             <button className={styles.explor_button}>
-              {HeroBannerText.btnText}
+              {/* {HeroBannerText.btnText} */}
             </button>
           </div>
         </div>
@@ -21,19 +21,19 @@ const HeroBanner = () => {
           <div className="w-fit flex">
             <div>
               <p className={styles.rating_heading_text}>
-                {HeroBannerText.subscriberCount}
+                {/* {HeroBannerText.subscriberCount} */}
               </p>
               <text className={styles.rating_text}>
-                {HeroBannerText.subscriber}
+                {/* {HeroBannerText.subscriber} */}
               </text>
             </div>
             <div className="ml-2.5 md:ml-10 ">
               <p className={styles.rating_heading_text}>
-                {HeroBannerText.Google}
+                {/* {HeroBannerText.Google} */}
               </p>
               <div className="flex items-center justify-center">
                 <text className={styles.rating_text}>
-                  {HeroBannerText.stars}
+                  {/* {HeroBannerText.stars} */}
                 </text>
                 <span className={styles.star_style}></span>
               </div>

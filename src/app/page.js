@@ -5,7 +5,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
 // import Footer from "@/components/Common/Footer";
 // import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
-// import Header from "@/components/Common/Header";
+import Header from "@/components/Common/Header";
 // import MenuList from "@/components/Common/MenuList";
 // import BackedBy from "@/components/Home/BackedBy";
 // import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
@@ -28,14 +28,15 @@ import FourSteps from "@/components/Home/FourSteps";
 import NewlyLaunched from "@/components/Home/NewlyLaunched";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import DownloadForMobile from "@/components/Home/DownloadForMobile";
+import RentNowBanner from "@/components/Home/RentNowBanner";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
   return (
     <div>
       <AnnouncementBar />
-      {/* <Header />
-      <MenuList /> */}
+      <Header />
+      {/* <MenuList /> */}
       {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
       <TrendingProducts />
@@ -53,6 +54,7 @@ export default function Home() {
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
       <FourSteps />
+      <RentNowBanner />
       <HappySubscribers />
       {/* <CTA /> */}
       {/* <FrequentlyAskedQuestions /> */}
