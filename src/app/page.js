@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
@@ -25,6 +26,7 @@ import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import FourSteps from "@/components/Home/FourSteps";
 import NewlyLaunched from "@/components/Home/NewlyLaunched";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -49,6 +51,7 @@ export default function Home() {
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
       <FourSteps />
+      <HappySubscribers />
       {/* <CTA /> */}
       {/* <FrequentlyAskedQuestions /> */}
       {/* <Footer /> */}

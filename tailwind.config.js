@@ -48,6 +48,7 @@ module.exports = {
       letterSpacing: {
         heading: "-0.4px",
         desc: "-0.28px",
+        0.3: "-0.32px",
       },
     },
   },
