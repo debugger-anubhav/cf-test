@@ -27,6 +27,7 @@ import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import FourSteps from "@/components/Home/FourSteps";
 import NewlyLaunched from "@/components/Home/NewlyLaunched";
 import HappySubscribers from "@/components/Home/HappySubscribers";
+import DownloadForMobile from "@/components/Home/DownloadForMobile";
 // import ThreeSteps from "@/components/Home/ThreeSteps";
 
 export default function Home() {
@@ -38,6 +39,7 @@ export default function Home() {
       {/* <HeroBanner /> */}
       <RentFurnitureAndAppliances />
       <TrendingProducts />
+      <DownloadForMobile />
       <PreDesignCombos />
       <RecentlyViewedProduct />
       {/* <WhyCityfurnish /> */}
