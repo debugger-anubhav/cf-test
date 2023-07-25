@@ -66,9 +66,27 @@ import QrCode from "./home_page_assets/downloadForMobile/QrCode.svg";
 import backgroungImageDesk from "./home_page_assets/downloadForMobile/backgroungImageDesk.svg";
 import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.svg";
 
+// cities banner for header
+import Delhi from "@/assets/header/city/delhi.svg";
+import Bangalore from "@/assets/header/city/Bangalore.svg";
+import Pune from "@/assets/header/city/Pune.svg";
+import Mumbai from "@/assets/header/city/Mumbai.svg";
+import Gurgaon from "@/assets/header/city/Gurgaon.svg";
+import Hyderabad from "@/assets/header/city/Hyderabad.svg";
+import Ghaziabad from "@/assets/header/city/ghaziabad.svg";
+import Noida from "@/assets/header/city/noida.svg";
+
 export const Images = {
   Demo,
   partner,
+  Delhi,
+  Bangalore,
+  Pune,
+  Mumbai,
+  Gurgaon,
+  Hyderabad,
+  Ghaziabad,
+  Noida,
 };
 
 export const HomePageImages = {

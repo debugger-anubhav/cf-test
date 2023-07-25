@@ -9,17 +9,17 @@ const Header = () => {
   return (
     <div className={styles.header_wrapper}>
       <div className={styles.header_left_wrapper}>
-        <CommonDrawer />
-        {/* <Image src={Icons.Menu} alt="menu-icon"  /> */}
+        <CommonDrawer DrawerName="menu" />
         <Image
           src={Icons.CityFurnishLogo}
           alt="City-furnish-logo"
           className={styles.cityfurnish_logo}
         />
         <div className={styles.header_city_wrapper}>
-          <p className={styles.header_city_name}>
-            Ghaziabad <DownArrow size={20} color={"#45454A"} />
-          </p>
+          <div className={styles.header_city_name}>
+            <CommonDrawer DrawerName="cities" />
+            <DownArrow size={20} color={"#45454A"} />
+          </div>
         </div>
       </div>
       <div className={styles.header_right_wrapper}>
@@ -49,7 +49,6 @@ const Header = () => {
           alt="profile-icon"
           className={styles.header_profile_icon}
         />
-        {/* <CommonDrawer/> */}
       </div>
     </div>
   );

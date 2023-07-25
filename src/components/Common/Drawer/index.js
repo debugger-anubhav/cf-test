@@ -3,15 +3,26 @@ import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {Close, Icons} from "@/assets/icon";
 import Image from "next/image";
+import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
 
-export default function CommonDrawer() {
+export default function CommonDrawer({DrawerName}) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  const Cities = [
+    {name: "Delhi", image: Images.Delhi},
+    {name: "Bangalore", image: Images.Bangalore},
+    {name: "Pune", image: Images.Pune},
+    {name: "Mumbai", image: Images.Mumbai},
+    {name: "Hyderabad", image: Images.Hyderabad},
+    {name: "Ghaziabad", image: Images.Ghaziabad},
+    {name: "Noida", image: Images.Noida},
+  ];
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -25,61 +36,100 @@ export default function CommonDrawer() {
     setState({...state, [anchor]: open});
   };
 
-  const list = anchor => (
-    <div
-      // style={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-      className={styles.drawer_wrapper}>
+  const list = anchor =>
+    DrawerName === "menu" ? (
       <div
-        className={styles.drawer_close}
-        onClick={() => toggleDrawer("left", false)}>
-        <Close color={"#000"} size={25} className={styles.close_icon} />
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+        className={styles.drawer_wrapper}>
+        <div
+          className={styles.drawer_close}
+          onClick={() => toggleDrawer("left", false)}>
+          <Close color={"#000"} size={25} className={styles.close_icon} />
+        </div>
+        <div className={styles.drawer_content}>
+          <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList1?.map((item, index) => (
+              <p
+                key={index.toString()}
+                className={styles.menu_item}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList2?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList3?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className={styles.drawer_content}>
-        <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList1?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
-            </p>
-          ))}
+    ) : (
+      <div className={`${styles.drawer_wrapper} ${styles.city_drawer_wrapper}`}>
+        <div
+          className={`${styles.drawer_close} ${styles.city_drawer_close}`}
+          onClick={() => toggleDrawer(false)}>
+          <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
-        <div className={styles.divider}></div>
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList2?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
+        <div className={`${styles.drawer_content}`}>
+          <h1 className={styles.select_heading}>Select your city</h1>
+          <div
+            className={`${styles.city_container} justify-center items-center`}>
+            {Cities?.map((city, index) => (
+              <div className={styles.city_wrapper} key={index.toString()}>
+                <Image src={city.image} className={styles.city_thambnil} />
+                <p className={styles.city_name}>{city.name}</p>
+              </div>
+            ))}
+          </div>
+          <div className={styles.bottom_city_content}>
+            <p className={styles.bottom_subheading}>
+              Get the free Cityfurnish app on your phone
             </p>
-          ))}
-        </div>
-        <div className={styles.divider}></div>
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList3?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
+            <button className={styles.bottom_heading}>
+              Download mobile app
+            </button>
+            <p className={styles.detail_line}>
+              100k+ People have already downloaded our app 🎉
             </p>
-          ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <div className={"flex"}>
-      <button onClick={toggleDrawer("left", true)}>
-        <Image src={Icons.Menu} alt="menu-icon" className={styles.menu_icon} />
-      </button>
+      <div onClick={toggleDrawer("left", true)}>
+        {DrawerName === "menu" ? (
+          <Image
+            src={Icons.Menu}
+            alt="menu-icon"
+            className={styles.menu_icon_drawer}
+          />
+        ) : (
+          <span className={styles.header_city_name}>Ghaziabad</span>
+        )}
+      </div>
       <SwipeableDrawer
         anchor={"left"}
         open={state.left}
