@@ -8,7 +8,7 @@
   @apply rounded-lg w-full px-3;
 }
 .right_text_section {
-  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full xl:px-1 lg:px-1 md:px-1 mx-4 mt-4;
+  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full xl:px-1 lg:px-1 md:px-1 px-4 mt-4;
 }
 .tryCity_heading {
   @apply font-Poppins font-medium xl:text-4xl lg:text-4xl md:text-4xl sm:text-2xl xs:text-2xl text-2xl tracking-tighter;
