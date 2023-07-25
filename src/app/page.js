@@ -2,34 +2,30 @@
 
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
-// import CTA from "@/components/Common/CTA";
-import Footer from "@/components/Common/Footer";
-import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Header from "@/components/Common/Header";
-// import MenuList from "@/components/Common/MenuList";
-// import BackedBy from "@/components/Home/BackedBy";
-// import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
 import HeroBanner from "@/components/Home/HeroBanner";
-// import HowProductsLook from "@/components/Home/HowProductsLook";
-
-import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
-import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
-
-import CustomerRating from "@/components/Home/Rating";
-
-import MediaCoverage from "@/components/Home/MediaCoverage";
+// import CTA from "@/components/Common/CTA";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
-import ChatWithUs from "@/components/Home/ChatWithUs";
-import TrendingProducts from "@/components/Home/TrendingProducts";
-import PreDesignCombos from "@/components/Home/PredesignCombos";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
-import FourSteps from "@/components/Home/FourSteps";
+import TrendingProducts from "@/components/Home/TrendingProducts";
+import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import NewlyLaunched from "@/components/Home/NewlyLaunched";
-import HappySubscribers from "@/components/Home/HappySubscribers";
 import DownloadForMobile from "@/components/Home/DownloadForMobile";
-import RentNowBanner from "@/components/Home/RentNowBanner";
+import PreDesignCombos from "@/components/Home/PredesignCombos";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import LimetedPreiodDiscount from "@/components/Home/LimetedPreiodDiscount";
+import RentNowBanner from "@/components/Home/RentNowBanner";
 import TryCityMax from "@/components/Home/TryCityMax";
+import MediaCoverage from "@/components/Home/MediaCoverage";
+import CustomerRating from "@/components/Home/Rating";
+import FourSteps from "@/components/Home/FourSteps";
+import ChatWithUs from "@/components/Home/ChatWithUs";
+import HappySubscribers from "@/components/Home/HappySubscribers";
+import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
+import Footer from "@/components/Common/Footer";
+// import MenuList from "@/components/Common/MenuList";
+// import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
+// import HowProductsLook from "@/components/Home/HowProductsLook";
 
 export default function Home() {
   return (
@@ -55,7 +51,6 @@ export default function Home() {
       <CustomerRating />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
-      {/* <HappySubscribers /> */}
       <FourSteps />
       <ChatWithUs />
       <HappySubscribers />

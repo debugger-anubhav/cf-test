@@ -85,16 +85,19 @@ export default function CommonDrawer({DrawerName}) {
         </div>
       </div>
     ) : (
-      <div className={`${styles.drawer_wrapper} ${styles.city_drawer_wrapper}`}>
+      <div
+        className={`${styles.drawer_wrapper} ${styles.city_drawer_wrapper}`}
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}>
         <div
           className={`${styles.drawer_close} ${styles.city_drawer_close}`}
-          onClick={() => toggleDrawer(false)}>
+          onClick={() => toggleDrawer("left", false)}>
           <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
         <div className={`${styles.drawer_content}`}>
           <h1 className={styles.select_heading}>Select your city</h1>
           <div
-            className={`${styles.city_container} justify-center items-center`}>
+            className={`${styles.city_container} justify-center lg:justify-start items-center`}>
             {Cities?.map((city, index) => (
               <div className={styles.city_wrapper} key={index.toString()}>
                 <Image src={city.image} className={styles.city_thambnil} />
