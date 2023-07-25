@@ -22,6 +22,12 @@
 .divider {
   @apply flex w-[225px] h-[2px] bg-EDEDEE mt-4;
 }
-.menu_icon {
-  @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6 items-center;
+.menu_icon_drawer {
+  @apply flex lg:mr-8 mr-0 lg:w-8 lg:h-8 w-6 h-6 items-center;
+}
+.header_city_name {
+  @apply flex lg:text-base text-sm font-medium font-Poppins leading-[24px] items-center text-45454A;
+}
+.select_heading {
+  @apply text-24 font-medium text-45454A;
 }

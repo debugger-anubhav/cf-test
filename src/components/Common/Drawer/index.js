@@ -5,7 +5,7 @@ import {Close, Icons} from "@/assets/icon";
 import Image from "next/image";
 import string from "@/constants/Constant.json";
 
-export default function CommonDrawer() {
+export default function CommonDrawer({DrawerName}) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -25,61 +25,80 @@ export default function CommonDrawer() {
     setState({...state, [anchor]: open});
   };
 
-  const list = anchor => (
-    <div
-      // style={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-      className={styles.drawer_wrapper}>
+  const list = anchor =>
+    DrawerName === "menu" ? (
       <div
-        className={styles.drawer_close}
-        onClick={() => toggleDrawer("left", false)}>
-        <Close color={"#000"} size={25} className={styles.close_icon} />
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+        className={styles.drawer_wrapper}>
+        <div
+          className={styles.drawer_close}
+          onClick={() => toggleDrawer("left", false)}>
+          <Close color={"#000"} size={25} className={styles.close_icon} />
+        </div>
+        <div className={styles.drawer_content}>
+          <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList1?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList2?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.menu_list}>
+            {string.landing_page.header.menuList3?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => console.log(item.link)}>
+                {item.item}
+              </p>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className={styles.drawer_content}>
-        <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList1?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
-            </p>
-          ))}
+    ) : (
+      <div className={styles.drawer_wrapper}>
+        <div
+          className={styles.drawer_close}
+          onClick={() => toggleDrawer(false)}>
+          <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
-        <div className={styles.divider}></div>
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList2?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
-            </p>
-          ))}
-        </div>
-        <div className={styles.divider}></div>
-        <div className={styles.menu_list}>
-          {string.landing_page.header.menuList3?.map((item, index) => (
-            <p
-              className={styles.menu_item}
-              key={index.toString()}
-              onClick={() => console.log(item.link)}>
-              {item.item}
-            </p>
-          ))}
+        <div className={styles.drawer_content}>
+          <h1 className={styles.select_heading}>Select your city</h1>
         </div>
       </div>
-    </div>
-  );
+    );
 
   return (
     <div className={"flex"}>
-      <button onClick={toggleDrawer("left", true)}>
-        <Image src={Icons.Menu} alt="menu-icon" className={styles.menu_icon} />
-      </button>
+      <div onClick={toggleDrawer("left", true)}>
+        {DrawerName === "menu" ? (
+          <Image
+            src={Icons.Menu}
+            alt="menu-icon"
+            className={styles.menu_icon_drawer}
+          />
+        ) : (
+          <span className={styles.header_city_name}>Ghaziabad</span>
+        )}
+      </div>
       <SwipeableDrawer
         anchor={"left"}
         open={state.left}
