@@ -10,8 +10,12 @@
   @apply flex items-center;
 }
 
+.menu_icon {
+  @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6;
+}
+
 .cityfurnish_logo {
-  @apply flex lg:mr-6 mr-4 lg:w-full h-full w-24;
+  @apply flex lg:mx-6 mx-4 lg:w-full h-full w-24;
 }
 
 .header_city_wrapper {
@@ -26,7 +30,7 @@
   @apply hidden lg:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
 }
 .search_input {
-  @apply flex w-full;
+  @apply flex w-full outline-none;
 }
 .header_search_icon {
   @apply ml-2;
