@@ -1,1 +1,3 @@
-"use strict";(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[791],{2376:function(t,a,n){n.d(a,{SnT:function(){return u}});var r=n(3270);function u(t){return(0,r.w_)({tag:"svg",attr:{viewBox:"0 0 256 256",fill:"currentColor"},child:[{tag:"path",attr:{d:"M180,64H40A12,12,0,0,0,28,76V216a12,12,0,0,0,12,12H180a12,12,0,0,0,12-12V76A12,12,0,0,0,180,64ZM168,204H52V88H168ZM228,40V180a12,12,0,0,1-24,0V52H76a12,12,0,0,1,0-24H216A12,12,0,0,1,228,40Z"}}]})(t)}}}]);
+version https://git-lfs.github.com/spec/v1
+oid sha256:436e5d230f696b87c7da3aed01a127bfb8dc2ab2a30b5cafa3510ea1f91440cb
+size 466

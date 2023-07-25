@@ -1,1 +1,3 @@
-self.__PRERENDER_MANIFEST="{\"version\":4,\"routes\":{\"/\":{\"initialRevalidateSeconds\":false,\"srcRoute\":\"/\",\"dataRoute\":\"/index.rsc\"}},\"dynamicRoutes\":{},\"notFoundRoutes\":[],\"preview\":{\"previewModeId\":\"0336bae8f8cf2858ca578878709dd05a\",\"previewModeSigningKey\":\"ab18f861cc5b089290039a64f1d2631066fc54c76f321c34c2c0ca907a2e8430\",\"previewModeEncryptionKey\":\"ead994e744bcb30a75537631ba8ef78f297b2e7c384b624fbfcaa79ace23685e\"}}"
+version https://git-lfs.github.com/spec/v1
+oid sha256:21b2afc1a868dd44021a6791bb8969f1699044e8745322b0b57c4bcfacd4ed8a
+size 452

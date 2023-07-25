@@ -1,1 +1,3 @@
-self.__BUILD_MANIFEST={polyfillFiles:["static/chunks/polyfills-78c92fac7aa8fdd8.js"],devFiles:[],ampDevFiles:[],lowPriorityFiles:["static/PeOrBaOMlgiY7avKDOaoz/_buildManifest.js","static/PeOrBaOMlgiY7avKDOaoz/_ssgManifest.js"],rootMainFiles:["static/chunks/webpack-c2a1e23230ed3293.js","static/chunks/bce60fc1-2429d53baa9b8dee.js","static/chunks/961-c96956d6779217f0.js","static/chunks/main-app-5bf71fa6a57b8e5a.js"],pages:{"/_app":["static/chunks/webpack-c2a1e23230ed3293.js","static/chunks/framework-8883d1e9be70c3da.js","static/chunks/main-2a8b21cc72da7bdd.js","static/chunks/pages/_app-52924524f99094ab.js"],"/_error":["static/chunks/webpack-c2a1e23230ed3293.js","static/chunks/framework-8883d1e9be70c3da.js","static/chunks/main-2a8b21cc72da7bdd.js","static/chunks/pages/_error-c92d5c4bb2b49926.js"]},ampFirstPages:[]};
+version https://git-lfs.github.com/spec/v1
+oid sha256:dcb13746d8c75658265d4eb9e99f4ffb64b7343aff30059eb759422cd0a8d220
+size 823

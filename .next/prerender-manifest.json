@@ -1,1 +1,3 @@
-{"version":4,"routes":{"/":{"initialRevalidateSeconds":false,"srcRoute":"/","dataRoute":"/index.rsc"}},"dynamicRoutes":{},"notFoundRoutes":[],"preview":{"previewModeId":"0336bae8f8cf2858ca578878709dd05a","previewModeSigningKey":"ab18f861cc5b089290039a64f1d2631066fc54c76f321c34c2c0ca907a2e8430","previewModeEncryptionKey":"ead994e744bcb30a75537631ba8ef78f297b2e7c384b624fbfcaa79ace23685e"}}
+version https://git-lfs.github.com/spec/v1
+oid sha256:1866568201fc1ed367915a13588db4c8f7d2e18db30d543740ce4b3f8ef455e6
+size 390
