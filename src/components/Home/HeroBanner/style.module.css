@@ -39,3 +39,7 @@
   @apply w-[55px] h-3.5 md:w-[112px] md:h-[25px] inline-block bg-no-repeat bg-contain align-top ml-1;
   background-image: url(https://d3juy0zp6vqec8.cloudfront.net/images/rating-4-5.webp);
 }
+
+.slick_container {
+  @apply pt-4 pl-4;
+}
