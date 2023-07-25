@@ -28,6 +28,7 @@ import NewlyLaunched from "@/components/Home/NewlyLaunched";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import DownloadForMobile from "@/components/Home/DownloadForMobile";
 import RentNowBanner from "@/components/Home/RentNowBanner";
+import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
       <TrendingProducts />
       <DownloadForMobile />
       <PreDesignCombos />
+      <HasselFreeServicesCards />
       <RecentlyViewedProduct />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}

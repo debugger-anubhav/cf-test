@@ -43,6 +43,21 @@ import card4 from "./home_page_assets/fourSteps/card4.svg";
 
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
+// hassel free section
+import FrameOne from "./home_page_assets/HasselFree/FrameOne.svg";
+import FrameTwo from "./home_page_assets/HasselFree/FrameTwo.svg";
+import FrameThree from "./home_page_assets/HasselFree/FrameThree.svg";
+import FrameFour from "./home_page_assets/HasselFree/FrameFour.svg";
+import FrameFive from "./home_page_assets/HasselFree/FrameFive.svg";
+import FrameSix from "./home_page_assets/HasselFree/FrameSix.svg";
+import FrameIconeOne from "./home_page_assets/HasselFree/FrameIconOne.svg";
+import FrameIconTwo from "./home_page_assets/HasselFree/FrameIconTwo.svg";
+import FrameIconThree from "./home_page_assets/HasselFree/FrameIconThree.svg";
+import FrameIconFour from "./home_page_assets/HasselFree/FrameIconFour.svg";
+import FrameIconFive from "./home_page_assets/HasselFree/FrameIconFive.svg";
+import FrameIconSix from "./home_page_assets/HasselFree/FrameIconSix.svg";
+
+// download for app section
 import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
 import DownloadBackgroundImage from "./home_page_assets/downloadForMobile/DownloadBackgroundImage.svg";
 import appleIcon from "./home_page_assets/downloadForMobile/appleIcon.svg";
@@ -109,4 +124,19 @@ export const downloadBannersImages = {
   QrCode,
   backgroungImageDesk,
   mobileDesktop,
+};
+
+export const hasselFreeSection = {
+  FrameOne,
+  FrameTwo,
+  FrameThree,
+  FrameFour,
+  FrameFive,
+  FrameSix,
+  FrameIconeOne,
+  FrameIconTwo,
+  FrameIconThree,
+  FrameIconFour,
+  FrameIconFive,
+  FrameIconSix,
 };
