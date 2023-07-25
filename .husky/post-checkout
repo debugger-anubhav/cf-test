@@ -1,3 +1,3 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:8a1e0196e746a3dec6cc7b06cb53da6c4e4c3dd887f66974ce123f4d8eaedddf
-size 282
+#!/bin/sh
+command -v git-lfs >/dev/null 2>&1 || { echo >&2 "\nThis repository is configured for Git LFS but 'git-lfs' was not found on your path. If you no longer wish to use Git LFS, remove this hook by deleting '.git/hooks/post-checkout'.\n"; exit 2; }
+git lfs post-checkout "$@"
