@@ -31,3 +31,33 @@
 .select_heading {
   @apply text-24 font-medium text-45454A;
 }
+.city_container {
+  @apply flex flex-wrap w-full mt-8;
+}
+.city_wrapper {
+  @apply flex flex-col w-fit mr-6 mb-6;
+}
+.city_thambnil {
+  @apply flex rounded-md;
+}
+.city_name {
+  @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2;
+}
+.city_drawer_wrapper {
+  @apply md:w-[510px] w-[410px] px-8 lg:px-0;
+}
+.city_drawer_close {
+  @apply lg:flex hidden;
+}
+.bottom_city_content {
+  @apply flex w-full flex-col;
+}
+.bottom_subheading {
+  @apply flex text-14 text-71717A font-medium leading-[20px] font-Poppins;
+}
+.bottom_heading {
+  @apply flex rounded border-71717A border my-4 mr-4 py-3 font-Poppins font-medium  justify-center items-center;
+}
+.detail_line {
+  @apply flex;
+}

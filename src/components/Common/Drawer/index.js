@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {Close, Icons} from "@/assets/icon";
 import Image from "next/image";
+import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
 
 export default function CommonDrawer({DrawerName}) {
@@ -12,6 +13,16 @@ export default function CommonDrawer({DrawerName}) {
     bottom: false,
     right: false,
   });
+
+  const Cities = [
+    {name: "Delhi", image: Images.Delhi},
+    {name: "Bangalore", image: Images.Bangalore},
+    {name: "Pune", image: Images.Pune},
+    {name: "Mumbai", image: Images.Mumbai},
+    {name: "Hyderabad", image: Images.Hyderabad},
+    {name: "Ghaziabad", image: Images.Ghaziabad},
+    {name: "Noida", image: Images.Noida},
+  ];
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -42,8 +53,8 @@ export default function CommonDrawer({DrawerName}) {
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList1?.map((item, index) => (
               <p
-                className={styles.menu_item}
                 key={index.toString()}
+                className={styles.menu_item}
                 onClick={() => console.log(item.link)}>
                 {item.item}
               </p>
@@ -74,14 +85,34 @@ export default function CommonDrawer({DrawerName}) {
         </div>
       </div>
     ) : (
-      <div className={styles.drawer_wrapper}>
+      <div className={`${styles.drawer_wrapper} ${styles.city_drawer_wrapper}`}>
         <div
-          className={styles.drawer_close}
+          className={`${styles.drawer_close} ${styles.city_drawer_close}`}
           onClick={() => toggleDrawer(false)}>
           <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
-        <div className={styles.drawer_content}>
+        <div className={`${styles.drawer_content}`}>
           <h1 className={styles.select_heading}>Select your city</h1>
+          <div
+            className={`${styles.city_container} justify-center items-center`}>
+            {Cities?.map((city, index) => (
+              <div className={styles.city_wrapper} key={index.toString()}>
+                <Image src={city.image} className={styles.city_thambnil} />
+                <p className={styles.city_name}>{city.name}</p>
+              </div>
+            ))}
+          </div>
+          <div className={styles.bottom_city_content}>
+            <p className={styles.bottom_subheading}>
+              Get the free Cityfurnish app on your phone
+            </p>
+            <button className={styles.bottom_heading}>
+              Download mobile app
+            </button>
+            <p className={styles.detail_line}>
+              100k+ People have already downloaded our app 🎉
+            </p>
+          </div>
         </div>
       </div>
     );
