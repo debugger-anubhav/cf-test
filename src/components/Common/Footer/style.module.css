@@ -32,7 +32,7 @@
   @apply text-12 text-9A9AA2 leading-5;
 }
 .social_media_icons_div {
-  @apply flex items-center gap-5 mt-8;
+  @apply flex w-full flex-wrap justify-center mobile:justify-start items-center gap-5 mt-8;
 }
 .sm_icon {
   @apply w-[30px] h-[30px] cursor-pointer;

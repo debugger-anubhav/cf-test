@@ -11,7 +11,7 @@
   @apply flex justify-between lg:gap-3 items-center;
 }
 .ques {
-  @apply font-medium lg:text-20 lg:leading-7 leading-6 text-45454A lg:tracking-heading tracking-0.3 min-w-[18.6rem] max-w-[18.6rem] lg:w-[39.69rem];
+  @apply font-medium lg:text-20 lg:leading-7 leading-6 text-45454A lg:tracking-heading tracking-0.3 w-[18.6rem] lg:w-[39.69rem];
 }
 .ans {
   @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem];

@@ -37,7 +37,7 @@
   @apply pt-6 xl:pt-[48px] lg:pt-[48px] md:pt-[30px] sm:pt-6 xs:pt-6 pb-4 text-71717A font-Poppins text-12 lg:text-14 xl:text-14 font-medium leading-5;
 }
 .btn_container {
-  @apply flex gap-[6px] xl:gap-[16px] lg:gap-[16px] md:gap-[6px] sm:gap-[6px] xs:gap-[6px] xl:w-full lg:w-full;
+  @apply flex flex-col mobile:flex-row gap-[6px] xl:gap-[16px] lg:gap-[16px] md:gap-[6px] sm:gap-[6px] xs:gap-[6px] xl:w-full lg:w-full;
 }
 .btn_style {
   @apply flex justify-center items-center xl:w-[163px] lg:w-[163px] md:w-[163px] w-[156px] xl:h-[56px] lg:h-[56px] md:h-[56px] h-[48px] xl:px-8 lg:px-8 md:px-8 px-3 bg-F6B704 rounded-lg;

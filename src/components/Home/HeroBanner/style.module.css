@@ -1,5 +1,5 @@
 .hero_banner_wrapper {
-  @apply flex flex-col w-full justify-center  !h-[31.2rem] md:h-auto bg-cover bg-no-repeat bg-center pt-7 md:pt-28 pb-3.5;
+  @apply flex md:hidden flex-col w-full justify-center  !h-[31.2rem] md:h-auto bg-cover bg-no-repeat bg-center pt-7 md:pt-28 pb-3.5;
   background-image: url(https://d3juy0zp6vqec8.cloudfront.net/images/bg-banner.webp);
 }
 
