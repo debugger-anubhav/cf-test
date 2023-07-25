@@ -2,7 +2,7 @@
   @apply rounded flex-col items-start;
 }
 .main_container {
-  @apply flex-col w-[328px] h-[356px] rounded border border-s border-[#DDDDDF] 
+  @apply flex-col h-[356px] rounded border border-s border-[#DDDDDF] 
   outline-none py-6 text-gray-300 px-4 items-start m-4;
 }
 .sub_container {
@@ -18,22 +18,22 @@
   @apply flex-col;
 }
 .sub_paragraph_details {
-  @apply font-Poppins font-normal text-base leading-6 text-[#71717A] w-[288px] mt-4;
+  @apply font-Poppins font-normal text-base leading-6 text-[#71717A] mt-4;
 }
 .mail_address {
   @apply text-[#48678B];
 }
 .write_to_us_wrapper {
-  @apply flex w-[288px] rounded-lg border-2 p-2.5 mt-5 justify-center border-[#71717A] bg-[#FFF];
+  @apply flex w-full rounded-lg border-2 p-2.5 mt-5 justify-center border-[#71717A] bg-[#FFF];
 }
 .tbMail_icon {
   @apply w-[20px] h-[21px] text-[#71717A];
 }
 .write_to_us_text {
-  @apply font-Poppins w-[86px] h-[20px] text-[#71717A] text-sm leading-5;
+  @apply font-Poppins w-[86px] h-[20px] text-[#1f1f27] text-sm leading-5;
 }
 .chat_now_wrapper {
-  @apply flex w-[288px] rounded-lg p-2.5 mt-5 justify-center items-center bg-[#F6B704];
+  @apply flex w-full rounded-lg p-2.5 mt-5 justify-center items-center bg-[#F6B704];
 }
 .message_icon {
   @apply w-[20px] h-[21px] text-[#222];

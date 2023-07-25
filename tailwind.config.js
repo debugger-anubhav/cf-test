@@ -47,6 +47,7 @@ module.exports = {
         "main-head": "140%",
       },
       screens: {
+        mobile: "360px",
         xs: "428px",
         desktop: "1440px",
         "last-screen": "2000px",
