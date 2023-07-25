@@ -19,7 +19,7 @@
   @apply ml-1 mr-2;
 }
 .upper_div {
-  @apply flex gap-[121px] items-center mt-3;
+  @apply flex justify-between pr-4 items-center mt-3;
 }
 .editIcon {
   @apply w-10 h-10;
