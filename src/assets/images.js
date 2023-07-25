@@ -237,6 +237,11 @@ import Hyderabad from "@/assets/header/city/Hyderabad.svg";
 import Ghaziabad from "@/assets/header/city/ghaziabad.svg";
 import Noida from "@/assets/header/city/noida.svg";
 
+// Her --banner--
+import HeroBannerImageOne from "@/assets/home_page_assets/heroBanner/HeroBannerImageOne.svg";
+import HeroBannerImageTwo from "@/assets/home_page_assets/heroBanner/HeroBannerImageTwo.svg";
+import HeroBannerImageThree from "@/assets/home_page_assets/heroBanner/HeroBannerImageThree.svg";
+
 export const Images = {
   Demo,
   partner,
@@ -318,4 +323,10 @@ export const hasselFreeSection = {
   FrameIconFour,
   FrameIconFive,
   FrameIconSix,
+};
+
+export const HeroBannerImages = {
+  HeroBannerImageOne,
+  HeroBannerImageTwo,
+  HeroBannerImageThree,
 };
