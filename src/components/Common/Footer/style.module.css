@@ -1,3 +1,51 @@
-.footer_wrapperfooter_wrapper {
-  @apply flex;
+.footer_wrapper {
+  @apply px-4 pt-6 pb-4 font-Poppins mt-8;
+}
+.head {
+  @apply text-45454A text-16 leading-6 -tracking-[0.02rem] font-medium;
+}
+.desc {
+  @apply text-14 leading-5 tracking-desc text-9A9AA2 mt-2;
+}
+.pointers_div {
+  @apply mt-8 flex flex-wrap gap-x-[72px] gap-y-8;
+}
+.points_div {
+  @apply mt-5 flex flex-col gap-3;
+}
+.points {
+  @apply text-14 font-medium leading-5 text-45454A cursor-pointer;
+}
+.line {
+  @apply w-full h-[1px] bg-DDDDDF mt-8;
+}
+.contact_div {
+  @apply flex mt-6 gap-1;
+}
+.phoneImg {
+  @apply w-[25px] h-[25px];
+}
+.contact {
+  @apply text-14 text-45454A leading-5 font-medium;
+}
+.time {
+  @apply text-12 text-9A9AA2 leading-5;
+}
+.social_media_icons_div {
+  @apply flex items-center gap-5 mt-8;
+}
+.sm_icon {
+  @apply w-[30px] h-[30px] cursor-pointer;
+}
+.copyRight_div {
+  @apply flex justify-between items-center mt-8;
+}
+.copyTxt {
+  @apply text-14 leading-5 text-45454A w-[204px];
+}
+.goToTopIcon {
+  @apply cursor-pointer min-w-[20px] min-h-[20px];
+}
+.goToTopTxt {
+  @apply text-14 leading-5 text-45454A font-medium;
 }
