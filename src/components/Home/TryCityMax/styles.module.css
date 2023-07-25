@@ -5,7 +5,7 @@
   @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full;
 }
 .tryCity_image {
-  @apply xl:w-[589px] lg:w-[589px] md:w-[589px] sm:w-full xs:w-full w-full xl:h-[720px] lg:h-[720px] md:h-[720px] rounded-lg mx-3;
+  @apply rounded-lg w-full px-3;
 }
 .right_text_section {
   @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full xl:px-1 lg:px-1 md:px-1 mx-4 mt-4;
