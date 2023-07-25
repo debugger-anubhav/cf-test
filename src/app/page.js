@@ -3,13 +3,13 @@
 import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import CTA from "@/components/Common/CTA";
-// import Footer from "@/components/Common/Footer";
+import Footer from "@/components/Common/Footer";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Header from "@/components/Common/Header";
 // import MenuList from "@/components/Common/MenuList";
 // import BackedBy from "@/components/Home/BackedBy";
 // import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
-// // import HeroBanner from "@/components/Home/HeroBanner";
+import HeroBanner from "@/components/Home/HeroBanner";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
@@ -29,6 +29,7 @@ import HappySubscribers from "@/components/Home/HappySubscribers";
 import DownloadForMobile from "@/components/Home/DownloadForMobile";
 import RentNowBanner from "@/components/Home/RentNowBanner";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import TryCityMax from "@/components/Home/TryCityMax";
 
 export default function Home() {
   return (
@@ -36,30 +37,31 @@ export default function Home() {
       <AnnouncementBar />
       <Header />
       {/* <MenuList /> */}
-      {/* <HeroBanner /> */}
+      <HeroBanner />
       <RentFurnitureAndAppliances />
+      <RecentlyViewedProduct />
       <TrendingProducts />
+      <OffersAndCoupons />
+      <NewlyLaunched />
       <DownloadForMobile />
       <PreDesignCombos />
       <HasselFreeServicesCards />
-      <RecentlyViewedProduct />
+      <LimetedPreiodDiscount />
+      <RentNowBanner />
+      <TryCityMax />
       {/* <WhyCityfurnish /> */}
       {/* <HowProductsLook /> */}
-      <LimetedPreiodDiscount />
       <MediaCoverage />
-      <OffersAndCoupons />
-      <NewlyLaunched />
       <CustomerRating />
       {/* <FurnishingGuaranteed /> */}
       {/* <BackedBy /> */}
       {/* <HappySubscribers /> */}
       <FourSteps />
-      <RentNowBanner />
-      <HappySubscribers />
-      {/* <CTA /> */}
-      {/* <Footer /> */}
       <ChatWithUs />
+      <HappySubscribers />
       <FrequentlyAskedQuestions />
+      {/* <CTA /> */}
+      <Footer />
     </div>
   );
 }

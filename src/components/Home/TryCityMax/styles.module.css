@@ -1,0 +1,61 @@
+.main_wrapper {
+  @apply w-full xl:px-4 lg:px-4 md:px-4 xl:mt-6 lg:mt-6 md:mt-6 flex xl:flex-row lg:flex-row md:flex-row sm:flex-col xs:flex-col flex-col;
+}
+.left_image_section {
+  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full;
+}
+.tryCity_image {
+  @apply xl:w-[589px] lg:w-[589px] md:w-[589px] sm:w-full xs:w-full w-full xl:h-[720px] lg:h-[720px] md:h-[720px] rounded-lg mx-3;
+}
+.right_text_section {
+  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full xl:px-1 lg:px-1 md:px-1 mx-4 mt-4;
+}
+.tryCity_heading {
+  @apply font-Poppins font-medium xl:text-4xl lg:text-4xl md:text-4xl sm:text-2xl xs:text-2xl text-2xl tracking-tighter;
+}
+.tryCity_headingMax {
+  @apply font-Poppins font-medium xl:text-4xl lg:text-4xl md:text-4xl sm:text-2xl xs:text-2xl tracking-tighter text-[#3E688E];
+}
+.TryCity_paragraph {
+  @apply font-Poppins font-medium xl:text-2xl lg:text-2xl md:text-2xl sm:text-base xs:text-base xl:leading-9 lg:leading-9 md:leading-9
+    sm:leading-6 xs:leading-6 tracking-tighter text-[#222];
+}
+.check_button {
+  @apply h-[56px] flex items-center py-0 px-8 gap-2 bg-[#F6B704] rounded-lg mt-8;
+}
+.check_button_paragraph {
+  @apply font-Poppins font-medium text-[#222] leading-5 flex;
+}
+.forward_icon {
+  @apply w-[20px] h-[20px] flex justify-center items-center;
+}
+.benefits_text {
+  @apply font-Poppins text-sm font-medium leading-6 tracking-tighter text-[#9A9AA2] mt-16 px-1;
+}
+.line {
+  @apply decoration-2 w-[528px] text-[#9A9AA2]  mt-4 border-y;
+}
+.benefits_of_city_wrapper {
+  @apply w-[528px] xl:block lg:block md:block sm:hidden xs:hidden hidden;
+}
+.benefits_content {
+  @apply w-[528px] h-[232px] flex flex-wrap gap-8 mt-12;
+}
+.benefit_title {
+  @apply font-Poppins font-medium text-sm leading-6 text-[#45454A] w-[240px] h-[24px];
+}
+.benefit_paragraph {
+  @apply font-Poppins font-normal text-base leading-6 tracking-tight text-[#9A9AA2] w-[240px] h-[72px];
+}
+.how_it_works_button {
+  @apply w-[154px] flex mt-16 xl:block lg:block md:block sm:block xs:block;
+}
+.how_it_works_paragraph {
+  @apply font-Poppins font-medium text-sm leading-7 tracking-tight text-[#597492] flex;
+}
+.forward_arrow {
+  @apply flex justify-center items-center mx-1 my-1;
+}
+.underline {
+  @apply w-[154px] flex items-center py-0 gap-2 text-[#9A9AA2] border-y;
+}
