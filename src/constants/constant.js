@@ -4,6 +4,7 @@ import {
   HomePageMediaCoverage,
   NewProducts,
   HomePageFourSteps,
+  hasselFreeSection,
 } from "@/assets/images";
 
 export const RentFurniture = [
@@ -137,5 +138,44 @@ export const HappySubscriber = [
     videoUrl: "",
     name: "Name | Profession",
     desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+];
+
+export const HasselFreeData = [
+  {
+    backgroungImage: hasselFreeSection.FrameOne,
+    icon: hasselFreeSection.FrameIconeOne,
+    Heading: "Mint new products",
+    text: "Assured products. You'll be renting furniture that looks & feels brand new",
+  },
+  {
+    backgroungImage: hasselFreeSection.FrameTwo,
+    icon: hasselFreeSection.FrameIconTwo,
+    Heading: "Free shipping",
+    text: "Get your furniture delivered to your doorstep with no extra shipping cost",
+  },
+  {
+    backgroungImage: hasselFreeSection.FrameThree,
+    icon: hasselFreeSection.FrameIconThree,
+    Heading: "Free installation",
+    text: "No need to pay for furniture assembly. We will install your furniture for free",
+  },
+  {
+    backgroungImage: hasselFreeSection.FrameFour,
+    icon: hasselFreeSection.FrameIconFour,
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
+  },
+  {
+    backgroungImage: hasselFreeSection.FrameFive,
+    icon: hasselFreeSection.FrameIconFive,
+    Heading: "Insurance cover",
+    text: "Minor damages or scratches to the rent products will be waived off",
+  },
+  {
+    backgroungImage: hasselFreeSection.FrameSix,
+    icon: hasselFreeSection.FrameIconSix,
+    Heading: "Flexible upgrades",
+    text: "Upgrade your house with new products after 6 months of use for free",
   },
 ];
