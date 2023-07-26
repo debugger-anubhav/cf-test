@@ -2,18 +2,20 @@ import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import trycity from "../../../assets/home_page_assets/tryCityMax/trycity.svg";
-import {ForwardArrow} from "@/assets/icon";
+import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 
 const TryCityMax = () => {
   const benefitsOfCity = [
     {
       id: 1,
+      img: CityMaxIcons.Icon1,
       title: "Quality products",
       paragraph:
         "Branded appliances and solid Sheesham Wood products in mint new condition",
     },
     {
       id: 2,
+      img: CityMaxIcons.Icon2,
       title: "Free Swap",
       paragraph:
         "Swap any product or design anytime during the subscription period",
@@ -21,11 +23,13 @@ const TryCityMax = () => {
     {
       id: 3,
       title: "Cancel anytime",
+      img: CityMaxIcons.Icon3,
       paragraph:
         "We will deduct 1 month's extra rent as a penalty and refund rest of the amount instantly",
     },
     {
       id: 4,
+      img: CityMaxIcons.Icon4,
       title: "Easy on Wallet",
       paragraph:
         "You can pay subscription fee in one go or opt for our no cost EMI plan",
@@ -35,7 +39,18 @@ const TryCityMax = () => {
     <>
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
-          <Image src={trycity} alt="trycity" className={styles.tryCity_image} />
+          <Image
+            src={trycity}
+            alt="trycity"
+            layout="fill"
+            objectFit="cover"
+            className={`hidden xl:flex ${styles.tryCity_image}`}
+          />
+          <Image
+            src={trycity}
+            alt="trycity"
+            className={`xl:hidden ${styles.tryCity_image}`}
+          />
         </div>
         <div className={styles.right_text_section}>
           <h1 className={styles.tryCity_heading}>
@@ -57,16 +72,13 @@ const TryCityMax = () => {
             <h2 className={styles.benefits_text}>Benefits of CityMax</h2>
             <hr className={styles.line} />
             <div className={styles.benefits_content}>
-              {benefitsOfCity.map(item => {
+              {benefitsOfCity.map((item, index) => {
                 return (
-                  <>
-                    <div>
-                      <h3 className={styles.benefit_title}>{item.title}</h3>
-                      <p className={styles.benefit_paragraph}>
-                        {item.paragraph}
-                      </p>
-                    </div>
-                  </>
+                  <div className={styles.card_wrapper} key={index}>
+                    <Image src={item.img} className={styles.card_icon} />
+                    <h3 className={styles.benefit_title}>{item.title}</h3>
+                    <p className={styles.benefit_paragraph}>{item.paragraph}</p>
+                  </div>
                 );
               })}
             </div>

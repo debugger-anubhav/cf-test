@@ -23,7 +23,7 @@
   @apply flex w-[225px] h-[2px] bg-EDEDEE mt-4;
 }
 .menu_icon_drawer {
-  @apply flex lg:mr-8 mr-0 lg:w-8 lg:h-8 w-6 h-6 items-center cursor-pointer;
+  @apply flex lg:mr-8 mr-0 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 items-center cursor-pointer;
 }
 .header_city_name {
   @apply flex lg:text-base text-sm font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
@@ -44,10 +44,10 @@
   @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2;
 }
 .city_drawer_wrapper {
-  @apply md:w-[510px] w-[410px] px-8 lg:px-0;
+  @apply sm:w-[540px] w-full px-8 lg:px-0 rounded-t-lg;
 }
 .city_drawer_close {
-  @apply lg:flex hidden;
+  @apply sm:flex hidden;
 }
 .bottom_city_content {
   @apply flex w-full flex-col;
@@ -56,8 +56,27 @@
   @apply flex text-14 text-71717A font-medium leading-[20px] font-Poppins;
 }
 .bottom_heading {
-  @apply flex rounded border-71717A border my-4 mr-4 py-3 font-Poppins font-medium  justify-center items-center;
+  @apply flex sm:hidden rounded border-71717A border my-4 mr-4 py-3 font-Poppins font-medium  justify-center items-center;
 }
 .detail_line {
-  @apply flex;
+  @apply flex sm:hidden;
+}
+.responsive_city_drawer_close_icon {
+  @apply absolute top-0 rounded-[50%]  bg-white w-4 h-4 right-12;
+}
+.download_qr_wrapper {
+  @apply sm:flex hidden my-8 justify-start;
+}
+.qr_text {
+  @apply flex flex-col ml-3 justify-center text-9A9AA2;
+}
+.qr_text_span {
+  @apply text-[#7895B0] font-bold text-24 leading-[24px];
+}
+.bottom_close_icon {
+  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full;
+  /* -top-11  */
+}
+.-MuiPaper-root-MuiDrawer-paper {
+  @apply !overflow-visible;
 }

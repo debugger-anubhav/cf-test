@@ -27,3 +27,34 @@ body h1 h2 h3 h4 h5 h6 p {
 ::-webkit-scrollbar {
   width: 0px;
 }
+
+.carousel .control-dots {
+  width: fit-content !important;
+  border-radius: 12px;
+  border: 2px solid var(--grey-grey-100, #f7f7f8);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(38.787879943847656px);
+  margin: 10px 0 0 !important;
+}
+.carousel.carousel-slider {
+  /* @apply flex justify-center; */
+  display: flex;
+  justify-content: center;
+  overflow: visible !important;
+}
+.carousel .control-dots .dot {
+  background: white !important;
+  opacity: 1 !important;
+}
+.carousel .control-dots .selected {
+  background: #597492 !important;
+}
+.control-dots {
+  bottom: -14px !important;
+}
+/* .MuiDrawer-paper {
+  max-height: 80% !important;
+  overflow-y: visible !important;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+} */

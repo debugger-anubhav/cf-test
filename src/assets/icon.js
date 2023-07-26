@@ -4,7 +4,11 @@ import {IoClose} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
-import {IoMdArrowDropdown, IoIosArrowForward} from "react-icons/io";
+import {
+  IoMdArrowDropdown,
+  IoMdArrowDropup,
+  IoIosArrowForward,
+} from "react-icons/io";
 import {BsFillStarFill, BsGoogle} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import Favorite from "@/assets/header/favorite.svg";
@@ -24,6 +28,12 @@ import Twitter from "@/assets/footer_icons/twitter.svg";
 import Pinterest from "@/assets/footer_icons/pinterest.svg";
 import GoToTopIcon from "@/assets/footer_icons/goToTopIcon.svg";
 
+// homepage citymax component card icons
+import Icon1 from "@/assets/home_page_assets/tryCityMax/v6-icon1.svg";
+import Icon2 from "@/assets/home_page_assets/tryCityMax/v6-icon2.svg";
+import Icon3 from "@/assets/home_page_assets/tryCityMax/v6-icon3.svg";
+import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
+
 export const FooterIcons = {
   Phone,
   GoToTopIcon,
@@ -36,6 +46,14 @@ export const FooterIcons = {
     {icon: Pinterest, link: "link"},
   ],
 };
+
+export const CityMaxIcons = {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+};
+
 export const Icons = {
   Favorite,
   Menu,
@@ -50,6 +68,9 @@ export const Close = ({size, color, className}) => (
 );
 export const DownArrow = ({size, color, className}) => (
   <IoMdArrowDropdown size={size} color={color} className={className} />
+);
+export const UpArrow = ({size, color, className}) => (
+  <IoMdArrowDropup size={size} color={color} className={className} />
 );
 
 export const Heart = ({size, color, className}) => (
