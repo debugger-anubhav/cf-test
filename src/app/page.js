@@ -24,7 +24,7 @@ import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestio
 import Footer from "@/components/Common/Footer";
 
 import CombineSection from "@/components/Home/CombineSection";
-// import MenuList from "@/components/Common/MenuList";
+import MenuList from "@/components/Common/MenuList";
 // import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
 
@@ -33,7 +33,7 @@ export default function Home() {
     <div>
       <AnnouncementBar />
       <Header />
-      {/* <MenuList /> */}
+      <MenuList />
       <HeroBanner />
       <RentFurnitureAndAppliances />
       <RecentlyViewedProduct />

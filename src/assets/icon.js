@@ -4,7 +4,11 @@ import {IoClose} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
-import {IoMdArrowDropdown, IoIosArrowForward} from "react-icons/io";
+import {
+  IoMdArrowDropdown,
+  IoMdArrowDropup,
+  IoIosArrowForward,
+} from "react-icons/io";
 import {BsFillStarFill, BsGoogle} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import Favorite from "@/assets/header/favorite.svg";
@@ -64,6 +68,9 @@ export const Close = ({size, color, className}) => (
 );
 export const DownArrow = ({size, color, className}) => (
   <IoMdArrowDropdown size={size} color={color} className={className} />
+);
+export const UpArrow = ({size, color, className}) => (
+  <IoMdArrowDropup size={size} color={color} className={className} />
 );
 
 export const Heart = ({size, color, className}) => (
