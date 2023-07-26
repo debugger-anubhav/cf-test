@@ -15,7 +15,7 @@
 }
 
 .cityfurnish_logo {
-  @apply flex lg:mx-6 mx-4 lg:w-full h-full w-24;
+  @apply flex lg:mx-6 mobile:mx-4 mx-1 lg:w-full h-full mobile:w-24 w-20;
 }
 
 .header_city_wrapper {
@@ -23,7 +23,7 @@
 }
 
 .header_city_name {
-  @apply flex lg:text-base text-sm font-medium font-Poppins leading-[24px] items-center text-45454A;
+  @apply flex lg:text-base mobile:text-sm text-12 font-medium font-Poppins leading-[24px] items-center text-45454A;
 }
 
 .search_wrapper {
@@ -37,11 +37,11 @@
 }
 
 .header_favorite {
-  @apply flex lg:mr-8 mr-4 w-6 h-6;
+  @apply flex lg:mr-8 mobile:mr-4 mr-1 mobile:w-6 mobile:h-6 h-4 w-4;
 }
 
 .header_shopping_card {
-  @apply flex lg:mr-8 w-6 h-6;
+  @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4;
 }
 
 .header_profile_icon {
