@@ -75,6 +75,7 @@ import Gurgaon from "@/assets/header/city/Gurgaon.svg";
 import Hyderabad from "@/assets/header/city/Hyderabad.svg";
 import Ghaziabad from "@/assets/header/city/ghaziabad.svg";
 import Noida from "@/assets/header/city/noida.svg";
+import DownloadQR from "@/assets/header/download-QR.svg";
 
 // Her --banner--
 import HeroBannerImageOne from "@/assets/home_page_assets/heroBanner/HeroBannerImageOne.svg";
@@ -92,6 +93,7 @@ export const Images = {
   Hyderabad,
   Ghaziabad,
   Noida,
+  DownloadQR,
 };
 
 export const HomePageImages = {
