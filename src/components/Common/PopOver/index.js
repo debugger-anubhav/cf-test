@@ -23,7 +23,7 @@ export default function PopOver({list, item}) {
         aria-haspopup="true"
         onMouseEnter={handlePopoverOpen}
         onMouseLeave={handlePopoverClose}
-        className="flex items-center">
+        className="flex items-center whitespace-nowrap">
         {item}
         <DownArrow
           size={20}

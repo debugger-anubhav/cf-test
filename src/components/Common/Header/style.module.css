@@ -27,7 +27,7 @@
 }
 
 .search_wrapper {
-  @apply hidden lg:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
+  @apply hidden md:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
 }
 .search_input {
   @apply flex w-full outline-none text-14;
@@ -48,7 +48,7 @@
   @apply lg:flex hidden;
 }
 .mobile_search_row {
-  @apply flex lg:hidden justify-center items-center mb-4;
+  @apply flex md:hidden justify-center items-center mb-4;
 }
 .search_wrapper_mobile {
   @apply w-full  mx-4 flex  border border-ECECEC bg-white px-4 py-2;

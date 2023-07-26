@@ -1,5 +1,5 @@
 .menu_list_wrapper {
-  @apply lg:flex hidden justify-between px-[122px] pb-4 mb-6;
+  @apply md:flex hidden justify-between xl:px-[122px] lg:px-[90px] px-4 pb-4 mb-6;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
 }
@@ -13,5 +13,5 @@
 }
 
 .item_wrap {
-  @apply flex items-center mr-6 text-16 font-medium font-Poppins text-45454A;
+  @apply flex items-center lg:mr-6 mr-4 lg:text-16 md:text-14 font-medium font-Poppins text-45454A whitespace-nowrap;
 }
