@@ -1,15 +1,10 @@
 import React from "react";
 import styles from "./style.module.css";
 import {Mail, Message} from "@/assets/icon";
-import partner from "../../../assets/partnership.svg";
-import Image from "next/image";
 
 const ChatWithUs = () => {
   return (
     <>
-      <div className={styles.partnership_banner}>
-        <Image src={partner} alt="partnership" />
-      </div>
       <div className={styles.main_container}>
         <div className={styles.sub_container}>
           <h2 className={styles.sub_paragraph}>Have a query? Need help?</h2>
@@ -23,15 +18,25 @@ const ChatWithUs = () => {
             <span className={styles.mail_address}> 080-66084700 </span> (9 AM -
             9 PM)
           </p>
-          <button className={styles.write_to_us_wrapper}>
-            {/* <TbMailFilled className={styles.tbMail_icon} /> */}
-            <Mail size={20} color={"#71717A"} className={styles.tbMail_icon} />
-            <p className={styles.write_to_us_text}>Write to us</p>
-          </button>
-          <div className={styles.chat_now_wrapper}>
-            {/* <BiSolidMessage className={styles.message_icon} /> */}
-            <Message size={20} color={"#222"} className={styles.message_icon} />
-            <button className={styles.chat_now_text}>Chat now</button>
+          <div className={styles.btn_wrapper}>
+            <button className={styles.write_to_us_wrapper}>
+              {/* <TbMailFilled className={styles.tbMail_icon} /> */}
+              <Mail
+                size={20}
+                color={"#71717A"}
+                className={styles.tbMail_icon}
+              />
+              <p className={styles.write_to_us_text}>Write to us</p>
+            </button>
+            <div className={styles.chat_now_wrapper}>
+              {/* <BiSolidMessage className={styles.message_icon} /> */}
+              <Message
+                size={20}
+                color={"#222"}
+                className={styles.message_icon}
+              />
+              <p className={styles.chat_now_text}>Chat now</p>
+            </div>
           </div>
         </div>
       </div>

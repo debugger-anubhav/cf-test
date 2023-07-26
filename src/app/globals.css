@@ -40,10 +40,14 @@ body h1 h2 h3 h4 h5 h6 p {
   /* @apply flex justify-center; */
   display: flex;
   justify-content: center;
+  overflow: visible !important;
 }
 .carousel .control-dots .dot {
   background: white !important;
 }
 .carousel .control-dots .selected {
   background: #597492 !important;
+}
+.control-dots {
+  bottom: -14px !important;
 }
