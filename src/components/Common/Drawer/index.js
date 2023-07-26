@@ -104,14 +104,12 @@ export default function CommonDrawer({DrawerName}) {
     ) : (
       <>
         {mobileCityDrawer && DrawerName !== "menu" && (
-          <div className="w-full relative">
-            <p onClick={toggleDrawer("bottom", false)}>
-              <Close
-                color={"#000"}
-                size={45}
-                className={styles.bottom_close_icon}
-              />
-            </p>
+          <div className="relative" onClick={toggleDrawer("bottom", false)}>
+            {/* <p onClick={toggleDrawer("bottom", false)}> */}
+            <div className={styles.bottom_close_icon}>
+              <Close color={"#000"} size={20} />
+            </div>
+            {/* </p> */}
           </div>
         )}
         <div
