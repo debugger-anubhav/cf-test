@@ -193,5 +193,33 @@
       "copy_right": "© Copyright 2023 Cityfurnish. All Rights Reserved.",
       "go_to_top": "Go to top"
     }
+  },
+  "Menu_list": {
+    "Home_Furniture": [
+      "All",
+      "Bedroom",
+      "Study room",
+      "Living room",
+      "Dining room"
+    ],
+    "Appliances": [
+      "All",
+      "Refrigerator",
+      "Water Purifier",
+      "Air Conditioners",
+      "Washing Machine",
+      "Television",
+      "Other Appliances"
+    ],
+    "Office_Furniture": ["All", "Workstations", "Office Chair"],
+    "Combos": [
+      "All",
+      "Bed Room",
+      "Living Room",
+      "Dining Room",
+      "Study Room",
+      "Appliances",
+      "Value Combos"
+    ]
   }
 }

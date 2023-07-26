@@ -1,3 +1,17 @@
 .menu_list_wrapper {
+  @apply lg:flex hidden justify-between px-[122px] pb-4 mb-6;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
+}
+
+.menu_list_left {
   @apply flex;
+}
+
+.menu_list_right {
+  @apply flex;
+}
+
+.item_wrap {
+  @apply flex items-center mr-6 text-16 font-medium font-Poppins text-45454A;
 }
