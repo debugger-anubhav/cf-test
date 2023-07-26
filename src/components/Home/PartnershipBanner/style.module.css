@@ -1,0 +1,3 @@
+.partnership_banner {
+  @apply rounded mt-8 xl:mt-0 xl:min-w-[470px] xl:relative;
+}

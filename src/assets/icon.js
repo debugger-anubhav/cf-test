@@ -24,6 +24,12 @@ import Twitter from "@/assets/footer_icons/twitter.svg";
 import Pinterest from "@/assets/footer_icons/pinterest.svg";
 import GoToTopIcon from "@/assets/footer_icons/goToTopIcon.svg";
 
+// homepage citymax component card icons
+import Icon1 from "@/assets/home_page_assets/tryCityMax/v6-icon1.svg";
+import Icon2 from "@/assets/home_page_assets/tryCityMax/v6-icon2.svg";
+import Icon3 from "@/assets/home_page_assets/tryCityMax/v6-icon3.svg";
+import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
+
 export const FooterIcons = {
   Phone,
   GoToTopIcon,
@@ -36,6 +42,14 @@ export const FooterIcons = {
     {icon: Pinterest, link: "link"},
   ],
 };
+
+export const CityMaxIcons = {
+  Icon1,
+  Icon2,
+  Icon3,
+  Icon4,
+};
+
 export const Icons = {
   Favorite,
   Menu,

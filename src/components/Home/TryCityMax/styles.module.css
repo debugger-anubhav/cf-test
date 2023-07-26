@@ -1,24 +1,26 @@
 .main_wrapper {
-  @apply w-full xl:px-4 lg:px-4 md:px-4 xl:mt-6 lg:mt-6 md:mt-6 flex xl:flex-row lg:flex-row md:flex-row sm:flex-col xs:flex-col flex-col;
+  @apply w-full px-4 xl:px-[90px] macbook:px-[122px] md:mt-6 flex xl:flex-row flex-col xl:gap-[60px];
 }
 .left_image_section {
-  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full;
+  @apply xl:w-[589px] xl:h-[720px] w-full xl:relative;
 }
 .tryCity_image {
-  @apply rounded-lg w-full px-3;
+  @apply rounded-lg w-full;
 }
 .right_text_section {
-  @apply xl:w-[50%] lg:w-[50%] md:w-[50%] sm:w-full xs:w-full w-full xl:px-1 lg:px-1 md:px-1 px-4 mt-4;
+  @apply xl:w-[50%] w-full mt-4;
+}
+.card_icon {
+  @apply w-10 h-10 mb-4 xl:hidden;
 }
 .tryCity_heading {
-  @apply font-Poppins font-medium xl:text-4xl lg:text-4xl md:text-4xl sm:text-2xl xs:text-2xl text-2xl tracking-tighter;
+  @apply font-Poppins font-medium xl:text-4xl text-2xl tracking-tighter;
 }
 .tryCity_headingMax {
-  @apply font-Poppins font-medium xl:text-4xl lg:text-4xl md:text-4xl sm:text-2xl xs:text-2xl tracking-tighter text-[#3E688E];
+  @apply font-Poppins font-medium xl:text-4xl text-2xl tracking-tighter text-[#3E688E];
 }
 .TryCity_paragraph {
-  @apply font-Poppins font-medium xl:text-2xl lg:text-2xl md:text-2xl sm:text-base xs:text-base xl:leading-9 lg:leading-9 md:leading-9
-    sm:leading-6 xs:leading-6 tracking-tighter text-[#222];
+  @apply font-Poppins font-medium xl:text-24 text-16 xl:leading-9 leading-6 tracking-tighter text-[#222];
 }
 .check_button {
   @apply h-[56px] flex items-center py-0 px-8 gap-2 bg-[#F6B704] rounded-lg mt-8;
@@ -30,25 +32,29 @@
   @apply w-[20px] h-[20px] flex justify-center items-center;
 }
 .benefits_text {
-  @apply font-Poppins text-sm font-medium leading-6 tracking-tighter text-[#9A9AA2] mt-16 px-1;
+  @apply hidden xl:block font-Poppins text-sm font-medium leading-6 tracking-tighter text-[#9A9AA2] mt-16 px-1;
 }
 .line {
-  @apply decoration-2 w-[528px] text-[#9A9AA2]  mt-4 border-y;
+  @apply decoration-2 w-[528px] text-[#9A9AA2] mt-4 border-y hidden xl:flex;
 }
 .benefits_of_city_wrapper {
-  @apply w-[528px] xl:block lg:block md:block sm:hidden xs:hidden hidden;
+  @apply xl:w-[528px];
 }
 .benefits_content {
-  @apply w-[528px] h-[232px] flex flex-wrap gap-8 mt-12;
+  @apply xl:w-[528px] flex xl:flex-wrap w-full overflow-scroll
+  gap-4 xl:gap-8 mt-8 xl:mt-12;
+}
+.card_wrapper {
+  @apply border border-solid border-[#E3E1DC] xl:border-none rounded-lg py-6 pl-6 pr-2 xl:p-0;
 }
 .benefit_title {
-  @apply font-Poppins font-medium text-sm leading-6 text-[#45454A] w-[240px] h-[24px];
+  @apply font-Poppins font-medium text-14 leading-6 text-[#45454A];
 }
 .benefit_paragraph {
-  @apply font-Poppins font-normal text-base leading-6 tracking-tight text-[#9A9AA2] w-[240px] h-[72px];
+  @apply font-Poppins font-normal text-base leading-6 tracking-tight text-[#9A9AA2] w-[240px];
 }
 .how_it_works_button {
-  @apply w-[154px] flex mt-16 xl:block lg:block md:block sm:block xs:block;
+  @apply w-[154px] flex mt-5 xl:mt-16;
 }
 .how_it_works_paragraph {
   @apply font-Poppins font-medium text-sm leading-7 tracking-tight text-[#597492] flex;

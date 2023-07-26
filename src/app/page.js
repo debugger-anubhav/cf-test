@@ -18,11 +18,12 @@ import RentNowBanner from "@/components/Home/RentNowBanner";
 import TryCityMax from "@/components/Home/TryCityMax";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import CustomerRating from "@/components/Home/Rating";
-import FourSteps from "@/components/Home/FourSteps";
-import ChatWithUs from "@/components/Home/ChatWithUs";
+
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
+
+import CombineSection from "@/components/Home/CombineSection";
 // import MenuList from "@/components/Common/MenuList";
 // import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
 // import HowProductsLook from "@/components/Home/HowProductsLook";
@@ -49,9 +50,9 @@ export default function Home() {
       {/* <HowProductsLook /> */}
       <MediaCoverage />
       <CustomerRating />
+      <CombineSection />
       {/* <FurnishingGuaranteed /> */}
-      <FourSteps />
-      <ChatWithUs />
+
       <HappySubscribers />
       <FrequentlyAskedQuestions />
       {/* <CTA /> */}
