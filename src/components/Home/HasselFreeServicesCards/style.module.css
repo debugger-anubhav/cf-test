@@ -1,5 +1,5 @@
 .main_container {
-  @apply flex flex-col bg-[#597492] xl:py-12 lg:py-12 md:py-10 sm:py-6 xs:py-6 py-6 xl:px-[60px] lg:px-[60px] md:px-[50px] sm:px-6 xs:px-6 px-6;
+  @apply flex flex-col bg-[#597492] xl:py-12 lg:py-12 md:py-10 sm:py-6 xs:py-6 py-6  macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
 }
 .heading {
   @apply text-white flex font-Poppins text-20 font-medium leading-8 tracking-heading pb-8;
@@ -8,7 +8,7 @@
   @apply flex xl:flex-wrap lg:flex-wrap md:flex-wrap sm:flex-nowrap xs:flex-nowrap flex-nowrap overflow-x-scroll;
 }
 .card_wrapper {
-  @apply relative min-h-[240px] xl:min-w-[378px] lg:min-w-[380px] md:min-w-[320px] sm:min-w-[280px] xs:min-w-[280px] min-w-[280px] xl:mr-[25px] lg:mr-[25px] md:mr-[25px] sm:mr-[16px] xs:mr-[16px] mr-[16px] mb-10  flex;
+  @apply relative min-h-[240px] xl:min-w-[378px] lg:min-w-[380px] md:min-w-[320px] sm:min-w-[280px] xs:min-w-[280px] min-w-[280px] 2xl:mr-[25px] lg:mr-[15px] md:mr-[25px] sm:mr-[16px] xs:mr-[16px] mr-[16px] mb-10  flex;
 }
 .heading_text {
   @apply flex font-Poppins text-20 font-medium leading-6 tracking-heading;

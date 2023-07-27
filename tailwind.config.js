@@ -50,6 +50,7 @@ module.exports = {
         mobile: "360px",
         xs: "428px",
         macbook: "1440px",
+        "3xl": "1660px",
         "last-screen": "2000px",
       },
       letterSpacing: {

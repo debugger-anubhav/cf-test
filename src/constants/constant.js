@@ -64,6 +64,8 @@ export const Newlylaunched = [
   {img: NewProducts.product2, price: "₹1699/mo"},
   {img: NewProducts.product3, price: "₹1699/mo"},
   {img: NewProducts.product4, price: "₹1699/mo"},
+  {img: NewProducts.product3, price: "₹1699/mo"},
+  {img: NewProducts.product3, price: "₹1699/mo"},
 ];
 
 export const CustomerRatingsCard = [
@@ -148,6 +150,24 @@ export const HappySubscriber = [
     thumbnailImg: "",
     videoUrl:
       "https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
     name: "Name | Profession",
     desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },

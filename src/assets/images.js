@@ -81,6 +81,9 @@ import DownloadQR from "@/assets/header/download-QR.svg";
 import HeroBannerImageOne from "@/assets/home_page_assets/heroBanner/HeroBannerImageOne.svg";
 import HeroBannerImageTwo from "@/assets/home_page_assets/heroBanner/HeroBannerImageTwo.svg";
 import HeroBannerImageThree from "@/assets/home_page_assets/heroBanner/HeroBannerImageThree.svg";
+import WebHeroBannerOne from "@/assets/home_page_assets/heroBanner/hero-banner-main.svg";
+import WebHeroBannerTwo from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-1.svg";
+import WebHeroBannerThree from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-2.svg";
 
 export const Images = {
   Demo,
@@ -170,4 +173,7 @@ export const HeroBannerImages = {
   HeroBannerImageOne,
   HeroBannerImageTwo,
   HeroBannerImageThree,
+  WebHeroBannerOne,
+  WebHeroBannerTwo,
+  WebHeroBannerThree,
 };

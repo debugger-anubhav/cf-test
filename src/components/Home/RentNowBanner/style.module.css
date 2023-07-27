@@ -1,6 +1,10 @@
 .rentNow_Banner_wrapper {
-  @apply w-full h-[316px] rounded px-4 overflow-x-auto overflow-y-hidden mt-8;
+  @apply w-full h-[316px] rounded overflow-x-auto overflow-y-hidden mt-8  macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
 }
 .banner_card {
   @apply flex flex-row gap-x-3 w-[100%];
+}
+.banner_wrapper {
+  @apply flex;
+  /* @apply flex lg:w-[272px] lg:h-[388px] h-[316px] w-[221px]; */
 }

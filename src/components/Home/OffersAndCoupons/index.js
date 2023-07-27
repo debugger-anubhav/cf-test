@@ -52,7 +52,7 @@ const OffersAndCoupons = () => {
           <div key={index} className={styles.card}>
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
-            <div>
+            <div className="xl:w-full">
               <p className={styles.desc}>{item?.price_text}</p>
               <p className={styles.desc}>{item?.price_below_text}</p>
               <p className={styles.code}>Use Code {item?.coupon_code}</p>

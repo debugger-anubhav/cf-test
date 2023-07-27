@@ -52,8 +52,6 @@ const Header = () => {
     dispatch(addCityList(cityList));
   };
 
-  // console.log(storeCityList, "storeCityList++++++++++++");
-
   return (
     <>
       <div className={styles.header_wrapper}>
