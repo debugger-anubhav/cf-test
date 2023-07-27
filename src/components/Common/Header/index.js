@@ -1,11 +1,40 @@
 "use client";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
+// import { useAppDispatch, useAppSelector } from "@/store";
+import {addCityList} from "@/store/Slices";
+import {useDispatch} from "react-redux";
+import {useAppSelector} from "@/store";
 
 const Header = () => {
+  const [cityList, setCityList] = useState([]);
+
+  const dispatch = useDispatch();
+  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+
+  const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
+
+  useEffect(() => {
+    getCityList()
+      .then(res => setCityList(res?.data?.data))
+      .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    cityListData();
+  }, [cityList]);
+
+  const cityListData = () => {
+    dispatch(addCityList(cityList));
+  };
+
+  console.log(storeCityList, "city list+++++ from store ");
+
   return (
     <>
       <div className={styles.header_wrapper}>

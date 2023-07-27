@@ -6,6 +6,14 @@ import string from "@/constants/Constant.json";
 
 const AnnouncementBar = () => {
   const [closeBar, setCloseBar] = useState(false);
+
+  // const {mutateAsync} = useMutation("furniture", "post", endPoints.login, {
+  //   name: "abhishek"
+  // })
+
+  // mutateAsync().then(res => {
+  //   res.
+  // })
   return (
     <>
       {!closeBar && (
