@@ -64,6 +64,8 @@ export const Newlylaunched = [
   {img: NewProducts.product2, price: "₹1699/mo"},
   {img: NewProducts.product3, price: "₹1699/mo"},
   {img: NewProducts.product4, price: "₹1699/mo"},
+  {img: NewProducts.product3, price: "₹1699/mo"},
+  {img: NewProducts.product3, price: "₹1699/mo"},
 ];
 
 export const CustomerRatingsCard = [

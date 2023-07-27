@@ -13,12 +13,19 @@ const NewlyLaunched = () => {
                 <h2 className={styles.heading}>{heading}</h2>
                 <h3 className={styles.subHeading}>{subHeading}</h3>
             </div> */}
-      <div className="flex overflow-x-scroll">
+      <div className={`${styles.brown_box} hidden lg:flex`}>
+        <h2 className={styles.heading}>{heading}</h2>
+        <h3 className={styles.subHeading}>{subHeading}</h3>
+      </div>
+      <div className="flex overflow-x-scroll lg:flex-wrap lg:overflow-x-visible">
         {Newlylaunched.map((ele, index) => (
           <div key={index}>
-            <div className="flex mr-4">
+            <div
+              className={`flex mr-4 lg:mr-0  ${index !== 0 && "lg:ml-4"} ${
+                index < 2 && "lg:mb-4"
+              }`}>
               {index === 0 ? (
-                <div className={styles.brown_box}>
+                <div className={`${styles.brown_box} lg:hidden flex`}>
                   <h2 className={styles.heading}>{heading}</h2>
                   <h3 className={styles.subHeading}>{subHeading}</h3>
                 </div>
