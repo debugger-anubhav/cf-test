@@ -23,7 +23,7 @@ const Header = () => {
     getCityList()
       .then(res => {
         setCityList(res?.data?.data);
-        console.log(res?.data?.data, "response");
+        // console.log(res?.data?.data, "response");
       })
       .catch(err => console.log(err));
   }, []);
@@ -35,8 +35,6 @@ const Header = () => {
   const cityListData = () => {
     dispatch(addCityList(cityList));
   };
-
-  console.log(storeCityList, "storeCityList++++++++++++");
 
   return (
     <>
