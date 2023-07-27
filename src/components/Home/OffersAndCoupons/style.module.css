@@ -1,26 +1,26 @@
 .wrapper {
-  @apply pl-4 mt-8;
+  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-8;
 }
 .heading {
-  @apply text-20 font-medium leading-8 tracking-heading text-45454A;
+  @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 text-45454A;
 }
 .cards_wrapper {
   @apply w-full overflow-scroll flex gap-3 mt-4;
 }
 .card {
-  @apply cursor-pointer h-[100px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px];
+  @apply cursor-pointer h-[100px] xl:min-w-[365px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px];
   background: url("../../../assets/home_page_assets//offers/card_bg.svg")
     no-repeat;
   background-size: cover;
 }
 .desc {
-  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px];
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full;
 }
 .code {
   @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;
 }
 .copy_div {
-  @apply text-14 tracking-desc flex w-24 h-9 bg-white rounded-[20px] justify-center gap-1 items-center;
+  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center;
 }
 .line {
   @apply right-32 absolute top-0 bottom-0;

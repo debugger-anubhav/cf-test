@@ -1,5 +1,5 @@
 .main_container {
-  @apply px-4 py-8 flex justify-center;
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] py-8 flex justify-center;
 }
 .brown_box {
   @apply flex flex-col bg-[#9B4A4A] rounded-lg px-6 py-[26px] max-h-[181px] justify-center border;

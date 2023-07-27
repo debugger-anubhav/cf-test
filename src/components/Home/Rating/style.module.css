@@ -1,13 +1,13 @@
 .wrapper {
-  @apply py-8 bg-[#F5F5F5] pl-4;
+  @apply py-8 xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px];
 }
 .head {
-  @apply font-medium text-9A9AA2 text-20 tracking-desc font-Poppins;
+  @apply font-medium text-9A9AA2 text-16 leading-5 tracking-desc xl:tracking-0.3 font-Poppins;
 }
 
 .rating_div {
-  @apply w-[152px] h-[40px] flex text-24 text-fff rounded-sm;
-  padding: 3.804px 5px 4.196px 5px;
+  @apply w-[152px] xl:w-[220px] h-[40px] xl:h-[48px] flex text-24 xl:text-32 text-fff rounded-sm;
+  padding: 3.8px 5px 4px 5px;
   justify-content: center;
   align-items: center;
   background: var(--green-green-700, #45a07a);
@@ -19,30 +19,33 @@
   @apply ml-1 mr-2;
 }
 .upper_div {
-  @apply flex justify-between pr-4 items-center mt-3;
+  @apply flex justify-between pr-4 xl:pr-36 items-center mt-3;
 }
 .editIcon {
-  @apply w-10 h-10;
+  @apply w-10 h-10 xl:hidden;
 }
 .subhead {
   @apply text-71717A leading-normal font-Poppins mt-1;
 }
 .card_wrapper {
-  @apply mt-6 flex gap-4 w-full overflow-scroll;
+  @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 w-full overflow-scroll;
 }
 .card {
-  @apply p-6 rounded-lg bg-fff min-w-[290px] h-[300px];
+  @apply p-6 rounded-lg bg-fff min-w-[290px] xl:min-w-[371px];
   border: 1px solid var(--offwhite-offwhite-3, #e3e1dc);
 }
 .img {
   @apply min-w-[3rem] h-12 rounded-full bg-red-400;
 }
 .row {
-  @apply flex items-center;
+  @apply flex items-center justify-between;
 }
 .content {
   @apply mt-6;
 }
 .contentP {
   @apply text-14 leading-5 text-71717A font-Poppins;
+}
+.editBtn {
+  @apply hidden xl:flex gap-[10px] px-8 h-[56px] items-center bg-[#F6B704] rounded-lg;
 }

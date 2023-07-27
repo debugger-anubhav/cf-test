@@ -11,6 +11,7 @@ import {
 } from "react-icons/io";
 import {BsFillStarFill, BsGoogle} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
+import {MdModeEdit} from "react-icons/md";
 import Favorite from "@/assets/header/favorite.svg";
 import Menu from "@/assets/header/menu.svg";
 import shoppingCard from "@/assets/header/shopping_cart.svg";
@@ -105,4 +106,8 @@ export const Minus = ({size, color, className}) => (
 
 export const ForwardArrow = ({size, color, className}) => (
   <IoIosArrowForward size={size} color={color} className={className} />
+);
+
+export const EditIcon = ({size, color, className}) => (
+  <MdModeEdit size={size} color={color} className={className} />
 );

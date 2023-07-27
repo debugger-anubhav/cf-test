@@ -13,7 +13,7 @@ const OffersAndCoupons = () => {
           <div key={index} className={styles.card}>
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
-            <div>
+            <div className="xl:w-full">
               <p className={styles.desc}>{item.desc}</p>
               <p className={styles.code}>{item.code}</p>
             </div>
