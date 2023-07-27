@@ -5,8 +5,10 @@ import {Close, Icons} from "@/assets/icon";
 import Image from "next/image";
 import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
+import {cityUrl} from "../../../../appConfig";
 
-export default function CommonDrawer({DrawerName}) {
+export default function CommonDrawer({DrawerName, Cities}) {
+  console.log(Cities, "Cities");
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -28,15 +30,15 @@ export default function CommonDrawer({DrawerName}) {
     return () => window.removeEventListener("resize", handleresize);
   }, []);
 
-  const Cities = [
-    {name: "Delhi", image: Images.Delhi},
-    {name: "Bangalore", image: Images.Bangalore},
-    {name: "Pune", image: Images.Pune},
-    {name: "Mumbai", image: Images.Mumbai},
-    {name: "Hyderabad", image: Images.Hyderabad},
-    {name: "Ghaziabad", image: Images.Ghaziabad},
-    {name: "Noida", image: Images.Noida},
-  ];
+  // const Cities = [
+  //   {name: "Delhi", image: Images.Delhi},
+  //   {name: "Bangalore", image: Images.Bangalore},
+  //   {name: "Pune", image: Images.Pune},
+  //   {name: "Mumbai", image: Images.Mumbai},
+  //   {name: "Hyderabad", image: Images.Hyderabad},
+  //   {name: "Ghaziabad", image: Images.Ghaziabad},
+  //   {name: "Noida", image: Images.Noida},
+  // ];
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -132,11 +134,13 @@ export default function CommonDrawer({DrawerName}) {
               {Cities?.map((city, index) => (
                 <div className={styles.city_wrapper} key={index.toString()}>
                   <Image
-                    src={city.image}
+                    src={cityUrl + city?.list_value_seourl + ".svg"}
                     className={styles.city_thambnil}
                     alt="city-images"
+                    width={100}
+                    height={100}
                   />
-                  <p className={styles.city_name}>{city.name}</p>
+                  <p className={styles.city_name}>{city?.list_value}</p>
                 </div>
               ))}
             </div>

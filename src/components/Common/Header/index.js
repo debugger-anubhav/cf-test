@@ -21,7 +21,10 @@ const Header = () => {
 
   useEffect(() => {
     getCityList()
-      .then(res => setCityList(res?.data?.data))
+      .then(res => {
+        setCityList(res?.data?.data);
+        console.log(res?.data?.data, "response");
+      })
       .catch(err => console.log(err));
   }, []);
 
@@ -33,7 +36,7 @@ const Header = () => {
     dispatch(addCityList(cityList));
   };
 
-  console.log(storeCityList, "city list+++++ from store ");
+  console.log(storeCityList, "storeCityList++++++++++++");
 
   return (
     <>
@@ -47,7 +50,7 @@ const Header = () => {
           />
           <div className={styles.header_city_wrapper}>
             <div className={styles.header_city_name}>
-              <CommonDrawer DrawerName="cities" />
+              <CommonDrawer Cities={storeCityList} DrawerName="cities" />
               <DownArrow size={20} color={"#45454A"} />
             </div>
           </div>
