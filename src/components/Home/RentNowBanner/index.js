@@ -16,7 +16,9 @@ const RentNowBanner = () => {
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card}>
         {RentNowBannerImages.map((item, index) => (
-          <Image key={index} src={item.img} alt="" />
+          <div className={styles.banner_wrapper} key={index.toString()}>
+            <Image src={item.img} alt="rant-now-banner-image" />
+          </div>
         ))}
       </div>
     </div>

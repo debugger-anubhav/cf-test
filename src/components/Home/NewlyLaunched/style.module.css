@@ -2,14 +2,14 @@
   @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] py-8 flex justify-center;
 }
 .brown_box {
-  @apply flex flex-col bg-[#9B4A4A] rounded-lg px-6 py-[26px] max-h-[181px] justify-center border;
+  @apply flex-col bg-[#9B4A4A] rounded-lg px-6 py-[26px] max-h-[181px] lg:max-h-[399px] lg:min-w-[372px] justify-center border;
 }
 .heading {
-  @apply font-Poppins text-20 font-medium leading-8 tracking-heading text-white w-1/3 pb-4;
+  @apply font-Poppins text-20 lg:text-32 font-medium leading-8 tracking-heading text-white w-1/3 lg:w-full pb-4 lg:pb-2;
 }
 
 .subHeading {
-  @apply font-Poppins text-14 font-medium leading-5 tracking-desc text-white w-1/2;
+  @apply font-Poppins text-14 lg:text-16 font-medium leading-5 tracking-desc text-white w-1/2;
 }
 .price_tag {
   @apply absolute bg-[#ffffffcc] px-[12px] py-[6px] border top-2 left-2;
