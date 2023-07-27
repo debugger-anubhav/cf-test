@@ -1,15 +1,30 @@
 .rent_furniture_wrapper {
-  @apply mx-4 mt-6;
+  @apply mx-4 xl:mx-[90px] macbook:mx-[120px] mt-6 xl:mt-[60px] font-Poppins;
 }
 .head {
-  @apply text-20 font-medium leading-8 text-45454A tracking-heading font-Poppins;
+  @apply text-20 xl:text-32 xl:leading-10 xl:tracking-0.6 font-medium leading-8 text-45454A tracking-heading;
+}
+.subhead {
+  @apply hidden xl:flex font-medium text-9A9AA2 leading-5 tracking-0.3 mt-1;
 }
 .card_div {
-  @apply mt-4 flex flex-wrap gap-4 justify-evenly;
+  @apply mt-4 xl:mt-6 flex flex-wrap gap-4 xl:gap-6 macbook:gap-10;
 }
 .img {
-  @apply min-w-[98px] max-w-[98px] min-h-[98px] rounded-lg;
+  @apply w-[98px] h-[98px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] rounded-lg xl:rounded-none;
 }
 .label {
-  @apply mt-1 text-45454A text-14 font-medium tracking-desc font-Poppins;
+  @apply mt-1 xl:mt-3 text-45454A text-14 xl:text-20 xl:leading-normal font-medium tracking-desc xl:tracking-heading;
+}
+.desc {
+  @apply text-14 text-9A9AA2 leading-5 xl:w-[330px] macbook:w-[371px] hidden xl:flex;
+}
+.pricetag {
+  @apply absolute bottom-6 left-11 hidden xl:block;
+}
+.price {
+  @apply text-14 text-fff leading-normal tracking-desc;
+}
+.span {
+  @apply font-bold text-32;
 }
