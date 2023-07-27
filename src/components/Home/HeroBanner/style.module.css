@@ -1,45 +1,9 @@
 .hero_banner_wrapper {
-  @apply flex md:hidden flex-col w-full justify-center  !h-[31.2rem] md:h-auto bg-cover bg-no-repeat bg-center pt-7 md:pt-28 pb-3.5;
-  background-image: url(https://d3juy0zp6vqec8.cloudfront.net/images/bg-banner.webp);
+  @apply lg:flex hidden macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center;
 }
-
-.banner_container {
-  @apply h-full flex flex-col items-center text-center;
+.left_hero {
+  @apply flex 3xl:w-[55%] 2xl:w-[60%] macbook:w-[63%] xl:w-[68%];
 }
-.heading_container {
-  @apply justify-center my-auto md:my-0 flex flex-col right-0;
-}
-
-.heading_text {
-  /* @apply relative text-2.5xl leading-10 md:text-5.5xl md:leading-74 lg:leading-72 font-bold text-white max-w-md md:max-w-[906px] mx-auto mt-6 md:mt-0 */
-  @apply relative text-[1.75rem] sm:text-[1.75rem] md:text-[3.5rem] xl:text-[3.5rem] leading-[2.5rem] sm:leading-[2.5rem] md:leading-[4.625rem] xl:leading-[4.625rem] font-bold text-white font-Poppins max-w-md md:max-w-[906px] mx-auto mt-6 md:mt-0;
-}
-
-.explor_button {
-  /* @apply bg-white inline-block rounded-full py-2 px-14 md:py-3 md:px-20 mt-6 mb-[5px] md:mt-9 md:mb-0 text-lg leading-6 font-semibold md:text-2xl md:leading-8 md:font-bold text-[#333333] hover:bg-ruby-delta; */
-  @apply bg-white inline-block rounded-full py-2 px-14 md:py-3 md:px-20 mt-6 mb-[5px] md:mt-9 md:mb-0 text-lg leading-6 font-bold xl:font-semibold md:text-2xl md:leading-8 md:font-bold text-[#333333];
-  --tw-bg-opacity: 1;
-  background-color: rgb(227 227 227 / var(--tw-bg-opacity));
-}
-
-.rating_text_container {
-  /* @apply flex justify-end mt-auto md:mt-[68px] pr-5 sub-details */
-  @apply flex justify-end mt-auto md:mt-[55px] pr-5 w-full;
-}
-
-.rating_heading_text {
-  @apply text-lg leading-6 md:text-[2.5rem] md:leading-[3.5rem] font-bold text-white text-center;
-}
-
-.rating_text {
-  @apply text-xs leading-4 md:text-lg font-normal xl:leading-6 text-white align-top;
-}
-
-.star_style {
-  @apply w-[55px] h-3.5 md:w-[112px] md:h-[25px] inline-block bg-no-repeat bg-contain align-top ml-1;
-  background-image: url(https://d3juy0zp6vqec8.cloudfront.net/images/rating-4-5.webp);
-}
-
-.slick_container {
-  @apply pt-4 pl-4;
+.right_hero {
+  @apply flex flex-col 3xl:w-[55%] 2xl:w-[40%] macbook:w-[37%] xl:w-[32%] gap-2;
 }
