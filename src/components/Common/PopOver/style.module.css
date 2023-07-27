@@ -1,0 +1,16 @@
+.sub_item_wrapper {
+  @apply flex flex-col pt-2 px-4 bg-white;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.sub_item {
+  @apply flex text-16 text-45454A font-Poppins leading-[-0.32px] mb-4;
+}
+.arrow_down {
+  /* transition: transform 330ms ease-out; */
+  transition: transform 330ms ease;
+}
+.arrow_up {
+  transition: transform 330ms ease;
+  transform: rotate(180deg);
+}
