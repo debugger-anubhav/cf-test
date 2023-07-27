@@ -13,6 +13,7 @@ import {useAppSelector} from "@/store";
 
 const Header = () => {
   const [cityList, setCityList] = useState([]);
+  const [citySelectedId, setCitySelectedId] = React.useState();
 
   const dispatch = useDispatch();
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
@@ -20,10 +21,25 @@ const Header = () => {
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
 
   useEffect(() => {
+    if (citySelectedId) {
+      localStorage.setItem("city-Seleted", JSON.stringify(citySelectedId));
+    }
+    // else {
+    //   localStorage.setItem('city-Seleted', JSON.stringify(cityList[0]?.id));
+    // }
+  }, [citySelectedId]);
+
+  useEffect(() => {
     getCityList()
       .then(res => {
         setCityList(res?.data?.data);
-        // console.log(res?.data?.data, "response");
+        const cityId = localStorage.getItem("city-Seleted");
+        if (!cityId) {
+          localStorage.setItem(
+            "city-Seleted",
+            JSON.stringify(res?.data?.data[0]?.id),
+          );
+        }
       })
       .catch(err => console.log(err));
   }, []);
@@ -48,7 +64,12 @@ const Header = () => {
           />
           <div className={styles.header_city_wrapper}>
             <div className={styles.header_city_name}>
-              <CommonDrawer Cities={storeCityList} DrawerName="cities" />
+              <CommonDrawer
+                Cities={storeCityList}
+                setCitySelectedId={setCitySelectedId}
+                citySelectedId={citySelectedId}
+                DrawerName="cities"
+              />
               <DownArrow size={20} color={"#45454A"} />
             </div>
           </div>
