@@ -20,3 +20,5 @@ export const AppConfig = {
   appEnv,
   Config,
 };
+
+export const cityUrl = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
