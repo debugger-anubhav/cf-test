@@ -169,6 +169,24 @@ export const HappySubscriber = [
     name: "Name | Profession",
     desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
+  {
+    thumbnailImg: "",
+    videoUrl: "",
+    name: "Name | Profession",
+    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+  },
 ];
 
 export const HasselFreeData = [

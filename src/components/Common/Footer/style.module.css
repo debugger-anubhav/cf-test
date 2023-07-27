@@ -1,8 +1,8 @@
 .footer_wrapper {
-  @apply px-4 pt-6 pb-4 font-Poppins mt-8;
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] pt-6 pb-4 xl:pb-8 font-Poppins mt-8 xl:mt-16;
 }
 .head {
-  @apply text-45454A text-16 leading-6 -tracking-[0.02rem] font-medium;
+  @apply text-45454A text-16 xl:text-20 leading-6 xl:leading-7 -tracking-[0.02rem] font-medium;
 }
 .desc {
   @apply text-14 leading-5 tracking-desc text-9A9AA2 mt-2;
@@ -20,7 +20,7 @@
   @apply w-full h-[1px] bg-DDDDDF mt-8;
 }
 .contact_div {
-  @apply flex mt-6 gap-1;
+  @apply flex mt-6 gap-1 xl:mt-3;
 }
 .phoneImg {
   @apply w-[25px] h-[25px];
@@ -32,16 +32,19 @@
   @apply text-12 text-9A9AA2 leading-5;
 }
 .social_media_icons_div {
-  @apply flex w-full flex-wrap justify-center mobile:justify-start items-center gap-5 mt-8;
+  @apply flex w-full flex-wrap justify-center mobile:justify-start items-center gap-5 xl:gap-4 mt-8 xl:mt-4;
 }
 .sm_icon {
-  @apply w-[30px] h-[30px] cursor-pointer;
+  @apply w-[30px] h-[30px] xl:w-[25px] xl:h-[25px] cursor-pointer;
 }
 .copyRight_div {
-  @apply flex justify-between items-center mt-8;
+  @apply flex items-center mt-8 relative;
 }
 .copyTxt {
-  @apply text-14 leading-5 text-45454A w-[204px];
+  @apply text-14 xl:text-center leading-5 text-45454A w-[204px] xl:w-full;
+}
+.goToTopDiv {
+  @apply flex gap-2 items-center absolute right-0;
 }
 .goToTopIcon {
   @apply cursor-pointer min-w-[20px] min-h-[20px];
