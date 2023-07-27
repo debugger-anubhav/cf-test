@@ -3,11 +3,11 @@
 import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {store} from "@/store";
+import {Provider} from "react-redux";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
-// import CTA from "@/components/Common/CTA";
 import RentFurnitureAndAppliances from "@/components/Home/RentFurnitureAndAppliances";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import TrendingProducts from "@/components/Home/TrendingProducts";
@@ -21,18 +21,11 @@ import RentNowBanner from "@/components/Home/RentNowBanner";
 import TryCityMax from "@/components/Home/TryCityMax";
 import MediaCoverage from "@/components/Home/MediaCoverage";
 import CustomerRating from "@/components/Home/Rating";
-
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
-import {Provider} from "react-redux";
-
-// import CombineSection from "@/components/Home/CombineSection";
-// import MenuList from "@/components/Common/MenuList";
-import FourSteps from "@/components/Home/FourSteps";
-import ChatWithUs from "@/components/Home/ChatWithUs";
-// import FurnishingGuaranteed from "@/components/Home/FurnishingGuaranteed";
-// import HowProductsLook from "@/components/Home/HowProductsLook";
+import CombineSection from "@/components/Home/CombineSection";
+import MenuList from "@/components/Common/MenuList";
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -42,7 +35,7 @@ export default function Home() {
         <div>
           <AnnouncementBar />
           <Header />
-          {/* <MenuList /> */}
+          <MenuList />
           <HeroBanner />
           <RentFurnitureAndAppliances />
           <RecentlyViewedProduct />
@@ -55,16 +48,11 @@ export default function Home() {
           <LimetedPreiodDiscount />
           <RentNowBanner />
           <TryCityMax />
-          {/* <WhyCityfurnish /> */}
-          {/* <HowProductsLook /> */}
           <MediaCoverage />
           <CustomerRating />
-          {/* <FurnishingGuaranteed /> */}
-          <FourSteps />
-          <ChatWithUs />
+          <CombineSection />
           <HappySubscribers />
           <FrequentlyAskedQuestions />
-          {/* <CTA /> */}
           <Footer />
         </div>
       </Provider>
