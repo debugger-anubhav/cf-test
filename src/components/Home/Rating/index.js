@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {GoogleIcon, RatingStar} from "@/assets/icon";
+import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
 import Image from "next/image";
 import {HomePageImages} from "@/assets/images";
 import {CustomerRatingsCard} from "@/constants/constant";
@@ -10,6 +10,7 @@ import {CustomerRatingsCard} from "@/constants/constant";
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
+  const btntxt = "Write a review";
   return (
     <div className={styles.wrapper}>
       <div>
@@ -27,6 +28,10 @@ const CustomerRating = () => {
             alt="editIcon"
             className={styles.editIcon}
           />
+          <div className={styles.editBtn}>
+            <EditIcon size={25} />
+            <p className="text-[#222] font-medium">{btntxt}</p>
+          </div>
         </div>
         <h3 className={styles.subhead}>{subhead}</h3>
       </div>
@@ -35,15 +40,17 @@ const CustomerRating = () => {
         {CustomerRatingsCard.map((item, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.row}>
-              <Image src={item.img} alt="" className={styles.img} />
-              <div className="ml-3 mr-7">
-                <h3 className={styles.name}>{item.name}</h3>
-                <div className="flex gap-2">
-                  {[{}, {}, {}, {}, {}].map((item, index) => (
-                    <div key={index}>
-                      <RatingStar size={16} color={"#FFCB45"} />
-                    </div>
-                  ))}
+              <div className="flex">
+                <Image src={item.img} alt="" className={styles.img} />
+                <div className="ml-3 mr-7">
+                  <h3 className={styles.name}>{item.name}</h3>
+                  <div className="flex gap-2">
+                    {[{}, {}, {}, {}, {}].map((item, index) => (
+                      <div key={index}>
+                        <RatingStar size={16} color={"#FFCB45"} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
               <GoogleIcon color={"#5391F7"} size={30} />

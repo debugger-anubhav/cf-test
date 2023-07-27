@@ -1,5 +1,5 @@
 .main_container {
-  @apply flex flex-col px-4 py-6;
+  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] py-6;
 }
 .heading {
   @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading;

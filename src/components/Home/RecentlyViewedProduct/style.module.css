@@ -1,5 +1,5 @@
 .main_container {
-  @apply flex flex-col px-4 mt-8;
+  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-8 xl:mt-20;
 }
 
 .heading {
