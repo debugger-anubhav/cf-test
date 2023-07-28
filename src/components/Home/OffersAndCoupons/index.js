@@ -60,7 +60,7 @@ const OffersAndCoupons = () => {
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
               <CopyIcon size={20} color={"black"} />
-              <p className="text-[#222]">{item.copy}</p>
+              <p className="text-[#222]">Copy</p>
             </div>
           </div>
         ))}
