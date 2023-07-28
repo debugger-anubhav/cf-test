@@ -1,56 +1,30 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-// import { useAppDispatch, useAppSelector } from "@/store";
-import {addCityList} from "@/store/Slices";
+import {addCityList, selectedCityId} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/store";
 
 const Header = () => {
-  const [cityList, setCityList] = useState([]);
-  const [citySelectedId, setCitySelectedId] = React.useState();
-
   const dispatch = useDispatch();
+
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
 
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
 
   useEffect(() => {
-    if (citySelectedId) {
-      localStorage.setItem("city-Seleted", JSON.stringify(citySelectedId));
-    }
-    // else {
-    //   localStorage.setItem('city-Seleted', JSON.stringify(cityList[0]?.id));
-    // }
-  }, [citySelectedId]);
-
-  useEffect(() => {
     getCityList()
       .then(res => {
-        setCityList(res?.data?.data);
-        const cityId = localStorage.getItem("city-Seleted");
-        if (!cityId) {
-          localStorage.setItem(
-            "city-Seleted",
-            JSON.stringify(res?.data?.data[0]?.id),
-          );
-        }
+        dispatch(addCityList(res?.data?.data));
+        dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
       .catch(err => console.log(err));
   }, []);
-
-  useEffect(() => {
-    cityListData();
-  }, [cityList]);
-
-  const cityListData = () => {
-    dispatch(addCityList(cityList));
-  };
 
   return (
     <>
@@ -64,12 +38,7 @@ const Header = () => {
           />
           <div className={styles.header_city_wrapper}>
             <div className={styles.header_city_name}>
-              <CommonDrawer
-                Cities={storeCityList}
-                setCitySelectedId={setCitySelectedId}
-                citySelectedId={citySelectedId}
-                DrawerName="cities"
-              />
+              <CommonDrawer Cities={storeCityList} DrawerName="cities" />
               <DownArrow size={20} color={"#45454A"} />
             </div>
           </div>

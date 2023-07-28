@@ -11,7 +11,6 @@ const Footer = () => {
       <h2 className={styles.head}>{str.why_furni}</h2>
       <p className={styles.desc}>{str.why_furni_desc}</p>
 
-      {/* <div className="flex"> */}
       <div className={styles.pointers_div}>
         {str.array.map((item, index) => (
           <div key={index} className="w-[109px] xl:w-fit">
@@ -48,7 +47,6 @@ const Footer = () => {
               />
             ))}
           </div>
-          {/* </div> */}
         </div>
       </div>
 

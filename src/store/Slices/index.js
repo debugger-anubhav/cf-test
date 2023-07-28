@@ -6,6 +6,8 @@ export const HomepageSlice = createSlice({
     cityList: [],
     offerCoupons: [],
     recentProduct: [],
+    cityId: null,
+    cityName: "Ghaziabad",
   },
   reducers: {
     addCityList(state, action) {
@@ -17,8 +19,19 @@ export const HomepageSlice = createSlice({
     addRecentlyViewedProduct(state, action) {
       state.recentProduct = action.payload;
     },
+    selectedCityId(state, action) {
+      state.cityId = action.payload;
+    },
+    selectedCityName(state, action) {
+      state.cityName = action.payload;
+    },
   },
 });
 
-export const {addCityList, offersAndCuponsList, addRecentlyViewedProduct} =
-  HomepageSlice.actions;
+export const {
+  addCityList,
+  offersAndCuponsList,
+  addRecentlyViewedProduct,
+  selectedCityId,
+  selectedCityName,
+} = HomepageSlice.actions;
