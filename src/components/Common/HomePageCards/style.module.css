@@ -22,3 +22,9 @@
 .discount {
   @apply bg-[#67AF7B] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] h-5 text-12 leading-4 text-fff;
 }
+.item_included_container {
+  @apply flex px-1 py-2 items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
+}
+.item_icluded_text {
+  @apply text-45454A font-Poppins text-12 font-medium leading-normal;
+}

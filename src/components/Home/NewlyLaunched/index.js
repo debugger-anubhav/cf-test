@@ -36,7 +36,7 @@ const NewlyLaunched = () => {
                       src={ele.img}
                       width={241}
                       height={181}
-                      className="!max-w-[241px] !max-h-[181px]"
+                      className="max-w-[241px] max-h-[181px] lg:max-w-[165px] xl:max-w-[226px] "
                     />
                   </div>
                   <div className={styles.price_tag}>
