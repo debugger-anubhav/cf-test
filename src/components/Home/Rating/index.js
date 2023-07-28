@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import { GoogleIcon, RatingStar, EditIcon } from "@/assets/icon";
+import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
 import Image from "next/image";
-import { HomePageImages } from "@/assets/images";
-import { endPoints } from "@/network/endPoints";
-import { useDispatch, useSelector } from "react-redux";
-import { addGoogleReviews } from "@/store/Slices";
-import { useQuery } from "@/hooks/useQuery";
+import {HomePageImages} from "@/assets/images";
+import {endPoints} from "@/network/endPoints";
+import {useDispatch, useSelector} from "react-redux";
+import {addGoogleReviews} from "@/store/Slices";
+import {useQuery} from "@/hooks/useQuery";
 import Rating from "react-rating";
-import { BsFillStarFill } from "react-icons/bs";
+import {BsFillStarFill} from "react-icons/bs";
 
 // h2 h3 h3 h3 p
 
@@ -19,14 +19,14 @@ const CustomerRating = () => {
 
   const cityId = localStorage.getItem("city-Seleted");
 
-  const { refetch: getGoogleReviews } = useQuery(
+  const {refetch: getGoogleReviews} = useQuery(
     "google-reviews",
     endPoints.googleReviews,
     `?cityId=${cityId}`,
   );
 
   const dispatch = useDispatch();
-  const { reviews } = useSelector(state => state.homePagedata);
+  const {reviews} = useSelector(state => state.homePagedata);
 
   const [googleReviews, setGooglereviews] = useState([]);
 
@@ -41,7 +41,6 @@ const CustomerRating = () => {
   useEffect(() => {
     gooeleReviewData();
   }, [googleReviews]);
-
 
   const gooeleReviewData = () => {
     dispatch(addGoogleReviews(googleReviews));

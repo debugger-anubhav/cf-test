@@ -1,8 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import { HomePageImages } from "@/assets/images";
-import { Heart } from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 
 const Card = ({
   desc,

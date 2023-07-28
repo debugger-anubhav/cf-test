@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 export const HomepageSlice = createSlice({
   name: "HomePageData",
@@ -36,7 +36,7 @@ export const HomepageSlice = createSlice({
     },
     addComboProducts(state, action) {
       state.designComboProduct = action.payload;
-    }
+    },
   },
 });
 
@@ -48,5 +48,5 @@ export const {
   addNewlaunchedProducts,
   addLimitedPreiodDiscount,
   addtrendingproduct,
-  addComboProducts
+  addComboProducts,
 } = HomepageSlice.actions;
