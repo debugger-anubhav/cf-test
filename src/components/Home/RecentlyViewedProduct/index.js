@@ -3,15 +3,15 @@ import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
 import {endPoints} from "@/network/endPoints";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {useAppSelector} from "@/store";
 
 const RecentlyViewedProduct = () => {
   // const cardData = string.landing_page.Common_card;
-
-  const cityId = localStorage.getItem("city-Seleted");
+  const homepageData = useSelector(state => state.homePagedata);
+  const cityId = homepageData.cityId;
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",

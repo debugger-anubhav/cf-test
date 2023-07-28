@@ -15,7 +15,6 @@ export default function PopOver({list, item}) {
   };
 
   const open = Boolean(anchorEl);
-  console.log(list);
   return (
     <div>
       <div

@@ -9,7 +9,6 @@ const HappySubscribers = () => {
 
   const handlePlayButtonClick = () => {
     if (videoRef.current) {
-      console.log("playe click");
       videoRef.current.play();
     }
   };

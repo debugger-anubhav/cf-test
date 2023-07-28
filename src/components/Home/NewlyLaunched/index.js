@@ -11,7 +11,8 @@ const NewlyLaunched = () => {
   const heading = strings.landing_page.Newlylaunced.heading;
   const subHeading = strings.landing_page.Newlylaunced.productRent;
 
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const {refetch: getNewlaunchedProduct} = useQuery(
     "new-product",

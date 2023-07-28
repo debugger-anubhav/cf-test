@@ -6,6 +6,8 @@ export const HomepageSlice = createSlice({
     cityList: [],
     offerCoupons: [],
     recentProduct: [],
+    cityId: 46,
+    cityName: "Bangalore",
     reviews: [],
     newProduct: [],
   },
@@ -19,6 +21,13 @@ export const HomepageSlice = createSlice({
     addRecentlyViewedProduct(state, action) {
       state.recentProduct = action.payload;
     },
+    selectedCityId(state, action) {
+      state.cityId = action.payload;
+    },
+    selectedCityName(state, action) {
+      state.cityName = action.payload;
+    },
+
     addGoogleReviews(state, action) {
       state.reviews = action.payload;
     },
@@ -32,6 +41,8 @@ export const {
   addCityList,
   offersAndCuponsList,
   addRecentlyViewedProduct,
+  selectedCityId,
+  selectedCityName,
   addGoogleReviews,
   addNewlaunchedProducts,
 } = HomepageSlice.actions;
