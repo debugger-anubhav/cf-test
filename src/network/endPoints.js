@@ -4,4 +4,7 @@ export const endPoints = {
   recentlyViewedProduct: "fc-view-products/getRecentlyViewedProducts",
   googleReviews: "fc-google-review-lists/getAllGoogleReviews",
   newlylaunchedProduct: "fc-products/getNewLaunchProducts",
+  limitedPreiod: "fc-products/getProductsOnSale",
+  trendingProduct: "fc-products/getTrendingProducts",
+  productCombos: "fc-products/getCombosProducts",
 };

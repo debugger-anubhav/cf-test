@@ -1,11 +1,11 @@
 import * as React from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Close, Icons} from "@/assets/icon";
+import { Close, Icons } from "@/assets/icon";
 import Image from "next/image";
-import {Images} from "@/assets/images";
+import { Images } from "@/assets/images";
 import string from "@/constants/Constant.json";
-import {cityUrl} from "../../../../appConfig";
+import { cityUrl } from "../../../../appConfig";
 
 export default function CommonDrawer({
   DrawerName,
@@ -54,10 +54,10 @@ export default function CommonDrawer({
       return;
     }
 
-    setState({...state, [anchor]: open});
+    setState({ ...state, [anchor]: open });
   };
   React.useEffect(() => {
-    console.log(mobileCityDrawer, "state");
+    // console.log(mobileCityDrawer, "state");
   }, [mobileCityDrawer]);
 
   const list = anchor =>

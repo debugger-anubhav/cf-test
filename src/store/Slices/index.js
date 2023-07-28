@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const HomepageSlice = createSlice({
   name: "HomePageData",
@@ -8,6 +8,9 @@ export const HomepageSlice = createSlice({
     recentProduct: [],
     reviews: [],
     newProduct: [],
+    limitedDiscount: [],
+    trendindProduct: [],
+    designComboProduct: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -25,6 +28,15 @@ export const HomepageSlice = createSlice({
     addNewlaunchedProducts(state, action) {
       state.newProduct = action.payload;
     },
+    addLimitedPreiodDiscount(state, action) {
+      state.limitedDiscount = action.payload;
+    },
+    addtrendingproduct(state, action) {
+      state.trendindProduct = action.payload;
+    },
+    addComboProducts(state, action) {
+      state.designComboProduct = action.payload;
+    }
   },
 });
 
@@ -34,4 +46,7 @@ export const {
   addRecentlyViewedProduct,
   addGoogleReviews,
   addNewlaunchedProducts,
+  addLimitedPreiodDiscount,
+  addtrendingproduct,
+  addComboProducts
 } = HomepageSlice.actions;

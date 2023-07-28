@@ -1,9 +1,9 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
-import {DownArrow} from "@/assets/icon";
+import { DownArrow } from "@/assets/icon";
 import styles from "./style.module.css";
 
-export default function PopOver({list, item}) {
+export default function PopOver({ list, item }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handlePopoverOpen = event => {
@@ -15,7 +15,7 @@ export default function PopOver({list, item}) {
   };
 
   const open = Boolean(anchorEl);
-  console.log(list);
+  // console.log(list);
   return (
     <div>
       <div
