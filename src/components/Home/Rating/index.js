@@ -7,8 +7,8 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import Rating from "react-rating";
 import {BsFillStarFill} from "react-icons/bs";
+import Rating from "react-rating";
 
 // h2 h3 h3 h3 p
 

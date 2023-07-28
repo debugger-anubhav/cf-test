@@ -1,10 +1,8 @@
 .main_container {
-  /* @apply flex lg:flex-row xl:flex-row md:flex-row flex-col xl:px-[140px] lg:px-[100px] md:px-[90px] sm:px-0 px-0 xl:pt-[64px] lg:pt-[64px] md:pt-[40px] bg-offwhite sm:pt-0 xs:pt-0 pt-0; */
-  @apply flex lg:flex-row xl:flex-row md:flex-row flex-col xl:pl-[140px] lg:pl-[100px] md:pl-[90px] sm:pl-0 pl-0 bg-offwhite sm:pt-0 xs:pt-0 pt-0;
+  @apply flex items-center md:flex-row flex-col xl:pl-[140px] lg:pl-[100px] md:pl-[90px] sm:pl-0 pl-0 bg-offwhite  pt-0;
 }
 .bar_code {
   @apply flex;
-  /* @apply flex  xl:mt-[42px] lg:mt-[42px] md:mt-[42px] sm:px-0 px-0; */
 }
 .qr_code {
   @apply flex mt-[36px] mb-[50px];
@@ -19,13 +17,13 @@
   @apply absolute left-3 top-2;
 }
 .bakgroungimage_desktop {
-  @apply justify-end relative w-1/2 xl:block lg:block md:block sm:hidden xs:hidden hidden;
+  @apply justify-end relative w-1/2 md:block  hidden;
 }
 .destop_heading_container {
-  @apply flex-col xl:pt-[64px] lg:pt-[64px] md:pt-[40px]   xl:block lg:block md:block sm:hidden xs:hidden hidden w-1/2;
+  @apply flex-col lg:pt-[64px] md:pt-[40px]  md:block hidden w-1/2;
 }
 .headingContainer {
-  @apply flex-col px-4 pt-8  bg-offwhite pb-6 xl:hidden lg:hidden md:hidden sm:block xs:block block;
+  @apply flex-col px-4 pt-8 xl:pt-16 bg-offwhite pb-6 xl:hidden lg:hidden md:hidden sm:block xs:block block;
 }
 .heading {
   @apply font-Poppins text-9A9AA2 text-16 font-medium leading-5 tracking-subHeading pb-2 xl:pb-3 lg:pb-3 md:pb-3;

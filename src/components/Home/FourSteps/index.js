@@ -8,7 +8,7 @@ import Image from "next/image";
 
 const FourSteps = () => {
   return (
-    <div className={styles.three_steps_wrapper}>
+    <div className={styles.four_steps_wrapper}>
       <h2 className={styles.head}>{string.landing_page.Four_steps.heading}</h2>
       <p className={styles.subhead}>{string.landing_page.Four_steps.subhead}</p>
       <div className={styles.card_wrapper}>

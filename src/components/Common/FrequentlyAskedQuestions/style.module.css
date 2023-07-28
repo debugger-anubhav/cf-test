@@ -1,5 +1,5 @@
 .freq_asked_que_wrapper {
-  @apply flex flex-col lg:flex-row gap-4 lg:justify-between px-4 lg:px-[70px] xl:px-[122px] font-Poppins mt-8;
+  @apply flex flex-col lg:flex-row gap-4 lg:justify-between px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] font-Poppins my-8 xl:my-16;
 }
 .head {
   @apply text-20 lg:text-32 lg:w-[23rem] leading-8 lg:leading-10 font-medium text-45454A tracking-heading;
