@@ -1,8 +1,9 @@
 .main_container {
-  @apply pl-4 md:pl-[70px] xl:px-[90px] macbook:px-[122px] py-8 xl:py-[88px] flex justify-center;
+  @apply pl-4 md:pl-[70px] xl:px-[90px] macbook:px-[122px] py-8 xl:py-[88px] flex w-full overflow-scroll lg:overflow-hidden gap-4 macbook:gap-5;
 }
 .brown_box {
-  @apply flex-col bg-[#9B4A4A] rounded-lg px-6 py-[26px] max-h-[181px] lg:max-h-[399px] min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] justify-center border;
+  @apply flex justify-center items-center
+   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[181px] lg:h-[399px] min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border;
 }
 .heading {
   @apply font-Poppins text-20 lg:text-32 font-medium leading-8 tracking-heading text-white w-full lg:w-full pb-4 lg:pb-2;
@@ -12,4 +13,10 @@
 }
 .price_tag {
   @apply absolute bg-[#ffffffcc] px-[12px] py-[6px] border top-2 left-2;
+}
+.img {
+  @apply min-w-[241px] h-[181px] lg:min-w-[165px] xl:min-w-[226px] xl:w-[226px] macbook:w-[253px] rounded-lg lg:rounded-[4px];
+}
+.images_wrapper {
+  @apply flex lg:flex-wrap gap-4 macbook:gap-5;
 }
