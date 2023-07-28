@@ -11,7 +11,8 @@ import {productImageBaseUrl} from "@/constants/constant";
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
 
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const dispatch = useDispatch();
   const {limitedDiscount: getLimitedPreiodData} = useSelector(

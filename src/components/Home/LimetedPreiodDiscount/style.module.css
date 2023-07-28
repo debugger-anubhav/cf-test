@@ -1,11 +1,11 @@
 .main_container {
-  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] py-6;
+  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-6 xl:mt-[88px];
 }
 .heading {
-  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading;
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6;
 }
 .subHeading {
-  @apply text-9A9AA2 font-Poppins font-medium leading-5 tracking-desc pb-4;
+  @apply text-9A9AA2 font-Poppins font-medium leading-5 tracking-desc xl:tracking-0.3 pb-4;
 }
 .card_box {
   @apply flex w-full gap-4 overflow-y-hidden overflow-x-scroll;

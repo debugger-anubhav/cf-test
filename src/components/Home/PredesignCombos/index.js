@@ -10,8 +10,8 @@ import {productImageBaseUrl} from "@/constants/constant";
 
 const PreDesignCombos = () => {
   // const str = string.landing_page.Common_card;
-
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const {refetch: getPreDesignCombos} = useQuery(
     "design-combos",
@@ -32,8 +32,6 @@ const PreDesignCombos = () => {
       .catch(err => console.log(err));
   }, []);
 
-  console.log(getPreDesignCombosData, "getPreDesignCombosData");
-
   return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
@@ -45,7 +43,9 @@ const PreDesignCombos = () => {
               desc={item.product_name}
               originalPrice={item.price}
               currentPrice={item.sale_price}
-              discount={item.discount}
+              discount={`${Math.round(
+                ((item.price - item.sale_price) * 100) / item.price,
+              ).toFixed(2)}%`}
               showincludedItem={true}
             />
           </div>

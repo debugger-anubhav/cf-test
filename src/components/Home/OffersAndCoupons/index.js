@@ -3,13 +3,14 @@ import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {CopyIcon} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useQuery} from "@/hooks/useQuery";
 import {offersAndCuponsList} from "@/store/Slices";
 
 const OffersAndCoupons = () => {
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageData = useSelector(state => state.homePagedata);
+  const cityId = homePageData.cityId;
 
   const {refetch: getOfferCupon} = useQuery(
     "offer-cuopons",

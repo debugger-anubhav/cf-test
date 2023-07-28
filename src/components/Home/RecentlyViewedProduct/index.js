@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
 import {endPoints} from "@/network/endPoints";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {useAppSelector} from "@/store";
@@ -11,16 +11,16 @@ import {productImageBaseUrl} from "@/constants/constant";
 
 const RecentlyViewedProduct = () => {
   // const cardData = string.landing_page.Common_card;
-
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
+  const {recentProduct} = useAppSelector(state => state.homePagedata);
+  const dispatch = useDispatch();
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${85757}`,
   );
-  const {recentProduct} = useAppSelector(state => state.homePagedata);
-  const dispatch = useDispatch();
 
   const [recentlyViewedproduct, setRecentlyViewedproduct] = useState([]);
 

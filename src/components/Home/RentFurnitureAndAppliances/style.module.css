@@ -1,5 +1,5 @@
 .rent_furniture_wrapper {
-  @apply mx-4 xl:mx-[90px] macbook:mx-[120px] mt-6 xl:mt-[60px] font-Poppins;
+  @apply mx-4 md:mx-[70px] xl:mx-[90px] macbook:mx-[120px] mt-6 xl:mt-[60px] font-Poppins;
 }
 .head {
   @apply text-20 xl:text-32 xl:leading-10 xl:tracking-0.6 font-medium leading-8 text-45454A tracking-heading;
@@ -11,7 +11,7 @@
   @apply mt-4 xl:mt-6 flex flex-wrap gap-4 xl:gap-6 macbook:gap-10;
 }
 .img {
-  @apply w-[98px] h-[98px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] rounded-lg xl:rounded-none;
+  @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] rounded-lg md:rounded-none;
 }
 .label {
   @apply mt-1 xl:mt-3 text-45454A text-14 xl:text-20 xl:leading-normal font-medium tracking-desc xl:tracking-heading;

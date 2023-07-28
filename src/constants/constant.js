@@ -233,3 +233,8 @@ export const HasselFreeData = [
 // images url not be deleted where all images cominhg from
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
+
+export const categoryImageBaseUrl =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
+
+// https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp

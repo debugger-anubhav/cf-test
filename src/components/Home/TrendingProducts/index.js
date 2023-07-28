@@ -8,7 +8,8 @@ import {addtrendingproduct} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 
 const TrendingProducts = () => {
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const {trendindProduct: getTrendingProducts} = useSelector(
     state => state.homePagedata,
@@ -39,9 +40,11 @@ const TrendingProducts = () => {
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
               desc={item.product_name}
-              originalPrice={item.originalPrice}
-              currentPrice={item.currentPrice}
-              discount={item.discount}
+              originalPrice={item.price}
+              currentPrice={item.sale_price}
+              discount={`${Math.round(
+                ((item.price - item.sale_price) * 100) / item.price,
+              ).toFixed(2)}%`}
             />
           </div>
         ))}

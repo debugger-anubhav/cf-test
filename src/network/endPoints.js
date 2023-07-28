@@ -7,4 +7,5 @@ export const endPoints = {
   limitedPreiod: "fc-products/getProductsOnSale",
   trendingProduct: "fc-products/getTrendingProducts",
   productCombos: "fc-products/getCombosProducts",
+  category: "fc-categories/all",
 };
