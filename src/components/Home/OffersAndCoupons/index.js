@@ -27,7 +27,6 @@ const OffersAndCoupons = () => {
     getOfferCupon()
       .then(res => {
         setOfferCupon(res?.data?.data);
-        console.log(res?.data?.data, "response------offer");
       })
       .catch(err => console.log(err));
   }, []);
@@ -39,8 +38,6 @@ const OffersAndCoupons = () => {
   const OffersAndCupons = () => {
     dispatch(offersAndCuponsList(offerCupon));
   };
-
-  console.log(offersCuponsList, "offerCupon++++++++++++");
 
   const str = string.landing_page.OffersAndDiscount;
   return (
@@ -60,7 +57,7 @@ const OffersAndCoupons = () => {
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
               <CopyIcon size={20} color={"black"} />
-              <p className="text-[#222]">{item.copy}</p>
+              <p className="text-[#222]">copy</p>
             </div>
           </div>
         ))}

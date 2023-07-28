@@ -6,6 +6,8 @@ export const HomepageSlice = createSlice({
     cityList: [],
     offerCoupons: [],
     recentProduct: [],
+    reviews: [],
+    newProduct: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -17,8 +19,19 @@ export const HomepageSlice = createSlice({
     addRecentlyViewedProduct(state, action) {
       state.recentProduct = action.payload;
     },
+    addGoogleReviews(state, action) {
+      state.reviews = action.payload;
+    },
+    addNewlaunchedProducts(state, action) {
+      state.newProduct = action.payload;
+    },
   },
 });
 
-export const {addCityList, offersAndCuponsList, addRecentlyViewedProduct} =
-  HomepageSlice.actions;
+export const {
+  addCityList,
+  offersAndCuponsList,
+  addRecentlyViewedProduct,
+  addGoogleReviews,
+  addNewlaunchedProducts,
+} = HomepageSlice.actions;
