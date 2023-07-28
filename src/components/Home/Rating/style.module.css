@@ -1,5 +1,5 @@
 .wrapper {
-  @apply py-8 xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px];
+  @apply py-8 xl:mt-[88px] xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px];
 }
 .head {
   @apply font-medium text-9A9AA2 text-16 leading-5 tracking-desc xl:tracking-0.3 font-Poppins;
@@ -35,7 +35,7 @@
   border: 1px solid var(--offwhite-offwhite-3, #e3e1dc);
 }
 .img {
-  @apply min-w-[3rem] h-12 rounded-full bg-red-400;
+  @apply min-w-[3rem] h-12 rounded-full;
 }
 .row {
   @apply flex items-center justify-between;

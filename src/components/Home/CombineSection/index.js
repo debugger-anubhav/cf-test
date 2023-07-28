@@ -7,7 +7,7 @@ const CombineSection = () => {
   return (
     <>
       {/* for desktop */}
-      <div className="hidden xl:flex py-20 px-[90px] relative macbook:px-[122px]">
+      <div className="hidden xl:flex py-20 px-[90px] relative macbook:px-[122px] mt-10">
         <PartnershipBanner />
         <div>
           <FourSteps />

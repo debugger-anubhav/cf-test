@@ -48,8 +48,8 @@ export default function Home() {
           <LimetedPreiodDiscount />
           <RentNowBanner />
           <TryCityMax />
-          <MediaCoverage />
           <CustomerRating />
+          <MediaCoverage />
           <CombineSection />
           <HappySubscribers />
           <FrequentlyAskedQuestions />

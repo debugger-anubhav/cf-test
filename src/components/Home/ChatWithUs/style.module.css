@@ -1,6 +1,6 @@
 .main_container {
   @apply flex-col rounded border border-[#DDDDDF] 
-  outline-none py-6 text-gray-300 px-4 items-start m-4 xl:p-7 macbook:p-12;
+  outline-none py-6 text-gray-300 px-4 md:px-6 items-start m-4 md:mt-7 xl:mt-0 md:mx-[70px] xl:mx-0 xl:p-7 macbook:p-12;
 }
 .sub_container {
   @apply flex-col w-[288px] h-[52px];
@@ -21,7 +21,7 @@
   @apply text-[#48678B];
 }
 .write_to_us_wrapper {
-  @apply flex w-full xl:w-[140px] macbook:w-[185px] rounded-lg border-2 p-2.5 justify-center border-[#71717A] bg-[#FFF];
+  @apply flex w-full md:w-[50%] xl:w-[140px] macbook:w-[185px] rounded-lg border-2 p-2.5 justify-center border-[#71717A] bg-[#FFF];
 }
 .tbMail_icon {
   @apply w-[20px] h-[21px] text-[#71717A];
@@ -30,7 +30,7 @@
   @apply font-Poppins w-[86px] h-[20px] text-[#1f1f27] text-sm leading-5;
 }
 .chat_now_wrapper {
-  @apply flex w-full rounded-lg p-2.5 xl:w-[140px] macbook:w-[185px] justify-center items-center bg-[#F6B704];
+  @apply flex w-full md:w-[50%] rounded-lg p-2.5 xl:w-[140px] macbook:w-[185px] justify-center items-center bg-[#F6B704];
 }
 .message_icon {
   @apply w-[20px] h-[21px] text-[#222];

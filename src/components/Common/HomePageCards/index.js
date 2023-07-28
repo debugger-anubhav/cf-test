@@ -27,7 +27,9 @@ const Card = ({
         )}
       </div>
       <div className={styles.desc_div}>
-        <h3 className={styles.desc}>{desc}</h3>
+        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+          {desc}
+        </h3>
         <Heart size={25} color={"#C0C0C6"} />
       </div>
       <div className={styles.price_div}>

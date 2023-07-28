@@ -1,11 +1,11 @@
 .wrapper {
-  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-8;
+  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-8 xl:mt-20;
 }
 .heading {
-  @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 text-45454A;
+  @apply text-20 font-medium leading-8 xl:text-32 xl:leading-10 xl:tracking-0.6 tracking-heading text-45454A;
 }
 .cards_wrapper {
-  @apply w-full overflow-scroll flex gap-3 mt-4;
+  @apply w-full overflow-scroll flex gap-3 mt-4 xl:mt-8;
 }
 .card {
   @apply cursor-pointer h-[100px] xl:min-w-[365px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px];
