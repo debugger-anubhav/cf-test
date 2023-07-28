@@ -27,7 +27,6 @@ const RecentlyViewedProduct = () => {
     recentlyViewed()
       .then(res => {
         setRecentlyViewedproduct(res?.data?.data);
-        console.log(res?.data?.data, "r+++++++++++++++++++++");
       })
       .catch(err => console.log(err));
   }, []);
@@ -39,8 +38,6 @@ const RecentlyViewedProduct = () => {
   const recentlyViewedProducts = () => {
     dispatch(addRecentlyViewedProduct(recentlyViewedproduct));
   };
-
-  console.log(recentProduct, "offerCupon++++++recentProduct++++++");
 
   return (
     <div className={styles.main_container}>

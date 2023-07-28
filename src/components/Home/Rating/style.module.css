@@ -35,7 +35,7 @@
   border: 1px solid var(--offwhite-offwhite-3, #e3e1dc);
 }
 .img {
-  @apply min-w-[3rem] h-12 rounded-full bg-red-400;
+  @apply min-w-[3rem] h-12 rounded-full;
 }
 .row {
   @apply flex items-center justify-between;
