@@ -7,14 +7,19 @@ import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
 import {cityUrl} from "../../../../appConfig";
 
-export default function CommonDrawer({DrawerName, Cities}) {
-  console.log(Cities, "Cities");
+export default function CommonDrawer({
+  DrawerName,
+  Cities,
+  setCitySelectedId,
+  citySelectedId,
+}) {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const handleresize = e => {
     if (e.target.innerWidth < 640) {
@@ -132,7 +137,10 @@ export default function CommonDrawer({DrawerName, Cities}) {
             <div
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => (
-                <div className={styles.city_wrapper} key={index.toString()}>
+                <div
+                  className={styles.city_wrapper}
+                  key={index.toString()}
+                  onClick={() => setCitySelectedId(city?.id)}>
                   <Image
                     src={cityUrl + city?.list_value_seourl + ".svg"}
                     className={styles.city_thambnil}
