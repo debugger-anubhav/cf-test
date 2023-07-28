@@ -11,7 +11,8 @@ const NewlyLaunched = () => {
   const heading = strings.landing_page.Newlylaunced.heading;
   const subHeading = strings.landing_page.Newlylaunced.productRent;
 
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const {refetch: getNewlaunchedProduct} = useQuery(
     "new-product",
@@ -69,10 +70,6 @@ const NewlyLaunched = () => {
 
   return (
     <div className={styles.main_container}>
-      {/* <div className={styles.brown_box}>
-                <h2 className={styles.heading}>{heading}</h2>
-                <h3 className={styles.subHeading}>{subHeading}</h3>
-            </div> */}
       <div className={`${styles.brown_box} hidden lg:flex`}>
         <h2 className={styles.heading}>{heading}</h2>
         <h3 className={styles.subHeading}>{subHeading}</h3>

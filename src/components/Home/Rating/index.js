@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
 import Image from "next/image";
@@ -16,8 +16,8 @@ const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
-
-  const cityId = localStorage.getItem("city-Seleted");
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
 
   const {refetch: getGoogleReviews} = useQuery(
     "google-reviews",
@@ -28,24 +28,14 @@ const CustomerRating = () => {
   const dispatch = useDispatch();
   const {reviews} = useSelector(state => state.homePagedata);
 
-  const [googleReviews, setGooglereviews] = useState([]);
-
   useEffect(() => {
     getGoogleReviews()
       .then(res => {
-        setGooglereviews(res?.data?.data);
         console.log(res?.data?.data, "res?.data?.data)");
+        dispatch(addGoogleReviews(res?.data?.data));
       })
       .catch(err => console.log(err));
   }, []);
-
-  useEffect(() => {
-    gooeleReviewData();
-  }, [googleReviews]);
-
-  const gooeleReviewData = () => {
-    dispatch(addGoogleReviews(googleReviews));
-  };
 
   return (
     <div className={styles.wrapper}>

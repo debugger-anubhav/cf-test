@@ -6,13 +6,13 @@ import Image from "next/image";
 import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
 import {cityUrl} from "../../../../appConfig";
+import {useDispatch, useSelector} from "react-redux";
+import {selectedCityId, selectedCityName} from "@/store/Slices";
 
-export default function CommonDrawer({
-  DrawerName,
-  Cities,
-  setCitySelectedId,
-  citySelectedId,
-}) {
+export default function CommonDrawer({DrawerName, Cities}) {
+  const dispatch = useDispatch();
+  const homePageReduxData = useSelector(state => state.homePagedata);
+
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -140,7 +140,10 @@ export default function CommonDrawer({
                 <div
                   className={styles.city_wrapper}
                   key={index.toString()}
-                  onClick={() => setCitySelectedId(city?.id)}>
+                  onClick={() => {
+                    dispatch(selectedCityId(city?.id));
+                    dispatch(selectedCityName(city?.list_value));
+                  }}>
                   <Image
                     src={cityUrl + city?.list_value_seourl + ".svg"}
                     className={styles.city_thambnil}
@@ -190,7 +193,9 @@ export default function CommonDrawer({
             className={styles.menu_icon_drawer}
           />
         ) : (
-          <span className={styles.header_city_name}>Ghaziabad</span>
+          <span className={styles.header_city_name}>
+            {homePageReduxData?.cityName}
+          </span>
         )}
       </div>
       <SwipeableDrawer
