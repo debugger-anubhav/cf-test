@@ -6,7 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {addCategory} from "@/store/Slices";
-import {categoryImageBaseUrl} from "@/constants/constant";
+// import {categoryImageBaseUrl} from "@/constants/constant";
+import {RentFurniture} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = () => {
   const {category: getCategory} = useSelector(state => state.homePagedata);
@@ -28,26 +29,29 @@ const RentFurnitureAndAppliances = () => {
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
       <div className={styles.card_div}>
-        {getCategory?.map((item, index) => (
+        {RentFurniture?.map((item, index) => (
           <div key={index}>
             <div className="relative">
-              <Image
-                src={categoryImageBaseUrl + item.category_image}
-                width={371}
-                height={367}
-                alt=""
-                className={styles.img}
-              />
-              <div className={styles.pricetag}>
+              <div>
+                <Image
+                  // src={categoryImageBaseUrl + item.category_image}
+                  src={item.img}
+                  width={"100%"}
+                  height={"100%"}
+                  alt=""
+                  className={styles.img}
+                />
+              </div>
+              {/* <div className={styles.pricetag}>
                 <p className={styles.price}>Starting from</p>
                 <p className={styles.price}>
                   <span className={styles.span}>{item.pricetag}</span>
                   month
                 </p>
-              </div>
+              </div> */}
             </div>
             <div className="xl:pl-3 macbook:pl-0">
-              <h3 className={styles.label}>{item.cat_name}</h3>
+              <h3 className={styles.label}>{item.label}</h3>
               <p className={styles.desc}>{item.desc}</p>
             </div>
           </div>

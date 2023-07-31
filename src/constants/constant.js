@@ -12,37 +12,31 @@ export const RentFurniture = [
     img: HomePageImages.bedroom,
     label: "Bedroom",
     desc: "Beds, bedside tables, mattresses, storage, wardrobes, pillows and more",
-    pricetag: "₹99/",
   },
   {
     img: HomePageImages.studyroom,
     label: "Study room",
     desc: "Refrigerator, Water purifier, Air conditioners, washing machine, Television and more",
-    pricetag: "₹189/",
   },
   {
     img: HomePageImages.livingroom,
     label: "Living room",
     desc: "Workstations, Office tables, Ergonomic office chairs and more",
-    pricetag: "₹67/",
   },
   {
     img: HomePageImages.appliances,
     label: "Appliances",
     desc: "Refrigerator, Water purifier, Air conditioners, washing machine, Television and more",
-    pricetag: "₹149/",
   },
   {
     img: HomePageImages.office,
     label: "Office",
     desc: "Workstations, Office tables, Ergonomic office chairs and more",
-    pricetag: "₹189/",
   },
   {
     img: HomePageImages.diningroom,
     label: "Dining room",
     desc: "4 seater dining set, 6 seater dining set, Dining table, Dining chair, 2 seater dining set and more",
-    pricetag: "₹69/",
   },
 ];
 

@@ -1,14 +1,14 @@
 import Demo from "./demo.png";
 import partner from "./partnership.svg";
 
-// home page images
-import bedroom from "./home_page_assets/rentFurniture/bedroom.svg";
-import appliances from "./home_page_assets/rentFurniture/appliances.svg";
-import diningroom from "./home_page_assets/rentFurniture/diningroom.svg";
-import livingroom from "./home_page_assets/rentFurniture/living-room.svg";
-import office from "./home_page_assets/rentFurniture/office.svg";
+// home page rent furniture images
+import bedroom from "./home_page_assets/rentFurniture/bed-room.webp";
+import appliances from "./home_page_assets/rentFurniture/appliances.webp";
+import diningroom from "./home_page_assets/rentFurniture/dining-room.webp";
+import livingroom from "./home_page_assets/rentFurniture/living-room.webp";
+import office from "./home_page_assets/rentFurniture/office.webp";
 import cardThumbnail from "./home_page_assets/commonCard/thumbnail.svg";
-import studyroom from "./home_page_assets/rentFurniture/study-room.svg";
+import studyroom from "./home_page_assets/rentFurniture/study-room.webp";
 
 // home page media coverage images
 import icon1 from "./home_page_assets/mediaCoverag/icon1.svg";
