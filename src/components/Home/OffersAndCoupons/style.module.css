@@ -1,5 +1,5 @@
 .wrapper {
-  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] mt-8 xl:mt-20;
+  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:px-[160px] mt-8 xl:mt-20;
 }
 .heading {
   @apply text-20 font-medium leading-8 xl:text-32 xl:leading-10 xl:tracking-0.6 tracking-heading text-45454A;
