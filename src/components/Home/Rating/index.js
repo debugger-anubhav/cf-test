@@ -54,7 +54,11 @@ const CustomerRating = () => {
             alt="editIcon"
             className={styles.editIcon}
           />
-          <div className={styles.editBtn}>
+          <div
+            className={styles.editBtn}
+            onClick={
+              "window.location.href = 'https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU';"
+            }>
             <EditIcon size={25} />
             <p className="text-[#222] font-medium">{btntxt}</p>
           </div>

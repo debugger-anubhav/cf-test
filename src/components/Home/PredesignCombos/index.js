@@ -9,7 +9,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
 
 const PreDesignCombos = () => {
-  // const str = string.landing_page.Common_card;
+  const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
@@ -18,11 +18,6 @@ const PreDesignCombos = () => {
     endPoints.productCombos,
     `?cityId=${cityId}&userId=${85757}`,
   );
-
-  const {designComboProduct: getPreDesignCombosData} = useSelector(
-    state => state.homePagedata,
-  );
-  const dispatch = useDispatch();
 
   useEffect(() => {
     getPreDesignCombos()
@@ -36,7 +31,7 @@ const PreDesignCombos = () => {
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box}>
-        {getPreDesignCombosData?.map((item, index) => (
+        {homePageReduxData?.designComboProduct?.map((item, index) => (
           <div key={index}>
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
@@ -47,6 +42,7 @@ const PreDesignCombos = () => {
                 ((item.price - item.sale_price) * 100) / item.price,
               ).toFixed(2)}%`}
               showincludedItem={true}
+              itemIncluded={item?.subProduct.length}
             />
           </div>
         ))}

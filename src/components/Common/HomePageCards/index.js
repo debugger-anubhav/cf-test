@@ -10,6 +10,7 @@ const Card = ({
   discount,
   showincludedItem,
   cardImage,
+  itemIncluded,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -25,7 +26,10 @@ const Card = ({
         {/* ----------- */}
         {showincludedItem && (
           <div className={styles.item_included_container}>
-            <p className={styles.item_icluded_text}>5 items included</p>
+            <p
+              className={
+                styles.item_icluded_text
+              }>{`${itemIncluded} items included`}</p>
           </div>
         )}
       </div>
@@ -37,8 +41,8 @@ const Card = ({
       </div>
       <div className={styles.price_div}>
         <div className="flex gap-[0.62rem] items-center">
-          <h3 className={styles.currentPrice}>{currentPrice}</h3>
-          <h3 className={styles.originalPrice}>{originalPrice}</h3>
+          <h3 className={styles.currentPrice}>{`₹${currentPrice} /mo`}</h3>
+          <h3 className={styles.originalPrice}>{`₹${originalPrice} /mo`}</h3>
         </div>
         <div className={styles.discount}>{discount}</div>
       </div>
