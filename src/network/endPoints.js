@@ -9,4 +9,5 @@ export const endPoints = {
   productCombos: "fc-products/getCombosProducts",
   category: "fc-categories/all",
   allAndSubCategory: "fc-categories/getAllCategoriesAndSubCategories",
+  sidebarMenuLists: "fc-categories/getSidebarMenuLists",
 };

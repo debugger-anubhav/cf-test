@@ -9,7 +9,7 @@ import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 
-export default function CommonDrawer({DrawerName, Cities}) {
+export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
@@ -35,16 +35,6 @@ export default function CommonDrawer({DrawerName, Cities}) {
     return () => window.removeEventListener("resize", handleresize);
   }, []);
 
-  // const Cities = [
-  //   {name: "Delhi", image: Images.Delhi},
-  //   {name: "Bangalore", image: Images.Bangalore},
-  //   {name: "Pune", image: Images.Pune},
-  //   {name: "Mumbai", image: Images.Mumbai},
-  //   {name: "Hyderabad", image: Images.Hyderabad},
-  //   {name: "Ghaziabad", image: Images.Ghaziabad},
-  //   {name: "Noida", image: Images.Noida},
-  // ];
-
   const toggleDrawer = (anchor, open) => event => {
     if (
       event &&
@@ -56,9 +46,7 @@ export default function CommonDrawer({DrawerName, Cities}) {
 
     setState({...state, [anchor]: open});
   };
-  React.useEffect(() => {
-    // console.log(mobileCityDrawer, "state");
-  }, [mobileCityDrawer]);
+  React.useEffect(() => {}, [mobileCityDrawer]);
 
   const list = anchor =>
     DrawerName === "menu" ? (
@@ -75,12 +63,18 @@ export default function CommonDrawer({DrawerName, Cities}) {
         <div className={styles.drawer_content}>
           <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
           <div className={styles.menu_list}>
-            {string.landing_page.header.menuList1?.map((item, index) => (
+            <p
+              className={styles.menu_item}
+              // onClick={() => console.log(item.link)}
+            >
+              All
+            </p>
+            {data?.map((item, index) => (
               <p
                 key={index.toString()}
                 className={styles.menu_item}
                 onClick={() => console.log(item.link)}>
-                {item.item}
+                {item.cat_name}
               </p>
             ))}
           </div>
