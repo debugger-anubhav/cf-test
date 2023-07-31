@@ -1,21 +1,21 @@
 "use client";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import {Icons, DownArrow} from "@/assets/icon";
+import { Icons, DownArrow } from "@/assets/icon";
 import CommonDrawer from "../Drawer";
-import {endPoints} from "@/network/endPoints";
-import {useQuery} from "@/hooks/useQuery";
-import {addCityList, selectedCityId} from "@/store/Slices";
-import {useDispatch} from "react-redux";
-import {useAppSelector} from "@/store";
+import { endPoints } from "@/network/endPoints";
+import { useQuery } from "@/hooks/useQuery";
+import { addCityList, selectedCityId } from "@/store/Slices";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/store";
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+  const { cityList: storeCityList } = useAppSelector(state => state.homePagedata);
 
-  const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
+  const { refetch: getCityList } = useQuery("city-list", endPoints.cityList);
 
   useEffect(() => {
     getCityList()

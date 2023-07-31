@@ -1,21 +1,19 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
-import {categoryImageBaseUrl} from "@/constants/constant";
 import Image from "next/image";
-import {useDispatch, useSelector} from "react-redux";
-import {useQuery} from "@/hooks/useQuery";
-import {endPoints} from "@/network/endPoints";
-import {addCategory} from "@/store/Slices";
+import { useDispatch, useSelector } from "react-redux";
+import { useQuery } from "@/hooks/useQuery";
+import { endPoints } from "@/network/endPoints";
+import { addCategory } from "@/store/Slices";
+import { categoryImageBaseUrl } from "@/constants/constant";
 
 const RentFurnitureAndAppliances = () => {
-  // const homePageReduxData = useSelector(state => state.homePagedata);
-  // const cityId = homePageReduxData.cityId;
 
-  const {category: getCategory} = useSelector(state => state.homePagedata);
+  const { category: getCategory } = useSelector(state => state.homePagedata);
   const dispatch = useDispatch();
 
-  const {refetch: getAllCategory} = useQuery("category", endPoints.category);
+  const { refetch: getAllCategory } = useQuery("category", endPoints.category);
 
   useEffect(() => {
     getAllCategory()
@@ -25,7 +23,6 @@ const RentFurnitureAndAppliances = () => {
       .catch(err => console.log(err));
   }, []);
 
-  console.log(getCategory, "getCategory");
 
   return (
     <div className={styles.rent_furniture_wrapper}>

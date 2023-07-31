@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const HomepageSlice = createSlice({
   name: "HomePageData",
@@ -14,6 +14,7 @@ export const HomepageSlice = createSlice({
     trendindProduct: [],
     designComboProduct: [],
     category: [],
+    allAndSubCategory: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -50,6 +51,9 @@ export const HomepageSlice = createSlice({
     addCategory(state, action) {
       state.category = action.payload;
     },
+    addAllAndSubCategory(state, action) {
+      state.allAndSubCategory = action.payload;
+    }
   },
 });
 
@@ -65,4 +69,5 @@ export const {
   addtrendingproduct,
   addComboProducts,
   addCategory,
+  addAllAndSubCategory,
 } = HomepageSlice.actions;

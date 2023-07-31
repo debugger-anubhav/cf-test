@@ -47,25 +47,25 @@ export const RentFurniture = [
 ];
 
 export const MediaCoverageImages = [
-  {img: HomePageMediaCoverage.icon1},
-  {img: HomePageMediaCoverage.icon2},
-  {img: HomePageMediaCoverage.icon3},
-  {img: HomePageMediaCoverage.icon4},
-  {img: HomePageMediaCoverage.icon5},
-  {img: HomePageMediaCoverage.icon6},
-  {img: HomePageMediaCoverage.icon7},
-  {img: HomePageMediaCoverage.icon8},
-  {img: HomePageMediaCoverage.icon9},
+  { img: HomePageMediaCoverage.icon1 },
+  { img: HomePageMediaCoverage.icon2 },
+  { img: HomePageMediaCoverage.icon3 },
+  { img: HomePageMediaCoverage.icon4 },
+  { img: HomePageMediaCoverage.icon5 },
+  { img: HomePageMediaCoverage.icon6 },
+  { img: HomePageMediaCoverage.icon7 },
+  { img: HomePageMediaCoverage.icon8 },
+  { img: HomePageMediaCoverage.icon9 },
 ];
 
 export const Newlylaunched = [
-  {img: null, price: ""},
-  {img: NewProducts.product1, price: "₹1699/mo"},
-  {img: NewProducts.product2, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
-  {img: NewProducts.product4, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
+  { img: null, price: "" },
+  { img: NewProducts.product1, price: "₹1699/mo" },
+  { img: NewProducts.product2, price: "₹1699/mo" },
+  { img: NewProducts.product3, price: "₹1699/mo" },
+  { img: NewProducts.product4, price: "₹1699/mo" },
+  { img: NewProducts.product3, price: "₹1699/mo" },
+  { img: NewProducts.product3, price: "₹1699/mo" },
 ];
 
 export const CustomerRatingsCard = [
@@ -230,11 +230,9 @@ export const HasselFreeData = [
   },
 ];
 
-// images url not be deleted where all images cominhg from
+
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
 
 export const categoryImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
-
-// https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp

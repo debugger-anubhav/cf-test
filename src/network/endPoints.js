@@ -8,4 +8,5 @@ export const endPoints = {
   trendingProduct: "fc-products/getTrendingProducts",
   productCombos: "fc-products/getCombosProducts",
   category: "fc-categories/all",
+  allAndSubCategory: "fc-categories/getAllCategoriesAndSubCategories",
 };

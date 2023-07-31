@@ -1,13 +1,13 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
-import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
+import { GoogleIcon, RatingStar, EditIcon } from "@/assets/icon";
 import Image from "next/image";
-import {HomePageImages} from "@/assets/images";
-import {endPoints} from "@/network/endPoints";
-import {useDispatch, useSelector} from "react-redux";
-import {addGoogleReviews} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
-import {BsFillStarFill} from "react-icons/bs";
+import { HomePageImages } from "@/assets/images";
+import { endPoints } from "@/network/endPoints";
+import { useDispatch, useSelector } from "react-redux";
+import { addGoogleReviews } from "@/store/Slices";
+import { useQuery } from "@/hooks/useQuery";
+import { BsFillStarFill } from "react-icons/bs";
 import Rating from "react-rating";
 
 // h2 h3 h3 h3 p
@@ -20,19 +20,18 @@ const CustomerRating = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
-  const {refetch: getGoogleReviews} = useQuery(
+  const { refetch: getGoogleReviews } = useQuery(
     "google-reviews",
     endPoints.googleReviews,
     `?cityId=${cityId}`,
   );
 
   const dispatch = useDispatch();
-  const {reviews} = useSelector(state => state.homePagedata);
+  const { reviews } = useSelector(state => state.homePagedata);
 
   useEffect(() => {
     getGoogleReviews()
       .then(res => {
-        console.log(res?.data?.data, "res?.data?.data)");
         dispatch(addGoogleReviews(res?.data?.data));
       })
       .catch(err => console.log(err));

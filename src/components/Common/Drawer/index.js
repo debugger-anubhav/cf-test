@@ -1,15 +1,15 @@
 import * as React from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Close, Icons} from "@/assets/icon";
+import { Close, Icons } from "@/assets/icon";
 import Image from "next/image";
-import {Images} from "@/assets/images";
+import { Images } from "@/assets/images";
 import string from "@/constants/Constant.json";
-import {cityUrl} from "../../../../appConfig";
-import {useDispatch, useSelector} from "react-redux";
-import {selectedCityId, selectedCityName} from "@/store/Slices";
+import { cityUrl } from "../../../../appConfig";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedCityId, selectedCityName } from "@/store/Slices";
 
-export default function CommonDrawer({DrawerName, Cities}) {
+export default function CommonDrawer({ DrawerName, Cities }) {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
@@ -54,7 +54,7 @@ export default function CommonDrawer({DrawerName, Cities}) {
       return;
     }
 
-    setState({...state, [anchor]: open});
+    setState({ ...state, [anchor]: open });
   };
   React.useEffect(() => {
     // console.log(mobileCityDrawer, "state");
