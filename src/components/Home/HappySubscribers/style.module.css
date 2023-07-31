@@ -1,5 +1,5 @@
 .happy_subscribers_wrapper {
-  @apply py-6 ml-4 md:ml-[70px] xl:ml-[90px] macbook:ml-[122px] font-Poppins;
+  @apply py-6 ml-4 md:ml-[70px] xl:ml-[90px] macbook:ml-[122px] 3xl:ml-[160px] font-Poppins;
 }
 .label {
   @apply text-14 xl:text-16 font-medium leading-5 text-9A9AA2 tracking-desc xl:tracking-0.3;
@@ -8,7 +8,7 @@
   @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6;
 }
 .desc {
-  @apply text-9A9AA2 leading-6 tracking-0.3 mt-4 pr-4 md:pr-[70px] xl:pr-[90px] macbook:pr-[122px];
+  @apply text-9A9AA2 leading-6 tracking-0.3 mt-4 pr-4 md:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:px-[160px];
 }
 .cards_wrapper {
   @apply mt-8 flex gap-4 xl:gap-7 w-full overflow-scroll;

@@ -1,5 +1,5 @@
 .main_container {
-  @apply bg-[#597492] lg:py-12 md:py-10 py-6 macbook:px-[122px] xl:px-[90px] lg:px-[80px] md:pl-[70px] pl-4;
+  @apply bg-[#597492] lg:py-12 md:py-10 py-6 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] lg:px-[80px] md:pl-[70px] pl-4;
 }
 .heading {
   @apply text-white flex font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6 pb-8;

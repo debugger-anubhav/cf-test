@@ -1,6 +1,6 @@
 .main_container {
   @apply flex flex-col w-full mt-8 pl-4 md:pl-[70px] 
-  xl:pl-[90px] macbook:pl-[122px] py-4 xl:py-12;
+  xl:pl-[90px] macbook:pl-[122px] 3xl:px-[160px] py-4 xl:py-12;
   background: linear-gradient(
     149deg,
     #fffae1 0%,
