@@ -46,7 +46,7 @@ const RecentlyViewedProduct = () => {
       <div className="flex overflow-x-scroll">
         {/* {cardData?.map((item, index) => ( */}
         {recentProduct?.map((item, index) => (
-          <div className="mr-4" key={index.toString()}>
+          <div className="mr-4 3xl:mr-8" key={index.toString()}>
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
               discount={`${Math.round(
