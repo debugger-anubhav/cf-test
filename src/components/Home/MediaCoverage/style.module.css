@@ -1,5 +1,5 @@
 .media_coverage_wrapper {
-  @apply pb-8 pt-2 mt-6 xl:mt-[88px] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:px-[160px];
+  @apply pb-8 pt-2 mt-6 xl:mt-[88px] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
 }
 .label {
   @apply text-14 xl:text-16 font-medium leading-5 tracking-desc xl:tracking-0.3 font-Poppins text-9A9AA2;

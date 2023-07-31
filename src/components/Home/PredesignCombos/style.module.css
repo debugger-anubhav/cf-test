@@ -1,5 +1,5 @@
 .main_container {
-  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:px-[160px] my-8 xl:my-[88px];
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] my-8 xl:my-[88px];
 }
 
 .heading {

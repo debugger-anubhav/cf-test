@@ -1,5 +1,5 @@
 .wrapper {
-  @apply py-8 xl:mt-[88px] xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:px-[160px];
+  @apply py-8 xl:mt-[88px] xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
 }
 .head {
   @apply font-medium text-9A9AA2 text-16 leading-5 tracking-desc xl:tracking-0.3 font-Poppins;
