@@ -1,0 +1,30 @@
+.wrapper {
+  @apply w-[17.3rem] lg:w-[20.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[20.8rem] 3xl:h-[26.8rem];
+}
+.thumbnail {
+  @apply min-w-full h-[13rem];
+}
+.desc_div {
+  @apply mt-1 flex gap-2;
+}
+.desc {
+  @apply text-14 lg:text-18 font-medium !leading-normal tracking-desc text-71717A w-[15.3rem] font-Poppins;
+}
+.price_div {
+  @apply mt-1 flex justify-between items-center;
+}
+.originalPrice {
+  @apply text-14 tracking-desc text-9A9AA2 line-through;
+}
+.currentPrice {
+  @apply text-18 text-[#222] font-medium;
+}
+.discount {
+  @apply bg-[#67AF7B] flex justify-center items-center rounded-3xl px-1 w-[4.25rem] h-5 text-12 leading-4 text-fff;
+}
+.item_included_container {
+  @apply flex px-1 py-2 items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
+}
+.item_icluded_text {
+  @apply text-45454A font-Poppins text-12 font-medium leading-normal;
+}

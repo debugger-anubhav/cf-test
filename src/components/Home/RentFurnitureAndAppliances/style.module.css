@@ -1,5 +1,5 @@
 .rent_furniture_wrapper {
-  @apply mx-4 md:mx-[70px] xl:mx-[90px] macbook:mx-[120px] mt-6 xl:mt-[60px] font-Poppins;
+  @apply mx-4 md:mx-[70px] xl:mx-[90px] macbook:mx-[120px] mt-6 3xl:mx-[160px] xl:mt-[60px] font-Poppins;
 }
 .head {
   @apply text-20 xl:text-32 xl:leading-10 xl:tracking-0.6 font-medium leading-8 text-45454A tracking-heading;

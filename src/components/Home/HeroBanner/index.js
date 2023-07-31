@@ -33,26 +33,11 @@ const HeroBanner = () => {
       </div>
 
       <div className={styles.hero_banner_wrapper}>
-        <div className={styles.left_hero}>
-          <Image
-            src={HeroBannerImages.WebHeroBannerOne}
-            height={"100%"}
-            width={"100%"}
-            className="w-full h-full"
-          />
-        </div>
-        <div className={styles.right_hero}>
-          <Image
-            src={HeroBannerImages.WebHeroBannerTwo}
-            height={"100%"}
-            width={"100%"}
-          />
-          <Image
-            src={HeroBannerImages.WebHeroBannerThree}
-            height={"100%"}
-            width={"100%"}
-          />
-        </div>
+        <Image
+          src={HeroBannerImages.HeroFrame}
+          alt="hero-banner"
+          className="w-full"
+        />
       </div>
     </>
   );
