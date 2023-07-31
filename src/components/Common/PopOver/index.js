@@ -15,7 +15,6 @@ export default function PopOver({list, item}) {
   };
 
   const open = Boolean(anchorEl);
-  // console.log(list);
   return (
     <div>
       <div
@@ -50,9 +49,10 @@ export default function PopOver({list, item}) {
         onClose={handlePopoverClose}
         disableRestoreFocus>
         <div className={styles.sub_item_wrapper}>
+          <p className={styles.sub_item}>All</p>
           {list?.map((item, index) => (
             <p className={styles.sub_item} key={index.toString()}>
-              {item}
+              {item?.cat_name}
             </p>
           ))}
         </div>
