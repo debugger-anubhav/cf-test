@@ -1,25 +1,25 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
-import { useDispatch, useSelector } from "react-redux";
-import { endPoints } from "@/network/endPoints";
-import { addComboProducts } from "@/store/Slices";
-import { useQuery } from "@/hooks/useQuery";
-import { productImageBaseUrl } from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+import {endPoints} from "@/network/endPoints";
+import {addComboProducts} from "@/store/Slices";
+import {useQuery} from "@/hooks/useQuery";
+import {productImageBaseUrl} from "@/constants/constant";
 
 const PreDesignCombos = () => {
   // const str = string.landing_page.Common_card;
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
-  const { refetch: getPreDesignCombos } = useQuery(
+  const {refetch: getPreDesignCombos} = useQuery(
     "design-combos",
     endPoints.productCombos,
     `?cityId=${cityId}&userId=${85757}`,
   );
 
-  const { designComboProduct: getPreDesignCombosData } = useSelector(
+  const {designComboProduct: getPreDesignCombosData} = useSelector(
     state => state.homePagedata,
   );
   const dispatch = useDispatch();

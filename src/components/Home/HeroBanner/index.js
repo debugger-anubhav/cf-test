@@ -1,16 +1,16 @@
 // import {HeroBannerText} from "@/constants/constant";
-import { HeroBannerImages } from "@/assets/images";
+import {HeroBannerImages} from "@/assets/images";
 import React from "react";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
+import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 
 const HeroBanner = () => {
   return (
     <>
       <div className="w-[95%] mx-auto lg:hidden">
-        <Carousel showStatus={false} showArrows={false} >
+        <Carousel showStatus={false} showArrows={false}>
           <div>
             <Image
               src={HeroBannerImages.HeroBannerImageOne}

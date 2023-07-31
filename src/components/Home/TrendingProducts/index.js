@@ -1,22 +1,22 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import { useQuery } from "@/hooks/useQuery";
-import { useDispatch, useSelector } from "react-redux";
-import { addtrendingproduct } from "@/store/Slices";
-import { endPoints } from "@/network/endPoints";
-import { productImageBaseUrl } from "@/constants/constant";
+import {useQuery} from "@/hooks/useQuery";
+import {useDispatch, useSelector} from "react-redux";
+import {addtrendingproduct} from "@/store/Slices";
+import {endPoints} from "@/network/endPoints";
+import {productImageBaseUrl} from "@/constants/constant";
 
 const TrendingProducts = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
-  const { trendindProduct: getTrendingProducts } = useSelector(
+  const {trendindProduct: getTrendingProducts} = useSelector(
     state => state.homePagedata,
   );
   const dispatch = useDispatch();
 
-  const { refetch: getTrendyProducts } = useQuery(
+  const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
     endPoints.trendingProduct,
     `?cityId=${cityId}&userId=${85757}`,

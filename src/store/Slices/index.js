@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 export const HomepageSlice = createSlice({
   name: "HomePageData",
@@ -53,7 +53,7 @@ export const HomepageSlice = createSlice({
     },
     addAllAndSubCategory(state, action) {
       state.allAndSubCategory = action.payload;
-    }
+    },
   },
 });
 
