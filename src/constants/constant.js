@@ -229,3 +229,9 @@ export const HasselFreeData = [
     text: "Upgrade your house with new products after 6 months of use for free",
   },
 ];
+
+export const productImageBaseUrl =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
+
+export const categoryImageBaseUrl =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/category/";

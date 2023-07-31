@@ -16,6 +16,7 @@ const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
+
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
@@ -31,7 +32,6 @@ const CustomerRating = () => {
   useEffect(() => {
     getGoogleReviews()
       .then(res => {
-        console.log(res?.data?.data, "res?.data?.data)");
         dispatch(addGoogleReviews(res?.data?.data));
       })
       .catch(err => console.log(err));

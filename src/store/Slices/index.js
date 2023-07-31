@@ -10,6 +10,11 @@ export const HomepageSlice = createSlice({
     cityName: "Bangalore",
     reviews: [],
     newProduct: [],
+    limitedDiscount: [],
+    trendindProduct: [],
+    designComboProduct: [],
+    category: [],
+    allAndSubCategory: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -34,6 +39,21 @@ export const HomepageSlice = createSlice({
     addNewlaunchedProducts(state, action) {
       state.newProduct = action.payload;
     },
+    addLimitedPreiodDiscount(state, action) {
+      state.limitedDiscount = action.payload;
+    },
+    addtrendingproduct(state, action) {
+      state.trendindProduct = action.payload;
+    },
+    addComboProducts(state, action) {
+      state.designComboProduct = action.payload;
+    },
+    addCategory(state, action) {
+      state.category = action.payload;
+    },
+    addAllAndSubCategory(state, action) {
+      state.allAndSubCategory = action.payload;
+    },
   },
 });
 
@@ -45,4 +65,9 @@ export const {
   selectedCityName,
   addGoogleReviews,
   addNewlaunchedProducts,
+  addLimitedPreiodDiscount,
+  addtrendingproduct,
+  addComboProducts,
+  addCategory,
+  addAllAndSubCategory,
 } = HomepageSlice.actions;

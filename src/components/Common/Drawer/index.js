@@ -57,7 +57,7 @@ export default function CommonDrawer({DrawerName, Cities}) {
     setState({...state, [anchor]: open});
   };
   React.useEffect(() => {
-    console.log(mobileCityDrawer, "state");
+    // console.log(mobileCityDrawer, "state");
   }, [mobileCityDrawer]);
 
   const list = anchor =>

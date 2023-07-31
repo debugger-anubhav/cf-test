@@ -1,7 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import PopOver from "../PopOver";
+import {endPoints} from "@/network/endPoints";
+import {useDispatch, useSelector} from "react-redux";
+import {addAllAndSubCategory} from "@/store/Slices";
+import {useQuery} from "@/hooks/useQuery";
 
 const MenuList = () => {
   const menuList = [
@@ -11,6 +15,27 @@ const MenuList = () => {
     {item: "Office Furniture", selectItem: string.Menu_list.Office_Furniture},
     {item: "Combos", selectItem: string.Menu_list.Combos},
   ];
+
+  const dispatch = useDispatch();
+  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
+    state => state.homePagedata,
+  );
+
+  const {refetch: getAllAndSubCategory} = useQuery(
+    "category",
+    endPoints.allAndSubCategory,
+  );
+
+  useEffect(() => {
+    getAllAndSubCategory()
+      .then(res => {
+        dispatch(addAllAndSubCategory(res?.data?.data));
+      })
+      .catch(err => console.log(err));
+  }, []);
+
+  console.log(getAllAndSubCategoryData, "getAllAndSubCategoryData-----");
+
   return (
     <div className={styles.menu_list_wrapper}>
       <div className={styles.menu_list_left}>

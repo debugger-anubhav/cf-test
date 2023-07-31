@@ -7,19 +7,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {useAppSelector} from "@/store";
+import {productImageBaseUrl} from "@/constants/constant";
 
 const RecentlyViewedProduct = () => {
   // const cardData = string.landing_page.Common_card;
-  const homepageData = useSelector(state => state.homePagedata);
-  const cityId = homepageData.cityId;
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = homePageReduxData.cityId;
+  const {recentProduct} = useAppSelector(state => state.homePagedata);
+  const dispatch = useDispatch();
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${85757}`,
   );
-  const {recentProduct} = useAppSelector(state => state.homePagedata);
-  const dispatch = useDispatch();
 
   const [recentlyViewedproduct, setRecentlyViewedproduct] = useState([]);
 
@@ -47,6 +48,7 @@ const RecentlyViewedProduct = () => {
         {recentProduct?.map((item, index) => (
           <div className="mr-4" key={index.toString()}>
             <Card
+              cardImage={productImageBaseUrl + item.image.split(",")[0]}
               discount={`${Math.round(
                 ((item.price - item.product_sale_price) * 100) /
                   item.product_sale_price,

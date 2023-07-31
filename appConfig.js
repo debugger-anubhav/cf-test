@@ -22,3 +22,9 @@ export const AppConfig = {
 };
 
 export const cityUrl = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+
+// export const productImageBaseUrl =
+//   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
+
+// export const categoryImageBaseUrl =
+//   "https://d3juy0zp6vqec8.cloudfront.net/images/category/";

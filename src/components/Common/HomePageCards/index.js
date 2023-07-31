@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import {HomePageImages} from "@/assets/images";
 import {Heart} from "@/assets/icon";
 
 const Card = ({
@@ -10,14 +9,18 @@ const Card = ({
   originalPrice,
   discount,
   showincludedItem,
+  cardImage,
 }) => {
   return (
     <div className={styles.wrapper}>
       <div className="relative">
         <Image
-          src={HomePageImages.cardThumbnail}
+          // src={HomePageImages.cardThumbnail}
+          src={cardImage}
           alt="thumbnail image"
           className={styles.thumbnail}
+          width={241}
+          height={181}
         />
         {/* ----------- */}
         {showincludedItem && (
