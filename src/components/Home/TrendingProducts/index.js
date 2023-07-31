@@ -8,13 +8,9 @@ import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
 
 const TrendingProducts = () => {
+  const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
-
-  const {trendindProduct: getTrendingProducts} = useSelector(
-    state => state.homePagedata,
-  );
-  const dispatch = useDispatch();
 
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
@@ -35,7 +31,7 @@ const TrendingProducts = () => {
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
       <div className={styles.card_box}>
-        {getTrendingProducts?.map((item, index) => (
+        {homePageReduxData?.trendindProduct?.map((item, index) => (
           <div key={index.toString()} className="mr-4">
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
