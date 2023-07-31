@@ -22,6 +22,7 @@ const RentFurnitureAndAppliances = () => {
       .catch(err => console.log(err));
   }, []);
 
+  console.log(getCategory, "getCategory----------");
   return (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
