@@ -15,6 +15,7 @@ export const HomepageSlice = createSlice({
     designComboProduct: [],
     category: [],
     allAndSubCategory: [],
+    sidebarMenuLists: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -54,6 +55,9 @@ export const HomepageSlice = createSlice({
     addAllAndSubCategory(state, action) {
       state.allAndSubCategory = action.payload;
     },
+    addSidebarMenuLists(state, action) {
+      state.sidebarMenuLists = action.payload;
+    },
   },
 });
 
@@ -70,4 +74,5 @@ export const {
   addComboProducts,
   addCategory,
   addAllAndSubCategory,
+  addSidebarMenuLists,
 } = HomepageSlice.actions;
