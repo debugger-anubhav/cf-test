@@ -84,6 +84,7 @@ import HeroBannerImageThree from "@/assets/home_page_assets/heroBanner/HeroBanne
 import WebHeroBannerOne from "@/assets/home_page_assets/heroBanner/hero-banner-main.svg";
 import WebHeroBannerTwo from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-1.svg";
 import WebHeroBannerThree from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-2.svg";
+import HeroFrame from "@/assets/home_page_assets/heroBanner/hero-banner-main.webp";
 
 export const Images = {
   Demo,
@@ -176,4 +177,5 @@ export const HeroBannerImages = {
   WebHeroBannerOne,
   WebHeroBannerTwo,
   WebHeroBannerThree,
+  HeroFrame,
 };
