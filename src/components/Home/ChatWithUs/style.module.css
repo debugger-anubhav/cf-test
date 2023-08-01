@@ -1,6 +1,6 @@
 .main_container {
   @apply flex-col rounded border border-[#DDDDDF] 
-  outline-none py-6 text-gray-300 px-4 md:px-6 items-start m-4 md:mt-7 xl:mt-0 md:mx-[70px] xl:mx-0 xl:p-7 macbook:p-12;
+  outline-none py-6 text-gray-300 px-4 md:px-6 items-start mt-4 mx-4 mb-4 xl:mb-0 md:mt-7 xl:mt-[33px] md:mx-[70px] xl:mx-0 xl:p-7 macbook:p-12;
 }
 .sub_container {
   @apply flex-col w-[288px] h-[52px];

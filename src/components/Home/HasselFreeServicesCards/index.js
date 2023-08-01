@@ -7,20 +7,26 @@ const HasselFreeServicesCards = () => {
   return (
     <div className={style.main_container}>
       <p className={style.heading}>{Title}</p>
-      <div className={style.card_container}>
-        {HasselFreeData.map((data, index) => {
-          return (
-            <div
-              key={index.toString()}
-              className={style.card_wrapper}
-              style={{backgroundImage: ` url("${data.backgroungImage.src}")`}}>
-              <div className="absolute bottom-0 px-4">
-                <p className={style.heading_text}>{data.Heading}</p>
-                <p className={style.content}>{data.text}</p>
+      <div className="flex">
+        <div className={style.card_container}>
+          {HasselFreeData.map((data, index) => {
+            return (
+              <div
+                key={index.toString()}
+                className={style.card_wrapper}
+                style={{
+                  backgroundImage: `url("${data.backgroungImage.src}")`,
+                  backgroundRepeat: "no-repeat",
+                  backgroundSize: "cover",
+                }}>
+                <div className="absolute bottom-4 px-4">
+                  <p className={style.heading_text}>{data.Heading}</p>
+                  <p className={style.content}>{data.text}</p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
     </div>
   );

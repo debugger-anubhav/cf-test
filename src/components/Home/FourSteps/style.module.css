@@ -8,7 +8,7 @@
   @apply text-20 leading-8 text-45454A font-Poppins font-medium tracking-heading;
 }
 .card_wrapper {
-  @apply flex gap-[23.5px] w-full overflow-scroll mt-8;
+  @apply flex gap-[23.5px] xl:gap-[42px] w-full overflow-scroll xl:overflow-hidden mt-8;
 }
 .img {
   @apply w-[171px] h-[171px] xl:w-[80px] xl:h-[80px];
