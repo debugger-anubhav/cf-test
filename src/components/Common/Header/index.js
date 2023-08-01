@@ -9,7 +9,6 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/store";
-import "react-responsive-modal/styles.css";
 import {RentFurniture} from "@/constants/constant";
 // import {BiArrowFromRight} from "react-icons/bi";
 // import {Modal} from "react-responsive-modal";
