@@ -10,17 +10,6 @@ import office from "./home_page_assets/rentFurniture/office.webp";
 import cardThumbnail from "./home_page_assets/commonCard/thumbnail.svg";
 import studyroom from "./home_page_assets/rentFurniture/study-room.webp";
 
-// home page media coverage images
-import icon1 from "./home_page_assets/mediaCoverag/icon1.svg";
-import icon2 from "./home_page_assets/mediaCoverag/icon2.svg";
-import icon3 from "./home_page_assets/mediaCoverag/icon3.svg";
-import icon4 from "./home_page_assets/mediaCoverag/icon4.svg";
-import icon5 from "./home_page_assets/mediaCoverag/icon5.svg";
-import icon6 from "./home_page_assets/mediaCoverag/icon6.svg";
-import icon7 from "./home_page_assets/mediaCoverag/icon7.svg";
-import icon8 from "./home_page_assets/mediaCoverag/icon8.svg";
-import icon9 from "./home_page_assets/mediaCoverag/icon9.svg";
-
 // rent now banner images
 import branded from "./home_page_assets/rentNowBanners/branded.svg";
 import doubleBed from "./home_page_assets/rentNowBanners/doubleBed.svg";
@@ -35,12 +24,6 @@ import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
 import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
 import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
 
-// home page four steps  section
-import card1 from "./home_page_assets/fourSteps/card1.svg";
-import card2 from "./home_page_assets/fourSteps/card2.svg";
-import card3 from "./home_page_assets/fourSteps/card3.svg";
-import card4 from "./home_page_assets/fourSteps/card4.svg";
-
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
 // hassel free section
@@ -51,11 +34,11 @@ import FrameFour from "./home_page_assets/HasselFree/FrameFour.svg";
 import FrameFive from "./home_page_assets/HasselFree/FrameFive.svg";
 import FrameSix from "./home_page_assets/HasselFree/FrameSix.svg";
 import FrameIconeOne from "./home_page_assets/HasselFree/FrameIconOne.svg";
-import FrameIconTwo from "./home_page_assets/HasselFree/FrameIconTwo.svg";
 import FrameIconThree from "./home_page_assets/HasselFree/FrameIconThree.svg";
 import FrameIconFour from "./home_page_assets/HasselFree/FrameIconFour.svg";
 import FrameIconFive from "./home_page_assets/HasselFree/FrameIconFive.svg";
 import FrameIconSix from "./home_page_assets/HasselFree/FrameIconSix.svg";
+import FrameIconTwo from "./home_page_assets/HasselFree/FrameIconTwo.svg";
 
 // download for app section
 import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
@@ -84,8 +67,14 @@ import HeroBannerImageThree from "@/assets/home_page_assets/heroBanner/HeroBanne
 import WebHeroBannerOne from "@/assets/home_page_assets/heroBanner/hero-banner-main.svg";
 import WebHeroBannerTwo from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-1.svg";
 import WebHeroBannerThree from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-2.svg";
-import HeroFrame from "@/assets/home_page_assets/heroBanner/hero-banner-main.webp";
 
+export const HeroFrame =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp";
+export const DownloadForWeb =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/download-cityfurnish-web-app.webp";
+
+export const DownloadForMobileImg =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/download-cityfurnish-mobile-app.webp";
 export const Images = {
   Demo,
   partner,
@@ -112,15 +101,22 @@ export const HomePageImages = {
 };
 
 export const HomePageMediaCoverage = {
-  icon1,
-  icon2,
-  icon3,
-  icon4,
-  icon5,
-  icon6,
-  icon7,
-  icon8,
-  icon9,
+  icon1:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/business-line.webp",
+  icon2: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/ani.webp",
+  icon3:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/business-standard.webp",
+  icon4:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/entrackr.webp",
+  icon5:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/entrepreneur-india.webp",
+  icon6: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/inc42.webp",
+  icon7:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/khaleej-times.webp",
+  icon8:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/theprint.webp",
+  icon9:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/outlook.webp",
 };
 
 export const HomePageRentNowBanner = {
@@ -139,10 +135,10 @@ export const NewProducts = {
 };
 
 export const HomePageFourSteps = {
-  card1,
-  card2,
-  card3,
-  card4,
+  card1: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step1.webp",
+  card2: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step2.webp",
+  card3: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step3.webp",
+  card4: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step4.webp",
 };
 
 export const downloadBannersImages = {
@@ -177,5 +173,4 @@ export const HeroBannerImages = {
   WebHeroBannerOne,
   WebHeroBannerTwo,
   WebHeroBannerThree,
-  HeroFrame,
 };
