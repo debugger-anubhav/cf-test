@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {DownloadForWeb} from "@/assets/images";
+import {DownloadForMobileImg, DownloadForWeb} from "@/assets/images";
 
 const DownloadForMobile = () => {
   return (
@@ -14,7 +14,7 @@ const DownloadForMobile = () => {
       </div>
       <div className={styles.mobile_container}>
         <img
-          src={DownloadForMobile}
+          src={DownloadForMobileImg}
           alt="download-image-for-mobile"
           className={styles.download_image}
         />

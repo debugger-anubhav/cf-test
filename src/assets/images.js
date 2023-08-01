@@ -71,10 +71,10 @@ import WebHeroBannerThree from "@/assets/home_page_assets/heroBanner/Benefit-her
 export const HeroFrame =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp";
 export const DownloadForWeb =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/download-cityfurnish-mobile-app.webp";
-export const DownloadForMobile =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/DownloadForMobile.webp";
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/download-cityfurnish-web-app.webp";
 
+export const DownloadForMobileImg =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/download-cityfurnish-mobile-app.webp";
 export const Images = {
   Demo,
   partner,
