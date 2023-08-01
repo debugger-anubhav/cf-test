@@ -1,14 +1,25 @@
 import React from "react";
 import styles from "./style.module.css";
-import Image from "next/image";
-import string from "@/constants/Constant.json";
-import {downloadBannersImages} from "@/assets/images";
+import {DownloadForWeb} from "@/assets/images";
 
 const DownloadForMobile = () => {
-  const content = string.landing_page.DownloadForMobile;
   return (
     <div className={styles.main_container}>
-      <div className={styles.destop_heading_container}>
+      <div className={styles.web_container}>
+        <img
+          src={DownloadForWeb}
+          alt="download-image-for-web"
+          className={styles.download_image}
+        />
+      </div>
+      <div className={styles.mobile_container}>
+        <img
+          src={DownloadForMobile}
+          alt="download-image-for-mobile"
+          className={styles.download_image}
+        />
+      </div>
+      {/* <div className={styles.destop_heading_container}>
         <p className={styles.heading}>{content.download}</p>
         <p className={styles.sub_heading}>{content.rent}</p>
         <div>
@@ -83,7 +94,7 @@ const DownloadForMobile = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

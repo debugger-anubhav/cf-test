@@ -1,4 +1,4 @@
-.main_container {
+/* .main_container {
   @apply flex items-center md:flex-row flex-col xl:pl-[140px] lg:pl-[100px] md:pl-[90px] sm:pl-0 pl-0 bg-offwhite  pt-0;
 }
 .bar_code {
@@ -42,4 +42,19 @@
 }
 .btn_text {
   @apply text-[#222] font-Poppins text-14 lg:text-16 xl:text-16 md:text-16 font-medium leading-5 pl-[6px] whitespace-nowrap;
+} */
+
+.main_container {
+  @apply flex w-full;
+}
+
+.web_container {
+  @apply hidden lg:flex w-full;
+}
+.mobile_container {
+  @apply flex lg:hidden w-full;
+}
+
+.download_image {
+  @apply w-full;
 }

@@ -1,5 +1,5 @@
 // import {HeroBannerText} from "@/constants/constant";
-import {HeroBannerImages} from "@/assets/images";
+import {HeroBannerImages, HeroFrame} from "@/assets/images";
 import React from "react";
 import Image from "next/image";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -33,11 +33,7 @@ const HeroBanner = () => {
       </div>
 
       <div className={styles.hero_banner_wrapper}>
-        <Image
-          src={HeroBannerImages.HeroFrame}
-          alt="hero-banner"
-          className="w-full"
-        />
+        <img src={HeroFrame} alt="hero-banner" className="w-full" />
       </div>
     </>
   );
