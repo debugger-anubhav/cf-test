@@ -74,8 +74,13 @@ export const UpArrow = ({size, color, className}) => (
   <IoMdArrowDropup size={size} color={color} className={className} />
 );
 
-export const Heart = ({size, color, className}) => (
-  <VscHeartFilled size={size} color={color} className={className} />
+export const Heart = ({size, color, className, onClick}) => (
+  <VscHeartFilled
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
 );
 export const Mail = ({size, color, className}) => (
   <TbMailFilled size={size} color={color} className={className} />

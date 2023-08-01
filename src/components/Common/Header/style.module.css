@@ -27,7 +27,7 @@
 }
 
 .search_wrapper {
-  @apply hidden md:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
+  @apply hidden md:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center relative;
 }
 .search_input {
   @apply flex w-full outline-none text-14;
@@ -37,19 +37,23 @@
 }
 
 .header_favorite {
-  @apply flex lg:mr-8 mobile:mr-4 mr-1 mobile:w-6 mobile:h-6 h-4 w-4;
+  @apply flex lg:mr-8 mobile:mr-4 mr-1 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 
 .header_shopping_card {
-  @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4;
+  @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 
 .header_profile_icon {
-  @apply lg:flex hidden;
+  @apply lg:flex hidden cursor-pointer;
 }
 .mobile_search_row {
   @apply flex md:hidden justify-center items-center mb-4;
 }
 .search_wrapper_mobile {
-  @apply w-full  mx-4 flex  border border-ECECEC bg-white px-4 py-2;
+  @apply w-full  mx-4 flex  border border-ECECEC bg-white px-4 py-2 relative;
+}
+
+.search_open_details {
+  @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border border-red-900 top-11 left-0 rounded-lg z-[111] h-[416px];
 }

@@ -12,6 +12,7 @@ const Card = ({
   cardImage,
   itemIncluded,
 }) => {
+  const [inWishList, setInWishList] = React.useState(false);
   return (
     <div className={styles.wrapper}>
       <div className="relative">
@@ -37,7 +38,11 @@ const Card = ({
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
         </h3>
-        <Heart size={25} color={"#C0C0C6"} />
+        <Heart
+          size={25}
+          color={inWishList ? "#FF0000" : "#C0C0C6"}
+          onClick={() => setInWishList(!inWishList)}
+        />
       </div>
       <div className={styles.price_div}>
         <div className="flex gap-[0.62rem] items-center">
