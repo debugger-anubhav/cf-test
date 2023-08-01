@@ -8,8 +8,8 @@
   @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 font-Poppins text-45454A;
 }
 .icons_div {
-  @apply mt-4 xl:mt-8 pt-4 xl:pt-0 pl-4 -mx-4 xl:-mx-0 xl:pl-0 w-full overflow-scroll items-center flex gap-8 xl:gap-12 bg-[#E5EFF4] md:bg-transparent;
+  @apply mt-4 xl:mt-8 3xl:mt-12 pt-4 xl:pt-0 pl-4 -mx-4 xl:-mx-0 xl:pl-0 w-full overflow-scroll items-center flex gap-8 xl:gap-12 bg-[#E5EFF4] md:bg-transparent;
 }
 .icon {
-  @apply h-5 w-fit;
+  @apply h-5 xl:h-11 3xl:h-12 w-fit;
 }

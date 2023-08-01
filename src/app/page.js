@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {store} from "@/store";
 import {Provider} from "react-redux";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";

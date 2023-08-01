@@ -6,16 +6,21 @@ import {Icons, DownArrow} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-import {addCityList, selectedCityId} from "@/store/Slices";
+import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {useAppSelector} from "@/store";
 
 const Header = () => {
   const dispatch = useDispatch();
 
-  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
-
+  const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
+    useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
+
+  const {refetch: getSidebarMenuList} = useQuery(
+    "sideBarMenuLists",
+    endPoints.sidebarMenuLists,
+  );
 
   useEffect(() => {
     getCityList()
@@ -24,13 +29,17 @@ const Header = () => {
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
       .catch(err => console.log(err));
+
+    getSidebarMenuList().then(res => {
+      dispatch(addSidebarMenuLists(res?.data?.data));
+    });
   }, []);
 
   return (
     <>
       <div className={styles.header_wrapper}>
         <div className={styles.header_left_wrapper}>
-          <CommonDrawer DrawerName="menu" />
+          <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
           <Image
             src={Icons.CityFurnishLogo}
             alt="City-furnish-logo"
