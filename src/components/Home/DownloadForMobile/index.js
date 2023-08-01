@@ -42,8 +42,8 @@ const DownloadForMobile = () => {
         <div className={styles.bannerimage}>
           <Image
             src={downloadBannersImages.downloadBanner}
-            widht={416}
-            height={380}
+            // widht={416}
+            // height={380}
           />
         </div>
       </div>

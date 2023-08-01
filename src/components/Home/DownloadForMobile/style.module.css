@@ -20,7 +20,7 @@
   @apply justify-end relative w-1/2 md:block  hidden;
 }
 .destop_heading_container {
-  @apply flex-col lg:pt-[64px] md:pt-[40px]  md:block hidden w-1/2;
+  @apply flex-col lg:pt-[64px] md:pt-[40px]  md:block hidden w-1/2 3xl:w-[68%];
 }
 .headingContainer {
   @apply flex-col px-4 pt-8 xl:pt-16 bg-offwhite pb-6 xl:hidden lg:hidden md:hidden sm:block xs:block block;
