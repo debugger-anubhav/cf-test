@@ -8,10 +8,18 @@
   @apply hidden xl:flex font-medium text-9A9AA2 leading-5 tracking-0.3 mt-1;
 }
 .card_div {
-  @apply mt-4 xl:mt-6 flex flex-wrap gap-4 xl:gap-6 macbook:gap-10;
+  @apply mt-4 xl:mt-6 flex flex-wrap gap-4 xl:gap-6;
+}
+.card_wrapper {
+  width: calc(33.33% - 20px);
+  flex: calc(33.33% - 20px);
+  /* @apply w-[98px] h-[98px] md:w  /* width: 100%;
+  height: auto;-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
 }
 .img {
-  @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] rounded-lg md:rounded-none;
+  width: 100%;
+  height: auto;
+  /* @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
 }
 .label {
   @apply mt-1 xl:mt-3 text-45454A text-14 xl:text-20 xl:leading-normal font-medium tracking-desc xl:tracking-heading;
