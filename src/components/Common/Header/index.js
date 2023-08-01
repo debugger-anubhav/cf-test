@@ -12,7 +12,7 @@ import {useAppSelector} from "@/store";
 
 const Header = () => {
   const dispatch = useDispatch();
-
+  const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
@@ -53,7 +53,9 @@ const Header = () => {
           </div>
         </div>
         <div className={styles.header_right_wrapper}>
-          <div className={styles.search_wrapper}>
+          <div
+            className={styles.search_wrapper}
+            onClick={() => setOpenSearchBar(!openSearchbar)}>
             <input
               placeholder="Search for Furniture, Appliances, etc"
               className={styles.search_input}
@@ -63,6 +65,11 @@ const Header = () => {
               alt="search-icon"
               className={styles.header_search_icon}
             />
+            {openSearchbar && (
+              <div className={styles.search_open_details}>
+                search bar content
+              </div>
+            )}
           </div>
           <Image
             src={Icons.Favorite}
