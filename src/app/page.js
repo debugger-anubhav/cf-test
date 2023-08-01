@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div>
+        <div className="last-screen:w-[2000px] mx-auto">
           <AnnouncementBar />
           <Header />
           <MenuList />
