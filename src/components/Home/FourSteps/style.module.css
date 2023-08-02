@@ -1,5 +1,5 @@
 .four_steps_wrapper {
-  @apply px-4 md:px-6 py-6 xl:p-7 macbook:p-12 mt-4 xl:mt-0 mx-4 md:mx-[70px] xl:mx-0 border border-solid border-[#DDDDDF] rounded-[4px];
+  @apply px-4 md:px-6 py-6 xl:p-7 macbook:p-12 mt-4 lg:mt-0 mx-4 md:mx-[70px] lg:mx-0 border border-solid border-[#DDDDDF] rounded-[4px];
 }
 .head {
   @apply text-14 font-Poppins text-9A9AA2 font-medium leading-5 tracking-desc;
@@ -8,14 +8,11 @@
   @apply text-20 leading-8 text-45454A font-Poppins font-medium tracking-heading;
 }
 .card_wrapper {
-  @apply flex gap-[23.5px] xl:gap-[42px] w-full overflow-scroll xl:overflow-hidden mt-8;
-}
-.img {
-  @apply w-[171px] h-[171px] xl:w-[80px] xl:h-[80px];
+  @apply flex gap-[23.5px] xl:gap-[42px] w-full overflow-scroll lg:overflow-hidden mt-8 lg:justify-between;
 }
 .head1 {
   @apply font-Poppins leading-normal text-[#48678B] font-semibold -tracking-[0.32px] mt-[4.56px];
 }
 .content1 {
-  @apply font-Poppins w-[131px] text-14 text-71717A tracking-desc leading-normal mt-2;
+  @apply font-Poppins w-[131px] lg:w-full text-14 text-71717A tracking-desc leading-normal mt-2;
 }
