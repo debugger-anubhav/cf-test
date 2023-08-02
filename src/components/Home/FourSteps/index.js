@@ -13,7 +13,8 @@ const FourSteps = () => {
       <div className={styles.card_wrapper}>
         {FourStepsCardData.map((itemm, index) => (
           <div key={index} className={styles.card}>
-            <img src={itemm.img} className={styles.img} />
+            <img src={itemm.img1} className={`${styles.img} lg:flex hidden`} />
+            <img src={itemm.img2} className={`${styles.img} lg:hidden flex`} />
             <h3 className={styles.head1}>{itemm.head}</h3>
             <p className={styles.content1}>{itemm.content}</p>
           </div>
