@@ -2,7 +2,7 @@
   @apply flex flex-col lg:flex-row gap-4 lg:justify-between px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins my-8 xl:my-16;
 }
 .head {
-  @apply text-20 lg:text-32 lg:w-[23rem] leading-8 lg:leading-10 font-medium text-45454A tracking-heading;
+  @apply text-20 lg:text-32 lg:w-[23rem] 3xl:w-[30rem] leading-8 lg:leading-10 font-medium text-45454A tracking-heading;
 }
 .QuesAnsArray_div {
   @apply flex flex-col gap-6;
@@ -11,14 +11,13 @@
   @apply flex justify-between lg:gap-3 items-center;
 }
 .ques {
-  @apply font-medium lg:text-20 lg:leading-7 leading-6 text-45454A lg:tracking-heading tracking-0.3 w-[18.6rem] lg:w-[39.69rem];
+  @apply font-medium lg:text-20 lg:leading-7 leading-6 text-45454A lg:tracking-heading tracking-0.3 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem];
 }
 .ans {
-  @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem];
+  @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem];
 }
 .btn {
-  @apply mt-2 bg-[#F6B704] rounded-lg flex py-[14px] px-5 items-center justify-center gap-1 h-12;
-  width: 195px;
+  @apply mt-2 bg-[#F6B704] rounded-lg flex py-[14px] px-5 items-center justify-center gap-1 h-12 w-[195px];
 }
 .btn_txt {
   @apply text-[#222] font-medium;
