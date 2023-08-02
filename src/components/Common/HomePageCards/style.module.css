@@ -7,7 +7,7 @@
   @apply min-w-full h-[13rem] lg:h-[17rem] rounded-lg;
 }
 .desc_div {
-  @apply mt-1 flex gap-2;
+  @apply mt-1 flex gap-2 3xl:justify-between;
 }
 .desc {
   @apply text-14 font-medium tracking-desc text-71717A w-[15.3rem] lg:w-[20.3rem] font-Poppins;
