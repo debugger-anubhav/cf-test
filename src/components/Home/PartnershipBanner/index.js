@@ -6,9 +6,12 @@ import styles from "./style.module.css";
 const PartnershipBanner = () => {
   return (
     <div className={styles.partnership_banner}>
-      <Image
-        src={partner}
+      <img
         alt="partnership"
+        src={
+          "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
+        }
+        loading="lazy"
         className="w-full h-full xl:hidden"
       />
       <Image
