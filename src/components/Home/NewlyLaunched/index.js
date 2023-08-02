@@ -52,7 +52,7 @@ const NewlyLaunched = () => {
         </div>
       </div>
       <div className={styles.images_wrapper}>
-        {newProductFetched.map((ele, index) => (
+        {newProductFetched?.map((ele, index) => (
           <div className="relative" key={index}>
             <div className="">
               <Image
