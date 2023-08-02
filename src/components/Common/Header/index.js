@@ -163,7 +163,7 @@ const SearchModal = arr => {
         <div className={styles.categories_wrapper}>
           {RentFurniture?.map((item, index) => (
             <div key={index} className={styles.card_wrapper}>
-              <Image src={item.img} alt="" className={styles.categories_img} />
+              <img src={item.img} alt="" className={styles.categories_img} />
               <div>
                 <h3 className={styles.category_label}>{item.label}</h3>
               </div>
