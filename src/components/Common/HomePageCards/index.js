@@ -10,15 +10,20 @@ const Card = ({
   discount,
   showincludedItem,
   cardImage,
+  hoverCardImage,
+  // hoverCard,
   itemIncluded,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
+  const [hoverCard, setHoverCard] = React.useState(false);
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseOver={() => setHoverCard(true)}
+      onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
         <Image
-          // src={HomePageImages.cardThumbnail}
-          src={cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={styles.thumbnail}
           width={241}
@@ -40,8 +45,9 @@ const Card = ({
         </h3>
         <Heart
           size={25}
-          color={inWishList ? "#FF0000" : "#C0C0C6"}
+          color={inWishList ? "#D96060" : "#C0C0C6"}
           onClick={() => setInWishList(!inWishList)}
+          className={"cursor-pointer"}
         />
       </div>
       <div className={styles.price_div}>

@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import trycity from "../../../assets/home_page_assets/tryCityMax/trycity.svg";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
+import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 
 const TryCityMax = () => {
   const benefitsOfCity = [
@@ -39,17 +39,16 @@ const TryCityMax = () => {
     <>
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
-          <Image
-            src={trycity}
+          <img
+            src={TryCityMaxBannerWeb}
             alt="trycity"
-            layout="fill"
-            objectFit="cover"
             className={`hidden xl:flex ${styles.tryCity_image}`}
           />
-          <Image
-            src={trycity}
+          <img
+            src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
+            loading="lazy"
           />
         </div>
         <div className={styles.right_text_section}>

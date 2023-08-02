@@ -35,6 +35,10 @@ import Icon2 from "@/assets/home_page_assets/tryCityMax/v6-icon2.svg";
 import Icon3 from "@/assets/home_page_assets/tryCityMax/v6-icon3.svg";
 import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 
+// menubar search modal icons
+import {LuRefreshCcw} from "react-icons/lu";
+import {HiArrowTrendingUp} from "react-icons/hi2";
+
 export const FooterIcons = {
   Phone,
   GoToTopIcon,
@@ -115,4 +119,12 @@ export const ForwardArrow = ({size, color, className}) => (
 
 export const EditIcon = ({size, color, className}) => (
   <MdModeEdit size={size} color={color} className={className} />
+);
+
+export const TrendingIcon = ({size, color, className}) => (
+  <HiArrowTrendingUp size={size} color={color} className={className} />
+);
+
+export const RecentIcon = ({size, color, className}) => (
+  <LuRefreshCcw size={size} color={color} className={className} />
 );

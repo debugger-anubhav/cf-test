@@ -35,6 +35,8 @@ const TrendingProducts = () => {
           <div key={index.toString()} className="mr-4">
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
+              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
+              // hoverCard="false"
               desc={item.product_name}
               originalPrice={item.price}
               currentPrice={item.sale_price}

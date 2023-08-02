@@ -118,24 +118,28 @@ export const FourStepsCardData = [
   {
     head: "STEP 1",
     content: "Select a product & tenure to start renting",
-    img: HomePageFourSteps.card1,
+    img1: HomePageFourSteps.card1,
+    img2: HomePageFourSteps.cardMob1,
   },
   {
     head: "STEP 2",
     content: "Pay the amount & do KYC",
-    img: HomePageFourSteps.card2,
+    img1: HomePageFourSteps.card2,
+    img2: HomePageFourSteps.cardMob2,
   },
   {
     head: "STEP 3",
     content: `Get items delivered
-& assembled
-within 72 hrs`,
-    img: HomePageFourSteps.card3,
+    & assembled
+    within 72 hrs`,
+    img1: HomePageFourSteps.card3,
+    img2: HomePageFourSteps.cardMob3,
   },
   {
     head: "STEP 4",
     content: "Experience the firsthand magic of furniture",
-    img: HomePageFourSteps.card4,
+    img1: HomePageFourSteps.card4,
+    img2: HomePageFourSteps.cardMob4,
   },
 ];
 
@@ -188,37 +192,31 @@ export const HappySubscriber = [
 export const HasselFreeData = [
   {
     backgroungImage: hasselFreeSection.FrameOne,
-    icon: hasselFreeSection.FrameIconeOne,
     Heading: "Mint new products",
     text: "Assured products. You'll be renting furniture that looks & feels brand new",
   },
   {
     backgroungImage: hasselFreeSection.FrameTwo,
-    icon: hasselFreeSection.FrameIconTwo,
     Heading: "Free shipping",
     text: "Get your furniture delivered to your doorstep with no extra shipping cost",
   },
   {
     backgroungImage: hasselFreeSection.FrameThree,
-    icon: hasselFreeSection.FrameIconThree,
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
   },
   {
     backgroungImage: hasselFreeSection.FrameFour,
-    icon: hasselFreeSection.FrameIconFour,
     Heading: "Free relocation",
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
   {
     backgroungImage: hasselFreeSection.FrameFive,
-    icon: hasselFreeSection.FrameIconFive,
     Heading: "Insurance cover",
     text: "Minor damages or scratches to the rent products will be waived off",
   },
   {
     backgroungImage: hasselFreeSection.FrameSix,
-    icon: hasselFreeSection.FrameIconSix,
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
   },

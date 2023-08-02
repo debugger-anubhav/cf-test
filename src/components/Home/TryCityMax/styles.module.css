@@ -1,5 +1,5 @@
 .main_wrapper {
-  @apply w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] md:mt-6  xl:py-16 flex xl:flex-row flex-col xl:gap-[60px];
+  @apply w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] md:mt-6 flex xl:flex-row flex-col xl:gap-[60px];
 }
 .left_image_section {
   @apply xl:w-[589px] xl:h-[720px] w-full xl:relative;
