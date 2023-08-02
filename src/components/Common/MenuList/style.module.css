@@ -13,5 +13,5 @@
 }
 
 .item_wrap {
-  @apply flex items-center lg:mr-6 mr-4 lg:text-16 md:text-14 font-medium font-Poppins text-45454A whitespace-nowrap;
+  @apply flex items-center lg:mr-6 mr-4 lg:text-16 md:text-14 font-medium font-Poppins text-45454A whitespace-nowrap cursor-pointer;
 }
