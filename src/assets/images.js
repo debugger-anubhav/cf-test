@@ -1,23 +1,4 @@
-import Demo from "./demo.png";
 import partner from "./partnership.svg";
-
-// home page rent furniture images
-import bedroom from "./home_page_assets/rentFurniture/bed-room.webp";
-import appliances from "./home_page_assets/rentFurniture/appliances.webp";
-import diningroom from "./home_page_assets/rentFurniture/dining-room.webp";
-import livingroom from "./home_page_assets/rentFurniture/living-room.webp";
-import office from "./home_page_assets/rentFurniture/office.webp";
-import cardThumbnail from "./home_page_assets/commonCard/thumbnail.svg";
-import studyroom from "./home_page_assets/rentFurniture/study-room.webp";
-
-// rent now banner images
-import branded from "./home_page_assets/rentNowBanners/branded.svg";
-import doubleBed from "./home_page_assets/rentNowBanners/doubleBed.svg";
-import studyTable from "./home_page_assets/rentNowBanners/studyTable.svg";
-import clearanceSale from "./home_page_assets/rentNowBanners/clearanceSale.svg";
-import workfromHome from "./home_page_assets/rentNowBanners/workfromHome.svg";
-import checkOut from "./home_page_assets/rentNowBanners/checkOut.svg";
-
 // New launched Product
 import product1 from "./home_page_assets/newlyLuanched/newSofa.svg";
 import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
@@ -25,20 +6,6 @@ import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
 import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
 
 import editIcon from "./home_page_assets/rating/editIcon.svg";
-
-// hassel free section
-import FrameOne from "./home_page_assets/HasselFree/FrameOne.svg";
-import FrameTwo from "./home_page_assets/HasselFree/FrameTwo.svg";
-import FrameThree from "./home_page_assets/HasselFree/FrameThree.svg";
-import FrameFour from "./home_page_assets/HasselFree/FrameFour.svg";
-import FrameFive from "./home_page_assets/HasselFree/FrameFive.svg";
-import FrameSix from "./home_page_assets/HasselFree/FrameSix.svg";
-import FrameIconeOne from "./home_page_assets/HasselFree/FrameIconOne.svg";
-import FrameIconThree from "./home_page_assets/HasselFree/FrameIconThree.svg";
-import FrameIconFour from "./home_page_assets/HasselFree/FrameIconFour.svg";
-import FrameIconFive from "./home_page_assets/HasselFree/FrameIconFive.svg";
-import FrameIconSix from "./home_page_assets/HasselFree/FrameIconSix.svg";
-import FrameIconTwo from "./home_page_assets/HasselFree/FrameIconTwo.svg";
 
 // download for app section
 import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
@@ -49,15 +16,6 @@ import QrCode from "./home_page_assets/downloadForMobile/QrCode.svg";
 import backgroungImageDesk from "./home_page_assets/downloadForMobile/backgroungImageDesk.svg";
 import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.svg";
 
-// cities banner for header
-import Delhi from "@/assets/header/city/delhi.svg";
-import Bangalore from "@/assets/header/city/Bangalore.svg";
-import Pune from "@/assets/header/city/Pune.svg";
-import Mumbai from "@/assets/header/city/Mumbai.svg";
-import Gurgaon from "@/assets/header/city/Gurgaon.svg";
-import Hyderabad from "@/assets/header/city/Hyderabad.svg";
-import Ghaziabad from "@/assets/header/city/ghaziabad.svg";
-import Noida from "@/assets/header/city/noida.svg";
 import DownloadQR from "@/assets/header/download-QR.svg";
 
 // Her --banner--
@@ -68,35 +26,38 @@ import WebHeroBannerOne from "@/assets/home_page_assets/heroBanner/hero-banner-m
 import WebHeroBannerTwo from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-1.svg";
 import WebHeroBannerThree from "@/assets/home_page_assets/heroBanner/Benefit-hero-banner-2.svg";
 
+export const TryCityMaxBannerWeb =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/city-max.webp";
+export const TryCityMaxBannerMobile =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/city-max.webp";
+
 export const HeroFrame =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp";
+
 export const DownloadForWeb =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/download-cityfurnish-web-app.webp";
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/download-cityfurnish-mobile-app.webp";
 
 export const DownloadForMobileImg =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/download-cityfurnish-mobile-app.webp";
+
 export const Images = {
-  Demo,
   partner,
-  Delhi,
-  Bangalore,
-  Pune,
-  Mumbai,
-  Gurgaon,
-  Hyderabad,
-  Ghaziabad,
-  Noida,
   DownloadQR,
 };
 
 export const HomePageImages = {
-  bedroom,
-  appliances,
-  livingroom,
-  diningroom,
-  office,
-  studyroom,
-  cardThumbnail,
+  bedroom:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/bed-room.webp",
+  appliances:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/appliances.webp",
+  livingroom:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/living-room.webp",
+  diningroom:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/dining-room.webp",
+  office:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/office.webp",
+  studyroom:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/study-room.webp",
   editIcon,
 };
 
@@ -120,12 +81,18 @@ export const HomePageMediaCoverage = {
 };
 
 export const HomePageRentNowBanner = {
-  branded,
-  doubleBed,
-  studyTable,
-  clearanceSale,
-  workfromHome,
-  checkOut,
+  branded:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/branded-appliances.webp",
+  doubleBed:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/vesta-king-size-double-bed-with-mattress.webp",
+  studyTable:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/alexa-study-table-with-selecta-chair.webp",
+  clearanceSale:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/clearance-sale.webp",
+  workfromHome:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/work-from-home-setup.webp",
+  checkOut:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/belle-collection.webp",
 };
 export const NewProducts = {
   product1,
@@ -152,18 +119,18 @@ export const downloadBannersImages = {
 };
 
 export const hasselFreeSection = {
-  FrameOne,
-  FrameTwo,
-  FrameThree,
-  FrameFour,
-  FrameFive,
-  FrameSix,
-  FrameIconeOne,
-  FrameIconTwo,
-  FrameIconThree,
-  FrameIconFour,
-  FrameIconFive,
-  FrameIconSix,
+  FrameOne:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/mint-new-products.webp",
+  FrameTwo:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/free-shipping.webp",
+  FrameThree:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/free-installation.webp",
+  FrameFour:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/free-relocation.webp",
+  FrameFive:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/insurance-cover.webp",
+  FrameSix:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/flexible-upgrades.webp",
 };
 
 export const HeroBannerImages = {

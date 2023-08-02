@@ -49,12 +49,12 @@
 }
 
 .web_container {
-  @apply hidden lg:flex w-full;
+  @apply hidden sm:flex w-full;
 }
 .mobile_container {
-  @apply flex lg:hidden w-full;
+  @apply flex sm:hidden w-full;
 }
 
 .download_image {
-  @apply w-full;
+  @apply w-full cursor-pointer;
 }

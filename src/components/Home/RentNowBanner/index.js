@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./style.module.css";
-import Image from "next/image";
 import {HomePageRentNowBanner} from "@/assets/images";
 
 const RentNowBanner = () => {
@@ -17,7 +16,7 @@ const RentNowBanner = () => {
       <div className={styles.banner_card}>
         {RentNowBannerImages.map((item, index) => (
           <div className={styles.banner_wrapper} key={index.toString()}>
-            <Image
+            <img
               src={item.img}
               alt="rant-now-banner-image"
               className={styles.banner_img}

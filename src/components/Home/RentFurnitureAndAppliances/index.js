@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
-import Image from "next/image";
 
 // import {categoryImageBaseUrl} from "@/constants/constant";
 import {RentFurniture} from "@/constants/constant";
@@ -14,7 +13,7 @@ const RentFurnitureAndAppliances = () => {
       <div className={styles.card_div}>
         {RentFurniture?.map((item, index) => (
           <div key={index} className={styles.card_wrapper}>
-            <Image
+            <img
               src={item.img}
               width={"100%"}
               height={"100%"}
