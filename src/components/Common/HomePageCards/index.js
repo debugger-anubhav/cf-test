@@ -10,15 +10,20 @@ const Card = ({
   discount,
   showincludedItem,
   cardImage,
+  hoverCardImage,
+  // hoverCard,
   itemIncluded,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
+  const [hoverCard, setHoverCard] = React.useState(false);
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      onMouseOver={() => setHoverCard(true)}
+      onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
         <Image
-          // src={HomePageImages.cardThumbnail}
-          src={cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={styles.thumbnail}
           width={241}
