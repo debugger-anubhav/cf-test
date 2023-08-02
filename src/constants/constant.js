@@ -118,24 +118,28 @@ export const FourStepsCardData = [
   {
     head: "STEP 1",
     content: "Select a product & tenure to start renting",
-    img: HomePageFourSteps.card1,
+    img1: HomePageFourSteps.card1,
+    img2: HomePageFourSteps.cardMob1,
   },
   {
     head: "STEP 2",
     content: "Pay the amount & do KYC",
-    img: HomePageFourSteps.card2,
+    img1: HomePageFourSteps.card2,
+    img2: HomePageFourSteps.cardMob2,
   },
   {
     head: "STEP 3",
     content: `Get items delivered
-& assembled
-within 72 hrs`,
-    img: HomePageFourSteps.card3,
+    & assembled
+    within 72 hrs`,
+    img1: HomePageFourSteps.card3,
+    img2: HomePageFourSteps.cardMob3,
   },
   {
     head: "STEP 4",
     content: "Experience the firsthand magic of furniture",
-    img: HomePageFourSteps.card4,
+    img1: HomePageFourSteps.card4,
+    img2: HomePageFourSteps.cardMob4,
   },
 ];
 

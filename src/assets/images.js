@@ -106,6 +106,14 @@ export const HomePageFourSteps = {
   card2: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step2.webp",
   card3: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step3.webp",
   card4: "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/step4.webp",
+  cardMob1:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/step1.webp",
+  cardMob2:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/step2.webp",
+  cardMob3:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/step3.webp",
+  cardMob4:
+    "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/step4.webp",
 };
 
 export const downloadBannersImages = {
