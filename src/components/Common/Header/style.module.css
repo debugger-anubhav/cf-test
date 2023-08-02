@@ -1,5 +1,5 @@
 .header_wrapper {
-  @apply font-Poppins flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:py-10 py-5;
+  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:py-10 py-5;
 }
 
 .header_left_wrapper {
@@ -27,7 +27,7 @@
 }
 
 .search_wrapper {
-  @apply hidden md:flex mr-8 border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center relative;
+  @apply hidden cursor-pointer md:flex border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
 }
 .search_input {
   @apply flex w-full outline-none text-14;
@@ -51,16 +51,19 @@
   @apply flex md:hidden justify-center items-center mb-4;
 }
 .search_wrapper_mobile {
-  @apply w-full  mx-4 flex  border border-ECECEC bg-white px-4 py-2 relative;
+  @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative;
+}
+.search_details_wrapper {
+  @apply w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px];
 }
 .search_open_details {
-  @apply font-Poppins px-4 py-6 absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-14 left-0 rounded-lg z-[111] h-[416px] overflow-y-scroll;
+  @apply font-Poppins mt-5 mx-4 md:mx-0 px-4 py-6 xl:w-[345px] md:w-[300px] bg-white border rounded-lg z-[111] h-[416px] overflow-y-scroll;
 }
 .pills_wrapper {
   @apply flex flex-wrap gap-2 mt-4;
 }
 .pill {
-  @apply items-center px-3 py-2 md:px-1.5 xl:px-3 flex gap-2 md:gap-1.5 xl:gap-2 rounded-[20px] border border-solid border-DDDDDF;
+  @apply cursor-pointer items-center px-3 py-2 md:px-1.5 xl:px-3 flex gap-2 md:gap-1.5 xl:gap-2 rounded-[20px] border border-solid border-DDDDDF;
 }
 .pill_text {
   @apply font-medium text-12 md:text-[10px] xl:text-12 text-71717A;
@@ -72,8 +75,17 @@
   @apply flex flex-wrap gap-4 mt-4;
 }
 .categories_img {
-  @apply w-[88px] h-[100px] rounded-xl;
+  @apply w-[88px] h-[100px] rounded-xl cursor-pointer;
 }
 .category_label {
   @apply text-12 text-center font-medium mt-1 text-45454A;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
