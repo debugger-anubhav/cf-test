@@ -4,7 +4,7 @@
   transition: all 0.15s ease;
 }
 .thumbnail {
-  @apply min-w-full h-[13rem] lg:h-[17rem] rounded-lg;
+  @apply min-w-full h-[13rem] lg:h-[17rem] 3xl:h-[20rem] rounded-lg;
 }
 .desc_div {
   @apply mt-1 flex gap-2 3xl:justify-between;

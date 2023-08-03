@@ -32,7 +32,7 @@ const RecentlyViewedProduct = () => {
       <h2 className={styles.heading}>Recently Viewed products</h2>
       <div className="flex overflow-x-scroll">
         {homePageReduxData?.recentProduct?.map((item, index) => (
-          <div className="mr-4" key={index.toString()}>
+          <div className="3xl:mr-8 mr-4" key={index.toString()}>
             <Card
               // hoverCard="false"
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
