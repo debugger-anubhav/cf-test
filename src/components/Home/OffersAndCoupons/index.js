@@ -12,7 +12,7 @@ const OffersAndCoupons = () => {
   const homePageData = useSelector(state => state.homePagedata);
   const cityId = homePageData.cityId;
   const [isCopied, setIsCopied] = React.useState(false);
-  const textToCopy = "dneh21jh423rmq";
+  const [copiedIndex, setCopiedIndex] = React.useState(null);
 
   const {refetch: getOfferCupon} = useQuery(
     "offer-cuopons",
@@ -30,7 +30,7 @@ const OffersAndCoupons = () => {
 
   const str = string.landing_page.OffersAndDiscount;
 
-  const handleCopyClick = () => {
+  const handleCopyClick = textToCopy => {
     const tempTextArea = document.createElement("textarea");
     tempTextArea.value = textToCopy;
     document.body.appendChild(tempTextArea);
@@ -48,9 +48,15 @@ const OffersAndCoupons = () => {
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
-      <div className={styles.cards_wrapper} onClick={handleCopyClick}>
+      <div className={styles.cards_wrapper}>
         {homePageData?.offerCoupons?.map((item, index) => (
-          <div key={index} className={styles.card}>
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() => {
+              handleCopyClick(item.coupon_code);
+              setCopiedIndex(index);
+            }}>
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
             <div className="xl:w-full">
@@ -59,7 +65,11 @@ const OffersAndCoupons = () => {
                   ? `(up to Rs ${item?.max_discount})*`
                   : ""
               } `}</p>
-              <p className={styles.desc}>{item?.price_below_text}</p>
+              {item?.price_below_text && (
+                <p className={styles.desc}>
+                  {item?.price_below_text.split(" ").slice(0, 7).join(" ")}
+                </p>
+              )}
               <p className={styles.code}>Use Code {item?.coupon_code}</p>
             </div>
             <div className={styles.line}></div>
@@ -68,8 +78,9 @@ const OffersAndCoupons = () => {
               <button
                 id="copy-button"
                 className="text-[#222]"
-                onClick={handleCopyClick}>
-                {isCopied ? "Copied!" : "Copy"}
+                // onClick={() => handleCopyClick(item.coupon_code)}
+              >
+                {isCopied && copiedIndex === index ? "Copied!" : "Copy"}
               </button>
             </div>
           </div>
@@ -79,25 +90,3 @@ const OffersAndCoupons = () => {
   );
 };
 export default OffersAndCoupons;
-
-// import { useState } from 'react';
-// import clipboard from 'clipboard';
-
-// const CopyTextButton = ({ textToCopy }) => {
-//   const [isCopied, setIsCopied] = useState(false);
-
-//   const handleCopyClick = () => {
-//     clipboard.writeText(textToCopy);
-//     setIsCopied(true);
-//     setTimeout(() => setIsCopied(false), 2000); // Reset "isCopied" after 2 seconds
-//   };
-
-//   return (
-//     <div>
-//       <p>{textToCopy}</p>
-//       <button onClick={handleCopyClick}>{isCopied ? 'Copied!' : 'Copy'}</button>
-//     </div>
-//   );
-// };
-
-// export default CopyTextButton;
