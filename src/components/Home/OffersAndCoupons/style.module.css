@@ -14,7 +14,7 @@
   background-size: cover;
 }
 .desc {
-  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full;
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full truncate;
 }
 .code {
   @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;

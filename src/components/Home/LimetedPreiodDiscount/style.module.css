@@ -8,5 +8,5 @@
   @apply text-9A9AA2 font-Poppins font-medium leading-5 tracking-desc xl:tracking-0.3 pb-4;
 }
 .card_box {
-  @apply flex w-full gap-4 3xl:gap-8 overflow-y-hidden overflow-x-scroll;
+  @apply flex w-full gap-4 xl:gap-6 3xl:gap-8 overflow-y-hidden overflow-x-scroll;
 }
