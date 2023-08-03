@@ -41,14 +41,14 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
             <Card
-              cardImage={productImageBaseUrl + item.image.split(",")[0]}
-              desc={item.product_name}
-              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
+              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              desc={item?.product_name}
+              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
               // hoverCard="false"
-              originalPrice={item.price}
-              currentPrice={item.product_sale_price}
+              originalPrice={item?.price}
+              currentPrice={item?.product_sale_price}
               discount={`${Math.round(
-                ((item.price - item.product_sale_price) * 100) / item.price,
+                ((item?.price - item?.product_sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
             />
           </div>

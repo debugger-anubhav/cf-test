@@ -13,9 +13,9 @@ const FrequentlyAskedQuestions = () => {
       <h2 className={styles.head}>{str.header}</h2>
       <div>
         <div className={styles.QuesAnsArray_div}>
-          {str.QuesAnsArray.map((item, index) => (
+          {str.QuesAnsArray?.map((item, index) => (
             <div key={index}>
-              <SingleQuestion ques={item.ques} ans={item.ans} />
+              <SingleQuestion ques={item?.ques} ans={item?.ans} />
             </div>
           ))}
         </div>

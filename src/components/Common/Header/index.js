@@ -207,7 +207,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
         <div className={styles.search_open_details} open={open}>
           <p className={styles.search_head}>Recent</p>
           <div className={styles.pills_wrapper}>
-            {arr.map((item, index) => (
+            {arr?.map((item, index) => (
               <div key={index} className={styles.pill}>
                 <RecentIcon className={styles.modal_icon} color={"#E0806A"} />
                 <p className={styles.pill_text}>{item}</p>
@@ -217,7 +217,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
           <div className="mt-6"></div>
           <p className={styles.search_head}>Trending searches</p>
           <div className={styles.pills_wrapper}>
-            {arr.map((item, index) => (
+            {arr?.map((item, index) => (
               <div key={index} className={styles.pill}>
                 <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
                 <p className={styles.pill_text}>{item}</p>
@@ -232,11 +232,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
                 <div key={index} className={styles.card_wrapper}>
                   <img
                     src={item.img}
-                    alt=""
+                    alt="RentFurnitureImages"
                     className={styles.categories_img}
                   />
                   <div>
-                    <h3 className={styles.category_label}>{item.label}</h3>
+                    <h3 className={styles.category_label}>{item?.label}</h3>
                   </div>
                 </div>
               ))}

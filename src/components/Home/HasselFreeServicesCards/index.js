@@ -9,7 +9,7 @@ const HasselFreeServicesCards = () => {
       <p className={style.heading}>{Title}</p>
       <div className="flex">
         <div className={style.card_container}>
-          {HasselFreeData.map((data, index) => {
+          {HasselFreeData?.map((data, index) => {
             return (
               <div
                 key={index.toString()}
@@ -20,8 +20,8 @@ const HasselFreeServicesCards = () => {
                   backgroundSize: "cover",
                 }}>
                 <div className="absolute bottom-4 px-4 3xl:px-8 3xl:pr-20">
-                  <p className={style.heading_text}>{data.Heading}</p>
-                  <p className={style.content}>{data.text}</p>
+                  <p className={style.heading_text}>{data?.Heading}</p>
+                  <p className={style.content}>{data?.text}</p>
                 </div>
               </div>
             );
