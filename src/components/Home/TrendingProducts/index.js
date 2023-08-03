@@ -32,7 +32,7 @@ const TrendingProducts = () => {
       <h3 className={styles.subHeading}>Best Selling Products</h3>
       <div className={styles.card_box}>
         {homePageReduxData?.trendindProduct?.map((item, index) => (
-          <div key={index.toString()} className="mr-4">
+          <div key={index.toString()}>
             <Card
               cardImage={productImageBaseUrl + item.image.split(",")[0]}
               hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
