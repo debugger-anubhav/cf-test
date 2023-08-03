@@ -27,21 +27,21 @@ const PreDesignCombos = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.designComboProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box}>
         {homePageReduxData?.designComboProduct?.map((item, index) => (
           <div key={index}>
             <Card
-              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
+              cardImage={productImageBaseUrl + item.image.split(",")[0]}
+              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
               // hoverCard="false"
-              desc={item?.product_name}
-              originalPrice={item?.price}
-              currentPrice={item?.sale_price}
+              desc={item.product_name}
+              originalPrice={item.price}
+              currentPrice={item.sale_price}
               discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.price,
+                ((item.price - item.sale_price) * 100) / item.price,
               ).toFixed(2)}%`}
               showincludedItem={true}
               itemIncluded={item?.subProduct.length}
@@ -50,7 +50,7 @@ const PreDesignCombos = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default PreDesignCombos;
