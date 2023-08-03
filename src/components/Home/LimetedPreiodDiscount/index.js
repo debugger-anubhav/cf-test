@@ -41,9 +41,9 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
             <Card
-              cardImage={productImageBaseUrl + item.image.split(",")[0]}
+              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}
-              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
+              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
               // hoverCard="false"
               originalPrice={item.price}
               currentPrice={item.product_sale_price}
