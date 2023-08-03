@@ -14,7 +14,7 @@ const RentFurnitureAndAppliances = () => {
         {RentFurniture?.map((item, index) => (
           <div key={index} className={styles.card_wrapper}>
             <img
-              src={item.img}
+              src={item?.img}
               width={"100%"}
               height={"100%"}
               alt=""
@@ -22,8 +22,8 @@ const RentFurnitureAndAppliances = () => {
             />
 
             <div className="xl:pl-3 macbook:pl-0">
-              <h3 className={styles.label}>{item.label}</h3>
-              <p className={styles.desc}>{item.desc}</p>
+              <h3 className={styles.label}>{item?.label}</h3>
+              <p className={styles.desc}>{item?.desc}</p>
             </div>
           </div>
         ))}

@@ -58,7 +58,7 @@ const NewlyLaunched = () => {
               <Image
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
-                  ele.image.split(",")[0]
+                  ele?.image?.split(",")[0]
                 }
                 width={241}
                 height={181}
@@ -66,7 +66,7 @@ const NewlyLaunched = () => {
               />
             </div>
             <div className={styles.price_tag}>
-              <p>{`₹${ele.price} / month`}</p>
+              <p>{`₹${ele?.price} / month`}</p>
             </div>
           </div>
         ))}

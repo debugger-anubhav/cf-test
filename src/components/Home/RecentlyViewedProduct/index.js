@@ -38,12 +38,12 @@ const RecentlyViewedProduct = () => {
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
               discount={`${Math.round(
-                ((item.price - item.product_sale_price) * 100) /
-                  item.product_sale_price,
+                ((item?.price - item?.product_sale_price) * 100) /
+                  item?.product_sale_price,
               ).toFixed(2)}%`}
-              originalPrice={item.price}
-              currentPrice={item.product_sale_price}
-              desc={item.product_name}
+              originalPrice={item?.price}
+              currentPrice={item?.product_sale_price}
+              desc={item?.product_name}
             />
           </div>
         ))}
