@@ -11,11 +11,11 @@ const FourSteps = () => {
       <h2 className={styles.head}>{string.landing_page.Four_steps.heading}</h2>
       <p className={styles.subhead}>{string.landing_page.Four_steps.subhead}</p>
       <div className={styles.card_wrapper}>
-        {FourStepsCardData.map((itemm, index) => (
+        {FourStepsCardData?.map((itemm, index) => (
           <div key={index} className={styles.card}>
             <div>
               <img
-                src={itemm.img1}
+                src={itemm?.img1}
                 className={`${
                   index === 0
                     ? "w-[80px] h-[80px]"
@@ -31,8 +31,8 @@ const FourSteps = () => {
                 className={`w-[165px] h-[120px] lg:hidden flex`}
               />
             </div>
-            <h3 className={styles.head1}>{itemm.head}</h3>
-            <p className={styles.content1}>{itemm.content}</p>
+            <h3 className={styles.head1}>{itemm?.head}</h3>
+            <p className={styles.content1}>{itemm?.content}</p>
           </div>
         ))}
       </div>

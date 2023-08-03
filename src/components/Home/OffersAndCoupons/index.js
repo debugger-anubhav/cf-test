@@ -50,7 +50,6 @@ const OffersAndCoupons = () => {
       <h2 className={styles.heading}>{str.heading}</h2>
       <div className={styles.cards_wrapper} onClick={handleCopyClick}>
         {homePageData?.offerCoupons?.map((item, index) => (
-          // {/* {str.card_data.map((item, index) => ( */}
           <div key={index} className={styles.card}>
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
