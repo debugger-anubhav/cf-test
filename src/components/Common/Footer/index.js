@@ -5,7 +5,10 @@ import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
   const str = string.common_components.Footer;
+
   return (
     <div className={styles.footer_wrapper}>
       <h2 className={styles.head}>{str.why_furni}</h2>
@@ -75,7 +78,7 @@ const Footer = () => {
       </div>
 
       <div className={styles.copyRight_div}>
-        <p className={styles.copyTxt}>{str.copy_right}</p>
+        <p className={styles.copyTxt}>{text}</p>
         <div className={styles.goToTopDiv}>
           <Image
             src={FooterIcons.GoToTopIcon}
