@@ -8,8 +8,35 @@
   @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 font-Poppins text-45454A;
 }
 .icons_div {
-  @apply mt-4 xl:mt-8 3xl:mt-12 pt-4 xl:pt-0 pl-4  xl:mx-0 xl:pl-0 w-full overflow-scroll items-center flex gap-8 xl:gap-12 bg-[#E5EFF4] md:bg-transparent;
+  /* @apply mt-4 xl:mt-8 3xl:mt-12 pt-4 xl:pt-0 pl-4  xl:mx-0 xl:pl-0 w-full overflow-scroll items-center flex gap-8 xl:gap-12 bg-[#E5EFF4] md:bg-transparent; */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  white-space: nowrap;
+  width: 100%;
+  animation: scrollAnimation 20s linear infinite;
 }
 .icon {
-  @apply xl:h-8 3xl:h-12 w-full h-full;
+  @apply xl:h-8 3xl:h-12 w-full h-full mr-8;
+  object-fit: contain;
+  /* width: 5rem;
+  height: 100%; */
+  aspect-ratio: 16/9;
+}
+.demo {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+@keyframes scrollAnimation {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
 }
