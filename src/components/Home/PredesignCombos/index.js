@@ -27,7 +27,14 @@ const PreDesignCombos = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return homePageReduxData?.designComboProduct ? (
+  // const handleMouse = () => {
+  //   mousewheel(function (e, delta) {
+  //     this.scrollLeft -= (delta);
+  //     e.preventDefault();
+  //   });
+  // }
+
+  return homePageReduxData?.designComboProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box}>
