@@ -7,7 +7,7 @@ import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {RentFurniture} from "@/constants/constant";
 // import {BiArrowFromRight} from "react-icons/bi";
@@ -85,6 +85,7 @@ const Header = () => {
               src={Icons.CityFurnishLogo}
               alt="City-furnish-logo"
               className={styles.cityfurnish_logo}
+              // onClick={()=>}
             />
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
@@ -174,9 +175,18 @@ export default Header;
 
 // search modal component
 const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
+  const closeBar = useSelector(state => state.homePagedata.announcementBar);
+
   return (
     <div className={styles.backdrop}>
-      <div className={styles.search_details_wrapper}>
+      {/* <div className={` ${styles.search_details_wrapper}`}> */}
+      <div
+        className={` ${
+          closeBar
+            ? "w-full absolute top-[65px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
+            : "w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
+        }
+`}>
         <div className={styles.search_wrapper_mobile}>
           <input
             placeholder="Search for Furniture, Appliances, etc"
