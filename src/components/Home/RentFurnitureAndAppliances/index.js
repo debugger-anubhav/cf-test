@@ -32,7 +32,7 @@ const RentFurnitureAndAppliances = () => {
     router.push(`/${homePageReduxData?.cityName}/${rentItem.seourl}`);
   };
 
-  return getCategory.length ? (
+  return getCategory?.length ? (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
