@@ -2,7 +2,7 @@
   @apply w-full rounded overflow-scroll my-8 xl:my-[88px] macbook:px-[122px] 3xl:px-[160px] xl:px-[90px] md:px-[70px] px-4;
 }
 .banner_card {
-  @apply flex flex-row gap-x-3 w-[100%];
+  @apply flex flex-row gap-x-3 md:gap-x-4 3xl:gap-x-6 w-[100%];
 }
 .banner_wrapper {
   @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative;
