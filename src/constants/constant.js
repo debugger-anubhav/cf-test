@@ -226,4 +226,7 @@ export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
 
 export const categoryImageBaseUrl =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
+// "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
+
+// "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/appliances.webp";
