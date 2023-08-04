@@ -16,6 +16,7 @@ export const HomepageSlice = createSlice({
     category: [],
     allAndSubCategory: [],
     sidebarMenuLists: [],
+    announcementBar: false,
   },
   reducers: {
     addCityList(state, action) {
@@ -58,6 +59,9 @@ export const HomepageSlice = createSlice({
     addSidebarMenuLists(state, action) {
       state.sidebarMenuLists = action.payload;
     },
+    setAnnouncementBar(state, action) {
+      state.announcementBar = action.payload;
+    },
   },
 });
 
@@ -75,4 +79,5 @@ export const {
   addCategory,
   addAllAndSubCategory,
   addSidebarMenuLists,
+  setAnnouncementBar,
 } = HomepageSlice.actions;

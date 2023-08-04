@@ -1,19 +1,15 @@
 // "use client"
-import React, {useState} from "react";
+import React from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import string from "@/constants/Constant.json";
+import {useDispatch, useSelector} from "react-redux";
+import {setAnnouncementBar} from "@/store/Slices";
 
 const AnnouncementBar = () => {
-  const [closeBar, setCloseBar] = useState(false);
+  const dispatch = useDispatch();
+  const closeBar = useSelector(state => state.homePagedata.announcementBar);
 
-  // const {mutateAsync} = useMutation("furniture", "post", endPoints.login, {
-  //   name: "abhishek"
-  // })
-
-  // mutateAsync().then(res => {
-  //   res.
-  // })
   return (
     <>
       {!closeBar && (
@@ -23,8 +19,8 @@ const AnnouncementBar = () => {
           </p>
           <p
             className={styles.announcement_close_icon}
-            onClick={() => setCloseBar(true)}>
-            <Close size={20} color={"#fff"} />
+            onClick={() => dispatch(setAnnouncementBar(true))}>
+            <Close size={20} color={"#fff"} className={"cursor-pointer"} />
           </p>
         </div>
       )}
