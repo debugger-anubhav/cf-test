@@ -47,5 +47,5 @@
   @apply text-14 leading-5 text-71717A font-Poppins;
 }
 .editBtn {
-  @apply hidden xl:flex gap-[10px] px-8 h-[56px] items-center bg-[#F6B704] rounded-lg;
+  @apply hidden xl:flex gap-[10px] px-8 h-[56px] items-center bg-[#F6B704] rounded-lg cursor-pointer;
 }

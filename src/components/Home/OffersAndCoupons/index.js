@@ -74,13 +74,15 @@ const OffersAndCoupons = () => {
             </div>
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
-              <CopyIcon size={20} color={"black"} />
-              <button
-                id="copy-button"
-                className="text-[#222]"
-                // onClick={() => handleCopyClick(item.coupon_code)}
-              >
-                {isCopied && copiedIndex === index ? "Copied!" : "Copy"}
+              <button id="copy-button" className="text-[#222] flex ">
+                {isCopied && copiedIndex === index ? (
+                  "Copied!"
+                ) : (
+                  <>
+                    <CopyIcon size={20} color={"black"} />
+                    Copy
+                  </>
+                )}
               </button>
             </div>
           </div>

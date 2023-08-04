@@ -8,5 +8,5 @@
   @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative;
 }
 .banner_img {
-  @apply w-full h-full;
+  @apply w-full h-full cursor-pointer;
 }

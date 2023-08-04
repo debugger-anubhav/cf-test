@@ -34,9 +34,12 @@ const RecentlyViewedProduct = () => {
         {homePageReduxData?.recentProduct?.map((item, index) => (
           <div key={index.toString()}>
             <Card
-              // hoverCard="false"
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
+              hoverCardImage={
+                item?.image?.split(",").filter(item => item).length > 1
+                  ? productImageBaseUrl + item?.image?.split(",")[1]
+                  : productImageBaseUrl + item?.image?.split(",")[0]
+              }
               discount={`${Math.round(
                 ((item?.price - item?.product_sale_price) * 100) /
                   item?.product_sale_price,
