@@ -26,7 +26,7 @@ const TrendingProducts = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
@@ -48,6 +48,6 @@ const TrendingProducts = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 export default TrendingProducts;

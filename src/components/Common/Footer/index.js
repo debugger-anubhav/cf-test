@@ -21,7 +21,7 @@ const Footer = () => {
                   key={i}
                   className={styles.points}
                   onClick={() => console.log("clicked")}>
-                  {t.text}
+                  {t?.text}
                 </p>
               ))}
             </div>
@@ -41,7 +41,7 @@ const Footer = () => {
               <Image
                 key={index}
                 alt="sm icons"
-                src={item.icon}
+                src={item?.icon}
                 className={styles.sm_icon}
                 onClick={() => console.log("cliked")}
               />

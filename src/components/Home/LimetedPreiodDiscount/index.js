@@ -33,7 +33,7 @@ const LimetedPreiodDiscount = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
@@ -42,7 +42,7 @@ const LimetedPreiodDiscount = () => {
           <div key={index}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              desc={item?.product_name}
+              desc={item.product_name}
               hoverCardImage={productImageBaseUrl + item?.image?.split(",")[1]}
               // hoverCard="false"
               originalPrice={item?.price}
@@ -55,7 +55,7 @@ const LimetedPreiodDiscount = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default LimetedPreiodDiscount;

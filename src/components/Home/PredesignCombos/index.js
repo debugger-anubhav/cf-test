@@ -27,7 +27,7 @@ const PreDesignCombos = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.designComboProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box}>
@@ -50,7 +50,7 @@ const PreDesignCombos = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default PreDesignCombos;
