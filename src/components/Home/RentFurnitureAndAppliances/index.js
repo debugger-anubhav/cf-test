@@ -1,32 +1,32 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
-// import {useQuery} from "@/hooks/useQuery";
-// import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
+import {endPoints} from "@/network/endPoints";
 import {addCategory, addSelectedFurnitureCategory} from "@/store/Slices";
 import {categoryImageBaseUrl} from "@/constants/constant";
 // import {useRouter} from "next/navigation";
-import axios from "axios";
+// import axios from "axios";
 
 const RentFurnitureAndAppliances = () => {
-  const config = {
-    method: "get",
-    maxBodyLength: Infinity,
-    url: "http://3.6.205.109/api/fc-categories/all",
-    headers: {},
-  };
+  // const config = {
+  //   method: "get",
+  //   maxBodyLength: Infinity,
+  //   url: "http://3.6.205.109/api/fc-categories/all",
+  //   headers: {},
+  // };
 
-  axios
-    .request(config)
-    .then(response => {
-      dispatch(addCategory(response?.data?.data));
-      console.log(JSON.stringify(response.data));
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  // axios
+  //   .request(config)
+  //   .then(response => {
+  //     dispatch(addCategory(response?.data?.data));
+  //     console.log(JSON.stringify(response.data));
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   });
 
   const dispatch = useDispatch();
   const {category: getCategory} = useSelector(state => state.homePagedata);
@@ -34,15 +34,15 @@ const RentFurnitureAndAppliances = () => {
 
   // const router = useRouter();
 
-  // const { refetch: getAllCategory } = useQuery("category", endPoints.category);
+  const {refetch: getAllCategory} = useQuery("category", endPoints.category);
 
-  // useEffect(() => {
-  //   getAllCategory()
-  //     .then(res => {
-  //       dispatch(addCategory(res?.data?.data));
-  //     })
-  //     .catch(err => console.log(err));
-  // }, []);
+  useEffect(() => {
+    getAllCategory()
+      .then(res => {
+        dispatch(addCategory(res?.data?.data));
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   const handleSubCategory = rentItem => {
     dispatch(addSelectedFurnitureCategory(rentItem));
