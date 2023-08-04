@@ -1,5 +1,5 @@
 .drawer_wrapper {
-  @apply flex w-[430px] pt-16;
+  @apply flex w-[430px] pt-16 relative z-[999];
 }
 .drawer_close {
   @apply flex mx-8 flex-col;

@@ -9,6 +9,7 @@ import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
+import {useRouter} from "next/navigation";
 
 // h2 h3 h3 h3 p
 
@@ -16,6 +17,7 @@ const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
+  const router = useRouter();
 
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
@@ -56,8 +58,10 @@ const CustomerRating = () => {
           />
           <div
             className={styles.editBtn}
-            onClick={
-              "window.location.href = 'https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU';"
+            onClick={() =>
+              router.push(
+                "https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU",
+              )
             }>
             <EditIcon size={25} />
             <p className="text-[#222] font-medium">{btntxt}</p>

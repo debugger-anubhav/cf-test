@@ -77,7 +77,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="bg-fff z-[9999] sticky top-0 ">
+      <div className="bg-fff z-[111] sticky top-0 ">
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
