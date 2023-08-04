@@ -23,7 +23,7 @@ const HappySubscribers = () => {
           <div className={styles.card_div} key={index}>
             <div className={styles.video}>
               <video className={styles.video_player} ref={videoRef}>
-                <source src={item.videoUrl} type="video/mp4" />
+                <source src={item?.videoUrl} type="video/mp4" />
                 {/* Add more <source> elements for different video formats (WebM, Ogg, etc.) */}
                 Your browser does not support the video tag.
               </video>

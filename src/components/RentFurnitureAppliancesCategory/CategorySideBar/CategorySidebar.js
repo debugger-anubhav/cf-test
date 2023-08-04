@@ -85,7 +85,7 @@ const CategorySidebar = () => {
                               <input
                                 type="radio"
                                 id="sub_category"
-                                value={element.cat_name}
+                                value={element?.cat_name}
                                 name="SubCatrgory"
                                 onChange={e =>
                                   console.log(e.target.value, "e.target.value")

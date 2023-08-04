@@ -30,9 +30,9 @@ const RecentlyViewedProduct = () => {
   return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
-      <div className="flex overflow-x-scroll">
+      <div className="flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8">
         {homePageReduxData?.recentProduct?.map((item, index) => (
-          <div className="3xl:mr-8 mr-4" key={index.toString()}>
+          <div key={index.toString()}>
             <Card
               // hoverCard="false"
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}

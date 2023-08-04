@@ -11,6 +11,8 @@ const OffersAndCoupons = () => {
   const dispatch = useDispatch();
   const homePageData = useSelector(state => state.homePagedata);
   const cityId = homePageData.cityId;
+  const [isCopied, setIsCopied] = React.useState(false);
+  const [copiedIndex, setCopiedIndex] = React.useState(null);
 
   const {refetch: getOfferCupon} = useQuery(
     "offer-cuopons",
@@ -28,13 +30,33 @@ const OffersAndCoupons = () => {
 
   const str = string.landing_page.OffersAndDiscount;
 
+  const handleCopyClick = textToCopy => {
+    const tempTextArea = document.createElement("textarea");
+    tempTextArea.value = textToCopy;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    try {
+      document.execCommand("copy");
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000); // Reset "isCopied" after 2 seconds
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+    document.body.removeChild(tempTextArea);
+  };
+
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
       <div className={styles.cards_wrapper}>
         {homePageData?.offerCoupons?.map((item, index) => (
-          // {/* {str.card_data.map((item, index) => ( */}
-          <div key={index} className={styles.card}>
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() => {
+              handleCopyClick(item.coupon_code);
+              setCopiedIndex(index);
+            }}>
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
             <div className="xl:w-full">
@@ -43,13 +65,23 @@ const OffersAndCoupons = () => {
                   ? `(up to Rs ${item?.max_discount})*`
                   : ""
               } `}</p>
-              <p className={styles.desc}>{item?.price_below_text}</p>
+              {item?.price_below_text && (
+                <p className={styles.desc}>
+                  {item?.price_below_text.split(" ").slice(0, 7).join(" ")}
+                </p>
+              )}
               <p className={styles.code}>Use Code {item?.coupon_code}</p>
             </div>
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
               <CopyIcon size={20} color={"black"} />
-              <p className="text-[#222]">Copy</p>
+              <button
+                id="copy-button"
+                className="text-[#222]"
+                // onClick={() => handleCopyClick(item.coupon_code)}
+              >
+                {isCopied && copiedIndex === index ? "Copied!" : "Copy"}
+              </button>
             </div>
           </div>
         ))}

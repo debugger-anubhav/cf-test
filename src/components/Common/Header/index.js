@@ -77,41 +77,85 @@ const Header = () => {
 
   return (
     <>
-      <div className={styles.header_wrapper}>
-        <div className={styles.header_left_wrapper}>
-          <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-          <Image
-            src={Icons.CityFurnishLogo}
-            alt="City-furnish-logo"
-            className={styles.cityfurnish_logo}
-          />
-          <div className={styles.header_city_wrapper}>
-            <div className={styles.header_city_name}>
-              <CommonDrawer Cities={storeCityList} DrawerName="cities" />
-              <DownArrow size={20} color={"#45454A"} />
-            </div>
-          </div>
-        </div>
-        <div className={styles.header_right_wrapper}>
-          {!openSearchbar && (
-            <div className="absolute md:right-[19%] lg:right-[21%] xl:right-[19%]">
-              <div
-                className={styles.search_wrapper}
-                onClick={() => {
-                  setOpenSearchBar(!openSearchbar);
-                }}>
-                <input
-                  placeholder="Search for Furniture, Appliances, etc"
-                  className={styles.search_input}
-                />
-                <Image
-                  src={Icons.Search}
-                  alt="search-icon"
-                  className={styles.header_search_icon}
-                />
+      <div className="bg-fff z-[9999] sticky top-0 ">
+        <div className={styles.header_wrapper}>
+          <div className={styles.header_left_wrapper}>
+            <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
+            <Image
+              src={Icons.CityFurnishLogo}
+              alt="City-furnish-logo"
+              className={styles.cityfurnish_logo}
+            />
+            <div className={styles.header_city_wrapper}>
+              <div className={styles.header_city_name}>
+                <CommonDrawer Cities={storeCityList} DrawerName="cities" />
+                <DownArrow size={20} color={"#45454A"} />
               </div>
             </div>
-          )}
+          </div>
+          <div className={styles.header_right_wrapper}>
+            {!openSearchbar && (
+              <div className="absolute md:right-[19%] lg:right-[21%] xl:right-[19%]">
+                <div
+                  className={styles.search_wrapper}
+                  onClick={() => {
+                    setOpenSearchBar(!openSearchbar);
+                  }}>
+                  <input
+                    placeholder="Search for Furniture, Appliances, etc"
+                    className={styles.search_input}
+                  />
+                  <Image
+                    src={Icons.Search}
+                    alt="search-icon"
+                    className={styles.header_search_icon}
+                  />
+                </div>
+              </div>
+            )}
+            {openSearchbar && (
+              <>
+                <SearchModal
+                  arr={arr}
+                  openSearchbar={openSearchbar}
+                  setOpenSearchBar={setOpenSearchBar}
+                />
+              </>
+            )}
+
+            <Image
+              src={Icons.Favorite}
+              alt="favorite"
+              className={styles.header_favorite}
+            />
+            <Image
+              src={Icons.shoppingCard}
+              alt="shopping-card-icon"
+              className={styles.header_shopping_card}
+            />
+            <Image
+              src={Icons.Profile}
+              alt="profile-icon"
+              className={styles.header_profile_icon}
+            />
+          </div>
+        </div>
+        <div className={styles.mobile_search_row}>
+          <div className={styles.search_wrapper_mobile} style={{width: "100%"}}>
+            <input
+              placeholder="Search for Furniture, Appliances, etc"
+              className={styles.search_input}
+              onClick={() => {
+                setOpenSearchBar(!openSearchbar);
+              }}
+            />
+            <Image
+              src={Icons.Search}
+              alt="search-icon"
+              className={styles.header_search_icon}
+            />
+          </div>
+
           {openSearchbar && (
             <>
               <SearchModal
@@ -121,49 +165,7 @@ const Header = () => {
               />
             </>
           )}
-
-          <Image
-            src={Icons.Favorite}
-            alt="favorite"
-            className={styles.header_favorite}
-          />
-          <Image
-            src={Icons.shoppingCard}
-            alt="shopping-card-icon"
-            className={styles.header_shopping_card}
-          />
-          <Image
-            src={Icons.Profile}
-            alt="profile-icon"
-            className={styles.header_profile_icon}
-          />
         </div>
-      </div>
-      <div className={styles.mobile_search_row}>
-        <div className={styles.search_wrapper_mobile} style={{width: "100%"}}>
-          <input
-            placeholder="Search for Furniture, Appliances, etc"
-            className={styles.search_input}
-            onClick={() => {
-              setOpenSearchBar(!openSearchbar);
-            }}
-          />
-          <Image
-            src={Icons.Search}
-            alt="search-icon"
-            className={styles.header_search_icon}
-          />
-        </div>
-
-        {openSearchbar && (
-          <>
-            <SearchModal
-              arr={arr}
-              openSearchbar={openSearchbar}
-              setOpenSearchBar={setOpenSearchBar}
-            />
-          </>
-        )}
       </div>
     </>
   );
@@ -231,7 +233,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
               {RentFurniture?.map((item, index) => (
                 <div key={index} className={styles.card_wrapper}>
                   <img
-                    src={item.img}
+                    src={item?.img}
                     alt="RentFurnitureImages"
                     className={styles.categories_img}
                   />
