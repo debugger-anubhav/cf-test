@@ -79,14 +79,15 @@ const Footer = () => {
 
       <div className={styles.copyRight_div}>
         <p className={styles.copyTxt}>{text}</p>
-        <div className={styles.goToTopDiv}>
+        <div
+          className={styles.goToTopDiv}
+          onClick={() =>
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+          }>
           <Image
             src={FooterIcons.GoToTopIcon}
             alt="go to top"
             className={styles.goToTopIcon}
-            onClick={() =>
-              window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-            }
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>
