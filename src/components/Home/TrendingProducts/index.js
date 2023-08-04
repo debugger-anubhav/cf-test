@@ -1,18 +1,18 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import {useQuery} from "@/hooks/useQuery";
-import {useDispatch, useSelector} from "react-redux";
-import {addtrendingproduct} from "@/store/Slices";
-import {endPoints} from "@/network/endPoints";
-import {productImageBaseUrl} from "@/constants/constant";
+import { useQuery } from "@/hooks/useQuery";
+import { useDispatch, useSelector } from "react-redux";
+import { addtrendingproduct } from "@/store/Slices";
+import { endPoints } from "@/network/endPoints";
+import { productImageBaseUrl } from "@/constants/constant";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
-  const {refetch: getTrendyProducts} = useQuery(
+  const { refetch: getTrendyProducts } = useQuery(
     "trendy-product",
     endPoints.trendingProduct,
     `?cityId=${cityId}&userId=${85757}`,
@@ -33,6 +33,7 @@ const TrendingProducts = () => {
       <div className={styles.card_box}>
         {homePageReduxData?.trendindProduct?.map((item, index) => (
           <div key={index.toString()}>
+
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={
