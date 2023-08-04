@@ -233,7 +233,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
               {RentFurniture?.map((item, index) => (
                 <div key={index} className={styles.card_wrapper}>
                   <img
-                    src={item.img}
+                    src={item?.img}
                     alt="RentFurnitureImages"
                     className={styles.categories_img}
                   />

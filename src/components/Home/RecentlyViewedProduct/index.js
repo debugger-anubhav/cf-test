@@ -27,7 +27,7 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
       <div className="flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8">
@@ -49,7 +49,7 @@ const RecentlyViewedProduct = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default RecentlyViewedProduct;

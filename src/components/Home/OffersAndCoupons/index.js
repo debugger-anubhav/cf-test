@@ -45,7 +45,7 @@ const OffersAndCoupons = () => {
     document.body.removeChild(tempTextArea);
   };
 
-  return (
+  return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
       <div className={styles.cards_wrapper}>
@@ -89,6 +89,6 @@ const OffersAndCoupons = () => {
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 export default OffersAndCoupons;

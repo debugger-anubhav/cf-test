@@ -31,6 +31,7 @@ const CategorySidebar = () => {
   };
 
   const filteredProduct = [];
+  console.log(filteredProduct, "filteredProduct");
 
   const {refetch: getAllFilterProduct} = useQuery(
     "filter-product",
@@ -77,10 +78,6 @@ const CategorySidebar = () => {
                   openSubcategory
                     ? categoryIndex === index
                       ? ele?.sub_categories?.map((element, index) => {
-                          // (categoryIndex === index) ? (
-                          // console.log(index, "element")
-                          // console.log(categoryIndex, "categoryIndex")
-
                           return (
                             <div
                               className={style.subCategory_container}
@@ -88,7 +85,7 @@ const CategorySidebar = () => {
                               <input
                                 type="radio"
                                 id="sub_category"
-                                value={element.cat_name}
+                                value={element?.cat_name}
                                 name="SubCatrgory"
                                 onChange={e =>
                                   console.log(e.target.value, "e.target.value")

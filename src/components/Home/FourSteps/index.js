@@ -27,7 +27,7 @@ const FourSteps = () => {
                 } lg:flex hidden`}
               />
               <img
-                src={itemm.img2}
+                src={itemm?.img2}
                 className={`w-[165px] h-[120px] lg:hidden flex`}
               />
             </div>
