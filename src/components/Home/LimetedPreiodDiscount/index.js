@@ -40,7 +40,6 @@ const LimetedPreiodDiscount = () => {
       <div className={styles.card_box}>
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
-            {console.log(item?.image?.split(",").filter(item => item))}
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}
