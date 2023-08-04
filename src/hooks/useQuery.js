@@ -11,7 +11,7 @@ export const useQuery = (
 
   return useReactQuery({
     queryKey: [queryKey],
-    // [queryKey,_]: queryKey,
+    networkMode: "always",
     queryFn: async () => {
       return baseInstance.get(`/${endPoint}${params}`, {headers}).then(res => {
         queryClient.invalidateQueries([queryKey]);
