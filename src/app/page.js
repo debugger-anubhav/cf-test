@@ -4,6 +4,7 @@ import React from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+// import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
@@ -29,6 +30,7 @@ import MenuList from "@/components/Common/MenuList";
 
 export default function Home() {
   const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -56,7 +58,7 @@ export default function Home() {
           <Footer />
         </div>
       </Provider>
-      {/* <ReactQueryDevtools initialIsOpen={false} position={"bottom-left"} /> */}
+      {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}
     </QueryClientProvider>
   );
 }
