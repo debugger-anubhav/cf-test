@@ -6,6 +6,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
+import "react-horizontal-scrolling-menu/dist/styles.css";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
@@ -26,11 +28,14 @@ const TrendingProducts = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const scrollRef = useHorizontalScroll();
+
   return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className={styles.card_box}>
+      <div className={styles.card_box} ref={scrollRef}>
+        {/* <ScrollMenu> */}
         {homePageReduxData?.trendindProduct?.map((item, index) => (
           <div key={index.toString()}>
             <Card
@@ -49,6 +54,7 @@ const TrendingProducts = () => {
             />
           </div>
         ))}
+        {/* </ScrollMenu> */}
       </div>
     </div>
   ) : null;

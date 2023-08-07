@@ -7,6 +7,7 @@ import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
@@ -33,11 +34,12 @@ const PreDesignCombos = () => {
   //     e.preventDefault();
   //   });
   // }
+  const scrollRef = useHorizontalScroll();
 
   return homePageReduxData?.designComboProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Predesigned combos for you</h2>
-      <div className={styles.card_box}>
+      <div className={styles.card_box} ref={scrollRef}>
         {homePageReduxData?.designComboProduct?.map((item, index) => (
           <div key={index}>
             <Card
