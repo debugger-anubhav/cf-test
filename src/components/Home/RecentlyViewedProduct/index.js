@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const RecentlyViewedProduct = () => {
   const dispatch = useDispatch();
@@ -27,10 +28,14 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const scrollRef = useHorizontalScroll();
+
   return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
-      <div className="flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8">
+      <div
+        className="flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8"
+        ref={scrollRef}>
         {homePageReduxData?.recentProduct?.map((item, index) => (
           <div key={index.toString()}>
             <Card
