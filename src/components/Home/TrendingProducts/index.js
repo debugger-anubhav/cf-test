@@ -26,28 +26,31 @@ const TrendingProducts = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
       <div className={styles.card_box}>
         {homePageReduxData?.trendindProduct?.map((item, index) => (
-          <div key={index.toString()} className="mr-4">
+          <div key={index.toString()}>
             <Card
-              cardImage={productImageBaseUrl + item.image.split(",")[0]}
-              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
-              // hoverCard="false"
-              desc={item.product_name}
-              originalPrice={item.price}
-              currentPrice={item.sale_price}
+              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              hoverCardImage={
+                item?.image?.split(",").filter(item => item).length > 1
+                  ? productImageBaseUrl + item?.image?.split(",")[1]
+                  : productImageBaseUrl + item?.image?.split(",")[0]
+              }
+              desc={item?.product_name}
+              originalPrice={item?.price}
+              currentPrice={item?.sale_price}
               discount={`${Math.round(
-                ((item.price - item.sale_price) * 100) / item.price,
+                ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
             />
           </div>
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 export default TrendingProducts;

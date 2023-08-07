@@ -71,12 +71,14 @@ const TryCityMax = () => {
             <h2 className={styles.benefits_text}>Benefits of CityMax</h2>
             <hr className={styles.line} />
             <div className={styles.benefits_content}>
-              {benefitsOfCity.map((item, index) => {
+              {benefitsOfCity?.map((item, index) => {
                 return (
                   <div className={styles.card_wrapper} key={index}>
-                    <Image src={item.img} className={styles.card_icon} />
-                    <h3 className={styles.benefit_title}>{item.title}</h3>
-                    <p className={styles.benefit_paragraph}>{item.paragraph}</p>
+                    <Image src={item?.img} className={styles.card_icon} />
+                    <h3 className={styles.benefit_title}>{item?.title}</h3>
+                    <p className={styles.benefit_paragraph}>
+                      {item?.paragraph}
+                    </p>
                   </div>
                 );
               })}

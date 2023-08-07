@@ -1,5 +1,5 @@
 .header_wrapper {
-  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:py-10 py-5;
+  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:pt-10 lg:mb-10 py-5;
 }
 
 .header_left_wrapper {
@@ -15,7 +15,7 @@
 }
 
 .cityfurnish_logo {
-  @apply flex lg:mx-6 mobile:mx-4 mx-1 lg:w-full h-full mobile:w-24 w-20;
+  @apply flex lg:mx-6 mobile:mx-4 mx-1 lg:w-full h-full mobile:w-24 w-20 cursor-pointer;
 }
 
 .header_city_wrapper {
@@ -57,7 +57,7 @@
   @apply w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px];
 }
 .search_open_details {
-  @apply font-Poppins mt-5 mx-4 md:mx-0 px-4 py-6 xl:w-[345px] md:w-[300px] bg-white border rounded-lg z-[111] h-[416px] overflow-y-scroll;
+  @apply font-Poppins mt-5 mx-4 md:mx-0 px-4 py-6 xl:w-[345px] md:w-[300px] bg-white border rounded-lg z-[111] md:h-[416px] h-fit overflow-y-scroll;
 }
 .pills_wrapper {
   @apply flex flex-wrap gap-2 mt-4;
@@ -90,5 +90,5 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 9999;
+  z-index: 111;
 }

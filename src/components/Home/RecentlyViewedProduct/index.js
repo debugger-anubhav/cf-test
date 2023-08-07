@@ -27,29 +27,32 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
-      <div className="flex overflow-x-scroll">
+      <div className="flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8">
         {homePageReduxData?.recentProduct?.map((item, index) => (
-          <div className="3xl:mr-8 mr-4" key={index.toString()}>
+          <div key={index.toString()}>
             <Card
-              // hoverCard="false"
-              cardImage={productImageBaseUrl + item.image.split(",")[0]}
-              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
+              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              hoverCardImage={
+                item?.image?.split(",").filter(item => item).length > 1
+                  ? productImageBaseUrl + item?.image?.split(",")[1]
+                  : productImageBaseUrl + item?.image?.split(",")[0]
+              }
               discount={`${Math.round(
-                ((item.price - item.product_sale_price) * 100) /
-                  item.product_sale_price,
+                ((item?.price - item?.product_sale_price) * 100) /
+                  item?.product_sale_price,
               ).toFixed(2)}%`}
-              originalPrice={item.price}
-              currentPrice={item.product_sale_price}
-              desc={item.product_name}
+              originalPrice={item?.price}
+              currentPrice={item?.product_sale_price}
+              desc={item?.product_name}
             />
           </div>
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default RecentlyViewedProduct;

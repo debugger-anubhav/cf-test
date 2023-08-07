@@ -33,7 +33,7 @@ const LimetedPreiodDiscount = () => {
       .catch(err => console.log(err));
   }, []);
 
-  return (
+  return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
@@ -41,21 +41,24 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
             <Card
-              cardImage={productImageBaseUrl + item.image.split(",")[0]}
+              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}
-              hoverCardImage={productImageBaseUrl + item.image.split(",")[1]}
-              // hoverCard="false"
-              originalPrice={item.price}
-              currentPrice={item.product_sale_price}
+              hoverCardImage={
+                item?.image?.split(",").filter(item => item).length > 1
+                  ? productImageBaseUrl + item?.image?.split(",")[1]
+                  : productImageBaseUrl + item?.image?.split(",")[0]
+              }
+              originalPrice={item?.price}
+              currentPrice={item?.product_sale_price}
               discount={`${Math.round(
-                ((item.price - item.product_sale_price) * 100) / item.price,
+                ((item?.price - item?.product_sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
             />
           </div>
         ))}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default LimetedPreiodDiscount;

@@ -44,7 +44,7 @@
   @apply text-14 xl:text-center leading-5 text-45454A w-[204px] xl:w-full;
 }
 .goToTopDiv {
-  @apply flex gap-2 items-center absolute right-0;
+  @apply flex gap-2 items-center absolute right-0 cursor-pointer;
 }
 .goToTopIcon {
   @apply cursor-pointer min-w-[20px] min-h-[20px];

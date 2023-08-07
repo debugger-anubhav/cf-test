@@ -9,6 +9,7 @@ import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
+import {useRouter} from "next/navigation";
 
 // h2 h3 h3 h3 p
 
@@ -16,6 +17,7 @@ const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
+  const router = useRouter();
 
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
@@ -56,8 +58,10 @@ const CustomerRating = () => {
           />
           <div
             className={styles.editBtn}
-            onClick={
-              "window.location.href = 'https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU';"
+            onClick={() =>
+              router.push(
+                "https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU",
+              )
             }>
             <EditIcon size={25} />
             <p className="text-[#222] font-medium">{btntxt}</p>
@@ -68,23 +72,19 @@ const CustomerRating = () => {
 
       <div className={styles.card_wrapper}>
         {reviews?.map((item, index) => (
-          // {CustomerRatingsCard.map((item, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.row}>
               <div className="flex">
                 <Image
-                  src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item.user_image}`}
+                  src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
                   width={12}
                   height={48}
                   alt=""
                   className={styles.img}
                 />
                 <div className="ml-3 mr-7">
-                  <h3 className={styles.name}>{item.user_name}</h3>
+                  <h3 className={styles.name}>{item?.user_name}</h3>
                   <div className="flex gap-2">
-                    {/* {[{}, {}, {}, {}, {}].map((item, index) => ( */}
-                    {/* <div key={index}> */}
-                    {/* <RatingStar size={16} color={"#FFCB45"} /> */}
                     <Rating
                       stop={5}
                       emptySymbol={
@@ -102,12 +102,10 @@ const CustomerRating = () => {
                         />
                       }
                       initialRating={
-                        item.fc_google_location_data[0]?.average_review
+                        item?.fc_google_location_data[0]?.average_review
                       }
                       readonly
                     />
-                    {/* </div>
-                    ))} */}
                   </div>
                 </div>
               </div>
@@ -115,7 +113,7 @@ const CustomerRating = () => {
             </div>
 
             <div className={styles.content}>
-              <p className={styles.contentP}>{item.comment}</p>
+              <p className={styles.contentP}>{item?.comment}</p>
             </div>
           </div>
         ))}

@@ -19,11 +19,11 @@ const HappySubscribers = () => {
       <h2 className={styles.head}>{str.head}</h2>
       <p className={styles.desc}>{str.desc}</p>
       <div className={styles.cards_wrapper}>
-        {HappySubscriber.map((item, index) => (
+        {HappySubscriber?.map((item, index) => (
           <div className={styles.card_div} key={index}>
             <div className={styles.video}>
               <video className={styles.video_player} ref={videoRef}>
-                <source src={item.videoUrl} type="video/mp4" />
+                <source src={item?.videoUrl} type="video/mp4" />
                 {/* Add more <source> elements for different video formats (WebM, Ogg, etc.) */}
                 Your browser does not support the video tag.
               </video>
@@ -31,8 +31,8 @@ const HappySubscribers = () => {
                 className={styles.play_button_container}
                 onClick={() => handlePlayButtonClick()}></div>
             </div>
-            <h3 className={styles.video_name}>{item.name}</h3>
-            <p className={styles.video_desc}>{item.desc}</p>
+            <h3 className={styles.video_name}>{item?.name}</h3>
+            <p className={styles.video_desc}>{item?.desc}</p>
           </div>
         ))}
       </div>

@@ -5,7 +5,10 @@ import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
   const str = string.common_components.Footer;
+
   return (
     <div className={styles.footer_wrapper}>
       <h2 className={styles.head}>{str.why_furni}</h2>
@@ -21,7 +24,7 @@ const Footer = () => {
                   key={i}
                   className={styles.points}
                   onClick={() => console.log("clicked")}>
-                  {t.text}
+                  {t?.text}
                 </p>
               ))}
             </div>
@@ -41,7 +44,7 @@ const Footer = () => {
               <Image
                 key={index}
                 alt="sm icons"
-                src={item.icon}
+                src={item?.icon}
                 className={styles.sm_icon}
                 onClick={() => console.log("cliked")}
               />
@@ -75,15 +78,16 @@ const Footer = () => {
       </div>
 
       <div className={styles.copyRight_div}>
-        <p className={styles.copyTxt}>{str.copy_right}</p>
-        <div className={styles.goToTopDiv}>
+        <p className={styles.copyTxt}>{text}</p>
+        <div
+          className={styles.goToTopDiv}
+          onClick={() =>
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"})
+          }>
           <Image
             src={FooterIcons.GoToTopIcon}
             alt="go to top"
             className={styles.goToTopIcon}
-            onClick={() =>
-              window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-            }
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

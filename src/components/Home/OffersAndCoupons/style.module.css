@@ -8,13 +8,13 @@
   @apply w-full overflow-scroll flex gap-3 3xl:gap-4 mt-4 xl:mt-8;
 }
 .card {
-  @apply cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[365px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-8 pl-5 pr-[17px];
+  @apply cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px];
   background: url("../../../assets/home_page_assets//offers/card_bg.svg")
     no-repeat;
   background-size: cover;
 }
 .desc {
-  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full;
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full truncate;
 }
 .code {
   @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;

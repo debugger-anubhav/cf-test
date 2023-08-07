@@ -20,5 +20,5 @@
   @apply mt-2 bg-[#F6B704] rounded-lg flex py-[14px] px-5 items-center justify-center gap-1 h-12 w-[195px];
 }
 .btn_txt {
-  @apply text-[#222] font-medium;
+  @apply text-[#222] font-medium cursor-pointer;
 }

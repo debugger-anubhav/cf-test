@@ -74,7 +74,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 key={index.toString()}
                 className={styles.menu_item}
                 onClick={() => console.log(item.link)}>
-                {item.cat_name}
+                {item?.cat_name}
               </p>
             ))}
           </div>
@@ -85,7 +85,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={styles.menu_item}
                 key={index.toString()}
                 onClick={() => console.log(item.link)}>
-                {item.item}
+                {item?.item}
               </p>
             ))}
           </div>
@@ -96,7 +96,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={styles.menu_item}
                 key={index.toString()}
                 onClick={() => console.log(item.link)}>
-                {item.item}
+                {item?.item}
               </p>
             ))}
           </div>
