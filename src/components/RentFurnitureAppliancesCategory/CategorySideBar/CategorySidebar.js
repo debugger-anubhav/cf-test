@@ -48,7 +48,6 @@ const CategorySidebar = () => {
       .catch(err => console.log(err));
   }, []);
 
-  console.log(filteredProduct, "filteredProduct..filteredProduct");
   return (
     <div className="w-full">
       <h2 className={style.heading}>Categories</h2>

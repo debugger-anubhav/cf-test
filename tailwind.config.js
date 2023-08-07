@@ -55,6 +55,7 @@ module.exports = {
       },
       letterSpacing: {
         heading: "-0.4px",
+        headingOne: "-0.48px",
         desc: "-0.28px",
         subHeading: "-0.32px",
         desktop_sub_heading: "-0.64px",

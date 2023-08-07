@@ -1,0 +1,41 @@
+.conatiner_wrapper {
+  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.container {
+  @apply flex w-full;
+}
+.listings {
+  @apply flex w-full items-center flex-wrap list-none;
+}
+.list {
+  @apply mr-[15px] relative inline-flex items-center font-Poppins;
+}
+.arrow {
+  @apply w-0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid rgba(0, 0, 0, 0.22);
+  position: absolute;
+  right: -10px;
+}
+.route_text {
+  @apply text-[#0e1113] text-14 font-normal font-Poppins;
+}
+.inner_banner {
+  @apply flex justify-center w-full h-auto;
+}
+.heading {
+  @apply text-45454A font-Poppins text-24 font-medium leading-10 tracking-headingOne pt-3 pb-4;
+  font-feature-settings: "ss02" on;
+}
+.category_wrapper {
+  @apply flex w-full;
+}
+.category_container_box {
+  @apply w-[156.558px] h-[117.419px] bg-[#F6F5F8] flex flex-col justify-center items-center mr-4;
+}
+.category_container {
+  @apply text-71717A font-Poppins text-14 font-medium leading-[20.274p] tracking-desc mr-3;
+}
