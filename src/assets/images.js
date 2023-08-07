@@ -1,10 +1,4 @@
 import partner from "./partnership.svg";
-// New launched Product
-import product1 from "./home_page_assets/newlyLuanched/newSofa.svg";
-import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
-import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
-import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
-
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
 // download for app section
@@ -15,7 +9,6 @@ import androidIcon from "./home_page_assets/downloadForMobile/androidIcon.svg";
 import QrCode from "./home_page_assets/downloadForMobile/QrCode.svg";
 import backgroungImageDesk from "./home_page_assets/downloadForMobile/backgroungImageDesk.svg";
 import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.svg";
-
 import DownloadQR from "@/assets/header/download-QR.svg";
 
 export const TryCityMaxBannerWeb =
@@ -85,12 +78,6 @@ export const HomePageRentNowBanner = {
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/work-from-home-setup.webp",
   checkOut:
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/belle-collection.webp",
-};
-export const NewProducts = {
-  product1,
-  product2,
-  product3,
-  product4,
 };
 
 export const HomePageFourSteps = {

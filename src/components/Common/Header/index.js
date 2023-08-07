@@ -81,12 +81,15 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <Image
+            {/* <Image
               src={Icons.CityFurnishLogo}
               alt="City-furnish-logo"
               className={styles.cityfurnish_logo}
               // onClick={()=>}
-            />
+            /> */}
+            <p className="font-semibold md:text-32 xs:text-[28px] mobile:text-[24px] text-[22px] xs:mr-6 mr-4 mobile:ml-4 ml-2 md:ml-0">
+              cityfurnish
+            </p>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
