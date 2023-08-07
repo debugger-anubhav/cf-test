@@ -40,3 +40,12 @@
 .span {
   @apply font-bold text-32;
 }
+
+.rent_furniture_skeleton {
+  @apply flex w-full flex-wrap mt-8;
+}
+.rent_furniture_skeleton > span {
+  @apply h-[50%] mr-4;
+  width: calc(33.33% - 20px);
+  flex: calc(33.33% - 20px);
+}
