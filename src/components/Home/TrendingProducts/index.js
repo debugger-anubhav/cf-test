@@ -6,7 +6,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import "react-horizontal-scrolling-menu/dist/styles.css";
 import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const TrendingProducts = () => {
