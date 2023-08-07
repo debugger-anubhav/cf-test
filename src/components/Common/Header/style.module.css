@@ -1,5 +1,5 @@
 .header_wrapper {
-  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:pt-10 lg:mb-10 py-5;
+  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:pt-10  py-5;
 }
 
 .header_left_wrapper {
