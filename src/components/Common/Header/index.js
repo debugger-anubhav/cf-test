@@ -77,7 +77,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="bg-fff z-[111] sticky top-0 ">
+      <div className={styles.main}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
@@ -87,9 +87,7 @@ const Header = () => {
               className={styles.cityfurnish_logo}
               // onClick={()=>}
             /> */}
-            <p className="font-semibold md:text-32 xs:text-[28px] mobile:text-[24px] text-[22px] xs:mr-6 mr-4 mobile:ml-4 ml-2 md:ml-0">
-              cityfurnish
-            </p>
+            <p className={styles.logo_text}>cityfurnish</p>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
@@ -99,7 +97,7 @@ const Header = () => {
           </div>
           <div className={styles.header_right_wrapper}>
             {!openSearchbar && (
-              <div className="absolute md:right-[19%] lg:right-[21%] xl:right-[19%]">
+              <div className={styles.open_searchbar_main}>
                 <div
                   className={styles.search_wrapper}
                   onClick={() => {

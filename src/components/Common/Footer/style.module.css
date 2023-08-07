@@ -52,3 +52,9 @@
 .goToTopTxt {
   @apply text-14 leading-5 text-45454A font-medium;
 }
+.head_wrapper {
+  @apply w-[109px] xl:w-fit;
+}
+.need_help_box {
+  @apply hidden xl:block;
+}

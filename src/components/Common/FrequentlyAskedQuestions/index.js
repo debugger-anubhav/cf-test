@@ -21,7 +21,7 @@ const FrequentlyAskedQuestions = () => {
         </div>
         <div className={styles.btn}>
           <p className={styles.btn_txt}>{str.btn_txt}</p>
-          <ForwardArrow className="w-4 h-4 xl:w-5 xl:h-5" />
+          <ForwardArrow className={styles.forword_icon} />
         </div>
       </div>
     </div>

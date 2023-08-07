@@ -22,6 +22,9 @@
   height: auto;
   /* @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
 }
+.label_wrapper {
+  @apply xl:pl-3 macbook:pl-0;
+}
 .label {
   @apply mt-1 xl:mt-3 text-45454A text-14 xl:text-20 xl:leading-normal font-medium tracking-desc xl:tracking-heading;
 }

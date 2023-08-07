@@ -88,7 +88,7 @@ const RentFurnitureAndAppliances = () => {
               className={styles.img}
             />
 
-            <div className="xl:pl-3 macbook:pl-0">
+            <div className={styles.label_wrapper}>
               <h3 className={styles.label}>{item.label}</h3>
               <p className={styles.desc}>{item.desc}</p>
             </div>

@@ -33,9 +33,7 @@ const RecentlyViewedProduct = () => {
   return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
-      <div
-        className="flex overflow-x-scroll overflow-y-hidden gap-4 xl:gap-6 3xl:gap-8"
-        ref={scrollRef}>
+      <div className={styles.recentlyViewed_main} ref={scrollRef}>
         {homePageReduxData?.recentProduct?.map((item, index) => (
           <div key={index.toString()}>
             <Card
