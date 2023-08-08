@@ -221,12 +221,26 @@ export const HasselFreeData = [
     text: "Upgrade your house with new products after 6 months of use for free",
   },
 ];
+export const CategoryFilterData = [
+  {item: "Queen Size Bed"},
+  {item: "Single Bed"},
+  {item: "Storage Bed"},
+  {item: "King Size Bed"},
+  {item: "Bedside And Storage"},
+  {item: "Mattress"},
+  {item: "Bedsheet And Pillow"},
+];
+export const sortByText = [
+  {text: "New"},
+  {text: "Price Low to High"},
+  {text: "Price Hight to low"},
+];
 
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
 
 export const categoryImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
-// "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
 
-// "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/appliances.webp";
+// const cartegoryIconsUrl =
+//   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/";

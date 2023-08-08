@@ -63,3 +63,9 @@ body h1 h2 h3 h4 h5 h6 p {
   @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-[6.5rem] xl:right-[19.5%] rounded-lg z-[111] h-[416px] overflow-y-scroll;
   position: absolute !important;
 }
+
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  background-color: #fa9e57;
+}

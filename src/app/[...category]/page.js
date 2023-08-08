@@ -11,6 +11,7 @@ import Header from "@/components/Common/Header";
 import Footer from "@/components/Common/Footer";
 import MenuList from "@/components/Common/MenuList";
 import SubHeader from "@/components/Category/SubHeader/SubHeader";
+import SingleProduct from "@/components/Category/SingleProduct/SingleProduct";
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ export default function Home() {
           <Header />
           <MenuList />
           <SubHeader />
+          <SingleProduct />
           <Footer />
         </div>
       </Provider>
