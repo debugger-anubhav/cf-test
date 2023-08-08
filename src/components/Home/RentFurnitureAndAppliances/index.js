@@ -104,10 +104,8 @@ const RentFurnitureAndAppliances = () => {
             <div key={index} className={styles.card_wrapper}>
               <img
                 src={item.img}
-                width={"100%"}
-                height={"100%"}
-                alt=""
-                className={styles.img}
+                alt="RentFurnitureImage"
+                className={styles.category_img}
               />
 
               <div className={styles.label_wrapper}>

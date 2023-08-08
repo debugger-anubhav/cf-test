@@ -61,6 +61,30 @@ module.exports = {
         0.3: "-0.32px",
         0.6: " -0.64px",
       },
+      animation: {
+        fade: "fadeOut 0.5s ease-in-out",
+      },
+
+      // that is actual animation
+      keyframes: theme => ({
+        fadeOut: {
+          "0%": {
+            opacity: "0.2",
+          },
+          "25%": {
+            opacity: "0.4",
+          },
+          "50%": {
+            opacity: "0.6",
+          },
+          "75%": {
+            opacity: "0.8",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+      }),
     },
   },
   plugins: [],
