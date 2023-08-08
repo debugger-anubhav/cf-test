@@ -12,8 +12,6 @@ import Rating from "react-rating";
 import {useRouter} from "next/navigation";
 import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
-// h2 h3 h3 h3 p
-
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
@@ -87,11 +85,9 @@ const CustomerRating = () => {
           <div key={index} className={styles.card}>
             <div className={styles.row}>
               <div className="flex">
-                <Image
+                <img
                   src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
-                  width={12}
-                  height={48}
-                  alt=""
+                  alt="profile-pic"
                   className={styles.img}
                 />
                 <div className="ml-3 mr-7">
