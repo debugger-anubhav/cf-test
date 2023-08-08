@@ -138,12 +138,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     dispatch(selectedCityId(city?.id));
                     dispatch(selectedCityName(city?.list_value));
                   }}>
-                  <Image
+                  <img
                     src={cityUrl + city?.list_value_seourl + ".svg"}
                     className={styles.city_thambnil}
-                    alt="city-images"
-                    width={100}
-                    height={100}
+                    alt="city-image"
                   />
                   <p className={styles.city_name}>{city?.list_value}</p>
                 </div>
