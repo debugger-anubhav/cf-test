@@ -6,6 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@/hooks/useQuery";
 import {offersAndCuponsList} from "@/store/Slices";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const OffersAndCoupons = () => {
   const dispatch = useDispatch();
@@ -45,10 +46,12 @@ const OffersAndCoupons = () => {
     document.body.removeChild(tempTextArea);
   };
 
+  const scrollRef = useHorizontalScroll();
+
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
-      <div className={styles.cards_wrapper}>
+      <div className={styles.cards_wrapper} ref={scrollRef}>
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
             key={index}

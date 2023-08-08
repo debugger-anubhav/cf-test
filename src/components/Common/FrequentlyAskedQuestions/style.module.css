@@ -22,3 +22,6 @@
 .btn_txt {
   @apply text-[#222] font-medium cursor-pointer;
 }
+.forword_icon {
+  @apply w-4 h-4 xl:w-5 xl:h-5;
+}

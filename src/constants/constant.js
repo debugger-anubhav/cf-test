@@ -2,7 +2,6 @@
 import {
   HomePageImages,
   HomePageMediaCoverage,
-  NewProducts,
   HomePageFourSteps,
   hasselFreeSection,
 } from "@/assets/images";
@@ -50,16 +49,6 @@ export const MediaCoverageImages = [
   {img: HomePageMediaCoverage.icon7},
   {img: HomePageMediaCoverage.icon8},
   {img: HomePageMediaCoverage.icon9},
-];
-
-export const Newlylaunched = [
-  {img: null, price: ""},
-  {img: NewProducts.product1, price: "₹1699/mo"},
-  {img: NewProducts.product2, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
-  {img: NewProducts.product4, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
-  {img: NewProducts.product3, price: "₹1699/mo"},
 ];
 
 export const CustomerRatingsCard = [

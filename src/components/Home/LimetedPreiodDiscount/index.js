@@ -7,6 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
@@ -32,12 +33,13 @@ const LimetedPreiodDiscount = () => {
       })
       .catch(err => console.log(err));
   }, []);
+  const scrollRef = useHorizontalScroll();
 
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
-      <div className={styles.card_box}>
+      <div className={styles.card_box} ref={scrollRef}>
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
             <Card

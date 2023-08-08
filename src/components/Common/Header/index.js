@@ -77,16 +77,17 @@ const Header = () => {
 
   return (
     <>
-      <div className="bg-fff z-[111] sticky top-0 ">
+      <div className={styles.main}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <Image
+            {/* <Image
               src={Icons.CityFurnishLogo}
               alt="City-furnish-logo"
               className={styles.cityfurnish_logo}
               // onClick={()=>}
-            />
+            /> */}
+            <p className={styles.logo_text}>cityfurnish</p>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
@@ -96,7 +97,7 @@ const Header = () => {
           </div>
           <div className={styles.header_right_wrapper}>
             {!openSearchbar && (
-              <div className="absolute md:right-[19%] lg:right-[21%] xl:right-[19%]">
+              <div className={styles.open_searchbar_main}>
                 <div
                   className={styles.search_wrapper}
                   onClick={() => {

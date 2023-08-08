@@ -64,8 +64,10 @@ body h1 h2 h3 h4 h5 h6 p {
   position: absolute !important;
 }
 
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  background-color: #fa9e57;
+.large_layout {
+  @apply last-screen:w-[2000px] mx-auto;
+}
+
+.skeleton_product_card {
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
 }
