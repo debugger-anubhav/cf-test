@@ -32,12 +32,21 @@ const PreDesignCombos = () => {
 
   const tabBox = document.querySelector("#gallerySlider");
 
+  let isDragging = false;
+
   const dragging = e => {
+    if (!isDragging) return;
     tabBox.scrollLeft -= e.movementX;
   };
-  if (tabBox) {
-    tabBox?.addEventListener("mousemove", dragging);
-  }
+  const dragStop = () => {
+    isDragging = false;
+  };
+
+  // if (tabBox) {
+  tabBox?.addEventListener("mousedown", () => (isDragging = true));
+  tabBox?.addEventListener("mousemove", dragging);
+  // }
+  document.addEventListener("mouseup", dragStop);
 
   return homePageReduxData?.designComboProduct?.length ? (
     <div className={styles.main_container}>
