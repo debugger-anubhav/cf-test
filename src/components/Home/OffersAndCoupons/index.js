@@ -47,11 +47,20 @@ const OffersAndCoupons = () => {
   };
 
   const scrollRef = useHorizontalScroll();
+  const tabBox = document.querySelector("#slider");
+
+  const dragging = e => {
+    tabBox.scrollLeft -= e.movementX;
+  };
+
+  if (tabBox) {
+    tabBox?.addEventListener("mousemove", dragging);
+  }
 
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
-      <div className={styles.cards_wrapper} ref={scrollRef}>
+      <div className={styles.cards_wrapper} ref={scrollRef} id="slider">
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
             key={index}

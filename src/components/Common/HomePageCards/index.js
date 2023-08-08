@@ -16,6 +16,7 @@ const Card = ({
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
+
   return (
     <div
       className={styles.wrapper}

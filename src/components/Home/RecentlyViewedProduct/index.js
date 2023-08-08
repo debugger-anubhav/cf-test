@@ -31,13 +31,22 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const tabBox = document.querySelector("#gallery");
+
+  const dragging = e => {
+    tabBox.scrollLeft -= e.movementX;
+  };
+  if (tabBox) {
+    tabBox?.addEventListener("mousemove", dragging);
+  }
+
   const scrollRef = useHorizontalScroll();
 
   return homePageReduxData?.recentProduct?.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
 
-      <div className={styles.recentlyViewed_main} ref={scrollRef}>
+      <div className={styles.recentlyViewed_main} ref={scrollRef} id="gallery">
         {homePageReduxData?.recentProduct?.map((item, index) => (
           <div key={index.toString()}>
             {!loading ? (
