@@ -35,11 +35,21 @@ const LimetedPreiodDiscount = () => {
   }, []);
   const scrollRef = useHorizontalScroll();
 
+  const tabBox = document.querySelector("#limitedslider");
+
+  const dragging = e => {
+    tabBox.scrollLeft -= e.movementX;
+  };
+
+  if (tabBox) {
+    tabBox?.addEventListener("mousemove", dragging);
+  }
+
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
-      <div className={styles.card_box} ref={scrollRef}>
+      <div className={styles.card_box} ref={scrollRef} id="limitedslider">
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index}>
             <Card

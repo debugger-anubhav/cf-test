@@ -10,6 +10,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
 import {useRouter} from "next/navigation";
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 // h2 h3 h3 h3 p
 
@@ -38,6 +39,17 @@ const CustomerRating = () => {
       })
       .catch(err => console.log(err));
   }, []);
+
+  const scrollRef = useHorizontalScroll();
+  const tabBox = document.querySelector("#imageslider");
+
+  const dragging = e => {
+    tabBox.scrollLeft -= e.movementX;
+  };
+
+  if (tabBox) {
+    tabBox?.addEventListener("mousemove", dragging);
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -70,7 +82,7 @@ const CustomerRating = () => {
         <h3 className={styles.subhead}>{subhead}</h3>
       </div>
 
-      <div className={styles.card_wrapper}>
+      <div className={styles.card_wrapper} ref={scrollRef} id="imageslider">
         {reviews?.map((item, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.row}>

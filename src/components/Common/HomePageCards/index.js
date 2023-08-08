@@ -16,6 +16,7 @@ const Card = ({
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
+
   return (
     <div
       className={styles.wrapper}
@@ -55,7 +56,9 @@ const Card = ({
           <h3 className={styles.currentPrice}>{`₹${currentPrice} /mo`}</h3>
           <h3 className={styles.originalPrice}>{`₹${originalPrice} /mo`}</h3>
         </div>
-        <div className={styles.discount}>{discount}</div>
+        {originalPrice !== currentPrice && (
+          <div className={styles.discount}>{discount}</div>
+        )}
       </div>
     </div>
   );

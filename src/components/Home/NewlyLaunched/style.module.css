@@ -18,5 +18,5 @@
   @apply min-w-[241px] h-[181px] lg:min-w-[165px] xl:min-w-[226px] 2xl:min-w-[300px] 3xl:min-w-[320px] xl:w-[265px] macbook:w-[253px] rounded-lg lg:rounded-[4px];
 }
 .images_wrapper {
-  @apply flex lg:flex-wrap gap-4 macbook:gap-5;
+  @apply flex lg:flex-wrap gap-4 macbook:gap-5 overflow-x-scroll;
 }
