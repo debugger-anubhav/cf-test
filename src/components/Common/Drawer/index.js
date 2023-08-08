@@ -61,7 +61,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
         <div className={styles.drawer_content}>
-          <Image src={Icons.CityFurnishLogo} className={styles.drawer_logo} />
+          <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
             <p
               className={styles.menu_item}

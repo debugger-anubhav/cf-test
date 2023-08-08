@@ -8,11 +8,12 @@
   @apply flex flex-col;
 }
 .close_icon {
-  @apply cursor-pointer;
+  @apply cursor-pointer mt-3;
 }
-.drawer_logo {
-  @apply flex w-[55%];
+.logo_text {
+  @apply font-semibold md:text-32 text-[28px];
 }
+
 .menu_list {
   @apply flex flex-col mt-8;
 }

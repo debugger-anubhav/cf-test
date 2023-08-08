@@ -10,7 +10,6 @@ import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {RentFurniture} from "@/constants/constant";
-// import {BiArrowFromRight} from "react-icons/bi";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -81,12 +80,6 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            {/* <Image
-              src={Icons.CityFurnishLogo}
-              alt="City-furnish-logo"
-              className={styles.cityfurnish_logo}
-              // onClick={()=>}
-            /> */}
             <p className={styles.logo_text}>cityfurnish</p>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>

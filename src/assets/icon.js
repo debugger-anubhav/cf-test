@@ -15,7 +15,7 @@ import {MdModeEdit} from "react-icons/md";
 import Favorite from "@/assets/header/favorite.svg";
 import Menu from "@/assets/header/menu.svg";
 import shoppingCard from "@/assets/header/shopping_cart.svg";
-import CityFurnishLogo from "@/assets/cityFurnish-logo.svg";
+// import CityFurnishLogo from "@/assets/cityFurnish-logo.svg";
 import Profile from "@/assets/header/account_circle.svg";
 import Search from "@/assets/header/search.svg";
 
@@ -63,7 +63,7 @@ export const Icons = {
   Favorite,
   Menu,
   shoppingCard,
-  CityFurnishLogo,
+  // CityFurnishLogo,
   Profile,
   Search,
 };
