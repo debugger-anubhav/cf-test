@@ -10,7 +10,7 @@ const HeroBanner = () => {
   const router = useRouter();
   return (
     <>
-      <div className="w-[95%] mx-auto lg:hidden">
+      <div className="w-[95%] mx-auto lg:hidden landing_page_carousel">
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className="cursor-pointer"

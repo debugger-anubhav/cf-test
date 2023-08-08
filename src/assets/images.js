@@ -4,7 +4,6 @@ import product1 from "./home_page_assets/newlyLuanched/newSofa.svg";
 import product2 from "./home_page_assets/newlyLuanched/newFridge2.svg";
 import product3 from "./home_page_assets/newlyLuanched/newFridge3.svg";
 import product4 from "./home_page_assets/newlyLuanched/newFridge.svg";
-
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
 // download for app section
