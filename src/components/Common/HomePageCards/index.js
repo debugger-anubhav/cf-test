@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./style.module.css";
-import Image from "next/image";
 import {Heart} from "@/assets/icon";
 
 const Card = ({
@@ -11,7 +10,6 @@ const Card = ({
   showincludedItem,
   cardImage,
   hoverCardImage,
-  // hoverCard,
   itemIncluded,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
@@ -19,16 +17,17 @@ const Card = ({
 
   return (
     <div
-      className={styles.wrapper}
+      className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper}
+      `}
       onMouseOver={() => setHoverCard(true)}
       onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
-        <Image
+        <img
           src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
-          className={styles.thumbnail}
-          width={241}
-          height={181}
+          className={`${styles.thumbnail}
+          ${hoverCard && styles.card_image_hover}
+          `}
         />
         {/* ----------- */}
         {showincludedItem && (
@@ -52,7 +51,7 @@ const Card = ({
         />
       </div>
       <div className={styles.price_div}>
-        <div className="flex gap-[0.62rem] items-center">
+        <div className={styles.card_price_wrap}>
           <h3 className={styles.currentPrice}>{`₹${currentPrice} /mo`}</h3>
           <h3 className={styles.originalPrice}>{`₹${originalPrice} /mo`}</h3>
         </div>
