@@ -22,10 +22,6 @@
   @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6;
 }
 
-.cityfurnish_logo {
-  @apply flex lg:mx-6 mobile:mx-4 mx-1 lg:w-full h-full mobile:w-24 w-20 cursor-pointer;
-}
-
 .header_city_wrapper {
   @apply flex items-center;
 }
@@ -59,7 +55,7 @@
   @apply flex md:hidden justify-center items-center mb-4;
 }
 .search_wrapper_mobile {
-  @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative;
+  @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative mb-4;
 }
 .search_details_wrapper {
   @apply w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px];
