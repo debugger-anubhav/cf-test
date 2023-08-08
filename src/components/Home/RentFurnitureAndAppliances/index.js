@@ -71,6 +71,7 @@ import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {RentFurniture} from "@/constants/constant";
+// import Skeleton from "react-loading-skeleton";
 import Skeleton from "@mui/material/Skeleton";
 
 const RentFurnitureAndAppliances = () => {

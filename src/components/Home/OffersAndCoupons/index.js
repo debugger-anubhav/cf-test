@@ -47,11 +47,27 @@ const OffersAndCoupons = () => {
   };
 
   const scrollRef = useHorizontalScroll();
+  const tabBox = document.querySelector("#slider");
+  let isDragging = false;
+
+  const dragging = e => {
+    if (!isDragging) return;
+    tabBox.scrollLeft -= e.movementX;
+  };
+  const dragStop = () => {
+    isDragging = false;
+  };
+
+  // if (tabBox) {
+  tabBox?.addEventListener("mousedown", () => (isDragging = true));
+  tabBox?.addEventListener("mousemove", dragging);
+  // }
+  document.addEventListener("mouseup", dragStop);
 
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
-      <div className={styles.cards_wrapper} ref={scrollRef}>
+      <div className={styles.cards_wrapper} ref={scrollRef} id="slider">
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
             key={index}

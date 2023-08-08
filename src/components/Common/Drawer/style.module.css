@@ -8,11 +8,12 @@
   @apply flex flex-col;
 }
 .close_icon {
-  @apply cursor-pointer;
+  @apply cursor-pointer mt-3;
 }
-.drawer_logo {
-  @apply flex w-[55%];
+.logo_text {
+  @apply font-semibold md:text-32 text-[28px];
 }
+
 .menu_list {
   @apply flex flex-col mt-8;
 }
@@ -35,10 +36,10 @@
   @apply flex flex-wrap w-full mt-8;
 }
 .city_wrapper {
-  @apply flex flex-col mr-6 mb-6 sm:w-[115px] w-[100px] cursor-pointer;
+  @apply flex flex-col mr-6 mb-6 xs:w-[90px] w-[73px]  cursor-pointer;
 }
 .city_thambnil {
-  @apply flex rounded-md;
+  @apply flex rounded-md w-full;
 }
 .city_name {
   @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2;
@@ -59,7 +60,7 @@
   @apply flex sm:hidden rounded border-71717A border my-4 mr-4 py-3 font-Poppins font-medium  justify-center items-center;
 }
 .detail_line {
-  @apply flex sm:hidden;
+  @apply flex sm:hidden xs:pb-0 pb-8;
 }
 .responsive_city_drawer_close_icon {
   @apply absolute top-0 rounded-[50%]  bg-white w-4 h-4 right-12;
