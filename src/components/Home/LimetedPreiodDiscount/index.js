@@ -37,13 +37,21 @@ const LimetedPreiodDiscount = () => {
 
   const tabBox = document.querySelector("#limitedslider");
 
+  let isDragging = false;
+
   const dragging = e => {
+    if (!isDragging) return;
     tabBox.scrollLeft -= e.movementX;
   };
+  const dragStop = () => {
+    isDragging = false;
+  };
 
-  if (tabBox) {
-    tabBox?.addEventListener("mousemove", dragging);
-  }
+  // if (tabBox) {
+  tabBox?.addEventListener("mousedown", () => (isDragging = true));
+  tabBox?.addEventListener("mousemove", dragging);
+  // }
+  document.addEventListener("mouseup", dragStop);
 
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
