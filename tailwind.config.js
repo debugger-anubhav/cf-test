@@ -23,6 +23,7 @@ module.exports = {
         "3A3A3A": "#3A3A3A",
         "6A6A6A": "#6A6A6A",
         fff: "#ffffff",
+        222: "#222",
         "45454A": "#45454A",
         "9A9AA2": "#9A9AA2",
         "71717A": "#71717A",
@@ -35,6 +36,7 @@ module.exports = {
       },
       fontSize: {
         "main-head": "40px",
+        10: "10px",
         18: "18px",
         16: "16px",
         20: "20px",
@@ -51,6 +53,7 @@ module.exports = {
         xs: "428px",
         macbook: "1440px",
         "3xl": "1660px",
+        "4xl": "1850px",
         "last-screen": "2000px",
       },
       letterSpacing: {
@@ -60,6 +63,7 @@ module.exports = {
         desktop_sub_heading: "-0.64px",
         0.3: "-0.32px",
         0.6: " -0.64px",
+        0.4: " -0.4px",
       },
       animation: {
         fade: "fadeOut 0.5s ease-in-out",

@@ -32,7 +32,7 @@ body h1 h2 h3 h4 h5 h6 p {
   width: 95% !important;
   margin: auto !important;
 }
-.carousel .control-dots {
+.landing_page_carousel .carousel .control-dots {
   width: fit-content !important;
   border-radius: 12px;
   border: 2px solid var(--grey-grey-100, #f7f7f8);
@@ -46,15 +46,15 @@ body h1 h2 h3 h4 h5 h6 p {
   justify-content: center;
   overflow: visible !important;
 }
-.carousel .control-dots .dot {
+.landing_page_carousel .carousel .control-dots .dot {
   background: white !important;
   opacity: 1 !important;
   margin-bottom: 0.2rem !important;
 }
-.carousel .control-dots .selected {
+.landing_page_carousel .carousel .control-dots .selected {
   background: #597492 !important;
 }
-.control-dots {
+.landing_page_carousel .control-dots {
   bottom: -14px !important;
 }
 /* .MuiDrawer-paper {
