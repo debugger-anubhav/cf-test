@@ -76,7 +76,7 @@ export const ProductCalaogs = () => {
           >
             <Typography sx={{p: 2}}>
               {items.map(ele => {
-                return <div key={ele.item}>{ele?.item}</div>;
+                return <div key={ele.item.toString()}>{ele?.item}</div>;
               })}
             </Typography>
           </Popover>

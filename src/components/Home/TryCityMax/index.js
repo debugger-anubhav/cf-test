@@ -73,8 +73,12 @@ const TryCityMax = () => {
             <div className={styles.benefits_content}>
               {benefitsOfCity?.map((item, index) => {
                 return (
-                  <div className={styles.card_wrapper} key={index}>
-                    <Image src={item?.img} className={styles.card_icon} />
+                  <div className={styles.card_wrapper} key={index.toString()}>
+                    <Image
+                      src={item?.img}
+                      className={styles.card_icon}
+                      alt="card-icon"
+                    />
                     <h3 className={styles.benefit_title}>{item?.title}</h3>
                     <p className={styles.benefit_paragraph}>
                       {item?.paragraph}

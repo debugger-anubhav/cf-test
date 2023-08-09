@@ -39,7 +39,7 @@ const HappySubscribers = () => {
       <p className={styles.desc}>{str.desc}</p>
       <div className={styles.cards_wrapper} ref={scrollRef} id="videoslider">
         {HappySubscriber?.map((item, index) => (
-          <div className={styles.card_div} key={index}>
+          <div className={styles.card_div} key={index.toString()}>
             <div className={styles.video}>
               <video className={styles.video_player} ref={videoRef}>
                 <source src={item?.videoUrl} type="video/mp4" />
