@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import strings from "@/constants/Constant.json";
-import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewlaunchedProducts} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
@@ -55,13 +54,11 @@ const NewlyLaunched = () => {
         {newProductFetched?.map((ele, index) => (
           <div className="relative" key={index}>
             <div className="">
-              <Image
+              <img
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
                   ele?.image?.split(",")[0]
                 }
-                width={241}
-                height={181}
                 className={styles.img}
               />
             </div>

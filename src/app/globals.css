@@ -63,3 +63,11 @@ body h1 h2 h3 h4 h5 h6 p {
   @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-[6.5rem] xl:right-[19.5%] rounded-lg z-[111] h-[416px] overflow-y-scroll;
   position: absolute !important;
 }
+
+.large_layout {
+  @apply last-screen:w-[2000px] mx-auto;
+}
+
+.skeleton_product_card {
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
+}

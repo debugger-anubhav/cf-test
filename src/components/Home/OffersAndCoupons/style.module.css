@@ -9,7 +9,8 @@
 }
 .card {
   @apply cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px];
-  background: url("../../../assets/home_page_assets//offers/card_bg.svg")
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp")
+    /* background: url("../../../assets/home_page_assets//offers/card_bg.svg") */
     no-repeat;
   background-size: cover;
 }

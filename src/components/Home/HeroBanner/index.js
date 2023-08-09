@@ -10,14 +10,14 @@ const HeroBanner = () => {
   const router = useRouter();
   return (
     <>
-      <div className="w-[95%] mx-auto lg:hidden landing_page_carousel">
+      <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className="cursor-pointer"
             onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
             <img
               src={HeroBannerImages.HeroBannerImageOne}
-              className="w-full rounded-md"
+              className={styles.carousel_images}
               alt="hero-banner-1"
             />
           </div>
@@ -26,7 +26,7 @@ const HeroBanner = () => {
             onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
             <img
               src={HeroBannerImages.HeroBannerImageTwo}
-              className="w-full rounded-md"
+              className={styles.carousel_images}
               alt="hero-banner-2"
             />
           </div>
@@ -35,7 +35,7 @@ const HeroBanner = () => {
             onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
             <img
               src={HeroBannerImages.HeroBannerImageThree}
-              className="w-full rounded-md"
+              className={styles.carousel_images}
               alt="hero-banner-3"
             />
           </div>

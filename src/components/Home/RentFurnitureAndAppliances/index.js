@@ -67,34 +67,55 @@
 // };
 // export default RentFurnitureAndAppliances;
 
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {RentFurniture} from "@/constants/constant";
+// import Skeleton from "react-loading-skeleton";
+import Skeleton from "@mui/material/Skeleton";
 
 const RentFurnitureAndAppliances = () => {
+  const [loading, setLoading] = React.useState(true);
+
+  // will be replace by api data
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
+
   return (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
-      <div className={styles.card_div}>
-        {RentFurniture?.map((item, index) => (
-          <div key={index} className={styles.card_wrapper}>
-            <img
-              src={item.img}
-              width={"100%"}
-              height={"100%"}
-              alt=""
-              className={styles.img}
-            />
-
-            <div className="xl:pl-3 macbook:pl-0">
-              <h3 className={styles.label}>{item.label}</h3>
-              <p className={styles.desc}>{item.desc}</p>
-            </div>
+      {loading ? (
+        <>
+          <div className={styles.rent_furniture_skeleton}>
+            {RentFurniture.map((item, index) => (
+              <>
+                <Skeleton variant="rectangular" height={310} className="mb-4" />
+              </>
+            ))}
           </div>
-        ))}
-      </div>
+        </>
+      ) : (
+        <div className={styles.card_div}>
+          {RentFurniture?.map((item, index) => (
+            <div key={index} className={styles.card_wrapper}>
+              <img
+                src={item.img}
+                alt="RentFurnitureImage"
+                className={styles.category_img}
+              />
+
+              <div className={styles.label_wrapper}>
+                <h3 className={styles.label}>{item.label}</h3>
+                <p className={styles.desc}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

@@ -16,7 +16,7 @@ const Footer = () => {
 
       <div className={styles.pointers_div}>
         {str.array.map((item, index) => (
-          <div key={index} className="w-[109px] xl:w-fit">
+          <div key={index} className={styles.head_wrapper}>
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
               {item.points.map((t, i) => (
@@ -30,7 +30,7 @@ const Footer = () => {
             </div>
           </div>
         ))}
-        <div className="hidden xl:block">
+        <div className={styles.need_help_box}>
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
             <Image className={styles.phoneImg} alt="" src={FooterIcons.Phone} />

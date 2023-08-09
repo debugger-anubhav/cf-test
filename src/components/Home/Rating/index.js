@@ -10,8 +10,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
 import {useRouter} from "next/navigation";
-
-// h2 h3 h3 h3 p
+import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
@@ -39,6 +38,24 @@ const CustomerRating = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const scrollRef = useHorizontalScroll();
+  const tabBox = document.querySelector("#imageslider");
+
+  let isDragging = false;
+
+  const dragging = e => {
+    if (!isDragging) return;
+    tabBox.scrollLeft -= e.movementX;
+  };
+  const dragStop = () => {
+    isDragging = false;
+  };
+
+  // if (tabBox) {
+  tabBox?.addEventListener("mousedown", () => (isDragging = true));
+  tabBox?.addEventListener("mousemove", dragging);
+  // }
+  document.addEventListener("mouseup", dragStop);
   return (
     <div className={styles.wrapper}>
       <div>
@@ -70,16 +87,14 @@ const CustomerRating = () => {
         <h3 className={styles.subhead}>{subhead}</h3>
       </div>
 
-      <div className={styles.card_wrapper}>
+      <div className={styles.card_wrapper} ref={scrollRef} id="imageslider">
         {reviews?.map((item, index) => (
           <div key={index} className={styles.card}>
             <div className={styles.row}>
               <div className="flex">
-                <Image
+                <img
                   src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
-                  width={12}
-                  height={48}
-                  alt=""
+                  alt="profile-pic"
                   className={styles.img}
                 />
                 <div className="ml-3 mr-7">

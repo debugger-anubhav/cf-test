@@ -11,9 +11,14 @@ import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
+// const MenuList = loadable(() => import("@/components/Common/MenuList"));
+import MenuList from "@/components/Common/MenuList";
 
-const RentFurnitureAndAppliances = loadable(() =>
-  import("@/components/Home/RentFurnitureAndAppliances"),
+const RentFurnitureAndAppliances = loadable(
+  () => import("@/components/Home/RentFurnitureAndAppliances"),
+  {
+    // fallback:<div>lsjfskldg/............</div>
+  },
 );
 const RecentlyViewedProduct = loadable(() =>
   import("@/components/Home/RecentlyViewedProduct"),
@@ -51,7 +56,6 @@ const Footer = loadable(() => import("@/components/Common/Footer"));
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
-const MenuList = loadable(() => import("@/components/Common/MenuList"));
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -59,7 +63,7 @@ export default function Home() {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div className="last-screen:w-[2000px] mx-auto">
+        <div className="large_layout">
           <AnnouncementBar />
           <Header />
           <MenuList />
