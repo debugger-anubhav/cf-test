@@ -89,6 +89,12 @@ export const hasselFreeSection = {
   FrameFour: Desktop + "free-relocation.webp",
   FrameFive: Desktop + "insurance-cover.webp",
   FrameSix: Desktop + "flexible-upgrades.webp",
+  IconOne: Desktop + "mint-new-products.svg",
+  IconTwo: Desktop + "free-shipping.svg",
+  IconThree: Desktop + "free-installation.svg",
+  IconFour: Desktop + "free-relocation.svg",
+  IconFive: Desktop + "insurance-cover.svg",
+  IconSix: Desktop + "flexible-upgrades.svg",
 };
 
 export const HeroBannerImages = {
