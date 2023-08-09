@@ -49,6 +49,7 @@ module.exports = {
       screens: {
         mobile: "360px",
         xs: "428px",
+        ms: "520px",
         macbook: "1440px",
         "3xl": "1660px",
         "last-screen": "2000px",
