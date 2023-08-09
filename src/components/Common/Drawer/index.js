@@ -155,7 +155,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 Download mobile app
               </button>
               <div className={styles.download_qr_wrapper}>
-                <Image src={Images.DownloadQR} alt="download-qr" />
+                <Image src={Images.DownloadQR} alt="download-QR" />
                 <p className={styles.qr_text}>
                   <span className={styles.qr_text_span}>100+</span>People have
                   already downloaded our app 🎉

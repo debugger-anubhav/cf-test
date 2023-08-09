@@ -13,12 +13,22 @@ const MediaCoverage = () => {
       <div className={styles.demo}>
         <div className={styles.icons_div}>
           {MediaCoverageImages?.map((item, index) => (
-            <img key={index} className={styles.icon} src={item?.img} alt="" />
+            <img
+              key={index.toString()}
+              className={styles.icon}
+              src={item?.img}
+              alt=""
+            />
           ))}
         </div>
         <div className={styles.icons_div}>
           {MediaCoverageImages?.map((item, index) => (
-            <img key={index} className={styles.icon} src={item?.img} alt="" />
+            <img
+              key={index.toString()}
+              className={styles.icon}
+              src={item?.img}
+              alt=""
+            />
           ))}
         </div>
       </div>

@@ -214,7 +214,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
           <p className={styles.search_head}>Recent</p>
           <div className={styles.pills_wrapper}>
             {arr?.map((item, index) => (
-              <div key={index} className={styles.pill}>
+              <div key={index.toString()} className={styles.pill}>
                 <RecentIcon className={styles.modal_icon} color={"#E0806A"} />
                 <p className={styles.pill_text}>{item}</p>
               </div>
@@ -224,7 +224,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
           <p className={styles.search_head}>Trending searches</p>
           <div className={styles.pills_wrapper}>
             {arr?.map((item, index) => (
-              <div key={index} className={styles.pill}>
+              <div key={index.toString()} className={styles.pill}>
                 <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
                 <p className={styles.pill_text}>{item}</p>
               </div>
@@ -235,7 +235,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
             <p className={styles.search_head}>Categories</p>
             <div className={styles.categories_wrapper}>
               {RentFurniture?.map((item, index) => (
-                <div key={index} className={styles.card_wrapper}>
+                <div key={index.toString()} className={styles.card_wrapper}>
                   <img
                     src={item?.img}
                     alt="RentFurnitureImages"

@@ -59,7 +59,7 @@ const LimetedPreiodDiscount = () => {
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
       <div className={styles.card_box} ref={scrollRef} id="limitedslider">
         {getLimitedPreiodData?.map((item, index) => (
-          <div key={index}>
+          <div key={index.toString()}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}

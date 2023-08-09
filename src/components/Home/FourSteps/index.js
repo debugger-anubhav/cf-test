@@ -12,7 +12,7 @@ const FourSteps = () => {
       <p className={styles.subhead}>{string.landing_page.Four_steps.subhead}</p>
       <div className={styles.card_wrapper}>
         {FourStepsCardData?.map((itemm, index) => (
-          <div key={index} className={styles.card}>
+          <div key={index.toString()} className={styles.card}>
             <div>
               <img
                 src={itemm?.img1}

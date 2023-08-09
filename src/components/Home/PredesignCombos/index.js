@@ -53,7 +53,7 @@ const PreDesignCombos = () => {
       <h2 className={styles.heading}>Predesigned combos for you</h2>
       <div className={styles.card_box} ref={scrollRef} id="gallerySlider">
         {homePageReduxData?.designComboProduct?.map((item, index) => (
-          <div key={index}>
+          <div key={index.toString()}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               // hoverCard="false"

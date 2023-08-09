@@ -28,6 +28,10 @@ body h1 h2 h3 h4 h5 h6 p {
   width: 0px;
 }
 
+.cursor-pointer {
+  width: 95% !important;
+  margin: auto !important;
+}
 .carousel .control-dots {
   width: fit-content !important;
   border-radius: 12px;
@@ -45,6 +49,7 @@ body h1 h2 h3 h4 h5 h6 p {
 .carousel .control-dots .dot {
   background: white !important;
   opacity: 1 !important;
+  margin-bottom: 0.2rem !important;
 }
 .carousel .control-dots .selected {
   background: #597492 !important;
