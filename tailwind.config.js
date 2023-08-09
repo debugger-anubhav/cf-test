@@ -36,6 +36,7 @@ module.exports = {
       },
       fontSize: {
         "main-head": "40px",
+        10: "10px",
         18: "18px",
         16: "16px",
         20: "20px",
@@ -52,6 +53,7 @@ module.exports = {
         xs: "428px",
         macbook: "1440px",
         "3xl": "1660px",
+        "4xl": "1850px",
         "last-screen": "2000px",
       },
       letterSpacing: {

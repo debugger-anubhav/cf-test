@@ -13,6 +13,8 @@ import {
 import {RiSparklingFill} from "react-icons/ri";
 import {BsPersonVcard} from "react-icons/bs";
 import string from "@/constants/Constant.json";
+import {HasselFreeData} from "@/constants/constant";
+import ServiceCard from "./ServiceCard";
 
 const ProductDetails = ({category, itemName}) => {
   const str = string.product_page;
@@ -29,8 +31,6 @@ const ProductDetails = ({category, itemName}) => {
   const handleSliderChange = index => {
     setSelectedIndex(index);
   };
-
-  const isMobile = window.innerWidth <= 1023;
 
   return (
     <div className={styles.main_container}>
@@ -55,7 +55,6 @@ const ProductDetails = ({category, itemName}) => {
         <div className={styles.carousel_wrapper}>
           <Carousel
             selectedItem={selectedIndex}
-            showIndicators={isMobile}
             showThumbs={false}
             showStatus={false}
             onChange={handleSliderChange}
@@ -102,13 +101,34 @@ const ProductDetails = ({category, itemName}) => {
               </div>
             ))}
           </div>
+
+          <div className={`${styles.services_cards_container} ${styles.web}`}>
+            {HasselFreeData.map((item, index) => (
+              <ServiceCard
+                icon={item.icon}
+                key={index}
+                head={item.Heading}
+                desc={item.text}
+              />
+            ))}
+          </div>
         </div>
 
         <div className={styles.details_wrapper}>
-          <div className={styles.header_div}>
+          <div
+            className={styles.header_div}
+            style={{justifyContent: "space-between"}}>
             <h1 className={styles.item_name}>{itemName} placeholder</h1>
-            <Heart size={40} color={"#C0C0C6"} />
-            <ShareIcon size={40} color={"#C0C0C6"} />
+            <div className={styles.header_div}>
+              <Heart
+                className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}
+                color={"#C0C0C6"}
+              />
+              <ShareIcon
+                className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}
+                color={"#C0C0C6"}
+              />
+            </div>
           </div>
 
           <div className={styles.rating_div}>
@@ -119,7 +139,7 @@ const ProductDetails = ({category, itemName}) => {
               </div>
               <p className={styles.rating_txt}>25 ratings</p>
             </div>
-            <p className={`${styles.rating_txt} text-[#63798D]`}>
+            <p className={styles.rating_txt} style={{color: "#63798D"}}>
               Get it by 3rd aug
               <span>
                 <DeliveryTruck size={16} color={"#63798D"} className={"ml-1"} />
@@ -128,7 +148,9 @@ const ProductDetails = ({category, itemName}) => {
           </div>
 
           <div className={styles.duration}>
-            <p>For how many months would you like to rent this?</p>
+            <p className={styles.duration_text}>
+              For how many months would you like to rent this?
+            </p>
             <div className={styles.circle_div}>
               {["3", "6", "9", "12"].map((item, index) => (
                 <div
@@ -171,6 +193,18 @@ const ProductDetails = ({category, itemName}) => {
           <div className={styles.kyc_wrapper}>
             <BsPersonVcard size={24} />
             <p className={styles.kyc_text}>{str.kyc}</p>
+          </div>
+
+          <div
+            className={`${styles.services_cards_container} ${styles.mobile}`}>
+            {HasselFreeData.map((item, index) => (
+              <ServiceCard
+                key={index}
+                head={item.Heading}
+                desc={item.text}
+                icon={item.icon}
+              />
+            ))}
           </div>
 
           <div className={styles.city_shield_wrapper}>

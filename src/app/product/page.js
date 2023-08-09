@@ -8,13 +8,14 @@ import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import ProductDetails from "@/components/Product/ProductDetailsSection";
+import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div>
+        <div className="large_layout">
           <AnnouncementBar />
           <Header />
           <MenuList />
@@ -22,6 +23,9 @@ const ProductPage = () => {
             category={"Home Furniture"}
             itemName={"  Belle Single Bed with Storage"}
           />
+          <div className="-mt-8">
+            <OffersAndCoupons />
+          </div>
         </div>
       </Provider>
     </QueryClientProvider>
