@@ -55,10 +55,13 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
         className={styles.drawer_wrapper}>
-        <div
-          className={styles.drawer_close}
-          onClick={() => toggleDrawer("left", false)}>
-          <Close color={"#000"} size={25} className={styles.close_icon} />
+        <div className={styles.drawer_close}>
+          <Close
+            color={"#000"}
+            size={25}
+            className={styles.close_icon}
+            onClick={() => toggleDrawer("left", false)}
+          />
         </div>
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
@@ -105,10 +108,22 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     ) : (
       <>
         {mobileCityDrawer && DrawerName !== "menu" && (
-          <div className="relative" onClick={toggleDrawer("bottom", false)}>
+          <div
+            className="relative"
+            onClick={() => toggleDrawer("bottom", false)}>
             {/* <p onClick={toggleDrawer("bottom", false)}> */}
-            <div className={styles.bottom_close_icon}>
-              <Close color={"#000"} size={20} />
+            <div
+              className={styles.bottom_close_icon}
+              onClick={() => console.log("print")}>
+              <Close
+                color={"#000"}
+                size={20}
+                className={"z-30"}
+                onClick={() => {
+                  toggleDrawer("bottom", false);
+                  console.log("click");
+                }}
+              />
             </div>
             {/* </p> */}
           </div>
@@ -124,7 +139,16 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 ? toggleDrawer("bottom", false)
                 : toggleDrawer("left", false);
             }}>
-            <Close color={"#000"} size={25} className={styles.close_icon} />
+            <Close
+              color={"#000"}
+              size={25}
+              className={styles.close_icon}
+              onClick={() => {
+                mobileCityDrawer && DrawerName !== "menu"
+                  ? toggleDrawer("bottom", false)
+                  : toggleDrawer("left", false);
+              }}
+            />
           </div>
           <div className={`${styles.drawer_content}`}>
             <h1 className={styles.select_heading}>Select your city</h1>
@@ -137,6 +161,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   onClick={() => {
                     dispatch(selectedCityId(city?.id));
                     dispatch(selectedCityName(city?.list_value));
+                    toggleDrawer("bottom", false);
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".svg"}
@@ -155,7 +180,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 Download mobile app
               </button>
               <div className={styles.download_qr_wrapper}>
-                <Image src={Images.DownloadQR} alt="download-qr" />
+                <Image src={Images.DownloadQR} alt="download-QR" />
                 <p className={styles.qr_text}>
                   <span className={styles.qr_text_span}>100+</span>People have
                   already downloaded our app 🎉

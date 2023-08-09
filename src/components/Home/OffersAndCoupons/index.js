@@ -70,7 +70,7 @@ const OffersAndCoupons = () => {
       <div className={styles.cards_wrapper} ref={scrollRef} id="slider">
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
-            key={index}
+            key={index.toString()}
             className={styles.card}
             onClick={() => {
               handleCopyClick(item.coupon_code);

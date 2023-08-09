@@ -14,7 +14,7 @@ const FrequentlyAskedQuestions = () => {
       <div>
         <div className={styles.QuesAnsArray_div}>
           {str.QuesAnsArray?.map((item, index) => (
-            <div key={index}>
+            <div key={index.toString()}>
               <SingleQuestion ques={item?.ques} ans={item?.ans} />
             </div>
           ))}

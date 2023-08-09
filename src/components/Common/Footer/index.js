@@ -16,12 +16,12 @@ const Footer = () => {
 
       <div className={styles.pointers_div}>
         {str.array.map((item, index) => (
-          <div key={index} className={styles.head_wrapper}>
+          <div key={index.toString()} className={styles.head_wrapper}>
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
               {item.points.map((t, i) => (
                 <p
-                  key={i}
+                  key={i.toString()}
                   className={styles.points}
                   onClick={() => console.log("clicked")}>
                   {t?.text}
@@ -33,7 +33,11 @@ const Footer = () => {
         <div className={styles.need_help_box}>
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
-            <Image className={styles.phoneImg} alt="" src={FooterIcons.Phone} />
+            <Image
+              className={styles.phoneImg}
+              alt="phone-icon"
+              src={FooterIcons.Phone}
+            />
             <div>
               <p className={styles.contact}>{str.contact}</p>
               <p className={styles.time}>{str.time}</p>
@@ -42,8 +46,8 @@ const Footer = () => {
           <div className={styles.social_media_icons_div}>
             {FooterIcons.social_media_icons.map((item, index) => (
               <Image
-                key={index}
-                alt="sm icons"
+                key={index.toString()}
+                alt={item?.icon}
                 src={item?.icon}
                 className={styles.sm_icon}
                 onClick={() => console.log("cliked")}
@@ -57,7 +61,11 @@ const Footer = () => {
 
       <div className="xl:hidden">
         <div className={styles.contact_div}>
-          <Image className={styles.phoneImg} alt="" src={FooterIcons.Phone} />
+          <Image
+            className={styles.phoneImg}
+            alt="phone-icon"
+            src={FooterIcons.Phone}
+          />
           <div>
             <p className={styles.contact}>{str.contact}</p>
             <p className={styles.time}>{str.time}</p>
@@ -65,11 +73,11 @@ const Footer = () => {
         </div>
 
         <div className={styles.social_media_icons_div}>
-          {FooterIcons.social_media_icons.map((item, index) => (
+          {FooterIcons?.social_media_icons?.map((item, index) => (
             <Image
-              key={index}
-              alt="sm icons"
-              src={item.icon}
+              key={index.toString()}
+              alt={item?.icon}
+              src={item?.icon}
               className={styles.sm_icon}
               onClick={() => console.log("cliked")}
             />
@@ -86,7 +94,7 @@ const Footer = () => {
           }>
           <Image
             src={FooterIcons.GoToTopIcon}
-            alt="go to top"
+            alt="go-to-top-icon"
             className={styles.goToTopIcon}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>

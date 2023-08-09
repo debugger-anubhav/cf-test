@@ -75,7 +75,7 @@
   @apply text-[#7895B0] font-bold text-24 leading-[24px];
 }
 .bottom_close_icon {
-  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full;
+  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4;
   /* -top-11  */
 }
 .-MuiPaper-root-MuiDrawer-paper {

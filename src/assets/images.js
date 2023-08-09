@@ -101,7 +101,4 @@ export const HeroBannerImages = {
   HeroBannerImageOne: Mobile + "rent-now-one.webp",
   HeroBannerImageTwo: Mobile + "rent-now-two.webp",
   HeroBannerImageThree: Mobile + "clearance.webp",
-  // HeroBannerImageOne: Mobile + "carousel-first.png",
-  // HeroBannerImageTwo: Mobile + "carousel-second.png",
-  // HeroBannerImageThree: Mobile + "carousel-third.png",
 };

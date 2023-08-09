@@ -72,8 +72,13 @@ export const Icons = {
   Search,
 };
 
-export const Close = ({size, color, className}) => (
-  <IoClose size={size} color={color} className={className} />
+export const Close = ({size, color, className, onClick}) => (
+  <IoClose
+    size={size}
+    color={color}
+    className={className}
+    onClick={() => onClick}
+  />
 );
 export const DownArrow = ({size, color, className}) => (
   <IoMdArrowDropdown size={size} color={color} className={className} />

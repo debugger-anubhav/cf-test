@@ -92,16 +92,16 @@ const RentFurnitureAndAppliances = () => {
         <>
           <div className={styles.rent_furniture_skeleton}>
             {RentFurniture.map((item, index) => (
-              <>
+              <div key={index.toString()}>
                 <Skeleton variant="rectangular" height={310} className="mb-4" />
-              </>
+              </div>
             ))}
           </div>
         </>
       ) : (
         <div className={styles.card_div}>
           {RentFurniture?.map((item, index) => (
-            <div key={index} className={styles.card_wrapper}>
+            <div key={index.toString()} className={styles.card_wrapper}>
               <img
                 src={item.img}
                 alt="RentFurnitureImage"

@@ -89,7 +89,7 @@ const CustomerRating = () => {
 
       <div className={styles.card_wrapper} ref={scrollRef} id="imageslider">
         {reviews?.map((item, index) => (
-          <div key={index} className={styles.card}>
+          <div key={index.toString()} className={styles.card}>
             <div className={styles.row}>
               <div className="flex">
                 <img

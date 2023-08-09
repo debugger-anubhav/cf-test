@@ -1,57 +1,55 @@
-import * as React from "react";
-import Popover from "@mui/material/Popover";
 import {DownArrow} from "@/assets/icon";
 import styles from "./style.module.css";
+import * as React from "react";
+import Popover from "@mui/material/Popover";
 
-export default function PopOver({list, item}) {
+const PopOver = ({list, item}) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  const handlePopoverOpen = event => {
+  const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handlePopoverClose = () => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
 
   const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
   return (
     <div>
-      <div
-        // aria-owns={open ? 'mouse-over-popover' : undefined}
-        aria-haspopup="true"
-        onMouseEnter={handlePopoverOpen}
-        onMouseLeave={handlePopoverClose}
-        className="flex items-center whitespace-nowrap">
+      <button
+        onClick={handleClick}
+        className="flex items-center whitespace-nowrap cursor-pointer"
+        onMouseEnter={handleClick}>
         {item}
         <DownArrow
           size={20}
           color={"#45454A"}
           className={open ? styles.arrow_up : styles.arrow_down}
         />
-      </div>
+      </button>
       <Popover
-        id="mouse-over-popover"
-        sx={{
-          pointerEvents: "none",
-          marginTop: "0.9rem",
-        }}
+        id={id}
         open={open}
         anchorEl={anchorEl}
+        onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus>
-        <div className={styles.sub_item_wrapper}>
-          <p className={styles.sub_item}>All</p>
+        sx={{
+          marginTop: "0.9rem",
+        }}>
+        <div className={styles.sub_item_wrapper} onMouseLeave={handleClose}>
+          <p className={styles.sub_item} onClick={handleClose}>
+            All
+          </p>
           {list?.map((item, index) => (
-            <p className={styles.sub_item} key={index.toString()}>
+            <p
+              className={styles.sub_item}
+              key={index.toString()}
+              onClick={handleClose}>
               {item?.cat_name}
             </p>
           ))}
@@ -59,4 +57,5 @@ export default function PopOver({list, item}) {
       </Popover>
     </div>
   );
-}
+};
+export default PopOver;
