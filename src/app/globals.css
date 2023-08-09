@@ -71,3 +71,7 @@ body h1 h2 h3 h4 h5 h6 p {
 .skeleton_product_card {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
 }
+/* 
+.slick-slide slick-active{
+  @apply w-fit gap-4 xl:gap-6 3xl:gap-8;
+} */

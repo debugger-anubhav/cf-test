@@ -78,3 +78,83 @@
   /* stroke-width: 2px; */
   /* stroke: var(--grey-grey-300, #DDDDDF); */
 }
+
+/* .conatiner_wrapper {
+  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.container {
+  @apply flex w-full;
+}
+.listings {
+  @apply flex w-full items-center flex-wrap list-none;
+}
+.list {
+  @apply mr-[15px] relative inline-flex items-center font-Poppins;
+}
+.arrow {
+  @apply w-0;
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid rgba(0, 0, 0, 0.22);
+  position: absolute;
+  right: -10px;
+}
+.route_text {
+  @apply text-[#0e1113] text-14 font-normal font-Poppins;
+}
+.inner_banner {
+  @apply flex justify-center w-full h-auto;
+}
+.heading {
+  @apply text-45454A font-Poppins text-24 font-medium leading-10 tracking-headingOne pt-3 pb-4;
+  font-feature-settings: "ss02" on;
+}
+.category_wrapper {
+  @apply flex w-full;
+}
+.category_container_box {
+  @apply w-[156.558px] h-[117.419px] bg-[#F6F5F8] flex flex-col justify-center items-center mr-4;
+}
+.category_container {
+  @apply text-71717A font-Poppins text-14 font-medium leading-[20.274p] tracking-desc mr-3;
+}
+.filter_sort_section {
+  @apply flex justify-between items-center pt-12;
+}
+.filter {
+  @apply flex px-4 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-[#71717A] relative;
+}
+.filter_text_container {
+  @apply flex w-[157px];
+}
+.filter_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A;
+}
+.arrow_down {
+  transition: transform 330ms ease;
+}
+.arrow_up {
+  transition: transform 330ms ease;
+  transform: rotate(180deg);
+}
+.filter_sort_Dropdown_container {
+  @apply flex w-[228px] flex-col justify-center gap-6 rounded-2xl border-[2px] border-71717A absolute bg-white z-50 mt-3 p-4;
+}
+.sort_Dropdown_container {
+  @apply flex w-[228px] flex-col justify-center right-20 gap-6 rounded-2xl border-[2px] border-71717A absolute bg-white z-50 mt-3 p-4;
+}
+.option_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A;
+}
+.sortBy_container {
+  @apply flex  justify-center items-center;
+}
+.sortBy_text {
+  @apply text-71717A font-Poppins text-16 font-normal leading-6 pr-2;
+}
+.horizontal_line {
+  @apply my-9 w-full h-[2px] bg-[#DDDDDF];
+  /* stroke-width: 2px; */
+/* stroke: var(--grey-grey-300, #DDDDDF); */

@@ -1,5 +1,6 @@
 .wrapper {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem] cursor-pointer;
+  /* @apply w-[50%] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem] cursor-pointer; */
   animation-duration: 0.75s;
   transition: all 0.15s ease;
 }

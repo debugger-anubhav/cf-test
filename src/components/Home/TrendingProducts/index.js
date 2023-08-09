@@ -6,8 +6,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+// import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 import Skeleton from "@mui/material/Skeleton";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const TrendingProducts = () => {
   const dispatch = useDispatch();
@@ -29,33 +32,83 @@ const TrendingProducts = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const scrollRef = useHorizontalScroll();
+  // const scrollRef = useHorizontalScroll();
 
-  const tabBox = document.querySelector("#galleryDragger");
+  // const tabBox = document.querySelector("#galleryDragger");
 
-  let isDragging = false;
+  // let isDragging = false;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
+  // const dragging = e => {
+  //   if (!isDragging) return;
+  //   tabBox.scrollLeft -= e.movementX;
+  // };
+  // const dragStop = () => {
+  //   isDragging = false;
+  // };
+  // tabBox?.addEventListener("mousedown", () => (isDragging = true));
+  // tabBox?.addEventListener("mousemove", dragging);
+  // document.addEventListener("mouseup", dragStop);
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 200,
+    slidesToShow: 3.44,
+    slidesToScroll: 3.44,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2.44,
+          slidesToScroll: 2.44,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1.44,
+          slidesToScroll: 1.44,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1.24,
+          slidesToScroll: 1.24,
+        },
+      },
+      {
+        breakpoint: 360,
+        settings: {
+          slidesToShow: 1.09,
+          slidesToScroll: 1.09,
+        },
+      },
+    ],
   };
-  const dragStop = () => {
-    isDragging = false;
-  };
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
   return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className={styles.card_box} ref={scrollRef} id="galleryDragger">
-        {/* <ScrollMenu> */}
+      {/* <div className={styles.card_box} ref={scrollRef} id="galleryDragger"> */}
+      {/* <div className={styles.card_box}> */}
+      <Slider {...settings}>
         {homePageReduxData?.trendindProduct?.map((item, index) => (
-          <div key={index.toString()}>
+          <div key={index.toString()} className="!w-[40%]">
             {loading ? (
               <Skeleton
                 variant="rectangular"
@@ -79,9 +132,9 @@ const TrendingProducts = () => {
             )}
           </div>
         ))}
-        {/* </ScrollMenu> */}
-      </div>
+      </Slider>
     </div>
-  ) : null;
+  ) : // </div>
+  null;
 };
 export default TrendingProducts;

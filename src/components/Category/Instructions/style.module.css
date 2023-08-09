@@ -1,0 +1,6 @@
+.main_wrapper {
+  @apply macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pb-[64px];
+}
+.heading {
+  @apply text-45454A font-Poppins text-24 font-semibold leading-10 tracking-headingOne pb-8;
+}

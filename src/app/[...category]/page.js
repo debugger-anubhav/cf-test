@@ -10,8 +10,18 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import Footer from "@/components/Common/Footer";
 import MenuList from "@/components/Common/MenuList";
-import SubHeader from "@/components/Category/SubHeader/SubHeader";
 import SingleProduct from "@/components/Category/SingleProduct/SingleProduct";
+import ProductSet from "@/components/Category/ProductSet/ProductSet";
+import SoldOutProduct from "@/components/Category/SoldOutProduct/SoldOutProduct";
+import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import SavedItem from "@/components/Category/SavedItem/SavedItem";
+import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+import TrendingItem from "@/components/Category/TrendingItem/TrendingItem";
+import Instruction from "@/components/Category/Instructions/Instruction";
+import HappySubscribers from "@/components/Home/HappySubscribers";
+import CustomerRating from "@/components/Home/Rating";
+import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 
 export default function Home() {
   const queryClient = new QueryClient();
@@ -25,6 +35,16 @@ export default function Home() {
           <MenuList />
           <SubHeader />
           <SingleProduct />
+          <ProductSet />
+          <SoldOutProduct />
+          <RecentlyViewedProduct />
+          <SavedItem />
+          <TrendingItem />
+          <Instruction />
+          <HappySubscribers />
+          <CustomerRating />
+          <HasselFreeServicesCards />
+          <FrequentlyAskedQuestions />
           <Footer />
         </div>
       </Provider>

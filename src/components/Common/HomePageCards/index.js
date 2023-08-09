@@ -30,6 +30,7 @@ const Card = ({
           width={241}
           height={181}
         />
+
         {/* ----------- */}
         {showincludedItem && (
           <div className={styles.item_included_container}>

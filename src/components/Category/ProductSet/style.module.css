@@ -1,0 +1,9 @@
+.main_wrapper {
+  @apply macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.main_container {
+  @apply flex flex-wrap  my-4;
+}
+.heading {
+  @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
+}

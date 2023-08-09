@@ -43,11 +43,10 @@ const RecentlyViewedProduct = () => {
     isDragging = false;
   };
 
-  // if (tabBox) {
   tabBox?.addEventListener("mousedown", () => (isDragging = true));
   tabBox?.addEventListener("mousemove", dragging);
-  // }
   document.addEventListener("mouseup", dragStop);
+
   const scrollRef = useHorizontalScroll();
 
   return homePageReduxData?.recentProduct?.length ? (
