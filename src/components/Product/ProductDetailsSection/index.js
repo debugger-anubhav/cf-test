@@ -187,6 +187,12 @@ const ProductDetails = ({category, itemName}) => {
             </div>
             <p className={styles.opt_for}>{str.opt_for}</p>
             <p className={styles.protect}>{str.protect}</p>
+
+            <div className={styles.cityshield_prices}>
+              <p className={styles.currentPrice}>₹250 /mo</p>
+              <p className={styles.originalPrice}>₹400 / mo</p>
+              <div className={styles.discount}>-60% OFF</div>
+            </div>
           </div>
         </div>
       </div>
