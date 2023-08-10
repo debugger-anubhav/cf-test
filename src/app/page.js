@@ -13,34 +13,55 @@ import HeroBanner from "@/components/Home/HeroBanner";
 import loadable from "@loadable/component";
 // const MenuList = loadable(() => import("@/components/Common/MenuList"));
 import MenuList from "@/components/Common/MenuList";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
+import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
-    // fallback:<div>lsjfskldg/............</div>
+    fallback: <RentFurnitureSkeleton />,
   },
 );
-const RecentlyViewedProduct = loadable(() =>
-  import("@/components/Home/RecentlyViewedProduct"),
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
-const TrendingProducts = loadable(() =>
-  import("@/components/Home/TrendingProducts"),
+const TrendingProducts = loadable(
+  () => import("@/components/Home/TrendingProducts"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
-const OffersAndCoupons = loadable(() =>
-  import("@/components/Home/OffersAndCoupons"),
+const OffersAndCoupons = loadable(
+  () => import("@/components/Home/OffersAndCoupons"),
+  {fallback: <OffersSkeleton />},
 );
-const NewlyLaunched = loadable(() => import("@/components/Home/NewlyLaunched"));
+const NewlyLaunched = loadable(
+  () => import("@/components/Home/NewlyLaunched"),
+  {fallback: <NewlyLauncedSkeleton />},
+);
+
 const DownloadForMobile = loadable(() =>
   import("@/components/Home/DownloadForMobile"),
 );
-const PreDesignCombos = loadable(() =>
-  import("@/components/Home/PredesignCombos"),
+const PreDesignCombos = loadable(
+  () => import("@/components/Home/PredesignCombos"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
 const HasselFreeServicesCards = loadable(() =>
   import("@/components/Home/HasselFreeServicesCards"),
 );
-const LimetedPreiodDiscount = loadable(() =>
-  import("@/components/Home/LimetedPreiodDiscount"),
+const LimetedPreiodDiscount = loadable(
+  () => import("@/components/Home/LimetedPreiodDiscount"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
 const RentNowBanner = loadable(() => import("@/components/Home/RentNowBanner"));
 const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"));

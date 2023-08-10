@@ -49,3 +49,9 @@
   width: calc(33.33% - 20px);
   flex: calc(33.33% - 20px);
 }
+.Skeleton_text {
+  @apply text-32 w-1/2;
+}
+.Skeleton_sub_text {
+  @apply text-16 w-2/5;
+}

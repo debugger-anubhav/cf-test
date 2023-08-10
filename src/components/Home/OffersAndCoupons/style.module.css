@@ -36,3 +36,12 @@
 .right {
   @apply right-0;
 }
+.Skeleton_text {
+  @apply text-18 w-1/2;
+}
+.offer_card_skeleton {
+  @apply flex w-full h-[90px];
+}
+.offer_coupon_skeleton {
+  @apply flex mr-4 w-full h-full my-6;
+}
