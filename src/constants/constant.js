@@ -217,6 +217,74 @@ export const HasselFreeData = [
   },
 ];
 
+export const productItemsIncludedDetails = [
+  {
+    img: "",
+    name: "storage 1",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 2",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 3",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 4",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 5",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+];
+
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
 
