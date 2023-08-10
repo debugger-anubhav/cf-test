@@ -156,7 +156,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => (
                 <div
-                  className={styles.city_wrapper}
+                  className={`${styles.city_wrapper} ${
+                    homePageReduxData?.cityName === city?.list_value &&
+                    "border-[2px] border-primary"
+                  }`}
                   key={index.toString()}
                   onClick={() => {
                     dispatch(selectedCityId(city?.id));
