@@ -1,0 +1,18 @@
+.main_container {
+  @apply relative text-fff bg-[#457A47] rounded-xl p-4 md:p-5 xl:px-6 xl:py-8   mx-4 md:mx-[70px] xl:mx-[90px] macbook:mx-[122px] 3xl:mx-[160px] font-Poppins my-8 xl:my-[88px];
+}
+.head_div {
+  @apply flex gap-2 items-center;
+}
+.head {
+  @apply text-18 xl:text-24 font-medium leading-5 tracking-[-0.36px] xl:tracking-[-0.48px];
+}
+.leaf_icon {
+  @apply w-[30px] h-[30px];
+}
+.desc {
+  @apply w-[137px] mobile:w-[176px] xs:w-[70%] md:w-[80%] lg:w-full mt-2 md:mt-4 xl:mt-6 text-12 xl:text-16 tracking-[-0.24px] xl:tracking-0.3;
+}
+.bg_img {
+  @apply absolute right-0 bottom-0 w-[100px] mobile:w-[136px] h-[91px] lg:w-[193px] lg:h-full;
+}
