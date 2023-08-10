@@ -17,6 +17,7 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
+import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -63,7 +64,10 @@ const LimetedPreiodDiscount = loadable(
     fallback: <ProductRowSkeleton />,
   },
 );
-const RentNowBanner = loadable(() => import("@/components/Home/RentNowBanner"));
+const RentNowBanner = loadable(
+  () => import("@/components/Home/RentNowBanner"),
+  {fallback: <RentNowBannersSkeleton />},
+);
 const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"));
 const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 const CustomerRating = loadable(() => import("@/components/Home/Rating"));
