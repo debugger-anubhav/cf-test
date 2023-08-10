@@ -23,6 +23,7 @@ const ProductDetails = ({category, itemName}) => {
 
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState(3);
+  const [inWishList, setInWishList] = React.useState(false);
 
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
@@ -122,7 +123,8 @@ const ProductDetails = ({category, itemName}) => {
             <div className={styles.header_div}>
               <Heart
                 className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}
-                color={"#C0C0C6"}
+                color={inWishList ? "#D96060" : "#C0C0C6"}
+                onClick={() => setInWishList(!inWishList)}
               />
               <ShareIcon
                 className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}

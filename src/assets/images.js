@@ -1,6 +1,9 @@
 import partner from "./partnership.svg";
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
+// demo produt page  images
+import CtaImage from "./product_cta.svg";
+
 // download for app section
 import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
 import DownloadBackgroundImage from "./home_page_assets/downloadForMobile/DownloadBackgroundImage.svg";
@@ -101,4 +104,10 @@ export const HeroBannerImages = {
   HeroBannerImageOne: Mobile + "rent-now-one.webp",
   HeroBannerImageTwo: Mobile + "rent-now-two.webp",
   HeroBannerImageThree: Mobile + "clearance.webp",
+};
+
+export const ProductPageImages = {
+  // CtaImage: Desktop + "illustration.webp",
+  CtaImage,
+  LeafIcon: Desktop + "leaf-icon.svg",
 };

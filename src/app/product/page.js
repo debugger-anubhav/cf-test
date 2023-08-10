@@ -9,6 +9,8 @@ import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import ProductDetails from "@/components/Product/ProductDetailsSection";
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
+import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
+import BenefitsCta from "@/components/Product/BenefitsCta";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -26,6 +28,8 @@ const ProductPage = () => {
           <div className="-mt-8">
             <OffersAndCoupons />
           </div>
+          <ItemsIncluded noOfItems={5} />
+          <BenefitsCta />
         </div>
       </Provider>
     </QueryClientProvider>
