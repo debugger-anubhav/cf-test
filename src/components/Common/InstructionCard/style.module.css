@@ -1,12 +1,12 @@
 .card_container {
-  @apply flex flex-col w-[281px] pr-6;
+  @apply flex flex-col w-[281px] mobile:w-[211px] mobile:rounded-[4px] pr-6 mobile:pr-4;
 }
 .text_container {
-  @apply flex flex-col;
+  @apply flex flex-col mobile:w-[211px];
 }
 .heading {
-  @apply flex text-[#222] font-Poppins text-20 font-medium tracking-heading leading-normal pt-3;
+  @apply flex text-[#222] font-Poppins text-20 mobile:text-16 font-medium tracking-heading mobile:tracking-0.3 leading-normal pt-3;
 }
 .content {
-  @apply flex text-9A9AA2 font-Poppins text-14 font-normal leading-5 pt-2;
+  @apply flex text-9A9AA2 font-Poppins text-14 mobile:text-12 font-normal leading-5 mobile:tracking-0.24 pt-2;
 }

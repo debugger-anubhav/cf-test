@@ -1,39 +1,17 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "./style.module.css";
-import {DownPopUpArrow} from "@/assets/icon";
-import {CategoryFilterData, sortByText} from "@/constants/constant";
+// import {CloseOutline, DownPopUpArrow} from "@/assets/icon";
+import {CategoryFilterData} from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
+import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
+import {useSelector} from "react-redux";
 
 const SubHeader = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorElSortBy, setAnchorElSortBy] = useState(null);
-  const [openFilterOptions, setOpenFilterOptions] = useState(false);
-  const [filterIndex, setFilterIndex] = useState(false);
-  const open = Boolean(anchorEl);
-  const openSortby = Boolean(anchorElSortBy);
+  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
+    state => state.homePagedata,
+  );
 
-  console.log(filterIndex);
-
-  const handlePopoverOpen = event => {
-    // console.log(text, "textghjk")
-    // text === "filter" ? (setAnchorEl(event.currentTarget)) : (setAnchorElSortBy(event.currentTarget))
-    setAnchorEl(event.currentTarget);
-  };
-  const handlePopoverOpenSortBy = event => {
-    setAnchorElSortBy(event.currentTarget);
-  };
-
-  const handlePopoverClose = () => {
-    setAnchorEl(null);
-    setAnchorElSortBy(null);
-  };
-
-  const handleOpenSubCategory = (e, index) => {
-    setOpenFilterOptions(!openFilterOptions);
-    setFilterIndex(index);
-  };
-
-  // console.log(openFilterOptions, "openFilterOptions")
+  console.log(getAllAndSubCategoryData, "allAndSubCategoryallAndSubCategory");
 
   return (
     <div className={styles.conatiner_wrapper}>
@@ -67,95 +45,39 @@ const SubHeader = () => {
           );
         })}
       </div>
-      {/*  */}
+
       <div className={styles.filter_sort_section}>
         <div className={styles.filter}>
-          <div className={styles.filter_text_container}>
-            <p className={styles.filter_text}>Filter</p>
-          </div>
-          <div
-            aria-haspopup="true"
-            onMouseOver={handlePopoverOpen}
-            onMouseOut={handlePopoverClose}>
-            <DownPopUpArrow
-              size={20}
-              color={"#45454A"}
-              className={open ? styles.arrow_up : styles.arrow_down}
-              onClick={e => handleOpenSubCategory(e)}
-            />
+          <CategoryPopover btnName={"click"} filterName={"Filter"} />
+        </div>
+        <div className="flex items-center justify-center ">
+          <p className={styles.option_text}>Sortby</p>
+          <div className={styles.filter}>
+            <CategoryPopover btnName={"click"} filterName={"Default"} />
           </div>
         </div>
         {/* ------------------------------------------------------------------------------------------------------ */}
-        <div className={styles.sortBy_container}>
-          <p className={styles.sortBy_text}>Sort by</p>
-          <div className={styles.filter}>
-            <div className={styles.filter_text_container}>
-              <p className={styles.filter_text}>Default</p>
-            </div>
-            <div
-              aria-haspopup="true"
-              onMouseOver={handlePopoverOpenSortBy}
-              onMouseOut={handlePopoverClose}>
-              <DownPopUpArrow
-                size={20}
-                color={"#45454A"}
-                className={openSortby ? styles.arrow_up : styles.arrow_down}
-                onClick={e => handleOpenSubCategory(e)}
-              />
-            </div>
-          </div>
-        </div>
       </div>
-      {open && (
-        <div className={styles.filter_sort_Dropdown_container}>
-          {CategoryFilterData.map((ele, index) => {
-            return (
-              <div
-                className="pb-[6.5px] flex justify-between"
-                key={index.toString()}>
-                <p className={styles.option_text}>{ele.item}</p>
-                <input
-                  type="checkbox"
-                  id="vehicle1"
-                  name="vehicle1"
-                  value="Bike"
-                />
-              </div>
-            );
-          })}
-        </div>
-      )}
-
-      {openSortby && (
-        <div className={styles.sort_Dropdown_container}>
-          {sortByText.map((ele, index) => {
-            return (
-              <div
-                className="pb-[6.5px] flex justify-between"
-                key={index.toString()}>
-                <p className={styles.option_text}>{ele.text}</p>
-                <input
-                  type="radio"
-                  id="html"
-                  name="fav_language"
-                  value="HTML"></input>
-                {/* <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike" /> */}
-              </div>
-            );
-          })}
-        </div>
-      )}
       <div className={styles.horizontal_line}></div>
       <div className="flex flex-wrap">
+        <div className={styles.single_filter_mobile}>
+          <p className={styles.clear_All}>Clear all</p>
+        </div>
         {CategoryFilterData.map((item, index) => {
           return (
-            <div
-              className="flex justify-between items-center mr-4 mb-4"
-              key={index.toString()}>
-              <FilterCard text={item.item} />
-            </div>
+            <>
+              <div
+                className={styles.filter_card}
+                // className="flex justify-between items-center mr-4 mb-4"
+                key={index.toString()}>
+                <FilterCard text={item.item} />
+              </div>
+            </>
           );
         })}
+        <div className={styles.single_filter}>
+          <p className={styles.clear_All}>Clear all</p>
+        </div>
       </div>
     </div>
   );

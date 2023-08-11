@@ -5,8 +5,8 @@ import {CloseOutline} from "@/assets/icon";
 const FilterCard = ({text}) => {
   return (
     <div className={style.main_container}>
-      <CloseOutline />
-      {text}
+      <CloseOutline color={"#597492"} />
+      <p className={style.filter_card_text}>{text}</p>
     </div>
   );
 };

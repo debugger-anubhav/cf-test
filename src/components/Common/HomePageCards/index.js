@@ -13,6 +13,7 @@ const Card = ({
   hoverCardImage,
   // hoverCard,
   itemIncluded,
+  soldOut,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
@@ -38,6 +39,11 @@ const Card = ({
               className={
                 styles.item_icluded_text
               }>{`${itemIncluded} items included`}</p>
+          </div>
+        )}
+        {soldOut && (
+          <div className={styles.soldout_tag}>
+            <p className={styles.tag_text}>SOLD OUT</p>
           </div>
         )}
       </div>

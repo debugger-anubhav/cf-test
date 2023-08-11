@@ -52,34 +52,44 @@ const TrendingProducts = () => {
   const settings = {
     dots: false,
     infinite: false,
+    loop: true,
     speed: 200,
     slidesToShow: 3.44,
     slidesToScroll: 3.44,
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1280,
+        breakpoint: 1350,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 3,
-          infinite: true,
-          dots: true,
+          // infinite: true,
+          // dots: true,
         },
       },
       {
-        breakpoint: 1024,
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 2.7,
+          slidesToScroll: 2.7,
+          // infinite: true,
+          // dots: true,
+        },
+      },
+      {
+        breakpoint: 980,
         settings: {
           slidesToShow: 2.44,
           slidesToScroll: 2.44,
-          infinite: true,
-          dots: true,
+          // infinite: true,
+          // dots: true,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1.44,
-          slidesToScroll: 1.44,
+          slidesToShow: 1.5,
+          slidesToScroll: 1.5,
           initialSlide: 2,
         },
       },

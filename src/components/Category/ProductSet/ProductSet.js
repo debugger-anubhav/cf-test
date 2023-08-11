@@ -7,7 +7,7 @@ const ProductSet = () => {
     <div className={style.main_wrapper}>
       <h2 className={style.heading}>Product sets</h2>
       <div className={style.main_container}>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -23,7 +23,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -39,7 +39,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -55,7 +55,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -71,7 +71,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -87,7 +87,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -103,7 +103,7 @@ const ProductSet = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={

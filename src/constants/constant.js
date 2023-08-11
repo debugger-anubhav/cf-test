@@ -218,6 +218,7 @@ export const CategoryFilterData = [
   {item: "Bedside And Storage"},
   {item: "Mattress"},
   {item: "Bedsheet And Pillow"},
+  {item: "Bedsheet And Pillow"},
 ];
 export const sortByText = [
   {text: "New"},

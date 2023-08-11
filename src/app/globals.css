@@ -75,3 +75,6 @@ body h1 h2 h3 h4 h5 h6 p {
 .slick-slide slick-active{
   @apply w-fit gap-4 xl:gap-6 3xl:gap-8;
 } */
+#filter-popover .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  border-radius: 16px !important;
+}

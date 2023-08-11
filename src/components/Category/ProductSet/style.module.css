@@ -3,7 +3,20 @@
 }
 .main_container {
   @apply flex flex-wrap  my-4;
+  /* @apply flex flex-wrap mobile:flex-col my-4; */
 }
 .heading {
   @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
+}
+
+.card_box {
+  @apply flex mr-4 mb-4 p-3 bg-white;
+  -webkit-transition: box-shadow 0.2s ease-out;
+  width: calc(33.33% - 20px);
+  cursor: pointer;
+}
+.card_box:hover {
+  box-shadow: 1px 8px 20px grey;
+  -webkit-transition: box-shadow 0.2s ease-in;
+  flex-basis: calc(33.33% - 20px);
 }

@@ -6,7 +6,7 @@ const Instruction = () => {
   return (
     <div className={style.main_wrapper}>
       <p className={style.heading}>Care Instructions</p>
-      <div className="flex">
+      <div className="flex overflow-x-scroll w-full">
         <InstructionCard />
         <InstructionCard />
         <InstructionCard />

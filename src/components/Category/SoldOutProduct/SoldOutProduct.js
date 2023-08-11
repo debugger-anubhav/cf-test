@@ -7,7 +7,7 @@ const SoldOutProduct = () => {
     <div className={style.main_wrapper}>
       <h2 className={style.heading}>Sold out</h2>
       <div className={style.main_container}>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -16,6 +16,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -23,7 +24,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -32,6 +33,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -39,7 +41,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -48,6 +50,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -55,7 +58,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -64,6 +67,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -71,7 +75,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -80,6 +84,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -87,7 +92,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -96,6 +101,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -103,7 +109,7 @@ const SoldOutProduct = () => {
             // }
           />
         </div>
-        <div className="flex flex-wrap mr-4 mb-4">
+        <div className={style.card_box}>
           <Card
             // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
             cardImage={
@@ -112,6 +118,7 @@ const SoldOutProduct = () => {
             desc={"xyzAbc"}
             originalPrice={"1000"}
             currentPrice={"750"}
+            soldOut={true}
             // hoverCardImage={
             //     item?.image?.split(",").filter(item => item).length > 1
             //         ? productImageBaseUrl + item?.image?.split(",")[1]

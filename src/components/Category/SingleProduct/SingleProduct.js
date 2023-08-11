@@ -5,7 +5,7 @@ import Card from "@/components/Common/HomePageCards";
 const SingleProduct = () => {
   return (
     <div className={style.main_container}>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -21,7 +21,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -37,7 +37,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -53,7 +53,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -69,7 +69,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -85,7 +85,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
@@ -101,7 +101,7 @@ const SingleProduct = () => {
           // }
         />
       </div>
-      <div className="flex flex-wrap mr-4 mb-4">
+      <div className={style.card_box}>
         <Card
           // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
           cardImage={
