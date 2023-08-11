@@ -1,7 +1,7 @@
 import axios from "axios";
 import {AppConfig} from "../../../appConfig";
 
-const baseURL = AppConfig.Config.BASE_URL;
+export const baseURL = AppConfig.Config.BASE_URL;
 
 const staticHeaders = () => ({
   Accept: "application/json",

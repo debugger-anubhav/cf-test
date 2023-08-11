@@ -9,7 +9,6 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
-import {RentFurniture} from "@/constants/constant";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,10 @@ const Header = () => {
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
-
+  const {refetch: getTrendingSearch} = useQuery(
+    "trending-search",
+    endPoints.trendingSearchConstants,
+  );
   const {refetch: getSidebarMenuList} = useQuery(
     "sideBarMenuLists",
     endPoints.sidebarMenuLists,
@@ -29,6 +31,9 @@ const Header = () => {
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
+      .catch(err => console.log(err));
+    getTrendingSearch()
+      .then(res => setArr(res?.data?.data))
       .catch(err => console.log(err));
 
     getSidebarMenuList().then(res => {
@@ -67,12 +72,7 @@ const Header = () => {
     };
   }, [openSearchbar]);
 
-  const arr = [
-    "Jade queen size",
-    "Jade queen size",
-    "Jade queen size",
-    "Jade queen size",
-  ];
+  const [arr, setArr] = React.useState(null);
 
   return (
     <>
@@ -166,17 +166,16 @@ const Header = () => {
   );
 };
 export default Header;
-
 // search modal component
 const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
-  const closeBar = useSelector(state => state.homePagedata.announcementBar);
+  const homePageReduxData = useSelector(state => state.homePagedata);
 
   return (
     <div className={styles.backdrop}>
       {/* <div className={` ${styles.search_details_wrapper}`}> */}
       <div
         className={` ${
-          closeBar
+          homePageReduxData?.announcementBar
             ? "w-full absolute top-[65px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
             : "w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
         }
@@ -213,7 +212,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
         <div className={styles.search_open_details} open={open}>
           <p className={styles.search_head}>Recent</p>
           <div className={styles.pills_wrapper}>
-            {arr?.map((item, index) => (
+            {["bad", "furniture", "office", "tabel"]?.map((item, index) => (
               <div key={index.toString()} className={styles.pill}>
                 <RecentIcon className={styles.modal_icon} color={"#E0806A"} />
                 <p className={styles.pill_text}>{item}</p>
@@ -234,15 +233,18 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
           <div className="mt-6">
             <p className={styles.search_head}>Categories</p>
             <div className={styles.categories_wrapper}>
-              {RentFurniture?.map((item, index) => (
+              {homePageReduxData?.category?.map((item, index) => (
                 <div key={index.toString()} className={styles.card_wrapper}>
                   <img
-                    src={item?.img}
+                    src={
+                      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                      item.category_image
+                    }
                     alt="RentFurnitureImages"
                     className={styles.categories_img}
                   />
                   <div>
-                    <h3 className={styles.category_label}>{item?.label}</h3>
+                    <h3 className={styles.category_label}>{item?.cat_name}</h3>
                   </div>
                 </div>
               ))}
