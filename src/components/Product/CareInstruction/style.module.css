@@ -1,0 +1,52 @@
+.main_container {
+  @apply md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-6 md:py-8 xl:py-12 font-Poppins;
+  background:
+    linear-gradient(
+      0deg,
+      rgba(254, 244, 0, 0.01) 0%,
+      rgba(254, 244, 0, 0.01) 100%
+    ),
+    linear-gradient(
+        to bottom right,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      bottom right / 50% 50% no-repeat,
+    linear-gradient(
+        to bottom left,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      bottom left / 50% 50% no-repeat,
+    linear-gradient(
+        to top left,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      top left / 50% 50% no-repeat,
+    linear-gradient(
+        to top right,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      top right / 50% 50% no-repeat;
+}
+.head {
+  @apply px-4 md:px-0 text-20 xl:text-24 text-45454A font-semibold leading-8 xl:leading-10 tracking-0.4 xl:tracking-[-0.48px];
+}
+.card_wrapper {
+  @apply flex mt-8 gap-6 w-full overflow-scroll pl-4 md:pl-0;
+}
+.img {
+  @apply min-w-[281px] h-[240px];
+}
+.card_head {
+  @apply text-16 xl:text-20 font-medium text-222 leading-normal tracking-0.3 xl:tracking-0.4 mt-3;
+}
+.card_desc {
+  @apply text-12 xl:text-14 leading-normal xl:leading-5 text-9A9AA2 mt-2;
+}
