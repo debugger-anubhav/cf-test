@@ -11,4 +11,5 @@ export const endPoints = {
   allAndSubCategory: "fc-categories/getAllCategoriesAndSubCategories",
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
+  trendingSearchConstants: "fc-products/trendingSearchConstants",
 };
