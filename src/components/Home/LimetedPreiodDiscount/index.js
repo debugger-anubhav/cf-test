@@ -69,9 +69,9 @@ const LimetedPreiodDiscount = () => {
                   : productImageBaseUrl + item?.image?.split(",")[0]
               }
               originalPrice={item?.price}
-              currentPrice={item?.product_sale_price}
+              currentPrice={item?.sale_price}
               discount={`${Math.round(
-                ((item?.price - item?.product_sale_price) * 100) / item?.price,
+                ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
             />
           </div>
