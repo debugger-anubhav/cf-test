@@ -11,6 +11,9 @@ import ProductDetails from "@/components/Product/ProductDetailsSection";
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
+import CompleteTheLook from "@/components/Product/CompleteTheLook";
+import CareInstruction from "@/components/Product/CareInstruction";
+import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -30,6 +33,10 @@ const ProductPage = () => {
           </div>
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
+          <CompleteTheLook heading={"Complete The Look"} isbg={false} />
+          <CareInstruction />
+          <RecentlyViewedProduct />
+          <CompleteTheLook heading={"You might also like"} isbg />
         </div>
       </Provider>
     </QueryClientProvider>
