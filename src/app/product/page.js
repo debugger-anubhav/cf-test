@@ -14,6 +14,8 @@ import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import CustomerRating from "@/components/Product/CustomerRatings";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -37,6 +39,8 @@ const ProductPage = () => {
           <CareInstruction />
           <RecentlyViewedProduct />
           <CompleteTheLook heading={"You might also like"} isbg />
+          <CustomerRating />
+          <HappySubscribers />
         </div>
       </Provider>
     </QueryClientProvider>

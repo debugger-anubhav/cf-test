@@ -66,6 +66,7 @@ module.exports = {
         0.6: " -0.64px",
         0.4: " -0.4px",
         0.48: "-0.48px",
+        0.24: "-0.24px",
       },
       animation: {
         fade: "fadeOut 0.5s ease-in-out",
