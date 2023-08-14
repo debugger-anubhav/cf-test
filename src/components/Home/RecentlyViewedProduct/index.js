@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-// import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,25 +7,22 @@ import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
 import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
-import Skeleton from "@mui/material/Skeleton";
 
 const RecentlyViewedProduct = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
-  const [loading, setLoading] = React.useState(true);
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
-    `?cityId=${cityId}&userId=${85757}`,
+    `?cityId=${cityId}&userId=${85760}`,
   );
 
   useEffect(() => {
     recentlyViewed()
       .then(res => {
         dispatch(addRecentlyViewedProduct(res?.data?.data));
-        setLoading(false);
       })
       .catch(err => console.log(err));
   }, []);
@@ -49,14 +45,17 @@ const RecentlyViewedProduct = () => {
 
   const scrollRef = useHorizontalScroll();
 
-  return homePageReduxData?.recentProduct?.length ? (
+  return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
 
-      <div className={styles.recentlyViewed_main} ref={scrollRef} id="gallery">
-        {homePageReduxData?.recentProduct?.map((item, index) => (
-          <div key={index.toString()}>
-            {!loading ? (
+      {homePageReduxData?.recentProduct?.length ? (
+        <div
+          className={styles.recentlyViewed_main}
+          ref={scrollRef}
+          id="gallery">
+          {homePageReduxData?.recentProduct?.map((item, index) => (
+            <div key={index.toString()}>
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 hoverCardImage={
@@ -72,17 +71,12 @@ const RecentlyViewedProduct = () => {
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
               />
-            ) : (
-              <Skeleton
-                variant="rectangular"
-                className="skeleton_product_card"
-              />
-            )}
-          </div>
-        ))}
-      </div>
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
-  ) : null;
+  );
 };
 
 export default RecentlyViewedProduct;

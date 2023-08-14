@@ -1,35 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import {HomePageRentNowBanner} from "@/assets/images";
 import {useRouter} from "next/navigation";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+import {useQuery} from "@/hooks/useQuery";
+import {endPoints} from "@/network/endPoints";
+import {Skeleton} from "@mui/material";
 
 const RentNowBanner = () => {
   const router = useRouter();
-  const RentNowBannerImages = [
-    {
-      img: HomePageRentNowBanner.branded,
-      link: "https://cityfurnish.com/bangalore/home-appliances-rental",
-    },
-    {
-      img: HomePageRentNowBanner.doubleBed,
-      link: "https://cityfurnish.com/things/3921/vesta-king-size-double-bed-with-mattress",
-    },
-    {
-      img: HomePageRentNowBanner.studyTable,
-      link: "https://cityfurnish.com/things/4150/v-leg-4-seater-dining-table-with-4-tang-chairs",
-    },
-    {img: HomePageRentNowBanner.clearanceSale, link: ""},
-    {
-      img: HomePageRentNowBanner.workfromHome,
-      link: "https://cityfurnish.com/pune/office-furniture-rent",
-    },
-    {
-      img: HomePageRentNowBanner.checkOut,
-      link: "https://cityfurnish.com/search/belle",
-    },
-  ];
-  const scrollRef = useHorizontalScroll();
+  const [rentNowBanner, setRentNowBanner] = React.useState(null);
   const tabBox = document.querySelector("#rentNowSlider");
 
   let isDragging = false;
@@ -47,20 +25,28 @@ const RentNowBanner = () => {
   tabBox?.addEventListener("mousemove", dragging);
   // }
   document.addEventListener("mouseup", dragStop);
+  const {refetch: getRentNowBanners} = useQuery(
+    "rentNowBanners",
+    endPoints.rentNowBanners,
+  );
+  useEffect(() => {
+    getRentNowBanners()
+      .then(res => {
+        setRentNowBanner(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
-    <div
-      className={styles.rentNow_Banner_wrapper}
-      ref={scrollRef}
-      id="rentNowSlider">
+    <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card}>
-        {RentNowBannerImages.map((item, index) => (
+        {rentNowBanner?.map((item, index) => (
           <div className={styles.banner_wrapper} key={index.toString()}>
             <img
-              src={item?.img}
-              alt="rant-now-banner-image"
+              src={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
+              alt={item?.image}
               className={styles.banner_img}
-              onClick={() => router.push(item?.link)}
+              onClick={() => router.push(item?.url)}
             />
           </div>
         ))}
@@ -69,3 +55,17 @@ const RentNowBanner = () => {
   );
 };
 export default RentNowBanner;
+
+export const RentNowBannersSkeleton = () => {
+  return (
+    <div className={styles.rentNow_Banner_wrapper}>
+      <div className={styles.banner_card}>
+        {[1, 2, 3, 4, 5, 6].map((item, index) => (
+          <div className={styles.banner_wrapper} key={index.toString()}>
+            <Skeleton variant="rectangular" className="w-full h-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

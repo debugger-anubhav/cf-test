@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@/hooks/useQuery";
 import {offersAndCuponsList} from "@/store/Slices";
 import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+import {Skeleton} from "@mui/material";
 
 const OffersAndCoupons = () => {
   const dispatch = useDispatch();
@@ -70,7 +71,7 @@ const OffersAndCoupons = () => {
       <div className={styles.cards_wrapper} ref={scrollRef} id="slider">
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
-            key={index}
+            key={index.toString()}
             className={styles.card}
             onClick={() => {
               handleCopyClick(item.coupon_code);
@@ -111,3 +112,22 @@ const OffersAndCoupons = () => {
   ) : null;
 };
 export default OffersAndCoupons;
+
+export const OffersSkeleton = () => {
+  return (
+    <div className={`flex flex-col my-8 ${styles.wrapper}`}>
+      <Skeleton variant="text" className={styles.Skeleton_text} />
+      <div className={styles.offer_card_skeleton}>
+        {[1, 2, 3, 4]?.map((item, index) => (
+          <>
+            <Skeleton
+              variant="rectangular"
+              className={styles.offer_coupon_skeleton}
+              key={index.toString()}
+            />
+          </>
+        ))}
+      </div>
+    </div>
+  );
+};

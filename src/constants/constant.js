@@ -180,31 +180,37 @@ export const HappySubscriber = [
 
 export const HasselFreeData = [
   {
+    icon: hasselFreeSection.IconOne,
     backgroungImage: hasselFreeSection.FrameOne,
     Heading: "Mint new products",
     text: "Assured products. You'll be renting furniture that looks & feels brand new",
   },
   {
+    icon: hasselFreeSection.IconTwo,
     backgroungImage: hasselFreeSection.FrameTwo,
     Heading: "Free shipping",
     text: "Get your furniture delivered to your doorstep with no extra shipping cost",
   },
   {
+    icon: hasselFreeSection.IconThree,
     backgroungImage: hasselFreeSection.FrameThree,
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
   },
   {
+    icon: hasselFreeSection.IconFour,
     backgroungImage: hasselFreeSection.FrameFour,
     Heading: "Free relocation",
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
   {
+    icon: hasselFreeSection.IconFive,
     backgroungImage: hasselFreeSection.FrameFive,
     Heading: "Insurance cover",
     text: "Minor damages or scratches to the rent products will be waived off",
   },
   {
+    icon: hasselFreeSection.IconSix,
     backgroungImage: hasselFreeSection.FrameSix,
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
@@ -226,6 +232,74 @@ export const sortByText = [
   {text: "Price Hight to low"},
 ];
 
+export const productItemsIncludedDetails = [
+  {
+    img: "",
+    name: "storage 1",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 2",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 3",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 4",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+  {
+    img: "",
+    name: "storage 5",
+    brand: "placeholder",
+    color: "red",
+    material: "placeholder",
+    size: "12 inches x 12 inches x 12 inches",
+    features: [
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    ],
+  },
+];
+
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
 
@@ -234,3 +308,5 @@ export const categoryImageBaseUrl =
 
 // const cartegoryIconsUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/";
+export const categoryIconsUrl =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";

@@ -9,10 +9,14 @@ import {
   IoMdArrowDropdown,
   IoMdArrowDropup,
   IoIosArrowForward,
+  IoIosArrowBack,
 } from "react-icons/io";
 import {BsFillStarFill, BsGoogle} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
-import {MdModeEdit} from "react-icons/md";
+import {MdModeEdit, MdVerifiedUser} from "react-icons/md";
+import {HiOutlineShare} from "react-icons/hi";
+import {LiaTruckMovingSolid} from "react-icons/lia";
+// import {MdVerifiedUser} from "react-icons/md";
 import Favorite from "@/assets/header/favorite.svg";
 import Menu from "@/assets/header/menu.svg";
 import shoppingCard from "@/assets/header/shopping_cart.svg";
@@ -69,8 +73,13 @@ export const Icons = {
   Search,
 };
 
-export const Close = ({size, color, className}) => (
-  <IoClose size={size} color={color} className={className} />
+export const Close = ({size, color, className, onClick}) => (
+  <IoClose
+    size={size}
+    color={color}
+    className={className}
+    onClick={() => onClick}
+  />
 );
 export const CloseOutline = ({size, color, className}) => (
   <IoCloseOutline size={size} color={color} className={className} />
@@ -121,6 +130,10 @@ export const ForwardArrow = ({size, color, className}) => (
   <IoIosArrowForward size={size} color={color} className={className} />
 );
 
+export const BackwardArrow = ({size, color, className}) => (
+  <IoIosArrowBack size={size} color={color} className={className} />
+);
+
 export const EditIcon = ({size, color, className}) => (
   <MdModeEdit size={size} color={color} className={className} />
 );
@@ -139,4 +152,16 @@ export const DownPopUpArrow = ({size, color, className, onMouseOver}) => (
     className={className}
     onMouseOver={onMouseOver}
   />
+);
+
+export const ShareIcon = ({size, color, className}) => (
+  <HiOutlineShare size={size} color={color} className={className} />
+);
+
+export const DeliveryTruck = ({size, color, className}) => (
+  <LiaTruckMovingSolid size={size} color={color} className={className} />
+);
+
+export const VerifyIcon = ({size, color, className}) => (
+  <MdVerifiedUser size={size} color={color} className={className} />
 );

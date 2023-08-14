@@ -4,7 +4,7 @@ import style from "./style.module.css";
 const InstructionCard = () => {
   return (
     <div className={style.card_container}>
-      <div>
+      <div className={style.image_wrapper}>
         <img src="https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp" />
       </div>
       <div className={style.text_container}>

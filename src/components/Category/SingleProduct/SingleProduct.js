@@ -14,6 +14,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -30,6 +34,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -46,6 +54,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -62,6 +74,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -78,6 +94,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -94,6 +114,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]
@@ -110,6 +134,10 @@ const SingleProduct = () => {
           desc={"xyzAbc"}
           originalPrice={"1000"}
           currentPrice={"750"}
+          hoverCardImage={
+            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
+          }
+          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
           // hoverCardImage={
           //     item?.image?.split(",").filter(item => item).length > 1
           //         ? productImageBaseUrl + item?.image?.split(",")[1]

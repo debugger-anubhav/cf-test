@@ -8,7 +8,7 @@
   @apply flex flex-col;
 }
 .close_icon {
-  @apply cursor-pointer mt-3;
+  @apply cursor-pointer mt-[0.3rem];
 }
 .logo_text {
   @apply font-semibold md:text-32 text-[28px];
@@ -36,7 +36,7 @@
   @apply flex flex-wrap w-full mt-8;
 }
 .city_wrapper {
-  @apply flex flex-col mr-6 mb-6 xs:w-[90px] w-[73px]  cursor-pointer;
+  @apply flex flex-col mr-6 mb-6 xs:w-[90px] ms:w-[120px] w-[73px]  cursor-pointer p-4 rounded-md hover:border-[2px] hover:border-primary;
 }
 .city_thambnil {
   @apply flex rounded-md w-full;
@@ -45,7 +45,7 @@
   @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2;
 }
 .city_drawer_wrapper {
-  @apply sm:w-[540px] w-full px-8 lg:px-0 rounded-t-lg;
+  @apply sm:w-[590px] w-full px-8 lg:px-0 rounded-t-lg;
 }
 .city_drawer_close {
   @apply sm:flex hidden;
@@ -75,7 +75,7 @@
   @apply text-[#7895B0] font-bold text-24 leading-[24px];
 }
 .bottom_close_icon {
-  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full;
+  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4;
   /* -top-11  */
 }
 .-MuiPaper-root-MuiDrawer-paper {

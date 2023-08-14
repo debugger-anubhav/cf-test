@@ -17,7 +17,7 @@
   /* @apply w-[98px] h-[98px] md:w  /* width: 100%;
   height: auto;-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
 }
-.img {
+.category_img {
   width: 100%;
   height: auto;
   /* @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
@@ -48,4 +48,10 @@
   @apply h-[50%] mr-4;
   width: calc(33.33% - 20px);
   flex: calc(33.33% - 20px);
+}
+.Skeleton_text {
+  @apply text-32 w-1/2;
+}
+.Skeleton_sub_text {
+  @apply text-16 w-2/5;
 }

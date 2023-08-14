@@ -24,11 +24,17 @@ body h1 h2 h3 h4 h5 h6 p {
   font-weight: normal;
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar-track {
   width: 0px;
 }
-
-.carousel .control-dots {
+.mapped_filter::-webkit-scrollbar-thumb {
+  width: 5px !important;
+}
+.slide .cursor-pointer {
+  width: 95% !important;
+  margin: auto !important;
+}
+.landing_page_carousel .carousel .control-dots {
   width: fit-content !important;
   border-radius: 12px;
   border: 2px solid var(--grey-grey-100, #f7f7f8);
@@ -42,14 +48,15 @@ body h1 h2 h3 h4 h5 h6 p {
   justify-content: center;
   overflow: visible !important;
 }
-.carousel .control-dots .dot {
+.landing_page_carousel .carousel .control-dots .dot {
   background: white !important;
   opacity: 1 !important;
+  margin-bottom: 0.2rem !important;
 }
-.carousel .control-dots .selected {
+.landing_page_carousel .carousel .control-dots .selected {
   background: #597492 !important;
 }
-.control-dots {
+.landing_page_carousel .control-dots {
   bottom: -14px !important;
 }
 /* .MuiDrawer-paper {
@@ -77,4 +84,20 @@ body h1 h2 h3 h4 h5 h6 p {
 } */
 #filter-popover .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
   border-radius: 16px !important;
+}
+.css-58ftfq-MuiSkeleton-root {
+  height: 100% !important;
+}
+/* .MuiPopover-paper .css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+  left: 90px !important;;
+} */
+
+input[type="checkbox"] {
+  accent-color: #71717a !important;
+}
+input:checked ~ .checkmark {
+  background-color: white;
+}
+input[type="radio"]:checked {
+  accent-color: #71717a !important;
 }

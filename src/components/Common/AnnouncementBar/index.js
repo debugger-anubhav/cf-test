@@ -20,7 +20,7 @@ const AnnouncementBar = () => {
           <p
             className={styles.announcement_close_icon}
             onClick={() => dispatch(setAnnouncementBar(true))}>
-            <Close size={20} color={"#fff"} className={"cursor-pointer"} />
+            <Close size={20} color={"#fff"} className="cursor-pointer" />
           </p>
         </div>
       )}

@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import strings from "@/constants/Constant.json";
-import Image from "next/image";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewlaunchedProducts} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
+import {Skeleton} from "@mui/material";
 
 const NewlyLaunched = () => {
   const heading = strings.landing_page.Newlylaunced.heading;
@@ -53,15 +53,13 @@ const NewlyLaunched = () => {
       </div>
       <div className={styles.images_wrapper}>
         {newProductFetched?.map((ele, index) => (
-          <div className="relative" key={index}>
+          <div className="relative" key={index.toString()}>
             <div className="">
-              <Image
+              <img
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
                   ele?.image?.split(",")[0]
                 }
-                width={241}
-                height={181}
                 className={styles.img}
               />
             </div>
@@ -76,3 +74,22 @@ const NewlyLaunched = () => {
 };
 
 export default NewlyLaunched;
+
+export const NewlyLauncedSkeleton = () => {
+  return (
+    <div className={styles.main_container}>
+      <div className={`${styles.skeleton_brown_box}`}>
+        <Skeleton className="w-full h-full" variant="rectangular" />
+      </div>
+      <div className={styles.skeleton_images_wrapper}>
+        {[1, 2, 3, 4, 5, 6].map((item, index) => (
+          <div
+            className={styles.Newlylaunced_skeleton_wrapper}
+            key={index.toString()}>
+            <Skeleton className="w-full h-full" variant="rectangular" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};

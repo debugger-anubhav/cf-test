@@ -23,6 +23,7 @@ module.exports = {
         "3A3A3A": "#3A3A3A",
         "6A6A6A": "#6A6A6A",
         fff: "#ffffff",
+        222: "#222",
         "45454A": "#45454A",
         "9A9AA2": "#9A9AA2",
         "71717A": "#71717A",
@@ -35,6 +36,7 @@ module.exports = {
       },
       fontSize: {
         "main-head": "40px",
+        10: "10px",
         18: "18px",
         16: "16px",
         20: "20px",
@@ -49,8 +51,10 @@ module.exports = {
       screens: {
         mobile: "360px",
         xs: "428px",
+        ms: "520px",
         macbook: "1440px",
         "3xl": "1660px",
+        "4xl": "1850px",
         "last-screen": "2000px",
       },
       letterSpacing: {
@@ -62,7 +66,32 @@ module.exports = {
         0.3: "-0.32px",
         0.6: " -0.64px",
         0.24: "-0.24px",
+        0.4: " -0.4px",
       },
+      animation: {
+        fade: "fadeOut 0.5s ease-in-out",
+      },
+
+      // that is actual animation
+      keyframes: theme => ({
+        fadeOut: {
+          "0%": {
+            opacity: "0.2",
+          },
+          "25%": {
+            opacity: "0.4",
+          },
+          "50%": {
+            opacity: "0.6",
+          },
+          "75%": {
+            opacity: "0.8",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+      }),
     },
   },
   plugins: [],

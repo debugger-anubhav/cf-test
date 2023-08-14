@@ -1,5 +1,5 @@
 .card_container {
-  @apply flex flex-col w-[281px] mobile:w-[211px] mobile:rounded-[4px] pr-6 mobile:pr-4;
+  @apply flex flex-col 3xl:w-[370px] 2xl:w-[350px] md:w-[300px] ms:w-[230px] w-[211px] mobile:rounded-[4px] pr-6 mobile:pr-4;
 }
 .text_container {
   @apply flex flex-col mobile:w-[211px];
@@ -10,3 +10,16 @@
 .content {
   @apply flex text-9A9AA2 font-Poppins text-14 mobile:text-12 font-normal leading-5 mobile:tracking-0.24 pt-2;
 }
+.image_wrapper {
+  @apply w-full;
+}
+.image_wrapper img {
+  @apply w-full;
+}
+
+/* mobile: "360px",
+        xs: "428px",
+        ms: "520px",
+        //sm:620
+        //md
+        macbook: "1440px", */

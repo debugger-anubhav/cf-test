@@ -8,6 +8,8 @@ export const HomepageSlice = createSlice({
     recentProduct: [],
     cityId: 46,
     cityName: "Bangalore",
+    productName: "",
+    productCategory: "",
     reviews: [],
     newProduct: [],
     limitedDiscount: [],
@@ -34,7 +36,12 @@ export const HomepageSlice = createSlice({
     selectedCityName(state, action) {
       state.cityName = action.payload;
     },
-
+    addProductName(state, action) {
+      state.productName = action.payload;
+    },
+    addProductCategory(state, action) {
+      state.productCategory = action.payload;
+    },
     addGoogleReviews(state, action) {
       state.reviews = action.payload;
     },
@@ -80,4 +87,6 @@ export const {
   addAllAndSubCategory,
   addSidebarMenuLists,
   setAnnouncementBar,
+  addProductName,
+  addProductCategory,
 } = HomepageSlice.actions;

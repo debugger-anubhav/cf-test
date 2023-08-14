@@ -10,7 +10,7 @@ const HeroBanner = () => {
   const router = useRouter();
   return (
     <>
-      <div className={styles.hero_banner_main}>
+      <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className="cursor-pointer"

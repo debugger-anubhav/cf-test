@@ -1,124 +1,72 @@
-// import React, {useEffect} from "react";
-// import styles from "./style.module.css";
-// import string from "@/constants/Constant.json";
-// import Image from "next/image";
-// import {useDispatch, useSelector} from "react-redux";
-// import {useQuery} from "@/hooks/useQuery";
-// import {endPoints} from "@/network/endPoints";
-// import {addCategory, addSelectedFurnitureCategory} from "@/store/Slices";
-// import {categoryImageBaseUrl} from "@/constants/constant";
-// // import {useRouter} from "next/navigation";
-// // import axios from "axios";
-// // import { HomePageImages } from "@/assets/images";
-
-// const RentFurnitureAndAppliances = () => {
-//   const dispatch = useDispatch();
-//   const {category: getCategory} = useSelector(state => state.homePagedata);
-//   // const homePageReduxData = useSelector(state => state.homePagedata);
-
-//   // const router = useRouter();
-
-//   const {refetch: getAllCategory} = useQuery("category", endPoints.category);
-
-//   useEffect(() => {
-//     getAllCategory()
-//       .then(res => {
-//         dispatch(addCategory(res?.data?.data));
-//       })
-//       .catch(err => {
-//         console.log(err);
-//         dispatch(addCategory([]));
-//       });
-//   });
-
-//   const handleSubCategory = rentItem => {
-//     dispatch(addSelectedFurnitureCategory(rentItem));
-//     // router.push(`/${homePageReduxData?.cityName}/${rentItem.seourl}`);
-//   };
-//   console.log(getCategory, "getCategorygetCategory");
-
-//   return getCategory?.length ? (
-//     <div className={styles.rent_furniture_wrapper}>
-//       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
-//       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
-//       <div className={styles.card_div}>
-//         {getCategory?.map((item, index) => (
-//           <div key={index}>
-//             <div className="relative">
-//               <div onClick={() => handleSubCategory(item)}>
-//                 <Image
-//                   src={categoryImageBaseUrl + item?.category_image}
-//                   width={200}
-//                   height={200}
-//                   alt="Rent Appliance And Furniture"
-//                   className={styles.img}
-//                 />
-//               </div>
-//             </div>
-//             <div className="xl:pl-3 macbook:pl-0">
-//               <h3 className={styles.label}>{item?.cat_name}</h3>
-//               <p className={styles.desc}>{item?.page_heading}</p>
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   ) : null;
-// };
-// export default RentFurnitureAndAppliances;
-
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
-import {RentFurniture} from "@/constants/constant";
-// import Skeleton from "react-loading-skeleton";
 import Skeleton from "@mui/material/Skeleton";
+import {useDispatch, useSelector} from "react-redux";
+import {addCategory} from "@/store/Slices";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const RentFurnitureAndAppliances = () => {
-  const [loading, setLoading] = React.useState(true);
+  const dispatch = useDispatch();
+  const homePageReduxData = useSelector(state => state.homePagedata);
 
-  // will be replace by api data
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    axios
+      .get(baseURL + endPoints.category)
+      .then(res => {
+        dispatch(addCategory(res?.data?.data));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(addCategory([]));
+      });
   }, []);
+  const RentFurniture = homePageReduxData.category;
 
   return (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
-      {loading ? (
-        <>
-          <div className={styles.rent_furniture_skeleton}>
-            {RentFurniture.map((item, index) => (
-              <>
-                <Skeleton variant="rectangular" height={310} className="mb-4" />
-              </>
-            ))}
-          </div>
-        </>
-      ) : (
-        <div className={styles.card_div}>
-          {RentFurniture?.map((item, index) => (
-            <div key={index} className={styles.card_wrapper}>
-              <img
-                src={item.img}
-                width={"100%"}
-                height={"100%"}
-                alt=""
-                className={styles.img}
-              />
+      <div className={styles.card_div}>
+        {RentFurniture?.map((item, index) => (
+          <div key={index.toString()} className={styles.card_wrapper}>
+            <img
+              src={
+                "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                item.category_image
+              }
+              alt="RentFurnitureImage"
+              className={styles.category_img}
+            />
 
-              <div className={styles.label_wrapper}>
-                <h3 className={styles.label}>{item.label}</h3>
-                <p className={styles.desc}>{item.desc}</p>
-              </div>
+            <div className={styles.label_wrapper}>
+              <h3 className={styles.label}>{item.cat_name}</h3>
+              <p className={styles.desc}>{item.category_description}</p>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 export default RentFurnitureAndAppliances;
+
+export const RentFurnitureSkeleton = () => {
+  return (
+    <div className={styles.rent_furniture_wrapper}>
+      <Skeleton variant="text" className={styles.Skeleton_text} />
+      <Skeleton variant="text" className={styles.Skeleton_sub_text} />
+      <div className={`${styles.card_div}`}>
+        {[1, 2, 3, 4, 5, 6].map((item, index) => (
+          <div
+            key={index.toString()}
+            className={`${styles.card_wrapper} lg:h-[300px] md:h-[200px] sm:h-[180px] h-[100px]`}>
+            <Skeleton variant="rectangular" className="h-full" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
