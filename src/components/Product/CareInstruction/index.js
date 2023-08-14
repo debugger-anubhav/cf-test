@@ -29,8 +29,8 @@ const CareInstruction = () => {
     <div className={styles.main_container}>
       <h2 className={styles.head}>Care Instructions</h2>
       <div className={styles.card_wrapper}>
-        {arr.map((item, index) => (
-          <div key={index}>
+        {arr?.map((item, index) => (
+          <div key={index.toString()}>
             <img src={item.img} className={styles.img} alt="card_img" />
             <p className={styles.card_head}>{item.head}</p>
             <p className={styles.card_desc}>{item.desc}</p>

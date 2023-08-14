@@ -15,7 +15,7 @@ import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
 // import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 // import CustomerRating from "@/components/Product/CustomerRatings";
-// import HappySubscribers from "@/components/Home/HappySubscribers";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
 
@@ -40,7 +40,7 @@ const ProductPage = () => {
           {/* <RecentlyViewedProduct /> */}
           {/* <CompleteTheLook heading={"You might also like"} isbg /> */}
           {/* <CustomerRating /> */}
-          {/* <HappySubscribers /> */}
+          <HappySubscribers />
           <QuesAndAns />
           <Footer />
         </div>
