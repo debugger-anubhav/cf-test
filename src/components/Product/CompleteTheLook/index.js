@@ -87,7 +87,7 @@ const CompleteTheLook = ({heading, isbg}) => {
 
       <div className={styles.recentlyViewed_main} id="gallery">
         {arr?.map((item, index) => (
-          <div key={index}>
+          <div key={index.toString()}>
             <Card
               cardImage={item.image}
               discount={"60%"}
