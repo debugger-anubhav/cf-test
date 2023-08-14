@@ -65,3 +65,10 @@
 .underline {
   @apply w-[154px] flex items-center py-0 gap-2 text-[#9A9AA2] border-y;
 }
+
+.Skeleton_text {
+  @apply text-16 w-full;
+}
+.Skeleton_button {
+  @apply h-20 w-60;
+}

@@ -18,6 +18,7 @@ import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliance
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
+import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -68,7 +69,9 @@ const RentNowBanner = loadable(
   () => import("@/components/Home/RentNowBanner"),
   {fallback: <RentNowBannersSkeleton />},
 );
-const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"));
+const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+  fallback: <TryCityMaxSkeleton />,
+});
 const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 const CustomerRating = loadable(() => import("@/components/Home/Rating"));
 const HappySubscribers = loadable(() =>

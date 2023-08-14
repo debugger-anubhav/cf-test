@@ -101,3 +101,8 @@ input:checked ~ .checkmark {
 input[type="radio"]:checked {
   accent-color: #71717a !important;
 }
+
+/* product page ratings progress bar styling */
+.custom-progress-bar .rc-progress-line {
+  border-radius: 4px;
+}

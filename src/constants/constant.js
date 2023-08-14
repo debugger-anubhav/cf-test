@@ -300,8 +300,60 @@ export const productItemsIncludedDetails = [
   },
 ];
 
+export const ProductRatings = [
+  {
+    name: "Steven Chen",
+    rating: 4,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 4.5,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 3,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 4,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+  {
+    name: "Steven Chen",
+    rating: 5,
+    content:
+      "Great product. Really feels comfortable. Thanks for the no hassle delivery. Material and quality is also very good",
+    date: "4 July 2023",
+  },
+];
+
 export const productImageBaseUrl =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
+  "https://d3juy0zp6vqec8.cloudfront.net/images/product/";
 
 export const categoryImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";

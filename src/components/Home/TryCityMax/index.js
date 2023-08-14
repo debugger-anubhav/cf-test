@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import Image from "next/image";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
+import {Skeleton} from "@mui/material";
 
 const TryCityMax = () => {
   const benefitsOfCity = [
@@ -104,3 +105,34 @@ const TryCityMax = () => {
 };
 
 export default TryCityMax;
+
+export const TryCityMaxSkeleton = () => {
+  return (
+    <div className={styles.main_wrapper}>
+      <div className={styles.left_image_section}>
+        <Skeleton variant="rectangular" className="w-full h-full" />
+      </div>
+      <div className={`${styles.right_text_section} h-full`}>
+        <Skeleton variant="text" className={styles.Skeleton_text} />
+        <Skeleton
+          variant="text"
+          className={`${styles.Skeleton_text} w-[80%]`}
+        />
+        <Skeleton variant="text" className={styles.Skeleton_button} />
+        <Skeleton
+          variant="text"
+          className={`${styles.Skeleton_text} mt-10 mb-4`}
+          width={"140px"}
+        />
+        <Skeleton variant="text" height={"0.5rem"} width={"100%"} />
+        <div className=" flex flex-wrap">
+          {[1, 2].map((i, index) => (
+            <div className=" w-[40%] mr-10" key={index.toString()}>
+              <Skeleton variant="text" height={"400px"} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};

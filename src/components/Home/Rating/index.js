@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";

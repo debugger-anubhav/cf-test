@@ -1,5 +1,6 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem] cursor-pointer;
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
+  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
 }
 .hover_wrapper img {
   @apply animate-fade;
@@ -11,7 +12,7 @@
   @apply flex gap-[0.62rem] items-center;
 }
 .thumbnail {
-  @apply min-w-full h-[13rem] lg:h-[17rem] 3xl:h-[20rem] rounded-lg;
+  @apply min-w-full w-full rounded-lg;
 }
 .desc_div {
   @apply mt-1 flex gap-2 3xl:justify-between;
