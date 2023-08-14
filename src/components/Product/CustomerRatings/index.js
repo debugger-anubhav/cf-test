@@ -38,8 +38,8 @@ const CustomerRating = () => {
       </div>
 
       <div className={styles.right_div}>
-        {ProductRatings.slice(0, 3).map((item, index) => (
-          <div key={index} className={styles.single_rating_div}>
+        {ProductRatings?.slice(0, 3)?.map((item, index) => (
+          <div key={index.toString()} className={styles.single_rating_div}>
             <div className="flex gap-2">
               <Rating
                 stop={5}
