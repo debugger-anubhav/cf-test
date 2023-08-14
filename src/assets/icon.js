@@ -44,11 +44,11 @@ export const FooterIcons = {
   GoToTopIcon,
   social_media_icons: [
     {icon: `${IconLink}facebook.svg`, link: "link"},
-    {icon: `${IconLink}insta.svg`, link: "link"},
+    {icon: `${IconLink}instagram.svg`, link: "link"},
     {icon: `${IconLink}youtube.svg`, link: "link"},
     {icon: `${IconLink}linkedin.svg`, link: "link"},
     {icon: `${IconLink}twitter.svg`, link: "link"},
-    {icon: `${IconLink}printerest.svg`, link: "link"},
+    {icon: `${IconLink}pinterest.svg`, link: "link"},
   ],
 };
 
