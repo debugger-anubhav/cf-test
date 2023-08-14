@@ -18,6 +18,11 @@ import CustomerRating from "@/components/Product/CustomerRatings";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
+import BannerOne from "@/components/Product/BannerSection/BannerOne";
+import BannerTwo from "@/components/Product/BannerSection/BannerTwo";
+import BannerThree from "@/components/Product/BannerSection/BannnerThree";
+import BannerFour from "@/components/Product/BannerSection/BannerFour";
+import BannerFive from "@/components/Product/BannerSection/BannerFive";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -38,6 +43,12 @@ const ProductPage = () => {
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
           <CompleteTheLook heading={"Complete The Look"} isbg={false} />
+          <BannerOne />
+          <BannerTwo />
+          <BannerThree />
+          <BannerFour />
+          <BannerFive />
+          <BannerFive />
           <CareInstruction />
           <RecentlyViewedProduct />
           <CompleteTheLook heading={"You might also like"} isbg />

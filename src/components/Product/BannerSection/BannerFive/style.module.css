@@ -1,0 +1,9 @@
+.main_container {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins py-12;
+}
+.img_wrapper {
+  @apply relative w-full h-[459px] xl:h-[362px];
+}
+.img {
+  @apply min-w-full h-full;
+}
