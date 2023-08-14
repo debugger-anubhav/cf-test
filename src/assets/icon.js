@@ -25,12 +25,6 @@ import Search from "@/assets/header/search.svg";
 
 // footer icons
 import Phone from "@/assets/footer_icons/phoneIcon.svg";
-import Fb from "@/assets/footer_icons/fb.svg";
-import YouTube from "@/assets/footer_icons/youtube.svg";
-import Insta from "@/assets/footer_icons/insta.svg";
-import Linkedin from "@/assets/footer_icons/linkedin.svg";
-import Twitter from "@/assets/footer_icons/twitter.svg";
-import Pinterest from "@/assets/footer_icons/pinterest.svg";
 import GoToTopIcon from "@/assets/footer_icons/goToTopIcon.svg";
 
 // homepage citymax component card icons
@@ -43,16 +37,18 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
+const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+
 export const FooterIcons = {
   Phone,
   GoToTopIcon,
   social_media_icons: [
-    {icon: Fb, link: "link"},
-    {icon: YouTube, link: "link"},
-    {icon: Insta, link: "link"},
-    {icon: Linkedin, link: "link"},
-    {icon: Twitter, link: "link"},
-    {icon: Pinterest, link: "link"},
+    {icon: `${IconLink}facebook.svg`, link: "link"},
+    {icon: `${IconLink}insta.svg`, link: "link"},
+    {icon: `${IconLink}youtube.svg`, link: "link"},
+    {icon: `${IconLink}linkedin.svg`, link: "link"},
+    {icon: `${IconLink}twitter.svg`, link: "link"},
+    {icon: `${IconLink}printerest.svg`, link: "link"},
   ],
 };
 

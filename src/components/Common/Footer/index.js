@@ -45,11 +45,11 @@ const Footer = () => {
           </div>
           <div className={styles.social_media_icons_div}>
             {FooterIcons.social_media_icons.map((item, index) => (
-              <Image
+              <img
                 key={index.toString()}
                 alt={item?.icon}
                 src={item?.icon}
-                className={styles.sm_icon}
+                // className={styles.sm_icon}
                 onClick={() => console.log("cliked")}
               />
             ))}
@@ -74,11 +74,11 @@ const Footer = () => {
 
         <div className={styles.social_media_icons_div}>
           {FooterIcons?.social_media_icons?.map((item, index) => (
-            <Image
+            <img
               key={index.toString()}
               alt={item?.icon}
               src={item?.icon}
-              className={styles.sm_icon}
+              // className={styles.sm_icon}
               onClick={() => console.log("cliked")}
             />
           ))}
