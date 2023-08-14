@@ -1,0 +1,24 @@
+.main_container {
+  @apply my-8 xl:my-[88px] px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins;
+}
+.head {
+  @apply text-20 xl:text-24 text-45454A leading-8 font-medium;
+}
+.ques_ans_div {
+  @apply mt-8 macbook:w-[777px];
+}
+.ques {
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
+}
+.ans {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+}
+.single_row {
+  @apply flex gap-2;
+}
+.bottom_txt {
+  @apply text-9A9AA2 text-12 mt-2 tracking-0.24;
+}
+.more_btn {
+  @apply mt-10 cursor-pointer flex px-5 xl:px-8 h-12 xl:h-14 items-center rounded-lg text-16 font-medium leading-5 text-71717A border-2 border-71717A;
+}

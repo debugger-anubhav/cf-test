@@ -79,3 +79,8 @@ body h1 h2 h3 h4 h5 h6 p {
 .css-58ftfq-MuiSkeleton-root {
   height: 100% !important;
 }
+
+/* product page ratings progress bar styling */
+.custom-progress-bar .rc-progress-line {
+  border-radius: 4px;
+}
