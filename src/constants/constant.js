@@ -338,7 +338,7 @@ export const ProductRatings = [
 ];
 
 export const productImageBaseUrl =
-  "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";
+  "https://d3juy0zp6vqec8.cloudfront.net/images/product/";
 
 export const categoryImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";

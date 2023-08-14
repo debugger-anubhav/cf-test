@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";

@@ -48,12 +48,13 @@ const OffersAndCoupons = () => {
   };
 
   const scrollRef = useHorizontalScroll();
-  const tabBox = document.querySelector("#slider");
+  const tabBox =
+    typeof document !== "undefined" ? document.querySelector("#slider") : null;
   let isDragging = false;
 
   const dragging = e => {
     if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
+    if (tabBox) tabBox.scrollLeft -= e.movementX;
   };
   const dragStop = () => {
     isDragging = false;
@@ -63,7 +64,10 @@ const OffersAndCoupons = () => {
   tabBox?.addEventListener("mousedown", () => (isDragging = true));
   tabBox?.addEventListener("mousemove", dragging);
   // }
-  document.addEventListener("mouseup", dragStop);
+
+  useEffect(() => {
+    document.addEventListener("mouseup", dragStop);
+  }, []);
 
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>

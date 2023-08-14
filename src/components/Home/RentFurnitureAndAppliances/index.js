@@ -34,8 +34,8 @@ const RentFurnitureAndAppliances = () => {
           <div key={index.toString()} className={styles.card_wrapper}>
             <img
               src={
-                "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                item.category_image
+                "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                item.category_web_image
               }
               alt="RentFurnitureImage"
               className={styles.category_img}

@@ -13,9 +13,9 @@ import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
-import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
-import CustomerRating from "@/components/Product/CustomerRatings";
-import HappySubscribers from "@/components/Home/HappySubscribers";
+// import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+// import CustomerRating from "@/components/Product/CustomerRatings";
+// import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
 
@@ -32,17 +32,15 @@ const ProductPage = () => {
             category={"Home Furniture"}
             itemName={"  Belle Single Bed with Storage"}
           />
-          <div className="-mt-8">
-            <OffersAndCoupons />
-          </div>
+          <OffersAndCoupons />
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
           <CompleteTheLook heading={"Complete The Look"} isbg={false} />
           <CareInstruction />
-          <RecentlyViewedProduct />
-          <CompleteTheLook heading={"You might also like"} isbg />
-          <CustomerRating />
-          <HappySubscribers />
+          {/* <RecentlyViewedProduct /> */}
+          {/* <CompleteTheLook heading={"You might also like"} isbg /> */}
+          {/* <CustomerRating /> */}
+          {/* <HappySubscribers /> */}
           <QuesAndAns />
           <Footer />
         </div>
