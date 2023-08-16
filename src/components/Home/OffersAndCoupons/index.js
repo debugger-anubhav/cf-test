@@ -103,7 +103,7 @@ const OffersAndCoupons = () => {
                   "Copied!"
                 ) : (
                   <>
-                    <CopyIcon size={20} color={"black"} />
+                    <CopyIcon size={20} color={"black"} className={"mr-1"} />
                     Copy
                   </>
                 )}

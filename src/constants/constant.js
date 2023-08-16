@@ -194,14 +194,14 @@ export const HasselFreeData = [
   {
     icon: hasselFreeSection.IconThree,
     backgroungImage: hasselFreeSection.FrameThree,
-    Heading: "Free installation",
-    text: "No need to pay for furniture assembly. We will install your furniture for free",
+    Heading: "Flexible upgrades",
+    text: "Upgrade your house with new products after 6 months of use for free",
   },
   {
     icon: hasselFreeSection.IconFour,
     backgroungImage: hasselFreeSection.FrameFour,
-    Heading: "Free relocation",
-    text: "Planning to relocate? We’ll help you relocate your furniture for free",
+    Heading: "Free installation",
+    text: "No need to pay for furniture assembly. We will install your furniture for free",
   },
   {
     icon: hasselFreeSection.IconFive,
@@ -212,8 +212,8 @@ export const HasselFreeData = [
   {
     icon: hasselFreeSection.IconSix,
     backgroungImage: hasselFreeSection.FrameSix,
-    Heading: "Flexible upgrades",
-    text: "Upgrade your house with new products after 6 months of use for free",
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
 ];
 

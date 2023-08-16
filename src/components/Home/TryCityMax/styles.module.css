@@ -32,7 +32,7 @@
   @apply w-[20px] h-[20px] flex justify-center items-center;
 }
 .benefits_text {
-  @apply hidden xl:block font-Poppins text-sm font-medium leading-6 tracking-tighter text-[#9A9AA2] mt-16 px-1;
+  @apply hidden xl:block font-Poppins text-sm text-20 font-medium leading-6 tracking-tighter text-[#9A9AA2] mt-16 px-1;
 }
 .line {
   @apply decoration-2 w-[528px] text-[#9A9AA2] mt-4 border-y hidden xl:flex;
@@ -48,16 +48,16 @@
   @apply border border-solid border-[#E3E1DC] xl:border-none rounded-lg py-6 pl-6 pr-2 xl:p-0;
 }
 .benefit_title {
-  @apply font-Poppins font-medium text-14 leading-6 text-[#45454A];
+  @apply font-Poppins font-medium text-16 xs:text-20 leading-6 text-[#45454A];
 }
 .benefit_paragraph {
-  @apply font-Poppins font-normal text-base leading-6 tracking-tight text-[#9A9AA2] w-[240px];
+  @apply font-Poppins font-normal xs:text-base text-14 leading-6 tracking-tight text-[#9A9AA2] w-[240px];
 }
 .how_it_works_button {
   @apply w-[154px] flex mt-5 xl:mt-16;
 }
 .how_it_works_paragraph {
-  @apply font-Poppins font-medium text-sm leading-7 tracking-tight text-[#597492] flex;
+  @apply font-Poppins font-medium text-sm xs:text-20 leading-7 tracking-tight text-[#597492] flex;
 }
 .forward_arrow {
   @apply flex justify-center items-center mx-1 my-1;

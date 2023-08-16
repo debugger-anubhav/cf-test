@@ -86,18 +86,18 @@ export const downloadBannersImages = {
 };
 
 export const hasselFreeSection = {
-  FrameOne: Desktop + "mint-new-products.webp",
-  FrameTwo: Desktop + "free-shipping.webp",
+  FrameSix: Desktop + "flexible-upgrades.webp",
   FrameThree: Desktop + "free-installation.webp",
   FrameFour: Desktop + "free-relocation.webp",
+  FrameTwo: Desktop + "free-shipping.webp",
   FrameFive: Desktop + "insurance-cover.webp",
-  FrameSix: Desktop + "flexible-upgrades.webp",
-  IconOne: Desktop + "mint-new-products.svg",
-  IconTwo: Desktop + "free-shipping.svg",
+  FrameOne: Desktop + "mint-new-products.webp",
+  IconSix: Desktop + "flexible-upgrades.svg",
   IconThree: Desktop + "free-installation.svg",
   IconFour: Desktop + "free-relocation.svg",
+  IconTwo: Desktop + "free-shipping.svg",
   IconFive: Desktop + "insurance-cover.svg",
-  IconSix: Desktop + "flexible-upgrades.svg",
+  IconOne: Desktop + "mint-new-products.svg",
 };
 
 export const HeroBannerImages = {
