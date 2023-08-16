@@ -17,6 +17,7 @@ export const HomepageSlice = createSlice({
     allAndSubCategory: [],
     sidebarMenuLists: [],
     announcementBar: false,
+    seoFurnitureSubCategory: [],
   },
   reducers: {
     addCityList(state, action) {
@@ -62,6 +63,25 @@ export const HomepageSlice = createSlice({
     setAnnouncementBar(state, action) {
       state.announcementBar = action.payload;
     },
+    setSeoFurnitureRentalSubCategory(state, action) {
+      state.seoFurnitureSubCategory = action.payload;
+    },
+  },
+});
+
+export const SeoAppliancePageSlice = createSlice({
+  name: "SeoAppliancePageData",
+  initialState: {
+    seoApplianceSubCategory: [],
+    seoApplianceCrowd: [],
+  },
+  reducers: {
+    setSeoApplianceRentalSubCategory(state, action) {
+      state.seoApplianceSubCategory = action.payload;
+    },
+    setSeoApplianceCrowd(state, action) {
+      state.seoApplianceCrowd = action.payload;
+    },
   },
 });
 
@@ -80,4 +100,8 @@ export const {
   addAllAndSubCategory,
   addSidebarMenuLists,
   setAnnouncementBar,
+  setSeoFurnitureRentalSubCategory,
 } = HomepageSlice.actions;
+
+export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
+  SeoAppliancePageSlice.actions;
