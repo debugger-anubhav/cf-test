@@ -113,10 +113,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             onClick={() => toggleDrawer("bottom", false)}>
             <div
               className={styles.bottom_close_icon}
-              onClick={() => {
-                toggleDrawer("bottom", false);
-                console.log("sdjfjsd");
-              }}>
+              onClick={
+                toggleDrawer("bottom", false)
+                // console.log("sdjfjsd");
+              }>
               <Close
                 color={"#000"}
                 size={20}
