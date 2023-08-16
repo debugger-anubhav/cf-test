@@ -109,12 +109,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       <>
         {mobileCityDrawer && DrawerName !== "menu" && (
           <div
-            className="relative"
+            className="relative z-[9999]"
             onClick={() => toggleDrawer("bottom", false)}>
-            {/* <p onClick={toggleDrawer("bottom", false)}> */}
             <div
               className={styles.bottom_close_icon}
-              onClick={() => console.log("print")}>
+              onClick={() => {
+                toggleDrawer("bottom", false);
+                console.log("sdjfjsd");
+              }}>
               <Close
                 color={"#000"}
                 size={20}
@@ -156,10 +158,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => (
                 <div
-                  className={`${styles.city_wrapper} ${
-                    homePageReduxData?.cityName === city?.list_value &&
-                    "border-[2px] border-primary"
-                  }`}
+                  className={`${styles.city_wrapper} 
+                  `}
                   key={index.toString()}
                   onClick={() => {
                     dispatch(selectedCityId(city?.id));
@@ -167,8 +167,11 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     toggleDrawer("bottom", false);
                   }}>
                   <img
-                    src={cityUrl + city?.list_value_seourl + ".svg"}
-                    className={styles.city_thambnil}
+                    src={cityUrl + city?.list_value_seourl + ".webp"}
+                    className={`${styles.city_thambnil} ${
+                      homePageReduxData?.cityName === city?.list_value &&
+                      "border-[2px] border-primary"
+                    }`}
                     alt="city-image"
                   />
                   <p className={styles.city_name}>{city?.list_value}</p>
