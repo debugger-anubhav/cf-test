@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow, RecentIcon, TrendingIcon} from "@/assets/icon";
@@ -9,6 +9,8 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
+
+const HEADER_HEIGHT = 48;
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -24,6 +26,9 @@ const Header = () => {
     "sideBarMenuLists",
     endPoints.sidebarMenuLists,
   );
+  const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const [topOffset, settopOffset] = useState(0);
 
   useEffect(() => {
     getCityList()
@@ -97,6 +102,15 @@ const Header = () => {
                   className={styles.search_wrapper}
                   onClick={() => {
                     setOpenSearchBar(!openSearchbar);
+                    const SCREEN_TYPE_OFFSET =
+                      window.screen.availWidth <= 768 ? 20 : 40;
+                    if (window.pageYOffset <= HEADER_HEIGHT) {
+                      settopOffset(
+                        (!homePageReduxData.announcementBar
+                          ? SCREEN_TYPE_OFFSET + HEADER_HEIGHT
+                          : HEADER_HEIGHT) - window.pageYOffset,
+                      );
+                    } else settopOffset(SCREEN_TYPE_OFFSET);
                   }}>
                   <input
                     placeholder="Search for Furniture, Appliances, etc"
@@ -114,6 +128,7 @@ const Header = () => {
               <>
                 <SearchModal
                   arr={arr}
+                  topOffset={topOffset}
                   openSearchbar={openSearchbar}
                   setOpenSearchBar={setOpenSearchBar}
                 />
@@ -144,6 +159,8 @@ const Header = () => {
               className={styles.search_input}
               onClick={() => {
                 setOpenSearchBar(!openSearchbar);
+                settopOffset(65 - window.pageYOffset);
+                console.log("dsajh");
               }}
             />
             <Image
@@ -169,17 +186,22 @@ const Header = () => {
 };
 export default Header;
 // search modal component
-const SearchModal = ({arr, setOpenSearchBar, openSearchbar}) => {
+const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   return (
     <div className={styles.backdrop}>
       {/* <div className={` ${styles.search_details_wrapper}`}> */}
       <div
+        style={{
+          top: `${
+            !homePageReduxData?.announcementBar ? topOffset : topOffset
+          }px`,
+        }}
         className={` ${
           homePageReduxData?.announcementBar
-            ? "w-full absolute top-[65px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
-            : "w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]"
+            ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
