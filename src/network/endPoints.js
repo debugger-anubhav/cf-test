@@ -12,4 +12,18 @@ export const endPoints = {
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
+  productPage: {
+    completeTheLook:
+      "fc-products/getRecommendedProducts?productId=3958&cityId=50",
+    youMightLike:
+      "fc-products/getYouMightAlsoLikeProducts?productId=3958&cityId=50",
+    monthlyRent:
+      "fc-subproducts/getProductForThePeriod?productId=3924&cityId=46",
+    careInstructions:
+      "fc-care-instructions/getProductCareInstructions?productId=3783",
+    bannerImages: "fc-product-banners/getProductBanners",
+    customerReviews:
+      "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
+    qna: "fc-faq-products/getProductPageFAQs?productId=3783",
+  },
 };

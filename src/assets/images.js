@@ -17,6 +17,8 @@ import DownloadQR from "@/assets/header/download-QR.svg";
 const Desktop = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
 const Mobile = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/";
 
+const ProductIcons = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+
 export const TryCityMaxBannerWeb = Desktop + "city-max.webp";
 
 export const TryCityMaxBannerMobile = Mobile + "city-max.webp";
@@ -92,12 +94,12 @@ export const hasselFreeSection = {
   FrameFour: Desktop + "free-relocation.webp",
   FrameFive: Desktop + "insurance-cover.webp",
   FrameSix: Desktop + "flexible-upgrades.webp",
-  IconOne: Desktop + "mint-new-products.svg",
-  IconTwo: Desktop + "free-shipping.svg",
-  IconThree: Desktop + "free-installation.svg",
-  IconFour: Desktop + "free-relocation.svg",
-  IconFive: Desktop + "insurance-cover.svg",
-  IconSix: Desktop + "flexible-upgrades.svg",
+  IconOne: ProductIcons + "mint-new-products.svg",
+  IconTwo: ProductIcons + "free-shipping.svg",
+  IconThree: ProductIcons + "free-installation.svg",
+  IconFour: ProductIcons + "free-relocation.svg",
+  IconFive: ProductIcons + "insurance-cover.svg",
+  IconSix: ProductIcons + "flexible-upgrades.svg",
 };
 
 export const HeroBannerImages = {
@@ -109,5 +111,5 @@ export const HeroBannerImages = {
 export const ProductPageImages = {
   // CtaImage: Desktop + "illustration.webp",
   CtaImage,
-  LeafIcon: Desktop + "leaf-icon.svg",
+  LeafIcon: ProductIcons + "leaf-icon.svg",
 };

@@ -1,0 +1,15 @@
+.rating_drawer {
+  @apply p-4 xl:px-12 xl:pt-12 xl:pb-6 relative lg:h-full;
+}
+.review_section {
+  @apply mt-14;
+}
+.btn_div {
+  @apply flex gap-4 mt-8 w-full justify-center;
+}
+.btn {
+  @apply cursor-pointer w-[230px] h-14 flex justify-center items-center border-2 text-16 font-medium rounded-lg;
+}
+.close_icon {
+  @apply fixed right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-16 lg:-mt-0;
+}

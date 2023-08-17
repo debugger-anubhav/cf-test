@@ -23,6 +23,7 @@ import BannerTwo from "@/components/Product/BannerSection/BannerTwo";
 import BannerThree from "@/components/Product/BannerSection/BannnerThree";
 import BannerFour from "@/components/Product/BannerSection/BannerFour";
 import BannerFive from "@/components/Product/BannerSection/BannerFive";
+import YouMightLike from "@/components/Product/YouMightLike";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -42,7 +43,7 @@ const ProductPage = () => {
           </div>
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
-          <CompleteTheLook heading={"Complete The Look"} isbg={false} />
+          <CompleteTheLook />
           <BannerOne />
           <BannerTwo />
           <BannerThree />
@@ -51,7 +52,7 @@ const ProductPage = () => {
           <BannerFive />
           <CareInstruction />
           <RecentlyViewedProduct />
-          <CompleteTheLook heading={"You might also like"} isbg />
+          <YouMightLike />
           <CustomerRating />
           <HappySubscribers />
           <QuesAndAns />

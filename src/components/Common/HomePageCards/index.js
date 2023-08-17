@@ -11,6 +11,7 @@ const Card = ({
   cardImage,
   hoverCardImage,
   itemIncluded,
+  isHover = true,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
@@ -19,7 +20,9 @@ const Card = ({
     <div
       className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper}
       `}
-      onMouseOver={() => setHoverCard(true)}
+      onMouseOver={() => {
+        isHover && setHoverCard(true);
+      }}
       onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
         <img

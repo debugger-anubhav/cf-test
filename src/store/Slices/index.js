@@ -34,7 +34,6 @@ export const HomepageSlice = createSlice({
     selectedCityName(state, action) {
       state.cityName = action.payload;
     },
-
     addGoogleReviews(state, action) {
       state.reviews = action.payload;
     },
@@ -65,6 +64,38 @@ export const HomepageSlice = createSlice({
   },
 });
 
+export const ProductpageSlice = createSlice({
+  name: "ProductPageData",
+  initialState: {
+    completeTheLook: [],
+    youMightLike: [],
+    careInstructions: [],
+    bannerImages: [],
+    customerReviews: [],
+    qna: [],
+  },
+  reducers: {
+    addCompleteTheLook(state, action) {
+      state.completeTheLook = action.payload;
+    },
+    addYouMightLike(state, action) {
+      state.youMightLike = action.payload;
+    },
+    addCareInstructions(state, action) {
+      state.careInstructions = action.payload;
+    },
+    getBannerImages(state, action) {
+      state.bannerImages = action.payload;
+    },
+    getCustomerReviews(state, action) {
+      state.customerReviews = action.payload;
+    },
+    getProductQuesAns(state, action) {
+      state.qna = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -81,3 +112,12 @@ export const {
   addSidebarMenuLists,
   setAnnouncementBar,
 } = HomepageSlice.actions;
+
+export const {
+  addCompleteTheLook,
+  addYouMightLike,
+  addCareInstructions,
+  getBannerImages,
+  getCustomerReviews,
+  getProductQuesAns,
+} = ProductpageSlice.actions;

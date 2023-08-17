@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -6,6 +6,7 @@ import {CustomNextArrow, CustomPrevArrow} from "./CustomArrows";
 import {
   DeliveryTruck,
   Heart,
+  InformationIcon,
   RatingStar,
   ShareIcon,
   VerifyIcon,
@@ -15,15 +16,55 @@ import {BsPersonVcard} from "react-icons/bs";
 import string from "@/constants/Constant.json";
 import {HasselFreeData} from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {useDispatch, useSelector} from "react-redux";
+import {getBannerImages} from "@/store/Slices";
 
 const ProductDetails = ({category, itemName}) => {
+  const dispatch = useDispatch();
+  const pageData = useSelector(state => state.productPageData);
+
+  console.log(pageData);
+
   const str = string.product_page;
   const arr = ["Home", category, itemName];
   const images = ["grey", "lightgreen", "khaki", "lightblue", "pink"];
 
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [duration, setDuration] = useState(3);
+  const [duration, setDuration] = useState({currentIndex: 3, value: 12});
   const [inWishList, setInWishList] = React.useState(false);
+  const [durationArray, setDurationArray] = useState([]);
+
+  const getBannerImagesFunction = () => {
+    axios
+      .get(baseURL + endPoints.productPage.bannerImages)
+      .then(res => {
+        dispatch(getBannerImages(res?.data?.data));
+        console.log(res, "res on monthly rent");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  const getDurationRent = () => {
+    axios
+      .get(baseURL + endPoints.productPage.monthlyRent)
+      .then(res => {
+        setDurationArray(res?.data?.data.reverse());
+        console.log(res, "res on monthly rent");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getDurationRent();
+    getBannerImagesFunction();
+  }, []);
 
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
@@ -84,7 +125,14 @@ const ProductDetails = ({category, itemName}) => {
                 key={index}
                 className={styles.prod_img}
                 style={{backgroundColor: item}}>
-                {/* <img src={item} alt={`Thumbnail ${index}`} /> */}
+                {/* <img
+                  src={`${productPageImagesBaseUrl + item?.file_name}`}
+                  alt={`Thumbnail ${index}`}
+                /> */}
+                <div className={styles.info}>
+                  <InformationIcon color={"ffffff"} />
+                  <p>39 people ordered this in the last 24hrs</p>
+                </div>
               </div>
             ))}
           </Carousel>
@@ -98,7 +146,10 @@ const ProductDetails = ({category, itemName}) => {
                 }`}
                 key={index}
                 onClick={() => handleThumbnailClick(index)}>
-                {/* <img src={image} alt={`Thumbnail ${index}`} /> */}
+                {/* <img
+                  src={`${productPageImagesBaseUrl + image?.file_name}`}
+                  alt={`Thumbnail ${index}`}
+                /> */}
               </div>
             ))}
           </div>
@@ -153,27 +204,54 @@ const ProductDetails = ({category, itemName}) => {
             <p className={styles.duration_text}>
               For how many months would you like to rent this?
             </p>
+
             <div className={styles.circle_div}>
-              {["3", "6", "9", "12"].map((item, index) => (
-                <div
-                  className={`${
-                    duration === index
-                      ? "bg-[#597492] text-fff"
-                      : "text-[#597492]"
-                  } ${styles.duration_circle}`}
-                  onClick={() => setDuration(index)}
-                  key={index}>
-                  {item}
+              {durationArray.map((item, index) => (
+                <div key={index}>
+                  <div
+                    className={`${
+                      duration.currentIndex === index
+                        ? "bg-[#597492] text-fff"
+                        : "text-[#597492]"
+                    } ${styles.duration_circle}`}
+                    onClick={() =>
+                      setDuration({
+                        value: item.attr_name?.split(" ")[0],
+                        currentIndex: index,
+                      })
+                    }>
+                    {item.attr_name?.split(" ")[0]}
+                  </div>
                 </div>
               ))}
             </div>
+
             <div className={styles.deposit_div}>
               <div>
                 <p className={styles.deposit_txt}>Monthly Rent</p>
                 <div className={styles.flexx}>
-                  <p className={styles.currentPrice}>₹709</p>
-                  <p className={styles.originalPrice}>899</p>
-                  <div className={styles.discount}>-60% OFF</div>
+                  <p className={styles.currentPrice}>
+                    {durationArray[duration.currentIndex]?.attr_price}
+                  </p>
+                  <p
+                    className={styles.originalPrice}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    {durationArray[0]?.attr_price}
+                  </p>
+                  <div
+                    className={styles.discount}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    {`${Math.round(
+                      ((durationArray[0]?.attr_price -
+                        durationArray[duration.currentIndex]?.attr_price) *
+                        100) /
+                        durationArray[0]?.attr_price,
+                    ).toFixed(2)}%`}
+                  </div>
                 </div>
               </div>
               <span className="text-[#9C9C9C]">+</span>
