@@ -15,6 +15,7 @@ import {GoPlus} from "react-icons/go";
 import {MdModeEdit, MdVerifiedUser} from "react-icons/md";
 import {HiOutlineShare} from "react-icons/hi";
 import {LiaTruckMovingSolid} from "react-icons/lia";
+import {RiInformationLine} from "react-icons/ri";
 // import {MdVerifiedUser} from "react-icons/md";
 import Favorite from "@/assets/header/favorite.svg";
 import Menu from "@/assets/header/menu.svg";
@@ -148,4 +149,8 @@ export const DeliveryTruck = ({size, color, className}) => (
 
 export const VerifyIcon = ({size, color, className}) => (
   <MdVerifiedUser size={size} color={color} className={className} />
+);
+
+export const InformationIcon = ({size, color, className}) => (
+  <RiInformationLine size={size} color={color} className={className} />
 );

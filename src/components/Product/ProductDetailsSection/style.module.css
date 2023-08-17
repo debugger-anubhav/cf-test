@@ -19,6 +19,10 @@
 .prod_img {
   @apply relative w-full h-[270px] md:h-[400px] lg:h-[546px];
 }
+.info {
+  @apply flex gap-1 p-1 xl:p-2 rounded-[4px] absolute top-0 left-0 xl:left-2 text-fff text-12 xl:text-14 xl:font-medium tracking-0.24 xl:tracking-desc uppercase items-center;
+  background: rgba(62, 104, 142, 0.6);
+}
 .arrow_div {
   @apply hidden absolute w-12 h-full lg:flex items-center;
 }
