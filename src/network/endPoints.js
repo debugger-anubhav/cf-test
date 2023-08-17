@@ -12,4 +12,11 @@ export const endPoints = {
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
+
+  seoApplianceRentalSubCategory:
+    "fc-categories/getRentalApplianceSubCategories",
+  seoApplianceTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+
+  seoFurnitureRentalSubCategory: "fc-categories/all",
 };
