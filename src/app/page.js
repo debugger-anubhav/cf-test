@@ -98,7 +98,7 @@ export default function Home() {
           <HeroBanner />
           <RentFurnitureAndAppliances params={"All"} />
           <RecentlyViewedProduct />
-          <TrendingProducts params={""} />
+          <TrendingProducts params={"home-page"} />
           <OffersAndCoupons />
           <NewlyLaunched />
           <DownloadForMobile />
@@ -111,7 +111,7 @@ export default function Home() {
           <MediaCoverage />
           <CombineSection />
           <HappySubscribers />
-          <FrequentlyAskedQuestions />
+          <FrequentlyAskedQuestions params={"home-page"} />
           <Footer />
         </div>
       </Provider>
