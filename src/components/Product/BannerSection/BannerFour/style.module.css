@@ -1,0 +1,27 @@
+.main_container {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins py-12 flex flex-col lg:flex-row gap-8;
+}
+.video {
+  @apply min-w-full md:min-w-[630px] xl:min-w-[866px] h-[270px] md:h-[320px] xl:h-[487px] relative;
+  background:
+    url("../bgBanner.svg"),
+    lightgray 50% / cover no-repeat;
+}
+.video_player {
+  @apply w-full h-full;
+}
+.play_button_container {
+  @apply w-24 h-24 cursor-pointer absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url("../../../../assets/home_page_assets/icons/playBtn.svg");
+  background-size: cover;
+  z-index: 1;
+}
+.head {
+  @apply mt-2 text-20 xl:text-24 text-[#2A2A2A] font-semibold tracking-0.48;
+}
+.desc {
+  @apply mt-3 text-71717A text-12 xl:text-16 xl:tracking-0.3 tracking-0.24;
+}

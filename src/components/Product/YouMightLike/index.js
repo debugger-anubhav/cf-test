@@ -4,33 +4,39 @@ import Card from "@/components/Common/HomePageCards";
 // import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 // import {HomePageImages} from "@/assets/images";
 import {useDispatch, useSelector} from "react-redux";
-import {addCompleteTheLook} from "@/store/Slices";
+import {addYouMightLike} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 
-const CompleteTheLook = () => {
+const YouMightLike = ({heading, isbg}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.productPage.completeTheLook)
+      .get(baseURL + endPoints.productPage.youMightLike)
       .then(res => {
-        dispatch(addCompleteTheLook(res?.data?.data));
+        dispatch(addYouMightLike(res?.data?.data));
+        console.log(res, "res on product");
       })
       .catch(err => {
         console.log(err);
-        dispatch(addCompleteTheLook([]));
+        dispatch(addYouMightLike([]));
       });
   }, []);
   return (
-    <div className={styles.main_container}>
-      <h2 className={styles.heading}>Complete The Look</h2>
+    <div
+      className={styles.main_container}
+      style={{
+        background:
+          "linear-gradient(136deg, rgba(250, 247, 172, 0.00) 0%, rgba(219, 240, 229, 0.70) 100%)",
+      }}>
+      <h2 className={styles.heading}>You might also like</h2>
 
       <div className={styles.card_wrapper}>
-        {pageData?.completeTheLook?.map((item, index) => (
+        {pageData?.youMightLike?.map((item, index) => (
           <div key={index}>
             <Card
               cardImage={`${
@@ -51,4 +57,4 @@ const CompleteTheLook = () => {
   );
 };
 
-export default CompleteTheLook;
+export default YouMightLike;

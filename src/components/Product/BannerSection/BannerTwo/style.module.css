@@ -1,0 +1,9 @@
+.main_container {
+  @apply font-Poppins my-12 xl:my-[88px];
+}
+.img_wrapper {
+  @apply relative w-full h-[270px] md:h-[320px] xl:h-[487px];
+}
+.img {
+  @apply min-w-full h-full;
+}

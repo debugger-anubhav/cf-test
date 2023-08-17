@@ -1,0 +1,19 @@
+.main_container {
+  @apply font-Poppins;
+}
+.img_wrapper {
+  @apply relative w-full p-3 h-[270px] md:h-[320px] xl:h-[709px] mt-4;
+}
+.img {
+  @apply min-w-full h-full;
+}
+
+.content_div {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.head {
+  @apply mt-2 text-20 xl:text-24 text-[#2A2A2A] font-semibold tracking-0.48;
+}
+.desc {
+  @apply mt-3 text-71717A text-12 xl:text-16 tracking-0.24 xl:tracking-0.3;
+}

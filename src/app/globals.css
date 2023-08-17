@@ -64,6 +64,11 @@ body h1 h2 h3 h4 h5 h6 p {
   border-top-right-radius: 20px !important;
 } */
 
+/*  for product page  */
+/* .MuiDrawer-paper {
+  @apply !rounded-t-[20px] lg:!rounded-t-none;
+} */
+
 .react-responsive-modal-modal {
   @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-[6.5rem] xl:right-[19.5%] rounded-lg z-[111] h-[416px] overflow-y-scroll;
   position: absolute !important;

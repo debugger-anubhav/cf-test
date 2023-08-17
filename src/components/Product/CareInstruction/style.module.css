@@ -48,5 +48,5 @@
   @apply text-16 xl:text-20 font-medium text-222 leading-normal tracking-0.3 xl:tracking-0.4 mt-3;
 }
 .card_desc {
-  @apply text-12 xl:text-14 leading-normal xl:leading-5 text-9A9AA2 mt-2;
+  @apply w-[281px] text-12 xl:text-14 leading-normal xl:leading-5 text-9A9AA2 mt-2;
 }
