@@ -109,7 +109,7 @@ export default function Page() {
           <MediaCoverage />
           <CombineSection />
           <HappySubscribers />
-          <FrequentlyAskedQuestions />
+          <FrequentlyAskedQuestions params={params} />
           <Footer />
         </div>
       </Provider>

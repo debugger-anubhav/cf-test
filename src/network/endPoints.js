@@ -12,11 +12,18 @@ export const endPoints = {
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
+  faqsLandingPage: "fc-faqs/getHomePageFAQS",
 
   seoApplianceRentalSubCategory:
     "fc-categories/getRentalApplianceSubCategories",
   seoApplianceTtrendingProduct:
     "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=",
+  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
 
   seoFurnitureRentalSubCategory: "fc-categories/all",
+  seoFurnitureTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=",
+  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
 };
