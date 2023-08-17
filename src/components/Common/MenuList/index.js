@@ -9,7 +9,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 const MenuList = () => {
   const dispatch = useDispatch();
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
@@ -27,8 +27,6 @@ const MenuList = () => {
       })
       .catch(err => console.log(err));
   }, []);
-
-  console.log(homePageReduxData.cityName, "fghjkjhg");
 
   return (
     <div className={styles.menu_list_wrapper}>

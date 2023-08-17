@@ -1,150 +1,53 @@
 import React from "react";
 import style from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
+import {useSelector} from "react-redux";
+import {productImageBaseUrl} from "@/constants/constant";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const SingleProduct = () => {
+const SingleProduct = ({setInPageNo}) => {
+  const getAllProductWithFilterData = useSelector(
+    state => state.categoryPageData,
+  );
+  const data = getAllProductWithFilterData?.singleProduct;
+
   return (
-    <div className={style.main_container}>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
-      <div className={style.card_box}>
-        <Card
-          // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-          cardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          desc={"xyzAbc"}
-          originalPrice={"1000"}
-          currentPrice={"750"}
-          hoverCardImage={
-            "https://d3juy0zp6vqec8.cloudfront.net/images/category/bedroom-furniture.webp"
-          }
-          discount={`${Math.round(((1000 - 750) * 100) / 1000).toFixed(2)}%`}
-          // hoverCardImage={
-          //     item?.image?.split(",").filter(item => item).length > 1
-          //         ? productImageBaseUrl + item?.image?.split(",")[1]
-          //         : productImageBaseUrl + item?.image?.split(",")[0]
-          // }
-        />
-      </div>
+    <div>
+      <InfiniteScroll
+        dataLength={data.length}
+        next={() => setInPageNo(prev => prev + 1)}
+        hasMore={true} // Replace with a condition based on your data source
+        className="!w-full !h-full">
+        <div className={style.main_container}>
+          {data?.map((item, index) => {
+            return (
+              <div className={style.card_box} key={index.toString()}>
+                <Card
+                  cardImage={`${productImageBaseUrl}${
+                    item?.image?.split(",")[0]
+                  }`}
+                  productImageBaseUrl
+                  desc={item?.product_name}
+                  originalPrice={item?.price}
+                  currentPrice={item?.sale_price}
+                  hoverCardImage={`${productImageBaseUrl}${
+                    item?.image.split(",")[1]
+                  }`}
+                  discount={`${Math.round(
+                    ((item?.price - item?.sale_price) * 100) / 1000,
+                  ).toFixed(2)}%`}
+                />
+              </div>
+            );
+            // }
+            // else {
+            //   console.log("xxxx")
+            //   dispatch(addIsSubProduct(true))
+            // }
+            // return null;
+          })}
+        </div>
+      </InfiniteScroll>
     </div>
   );
 };

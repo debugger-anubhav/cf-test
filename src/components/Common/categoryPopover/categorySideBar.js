@@ -3,17 +3,21 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import styles from "../../Category/SubHeader/Subheader/style.module.css";
-import {DownPopUpArrow} from "@/assets/icon";
-// import {useSelector} from "react-redux";
+import {Close, DownPopUpArrow} from "@/assets/icon";
 import {CategoryFilterData, sortByText} from "@/constants/constant";
-// import InboxIcon from '@mui/icons-material/MoveToInbox';
-// import MailIcon from '@mui/icons-material/Mail';
+import {useState} from "react";
 
 export default function FilterSortDrawer({filterName}) {
   // const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const [state, setState] = React.useState({
     bottom: false,
   });
+
+  const [itemCount, setItemCount] = useState(7);
+  console.log(setItemCount, "setItemCount");
+  const loadMoreItems = () => {
+    return prevCount => prevCount + 7; // Increment the item count by 7
+  };
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -25,25 +29,23 @@ export default function FilterSortDrawer({filterName}) {
 
     setState({...state, [anchor]: open});
   };
-  //   const id = open ? "filter-popover" : undefined;
 
   const list = anchor => (
     <div
       // sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}>
+      onKeyDown={toggleDrawer(anchor, false)}
+      className="relative">
       <List>
         <div className="rounded-t-2xl">
           {filterName === "Filter" ? (
             <div className="gap-6 shadow-md w-full bg-white px-4 pt-4 pb-8">
               <p className={styles.headin_text}>{filterName}</p>
-              {/* <div className=" flex flex-col max-h-[259px] bg-red-100 overflow-y-scroll "> */}
               <div className={styles.mapped_filter_mobile}>
-                {CategoryFilterData.map((ele, index) => {
+                {CategoryFilterData.slice(0, itemCount).map((ele, index) => {
                   return (
                     <div
-                      // className="h-[37px] flex items-center justify-between"
                       className={styles.single_filter_text}
                       key={index.toString()}>
                       <p className={styles.option_text}>{ele.item}</p>
@@ -56,15 +58,16 @@ export default function FilterSortDrawer({filterName}) {
                         //     categoryPageReduxData?.filteredItems.includes(ele?.item) ? true : false
                         // }
                         className="pr-1"
-                        // {
-                        // }
-                        // }
-                        // onChange={(e) => handleFilteredItems(e)}
                       />
                     </div>
                   );
                 })}
               </div>
+              {itemCount < CategoryFilterData.length && (
+                <p className={styles.see_more_text} onClick={loadMoreItems}>
+                  See more
+                </p>
+              )}
               <div className="mt-6 w-full flex justify-center">
                 <div className={styles.btn_container}>
                   <p className={styles.apply_btn}>Apply</p>
@@ -91,7 +94,6 @@ export default function FilterSortDrawer({filterName}) {
                   );
                 })}
               </div>
-              <p className={styles.see_more_text}>See more</p>
             </div>
           )}
         </div>
@@ -104,14 +106,13 @@ export default function FilterSortDrawer({filterName}) {
     <div>
       {["bottom"].map(anchor => (
         <React.Fragment key={anchor}>
-          {/* <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button> */}
           <div
             className={styles.filterbox}
             // onClick={handleClick}
             onClick={toggleDrawer(anchor, true)}>
             <div className={styles.filter_text_container}>
-              <p className={styles.filter_text}>Filter</p>
-              {/* <p className={styles.filter_text}>{filterName}</p> */}
+              {/* <p className={styles.filter_text}>Filter</p> */}
+              <p className={styles.filter_text}>{filterName}</p>
             </div>
             <div>
               <DownPopUpArrow
@@ -123,7 +124,7 @@ export default function FilterSortDrawer({filterName}) {
               />
             </div>
           </div>
-          <div className="relative bg-red-200"> 44</div>
+
           <Drawer
             anchor={anchor}
             PaperProps={{
@@ -140,6 +141,13 @@ export default function FilterSortDrawer({filterName}) {
               borderTopLeftRadius: "20px",
               borderTopRightRadius: "20px",
             }}>
+            <div
+              className="relative top-4 right-[24px] flex w-full justify-end z-[111]"
+              onClick={toggleDrawer("bottom", false)}>
+              {/* <DialogTitle sx={{ padding: 0, justifyContent: 'flex-end', display: 'flex', background: "transparent", position: 'absolute', }}> */}
+              <Close size={25} color={"#000"} />
+              {/* </DialogTitle> */}
+            </div>
             {list(anchor)}
           </Drawer>
         </React.Fragment>

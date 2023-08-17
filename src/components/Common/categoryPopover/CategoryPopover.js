@@ -1,7 +1,7 @@
 import * as React from "react";
 import Popover from "@mui/material/Popover";
 import styles from "../../Category/SubHeader/Subheader/style.module.css";
-import {CategoryFilterData, sortByText} from "@/constants/constant";
+import {sortByText} from "@/constants/constant";
 import {DownPopUpArrow} from "@/assets/icon";
 import {useDispatch, useSelector} from "react-redux";
 import {addFilteredItem} from "@/store/Slices/categorySlice";
@@ -15,11 +15,18 @@ export default function CategoryPopover({
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const getAllProductWithFilterData = useSelector(
+    state => state.categoryPageData,
+  );
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  // console.log(getAllProductWithFilterData?.prdoucWithFilter?.filters, "data")
+  const filtereData = getAllProductWithFilterData?.prdoucWithFilter?.filters;
+
   const [filterList, setFilterList] = useState([]);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   console.log(filterList, "filterList");
+
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -29,12 +36,11 @@ export default function CategoryPopover({
   };
 
   const open = Boolean(anchorEl);
+
   const id = open ? "filter-popover" : undefined;
 
   const handleFilteredItems = e => {
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
-    // const newFilterItem = e.target.value;
-    // if (e.target.checked && categoryPageReduxData?.filteredItems.indexOf(newFilterItem) === -1) {
     if (e.target.checked) {
       updatedFilteredList = [
         ...categoryPageReduxData?.filteredItems,
@@ -56,8 +62,8 @@ export default function CategoryPopover({
   }, [emptyFilterItem]);
 
   return (
-    <div>
-      <div className={styles.filterbox} onClick={handleClick}>
+    <div onClick={handleClick}>
+      <div className={styles.filterbox}>
         <div className={styles.filter_text_container}>
           <p className={styles.filter_text}>{filterName}</p>
         </div>
@@ -84,16 +90,17 @@ export default function CategoryPopover({
           sx={{top: "3.5rem", borderRadius: "16px"}}>
           <div className="rounded-2xl">
             {filterName === "Filter" ? (
-              <div className="gap-6 shadow-md w-[228px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 pl-4">
+              <div className="gap-6 shadow-md w-[228px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 px-4">
                 {/* <div className=" flex flex-col max-h-[259px] bg-red-100 overflow-y-scroll "> */}
                 <div className={styles.mapped_filter}>
-                  {CategoryFilterData.map((ele, index) => {
+                  {/* {CategoryFilterData.map((ele, index) => { */}
+                  {filtereData?.map((ele, index) => {
                     return (
                       <div
                         // className="h-[37px] flex items-center justify-between"
                         className={styles.single_filter_text}
                         key={index.toString()}>
-                        <p className={styles.option_text}>{ele.item}</p>
+                        <p className={styles.option_text}>{ele?.filter_name}</p>
                         <input
                           type="checkbox"
                           id="filterItem"

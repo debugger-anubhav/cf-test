@@ -5,6 +5,11 @@ import Popover from "@mui/material/Popover";
 import {useRouter} from "next/navigation";
 import {useDispatch, useSelector} from "react-redux";
 import {addProductCategory, addProductName} from "@/store/Slices";
+import {
+  addOutStockProduct,
+  addSetProduct,
+  addSingleProduct,
+} from "@/store/Slices/categorySlice";
 
 const PopOver = ({list, item}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -29,6 +34,10 @@ const PopOver = ({list, item}) => {
   const handleSelectedProduct = (e, item) => {
     dispatch(addProductName(item));
     dispatch(addProductCategory(hoverRef.current));
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+
     router.push(
       `/${homePageReduxData.cityName.toLowerCase()}/${
         homePageReduxData?.productName?.cat_name
