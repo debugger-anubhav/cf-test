@@ -88,12 +88,12 @@ export const downloadBannersImages = {
 };
 
 export const hasselFreeSection = {
-  FrameOne: Desktop + "mint-new-products.webp",
-  FrameTwo: Desktop + "free-shipping.webp",
+  FrameSix: Desktop + "flexible-upgrades.webp",
   FrameThree: Desktop + "free-installation.webp",
   FrameFour: Desktop + "free-relocation.webp",
+  FrameTwo: Desktop + "free-shipping.webp",
   FrameFive: Desktop + "insurance-cover.webp",
-  FrameSix: Desktop + "flexible-upgrades.webp",
+  FrameOne: Desktop + "mint-new-products.webp",
   IconOne: ProductIcons + "mint-new-products.svg",
   IconTwo: ProductIcons + "free-shipping.svg",
   IconThree: ProductIcons + "free-installation.svg",

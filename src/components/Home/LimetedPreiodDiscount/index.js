@@ -1,3 +1,5 @@
+"use client";
+
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";

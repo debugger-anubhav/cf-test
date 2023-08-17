@@ -12,10 +12,10 @@
   @apply flex gap-[0.62rem] items-center;
 }
 .thumbnail {
-  @apply min-w-full h-[13rem] lg:h-[17rem] 3xl:h-[20rem] rounded-lg;
+  @apply min-w-full w-full rounded-lg;
 }
 .desc_div {
-  @apply mt-1 flex gap-2 3xl:justify-between;
+  @apply flex gap-2 3xl:justify-between mt-3;
 }
 .desc {
   @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;

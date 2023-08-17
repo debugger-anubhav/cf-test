@@ -1,4 +1,6 @@
-import React, {useRef} from "react";
+"use client";
+
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {HappySubscriber} from "@/constants/constant";
@@ -15,12 +17,17 @@ const HappySubscribers = () => {
   };
 
   const scrollRef = useHorizontalScroll();
-  const tabBox = document.querySelector("#videoslider");
+  // const tabBox = document.querySelector("#videoslider");
+  const tabBox =
+    typeof document !== "undefined"
+      ? document.querySelector("#videoslider")
+      : null;
   let isDragging = false;
 
   const dragging = e => {
     if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
+    // tabBox.scrollLeft -= e.movementX;
+    if (tabBox) tabBox.scrollLeft -= e.movementX;
   };
   const dragStop = () => {
     isDragging = false;
@@ -30,7 +37,9 @@ const HappySubscribers = () => {
   tabBox?.addEventListener("mousedown", () => (isDragging = true));
   tabBox?.addEventListener("mousemove", dragging);
   // }
-  document.addEventListener("mouseup", dragStop);
+  useEffect(() => {
+    document.addEventListener("mouseup", dragStop);
+  }, []);
 
   return (
     <div className={styles.happy_subscribers_wrapper}>

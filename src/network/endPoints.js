@@ -26,4 +26,18 @@ export const endPoints = {
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
     qna: "fc-faq-products/getProductPageFAQs?productId=3783",
   },
+  faqsLandingPage: "fc-faqs/getHomePageFAQS",
+
+  seoApplianceRentalSubCategory:
+    "fc-categories/getRentalApplianceSubCategories",
+  seoApplianceTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=",
+  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
+
+  seoFurnitureRentalSubCategory: "fc-categories/all",
+  seoFurnitureTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=",
+  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
 };

@@ -58,9 +58,11 @@ const Header = () => {
       }
     };
     if (openSearchbar) {
-      document.body.style.overflow = "hidden";
-      document.addEventListener("keydown", handleEscKey);
-      document.addEventListener("click", handleBackdropClick);
+      if (typeof document !== "undefined") {
+        document.body.style.overflow = "hidden";
+        document.addEventListener("keydown", handleEscKey);
+        document.addEventListener("click", handleBackdropClick);
+      }
     } else {
       document.body.style.overflow = "auto";
     }

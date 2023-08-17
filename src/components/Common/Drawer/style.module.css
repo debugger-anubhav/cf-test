@@ -36,10 +36,10 @@
   @apply flex flex-wrap w-full mt-8;
 }
 .city_wrapper {
-  @apply flex flex-col mr-6 mb-6 xs:w-[90px] ms:w-[120px] w-[73px]  cursor-pointer p-4 rounded-md hover:border-[2px] hover:border-primary;
+  @apply flex flex-col sm:mb-6  xs:w-[115px] ms:w-[130px] w-[95px]  cursor-pointer p-4;
 }
 .city_thambnil {
-  @apply flex rounded-md w-full;
+  @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary;
 }
 .city_name {
   @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2;
@@ -75,7 +75,7 @@
   @apply text-[#7895B0] font-bold text-24 leading-[24px];
 }
 .bottom_close_icon {
-  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4;
+  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4  z-[111];
   /* -top-11  */
 }
 .-MuiPaper-root-MuiDrawer-paper {

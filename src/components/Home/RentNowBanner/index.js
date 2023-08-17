@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {useRouter} from "next/navigation";
@@ -29,6 +31,15 @@ const RentNowBanner = () => {
     "rentNowBanners",
     endPoints.rentNowBanners,
   );
+  // const {refetch: getApplianceRentNowBanners} = useQuery(
+  //   "applianceRentNowBanners",
+  //   endPoints.seoApplianceBanners,
+  // );
+  // const {refetch: getFurnitureRentNowBanners} = useQuery(
+  //   "furnitureRentNowBanners",
+  //   endPoints.seoFurnitureBanners,
+  // );
+
   useEffect(() => {
     getRentNowBanners()
       .then(res => {

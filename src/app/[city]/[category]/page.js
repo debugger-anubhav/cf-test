@@ -1,17 +1,15 @@
 "use client";
 
 import React from "react";
+import {useParams} from "next/navigation";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-// import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// const MenuList = loadable(() => import("@/components/Common/MenuList"));
 import MenuList from "@/components/Common/MenuList";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
@@ -85,9 +83,9 @@ const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
 
-export default function Home() {
+export default function Page() {
   const queryClient = new QueryClient();
-
+  const params = useParams();
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -96,9 +94,9 @@ export default function Home() {
           <Header />
           <MenuList />
           <HeroBanner />
-          <RentFurnitureAndAppliances params={"All"} />
+          <RentFurnitureAndAppliances params={params} />
           <RecentlyViewedProduct />
-          <TrendingProducts params={"home-page"} />
+          <TrendingProducts params={params} />
           <OffersAndCoupons />
           <NewlyLaunched />
           <DownloadForMobile />
@@ -111,7 +109,7 @@ export default function Home() {
           <MediaCoverage />
           <CombineSection />
           <HappySubscribers />
-          <FrequentlyAskedQuestions params={"home-page"} />
+          <FrequentlyAskedQuestions params={params} />
           <Footer />
         </div>
       </Provider>

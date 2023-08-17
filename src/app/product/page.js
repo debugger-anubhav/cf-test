@@ -38,9 +38,7 @@ const ProductPage = () => {
             category={"Home Furniture"}
             itemName={"  Belle Single Bed with Storage"}
           />
-          <div className="-mt-8">
-            <OffersAndCoupons />
-          </div>
+          <OffersAndCoupons />
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
           <CompleteTheLook />

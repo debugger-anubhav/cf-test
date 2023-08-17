@@ -16,7 +16,11 @@ const SingleQuestion = ({ques, ans}) => {
           )}
         </div>
       </div>
-      <div>{showAnswer && <p className={styles.ans}>{ans}</p>}</div>
+      <div>
+        {showAnswer && (
+          <div dangerouslySetInnerHTML={{__html: ans}} className={styles.ans} />
+        )}
+      </div>
     </div>
   );
 };

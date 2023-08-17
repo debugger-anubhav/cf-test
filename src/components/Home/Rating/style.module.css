@@ -19,7 +19,7 @@
   @apply ml-1 mr-2;
 }
 .upper_div {
-  @apply flex justify-between pr-4 xl:pr-36 items-center mt-3;
+  @apply flex justify-between pr-4 macbook:pr-[122px] md:pr-[70px] xl:pr-[90px] 3xl:pr-[160px] items-center mt-3;
 }
 .editIcon {
   @apply w-10 h-10 xl:hidden;

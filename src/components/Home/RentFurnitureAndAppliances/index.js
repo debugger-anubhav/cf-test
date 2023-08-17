@@ -3,27 +3,62 @@ import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Skeleton from "@mui/material/Skeleton";
 import {useDispatch, useSelector} from "react-redux";
-import {addCategory} from "@/store/Slices";
+import {
+  addCategory,
+  setSeoApplianceRentalSubCategory,
+  setSeoFurnitureRentalSubCategory,
+} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 
-const RentFurnitureAndAppliances = () => {
+const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const seoAppliancePageReduxData = useSelector(
+    state => state.seoApplianceData,
+  );
 
   useEffect(() => {
-    axios
-      .get(baseURL + endPoints.category)
-      .then(res => {
-        dispatch(addCategory(res?.data?.data));
-      })
-      .catch(err => {
-        console.log(err);
-        dispatch(addCategory([]));
-      });
+    if (params?.category === "appliances-rental") {
+      axios
+        .get(baseURL + endPoints.seoApplianceRentalSubCategory)
+        .then(res => {
+          dispatch(setSeoApplianceRentalSubCategory(res?.data?.data));
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(setSeoApplianceRentalSubCategory([]));
+        });
+    } else if (params?.category === "furniture-rental") {
+      axios
+        .get(baseURL + endPoints.seoFurnitureRentalSubCategory)
+        .then(res => {
+          dispatch(setSeoFurnitureRentalSubCategory(res?.data?.data));
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(setSeoFurnitureRentalSubCategory([]));
+        });
+    } else {
+      axios
+        .get(baseURL + endPoints.category)
+        .then(res => {
+          dispatch(addCategory(res?.data?.data));
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(addCategory([]));
+        });
+    }
   }, []);
-  const RentFurniture = homePageReduxData.category;
+
+  const RentFurniture =
+    params.category === "appliances-rental"
+      ? seoAppliancePageReduxData.seoApplianceSubCategory
+      : params.category === "furniture-rental"
+      ? homePageReduxData.seoFurnitureSubCategory
+      : homePageReduxData.category;
 
   return (
     <div className={styles.rent_furniture_wrapper}>
@@ -34,8 +69,8 @@ const RentFurnitureAndAppliances = () => {
           <div key={index.toString()} className={styles.card_wrapper}>
             <img
               src={
-                "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                item.category_image
+                "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                item.category_web_image
               }
               alt="RentFurnitureImage"
               className={styles.category_img}

@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
@@ -27,13 +29,15 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const tabBox = document.querySelector("#gallery");
-
+  // const tabBox = document.querySelector("#gallery");
+  const tabBox =
+    typeof document !== "undefined" ? document.querySelector("#gallery") : null;
   let isDragging = false;
 
   const dragging = e => {
     if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
+    // tabBox.scrollLeft -= e.movementX;
+    if (tabBox) tabBox.scrollLeft -= e.movementX;
   };
   const dragStop = () => {
     isDragging = false;
@@ -43,7 +47,9 @@ const RecentlyViewedProduct = () => {
   tabBox?.addEventListener("mousedown", () => (isDragging = true));
   tabBox?.addEventListener("mousemove", dragging);
   // }
-  document.addEventListener("mouseup", dragStop);
+  useEffect(() => {
+    document.addEventListener("mouseup", dragStop);
+  }, []);
   const scrollRef = useHorizontalScroll();
 
   return (
