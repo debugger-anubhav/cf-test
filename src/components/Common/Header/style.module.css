@@ -96,3 +96,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 111;
 }
+
+.mobile_search_row .backdrop {
+  padding-top: 1rem;
+}
