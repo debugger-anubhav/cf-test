@@ -5,6 +5,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {CustomNextArrow, CustomPrevArrow} from "./CustomArrows";
 import {
   DeliveryTruck,
+  FooterIcons,
   Heart,
   InformationIcon,
   RatingStar,
@@ -12,8 +13,8 @@ import {
   VerifyIcon,
 } from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
-import {BsPersonVcard} from "react-icons/bs";
 import string from "@/constants/Constant.json";
+import {ProductPageImages} from "@/assets/images";
 import {HasselFreeData} from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
@@ -21,6 +22,9 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
+import Modal from "react-responsive-modal";
+import "react-responsive-modal/styles.css";
+import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
 
 const ProductDetails = ({category, itemName}) => {
@@ -33,10 +37,21 @@ const ProductDetails = ({category, itemName}) => {
   const arr = ["Home", category, itemName];
   const images = ["grey", "lightgreen", "khaki", "lightblue", "pink"];
 
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 3, value: 12});
   const [inWishList, setInWishList] = React.useState(false);
   const [durationArray, setDurationArray] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const getBannerImagesFunction = () => {
     axios
@@ -75,8 +90,56 @@ const ProductDetails = ({category, itemName}) => {
     setSelectedIndex(index);
   };
 
+  const cityShieldCurrentPrice =
+    (durationArray[duration.currentIndex]?.attr_price * 6) / 100;
+
+  const cityShieldOriginalPrice =
+    (durationArray[duration.currentIndex]?.attr_price * 10) / 100;
+
+  const cityShieldDiscount = Math.round(
+    ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
+      cityShieldOriginalPrice,
+  ).toFixed(2);
+
+  const handleButtonClick = () => {
+    setIsLoading(true);
+
+    // Simulate loading by using setTimeout
+    setTimeout(() => {
+      // After a delay, set isLoading back to false
+      setIsLoading(false);
+    }, 3000);
+  };
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   return (
     <div className={styles.main_container}>
+      <Modal
+        styles={{}}
+        open={isModalOpen}
+        onClose={closeModal}
+        // center={true}
+        classNames={{
+          modal: styles.customModal,
+          overlay: styles.customOverlay,
+          closeButton: styles.customCloseButton,
+        }}>
+        <h1 className={styles.share_modal_head}>Share Product via:</h1>
+        <div className={styles.share_modal_icons_wrapper}>
+          {FooterIcons?.social_media_icons?.map((item, index) => (
+            <img
+              key={index.toString()}
+              alt={item?.icon}
+              src={item?.icon}
+              // className={styles.sm_icon}
+              onClick={() => console.log("cliked")}
+            />
+          ))}
+        </div>
+      </Modal>
       <div className={styles.bread_crumps}>
         {arr.map((item, index) => (
           <div key={index} className="flex gap-2">
@@ -174,14 +237,20 @@ const ProductDetails = ({category, itemName}) => {
             <h1 className={styles.item_name}>{itemName} placeholder</h1>
             <div className={styles.header_div}>
               <Heart
-                className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}
+                className={
+                  "w-[30px] h-[30px] xl:w-[40px] xl:h-[40px] cursor-pointer"
+                }
                 color={inWishList ? "#D96060" : "#C0C0C6"}
                 onClick={() => setInWishList(!inWishList)}
               />
-              <ShareIcon
-                className={"w-[30px] h-[30px] xl:w-[40px] xl:h-[40px]"}
-                color={"#C0C0C6"}
-              />
+              <div onClick={openModal}>
+                <ShareIcon
+                  className={
+                    "w-[30px] h-[30px] xl:w-[40px] xl:h-[40px] cursor-pointer"
+                  }
+                  color={"#C0C0C6"}
+                />
+              </div>
             </div>
           </div>
 
@@ -265,16 +334,25 @@ const ProductDetails = ({category, itemName}) => {
             </div>
           </div>
 
-          <button className={styles.btn}>Add to Cart</button>
+          <button
+            onClick={handleButtonClick}
+            disabled={isLoading}
+            className={styles.btn}>
+            {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
+          </button>
 
           <div className={styles.emi_wrapper}>
             <RiSparklingFill size={16} color={"#597492"} />
-            <p className={styles.emi_text}>{str.emi}</p>
+            <p className={styles.emi_text}>
+              Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
+              using No-Cost EMI (excluding GST)
+            </p>
             <RiSparklingFill size={16} color={"#597492"} />
           </div>
 
           <div className={styles.kyc_wrapper}>
-            <BsPersonVcard size={24} />
+            {/* <BsPersonVcard size={24} /> */}
+            <img src={ProductPageImages.KycDoc} alt="kyc" className="w-6 h-6" />
             <p className={styles.kyc_text}>{str.kyc}</p>
           </div>
 
@@ -300,19 +378,35 @@ const ProductDetails = ({category, itemName}) => {
                 <VerifyIcon size={30} color={"#2D9469"} />
                 <p className={styles.city_shield_head}>Cityshield </p>
               </div>
-              <button className={styles.read_more}>Read More</button>
+              <button onClick={toggleDrawer} className={styles.read_more}>
+                Read More
+              </button>
+
+              {drawerOpen && (
+                <CityshieldDrawer
+                  toggleDrawer={toggleDrawer}
+                  open={drawerOpen}
+                  cityShieldCurrentPrice={cityShieldCurrentPrice}
+                  cityShieldOriginalPrice={cityShieldOriginalPrice}
+                  cityShieldDiscount={cityShieldDiscount}
+                />
+              )}
             </div>
-            <p className={styles.opt_for}>{str.opt_for}</p>
+            <p className={styles.opt_for}>
+              Opt for City Shield today and get covered for accidental damages
+              at ONLY {cityShieldCurrentPrice}
+              /month!
+            </p>
             <p className={styles.protect}>{str.protect}</p>
 
             <div className={styles.cityshield_prices}>
               <p className={styles.currentPrice}>
                 <FaRupeeSign />
-                250 /mo
+                {cityShieldCurrentPrice}/mo
               </p>
               <p className={styles.originalPrice}>
                 <FaRupeeSign />
-                400 / mo
+                {cityShieldOriginalPrice} / mo
               </p>
               <div className={styles.discount}>-60% OFF</div>
             </div>

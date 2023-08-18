@@ -20,11 +20,13 @@ export const endPoints = {
     monthlyRent:
       "fc-subproducts/getProductForThePeriod?productId=3924&cityId=46",
     careInstructions:
-      "fc-care-instructions/getProductCareInstructions?productId=3783",
+      "fc-care-instructions/getProductCareInstructions?productId=4096",
     bannerImages: "fc-product-banners/getProductBanners",
     customerReviews:
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
     qna: "fc-faq-products/getProductPageFAQs?productId=3783",
+    happySubscribers:
+      "fc-care-instructions/getCustomerHappyStories?productId=4096",
   },
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
 
