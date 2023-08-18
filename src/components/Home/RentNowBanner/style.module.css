@@ -2,10 +2,11 @@
   @apply w-full rounded my-8 xl:my-[88px] macbook:pl-[122px] 3xl:pl-[160px] xl:pl-[90px] md:pl-[70px] pl-4;
 }
 .banner_card {
-  @apply flex flex-row gap-x-3 md:gap-x-4 3xl:gap-x-6 w-[100%] overflow-x-scroll;
+  @apply flex gap-x-3 md:gap-x-4 3xl:gap-x-6 w-full overflow-x-scroll;
 }
 .banner_wrapper {
-  @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative;
+  /* @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative; */
+  @apply lg:w-full lg:h-full h-[316px] min-w-[221px];
 }
 .banner_img {
   @apply w-full h-full cursor-pointer;

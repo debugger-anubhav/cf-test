@@ -5,6 +5,7 @@ import SingleQuestion from "./singleQuestion";
 import {ForwardArrow} from "@/assets/icon";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
+import {Skeleton} from "@mui/material";
 
 // h2 h3 p
 
@@ -70,3 +71,23 @@ const FrequentlyAskedQuestions = ({params}) => {
   );
 };
 export default FrequentlyAskedQuestions;
+
+export const FaqsSkeleton = () => {
+  return (
+    <div className={styles.faq_skeleton_wrapper}>
+      <Skeleton variant="text" className={"text-16 w-[30%] h-8"} />
+      <div className="w-[45%]">
+        <div className={styles.QuesAnsArray_div}>
+          {[1, 2, 3, 4, 5]?.map((item, index) => {
+            return (
+              <div key={index.toString()}>
+                <Skeleton variant="text" className={"text-16 w-full"} />
+              </div>
+            );
+          })}
+        </div>
+        <Skeleton variant="text" className={"w-40 h-20 mt-2"} />
+      </div>
+    </div>
+  );
+};
