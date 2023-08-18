@@ -25,6 +25,7 @@ import {getBannerImages} from "@/store/Slices";
 import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
+import {FaRupeeSign} from "react-icons/fa";
 
 const ProductDetails = ({category, itemName}) => {
   const dispatch = useDispatch();
@@ -326,7 +327,9 @@ const ProductDetails = ({category, itemName}) => {
               <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
-                <p className={styles.currentPrice}>₹0</p>
+                <p className={styles.currentPrice}>
+                  <FaRupeeSign />0
+                </p>
               </div>
             </div>
           </div>
@@ -398,13 +401,14 @@ const ProductDetails = ({category, itemName}) => {
 
             <div className={styles.cityshield_prices}>
               <p className={styles.currentPrice}>
-                {cityShieldCurrentPrice}
-                /mo
+                <FaRupeeSign />
+                {cityShieldCurrentPrice}/mo
               </p>
               <p className={styles.originalPrice}>
+                <FaRupeeSign />
                 {cityShieldOriginalPrice} / mo
               </p>
-              <div className={styles.discount}>{cityShieldDiscount}%</div>
+              <div className={styles.discount}>-60% OFF</div>
             </div>
           </div>
         </div>

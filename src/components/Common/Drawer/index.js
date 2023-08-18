@@ -2,12 +2,11 @@ import * as React from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {Close, Icons} from "@/assets/icon";
-import Image from "next/image";
-import {Images} from "@/assets/images";
 import string from "@/constants/Constant.json";
 import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
+import Image from "next/image";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -186,7 +185,13 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 Download mobile app
               </button>
               <div className={styles.download_qr_wrapper}>
-                <Image src={Images.DownloadQR} alt="download-QR" />
+                <img
+                  src={
+                    "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
+                  }
+                  alt="download-QR"
+                />
+                {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
                 <p className={styles.qr_text}>
                   <span className={styles.qr_text_span}>100+</span>People have
                   already downloaded our app 🎉
