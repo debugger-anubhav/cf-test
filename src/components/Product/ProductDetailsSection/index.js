@@ -24,6 +24,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
 import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
+import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 
 const ProductDetails = ({category, itemName}) => {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const ProductDetails = ({category, itemName}) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -106,6 +108,10 @@ const ProductDetails = ({category, itemName}) => {
       // After a delay, set isLoading back to false
       setIsLoading(false);
     }, 3000);
+  };
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
   return (
@@ -369,7 +375,19 @@ const ProductDetails = ({category, itemName}) => {
                 <VerifyIcon size={30} color={"#2D9469"} />
                 <p className={styles.city_shield_head}>Cityshield </p>
               </div>
-              <button className={styles.read_more}>Read More</button>
+              <button onClick={toggleDrawer} className={styles.read_more}>
+                Read More
+              </button>
+
+              {drawerOpen && (
+                <CityshieldDrawer
+                  toggleDrawer={toggleDrawer}
+                  open={drawerOpen}
+                  cityShieldCurrentPrice={cityShieldCurrentPrice}
+                  cityShieldOriginalPrice={cityShieldOriginalPrice}
+                  cityShieldDiscount={cityShieldDiscount}
+                />
+              )}
             </div>
             <p className={styles.opt_for}>
               Opt for City Shield today and get covered for accidental damages
