@@ -25,3 +25,7 @@
 .forword_icon {
   @apply w-4 h-4 xl:w-5 xl:h-5;
 }
+
+.faq_skeleton_wrapper {
+  @apply flex my-8 w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] justify-between;
+}
