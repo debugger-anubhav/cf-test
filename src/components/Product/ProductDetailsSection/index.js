@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {CustomNextArrow, CustomPrevArrow} from "./CustomArrows";
 import {
   DeliveryTruck,
-  FooterIcons,
   Heart,
   InformationIcon,
   RatingStar,
@@ -15,17 +14,20 @@ import {
 import {RiSparklingFill} from "react-icons/ri";
 import string from "@/constants/Constant.json";
 import {ProductPageImages} from "@/assets/images";
-import {HasselFreeData} from "@/constants/constant";
+import {HasselFreeData, productPageImagesBaseUrl} from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
-import Modal from "react-responsive-modal";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
+import ShareModal from "./ShareDrawer/ShareModal";
+
+// import ShareDrawer from "./ShareDrawer/ShareDrawer";
+// import Modal from "react-responsive-modal";
 
 const ProductDetails = ({category, itemName}) => {
   const dispatch = useDispatch();
@@ -35,7 +37,13 @@ const ProductDetails = ({category, itemName}) => {
 
   const str = string.product_page;
   const arr = ["Home", category, itemName];
-  const images = ["grey", "lightgreen", "khaki", "lightblue", "pink"];
+  const images = [
+    "1583995987Alexa-queen-bed.jpg",
+    "1583996030alexa-queen-bed-1.jpg",
+    "1583995987Alexa-queen-bed.jpg",
+    "1583995987Alexa-queen-bed.jpg",
+    "1583995987Alexa-queen-bed.jpg",
+  ];
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -117,29 +125,7 @@ const ProductDetails = ({category, itemName}) => {
 
   return (
     <div className={styles.main_container}>
-      <Modal
-        styles={{}}
-        open={isModalOpen}
-        onClose={closeModal}
-        // center={true}
-        classNames={{
-          modal: styles.customModal,
-          overlay: styles.customOverlay,
-          closeButton: styles.customCloseButton,
-        }}>
-        <h1 className={styles.share_modal_head}>Share Product via:</h1>
-        <div className={styles.share_modal_icons_wrapper}>
-          {FooterIcons?.social_media_icons?.map((item, index) => (
-            <img
-              key={index.toString()}
-              alt={item?.icon}
-              src={item?.icon}
-              // className={styles.sm_icon}
-              onClick={() => console.log("cliked")}
-            />
-          ))}
-        </div>
-      </Modal>
+      <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
       <div className={styles.bread_crumps}>
         {arr.map((item, index) => (
           <div key={index} className="flex gap-2">
@@ -185,14 +171,12 @@ const ProductDetails = ({category, itemName}) => {
               );
             }}>
             {images.map((item, index) => (
-              <div
-                key={index}
-                className={styles.prod_img}
-                style={{backgroundColor: item}}>
-                {/* <img
-                  src={`${productPageImagesBaseUrl + item?.file_name}`}
+              <div key={index} className={styles.prod_img}>
+                <img
+                  src={`${productPageImagesBaseUrl + item}`}
                   alt={`Thumbnail ${index}`}
-                /> */}
+                  className="w-full h-full"
+                />
                 <div className={styles.info}>
                   <InformationIcon color={"ffffff"} />
                   <p>39 people ordered this in the last 24hrs</p>
@@ -204,16 +188,16 @@ const ProductDetails = ({category, itemName}) => {
           <div className={styles.thumbnail_container}>
             {images.map((image, index) => (
               <div
-                style={{backgroundColor: image}}
                 className={`${styles.thumbnail_img} ${
                   index === selectedIndex ? "border-[#5F789D]" : "border-fff"
                 }`}
                 key={index}
                 onClick={() => handleThumbnailClick(index)}>
-                {/* <img
-                  src={`${productPageImagesBaseUrl + image?.file_name}`}
+                <img
+                  src={`${productPageImagesBaseUrl + "thumb/" + image}`}
                   alt={`Thumbnail ${index}`}
-                /> */}
+                  className="w-full h-full"
+                />
               </div>
             ))}
           </div>
@@ -301,6 +285,7 @@ const ProductDetails = ({category, itemName}) => {
                 <p className={styles.deposit_txt}>Monthly Rent</p>
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
+                    <FaRupeeSign />
                     {durationArray[duration.currentIndex]?.attr_price}
                   </p>
                   <p
@@ -394,7 +379,7 @@ const ProductDetails = ({category, itemName}) => {
             </div>
             <p className={styles.opt_for}>
               Opt for City Shield today and get covered for accidental damages
-              at ONLY {cityShieldCurrentPrice}
+              at ONLY ₹{cityShieldCurrentPrice}
               /month!
             </p>
             <p className={styles.protect}>{str.protect}</p>

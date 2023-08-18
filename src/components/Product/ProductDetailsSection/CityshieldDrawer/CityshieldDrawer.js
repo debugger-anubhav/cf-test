@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {Close, VerifyIcon} from "@/assets/icon";
 import {ProductPageImages} from "@/assets/images";
+import {FaRupeeSign} from "react-icons/fa";
 
 const CityshieldDrawer = ({
   toggleDrawer,
@@ -20,8 +21,13 @@ const CityshieldDrawer = ({
       setIsBottomDrawer(false);
     }
   };
+
   React.useEffect(() => {
     handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
   }, []);
 
   const arr = [
@@ -68,11 +74,11 @@ const CityshieldDrawer = ({
 
           <div className={styles.cityshield_prices}>
             <p className={styles.currentPrice}>
-              {cityShieldCurrentPrice}
-              /mo
+              <FaRupeeSign />
+              {cityShieldCurrentPrice}/mo
             </p>
             <p className={styles.originalPrice}>
-              {cityShieldOriginalPrice} / mo
+              <FaRupeeSign /> {cityShieldOriginalPrice} / mo
             </p>
             <div className={styles.discount}>{cityShieldDiscount}%</div>
           </div>
