@@ -11,5 +11,5 @@
   @apply cursor-pointer w-[230px] h-14 flex justify-center items-center border-2 text-16 font-medium rounded-lg;
 }
 .close_icon {
-  @apply fixed right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-16 lg:-mt-0;
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-16 lg:-mt-0;
 }
