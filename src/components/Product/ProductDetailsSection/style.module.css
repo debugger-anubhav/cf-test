@@ -86,10 +86,10 @@
   @apply font-medium text-12 mobile:text-14 leading-5 text-71717A;
 }
 .originalPrice {
-  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through;
+  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through flex items-center;
 }
 .currentPrice {
-  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4;
+  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4 flex items-center;
 }
 .discount {
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;

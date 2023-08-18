@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
-import {FaRupeeSign} from "react-icons/fa";
+// import {FaRupeeSign} from "react-icons/fa";
+import {BiRupee} from "react-icons/bi";
 
 const Card = ({
   desc,
@@ -56,12 +57,12 @@ const Card = ({
       </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
-          <h3 className={`${styles.currentPrice} flexx`}>
-            <FaRupeeSign />
+          <h3 className={`${styles.currentPrice} flex`}>
+            <BiRupee />
             {`${currentPrice} /mo`}
           </h3>
           <h3 className={`${styles.originalPrice} flex`}>
-            <FaRupeeSign />
+            <BiRupee />
             {`${originalPrice} /mo`}
           </h3>
         </div>

@@ -21,6 +21,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
+import {FaRupeeSign} from "react-icons/fa";
 
 const ProductDetails = ({category, itemName}) => {
   const dispatch = useDispatch();
@@ -257,7 +258,9 @@ const ProductDetails = ({category, itemName}) => {
               <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
-                <p className={styles.currentPrice}>₹0</p>
+                <p className={styles.currentPrice}>
+                  <FaRupeeSign />0
+                </p>
               </div>
             </div>
           </div>
@@ -303,8 +306,14 @@ const ProductDetails = ({category, itemName}) => {
             <p className={styles.protect}>{str.protect}</p>
 
             <div className={styles.cityshield_prices}>
-              <p className={styles.currentPrice}>₹250 /mo</p>
-              <p className={styles.originalPrice}>₹400 / mo</p>
+              <p className={styles.currentPrice}>
+                <FaRupeeSign />
+                250 /mo
+              </p>
+              <p className={styles.originalPrice}>
+                <FaRupeeSign />
+                400 / mo
+              </p>
               <div className={styles.discount}>-60% OFF</div>
             </div>
           </div>
