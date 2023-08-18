@@ -112,4 +112,5 @@ export const ProductPageImages = {
   // CtaImage: Desktop + "illustration.webp",
   CtaImage,
   LeafIcon: ProductIcons + "leaf-icon.svg",
+  KycDoc: ProductIcons + "kyc-documents.svg",
 };

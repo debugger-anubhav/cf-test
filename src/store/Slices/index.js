@@ -93,6 +93,7 @@ export const ProductpageSlice = createSlice({
     bannerImages: [],
     customerReviews: [],
     qna: [],
+    happySubscribersVideos: [],
   },
   reducers: {
     addCompleteTheLook(state, action) {
@@ -112,6 +113,9 @@ export const ProductpageSlice = createSlice({
     },
     getProductQuesAns(state, action) {
       state.qna = action.payload;
+    },
+    getSubscribersVideos(state, action) {
+      state.happySubscribersVideos = action.payload;
     },
   },
 });
@@ -141,6 +145,7 @@ export const {
   getBannerImages,
   getCustomerReviews,
   getProductQuesAns,
+  getSubscribersVideos,
 } = ProductpageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

@@ -135,46 +135,53 @@ export const FourStepsCardData = [
 export const HappySubscriber = [
   {
     thumbnailImg: "",
-    videoUrl:
+    file_name:
       "https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
   {
     thumbnailImg: "",
-    videoUrl: "",
-    name: "Name | Profession",
-    desc: "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
+    file_name: "",
+    title: "Name | Profession",
+    description:
+      "placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder placeholder ",
   },
 ];
 
