@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
 import Image from "next/image";
@@ -12,7 +12,6 @@ import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
 import {useRouter} from "next/navigation";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
@@ -40,24 +39,36 @@ const CustomerRating = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const scrollRef = useHorizontalScroll();
-  const tabBox = document.querySelector("#imageslider");
+  const sliderRef = useRef(null);
 
-  let isDragging = false;
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div>
@@ -89,7 +100,7 @@ const CustomerRating = () => {
         <h3 className={styles.subhead}>{subhead}</h3>
       </div>
 
-      <div className={styles.card_wrapper} ref={scrollRef} id="imageslider">
+      <div className={styles.card_wrapper} ref={sliderRef}>
         {reviews?.map((item, index) => (
           <div key={index.toString()} className={styles.card}>
             <div className={styles.row}>

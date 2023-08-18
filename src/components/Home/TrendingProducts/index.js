@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useQuery} from "@/hooks/useQuery";
@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
@@ -46,38 +45,48 @@ const TrendingProducts = ({params}) => {
     }
   }, []);
 
-  const scrollRef = useHorizontalScroll();
-
-  const tabBox = document.querySelector("#galleryDragger");
-
-  let isDragging = false;
-
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
-
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
-
   const Data =
     params?.category === "appliances-rental"
       ? seoAppliancePageReduxData?.seoApplianceCrowd
       : homePageReduxData?.trendindProduct;
+
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
+
   return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className={styles.card_box} ref={scrollRef} id="galleryDragger">
-        {/* <ScrollMenu> */}
+      <div className={`${styles.card_box} `} ref={sliderRef}>
         {Data?.map((item, index) => (
-          <div key={index.toString()}>
+          <div key={index.toString()} className={styles.child}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={
@@ -94,7 +103,6 @@ const TrendingProducts = ({params}) => {
             />
           </div>
         ))}
-        {/* </ScrollMenu> */}
       </div>
     </div>
   ) : null;

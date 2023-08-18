@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {endPoints} from "@/network/endPoints";
@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const RecentlyViewedProduct = () => {
   const dispatch = useDispatch();
@@ -29,38 +28,42 @@ const RecentlyViewedProduct = () => {
       .catch(err => console.log(err));
   }, []);
 
-  // const tabBox = document.querySelector("#gallery");
-  const tabBox =
-    typeof document !== "undefined" ? document.querySelector("#gallery") : null;
-  let isDragging = false;
+  const sliderRef = useRef(null);
 
-  const dragging = e => {
-    if (!isDragging) return;
-    // tabBox.scrollLeft -= e.movementX;
-    if (tabBox) tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
-
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
   useEffect(() => {
-    document.addEventListener("mouseup", dragStop);
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
-  const scrollRef = useHorizontalScroll();
 
   return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Recently Viewed products</h2>
 
       {homePageReduxData?.recentProduct?.length ? (
-        <div
-          className={styles.recentlyViewed_main}
-          ref={scrollRef}
-          id="gallery">
+        <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
           {homePageReduxData?.recentProduct?.map((item, index) => (
             <div key={index.toString()}>
               <Card

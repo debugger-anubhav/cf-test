@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
@@ -10,36 +10,11 @@ import {Skeleton} from "@mui/material";
 const RentNowBanner = () => {
   const router = useRouter();
   const [rentNowBanner, setRentNowBanner] = React.useState(null);
-  const tabBox = document.querySelector("#rentNowSlider");
 
-  let isDragging = false;
-
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
-
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
   const {refetch: getRentNowBanners} = useQuery(
     "rentNowBanners",
     endPoints.rentNowBanners,
   );
-  // const {refetch: getApplianceRentNowBanners} = useQuery(
-  //   "applianceRentNowBanners",
-  //   endPoints.seoApplianceBanners,
-  // );
-  // const {refetch: getFurnitureRentNowBanners} = useQuery(
-  //   "furnitureRentNowBanners",
-  //   endPoints.seoFurnitureBanners,
-  // );
-
   useEffect(() => {
     getRentNowBanners()
       .then(res => {
@@ -48,9 +23,39 @@ const RentNowBanner = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
+
   return (
     <div className={styles.rentNow_Banner_wrapper}>
-      <div className={styles.banner_card}>
+      <div className={styles.banner_card} ref={sliderRef}>
         {rentNowBanner?.map((item, index) => (
           <div className={styles.banner_wrapper} key={index.toString()}>
             <img
