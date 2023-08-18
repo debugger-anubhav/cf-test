@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
+import {FaRupeeSign} from "react-icons/fa";
 
 const Card = ({
   desc,
@@ -55,8 +56,14 @@ const Card = ({
       </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
-          <h3 className={styles.currentPrice}>{`₹${currentPrice} /mo`}</h3>
-          <h3 className={styles.originalPrice}>{`₹${originalPrice} /mo`}</h3>
+          <h3 className={`${styles.currentPrice} flexx`}>
+            <FaRupeeSign />
+            {`${currentPrice} /mo`}
+          </h3>
+          <h3 className={`${styles.originalPrice} flex`}>
+            <FaRupeeSign />
+            {`${originalPrice} /mo`}
+          </h3>
         </div>
         {originalPrice !== currentPrice && (
           <div className={styles.discount}>{discount}</div>

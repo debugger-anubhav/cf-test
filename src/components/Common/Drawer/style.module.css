@@ -66,7 +66,10 @@
   @apply absolute top-0 rounded-[50%]  bg-white w-4 h-4 right-12;
 }
 .download_qr_wrapper {
-  @apply sm:flex hidden my-8 justify-start;
+  @apply sm:flex hidden my-8 justify-start pr-4;
+}
+.download_qr_wrapper img {
+  @apply w-[40%];
 }
 .qr_text {
   @apply flex flex-col ml-3 justify-center text-9A9AA2;
