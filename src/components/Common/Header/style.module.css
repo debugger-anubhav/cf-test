@@ -27,7 +27,7 @@
 }
 
 .header_city_name {
-  @apply flex lg:text-base mobile:text-sm text-12 font-medium font-Poppins leading-[24px] items-center text-45454A;
+  @apply flex lg:text-base mobile:text-sm text-12 font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
 }
 
 .search_wrapper {
@@ -95,4 +95,8 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 111;
+}
+
+.mobile_search_row .backdrop {
+  padding-top: 1rem;
 }

@@ -30,7 +30,7 @@
   @apply font-Poppins w-[86px] h-[20px] text-[#1f1f27] text-base leading-5;
 }
 .chat_now_wrapper {
-  @apply flex w-fit px-8 h-[56px] rounded-lg justify-center items-center bg-[#F6B704] gap-[10px];
+  @apply flex w-fit px-8 h-[56px] rounded-lg justify-center items-center bg-[#F6B704] gap-[10px] cursor-pointer;
 }
 .message_icon {
   @apply w-[20px] h-[21px] text-[#222];

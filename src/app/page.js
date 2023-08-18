@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useRef} from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -88,10 +88,21 @@ const CombineSection = loadable(() =>
 export default function Home() {
   const queryClient = new QueryClient();
 
+  const myElementRef = useRef();
+
+  React.useEffect(() => {
+    // const onScroll = e => {
+    // console.log(window.pageYOffset)
+    // }
+    // window.addEventListener("scroll", onScroll);
+    // return () => {
+    //   window.removeEventListener("scroll", onScroll);
+    // };
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div className="large_layout">
+        <div ref={myElementRef} className="large_layout">
           <AnnouncementBar />
           <Header />
           <MenuList />

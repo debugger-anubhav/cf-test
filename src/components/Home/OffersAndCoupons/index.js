@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {CopyIcon} from "@/assets/icon";
@@ -6,7 +6,6 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {useQuery} from "@/hooks/useQuery";
 import {offersAndCuponsList} from "@/store/Slices";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 import {Skeleton} from "@mui/material";
 
 const OffersAndCoupons = () => {
@@ -46,33 +45,40 @@ const OffersAndCoupons = () => {
     }
     document.body.removeChild(tempTextArea);
   };
-
-  const scrollRef = useHorizontalScroll();
-  const tabBox =
-    typeof document !== "undefined" ? document.querySelector("#slider") : null;
-  let isDragging = false;
-
-  const dragging = e => {
-    if (!isDragging) return;
-    if (tabBox) tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
-
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
+  const sliderRef = useRef(null);
 
   useEffect(() => {
-    document.addEventListener("mouseup", dragStop);
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
 
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2 className={styles.heading}>{str.heading}</h2>
-      <div className={styles.cards_wrapper} ref={scrollRef} id="slider">
+      <div className={styles.cards_wrapper} ref={sliderRef}>
         {homePageData?.offerCoupons?.map((item, index) => (
           <div
             key={index.toString()}

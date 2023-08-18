@@ -1,10 +1,10 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {HappySubscriber} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+// import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 import {useDispatch, useSelector} from "react-redux";
 import {getSubscribersVideos} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
@@ -42,29 +42,36 @@ const HappySubscribers = ({page}) => {
   //   // videoRef.current.play();
   // };
 
-  const scrollRef = useHorizontalScroll();
   // const tabBox = document.querySelector("#videoslider");
-  const tabBox =
-    typeof document !== "undefined"
-      ? document.querySelector("#videoslider")
-      : null;
-  let isDragging = false;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    // tabBox.scrollLeft -= e.movementX;
-    if (tabBox) tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+  const sliderRef = useRef(null);
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
   useEffect(() => {
-    document.addEventListener("mouseup", dragStop);
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
 
   const HappySubscriberVideosArray =
@@ -77,7 +84,7 @@ const HappySubscribers = ({page}) => {
       <h2 className={styles.label}>{str.label}</h2>
       <h2 className={styles.head}>{str.head}</h2>
       <p className={styles.desc}>{str.desc}</p>
-      <div className={styles.cards_wrapper} ref={scrollRef} id="videoslider">
+      <div className={styles.cards_wrapper} ref={sliderRef}>
         {HappySubscriber?.map((item, index) => (
           <div className={styles.card_div} key={index.toString()}>
             <div className={styles.video}>

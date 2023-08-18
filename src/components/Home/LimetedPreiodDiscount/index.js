@@ -2,14 +2,12 @@
 
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-// import string from "@/constants/Constant.json";
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
@@ -35,31 +33,41 @@ const LimetedPreiodDiscount = () => {
       })
       .catch(err => console.log(err));
   }, []);
-  const scrollRef = useHorizontalScroll();
 
-  const tabBox = document.querySelector("#limitedslider");
+  const sliderRef = useRef(null);
 
-  let isDragging = false;
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
 
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
-      <div className={styles.card_box} ref={scrollRef} id="limitedslider">
+      <div className={styles.card_box} ref={sliderRef}>
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index.toString()}>
             <Card
