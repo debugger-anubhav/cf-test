@@ -3,46 +3,77 @@
 import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
-import {HappySubscriber} from "@/constants/constant";
+// import {HappySubscriber} from "@/constants/constant";
 // import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {getSubscribersVideos} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 
-const HappySubscribers = ({page}) => {
+const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
-  const productPageSubscribersVideos = useSelector(
-    state => state.productPageData.happySubscribersVideos,
-  );
+  const [data, setData] = React.useState(null);
 
   const getVideosForProductPage = () => {
     axios
       .get(baseURL + endPoints.productPage.happySubscribers)
       .then(res => {
         dispatch(getSubscribersVideos(res?.data?.data));
-        console.log(res, "hhwijwoijeijwoijeiji");
+        setData(res?.data?.data);
       })
       .catch(err => {
         console.log(err);
         dispatch(getSubscribersVideos([]));
       });
   };
+  const getVideosForHomePage = () => {
+    axios
+      .get(baseURL + endPoints.homePageHappySubscriber)
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(getSubscribersVideos([]));
+      });
+  };
+  const getVideosForSeoAppliancesPage = () => {
+    axios
+      .get(baseURL + endPoints.seoApplianceHappyCustomer)
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+  const getVideosForSeoFurniturePage = () => {
+    axios
+      .get(baseURL + endPoints.seoFurnitureHappyCustomer)
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-    getVideosForProductPage();
+    if (page === "home-page") {
+      getVideosForHomePage();
+    } else if (page === "product") {
+      getVideosForProductPage();
+    } else if (page === "appliances-rental") {
+      getVideosForSeoAppliancesPage();
+    } else if (page === "furniture-rental") {
+      getVideosForSeoFurniturePage();
+    } else {
+      getVideosForHomePage();
+    }
   }, []);
 
   const str = string.landing_page.HappySubscriber;
-  // const videoRef = useRef(null);
-
-  // const handlePlayButtonClick = ({data}) => {
-  //   window.location.href = data;
-  //   // videoRef.current.play();
-  // };
-
-  // const tabBox = document.querySelector("#videoslider");
 
   const sliderRef = useRef(null);
 
@@ -74,18 +105,17 @@ const HappySubscribers = ({page}) => {
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
 
-  const HappySubscriberVideosArray =
-    page === "product" ? productPageSubscribersVideos : HappySubscriber;
-
-  console.log(HappySubscriberVideosArray, "HappySubscriberVideosArray");
+  // const HappySubscriberVideosArray =
+  //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
 
   return (
     <div className={styles.happy_subscribers_wrapper}>
       <h2 className={styles.label}>{str.label}</h2>
       <h2 className={styles.head}>{str.head}</h2>
       <p className={styles.desc}>{str.desc}</p>
+
       <div className={styles.cards_wrapper} ref={sliderRef}>
-        {HappySubscriber?.map((item, index) => (
+        {data?.map((item, index) => (
           <div className={styles.card_div} key={index.toString()}>
             <div className={styles.video}>
               {/* <video className={styles.video_player} ref={videoRef}>
@@ -95,7 +125,8 @@ const HappySubscribers = ({page}) => {
               <iframe
                 width="256"
                 height="152"
-                src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
+                // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
+                src={item.file_name}
                 title="YouTube video player"
                 allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
@@ -104,7 +135,9 @@ const HappySubscribers = ({page}) => {
                 onClick={() => handlePlayButtonClick(item.file_name)}></div> */}
             </div>
             <h3 className={styles.video_name}>{item?.title}</h3>
-            <p className={styles.video_desc}>{item?.description}</p>
+            <p className={styles.video_desc}>
+              {item?.description.replace(/<[^>]*>/g, "")}
+            </p>
           </div>
         ))}
       </div>

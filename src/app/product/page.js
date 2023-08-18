@@ -52,7 +52,7 @@ const ProductPage = () => {
           <RecentlyViewedProduct />
           <YouMightLike />
           <CustomerRating />
-          <HappySubscribers page={"product"} />
+          <HappySubscribers page={"product"} params={"product-page"} />
           <QuesAndAns />
           <Footer />
         </div>

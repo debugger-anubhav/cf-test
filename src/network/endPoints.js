@@ -29,6 +29,8 @@ export const endPoints = {
       "fc-care-instructions/getCustomerHappyStories?productId=4096",
   },
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
+  homePageHappySubscriber:
+    "fc-care-instructions/getHomePageHappyCustomerStories",
 
   seoApplianceRentalSubCategory:
     "fc-categories/getRentalApplianceSubCategories",
@@ -36,10 +38,14 @@ export const endPoints = {
     "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
   seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=",
   seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
+  seoApplianceHappyCustomer:
+    "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
 
   seoFurnitureRentalSubCategory: "fc-categories/all",
   seoFurnitureTtrendingProduct:
     "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
   seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=",
   seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
+  seoFurnitureHappyCustomer:
+    "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
 };

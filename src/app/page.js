@@ -118,7 +118,7 @@ export default function Home() {
           <CustomerRating />
           <MediaCoverage />
           <CombineSection />
-          <HappySubscribers />
+          <HappySubscribers params={"home-page"} />
           <FrequentlyAskedQuestions params={"home-page"} />
           <Footer />
         </div>
