@@ -11,8 +11,8 @@ const Footer = () => {
 
   return (
     <div className={styles.footer_wrapper}>
-      <h2 className={styles.head}>{str.why_furni}</h2>
-      <p className={styles.desc}>{str.why_furni_desc}</p>
+      {/* <h2 className={styles.head}>{str.why_furni}</h2>
+      <p className={styles.desc}>{str.why_furni_desc}</p> */}
 
       <div className={styles.pointers_div}>
         {str.array.map((item, index) => (
