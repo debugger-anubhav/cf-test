@@ -23,10 +23,10 @@
   @apply text-14 xl:text-16 text-9A9AA2 font-medium leading-5  tracking-0.3 mb-1;
 }
 .originalPrice {
-  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through;
+  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through flex;
 }
 .currentPrice {
-  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4;
+  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4 flex;
 }
 .discount {
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
@@ -35,7 +35,7 @@
   @apply text-71717A leading-6 text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center;
 }
 .arr_wrapper {
-  @apply flex gap-4 xl:gap-11 mt-8 items-center;
+  @apply flex gap-4 xl:gap-8 mt-8 items-center;
 }
 .img_div {
   @apply w-[60px] h-[60px] lg:w-[72px] lg:h-[72px] flex p-3;
