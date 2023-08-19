@@ -37,6 +37,10 @@ const SideDrawer = ({
   };
   React.useEffect(() => {
     handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
   }, []);
 
   return (

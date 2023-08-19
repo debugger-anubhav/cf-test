@@ -40,7 +40,7 @@
   @apply hidden lg:flex gap-4 4xl:gap-6 mt-6;
 }
 .thumbnail_img {
-  @apply w-[8rem] 4xl:w-[10rem] h-[5.6rem] 4xl:h-[7rem] bg-yellow-300  border-2;
+  @apply w-[8rem] 4xl:w-[10rem] h-[5.6rem] 4xl:h-[7rem] border-2 cursor-pointer;
 }
 .header_div {
   @apply flex gap-2;
@@ -176,28 +176,4 @@
   to {
     transform: rotate(360deg);
   }
-}
-
-/* YourComponent.module.css */
-.customModal {
-  @apply md:!px-12 md:!py-12 md:!w-[400px] !h-[192px] !items-center !fixed;
-  top: 50% !important;
-  left: 50% !important ; /* Center horizontally */
-  transform: translate(-50%, -50%) !important;
-}
-
-.customOverlay {
-  /* Your custom overlay styles */
-}
-
-.customCloseButton {
-  @apply !top-12 !right-8 !outline-none !border-none;
-  width: 20px !important;
-  height: 21px !important;
-}
-.share_modal_head {
-  @apply text-24 text-45454A font-medium leading-8 tracking-0.48;
-}
-.share_modal_icons_wrapper {
-  @apply flex gap-[14px] items-center mt-8;
 }
