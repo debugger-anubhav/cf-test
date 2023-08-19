@@ -38,3 +38,6 @@
 .heading {
   @apply text-45454A font-Poppins text-24 font-semibold leading-10 tracking-headingOne pb-8;
 }
+.main_wrapper::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

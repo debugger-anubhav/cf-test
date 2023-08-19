@@ -17,7 +17,7 @@
   @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem];
 }
 .btn {
-  @apply mt-2 bg-[#F6B704] rounded-lg flex py-[14px] px-5 items-center justify-center gap-1 h-12 w-[195px];
+  @apply mt-2 bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 h-[56px] w-fit;
 }
 .btn_txt {
   @apply text-[#222] font-medium cursor-pointer;

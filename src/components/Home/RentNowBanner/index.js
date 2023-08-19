@@ -31,6 +31,15 @@ const RentNowBanner = () => {
     "rentNowBanners",
     endPoints.rentNowBanners,
   );
+  // const {refetch: getApplianceRentNowBanners} = useQuery(
+  //   "applianceRentNowBanners",
+  //   endPoints.seoApplianceBanners,
+  // );
+  // const {refetch: getFurnitureRentNowBanners} = useQuery(
+  //   "furnitureRentNowBanners",
+  //   endPoints.seoFurnitureBanners,
+  // );
+
   useEffect(() => {
     getRentNowBanners()
       .then(res => {

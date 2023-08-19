@@ -19,6 +19,8 @@ export const HomepageSlice = createSlice({
     allAndSubCategory: [],
     sidebarMenuLists: [],
     announcementBar: false,
+    seoFurnitureSubCategory: [],
+    subcategoryId: "270",
   },
   reducers: {
     addCityList(state, action) {
@@ -30,10 +32,15 @@ export const HomepageSlice = createSlice({
     addRecentlyViewedProduct(state, action) {
       state.recentProduct = action.payload;
     },
+    addSubCategoryId(state, action) {
+      state.subcategoryId = action.payload;
+    },
     selectedCityId(state, action) {
+      // console.log(action?.payload, "action")
       state.cityId = action.payload;
     },
     selectedCityName(state, action) {
+      // console.log(action.payload, "actions");
       state.cityName = action.payload;
     },
     addProductName(state, action) {
@@ -69,6 +76,57 @@ export const HomepageSlice = createSlice({
     setAnnouncementBar(state, action) {
       state.announcementBar = action.payload;
     },
+    setSeoFurnitureRentalSubCategory(state, action) {
+      state.seoFurnitureSubCategory = action.payload;
+    },
+  },
+});
+
+export const SeoAppliancePageSlice = createSlice({
+  name: "SeoAppliancePageData",
+  initialState: {
+    seoApplianceSubCategory: [],
+    seoApplianceCrowd: [],
+  },
+  reducers: {
+    setSeoApplianceRentalSubCategory(state, action) {
+      state.seoApplianceSubCategory = action.payload;
+    },
+    setSeoApplianceCrowd(state, action) {
+      state.seoApplianceCrowd = action.payload;
+    },
+  },
+});
+
+export const ProductpageSlice = createSlice({
+  name: "ProductPageData",
+  initialState: {
+    completeTheLook: [],
+    youMightLike: [],
+    careInstructions: [],
+    bannerImages: [],
+    customerReviews: [],
+    qna: [],
+  },
+  reducers: {
+    addCompleteTheLook(state, action) {
+      state.completeTheLook = action.payload;
+    },
+    addYouMightLike(state, action) {
+      state.youMightLike = action.payload;
+    },
+    addCareInstructions(state, action) {
+      state.careInstructions = action.payload;
+    },
+    getBannerImages(state, action) {
+      state.bannerImages = action.payload;
+    },
+    getCustomerReviews(state, action) {
+      state.customerReviews = action.payload;
+    },
+    getProductQuesAns(state, action) {
+      state.qna = action.payload;
+    },
   },
 });
 
@@ -87,6 +145,20 @@ export const {
   addAllAndSubCategory,
   addSidebarMenuLists,
   setAnnouncementBar,
+  setSeoFurnitureRentalSubCategory,
   addProductName,
   addProductCategory,
+  addSubCategoryId,
 } = HomepageSlice.actions;
+
+export const {
+  addCompleteTheLook,
+  addYouMightLike,
+  addCareInstructions,
+  getBannerImages,
+  getCustomerReviews,
+  getProductQuesAns,
+} = ProductpageSlice.actions;
+
+export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
+  SeoAppliancePageSlice.actions;

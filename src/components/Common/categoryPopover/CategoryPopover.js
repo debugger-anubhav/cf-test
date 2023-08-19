@@ -5,7 +5,7 @@ import {sortByText} from "@/constants/constant";
 import {DownPopUpArrow} from "@/assets/icon";
 import {useDispatch, useSelector} from "react-redux";
 import {addFilteredItem} from "@/store/Slices/categorySlice";
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 export default function CategoryPopover({
   btnName,
@@ -19,7 +19,6 @@ export default function CategoryPopover({
     state => state.categoryPageData,
   );
 
-  // console.log(getAllProductWithFilterData?.prdoucWithFilter?.filters, "data")
   const filtereData = getAllProductWithFilterData?.prdoucWithFilter?.filters;
 
   const [filterList, setFilterList] = useState([]);
@@ -41,6 +40,7 @@ export default function CategoryPopover({
 
   const handleFilteredItems = e => {
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    console.log(updatedFilteredList, "updatedFilteredList");
     if (e.target.checked) {
       updatedFilteredList = [
         ...categoryPageReduxData?.filteredItems,
@@ -56,25 +56,27 @@ export default function CategoryPopover({
     dispatch(addFilteredItem(updatedFilteredList));
   };
 
-  useEffect(() => {
-    dispatch(addFilteredItem([]));
-    setfiltereSaved(false);
-  }, [emptyFilterItem]);
+  // useEffect(() => {
+  //   dispatch(addFilteredItem([]));
+  //   setfiltereSaved(false);
+  // }, [emptyFilterItem]);
 
   return (
-    <div onClick={handleClick}>
-      <div className={styles.filterbox}>
-        <div className={styles.filter_text_container}>
-          <p className={styles.filter_text}>{filterName}</p>
-        </div>
-        <div>
-          <DownPopUpArrow
-            size={20}
-            // size={styles.icon_size}
-            color={"#45454A"}
-            className={open ? styles.arrow_up : styles.arrow_down}
-            // onClick={e => handleOpenSubCategory(e)}
-          />
+    <div>
+      <div className={styles.filter} onClick={handleClick}>
+        <div className={styles.filterbox}>
+          <div className={styles.filter_text_container}>
+            <p className={styles.filter_text}>{filterName}</p>
+          </div>
+          <div>
+            <DownPopUpArrow
+              size={20}
+              // size={styles.icon_size}
+              color={"#45454A"}
+              className={open ? styles.arrow_up : styles.arrow_down}
+              // onClick={e => handleOpenSubCategory(e)}
+            />
+          </div>
         </div>
       </div>
       <div className={styles.popover_wrapper}>
@@ -100,17 +102,17 @@ export default function CategoryPopover({
                         // className="h-[37px] flex items-center justify-between"
                         className={styles.single_filter_text}
                         key={index.toString()}>
-                        <p className={styles.option_text}>{ele?.filter_name}</p>
+                        <p htmlFor={index} className={styles.option_text}>
+                          {ele?.filter_name}
+                        </p>
                         <input
                           type="checkbox"
-                          id="filterItem"
+                          id={index}
                           name="filterProducts"
-                          value={ele.item}
-                          checked={
-                            !!categoryPageReduxData?.filteredItems.includes(
-                              ele?.item,
-                            )
-                          }
+                          value={ele.filter_name}
+                          checked={categoryPageReduxData?.filteredItems.includes(
+                            ele?.filter_name,
+                          )}
                           className="pr-1"
                           // {
                           // }

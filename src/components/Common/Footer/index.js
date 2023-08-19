@@ -1,18 +1,53 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
+import {useSelector} from "react-redux";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
 
-const Footer = () => {
+const Footer = ({params}) => {
+  // console.log(params, "params")
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
   const str = string.common_components.Footer;
 
+  const [content, setContent] = useState([]);
+
+  const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const {refetch: getcategoryContent} = useQuery(
+    "category-content",
+    endPoints.categoryContent,
+    `?cityId=${homePageReduxData?.cityId}&categoryId=27`,
+    // `?cityId=46&categoryId=27`,
+  );
+
+  useEffect(() => {
+    if (params === "category") {
+      getcategoryContent()
+        .then(res => {
+          setContent(res?.data?.data);
+        })
+        .catch(err => console.log(err));
+    }
+  }, []);
+
   return (
     <div className={styles.footer_wrapper}>
-      <h2 className={styles.head}>{str.why_furni}</h2>
-      <p className={styles.desc}>{str.why_furni_desc}</p>
+      {content.map((str, index) => {
+        return (
+          <>
+            <h2 className={styles.head}>{str.cat_heading}</h2>
+            <p
+              className={styles.desc}
+              dangerouslySetInnerHTML={{__html: str.cat_desc}}
+            />
+            {/* <p className={styles.desc}>{str.cat_desc}</p> */}
+          </>
+        );
+      })}
 
       <div className={styles.pointers_div}>
         {str.array.map((item, index) => (

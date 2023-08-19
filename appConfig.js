@@ -6,11 +6,11 @@ export const AppEnv = {
 const appEnv = AppEnv.STG;
 
 const ConfigurationProd = {
-  BASE_URL: "http://3.6.205.109:4000/api/",
+  BASE_URL: "http://3.109.156.217:4000/api/",
 };
 
 const ConfigurationStaging = {
-  BASE_URL: "http://3.6.205.109:4000/api/",
+  BASE_URL: "http://3.109.156.217:4000/api/",
 };
 
 const Config =

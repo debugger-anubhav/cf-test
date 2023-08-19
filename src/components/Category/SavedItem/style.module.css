@@ -16,3 +16,6 @@
 .heading {
   @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
 }
+.main_sub_container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

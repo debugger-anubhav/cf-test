@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 // import {CloseOutline, DownPopUpArrow} from "@/assets/icon";
 import {categoryIconsUrl} from "@/constants/constant";
@@ -7,110 +7,19 @@ import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover
 import {useDispatch, useSelector} from "react-redux";
 import {ForwardArrow} from "@/assets/icon";
 import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBar";
-import {
-  addOutStockProduct,
-  addSetProduct,
-  addSingleProduct,
-} from "@/store/Slices/categorySlice";
-import {endPoints} from "@/network/endPoints";
-import {useMutation} from "@/hooks/useMutation";
+import {addFilteredItem} from "@/store/Slices/categorySlice";
 import SingleProduct from "../../SingleProduct/SingleProduct";
-import ProductSet from "../../ProductSet/ProductSet";
-import SoldOutProduct from "../../SoldOutProduct/SoldOutProduct";
 
-const SubHeader = ({setShowRemainingComponents}) => {
+const SubHeader = () => {
   const dispatch = useDispatch();
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const getAllProductWithFilterData = useSelector(
-    state => state.categoryPageData,
-  );
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  const [inPageNo, setInPageNo] = useState(1);
-  const [outPageNo, setOutPageNo] = useState(1);
-  const [showProductSet, setShowProductSet] = useState(true);
-  const [showOutStockProduct, setShowOutStockProduct] = useState(true);
-  const [loading, setLoading] = React.useState(true);
-  const [singleProductCount, setSingleProductCount] = useState(0);
-  const [productSetCount, setProductSetCount] = useState(0);
-  const [outStockCount, setOutStockCount] = useState(0);
-
-  console.log(filterSaved, loading, "filterSaved");
-  const singleProductLength =
-    getAllProductWithFilterData?.singleProduct?.length;
-  const setProductLength = getAllProductWithFilterData?.setProduct?.length;
-  const outStockProductLength =
-    getAllProductWithFilterData?.outStockProduct?.length;
-
-  const data = {
-    subCategoryId: homePageReduxData?.productName?.id,
-    parentCategoryId: homePageReduxData?.productName?.rootID,
-    // cityId: homePageReduxData?.cityId,
-    cityId: 50,
-    inPageNo,
-    outPageNo,
-  };
-
-  const {mutateAsync: getAllProductWithFilter} = useMutation(
-    "product-with-filter",
-    "POST",
-    endPoints.productWithFilter,
-    data,
-  );
-
-  const getDataOfProductWithFilter = () => {
-    getAllProductWithFilter()
-      .then(res => {
-        console.log(res?.data?.meta, "dgfhghjn");
-        setSingleProductCount(res?.data?.meta?.totalSingleProduct);
-        setProductSetCount(res?.data?.meta?.totalSetProduct);
-        setOutStockCount(res?.data?.meta?.totalOutOfStockProduct);
-        if (singleProductLength === singleProductCount) {
-          setShowProductSet(false);
-        }
-        if (productSetCount === setProductLength) {
-          setShowOutStockProduct(false);
-        }
-        if (outStockProductLength === outStockCount) {
-          setShowRemainingComponents(true);
-        }
-        dispatch(
-          addSingleProduct([
-            ...getAllProductWithFilterData?.singleProduct,
-            ...res?.data?.inStockProducts.filter(
-              product => product.subProduct.length === 0,
-            ),
-          ]),
-        );
-        dispatch(
-          addSetProduct([
-            ...getAllProductWithFilterData?.setProduct,
-            ...res?.data?.inStockProducts.filter(
-              product => product.subProduct.length > 0,
-            ),
-          ]),
-        );
-        dispatch(
-          addOutStockProduct([
-            ...getAllProductWithFilterData?.outStockProduct,
-            ...res?.data?.outOfStockProducts,
-          ]),
-        );
-        setLoading(false);
-      })
-      .catch(err => console.log(err));
-  };
-
-  // console.log(showProductSet, "sssssss")
-
-  useEffect(() => {
-    getDataOfProductWithFilter();
-  }, [inPageNo, outPageNo]);
 
   return (
     <>
@@ -175,6 +84,7 @@ const SubHeader = ({setShowRemainingComponents}) => {
                         <div>
                           <img
                             src={`${categoryIconsUrl}${subItem?.icon_image}`}
+                            className={styles.selected_icon}
                           />
                         </div>
                       )}
@@ -190,17 +100,19 @@ const SubHeader = ({setShowRemainingComponents}) => {
         </div>
 
         <div className={styles.filter_sort_section}>
-          <div className={styles.filter}>
+          <div>
             <CategoryPopover
               btnName={"click"}
               filterName={"Filter"}
               emptyFilterItem={emptyFilterItem}
               setfiltereSaved={setfiltereSaved}
+              setEmptyFilterItem={setEmptyFilterItem}
+              filterSaved={filterSaved}
             />
           </div>
           <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
-            <div className={styles.filter} onClick>
+            <div>
               <CategoryPopover
                 btnName={"click"}
                 filterName={"Default"}
@@ -227,16 +139,16 @@ const SubHeader = ({setShowRemainingComponents}) => {
           <div className="flex flex-wrap">
             <div
               className={styles.single_filter_mobile}
-              onClick={() => setEmptyFilterItem(true)}>
+              onClick={() => dispatch(addFilteredItem([]))}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
             {categoryPageReduxData?.filteredItems.length !== 0
               ? categoryPageReduxData?.filteredItems?.map((item, index) => {
+                  console.log(item, "itemmmsss filter");
                   return (
                     <>
                       <div
                         className={styles.filter_card}
-                        // className="flex justify-between items-center mr-4 mb-4"
                         key={index.toString()}>
                         <FilterCard text={item} />
                       </div>
@@ -246,24 +158,14 @@ const SubHeader = ({setShowRemainingComponents}) => {
               : null}
             <div
               className={styles.single_filter}
-              onClick={() => setEmptyFilterItem(true)}>
+              onClick={() => dispatch(addFilteredItem([]))}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
           </div>
         )}
+        {/* ------------------------------------------------------------------------------------------------------------- */}
       </div>
-      {/* {console.log(getAllProductWithFilterData?.singleProduct?.length, "getAllProductWithFilterData?.singleProduct?.length")} */}
-      {getAllProductWithFilterData?.singleProduct?.length > 0 ? (
-        <SingleProduct setInPageNo={setInPageNo} />
-      ) : null}
-      {getAllProductWithFilterData?.setProduct?.length > 0 &&
-      showProductSet === false ? (
-        <ProductSet setInPageNo={setInPageNo} />
-      ) : null}
-      {getAllProductWithFilterData?.outStockProduct?.length > 0 &&
-      showOutStockProduct === false ? (
-        <SoldOutProduct setOutPageNo={setOutPageNo} />
-      ) : null}
+      <SingleProduct />
     </>
   );
 };

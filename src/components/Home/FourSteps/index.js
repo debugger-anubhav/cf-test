@@ -26,10 +26,11 @@ const FourSteps = () => {
                     : "w-[161px] h-[70px]"
                 } lg:flex hidden`}
               />
-              <img
+              {/* <img
                 src={itemm?.img2}
-                className={`w-[165px] h-[120px] lg:hidden flex`}
-              />
+                // className={`w-[165px] h-[120px] lg:hidden flex`}
+                className={`w-full`}
+              /> */}
             </div>
             <h3 className={styles.head1}>{itemm?.head}</h3>
             <p className={styles.content1}>{itemm?.content}</p>

@@ -35,6 +35,7 @@ const LimetedPreiodDiscount = () => {
       })
       .catch(err => console.log(err));
   }, []);
+
   const scrollRef = useHorizontalScroll();
 
   const tabBox = document.querySelector("#limitedslider");

@@ -1,25 +1,71 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import style from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {productImageBaseUrl} from "@/constants/constant";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {endPoints} from "@/network/endPoints";
+import {useMutation} from "@/hooks/useMutation";
+import {
+  addSingleProduct,
+  addSubCategoryMetaData,
+} from "@/store/Slices/categorySlice";
+import ProductSet from "../ProductSet/ProductSet";
 
-const SingleProduct = ({setInPageNo}) => {
-  const getAllProductWithFilterData = useSelector(
-    state => state.categoryPageData,
+const SingleProduct = () => {
+  const [pageNo, setPageNo] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const dispatch = useDispatch();
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const bodyData = {
+    subCategoryId: homePageReduxData?.productName?.id,
+    parentCategoryId: homePageReduxData?.productName?.rootID,
+    cityId: 50,
+    pageNo,
+  };
+
+  const singleItemLength =
+    categoryPageReduxData?.categoryMetaData?.totalProduct;
+  const {mutateAsync: getSingleProducts} = useMutation(
+    "category-single-product",
+    "POST",
+    endPoints.categorySingleProduct,
+    bodyData,
   );
-  const data = getAllProductWithFilterData?.singleProduct;
 
-  return (
+  useEffect(() => {
+    getSingleProducts()
+      .then(res => {
+        setTotalPage(res?.data?.meta?.totalPage);
+        dispatch(addSubCategoryMetaData(res?.data?.meta));
+        dispatch(
+          addSingleProduct([
+            ...categoryPageReduxData?.singleProduct,
+            ...res?.data?.products,
+          ]),
+        );
+      })
+      .catch(err => console.log(err));
+  }, [pageNo]);
+
+  const singleItemData = categoryPageReduxData?.singleProduct;
+
+  return singleItemData?.length ? (
     <div>
       <InfiniteScroll
-        dataLength={data.length}
-        next={() => setInPageNo(prev => prev + 1)}
+        dataLength={singleItemData?.length}
+        next={() => {
+          if (pageNo < totalPage) {
+            setPageNo(prev => prev + 1);
+          }
+        }}
         hasMore={true} // Replace with a condition based on your data source
         className="!w-full !h-full">
         <div className={style.main_container}>
-          {data?.map((item, index) => {
+          {singleItemData?.map((item, index) => {
             return (
               <div className={style.card_box} key={index.toString()}>
                 <Card
@@ -39,17 +85,14 @@ const SingleProduct = ({setInPageNo}) => {
                 />
               </div>
             );
-            // }
-            // else {
-            //   console.log("xxxx")
-            //   dispatch(addIsSubProduct(true))
-            // }
-            // return null;
           })}
         </div>
       </InfiniteScroll>
+      {categoryPageReduxData?.singleProduct?.length === singleItemLength ? (
+        <ProductSet />
+      ) : null}
     </div>
-  );
+  ) : null;
 };
 
 export default SingleProduct;
