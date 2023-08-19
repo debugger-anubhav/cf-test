@@ -40,7 +40,7 @@
   @apply hidden lg:flex gap-4 4xl:gap-6 mt-6;
 }
 .thumbnail_img {
-  @apply w-[8rem] 4xl:w-[10rem] h-[5.6rem] 4xl:h-[7rem] bg-yellow-300  border-2;
+  @apply w-[8rem] 4xl:w-[10rem] h-[5.6rem] 4xl:h-[7rem] border-2 cursor-pointer;
 }
 .header_div {
   @apply flex gap-2;
@@ -86,16 +86,16 @@
   @apply font-medium text-12 mobile:text-14 leading-5 text-71717A;
 }
 .originalPrice {
-  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through;
+  @apply text-14 xl:text-16 tracking-0.3 text-9A9AA2 line-through flex items-center;
 }
 .currentPrice {
-  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4;
+  @apply text-16 mobile:text-18 xl:text-20 text-222 font-medium tracking-0.4 flex items-center;
 }
 .discount {
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
 }
 .btn {
-  @apply mt-12 bg-btn-primary flex justify-center items-center w-full md:w-[440px] lg:w-full h-12 xl:h-14 rounded-lg text-16 text-222 font-medium;
+  @apply cursor-pointer mt-12 bg-btn-primary flex justify-center items-center w-full md:w-[440px] lg:w-full h-12 xl:h-14 rounded-lg text-16 text-222 font-medium;
 }
 .emi_wrapper {
   @apply py-1 xl:py-2 px-[3px] xl:px-4 rounded-lg flex w-full md:w-[440px] lg:w-full items-center justify-center gap-1 xl:gap-2 mt-4;
@@ -162,4 +162,18 @@
 }
 .web {
   @apply hidden lg:flex;
+}
+.spinner {
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #000;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

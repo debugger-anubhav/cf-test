@@ -1,5 +1,5 @@
 .footer_wrapper {
-  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] pt-6 pb-4 xl:pb-8 font-Poppins;
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] pt-6 pb-4 xl:pb-8 font-Poppins bg-[#F5F5F5];
 }
 .head {
   @apply text-45454A text-16 xl:text-20 leading-6 xl:leading-7 -tracking-[0.02rem] font-medium;
@@ -17,13 +17,13 @@
   @apply text-14 font-medium leading-5 text-45454A cursor-pointer;
 }
 .line {
-  @apply w-full h-[1px] bg-DDDDDF mt-8;
+  @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted mt-8;
 }
 .contact_div {
   @apply flex mt-6 gap-1 xl:mt-3;
 }
 .phoneImg {
-  @apply w-[25px] h-[25px];
+  @apply w-[25px] h-[25px] cursor-pointer;
 }
 .contact {
   @apply text-14 text-45454A leading-5 font-medium;
@@ -33,6 +33,9 @@
 }
 .social_media_icons_div {
   @apply flex w-full flex-wrap justify-center mobile:justify-start items-center gap-5 xl:gap-4 mt-8 xl:mt-4;
+}
+.social_media_icons_div img {
+  @apply cursor-pointer;
 }
 .sm_icon {
   @apply w-[30px] h-[30px] xl:w-[25px] xl:h-[25px] cursor-pointer;
@@ -50,7 +53,7 @@
   @apply cursor-pointer min-w-[20px] min-h-[20px];
 }
 .goToTopTxt {
-  @apply text-14 leading-5 text-45454A font-medium;
+  @apply text-14 leading-5 text-45454A font-medium cursor-pointer;
 }
 .head_wrapper {
   @apply w-[109px] xl:w-fit;

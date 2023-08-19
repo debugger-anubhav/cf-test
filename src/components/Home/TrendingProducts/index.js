@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useQuery} from "@/hooks/useQuery";
@@ -8,14 +8,16 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const seoAppliancePageReduxData = useSelector(
-    state => state.seoApplianceData,
-  );
+
+  const [paramsCityId, setParamsCityId] = React.useState(46);
+  const [data, setData] = React.useState(null);
+
   const cityId = homePageReduxData.cityId;
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
@@ -25,59 +27,90 @@ const TrendingProducts = ({params}) => {
   const {refetch: getSeoApplianceTrendProduct} = useQuery(
     "seo-appliance-trend-product",
     endPoints.seoApplianceTtrendingProduct,
-    cityId,
+    paramsCityId,
   );
+  const {refetch: getSeoFurnitureTrendProduct} = useQuery(
+    "seo-furniture-trend-product",
+    endPoints.seoFurnitureTtrendingProduct,
+    paramsCityId,
+  );
+
+  useEffect(() => {
+    if (
+      params?.category === "appliances-rental" ||
+      params?.category === "furniture-rental"
+    ) {
+      axios
+        .get(baseURL + endPoints.cityIdByCityName + params?.city)
+        .then(res => setParamsCityId(res?.data?.data?.id))
+        .catch(err => console.log(err));
+    }
+  }, []);
 
   useEffect(() => {
     if (params?.category === "appliances-rental") {
       getSeoApplianceTrendProduct()
         .then(res => {
+          // console.log("seoApplianceeeeeeeeeeeeeeeeee")
           dispatch(setSeoApplianceCrowd(res?.data?.data));
-          // console.log("appliance-page-trending",res.data.data)
+          setData(res?.data?.data);
+        })
+        .catch(err => console.log(err));
+    } else if (params?.category === "furniture-rental") {
+      getSeoFurnitureTrendProduct()
+        .then(res => {
+          setData(res?.data?.data);
+          // console.log("seooFurniture-rentaleeeeeeeeeee")
         })
         .catch(err => console.log(err));
     } else {
       getTrendyProducts()
         .then(res => {
+          // console.log("hommmmmmeeeeeeeeeeeeeeeeee")
+          setData(res?.data?.data);
           dispatch(addtrendingproduct(res?.data?.data));
-          // console.log("landing-page",res?.data?.data)
         })
         .catch(err => console.log(err));
     }
   }, []);
 
-  const scrollRef = useHorizontalScroll();
+  const sliderRef = useRef(null);
 
-  const tabBox = document.querySelector("#galleryDragger");
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  let isDragging = false;
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
 
-  const Data =
-    params?.category === "appliances-rental"
-      ? seoAppliancePageReduxData?.seoApplianceCrowd
-      : homePageReduxData?.trendindProduct;
   return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className={styles.card_box} ref={scrollRef} id="galleryDragger">
-        {/* <ScrollMenu> */}
-        {Data?.map((item, index) => (
-          <div key={index.toString()}>
+      <div className={`${styles.card_box} `} ref={sliderRef}>
+        {data?.map((item, index) => (
+          <div key={index.toString()} className={styles.child}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={
@@ -94,7 +127,6 @@ const TrendingProducts = ({params}) => {
             />
           </div>
         ))}
-        {/* </ScrollMenu> */}
       </div>
     </div>
   ) : null;

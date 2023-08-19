@@ -17,6 +17,8 @@ import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+// import TextContent from "@/components/Common/TextContent";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -71,12 +73,17 @@ const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
   fallback: <TryCityMaxSkeleton />,
 });
 const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-const CustomerRating = loadable(() => import("@/components/Home/Rating"));
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
 const HappySubscribers = loadable(() =>
   import("@/components/Home/HappySubscribers"),
 );
-const FrequentlyAskedQuestions = loadable(() =>
-  import("@/components/Common/FrequentlyAskedQuestions"),
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
 );
 const Footer = loadable(() => import("@/components/Common/Footer"));
 const CombineSection = loadable(() =>
@@ -103,13 +110,14 @@ export default function Page() {
           <PreDesignCombos />
           <HasselFreeServicesCards />
           <LimetedPreiodDiscount />
-          <RentNowBanner />
+          <RentNowBanner params={params} />
           <TryCityMax />
           <CustomerRating />
           <MediaCoverage />
           <CombineSection />
-          <HappySubscribers />
+          <HappySubscribers params={params} page={params.category} />
           <FrequentlyAskedQuestions params={params} />
+          {/* <TextContent params={params}/> */}
           <Footer />
         </div>
       </Provider>

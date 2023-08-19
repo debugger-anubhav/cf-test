@@ -37,16 +37,20 @@ const SideDrawer = ({
   };
   React.useEffect(() => {
     handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
   }, []);
 
   return (
-    <div className={`rounded-t-[20px] product-page-drawer`}>
+    <div className={`product-page-drawer`}>
       <Drawer
         anchor={isBottomDrawer ? "bottom" : "right"}
         open={open}
         onClose={toggleDrawer}
         transitionDuration={{enter: 400, exit: 200}}>
-        <div className="w-full h-[60vh] lg:h-fit lg:w-[750px] xl:w-[962px] rounded-t-[20px]">
+        <div className="w-full h-[90vh] lg:h-fit lg:w-[750px] xl:w-[962px] ">
           <div className={styles.rating_drawer}>
             <div
               className={styles.close_icon}

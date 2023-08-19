@@ -17,11 +17,15 @@
   @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem];
 }
 .btn {
-  @apply mt-2 bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 h-[56px] w-fit;
+  @apply mt-2 bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 h-[56px] w-fit cursor-pointer;
 }
 .btn_txt {
-  @apply text-[#222] font-medium cursor-pointer;
+  @apply text-[#222] font-medium;
 }
 .forword_icon {
   @apply w-4 h-4 xl:w-5 xl:h-5;
+}
+
+.faq_skeleton_wrapper {
+  @apply flex my-8 w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] justify-between;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
@@ -9,7 +9,6 @@ import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
@@ -30,54 +29,74 @@ const PreDesignCombos = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const scrollRef = useHorizontalScroll();
+  const sliderRef = useRef(null);
 
-  const tabBox = document.querySelector("#gallerySlider");
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  let isDragging = false;
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      mouseDown = false;
+    };
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
 
-  return homePageReduxData?.designComboProduct?.length ? (
-    <div className={styles.main_container}>
-      <h2 className={styles.heading}>Predesigned combos for you</h2>
-      <div className={styles.card_box} ref={scrollRef} id="gallerySlider">
-        {homePageReduxData?.designComboProduct?.map((item, index) => (
-          <div key={index.toString()}>
-            <Card
-              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              // hoverCard="false"
-              hoverCardImage={
-                item?.image?.split(",").filter(item => item).length > 1
-                  ? productImageBaseUrl + item?.image?.split(",")[1]
-                  : productImageBaseUrl + item?.image?.split(",")[0]
-              }
-              desc={item?.product_name}
-              originalPrice={item?.price}
-              currentPrice={item?.sale_price}
-              discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.price,
-              ).toFixed(2)}%`}
-              showincludedItem={true}
-              itemIncluded={item?.subProduct.length}
-            />
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+    };
+  }, []);
+
+  return (
+    <>
+      {homePageReduxData?.designComboProduct?.length ? (
+        <div className={styles.main_container}>
+          <h2 className={styles.heading}>Predesigned combos for you</h2>
+          <div className={styles.card_box} ref={sliderRef}>
+            {homePageReduxData?.designComboProduct?.map((item, index) => (
+              <div key={index.toString()}>
+                <Card
+                  cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+                  // hoverCard="false"
+                  hoverCardImage={
+                    item?.image?.split(",").filter(item => item).length > 1
+                      ? productImageBaseUrl + item?.image?.split(",")[1]
+                      : productImageBaseUrl + item?.image?.split(",")[0]
+                  }
+                  desc={item?.product_name}
+                  originalPrice={item?.price}
+                  currentPrice={item?.sale_price}
+                  discount={`${Math.round(
+                    ((item?.price - item?.sale_price) * 100) / item?.price,
+                  ).toFixed(2)}%`}
+                  showincludedItem={true}
+                  itemIncluded={item?.subProduct.length}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  ) : null;
+        </div>
+      ) : null}
+    </>
+  );
 };
 
 export default PreDesignCombos;

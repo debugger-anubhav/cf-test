@@ -13,6 +13,33 @@ export const endPoints = {
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
   productWithFilter: "fc-products/getProductsWithFilter",
+  faqsLandingPage: "fc-faqs/getHomePageFAQS",
+  homePageHappySubscriber:
+    "fc-care-instructions/getHomePageHappyCustomerStories",
+  homePageTextContent: "fc-admin-settings/getHomePageTextContent",
+  cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=",
+
+  seoApplianceRentalSubCategory:
+    "fc-categories/getRentalApplianceSubCategories",
+  seoApplianceTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=26",
+  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
+  seoApplianceHappyCustomer:
+    "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
+  seoAppliancesTextContent:
+    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=26",
+
+  seoFurnitureRentalSubCategory: "fc-categories/all",
+  seoFurnitureTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=27",
+  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
+  seoFurnitureHappyCustomer:
+    "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
+  seoFurnitureTextContent:
+    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=appliances",
+
   productPage: {
     completeTheLook:
       "fc-products/getRecommendedProducts?productId=3958&cityId=50",
@@ -21,26 +48,14 @@ export const endPoints = {
     monthlyRent:
       "fc-subproducts/getProductForThePeriod?productId=3924&cityId=46",
     careInstructions:
-      "fc-care-instructions/getProductCareInstructions?productId=3783",
+      "fc-care-instructions/getProductCareInstructions?productId=4096",
     bannerImages: "fc-product-banners/getProductBanners",
     customerReviews:
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
     qna: "fc-faq-products/getProductPageFAQs?productId=3783",
+    happySubscribers:
+      "fc-care-instructions/getCustomerHappyStories?productId=4096",
   },
-  faqsLandingPage: "fc-faqs/getHomePageFAQS",
-
-  seoApplianceRentalSubCategory:
-    "fc-categories/getRentalApplianceSubCategories",
-  seoApplianceTtrendingProduct:
-    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
-  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=",
-  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
-
-  seoFurnitureRentalSubCategory: "fc-categories/all",
-  seoFurnitureTtrendingProduct:
-    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
-  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=",
-  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
   categoryHappySubscriber:
     "fc-care-instructions/getCategoryPageHappyCustomerStories",
   categortFaq: "fc-faqs/getCategoryPageFAQS",

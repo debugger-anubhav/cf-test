@@ -2,14 +2,12 @@
 
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-// import string from "@/constants/Constant.json";
-import React, {useEffect} from "react";
-import {endPoints} from "@/network/endPoints";
-import {useQuery} from "@/hooks/useQuery";
-import {useDispatch, useSelector} from "react-redux";
-import {addLimitedPreiodDiscount} from "@/store/Slices";
-import {productImageBaseUrl} from "@/constants/constant";
-import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
+import React, { useEffect, useRef } from "react";
+import { endPoints } from "@/network/endPoints";
+import { useQuery } from "@/hooks/useQuery";
+import { useDispatch, useSelector } from "react-redux";
+import { addLimitedPreiodDiscount } from "@/store/Slices";
+import { productImageBaseUrl } from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
@@ -18,11 +16,11 @@ const LimetedPreiodDiscount = () => {
   const cityId = homePageReduxData.cityId;
 
   const dispatch = useDispatch();
-  const {limitedDiscount: getLimitedPreiodData} = useSelector(
+  const { limitedDiscount: getLimitedPreiodData } = useSelector(
     state => state.homePagedata,
   );
 
-  const {refetch: getLimitedPeriodDiscount} = useQuery(
+  const { refetch: getLimitedPeriodDiscount } = useQuery(
     "limited-discount",
     endPoints.limitedPreiod,
     `?cityId=${cityId}`,
@@ -36,31 +34,40 @@ const LimetedPreiodDiscount = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const scrollRef = useHorizontalScroll();
+  const sliderRef = useRef(null);
 
-  const tabBox = document.querySelector("#limitedslider");
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
 
-  let isDragging = false;
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  const dragging = e => {
-    if (!isDragging) return;
-    tabBox.scrollLeft -= e.movementX;
-  };
-  const dragStop = () => {
-    isDragging = false;
-  };
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
 
-  // if (tabBox) {
-  tabBox?.addEventListener("mousedown", () => (isDragging = true));
-  tabBox?.addEventListener("mousemove", dragging);
-  // }
-  document.addEventListener("mouseup", dragStop);
-
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
-      <div className={styles.card_box} ref={scrollRef} id="limitedslider">
+      <div className={styles.card_box} ref={sliderRef}>
         {getLimitedPreiodData?.map((item, index) => (
           <div key={index.toString()}>
             <Card
