@@ -2,12 +2,12 @@
 
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-import React, { useEffect, useRef } from "react";
-import { endPoints } from "@/network/endPoints";
-import { useQuery } from "@/hooks/useQuery";
-import { useDispatch, useSelector } from "react-redux";
-import { addLimitedPreiodDiscount } from "@/store/Slices";
-import { productImageBaseUrl } from "@/constants/constant";
+import React, {useEffect, useRef} from "react";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
+import {useDispatch, useSelector} from "react-redux";
+import {addLimitedPreiodDiscount} from "@/store/Slices";
+import {productImageBaseUrl} from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
@@ -16,11 +16,11 @@ const LimetedPreiodDiscount = () => {
   const cityId = homePageReduxData.cityId;
 
   const dispatch = useDispatch();
-  const { limitedDiscount: getLimitedPreiodData } = useSelector(
+  const {limitedDiscount: getLimitedPreiodData} = useSelector(
     state => state.homePagedata,
   );
 
-  const { refetch: getLimitedPeriodDiscount } = useQuery(
+  const {refetch: getLimitedPeriodDiscount} = useQuery(
     "limited-discount",
     endPoints.limitedPreiod,
     `?cityId=${cityId}`,

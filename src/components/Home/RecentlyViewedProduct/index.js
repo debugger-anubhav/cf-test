@@ -1,20 +1,20 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import { endPoints } from "@/network/endPoints";
-import { useDispatch, useSelector } from "react-redux";
-import { addRecentlyViewedProduct } from "@/store/Slices";
-import { useQuery } from "@/hooks/useQuery";
-import { productImageBaseUrl } from "@/constants/constant";
+import {endPoints} from "@/network/endPoints";
+import {useDispatch, useSelector} from "react-redux";
+import {addRecentlyViewedProduct} from "@/store/Slices";
+import {useQuery} from "@/hooks/useQuery";
+import {productImageBaseUrl} from "@/constants/constant";
 
 const RecentlyViewedProduct = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
-  const { refetch: recentlyViewed } = useQuery(
+  const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${85760}`,
@@ -75,7 +75,7 @@ const RecentlyViewedProduct = () => {
                 }
                 discount={`${Math.round(
                   ((item?.price - item?.product_sale_price) * 100) /
-                  item?.price,
+                    item?.price,
                 ).toFixed(2)}%`}
                 originalPrice={item?.price}
                 currentPrice={item?.product_sale_price}

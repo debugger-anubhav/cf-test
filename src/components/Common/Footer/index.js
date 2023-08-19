@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Image from "next/image";
-import { FooterIcons } from "@/assets/icon";
-import { useSelector } from "react-redux";
-import { endPoints } from "@/network/endPoints";
-import { useQuery } from "@/hooks/useQuery";
+import {FooterIcons} from "@/assets/icon";
+import {useSelector} from "react-redux";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
 
-const Footer = ({ params }) => {
+const Footer = ({params}) => {
   // console.log(params, "params")
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
@@ -17,7 +17,7 @@ const Footer = ({ params }) => {
 
   const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const { refetch: getcategoryContent } = useQuery(
+  const {refetch: getcategoryContent} = useQuery(
     "category-content",
     endPoints.categoryContent,
     `?cityId=${homePageReduxData?.cityId}&categoryId=27`,
@@ -42,7 +42,7 @@ const Footer = ({ params }) => {
             <h2 className={styles.head}>{str.cat_heading}</h2>
             <p
               className={styles.desc}
-              dangerouslySetInnerHTML={{ __html: str.cat_desc }}
+              dangerouslySetInnerHTML={{__html: str.cat_desc}}
             />
             {/* <p className={styles.desc}>{str.cat_desc}</p> */}
           </>
@@ -125,7 +125,7 @@ const Footer = ({ params }) => {
         <div
           className={styles.goToTopDiv}
           onClick={() =>
-            window.scrollTo({ top: 0, left: 0, behavior: "smooth" })
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"})
           }>
           <Image
             src={FooterIcons.GoToTopIcon}
