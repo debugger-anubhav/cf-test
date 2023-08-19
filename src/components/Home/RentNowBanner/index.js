@@ -7,7 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 
-const RentNowBanner = () => {
+const RentNowBanner = ({params}) => {
   const router = useRouter();
   const [rentNowBanner, setRentNowBanner] = React.useState(null);
 
@@ -15,12 +15,35 @@ const RentNowBanner = () => {
     "rentNowBanners",
     endPoints.rentNowBanners,
   );
+  const {refetch: getSeoApplianceBanners} = useQuery(
+    "seoApplianceBanners",
+    endPoints.seoApplianceBanners,
+  );
+  const {refetch: getSeoFurnitureBanners} = useQuery(
+    "seoFurnitureBanners",
+    endPoints.seoFurnitureBanners,
+  );
+
   useEffect(() => {
-    getRentNowBanners()
-      .then(res => {
-        setRentNowBanner(res?.data?.data);
-      })
-      .catch(err => console.log(err));
+    if (params === "home-page") {
+      getRentNowBanners()
+        .then(res => {
+          setRentNowBanner(res?.data?.data);
+        })
+        .catch(err => console.log(err));
+    } else if (params?.category === "appliances-rental") {
+      getSeoApplianceBanners()
+        .then(res => {
+          setRentNowBanner(res?.data?.data);
+        })
+        .catch(err => console.log(err));
+    } else if (params?.category === "furniture-rental") {
+      getSeoFurnitureBanners()
+        .then(res => {
+          setRentNowBanner(res?.data?.data);
+        })
+        .catch(err => console.log(err));
+    }
   }, []);
 
   const sliderRef = useRef(null);
