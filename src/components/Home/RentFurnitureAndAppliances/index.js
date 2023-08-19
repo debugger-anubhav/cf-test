@@ -13,7 +13,6 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 
 const RentFurnitureAndAppliances = ({params}) => {
-  console.log(params, "paramsssssss");
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const seoAppliancePageReduxData = useSelector(

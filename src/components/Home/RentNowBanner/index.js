@@ -8,7 +8,6 @@ import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 
 const RentNowBanner = ({params}) => {
-  console.log(params, "paramssssssssss");
   const router = useRouter();
   const [rentNowBanner, setRentNowBanner] = React.useState(null);
 
@@ -32,7 +31,7 @@ const RentNowBanner = ({params}) => {
           setRentNowBanner(res?.data?.data);
         })
         .catch(err => console.log(err));
-    } else if (params?.category === "appliance-rental") {
+    } else if (params?.category === "appliances-rental") {
       getSeoApplianceBanners()
         .then(res => {
           setRentNowBanner(res?.data?.data);

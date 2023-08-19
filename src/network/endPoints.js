@@ -16,7 +16,7 @@ export const endPoints = {
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
   homePageTextContent: "fc-admin-settings/getHomePageTextContent",
-  cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=gurgaon",
+  cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=",
 
   seoApplianceRentalSubCategory:
     "fc-categories/getRentalApplianceSubCategories",
