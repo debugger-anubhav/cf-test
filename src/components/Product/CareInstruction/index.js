@@ -16,7 +16,6 @@ const CareInstruction = () => {
       .get(baseURL + endPoints.productPage.careInstructions)
       .then(res => {
         dispatch(addCareInstructions(res?.data?.data));
-        console.log(res, "res on product");
       })
       .catch(err => {
         console.log(err);

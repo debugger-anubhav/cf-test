@@ -48,7 +48,8 @@ export const endPoints = {
       "fc-subproducts/getProductForThePeriod?productId=3924&cityId=46",
     careInstructions:
       "fc-care-instructions/getProductCareInstructions?productId=4096",
-    bannerImages: "fc-product-banners/getProductBanners",
+    bannerImages: "fc-product-banners/getProductBanners?productId=3866",
+    productVideos: "fc-product-videos/getProductVideos?productId=3783",
     customerReviews:
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
     qna: "fc-faq-products/getProductPageFAQs?productId=3783",

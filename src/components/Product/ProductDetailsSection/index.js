@@ -19,23 +19,18 @@ import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {useDispatch, useSelector} from "react-redux";
-import {getBannerImages} from "@/store/Slices";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
+import {format} from "date-fns";
+import {useSelector} from "react-redux";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({category, itemName}) => {
-  const dispatch = useDispatch();
-  const pageData = useSelector(state => state.productPageData);
-
-  console.log(pageData);
-
   const str = string.product_page;
   const arr = ["Home", category, itemName];
 
@@ -91,18 +86,6 @@ const ProductDetails = ({category, itemName}) => {
     setIsModalOpen(false);
   };
 
-  const getBannerImagesFunction = () => {
-    axios
-      .get(baseURL + endPoints.productPage.bannerImages)
-      .then(res => {
-        dispatch(getBannerImages(res?.data?.data));
-        console.log(res, "res on monthly rent");
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   const getDurationRent = () => {
     axios
       .get(baseURL + endPoints.productPage.monthlyRent)
@@ -117,7 +100,6 @@ const ProductDetails = ({category, itemName}) => {
 
   useEffect(() => {
     getDurationRent();
-    getBannerImagesFunction();
   }, []);
 
   const handleThumbnailClick = index => {
@@ -151,6 +133,19 @@ const ProductDetails = ({category, itemName}) => {
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const currentDate = new Date();
+  // Add three days to the current date
+  currentDate.setDate(currentDate.getDate() + 3);
+
+  const pageData = useSelector(state => state.productPageData.customerReviews);
+  const totalReviews = pageData.length;
+  const totalRatingSum = pageData.reduce((sum, item) => {
+    const rating = parseFloat(item.rating);
+    return isNaN(rating) ? sum : sum + rating;
+  }, 0);
+
+  const averageRating = totalRatingSum / totalReviews;
 
   return (
     <div className={styles.main_container}>
@@ -278,13 +273,13 @@ const ProductDetails = ({category, itemName}) => {
           <div className={styles.rating_div}>
             <div className={styles.rating_wrapper}>
               <div className="flex gap-1">
-                <p className={styles.rating_txt}>4.5</p>
+                <p className={styles.rating_txt}>{averageRating.toFixed(1)}</p>
                 <RatingStar color={"#F6B704"} size={16} />
               </div>
-              <p className={styles.rating_txt}>25 ratings</p>
+              <p className={styles.rating_txt}>{totalReviews} ratings</p>
             </div>
             <p className={styles.rating_txt} style={{color: "#63798D"}}>
-              Get it by 3rd aug
+              Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
               <span>
                 <DeliveryTruck size={16} color={"#63798D"} className={"ml-1"} />
               </span>

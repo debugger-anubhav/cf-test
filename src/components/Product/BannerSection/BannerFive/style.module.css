@@ -2,8 +2,14 @@
   @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins py-12;
 }
 .img_wrapper {
-  @apply relative w-full h-[459px] xl:h-[362px];
+  @apply relative w-full h-[350px] md:h-[500px] xl:h-[626px];
 }
 .img {
   @apply min-w-full h-full;
+}
+.desc_div {
+  @apply mx-6 w-[80%] px-6 py-6 z-50 top-9 overflow-hidden bg-[#2A2A2A] left-3 absolute;
+}
+.desc {
+  @apply mt-3 text-fff text-24 xl:text-32 tracking-0.24 xl:tracking-[-0.64px] truncate;
 }
