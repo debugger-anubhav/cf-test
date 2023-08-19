@@ -15,7 +15,9 @@ export const endPoints = {
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
+
   homePageTextContent: "fc-admin-settings/getHomePageTextContent",
+
   cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=",
 
   seoApplianceRentalSubCategory:
@@ -36,8 +38,7 @@ export const endPoints = {
   seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
   seoFurnitureHappyCustomer:
     "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
-  seoFurnitureTextContent:
-    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=appliances",
+  seoFurnitureTextContent: "fc-city-category-seo-data/getSeoPageTextContent",
 
   productPage: {
     completeTheLook:
