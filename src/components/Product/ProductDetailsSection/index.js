@@ -81,7 +81,7 @@ const ProductDetails = ({category, itemName}) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [showBottomBar]);
 
   const openModal = () => {
     setIsModalOpen(true);
