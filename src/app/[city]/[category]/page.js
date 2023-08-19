@@ -18,6 +18,7 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+// import TextContent from "@/components/Common/TextContent";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -109,13 +110,14 @@ export default function Page() {
           <PreDesignCombos />
           <HasselFreeServicesCards />
           <LimetedPreiodDiscount />
-          <RentNowBanner />
+          <RentNowBanner params={params} />
           <TryCityMax />
           <CustomerRating />
           <MediaCoverage />
           <CombineSection />
           <HappySubscribers params={params} page={params.category} />
           <FrequentlyAskedQuestions params={params} />
+          {/* <TextContent params={params}/> */}
           <Footer />
         </div>
       </Provider>

@@ -12,6 +12,33 @@ export const endPoints = {
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
+  faqsLandingPage: "fc-faqs/getHomePageFAQS",
+  homePageHappySubscriber:
+    "fc-care-instructions/getHomePageHappyCustomerStories",
+  homePageTextContent: "fc-admin-settings/getHomePageTextContent",
+  cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=gurgaon",
+
+  seoApplianceRentalSubCategory:
+    "fc-categories/getRentalApplianceSubCategories",
+  seoApplianceTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=26",
+  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
+  seoApplianceHappyCustomer:
+    "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
+  seoAppliancesTextContent:
+    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=26",
+
+  seoFurnitureRentalSubCategory: "fc-categories/all",
+  seoFurnitureTtrendingProduct:
+    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
+  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=27",
+  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
+  seoFurnitureHappyCustomer:
+    "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
+  seoFurnitureTextContent:
+    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=appliances",
+
   productPage: {
     completeTheLook:
       "fc-products/getRecommendedProducts?productId=3958&cityId=50",
@@ -28,24 +55,4 @@ export const endPoints = {
     happySubscribers:
       "fc-care-instructions/getCustomerHappyStories?productId=4096",
   },
-  faqsLandingPage: "fc-faqs/getHomePageFAQS",
-  homePageHappySubscriber:
-    "fc-care-instructions/getHomePageHappyCustomerStories",
-
-  seoApplianceRentalSubCategory:
-    "fc-categories/getRentalApplianceSubCategories",
-  seoApplianceTtrendingProduct:
-    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
-  seoApplianceBanners: "fc-app-product-urls/getBanners?categoryId=",
-  seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
-  seoApplianceHappyCustomer:
-    "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
-
-  seoFurnitureRentalSubCategory: "fc-categories/all",
-  seoFurnitureTtrendingProduct:
-    "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
-  seoFurnitureBanners: "fc-app-product-urls/getBanners?categoryId=",
-  seoFurnitureFaqs: "fc-faqs/getSeoFurnitureRentalPageFAQS",
-  seoFurnitureHappyCustomer:
-    "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
 };
