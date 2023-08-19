@@ -37,7 +37,9 @@ const CareInstruction = () => {
               alt="card_img"
             />
             <p className={styles.card_head}>{item.title}</p>
-            <p className={styles.card_desc}>{item.description}</p>
+            <p className={styles.card_desc}>
+              {item.description.replace(/<[^>]*>/g, "")}
+            </p>
           </div>
         ))}
       </div>

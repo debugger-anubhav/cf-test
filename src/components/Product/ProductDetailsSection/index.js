@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -25,6 +25,7 @@ import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
+import StickyBottomBar from "./StickyBottomBar";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
@@ -37,6 +38,8 @@ const ProductDetails = ({category, itemName}) => {
 
   const str = string.product_page;
   const arr = ["Home", category, itemName];
+
+  // dummy
   const images = [
     "1583995987Alexa-queen-bed.jpg",
     "1583996030alexa-queen-bed-1.jpg",
@@ -52,6 +55,33 @@ const ProductDetails = ({category, itemName}) => {
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showBottomBar, setShowBottomBar] = useState(false);
+  const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
+
+  // bottombar visibility conditiionally
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition + windowHeight >= documentHeight) {
+        setShowBottomBar(false);
+      } else if (scrollPosition > yourScrollThreshold) {
+        setShowBottomBar(true);
+      } else {
+        setShowBottomBar(false);
+      }
+    };
+
+    const buttonPosition =
+      addToCartButtonRef.current.getBoundingClientRect().bottom +
+      window.scrollY;
+    setYourScrollThreshold(buttonPosition);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -98,6 +128,8 @@ const ProductDetails = ({category, itemName}) => {
     setSelectedIndex(index);
   };
 
+  const addToCartButtonRef = useRef(null);
+
   const cityShieldCurrentPrice =
     (durationArray[duration.currentIndex]?.attr_price * 6) / 100;
 
@@ -111,10 +143,7 @@ const ProductDetails = ({category, itemName}) => {
 
   const handleButtonClick = () => {
     setIsLoading(true);
-
-    // Simulate loading by using setTimeout
     setTimeout(() => {
-      // After a delay, set isLoading back to false
       setIsLoading(false);
     }, 3000);
   };
@@ -126,6 +155,15 @@ const ProductDetails = ({category, itemName}) => {
   return (
     <div className={styles.main_container}>
       <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      {showBottomBar && (
+        <StickyBottomBar
+          productName={itemName}
+          duration={duration}
+          durationArray={durationArray}
+          isLoading={isLoading}
+          handleButtonClick={handleButtonClick}
+        />
+      )}
       <div className={styles.bread_crumps}>
         {arr.map((item, index) => (
           <div key={index} className="flex gap-2">
@@ -142,7 +180,6 @@ const ProductDetails = ({category, itemName}) => {
           </div>
         ))}
       </div>
-
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
           <Carousel
@@ -286,14 +323,14 @@ const ProductDetails = ({category, itemName}) => {
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
                     <FaRupeeSign />
-                    {durationArray[duration.currentIndex]?.attr_price}
+                    {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
                   <p
                     className={styles.originalPrice}
                     style={{
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
-                    {durationArray[0]?.attr_price}
+                    {durationArray?.[0]?.attr_price}
                   </p>
                   <div
                     className={styles.discount}
@@ -301,10 +338,10 @@ const ProductDetails = ({category, itemName}) => {
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
                     {`${Math.round(
-                      ((durationArray[0]?.attr_price -
-                        durationArray[duration.currentIndex]?.attr_price) *
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
                         100) /
-                        durationArray[0]?.attr_price,
+                        durationArray?.[0]?.attr_price,
                     ).toFixed(2)}%`}
                   </div>
                 </div>
@@ -322,7 +359,8 @@ const ProductDetails = ({category, itemName}) => {
           <button
             onClick={handleButtonClick}
             disabled={isLoading}
-            className={styles.btn}>
+            className={styles.btn}
+            ref={addToCartButtonRef}>
             {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
           </button>
 
