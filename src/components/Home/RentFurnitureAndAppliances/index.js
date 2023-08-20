@@ -25,6 +25,7 @@ const RentFurnitureAndAppliances = ({params}) => {
         .get(baseURL + endPoints.seoApplianceRentalSubCategory)
         .then(res => {
           dispatch(setSeoApplianceRentalSubCategory(res?.data?.data));
+          // console.log("appliances-rental")
         })
         .catch(err => {
           console.log(err);
@@ -35,6 +36,7 @@ const RentFurnitureAndAppliances = ({params}) => {
         .get(baseURL + endPoints.seoFurnitureRentalSubCategory)
         .then(res => {
           dispatch(setSeoFurnitureRentalSubCategory(res?.data?.data));
+          // console.log("furniture-rental")
         })
         .catch(err => {
           console.log(err);
@@ -45,6 +47,7 @@ const RentFurnitureAndAppliances = ({params}) => {
         .get(baseURL + endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
+          // console.log("home")
         })
         .catch(err => {
           console.log(err);

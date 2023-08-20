@@ -28,8 +28,7 @@ export const endPoints = {
   seoApplianceFaqs: "fc-faqs/getSeoApplianceRentalPageFAQS",
   seoApplianceHappyCustomer:
     "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
-  seoAppliancesTextContent:
-    "fc-city-category-seo-data/getSeoPageTextContent?cityId=46&categoryId=26",
+  seoAppliancesTextContent: "fc-city-category-seo-data/getSeoPageTextContent",
 
   seoFurnitureRentalSubCategory: "fc-categories/all",
   seoFurnitureTtrendingProduct:

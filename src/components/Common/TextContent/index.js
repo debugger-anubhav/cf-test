@@ -11,17 +11,22 @@ export default function TextContent({params}) {
   const HomePageText = () => {
     axios
       .get(baseURL + endPoints.homePageTextContent)
-      .then(res => setData(res?.data?.data))
+      .then(res => {
+        setData(res?.data?.data);
+        console.log("home");
+      })
       .catch(err => console.log(err));
   };
   const SeoAppliancesPageText = () => {
     axios
       .get(
         baseURL +
-          endPoints.seoAppliancesTextContent`?cityId=${paramsCityId}&categoryId=26`,
+          endPoints.seoAppliancesTextContent +
+          `?cityId=${paramsCityId}&categoryId=26`,
       )
       .then(res => {
         setData(res?.data?.data);
+        console.log("appliances-rental");
       })
       .catch(err => console.log(err));
   };
@@ -34,6 +39,7 @@ export default function TextContent({params}) {
       )
       .then(res => {
         setData(res?.data);
+        console.log("furniture-rental");
       })
       .catch(err => console.log(err));
   };
