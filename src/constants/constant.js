@@ -223,6 +223,21 @@ export const HasselFreeData = [
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
 ];
+export const CategoryFilterData = [
+  {item: "Queen Size Bed"},
+  {item: "Single Bed"},
+  {item: "Storage Bed"},
+  {item: "King Size Bed"},
+  {item: "Bedside And Storage"},
+  {item: "Mattress"},
+  {item: "Bedsheet And Pillow"},
+  {item: "Bedsheet And Pillow"},
+];
+export const sortByText = [
+  {text: "New"},
+  {text: "Price Low to High"},
+  {text: "Price Hight to low"},
+];
 
 export const productItemsIncludedDetails = [
   {
@@ -352,6 +367,8 @@ export const productPageImagesBaseUrl =
 
 export const categoryImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
-// "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
 
-// "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/appliances.webp";
+// const cartegoryIconsUrl =
+//   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/";
+export const categoryIconsUrl =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";

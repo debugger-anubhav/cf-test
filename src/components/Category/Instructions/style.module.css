@@ -1,0 +1,43 @@
+.main_wrapper {
+  @apply macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pb-[64px] py-12 mobile:overflow-x-scroll;
+  background:
+    linear-gradient(
+      0deg,
+      rgba(254, 244, 0, 0.01) 0%,
+      rgba(254, 244, 0, 0.01) 100%
+    ),
+    linear-gradient(
+        to bottom right,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      bottom right / 50% 50% no-repeat,
+    linear-gradient(
+        to bottom left,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      bottom left / 50% 50% no-repeat,
+    linear-gradient(
+        to top left,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      top left / 50% 50% no-repeat,
+    linear-gradient(
+        to top right,
+        #ffffb9 0%,
+        rgba(253, 253, 251, 0) 0%,
+        #f0f0e8 50%
+      )
+      top right / 50% 50% no-repeat;
+}
+.heading {
+  @apply text-45454A font-Poppins text-24 font-semibold leading-10 tracking-headingOne pb-8;
+}
+.main_wrapper::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
