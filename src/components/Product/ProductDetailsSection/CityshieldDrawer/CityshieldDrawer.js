@@ -15,7 +15,7 @@ const CityshieldDrawer = ({
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
   const handleresize = e => {
-    if (window.innerWidth < 1024) {
+    if (window.innerWidth < 768) {
       setIsBottomDrawer(true);
     } else {
       setIsBottomDrawer(false);
@@ -43,7 +43,8 @@ const CityshieldDrawer = ({
         anchor={isBottomDrawer ? "bottom" : "right"}
         open={open}
         onClose={toggleDrawer}
-        transitionDuration={{enter: 400, exit: 200}}>
+        transitionDuration={600}
+        classes={{paper: styles.customDrawer}}>
         <div className={styles.main_container}>
           <div
             className={styles.close_icon}

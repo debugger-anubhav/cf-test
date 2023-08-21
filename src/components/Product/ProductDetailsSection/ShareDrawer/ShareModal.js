@@ -8,7 +8,7 @@ const ShareModal = ({isModalOpen, closeModal}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
-    if (window.innerWidth < 770) {
+    if (window.innerWidth < 768) {
       setIsBottomShareDrawer(true);
     } else {
       setIsBottomShareDrawer(false);
@@ -29,6 +29,7 @@ const ShareModal = ({isModalOpen, closeModal}) => {
           anchor={"bottom"}
           open={isModalOpen}
           onClose={closeModal}
+          classes={{paper: styles.bottomDrawer}}
           transitionDuration={{enter: 400, exit: 200}}>
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />

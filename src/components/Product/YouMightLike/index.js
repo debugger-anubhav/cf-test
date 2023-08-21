@@ -19,7 +19,6 @@ const YouMightLike = ({heading, isbg}) => {
       .get(baseURL + endPoints.productPage.youMightLike)
       .then(res => {
         dispatch(addYouMightLike(res?.data?.data));
-        console.log(res, "res on product");
       })
       .catch(err => {
         console.log(err);
