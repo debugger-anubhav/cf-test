@@ -44,13 +44,14 @@ const SideDrawer = ({
   }, []);
 
   return (
-    <div className={`product-page-drawer`}>
+    <div>
       <Drawer
         anchor={isBottomDrawer ? "bottom" : "right"}
         open={open}
         onClose={toggleDrawer}
-        transitionDuration={{enter: 400, exit: 200}}>
-        <div className="w-full h-[90vh] lg:h-fit lg:w-[750px] xl:w-[962px] ">
+        // transitionDuration={{enter: 800, exit: 600}}
+        classes={{paper: styles.bottomDrawer}}>
+        <div className={styles.main_wrapper}>
           <div className={styles.rating_drawer}>
             <div
               className={styles.close_icon}

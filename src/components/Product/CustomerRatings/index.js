@@ -65,7 +65,6 @@ const CustomerRating = () => {
               <Rating
                 stop={5}
                 initialRating={item.rating}
-                // step={0.5}
                 fractions={2}
                 emptySymbol={
                   <RatingStar color={"white"} className={styles.star} />

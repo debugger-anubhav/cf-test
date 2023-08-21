@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -19,31 +19,35 @@ import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {useDispatch, useSelector} from "react-redux";
-import {getBannerImages} from "@/store/Slices";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
+import StickyBottomBar from "./StickyBottomBar";
+import {format} from "date-fns";
+import {useSelector, useDispatch} from "react-redux";
+import {getProductDetails} from "@/store/Slices";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
-const ProductDetails = ({category, itemName}) => {
-  const dispatch = useDispatch();
-  const pageData = useSelector(state => state.productPageData);
-
-  console.log(pageData);
-
+const ProductDetails = ({category, params}) => {
   const str = string.product_page;
-  const arr = ["Home", category, itemName];
-  const images = [
-    "1583995987Alexa-queen-bed.jpg",
-    "1583996030alexa-queen-bed-1.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-  ];
+  const prodDetails = useSelector(
+    state => state.productPageData.singleProductDetails,
+  );
+
+  const arr = ["Home", category, prodDetails?.[0]?.product_name];
+  const dispatch = useDispatch();
+
+  // dummy
+  // const images = [
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583996030alexa-queen-bed-1.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  // ];
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -52,6 +56,33 @@ const ProductDetails = ({category, itemName}) => {
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showBottomBar, setShowBottomBar] = useState(false);
+  const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
+
+  // bottombar visibility conditiionally
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition + windowHeight >= documentHeight) {
+        setShowBottomBar(false);
+      } else if (scrollPosition > yourScrollThreshold) {
+        setShowBottomBar(true);
+      } else {
+        setShowBottomBar(false);
+      }
+    };
+
+    const buttonPosition =
+      addToCartButtonRef.current.getBoundingClientRect().bottom +
+      window.scrollY;
+    setYourScrollThreshold(buttonPosition);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showBottomBar]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -61,12 +92,13 @@ const ProductDetails = ({category, itemName}) => {
     setIsModalOpen(false);
   };
 
-  const getBannerImagesFunction = () => {
+  const GetProductDetails = () => {
     axios
-      .get(baseURL + endPoints.productPage.bannerImages)
+      .get(
+        baseURL + endPoints.productPage.singleProductDetails(params.productId),
+      )
       .then(res => {
-        dispatch(getBannerImages(res?.data?.data));
-        console.log(res, "res on monthly rent");
+        dispatch(getProductDetails(res?.data?.data));
       })
       .catch(err => {
         console.log(err);
@@ -75,10 +107,9 @@ const ProductDetails = ({category, itemName}) => {
 
   const getDurationRent = () => {
     axios
-      .get(baseURL + endPoints.productPage.monthlyRent)
+      .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
       .then(res => {
         setDurationArray(res?.data?.data.reverse());
-        console.log(res, "res on monthly rent");
       })
       .catch(err => {
         console.log(err);
@@ -87,7 +118,7 @@ const ProductDetails = ({category, itemName}) => {
 
   useEffect(() => {
     getDurationRent();
-    getBannerImagesFunction();
+    GetProductDetails();
   }, []);
 
   const handleThumbnailClick = index => {
@@ -97,6 +128,8 @@ const ProductDetails = ({category, itemName}) => {
   const handleSliderChange = index => {
     setSelectedIndex(index);
   };
+
+  const addToCartButtonRef = useRef(null);
 
   const cityShieldCurrentPrice =
     (durationArray[duration.currentIndex]?.attr_price * 6) / 100;
@@ -111,10 +144,7 @@ const ProductDetails = ({category, itemName}) => {
 
   const handleButtonClick = () => {
     setIsLoading(true);
-
-    // Simulate loading by using setTimeout
     setTimeout(() => {
-      // After a delay, set isLoading back to false
       setIsLoading(false);
     }, 3000);
   };
@@ -123,9 +153,61 @@ const ProductDetails = ({category, itemName}) => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const currentDate = new Date();
+  // Add three days to the current date
+  currentDate.setDate(currentDate.getDate() + 3);
+
+  const pageData = useSelector(state => state.productPageData.customerReviews);
+  const totalReviews = pageData.length;
+  const totalRatingSum = pageData.reduce((sum, item) => {
+    const rating = parseFloat(item.rating);
+    return isNaN(rating) ? sum : sum + rating;
+  }, 0);
+
+  const averageRating = totalRatingSum / totalReviews;
+
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
+
   return (
     <div className={styles.main_container}>
       <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      {showBottomBar && (
+        <StickyBottomBar
+          productName={prodDetails?.[0]?.product_name}
+          duration={duration}
+          durationArray={durationArray}
+          isLoading={isLoading}
+          handleButtonClick={handleButtonClick}
+        />
+      )}
       <div className={styles.bread_crumps}>
         {arr.map((item, index) => (
           <div key={index} className="flex gap-2">
@@ -142,7 +224,6 @@ const ProductDetails = ({category, itemName}) => {
           </div>
         ))}
       </div>
-
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
           <Carousel
@@ -170,39 +251,51 @@ const ProductDetails = ({category, itemName}) => {
                 />
               );
             }}>
-            {images.map((item, index) => (
-              <div key={index} className={styles.prod_img}>
-                <img
-                  src={`${productPageImagesBaseUrl + item}`}
-                  alt={`Thumbnail ${index}`}
-                  className="w-full h-full"
-                />
-                <div className={styles.info}>
-                  <InformationIcon color={"ffffff"} />
-                  <p>39 people ordered this in the last 24hrs</p>
-                </div>
-              </div>
+            {prodDetails?.[0]?.image?.split(",")?.map((item, index) => (
+              <>
+                {item && (
+                  <div key={index} className={styles.prod_img}>
+                    <img
+                      src={`${productPageImagesBaseUrl + item}`}
+                      alt={`Thumbnail ${index}`}
+                      className="w-full h-full"
+                    />
+                    <div className={styles.info}>
+                      <InformationIcon color={"ffffff"} />
+                      <p>39 people ordered this in the last 24hrs</p>
+                    </div>
+                  </div>
+                )}
+              </>
             ))}
           </Carousel>
 
           <div className={styles.thumbnail_container}>
-            {images.map((image, index) => (
-              <div
-                className={`${styles.thumbnail_img} ${
-                  index === selectedIndex ? "border-[#5F789D]" : "border-fff"
-                }`}
-                key={index}
-                onClick={() => handleThumbnailClick(index)}>
-                <img
-                  src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                  alt={`Thumbnail ${index}`}
-                  className="w-full h-full"
-                />
-              </div>
+            {prodDetails?.[0]?.image?.split(",")?.map((image, index) => (
+              <>
+                {image && (
+                  <div
+                    className={`${styles.thumbnail_img} ${
+                      index === selectedIndex
+                        ? "border-[#5F789D]"
+                        : "border-fff"
+                    }`}
+                    key={index}
+                    onClick={() => handleThumbnailClick(index)}>
+                    <img
+                      src={`${productPageImagesBaseUrl + "thumb/" + image}`}
+                      alt={`Thumbnail ${index}`}
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
+              </>
             ))}
           </div>
 
-          <div className={`${styles.services_cards_container} ${styles.web}`}>
+          <div
+            className={`${styles.services_cards_container} ${styles.web}`}
+            ref={sliderRef}>
             {HasselFreeData.map((item, index) => (
               <ServiceCard
                 icon={item.icon}
@@ -218,7 +311,9 @@ const ProductDetails = ({category, itemName}) => {
           <div
             className={styles.header_div}
             style={{justifyContent: "space-between"}}>
-            <h1 className={styles.item_name}>{itemName} placeholder</h1>
+            <h1 className={styles.item_name}>
+              {prodDetails?.[0]?.product_name}
+            </h1>
             <div className={styles.header_div}>
               <Heart
                 className={
@@ -241,13 +336,13 @@ const ProductDetails = ({category, itemName}) => {
           <div className={styles.rating_div}>
             <div className={styles.rating_wrapper}>
               <div className="flex gap-1">
-                <p className={styles.rating_txt}>4.5</p>
+                <p className={styles.rating_txt}>{averageRating.toFixed(1)}</p>
                 <RatingStar color={"#F6B704"} size={16} />
               </div>
-              <p className={styles.rating_txt}>25 ratings</p>
+              <p className={styles.rating_txt}>{totalReviews} ratings</p>
             </div>
             <p className={styles.rating_txt} style={{color: "#63798D"}}>
-              Get it by 3rd aug
+              Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
               <span>
                 <DeliveryTruck size={16} color={"#63798D"} className={"ml-1"} />
               </span>
@@ -286,14 +381,14 @@ const ProductDetails = ({category, itemName}) => {
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
                     <FaRupeeSign />
-                    {durationArray[duration.currentIndex]?.attr_price}
+                    {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
                   <p
                     className={styles.originalPrice}
                     style={{
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
-                    {durationArray[0]?.attr_price}
+                    {durationArray?.[0]?.attr_price}
                   </p>
                   <div
                     className={styles.discount}
@@ -301,10 +396,10 @@ const ProductDetails = ({category, itemName}) => {
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
                     {`${Math.round(
-                      ((durationArray[0]?.attr_price -
-                        durationArray[duration.currentIndex]?.attr_price) *
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
                         100) /
-                        durationArray[0]?.attr_price,
+                        durationArray?.[0]?.attr_price,
                     ).toFixed(2)}%`}
                   </div>
                 </div>
@@ -322,7 +417,8 @@ const ProductDetails = ({category, itemName}) => {
           <button
             onClick={handleButtonClick}
             disabled={isLoading}
-            className={styles.btn}>
+            className={styles.btn}
+            ref={addToCartButtonRef}>
             {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
           </button>
 
@@ -342,7 +438,8 @@ const ProductDetails = ({category, itemName}) => {
           </div>
 
           <div
-            className={`${styles.services_cards_container} ${styles.mobile}`}>
+            className={`${styles.services_cards_container} ${styles.mobile}`}
+            ref={sliderRef}>
             {HasselFreeData.map((item, index) => (
               <ServiceCard
                 key={index}

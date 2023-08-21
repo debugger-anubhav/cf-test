@@ -24,3 +24,6 @@
 .close_icon {
   @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12;
 }
+.bottomDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
+}

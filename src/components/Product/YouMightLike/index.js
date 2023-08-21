@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 // import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
@@ -10,21 +10,50 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 
-const YouMightLike = ({heading, isbg}) => {
+const YouMightLike = ({heading, isbg, params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.productPage.youMightLike)
+      .get(baseURL + endPoints.productPage.youMightLike(params.productId))
       .then(res => {
         dispatch(addYouMightLike(res?.data?.data));
-        console.log(res, "res on product");
       })
       .catch(err => {
         console.log(err);
         dispatch(addYouMightLike([]));
       });
+  }, []);
+
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
   return (
     <div
@@ -35,7 +64,7 @@ const YouMightLike = ({heading, isbg}) => {
       }}>
       <h2 className={styles.heading}>You might also like</h2>
 
-      <div className={styles.card_wrapper}>
+      <div className={styles.card_wrapper} ref={sliderRef}>
         {pageData?.youMightLike?.map((item, index) => (
           <div key={index}>
             <Card
@@ -49,6 +78,8 @@ const YouMightLike = ({heading, isbg}) => {
               currentPrice={item?.sale_price}
               desc={item?.product_name}
               isHover={false}
+              productId={item?.product_id}
+              productName={item?.product_name.replace(/ /g, "-")}
             />
           </div>
         ))}

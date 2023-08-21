@@ -37,7 +37,7 @@ const CustomerRating = () => {
         dispatch(addGoogleReviews(res?.data?.data));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [cityId]);
 
   const sliderRef = useRef(null);
 

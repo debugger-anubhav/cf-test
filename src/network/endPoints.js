@@ -41,20 +41,23 @@ export const endPoints = {
   seoFurnitureTextContent: "fc-city-category-seo-data/getSeoPageTextContent",
 
   productPage: {
-    completeTheLook:
-      "fc-products/getRecommendedProducts?productId=3958&cityId=50",
-    youMightLike:
-      "fc-products/getYouMightAlsoLikeProducts?productId=3958&cityId=50",
-    monthlyRent:
-      "fc-subproducts/getProductForThePeriod?productId=3924&cityId=46",
+    completeTheLook: id =>
+      `fc-products/getRecommendedProducts?productId=${id}&cityId=50`,
+    youMightLike: id =>
+      `fc-products/getYouMightAlsoLikeProducts?productId=${id}&cityId=50`,
+    monthlyRent: id =>
+      `fc-subproducts/getProductForThePeriod?productId=${id}&cityId=46`,
     careInstructions:
       "fc-care-instructions/getProductCareInstructions?productId=4096",
-    bannerImages: "fc-product-banners/getProductBanners",
+    bannerImages: "fc-product-banners/getProductBanners?productId=3866",
+    productVideos: "fc-product-videos/getProductVideos?productId=3783",
     customerReviews:
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
     qna: "fc-faq-products/getProductPageFAQs?productId=3783",
     happySubscribers:
       "fc-care-instructions/getCustomerHappyStories?productId=4096",
+    singleProductDetails: id =>
+      `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
   },
   categoryHappySubscriber:
     "fc-care-instructions/getCategoryPageHappyCustomerStories",

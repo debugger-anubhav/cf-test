@@ -36,7 +36,7 @@ export const HomepageSlice = createSlice({
       state.subcategoryId = action.payload;
     },
     selectedCityId(state, action) {
-      // console.log(action?.payload, "action")
+      // console.log(action?.payload, "action city iddddddd")
       state.cityId = action.payload;
     },
     selectedCityName(state, action) {
@@ -108,6 +108,8 @@ export const ProductpageSlice = createSlice({
     customerReviews: [],
     qna: [],
     happySubscribersVideos: [],
+    productVideos: [],
+    singleProductDetails: [],
   },
   reducers: {
     addCompleteTheLook(state, action) {
@@ -130,6 +132,12 @@ export const ProductpageSlice = createSlice({
     },
     getSubscribersVideos(state, action) {
       state.happySubscribersVideos = action.payload;
+    },
+    getProductVideos(state, action) {
+      state.productVideos = action.payload;
+    },
+    getProductDetails(state, action) {
+      state.singleProductDetails = action.payload;
     },
   },
 });
@@ -163,6 +171,8 @@ export const {
   getCustomerReviews,
   getProductQuesAns,
   getSubscribersVideos,
+  getProductVideos,
+  getProductDetails,
 } = ProductpageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

@@ -105,7 +105,7 @@ export default function Home() {
           <Header />
           <MenuList />
           <HeroBanner />
-          <RentFurnitureAndAppliances params={"All"} />
+          <RentFurnitureAndAppliances params={"home-page"} />
           <RecentlyViewedProduct />
           <TrendingProducts params={"home-page"} />
           <OffersAndCoupons />

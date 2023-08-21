@@ -1,19 +1,21 @@
 import React from "react";
 import styles from "./style.module.css";
-import bg from "../bgBanner.svg";
-import Image from "next/image";
+import {useSelector} from "react-redux";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 
 const BannerFive = () => {
+  const bannerImages = useSelector(state => state.productPageData.bannerImages);
   return (
     <div className={styles.main_container}>
       <div className={styles.img_wrapper}>
-        <Image
+        <img
           className={styles.img}
-          src={bg}
+          src={`${productPageImagesBaseUrl + bannerImages?.[3]?.file_name}`}
           alt="banner_img"
-          layout="fill"
-          objectFit="cover"
         />
+        <div className={styles.desc_div}>
+          <p className={styles.desc}>{bannerImages?.[3]?.file_description}</p>
+        </div>
       </div>
     </div>
   );

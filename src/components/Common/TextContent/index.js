@@ -26,7 +26,7 @@ export default function TextContent({params}) {
       )
       .then(res => {
         setData(res?.data?.data);
-        console.log("appliances-rental");
+        console.log("appliances-rental text-content");
       })
       .catch(err => console.log(err));
   };
@@ -39,7 +39,7 @@ export default function TextContent({params}) {
       )
       .then(res => {
         setData(res?.data);
-        console.log("furniture-rental");
+        console.log("furniture-rental text content");
       })
       .catch(err => console.log(err));
   };
@@ -73,10 +73,19 @@ export default function TextContent({params}) {
           ))}
         </>
       )}
-      {params === "furniture-rental" && (
+      {params.category === "furniture-rental" && (
+        <>
+          {console.log(data, "data")}
+          <div
+            dangerouslySetInnerHTML={{__html: data?.data?.cat_meta_keyword}}
+            className={styles.apiDataSeo}
+          />
+        </>
+      )}
+      {params.category === "appliances-rental" && (
         <div
-          dangerouslySetInnerHTML={{__html: data?.data?.cat_meta_keyword}}
-          className={styles.apiData}
+          dangerouslySetInnerHTML={{__html: data?.cat_meta_keyword}}
+          className={styles.apiDataSeo}
         />
       )}
     </div>

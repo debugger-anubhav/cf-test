@@ -18,15 +18,14 @@ import CustomerRating from "@/components/Product/CustomerRatings";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
-import BannerOne from "@/components/Product/BannerSection/BannerOne";
-import BannerTwo from "@/components/Product/BannerSection/BannerTwo";
-import BannerThree from "@/components/Product/BannerSection/BannnerThree";
-import BannerFour from "@/components/Product/BannerSection/BannerFour";
-import BannerFive from "@/components/Product/BannerSection/BannerFive";
 import YouMightLike from "@/components/Product/YouMightLike";
+import BannerSection from "@/components/Product/BannerSection";
+import {useParams} from "next/navigation";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
+  const params = useParams();
+  console.log(params, "paramsss");
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -34,25 +33,17 @@ const ProductPage = () => {
           <AnnouncementBar />
           <Header />
           <MenuList />
-          <ProductDetails
-            category={"Home Furniture"}
-            itemName={"  Belle Single Bed with Storage"}
-          />
+          <ProductDetails category={"Home Furniture"} params={params} />
           <OffersAndCoupons />
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
-          <CompleteTheLook />
-          <BannerOne />
-          <BannerTwo />
-          <BannerThree />
-          <BannerFour />
-          <BannerFive />
-          <BannerFive />
+          <CompleteTheLook params={params} />
+          <BannerSection />
           <CareInstruction />
           <RecentlyViewedProduct />
-          <YouMightLike />
+          <YouMightLike params={params} />
           <CustomerRating />
-          <HappySubscribers page={"product"} params={"product-page"} />
+          <HappySubscribers page={"product"} />
           <QuesAndAns />
           <Footer />
         </div>

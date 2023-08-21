@@ -113,8 +113,8 @@ export const ProductPageImages = {
   CtaImage,
   LeafIcon: ProductIcons + "leaf-icon.svg",
   KycDoc: ProductIcons + "kyc-documents.svg",
-  cracksTears: ProductIcons + "cracks tears.svg",
-  brokenFurni: ProductIcons + "broken furniture.svg",
-  liquidSpill: ProductIcons + "liquid spill.svg",
-  sratches: ProductIcons + "Scratches&dents.svg",
+  cracksTears: ProductIcons + "cracks_tears.svg",
+  brokenFurni: ProductIcons + "broken_furniture.svg",
+  liquidSpill: ProductIcons + "liquid_spill.svg",
+  sratches: ProductIcons + "scratches_dents.svg",
 };
