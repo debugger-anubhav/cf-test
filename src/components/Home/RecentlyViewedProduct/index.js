@@ -17,7 +17,7 @@ const RecentlyViewedProduct = () => {
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
-    `?cityId=${cityId}&userId=${85760}`,
+    `?cityId=${cityId}&userId=${85757}`,
   );
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const RecentlyViewedProduct = () => {
                 }
                 discount={`${Math.round(
                   ((item?.price - item?.product_sale_price) * 100) /
-                    item?.price,
+                    item?.product_sale_price,
                 ).toFixed(2)}%`}
                 originalPrice={item?.price}
                 currentPrice={item?.product_sale_price}

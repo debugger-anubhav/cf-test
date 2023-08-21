@@ -11,7 +11,7 @@
 }
 
 .main_sub_container {
-  @apply flex my-4 overflow-x-scroll;
+  @apply flex my-4 overflow-x-scroll w-full;
 }
 .heading {
   @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;

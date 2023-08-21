@@ -24,8 +24,12 @@ body h1 h2 h3 h4 h5 h6 p {
   font-weight: normal;
 }
 
+::-webkit-scrollbar {
+  width: 0;
+}
+
 ::-webkit-scrollbar-track {
-  width: 0px;
+  width: 0px !important;
 }
 .mapped_filter::-webkit-scrollbar-thumb {
   width: 5px !important;
@@ -59,17 +63,6 @@ body h1 h2 h3 h4 h5 h6 p {
 .landing_page_carousel .control-dots {
   bottom: -14px !important;
 }
-/* .MuiDrawer-paper {
-  max-height: 80% !important;
-  overflow-y: visible !important;
-  border-top-left-radius: 20px !important;
-  border-top-right-radius: 20px !important;
-} */
-
-/*  for product page  */
-/* .MuiDrawer-paper {
-  @apply !rounded-t-[20px] lg:!rounded-t-none;
-} */
 
 .react-responsive-modal-modal {
   @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-[6.5rem] xl:right-[19.5%] rounded-lg z-[111] h-[416px] overflow-y-scroll;
@@ -83,19 +76,13 @@ body h1 h2 h3 h4 h5 h6 p {
 .skeleton_product_card {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
 }
-/* 
-.slick-slide slick-active{
-  @apply w-fit gap-4 xl:gap-6 3xl:gap-8;
-} */
+
 #filter-popover .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
   border-radius: 16px !important;
 }
 .css-58ftfq-MuiSkeleton-root {
   height: 100% !important;
 }
-/* .MuiPopover-paper .css-3bmhjh-MuiPaper-root-MuiPopover-paper{
-  left: 90px !important;;
-} */
 
 input[type="checkbox"] {
   accent-color: #71717a !important;

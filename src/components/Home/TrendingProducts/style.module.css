@@ -19,7 +19,7 @@
 .card_box {
   /* @apply flex w-full gap-4 xl:gap-6 3xl:gap-8 overflow-y-hidden overflow-x-scroll; */
   /* @apply flex w-full gap-4 xl:gap-6 3xl:gap-8 overflow-y-hidden; */
-  @apply flex items-center gap-4 xl:gap-6 3xl:gap-8;
+  @apply flex items-center gap-4 xl:gap-6 3xl:gap-8 w-full overflow-x-scroll;
 }
 /* .slide{
   @apply mr-4;
