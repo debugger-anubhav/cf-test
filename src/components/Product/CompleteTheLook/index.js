@@ -73,7 +73,7 @@ const CompleteTheLook = ({params}) => {
               currentPrice={item?.sale_price}
               desc={item?.product_name}
               isHover={false}
-              productId={item?.product_id}
+              productId={item?.id}
               productName={item?.product_name.replace(/ /g, "-")}
             />
           </div>

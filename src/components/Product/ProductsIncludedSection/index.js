@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-
 import {useSelector} from "react-redux";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 
-const ItemsIncluded = ({noOfItems}) => {
+const ItemsIncluded = () => {
   const [selectedItem, setSelectedItem] = useState(0);
   const pageDetails = useSelector(
     state => state.productPageData.singleProductDetails[0],
@@ -12,7 +11,9 @@ const ItemsIncluded = ({noOfItems}) => {
   console.log(pageDetails, "pagejkl");
   return (
     <div className={styles.main_container}>
-      <h2 className={styles.header}>{noOfItems} product included</h2>
+      <h2 className={styles.header}>
+        {pageDetails?.subProduct?.length} product included
+      </h2>
       <div className={styles.images_wrappper}>
         {pageDetails?.subProduct?.map((item, index) => (
           <div

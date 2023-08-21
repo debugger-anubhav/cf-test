@@ -25,14 +25,10 @@ const Card = ({
 
   // const router = useRouter();
 
-  const handleProductClick = productId => {
-    // router.push(`/product?id=${productId}`);
-  };
-
   return (
-    <Link href={`things/${productId}/${productName}`}>
+    <Link href={`/things/${productId}/${productName}`}>
       <div
-        onClick={() => handleProductClick(productId)}
+        // onClick={() => handleProductClick(productId)}
         className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper}
       `}
         onMouseOver={() => {
