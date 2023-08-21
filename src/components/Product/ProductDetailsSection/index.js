@@ -25,23 +25,29 @@ import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
 import {format} from "date-fns";
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
+import {getProductDetails} from "@/store/Slices";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
-const ProductDetails = ({category, itemName}) => {
+const ProductDetails = ({category, params}) => {
   const str = string.product_page;
-  const arr = ["Home", category, itemName];
+  const prodDetails = useSelector(
+    state => state.productPageData.singleProductDetails,
+  );
+
+  const arr = ["Home", category, prodDetails?.[0]?.product_name];
+  const dispatch = useDispatch();
 
   // dummy
-  const images = [
-    "1583995987Alexa-queen-bed.jpg",
-    "1583996030alexa-queen-bed-1.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-    "1583995987Alexa-queen-bed.jpg",
-  ];
+  // const images = [
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583996030alexa-queen-bed-1.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  //   "1583995987Alexa-queen-bed.jpg",
+  // ];
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -86,12 +92,24 @@ const ProductDetails = ({category, itemName}) => {
     setIsModalOpen(false);
   };
 
+  const GetProductDetails = () => {
+    axios
+      .get(
+        baseURL + endPoints.productPage.singleProductDetails(params.productId),
+      )
+      .then(res => {
+        dispatch(getProductDetails(res?.data?.data));
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const getDurationRent = () => {
     axios
-      .get(baseURL + endPoints.productPage.monthlyRent)
+      .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
       .then(res => {
         setDurationArray(res?.data?.data.reverse());
-        console.log(res, "res on monthly rent");
       })
       .catch(err => {
         console.log(err);
@@ -100,6 +118,7 @@ const ProductDetails = ({category, itemName}) => {
 
   useEffect(() => {
     getDurationRent();
+    GetProductDetails();
   }, []);
 
   const handleThumbnailClick = index => {
@@ -182,7 +201,7 @@ const ProductDetails = ({category, itemName}) => {
       <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
       {showBottomBar && (
         <StickyBottomBar
-          productName={itemName}
+          productName={prodDetails?.[0]?.product_name}
           duration={duration}
           durationArray={durationArray}
           isLoading={isLoading}
@@ -232,35 +251,45 @@ const ProductDetails = ({category, itemName}) => {
                 />
               );
             }}>
-            {images.map((item, index) => (
-              <div key={index} className={styles.prod_img}>
-                <img
-                  src={`${productPageImagesBaseUrl + item}`}
-                  alt={`Thumbnail ${index}`}
-                  className="w-full h-full"
-                />
-                <div className={styles.info}>
-                  <InformationIcon color={"ffffff"} />
-                  <p>39 people ordered this in the last 24hrs</p>
-                </div>
-              </div>
+            {prodDetails?.[0]?.image?.split(",")?.map((item, index) => (
+              <>
+                {item && (
+                  <div key={index} className={styles.prod_img}>
+                    <img
+                      src={`${productPageImagesBaseUrl + item}`}
+                      alt={`Thumbnail ${index}`}
+                      className="w-full h-full"
+                    />
+                    <div className={styles.info}>
+                      <InformationIcon color={"ffffff"} />
+                      <p>39 people ordered this in the last 24hrs</p>
+                    </div>
+                  </div>
+                )}
+              </>
             ))}
           </Carousel>
 
           <div className={styles.thumbnail_container}>
-            {images.map((image, index) => (
-              <div
-                className={`${styles.thumbnail_img} ${
-                  index === selectedIndex ? "border-[#5F789D]" : "border-fff"
-                }`}
-                key={index}
-                onClick={() => handleThumbnailClick(index)}>
-                <img
-                  src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                  alt={`Thumbnail ${index}`}
-                  className="w-full h-full"
-                />
-              </div>
+            {prodDetails?.[0]?.image?.split(",")?.map((image, index) => (
+              <>
+                {image && (
+                  <div
+                    className={`${styles.thumbnail_img} ${
+                      index === selectedIndex
+                        ? "border-[#5F789D]"
+                        : "border-fff"
+                    }`}
+                    key={index}
+                    onClick={() => handleThumbnailClick(index)}>
+                    <img
+                      src={`${productPageImagesBaseUrl + "thumb/" + image}`}
+                      alt={`Thumbnail ${index}`}
+                      className="w-full h-full"
+                    />
+                  </div>
+                )}
+              </>
             ))}
           </div>
 
@@ -282,7 +311,9 @@ const ProductDetails = ({category, itemName}) => {
           <div
             className={styles.header_div}
             style={{justifyContent: "space-between"}}>
-            <h1 className={styles.item_name}>{itemName} placeholder</h1>
+            <h1 className={styles.item_name}>
+              {prodDetails?.[0]?.product_name}
+            </h1>
             <div className={styles.header_div}>
               <Heart
                 className={
