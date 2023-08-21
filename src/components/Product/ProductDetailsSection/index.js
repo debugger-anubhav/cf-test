@@ -147,6 +147,36 @@ const ProductDetails = ({category, itemName}) => {
 
   const averageRating = totalRatingSum / totalReviews;
 
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
+
   return (
     <div className={styles.main_container}>
       <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
@@ -234,7 +264,9 @@ const ProductDetails = ({category, itemName}) => {
             ))}
           </div>
 
-          <div className={`${styles.services_cards_container} ${styles.web}`}>
+          <div
+            className={`${styles.services_cards_container} ${styles.web}`}
+            ref={sliderRef}>
             {HasselFreeData.map((item, index) => (
               <ServiceCard
                 icon={item.icon}
@@ -375,7 +407,8 @@ const ProductDetails = ({category, itemName}) => {
           </div>
 
           <div
-            className={`${styles.services_cards_container} ${styles.mobile}`}>
+            className={`${styles.services_cards_container} ${styles.mobile}`}
+            ref={sliderRef}>
             {HasselFreeData.map((item, index) => (
               <ServiceCard
                 key={index}
