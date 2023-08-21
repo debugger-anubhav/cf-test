@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
-import {Close, FooterIcons} from "@/assets/icon";
+import {Close, ShareIconsForProductPage} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 
 const ShareModal = ({isModalOpen, closeModal}) => {
@@ -37,15 +37,17 @@ const ShareModal = ({isModalOpen, closeModal}) => {
           <div className={styles.share_drawer_wrapper}>
             <h1 className={styles.share_modal_head}>Share Product via:</h1>
             <div className={styles.share_modal_icons_wrapper}>
-              {FooterIcons?.social_media_icons?.map((item, index) => (
-                <img
-                  key={index.toString()}
-                  alt={item?.icon}
-                  src={item?.icon}
-                  // className={styles.sm_icon}
-                  onClick={() => console.log("cliked")}
-                />
-              ))}
+              {ShareIconsForProductPage?.social_media_icons?.map(
+                (item, index) => (
+                  <img
+                    key={index.toString()}
+                    alt={item?.icon}
+                    src={item?.icon}
+                    className="cursor-pointer"
+                    onClick={() => console.log("cliked")}
+                  />
+                ),
+              )}
             </div>
           </div>
         </Drawer>
@@ -62,15 +64,17 @@ const ShareModal = ({isModalOpen, closeModal}) => {
           }}>
           <h1 className={styles.share_modal_head}>Share Product via:</h1>
           <div className={styles.share_modal_icons_wrapper}>
-            {FooterIcons?.social_media_icons?.map((item, index) => (
-              <img
-                key={index.toString()}
-                alt={item?.icon}
-                src={item?.icon}
-                // className={styles.sm_icon}
-                onClick={() => console.log("cliked")}
-              />
-            ))}
+            {ShareIconsForProductPage?.social_media_icons?.map(
+              (item, index) => (
+                <img
+                  key={index.toString()}
+                  alt={item?.icon}
+                  src={item?.icon}
+                  className="cursor-pointer"
+                  onClick={() => console.log("cliked")}
+                />
+              ),
+            )}
           </div>
         </Modal>
       )}
