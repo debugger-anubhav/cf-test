@@ -11,9 +11,7 @@ const StickyBottomBar = ({
 }) => {
   return (
     <div className={styles.sticky_bar_wrapper}>
-      <p className={styles.sticky_bar_head}>
-        Alexa 6 Seater Dining Table with 4 Chairs and Bench
-      </p>
+      <p className={styles.sticky_bar_head}>{productName}</p>
 
       <div
         className={styles.deposit_div}

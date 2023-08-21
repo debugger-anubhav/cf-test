@@ -80,6 +80,8 @@ const RecentlyViewedProduct = () => {
                 originalPrice={item?.price}
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
+                productId={item?.product_id}
+                productName={item?.product_name.replace(/ /g, "-")}
               />
             </div>
           ))}

@@ -158,7 +158,7 @@ const Header = () => {
               placeholder="Search for Furniture, Appliances, etc"
               className={styles.search_input}
               onClick={() => {
-                setOpenSearchBar(!openSearchbar);
+                // setOpenSearchBar(!openSearchbar);
                 settopOffset(65 - window.pageYOffset);
                 console.log("dsajh");
               }}
@@ -221,7 +221,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         <div
           className={`${styles.search_wrapper}`}
           onClick={() => {
-            setOpenSearchBar(!openSearchbar);
+            // setOpenSearchBar(!openSearchbar);
           }}>
           <Image
             src={Icons.Search}

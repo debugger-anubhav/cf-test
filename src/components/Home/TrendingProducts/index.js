@@ -124,6 +124,8 @@ const TrendingProducts = ({params}) => {
               discount={`${Math.round(
                 ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
+              productId={item?.product_id}
+              productName={item?.product_name.replace(/ /g, "-")}
             />
           </div>
         ))}
