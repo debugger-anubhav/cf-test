@@ -26,6 +26,13 @@ const SingleProduct = () => {
     cityId: 50,
     pageNo,
   };
+  const bodyDataAll = {
+    parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    cityId: 50,
+    pageNo,
+  };
+
+  const data = categoryPageReduxData?.isAllProduct ? bodyDataAll : bodyData;
 
   const singleItemLength =
     categoryPageReduxData?.categoryMetaData?.totalProduct;
@@ -33,7 +40,7 @@ const SingleProduct = () => {
     "category-single-product",
     "POST",
     endPoints.categorySingleProduct,
-    bodyData,
+    data,
   );
 
   useEffect(() => {
@@ -52,6 +59,8 @@ const SingleProduct = () => {
   }, [pageNo]);
 
   const singleItemData = categoryPageReduxData?.singleProduct;
+
+  console.log("main mapper", singleItemData);
 
   return singleItemData?.length ? (
     <div>
@@ -76,12 +85,19 @@ const SingleProduct = () => {
                   desc={item?.product_name}
                   originalPrice={item?.price}
                   currentPrice={item?.sale_price}
-                  hoverCardImage={`${productImageBaseUrl}${
-                    item?.image.split(",")[1]
-                  }`}
+                  // hoverCardImage={`${productImageBaseUrl}${
+                  //   item?.image.split(",")[1]
+                  // }`}
+                  hoverCardImage={
+                    item?.image?.split(",").filter(item => item).length > 1
+                      ? productImageBaseUrl + item?.image?.split(",")[1]
+                      : productImageBaseUrl + item?.image?.split(",")[0]
+                  }
                   discount={`${Math.round(
                     ((item?.price - item?.sale_price) * 100) / 1000,
                   ).toFixed(2)}%`}
+                  productId={item?.product_id}
+                  productName={item?.product_name.replace(/ /g, "-")}
                 />
               </div>
             );

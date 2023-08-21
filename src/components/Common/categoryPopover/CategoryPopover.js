@@ -21,10 +21,8 @@ export default function CategoryPopover({
 
   const filtereData = getAllProductWithFilterData?.prdoucWithFilter?.filters;
 
-  const [filterList, setFilterList] = useState([]);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
-  console.log(filterList, "filterList");
+  // const [filterList, setFilterList] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = event => {
     setAnchorEl(event.currentTarget);
@@ -40,7 +38,6 @@ export default function CategoryPopover({
 
   const handleFilteredItems = e => {
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
-    console.log(updatedFilteredList, "updatedFilteredList");
     if (e.target.checked) {
       updatedFilteredList = [
         ...categoryPageReduxData?.filteredItems,
@@ -52,7 +49,6 @@ export default function CategoryPopover({
         1,
       );
     }
-    setFilterList(updatedFilteredList);
     dispatch(addFilteredItem(updatedFilteredList));
   };
 
