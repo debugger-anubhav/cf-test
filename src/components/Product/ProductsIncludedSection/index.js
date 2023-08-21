@@ -1,26 +1,35 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {productItemsIncludedDetails} from "@/constants/constant";
+
+import {useSelector} from "react-redux";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 
 const ItemsIncluded = ({noOfItems}) => {
   const [selectedItem, setSelectedItem] = useState(0);
+  const pageDetails = useSelector(
+    state => state.productPageData.singleProductDetails[0],
+  );
+  console.log(pageDetails, "pagejkl");
   return (
     <div className={styles.main_container}>
       <h2 className={styles.header}>{noOfItems} product included</h2>
       <div className={styles.images_wrappper}>
-        {productItemsIncludedDetails.map((item, index) => (
+        {pageDetails?.subProduct?.map((item, index) => (
           <div
             onClick={() => setSelectedItem(index)}
             className={`border-[4px] p-1 ${
               selectedItem === index ? "border-[#5F789D]" : "border-fff"
             }`}
             key={index}>
-            <img src={item} className={styles.img} />
+            <img
+              src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
+              className={styles.img}
+            />
           </div>
         ))}
       </div>
       <div>
-        {productItemsIncludedDetails.map((item, index) => (
+        {pageDetails?.subProduct?.map((item, index) => (
           <div
             key={index}
             className={`${
@@ -32,7 +41,7 @@ const ItemsIncluded = ({noOfItems}) => {
                 <div className={styles.info_row}>
                   <p className={styles.label}>Name</p>
                   <p className={styles.colon}>:</p>
-                  <p className={styles.info_details}>{item.name}</p>
+                  <p className={styles.info_details}>{item.product_name}</p>
                 </div>
 
                 <div className={styles.info_row}>
@@ -44,7 +53,7 @@ const ItemsIncluded = ({noOfItems}) => {
                 <div className={styles.info_row}>
                   <p className={styles.label}>Size</p>
                   <p className={styles.colon}>:</p>
-                  <p className={styles.info_details}>L x W x H: {item.size}</p>
+                  <p className={styles.info_details}>{item.dimension}</p>
                 </div>
 
                 <div className={styles.info_row}>
@@ -56,14 +65,14 @@ const ItemsIncluded = ({noOfItems}) => {
                 <div className={styles.info_row}>
                   <p className={styles.label}>Color</p>
                   <p className={styles.colon}>:</p>
-                  <p className={styles.info_details}>{item.color}</p>
+                  <p className={styles.info_details}>{item.colour}</p>
                 </div>
               </div>
             </div>
             <div className={styles.right_div}>
               <p className={styles.info_subhead}>Features</p>
               <div className={styles.features_wrappers}>
-                {item.features.map((feature, index) => (
+                {item.features?.map((feature, index) => (
                   <li key={index} className={styles.feature}>
                     <div className={styles.dot}></div>
                     {feature}

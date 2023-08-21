@@ -10,13 +10,13 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 
-const YouMightLike = ({heading, isbg}) => {
+const YouMightLike = ({heading, isbg, params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.productPage.youMightLike)
+      .get(baseURL + endPoints.productPage.youMightLike(params.productId))
       .then(res => {
         dispatch(addYouMightLike(res?.data?.data));
       })
@@ -78,6 +78,8 @@ const YouMightLike = ({heading, isbg}) => {
               currentPrice={item?.sale_price}
               desc={item?.product_name}
               isHover={false}
+              productId={item?.product_id}
+              productName={item?.product_name.replace(/ /g, "-")}
             />
           </div>
         ))}
