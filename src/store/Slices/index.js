@@ -8,6 +8,8 @@ export const HomepageSlice = createSlice({
     recentProduct: [],
     cityId: 46,
     cityName: "Bangalore",
+    productName: "",
+    productCategory: "",
     reviews: [],
     newProduct: [],
     limitedDiscount: [],
@@ -18,6 +20,7 @@ export const HomepageSlice = createSlice({
     sidebarMenuLists: [],
     announcementBar: false,
     seoFurnitureSubCategory: [],
+    subcategoryId: "270",
   },
   reducers: {
     addCityList(state, action) {
@@ -29,11 +32,22 @@ export const HomepageSlice = createSlice({
     addRecentlyViewedProduct(state, action) {
       state.recentProduct = action.payload;
     },
+    addSubCategoryId(state, action) {
+      state.subcategoryId = action.payload;
+    },
     selectedCityId(state, action) {
+      // console.log(action?.payload, "action")
       state.cityId = action.payload;
     },
     selectedCityName(state, action) {
+      // console.log(action.payload, "actions");
       state.cityName = action.payload;
+    },
+    addProductName(state, action) {
+      state.productName = action.payload;
+    },
+    addProductCategory(state, action) {
+      state.productCategory = action.payload;
     },
     addGoogleReviews(state, action) {
       state.reviews = action.payload;
@@ -140,6 +154,9 @@ export const {
   addSidebarMenuLists,
   setAnnouncementBar,
   setSeoFurnitureRentalSubCategory,
+  addProductName,
+  addProductCategory,
+  addSubCategoryId,
 } = HomepageSlice.actions;
 
 export const {

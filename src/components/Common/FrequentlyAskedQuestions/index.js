@@ -24,6 +24,11 @@ const FrequentlyAskedQuestions = ({params}) => {
     "faqsSeoFurniturePage",
     endPoints.seoFurnitureFaqs,
   );
+  const {refetch: getFaqsCategory} = useQuery(
+    "faqsCategoryPage",
+    endPoints.categortFaq,
+    `?parentCategoryId=27`,
+  );
 
   useEffect(() => {
     if (params?.category === "appliances-rental") {
@@ -38,6 +43,12 @@ const FrequentlyAskedQuestions = ({params}) => {
         .then(res => {
           setFaqs(res?.data?.data);
           // console.log("furniture-rental")
+        })
+        .catch(err => console.log(err));
+    } else if (params === "category") {
+      getFaqsCategory()
+        .then(res => {
+          setFaqs(res?.data?.data);
         })
         .catch(err => console.log(err));
     } else {
