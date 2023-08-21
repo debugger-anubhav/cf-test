@@ -30,18 +30,21 @@ const FrequentlyAskedQuestions = ({params}) => {
       getFaqsSeoAppliancePage()
         .then(res => {
           setFaqs(res?.data?.data);
+          // console.log("appliances-rental")
         })
         .catch(err => console.log(err));
     } else if (params?.category === "furniture-rental") {
       getFaqsSeoFurniturePage()
         .then(res => {
           setFaqs(res?.data?.data);
+          // console.log("furniture-rental")
         })
         .catch(err => console.log(err));
     } else {
       getFaqsLandingPage()
         .then(res => {
           setFaqs(res?.data?.data);
+          // console.log("home")
         })
         .catch(err => console.log(err));
     }

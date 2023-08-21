@@ -1,3 +1,12 @@
 .wrapper {
-  @apply w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+  @apply w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] my-8;
+}
+.apiData {
+  @apply font-Poppins;
+}
+.apiData div h4 {
+  @apply pt-4 pb-2 font-Poppins text-[#45454A] text-20 font-medium;
+}
+.apiData div {
+  @apply text-[#9A9AA2] font-Poppins text-14;
 }

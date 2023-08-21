@@ -32,6 +32,7 @@ const HappySubscribers = ({page, params}) => {
       .get(baseURL + endPoints.homePageHappySubscriber)
       .then(res => {
         setData(res?.data?.data);
+        // console.log("home")
       })
       .catch(err => {
         console.log(err);
@@ -43,6 +44,7 @@ const HappySubscribers = ({page, params}) => {
       .get(baseURL + endPoints.seoApplianceHappyCustomer)
       .then(res => {
         setData(res?.data?.data);
+        // console.log("appliances-rental")
       })
       .catch(err => {
         console.log(err);
@@ -53,6 +55,7 @@ const HappySubscribers = ({page, params}) => {
       .get(baseURL + endPoints.seoFurnitureHappyCustomer)
       .then(res => {
         setData(res?.data?.data);
+        // console.log("furniture-rental")
       })
       .catch(err => {
         console.log(err);
