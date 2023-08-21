@@ -16,8 +16,16 @@ export const CategoryPageSlice = createSlice({
     categoryMetaData: [],
     categoryMetaSubProduct: [],
     categoryMetaOutStock: [],
+    isAllProduct: false,
+    parentCategoryId: 27,
   },
   reducers: {
+    addParentCategoryId(state, action) {
+      state.parentCategoryId = action.payload;
+    },
+    addAllProduct(state, action) {
+      state.isAllProduct = action.payload;
+    },
     addFilterMetaData(state, action) {
       state.categoryFilterData = action.payload;
     },
@@ -37,9 +45,7 @@ export const CategoryPageSlice = createSlice({
       state.categoryMetaOutStock = action.payload;
     },
     addSingleProduct: (state, action) => {
-      // console.log(action.payload, "payload")
       state.singleProduct = action.payload;
-      // console.log([...state.singleProduct, { ...action.payload }], "afterappending data")
     },
     addSetProduct: (state, action) => {
       state.setProduct = action.payload;
@@ -76,4 +82,6 @@ export const {
   addSubCategoryMetaData,
   addSubCategoryMetaSubProduct,
   addSubCategoryMetaOutStockProduct,
+  addAllProduct,
+  addParentCategoryId,
 } = CategoryPageSlice.actions;

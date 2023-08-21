@@ -28,8 +28,8 @@ const SoldOutProduct = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const outStockItemLength =
-    categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
+  // const outStockItemLength =
+  //   categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
   const bodyData = {
     subCategoryId: homePageReduxData?.productName?.id,
@@ -38,11 +38,19 @@ const SoldOutProduct = () => {
     pageNo,
   };
 
+  const bodyDataAll = {
+    parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    cityId: 50,
+    pageNo,
+  };
+
+  const payload = categoryPageReduxData?.isAllProduct ? bodyDataAll : bodyData;
+
   const {mutateAsync: getStockOutProducts} = useMutation(
     "category-stock-product",
     "POST",
     endPoints.categoryStockOutProduct,
-    bodyData,
+    payload,
   );
 
   useEffect(() => {
@@ -66,57 +74,63 @@ const SoldOutProduct = () => {
     <>
       <div className={style.main_wrapper}>
         <h2 className={style.heading}>Sold out</h2>
-        <div className={style.main_container}>
-          <div>
-            <InfiniteScroll
-              dataLength={data.length}
-              next={() => {
-                if (pageNo <= totalPage) {
-                  setPageNo(prev => prev + 1);
-                }
-              }}
-              hasMore={true} // Replace with a condition based on your data source}
-              className="!w-full !h-full">
-              <div className={style.main_container}>
-                {data?.map((item, index) => {
-                  return (
-                    <div className={style.card_box} key={index.toString()}>
-                      <Card
-                        cardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[0]
-                        }`}
-                        productImageBaseUrl
-                        desc={item?.product_name}
-                        originalPrice={item?.price}
-                        currentPrice={item?.sale_price}
-                        hoverCardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[1]
-                        }`}
-                        discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) / 1000,
-                        ).toFixed(2)}%`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            </InfiniteScroll>
-          </div>
+        {/* <div className={style.main_container}> */}
+        <div>
+          <InfiniteScroll
+            dataLength={data.length}
+            next={() => {
+              if (pageNo <= totalPage) {
+                setPageNo(prev => prev + 1);
+              }
+            }}
+            hasMore={true} // Replace with a condition based on your data source}
+            className="!w-full !h-full">
+            <div className={style.main_container}>
+              {data?.map((item, index) => {
+                return (
+                  <div className={style.card_box} key={index.toString()}>
+                    <Card
+                      cardImage={`${productImageBaseUrl}${
+                        item?.image?.split(",")[0]
+                      }`}
+                      productImageBaseUrl
+                      desc={item?.product_name}
+                      originalPrice={item?.price}
+                      currentPrice={item?.sale_price}
+                      // hoverCardImage={`${productImageBaseUrl}${item?.image?.split(",")[1]
+                      //   }`}
+                      hoverCardImage={
+                        item?.image?.split(",").filter(item => item).length > 1
+                          ? productImageBaseUrl + item?.image?.split(",")[1]
+                          : productImageBaseUrl + item?.image?.split(",")[0]
+                      }
+                      discount={`${Math.round(
+                        ((item?.price - item?.sale_price) * 100) / 1000,
+                      ).toFixed(2)}%`}
+                      productId={item?.product_id}
+                      productName={item?.product_name.replace(/ /g, "-")}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </InfiniteScroll>
         </div>
+        {/* </div> */}
       </div>
-      {categoryPageReduxData?.outStockProduct?.length === outStockItemLength ? (
-        <>
-          <RecentlyViewedProduct />
-          <SavedItem />
-          <TrendingItem />
-          <Instruction />
-          <HappySubscribers />
-          <CustomerRating />
-          <HasselFreeServicesCards />
-          <FrequentlyAskedQuestions />
-          <Footer />
-        </>
-      ) : null}
+      {/* {categoryPageReduxData?.outStockProduct?.length === outStockItemLength ? ( */}
+      <>
+        <RecentlyViewedProduct />
+        <SavedItem />
+        <TrendingItem />
+        <Instruction />
+        <HappySubscribers />
+        <CustomerRating />
+        <HasselFreeServicesCards />
+        <FrequentlyAskedQuestions />
+        <Footer />
+      </>
+      {/* ) : null} */}
     </>
   ) : null;
 };

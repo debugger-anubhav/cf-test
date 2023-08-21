@@ -10,15 +10,19 @@ import {
   addSubCategoryId,
 } from "@/store/Slices";
 import {
+  addAllProduct,
   addOutStockProduct,
+  addParentCategoryId,
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 
-const PopOver = ({list, item}) => {
+const PopOver = ({list, item, parentCategoryId}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
+
   const hoverRef = React.useRef("");
   const [anchorEl, setAnchorEl] = React.useState(null);
+
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -26,17 +30,34 @@ const PopOver = ({list, item}) => {
   //   setAnchorEl(event.currentTarget);
   // };
   const handleCategory = (event, item) => {
-    // dispatch(addProductCategory(item))
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = e => {
+  const handleClose = () => {
     setAnchorEl(null);
   };
-  // console.log(homePageReduxData?.productName, "productName")
+
+  const handMainCategory = e => {
+    dispatch(addProductCategory(hoverRef.current));
+    dispatch(addParentCategoryId(parentCategoryId));
+    dispatch(addProductName(item));
+
+    dispatch(addSubCategoryId(""));
+    dispatch(addProductName(null));
+
+    dispatch(addAllProduct(true));
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    setAnchorEl(null);
+    router.push(
+      `/category/${homePageReduxData?.cityName.toLowerCase()}/all}
+      }`,
+    );
+  };
 
   const handleSelectedProduct = (e, item) => {
-    console.log(item?.id, "item");
+    // console.log(item?.cat_name.trim().split(" ").join("-").toLowerCase(), "item?.cat_name.trim()")
     dispatch(addSubCategoryId(item?.id));
     dispatch(addProductName(item));
     dispatch(addProductCategory(hoverRef.current));
@@ -45,8 +66,11 @@ const PopOver = ({list, item}) => {
     dispatch(addOutStockProduct([]));
 
     router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/${
-        homePageReduxData?.productName?.cat_name
+      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+        .trim()
+        .split(" ")
+        .join("-")
+        .toLowerCase()}
       }`,
     );
     setAnchorEl(null);
@@ -84,13 +108,14 @@ const PopOver = ({list, item}) => {
           marginTop: "0.9rem",
         }}>
         <div className={styles.sub_item_wrapper} onMouseLeave={handleClose}>
-          <p className={styles.sub_item} onClick={handleClose}>
+          <p className={styles.sub_item} onClick={handMainCategory}>
             All
           </p>
           {list?.map(
             (item, index) =>
               // <Link>
               {
+                // { console.log(item, "itemmm") }
                 // console.log(item, "item")
                 return (
                   <p

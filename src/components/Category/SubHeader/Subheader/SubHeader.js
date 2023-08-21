@@ -48,13 +48,12 @@ const SubHeader = () => {
           Rental
         </h1>
         <div className={styles.category_wrapper}>
-          {getAllAndSubCategoryData?.map((item, index) => {
+          {/* {getAllAndSubCategoryData?.map((item, index) => {
             if (item?.cat_name === homePageReduxData?.productCategory) {
               const subCategoriesWithNewObject = [
                 {
+                  ...item,
                   cat_name: "All",
-                  icon_image: "new-icon-image.png",
-                  icon_active_image: "new-icon-image.png",
                 },
                 ...item?.sub_categories,
               ];
@@ -77,7 +76,7 @@ const SubHeader = () => {
                           <img
                             src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
                             className={styles.selected_icon}
-                            // className="w-[30px] h-[30px]"
+                          // className="w-[30px] h-[30px]"
                           />
                         </div>
                       ) : (
@@ -95,7 +94,58 @@ const SubHeader = () => {
                   </>
                 );
               });
-            } else return null;
+            } else {
+              console.log("outttt");
+            }
+          })} */}
+          {getAllAndSubCategoryData?.map((item, index) => {
+            if (item?.cat_name === homePageReduxData?.productCategory) {
+              const subCategoriesWithNewObject = [
+                {
+                  ...item,
+                  cat_name: "All",
+                },
+                ...item?.sub_categories,
+              ];
+
+              return subCategoriesWithNewObject?.map((subItem, i) => {
+                const selectedProduct =
+                  homePageReduxData?.productName?.cat_name ===
+                  subItem?.cat_name;
+                return (
+                  <div
+                    className={
+                      selectedProduct
+                        ? styles.category_container_box_active
+                        : styles.category_container_box
+                    }
+                    key={i.toString()}>
+                    {selectedProduct ? (
+                      <div>
+                        <img
+                          src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
+                          className={styles.selected_icon}
+                        />
+                      </div>
+                    ) : (
+                      <div>
+                        <img
+                          src={`${categoryIconsUrl}${subItem?.icon_image}`}
+                          className={styles.selected_icon}
+                        />
+                      </div>
+                    )}
+                    <p className={styles.category_container}>
+                      {subItem?.cat_name}
+                    </p>
+                  </div>
+                );
+              });
+            } else {
+              console.log("outttt");
+              // Return a placeholder value when the condition is not met
+              return null;
+            }
           })}
         </div>
 
@@ -144,7 +194,7 @@ const SubHeader = () => {
             </div>
             {categoryPageReduxData?.filteredItems.length !== 0
               ? categoryPageReduxData?.filteredItems?.map((item, index) => {
-                  console.log(item, "itemmmsss filter");
+                  // console.log(item, "itemmmsss filter");
                   return (
                     <>
                       <div
