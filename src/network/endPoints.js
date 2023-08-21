@@ -12,6 +12,7 @@ export const endPoints = {
   sidebarMenuLists: "fc-categories/getSidebarMenuLists",
   rentNowBanners: "fc-app-product-urls/getBanners?isHomePage=1",
   trendingSearchConstants: "fc-products/trendingSearchConstants",
+  productWithFilter: "fc-products/getProductsWithFilter",
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
@@ -56,4 +57,12 @@ export const endPoints = {
     happySubscribers:
       "fc-care-instructions/getCustomerHappyStories?productId=4096",
   },
+  categoryHappySubscriber:
+    "fc-care-instructions/getCategoryPageHappyCustomerStories",
+  categortFaq: "fc-faqs/getCategoryPageFAQS",
+  categoryContent: "fc-city-category-datas/getCategoryPageTextContent",
+  savedItems: "fc-product-likes/getWishlistProducts",
+  categorySingleProduct: "fc-products/getSingleProducts",
+  categoryComboProduct: "fc-products/getSetProducts",
+  categoryStockOutProduct: "fc-products/getOutOfStockProducts",
 };

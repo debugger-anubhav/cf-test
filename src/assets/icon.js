@@ -1,6 +1,7 @@
 import React from "react";
 import {BiSolidMessage, BiMinus} from "react-icons/bi";
-import {IoClose} from "react-icons/io5";
+import {FiChevronDown} from "react-icons/fi";
+import {IoClose, IoCloseOutline} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
@@ -88,6 +89,9 @@ export const Close = ({size, color, className, onClick}) => (
     onClick={() => onClick}
   />
 );
+export const CloseOutline = ({size, color, className}) => (
+  <IoCloseOutline size={size} color={color} className={className} />
+);
 export const DownArrow = ({size, color, className}) => (
   <IoMdArrowDropdown size={size} color={color} className={className} />
 );
@@ -148,6 +152,14 @@ export const TrendingIcon = ({size, color, className}) => (
 
 export const RecentIcon = ({size, color, className}) => (
   <LuRefreshCcw size={size} color={color} className={className} />
+);
+export const DownPopUpArrow = ({size, color, className, onMouseOver}) => (
+  <FiChevronDown
+    size={size}
+    color={color}
+    className={className}
+    onMouseOver={onMouseOver}
+  />
 );
 
 export const ShareIcon = ({size, color, className}) => (

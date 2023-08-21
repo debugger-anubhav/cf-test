@@ -52,7 +52,7 @@
   @apply lg:flex hidden cursor-pointer;
 }
 .mobile_search_row {
-  @apply flex md:hidden justify-center items-center mb-4;
+  @apply flex md:hidden justify-center items-center;
 }
 .search_wrapper_mobile {
   @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative mb-4;

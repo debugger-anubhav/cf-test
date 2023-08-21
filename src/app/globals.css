@@ -24,10 +24,12 @@ body h1 h2 h3 h4 h5 h6 p {
   font-weight: normal;
 }
 
-::-webkit-scrollbar {
+::-webkit-scrollbar-track {
   width: 0px;
 }
-
+.mapped_filter::-webkit-scrollbar-thumb {
+  width: 5px !important;
+}
 .slide .cursor-pointer {
   width: 95% !important;
   margin: auto !important;
@@ -81,8 +83,28 @@ body h1 h2 h3 h4 h5 h6 p {
 .skeleton_product_card {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
 }
+/* 
+.slick-slide slick-active{
+  @apply w-fit gap-4 xl:gap-6 3xl:gap-8;
+} */
+#filter-popover .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+  border-radius: 16px !important;
+}
 .css-58ftfq-MuiSkeleton-root {
   height: 100% !important;
+}
+/* .MuiPopover-paper .css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+  left: 90px !important;;
+} */
+
+input[type="checkbox"] {
+  accent-color: #71717a !important;
+}
+input:checked ~ .checkmark {
+  background-color: white;
+}
+input[type="radio"]:checked {
+  accent-color: #71717a !important;
 }
 
 /* product page ratings progress bar styling */
