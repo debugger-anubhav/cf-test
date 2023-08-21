@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 // import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
@@ -25,6 +25,36 @@ const YouMightLike = ({heading, isbg}) => {
         dispatch(addYouMightLike([]));
       });
   }, []);
+
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = function (e) {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = function () {
+      mouseDown = false;
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+  }, []);
   return (
     <div
       className={styles.main_container}
@@ -34,7 +64,7 @@ const YouMightLike = ({heading, isbg}) => {
       }}>
       <h2 className={styles.heading}>You might also like</h2>
 
-      <div className={styles.card_wrapper}>
+      <div className={styles.card_wrapper} ref={sliderRef}>
         {pageData?.youMightLike?.map((item, index) => (
           <div key={index}>
             <Card
