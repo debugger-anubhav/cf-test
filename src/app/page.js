@@ -20,7 +20,7 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-// import TextContent from "@/components/Common/TextContent";
+import TextContent from "@/components/Common/TextContent";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -121,7 +121,7 @@ export default function Home() {
           <CombineSection />
           <HappySubscribers params={"home-page"} />
           <FrequentlyAskedQuestions params={"home-page"} />
-          {/* <TextContent params={"home-page"} /> */}
+          <TextContent params={"home-page"} />
           <Footer />
         </div>
       </Provider>
