@@ -7,3 +7,14 @@
 .img {
   @apply min-w-full h-full;
 }
+.desc_div {
+  @apply w-[336px] md:w-[400px] xl:w-[552px] h-fit xl:h-[180px] px-6 py-4 z-50 top-12 right-5 xl:right-[128px] overflow-hidden;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+}
+.head {
+  @apply text-16 md:text-20 xl:text-24 text-[#2A2A2A] font-semibold tracking-0.48 truncate;
+}
+.desc {
+  @apply mt-3 hidden xl:flex text-71717A text-12 xl:text-16 tracking-0.24 xl:tracking-0.3;
+}

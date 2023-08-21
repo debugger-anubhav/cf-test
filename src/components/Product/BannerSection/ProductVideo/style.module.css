@@ -3,9 +3,7 @@
 }
 .video {
   @apply min-w-full md:min-w-[630px] xl:min-w-[866px] h-[270px] md:h-[320px] xl:h-[487px] relative;
-  background:
-    url("../bgBanner.svg"),
-    lightgray 50% / cover no-repeat;
+  background: lightgray 50% / cover no-repeat;
 }
 .video_player {
   @apply w-full h-full;

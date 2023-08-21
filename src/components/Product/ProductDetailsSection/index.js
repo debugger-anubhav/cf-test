@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -19,24 +19,22 @@ import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {useDispatch, useSelector} from "react-redux";
-import {getBannerImages} from "@/store/Slices";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
+import StickyBottomBar from "./StickyBottomBar";
+import {format} from "date-fns";
+import {useSelector} from "react-redux";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({category, itemName}) => {
-  const dispatch = useDispatch();
-  const pageData = useSelector(state => state.productPageData);
-
-  console.log(pageData);
-
   const str = string.product_page;
   const arr = ["Home", category, itemName];
+
+  // dummy
   const images = [
     "1583995987Alexa-queen-bed.jpg",
     "1583996030alexa-queen-bed-1.jpg",
@@ -52,6 +50,33 @@ const ProductDetails = ({category, itemName}) => {
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [showBottomBar, setShowBottomBar] = useState(false);
+  const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
+
+  // bottombar visibility conditiionally
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+
+      if (scrollPosition + windowHeight >= documentHeight) {
+        setShowBottomBar(false);
+      } else if (scrollPosition > yourScrollThreshold) {
+        setShowBottomBar(true);
+      } else {
+        setShowBottomBar(false);
+      }
+    };
+
+    const buttonPosition =
+      addToCartButtonRef.current.getBoundingClientRect().bottom +
+      window.scrollY;
+    setYourScrollThreshold(buttonPosition);
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [showBottomBar]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -59,18 +84,6 @@ const ProductDetails = ({category, itemName}) => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-  };
-
-  const getBannerImagesFunction = () => {
-    axios
-      .get(baseURL + endPoints.productPage.bannerImages)
-      .then(res => {
-        dispatch(getBannerImages(res?.data?.data));
-        console.log(res, "res on monthly rent");
-      })
-      .catch(err => {
-        console.log(err);
-      });
   };
 
   const getDurationRent = () => {
@@ -87,7 +100,6 @@ const ProductDetails = ({category, itemName}) => {
 
   useEffect(() => {
     getDurationRent();
-    getBannerImagesFunction();
   }, []);
 
   const handleThumbnailClick = index => {
@@ -97,6 +109,8 @@ const ProductDetails = ({category, itemName}) => {
   const handleSliderChange = index => {
     setSelectedIndex(index);
   };
+
+  const addToCartButtonRef = useRef(null);
 
   const cityShieldCurrentPrice =
     (durationArray[duration.currentIndex]?.attr_price * 6) / 100;
@@ -111,10 +125,7 @@ const ProductDetails = ({category, itemName}) => {
 
   const handleButtonClick = () => {
     setIsLoading(true);
-
-    // Simulate loading by using setTimeout
     setTimeout(() => {
-      // After a delay, set isLoading back to false
       setIsLoading(false);
     }, 3000);
   };
@@ -123,9 +134,31 @@ const ProductDetails = ({category, itemName}) => {
     setDrawerOpen(!drawerOpen);
   };
 
+  const currentDate = new Date();
+  // Add three days to the current date
+  currentDate.setDate(currentDate.getDate() + 3);
+
+  const pageData = useSelector(state => state.productPageData.customerReviews);
+  const totalReviews = pageData.length;
+  const totalRatingSum = pageData.reduce((sum, item) => {
+    const rating = parseFloat(item.rating);
+    return isNaN(rating) ? sum : sum + rating;
+  }, 0);
+
+  const averageRating = totalRatingSum / totalReviews;
+
   return (
     <div className={styles.main_container}>
       <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      {showBottomBar && (
+        <StickyBottomBar
+          productName={itemName}
+          duration={duration}
+          durationArray={durationArray}
+          isLoading={isLoading}
+          handleButtonClick={handleButtonClick}
+        />
+      )}
       <div className={styles.bread_crumps}>
         {arr.map((item, index) => (
           <div key={index} className="flex gap-2">
@@ -142,7 +175,6 @@ const ProductDetails = ({category, itemName}) => {
           </div>
         ))}
       </div>
-
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
           <Carousel
@@ -241,13 +273,13 @@ const ProductDetails = ({category, itemName}) => {
           <div className={styles.rating_div}>
             <div className={styles.rating_wrapper}>
               <div className="flex gap-1">
-                <p className={styles.rating_txt}>4.5</p>
+                <p className={styles.rating_txt}>{averageRating.toFixed(1)}</p>
                 <RatingStar color={"#F6B704"} size={16} />
               </div>
-              <p className={styles.rating_txt}>25 ratings</p>
+              <p className={styles.rating_txt}>{totalReviews} ratings</p>
             </div>
             <p className={styles.rating_txt} style={{color: "#63798D"}}>
-              Get it by 3rd aug
+              Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
               <span>
                 <DeliveryTruck size={16} color={"#63798D"} className={"ml-1"} />
               </span>
@@ -286,14 +318,14 @@ const ProductDetails = ({category, itemName}) => {
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
                     <FaRupeeSign />
-                    {durationArray[duration.currentIndex]?.attr_price}
+                    {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
                   <p
                     className={styles.originalPrice}
                     style={{
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
-                    {durationArray[0]?.attr_price}
+                    {durationArray?.[0]?.attr_price}
                   </p>
                   <div
                     className={styles.discount}
@@ -301,10 +333,10 @@ const ProductDetails = ({category, itemName}) => {
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
                     {`${Math.round(
-                      ((durationArray[0]?.attr_price -
-                        durationArray[duration.currentIndex]?.attr_price) *
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
                         100) /
-                        durationArray[0]?.attr_price,
+                        durationArray?.[0]?.attr_price,
                     ).toFixed(2)}%`}
                   </div>
                 </div>
@@ -322,7 +354,8 @@ const ProductDetails = ({category, itemName}) => {
           <button
             onClick={handleButtonClick}
             disabled={isLoading}
-            className={styles.btn}>
+            className={styles.btn}
+            ref={addToCartButtonRef}>
             {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
           </button>
 
