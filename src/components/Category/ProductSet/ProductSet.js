@@ -31,12 +31,19 @@ const ProductSet = () => {
     cityId: 50,
     pageNo,
   };
+  const bodyDataAll = {
+    parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    cityId: 50,
+    pageNo,
+  };
+
+  const payload = categoryPageReduxData?.isAllProduct ? bodyDataAll : bodyData;
 
   const {mutateAsync: getComboProducts} = useMutation(
     "category-combo-product",
     "POST",
     endPoints.categoryComboProduct,
-    bodyData,
+    payload,
   );
 
   if (categoryPageReduxData?.singleProduct?.length === singleItemLength) {
@@ -55,20 +62,20 @@ const ProductSet = () => {
         .catch(err => console.log(err));
     }, [pageNo]);
   }
-  useEffect(() => {
-    getComboProducts()
-      .then(res => {
-        setTotalPage(res?.data?.meta?.totalPage);
-        dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
-        dispatch(
-          addSetProduct([
-            ...categoryPageReduxData?.setProduct,
-            ...res?.data?.products,
-          ]),
-        );
-      })
-      .catch(err => console.log(err));
-  }, [pageNo]);
+  // useEffect(() => {
+  //   getComboProducts()
+  //     .then(res => {
+  //       setTotalPage(res?.data?.meta?.totalPage);
+  //       dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
+  //       dispatch(
+  //         addSetProduct([
+  //           ...categoryPageReduxData?.setProduct,
+  //           ...res?.data?.products,
+  //         ]),
+  //       );
+  //     })
+  //     .catch(err => console.log(err));
+  // }, [pageNo]);
 
   const data = categoryPageReduxData?.setProduct;
 
@@ -98,12 +105,19 @@ const ProductSet = () => {
                       desc={item?.product_name}
                       originalPrice={item?.price}
                       currentPrice={item?.sale_price}
-                      hoverCardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[1]
-                      }`}
+                      // hoverCardImage={`${productImageBaseUrl}${
+                      //   item?.image?.split(",")[1]
+                      // }`}
+                      hoverCardImage={
+                        item?.image?.split(",").filter(item => item).length > 1
+                          ? productImageBaseUrl + item?.image?.split(",")[1]
+                          : productImageBaseUrl + item?.image?.split(",")[0]
+                      }
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}
+                      productId={item?.product_id}
+                      productName={item?.product_name.replace(/ /g, "-")}
                     />
                   </div>
                 ) : null;
