@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow, RecentIcon, TrendingIcon} from "@/assets/icon";
@@ -45,39 +45,6 @@ const Header = () => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
   }, []);
-
-  const handleClosePopup = () => {
-    setOpenSearchBar(false);
-  };
-
-  useEffect(() => {
-    const handleEscKey = event => {
-      if (event.key === "Escape") {
-        handleClosePopup();
-      }
-    };
-
-    const handleBackdropClick = event => {
-      if (event.target.closest(`.${styles.backdrop}`)) {
-        handleClosePopup();
-      }
-    };
-    if (openSearchbar) {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "hidden";
-        document.addEventListener("keydown", handleEscKey);
-        document.addEventListener("click", handleBackdropClick);
-      }
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-      document.removeEventListener("keydown", handleEscKey);
-      document.removeEventListener("click", handleBackdropClick);
-    };
-  }, [openSearchbar]);
 
   const [arr, setArr] = React.useState(null);
 
@@ -185,19 +152,37 @@ const Header = () => {
   );
 };
 export default Header;
+
 // search modal component
 const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
+  const modalRef = useRef(null);
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const handleClick = event => {
+    if (
+      modalRef.current &&
+      !modalRef.current.contains(event.target) &&
+      event.target.tagName !== "INPUT"
+    ) {
+      setOpenSearchBar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
 
   return (
     <div className={styles.backdrop}>
-      {/* <div className={` ${styles.search_details_wrapper}`}> */}
       <div
         style={{
           top: `${
             !homePageReduxData?.announcementBar ? topOffset : topOffset
           }px`,
         }}
+        ref={modalRef}
         className={` ${
           homePageReduxData?.announcementBar
             ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
