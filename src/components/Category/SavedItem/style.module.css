@@ -1,0 +1,21 @@
+.main_container {
+  @apply flex flex-col w-full mt-8 pl-4 md:pl-[70px] 
+  xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] py-4 xl:py-12;
+  background: linear-gradient(
+    149deg,
+    #fffae1 0%,
+    #fff 0.01%,
+    #fffae1 18.25%,
+    rgba(239, 126, 126, 0.2) 100%
+  );
+}
+
+.main_sub_container {
+  @apply flex my-4 overflow-x-scroll;
+}
+.heading {
+  @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
+}
+.main_sub_container::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
