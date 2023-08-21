@@ -51,7 +51,7 @@ const ProductDetails = ({category, params}) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [duration, setDuration] = useState({currentIndex: 3, value: 12});
+  const [duration, setDuration] = useState({currentIndex: 0, value: 12});
   const [inWishList, setInWishList] = React.useState(false);
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
