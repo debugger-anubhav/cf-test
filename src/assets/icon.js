@@ -56,11 +56,11 @@ export const FooterIcons = {
 export const ShareIconsForProductPage = {
   social_media_icons: [
     {icon: `${IconLink}facebook.svg`, link: "link"},
+    {icon: `${IconLink}whatsapp_icon.svg`, link: "link"},
     {icon: `${IconLink}instagram.svg`, link: "link"},
-    {icon: `${IconLink}youtube.svg`, link: "link"},
     {icon: `${IconLink}linkedin.svg`, link: "link"},
     {icon: `${IconLink}twitter.svg`, link: "link"},
-    {icon: `${IconLink}whatsapp icon.svg`, link: "link"},
+    {icon: `${IconLink}clipboard.svg`, link: "link"},
   ],
 };
 
