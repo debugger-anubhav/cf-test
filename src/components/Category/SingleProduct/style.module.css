@@ -3,7 +3,7 @@
   @apply flex flex-wrap justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;
 }
 .card_box {
-  @apply flex mr-[10px] mb-4 p-3 bg-white;
+  @apply flex mr-[8px] mb-4 p-3 bg-white;
   /* @apply flex mr-4 mb-4 p-3 bg-red-200; */
   -webkit-transition: box-shadow 0.2s ease-out;
   /* width: calc(33.33% - 20px); */
@@ -27,6 +27,6 @@
 }
 @media only screen and (min-width: 1221px) and (max-width: 1800px) {
   .card_box {
-    width: calc(33.33% - 10px);
+    width: calc(33.33% - 8px);
   }
 }

@@ -50,10 +50,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     setAnchorEl(null);
-    router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/all}
-      }`,
-    );
+    router.push(`/category/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -71,7 +68,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
         .split(" ")
         .join("-")
         .toLowerCase()}
-      }`,
+      `,
     );
     setAnchorEl(null);
   };
