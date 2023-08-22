@@ -1,31 +1,14 @@
 .main_container {
-  /* @apply flex flex-col flex-wrap mobile:flex-row macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
   @apply flex flex-wrap justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;
 }
-.card_box {
-  @apply flex flex-wrap mr-[8px] mb-4 p-3 bg-white;
-  -webkit-transition: box-shadow 0.2s ease-out;
-  width: fit-content;
+.card_box_product {
+  @apply flex flex-wrap mr-2 2xl:mr-3 3xl:mr-4  mb-4 p-3 bg-white w-fit last-screen:mx-auto;
   cursor: pointer;
 }
-.card_box:hover {
+.card_box_product:hover {
   box-shadow: 1px 8px 20px grey;
-  -webkit-transition: box-shadow 0.2s ease-in;
-  /* flex-basis: calc(33.33% - 20px); */
 }
-/* @media only screen and (max-width: 650px) {
-  .card_box {
-    @apply flex items-center justify-center;
-    width: calc(90% - 10px);
-  }
+
+.productCardWidth {
+  @apply macbook:w-[23rem] 2xl:w-[25rem] 3xl:w-[27rem] 4xl:w-[32rem];
 }
-@media only screen and (min-width: 651px) and (max-width: 1220px) {
-  .card_box {
-    width: calc(50% - 40px);
-  }
-}
-@media only screen and (min-width: 1221px) and (max-width: 1800px) {
-  .card_box {
-    width: calc(33.33% - 8px);
-  }
-} */
