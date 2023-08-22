@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, DownArrow, RecentIcon, TrendingIcon} from "@/assets/icon";
@@ -45,39 +45,6 @@ const Header = () => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
   }, []);
-
-  const handleClosePopup = () => {
-    setOpenSearchBar(false);
-  };
-
-  useEffect(() => {
-    const handleEscKey = event => {
-      if (event.key === "Escape") {
-        handleClosePopup();
-      }
-    };
-
-    const handleBackdropClick = event => {
-      if (event.target.closest(`.${styles.backdrop}`)) {
-        handleClosePopup();
-      }
-    };
-    if (openSearchbar) {
-      if (typeof document !== "undefined") {
-        document.body.style.overflow = "hidden";
-        document.addEventListener("keydown", handleEscKey);
-        document.addEventListener("click", handleBackdropClick);
-      }
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-      document.removeEventListener("keydown", handleEscKey);
-      document.removeEventListener("click", handleBackdropClick);
-    };
-  }, [openSearchbar]);
 
   const [arr, setArr] = React.useState(null);
 
@@ -185,19 +152,65 @@ const Header = () => {
   );
 };
 export default Header;
+
 // search modal component
 const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
+  const modalRef = useRef(null);
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const [searchTerm, setSearchTerm] = React.useState("");
+
+  const handleClick = event => {
+    if (
+      modalRef.current &&
+      !modalRef.current.contains(event.target) &&
+      event.target.tagName !== "INPUT"
+    ) {
+      setOpenSearchBar(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => {
+      document.removeEventListener("click", handleClick);
+    };
+  }, []);
+
+  const [searchedData, setSearchedData] = React.useState();
+
+  const handleSearch = e => {
+    const newSearchTerm = e.target.value;
+    setSearchTerm(newSearchTerm);
+
+    // Store search term in local storage
+    if (e.key === "Enter" || e.type === "click") {
+      if (newSearchTerm.trim() !== "") {
+        const storedSearches = localStorage.getItem("searches");
+        const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
+        searchesArray.unshift(newSearchTerm);
+        const maxItems = 10;
+        const truncatedArray = searchesArray.slice(0, maxItems);
+        localStorage.setItem("searches", JSON.stringify(truncatedArray));
+        setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+      }
+    }
+  };
+
+  useEffect(() => {
+    setSearchedData(
+      JSON.parse(localStorage.getItem("searches")) || ["No search history"],
+    );
+  }, []);
 
   return (
     <div className={styles.backdrop}>
-      {/* <div className={` ${styles.search_details_wrapper}`}> */}
       <div
         style={{
           top: `${
             !homePageReduxData?.announcementBar ? topOffset : topOffset
           }px`,
         }}
+        ref={modalRef}
         className={` ${
           homePageReduxData?.announcementBar
             ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
@@ -208,9 +221,8 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <input
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
-            onClick={() => {
-              setOpenSearchBar(!openSearchbar);
-            }}
+            value={searchTerm}
+            onChange={e => handleSearch(e)}
           />
           <Image
             src={Icons.Search}
@@ -218,11 +230,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
         </div>
-        <div
-          className={`${styles.search_wrapper}`}
-          onClick={() => {
-            // setOpenSearchBar(!openSearchbar);
-          }}>
+        <div className={`${styles.search_wrapper}`}>
           <Image
             src={Icons.Search}
             alt="search-icon"
@@ -231,17 +239,30 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <input
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
+            value={searchTerm}
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyDown={e => handleSearch(e)}
           />
         </div>
+
         <div className={styles.search_open_details} open={open}>
           <p className={styles.search_head}>Recent</p>
           <div className={styles.pills_wrapper}>
-            {["bad", "furniture", "office", "tabel"]?.map((item, index) => (
-              <div key={index.toString()} className={styles.pill}>
-                <RecentIcon className={styles.modal_icon} color={"#E0806A"} />
-                <p className={styles.pill_text}>{item}</p>
-              </div>
-            ))}
+            {searchedData?.map((item, index) => {
+              return (
+                <>
+                  {index < 5 && (
+                    <div key={index.toString()} className={styles.pill}>
+                      <RecentIcon
+                        className={styles.modal_icon}
+                        color={"#E0806A"}
+                      />
+                      <p className={styles.pill_text}>{item}</p>
+                    </div>
+                  )}
+                </>
+              );
+            })}
           </div>
           <div className="mt-6"></div>
           <p className={styles.search_head}>Trending searches</p>

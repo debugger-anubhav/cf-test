@@ -11,10 +11,13 @@ import {
 } from "@/store/Slices";
 import {
   addAllProduct,
-  addOutStockProduct,
+  // addOutStockProduct,
   addParentCategoryId,
-  addSetProduct,
+  addSingleAllProduct,
+  // addSetProduct,
+  // addSingleAllProduct,
   addSingleProduct,
+  // addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
 
 const PopOver = ({list, item, parentCategoryId}) => {
@@ -38,32 +41,39 @@ const PopOver = ({list, item, parentCategoryId}) => {
   };
 
   const handMainCategory = e => {
+    const previouseSubCategory = JSON.parse(
+      localStorage.getItem("subCategory"),
+    );
     dispatch(addProductCategory(hoverRef.current));
+    localStorage.setItem("category", JSON.stringify(hoverRef.current));
     dispatch(addParentCategoryId(parentCategoryId));
     dispatch(addProductName(item));
-
+    localStorage.setItem("subCategory", JSON.stringify("All"));
     dispatch(addSubCategoryId(""));
     dispatch(addProductName(null));
-
     dispatch(addAllProduct(true));
-    dispatch(addSingleProduct([]));
-    dispatch(addSetProduct([]));
-    dispatch(addOutStockProduct([]));
+    if (previouseSubCategory !== "All") {
+      dispatch(addSingleAllProduct([]));
+    }
+
+    // dispatch(addSingleAllProduct([]));
+    // dispatch(addSingleProduct([]))
+    // dispatch(addSetProduct([]));
+    // dispatch(addOutStockProduct([]));
     setAnchorEl(null);
-    router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/all}
-      }`,
-    );
+    router.push(`/category/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
-    // console.log(item?.cat_name.trim().split(" ").join("-").toLowerCase(), "item?.cat_name.trim()")
-    dispatch(addSubCategoryId(item?.id));
-    dispatch(addProductName(item));
-    dispatch(addProductCategory(hoverRef.current));
-    dispatch(addSingleProduct([]));
-    dispatch(addSetProduct([]));
-    dispatch(addOutStockProduct([]));
+    dispatch(addAllProduct(false));
+    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+
+    // Update localStorage with the new selected subCategory
+    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
+
+    // Now you have both the previous and new selected subCategory
+    console.log("Previous SubCategory:", previousSubCategory);
+    console.log("New SubCategory:", item?.cat_name);
 
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
@@ -71,13 +81,25 @@ const PopOver = ({list, item, parentCategoryId}) => {
         .split(" ")
         .join("-")
         .toLowerCase()}
-      }`,
+      `,
     );
-    setAnchorEl(null);
+    dispatch(addSubCategoryId(item?.id));
+    localStorage.setItem("category", JSON.stringify(hoverRef.current));
+    localStorage.setItem("categoryId", JSON.stringify(item?.rootID));
+    dispatch(addProductName(item));
+    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
+    localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
+    dispatch(addProductCategory(hoverRef.current));
+    // previousSubCategory !== item?.cat_name ? dispatch(addSingleProduct([])) : null
+    // previousSubCategory !== item?.cat_name ? dispatch(addSubCategoryMetaData([])) : null
+    if (previousSubCategory !== item?.cat_name) {
+      dispatch(addSingleProduct([]));
+    }
   };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
   return (
     <div>
       <button
