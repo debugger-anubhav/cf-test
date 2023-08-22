@@ -13,6 +13,7 @@ import {
   addAllProduct,
   // addOutStockProduct,
   addParentCategoryId,
+  addSingleAllProduct,
   // addSetProduct,
   // addSingleAllProduct,
   addSingleProduct,
@@ -39,11 +40,10 @@ const PopOver = ({list, item, parentCategoryId}) => {
     setAnchorEl(null);
   };
 
-  const handleOptionChange = (e, item) => {
-    console.log(item, "item");
-  };
-
   const handMainCategory = e => {
+    const previouseSubCategory = JSON.parse(
+      localStorage.getItem("subCategory"),
+    );
     dispatch(addProductCategory(hoverRef.current));
     localStorage.setItem("category", JSON.stringify(hoverRef.current));
     dispatch(addParentCategoryId(parentCategoryId));
@@ -52,6 +52,9 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addSubCategoryId(""));
     dispatch(addProductName(null));
     dispatch(addAllProduct(true));
+    if (previouseSubCategory !== "All") {
+      dispatch(addSingleAllProduct([]));
+    }
 
     // dispatch(addSingleAllProduct([]));
     // dispatch(addSingleProduct([]))
@@ -140,8 +143,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
                   <p
                     className={styles.sub_item}
                     key={index.toString()}
-                    onClick={e => handleSelectedProduct(e, item)}
-                    onChange={e => handleOptionChange(e, item)}>
+                    onClick={e => handleSelectedProduct(e, item)}>
                     {item?.cat_name}
                   </p>
                 );
