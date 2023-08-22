@@ -19,11 +19,10 @@ const SingleProduct = () => {
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  // const homePageReduxData = useSelector(state => state.homePagedata);
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  // const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
 
   const bodyData = {
     // subCategoryId: homePageReduxData?.productName?.id,
@@ -52,16 +51,16 @@ const SingleProduct = () => {
   );
 
   // console.log(categoryPageReduxData?.categoryMetaData, "meta")
-  useEffect(() => {
-    dispatch(addSingleProduct([])); // Clear the previous data
-    dispatch(addSubCategoryMetaData(null));
+  // useEffect(() => {
+  //   dispatch(addSingleProduct([])); // Clear the previous data
+  //   dispatch(addSubCategoryMetaData(null));
 
-    if (subCategory !== "All") {
-      // Clear singleProductAll when switching from "All" to any other option
-      dispatch(addSingleAllProduct([]));
-      dispatch(addSubCategoryMetaData(null));
-    }
-  }, [subCategory]);
+  //   if (subCategory !== "All") {
+  //     // Clear singleProductAll when switching from "All" to any other option
+  //     dispatch(addSingleAllProduct([]));
+  //     dispatch(addSubCategoryMetaData(null));
+  //   }
+  // }, [subCategory]);
 
   useEffect(() => {
     getSingleProducts()
@@ -83,20 +82,15 @@ const SingleProduct = () => {
             ]),
           );
         }
-        // dispatch(
-        //   addSingleProduct([
-        //     ...categoryPageReduxData?.singleProduct,
-        //     ...res?.data?.products,
-        //   ]),
-        // );
       })
       .catch(err => console.log(err));
-  }, [pageNo, subCategory]);
+  }, [pageNo]);
 
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
-  console.log(categoryPageReduxData?.singleProductAll, "singleItemData");
+
+  console.log(singleItemData, "singleItemData");
 
   return singleItemData?.length ? (
     <div>

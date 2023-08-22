@@ -11,12 +11,12 @@ import {
 } from "@/store/Slices";
 import {
   addAllProduct,
-  addOutStockProduct,
+  // addOutStockProduct,
   addParentCategoryId,
-  addSetProduct,
-  addSingleAllProduct,
+  // addSetProduct,
+  // addSingleAllProduct,
   addSingleProduct,
-  addSubCategoryMetaData,
+  // addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
 
 const PopOver = ({list, item, parentCategoryId}) => {
@@ -44,36 +44,33 @@ const PopOver = ({list, item, parentCategoryId}) => {
   };
 
   const handMainCategory = e => {
-    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     dispatch(addProductCategory(hoverRef.current));
     localStorage.setItem("category", JSON.stringify(hoverRef.current));
     dispatch(addParentCategoryId(parentCategoryId));
     dispatch(addProductName(item));
-    const AllItem = localStorage.setItem("subCategory", JSON.stringify("All"));
+    localStorage.setItem("subCategory", JSON.stringify("All"));
     dispatch(addSubCategoryId(""));
     dispatch(addProductName(null));
-    if (previousSubCategory !== AllItem) {
-      dispatch(addSingleProduct([]));
-    } else {
-      return null;
-    }
-
     dispatch(addAllProduct(true));
-    dispatch(addSingleAllProduct([]));
+
+    // dispatch(addSingleAllProduct([]));
     // dispatch(addSingleProduct([]))
-    dispatch(addSetProduct([]));
-    dispatch(addOutStockProduct([]));
+    // dispatch(addSetProduct([]));
+    // dispatch(addOutStockProduct([]));
     setAnchorEl(null);
     router.push(`/category/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
+    dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
 
     // Update localStorage with the new selected subCategory
     localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
 
     // Now you have both the previous and new selected subCategory
+    console.log("Previous SubCategory:", previousSubCategory);
+    console.log("New SubCategory:", item?.cat_name);
 
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
@@ -90,9 +87,10 @@ const PopOver = ({list, item, parentCategoryId}) => {
     localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
     localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
     dispatch(addProductCategory(hoverRef.current));
+    // previousSubCategory !== item?.cat_name ? dispatch(addSingleProduct([])) : null
+    // previousSubCategory !== item?.cat_name ? dispatch(addSubCategoryMetaData([])) : null
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
-      dispatch(addSubCategoryMetaData([]));
     }
   };
 

@@ -51,6 +51,10 @@ export const CategoryPageSlice = createSlice({
     addSingleAllProduct: (state, action) => {
       state.singleProductAll = action.payload;
     },
+    clearSingleProducts: state => {
+      state.singleProduct = [];
+      state.singleProductAll = [];
+    },
     addSetProduct: (state, action) => {
       state.setProduct = action.payload;
     },
@@ -89,4 +93,5 @@ export const {
   addAllProduct,
   addParentCategoryId,
   addSingleAllProduct,
+  clearSingleProducts,
 } = CategoryPageSlice.actions;
