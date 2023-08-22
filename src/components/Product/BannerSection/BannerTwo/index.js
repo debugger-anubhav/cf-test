@@ -14,7 +14,6 @@ const BannerTwo = () => {
           alt="banner_img"
         />
         <div className={styles.desc_div}>
-          <p className={styles.head}>{bannerImages?.[1]?.file_title}</p>
           <p className={styles.desc}>{bannerImages?.[1]?.file_description}</p>
         </div>
       </div>

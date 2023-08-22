@@ -36,15 +36,15 @@ const RatingBar = () => {
     total: totalReviews,
   };
 
-  console.log(
-    (ratings.oneStar +
-      ratings.twoStar +
-      ratings.threeStar +
-      ratings.fourStar +
-      ratings.fiveStar) /
-      totalReviews,
-    "my calci",
-  );
+  // console.log(
+  //   (ratings.oneStar +
+  //     ratings.twoStar +
+  //     ratings.threeStar +
+  //     ratings.fourStar +
+  //     ratings.fiveStar) /
+  //     totalReviews,
+  //   "my calci",
+  // );
 
   return (
     <div>
