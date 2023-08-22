@@ -31,14 +31,22 @@ import {getProductDetails} from "@/store/Slices";
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
-const ProductDetails = ({category, params}) => {
+const ProductDetails = ({params}) => {
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
   );
 
-  const arr = ["Home", category, prodDetails?.[0]?.product_name];
+  const arr = [
+    "Home",
+    prodDetails?.[0]?.category_name,
+    prodDetails?.[0]?.product_name,
+  ];
   const dispatch = useDispatch();
+
+  const carouselData = prodDetails?.[0]?.image?.split(",");
+  const lastCaraouselElement = carouselData?.[carouselData?.length - 1];
+  if (!lastCaraouselElement) carouselData?.pop();
 
   // dummy
   // const images = [
@@ -251,7 +259,7 @@ const ProductDetails = ({category, params}) => {
                 />
               );
             }}>
-            {prodDetails?.[0]?.image?.split(",")?.map((item, index) => (
+            {carouselData?.map((item, index) => (
               <>
                 {item && (
                   <div key={index} className={styles.prod_img}>

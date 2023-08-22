@@ -17,14 +17,12 @@ const QuesAndAns = () => {
 
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData.qna);
-  // console.log(pageData, "quessss");
 
   const getQuesAnsFunction = () => {
     axios
       .get(baseURL + endPoints.productPage.qna)
       .then(res => {
         dispatch(getProductQuesAns(res?.data?.data));
-        console.log(res?.data?.data, "res in ques and nwers");
       })
       .catch(err => {
         console.log(err);
