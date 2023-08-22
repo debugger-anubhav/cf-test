@@ -1,9 +1,13 @@
 import React, {useEffect, useState} from "react";
-import style from "./style.module.css";
-import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
-import {productImageBaseUrl} from "@/constants/constant";
 import InfiniteScroll from "react-infinite-scroll-component";
+import {useParams} from "next/navigation";
+import style from "./style.module.css";
+import ProductSet from "../ProductSet/ProductSet";
+
+import Card from "@/components/Common/HomePageCards";
+
+import {productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {
@@ -11,35 +15,34 @@ import {
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
-import ProductSet from "../ProductSet/ProductSet";
 
 const SingleProduct = () => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
+  const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  // const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
 
   const bodyData = {
-    // subCategoryId: homePageReduxData?.productName?.id,
     subCategoryId,
-    // parentCategoryId: homePageReduxData?.productName?.rootID,
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
   const bodyDataAll = {
-    // parentCategoryId: categoryPageReduxData?.parentCategoryId,
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
 
-  const data = categoryPageReduxData?.isAllProduct ? bodyDataAll : bodyData;
+  const data =
+    productname === "all" || categoryPageReduxData?.isAllProduct
+      ? bodyDataAll
+      : bodyData;
 
   const singleItemLength =
     categoryPageReduxData?.categoryMetaData?.totalProduct;
@@ -49,18 +52,6 @@ const SingleProduct = () => {
     endPoints.categorySingleProduct,
     data,
   );
-
-  // console.log(categoryPageReduxData?.categoryMetaData, "meta")
-  // useEffect(() => {
-  //   dispatch(addSingleProduct([])); // Clear the previous data
-  //   dispatch(addSubCategoryMetaData(null));
-
-  //   if (subCategory !== "All") {
-  //     // Clear singleProductAll when switching from "All" to any other option
-  //     dispatch(addSingleAllProduct([]));
-  //     dispatch(addSubCategoryMetaData(null));
-  //   }
-  // }, [subCategory]);
 
   useEffect(() => {
     getSingleProducts()
@@ -89,8 +80,6 @@ const SingleProduct = () => {
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
-
-  console.log(singleItemData, "singleItemData");
 
   return singleItemData?.length ? (
     <div>
