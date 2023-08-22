@@ -14,6 +14,7 @@ export default function FilterSortDrawer({filterName}) {
   });
 
   const [itemCount, setItemCount] = useState(7);
+  setItemCount(1);
 
   const loadMoreItems = () => {
     return prevCount => prevCount + 7; // Increment the item count by 7
