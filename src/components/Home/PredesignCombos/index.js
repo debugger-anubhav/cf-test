@@ -89,7 +89,7 @@ const PreDesignCombos = () => {
                   ).toFixed(2)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
-                  productId={item?.product_id}
+                  productId={item?.id}
                   productName={item?.product_name.replace(/ /g, "-")}
                 />
               </div>
