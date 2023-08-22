@@ -176,32 +176,29 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     };
   }, []);
 
-  // const handleSearch = (e) => {
-  //   setSearchTerm(e.target.value);
-  //   console.log(e.target.value, "valueuuu")
-  // };
+  const [searchedData, setSearchedData] = React.useState();
 
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
 
     // Store search term in local storage
-    if (newSearchTerm.trim() !== "") {
-      const storedSearches = localStorage.getItem("searches");
-      const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
-
-      // Add new search term to the beginning of the array
-      searchesArray.unshift(newSearchTerm);
-
-      // Limit the array to a certain number of items if needed
-      const maxItems = 10;
-      const truncatedArray = searchesArray.slice(0, maxItems);
-
-      localStorage.setItem("searches", JSON.stringify(truncatedArray));
+    if (e.key === "Enter" || e.type === "click") {
+      if (newSearchTerm.trim() !== "") {
+        const storedSearches = localStorage.getItem("searches");
+        const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
+        searchesArray.unshift(newSearchTerm);
+        const maxItems = 10;
+        const truncatedArray = searchesArray.slice(0, maxItems);
+        localStorage.setItem("searches", JSON.stringify(truncatedArray));
+        setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+      }
     }
   };
 
-  const storedSearches = JSON.parse(localStorage.getItem("searches")) || [];
+  useEffect(() => {
+    setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+  }, []);
 
   return (
     <div className={styles.backdrop}>
@@ -241,14 +238,15 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
-            onChange={e => handleSearch(e)}
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyDown={e => handleSearch(e)}
           />
         </div>
 
         <div className={styles.search_open_details} open={open}>
           <p className={styles.search_head}>Recent</p>
           <div className={styles.pills_wrapper}>
-            {storedSearches?.map((item, index) => {
+            {searchedData?.map((item, index) => {
               return (
                 <>
                   {index < 5 && (
