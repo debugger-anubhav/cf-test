@@ -81,6 +81,8 @@ const SingleProduct = () => {
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
 
+  console.log(singleItemData, "singleItemData");
+
   return singleItemData?.length ? (
     <div>
       <InfiniteScroll
