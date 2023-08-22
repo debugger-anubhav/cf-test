@@ -14,7 +14,8 @@ export default function FilterSortDrawer({filterName}) {
   });
 
   const [itemCount, setItemCount] = useState(7);
-  setItemCount(1);
+  // setItemCount(1);
+  console.log(setItemCount, "setItemCount");
 
   const loadMoreItems = () => {
     return prevCount => prevCount + 7; // Increment the item count by 7
@@ -45,6 +46,7 @@ export default function FilterSortDrawer({filterName}) {
               <p className={styles.headin_text}>{filterName}</p>
               <div className={styles.mapped_filter_mobile}>
                 {CategoryFilterData.slice(0, itemCount).map((ele, index) => {
+                  // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
                     <div
                       className={styles.single_filter_text}
