@@ -18,21 +18,29 @@ const ProductSet = () => {
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
 
   const singleItemLength =
     categoryPageReduxData?.categoryMetaData?.totalProduct;
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
+  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
+  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
+  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+
   const bodyData = {
-    subCategoryId: homePageReduxData?.productName?.id,
-    parentCategoryId: homePageReduxData?.productName?.rootID,
+    // subCategoryId: homePageReduxData?.productName?.id,
+    subCategoryId,
+    // parentCategoryId: homePageReduxData?.productName?.rootID,
+    parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
+
   const bodyDataAll = {
-    parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    // parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
@@ -62,20 +70,10 @@ const ProductSet = () => {
         .catch(err => console.log(err));
     }, [pageNo]);
   }
-  // useEffect(() => {
-  //   getComboProducts()
-  //     .then(res => {
-  //       setTotalPage(res?.data?.meta?.totalPage);
-  //       dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
-  //       dispatch(
-  //         addSetProduct([
-  //           ...categoryPageReduxData?.setProduct,
-  //           ...res?.data?.products,
-  //         ]),
-  //       );
-  //     })
-  //     .catch(err => console.log(err));
-  // }, [pageNo]);
+
+  useEffect(() => {
+    dispatch(addSetProduct([])); // Clear the previous data
+  }, [subCategory]);
 
   const data = categoryPageReduxData?.setProduct;
 
