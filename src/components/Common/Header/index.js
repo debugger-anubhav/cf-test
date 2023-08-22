@@ -197,7 +197,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   };
 
   useEffect(() => {
-    setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+    setSearchedData(
+      JSON.parse(localStorage.getItem("searches")) || ["No search history"],
+    );
   }, []);
 
   return (
