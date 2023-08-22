@@ -9,11 +9,13 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
+import {useRouter} from "next/navigation";
 
 const HEADER_HEIGHT = 48;
 
 const Header = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
@@ -54,7 +56,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text}>cityfurnish</p>
+            <p className={styles.logo_text} onClick={() => router.push("/")}>
+              cityfurnish
+            </p>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
