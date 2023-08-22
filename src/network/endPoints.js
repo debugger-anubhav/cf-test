@@ -53,7 +53,7 @@ export const endPoints = {
     productVideos: "fc-product-videos/getProductVideos?productId=3783",
     customerReviews:
       "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
-    qna: "fc-faq-products/getProductPageFAQs?productId=3783",
+    qna: "fc-faq-products/getProductPageFAQs?productId=3843",
     happySubscribers:
       "fc-care-instructions/getCustomerHappyStories?productId=4096",
     singleProductDetails: id =>

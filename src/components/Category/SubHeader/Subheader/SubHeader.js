@@ -15,11 +15,14 @@ const SubHeader = () => {
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
+
+  const category = localStorage.getItem("category").replace(/"/g, "");
+  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
 
   return (
     <>
@@ -32,13 +35,15 @@ const SubHeader = () => {
             </li>
             <li className={styles.list}>
               <p className={styles.route_text}>
-                {homePageReduxData?.productCategory}
+                {category}
+                {/* {homePageReduxData?.productCategory} */}
               </p>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
               <p className={styles.route_text}>
-                {homePageReduxData?.productName?.cat_name}
+                {subCategory}
+                {/* {homePageReduxData?.productName?.cat_name} */}
               </p>
             </li>
           </ul>
@@ -48,58 +53,9 @@ const SubHeader = () => {
           Rental
         </h1>
         <div className={styles.category_wrapper}>
-          {/* {getAllAndSubCategoryData?.map((item, index) => {
-            if (item?.cat_name === homePageReduxData?.productCategory) {
-              const subCategoriesWithNewObject = [
-                {
-                  ...item,
-                  cat_name: "All",
-                },
-                ...item?.sub_categories,
-              ];
-
-              return subCategoriesWithNewObject?.map((subItem, i) => {
-                const selectedProduct =
-                  homePageReduxData?.productName?.cat_name ===
-                  subItem?.cat_name;
-                return (
-                  <>
-                    <div
-                      className={
-                        selectedProduct
-                          ? styles.category_container_box_active
-                          : styles.category_container_box
-                      }
-                      key={i.toString()}>
-                      {selectedProduct ? (
-                        <div>
-                          <img
-                            src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
-                            className={styles.selected_icon}
-                          // className="w-[30px] h-[30px]"
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img
-                            src={`${categoryIconsUrl}${subItem?.icon_image}`}
-                            className={styles.selected_icon}
-                          />
-                        </div>
-                      )}
-                      <p className={styles.category_container}>
-                        {subItem?.cat_name}
-                      </p>
-                    </div>
-                  </>
-                );
-              });
-            } else {
-              console.log("outttt");
-            }
-          })} */}
           {getAllAndSubCategoryData?.map((item, index) => {
-            if (item?.cat_name === homePageReduxData?.productCategory) {
+            // if (item?.cat_name === homePageReduxData?.productCategory) {
+            if (item?.cat_name === category) {
               const subCategoriesWithNewObject = [
                 {
                   ...item,
@@ -109,9 +65,10 @@ const SubHeader = () => {
               ];
 
               return subCategoriesWithNewObject?.map((subItem, i) => {
-                const selectedProduct =
-                  homePageReduxData?.productName?.cat_name ===
-                  subItem?.cat_name;
+                // const selectedProduct =
+                //   homePageReduxData?.productName?.cat_name ===
+                //   subItem?.cat_name;
+                const selectedProduct = subCategory === subItem?.cat_name;
                 return (
                   <div
                     className={
@@ -142,7 +99,7 @@ const SubHeader = () => {
                 );
               });
             } else {
-              console.log("outttt");
+              // console.log("outttt");
               // Return a placeholder value when the condition is not met
               return null;
             }
