@@ -2,7 +2,7 @@
   @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins py-12;
 }
 .img_wrapper {
-  @apply relative w-full p-3 h-[270px] md:h-[320px] xl:h-[487px] 3xl:h-[590px];
+  @apply relative w-full p-3 h-[270px] md:h-[320px] xl:h-[487px] 3xl:h-[680px];
 }
 .img {
   @apply min-w-full h-full;
