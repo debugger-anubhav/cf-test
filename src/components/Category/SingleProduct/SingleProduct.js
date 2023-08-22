@@ -7,6 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {
+  addSingleAllProduct,
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
@@ -18,16 +19,23 @@ const SingleProduct = () => {
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
+  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
+  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
 
   const bodyData = {
-    subCategoryId: homePageReduxData?.productName?.id,
-    parentCategoryId: homePageReduxData?.productName?.rootID,
+    // subCategoryId: homePageReduxData?.productName?.id,
+    subCategoryId,
+    // parentCategoryId: homePageReduxData?.productName?.rootID,
+    parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
   const bodyDataAll = {
-    parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    // parentCategoryId: categoryPageReduxData?.parentCategoryId,
+    parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
   };
@@ -43,24 +51,52 @@ const SingleProduct = () => {
     data,
   );
 
+  // console.log(categoryPageReduxData?.categoryMetaData, "meta")
+  useEffect(() => {
+    dispatch(addSingleProduct([])); // Clear the previous data
+    dispatch(addSubCategoryMetaData(null));
+
+    if (subCategory !== "All") {
+      // Clear singleProductAll when switching from "All" to any other option
+      dispatch(addSingleAllProduct([]));
+      dispatch(addSubCategoryMetaData(null));
+    }
+  }, [subCategory]);
+
   useEffect(() => {
     getSingleProducts()
       .then(res => {
         setTotalPage(res?.data?.meta?.totalPage);
         dispatch(addSubCategoryMetaData(res?.data?.meta));
-        dispatch(
-          addSingleProduct([
-            ...categoryPageReduxData?.singleProduct,
-            ...res?.data?.products,
-          ]),
-        );
+        if (categoryPageReduxData?.isAllProduct) {
+          dispatch(
+            addSingleAllProduct([
+              ...categoryPageReduxData?.singleProductAll,
+              ...res?.data?.products,
+            ]),
+          );
+        } else {
+          dispatch(
+            addSingleProduct([
+              ...categoryPageReduxData?.singleProduct,
+              ...res?.data?.products,
+            ]),
+          );
+        }
+        // dispatch(
+        //   addSingleProduct([
+        //     ...categoryPageReduxData?.singleProduct,
+        //     ...res?.data?.products,
+        //   ]),
+        // );
       })
       .catch(err => console.log(err));
-  }, [pageNo]);
+  }, [pageNo, subCategory]);
 
-  const singleItemData = categoryPageReduxData?.singleProduct;
-
-  console.log("main mapper", singleItemData);
+  const singleItemData = categoryPageReduxData?.isAllProduct
+    ? categoryPageReduxData?.singleProductAll
+    : categoryPageReduxData?.singleProduct;
+  console.log(categoryPageReduxData?.singleProductAll, "singleItemData");
 
   return singleItemData?.length ? (
     <div>
@@ -85,9 +121,6 @@ const SingleProduct = () => {
                   desc={item?.product_name}
                   originalPrice={item?.price}
                   currentPrice={item?.sale_price}
-                  // hoverCardImage={`${productImageBaseUrl}${
-                  //   item?.image.split(",")[1]
-                  // }`}
                   hoverCardImage={
                     item?.image?.split(",").filter(item => item).length > 1
                       ? productImageBaseUrl + item?.image?.split(",")[1]

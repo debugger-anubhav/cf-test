@@ -14,7 +14,9 @@ import {
   addOutStockProduct,
   addParentCategoryId,
   addSetProduct,
+  addSingleAllProduct,
   addSingleProduct,
+  addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
 
 const PopOver = ({list, item, parentCategoryId}) => {
@@ -37,16 +39,28 @@ const PopOver = ({list, item, parentCategoryId}) => {
     setAnchorEl(null);
   };
 
+  const handleOptionChange = (e, item) => {
+    console.log(item, "item");
+  };
+
   const handMainCategory = e => {
+    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     dispatch(addProductCategory(hoverRef.current));
+    localStorage.setItem("category", JSON.stringify(hoverRef.current));
     dispatch(addParentCategoryId(parentCategoryId));
     dispatch(addProductName(item));
-
+    const AllItem = localStorage.setItem("subCategory", JSON.stringify("All"));
     dispatch(addSubCategoryId(""));
     dispatch(addProductName(null));
+    if (previousSubCategory !== AllItem) {
+      dispatch(addSingleProduct([]));
+    } else {
+      return null;
+    }
 
     dispatch(addAllProduct(true));
-    dispatch(addSingleProduct([]));
+    dispatch(addSingleAllProduct([]));
+    // dispatch(addSingleProduct([]))
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     setAnchorEl(null);
@@ -54,13 +68,12 @@ const PopOver = ({list, item, parentCategoryId}) => {
   };
 
   const handleSelectedProduct = (e, item) => {
-    // console.log(item?.cat_name.trim().split(" ").join("-").toLowerCase(), "item?.cat_name.trim()")
-    dispatch(addSubCategoryId(item?.id));
-    dispatch(addProductName(item));
-    dispatch(addProductCategory(hoverRef.current));
-    dispatch(addSingleProduct([]));
-    dispatch(addSetProduct([]));
-    dispatch(addOutStockProduct([]));
+    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+
+    // Update localStorage with the new selected subCategory
+    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
+
+    // Now you have both the previous and new selected subCategory
 
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
@@ -70,11 +83,22 @@ const PopOver = ({list, item, parentCategoryId}) => {
         .toLowerCase()}
       `,
     );
-    setAnchorEl(null);
+    dispatch(addSubCategoryId(item?.id));
+    localStorage.setItem("category", JSON.stringify(hoverRef.current));
+    localStorage.setItem("categoryId", JSON.stringify(item?.rootID));
+    dispatch(addProductName(item));
+    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
+    localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
+    dispatch(addProductCategory(hoverRef.current));
+    if (previousSubCategory !== item?.cat_name) {
+      dispatch(addSingleProduct([]));
+      dispatch(addSubCategoryMetaData([]));
+    }
   };
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
   return (
     <div>
       <button
@@ -118,7 +142,8 @@ const PopOver = ({list, item, parentCategoryId}) => {
                   <p
                     className={styles.sub_item}
                     key={index.toString()}
-                    onClick={e => handleSelectedProduct(e, item)}>
+                    onClick={e => handleSelectedProduct(e, item)}
+                    onChange={e => handleOptionChange(e, item)}>
                     {item?.cat_name}
                   </p>
                 );

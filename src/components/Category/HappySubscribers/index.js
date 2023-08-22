@@ -33,7 +33,6 @@ const HappySubscribers = () => {
   useEffect(() => {
     getHappySubscriber()
       .then(res => {
-        console.log(res?.data, "dfghjklkjhgf");
         dispatch(addHappySubscriber(res?.data?.data));
       })
       .catch(err => console.log(err));
