@@ -6,9 +6,12 @@ import styles from "../../Category/SubHeader/Subheader/style.module.css";
 import {Close, DownPopUpArrow} from "@/assets/icon";
 import {CategoryFilterData, sortByText} from "@/constants/constant";
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addFilteredItem, isFilterApplied} from "@/store/Slices/categorySlice";
 
 export default function FilterSortDrawer({filterName}) {
-  // const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const dispatch = useDispatch();
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const [state, setState] = React.useState({
     bottom: false,
   });
@@ -32,11 +35,38 @@ export default function FilterSortDrawer({filterName}) {
     setState({...state, [anchor]: open});
   };
 
+  const handleFilteredItems = e => {
+    console.log(e.target.value, "e.target.value");
+    let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    if (e.target.checked) {
+      updatedFilteredList = [
+        ...categoryPageReduxData?.filteredItems,
+        e.target.value,
+      ];
+    } else {
+      updatedFilteredList.splice(
+        categoryPageReduxData?.filteredItems.indexOf(e.target.value),
+        1,
+      );
+    }
+    dispatch(addFilteredItem(updatedFilteredList));
+  };
+
+  const handleApply = () => {
+    dispatch(isFilterApplied(true));
+    // setAnchorEl(null);
+    setState({...state, bottom: false});
+    // toggleDrawer("bottom", false)
+  };
+
+  const filtereData = categoryPageReduxData?.filterData;
+  console.log(filtereData, "filtereData");
+
   const list = anchor => (
     <div
       // sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
       className="relative">
       <List>
@@ -45,22 +75,24 @@ export default function FilterSortDrawer({filterName}) {
             <div className="gap-6 shadow-md w-full bg-white px-4 pt-4 pb-8">
               <p className={styles.headin_text}>{filterName}</p>
               <div className={styles.mapped_filter_mobile}>
-                {CategoryFilterData.slice(0, itemCount).map((ele, index) => {
+                {filtereData?.map((ele, index) => {
                   // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
                     <div
                       className={styles.single_filter_text}
                       key={index.toString()}>
-                      <p className={styles.option_text}>{ele.item}</p>
+                      <p className={styles.option_text}>{ele?.filter_name}</p>
                       <input
                         type="checkbox"
                         id="filterItem"
                         name="filterProducts"
-                        value={ele.item}
-                        // checked={
-                        //     categoryPageReduxData?.filteredItems.includes(ele?.item) ? true : false
-                        // }
+                        // value={ele.item}
+                        value={ele.filter_tag}
+                        checked={categoryPageReduxData?.filteredItems.includes(
+                          ele?.filter_name,
+                        )}
                         className="pr-1"
+                        onChange={e => handleFilteredItems(e)}
                       />
                     </div>
                   );
@@ -73,14 +105,16 @@ export default function FilterSortDrawer({filterName}) {
               )}
               <div className="mt-6 w-full flex justify-center">
                 <div className={styles.btn_container}>
-                  <p className={styles.apply_btn}>Apply</p>
+                  <p className={styles.apply_btn} onClick={() => handleApply()}>
+                    Apply
+                  </p>
                 </div>
               </div>
             </div>
           ) : (
             <div className="gap-6 shadow-md w-full rounded-t-2xl bg-white p-4">
               <p className={styles.headin_text}>{filterName}</p>
-              <div className="bg-red-300">
+              <div className="">
                 {sortByText.map((ele, index) => {
                   return (
                     <div
@@ -90,9 +124,10 @@ export default function FilterSortDrawer({filterName}) {
                       <p className={styles.option_text}>{ele.text}</p>
                       <input
                         type="radio"
-                        id="html"
-                        name="fav_language"
-                        value="HTML"></input>
+                        id={index}
+                        name="sortBy"
+                        value={ele.text}
+                      />
                     </div>
                   );
                 })}

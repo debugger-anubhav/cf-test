@@ -4,7 +4,7 @@ import styles from "../../Category/SubHeader/Subheader/style.module.css";
 import {sortByText} from "@/constants/constant";
 import {DownPopUpArrow} from "@/assets/icon";
 import {useDispatch, useSelector} from "react-redux";
-import {addFilteredItem} from "@/store/Slices/categorySlice";
+import {addFilteredItem, isFilterApplied} from "@/store/Slices/categorySlice";
 import {useState} from "react";
 
 export default function CategoryPopover({
@@ -12,14 +12,15 @@ export default function CategoryPopover({
   filterName,
   emptyFilterItem,
   setfiltereSaved,
+  isApplyFilter,
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const getAllProductWithFilterData = useSelector(
-    state => state.categoryPageData,
-  );
+  // const getAllProductWithFilterData = useSelector(
+  //   state => state.categoryPageData,
+  // );
 
-  const filtereData = getAllProductWithFilterData?.prdoucWithFilter?.filters;
+  const filtereData = categoryPageReduxData?.filterData;
 
   // const [filterList, setFilterList] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,6 +32,10 @@ export default function CategoryPopover({
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  React.useEffect(() => {
+    setAnchorEl(null);
+  }, [isApplyFilter]);
 
   const open = Boolean(anchorEl);
 
@@ -57,6 +62,11 @@ export default function CategoryPopover({
   //   setfiltereSaved(false);
   // }, [emptyFilterItem]);
 
+  const handleApply = () => {
+    dispatch(isFilterApplied(true));
+    setAnchorEl(null);
+  };
+
   return (
     <div>
       <div className={styles.filter} onClick={handleClick}>
@@ -67,7 +77,6 @@ export default function CategoryPopover({
           <div>
             <DownPopUpArrow
               size={20}
-              // size={styles.icon_size}
               color={"#45454A"}
               className={open ? styles.arrow_up : styles.arrow_down}
               // onClick={e => handleOpenSubCategory(e)}
@@ -105,14 +114,11 @@ export default function CategoryPopover({
                           type="checkbox"
                           id={index}
                           name="filterProducts"
-                          value={ele.filter_name}
+                          value={ele.filter_tag}
                           checked={categoryPageReduxData?.filteredItems.includes(
                             ele?.filter_name,
                           )}
                           className="pr-1"
-                          // {
-                          // }
-                          // }
                           onChange={e => handleFilteredItems(e)}
                         />
                       </div>
@@ -120,7 +126,9 @@ export default function CategoryPopover({
                   })}
                 </div>
                 <div className="mt-6 w-full flex justify-center">
-                  <div className={styles.btn_container}>
+                  <div
+                    className={styles.btn_container}
+                    onClick={() => handleApply()}>
                     <p className={styles.apply_btn}>Apply</p>
                   </div>
                 </div>
@@ -129,16 +137,14 @@ export default function CategoryPopover({
               <div className="gap-6 shadow-md w-[213px] rounded-2xl border-[2px] border-71717A bg-white p-4">
                 {sortByText.map((ele, index) => {
                   return (
-                    <div
-                      // className="pb-[6.5px] flex justify-between"
-                      className={styles.sorted_text}
-                      key={index.toString()}>
+                    <div className={styles.sorted_text} key={index.toString()}>
                       <p className={styles.option_text}>{ele.text}</p>
                       <input
                         type="radio"
-                        id="html"
-                        name="fav_language"
-                        value="HTML"></input>
+                        id={index}
+                        name="sortBy"
+                        value={ele.text}
+                      />
                     </div>
                   );
                 })}

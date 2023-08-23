@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 // import {CloseOutline, DownPopUpArrow} from "@/assets/icon";
 import {categoryIconsUrl} from "@/constants/constant";
@@ -7,8 +7,14 @@ import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover
 import {useDispatch, useSelector} from "react-redux";
 import {ForwardArrow} from "@/assets/icon";
 import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBar";
-import {addFilteredItem} from "@/store/Slices/categorySlice";
+import {
+  addFilterData,
+  addFilteredItem,
+  isFilterApplied,
+} from "@/store/Slices/categorySlice";
 import SingleProduct from "../../SingleProduct/SingleProduct";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
 
 const SubHeader = () => {
   const dispatch = useDispatch();
@@ -20,9 +26,30 @@ const SubHeader = () => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
+  const [isApplyFilter, setIsApplyFilter] = useState(false);
+  console.log(setIsApplyFilter);
 
   const category = localStorage.getItem("category").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId");
   const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  const subCategoryId = localStorage.getItem("subCategoryId");
+
+  const {refetch: getFilterList} = useQuery(
+    "filter-list",
+    endPoints.categoryFilterOption,
+    `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
+  );
+
+  useEffect(() => {
+    getFilterList()
+      .then(res => {
+        console.log(res?.data?.data, "data");
+        dispatch(addFilterData(res?.data?.data));
+        // dispatch(addCityList(res?.data?.data));
+        // dispatch(selectedCityId(res?.data?.data[0]?.id));
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <>
@@ -115,6 +142,7 @@ const SubHeader = () => {
               setfiltereSaved={setfiltereSaved}
               setEmptyFilterItem={setEmptyFilterItem}
               filterSaved={filterSaved}
+              isApplyFilter={isApplyFilter}
             />
           </div>
           <div className="flex items-center justify-center ">
@@ -124,6 +152,7 @@ const SubHeader = () => {
                 btnName={"click"}
                 filterName={"Default"}
                 setfiltereSaved={setfiltereSaved}
+                isApplyFilter={isApplyFilter}
               />
             </div>
           </div>
@@ -146,7 +175,11 @@ const SubHeader = () => {
           <div className="flex flex-wrap">
             <div
               className={styles.single_filter_mobile}
-              onClick={() => dispatch(addFilteredItem([]))}>
+              onClick={() => {
+                dispatch(addFilteredItem([]));
+                dispatch(isFilterApplied(false));
+                console.log(categoryPageReduxData?.filteredItems, "data");
+              }}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
             {categoryPageReduxData?.filteredItems.length !== 0
@@ -156,6 +189,7 @@ const SubHeader = () => {
                     <>
                       <div
                         className={styles.filter_card}
+                        // style={{ background: "red" }}
                         key={index.toString()}>
                         <FilterCard text={item} />
                       </div>
@@ -165,7 +199,11 @@ const SubHeader = () => {
               : null}
             <div
               className={styles.single_filter}
-              onClick={() => dispatch(addFilteredItem([]))}>
+              onClick={() => {
+                dispatch(addFilteredItem([]));
+                dispatch(isFilterApplied(false));
+                console.log(categoryPageReduxData?.filteredItems, "data");
+              }}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
           </div>
