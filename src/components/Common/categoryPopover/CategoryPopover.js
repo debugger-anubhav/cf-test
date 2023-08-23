@@ -4,7 +4,15 @@ import styles from "../../Category/SubHeader/Subheader/style.module.css";
 import {sortByText} from "@/constants/constant";
 import {DownPopUpArrow} from "@/assets/icon";
 import {useDispatch, useSelector} from "react-redux";
-import {addFilteredItem, isFilterApplied} from "@/store/Slices/categorySlice";
+import {
+  addFilteredItem,
+  addOutStockProduct,
+  // addOutStockProductAll,
+  addSetProduct,
+  // addSetProductAll,
+  addSingleProduct,
+  isFilterApplied,
+} from "@/store/Slices/categorySlice";
 import {useState} from "react";
 
 export default function CategoryPopover({
@@ -13,6 +21,7 @@ export default function CategoryPopover({
   emptyFilterItem,
   setfiltereSaved,
   isApplyFilter,
+  setPageNo,
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -57,12 +66,11 @@ export default function CategoryPopover({
     dispatch(addFilteredItem(updatedFilteredList));
   };
 
-  // useEffect(() => {
-  //   dispatch(addFilteredItem([]));
-  //   setfiltereSaved(false);
-  // }, [emptyFilterItem]);
-
   const handleApply = () => {
+    setPageNo(1);
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setAnchorEl(null);
   };
@@ -113,10 +121,10 @@ export default function CategoryPopover({
                         <input
                           type="checkbox"
                           id={index}
-                          name="filterProducts"
+                          name={ele.filter_name}
                           value={ele.filter_tag}
                           checked={categoryPageReduxData?.filteredItems.includes(
-                            ele?.filter_name,
+                            ele?.filter_tag,
                           )}
                           className="pr-1"
                           onChange={e => handleFilteredItems(e)}

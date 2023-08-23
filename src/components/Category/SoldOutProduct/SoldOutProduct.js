@@ -39,14 +39,18 @@ const SoldOutProduct = () => {
     parentCategoryId: homePageReduxData?.productName?.rootID,
     cityId: 50,
     pageNo,
-    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
   };
 
   const bodyDataAll = {
     parentCategoryId: categoryPageReduxData?.parentCategoryId,
     cityId: 50,
     pageNo,
-    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
   };
 
   const payload =
@@ -66,32 +70,28 @@ const SoldOutProduct = () => {
       .then(res => {
         setTotalPage(res?.data?.meta?.totalPage);
         dispatch(addSubCategoryMetaOutStockProduct(res?.data?.meta));
-        dispatch(
-          addOutStockProduct([
-            ...categoryPageReduxData?.outStockProduct,
-            ...res?.data?.products,
-          ]),
-        );
-        if (categoryPageReduxData?.isAllProduct) {
-          console.log("in all true");
-          dispatch(
-            addOutStockProductAll([
-              ...categoryPageReduxData?.outStockProductAll,
-              ...res?.data?.products,
-            ]),
-          );
-        } else {
+        if (categoryPageReduxData?.isfilter) {
           dispatch(
             addOutStockProduct([
               ...categoryPageReduxData?.outStockProduct,
               ...res?.data?.products,
             ]),
           );
-          //   // }
+        } else {
+          if (categoryPageReduxData?.isAllProduct) {
+            dispatch(addOutStockProductAll([...res?.data?.products]));
+          } else {
+            dispatch(
+              addOutStockProduct([
+                ...categoryPageReduxData?.outStockProduct,
+                ...res?.data?.products,
+              ]),
+            );
+          }
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo]);
+  }, [pageNo, categoryPageReduxData?.isfilter]);
 
   // const data = categoryPageReduxData?.outStockProduct;
 
@@ -166,8 +166,9 @@ const SoldOutProduct = () => {
       }` */}
         </>
       ) : null}
-      {categoryPageReduxData?.outStockProduct?.length === outStockItemLength ? (
+      {data?.length === outStockItemLength ? (
         <>
+          {console.log("comminggggg")}
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />

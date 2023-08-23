@@ -11,11 +11,12 @@ import {
 } from "@/store/Slices";
 import {
   addAllProduct,
+  addFilteredItem,
   addOutStockProduct,
   addOutStockProductAll,
   // addOutStockProduct,
   addParentCategoryId,
-  addSetProduct,
+  // addSetProduct,
   addSetProductAll,
   addSingleAllProduct,
   // addSetProduct,
@@ -48,6 +49,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
     const previouseSubCategory = JSON.parse(
       localStorage.getItem("subCategory"),
     );
+    dispatch(addFilteredItem([]));
     dispatch(addProductCategory(hoverRef.current));
     localStorage.setItem("category", JSON.stringify(hoverRef.current));
     dispatch(addParentCategoryId(parentCategoryId));
@@ -67,6 +69,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
   };
 
   const handleSelectedProduct = (e, item) => {
+    dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
 
@@ -94,9 +97,10 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addProductCategory(hoverRef.current));
     // previousSubCategory !== item?.cat_name ? dispatch(addSingleProduct([])) : null
     // previousSubCategory !== item?.cat_name ? dispatch(addSubCategoryMetaData([])) : null
+    console.log(previousSubCategory !== item?.cat_name, "state");
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
-      dispatch(addSetProduct([]));
+      // dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
   };

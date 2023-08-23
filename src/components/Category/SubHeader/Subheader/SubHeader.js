@@ -10,6 +10,11 @@ import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBa
 import {
   addFilterData,
   addFilteredItem,
+  addOutStockProduct,
+  // addOutStockProductAll,
+  addSetProduct,
+  // addSetProductAll,
+  addSingleProduct,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
 import SingleProduct from "../../SingleProduct/SingleProduct";
@@ -18,6 +23,7 @@ import {useQuery} from "@/hooks/useQuery";
 
 const SubHeader = () => {
   const dispatch = useDispatch();
+  const [pageNo, setPageNo] = useState(1);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
@@ -43,7 +49,6 @@ const SubHeader = () => {
   useEffect(() => {
     getFilterList()
       .then(res => {
-        console.log(res?.data?.data, "data");
         dispatch(addFilterData(res?.data?.data));
         // dispatch(addCityList(res?.data?.data));
         // dispatch(selectedCityId(res?.data?.data[0]?.id));
@@ -143,6 +148,7 @@ const SubHeader = () => {
               setEmptyFilterItem={setEmptyFilterItem}
               filterSaved={filterSaved}
               isApplyFilter={isApplyFilter}
+              setPageNo={setPageNo}
             />
           </div>
           <div className="flex items-center justify-center ">
@@ -153,6 +159,7 @@ const SubHeader = () => {
                 filterName={"Default"}
                 setfiltereSaved={setfiltereSaved}
                 isApplyFilter={isApplyFilter}
+                setPageNo={setPageNo}
               />
             </div>
           </div>
@@ -160,12 +167,12 @@ const SubHeader = () => {
         </div>
         <div className={styles.filter_sort_section_mobile}>
           <div className={styles.filter}>
-            <FilterSortDrawer filterName={"Filter"} />
+            <FilterSortDrawer filterName={"Filter"} setPageNo={setPageNo} />
           </div>
           <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
             <div className={styles.filter}>
-              <FilterSortDrawer filterName={"Default"} />
+              <FilterSortDrawer filterName={"Default"} setPageNo={setPageNo} />
             </div>
           </div>
           {/* ------------------------------------------------------------------------------------------------------ */}
@@ -177,14 +184,26 @@ const SubHeader = () => {
               className={styles.single_filter_mobile}
               onClick={() => {
                 dispatch(addFilteredItem([]));
+                dispatch(addSingleProduct([]));
+                dispatch(addSetProduct([]));
+                dispatch(addOutStockProduct([]));
                 dispatch(isFilterApplied(false));
-                console.log(categoryPageReduxData?.filteredItems, "data");
               }}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
             {categoryPageReduxData?.filteredItems.length !== 0
               ? categoryPageReduxData?.filteredItems?.map((item, index) => {
                   // console.log(item, "itemmmsss filter");
+
+                  const words = item.split("_");
+
+                  const capitalizedWords = words.map(word => {
+                    if (word.length === 0) return word; // Handle empty words
+                    return word.charAt(0).toUpperCase() + word.slice(1);
+                  });
+
+                  item = capitalizedWords.join(" ");
+
                   return (
                     <>
                       <div
@@ -202,7 +221,9 @@ const SubHeader = () => {
               onClick={() => {
                 dispatch(addFilteredItem([]));
                 dispatch(isFilterApplied(false));
-                console.log(categoryPageReduxData?.filteredItems, "data");
+                dispatch(addSingleProduct([]));
+                dispatch(addSetProduct([]));
+                dispatch(addOutStockProduct([]));
               }}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
@@ -210,7 +231,7 @@ const SubHeader = () => {
         )}
         {/* ------------------------------------------------------------------------------------------------------------- */}
       </div>
-      <SingleProduct />
+      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
     </>
   );
 };

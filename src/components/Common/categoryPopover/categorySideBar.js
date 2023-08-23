@@ -7,9 +7,17 @@ import {Close, DownPopUpArrow} from "@/assets/icon";
 import {CategoryFilterData, sortByText} from "@/constants/constant";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addFilteredItem, isFilterApplied} from "@/store/Slices/categorySlice";
+import {
+  addFilteredItem,
+  addOutStockProduct,
+  // addOutStockProductAll,
+  addSetProduct,
+  // addSetProductAll,
+  addSingleProduct,
+  isFilterApplied,
+} from "@/store/Slices/categorySlice";
 
-export default function FilterSortDrawer({filterName}) {
+export default function FilterSortDrawer({filterName, setPageNo}) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const [state, setState] = React.useState({
@@ -53,14 +61,15 @@ export default function FilterSortDrawer({filterName}) {
   };
 
   const handleApply = () => {
+    setPageNo(1);
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
-    // setAnchorEl(null);
     setState({...state, bottom: false});
-    // toggleDrawer("bottom", false)
   };
 
   const filtereData = categoryPageReduxData?.filterData;
-  console.log(filtereData, "filtereData");
 
   const list = anchor => (
     <div
