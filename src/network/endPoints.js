@@ -59,6 +59,7 @@ export const endPoints = {
     singleProductDetails: id =>
       `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
   },
+
   categoryHappySubscriber:
     "fc-care-instructions/getCategoryPageHappyCustomerStories",
   categortFaq: "fc-faqs/getCategoryPageFAQS",
@@ -67,4 +68,5 @@ export const endPoints = {
   categorySingleProduct: "fc-products/getSingleProducts",
   categoryComboProduct: "fc-products/getSetProducts",
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
+  categoryFilterOption: "fc-products/getProductFilters",
 };

@@ -8,9 +8,11 @@ import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {
   addSetProduct,
+  addSetProductAll,
   addSubCategoryMetaSubProduct,
 } from "@/store/Slices/categorySlice";
 import SoldOutProduct from "../SoldOutProduct/SoldOutProduct";
+import {useParams} from "next/navigation";
 
 const ProductSet = () => {
   const [pageNo, setPageNo] = useState(1);
@@ -20,14 +22,16 @@ const ProductSet = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   // const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const singleItemLength =
-    categoryPageReduxData?.categoryMetaData?.totalProduct;
-  const comboItemLength =
-    categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
+  // const singleItemLength =
+  //   categoryPageReduxData?.categoryMetaData?.totalProduct;
+  // const comboItemLength =
+  //   categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  // const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+
+  const {productname} = useParams();
 
   const bodyData = {
     // subCategoryId: homePageReduxData?.productName?.id,
@@ -36,6 +40,7 @@ const ProductSet = () => {
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
+    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
   };
 
   const bodyDataAll = {
@@ -43,9 +48,13 @@ const ProductSet = () => {
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
+    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
   };
 
-  const payload = categoryPageReduxData?.isAllProduct ? bodyDataAll : bodyData;
+  const payload =
+    productname === "all" || categoryPageReduxData?.isAllProduct
+      ? bodyDataAll
+      : bodyData;
 
   const {mutateAsync: getComboProducts} = useMutation(
     "category-combo-product",
@@ -54,28 +63,44 @@ const ProductSet = () => {
     payload,
   );
 
-  if (categoryPageReduxData?.singleProduct?.length === singleItemLength) {
-    useEffect(() => {
-      getComboProducts()
-        .then(res => {
-          setTotalPage(res?.data?.meta?.totalPage);
-          dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
+  // if (categoryPageReduxData?.singleProduct?.length === singleItemLength) {
+  useEffect(() => {
+    getComboProducts()
+      .then(res => {
+        setTotalPage(res?.data?.meta?.totalPage);
+        dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
+        // dispatch(
+        //   addSetProduct([
+        //     ...categoryPageReduxData?.setProduct,
+        //     ...res?.data?.products,
+        //   ]),
+        // );
+        // console.log(categoryPageReduxData?.isAllProduct, "categoryPageReduxData?.isAllProduct")
+        if (categoryPageReduxData?.isAllProduct) {
+          console.log("in all true");
+          dispatch(
+            addSetProductAll([
+              ...categoryPageReduxData?.setProductAll,
+              ...res?.data?.products,
+            ]),
+          );
+        } else {
           dispatch(
             addSetProduct([
               ...categoryPageReduxData?.setProduct,
               ...res?.data?.products,
             ]),
           );
-        })
-        .catch(err => console.log(err));
-    }, [pageNo]);
-  }
+          // }
+        }
+      })
+      .catch(err => console.log(err));
+  }, [pageNo]);
+  // }
 
-  useEffect(() => {
-    dispatch(addSetProduct([])); // Clear the previous data
-  }, [subCategory]);
-
-  const data = categoryPageReduxData?.setProduct;
+  const data = categoryPageReduxData?.isAllProduct
+    ? categoryPageReduxData?.setProductAll
+    : categoryPageReduxData?.setProduct;
 
   return data.length ? (
     <>
@@ -114,7 +139,7 @@ const ProductSet = () => {
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}
-                      productId={item?.product_id}
+                      productId={item?.id}
                       productName={item?.product_name.replace(/ /g, "-")}
                     />
                   </div>
@@ -124,9 +149,9 @@ const ProductSet = () => {
           </InfiniteScroll>
         </div>
       </div>
-      {categoryPageReduxData?.setProduct?.length === comboItemLength ? (
-        <SoldOutProduct />
-      ) : null}
+      {/* {categoryPageReduxData?.setProduct?.length === comboItemLength ? ( */}
+      <SoldOutProduct />
+      {/* ) : null} */}
     </>
   ) : null;
 };

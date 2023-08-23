@@ -32,11 +32,17 @@ const SingleProduct = () => {
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
   };
   const bodyDataAll = {
     parentCategoryId: categoryId,
     cityId: 50,
     pageNo,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
   };
 
   const data =
@@ -44,8 +50,15 @@ const SingleProduct = () => {
       ? bodyDataAll
       : bodyData;
 
-  const singleItemLength =
-    categoryPageReduxData?.categoryMetaData?.totalProduct;
+  // const singleItemLength =
+  //   categoryPageReduxData?.categoryMetaData?.totalProduct;
+
+  console.log(
+    categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : null,
+  );
+
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
     "POST",
@@ -75,13 +88,17 @@ const SingleProduct = () => {
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo]);
+  }, [pageNo, categoryPageReduxData?.isfilter]);
 
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
 
-  console.log(singleItemData, "singleItemData");
+  console.log(
+    categoryPageReduxData?.isfilter,
+    categoryPageReduxData?.filteredItems,
+    "isfilter",
+  );
 
   return singleItemData?.length ? (
     <div>
@@ -115,7 +132,7 @@ const SingleProduct = () => {
                   discount={`${Math.round(
                     ((item?.price - item?.sale_price) * 100) / 1000,
                   ).toFixed(2)}%`}
-                  productId={item?.product_id}
+                  productId={item?.id}
                   productName={item?.product_name.replace(/ /g, "-")}
                 />
               </div>
@@ -123,9 +140,9 @@ const SingleProduct = () => {
           })}
         </div>
       </InfiniteScroll>
-      {categoryPageReduxData?.singleProduct?.length === singleItemLength ? (
-        <ProductSet />
-      ) : null}
+      {/* {categoryPageReduxData?.singleProduct?.length === singleItemLength ? ( */}
+      <ProductSet />
+      {/* ) : null} */}
     </div>
   ) : null;
 };
