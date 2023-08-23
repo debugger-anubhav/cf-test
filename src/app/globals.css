@@ -98,3 +98,8 @@ input[type="radio"]:checked {
 .custom-progress-bar .rc-progress-line {
   border-radius: 4px;
 }
+
+#mobile-chat-container,
+#fbots-wdgt {
+  left: 30px !important;
+}
