@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 const ProductVideo = () => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData.productVideos);
-  console.log(pageData, "uedhudiui");
+
   // const videoRef = useRef(null);
 
   // const handlePlayButtonClick = () => {

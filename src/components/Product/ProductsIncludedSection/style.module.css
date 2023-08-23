@@ -8,7 +8,7 @@
   @apply flex gap-4 3xl:gap-5 w-full overflow-scroll mt-4 xl:mt-8;
 }
 .img {
-  @apply w-[123px] 3xl:w-[160px] h-[92px] 3xl:h-[120px] bg-slate-400;
+  @apply min-w-[123px] 3xl:min-w-[160px] h-[92px] 3xl:h-[120px] bg-slate-400;
 }
 .left_div {
   @apply min-w-full lg:min-w-[400px] xl:min-w-[416px];

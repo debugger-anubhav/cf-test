@@ -6,22 +6,19 @@ import BannerFive from "./BannerFive";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
 import ProductVideo from "./ProductVideo";
 
 const BannerSection = () => {
   const dispatch = useDispatch();
-  const pageData = useSelector(state => state.productPageData);
-
-  console.log(pageData, "bannneerrrrrrr");
+  // const pageData = useSelector(state => state.productPageData);
 
   const getBannerImagesFunction = () => {
     axios
       .get(baseURL + endPoints.productPage.bannerImages)
       .then(res => {
         dispatch(getBannerImages(res?.data?.data));
-        console.log(res, "bannerdata");
       })
       .catch(err => {
         console.log(err);

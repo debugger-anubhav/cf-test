@@ -114,8 +114,9 @@ const SingleProduct = () => {
         <div className={style.main_container}>
           {singleItemData?.map((item, index) => {
             return (
-              <div className={style.card_box} key={index.toString()}>
+              <div className={style.card_box_product} key={index.toString()}>
                 <Card
+                  productWidth={style.productCardWidth}
                   cardImage={`${productImageBaseUrl}${
                     item?.image?.split(",")[0]
                   }`}

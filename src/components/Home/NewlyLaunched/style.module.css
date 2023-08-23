@@ -1,9 +1,9 @@
 .main_container {
-  @apply pl-4 md:pl-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-8 xl:py-[88px] flex w-full overflow-scroll lg:overflow-hidden gap-4 macbook:gap-5;
+  @apply pl-4 pr-0 md:pl-[70px] lg:pr-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-8 xl:py-[88px] flex w-full overflow-scroll lg:overflow-hidden gap-4 macbook:gap-5;
 }
 .brown_box {
   @apply flex justify-center items-center
-   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[181px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border;
+   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[181px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border mb-4;
 }
 .heading {
   @apply font-Poppins text-20 lg:text-32 font-medium leading-8 tracking-heading text-white w-full lg:w-full pb-4 lg:pb-2;
@@ -15,11 +15,15 @@
   @apply absolute bg-[#ffffffcc] px-[12px] py-[6px] border top-2 left-2;
 }
 .img {
-  /* @apply min-w-[241px] h-[181px] lg:min-w-[165px] xl:min-w-[226px] 2xl:min-w-[300px] 3xl:min-w-[320px] xl:w-[265px] macbook:w-[253px] rounded-lg lg:rounded-[4px]; */
-  @apply min-w-[241px] h-[181px] lg:min-w-[165px] xl:min-w-[226px]  xl:w-[257px] macbook:w-[260px] macbook:mr-8 rounded-lg lg:rounded-[4px] last-screen:mr-12;
+  @apply w-full h-full rounded-lg lg:rounded-[4px] gap-4;
 }
 .images_wrapper {
-  @apply flex lg:flex-wrap gap-4 macbook:gap-5 overflow-x-scroll lg:overflow-x-auto;
+  @apply flex lg:grid-rows-2 lg:grid lg:grid-cols-3 3xl:grid-cols-4 lg:flex-wrap gap-5 overflow-x-scroll lg:overflow-hidden;
+  grid-template-rows: minmax(100px, 1fr) minmax(100px, 1fr) minmax(0px, 0);
+}
+
+.width_container {
+  @apply min-w-[246px] lg:min-w-full;
 }
 
 .skeleton_brown_box {

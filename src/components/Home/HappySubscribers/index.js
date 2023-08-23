@@ -11,7 +11,7 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 
-const HappySubscribers = ({page}) => {
+const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState(null);
 

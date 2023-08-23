@@ -19,6 +19,7 @@ const Card = ({
   itemIncluded,
   soldOut,
   isHover = true,
+  productWidth,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
@@ -29,7 +30,9 @@ const Card = ({
     <Link href={`/things/${productId}/${productName}`}>
       <div
         // onClick={() => handleProductClick(productId)}
-        className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper}
+        className={`${styles.wrapper} ${
+          hoverCard && styles.hover_wrapper
+        } ${productWidth}
       `}
         onMouseOver={() => {
           isHover && setHoverCard(true);
