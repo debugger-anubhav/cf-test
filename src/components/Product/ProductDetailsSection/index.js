@@ -177,13 +177,13 @@ const ProductDetails = ({params}) => {
   currentDate.setDate(currentDate.getDate() + 3);
 
   const pageData = useSelector(state => state.productPageData.customerReviews);
-  const totalReviews = pageData.length;
-  const totalRatingSum = pageData.reduce((sum, item) => {
+  const totalReviews = pageData?.length;
+  const totalRatingSum = pageData?.reduce((sum, item) => {
     const rating = parseFloat(item.rating);
     return isNaN(rating) ? sum : sum + rating;
   }, 0);
 
-  const averageRating = totalRatingSum / totalReviews;
+  const averageRating = totalReviews > 0 ? totalRatingSum / totalReviews : 0;
 
   const sliderRef = useRef(null);
 

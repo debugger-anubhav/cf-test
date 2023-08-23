@@ -55,37 +55,40 @@ const YouMightLike = ({heading, isbg, params}) => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
-  return (
-    <div
-      className={styles.main_container}
-      style={{
-        background:
-          "linear-gradient(136deg, rgba(250, 247, 172, 0.00) 0%, rgba(219, 240, 229, 0.70) 100%)",
-      }}>
-      <h2 className={styles.heading}>You might also like</h2>
 
-      <div className={styles.card_wrapper} ref={sliderRef}>
-        {pageData?.youMightLike?.map((item, index) => (
-          <div key={index}>
-            <Card
-              cardImage={`${
-                productPageImagesBaseUrl + item?.image?.split(",")[0]
-              }`}
-              discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.sale_price,
-              ).toFixed(2)}%`}
-              originalPrice={item?.price}
-              currentPrice={item?.sale_price}
-              desc={item?.product_name}
-              isHover={false}
-              productId={item?.id}
-              productName={item?.product_name.replace(/ /g, "-")}
-            />
-          </div>
-        ))}
+  if (pageData?.youMightLike?.length > 0) {
+    return (
+      <div
+        className={styles.main_container}
+        style={{
+          background:
+            "linear-gradient(136deg, rgba(250, 247, 172, 0.00) 0%, rgba(219, 240, 229, 0.70) 100%)",
+        }}>
+        <h2 className={styles.heading}>You might also like</h2>
+
+        <div className={styles.card_wrapper} ref={sliderRef}>
+          {pageData?.youMightLike?.map((item, index) => (
+            <div key={index}>
+              <Card
+                cardImage={`${
+                  productPageImagesBaseUrl + item?.image?.split(",")[0]
+                }`}
+                discount={`${Math.round(
+                  ((item?.price - item?.sale_price) * 100) / item?.sale_price,
+                ).toFixed(2)}%`}
+                originalPrice={item?.price}
+                currentPrice={item?.sale_price}
+                desc={item?.product_name}
+                isHover={false}
+                productId={item?.id}
+                productName={item?.product_name.replace(/ /g, "-")}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default YouMightLike;

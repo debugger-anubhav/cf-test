@@ -6,16 +6,16 @@ import {useSelector} from "react-redux";
 
 const RatingBar = () => {
   const pageData = useSelector(state => state.productPageData.customerReviews);
-  const totalReviews = pageData.length;
+  const totalReviews = pageData?.length;
 
-  const totalRatingSum = pageData.reduce((sum, item) => {
+  const totalRatingSum = pageData?.reduce((sum, item) => {
     const rating = parseFloat(item.rating);
     return isNaN(rating) ? sum : sum + rating;
   }, 0);
 
-  const averageRating = totalRatingSum / totalReviews;
+  const averageRating = totalReviews > 0 ? totalRatingSum / totalReviews : 0;
 
-  const ratingCounts = pageData.reduce((acc, item) => {
+  const ratingCounts = pageData?.reduce((acc, item) => {
     const rating = Math.round(item.rating);
     if (!isNaN(rating)) {
       if (acc[rating]) {
@@ -28,11 +28,11 @@ const RatingBar = () => {
   }, {});
 
   const ratings = {
-    oneStar: ratingCounts[1] || 0,
-    twoStar: ratingCounts[2] || 0,
-    threeStar: ratingCounts[3] || 0,
-    fourStar: ratingCounts[4] || 0,
-    fiveStar: ratingCounts[5] || 0,
+    oneStar: ratingCounts?.[1] || 0,
+    twoStar: ratingCounts?.[2] || 0,
+    threeStar: ratingCounts?.[3] || 0,
+    fourStar: ratingCounts?.[4] || 0,
+    fiveStar: ratingCounts?.[5] || 0,
     total: totalReviews,
   };
 

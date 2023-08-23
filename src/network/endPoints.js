@@ -47,15 +47,15 @@ export const endPoints = {
       `fc-products/getYouMightAlsoLikeProducts?productId=${id}&cityId=50`,
     monthlyRent: id =>
       `fc-subproducts/getProductForThePeriod?productId=${id}&cityId=46`,
-    careInstructions:
-      "fc-care-instructions/getProductCareInstructions?productId=4096",
-    bannerImages: "fc-product-banners/getProductBanners?productId=3866",
-    productVideos: "fc-product-videos/getProductVideos?productId=3783",
-    customerReviews:
-      "fc-user-reviews/getProductUserReviews?productId=3783&cityId=45",
-    qna: "fc-faq-products/getProductPageFAQs?productId=3843",
-    happySubscribers:
-      "fc-care-instructions/getCustomerHappyStories?productId=4096",
+    careInstructions: id =>
+      `fc-care-instructions/getProductCareInstructions?productId=${id}`,
+    bannerImages: id => `fc-product-banners/getProductBanners?productId=${id}`,
+    productVideos: id => `fc-product-videos/getProductVideos?productId=${id}`,
+    customerReviews: id =>
+      `fc-user-reviews/getProductUserReviews?productId=${id}&cityId=45`,
+    qna: id => `fc-faq-products/getProductPageFAQs?productId=${id}`,
+    happySubscribers: id =>
+      `fc-care-instructions/getCustomerHappyStories?productId=${id}`,
     singleProductDetails: id =>
       `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
   },
