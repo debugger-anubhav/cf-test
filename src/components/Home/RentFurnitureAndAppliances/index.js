@@ -11,9 +11,11 @@ import {
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import {useRouter} from "next/navigation";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const seoAppliancePageReduxData = useSelector(
     state => state.seoApplianceData,
@@ -69,7 +71,19 @@ const RentFurnitureAndAppliances = ({params}) => {
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
       <div className={styles.card_div}>
         {RentFurniture?.map((item, index) => (
-          <div key={index.toString()} className={styles.card_wrapper}>
+          <div
+            key={index.toString()}
+            className={styles.card_wrapper}
+            onClick={() => {
+              router.push(
+                `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                  .trim()
+                  .split(" ")
+                  .join("-")
+                  .toLowerCase()}
+      `,
+              );
+            }}>
             <img
               src={
                 "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
