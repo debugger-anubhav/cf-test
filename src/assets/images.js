@@ -25,6 +25,7 @@ export const TryCityMaxBannerMobile = Mobile + "city-max.webp";
 
 export const HeroFrame = Desktop + "hero-banner-main.webp";
 
+// export const DownloadForWeb = Desktop + "download-cityfurnish-mobile-app.webp";
 export const DownloadForWeb = Desktop + "download-cityfurnish-mobile-app.webp";
 
 export const DownloadForMobileImg =
