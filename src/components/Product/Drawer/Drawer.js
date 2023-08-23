@@ -94,13 +94,13 @@ const SideDrawer = ({
               </button>
               <button
                 className={`${styles.btn} ${
-                  endIndex >= totalReviews
+                  endIndex >= totalQuestions
                     ? "text-9A9AA2 border-9A9AA2"
                     : "text-71717A border-71717A"
                 }`}
                 onClick={handleNextPage}
-                disabled={endIndex >= totalReviews}>
-                Next Page {!(endIndex >= totalReviews) && ">"}
+                disabled={endIndex >= totalQuestions}>
+                Next Page {!(endIndex >= totalQuestions) && ">"}
               </button>
             </div>
           </div>

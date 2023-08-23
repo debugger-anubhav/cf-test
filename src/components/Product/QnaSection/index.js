@@ -8,7 +8,7 @@ import {baseURL} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {format} from "date-fns";
 
-const QuesAndAns = () => {
+const QuesAndAns = ({params}) => {
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const toggleDrawer = () => {
@@ -20,7 +20,7 @@ const QuesAndAns = () => {
 
   const getQuesAnsFunction = () => {
     axios
-      .get(baseURL + endPoints.productPage.qna)
+      .get(baseURL + endPoints.productPage.qna(params.productId))
       .then(res => {
         dispatch(getProductQuesAns(res?.data?.data));
       })
@@ -35,60 +35,62 @@ const QuesAndAns = () => {
   }, []);
 
   const questionsPerPage = 4;
-  const totalQuestions = pageData.length;
+  const totalQuestions = pageData?.length;
 
   // Calculate the range of reviews to display on the current page
   const startIndex = open ? (currentPage - 1) * questionsPerPage : 0;
   const endIndex = open ? startIndex + questionsPerPage : 3;
 
-  return (
-    <div className={styles.main_container}>
-      <h1 className={styles.head}>Product QnA</h1>
-      <div className={styles.ques_ans_wrapper}>
-        {pageData.slice(0, 3).map((item, index) => (
-          <div key={index} className={styles.ques_ans_div}>
-            <div className={styles.single_row}>
-              <p className={styles.ques}> Q:</p>
-              <p className={styles.ques}>{item.question}</p>
-            </div>
-            <div className={`mt-[9.5px] lg:mt-4 ${styles.single_row}`}>
-              <div className={`${styles.ques} hidden lg:block`}>A:</div>
-              <div>
-                <div
-                  dangerouslySetInnerHTML={{__html: item.answer}}
-                  className={styles.ans}
-                />
+  if (pageData.length > 0) {
+    return (
+      <div className={styles.main_container}>
+        <h1 className={styles.head}>Product QnA</h1>
+        <div className={styles.ques_ans_wrapper}>
+          {pageData?.slice(0, 3).map((item, index) => (
+            <div key={index} className={styles.ques_ans_div}>
+              <div className={styles.single_row}>
+                <p className={styles.ques}> Q:</p>
+                <p className={styles.ques}>{item.question}</p>
+              </div>
+              <div className={`mt-[9.5px] lg:mt-4 ${styles.single_row}`}>
+                <div className={`${styles.ques} hidden lg:block`}>A:</div>
+                <div>
+                  <div
+                    dangerouslySetInnerHTML={{__html: item.answer}}
+                    className={styles.ans}
+                  />
 
-                <p className={styles.bottom_txt}>
-                  Answered by CityFurnish on{" "}
-                  {`${format(new Date(item.created_at), "d MMMM, yyyy")}`}
-                </p>
+                  <p className={styles.bottom_txt}>
+                    Answered by CityFurnish on{" "}
+                    {`${format(new Date(item.created_at), "d MMMM, yyyy")}`}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+
+        {!open && (
+          <button className={styles.more_btn} onClick={toggleDrawer}>
+            View all questions
+          </button>
+        )}
+
+        {open && (
+          <SideDrawer
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+            endIndex={endIndex}
+            startIndex={startIndex}
+            toggleDrawer={toggleDrawer}
+            open={open}
+            totalQuestions={totalQuestions}
+            drawerType={"QnA"}
+          />
+        )}
       </div>
-
-      {!open && (
-        <button className={styles.more_btn} onClick={toggleDrawer}>
-          View all questions
-        </button>
-      )}
-
-      {open && (
-        <SideDrawer
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          endIndex={endIndex}
-          startIndex={startIndex}
-          toggleDrawer={toggleDrawer}
-          open={open}
-          totalQuestions={totalQuestions}
-          drawerType={"QnA"}
-        />
-      )}
-    </div>
-  );
+    );
+  }
 };
 
 export default QuesAndAns;
