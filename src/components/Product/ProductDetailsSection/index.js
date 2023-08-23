@@ -59,7 +59,7 @@ const ProductDetails = ({params}) => {
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [duration, setDuration] = useState({currentIndex: 0, value: 12});
+  const [duration, setDuration] = useState({currentIndex: 0, value: ""});
   const [inWishList, setInWishList] = React.useState(false);
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -117,12 +117,23 @@ const ProductDetails = ({params}) => {
     axios
       .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
       .then(res => {
-        setDurationArray(res?.data?.data.reverse());
+        setDurationArray(res?.data?.data);
       })
       .catch(err => {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (durationArray.length > 0) {
+      const lastIndex = durationArray.length - 1;
+      const lastValue = durationArray[lastIndex];
+      setDuration({
+        currentIndex: lastIndex,
+        value: lastValue,
+      });
+    }
+  }, [durationArray]);
 
   useEffect(() => {
     getDurationRent();
@@ -349,6 +360,7 @@ const ProductDetails = ({params}) => {
               </div>
               <p className={styles.rating_txt}>{totalReviews} ratings</p>
             </div>
+
             <p className={styles.rating_txt} style={{color: "#63798D"}}>
               Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
               <span>
