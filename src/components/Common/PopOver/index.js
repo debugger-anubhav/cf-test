@@ -11,8 +11,12 @@ import {
 } from "@/store/Slices";
 import {
   addAllProduct,
+  addOutStockProduct,
+  addOutStockProductAll,
   // addOutStockProduct,
   addParentCategoryId,
+  addSetProduct,
+  addSetProductAll,
   addSingleAllProduct,
   // addSetProduct,
   // addSingleAllProduct,
@@ -54,12 +58,10 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addAllProduct(true));
     if (previouseSubCategory !== "All") {
       dispatch(addSingleAllProduct([]));
+      dispatch(addSetProductAll([]));
+      dispatch(addOutStockProductAll([]));
     }
 
-    // dispatch(addSingleAllProduct([]));
-    // dispatch(addSingleProduct([]))
-    // dispatch(addSetProduct([]));
-    // dispatch(addOutStockProduct([]));
     setAnchorEl(null);
     router.push(`/category/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
@@ -72,8 +74,8 @@ const PopOver = ({list, item, parentCategoryId}) => {
     localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
 
     // Now you have both the previous and new selected subCategory
-    console.log("Previous SubCategory:", previousSubCategory);
-    console.log("New SubCategory:", item?.cat_name);
+    // console.log("Previous SubCategory:", previousSubCategory);
+    // console.log("New SubCategory:", item?.cat_name);
 
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
@@ -94,6 +96,8 @@ const PopOver = ({list, item, parentCategoryId}) => {
     // previousSubCategory !== item?.cat_name ? dispatch(addSubCategoryMetaData([])) : null
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
+      dispatch(addSetProduct([]));
+      dispatch(addOutStockProduct([]));
     }
   };
 

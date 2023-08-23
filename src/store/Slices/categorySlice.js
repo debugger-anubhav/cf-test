@@ -7,6 +7,7 @@ export const CategoryPageSlice = createSlice({
     prdoucWithFilter: null,
     singleProduct: [],
     setProduct: [],
+    setProductAll: [],
     outStockProduct: [],
     happySucbscriber: [],
     categoryContentData: [],
@@ -19,6 +20,9 @@ export const CategoryPageSlice = createSlice({
     isAllProduct: false,
     parentCategoryId: 27,
     singleProductAll: [],
+    outStockProductAll: [],
+    filterData: [],
+    isfilter: false,
   },
   reducers: {
     addParentCategoryId(state, action) {
@@ -51,15 +55,17 @@ export const CategoryPageSlice = createSlice({
     addSingleAllProduct: (state, action) => {
       state.singleProductAll = action.payload;
     },
-    clearSingleProducts: state => {
-      state.singleProduct = [];
-      state.singleProductAll = [];
-    },
     addSetProduct: (state, action) => {
       state.setProduct = action.payload;
     },
+    addSetProductAll: (state, action) => {
+      state.setProductAll = action.payload;
+    },
     addOutStockProduct: (state, action) => {
       state.outStockProduct = action.payload;
+    },
+    addOutStockProductAll: (state, action) => {
+      state.outStockProductAll = action.payload;
     },
     addHappySubscriber: (state, action) => {
       state.happySucbscriber = action.payload;
@@ -72,6 +78,12 @@ export const CategoryPageSlice = createSlice({
     },
     addCategoryTrendingProduct(state, action) {
       state.tendingItems = action.payload;
+    },
+    addFilterData(state, action) {
+      state.filterData = action.payload;
+    },
+    isFilterApplied(state, action) {
+      state.isfilter = action.payload;
     },
   },
 });
@@ -93,5 +105,8 @@ export const {
   addAllProduct,
   addParentCategoryId,
   addSingleAllProduct,
-  clearSingleProducts,
+  addSetProductAll,
+  addOutStockProductAll,
+  addFilterData,
+  isFilterApplied,
 } = CategoryPageSlice.actions;

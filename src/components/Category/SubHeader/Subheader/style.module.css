@@ -79,7 +79,7 @@
   @apply my-9 mobile:my-[26px] w-full h-[1.5px] bg-[#DDDDDF];
 }
 .btn_container {
-  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[196px] h-[40px];
+  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[196px] h-[40px] cursor-pointer;
 }
 .apply_btn {
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
