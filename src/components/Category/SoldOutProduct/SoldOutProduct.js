@@ -35,6 +35,9 @@ const SoldOutProduct = () => {
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
   const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+
+  // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
+
   const subCategoryId = localStorage
     .getItem("subCategoryId")
     ?.replace(/"/g, "");
