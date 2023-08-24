@@ -62,7 +62,6 @@ const SubHeader = () => {
         .toLowerCase()}
       `,
     );
-    // console.log(mainCategory?.rootID, "parent", item?.id, "child")
     dispatch(addSubCategoryId(item?.id));
     localStorage.setItem("category", JSON.stringify(mainCategory?.cat_name));
     localStorage.setItem("categoryId", JSON.stringify(mainCategory?.id));

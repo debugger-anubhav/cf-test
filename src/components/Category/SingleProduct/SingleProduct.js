@@ -22,10 +22,12 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const homePageReduxData = useSelector(state => state.homePagedata);
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
 
+  console.log(homePageReduxData?.cityId, "homePageReduxData?.cityId");
   const bodyData = {
     subCategoryId,
     parentCategoryId: categoryId,
