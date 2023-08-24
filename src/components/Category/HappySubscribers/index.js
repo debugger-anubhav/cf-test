@@ -24,7 +24,6 @@ const HappySubscribers = () => {
   const {refetch: getHappySubscriber} = useQuery(
     "happy-subscriber",
     endPoints.categoryHappySubscriber,
-    // `?parentCategoryId=${homePageReduxData?.productName?.rootID}`,
     `?parentCategoryId=14`,
   );
   const text = "placeholder placeholder placeholder";
@@ -46,24 +45,19 @@ const HappySubscribers = () => {
       <h2 className={styles.head}>{str.head}</h2>
       <p className={styles.desc}>{str.desc}</p>
       <div className={styles.cards_wrapper}>
-        {/* {HappySubscriber?.map((item, index) => { */}
         {data?.map((item, index) => {
-          // console.log(item, "itemsss")
           return (
             <div className={styles.card_div} key={index.toString()}>
               <div className={styles.video}>
                 <video className={styles.video_player} ref={videoRef}>
                   <source src={item?.file_name} type="video/mp4" />
-                  {/* Add more <source> elements for different video formats (WebM, Ogg, etc.) */}
                   Your browser does not support the video tag.
                 </video>
                 <div
                   className={styles.play_button_container}
                   onClick={() => handlePlayButtonClick()}></div>
               </div>
-              {/* <h3 className={styles.video_name}>{item?.name}</h3> */}
               <h3 className={styles.video_name}>{nameText}</h3>
-              {/* <p className={styles.video_desc}>{item?.desc}</p> */}
               <p className={styles.video_desc}>{text}</p>
             </div>
           );

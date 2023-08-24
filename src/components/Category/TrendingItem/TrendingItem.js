@@ -9,9 +9,9 @@ import {productImageBaseUrl} from "@/constants/constant";
 
 const TrendingItem = () => {
   const dispatch = useDispatch();
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const cityId = homePageReduxData.cityId;
+  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
 
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",

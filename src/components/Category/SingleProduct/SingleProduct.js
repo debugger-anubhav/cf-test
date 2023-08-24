@@ -22,25 +22,25 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const homePageReduxData = useSelector(state => state.homePagedata);
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
+  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
 
-  console.log(homePageReduxData?.cityId, "homePageReduxData?.cityId");
   const bodyData = {
     subCategoryId,
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
+
   const bodyDataAll = {
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -56,22 +56,12 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const singleItemLength =
     categoryPageReduxData?.categoryMetaData?.totalProduct;
 
-  // console.log(
-  //   categoryPageReduxData?.isfilter
-  //     ? categoryPageReduxData?.filteredItems
-  //     : null,
-  // );
-
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
     "POST",
     endPoints.categorySingleProduct,
     data,
   );
-
-  // useEffect(() => {
-  //   setPageNo(1)
-  // }, [categoryPageReduxData?.isfilter])
 
   useEffect(() => {
     getSingleProducts()
@@ -127,7 +117,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             dataLength={singleItemData?.length}
             next={() => {
               if (pageNo < totalPage) {
-                console.log(pageNo, "page nooo");
                 setPageNo(prev => prev + 1);
               }
             }}
@@ -164,9 +153,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
               })}
             </div>
           </InfiniteScroll>
-          {/* {categoryPageReduxData?.singleProduct?.length === singleItemLength ? (
-        <ProductSet />
-      ) : null} */}
         </div>
       ) : null}
       {singleItemData?.length === singleItemLength ? <ProductSet /> : null}

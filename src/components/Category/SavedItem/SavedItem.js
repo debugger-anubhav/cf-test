@@ -10,12 +10,13 @@ import {productImageBaseUrl} from "@/constants/constant";
 const SavedItem = () => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
 
   const {refetch: getSavedItems} = useQuery(
     "saved-items",
     endPoints.savedItems,
     // `?parentCategoryId=${homePageReduxData?.productName?.rootID}`,
-    `?cityId=50&userId=84285`,
+    `?cityId=${cityId}&userId=84285`,
   );
 
   useEffect(() => {
