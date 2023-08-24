@@ -33,8 +33,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
-  console.log(typeof cityId, "localStorage.getItem");
-
   const bodyData = {
     subCategoryId,
     parentCategoryId: categoryId,
@@ -56,12 +54,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     sortKey: categoryPageReduxData?.sortKey,
   };
 
-  // const productCardWidth={
-  //   width:"100% !important"
-  // }
-
-  const productCardWidth =
-    "xl:!w-full lg:!w-[20rem] ms:!w-[18rem] xs:!w-[15rem] !w-full ";
+  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
   const data =
     productname === "all" || categoryPageReduxData?.isAllProduct

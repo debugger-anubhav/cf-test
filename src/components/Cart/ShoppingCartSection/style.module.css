@@ -1,0 +1,57 @@
+.main_container {
+  @apply py-10 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex justify-between;
+}
+.head {
+  @apply text-24 font-medium leading-8 tracking-0.48 text-45454A;
+}
+.card_wrapper {
+  @apply mt-8 flex flex-col gap-16;
+}
+.single_product_wrapper {
+  @apply w-[537px] h-[98px] flex gap-6;
+}
+.img_div {
+  @apply w-[132px] h-[98px];
+}
+.img {
+  @apply w-full h-full;
+}
+.name_div {
+  @apply flex gap-4;
+}
+.product_name {
+  @apply text-20 w-[337px] leading-6 tracking-0.4 text-45454A font-medium;
+}
+.price_div {
+  @apply flex mt-4 items-center gap-6;
+}
+.incre_decre_div {
+  @apply flex py-1 px-2 items-center gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
+}
+.span_item {
+  @apply text-18 font-normal hover:text-[#5774AC] cursor-pointer;
+}
+.deposit_txt {
+  @apply text-14 font-medium text-71717A leading-5;
+}
+.currentPrice {
+  @apply text-222 font-medium text-20 tracking-0.4 flex items-center;
+}
+.originalPrice {
+  @apply text-9A9AA2 text-16 tracking-0.3 line-through;
+}
+.delete_icon {
+  @apply w-6 h-6 text-71717A hover:text-[#D96060] cursor-pointer;
+}
+.city_shield_div {
+  @apply p-4 w-[440px] bg-fff border border-DDDDDF rounded-xl;
+}
+.city_shield_head {
+  @apply text-16 mobile:text-20 pl-1 font-semibold leading-[30px] text-[#2D9469] uppercase;
+}
+.city_shield_head_div {
+  @apply flex items-center justify-between;
+}
+.verify_icon_div {
+  @apply flex;
+}
