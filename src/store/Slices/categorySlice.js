@@ -23,6 +23,7 @@ export const CategoryPageSlice = createSlice({
     outStockProductAll: [],
     filterData: [],
     isfilter: false,
+    sortKey: ["subproducts", "ASC"],
   },
   reducers: {
     addParentCategoryId(state, action) {
@@ -85,11 +86,15 @@ export const CategoryPageSlice = createSlice({
     isFilterApplied(state, action) {
       state.isfilter = action.payload;
     },
+    addSortKey(state, action) {
+      state.sortKey = action.payload;
+    },
   },
 });
 
 export const {
   addFilteredItem,
+  addSortKey,
   addPrdoucWithFilter,
   addSingleProduct,
   addSetProduct,
