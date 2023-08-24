@@ -10,6 +10,7 @@ import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
+import Link from "next/link";
 import {setLocalStorage} from "@/constants/constant";
 
 const HEADER_HEIGHT = 48;
@@ -112,11 +113,13 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Image
-              src={Icons.shoppingCard}
-              alt="shopping-card-icon"
-              className={styles.header_shopping_card}
-            />
+            <Link href={`/cart`}>
+              <Image
+                src={Icons.shoppingCard}
+                alt="shopping-card-icon"
+                className={styles.header_shopping_card}
+              />
+            </Link>
             <Image
               src={Icons.Profile}
               alt="profile-icon"
