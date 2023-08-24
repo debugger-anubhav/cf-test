@@ -7,9 +7,11 @@ import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   const [state, setState] = React.useState({
@@ -75,7 +77,16 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               <p
                 key={index.toString()}
                 className={styles.menu_item}
-                onClick={() => console.log(item.link)}>
+                onClick={() => {
+                  router.push(
+                    `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                      .trim()
+                      .split(" ")
+                      .join("-")
+                      .toLowerCase()}
+                    `,
+                  );
+                }}>
                 {item?.cat_name}
               </p>
             ))}

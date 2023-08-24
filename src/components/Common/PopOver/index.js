@@ -20,6 +20,7 @@ import {
   addSingleAllProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
+import {setLocalStorage} from "@/constants/constant";
 
 const PopOver = ({list, item, parentCategoryId}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -44,10 +45,14 @@ const PopOver = ({list, item, parentCategoryId}) => {
     );
     dispatch(addFilteredItem([]));
     dispatch(addProductCategory(hoverRef.current));
-    localStorage.setItem("category", JSON.stringify(hoverRef.current));
+
+    if (typeof window !== "undefined") {
+      setLocalStorage("category", hoverRef.current);
+      setLocalStorage("subCategory", "All");
+    }
+
     dispatch(addParentCategoryId(parentCategoryId));
     dispatch(addProductName(item));
-    localStorage.setItem("subCategory", JSON.stringify("All"));
     dispatch(addSubCategoryId(""));
     dispatch(addProductName(null));
     dispatch(addAllProduct(true));
@@ -65,7 +70,6 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
-    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
         .trim()
@@ -74,12 +78,15 @@ const PopOver = ({list, item, parentCategoryId}) => {
         .toLowerCase()}
       `,
     );
+
+    if (typeof window !== "undefined") {
+      setLocalStorage("category", hoverRef.current);
+      setLocalStorage("categoryId", item?.rootID);
+      setLocalStorage("subCategory", item?.cat_name);
+      setLocalStorage("subCategoryId", item?.id);
+    }
     dispatch(addSubCategoryId(item?.id));
-    localStorage.setItem("category", JSON.stringify(hoverRef.current));
-    localStorage.setItem("categoryId", JSON.stringify(item?.rootID));
     dispatch(addProductName(item));
-    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
-    localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
     dispatch(addProductCategory(hoverRef.current));
     console.log(previousSubCategory !== item?.cat_name, "state");
     if (previousSubCategory !== item?.cat_name) {

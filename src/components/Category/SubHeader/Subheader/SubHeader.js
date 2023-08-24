@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
-import {categoryIconsUrl} from "@/constants/constant";
+import {categoryIconsUrl, setLocalStorage} from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
 import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
 import {useDispatch, useSelector} from "react-redux";
@@ -33,9 +33,6 @@ const SubHeader = () => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  const [isApplyFilter, setIsApplyFilter] = useState(false);
-  console.log(setIsApplyFilter);
-
   const category = localStorage.getItem("category").replace(/"/g, "");
   const categoryId = localStorage.getItem("categoryId");
   const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
@@ -53,7 +50,9 @@ const SubHeader = () => {
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
-    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
+    if (typeof window !== "undefined") {
+      setLocalStorage("subCategory", item?.cat_name);
+    }
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
         .trim()
@@ -62,13 +61,17 @@ const SubHeader = () => {
         .toLowerCase()}
       `,
     );
-    // console.log(mainCategory?.rootID, "parent", item?.id, "child")
     dispatch(addSubCategoryId(item?.id));
-    localStorage.setItem("category", JSON.stringify(mainCategory?.cat_name));
-    localStorage.setItem("categoryId", JSON.stringify(mainCategory?.id));
+
+    if (typeof window !== "undefined") {
+      setLocalStorage("category", mainCategory?.cat_name);
+      setLocalStorage("categoryId", mainCategory?.id);
+      setLocalStorage("subCategory", item?.cat_name);
+      setLocalStorage("subCategoryId", item?.id);
+    }
+
     dispatch(addProductName(item));
-    localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
-    localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
+
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
       dispatch(addSetProduct([]));
@@ -94,17 +97,11 @@ const SubHeader = () => {
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              <p className={styles.route_text}>
-                {category}
-                {/* {homePageReduxData?.productCategory} */}
-              </p>
+              <p className={styles.route_text}>{category}</p>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              <p className={styles.route_text}>
-                {subCategory}
-                {/* {homePageReduxData?.productName?.cat_name} */}
-              </p>
+              <p className={styles.route_text}>{subCategory}</p>
             </li>
           </ul>
         </div>
@@ -171,7 +168,7 @@ const SubHeader = () => {
               setfiltereSaved={setfiltereSaved}
               setEmptyFilterItem={setEmptyFilterItem}
               filterSaved={filterSaved}
-              isApplyFilter={isApplyFilter}
+              isApplyFilter={false}
               setPageNo={setPageNo}
             />
           </div>
@@ -182,7 +179,7 @@ const SubHeader = () => {
                 btnName={"click"}
                 filterName={"Default"}
                 setfiltereSaved={setfiltereSaved}
-                isApplyFilter={isApplyFilter}
+                isApplyFilter={false}
                 setPageNo={setPageNo}
               />
             </div>

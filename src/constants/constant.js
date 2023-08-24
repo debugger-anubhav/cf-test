@@ -373,3 +373,8 @@ export const categoryImageBaseUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/";
 export const categoryIconsUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+
+export function setLocalStorage(key, value) {
+  const data = JSON.stringify(value);
+  return window.localStorage.setItem(key, data);
+}
