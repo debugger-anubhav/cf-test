@@ -25,20 +25,22 @@ const SingleProduct = ({pageNo, setPageNo}) => {
 
   const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
+  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
 
   const bodyData = {
     subCategoryId,
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
+
   const bodyDataAll = {
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -54,22 +56,12 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const singleItemLength =
     categoryPageReduxData?.categoryMetaData?.totalProduct;
 
-  // console.log(
-  //   categoryPageReduxData?.isfilter
-  //     ? categoryPageReduxData?.filteredItems
-  //     : null,
-  // );
-
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
     "POST",
     endPoints.categorySingleProduct,
     data,
   );
-
-  // useEffect(() => {
-  //   setPageNo(1)
-  // }, [categoryPageReduxData?.isfilter])
 
   useEffect(() => {
     getSingleProducts()
@@ -161,9 +153,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
               })}
             </div>
           </InfiniteScroll>
-          {/* {categoryPageReduxData?.singleProduct?.length === singleItemLength ? (
-        <ProductSet />
-      ) : null} */}
         </div>
       ) : null}
       {singleItemData?.length === singleItemLength ? <ProductSet /> : null}

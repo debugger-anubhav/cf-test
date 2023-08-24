@@ -3,25 +3,23 @@ import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
-import {useSelector} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 
 const Footer = ({params}) => {
-  // console.log(params, "params")
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
   const str = string.common_components.Footer;
 
   const [content, setContent] = useState([]);
 
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
+  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
 
   const {refetch: getcategoryContent} = useQuery(
     "category-content",
     endPoints.categoryContent,
-    `?cityId=${homePageReduxData?.cityId}&categoryId=27`,
-    // `?cityId=46&categoryId=27`,
+    `?cityId=${cityId}&categoryId=27`,
   );
 
   useEffect(() => {
@@ -44,7 +42,6 @@ const Footer = ({params}) => {
               className={styles.desc}
               dangerouslySetInnerHTML={{__html: str.cat_desc}}
             />
-            {/* <p className={styles.desc}>{str.cat_desc}</p> */}
           </>
         );
       })}
@@ -84,7 +81,6 @@ const Footer = ({params}) => {
                 key={index.toString()}
                 alt={item?.icon}
                 src={item?.icon}
-                // className={styles.sm_icon}
                 onClick={() => console.log("cliked")}
               />
             ))}
@@ -113,7 +109,6 @@ const Footer = ({params}) => {
               key={index.toString()}
               alt={item?.icon}
               src={item?.icon}
-              // className={styles.sm_icon}
               onClick={() => console.log("cliked")}
             />
           ))}
