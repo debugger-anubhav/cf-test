@@ -46,6 +46,13 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     sortKey: categoryPageReduxData?.sortKey,
   };
 
+  // const productCardWidth={
+  //   width:"100% !important"
+  // }
+
+  const productCardWidth =
+    "xl:!w-full lg:!w-[20rem] ms:!w-[18rem] xs:!w-[15rem] !w-full ";
+
   const data =
     productname === "all" || categoryPageReduxData?.isAllProduct
       ? bodyDataAll
@@ -66,10 +73,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     endPoints.categorySingleProduct,
     data,
   );
-
-  // useEffect(() => {
-  //   setPageNo(1)
-  // }, [categoryPageReduxData?.isfilter])
 
   useEffect(() => {
     getSingleProducts()
@@ -137,7 +140,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                     className={style.card_box_product}
                     key={index.toString()}>
                     <Card
-                      productWidth={style.productCardWidth}
+                      productWidth={productCardWidth}
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
                       }`}
