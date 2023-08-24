@@ -33,9 +33,9 @@ const SubHeader = () => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  const category = localStorage.getItem("category").replace(/"/g, "");
+  const category = localStorage.getItem("category")?.replace(/"/g, "");
   const categoryId = localStorage.getItem("categoryId");
-  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  const subCategory = localStorage.getItem("subCategory")?.replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId");
 
   const {refetch: getFilterList} = useQuery(

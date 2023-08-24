@@ -12,7 +12,11 @@ import {productImageBaseUrl} from "@/constants/constant";
 const RecentlyViewedProduct = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",

@@ -97,6 +97,7 @@ export default function Home() {
   const queryClient = new QueryClient();
 
   const myElementRef = useRef();
+  localStorage.setItem("cityId", 46);
 
   return (
     <QueryClientProvider client={queryClient}>

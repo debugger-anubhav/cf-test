@@ -23,9 +23,17 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
-  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  console.log(typeof cityId, "localStorage.getItem");
 
   const bodyData = {
     subCategoryId,

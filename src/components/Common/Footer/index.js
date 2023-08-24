@@ -14,7 +14,11 @@ const Footer = ({params}) => {
   const [content, setContent] = useState([]);
 
   // const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: getcategoryContent} = useQuery(
     "category-content",
