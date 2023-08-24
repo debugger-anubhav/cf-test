@@ -25,11 +25,8 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
     bottom: false,
   });
 
-  const [itemCount, setItemCount] = useState(7);
+  const itemCount = 7;
   const [selectedOption, setSelectedOption] = useState("Default");
-  // setItemCount(1);
-  console.log(setItemCount, "setItemCount");
-
   const defaultKey = ["subproducts", "ASC"];
   const newSortKey = ["created", "DESC"];
   const highToLowKey = ["sale_price", "DESC"];
