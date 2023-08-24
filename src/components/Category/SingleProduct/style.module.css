@@ -1,8 +1,9 @@
 .main_container {
-  @apply flex flex-wrap justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;
+  @apply flex flex-wrap md:grid justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;
+  grid-template-columns: auto auto auto;
 }
 .card_box_product {
-  @apply flex flex-wrap mr-2 2xl:mr-3 3xl:mr-4  mb-4 p-3 bg-white w-fit last-screen:mx-auto;
+  @apply mr-2 2xl:mr-3 3xl:mr-4  mb-4 p-3 bg-white w-fit last-screen:mx-auto;
   cursor: pointer;
 }
 .card_box_product:hover {
@@ -10,5 +11,6 @@
 }
 
 .productCardWidth {
-  @apply macbook:w-[23rem] 2xl:w-[25rem] 3xl:w-[27rem] 4xl:w-[32rem];
+  /* @apply macbook:w-[23rem] 2xl:w-[25rem] 3xl:w-[27rem] 4xl:w-[32rem]; */
+  width: 100%;
 }

@@ -34,9 +34,9 @@ const BannerSection = ({params}) => {
       <div>
         <BannerOne />
         <BannerTwo />
+        <ProductVideo params={params} />
         <BannerThree />
         <BannerFive />
-        <ProductVideo params={params} />
       </div>
     );
   }

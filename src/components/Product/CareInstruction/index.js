@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import {HomePageImages} from "@/assets/images";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -31,8 +31,8 @@ const CareInstruction = ({params}) => {
           {pageData?.careInstructions?.map((item, index) => (
             <div key={index}>
               <img
-                // src={`${productPageImagesBaseUrl + item?.file_name}`}
-                src={HomePageImages.office}
+                src={`${productPageImagesBaseUrl + item?.file_name}`}
+                // src={HomePageImages.office}
                 className={styles.img}
                 alt="card_img"
               />

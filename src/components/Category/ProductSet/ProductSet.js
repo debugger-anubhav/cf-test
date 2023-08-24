@@ -24,9 +24,15 @@ const ProductSet = () => {
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {productname} = useParams();
 

@@ -23,9 +23,17 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
-  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  console.log(typeof cityId, "localStorage.getItem");
 
   const bodyData = {
     subCategoryId,
@@ -47,6 +55,13 @@ const SingleProduct = ({pageNo, setPageNo}) => {
       : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
+
+  // const productCardWidth={
+  //   width:"100% !important"
+  // }
+
+  const productCardWidth =
+    "xl:!w-full lg:!w-[20rem] ms:!w-[18rem] xs:!w-[15rem] !w-full ";
 
   const data =
     productname === "all" || categoryPageReduxData?.isAllProduct
@@ -129,7 +144,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                     className={style.card_box_product}
                     key={index.toString()}>
                     <Card
-                      productWidth={style.productCardWidth}
+                      productWidth={productCardWidth}
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
                       }`}

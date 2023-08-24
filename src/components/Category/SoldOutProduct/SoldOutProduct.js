@@ -34,9 +34,15 @@ const SoldOutProduct = () => {
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
     subCategoryId,

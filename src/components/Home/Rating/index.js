@@ -20,7 +20,11 @@ const CustomerRating = () => {
   const router = useRouter();
 
   // const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: getGoogleReviews} = useQuery(
     "google-reviews",

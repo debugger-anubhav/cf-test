@@ -11,7 +11,11 @@ const TrendingItem = () => {
   const dispatch = useDispatch();
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",

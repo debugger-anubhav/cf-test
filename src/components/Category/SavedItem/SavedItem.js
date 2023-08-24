@@ -10,7 +10,11 @@ import {productImageBaseUrl} from "@/constants/constant";
 const SavedItem = () => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const cityId = localStorage.getItem("cityId").replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: getSavedItems} = useQuery(
     "saved-items",
