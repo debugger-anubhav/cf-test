@@ -18,6 +18,7 @@ export default function CategoryPopover({
   filterName,
   isApplyFilter,
   setPageNo,
+  setFilterListed,
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -85,6 +86,7 @@ export default function CategoryPopover({
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
+    setFilterListed(true);
     setAnchorEl(null);
   };
 
