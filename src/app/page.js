@@ -21,6 +21,7 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
+import {useChatScript} from "../../useChatScript";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -101,6 +102,7 @@ export default function Home() {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <div ref={myElementRef} className="large_layout">
+          {useChatScript()}
           <AnnouncementBar />
           <Header />
           <MenuList />

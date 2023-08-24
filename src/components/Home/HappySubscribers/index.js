@@ -17,7 +17,7 @@ const HappySubscribers = ({page, params}) => {
 
   const getVideosForProductPage = () => {
     axios
-      .get(baseURL + endPoints.productPage.happySubscribers)
+      .get(baseURL + endPoints.productPage.happySubscribers(params.productId))
       .then(res => {
         dispatch(getSubscribersVideos(res?.data?.data));
         setData(res?.data?.data);
@@ -111,40 +111,45 @@ const HappySubscribers = ({page, params}) => {
   // const HappySubscriberVideosArray =
   //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
 
-  return (
-    <div className={styles.happy_subscribers_wrapper}>
-      <h2 className={styles.label}>{str.label}</h2>
-      <h2 className={styles.head}>{str.head}</h2>
-      <p className={styles.desc}>{str.desc}</p>
+  if (data?.length > 0) {
+    return (
+      <div
+        className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
+          styles.happy_subscribers_wrapper
+        }`}>
+        <h2 className={styles.label}>{str.label}</h2>
+        <h2 className={styles.head}>{str.head}</h2>
+        <p className={styles.desc}>{str.desc}</p>
 
-      <div className={styles.cards_wrapper} ref={sliderRef}>
-        {data?.map((item, index) => (
-          <div className={styles.card_div} key={index.toString()}>
-            <div className={styles.video}>
-              {/* <video className={styles.video_player} ref={videoRef}>
+        <div className={styles.cards_wrapper} ref={sliderRef}>
+          {data?.map((item, index) => (
+            <div className={styles.card_div} key={index.toString()}>
+              <div className={styles.video}>
+                {/* <video className={styles.video_player} ref={videoRef}>
                 <source src={item.file_name} type="video/mp4" />
                 Your browser does not support the video tag.
               </video> */}
-              <iframe
-                width="256"
-                height="152"
-                // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
-                src={item.file_name}
-                title="YouTube video player"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-              {/* <div
+                <iframe
+                  width="256"
+                  height="152"
+                  // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
+                  src={item.file_name}
+                  title="YouTube video player"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+                {/* <div
                 className={styles.play_button_container}
                 onClick={() => handlePlayButtonClick(item.file_name)}></div> */}
+              </div>
+              <h3 className={styles.video_name}>{item?.title}</h3>
+              <p className={styles.video_desc}>
+                {item?.description.replace(/<[^>]*>/g, "")}
+              </p>
             </div>
-            <h3 className={styles.video_name}>{item?.title}</h3>
-            <p className={styles.video_desc}>
-              {item?.description.replace(/<[^>]*>/g, "")}
-            </p>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 export default HappySubscribers;

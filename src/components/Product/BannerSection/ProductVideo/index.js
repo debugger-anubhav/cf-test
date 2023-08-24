@@ -6,7 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {getProductVideos} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 
-const ProductVideo = () => {
+const ProductVideo = ({params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData.productVideos);
 
@@ -20,7 +20,7 @@ const ProductVideo = () => {
 
   const getVideos = () => {
     axios
-      .get(baseURL + endPoints.productPage.productVideos)
+      .get(baseURL + endPoints.productPage.productVideos(params.productId))
       .then(res => {
         dispatch(getProductVideos(res?.data?.data));
         console.log(res, "banner video");
@@ -34,27 +34,29 @@ const ProductVideo = () => {
     getVideos();
   }, []);
 
-  return (
-    <div className={styles.main_container}>
-      <div className={styles.video}>
-        <iframe
-          className={styles.video}
-          // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
-          src={pageData?.[0]?.video_name}
-          title="YouTube video player"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+  if (pageData.length > 0) {
+    return (
+      <div className={styles.main_container}>
+        <div className={styles.video}>
+          <iframe
+            className={styles.video}
+            // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
+            src={pageData?.[0]?.video_name}
+            title="YouTube video player"
+            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
 
-        {/* <div
+          {/* <div
           className={styles.play_button_container}
           onClick={() => handlePlayButtonClick()}></div> */}
+        </div>
+        <div>
+          <p className={styles.head}>{pageData?.[0]?.file_title}</p>
+          <p className={styles.desc}>{pageData?.[0]?.file_description}</p>
+        </div>
       </div>
-      <div>
-        <p className={styles.head}>{pageData?.[0]?.file_title}</p>
-        <p className={styles.desc}>{pageData?.[0]?.file_description}</p>
-      </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default ProductVideo;

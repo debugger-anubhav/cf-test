@@ -38,13 +38,13 @@ const ProductPage = () => {
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
           <CompleteTheLook params={params} />
-          <BannerSection />
-          <CareInstruction />
+          <BannerSection params={params} />
+          <CareInstruction params={params} />
           <RecentlyViewedProduct />
           <YouMightLike params={params} />
-          <CustomerRating />
-          <HappySubscribers page={"product"} />
-          <QuesAndAns />
+          <CustomerRating params={params} />
+          <HappySubscribers page={"product"} params={params} />
+          <QuesAndAns params={params} />
           <Footer />
         </div>
       </Provider>

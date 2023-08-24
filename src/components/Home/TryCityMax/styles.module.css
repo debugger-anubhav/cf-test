@@ -72,3 +72,37 @@
 .Skeleton_button {
   @apply h-20 w-60;
 }
+
+.drawer_wrapper {
+  /* @apply min-w-[390px]; */
+}
+.sidebar_wrapper {
+  @apply w-full p-[48px];
+}
+.sidebar_header {
+  @apply flex justify-between;
+}
+.sidebar_header_subheading {
+  @apply text-base text-9A9AA2 font-Poppins font-medium leading-5;
+}
+.sidebar_header_heading {
+  @apply text-24 font-Poppins text-45454A font-medium leading-8;
+}
+.sidebar_benefit_wrapper {
+  @apply py-8 flex w-full;
+}
+.sidebar_number {
+  @apply flex;
+}
+.sidebar_number p {
+  @apply p-2 rounded-[50%] border-2 font-bold text-sm border-45454A w-6 h-6 flex justify-center items-center;
+}
+.sidebar_detailing {
+  @apply flex flex-col w-full ml-3;
+}
+.sidebar_detail_heading {
+  @apply font-Poppins text-222 text-20 font-medium leading-6;
+}
+.sidebar_detail_subheading {
+  @apply text-base text-71717A font-Poppins leading-6;
+}

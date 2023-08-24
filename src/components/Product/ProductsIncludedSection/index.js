@@ -70,17 +70,19 @@ const ItemsIncluded = () => {
                 </div>
               </div>
             </div>
-            <div className={styles.right_div}>
-              <p className={styles.info_subhead}>Features</p>
-              <div className={styles.features_wrappers}>
-                {item.features?.map((feature, index) => (
-                  <li key={index} className={styles.feature}>
-                    <div className={styles.dot}></div>
-                    {feature}
-                  </li>
-                ))}
+            {item.features && (
+              <div className={styles.right_div}>
+                <p className={styles.info_subhead}>Features</p>
+                <div className={styles.features_wrappers}>
+                  {item.features?.map((feature, index) => (
+                    <li key={index} className={styles.feature}>
+                      <div className={styles.dot}></div>
+                      {feature}
+                    </li>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
         ))}
       </div>

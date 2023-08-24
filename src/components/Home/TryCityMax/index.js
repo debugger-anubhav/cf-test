@@ -4,8 +4,11 @@ import Image from "next/image";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
+import {useRouter} from "next/navigation";
+import SideDrawer from "./sideDrawer";
 
 const TryCityMax = () => {
+  const router = useRouter();
   const benefitsOfCity = [
     {
       id: 1,
@@ -60,7 +63,9 @@ const TryCityMax = () => {
             Unlimited furniture and appliances for
             <br /> lifetime. Starting at just ₹2,999/month.
           </p>
-          <button className={styles.check_button}>
+          <button
+            className={styles.check_button}
+            onClick={() => router.push("https://cityfurnish.com/citymax")}>
             <p className={styles.check_button_paragraph}>Check our plans</p>
             <ForwardArrow
               size={20}
@@ -88,14 +93,15 @@ const TryCityMax = () => {
                 );
               })}
             </div>
-            <button className={styles.how_it_works_button}>
+            {/* <button className={styles.how_it_works_button}>
               <p className={styles.how_it_works_paragraph}>How it works</p>
               <ForwardArrow
                 size={18}
                 color={"#597492"}
                 className={styles.forward_arrow}
               />
-            </button>
+            </button> */}
+            <SideDrawer />
             <hr className={styles.underline} />
           </div>
         </div>

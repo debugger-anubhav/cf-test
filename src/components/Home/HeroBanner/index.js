@@ -43,7 +43,12 @@ const HeroBanner = () => {
       </div>
 
       <div className={styles.hero_banner_wrapper}>
-        <img src={HeroFrame} alt="hero-banner" className="w-full" />
+        <img
+          src={HeroFrame}
+          alt="hero-banner"
+          className="w-full"
+          onClick={() => router.push("https://cityfurnish.com/<city>/rent")}
+        />
       </div>
     </>
   );

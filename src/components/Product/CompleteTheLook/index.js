@@ -55,32 +55,34 @@ const CompleteTheLook = ({params}) => {
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
 
-  return (
-    <div className={styles.main_container}>
-      <h2 className={styles.heading}>Complete The Look</h2>
+  if (pageData?.completeTheLook.length > 0) {
+    return (
+      <div className={styles.main_container}>
+        <h2 className={styles.heading}>Complete The Look</h2>
 
-      <div className={styles.card_wrapper} ref={sliderRef}>
-        {pageData?.completeTheLook?.map((item, index) => (
-          <div key={index}>
-            <Card
-              cardImage={`${
-                productPageImagesBaseUrl + item?.image?.split(",")[0]
-              }`}
-              discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.sale_price,
-              ).toFixed(2)}%`}
-              originalPrice={item?.price}
-              currentPrice={item?.sale_price}
-              desc={item?.product_name}
-              isHover={false}
-              productId={item?.id}
-              productName={item?.product_name.replace(/ /g, "-")}
-            />
-          </div>
-        ))}
+        <div className={styles.card_wrapper} ref={sliderRef}>
+          {pageData?.completeTheLook?.map((item, index) => (
+            <div key={index}>
+              <Card
+                cardImage={`${
+                  productPageImagesBaseUrl + item?.image?.split(",")[0]
+                }`}
+                discount={`${Math.round(
+                  ((item?.price - item?.sale_price) * 100) / item?.sale_price,
+                ).toFixed(2)}%`}
+                originalPrice={item?.price}
+                currentPrice={item?.sale_price}
+                desc={item?.product_name}
+                isHover={false}
+                productId={item?.id}
+                productName={item?.product_name.replace(/ /g, "-")}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default CompleteTheLook;
