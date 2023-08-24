@@ -6,8 +6,9 @@ import {addNewlaunchedProducts} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {Skeleton} from "@mui/material";
-
+import {useRouter} from "next/navigation";
 const NewlyLaunched = () => {
+  const router = useRouter();
   const heading = strings.landing_page.Newlylaunced.heading;
   const subHeading = strings.landing_page.Newlylaunced.productRent;
 
@@ -57,7 +58,11 @@ const NewlyLaunched = () => {
             className={`${styles.width_container} relative`}
             // className={`${styles.width_container} relative bg-red-400`}
             key={index.toString()}>
-            <div className="w-full h-auto ">
+            <div
+              className="w-full h-auto cursor-pointer "
+              onClick={() =>
+                router.push(`/things/${ele.id}/${ele.product_name}`)
+              }>
               <img
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +

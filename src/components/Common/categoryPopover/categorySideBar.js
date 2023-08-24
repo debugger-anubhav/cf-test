@@ -7,21 +7,33 @@ import {Close, DownPopUpArrow} from "@/assets/icon";
 import {CategoryFilterData, sortByText} from "@/constants/constant";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addFilteredItem, isFilterApplied} from "@/store/Slices/categorySlice";
+import {
+  addFilteredItem,
+  addOutStockProduct,
+  // addOutStockProductAll,
+  addSetProduct,
+  // addSetProductAll,
+  addSingleProduct,
+  addSortKey,
+  isFilterApplied,
+} from "@/store/Slices/categorySlice";
 
-export default function FilterSortDrawer({filterName}) {
+export default function FilterSortDrawer({filterName, setPageNo}) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const [state, setState] = React.useState({
     bottom: false,
   });
 
-  const [itemCount, setItemCount] = useState(7);
-  // setItemCount(1);
-  console.log(setItemCount, "setItemCount");
+  const itemCount = 7;
+  const [selectedOption, setSelectedOption] = useState("Default");
+  const defaultKey = ["subproducts", "ASC"];
+  const newSortKey = ["created", "DESC"];
+  const highToLowKey = ["sale_price", "DESC"];
+  const lowToHighKey = ["sale_price", "ASC"];
 
   const loadMoreItems = () => {
-    return prevCount => prevCount + 7; // Increment the item count by 7
+    return prevCount => prevCount + 7;
   };
 
   const toggleDrawer = (anchor, open) => event => {
@@ -36,7 +48,6 @@ export default function FilterSortDrawer({filterName}) {
   };
 
   const handleFilteredItems = e => {
-    console.log(e.target.value, "e.target.value");
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     if (e.target.checked) {
       updatedFilteredList = [
@@ -52,15 +63,35 @@ export default function FilterSortDrawer({filterName}) {
     dispatch(addFilteredItem(updatedFilteredList));
   };
 
-  const handleApply = () => {
-    dispatch(isFilterApplied(true));
-    // setAnchorEl(null);
+  const handleSort = (item, index) => {
+    setPageNo(1);
+    setSelectedOption(item);
+    if (setSelectedOption === "New") {
+      dispatch(addSortKey(newSortKey));
+    } else if (setSelectedOption === "Price Low to High") {
+      dispatch(addSortKey(lowToHighKey));
+    } else if (setSelectedOption === "Price Hight to low") {
+      dispatch(addSortKey(highToLowKey));
+    } else {
+      dispatch(addSortKey(defaultKey));
+    }
+
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
     setState({...state, bottom: false});
-    // toggleDrawer("bottom", false)
+  };
+
+  const handleApply = () => {
+    setPageNo(1);
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    dispatch(isFilterApplied(true));
+    setState({...state, bottom: false});
   };
 
   const filtereData = categoryPageReduxData?.filterData;
-  console.log(filtereData, "filtereData");
 
   const list = anchor => (
     <div
@@ -127,6 +158,8 @@ export default function FilterSortDrawer({filterName}) {
                         id={index}
                         name="sortBy"
                         value={ele.text}
+                        checked={selectedOption === ele.text}
+                        onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );

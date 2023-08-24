@@ -39,14 +39,20 @@ const SoldOutProduct = () => {
     parentCategoryId: homePageReduxData?.productName?.rootID,
     cityId: 50,
     pageNo,
-    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const bodyDataAll = {
     parentCategoryId: categoryPageReduxData?.parentCategoryId,
     cityId: 50,
     pageNo,
-    // filterList: categoryPageReduxData?.isfilter ? (categoryPageReduxData?.filteredItems) : null,
+    filterList: categoryPageReduxData?.isfilter
+      ? categoryPageReduxData?.filteredItems
+      : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const payload =
@@ -66,32 +72,36 @@ const SoldOutProduct = () => {
       .then(res => {
         setTotalPage(res?.data?.meta?.totalPage);
         dispatch(addSubCategoryMetaOutStockProduct(res?.data?.meta));
-        dispatch(
-          addOutStockProduct([
-            ...categoryPageReduxData?.outStockProduct,
-            ...res?.data?.products,
-          ]),
-        );
-        if (categoryPageReduxData?.isAllProduct) {
-          console.log("in all true");
-          dispatch(
-            addOutStockProductAll([
-              ...categoryPageReduxData?.outStockProductAll,
-              ...res?.data?.products,
-            ]),
-          );
+        if (categoryPageReduxData?.isfilter) {
+          if (pageNo === 1) {
+            dispatch(addOutStockProduct([...res?.data?.products]));
+          } else {
+            dispatch(
+              addOutStockProduct([
+                ...categoryPageReduxData?.outStockProduct,
+                ...res?.data?.products,
+              ]),
+            );
+          }
         } else {
-          dispatch(
-            addOutStockProduct([
-              ...categoryPageReduxData?.outStockProduct,
-              ...res?.data?.products,
-            ]),
-          );
-          //   // }
+          if (categoryPageReduxData?.isAllProduct) {
+            dispatch(addOutStockProductAll([...res?.data?.products]));
+          } else {
+            if (pageNo === 1) {
+              dispatch(addOutStockProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addOutStockProduct([
+                  ...categoryPageReduxData?.outStockProduct,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
+          }
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo]);
+  }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
 
   // const data = categoryPageReduxData?.outStockProduct;
 
@@ -166,7 +176,7 @@ const SoldOutProduct = () => {
       }` */}
         </>
       ) : null}
-      {categoryPageReduxData?.outStockProduct?.length === outStockItemLength ? (
+      {data?.length === outStockItemLength ? (
         <>
           <RecentlyViewedProduct />
           <SavedItem />

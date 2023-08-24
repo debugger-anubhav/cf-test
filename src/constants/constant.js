@@ -199,16 +199,16 @@ export const HasselFreeData = [
     text: "Get your furniture delivered to your doorstep with no extra shipping cost",
   },
   {
-    icon: hasselFreeSection.IconThree,
-    backgroungImage: hasselFreeSection.FrameThree,
-    Heading: "Flexible upgrades",
-    text: "Upgrade your house with new products after 6 months of use for free",
-  },
-  {
     icon: hasselFreeSection.IconFour,
     backgroungImage: hasselFreeSection.FrameFour,
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
+  },
+  {
+    icon: hasselFreeSection.IconSix,
+    backgroungImage: hasselFreeSection.FrameSix,
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
   {
     icon: hasselFreeSection.IconFive,
@@ -217,10 +217,10 @@ export const HasselFreeData = [
     text: "Minor damages or scratches to the rent products will be waived off",
   },
   {
-    icon: hasselFreeSection.IconSix,
-    backgroungImage: hasselFreeSection.FrameSix,
-    Heading: "Free relocation",
-    text: "Planning to relocate? We’ll help you relocate your furniture for free",
+    icon: hasselFreeSection.IconThree,
+    backgroungImage: hasselFreeSection.FrameThree,
+    Heading: "Flexible upgrades",
+    text: "Upgrade your house with new products after 6 months of use for free",
   },
 ];
 
@@ -408,3 +408,8 @@ export const categoryImageBaseUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/";
 export const categoryIconsUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+
+export function setLocalStorage(key, value) {
+  const data = JSON.stringify(value);
+  return window.localStorage.setItem(key, data);
+}

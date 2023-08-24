@@ -10,6 +10,7 @@ import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
+import {setLocalStorage} from "@/constants/constant";
 
 const HEADER_HEIGHT = 48;
 
@@ -120,6 +121,11 @@ const Header = () => {
               src={Icons.Profile}
               alt="profile-icon"
               className={styles.header_profile_icon}
+              onClick={() =>
+                router.push(
+                  "https://test.rentofurniture.com/htdocs/user_sign_up",
+                )
+              }
             />
           </div>
         </div>
@@ -194,7 +200,10 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         searchesArray.unshift(newSearchTerm);
         const maxItems = 10;
         const truncatedArray = searchesArray.slice(0, maxItems);
-        localStorage.setItem("searches", JSON.stringify(truncatedArray));
+        if (typeof window !== "undefined") {
+          setLocalStorage("searches", truncatedArray);
+        }
+
         setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
       }
     }

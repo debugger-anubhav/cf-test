@@ -7,9 +7,12 @@ import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
+import {setLocalStorage} from "@/constants/constant";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   const [state, setState] = React.useState({
@@ -75,7 +78,16 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               <p
                 key={index.toString()}
                 className={styles.menu_item}
-                onClick={() => console.log(item.link)}>
+                onClick={() => {
+                  router.push(
+                    `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                      .trim()
+                      .split(" ")
+                      .join("-")
+                      .toLowerCase()}
+                    `,
+                  );
+                }}>
                 {item?.cat_name}
               </p>
             ))}
@@ -164,6 +176,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     dispatch(selectedCityId(city?.id));
                     dispatch(selectedCityName(city?.list_value));
                     toggleDrawer("bottom", false);
+                    if (typeof window !== "undefined") {
+                      setLocalStorage("cityId", city?.id);
+                    }
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
