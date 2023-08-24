@@ -14,6 +14,7 @@ import {
   addSetProduct,
   // addSetProductAll,
   addSingleProduct,
+  addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
 
@@ -25,11 +26,17 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
   });
 
   const [itemCount, setItemCount] = useState(7);
+  const [selectedOption, setSelectedOption] = useState("Default");
   // setItemCount(1);
   console.log(setItemCount, "setItemCount");
 
+  const defaultKey = ["subproducts", "ASC"];
+  const newSortKey = ["created", "DESC"];
+  const highToLowKey = ["sale_price", "DESC"];
+  const lowToHighKey = ["sale_price", "ASC"];
+
   const loadMoreItems = () => {
-    return prevCount => prevCount + 7; // Increment the item count by 7
+    return prevCount => prevCount + 7;
   };
 
   const toggleDrawer = (anchor, open) => event => {
@@ -44,7 +51,6 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
   };
 
   const handleFilteredItems = e => {
-    console.log(e.target.value, "e.target.value");
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     if (e.target.checked) {
       updatedFilteredList = [
@@ -58,6 +64,25 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
       );
     }
     dispatch(addFilteredItem(updatedFilteredList));
+  };
+
+  const handleSort = (item, index) => {
+    setPageNo(1);
+    setSelectedOption(item);
+    if (setSelectedOption === "New") {
+      dispatch(addSortKey(newSortKey));
+    } else if (setSelectedOption === "Price Low to High") {
+      dispatch(addSortKey(lowToHighKey));
+    } else if (setSelectedOption === "Price Hight to low") {
+      dispatch(addSortKey(highToLowKey));
+    } else {
+      dispatch(addSortKey(defaultKey));
+    }
+
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    setState({...state, bottom: false});
   };
 
   const handleApply = () => {
@@ -136,6 +161,8 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
                         id={index}
                         name="sortBy"
                         value={ele.text}
+                        checked={selectedOption === ele.text}
+                        onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );

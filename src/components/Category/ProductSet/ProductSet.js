@@ -43,6 +43,7 @@ const ProductSet = () => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const bodyDataAll = {
@@ -53,6 +54,7 @@ const ProductSet = () => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const payload =
@@ -74,15 +76,8 @@ const ProductSet = () => {
         setTotalPage(res?.data?.meta?.totalPage);
         dispatch(addSubCategoryMetaSubProduct(res?.data?.meta));
         if (categoryPageReduxData?.isfilter) {
-          dispatch(
-            addSetProduct([
-              ...categoryPageReduxData?.setProduct,
-              ...res?.data?.products,
-            ]),
-          );
-        } else {
-          if (categoryPageReduxData?.isAllProduct) {
-            dispatch(addSetProductAll([...res?.data?.products]));
+          if (pageNo === 1) {
+            dispatch(addSetProduct([...res?.data?.products]));
           } else {
             dispatch(
               addSetProduct([
@@ -91,16 +86,28 @@ const ProductSet = () => {
               ]),
             );
           }
+        } else {
+          if (categoryPageReduxData?.isAllProduct) {
+            dispatch(addSetProductAll([...res?.data?.products]));
+          } else {
+            if (pageNo === 1) {
+              dispatch(addSetProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addSetProduct([
+                  ...categoryPageReduxData?.setProduct,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
+          }
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo, categoryPageReduxData?.isfilter]);
+  }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
   // }
 
-  console.log(
-    categoryPageReduxData?.setProduct,
-    "categoryPageReduxData?.isfilter",
-  );
+  // console.log(categoryPageReduxData?.setProduct, "categoryPageReduxData?.isfilter")
 
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.setProductAll
@@ -122,7 +129,7 @@ const ProductSet = () => {
               hasMore={true} // Replace with a condition based on your data source}
               className="!w-full !h-full">
               <div className={style.main_container}>
-                {[...new Set(data)]?.map((item, index) => {
+                {data?.map((item, index) => {
                   return item?.subProduct.length ? (
                     <div className={style.card_box}>
                       <Card

@@ -17,7 +17,6 @@ import {
 } from "@/store/Slices/categorySlice";
 
 const SingleProduct = ({pageNo, setPageNo}) => {
-  // const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
   const {productname} = useParams();
@@ -35,6 +34,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
   const bodyDataAll = {
     parentCategoryId: categoryId,
@@ -43,6 +43,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const data =
@@ -77,13 +78,16 @@ const SingleProduct = ({pageNo, setPageNo}) => {
 
         dispatch(addSubCategoryMetaData(res?.data?.meta));
         if (categoryPageReduxData?.isfilter) {
-          // console.log(res?.data?.products, "res?.data?.products")
-          dispatch(
-            addSingleProduct([
-              ...categoryPageReduxData?.singleProduct,
-              ...res?.data?.products,
-            ]),
-          );
+          if (pageNo === 1) {
+            dispatch(addSingleProduct([...res?.data?.products]));
+          } else {
+            dispatch(
+              addSingleProduct([
+                ...categoryPageReduxData?.singleProduct,
+                ...res?.data?.products,
+              ]),
+            );
+          }
         } else {
           if (categoryPageReduxData?.isAllProduct) {
             dispatch(
@@ -93,34 +97,25 @@ const SingleProduct = ({pageNo, setPageNo}) => {
               ]),
             );
           } else {
-            dispatch(
-              addSingleProduct([
-                ...categoryPageReduxData?.singleProduct,
-                ...res?.data?.products,
-              ]),
-            );
+            if (pageNo === 1) {
+              dispatch(addSingleProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addSingleProduct([
+                  ...categoryPageReduxData?.singleProduct,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
           }
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo, categoryPageReduxData?.isfilter]);
+  }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
 
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
-
-  // console.log(
-  //   categoryPageReduxData?.isfilter,
-  //   categoryPageReduxData?.filteredItems,
-  //   "isfilter",
-  // );
-
-  console.log(
-    singleItemLength,
-    singleItemData?.length,
-    singleItemData?.length === singleItemLength,
-    "lennnn",
-  );
 
   return (
     <>
@@ -130,6 +125,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             dataLength={singleItemData?.length}
             next={() => {
               if (pageNo < totalPage) {
+                console.log(pageNo, "page nooo");
                 setPageNo(prev => prev + 1);
               }
             }}

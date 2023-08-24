@@ -14,15 +14,11 @@ import {
   addFilteredItem,
   addOutStockProduct,
   addOutStockProductAll,
-  // addOutStockProduct,
   addParentCategoryId,
-  // addSetProduct,
+  addSetProduct,
   addSetProductAll,
   addSingleAllProduct,
-  // addSetProduct,
-  // addSingleAllProduct,
   addSingleProduct,
-  // addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
 
 const PopOver = ({list, item, parentCategoryId}) => {
@@ -34,9 +30,6 @@ const PopOver = ({list, item, parentCategoryId}) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  // const handleClick = (event, item) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
   const handleCategory = (event, item) => {
     setAnchorEl(event.currentTarget);
   };
@@ -72,14 +65,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
-
-    // Update localStorage with the new selected subCategory
     localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
-
-    // Now you have both the previous and new selected subCategory
-    // console.log("Previous SubCategory:", previousSubCategory);
-    // console.log("New SubCategory:", item?.cat_name);
-
     router.push(
       `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
         .trim()
@@ -95,12 +81,10 @@ const PopOver = ({list, item, parentCategoryId}) => {
     localStorage.setItem("subCategory", JSON.stringify(item?.cat_name));
     localStorage.setItem("subCategoryId", JSON.stringify(item?.id));
     dispatch(addProductCategory(hoverRef.current));
-    // previousSubCategory !== item?.cat_name ? dispatch(addSingleProduct([])) : null
-    // previousSubCategory !== item?.cat_name ? dispatch(addSubCategoryMetaData([])) : null
     console.log(previousSubCategory !== item?.cat_name, "state");
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
-      // dispatch(addSetProduct([]));
+      dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
   };

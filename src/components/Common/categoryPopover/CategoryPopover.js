@@ -7,29 +7,29 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   addFilteredItem,
   addOutStockProduct,
-  // addOutStockProductAll,
   addSetProduct,
-  // addSetProductAll,
   addSingleProduct,
+  addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
 import {useState} from "react";
 
 export default function CategoryPopover({
-  btnName,
   filterName,
-  emptyFilterItem,
-  setfiltereSaved,
   isApplyFilter,
   setPageNo,
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  // const getAllProductWithFilterData = useSelector(
-  //   state => state.categoryPageData,
-  // );
+
+  const [selectedOption, setSelectedOption] = useState("Default");
 
   const filtereData = categoryPageReduxData?.filterData;
+
+  const defaultKey = ["subproducts", "ASC"];
+  const newSortKey = ["created", "DESC"];
+  const highToLowKey = ["sale_price", "DESC"];
+  const lowToHighKey = ["sale_price", "ASC"];
 
   // const [filterList, setFilterList] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -47,8 +47,21 @@ export default function CategoryPopover({
   }, [isApplyFilter]);
 
   const open = Boolean(anchorEl);
-
   const id = open ? "filter-popover" : undefined;
+
+  const handleFilterDivClick = (e, filterTag) => {
+    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    const filterIndex = updatedFilteredList.indexOf(filterTag);
+
+    if (filterIndex === -1) {
+      // If the filter is not in the list, add it
+      updatedFilteredList.push(filterTag);
+    } else {
+      // If the filter is already in the list, remove it
+      updatedFilteredList.splice(filterIndex, 1);
+    }
+    dispatch(addFilteredItem(updatedFilteredList));
+  };
 
   const handleFilteredItems = e => {
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
@@ -75,19 +88,43 @@ export default function CategoryPopover({
     setAnchorEl(null);
   };
 
+  const handleSort = (item, index) => {
+    setPageNo(1);
+    setSelectedOption(item);
+    if (setSelectedOption === "New") {
+      dispatch(addSortKey(newSortKey));
+    } else if (setSelectedOption === "Price Low to High") {
+      dispatch(addSortKey(lowToHighKey));
+    } else if (setSelectedOption === "Price Hight to low") {
+      dispatch(addSortKey(highToLowKey));
+    } else {
+      dispatch(addSortKey(defaultKey));
+    }
+    // Update the selected option when a radio button is clicked
+    // dispatch(addSortKey(item === "New" ? newSortKey : item === "Price Low to High" ? lowToHighKey : highToLowKey));
+    dispatch(addSingleProduct([]));
+
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    setAnchorEl(null);
+  };
+  // "sortKey": ["sale_price", "ASC"]
+  // addSortKey
   return (
     <div>
       <div className={styles.filter} onClick={handleClick}>
         <div className={styles.filterbox}>
           <div className={styles.filter_text_container}>
-            <p className={styles.filter_text}>{filterName}</p>
+            <p className={styles.filter_text}>
+              {filterName === "Filter" ? filterName : selectedOption}
+            </p>
           </div>
           <div>
             <DownPopUpArrow
               size={20}
               color={"#45454A"}
               className={open ? styles.arrow_up : styles.arrow_down}
-              // onClick={e => handleOpenSubCategory(e)}
             />
           </div>
         </div>
@@ -106,15 +143,13 @@ export default function CategoryPopover({
           <div className="rounded-2xl">
             {filterName === "Filter" ? (
               <div className="gap-6 shadow-md w-[228px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 px-4">
-                {/* <div className=" flex flex-col max-h-[259px] bg-red-100 overflow-y-scroll "> */}
                 <div className={styles.mapped_filter}>
-                  {/* {CategoryFilterData.map((ele, index) => { */}
                   {filtereData?.map((ele, index) => {
                     return (
                       <div
-                        // className="h-[37px] flex items-center justify-between"
                         className={styles.single_filter_text}
-                        key={index.toString()}>
+                        key={index.toString()}
+                        onClick={e => handleFilterDivClick(e, ele.filter_tag)}>
                         <p htmlFor={index} className={styles.option_text}>
                           {ele?.filter_name}
                         </p>
@@ -152,6 +187,8 @@ export default function CategoryPopover({
                         id={index}
                         name="sortBy"
                         value={ele.text}
+                        checked={selectedOption === ele.text}
+                        onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );

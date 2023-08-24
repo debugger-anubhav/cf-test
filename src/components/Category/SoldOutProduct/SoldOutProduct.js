@@ -42,6 +42,7 @@ const SoldOutProduct = () => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const bodyDataAll = {
@@ -51,6 +52,7 @@ const SoldOutProduct = () => {
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
       : [],
+    sortKey: categoryPageReduxData?.sortKey,
   };
 
   const payload =
@@ -71,15 +73,8 @@ const SoldOutProduct = () => {
         setTotalPage(res?.data?.meta?.totalPage);
         dispatch(addSubCategoryMetaOutStockProduct(res?.data?.meta));
         if (categoryPageReduxData?.isfilter) {
-          dispatch(
-            addOutStockProduct([
-              ...categoryPageReduxData?.outStockProduct,
-              ...res?.data?.products,
-            ]),
-          );
-        } else {
-          if (categoryPageReduxData?.isAllProduct) {
-            dispatch(addOutStockProductAll([...res?.data?.products]));
+          if (pageNo === 1) {
+            dispatch(addOutStockProduct([...res?.data?.products]));
           } else {
             dispatch(
               addOutStockProduct([
@@ -88,10 +83,25 @@ const SoldOutProduct = () => {
               ]),
             );
           }
+        } else {
+          if (categoryPageReduxData?.isAllProduct) {
+            dispatch(addOutStockProductAll([...res?.data?.products]));
+          } else {
+            if (pageNo === 1) {
+              dispatch(addOutStockProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addOutStockProduct([
+                  ...categoryPageReduxData?.outStockProduct,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
+          }
         }
       })
       .catch(err => console.log(err));
-  }, [pageNo, categoryPageReduxData?.isfilter]);
+  }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
 
   // const data = categoryPageReduxData?.outStockProduct;
 
@@ -168,7 +178,6 @@ const SoldOutProduct = () => {
       ) : null}
       {data?.length === outStockItemLength ? (
         <>
-          {console.log("comminggggg")}
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
