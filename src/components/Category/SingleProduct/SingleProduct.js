@@ -125,7 +125,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             dataLength={singleItemData?.length}
             next={() => {
               if (pageNo < totalPage) {
-                console.log(pageNo, "page nooo");
                 setPageNo(prev => prev + 1);
               }
             }}
