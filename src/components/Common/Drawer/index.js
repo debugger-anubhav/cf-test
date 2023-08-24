@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
+import {setLocalStorage} from "@/constants/constant";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -175,6 +176,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     dispatch(selectedCityId(city?.id));
                     dispatch(selectedCityName(city?.list_value));
                     toggleDrawer("bottom", false);
+                    if (typeof window !== "undefined") {
+                      setLocalStorage("cityId", city?.id);
+                    }
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}

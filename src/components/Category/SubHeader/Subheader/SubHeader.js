@@ -45,7 +45,6 @@ const SubHeader = () => {
   );
 
   const handleSelectedProduct = (e, item, mainCategory) => {
-    console.log(mainCategory, "mainCategory");
     setPageNo(1);
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
