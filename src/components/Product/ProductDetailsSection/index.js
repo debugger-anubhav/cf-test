@@ -14,7 +14,10 @@ import {
 import {RiSparklingFill} from "react-icons/ri";
 import string from "@/constants/Constant.json";
 import {ProductPageImages} from "@/assets/images";
-import {HasselFreeData, productPageImagesBaseUrl} from "@/constants/constant";
+import {
+  HasselFreeDataForProductPage,
+  productPageImagesBaseUrl,
+} from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
@@ -315,7 +318,7 @@ const ProductDetails = ({params}) => {
           <div
             className={`${styles.services_cards_container} ${styles.web}`}
             ref={sliderRef}>
-            {HasselFreeData.map((item, index) => (
+            {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
                 icon={item.icon}
                 key={index}
@@ -353,18 +356,24 @@ const ProductDetails = ({params}) => {
           </div>
 
           <div className={styles.rating_div}>
-            <div className={styles.rating_wrapper}>
-              <div className="flex gap-1">
-                <p className={styles.rating_txt}>{averageRating.toFixed(1)}</p>
-                <RatingStar color={"#F6B704"} size={16} />
+            {totalReviews !== 0 && (
+              <div className={styles.rating_wrapper}>
+                <div className="flex gap-1">
+                  <p className={styles.rating_txt}>
+                    {averageRating.toFixed(1)}
+                  </p>
+                  <RatingStar color={"#F6B704"} size={16} />
+                </div>
+                <p className={`underline ${styles.rating_txt}`}>
+                  {totalReviews} ratings
+                </p>
               </div>
-              <p className={styles.rating_txt}>{totalReviews} ratings</p>
-            </div>
+            )}
 
             <p className={styles.rating_txt} style={{color: "#63798D"}}>
               Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
               <span>
-                <DeliveryTruck size={16} color={"#63798D"} className={"ml-1"} />
+                <DeliveryTruck color={"#63798D"} className={"ml-1 w-6 h-6"} />
               </span>
             </p>
           </div>
@@ -380,7 +389,7 @@ const ProductDetails = ({params}) => {
                   <div
                     className={`${
                       duration.currentIndex === index
-                        ? "bg-[#597492] text-fff"
+                        ? "bg-[#597492] text-fff hover:!shadow-none"
                         : "text-[#597492]"
                     } ${styles.duration_circle}`}
                     onClick={() =>
@@ -460,7 +469,7 @@ const ProductDetails = ({params}) => {
           <div
             className={`${styles.services_cards_container} ${styles.mobile}`}
             ref={sliderRef}>
-            {HasselFreeData.map((item, index) => (
+            {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
                 key={index}
                 head={item.Heading}
@@ -470,7 +479,7 @@ const ProductDetails = ({params}) => {
             ))}
           </div>
 
-          <div className={styles.city_shield_wrapper}>
+          <div onClick={toggleDrawer} className={styles.city_shield_wrapper}>
             <div className={styles.getPeace_div}>
               <RiSparklingFill size={16} color={"#ffffff"} />
               <p className={styles.getPeace_text}>{str.get_peace}</p>
@@ -480,9 +489,7 @@ const ProductDetails = ({params}) => {
                 <VerifyIcon size={30} color={"#2D9469"} />
                 <p className={styles.city_shield_head}>Cityshield </p>
               </div>
-              <button onClick={toggleDrawer} className={styles.read_more}>
-                Read More
-              </button>
+              <button className={styles.read_more}>Read More</button>
 
               {drawerOpen && (
                 <CityshieldDrawer

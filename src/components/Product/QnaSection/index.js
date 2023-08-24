@@ -90,6 +90,8 @@ const QuesAndAns = ({params}) => {
         )}
       </div>
     );
+  } else {
+    return <div className="h-[88px] w-full"></div>;
   }
 };
 

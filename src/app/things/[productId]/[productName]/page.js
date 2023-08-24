@@ -34,13 +34,13 @@ const ProductPage = () => {
           <Header />
           <MenuList />
           <ProductDetails category={"Home Furniture"} params={params} />
-          <OffersAndCoupons />
+          <OffersAndCoupons page={"product"} />
           <ItemsIncluded noOfItems={5} />
           <BenefitsCta />
           <CompleteTheLook params={params} />
           <BannerSection params={params} />
           <CareInstruction params={params} />
-          <RecentlyViewedProduct />
+          <RecentlyViewedProduct page={"product"} />
           <YouMightLike params={params} />
           <CustomerRating params={params} />
           <HappySubscribers page={"product"} params={params} />

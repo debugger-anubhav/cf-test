@@ -223,6 +223,41 @@ export const HasselFreeData = [
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
 ];
+
+export const HasselFreeDataForProductPage = [
+  {
+    icon: hasselFreeSection.IconTwo,
+    Heading: "Free shipping",
+    text: "Get your furniture delivered to your doorstep with no extra shipping cost",
+  },
+  {
+    icon: hasselFreeSection.IconFour,
+    Heading: "Free installation",
+    text: "No need to pay for furniture assembly. We will install your furniture for free",
+  },
+  {
+    icon: hasselFreeSection.IconOne,
+    Heading: "Mint new products",
+    text: "Assured products. You'll be renting furniture that looks & feels brand new",
+  },
+  {
+    icon: hasselFreeSection.IconSix,
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
+  },
+
+  {
+    icon: hasselFreeSection.IconThree,
+    Heading: "Flexible upgrades",
+    text: "Upgrade your house with new products after 6 months of use for free",
+  },
+
+  {
+    icon: hasselFreeSection.IconFive,
+    Heading: "Insurance cover",
+    text: "Minor damages or scratches to the rent products will be waived off",
+  },
+];
 export const CategoryFilterData = [
   {item: "Queen Size Bed"},
   {item: "Single Bed"},
