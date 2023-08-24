@@ -39,6 +39,9 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
+// cart page icons
+import {AiOutlineDelete} from "react-icons/ai";
+
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 export const FooterIcons = {
@@ -176,4 +179,8 @@ export const VerifyIcon = ({size, color, className}) => (
 
 export const InformationIcon = ({size, color, className}) => (
   <RiInformationLine size={size} color={color} className={className} />
+);
+
+export const DeleteIcon = ({size, color, className}) => (
+  <AiOutlineDelete size={size} color={color} className={className} />
 );
