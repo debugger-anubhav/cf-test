@@ -3,7 +3,7 @@
 }
 
 .heading {
-  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6 pb-4 md:pb-6 xl:pb-8;
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-24 xl:leading-10 xl:tracking-0.48 pb-4 md:pb-6 xl:pb-8;
 }
 
 .card_wrapper {

@@ -8,7 +8,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {offersAndCuponsList} from "@/store/Slices";
 import {Skeleton} from "@mui/material";
 
-const OffersAndCoupons = () => {
+const OffersAndCoupons = ({page}) => {
   const dispatch = useDispatch();
   const homePageData = useSelector(state => state.homePagedata);
   const cityId = homePageData.cityId;
@@ -77,7 +77,12 @@ const OffersAndCoupons = () => {
 
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
-      <h2 className={styles.heading}>{str.heading}</h2>
+      <h2
+        className={`${page === "product" && "xl:!text-24 xl:!tracking-0.48"} ${
+          styles.heading
+        }`}>
+        {str.heading}
+      </h2>
       <div className={styles.cards_wrapper} ref={sliderRef}>
         {homePageData?.offerCoupons?.map((item, index) => (
           <div

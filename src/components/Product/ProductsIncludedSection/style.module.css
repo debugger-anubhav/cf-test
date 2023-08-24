@@ -14,7 +14,7 @@
   @apply min-w-full lg:min-w-[400px] xl:min-w-[416px];
 }
 .info_wrapper {
-  @apply gap-4 lg:gap-6 xl:gap-16 3xl:gap-28 mt-4 lg:mt-8;
+  @apply gap-4 lg:gap-6 xl:gap-16 3xl:gap-28 mt-4 lg:mt-6;
 }
 .info_subhead {
   @apply text-16 xl:text-20 text-71717A tracking-0.3 xl:tracking-0.4 leading-normal pb-2 w-fit;
