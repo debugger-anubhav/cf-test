@@ -13,7 +13,11 @@ const RecentlyViewedProduct = ({page}) => {
   console.log(page, "paggeeeeee");
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = homePageReduxData.cityId;
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",

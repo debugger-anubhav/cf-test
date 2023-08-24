@@ -1,9 +1,0 @@
-.content_wrapper {
-  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] pt-6 pb-4 xl:pb-8 font-Poppins;
-}
-.head {
-  @apply text-45454A text-16 xl:text-20 leading-6 xl:leading-7 -tracking-[0.02rem] font-medium;
-}
-.desc {
-  @apply text-14 leading-5 tracking-desc text-9A9AA2 mt-2;
-}

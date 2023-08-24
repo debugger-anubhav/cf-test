@@ -29,15 +29,25 @@ const SoldOutProduct = () => {
   const dispatch = useDispatch();
   const {productname} = useParams();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const homePageReduxData = useSelector(state => state.homePagedata);
 
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
   const bodyData = {
-    subCategoryId: homePageReduxData?.productName?.id,
-    parentCategoryId: homePageReduxData?.productName?.rootID,
-    cityId: 50,
+    subCategoryId,
+    parentCategoryId: categoryId,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -46,8 +56,8 @@ const SoldOutProduct = () => {
   };
 
   const bodyDataAll = {
-    parentCategoryId: categoryPageReduxData?.parentCategoryId,
-    cityId: 50,
+    parentCategoryId: categoryId,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -103,8 +113,6 @@ const SoldOutProduct = () => {
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
 
-  // const data = categoryPageReduxData?.outStockProduct;
-
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
@@ -115,7 +123,6 @@ const SoldOutProduct = () => {
         <>
           <div className={style.main_wrapper}>
             <h2 className={style.heading}>Sold out</h2>
-            {/* <div className={style.main_container}> */}
             <div>
               <InfiniteScroll
                 dataLength={data.length}
@@ -138,8 +145,6 @@ const SoldOutProduct = () => {
                           desc={item?.product_name}
                           originalPrice={item?.price}
                           currentPrice={item?.sale_price}
-                          // hoverCardImage={`${productImageBaseUrl}${item?.image?.split(",")[1]
-                          //   }`}
                           hoverCardImage={
                             item?.image?.split(",").filter(item => item)
                               .length > 1
@@ -158,22 +163,7 @@ const SoldOutProduct = () => {
                 </div>
               </InfiniteScroll>
             </div>
-            {/* </div> */}
           </div>
-          {/* {categoryPageReduxData?.outStockProduct?.length === outStockItemLength ? (
-        <>
-          <RecentlyViewedProduct />
-          <SavedItem />
-          <TrendingItem />
-          <Instruction />
-          <HappySubscribers />
-          <CustomerRating />
-          <HasselFreeServicesCards />
-          <FrequentlyAskedQuestions />
-          <Footer />
-        </>
-      ) : null
-      }` */}
         </>
       ) : null}
       {data?.length === outStockItemLength ? (

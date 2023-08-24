@@ -20,25 +20,26 @@ const ProductSet = () => {
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  // const homePageReduxData = useSelector(state => state.homePagedata);
 
-  // const singleItemLength =
-  //   categoryPageReduxData?.categoryMetaData?.totalProduct;
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId").replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId").replace(/"/g, "");
-  // const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  const subCategoryId = localStorage
+    .getItem("subCategoryId")
+    ?.replace(/"/g, "");
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    .toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const {productname} = useParams();
 
   const bodyData = {
-    // subCategoryId: homePageReduxData?.productName?.id,
     subCategoryId,
-    // parentCategoryId: homePageReduxData?.productName?.rootID,
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -47,9 +48,8 @@ const ProductSet = () => {
   };
 
   const bodyDataAll = {
-    // parentCategoryId: categoryPageReduxData?.parentCategoryId,
     parentCategoryId: categoryId,
-    cityId: 50,
+    cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
       ? categoryPageReduxData?.filteredItems
@@ -69,7 +69,6 @@ const ProductSet = () => {
     payload,
   );
 
-  // if (categoryPageReduxData?.singleProduct?.length === singleItemLength) {
   useEffect(() => {
     getComboProducts()
       .then(res => {
@@ -105,9 +104,6 @@ const ProductSet = () => {
       })
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-  // }
-
-  // console.log(categoryPageReduxData?.setProduct, "categoryPageReduxData?.isfilter")
 
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.setProductAll
@@ -140,9 +136,6 @@ const ProductSet = () => {
                         desc={item?.product_name}
                         originalPrice={item?.price}
                         currentPrice={item?.sale_price}
-                        // hoverCardImage={`${productImageBaseUrl}${
-                        //   item?.image?.split(",")[1]
-                        // }`}
                         hoverCardImage={
                           item?.image?.split(",").filter(item => item).length >
                           1

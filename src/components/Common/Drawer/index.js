@@ -134,7 +134,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={"z-30"}
                 onClick={() => {
                   toggleDrawer("bottom", false);
-                  console.log("click");
+                  // console.log("click");
                 }}
               />
             </div>

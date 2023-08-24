@@ -27,6 +27,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
 
   const itemCount = 7;
   const [selectedOption, setSelectedOption] = useState("Default");
+
   const defaultKey = ["subproducts", "ASC"];
   const newSortKey = ["created", "DESC"];
   const highToLowKey = ["sale_price", "DESC"];
@@ -66,12 +67,12 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
   const handleSort = (item, index) => {
     setPageNo(1);
     setSelectedOption(item);
-    if (setSelectedOption === "New") {
+    if (item === "New") {
       dispatch(addSortKey(newSortKey));
-    } else if (setSelectedOption === "Price Low to High") {
+    } else if (item === "Price Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (setSelectedOption === "Price Hight to low") {
-      dispatch(addSortKey(highToLowKey));
+    } else if (item === "Price Hight to low") {
+      dispatch(addSortKey([...highToLowKey]));
     } else {
       dispatch(addSortKey(defaultKey));
     }
@@ -149,7 +150,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
                 {sortByText.map((ele, index) => {
                   return (
                     <div
-                      // className="pb-[6.5px] flex justify-between"
+                      onClick={() => handleSort(ele?.text, index)}
                       className={styles.sorted_text}
                       key={index.toString()}>
                       <p className={styles.option_text}>{ele.text}</p>
@@ -159,7 +160,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
                         name="sortBy"
                         value={ele.text}
                         checked={selectedOption === ele.text}
-                        onClick={() => handleSort(ele?.text, index)}
+                        // onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );
@@ -179,19 +180,15 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
         <React.Fragment key={anchor}>
           <div
             className={styles.filterbox}
-            // onClick={handleClick}
             onClick={toggleDrawer(anchor, true)}>
             <div className={styles.filter_text_container}>
-              {/* <p className={styles.filter_text}>Filter</p> */}
               <p className={styles.filter_text}>{filterName}</p>
             </div>
             <div>
               <DownPopUpArrow
                 size={20}
-                // size={styles.icon_size}
                 color={"#45454A"}
                 className={open ? styles.arrow_up : styles.arrow_down}
-                // onClick={e => handleOpenSubCategory(e)}
               />
             </div>
           </div>
@@ -215,9 +212,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
             <div
               className="relative top-4 right-[24px] flex w-full justify-end z-[111]"
               onClick={toggleDrawer("bottom", false)}>
-              {/* <DialogTitle sx={{ padding: 0, justifyContent: 'flex-end', display: 'flex', background: "transparent", position: 'absolute', }}> */}
               <Close size={25} color={"#000"} />
-              {/* </DialogTitle> */}
             </div>
             {list(anchor)}
           </Drawer>
