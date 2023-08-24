@@ -9,7 +9,8 @@ import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
 
-const RecentlyViewedProduct = () => {
+const RecentlyViewedProduct = ({page}) => {
+  console.log(page, "paggeeeeee");
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
@@ -60,7 +61,12 @@ const RecentlyViewedProduct = () => {
 
   return (
     <div className={styles.main_container}>
-      <h2 className={styles.heading}>Recently Viewed products</h2>
+      <h2
+        className={`${page === "product" && "xl:!text-24 xl:!tracking-0.48"} ${
+          styles.heading
+        }`}>
+        Recently Viewed products
+      </h2>
 
       {homePageReduxData?.recentProduct?.length ? (
         <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
