@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {productImageBaseUrl} from "@/constants/constant";
 import {FaRupeeSign} from "react-icons/fa";
@@ -89,8 +89,16 @@ const ShoppingCartSection = () => {
     setDrawerOpen(true);
   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
+  // const closeDrawer = () => {
+  //   setDrawerOpen(false);
+  // };
+
+  useEffect(() => {
+    console.log(isDrawerOpen, "isdrawer opennn");
+  }, [isDrawerOpen]);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
   };
 
   return (
@@ -165,22 +173,27 @@ const ShoppingCartSection = () => {
             </div>
             <div>
               {isCheckboxChecked ? (
-                <Checked
-                  size={20}
-                  color={"#5774AC"}
-                  onClick={openDrawer}
-                  className={"cursor-pointer"}
-                />
+                <div onClick={openDrawer}>
+                  <Checked
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
               ) : (
-                <Unchecked
-                  size={20}
-                  color={"#5774AC"}
-                  className={"cursor-pointer"}
-                  onClick={() => setCheckboxChecked(true)}
-                />
+                <div onClick={() => setCheckboxChecked(true)}>
+                  <Unchecked
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
               )}
               {isDrawerOpen && (
-                <CityShieldDrawerForCart onClose={closeDrawer} />
+                <CityShieldDrawerForCart
+                  toggleDrawer={toggleDrawer}
+                  open={isDrawerOpen}
+                />
               )}
             </div>
           </div>
