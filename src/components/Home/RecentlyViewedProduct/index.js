@@ -15,7 +15,7 @@ const RecentlyViewedProduct = ({page}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
@@ -91,7 +91,7 @@ const RecentlyViewedProduct = ({page}) => {
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
                 productId={item?.product_id}
-                productName={item?.product_name.replace(/ /g, "-")}
+                productName={item?.product_name}
               />
             </div>
           ))}

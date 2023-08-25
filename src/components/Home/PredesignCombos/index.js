@@ -90,7 +90,7 @@ const PreDesignCombos = () => {
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
                   productId={item?.id}
-                  productName={item?.product_name.replace(/ /g, "-")}
+                  productName={item?.product_name}
                 />
               </div>
             ))}

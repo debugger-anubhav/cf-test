@@ -1,5 +1,6 @@
 import React from "react";
 import Drawer from "@mui/material/Drawer";
+import styles from "./styles.module.css";
 
 const CityShieldDrawerForCart = ({onClose}) => {
   return (
@@ -7,7 +8,7 @@ const CityShieldDrawerForCart = ({onClose}) => {
       anchor="right"
       open={true} // Adjust open state as needed
       onClose={onClose}>
-      it is tyysyqwiq
+      <div className={styles.drawer_wrapper}></div>
     </Drawer>
   );
 };

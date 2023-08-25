@@ -13,7 +13,7 @@ const TrendingItem = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 

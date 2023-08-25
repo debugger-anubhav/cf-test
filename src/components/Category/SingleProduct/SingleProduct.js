@@ -29,7 +29,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     ?.replace(/"/g, "");
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
@@ -154,7 +154,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}
                       productId={item?.id}
-                      productName={item?.product_name.replace(/ /g, "-")}
+                      productName={item?.product_name}
                     />
                   </div>
                 );

@@ -1,5 +1,8 @@
 .main_container {
-  @apply py-10 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex justify-between;
+  @apply py-10 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex justify-between macbook:justify-normal macbook:gap-[214px];
+}
+.left_div {
+  @apply h-[100vh] overflow-scroll;
 }
 .head {
   @apply text-24 font-medium leading-8 tracking-0.48 text-45454A;
@@ -44,7 +47,7 @@
   @apply w-6 h-6 text-71717A hover:text-[#D96060] cursor-pointer;
 }
 .city_shield_div {
-  @apply p-4 w-[440px] bg-fff border border-DDDDDF rounded-xl;
+  @apply p-4 w-[440px] bg-fff border-[1.5px] border-DDDDDF rounded-xl  hover:border-[#3E688E];
 }
 .city_shield_head {
   @apply text-16 mobile:text-20 pl-1 font-semibold leading-[30px] text-[#2D9469] uppercase;
@@ -54,4 +57,55 @@
 }
 .verify_icon_div {
   @apply flex;
+}
+.discount {
+  @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
+}
+.protect_text {
+  @apply text-14 text-45454A mt-4 tracking-desc;
+}
+.learn_more {
+  @apply text-[#5774AC] underline cursor-pointer;
+}
+.coupons_wrapper {
+  @apply flex w-[440px] h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-8 border-[1.5px] border-transparent hover:border-[#3E688E];
+  background: linear-gradient(138deg, #e8f0f6 0%, #fffaeb 99.38%);
+}
+.offer_text {
+  @apply text-[#3E688E];
+}
+.arrow {
+  @apply w-[19px] h-[19px] cursor-pointer;
+}
+.remove_text {
+  @apply text-[#D96060] text-16 underline;
+}
+.coins_div {
+  @apply p-4 hover:border-[#3E688E] border border-[#dddddf] mt-8 flex justify-between items-center;
+  border-radius: 8.092px;
+  border: 1px solid #dddddf;
+}
+.coins_left_div {
+  @apply flex gap-[10px] items-center;
+}
+.coin {
+  @apply w-[30.8px] h-[30.8px];
+}
+.coin_txt {
+  @apply text-20 text-45454A font-medium leading-10 tracking-0.4;
+}
+.avail_bal {
+  @apply text-9A9AA2 font-medium text-14 leading-5 tracking-desc;
+}
+.cart_breakup {
+  @apply p-4 rounded-lg border border-DDDDDF flex justify-between mt-8;
+}
+.total_text {
+  @apply text-71717A text-20 font-medium leading-5;
+}
+.view_cart_text {
+  @apply text-16 text-[#5774AC] leading-6 tracking-0.3 underline cursor-pointer;
+}
+.total_amount {
+  @apply text-222 font-medium text-20 tracking-0.4 flex items-center h-fit;
 }
