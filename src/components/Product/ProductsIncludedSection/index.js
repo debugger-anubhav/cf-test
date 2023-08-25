@@ -19,7 +19,7 @@ const ItemsIncluded = () => {
           {pageDetails?.subProduct?.map((item, index) => (
             <div
               onClick={() => setSelectedItem(index)}
-              className={`border-[4px] p-1 ${
+              className={`border-[4px] p-1 relative ${
                 selectedItem === index ? "border-[#5F789D]" : "border-fff"
               }`}
               key={index}>
@@ -27,6 +27,7 @@ const ItemsIncluded = () => {
                 src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
                 className={styles.img}
               />
+              <div className={styles.quantity_label}>1x</div>
             </div>
           ))}
         </div>

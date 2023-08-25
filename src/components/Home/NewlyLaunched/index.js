@@ -61,7 +61,11 @@ const NewlyLaunched = () => {
             <div
               className="w-full h-auto cursor-pointer "
               onClick={() =>
-                router.push(`/things/${ele.id}/${ele.product_name}`)
+                router.push(
+                  `/things/${ele.id}/${ele.product_name
+                    .toLowerCase()
+                    .replace(/ /g, "-")}`,
+                )
               }>
               <img
                 src={

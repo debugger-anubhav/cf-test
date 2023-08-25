@@ -81,7 +81,7 @@ const YouMightLike = ({heading, isbg, params}) => {
                 desc={item?.product_name}
                 isHover={false}
                 productId={item?.id}
-                productName={item?.product_name.replace(/ /g, "-")}
+                productName={item?.product_name}
               />
             </div>
           ))}
