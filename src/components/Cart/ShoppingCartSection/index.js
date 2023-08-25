@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {productImageBaseUrl} from "@/constants/constant";
 import {
@@ -74,14 +74,14 @@ const ShoppingCartSection = () => {
     },
   ];
 
-  const [isCheckboxChecked, setCheckboxChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(true);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
 
   // const handleCheckboxToggle = () => {
   //   if (!isDrawerOpen) {
-  //     setCheckboxChecked(!isCheckboxChecked);
+  //     setIsChecked(!isChecked);
   //   }
   // };
 
@@ -89,8 +89,16 @@ const ShoppingCartSection = () => {
     setDrawerOpen(true);
   };
 
-  const closeDrawer = () => {
-    setDrawerOpen(false);
+  // const closeDrawer = () => {
+  //   setDrawerOpen(false);
+  // };
+
+  useEffect(() => {
+    console.log(isDrawerOpen, "isdrawer opennn");
+  }, [isDrawerOpen]);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!isDrawerOpen);
   };
 
   return (
@@ -164,23 +172,29 @@ const ShoppingCartSection = () => {
               <p className={styles.city_shield_head}>Cityshield </p>
             </div>
             <div>
-              {isCheckboxChecked ? (
-                <Checked
-                  size={20}
-                  color={"#5774AC"}
-                  onClick={openDrawer}
-                  className={"cursor-pointer"}
-                />
+              {isChecked ? (
+                <div onClick={openDrawer}>
+                  <Checked
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
               ) : (
-                <Unchecked
-                  size={20}
-                  color={"#5774AC"}
-                  className={"cursor-pointer"}
-                  onClick={() => setCheckboxChecked(true)}
-                />
+                <div onClick={() => setIsChecked(true)}>
+                  <Unchecked
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
               )}
               {isDrawerOpen && (
-                <CityShieldDrawerForCart onClose={closeDrawer} />
+                <CityShieldDrawerForCart
+                  toggleDrawer={toggleDrawer}
+                  open={isDrawerOpen}
+                  toggleCheckbox={() => setIsChecked(false)}
+                />
               )}
             </div>
           </div>

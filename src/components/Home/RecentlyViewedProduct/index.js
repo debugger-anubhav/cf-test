@@ -10,7 +10,6 @@ import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
 
 const RecentlyViewedProduct = ({page}) => {
-  console.log(page, "paggeeeeee");
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityIdStr = localStorage
@@ -91,7 +90,7 @@ const RecentlyViewedProduct = ({page}) => {
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
                 productId={item?.product_id}
-                productName={item?.product_name}
+                productName={item?.seourl}
               />
             </div>
           ))}
