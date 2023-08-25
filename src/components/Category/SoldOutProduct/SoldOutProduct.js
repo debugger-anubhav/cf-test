@@ -43,7 +43,7 @@ const SoldOutProduct = () => {
     ?.replace(/"/g, "");
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 

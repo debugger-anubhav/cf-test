@@ -29,7 +29,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     ?.replace(/"/g, "");
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
