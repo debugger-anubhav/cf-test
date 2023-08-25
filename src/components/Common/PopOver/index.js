@@ -63,7 +63,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/category/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -71,12 +71,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
     dispatch(addAllProduct(false));
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
-        .trim()
-        .split(" ")
-        .join("-")
-        .toLowerCase()}
-      `,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
 
     if (typeof window !== "undefined") {

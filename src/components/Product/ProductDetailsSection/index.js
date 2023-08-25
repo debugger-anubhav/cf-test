@@ -8,6 +8,7 @@ import {
   Heart,
   InformationIcon,
   RatingStar,
+  Rupee,
   ShareIcon,
   VerifyIcon,
 } from "@/assets/icon";
@@ -24,7 +25,6 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
-import {FaRupeeSign} from "react-icons/fa";
 import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
 import {format} from "date-fns";
@@ -50,15 +50,6 @@ const ProductDetails = ({params}) => {
   const carouselData = prodDetails?.[0]?.image?.split(",");
   const lastCaraouselElement = carouselData?.[carouselData?.length - 1];
   if (!lastCaraouselElement) carouselData?.pop();
-
-  // dummy
-  // const images = [
-  //   "1583995987Alexa-queen-bed.jpg",
-  //   "1583996030alexa-queen-bed-1.jpg",
-  //   "1583995987Alexa-queen-bed.jpg",
-  //   "1583995987Alexa-queen-bed.jpg",
-  //   "1583995987Alexa-queen-bed.jpg",
-  // ];
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -409,7 +400,7 @@ const ProductDetails = ({params}) => {
                 <p className={styles.deposit_txt}>Monthly Rent</p>
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
-                    <FaRupeeSign />
+                    <Rupee />
                     {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
                   <p
@@ -437,7 +428,7 @@ const ProductDetails = ({params}) => {
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
                 <p className={styles.currentPrice}>
-                  <FaRupeeSign />0
+                  <Rupee />0
                 </p>
               </div>
             </div>
@@ -510,11 +501,11 @@ const ProductDetails = ({params}) => {
 
             <div className={styles.cityshield_prices}>
               <p className={styles.currentPrice}>
-                <FaRupeeSign />
+                <Rupee />
                 {cityShieldCurrentPrice}/mo
               </p>
               <p className={styles.originalPrice}>
-                <FaRupeeSign />
+                <Rupee />
                 {cityShieldOriginalPrice} / mo
               </p>
               <div className={styles.discount}>-60% OFF</div>

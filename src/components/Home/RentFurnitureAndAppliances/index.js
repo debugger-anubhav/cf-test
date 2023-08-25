@@ -78,12 +78,9 @@ const RentFurnitureAndAppliances = ({params}) => {
               className={styles.card_wrapper}
               onClick={() => {
                 router.push(
-                  `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
-                    .trim()
-                    .split(" ")
-                    .join("-")
-                    .toLowerCase()}
-      `,
+                  `/${homePageReduxData?.cityName.toLowerCase()}/${
+                    item?.seourl
+                  }`,
                 );
                 if (typeof window !== "undefined") {
                   setLocalStorage("categoryId", item?.rootID);
