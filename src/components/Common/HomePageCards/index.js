@@ -23,7 +23,6 @@ const Card = ({
 
   // const router = useRouter();
 
-  console.log(productName, "product name");
   const updatedProductName = productName?.toLowerCase().replace(/ /g, "-");
   return (
     <Link href={`/things/${productId}/${updatedProductName}`}>

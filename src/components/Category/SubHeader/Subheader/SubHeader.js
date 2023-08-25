@@ -53,13 +53,9 @@ const SubHeader = () => {
     if (typeof window !== "undefined") {
       setLocalStorage("subCategory", item?.cat_name);
     }
+
     router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
-        .trim()
-        .split(" ")
-        .join("-")
-        .toLowerCase()}
-      `,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
     dispatch(addSubCategoryId(item?.id));
 
