@@ -150,7 +150,7 @@ const SoldOutProduct = () => {
                             ((item?.price - item?.sale_price) * 100) / 1000,
                           ).toFixed(2)}%`}
                           productId={item?.id}
-                          productName={item?.product_name.replace(/ /g, "-")}
+                          productName={item?.product_name}
                         />
                       </div>
                     );

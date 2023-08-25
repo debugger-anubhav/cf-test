@@ -26,8 +26,11 @@ const Card = ({
 
   // const router = useRouter();
 
+  console.log(productName, "product name");
+  const updatedProductName = productName.toLowerCase().replace(/ /g, "-");
+  console.log(updatedProductName, "updatedProductName");
   return (
-    <Link href={`/things/${productId}/${productName}`}>
+    <Link href={`/things/${productId}/${updatedProductName}`}>
       <div
         // onClick={() => handleProductClick(productId)}
         className={`${styles.wrapper} ${
