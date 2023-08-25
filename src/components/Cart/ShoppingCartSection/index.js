@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
 import {productImageBaseUrl} from "@/constants/constant";
-import {FaRupeeSign} from "react-icons/fa";
 import {
   ArrowForw,
   Checked,
   DeleteIcon,
+  Rupee,
   Unchecked,
   VerifyIcon,
 } from "@/assets/icon";
@@ -124,7 +124,7 @@ const ShoppingCartSection = () => {
                     <p className={styles.deposit_txt}>Monthly Rent</p>
                     <div className="flex items-end gap-2">
                       <p className={styles.currentPrice}>
-                        <FaRupeeSign />
+                        <Rupee />
                         {item.currentPrice}
                       </p>
                       <p className={styles.originalPrice}>
@@ -144,7 +144,7 @@ const ShoppingCartSection = () => {
                     <div>
                       <p className={styles.deposit_txt}>Security Deposit</p>
                       <p className={styles.currentPrice}>
-                        <FaRupeeSign />
+                        <Rupee />
                         {item.securityDeposit}
                       </p>
                     </div>
@@ -188,7 +188,7 @@ const ShoppingCartSection = () => {
           <p>Insurance value</p>
           <div className="flex items-end gap-2">
             <p className={styles.currentPrice}>
-              <FaRupeeSign />
+              <Rupee />
               250/mo
             </p>
             <p className={styles.originalPrice}>400/mo</p>
@@ -253,7 +253,7 @@ const ShoppingCartSection = () => {
             </div>
           </div>
           <p className={styles.total_amount}>
-            <FaRupeeSign />
+            <Rupee />
             11,709
           </p>
         </div>

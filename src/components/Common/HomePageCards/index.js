@@ -1,9 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {Heart} from "@/assets/icon";
-// import {FaRupeeSign} from "react-icons/fa";
-import {BiRupee} from "react-icons/bi";
-// import {useRouter} from "next/router";
+import {Heart, Rupee} from "@/assets/icon";
 import Link from "next/link";
 
 const Card = ({
@@ -81,11 +78,11 @@ const Card = ({
         <div className={styles.price_div}>
           <div className={styles.card_price_wrap}>
             <h3 className={`${styles.currentPrice} flex`}>
-              <BiRupee />
+              <Rupee />
               {`${currentPrice} /mo`}
             </h3>
             <h3 className={`${styles.originalPrice} flex`}>
-              <BiRupee />
+              <Rupee />
               {`${originalPrice} /mo`}
             </h3>
           </div>
