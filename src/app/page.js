@@ -22,6 +22,7 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../useChatScript";
+import {setLocalStorage} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -97,6 +98,9 @@ export default function Home() {
   const queryClient = new QueryClient();
 
   const myElementRef = useRef();
+  if (typeof window !== "undefined") {
+    setLocalStorage("cityId", 46);
+  }
 
   return (
     <QueryClientProvider client={queryClient}>

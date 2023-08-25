@@ -12,6 +12,7 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
+import {setLocalStorage} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
@@ -70,37 +71,43 @@ const RentFurnitureAndAppliances = ({params}) => {
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
       <div className={styles.card_div}>
-        {RentFurniture?.map((item, index) => (
-          <div
-            key={index.toString()}
-            className={styles.card_wrapper}
-            onClick={() => {
-              router.push(
-                `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
-                  .trim()
-                  .split(" ")
-                  .join("-")
-                  .toLowerCase()}
+        {RentFurniture?.map((item, index) => {
+          return (
+            <div
+              key={index.toString()}
+              className={styles.card_wrapper}
+              onClick={() => {
+                router.push(
+                  `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                    .trim()
+                    .split(" ")
+                    .join("-")
+                    .toLowerCase()}
       `,
-              );
-            }}>
-            <img
-              src={
-                "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
-                item.category_web_image
-              }
-              alt="RentFurnitureImage"
-              className={styles.category_img}
-            />
+                );
+                if (typeof window !== "undefined") {
+                  setLocalStorage("categoryId", item?.rootID);
+                  setLocalStorage("subCategoryId", item?.id);
+                }
+              }}>
+              <img
+                src={
+                  "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                  item.category_web_image
+                }
+                alt="RentFurnitureImage"
+                className={styles.category_img}
+              />
 
-            <div className={styles.label_wrapper}>
-              <h3 className={styles.label}>{item.cat_name}</h3>
-              {params === "home-page" && (
-                <p className={styles.desc}>{item.category_description}</p>
-              )}
+              <div className={styles.label_wrapper}>
+                <h3 className={styles.label}>{item.cat_name}</h3>
+                {params === "home-page" && (
+                  <p className={styles.desc}>{item.category_description}</p>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -25,6 +25,7 @@ const SubHeader = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
+  const [filterListed, setFilterListed] = useState(false);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
@@ -33,9 +34,9 @@ const SubHeader = () => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  const category = localStorage.getItem("category").replace(/"/g, "");
+  const category = localStorage.getItem("category")?.replace(/"/g, "");
   const categoryId = localStorage.getItem("categoryId");
-  const subCategory = localStorage.getItem("subCategory").replace(/"/g, "");
+  const subCategory = localStorage.getItem("subCategory")?.replace(/"/g, "");
   const subCategoryId = localStorage.getItem("subCategoryId");
 
   const {refetch: getFilterList} = useQuery(
@@ -169,6 +170,7 @@ const SubHeader = () => {
               filterSaved={filterSaved}
               isApplyFilter={false}
               setPageNo={setPageNo}
+              setFilterListed={setFilterListed}
             />
           </div>
           <div className="flex items-center justify-center ">
@@ -180,6 +182,7 @@ const SubHeader = () => {
                 setfiltereSaved={setfiltereSaved}
                 isApplyFilter={false}
                 setPageNo={setPageNo}
+                setFilterListed={setFilterListed}
               />
             </div>
           </div>
@@ -198,7 +201,7 @@ const SubHeader = () => {
           {/* ------------------------------------------------------------------------------------------------------ */}
         </div>
         <div className={styles.horizontal_line}></div>
-        {categoryPageReduxData?.filteredItems.length !== 0 && (
+        {categoryPageReduxData?.filteredItems.length !== 0 && filterListed && (
           <div className="flex flex-wrap">
             <div
               className={styles.single_filter_mobile}
@@ -211,7 +214,7 @@ const SubHeader = () => {
               }}>
               <p className={styles.clear_All}>Clear all</p>
             </div>
-            {categoryPageReduxData?.filteredItems.length !== 0
+            {filterListed && categoryPageReduxData?.filteredItems.length !== 0
               ? categoryPageReduxData?.filteredItems?.map((item, index) => {
                   const words = item.split("_");
 

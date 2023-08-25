@@ -18,6 +18,7 @@ export default function CategoryPopover({
   filterName,
   isApplyFilter,
   setPageNo,
+  setFilterListed,
 }) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -85,30 +86,32 @@ export default function CategoryPopover({
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
+    setFilterListed(true);
     setAnchorEl(null);
   };
 
   const handleSort = (item, index) => {
     setPageNo(1);
     setSelectedOption(item);
-    if (setSelectedOption === "New") {
+    if (item === "New") {
       dispatch(addSortKey(newSortKey));
-    } else if (setSelectedOption === "Price Low to High") {
+    } else if (item === "Price Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (setSelectedOption === "Price Hight to low") {
-      dispatch(addSortKey(highToLowKey));
+    } else if (item === "Price Hight to low") {
+      dispatch(addSortKey([...highToLowKey]));
     } else {
       dispatch(addSortKey(defaultKey));
     }
     // Update the selected option when a radio button is clicked
     // dispatch(addSortKey(item === "New" ? newSortKey : item === "Price Low to High" ? lowToHighKey : highToLowKey));
-    dispatch(addSingleProduct([]));
+    // dispatch(addSingleProduct([]));
 
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     setAnchorEl(null);
   };
+
   // "sortKey": ["sale_price", "ASC"]
   // addSortKey
   return (
@@ -180,7 +183,10 @@ export default function CategoryPopover({
               <div className="gap-6 shadow-md w-[213px] rounded-2xl border-[2px] border-71717A bg-white p-4">
                 {sortByText.map((ele, index) => {
                   return (
-                    <div className={styles.sorted_text} key={index.toString()}>
+                    <div
+                      className={styles.sorted_text}
+                      key={index.toString()}
+                      onClick={() => handleSort(ele?.text, index)}>
                       <p className={styles.option_text}>{ele.text}</p>
                       <input
                         type="radio"
@@ -188,7 +194,6 @@ export default function CategoryPopover({
                         name="sortBy"
                         value={ele.text}
                         checked={selectedOption === ele.text}
-                        onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );

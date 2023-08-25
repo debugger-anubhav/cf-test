@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Close, Icons} from "@/assets/icon";
+import {Close, DownArrow, Icons} from "@/assets/icon";
 import string from "@/constants/Constant.json";
 import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
@@ -134,7 +134,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={"z-30"}
                 onClick={() => {
                   toggleDrawer("bottom", false);
-                  console.log("click");
+                  // console.log("click");
                 }}
               />
             </div>
@@ -238,6 +238,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         ) : (
           <span className={styles.header_city_name}>
             {homePageReduxData?.cityName}
+            {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
           </span>
         )}
       </div>

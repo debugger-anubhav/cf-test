@@ -2,7 +2,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import {Icons, DownArrow, RecentIcon, TrendingIcon} from "@/assets/icon";
+import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
@@ -64,7 +64,6 @@ const Header = () => {
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
-                <DownArrow size={20} color={"#45454A"} />
               </div>
             </div>
           </div>

@@ -36,7 +36,6 @@ export const HomepageSlice = createSlice({
       state.subcategoryId = action.payload;
     },
     selectedCityId(state, action) {
-      // console.log(action?.payload, "action city iddddddd")
       state.cityId = action.payload;
     },
     selectedCityName(state, action) {
