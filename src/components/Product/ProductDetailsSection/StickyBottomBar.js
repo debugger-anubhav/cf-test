@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {FaRupeeSign} from "react-icons/fa";
+import {Rupee} from "@/assets/icon";
 
 const StickyBottomBar = ({
   productName,
@@ -20,7 +20,7 @@ const StickyBottomBar = ({
           <p className={styles.deposit_txt}>Monthly Rent</p>
           <div className={styles.flexx}>
             <p className={styles.currentPrice}>
-              <FaRupeeSign />
+              <Rupee />
               {durationArray?.[duration.currentIndex]?.attr_price}
             </p>
             <p
@@ -48,7 +48,7 @@ const StickyBottomBar = ({
         <div>
           <p className={styles.deposit_txt}>Security Deposit</p>
           <p className={styles.currentPrice}>
-            <FaRupeeSign />0
+            <Rupee />0
           </p>
         </div>
       </div>

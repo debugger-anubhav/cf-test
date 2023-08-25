@@ -1,5 +1,5 @@
 import React from "react";
-import {BiSolidMessage, BiMinus} from "react-icons/bi";
+import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
 import {FiChevronDown} from "react-icons/fi";
 import {IoClose, IoCloseOutline, IoArrowForward} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
@@ -120,6 +120,9 @@ export const Mail = ({size, color, className}) => (
 );
 export const Message = ({size, color, className}) => (
   <BiSolidMessage size={size} color={color} className={className} />
+);
+export const Rupee = ({size, color, className}) => (
+  <BiRupee size={size} color={color} className={className} />
 );
 
 export const CopyIcon = ({size, color, className}) => (
