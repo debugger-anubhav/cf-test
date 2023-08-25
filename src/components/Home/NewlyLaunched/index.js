@@ -60,13 +60,7 @@ const NewlyLaunched = () => {
             key={index.toString()}>
             <div
               className="w-full h-auto cursor-pointer "
-              onClick={() =>
-                router.push(
-                  `/things/${ele.id}/${ele.product_name
-                    .toLowerCase()
-                    .replace(/ /g, "-")}`,
-                )
-              }>
+              onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
               <img
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +

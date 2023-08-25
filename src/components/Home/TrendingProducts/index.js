@@ -125,7 +125,7 @@ const TrendingProducts = ({params}) => {
                 ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
               productId={item?.id}
-              productName={item?.product_name}
+              productName={item?.seourl}
             />
           </div>
         ))}

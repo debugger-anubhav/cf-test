@@ -51,6 +51,9 @@
   animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   transition-timing-function: ease-in;
 }
+.risk_text {
+  @apply text-16 text-[#5774AC] mt-4 underline cursor-pointer;
+}
 
 @media only screen and (min-width: 768px) {
   .customDrawer {

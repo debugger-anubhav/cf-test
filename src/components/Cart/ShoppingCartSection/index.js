@@ -74,14 +74,14 @@ const ShoppingCartSection = () => {
     },
   ];
 
-  const [isCheckboxChecked, setCheckboxChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(true);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
 
   // const handleCheckboxToggle = () => {
   //   if (!isDrawerOpen) {
-  //     setCheckboxChecked(!isCheckboxChecked);
+  //     setIsChecked(!isChecked);
   //   }
   // };
 
@@ -172,7 +172,7 @@ const ShoppingCartSection = () => {
               <p className={styles.city_shield_head}>Cityshield </p>
             </div>
             <div>
-              {isCheckboxChecked ? (
+              {isChecked ? (
                 <div onClick={openDrawer}>
                   <Checked
                     size={20}
@@ -181,7 +181,7 @@ const ShoppingCartSection = () => {
                   />
                 </div>
               ) : (
-                <div onClick={() => setCheckboxChecked(true)}>
+                <div onClick={() => setIsChecked(true)}>
                   <Unchecked
                     size={20}
                     color={"#5774AC"}
@@ -193,6 +193,7 @@ const ShoppingCartSection = () => {
                 <CityShieldDrawerForCart
                   toggleDrawer={toggleDrawer}
                   open={isDrawerOpen}
+                  toggleCheckbox={() => setIsChecked(false)}
                 />
               )}
             </div>

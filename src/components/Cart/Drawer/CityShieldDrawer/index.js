@@ -11,6 +11,7 @@ const CityShieldDrawerForCart = ({
   cityShieldOriginalPrice,
   cityShieldCurrentPrice,
   cityShieldDiscount,
+  toggleCheckbox,
 }) => {
   const arr = [
     {img: ProductPageImages.sratches, label: "Scratches & dents"},
@@ -82,8 +83,16 @@ const CityShieldDrawerForCart = ({
         </div>
 
         <button className={styles.btn} onClick={toggleDrawer}>
-          Okay, understood
+          Continue with Cityshield
         </button>
+        <p
+          className={styles.risk_text}
+          onClick={() => {
+            toggleCheckbox();
+            toggleDrawer();
+          }}>
+          No, I wanna risk damaging the furniture & Applicances
+        </p>
       </div>
     </Drawer>
   );

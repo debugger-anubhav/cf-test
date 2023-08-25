@@ -8,7 +8,7 @@ const ItemsIncluded = () => {
   const pageDetails = useSelector(
     state => state.productPageData.singleProductDetails[0],
   );
-  console.log(pageDetails, "pagejkl");
+
   if (pageDetails?.subProduct?.length > 0) {
     return (
       <div className={styles.main_container}>
