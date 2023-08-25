@@ -54,6 +54,8 @@ const SavedItem = () => {
                   ((item?.price - item?.fc_product_sale_price) * 100) /
                     item?.price,
                 ).toFixed(2)}%`}
+                productId={item?.id}
+                productName={item?.seourl}
               />
             </div>
           );

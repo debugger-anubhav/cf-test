@@ -424,13 +424,13 @@ const ProductDetails = ({params}) => {
                   </div>
                 </div>
               </div>
-              <span className="text-[#9C9C9C]">+</span>
+              {/* <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
                 <p className={styles.currentPrice}>
                   <Rupee />0
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
 
