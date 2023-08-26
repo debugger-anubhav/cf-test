@@ -14,6 +14,7 @@ const Card = ({
   soldOut,
   isHover = true,
   productWidth,
+  isImageHeight = false,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
@@ -34,7 +35,9 @@ const Card = ({
           src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover}
+          ${hoverCard && styles.card_image_hover} ${
+            isImageHeight && "min-h-[240px]"
+          }
           `}
         />
 
