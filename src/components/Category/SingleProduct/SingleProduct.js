@@ -167,6 +167,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       desc={item?.product_name}
                       originalPrice={item?.price}
                       currentPrice={item?.sale_price}
+                      isImageHeight={true}
                       // boxShadowHover={true}
                       hoverCardImage={
                         item?.image?.split(",").length > 1
