@@ -12,9 +12,10 @@ import {
   addSubCategoryMetaSubProduct,
 } from "@/store/Slices/categorySlice";
 import SoldOutProduct from "../SoldOutProduct/SoldOutProduct";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 
 const ProductSet = () => {
+  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -104,7 +105,11 @@ const ProductSet = () => {
       })
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(style.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.setProductAll
     : categoryPageReduxData?.setProduct;
@@ -127,7 +132,9 @@ const ProductSet = () => {
               <div className={style.main_container}>
                 {data?.map((item, index) => {
                   return item?.subProduct.length ? (
-                    <div className={style.card_box}>
+                    <div
+                      className={`${style.card_box} ${style.child}`}
+                      onClick={e => handleCardClick(e, item)}>
                       <Card
                         cardImage={`${productImageBaseUrl}${
                           item?.image?.split(",")[0]
@@ -145,8 +152,6 @@ const ProductSet = () => {
                         discount={`${Math.round(
                           ((item?.price - item?.sale_price) * 100) / 1000,
                         ).toFixed(2)}%`}
-                        productId={item?.id}
-                        productName={item?.seourl}
                       />
                     </div>
                   ) : null;

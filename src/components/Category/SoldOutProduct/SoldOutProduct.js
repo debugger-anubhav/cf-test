@@ -20,9 +20,10 @@ import CustomerRating from "@/components/Home/Rating";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 
 const SoldOutProduct = () => {
+  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -115,7 +116,11 @@ const SoldOutProduct = () => {
       })
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(style.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
@@ -139,7 +144,10 @@ const SoldOutProduct = () => {
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
                     return (
-                      <div className={style.card_box} key={index.toString()}>
+                      <div
+                        className={`${style.card_box} ${style.child}`}
+                        key={index.toString()}
+                        onClick={e => handleCardClick(e, item)}>
                         <Card
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]
@@ -157,8 +165,6 @@ const SoldOutProduct = () => {
                           discount={`${Math.round(
                             ((item?.price - item?.sale_price) * 100) / 1000,
                           ).toFixed(2)}%`}
-                          productId={item?.id}
-                          productName={item?.seourl}
                         />
                       </div>
                     );
