@@ -11,7 +11,7 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
 } from "react-icons/io";
-import {BsFillStarFill, BsGoogle} from "react-icons/bs";
+import {BsFillStarFill, BsGoogle, BsCheckLg} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import {
   MdModeEdit,
@@ -197,7 +197,7 @@ export const ArrowForw = ({size, color, className}) => (
   <IoArrowForward size={size} color={color} className={className} />
 );
 
-export const Checked = ({size, color, className, onClick}) => (
+export const CheckedBox = ({size, color, className, onClick}) => (
   <MdCheckBox
     size={size}
     color={color}
@@ -206,11 +206,15 @@ export const Checked = ({size, color, className, onClick}) => (
   />
 );
 
-export const Unchecked = ({size, color, className, onClick}) => (
+export const UncheckedBox = ({size, color, className, onClick}) => (
   <MdOutlineCheckBoxOutlineBlank
     size={size}
     color={color}
     className={className}
     onClick={onClick}
   />
+);
+
+export const RightIcon = ({size, color, className}) => (
+  <BsCheckLg size={size} color={color} className={className} />
 );

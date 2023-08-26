@@ -23,7 +23,7 @@ const Card = ({
       // onClick={() => handleProductClick(productId)}
       className={`${styles.wrapper} ${
         hoverCard && styles.hover_wrapper
-      } ${productWidth}
+      } ${productWidth} 
       `}
       onMouseOver={() => {
         isHover && setHoverCard(true);
