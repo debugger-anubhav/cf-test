@@ -198,7 +198,6 @@ const SoldOutProduct = () => {
           <SavedItem />
           <TrendingItem />
           <CareInstruction params={{productId: "4096", productName: "4096"}} />
-          {/* <HappySubscribers /> */}
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
