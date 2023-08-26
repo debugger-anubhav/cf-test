@@ -137,8 +137,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
 
-  // console.log("data", singleItemData)
-
   return (
     <>
       {singleItemData?.length ? (
@@ -169,6 +167,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       desc={item?.product_name}
                       originalPrice={item?.price}
                       currentPrice={item?.sale_price}
+                      // boxShadowHover={true}
                       hoverCardImage={
                         item?.image?.split(",").length > 1
                           ? productImageBaseUrl + item?.image?.split(",")[1]

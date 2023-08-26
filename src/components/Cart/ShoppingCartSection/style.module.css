@@ -1,53 +1,51 @@
 .main_container {
-  @apply py-10 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex justify-between macbook:justify-normal macbook:gap-[214px];
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-28 xl:gap-36 macbook:gap-[214px];
 }
 .left_div {
-  @apply h-[100vh] overflow-scroll;
+  @apply lg:h-[100vh] lg:overflow-scroll;
 }
 .head {
-  @apply text-24 font-medium leading-8 tracking-0.48 text-45454A;
+  @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
 }
 .card_wrapper {
-  @apply mt-8 flex flex-col gap-16;
+  @apply mt-8 flex flex-col gap-12 xl:gap-16;
 }
 .single_product_wrapper {
-  @apply w-[537px] h-[98px] flex gap-6;
+  @apply xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
 }
 .img_div {
-  @apply w-[132px] h-[98px];
+  @apply min-w-[96px] h-[71px] md:min-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:h-[98px];
 }
 .img {
   @apply w-full h-full;
 }
 .name_div {
-  @apply flex gap-4;
+  @apply flex gap-2 xl:gap-4;
 }
 .product_name {
-  @apply text-20 w-[337px] leading-6 tracking-0.4 text-45454A font-medium;
+  @apply text-16 xl:text-20 w-[192px] xl:w-[337px] leading-6 tracking-0.3 xl:tracking-0.4 text-45454A font-medium;
 }
 .price_div {
-  @apply flex mt-4 items-center gap-6;
+  @apply flex -ml-[104px] md:-ml-[128px] lg:-ml-0 mt-[39px] md:mt-[45px] lg:mt-4 items-center gap-6;
 }
 .incre_decre_div {
-  @apply flex py-1 px-2 items-center gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
+  @apply flex py-1 px-2 items-center gap-2 xl:gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
 }
 .span_item {
   @apply text-18 font-normal hover:text-[#5774AC] cursor-pointer;
 }
-.deposit_txt {
-  @apply text-14 font-medium text-71717A leading-5;
-}
+
 .currentPrice {
-  @apply text-222 font-medium text-20 tracking-0.4 flex items-center;
+  @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4 flex items-center;
 }
 .originalPrice {
-  @apply text-9A9AA2 text-16 tracking-0.3 line-through;
+  @apply text-9A9AA2 text-14 xl:text-16 tracking-desc xl:tracking-0.3 line-through;
 }
 .delete_icon {
   @apply w-6 h-6 text-71717A hover:text-[#D96060] cursor-pointer;
 }
 .city_shield_div {
-  @apply p-4 w-[440px] bg-fff border-[1.5px] border-DDDDDF rounded-xl  hover:border-[#3E688E];
+  @apply p-4 xl:w-[440px] bg-fff border border-DDDDDF rounded-xl hover:border-2 hover:p-[15px] hover:border-[#3E688E];
 }
 .city_shield_head {
   @apply text-16 mobile:text-20 pl-1 font-semibold leading-[30px] text-[#2D9469] uppercase;
@@ -68,11 +66,11 @@
   @apply text-[#5774AC] underline cursor-pointer;
 }
 .coupons_wrapper {
-  @apply flex w-[440px] h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-8 border-[1.5px] border-transparent hover:border-[#3E688E];
+  @apply flex xl:w-[440px] xl:h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-4 border-[2px] border-transparent hover:border-[#3E688E];
   background: linear-gradient(138deg, #e8f0f6 0%, #fffaeb 99.38%);
 }
 .offer_text {
-  @apply text-[#3E688E];
+  @apply text-14 xl:text-16 text-[#3E688E];
 }
 .arrow {
   @apply w-[19px] h-[19px] cursor-pointer;
@@ -81,7 +79,7 @@
   @apply text-[#D96060] text-16 underline;
 }
 .coins_div {
-  @apply p-4 hover:border-[#3E688E] border border-[#dddddf] mt-8 flex justify-between items-center;
+  @apply p-4 hover:border-[#3E688E] hover:border-[1.5px] border border-[#dddddf] mt-4 flex justify-between items-center;
   border-radius: 8.092px;
   border: 1px solid #dddddf;
 }
@@ -92,20 +90,50 @@
   @apply w-[30.8px] h-[30.8px];
 }
 .coin_txt {
-  @apply text-20 text-45454A font-medium leading-10 tracking-0.4;
+  @apply text-16 xl:text-20 text-45454A font-medium leading-normal xl:leading-10 tracking-0.3 xl:tracking-0.4;
 }
 .avail_bal {
-  @apply text-9A9AA2 font-medium text-14 leading-5 tracking-desc;
+  @apply text-9A9AA2 font-medium text-12 xl:text-14  leading-5 tracking-0.24 xl:tracking-desc;
 }
 .cart_breakup {
-  @apply p-4 rounded-lg border border-DDDDDF flex justify-between mt-8;
+  @apply p-4 rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-[#5774AC] flex justify-between mt-4;
+}
+.breakup_wrapper {
+  @apply flex gap-1 items-center mt-1 xl:mt-[11px];
 }
 .total_text {
-  @apply text-71717A text-20 font-medium leading-5;
+  @apply text-71717A text-16 xl:text-20 font-medium leading-5;
 }
 .view_cart_text {
-  @apply text-16 text-[#5774AC] leading-6 tracking-0.3 underline cursor-pointer;
+  @apply text-14 xl:text-16 text-[#5774AC] leading-6 tracking-0.3 underline cursor-pointer;
 }
 .total_amount {
-  @apply text-222 font-medium text-20 tracking-0.4 flex items-center h-fit;
+  @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4 flex items-center h-fit;
+}
+.for_arrow {
+  @apply w-5 h-5 xl:w-6 xl:h-6;
+}
+.rupeeIcon {
+  @apply w-4 h-4 xl:h-5 xl:w-5;
+}
+.payment_mode {
+  @apply mt-4 p-4 border border-DDDDDF hover:border-2 hover:p-[15px] hover:border-[#5774AC] rounded-lg;
+}
+.pref_mode_head {
+  @apply text-45454A text-16 xl:text-20 font-medium xl:leading-10 tracking-0.3 xl:tracking-0.4;
+}
+.monthly_toggler {
+  @apply mt-3 p-1 flex items-center justify-between bg-[#CBCBCB] rounded-xl w-[212px] h-[44px];
+}
+.pref_mode_text {
+  @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
+}
+.pref_mode_features_wrappper {
+  @apply mt-[10px];
+}
+.payment_mode_list {
+  @apply flex items-center gap-[5.6px] mt-[2px];
+}
+.payment_mode_feature {
+  @apply text-14 leading-5 text-71717A tracking-desc;
 }

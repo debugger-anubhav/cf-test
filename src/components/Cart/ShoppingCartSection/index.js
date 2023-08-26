@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
-import {productImageBaseUrl} from "@/constants/constant";
+import {categoryIconsUrl, productImageBaseUrl} from "@/constants/constant";
 import {
   ArrowForw,
-  Checked,
+  CheckedBox,
   DeleteIcon,
+  RightIcon,
   Rupee,
-  Unchecked,
+  UncheckedBox,
   VerifyIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
+import CouponDrawer from "../Drawer/CouponDrawer";
 
 const ShoppingCartSection = () => {
   const count = 5;
@@ -21,84 +23,84 @@ const ShoppingCartSection = () => {
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 80,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
     {
       img: "1583995987Alexa-queen-bed.jpg",
       product_name: "V-leg 4 Seater Dining Table",
       currentPrice: 1709,
       originalPrice: 1899,
-      securityDeposit: 0,
     },
   ];
 
+  const monthlyModeFeatures = [
+    "Get additional coupon upto 8%",
+    "Pay as you use",
+    "Mandatory Security Deposit",
+  ];
+  const upfrontModeFeatures = [
+    "Get additional coupons upto 20%",
+    "Faster KYC",
+    "No Security Deposit",
+  ];
+
   const [isChecked, setIsChecked] = useState(true);
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
+  const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
-
-  // const handleCheckboxToggle = () => {
-  //   if (!isDrawerOpen) {
-  //     setIsChecked(!isChecked);
-  //   }
-  // };
+  const [isMonthly, setIsMonthly] = useState(true);
 
   const openDrawer = () => {
-    setDrawerOpen(true);
+    setCityShieldDrawerOpen(true);
   };
+  const availCoin = 300;
 
   // const closeDrawer = () => {
-  //   setDrawerOpen(false);
+  //   setCityShieldDrawerOpen(false);
   // };
 
-  useEffect(() => {
-    console.log(isDrawerOpen, "isdrawer opennn");
-  }, [isDrawerOpen]);
+  const toggleDrawerCityShield = () => {
+    setCityShieldDrawerOpen(!cityShieldDrawerOpen);
+  };
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!isDrawerOpen);
+  const toggleDrawerCoupon = () => {
+    setCouponDrawerOpen(!couponDrawerOpen);
   };
 
   return (
@@ -140,23 +142,6 @@ const ShoppingCartSection = () => {
                       </p>
                     </div>
                   </div>
-
-                  <p
-                    className={`${
-                      item.securityDeposit === 0 ? "hidden" : "flex"
-                    } ${styles.plus_icon}`}>
-                    +
-                  </p>
-
-                  {item.securityDeposit !== 0 && (
-                    <div>
-                      <p className={styles.deposit_txt}>Security Deposit</p>
-                      <p className={styles.currentPrice}>
-                        <Rupee />
-                        {item.securityDeposit}
-                      </p>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -174,7 +159,7 @@ const ShoppingCartSection = () => {
             <div>
               {isChecked ? (
                 <div onClick={openDrawer}>
-                  <Checked
+                  <CheckedBox
                     size={20}
                     color={"#5774AC"}
                     className={"cursor-pointer"}
@@ -182,17 +167,17 @@ const ShoppingCartSection = () => {
                 </div>
               ) : (
                 <div onClick={() => setIsChecked(true)}>
-                  <Unchecked
+                  <UncheckedBox
                     size={20}
                     color={"#5774AC"}
                     className={"cursor-pointer"}
                   />
                 </div>
               )}
-              {isDrawerOpen && (
+              {cityShieldDrawerOpen && (
                 <CityShieldDrawerForCart
-                  toggleDrawer={toggleDrawer}
-                  open={isDrawerOpen}
+                  toggleDrawer={toggleDrawerCityShield}
+                  open={cityShieldDrawerOpen}
                   toggleCheckbox={() => setIsChecked(false)}
                 />
               )}
@@ -216,41 +201,31 @@ const ShoppingCartSection = () => {
           </p>
         </div>
 
-        <div className={styles.coupons_wrapper}>
-          <p className={styles.offer_text}>
-            Apply Offers & Coupons (save 20% Off) 🎉
-          </p>
-          {isCouponApplied ? (
-            <p className={styles.remove_txt}>Remove</p>
-          ) : (
-            <ArrowForw
-              onClick={() => setIsCouponApplied(true)}
-              color={"#3E688E"}
-              className={styles.arrow}
-            />
-          )}
-        </div>
-
         <div className={styles.coins_div}>
           <div className={styles.coins_left_div}>
             <div>
-              <img src="" className={styles.coin} />
+              <img
+                src={`${categoryIconsUrl + "cf_coin.svg"}`}
+                className={styles.coin}
+              />
             </div>
             <div>
               <p className={styles.coin_txt}>Use Cityfurnish coins</p>
-              <p className={styles.avail_bal}>Available balance: 300</p>
+              <p className={styles.avail_bal}>
+                Available balance: {isCoinApplied ? 0 : availCoin}
+              </p>
             </div>
           </div>
           <div className="cursor-pointer">
             {isCoinApplied ? (
-              <FaToggleOff
+              <FaToggleOn
                 size={29}
-                color={"#E3E1DC"}
+                color={"#5774AC"}
                 onClick={() => setIsCoinApplied(false)}
               />
             ) : (
-              <FaToggleOn
-                color={"#5774AC"}
+              <FaToggleOff
+                color={"#E3E1DC"}
                 size={29}
                 onClick={() => setIsCoinApplied(true)}
               />
@@ -258,16 +233,74 @@ const ShoppingCartSection = () => {
           </div>
         </div>
 
+        <div className={styles.coupons_wrapper}>
+          <p className={styles.offer_text}>Apply Offers & Coupons🎉</p>
+          {isCouponApplied ? (
+            <p className={styles.remove_txt}>Remove</p>
+          ) : (
+            <div onClick={() => setCouponDrawerOpen(true)}>
+              <ArrowForw color={"#3E688E"} className={styles.arrow} />
+            </div>
+          )}
+
+          {couponDrawerOpen && (
+            <CouponDrawer
+              toggleDrawer={toggleDrawerCoupon}
+              open={couponDrawerOpen}
+              applyCoupon={setIsCouponApplied}
+            />
+          )}
+        </div>
+
+        <div className={styles.payment_mode}>
+          <h2 className={styles.pref_mode_head}>Preferred payment mode:</h2>
+          <div className={styles.monthly_toggler}>
+            <p
+              onClick={() => setIsMonthly(true)}
+              className={`${
+                isMonthly
+                  ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                  : "bg-transparent"
+              } ${styles.pref_mode_text}`}>
+              Monthly
+            </p>
+            <p
+              onClick={() => setIsMonthly(false)}
+              className={`${
+                isMonthly
+                  ? "bg-transparent"
+                  : "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+              } ${styles.pref_mode_text}`}>
+              Upfront
+            </p>
+          </div>
+          <div className={styles.pref_mode_features_wrappper}>
+            {isMonthly
+              ? monthlyModeFeatures.map((item, index) => (
+                  <ul key={index} className={styles.payment_mode_list}>
+                    <RightIcon color={"#2D9469"} size={13} />
+                    <li className={styles.payment_mode_feature}>{item}</li>
+                  </ul>
+                ))
+              : upfrontModeFeatures.map((item, index) => (
+                  <ul key={index} className={styles.payment_mode_list}>
+                    <RightIcon color={"#2D9469"} size={13} />
+                    <li className={styles.payment_mode_feature}>{item}</li>
+                  </ul>
+                ))}
+          </div>
+        </div>
+
         <div className={styles.cart_breakup}>
           <div>
             <p className={styles.total_text}>Total:</p>
-            <div className="flex gap-1 items-center mt-[11px]">
+            <div className={styles.breakup_wrapper}>
               <p className={styles.view_cart_text}>View cart breakup</p>
-              <ArrowForw color={"#5774AC"} size={24} />
+              <ArrowForw color={"#5774AC"} className={styles.for_arrow} />
             </div>
           </div>
           <p className={styles.total_amount}>
-            <Rupee />
+            <Rupee className={styles.rupeeIcon} />
             11,709
           </p>
         </div>
