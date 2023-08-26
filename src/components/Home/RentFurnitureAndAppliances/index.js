@@ -77,7 +77,7 @@ const RentFurnitureAndAppliances = ({params}) => {
               className={styles.card_wrapper}
               onClick={() => {
                 router.push(
-                  `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                  `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
                     .trim()
                     .split(" ")
                     .join("-")

@@ -21,6 +21,7 @@ export const HomepageSlice = createSlice({
     announcementBar: false,
     seoFurnitureSubCategory: [],
     subcategoryId: "270",
+    catHeading: "",
   },
   reducers: {
     addCityList(state, action) {
@@ -77,6 +78,10 @@ export const HomepageSlice = createSlice({
     },
     setSeoFurnitureRentalSubCategory(state, action) {
       state.seoFurnitureSubCategory = action.payload;
+    },
+    //
+    addCategoryHeading(state, action) {
+      state.catHeading = action.payload;
     },
   },
 });
@@ -160,6 +165,7 @@ export const {
   addProductName,
   addProductCategory,
   addSubCategoryId,
+  addCategoryHeading,
 } = HomepageSlice.actions;
 
 export const {

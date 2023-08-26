@@ -24,8 +24,6 @@ const Card = ({
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
 
-  // const router = useRouter();
-
   return (
     <Link href={`/things/${productId}/${productName}`}>
       <div
@@ -36,12 +34,17 @@ const Card = ({
       `}
         onMouseOver={() => {
           isHover && setHoverCard(true);
+          // hoverRef.current = true
         }}
-        onMouseOut={() => setHoverCard(false)}>
+        onMouseOut={() => {
+          setHoverCard(false);
+          // hoverRef.current = false
+        }}>
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
             alt="thumbnail image"
+            // onError={handleImageError}
             className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover}
           `}

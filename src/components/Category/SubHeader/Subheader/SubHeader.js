@@ -54,7 +54,8 @@ const SubHeader = () => {
       setLocalStorage("subCategory", item?.cat_name);
     }
     router.push(
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+      // &#0;
+      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
         .trim()
         .split(" ")
         .join("-")
@@ -106,8 +107,8 @@ const SubHeader = () => {
           </ul>
         </div>
         <h1 className={styles.heading}>
-          Single & Double Bed On Rent In Noida And Ghaziabad, Bedroom Furniture
-          Rental
+          {subCategory} On Rent In {homePageReduxData?.cityName},{subCategory}{" "}
+          Furniture Rental
         </h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {

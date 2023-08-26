@@ -80,7 +80,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={styles.menu_item}
                 onClick={() => {
                   router.push(
-                    `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.cat_name
+                    `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
                       .trim()
                       .split(" ")
                       .join("-")

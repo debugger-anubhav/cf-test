@@ -14,13 +14,13 @@ import {useMutation} from "@/hooks/useMutation";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
-import Instruction from "../Instructions/Instruction";
-import HappySubscribers from "../HappySubscribers";
 import CustomerRating from "@/components/Home/Rating";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
 import {useParams} from "next/navigation";
+import CareInstruction from "@/components/Product/CareInstruction";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 
 const SoldOutProduct = () => {
   const [pageNo, setPageNo] = useState(1);
@@ -98,7 +98,15 @@ const SoldOutProduct = () => {
           }
         } else {
           if (categoryPageReduxData?.isAllProduct) {
-            dispatch(addOutStockProductAll([...res?.data?.products]));
+            if (pageNo === 1)
+              dispatch(addOutStockProductAll([...res?.data?.products]));
+            else
+              dispatch(
+                addOutStockProductAll([
+                  ...categoryPageReduxData?.outStockProductAll,
+                  ...res?.data?.products,
+                ]),
+              );
           } else {
             if (pageNo === 1) {
               dispatch(addOutStockProduct([...res?.data?.products]));
@@ -174,8 +182,9 @@ const SoldOutProduct = () => {
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          <Instruction />
-          <HappySubscribers />
+          <CareInstruction params={{productId: "4096", productName: "4096"}} />
+          {/* <HappySubscribers /> */}
+          <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />

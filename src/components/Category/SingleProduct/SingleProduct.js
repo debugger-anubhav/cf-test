@@ -81,21 +81,29 @@ const SingleProduct = ({pageNo, setPageNo}) => {
           if (pageNo === 1) {
             dispatch(addSingleProduct([...res?.data?.products]));
           } else {
-            dispatch(
-              addSingleProduct([
-                ...categoryPageReduxData?.singleProduct,
-                ...res?.data?.products,
-              ]),
-            );
+            if (pageNo === 1) {
+              dispatch(addSingleProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addSingleProduct([
+                  ...categoryPageReduxData?.singleProduct,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
           }
         } else {
           if (categoryPageReduxData?.isAllProduct) {
-            dispatch(
-              addSingleAllProduct([
-                // ...categoryPageReduxData?.singleProductAll,
-                ...res?.data?.products,
-              ]),
-            );
+            if (pageNo === 1) {
+              dispatch(addSingleAllProduct([...res?.data?.products]));
+            } else {
+              dispatch(
+                addSingleAllProduct([
+                  ...categoryPageReduxData?.singleProductAll,
+                  ...res?.data?.products,
+                ]),
+              );
+            }
           } else {
             if (pageNo === 1) {
               dispatch(addSingleProduct([...res?.data?.products]));
@@ -117,6 +125,8 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
 
+  // console.log("data", singleItemData)
+
   return (
     <>
       {singleItemData?.length ? (
@@ -132,6 +142,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
+                // console.log(item?.image.split(","), "item?.image.split")
                 return (
                   <div
                     className={style.card_box_product}
@@ -146,10 +157,13 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       originalPrice={item?.price}
                       currentPrice={item?.sale_price}
                       hoverCardImage={
-                        item?.image?.split(",").filter(item => item).length > 1
+                        item?.image?.split(",").length > 1
                           ? productImageBaseUrl + item?.image?.split(",")[1]
                           : productImageBaseUrl + item?.image?.split(",")[0]
                       }
+                      // hoverCardImage={
+                      //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
+                      // }
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}

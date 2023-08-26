@@ -51,7 +51,7 @@
   @apply flex md:w-[157px] sm:w-[130px] ms:w-[120px] mobile:w-[65px]  w-auto;
 }
 .filter_text {
-  @apply font-Poppins text-14 mobile:text-12 font-medium leading-6 text-71717A;
+  @apply font-Poppins text-12 mobile:text-14 font-medium leading-6 text-71717A;
 }
 .arrow_down {
   transition: transform 330ms ease;
@@ -88,7 +88,7 @@
   @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] w-fit h-fit mobile:hidden cursor-pointer;
 }
 .single_filter_mobile {
-  @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] mr-2 border-71717A bg-[#FFF] w-fit h-fit mobile:block cursor-pointer;
+  @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] mr-[12px] border-71717A bg-[#FFF] w-fit h-fit mobile:block cursor-pointer;
 }
 .clear_All {
   @apply text-71717A font-Poppins text-14 font-medium leading-6;
