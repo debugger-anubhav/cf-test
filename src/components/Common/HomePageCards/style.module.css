@@ -12,7 +12,7 @@
   @apply flex gap-[0.62rem] items-center;
 }
 .thumbnail {
-  @apply min-w-full w-full rounded-lg;
+  @apply min-w-full w-full h-[240px] rounded-lg;
 }
 .desc_div {
   @apply flex gap-2 3xl:justify-between mt-3;
