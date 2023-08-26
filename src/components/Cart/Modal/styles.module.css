@@ -1,0 +1,24 @@
+/* YourComponent.module.css */
+.customModal {
+  @apply md:!px-12 md:!py-12 w-full md:!w-[400px] !h-[192px];
+  top: 50% !important;
+  left: 50% !important ;
+  transform: translate(-50%, -50%) !important;
+}
+
+.customCloseButton {
+  @apply !top-12 !right-8 !outline-none !border-none;
+  width: 20px !important;
+  height: 21px !important;
+}
+
+.share_drawer_wrapper {
+  @apply w-full h-[150px] px-4 pt-6 pb-8 flex flex-col justify-center;
+  border-radius: 20px 20px 0px 0px !important;
+}
+.close_icon {
+  @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12;
+}
+.bottomDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
+}
