@@ -61,6 +61,16 @@ const HappySubscribers = ({page, params}) => {
         console.log(err);
       });
   };
+  const getVideosForCategoryPage = () => {
+    axios
+      .get(baseURL + endPoints.categoryHappySubscriber(params))
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     if (page === "home-page") {
@@ -69,6 +79,8 @@ const HappySubscribers = ({page, params}) => {
       getVideosForProductPage();
     } else if (page === "appliances-rental") {
       getVideosForSeoAppliancesPage();
+    } else if (page === "category") {
+      getVideosForCategoryPage();
     } else if (page === "furniture-rental") {
       getVideosForSeoFurniturePage();
     } else {

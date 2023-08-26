@@ -50,8 +50,8 @@ const SubHeader = () => {
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
     subCategoryId = getLocalStorage("subCategoryId");
-    subCategory = getLocalStorage("subCategory");
-    category = getLocalStorage("category");
+    subCategory = getLocalStorage("subCategory")?.replace(/"/g, "");
+    category = getLocalStorage("category")?.replace(/"/g, "");
   }
 
   const {refetch: getFilterList} = useQuery(
@@ -68,7 +68,6 @@ const SubHeader = () => {
     if (typeof window !== "undefined") {
       setLocalStorage("subCategory", item?.cat_name);
     }
-    console.log(getLocalStorage("subCategory"), "oooooooooooo");
 
     router.push(
       `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
@@ -118,8 +117,8 @@ const SubHeader = () => {
           </ul>
         </div>
         <h1 className={styles.heading}>
-          Single & Double Bed On Rent In Noida And Ghaziabad, Bedroom Furniture
-          Rental
+          {subCategory} On Rent In {homePageReduxData?.cityName},{subCategory}{" "}
+          Furniture Rental
         </h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {

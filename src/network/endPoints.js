@@ -60,8 +60,10 @@ export const endPoints = {
       `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
   },
 
-  categoryHappySubscriber:
-    "fc-care-instructions/getCategoryPageHappyCustomerStories",
+  // categoryHappySubscriber:
+  //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
+  categoryHappySubscriber: id =>
+    `fc-care-instructions/getCategoryPageHappyCustomerStories?parentCategoryId=${id}`,
   categortFaq: "fc-faqs/getCategoryPageFAQS",
   categoryContent: "fc-city-category-datas/getCategoryPageTextContent",
   savedItems: "fc-product-likes/getWishlistProducts",
@@ -69,4 +71,5 @@ export const endPoints = {
   categoryComboProduct: "fc-products/getSetProducts",
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",
+  categoryInstruction: "fc-care-instructions/getProductCareInstructions",
 };
