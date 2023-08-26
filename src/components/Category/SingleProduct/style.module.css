@@ -9,8 +9,3 @@
 .card_box_product:hover {
   box-shadow: 1px 8px 20px grey;
 }
-
-.productCardWidth {
-  /* @apply macbook:w-[23rem] 2xl:w-[25rem] 3xl:w-[27rem] 4xl:w-[32rem]; */
-  width: 100%;
-}

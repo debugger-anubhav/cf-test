@@ -28,6 +28,7 @@ const ProductSet = () => {
   let categoryId;
   let subCategoryId;
   let cityIdStr;
+  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
@@ -35,14 +36,6 @@ const ProductSet = () => {
     cityIdStr = getLocalStorage("cityId");
   }
 
-  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-  // const subCategoryId = localStorage
-  //   .getItem("subCategoryId")
-  //   ?.replace(/"/g, "");
-  // const cityIdStr = localStorage
-  //   .getItem("cityId")
-  //   ?.toString()
-  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const {productname} = useParams();
@@ -108,7 +101,6 @@ const ProductSet = () => {
                 ]),
               );
           } else {
-            console.log("kdddddddddddddddddd");
             if (pageNo === 1) {
               dispatch(addSetProduct([...res?.data?.products]));
             } else {
@@ -155,6 +147,7 @@ const ProductSet = () => {
                       className={`${style.card_box} ${style.child}`}
                       onClick={e => handleCardClick(e, item)}>
                       <Card
+                        productWidth={productCardWidth}
                         cardImage={`${productImageBaseUrl}${
                           item?.image?.split(",")[0]
                         }`}
@@ -180,11 +173,7 @@ const ProductSet = () => {
           </div>
         </div>
       ) : null}
-      {data?.length === comboItemLength ? (
-        <SoldOutProduct />
-      ) : (
-        <p className="bg-red-400">red</p>
-      )}
+      {data?.length === comboItemLength ? <SoldOutProduct /> : null}
     </>
   );
 };
