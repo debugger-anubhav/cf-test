@@ -98,8 +98,17 @@ const ProductSet = () => {
           }
         } else {
           if (categoryPageReduxData?.isAllProduct) {
-            dispatch(addSetProductAll([...res?.data?.products]));
+            if (pageNo === 1)
+              dispatch(addSetProductAll([...res?.data?.products]));
+            else
+              dispatch(
+                addSetProductAll([
+                  ...categoryPageReduxData?.setProductAll,
+                  ...res?.data?.products,
+                ]),
+              );
           } else {
+            console.log("kdddddddddddddddddd");
             if (pageNo === 1) {
               dispatch(addSetProduct([...res?.data?.products]));
             } else {
@@ -171,7 +180,11 @@ const ProductSet = () => {
           </div>
         </div>
       ) : null}
-      {data?.length === comboItemLength ? <SoldOutProduct /> : null}
+      {data?.length === comboItemLength ? (
+        <SoldOutProduct />
+      ) : (
+        <p className="bg-red-400">red</p>
+      )}
     </>
   );
 };
