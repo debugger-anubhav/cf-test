@@ -92,7 +92,7 @@ const RecentlyViewedProduct = ({page}) => {
               key={index.toString()}
               onClick={e => handleCardClick(e, item)}
               className={styles.child}>
-              {console.log(item, "kdjfkdsfhdsjkf")}
+              {/* {console.log(item, "kdjfkdsfhdsjkf")} */}
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 hoverCardImage={
