@@ -173,11 +173,7 @@ const ProductSet = () => {
           </div>
         </div>
       ) : null}
-      {data?.length === comboItemLength ? (
-        <SoldOutProduct />
-      ) : (
-        <p className="bg-red-400">red</p>
-      )}
+      {data?.length === comboItemLength ? <SoldOutProduct /> : null}
     </>
   );
 };

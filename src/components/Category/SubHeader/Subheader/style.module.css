@@ -103,19 +103,20 @@
   @apply w-[30px] h-[30px] md:w-[60px] md:h-[60px] cursor-pointer;
 }
 .single_filter_text {
-  @apply flex items-center justify-between pb-[13px] cursor-pointer;
+  @apply flex items-center justify-between h-[37px] cursor-pointer px-[16px];
 }
 .single_filter_text:hover {
-  @apply h-[37px] flex items-center justify-between bg-[#EFF5FF] cursor-pointer;
+  @apply h-[37px] flex items-center justify-between bg-[#EFF5FF] cursor-pointer px-[16px];
 }
 .sorted_text {
-  @apply flex h-[39px] items-center justify-between  cursor-pointer;
+  @apply flex h-[39px] items-center justify-between  cursor-pointer px-4;
 }
 .sorted_text:hover {
-  @apply flex h-[39px] items-center justify-between bg-[#EFF5FF] cursor-pointer;
+  @apply flex h-[39px] items-center justify-between bg-[#EFF5FF] cursor-pointer px-4;
 }
 .mapped_filter {
-  @apply flex flex-col max-h-[259px] pr-[10px];
+  /* @apply flex flex-col max-h-[259px] pr-[10px]; */
+  @apply flex flex-col max-h-[259px];
 }
 .mapped_filter_mobile {
   @apply flex flex-col max-h-[259px] px-4;
