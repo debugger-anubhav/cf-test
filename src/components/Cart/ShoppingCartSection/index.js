@@ -14,6 +14,7 @@ import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
+// import DeleteModal from "../Modal/DeleteModal";
 
 const ShoppingCartSection = () => {
   const count = 5;
@@ -85,6 +86,7 @@ const ShoppingCartSection = () => {
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -103,8 +105,17 @@ const ShoppingCartSection = () => {
     setCouponDrawerOpen(!couponDrawerOpen);
   };
 
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  // };
+  console.log(isModalOpen);
+
   return (
     <div className={styles.main_container}>
+      {/* <DeleteModal isModalOpen={isModalOpen} closeModal={closeModal} /> */}
       <div className={styles.left_div}>
         <h1 className={styles.head}>Shopping cart ({count})</h1>
         <div className={styles.card_wrapper}>
@@ -121,7 +132,10 @@ const ShoppingCartSection = () => {
               <div>
                 <div className={styles.name_div}>
                   <p className={styles.product_name}>{item.product_name}</p>
-                  <DeleteIcon className={styles.delete_icon} />
+                  <div onClick={openModal}>
+                    {" "}
+                    <DeleteIcon className={styles.delete_icon} />
+                  </div>
                 </div>
 
                 <div className={styles.price_div}>
