@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-full w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .city_shield_head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-semibold leading-[30px] text-[#2D9469];
@@ -32,13 +32,13 @@
   @apply bg-[#207B3A] font-Poppins flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
 }
 .benefits_label {
-  @apply text-71717A leading-6 font-Poppins text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center;
+  @apply text-71717A leading-6 font-Poppins text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center mt-2;
 }
 .arr_wrapper {
   @apply flex gap-4 xl:gap-8 mt-8 items-center;
 }
 .img_div {
-  @apply w-[60px] h-[60px] lg:w-[72px] lg:h-[72px] flex p-3;
+  @apply w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] flex;
 }
 .btn {
   @apply w-full xs:w-fit mt-8 px-8 font-Poppins justify-center text-14 lg:text-16 flex items-center text-71717A font-medium h-10 lg:h-14 rounded-lg border-2 border-71717A;
@@ -53,6 +53,21 @@
 }
 .risk_text {
   @apply text-16 text-[#5774AC] mt-4 underline cursor-pointer;
+}
+.points_wrappper {
+  @apply mt-16;
+}
+.cover_head {
+  @apply text-45454A text-16 font-medium leading-6 pb-2;
+}
+.list {
+  @apply list-none flex items-baseline gap-2;
+}
+.points_item {
+  @apply text-71717A text-16 leading-6;
+}
+.dot {
+  @apply px-[2px] w-1 h-1 rounded-full bg-71717A;
 }
 
 @media only screen and (min-width: 768px) {

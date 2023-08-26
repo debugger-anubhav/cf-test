@@ -1,0 +1,21 @@
+.main_container {
+  @apply h-[90vh] md:h-fit w-full xl:w-[413px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+}
+.header {
+  @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.input_div {
+  @apply mt-8 flex gap-2 py-3 px-4 rounded-xl border border-DDDDDF bg-fff;
+}
+.input {
+  @apply border-none outline-none text-16 w-full placeholder:text-71717A placeholder:tracking-0.3;
+}
+.apply_text {
+  @apply text-5774AC text-16 font-medium tracking-0.3;
+}
+.coupons_wrapper {
+  @apply mt-8;
+}
