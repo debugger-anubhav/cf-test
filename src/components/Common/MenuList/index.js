@@ -37,9 +37,11 @@ const MenuList = () => {
       ) : (
         <div className={styles.menu_list_left}>
           {getAllAndSubCategoryData?.map((list, index) => {
+            // console.log(list, "listtttt")
             return (
               <div className={styles.item_wrap} key={index.toString()}>
                 <PopOver
+                  data={list}
                   list={list?.sub_categories}
                   item={list?.cat_name}
                   parentCategoryId={list.id}
