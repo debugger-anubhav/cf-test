@@ -7,17 +7,24 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 
 const RecentlyViewedProduct = ({page}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
+  let cityIdStr;
+
+  if (typeof window !== "undefined") {
+    cityIdStr = getLocalStorage("cityId");
+  }
+
   const cityId = parseFloat(cityIdStr);
 
   const {refetch: recentlyViewed} = useQuery(

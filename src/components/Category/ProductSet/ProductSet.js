@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import style from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
@@ -25,14 +25,24 @@ const ProductSet = () => {
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-  const subCategoryId = localStorage
-    .getItem("subCategoryId")
-    ?.replace(/"/g, "");
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  let categoryId;
+  let subCategoryId;
+  let cityIdStr;
+
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    cityIdStr = getLocalStorage("cityId");
+  }
+
+  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  // const subCategoryId = localStorage
+  //   .getItem("subCategoryId")
+  //   ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const {productname} = useParams();

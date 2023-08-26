@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {
   addOutStockProduct,
@@ -35,17 +35,26 @@ const SoldOutProduct = () => {
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  let categoryId;
+  let subCategoryId;
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    cityIdStr = getLocalStorage("cityId");
+  }
 
-  // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
+  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
 
-  const subCategoryId = localStorage
-    .getItem("subCategoryId")
-    ?.replace(/"/g, "");
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
+
+  // const subCategoryId = localStorage
+  //   .getItem("subCategoryId")
+  //   ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {

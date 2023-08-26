@@ -7,7 +7,7 @@ import ProductSet from "../ProductSet/ProductSet";
 
 import Card from "@/components/Common/HomePageCards";
 
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {
@@ -22,15 +22,23 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  let categoryId;
+  let subCategoryId;
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    cityIdStr = getLocalStorage("cityId");
+  }
 
-  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-  const subCategoryId = localStorage
-    .getItem("subCategoryId")
-    ?.replace(/"/g, "");
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  // const subCategoryId = localStorage
+  //   .getItem("subCategoryId")
+  //   ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {

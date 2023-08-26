@@ -69,6 +69,7 @@ const PopOver = ({list, item, parentCategoryId}) => {
   const handleSelectedProduct = (e, item) => {
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
+
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
       `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,

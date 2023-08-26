@@ -11,7 +11,6 @@ const staticHeaders = () => ({
 const baseInstance = axios.create({
   baseURL,
 });
-// const fetchedToken = localStorage.getItem("token");
 const fetchedToken = "abcdjdyhsi";
 const token = fetchedToken || null;
 
