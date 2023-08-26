@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-fit w-full xl:w-[413px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply h-[90vh] md:h-fit w-full xl:w-fit py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .header {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
@@ -16,6 +16,49 @@
 .apply_text {
   @apply text-5774AC text-16 font-medium tracking-0.3;
 }
-.coupons_wrapper {
-  @apply mt-8;
+
+/* .wrapper {
+  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-20;
+}
+.heading {
+  @apply text-20 font-medium leading-8 xl:text-32 xl:leading-10 xl:tracking-0.6 tracking-heading text-45454A;
+} */
+
+.card {
+  @apply mt-8 cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px];
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp")
+    /* background: url("../../../assets/home_page_assets//offers/card_bg.svg") */
+    no-repeat;
+  background-size: cover;
+}
+.desc {
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full truncate;
+}
+.code {
+  @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;
+}
+.copy_div {
+  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center;
+}
+.line {
+  @apply right-32 3xl:right-40 absolute top-0 bottom-0;
+  border-left: 2px dashed #7e6dd5;
+}
+.ellipse {
+  @apply w-4 h-4 bg-F7F7F8 rounded-full absolute top-[42px] 3xl:top-[60px];
+}
+.left {
+  @apply -left-2;
+}
+.right {
+  @apply right-0;
+}
+.Skeleton_text {
+  @apply text-18 w-1/2;
+}
+.offer_card_skeleton {
+  @apply flex w-full h-[90px];
+}
+.offer_coupon_skeleton {
+  @apply flex mr-4 w-full h-full my-6;
 }
