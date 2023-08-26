@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {
   addOutStockProduct,
@@ -20,9 +20,10 @@ import CustomerRating from "@/components/Home/Rating";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 
 const SoldOutProduct = () => {
+  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -34,17 +35,26 @@ const SoldOutProduct = () => {
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
 
-  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  let categoryId;
+  let subCategoryId;
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    cityIdStr = getLocalStorage("cityId");
+  }
 
-  // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
+  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
 
-  const subCategoryId = localStorage
-    .getItem("subCategoryId")
-    ?.replace(/"/g, "");
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
+
+  // const subCategoryId = localStorage
+  //   .getItem("subCategoryId")
+  //   ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
@@ -115,7 +125,11 @@ const SoldOutProduct = () => {
       })
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(style.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
@@ -139,7 +153,10 @@ const SoldOutProduct = () => {
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
                     return (
-                      <div className={style.card_box} key={index.toString()}>
+                      <div
+                        className={`${style.card_box} ${style.child}`}
+                        key={index.toString()}
+                        onClick={e => handleCardClick(e, item)}>
                         <Card
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]
@@ -157,8 +174,6 @@ const SoldOutProduct = () => {
                           discount={`${Math.round(
                             ((item?.price - item?.sale_price) * 100) / 1000,
                           ).toFixed(2)}%`}
-                          productId={item?.id}
-                          productName={item?.seourl}
                         />
                       </div>
                     );

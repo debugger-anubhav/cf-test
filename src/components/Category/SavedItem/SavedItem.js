@@ -6,9 +6,11 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {addSaveditems} from "@/store/Slices/categorySlice";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const SavedItem = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const cityIdStr = localStorage
     .getItem("cityId")
@@ -30,7 +32,11 @@ const SavedItem = () => {
       })
       .catch(err => console.log(err));
   }, []);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const data = categoryPageReduxData?.savedProducts;
 
   return (
@@ -39,7 +45,10 @@ const SavedItem = () => {
       <div className={styles.main_sub_container}>
         {data?.map((item, index) => {
           return (
-            <div className="flex flex-wrap mr-4 mb-4" key={index.toString()}>
+            <div
+              className={`flex flex-wrap mr-4 mb-4 ${styles.child}`}
+              key={index.toString()}
+              onClick={e => handleCardClick(e, item)}>
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 desc={item?.product_name}
@@ -54,8 +63,6 @@ const SavedItem = () => {
                   ((item?.price - item?.fc_product_sale_price) * 100) /
                     item?.price,
                 ).toFixed(2)}%`}
-                productId={item?.id}
-                productName={item?.seourl}
               />
             </div>
           );

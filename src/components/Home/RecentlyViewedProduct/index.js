@@ -7,15 +7,24 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const RecentlyViewedProduct = ({page}) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
+  let cityIdStr;
+
+  if (typeof window !== "undefined") {
+    cityIdStr = getLocalStorage("cityId");
+  }
+
   const cityId = parseFloat(cityIdStr);
 
   const {refetch: recentlyViewed} = useQuery(
@@ -61,6 +70,11 @@ const RecentlyViewedProduct = ({page}) => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.product_id}/${item.seourl}`);
+    }
+  };
 
   return (
     <div className={styles.main_container}>
@@ -74,7 +88,11 @@ const RecentlyViewedProduct = ({page}) => {
       {homePageReduxData?.recentProduct?.length ? (
         <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
           {homePageReduxData?.recentProduct?.map((item, index) => (
-            <div key={index.toString()}>
+            <div
+              key={index.toString()}
+              onClick={e => handleCardClick(e, item)}
+              className={styles.child}>
+              {console.log(item, "kdjfkdsfhdsjkf")}
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 hoverCardImage={
@@ -89,8 +107,6 @@ const RecentlyViewedProduct = ({page}) => {
                 originalPrice={item?.price}
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
-                productId={item?.product_id}
-                productName={item?.seourl}
               />
             </div>
           ))}

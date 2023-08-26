@@ -10,9 +10,11 @@ import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import {useRouter} from "next/navigation";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   const [paramsCityId, setParamsCityId] = React.useState(46);
@@ -104,13 +106,21 @@ const TrendingProducts = ({params}) => {
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
 
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   return homePageReduxData?.trendindProduct ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Crowd Favourite</h2>
       <h3 className={styles.subHeading}>Best Selling Products</h3>
       <div className={`${styles.card_box} `} ref={sliderRef}>
         {data?.map((item, index) => (
-          <div key={index.toString()} className={styles.child}>
+          <div
+            key={index.toString()}
+            className={styles.child}
+            onClick={e => handleCardClick(e, item)}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={
@@ -124,8 +134,6 @@ const TrendingProducts = ({params}) => {
               discount={`${Math.round(
                 ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
-              productId={item?.id}
-              productName={item?.seourl}
             />
           </div>
         ))}

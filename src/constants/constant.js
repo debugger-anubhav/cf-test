@@ -413,3 +413,7 @@ export function setLocalStorage(key, value) {
   const data = JSON.stringify(value);
   return window.localStorage.setItem(key, data);
 }
+export function getLocalStorage(key, value) {
+  const data = JSON.stringify(value);
+  return window.localStorage.getItem(key, data);
+}
