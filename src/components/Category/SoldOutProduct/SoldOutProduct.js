@@ -43,18 +43,7 @@ const SoldOutProduct = () => {
     subCategoryId = getLocalStorage("subCategoryId");
     cityIdStr = getLocalStorage("cityId");
   }
-
-  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-
-  // // setSession({ "categoryId": categoryId, "subCategoryId": subCategoryId, });
-
-  // const subCategoryId = localStorage
-  //   .getItem("subCategoryId")
-  //   ?.replace(/"/g, "");
-  // const cityIdStr = localStorage
-  //   .getItem("cityId")
-  //   ?.toString()
-  //   ?.replace(/"/g, "");
+  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
@@ -166,6 +155,7 @@ const SoldOutProduct = () => {
                         key={index.toString()}
                         onClick={e => handleCardClick(e, item)}>
                         <Card
+                          productWidth={productCardWidth}
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]
                           }`}
@@ -198,7 +188,6 @@ const SoldOutProduct = () => {
           <SavedItem />
           <TrendingItem />
           <CareInstruction params={{productId: "4096", productName: "4096"}} />
-          {/* <HappySubscribers /> */}
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
