@@ -3,7 +3,7 @@
 }
 .main_container {
   /* @apply flex flex-wrap  my-4; */
-  @apply flex flex-col justify-center md:justify-normal flex-wrap mobile:flex-row my-4;
+  @apply flex flex-wrap lg:grid lg:grid-cols-3 justify-center md:justify-normal  mobile:flex-row my-4;
 }
 .heading {
   @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
