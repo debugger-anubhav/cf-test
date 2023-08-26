@@ -25,7 +25,7 @@ import {useParams} from "next/navigation";
 const ProductPage = () => {
   const queryClient = new QueryClient();
   const params = useParams();
-  console.log(params, "paramsss");
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>

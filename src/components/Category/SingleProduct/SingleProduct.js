@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import style from "./style.module.css";
 import ProductSet from "../ProductSet/ProductSet";
 
 import Card from "@/components/Common/HomePageCards";
 
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {
@@ -18,19 +18,27 @@ import {
 
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
-
+  const router = useRouter();
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  let categoryId;
+  let subCategoryId;
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    cityIdStr = getLocalStorage("cityId");
+  }
 
-  const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-  const subCategoryId = localStorage
-    .getItem("subCategoryId")
-    ?.replace(/"/g, "");
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    .toString()
-    ?.replace(/"/g, "");
+  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
+  // const subCategoryId = localStorage
+  //   .getItem("subCategoryId")
+  //   ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
@@ -120,7 +128,11 @@ const SingleProduct = ({pageNo, setPageNo}) => {
       })
       .catch(err => console.log(err));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(style.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
@@ -145,8 +157,9 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                 // console.log(item?.image.split(","), "item?.image.split")
                 return (
                   <div
-                    className={style.card_box_product}
-                    key={index.toString()}>
+                    className={`${style.card_box_product} ${style.child}`}
+                    key={index.toString()}
+                    onClick={e => handleCardClick(e, item)}>
                     <Card
                       productWidth={productCardWidth}
                       cardImage={`${productImageBaseUrl}${
@@ -167,8 +180,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}
-                      productId={item?.id}
-                      productName={item?.product_name.replace(/ /g, "-")}
                     />
                   </div>
                 );

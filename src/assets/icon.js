@@ -1,7 +1,7 @@
 import React from "react";
-import {BiSolidMessage, BiMinus} from "react-icons/bi";
+import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
 import {FiChevronDown} from "react-icons/fi";
-import {IoClose, IoCloseOutline} from "react-icons/io5";
+import {IoClose, IoCloseOutline, IoArrowForward} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
@@ -13,7 +13,12 @@ import {
 } from "react-icons/io";
 import {BsFillStarFill, BsGoogle} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
-import {MdModeEdit, MdVerifiedUser} from "react-icons/md";
+import {
+  MdModeEdit,
+  MdVerifiedUser,
+  MdCheckBox,
+  MdOutlineCheckBoxOutlineBlank,
+} from "react-icons/md";
 import {HiOutlineShare} from "react-icons/hi";
 import {LiaTruckMovingSolid} from "react-icons/lia";
 import {RiInformationLine} from "react-icons/ri";
@@ -116,6 +121,9 @@ export const Mail = ({size, color, className}) => (
 export const Message = ({size, color, className}) => (
   <BiSolidMessage size={size} color={color} className={className} />
 );
+export const Rupee = ({size, color, className}) => (
+  <BiRupee size={size} color={color} className={className} />
+);
 
 export const CopyIcon = ({size, color, className}) => (
   <PiCopySimpleBold size={size} color={color} className={className} />
@@ -183,4 +191,26 @@ export const InformationIcon = ({size, color, className}) => (
 
 export const DeleteIcon = ({size, color, className}) => (
   <AiOutlineDelete size={size} color={color} className={className} />
+);
+
+export const ArrowForw = ({size, color, className}) => (
+  <IoArrowForward size={size} color={color} className={className} />
+);
+
+export const Checked = ({size, color, className, onClick}) => (
+  <MdCheckBox
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
+);
+
+export const Unchecked = ({size, color, className, onClick}) => (
+  <MdOutlineCheckBoxOutlineBlank
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
 );

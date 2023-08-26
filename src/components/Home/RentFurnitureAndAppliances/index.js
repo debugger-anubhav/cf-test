@@ -12,6 +12,7 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
+import {setLocalStorage} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
@@ -77,16 +78,14 @@ const RentFurnitureAndAppliances = ({params}) => {
               className={styles.card_wrapper}
               onClick={() => {
                 router.push(
-                  `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
-                    .trim()
-                    .split(" ")
-                    .join("-")
-                    .toLowerCase()}
-      `,
+                  `/${homePageReduxData?.cityName.toLowerCase()}/${
+                    item?.seourl
+                  }`,
                 );
-
-                localStorage.setItem("categoryId", item?.rootID);
-                localStorage.setItem("subCategoryId", item?.id);
+                if (typeof window !== "undefined") {
+                  setLocalStorage("categoryId", item?.rootID);
+                  setLocalStorage("subCategoryId", item?.id);
+                }
               }}>
               <img
                 src={

@@ -16,7 +16,7 @@ const Footer = ({params}) => {
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 

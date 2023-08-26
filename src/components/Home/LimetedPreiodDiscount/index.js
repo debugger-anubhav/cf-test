@@ -7,11 +7,12 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
+import {useRouter} from "next/navigation";
 import {productImageBaseUrl} from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
-
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
 
@@ -63,13 +64,21 @@ const LimetedPreiodDiscount = () => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
       <h3 className={styles.subHeading}>Hurry before it ends</h3>
       <div className={styles.card_box} ref={sliderRef}>
         {getLimitedPreiodData?.map((item, index) => (
-          <div key={index.toString()}>
+          <div
+            key={index.toString()}
+            onClick={e => handleCardClick(e, item)}
+            className={styles.child}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}
@@ -83,8 +92,6 @@ const LimetedPreiodDiscount = () => {
               discount={`${Math.round(
                 ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
-              productId={item?.id}
-              productName={item?.product_name.replace(/ /g, "-")}
             />
           </div>
         ))}

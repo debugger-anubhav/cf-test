@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
-import {categoryIconsUrl, setLocalStorage} from "@/constants/constant";
+import {
+  categoryIconsUrl,
+  getLocalStorage,
+  setLocalStorage,
+} from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
 import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
 import {useDispatch, useSelector} from "react-redux";
@@ -34,10 +38,21 @@ const SubHeader = () => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  const category = localStorage.getItem("category")?.replace(/"/g, "");
-  const categoryId = localStorage.getItem("categoryId");
-  const subCategory = localStorage.getItem("subCategory")?.replace(/"/g, "");
-  const subCategoryId = localStorage.getItem("subCategoryId");
+  // const category = localStorage.getItem("category")?.replace(/"/g, "");
+  // const categoryId = localStorage.getItem("categoryId");
+  // const subCategory = localStorage.getItem("subCategory")?.replace(/"/g, "");
+  // const subCategoryId = localStorage.getItem("subCategoryId");
+  let category;
+  let categoryId;
+  let subCategoryId;
+  let subCategory;
+
+  if (typeof window !== "undefined") {
+    categoryId = getLocalStorage("categoryId");
+    subCategoryId = getLocalStorage("subCategoryId");
+    subCategory = getLocalStorage("subCategory")?.replace(/"/g, "");
+    category = getLocalStorage("category")?.replace(/"/g, "");
+  }
 
   const {refetch: getFilterList} = useQuery(
     "filter-list",
@@ -53,14 +68,9 @@ const SubHeader = () => {
     if (typeof window !== "undefined") {
       setLocalStorage("subCategory", item?.cat_name);
     }
+
     router.push(
-      // &#0;
-      `/category/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
-        .trim()
-        .split(" ")
-        .join("-")
-        .toLowerCase()}
-      `,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
     dispatch(addSubCategoryId(item?.id));
 

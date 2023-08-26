@@ -9,8 +9,10 @@ import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const PreDesignCombos = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
@@ -64,7 +66,11 @@ const PreDesignCombos = () => {
       slider.removeEventListener("mouseleave", stopDragging);
     };
   }, []);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   return (
     <>
       {homePageReduxData?.designComboProduct?.length ? (
@@ -72,7 +78,10 @@ const PreDesignCombos = () => {
           <h2 className={styles.heading}>Predesigned combos for you</h2>
           <div className={styles.card_box} ref={sliderRef}>
             {homePageReduxData?.designComboProduct?.map((item, index) => (
-              <div key={index.toString()} className="demo">
+              <div
+                key={index.toString()}
+                className={styles.child}
+                onClick={e => handleCardClick(e, item)}>
                 <Card
                   cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                   // hoverCard="false"
@@ -89,8 +98,6 @@ const PreDesignCombos = () => {
                   ).toFixed(2)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
-                  productId={item?.id}
-                  productName={item?.product_name.replace(/ /g, "-")}
                 />
               </div>
             ))}

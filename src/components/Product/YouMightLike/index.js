@@ -9,8 +9,10 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {productPageImagesBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const YouMightLike = ({heading, isbg, params}) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
@@ -55,7 +57,11 @@ const YouMightLike = ({heading, isbg, params}) => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   if (pageData?.youMightLike?.length > 0) {
     return (
       <div
@@ -68,7 +74,10 @@ const YouMightLike = ({heading, isbg, params}) => {
 
         <div className={styles.card_wrapper} ref={sliderRef}>
           {pageData?.youMightLike?.map((item, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              onClick={e => handleCardClick(e, item)}
+              className={styles.child}>
               <Card
                 cardImage={`${
                   productPageImagesBaseUrl + item?.image?.split(",")[0]
@@ -80,8 +89,6 @@ const YouMightLike = ({heading, isbg, params}) => {
                 currentPrice={item?.sale_price}
                 desc={item?.product_name}
                 isHover={false}
-                productId={item?.id}
-                productName={item?.product_name.replace(/ /g, "-")}
               />
             </div>
           ))}

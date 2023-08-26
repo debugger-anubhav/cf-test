@@ -6,14 +6,16 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCategoryTrendingProduct} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const TrendingItem = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const cityIdStr = localStorage
     .getItem("cityId")
-    .toString()
+    ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
@@ -30,7 +32,11 @@ const TrendingItem = () => {
       })
       .catch(err => console.log(err));
   }, []);
-
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   const Data = categoryPageReduxData?.tendingItems;
 
   return (
@@ -38,7 +44,10 @@ const TrendingItem = () => {
       <h2 className={styles.heading}>Trending products</h2>
       <div className={styles.main_sub_container} id="galleryDragger">
         {Data?.map((item, index) => (
-          <div key={index.toString()} className="flex flex-wrap mr-4 mb-4">
+          <div
+            key={index.toString()}
+            className={`${styles.child}flex flex-wrap mr-4 mb-4`}
+            onClick={e => handleCardClick(e, item)}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={

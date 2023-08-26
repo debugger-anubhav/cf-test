@@ -19,6 +19,7 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
+import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -100,25 +101,34 @@ export default function Page() {
           <AnnouncementBar />
           <Header />
           <MenuList />
-          <HeroBanner />
-          <RentFurnitureAndAppliances params={params} />
-          <RecentlyViewedProduct />
-          <TrendingProducts params={params} />
-          <OffersAndCoupons />
-          <NewlyLaunched />
-          <DownloadForMobile />
-          <PreDesignCombos />
-          <HasselFreeServicesCards />
-          <LimetedPreiodDiscount />
-          <RentNowBanner params={params} />
-          <TryCityMax />
-          <CustomerRating />
-          <MediaCoverage />
-          <CombineSection />
-          <HappySubscribers params={params} page={params.category} />
-          <FrequentlyAskedQuestions params={params} />
-          <TextContent params={params} />
-          <Footer />
+          {params.category === "appliances-rental" ||
+          params.category === "furniture-rental" ? (
+            <div>
+              <HeroBanner />
+              <RentFurnitureAndAppliances params={params} />
+              <RecentlyViewedProduct />
+              <TrendingProducts params={params} />
+              <OffersAndCoupons />
+              <NewlyLaunched />
+              <DownloadForMobile />
+              <PreDesignCombos />
+              <HasselFreeServicesCards />
+              <LimetedPreiodDiscount />
+              <RentNowBanner params={params} />
+              <TryCityMax />
+              <CustomerRating />
+              <MediaCoverage />
+              <CombineSection />
+              <HappySubscribers params={params} page={params.category} />
+              <FrequentlyAskedQuestions params={params} />
+              <TextContent params={params} />
+              <Footer />
+            </div>
+          ) : (
+            <div>
+              <SubHeader />
+            </div>
+          )}
         </div>
       </Provider>
       {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}

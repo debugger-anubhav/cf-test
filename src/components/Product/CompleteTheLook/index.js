@@ -9,8 +9,10 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {productPageImagesBaseUrl} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 const CompleteTheLook = ({params}) => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
@@ -54,6 +56,11 @@ const CompleteTheLook = ({params}) => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
   }, []);
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
 
   if (pageData?.completeTheLook.length > 0) {
     return (
@@ -62,7 +69,10 @@ const CompleteTheLook = ({params}) => {
 
         <div className={styles.card_wrapper} ref={sliderRef}>
           {pageData?.completeTheLook?.map((item, index) => (
-            <div key={index}>
+            <div
+              key={index}
+              onClick={e => handleCardClick(e, item)}
+              className={styles.child}>
               <Card
                 cardImage={`${
                   productPageImagesBaseUrl + item?.image?.split(",")[0]
@@ -74,8 +84,6 @@ const CompleteTheLook = ({params}) => {
                 currentPrice={item?.sale_price}
                 desc={item?.product_name}
                 isHover={false}
-                productId={item?.id}
-                productName={item?.product_name.replace(/ /g, "-")}
               />
             </div>
           ))}
