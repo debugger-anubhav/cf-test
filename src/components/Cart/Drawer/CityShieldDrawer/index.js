@@ -13,12 +13,27 @@ const CityShieldDrawerForCart = ({
   cityShieldDiscount,
   toggleCheckbox,
 }) => {
-  const arr = [
+  const benefits = [
     {img: ProductPageImages.sratches, label: "Scratches & dents"},
     {img: ProductPageImages.liquidSpill, label: "Liquid spills & stains"},
     {img: ProductPageImages.brokenFurni, label: "Broken furniture"},
     {img: ProductPageImages.cracksTears, label: "Cracks, tears & more"},
   ];
+
+  const coveredPoints = [
+    "Damages due to normal wear and tear",
+    "Scratches and dents on the product(s)",
+    "Liquid spills and food stains on the upholstery or product surfaces",
+    "Cracks and tears to the product(s)",
+    "Bugs and fungus damaging the product(s)",
+    "And more",
+  ];
+
+  const uncoveredPoints = [
+    " Damages voluntarily caused or worsened, with sharp objects, hand or power tools, cigarette butts, or other such abuse",
+    "Burglary or theft of the product(s)",
+  ];
+
   return (
     <Drawer
       anchor="right"
@@ -61,7 +76,7 @@ const CityShieldDrawerForCart = ({
         </div>
 
         <div className={styles.arr_wrapper}>
-          {arr.map((item, index) => (
+          {benefits.map((item, index) => (
             <div key={index} className="w-[80px]">
               <div className={styles.img_div}>
                 <img src={item.img} />
@@ -93,6 +108,30 @@ const CityShieldDrawerForCart = ({
           }}>
           No, I wanna risk damaging the furniture & Applicances
         </p>
+
+        <div className={styles.points_wrappper}>
+          <div>
+            <p className={styles.cover_head}>What is covered?</p>
+            {coveredPoints.map((item, index) => (
+              <ul key={index} className={styles.list}>
+                <div className={styles.dot}></div>
+                <li className={styles.points_item}>{item}</li>
+              </ul>
+            ))}
+          </div>
+
+          <div className="mt-6">
+            <p className={styles.cover_head}>What is not covered?</p>
+            {uncoveredPoints.map((item, index) => (
+              <ul key={index} className={styles.list}>
+                <div className={styles.dot}></div>
+                <li key={index} className={styles.points_item}>
+                  {item}
+                </li>
+              </ul>
+            ))}
+          </div>
+        </div>
       </div>
     </Drawer>
   );
