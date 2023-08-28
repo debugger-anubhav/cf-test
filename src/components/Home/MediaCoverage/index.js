@@ -43,6 +43,7 @@ const MediaCoverage = () => {
         },
       },
     ],
+    pauseOnHover: false,
   };
 
   return (

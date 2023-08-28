@@ -72,7 +72,7 @@ const RecentlyViewedProduct = ({page}) => {
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.product_id}/${item.seourl}`);
+      router.push(`/next/things/${item.product_id}/${item.seourl}`);
     }
   };
 

@@ -16,6 +16,7 @@ import DownloadQR from "@/assets/header/download-QR.svg";
 
 const Desktop = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
 const Mobile = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/";
+const MediaIcons = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 const ProductIcons = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -47,15 +48,15 @@ export const HomePageImages = {
 };
 
 export const HomePageMediaCoverage = {
-  icon1: Desktop + "business-line.webp",
-  icon2: Desktop + "ani.webp",
-  icon3: Desktop + "business-standard.webp",
-  icon4: Desktop + "entrackr.webp",
-  icon5: Desktop + "entrepreneur-india.webp",
-  icon6: Desktop + "inc42.webp",
-  icon7: Desktop + "khaleej-times.webp",
-  icon8: Desktop + "theprint.webp",
-  icon9: Desktop + "outlook.webp",
+  icon1: MediaIcons + "business-line.webp",
+  icon2: MediaIcons + "ani.webp",
+  icon3: MediaIcons + "business-standard.webp",
+  icon4: MediaIcons + "entrackr.webp",
+  icon5: MediaIcons + "entrepreneur-india.webp",
+  icon6: MediaIcons + "inc42.webp",
+  icon7: MediaIcons + "khaleej-times.webp",
+  icon8: MediaIcons + "theprint.webp",
+  icon9: MediaIcons + "outlook.webp",
 };
 
 export const HomePageRentNowBanner = {
