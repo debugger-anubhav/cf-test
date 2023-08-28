@@ -58,7 +58,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/next/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -287,7 +289,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                 className={styles.pill}
                 // onClick={() => router.push("/")}
               >
-                {console.log(item, "ppppp")}
                 <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
                 <p className={styles.pill_text}>{item}</p>
               </div>

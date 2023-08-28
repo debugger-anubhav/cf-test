@@ -70,7 +70,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(`/next/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -79,7 +79,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
 
     if (typeof window !== "undefined") {

@@ -70,7 +70,7 @@ const SubHeader = () => {
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
     dispatch(addSubCategoryId(item?.id));
 
