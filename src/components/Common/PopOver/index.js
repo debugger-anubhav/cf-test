@@ -91,7 +91,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     dispatch(addSubCategoryId(item?.id));
     dispatch(addProductName(item));
     dispatch(addProductCategory(hoverRef.current));
-    console.log(previousSubCategory !== item?.cat_name, "state");
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
       dispatch(addSetProduct([]));
@@ -136,20 +135,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
             All
           </p>
           {list?.map(
-            (item, index) =>
-              // <Link>
-              {
-                // { console.log(item, "itemmm") }
-                // console.log(item, "item")
-                return (
-                  <p
-                    className={styles.sub_item}
-                    key={index.toString()}
-                    onClick={e => handleSelectedProduct(e, item)}>
-                    {item?.cat_name}
-                  </p>
-                );
-              },
+            (item, index) => {
+              return (
+                <p
+                  className={styles.sub_item}
+                  key={index.toString()}
+                  onClick={e => handleSelectedProduct(e, item)}>
+                  {item?.cat_name}
+                </p>
+              );
+            },
             // </Link>
           )}
         </div>

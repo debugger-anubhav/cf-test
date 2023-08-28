@@ -139,7 +139,6 @@ const Header = () => {
               onClick={() => {
                 // setOpenSearchBar(!openSearchbar);
                 settopOffset(65 - window.pageYOffset);
-                console.log("dsajh");
               }}
             />
             <Image
@@ -283,7 +282,12 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <p className={styles.search_head}>Trending searches</p>
           <div className={styles.pills_wrapper}>
             {arr?.map((item, index) => (
-              <div key={index.toString()} className={styles.pill}>
+              <div
+                key={index.toString()}
+                className={styles.pill}
+                // onClick={() => router.push("/")}
+              >
+                {console.log(item, "ppppp")}
                 <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
                 <p className={styles.pill_text}>{item}</p>
               </div>
