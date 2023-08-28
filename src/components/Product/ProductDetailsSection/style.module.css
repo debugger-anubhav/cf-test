@@ -111,7 +111,7 @@
   @apply text-12 xl:text-14 tracking-[-0.24] xl:tracking-desc text-45454A leading-normal;
 }
 .city_shield_wrapper {
-  @apply rounded-xl p-4 xl:p-6 w-full relative mt-12;
+  @apply rounded-xl p-4 xl:p-6 w-full relative mt-12 cursor-pointer;
   background: linear-gradient(
     133deg,
     #f1eeff 0%,
