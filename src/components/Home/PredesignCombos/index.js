@@ -16,13 +16,13 @@ const PreDesignCombos = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
+  const [isDumy, setIsDumy] = React.useState(false);
 
   const {refetch: getPreDesignCombos} = useQuery(
     "design-combos",
     endPoints.productCombos,
     `?cityId=${cityId}&userId=${85757}`,
   );
-
   useEffect(() => {
     getPreDesignCombos()
       .then(res => {
@@ -46,7 +46,12 @@ const PreDesignCombos = () => {
       scrollLeft = slider.scrollLeft;
     };
     const stopDragging = () => {
+      setIsDumy(false);
       mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
     };
 
     slider.addEventListener("mousemove", e => {
@@ -59,13 +64,16 @@ const PreDesignCombos = () => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
 
     return () => {
       slider.removeEventListener("mousedown", startDragging);
       slider.removeEventListener("mouseup", stopDragging);
       slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
       router.push(`/next/things/${item.id}/${item.seourl}`);
@@ -80,7 +88,7 @@ const PreDesignCombos = () => {
             {homePageReduxData?.designComboProduct?.map((item, index) => (
               <div
                 key={index.toString()}
-                className={styles.child}
+                className={`${styles.child} ${isDumy && "pointer-events-none"}`}
                 onClick={e => handleCardClick(e, item)}>
                 <Card
                   cardImage={productImageBaseUrl + item?.image?.split(",")[0]}

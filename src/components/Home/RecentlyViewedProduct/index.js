@@ -14,6 +14,7 @@ const RecentlyViewedProduct = ({page}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const [isDumy, setIsDumy] = React.useState(false);
   // const cityIdStr = localStorage
   //   .getItem("cityId")
   //   ?.toString()
@@ -50,13 +51,18 @@ const RecentlyViewedProduct = ({page}) => {
     let mouseDown = false;
     let startX, scrollLeft;
 
-    const startDragging = function (e) {
+    const startDragging = e => {
       mouseDown = true;
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     };
-    const stopDragging = function () {
+    const stopDragging = () => {
+      setIsDumy(false);
       mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
     };
 
     slider.addEventListener("mousemove", e => {
@@ -69,6 +75,14 @@ const RecentlyViewedProduct = ({page}) => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
@@ -91,7 +105,7 @@ const RecentlyViewedProduct = ({page}) => {
             <div
               key={index.toString()}
               onClick={e => handleCardClick(e, item)}
-              className={styles.child}>
+              className={`${styles.child} ${isDumy && "pointer-events-none"}`}>
               {/* {console.log(item, "kdjfkdsfhdsjkf")} */}
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
