@@ -1,28 +1,21 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
-import {Close, CopyIcon} from "@/assets/icon";
+import {Close} from "@/assets/icon";
 import {useSelector} from "react-redux";
+import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 
-const CouponDrawer = ({toggleDrawer, open}) => {
+const CouponDrawer = ({toggleDrawer, open, applyCouponCode}) => {
   const pageData = useSelector(state => state.homePagedata.offerCoupons);
 
-  const [isCopied, setIsCopied] = React.useState(false);
-  const [copiedIndex, setCopiedIndex] = React.useState(null);
+  const [isApplied, setIsApplied] = React.useState(false);
+  const [appliedIndex, setappliedIndex] = React.useState(null);
+  const [input, setInput] = useState("");
 
-  const handleCopyClick = textToCopy => {
-    const tempTextArea = document.createElement("textarea");
-    tempTextArea.value = textToCopy;
-    document.body.appendChild(tempTextArea);
-    tempTextArea.select();
-    try {
-      document.execCommand("copy");
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000); // Reset "isCopied" after 2 seconds
-    } catch (err) {
-      console.error("Failed to copy: ", err);
-    }
-    document.body.removeChild(tempTextArea);
+  const handleApplyClick = couponCode => {
+    setIsApplied(true);
+    if (couponCode !== "") applyCouponCode(couponCode);
+    toggleDrawer();
   };
 
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
@@ -51,17 +44,27 @@ const CouponDrawer = ({toggleDrawer, open}) => {
       classes={{paper: styles.customDrawer}}>
       {" "}
       <div className={styles.main_container}>
-        <div
-          className={styles.close_icon}
-          onClick={() => {
-            toggleDrawer();
-          }}>
+        <div className={styles.close_icon} onClick={toggleDrawer}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
+        </div>
+        <div className="hidden">
+          <OffersAndCoupons />
         </div>
         <h1 className={styles.header}>Offers & coupons</h1>
         <div className={styles.input_div}>
-          <input className={styles.input} placeholder="Enter Coupon code" />
-          <p className={styles.apply_text}>Apply</p>
+          <input
+            className={styles.input}
+            placeholder="Enter Coupon code"
+            onChange={e => setInput(e.target.value)}
+          />
+          <p
+            className={styles.apply_text}
+            onClick={() => {
+              input !== "" && applyCouponCode(input);
+              toggleDrawer();
+            }}>
+            Apply
+          </p>
         </div>
 
         <div className={styles.coupons_wrapper}>
@@ -70,9 +73,9 @@ const CouponDrawer = ({toggleDrawer, open}) => {
               key={index.toString()}
               className={styles.card}
               onClick={() => {
-                console.log("click");
-                setCopiedIndex(index);
-                handleCopyClick(item.coupon_code);
+                handleApplyClick(item.coupon_code);
+                setappliedIndex(index);
+                toggleDrawer();
               }}>
               <div className={`${styles.ellipse} ${styles.left}`}></div>
               <div className={`${styles.ellipse} ${styles.right}`}></div>
@@ -92,14 +95,7 @@ const CouponDrawer = ({toggleDrawer, open}) => {
               <div className={styles.line}></div>
               <div className={styles.copy_div}>
                 <button id="copy-button" className="text-[#222] flex ">
-                  {isCopied && copiedIndex === index ? (
-                    "Copied!"
-                  ) : (
-                    <>
-                      <CopyIcon size={20} color={"black"} className={"mr-1"} />
-                      Copy
-                    </>
-                  )}
+                  {isApplied && appliedIndex === index ? "Applied!" : "Apply"}
                 </button>
               </div>
             </div>
