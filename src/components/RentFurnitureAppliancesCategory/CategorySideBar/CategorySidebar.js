@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {DownArrow} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-import {addFilterProduct} from "@/store/Slices/CategorySlice";
+import {addFilterProduct} from "@/store/Slices/categorySlice";
 
 const CategorySidebar = () => {
   const dispatch = useDispatch();
@@ -31,8 +31,6 @@ const CategorySidebar = () => {
   };
 
   const filteredProduct = [];
-  console.log(filteredProduct, "filteredProduct");
-
   const {refetch: getAllFilterProduct} = useQuery(
     "filter-product",
     endPoints.filterProduct,
@@ -42,7 +40,6 @@ const CategorySidebar = () => {
   useEffect(() => {
     getAllFilterProduct()
       .then(res => {
-        console.log(res?.data?.data, "6511122");
         dispatch(addFilterProduct(res?.data?.data));
       })
       .catch(err => console.log(err));
