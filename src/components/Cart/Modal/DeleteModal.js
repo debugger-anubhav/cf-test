@@ -34,7 +34,15 @@ const DeleteModal = ({isModalOpen, closeModal}) => {
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
-          <div className={styles.share_drawer_wrapper}></div>
+          <h1 className={styles.head}>Delete item? </h1>
+          <div className={styles.btn_wrapper}>
+            <button className={`${styles.white_btn} ${styles.btn}`}>
+              Save to favorites
+            </button>
+            <button className={`${styles.yellow_btn} ${styles.btn}`}>
+              Yes, delete
+            </button>
+          </div>
         </Drawer>
       ) : (
         <Modal
@@ -47,7 +55,15 @@ const DeleteModal = ({isModalOpen, closeModal}) => {
             overlay: styles.customOverlay,
             closeButton: styles.customCloseButton,
           }}>
-          delete modal
+          <h1 className={styles.head}>Delete item? </h1>
+          <div className={styles.btn_wrapper}>
+            <button className={`${styles.white_btn} ${styles.btn}`}>
+              Save to favorites
+            </button>
+            <button className={`${styles.yellow_btn} ${styles.btn}`}>
+              Yes, delete
+            </button>
+          </div>
         </Modal>
       )}
     </div>
