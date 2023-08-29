@@ -23,7 +23,6 @@ import {
 import {setLocalStorage} from "@/constants/constant";
 
 const PopOver = ({list, item, parentCategoryId, data}) => {
-  console.log(data?.cat_name, "data");
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   const hoverRef = React.useRef("");

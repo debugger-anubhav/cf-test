@@ -152,7 +152,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
-                // console.log(item?.image.split(","), "item?.image.split")
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}

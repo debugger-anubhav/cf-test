@@ -100,3 +100,13 @@
 .mobile_search_row .backdrop {
   padding-top: 1rem;
 }
+
+.search_rasult_wrapper {
+  @apply flex mb-4 items-center cursor-pointer;
+}
+.serach_result_img {
+  @apply min-w-[4rem]  h-12 mr-2;
+}
+.search_result_text {
+  @apply text-14 text-45454A font-medium;
+}

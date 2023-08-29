@@ -36,16 +36,6 @@ const RatingBar = () => {
     total: totalReviews,
   };
 
-  // console.log(
-  //   (ratings.oneStar +
-  //     ratings.twoStar +
-  //     ratings.threeStar +
-  //     ratings.fourStar +
-  //     ratings.fiveStar) /
-  //     totalReviews,
-  //   "my calci",
-  // );
-
   return (
     <div>
       <h2 className={styles.head}>Customer Ratings</h2>
