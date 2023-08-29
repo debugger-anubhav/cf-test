@@ -6,7 +6,8 @@ import {store} from "@/store";
 import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Provider} from "react-redux";
-import ShoppingCartSection from "@/components/Cart/ShoppingCartSection";
+// import ShoppingCartSection from "@/components/Cart/ShoppingCartSection";
+import CartSection from "@/components/Cart";
 
 const Cart = () => {
   const queryClient = new QueryClient();
@@ -17,7 +18,7 @@ const Cart = () => {
           <AnnouncementBar />
           <Header />
           <MenuList />
-          <ShoppingCartSection />
+          <CartSection />
         </div>
       </Provider>
     </QueryClientProvider>

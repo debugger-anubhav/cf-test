@@ -1,7 +1,12 @@
 import React from "react";
 import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
-import {FiChevronDown} from "react-icons/fi";
-import {IoClose, IoCloseOutline, IoArrowForward} from "react-icons/io5";
+import {FiChevronDown, FiChevronUp} from "react-icons/fi";
+import {
+  IoClose,
+  IoCloseOutline,
+  IoArrowForward,
+  IoArrowBack,
+} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
@@ -173,6 +178,15 @@ export const DownPopUpArrow = ({size, color, className, onMouseOver}) => (
   />
 );
 
+export const PopUpArrow = ({size, color, className, onMouseOver}) => (
+  <FiChevronUp
+    size={size}
+    color={color}
+    className={className}
+    onMouseOver={onMouseOver}
+  />
+);
+
 export const ShareIcon = ({size, color, className}) => (
   <HiOutlineShare size={size} color={color} className={className} />
 );
@@ -217,4 +231,8 @@ export const UncheckedBox = ({size, color, className, onClick}) => (
 
 export const RightIcon = ({size, color, className}) => (
   <BsCheckLg size={size} color={color} className={className} />
+);
+
+export const BackIcon = ({size, color, className}) => (
+  <IoArrowBack size={size} color={color} className={className} />
 );

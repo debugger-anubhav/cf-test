@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {categoryIconsUrl, productImageBaseUrl} from "@/constants/constant";
 import {
@@ -14,9 +14,10 @@ import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
+import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 // import DeleteModal from "../Modal/DeleteModal";
 
-const ShoppingCartSection = () => {
+const ShoppingCartSection = ({setTab}) => {
   const count = 5;
   const arr = [
     {
@@ -83,10 +84,14 @@ const ShoppingCartSection = () => {
   const [isChecked, setIsChecked] = useState(true);
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
+  const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [code, setCode] = useState("");
+
+  // console.log(isModalOpen);
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -105,18 +110,30 @@ const ShoppingCartSection = () => {
     setCouponDrawerOpen(!couponDrawerOpen);
   };
 
-  const openModal = () => {
-    setIsModalOpen(true);
+  useEffect(() => {
+    console.log(breakupDrawer, "reakkk");
+  }, [breakupDrawer]);
+
+  const toggleDrawerBreakup = () => {
+    setBreakupDrawer(!breakupDrawer);
   };
+
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  // };
   // const closeModal = () => {
   //   setIsModalOpen(false);
   // };
-  console.log(isModalOpen);
+
+  const applyCouponCode = value => {
+    setIsCouponApplied(true);
+    setCode(value);
+  };
 
   return (
     <div className={styles.main_container}>
       {/* <DeleteModal isModalOpen={isModalOpen} closeModal={closeModal} /> */}
-      <div className={styles.left_div}>
+      <div className={styles.left_div} id="leftDiv">
         <h1 className={styles.head}>Shopping cart ({count})</h1>
         <div className={styles.card_wrapper}>
           {arr.map((item, index) => (
@@ -132,7 +149,9 @@ const ShoppingCartSection = () => {
               <div>
                 <div className={styles.name_div}>
                   <p className={styles.product_name}>{item.product_name}</p>
-                  <div onClick={openModal}>
+                  <div
+                  // onClick={openModal}
+                  >
                     {" "}
                     <DeleteIcon className={styles.delete_icon} />
                   </div>
@@ -163,7 +182,7 @@ const ShoppingCartSection = () => {
         </div>
       </div>
 
-      <div className={styles.right_div}>
+      <div className={styles.right_div} id="rightDiv">
         <div className={styles.city_shield_div}>
           <div className={styles.city_shield_head_div}>
             <div className={styles.verify_icon_div}>
@@ -247,24 +266,35 @@ const ShoppingCartSection = () => {
           </div>
         </div>
 
-        <div className={styles.coupons_wrapper}>
-          <p className={styles.offer_text}>Apply Offers & Coupons🎉</p>
+        <div
+          className={styles.coupons_wrapper}
+          onClick={() => {
+            !isCouponApplied && setCouponDrawerOpen(true);
+          }}>
+          <p className={styles.offer_text}>
+            {isCouponApplied ? `${code} applied🎉` : "Apply Offers & Coupon🎉"}
+          </p>
           {isCouponApplied ? (
-            <p className={styles.remove_txt}>Remove</p>
+            <p
+              className={styles.remove_txt}
+              onClick={() => setIsCouponApplied(false)}>
+              Remove
+            </p>
           ) : (
             <div onClick={() => setCouponDrawerOpen(true)}>
               <ArrowForw color={"#3E688E"} className={styles.arrow} />
             </div>
           )}
-
-          {couponDrawerOpen && (
-            <CouponDrawer
-              toggleDrawer={toggleDrawerCoupon}
-              open={couponDrawerOpen}
-              applyCoupon={setIsCouponApplied}
-            />
-          )}
         </div>
+
+        {couponDrawerOpen && (
+          <CouponDrawer
+            toggleDrawer={toggleDrawerCoupon}
+            open={couponDrawerOpen}
+            applyCoupon={setIsCouponApplied}
+            applyCouponCode={applyCouponCode}
+          />
+        )}
 
         <div className={styles.payment_mode}>
           <h2 className={styles.pref_mode_head}>Preferred payment mode:</h2>
@@ -305,7 +335,9 @@ const ShoppingCartSection = () => {
           </div>
         </div>
 
-        <div className={styles.cart_breakup}>
+        <div
+          className={styles.cart_breakup}
+          onClick={() => setBreakupDrawer(true)}>
           <div>
             <p className={styles.total_text}>Total:</p>
             <div className={styles.breakup_wrapper}>
@@ -318,6 +350,18 @@ const ShoppingCartSection = () => {
             11,709
           </p>
         </div>
+
+        {breakupDrawer && (
+          <TotalBreakup
+            toggleDrawer={toggleDrawerBreakup}
+            open={breakupDrawer}
+            arr={arr}
+          />
+        )}
+
+        <button className={styles.proceed_button} onClick={setTab}>
+          Proceed <ArrowForw size={19} color={"#222"} />
+        </button>
       </div>
     </div>
   );

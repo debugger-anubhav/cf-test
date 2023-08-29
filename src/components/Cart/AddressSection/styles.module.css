@@ -1,0 +1,9 @@
+.main_container {
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-28 xl:gap-36 macbook:gap-[214px];
+}
+.head_div {
+  @apply flex gap-2 items-center cursor-pointer;
+}
+.head {
+  @apply text-20 text-45454A leading-10 font-medium tracking-0.4;
+}

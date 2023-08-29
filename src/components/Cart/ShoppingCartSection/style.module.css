@@ -1,8 +1,8 @@
 .main_container {
-  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-28 xl:gap-36 macbook:gap-[214px];
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px];
 }
 .left_div {
-  @apply lg:h-[100vh] lg:overflow-scroll;
+  @apply lg:h-[100vh] xl:h-[800px] lg:overflow-y-scroll lg:overflow-x-hidden;
 }
 .head {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
@@ -11,7 +11,7 @@
   @apply mt-8 flex flex-col gap-12 xl:gap-16;
 }
 .single_product_wrapper {
-  @apply xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
+  @apply w-fit lg:w-[450px] xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
 }
 .img_div {
   @apply min-w-[96px] h-[71px] md:min-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:h-[98px];
@@ -66,7 +66,7 @@
   @apply text-[#5774AC] underline cursor-pointer;
 }
 .coupons_wrapper {
-  @apply flex md:w-[440px] lg:w-full xl:w-[440px] xl:h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-4 border-[2px] border-transparent hover:border-[#3E688E];
+  @apply cursor-pointer flex md:w-[440px] lg:w-full xl:w-[440px] xl:h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-4 border-[2px] border-transparent hover:border-[#3E688E];
   background: linear-gradient(138deg, #e8f0f6 0%, #fffaeb 99.38%);
 }
 .offer_text {
@@ -75,8 +75,8 @@
 .arrow {
   @apply w-[19px] h-[19px] cursor-pointer;
 }
-.remove_text {
-  @apply text-[#D96060] text-16 underline;
+.remove_txt {
+  @apply text-[#D96060] text-16 underline cursor-pointer;
 }
 .coins_div {
   @apply w-full md:w-[440px] lg:w-full xl:w-[440px] p-4 hover:border-[#3E688E] hover:border-[1.5px] border border-[#dddddf] mt-4 flex justify-between items-center;
@@ -96,7 +96,7 @@
   @apply text-9A9AA2 font-medium text-12 xl:text-14  leading-5 tracking-0.24 xl:tracking-desc;
 }
 .cart_breakup {
-  @apply md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-[#5774AC] flex justify-between mt-4;
+  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-[#5774AC] flex justify-between mt-4;
 }
 .breakup_wrapper {
   @apply flex gap-1 items-center mt-1 xl:mt-[11px];
@@ -123,7 +123,7 @@
   @apply text-45454A text-16 xl:text-20 font-medium xl:leading-10 tracking-0.3 xl:tracking-0.4;
 }
 .monthly_toggler {
-  @apply mt-3 p-1 flex items-center justify-between bg-[#CBCBCB] rounded-xl w-[212px] h-[44px];
+  @apply mt-3 p-1 flex items-center justify-between bg-[#747474] rounded-xl w-[212px] h-[44px];
 }
 .pref_mode_text {
   @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
@@ -136,4 +136,7 @@
 }
 .payment_mode_feature {
   @apply text-14 leading-5 text-71717A tracking-desc;
+}
+.proceed_button {
+  @apply mt-6 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-14 flex items-center justify-center gap-[10px];
 }
