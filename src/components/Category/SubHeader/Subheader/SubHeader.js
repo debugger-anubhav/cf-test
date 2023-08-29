@@ -70,7 +70,7 @@ const SubHeader = () => {
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
     dispatch(addSubCategoryId(item?.id));
 
@@ -201,12 +201,20 @@ const SubHeader = () => {
         </div>
         <div className={styles.filter_sort_section_mobile}>
           <div className={styles.filter}>
-            <FilterSortDrawer filterName={"Filter"} setPageNo={setPageNo} />
+            <FilterSortDrawer
+              filterName={"Filter"}
+              setPageNo={setPageNo}
+              setFilterListed={setFilterListed}
+            />
           </div>
           <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
             <div className={styles.filter}>
-              <FilterSortDrawer filterName={"Default"} setPageNo={setPageNo} />
+              <FilterSortDrawer
+                filterName={"Default"}
+                setPageNo={setPageNo}
+                setFilterListed={setFilterListed}
+              />
             </div>
           </div>
           {/* ------------------------------------------------------------------------------------------------------ */}

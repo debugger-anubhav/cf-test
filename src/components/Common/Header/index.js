@@ -58,7 +58,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/next/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -125,7 +127,7 @@ const Header = () => {
               className={styles.header_profile_icon}
               onClick={() =>
                 router.push(
-                  "https://test.rentofurniture.com/htdocs/user_sign_up",
+                  "https://test.rentofurniture.com/cityfurnish/user_sign_up",
                 )
               }
             />
@@ -139,7 +141,6 @@ const Header = () => {
               onClick={() => {
                 // setOpenSearchBar(!openSearchbar);
                 settopOffset(65 - window.pageYOffset);
-                console.log("dsajh");
               }}
             />
             <Image
@@ -283,7 +284,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <p className={styles.search_head}>Trending searches</p>
           <div className={styles.pills_wrapper}>
             {arr?.map((item, index) => (
-              <div key={index.toString()} className={styles.pill}>
+              <div
+                key={index.toString()}
+                className={styles.pill}
+                // onClick={() => router.push("/")}
+              >
                 <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
                 <p className={styles.pill_text}>{item}</p>
               </div>

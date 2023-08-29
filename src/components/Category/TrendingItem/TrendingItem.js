@@ -34,7 +34,7 @@ const TrendingItem = () => {
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   const Data = categoryPageReduxData?.tendingItems;

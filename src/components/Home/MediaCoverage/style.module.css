@@ -24,7 +24,7 @@
 }
 
 .slide {
-  @apply mb-0 md:mb-16 mt-16 mx-4 w-full flex justify-center items-center h-auto;
+  @apply mb-0 mt-16 mx-4 w-full flex justify-center items-center h-auto;
 }
 
 .slide img {

@@ -10,6 +10,7 @@ const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
   const settings = {
     dots: false,
+    arrows: false,
     infinite: true,
     speed: 100,
     autoplay: true,
@@ -42,6 +43,7 @@ const MediaCoverage = () => {
         },
       },
     ],
+    pauseOnHover: false,
   };
 
   return (

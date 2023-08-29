@@ -18,7 +18,11 @@ import {
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
 
-export default function FilterSortDrawer({filterName, setPageNo}) {
+export default function FilterSortDrawer({
+  filterName,
+  setPageNo,
+  setFilterListed,
+}) {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const [state, setState] = React.useState({
@@ -46,6 +50,20 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
     }
 
     setState({...state, [anchor]: open});
+  };
+
+  const handleFilterDivClick = (e, filterTag) => {
+    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    const filterIndex = updatedFilteredList.indexOf(filterTag);
+
+    if (filterIndex === -1) {
+      // If the filter is not in the list, add it
+      updatedFilteredList.push(filterTag);
+    } else {
+      // If the filter is already in the list, remove it
+      updatedFilteredList.splice(filterIndex, 1);
+    }
+    dispatch(addFilteredItem(updatedFilteredList));
   };
 
   const handleFilteredItems = e => {
@@ -88,6 +106,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
+    setFilterListed(true);
     dispatch(isFilterApplied(true));
     setState({...state, bottom: false});
   };
@@ -105,25 +124,27 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
         <div className="rounded-t-2xl">
           {filterName === "Filter" ? (
             <div className="gap-6 shadow-md w-full bg-white px-4 pt-4 pb-8">
-              <p className={styles.headin_text}>{filterName}</p>
+              <p className={styles.headin_text}>
+                {filterName === "Filter" ? filterName : selectedOption}
+              </p>
               <div className={styles.mapped_filter_mobile}>
                 {filtereData?.map((ele, index) => {
                   // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
                     <div
                       className={styles.single_filter_text}
-                      key={index.toString()}>
+                      key={index.toString()}
+                      onClick={e => handleFilterDivClick(e, ele.filter_tag)}>
                       <p className={styles.option_text}>{ele?.filter_name}</p>
                       <input
                         type="checkbox"
-                        id="filterItem"
-                        name="filterProducts"
-                        // value={ele.item}
+                        id={index}
+                        name={ele.filter_name}
                         value={ele.filter_tag}
                         checked={categoryPageReduxData?.filteredItems.includes(
-                          ele?.filter_name,
+                          ele?.filter_tag,
                         )}
-                        className="pr-1"
+                        className="pr-1 cursor-pointer"
                         onChange={e => handleFilteredItems(e)}
                       />
                     </div>
@@ -135,7 +156,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
                   See more
                 </p>
               )}
-              <div className="mt-6 w-full flex justify-center">
+              <div className="mt-4 w-full flex justify-center">
                 <div className={styles.btn_container}>
                   <p className={styles.apply_btn} onClick={() => handleApply()}>
                     Apply
@@ -159,6 +180,7 @@ export default function FilterSortDrawer({filterName, setPageNo}) {
                         id={index}
                         name="sortBy"
                         value={ele.text}
+                        className="cursor-pointer"
                         checked={selectedOption === ele.text}
                         // onClick={() => handleSort(ele?.text, index)}
                       />
