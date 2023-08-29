@@ -7,3 +7,26 @@
 .head {
   @apply text-20 text-45454A leading-10 font-medium tracking-0.4;
 }
+.saved_address_div {
+  @apply mt-8 p-4 border border-DDDDDF rounded-xl w-[440px] h-[127px] hover:border-2 hover:border-5774AC hover:p-[15px];
+}
+.saved_add_head {
+  @apply text-45454A text-20 font-medium leading-[30px];
+}
+.saved_add_upper_div {
+  @apply flex justify-between items-center;
+}
+.change_btn {
+  @apply w-[79px] h-[26px] flex justify-center items-center rounded-lg text-71717A font-medium text-16;
+  border-radius: 8px;
+  border: 2px solid #71717a;
+}
+.name_div {
+  @apply flex gap-2 items-center mt-[12.5px];
+}
+.saved_name {
+  @apply text-222 text-16 font-medium tracking-0.3;
+}
+.saved_address {
+  @apply text-14 text-45454A tracking-desc truncate;
+}

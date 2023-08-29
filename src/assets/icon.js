@@ -6,6 +6,7 @@ import {
   IoCloseOutline,
   IoArrowForward,
   IoArrowBack,
+  IoPerson,
 } from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
@@ -235,4 +236,8 @@ export const RightIcon = ({size, color, className}) => (
 
 export const BackIcon = ({size, color, className}) => (
   <IoArrowBack size={size} color={color} className={className} />
+);
+
+export const PersonIcon = ({size, color, className}) => (
+  <IoPerson size={size} color={color} className={className} />
 );

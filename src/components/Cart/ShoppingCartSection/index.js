@@ -15,7 +15,9 @@ import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
-// import DeleteModal from "../Modal/DeleteModal";
+import DeleteModal from "../Modal/DeleteModal";
+import "react-responsive-modal/styles.css";
+// import ShareModal from "../Modal/DeleteModal";
 
 const ShoppingCartSection = ({setTab}) => {
   const count = 5;
@@ -88,10 +90,10 @@ const ShoppingCartSection = ({setTab}) => {
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [isMonthly, setIsMonthly] = useState(true);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState("");
 
-  // console.log(isModalOpen);
+  console.log(isModalOpen);
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -118,12 +120,12 @@ const ShoppingCartSection = ({setTab}) => {
     setBreakupDrawer(!breakupDrawer);
   };
 
-  // const openModal = () => {
-  //   setIsModalOpen(true);
-  // };
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const applyCouponCode = value => {
     setIsCouponApplied(true);
@@ -132,7 +134,8 @@ const ShoppingCartSection = ({setTab}) => {
 
   return (
     <div className={styles.main_container}>
-      {/* <DeleteModal isModalOpen={isModalOpen} closeModal={closeModal} /> */}
+      <DeleteModal isModalOpen={isModalOpen} closeModal={closeModal} />
+
       <div className={styles.left_div} id="leftDiv">
         <h1 className={styles.head}>Shopping cart ({count})</h1>
         <div className={styles.card_wrapper}>
@@ -149,9 +152,7 @@ const ShoppingCartSection = ({setTab}) => {
               <div>
                 <div className={styles.name_div}>
                   <p className={styles.product_name}>{item.product_name}</p>
-                  <div
-                  // onClick={openModal}
-                  >
+                  <div onClick={openModal}>
                     {" "}
                     <DeleteIcon className={styles.delete_icon} />
                   </div>

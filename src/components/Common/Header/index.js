@@ -114,7 +114,7 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/cart`}>
+            <Link href={`next/cart`}>
               <Image
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
