@@ -14,7 +14,7 @@ export const endPoints = {
   trendingSearchConstants: "fc-products/trendingSearchConstants",
   productWithFilter: "fc-products/getProductsWithFilter",
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
-  searchKey: "fc-products/search?searchKey=bi",
+  searchKey: "fc-products/search?searchKey=",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
 
