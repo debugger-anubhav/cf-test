@@ -265,7 +265,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="ppppSearch for Furniture, Appliances, etc"
+            placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}

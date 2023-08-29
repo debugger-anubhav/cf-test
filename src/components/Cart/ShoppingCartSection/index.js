@@ -112,7 +112,6 @@ const ShoppingCartSection = () => {
   //   setIsModalOpen(false);
   // };
   console.log(isModalOpen);
-
   return (
     <div className={styles.main_container}>
       {/* <DeleteModal isModalOpen={isModalOpen} closeModal={closeModal} /> */}

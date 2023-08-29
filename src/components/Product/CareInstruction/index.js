@@ -9,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {addCareInstructions} from "@/store/Slices";
 
 const CareInstruction = ({params}) => {
-  // console.log(params, "params")
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
   useEffect(() => {
