@@ -33,6 +33,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handleCategory = (event, item) => {
     setAnchorEl(event.currentTarget);
+    router.push(
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`,
+    );
   };
 
   const handleClose = () => {
