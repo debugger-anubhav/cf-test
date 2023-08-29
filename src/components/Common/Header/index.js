@@ -116,7 +116,7 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/cart`}>
+            <Link href={`/next/cart`}>
               <Image
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
@@ -177,23 +177,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const [searchedData, setSearchedData] = React.useState();
   const [searchApiData, setSearchApiData] = React.useState(null);
 
-  const handleClick = event => {
-    if (
-      modalRef.current &&
-      !modalRef.current.contains(event.target) &&
-      event.target.tagName !== "INPUT"
-    ) {
-      setOpenSearchBar(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
-
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
@@ -231,7 +214,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   }, []);
 
   return (
-    <div className={styles.backdrop}>
+    <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
         style={{
           top: `${
@@ -265,7 +248,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="Search for Furniture, Appliances, etc"
+            placeholder="pppSearch for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -273,7 +256,13 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           />
         </div>
 
-        <div className={styles.search_open_details} open={open}>
+        <div
+          className={styles.search_open_details}
+          open={open}
+          onClick={e => {
+            console.log("beingclicked");
+            e.stopPropagation();
+          }}>
           <div>
             {searchApiData &&
               searchApiData?.products?.map((item, index) => (

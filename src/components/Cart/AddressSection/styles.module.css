@@ -1,0 +1,69 @@
+.main_container {
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px];
+}
+.head_div {
+  @apply flex gap-2 items-center cursor-pointer;
+}
+.head {
+  @apply text-20 text-45454A leading-10 font-medium tracking-0.4;
+}
+.saved_address_div {
+  @apply mt-8 p-4 border border-DDDDDF rounded-xl md:w-[537px] lg:w-full xl:w-[537px] h-[127px] hover:border-2 hover:border-5774AC hover:p-[15px];
+}
+.saved_address_div:hover .change_btn {
+  @apply border-5774AC;
+}
+.saved_add_head {
+  @apply text-45454A text-20 font-medium leading-[30px];
+}
+.saved_add_upper_div {
+  @apply flex justify-between items-center;
+}
+.change_btn {
+  @apply w-[79px] border-2 border-71717A h-[26px] flex justify-center items-center rounded-lg text-71717A font-medium text-16;
+}
+.name_div {
+  @apply flex gap-2 items-center mt-[12.5px];
+}
+.saved_name {
+  @apply text-222 text-16 font-medium tracking-0.3;
+}
+.saved_address {
+  @apply text-14 text-45454A tracking-desc truncate mt-[12.5px];
+}
+.new_address_wrapper {
+  @apply mt-10;
+}
+.new_add_head {
+  @apply text-45454A text-24 font-medium leading-8 tracking-0.48 mb-4;
+}
+.form_field {
+  @apply mt-4;
+}
+.form_label {
+  @apply text-71717A text-16 tracking-0.3 leading-normal;
+}
+.form_input {
+  @apply outline-none hover:border-71717A w-full h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+}
+.save_btn {
+  @apply mt-6 border-2 rounded-lg border-71717A text-71717A text-16 tracking-0.3 leading-normal w-full h-14 flex justify-center items-center;
+}
+.right_div {
+  @apply flex flex-col gap-6;
+}
+.box_wrapper {
+  @apply flex justify-between items-center p-4 border border-DDDDDF rounded-lg hover:border-2 hover:border-5774AC hover:p-[15px] w-[440px] lg:w-full xl:w-[440px];
+}
+.whatsapp_icon {
+  @apply w-6 h-6;
+}
+.box_wrapper_left_div {
+  @apply flex gap-[11px] items-center;
+}
+.box_desc {
+  @apply text-45454A text-20 font-medium leading-10 tracking-0.4;
+}
+.hash {
+  @apply text-[30px] text-45454A;
+}

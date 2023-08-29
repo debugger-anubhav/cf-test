@@ -1,0 +1,48 @@
+.main_container {
+  @apply w-full md:w-[497px] h-[90vh] md:h-full py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[75px] font-Poppins;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
+}
+.head {
+  @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.breakup_wrapper {
+  @apply mt-8;
+}
+.left_div {
+  @apply flex gap-1 items-center cursor-pointer;
+}
+.row {
+  @apply flex justify-between mt-4;
+}
+.dropdown_wrapper {
+  @apply mt-4 pl-4 pt-2 flex flex-col gap-2;
+}
+.dropdown_row {
+  @apply flex gap-4 items-start;
+}
+.prod_name {
+  @apply text-71717A text-16 leading-6;
+}
+.sub_total_text {
+  @apply text-16 text-5774AC underline leading-6 tracking-0.3;
+}
+.total_amount {
+  @apply flex text-16 font-medium tracking-0.3 leading-6 items-center;
+}
+.rupeeIcon {
+  @apply w-4 h-4;
+}
+.line {
+  @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted mt-4;
+}
+.price_label {
+  @apply text-16 text-71717A leading-6 tracking-0.3;
+}
+.total_txt {
+  @apply text-16 text-222 font-medium leading-6 tracking-0.3;
+}
