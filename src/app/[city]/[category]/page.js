@@ -20,6 +20,7 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -94,6 +95,7 @@ const CombineSection = loadable(() =>
 export default function Page() {
   const queryClient = new QueryClient();
   const params = useParams();
+  console.log(params, "paramssss");
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -123,6 +125,10 @@ export default function Page() {
               <FrequentlyAskedQuestions params={params} />
               <TextContent params={params} />
               <Footer />
+            </div>
+          ) : params.category === "rent" ? (
+            <div>
+              <Subproduct />
             </div>
           ) : (
             <div>

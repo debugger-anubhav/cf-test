@@ -40,7 +40,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     setAnchorEl(null);
   };
 
-  // console.log(hoverItem, "hoverItem")
   const handMainCategory = e => {
     dispatch(addAllProduct(true));
     const previouseSubCategory = JSON.parse(

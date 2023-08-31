@@ -64,6 +64,7 @@ module.exports = {
         desc: "-0.28px",
         subHeading: "-0.32px",
         desktop_sub_heading: "-0.64px",
+        0.36: "-0.36px",
         0.3: "-0.32px",
         0.6: " -0.64px",
         0.24: "-0.24px",
