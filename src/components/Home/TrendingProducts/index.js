@@ -19,6 +19,7 @@ const TrendingProducts = ({params}) => {
 
   const [paramsCityId, setParamsCityId] = React.useState(46);
   const [data, setData] = React.useState(null);
+  const [isDumy, setIsDumy] = React.useState(false);
 
   const cityId = homePageReduxData.cityId;
   const {refetch: getTrendyProducts} = useQuery(
@@ -85,13 +86,18 @@ const TrendingProducts = ({params}) => {
     let mouseDown = false;
     let startX, scrollLeft;
 
-    const startDragging = function (e) {
+    const startDragging = e => {
       mouseDown = true;
       startX = e.pageX - slider.offsetLeft;
       scrollLeft = slider.scrollLeft;
     };
-    const stopDragging = function () {
+    const stopDragging = () => {
+      setIsDumy(false);
       mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
     };
 
     slider.addEventListener("mousemove", e => {
@@ -104,11 +110,19 @@ const TrendingProducts = ({params}) => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
   }, []);
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   return homePageReduxData?.trendindProduct ? (
@@ -119,7 +133,7 @@ const TrendingProducts = ({params}) => {
         {data?.map((item, index) => (
           <div
             key={index.toString()}
-            className={styles.child}
+            className={`${styles.child} ${isDumy && "pointer-events-none"}`}
             onClick={e => handleCardClick(e, item)}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}

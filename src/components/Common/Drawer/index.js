@@ -68,19 +68,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
-            <p
-              className={styles.menu_item}
-              // onClick={() => console.log(item.link)}
-            >
-              All
-            </p>
+            <p className={styles.menu_item}>All</p>
             {data?.map((item, index) => (
               <p
                 key={index.toString()}
                 className={styles.menu_item}
                 onClick={() => {
                   router.push(
-                    `/${homePageReduxData?.cityName.toLowerCase()}/${
+                    `/next/${homePageReduxData?.cityName.toLowerCase()}/${
                       item?.seourl
                     }`,
                   );
@@ -92,10 +87,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList2?.map((item, index) => (
-              <p
-                className={styles.menu_item}
-                key={index.toString()}
-                onClick={() => console.log(item.link)}>
+              <p className={styles.menu_item} key={index.toString()}>
                 {item?.item}
               </p>
             ))}
@@ -103,10 +95,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList3?.map((item, index) => (
-              <p
-                className={styles.menu_item}
-                key={index.toString()}
-                onClick={() => console.log(item.link)}>
+              <p className={styles.menu_item} key={index.toString()}>
                 {item?.item}
               </p>
             ))}
@@ -121,17 +110,13 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             onClick={() => toggleDrawer("bottom", false)}>
             <div
               className={styles.bottom_close_icon}
-              onClick={
-                toggleDrawer("bottom", false)
-                // console.log("sdjfjsd");
-              }>
+              onClick={toggleDrawer("bottom", false)}>
               <Close
                 color={"#000"}
                 size={20}
                 className={"z-30"}
                 onClick={() => {
                   toggleDrawer("bottom", false);
-                  // console.log("click");
                 }}
               />
             </div>

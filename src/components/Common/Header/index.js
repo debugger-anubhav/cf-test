@@ -11,7 +11,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
 import Link from "next/link";
-import {setLocalStorage} from "@/constants/constant";
+import {productImageBaseUrl, setLocalStorage} from "@/constants/constant";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const HEADER_HEIGHT = 48;
 
@@ -31,8 +33,8 @@ const Header = () => {
     endPoints.sidebarMenuLists,
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
-
   const [topOffset, settopOffset] = useState(0);
+  const [arr, setArr] = React.useState(null);
 
   useEffect(() => {
     getCityList()
@@ -42,7 +44,9 @@ const Header = () => {
       })
       .catch(err => console.log(err));
     getTrendingSearch()
-      .then(res => setArr(res?.data?.data))
+      .then(res => {
+        setArr(res?.data?.data);
+      })
       .catch(err => console.log(err));
 
     getSidebarMenuList().then(res => {
@@ -50,15 +54,15 @@ const Header = () => {
     });
   }, []);
 
-  const [arr, setArr] = React.useState(null);
-
   return (
     <>
       <div className={styles.main}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/next/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -112,7 +116,7 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/cart`}>
+            <Link href={`/next/cart`}>
               <Image
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
@@ -139,7 +143,6 @@ const Header = () => {
               onClick={() => {
                 // setOpenSearchBar(!openSearchbar);
                 settopOffset(65 - window.pageYOffset);
-                console.log("dsajh");
               }}
             />
             <Image
@@ -168,31 +171,19 @@ export default Header;
 // search modal component
 const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const modalRef = useRef(null);
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [searchTerm, setSearchTerm] = React.useState("");
-
-  const handleClick = event => {
-    if (
-      modalRef.current &&
-      !modalRef.current.contains(event.target) &&
-      event.target.tagName !== "INPUT"
-    ) {
-      setOpenSearchBar(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
-
   const [searchedData, setSearchedData] = React.useState();
+  const [searchApiData, setSearchApiData] = React.useState(null);
 
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
+
+    axios.get(baseURL + endPoints.searchKey + newSearchTerm).then(res => {
+      setSearchApiData(res?.data?.data);
+    });
 
     // Store search term in local storage
     if (e.key === "Enter" || e.type === "click") {
@@ -210,7 +201,12 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       }
     }
   };
-
+  const handleTrending = (item, event) => {
+    event.stopPropagation();
+    axios.get(baseURL + endPoints.searchKey + item).then(res => {
+      setSearchApiData(res?.data?.data);
+    });
+  };
   useEffect(() => {
     setSearchedData(
       JSON.parse(localStorage.getItem("searches")) || ["No search history"],
@@ -218,7 +214,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   }, []);
 
   return (
-    <div className={styles.backdrop}>
+    <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
         style={{
           top: `${
@@ -252,7 +248,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="Search for Furniture, Appliances, etc"
+            placeholder="pppSearch for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -260,54 +256,122 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           />
         </div>
 
-        <div className={styles.search_open_details} open={open}>
-          <p className={styles.search_head}>Recent</p>
-          <div className={styles.pills_wrapper}>
-            {searchedData?.map((item, index) => {
-              return (
-                <>
-                  {index < 5 && (
-                    <div key={index.toString()} className={styles.pill}>
-                      <RecentIcon
-                        className={styles.modal_icon}
-                        color={"#E0806A"}
-                      />
-                      <p className={styles.pill_text}>{item}</p>
-                    </div>
-                  )}
-                </>
-              );
-            })}
-          </div>
-          <div className="mt-6"></div>
-          <p className={styles.search_head}>Trending searches</p>
-          <div className={styles.pills_wrapper}>
-            {arr?.map((item, index) => (
-              <div key={index.toString()} className={styles.pill}>
-                <TrendingIcon className={styles.modal_icon} color={"#2D9469"} />
-                <p className={styles.pill_text}>{item}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6">
-            <p className={styles.search_head}>Categories</p>
-            <div className={styles.categories_wrapper}>
-              {homePageReduxData?.category?.map((item, index) => (
-                <div key={index.toString()} className={styles.card_wrapper}>
+        <div
+          className={styles.search_open_details}
+          open={open}
+          onClick={e => {
+            console.log("beingclicked");
+            e.stopPropagation();
+          }}>
+          <div>
+            {searchApiData &&
+              searchApiData?.products?.map((item, index) => (
+                <div
+                  className={styles.search_rasult_wrapper}
+                  key={index.toString()}
+                  onClick={() =>
+                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                  }>
                   <img
-                    src={
-                      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                      item.category_image
-                    }
-                    alt="RentFurnitureImages"
-                    className={styles.categories_img}
+                    src={productImageBaseUrl + item?.image?.split(",")[0]}
+                    alt={item?.image}
+                    className={styles.serach_result_img}
                   />
-                  <div>
-                    <h3 className={styles.category_label}>{item?.cat_name}</h3>
-                  </div>
+                  <p className={styles.search_result_text}>
+                    {item.product_name}
+                  </p>
                 </div>
               ))}
+
+            {searchApiData &&
+              searchApiData?.categories?.map((item, index) => (
+                <div
+                  className={styles.search_rasult_wrapper}
+                  key={index.toString()}
+                  onClick={() =>
+                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                  }>
+                  <img
+                    src={productImageBaseUrl + item?.image?.split(",")[0]}
+                    alt={item?.image}
+                    className={styles.serach_result_img}
+                  />
+                  <p className={styles.search_result_text}>
+                    {item.product_name}
+                  </p>
+                </div>
+              ))}
+          </div>
+          <div>
+            <p className={styles.search_head}>Recent</p>
+            <div className={styles.pills_wrapper}>
+              {searchedData?.map((item, index) => {
+                return (
+                  <>
+                    {index < 5 && (
+                      <div key={index.toString()} className={styles.pill}>
+                        <RecentIcon
+                          className={styles.modal_icon}
+                          color={"#E0806A"}
+                        />
+                        <p className={styles.pill_text}>{item}</p>
+                      </div>
+                    )}
+                  </>
+                );
+              })}
+            </div>
+            <div className="mt-6"></div>
+            <p className={styles.search_head}>Trending searches</p>
+            <div className={styles.pills_wrapper}>
+              {arr?.map((item, index) => (
+                <div
+                  key={index.toString()}
+                  className={styles.pill}
+                  onClick={event => handleTrending(item, event)}>
+                  <TrendingIcon
+                    className={styles.modal_icon}
+                    color={"#2D9469"}
+                  />
+                  <p className={styles.pill_text}>{item}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6">
+              <p className={styles.search_head}>Categories</p>
+              <div className={styles.categories_wrapper}>
+                {homePageReduxData?.category?.map((item, index) => (
+                  <div
+                    key={index.toString()}
+                    className={styles.card_wrapper}
+                    onClick={() => {
+                      router.push(
+                        `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                          item?.seourl
+                        }`,
+                      );
+                      if (typeof window !== "undefined") {
+                        setLocalStorage("categoryId", item?.rootID);
+                        setLocalStorage("subCategoryId", item?.id);
+                      }
+                    }}>
+                    <img
+                      src={
+                        "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                        item.category_image
+                      }
+                      alt="RentFurnitureImages"
+                      className={styles.categories_img}
+                    />
+                    <div>
+                      <h3 className={styles.category_label}>
+                        {item?.cat_name}
+                      </h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

@@ -130,7 +130,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   const singleItemData = categoryPageReduxData?.isAllProduct
@@ -152,7 +152,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
-                // console.log(item?.image.split(","), "item?.image.split")
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}

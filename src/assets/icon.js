@@ -1,7 +1,13 @@
 import React from "react";
 import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
-import {FiChevronDown} from "react-icons/fi";
-import {IoClose, IoCloseOutline, IoArrowForward} from "react-icons/io5";
+import {FiChevronDown, FiChevronUp} from "react-icons/fi";
+import {
+  IoClose,
+  IoCloseOutline,
+  IoArrowForward,
+  IoArrowBack,
+  IoPerson,
+} from "react-icons/io5";
 import {TbMailFilled} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
@@ -11,7 +17,7 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
 } from "react-icons/io";
-import {BsFillStarFill, BsGoogle, BsCheckLg} from "react-icons/bs";
+import {BsFillStarFill, BsGoogle, BsCheckLg, BsWhatsapp} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import {
   MdModeEdit,
@@ -44,7 +50,6 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
-// cart page icons
 import {AiOutlineDelete} from "react-icons/ai";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
@@ -173,6 +178,15 @@ export const DownPopUpArrow = ({size, color, className, onMouseOver}) => (
   />
 );
 
+export const PopUpArrow = ({size, color, className, onMouseOver}) => (
+  <FiChevronUp
+    size={size}
+    color={color}
+    className={className}
+    onMouseOver={onMouseOver}
+  />
+);
+
 export const ShareIcon = ({size, color, className}) => (
   <HiOutlineShare size={size} color={color} className={className} />
 );
@@ -217,4 +231,16 @@ export const UncheckedBox = ({size, color, className, onClick}) => (
 
 export const RightIcon = ({size, color, className}) => (
   <BsCheckLg size={size} color={color} className={className} />
+);
+
+export const BackIcon = ({size, color, className}) => (
+  <IoArrowBack size={size} color={color} className={className} />
+);
+
+export const PersonIcon = ({size, color, className}) => (
+  <IoPerson size={size} color={color} className={className} />
+);
+
+export const WhatsappIcon = ({size, color, className}) => (
+  <BsWhatsapp size={size} color={color} className={className} />
 );

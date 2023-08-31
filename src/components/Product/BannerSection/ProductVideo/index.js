@@ -23,7 +23,6 @@ const ProductVideo = ({params}) => {
       .get(baseURL + endPoints.productPage.productVideos(params.productId))
       .then(res => {
         dispatch(getProductVideos(res?.data?.data));
-        console.log(res, "banner video");
       })
       .catch(err => {
         console.log(err);

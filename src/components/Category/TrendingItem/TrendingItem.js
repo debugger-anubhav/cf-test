@@ -18,7 +18,6 @@ const TrendingItem = () => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
     endPoints.trendingProduct,
@@ -34,7 +33,7 @@ const TrendingItem = () => {
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   const Data = categoryPageReduxData?.tendingItems;
@@ -46,7 +45,8 @@ const TrendingItem = () => {
         {Data?.map((item, index) => (
           <div
             key={index.toString()}
-            className={`${styles.child}flex flex-wrap mr-4 mb-4`}
+            className={`${styles.child}flex flex-wrap mr-4 mb-4
+            `}
             onClick={e => handleCardClick(e, item)}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}

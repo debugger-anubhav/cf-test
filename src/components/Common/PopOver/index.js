@@ -23,7 +23,6 @@ import {
 import {setLocalStorage} from "@/constants/constant";
 
 const PopOver = ({list, item, parentCategoryId, data}) => {
-  console.log(data?.cat_name, "data");
   const homePageReduxData = useSelector(state => state.homePagedata);
 
   const hoverRef = React.useRef("");
@@ -34,6 +33,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handleCategory = (event, item) => {
     setAnchorEl(event.currentTarget);
+    router.push(
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`,
+    );
   };
 
   const handleClose = () => {
@@ -69,7 +71,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(`/next/${homePageReduxData?.cityName.toLowerCase()}/all`);
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -78,7 +80,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
 
     if (typeof window !== "undefined") {
@@ -90,7 +92,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     dispatch(addSubCategoryId(item?.id));
     dispatch(addProductName(item));
     dispatch(addProductCategory(hoverRef.current));
-    console.log(previousSubCategory !== item?.cat_name, "state");
     if (previousSubCategory !== item?.cat_name) {
       dispatch(addSingleProduct([]));
       dispatch(addSetProduct([]));
@@ -135,20 +136,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
             All
           </p>
           {list?.map(
-            (item, index) =>
-              // <Link>
-              {
-                // { console.log(item, "itemmm") }
-                // console.log(item, "item")
-                return (
-                  <p
-                    className={styles.sub_item}
-                    key={index.toString()}
-                    onClick={e => handleSelectedProduct(e, item)}>
-                    {item?.cat_name}
-                  </p>
-                );
-              },
+            (item, index) => {
+              return (
+                <p
+                  className={styles.sub_item}
+                  key={index.toString()}
+                  onClick={e => handleSelectedProduct(e, item)}>
+                  {item?.cat_name}
+                </p>
+              );
+            },
             // </Link>
           )}
         </div>
