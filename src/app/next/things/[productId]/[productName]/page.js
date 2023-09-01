@@ -30,10 +30,6 @@ const ProductPage = () => {
   const queryClient = new QueryClient();
   const params = useParams();
 
-  // if (typeof window !== "undefined") {
-  //   tempUserID = getLocalStorage("tempUserID");
-  // }
-
   useEffect(() => {
     const data = {
       userId: "",

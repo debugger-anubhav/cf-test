@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useEffect} from "react";
 import {useParams} from "next/navigation";
 import {store} from "@/store";
 import {Provider} from "react-redux";
@@ -20,6 +20,11 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {setLocalStorage} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -94,6 +99,27 @@ const CombineSection = loadable(() =>
 export default function Page() {
   const queryClient = new QueryClient();
   const params = useParams();
+  // console.log(params, "paramssss");
+
+  // if (typeof window !== "undefined") {
+  //   tempUserID = getLocalStorage("tempUserID");
+  // }
+
+  useEffect(() => {
+    const data = {
+      userId: "",
+      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    };
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        if (typeof window !== "undefined") {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -123,6 +149,10 @@ export default function Page() {
               <FrequentlyAskedQuestions params={params} />
               <TextContent params={params} />
               <Footer />
+            </div>
+          ) : params.category === "rent" ? (
+            <div>
+              <Subproduct />
             </div>
           ) : (
             <div>
