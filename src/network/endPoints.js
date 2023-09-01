@@ -40,6 +40,10 @@ export const endPoints = {
   seoFurnitureHappyCustomer:
     "fc-care-instructions/getSeoFurnitureRentalPageHappyCustomerStories",
   seoFurnitureTextContent: "fc-city-category-seo-data/getSeoPageTextContent",
+  sessionUserUrl: "node-sessions/createSessionData",
+  addRecentViewProduct: "fc-view-products/createRecentlyViewedProduct",
+  addWishListProduct: "fc-product-likes/addToWishlistProduct",
+  deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
 
   productPage: {
     completeTheLook: id =>

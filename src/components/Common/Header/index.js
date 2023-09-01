@@ -128,9 +128,10 @@ const Header = () => {
               alt="profile-icon"
               className={styles.header_profile_icon}
               onClick={() =>
-                router.push(
-                  "https://test.rentofurniture.com/cityfurnish/user_sign_up",
-                )
+                // router.push(
+                //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
+                // )
+                router.push("https://test.rentofurniture.com/user_sign_up")
               }
             />
           </div>

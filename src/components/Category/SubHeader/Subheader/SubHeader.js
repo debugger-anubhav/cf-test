@@ -98,6 +98,8 @@ const SubHeader = () => {
       .catch(err => console.log(err));
   }, []);
 
+  // console.log(getAllAndSubCategoryData, "getAllAndSubCategoryData")
+
   return (
     <>
       <div className={styles.conatiner_wrapper}>
@@ -117,11 +119,13 @@ const SubHeader = () => {
           </ul>
         </div>
         <h1 className={styles.heading}>
-          {subCategory} On Rent In {homePageReduxData?.cityName},{subCategory}{" "}
-          Furniture Rental
+          {subCategory} On Rent In {homePageReduxData?.cityName}, {subCategory}{" "}
+          Rental
         </h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {
+            // console.log(category, item?.cat_name, "tttttt")
+
             if (item?.cat_name === category) {
               const subCategoriesWithNewObject = [
                 {

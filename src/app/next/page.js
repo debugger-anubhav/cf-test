@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef} from "react";
+import React, {useRef, useEffect} from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -23,6 +23,9 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../../useChatScript";
 import {setLocalStorage} from "@/constants/constant";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
@@ -99,6 +102,22 @@ export default function index() {
   if (typeof window !== "undefined") {
     setLocalStorage("cityId", 46);
   }
+
+  useEffect(() => {
+    const data = {
+      userId: "",
+      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    };
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        console.log(res?.data?.data?.tempUserId, "res?.data?.data?.tempUserId");
+        if (typeof window !== "undefined") {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

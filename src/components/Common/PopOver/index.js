@@ -71,7 +71,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/next/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
+    );
   };
 
   const handleSelectedProduct = (e, item) => {

@@ -26,6 +26,7 @@ export const CategoryPageSlice = createSlice({
     sortKey: ["subproducts", "ASC"],
     categoryInstruction: [],
     filterProduct: [],
+    savedProductID: [],
   },
   reducers: {
     addParentCategoryId(state, action) {
@@ -79,6 +80,9 @@ export const CategoryPageSlice = createSlice({
     addSaveditems: (state, action) => {
       state.savedProducts = action.payload;
     },
+    addSaveditemID: (state, action) => {
+      state.savedProductID = action.payload;
+    },
     addCategoryTrendingProduct(state, action) {
       state.tendingItems = action.payload;
     },
@@ -124,4 +128,5 @@ export const {
   addFilterData,
   isFilterApplied,
   addFilterProduct,
+  addSaveditemID,
 } = CategoryPageSlice.actions;

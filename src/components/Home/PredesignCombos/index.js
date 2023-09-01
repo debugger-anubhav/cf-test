@@ -106,6 +106,7 @@ const PreDesignCombos = () => {
                   ).toFixed(2)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
+                  productID={item?.id}
                 />
               </div>
             ))}

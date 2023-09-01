@@ -24,6 +24,9 @@ import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../useChatScript";
 import {setLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
@@ -97,6 +100,7 @@ const CombineSection = loadable(() =>
 export default function Home() {
   const router = useRouter();
   const queryClient = new QueryClient();
+
   useEffect(() => {
     router.push("/next/");
   }, []);
@@ -104,6 +108,23 @@ export default function Home() {
   if (typeof window !== "undefined") {
     setLocalStorage("cityId", 46);
   }
+
+  const data = {
+    userId: "",
+    tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+  };
+
+  useEffect(() => {
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        console.log(res?.data?.data?.tempUserId, "res?.data?.data?.tempUserId");
+        if (typeof window !== "undefined") {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

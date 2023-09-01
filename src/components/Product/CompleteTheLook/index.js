@@ -98,6 +98,7 @@ const CompleteTheLook = ({params}) => {
                 currentPrice={item?.sale_price}
                 desc={item?.product_name}
                 isHover={false}
+                productID={item?.id}
               />
             </div>
           ))}
