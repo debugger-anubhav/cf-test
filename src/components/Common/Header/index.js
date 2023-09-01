@@ -60,9 +60,7 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text}
-              onClick={() => router.push("/next/")}>
+            <p className={styles.logo_text} onClick={() => router.push("/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -116,7 +114,7 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/next/cart`}>
+            <Link href={`/cart`}>
               <Image
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
