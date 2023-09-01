@@ -20,7 +20,7 @@ import {
   addSingleAllProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 
 const PopOver = ({list, item, parentCategoryId, data}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -42,9 +42,15 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handMainCategory = e => {
     dispatch(addAllProduct(true));
-    const previouseSubCategory = JSON.parse(
-      localStorage.getItem("subCategory"),
-    );
+    // const previouseSubCategory = JSON.parse(
+    //   localStorage.getItem("subCategory"),
+    // );
+
+    let previouseSubCategory;
+
+    if (typeof window !== "undefined") {
+      previouseSubCategory = getLocalStorage("subCategory");
+    }
     dispatch(addFilteredItem([]));
     dispatch(addProductCategory(hoverRef.current));
 
