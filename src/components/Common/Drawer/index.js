@@ -75,7 +75,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 className={styles.menu_item}
                 onClick={() => {
                   router.push(
-                    `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                    `/${homePageReduxData?.cityName.toLowerCase()}/${
                       item?.seourl
                     }`,
                   );
