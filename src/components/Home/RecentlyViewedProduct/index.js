@@ -32,8 +32,9 @@ const RecentlyViewedProduct = ({page}) => {
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
-      JSON.parse(localStorage.getItem("user_id")) ??
-      JSON.parse(localStorage.getItem("tempUserID"))
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
@@ -90,7 +91,7 @@ const RecentlyViewedProduct = ({page}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/next/things/${item.product_id}/${item.seourl}`);
+      router.push(`/things/${item.product_id}/${item.seourl}`);
     }
   };
 

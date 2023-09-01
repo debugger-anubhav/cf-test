@@ -22,7 +22,7 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../useChatScript";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
@@ -102,7 +102,7 @@ export default function Home() {
   const queryClient = new QueryClient();
 
   useEffect(() => {
-    router.push("/next/");
+    router.push("/");
   }, []);
   const myElementRef = useRef();
   if (typeof window !== "undefined") {
@@ -111,14 +111,14 @@ export default function Home() {
 
   const data = {
     userId: "",
-    tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID") ?? "",
   };
 
   useEffect(() => {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
-        console.log(res?.data?.data?.tempUserId, "res?.data?.data?.tempUserId");
         if (typeof window !== "undefined") {
           setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
         }

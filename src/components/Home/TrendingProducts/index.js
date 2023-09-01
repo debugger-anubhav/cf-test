@@ -122,7 +122,7 @@ const TrendingProducts = ({params}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/next/things/${item.id}/${item.seourl}`);
+      router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
   return homePageReduxData?.trendindProduct ? (

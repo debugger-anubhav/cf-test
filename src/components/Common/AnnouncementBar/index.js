@@ -8,6 +8,7 @@ import {setAnnouncementBar} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
+import {getLocalStorage} from "@/constants/constant";
 
 const AnnouncementBar = () => {
   const dispatch = useDispatch();
@@ -23,8 +24,9 @@ const AnnouncementBar = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      JSON.parse(localStorage.getItem("user_id")) ??
-      JSON.parse(localStorage.getItem("tempUserID"))
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 

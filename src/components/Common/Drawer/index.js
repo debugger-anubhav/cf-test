@@ -81,7 +81,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       dispatch(addOutStockProduct([]));
     }
     router.push(
-      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
   };
 

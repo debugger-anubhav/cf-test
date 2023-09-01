@@ -5,7 +5,7 @@ import Card from "@/components/Common/HomePageCards";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 
 const SavedItem = () => {
@@ -23,8 +23,10 @@ const SavedItem = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      JSON.parse(localStorage.getItem("user_id")) ??
-      JSON.parse(localStorage.getItem("tempUserID"))
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
@@ -43,7 +45,7 @@ const SavedItem = () => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/next/things/${item.id}/${item.seourl}`);
+      router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
   const data = categoryPageReduxData?.savedProducts;

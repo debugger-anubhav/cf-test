@@ -24,7 +24,7 @@ import {useParams} from "next/navigation";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
@@ -37,7 +37,8 @@ const ProductPage = () => {
   useEffect(() => {
     const data = {
       userId: "",
-      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      tempUserId: getLocalStorage("tempUserID") ?? "",
     };
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)

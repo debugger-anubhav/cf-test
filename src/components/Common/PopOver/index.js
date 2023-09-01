@@ -33,9 +33,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handleCategory = (event, item) => {
     setAnchorEl(event.currentTarget);
-    router.push(
-      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`,
-    );
+    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`);
   };
 
   const handleClose = () => {
@@ -72,7 +70,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
     setAnchorEl(null);
     router.push(
-      `/next/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
     );
   };
 
@@ -82,7 +80,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
-      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
 
     if (typeof window !== "undefined") {

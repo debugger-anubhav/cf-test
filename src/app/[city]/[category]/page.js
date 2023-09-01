@@ -24,7 +24,7 @@ import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -108,7 +108,8 @@ export default function Page() {
   useEffect(() => {
     const data = {
       userId: "",
-      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      tempUserId: getLocalStorage("tempUserID") ?? "",
     };
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)

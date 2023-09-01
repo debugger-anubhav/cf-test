@@ -17,6 +17,7 @@ import string from "@/constants/Constant.json";
 import {ProductPageImages} from "@/assets/images";
 import {
   HasselFreeDataForProductPage,
+  getLocalStorage,
   productPageImagesBaseUrl,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
@@ -170,8 +171,12 @@ const ProductDetails = ({params}) => {
     setInWishList(!inWishList);
   };
   const data = {
-    tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    userId: JSON.parse(localStorage.getItem("user_id")),
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: params?.productId,
   };
 

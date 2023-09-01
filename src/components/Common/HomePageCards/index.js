@@ -4,6 +4,7 @@ import {Heart, Rupee} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useSelector} from "react-redux";
+import {getLocalStorage} from "@/constants/constant";
 
 const Card = ({
   desc,
@@ -25,8 +26,10 @@ const Card = ({
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const data = {
-    tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    userId: JSON.parse(localStorage.getItem("user_id")),
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
 

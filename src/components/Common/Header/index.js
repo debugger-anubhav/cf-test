@@ -271,7 +271,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
@@ -290,7 +290,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
