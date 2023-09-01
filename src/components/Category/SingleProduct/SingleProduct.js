@@ -152,7 +152,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
-                console.log(item, "itemsss");
+                // console.log(item, "itemsss");
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}
