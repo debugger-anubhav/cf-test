@@ -33,7 +33,7 @@ const TrendingItem = () => {
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   const Data = categoryPageReduxData?.tendingItems;
@@ -61,6 +61,7 @@ const TrendingItem = () => {
               discount={`${Math.round(
                 ((item?.price - item?.sale_price) * 100) / item?.price,
               ).toFixed(2)}%`}
+              productID={item?.id}
             />
           </div>
         ))}

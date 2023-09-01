@@ -74,7 +74,7 @@ const YouMightLike = ({heading, isbg, params}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   if (pageData?.youMightLike?.length > 0) {
@@ -104,6 +104,7 @@ const YouMightLike = ({heading, isbg, params}) => {
                 currentPrice={item?.sale_price}
                 desc={item?.product_name}
                 isHover={false}
+                productID={item?.id}
               />
             </div>
           ))}

@@ -33,14 +33,15 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handleCategory = (event, item) => {
     setAnchorEl(event.currentTarget);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`);
+    router.push(
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`,
+    );
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  // console.log(hoverItem, "hoverItem")
   const handMainCategory = e => {
     dispatch(addAllProduct(true));
     const previouseSubCategory = JSON.parse(
@@ -70,7 +71,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
+    );
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -79,7 +82,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
 
     if (typeof window !== "undefined") {

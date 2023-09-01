@@ -9,7 +9,6 @@ import Skeleton from "@mui/material/Skeleton";
 
 const MenuList = () => {
   const dispatch = useDispatch();
-  // const homePageReduxData = useSelector(state => state.homePagedata);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );

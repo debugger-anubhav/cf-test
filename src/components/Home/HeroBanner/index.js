@@ -6,8 +6,10 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useRouter} from "next/navigation";
+import {useSelector} from "react-redux";
 const HeroBanner = () => {
   const router = useRouter();
+  const homePageReduxData = useSelector(state => state.homePagedata);
   return (
     <>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
@@ -47,7 +49,9 @@ const HeroBanner = () => {
           src={HeroFrame}
           alt="hero-banner"
           className="w-full"
-          onClick={() => router.push("https://cityfurnish.com/<city>/rent")}
+          onClick={() =>
+            router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`)
+          }
         />
       </div>
     </>

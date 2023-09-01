@@ -21,12 +21,11 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
-import {useChatScript} from "../../useChatScript";
+import {useChatScript} from "../../../useChatScript";
 import {setLocalStorage} from "@/constants/constant";
-import {useRouter} from "next/navigation";
-import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
@@ -97,24 +96,18 @@ const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
 
-export default function Home() {
-  const router = useRouter();
+export default function index() {
   const queryClient = new QueryClient();
-
-  useEffect(() => {
-    router.push("/next/");
-  }, []);
   const myElementRef = useRef();
   if (typeof window !== "undefined") {
     setLocalStorage("cityId", 46);
   }
 
-  const data = {
-    userId: "",
-    tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-  };
-
   useEffect(() => {
+    const data = {
+      userId: "",
+      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    };
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {

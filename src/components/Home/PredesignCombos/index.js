@@ -76,7 +76,7 @@ const PreDesignCombos = () => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      router.push(`/next/things/${item.id}/${item.seourl}`);
     }
   };
   return (
@@ -106,6 +106,7 @@ const PreDesignCombos = () => {
                   ).toFixed(2)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
+                  productID={item?.id}
                 />
               </div>
             ))}

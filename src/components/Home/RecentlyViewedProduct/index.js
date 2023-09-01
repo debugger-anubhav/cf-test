@@ -31,7 +31,10 @@ const RecentlyViewedProduct = ({page}) => {
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
-    `?cityId=${cityId}&userId=${85757}`,
+    `?cityId=${cityId}&userId=${
+      JSON.parse(localStorage.getItem("user_id")) ??
+      JSON.parse(localStorage.getItem("tempUserID"))
+    }`,
   );
 
   useEffect(() => {
@@ -84,9 +87,10 @@ const RecentlyViewedProduct = ({page}) => {
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.product_id}/${item.seourl}`);
+      router.push(`/next/things/${item.product_id}/${item.seourl}`);
     }
   };
 
@@ -120,6 +124,7 @@ const RecentlyViewedProduct = ({page}) => {
                 originalPrice={item?.price}
                 currentPrice={item?.product_sale_price}
                 desc={item?.product_name}
+                productID={item?.id}
               />
             </div>
           ))}
