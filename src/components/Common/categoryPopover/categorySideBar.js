@@ -196,8 +196,6 @@ export default function FilterSortDrawer({
     </div>
   );
 
-  console.log(state.bottom, "stategfghj");
-
   return (
     <div>
       {["bottom"].map(anchor => (
