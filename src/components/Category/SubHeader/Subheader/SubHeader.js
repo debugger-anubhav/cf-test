@@ -64,8 +64,10 @@ const SubHeader = () => {
     setPageNo(1);
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
-    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    let previousSubCategory;
     if (typeof window !== "undefined") {
+      getLocalStorage("subCategory");
       setLocalStorage("subCategory", item?.cat_name);
     }
 
