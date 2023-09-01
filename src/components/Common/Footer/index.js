@@ -5,6 +5,7 @@ import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
+import {getLocalStorage} from "@/constants/constant";
 
 const Footer = ({params}) => {
   const currentYear = new Date().getFullYear();
@@ -14,10 +15,16 @@ const Footer = ({params}) => {
   const [content, setContent] = useState([]);
 
   // const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    cityIdStr = getLocalStorage("cityId");
+  }
+
   const cityId = parseFloat(cityIdStr);
 
   const {refetch: getcategoryContent} = useQuery(

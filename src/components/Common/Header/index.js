@@ -60,9 +60,7 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text}
-              onClick={() => router.push("/next/")}>
+            <p className={styles.logo_text} onClick={() => router.push("/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -270,7 +268,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
@@ -289,7 +287,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
@@ -347,7 +345,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.card_wrapper}
                     onClick={() => {
                       router.push(
-                        `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                        `/${homePageReduxData?.cityName.toLowerCase()}/${
                           item?.seourl
                         }`,
                       );
