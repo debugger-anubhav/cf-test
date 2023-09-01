@@ -152,6 +152,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
+                console.log(item, "itemsss");
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}
@@ -179,6 +180,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(2)}%`}
+                      productID={item?.id}
                     />
                   </div>
                 );

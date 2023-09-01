@@ -7,21 +7,27 @@ import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
-import {useRouter} from "next/navigation";
+import {useRouter, useParams} from "next/navigation";
 import {setLocalStorage} from "@/constants/constant";
+import {
+  addAllProduct,
+  addOutStockProduct,
+  // addParentCategoryId,
+  addSetProduct,
+  addSingleProduct,
+} from "@/store/Slices/categorySlice";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
+  const params = useParams();
   const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
-
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const handleresize = e => {
     if (e.target.innerWidth < 640) {
@@ -50,6 +56,35 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   };
   React.useEffect(() => {}, [mobileCityDrawer]);
 
+  const handleMenu = (e, item) => {
+    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    if (item?.rootID !== 0) {
+      if (typeof window !== "undefined") {
+        setLocalStorage("category", "Home Furniture");
+        setLocalStorage("categoryId", item?.rootID);
+        setLocalStorage("subCategory", item?.cat_name);
+        setLocalStorage("subCategoryId", item?.id);
+      }
+    } else {
+      if (typeof window !== "undefined") {
+        dispatch(addAllProduct(true));
+        setLocalStorage("category", item?.cat_name);
+        setLocalStorage("categoryId", item?.id);
+        setLocalStorage("subCategory", "");
+        // setLocalStorage("subCategoryId", item?.id);
+        // dispatch(addParentCategoryId(item?.id));
+      }
+    }
+    if (previousSubCategory !== item?.cat_name) {
+      dispatch(addSingleProduct([]));
+      dispatch(addSetProduct([]));
+      dispatch(addOutStockProduct([]));
+    }
+    router.push(
+      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+    );
+  };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -68,17 +103,28 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
-            <p className={styles.menu_item}>All</p>
+            <p
+              className={styles.menu_item}
+              onClick={() => console.log("Alll;;;;")}>
+              All
+            </p>
             {data?.map((item, index) => (
               <p
                 key={index.toString()}
                 className={styles.menu_item}
-                onClick={() => {
-                  router.push(
-                    `/${homePageReduxData?.cityName.toLowerCase()}/${
-                      item?.seourl
-                    }`,
-                  );
+                // onClick={() => {
+                //   router.push(
+                //     `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
+                //     }`,
+                //   );
+                // }}>
+                value={item}
+                onClick={e => {
+                  handleMenu(e, item);
+                  // router.push(
+                  //   `/next/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl
+                  //   }`,
+                  // );
                 }}>
                 {item?.cat_name}
               </p>
@@ -161,6 +207,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     if (typeof window !== "undefined") {
                       setLocalStorage("cityId", city?.id);
                     }
+                    const d = city?.list_value_seourl;
+                    if (params.productId === undefined) {
+                      router.push(`/${d}/${params.category}`);
+                    }
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
@@ -170,7 +220,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     }`}
                     alt="city-image"
                   />
-                  <p className={styles.city_name}>{city?.list_value}</p>
+                  <p className={styles.city_name}>{city?.list_value_seourl}</p>
                 </div>
               ))}
             </div>
@@ -202,6 +252,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         </div>
       </>
     );
+
+  // console.log(Cities, "Cities")
 
   return (
     <div className={"flex"}>

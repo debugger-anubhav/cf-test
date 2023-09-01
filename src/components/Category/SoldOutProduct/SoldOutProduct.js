@@ -172,6 +172,7 @@ const SoldOutProduct = () => {
                           discount={`${Math.round(
                             ((item?.price - item?.sale_price) * 100) / 1000,
                           ).toFixed(2)}%`}
+                          productID={item?.id}
                         />
                       </div>
                     );

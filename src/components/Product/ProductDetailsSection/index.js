@@ -17,6 +17,7 @@ import string from "@/constants/Constant.json";
 import {ProductPageImages} from "@/assets/images";
 import {
   HasselFreeDataForProductPage,
+  getLocalStorage,
   productPageImagesBaseUrl,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
@@ -30,11 +31,13 @@ import StickyBottomBar from "./StickyBottomBar";
 import {format} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
 import {getProductDetails} from "@/store/Slices";
+import {useMutation} from "@/hooks/useMutation";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({params}) => {
+  console.log(params, "params");
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
@@ -60,6 +63,8 @@ const ProductDetails = ({params}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
+
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   // bottombar visibility conditiionally
   useEffect(() => {
@@ -119,6 +124,22 @@ const ProductDetails = ({params}) => {
   };
 
   useEffect(() => {
+    const data = {
+      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
+      productId: params?.productId,
+    };
+    axios
+      .post(baseURL + endPoints.addRecentViewProduct, data)
+      .then(res => {
+        console.log(res?.data?.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }, []);
+
+  useEffect(() => {
     if (durationArray.length > 0) {
       const lastIndex = durationArray.length - 1;
       const lastValue = durationArray[lastIndex];
@@ -133,6 +154,38 @@ const ProductDetails = ({params}) => {
     getDurationRent();
     GetProductDetails();
   }, []);
+
+  useEffect(() => {
+    setInWishList(
+      categoryPageReduxData.savedProducts
+        .map(obj => obj.id)
+        .includes(params.productId),
+    );
+  }, []);
+
+  const handleWhislistCard = e => {
+    e.preventDefault();
+    getwhislistProduct()
+      .then(res => console.log(res?.data?.dat))
+      .catch(err => console.log(err));
+    setInWishList(!inWishList);
+  };
+  const data = {
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    productId: params?.productId,
+  };
+
+  const {mutateAsync: getwhislistProduct} = useMutation(
+    "add-wishlist",
+    "POST",
+    endPoints.addWishListProduct,
+    data,
+  );
 
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
@@ -333,7 +386,8 @@ const ProductDetails = ({params}) => {
                   "w-[30px] h-[30px] xl:w-[40px] xl:h-[40px] cursor-pointer"
                 }
                 color={inWishList ? "#D96060" : "#C0C0C6"}
-                onClick={() => setInWishList(!inWishList)}
+                // onClick={() => setInWishList(!inWishList)}
+                onClick={e => handleWhislistCard(e)}
               />
               <div onClick={openModal}>
                 <ShareIcon

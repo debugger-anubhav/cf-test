@@ -1,14 +1,47 @@
 // "use client"
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import string from "@/constants/Constant.json";
 import {useDispatch, useSelector} from "react-redux";
 import {setAnnouncementBar} from "@/store/Slices";
+import {useQuery} from "@/hooks/useQuery";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {endPoints} from "@/network/endPoints";
+import {getLocalStorage} from "@/constants/constant";
 
 const AnnouncementBar = () => {
   const dispatch = useDispatch();
   const closeBar = useSelector(state => state.homePagedata.announcementBar);
+
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
+    }`,
+  );
+
+  useEffect(() => {
+    getSavedItems()
+      .then(res => {
+        dispatch(addSaveditems(res?.data?.data));
+        // addSaveditemID
+        const ids = res?.data?.data.map(item => {
+          return item?.id;
+        });
+        dispatch(addSaveditemID(ids));
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <>

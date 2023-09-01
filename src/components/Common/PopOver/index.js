@@ -40,7 +40,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     setAnchorEl(null);
   };
 
-  // console.log(hoverItem, "hoverItem")
   const handMainCategory = e => {
     dispatch(addAllProduct(true));
     const previouseSubCategory = JSON.parse(
@@ -70,7 +69,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/all`);
+    router.push(
+      `/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
+    );
   };
 
   const handleSelectedProduct = (e, item) => {

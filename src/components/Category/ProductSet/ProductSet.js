@@ -142,6 +142,7 @@ const ProductSet = () => {
               className="!w-full !h-full">
               <div className={style.main_container}>
                 {data?.map((item, index) => {
+                  console.log(item, "itemmm");
                   return item?.subProduct.length ? (
                     <div
                       className={`${style.card_box} ${style.child}`}
@@ -164,6 +165,7 @@ const ProductSet = () => {
                         discount={`${Math.round(
                           ((item?.price - item?.sale_price) * 100) / 1000,
                         ).toFixed(2)}%`}
+                        productID={item?.id}
                       />
                     </div>
                   ) : null;
