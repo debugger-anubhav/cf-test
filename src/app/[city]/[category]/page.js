@@ -1,17 +1,15 @@
 "use client";
 
-import React, {useRef} from "react";
+import React, {useEffect} from "react";
+import {useParams} from "next/navigation";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-// import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// const MenuList = loadable(() => import("@/components/Common/MenuList"));
 import MenuList from "@/components/Common/MenuList";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
@@ -21,8 +19,13 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
-import {useChatScript} from "../../../useChatScript";
-import {setLocalStorage} from "@/constants/constant";
+import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
+
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
@@ -93,40 +96,70 @@ const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
 
-export default function index() {
+export default function Page() {
   const queryClient = new QueryClient();
-  const myElementRef = useRef();
-  if (typeof window !== "undefined") {
-    setLocalStorage("cityId", 46);
-  }
+  const params = useParams();
+  // console.log(params, "paramssss");
+
+  // if (typeof window !== "undefined") {
+  //   tempUserID = getLocalStorage("tempUserID");
+  // }
+
+  useEffect(() => {
+    const data = {
+      userId: "",
+      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      tempUserId: getLocalStorage("tempUserID") ?? "",
+    };
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        if (typeof window !== "undefined") {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div ref={myElementRef} className="large_layout">
-          {useChatScript()}
+        <div className="large_layout">
           <AnnouncementBar />
           <Header />
           <MenuList />
-          <HeroBanner />
-          <RentFurnitureAndAppliances params={"home-page"} />
-          <RecentlyViewedProduct />
-          <TrendingProducts params={"home-page"} />
-          <OffersAndCoupons />
-          <NewlyLaunched />
-          <DownloadForMobile />
-          <PreDesignCombos />
-          <HasselFreeServicesCards />
-          <LimetedPreiodDiscount />
-          <RentNowBanner params={"home-page"} />
-          <TryCityMax />
-          <CustomerRating />
-          <MediaCoverage />
-          <CombineSection />
-          <HappySubscribers params={"home-page"} />
-          <FrequentlyAskedQuestions params={"home-page"} />
-          <TextContent params={"home-page"} />
-          <Footer />
+          {params.category === "appliances-rental" ||
+          params.category === "furniture-rental" ? (
+            <div>
+              <HeroBanner />
+              <RentFurnitureAndAppliances params={params} />
+              <RecentlyViewedProduct />
+              <TrendingProducts params={params} />
+              <OffersAndCoupons />
+              <NewlyLaunched />
+              <DownloadForMobile />
+              <PreDesignCombos />
+              <HasselFreeServicesCards />
+              <LimetedPreiodDiscount />
+              <RentNowBanner params={params} />
+              <TryCityMax />
+              <CustomerRating />
+              <MediaCoverage />
+              <CombineSection />
+              <HappySubscribers params={params} page={params.category} />
+              <FrequentlyAskedQuestions params={params} />
+              <TextContent params={params} />
+              <Footer />
+            </div>
+          ) : params.category === "rent" ? (
+            <div>
+              <Subproduct />
+            </div>
+          ) : (
+            <div>
+              <SubHeader params={params} />
+            </div>
+          )}
         </div>
       </Provider>
       {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}

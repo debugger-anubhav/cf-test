@@ -10,8 +10,12 @@ import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
-import Link from "next/link";
-import {productImageBaseUrl, setLocalStorage} from "@/constants/constant";
+// import Link from "next/link";
+import {
+  getLocalStorage,
+  productImageBaseUrl,
+  setLocalStorage,
+} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 
@@ -60,9 +64,7 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text}
-              onClick={() => router.push("/next/")}>
+            <p className={styles.logo_text} onClick={() => router.push("/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -116,21 +118,23 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/next/cart`}>
-              <Image
-                src={Icons.shoppingCard}
-                alt="shopping-card-icon"
-                className={styles.header_shopping_card}
-              />
-            </Link>
+            {/* <Link href={`/cart`}> */}
+            <Image
+              src={Icons.shoppingCard}
+              alt="shopping-card-icon"
+              className={styles.header_shopping_card}
+              onClick={() => router.push("/Cart")}
+            />
+            {/* </Link> */}
             <Image
               src={Icons.Profile}
               alt="profile-icon"
               className={styles.header_profile_icon}
               onClick={() =>
-                router.push(
-                  "https://test.rentofurniture.com/cityfurnish/user_sign_up",
-                )
+                // router.push(
+                //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
+                // )
+                router.push("https://test.rentofurniture.com/user_sign_up")
               }
             />
           </div>
@@ -177,23 +181,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const [searchedData, setSearchedData] = React.useState();
   const [searchApiData, setSearchApiData] = React.useState(null);
 
-  const handleClick = event => {
-    if (
-      modalRef.current &&
-      !modalRef.current.contains(event.target) &&
-      event.target.tagName !== "INPUT"
-    ) {
-      setOpenSearchBar(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClick);
-    return () => {
-      document.removeEventListener("click", handleClick);
-    };
-  }, []);
-
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
@@ -205,16 +192,19 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     // Store search term in local storage
     if (e.key === "Enter" || e.type === "click") {
       if (newSearchTerm.trim() !== "") {
-        const storedSearches = localStorage.getItem("searches");
+        // const storedSearches = localStorage.getItem("searches");
+        let storedSearches;
         const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
         searchesArray.unshift(newSearchTerm);
         const maxItems = 10;
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
           setLocalStorage("searches", truncatedArray);
+          storedSearches = getLocalStorage("searches");
         }
 
-        setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+        setSearchedData(storedSearches);
+        // setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
       }
     }
   };
@@ -226,12 +216,13 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   };
   useEffect(() => {
     setSearchedData(
-      JSON.parse(localStorage.getItem("searches")) || ["No search history"],
+      getLocalStorage("searches") || ["No search history"],
+      // JSON.parse(localStorage.getItem("searches")) || ["No search history"],
     );
   }, []);
 
   return (
-    <div className={styles.backdrop}>
+    <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
         style={{
           top: `${
@@ -265,7 +256,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="Search for Furniture, Appliances, etc"
+            placeholder="pppSearch for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -273,7 +264,13 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           />
         </div>
 
-        <div className={styles.search_open_details} open={open}>
+        <div
+          className={styles.search_open_details}
+          open={open}
+          onClick={e => {
+            console.log("beingclicked");
+            e.stopPropagation();
+          }}>
           <div>
             {searchApiData &&
               searchApiData?.products?.map((item, index) => (
@@ -281,7 +278,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
@@ -300,7 +297,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                   className={styles.search_rasult_wrapper}
                   key={index.toString()}
                   onClick={() =>
-                    router.push(`/next/things/${item.id}/${item.seourl}`)
+                    router.push(`/things/${item.id}/${item.seourl}`)
                   }>
                   <img
                     src={productImageBaseUrl + item?.image?.split(",")[0]}

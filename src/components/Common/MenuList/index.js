@@ -9,7 +9,6 @@ import Skeleton from "@mui/material/Skeleton";
 
 const MenuList = () => {
   const dispatch = useDispatch();
-  // const homePageReduxData = useSelector(state => state.homePagedata);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
@@ -37,7 +36,6 @@ const MenuList = () => {
       ) : (
         <div className={styles.menu_list_left}>
           {getAllAndSubCategoryData?.map((list, index) => {
-            // console.log(list, "listtttt")
             return (
               <div className={styles.item_wrap} key={index.toString()}>
                 <PopOver

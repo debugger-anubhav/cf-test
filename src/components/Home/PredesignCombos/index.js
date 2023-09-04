@@ -33,6 +33,11 @@ const PreDesignCombos = () => {
 
   const sliderRef = useRef(null);
 
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -73,12 +78,6 @@ const PreDesignCombos = () => {
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
-
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/next/things/${item.id}/${item.seourl}`);
-    }
-  };
   return (
     <>
       {homePageReduxData?.designComboProduct?.length ? (
@@ -106,6 +105,7 @@ const PreDesignCombos = () => {
                   ).toFixed(2)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
+                  productID={item?.id}
                 />
               </div>
             ))}

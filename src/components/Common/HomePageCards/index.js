@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {Heart, Rupee} from "@/assets/icon";
+import {useMutation} from "@/hooks/useMutation";
+import {endPoints} from "@/network/endPoints";
+import {useSelector} from "react-redux";
+import {getLocalStorage} from "@/constants/constant";
 
 const Card = ({
   desc,
@@ -15,9 +19,53 @@ const Card = ({
   isHover = true,
   productWidth,
   isImageHeight = false,
+  productID,
 }) => {
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
+  const data = {
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    productId: productID,
+  };
+
+  const {mutateAsync: getwhislistProduct} = useMutation(
+    "add-wishlist",
+    "POST",
+    endPoints.addWishListProduct,
+    data,
+  );
+
+  const {mutateAsync: removewhislistProduct} = useMutation(
+    "remove-wishlist",
+    "DELETE",
+    endPoints.deleteWishListProduct,
+    data,
+  );
+
+  const handleWhislistCard = e => {
+    e.stopPropagation();
+    setInWishList(!inWishList);
+    !inWishList
+      ? getwhislistProduct()
+          .then(res => console.log(res?.data?.dat))
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    setInWishList(
+      categoryPageReduxData.savedProducts
+        .map(obj => obj.id)
+        .includes(productID),
+    );
+  }, []);
 
   return (
     <div
@@ -63,9 +111,13 @@ const Card = ({
         <Heart
           size={25}
           color={inWishList ? "#D96060" : "#C0C0C6"}
+          // onClick={e => {
+          //   e.preventDefault();
+          //   setInWishList(!inWishList);
+          // }}
           onClick={e => {
             e.preventDefault();
-            setInWishList(!inWishList);
+            handleWhislistCard(e);
           }}
           className={"cursor-pointer"}
         />
