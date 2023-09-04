@@ -53,7 +53,7 @@
   @apply flex flex-col gap-6;
 }
 .box_wrapper {
-  @apply flex justify-between items-center p-4 border border-DDDDDF rounded-lg hover:border-2 hover:border-5774AC hover:p-[15px] w-[440px] lg:w-full xl:w-[440px];
+  @apply flex justify-between items-center p-4 border border-DDDDDF rounded-lg hover:border-2 hover:border-5774AC hover:p-[15px] md:w-[440px] lg:w-full xl:w-[440px];
 }
 .whatsapp_icon {
   @apply w-6 h-6;
@@ -66,4 +66,16 @@
 }
 .hash {
   @apply text-[30px] text-45454A;
+}
+.tenure_info {
+  @apply flex gap-[11px] mt-6  md:w-[440px] lg:w-full xl:w-[440px];
+}
+.kyc_info {
+  @apply flex gap-[11px] mt-4 md:w-[440px] lg:w-full xl:w-[440px];
+}
+.desc {
+  @apply text-45454A text-14 leading-normal tracking-desc;
+}
+.verified_icon {
+  @apply min-w-[24px] h-6;
 }

@@ -150,10 +150,13 @@ const ProductDetails = ({params}) => {
   const cityShieldOriginalPrice =
     (durationArray[duration.currentIndex]?.attr_price * 10) / 100;
 
-  const cityShieldDiscount = Math.round(
-    ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
-      cityShieldOriginalPrice,
-  ).toFixed(2);
+  const cityShieldDiscount =
+    cityShieldOriginalPrice > 0
+      ? Math.round(
+          ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
+            cityShieldOriginalPrice,
+        ).toFixed(2)
+      : 0;
 
   const handleButtonClick = () => {
     setIsLoading(true);
@@ -508,7 +511,7 @@ const ProductDetails = ({params}) => {
                 <Rupee />
                 {cityShieldOriginalPrice} / mo
               </p>
-              <div className={styles.discount}>-60% OFF</div>
+              <div className={styles.discount}>{cityShieldDiscount}</div>
             </div>
           </div>
         </div>

@@ -1,11 +1,77 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
-import {BackIcon, PersonIcon, WhatsappIcon} from "@/assets/icon";
+import otherStyles from "../ShoppingCartSection/style.module.css";
+import {
+  ArrowForw,
+  BackIcon,
+  CalendarIcon,
+  PersonIcon,
+  Rupee,
+  VerifiedIcon,
+  WhatsappIcon,
+} from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
+import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 
 const AddressSection = ({setTab}) => {
   const [whatsappNotification, setWhatsappNotification] = useState(true);
   const [gstNumber, setGstNumber] = useState(false);
+  const [breakupDrawer, setBreakupDrawer] = useState(false);
+
+  const arr = [
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+    {
+      img: "1583995987Alexa-queen-bed.jpg",
+      product_name: "V-leg 4 Seater Dining Table",
+      currentPrice: 1709,
+      originalPrice: 1899,
+    },
+  ];
+
+  const toggleDrawerBreakup = () => {
+    setBreakupDrawer(!breakupDrawer);
+  };
   return (
     <div className={styles.main_container}>
       <div className={styles.left_div}>
@@ -124,6 +190,44 @@ const AddressSection = ({setTab}) => {
             )}
           </div>
         </div>
+
+        <div className={styles.tenure_info}>
+          <CalendarIcon size={24} />
+          <p className={styles.desc}>
+            Your rental payment and tenure will begin from the date of delivery
+          </p>
+        </div>
+
+        <div className={styles.kyc_info}>
+          <VerifiedIcon className={styles.verified_icon} />
+          <p className={styles.desc}>
+            Once the order has been placed, you might be required to share a few
+            documents for KYC
+          </p>
+        </div>
+
+        <div
+          className={otherStyles.cart_breakup}
+          onClick={() => setBreakupDrawer(true)}>
+          <div>
+            <p className={otherStyles.total_text}>Total:</p>
+            <div className={otherStyles.breakup_wrapper}>
+              <p className={otherStyles.view_cart_text}>View cart breakup</p>
+              <ArrowForw color={"#5774AC"} className={otherStyles.for_arrow} />
+            </div>
+          </div>
+          <p className={otherStyles.total_amount}>
+            <Rupee className={otherStyles.rupeeIcon} />
+            11,709
+          </p>
+        </div>
+        {breakupDrawer && (
+          <TotalBreakup
+            toggleDrawer={toggleDrawerBreakup}
+            open={breakupDrawer}
+            arr={arr}
+          />
+        )}
       </div>
     </div>
   );
