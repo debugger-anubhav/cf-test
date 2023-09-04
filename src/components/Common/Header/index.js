@@ -18,6 +18,7 @@ import {
 } from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import ProfileDropDown from "./ProfileDropDown";
 
 const HEADER_HEIGHT = 48;
 
@@ -112,31 +113,33 @@ const Header = () => {
                 />
               </>
             )}
-
-            <Image
-              src={Icons.Favorite}
-              alt="favorite"
-              className={styles.header_favorite}
-            />
-            {/* <Link href={`/cart`}> */}
-            <Image
-              src={Icons.shoppingCard}
-              alt="shopping-card-icon"
-              className={styles.header_shopping_card}
-              onClick={() => router.push("/Cart")}
-            />
-            {/* </Link> */}
-            <Image
-              src={Icons.Profile}
-              alt="profile-icon"
-              className={styles.header_profile_icon}
-              onClick={() =>
-                // router.push(
-                //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
-                // )
-                router.push("https://test.rentofurniture.com/user_sign_up")
-              }
-            />
+            <div className="relative flex">
+              <Image
+                src={Icons.Favorite}
+                alt="favorite"
+                className={styles.header_favorite}
+              />
+              {/* <Link href={`/cart`}> */}
+              <Image
+                src={Icons.shoppingCard}
+                alt="shopping-card-icon"
+                className={styles.header_shopping_card}
+                onClick={() => router.push("/Cart")}
+              />
+              {/* </Link> */}
+              <Image
+                src={Icons.Profile}
+                alt="profile-icon"
+                className={`${styles.header_profile_icon} relative`}
+                onClick={() =>
+                  // router.push(
+                  //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
+                  // )
+                  router.push("https://test.rentofurniture.com/user_sign_up")
+                }
+              />
+              <ProfileDropDown />
+            </div>
           </div>
         </div>
         <div className={styles.mobile_search_row}>

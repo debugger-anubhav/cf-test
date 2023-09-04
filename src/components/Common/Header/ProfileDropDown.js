@@ -13,13 +13,13 @@ export default function ProfileDropDown() {
   ];
   return (
     <div
-      className="flex p-4 rounded-lg"
+      className="flex px-6 py-4 pr-8 rounded-t-lg absolute top-10 right-0 bg-white flex-col"
       style={{boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)"}}>
       {items?.map((ele, index) => (
         <div
-          className="flex mb-4 text-base font-Poppins"
+          className="flex mb-4 text-base font-Poppins cursor-pointer whitespace-nowrap"
           key={index.toString()}>
-          {ele}
+          {ele.item}
         </div>
       ))}
     </div>
