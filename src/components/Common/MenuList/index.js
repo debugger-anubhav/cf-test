@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addAllAndSubCategory} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
+import {getLocalStorage} from "@/constants/constant";
 
 const MenuList = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const MenuList = () => {
   const [loading, setLoading] = React.useState(true);
   const {refetch: getAllAndSubCategory} = useQuery(
     "category",
-    endPoints.allAndSubCategory,
+    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
   );
 
   useEffect(() => {
