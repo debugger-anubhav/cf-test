@@ -7,6 +7,7 @@ import {addAllAndSubCategory} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {useRouter} from "next/navigation";
+import {getLocalStorage} from "@/constants/constant";
 
 const MenuList = () => {
   const router = useRouter();
@@ -17,7 +18,8 @@ const MenuList = () => {
   const [loading, setLoading] = React.useState(true);
   const {refetch: getAllAndSubCategory} = useQuery(
     "category",
-    endPoints.allAndSubCategory,
+    // endPoints.allAndSubCategory,
+    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")},`,
   );
 
   useEffect(() => {
