@@ -142,7 +142,6 @@ const ProductSet = () => {
               className="!w-full !h-full">
               <div className={style.main_container}>
                 {data?.map((item, index) => {
-                  console.log(item, "itemmm");
                   return item?.subProduct.length ? (
                     <div
                       className={`${style.card_box} ${style.child}`}

@@ -108,15 +108,19 @@ export default function Home() {
   const data = {
     userId: "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    tempUserId: getLocalStorage("tempUserID") ?? "",
+    tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
   };
 
   useEffect(() => {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
+        console.log(res?.data?.data, "temp user id");
         if (typeof window !== "undefined") {
-          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+          setLocalStorage(
+            "tempUserID",
+            JSON.parse(res?.data?.data?.tempUserId),
+          );
         }
       })
       .catch(err => console.log(err));

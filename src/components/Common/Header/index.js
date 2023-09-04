@@ -355,7 +355,8 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.card_wrapper}
                     onClick={() => {
                       router.push(
-                        `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                        // `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                        `${homePageReduxData?.cityName.toLowerCase()}/${
                           item?.seourl
                         }`,
                       );
