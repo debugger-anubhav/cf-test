@@ -47,10 +47,11 @@ import Icon3 from "@/assets/home_page_assets/tryCityMax/v6-icon3.svg";
 import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 
 // menubar search modal icons
-import {LuRefreshCcw} from "react-icons/lu";
+import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
 import {AiOutlineDelete} from "react-icons/ai";
+import {FaRegCalendar} from "react-icons/fa";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -243,4 +244,12 @@ export const PersonIcon = ({size, color, className}) => (
 
 export const WhatsappIcon = ({size, color, className}) => (
   <BsWhatsapp size={size} color={color} className={className} />
+);
+
+export const CalendarIcon = ({size, color, className}) => (
+  <FaRegCalendar size={size} color={color} className={className} />
+);
+
+export const VerifiedIcon = ({size, color, className}) => (
+  <LuVerified size={size} color={color} className={className} />
 );

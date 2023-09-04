@@ -99,23 +99,20 @@ const CombineSection = loadable(() =>
 export default function Page() {
   const queryClient = new QueryClient();
   const params = useParams();
-  // console.log(params, "paramssss");
-
-  // if (typeof window !== "undefined") {
-  //   tempUserID = getLocalStorage("tempUserID");
-  // }
 
   useEffect(() => {
     const data = {
       userId: "",
-      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-      tempUserId: getLocalStorage("tempUserID") ?? "",
+      tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
     };
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
         if (typeof window !== "undefined") {
-          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+          setLocalStorage(
+            "tempUserID",
+            JSON.parse(res?.data?.data?.tempUserId),
+          );
         }
       })
       .catch(err => console.log(err));

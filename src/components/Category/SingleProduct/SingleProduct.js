@@ -22,28 +22,24 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
   let categoryId;
   let subCategoryId;
   let cityIdStr;
+
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
     subCategoryId = getLocalStorage("subCategoryId");
     cityIdStr = getLocalStorage("cityId");
   }
 
-  // const categoryId = localStorage.getItem("categoryId")?.replace(/"/g, "");
-  // const subCategoryId = localStorage
-  //   .getItem("subCategoryId")
-  //   ?.replace(/"/g, "");
-  // const cityIdStr = localStorage
-  //   .getItem("cityId")
-  //   ?.toString()
-  //   ?.replace(/"/g, "");
+  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
+
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
-    subCategoryId,
     parentCategoryId: categoryId,
+    subCategoryId,
     cityId,
     pageNo,
     filterList: categoryPageReduxData?.isfilter
@@ -62,8 +58,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     sortKey: categoryPageReduxData?.sortKey,
   };
 
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
-
   const data =
     productname === "all" || categoryPageReduxData?.isAllProduct
       ? bodyDataAll
@@ -79,55 +73,60 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     data,
   );
 
-  useEffect(() => {
-    getSingleProducts()
-      .then(res => {
-        setTotalPage(res?.data?.meta?.totalPage);
+  useEffect(
+    () => {
+      getSingleProducts()
+        .then(res => {
+          setTotalPage(res?.data?.meta?.totalPage);
 
-        dispatch(addSubCategoryMetaData(res?.data?.meta));
-        if (categoryPageReduxData?.isfilter) {
-          if (pageNo === 1) {
-            dispatch(addSingleProduct([...res?.data?.products]));
-          } else {
+          dispatch(addSubCategoryMetaData(res?.data?.meta));
+          if (categoryPageReduxData?.isfilter) {
             if (pageNo === 1) {
               dispatch(addSingleProduct([...res?.data?.products]));
             } else {
-              dispatch(
-                addSingleProduct([
-                  ...categoryPageReduxData?.singleProduct,
-                  ...res?.data?.products,
-                ]),
-              );
-            }
-          }
-        } else {
-          if (categoryPageReduxData?.isAllProduct) {
-            if (pageNo === 1) {
-              dispatch(addSingleAllProduct([...res?.data?.products]));
-            } else {
-              dispatch(
-                addSingleAllProduct([
-                  ...categoryPageReduxData?.singleProductAll,
-                  ...res?.data?.products,
-                ]),
-              );
+              if (pageNo === 1) {
+                dispatch(addSingleProduct([...res?.data?.products]));
+              } else {
+                dispatch(
+                  addSingleProduct([
+                    ...categoryPageReduxData?.singleProduct,
+                    ...res?.data?.products,
+                  ]),
+                );
+              }
             }
           } else {
-            if (pageNo === 1) {
-              dispatch(addSingleProduct([...res?.data?.products]));
+            if (categoryPageReduxData?.isAllProduct) {
+              if (pageNo === 1) {
+                dispatch(addSingleAllProduct([...res?.data?.products]));
+              } else {
+                dispatch(
+                  addSingleAllProduct([
+                    ...categoryPageReduxData?.singleProductAll,
+                    ...res?.data?.products,
+                  ]),
+                );
+              }
             } else {
-              dispatch(
-                addSingleProduct([
-                  ...categoryPageReduxData?.singleProduct,
-                  ...res?.data?.products,
-                ]),
-              );
+              if (pageNo === 1) {
+                dispatch(addSingleProduct([...res?.data?.products]));
+              } else {
+                dispatch(
+                  addSingleProduct([
+                    ...categoryPageReduxData?.singleProduct,
+                    ...res?.data?.products,
+                  ]),
+                );
+              }
             }
           }
-        }
-      })
-      .catch(err => console.log(err));
-  }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
+        })
+        .catch(err => console.log(err));
+    },
+    [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey],
+    subCategoryId,
+  );
+
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
       router.push(`/things/${item.id}/${item.seourl}`);

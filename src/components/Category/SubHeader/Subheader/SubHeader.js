@@ -22,11 +22,17 @@ import {
 import SingleProduct from "../../SingleProduct/SingleProduct";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-import {addProductName, addSubCategoryId} from "@/store/Slices";
+import {
+  addCategoryId,
+  addProductName,
+  addSubCategoryId,
+  selectedCityId,
+  selectedCityName,
+} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 
 const SubHeader = ({params}) => {
-  // console.log(params.category.split("-")[0], "params++++++++ ")
+  // console.log(params, "a-------")
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -39,32 +45,69 @@ const SubHeader = ({params}) => {
 
   const [emptyFilterItem, setEmptyFilterItem] = useState(false);
   const [filterSaved, setfiltereSaved] = useState(false);
-  // const category = localStorage.getItem("category")?.replace(/"/g, "");
-  // const categoryId = localStorage.getItem("categoryId");
-  // const subCategory = localStorage.getItem("subCategory")?.replace(/"/g, "");
-  // const subCategoryId = localStorage.getItem("subCategoryId");
-  let category;
-  let categoryId;
-  let subCategoryId;
-  let subCategory;
+  const [isLoading, setIsLoading] = useState(false);
+  const [category, setCategory] = useState("");
+  const [subCategory, setSubCategory] = useState("");
+  const [cityId, setCityId] = useState("");
+  const [categoryId, setCategoryId] = useState("");
+  const [subCategoryId, setSubCategoryId] = useState("");
 
-  if (typeof window !== "undefined") {
-    setLocalStorage("subCategory", params.category.split("-")[0]);
+  console.log(cityId);
+  function findSubCategoryByURL(data, browserURL) {
+    for (const category of data) {
+      for (const subCategory of category.sub_categories) {
+        if (subCategory.seourl === browserURL) {
+          return {
+            cat_name: subCategory.cat_name,
+            id: subCategory.id,
+            rootID: subCategory.rootID,
+          };
+        }
+      }
+    }
+    return null; // Return null if no match is found
   }
 
-  if (typeof window !== "undefined") {
-    categoryId = getLocalStorage("categoryId");
-    subCategoryId = getLocalStorage("subCategoryId");
-    subCategory = getLocalStorage("subCategory")?.replace(/"/g, "");
-    category =
-      getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture";
+  function findIdByURL(list, browserURL) {
+    for (let i = 0; i < list.length; i++) {
+      if (list[i].list_value_seourl === browserURL) {
+        dispatch(selectedCityName(browserURL));
+        return list[i].id;
+      }
+    }
+    return null;
   }
 
-  const {refetch: getFilterList} = useQuery(
-    "filter-list",
-    endPoints.categoryFilterOption,
-    `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
-  );
+  useEffect(() => {
+    if (getAllAndSubCategoryData.length) {
+      const matchedCategoryName = findSubCategoryByURL(
+        getAllAndSubCategoryData,
+        params?.category,
+      );
+      if (matchedCategoryName !== null) {
+        setLocalStorage("subCategory", matchedCategoryName.cat_name);
+        setLocalStorage("subCategoryId", matchedCategoryName.id);
+        setLocalStorage("categoryId", matchedCategoryName.rootID);
+        dispatch(addCategoryId(matchedCategoryName.rootID));
+        dispatch(addSubCategoryId(matchedCategoryName.id));
+      } else {
+        console.log("No matching category found for the browser URL.");
+      }
+      setTimeout(() => {
+        setIsLoading(true);
+      }, 5000);
+    }
+
+    if (homePageReduxData?.cityList.length) {
+      const id = findIdByURL(homePageReduxData?.cityList, params.city);
+      if (id !== null) {
+        setLocalStorage("cityId", id);
+        dispatch(selectedCityId(id));
+      } else {
+        console.log(`No match found for`);
+      }
+    }
+  }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     setPageNo(1);
@@ -86,6 +129,8 @@ const SubHeader = ({params}) => {
       setLocalStorage("categoryId", mainCategory?.id);
       setLocalStorage("subCategory", item?.cat_name);
       setLocalStorage("subCategoryId", item?.id);
+      dispatch(addCategoryId(mainCategory?.id));
+      dispatch(addSubCategoryId(item?.id));
     }
 
     dispatch(addProductName(item));
@@ -98,14 +143,37 @@ const SubHeader = ({params}) => {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCategoryId(getLocalStorage("categoryId"));
+      setSubCategoryId(getLocalStorage("subCategoryId"));
+      setSubCategory(getLocalStorage("subCategory")?.replace(/"/g, ""));
+      setCategory(
+        getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
+      );
+      setCityId(getLocalStorage("cityId"));
+    }
+  }, []);
+
+  const {refetch: getFilterList} = useQuery(
+    "filter-list",
+    endPoints.categoryFilterOption,
+    // `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
+    // `?parentCategoryId=${getLocalStorage("categoryId")}&subCategoryId=${getLocalStorage("subCategoryId")}`,
+    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${homePageReduxData.subcategoryId}`,
+  );
+
+  useEffect(() => {
     getFilterList()
       .then(res => {
         dispatch(addFilterData(res?.data?.data));
       })
       .catch(err => console.log(err));
-  }, []);
-
-  // console.log(getAllAndSubCategoryData, "getAllAndSubCategoryData")
+  }, [
+    categoryId,
+    subCategoryId,
+    homePageReduxData.categoryId,
+    homePageReduxData.subcategoryId,
+  ]);
 
   return (
     <>
@@ -117,11 +185,17 @@ const SubHeader = ({params}) => {
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              <p className={styles.route_text}>{category}</p>
+              {/* <p className={styles.route_text}>{category}</p> */}
+              <p className={styles.route_text}>
+                {getLocalStorage("category")?.replace(/"/g, "")}
+              </p>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              <p className={styles.route_text}>{subCategory}</p>
+              {/* <p className={styles.route_text}>{subCategory}</p> */}
+              <p className={styles.route_text}>
+                {getLocalStorage("subCategory")?.replace(/"/g, "")}
+              </p>
             </li>
           </ul>
         </div>
@@ -131,8 +205,6 @@ const SubHeader = ({params}) => {
         </h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {
-            // console.log(category, item?.cat_name, "tttttt")
-
             if (item?.cat_name === category) {
               const subCategoriesWithNewObject = [
                 {
@@ -143,7 +215,10 @@ const SubHeader = ({params}) => {
               ];
 
               return subCategoriesWithNewObject?.map((subItem, i) => {
-                const selectedProduct = subCategory === subItem?.cat_name;
+                const selectedProduct =
+                  getLocalStorage("subCategory")?.replace(/"/g, "") ===
+                  subItem?.cat_name;
+                // console.log(subCategory, subItem?.cat_name, "tesstsst")
                 return (
                   <div
                     className={
@@ -281,7 +356,7 @@ const SubHeader = ({params}) => {
         )}
         {/* ------------------------------------------------------------------------------------------------------------- */}
       </div>
-      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
+      {isLoading && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
       {/* <p className="bg-red-400">gfhhmn</p> */}
     </>
   );
