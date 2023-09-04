@@ -40,6 +40,7 @@ const Header = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [topOffset, settopOffset] = useState(0);
   const [arr, setArr] = React.useState(null);
+  const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
 
   useEffect(() => {
     getCityList()
@@ -131,14 +132,16 @@ const Header = () => {
                 src={Icons.Profile}
                 alt="profile-icon"
                 className={`${styles.header_profile_icon} relative`}
-                onClick={() =>
-                  // router.push(
-                  //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
-                  // )
-                  router.push("https://test.rentofurniture.com/user_sign_up")
-                }
+                onClick={() => {
+                  if (getLocalStorage("tempUserID") === "null") {
+                    router.push("https://test.rentofurniture.com/user_sign_up");
+                  } else {
+                    setShowProfileDropdown(!showProfileDropdown);
+                  }
+                }}
               />
-              <ProfileDropDown />
+              {getLocalStorage("tempUserID") !== "null" &&
+                showProfileDropdown && <ProfileDropDown />}
             </div>
           </div>
         </div>
@@ -271,7 +274,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           className={styles.search_open_details}
           open={open}
           onClick={e => {
-            console.log("beingclicked");
             e.stopPropagation();
           }}>
           <div>
