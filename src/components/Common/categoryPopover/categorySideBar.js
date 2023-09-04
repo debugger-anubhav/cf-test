@@ -210,7 +210,7 @@ export default function FilterSortDrawer({
               <DownPopUpArrow
                 size={20}
                 color={"#45454A"}
-                className={open ? styles.arrow_up : styles.arrow_down}
+                className={state.bottom ? styles.arrow_up : styles.arrow_down}
               />
             </div>
           </div>

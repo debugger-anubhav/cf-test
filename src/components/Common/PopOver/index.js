@@ -42,9 +42,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
 
   const handMainCategory = e => {
     dispatch(addAllProduct(true));
-    // const previouseSubCategory = JSON.parse(
-    //   localStorage.getItem("subCategory"),
-    // );
 
     let previouseSubCategory;
 
@@ -59,10 +56,6 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       setLocalStorage("subCategory", "All");
       setLocalStorage("categoryId", data?.id);
     }
-    // if (typeof window !== "undefined") {
-    //   setLocalStorage("categoryId", mainCategory?.id);
-    // }
-
     dispatch(addParentCategoryId(parentCategoryId));
     dispatch(addProductName(item));
     dispatch(addSubCategoryId(""));
