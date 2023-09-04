@@ -568,7 +568,7 @@ const ProductDetails = ({params}) => {
                 <Rupee />
                 {cityShieldOriginalPrice} / mo
               </p>
-              <div className={styles.discount}>{cityShieldDiscount}</div>
+              <div className={styles.discount}>{cityShieldDiscount}%</div>
             </div>
           </div>
         </div>
