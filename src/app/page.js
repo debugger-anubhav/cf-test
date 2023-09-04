@@ -108,7 +108,7 @@ export default function Home() {
   const data = {
     userId: "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID") ?? "",
   };
 
   useEffect(() => {
