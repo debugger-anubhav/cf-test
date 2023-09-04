@@ -4,7 +4,7 @@ import {Mail, Message} from "@/assets/icon";
 // import { useChatScript } from "../../../../useChatScript";
 
 export default function ChatWithUs() {
-  // const [showChat, setShowChat] = React.useState(false)
+  const handleButtonClick = () => {};
 
   return (
     <>
@@ -23,7 +23,11 @@ export default function ChatWithUs() {
             9 PM)
           </p>
           <div className={styles.btn_wrapper}>
-            <button className={styles.write_to_us_wrapper}>
+            <button
+              className={styles.write_to_us_wrapper}
+              onClick={() => {
+                handleButtonClick();
+              }}>
               {/* <TbMailFilled className={styles.tbMail_icon} /> */}
               <Mail
                 size={20}

@@ -89,7 +89,7 @@ const SubHeader = ({params}) => {
   };
 
   useEffect(() => {
-    if (getAllAndSubCategoryData.length) {
+    if (getAllAndSubCategoryData?.length) {
       const matchedCategoryName = findSubCategoryByURL(
         getAllAndSubCategoryData,
         params?.category,
@@ -117,7 +117,7 @@ const SubHeader = ({params}) => {
         console.log(`No match found for`);
       }
     }
-  }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData.length]);
+  }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     setPageNo(1);

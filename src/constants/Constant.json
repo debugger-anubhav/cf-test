@@ -13,9 +13,12 @@
         {"item": "Combos", "link": "link"}
       ],
       "menuList2": [
-        {"item": "Furniture Sale", "link": "link"},
-        {"item": "CF For Businesses", "link": "link"},
-        {"item": "Pay your dues", "link": "link"}
+        {"item": "Furniture Sale", "link": "https://zior.in/"},
+        {
+          "item": "CF For Businesses",
+          "link": "https://cityfurnish.com/pages/bulkorder"
+        },
+        {"item": "Pay your dues", "link": "/"}
       ],
       "menuList3": [
         {"item": "Help", "link": "link"},

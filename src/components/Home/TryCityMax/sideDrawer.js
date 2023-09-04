@@ -51,9 +51,11 @@ export default function SideDrawer() {
   ];
   const list = anchor => (
     <div
-      style={{
-        width: anchor === "top" || anchor === "bottom" ? "auto" : "530px",
-      }}
+      style={
+        {
+          // width: anchor === "top" || anchor === "bottom" ? "auto" : "530px",
+        }
+      }
       className={styles.drawer_wrapper}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}

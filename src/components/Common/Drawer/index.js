@@ -12,7 +12,6 @@ import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {
   addAllProduct,
   addOutStockProduct,
-  // addParentCategoryId,
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
@@ -42,7 +41,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     window.addEventListener("resize", handleresize);
     return () => window.removeEventListener("resize", handleresize);
   }, []);
-
+  const hoverRef = React.useRef("");
   const toggleDrawer = (anchor, open) => event => {
     if (
       event &&
@@ -74,9 +73,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         dispatch(addAllProduct(true));
         setLocalStorage("category", item?.cat_name);
         setLocalStorage("categoryId", item?.id);
-        setLocalStorage("subCategory", "");
-        // setLocalStorage("subCategoryId", item?.id);
-        // dispatch(addParentCategoryId(item?.id));
+        setLocalStorage("subCategory", "All");
       }
     }
     if (previousSubCategory !== item?.cat_name) {
@@ -88,7 +85,19 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     );
   };
-
+  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
+    state => state.homePagedata,
+  );
+  const handMainCategory = e => {
+    if (typeof window !== "undefined") {
+      setLocalStorage("category", "Home Furniture");
+      setLocalStorage("subCategory", "All");
+      setLocalStorage("categoryId", getAllAndSubCategoryData[0]?.id);
+    }
+    router.push(
+      `/${homePageReduxData?.cityName.toLowerCase()}/home-furniture-rental`,
+    );
+  };
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -109,7 +118,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.menu_list}>
             <p
               className={styles.menu_item}
-              onClick={() => console.log("Alll;;;;")}>
+              onMouseEnter={e => {
+                hoverRef.current = "All";
+              }}
+              onClick={() => handMainCategory()}>
               All
             </p>
             {data?.map((item, index) => (
@@ -137,7 +149,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList2?.map((item, index) => (
-              <p className={styles.menu_item} key={index.toString()}>
+              <p
+                className={styles.menu_item}
+                key={index.toString()}
+                onClick={() => router.push(item.link)}>
                 {item?.item}
               </p>
             ))}
