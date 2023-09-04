@@ -133,15 +133,19 @@ const Header = () => {
                 alt="profile-icon"
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  if (getLocalStorage("tempUserID") === "null") {
+                  if (getLocalStorage("tempUserID") === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     setShowProfileDropdown(!showProfileDropdown);
                   }
                 }}
               />
-              {getLocalStorage("tempUserID") !== "null" &&
-                showProfileDropdown && <ProfileDropDown />}
+              {getLocalStorage("tempUserID") !== null &&
+                showProfileDropdown && (
+                  <ProfileDropDown
+                    setShowProfileDropdown={setShowProfileDropdown}
+                  />
+                )}
             </div>
           </div>
         </div>

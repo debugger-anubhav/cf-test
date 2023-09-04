@@ -1,6 +1,6 @@
 import {useRouter} from "next/navigation";
 import React from "react";
-export default function ProfileDropDown() {
+export default function ProfileDropDown({setShowProfileDropdown}) {
   const items = [
     {item: "My Orders", link: "https://cityfurnish.com/purchases"},
     {
@@ -27,7 +27,8 @@ export default function ProfileDropDown() {
       {items?.map((ele, index) => (
         <div
           className={`flex mb-4 text-base font-Poppins cursor-pointer whitespace-nowrap hover:text-5774AC hover:underline ${
-            index === items.length - 1 && "text-[#D96060] hover:text-[#D96060]"
+            index === items.length - 1 &&
+            "text-[#D96060] hover:text-[#D96060] mb-0"
           }`}
           key={index.toString()}
           onClick={() => {
@@ -35,6 +36,8 @@ export default function ProfileDropDown() {
               router.push(ele.link);
             } else {
               // remove userid
+              localStorage.removeItem("tempUserID");
+              setShowProfileDropdown(false);
             }
           }}>
           {ele.item}
