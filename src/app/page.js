@@ -115,8 +115,12 @@ export default function Home() {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
+        console.log(res?.data?.data, "temp user id");
         if (typeof window !== "undefined") {
-          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+          setLocalStorage(
+            "tempUserID",
+            JSON.parse(res?.data?.data?.tempUserId),
+          );
         }
       })
       .catch(err => console.log(err));
@@ -142,8 +146,13 @@ export default function Home() {
           <LimetedPreiodDiscount />
           <RentNowBanner params={"home-page"} />
           <TryCityMax />
+          <div className="xl:hidden block">
+            <MediaCoverage />
+          </div>
           <CustomerRating />
-          <MediaCoverage />
+          <div className="hidden xl:block">
+            <MediaCoverage />
+          </div>
           <CombineSection />
           <HappySubscribers params={"home-page"} />
           <FrequentlyAskedQuestions params={"home-page"} />

@@ -93,14 +93,6 @@ const TryCityMax = () => {
                 );
               })}
             </div>
-            {/* <button className={styles.how_it_works_button}>
-              <p className={styles.how_it_works_paragraph}>How it works</p>
-              <ForwardArrow
-                size={18}
-                color={"#597492"}
-                className={styles.forward_arrow}
-              />
-            </button> */}
             <SideDrawer />
             <hr className={styles.underline} />
           </div>

@@ -18,6 +18,7 @@ import {
 } from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import ProfileDropDown from "./ProfileDropDown";
 
 const HEADER_HEIGHT = 48;
 
@@ -39,6 +40,7 @@ const Header = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [topOffset, settopOffset] = useState(0);
   const [arr, setArr] = React.useState(null);
+  const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
 
   useEffect(() => {
     getCityList()
@@ -112,31 +114,39 @@ const Header = () => {
                 />
               </>
             )}
-
-            <Image
-              src={Icons.Favorite}
-              alt="favorite"
-              className={styles.header_favorite}
-            />
-            {/* <Link href={`/cart`}> */}
-            <Image
-              src={Icons.shoppingCard}
-              alt="shopping-card-icon"
-              className={styles.header_shopping_card}
-              onClick={() => router.push("/cart")}
-            />
-            {/* </Link> */}
-            <Image
-              src={Icons.Profile}
-              alt="profile-icon"
-              className={styles.header_profile_icon}
-              onClick={() =>
-                // router.push(
-                //   "https://test.rentofurniture.com/cityfurnish/user_sign_up",
-                // )
-                router.push("https://test.rentofurniture.com/user_sign_up")
-              }
-            />
+            <div className="relative flex">
+              <Image
+                src={Icons.Favorite}
+                alt="favorite"
+                className={styles.header_favorite}
+              />
+              {/* <Link href={`/cart`}> */}
+              <Image
+                src={Icons.shoppingCard}
+                alt="shopping-card-icon"
+                className={styles.header_shopping_card}
+                onClick={() => router.push("/cart")}
+              />
+              {/* </Link> */}
+              <Image
+                src={Icons.Profile}
+                alt="profile-icon"
+                className={`${styles.header_profile_icon} relative`}
+                onClick={() => {
+                  if (getLocalStorage("tempUserID") === null) {
+                    router.push("https://test.rentofurniture.com/user_sign_up");
+                  } else {
+                    setShowProfileDropdown(!showProfileDropdown);
+                  }
+                }}
+              />
+              {getLocalStorage("tempUserID") !== null &&
+                showProfileDropdown && (
+                  <ProfileDropDown
+                    setShowProfileDropdown={setShowProfileDropdown}
+                  />
+                )}
+            </div>
           </div>
         </div>
         <div className={styles.mobile_search_row}>
@@ -268,7 +278,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           className={styles.search_open_details}
           open={open}
           onClick={e => {
-            console.log("beingclicked");
             e.stopPropagation();
           }}>
           <div>
@@ -355,7 +364,8 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.card_wrapper}
                     onClick={() => {
                       router.push(
-                        `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                        // `/next/${homePageReduxData?.cityName.toLowerCase()}/${
+                        `${homePageReduxData?.cityName.toLowerCase()}/${
                           item?.seourl
                         }`,
                       );

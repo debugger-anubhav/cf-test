@@ -96,42 +96,48 @@ const RecentlyViewedProduct = ({page}) => {
   };
 
   return (
-    <div className={styles.main_container}>
-      <h2
-        className={`${page === "product" && "xl:!text-24 xl:!tracking-0.48"} ${
-          styles.heading
-        }`}>
-        Recently Viewed products
-      </h2>
-
+    <>
       {homePageReduxData?.recentProduct?.length ? (
-        <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
-          {homePageReduxData?.recentProduct?.map((item, index) => (
-            <div
-              key={index.toString()}
-              onClick={e => handleCardClick(e, item)}
-              className={`${styles.child} ${isDumy && "pointer-events-none"}`}>
-              <Card
-                cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-                hoverCardImage={
-                  item?.image?.split(",").filter(item => item).length > 1
-                    ? productImageBaseUrl + item?.image?.split(",")[1]
-                    : productImageBaseUrl + item?.image?.split(",")[0]
-                }
-                discount={`${Math.round(
-                  ((item?.price - item?.product_sale_price) * 100) /
-                    item?.product_sale_price,
-                ).toFixed(2)}%`}
-                originalPrice={item?.price}
-                currentPrice={item?.product_sale_price}
-                desc={item?.product_name}
-                productID={item?.id}
-              />
-            </div>
-          ))}
+        <div className={styles.main_container}>
+          <h2
+            className={`${
+              page === "product" && "xl:!text-24 xl:!tracking-0.48"
+            } ${styles.heading}`}>
+            Recently Viewed products
+          </h2>
+
+          {/* {homePageReduxData?.recentProduct?.length ? ( */}
+          <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
+            {homePageReduxData?.recentProduct?.map((item, index) => (
+              <div
+                key={index.toString()}
+                onClick={e => handleCardClick(e, item)}
+                className={`${styles.child} ${
+                  isDumy && "pointer-events-none"
+                }`}>
+                <Card
+                  cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+                  hoverCardImage={
+                    item?.image?.split(",").filter(item => item).length > 1
+                      ? productImageBaseUrl + item?.image?.split(",")[1]
+                      : productImageBaseUrl + item?.image?.split(",")[0]
+                  }
+                  discount={`${Math.round(
+                    ((item?.price - item?.product_sale_price) * 100) /
+                      item?.product_sale_price,
+                  ).toFixed(2)}%`}
+                  originalPrice={item?.price}
+                  currentPrice={item?.product_sale_price}
+                  desc={item?.product_name}
+                  productID={item?.id}
+                />
+              </div>
+            ))}
+          </div>
+          {/* // ) : null} */}
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 
