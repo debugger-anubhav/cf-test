@@ -20,7 +20,8 @@ export const HomepageSlice = createSlice({
     sidebarMenuLists: [],
     announcementBar: false,
     seoFurnitureSubCategory: [],
-    subcategoryId: "270",
+    subcategoryId: "",
+    categoryId: "",
     catHeading: "",
     inWishList: false,
   },
@@ -39,6 +40,9 @@ export const HomepageSlice = createSlice({
     },
     addSubCategoryId(state, action) {
       state.subcategoryId = action.payload;
+    },
+    addCategoryId(state, action) {
+      state.categoryId = action.payload;
     },
     selectedCityId(state, action) {
       state.cityId = action.payload;
@@ -168,6 +172,7 @@ export const {
   addProductName,
   addProductCategory,
   addSubCategoryId,
+  addCategoryId,
   addCategoryHeading,
   addWhishListProduc,
 } = HomepageSlice.actions;
