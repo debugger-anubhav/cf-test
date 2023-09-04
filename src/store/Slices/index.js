@@ -149,6 +149,18 @@ export const ProductpageSlice = createSlice({
   },
 });
 
+export const CartPageSlice = createSlice({
+  name: "CartPageData",
+  initialState: {
+    cartItems: [],
+  },
+  reducers: {
+    getCartItems(state, action) {
+      state.cartItems = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -183,6 +195,8 @@ export const {
   getProductVideos,
   getProductDetails,
 } = ProductpageSlice.actions;
+
+export const {getCartItems} = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
   SeoAppliancePageSlice.actions;

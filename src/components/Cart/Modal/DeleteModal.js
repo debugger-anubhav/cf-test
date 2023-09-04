@@ -3,8 +3,11 @@ import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
+import {endPoints} from "@/network/endPoints";
+import {baseURL} from "@/network/axios";
+import axios from "axios";
 
-const DeleteModal = ({isModalOpen, closeModal}) => {
+const DeleteModal = ({isModalOpen, closeModal, productId}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
@@ -22,6 +25,14 @@ const DeleteModal = ({isModalOpen, closeModal}) => {
     };
   }, []);
 
+  const handleDeleteItem = () => {
+    console.log("ijdnjwej");
+    axios
+      .get(baseURL + endPoints.addToCart.deleteItem(productId))
+      .then(res => console.log(res, "res in delete items"))
+      .catch(err => console.log(err, "error"));
+  };
+
   return (
     <div>
       {isBottomShareDrawer ? (
@@ -36,12 +47,18 @@ const DeleteModal = ({isModalOpen, closeModal}) => {
           </div>
           <h1 className={styles.head}>Delete item? </h1>
           <div className={styles.btn_wrapper}>
-            <button className={`${styles.white_btn} ${styles.btn}`}>
+            <button
+              className={`${styles.white_btn} ${styles.btn}`}
+              onClick={() => console.log("")}>
               Save to favorites
             </button>
-            <button className={`${styles.yellow_btn} ${styles.btn}`}>
-              Yes, delete
-            </button>
+            <div>
+              <button
+                className={`${styles.yellow_btn} ${styles.btn}`}
+                onClick={handleDeleteItem}>
+                Yes, delete
+              </button>
+            </div>
           </div>
         </Drawer>
       ) : (
@@ -60,7 +77,9 @@ const DeleteModal = ({isModalOpen, closeModal}) => {
             <button className={`${styles.white_btn} ${styles.btn}`}>
               Save to favorites
             </button>
-            <button className={`${styles.yellow_btn} ${styles.btn}`}>
+            <button
+              className={`${styles.yellow_btn} ${styles.btn}`}
+              onClick={handleDeleteItem}>
               Yes, delete
             </button>
           </div>

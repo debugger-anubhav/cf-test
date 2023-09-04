@@ -37,7 +37,7 @@ import {useMutation} from "@/hooks/useMutation";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({params}) => {
-  console.log(params, "params");
+  // console.log(params, "params");
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
@@ -166,6 +166,32 @@ const ProductDetails = ({params}) => {
     );
   }, []);
 
+  const AddToCart = () => {
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const body = {
+      userId: 113999132,
+      sellId: 22,
+      price: parseInt(prodDetails?.[0]?.price),
+      categoryId: prodDetails?.[0]?.category_id,
+      productId: prodDetails?.[0]?.id,
+      quantity: 1,
+      attributeValue: durationArray[duration.currentIndex]?.pid,
+      selectedTenure: parseInt(
+        durationArray[duration.currentIndex]?.attr_name?.split(" ")[0],
+      ),
+    };
+    axios
+      .post(baseURL + endPoints.productPage.addToCart, body, headers)
+      .then(res => {
+        console.log(res, "res in add to cart");
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   const handleWhislistCard = e => {
     e.preventDefault();
     getwhislistProduct()
@@ -214,8 +240,9 @@ const ProductDetails = ({params}) => {
         ).toFixed(2)
       : 0;
 
-  const handleButtonClick = () => {
+  const handleAddToCart = () => {
     setIsLoading(true);
+    AddToCart();
     setTimeout(() => {
       setIsLoading(false);
     }, 3000);
@@ -277,7 +304,7 @@ const ProductDetails = ({params}) => {
           duration={duration}
           durationArray={durationArray}
           isLoading={isLoading}
-          handleButtonClick={handleButtonClick}
+          handleButtonClick={handleAddToCart}
         />
       )}
       <div className={styles.bread_crumps}>
@@ -495,7 +522,7 @@ const ProductDetails = ({params}) => {
           </div>
 
           <button
-            onClick={handleButtonClick}
+            onClick={handleAddToCart}
             disabled={isLoading}
             className={styles.btn}
             ref={addToCartButtonRef}>
