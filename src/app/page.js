@@ -146,8 +146,13 @@ export default function Home() {
           <LimetedPreiodDiscount />
           <RentNowBanner params={"home-page"} />
           <TryCityMax />
+          <div className="xl:hidden block">
+            <MediaCoverage />
+          </div>
           <CustomerRating />
-          <MediaCoverage />
+          <div className="hidden xl:block">
+            <MediaCoverage />
+          </div>
           <CombineSection />
           <HappySubscribers params={"home-page"} />
           <FrequentlyAskedQuestions params={"home-page"} />
