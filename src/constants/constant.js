@@ -411,9 +411,17 @@ export const categoryIconsUrl =
 
 export function setLocalStorage(key, value) {
   const data = JSON.stringify(value);
-  return window.localStorage.setItem(key, data);
+  if (typeof window !== "undefined") {
+    return window.localStorage.setItem(key, data);
+  } else {
+    return {key, value};
+  }
 }
 export function getLocalStorage(key, value) {
   const data = JSON.stringify(value);
-  return window.localStorage.getItem(key, data);
+  if (typeof window !== "undefined") {
+    return window.localStorage.getItem(key, data);
+  } else {
+    return {key, value};
+  }
 }

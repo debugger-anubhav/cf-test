@@ -25,7 +25,8 @@ import {useQuery} from "@/hooks/useQuery";
 import {addProductName, addSubCategoryId} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 
-const SubHeader = () => {
+const SubHeader = ({params}) => {
+  // console.log(params.category.split("-")[0], "params++++++++ ")
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -48,10 +49,15 @@ const SubHeader = () => {
   let subCategory;
 
   if (typeof window !== "undefined") {
+    setLocalStorage("subCategory", params.category.split("-")[0]);
+  }
+
+  if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
     subCategoryId = getLocalStorage("subCategoryId");
     subCategory = getLocalStorage("subCategory")?.replace(/"/g, "");
-    category = getLocalStorage("category")?.replace(/"/g, "");
+    category =
+      getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture";
   }
 
   const {refetch: getFilterList} = useQuery(
@@ -64,8 +70,9 @@ const SubHeader = () => {
     setPageNo(1);
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));
-    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    let previousSubCategory;
     if (typeof window !== "undefined") {
+      getLocalStorage("subCategory");
       setLocalStorage("subCategory", item?.cat_name);
     }
 

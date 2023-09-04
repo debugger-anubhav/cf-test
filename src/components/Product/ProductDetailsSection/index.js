@@ -125,8 +125,11 @@ const ProductDetails = ({params}) => {
 
   useEffect(() => {
     const data = {
-      tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-      userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
+      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+      tempUserId: getLocalStorage("tempUserID") ?? "",
+      userId: getLocalStorage("userId") ?? "",
+
+      // userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
       productId: params?.productId,
     };
     axios

@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
 import {useRouter, useParams} from "next/navigation";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {
   addAllProduct,
   addOutStockProduct,
@@ -57,7 +57,11 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   React.useEffect(() => {}, [mobileCityDrawer]);
 
   const handleMenu = (e, item) => {
-    const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
+    let previousSubCategory;
+    if (typeof window !== "undefined") {
+      previousSubCategory = getLocalStorage("subCategory");
+    }
     if (item?.rootID !== 0) {
       if (typeof window !== "undefined") {
         setLocalStorage("category", "Home Furniture");

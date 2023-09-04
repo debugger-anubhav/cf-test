@@ -23,7 +23,6 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../useChatScript";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -98,12 +97,9 @@ const CombineSection = loadable(() =>
 );
 
 export default function Home() {
-  const router = useRouter();
+  // const router = useRouter();
   const queryClient = new QueryClient();
 
-  useEffect(() => {
-    router.push("/");
-  }, []);
   const myElementRef = useRef();
   if (typeof window !== "undefined") {
     setLocalStorage("cityId", 46);

@@ -14,10 +14,14 @@ const AnnouncementBar = () => {
   const dispatch = useDispatch();
   const closeBar = useSelector(state => state.homePagedata.announcementBar);
 
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+  let cityIdStr;
+  if (typeof window !== "undefined") {
+    cityIdStr = getLocalStorage("cityId");
+  }
   const cityId = parseFloat(cityIdStr);
 
   const {refetch: getSavedItems} = useQuery(

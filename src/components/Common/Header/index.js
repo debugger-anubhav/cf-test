@@ -10,8 +10,12 @@ import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
-import Link from "next/link";
-import {productImageBaseUrl, setLocalStorage} from "@/constants/constant";
+// import Link from "next/link";
+import {
+  getLocalStorage,
+  productImageBaseUrl,
+  setLocalStorage,
+} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 
@@ -60,9 +64,7 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text}
-              onClick={() => router.push("/next/")}>
+            <p className={styles.logo_text} onClick={() => router.push("/")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -116,13 +118,14 @@ const Header = () => {
               alt="favorite"
               className={styles.header_favorite}
             />
-            <Link href={`/next/cart`}>
-              <Image
-                src={Icons.shoppingCard}
-                alt="shopping-card-icon"
-                className={styles.header_shopping_card}
-              />
-            </Link>
+            {/* <Link href={`/cart`}> */}
+            <Image
+              src={Icons.shoppingCard}
+              alt="shopping-card-icon"
+              className={styles.header_shopping_card}
+              onClick={() => router.push("/Cart")}
+            />
+            {/* </Link> */}
             <Image
               src={Icons.Profile}
               alt="profile-icon"
@@ -189,16 +192,19 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     // Store search term in local storage
     if (e.key === "Enter" || e.type === "click") {
       if (newSearchTerm.trim() !== "") {
-        const storedSearches = localStorage.getItem("searches");
+        // const storedSearches = localStorage.getItem("searches");
+        let storedSearches;
         const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
         searchesArray.unshift(newSearchTerm);
         const maxItems = 10;
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
           setLocalStorage("searches", truncatedArray);
+          storedSearches = getLocalStorage("searches");
         }
 
-        setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
+        setSearchedData(storedSearches);
+        // setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
       }
     }
   };
@@ -210,7 +216,8 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   };
   useEffect(() => {
     setSearchedData(
-      JSON.parse(localStorage.getItem("searches")) || ["No search history"],
+      getLocalStorage("searches") || ["No search history"],
+      // JSON.parse(localStorage.getItem("searches")) || ["No search history"],
     );
   }, []);
 

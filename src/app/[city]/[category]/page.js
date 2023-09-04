@@ -157,7 +157,7 @@ export default function Page() {
             </div>
           ) : (
             <div>
-              <SubHeader />
+              <SubHeader params={params} />
             </div>
           )}
         </div>
