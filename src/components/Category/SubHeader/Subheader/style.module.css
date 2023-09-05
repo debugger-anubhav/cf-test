@@ -85,10 +85,10 @@
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
 }
 .single_filter {
-  @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] w-fit h-fit mobile:hidden cursor-pointer;
+  @apply hidden px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] w-fit h-fit mobile:flex cursor-pointer;
 }
 .single_filter_mobile {
-  @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] mr-[12px] border-71717A bg-[#FFF] w-fit h-fit mobile:block cursor-pointer;
+  @apply flex px-3 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] mr-[12px] border-71717A bg-[#FFF] w-fit h-fit  mobile:hidden cursor-pointer;
 }
 .clear_All {
   @apply text-71717A font-Poppins text-14 font-medium leading-6;

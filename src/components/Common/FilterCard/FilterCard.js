@@ -3,10 +3,10 @@ import style from "./style.module.css";
 // import { CloseOutline } from "@/assets/icon";
 import {IoClose} from "react-icons/io5";
 
-const FilterCard = ({text}) => {
+const FilterCard = ({text, onRemove}) => {
   return (
     <div className={style.main_container}>
-      <IoClose color={"#597492"} size={"16px"} />
+      <IoClose color={"#597492"} size={"16px"} onClick={onRemove} />
       <p className={style.filter_card_text}>{text}</p>
     </div>
   );

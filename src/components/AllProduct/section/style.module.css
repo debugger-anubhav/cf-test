@@ -1,11 +1,14 @@
 .container {
   @apply flex flex-col w-full;
 }
-.heading_container {
+.heading_container_home_furniture {
   @apply flex w-full justify-between;
 }
+.heading_container {
+  @apply flex w-full justify-between pt-[88px];
+}
 .heading {
-  @apply font-Poppins text-32 font-medium leading-10 tracking-0.6;
+  @apply font-Poppins text-32 font-medium leading-10 tracking-0.6 text-[#45454A];
 }
 .viewAllText {
   @apply font-Poppins text-18 font-medium leading-normal tracking-0.36 text-[#597492];
@@ -14,15 +17,11 @@
   @apply flex justify-center items-center;
 }
 .card_text {
-  @apply text-20 font-medium font-Poppins leading-normal tracking-0.4 text-[#45454A];
+  @apply text-20 w-full font-medium font-Poppins leading-normal tracking-0.4 text-[#45454A];
 }
 .card_container {
-  @apply pt-6 w-[245px] bg-red-200 mr-6;
+  @apply pt-6 !w-[245px] mr-6;
 }
-/* color: var(--grey-grey-700, #45454A);
-font-family: Poppins;
-font-size: 20px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
-letter-spacing: -0.4px; */
+.category_section_container {
+  @apply flex pt-6 w-full overflow-x-scroll;
+}

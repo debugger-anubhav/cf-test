@@ -1,25 +1,24 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "./style.module.css";
 import PopOver from "../PopOver";
-import {endPoints} from "@/network/endPoints";
-import {useDispatch, useSelector} from "react-redux";
-import {addAllAndSubCategory} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
+import { endPoints } from "@/network/endPoints";
+import { useDispatch, useSelector } from "react-redux";
+import { addAllAndSubCategory } from "@/store/Slices";
+import { useQuery } from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
-import {useRouter} from "next/navigation";
-import {getLocalStorage} from "@/constants/constant";
+import { useRouter } from "next/navigation";
+import { getLocalStorage } from "@/constants/constant";
 
 const MenuList = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
+  const { allAndSubCategory: getAllAndSubCategoryData } = useSelector(
     state => state.homePagedata,
   );
   const [loading, setLoading] = React.useState(true);
-  const {refetch: getAllAndSubCategory} = useQuery(
+  const { refetch: getAllAndSubCategory } = useQuery(
     "category",
-    // endPoints.allAndSubCategory,
-    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")},`,
+    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
   );
 
   useEffect(() => {
@@ -63,7 +62,7 @@ const MenuList = () => {
         </p>
         <p
           className={`${styles.item_wrap}`}
-          style={{marginRight: "0"}}
+          style={{ marginRight: "0" }}
           onClick={() => {
             router.push("https://cityfurnish.com/pages/bulkorder");
           }}>

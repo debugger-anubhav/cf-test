@@ -16,7 +16,10 @@ const HeroBanner = () => {
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className="cursor-pointer"
-            onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
+            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}
+            onClick={() => {
+              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
+            }}>
             <img
               src={HeroBannerImages.HeroBannerImageOne}
               className={styles.carousel_images}
@@ -25,7 +28,10 @@ const HeroBanner = () => {
           </div>
           <div
             className="cursor-pointer"
-            onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
+            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
+            onClick={() => {
+              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
+            }}>
             <img
               src={HeroBannerImages.HeroBannerImageTwo}
               className={styles.carousel_images}
@@ -34,7 +40,10 @@ const HeroBanner = () => {
           </div>
           <div
             className="cursor-pointer"
-            onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
+            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
+            onClick={() => {
+              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
+            }}>
             <img
               src={HeroBannerImages.HeroBannerImageThree}
               className={styles.carousel_images}
@@ -49,9 +58,9 @@ const HeroBanner = () => {
           src={HeroFrame}
           alt="hero-banner"
           className="w-full"
-          onClick={() =>
-            router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`)
-          }
+          onClick={() => {
+            router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
+          }}
         />
       </div>
     </>
