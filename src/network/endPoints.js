@@ -17,11 +17,8 @@ export const endPoints = {
   searchKey: "fc-products/search?searchKey=",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
-
   homePageTextContent: "fc-admin-settings/getHomePageTextContent",
-
   cityIdByCityName: "fc-list-values/getCityIdByCityName?cityName=",
-
   seoApplianceRentalSubCategory:
     "fc-categories/getRentalApplianceSubCategories",
   seoApplianceTtrendingProduct:
@@ -31,7 +28,6 @@ export const endPoints = {
   seoApplianceHappyCustomer:
     "fc-care-instructions/getSeoApplianceRentalPageHappyCustomerStories",
   seoAppliancesTextContent: "fc-city-category-seo-data/getSeoPageTextContent",
-
   seoFurnitureRentalSubCategory: "fc-categories/all",
   seoFurnitureTtrendingProduct:
     "fc-products/getRentalFurnitureCrowdFavourites?cityId=",
@@ -63,10 +59,19 @@ export const endPoints = {
       `fc-care-instructions/getCustomerHappyStories?productId=${id}`,
     singleProductDetails: id =>
       `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
+    addToCart: `fc-shopping-carts/addToCart`,
+  },
+
+  addToCart: {
+    deleteItem: id => `fc-shopping-carts/delete?id=${id}&userId=113999132`,
+    fetchCartItems: userId =>
+      `fc-shopping-carts/fetchAddToCartItems?cityId=46&userId=${userId}`,
+    updateQuantity: `fc-shopping-carts/updateQuantity`,
   },
 
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
+
   categoryHappySubscriber: id =>
     `fc-care-instructions/getCategoryPageHappyCustomerStories?parentCategoryId=${id}`,
   categortFaq: "fc-faqs/getCategoryPageFAQS",

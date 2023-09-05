@@ -125,7 +125,7 @@ const Header = () => {
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
                 className={styles.header_shopping_card}
-                onClick={() => router.push("/Cart")}
+                onClick={() => router.push("/cart")}
               />
               {/* </Link> */}
               <Image
