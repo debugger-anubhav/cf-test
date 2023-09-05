@@ -51,8 +51,8 @@ const SubHeader = ({params}) => {
   const [cityId, setCityId] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
+  const [title, setTitle] = useState("");
 
-  console.log(cityId);
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
       for (const subCategory of category.sub_categories) {
@@ -77,6 +77,7 @@ const SubHeader = ({params}) => {
     }
     return null;
   }
+  console.log(subCategory, cityId);
 
   const handleFilterRemove = index => {
     if (index > -1) {
@@ -150,6 +151,7 @@ const SubHeader = ({params}) => {
       dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
+    setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
   useEffect(() => {
@@ -210,12 +212,18 @@ const SubHeader = ({params}) => {
           </ul>
         </div>
         <h1 className={styles.heading}>
-          {subCategory} On Rent In {homePageReduxData?.cityName}, {subCategory}{" "}
-          Rental
+          {/* {subCategory} On Rent In {homePageReduxData?.cityName}, {subCategory}{" "}
+          Rental */}
+          {title}
         </h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {
             if (item?.cat_name === category) {
+              console.log(
+                item?.fc_city_category_data?.cat_heading,
+                "getAllAndSubCategoryData",
+              );
+              // setTitle(() => item?.fc_city_category_data?.cat_heading)
               const subCategoriesWithNewObject = [
                 {
                   ...item,
@@ -266,19 +274,19 @@ const SubHeader = ({params}) => {
         </div>
 
         <div className={styles.filter_sort_section}>
-          <div>
-            <CategoryPopover
-              btnName={"click"}
-              filterName={"Filter"}
-              emptyFilterItem={emptyFilterItem}
-              setfiltereSaved={setfiltereSaved}
-              setEmptyFilterItem={setEmptyFilterItem}
-              filterSaved={filterSaved}
-              isApplyFilter={false}
-              setPageNo={setPageNo}
-              setFilterListed={setFilterListed}
-            />
-          </div>
+          {/* <div> */}
+          <CategoryPopover
+            btnName={"click"}
+            filterName={"Filter"}
+            emptyFilterItem={emptyFilterItem}
+            setfiltereSaved={setfiltereSaved}
+            setEmptyFilterItem={setEmptyFilterItem}
+            filterSaved={filterSaved}
+            isApplyFilter={false}
+            setPageNo={setPageNo}
+            setFilterListed={setFilterListed}
+          />
+          {/* </div> */}
           <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
             <div>
