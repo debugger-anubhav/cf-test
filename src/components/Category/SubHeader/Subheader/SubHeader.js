@@ -78,6 +78,16 @@ const SubHeader = ({params}) => {
     return null;
   }
 
+  const handleFilterRemove = index => {
+    if (index > -1) {
+      const newFilteredItems = [
+        ...categoryPageReduxData?.filteredItems.slice(0, index),
+        ...categoryPageReduxData?.filteredItems.slice(index + 1),
+      ];
+      dispatch(addFilteredItem(newFilteredItems));
+    }
+  };
+
   useEffect(() => {
     if (getAllAndSubCategoryData?.length) {
       const matchedCategoryName = findSubCategoryByURL(
@@ -335,7 +345,10 @@ const SubHeader = ({params}) => {
                         className={styles.filter_card}
                         // style={{ background: "red" }}
                         key={index.toString()}>
-                        <FilterCard text={item} />
+                        <FilterCard
+                          text={item}
+                          onRemove={() => handleFilterRemove(index)}
+                        />
                       </div>
                     </>
                   );

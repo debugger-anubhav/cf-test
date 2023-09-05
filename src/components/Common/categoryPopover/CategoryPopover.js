@@ -145,7 +145,7 @@ export default function CategoryPopover({
           sx={{top: "3.5rem", borderRadius: "16px"}}>
           <div className="rounded-2xl">
             {filterName === "Filter" ? (
-              <div className="gap-6 shadow-md w-[228px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+              <div className="gap-6 shadow-md w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
                 <div className={styles.mapped_filter}>
                   {filtereData?.map((ele, index) => {
                     return (
@@ -180,7 +180,7 @@ export default function CategoryPopover({
                 </div>
               </div>
             ) : (
-              <div className="gap-6 shadow-md w-[213px] rounded-2xl border-[2px] border-71717A bg-white py-4">
+              <div className="gap-6 shadow-md w-[222px] rounded-2xl border-[2px] border-71717A bg-white py-4">
                 {sortByText.map((ele, index) => {
                   return (
                     <div
