@@ -27,10 +27,15 @@ export const CategoryPageSlice = createSlice({
     categoryInstruction: [],
     filterProduct: [],
     savedProductID: [],
+    categorTextContent: [],
+    addRemoveWhislitItem: false,
   },
   reducers: {
     addParentCategoryId(state, action) {
       state.parentCategoryId = action.payload;
+    },
+    addCategoryTextContent(state, action) {
+      state.categorTextContent = action.payload;
     },
     addAllProduct(state, action) {
       state.isAllProduct = action.payload;
@@ -79,6 +84,9 @@ export const CategoryPageSlice = createSlice({
     },
     addSaveditems: (state, action) => {
       state.savedProducts = action.payload;
+    },
+    addRemoveWhishListitems: (state, action) => {
+      state.addRemoveWhislitItem = action.payload;
     },
     addSaveditemID: (state, action) => {
       state.savedProductID = action.payload;
@@ -129,4 +137,6 @@ export const {
   isFilterApplied,
   addFilterProduct,
   addSaveditemID,
+  addCategoryTextContent,
+  addRemoveWhishListitems,
 } = CategoryPageSlice.actions;

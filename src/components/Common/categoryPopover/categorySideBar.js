@@ -3,10 +3,10 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import styles from "../../Category/SubHeader/Subheader/style.module.css";
-import { Close, DownPopUpArrow } from "@/assets/icon";
-import { CategoryFilterData, sortByText } from "@/constants/constant";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {Close, DownPopUpArrow} from "@/assets/icon";
+import {CategoryFilterData, sortByText} from "@/constants/constant";
+import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
 import {
   addFilteredItem,
   addOutStockProduct,
@@ -49,7 +49,7 @@ export default function FilterSortDrawer({
       return;
     }
 
-    setState({ ...state, [anchor]: open });
+    setState({...state, [anchor]: open});
   };
 
   const handleFilterDivClick = (e, filterTag) => {
@@ -98,7 +98,7 @@ export default function FilterSortDrawer({
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
-    setState({ ...state, bottom: false });
+    setState({...state, bottom: false});
   };
 
   const handleApply = () => {
@@ -108,7 +108,7 @@ export default function FilterSortDrawer({
     dispatch(addOutStockProduct([]));
     setFilterListed(true);
     dispatch(isFilterApplied(true));
-    setState({ ...state, bottom: false });
+    setState({...state, bottom: false});
   };
 
   const filtereData = categoryPageReduxData?.filterData;
@@ -182,7 +182,7 @@ export default function FilterSortDrawer({
                         value={ele.text}
                         className="cursor-pointer"
                         checked={selectedOption === ele.text}
-                      // onClick={() => handleSort(ele?.text, index)}
+                        // onClick={() => handleSort(ele?.text, index)}
                       />
                     </div>
                   );

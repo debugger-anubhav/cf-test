@@ -1,17 +1,17 @@
 .main_container {
-  @apply justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-9;
+  @apply justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 md:mt-9;
 }
 
 .product_wrapper {
   /* @apply flex flex-wrap lg:grid lg:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
-  @apply flex mt-4;
+  @apply flex mt-0 md:mt-4;
 }
 .container {
   /* @apply hidden w-full xs:block  justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
   @apply hidden w-full xs:block;
 }
 .listings {
-  @apply flex w-full items-center flex-wrap list-none;
+  @apply hidden mobile:flex md:w-full items-center flex-wrap list-none;
 }
 .list {
   @apply mr-1 relative inline-flex items-center font-Poppins;
