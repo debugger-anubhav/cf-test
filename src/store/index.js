@@ -1,6 +1,11 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {useDispatch, useSelector} from "react-redux";
-import {HomepageSlice, ProductpageSlice, SeoAppliancePageSlice} from "./Slices";
+import {
+  HomepageSlice,
+  ProductpageSlice,
+  SeoAppliancePageSlice,
+  CartPageSlice,
+} from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
 export const store = configureStore({
@@ -9,6 +14,7 @@ export const store = configureStore({
     productPageData: ProductpageSlice.reducer,
     seoApplianceData: SeoAppliancePageSlice.reducer,
     categoryPageData: CategoryPageSlice.reducer,
+    cartPageData: CartPageSlice.reducer,
   },
 });
 
