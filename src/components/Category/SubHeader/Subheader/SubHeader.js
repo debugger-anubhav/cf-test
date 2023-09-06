@@ -322,6 +322,7 @@ const SubHeader = ({params}) => {
           <div className="flex flex-wrap">
             <div
               className={styles.single_filter_mobile}
+              // className={styles.single_filter}
               onClick={() => {
                 dispatch(addFilteredItem([]));
                 dispatch(addSingleProduct([]));
@@ -358,6 +359,7 @@ const SubHeader = ({params}) => {
                 })
               : null}
             <div
+              // className={styles.single_filter_mobile}
               className={styles.single_filter}
               onClick={() => {
                 dispatch(addFilteredItem([]));

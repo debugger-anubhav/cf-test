@@ -30,7 +30,6 @@ const SavedItem = () => {
   );
 
   useEffect(() => {
-    console.log("saved item");
     getSavedItems()
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
