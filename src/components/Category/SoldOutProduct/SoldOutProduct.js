@@ -150,6 +150,11 @@ const SoldOutProduct = () => {
                 className="!w-full !h-full">
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
+                    const imageArray = item?.image?.split(",");
+                    const newImageArray = imageArray.slice(
+                      0,
+                      imageArray.length - 1,
+                    );
                     return (
                       <div
                         className={`${style.card_box} ${style.child}`}
@@ -164,11 +169,16 @@ const SoldOutProduct = () => {
                           desc={item?.product_name}
                           originalPrice={item?.price}
                           currentPrice={item?.sale_price}
+                          // hoverCardImage={
+                          //   item?.image?.split(",").filter(item => item)
+                          //     .length > 1
+                          //     ? productImageBaseUrl + item?.image?.split(",")[1]
+                          //     : productImageBaseUrl + item?.image?.split(",")[0]
+                          // }
                           hoverCardImage={
-                            item?.image?.split(",").filter(item => item)
-                              .length > 1
-                              ? productImageBaseUrl + item?.image?.split(",")[1]
-                              : productImageBaseUrl + item?.image?.split(",")[0]
+                            newImageArray?.length > 1
+                              ? productImageBaseUrl + newImageArray[1]
+                              : productImageBaseUrl + newImageArray[0]
                           }
                           discount={`${Math.round(
                             ((item?.price - item?.sale_price) * 100) / 1000,

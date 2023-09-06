@@ -151,7 +151,11 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
-                // console.log(item, "itemsss");
+                const imageArray = item?.image?.split(",");
+                const newImageArray = imageArray.slice(
+                  0,
+                  imageArray.length - 1,
+                );
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}
@@ -168,14 +172,16 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       currentPrice={item?.sale_price}
                       isImageHeight={true}
                       // boxShadowHover={true}
-                      hoverCardImage={
-                        item?.image?.split(",").length > 1
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
                       // hoverCardImage={
-                      //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
+                      //   item?.image?.split(",").length > 1
+                      //     ? productImageBaseUrl + item?.image?.split(",")[1]
+                      //     : productImageBaseUrl + item?.image?.split(",")[0]
                       // }
+                      hoverCardImage={
+                        newImageArray?.length > 1
+                          ? productImageBaseUrl + newImageArray[1]
+                          : productImageBaseUrl + newImageArray[0]
+                      }
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
                       ).toFixed(0)}%`}

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import {Heart, Rupee} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
@@ -22,17 +22,17 @@ const Card = ({
   isImageHeight = false,
   productID,
 }) => {
-  const [inWishList, setInWishList] = React.useState(false);
-  const [hoverCard, setHoverCard] = React.useState(false);
+  const [inWishList, setInWishList] = useState(false);
+  const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
+  const updateCount = useRef(0);
 
   const dispatch = useDispatch();
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
 
@@ -50,17 +50,30 @@ const Card = ({
     data,
   );
 
-  const handleWhislistCard = e => {
-    e.stopPropagation();
-    setInWishList(!inWishList);
-    dispatch(addRemoveWhishListitems(!inWishList));
-    !inWishList
-      ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
-          .catch(err => console.log(err))
-      : removewhislistProduct()
+  useEffect(() => {
+    const payload = {
+      tempUserId: getLocalStorage("tempUserID") ?? "",
+      userId: getLocalStorage("user_id") ?? "",
+      productId: productID,
+    };
+    if (updateCount.current > 1) {
+      if (inWishList === false) {
+        getwhislistProduct(payload)
+          .then(res => console.log(res?.data?.data))
+          .catch(err => console.log(err));
+      } else if (inWishList === true) {
+        removewhislistProduct(payload)
           .then(res => console.log(res))
           .catch(err => console.log(err));
+      }
+    }
+  }, [productID, inWishList]);
+
+  const handleWhislistCard = e => {
+    e.stopPropagation();
+    if (updateCount.current <= 1) updateCount.current += 1;
+    setInWishList(!inWishList);
+    dispatch(addRemoveWhishListitems(!inWishList));
   };
 
   useEffect(() => {
@@ -69,6 +82,7 @@ const Card = ({
         .map(obj => obj.id)
         .includes(productID),
     );
+    updateCount.current += 1;
   }, []);
 
   return (
@@ -112,19 +126,26 @@ const Card = ({
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
         </h3>
-        <Heart
-          size={25}
-          color={inWishList ? "#D96060" : "#C0C0C6"}
-          // onClick={e => {
-          //   e.preventDefault();
-          //   setInWishList(!inWishList);
-          // }}
+        <div
+          id={productID}
           onClick={e => {
             e.preventDefault();
             handleWhislistCard(e);
-          }}
-          className={"cursor-pointer"}
-        />
+          }}>
+          <Heart
+            size={25}
+            color={inWishList ? "#D96060" : "#C0C0C6"}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   setInWishList(!inWishList);
+            // }}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   handleWhislistCard(e);
+            // }}
+            className={"cursor-pointer"}
+          />
+        </div>
       </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
