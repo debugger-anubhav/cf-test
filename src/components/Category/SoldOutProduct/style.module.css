@@ -1,12 +1,12 @@
-.main_wrapper {
-  @apply macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
-}
+/* .main_wrapper {
+  @apply;
+} */
 .main_container {
   /* @apply flex flex-wrap  my-4; */
-  @apply flex flex-wrap lg:grid lg:grid-cols-3 gap-[10px] justify-center md:justify-normal mobile:flex-row my-4;
+  @apply macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 flex flex-wrap lg:grid lg:grid-cols-3 gap-[10px] justify-center md:justify-normal mobile:flex-row my-4;
 }
 .heading {
-  @apply text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
+  @apply macbook:pl-[122px] xl:pl-[90px] md:pl-[70px] pl-4 text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
 }
 
 /* .card_box {
