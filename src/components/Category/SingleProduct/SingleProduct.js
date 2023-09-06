@@ -3,7 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useParams, useRouter} from "next/navigation";
 import style from "./style.module.css";
-import ProductSet from "../ProductSet/ProductSet";
 
 // import Card from "@/components/Common/HomePageCards";
 
@@ -16,6 +15,7 @@ import {
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
 import CategoryCard from "./CommonCard";
+import ProductSet from "../ProductSet/ProductSet";
 
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);

@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,8 +11,11 @@ import {useRouter} from "next/navigation";
 const TrendingItem = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [isDumy, setIsDumy] = React.useState(false);
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const sliderRef = useRef(null);
+
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -27,7 +30,7 @@ const TrendingItem = () => {
   useEffect(() => {
     getTrendyProducts()
       .then(res => {
-        console.log(res?.data?.data, "sdfghjk");
+        // console.log(res?.data?.data, "sdfghjk");
         dispatch(addCategoryTrendingProduct(res?.data?.data));
       })
       .catch(err => console.log(err));
@@ -37,12 +40,54 @@ const TrendingItem = () => {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
+  }, []);
+
   const Data = categoryPageReduxData?.tendingItems;
 
   return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Trending products</h2>
-      <div className={styles.main_sub_container} id="galleryDragger">
+      <div className={styles.main_sub_container} ref={sliderRef}>
         {Data?.map((item, index) => (
           <div
             key={index.toString()}
