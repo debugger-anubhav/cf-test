@@ -63,6 +63,7 @@ const CategoryCard = ({
         .includes(productID),
     );
   }, []);
+
   return (
     <div
       className={`${styles.card_wrapper} `}
