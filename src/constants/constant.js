@@ -395,6 +395,75 @@ export const ProductRatings = [
   },
 ];
 
+export const FooterItems = [
+  {
+    Footer: {
+      why_furni: "Furniture Rental: An Affordable and Flexible Option",
+      why_furni_desc:
+        "Are you looking for a cost-effective and flexible way to furnish your home or office? Furniture rental may be the solution you've been searching for. CityFurnish, a leading furniture rental company, offers a wide range of home and office furniture for rent online, through their user-friendly furniture rental app.",
+      array: [
+        {
+          head: "Categories",
+          points: [
+            {text: "All", link: "https://cityfurnish.com/bangalore/rent"},
+            {text: "Categories", link: `/home-furniture-rental`},
+            {text: "Home Furniture", link: "/"},
+            {text: "Appliances", link: "/"},
+            {text: "Workstations", link: "/"},
+            {text: "Combos", link: "/"},
+            {text: "Furniture Sale", link: "/"},
+          ],
+        },
+        {
+          head: "Cityfurnish",
+          points: [
+            {text: "About US", link: "https://cityfurnish.com/pages/about"},
+            {
+              text: "Refer a Friend",
+              link: "https://cityfurnish.com/pages/refer-a-friend",
+            },
+            {text: "Career", link: "https://cityfurnish.com/pages/careers"},
+            {
+              text: "Contact US",
+              link: "https://cityfurnish.com/pages/contact-us",
+            },
+          ],
+        },
+
+        {
+          head: "Information",
+          points: [
+            {text: "Blog", link: "https://cityfurnish.com/blog/"},
+            {text: "FAQ", link: "https://cityfurnish.com/pages/faq"},
+            {
+              text: "Sample Rental Agreement",
+              link: "https://cityfurnish.com/pages/rentalagreement",
+            },
+            {text: "Offers", link: "/"},
+          ],
+        },
+
+        {
+          head: "Resources",
+          points: [
+            {
+              text: "Privacy Policy",
+              link: "https://cityfurnish.com/pages/privacy-policy",
+            },
+            {
+              text: "Terms & Conditions",
+              link: "https://cityfurnish.com/pages/terms-of-use",
+            },
+          ],
+        },
+      ],
+      contact: "080-66084700",
+      time: "(09AM to 09PM)",
+      go_to_top: "Go to top",
+    },
+  },
+];
+
 export const productImageBaseUrl =
   "https://d3juy0zp6vqec8.cloudfront.net/images/product/";
 
