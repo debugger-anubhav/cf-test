@@ -1,0 +1,42 @@
+.card_wrapper {
+  @apply p-4 bg-fff;
+}
+.card_wrapper:hover {
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+}
+.img {
+  @apply w-full h-[240px] rounded-lg;
+}
+.hover_wrapper img {
+  @apply animate-fade;
+}
+.card_image_hover {
+  @apply hover:transition-all hover:duration-100 hover:ease-in-out hover:animate-fade;
+}
+.card_price_wrap {
+  @apply flex gap-[0.62rem] items-center;
+}
+.desc_div {
+  @apply flex gap-2 3xl:justify-between mt-3;
+}
+.desc {
+  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] h-[54px] font-Poppins;
+}
+.price_div {
+  @apply mt-1 flex justify-between items-center font-Poppins;
+}
+.originalPrice {
+  @apply text-14 xl:text-18 tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+}
+.currentPrice {
+  @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
+}
+.discount {
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+}
+.soldout_tag {
+  @apply flex p-1 items-center gap-1 absolute top-3 bg-[#3E688E] rounded-[4px];
+}
+.tag_text {
+  @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
+}

@@ -3,9 +3,8 @@ import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useParams, useRouter} from "next/navigation";
 import style from "./style.module.css";
-import ProductSet from "../ProductSet/ProductSet";
 
-import Card from "@/components/Common/HomePageCards";
+// import Card from "@/components/Common/HomePageCards";
 
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
@@ -15,6 +14,8 @@ import {
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
+import CategoryCard from "./CommonCard";
+import ProductSet from "../ProductSet/ProductSet";
 
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
@@ -33,7 +34,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     cityIdStr = getLocalStorage("cityId");
   }
 
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
+  // const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
   const cityId = parseFloat(cityIdStr);
 
@@ -150,37 +151,20 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             hasMore={true} // Replace with a condition based on your data source
             className="!w-full !h-full">
             <div className={style.main_container}>
-              {singleItemData?.map((item, index) => {
-                const imageArray = item?.image?.split(",");
-                const newImageArray = imageArray.slice(
-                  0,
-                  imageArray.length - 1,
-                );
-                return (
-                  <div
-                    className={`${style.card_box_product} ${style.child}`}
-                    key={index.toString()}
-                    onClick={e => handleCardClick(e, item)}>
-                    <Card
-                      productWidth={productCardWidth}
+              {singleItemData?.map(
+                (item, index) => (
+                  <div key={index} onClick={e => handleCardClick(e, item)}>
+                    <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
                       }`}
-                      productImageBaseUrl
                       desc={item?.product_name}
                       originalPrice={item?.price}
                       currentPrice={item?.sale_price}
-                      isImageHeight={true}
-                      // boxShadowHover={true}
-                      // hoverCardImage={
-                      //   item?.image?.split(",").length > 1
-                      //     ? productImageBaseUrl + item?.image?.split(",")[1]
-                      //     : productImageBaseUrl + item?.image?.split(",")[0]
-                      // }
                       hoverCardImage={
-                        newImageArray?.length > 1
-                          ? productImageBaseUrl + newImageArray[1]
-                          : productImageBaseUrl + newImageArray[0]
+                        item?.image?.split(",").length > 1
+                          ? productImageBaseUrl + item?.image?.split(",")[1]
+                          : productImageBaseUrl + item?.image?.split(",")[0]
                       }
                       discount={`${Math.round(
                         ((item?.price - item?.sale_price) * 100) / 1000,
@@ -188,8 +172,42 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       productID={item?.id}
                     />
                   </div>
-                );
-              })}
+                ),
+                // {
+                //   // console.log(item, "itemsss");
+                //   return (
+                //     <div
+                //       className={`${style.card_box_product} ${style.child}`}
+                //       key={index.toString()}
+                //       onClick={e => handleCardClick(e, item)}>
+                //       <Card
+                //         productWidth={productCardWidth}
+                //         cardImage={`${productImageBaseUrl}${
+                //           item?.image?.split(",")[0]
+                //         }`}
+                //         productImageBaseUrl
+                //         desc={item?.product_name}
+                //         originalPrice={item?.price}
+                //         currentPrice={item?.sale_price}
+                //         isImageHeight={true}
+                //         // boxShadowHover={true}
+                //         hoverCardImage={
+                //           item?.image?.split(",").length > 1
+                //             ? productImageBaseUrl + item?.image?.split(",")[1]
+                //             : productImageBaseUrl + item?.image?.split(",")[0]
+                //         }
+                //         // hoverCardImage={
+                //         //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
+                //         // }
+                //         discount={`${Math.round(
+                //           ((item?.price - item?.sale_price) * 100) / 1000,
+                //         ).toFixed(0)}%`}
+                //         productID={item?.id}
+                //       />
+                //     </div>
+                //   );
+                // }
+              )}
             </div>
           </InfiniteScroll>
         </div>

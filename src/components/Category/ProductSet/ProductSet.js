@@ -11,10 +11,10 @@ import {
   addSetProductAll,
   addSubCategoryMetaSubProduct,
 } from "@/store/Slices/categorySlice";
-import SoldOutProduct from "../SoldOutProduct/SoldOutProduct";
 import {useParams, useRouter} from "next/navigation";
+import {SoldOutProduct} from "../SoldOutProduct/SoldOutProduct";
 
-const ProductSet = () => {
+export const ProductSet = () => {
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
