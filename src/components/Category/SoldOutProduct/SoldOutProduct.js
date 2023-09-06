@@ -19,7 +19,7 @@ import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
 import {useParams, useRouter} from "next/navigation";
-import CareInstruction from "@/components/Product/CareInstruction";
+// import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
@@ -221,7 +221,7 @@ export const SoldOutProduct = () => {
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          <CareInstruction params={{productId: "4096", productName: "4096"}} />
+          {/* <CareInstruction params={{ productId: "4096", productName: "4096" }} /> */}
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
