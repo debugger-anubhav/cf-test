@@ -93,7 +93,7 @@ input:checked ~ .checkmark {
   background-color: white;
 }
 input[type="radio"]:checked {
-  accent-color: #71717a !important;
+  accent-color: #597492 !important;
 }
 /* product page ratings progress bar styling */
 .custom-progress-bar .rc-progress-line {
