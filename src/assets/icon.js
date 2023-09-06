@@ -59,22 +59,46 @@ export const FooterIcons = {
   Phone,
   GoToTopIcon,
   social_media_icons: [
-    {icon: `${IconLink}facebook.svg`, link: "link"},
-    {icon: `${IconLink}instagram.svg`, link: "link"},
-    {icon: `${IconLink}youtube.svg`, link: "link"},
-    {icon: `${IconLink}linkedin.svg`, link: "link"},
-    {icon: `${IconLink}twitter.svg`, link: "link"},
-    {icon: `${IconLink}pinterest.svg`, link: "link"},
+    {
+      icon: `${IconLink}facebook.svg`,
+      link: "https://www.facebook.com/cityFurnishRental/",
+    },
+    {
+      icon: `${IconLink}instagram.svg`,
+      link: "https://www.instagram.com/cityfurnish/?hl=en",
+    },
+    {
+      icon: `${IconLink}youtube.svg`,
+      link: "https://www.youtube.com/channel/UCPxgx4WxU86cbr38oqGu-OQ",
+    },
+    {
+      icon: `${IconLink}linkedin.svg`,
+      link: "https://www.linkedin.com/company/cityfurnish/",
+    },
+    {icon: `${IconLink}twitter.svg`, link: "https://twitter.com/CityFurnish"},
+    {
+      icon: `${IconLink}pinterest.svg`,
+      link: "https://in.pinterest.com/cityfurnish/",
+    },
   ],
 };
 
 export const ShareIconsForProductPage = {
   social_media_icons: [
-    {icon: `${IconLink}facebook.svg`, link: "link"},
+    {
+      icon: `${IconLink}facebook.svg`,
+      link: "https://www.facebook.com/cityFurnishRental/",
+    },
     {icon: `${IconLink}whatsapp_icon.svg`, link: "link"},
-    {icon: `${IconLink}instagram.svg`, link: "link"},
-    {icon: `${IconLink}linkedin.svg`, link: "link"},
-    {icon: `${IconLink}twitter.svg`, link: "link"},
+    {
+      icon: `${IconLink}instagram.svg`,
+      link: "https://www.instagram.com/cityfurnish/?hl=en",
+    },
+    {
+      icon: `${IconLink}linkedin.svg`,
+      link: "https://www.linkedin.com/company/cityfurnish/",
+    },
+    {icon: `${IconLink}twitter.svg`, link: "https://twitter.com/CityFurnish"},
     {icon: `${IconLink}clipboard.svg`, link: "link"},
   ],
 };
