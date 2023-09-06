@@ -1,0 +1,52 @@
+.wrapper {
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
+  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] ; */
+}
+.hover_wrapper img {
+  @apply animate-fade;
+}
+.card_image_hover {
+  @apply hover:transition-all hover:duration-100 hover:ease-in-out hover:animate-fade;
+}
+.card_price_wrap {
+  @apply flex gap-[0.62rem] items-center;
+}
+.thumbnail {
+  @apply min-w-full w-full rounded-lg;
+}
+.desc_div {
+  @apply flex gap-2 3xl:justify-between mt-3;
+}
+.desc {
+  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;
+}
+.price_div {
+  @apply mt-1 flex justify-between items-center font-Poppins;
+}
+.originalPrice {
+  @apply text-14 xl:text-18 tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+}
+.currentPrice {
+  @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
+}
+.discount {
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+}
+.item_included_container {
+  @apply flex px-[8px] py-[4px] items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
+}
+.item_icluded_text {
+  @apply text-45454A font-Poppins text-12 font-medium leading-normal;
+}
+.soldout_tag {
+  @apply flex p-1 items-center gap-1 absolute top-3 bg-[#3E688E] rounded-[4px];
+}
+.tag_text {
+  @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
+}
+.move_to_cart_btn {
+  @apply bg-btn-primary text-222 font-medium px-6 py-2 w-full rounded cursor-pointer mt-3;
+}
+.delete_item_text {
+  @apply text-222 font-medium font-Poppins;
+}

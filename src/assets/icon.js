@@ -253,3 +253,12 @@ export const CalendarIcon = ({size, color, className}) => (
 export const VerifiedIcon = ({size, color, className}) => (
   <LuVerified size={size} color={color} className={className} />
 );
+
+export const Delete = ({size, color, className, onClick}) => (
+  <AiOutlineDelete
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
+);

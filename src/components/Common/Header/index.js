@@ -119,6 +119,7 @@ const Header = () => {
                 src={Icons.Favorite}
                 alt="favorite"
                 className={styles.header_favorite}
+                onClick={() => router.push("/wishlist")}
               />
               {/* <Link href={`/cart`}> */}
               <Image
