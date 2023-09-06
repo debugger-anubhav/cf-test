@@ -49,32 +49,47 @@ const Card = ({
     data,
   );
 
-  useEffect(() => {
-    const payload = {
-      tempUserId: getLocalStorage("tempUserID") ?? "",
-      userId: getLocalStorage("user_id") ?? "",
-      productId: productID,
-    };
-    if (updateCount.current > 1) {
-      console.log(inWishList, "inWishList");
-      if (inWishList === false) {
-        getwhislistProduct(payload)
-          .then(res => console.log(res?.data?.data))
-          .catch(err => console.log(err));
-      } else if (inWishList === true) {
-        removewhislistProduct(payload)
-          .then(res => console.log(res))
-          .catch(err => console.log(err));
-      }
-    }
-  }, [productID, inWishList]);
+  console.log(categoryPageReduxData.addRemoveWhislitItem, "2124214241");
+
+  // useEffect(() => {
+  //   const payload = {
+  //     tempUserId: getLocalStorage("tempUserID") ?? "",
+  //     userId: getLocalStorage("user_id") ?? "",
+  //     productId: productID,
+  //   };
+  //   if (updateCount.current > 1) {
+  //     console.log(inWishList, "inWishList");
+  //     if (inWishList === false || categoryPageReduxData.addRemoveWhislitItem === false) {
+  //       getwhislistProduct(payload)
+  //         .then(res => console.log(res?.data?.data))
+  //         .catch(err => console.log(err));
+  //     } else if (inWishList === true || categoryPageReduxData.addRemoveWhislitItem === true) {
+  //       removewhislistProduct(payload)
+  //         .then(res => console.log(res))
+  //         .catch(err => console.log(err));
+  //     }
+  //   }
+  // }, [productID, inWishList, categoryPageReduxData.addRemoveWhislitItem]);
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    if (updateCount.current <= 1) updateCount.current += 1;
     setInWishList(!inWishList);
     dispatch(addRemoveWhishListitems(!inWishList));
+    !inWishList
+      ? getwhislistProduct()
+          .then(res => console.log(res?.data?.dat))
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
   };
+
+  // const handleWhislistCard = e => {
+  //   e.stopPropagation();
+  //   if (updateCount.current <= 1) updateCount.current += 1;
+  //   setInWishList(!inWishList);
+  //   dispatch(addRemoveWhishListitems(!inWishList));
+  // };
 
   useEffect(() => {
     setInWishList(
