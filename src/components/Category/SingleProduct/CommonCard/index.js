@@ -7,22 +7,18 @@ import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
 
-const Card = ({
+const CategoryCard = ({
+  hoverCardImage,
+  cardImage,
   desc,
   currentPrice,
   originalPrice,
   discount,
-  showincludedItem,
-  cardImage,
-  hoverCardImage,
-  itemIncluded,
-  soldOut,
-  isHover = true,
-  productWidth,
   productID,
+  soldOut,
 }) => {
-  const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
+  const [inWishList, setInWishList] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const dispatch = useDispatch();
@@ -30,8 +26,6 @@ const Card = ({
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
 
@@ -69,43 +63,27 @@ const Card = ({
         .includes(productID),
     );
   }, []);
-
   return (
     <div
-      // onClick={() => handleProductClick(productId)}
-      className={`${styles.wrapper} ${
-        hoverCard && styles.hover_wrapper
-      } ${productWidth} 
-      `}
+      className={`${styles.card_wrapper} `}
       onMouseOver={() => {
-        isHover && setHoverCard(true);
+        setHoverCard(true);
       }}
       onMouseOut={() => setHoverCard(false)}>
-      <div className="relative">
+      <div>
         <img
           src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
-          className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover} 
-          }
-          `}
+          className={styles.img}
         />
-
-        {/* ----------- */}
-        {showincludedItem && (
-          <div className={styles.item_included_container}>
-            <p
-              className={
-                styles.item_icluded_text
-              }>{`${itemIncluded} items included`}</p>
-          </div>
-        )}
-        {soldOut && (
-          <div className={styles.soldout_tag}>
-            <p className={styles.tag_text}>SOLD OUT</p>
-          </div>
-        )}
       </div>
+
+      {soldOut && (
+        <div className={styles.soldout_tag}>
+          <p className={styles.tag_text}>SOLD OUT</p>
+        </div>
+      )}
+
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
@@ -144,4 +122,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default CategoryCard;

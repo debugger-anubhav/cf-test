@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import style from "./style.module.css";
-import Card from "@/components/Common/HomePageCards";
+// import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
@@ -22,6 +22,7 @@ import {useParams, useRouter} from "next/navigation";
 import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
+import CategoryCard from "../SingleProduct/CommonCard";
 
 const SoldOutProduct = () => {
   const router = useRouter();
@@ -44,7 +45,7 @@ const SoldOutProduct = () => {
     subCategoryId = getLocalStorage("subCategoryId");
     cityIdStr = getLocalStorage("cityId");
   }
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
+  // const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
@@ -149,24 +150,18 @@ const SoldOutProduct = () => {
                 hasMore={true} // Replace with a condition based on your data source}
                 className="!w-full !h-full">
                 <div className={style.main_container}>
-                  {data?.map((item, index) => {
-                    return (
-                      <div
-                        className={`${style.card_box} ${style.child}`}
-                        key={index.toString()}
-                        onClick={e => handleCardClick(e, item)}>
-                        <Card
-                          productWidth={productCardWidth}
+                  {data?.map(
+                    (item, index) => (
+                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                        <CategoryCard
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]
                           }`}
-                          productImageBaseUrl
                           desc={item?.product_name}
                           originalPrice={item?.price}
                           currentPrice={item?.sale_price}
                           hoverCardImage={
-                            item?.image?.split(",").filter(item => item)
-                              .length > 1
+                            item?.image?.split(",").length > 1
                               ? productImageBaseUrl + item?.image?.split(",")[1]
                               : productImageBaseUrl + item?.image?.split(",")[0]
                           }
@@ -176,8 +171,37 @@ const SoldOutProduct = () => {
                           productID={item?.id}
                         />
                       </div>
-                    );
-                  })}
+                    ),
+                    // {
+                    //   return (
+                    //     <div
+                    //       className={`${style.card_box} ${style.child}`}
+                    //       key={index.toString()}
+                    //       onClick={e => handleCardClick(e, item)}>
+                    //       <Card
+                    //         productWidth={productCardWidth}
+                    //         cardImage={`${productImageBaseUrl}${
+                    //           item?.image?.split(",")[0]
+                    //         }`}
+                    //         productImageBaseUrl
+                    //         desc={item?.product_name}
+                    //         originalPrice={item?.price}
+                    //         currentPrice={item?.sale_price}
+                    //         hoverCardImage={
+                    //           item?.image?.split(",").filter(item => item)
+                    //             .length > 1
+                    //             ? productImageBaseUrl + item?.image?.split(",")[1]
+                    //             : productImageBaseUrl + item?.image?.split(",")[0]
+                    //         }
+                    //         discount={`${Math.round(
+                    //           ((item?.price - item?.sale_price) * 100) / 1000,
+                    //         ).toFixed(0)}%`}
+                    //         productID={item?.id}
+                    //       />
+                    //     </div>
+                    //   );
+                    // }
+                  )}
                 </div>
               </InfiniteScroll>
             </div>
