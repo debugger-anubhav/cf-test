@@ -6,6 +6,7 @@ import {ForwardArrow} from "@/assets/icon";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
+import Link from "next/link";
 
 // h2 h3 p
 
@@ -90,10 +91,12 @@ const FrequentlyAskedQuestions = ({params}) => {
             );
           })}
         </div>
-        <div className={styles.btn}>
-          <p className={styles.btn_txt}>{str.btn_txt}</p>
-          <ForwardArrow className={styles.forword_icon} />
-        </div>
+        <Link href="https://cityfurnish.com/pages/faq">
+          <div className={styles.btn}>
+            <p className={styles.btn_txt}>{str.btn_txt}</p>
+            <ForwardArrow className={styles.forword_icon} />
+          </div>
+        </Link>
       </div>
     </div>
   );
