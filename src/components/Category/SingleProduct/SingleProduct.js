@@ -152,27 +152,29 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             className="!w-full !h-full">
             <div className={style.main_container}>
               {singleItemData?.map(
-                (item, index) => (
-                  <div key={index} onClick={e => handleCardClick(e, item)}>
-                    <CategoryCard
-                      cardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      desc={item?.product_name}
-                      originalPrice={item?.price}
-                      currentPrice={item?.sale_price}
-                      hoverCardImage={
-                        item?.image?.split(",").length > 1
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
-                      discount={`${Math.round(
-                        ((item?.price - item?.sale_price) * 100) / 1000,
-                      ).toFixed(0)}%`}
-                      productID={item?.id}
-                    />
-                  </div>
-                ),
+                (item, index) => {
+                  return (
+                    <div key={index} onClick={e => handleCardClick(e, item)}>
+                      <CategoryCard
+                        cardImage={`${productImageBaseUrl}${
+                          item?.image?.split(",")[0]
+                        }`}
+                        desc={item?.product_name}
+                        originalPrice={item?.price}
+                        currentPrice={item?.sale_price}
+                        hoverCardImage={
+                          item?.image?.split(",").length > 1
+                            ? productImageBaseUrl + item?.image?.split(",")[1]
+                            : productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        discount={`${Math.round(
+                          ((item?.price - item?.sale_price) * 100) / 1000,
+                        ).toFixed(0)}%`}
+                        productID={item?.id}
+                      />
+                    </div>
+                  );
+                },
                 // {
                 //   // console.log(item, "itemsss");
                 //   return (
