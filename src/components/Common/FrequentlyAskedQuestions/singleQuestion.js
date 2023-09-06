@@ -1,15 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
-const SingleQuestion = ({ques, ans}) => {
-  const [showAnswer, setShowAnswer] = useState(false);
+const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
   return (
     <div className="pb-6">
-      <div className={styles.quesWrapper}>
+      <div className={styles.quesWrapper} onClick={toggleQuestion}>
         <h3 className={styles.ques}>{ques}</h3>
-        <div onClick={() => setShowAnswer(!showAnswer)}>
-          {showAnswer ? (
+        <div>
+          {isOpen ? (
             <Minus className="cursor-pointer" size={20} color={"#222"} />
           ) : (
             <Plus className="cursor-pointer" size={20} color={"#222"} />
@@ -17,7 +16,7 @@ const SingleQuestion = ({ques, ans}) => {
         </div>
       </div>
       <div>
-        {showAnswer && (
+        {isOpen && (
           <div dangerouslySetInnerHTML={{__html: ans}} className={styles.ans} />
         )}
       </div>
