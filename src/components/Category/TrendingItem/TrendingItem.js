@@ -27,6 +27,7 @@ const TrendingItem = () => {
   useEffect(() => {
     getTrendyProducts()
       .then(res => {
+        console.log(res?.data?.data, "sdfghjk");
         dispatch(addCategoryTrendingProduct(res?.data?.data));
       })
       .catch(err => console.log(err));
