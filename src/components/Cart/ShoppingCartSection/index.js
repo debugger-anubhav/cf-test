@@ -140,7 +140,7 @@ const ShoppingCartSection = ({setTab}) => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  return (
+  return cartItems.length > 0 ? (
     <>
       <DeleteModal
         isModalOpen={isModalOpen}
@@ -407,6 +407,10 @@ const ShoppingCartSection = ({setTab}) => {
         </div>
       </div>
     </>
+  ) : (
+    <div className="flex justify-center items-center h-full">
+      <p className="text-32">Your cart is empty</p>
+    </div>
   );
 };
 

@@ -43,8 +43,7 @@ const ProductDetails = ({params}) => {
     state => state.productPageData.singleProductDetails,
   );
   const cartItems = useSelector(state => state.cartPageData.cartItems);
-  console.log(cartItems, "cart items in product oage");
-
+  console.log(cartItems, "cart items in product page");
   const arr = [
     "Home",
     prodDetails?.[0]?.category_name,
@@ -216,9 +215,10 @@ const ProductDetails = ({params}) => {
         ).toFixed(2)
       : 0;
 
-  const isItemInCart = cartItems.some(
-    item => item.fc_product.id === params.productId,
-  );
+  const isItemInCart = cartItems.some(item => {
+    console.log(item.fc_product.id, params.productId, "herereerer");
+    return item.fc_product.id === parseInt(params.productId);
+  });
 
   console.log(isItemInCart, params.productId, "isItemInCart");
 
@@ -319,6 +319,7 @@ const ProductDetails = ({params}) => {
           durationArray={durationArray}
           isLoading={isLoading}
           handleButtonClick={handleAddToCart}
+          isItemInCart={isItemInCart}
         />
       )}
       <div className={styles.bread_crumps}>
