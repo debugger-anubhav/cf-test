@@ -51,8 +51,9 @@ const SubHeader = ({params}) => {
   const [cityId, setCityId] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
+  const [title, setTitle] = useState("");
 
-  console.log(cityId);
+  console.log(subCategory, cityId);
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
       for (const subCategory of category.sub_categories) {
@@ -77,6 +78,16 @@ const SubHeader = ({params}) => {
     }
     return null;
   }
+
+  const handleFilterRemove = index => {
+    if (index > -1) {
+      const newFilteredItems = [
+        ...categoryPageReduxData?.filteredItems.slice(0, index),
+        ...categoryPageReduxData?.filteredItems.slice(index + 1),
+      ];
+      dispatch(addFilteredItem(newFilteredItems));
+    }
+  };
 
   useEffect(() => {
     if (getAllAndSubCategoryData?.length) {
@@ -140,6 +151,7 @@ const SubHeader = ({params}) => {
       dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
+    setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
   useEffect(() => {
@@ -157,8 +169,6 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    // `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
-    // `?parentCategoryId=${getLocalStorage("categoryId")}&subCategoryId=${getLocalStorage("subCategoryId")}`,
     `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${homePageReduxData.subcategoryId}`,
   );
 
@@ -175,6 +185,12 @@ const SubHeader = ({params}) => {
     homePageReduxData.subcategoryId,
   ]);
 
+  const handleTitle = item => {
+    if (item?.fc_city_category_data?.cat_heading !== title) {
+      setTitle(item?.fc_city_category_data?.cat_heading || "");
+    }
+  };
+
   return (
     <>
       <div className={styles.conatiner_wrapper}>
@@ -185,27 +201,23 @@ const SubHeader = ({params}) => {
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              {/* <p className={styles.route_text}>{category}</p> */}
               <p className={styles.route_text}>
                 {getLocalStorage("category")?.replace(/"/g, "")}
               </p>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              {/* <p className={styles.route_text}>{subCategory}</p> */}
               <p className={styles.route_text}>
                 {getLocalStorage("subCategory")?.replace(/"/g, "")}
               </p>
             </li>
           </ul>
         </div>
-        <h1 className={styles.heading}>
-          {subCategory} On Rent In {homePageReduxData?.cityName}, {subCategory}{" "}
-          Rental
-        </h1>
+        <h1 className={styles.heading}>{title}</h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {
             if (item?.cat_name === category) {
+              handleTitle(item);
               const subCategoriesWithNewObject = [
                 {
                   ...item,
@@ -256,19 +268,19 @@ const SubHeader = ({params}) => {
         </div>
 
         <div className={styles.filter_sort_section}>
-          <div>
-            <CategoryPopover
-              btnName={"click"}
-              filterName={"Filter"}
-              emptyFilterItem={emptyFilterItem}
-              setfiltereSaved={setfiltereSaved}
-              setEmptyFilterItem={setEmptyFilterItem}
-              filterSaved={filterSaved}
-              isApplyFilter={false}
-              setPageNo={setPageNo}
-              setFilterListed={setFilterListed}
-            />
-          </div>
+          {/* <div> */}
+          <CategoryPopover
+            btnName={"click"}
+            filterName={"Filter"}
+            emptyFilterItem={emptyFilterItem}
+            setfiltereSaved={setfiltereSaved}
+            setEmptyFilterItem={setEmptyFilterItem}
+            filterSaved={filterSaved}
+            isApplyFilter={false}
+            setPageNo={setPageNo}
+            setFilterListed={setFilterListed}
+          />
+          {/* </div> */}
           <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
             <div>
@@ -335,7 +347,10 @@ const SubHeader = ({params}) => {
                         className={styles.filter_card}
                         // style={{ background: "red" }}
                         key={index.toString()}>
-                        <FilterCard text={item} />
+                        <FilterCard
+                          text={item}
+                          onRemove={() => handleFilterRemove(index)}
+                        />
                       </div>
                     </>
                   );

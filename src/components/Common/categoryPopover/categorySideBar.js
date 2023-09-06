@@ -219,8 +219,8 @@ export default function FilterSortDrawer({
             anchor={anchor}
             PaperProps={{
               sx: {
-                borderTopRightRadius: 20,
-                borderTopLeftRadius: 20,
+                borderTopRightRadius: "20px",
+                borderTopLeftRadius: "20px",
                 position: "absolute",
               },
             }}
@@ -232,7 +232,7 @@ export default function FilterSortDrawer({
               borderTopRightRadius: "20px",
             }}>
             <div
-              className="relative top-4 right-[24px] flex w-full justify-end z-[111]"
+              className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
               onClick={toggleDrawer("bottom", false)}>
               <Close size={25} color={"#000"} />
             </div>

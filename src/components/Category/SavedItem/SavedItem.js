@@ -24,9 +24,6 @@ const SavedItem = () => {
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
@@ -41,7 +38,7 @@ const SavedItem = () => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [categoryPageReduxData.addRemoveWhislitItem]);
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
@@ -50,7 +47,7 @@ const SavedItem = () => {
   };
   const data = categoryPageReduxData?.savedProducts;
 
-  return (
+  return data.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Your saved items</h2>
       <div className={styles.main_sub_container}>
@@ -73,7 +70,7 @@ const SavedItem = () => {
                 discount={`${Math.round(
                   ((item?.price - item?.fc_product_sale_price) * 100) /
                     item?.price,
-                ).toFixed(2)}%`}
+                ).toFixed(0)}%`}
                 productID={item?.id}
               />
             </div>
@@ -81,7 +78,7 @@ const SavedItem = () => {
         })}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default SavedItem;

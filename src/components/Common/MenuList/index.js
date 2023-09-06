@@ -18,8 +18,7 @@ const MenuList = () => {
   const [loading, setLoading] = React.useState(true);
   const {refetch: getAllAndSubCategory} = useQuery(
     "category",
-    // endPoints.allAndSubCategory,
-    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")},`,
+    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
   );
 
   useEffect(() => {

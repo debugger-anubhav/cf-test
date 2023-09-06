@@ -21,6 +21,7 @@ import Footer from "@/components/Common/Footer";
 import {useParams, useRouter} from "next/navigation";
 import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
+import CategoryContent from "../categoryContent/categoryContent";
 
 const SoldOutProduct = () => {
   const router = useRouter();
@@ -171,7 +172,7 @@ const SoldOutProduct = () => {
                           }
                           discount={`${Math.round(
                             ((item?.price - item?.sale_price) * 100) / 1000,
-                          ).toFixed(2)}%`}
+                          ).toFixed(0)}%`}
                           productID={item?.id}
                         />
                       </div>
@@ -193,6 +194,7 @@ const SoldOutProduct = () => {
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />
+          <CategoryContent />
           <Footer />
         </>
       ) : null}
