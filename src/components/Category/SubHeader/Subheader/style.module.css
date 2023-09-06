@@ -100,7 +100,7 @@
   @apply flex justify-between items-center mr-4 mobile:mr-2 mb-4 mobile:mb-3 cursor-pointer;
 }
 .selected_icon {
-  @apply w-[30px] h-[30px] md:w-[60px] md:h-[60px] cursor-pointer;
+  @apply min-w-[30px] h-[30px] md:min-w-[60px] md:h-[60px] cursor-pointer;
 }
 .single_filter_text {
   @apply flex items-center justify-between h-[37px] cursor-pointer px-[16px];
