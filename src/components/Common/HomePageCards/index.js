@@ -56,6 +56,7 @@ const Card = ({
       productId: productID,
     };
     if (updateCount.current > 1) {
+      console.log(inWishList, "inWishList");
       if (inWishList === false) {
         getwhislistProduct(payload)
           .then(res => console.log(res?.data?.data))
@@ -151,13 +152,19 @@ const Card = ({
             <Rupee />
             {`${currentPrice} /mo`}
           </h3>
-          <h3 className={`${styles.originalPrice} flex`}>
-            <Rupee />
-            {`${originalPrice} /mo`}
-          </h3>
+          {
+            // currentPrice >= originalPrice ? (
+            originalPrice >= currentPrice ? (
+              <h3 className={`${styles.originalPrice} flex`}>
+                <Rupee />
+                {`${originalPrice} /mo`}
+              </h3>
+            ) : null
+          }
         </div>
+
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice < originalPrice && (
+        {currentPrice <= originalPrice && (
           <div className={styles.discount}>{discount}</div>
         )}
       </div>
