@@ -66,7 +66,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -125,7 +127,7 @@ const Header = () => {
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
                 className={styles.header_shopping_card}
-                onClick={() => router.push("/cart")}
+                onClick={() => router.push("https://cityfurnish.com/cart")}
               />
               {/* </Link> */}
               <Image
