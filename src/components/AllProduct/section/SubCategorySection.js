@@ -6,6 +6,10 @@ import {useSelector} from "react-redux";
 
 const SubCategorySection = () => {
   const [isDumy, setIsDumy] = React.useState(false);
+  const [windowSize, setWindowSize] = React.useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
 
   const homePageReduxData = useSelector(state => state.homePagedata);
   const data = homePageReduxData?.allAndSubCategory;
@@ -53,6 +57,18 @@ const SubCategorySection = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize([window.innerWidth, window.innerHeight]);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       {data?.map((item, index) => {
@@ -67,21 +83,26 @@ const SubCategorySection = () => {
               {/* <div className='flex w-full justify-between'> */}
               <h1 className={styles.heading}>{item?.cat_name}</h1>
               <div className={styles.viewButton}>
-                <p className={styles.viewAllText}>View all home furniture</p>
-                <ForwardArrow size={20} color={"#597492"} />
+                <p className={styles.viewAllText}>
+                  {windowSize[0] > 450 ? "View all home furniture" : "View all"}
+                </p>
+                <ForwardArrow
+                  size={windowSize[0] > 768 ? 20 : 16}
+                  color={"#597492"}
+                />
               </div>
             </div>
             <div className={styles.category_section_container} ref={sliderRef}>
               {item?.sub_categories.map((subItem, index) => {
                 return (
                   <div className={styles.card_container} key={index.toString()}>
-                    <div className="w-[245px]">
+                    <div className="w-[79.2px] ms:w-[245px]">
                       <img
                         src={
                           "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                           subItem?.category_web_image
                         }
-                        className="!w-full"
+                        className="!w-full rounded-[6.4px] ms:rounded-none"
                       />
                     </div>
                     <h3 className={styles.card_text}>{subItem?.cat_name}</h3>

@@ -152,7 +152,7 @@ const ProductSet = () => {
                           item?.image?.split(",")[0]
                         }`}
                         productImageBaseUrl
-                        desc={item?.seourl}
+                        desc={item?.product_name}
                         originalPrice={item?.price}
                         currentPrice={item?.sale_price}
                         hoverCardImage={
@@ -163,7 +163,7 @@ const ProductSet = () => {
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.sale_price) * 100) / 1000,
-                        ).toFixed(2)}%`}
+                        ).toFixed(0)}%`}
                         productID={item?.id}
                       />
                     </div>

@@ -127,6 +127,6 @@
 .see_more_text {
   @apply text-[#597492] font-Poppins  text-12  font-medium leading-6 underline;
 }
-/* .popover_wrapper{
-  @apply !left-[90px] bg-red-400;
-} */
+.popover_wrapper {
+  @apply bg-red-400;
+}

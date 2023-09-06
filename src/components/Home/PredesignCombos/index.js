@@ -102,7 +102,7 @@ const PreDesignCombos = () => {
                   currentPrice={item?.sale_price}
                   discount={`${Math.round(
                     ((item?.price - item?.sale_price) * 100) / item?.price,
-                  ).toFixed(2)}%`}
+                  ).toFixed(0)}%`}
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
                   productID={item?.id}

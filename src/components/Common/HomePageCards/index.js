@@ -3,8 +3,9 @@ import styles from "./style.module.css";
 import {Heart, Rupee} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
+import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
 
 const Card = ({
   desc,
@@ -24,6 +25,8 @@ const Card = ({
   const [inWishList, setInWishList] = React.useState(false);
   const [hoverCard, setHoverCard] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
+  const dispatch = useDispatch();
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -50,6 +53,7 @@ const Card = ({
   const handleWhislistCard = e => {
     e.stopPropagation();
     setInWishList(!inWishList);
+    dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? getwhislistProduct()
           .then(res => console.log(res?.data?.dat))
@@ -133,7 +137,8 @@ const Card = ({
             {`${originalPrice} /mo`}
           </h3>
         </div>
-        {originalPrice !== currentPrice && (
+        {/* {originalPrice !== currentPrice && ( */}
+        {currentPrice < originalPrice && (
           <div className={styles.discount}>{discount}</div>
         )}
       </div>

@@ -13,6 +13,7 @@ import {getLocalStorage} from "@/constants/constant";
 const AnnouncementBar = () => {
   const dispatch = useDispatch();
   const closeBar = useSelector(state => state.homePagedata.announcementBar);
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   // const cityIdStr = localStorage
   //   .getItem("cityId")
@@ -45,7 +46,7 @@ const AnnouncementBar = () => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [categoryPageReduxData.addRemoveWhislitItem]);
 
   return (
     <>
