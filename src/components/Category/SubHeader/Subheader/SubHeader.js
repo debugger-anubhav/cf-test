@@ -346,7 +346,7 @@ const SubHeader = ({params}) => {
                   <DownPopUpArrow
                     size={20}
                     color={"#45454A"}
-                    className={open ? styles.arrow_up : styles.arrow_down}
+                    className={filterOpen ? styles.arrow_up : styles.arrow_down}
                   />
                 </div>
               </div>
@@ -422,7 +422,7 @@ const SubHeader = ({params}) => {
                   <DownPopUpArrow
                     size={20}
                     color={"#45454A"}
-                    className={open ? styles.arrow_up : styles.arrow_down}
+                    className={sortOpen ? styles.arrow_up : styles.arrow_down}
                   />
                 </div>
               </div>
