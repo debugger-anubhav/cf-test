@@ -7,7 +7,7 @@ import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
 import {selectedCityId, selectedCityName} from "@/store/Slices";
 import Image from "next/image";
-import {useRouter, useParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {
   addAllProduct,
@@ -18,7 +18,6 @@ import {
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
-  const params = useParams();
   const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [state, setState] = React.useState({
@@ -225,10 +224,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     toggleDrawer("bottom", false);
                     if (typeof window !== "undefined") {
                       setLocalStorage("cityId", city?.id);
-                    }
-                    const d = city?.list_value_seourl;
-                    if (params.productId === undefined) {
-                      router.push(`/${d}/${params.category}`);
                     }
                   }}>
                   <img
