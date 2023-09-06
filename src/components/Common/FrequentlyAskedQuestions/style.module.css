@@ -8,7 +8,7 @@
   @apply flex flex-col gap-6;
 }
 .quesWrapper {
-  @apply flex justify-between lg:gap-3 items-center;
+  @apply flex justify-between lg:gap-3 items-center cursor-pointer;
 }
 .ques {
   @apply font-medium lg:text-20 lg:leading-7 leading-6 text-45454A lg:tracking-heading tracking-0.3 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem];

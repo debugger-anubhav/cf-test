@@ -12,6 +12,7 @@ import {Skeleton} from "@mui/material";
 const FrequentlyAskedQuestions = ({params}) => {
   const str = string.common_components.FAQ;
   const [faqs, setFaqs] = React.useState(null);
+  const [openIndex, setOpenIndex] = React.useState(null);
   const {refetch: getFaqsLandingPage} = useQuery(
     "faqsLandingPage",
     endPoints.faqsLandingPage,
@@ -29,6 +30,14 @@ const FrequentlyAskedQuestions = ({params}) => {
     endPoints.categortFaq,
     `?parentCategoryId=27`,
   );
+
+  const toggleQuestion = index => {
+    if (openIndex === index) {
+      setOpenIndex(null);
+    } else {
+      setOpenIndex(index);
+    }
+  };
 
   useEffect(() => {
     if (params?.category === "appliances-rental") {
@@ -70,7 +79,12 @@ const FrequentlyAskedQuestions = ({params}) => {
             return (
               index < 7 && (
                 <div key={index.toString()}>
-                  <SingleQuestion ques={item?.question} ans={item?.answer} />
+                  <SingleQuestion
+                    ques={item?.question}
+                    ans={item?.answer}
+                    isOpen={index === openIndex}
+                    toggleQuestion={() => toggleQuestion(index)}
+                  />
                 </div>
               )
             );
