@@ -48,6 +48,10 @@
   @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 
+.cart_badge {
+  @apply absolute top-[-6px] left-4 w-5 h-5 rounded-[50%] bg-[#3e688e] text-12 text-fff leading-5 text-center;
+}
+
 .header_profile_icon {
   @apply lg:flex hidden cursor-pointer;
 }

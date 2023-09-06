@@ -1,6 +1,10 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
-import {categoryIconsUrl, productImageBaseUrl} from "@/constants/constant";
+import {
+  categoryIconsUrl,
+  getLocalStorage,
+  productImageBaseUrl,
+} from "@/constants/constant";
 import {
   ArrowForw,
   CheckedBox,
@@ -21,69 +25,35 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
+import {
+  deleteItems,
+  //  getCartItems
+} from "@/store/Slices";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
-  const count = 5;
-  const [arr, setArr] = useState([
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-  ]);
-
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   console.log(cartItems, "cart itemsss");
+  const [arr, setArr] = useState(cartItems);
+  // console.log(arr, "arrrrr");
+  const count = cartItems.length;
 
-  const fetchCartItems = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(113999132))
-      .then(res => {
-        console.log(res, "res in fetch itemms");
-        dispatch(res?.data?.data);
-      })
-      .catch(err => console.log(err));
-  };
+  const userId = getLocalStorage("userID");
+  const tempUserId = getLocalStorage("tempUserID");
+  const userIdToUse = userId || tempUserId;
 
-  useEffect(() => {
-    fetchCartItems();
-  }, []);
+  console.log(userIdToUse, "user id to use");
+
+  // const fetchCartItems = () => {
+  //   axios
+  //     .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+  //     .then(res => {
+  //       console.log(res, "res in fetch itemms");
+  //       setArr(res?.data?.data);
+  //       dispatch(getCartItems(res?.data?.data));
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   const monthlyModeFeatures = [
     "Get additional coupon upto 8%",
@@ -106,6 +76,8 @@ const ShoppingCartSection = ({setTab}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState("");
   const [productId, setProductId] = useState();
+  const [itemId, setItemId] = useState();
+
   // const [itemQuantity, setItemQuantity] = useState(1);
 
   const openDrawer = () => {
@@ -147,7 +119,7 @@ const ShoppingCartSection = ({setTab}) => {
     const updatedArr = [...arr];
     if (operator === "minus" && arr[index].quantity > 0)
       updatedArr[index].quantity--;
-    else if (operator === "plus") arr[index].quantity++;
+    else if (operator === "plus") updatedArr[index].quantity++;
     else openModal();
     setArr(updatedArr);
 
@@ -162,22 +134,35 @@ const ShoppingCartSection = ({setTab}) => {
       .catch(err => console.log(err, "error in update qunatity"));
   };
 
+  const deleteItem = id => {
+    console.log(id, "in delet ");
+    dispatch(deleteItems(id));
+    // setArr(arr.filter(t => t.fc_product.id !== id));
+  };
+
   return (
     <>
       <DeleteModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         productId={productId}
+        id={itemId}
+        userId={userIdToUse}
+        updateArr={id => deleteItem(id)}
       />
       <div className={styles.main_container}>
         <div className={styles.left_div} id="leftDiv">
           <h1 className={styles.head}>Shopping cart ({count})</h1>
           <div className={styles.card_wrapper}>
-            {arr?.map((item, index) => (
+            {cartItems?.map((item, index) => (
               <div key={index} className={styles.single_product_wrapper}>
                 <div className={styles.img_div}>
                   <img
-                    src={`${productImageBaseUrl + "thumb/" + item.img}`}
+                    src={`${
+                      productImageBaseUrl +
+                      "thumb/" +
+                      item.fc_product?.image?.split(",")?.[0]
+                    }`}
                     alt="product_img"
                     className={styles.img}
                   />
@@ -185,10 +170,13 @@ const ShoppingCartSection = ({setTab}) => {
 
                 <div>
                   <div className={styles.name_div}>
-                    <p className={styles.product_name}>{item.product_name}</p>
+                    <p className={styles.product_name}>
+                      {item?.fc_product?.product_name}
+                    </p>
                     <div
                       onClick={() => {
-                        setProductId(item.id);
+                        setProductId(item?.fc_product?.id);
+                        setItemId(item?.id);
                         openModal();
                       }}>
                       {" "}
@@ -205,7 +193,7 @@ const ShoppingCartSection = ({setTab}) => {
                         }>
                         -
                       </span>
-                      {item.quantity}
+                      {item?.quantity}
                       <span
                         className={styles.span_item}
                         onClick={() =>
@@ -220,10 +208,10 @@ const ShoppingCartSection = ({setTab}) => {
                       <div className="flex items-end gap-2">
                         <p className={styles.currentPrice}>
                           <Rupee />
-                          {item.currentPrice}
+                          {item?.fc_product?.fc_product_sale_price?.sale_price}
                         </p>
                         <p className={styles.originalPrice}>
-                          {item.originalPrice}
+                          {item?.fc_product?.price}
                         </p>
                       </div>
                     </div>

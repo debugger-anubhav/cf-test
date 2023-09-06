@@ -86,7 +86,7 @@ const AddressSection = ({setTab}) => {
             <button className={styles.change_btn}>Change</button>
           </div>
           <div className={styles.name_div}>
-            <PersonIcon color={"#2D9469"} size={20} />
+            <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
             <p className={styles.saved_name}>Pratyush, 9717314756</p>
           </div>
 
@@ -116,7 +116,7 @@ const AddressSection = ({setTab}) => {
               <p className={styles.form_label}>Address</p>
               <textarea
                 placeholder="Enter your address here including flat/building no. "
-                className={styles.form_input}
+                className={`${styles.textarea} ${styles.form_input}`}
               />
             </div>
 
@@ -128,7 +128,8 @@ const AddressSection = ({setTab}) => {
               />
             </div>
 
-            <div className={`flex gap-4 ${styles.form_field}`}>
+            <div
+              className={`flex flex-col lg:flex-row gap-4 ${styles.form_field}`}>
               <div>
                 <p className={styles.form_label}>Postal code</p>
                 <input
@@ -142,7 +143,7 @@ const AddressSection = ({setTab}) => {
               </div>
             </div>
 
-            <button className={styles.save_btn}>Save & Proceed</button>
+            {/* <button className={styles.save_btn}>Save & Proceed</button> */}
           </div>
         </div>
       </div>
@@ -192,7 +193,7 @@ const AddressSection = ({setTab}) => {
         </div>
 
         <div className={styles.tenure_info}>
-          <CalendarIcon size={24} />
+          <CalendarIcon className={styles.calendar} />
           <p className={styles.desc}>
             Your rental payment and tenure will begin from the date of delivery
           </p>

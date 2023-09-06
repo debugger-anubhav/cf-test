@@ -8,7 +8,7 @@ const CartSection = () => {
     <div>
       {/* <AddressSection /> */}
       {tab === 0 ? (
-        <ShoppingCartSection />
+        <ShoppingCartSection setTab={() => setTab(1)} />
       ) : (
         <AddressSection setTab={() => setTab(0)} />
       )}

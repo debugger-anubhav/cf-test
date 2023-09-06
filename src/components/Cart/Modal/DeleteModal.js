@@ -7,7 +7,14 @@ import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
 
-const DeleteModal = ({isModalOpen, closeModal, productId}) => {
+const DeleteModal = ({
+  isModalOpen,
+  closeModal,
+  productId,
+  userId,
+  updateArr,
+  id,
+}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
@@ -27,10 +34,13 @@ const DeleteModal = ({isModalOpen, closeModal, productId}) => {
 
   const handleDeleteItem = () => {
     console.log("ijdnjwej");
+    updateArr(productId);
     axios
-      .get(baseURL + endPoints.addToCart.deleteItem(productId))
+      .get(baseURL + endPoints.addToCart.deleteItem(id, userId))
       .then(res => console.log(res, "res in delete items"))
       .catch(err => console.log(err, "error"));
+
+    closeModal();
   };
 
   return (

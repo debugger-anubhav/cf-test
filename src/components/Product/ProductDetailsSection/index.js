@@ -30,7 +30,7 @@ import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
 import {format} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
-import {getProductDetails} from "@/store/Slices";
+import {addItemsToCart, getProductDetails} from "@/store/Slices";
 import {useMutation} from "@/hooks/useMutation";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
@@ -42,6 +42,8 @@ const ProductDetails = ({params}) => {
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
   );
+  const cartItems = useSelector(state => state.cartPageData.cartItems);
+  console.log(cartItems, "cart items in product oage");
 
   const arr = [
     "Home",
@@ -166,32 +168,6 @@ const ProductDetails = ({params}) => {
     );
   }, []);
 
-  const AddToCart = () => {
-    const headers = {
-      "Content-Type": "application/json",
-    };
-    const body = {
-      userId: 113999132,
-      sellId: 22,
-      price: parseInt(prodDetails?.[0]?.price),
-      categoryId: prodDetails?.[0]?.category_id,
-      productId: prodDetails?.[0]?.id,
-      quantity: 1,
-      attributeValue: durationArray[duration.currentIndex]?.pid,
-      selectedTenure: parseInt(
-        durationArray[duration.currentIndex]?.attr_name?.split(" ")[0],
-      ),
-    };
-    axios
-      .post(baseURL + endPoints.productPage.addToCart, body, headers)
-      .then(res => {
-        console.log(res, "res in add to cart");
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  };
-
   const handleWhislistCard = e => {
     e.preventDefault();
     getwhislistProduct()
@@ -240,12 +216,50 @@ const ProductDetails = ({params}) => {
         ).toFixed(2)
       : 0;
 
+  const isItemInCart = cartItems.some(
+    item => item.fc_product.id === params.productId,
+  );
+
+  console.log(isItemInCart, params.productId, "isItemInCart");
+
   const handleAddToCart = () => {
     setIsLoading(true);
-    AddToCart();
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
+    // AddToCart();
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    const userId = localStorage.getItem("userID");
+    const tempUserId = localStorage.getItem("tempUserID");
+    const userIdToUse = userId || tempUserId;
+    const body = {
+      userId: parseInt(userIdToUse),
+      sellId: 22,
+      price: parseInt(durationArray[duration.currentIndex]?.attr_price),
+      categoryId: prodDetails?.[0]?.category_id,
+      productId: prodDetails?.[0]?.id,
+      quantity: 1,
+      attributeValue: durationArray[duration.currentIndex]?.pid,
+      selectedTenure: parseInt(
+        durationArray[duration.currentIndex]?.attr_name?.split(" ")[0],
+      ),
+    };
+    axios
+      .post(baseURL + endPoints.productPage.addToCart, body, headers)
+      .then(res => {
+        console.log(res, "res in add to cart");
+        const apiData = res?.data?.data;
+        if (!isItemInCart) {
+          dispatch(addItemsToCart(apiData));
+        }
+        setIsLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setIsLoading(false);
+      });
+    // setTimeout(() => {
+    //   setIsLoading(false);
+    // }, 3000);
   };
 
   const toggleDrawer = () => {
@@ -523,10 +537,16 @@ const ProductDetails = ({params}) => {
 
           <button
             onClick={handleAddToCart}
-            disabled={isLoading}
+            disabled={isLoading || isItemInCart}
             className={styles.btn}
             ref={addToCartButtonRef}>
-            {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
+            {isLoading ? (
+              <div className={styles.spinner} />
+            ) : isItemInCart ? (
+              "In cart"
+            ) : (
+              "Add to Cart"
+            )}
           </button>
 
           <div className={styles.emi_wrapper}>
