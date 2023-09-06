@@ -6,12 +6,14 @@ import {ForwardArrow} from "@/assets/icon";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
+import Link from "next/link";
 
 // h2 h3 p
 
 const FrequentlyAskedQuestions = ({params}) => {
   const str = string.common_components.FAQ;
   const [faqs, setFaqs] = React.useState(null);
+  const [openIndex, setOpenIndex] = React.useState(null);
   const {refetch: getFaqsLandingPage} = useQuery(
     "faqsLandingPage",
     endPoints.faqsLandingPage,
@@ -29,6 +31,14 @@ const FrequentlyAskedQuestions = ({params}) => {
     endPoints.categortFaq,
     `?parentCategoryId=27`,
   );
+
+  const toggleQuestion = index => {
+    if (openIndex === index) {
+      setOpenIndex(null);
+    } else {
+      setOpenIndex(index);
+    }
+  };
 
   useEffect(() => {
     if (params?.category === "appliances-rental") {
@@ -70,16 +80,23 @@ const FrequentlyAskedQuestions = ({params}) => {
             return (
               index < 7 && (
                 <div key={index.toString()}>
-                  <SingleQuestion ques={item?.question} ans={item?.answer} />
+                  <SingleQuestion
+                    ques={item?.question}
+                    ans={item?.answer}
+                    isOpen={index === openIndex}
+                    toggleQuestion={() => toggleQuestion(index)}
+                  />
                 </div>
               )
             );
           })}
         </div>
-        <div className={styles.btn}>
-          <p className={styles.btn_txt}>{str.btn_txt}</p>
-          <ForwardArrow className={styles.forword_icon} />
-        </div>
+        <Link href="https://cityfurnish.com/pages/faq">
+          <div className={styles.btn}>
+            <p className={styles.btn_txt}>{str.btn_txt}</p>
+            <ForwardArrow className={styles.forword_icon} />
+          </div>
+        </Link>
       </div>
     </div>
   );

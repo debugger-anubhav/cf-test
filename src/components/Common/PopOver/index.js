@@ -102,7 +102,11 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div>
+    <div
+      onMouseLeave={() => {
+        setAnchorEl(null);
+        hoverRef.current = "";
+      }}>
       <button
         onClick={e => handleCategory(e, item)}
         className="flex items-center whitespace-nowrap cursor-pointer"
@@ -114,6 +118,10 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         <DownArrow
           size={20}
           color={"#45454A"}
+          onMouseLeave={() => {
+            setAnchorEl(null);
+            hoverRef.current = "";
+          }}
           className={open ? styles.arrow_up : styles.arrow_down}
         />
       </button>
@@ -123,6 +131,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
+        onMouseLeave={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
