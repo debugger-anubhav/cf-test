@@ -36,6 +36,7 @@ const AnnouncementBar = () => {
   );
 
   useEffect(() => {
+    console.log("itemmmm");
     getSavedItems()
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));

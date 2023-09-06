@@ -121,6 +121,7 @@ const SubHeader = ({params}) => {
   }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
+    console.log(item, "itemsss");
     setPageNo(1);
     dispatch(addFilteredItem([]));
     dispatch(addAllProduct(false));

@@ -24,7 +24,7 @@ import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
 
-const SoldOutProduct = () => {
+export const SoldOutProduct = () => {
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
@@ -132,7 +132,6 @@ const SoldOutProduct = () => {
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
-
   return (
     <>
       {data.length ? (
@@ -151,27 +150,36 @@ const SoldOutProduct = () => {
                 className="!w-full !h-full">
                 <div className={style.main_container}>
                   {data?.map(
-                    (item, index) => (
-                      <div key={index} onClick={e => handleCardClick(e, item)}>
-                        <CategoryCard
-                          cardImage={`${productImageBaseUrl}${
-                            item?.image?.split(",")[0]
-                          }`}
-                          desc={item?.product_name}
-                          originalPrice={item?.price}
-                          currentPrice={item?.sale_price}
-                          hoverCardImage={
-                            item?.image?.split(",").length > 1
-                              ? productImageBaseUrl + item?.image?.split(",")[1]
-                              : productImageBaseUrl + item?.image?.split(",")[0]
-                          }
-                          discount={`${Math.round(
-                            ((item?.price - item?.sale_price) * 100) / 1000,
-                          ).toFixed(0)}%`}
-                          productID={item?.id}
-                        />
-                      </div>
-                    ),
+                    (item, index) => {
+                      const imageArray = item?.image?.split(",");
+                      const newImageArray = imageArray.slice(
+                        0,
+                        imageArray.length - 1,
+                      );
+                      return (
+                        <div
+                          key={index}
+                          onClick={e => handleCardClick(e, item)}>
+                          <CategoryCard
+                            cardImage={`${productImageBaseUrl}${
+                              item?.image?.split(",")[0]
+                            }`}
+                            desc={item?.product_name}
+                            originalPrice={item?.price}
+                            currentPrice={item?.sale_price}
+                            hoverCardImage={
+                              newImageArray?.length > 1
+                                ? productImageBaseUrl + newImageArray[1]
+                                : productImageBaseUrl + newImageArray[0]
+                            }
+                            discount={`${Math.round(
+                              ((item?.price - item?.sale_price) * 100) / 1000,
+                            ).toFixed(0)}%`}
+                            productID={item?.id}
+                          />
+                        </div>
+                      );
+                    },
                     // {
                     //   return (
                     //     <div
@@ -225,5 +233,3 @@ const SoldOutProduct = () => {
     </>
   );
 };
-
-export default SoldOutProduct;
