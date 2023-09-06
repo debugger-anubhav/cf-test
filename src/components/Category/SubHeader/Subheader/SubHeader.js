@@ -53,6 +53,7 @@ const SubHeader = ({params}) => {
   const [subCategoryId, setSubCategoryId] = useState("");
   const [title, setTitle] = useState("");
 
+  console.log(subCategory, cityId);
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
       for (const subCategory of category.sub_categories) {
@@ -77,7 +78,6 @@ const SubHeader = ({params}) => {
     }
     return null;
   }
-  console.log(subCategory, cityId);
 
   const handleFilterRemove = index => {
     if (index > -1) {
@@ -169,8 +169,6 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    // `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
-    // `?parentCategoryId=${getLocalStorage("categoryId")}&subCategoryId=${getLocalStorage("subCategoryId")}`,
     `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${homePageReduxData.subcategoryId}`,
   );
 
@@ -187,6 +185,12 @@ const SubHeader = ({params}) => {
     homePageReduxData.subcategoryId,
   ]);
 
+  const handleTitle = item => {
+    if (item?.fc_city_category_data?.cat_heading !== title) {
+      setTitle(item?.fc_city_category_data?.cat_heading || "");
+    }
+  };
+
   return (
     <>
       <div className={styles.conatiner_wrapper}>
@@ -197,33 +201,23 @@ const SubHeader = ({params}) => {
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              {/* <p className={styles.route_text}>{category}</p> */}
               <p className={styles.route_text}>
                 {getLocalStorage("category")?.replace(/"/g, "")}
               </p>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              {/* <p className={styles.route_text}>{subCategory}</p> */}
               <p className={styles.route_text}>
                 {getLocalStorage("subCategory")?.replace(/"/g, "")}
               </p>
             </li>
           </ul>
         </div>
-        <h1 className={styles.heading}>
-          {/* {subCategory} On Rent In {homePageReduxData?.cityName}, {subCategory}{" "}
-          Rental */}
-          {title}
-        </h1>
+        <h1 className={styles.heading}>{title}</h1>
         <div className={styles.category_wrapper}>
           {getAllAndSubCategoryData?.map((item, index) => {
             if (item?.cat_name === category) {
-              console.log(
-                item?.fc_city_category_data?.cat_heading,
-                "getAllAndSubCategoryData",
-              );
-              // setTitle(() => item?.fc_city_category_data?.cat_heading)
+              handleTitle(item);
               const subCategoriesWithNewObject = [
                 {
                   ...item,

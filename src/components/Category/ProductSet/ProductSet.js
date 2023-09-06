@@ -152,7 +152,7 @@ const ProductSet = () => {
                           item?.image?.split(",")[0]
                         }`}
                         productImageBaseUrl
-                        desc={item?.seourl}
+                        desc={item?.product_name}
                         originalPrice={item?.price}
                         currentPrice={item?.sale_price}
                         hoverCardImage={
