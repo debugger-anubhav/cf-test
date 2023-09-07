@@ -415,14 +415,16 @@ const SubHeader = ({params}) => {
                 Sort By
               </p>
               <div
-                className={`${styles.filter} relative`}
+                className={`${styles.filter} relative `}
                 // onClick={() => setFilterOpen(!fi)}
               >
                 <div
                   className={styles.filterbox}
                   onClick={() => setSortOpen(!filterOpen)}>
                   <div className={styles.filter_text_container}>
-                    <p className={styles.filter_text}>{selectedOption}</p>
+                    <p className={`${styles.filter_text} text-[#597492]`}>
+                      {selectedOption}
+                    </p>
                   </div>
                   <div>
                     <DownPopUpArrow
