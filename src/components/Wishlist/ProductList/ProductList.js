@@ -1,140 +1,62 @@
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useMutation} from "@/hooks/useMutation";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {endPoints} from "@/network/endPoints";
-
-import {
-  addSingleAllProduct,
-  addSingleProduct,
-  addSubCategoryMetaData,
-} from "@/store/Slices/categorySlice";
-
 import ProductCard from "../ProductCard/ProductCard";
 import style from "./style.module.css";
+import {endPoints} from "@/network/endPoints";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 const ProductList = ({params}) => {
   const [pageNo, setPageNo] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-  const {productname} = useParams();
+  const [totalPage] = useState(1);
+  const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
+
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-
-  let categoryId;
-  let subCategoryId;
-  let cityIdStr;
-
-  if (typeof window !== "undefined") {
-    categoryId = getLocalStorage("categoryId");
-    subCategoryId = getLocalStorage("subCategoryId");
-    cityIdStr = getLocalStorage("cityId");
-  }
-
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
-
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
-  const bodyData = {
-    parentCategoryId: categoryId,
-    subCategoryId,
-    cityId,
-    pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
-    sortKey: categoryPageReduxData?.sortKey,
-  };
+  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
 
-  const bodyDataAll = {
-    parentCategoryId: categoryId,
-    cityId,
-    pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
-    sortKey: categoryPageReduxData?.sortKey,
-  };
-
-  const data =
-    productname === "all" || categoryPageReduxData?.isAllProduct
-      ? bodyDataAll
-      : bodyData;
-
-  const {mutateAsync: getSingleProducts} = useMutation(
-    "category-single-product",
-    "POST",
-    endPoints.categorySingleProduct,
-    data,
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
+    }`,
   );
 
-  useEffect(
-    () => {
-      getSingleProducts()
-        .then(res => {
-          setTotalPage(res?.data?.meta?.totalPage);
+  useEffect(() => {
+    getSavedItems()
+      .then(res => {
+        dispatch(addSaveditems(res?.data?.data));
+        // addSaveditemID
+        const ids = res?.data?.data.map(item => {
+          return item?.id;
+        });
+        dispatch(addSaveditemID(ids));
+      })
+      .catch(err => console.log(err));
+  }, [refreshState]);
 
-          dispatch(addSubCategoryMetaData(res?.data?.meta));
-          if (categoryPageReduxData?.isfilter) {
-            if (pageNo === 1) {
-              dispatch(addSingleProduct([...res?.data?.products]));
-            } else {
-              if (pageNo === 1) {
-                dispatch(addSingleProduct([...res?.data?.products]));
-              } else {
-                dispatch(
-                  addSingleProduct([
-                    ...categoryPageReduxData?.singleProduct,
-                    ...res?.data?.products,
-                  ]),
-                );
-              }
-            }
-          } else {
-            if (categoryPageReduxData?.isAllProduct) {
-              if (pageNo === 1) {
-                dispatch(addSingleAllProduct([...res?.data?.products]));
-              } else {
-                dispatch(
-                  addSingleAllProduct([
-                    ...categoryPageReduxData?.singleProductAll,
-                    ...res?.data?.products,
-                  ]),
-                );
-              }
-            } else {
-              if (pageNo === 1) {
-                dispatch(addSingleProduct([...res?.data?.products]));
-              } else {
-                dispatch(
-                  addSingleProduct([
-                    ...categoryPageReduxData?.singleProduct,
-                    ...res?.data?.products,
-                  ]),
-                );
-              }
-            }
-          }
-        })
-        .catch(err => console.log(err));
-    },
-    [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey],
-    subCategoryId,
-  );
-
-  const singleItemData = categoryPageReduxData?.savedProducts;
-
-  console.log(categoryPageReduxData, "ssss");
+  const data = categoryPageReduxData?.savedProducts;
+  console.log(categoryPageReduxData);
   return (
     <>
       <div className={style.conatiner_wrapper}>
-        <h1 className={style.heading}>Wishlist({singleItemData?.length})</h1>
+        <h1 className={style.heading}>Wishlist({data?.length})</h1>
       </div>
-      {singleItemData?.length ? (
+      {data?.length ? (
         <div>
           <InfiniteScroll
-            dataLength={singleItemData?.length}
+            dataLength={data?.length}
             next={() => {
               if (pageNo < totalPage) {
                 setPageNo(prev => prev + 1);
@@ -143,8 +65,7 @@ const ProductList = ({params}) => {
             hasMore={true} // Replace with a condition based on your data source
             className="!w-full !h-full">
             <div className={style.main_container}>
-              {singleItemData?.map((item, index) => {
-                console.log(item);
+              {data?.map((item, index) => {
                 return (
                   <div
                     className={`${style.card_box_product} ${style.child}`}
@@ -159,7 +80,7 @@ const ProductList = ({params}) => {
                       productImageBaseUrl
                       desc={item?.product_name}
                       originalPrice={item?.price}
-                      currentPrice={item?.sale_price}
+                      currentPrice={item?.fc_product_sale_price}
                       isImageHeight={true}
                       boxShadowHover={true}
                       hoverCardImage={
@@ -173,9 +94,11 @@ const ProductList = ({params}) => {
                       //     : productImageBaseUrl + item?.image[0]
                       // }
                       discount={`${Math.round(
-                        ((item?.price - item?.sale_price) * 100) / 1000,
+                        ((item?.price - item?.fc_product_sale_price) * 100) /
+                          1000,
                       ).toFixed(2)}%`}
                       productID={item?.id}
+                      refreshFunction={setRefreshState}
                     />
                   </div>
                 );
@@ -184,9 +107,8 @@ const ProductList = ({params}) => {
           </InfiniteScroll>
         </div>
       ) : (
-        "No Data"
+        ""
       )}
-      <p className="bg-red-400">gfhhmn</p>
     </>
   );
 };
