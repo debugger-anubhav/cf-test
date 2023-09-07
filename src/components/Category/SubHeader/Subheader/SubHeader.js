@@ -21,7 +21,6 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
-import loadable from "@loadable/component";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {
@@ -32,14 +31,8 @@ import {
   selectedCityName,
 } from "@/store/Slices";
 import {useRouter} from "next/navigation";
-import SingleProductSkeleton from "../../SingleProduct/SingleProductSkeleton";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
-const SingleProduct = loadable(
-  () => import("../../SingleProduct/SingleProduct"),
-  {
-    fallback: <SingleProductSkeleton />,
-  },
-);
+import SingleProduct from "../../SingleProduct/SingleProduct";
 
 const SubHeader = ({params}) => {
   const dispatch = useDispatch();

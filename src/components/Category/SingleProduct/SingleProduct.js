@@ -62,9 +62,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
       ? bodyDataAll
       : bodyData;
 
-  const singleItemLength =
-    categoryPageReduxData?.categoryMetaData?.totalProduct;
-
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
     "POST",
@@ -185,10 +182,9 @@ const SingleProduct = ({pageNo, setPageNo}) => {
               </InfiniteScroll>
             </div>
           ) : null}
-
-          {singleItemData?.length === singleItemLength ? <ProductSet /> : null}
         </>
       )}
+      <ProductSet />
     </>
   );
 };

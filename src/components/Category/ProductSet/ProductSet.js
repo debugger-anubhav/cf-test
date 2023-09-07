@@ -24,9 +24,6 @@ export const ProductSet = () => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
-  const comboItemLength =
-    categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
-
   let categoryId;
   let subCategoryId;
   let cityIdStr;
@@ -195,7 +192,8 @@ export const ProductSet = () => {
           ) : null}
         </>
       )}
-      {data?.length === comboItemLength ? <SoldOutProduct /> : null}
+
+      <SoldOutProduct />
     </>
   );
 };
