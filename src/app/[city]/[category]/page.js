@@ -24,14 +24,10 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
-
-const SubHeader = loadable(
-  () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
-  {
-    fallback: <SubHeaderSkeleton />,
-  },
-);
+import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+// const SubHeader = loadable(
+//   () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
+// );
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
