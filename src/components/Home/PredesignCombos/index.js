@@ -80,38 +80,39 @@ const PreDesignCombos = () => {
   }, []);
   return (
     <>
-      {homePageReduxData?.designComboProduct ? (
-        <div className={styles.main_container}>
+      <div className={styles.main_container}>
+        {homePageReduxData?.designComboProduct?.length ? (
           <h2 className={styles.heading}>Predesigned combos for you</h2>
-          <div className={styles.card_box} ref={sliderRef}>
-            {homePageReduxData?.designComboProduct?.map((item, index) => (
-              <div
-                key={index.toString()}
-                className={`${styles.child} ${isDumy && "pointer-events-none"}`}
-                onClick={e => handleCardClick(e, item)}>
-                <Card
-                  cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-                  // hoverCard="false"
-                  hoverCardImage={
-                    item?.image?.split(",").filter(item => item).length > 1
-                      ? productImageBaseUrl + item?.image?.split(",")[1]
-                      : productImageBaseUrl + item?.image?.split(",")[0]
-                  }
-                  desc={item?.product_name}
-                  originalPrice={item?.price}
-                  currentPrice={item?.sale_price}
-                  discount={`${Math.round(
-                    ((item?.price - item?.sale_price) * 100) / item?.price,
-                  ).toFixed(0)}%`}
-                  showincludedItem={true}
-                  itemIncluded={item?.subProduct.length}
-                  productID={item?.id}
-                />
-              </div>
-            ))}
-          </div>
+        ) : null}
+        <div className={styles.card_box} ref={sliderRef}>
+          {homePageReduxData?.designComboProduct?.map((item, index) => (
+            <div
+              key={index.toString()}
+              className={`${styles.child} ${isDumy && "pointer-events-none"}`}
+              onClick={e => handleCardClick(e, item)}>
+              <Card
+                cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+                // hoverCard="false"
+                hoverCardImage={
+                  item?.image?.split(",").filter(item => item).length > 1
+                    ? productImageBaseUrl + item?.image?.split(",")[1]
+                    : productImageBaseUrl + item?.image?.split(",")[0]
+                }
+                desc={item?.product_name}
+                originalPrice={item?.price}
+                currentPrice={item?.sale_price}
+                discount={`${Math.round(
+                  ((item?.price - item?.sale_price) * 100) / item?.price,
+                ).toFixed(0)}%`}
+                showincludedItem={true}
+                itemIncluded={item?.subProduct.length}
+                productID={item?.id}
+              />
+            </div>
+          ))}
         </div>
-      ) : null}
+      </div>
+      {/* ) : null} */}
     </>
   );
 };
