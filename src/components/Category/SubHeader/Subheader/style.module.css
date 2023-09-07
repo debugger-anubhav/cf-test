@@ -116,7 +116,7 @@
 }
 .mapped_filter {
   /* @apply flex flex-col max-h-[259px] pr-[10px]; */
-  @apply flex flex-col max-h-[259px] bg-red-400 overflow-y-scroll;
+  @apply flex flex-col max-h-[259px] overflow-y-scroll;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin; /* Width of the scrollbar (adjust as needed) */
   scrollbar-color: darkgray lightgray;
