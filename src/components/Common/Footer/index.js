@@ -116,7 +116,6 @@ const Footer = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(array, "array");
     setPoints(array);
   }, [cityName]);
 
