@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import style from "./style.module.css";
-import Card from "@/components/Common/HomePageCards";
+// import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
@@ -11,21 +11,33 @@ import {
   addSubCategoryMetaOutStockProduct,
 } from "@/store/Slices/categorySlice";
 import {useMutation} from "@/hooks/useMutation";
+import loadable from "@loadable/component";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
-import CustomerRating from "@/components/Home/Rating";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
-import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
+import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
 import {useParams, useRouter} from "next/navigation";
-import CareInstruction from "@/components/Product/CareInstruction";
+// import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
-
-const SoldOutProduct = () => {
+import CategoryContent from "../categoryContent/categoryContent";
+import CategoryCard from "../SingleProduct/CommonCard";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
+export const SoldOutProduct = () => {
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const [skeletonOpen, setSkeletonOpen] = useState(true);
 
   const dispatch = useDispatch();
   const {productname} = useParams();
@@ -43,7 +55,7 @@ const SoldOutProduct = () => {
     subCategoryId = getLocalStorage("subCategoryId");
     cityIdStr = getLocalStorage("cityId");
   }
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
+  // const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
@@ -130,74 +142,116 @@ const SoldOutProduct = () => {
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
+  useEffect(() => {
+    setSkeletonOpen(false);
+  }, [data]);
 
   return (
     <>
-      {data.length ? (
+      {skeletonOpen ? (
+        <ProductRowSkeleton />
+      ) : (
         <>
-          <div className={style.main_wrapper}>
-            <h2 className={style.heading}>Sold out</h2>
-            <div>
-              <InfiniteScroll
-                dataLength={data.length}
-                next={() => {
-                  if (pageNo <= totalPage) {
-                    setPageNo(prev => prev + 1);
-                  }
-                }}
-                hasMore={true} // Replace with a condition based on your data source}
-                className="!w-full !h-full">
-                <div className={style.main_container}>
-                  {data?.map((item, index) => {
-                    return (
-                      <div
-                        className={`${style.card_box} ${style.child}`}
-                        key={index.toString()}
-                        onClick={e => handleCardClick(e, item)}>
-                        <Card
-                          productWidth={productCardWidth}
-                          cardImage={`${productImageBaseUrl}${
-                            item?.image?.split(",")[0]
-                          }`}
-                          productImageBaseUrl
-                          desc={item?.product_name}
-                          originalPrice={item?.price}
-                          currentPrice={item?.sale_price}
-                          hoverCardImage={
-                            item?.image?.split(",").filter(item => item)
-                              .length > 1
-                              ? productImageBaseUrl + item?.image?.split(",")[1]
-                              : productImageBaseUrl + item?.image?.split(",")[0]
-                          }
-                          discount={`${Math.round(
-                            ((item?.price - item?.sale_price) * 100) / 1000,
-                          ).toFixed(2)}%`}
-                          productID={item?.id}
-                        />
-                      </div>
-                    );
-                  })}
+          {data.length ? (
+            <>
+              <div className={style.main_wrapper}>
+                <h2 className={style.heading}>Sold out</h2>
+                <div>
+                  <InfiniteScroll
+                    dataLength={data.length}
+                    next={() => {
+                      if (pageNo <= totalPage) {
+                        setPageNo(prev => prev + 1);
+                      }
+                    }}
+                    hasMore={true} // Replace with a condition based on your data source}
+                    className="!w-full !h-full">
+                    <div className={style.main_container}>
+                      {data?.map(
+                        (item, index) => {
+                          const imageArray = item?.image?.split(",");
+                          const newImageArray = imageArray.slice(
+                            0,
+                            imageArray.length - 1,
+                          );
+                          return (
+                            <div
+                              key={index}
+                              onClick={e => handleCardClick(e, item)}>
+                              <CategoryCard
+                                cardImage={`${productImageBaseUrl}${
+                                  item?.image?.split(",")[0]
+                                }`}
+                                desc={item?.product_name}
+                                originalPrice={item?.price}
+                                currentPrice={item?.sale_price}
+                                hoverCardImage={
+                                  newImageArray?.length > 1
+                                    ? productImageBaseUrl + newImageArray[1]
+                                    : productImageBaseUrl + newImageArray[0]
+                                }
+                                discount={`${Math.round(
+                                  ((item?.price - item?.sale_price) * 100) /
+                                    1000,
+                                ).toFixed(0)}%`}
+                                productID={item?.id}
+                              />
+                            </div>
+                          );
+                        },
+                        // {
+                        //   return (
+                        //     <div
+                        //       className={`${style.card_box} ${style.child}`}
+                        //       key={index.toString()}
+                        //       onClick={e => handleCardClick(e, item)}>
+                        //       <Card
+                        //         productWidth={productCardWidth}
+                        //         cardImage={`${productImageBaseUrl}${
+                        //           item?.image?.split(",")[0]
+                        //         }`}
+                        //         productImageBaseUrl
+                        //         desc={item?.product_name}
+                        //         originalPrice={item?.price}
+                        //         currentPrice={item?.sale_price}
+                        //         hoverCardImage={
+                        //           item?.image?.split(",").filter(item => item)
+                        //             .length > 1
+                        //             ? productImageBaseUrl + item?.image?.split(",")[1]
+                        //             : productImageBaseUrl + item?.image?.split(",")[0]
+                        //         }
+                        //         discount={`${Math.round(
+                        //           ((item?.price - item?.sale_price) * 100) / 1000,
+                        //         ).toFixed(0)}%`}
+                        //         productID={item?.id}
+                        //       />
+                        //     </div>
+                        //   );
+                        // }
+                      )}
+                    </div>
+                  </InfiniteScroll>
                 </div>
-              </InfiniteScroll>
-            </div>
-          </div>
+              </div>
+            </>
+          ) : null}
         </>
-      ) : null}
+      )}
+
       {data?.length === outStockItemLength ? (
         <>
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          <CareInstruction params={{productId: "4096", productName: "4096"}} />
+          {/* <CareInstruction params={{ productId: "4096", productName: "4096" }} /> */}
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />
+          <CategoryContent />
           <Footer />
         </>
       ) : null}
     </>
   );
 };
-
-export default SoldOutProduct;

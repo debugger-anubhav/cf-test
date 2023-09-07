@@ -66,7 +66,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>
@@ -126,7 +128,7 @@ const Header = () => {
                 src={Icons.shoppingCard}
                 alt="shopping-card-icon"
                 className={styles.header_shopping_card}
-                onClick={() => router.push("/cart")}
+                onClick={() => router.push("https://cityfurnish.com/cart")}
               />
               {/* </Link> */}
               <Image
@@ -134,7 +136,7 @@ const Header = () => {
                 alt="profile-icon"
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  if (getLocalStorage("tempUserID") === null) {
+                  if (getLocalStorage("user_id") === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     setShowProfileDropdown(!showProfileDropdown);
@@ -207,15 +209,14 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         let storedSearches;
         const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
         searchesArray.unshift(newSearchTerm);
-        const maxItems = 10;
+        const maxItems = 5;
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
-          setLocalStorage("searches", truncatedArray);
+          const existingLocal = getLocalStorage("searches");
+          setLocalStorage("searches", [...existingLocal, truncatedArray]);
           storedSearches = getLocalStorage("searches");
         }
-
         setSearchedData(storedSearches);
-        // setSearchedData(JSON.parse(localStorage.getItem("searches")) || []);
       }
     }
   };
@@ -223,13 +224,14 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     event.stopPropagation();
     axios.get(baseURL + endPoints.searchKey + item).then(res => {
       setSearchApiData(res?.data?.data);
+      setSearchedData(prev => [...prev, item]);
+      const existingLocal = getLocalStorage("searches");
+      setLocalStorage("searches", [...existingLocal, item]);
     });
   };
+
   useEffect(() => {
-    setSearchedData(
-      getLocalStorage("searches") || ["No search history"],
-      // JSON.parse(localStorage.getItem("searches")) || ["No search history"],
-    );
+    setSearchedData(getLocalStorage("searches") || ["No search history"]);
   }, []);
 
   return (
@@ -260,7 +262,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
         </div>
-        <div className={`${styles.search_wrapper}`}>
+        <div
+          className={`${styles.search_wrapper}`}
+          onClick={e => e.stopPropagation()}>
           <Image
             src={Icons.Search}
             alt="search-icon"

@@ -1,0 +1,43 @@
+.main_container {
+  @apply flex flex-col w-full mt-8 pl-4 md:px-[70px] 
+  xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-12 xl:py-12;
+}
+.text1 {
+  @apply text-9A9AA2 font-Poppins text-14 font-normal leading-5;
+}
+.text2 {
+  @apply pt-4;
+}
+
+.wrapper {
+  @apply w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] my-8;
+}
+.apiData {
+  @apply font-Poppins;
+}
+.apiData div h4 {
+  @apply pt-4 pb-2 font-Poppins text-[#45454A] text-20 font-medium;
+}
+
+.apiData div {
+  @apply text-[#9A9AA2] font-Poppins text-14;
+}
+.apiData div font {
+  @apply text-[#9A9AA2] font-Poppins text-14;
+}
+
+.apiData div font span {
+  @apply text-[#9A9AA2] font-Poppins;
+  font-size: 14px !important;
+  font-family: "poppins" !important;
+  /* @apply pt-4 pb-2 font-Poppins text-[#45454A] text-20 font-medium; */
+}
+.apiData h2 font span {
+  @apply font-Poppins font-medium text-[#45454A];
+  font-size: 20px !important;
+}
+
+.apiData h3 font span {
+  @apply font-Poppins font-medium text-[#45454A];
+  font-size: 20px !important;
+}

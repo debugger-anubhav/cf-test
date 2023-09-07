@@ -19,13 +19,15 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
-import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
 import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-
+import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
+// const SubHeader = loadable(
+//   () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
+// );
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {

@@ -1,10 +1,11 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import {Heart, Rupee} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
+import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
 
 const Card = ({
   desc,
@@ -18,18 +19,19 @@ const Card = ({
   soldOut,
   isHover = true,
   productWidth,
-  isImageHeight = false,
   productID,
 }) => {
-  const [inWishList, setInWishList] = React.useState(false);
-  const [hoverCard, setHoverCard] = React.useState(false);
+  const [inWishList, setInWishList] = useState(false);
+  const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
+  const updateCount = useRef(0);
+
+  const dispatch = useDispatch();
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
 
@@ -47,9 +49,30 @@ const Card = ({
     data,
   );
 
+  // useEffect(() => {
+  //   const payload = {
+  //     tempUserId: getLocalStorage("tempUserID") ?? "",
+  //     userId: getLocalStorage("user_id") ?? "",
+  //     productId: productID,
+  //   };
+  //   if (updateCount.current > 1) {
+  //     console.log(inWishList, "inWishList");
+  //     if (inWishList === false || categoryPageReduxData.addRemoveWhislitItem === false) {
+  //       getwhislistProduct(payload)
+  //         .then(res => console.log(res?.data?.data))
+  //         .catch(err => console.log(err));
+  //     } else if (inWishList === true || categoryPageReduxData.addRemoveWhislitItem === true) {
+  //       removewhislistProduct(payload)
+  //         .then(res => console.log(res))
+  //         .catch(err => console.log(err));
+  //     }
+  //   }
+  // }, [productID, inWishList, categoryPageReduxData.addRemoveWhislitItem]);
+
   const handleWhislistCard = e => {
     e.stopPropagation();
     setInWishList(!inWishList);
+    dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? getwhislistProduct()
           .then(res => console.log(res?.data?.data))
@@ -59,12 +82,20 @@ const Card = ({
           .catch(err => console.log(err));
   };
 
+  // const handleWhislistCard = e => {
+  //   e.stopPropagation();
+  //   if (updateCount.current <= 1) updateCount.current += 1;
+  //   setInWishList(!inWishList);
+  //   dispatch(addRemoveWhishListitems(!inWishList));
+  // };
+
   useEffect(() => {
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
         .includes(productID),
     );
+    updateCount.current += 1;
   }, []);
 
   return (
@@ -83,8 +114,7 @@ const Card = ({
           src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover} ${
-            isImageHeight && "min-h-[240px]"
+          ${hoverCard && styles.card_image_hover} 
           }
           `}
         />
@@ -108,19 +138,26 @@ const Card = ({
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
         </h3>
-        <Heart
-          size={25}
-          color={inWishList ? "#D96060" : "#C0C0C6"}
-          // onClick={e => {
-          //   e.preventDefault();
-          //   setInWishList(!inWishList);
-          // }}
+        <div
+          id={productID}
           onClick={e => {
             e.preventDefault();
             handleWhislistCard(e);
-          }}
-          className={"cursor-pointer"}
-        />
+          }}>
+          <Heart
+            size={25}
+            color={inWishList ? "#D96060" : "#C0C0C6"}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   setInWishList(!inWishList);
+            // }}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   handleWhislistCard(e);
+            // }}
+            className={"cursor-pointer"}
+          />
+        </div>
       </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
@@ -128,12 +165,19 @@ const Card = ({
             <Rupee />
             {`${currentPrice} /mo`}
           </h3>
-          <h3 className={`${styles.originalPrice} flex`}>
-            <Rupee />
-            {`${originalPrice} /mo`}
-          </h3>
+          {
+            // currentPrice >= originalPrice ? (
+            originalPrice >= currentPrice ? (
+              <h3 className={`${styles.originalPrice} flex`}>
+                <Rupee />
+                {`${originalPrice} /mo`}
+              </h3>
+            ) : null
+          }
         </div>
-        {originalPrice !== currentPrice && (
+
+        {/* {originalPrice !== currentPrice && ( */}
+        {currentPrice <= originalPrice && (
           <div className={styles.discount}>{discount}</div>
         )}
       </div>

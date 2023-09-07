@@ -31,6 +31,12 @@ body h1 h2 h3 h4 h5 h6 p {
 ::-webkit-scrollbar-track {
   width: 0px !important;
 }
+.mapped_filter::-webkit-scrollbar {
+  width: 5px;
+}
+.mapped_filter::-webkit-scrollbar-track {
+  width: 5px !important;
+}
 .mapped_filter::-webkit-scrollbar-thumb {
   width: 5px !important;
 }
@@ -69,16 +75,18 @@ body h1 h2 h3 h4 h5 h6 p {
   position: absolute !important;
 }
 
-. hsdb {
+.hsdb {
   @apply last-screen:w-[2000px] mx-auto;
 }
 
 .skeleton_product_card {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[22.8rem] 3xl:h-[26.8rem];
 }
-
 #filter-popover .css-3bmhjh-MuiPaper-root-MuiPopover-paper {
-  border-radius: 16px !important;
+  border-radius: 20px !important;
+}
+#filter-popover .MuiPopover-paper {
+  border-radius: 20px;
 }
 .css-58ftfq-MuiSkeleton-root {
   height: 100% !important;
@@ -91,14 +99,12 @@ input:checked ~ .checkmark {
   background-color: white;
 }
 input[type="radio"]:checked {
-  accent-color: #71717a !important;
+  accent-color: #597492 !important;
 }
-
 /* product page ratings progress bar styling */
 .custom-progress-bar .rc-progress-line {
   border-radius: 4px;
 }
-
 #mobile-chat-container,
 #fbots-wdgt {
   left: 30px !important;

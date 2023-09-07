@@ -3,9 +3,6 @@ import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useParams, useRouter} from "next/navigation";
 import style from "./style.module.css";
-import ProductSet from "../ProductSet/ProductSet";
-
-import Card from "@/components/Common/HomePageCards";
 
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
@@ -15,9 +12,13 @@ import {
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
+import CategoryCard from "./CommonCard";
+import ProductSet from "../ProductSet/ProductSet";
+import SingleProductSkeleton from "./SingleProductSkeleton";
 
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
+  const [skeletonOpen, setSkeletonpen] = useState(true);
   const router = useRouter();
   const {productname} = useParams();
   const dispatch = useDispatch();
@@ -32,8 +33,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId = getLocalStorage("subCategoryId");
     cityIdStr = getLocalStorage("cityId");
   }
-
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
   const cityId = parseFloat(cityIdStr);
 
@@ -62,9 +61,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     productname === "all" || categoryPageReduxData?.isAllProduct
       ? bodyDataAll
       : bodyData;
-
-  const singleItemLength =
-    categoryPageReduxData?.categoryMetaData?.totalProduct;
 
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
@@ -135,60 +131,60 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
+  useEffect(() => {
+    setSkeletonpen(false);
+  }, [singleItemData]);
 
   return (
     <>
-      {singleItemData?.length ? (
-        <div>
-          <InfiniteScroll
-            dataLength={singleItemData?.length}
-            next={() => {
-              if (pageNo < totalPage) {
-                setPageNo(prev => prev + 1);
-              }
-            }}
-            hasMore={true} // Replace with a condition based on your data source
-            className="!w-full !h-full">
-            <div className={style.main_container}>
-              {singleItemData?.map((item, index) => {
-                // console.log(item, "itemsss");
-                return (
-                  <div
-                    className={`${style.card_box_product} ${style.child}`}
-                    key={index.toString()}
-                    onClick={e => handleCardClick(e, item)}>
-                    <Card
-                      productWidth={productCardWidth}
-                      cardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      productImageBaseUrl
-                      desc={item?.product_name}
-                      originalPrice={item?.price}
-                      currentPrice={item?.sale_price}
-                      isImageHeight={true}
-                      // boxShadowHover={true}
-                      hoverCardImage={
-                        item?.image?.split(",").length > 1
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
-                      // hoverCardImage={
-                      //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
-                      // }
-                      discount={`${Math.round(
-                        ((item?.price - item?.sale_price) * 100) / 1000,
-                      ).toFixed(2)}%`}
-                      productID={item?.id}
-                    />
-                  </div>
-                );
-              })}
+      {skeletonOpen ? (
+        <>
+          <SingleProductSkeleton />
+        </>
+      ) : (
+        <>
+          {singleItemData?.length ? (
+            <div>
+              <InfiniteScroll
+                dataLength={singleItemData?.length}
+                next={() => {
+                  if (pageNo < totalPage) {
+                    setPageNo(prev => prev + 1);
+                  }
+                }}
+                hasMore={true} // Replace with a condition based on your data source
+                className="!w-full !h-full">
+                <div className={style.main_container}>
+                  {singleItemData?.map((item, index) => {
+                    return (
+                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                        <CategoryCard
+                          cardImage={`${productImageBaseUrl}${
+                            item?.image?.split(",")[0]
+                          }`}
+                          desc={item?.product_name}
+                          originalPrice={item?.price}
+                          currentPrice={item?.sale_price}
+                          hoverCardImage={
+                            item?.image?.split(",").length > 1
+                              ? productImageBaseUrl + item?.image?.split(",")[1]
+                              : productImageBaseUrl + item?.image?.split(",")[0]
+                          }
+                          discount={`${Math.round(
+                            ((item?.price - item?.sale_price) * 100) / 1000,
+                          ).toFixed(0)}%`}
+                          productID={item?.id}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </InfiniteScroll>
             </div>
-          </InfiniteScroll>
-        </div>
-      ) : null}
-      {singleItemData?.length === singleItemLength ? <ProductSet /> : null}
+          ) : null}
+        </>
+      )}
+      <ProductSet />
     </>
   );
 };

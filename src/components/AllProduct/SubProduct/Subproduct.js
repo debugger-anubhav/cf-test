@@ -4,6 +4,7 @@ import SubCategorySection from "../section/SubCategorySection";
 import {ForwardArrow} from "@/assets/icon";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import Footer from "@/components/Common/Footer";
+import CategoryContent from "@/components/Category/categoryContent/categoryContent";
 
 const Subproduct = () => {
   return (
@@ -25,7 +26,7 @@ const Subproduct = () => {
         </div>
       </div>
       <HasselFreeServicesCards />
-      <p className="bg-red-400 h-[200px]">fbggnm</p>
+      <CategoryContent />
       <Footer />
     </>
   );

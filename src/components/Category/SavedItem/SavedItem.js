@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import Card from "@/components/Common/HomePageCards";
@@ -12,6 +12,8 @@ const SavedItem = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const [isDumy, setIsDumy] = React.useState(false);
+  const sliderRef = useRef(null);
 
   const cityIdStr = localStorage
     .getItem("cityId")
@@ -24,9 +26,6 @@ const SavedItem = () => {
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
@@ -41,19 +40,61 @@ const SavedItem = () => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [categoryPageReduxData.addRemoveWhislitItem]);
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
+
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
+  }, []);
+
   const data = categoryPageReduxData?.savedProducts;
 
-  return (
+  return data.length ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Your saved items</h2>
-      <div className={styles.main_sub_container}>
+      <div className={styles.main_sub_container} ref={sliderRef}>
         {data?.map((item, index) => {
           return (
             <div
@@ -73,7 +114,7 @@ const SavedItem = () => {
                 discount={`${Math.round(
                   ((item?.price - item?.fc_product_sale_price) * 100) /
                     item?.price,
-                ).toFixed(2)}%`}
+                ).toFixed(0)}%`}
                 productID={item?.id}
               />
             </div>
@@ -81,7 +122,7 @@ const SavedItem = () => {
         })}
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default SavedItem;

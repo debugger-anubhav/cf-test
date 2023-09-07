@@ -15,11 +15,12 @@ export const useMutation = (
 
   return useReactMutation({
     mutationKey: [mutationKey],
-    mutationFn: async () => {
+    mutationFn: async payload => {
+      // console.log(payload, "payload")
       return baseInstance({
         method,
         url,
-        data,
+        data: payload ?? data,
         headers,
       }).then(res => {
         queryClient.invalidateQueries([mutationKey]);
