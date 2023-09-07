@@ -80,7 +80,7 @@ const PreDesignCombos = () => {
   }, []);
   return (
     <>
-      {homePageReduxData?.designComboProduct?.length ? (
+      {homePageReduxData?.designComboProduct ? (
         <div className={styles.main_container}>
           <h2 className={styles.heading}>Predesigned combos for you</h2>
           <div className={styles.card_box} ref={sliderRef}>
