@@ -116,7 +116,10 @@
 }
 .mapped_filter {
   /* @apply flex flex-col max-h-[259px] pr-[10px]; */
-  @apply flex flex-col max-h-[259px];
+  @apply flex flex-col max-h-[259px] overflow-y-scroll;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin; /* Width of the scrollbar (adjust as needed) */
+  scrollbar-color: darkgray lightgray;
 }
 .mapped_filter_mobile {
   @apply flex flex-col max-h-[259px] px-4;

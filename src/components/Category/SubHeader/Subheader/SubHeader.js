@@ -41,7 +41,6 @@ const SingleProduct = loadable(
 );
 
 const SubHeader = ({params}) => {
-  // console.log(params, "a-------")
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -52,9 +51,6 @@ const SubHeader = ({params}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const filtereData = categoryPageReduxData?.filterData;
-
-  // const [emptyFilterItem, setEmptyFilterItem] = useState(false);
-  // const [filterSaved, setfiltereSaved] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
@@ -67,6 +63,7 @@ const SubHeader = ({params}) => {
   const [selectedOption, setSelectedOption] = useState("Default");
 
   console.log(subCategory, cityId);
+
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
       for (const subCategory of category.sub_categories) {
@@ -135,9 +132,13 @@ const SubHeader = ({params}) => {
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     console.log(item, "itemsss");
+    if (item?.cat_name === "All") {
+      dispatch(addAllProduct(true));
+    } else {
+      dispatch(addAllProduct(false));
+    }
     setPageNo(1);
     dispatch(addFilteredItem([]));
-    dispatch(addAllProduct(false));
     let previousSubCategory;
     if (typeof window !== "undefined") {
       getLocalStorage("subCategory");
@@ -183,7 +184,9 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${homePageReduxData.subcategoryId}`,
+    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${
+      categoryPageReduxData?.isAllProduct ? "" : homePageReduxData.subcategoryId
+    }`,
   );
 
   useEffect(() => {
@@ -288,7 +291,6 @@ const SubHeader = ({params}) => {
                 const selectedProduct =
                   getLocalStorage("subCategory")?.replace(/"/g, "") ===
                   subItem?.cat_name;
-                // console.log(subCategory, subItem?.cat_name, "tesstsst")
                 return (
                   <div
                     className={
@@ -353,7 +355,7 @@ const SubHeader = ({params}) => {
                   <DownPopUpArrow
                     size={20}
                     color={"#45454A"}
-                    className={open ? styles.arrow_up : styles.arrow_down}
+                    className={filterOpen ? styles.arrow_up : styles.arrow_down}
                   />
                 </div>
               </div>
@@ -429,7 +431,7 @@ const SubHeader = ({params}) => {
                   <DownPopUpArrow
                     size={20}
                     color={"#45454A"}
-                    className={open ? styles.arrow_up : styles.arrow_down}
+                    className={sortOpen ? styles.arrow_up : styles.arrow_down}
                   />
                 </div>
               </div>
