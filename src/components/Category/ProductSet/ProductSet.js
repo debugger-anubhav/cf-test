@@ -13,11 +13,13 @@ import {
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
 import {SoldOutProduct} from "../SoldOutProduct/SoldOutProduct";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 export const ProductSet = () => {
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+  const [skeletonOpen, setSkeletonOpen] = useState(true);
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -124,66 +126,75 @@ export const ProductSet = () => {
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.setProductAll
     : categoryPageReduxData?.setProduct;
+  useEffect(() => {
+    setSkeletonOpen(false);
+  }, [data]);
 
   return (
     <>
-      {data.length ? (
-        <div className={style.main_wrapper}>
-          <h2 className={style.heading}>Product sets</h2>
-          <div>
-            <InfiniteScroll
-              dataLength={data.length}
-              next={() => {
-                if (pageNo <= totalPage) {
-                  setPageNo(prev => prev + 1);
-                }
-              }}
-              hasMore={true} // Replace with a condition based on your data source}
-              className="!w-full !h-full">
-              <div className={style.main_container}>
-                {data?.map((item, index) => {
-                  const imageArray = item?.image?.split(",");
-                  const newImageArray = imageArray.slice(
-                    0,
-                    imageArray.length - 1,
-                  );
-                  return item?.subProduct.length ? (
-                    <div
-                      className={`${style.card_box} ${style.child}`}
-                      onClick={e => handleCardClick(e, item)}>
-                      <Card
-                        productWidth={productCardWidth}
-                        cardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[0]
-                        }`}
-                        productImageBaseUrl
-                        desc={item?.product_name}
-                        originalPrice={item?.price}
-                        currentPrice={item?.sale_price}
-                        // hoverCardImage={
-                        //   item?.image?.split(",").filter(item => item).length >
-                        //     1
-                        //     ? productImageBaseUrl + item?.image?.split(",")[1]
-                        //     : productImageBaseUrl + item?.image?.split(",")[0]
-                        // }
-                        hoverCardImage={
-                          newImageArray?.length > 1
-                            ? productImageBaseUrl + newImageArray[1]
-                            : productImageBaseUrl + newImageArray[0]
-                        }
-                        discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) / 1000,
-                        ).toFixed(0)}%`}
-                        productID={item?.id}
-                      />
-                    </div>
-                  ) : null;
-                })}
+      {skeletonOpen ? (
+        <ProductRowSkeleton />
+      ) : (
+        <>
+          {data.length ? (
+            <div className={style.main_wrapper}>
+              <h2 className={style.heading}>Product sets</h2>
+              <div>
+                <InfiniteScroll
+                  dataLength={data.length}
+                  next={() => {
+                    if (pageNo <= totalPage) {
+                      setPageNo(prev => prev + 1);
+                    }
+                  }}
+                  hasMore={true} // Replace with a condition based on your data source}
+                  className="!w-full !h-full">
+                  <div className={style.main_container}>
+                    {data?.map((item, index) => {
+                      const imageArray = item?.image?.split(",");
+                      const newImageArray = imageArray.slice(
+                        0,
+                        imageArray.length - 1,
+                      );
+                      return item?.subProduct.length ? (
+                        <div
+                          className={`${style.card_box} ${style.child}`}
+                          onClick={e => handleCardClick(e, item)}>
+                          <Card
+                            productWidth={productCardWidth}
+                            cardImage={`${productImageBaseUrl}${
+                              item?.image?.split(",")[0]
+                            }`}
+                            productImageBaseUrl
+                            desc={item?.product_name}
+                            originalPrice={item?.price}
+                            currentPrice={item?.sale_price}
+                            // hoverCardImage={
+                            //   item?.image?.split(",").filter(item => item).length >
+                            //     1
+                            //     ? productImageBaseUrl + item?.image?.split(",")[1]
+                            //     : productImageBaseUrl + item?.image?.split(",")[0]
+                            // }
+                            hoverCardImage={
+                              newImageArray?.length > 1
+                                ? productImageBaseUrl + newImageArray[1]
+                                : productImageBaseUrl + newImageArray[0]
+                            }
+                            discount={`${Math.round(
+                              ((item?.price - item?.sale_price) * 100) / 1000,
+                            ).toFixed(0)}%`}
+                            productID={item?.id}
+                          />
+                        </div>
+                      ) : null;
+                    })}
+                  </div>
+                </InfiniteScroll>
               </div>
-            </InfiniteScroll>
-          </div>
-        </div>
-      ) : null}
+            </div>
+          ) : null}
+        </>
+      )}
       {data?.length === comboItemLength ? <SoldOutProduct /> : null}
     </>
   );

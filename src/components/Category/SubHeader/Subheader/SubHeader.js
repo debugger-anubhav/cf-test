@@ -52,7 +52,6 @@ const SubHeader = ({params}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const filtereData = categoryPageReduxData?.filterData;
-  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
@@ -112,9 +111,6 @@ const SubHeader = ({params}) => {
       } else {
         console.log("No matching category found for the browser URL.");
       }
-      setTimeout(() => {
-        setIsLoading(true);
-      }, 5000);
     }
 
     if (homePageReduxData?.cityList.length) {
@@ -552,8 +548,7 @@ const SubHeader = ({params}) => {
         </div>
       )}
 
-      {isLoading && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
-      {/* <p className="bg-red-400">gfhhmn</p> */}
+      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
     </>
   );
 };
