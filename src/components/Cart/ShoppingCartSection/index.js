@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {
   categoryIconsUrl,
@@ -35,7 +35,10 @@ const ShoppingCartSection = ({setTab}) => {
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   console.log(cartItems, "cart itemsss");
   const [arr, setArr] = useState(cartItems);
-  // console.log(arr, "arrrrr");
+  useEffect(() => {
+    setArr(cartItems);
+  }, [cartItems]);
+  console.log(arr, "arrrrr");
   const count = cartItems.length;
 
   const userId = getLocalStorage("userID");
@@ -114,18 +117,42 @@ const ShoppingCartSection = ({setTab}) => {
     setCode(value);
   };
 
-  const handleUpdateQuantity = (productid, index, operator) => {
-    console.log("inside", operator, index);
-    const updatedArr = [...arr];
-    if (operator === "minus" && arr[index].quantity > 0)
-      updatedArr[index].quantity--;
-    else if (operator === "plus") updatedArr[index].quantity++;
-    else openModal();
-    setArr(updatedArr);
+  const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
+    console.log("inside", newQuantity);
+    // const updatedArr = [...arr];
+    // if (operator === "minus" && arr[index].quantity > 0)
+    //   updatedArr[index].quantity--;
+    // else if (operator === "plus") updatedArr[index].quantity++;
+    // else openModal();
+    // setArr(updatedArr);
+
+    // const updatedItems = [...arr];
+    // const itemIndex = updatedItems.findIndex(item => item.id === productid);
+
+    // if (itemIndex !== -1) {
+    //   updatedItems[itemIndex].quantity = newQuantity;
+    //   setArr(updatedItems);
+    // }
+
+    if (newQuantity < 1) {
+      setProductId(productid);
+      setItemId(itemid);
+      openModal();
+    } else {
+      const updatedItems = arr.map(item => {
+        if (item.id === itemid) {
+          return {...item, quantity: newQuantity}; // Create a new object with updated quantity
+        }
+        return item; // Return other items unchanged
+      });
+
+      // Set the state with the updated array
+      setArr(updatedItems);
+    }
 
     const headers = {
       userId: 113999132,
-      quantity: arr[index].quantity,
+      quantity: arr[itemIndex].quantity,
       productId: productid,
     };
     axios
@@ -140,7 +167,7 @@ const ShoppingCartSection = ({setTab}) => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  return cartItems.length > 0 ? (
+  return count > 0 ? (
     <>
       <DeleteModal
         isModalOpen={isModalOpen}
@@ -154,7 +181,7 @@ const ShoppingCartSection = ({setTab}) => {
         <div className={styles.left_div} id="leftDiv">
           <h1 className={styles.head}>Shopping cart ({count})</h1>
           <div className={styles.card_wrapper}>
-            {cartItems?.map((item, index) => (
+            {arr?.map((item, index) => (
               <div key={index} className={styles.single_product_wrapper}>
                 <div className={styles.img_div}>
                   <img
@@ -189,7 +216,12 @@ const ShoppingCartSection = ({setTab}) => {
                       <span
                         className={styles.span_item}
                         onClick={() =>
-                          handleUpdateQuantity(item.id, index, "minus")
+                          handleUpdateQuantity(
+                            item.id,
+                            item?.fc_product?.id,
+                            item.quantity - 1,
+                            index,
+                          )
                         }>
                         -
                       </span>
@@ -197,7 +229,12 @@ const ShoppingCartSection = ({setTab}) => {
                       <span
                         className={styles.span_item}
                         onClick={() =>
-                          handleUpdateQuantity(item.id, index, "plus")
+                          handleUpdateQuantity(
+                            item.id,
+                            item?.fc_product?.id,
+                            item.quantity + 1,
+                            index,
+                          )
                         }>
                         +
                       </span>
