@@ -52,7 +52,7 @@ const Card = ({
     setInWishList(!inWishList);
     !inWishList
       ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
+          .then(res => console.log(res?.data?.data))
           .catch(err => console.log(err))
       : removewhislistProduct()
           .then(res => console.log(res))

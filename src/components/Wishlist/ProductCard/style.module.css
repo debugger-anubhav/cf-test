@@ -48,5 +48,21 @@
   @apply bg-btn-primary text-222 font-medium px-6 py-2 w-full rounded cursor-pointer mt-3;
 }
 .delete_item_text {
-  @apply text-222 font-medium font-Poppins;
+  @apply text-222 font-medium font-Poppins text-24 py-4;
+}
+
+.delete_confirmation_text {
+  @apply font-normal font-Poppins py-4;
+  color: #71717a;
+}
+.cancel_delete_btn {
+  @apply border rounded-lg py-4 px-10;
+  border-color: #71717a;
+}
+.confirm_delete_btn {
+  @apply border rounded-lg  py-4 px-10 ml-4;
+  background-color: #f6b704;
+}
+.main_container {
+  @apply bg-white w-fit h-min absolute sm:top-1/2 sm:left-1/2 sm:transform sm:-translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg p-6 flex;
 }

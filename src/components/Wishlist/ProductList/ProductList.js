@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {useMutation} from "@/hooks/useMutation";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 
 import {
@@ -123,67 +123,70 @@ const ProductList = ({params}) => {
     subCategoryId,
   );
 
-  const singleItemData = categoryPageReduxData?.isAllProduct
-    ? categoryPageReduxData?.singleProductAll
-    : categoryPageReduxData?.singleProduct;
+  const singleItemData = categoryPageReduxData?.savedProducts;
 
+  console.log(categoryPageReduxData, "ssss");
   return (
     <>
       <div className={style.conatiner_wrapper}>
         <h1 className={style.heading}>Wishlist({singleItemData?.length})</h1>
       </div>
-
-      {/* {singleItemData?.length ? ( */}
-      <div>
-        <InfiniteScroll
-          dataLength={singleItemData?.length}
-          next={() => {
-            if (pageNo < totalPage) {
-              setPageNo(prev => prev + 1);
-            }
-          }}
-          hasMore={true} // Replace with a condition based on your data source
-          className="!w-full !h-full">
-          <div className={style.main_container}>
-            {/* {singleItemData?.map((item, index) => { */}
-            {/* return ( */}
-            <div
-              className={`${style.card_box_product} ${style.child}`}
-              // key={index.toString()}
-              // onClick={e => handleCardClick(e, item)}
-            >
-              <ProductCard
-                productWidth={productCardWidth}
-                // cardImage={`${productImageBaseUrl}${
-                //   item?.image?.split(",")[0]
-                // }`}
-                productImageBaseUrl
-                // desc={item?.product_name}
-                // originalPrice={item?.price}
-                // currentPrice={item?.sale_price}
-                isImageHeight={true}
-                // boxShadowHover={true}
-                // hoverCardImage={
-                //   item?.image?.split(",").length > 1
-                //     ? productImageBaseUrl + item?.image?.split(",")[1]
-                //     : productImageBaseUrl + item?.image?.split(",")[0]
-                // }
-                // hoverCardImage={
-                //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
-                // }
-                // discount={`${Math.round(
-                //   ((item?.price - item?.sale_price) * 100) / 1000,
-                // ).toFixed(2)}%`}
-                // productID={item?.id}
-              />
+      {singleItemData?.length ? (
+        <div>
+          <InfiniteScroll
+            dataLength={singleItemData?.length}
+            next={() => {
+              if (pageNo < totalPage) {
+                setPageNo(prev => prev + 1);
+              }
+            }}
+            hasMore={true} // Replace with a condition based on your data source
+            className="!w-full !h-full">
+            <div className={style.main_container}>
+              {singleItemData?.map((item, index) => {
+                console.log(item);
+                return (
+                  <div
+                    className={`${style.card_box_product} ${style.child}`}
+                    key={index.toString()}
+                    // onClick={e => handleCardClick(e, item)}
+                  >
+                    <ProductCard
+                      productWidth={productCardWidth}
+                      cardImage={`${productImageBaseUrl}${
+                        item?.image?.split(",")[0]
+                      }`}
+                      productImageBaseUrl
+                      desc={item?.product_name}
+                      originalPrice={item?.price}
+                      currentPrice={item?.sale_price}
+                      isImageHeight={true}
+                      boxShadowHover={true}
+                      hoverCardImage={
+                        item?.image?.split(",").length > 1
+                          ? productImageBaseUrl + item?.image?.split(",")[1]
+                          : productImageBaseUrl + item?.image?.split(",")[0]
+                      }
+                      // hoverCardImage={
+                      //   imagesArr?.length > 1
+                      //     ? productImageBaseUrl + item?.image[1]
+                      //     : productImageBaseUrl + item?.image[0]
+                      // }
+                      discount={`${Math.round(
+                        ((item?.price - item?.sale_price) * 100) / 1000,
+                      ).toFixed(2)}%`}
+                      productID={item?.id}
+                    />
+                  </div>
+                );
+              })}
             </div>
-            {/*  );
-               })} */}
-          </div>
-        </InfiniteScroll>
-      </div>
-      {/* ) : "No Data"}  */}
-      {/* <p className="bg-red-400">gfhhmn</p> */}
+          </InfiniteScroll>
+        </div>
+      ) : (
+        "No Data"
+      )}
+      <p className="bg-red-400">gfhhmn</p>
     </>
   );
 };

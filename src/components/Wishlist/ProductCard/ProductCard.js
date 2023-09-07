@@ -3,17 +3,9 @@ import styles from "./style.module.css";
 import {Close, Delete, Rupee} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  backgroundColor: "#fff",
-  width: 400,
-  boxShadow: 24,
-  p: 4,
-};
+import {getLocalStorage} from "@/constants/constant";
+import {useMutation} from "@/hooks/useMutation";
+import {endPoints} from "@/network/endPoints";
 
 const ProductCard = ({
   desc,
@@ -26,8 +18,28 @@ const ProductCard = ({
   soldOut,
   productWidth,
   isImageHeight = false,
+  productID,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
+  const data = {
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    productId: productID,
+  };
+  const {mutateAsync: removewhislistProduct} = useMutation(
+    "remove-wishlist",
+    "DELETE",
+    endPoints.deleteWishListProduct,
+    data,
+  );
+
+  const remove = () => {
+    removewhislistProduct()
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
 
   return (
     <div className={`${styles.wrapper} ${productWidth} `}>
@@ -62,7 +74,7 @@ const ProductCard = ({
         <Delete
           size={25}
           color={"#71717A"}
-          onClick={e => {
+          onClick={() => {
             setDeleteIconClick(true);
           }}
           className={"cursor-pointer"}
@@ -91,22 +103,45 @@ const ProductCard = ({
         open={deleteIconClick}
         onClose={() => setDeleteIconClick(false)}
         aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description">
-        <Box sx={style}>
-          <Box display={"flex"} justifyContent={"space-between"}>
-            <Typography className={styles.delete_item_text}>
-              Delete item?
-            </Typography>
-            <Close
-              size={25}
-              color={"#222222"}
-              onClick={e => {
-                setDeleteIconClick(false);
-              }}
-              className={"cursor-pointer"}
-            />
-          </Box>
-        </Box>
+        aria-describedby="modal-modal-description"
+        disableRestoreFocus
+        disableEnforceFocus
+        disableAutoFocus>
+        <div className={styles.main_container}>
+          <div>
+            {" "}
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Typography className={styles.delete_item_text}>
+                Delete item?
+              </Typography>
+              <button
+                onClick={() => {
+                  setDeleteIconClick(false);
+                }}>
+                <Close
+                  size={25}
+                  color={"#222222"}
+                  className={"cursor-pointer"}
+                />
+              </button>
+            </Box>
+            <Box>
+              <Typography className={styles.delete_confirmation_text}>
+                Are you sure you want to delete this product from the wishlist?
+              </Typography>
+            </Box>
+            <Box>
+              <button className={styles.cancel_delete_btn}>Cancel</button>
+              <button
+                className={styles.confirm_delete_btn}
+                onClick={() => {
+                  remove();
+                }}>
+                Yes, Delete
+              </button>
+            </Box>
+          </div>
+        </div>
       </Modal>
     </div>
   );
