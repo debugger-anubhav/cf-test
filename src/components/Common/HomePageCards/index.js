@@ -49,8 +49,6 @@ const Card = ({
     data,
   );
 
-  console.log(categoryPageReduxData.addRemoveWhislitItem, "2124214241");
-
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
