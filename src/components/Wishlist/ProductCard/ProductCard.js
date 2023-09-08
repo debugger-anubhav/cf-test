@@ -20,7 +20,7 @@ const ProductCard = ({
   productWidth,
   isImageHeight = false,
   productID,
-  refreshFunction,
+  // refreshFunction,
   hoverCardImage,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
@@ -46,7 +46,7 @@ const ProductCard = ({
     removewhislistProduct()
       .then(res => {
         setDeleteIconClick(false);
-        refreshFunction(Math.random());
+        // refreshFunction(Math.random());
       })
       .catch(err => console.log(err));
   };
