@@ -23,6 +23,7 @@ import ProfileDropDown from "./ProfileDropDown";
 const HEADER_HEIGHT = 48;
 
 const Header = () => {
+  const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
@@ -59,6 +60,23 @@ const Header = () => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
   }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+  const toggleDropdown = () => {
+    setShowProfileDropdown(!showProfileDropdown);
+  };
 
   return (
     <>
@@ -138,14 +156,17 @@ const Header = () => {
                   if (getLocalStorage("tempUserID") === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
-                    setShowProfileDropdown(!showProfileDropdown);
+                    toggleDropdown();
+                    // setShowProfileDropdown(!showProfileDropdown);
                   }
                 }}
+                ref={iconRef}
               />
               {getLocalStorage("tempUserID") !== null &&
                 showProfileDropdown && (
                   <ProfileDropDown
                     setShowProfileDropdown={setShowProfileDropdown}
+                    showProfileDropdown={showProfileDropdown}
                   />
                 )}
             </div>

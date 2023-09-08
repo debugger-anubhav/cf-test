@@ -1,6 +1,9 @@
 import {useRouter} from "next/navigation";
 import React from "react";
-export default function ProfileDropDown({setShowProfileDropdown}) {
+export default function ProfileDropDown({
+  setShowProfileDropdown,
+  showProfileDropdown,
+}) {
   const items = [
     {item: "My Orders", link: "https://cityfurnish.com/purchases"},
     {
@@ -17,8 +20,14 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
   const router = useRouter();
   return (
     <div
-      className="flex px-6 py-4 pr-8 rounded-t-lg absolute top-10 right-0 bg-white flex-col"
-      style={{boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)"}}>
+      className={
+        "absolute top-10 right-0 px-6 py-4 pr-8 rounded-t-lg select-none flex  bg-white flex-col z-2"
+      }
+      style={
+        showProfileDropdown
+          ? {boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)"}
+          : "hidden"
+      }>
       <div>
         <p className="text-sm text-6A6A6A">Your Account,</p>
         <p className="text-sm font-medium text-45454A">Pratyush</p>
