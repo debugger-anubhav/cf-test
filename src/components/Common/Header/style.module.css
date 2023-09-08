@@ -49,7 +49,7 @@
 }
 
 .header_profile_icon {
-  @apply lg:flex hidden cursor-pointer;
+  @apply lg:flex hidden cursor-pointer relative;
 }
 .mobile_search_row {
   @apply flex md:hidden justify-center items-center;
@@ -109,4 +109,7 @@
 }
 .search_result_text {
   @apply text-14 text-45454A font-medium;
+}
+.category_card_in_searchbox img {
+  @apply !h-auto;
 }

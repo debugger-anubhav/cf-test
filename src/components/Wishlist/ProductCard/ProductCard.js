@@ -6,6 +6,7 @@ import {Box, Modal, Typography} from "@mui/material";
 import {getLocalStorage} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
+import {useRouter} from "next/navigation";
 
 const ProductCard = ({
   desc,
@@ -22,6 +23,7 @@ const ProductCard = ({
   refreshFunction,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
@@ -29,6 +31,7 @@ const ProductCard = ({
     // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
+  const router = useRouter();
   const {mutateAsync: removewhislistProduct} = useMutation(
     "remove-wishlist",
     "DELETE",
@@ -75,14 +78,18 @@ const ProductCard = ({
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
         </h3>
-        <Delete
-          size={25}
-          color={"#71717A"}
-          onClick={() => {
-            setDeleteIconClick(true);
-          }}
-          className={"cursor-pointer"}
-        />
+        <span
+          onMouseOver={() => setIsHovered(true)}
+          onMouseOut={() => setIsHovered(false)}>
+          <Delete
+            size={25}
+            color={isHovered ? "#D96060" : "#71717A"}
+            onClick={() => {
+              setDeleteIconClick(true);
+            }}
+            className={"cursor-pointer"}
+          />
+        </span>
       </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
@@ -100,7 +107,11 @@ const ProductCard = ({
         )}
       </div>
       <div>
-        <button className={styles.move_to_cart_btn}>Move to Cart</button>
+        <button
+          className={styles.move_to_cart_btn}
+          onClick={() => router.push("https://cityfurnish.com/cart")}>
+          Move to Cart
+        </button>
       </div>
 
       <Modal
@@ -113,7 +124,6 @@ const ProductCard = ({
         disableAutoFocus>
         <div className={styles.main_container}>
           <div>
-            {" "}
             <Box display={"flex"} justifyContent={"space-between"}>
               <Typography className={styles.delete_item_text}>
                 Delete item?
@@ -131,11 +141,16 @@ const ProductCard = ({
             </Box>
             <Box>
               <Typography className={styles.delete_confirmation_text}>
-                Are you sure you want to delete this product from the wishlist?
+                Are you sure you want to delete this product <br /> from the
+                wishlist?
               </Typography>
             </Box>
             <Box>
-              <button className={styles.cancel_delete_btn}>Cancel</button>
+              <button
+                className={styles.cancel_delete_btn}
+                onClick={() => setDeleteIconClick(false)}>
+                Cancel
+              </button>
               <button
                 className={styles.confirm_delete_btn}
                 onClick={() => {
