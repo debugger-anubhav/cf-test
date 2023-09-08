@@ -44,3 +44,7 @@
 .tag_text {
   @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
 }
+
+.banner_img {
+  @apply w-full h-full cursor-pointer;
+}
