@@ -36,7 +36,7 @@ const ProductPage = () => {
 
   useEffect(() => {
     const data = {
-      userId: "",
+      userId: getLocalStorage("user_id") ?? "",
       // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
       tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
     };
@@ -48,6 +48,8 @@ const ProductPage = () => {
             "tempUserID",
             JSON.parse(res?.data?.data?.tempUserId),
           );
+          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
+          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
         }
       })
       .catch(err => console.log(err));

@@ -1,3 +1,4 @@
+import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import React from "react";
 import cookie from "react-cookies";
@@ -20,6 +21,8 @@ export default function ProfileDropDown({
     {item: "Logout", link: "link"},
   ];
   const router = useRouter();
+
+  const userName = getLocalStorage("user_name") ?? "";
   return (
     <div
       className={
@@ -32,7 +35,7 @@ export default function ProfileDropDown({
       }>
       <div>
         <p className="text-sm text-6A6A6A">Your Account,</p>
-        <p className="text-sm font-medium text-45454A">Pratyush</p>
+        <p className="text-sm font-medium text-45454A">{userName}</p>
         <p className="bg-EDEDEE h-[1px] w-full my-4"></p>
       </div>
       {items?.map((ele, index) => (
