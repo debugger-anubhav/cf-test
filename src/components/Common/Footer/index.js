@@ -4,13 +4,16 @@ import Image from "next/image";
 import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
+import {useRouter} from "next/navigation";
 import {useSelector} from "react-redux";
 import {setLocalStorage} from "@/constants/constant";
-
+// import { FooterItems } from "@/constants/constant";
 const Footer = ({params}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
+  const router = useRouter();
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
+  // const str = FooterItems[0]?.Footer;
 
   const str = {
     why_furni: "Furniture Rental: An Affordable and Flexible Option",
@@ -25,6 +28,10 @@ const Footer = ({params}) => {
       head: "Categories",
       points: [
         {text: "All", link: "https://cityfurnish.com/bangalore/rent"},
+        {
+          text: "Categories",
+          link: `/${cityName}/home-furniture-rental`,
+        },
         {text: "Home Furniture", link: `/${cityName}/home-furniture-rental`},
         {text: "Appliances", link: `/${cityName}/home-appliances-rental`},
         {text: "Workstations", link: `/${cityName}/workstations`},
@@ -65,7 +72,7 @@ const Footer = ({params}) => {
           text: "Sample Rental Agreement",
           link: "https://cityfurnish.com/pages/rentalagreement",
         },
-        {text: "Offers", link: "https://cityfurnish.com/pages/offers"},
+        {text: "Offers", link: "/"},
       ],
     },
 
@@ -132,24 +139,19 @@ const Footer = ({params}) => {
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
               {item.points.map((t, i) => (
-                <a
-                  key={index.toString()}
-                  href={t.link}
-                  target="_blank"
-                  rel="noopener noreferrer">
-                  <p
-                    className={styles.points}
-                    onClick={() => {
-                      if (t?.text === "Workstations") {
-                        setLocalStorage("subCategory", "Workstations");
-                      } else {
-                        setLocalStorage("subCategory", "All");
-                      }
-                      // router.push(t?.link);
-                    }}>
-                    {t?.text}
-                  </p>
-                </a>
+                <p
+                  key={i.toString()}
+                  className={styles.points}
+                  onClick={() => {
+                    if (t?.text === "Workstations") {
+                      setLocalStorage("subCategory", "Workstations");
+                    } else {
+                      setLocalStorage("subCategory", "All");
+                    }
+                    router.push(t?.link);
+                  }}>
+                  {t?.text}
+                </p>
               ))}
             </div>
           </div>

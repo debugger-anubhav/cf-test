@@ -8,6 +8,7 @@ const StickyBottomBar = ({
   durationArray,
   handleButtonClick,
   isLoading,
+  isItemInCart,
 }) => {
   return (
     <div className={styles.sticky_bar_wrapper}>
@@ -35,12 +36,12 @@ const StickyBottomBar = ({
               style={{
                 display: duration.value === "3" ? "none" : "flex",
               }}>
-              {`${Math.round(
+              {`-${Math.round(
                 ((durationArray?.[0]?.attr_price -
                   durationArray?.[duration.currentIndex]?.attr_price) *
                   100) /
                   durationArray?.[0]?.attr_price,
-              ).toFixed(2)}%`}
+              ).toFixed(0)}% OFF`}
             </div>
           </div>
         </div>
@@ -56,9 +57,15 @@ const StickyBottomBar = ({
       <button
         onClick={handleButtonClick}
         style={{width: "232px", marginTop: "0px"}}
-        disabled={isLoading}
+        disabled={isLoading || isItemInCart}
         className={styles.btn}>
-        {isLoading ? <div className={styles.spinner} /> : "Add to Cart"}
+        {isLoading ? (
+          <div className={styles.spinner} />
+        ) : isItemInCart ? (
+          "In cart"
+        ) : (
+          "Add to Cart"
+        )}
       </button>
     </div>
   );
