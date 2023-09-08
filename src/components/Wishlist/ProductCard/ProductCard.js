@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {Close, Delete, Rupee} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
@@ -21,9 +21,12 @@ const ProductCard = ({
   isImageHeight = false,
   productID,
   refreshFunction,
+  hoverCardImage,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const [hoverCard, setHoverCard] = useState(false);
+
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
@@ -49,16 +52,19 @@ const ProductCard = ({
   };
 
   return (
-    <div className={`${styles.wrapper} ${productWidth} `}>
+    <div
+      className={`${styles.wrapper} ${productWidth} `}
+      onMouseOver={() => {
+        setHoverCard(true);
+      }}
+      onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
         <img
-          src={cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={`${styles.thumbnail} ${isImageHeight && "min-h-[240px]"}
           `}
         />
-
-        {/* ----------- */}
         {showincludedItem && (
           <div className={styles.item_included_container}>
             <p
@@ -125,38 +131,39 @@ const ProductCard = ({
         <div className={styles.main_container}>
           <div>
             <Box display={"flex"} justifyContent={"space-between"}>
-              <Typography className={styles.delete_item_text}>
-                Delete item?
-              </Typography>
+              <div>
+                <Typography className={styles.delete_item_text}>
+                  Delete item?
+                </Typography>
+                <Box>
+                  <Typography className={styles.delete_confirmation_text}>
+                    Are you sure you want to delete this product <br /> from the
+                    wishlist?
+                  </Typography>
+                </Box>
+                <Box>
+                  <button
+                    className={styles.cancel_delete_btn}
+                    onClick={() => setDeleteIconClick(false)}>
+                    Cancel
+                  </button>
+                  <button
+                    className={styles.confirm_delete_btn}
+                    onClick={() => {
+                      remove();
+                    }}>
+                    Yes, Delete
+                  </button>
+                </Box>
+              </div>
               <button
+                className={`${styles.close_icon_btn}`}
                 onClick={() => {
                   setDeleteIconClick(false);
                 }}>
-                <Close
-                  size={25}
-                  color={"#222222"}
-                  className={"cursor-pointer"}
-                />
-              </button>
-            </Box>
-            <Box>
-              <Typography className={styles.delete_confirmation_text}>
-                Are you sure you want to delete this product <br /> from the
-                wishlist?
-              </Typography>
-            </Box>
-            <Box>
-              <button
-                className={styles.cancel_delete_btn}
-                onClick={() => setDeleteIconClick(false)}>
-                Cancel
-              </button>
-              <button
-                className={styles.confirm_delete_btn}
-                onClick={() => {
-                  remove();
-                }}>
-                Yes, Delete
+                <div className={`${styles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
               </button>
             </Box>
           </div>

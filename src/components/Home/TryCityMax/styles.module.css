@@ -20,7 +20,7 @@
   @apply font-Poppins font-medium xl:text-4xl text-2xl tracking-tighter text-[#3E688E];
 }
 .TryCity_paragraph {
-  @apply font-Poppins font-medium xl:text-24 text-16 xl:leading-9 leading-6 tracking-tighter text-[#222];
+  @apply font-Poppins font-medium xl:text-24 text-16 leading-normal tracking-[0.48px] mt-2 text-[#222];
 }
 .check_button {
   @apply h-[56px] flex items-center py-0 px-8 gap-2 bg-F6B704 rounded-lg mt-8;

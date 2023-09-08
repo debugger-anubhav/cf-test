@@ -4,23 +4,29 @@ import {Plus, Minus} from "@/assets/icon";
 
 const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
   return (
-    <div className="pb-6">
-      <div className={styles.quesWrapper} onClick={toggleQuestion}>
-        <h3 className={styles.ques}>{ques}</h3>
+    <>
+      <div className="pb-6">
+        <div className={styles.quesWrapper} onClick={toggleQuestion}>
+          <h3 className={styles.ques}>{ques}</h3>
+          <div>
+            {isOpen ? (
+              <Minus className="cursor-pointer" size={20} color={"#222"} />
+            ) : (
+              <Plus className="cursor-pointer" size={20} color={"#222"} />
+            )}
+          </div>
+        </div>
         <div>
-          {isOpen ? (
-            <Minus className="cursor-pointer" size={20} color={"#222"} />
-          ) : (
-            <Plus className="cursor-pointer" size={20} color={"#222"} />
+          {isOpen && (
+            <div
+              dangerouslySetInnerHTML={{__html: ans}}
+              className={styles.ans}
+            />
           )}
         </div>
       </div>
-      <div>
-        {isOpen && (
-          <div dangerouslySetInnerHTML={{__html: ans}} className={styles.ans} />
-        )}
-      </div>
-    </div>
+      <div className="bg-EDEDEE h-[1px] w-full"></div>
+    </>
   );
 };
 
