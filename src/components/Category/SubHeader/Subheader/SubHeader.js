@@ -1,5 +1,5 @@
 import styles from "./style.module.css";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {
   categoryIconsUrl,
   getLocalStorage,
@@ -35,6 +35,8 @@ import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
 
 const SubHeader = ({params}) => {
+  const dropDownRefFilter = useRef(null);
+  const dropDownRefSort = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -242,6 +244,39 @@ const SubHeader = ({params}) => {
     }
   }, [getAllAndSubCategoryData]);
 
+  // dropdown clickable outside ref
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefFilter.current &&
+        !dropDownRefFilter.current.contains(event.target)
+      ) {
+        setFilterOpen(false);
+      }
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
+        setSortOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdownSort = () => {
+    setSortOpen(!sortOpen);
+  };
+
+  const toggleDropDownFilter = () => {
+    console.log("hiii");
+    setFilterOpen(!filterOpen);
+  };
+
   return (
     <>
       {skeletonOpen ? (
@@ -336,11 +371,17 @@ const SubHeader = ({params}) => {
             <div className="relative">
               <div
                 className={`${styles.filter} relative`}
+
                 // onClick={() => setFilterOpen(!fi)}
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setFilterOpen(!filterOpen)}>
+                  onClick={() => {
+                    // setFilterOpen(!filterOpen)
+                    toggleDropDownFilter();
+                    // toggleDropdownSort();
+                  }}
+                  ref={dropDownRefFilter}>
                   <div className={styles.filter_text_container}>
                     <p className={styles.filter_text}>Filter</p>
                   </div>
@@ -420,9 +461,13 @@ const SubHeader = ({params}) => {
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setSortOpen(!filterOpen)}>
+                  onClick={() => {
+                    // setSortOpen(!filterOpen);
+                    toggleDropdownSort();
+                  }}
+                  ref={dropDownRefSort}>
                   <div className={styles.filter_text_container}>
-                    <p className={`${styles.filter_text} text-[#597492]`}>
+                    <p className={`${styles.filter_text} !text-[#597492]`}>
                       {selectedOption}
                     </p>
                   </div>

@@ -51,7 +51,7 @@
   @apply flex md:w-[157px] sm:w-[130px] ms:w-[120px] mobile:w-[65px]  w-auto;
 }
 .filter_text {
-  @apply font-Poppins text-12 mobile:text-14 font-medium leading-6 text-71717A;
+  @apply font-Poppins text-12 md:text-14 font-medium leading-6 text-71717A;
 }
 .arrow_down {
   transition: transform 330ms ease;
