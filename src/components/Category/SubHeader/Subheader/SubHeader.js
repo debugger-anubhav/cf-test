@@ -342,7 +342,9 @@ const SubHeader = ({params}) => {
                   className={styles.filterbox}
                   onClick={() => setFilterOpen(!filterOpen)}>
                   <div className={styles.filter_text_container}>
-                    <p className={styles.filter_text}>Filter</p>
+                    <p className={`${styles.filter_text} text-71717A`}>
+                      Filter
+                    </p>
                   </div>
                   <div>
                     <DownPopUpArrow
@@ -420,7 +422,7 @@ const SubHeader = ({params}) => {
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setSortOpen(!filterOpen)}>
+                  onClick={() => setSortOpen(!sortOpen)}>
                   <div className={styles.filter_text_container}>
                     <p className={`${styles.filter_text} text-[#597492]`}>
                       {selectedOption}

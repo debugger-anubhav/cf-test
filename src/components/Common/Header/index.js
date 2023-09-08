@@ -23,6 +23,7 @@ import ProfileDropDown from "./ProfileDropDown";
 const HEADER_HEIGHT = 48;
 
 const Header = () => {
+  const iconRef = useRef(null);
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
@@ -64,6 +65,23 @@ const Header = () => {
     });
   }, []);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+  const toggleDropdown = () => {
+    setShowProfileDropdown(!showProfileDropdown);
+  };
+
   return (
     <>
       <div className={styles.main}>
@@ -71,7 +89,7 @@ const Header = () => {
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
             <p
-              className={styles.logo_text}
+              className={styles.logo_text_main_header}
               onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
@@ -152,14 +170,17 @@ const Header = () => {
                   if (getLocalStorage("user_id") === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
-                    setShowProfileDropdown(!showProfileDropdown);
+                    toggleDropdown();
+                    // setShowProfileDropdown(!showProfileDropdown);
                   }
                 }}
+                ref={iconRef}
               />
               {getLocalStorage("tempUserID") !== null &&
                 showProfileDropdown && (
                   <ProfileDropDown
                     setShowProfileDropdown={setShowProfileDropdown}
+                    showProfileDropdown={showProfileDropdown}
                   />
                 )}
             </div>
@@ -284,7 +305,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="pppSearch for Furniture, Appliances, etc"
+            placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -375,11 +396,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
 
             <div className="mt-6">
               <p className={styles.search_head}>Categories</p>
-              <div className={styles.categories_wrapper}>
+              <div className={`${styles.categories_wrapper}`}>
                 {homePageReduxData?.category?.map((item, index) => (
                   <div
                     key={index.toString()}
-                    className={styles.card_wrapper}
+                    className={styles.category_card_in_searchbox}
                     onClick={() => {
                       router.push(
                         // `/next/${homePageReduxData?.cityName.toLowerCase()}/${
