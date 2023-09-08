@@ -271,7 +271,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="pppSearch for Furniture, Appliances, etc"
+            placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -362,11 +362,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
 
             <div className="mt-6">
               <p className={styles.search_head}>Categories</p>
-              <div className={styles.categories_wrapper}>
+              <div className={`${styles.categories_wrapper}`}>
                 {homePageReduxData?.category?.map((item, index) => (
                   <div
                     key={index.toString()}
-                    className={styles.card_wrapper}
+                    className={styles.category_card_in_searchbox}
                     onClick={() => {
                       router.push(
                         // `/next/${homePageReduxData?.cityName.toLowerCase()}/${

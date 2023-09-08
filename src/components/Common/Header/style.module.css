@@ -110,3 +110,6 @@
 .search_result_text {
   @apply text-14 text-45454A font-medium;
 }
+.category_card_in_searchbox img {
+  @apply !h-auto;
+}
