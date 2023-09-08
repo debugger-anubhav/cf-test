@@ -123,36 +123,39 @@ const ProductCard = ({
         <div className={styles.main_container}>
           <div>
             <Box display={"flex"} justifyContent={"space-between"}>
-              <Typography className={styles.delete_item_text}>
-                Delete item?
-              </Typography>
+              <div>
+                <Typography className={styles.delete_item_text}>
+                  Delete item?
+                </Typography>
+                <Box>
+                  <Typography className={styles.delete_confirmation_text}>
+                    Are you sure you want to delete this product <br /> from the
+                    wishlist?
+                  </Typography>
+                </Box>
+                <Box>
+                  <button
+                    className={styles.cancel_delete_btn}
+                    onClick={() => setDeleteIconClick(false)}>
+                    Cancel
+                  </button>
+                  <button
+                    className={styles.confirm_delete_btn}
+                    onClick={() => {
+                      remove();
+                    }}>
+                    Yes, Delete
+                  </button>
+                </Box>
+              </div>
               <button
+                className={`${styles.close_icon_btn}`}
                 onClick={() => {
                   setDeleteIconClick(false);
                 }}>
                 <div className={`${styles.close_icon}`}>
                   <Close size={25} color={"#222222"} />
                 </div>
-              </button>
-            </Box>
-            <Box>
-              <Typography className={styles.delete_confirmation_text}>
-                Are you sure you want to delete this product <br /> from the
-                wishlist?
-              </Typography>
-            </Box>
-            <Box>
-              <button
-                className={styles.cancel_delete_btn}
-                onClick={() => setDeleteIconClick(false)}>
-                Cancel
-              </button>
-              <button
-                className={styles.confirm_delete_btn}
-                onClick={() => {
-                  remove();
-                }}>
-                Yes, Delete
               </button>
             </Box>
           </div>
