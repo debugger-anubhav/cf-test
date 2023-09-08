@@ -254,7 +254,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 />
                 {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
                 <p className={styles.qr_text}>
-                  <span className={styles.qr_text_span}>100+</span>People have
+                  <span className={styles.qr_text_span}>100k+</span>People have
                   already downloaded our app 🎉
                 </p>
               </div>

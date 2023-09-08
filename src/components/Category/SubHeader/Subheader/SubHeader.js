@@ -383,7 +383,9 @@ const SubHeader = ({params}) => {
                   }}
                   ref={dropDownRefFilter}>
                   <div className={styles.filter_text_container}>
-                    <p className={styles.filter_text}>Filter</p>
+                    <p className={`${styles.filter_text} text-71717A`}>
+                      Filter
+                    </p>
                   </div>
                   <div>
                     <DownPopUpArrow
