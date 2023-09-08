@@ -85,7 +85,7 @@ const Header = () => {
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
             <p
-              className={styles.logo_text}
+              className={styles.logo_text_main_header}
               onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
