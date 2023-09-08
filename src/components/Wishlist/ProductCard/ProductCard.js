@@ -124,7 +124,6 @@ const ProductCard = ({
         disableAutoFocus>
         <div className={styles.main_container}>
           <div>
-            {" "}
             <Box display={"flex"} justifyContent={"space-between"}>
               <Typography className={styles.delete_item_text}>
                 Delete item?
@@ -142,11 +141,16 @@ const ProductCard = ({
             </Box>
             <Box>
               <Typography className={styles.delete_confirmation_text}>
-                Are you sure you want to delete this product from the wishlist?
+                Are you sure you want to delete this product <br /> from the
+                wishlist?
               </Typography>
             </Box>
             <Box>
-              <button className={styles.cancel_delete_btn}>Cancel</button>
+              <button
+                className={styles.cancel_delete_btn}
+                onClick={() => setDeleteIconClick(false)}>
+                Cancel
+              </button>
               <button
                 className={styles.confirm_delete_btn}
                 onClick={() => {
