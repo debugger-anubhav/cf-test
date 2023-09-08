@@ -1,6 +1,10 @@
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
-import {categoryIconsUrl, productImageBaseUrl} from "@/constants/constant";
+import {
+  categoryIconsUrl,
+  getLocalStorage,
+  productImageBaseUrl,
+} from "@/constants/constant";
 import {
   ArrowForw,
   CheckedBox,
@@ -21,69 +25,56 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
+import {
+  deleteItems,
+  //  getCartItems
+} from "@/store/Slices";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
-  const count = 5;
-  const [arr, setArr] = useState([
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-    {
-      img: "1583995987Alexa-queen-bed.jpg",
-      product_name: "V-leg 4 Seater Dining Table",
-      currentPrice: 1709,
-      originalPrice: 1899,
-      id: 3794,
-      quantity: 1,
-    },
-  ]);
-
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   console.log(cartItems, "cart itemsss");
-
-  const fetchCartItems = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(113999132))
-      .then(res => {
-        console.log(res, "res in fetch itemms");
-        dispatch(res?.data?.data);
-      })
-      .catch(err => console.log(err));
-  };
-
+  const [arr, setArr] = useState(cartItems);
   useEffect(() => {
-    fetchCartItems();
-  }, []);
+    setArr(cartItems);
+  }, [cartItems]);
+  console.log(arr, "arrrrr");
+  const count = cartItems.length;
+
+  const userId = getLocalStorage("userID");
+  const tempUserId = getLocalStorage("tempUserID");
+  const userIdToUse = userId || tempUserId;
+
+  console.log(userIdToUse, "user id to use");
+
+  const totalAmount = cartItems.reduce((accumulator, item) => {
+    return accumulator + item?.fc_product?.fc_product_sale_price?.sale_price;
+  }, 0);
+  console.log(totalAmount, "bbbbbbb");
+
+  const cityShieldOriginalAmount = (totalAmount * 10) / 100;
+  const cityShieldDiscountAmount = (totalAmount * 6) / 100;
+  console.log(cityShieldOriginalAmount, "totalAmount");
+  console.log(cityShieldDiscountAmount, "totaldiscountedprice");
+
+  const cityShieldDiscountPercentage =
+    cityShieldOriginalAmount > 0
+      ? Math.round(
+          ((cityShieldOriginalAmount - cityShieldDiscountAmount) * 100) /
+            cityShieldOriginalAmount,
+        ).toFixed(2)
+      : 0;
+
+  // const fetchCartItems = () => {
+  //   axios
+  //     .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+  //     .then(res => {
+  //       console.log(res, "res in fetch itemms");
+  //       setArr(res?.data?.data);
+  //       dispatch(getCartItems(res?.data?.data));
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   const monthlyModeFeatures = [
     "Get additional coupon upto 8%",
@@ -102,16 +93,33 @@ const ShoppingCartSection = ({setTab}) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
+  const [availCoin, setAvailCoin] = useState(0);
   const [isMonthly, setIsMonthly] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState("");
   const [productId, setProductId] = useState();
+  const [itemId, setItemId] = useState();
+
   // const [itemQuantity, setItemQuantity] = useState(1);
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
   };
-  const availCoin = 300;
+
+  const fetchAvailCoins = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+      .then(res => {
+        console.log(res, "res in fetch coins");
+        if (res?.data?.data?.length > 0)
+          setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchAvailCoins();
+  }, []);
 
   // const closeDrawer = () => {
   //   setCityShieldDrawerOpen(false);
@@ -142,18 +150,26 @@ const ShoppingCartSection = ({setTab}) => {
     setCode(value);
   };
 
-  const handleUpdateQuantity = (productid, index, operator) => {
-    console.log("inside", operator, index);
-    const updatedArr = [...arr];
-    if (operator === "minus" && arr[index].quantity > 0)
-      updatedArr[index].quantity--;
-    else if (operator === "plus") arr[index].quantity++;
-    else openModal();
-    setArr(updatedArr);
+  const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
+    console.log("inside", newQuantity);
+    if (newQuantity < 1) {
+      setProductId(productid);
+      setItemId(itemid);
+      openModal();
+    } else {
+      const updatedItems = arr.map(item => {
+        if (item.id === itemid) {
+          return {...item, quantity: newQuantity};
+        }
+        return item;
+      });
+
+      setArr(updatedItems);
+    }
 
     const headers = {
-      userId: 113999132,
-      quantity: arr[index].quantity,
+      userId: parseInt(userIdToUse),
+      quantity: arr[itemIndex].quantity,
       productId: productid,
     };
     axios
@@ -162,12 +178,21 @@ const ShoppingCartSection = ({setTab}) => {
       .catch(err => console.log(err, "error in update qunatity"));
   };
 
-  return (
+  const deleteItem = id => {
+    console.log(id, "in delet ");
+    dispatch(deleteItems(id));
+    // setArr(arr.filter(t => t.fc_product.id !== id));
+  };
+
+  return count > 0 ? (
     <>
       <DeleteModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
         productId={productId}
+        id={itemId}
+        userId={userIdToUse}
+        updateArr={id => deleteItem(id)}
       />
       <div className={styles.main_container}>
         <div className={styles.left_div} id="leftDiv">
@@ -177,7 +202,11 @@ const ShoppingCartSection = ({setTab}) => {
               <div key={index} className={styles.single_product_wrapper}>
                 <div className={styles.img_div}>
                   <img
-                    src={`${productImageBaseUrl + "thumb/" + item.img}`}
+                    src={`${
+                      productImageBaseUrl +
+                      "thumb/" +
+                      item.fc_product?.image?.split(",")?.[0]
+                    }`}
                     alt="product_img"
                     className={styles.img}
                   />
@@ -185,10 +214,13 @@ const ShoppingCartSection = ({setTab}) => {
 
                 <div>
                   <div className={styles.name_div}>
-                    <p className={styles.product_name}>{item.product_name}</p>
+                    <p className={styles.product_name}>
+                      {item?.fc_product?.product_name}
+                    </p>
                     <div
                       onClick={() => {
-                        setProductId(item.id);
+                        setProductId(item?.fc_product?.id);
+                        setItemId(item?.id);
                         openModal();
                       }}>
                       {" "}
@@ -201,15 +233,25 @@ const ShoppingCartSection = ({setTab}) => {
                       <span
                         className={styles.span_item}
                         onClick={() =>
-                          handleUpdateQuantity(item.id, index, "minus")
+                          handleUpdateQuantity(
+                            item.id,
+                            item?.fc_product?.id,
+                            item.quantity - 1,
+                            index,
+                          )
                         }>
                         -
                       </span>
-                      {item.quantity}
+                      {item?.quantity}
                       <span
                         className={styles.span_item}
                         onClick={() =>
-                          handleUpdateQuantity(item.id, index, "plus")
+                          handleUpdateQuantity(
+                            item.id,
+                            item?.fc_product?.id,
+                            item.quantity + 1,
+                            index,
+                          )
                         }>
                         +
                       </span>
@@ -220,10 +262,10 @@ const ShoppingCartSection = ({setTab}) => {
                       <div className="flex items-end gap-2">
                         <p className={styles.currentPrice}>
                           <Rupee />
-                          {item.currentPrice}
+                          {item?.fc_product?.fc_product_sale_price?.sale_price}
                         </p>
                         <p className={styles.originalPrice}>
-                          {item.originalPrice}
+                          {item?.fc_product?.price}
                         </p>
                       </div>
                     </div>
@@ -261,6 +303,9 @@ const ShoppingCartSection = ({setTab}) => {
                 )}
                 {cityShieldDrawerOpen && (
                   <CityShieldDrawerForCart
+                    cityShieldCurrentPrice={cityShieldDiscountAmount}
+                    cityShieldOriginalPrice={cityShieldOriginalAmount}
+                    cityShieldDiscount={cityShieldDiscountPercentage}
                     toggleDrawer={toggleDrawerCityShield}
                     open={cityShieldDrawerOpen}
                     toggleCheckbox={() => setIsChecked(false)}
@@ -273,10 +318,14 @@ const ShoppingCartSection = ({setTab}) => {
             <div className="flex items-end gap-2">
               <p className={styles.currentPrice}>
                 <Rupee />
-                250/mo
+                {cityShieldDiscountAmount}/mo
               </p>
-              <p className={styles.originalPrice}>400/mo</p>
-              <div className={styles.discount}>-40% OFF</div>
+              <p className={styles.originalPrice}>
+                {cityShieldOriginalAmount}/mo
+              </p>
+              <div className={styles.discount}>
+                {cityShieldDiscountPercentage}% OFF
+              </div>
             </div>
             <p className={styles.protect_text}>
               Protect your appliances and furniture worth ₹70,000.{" "}
@@ -347,6 +396,7 @@ const ShoppingCartSection = ({setTab}) => {
               open={couponDrawerOpen}
               applyCoupon={setIsCouponApplied}
               applyCouponCode={applyCouponCode}
+              isMonthly={isMonthly}
             />
           )}
 
@@ -419,6 +469,10 @@ const ShoppingCartSection = ({setTab}) => {
         </div>
       </div>
     </>
+  ) : (
+    <div className="flex justify-center items-center h-full">
+      <p className="text-32">Your cart is empty</p>
+    </div>
   );
 };
 

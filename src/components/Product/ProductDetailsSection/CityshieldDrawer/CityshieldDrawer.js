@@ -80,7 +80,7 @@ const CityshieldDrawer = ({
             <p className={styles.originalPrice}>
               <Rupee /> {cityShieldOriginalPrice} / mo
             </p>
-            <div className={styles.discount}>{cityShieldDiscount}%</div>
+            <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
           </div>
 
           <div className={styles.arr_wrapper}>

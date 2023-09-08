@@ -63,10 +63,12 @@ export const endPoints = {
   },
 
   addToCart: {
-    deleteItem: id => `fc-shopping-carts/delete?id=${id}&userId=113999132`,
-    fetchCartItems: userId =>
-      `fc-shopping-carts/fetchAddToCartItems?cityId=46&userId=${userId}`,
+    deleteItem: (id, userId) =>
+      `fc-shopping-carts/delete?id=${id}&userId=${userId}`,
+    fetchCartItems: (cityId, userId) =>
+      `fc-shopping-carts/fetchAddToCartItems?cityId=${cityId}&userId=${userId}`,
     updateQuantity: `fc-shopping-carts/updateQuantity`,
+    fetchCoins: userId => `fc-my-wallets/getMyWalletDetails?userId=${userId}`,
   },
 
   // categoryHappySubscriber:
