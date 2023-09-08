@@ -20,6 +20,11 @@ const RecentlyViewedProduct = ({page}) => {
   //   ?.toString()
   //   ?.replace(/"/g, "");
 
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -33,6 +38,8 @@ const RecentlyViewedProduct = ({page}) => {
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
@@ -112,29 +119,36 @@ const RecentlyViewedProduct = ({page}) => {
             {homePageReduxData?.recentProduct?.map((item, index) => {
               // console.log(item?.image, "jjjjjjjjj")
               return (
-                <div
-                  key={index.toString()}
-                  onClick={e => handleCardClick(e, item)}
-                  className={`${styles.child} ${
-                    isDumy && "pointer-events-none"
-                  }`}>
-                  <Card
-                    cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-                    hoverCardImage={
-                      item?.image?.split(",").filter(item => item).length > 1
-                        ? productImageBaseUrl + item?.image?.split(",")[1]
-                        : productImageBaseUrl + item?.image?.split(",")[0]
-                    }
-                    discount={`${Math.round(
-                      ((item?.price - item?.product_sale_price) * 100) /
-                        item?.product_sale_price,
-                    ).toFixed(0)}%`}
-                    originalPrice={item?.price}
-                    currentPrice={item?.product_sale_price}
-                    desc={item?.product_name}
-                    productID={item?.product_id}
-                  />
-                </div>
+                <>
+                  {(item?.image || item?.price) && (
+                    <div
+                      key={index.toString()}
+                      onClick={e => handleCardClick(e, item)}
+                      className={`${styles.child} ${
+                        isDumy && "pointer-events-none"
+                      }`}>
+                      <Card
+                        cardImage={
+                          productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        hoverCardImage={
+                          item?.image?.split(",").filter(item => item).length >
+                          1
+                            ? productImageBaseUrl + item?.image?.split(",")[1]
+                            : productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        discount={`${Math.round(
+                          ((item?.price - item?.product_sale_price) * 100) /
+                            item?.product_sale_price,
+                        ).toFixed(0)}%`}
+                        originalPrice={item?.price}
+                        currentPrice={item?.product_sale_price}
+                        desc={item?.product_name}
+                        productID={item?.product_id}
+                      />
+                    </div>
+                  )}
+                </>
               );
             })}
           </div>
