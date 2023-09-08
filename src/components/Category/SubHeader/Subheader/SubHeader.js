@@ -126,7 +126,7 @@ const SubHeader = ({params}) => {
         console.log(`No match found for`);
       }
     }
-  }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData?.length]);
+  }, [homePageReduxData?.cityList?.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     console.log(item, "itemsss");
