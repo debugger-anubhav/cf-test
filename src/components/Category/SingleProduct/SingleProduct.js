@@ -14,9 +14,11 @@ import {
 } from "@/store/Slices/categorySlice";
 import CategoryCard from "./CommonCard";
 import ProductSet from "../ProductSet/ProductSet";
+import SingleProductSkeleton from "./SingleProductSkeleton";
 
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
+  const [skeletonOpen, setSkeletonpen] = useState(true);
   const router = useRouter();
   const {productname} = useParams();
   const dispatch = useDispatch();
@@ -59,9 +61,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     productname === "all" || categoryPageReduxData?.isAllProduct
       ? bodyDataAll
       : bodyData;
-
-  const singleItemLength =
-    categoryPageReduxData?.categoryMetaData?.totalProduct;
 
   const {mutateAsync: getSingleProducts} = useMutation(
     "category-single-product",
@@ -132,49 +131,60 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
+  useEffect(() => {
+    setSkeletonpen(false);
+  }, [singleItemData]);
 
   return (
     <>
-      {singleItemData?.length ? (
-        <div>
-          <InfiniteScroll
-            dataLength={singleItemData?.length}
-            next={() => {
-              if (pageNo < totalPage) {
-                setPageNo(prev => prev + 1);
-              }
-            }}
-            hasMore={true} // Replace with a condition based on your data source
-            className="!w-full !h-full">
-            <div className={style.main_container}>
-              {singleItemData?.map((item, index) => {
-                return (
-                  <div key={index} onClick={e => handleCardClick(e, item)}>
-                    <CategoryCard
-                      cardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      desc={item?.product_name}
-                      originalPrice={item?.price}
-                      currentPrice={item?.sale_price}
-                      hoverCardImage={
-                        item?.image?.split(",").length > 1
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
-                      discount={`${Math.round(
-                        ((item?.price - item?.sale_price) * 100) / 1000,
-                      ).toFixed(0)}%`}
-                      productID={item?.id}
-                    />
-                  </div>
-                );
-              })}
+      {skeletonOpen ? (
+        <>
+          <SingleProductSkeleton />
+        </>
+      ) : (
+        <>
+          {singleItemData?.length ? (
+            <div>
+              <InfiniteScroll
+                dataLength={singleItemData?.length}
+                next={() => {
+                  if (pageNo < totalPage) {
+                    setPageNo(prev => prev + 1);
+                  }
+                }}
+                hasMore={true} // Replace with a condition based on your data source
+                className="!w-full !h-full">
+                <div className={style.main_container}>
+                  {singleItemData?.map((item, index) => {
+                    return (
+                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                        <CategoryCard
+                          cardImage={`${productImageBaseUrl}${
+                            item?.image?.split(",")[0]
+                          }`}
+                          desc={item?.product_name}
+                          originalPrice={item?.price}
+                          currentPrice={item?.sale_price}
+                          hoverCardImage={
+                            item?.image?.split(",").length > 1
+                              ? productImageBaseUrl + item?.image?.split(",")[1]
+                              : productImageBaseUrl + item?.image?.split(",")[0]
+                          }
+                          discount={`${Math.round(
+                            ((item?.price - item?.sale_price) * 100) / 1000,
+                          ).toFixed(0)}%`}
+                          productID={item?.id}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </InfiniteScroll>
             </div>
-          </InfiniteScroll>
-        </div>
-      ) : null}
-      {singleItemData?.length === singleItemLength ? <ProductSet /> : null}
+          ) : null}
+        </>
+      )}
+      <ProductSet />
     </>
   );
 };
