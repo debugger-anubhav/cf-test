@@ -1,5 +1,7 @@
 import {useRouter} from "next/navigation";
 import React from "react";
+import cookie from "react-cookies";
+
 export default function ProfileDropDown({
   setShowProfileDropdown,
   showProfileDropdown,
@@ -41,11 +43,15 @@ export default function ProfileDropDown({
           }`}
           key={index.toString()}
           onClick={() => {
+            console.log(index, items.length);
             if (index !== items.length - 1) {
               router.push(ele.link);
             } else {
               // remove userid
               localStorage.removeItem("tempUserID");
+              localStorage.removeItem("user_id");
+              localStorage.removeItem("ci_session");
+              cookie.remove("ci_sessions");
               setShowProfileDropdown(false);
             }
           }}>

@@ -1,0 +1,12 @@
+.main_containor {
+  @apply 3xl:px-[160px] flex flex-col macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.Skeleton_row {
+  @apply flex w-full h-full my-4;
+}
+.filter_row {
+  @apply w-full mt-4 flex justify-between;
+}
+.horizontal_line {
+  @apply my-9 mobile:my-[26px] w-full h-[1.5px] bg-[#DDDDDF];
+}

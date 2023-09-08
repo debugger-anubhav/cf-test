@@ -49,8 +49,6 @@ const Card = ({
     data,
   );
 
-  console.log(categoryPageReduxData.addRemoveWhislitItem, "2124214241");
-
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -77,7 +75,7 @@ const Card = ({
     dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
+          .then(res => console.log(res?.data?.data))
           .catch(err => console.log(err))
       : removewhislistProduct()
           .then(res => console.log(res))
