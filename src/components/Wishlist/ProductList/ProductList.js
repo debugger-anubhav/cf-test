@@ -65,44 +65,88 @@ const ProductList = ({params}) => {
             hasMore={true} // Replace with a condition based on your data source
             className="!w-full !h-full">
             <div className={style.main_container}>
-              {data?.map((item, index) => {
-                return (
-                  <div
-                    className={`${style.card_box_product} ${style.child}`}
-                    key={index.toString()}
-                    // onClick={e => handleCardClick(e, item)}
-                  >
-                    <ProductCard
-                      productWidth={productCardWidth}
-                      cardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      productImageBaseUrl
-                      desc={item?.product_name}
-                      originalPrice={item?.price}
-                      currentPrice={item?.fc_product_sale_price}
-                      isImageHeight={true}
-                      boxShadowHover={true}
-                      hoverCardImage={
-                        item?.image?.split(",").length > 1
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
-                      // hoverCardImage={
-                      //   imagesArr?.length > 1
-                      //     ? productImageBaseUrl + item?.image[1]
-                      //     : productImageBaseUrl + item?.image[0]
-                      // }
-                      discount={`${Math.round(
-                        ((item?.price - item?.fc_product_sale_price) * 100) /
-                          1000,
-                      ).toFixed(2)}%`}
-                      productID={item?.id}
-                      refreshFunction={setRefreshState}
-                    />
-                  </div>
-                );
-              })}
+              {data
+                ?.filter(i => i.pq_quantity > 0)
+                .map((item, index) => {
+                  return (
+                    <div
+                      className={`${style.card_box_product} ${style.child}`}
+                      key={index.toString()}
+                      // onClick={e => handleCardClick(e, item)}
+                    >
+                      <ProductCard
+                        productWidth={productCardWidth}
+                        cardImage={`${productImageBaseUrl}${
+                          item?.image?.split(",")[0]
+                        }`}
+                        productImageBaseUrl
+                        desc={item?.product_name}
+                        originalPrice={item?.price}
+                        soldOut={item?.pq_quantity > 0}
+                        currentPrice={item?.fc_product_sale_price}
+                        isImageHeight={true}
+                        boxShadowHover={true}
+                        hoverCardImage={
+                          item?.image?.split(",").length > 1
+                            ? productImageBaseUrl + item?.image?.split(",")[1]
+                            : productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        // hoverCardImage={
+                        //   imagesArr?.length > 1
+                        //     ? productImageBaseUrl + item?.image[1]
+                        //     : productImageBaseUrl + item?.image[0]
+                        // }
+                        discount={`${Math.round(
+                          ((item?.price - item?.fc_product_sale_price) * 100) /
+                            1000,
+                        ).toFixed(2)}%`}
+                        productID={item?.id}
+                        refreshFunction={setRefreshState}
+                      />
+                    </div>
+                  );
+                })}
+              {data
+                ?.filter(i => i.pq_quantity <= 0)
+                .map((item, index) => {
+                  return (
+                    <div
+                      className={`${style.card_box_product} ${style.child}`}
+                      key={index + 100}
+                      // onClick={e => handleCardClick(e, item)}
+                    >
+                      <ProductCard
+                        productWidth={productCardWidth}
+                        cardImage={`${productImageBaseUrl}${
+                          item?.image?.split(",")[0]
+                        }`}
+                        productImageBaseUrl
+                        desc={item?.product_name}
+                        originalPrice={item?.price}
+                        soldOut={item?.pq_quantity > 0}
+                        currentPrice={item?.fc_product_sale_price}
+                        isImageHeight={true}
+                        boxShadowHover={true}
+                        hoverCardImage={
+                          item?.image?.split(",").length > 1
+                            ? productImageBaseUrl + item?.image?.split(",")[1]
+                            : productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        // hoverCardImage={
+                        //   imagesArr?.length > 1
+                        //     ? productImageBaseUrl + item?.image[1]
+                        //     : productImageBaseUrl + item?.image[0]
+                        // }
+                        discount={`${Math.round(
+                          ((item?.price - item?.fc_product_sale_price) * 100) /
+                            1000,
+                        ).toFixed(2)}%`}
+                        productID={item?.id}
+                        refreshFunction={setRefreshState}
+                      />
+                    </div>
+                  );
+                })}
             </div>
           </InfiniteScroll>
         </div>
