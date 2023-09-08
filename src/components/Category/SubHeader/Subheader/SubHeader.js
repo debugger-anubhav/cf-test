@@ -21,7 +21,6 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
-import loadable from "@loadable/component";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {
@@ -32,14 +31,8 @@ import {
   selectedCityName,
 } from "@/store/Slices";
 import {useRouter} from "next/navigation";
-import SingleProductSkeleton from "../../SingleProduct/SingleProductSkeleton";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
-const SingleProduct = loadable(
-  () => import("../../SingleProduct/SingleProduct"),
-  {
-    fallback: <SingleProductSkeleton />,
-  },
-);
+import SingleProduct from "../../SingleProduct/SingleProduct";
 
 const SubHeader = ({params}) => {
   const dispatch = useDispatch();
@@ -52,7 +45,6 @@ const SubHeader = ({params}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const filtereData = categoryPageReduxData?.filterData;
-  const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
@@ -112,9 +104,6 @@ const SubHeader = ({params}) => {
       } else {
         console.log("No matching category found for the browser URL.");
       }
-      setTimeout(() => {
-        setIsLoading(true);
-      }, 5000);
     }
 
     if (homePageReduxData?.cityList.length) {
@@ -353,7 +342,9 @@ const SubHeader = ({params}) => {
                   className={styles.filterbox}
                   onClick={() => setFilterOpen(!filterOpen)}>
                   <div className={styles.filter_text_container}>
-                    <p className={styles.filter_text}>Filter</p>
+                    <p className={`${styles.filter_text} text-71717A`}>
+                      Filter
+                    </p>
                   </div>
                   <div>
                     <DownPopUpArrow
@@ -426,14 +417,16 @@ const SubHeader = ({params}) => {
                 Sort By
               </p>
               <div
-                className={`${styles.filter} relative`}
+                className={`${styles.filter} relative `}
                 // onClick={() => setFilterOpen(!fi)}
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setSortOpen(!filterOpen)}>
+                  onClick={() => setSortOpen(!sortOpen)}>
                   <div className={styles.filter_text_container}>
-                    <p className={styles.filter_text}>{selectedOption}</p>
+                    <p className={`${styles.filter_text} text-[#597492]`}>
+                      {selectedOption}
+                    </p>
                   </div>
                   <div>
                     <DownPopUpArrow
@@ -552,8 +545,7 @@ const SubHeader = ({params}) => {
         </div>
       )}
 
-      {isLoading && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
-      {/* <p className="bg-red-400">gfhhmn</p> */}
+      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
     </>
   );
 };
