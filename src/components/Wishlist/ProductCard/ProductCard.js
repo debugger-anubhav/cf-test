@@ -57,8 +57,6 @@ const ProductCard = ({
           className={`${styles.thumbnail} ${isImageHeight && "min-h-[240px]"}
           `}
         />
-
-        {/* ----------- */}
         {showincludedItem && (
           <div className={styles.item_included_container}>
             <p
@@ -132,11 +130,9 @@ const ProductCard = ({
                 onClick={() => {
                   setDeleteIconClick(false);
                 }}>
-                <Close
-                  size={25}
-                  color={"#222222"}
-                  className={"cursor-pointer"}
-                />
+                <div className={`${styles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
               </button>
             </Box>
             <Box>
