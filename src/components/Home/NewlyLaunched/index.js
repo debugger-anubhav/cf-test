@@ -70,7 +70,7 @@ const NewlyLaunched = () => {
               />
             </div>
             <div className={styles.price_tag}>
-              <p>{`₹${ele?.price} / month`}</p>
+              <p>{`₹${ele?.sale_price} / month`}</p>
               {console.log(ele, "elelelelelelelele")}
             </div>
           </div>
