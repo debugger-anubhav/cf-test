@@ -123,7 +123,7 @@ const CategoryCard = ({
         </div>
         {/* {originalPrice !== currentPrice && ( */}
         {currentPrice < originalPrice && (
-          <div className={styles.discount}>{discount}</div>
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
     </div>

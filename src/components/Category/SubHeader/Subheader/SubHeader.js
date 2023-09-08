@@ -399,7 +399,7 @@ const SubHeader = ({params}) => {
                 </div>
               </div>
               {filterOpen && (
-                <div className=" absolute top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+                <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
                   <div className={styles.mapped_filter}>
                     {filtereData?.map((ele, index) => {
                       return (
@@ -483,7 +483,7 @@ const SubHeader = ({params}) => {
                 </div>
               </div>
               {sortOpen && (
-                <div className="gap-6 absolute top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+                <div className="gap-6 absolute z-[111] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
                   {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
                   {sortByText?.map((ele, index) => {
                     return (

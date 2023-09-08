@@ -66,8 +66,7 @@ const ProductList = ({params}) => {
             <div className={style.main_container}>
               {data
                 ?.filter(i => i.pq_quantity > 0)
-                .map((item, index) => {
-                  console.log(item?.image?.split(","));
+                ?.map((item, index) => {
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}
@@ -99,7 +98,7 @@ const ProductList = ({params}) => {
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
                             1000,
-                        ).toFixed(2)}%`}
+                        ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
                       />
@@ -108,7 +107,7 @@ const ProductList = ({params}) => {
                 })}
               {data
                 ?.filter(i => i.pq_quantity <= 0)
-                .map((item, index) => {
+                ?.map((item, index) => {
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}

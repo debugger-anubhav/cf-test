@@ -5,8 +5,12 @@
   @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between lg:pt-10  py-5;
 }
 .logo_text {
-  @apply font-semibold md:text-32 xs:text-[28px] mobile:text-[24px] text-[18px] xs:mr-6 mobile:mr-4 mr-2 mobile:ml-4 ml-2 md:ml-0 cursor-pointer;
+  @apply font-semibold md:text-[25px] xs:text-[28px] mobile:text-[24px] text-[18px] xs:mr-6 mobile:mr-4 mr-2 mobile:ml-4 ml-2 md:ml-0 cursor-pointer;
 }
+.logo_text_main_header {
+  @apply font-semibold md:text-[35px] xs:text-[28px] mobile:text-[24px] text-[18px] xs:mr-6 mobile:mr-4 mr-2 mobile:ml-4 ml-2 md:ml-0 cursor-pointer;
+}
+
 .open_searchbar_main {
   @apply absolute md:right-[19%] lg:right-[21%] xl:right-[19%];
 }

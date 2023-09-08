@@ -2,13 +2,12 @@
 
 import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
-import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
+import Card from "@/components/Common/HomePageCards";
 
 const RentNowBanner = ({params}) => {
-  const router = useRouter();
   const [rentNowBanner, setRentNowBanner] = React.useState(null);
   const [isDumy, setIsDumy] = React.useState(false);
 
@@ -101,12 +100,17 @@ const RentNowBanner = ({params}) => {
               isDumy && "pointer-events-none"
             }`}
             key={index.toString()}>
-            <img
+            <Card
+              cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
+              isRentNow={true}
+              url={item?.url}
+            />
+            {/* <img
               src={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
               alt={item?.image}
               className={styles.banner_img}
               onClick={() => router.push(item?.url)}
-            />
+            /> */}
           </div>
         ))}
       </div>
