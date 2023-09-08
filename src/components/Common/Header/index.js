@@ -6,12 +6,7 @@ import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-import {
-  addCityList,
-  selectedCityId,
-  addSidebarMenuLists,
-  getCartItems,
-} from "@/store/Slices";
+import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
@@ -28,9 +23,8 @@ import ProfileDropDown from "./ProfileDropDown";
 const HEADER_HEIGHT = 48;
 
 const Header = () => {
+  const iconRef = useRef(null);
   const dispatch = useDispatch();
-  const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const wishListCount = categoryPageReduxData?.savedProducts?.length;
   const router = useRouter();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
@@ -48,8 +42,6 @@ const Header = () => {
   const [topOffset, settopOffset] = useState(0);
   const [arr, setArr] = React.useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
-
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   useEffect(() => {
     getCityList()
@@ -69,31 +61,22 @@ const Header = () => {
     });
   }, []);
 
-  const cityId = getLocalStorage("cityId");
-
-  const cartItemsLength = useSelector(
-    state => state.cartPageData.cartItems.length,
-  );
-
-  const userId = getLocalStorage("user_id");
-  const tempUserId = getLocalStorage("tempUserID");
-  const userIdToUse = userId || tempUserId;
-
-  // added for cart icons
-  const fetchCartItems = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
-      .then(res => {
-        console.log(res, "res in fetch itemms");
-        setArr(res?.data?.data);
-        dispatch(getCartItems(res?.data?.data));
-      })
-      .catch(err => console.log(err));
-  };
-
   useEffect(() => {
-    fetchCartItems();
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
+  const toggleDropdown = () => {
+    setShowProfileDropdown(!showProfileDropdown);
+  };
 
   return (
     <>
@@ -102,7 +85,7 @@ const Header = () => {
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
             <p
-              className={styles.logo_text}
+              className={styles.logo_text_main_header}
               onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
@@ -152,51 +135,39 @@ const Header = () => {
               </>
             )}
             <div className="relative flex">
-              <span className={styles.header_favorite_container}>
-                <Image
-                  src={Icons.Favorite}
-                  alt="favorite"
-                  className={styles.header_favorite}
-                  onClick={() => router.push("/wishlist")}
-                />
-                {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.header_favorite_count}>
-                    {wishListCount}
-                  </span>
-                ) : (
-                  <></>
-                )}
-              </span>
+              <Image
+                src={Icons.Favorite}
+                alt="favorite"
+                className={styles.header_favorite}
+                onClick={() => router.push("/wishlist")}
+              />
               {/* <Link href={`/cart`}> */}
-
-              <div className="relative">
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
-                />
-                {cartItemsLength > 0 && (
-                  <div className={styles.cart_badge}>{cartItemsLength}</div>
-                )}
-              </div>
+              <Image
+                src={Icons.shoppingCard}
+                alt="shopping-card-icon"
+                className={styles.header_shopping_card}
+                onClick={() => router.push("https://cityfurnish.com/cart")}
+              />
               {/* </Link> */}
               <Image
                 src={Icons.Profile}
                 alt="profile-icon"
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  if (getLocalStorage("tempUserID") === null) {
+                  if (getLocalStorage("user_id") === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
-                    setShowProfileDropdown(!showProfileDropdown);
+                    toggleDropdown();
+                    // setShowProfileDropdown(!showProfileDropdown);
                   }
                 }}
+                ref={iconRef}
               />
               {getLocalStorage("tempUserID") !== null &&
                 showProfileDropdown && (
                   <ProfileDropDown
                     setShowProfileDropdown={setShowProfileDropdown}
+                    showProfileDropdown={showProfileDropdown}
                   />
                 )}
             </div>
@@ -321,7 +292,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             className={styles.header_search_icon}
           />
           <input
-            placeholder="pppSearch for Furniture, Appliances, etc"
+            placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
@@ -412,11 +383,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
 
             <div className="mt-6">
               <p className={styles.search_head}>Categories</p>
-              <div className={styles.categories_wrapper}>
+              <div className={`${styles.categories_wrapper}`}>
                 {homePageReduxData?.category?.map((item, index) => (
                   <div
                     key={index.toString()}
-                    className={styles.card_wrapper}
+                    className={styles.category_card_in_searchbox}
                     onClick={() => {
                       router.push(
                         // `/next/${homePageReduxData?.cityName.toLowerCase()}/${
