@@ -33,36 +33,33 @@ import {
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cartPageData.cartItems);
-  console.log(cartItems, "cart itemsss");
+
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
     setArr(cartItems);
   }, [cartItems]);
-  console.log(arr, "arrrrr");
+
   const count = cartItems.length;
 
   const userId = getLocalStorage("userID");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
-  console.log(userIdToUse, "user id to use");
+  // console.log(userIdToUse, "user id to use");
 
   const totalAmount = cartItems.reduce((accumulator, item) => {
     return accumulator + item?.fc_product?.fc_product_sale_price?.sale_price;
   }, 0);
-  console.log(totalAmount, "bbbbbbb");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
-  console.log(cityShieldOriginalAmount, "totalAmount");
-  console.log(cityShieldDiscountAmount, "totaldiscountedprice");
 
   const cityShieldDiscountPercentage =
     cityShieldOriginalAmount > 0
       ? Math.round(
           ((cityShieldOriginalAmount - cityShieldDiscountAmount) * 100) /
             cityShieldOriginalAmount,
-        ).toFixed(2)
+        ).toFixed(0)
       : 0;
 
   // const fetchCartItems = () => {
@@ -110,7 +107,6 @@ const ShoppingCartSection = ({setTab}) => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
       .then(res => {
-        console.log(res, "res in fetch coins");
         if (res?.data?.data?.length > 0)
           setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
       })
@@ -151,7 +147,6 @@ const ShoppingCartSection = ({setTab}) => {
   };
 
   const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
-    console.log("inside", newQuantity);
     if (newQuantity < 1) {
       setProductId(productid);
       setItemId(itemid);
@@ -179,9 +174,24 @@ const ShoppingCartSection = ({setTab}) => {
   };
 
   const deleteItem = id => {
-    console.log(id, "in delet ");
     dispatch(deleteItems(id));
     // setArr(arr.filter(t => t.fc_product.id !== id));
+  };
+
+  const getBillDetails = () => {
+    const headers = {
+      userId: userIdToUse,
+      cityshield: isChecked,
+      cityId: 46,
+      coins: isCoinApplied ? availCoin : 0,
+      couponsCode: code,
+      paymentMode: isMonthly ? 0 : 1,
+    };
+
+    axios
+      .post(baseURL + endPoints.addToCart.fetchBill, headers)
+      .then(res => console.log(res, "res in bill"))
+      .catch(err => console.log(err, "error in fetch bill"));
   };
 
   return count > 0 ? (
@@ -324,7 +334,7 @@ const ShoppingCartSection = ({setTab}) => {
                 {cityShieldOriginalAmount}/mo
               </p>
               <div className={styles.discount}>
-                {cityShieldDiscountPercentage}% OFF
+                -{cityShieldDiscountPercentage}% OFF
               </div>
             </div>
             <p className={styles.protect_text}>
@@ -441,7 +451,10 @@ const ShoppingCartSection = ({setTab}) => {
 
           <div
             className={styles.cart_breakup}
-            onClick={() => setBreakupDrawer(true)}>
+            onClick={() => {
+              getBillDetails();
+              setBreakupDrawer(true);
+            }}>
             <div>
               <p className={styles.total_text}>Total:</p>
               <div className={styles.breakup_wrapper}>

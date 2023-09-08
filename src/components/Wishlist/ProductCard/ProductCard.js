@@ -110,7 +110,7 @@ const ProductCard = ({
           </h3>
         </div>
         {originalPrice !== currentPrice && (
-          <div className={styles.discount}>{discount}</div>
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
       <div>

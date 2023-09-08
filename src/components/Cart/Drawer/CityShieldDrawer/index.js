@@ -90,7 +90,7 @@ const CityShieldDrawerForCart = ({
           <p className={styles.originalPrice}>
             <FaRupeeSign /> {cityShieldOriginalPrice} / mo
           </p>
-          <div className={styles.discount}>{cityShieldDiscount}%</div>
+          <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
         </div>
 
         <div className={styles.arr_wrapper}>
