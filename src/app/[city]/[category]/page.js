@@ -104,7 +104,7 @@ export default function Page() {
 
   useEffect(() => {
     const data = {
-      userId: "",
+      userId: getLocalStorage("user_id") ?? "",
       tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
     };
     axios
@@ -115,6 +115,8 @@ export default function Page() {
             "tempUserID",
             JSON.parse(res?.data?.data?.tempUserId),
           );
+          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
+          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
         }
       })
       .catch(err => console.log(err));

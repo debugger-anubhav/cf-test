@@ -26,7 +26,7 @@
   @apply mt-1 flex justify-between items-center font-Poppins;
 }
 .originalPrice {
-  @apply text-14 xl:text-18 tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+  @apply text-14 xl:text-18 font-normal tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
 }
 .currentPrice {
   @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
