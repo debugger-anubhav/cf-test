@@ -21,7 +21,7 @@
   @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;
 }
 .copy_div {
-  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center;
+  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px];
 }
 .line {
   @apply right-32 3xl:right-40 absolute top-0 bottom-0;
@@ -34,7 +34,7 @@
   @apply -left-2;
 }
 .right {
-  @apply right-0;
+  @apply right-[-7px];
 }
 .Skeleton_text {
   @apply text-18 w-1/2;
