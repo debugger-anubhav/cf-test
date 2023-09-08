@@ -49,7 +49,7 @@
 }
 
 .header_profile_icon {
-  @apply lg:flex hidden cursor-pointer;
+  @apply lg:flex hidden cursor-pointer relative;
 }
 .mobile_search_row {
   @apply flex md:hidden justify-center items-center;
