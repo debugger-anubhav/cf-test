@@ -6,6 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
+import {useRouter} from "next/navigation";
 
 const Card = ({
   desc,
@@ -20,11 +21,13 @@ const Card = ({
   isHover = true,
   productWidth,
   productID,
+  isRentNow,
+  url,
 }) => {
   const [inWishList, setInWishList] = useState(false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-
+  const router = useRouter();
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
@@ -106,14 +109,25 @@ const Card = ({
       } ${productWidth} 
       `}
       onMouseOver={() => {
-        isHover && setHoverCard(true);
+        if (!isRentNow) {
+          isHover && setHoverCard(true);
+        }
       }}
-      onMouseOut={() => setHoverCard(false)}>
+      onMouseOut={() => {
+        if (!isRentNow) {
+          setHoverCard(false);
+        }
+      }}>
       <div className="relative">
         <img
-          src={hoverCard ? hoverCardImage : cardImage}
+          src={isRentNow ? cardImage : hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
-          className={`${styles.thumbnail}
+          onClick={() => {
+            if (isRentNow) {
+              router.push(url);
+            }
+          }}
+          className={`${isRentNow} ? ${styles?.banner_img} : ${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }
           `}
@@ -134,53 +148,57 @@ const Card = ({
           </div>
         )}
       </div>
-      <div className={styles.desc_div}>
-        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
-        </h3>
-        <div
-          id={productID}
-          onClick={e => {
-            e.preventDefault();
-            handleWhislistCard(e);
-          }}>
-          <Heart
-            size={25}
-            color={inWishList ? "#D96060" : "#C0C0C6"}
-            // onClick={e => {
-            //   e.preventDefault();
-            //   setInWishList(!inWishList);
-            // }}
-            // onClick={e => {
-            //   e.preventDefault();
-            //   handleWhislistCard(e);
-            // }}
-            className={"cursor-pointer"}
-          />
-        </div>
-      </div>
-      <div className={styles.price_div}>
-        <div className={styles.card_price_wrap}>
-          <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
-            {`${currentPrice} /mo`}
+      {!isRentNow && (
+        <div className={styles.desc_div}>
+          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+            {desc}
           </h3>
-          {
-            // currentPrice >= originalPrice ? (
-            originalPrice >= currentPrice ? (
-              <h3 className={`${styles.originalPrice} flex`}>
-                <Rupee />
-                {`${originalPrice} /mo`}
-              </h3>
-            ) : null
-          }
+          <div
+            id={productID}
+            onClick={e => {
+              e.preventDefault();
+              handleWhislistCard(e);
+            }}>
+            <Heart
+              size={25}
+              color={inWishList ? "#D96060" : "#C0C0C6"}
+              // onClick={e => {
+              //   e.preventDefault();
+              //   setInWishList(!inWishList);
+              // }}
+              // onClick={e => {
+              //   e.preventDefault();
+              //   handleWhislistCard(e);
+              // }}
+              className={"cursor-pointer"}
+            />
+          </div>
         </div>
+      )}
+      {!isRentNow && (
+        <div className={styles.price_div}>
+          <div className={styles.card_price_wrap}>
+            <h3 className={`${styles.currentPrice} flex`}>
+              <Rupee />
+              {`${currentPrice} /mo`}
+            </h3>
+            {
+              // currentPrice >= originalPrice ? (
+              originalPrice >= currentPrice ? (
+                <h3 className={`${styles.originalPrice} flex`}>
+                  <Rupee />
+                  {`${originalPrice} /mo`}
+                </h3>
+              ) : null
+            }
+          </div>
 
-        {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice <= originalPrice && (
-          <div className={styles.discount}>{discount}</div>
-        )}
-      </div>
+          {/* {originalPrice !== currentPrice && ( */}
+          {currentPrice <= originalPrice && (
+            <div className={styles.discount}>{`-${discount} OFF`}</div>
+          )}
+        </div>
+      )}
     </div>
   );
 };
