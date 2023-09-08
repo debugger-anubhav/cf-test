@@ -67,8 +67,9 @@
   @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
 }
 .close_icon {
-  @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 right-6;
+  @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;
 }
 .close_icon_btn {
   @apply flex justify-start flex-col  pl-8;
 }
+

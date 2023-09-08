@@ -110,3 +110,19 @@
 .search_result_text {
   @apply text-14 text-45454A font-medium;
 }
+.header_favorite_container {
+  @apply relative;
+}
+.header_favorite_count {
+  position: absolute;
+  top: -6px;
+  left: 16px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #3e688e;
+  font-size: 12px;
+  color: #ffffff;
+  line-height: 20px;
+  text-align: center;
+}
