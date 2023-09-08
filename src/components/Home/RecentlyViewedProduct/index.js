@@ -15,6 +15,11 @@ const RecentlyViewedProduct = ({page}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [isDumy, setIsDumy] = React.useState(false);
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -28,12 +33,15 @@ const RecentlyViewedProduct = ({page}) => {
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
   useEffect(() => {
     recentlyViewed()
       .then(res => {
+        // console.log("reccent", res?.data?.data)
         dispatch(addRecentlyViewedProduct(res?.data?.data));
       })
       .catch(err => console.log(err));
@@ -90,29 +98,26 @@ const RecentlyViewedProduct = ({page}) => {
 
   return (
     <>
-      <div className={styles.main_container}>
-        {homePageReduxData?.recentProduct?.length ? (
+      {homePageReduxData?.recentProduct?.length ? (
+        <div className={styles.main_container}>
           <h2
             className={`${
               page === "product" && "xl:!text-24 xl:!tracking-0.48"
             } ${styles.heading}`}>
             Recently Viewed products
           </h2>
-        ) : null}
-        {/* {homePageReduxData?.recentProduct?.length ? ( */}
-        <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
-          {homePageReduxData?.recentProduct?.map((item, index) => {
-            // console.log(item?.image, "jjjjjjjjj")
-            return (
-              <div
-                key={index.toString()}
-                onClick={e => handleCardClick(e, item)}
-                className={`${styles.child} ${
-                  isDumy && "pointer-events-none"
-                }`}>
-                {(item?.image === null || item?.product_sale_price === null) &&
-                (item?.product_sale_price === null ||
-                  item?.product_name === null) ? null : (
+
+          {/* {homePageReduxData?.recentProduct?.length ? ( */}
+          <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
+            {homePageReduxData?.recentProduct?.map((item, index) => {
+              // console.log(item?.image, "jjjjjjjjj")
+              return (
+                <div
+                  key={index.toString()}
+                  onClick={e => handleCardClick(e, item)}
+                  className={`${styles.child} ${
+                    isDumy && "pointer-events-none"
+                  }`}>
                   <Card
                     cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                     hoverCardImage={
@@ -129,12 +134,13 @@ const RecentlyViewedProduct = ({page}) => {
                     desc={item?.product_name}
                     productID={item?.product_id}
                   />
-                )}
-              </div>
-            );
-          })}
+                </div>
+              );
+            })}
+          </div>
+          {/* // ) : null} */}
         </div>
-      </div>
+      ) : null}
     </>
   );
 };

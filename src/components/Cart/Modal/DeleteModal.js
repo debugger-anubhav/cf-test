@@ -7,7 +7,14 @@ import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
 
-const DeleteModal = ({isModalOpen, closeModal, productId}) => {
+const DeleteModal = ({
+  isModalOpen,
+  closeModal,
+  productId,
+  userId,
+  updateArr,
+  id,
+}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
@@ -27,10 +34,27 @@ const DeleteModal = ({isModalOpen, closeModal, productId}) => {
 
   const handleDeleteItem = () => {
     console.log("ijdnjwej");
+    updateArr(productId);
     axios
-      .get(baseURL + endPoints.addToCart.deleteItem(productId))
+      .get(baseURL + endPoints.addToCart.deleteItem(id, userId))
       .then(res => console.log(res, "res in delete items"))
       .catch(err => console.log(err, "error"));
+
+    closeModal();
+  };
+
+  const handleAddToWishlist = () => {
+    updateArr(productId);
+    const headers = {
+      userId,
+      productId,
+    };
+    axios
+      .post(baseURL + endPoints.addWishListProduct, headers)
+      .then(res => console.log(res?.data?.data))
+      .catch(err => console.log(err));
+
+    closeModal();
   };
 
   return (
@@ -49,7 +73,7 @@ const DeleteModal = ({isModalOpen, closeModal, productId}) => {
           <div className={styles.btn_wrapper}>
             <button
               className={`${styles.white_btn} ${styles.btn}`}
-              onClick={() => console.log("")}>
+              onClick={handleAddToWishlist}>
               Save to favorites
             </button>
             <div>
@@ -74,7 +98,9 @@ const DeleteModal = ({isModalOpen, closeModal, productId}) => {
           }}>
           <h1 className={styles.head}>Delete item? </h1>
           <div className={styles.btn_wrapper}>
-            <button className={`${styles.white_btn} ${styles.btn}`}>
+            <button
+              onClick={handleAddToWishlist}
+              className={`${styles.white_btn} ${styles.btn}`}>
               Save to favorites
             </button>
             <button

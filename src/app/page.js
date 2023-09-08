@@ -106,7 +106,7 @@ export default function Home() {
   }
 
   const data = {
-    userId: "",
+    userId: getLocalStorage("user_id") ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
   };
@@ -120,6 +120,8 @@ export default function Home() {
             "tempUserID",
             JSON.parse(res?.data?.data?.tempUserId),
           );
+          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
+          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
         }
       })
       .catch(err => console.log(err));

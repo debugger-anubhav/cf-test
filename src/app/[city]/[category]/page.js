@@ -24,10 +24,14 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import SubHeader from "@/components/Category/SubHeader/Subheader/SubHeader";
-// const SubHeader = loadable(
-//   () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
-// );
+import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
+
+const SubHeader = loadable(
+  () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
+  {
+    fallback: <SubHeaderSkeleton />,
+  },
+);
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
@@ -104,7 +108,7 @@ export default function Page() {
 
   useEffect(() => {
     const data = {
-      userId: "",
+      userId: getLocalStorage("user_id") ?? "",
       tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
     };
     axios
@@ -115,6 +119,8 @@ export default function Page() {
             "tempUserID",
             JSON.parse(res?.data?.data?.tempUserId),
           );
+          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
+          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
         }
       })
       .catch(err => console.log(err));

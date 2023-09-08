@@ -1,5 +1,5 @@
 import styles from "./style.module.css";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {
   categoryIconsUrl,
   getLocalStorage,
@@ -35,6 +35,8 @@ import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
 
 const SubHeader = ({params}) => {
+  const dropDownRefFilter = useRef(null);
+  const dropDownRefSort = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -115,7 +117,7 @@ const SubHeader = ({params}) => {
         console.log(`No match found for`);
       }
     }
-  }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData?.length]);
+  }, [homePageReduxData?.cityList?.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     console.log(item, "itemsss");
@@ -242,6 +244,39 @@ const SubHeader = ({params}) => {
     }
   }, [getAllAndSubCategoryData]);
 
+  // dropdown clickable outside ref
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefFilter.current &&
+        !dropDownRefFilter.current.contains(event.target)
+      ) {
+        setFilterOpen(false);
+      }
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
+        setSortOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  const toggleDropdownSort = () => {
+    setSortOpen(!sortOpen);
+  };
+
+  const toggleDropDownFilter = () => {
+    console.log("hiii");
+    setFilterOpen(!filterOpen);
+  };
+
   return (
     <>
       {skeletonOpen ? (
@@ -336,11 +371,17 @@ const SubHeader = ({params}) => {
             <div className="relative">
               <div
                 className={`${styles.filter} relative`}
+
                 // onClick={() => setFilterOpen(!fi)}
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setFilterOpen(!filterOpen)}>
+                  onClick={() => {
+                    // setFilterOpen(!filterOpen)
+                    toggleDropDownFilter();
+                    // toggleDropdownSort();
+                  }}
+                  ref={dropDownRefFilter}>
                   <div className={styles.filter_text_container}>
                     <p className={`${styles.filter_text} text-71717A`}>
                       Filter
@@ -358,7 +399,7 @@ const SubHeader = ({params}) => {
                 </div>
               </div>
               {filterOpen && (
-                <div className=" absolute top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+                <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
                   <div className={styles.mapped_filter}>
                     {filtereData?.map((ele, index) => {
                       return (
@@ -422,9 +463,13 @@ const SubHeader = ({params}) => {
               >
                 <div
                   className={styles.filterbox}
-                  onClick={() => setSortOpen(!sortOpen)}>
+                  onClick={() => {
+                    // setSortOpen(!filterOpen);
+                    toggleDropdownSort();
+                  }}
+                  ref={dropDownRefSort}>
                   <div className={styles.filter_text_container}>
-                    <p className={`${styles.filter_text} text-[#597492]`}>
+                    <p className={`${styles.filter_text} !text-[#597492]`}>
                       {selectedOption}
                     </p>
                   </div>
@@ -438,7 +483,7 @@ const SubHeader = ({params}) => {
                 </div>
               </div>
               {sortOpen && (
-                <div className="gap-6 absolute top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+                <div className="gap-6 absolute z-[111] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
                   {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
                   {sortByText?.map((ele, index) => {
                     return (
