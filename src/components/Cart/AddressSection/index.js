@@ -14,8 +14,8 @@ import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
-import india from "../india.svg";
 import {useSelector} from "react-redux";
+import {cityUrl} from "../../../../appConfig";
 
 const AddressSection = ({setTab}) => {
   const [whatsappNotification, setWhatsappNotification] = useState(true);
@@ -104,7 +104,7 @@ const AddressSection = ({setTab}) => {
           <Formik
             initialValues={{
               fullName: "",
-              contactNumber: "",
+              contactNumber: "9929839983",
               address: "",
               landmark: "",
               postalCode: "",
@@ -141,21 +141,25 @@ const AddressSection = ({setTab}) => {
                     <p className={styles.form_label}>Contact number</p>
                     <div
                       className={`flex gap-2 items-center ${styles.form_input}`}>
-                      <img src={india} className={styles.flag} />
+                      <img
+                        src={`${cityUrl + "india-icon.svg"}`}
+                        className={styles.flag}
+                      />
                       <Field
                         type="text"
+                        readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
                         className={styles.contact_input}
                       />
                     </div>
-                    <ErrorMessage name="contactNumber">
+                    {/* <ErrorMessage name="contactNumber">
                       {msg =>
                         formik.touched.contactNumber && (
                           <p className={styles.error}>{msg} </p>
                         )
                       }
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </div>
 
                   <div className={styles.form_field}>
@@ -207,6 +211,7 @@ const AddressSection = ({setTab}) => {
                     <div>
                       <p className={styles.form_label}>City</p>
                       <Field
+                        readOnly
                         type="text"
                         name="city"
                         placeholder="Enter city"

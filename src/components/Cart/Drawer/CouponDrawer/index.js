@@ -120,13 +120,13 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
                 <div className={`${styles.ellipse} ${styles.left}`}></div>
                 <div className={`${styles.ellipse} ${styles.right}`}></div>
                 <div className="xl:w-full">
-                  <p className={styles.desc}>{`${item?.price_text} ${
+                  <p className={` ${styles.desc}`}>{`${item?.price_text} ${
                     item?.max_discount !== "0"
                       ? `(up to Rs ${item?.max_discount})*`
                       : ""
                   } `}</p>
                   {item?.price_below_text && (
-                    <p className={styles.desc}>
+                    <p className={` ${styles.desc}`}>
                       {item?.price_below_text.split(" ").slice(0, 7).join(" ")}
                     </p>
                   )}

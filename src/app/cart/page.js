@@ -34,7 +34,7 @@ const CartPage = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
-        <div>
+        <div className="large_layout">
           <AnnouncementBar />
           <Header />
           <MenuList />
