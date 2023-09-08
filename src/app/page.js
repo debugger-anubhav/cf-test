@@ -115,7 +115,6 @@ export default function Home() {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
-        console.log(res);
         if (typeof window !== "undefined") {
           setLocalStorage(
             "tempUserID",

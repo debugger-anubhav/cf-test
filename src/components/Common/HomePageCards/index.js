@@ -75,7 +75,7 @@ const Card = ({
     dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? getwhislistProduct()
-          .then(res => console.log(res?.data?.data))
+          .then(res => console.log(res?.data?.dat))
           .catch(err => console.log(err))
       : removewhislistProduct()
           .then(res => console.log(res))
