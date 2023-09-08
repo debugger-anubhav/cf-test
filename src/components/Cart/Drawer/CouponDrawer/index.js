@@ -50,7 +50,7 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode}) => {
         <div className="hidden">
           <OffersAndCoupons />
         </div>
-        <h1 className={styles.header}>Offers & coupons</h1>
+        <h2 className={styles.header}>Offers & coupons</h2>
         <div className={styles.input_div}>
           <input
             className={styles.input}
