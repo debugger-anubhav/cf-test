@@ -43,6 +43,20 @@ const DeleteModal = ({
     closeModal();
   };
 
+  const handleAddToWishlist = () => {
+    updateArr(productId);
+    const headers = {
+      userId,
+      productId,
+    };
+    axios
+      .post(baseURL + endPoints.addWishListProduct, headers)
+      .then(res => console.log(res?.data?.data))
+      .catch(err => console.log(err));
+
+    closeModal();
+  };
+
   return (
     <div>
       {isBottomShareDrawer ? (
@@ -59,7 +73,7 @@ const DeleteModal = ({
           <div className={styles.btn_wrapper}>
             <button
               className={`${styles.white_btn} ${styles.btn}`}
-              onClick={() => console.log("")}>
+              onClick={handleAddToWishlist}>
               Save to favorites
             </button>
             <div>
@@ -84,7 +98,9 @@ const DeleteModal = ({
           }}>
           <h1 className={styles.head}>Delete item? </h1>
           <div className={styles.btn_wrapper}>
-            <button className={`${styles.white_btn} ${styles.btn}`}>
+            <button
+              onClick={handleAddToWishlist}
+              className={`${styles.white_btn} ${styles.btn}`}>
               Save to favorites
             </button>
             <button

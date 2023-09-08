@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
+import React, {useState, useEffect} from "react";
 import {
   categoryIconsUrl,
   getLocalStorage,
   setLocalStorage,
+  sortByText,
 } from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
-import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
+// import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
 import {useDispatch, useSelector} from "react-redux";
-import {ForwardArrow} from "@/assets/icon";
+import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBar";
 import {
   addAllProduct,
@@ -17,9 +18,10 @@ import {
   addOutStockProduct,
   addSetProduct,
   addSingleProduct,
+  addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
-import SingleProduct from "../../SingleProduct/SingleProduct";
+import loadable from "@loadable/component";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {
@@ -30,9 +32,15 @@ import {
   selectedCityName,
 } from "@/store/Slices";
 import {useRouter} from "next/navigation";
+import SingleProductSkeleton from "../../SingleProduct/SingleProductSkeleton";
+const SingleProduct = loadable(
+  () => import("../../SingleProduct/SingleProduct"),
+  {
+    fallback: <SingleProductSkeleton />,
+  },
+);
 
 const SubHeader = ({params}) => {
-  // console.log(params, "a-------")
   const dispatch = useDispatch();
   const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
@@ -42,9 +50,7 @@ const SubHeader = ({params}) => {
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-
-  const [emptyFilterItem, setEmptyFilterItem] = useState(false);
-  const [filterSaved, setfiltereSaved] = useState(false);
+  const filtereData = categoryPageReduxData?.filterData;
   const [isLoading, setIsLoading] = useState(false);
   const [category, setCategory] = useState("");
   const [subCategory, setSubCategory] = useState("");
@@ -52,8 +58,12 @@ const SubHeader = ({params}) => {
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
   const [title, setTitle] = useState("");
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [sortOpen, setSortOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("Default");
 
   console.log(subCategory, cityId);
+
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
       for (const subCategory of category.sub_categories) {
@@ -121,9 +131,14 @@ const SubHeader = ({params}) => {
   }, [homePageReduxData?.cityList.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
+    console.log(item, "itemsss");
+    if (item?.cat_name === "All") {
+      dispatch(addAllProduct(true));
+    } else {
+      dispatch(addAllProduct(false));
+    }
     setPageNo(1);
     dispatch(addFilteredItem([]));
-    dispatch(addAllProduct(false));
     let previousSubCategory;
     if (typeof window !== "undefined") {
       getLocalStorage("subCategory");
@@ -169,7 +184,9 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${homePageReduxData.subcategoryId}`,
+    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${
+      categoryPageReduxData?.isAllProduct ? "" : homePageReduxData.subcategoryId
+    }`,
   );
 
   useEffect(() => {
@@ -189,6 +206,50 @@ const SubHeader = ({params}) => {
     if (item?.fc_city_category_data?.cat_heading !== title) {
       setTitle(item?.fc_city_category_data?.cat_heading || "");
     }
+  };
+  const defaultKey = ["subproducts", "ASC"];
+  const newSortKey = ["created", "DESC"];
+  const highToLowKey = ["sale_price", "DESC"];
+  const lowToHighKey = ["sale_price", "ASC"];
+  const handleFilterDivClick = (e, filterTag) => {
+    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    const filterIndex = updatedFilteredList.indexOf(filterTag);
+
+    if (filterIndex === -1) {
+      // If the filter is not in the list, add it
+      updatedFilteredList.push(filterTag);
+    } else {
+      // If the filter is already in the list, remove it
+      updatedFilteredList.splice(filterIndex, 1);
+    }
+    dispatch(addFilteredItem(updatedFilteredList));
+  };
+  const handleApply = () => {
+    setPageNo(1);
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    dispatch(isFilterApplied(true));
+    setFilterListed(true);
+    setFilterOpen(false);
+  };
+  const handleSort = (item, index) => {
+    setPageNo(1);
+    setSelectedOption(item);
+    if (item === "New") {
+      dispatch(addSortKey(newSortKey));
+    } else if (item === "Price Low to High") {
+      dispatch(addSortKey(lowToHighKey));
+    } else if (item === "Price Hight to low") {
+      dispatch(addSortKey([...highToLowKey]));
+    } else {
+      dispatch(addSortKey(defaultKey));
+    }
+
+    dispatch(addSingleProduct([]));
+    dispatch(addSetProduct([]));
+    dispatch(addOutStockProduct([]));
+    setSortOpen(false);
   };
 
   return (
@@ -230,7 +291,6 @@ const SubHeader = ({params}) => {
                 const selectedProduct =
                   getLocalStorage("subCategory")?.replace(/"/g, "") ===
                   subItem?.cat_name;
-                // console.log(subCategory, subItem?.cat_name, "tesstsst")
                 return (
                   <div
                     className={
@@ -269,7 +329,7 @@ const SubHeader = ({params}) => {
 
         <div className={styles.filter_sort_section}>
           {/* <div> */}
-          <CategoryPopover
+          {/* <CategoryPopover
             btnName={"click"}
             filterName={"Filter"}
             emptyFilterItem={emptyFilterItem}
@@ -279,9 +339,67 @@ const SubHeader = ({params}) => {
             isApplyFilter={false}
             setPageNo={setPageNo}
             setFilterListed={setFilterListed}
-          />
+          /> */}
+          <div className="relative">
+            <div
+              className={`${styles.filter} relative`}
+              // onClick={() => setFilterOpen(!fi)}
+            >
+              <div
+                className={styles.filterbox}
+                onClick={() => setFilterOpen(!filterOpen)}>
+                <div className={styles.filter_text_container}>
+                  <p className={styles.filter_text}>Filter</p>
+                </div>
+                <div>
+                  <DownPopUpArrow
+                    size={20}
+                    color={"#45454A"}
+                    className={filterOpen ? styles.arrow_up : styles.arrow_down}
+                  />
+                </div>
+              </div>
+            </div>
+            {filterOpen && (
+              <div className=" absolute top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+                <div className={styles.mapped_filter}>
+                  {filtereData?.map((ele, index) => {
+                    return (
+                      <div
+                        className={styles.single_filter_text}
+                        key={index.toString()}
+                        onClick={e => handleFilterDivClick(e, ele.filter_tag)}>
+                        <p htmlFor={index} className={styles.option_text}>
+                          {ele?.filter_name}
+                        </p>
+                        <input
+                          type="checkbox"
+                          id={index}
+                          name={ele.filter_name}
+                          value={ele.filter_tag}
+                          checked={categoryPageReduxData?.filteredItems.includes(
+                            ele?.filter_tag,
+                          )}
+                          className="pr-1 cursor-pointer"
+                          // onChange={e => handleFilteredItems(e)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="mt-6 w-full flex justify-center">
+                  <div
+                    className={styles.btn_container}
+                    onClick={() => handleApply()}>
+                    <p className={styles.apply_btn}>Apply</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           {/* </div> */}
-          <div className="flex items-center justify-center ">
+          {/* <div className="flex items-center justify-center ">
             <p className={styles.option_text}>Sortby</p>
             <div>
               <CategoryPopover
@@ -293,6 +411,54 @@ const SubHeader = ({params}) => {
                 setFilterListed={setFilterListed}
               />
             </div>
+          </div> */}
+
+          <div className="relative flex">
+            <p className="flex items-center mr-2 text-71717A text-base">
+              Sort By
+            </p>
+            <div
+              className={`${styles.filter} relative`}
+              // onClick={() => setFilterOpen(!fi)}
+            >
+              <div
+                className={styles.filterbox}
+                onClick={() => setSortOpen(!filterOpen)}>
+                <div className={styles.filter_text_container}>
+                  <p className={styles.filter_text}>{selectedOption}</p>
+                </div>
+                <div>
+                  <DownPopUpArrow
+                    size={20}
+                    color={"#45454A"}
+                    className={sortOpen ? styles.arrow_up : styles.arrow_down}
+                  />
+                </div>
+              </div>
+            </div>
+            {sortOpen && (
+              <div className="gap-6 absolute top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+                {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
+                {sortByText?.map((ele, index) => {
+                  return (
+                    <div
+                      className={styles.sorted_text}
+                      key={index.toString()}
+                      onClick={() => handleSort(ele?.text, index)}>
+                      <p className={styles.option_text}>{ele.text}</p>
+                      <input
+                        type="radio"
+                        id={index}
+                        name="sortBy"
+                        value={ele.text}
+                        className="cursor-pointer"
+                        checked={selectedOption === ele.text}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
           {/* ------------------------------------------------------------------------------------------------------ */}
         </div>
@@ -314,6 +480,7 @@ const SubHeader = ({params}) => {
               />
             </div>
           </div>
+
           {/* ------------------------------------------------------------------------------------------------------ */}
         </div>
         <div className={styles.horizontal_line}></div>
@@ -321,6 +488,7 @@ const SubHeader = ({params}) => {
           <div className="flex flex-wrap">
             <div
               className={styles.single_filter_mobile}
+              // className={styles.single_filter}
               onClick={() => {
                 dispatch(addFilteredItem([]));
                 dispatch(addSingleProduct([]));
@@ -357,6 +525,7 @@ const SubHeader = ({params}) => {
                 })
               : null}
             <div
+              // className={styles.single_filter_mobile}
               className={styles.single_filter}
               onClick={() => {
                 dispatch(addFilteredItem([]));

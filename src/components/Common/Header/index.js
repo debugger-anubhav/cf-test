@@ -97,7 +97,9 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p className={styles.logo_text} onClick={() => router.push("/")}>
+            <p
+              className={styles.logo_text}
+              onClick={() => router.push("/cityfurnish")}>
               cityfurnish
             </p>
             <div className={styles.header_city_wrapper}>

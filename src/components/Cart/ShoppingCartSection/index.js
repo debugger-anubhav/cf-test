@@ -47,6 +47,24 @@ const ShoppingCartSection = ({setTab}) => {
 
   console.log(userIdToUse, "user id to use");
 
+  const totalAmount = cartItems.reduce((accumulator, item) => {
+    return accumulator + item?.fc_product?.fc_product_sale_price?.sale_price;
+  }, 0);
+  console.log(totalAmount, "bbbbbbb");
+
+  const cityShieldOriginalAmount = (totalAmount * 10) / 100;
+  const cityShieldDiscountAmount = (totalAmount * 6) / 100;
+  console.log(cityShieldOriginalAmount, "totalAmount");
+  console.log(cityShieldDiscountAmount, "totaldiscountedprice");
+
+  const cityShieldDiscountPercentage =
+    cityShieldOriginalAmount > 0
+      ? Math.round(
+          ((cityShieldOriginalAmount - cityShieldDiscountAmount) * 100) /
+            cityShieldOriginalAmount,
+        ).toFixed(2)
+      : 0;
+
   // const fetchCartItems = () => {
   //   axios
   //     .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
@@ -75,6 +93,7 @@ const ShoppingCartSection = ({setTab}) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
+  const [availCoin, setAvailCoin] = useState(0);
   const [isMonthly, setIsMonthly] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState("");
@@ -86,7 +105,21 @@ const ShoppingCartSection = ({setTab}) => {
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
   };
-  const availCoin = 300;
+
+  const fetchAvailCoins = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+      .then(res => {
+        console.log(res, "res in fetch coins");
+        if (res?.data?.data?.length > 0)
+          setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchAvailCoins();
+  }, []);
 
   // const closeDrawer = () => {
   //   setCityShieldDrawerOpen(false);
@@ -119,21 +152,6 @@ const ShoppingCartSection = ({setTab}) => {
 
   const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
     console.log("inside", newQuantity);
-    // const updatedArr = [...arr];
-    // if (operator === "minus" && arr[index].quantity > 0)
-    //   updatedArr[index].quantity--;
-    // else if (operator === "plus") updatedArr[index].quantity++;
-    // else openModal();
-    // setArr(updatedArr);
-
-    // const updatedItems = [...arr];
-    // const itemIndex = updatedItems.findIndex(item => item.id === productid);
-
-    // if (itemIndex !== -1) {
-    //   updatedItems[itemIndex].quantity = newQuantity;
-    //   setArr(updatedItems);
-    // }
-
     if (newQuantity < 1) {
       setProductId(productid);
       setItemId(itemid);
@@ -141,17 +159,16 @@ const ShoppingCartSection = ({setTab}) => {
     } else {
       const updatedItems = arr.map(item => {
         if (item.id === itemid) {
-          return {...item, quantity: newQuantity}; // Create a new object with updated quantity
+          return {...item, quantity: newQuantity};
         }
-        return item; // Return other items unchanged
+        return item;
       });
 
-      // Set the state with the updated array
       setArr(updatedItems);
     }
 
     const headers = {
-      userId: 113999132,
+      userId: parseInt(userIdToUse),
       quantity: arr[itemIndex].quantity,
       productId: productid,
     };
@@ -286,6 +303,9 @@ const ShoppingCartSection = ({setTab}) => {
                 )}
                 {cityShieldDrawerOpen && (
                   <CityShieldDrawerForCart
+                    cityShieldCurrentPrice={cityShieldDiscountAmount}
+                    cityShieldOriginalPrice={cityShieldOriginalAmount}
+                    cityShieldDiscount={cityShieldDiscountPercentage}
                     toggleDrawer={toggleDrawerCityShield}
                     open={cityShieldDrawerOpen}
                     toggleCheckbox={() => setIsChecked(false)}
@@ -298,10 +318,14 @@ const ShoppingCartSection = ({setTab}) => {
             <div className="flex items-end gap-2">
               <p className={styles.currentPrice}>
                 <Rupee />
-                250/mo
+                {cityShieldDiscountAmount}/mo
               </p>
-              <p className={styles.originalPrice}>400/mo</p>
-              <div className={styles.discount}>-40% OFF</div>
+              <p className={styles.originalPrice}>
+                {cityShieldOriginalAmount}/mo
+              </p>
+              <div className={styles.discount}>
+                {cityShieldDiscountPercentage}% OFF
+              </div>
             </div>
             <p className={styles.protect_text}>
               Protect your appliances and furniture worth ₹70,000.{" "}
@@ -372,6 +396,7 @@ const ShoppingCartSection = ({setTab}) => {
               open={couponDrawerOpen}
               applyCoupon={setIsCouponApplied}
               applyCouponCode={applyCouponCode}
+              isMonthly={isMonthly}
             />
           )}
 

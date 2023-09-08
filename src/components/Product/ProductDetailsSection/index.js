@@ -212,15 +212,14 @@ const ProductDetails = ({params}) => {
       ? Math.round(
           ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
             cityShieldOriginalPrice,
-        ).toFixed(2)
+        ).toFixed(0)
       : 0;
 
-  const isItemInCart = cartItems.some(item => {
-    console.log(item.fc_product.id, params.productId, "herereerer");
-    return item.fc_product.id === parseInt(params.productId);
+  const isItemInCart = cartItems?.some(item => {
+    return item?.fc_product?.id === parseInt(params.productId);
   });
 
-  console.log(isItemInCart, params.productId, "isItemInCart");
+  // console.log(isItemInCart, params.productId, "isItemInCart");
 
   const handleAddToCart = () => {
     setIsLoading(true);
@@ -517,12 +516,12 @@ const ProductDetails = ({params}) => {
                     style={{
                       display: duration.value === "3" ? "none" : "flex",
                     }}>
-                    {`${Math.round(
+                    {`-${Math.round(
                       ((durationArray?.[0]?.attr_price -
                         durationArray?.[duration.currentIndex]?.attr_price) *
                         100) /
                         durationArray?.[0]?.attr_price,
-                    ).toFixed(2)}%`}
+                    ).toFixed(0)}% OFF`}
                   </div>
                 </div>
               </div>
@@ -616,7 +615,7 @@ const ProductDetails = ({params}) => {
                 <Rupee />
                 {cityShieldOriginalPrice} / mo
               </p>
-              <div className={styles.discount}>{cityShieldDiscount}%</div>
+              <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
             </div>
           </div>
         </div>

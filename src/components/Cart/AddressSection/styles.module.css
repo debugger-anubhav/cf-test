@@ -46,11 +46,20 @@
 .form_input {
   @apply text-14 xl:text-16 outline-none hover:border-71717A w-full h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
 }
+.contact_input {
+  @apply border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.flag {
+  @apply w-6 h-6;
+}
 .textarea {
   @apply !h-[66px];
 }
+.error {
+  @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
+}
 .save_btn {
-  @apply mt-6 border-2 rounded-lg border-71717A text-71717A text-16 tracking-0.3 leading-normal w-full h-14 flex justify-center items-center;
+  @apply mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full h-12 lg:h-14 flex justify-center items-center;
 }
 .right_div {
   @apply flex flex-col gap-6;

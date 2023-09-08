@@ -68,6 +68,7 @@ export const endPoints = {
     fetchCartItems: (cityId, userId) =>
       `fc-shopping-carts/fetchAddToCartItems?cityId=${cityId}&userId=${userId}`,
     updateQuantity: `fc-shopping-carts/updateQuantity`,
+    fetchCoins: userId => `fc-my-wallets/getMyWalletDetails?userId=${userId}`,
   },
 
   // categoryHappySubscriber:
