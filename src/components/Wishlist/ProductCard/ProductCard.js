@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {Close, Delete, Rupee} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
@@ -21,9 +21,12 @@ const ProductCard = ({
   isImageHeight = false,
   productID,
   refreshFunction,
+  hoverCardImage,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
+  const [hoverCard, setHoverCard] = useState(false);
+
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
@@ -49,10 +52,15 @@ const ProductCard = ({
   };
 
   return (
-    <div className={`${styles.wrapper} ${productWidth} `}>
+    <div
+      className={`${styles.wrapper} ${productWidth} `}
+      onMouseOver={() => {
+        setHoverCard(true);
+      }}
+      onMouseOut={() => setHoverCard(false)}>
       <div className="relative">
         <img
-          src={cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={`${styles.thumbnail} ${isImageHeight && "min-h-[240px]"}
           `}

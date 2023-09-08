@@ -36,22 +36,22 @@
   @apply flex flex-wrap w-full mt-8;
 }
 .city_wrapper {
-  @apply flex flex-col sm:mb-6  xs:w-[115px] ms:w-[130px] w-[95px]  cursor-pointer p-4;
+  @apply flex flex-col xs:w-[110px]  w-[95px]  cursor-pointer p-2;
 }
 .city_thambnil {
-  @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary;
+  @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-md;
 }
 .city_name {
   @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2 capitalize whitespace-pre;
 }
 .city_drawer_wrapper {
-  @apply sm:w-[590px] w-full px-8 lg:px-0 rounded-t-lg;
+  @apply sm:w-[500px] w-full px-8 lg:px-0 rounded-t-lg;
 }
 .city_drawer_close {
   @apply sm:flex hidden;
 }
 .bottom_city_content {
-  @apply flex w-full flex-col;
+  @apply flex w-full flex-col mt-14;
 }
 .bottom_subheading {
   @apply flex text-14 text-71717A font-medium leading-[20px] font-Poppins;
@@ -66,13 +66,13 @@
   @apply absolute top-0 rounded-[50%]  bg-white w-4 h-4 right-12;
 }
 .download_qr_wrapper {
-  @apply sm:flex hidden my-8 justify-start pr-4;
+  @apply sm:flex hidden my-4 justify-start pr-4;
 }
 .download_qr_wrapper img {
   @apply w-[40%];
 }
 .qr_text {
-  @apply flex flex-col ml-3 justify-center text-9A9AA2;
+  @apply flex flex-col ml-3 justify-center text-9A9AA2  pb-[3.5rem];
 }
 .qr_text_span {
   @apply text-[#7895B0] font-bold text-32 leading-[24px];
