@@ -106,7 +106,7 @@ export default function Home() {
   }
 
   const data = {
-    userId: "",
+    userId: getLocalStorage("user_id") ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
   };
@@ -115,12 +115,13 @@ export default function Home() {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
-        console.log(res?.data?.data, "temp user id");
         if (typeof window !== "undefined") {
           setLocalStorage(
             "tempUserID",
             JSON.parse(res?.data?.data?.tempUserId),
           );
+          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
+          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
         }
       })
       .catch(err => console.log(err));

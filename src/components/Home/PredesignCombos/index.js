@@ -38,6 +38,7 @@ const PreDesignCombos = () => {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -78,6 +79,7 @@ const PreDesignCombos = () => {
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   return (
     <>
       {homePageReduxData?.designComboProduct?.length ? (
