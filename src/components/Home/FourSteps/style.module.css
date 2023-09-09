@@ -2,10 +2,10 @@
   @apply px-4 md:px-6 py-6 xl:p-7 macbook:p-12 mt-4 lg:mt-0 mx-4 md:mx-[70px] lg:mx-0 border border-solid border-[#DDDDDF] rounded-[4px];
 }
 .head {
-  @apply text-16 font-Poppins text-9A9AA2 font-medium leading-5 tracking-desc;
+  @apply text-14 xl:text-16 font-Poppins text-9A9AA2 font-medium leading-5 tracking-desc;
 }
 .subhead {
-  @apply text-32 leading-8 text-45454A font-Poppins font-medium tracking-heading mt-3;
+  @apply text-20 md:text-24 xl:text-32 leading-8 text-45454A font-Poppins font-medium tracking-heading xl:mt-3;
 }
 .card_wrapper {
   @apply flex gap-[23.5px] xl:gap-[42px] w-full overflow-scroll lg:overflow-hidden mt-8 lg:justify-between;
