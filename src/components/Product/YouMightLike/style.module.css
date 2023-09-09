@@ -1,11 +1,14 @@
 .main_container {
   @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] py-6 md:py-8 xl:py-12 mt-8 xl:mt-20;
+  background: linear-gradient(
+    98deg,
+    rgba(250, 247, 172, 0) -6.83%,
+    rgba(219, 240, 229, 0.7) 113%
+  );
 }
-
 .heading {
   @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-24 xl:leading-10 xl:tracking-0.48 pb-4 md:pb-6 xl:pb-8;
 }
-
 .card_wrapper {
   @apply flex overflow-scroll gap-4 xl:gap-6 3xl:gap-8;
 }

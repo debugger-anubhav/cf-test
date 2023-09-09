@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         Poppins: "Poppins",
+        Inter: "Inter",
       },
       colors: {
         primary: "#3E688E",
