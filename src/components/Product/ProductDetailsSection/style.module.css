@@ -48,6 +48,9 @@
 .item_name {
   @apply text-16 mobile:text-20 xl:text-24 mobile:leading-8 xl:leading-10 font-medium text-45454A tracking-0.4 xl:tracking-[-0.48px] mobile:w-[256px] sm:w-full xl:w-[341px];
 }
+.rupeeIcon {
+  @apply font-Inter;
+}
 .rating_div {
   @apply flex justify-between mt-3;
 }
@@ -179,7 +182,7 @@
 }
 
 .sticky_bar_wrapper {
-  @apply hidden w-full items-center rounded-t-2xl mx-auto py-3 px-4 lg:flex gap-3 md:gap-8 xl:gap-14 max-w-[1007px] h-[80px] z-[999] bg-fff fixed bottom-0 left-[50%];
+  @apply hidden items-center rounded-t-2xl mx-auto py-3 px-4 lg:flex gap-3 md:gap-8 xl:gap-14 h-[80px] z-[999] bg-fff fixed bottom-0 left-[50%];
   box-shadow: 0px -2px 20px 0px rgba(0, 0, 0, 0.25);
   transform: translateX(-50%);
 }

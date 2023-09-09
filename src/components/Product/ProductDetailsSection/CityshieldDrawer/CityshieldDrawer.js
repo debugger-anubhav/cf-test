@@ -1,7 +1,7 @@
 import Drawer from "@mui/material/Drawer";
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {Close, Rupee, VerifyIcon} from "@/assets/icon";
+import {Close, VerifyIcon} from "@/assets/icon";
 import {ProductPageImages} from "@/assets/images";
 
 const CityshieldDrawer = ({
@@ -61,7 +61,8 @@ const CityshieldDrawer = ({
 
           <p className={styles.opt_for}>
             Opt for City Shield today and get covered for accidental damages at
-            ONLY {cityShieldCurrentPrice}
+            ONLY <span className={styles.rupeeIcon}>₹</span>
+            {cityShieldCurrentPrice}
             /month!
           </p>
           <p className={styles.protect}>
@@ -74,18 +75,19 @@ const CityshieldDrawer = ({
 
           <div className={styles.cityshield_prices}>
             <p className={styles.currentPrice}>
-              <Rupee />
+              <span className={styles.rupeeIcon}>₹</span>
               {cityShieldCurrentPrice}/mo
             </p>
             <p className={styles.originalPrice}>
-              <Rupee /> {cityShieldOriginalPrice} / mo
+              <span className={styles.rupeeIcon}>₹</span>
+              {cityShieldOriginalPrice} / mo
             </p>
             <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
           </div>
 
           <div className={styles.arr_wrapper}>
             {arr.map((item, index) => (
-              <div key={index} className="w-[80px]">
+              <div key={index} className={styles.arr_item}>
                 <div className={styles.img_div}>
                   <img src={item.img} />
                 </div>

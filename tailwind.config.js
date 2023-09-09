@@ -14,6 +14,7 @@ module.exports = {
       },
       fontFamily: {
         Poppins: "Poppins",
+        Inter: "Inter",
       },
       colors: {
         primary: "#3E688E",
@@ -57,6 +58,9 @@ module.exports = {
         "3xl": "1660px",
         "4xl": "1850px",
         "last-screen": "2000px",
+      },
+      boxShadow: {
+        popper_shadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
       },
       letterSpacing: {
         heading: "-0.4px",

@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import {Heart, Rupee} from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
-import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
-
+import {useQuery} from "@/hooks/useQuery";
+import {useRouter} from "next/navigation";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -23,6 +24,12 @@ const CategoryCard = ({
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const dispatch = useDispatch();
+  const router = useRouter();
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -30,7 +37,7 @@ const CategoryCard = ({
     productId: productID,
   };
 
-  const {mutateAsync: getwhislistProduct} = useMutation(
+  const {mutateAsync: addwhislistProduct} = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
@@ -43,17 +50,54 @@ const CategoryCard = ({
     endPoints.deleteWishListProduct,
     data,
   );
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const userId = getLocalStorageString("userId");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    setInWishList(!inWishList);
-    dispatch(addRemoveWhishListitems(!inWishList));
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
-      ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
           .catch(err => console.log(err))
       : removewhislistProduct()
-          .then(res => console.log(res))
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
           .catch(err => console.log(err));
   };
 
@@ -114,13 +158,16 @@ const CategoryCard = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
-          <h3 className={`${styles.originalPrice} flex`}>
-            <Rupee />
-            {`${originalPrice} /mo`}
-          </h3>
+
+          {currentPrice < originalPrice && (
+            <h3 className={`${styles.originalPrice} flex`}>
+              <span className={styles.rupeeIcon}>₹</span>
+              {`${originalPrice} /mo`}
+            </h3>
+          )}
         </div>
         {/* {originalPrice !== currentPrice && ( */}
         {currentPrice < originalPrice && (

@@ -18,6 +18,7 @@ import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {
   getLocalStorage,
+  getLocalStorageString,
   productImageBaseUrl,
   setLocalStorage,
 } from "@/constants/constant";
@@ -73,7 +74,7 @@ const Header = () => {
   //   state => state.cartPageData.cartItems.length,
   // );
 
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -82,7 +83,7 @@ const Header = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        console.log(res, "res in fetch itemms");
+        // console.log(res, "res in fetch itemms");
         setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
       })
@@ -172,7 +173,16 @@ const Header = () => {
                   src={Icons.Favorite}
                   alt="favorite"
                   className={styles.header_favorite}
-                  onClick={() => router.push("/wishlist")}
+                  onClick={() => {
+                    if (userId) {
+                      router.push("/wishlist");
+                    } else {
+                      // router.push("/wishlist");
+                      router.push(
+                        "https://test.rentofurniture.com/user_sign_up",
+                      );
+                    }
+                  }}
                 />
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
                   <span className={styles.header_favorite_count}>

@@ -6,7 +6,6 @@ import {
   BackIcon,
   CalendarIcon,
   PersonIcon,
-  Rupee,
   VerifiedIcon,
   WhatsappIcon,
 } from "@/assets/icon";
@@ -327,7 +326,7 @@ const AddressSection = ({setTab}) => {
             </div>
           </div>
           <p className={otherStyles.total_amount}>
-            <Rupee className={otherStyles.rupeeIcon} />
+            <span className={otherStyles.rupeeIcon}>₹</span>
             11,709
           </p>
         </div>

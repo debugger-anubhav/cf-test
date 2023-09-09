@@ -32,13 +32,19 @@
   @apply bg-[#207B3A] font-Poppins flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
 }
 .benefits_label {
-  @apply text-71717A leading-6 font-Poppins text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center;
+  @apply text-71717A mt-2 lg:leading-6 font-Poppins text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center;
 }
 .arr_wrapper {
-  @apply flex gap-4 xl:gap-8 mt-8 items-center;
+  @apply flex gap-4 xl:gap-[44px] mt-8 items-center;
+}
+.arr_item {
+  @apply w-[80px] flex flex-col items-center;
 }
 .img_div {
-  @apply w-[60px] h-[60px] lg:w-[72px] lg:h-[72px] flex p-3;
+  @apply w-[60px] h-[60px] lg:w-[72px] lg:h-[72px] flex;
+}
+.img {
+  @apply w-full h-full;
 }
 .btn {
   @apply w-full xs:w-fit mt-8 px-8 font-Poppins justify-center text-14 lg:text-16 flex items-center text-71717A font-medium h-10 lg:h-14 rounded-lg border-2 border-71717A;
@@ -50,6 +56,9 @@
   @apply !rounded-t-[20px] md:!rounded-t-none;
   animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   transition-timing-function: ease-in;
+}
+.rupeeIcon {
+  @apply font-Inter;
 }
 
 @media only screen and (min-width: 768px) {

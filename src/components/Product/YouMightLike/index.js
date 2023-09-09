@@ -79,12 +79,7 @@ const YouMightLike = ({heading, isbg, params}) => {
   };
   if (pageData?.youMightLike?.length > 0) {
     return (
-      <div
-        className={styles.main_container}
-        style={{
-          background:
-            "linear-gradient(136deg, rgba(250, 247, 172, 0.00) 0%, rgba(219, 240, 229, 0.70) 100%)",
-        }}>
+      <div className={styles.main_container}>
         <h2 className={styles.heading}>You might also like</h2>
 
         <div className={styles.card_wrapper} ref={sliderRef}>

@@ -20,12 +20,15 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import TextContent from "@/components/Common/TextContent";
 import {useChatScript} from "../../useChatScript";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
+import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+  fallback: <ContentSkeleton />,
+});
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
   {

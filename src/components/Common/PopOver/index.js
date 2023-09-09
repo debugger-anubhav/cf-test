@@ -1,7 +1,6 @@
 import {DownArrow} from "@/assets/icon";
 import styles from "./style.module.css";
 import * as React from "react";
-import Popover from "@mui/material/Popover";
 import {useRouter} from "next/navigation";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -21,6 +20,8 @@ import {
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
+import {Popper} from "@mui/material";
+import Box from "@mui/material/Box";
 
 const PopOver = ({list, item, parentCategoryId, data}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -104,8 +105,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
   return (
     <div
       onMouseLeave={() => {
-        setAnchorEl(null);
-        hoverRef.current = "";
+        setAnchorEl("");
       }}>
       <button
         onClick={e => handleCategory(e, item)}
@@ -113,33 +113,45 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);
           hoverRef.current = item;
-        }}>
+        }}
+        // onMouseLeave={()=>setAnchorEl("")}
+      >
         {item}
         <DownArrow
           size={20}
           color={"#45454A"}
-          onMouseLeave={() => {
-            setAnchorEl(null);
-            hoverRef.current = "";
-          }}
+          // onMouseLeave={() => {
+          //   setAnchorEl(null);
+          //   hoverRef.current = "";
+          // }}
           className={open ? styles.arrow_up : styles.arrow_down}
         />
       </button>
 
-      <Popover
+      <Popper
         id={id}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        onMouseLeave={handleClose}
+        // onMouseLeave={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
-        sx={{
-          marginTop: "0.9rem",
-        }}>
-        <div className={styles.sub_item_wrapper} onMouseLeave={handleClose}>
+        sx={
+          {
+            // mb: "0.9rem",
+          }
+        }>
+        {/* <div className={styles.shadow_box}> */}
+        <Box
+          className={styles.sub_item_wrapper}
+          sx={{
+            mt: 2.4,
+            // boxShadow:3
+          }}
+          // onMouseLeave={handleClose}
+        >
           <p className={styles.sub_item} onClick={handMainCategory}>
             All
           </p>
@@ -156,8 +168,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
             },
             // </Link>
           )}
-        </div>
-      </Popover>
+        </Box>
+        {/* </div> */}
+      </Popper>
     </div>
   );
 };
