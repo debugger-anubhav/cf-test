@@ -49,6 +49,7 @@ export default function SideDrawer() {
         "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
     },
   ];
+
   const list = anchor => (
     <div
       style={
@@ -58,7 +59,7 @@ export default function SideDrawer() {
       }
       className={styles.drawer_wrapper}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <div className={styles.sidebar_wrapper}>
         <div className={styles.sidebar_header}>
@@ -66,11 +67,19 @@ export default function SideDrawer() {
             <p className={styles.sidebar_header_subheading}>CityMax</p>
             <p className={styles.sidebar_header_heading}>How it works</p>
           </div>
-          <div className="w-fit cursor-pointer">
+          <div
+            className="w-fit cursor-pointer"
+            onClick={e => {
+              toggleDrawer(anchor, false)(e);
+            }}>
             <Close
               size={25}
-              color={"#000"}
-              onClick={toggleDrawer(anchor, false)}
+              color={"#45454A"}
+              // onClick={e => {
+              //   console.log("click1", e.currentTarget);
+              //   toggleDrawer(anchor, false);
+              //   console.log("click2");
+              // }}
             />
           </div>
         </div>
