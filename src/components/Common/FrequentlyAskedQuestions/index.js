@@ -106,7 +106,9 @@ export default FrequentlyAskedQuestions;
 export const FaqsSkeleton = () => {
   return (
     <div className={styles.faq_skeleton_wrapper}>
-      <Skeleton variant="text" className={"text-16 w-[30%] h-8"} />
+      <div className="w-[30%] h-8">
+        <Skeleton variant="text" className={"text-16 w-full h-full"} />
+      </div>
       <div className="w-[45%]">
         <div className={styles.QuesAnsArray_div}>
           {[1, 2, 3, 4, 5]?.map((item, index) => {

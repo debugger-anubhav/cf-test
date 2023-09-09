@@ -5,7 +5,9 @@ import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
-import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {useRouter} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
 
 const Card = ({
   desc,
@@ -27,14 +29,20 @@ const Card = ({
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
     productId: productID,
   };
 
-  const {mutateAsync: getwhislistProduct} = useMutation(
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  const {mutateAsync: addwhislistProduct} = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
@@ -47,7 +55,14 @@ const Card = ({
     endPoints.deleteWishListProduct,
     data,
   );
-
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const userId = getLocalStorage("user_id");
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -70,14 +85,43 @@ const Card = ({
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    setInWishList(!inWishList);
-    dispatch(addRemoveWhishListitems(!inWishList));
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
-      ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
           .catch(err => console.log(err))
       : removewhislistProduct()
-          .then(res => console.log(res))
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
           .catch(err => console.log(err));
   };
 

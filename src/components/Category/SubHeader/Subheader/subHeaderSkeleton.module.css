@@ -4,3 +4,15 @@
 .Skeleton_row {
   @apply flex w-full h-full my-4;
 }
+.filtr_skeleton_row {
+  @apply flex justify-between my-8;
+}
+.line_skeleton {
+  @apply my-9 mobile:my-[26px] w-full h-[1.5px] bg-[#DDDDDF];
+}
+.card_wrraper {
+  @apply grid grid-cols-3 w-full 3xl:h-[1100px] xl:h-[900px]  lg:h-[800px] md:h-[700px] sm:h-[500px] ms:h-[400px] xs:h-[300px] mobile:h-[200px] h-[150px] gap-8;
+}
+.div {
+  @apply w-full;
+}
