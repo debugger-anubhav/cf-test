@@ -4,7 +4,7 @@ import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
@@ -57,7 +57,7 @@ const CategoryCard = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
