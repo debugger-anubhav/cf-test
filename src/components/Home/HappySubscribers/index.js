@@ -14,6 +14,7 @@ import {baseURL} from "@/network/axios";
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState(null);
+  const [isDumy, setIsDumy] = React.useState(false);
 
   const getVideosForProductPage = () => {
     axios
@@ -92,6 +93,34 @@ const HappySubscribers = ({page, params}) => {
 
   const sliderRef = useRef(null);
 
+  // useEffect(() => {
+  //   const slider = sliderRef.current;
+  //   if (!slider) return;
+
+  //   let mouseDown = false;
+  //   let startX, scrollLeft;
+
+  //   const startDragging = function (e) {
+  //     mouseDown = true;
+  //     startX = e.pageX - slider.offsetLeft;
+  //     scrollLeft = slider.scrollLeft;
+  //   };
+  //   const stopDragging = function () {
+  //     mouseDown = false;
+  //   };
+
+  //   slider.addEventListener("mousemove", e => {
+  //     e.preventDefault();
+  //     if (!mouseDown) return;
+  //     const x = e.pageX - slider.offsetLeft;
+  //     const scroll = x - startX;
+  //     slider.scrollLeft = scrollLeft - scroll;
+  //   });
+  //   slider.addEventListener("mousedown", startDragging, false);
+  //   slider.addEventListener("mouseup", stopDragging, false);
+  //   slider.addEventListener("mouseleave", stopDragging, false);
+  // }, []);
+
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -105,9 +134,13 @@ const HappySubscribers = ({page, params}) => {
       scrollLeft = slider.scrollLeft;
     };
     const stopDragging = function () {
+      setIsDumy(false);
       mouseDown = false;
     };
 
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
     slider.addEventListener("mousemove", e => {
       e.preventDefault();
       if (!mouseDown) return;
@@ -118,6 +151,14 @@ const HappySubscribers = ({page, params}) => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
   }, []);
 
   // const HappySubscriberVideosArray =
@@ -135,7 +176,11 @@ const HappySubscribers = ({page, params}) => {
 
         <div className={styles.cards_wrapper} ref={sliderRef}>
           {data?.map((item, index) => (
-            <div className={styles.card_div} key={index.toString()}>
+            <div
+              className={`${styles.card_div} ${
+                isDumy && "pointer-events-none"
+              }`}
+              key={index.toString()}>
               <div className={styles.video}>
                 {/* <video className={styles.video_player} ref={videoRef}>
                 <source src={item.file_name} type="video/mp4" />

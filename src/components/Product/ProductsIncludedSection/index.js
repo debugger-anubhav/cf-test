@@ -44,7 +44,9 @@ const ItemsIncluded = () => {
                   <div className={styles.info_row}>
                     <p className={styles.label}>Name</p>
                     <p className={styles.colon}>:</p>
-                    <p className={styles.info_details}>{item.product_name}</p>
+                    <p className={styles.info_details}>
+                      {item.product_name.replace(/-/g, " ")}
+                    </p>
                   </div>
 
                   <div className={styles.info_row}>
