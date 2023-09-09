@@ -1,3 +1,3 @@
 .partnership_banner {
-  @apply rounded mt-8 lg:mt-0 lg:min-w-[390px] xl:min-w-[420px] macbook:min-w-[490px] 3xl:min-w-[531px] xl:relative px-4 md:mx-[70px] lg:mx-0;
+  @apply rounded mt-8 lg:mt-0 lg:min-w-[390px] xl:min-w-[420px] macbook:min-w-[490px] 3xl:min-w-[531px] xl:relative px-4 lg:px-0 md:mx-[70px] lg:mx-0;
 }
