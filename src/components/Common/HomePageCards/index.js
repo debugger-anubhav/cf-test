@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
-import {Heart, Rupee} from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
@@ -181,7 +181,7 @@ const Card = ({
       </div>
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
+          {desc.replace(/-/g, " ")}
         </h3>
         <div
           id={productID}
@@ -207,14 +207,14 @@ const Card = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
           {
             // currentPrice >= originalPrice ? (
-            originalPrice >= currentPrice ? (
+            originalPrice > currentPrice ? (
               <h3 className={`${styles.originalPrice} flex`}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {`${originalPrice} /mo`}
               </h3>
             ) : null
@@ -222,7 +222,7 @@ const Card = ({
         </div>
 
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice <= originalPrice && (
+        {currentPrice < originalPrice && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>

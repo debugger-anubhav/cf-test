@@ -69,9 +69,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     }
 
     setAnchorEl(null);
-    router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
-    );
+    // router.push(
+    //   `/${homePageReduxData?.cityName.toLowerCase()}/${data?.seourl}`,
+    // );
   };
 
   const handleSelectedProduct = (e, item) => {
@@ -79,9 +79,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
     dispatch(addAllProduct(false));
 
     const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
-    router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
-    );
+    // router.push(
+    //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+    // );
 
     if (typeof window !== "undefined") {
       setLocalStorage("category", hoverRef.current);
@@ -147,23 +147,33 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         <Box
           className={styles.sub_item_wrapper}
           sx={{
-            mt: 3,
+            mt: 2.4,
             // boxShadow:3
           }}
           // onMouseLeave={handleClose}
         >
-          <p className={styles.sub_item} onClick={handMainCategory}>
-            All
-          </p>
+          <a
+            href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+              data?.seourl
+            }`}>
+            <p className={styles.sub_item} onClick={handMainCategory}>
+              All
+            </p>
+          </a>
           {list?.map(
             (item, index) => {
               return (
-                <p
-                  className={styles.sub_item}
+                <a
                   key={index.toString()}
-                  onClick={e => handleSelectedProduct(e, item)}>
-                  {item?.cat_name}
-                </p>
+                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                    item?.seourl
+                  }`}>
+                  <p
+                    className={styles.sub_item}
+                    onClick={e => handleSelectedProduct(e, item)}>
+                    {item?.cat_name}
+                  </p>
+                </a>
               );
             },
             // </Link>

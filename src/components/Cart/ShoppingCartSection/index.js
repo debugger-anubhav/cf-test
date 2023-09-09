@@ -10,7 +10,6 @@ import {
   CheckedBox,
   DeleteIcon,
   RightIcon,
-  Rupee,
   UncheckedBox,
   VerifyIcon,
 } from "@/assets/icon";
@@ -225,7 +224,7 @@ const ShoppingCartSection = ({setTab}) => {
                 <div>
                   <div className={styles.name_div}>
                     <p className={styles.product_name}>
-                      {item?.fc_product?.product_name}
+                      {item?.fc_product?.product_name.replace(/-/g, " ")}
                     </p>
                     <div
                       onClick={() => {
@@ -271,10 +270,11 @@ const ShoppingCartSection = ({setTab}) => {
                       <p className={styles.deposit_txt}>Monthly Rent</p>
                       <div className="flex items-end gap-2">
                         <p className={styles.currentPrice}>
-                          <Rupee />
+                          <span className={styles.rupeeIcon}>₹</span>
                           {item?.fc_product?.fc_product_sale_price?.sale_price}
                         </p>
                         <p className={styles.originalPrice}>
+                          <span className={styles.rupeeIcon}>₹</span>
                           {item?.fc_product?.price}
                         </p>
                       </div>
@@ -327,10 +327,11 @@ const ShoppingCartSection = ({setTab}) => {
             <p>Insurance value</p>
             <div className="flex items-end gap-2">
               <p className={styles.currentPrice}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {cityShieldDiscountAmount}/mo
               </p>
               <p className={styles.originalPrice}>
+                <span className={styles.rupeeIcon}>₹</span>
                 {cityShieldOriginalAmount}/mo
               </p>
               <div className={styles.discount}>
@@ -338,7 +339,8 @@ const ShoppingCartSection = ({setTab}) => {
               </div>
             </div>
             <p className={styles.protect_text}>
-              Protect your appliances and furniture worth ₹70,000.{" "}
+              Protect your appliances and furniture worth{" "}
+              <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
               <span className={styles.learn_more} onClick={openDrawer}>
                 Learn more
               </span>
@@ -463,7 +465,7 @@ const ShoppingCartSection = ({setTab}) => {
               </div>
             </div>
             <p className={styles.total_amount}>
-              <Rupee className={styles.rupeeIcon} />
+              <span className={styles.rupeeIcon}>₹</span>
               11,709
             </p>
           </div>

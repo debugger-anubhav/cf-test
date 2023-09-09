@@ -21,8 +21,14 @@
         {"item": "Pay your dues", "link": "/"}
       ],
       "menuList3": [
-        {"item": "Help", "link": "link"},
-        {"item": "Profile", "link": "link"}
+        {
+          "item": "Help",
+          "link": "https://test.rentofurniture.com/pages/contact-us"
+        },
+        {
+          "item": "Profile",
+          "link": "https://test.rentofurniture.com/user_sign_up"
+        }
       ]
     },
 

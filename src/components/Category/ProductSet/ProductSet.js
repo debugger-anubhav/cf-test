@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import style from "./style.module.css";
-import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -13,6 +12,7 @@ import {
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
 import {SoldOutProduct} from "../SoldOutProduct/SoldOutProduct";
+import CategoryCard from "../SingleProduct/CommonCard";
 
 export const ProductSet = () => {
   const router = useRouter();
@@ -28,7 +28,6 @@ export const ProductSet = () => {
   let categoryId;
   let subCategoryId;
   let cityIdStr;
-  const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
@@ -128,61 +127,54 @@ export const ProductSet = () => {
   return (
     <>
       {data.length ? (
-        <div className={style.main_wrapper}>
-          <h2 className={style.heading}>Product sets</h2>
-          <div>
-            <InfiniteScroll
-              dataLength={data.length}
-              next={() => {
-                if (pageNo <= totalPage) {
-                  setPageNo(prev => prev + 1);
-                }
-              }}
-              hasMore={true} // Replace with a condition based on your data source}
-              className="!w-full !h-full">
-              <div className={style.main_container}>
-                {data?.map((item, index) => {
-                  const imageArray = item?.image?.split(",");
-                  const newImageArray = imageArray.slice(
-                    0,
-                    imageArray.length - 1,
-                  );
-                  return item?.subProduct.length ? (
-                    <div
-                      className={`${style.card_box} ${style.child}`}
-                      onClick={e => handleCardClick(e, item)}>
-                      <Card
-                        productWidth={productCardWidth}
-                        cardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[0]
-                        }`}
-                        productImageBaseUrl
-                        desc={item?.product_name}
-                        originalPrice={item?.price}
-                        currentPrice={item?.sale_price}
-                        // hoverCardImage={
-                        //   item?.image?.split(",").filter(item => item).length >
-                        //     1
-                        //     ? productImageBaseUrl + item?.image?.split(",")[1]
-                        //     : productImageBaseUrl + item?.image?.split(",")[0]
-                        // }
-                        hoverCardImage={
-                          newImageArray?.length > 1
-                            ? productImageBaseUrl + newImageArray[1]
-                            : productImageBaseUrl + newImageArray[0]
-                        }
-                        discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) / 1000,
-                        ).toFixed(0)}%`}
-                        productID={item?.id}
-                      />
-                    </div>
-                  ) : null;
-                })}
-              </div>
-            </InfiniteScroll>
+        <>
+          <div className={style.main_wrapper}>
+            <h2 className={style.heading}>Product sets</h2>
+            <div>
+              <InfiniteScroll
+                dataLength={data.length}
+                next={() => {
+                  if (pageNo <= totalPage) {
+                    setPageNo(prev => prev + 1);
+                  }
+                }}
+                hasMore={true} // Replace with a condition based on your data source}
+                className="!w-full !h-full">
+                <div className={style.main_container}>
+                  {data?.map((item, index) => {
+                    const imageArray = item?.image?.split(",");
+                    const newImageArray = imageArray.slice(
+                      0,
+                      imageArray.length - 1,
+                    );
+                    return (
+                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                        <CategoryCard
+                          cardImage={`${productImageBaseUrl}${
+                            item?.image?.split(",")[0]
+                          }`}
+                          productImageBaseUrl
+                          desc={item?.product_name}
+                          originalPrice={item?.price}
+                          currentPrice={item?.sale_price}
+                          hoverCardImage={
+                            newImageArray?.length > 1
+                              ? productImageBaseUrl + newImageArray[1]
+                              : productImageBaseUrl + newImageArray[0]
+                          }
+                          discount={`${Math.round(
+                            ((item?.price - item?.sale_price) * 100) / 1000,
+                          ).toFixed(0)}%`}
+                          productID={item?.id}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </InfiniteScroll>
+            </div>
           </div>
-        </div>
+        </>
       ) : null}
       {data?.length === comboItemLength ? <SoldOutProduct /> : null}
     </>

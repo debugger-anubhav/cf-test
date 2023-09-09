@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import {Heart, Rupee} from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
@@ -138,7 +138,8 @@ const CategoryCard = ({
 
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
+          {/* {desc} */}
+          {desc.replace(/-/g, " ")}
         </h3>
         <Heart
           size={25}
@@ -157,13 +158,16 @@ const CategoryCard = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
-          <h3 className={`${styles.originalPrice} flex`}>
-            <Rupee />
-            {`${originalPrice} /mo`}
-          </h3>
+
+          {currentPrice < originalPrice && (
+            <h3 className={`${styles.originalPrice} flex`}>
+              <span className={styles.rupeeIcon}>₹</span>
+              {`${originalPrice} /mo`}
+            </h3>
+          )}
         </div>
         {/* {originalPrice !== currentPrice && ( */}
         {currentPrice < originalPrice && (
