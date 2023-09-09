@@ -1,6 +1,6 @@
 .sub_item_wrapper {
-  @apply flex flex-col pt-2 px-4 bg-white;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  @apply flex flex-col pt-2 px-4 bg-white scale-100;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) !important;
 }
 
 .sub_item {
@@ -13,4 +13,8 @@
 .arrow_up {
   transition: transform 330ms ease;
   transform: rotate(180deg);
+}
+
+.shadow_box {
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
