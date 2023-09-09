@@ -4,7 +4,7 @@ import {Heart, Rupee} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
@@ -61,7 +61,8 @@ const Card = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
+  console.log(userId);
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",

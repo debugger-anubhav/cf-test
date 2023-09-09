@@ -493,3 +493,10 @@ export function getLocalStorage(key, value) {
     return {key, value};
   }
 }
+export function getLocalStorageString(key, value) {
+  if (typeof window !== "undefined") {
+    return window.localStorage.getItem(key);
+  } else {
+    return {key, value};
+  }
+}
