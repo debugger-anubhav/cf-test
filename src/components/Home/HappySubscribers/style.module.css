@@ -11,7 +11,8 @@
   @apply text-9A9AA2 leading-6 tracking-0.3 mt-4 pr-4 md:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:pr-[160px];
 }
 .cards_wrapper {
-  @apply mt-8 flex gap-4 xl:gap-7 w-full overflow-scroll;
+  /* @apply mt-8 flex gap-4 xl:gap-7; */
+  @apply mt-8 flex gap-4 xl:gap-7 w-full overflow-x-scroll;
 }
 .card_div {
   @apply p-4 xl:p-6 bg-fff rounded-lg;
