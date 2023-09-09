@@ -108,7 +108,7 @@ const SubHeader = ({params}) => {
       }
     }
 
-    if (homePageReduxData?.cityList.length) {
+    if (homePageReduxData?.cityList?.length) {
       const id = findIdByURL(homePageReduxData?.cityList, params.city);
       if (id !== null) {
         setLocalStorage("cityId", id);
@@ -275,11 +275,8 @@ const SubHeader = ({params}) => {
   };
 
   const toggleDropDownFilter = () => {
-    console.log("hiii");
     setFilterOpen(!filterOpen);
   };
-
-  console.log("filtereData", filtereData);
 
   return (
     <>

@@ -58,6 +58,9 @@ module.exports = {
         "4xl": "1850px",
         "last-screen": "2000px",
       },
+      boxShadow: {
+        popper_shadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+      },
       letterSpacing: {
         heading: "-0.4px",
         headingOne: "-0.48px",
