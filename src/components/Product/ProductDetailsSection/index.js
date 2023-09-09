@@ -32,6 +32,9 @@ import {format} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
 import {addItemsToCart, getProductDetails} from "@/store/Slices";
 import {useMutation} from "@/hooks/useMutation";
+import {useRouter} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
@@ -167,13 +170,56 @@ const ProductDetails = ({params}) => {
     );
   }, []);
 
+  const router = useRouter();
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+  const userId = getLocalStorage("user_id");
+
   const handleWhislistCard = e => {
-    e.preventDefault();
-    getwhislistProduct()
-      .then(res => console.log(res?.data?.dat))
-      .catch(err => console.log(err));
-    setInWishList(!inWishList);
+    e.stopPropagation();
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
+    !inWishList
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
+          .catch(err => console.log(err));
   };
+
   const data = {
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -184,13 +230,26 @@ const ProductDetails = ({params}) => {
     productId: params?.productId,
   };
 
-  const {mutateAsync: getwhislistProduct} = useMutation(
+  const {mutateAsync: addwhislistProduct} = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
     data,
   );
 
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const {mutateAsync: removewhislistProduct} = useMutation(
+    "remove-wishlist",
+    "DELETE",
+    endPoints.deleteWishListProduct,
+    data,
+  );
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
   };
