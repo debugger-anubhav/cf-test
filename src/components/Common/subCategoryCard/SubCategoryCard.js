@@ -48,7 +48,7 @@ const SubCategoryCard = ({productID}) => {
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
   const includedItem = [
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png",
