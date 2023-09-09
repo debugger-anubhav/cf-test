@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./style.module.css";
-import {Rupee} from "@/assets/icon";
 
 const StickyBottomBar = ({
   productName,
@@ -9,10 +8,14 @@ const StickyBottomBar = ({
   handleButtonClick,
   isLoading,
   isItemInCart,
+  soldOut,
 }) => {
   return (
     <div className={styles.sticky_bar_wrapper}>
-      <p className={styles.sticky_bar_head}>{productName}</p>
+      <p className={styles.sticky_bar_head}>
+        Alexa 6 Seater Dining Table with 4 Chairs and Bench
+        {/* {productName} */}
+      </p>
 
       <div
         className={styles.deposit_div}
@@ -21,7 +24,7 @@ const StickyBottomBar = ({
           <p className={styles.deposit_txt}>Monthly Rent</p>
           <div className={styles.flexx}>
             <p className={styles.currentPrice}>
-              <Rupee />
+              <span className={styles.rupeeIcon}>₹</span>
               {durationArray?.[duration.currentIndex]?.attr_price}
             </p>
             <p
@@ -45,22 +48,24 @@ const StickyBottomBar = ({
             </div>
           </div>
         </div>
-        <span className="text-[#9C9C9C]">+</span>
-        <div>
+        {/* <span className="text-[#9C9C9C]">+</span> */}
+        {/* <div>
           <p className={styles.deposit_txt}>Security Deposit</p>
           <p className={styles.currentPrice}>
-            <Rupee />0
+            <span className={styles.rupeeIcon}>₹</span>0
           </p>
-        </div>
+        </div> */}
       </div>
 
       <button
         onClick={handleButtonClick}
         style={{width: "232px", marginTop: "0px"}}
-        disabled={isLoading || isItemInCart}
+        disabled={isLoading || isItemInCart || soldOut}
         className={styles.btn}>
         {isLoading ? (
           <div className={styles.spinner} />
+        ) : soldOut ? (
+          "Notify me"
         ) : isItemInCart ? (
           "In cart"
         ) : (

@@ -72,3 +72,6 @@
 .close_icon_btn {
   @apply flex justify-start flex-col  pl-8;
 }
+.rupeeIcon {
+  @apply font-Inter;
+}

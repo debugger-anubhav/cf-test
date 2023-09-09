@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
-import {Heart, Rupee} from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
@@ -206,14 +206,14 @@ const Card = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
           {
             // currentPrice >= originalPrice ? (
             originalPrice >= currentPrice ? (
               <h3 className={`${styles.originalPrice} flex`}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {`${originalPrice} /mo`}
               </h3>
             ) : null
