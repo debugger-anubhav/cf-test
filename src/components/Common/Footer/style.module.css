@@ -14,7 +14,7 @@
   @apply mt-5 flex flex-col gap-3;
 }
 .points {
-  @apply text-14 font-medium leading-5 text-45454A cursor-pointer;
+  @apply text-14 xl:text-16 font-medium leading-5 text-45454A cursor-pointer;
 }
 .line {
   @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted mt-8;

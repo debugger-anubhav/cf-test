@@ -6,8 +6,89 @@
 }
 .banner_wrapper {
   /* @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative; */
-  @apply lg:w-full lg:h-full;
+  /* @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px]; */
+  /* @apply lg:w-full lg:h-full; */
 }
 .banner_img {
   @apply w-full h-full cursor-pointer;
+}
+
+.main_container {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] my-8 xl:my-[88px] w-full;
+}
+
+.heading {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6 pb-4 md:pb-6 xl:pb-8;
+}
+
+/* .item_included_container {
+  @apply flex px-1 py-2 items-center absolute rounded-lg border-[1px] border-[#E3E1DC];
+} */
+
+/* .item_icluded_text {
+  @apply text-45454A font-Poppins text-12 font-medium leading-normal;
+} */
+.card_box {
+  @apply flex w-full gap-4 3xl:gap-8 overflow-x-scroll h-full;
+}
+.main_container {
+  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-20;
+}
+
+.heading {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6 pb-4 md:pb-6 xl:pb-8;
+}
+
+.recentlyViewed_main {
+  @apply flex overflow-x-scroll overflow-y-hidden gap-4 xl:gap-6 3xl:gap-8;
+}
+.recentlyViewed_main::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}
+
+.wrapper {
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
+  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
+}
+.hover_wrapper img {
+  @apply animate-fade;
+}
+.card_image_hover {
+  @apply hover:transition-all hover:duration-100 hover:ease-in-out hover:animate-fade;
+}
+.card_price_wrap {
+  @apply flex gap-[0.62rem] items-center;
+}
+.thumbnail {
+  @apply min-w-full w-full;
+}
+.desc_div {
+  @apply flex gap-2 3xl:justify-between mt-[14px];
+}
+.desc {
+  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;
+}
+.price_div {
+  @apply mt-1 flex justify-between items-center font-Poppins;
+}
+.originalPrice {
+  @apply text-14 xl:text-18 tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+}
+.currentPrice {
+  @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
+}
+.discount {
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+}
+.item_included_container {
+  @apply flex px-[8px] py-[4px] items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
+}
+.item_icluded_text {
+  @apply text-45454A font-Poppins text-12 font-medium leading-normal;
+}
+.soldout_tag {
+  @apply flex p-1 items-center gap-1 absolute top-3 bg-[#3E688E] rounded-[4px];
+}
+.tag_text {
+  @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
 }

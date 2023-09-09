@@ -1,5 +1,5 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
+  @apply cursor-pointer;
   /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
 }
 .hover_wrapper img {
@@ -46,5 +46,5 @@
 }
 
 .banner_img {
-  @apply w-full h-full cursor-pointer;
+  @apply cursor-pointer lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px];
 }

@@ -174,6 +174,7 @@ export const SoldOutProduct = () => {
                             0,
                             imageArray.length - 1,
                           );
+                          console.log("itemmmmm", item);
                           return (
                             <div
                               key={index}
@@ -182,6 +183,7 @@ export const SoldOutProduct = () => {
                                 cardImage={`${productImageBaseUrl}${
                                   item?.image?.split(",")[0]
                                 }`}
+                                soldOut={true}
                                 desc={item?.product_name}
                                 originalPrice={item?.price}
                                 currentPrice={item?.sale_price}

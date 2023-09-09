@@ -7,7 +7,6 @@ import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
-
 import loadable from "@loadable/component";
 import MenuList from "@/components/Common/MenuList";
 import {endPoints} from "@/network/endPoints";
@@ -24,7 +23,6 @@ const ProductList = loadable(() =>
 export default function Wishlist() {
   const queryClient = new QueryClient();
   const params = useParams();
-
   useEffect(() => {
     const data = {
       userId: "",

@@ -157,10 +157,28 @@ export const CartPageSlice = createSlice({
   name: "CartPageData",
   initialState: {
     cartItems: [],
+    totalNumberOfItems: 0,
+    billBreakout: [],
   },
   reducers: {
     getCartItems(state, action) {
       state.cartItems = action.payload;
+    },
+    addItemsToCart(state, action) {
+      state.cartItems.push(action.payload);
+      // state.totalNumberOfItems += 1;
+    },
+    deleteItems(state, action) {
+      const itemIndex = state.cartItems.findIndex(
+        item => item.fc_product.id === action.payload,
+      );
+      if (itemIndex !== -1) {
+        state.cartItems.splice(itemIndex, 1); // Remove the item from the array
+        // state.totalQuantity -= 1; // Decrease the total quantity
+      }
+    },
+    getBillDetails(state, action) {
+      state.billBreakout.push(action.payload);
     },
   },
 });
@@ -201,7 +219,8 @@ export const {
   getProductDetails,
 } = ProductpageSlice.actions;
 
-export const {getCartItems} = CartPageSlice.actions;
+export const {getCartItems, deleteItems, addItemsToCart, getBillDetails} =
+  CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
   SeoAppliancePageSlice.actions;

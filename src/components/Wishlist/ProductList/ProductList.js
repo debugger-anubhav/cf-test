@@ -1,33 +1,30 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {useQuery} from "@/hooks/useQuery";
+
 import InfiniteScroll from "react-infinite-scroll-component";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import ProductCard from "../ProductCard/ProductCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-
+import {useQuery} from "@/hooks/useQuery";
 const ProductList = ({params}) => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
-
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-
   const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
   const {refetch: getSavedItems} = useQuery(
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
@@ -47,6 +44,7 @@ const ProductList = ({params}) => {
   }, [refreshState]);
 
   const data = categoryPageReduxData?.savedProducts;
+  console.log(categoryPageReduxData);
   return (
     <>
       <div className={style.conatiner_wrapper}>
@@ -66,8 +64,7 @@ const ProductList = ({params}) => {
             <div className={style.main_container}>
               {data
                 ?.filter(i => i.pq_quantity > 0)
-                .map((item, index) => {
-                  console.log(item?.image?.split(","));
+                ?.map((item, index) => {
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}
@@ -99,7 +96,7 @@ const ProductList = ({params}) => {
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
                             1000,
-                        ).toFixed(2)}%`}
+                        ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
                       />
@@ -108,7 +105,7 @@ const ProductList = ({params}) => {
                 })}
               {data
                 ?.filter(i => i.pq_quantity <= 0)
-                .map((item, index) => {
+                ?.map((item, index) => {
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}

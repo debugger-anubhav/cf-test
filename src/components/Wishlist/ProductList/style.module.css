@@ -128,8 +128,8 @@
   @apply text-[#597492] font-Poppins  text-12  font-medium leading-6 underline;
 }
 /* .popover_wrapper{
-  @apply !left-[90px] bg-red-400;
-} */
+    @apply !left-[90px] bg-red-400;
+  } */
 
 .main_container {
   @apply flex flex-wrap lg:grid lg:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;

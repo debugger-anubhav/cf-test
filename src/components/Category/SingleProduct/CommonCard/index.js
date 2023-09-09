@@ -6,6 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
+import {RiSparklingFill} from "react-icons/ri";
 
 const CategoryCard = ({
   hoverCardImage,
@@ -71,19 +72,25 @@ const CategoryCard = ({
         setHoverCard(true);
       }}
       onMouseOut={() => setHoverCard(false)}>
-      <div>
+      <div className="relative">
         <img
           src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
           className={styles.img}
         />
+        {soldOut && (
+          <div className={styles.soldout_tag}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>SOLD OUT</p>
+          </div>
+        )}
       </div>
 
-      {soldOut && (
+      {/* {soldOut && (
         <div className={styles.soldout_tag}>
           <p className={styles.tag_text}>SOLD OUT</p>
         </div>
-      )}
+      )} */}
 
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
@@ -116,7 +123,7 @@ const CategoryCard = ({
         </div>
         {/* {originalPrice !== currentPrice && ( */}
         {currentPrice < originalPrice && (
-          <div className={styles.discount}>{discount}</div>
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
     </div>

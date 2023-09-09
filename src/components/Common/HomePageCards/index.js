@@ -24,7 +24,6 @@ const Card = ({
   const [inWishList, setInWishList] = useState(false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
@@ -75,7 +74,7 @@ const Card = ({
     dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? getwhislistProduct()
-          .then(res => console.log(res?.data?.data))
+          .then(res => console.log(res?.data?.dat))
           .catch(err => console.log(err))
       : removewhislistProduct()
           .then(res => console.log(res))
@@ -108,7 +107,9 @@ const Card = ({
       onMouseOver={() => {
         isHover && setHoverCard(true);
       }}
-      onMouseOut={() => setHoverCard(false)}>
+      onMouseOut={() => {
+        setHoverCard(false);
+      }}>
       <div className="relative">
         <img
           src={hoverCard ? hoverCardImage : cardImage}
@@ -178,7 +179,7 @@ const Card = ({
 
         {/* {originalPrice !== currentPrice && ( */}
         {currentPrice <= originalPrice && (
-          <div className={styles.discount}>{discount}</div>
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
     </div>

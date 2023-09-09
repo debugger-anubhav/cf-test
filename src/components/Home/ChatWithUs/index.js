@@ -23,19 +23,20 @@ export default function ChatWithUs() {
             9 PM)
           </p>
           <div className={styles.btn_wrapper}>
-            <button
-              className={styles.write_to_us_wrapper}
-              onClick={() => {
-                handleButtonClick();
-              }}>
-              {/* <TbMailFilled className={styles.tbMail_icon} /> */}
-              <Mail
-                size={20}
-                color={"#71717A"}
-                className={styles.tbMail_icon}
-              />
-              <p className={styles.write_to_us_text}>Write to us</p>
-            </button>
+            <a href="mailto: hello@cityfurnish.com">
+              <button
+                className={styles.write_to_us_wrapper}
+                onClick={() => {
+                  handleButtonClick();
+                }}>
+                <Mail
+                  size={20}
+                  color={"#71717A"}
+                  className={styles.tbMail_icon}
+                />
+                <p className={styles.write_to_us_text}>Write to us</p>
+              </button>
+            </a>
             <div
               className={styles.chat_now_wrapper}
               // onClick={() => setShowChat(true)}

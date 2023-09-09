@@ -6,7 +6,12 @@ import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
-import {addCityList, selectedCityId, addSidebarMenuLists} from "@/store/Slices";
+import {
+  addCityList,
+  selectedCityId,
+  addSidebarMenuLists,
+  getCartItems,
+} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
@@ -25,8 +30,6 @@ const HEADER_HEIGHT = 48;
 const Header = () => {
   const iconRef = useRef(null);
   const dispatch = useDispatch();
-  const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const wishListCount = categoryPageReduxData?.savedProducts?.length;
   const router = useRouter();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
@@ -44,9 +47,8 @@ const Header = () => {
   const [topOffset, settopOffset] = useState(0);
   const [arr, setArr] = React.useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
-
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
-
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
     getCityList()
       .then(res => {
@@ -65,6 +67,32 @@ const Header = () => {
     });
   }, []);
 
+  const cityId = getLocalStorage("cityId");
+
+  // const cartItemsLength = useSelector(
+  //   state => state.cartPageData.cartItems.length,
+  // );
+
+  const userId = getLocalStorage("user_id");
+  const tempUserId = getLocalStorage("tempUserID");
+  const userIdToUse = userId || tempUserId;
+
+  // added for cart icons
+  const fetchCartItems = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+      .then(res => {
+        console.log(res, "res in fetch itemms");
+        setArr(res?.data?.data);
+        dispatch(getCartItems(res?.data?.data));
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchCartItems();
+  }, []);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (iconRef.current && !iconRef.current.contains(event.target)) {
@@ -81,7 +109,7 @@ const Header = () => {
   const toggleDropdown = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
-
+  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
   return (
     <>
       <div className={styles.main}>
@@ -155,12 +183,24 @@ const Header = () => {
                 )}
               </span>
               {/* <Link href={`/cart`}> */}
-              <Image
-                src={Icons.shoppingCard}
-                alt="shopping-card-icon"
-                className={styles.header_shopping_card}
-                onClick={() => router.push("https://cityfurnish.com/cart")}
-              />
+
+              <div className="relative">
+                <Image
+                  src={Icons.shoppingCard}
+                  alt="shopping-card-icon"
+                  className={styles.header_shopping_card}
+                  onClick={() => router.push("https://cityfurnish.com/cart")}
+                />
+                {/* <Image
+                  src={Icons.shoppingCard}
+                  alt="shopping-card-icon"
+                  className={styles.header_shopping_card}
+                  onClick={() => router.push("/cart")}
+                /> */}
+                {/* {cartItemsLength > 0 && (
+                  <div className={styles.cart_badge}>{cartItemsLength}</div>
+                )} */}
+              </div>
               {/* </Link> */}
               <Image
                 src={Icons.Profile}

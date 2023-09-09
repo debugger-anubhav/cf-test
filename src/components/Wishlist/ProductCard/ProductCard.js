@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {Close, Delete, Rupee} from "@/assets/icon";
+import {Close, DeleteIcon, Rupee} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
 import {getLocalStorage} from "@/constants/constant";
@@ -46,6 +46,7 @@ const ProductCard = ({
     removewhislistProduct()
       .then(res => {
         setDeleteIconClick(false);
+
         refreshFunction(Math.random());
       })
       .catch(err => console.log(err));
@@ -86,13 +87,14 @@ const ProductCard = ({
         </h3>
         <span
           onMouseOver={() => setIsHovered(true)}
-          onMouseOut={() => setIsHovered(false)}>
-          <Delete
+          onMouseOut={() => setIsHovered(false)}
+          onClick={() => {
+            console.log("first");
+            setDeleteIconClick(true);
+          }}>
+          <DeleteIcon
             size={25}
             color={isHovered ? "#D96060" : "#71717A"}
-            onClick={() => {
-              setDeleteIconClick(true);
-            }}
             className={"cursor-pointer"}
           />
         </span>
@@ -109,7 +111,7 @@ const ProductCard = ({
           </h3>
         </div>
         {originalPrice !== currentPrice && (
-          <div className={styles.discount}>{discount}</div>
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
       <div>
