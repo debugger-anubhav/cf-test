@@ -174,7 +174,6 @@ export const SoldOutProduct = () => {
                             0,
                             imageArray.length - 1,
                           );
-                          console.log("itemmmmm", item);
                           return (
                             <div
                               key={index}
