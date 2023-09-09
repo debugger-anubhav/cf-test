@@ -29,13 +29,12 @@ const Card = ({
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-  const router = useRouter();
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
     productId: productID,
   };
-
+  const router = useRouter();
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
