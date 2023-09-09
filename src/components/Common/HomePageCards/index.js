@@ -212,7 +212,7 @@ const Card = ({
           </h3>
           {
             // currentPrice >= originalPrice ? (
-            originalPrice >= currentPrice ? (
+            originalPrice > currentPrice ? (
               <h3 className={`${styles.originalPrice} flex`}>
                 <span className={styles.rupeeIcon}>₹</span>
                 {`${originalPrice} /mo`}
@@ -222,7 +222,7 @@ const Card = ({
         </div>
 
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice <= originalPrice && (
+        {currentPrice < originalPrice && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
