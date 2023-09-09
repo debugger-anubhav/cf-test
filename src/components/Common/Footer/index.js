@@ -43,15 +43,15 @@ const Footer = ({params}) => {
     {
       head: "Cityfurnish",
       points: [
-        {text: "About US", link: "https://cityfurnish.com/pages/about"},
+        {text: "About US", link: "https://test.rentofurniture.com/pages/about"},
         {
           text: "Refer a Friend",
-          link: "https://cityfurnish.com/pages/refer-a-friend",
+          link: "https://test.rentofurniture.com/pages/refer-a-friend",
         },
-        {text: "Career", link: "https://cityfurnish.com/pages/careers"},
+        {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
         {
           text: "Contact US",
-          link: "https://cityfurnish.com/pages/contact-us",
+          link: "https://test.rentofurniture.com/pages/contact-us",
         },
       ],
     },
@@ -59,13 +59,13 @@ const Footer = ({params}) => {
     {
       head: "Information",
       points: [
-        {text: "Blog", link: "https://cityfurnish.com/blog/"},
-        {text: "FAQ", link: "https://cityfurnish.com/pages/faq"},
+        {text: "Blog", link: "https://test.rentofurniture.com/blog/"},
+        {text: "FAQ", link: "https://test.rentofurniture.com/pages/faq"},
         {
           text: "Sample Rental Agreement",
-          link: "https://cityfurnish.com/pages/rentalagreement",
+          link: "https://test.rentofurniture.com/pages/rentalagreement",
         },
-        {text: "Offers", link: "https://cityfurnish.com/pages/offers"},
+        {text: "Offers", link: "https://test.rentofurniture.com/pages/offers"},
       ],
     },
 
@@ -74,11 +74,11 @@ const Footer = ({params}) => {
       points: [
         {
           text: "Privacy Policy",
-          link: "https://cityfurnish.com/pages/privacy-policy",
+          link: "https://test.rentofurniture.com/pages/privacy-policy",
         },
         {
           text: "Terms & Conditions",
-          link: "https://cityfurnish.com/pages/terms-of-use",
+          link: "https://test.rentofurniture.com/pages/terms-of-use",
         },
       ],
     },

@@ -5,8 +5,9 @@ import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
-import {addRemoveWhishListitems} from "@/store/Slices/categorySlice";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useRouter} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
 
 const Card = ({
   desc,
@@ -21,24 +22,27 @@ const Card = ({
   isHover = true,
   productWidth,
   productID,
-  isRentNow,
-  url,
 }) => {
   const [inWishList, setInWishList] = useState(false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const router = useRouter();
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
     productId: productID,
   };
 
-  const {mutateAsync: getwhislistProduct} = useMutation(
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  const {mutateAsync: addwhislistProduct} = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
@@ -51,7 +55,14 @@ const Card = ({
     endPoints.deleteWishListProduct,
     data,
   );
-
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const userId = getLocalStorage("user_id");
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -74,14 +85,43 @@ const Card = ({
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    setInWishList(!inWishList);
-    dispatch(addRemoveWhishListitems(!inWishList));
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
-      ? getwhislistProduct()
-          .then(res => console.log(res?.data?.dat))
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
           .catch(err => console.log(err))
       : removewhislistProduct()
-          .then(res => console.log(res))
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
           .catch(err => console.log(err));
   };
 
@@ -109,25 +149,16 @@ const Card = ({
       } ${productWidth} 
       `}
       onMouseOver={() => {
-        if (!isRentNow) {
-          isHover && setHoverCard(true);
-        }
+        isHover && setHoverCard(true);
       }}
       onMouseOut={() => {
-        if (!isRentNow) {
-          setHoverCard(false);
-        }
+        setHoverCard(false);
       }}>
       <div className="relative">
         <img
-          src={isRentNow ? cardImage : hoverCard ? hoverCardImage : cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
-          onClick={() => {
-            if (isRentNow) {
-              router.push(url);
-            }
-          }}
-          className={`${isRentNow} ? ${styles?.banner_img} : ${styles.thumbnail}
+          className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }
           `}
@@ -148,57 +179,53 @@ const Card = ({
           </div>
         )}
       </div>
-      {!isRentNow && (
-        <div className={styles.desc_div}>
-          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-            {desc}
+      <div className={styles.desc_div}>
+        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+          {desc}
+        </h3>
+        <div
+          id={productID}
+          onClick={e => {
+            e.preventDefault();
+            handleWhislistCard(e);
+          }}>
+          <Heart
+            size={25}
+            color={inWishList ? "#D96060" : "#C0C0C6"}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   setInWishList(!inWishList);
+            // }}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   handleWhislistCard(e);
+            // }}
+            className={"cursor-pointer"}
+          />
+        </div>
+      </div>
+      <div className={styles.price_div}>
+        <div className={styles.card_price_wrap}>
+          <h3 className={`${styles.currentPrice} flex`}>
+            <span className={styles.rupeeIcon}>₹</span>
+            {`${currentPrice} /mo`}
           </h3>
-          <div
-            id={productID}
-            onClick={e => {
-              e.preventDefault();
-              handleWhislistCard(e);
-            }}>
-            <Heart
-              size={25}
-              color={inWishList ? "#D96060" : "#C0C0C6"}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   setInWishList(!inWishList);
-              // }}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   handleWhislistCard(e);
-              // }}
-              className={"cursor-pointer"}
-            />
-          </div>
+          {
+            // currentPrice >= originalPrice ? (
+            originalPrice >= currentPrice ? (
+              <h3 className={`${styles.originalPrice} flex`}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {`${originalPrice} /mo`}
+              </h3>
+            ) : null
+          }
         </div>
-      )}
-      {!isRentNow && (
-        <div className={styles.price_div}>
-          <div className={styles.card_price_wrap}>
-            <h3 className={`${styles.currentPrice} flex`}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {`${currentPrice} /mo`}
-            </h3>
-            {
-              // currentPrice >= originalPrice ? (
-              originalPrice >= currentPrice ? (
-                <h3 className={`${styles.originalPrice} flex`}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {`${originalPrice} /mo`}
-                </h3>
-              ) : null
-            }
-          </div>
 
-          {/* {originalPrice !== currentPrice && ( */}
-          {currentPrice <= originalPrice && (
-            <div className={styles.discount}>{`-${discount} OFF`}</div>
-          )}
-        </div>
-      )}
+        {/* {originalPrice !== currentPrice && ( */}
+        {currentPrice <= originalPrice && (
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
+        )}
+      </div>
     </div>
   );
 };

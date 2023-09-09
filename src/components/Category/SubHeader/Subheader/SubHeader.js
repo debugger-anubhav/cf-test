@@ -108,7 +108,7 @@ const SubHeader = ({params}) => {
       }
     }
 
-    if (homePageReduxData?.cityList.length) {
+    if (homePageReduxData?.cityList?.length) {
       const id = findIdByURL(homePageReduxData?.cityList, params.city);
       if (id !== null) {
         setLocalStorage("cityId", id);
@@ -177,11 +177,13 @@ const SubHeader = ({params}) => {
   );
 
   useEffect(() => {
-    getFilterList()
-      .then(res => {
-        dispatch(addFilterData(res?.data?.data));
-      })
-      .catch(err => console.log(err));
+    if (subCategoryId && categoryId) {
+      getFilterList()
+        .then(res => {
+          dispatch(addFilterData(res?.data?.data));
+        })
+        .catch(err => console.log(err));
+    }
   }, [
     categoryId,
     subCategoryId,
@@ -273,7 +275,6 @@ const SubHeader = ({params}) => {
   };
 
   const toggleDropDownFilter = () => {
-    console.log("hiii");
     setFilterOpen(!filterOpen);
   };
 
@@ -590,7 +591,7 @@ const SubHeader = ({params}) => {
         </div>
       )}
 
-      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
+      {filtereData && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
     </>
   );
 };
