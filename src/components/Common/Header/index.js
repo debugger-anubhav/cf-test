@@ -74,7 +74,7 @@ const Header = () => {
   //   state => state.cartPageData.cartItems.length,
   // );
 
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
