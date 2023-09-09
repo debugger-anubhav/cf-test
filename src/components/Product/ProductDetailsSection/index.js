@@ -177,7 +177,7 @@ const ProductDetails = ({params}) => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
