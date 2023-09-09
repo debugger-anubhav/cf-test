@@ -17,12 +17,10 @@ const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
           </div>
         </div>
         <div>
-          {isOpen && (
-            <div
-              dangerouslySetInnerHTML={{__html: ans}}
-              className={styles.ans}
-            />
-          )}
+          <div
+            dangerouslySetInnerHTML={{__html: ans}}
+            className={`${styles.ans} ${isOpen && styles.ans_open}`}
+          />
         </div>
       </div>
       <div className="bg-EDEDEE h-[1px] w-full"></div>
