@@ -177,11 +177,13 @@ const SubHeader = ({params}) => {
   );
 
   useEffect(() => {
-    getFilterList()
-      .then(res => {
-        dispatch(addFilterData(res?.data?.data));
-      })
-      .catch(err => console.log(err));
+    if (subCategoryId && categoryId) {
+      getFilterList()
+        .then(res => {
+          dispatch(addFilterData(res?.data?.data));
+        })
+        .catch(err => console.log(err));
+    }
   }, [
     categoryId,
     subCategoryId,
@@ -276,6 +278,8 @@ const SubHeader = ({params}) => {
     console.log("hiii");
     setFilterOpen(!filterOpen);
   };
+
+  console.log("filtereData", filtereData);
 
   return (
     <>
@@ -590,7 +594,7 @@ const SubHeader = ({params}) => {
         </div>
       )}
 
-      <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />
+      {filtereData && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
     </>
   );
 };
