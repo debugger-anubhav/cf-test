@@ -279,8 +279,6 @@ const SubHeader = ({params}) => {
     setFilterOpen(!filterOpen);
   };
 
-  console.log("filtereData", filtereData);
-
   return (
     <>
       {skeletonOpen ? (

@@ -76,7 +76,7 @@ const TotalBreakup = ({
                 {arr.map((item, index) => (
                   <div key={index} className={styles.dropdown_row}>
                     <p className={`min-w-[190px] ${styles.prod_name}`}>
-                      {item?.fc_product?.product_name}
+                      {item?.fc_product?.product_name.replace(/-/g, " ")}
                     </p>
                     <p className={`min-w-fit ${styles.prod_name}`}>12 months</p>
                     <p className={styles.total_amount}>

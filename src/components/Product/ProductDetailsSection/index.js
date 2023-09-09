@@ -47,7 +47,7 @@ const ProductDetails = ({params}) => {
   const arr = [
     "Home",
     prodDetails?.[0]?.category_name,
-    prodDetails?.[0]?.product_name,
+    prodDetails?.[0]?.product_name.replace(/-/g, " "),
   ];
   const dispatch = useDispatch();
 
@@ -425,7 +425,7 @@ const ProductDetails = ({params}) => {
             className={styles.header_div}
             style={{justifyContent: "space-between"}}>
             <h1 className={styles.item_name}>
-              {prodDetails?.[0]?.product_name}
+              {prodDetails?.[0]?.product_name.replace(/-/g, " ")}
             </h1>
             <div className={styles.header_div}>
               <Heart

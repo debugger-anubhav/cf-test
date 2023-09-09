@@ -287,7 +287,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
           const existingLocal = getLocalStorage("searches");
-          setLocalStorage("searches", [...existingLocal, truncatedArray]);
+          if (existingLocal) {
+            setLocalStorage("searches", [...existingLocal, truncatedArray]);
+          } else {
+            setLocalStorage("searches", truncatedArray);
+          }
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
@@ -374,7 +378,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.serach_result_img}
                   />
                   <p className={styles.search_result_text}>
-                    {item.product_name}
+                    {item.product_name?.replace(/-/g, " ")}
                   </p>
                 </div>
               ))}
@@ -393,7 +397,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.serach_result_img}
                   />
                   <p className={styles.search_result_text}>
-                    {item.product_name}
+                    {item.product_name?.replace(/-/g, " ")}
                   </p>
                 </div>
               ))}

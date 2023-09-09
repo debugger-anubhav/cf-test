@@ -83,7 +83,7 @@ const ProductCard = ({
       </div>
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
+          {desc.replace(/-/g, " ")}
         </h3>
         <span
           onMouseOver={() => setIsHovered(true)}
