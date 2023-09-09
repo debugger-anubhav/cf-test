@@ -5,7 +5,7 @@ import styles from "./style.module.css";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
-import Card from "@/components/Common/HomePageCards";
+import RentNowCard from "@/components/Common/RentNowCards";
 
 const RentNowBanner = ({params}) => {
   const [rentNowBanner, setRentNowBanner] = React.useState(null);
@@ -100,9 +100,8 @@ const RentNowBanner = ({params}) => {
               isDumy && "pointer-events-none"
             }`}
             key={index.toString()}>
-            <Card
+            <RentNowCard
               cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
-              isRentNow={true}
               url={item?.url}
             />
             {/* <img

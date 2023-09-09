@@ -22,17 +22,14 @@ const Card = ({
   isHover = true,
   productWidth,
   productID,
-  isRentNow,
-  url,
 }) => {
   const [inWishList, setInWishList] = useState(false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const router = useRouter();
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-
+  const router = useRouter();
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
@@ -152,25 +149,16 @@ const Card = ({
       } ${productWidth} 
       `}
       onMouseOver={() => {
-        if (!isRentNow) {
-          isHover && setHoverCard(true);
-        }
+        isHover && setHoverCard(true);
       }}
       onMouseOut={() => {
-        if (!isRentNow) {
-          setHoverCard(false);
-        }
+        setHoverCard(false);
       }}>
       <div className="relative">
         <img
-          src={isRentNow ? cardImage : hoverCard ? hoverCardImage : cardImage}
+          src={hoverCard ? hoverCardImage : cardImage}
           alt="thumbnail image"
-          onClick={() => {
-            if (isRentNow) {
-              router.push(url);
-            }
-          }}
-          className={`${isRentNow} ? ${styles?.banner_img} : ${styles.thumbnail}
+          className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }
           `}
@@ -191,57 +179,53 @@ const Card = ({
           </div>
         )}
       </div>
-      {!isRentNow && (
-        <div className={styles.desc_div}>
-          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-            {desc}
+      <div className={styles.desc_div}>
+        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+          {desc}
+        </h3>
+        <div
+          id={productID}
+          onClick={e => {
+            e.preventDefault();
+            handleWhislistCard(e);
+          }}>
+          <Heart
+            size={25}
+            color={inWishList ? "#D96060" : "#C0C0C6"}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   setInWishList(!inWishList);
+            // }}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   handleWhislistCard(e);
+            // }}
+            className={"cursor-pointer"}
+          />
+        </div>
+      </div>
+      <div className={styles.price_div}>
+        <div className={styles.card_price_wrap}>
+          <h3 className={`${styles.currentPrice} flex`}>
+            <Rupee />
+            {`${currentPrice} /mo`}
           </h3>
-          <div
-            id={productID}
-            onClick={e => {
-              e.preventDefault();
-              handleWhislistCard(e);
-            }}>
-            <Heart
-              size={25}
-              color={inWishList ? "#D96060" : "#C0C0C6"}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   setInWishList(!inWishList);
-              // }}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   handleWhislistCard(e);
-              // }}
-              className={"cursor-pointer"}
-            />
-          </div>
+          {
+            // currentPrice >= originalPrice ? (
+            originalPrice >= currentPrice ? (
+              <h3 className={`${styles.originalPrice} flex`}>
+                <Rupee />
+                {`${originalPrice} /mo`}
+              </h3>
+            ) : null
+          }
         </div>
-      )}
-      {!isRentNow && (
-        <div className={styles.price_div}>
-          <div className={styles.card_price_wrap}>
-            <h3 className={`${styles.currentPrice} flex`}>
-              <Rupee />
-              {`${currentPrice} /mo`}
-            </h3>
-            {
-              // currentPrice >= originalPrice ? (
-              originalPrice >= currentPrice ? (
-                <h3 className={`${styles.originalPrice} flex`}>
-                  <Rupee />
-                  {`${originalPrice} /mo`}
-                </h3>
-              ) : null
-            }
-          </div>
 
-          {/* {originalPrice !== currentPrice && ( */}
-          {currentPrice <= originalPrice && (
-            <div className={styles.discount}>{`-${discount} OFF`}</div>
-          )}
-        </div>
-      )}
+        {/* {originalPrice !== currentPrice && ( */}
+        {currentPrice <= originalPrice && (
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
+        )}
+      </div>
     </div>
   );
 };
