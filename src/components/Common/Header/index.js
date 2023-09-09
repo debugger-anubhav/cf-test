@@ -47,7 +47,8 @@ const Header = () => {
   const [topOffset, settopOffset] = useState(0);
   const [arr, setArr] = React.useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
-
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
     getCityList()
       .then(res => {
@@ -108,7 +109,7 @@ const Header = () => {
   const toggleDropdown = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
-
+  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
   return (
     <>
       <div className={styles.main}>
@@ -166,12 +167,21 @@ const Header = () => {
               </>
             )}
             <div className="relative flex">
-              <Image
-                src={Icons.Favorite}
-                alt="favorite"
-                className={styles.header_favorite}
-                onClick={() => router.push("/wishlist")}
-              />
+              <span className={styles.header_favorite_container}>
+                <Image
+                  src={Icons.Favorite}
+                  alt="favorite"
+                  className={styles.header_favorite}
+                  onClick={() => router.push("/wishlist")}
+                />
+                {categoryPageReduxData?.savedProducts?.length > 0 ? (
+                  <span className={styles.header_favorite_count}>
+                    {wishListCount}
+                  </span>
+                ) : (
+                  <></>
+                )}
+              </span>
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">

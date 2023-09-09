@@ -20,6 +20,11 @@ const RecentlyViewedProduct = ({page}) => {
   //   ?.toString()
   //   ?.replace(/"/g, "");
 
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -33,6 +38,8 @@ const RecentlyViewedProduct = ({page}) => {
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // JSON.parse(localStorage.getItem("user_id")) ??
+      // JSON.parse(localStorage.getItem("tempUserID"))
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,

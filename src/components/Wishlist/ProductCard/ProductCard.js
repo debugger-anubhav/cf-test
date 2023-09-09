@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {Close, Rupee} from "@/assets/icon";
-// import {Close, Delete, Rupee} from "@/assets/icon";
+import {Close, DeleteIcon, Rupee} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
 import {getLocalStorage} from "@/constants/constant";
@@ -21,11 +20,11 @@ const ProductCard = ({
   productWidth,
   isImageHeight = false,
   productID,
-  // refreshFunction,
+  refreshFunction,
   hoverCardImage,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
-  // const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
   const [hoverCard, setHoverCard] = useState(false);
 
   const data = {
@@ -47,7 +46,8 @@ const ProductCard = ({
     removewhislistProduct()
       .then(res => {
         setDeleteIconClick(false);
-        // refreshFunction(Math.random());
+
+        refreshFunction(Math.random());
       })
       .catch(err => console.log(err));
   };
@@ -81,23 +81,24 @@ const ProductCard = ({
           </div>
         )}
       </div>
-      {/* <div className={styles.desc_div}>
+      <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc}
         </h3>
         <span
           onMouseOver={() => setIsHovered(true)}
-          onMouseOut={() => setIsHovered(false)}>
-          <Delete
+          onMouseOut={() => setIsHovered(false)}
+          onClick={() => {
+            console.log("first");
+            setDeleteIconClick(true);
+          }}>
+          <DeleteIcon
             size={25}
             color={isHovered ? "#D96060" : "#71717A"}
-            onClick={() => {
-              setDeleteIconClick(true);
-            }}
             className={"cursor-pointer"}
           />
         </span>
-      </div> */}
+      </div>
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
