@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {Close, DeleteIcon, Rupee} from "@/assets/icon";
+import {Close, DeleteIcon} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
 import {getLocalStorage} from "@/constants/constant";
@@ -102,11 +102,11 @@ const ProductCard = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
           <h3 className={`${styles.originalPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${originalPrice} /mo`}
           </h3>
         </div>

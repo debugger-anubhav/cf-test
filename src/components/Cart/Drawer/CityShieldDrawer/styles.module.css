@@ -69,6 +69,9 @@
 .dot {
   @apply px-[2px] w-1 h-1 rounded-full bg-71717A;
 }
+.rupeeIcon {
+  @apply font-Inter;
+}
 
 @media only screen and (min-width: 768px) {
   .customDrawer {
