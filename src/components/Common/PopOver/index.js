@@ -147,7 +147,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         <Box
           className={styles.sub_item_wrapper}
           sx={{
-            mt: 3,
+            mt: 2.4,
             // boxShadow:3
           }}
           // onMouseLeave={handleClose}
