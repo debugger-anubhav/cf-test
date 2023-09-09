@@ -42,7 +42,7 @@
   @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-md;
 }
 .city_name {
-  @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2 capitalize whitespace-pre;
+  @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2 capitalize;
 }
 .city_drawer_wrapper {
   @apply sm:w-[500px] w-full px-8 lg:px-0 rounded-t-lg;
