@@ -8,7 +8,6 @@ import {
   Heart,
   InformationIcon,
   RatingStar,
-  Rupee,
   ShareIcon,
   VerifyIcon,
 } from "@/assets/icon";
@@ -18,6 +17,7 @@ import {ProductPageImages} from "@/assets/images";
 import {
   HasselFreeDataForProductPage,
   getLocalStorage,
+  getLocalStorageString,
   productPageImagesBaseUrl,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
@@ -32,6 +32,9 @@ import {format} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
 import {addItemsToCart, getProductDetails} from "@/store/Slices";
 import {useMutation} from "@/hooks/useMutation";
+import {useRouter} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
@@ -43,7 +46,6 @@ const ProductDetails = ({params}) => {
     state => state.productPageData.singleProductDetails,
   );
   const cartItems = useSelector(state => state.cartPageData.cartItems);
-  console.log(cartItems, "cart items in product page");
   const arr = [
     "Home",
     prodDetails?.[0]?.category_name,
@@ -64,6 +66,7 @@ const ProductDetails = ({params}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
+  const [soldOut, setSoldOut] = useState(false);
 
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -107,6 +110,7 @@ const ProductDetails = ({params}) => {
       )
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
+        if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
       })
       .catch(err => {
         console.log(err);
@@ -167,13 +171,56 @@ const ProductDetails = ({params}) => {
     );
   }, []);
 
+  const router = useRouter();
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+  const userId = getLocalStorageString("userId");
+
   const handleWhislistCard = e => {
-    e.preventDefault();
-    getwhislistProduct()
-      .then(res => console.log(res?.data?.dat))
-      .catch(err => console.log(err));
-    setInWishList(!inWishList);
+    e.stopPropagation();
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
+    !inWishList
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
+          .catch(err => console.log(err));
   };
+
   const data = {
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -184,13 +231,26 @@ const ProductDetails = ({params}) => {
     productId: params?.productId,
   };
 
-  const {mutateAsync: getwhislistProduct} = useMutation(
+  const {mutateAsync: addwhislistProduct} = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
     data,
   );
 
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const {mutateAsync: removewhislistProduct} = useMutation(
+    "remove-wishlist",
+    "DELETE",
+    endPoints.deleteWishListProduct,
+    data,
+  );
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
   };
@@ -245,7 +305,7 @@ const ProductDetails = ({params}) => {
     axios
       .post(baseURL + endPoints.productPage.addToCart, body, headers)
       .then(res => {
-        console.log(res, "res in add to cart");
+        // console.log(res, "res in add to cart");
         const apiData = res?.data?.data;
         if (!isItemInCart) {
           dispatch(addItemsToCart(apiData));
@@ -319,6 +379,7 @@ const ProductDetails = ({params}) => {
           isLoading={isLoading}
           handleButtonClick={handleAddToCart}
           isItemInCart={isItemInCart}
+          soldOut={soldOut}
         />
       )}
       <div className={styles.bread_crumps}>
@@ -501,35 +562,43 @@ const ProductDetails = ({params}) => {
                 <p className={styles.deposit_txt}>Monthly Rent</p>
                 <div className={styles.flexx}>
                   <p className={styles.currentPrice}>
-                    <Rupee />
+                    <span className={styles.rupeeIcon}>₹</span>
                     {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
-                  <p
-                    className={styles.originalPrice}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    {durationArray?.[0]?.attr_price}
-                  </p>
-                  <div
-                    className={styles.discount}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    {`-${Math.round(
-                      ((durationArray?.[0]?.attr_price -
-                        durationArray?.[duration.currentIndex]?.attr_price) *
-                        100) /
-                        durationArray?.[0]?.attr_price,
-                    ).toFixed(0)}% OFF`}
-                  </div>
+                  {durationArray?.[0]?.attr_price >
+                    durationArray?.[duration.currentIndex]?.attr_price && (
+                    <p
+                      className={styles.originalPrice}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      <span className={styles.rupeeIcon}>₹</span>
+                      {durationArray?.[0]?.attr_price}
+                    </p>
+                  )}
+
+                  {durationArray?.[0]?.attr_price >
+                    durationArray?.[duration.currentIndex]?.attr_price && (
+                    <div
+                      className={styles.discount}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      {`-${Math.round(
+                        ((durationArray?.[0]?.attr_price -
+                          durationArray?.[duration.currentIndex]?.attr_price) *
+                          100) /
+                          durationArray?.[0]?.attr_price,
+                      ).toFixed(0)}% OFF`}
+                    </div>
+                  )}
                 </div>
               </div>
               {/* <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
                 <p className={styles.currentPrice}>
-                  <Rupee />0
+                 <span className={styles.rupeeIcon}>₹</span>0
                 </p>
               </div> */}
             </div>
@@ -537,11 +606,13 @@ const ProductDetails = ({params}) => {
 
           <button
             onClick={handleAddToCart}
-            disabled={isLoading || isItemInCart}
+            disabled={isLoading || isItemInCart || soldOut}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
               <div className={styles.spinner} />
+            ) : soldOut ? (
+              "Notify me"
             ) : isItemInCart ? (
               "In cart"
             ) : (
@@ -588,16 +659,6 @@ const ProductDetails = ({params}) => {
                 <p className={styles.city_shield_head}>Cityshield </p>
               </div>
               <button className={styles.read_more}>Read More</button>
-
-              {drawerOpen && (
-                <CityshieldDrawer
-                  toggleDrawer={toggleDrawer}
-                  open={drawerOpen}
-                  cityShieldCurrentPrice={cityShieldCurrentPrice}
-                  cityShieldOriginalPrice={cityShieldOriginalPrice}
-                  cityShieldDiscount={cityShieldDiscount}
-                />
-              )}
             </div>
             <p className={styles.opt_for}>
               Opt for City Shield today and get covered for accidental damages
@@ -608,16 +669,26 @@ const ProductDetails = ({params}) => {
 
             <div className={styles.cityshield_prices}>
               <p className={styles.currentPrice}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {cityShieldCurrentPrice}/mo
               </p>
               <p className={styles.originalPrice}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {cityShieldOriginalPrice} / mo
               </p>
               <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
             </div>
           </div>
+
+          {drawerOpen && (
+            <CityshieldDrawer
+              toggleDrawer={toggleDrawer}
+              open={drawerOpen}
+              cityShieldCurrentPrice={cityShieldCurrentPrice}
+              cityShieldOriginalPrice={cityShieldOriginalPrice}
+              cityShieldDiscount={cityShieldDiscount}
+            />
+          )}
         </div>
       </div>
     </div>

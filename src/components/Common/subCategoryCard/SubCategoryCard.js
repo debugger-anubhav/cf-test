@@ -1,9 +1,54 @@
 import React, {useState} from "react";
 import style from "./style.module.css";
 import {Heart} from "@/assets/icon";
+import {useMutation} from "@/hooks/useMutation";
+import {endPoints} from "@/network/endPoints";
+import {useDispatch} from "react-redux";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {useQuery} from "@/hooks/useQuery";
+import {useRouter} from "next/navigation";
 
-const SubCategoryCard = () => {
+const SubCategoryCard = ({productID}) => {
   const [inWishList, setInWishList] = useState(false);
+
+  // const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const cityIdStr = localStorage
+    .getItem("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  const data = {
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
+    productId: productID,
+  };
+
+  const {mutateAsync: addwhislistProduct} = useMutation(
+    "add-wishlist",
+    "POST",
+    endPoints.addWishListProduct,
+    data,
+  );
+
+  const {mutateAsync: removewhislistProduct} = useMutation(
+    "remove-wishlist",
+    "DELETE",
+    endPoints.deleteWishListProduct,
+    data,
+  );
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const userId = getLocalStorageString("userId");
   const includedItem = [
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png",
@@ -15,6 +60,48 @@ const SubCategoryCard = () => {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png",
     },
   ];
+
+  const handleWhislistCard = e => {
+    e.stopPropagation();
+    if (!userId) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+    // dispatch(addRemoveWhishListitems(!inWishList));
+    !inWishList
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res?.data?.dat);
+          })
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+              })
+              .catch(err => console.log(err));
+            setInWishList(prev => !prev);
+            console.log(res);
+          })
+          .catch(err => console.log(err));
+  };
   return (
     <div className={style.main_card_container}>
       <div className={style.product_img_container}>
@@ -30,7 +117,7 @@ const SubCategoryCard = () => {
             <Heart
               size={15}
               color={inWishList ? "#FF0000" : "#C0C0C6"}
-              onClick={() => setInWishList(!inWishList)}
+              onClick={e => handleWhislistCard(e)}
             />
           </span>
         </div>

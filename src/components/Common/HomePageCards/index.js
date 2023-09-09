@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
-import {Heart, Rupee} from "@/assets/icon";
+import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
@@ -29,13 +29,12 @@ const Card = ({
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-  const router = useRouter();
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
     userId: getLocalStorage("user_id") ?? "",
     productId: productID,
   };
-
+  const router = useRouter();
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -62,7 +61,8 @@ const Card = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
+  console.log(userId);
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
@@ -207,14 +207,14 @@ const Card = ({
       <div className={styles.price_div}>
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
-            <Rupee />
+            <span className={styles.rupeeIcon}>₹</span>
             {`${currentPrice} /mo`}
           </h3>
           {
             // currentPrice >= originalPrice ? (
-            originalPrice >= currentPrice ? (
+            originalPrice > currentPrice ? (
               <h3 className={`${styles.originalPrice} flex`}>
-                <Rupee />
+                <span className={styles.rupeeIcon}>₹</span>
                 {`${originalPrice} /mo`}
               </h3>
             ) : null
@@ -222,7 +222,7 @@ const Card = ({
         </div>
 
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice <= originalPrice && (
+        {currentPrice < originalPrice && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
