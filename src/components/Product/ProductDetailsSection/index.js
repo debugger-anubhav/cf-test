@@ -17,6 +17,7 @@ import {ProductPageImages} from "@/assets/images";
 import {
   HasselFreeDataForProductPage,
   getLocalStorage,
+  getLocalStorageString,
   productPageImagesBaseUrl,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
@@ -176,7 +177,7 @@ const ProductDetails = ({params}) => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
 
   const handleWhislistCard = e => {
     e.stopPropagation();

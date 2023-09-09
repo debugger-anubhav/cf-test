@@ -4,7 +4,7 @@ import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
@@ -48,7 +48,7 @@ const SubCategoryCard = ({productID}) => {
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorage("user_id");
+  const userId = getLocalStorageString("userId");
   const includedItem = [
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png",
