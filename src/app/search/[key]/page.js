@@ -6,6 +6,7 @@ import MenuList from "@/components/Common/MenuList";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {store} from "@/store";
+import SearchList from "@/components/Search/SearchList/SearchList";
 
 export default function SearchPage() {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ export default function SearchPage() {
           <AnnouncementBar />
           <Header />
           <MenuList />
+          <SearchList />
         </div>
       </Provider>
     </QueryClientProvider>

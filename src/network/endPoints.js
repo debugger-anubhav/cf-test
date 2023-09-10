@@ -14,7 +14,7 @@ export const endPoints = {
   trendingSearchConstants: "fc-products/trendingSearchConstants",
   productWithFilter: "fc-products/getProductsWithFilter",
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
-  searchKey: "fc-products/search?searchKey=",
+  // searchKey: "fc-products/search?searchKey=",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
   homePageTextContent: "fc-admin-settings/getHomePageTextContent",
@@ -40,6 +40,9 @@ export const endPoints = {
   addRecentViewProduct: "fc-view-products/createRecentlyViewedProduct",
   addWishListProduct: "fc-product-likes/addToWishlistProduct",
   deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
+
+  searchKey: (key, cityId) =>
+    `fc-products/search?searchKey=${key}&&cityId=${cityId}`,
 
   productPage: {
     completeTheLook: id =>

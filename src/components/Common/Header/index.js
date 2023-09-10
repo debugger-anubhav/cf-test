@@ -295,6 +295,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         searchesArray.unshift(newSearchTerm);
         const maxItems = 5;
         const truncatedArray = searchesArray.slice(0, maxItems);
+        setLocalStorage("searcheKey", truncatedArray);
         if (typeof window !== "undefined") {
           const existingLocal = getLocalStorage("searches");
           if (existingLocal) {
@@ -305,6 +306,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
+        router.push(`/search/${truncatedArray}`);
       }
     }
   };
