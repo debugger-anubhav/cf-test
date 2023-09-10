@@ -10,19 +10,26 @@ import {
 import SearchCard from "../SeachCard/SearchCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
-import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {
+  addSaveditemID,
+  addSaveditems,
+  addSortKey,
+} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
+import {useRouter} from "next/navigation";
+import {BsEmojiFrown} from "react-icons/bs";
 
 const SearchList = () => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
+  const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
   const dropDownRefSort = useRef(null);
-  // const [selectedOption, setSelectedOption] = useState("Default");
+  const [selectedOption, setSelectedOption] = useState("Default");
   const [sortOpen, setSortOpen] = useState(false);
 
   const searchKey = getLocalStorage("searcheKey");
@@ -30,7 +37,7 @@ const SearchList = () => {
   const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
-    axios.get(baseURL + endPoints.searchKey(searchKey[0], city)).then(res => {
+    axios.get(baseURL + endPoints.searchKey(searchKey, city)).then(res => {
       console.log("response", res);
       setSearchData(res?.data?.data?.products);
     });
@@ -69,24 +76,32 @@ const SearchList = () => {
     setSortOpen(!sortOpen);
   };
 
-  // const handleSort = (item, index) => {
-  //   setPageNo(1);
-  //   setSelectedOption(item);
-  //   if (item === "New") {
-  //     dispatch(addSortKey(newSortKey));
-  //   } else if (item === "Price Low to High") {
-  //     dispatch(addSortKey(lowToHighKey));
-  //   } else if (item === "Price Hight to low") {
-  //     dispatch(addSortKey([...highToLowKey]));
-  //   } else {
-  //     dispatch(addSortKey(defaultKey));
-  //   }
+  const defaultKey = ["subproducts", "ASC"];
+  const newSortKey = ["created", "DESC"];
+  const highToLowKey = ["sale_price", "DESC"];
+  const lowToHighKey = ["sale_price", "ASC"];
 
-  //   dispatch(addSingleProduct([]));
-  //   dispatch(addSetProduct([]));
-  //   dispatch(addOutStockProduct([]));
-  //   setSortOpen(false);
-  // };
+  const handleSort = (item, index) => {
+    setPageNo(1);
+    setSelectedOption(item);
+    if (item === "New") {
+      dispatch(addSortKey(newSortKey));
+    } else if (item === "Price Low to High") {
+      dispatch(addSortKey(lowToHighKey));
+    } else if (item === "Price Hight to low") {
+      dispatch(addSortKey([...highToLowKey]));
+    } else {
+      dispatch(addSortKey(defaultKey));
+    }
+
+    setSortOpen(false);
+  };
+
+  const handleCardClick = (e, item) => {
+    if (!e.target.classList.contains(style.child)) {
+      router.push(`/things/${item.id}/${item.seourl}`);
+    }
+  };
 
   return (
     <div className={style.conatiner_wrapper}>
@@ -105,8 +120,10 @@ const SearchList = () => {
       </div>
 
       {/* sort by */}
-      <div className="relative flex">
-        <p className="flex items-center mr-2 text-71717A text-base">Sort By</p>
+      <div className="relative flex my-8">
+        <p className="hidden sm:flex items-center mr-2 text-71717A text-base">
+          Sort By
+        </p>
         <div
           className={`${style.filter} relative `}
           // onClick={() => setFilterOpen(!fi)}
@@ -120,7 +137,7 @@ const SearchList = () => {
             ref={dropDownRefSort}>
             <div className={style.filter_text_container}>
               <p className={`${style.filter_text} !text-[#597492]`}>
-                {/* {selectedOption} */}
+                {selectedOption}
               </p>
             </div>
             <div>
@@ -140,8 +157,7 @@ const SearchList = () => {
                 <div
                   className={style.sorted_text}
                   key={index.toString()}
-                  // onClick={() => handleSort(ele?.text, index)}
-                >
+                  onClick={() => handleSort(ele?.text, index)}>
                   <p className={style.option_text}>{ele.text}</p>
                   <input
                     type="radio"
@@ -149,7 +165,7 @@ const SearchList = () => {
                     name="sortBy"
                     value={ele.text}
                     className="cursor-pointer"
-                    // checked={selectedOption === ele.text}
+                    checked={selectedOption === ele.text}
                   />
                 </div>
               );
@@ -159,7 +175,7 @@ const SearchList = () => {
       </div>
 
       {/* Horizontal line */}
-      <div className="bg-EDEDEE h-[1px] w-full"></div>
+      <div className="bg-DDDDDF h-[2px] w-full"></div>
 
       {searchData?.length ? (
         <div>
@@ -178,8 +194,7 @@ const SearchList = () => {
                   <div
                     className={`${style.card_box_product} ${style.child}`}
                     key={index.toString()}
-                    // onClick={e => handleCardClick(e, item)}
-                  >
+                    onClick={e => handleCardClick(e, item)}>
                     <SearchCard
                       productWidth={productCardWidth}
                       cardImage={`${productImageBaseUrl}${
@@ -215,7 +230,12 @@ const SearchList = () => {
           </InfiniteScroll>
         </div>
       ) : (
-        ""
+        <div className={style.noContentContainer}>
+          <BsEmojiFrown className={style.noContentEmoji} color="#9A9AA2" />
+          <p className={style.noContentText}>
+            Oops! We don’t have any results for your query
+          </p>
+        </div>
       )}
     </div>
   );

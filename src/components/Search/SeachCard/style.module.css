@@ -15,7 +15,7 @@
   @apply min-w-full w-full rounded-lg;
 }
 .desc_div {
-  @apply flex gap-2 3xl:justify-between mt-[14px];
+  @apply flex gap-2 justify-between mt-[14px];
 }
 .desc {
   @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;

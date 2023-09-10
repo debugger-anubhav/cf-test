@@ -294,7 +294,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         searchesArray.unshift(newSearchTerm);
         const maxItems = 5;
         const truncatedArray = searchesArray.slice(0, maxItems);
-        setLocalStorage("searcheKey", truncatedArray);
+        setLocalStorage("searcheKey", truncatedArray[0]);
         if (typeof window !== "undefined") {
           const existingLocal = getLocalStorage("searches");
           if (existingLocal) {
@@ -305,7 +305,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
-        router.push(`/search/${truncatedArray}`);
+        router.push(`/search/${truncatedArray[0]}`);
       }
     }
   };
@@ -317,11 +317,19 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       const existingLocal = getLocalStorage("searches");
       setLocalStorage("searches", [...existingLocal, item]);
     });
+    const itm = [item];
+    onSearchClick(itm);
   };
 
   useEffect(() => {
     setSearchedData(getLocalStorage("searches") || ["No search history"]);
   }, []);
+
+  const onSearchClick = item => {
+    console.log(item[0]);
+    setLocalStorage("searcheKey", item[0]);
+    router.push(`/search/${item[0]}`);
+  };
 
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
@@ -420,7 +428,12 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                 return (
                   <>
                     {index < 5 && (
-                      <div key={index.toString()} className={styles.pill}>
+                      <div
+                        key={index.toString()}
+                        className={styles.pill}
+                        onClick={() => {
+                          onSearchClick(item);
+                        }}>
                         <RecentIcon
                           className={styles.modal_icon}
                           color={"#E0806A"}
