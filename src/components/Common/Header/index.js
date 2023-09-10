@@ -74,7 +74,7 @@ const Header = () => {
   //   state => state.cartPageData.cartItems.length,
   // );
 
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -226,13 +226,12 @@ const Header = () => {
                 }}
                 ref={iconRef}
               />
-              {getLocalStorage("tempUserID") !== null &&
-                showProfileDropdown && (
-                  <ProfileDropDown
-                    setShowProfileDropdown={setShowProfileDropdown}
-                    showProfileDropdown={showProfileDropdown}
-                  />
-                )}
+              {getLocalStorage("user_id") !== null && showProfileDropdown && (
+                <ProfileDropDown
+                  setShowProfileDropdown={setShowProfileDropdown}
+                  showProfileDropdown={showProfileDropdown}
+                />
+              )}
             </div>
           </div>
         </div>

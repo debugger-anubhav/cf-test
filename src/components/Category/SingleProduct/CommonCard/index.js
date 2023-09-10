@@ -57,7 +57,7 @@ const CategoryCard = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
