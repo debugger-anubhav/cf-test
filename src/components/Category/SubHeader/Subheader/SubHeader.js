@@ -515,13 +515,15 @@ const SubHeader = ({params}) => {
             {/* ------------------------------------------------------------------------------------------------------ */}
           </div>
           <div className={styles.filter_sort_section_mobile}>
-            <div className={styles.filter}>
-              <FilterSortDrawer
-                filterName={"Filter"}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
+            {showFilter && (
+              <div className={styles.filter}>
+                <FilterSortDrawer
+                  filterName={"Filter"}
+                  setPageNo={setPageNo}
+                  setFilterListed={setFilterListed}
+                />
+              </div>
+            )}
             <div className="flex items-center justify-center ">
               <p className={styles.option_text}>Sortby</p>
               <div className={styles.filter}>
