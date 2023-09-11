@@ -40,7 +40,8 @@ const SavedItem = () => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, [categoryPageReduxData.addRemoveWhislitItem]);
+  }, []);
+  // useEffect(() => {}, [categoryPageReduxData?.savedItems?.length]);
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
@@ -117,6 +118,7 @@ const SavedItem = () => {
                 ).toFixed(0)}%`}
                 productID={item?.id}
                 seourl={item?.seourl}
+                isSavedComp={true}
               />
             </div>
           );
