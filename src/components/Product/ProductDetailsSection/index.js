@@ -183,7 +183,7 @@ const ProductDetails = ({params}) => {
   }, []);
 
   const router = useRouter();
-  const cityIdStr = getLocalStorageString
+  const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
     ?.replace(/"/g, "");
