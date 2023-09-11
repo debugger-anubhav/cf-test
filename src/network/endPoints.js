@@ -41,8 +41,8 @@ export const endPoints = {
   addWishListProduct: "fc-product-likes/addToWishlistProduct",
   deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
 
-  searchKey: (key, cityId) =>
-    `fc-products/search?searchKey=${key}&&cityId=${cityId}`,
+  searchKey: (key, cityId, sort) =>
+    `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
 
   productPage: {
     completeTheLook: id =>

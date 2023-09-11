@@ -10,17 +10,18 @@ import {
 import SearchCard from "../SeachCard/SearchCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
-import {
-  addSaveditemID,
-  addSaveditems,
-  addSortKey,
-} from "@/store/Slices/categorySlice";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
+
+const defaultKey = 1;
+const newSortKey = 2;
+const highToLowKey = 3;
+const lowToHighKey = 4;
 
 const SearchList = () => {
   const [pageNo, setPageNo] = useState(1);
@@ -31,17 +32,21 @@ const SearchList = () => {
   const dropDownRefSort = useRef(null);
   const [selectedOption, setSelectedOption] = useState("Default");
   const [sortOpen, setSortOpen] = useState(false);
+  const [sort, setSort] = useState(defaultKey);
+  const [searchKey, setSearchKey] = useState();
 
-  const searchKey = getLocalStorage("searcheKey");
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
 
   useEffect(() => {
-    axios.get(baseURL + endPoints.searchKey(searchKey, city)).then(res => {
-      console.log("response", res);
+    const url = window?.location.pathname.split("/");
+    const key = url[url.length - 1].replace(/%20/g, " ");
+    setSearchKey(key);
+
+    axios.get(baseURL + endPoints.searchKey(key, city, sort)).then(res => {
       setSearchData(res?.data?.data?.products);
     });
-  }, []);
+  }, [sort]);
 
   const cityIdStr = localStorage
     .getItem("cityId")
@@ -76,22 +81,17 @@ const SearchList = () => {
     setSortOpen(!sortOpen);
   };
 
-  const defaultKey = ["subproducts", "ASC"];
-  const newSortKey = ["created", "DESC"];
-  const highToLowKey = ["sale_price", "DESC"];
-  const lowToHighKey = ["sale_price", "ASC"];
-
   const handleSort = (item, index) => {
     setPageNo(1);
     setSelectedOption(item);
     if (item === "New") {
-      dispatch(addSortKey(newSortKey));
+      setSort(newSortKey);
     } else if (item === "Price Low to High") {
-      dispatch(addSortKey(lowToHighKey));
+      setSort(lowToHighKey);
     } else if (item === "Price Hight to low") {
-      dispatch(addSortKey([...highToLowKey]));
+      setSort(highToLowKey);
     } else {
-      dispatch(addSortKey(defaultKey));
+      setSort(defaultKey);
     }
 
     setSortOpen(false);
@@ -113,7 +113,7 @@ const SearchList = () => {
           </li>
           <li className={style.list}>
             <p className={style.route_text}>
-              {`Search results for “${searchKey[0]}”`}
+              {`Search results for “${searchKey}”`}
             </p>
           </li>
         </ul>

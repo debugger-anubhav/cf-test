@@ -24,7 +24,9 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
       style={{boxShadow: "0px 2px 12px 0px rgba(0, 0, 0, 0.25)"}}>
       <div>
         <p className="text-sm text-6A6A6A">Your Account,</p>
-        <p className="text-sm font-medium text-45454A">{userName}</p>
+        <p className="text-sm font-medium text-45454A">
+          {userName || "Hello User"}
+        </p>
         <p className="bg-EDEDEE h-[1px] w-full my-4"></p>
       </div>
       {items?.map((ele, index) => (

@@ -111,6 +111,7 @@ const Header = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+
   return (
     <>
       <div className={styles.main}>
@@ -294,7 +295,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         searchesArray.unshift(newSearchTerm);
         const maxItems = 5;
         const truncatedArray = searchesArray.slice(0, maxItems);
-        setLocalStorage("searcheKey", truncatedArray[0]);
         if (typeof window !== "undefined") {
           const existingLocal = getLocalStorage("searches");
           if (existingLocal) {
@@ -318,6 +318,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       setLocalStorage("searches", [...existingLocal, item]);
     });
     const itm = [item];
+    console.log(itm, "itmmmmm");
     onSearchClick(itm);
   };
 
@@ -327,7 +328,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
 
   const onSearchClick = item => {
     console.log(item[0]);
-    setLocalStorage("searcheKey", item[0]);
     router.push(`/search/${item[0]}`);
   };
 

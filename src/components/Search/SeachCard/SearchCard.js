@@ -56,7 +56,7 @@ const SearchCard = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -166,7 +166,7 @@ const SearchCard = ({
           )}
         </div>
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice < originalPrice && discount > 0 && (
+        {currentPrice < originalPrice && parseInt(discount) > 0 && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
