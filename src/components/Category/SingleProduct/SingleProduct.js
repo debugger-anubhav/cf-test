@@ -170,6 +170,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                         ((item?.price - item?.sale_price) * 100) / item?.price,
                       ).toFixed(0)}%`}
                       productID={item?.id}
+                      seourl={item?.seourl}
                     />
                   </div>
                 );

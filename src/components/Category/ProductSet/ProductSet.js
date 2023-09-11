@@ -167,6 +167,7 @@ export const ProductSet = () => {
                               item?.price,
                           ).toFixed(0)}%`}
                           productID={item?.id}
+                          seourl={item?.seourl}
                         />
                       </div>
                     );
