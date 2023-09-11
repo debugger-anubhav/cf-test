@@ -50,14 +50,8 @@
 
 .ticker_container div {
   white-space: nowrap;
-  animation: slide 25s linear infinite;
+  animation: slide 35s linear infinite;
   min-width: max-content;
   /*height: 20px;
   margin-left: 100px; */
 }
-
-/* .ticker_container div {
-  height: 20px;
-  margin-left: 16px;
-  animation: slide 30s linear infinite;
-} */
