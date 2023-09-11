@@ -99,6 +99,7 @@ const ProductList = ({params}) => {
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
+                        seourl={item?.seourl}
                       />
                     </div>
                   );
@@ -140,6 +141,7 @@ const ProductList = ({params}) => {
                         ).toFixed(2)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
+                        seourl={item?.seourl}
                       />
                     </div>
                   );
