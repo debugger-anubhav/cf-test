@@ -151,67 +151,30 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             hasMore={true} // Replace with a condition based on your data source
             className="!w-full !h-full">
             <div className={style.main_container}>
-              {singleItemData?.map(
-                (item, index) => {
-                  return (
-                    <div key={index} onClick={e => handleCardClick(e, item)}>
-                      <CategoryCard
-                        cardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[0]
-                        }`}
-                        desc={item?.product_name}
-                        originalPrice={item?.price}
-                        currentPrice={item?.sale_price}
-                        hoverCardImage={
-                          item?.image?.split(",").length > 1
-                            ? productImageBaseUrl + item?.image?.split(",")[1]
-                            : productImageBaseUrl + item?.image?.split(",")[0]
-                        }
-                        discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) /
-                            item?.price,
-                        ).toFixed(0)}%`}
-                        productID={item?.id}
-                        seourl={item?.seourl}
-                      />
-                    </div>
-                  );
-                },
-                // {
-                //   // console.log(item, "itemsss");
-                //   return (
-                //     <div
-                //       className={`${style.card_box_product} ${style.child}`}
-                //       key={index.toString()}
-                //       onClick={e => handleCardClick(e, item)}>
-                //       <Card
-                //         productWidth={productCardWidth}
-                //         cardImage={`${productImageBaseUrl}${
-                //           item?.image?.split(",")[0]
-                //         }`}
-                //         productImageBaseUrl
-                //         desc={item?.product_name}
-                //         originalPrice={item?.price}
-                //         currentPrice={item?.sale_price}
-                //         isImageHeight={true}
-                //         // boxShadowHover={true}
-                //         hoverCardImage={
-                //           item?.image?.split(",").length > 1
-                //             ? productImageBaseUrl + item?.image?.split(",")[1]
-                //             : productImageBaseUrl + item?.image?.split(",")[0]
-                //         }
-                //         // hoverCardImage={
-                //         //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
-                //         // }
-                //         discount={`${Math.round(
-                //           ((item?.price - item?.sale_price) * 100) / item?.price,
-                //         ).toFixed(0)}%`}
-                //         productID={item?.id}
-                //       />
-                //     </div>
-                //   );
-                // }
-              )}
+              {singleItemData?.map((item, index) => {
+                return (
+                  <div key={index} onClick={e => handleCardClick(e, item)}>
+                    <CategoryCard
+                      cardImage={`${productImageBaseUrl}${
+                        item?.image?.split(",")[0]
+                      }`}
+                      desc={item?.product_name}
+                      originalPrice={item?.price}
+                      currentPrice={item?.sale_price}
+                      hoverCardImage={
+                        item?.image?.split(",")[1] !== ""
+                          ? productImageBaseUrl + item?.image?.split(",")[1]
+                          : productImageBaseUrl + item?.image?.split(",")[0]
+                      }
+                      discount={`${Math.round(
+                        ((item?.price - item?.sale_price) * 100) / item?.price,
+                      ).toFixed(0)}%`}
+                      productID={item?.id}
+                      seourl={item?.seourl}
+                    />
+                  </div>
+                );
+              })}
             </div>
           </InfiniteScroll>
         </div>
