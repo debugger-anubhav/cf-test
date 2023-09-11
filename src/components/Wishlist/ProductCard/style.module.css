@@ -52,7 +52,7 @@
 }
 
 .delete_confirmation_text {
-  @apply font-normal text-14 sm:text-16 font-Poppins py-4;
+  @apply font-normal text-14 sm:text-16 font-Poppins py-8;
   color: #71717a;
 }
 .cancel_delete_btn {
