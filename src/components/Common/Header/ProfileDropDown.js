@@ -18,6 +18,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
   const router = useRouter();
 
   const userName = getLocalStorage("user_name") ?? "";
+
   return (
     <div
       className="flex px-6 py-4 pr-8 rounded-t-lg absolute top-10 right-0 bg-white flex-col"
