@@ -95,6 +95,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/home-furniture-rental`,
     // );
   };
+  console.log(Cities, "dfghjk");
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -238,7 +239,17 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     }`}
                     alt="city-image"
                   />
-                  <p className={styles.city_name}>{city?.list_value}</p>
+                  {city?.id === 50 ? (
+                    <div className={styles.city_name}>
+                      {city?.list_value.split("/")[0]}/
+                      <br className="flex sm:hidden" />
+                      {city?.list_value.split("/")[1]}
+                      {/* {city?.list_value} */}
+                      {/* {city?.id} */}
+                    </div>
+                  ) : (
+                    <p className={styles.city_name}>{city?.list_value}</p>
+                  )}
                 </div>
               ))}
             </div>
