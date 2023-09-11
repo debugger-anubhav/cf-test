@@ -156,11 +156,17 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           </div>
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
-            {string.landing_page.header.menuList3?.map((item, index) => (
-              <a key={index.toString()} href={item.link}>
-                <p className={styles.menu_item}>{item?.item}</p>
-              </a>
-            ))}
+            {string.landing_page.header.menuList3?.map((item, index) => {
+              const dataurl =
+                index === 1 && getLocalStorage("user_id") !== null
+                  ? "/usersettings"
+                  : item.link;
+              return (
+                <a key={index.toString()} href={dataurl}>
+                  <p className={styles.menu_item}>{item?.item}</p>
+                </a>
+              );
+            })}
           </div>
         </div>
       </div>
