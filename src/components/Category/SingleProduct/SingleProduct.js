@@ -168,7 +168,8 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                             : productImageBaseUrl + item?.image?.split(",")[0]
                         }
                         discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) / 1000,
+                          ((item?.price - item?.sale_price) * 100) /
+                            item?.price,
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         seourl={item?.seourl}
@@ -203,7 +204,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                 //         //   imagesArr?.length > 1 ? productImageBaseUrl + item?.image[1] : productImageBaseUrl + item?.image[0]
                 //         // }
                 //         discount={`${Math.round(
-                //           ((item?.price - item?.sale_price) * 100) / 1000,
+                //           ((item?.price - item?.sale_price) * 100) / item?.price,
                 //         ).toFixed(0)}%`}
                 //         productID={item?.id}
                 //       />

@@ -99,7 +99,6 @@ const ProductList = ({params}) => {
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
-                        seourl={item?.seourl}
                       />
                     </div>
                   );
@@ -138,10 +137,9 @@ const ProductList = ({params}) => {
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
                             item?.price,
-                        ).toFixed(2)}%`}
+                        ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
-                        seourl={item?.seourl}
                       />
                     </div>
                   );

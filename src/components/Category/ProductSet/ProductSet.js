@@ -163,7 +163,8 @@ export const ProductSet = () => {
                               : productImageBaseUrl + newImageArray[0]
                           }
                           discount={`${Math.round(
-                            ((item?.price - item?.sale_price) * 100) / 1000,
+                            ((item?.price - item?.sale_price) * 100) /
+                              item?.price,
                           ).toFixed(0)}%`}
                           productID={item?.id}
                           seourl={item?.seourl}

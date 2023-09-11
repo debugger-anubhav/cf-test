@@ -9,8 +9,8 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
-const CategoryCard = ({
-  hoverCardImage,
+
+const SearchCard = ({
   cardImage,
   desc,
   currentPrice,
@@ -18,9 +18,7 @@ const CategoryCard = ({
   discount,
   productID,
   soldOut,
-  seourl,
 }) => {
-  const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -109,38 +107,24 @@ const CategoryCard = ({
         .includes(productID),
     );
   }, []);
-  const handleProductClick = (e, productID, seourl) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${productID}/${seourl}`);
-    }
-  };
+
   return (
     <div
       className={`${styles.card_wrapper} `}
-      onMouseOver={() => {
-        setHoverCard(true);
-      }}
-      onMouseOut={() => setHoverCard(false)}
-      onClick={e => handleProductClick(e, productID, seourl)}>
-      <a
-        href={`/things/${productID}/${seourl}`}
-        onClick={e => {
-          e.preventDefault();
-        }}>
-        <div className="relative">
-          <img
-            src={hoverCard ? hoverCardImage : cardImage}
-            alt="thumbnail image"
-            className={styles.img}
-          />
-          {soldOut && (
-            <div className={styles.soldout_tag}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.tag_text}>SOLD OUT</p>
-            </div>
-          )}
-        </div>
-      </a>
+      // onMouseOver={() => {
+      //   setHoverCard(true);
+      // }}
+      // onMouseOut={() => setHoverCard(false)}
+    >
+      <div className="relative">
+        <img src={cardImage} alt="thumbnail image" className={styles.img} />
+        {soldOut && (
+          <div className={styles.soldout_tag}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>SOLD OUT</p>
+          </div>
+        )}
+      </div>
 
       {/* {soldOut && (
         <div className={styles.soldout_tag}>
@@ -190,4 +174,4 @@ const CategoryCard = ({
   );
 };
 
-export default CategoryCard;
+export default SearchCard;
