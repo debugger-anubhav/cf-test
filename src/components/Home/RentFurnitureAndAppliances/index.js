@@ -87,14 +87,20 @@ const RentFurnitureAndAppliances = ({params}) => {
                   setLocalStorage("subCategoryId", item?.id);
                 }
               }}>
-              <img
-                src={
-                  "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
-                  item.category_web_image
-                }
-                alt="RentFurnitureImage"
-                className={styles.category_img}
-              />
+              <a
+                href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                  item?.seourl
+                }`}
+                onClick={e => e.preventDefault()}>
+                <img
+                  src={
+                    "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                    item.category_web_image
+                  }
+                  alt="RentFurnitureImage"
+                  className={styles.category_img}
+                />
+              </a>
 
               <div className={styles.label_wrapper}>
                 <h3 className={styles.label}>{item.cat_name}</h3>

@@ -169,11 +169,6 @@ export const SoldOutProduct = () => {
                     <div className={style.main_container}>
                       {data?.map(
                         (item, index) => {
-                          const imageArray = item?.image?.split(",");
-                          const newImageArray = imageArray.slice(
-                            0,
-                            imageArray.length - 1,
-                          );
                           return (
                             <div
                               key={index}
@@ -187,15 +182,18 @@ export const SoldOutProduct = () => {
                                 originalPrice={item?.price}
                                 currentPrice={item?.sale_price}
                                 hoverCardImage={
-                                  newImageArray?.length > 1
-                                    ? productImageBaseUrl + newImageArray[1]
-                                    : productImageBaseUrl + newImageArray[0]
+                                  item?.image?.split(",")[1] !== ""
+                                    ? productImageBaseUrl +
+                                      item?.image?.split(",")[1]
+                                    : productImageBaseUrl +
+                                      item?.image?.split(",")[0]
                                 }
                                 discount={`${Math.round(
                                   ((item?.price - item?.sale_price) * 100) /
                                     item?.price,
                                 ).toFixed(0)}%`}
                                 productID={item?.id}
+                                seourl={item?.seourl}
                               />
                             </div>
                           );

@@ -22,8 +22,10 @@ const Card = ({
   isHover = true,
   productWidth,
   productID,
+  seourl,
+  isSavedComp = false,
 }) => {
-  const [inWishList, setInWishList] = useState(false);
+  const [inWishList, setInWishList] = useState(isSavedComp || false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const updateCount = useRef(0);
@@ -103,7 +105,9 @@ const Card = ({
                 dispatch(addSaveditemID(ids));
               })
               .catch(err => console.log(err));
-            setInWishList(prev => !prev);
+            if (!isSavedComp) {
+              setInWishList(prev => !prev);
+            }
             console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
@@ -119,7 +123,9 @@ const Card = ({
                 dispatch(addSaveditemID(ids));
               })
               .catch(err => console.log(err));
-            setInWishList(prev => !prev);
+            if (!isSavedComp) {
+              setInWishList(prev => !prev);
+            }
             console.log(res);
           })
           .catch(err => console.log(err));
@@ -141,9 +147,15 @@ const Card = ({
     updateCount.current += 1;
   }, []);
 
+  const handleProductClick = (e, productID, seourl) => {
+    if (!e.target.classList.contains(styles.child)) {
+      router.push(`/things/${productID}/${seourl}`);
+    }
+  };
+
   return (
     <div
-      // onClick={() => handleProductClick(productId)}
+      onClick={e => handleProductClick(e, productID, seourl)}
       className={`${styles.wrapper} ${
         hoverCard && styles.hover_wrapper
       } ${productWidth} 
@@ -154,31 +166,37 @@ const Card = ({
       onMouseOut={() => {
         setHoverCard(false);
       }}>
-      <div className="relative">
-        <img
-          src={hoverCard ? hoverCardImage : cardImage}
-          alt="thumbnail image"
-          className={`${styles.thumbnail}
+      <a
+        href={`/things/${productID}/${seourl}`}
+        onClick={e => {
+          e.preventDefault();
+        }}>
+        <div className="relative">
+          <img
+            src={hoverCard ? hoverCardImage : cardImage}
+            alt="thumbnail image"
+            className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }
           `}
-        />
+          />
 
-        {/* ----------- */}
-        {showincludedItem && (
-          <div className={styles.item_included_container}>
-            <p
-              className={
-                styles.item_icluded_text
-              }>{`${itemIncluded} items included`}</p>
-          </div>
-        )}
-        {soldOut && (
-          <div className={styles.soldout_tag}>
-            <p className={styles.tag_text}>SOLD OUT</p>
-          </div>
-        )}
-      </div>
+          {/* ----------- */}
+          {showincludedItem && (
+            <div className={styles.item_included_container}>
+              <p
+                className={
+                  styles.item_icluded_text
+                }>{`${itemIncluded} items included`}</p>
+            </div>
+          )}
+          {soldOut && (
+            <div className={styles.soldout_tag}>
+              <p className={styles.tag_text}>SOLD OUT</p>
+            </div>
+          )}
+        </div>
+      </a>
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
           {desc.replace(/-/g, " ")}
@@ -187,6 +205,7 @@ const Card = ({
           id={productID}
           onClick={e => {
             e.preventDefault();
+            e.stopPropagation();
             handleWhislistCard(e);
           }}>
           <Heart

@@ -163,7 +163,10 @@ const Footer = ({params}) => {
               src={FooterIcons.Phone}
             />
             <div>
-              <p className={styles.contact}>{str.contact}</p>
+              <p className={styles.contact}>
+                {" "}
+                <a href={`tel:${str.contact}`}>{str.contact}</a>
+              </p>
               <p className={styles.time}>{str.time}</p>
             </div>
           </div>
@@ -205,7 +208,9 @@ const Footer = ({params}) => {
             src={FooterIcons.Phone}
           />
           <div>
-            <p className={styles.contact}>{str.contact}</p>
+            <p className={styles.contact}>
+              <a href={`tel:${str.contact}`}>{str.contact}</a>
+            </p>
             <p className={styles.time}>{str.time}</p>
           </div>
         </div>

@@ -145,6 +145,7 @@ const RecentlyViewedProduct = ({page}) => {
                         currentPrice={item?.product_sale_price}
                         desc={item?.product_name}
                         productID={item?.product_id}
+                        seourl={item?.seourl}
                       />
                     </div>
                   )}
