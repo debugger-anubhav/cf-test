@@ -46,13 +46,20 @@ const NewlyLaunched = () => {
 
   return (
     <div className={styles.main_container}>
-      <div className={styles.brown_box}>
+      <div className={`${styles.brown_box} hidden lg:flex`}>
         <div>
           <h2 className={styles.heading}>{heading}</h2>
           <h3 className={styles.subHeading}>{subHeading}</h3>
         </div>
       </div>
       <div className={styles.images_wrapper}>
+        <div className={`${styles.brown_box} lg:hidden flex`}>
+          <div>
+            <h2 className={styles.heading}>{heading}</h2>
+            <h3 className={styles.subHeading}>{subHeading}</h3>
+          </div>
+        </div>
+
         {newProductFetched?.map((ele, index) => (
           <div
             className={`${styles.width_container} relative`}
