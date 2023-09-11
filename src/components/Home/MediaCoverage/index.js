@@ -66,8 +66,14 @@ const MediaCoverage = () => {
 
       <div className={`${styles.ticker_container} gap-12`}>
         {MediaCoverageImages?.map((imageUrl, index) => (
-          <div key={index.toString()}>
-            <img src={imageUrl.img} alt={`Slide ${index} `} className="" />
+          <div
+            key={index.toString()}
+            className="!min-w-[124px] md:!min-w-[147px] lg:!min-w-max">
+            <img
+              src={imageUrl.img}
+              alt={`Slide ${index} `}
+              className="flex items-center w-full"
+            />
           </div>
         ))}
 

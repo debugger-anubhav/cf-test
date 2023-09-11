@@ -77,6 +77,22 @@ const SearchList = () => {
       .catch(err => console.log(err));
   }, [refreshState]);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
+        setSortOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
   const toggleDropdownSort = () => {
     setSortOpen(!sortOpen);
   };
@@ -150,7 +166,7 @@ const SearchList = () => {
           </div>
         </div>
         {sortOpen && (
-          <div className="gap-6 absolute z-[111] top-12 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+          <div className="gap-6 absolute z-[111] top-12 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4 sm:ml-16">
             {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
             {sortByText?.map((ele, index) => {
               return (
