@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef, useEffect} from "react";
+import React, {useRef} from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -21,11 +21,9 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
-import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {setLocalStorage} from "@/constants/constant";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
@@ -107,28 +105,6 @@ export default function Home() {
   if (typeof window !== "undefined") {
     setLocalStorage("cityId", 46);
   }
-
-  const data = {
-    userId: getLocalStorage("user_id") ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    tempUserId: getLocalStorage("tempUserID") ?? "",
-  };
-
-  useEffect(() => {
-    axios
-      .post(baseURL + endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (typeof window !== "undefined") {
-          setLocalStorage(
-            "tempUserID",
-            JSON.parse(res?.data?.data?.tempUserId),
-          );
-          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
-          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
-        }
-      })
-      .catch(err => console.log(err));
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
