@@ -6,8 +6,11 @@ import styles from "./style.module.css";
 import {MediaCoverageImages} from "@/constants/constant";
 import string from "@/constants/Constant.json";
 // import Image from "next/image";
+
 const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
+  // const refs=useRef(null);
+  // const parentRef=useRef(null);
   // const settings = {
   //   dots: false,
   //   arrows: false,
@@ -46,6 +49,16 @@ const MediaCoverage = () => {
   //   pauseOnHover: false,
   // };
   // h-full w-full
+
+  // useEffect(() => {
+  //   const mainDiv = refs.current;
+  //   // const newDiv = document.createElement('div');
+  //   // Check if the next sibling exists and is a div, and then insert the new div
+  //   mainDiv.insertAdjacentHTML('afterend', parentRef.current.innerHTML);
+  //   mainDiv.nextSibling.setAttribute('aria-hidden', 'true');
+  // }, []);
+
+  // const handleRef = (el )=> setLogos(refs.querySelectorAll('li'));
   return (
     <div className={styles.media_coverage_wrapper}>
       <p className={styles.label}>{str.label}</p>
@@ -57,7 +70,8 @@ const MediaCoverage = () => {
             <img src={imageUrl.img} alt={`Slide ${index} `} className="" />
           </div>
         ))}
-        {MediaCoverageImages?.map((imageUrl, index) => (
+
+        {/* {MediaCoverageImages?.map((imageUrl, index) => (
           <div key={index.toString()}>
             <img src={imageUrl.img} alt={`Slide ${index}`} className="" />
           </div>
@@ -71,7 +85,7 @@ const MediaCoverage = () => {
           <div key={index.toString()}>
             <img src={imageUrl.img} alt={`Slide ${index}`} className="" />
           </div>
-        ))}
+        ))} */}
       </div>
       {/* <Slider {...settings} className={styles.carousel}>
         {MediaCoverageImages.map((imageUrl, index) => (
