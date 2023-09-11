@@ -100,6 +100,7 @@ const YouMightLike = ({heading, isbg, params}) => {
                 desc={item?.product_name}
                 isHover={false}
                 productID={item?.id}
+                seourl={item?.seourl}
               />
             </div>
           ))}

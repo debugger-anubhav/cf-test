@@ -196,6 +196,7 @@ export const SoldOutProduct = () => {
                                     1000,
                                 ).toFixed(0)}%`}
                                 productID={item?.id}
+                                seourl={item?.seourl}
                               />
                             </div>
                           );

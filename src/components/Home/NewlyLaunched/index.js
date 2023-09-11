@@ -61,13 +61,17 @@ const NewlyLaunched = () => {
             <div
               className="w-full h-auto cursor-pointer "
               onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
-              <img
-                src={
-                  "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
-                  ele?.image?.split(",")[0]
-                }
-                className={styles.img}
-              />
+              <a
+                onClick={e => e.preventDefault()}
+                href={`/things/${ele.id}/${ele.seourl}`}>
+                <img
+                  src={
+                    "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
+                    ele?.image?.split(",")[0]
+                  }
+                  className={styles.img}
+                />
+              </a>
             </div>
             <div className={styles.price_tag}>
               <p>{`₹${ele?.sale_price} / month`}</p>

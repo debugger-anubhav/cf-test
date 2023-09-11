@@ -108,6 +108,7 @@ const PreDesignCombos = () => {
                   showincludedItem={true}
                   itemIncluded={item?.subProduct.length}
                   productID={item?.id}
+                  seourl={item?.seourl}
                 />
               </div>
             ))}
