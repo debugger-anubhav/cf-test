@@ -281,8 +281,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
+    const city = getLocalStorage("cityId");
 
-    axios.get(baseURL + endPoints.searchKey + newSearchTerm).then(res => {
+    axios.get(baseURL + endPoints.searchKey(newSearchTerm, city)).then(res => {
       setSearchApiData(res?.data?.data);
     });
 
