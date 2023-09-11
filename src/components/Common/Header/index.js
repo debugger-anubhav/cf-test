@@ -112,6 +112,26 @@ const Header = () => {
   };
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
+  const data = {
+    userId: getLocalStorage("user_id") ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID"),
+  };
+
+  useEffect(() => {
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        if (userId) {
+          setLocalStorage("user_id", res?.data?.data?.userId);
+          setLocalStorage("user_name", res?.data?.data?.userName);
+        } else {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <>
       <div className={styles.main}>
