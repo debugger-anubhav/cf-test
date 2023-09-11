@@ -28,8 +28,7 @@
       rgba(113, 113, 122, 0.25) 51.56%,
       rgba(113, 113, 122, 0) 100%
     ),
-    url(""),
-    lightgray 0px -41.129px / 100% 257.196% no-repeat;
+    /* url(""), */ lightgray 0px -41.129px / 100% 257.196% no-repeat;
 }
 .video_name {
   @apply text-45454A leading-6 font-medium mt-2 w-[16rem];

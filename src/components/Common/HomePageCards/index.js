@@ -23,8 +23,9 @@ const Card = ({
   productWidth,
   productID,
   seourl,
+  isSavedComp = false,
 }) => {
-  const [inWishList, setInWishList] = useState(false);
+  const [inWishList, setInWishList] = useState(isSavedComp || false);
   const [hoverCard, setHoverCard] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const updateCount = useRef(0);
@@ -104,7 +105,9 @@ const Card = ({
                 dispatch(addSaveditemID(ids));
               })
               .catch(err => console.log(err));
-            setInWishList(prev => !prev);
+            if (!isSavedComp) {
+              setInWishList(prev => !prev);
+            }
             console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
@@ -120,7 +123,9 @@ const Card = ({
                 dispatch(addSaveditemID(ids));
               })
               .catch(err => console.log(err));
-            setInWishList(prev => !prev);
+            if (!isSavedComp) {
+              setInWishList(prev => !prev);
+            }
             console.log(res);
           })
           .catch(err => console.log(err));
@@ -200,6 +205,7 @@ const Card = ({
           id={productID}
           onClick={e => {
             e.preventDefault();
+            e.stopPropagation();
             handleWhislistCard(e);
           }}>
           <Heart
