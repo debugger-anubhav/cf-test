@@ -312,11 +312,21 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   };
   const handleTrending = (item, event) => {
     event.stopPropagation();
+    const newSearchTerm = event.target.value;
     axios.get(baseURL + endPoints.searchKey + item).then(res => {
       setSearchApiData(res?.data?.data);
       setSearchedData(prev => [...prev, item]);
       const existingLocal = getLocalStorage("searches");
-      setLocalStorage("searches", [...existingLocal, item]);
+      let storedSearches;
+      const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
+      searchesArray.unshift(newSearchTerm);
+      const maxItems = 5;
+      const truncatedArray = searchesArray.slice(0, maxItems);
+      if (existingLocal) {
+        setLocalStorage("searches", [...existingLocal, truncatedArray]);
+      } else {
+        setLocalStorage("searches", truncatedArray);
+      }
     });
     const itm = [item];
     console.log(itm, "itmmmmm");
