@@ -232,7 +232,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     }`}
                     alt="city-image"
                   />
-                  <p className={styles.city_name}>{city?.list_value_seourl}</p>
+                  <p className={styles.city_name}>{city?.list_value}</p>
                 </div>
               ))}
             </div>

@@ -91,7 +91,7 @@ const SavedItem = () => {
 
   const data = categoryPageReduxData?.savedProducts;
 
-  return data.length ? (
+  return data.length > 0 ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Your saved items</h2>
       <div className={styles.main_sub_container} ref={sliderRef}>
