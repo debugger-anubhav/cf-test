@@ -74,7 +74,7 @@ const Header = () => {
   //   state => state.cartPageData.cartItems.length,
   // );
 
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -226,13 +226,12 @@ const Header = () => {
                 }}
                 ref={iconRef}
               />
-              {getLocalStorage("tempUserID") !== null &&
-                showProfileDropdown && (
-                  <ProfileDropDown
-                    setShowProfileDropdown={setShowProfileDropdown}
-                    showProfileDropdown={showProfileDropdown}
-                  />
-                )}
+              {getLocalStorage("user_id") !== null && showProfileDropdown && (
+                <ProfileDropDown
+                  setShowProfileDropdown={setShowProfileDropdown}
+                  showProfileDropdown={showProfileDropdown}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -297,7 +296,11 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
           const existingLocal = getLocalStorage("searches");
-          setLocalStorage("searches", [...existingLocal, truncatedArray]);
+          if (existingLocal) {
+            setLocalStorage("searches", [...existingLocal, truncatedArray]);
+          } else {
+            setLocalStorage("searches", truncatedArray);
+          }
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
@@ -384,7 +387,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.serach_result_img}
                   />
                   <p className={styles.search_result_text}>
-                    {item.product_name}
+                    {item.product_name?.replace(/-/g, " ")}
                   </p>
                 </div>
               ))}
@@ -403,7 +406,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                     className={styles.serach_result_img}
                   />
                   <p className={styles.search_result_text}>
-                    {item.product_name}
+                    {item.product_name?.replace(/-/g, " ")}
                   </p>
                 </div>
               ))}

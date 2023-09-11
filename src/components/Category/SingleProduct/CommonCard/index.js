@@ -57,7 +57,7 @@ const CategoryCard = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -138,7 +138,8 @@ const CategoryCard = ({
 
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
+          {/* {desc} */}
+          {desc.replace(/-/g, " ")}
         </h3>
         <Heart
           size={25}

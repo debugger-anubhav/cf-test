@@ -61,7 +61,7 @@ const Card = ({
       getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("userId");
+  const userId = getLocalStorageString("user_id");
   console.log(userId);
   // useEffect(() => {
   //   const payload = {
@@ -181,7 +181,7 @@ const Card = ({
       </div>
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc}
+          {desc.replace(/-/g, " ")}
         </h3>
         <div
           id={productID}
