@@ -9,8 +9,8 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
-const CategoryCard = ({
-  hoverCardImage,
+
+const SearchCard = ({
   cardImage,
   desc,
   currentPrice,
@@ -19,7 +19,6 @@ const CategoryCard = ({
   productID,
   soldOut,
 }) => {
-  const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -112,16 +111,13 @@ const CategoryCard = ({
   return (
     <div
       className={`${styles.card_wrapper} `}
-      onMouseOver={() => {
-        setHoverCard(true);
-      }}
-      onMouseOut={() => setHoverCard(false)}>
+      // onMouseOver={() => {
+      //   setHoverCard(true);
+      // }}
+      // onMouseOut={() => setHoverCard(false)}
+    >
       <div className="relative">
-        <img
-          src={hoverCard ? hoverCardImage : cardImage}
-          alt="thumbnail image"
-          className={styles.img}
-        />
+        <img src={cardImage} alt="thumbnail image" className={styles.img} />
         {soldOut && (
           <div className={styles.soldout_tag}>
             <RiSparklingFill size={16} color={"#ffffff"} />
@@ -178,4 +174,4 @@ const CategoryCard = ({
   );
 };
 
-export default CategoryCard;
+export default SearchCard;

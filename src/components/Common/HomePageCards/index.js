@@ -222,7 +222,7 @@ const Card = ({
         </div>
 
         {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice < originalPrice && (
+        {currentPrice < originalPrice && parseInt(discount) > 0 && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
       </div>
