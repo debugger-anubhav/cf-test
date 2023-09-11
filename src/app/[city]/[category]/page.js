@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect} from "react";
+import React from "react";
 import {useParams} from "next/navigation";
 import {store} from "@/store";
 import {Provider} from "react-redux";
@@ -20,10 +20,6 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
-import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
-import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
 
 const SubHeader = loadable(
@@ -105,26 +101,6 @@ const CombineSection = loadable(() =>
 export default function Page() {
   const queryClient = new QueryClient();
   const params = useParams();
-
-  useEffect(() => {
-    const data = {
-      userId: getLocalStorage("user_id") ?? "",
-      tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
-    };
-    axios
-      .post(baseURL + endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (typeof window !== "undefined") {
-          setLocalStorage(
-            "tempUserID",
-            JSON.parse(res?.data?.data?.tempUserId),
-          );
-          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
-          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
-        }
-      })
-      .catch(err => console.log(err));
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

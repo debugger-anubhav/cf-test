@@ -3,7 +3,7 @@
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import React, {useEffect} from "react";
+import React from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
@@ -21,39 +21,10 @@ import Footer from "@/components/Common/Footer";
 import YouMightLike from "@/components/Product/YouMightLike";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
-import axios from "axios";
-import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
-import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 
 const ProductPage = () => {
   const queryClient = new QueryClient();
   const params = useParams();
-
-  // if (typeof window !== "undefined") {
-  //   tempUserID = getLocalStorage("tempUserID");
-  // }
-
-  useEffect(() => {
-    const data = {
-      userId: getLocalStorage("user_id") ?? "",
-      // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-      tempUserId: JSON.parse(getLocalStorage("tempUserID")) ?? "",
-    };
-    axios
-      .post(baseURL + endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (typeof window !== "undefined") {
-          setLocalStorage(
-            "tempUserID",
-            JSON.parse(res?.data?.data?.tempUserId),
-          );
-          setLocalStorage("user_id", JSON.parse(res?.data?.data?.userId));
-          setLocalStorage("user_name", JSON.parse(res?.data?.data?.userName));
-        }
-      })
-      .catch(err => console.log(err));
-  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
