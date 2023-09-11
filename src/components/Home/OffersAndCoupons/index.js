@@ -150,16 +150,18 @@ const OffersAndCoupons = ({page}) => {
             </div>
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
-              <button id="copy-button" className="text-[#222] flex ">
-                {isCopied && copiedIndex === index ? (
-                  "Copied!"
-                ) : (
-                  <>
-                    <CopyIcon size={20} color={"black"} className={"mr-1"} />
-                    Copy
-                  </>
-                )}
-              </button>
+              {item?.coupon_code && (
+                <button id="copy-button" className="text-[#222] flex ">
+                  {isCopied && copiedIndex === index ? (
+                    "Copied!"
+                  ) : (
+                    <>
+                      <CopyIcon size={20} color={"black"} className={"mr-1"} />
+                      Copy
+                    </>
+                  )}
+                </button>
+              )}
             </div>
           </div>
         ))}

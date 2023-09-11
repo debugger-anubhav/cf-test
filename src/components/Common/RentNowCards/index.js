@@ -11,11 +11,13 @@ const RentNowCard = ({cardImage, url}) => {
       onClick={() => {
         router.push(url);
       }}>
-      <img
-        src={cardImage}
-        alt="thumbnail image"
-        className={styles?.banner_img}
-      />
+      <a href={url} onClick={e => e.preventDefault()}>
+        <img
+          src={cardImage}
+          alt="thumbnail image"
+          className={styles?.banner_img}
+        />
+      </a>
     </div>
   );
 };
