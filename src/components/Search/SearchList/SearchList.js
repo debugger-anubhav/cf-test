@@ -123,12 +123,10 @@ const SearchList = () => {
     <div className={style.conatiner_wrapper}>
       <div className={style.container}>
         <ul className={style.listings}>
-          <li
-            className={style.list}
-            onClick={() => {
-              router.push("/");
-            }}>
-            <p className={style.route_text}>Home</p>
+          <li className={style.list}>
+            <a href="/">
+              <p className={`${style.route_text} cursor-pointer`}>Home</p>
+            </a>
             <ForwardArrow size={12} color={"#71717A"} />
           </li>
           <li className={style.list}>

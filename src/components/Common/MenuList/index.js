@@ -6,11 +6,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {addAllAndSubCategory} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
-import {useRouter} from "next/navigation";
 import {getLocalStorage} from "@/constants/constant";
 
 const MenuList = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
@@ -53,21 +51,14 @@ const MenuList = () => {
         </div>
       )}
       <div className={styles.menu_list_right}>
-        <p
-          className={styles.item_wrap}
-          onClick={() => {
-            router.push("https://cityfurnish.com/pages/offers");
-          }}>
-          Offers
-        </p>
-        <p
-          className={`${styles.item_wrap}`}
-          style={{marginRight: "0"}}
-          onClick={() => {
-            router.push("https://cityfurnish.com/pages/bulkorder");
-          }}>
-          CF for business
-        </p>
+        <a href="https://cityfurnish.com/pages/offers">
+          <p className={styles.item_wrap}>Offers</p>
+        </a>
+        <a href="https://cityfurnish.com/pages/bulkorder">
+          <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
+            CF for business
+          </p>
+        </a>
       </div>
     </div>
   );

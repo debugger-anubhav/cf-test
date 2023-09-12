@@ -5,63 +5,47 @@ import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
-import {useRouter} from "next/navigation";
 import {useSelector} from "react-redux";
 const HeroBanner = () => {
-  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   return (
     <>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
-          <div
-            className="cursor-pointer"
-            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}
-            onClick={() => {
-              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
-            }}>
-            <img
-              src={HeroBannerImages.HeroBannerImageOne}
-              className={styles.carousel_images}
-              alt="hero-banner-1"
-            />
+          <div className="cursor-pointer">
+            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+              <img
+                src={HeroBannerImages.HeroBannerImageOne}
+                className={styles.carousel_images}
+                alt="hero-banner-1"
+              />
+            </a>
           </div>
-          <div
-            className="cursor-pointer"
-            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
-            onClick={() => {
-              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
-            }}>
-            <img
-              src={HeroBannerImages.HeroBannerImageTwo}
-              className={styles.carousel_images}
-              alt="hero-banner-2"
-            />
+          <div className="cursor-pointer">
+            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+              <img
+                src={HeroBannerImages.HeroBannerImageTwo}
+                className={styles.carousel_images}
+                alt="hero-banner-2"
+              />
+            </a>
           </div>
-          <div
-            className="cursor-pointer"
-            // onClick={() => router.push("https://cityfurnish.com/<city>/rent")}>
-            onClick={() => {
-              router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
-            }}>
-            <img
-              src={HeroBannerImages.HeroBannerImageThree}
-              className={styles.carousel_images}
-              alt="hero-banner-3"
-            />
+          <div className="cursor-pointer">
+            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+              <img
+                src={HeroBannerImages.HeroBannerImageThree}
+                className={styles.carousel_images}
+                alt="hero-banner-3"
+              />
+            </a>
           </div>
         </Carousel>
       </div>
 
       <div className={styles.hero_banner_wrapper}>
-        <img
-          src={HeroFrame}
-          alt="hero-banner"
-          className="w-full"
-          onClick={() => {
-            router.push(`/${homePageReduxData?.cityName.toLowerCase()}/rent`);
-          }}
-        />
+        <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+          <img src={HeroFrame} alt="hero-banner" className="w-full" />
+        </a>
       </div>
     </>
   );
