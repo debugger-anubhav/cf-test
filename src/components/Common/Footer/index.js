@@ -5,7 +5,7 @@ import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
-import {setLocalStorage} from "@/constants/constant";
+import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
 
 const Footer = ({params}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
@@ -86,8 +86,7 @@ const Footer = ({params}) => {
   const [points, setPoints] = useState(array);
 
   const [content, setContent] = useState([]);
-  const cityIdStr = localStorage
-    .getItem("cityId")
+  const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
@@ -163,7 +162,10 @@ const Footer = ({params}) => {
               src={FooterIcons.Phone}
             />
             <div>
-              <p className={styles.contact}>{str.contact}</p>
+              <p className={styles.contact}>
+                {" "}
+                <a href={`tel:${str.contact}`}>{str.contact}</a>
+              </p>
               <p className={styles.time}>{str.time}</p>
             </div>
           </div>
@@ -205,7 +207,9 @@ const Footer = ({params}) => {
             src={FooterIcons.Phone}
           />
           <div>
-            <p className={styles.contact}>{str.contact}</p>
+            <p className={styles.contact}>
+              <a href={`tel:${str.contact}`}>{str.contact}</a>
+            </p>
             <p className={styles.time}>{str.time}</p>
           </div>
         </div>

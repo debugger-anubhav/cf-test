@@ -22,7 +22,6 @@ const ProductCard = ({
   productID,
   refreshFunction,
   hoverCardImage,
-  seourl,
 }) => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -52,100 +51,77 @@ const ProductCard = ({
       })
       .catch(err => console.log(err));
   };
-  const handleProductClick = (e, productID, seourl) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${productID}/${seourl}`);
-    }
-  };
+
   return (
-    <>
-      <div
-        className={`${styles.wrapper} ${productWidth} `}
-        onMouseOver={() => {
-          setHoverCard(true);
-        }}
-        onMouseOut={() => setHoverCard(false)}
-        onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          handleProductClick(e, productID, seourl);
-        }}>
-        <a
-          href={`/things/${productID}/${seourl}`}
-          onClick={e => {
-            e.preventDefault();
-          }}>
-          <div className="relative">
-            <img
-              src={hoverCard ? hoverCardImage : cardImage}
-              alt="thumbnail image"
-              className={`${styles.thumbnail} ${
-                isImageHeight && "min-h-[240px]"
-              }
+    <div
+      className={`${styles.wrapper} ${productWidth} `}
+      onMouseOver={() => {
+        setHoverCard(true);
+      }}
+      onMouseOut={() => setHoverCard(false)}>
+      <div className="relative">
+        <img
+          src={hoverCard ? hoverCardImage : cardImage}
+          alt="thumbnail image"
+          className={`${styles.thumbnail} ${isImageHeight && "min-h-[240px]"}
           `}
-            />
-            {showincludedItem && (
-              <div className={styles.item_included_container}>
-                <p
-                  className={
-                    styles.item_icluded_text
-                  }>{`${itemIncluded} items included`}</p>
-              </div>
-            )}
-            {!soldOut && (
-              <div className={styles.soldout_tag}>
-                <RiSparklingFill size={16} color={"#ffffff"} />
-                <p className={styles.tag_text}>SOLD OUT</p>
-              </div>
-            )}
+        />
+        {showincludedItem && (
+          <div className={styles.item_included_container}>
+            <p
+              className={
+                styles.item_icluded_text
+              }>{`${itemIncluded} items included`}</p>
           </div>
-          <div className={styles.desc_div}>
-            <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-              {desc.replace(/-/g, " ")}
-            </h3>
-            <span
-              onMouseOver={() => setIsHovered(true)}
-              onMouseOut={() => setIsHovered(false)}
-              onClick={e => {
-                e.preventDefault();
-                e.stopPropagation();
-                setDeleteIconClick(true);
-              }}>
-              <DeleteIcon
-                size={25}
-                color={isHovered ? "#D96060" : "#71717A"}
-                className={"cursor-pointer"}
-              />
-            </span>
+        )}
+        {!soldOut && (
+          <div className={styles.soldout_tag}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>SOLD OUT</p>
           </div>
-          <div className={styles.price_div}>
-            <div className={styles.card_price_wrap}>
-              <h3 className={`${styles.currentPrice} flex`}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {`${currentPrice} /mo`}
-              </h3>
-              <h3 className={`${styles.originalPrice} flex`}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {`${originalPrice} /mo`}
-              </h3>
-            </div>
-            {originalPrice !== currentPrice && (
-              <div className={styles.discount}>{`-${discount} OFF`}</div>
-            )}
-          </div>
-          <div>
-            <button
-              className={styles.move_to_cart_btn}
-              onClick={e => {
-                e.preventDefault();
-                e.stopPropagation();
-                router.push("https://cityfurnish.com/cart");
-              }}>
-              Move to Cart
-            </button>
-          </div>
-        </a>
+        )}
       </div>
+      <div className={styles.desc_div}>
+        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+          {desc.replace(/-/g, " ")}
+        </h3>
+        <span
+          onMouseOver={() => setIsHovered(true)}
+          onMouseOut={() => setIsHovered(false)}
+          onClick={() => {
+            console.log("first");
+            setDeleteIconClick(true);
+          }}>
+          <DeleteIcon
+            size={25}
+            color={isHovered ? "#D96060" : "#71717A"}
+            className={"cursor-pointer"}
+          />
+        </span>
+      </div>
+      <div className={styles.price_div}>
+        <div className={styles.card_price_wrap}>
+          <h3 className={`${styles.currentPrice} flex`}>
+            <span className={styles.rupeeIcon}>₹</span>
+            {`${currentPrice} /mo`}
+          </h3>
+          <h3 className={`${styles.originalPrice} flex`}>
+            <span className={styles.rupeeIcon}>₹</span>
+            {`${originalPrice} /mo`}
+          </h3>
+        </div>
+        {originalPrice !== currentPrice && parseInt(discount) > 0 && (
+          <div className={styles.discount}>{`-${discount} OFF`}</div>
+        )}
+      </div>
+      <div>
+        <button
+          className={styles.move_to_cart_btn}
+          onClick={() => router.push("https://cityfurnish.com/cart")}>
+          Move to Cart
+        </button>
+      </div>
+
       <Modal
         open={deleteIconClick}
         onClose={() => setDeleteIconClick(false)}
@@ -195,7 +171,7 @@ const ProductCard = ({
           </div>
         </div>
       </Modal>
-    </>
+    </div>
   );
 };
 

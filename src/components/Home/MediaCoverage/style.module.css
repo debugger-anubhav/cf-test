@@ -30,3 +30,28 @@
 .slide img {
   @apply max-w-full max-h-full w-[80%];
 }
+
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-4150px, 0, 0); /* The image width */
+  }
+}
+
+.ticker_container {
+  overflow: hidden;
+  display: flex;
+  /* min-height: 20px; */
+  /* width: 100%;
+    margin: 0 auto; */
+}
+
+.ticker_container div {
+  white-space: nowrap;
+  animation: slide 45s linear infinite;
+  min-width: max-content;
+  /*height: 20px;
+  margin-left: 100px; */
+}

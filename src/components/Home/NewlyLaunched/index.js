@@ -46,13 +46,20 @@ const NewlyLaunched = () => {
 
   return (
     <div className={styles.main_container}>
-      <div className={styles.brown_box}>
+      <div className={`${styles.brown_box} hidden lg:flex`}>
         <div>
           <h2 className={styles.heading}>{heading}</h2>
           <h3 className={styles.subHeading}>{subHeading}</h3>
         </div>
       </div>
       <div className={styles.images_wrapper}>
+        <div className={`${styles.brown_box} lg:hidden flex`}>
+          <div>
+            <h2 className={styles.heading}>{heading}</h2>
+            <h3 className={styles.subHeading}>{subHeading}</h3>
+          </div>
+        </div>
+
         {newProductFetched?.map((ele, index) => (
           <div
             className={`${styles.width_container} relative`}
@@ -61,13 +68,17 @@ const NewlyLaunched = () => {
             <div
               className="w-full h-auto cursor-pointer "
               onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
-              <img
-                src={
-                  "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
-                  ele?.image?.split(",")[0]
-                }
-                className={styles.img}
-              />
+              <a
+                onClick={e => e.preventDefault()}
+                href={`/things/${ele.id}/${ele.seourl}`}>
+                <img
+                  src={
+                    "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
+                    ele?.image?.split(",")[0]
+                  }
+                  className={styles.img}
+                />
+              </a>
             </div>
             <div className={styles.price_tag}>
               <p>{`₹${ele?.sale_price} / month`}</p>

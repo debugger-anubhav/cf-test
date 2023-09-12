@@ -1,6 +1,6 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
-  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] ; */
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
+  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
 }
 .hover_wrapper img {
   @apply animate-fade;
@@ -15,7 +15,7 @@
   @apply min-w-full w-full rounded-lg;
 }
 .desc_div {
-  @apply flex gap-2 justify-between mt-3;
+  @apply flex gap-2 justify-between mt-[14px];
 }
 .desc {
   @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;
@@ -44,34 +44,9 @@
 .tag_text {
   @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
 }
-.move_to_cart_btn {
-  @apply bg-btn-primary text-222 font-medium px-6 py-2 w-full rounded cursor-pointer mt-3;
-}
-.delete_item_text {
-  @apply text-222 font-medium font-Poppins sm:text-24 text-20;
-}
-
-.delete_confirmation_text {
-  @apply font-normal text-14 sm:text-16 font-Poppins py-8;
-  color: #71717a;
-}
-.cancel_delete_btn {
-  @apply border rounded-lg py-4 px-10;
-  border-color: #71717a;
-}
-.confirm_delete_btn {
-  @apply border rounded-lg  py-4 px-10 ml-4;
-  background-color: #f6b704;
-}
-.main_container {
-  @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
-}
-.close_icon {
-  @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;
-}
-.close_icon_btn {
-  @apply flex justify-start flex-col  pl-8;
-}
 .rupeeIcon {
   @apply font-Inter;
+}
+.banner_img {
+  @apply w-full h-full cursor-pointer;
 }

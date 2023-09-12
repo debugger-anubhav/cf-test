@@ -111,6 +111,27 @@ const Header = () => {
     setShowProfileDropdown(!showProfileDropdown);
   };
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+
+  const data = {
+    userId: getLocalStorage("user_id") ?? "",
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID"),
+  };
+
+  useEffect(() => {
+    axios
+      .post(baseURL + endPoints.sessionUserUrl, data)
+      .then(res => {
+        if (userId) {
+          setLocalStorage("user_id", res?.data?.data?.userId);
+          setLocalStorage("user_name", res?.data?.data?.userName);
+        } else {
+          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+        }
+      })
+      .catch(err => console.log(err));
+  }, []);
+
   return (
     <>
       <div className={styles.main}>
@@ -280,8 +301,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
     setSearchTerm(newSearchTerm);
+    const city = getLocalStorage("cityId");
 
-    axios.get(baseURL + endPoints.searchKey + newSearchTerm).then(res => {
+    axios.get(baseURL + endPoints.searchKey(newSearchTerm, city)).then(res => {
       setSearchApiData(res?.data?.data);
     });
 
@@ -304,22 +326,41 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
+        router.push(`/search/${truncatedArray[0]}`);
       }
     }
   };
   const handleTrending = (item, event) => {
     event.stopPropagation();
+    const newSearchTerm = event.target.value;
     axios.get(baseURL + endPoints.searchKey + item).then(res => {
       setSearchApiData(res?.data?.data);
       setSearchedData(prev => [...prev, item]);
       const existingLocal = getLocalStorage("searches");
-      setLocalStorage("searches", [...existingLocal, item]);
+      let storedSearches;
+      const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
+      searchesArray.unshift(newSearchTerm);
+      const maxItems = 5;
+      const truncatedArray = searchesArray.slice(0, maxItems);
+      if (existingLocal) {
+        setLocalStorage("searches", [...existingLocal, truncatedArray]);
+      } else {
+        setLocalStorage("searches", truncatedArray);
+      }
     });
+    const itm = [item];
+    console.log(itm, "itmmmmm");
+    onSearchClick(itm);
   };
 
   useEffect(() => {
     setSearchedData(getLocalStorage("searches") || ["No search history"]);
   }, []);
+
+  const onSearchClick = item => {
+    console.log(item[0]);
+    router.push(`/search/${item[0]}`);
+  };
 
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
@@ -418,7 +459,12 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                 return (
                   <>
                     {index < 5 && (
-                      <div key={index.toString()} className={styles.pill}>
+                      <div
+                        key={index.toString()}
+                        className={styles.pill}
+                        onClick={() => {
+                          onSearchClick(item);
+                        }}>
                         <RecentIcon
                           className={styles.modal_icon}
                           color={"#E0806A"}
@@ -451,35 +497,34 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
               <p className={styles.search_head}>Categories</p>
               <div className={`${styles.categories_wrapper}`}>
                 {homePageReduxData?.category?.map((item, index) => (
-                  <div
+                  <a
                     key={index.toString()}
-                    className={styles.category_card_in_searchbox}
-                    onClick={() => {
-                      router.push(
-                        // `/next/${homePageReduxData?.cityName.toLowerCase()}/${
-                        `${homePageReduxData?.cityName.toLowerCase()}/${
-                          item?.seourl
-                        }`,
-                      );
-                      if (typeof window !== "undefined") {
-                        setLocalStorage("categoryId", item?.rootID);
-                        setLocalStorage("subCategoryId", item?.id);
-                      }
-                    }}>
-                    <img
-                      src={
-                        "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                        item.category_image
-                      }
-                      alt="RentFurnitureImages"
-                      className={styles.categories_img}
-                    />
-                    <div>
-                      <h3 className={styles.category_label}>
-                        {item?.cat_name}
-                      </h3>
+                    href={`${homePageReduxData?.cityName.toLowerCase()}/${
+                      item?.seourl
+                    }`}>
+                    <div
+                      className={styles.category_card_in_searchbox}
+                      onClick={() => {
+                        if (typeof window !== "undefined") {
+                          setLocalStorage("categoryId", item?.rootID);
+                          setLocalStorage("subCategoryId", item?.id);
+                        }
+                      }}>
+                      <img
+                        src={
+                          "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                          item.category_image
+                        }
+                        alt="RentFurnitureImages"
+                        className={styles.categories_img}
+                      />
+                      <div>
+                        <h3 className={styles.category_label}>
+                          {item?.cat_name}
+                        </h3>
+                      </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
               </div>
             </div>

@@ -14,7 +14,7 @@ export const endPoints = {
   trendingSearchConstants: "fc-products/trendingSearchConstants",
   productWithFilter: "fc-products/getProductsWithFilter",
   faqsLandingPage: "fc-faqs/getHomePageFAQS",
-  searchKey: "fc-products/search?searchKey=",
+  // searchKey: "fc-products/search?searchKey=",
   homePageHappySubscriber:
     "fc-care-instructions/getHomePageHappyCustomerStories",
   homePageTextContent: "fc-admin-settings/getHomePageTextContent",
@@ -40,6 +40,9 @@ export const endPoints = {
   addRecentViewProduct: "fc-view-products/createRecentlyViewedProduct",
   addWishListProduct: "fc-product-likes/addToWishlistProduct",
   deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
+
+  searchKey: (key = "", cityId = "", sort = "") =>
+    `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
 
   productPage: {
     completeTheLook: id =>
@@ -84,7 +87,7 @@ export const endPoints = {
   categortFaq: "fc-faqs/getCategoryPageFAQS",
   categoryContent: "fc-city-category-datas/getCategoryPageTextContent",
   savedItems: "fc-product-likes/getWishlistProducts",
-  categorySingleProduct: "fc-products/getSingleProducts",
+  categorySingleProduct: "fc-products/getCategoryProducts",
   categoryComboProduct: "fc-products/getSetProducts",
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",

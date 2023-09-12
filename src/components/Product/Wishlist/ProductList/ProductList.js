@@ -94,7 +94,6 @@ const ProductList = ({params}) => {
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
-                        seourl={item?.seourl}
                       />
                     </div>
                   );
@@ -121,22 +120,16 @@ const ProductList = ({params}) => {
                         isImageHeight={true}
                         boxShadowHover={true}
                         hoverCardImage={
-                          item?.image?.split(",").length > 1
+                          item?.image?.split(",")[1] !== ""
                             ? productImageBaseUrl + item?.image?.split(",")[1]
                             : productImageBaseUrl + item?.image?.split(",")[0]
                         }
-                        // hoverCardImage={
-                        //   imagesArr?.length > 1
-                        //     ? productImageBaseUrl + item?.image[1]
-                        //     : productImageBaseUrl + item?.image[0]
-                        // }
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
                             item?.price,
-                        ).toFixed(2)}%`}
+                        ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
-                        seourl={item?.seourl}
                       />
                     </div>
                   );

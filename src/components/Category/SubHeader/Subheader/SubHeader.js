@@ -55,6 +55,8 @@ const SubHeader = ({params}) => {
   const [sortOpen, setSortOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Default");
   const [skeletonOpen, setSkeletonOpen] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+  const [showData, setShowData] = useState(false);
 
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
@@ -120,7 +122,6 @@ const SubHeader = ({params}) => {
   }, [homePageReduxData?.cityList?.length, getAllAndSubCategoryData?.length]);
 
   const handleSelectedProduct = (e, item, mainCategory) => {
-    console.log(item, "itemsss");
     if (item?.cat_name === "All") {
       dispatch(addAllProduct(true));
     } else {
@@ -130,7 +131,6 @@ const SubHeader = ({params}) => {
     dispatch(addFilteredItem([]));
     let previousSubCategory;
     if (typeof window !== "undefined") {
-      getLocalStorage("subCategory");
       setLocalStorage("subCategory", item?.cat_name);
     }
 
@@ -171,16 +171,30 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${homePageReduxData.categoryId}&subCategoryId=${
-      categoryPageReduxData?.isAllProduct ? "" : homePageReduxData.subcategoryId
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
     }`,
   );
-
+  console.log(
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
+    }`,
+    "dddd",
+    getLocalStorage("subCategory"),
+  );
   useEffect(() => {
     if (subCategoryId && categoryId) {
       getFilterList()
         .then(res => {
+          if (res?.data?.data.length) {
+            setShowFilter(true);
+          }
           dispatch(addFilterData(res?.data?.data));
+          setShowData(true);
         })
         .catch(err => console.log(err));
     }
@@ -287,7 +301,14 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <p className={styles.route_text}>Home</p>
+                <p
+                  className={styles.route_text}
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                  style={{cursor: "pointer"}}>
+                  Home
+                </p>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
@@ -369,75 +390,77 @@ const SubHeader = ({params}) => {
             setPageNo={setPageNo}
             setFilterListed={setFilterListed}
           /> */}
-            <div className="relative">
-              <div
-                className={`${styles.filter} relative`}
-
-                // onClick={() => setFilterOpen(!fi)}
-              >
+            {showFilter && (
+              <div className="relative">
                 <div
-                  className={styles.filterbox}
-                  onClick={() => {
-                    // setFilterOpen(!filterOpen)
-                    toggleDropDownFilter();
-                    // toggleDropdownSort();
-                  }}
-                  ref={dropDownRefFilter}>
-                  <div className={styles.filter_text_container}>
-                    <p className={`${styles.filter_text} text-71717A`}>
-                      Filter
-                    </p>
-                  </div>
-                  <div>
-                    <DownPopUpArrow
-                      size={20}
-                      color={"#45454A"}
-                      className={
-                        filterOpen ? styles.arrow_up : styles.arrow_down
-                      }
-                    />
-                  </div>
-                </div>
-              </div>
-              {filterOpen && (
-                <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
-                  <div className={styles.mapped_filter}>
-                    {filtereData?.map((ele, index) => {
-                      return (
-                        <div
-                          className={styles.single_filter_text}
-                          key={index.toString()}
-                          onClick={e =>
-                            handleFilterDivClick(e, ele.filter_tag)
-                          }>
-                          <p htmlFor={index} className={styles.option_text}>
-                            {ele?.filter_name}
-                          </p>
-                          <input
-                            type="checkbox"
-                            id={index}
-                            name={ele.filter_name}
-                            value={ele.filter_tag}
-                            checked={categoryPageReduxData?.filteredItems.includes(
-                              ele?.filter_tag,
-                            )}
-                            className="pr-1 cursor-pointer"
-                            // onChange={e => handleFilteredItems(e)}
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                  <div className="mt-6 w-full flex justify-center">
-                    <div
-                      className={styles.btn_container}
-                      onClick={() => handleApply()}>
-                      <p className={styles.apply_btn}>Apply</p>
+                  className={`${styles.filter} relative`}
+
+                  // onClick={() => setFilterOpen(!fi)}
+                >
+                  <div
+                    className={styles.filterbox}
+                    onClick={() => {
+                      // setFilterOpen(!filterOpen)
+                      toggleDropDownFilter();
+                      // toggleDropdownSort();
+                    }}
+                    ref={dropDownRefFilter}>
+                    <div className={styles.filter_text_container}>
+                      <p className={`${styles.filter_text} text-71717A`}>
+                        Filter
+                      </p>
+                    </div>
+                    <div>
+                      <DownPopUpArrow
+                        size={20}
+                        color={"#45454A"}
+                        className={
+                          filterOpen ? styles.arrow_up : styles.arrow_down
+                        }
+                      />
                     </div>
                   </div>
                 </div>
-              )}
-            </div>
+                {filterOpen && (
+                  <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+                    <div className={styles.mapped_filter}>
+                      {filtereData?.map((ele, index) => {
+                        return (
+                          <div
+                            className={styles.single_filter_text}
+                            key={index.toString()}
+                            onClick={e =>
+                              handleFilterDivClick(e, ele.filter_tag)
+                            }>
+                            <p htmlFor={index} className={styles.option_text}>
+                              {ele?.filter_name}
+                            </p>
+                            <input
+                              type="checkbox"
+                              id={index}
+                              name={ele.filter_name}
+                              value={ele.filter_tag}
+                              checked={categoryPageReduxData?.filteredItems.includes(
+                                ele?.filter_tag,
+                              )}
+                              className="pr-1 cursor-pointer"
+                              // onChange={e => handleFilteredItems(e)}
+                            />
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="mt-6 w-full flex justify-center">
+                      <div
+                        className={styles.btn_container}
+                        onClick={() => handleApply()}>
+                        <p className={styles.apply_btn}>Apply</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* </div> */}
             {/* <div className="flex items-center justify-center ">
@@ -510,13 +533,15 @@ const SubHeader = ({params}) => {
             {/* ------------------------------------------------------------------------------------------------------ */}
           </div>
           <div className={styles.filter_sort_section_mobile}>
-            <div className={styles.filter}>
-              <FilterSortDrawer
-                filterName={"Filter"}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
+            {showFilter && (
+              <div className={styles.filter}>
+                <FilterSortDrawer
+                  filterName={"Filter"}
+                  setPageNo={setPageNo}
+                  setFilterListed={setFilterListed}
+                />
+              </div>
+            )}
             <div className="flex items-center justify-center ">
               <p className={styles.option_text}>Sortby</p>
               <div className={styles.filter}>
@@ -591,7 +616,7 @@ const SubHeader = ({params}) => {
         </div>
       )}
 
-      {filtereData && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
+      {showData && <SingleProduct pageNo={pageNo} setPageNo={setPageNo} />}
     </>
   );
 };

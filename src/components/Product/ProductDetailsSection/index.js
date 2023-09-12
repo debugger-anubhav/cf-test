@@ -35,6 +35,7 @@ import {useMutation} from "@/hooks/useMutation";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import SideDrawer from "../Drawer/Drawer";
 
 // import ShareDrawer from "./ShareDrawer/ShareDrawer";
 // import Modal from "react-responsive-modal";
@@ -67,6 +68,16 @@ const ProductDetails = ({params}) => {
   const [showBottomBar, setShowBottomBar] = useState(false);
   const [yourScrollThreshold, setYourScrollThreshold] = useState(0);
   const [soldOut, setSoldOut] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const reviewsPerPage = 4;
+  const startIndex = open ? (currentPage - 1) * reviewsPerPage : 0;
+  const endIndex = open ? startIndex + reviewsPerPage : 3;
+
+  const toggleRatingDrawer = () => {
+    setOpen(!open);
+  };
 
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -172,8 +183,7 @@ const ProductDetails = ({params}) => {
   }, []);
 
   const router = useRouter();
-  const cityIdStr = localStorage
-    .getItem("cityId")
+  const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
@@ -517,7 +527,9 @@ const ProductDetails = ({params}) => {
                   </p>
                   <RatingStar color={"#F6B704"} size={16} />
                 </div>
-                <p className={`underline ${styles.rating_txt}`}>
+                <p
+                  className={`underline ${styles.rating_txt}`}
+                  onClick={toggleRatingDrawer}>
                   {totalReviews} ratings
                 </p>
               </div>
@@ -691,6 +703,18 @@ const ProductDetails = ({params}) => {
           )}
         </div>
       </div>
+      {open && (
+        <SideDrawer
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+          endIndex={endIndex}
+          startIndex={startIndex}
+          toggleDrawer={toggleRatingDrawer}
+          open={open}
+          totalReviews={totalReviews}
+          drawerType={"ratings"}
+        />
+      )}
     </div>
   );
 };

@@ -6,9 +6,9 @@ import {store} from "@/store";
 import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Provider} from "react-redux";
-import CartSection from "@/components/Cart";
+import UserSettings from "@/components/UserSettings/UserSettings";
 
-const CartPage = () => {
+const UserSettingsPage = () => {
   const queryClient = new QueryClient();
 
   return (
@@ -18,11 +18,11 @@ const CartPage = () => {
           <AnnouncementBar />
           <Header />
           <MenuList />
-          <CartSection />
+          <UserSettings />
         </div>
       </Provider>
     </QueryClientProvider>
   );
 };
 
-export default CartPage;
+export default UserSettingsPage;
