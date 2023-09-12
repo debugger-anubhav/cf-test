@@ -105,15 +105,16 @@ const RecentlyViewedProduct = ({page}) => {
 
   return (
     <>
-      {homePageReduxData?.recentProduct?.length ? (
+      {homePageReduxData?.recentProduct ? (
         <div className={styles.main_container}>
-          <h2
-            className={`${
-              page === "product" && "xl:!text-24 xl:!tracking-0.48"
-            } ${styles.heading}`}>
-            Recently Viewed products
-          </h2>
-
+          {homePageReduxData?.recentProduct?.length ? (
+            <h2
+              className={`${
+                page === "product" && "xl:!text-24 xl:!tracking-0.48"
+              } ${styles.heading}`}>
+              Recently Viewed products
+            </h2>
+          ) : null}
           {/* {homePageReduxData?.recentProduct?.length ? ( */}
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
             {homePageReduxData?.recentProduct?.map((item, index) => {
