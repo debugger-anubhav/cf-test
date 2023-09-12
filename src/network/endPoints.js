@@ -70,6 +70,10 @@ export const endPoints = {
     updateQuantity: `fc-shopping-carts/updateQuantity`,
     fetchCoins: userId => `fc-my-wallets/getMyWalletDetails?userId=${userId}`,
     fetchBill: "fc-shopping-carts/generatedBill",
+    fetchSavedAddress: userId =>
+      `fc-shipping-addresses/getUserAllAddress?userId=${userId}`,
+    makePrimaryAddress: `fc-shipping-addresses/makeAddressPrimary`,
+    addAddress: "fc-shipping-addresses/saveUserAddress",
   },
 
   // categoryHappySubscriber:

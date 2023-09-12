@@ -1,0 +1,54 @@
+.main_container {
+  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+}
+.head {
+  @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-medium leading-8 tracking-0.48;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.card_wrapper {
+  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-8 cursor-pointer;
+}
+.circle {
+  @apply border-2 border-[#5774AC] flex justify-center items-center rounded-full;
+  width: 14px;
+  height: 14px;
+}
+.selected_circle {
+  @apply bg-5774AC w-1 h-1 rounded-full;
+}
+.first_row {
+  @apply flex gap-[10px] items-center;
+}
+.name {
+  @apply text-16 font-medium text-222 font-Inter tracking-0.3;
+}
+.address {
+  @apply mt-[12.5px] text-14 text-45454A tracking-desc;
+}
+.btn {
+  @apply text-16 font-medium text-71717A flex gap-[10px] px-8 rounded-lg justify-center items-center h-14 mt-8 w-full;
+  border: 2px solid var(--grey-grey-600, #71717a);
+  background: #fff;
+}
+.forwIcon {
+  @apply w-5 h-5;
+}
+.not_belong_wrapper {
+  @apply mb-3 rounded-lg bg-[#FFEFEF] border border-DDDDDF px-2 py-1 w-fit;
+}
+.not_belong_text {
+  @apply text-[#D96060] text-16 font-medium leading-5;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure the container takes all available height */
+}
+
+.item_wrapper {
+  flex: 1; /* Allow items to take the available vertical space */
+  overflow-y: auto; /* Add a vertical scrollbar if needed for overflow */
+}

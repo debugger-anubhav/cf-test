@@ -159,6 +159,8 @@ export const CartPageSlice = createSlice({
     cartItems: [],
     totalNumberOfItems: 0,
     billBreakout: [],
+    couponCodeUsed: "",
+    savedAddresses: [],
   },
   reducers: {
     getCartItems(state, action) {
@@ -179,6 +181,12 @@ export const CartPageSlice = createSlice({
     },
     getBillDetails(state, action) {
       state.billBreakout.push(action.payload);
+    },
+    getCouponCodeUsed(state, action) {
+      state.couponCodeUsed = action.payload;
+    },
+    getSavedAddress(state, action) {
+      state.savedAddresses = action.payload;
     },
   },
 });
@@ -219,8 +227,14 @@ export const {
   getProductDetails,
 } = ProductpageSlice.actions;
 
-export const {getCartItems, deleteItems, addItemsToCart, getBillDetails} =
-  CartPageSlice.actions;
+export const {
+  getCartItems,
+  deleteItems,
+  addItemsToCart,
+  getBillDetails,
+  getCouponCodeUsed,
+  getSavedAddress,
+} = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
   SeoAppliancePageSlice.actions;

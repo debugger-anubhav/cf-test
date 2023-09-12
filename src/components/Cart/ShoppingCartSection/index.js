@@ -26,12 +26,16 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {
   deleteItems,
+  getBillDetails,
+  getCouponCodeUsed,
   //  getCartItems
 } from "@/store/Slices";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cartPageData.cartItems);
+  const billBreakup = useSelector(state => state.cartPageData.billBreakout);
+  console.log(billBreakup, "billlllll");
 
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
@@ -143,6 +147,7 @@ const ShoppingCartSection = ({setTab}) => {
   const applyCouponCode = value => {
     setIsCouponApplied(true);
     setCode(value);
+    dispatch(getCouponCodeUsed(value));
   };
 
   const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
@@ -177,7 +182,7 @@ const ShoppingCartSection = ({setTab}) => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  const getBillDetails = () => {
+  const fetchBill = () => {
     const headers = {
       userId: userIdToUse,
       cityshield: isChecked,
@@ -189,9 +194,22 @@ const ShoppingCartSection = ({setTab}) => {
 
     axios
       .post(baseURL + endPoints.addToCart.fetchBill, headers)
-      .then(res => console.log(res, "res in bill"))
-      .catch(err => console.log(err, "error in fetch bill"));
+      .then(res => {
+        console.log(res, "res in bill");
+        dispatch(getBillDetails(res?.data?.data));
+      })
+      .catch(err => console.log(err));
   };
+
+  useEffect(
+    () => {
+      fetchBill();
+    },
+    [isCoinApplied],
+    [isChecked],
+    [isMonthly],
+    [isCoinApplied],
+  );
 
   return count > 0 ? (
     <>
@@ -207,280 +225,295 @@ const ShoppingCartSection = ({setTab}) => {
         <div className={styles.left_div} id="leftDiv">
           <h1 className={styles.head}>Shopping cart ({count})</h1>
           <div className={styles.card_wrapper}>
-            {arr?.map((item, index) => (
-              <div key={index} className={styles.single_product_wrapper}>
-                <div className={styles.img_div}>
-                  <img
-                    src={`${
-                      productImageBaseUrl +
-                      "thumb/" +
-                      item.fc_product?.image?.split(",")?.[0]
-                    }`}
-                    alt="product_img"
-                    className={styles.img}
-                  />
-                </div>
-
-                <div>
-                  <div className={styles.name_div}>
-                    <p className={styles.product_name}>
-                      {item?.fc_product?.product_name.replace(/-/g, " ")}
-                    </p>
-                    <div
-                      onClick={() => {
-                        setProductId(item?.fc_product?.id);
-                        setItemId(item?.id);
-                        openModal();
-                      }}>
-                      {" "}
-                      <DeleteIcon className={styles.delete_icon} />
-                    </div>
+            {arr?.map((item, index) => {
+              return (
+                <div key={index} className={styles.single_product_wrapper}>
+                  <div className={styles.img_div}>
+                    <img
+                      src={`${
+                        productImageBaseUrl +
+                        "thumb/" +
+                        item.fc_product?.image?.split(",")?.[0]
+                      }`}
+                      alt="product_img"
+                      className={styles.img}
+                    />
                   </div>
 
-                  <div className={styles.price_div}>
-                    <div className={styles.incre_decre_div}>
-                      <span
-                        className={styles.span_item}
-                        onClick={() =>
-                          handleUpdateQuantity(
-                            item.id,
-                            item?.fc_product?.id,
-                            item.quantity - 1,
-                            index,
-                          )
-                        }>
-                        -
-                      </span>
-                      {item?.quantity}
-                      <span
-                        className={styles.span_item}
-                        onClick={() =>
-                          handleUpdateQuantity(
-                            item.id,
-                            item?.fc_product?.id,
-                            item.quantity + 1,
-                            index,
-                          )
-                        }>
-                        +
-                      </span>
+                  <div>
+                    <div className={styles.name_div}>
+                      <p className={styles.product_name}>
+                        {item?.fc_product?.product_name.replace(/-/g, " ")}
+                      </p>
+                      <div
+                        onClick={() => {
+                          setProductId(item?.fc_product?.id);
+                          setItemId(item?.id);
+                          openModal();
+                        }}>
+                        {" "}
+                        <DeleteIcon className={styles.delete_icon} />
+                      </div>
                     </div>
 
-                    <div>
-                      <p className={styles.deposit_txt}>Monthly Rent</p>
-                      <div className="flex items-end gap-2">
-                        <p className={styles.currentPrice}>
-                          <span className={styles.rupeeIcon}>₹</span>
-                          {item?.fc_product?.fc_product_sale_price?.sale_price}
-                        </p>
-                        <p className={styles.originalPrice}>
-                          <span className={styles.rupeeIcon}>₹</span>
-                          {item?.fc_product?.price}
-                        </p>
+                    <div className={styles.price_div}>
+                      <div className={styles.incre_decre_div}>
+                        <span
+                          className={styles.span_item}
+                          onClick={() =>
+                            handleUpdateQuantity(
+                              item.id,
+                              item?.fc_product?.id,
+                              item.quantity - 1,
+                              index,
+                            )
+                          }>
+                          -
+                        </span>
+                        {item?.quantity}
+                        <span
+                          className={styles.span_item}
+                          onClick={() =>
+                            handleUpdateQuantity(
+                              item.id,
+                              item?.fc_product?.id,
+                              item.quantity + 1,
+                              index,
+                            )
+                          }>
+                          +
+                        </span>
+                      </div>
+
+                      <div>
+                        <p className={styles.deposit_txt}>Monthly Rent</p>
+                        <div className="flex items-end gap-2">
+                          <p className={styles.currentPrice}>
+                            <span className={styles.rupeeIcon}>₹</span>
+                            {
+                              item?.fc_product?.fc_product_sale_price
+                                ?.sale_price
+                            }
+                          </p>
+                          <p className={styles.originalPrice}>
+                            <span className={styles.rupeeIcon}>₹</span>
+                            {item?.fc_product?.price}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
         <div className={styles.right_div} id="rightDiv">
-          <div className={styles.city_shield_div}>
-            <div className={styles.city_shield_head_div}>
-              <div className={styles.verify_icon_div}>
-                <VerifyIcon size={24} color={"#2D9469"} />
-                <p className={styles.city_shield_head}>Cityshield </p>
+          <div>
+            <div className={styles.city_shield_div}>
+              <div className={styles.city_shield_head_div}>
+                <div className={styles.verify_icon_div}>
+                  <VerifyIcon size={24} color={"#2D9469"} />
+                  <p className={styles.city_shield_head}>Cityshield </p>
+                </div>
+                <div>
+                  {isChecked ? (
+                    <div onClick={openDrawer}>
+                      <CheckedBox
+                        size={20}
+                        color={"#5774AC"}
+                        className={"cursor-pointer"}
+                      />
+                    </div>
+                  ) : (
+                    <div onClick={() => setIsChecked(true)}>
+                      <UncheckedBox
+                        size={20}
+                        color={"#5774AC"}
+                        className={"cursor-pointer"}
+                      />
+                    </div>
+                  )}
+                  {cityShieldDrawerOpen && (
+                    <CityShieldDrawerForCart
+                      cityShieldCurrentPrice={cityShieldDiscountAmount}
+                      cityShieldOriginalPrice={cityShieldOriginalAmount}
+                      cityShieldDiscount={cityShieldDiscountPercentage}
+                      toggleDrawer={toggleDrawerCityShield}
+                      open={cityShieldDrawerOpen}
+                      toggleCheckbox={() => setIsChecked(false)}
+                    />
+                  )}
+                </div>
               </div>
-              <div>
-                {isChecked ? (
-                  <div onClick={openDrawer}>
-                    <CheckedBox
-                      size={20}
-                      color={"#5774AC"}
-                      className={"cursor-pointer"}
-                    />
-                  </div>
+
+              <p>Insurance value</p>
+              <div className="flex items-end gap-2">
+                <p className={styles.currentPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldDiscountAmount}/mo
+                </p>
+                <p className={styles.originalPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldOriginalAmount}/mo
+                </p>
+                <div className={styles.discount}>
+                  -{cityShieldDiscountPercentage}% OFF
+                </div>
+              </div>
+              <p className={styles.protect_text}>
+                Protect your appliances and furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
+                <span className={styles.learn_more} onClick={openDrawer}>
+                  Learn more
+                </span>
+              </p>
+            </div>
+
+            <div className={styles.coins_div}>
+              <div className={styles.coins_left_div}>
+                <div>
+                  <img
+                    src={`${categoryIconsUrl + "cf_coin.svg"}`}
+                    className={styles.coin}
+                  />
+                </div>
+                <div>
+                  <p className={styles.coin_txt}>Use Cityfurnish coins</p>
+                  <p className={styles.avail_bal}>
+                    Available balance:{" "}
+                    {isCoinApplied
+                      ? availCoin - billBreakup?.[0]?.coinsUsed
+                      : availCoin}
+                  </p>
+                </div>
+              </div>
+              <div className="cursor-pointer">
+                {isCoinApplied ? (
+                  <FaToggleOn
+                    size={29}
+                    color={"#5774AC"}
+                    onClick={() => setIsCoinApplied(false)}
+                  />
                 ) : (
-                  <div onClick={() => setIsChecked(true)}>
-                    <UncheckedBox
-                      size={20}
-                      color={"#5774AC"}
-                      className={"cursor-pointer"}
-                    />
-                  </div>
-                )}
-                {cityShieldDrawerOpen && (
-                  <CityShieldDrawerForCart
-                    cityShieldCurrentPrice={cityShieldDiscountAmount}
-                    cityShieldOriginalPrice={cityShieldOriginalAmount}
-                    cityShieldDiscount={cityShieldDiscountPercentage}
-                    toggleDrawer={toggleDrawerCityShield}
-                    open={cityShieldDrawerOpen}
-                    toggleCheckbox={() => setIsChecked(false)}
+                  <FaToggleOff
+                    color={"#E3E1DC"}
+                    size={29}
+                    onClick={() => setIsCoinApplied(true)}
                   />
                 )}
               </div>
             </div>
 
-            <p>Insurance value</p>
-            <div className="flex items-end gap-2">
-              <p className={styles.currentPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldDiscountAmount}/mo
+            <div
+              className={styles.coupons_wrapper}
+              onClick={() => {
+                !isCouponApplied && setCouponDrawerOpen(true);
+              }}>
+              <p className={styles.offer_text}>
+                {isCouponApplied
+                  ? `${code} applied🎉`
+                  : "Apply Offers & Coupon🎉"}
               </p>
-              <p className={styles.originalPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldOriginalAmount}/mo
-              </p>
-              <div className={styles.discount}>
-                -{cityShieldDiscountPercentage}% OFF
-              </div>
-            </div>
-            <p className={styles.protect_text}>
-              Protect your appliances and furniture worth{" "}
-              <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
-              <span className={styles.learn_more} onClick={openDrawer}>
-                Learn more
-              </span>
-            </p>
-          </div>
-
-          <div className={styles.coins_div}>
-            <div className={styles.coins_left_div}>
-              <div>
-                <img
-                  src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                  className={styles.coin}
-                />
-              </div>
-              <div>
-                <p className={styles.coin_txt}>Use Cityfurnish coins</p>
-                <p className={styles.avail_bal}>
-                  Available balance: {isCoinApplied ? 0 : availCoin}
+              {isCouponApplied ? (
+                <p
+                  className={styles.remove_txt}
+                  onClick={() => setIsCouponApplied(false)}>
+                  Remove
                 </p>
-              </div>
-            </div>
-            <div className="cursor-pointer">
-              {isCoinApplied ? (
-                <FaToggleOn
-                  size={29}
-                  color={"#5774AC"}
-                  onClick={() => setIsCoinApplied(false)}
-                />
               ) : (
-                <FaToggleOff
-                  color={"#E3E1DC"}
-                  size={29}
-                  onClick={() => setIsCoinApplied(true)}
-                />
+                <div onClick={() => setCouponDrawerOpen(true)}>
+                  <ArrowForw color={"#3E688E"} className={styles.arrow} />
+                </div>
               )}
             </div>
-          </div>
 
-          <div
-            className={styles.coupons_wrapper}
-            onClick={() => {
-              !isCouponApplied && setCouponDrawerOpen(true);
-            }}>
-            <p className={styles.offer_text}>
-              {isCouponApplied
-                ? `${code} applied🎉`
-                : "Apply Offers & Coupon🎉"}
-            </p>
-            {isCouponApplied ? (
-              <p
-                className={styles.remove_txt}
-                onClick={() => setIsCouponApplied(false)}>
-                Remove
-              </p>
-            ) : (
-              <div onClick={() => setCouponDrawerOpen(true)}>
-                <ArrowForw color={"#3E688E"} className={styles.arrow} />
-              </div>
+            {couponDrawerOpen && (
+              <CouponDrawer
+                toggleDrawer={toggleDrawerCoupon}
+                open={couponDrawerOpen}
+                applyCoupon={setIsCouponApplied}
+                applyCouponCode={applyCouponCode}
+                isMonthly={isMonthly}
+              />
             )}
-          </div>
 
-          {couponDrawerOpen && (
-            <CouponDrawer
-              toggleDrawer={toggleDrawerCoupon}
-              open={couponDrawerOpen}
-              applyCoupon={setIsCouponApplied}
-              applyCouponCode={applyCouponCode}
-              isMonthly={isMonthly}
-            />
-          )}
+            {/* hit and try */}
 
-          <div className={styles.payment_mode}>
-            <h2 className={styles.pref_mode_head}>Preferred payment mode:</h2>
-            <div className={styles.monthly_toggler}>
-              <p
-                onClick={() => setIsMonthly(true)}
-                className={`${
-                  isMonthly
-                    ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
-                    : "bg-transparent"
-                } ${styles.pref_mode_text}`}>
-                Monthly
-              </p>
-              <p
-                onClick={() => setIsMonthly(false)}
-                className={`${
-                  isMonthly
-                    ? "bg-transparent"
-                    : "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
-                } ${styles.pref_mode_text}`}>
-                Upfront
-              </p>
-            </div>
-            <div className={styles.pref_mode_features_wrappper}>
-              {isMonthly
-                ? monthlyModeFeatures.map((item, index) => (
-                    <ul key={index} className={styles.payment_mode_list}>
-                      <RightIcon color={"#2D9469"} size={13} />
-                      <li className={styles.payment_mode_feature}>{item}</li>
-                    </ul>
-                  ))
-                : upfrontModeFeatures.map((item, index) => (
-                    <ul key={index} className={styles.payment_mode_list}>
-                      <RightIcon color={"#2D9469"} size={13} />
-                      <li className={styles.payment_mode_feature}>{item}</li>
-                    </ul>
-                  ))}
-            </div>
-          </div>
-
-          <div
-            className={styles.cart_breakup}
-            onClick={() => {
-              getBillDetails();
-              setBreakupDrawer(true);
-            }}>
-            <div>
-              <p className={styles.total_text}>Total:</p>
-              <div className={styles.breakup_wrapper}>
-                <p className={styles.view_cart_text}>View cart breakup</p>
-                <ArrowForw color={"#5774AC"} className={styles.for_arrow} />
+            <div className={styles.payment_mode}>
+              <h2 className={styles.pref_mode_head}>Preferred payment mode:</h2>
+              <div className={styles.monthly_toggler}>
+                <p
+                  onClick={() => setIsMonthly(true)}
+                  className={`${
+                    isMonthly
+                      ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                      : "bg-transparent"
+                  } ${styles.pref_mode_text}`}>
+                  Monthly
+                </p>
+                <p
+                  onClick={() => setIsMonthly(false)}
+                  className={`${
+                    isMonthly
+                      ? "bg-transparent"
+                      : "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                  } ${styles.pref_mode_text}`}>
+                  Upfront
+                </p>
+              </div>
+              <div className={styles.pref_mode_features_wrappper}>
+                {isMonthly
+                  ? monthlyModeFeatures.map((item, index) => (
+                      <ul key={index} className={styles.payment_mode_list}>
+                        <RightIcon color={"#2D9469"} size={13} />
+                        <li className={styles.payment_mode_feature}>{item}</li>
+                      </ul>
+                    ))
+                  : upfrontModeFeatures.map((item, index) => (
+                      <ul key={index} className={styles.payment_mode_list}>
+                        <RightIcon color={"#2D9469"} size={13} />
+                        <li className={styles.payment_mode_feature}>{item}</li>
+                      </ul>
+                    ))}
               </div>
             </div>
-            <p className={styles.total_amount}>
-              <span className={styles.rupeeIcon}>₹</span>
-              11,709
-            </p>
           </div>
 
-          {breakupDrawer && (
-            <TotalBreakup
-              toggleDrawer={toggleDrawerBreakup}
-              open={breakupDrawer}
-              arr={arr}
-            />
-          )}
+          <div>
+            <div
+              className={styles.cart_breakup}
+              onClick={() => {
+                fetchBill();
+                setBreakupDrawer(true);
+              }}>
+              <div>
+                <p className={styles.total_text}>Total:</p>
+                <div className={styles.breakup_wrapper}>
+                  <p className={styles.view_cart_text}>View cart breakup</p>
+                  <ArrowForw color={"#5774AC"} className={styles.for_arrow} />
+                </div>
+              </div>
+              <p className={styles.total_amount}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
+              </p>
+            </div>
 
-          <button className={styles.proceed_button} onClick={setTab}>
-            Proceed <ArrowForw size={19} color={"#222"} />
-          </button>
+            {breakupDrawer && (
+              <TotalBreakup
+                toggleDrawer={toggleDrawerBreakup}
+                open={breakupDrawer}
+                billBreakup={billBreakup}
+                code={code}
+              />
+            )}
+
+            <button className={styles.proceed_button} onClick={setTab}>
+              Proceed <ArrowForw size={19} color={"#222"} />
+            </button>
+          </div>
         </div>
       </div>
     </>
