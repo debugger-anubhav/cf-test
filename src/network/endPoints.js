@@ -83,7 +83,7 @@ export const endPoints = {
   categortFaq: "fc-faqs/getCategoryPageFAQS",
   categoryContent: "fc-city-category-datas/getCategoryPageTextContent",
   savedItems: "fc-product-likes/getWishlistProducts",
-  categorySingleProduct: "fc-products/getSingleProducts",
+  categorySingleProduct: "fc-products/getCategoryProducts",
   categoryComboProduct: "fc-products/getSetProducts",
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",
