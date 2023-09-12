@@ -45,23 +45,23 @@ export const endPoints = {
     `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
 
   productPage: {
-    completeTheLook: id =>
-      `fc-products/getRecommendedProducts?productId=${id}&cityId=50`,
-    youMightLike: id =>
-      `fc-products/getYouMightAlsoLikeProducts?productId=${id}&cityId=50`,
-    monthlyRent: id =>
-      `fc-subproducts/getProductForThePeriod?productId=${id}&cityId=46`,
+    completeTheLook: (id, cityId) =>
+      `fc-products/getRecommendedProducts?productId=${id}&cityId=${cityId}`,
+    youMightLike: (id, cityId) =>
+      `fc-products/getYouMightAlsoLikeProducts?productId=${id}&cityId=${cityId}`,
+    monthlyRent: (id, cityId) =>
+      `fc-subproducts/getProductForThePeriod?productId=${id}&cityId=${cityId}`,
     careInstructions: id =>
       `fc-care-instructions/getProductCareInstructions?productId=${id}`,
     bannerImages: id => `fc-product-banners/getProductBanners?productId=${id}`,
     productVideos: id => `fc-product-videos/getProductVideos?productId=${id}`,
-    customerReviews: id =>
-      `fc-user-reviews/getProductUserReviews?productId=${id}&cityId=45`,
+    customerReviews: (id, cityId) =>
+      `fc-user-reviews/getProductUserReviews?productId=${id}&cityId=${cityId}`,
     qna: id => `fc-faq-products/getProductPageFAQs?productId=${id}`,
     happySubscribers: id =>
       `fc-care-instructions/getCustomerHappyStories?productId=${id}`,
-    singleProductDetails: id =>
-      `fc-products/getSingleProductDetails?productId=${id}&cityId=50`,
+    singleProductDetails: (id, cityId) =>
+      `fc-products/getSingleProductDetails?productId=${id}&cityId=${cityId}`,
     addToCart: `fc-shopping-carts/addToCart`,
   },
 

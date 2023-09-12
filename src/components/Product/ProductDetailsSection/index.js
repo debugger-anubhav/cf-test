@@ -117,7 +117,8 @@ const ProductDetails = ({params}) => {
   const GetProductDetails = () => {
     axios
       .get(
-        baseURL + endPoints.productPage.singleProductDetails(params.productId),
+        baseURL +
+          endPoints.productPage.singleProductDetails(params.productId, cityId),
       )
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
@@ -130,7 +131,9 @@ const ProductDetails = ({params}) => {
 
   const getDurationRent = () => {
     axios
-      .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
+      .get(
+        baseURL + endPoints.productPage.monthlyRent(params.productId, cityId),
+      )
       .then(res => {
         setDurationArray(res?.data?.data);
       })
