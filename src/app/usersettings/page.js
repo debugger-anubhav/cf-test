@@ -6,6 +6,7 @@ import {store} from "@/store";
 import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Provider} from "react-redux";
+import UserSettings from "@/components/UserSettings/UserSettings";
 
 const UserSettingsPage = () => {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ const UserSettingsPage = () => {
           <AnnouncementBar />
           <Header />
           <MenuList />
+          <UserSettings />
         </div>
       </Provider>
     </QueryClientProvider>
