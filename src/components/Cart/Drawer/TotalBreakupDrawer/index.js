@@ -2,19 +2,13 @@ import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
 import {Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
+import {useSelector} from "react-redux";
 
-const TotalBreakup = ({
-  toggleDrawer,
-  totalAmount = 19000,
-  totalDiscount = -1200,
-  code = "WELCOME10",
-  open,
-  totalPayable = "25000",
-  arr,
-}) => {
+const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [showTotalPriceBreakdown, setShowTotalPriceBreakdown] = useState(false);
-  console.log(arr, "arrr in breaku drawer");
+  const code = useSelector(state => state.cartPageData.couponCodeUsed);
+  console.log(code);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -31,8 +25,6 @@ const TotalBreakup = ({
       window.removeEventListener("resize", handleresize);
     };
   }, []);
-
-  const gst = (totalAmount * 18) / 100;
 
   return (
     <Drawer
@@ -66,23 +58,26 @@ const TotalBreakup = ({
 
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {totalAmount}
+              {billBreakup?.[0]?.cartSubTotal}
             </p>
           </div>
 
           {showTotalPriceBreakdown && (
             <>
               <div className={styles.dropdown_wrapper}>
-                {arr.map((item, index) => (
+                {billBreakup?.[0]?.cartSubTotalList?.map((item, index) => (
                   <div key={index} className={styles.dropdown_row}>
-                    <p className={`min-w-[190px] ${styles.prod_name}`}>
-                      {item?.fc_product?.product_name.replace(/-/g, " ")}
+                    <p
+                      className={`min-w-[190px] w-[190px] ${styles.prod_name}`}>
+                      {item.name}
                     </p>
-                    <p className={`min-w-fit ${styles.prod_name}`}>12 months</p>
+                    <p className={`min-w-fit ${styles.prod_name}`}>
+                      {item.tenure}
+                    </p>
                     <p className={styles.total_amount}>
                       <span className={styles.rupeeIcon}>₹</span>
-                      800
-                      {/* {item.originalPrice} */}
+
+                      {item.price}
                     </p>
                   </div>
                 ))}
@@ -97,8 +92,8 @@ const TotalBreakup = ({
               <p className={styles.price_label}>Items discount</p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {totalDiscount}
+              <span className={styles.rupeeIcon}>-₹</span>
+              {billBreakup?.[0]?.itemDiscount}
             </p>
           </div>
 
@@ -107,8 +102,8 @@ const TotalBreakup = ({
               <p className={styles.price_label}>Coupon discount {code}</p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {totalDiscount}
+              <span className={styles.rupeeIcon}>-₹</span>
+              {billBreakup?.[0]?.couponDiscount}
             </p>
           </div>
 
@@ -119,7 +114,8 @@ const TotalBreakup = ({
               <p className={styles.price_label}>Refundable Security Deposit</p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>₹</span>0
+              <span className={styles.rupeeIcon}>₹</span>
+              {billBreakup?.[0]?.refundableDeposite}
             </p>
           </div>
 
@@ -128,7 +124,8 @@ const TotalBreakup = ({
               <p className={styles.price_label}>Delivery & Installation fee</p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>₹</span>0
+              <span className={styles.rupeeIcon}>₹</span>
+              {billBreakup?.[0]?.deliveryAndInstallation}
             </p>
           </div>
 
@@ -140,7 +137,7 @@ const TotalBreakup = ({
             </div>
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {gst}
+              {billBreakup?.[0]?.gst}
             </p>
           </div>
 
@@ -151,8 +148,8 @@ const TotalBreakup = ({
               <p className={styles.price_label}>Cityfurnish coins used</p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {"500"}
+              <span className={styles.rupeeIcon}>-₹</span>
+              {billBreakup?.[0]?.coinsUsed}
             </p>
           </div>
 
@@ -162,7 +159,7 @@ const TotalBreakup = ({
             <p className={styles.total_txt}>Total</p>
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {totalPayable}
+              {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
             </p>
           </div>
         </div>

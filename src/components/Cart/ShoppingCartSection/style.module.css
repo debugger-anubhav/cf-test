@@ -1,5 +1,5 @@
 .main_container {
-  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px];
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between;
 }
 .left_div {
   @apply lg:h-[100vh] xl:h-[800px] lg:overflow-y-scroll lg:overflow-x-hidden;
@@ -34,7 +34,6 @@
 .span_item {
   @apply text-18 font-normal hover:bg-[#F2FAFF] hover:text-[#5774AC] cursor-pointer rounded-lg w-[13px] h-6 flex justify-center items-center;
 }
-
 .currentPrice {
   @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4 flex items-center;
 }
@@ -43,6 +42,9 @@
 }
 .delete_icon {
   @apply w-6 h-6 text-71717A hover:text-[#D96060] cursor-pointer;
+}
+.right_div {
+  @apply 4xl:flex 4xl:gap-7;
 }
 .city_shield_div {
   @apply p-4 md:w-[440px] lg:w-full xl:w-[440px] bg-fff border border-DDDDDF rounded-xl hover:border-2 hover:p-[15px] hover:border-[#3E688E];
@@ -99,7 +101,7 @@
   @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-[#5774AC] flex justify-between mt-4;
 }
 .breakup_wrapper {
-  @apply flex gap-1 items-center mt-1 xl:mt-[11px];
+  @apply flex gap-1 items-center mt-1 xl:mt-[11px] 4xl:mt-0;
 }
 .total_text {
   @apply text-71717A text-16 xl:text-20 font-medium leading-5;

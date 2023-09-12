@@ -20,29 +20,29 @@
   @apply flex justify-between mt-4;
 }
 .dropdown_wrapper {
-  @apply mt-4 pl-4 pt-2 flex flex-col gap-2;
+  @apply mt-4 md:pl-4 pt-2 flex flex-col gap-2;
 }
 .dropdown_row {
-  @apply flex gap-4 items-start;
+  @apply flex gap-2 md:gap-4 items-start;
 }
 .prod_name {
-  @apply text-71717A text-16 leading-6;
+  @apply text-71717A text-14 xl:text-16 leading-6;
 }
 .sub_total_text {
-  @apply text-16 text-5774AC underline leading-6 tracking-0.3;
+  @apply text-14 xl:text-16 text-5774AC underline leading-6 tracking-desc xl:tracking-0.3;
 }
 .total_amount {
-  @apply flex text-16 font-medium tracking-0.3 leading-6 items-center;
+  @apply flex text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 leading-6 items-center;
 }
 .rupeeIcon {
-  @apply w-4 h-4;
+  @apply font-Inter;
 }
 .line {
   @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted mt-4;
 }
 .price_label {
-  @apply text-16 text-71717A leading-6 tracking-0.3;
+  @apply text-14 xl:text-16 text-71717A leading-6 tracking-desc xl:tracking-0.3;
 }
 .total_txt {
-  @apply text-16 text-222 font-medium leading-6 tracking-0.3;
+  @apply text-14 xl:text-16 text-222 font-medium leading-6 tracking-desc xl:tracking-0.3;
 }

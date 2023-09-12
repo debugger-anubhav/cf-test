@@ -13,6 +13,7 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {format} from "date-fns";
+import {getLocalStorage} from "@/constants/constant";
 
 const CustomerRating = ({params}) => {
   const [open, setOpen] = useState(false);
@@ -21,12 +22,17 @@ const CustomerRating = ({params}) => {
     setOpen(!open);
   };
 
+  const cityId = getLocalStorage("cityId");
+
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
 
   const getReviews = () => {
     axios
-      .get(baseURL + endPoints.productPage.customerReviews(params.productId))
+      .get(
+        baseURL +
+          endPoints.productPage.customerReviews(params.productId, cityId),
+      )
       .then(res => {
         dispatch(getCustomerReviews(res?.data?.data));
       })
