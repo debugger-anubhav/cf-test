@@ -27,7 +27,7 @@
   @apply flex lg:mr-8 mr-0 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 items-center cursor-pointer;
 }
 .header_city_name {
-  @apply flex lg:text-base  text-sm font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
+  @apply flex lg:text-base capitalize  text-sm font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
 }
 .select_heading {
   @apply text-24 font-medium text-45454A;

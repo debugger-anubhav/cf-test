@@ -17,10 +17,15 @@ export default function ChatWithUs() {
         <div className={styles.mid_section}>
           <p className={styles.sub_paragraph_details}>
             Write to us at
-            <span className={styles.mail_address}> hello@cityfurnish.com </span>
+            <span className={styles.mail_address}>
+              <a href="mailto: hello@cityfurnish.com">hello@cityfurnish.com </a>
+            </span>
             or talk to our customer care representative at
-            <span className={styles.mail_address}> 080-66084700 </span> (9 AM -
-            9 PM)
+            <span className={styles.mail_address}>
+              {" "}
+              <a href={`tel:080-66084700 `}>080-66084700</a>
+            </span>{" "}
+            (9 AM - 9 PM)
           </p>
           <div className={styles.btn_wrapper}>
             <a href="mailto: hello@cityfurnish.com">

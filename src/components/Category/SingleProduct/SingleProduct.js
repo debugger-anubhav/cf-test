@@ -14,9 +14,23 @@ import {
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
+import loadable from "@loadable/component";
 import CategoryCard from "./CommonCard";
-import ProductSet from "../ProductSet/ProductSet";
-
+import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import SavedItem from "../SavedItem/SavedItem";
+import TrendingItem from "../TrendingItem/TrendingItem";
+import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
+import Footer from "@/components/Common/Footer";
+import HappySubscribers from "@/components/Home/HappySubscribers";
+import CustomerRating from "@/components/Home/Rating";
+import CategoryContent from "../categoryContent/categoryContent";
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
   const router = useRouter();
@@ -179,7 +193,20 @@ const SingleProduct = ({pageNo, setPageNo}) => {
           </InfiniteScroll>
         </div>
       ) : null}
-      {singleItemData?.length === singleItemLength ? <ProductSet /> : null}
+      {/* {singleItemData?.length === singleItemLength ? <ProductSet /> : null} */}
+      {singleItemData?.length === singleItemLength ? (
+        <>
+          <RecentlyViewedProduct />
+          <SavedItem />
+          <TrendingItem />
+          <HappySubscribers page={"category"} params={categoryId} />
+          <CustomerRating />
+          <HasselFreeServicesCards />
+          <FrequentlyAskedQuestions />
+          <CategoryContent />
+          <Footer />
+        </>
+      ) : null}
     </>
   );
 };
