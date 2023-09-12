@@ -48,6 +48,8 @@ const ShoppingCartSection = ({setTab}) => {
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
+  const cityId = getLocalStorage("cityId");
+
   // console.log(userIdToUse, "user id to use");
 
   const totalAmount = cartItems.reduce((accumulator, item) => {
@@ -186,7 +188,7 @@ const ShoppingCartSection = ({setTab}) => {
     const headers = {
       userId: userIdToUse,
       cityshield: isChecked,
-      cityId: 46,
+      cityId,
       coins: isCoinApplied ? availCoin : 0,
       couponsCode: code,
       paymentMode: isMonthly ? 0 : 1,
