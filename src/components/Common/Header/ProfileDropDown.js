@@ -1,6 +1,8 @@
 import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import React from "react";
+import cookie from "react-cookies";
+
 export default function ProfileDropDown({setShowProfileDropdown}) {
   const items = [
     {item: "My Orders", link: "https://cityfurnish.com/purchases"},
@@ -42,7 +44,11 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
               router.push(ele.link);
             } else {
               // remove userid
+              cookie.remove("ci-sessions");
               localStorage.removeItem("tempUserID");
+              localStorage.removeItem("user_id");
+              localStorage.removeItem("user_name");
+              localStorage.removeItem("ci_session");
               setShowProfileDropdown(false);
             }
           }}>

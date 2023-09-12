@@ -25,9 +25,9 @@
 .main_sub_container::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
-background: linear-gradient(
+/* background: linear-gradient(
   98deg,
   rgba(240, 195, 255, 0) -6.83%,
   rgba(247, 195, 195, 0.28) 53.71%,
   rgba(240, 219, 219, 0.7) 113%
-);
+); */

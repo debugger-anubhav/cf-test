@@ -131,7 +131,6 @@ const SubHeader = ({params}) => {
     dispatch(addFilteredItem([]));
     let previousSubCategory;
     if (typeof window !== "undefined") {
-      getLocalStorage("subCategory");
       setLocalStorage("subCategory", item?.cat_name);
     }
 
@@ -172,9 +171,21 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
+    }`,
   );
-
+  console.log(
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
+    }`,
+    "dddd",
+    getLocalStorage("subCategory"),
+  );
   useEffect(() => {
     if (subCategoryId && categoryId) {
       getFilterList()
@@ -290,7 +301,14 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <p className={styles.route_text}>Home</p>
+                <p
+                  className={styles.route_text}
+                  onClick={() => {
+                    router.push("/");
+                  }}
+                  style={{cursor: "pointer"}}>
+                  Home
+                </p>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
@@ -515,13 +533,15 @@ const SubHeader = ({params}) => {
             {/* ------------------------------------------------------------------------------------------------------ */}
           </div>
           <div className={styles.filter_sort_section_mobile}>
-            <div className={styles.filter}>
-              <FilterSortDrawer
-                filterName={"Filter"}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
+            {showFilter && (
+              <div className={styles.filter}>
+                <FilterSortDrawer
+                  filterName={"Filter"}
+                  setPageNo={setPageNo}
+                  setFilterListed={setFilterListed}
+                />
+              </div>
+            )}
             <div className="flex items-center justify-center ">
               <p className={styles.option_text}>Sortby</p>
               <div className={styles.filter}>

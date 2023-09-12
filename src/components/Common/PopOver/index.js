@@ -25,16 +25,40 @@ import Box from "@mui/material/Box";
 
 const PopOver = ({list, item, parentCategoryId, data}) => {
   const homePageReduxData = useSelector(state => state.homePagedata);
-
   const hoverRef = React.useRef("");
   const [anchorEl, setAnchorEl] = React.useState(null);
-
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const handleCategory = (event, item) => {
+  const handleCategory = event => {
     setAnchorEl(event.currentTarget);
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${item.seourl}`);
+    dispatch(addAllProduct(true));
+
+    dispatch(addFilteredItem([]));
+    let previouseSubCategory;
+
+    if (typeof window !== "undefined") {
+      previouseSubCategory = getLocalStorage("subCategory");
+    }
+    dispatch(addFilteredItem([]));
+    dispatch(addProductCategory(hoverRef.current));
+
+    if (typeof window !== "undefined") {
+      setLocalStorage("category", hoverRef.current);
+      setLocalStorage("subCategory", "All");
+      setLocalStorage("categoryId", data?.id);
+    }
+    dispatch(addParentCategoryId(parentCategoryId));
+    dispatch(addProductName(item));
+    dispatch(addSubCategoryId(""));
+    dispatch(addProductName(null));
+    dispatch(addAllProduct(true));
+    if (previouseSubCategory !== "All") {
+      dispatch(addSingleAllProduct([]));
+      dispatch(addSetProductAll([]));
+      dispatch(addOutStockProductAll([]));
+    }
+    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${data.seourl}`);
   };
 
   const handleClose = () => {
@@ -108,7 +132,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         setAnchorEl("");
       }}>
       <button
-        onClick={e => handleCategory(e, item)}
+        onClick={e => handleCategory(e)}
         className="flex items-center whitespace-nowrap cursor-pointer"
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);

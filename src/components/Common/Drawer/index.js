@@ -18,6 +18,7 @@ import {
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const [userSettings, setUserSettings] = React.useState(false);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -26,6 +27,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   });
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const handleresize = e => {
+    if (e.target.innerWidth < 1024) {
+      console.log(e.target.innerWidth);
+      setUserSettings(true);
+    } else {
+      setUserSettings(false);
+    }
     if (e.target.innerWidth < 640) {
       // if (mobileCityDrawer) return
       setMobileCityDrawer(true);
@@ -158,10 +165,13 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList3?.map((item, index) => {
-              const dataurl =
-                index === 1 && getLocalStorage("user_id") !== null
-                  ? "/usersettings"
-                  : item.link;
+              let dataurl = "";
+              if (userSettings) {
+                dataurl =
+                  index === 1 && getLocalStorage("user_id") !== null
+                    ? "/usersettings"
+                    : item.link;
+              }
               return (
                 <a key={index.toString()} href={dataurl}>
                   <p className={styles.menu_item}>{item?.item}</p>
