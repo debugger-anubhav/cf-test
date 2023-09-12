@@ -1,0 +1,35 @@
+.main_container {
+  @apply px-4 pb-4;
+}
+.main_text {
+  @apply font-medium tracking-[-0.28px] text-45454A;
+}
+.user_account {
+  @apply text-sm font-normal text-6A6A6A mb-6;
+}
+.services_wrapper {
+  @apply rounded-[8px] border border-EDEDEE p-4;
+}
+
+.head_row {
+  @apply mb-1 flex justify-between items-center py-0.5;
+}
+.head_row_text {
+  @apply text-5774AC text-base font-medium tracking-[-0.32px];
+}
+
+.chevron_right_icon {
+  @apply text-[#222] text-[19.2px];
+}
+
+.desc_row {
+  @apply text-9A9AA2 text-xs font-normal  tracking-[-0.24px] mb-4;
+}
+
+.line_sepration {
+  @apply h-[1px] bg-EDEDEE mb-4;
+}
+
+.lgout {
+  @apply text-[#D96060] text-base font-medium tracking-[-0.32px] py-0.5 cursor-pointer;
+}
