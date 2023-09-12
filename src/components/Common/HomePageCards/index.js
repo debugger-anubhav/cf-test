@@ -64,7 +64,6 @@ const Card = ({
     }`,
   );
   const userId = getLocalStorageString("user_id");
-  console.log(userId);
   // useEffect(() => {
   //   const payload = {
   //     tempUserId: getLocalStorage("tempUserID") ?? "",
