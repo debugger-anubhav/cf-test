@@ -41,16 +41,19 @@ import SideDrawer from "../Drawer/Drawer";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({params}) => {
-  // console.log(params, "params");
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
   );
   const cartItems = useSelector(state => state.cartPageData.cartItems);
+  const cityName = useSelector(state => state.homePagedata.cityName);
   const arr = [
-    "Home",
-    prodDetails?.[0]?.category_name,
-    prodDetails?.[0]?.product_name.replace(/-/g, " "),
+    {name: "Home", link: "/"},
+    {
+      name: prodDetails?.[0]?.category_name,
+      link: `/${cityName.toLowerCase()}/${prodDetails?.[0]?.category_seourl}`,
+    },
+    {name: prodDetails?.[0]?.product_name.replace(/-/g, " ")},
   ];
   const dispatch = useDispatch();
 
@@ -210,7 +213,6 @@ const ProductDetails = ({params}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -288,8 +290,6 @@ const ProductDetails = ({params}) => {
   const isItemInCart = cartItems?.some(item => {
     return item?.fc_product?.id === parseInt(params.productId);
   });
-
-  // console.log(isItemInCart, params.productId, "isItemInCart");
 
   const handleAddToCart = () => {
     setIsLoading(true);
@@ -393,14 +393,16 @@ const ProductDetails = ({params}) => {
         />
       )}
       <div className={styles.bread_crumps}>
-        {arr.map((item, index) => (
+        {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">
-            <p
-              className={` ${
-                index === arr.length - 1 ? "font-medium" : "font-normal"
-              } ${styles.crumpItem}`}>
-              {item}
-            </p>
+            <a href={index !== 2 && `${item?.link}`}>
+              <p
+                className={` ${
+                  index === arr.length - 1 ? "font-medium" : "font-normal"
+                } ${styles.crumpItem}`}>
+                {item.name}
+              </p>
+            </a>
             <p
               className={`${index === arr.length - 1 ? "hidden" : "flex"} ${
                 styles.crumpItem
