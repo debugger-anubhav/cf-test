@@ -7,8 +7,6 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 
 const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
-  // const pageData = useSelector(state => state.homePagedata.offerCoupons);
-
   const [isApplied, setIsApplied] = React.useState(false);
   const [appliedIndex, setappliedIndex] = React.useState(null);
   const [input, setInput] = useState("");
@@ -120,19 +118,51 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
                 <div className={`${styles.ellipse} ${styles.left}`}></div>
                 <div className={`${styles.ellipse} ${styles.right}`}></div>
                 <div className="xl:w-full">
-                  <p className={` ${styles.desc}`}>{`${item?.price_text} ${
+                  <p
+                    style={{
+                      color: isMonthly
+                        ? item.coupon_type === 0
+                          ? "#CCC5F4"
+                          : "#CCCCCC"
+                        : item.coupon_type === 0
+                        ? "#CCCCCC"
+                        : "#CCC5F4",
+                    }}
+                    className={`${styles.desc}`}>{`${item?.price_text} ${
                     item?.max_discount !== "0"
                       ? `(up to Rs ${item?.max_discount})*`
                       : ""
                   } `}</p>
                   {item?.price_below_text && (
-                    <p className={` ${styles.desc}`}>
-                      {item?.price_below_text.split(" ").slice(0, 7).join(" ")}
+                    <p
+                      style={{
+                        color: isMonthly
+                          ? item.coupon_type === 0
+                            ? "#CCC5F4"
+                            : "#CCCCCC"
+                          : item.coupon_type === 0
+                          ? "#CCCCCC"
+                          : "#CCC5F4",
+                      }}
+                      className={`${styles.desc}`}>
+                      {item?.price_below_text}
                     </p>
                   )}
-                  <p className={styles.code}>Use Code {item?.coupon_code}</p>
+                  <p className={styles.code}>
+                    Use Code &quot;{item?.coupon_code}&quot;
+                  </p>
                 </div>
-                <div className={styles.line}></div>
+                <div
+                  style={{
+                    borderColor: isMonthly
+                      ? item.coupon_type === 0
+                        ? "#7e6dd5"
+                        : "#B4B4B4"
+                      : item.coupon_type === 0
+                      ? "#B4B4B4"
+                      : "#7e6dd5",
+                  }}
+                  className={styles.line}></div>
                 <div className={styles.copy_div}>
                   <button id="copy-button" className="text-[#222] flex ">
                     {isApplied && appliedIndex === index ? "Applied!" : "Apply"}

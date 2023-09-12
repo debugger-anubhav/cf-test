@@ -121,7 +121,8 @@ const ProductDetails = ({params}) => {
   const GetProductDetails = () => {
     axios
       .get(
-        baseURL + endPoints.productPage.singleProductDetails(params.productId),
+        baseURL +
+          endPoints.productPage.singleProductDetails(params.productId, cityId),
       )
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
@@ -134,7 +135,9 @@ const ProductDetails = ({params}) => {
 
   const getDurationRent = () => {
     axios
-      .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
+      .get(
+        baseURL + endPoints.productPage.monthlyRent(params.productId, cityId),
+      )
       .then(res => {
         setDurationArray(res?.data?.data);
       })
@@ -294,13 +297,13 @@ const ProductDetails = ({params}) => {
 
   const handleAddToCart = () => {
     setIsLoading(true);
-    // AddToCart();
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = localStorage.getItem("userID");
-    const tempUserId = localStorage.getItem("tempUserID");
+    const userId = getLocalStorage("userID");
+    const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
+
     const body = {
       userId: parseInt(userIdToUse),
       sellId: 22,
