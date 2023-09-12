@@ -218,14 +218,12 @@ const AddressSection = ({setTab}) => {
               city: cityName,
             }}
             validationSchema={validationSchema}
-            onSubmit={async (values, {setSubmitting}) => {
+            onSubmit={async (values, {setSubmitting, resetForm}) => {
               console.log("Form submitted with values:", values);
               await saveUserAddress(values);
               console.log("1");
               getAllSavedAddresses();
-              Formik.resetForm();
-              // Focus on the top input field
-              // document.getElementById("fullName").focus();
+              resetForm();
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             }}>
             {formik => (
