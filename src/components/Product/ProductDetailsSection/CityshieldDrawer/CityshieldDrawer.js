@@ -66,7 +66,8 @@ const CityshieldDrawer = ({
             /month!
           </p>
           <p className={styles.protect}>
-            Protect your appliances and furniture worth upto ₹70,000{" "}
+            Protect your appliances and furniture worth upto{" "}
+            <span className={styles.rupeeIcon}>₹</span>70,000{" "}
           </p>
 
           <p className={styles.option_text}>

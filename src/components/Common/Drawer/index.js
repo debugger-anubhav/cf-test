@@ -102,6 +102,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/home-furniture-rental`,
     // );
   };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div

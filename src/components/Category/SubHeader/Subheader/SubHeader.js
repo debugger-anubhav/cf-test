@@ -57,6 +57,7 @@ const SubHeader = ({params}) => {
   const [skeletonOpen, setSkeletonOpen] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
   const [showData, setShowData] = useState(false);
+  const [seoUrl, setSeoUrl] = useState();
 
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
@@ -177,15 +178,7 @@ const SubHeader = ({params}) => {
         : `&subCategoryId=${subCategoryId}`
     }`,
   );
-  console.log(
-    `?parentCategoryId=${categoryId}${
-      getLocalStorage("subCategory") === "All"
-        ? ""
-        : `&subCategoryId=${subCategoryId}`
-    }`,
-    "dddd",
-    getLocalStorage("subCategory"),
-  );
+
   useEffect(() => {
     if (subCategoryId && categoryId) {
       getFilterList()
@@ -292,6 +285,15 @@ const SubHeader = ({params}) => {
     setFilterOpen(!filterOpen);
   };
 
+  useEffect(() => {
+    setSeoUrl(
+      getAllAndSubCategoryData.find(
+        item => item.id === getLocalStorage("categoryId"),
+      ),
+    );
+  }, [getAllAndSubCategoryData]);
+  console.log("seoUrl", seoUrl);
+
   return (
     <>
       {skeletonOpen ? (
@@ -301,20 +303,24 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <p
-                  className={styles.route_text}
-                  onClick={() => {
-                    router.push("/");
-                  }}
-                  style={{cursor: "pointer"}}>
-                  Home
-                </p>
+                <a href="/">
+                  <p className={`${styles.route_text} cursor-pointer`}>Home</p>
+                </a>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
-              <li className={styles.list}>
-                <p className={styles.route_text}>
-                  {getLocalStorage("category")?.replace(/"/g, "")}
-                </p>
+              <li
+                className={styles.list}
+                onClick={() => {
+                  setLocalStorage("subCategory", "All");
+                }}>
+                <a
+                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                    seoUrl?.seourl
+                  }`}>
+                  <p className={`${styles.route_text} cursor-pointer`}>
+                    {getLocalStorage("category")?.replace(/"/g, "")}
+                  </p>
+                </a>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>

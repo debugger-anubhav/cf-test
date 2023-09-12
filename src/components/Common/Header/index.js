@@ -70,9 +70,9 @@ const Header = () => {
 
   const cityId = getLocalStorage("cityId");
 
-  // const cartItemsLength = useSelector(
-  //   state => state.cartPageData.cartItems.length,
-  // );
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
 
   const userId = getLocalStorageString("user_id");
   const tempUserId = getLocalStorage("tempUserID");
@@ -216,21 +216,21 @@ const Header = () => {
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("https://cityfurnish.com/cart")}
-                />
                 {/* <Image
                   src={Icons.shoppingCard}
                   alt="shopping-card-icon"
                   className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
+                  onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                {/* {cartItemsLength > 0 && (
+                <Image
+                  src={Icons.shoppingCard}
+                  alt="shopping-card-icon"
+                  className={styles.header_shopping_card}
+                  onClick={() => router.push("/cart")}
+                />
+                {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
-                )} */}
+                )}
               </div>
               {/* </Link> */}
               <Image

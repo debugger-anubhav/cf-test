@@ -8,7 +8,7 @@ import {addCompleteTheLook} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {productPageImagesBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 
 const CompleteTheLook = ({params}) => {
@@ -17,9 +17,14 @@ const CompleteTheLook = ({params}) => {
   const pageData = useSelector(state => state.productPageData);
   const [isDumy, setIsDumy] = React.useState(false);
 
+  const cityId = getLocalStorage("cityId");
+
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.productPage.completeTheLook(params.productId))
+      .get(
+        baseURL +
+          endPoints.productPage.completeTheLook(params.productId, cityId),
+      )
       .then(res => {
         dispatch(addCompleteTheLook(res?.data?.data));
       })
