@@ -293,13 +293,13 @@ const ProductDetails = ({params}) => {
 
   const handleAddToCart = () => {
     setIsLoading(true);
-    // AddToCart();
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = localStorage.getItem("userID");
-    const tempUserId = localStorage.getItem("tempUserID");
+    const userId = getLocalStorage("userID");
+    const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
+
     const body = {
       userId: parseInt(userIdToUse),
       sellId: 22,

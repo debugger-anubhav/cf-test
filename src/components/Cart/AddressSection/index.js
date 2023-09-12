@@ -40,7 +40,7 @@ const AddressSection = ({setTab}) => {
   const billBreakup = useSelector(state => state.cartPageData.billBreakout);
   const cityName = useSelector(state => state.homePagedata.cityName);
 
-  // const addressArray = useSelector(state => state.cartPageData.savedAddresses);
+  const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   // console.log(addressArray[0], "lllllll");
 
   const validationSchema = Yup.object({
@@ -163,34 +163,38 @@ const AddressSection = ({setTab}) => {
           <h1 className={styles.head}>Go back to checkout</h1>
         </div>
 
-        <div className={styles.saved_address_div} onClick={toggleAddressDrawer}>
-          {cityName !== primaryAddress?.city && (
-            <div className={styles.not_belong_wrapper}>
-              <p className={styles.not_belong_text}>
-                Address does not belong to selected city
+        {addressArray.length > 0 && (
+          <div
+            className={styles.saved_address_div}
+            onClick={toggleAddressDrawer}>
+            {cityName !== primaryAddress?.city && (
+              <div className={styles.not_belong_wrapper}>
+                <p className={styles.not_belong_text}>
+                  Address does not belong to selected city
+                </p>
+              </div>
+            )}
+            <div className={styles.saved_add_upper_div}>
+              <h1 className={styles.saved_add_head}>Delivering to</h1>
+              <button className={styles.change_btn}>Change</button>
+            </div>
+            <div className={styles.name_div}>
+              <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
+              <p className={styles.saved_name}>
+                {primaryAddress?.full_name}, {primaryAddress?.phone}
               </p>
             </div>
-          )}
-          <div className={styles.saved_add_upper_div}>
-            <h1 className={styles.saved_add_head}>Delivering to</h1>
-            <button className={styles.change_btn}>Change</button>
-          </div>
-          <div className={styles.name_div}>
-            <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
-            <p className={styles.saved_name}>
-              {primaryAddress?.full_name}, {primaryAddress?.phone}
-            </p>
-          </div>
 
-          <p className={styles.saved_address}>{primaryAddress?.address1}</p>
+            <p className={styles.saved_address}>{primaryAddress?.address1}</p>
 
-          {cityName !== primaryAddress?.city && (
-            <div className={styles.add_new_info}>
-              <InformationIcon size={20} color={"#71717A"} />
-              <p className={styles.add_new_info_text}>Add new address </p>
-            </div>
-          )}
-        </div>
+            {cityName !== primaryAddress?.city && (
+              <div className={styles.add_new_info}>
+                <InformationIcon size={20} color={"#71717A"} />
+                <p className={styles.add_new_info_text}>Add new address </p>
+              </div>
+            )}
+          </div>
+        )}
 
         {addressDrawer && (
           <AddressDrawer
@@ -219,6 +223,10 @@ const AddressSection = ({setTab}) => {
               await saveUserAddress(values);
               console.log("1");
               getAllSavedAddresses();
+              Formik.resetForm();
+              // Focus on the top input field
+              // document.getElementById("fullName").focus();
+              window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             }}>
             {formik => (
               <Form className={styles.form_wrapper}>
@@ -256,13 +264,13 @@ const AddressSection = ({setTab}) => {
                         className={styles.contact_input}
                       />
                     </div>
-                    {/* <ErrorMessage name="contactNumber">
+                    <ErrorMessage name="contactNumber">
                       {msg =>
                         formik.touched.contactNumber && (
                           <p className={styles.error}>{msg} </p>
                         )
                       }
-                    </ErrorMessage> */}
+                    </ErrorMessage>
                   </div>
 
                   <div className={styles.form_field}>

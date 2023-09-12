@@ -32,7 +32,7 @@
   @apply text-222 text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
 }
 .saved_address {
-  @apply text-12 xl:text-14 text-45454A tracking-desc truncate mt-[10px] xl:mt-[12.5px];
+  @apply text-12 xl:text-14 text-45454A tracking-desc truncate mt-[10px];
 }
 .new_address_wrapper {
   @apply mt-8 xl:mt-10;

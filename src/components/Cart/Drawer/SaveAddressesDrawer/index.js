@@ -83,21 +83,22 @@ const AddressDrawer = ({
             ))}
           </div>
 
-          <button
-            className={styles.btn}
-            onClick={async () => {
-              try {
-                await makeAddressPrimary(id);
-                getAllSavedAddresses();
-
-                toggleDrawer();
-              } catch (error) {
-                console.error(error);
-              }
-            }}>
-            Proceed
-            <ForwardArrow color={"#71717A"} />
-          </button>
+          <div className={styles.btn_wrapper}>
+            <button
+              className={styles.btn}
+              onClick={async () => {
+                try {
+                  await makeAddressPrimary(id);
+                  getAllSavedAddresses();
+                  toggleDrawer();
+                } catch (error) {
+                  console.error(error);
+                }
+              }}>
+              Proceed
+              <ForwardArrow color={"#71717A"} />
+            </button>
+          </div>
         </div>
       </div>
     </Drawer>

@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply relative h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-medium leading-8 tracking-0.48;
@@ -8,29 +8,29 @@
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
 }
 .card_wrapper {
-  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-8 cursor-pointer;
+  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-4 md:mt-8 cursor-pointer;
 }
 .circle {
-  @apply border-2 border-[#5774AC] flex justify-center items-center rounded-full;
-  width: 14px;
-  height: 14px;
+  @apply border-2 border-[#5774AC] flex justify-center items-center rounded-full w-[14px] h-[14px];
 }
 .selected_circle {
-  @apply bg-5774AC w-1 h-1 rounded-full;
+  @apply bg-5774AC w-[6px] h-[6px] rounded-full;
 }
 .first_row {
   @apply flex gap-[10px] items-center;
 }
 .name {
-  @apply text-16 font-medium text-222 font-Inter tracking-0.3;
+  @apply text-14 md:text-16 font-medium text-222 font-Inter tracking-desc md:tracking-0.3;
 }
 .address {
-  @apply mt-[12.5px] text-14 text-45454A tracking-desc;
+  @apply mt-[11.5px] md:mt-[12.5px] text-12 md:text-14 text-45454A tracking-0.24 md:tracking-desc;
+}
+.btn_wrapper {
+  @apply sticky bottom-0 py-4 w-full;
 }
 .btn {
-  @apply text-16 font-medium text-71717A flex gap-[10px] px-8 rounded-lg justify-center items-center h-14 mt-8 w-full;
+  @apply bg-fff  text-16 font-medium text-71717A flex gap-[10px] px-8 rounded-lg justify-center items-center h-14 mt-8 w-full;
   border: 2px solid var(--grey-grey-600, #71717a);
-  background: #fff;
 }
 .forwIcon {
   @apply w-5 h-5;
@@ -39,16 +39,16 @@
   @apply mb-3 rounded-lg bg-[#FFEFEF] border border-DDDDDF px-2 py-1 w-fit;
 }
 .not_belong_text {
-  @apply text-[#D96060] text-16 font-medium leading-5;
+  @apply text-[#D96060] text-12 md:text-16 font-medium leading-5;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Ensure the container takes all available height */
+  @apply flex flex-col h-[90vh];
 }
-
 .item_wrapper {
-  flex: 1; /* Allow items to take the available vertical space */
-  overflow-y: auto; /* Add a vertical scrollbar if needed for overflow */
+  flex: 1;
+  overflow-y: auto;
 }
