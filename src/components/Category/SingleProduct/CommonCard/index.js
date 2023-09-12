@@ -115,18 +115,18 @@ const CategoryCard = ({
     }
   };
   return (
-    <div
-      className={`${styles.card_wrapper} `}
-      onMouseOver={() => {
-        setHoverCard(true);
-      }}
-      onMouseOut={() => setHoverCard(false)}
-      onClick={e => handleProductClick(e, productID, seourl)}>
-      <a
-        href={`/things/${productID}/${seourl}`}
-        onClick={e => {
-          e.preventDefault();
-        }}>
+    <a
+      href={`/things/${productID}/${seourl}`}
+      onClick={e => {
+        e.preventDefault();
+      }}>
+      <div
+        className={`${styles.card_wrapper} `}
+        onMouseOver={() => {
+          setHoverCard(true);
+        }}
+        onMouseOut={() => setHoverCard(false)}
+        onClick={e => handleProductClick(e, productID, seourl)}>
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
@@ -140,53 +140,54 @@ const CategoryCard = ({
             </div>
           )}
         </div>
-      </a>
 
-      {/* {soldOut && (
+        {/* {soldOut && (
         <div className={styles.soldout_tag}>
           <p className={styles.tag_text}>SOLD OUT</p>
         </div>
       )} */}
 
-      <div className={styles.desc_div}>
-        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {/* {desc} */}
-          {desc.replace(/-/g, " ")}
-        </h3>
-        <Heart
-          size={25}
-          color={inWishList ? "#D96060" : "#C0C0C6"}
-          // onClick={e => {
-          //   e.preventDefault();
-          //   setInWishList(!inWishList);
-          // }}
-          onClick={e => {
-            e.preventDefault();
-            handleWhislistCard(e);
-          }}
-          className={"cursor-pointer"}
-        />
-      </div>
-      <div className={styles.price_div}>
-        <div className={styles.card_price_wrap}>
-          <h3 className={`${styles.currentPrice} flex`}>
-            <span className={styles.rupeeIcon}>₹</span>
-            {`${currentPrice} /mo`}
+        <div className={styles.desc_div}>
+          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+            {/* {desc} */}
+            {desc.replace(/-/g, " ")}
           </h3>
-
-          {currentPrice < originalPrice && (
-            <h3 className={`${styles.originalPrice} flex`}>
+          <Heart
+            size={25}
+            color={inWishList ? "#D96060" : "#C0C0C6"}
+            // onClick={e => {
+            //   e.preventDefault();
+            //   setInWishList(!inWishList);
+            // }}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleWhislistCard(e);
+            }}
+            className={"cursor-pointer"}
+          />
+        </div>
+        <div className={styles.price_div}>
+          <div className={styles.card_price_wrap}>
+            <h3 className={`${styles.currentPrice} flex`}>
               <span className={styles.rupeeIcon}>₹</span>
-              {`${originalPrice} /mo`}
+              {`${currentPrice} /mo`}
             </h3>
+
+            {currentPrice < originalPrice && (
+              <h3 className={`${styles.originalPrice} flex`}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {`${originalPrice} /mo`}
+              </h3>
+            )}
+          </div>
+          {/* {originalPrice !== currentPrice && ( */}
+          {currentPrice < originalPrice && parseInt(discount) > 0 && (
+            <div className={styles.discount}>{`-${discount} OFF`}</div>
           )}
         </div>
-        {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice < originalPrice && parseInt(discount) > 0 && (
-          <div className={styles.discount}>{`-${discount} OFF`}</div>
-        )}
       </div>
-    </div>
+    </a>
   );
 };
 
