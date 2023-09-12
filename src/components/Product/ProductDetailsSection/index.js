@@ -19,6 +19,7 @@ import {
   getLocalStorage,
   getLocalStorageString,
   productPageImagesBaseUrl,
+  setLocalStorage,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
@@ -399,7 +400,10 @@ const ProductDetails = ({params}) => {
               <p
                 className={` ${
                   index === arr.length - 1 ? "font-medium" : "font-normal"
-                } ${styles.crumpItem}`}>
+                } ${styles.crumpItem}`}
+                onClick={() => {
+                  setLocalStorage("subCategory", "All");
+                }}>
                 {item.name}
               </p>
             </a>
