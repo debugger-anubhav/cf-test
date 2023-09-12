@@ -18,7 +18,6 @@ import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {
   getLocalStorage,
-  getLocalStorageString,
   productImageBaseUrl,
   setLocalStorage,
 } from "@/constants/constant";
@@ -74,7 +73,7 @@ const Header = () => {
   //   state => state.cartPageData.cartItems.length,
   // );
 
-  const userId = getLocalStorageString("user_id");
+  const userId = getLocalStorage("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
