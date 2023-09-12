@@ -105,7 +105,7 @@ const RecentlyViewedProduct = ({page}) => {
 
   return (
     <>
-      {homePageReduxData?.recentProduct?.length ? (
+      {homePageReduxData?.recentProduct ? (
         <div className={styles.main_container}>
           <h2
             className={`${
