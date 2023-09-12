@@ -148,28 +148,29 @@ const Card = ({
   }, []);
 
   const handleProductClick = (e, productID, seourl) => {
+    e.stopPropagation();
     if (!e.target.classList.contains(styles.child)) {
       router.push(`/things/${productID}/${seourl}`);
     }
   };
 
   return (
-    <div
-      onClick={e => handleProductClick(e, productID, seourl)}
-      className={`${styles.wrapper} ${
-        hoverCard && styles.hover_wrapper
-      } ${productWidth} 
-      `}
-      onMouseOver={() => {
-        isHover && setHoverCard(true);
-      }}
-      onMouseOut={() => {
-        setHoverCard(false);
+    <a
+      href={`/things/${productID}/${seourl}`}
+      onClick={e => {
+        e.preventDefault();
       }}>
-      <a
-        href={`/things/${productID}/${seourl}`}
-        onClick={e => {
-          e.preventDefault();
+      <div
+        onClick={e => handleProductClick(e, productID, seourl)}
+        className={`${styles.wrapper} ${
+          hoverCard && styles.hover_wrapper
+        } ${productWidth} 
+      `}
+        onMouseOver={() => {
+          isHover && setHoverCard(true);
+        }}
+        onMouseOut={() => {
+          setHoverCard(false);
         }}>
         <div className="relative">
           <img
@@ -196,56 +197,56 @@ const Card = ({
             </div>
           )}
         </div>
-      </a>
-      <div className={styles.desc_div}>
-        <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {desc.replace(/-/g, " ")}
-        </h3>
-        <div
-          id={productID}
-          onClick={e => {
-            e.preventDefault();
-            e.stopPropagation();
-            handleWhislistCard(e);
-          }}>
-          <Heart
-            size={25}
-            color={inWishList ? "#D96060" : "#C0C0C6"}
-            // onClick={e => {
-            //   e.preventDefault();
-            //   setInWishList(!inWishList);
-            // }}
-            // onClick={e => {
-            //   e.preventDefault();
-            //   handleWhislistCard(e);
-            // }}
-            className={"cursor-pointer"}
-          />
-        </div>
-      </div>
-      <div className={styles.price_div}>
-        <div className={styles.card_price_wrap}>
-          <h3 className={`${styles.currentPrice} flex`}>
-            <span className={styles.rupeeIcon}>₹</span>
-            {`${currentPrice} /mo`}
+        <div className={styles.desc_div}>
+          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+            {desc.replace(/-/g, " ")}
           </h3>
-          {
-            // currentPrice >= originalPrice ? (
-            originalPrice > currentPrice ? (
-              <h3 className={`${styles.originalPrice} flex`}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {`${originalPrice} /mo`}
-              </h3>
-            ) : null
-          }
+          <div
+            id={productID}
+            onClick={e => {
+              e.preventDefault();
+              e.stopPropagation();
+              handleWhislistCard(e);
+            }}>
+            <Heart
+              size={25}
+              color={inWishList ? "#D96060" : "#C0C0C6"}
+              // onClick={e => {
+              //   e.preventDefault();
+              //   setInWishList(!inWishList);
+              // }}
+              // onClick={e => {
+              //   e.preventDefault();
+              //   handleWhislistCard(e);
+              // }}
+              className={"cursor-pointer"}
+            />
+          </div>
         </div>
+        <div className={styles.price_div}>
+          <div className={styles.card_price_wrap}>
+            <h3 className={`${styles.currentPrice} flex`}>
+              <span className={styles.rupeeIcon}>₹</span>
+              {`${currentPrice} /mo`}
+            </h3>
+            {
+              // currentPrice >= originalPrice ? (
+              originalPrice > currentPrice ? (
+                <h3 className={`${styles.originalPrice} flex`}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {`${originalPrice} /mo`}
+                </h3>
+              ) : null
+            }
+          </div>
 
-        {/* {originalPrice !== currentPrice && ( */}
-        {currentPrice < originalPrice && parseInt(discount) > 0 && (
-          <div className={styles.discount}>{`-${discount} OFF`}</div>
-        )}
+          {/* {originalPrice !== currentPrice && ( */}
+          {currentPrice < originalPrice && parseInt(discount) > 0 && (
+            <div className={styles.discount}>{`-${discount} OFF`}</div>
+          )}
+        </div>
       </div>
-    </div>
+    </a>
   );
 };
 
