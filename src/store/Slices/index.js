@@ -1,3 +1,4 @@
+import {getLocalStorage} from "@/constants/constant";
 import {createSlice} from "@reduxjs/toolkit";
 
 export const HomepageSlice = createSlice({
@@ -6,8 +7,8 @@ export const HomepageSlice = createSlice({
     cityList: [],
     offerCoupons: [],
     recentProduct: [],
-    cityId: 46,
-    cityName: "Bangalore",
+    cityId: getLocalStorage("cityId") || 46,
+    cityName: "",
     productName: "",
     productCategory: "",
     reviews: [],
