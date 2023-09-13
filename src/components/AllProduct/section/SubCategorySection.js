@@ -146,7 +146,9 @@ const SubCategorySection = () => {
               <h1 className={styles.heading}>{item?.cat_name}</h1>
               <div className={styles.viewButton}>
                 <p className={styles.viewAllText}>
-                  {windowSize[0] > 450 ? "View all home furniture" : "View all"}
+                  {windowSize[0] > 450
+                    ? `View all ${item?.cat_name}`
+                    : "View all"}
                 </p>
                 <ForwardArrow
                   size={windowSize[0] > 768 ? 20 : 16}
