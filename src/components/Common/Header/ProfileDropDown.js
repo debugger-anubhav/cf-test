@@ -44,7 +44,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
               router.push(ele.link);
             } else {
               // remove userid
-              cookie.remove("ci_sessions");
+              cookie.save("ci_sessions", "");
               localStorage.removeItem("tempUserID");
               localStorage.removeItem("user_id");
               localStorage.removeItem("user_name");
