@@ -246,7 +246,7 @@ const ShoppingCartSection = ({setTab}) => {
                   <div>
                     <div className={styles.name_div}>
                       <p className={styles.product_name}>
-                        {item?.fc_product?.product_name.replace(/-/g, " ")}
+                        {item?.fc_product?.product_name?.replace(/-/g, " ")}
                       </p>
                       <div
                         onClick={() => {

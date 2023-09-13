@@ -44,12 +44,13 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
               router.push(ele.link);
             } else {
               // remove userid
-              cookie.remove("ci-sessions");
+              cookie.remove("ci_sessions");
               localStorage.removeItem("tempUserID");
               localStorage.removeItem("user_id");
               localStorage.removeItem("user_name");
               localStorage.removeItem("ci_session");
               setShowProfileDropdown(false);
+              router.push("https://test.rentofurniture.com/user_sign_up");
             }
           }}>
           {ele.item}
