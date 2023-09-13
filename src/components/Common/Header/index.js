@@ -11,6 +11,7 @@ import {
   selectedCityId,
   addSidebarMenuLists,
   getCartItems,
+  selectedCityName,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -18,7 +19,6 @@ import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {
   getLocalStorage,
-  getLocalStorageString,
   productImageBaseUrl,
   setLocalStorage,
 } from "@/constants/constant";
@@ -51,8 +51,15 @@ const Header = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
+    const cityId = getLocalStorage("cityId");
     getCityList()
       .then(res => {
+        if (cityId) {
+          const cityName = res.data.data.find(
+            item => item?.id === cityId,
+          ).list_value;
+          dispatch(selectedCityName(cityName));
+        }
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
@@ -70,11 +77,11 @@ const Header = () => {
 
   const cityId = getLocalStorage("cityId");
 
-  // const cartItemsLength = useSelector(
-  //   state => state.cartPageData.cartItems.length,
-  // );
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
 
-  const userId = getLocalStorageString("user_id");
+  const userId = getLocalStorage("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -216,21 +223,21 @@ const Header = () => {
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("https://cityfurnish.com/cart")}
-                />
                 {/* <Image
                   src={Icons.shoppingCard}
                   alt="shopping-card-icon"
                   className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
+                  onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                {/* {cartItemsLength > 0 && (
+                <Image
+                  src={Icons.shoppingCard}
+                  alt="shopping-card-icon"
+                  className={styles.header_shopping_card}
+                  onClick={() => router.push("/cart")}
+                />
+                {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
-                )} */}
+                )}
               </div>
               {/* </Link> */}
               <Image

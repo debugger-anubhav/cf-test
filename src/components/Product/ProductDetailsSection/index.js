@@ -19,6 +19,7 @@ import {
   getLocalStorage,
   getLocalStorageString,
   productPageImagesBaseUrl,
+  setLocalStorage,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
@@ -41,16 +42,19 @@ import SideDrawer from "../Drawer/Drawer";
 // import Modal from "react-responsive-modal";
 
 const ProductDetails = ({params}) => {
-  // console.log(params, "params");
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
   );
   const cartItems = useSelector(state => state.cartPageData.cartItems);
+  const cityName = useSelector(state => state.homePagedata.cityName);
   const arr = [
-    "Home",
-    prodDetails?.[0]?.category_name,
-    prodDetails?.[0]?.product_name.replace(/-/g, " "),
+    {name: "Home", link: "/"},
+    {
+      name: prodDetails?.[0]?.category_name,
+      link: `/${cityName.toLowerCase()}/${prodDetails?.[0]?.category_seourl}`,
+    },
+    {name: prodDetails?.[0]?.product_name.replace(/-/g, " ")},
   ];
   const dispatch = useDispatch();
 
@@ -117,7 +121,8 @@ const ProductDetails = ({params}) => {
   const GetProductDetails = () => {
     axios
       .get(
-        baseURL + endPoints.productPage.singleProductDetails(params.productId),
+        baseURL +
+          endPoints.productPage.singleProductDetails(params.productId, cityId),
       )
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
@@ -130,7 +135,9 @@ const ProductDetails = ({params}) => {
 
   const getDurationRent = () => {
     axios
-      .get(baseURL + endPoints.productPage.monthlyRent(params.productId))
+      .get(
+        baseURL + endPoints.productPage.monthlyRent(params.productId, cityId),
+      )
       .then(res => {
         setDurationArray(res?.data?.data);
       })
@@ -183,8 +190,7 @@ const ProductDetails = ({params}) => {
   }, []);
 
   const router = useRouter();
-  const cityIdStr = localStorage
-    .getItem("cityId")
+  const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
@@ -211,7 +217,6 @@ const ProductDetails = ({params}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -290,17 +295,15 @@ const ProductDetails = ({params}) => {
     return item?.fc_product?.id === parseInt(params.productId);
   });
 
-  // console.log(isItemInCart, params.productId, "isItemInCart");
-
   const handleAddToCart = () => {
     setIsLoading(true);
-    // AddToCart();
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = localStorage.getItem("userID");
-    const tempUserId = localStorage.getItem("tempUserID");
+    const userId = getLocalStorage("userID");
+    const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
+
     const body = {
       userId: parseInt(userIdToUse),
       sellId: 22,
@@ -394,14 +397,19 @@ const ProductDetails = ({params}) => {
         />
       )}
       <div className={styles.bread_crumps}>
-        {arr.map((item, index) => (
+        {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">
-            <p
-              className={` ${
-                index === arr.length - 1 ? "font-medium" : "font-normal"
-              } ${styles.crumpItem}`}>
-              {item}
-            </p>
+            <a href={index !== 2 && `${item?.link}`}>
+              <p
+                className={` ${
+                  index === arr.length - 1 ? "font-medium" : "font-normal"
+                } ${styles.crumpItem}`}
+                onClick={() => {
+                  setLocalStorage("subCategory", "All");
+                }}>
+                {item.name}
+              </p>
+            </a>
             <p
               className={`${index === arr.length - 1 ? "hidden" : "flex"} ${
                 styles.crumpItem

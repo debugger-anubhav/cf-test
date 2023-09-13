@@ -57,6 +57,7 @@ const SubHeader = ({params}) => {
   const [skeletonOpen, setSkeletonOpen] = useState(true);
   const [showFilter, setShowFilter] = useState(false);
   const [showData, setShowData] = useState(false);
+  const [seoUrl, setSeoUrl] = useState();
 
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
@@ -131,7 +132,6 @@ const SubHeader = ({params}) => {
     dispatch(addFilteredItem([]));
     let previousSubCategory;
     if (typeof window !== "undefined") {
-      getLocalStorage("subCategory");
       setLocalStorage("subCategory", item?.cat_name);
     }
 
@@ -172,7 +172,11 @@ const SubHeader = ({params}) => {
   const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${categoryId}&subCategoryId=${subCategoryId}`,
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
+    }`,
   );
 
   useEffect(() => {
@@ -199,10 +203,11 @@ const SubHeader = ({params}) => {
       setTitle(item?.fc_city_category_data?.cat_heading || "");
     }
   };
-  const defaultKey = ["subproducts", "ASC"];
-  const newSortKey = ["created", "DESC"];
-  const highToLowKey = ["sale_price", "DESC"];
-  const lowToHighKey = ["sale_price", "ASC"];
+  const defaultKey = 1;
+  const newSortKey = 2;
+  const highToLowKey = 3;
+  const lowToHighKey = 4;
+
   const handleFilterDivClick = (e, filterTag) => {
     const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
@@ -232,8 +237,8 @@ const SubHeader = ({params}) => {
       dispatch(addSortKey(newSortKey));
     } else if (item === "Price Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (item === "Price Hight to low") {
-      dispatch(addSortKey([...highToLowKey]));
+    } else if (item === "Price High to low") {
+      dispatch(addSortKey(highToLowKey));
     } else {
       dispatch(addSortKey(defaultKey));
     }
@@ -281,6 +286,15 @@ const SubHeader = ({params}) => {
     setFilterOpen(!filterOpen);
   };
 
+  useEffect(() => {
+    setSeoUrl(
+      getAllAndSubCategoryData.find(
+        item => item.id === getLocalStorage("categoryId"),
+      ),
+    );
+  }, [getAllAndSubCategoryData]);
+  console.log("seoUrl", seoUrl);
+
   return (
     <>
       {skeletonOpen ? (
@@ -290,13 +304,24 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <p className={styles.route_text}>Home</p>
+                <a href="/">
+                  <p className={`${styles.route_text} cursor-pointer`}>Home</p>
+                </a>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
-              <li className={styles.list}>
-                <p className={styles.route_text}>
-                  {getLocalStorage("category")?.replace(/"/g, "")}
-                </p>
+              <li
+                className={styles.list}
+                onClick={() => {
+                  setLocalStorage("subCategory", "All");
+                }}>
+                <a
+                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                    seoUrl?.seourl
+                  }`}>
+                  <p className={`${styles.route_text} cursor-pointer`}>
+                    {getLocalStorage("category")?.replace(/"/g, "")}
+                  </p>
+                </a>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
@@ -515,13 +540,15 @@ const SubHeader = ({params}) => {
             {/* ------------------------------------------------------------------------------------------------------ */}
           </div>
           <div className={styles.filter_sort_section_mobile}>
-            <div className={styles.filter}>
-              <FilterSortDrawer
-                filterName={"Filter"}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
+            {showFilter && (
+              <div className={styles.filter}>
+                <FilterSortDrawer
+                  filterName={"Filter"}
+                  setPageNo={setPageNo}
+                  setFilterListed={setFilterListed}
+                />
+              </div>
+            )}
             <div className="flex items-center justify-center ">
               <p className={styles.option_text}>Sortby</p>
               <div className={styles.filter}>

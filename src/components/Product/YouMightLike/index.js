@@ -8,7 +8,7 @@ import {addYouMightLike} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
-import {productPageImagesBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 
 const YouMightLike = ({heading, isbg, params}) => {
@@ -17,9 +17,13 @@ const YouMightLike = ({heading, isbg, params}) => {
   const pageData = useSelector(state => state.productPageData);
   const [isDumy, setIsDumy] = React.useState(false);
 
+  const cityId = getLocalStorage("cityId");
+
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.productPage.youMightLike(params.productId))
+      .get(
+        baseURL + endPoints.productPage.youMightLike(params.productId, cityId),
+      )
       .then(res => {
         dispatch(addYouMightLike(res?.data?.data));
       })
