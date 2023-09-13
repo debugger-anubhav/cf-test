@@ -30,14 +30,6 @@ const Footer = ({params}) => {
         {text: "Workstations", link: `/${cityName}/workstations`},
         {text: "Combos", link: `/${cityName}/furniture-rental-packages`},
         {text: "Furniture Sale", link: "https://zior.in/"},
-        // "points": [
-        //   {"text": "All", "link": "https://cityfurnish.com/bangalore/rent"},
-        //   {"text": "Categories", "link":`/`},
-        //   {"text": "Home Furniture", "link": `${cityName}/home-furniture-rental`},
-        //   {"text": "Appliances", "link": `${cityName}/home-appliances-rental`},
-        //   {"text": "Workstations", "link": `${cityName}/workstations`},
-        //   {"text": "Combos", "link": `${cityName}/furniture-rental-packages`},
-        //   {"text": "Furniture Sale", "link": "https://zior.in/"}
       ],
     },
     {
@@ -134,7 +126,7 @@ const Footer = ({params}) => {
                 <a
                   key={index.toString()}
                   href={t.link}
-                  target="_blank"
+                  target={t.text === "Furniture Sale" ? "_blank" : "_self"}
                   rel="noopener noreferrer">
                   <p
                     className={styles.points}
