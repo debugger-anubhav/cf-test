@@ -18,11 +18,22 @@
           "item": "CF For Businesses",
           "link": "https://cityfurnish.com/pages/bulkorder"
         },
-        {"item": "Pay your dues", "link": "/"}
+        {
+          "item": "Pay your dues",
+          "link": "https://test.rentofurniture.com/customerpayment"
+        }
       ],
       "menuList3": [
         {
-          "item": "Help",
+          "item": "How It Works?",
+          "link": "https://test.rentofurniture.com/pages/how-it-works"
+        },
+        {
+          "item": "FAQs",
+          "link": "https://test.rentofurniture.com/pages/faq"
+        },
+        {
+          "item": "Contact us",
           "link": "https://test.rentofurniture.com/pages/contact-us"
         },
         {
