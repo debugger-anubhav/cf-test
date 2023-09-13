@@ -30,6 +30,7 @@ import {
   getCouponCodeUsed,
   //  getCartItems
 } from "@/store/Slices";
+import EmptyCartPage from "../EmptyCartPage";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -520,9 +521,7 @@ const ShoppingCartSection = ({setTab}) => {
       </div>
     </>
   ) : (
-    <div className="flex justify-center items-center h-full">
-      <p className="text-32">Your cart is empty</p>
-    </div>
+    <EmptyCartPage />
   );
 };
 
