@@ -11,6 +11,7 @@ import {
   selectedCityId,
   addSidebarMenuLists,
   getCartItems,
+  selectedCityName,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -50,8 +51,15 @@ const Header = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
+    const cityId = getLocalStorage("cityId");
     getCityList()
       .then(res => {
+        if (cityId) {
+          const cityName = res.data.data.find(
+            item => item?.id === cityId,
+          ).list_value;
+          dispatch(selectedCityName(cityName));
+        }
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
