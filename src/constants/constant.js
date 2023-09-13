@@ -317,7 +317,7 @@ export const sortByText = [
   {text: "Default"},
   {text: "New"},
   {text: "Price Low to High"},
-  {text: "Price Hight to low"},
+  {text: "Price High to low"},
 ];
 
 export const productItemsIncludedDetails = [
