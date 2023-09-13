@@ -89,20 +89,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );
   };
-  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
-    state => state.homePagedata,
-  );
-  const handMainCategory = e => {
-    if (typeof window !== "undefined") {
-      setLocalStorage("category", "Home Furniture");
-      setLocalStorage("subCategory", "All");
-      setLocalStorage("categoryId", getAllAndSubCategoryData[0]?.id);
-    }
-    // router.push(
-    //   `/${homePageReduxData?.cityName.toLowerCase()}/home-furniture-rental`,
-    // );
-  };
-
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -121,14 +107,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
-            <a
-              href={`/${homePageReduxData?.cityName.toLowerCase()}/home-furniture-rental`}>
+            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
               <p
                 className={styles.menu_item}
                 onMouseEnter={e => {
                   hoverRef.current = "All";
-                }}
-                onClick={() => handMainCategory()}>
+                }}>
                 All
               </p>
             </a>
@@ -152,7 +136,11 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList2?.map((item, index) => (
-              <a key={index.toString()} href={item.link}>
+              <a
+                key={index.toString()}
+                href={item.link}
+                target={index === 0 ? "_blank" : "_self"}
+                rel="noreferrer">
                 <p
                   className={styles.menu_item}
                   // onClick={() => router.push(item.link)}
@@ -165,17 +153,26 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
             {string.landing_page.header.menuList3?.map((item, index) => {
-              let dataurl = "";
-              if (userSettings) {
-                dataurl =
-                  index === 1 && getLocalStorage("user_id") !== null
-                    ? "/usersettings"
-                    : item.link;
-              }
               return (
-                <a key={index.toString()} href={dataurl}>
-                  <p className={styles.menu_item}>{item?.item}</p>
-                </a>
+                <>
+                  {index !== 3 ? (
+                    <a key={index.toString()} href={item.link}>
+                      <p className={styles.menu_item}>{item?.item}</p>
+                    </a>
+                  ) : (
+                    <a
+                      key={index.toString()}
+                      href={
+                        index === 3 &&
+                        userSettings &&
+                        getLocalStorage("user_id") !== null
+                          ? "/usersettings"
+                          : item.link
+                      }>
+                      <p className={styles.menu_item}>{item?.item}</p>
+                    </a>
+                  )}
+                </>
               );
             })}
           </div>
