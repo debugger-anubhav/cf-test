@@ -18,6 +18,7 @@ import {
   addSetProductAll,
   addSingleAllProduct,
   addSingleProduct,
+  addIsCombos,
 } from "@/store/Slices/categorySlice";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {Popper} from "@mui/material";
@@ -58,7 +59,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       dispatch(addSetProductAll([]));
       dispatch(addOutStockProductAll([]));
     }
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${data.seourl}`);
+    router.push(
+      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+        data.seourl
+      }`,
+    );
+    if (item === "Combos") {
+      dispatch(addIsCombos(true));
+    } else {
+      dispatch(addIsCombos(false));
+    }
   };
 
   const handleClose = () => {
@@ -137,9 +147,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);
           hoverRef.current = item;
-        }}
-        // onMouseLeave={()=>setAnchorEl("")}
-      >
+        }}>
         {item}
         <DownArrow
           size={20}
@@ -177,9 +185,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           // onMouseLeave={handleClose}
         >
           <a
-            href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-              data?.seourl
-            }`}>
+            href={`/${homePageReduxData?.cityName
+              .replace(/\//g, "-")
+              .toLowerCase()}/${data?.seourl}`}>
             <p className={styles.sub_item} onClick={handMainCategory}>
               All
             </p>
@@ -189,9 +197,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
               return (
                 <a
                   key={index.toString()}
-                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                    item?.seourl
-                  }`}>
+                  href={`/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${item?.seourl}`}>
                   <p
                     className={styles.sub_item}
                     onClick={e => handleSelectedProduct(e, item)}>

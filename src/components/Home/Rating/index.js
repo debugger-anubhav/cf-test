@@ -106,7 +106,11 @@ const CustomerRating = () => {
 
       <div className={styles.card_wrapper} ref={sliderRef}>
         {reviews?.map((item, index) => (
-          <div key={index.toString()} className={styles.card}>
+          <div
+            key={index.toString()}
+            className={`${styles.card} ${
+              index === reviews?.length - 1 && "mr-[16px]"
+            }`}>
             <div className={styles.row}>
               <div className="flex">
                 <img

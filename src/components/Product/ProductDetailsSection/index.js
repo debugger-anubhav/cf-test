@@ -50,7 +50,9 @@ const ProductDetails = ({params}) => {
     {name: "Home", link: "/"},
     {
       name: prodDetails?.[0]?.category_name,
-      link: `/${cityName.toLowerCase()}/${prodDetails?.[0]?.category_seourl}`,
+      link: `/${cityName.replace(/\//g, "-").toLowerCase()}/${
+        prodDetails?.[0]?.category_seourl
+      }`,
     },
     {name: prodDetails?.[0]?.product_name.replace(/-/g, " ")},
   ];

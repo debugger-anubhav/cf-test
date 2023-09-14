@@ -164,7 +164,7 @@ const HappySubscribers = ({page, params}) => {
   // const HappySubscriberVideosArray =
   //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
 
-  if (data?.length > 0) {
+  if (data) {
     return (
       <div
         className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
@@ -178,8 +178,8 @@ const HappySubscribers = ({page, params}) => {
           {data?.map((item, index) => (
             <div
               className={`${styles.card_div} ${
-                isDumy && "pointer-events-none"
-              }`}
+                index === data?.length - 1 && "mr-[16px]"
+              } ${isDumy && "pointer-events-none"}`}
               key={index.toString()}>
               <div className={styles.video}>
                 {/* <video className={styles.video_player} ref={videoRef}>
