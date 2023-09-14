@@ -24,13 +24,13 @@ const FourSteps = () => {
                     : index === 2
                     ? "w-[137px] h-[73.5px]"
                     : "w-[161px] h-[70px]"
-                } lg:flex hidden`}
+                } md:flex hidden`}
               />
-              {/* <img
+              <img
                 src={itemm?.img2}
-                // className={`w-[165px] h-[120px] lg:hidden flex`}
-                className={`w-full`}
-              /> */}
+                className={`min-w-[160px] h-[160px] flex md:hidden`}
+                // className={`w-full md:hidden`}
+              />
             </div>
             <h3 className={styles.head1}>{itemm?.head}</h3>
             <p className={styles.content1}>{itemm?.content}</p>

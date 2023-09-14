@@ -2,7 +2,7 @@
   @apply py-8 xl:mt-[88px] xl:py-12 bg-[#F5F5F5] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
 }
 .head {
-  @apply font-medium pl-4 text-9A9AA2 text-16 leading-5 tracking-desc xl:tracking-0.3 font-Poppins;
+  @apply font-medium md:pl-4 text-9A9AA2 text-16 leading-5 tracking-desc xl:tracking-0.3 font-Poppins;
 }
 
 .rating_div {
@@ -25,7 +25,7 @@
   @apply w-10 h-10 xl:hidden;
 }
 .subhead {
-  @apply text-71717A pl-4 leading-normal font-Poppins mt-1;
+  @apply text-71717A md:pl-4 leading-normal font-Poppins mt-1;
 }
 .card_wrapper {
   @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 w-full overflow-scroll;

@@ -62,7 +62,9 @@ const NewlyLaunched = () => {
 
         {newProductFetched?.map((ele, index) => (
           <div
-            className={`${styles.width_container} relative`}
+            className={`${styles.width_container} ${
+              index === newProductFetched?.length - 1 && "mr-[16px]"
+            } relative`}
             // className={`${styles.width_container} relative bg-red-400`}
             key={index.toString()}>
             <div

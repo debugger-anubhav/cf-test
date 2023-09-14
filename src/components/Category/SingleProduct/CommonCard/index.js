@@ -253,7 +253,7 @@ const CategoryCard = ({
                       src={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
                       }`}
-                      alt="image"
+                      alt="Product Image"
                       className={`${styles.included_image} ${
                         isDumy && "pointer-events-none"
                       } `}

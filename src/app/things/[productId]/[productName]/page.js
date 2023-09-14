@@ -7,7 +7,6 @@ import React from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import ProductDetails from "@/components/Product/ProductDetailsSection";
 import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
@@ -21,7 +20,15 @@ import Footer from "@/components/Common/Footer";
 import YouMightLike from "@/components/Product/YouMightLike";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
-
+// import ProductDetails from "@/components/Product/ProductDetailsSection";
+import loadable from "@loadable/component";
+import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
+const ProductDetails = loadable(
+  () => import("@/components/Product/ProductDetailsSection"),
+  {
+    fallback: <SkeletonForProductDetail />,
+  },
+);
 const ProductPage = () => {
   const queryClient = new QueryClient();
   const params = useParams();

@@ -56,8 +56,8 @@
   @apply flex mt-4 w-full overflow-x-scroll;
 }
 .included_image {
-  @apply flex w-14 h-11 rounded mr-3;
+  @apply flex w-[60px] h-[45px] rounded mr-3 text-12;
 }
 .no_included_image {
-  @apply flex w-14 h-11 rounded mr-3;
+  @apply flex w-[60px] h-[45px] rounded mr-3;
 }
