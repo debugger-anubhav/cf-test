@@ -14,6 +14,7 @@ import {
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
+import {useParams, useRouter} from "next/navigation";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -26,6 +27,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     right: false,
   });
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
+  const params = useParams();
+  const router = useRouter();
   const handleresize = e => {
     if (e.target.innerWidth < 1024) {
       // console.log(e.target.innerWidth);
@@ -89,6 +92,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );
   };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -240,6 +244,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     if (typeof window !== "undefined") {
                       setLocalStorage("cityId", city?.id);
                     }
+                    const newUrl = window?.location.pathname.split("/");
+                    newUrl[1] = city.list_value
+                      .replace(/\//g, "-")
+                      .toLowerCase();
+                    const p = newUrl.join("/");
+                    params.city ? router.push(p) : window?.location.reload();
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
