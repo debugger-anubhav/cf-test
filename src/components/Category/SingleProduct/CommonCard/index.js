@@ -1,10 +1,14 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
+import {
+  getLocalStorage,
+  getLocalStorageString,
+  productImageBaseUrl,
+} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
@@ -19,10 +23,12 @@ const CategoryCard = ({
   productID,
   soldOut,
   seourl,
+  subProduct,
 }) => {
   const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const [isDumy, setIsDumy] = React.useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -114,6 +120,47 @@ const CategoryCard = ({
       router.push(`/things/${productID}/${seourl}`);
     }
   };
+  const sliderRef = useRef(null);
+  useEffect(() => {
+    const slider = sliderRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsdragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsdragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsdragging);
+    };
+  }, []);
   return (
     <a
       href={`/things/${productID}/${seourl}`}
@@ -186,6 +233,37 @@ const CategoryCard = ({
             <div className={styles.discount}>{`-${discount} OFF`}</div>
           )}
         </div>
+        {categoryPageReduxData.isCombos && (
+          <>
+            <div className={styles.combos_wrapper}>
+              <p
+                className={`${styles.items_included} ${
+                  subProduct?.length === 0 && styles.no_included
+                }`}>
+                {subProduct?.length} items included
+              </p>
+              <div className={styles.combos_images} ref={sliderRef}>
+                {subProduct?.length === 0 && (
+                  <p className={styles.no_included_image}></p>
+                )}
+                {subProduct?.map((item, index) => {
+                  return (
+                    <img
+                      key={index.toString()}
+                      src={`${productImageBaseUrl}${
+                        item?.image?.split(",")[0]
+                      }`}
+                      alt="Product Image"
+                      className={`${styles.included_image} ${
+                        isDumy && "pointer-events-none"
+                      } `}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </a>
   );

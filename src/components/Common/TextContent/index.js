@@ -13,7 +13,7 @@ export default function TextContent({params}) {
       .get(baseURL + endPoints.homePageTextContent)
       .then(res => {
         setData(res?.data?.data);
-        console.log("home");
+        // console.log("home");
       })
       .catch(err => console.log(err));
   };

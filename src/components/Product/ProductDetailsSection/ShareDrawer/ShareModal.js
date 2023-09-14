@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
-import {Close, ShareIconsForProductPage} from "@/assets/icon";
+import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 
-const ShareModal = ({isModalOpen, closeModal}) => {
+const ShareModal = ({isModalOpen, closeModal, params, title}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
+  // const [copied, setCopied] = useState(false);
+  // console.log(copied, "paramss");
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -22,6 +24,52 @@ const ShareModal = ({isModalOpen, closeModal}) => {
     };
   }, []);
 
+  const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+  const socialMediaIcons = [
+    {
+      icon: `${IconLink}facebook.svg`,
+      link: `https://www.facebook.com/sharer.php?u=cityfurnish.com/things/${params.productId}/${params.productName}`,
+    },
+    {
+      icon: `${IconLink}whatsapp_icon.svg`,
+      link: `https://api.whatsapp.com/send?text=http://cityfurnish.com/things/${params.productId}/${params.productName}`,
+    },
+
+    {
+      icon: `${IconLink}linkedin.svg`,
+      link: `https://www.linkedin.com/shareArticle?mini=true&url=cityfurnish.com/things/${params.productId}/${params.productName}&title=${title}`,
+    },
+    {
+      icon: `${IconLink}reddit.svg`,
+      link: `https://www.reddit.com/submit?url=cityfurnish.com/things/${params.productId}/${params.productName}&title=${title}`,
+    },
+    {
+      icon: `${IconLink}pinterest.svg`,
+      link: `https://pinterest.com/pin/create/button/?url=cityfurnish.com/things/${params.productId}/${params.productName}&media=IMAGE_URL&description=${title}`,
+    },
+    {
+      icon: `${IconLink}twitter.svg`,
+      link: `https://twitter.com/intent/tweet?url=cityfurnish.com/things/${params.productId}/${params.productName}`,
+    },
+    {icon: `${IconLink}clipboard.svg`, link: "link"},
+  ];
+
+  const copyToClipboard = text => {
+    if (!text) return;
+
+    // Create a temporary input element to copy text
+    const input = document.createElement("input");
+    input.style.position = "fixed";
+    input.style.opacity = 0;
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+    alert("Copied to clipboard!");
+    input.value = "";
+  };
+
   return (
     <div>
       {isBottomShareDrawer ? (
@@ -37,17 +85,28 @@ const ShareModal = ({isModalOpen, closeModal}) => {
           <div className={styles.share_drawer_wrapper}>
             <h1 className={styles.share_modal_head}>Share Product via:</h1>
             <div className={styles.share_modal_icons_wrapper}>
-              {ShareIconsForProductPage?.social_media_icons?.map(
-                (item, index) => (
+              {socialMediaIcons?.map((item, index) => (
+                <a
+                  href={item.link}
+                  key={index.toString()}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={e => {
+                    if (!item.link) {
+                      e.preventDefault(); // Prevent navigation
+                    } else if (index === socialMediaIcons.length - 1) {
+                      e.preventDefault();
+                      copyToClipboard(window.location.href);
+                    }
+                  }}>
                   <img
-                    key={index.toString()}
                     alt={item?.icon}
                     src={item?.icon}
                     className="cursor-pointer"
-                    onClick={() => console.log("cliked")}
+                    // onClick={() => console.log("cliked")}
                   />
-                ),
-              )}
+                </a>
+              ))}
             </div>
           </div>
         </Drawer>
@@ -64,17 +123,27 @@ const ShareModal = ({isModalOpen, closeModal}) => {
           }}>
           <h1 className={styles.share_modal_head}>Share Product via:</h1>
           <div className={styles.share_modal_icons_wrapper}>
-            {ShareIconsForProductPage?.social_media_icons?.map(
-              (item, index) => (
+            {socialMediaIcons?.map((item, index) => (
+              <a
+                href={item.link}
+                key={index.toString()}
+                target="_blank"
+                rel="noreferrer"
+                onClick={e => {
+                  // Prevent the default link behavior for the last icon
+                  if (index === socialMediaIcons.length - 1) {
+                    e.preventDefault();
+                    copyToClipboard(window.location.href);
+                  }
+                }}>
                 <img
-                  key={index.toString()}
                   alt={item?.icon}
                   src={item?.icon}
                   className="cursor-pointer"
-                  onClick={() => console.log("cliked")}
+                  // onClick={() => console.log("cliked")}
                 />
-              ),
-            )}
+              </a>
+            ))}
           </div>
         </Modal>
       )}

@@ -18,13 +18,13 @@
   @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full truncate;
 }
 .code {
-  @apply mt-2 text-[16px] -tracking-[0.32px] w-max font-Poppins leading-normal text-white;
+  @apply mt-2 text-16 -tracking-[0.32px] w-max font-Poppins font-light xl:font-normal leading-normal text-white;
 }
 .copy_div {
   @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px];
 }
 .line {
-  @apply right-32 3xl:right-40 absolute top-0 bottom-0;
+  @apply right-28 xl:right-32 3xl:right-40 absolute top-0 bottom-0;
   border-left: 2px dashed #7e6dd5;
 }
 .ellipse {
