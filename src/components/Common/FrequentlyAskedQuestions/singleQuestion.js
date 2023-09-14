@@ -23,7 +23,6 @@ const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
           />
         </div>
       </div>
-      <div className="bg-EDEDEE h-[1px] w-full"></div>
     </>
   );
 };

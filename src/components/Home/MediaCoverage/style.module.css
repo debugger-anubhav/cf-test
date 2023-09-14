@@ -1,11 +1,11 @@
 .media_coverage_wrapper {
-  @apply pb-8 pt-2 mt-6 xl:mt-[88px] pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
+  @apply pb-8 pt-2 mt-6 xl:mt-[88px] pl-0 md:pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
 }
 .label {
-  @apply text-14 xl:text-16 font-medium leading-5 tracking-desc xl:tracking-0.3 font-Poppins text-9A9AA2;
+  @apply text-14 xl:text-16 pl-4 md:pl-0 font-medium leading-5 tracking-desc xl:tracking-0.3 font-Poppins text-9A9AA2;
 }
 .heading {
-  @apply text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 font-Poppins text-45454A;
+  @apply text-20 xl:text-32 pl-4 md:pl-0 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 font-Poppins text-45454A;
 }
 @keyframes scrollAnimation {
   0% {
@@ -41,6 +41,7 @@
 }
 
 .ticker_container {
+  @apply bg-E5EFF4 md:bg-transparent;
   overflow: hidden;
   display: flex;
   /* min-height: 20px; */
@@ -54,4 +55,8 @@
   min-width: max-content;
   /*height: 20px;
   margin-left: 100px; */
+}
+
+.img {
+  mix-blend-mode: darken;
 }
