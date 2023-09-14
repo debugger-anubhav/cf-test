@@ -88,18 +88,29 @@ export const ShareIconsForProductPage = {
     {
       icon: `${IconLink}facebook.svg`,
       link: "https://www.facebook.com/cityFurnishRental/",
+      shareLink: "",
     },
-    {icon: `${IconLink}whatsapp_icon.svg`, link: "link"},
+    {
+      icon: `${IconLink}whatsapp_icon.svg`,
+      link: "https://api.whatsapp.com/send?text=http://cityfurnish.com",
+      shareLink: "https://api.whatsapp.com/send?text=http://cityfurnish.com",
+    },
     {
       icon: `${IconLink}instagram.svg`,
       link: "https://www.instagram.com/cityfurnish/?hl=en",
+      shareLink: "",
     },
     {
       icon: `${IconLink}linkedin.svg`,
       link: "https://www.linkedin.com/company/cityfurnish/",
+      shareLink: "",
     },
-    {icon: `${IconLink}twitter.svg`, link: "https://twitter.com/CityFurnish"},
-    {icon: `${IconLink}clipboard.svg`, link: "link"},
+    {
+      icon: `${IconLink}twitter.svg`,
+      link: "https://twitter.com/CityFurnish",
+      shareLink: "",
+    },
+    {icon: `${IconLink}clipboard.svg`, link: "link", shareLink: ""},
   ],
 };
 
