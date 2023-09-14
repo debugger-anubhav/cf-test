@@ -38,6 +38,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
 import {LiaMoneyBillWaveSolid} from "react-icons/lia";
+import {Skeleton} from "@mui/material";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -771,3 +772,52 @@ const ProductDetails = ({params}) => {
 };
 
 export default ProductDetails;
+
+export const SkeletonForProductDetail = () => {
+  return (
+    <div className={styles.skeleton_wrapper}>
+      <div className={styles.container_skeleton}>
+        <div className={styles.left_part}>
+          <Skeleton variant="rectangular" className="w-full" />
+        </div>
+        <div className={styles.right_part}>
+          <div className="h-6 w-full">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-3 w-1/2 my-4">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-3 w-4/6 my-4">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="my-4 flex">
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+          </div>
+          <div className="h-3 w-1/5 my-2">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-8 w-4/5 my-2">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

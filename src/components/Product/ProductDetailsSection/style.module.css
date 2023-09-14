@@ -201,3 +201,16 @@
 .sticky_bar_head {
   @apply w-[278px] text-16 xl:text-20 text-45454A font-medium tracking-0.4;
 }
+
+.skeleton_wrapper {
+  @apply flex w-full px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.container_skeleton {
+  @apply flex w-full gap-6;
+}
+.left_part {
+  @apply flex w-1/2 h-80;
+}
+.right_part {
+  @apply flex w-1/2 flex-col;
+}
