@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-full w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply max-h-[90vh] md:h-full w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .city_shield_head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-semibold leading-[30px] text-[#2D9469];

@@ -92,6 +92,82 @@ const ItemsIncluded = () => {
         </div>
       </div>
     );
+  } else {
+    return (
+      <div className={styles.main_container}>
+        <div className={styles.images_wrappper}>
+          <div className={`border-[4px] p-1 relative border-[#5F789D]`}>
+            <img
+              src={`${
+                productPageImagesBaseUrl + pageDetails?.image.split(",")[0]
+              }`}
+              className={styles.img}
+            />
+            <div className={styles.quantity_label}>1x</div>
+          </div>
+        </div>
+        <div className={`${styles.info_wrapper}`}>
+          <div className={styles.left_div}>
+            <p className={styles.info_subhead}>Product Information</p>
+            <div className={styles.info_list}>
+              <div className={styles.info_row}>
+                <p className={styles.label}>Name</p>
+                <p className={styles.colon}>:</p>
+                <p className={styles.info_details}>
+                  {pageDetails?.product_name.replace(/-/g, " ")}
+                </p>
+              </div>
+
+              {pageDetails?.brand && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Brand</p>
+                  <p className={styles.colon}>:</p>
+                  <p className={styles.info_details}>{pageDetails?.brand}</p>
+                </div>
+              )}
+              {pageDetails?.dimension && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Size</p>
+                  <p className={styles.colon}>:</p>
+                  <p className={styles.info_details}>
+                    {pageDetails?.dimension}
+                  </p>
+                </div>
+              )}
+
+              {pageDetails?.material && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Material</p>
+                  <p className={styles.colon}>:</p>
+                  <p className={styles.info_details}>{pageDetails?.material}</p>
+                </div>
+              )}
+
+              {pageDetails?.colour && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Color</p>
+                  <p className={styles.colon}>:</p>
+                  <p className={styles.info_details}>{pageDetails?.colour}</p>
+                </div>
+              )}
+            </div>
+          </div>
+          {pageDetails?.features && (
+            <div className={styles.right_div}>
+              <p className={styles.info_subhead}>Features</p>
+              <div className={styles.features_wrappers}>
+                {pageDetails.features?.map((feature, index) => (
+                  <li key={index} className={styles.feature}>
+                    <div className={styles.dot}></div>
+                    {feature}
+                  </li>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    );
   }
 };
 
