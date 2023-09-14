@@ -51,6 +51,14 @@ const Header = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
+    // Disable scrolling when the search bar is open
+    if (openSearchbar) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [openSearchbar]);
+  useEffect(() => {
     const cityId = getLocalStorage("cityId");
     getCityList()
       .then(res => {
@@ -91,7 +99,7 @@ const Header = () => {
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
         // console.log(res, "res in fetch itemms");
-        setArr(res?.data?.data);
+        // setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
       })
       .catch(err => console.log(err));
@@ -186,14 +194,14 @@ const Header = () => {
               </div>
             )}
             {openSearchbar && (
-              <>
+              <div className="hidden md:inline">
                 <SearchModal
                   arr={arr}
                   topOffset={topOffset}
                   openSearchbar={openSearchbar}
                   setOpenSearchBar={setOpenSearchBar}
                 />
-              </>
+              </div>
             )}
             <div className="relative flex">
               <span className={styles.header_favorite_container}>
@@ -269,7 +277,7 @@ const Header = () => {
               placeholder="Search for Furniture, Appliances, etc"
               className={styles.search_input}
               onClick={() => {
-                // setOpenSearchBar(!openSearchbar);
+                setOpenSearchBar(true);
                 settopOffset(65 - window.pageYOffset);
               }}
             />
@@ -317,19 +325,26 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     // Store search term in local storage
     if (e.key === "Enter" || e.type === "click") {
       if (newSearchTerm.trim() !== "") {
-        // const storedSearches = localStorage.getItem("searches");
+        const prevStoredSearches = getLocalStorage("searches");
         let storedSearches;
-        const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
+        const searchesArray = prevStoredSearches?.length
+          ? prevStoredSearches
+          : [];
+        const exists = searchesArray.includes(newSearchTerm);
+        if (exists) {
+          router.push(`/search/${newSearchTerm}`);
+          return;
+        }
         searchesArray.unshift(newSearchTerm);
         const maxItems = 5;
         const truncatedArray = searchesArray.slice(0, maxItems);
         if (typeof window !== "undefined") {
-          const existingLocal = getLocalStorage("searches");
-          if (existingLocal) {
-            setLocalStorage("searches", [...existingLocal, truncatedArray]);
-          } else {
-            setLocalStorage("searches", truncatedArray);
-          }
+          // const existingLocal = getLocalStorage("searches");
+          // if (existingLocal) {
+          //   setLocalStorage("searches", [...existingLocal, truncatedArray]);
+          // } else {
+          // }
+          setLocalStorage("searches", truncatedArray);
           storedSearches = getLocalStorage("searches");
         }
         setSearchedData(storedSearches);
@@ -339,24 +354,31 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   };
   const handleTrending = (item, event) => {
     event.stopPropagation();
-    const newSearchTerm = event.target.value;
+    setSearchedData(prev => [...prev, item]);
     axios.get(baseURL + endPoints.searchKey + item).then(res => {
       setSearchApiData(res?.data?.data);
-      setSearchedData(prev => [...prev, item]);
-      const existingLocal = getLocalStorage("searches");
-      let storedSearches;
-      const searchesArray = storedSearches ? JSON.parse(storedSearches) : [];
-      searchesArray.unshift(newSearchTerm);
-      const maxItems = 5;
-      const truncatedArray = searchesArray.slice(0, maxItems);
-      if (existingLocal) {
-        setLocalStorage("searches", [...existingLocal, truncatedArray]);
-      } else {
-        setLocalStorage("searches", truncatedArray);
+      const storedSearches = getLocalStorage("searches");
+      const searchesArray = storedSearches?.length ? storedSearches : [];
+      const exists = searchesArray.includes(item);
+      if (exists) {
+        const itm = [item];
+        setOpenSearchBar(false);
+        onSearchClick(itm);
+        return;
       }
+      searchesArray.unshift(item);
+      const truncatedArray = searchesArray.slice(0, 5);
+      console.log(storedSearches, searchesArray, truncatedArray, item);
+      // if (storedSearches?.length) {
+      //   setLocalStorage("searches", [...truncatedArray]);
+      // } else {
+      //   setLocalStorage("searches", truncatedArray);
+      // }
+      setLocalStorage("searches", [...truncatedArray]);
     });
     const itm = [item];
-    console.log(itm, "itmmmmm");
+    setOpenSearchBar(false);
+
     onSearchClick(itm);
   };
 
@@ -365,8 +387,8 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   }, []);
 
   const onSearchClick = item => {
-    console.log(item[0]);
-    router.push(`/search/${item[0]}`);
+    // console.log(item?.[0]);
+    router.push(`/search/${item}`);
   };
 
   return (
@@ -389,6 +411,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
             value={searchTerm}
+            onClick={e => e.stopPropagation()}
             onChange={e => handleSearch(e)}
           />
           <Image

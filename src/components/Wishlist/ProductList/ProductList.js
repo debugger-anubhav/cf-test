@@ -65,6 +65,7 @@ const ProductList = ({params}) => {
               {data
                 ?.filter(i => i.pq_quantity > 0)
                 ?.map((item, index) => {
+                  console.log(data);
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}
@@ -90,7 +91,7 @@ const ProductList = ({params}) => {
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
-                            item?.price,
+                            item?.fc_product_sale_price,
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}

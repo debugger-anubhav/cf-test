@@ -180,7 +180,7 @@ const SubHeader = ({params}) => {
   );
 
   useEffect(() => {
-    if (subCategoryId && categoryId) {
+    if (subCategoryId || categoryId) {
       getFilterList()
         .then(res => {
           if (res?.data?.data.length) {
