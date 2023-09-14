@@ -107,7 +107,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
-            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                .toLowerCase()}/rent`}>
               <p
                 className={styles.menu_item}
                 onMouseEnter={e => {
@@ -119,9 +122,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             {data?.map((item, index) => (
               <a
                 key={index.toString()}
-                href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                  item?.seourl
-                }`}>
+                href={`/${homePageReduxData?.cityName
+                  .replace(/\//g, "-")
+                  .toLowerCase()}/${item?.seourl}`}>
                 <p
                   className={styles.menu_item}
                   value={item}

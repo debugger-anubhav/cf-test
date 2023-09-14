@@ -37,7 +37,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  console.log(categoryPageReduxData, "categoryyyy");
 
   let categoryId;
   let subCategoryId;
@@ -186,6 +185,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       ).toFixed(0)}%`}
                       productID={item?.id}
                       seourl={item?.seourl}
+                      subProduct={item?.subProduct}
                     />
                   </div>
                 );

@@ -78,9 +78,9 @@ const RentFurnitureAndAppliances = ({params}) => {
               className={styles.card_wrapper}
               onClick={() => {
                 router.push(
-                  `/${homePageReduxData?.cityName.toLowerCase()}/${
-                    item?.seourl
-                  }`,
+                  `/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${item?.seourl}`,
                 );
                 if (typeof window !== "undefined") {
                   setLocalStorage("categoryId", item?.rootID);
@@ -88,9 +88,9 @@ const RentFurnitureAndAppliances = ({params}) => {
                 }
               }}>
               <a
-                href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                  item?.seourl
-                }`}
+                href={`/${homePageReduxData?.cityName
+                  .replace(/\//g, "-")
+                  .toLowerCase()}/${item?.seourl}`}
                 onClick={e => e.preventDefault()}>
                 <img
                   src={
