@@ -14,6 +14,7 @@ import {
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
+import {useParams, useRouter} from "next/navigation";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -26,9 +27,11 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     right: false,
   });
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
+  const params = useParams();
+  const router = useRouter();
   const handleresize = e => {
     if (e.target.innerWidth < 1024) {
-      console.log(e.target.innerWidth);
+      // console.log(e.target.innerWidth);
       setUserSettings(true);
     } else {
       setUserSettings(false);
@@ -89,6 +92,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );
   };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -107,7 +111,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         <div className={styles.drawer_content}>
           <p className={styles.logo_text}>cityfurnish</p>
           <div className={styles.menu_list}>
-            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                .toLowerCase()}/rent`}>
               <p
                 className={styles.menu_item}
                 onMouseEnter={e => {
@@ -119,9 +126,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             {data?.map((item, index) => (
               <a
                 key={index.toString()}
-                href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                  item?.seourl
-                }`}>
+                href={`/${homePageReduxData?.cityName
+                  .replace(/\//g, "-")
+                  .toLowerCase()}/${item?.seourl}`}>
                 <p
                   className={styles.menu_item}
                   value={item}
@@ -237,6 +244,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     if (typeof window !== "undefined") {
                       setLocalStorage("cityId", city?.id);
                     }
+                    const newUrl = window?.location.pathname.split("/");
+                    newUrl[1] = city.list_value
+                      .replace(/\//g, "-")
+                      .toLowerCase();
+                    const p = newUrl.join("/");
+                    params.city ? router.push(p) : window?.location.reload();
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}

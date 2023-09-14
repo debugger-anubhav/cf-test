@@ -86,6 +86,9 @@ const FrequentlyAskedQuestions = ({params}) => {
                     isOpen={index === openIndex}
                     toggleQuestion={() => toggleQuestion(index)}
                   />
+                  {index < 6 && (
+                    <div className="bg-EDEDEE h-[1px] w-full"></div>
+                  )}
                 </div>
               )
             );

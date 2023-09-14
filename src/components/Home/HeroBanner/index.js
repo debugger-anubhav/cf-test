@@ -13,7 +13,10 @@ const HeroBanner = () => {
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div className="cursor-pointer">
-            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                .toLowerCase()}/rent`}>
               <img
                 src={HeroBannerImages.HeroBannerImageOne}
                 className={styles.carousel_images}
@@ -22,7 +25,10 @@ const HeroBanner = () => {
             </a>
           </div>
           <div className="cursor-pointer">
-            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                .toLowerCase()}/rent`}>
               <img
                 src={HeroBannerImages.HeroBannerImageTwo}
                 className={styles.carousel_images}
@@ -31,7 +37,11 @@ const HeroBanner = () => {
             </a>
           </div>
           <div className="cursor-pointer">
-            <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .toLowerCase()
+                .replace(/\//g, "-")
+                .toLowerCase()}/rent`}>
               <img
                 src={HeroBannerImages.HeroBannerImageThree}
                 className={styles.carousel_images}
@@ -43,7 +53,10 @@ const HeroBanner = () => {
       </div>
 
       <div className={styles.hero_banner_wrapper}>
-        <a href={`/${homePageReduxData?.cityName.toLowerCase()}/rent`}>
+        <a
+          href={`/${homePageReduxData?.cityName
+            .toLowerCase()
+            .replace(/\//g, "-")}/rent`}>
           <img src={HeroFrame} alt="hero-banner" className="w-full" />
         </a>
       </div>

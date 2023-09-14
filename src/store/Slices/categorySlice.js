@@ -1,3 +1,4 @@
+import {getLocalStorage} from "@/constants/constant";
 import {createSlice} from "@reduxjs/toolkit";
 
 export const CategoryPageSlice = createSlice({
@@ -29,6 +30,7 @@ export const CategoryPageSlice = createSlice({
     savedProductID: [],
     categorTextContent: [],
     addRemoveWhislitItem: false,
+    isCombos: getLocalStorage("category") === "Combos",
   },
   reducers: {
     addParentCategoryId(state, action) {
@@ -88,6 +90,9 @@ export const CategoryPageSlice = createSlice({
     addRemoveWhishListitems: (state, action) => {
       state.addRemoveWhislitItem = action.payload;
     },
+    addIsCombos: (state, action) => {
+      state.isCombos = action.payload;
+    },
     addSaveditemID: (state, action) => {
       state.savedProductID = action.payload;
     },
@@ -139,4 +144,5 @@ export const {
   addSaveditemID,
   addCategoryTextContent,
   addRemoveWhishListitems,
+  addIsCombos,
 } = CategoryPageSlice.actions;
