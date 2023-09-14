@@ -117,7 +117,7 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
                 }}>
                 <div className={`${styles.ellipse} ${styles.left}`}></div>
                 <div className={`${styles.ellipse} ${styles.right}`}></div>
-                <div className="xl:w-full">
+                <div className="xl:w-[210px]">
                   <p
                     style={{
                       color: isMonthly

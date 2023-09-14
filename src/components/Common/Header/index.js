@@ -12,6 +12,7 @@ import {
   addSidebarMenuLists,
   getCartItems,
   selectedCityName,
+  setShowCartItem,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -90,9 +91,9 @@ const Header = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        // console.log(res, "res in fetch itemms");
         setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
       })
       .catch(err => console.log(err));
   };

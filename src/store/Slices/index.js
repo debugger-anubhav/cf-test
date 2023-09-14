@@ -162,6 +162,7 @@ export const CartPageSlice = createSlice({
     billBreakout: [],
     couponCodeUsed: "",
     savedAddresses: [],
+    showCartItems: false,
   },
   reducers: {
     getCartItems(state, action) {
@@ -181,13 +182,16 @@ export const CartPageSlice = createSlice({
       }
     },
     getBillDetails(state, action) {
-      state.billBreakout.push(action.payload);
+      state.billBreakout = action.payload;
     },
     getCouponCodeUsed(state, action) {
       state.couponCodeUsed = action.payload;
     },
     getSavedAddress(state, action) {
       state.savedAddresses = action.payload;
+    },
+    setShowCartItem(state, action) {
+      state.showCartItems = action.payload;
     },
   },
 });
@@ -235,6 +239,7 @@ export const {
   getBillDetails,
   getCouponCodeUsed,
   getSavedAddress,
+  setShowCartItem,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
