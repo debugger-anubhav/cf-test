@@ -63,6 +63,7 @@ export const endPoints = {
     singleProductDetails: (id, cityId) =>
       `fc-products/getSingleProductDetails?productId=${id}&cityId=${cityId}`,
     addToCart: `fc-shopping-carts/addToCart`,
+    notifyAvailability: "fc-notify-user-products/addIntoNotify",
   },
 
   addToCart: {

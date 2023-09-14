@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
   getLocalStorage,
+  getLocalStorageString,
   productImageBaseUrl,
   sortByText,
 } from "@/constants/constant";
@@ -48,8 +49,7 @@ const SearchList = () => {
     });
   }, [sort]);
 
-  const cityIdStr = localStorage
-    .getItem("cityId")
+  const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);

@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import {Close, DeleteIcon} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
@@ -36,11 +36,24 @@ const ProductCard = ({
     productId: productID,
   };
   const router = useRouter();
+  const cityIdStr = parseInt(getLocalStorage("cityId"));
+
+  const notifyData = {
+    userId: Number(getLocalStorageString("user_id").split('"').join("")),
+    cityId: cityIdStr,
+    productId: productID,
+  };
   const {mutateAsync: removewhislistProduct} = useMutation(
     "remove-wishlist",
     "DELETE",
     endPoints.deleteWishListProduct,
     data,
+  );
+  const {mutateAsync: notifyAvailibility} = useMutation(
+    "notify-availability",
+    "POST",
+    endPoints.productPage.notifyAvailability,
+    notifyData,
   );
 
   const remove = () => {
@@ -124,24 +137,35 @@ const ProductCard = ({
                 <span className={styles.rupeeIcon}>₹</span>
                 {`${currentPrice} /mo`}
               </h3>
-              <h3 className={`${styles.originalPrice} flex`}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {`${originalPrice} /mo`}
-              </h3>
+              {
+                // currentPrice >= originalPrice ? (
+                originalPrice > currentPrice ? (
+                  <h3 className={`${styles.originalPrice} flex`}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {`${originalPrice} /mo`}
+                  </h3>
+                ) : null
+              }
             </div>
-            {originalPrice !== currentPrice && (
-              <div className={styles.discount}>{`-${discount} OFF`}</div>
+
+            {/* {originalPrice !== currentPrice && ( */}
+            {currentPrice < originalPrice && parseInt(discount) > 0 && (
+              <div className={styles.discount}>{`-${parseInt(
+                discount,
+              )}% OFF`}</div>
             )}
           </div>
           <div>
             <button
               className={styles.move_to_cart_btn}
-              onClick={e => {
+              onClick={async e => {
                 e.preventDefault();
                 e.stopPropagation();
-                router.push("https://cityfurnish.com/cart");
+                !soldOut
+                  ? await notifyAvailibility()
+                  : router.push("https://cityfurnish.com/cart");
               }}>
-              Move to Cart
+              {!soldOut ? "Notify Me" : "  Move to Cart"}
             </button>
           </div>
         </a>

@@ -13,7 +13,9 @@ const HasselFreeServicesCards = () => {
             return (
               <div
                 key={index.toString()}
-                className={style.card_wrapper}
+                className={`${style.card_wrapper} ${
+                  index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
+                }`}
                 style={{
                   backgroundImage: `url("${data.backgroungImage}")`,
                   backgroundRepeat: "no-repeat",

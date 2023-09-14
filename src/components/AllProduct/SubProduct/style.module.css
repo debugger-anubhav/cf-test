@@ -4,7 +4,7 @@
 
 .product_wrapper {
   /* @apply flex flex-wrap lg:grid lg:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
-  @apply flex mt-0 md:mt-4;
+  @apply flex mt-0 md:mt-4 mb-8 ms:mb-[88px];
 }
 .container {
   /* @apply hidden w-full xs:block  justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
@@ -17,5 +17,5 @@
   @apply mr-1 relative inline-flex items-center font-Poppins;
 }
 .route_text {
-  @apply text-71717A text-14 font-normal font-Poppins leading-6 pr-1;
+  @apply text-71717A text-14 font-medium font-Poppins leading-6 pr-1;
 }
