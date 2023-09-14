@@ -412,6 +412,7 @@ const ShoppingCartSection = ({setTab}) => {
                 className={styles.coupons_wrapper}
                 onClick={() => {
                   !isCouponApplied && setCouponDrawerOpen(true);
+                  // checkCoupon();
                 }}>
                 <p className={styles.offer_text}>
                   {isCouponApplied
@@ -439,12 +440,12 @@ const ShoppingCartSection = ({setTab}) => {
                 <CouponDrawer
                   toggleDrawer={toggleDrawerCoupon}
                   open={couponDrawerOpen}
-                  // applyCoupon={setIsCouponApplied(!isCouponApplied)}
                   applyCouponCode={val => {
                     applyCouponCode(val);
                     fetchBill();
                   }}
                   isMonthly={isMonthly}
+                  cityId={cityId}
                 />
               )}
 
@@ -521,6 +522,7 @@ const ShoppingCartSection = ({setTab}) => {
                   toggleDrawer={toggleDrawerBreakup}
                   open={breakupDrawer}
                   code={code}
+                  isCouponApplied={isCouponApplied}
                 />
               )}
 
