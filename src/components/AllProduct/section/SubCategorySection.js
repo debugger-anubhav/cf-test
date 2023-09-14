@@ -202,7 +202,7 @@ const SubCategorySection = () => {
                             "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                             subItem?.category_web_image
                           }
-                          className="!w-full rounded-[6.4px] ms:rounded-none"
+                          className={`${styles.images}!w-full rounded-[6.4px] ms:rounded-none select-none`}
                         />
                       </a>
                     </div>

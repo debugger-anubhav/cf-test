@@ -31,3 +31,10 @@
   width: none;
   display: none;
 }
+
+.images {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+}
