@@ -234,25 +234,35 @@ const CategoryCard = ({
           )}
         </div>
         {categoryPageReduxData.isCombos && (
-          <div className={styles.combos_wrapper}>
-            <p className={styles.items_included}>
-              {subProduct?.length} items included
-            </p>
-            <div className={styles.combos_images} ref={sliderRef}>
-              {subProduct?.map((item, index) => {
-                return (
-                  <img
-                    key={index.toString()}
-                    src={`${productImageBaseUrl}${item?.image?.split(",")[0]}`}
-                    alt="image"
-                    className={`${styles.included_image} ${
-                      isDumy && "pointer-events-none"
-                    }`}
-                  />
-                );
-              })}
+          <>
+            <div className={styles.combos_wrapper}>
+              <p
+                className={`${styles.items_included} ${
+                  subProduct?.length === 0 && styles.no_included
+                }`}>
+                {subProduct?.length} items included
+              </p>
+              <div className={styles.combos_images} ref={sliderRef}>
+                {subProduct?.length === 0 && (
+                  <p className={styles.no_included_image}></p>
+                )}
+                {subProduct?.map((item, index) => {
+                  return (
+                    <img
+                      key={index.toString()}
+                      src={`${productImageBaseUrl}${
+                        item?.image?.split(",")[0]
+                      }`}
+                      alt="image"
+                      className={`${styles.included_image} ${
+                        isDumy && "pointer-events-none"
+                      } `}
+                    />
+                  );
+                })}
+              </div>
             </div>
-          </div>
+          </>
         )}
       </div>
     </a>
