@@ -126,8 +126,10 @@ const RecentlyViewedProduct = ({page}) => {
                       key={index.toString()}
                       onClick={e => handleCardClick(e, item)}
                       className={`${styles.child} ${
-                        isDumy && "pointer-events-none"
-                      }`}>
+                        index ===
+                          homePageReduxData?.recentProduct?.length - 1 &&
+                        "mr-[16px]"
+                      } ${isDumy && "pointer-events-none"}`}>
                       <Card
                         cardImage={
                           productImageBaseUrl + item?.image?.split(",")[0]

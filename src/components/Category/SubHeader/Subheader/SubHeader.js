@@ -136,7 +136,9 @@ const SubHeader = ({params}) => {
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
+      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+        item?.seourl
+      }`,
     );
     dispatch(addSubCategoryId(item?.id));
 
@@ -288,12 +290,11 @@ const SubHeader = ({params}) => {
 
   useEffect(() => {
     setSeoUrl(
-      getAllAndSubCategoryData.find(
-        item => item.id === getLocalStorage("categoryId"),
+      getAllAndSubCategoryData?.find(
+        item => item?.id === getLocalStorage("categoryId"),
       ),
     );
   }, [getAllAndSubCategoryData]);
-  console.log("seoUrl", seoUrl);
 
   return (
     <>
@@ -315,9 +316,9 @@ const SubHeader = ({params}) => {
                   setLocalStorage("subCategory", "All");
                 }}>
                 <a
-                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                    seoUrl?.seourl
-                  }`}>
+                  href={`/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${seoUrl?.seourl}`}>
                   <p className={`${styles.route_text} cursor-pointer`}>
                     {getLocalStorage("category")?.replace(/"/g, "")}
                   </p>
