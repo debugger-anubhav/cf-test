@@ -30,7 +30,7 @@ export const CategoryPageSlice = createSlice({
     savedProductID: [],
     categorTextContent: [],
     addRemoveWhislitItem: false,
-    isCombos: getLocalStorage("category")?.replace(/"/g, "") === "Combos",
+    isCombos: getLocalStorage("category") === "Combos",
   },
   reducers: {
     addParentCategoryId(state, action) {
