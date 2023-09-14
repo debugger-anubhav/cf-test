@@ -2,10 +2,10 @@
   @apply flex flex-col items-center mx-4 pt-6 pb-4 xl:py-14;
 }
 .img {
-  @apply w-[208px] h-[178px] xl:w-[254.8px] xl:h-[218.8px];
+  @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px];
 }
 .head {
-  @apply mt-[41px] xl:mt-[62px] text-45454A text-20 xl:text-32 font-Poppins font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;
+  @apply mt-2 xl:mt-8 text-45454A text-20 xl:text-32 font-Poppins font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;
 }
 .desc {
   @apply text-9A9AA2 text-14 xl:text-16 font-medium font-Poppins leading-5 tracking-desc xl:tracking-0.3;
