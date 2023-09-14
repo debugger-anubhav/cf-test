@@ -506,9 +506,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                 {homePageReduxData?.category?.map((item, index) => (
                   <a
                     key={index.toString()}
-                    href={`${homePageReduxData?.cityName.toLowerCase()}/${
-                      item?.seourl
-                    }`}>
+                    href={`${homePageReduxData?.cityName
+                      .replace(/\//g, "-")
+                      .toLowerCase()}/${item?.seourl}`}>
                     <div
                       className={styles.category_card_in_searchbox}
                       onClick={() => {

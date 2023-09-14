@@ -58,7 +58,11 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       dispatch(addSetProductAll([]));
       dispatch(addOutStockProductAll([]));
     }
-    router.push(`/${homePageReduxData?.cityName.toLowerCase()}/${data.seourl}`);
+    router.push(
+      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+        data.seourl
+      }`,
+    );
   };
 
   const handleClose = () => {
@@ -177,9 +181,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           // onMouseLeave={handleClose}
         >
           <a
-            href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-              data?.seourl
-            }`}>
+            href={`/${homePageReduxData?.cityName
+              .replace(/\//g, "-")
+              .toLowerCase()}/${data?.seourl}`}>
             <p className={styles.sub_item} onClick={handMainCategory}>
               All
             </p>
@@ -189,9 +193,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
               return (
                 <a
                   key={index.toString()}
-                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                    item?.seourl
-                  }`}>
+                  href={`/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${item?.seourl}`}>
                   <p
                     className={styles.sub_item}
                     onClick={e => handleSelectedProduct(e, item)}>
