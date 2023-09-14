@@ -179,6 +179,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       <p className={styles.menu_item}>{item?.item}</p>
                     </a>
                   )}
+                  {index === 2 && (
+                    <div className={`${styles.divider} mb-6`}></div>
+                  )}
                 </>
               );
             })}
