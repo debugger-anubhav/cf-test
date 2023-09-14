@@ -18,6 +18,7 @@ import {
   addSetProductAll,
   addSingleAllProduct,
   addSingleProduct,
+  addIsCombos,
 } from "@/store/Slices/categorySlice";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {Popper} from "@mui/material";
@@ -63,6 +64,11 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         data.seourl
       }`,
     );
+    if (item === "Combos") {
+      dispatch(addIsCombos(true));
+    } else {
+      dispatch(addIsCombos(false));
+    }
   };
 
   const handleClose = () => {
@@ -141,9 +147,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);
           hoverRef.current = item;
-        }}
-        // onMouseLeave={()=>setAnchorEl("")}
-      >
+        }}>
         {item}
         <DownArrow
           size={20}
