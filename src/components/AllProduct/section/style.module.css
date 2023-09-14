@@ -1,11 +1,11 @@
 .container {
-  @apply flex flex-col w-full;
+  @apply flex flex-col w-full gap-6 ms:gap-[88px];
 }
 .heading_container_home_furniture {
-  @apply flex w-full justify-between;
+  @apply flex w-full justify-between  mb-4 ms:mb-6;
 }
 .heading_container {
-  @apply flex w-full justify-between pt-4 ms:pt-[88px];
+  @apply flex w-full justify-between mb-4 ms:mb-6;
 }
 .heading {
   @apply font-Poppins text-20 md:text-32 font-medium leading-8 md:leading-10 tracking-heading md:tracking-0.6 text-[#45454A] whitespace-nowrap;
@@ -14,15 +14,20 @@
   @apply font-Poppins text-14 md:text-18 font-medium leading-normal tracking-desc md:tracking-0.36 text-[#597492] whitespace-nowrap;
 }
 .viewButton {
-  @apply flex justify-center items-center;
+  @apply flex justify-center items-center gap-1;
 }
 .card_text {
-  @apply text-14 ms:text-20 w-full font-medium font-Poppins leading-normal tracking-desc ms:tracking-0.4 text-[#45454A] items-stretch;
+  @apply text-sm ms:text-xl w-full font-medium font-Poppins tracking-desc ms:tracking-0.4 text-[#45454A] items-stretch mt-1 ms:mt-3 whitespace-normal;
   align-self: stretch;
 }
 .card_container {
-  @apply pt-4 md:pt-6 !w-[79.2px] ms:!w-[245px] mr-4 ms:mr-6;
+  @apply !w-[79.2px] ms:!w-[245px]  whitespace-nowrap;
 }
 .category_section_container {
-  @apply flex pt-0 md:pt-6 w-full overflow-x-scroll;
+  @apply flex w-full overflow-x-scroll gap-[18.8px] ms:gap-6;
+}
+
+.category_section_container::-webkit-scrollbar {
+  width: none;
+  display: none;
 }
