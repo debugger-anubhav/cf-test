@@ -5,17 +5,64 @@ import {Close} from "@/assets/icon";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
+import {useSelector} from "react-redux";
 
-const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
+const CouponDrawer = ({
+  toggleDrawer,
+  open,
+  applyCouponCode,
+  isMonthly,
+  cityId,
+}) => {
   const [isApplied, setIsApplied] = React.useState(false);
   const [appliedIndex, setappliedIndex] = React.useState(null);
   const [input, setInput] = useState("");
   const [pageData, setPageData] = useState();
+  const [showError, setShowError] = useState(false);
+  const [couponStatus] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleApplyClick = couponCode => {
-    setIsApplied(true);
-    if (couponCode !== "") applyCouponCode(couponCode);
-    toggleDrawer();
+  const data = useSelector(state => state.cartPageData);
+  const billBreakup = data.billBreakup;
+  const cartItems = data.cartItems;
+
+  const idsArr = [];
+
+  cartItems.map(item => {
+    return idsArr.push(item.fc_product.id.toString());
+  });
+
+  useEffect(() => {
+    console.log(open);
+  }, [open]);
+
+  const handleApplyClick = async couponCode => {
+    try {
+      const headers = {
+        productIds: idsArr,
+        couponCode,
+        cartSubTotal: billBreakup?.cartSubTotal,
+        paymentMode: isMonthly ? 0 : 1,
+        cityId,
+        tenure: cartItems?.[0]?.subproduct?.attr_name,
+      };
+      const res = await axios.post(
+        baseURL + endPoints.addToCart.checkCouponApplicability,
+        headers,
+      );
+      if (res?.data?.data?.status) {
+        console.log("innnnn");
+        setIsApplied(true);
+        if (couponCode !== "") applyCouponCode(couponCode);
+        toggleDrawer();
+      } else {
+        setErrorMsg(res?.data?.data?.msg);
+        setShowError(true);
+        applyCouponCode("");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
@@ -83,6 +130,10 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
           </p>
         </div>
 
+        {!couponStatus && showError && (
+          <p className={styles.error}>{errorMsg}</p>
+        )}
+
         <div className={styles.coupons_wrapper}>
           {pageData?.map((item, index) => (
             <>
@@ -112,7 +163,6 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
                   ) {
                     handleApplyClick(item.coupon_code);
                     setappliedIndex(index);
-                    toggleDrawer();
                   }
                 }}>
                 <div className={`${styles.ellipse} ${styles.left}`}></div>
@@ -169,6 +219,7 @@ const CouponDrawer = ({toggleDrawer, open, applyCouponCode, isMonthly}) => {
                   </button>
                 </div>
               </div>
+
               {((isMonthly && item.coupon_type === 1) ||
                 (!isMonthly && item.coupon_type === 0)) && (
                 <p className={styles.not_applicable_text}>

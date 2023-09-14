@@ -78,6 +78,7 @@ export const endPoints = {
       `fc-shipping-addresses/getUserAllAddress?userId=${userId}`,
     makePrimaryAddress: `fc-shipping-addresses/makeAddressPrimary`,
     addAddress: "fc-shipping-addresses/saveUserAddress",
+    checkCouponApplicability: "fc-couponcards/checkCoupon",
   },
 
   // categoryHappySubscriber:

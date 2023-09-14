@@ -4,7 +4,7 @@ import {Drawer} from "@mui/material";
 import {Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
 
-const TotalBreakup = ({toggleDrawer, open}) => {
+const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [showTotalPriceBreakdown, setShowTotalPriceBreakdown] = useState(false);
   const code = useSelector(state => state.cartPageData.couponCodeUsed);
@@ -100,7 +100,9 @@ const TotalBreakup = ({toggleDrawer, open}) => {
 
           <div className={styles.row}>
             <div>
-              <p className={styles.price_label}>Coupon discount {code}</p>
+              <p className={styles.price_label}>
+                Coupon discount {isCouponApplied && code}
+              </p>
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>-₹</span>
