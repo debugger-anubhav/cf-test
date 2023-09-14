@@ -4,11 +4,12 @@ import {Drawer} from "@mui/material";
 import {Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
 
-const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
+const TotalBreakup = ({toggleDrawer, open}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [showTotalPriceBreakdown, setShowTotalPriceBreakdown] = useState(false);
   const code = useSelector(state => state.cartPageData.couponCodeUsed);
-  console.log(code);
+  const billBreakup = useSelector(state => state.cartPageData.billBreakout);
+  // console.log(code);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -58,14 +59,14 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
 
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.cartSubTotal}
+              {billBreakup?.cartSubTotal}
             </p>
           </div>
 
           {showTotalPriceBreakdown && (
             <>
               <div className={styles.dropdown_wrapper}>
-                {billBreakup?.[0]?.cartSubTotalList?.map((item, index) => (
+                {billBreakup?.cartSubTotalList?.map((item, index) => (
                   <div key={index} className={styles.dropdown_row}>
                     <p
                       className={`min-w-[190px] w-[190px] ${styles.prod_name}`}>
@@ -93,7 +94,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>-₹</span>
-              {billBreakup?.[0]?.itemDiscount}
+              {billBreakup?.itemDiscount}
             </p>
           </div>
 
@@ -103,7 +104,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>-₹</span>
-              {billBreakup?.[0]?.couponDiscount}
+              {billBreakup?.couponDiscount}
             </p>
           </div>
 
@@ -115,7 +116,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.refundableDeposite}
+              {billBreakup?.refundableDeposite}
             </p>
           </div>
 
@@ -125,7 +126,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.deliveryAndInstallation}
+              {billBreakup?.deliveryAndInstallation}
             </p>
           </div>
 
@@ -137,7 +138,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.gst}
+              {billBreakup?.gst}
             </p>
           </div>
 
@@ -149,7 +150,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             </div>
             <p className={styles.total_amount} style={{color: "#2D9469"}}>
               <span className={styles.rupeeIcon}>-₹</span>
-              {billBreakup?.[0]?.coinsUsed}
+              {billBreakup?.coinsUsed}
             </p>
           </div>
 
@@ -159,7 +160,7 @@ const TotalBreakup = ({toggleDrawer, open, billBreakup}) => {
             <p className={styles.total_txt}>Total</p>
             <p className={styles.total_amount}>
               <span className={styles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
+              {billBreakup?.finalTotalPrice?.toFixed(2)}
             </p>
           </div>
         </div>

@@ -185,6 +185,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       ).toFixed(0)}%`}
                       productID={item?.id}
                       seourl={item?.seourl}
+                      subProduct={item?.subProduct}
                     />
                   </div>
                 );

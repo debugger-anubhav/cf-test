@@ -97,8 +97,8 @@ const RentNowBanner = ({params}) => {
         {rentNowBanner?.map((item, index) => (
           <div
             className={`${styles.banner_wrapper} ${
-              isDumy && "pointer-events-none"
-            }`}
+              index === rentNowBanner?.length - 1 && "mr-[16px]"
+            } ${isDumy && "pointer-events-none"}`}
             key={index.toString()}>
             <RentNowCard
               cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}

@@ -12,6 +12,7 @@ import {
   addSidebarMenuLists,
   getCartItems,
   selectedCityName,
+  setShowCartItem,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -101,6 +102,7 @@ const Header = () => {
         // console.log(res, "res in fetch itemms");
         // setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
       })
       .catch(err => console.log(err));
   };
@@ -529,9 +531,9 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
                 {homePageReduxData?.category?.map((item, index) => (
                   <a
                     key={index.toString()}
-                    href={`${homePageReduxData?.cityName.toLowerCase()}/${
-                      item?.seourl
-                    }`}>
+                    href={`${homePageReduxData?.cityName
+                      .replace(/\//g, "-")
+                      .toLowerCase()}/${item?.seourl}`}>
                     <div
                       className={styles.category_card_in_searchbox}
                       onClick={() => {

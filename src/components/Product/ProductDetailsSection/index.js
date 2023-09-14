@@ -37,9 +37,7 @@ import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
-
-// import ShareDrawer from "./ShareDrawer/ShareDrawer";
-// import Modal from "react-responsive-modal";
+import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -52,7 +50,9 @@ const ProductDetails = ({params}) => {
     {name: "Home", link: "/"},
     {
       name: prodDetails?.[0]?.category_name,
-      link: `/${cityName.toLowerCase()}/${prodDetails?.[0]?.category_seourl}`,
+      link: `/${cityName.replace(/\//g, "-").toLowerCase()}/${
+        prodDetails?.[0]?.category_seourl
+      }`,
     },
     {name: prodDetails?.[0]?.product_name.replace(/-/g, " ")},
   ];
@@ -182,11 +182,13 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
+    console.log(categoryPageReduxData, "category");
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
         .includes(params.productId),
     );
+    console.log(inWishList, "whishlist");
   }, []);
 
   const router = useRouter();
@@ -267,6 +269,7 @@ const ProductDetails = ({params}) => {
     endPoints.deleteWishListProduct,
     data,
   );
+
   const handleThumbnailClick = index => {
     setSelectedIndex(index);
   };
@@ -455,7 +458,11 @@ const ProductDetails = ({params}) => {
                     />
                     <div className={styles.info}>
                       <InformationIcon color={"ffffff"} />
-                      <p>39 people ordered this in the last 24hrs</p>
+                      <p>
+                        {soldOut
+                          ? "SOLD OUT"
+                          : "39 people ordered this in the last 24hrs"}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -514,7 +521,11 @@ const ProductDetails = ({params}) => {
                 }
                 color={inWishList ? "#D96060" : "#C0C0C6"}
                 // onClick={() => setInWishList(!inWishList)}
-                onClick={e => handleWhislistCard(e)}
+                onClick={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  handleWhislistCard(e);
+                }}
               />
               <div onClick={openModal}>
                 <ShareIcon
@@ -544,12 +555,19 @@ const ProductDetails = ({params}) => {
               </div>
             )}
 
-            <p className={styles.rating_txt} style={{color: "#63798D"}}>
-              Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
-              <span>
-                <DeliveryTruck color={"#63798D"} className={"ml-1 w-6 h-6"} />
-              </span>
-            </p>
+            {soldOut ? (
+              <div className={styles.sold_out_div}>
+                <p className={styles.sold_out_txt}>Currently sold out</p>
+                <DeliveryTruck color={"#63798D"} className={"w-6 h-6"} />
+              </div>
+            ) : (
+              <p className={styles.rating_txt} style={{color: "#63798D"}}>
+                Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
+                <span>
+                  <DeliveryTruck color={"#63798D"} className={"ml-1 w-6 h-6"} />
+                </span>
+              </p>
+            )}
           </div>
 
           <div className={styles.duration}>
@@ -655,6 +673,20 @@ const ProductDetails = ({params}) => {
             <img src={ProductPageImages.KycDoc} alt="kyc" className="w-6 h-6" />
             <p className={styles.kyc_text}>{str.kyc}</p>
           </div>
+
+          {prodDetails?.[0]?.installation_charge.replace(/-/g, " ") > 0 && (
+            <div className={styles.installation_wrapper}>
+              {/* <BsPersonVcard size={24} /> */}
+              <LiaMoneyBillWaveSolid
+                color={"#45454A"}
+                className="min-w-[24px] min-h-[24px]"
+              />
+              <p className={styles.kyc_text}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {str.installation}
+              </p>
+            </div>
+          )}
 
           <div
             className={`${styles.services_cards_container} ${styles.mobile}`}

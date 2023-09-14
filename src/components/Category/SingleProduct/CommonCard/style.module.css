@@ -43,3 +43,21 @@
 .rupeeIcon {
   @apply font-Inter;
 }
+.combos_wrapper {
+  @apply flex w-full pt-4 flex-col;
+}
+.items_included {
+  @apply flex w-fit rounded-lg text-12 text-45454A border-[1px] border-[#E3E1DC] font-medium font-Poppins leading-normal px-2 py-1;
+}
+.no_included {
+  @apply text-transparent border-transparent;
+}
+.combos_images {
+  @apply flex mt-4 w-full overflow-x-scroll;
+}
+.included_image {
+  @apply flex w-14 h-11 rounded mr-3;
+}
+.no_included_image {
+  @apply flex w-14 h-11 rounded mr-3;
+}
