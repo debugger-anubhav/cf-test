@@ -203,10 +203,11 @@ const SubHeader = ({params}) => {
       setTitle(item?.fc_city_category_data?.cat_heading || "");
     }
   };
-  const defaultKey = ["subproducts", "ASC"];
-  const newSortKey = ["created", "DESC"];
-  const highToLowKey = ["sale_price", "DESC"];
-  const lowToHighKey = ["sale_price", "ASC"];
+  const defaultKey = 1;
+  const newSortKey = 2;
+  const highToLowKey = 3;
+  const lowToHighKey = 4;
+
   const handleFilterDivClick = (e, filterTag) => {
     const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
@@ -236,8 +237,8 @@ const SubHeader = ({params}) => {
       dispatch(addSortKey(newSortKey));
     } else if (item === "Price Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (item === "Price Hight to low") {
-      dispatch(addSortKey([...highToLowKey]));
+    } else if (item === "Price High to low") {
+      dispatch(addSortKey(highToLowKey));
     } else {
       dispatch(addSortKey(defaultKey));
     }
@@ -303,7 +304,7 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <a href="/">
+                <a href="/cityfurnish">
                   <p className={`${styles.route_text} cursor-pointer`}>Home</p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />

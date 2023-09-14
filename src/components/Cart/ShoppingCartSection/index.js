@@ -30,12 +30,16 @@ import {
   getCouponCodeUsed,
   //  getCartItems
 } from "@/store/Slices";
+import EmptyCartPage from "../EmptyCartPage";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
-  const cartItems = useSelector(state => state.cartPageData.cartItems);
-  const billBreakup = useSelector(state => state.cartPageData.billBreakout);
-  console.log(billBreakup, "billlllll");
+  const data = useSelector(state => state.cartPageData);
+  const cartItems = data.cartItems;
+  const billBreakup = data.billBreakout;
+  const showData = data.showCartItems;
+
+  console.log(showData, "uhediuweuideiuej");
 
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
@@ -44,7 +48,7 @@ const ShoppingCartSection = ({setTab}) => {
 
   const count = cartItems.length;
 
-  const userId = getLocalStorage("userID");
+  const userId = getLocalStorage("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -184,34 +188,30 @@ const ShoppingCartSection = ({setTab}) => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  const fetchBill = () => {
-    const headers = {
-      userId: userIdToUse,
-      cityshield: isChecked,
-      cityId,
-      coins: isCoinApplied ? availCoin : 0,
-      couponsCode: code,
-      paymentMode: isMonthly ? 0 : 1,
-    };
+  const fetchBill = async () => {
+    try {
+      const headers = {
+        userId: parseInt(userIdToUse),
+        cityshield: isChecked,
+        cityId,
+        coins: isCoinApplied ? availCoin : 0,
+        couponsCode: code,
+        paymentMode: isMonthly ? 0 : 1,
+      };
 
-    axios
-      .post(baseURL + endPoints.addToCart.fetchBill, headers)
-      .then(res => {
-        console.log(res, "res in bill");
-        dispatch(getBillDetails(res?.data?.data));
-      })
-      .catch(err => console.log(err));
+      const res = await axios.post(
+        baseURL + endPoints.addToCart.fetchBill,
+        headers,
+      );
+      dispatch(getBillDetails(res?.data?.data));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  useEffect(
-    () => {
-      fetchBill();
-    },
-    [isCoinApplied],
-    [isChecked],
-    [isMonthly],
-    [isCoinApplied],
-  );
+  useEffect(() => {
+    fetchBill();
+  }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
   return count > 0 ? (
     <>
@@ -220,7 +220,7 @@ const ShoppingCartSection = ({setTab}) => {
         closeModal={closeModal}
         productId={productId}
         id={itemId}
-        userId={userIdToUse}
+        userId={parseInt(userIdToUse)}
         updateArr={id => deleteItem(id)}
       />
       <div className={styles.main_container}>
@@ -245,7 +245,7 @@ const ShoppingCartSection = ({setTab}) => {
                   <div>
                     <div className={styles.name_div}>
                       <p className={styles.product_name}>
-                        {item?.fc_product?.product_name.replace(/-/g, " ")}
+                        {item?.fc_product?.product_name?.replace(/-/g, " ")}
                       </p>
                       <div
                         onClick={() => {
@@ -292,14 +292,12 @@ const ShoppingCartSection = ({setTab}) => {
                         <div className="flex items-end gap-2">
                           <p className={styles.currentPrice}>
                             <span className={styles.rupeeIcon}>₹</span>
-                            {
-                              item?.fc_product?.fc_product_sale_price
-                                ?.sale_price
-                            }
+                            {item?.price}
                           </p>
+
                           <p className={styles.originalPrice}>
                             <span className={styles.rupeeIcon}>₹</span>
-                            {item?.fc_product?.price}
+                            {item?.attr_price}
                           </p>
                         </div>
                       </div>
@@ -386,7 +384,7 @@ const ShoppingCartSection = ({setTab}) => {
                   <p className={styles.avail_bal}>
                     Available balance:{" "}
                     {isCoinApplied
-                      ? availCoin - billBreakup?.[0]?.coinsUsed
+                      ? availCoin - billBreakup?.coinsUsed
                       : availCoin}
                   </p>
                 </div>
@@ -421,7 +419,11 @@ const ShoppingCartSection = ({setTab}) => {
               {isCouponApplied ? (
                 <p
                   className={styles.remove_txt}
-                  onClick={() => setIsCouponApplied(false)}>
+                  // onClick={handleRemoveCode}
+                  onClick={() => {
+                    setIsCouponApplied(false);
+                    setCode("");
+                  }}>
                   Remove
                 </p>
               ) : (
@@ -435,8 +437,11 @@ const ShoppingCartSection = ({setTab}) => {
               <CouponDrawer
                 toggleDrawer={toggleDrawerCoupon}
                 open={couponDrawerOpen}
-                applyCoupon={setIsCouponApplied}
-                applyCouponCode={applyCouponCode}
+                // applyCoupon={setIsCouponApplied(!isCouponApplied)}
+                applyCouponCode={val => {
+                  applyCouponCode(val);
+                  fetchBill();
+                }}
                 isMonthly={isMonthly}
               />
             )}
@@ -499,7 +504,7 @@ const ShoppingCartSection = ({setTab}) => {
               </div>
               <p className={styles.total_amount}>
                 <span className={styles.rupeeIcon}>₹</span>
-                {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
+                {billBreakup?.finalTotalPrice?.toFixed(2)}
               </p>
             </div>
 
@@ -507,7 +512,6 @@ const ShoppingCartSection = ({setTab}) => {
               <TotalBreakup
                 toggleDrawer={toggleDrawerBreakup}
                 open={breakupDrawer}
-                billBreakup={billBreakup}
                 code={code}
               />
             )}
@@ -520,9 +524,7 @@ const ShoppingCartSection = ({setTab}) => {
       </div>
     </>
   ) : (
-    <div className="flex justify-center items-center h-full">
-      <p className="text-32">Your cart is empty</p>
-    </div>
+    <EmptyCartPage />
   );
 };
 

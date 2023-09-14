@@ -11,6 +11,8 @@ import {
   selectedCityId,
   addSidebarMenuLists,
   getCartItems,
+  selectedCityName,
+  setShowCartItem,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -18,7 +20,6 @@ import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {
   getLocalStorage,
-  getLocalStorageString,
   productImageBaseUrl,
   setLocalStorage,
 } from "@/constants/constant";
@@ -51,8 +52,15 @@ const Header = () => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   useEffect(() => {
+    const cityId = getLocalStorage("cityId");
     getCityList()
       .then(res => {
+        if (cityId) {
+          const cityName = res.data.data.find(
+            item => item?.id === cityId,
+          ).list_value;
+          dispatch(selectedCityName(cityName));
+        }
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
@@ -74,7 +82,7 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  const userId = getLocalStorageString("user_id");
+  const userId = getLocalStorage("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -83,9 +91,9 @@ const Header = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        // console.log(res, "res in fetch itemms");
         setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
       })
       .catch(err => console.log(err));
   };

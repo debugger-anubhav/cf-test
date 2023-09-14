@@ -104,7 +104,7 @@ const SearchList = () => {
       setSort(newSortKey);
     } else if (item === "Price Low to High") {
       setSort(lowToHighKey);
-    } else if (item === "Price Hight to low") {
+    } else if (item === "Price High to low") {
       setSort(highToLowKey);
     } else {
       setSort(defaultKey);
@@ -124,7 +124,7 @@ const SearchList = () => {
       <div className={style.container}>
         <ul className={style.listings}>
           <li className={style.list}>
-            <a href="/">
+            <a href="/cityfurnish">
               <p className={`${style.route_text} cursor-pointer`}>Home</p>
             </a>
             <ForwardArrow size={12} color={"#71717A"} />

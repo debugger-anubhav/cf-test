@@ -18,11 +18,22 @@
           "item": "CF For Businesses",
           "link": "https://cityfurnish.com/pages/bulkorder"
         },
-        {"item": "Pay your dues", "link": "/"}
+        {
+          "item": "Pay your dues",
+          "link": "https://test.rentofurniture.com/customerpayment"
+        }
       ],
       "menuList3": [
         {
-          "item": "Help",
+          "item": "How It Works?",
+          "link": "https://test.rentofurniture.com/pages/how-it-works"
+        },
+        {
+          "item": "FAQs",
+          "link": "https://test.rentofurniture.com/pages/faq"
+        },
+        {
+          "item": "Contact us",
           "link": "https://test.rentofurniture.com/pages/contact-us"
         },
         {
@@ -194,6 +205,7 @@
     "rating": "ratings",
     "emi": "Pay only ₹1,556/month using our No-Cost EMI",
     "kyc": "KYC Documents to be submitted before Delivery",
+    "installation": "500 Installation charge for AC which is to be paid at the time of delivery",
     "add_to_cart": "Add to Cart",
     "get_peace": "Get peace of mind with",
     "opt_for": "Opt for City Shield today and get covered for accidental damages at ONLY ₹250/month!",

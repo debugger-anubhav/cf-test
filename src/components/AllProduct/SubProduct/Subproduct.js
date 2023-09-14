@@ -18,7 +18,7 @@ const Subproduct = () => {
               <p
                 className={styles.route_text}
                 onClick={() => {
-                  router.push("/");
+                  router.push("/cityfurnish");
                 }}>
                 Home
               </p>

@@ -21,7 +21,6 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
-import {setLocalStorage} from "@/constants/constant";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
@@ -102,9 +101,9 @@ export default function Home() {
   const queryClient = new QueryClient();
 
   const myElementRef = useRef();
-  if (typeof window !== "undefined") {
-    setLocalStorage("cityId", 46);
-  }
+  // if (typeof window !== "undefined") {
+  //   setLocalStorage("cityId", 46);
+  // }
 
   return (
     <QueryClientProvider client={queryClient}>
