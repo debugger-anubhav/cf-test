@@ -31,7 +31,7 @@ const AddressSection = ({setTab}) => {
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
 
-  const userId = getLocalStorage("userID");
+  const userId = getLocalStorage("user_id");
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 

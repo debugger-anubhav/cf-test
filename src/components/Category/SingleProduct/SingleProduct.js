@@ -37,6 +37,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  console.log(categoryPageReduxData, "categoryyyy");
 
   let categoryId;
   let subCategoryId;

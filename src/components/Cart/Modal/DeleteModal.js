@@ -6,6 +6,12 @@ import {Drawer} from "@mui/material";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
+import {useDispatch, useSelector} from "react-redux";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {useMutation} from "@/hooks/useMutation";
+import {useRouter} from "next/navigation";
+import {useQuery} from "@/hooks/useQuery";
+import {getLocalStorage} from "@/constants/constant";
 
 const DeleteModal = ({
   isModalOpen,
@@ -16,6 +22,11 @@ const DeleteModal = ({
   id,
 }) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
+  const [inWishList, setInWishList] = React.useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -24,6 +35,17 @@ const DeleteModal = ({
       setIsBottomShareDrawer(false);
     }
   };
+
+  React.useEffect(() => {
+    setInWishList(
+      categoryPageReduxData.savedProducts
+        .map(obj => obj.id)
+        .includes(productId),
+    );
+  }, []);
+
+  const cityId = parseInt(getLocalStorage("cityId"));
+
   React.useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
@@ -32,30 +54,78 @@ const DeleteModal = ({
     };
   }, []);
 
-  const handleDeleteItem = () => {
-    console.log("ijdnjwej");
+  const handleDeleteItem = async () => {
     updateArr(productId);
-    axios
-      .get(baseURL + endPoints.addToCart.deleteItem(id, userId))
-      .then(res => console.log(res, "res in delete items"))
-      .catch(err => console.log(err, "error"));
+    try {
+      await axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
+      closeModal();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${
+      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+    }`,
+  );
+  const data = {
+    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
+    tempUserId: getLocalStorage("tempUserID") ?? "",
+    userId: getLocalStorage("user_id") ?? "",
 
-    closeModal();
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    // userId: JSON.parse(localStorage.getItem("user_id")),
+    productId,
   };
 
-  const handleAddToWishlist = () => {
-    updateArr(productId);
-    const headers = {
-      userId,
-      productId,
-    };
-    axios
-      .post(baseURL + endPoints.addWishListProduct, headers)
-      .then(res => console.log(res?.data?.data))
-      .catch(err => console.log(err));
+  const {mutateAsync: addwhislistProduct} = useMutation(
+    "add-wishlist",
+    "POST",
+    endPoints.addWishListProduct,
+    data,
+  );
 
-    closeModal();
+  const handleWhislistCard = e => {
+    e.stopPropagation();
+    if (!getLocalStorage("user_id")) {
+      router.push("https://test.rentofurniture.com/user_sign_up");
+      return;
+    }
+
+    !inWishList &&
+      addwhislistProduct()
+        .then(res => {
+          getSavedItems()
+            .then(res => {
+              dispatch(addSaveditems(res?.data?.data));
+              const ids = res?.data?.data.map(item => {
+                return item?.id;
+              });
+              dispatch(addSaveditemID(ids));
+            })
+            .catch(err => console.log(err));
+          setInWishList(prev => !prev);
+        })
+        .catch(err => console.log(err));
+
+    handleDeleteItem();
   };
+
+  // const handleAddToWishlist = async () => {
+  //   updateArr(productId);
+  //   try {
+  //     const headers = {
+  //       userId,
+  //       productId,
+  //     };
+  //     await axios.post(baseURL + endPoints.addWishListProduct, headers);
+  //     handleDeleteItem();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -73,7 +143,14 @@ const DeleteModal = ({
           <div className={styles.btn_wrapper}>
             <button
               className={`${styles.white_btn} ${styles.btn}`}
-              onClick={handleAddToWishlist}>
+              onClick={e => {
+                try {
+                  handleWhislistCard(e);
+                  // handleDeleteItem();
+                } catch (error) {
+                  console.error(error);
+                }
+              }}>
               Save to favorites
             </button>
             <div>
@@ -99,7 +176,14 @@ const DeleteModal = ({
           <h1 className={styles.head}>Delete item? </h1>
           <div className={styles.btn_wrapper}>
             <button
-              onClick={handleAddToWishlist}
+              onClick={e => {
+                try {
+                  handleWhislistCard(e);
+                  // handleDeleteItem();
+                } catch (error) {
+                  console.error(error);
+                }
+              }}
               className={`${styles.white_btn} ${styles.btn}`}>
               Save to favorites
             </button>
