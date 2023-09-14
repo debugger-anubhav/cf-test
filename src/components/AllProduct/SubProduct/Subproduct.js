@@ -15,13 +15,14 @@ const Subproduct = () => {
         <div className={styles.container}>
           <ul className={styles.listings}>
             <li className={styles.list}>
-              <p
+              <a
+                href={"/cityfurnish"}
                 className={styles.route_text}
                 onClick={() => {
                   router.push("/cityfurnish");
                 }}>
                 Home
-              </p>
+              </a>
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>

@@ -2,6 +2,12 @@ import React, {useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import {ForwardArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
+import {
+  // categoryIconsUrl,
+  // getLocalStorage,
+  setLocalStorage,
+  // sortByText,
+} from "@/constants/constant";
 // import {productImageBaseUrl} from "@/constants/constant";
 
 const SubCategorySection = () => {
@@ -91,6 +97,7 @@ const SubCategorySection = () => {
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
   console.log(scrollContainerRef, "scrollContainerRef");
+
   const handleMouseDown = e => {
     setIsScrolling(true);
     setStartX(e.clientX);
@@ -143,13 +150,17 @@ const SubCategorySection = () => {
                   : styles.heading_container
               }>
               {/* <div className='flex w-full justify-between'> */}
-              <h1 className={styles.heading}>{item?.cat_name}</h1>
+              <h2 className={styles.heading}>{item?.cat_name}</h2>
               <div className={styles.viewButton}>
-                <p className={styles.viewAllText}>
+                <a
+                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                    item?.seourl
+                  }`}
+                  className={styles.viewAllText}>
                   {windowSize[0] > 450
                     ? `View all ${item?.cat_name}`
                     : "View all"}
-                </p>
+                </a>
                 <ForwardArrow
                   size={windowSize[0] > 768 ? 20 : 16}
                   color={"#597492"}
@@ -171,11 +182,21 @@ const SubCategorySection = () => {
               key={index.toString()}>
               {item?.sub_categories.map((subItem, index) => {
                 return (
-                  <div className={styles.card_container} key={index.toString()}>
+                  <div
+                    className={`${styles.card_container}`}
+                    key={index.toString()}
+                    onClick={() => {
+                      setLocalStorage("subCategory", subItem?.cat_name);
+                      setLocalStorage("subCategoryId", subItem?.id);
+                      setLocalStorage("categoryId", subItem?.rootID);
+                    }}>
                     <div
                       className="w-[79.2px] ms:w-[245px]"
                       key={index.toString()}>
-                      <a href={""}>
+                      <a
+                        href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                          item?.seourl
+                        }`}>
                         <img
                           src={
                             "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
