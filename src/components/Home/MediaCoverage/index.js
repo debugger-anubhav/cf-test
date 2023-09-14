@@ -68,11 +68,11 @@ const MediaCoverage = () => {
         {MediaCoverageImages?.map((imageUrl, index) => (
           <div
             key={index.toString()}
-            className="!min-w-[124px] md:!min-w-[147px] lg:!min-w-max">
+            className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max">
             <img
               src={imageUrl.img}
               alt={`Slide ${index} `}
-              className="flex items-center w-full"
+              className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
             />
           </div>
         ))}
