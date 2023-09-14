@@ -95,7 +95,10 @@ const Header = () => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        dispatch(setShowCartItem(true));
+      });
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {categoryImageBaseUrl} from "@/constants/constant";
+import {categoryIconsUrl} from "@/constants/constant";
 import {ArrowForw} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 
@@ -11,7 +11,7 @@ const EmptyCartPage = () => {
       <div>
         <img
           className={styles.img}
-          src={`${categoryImageBaseUrl + "illustration-empty-cart.svg"}`}
+          src={`${categoryIconsUrl + "empty-cart.svg"}`}
         />
       </div>
       <p className={styles.head}>Your cart is empty!</p>

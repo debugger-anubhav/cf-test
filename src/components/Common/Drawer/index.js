@@ -28,7 +28,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const handleresize = e => {
     if (e.target.innerWidth < 1024) {
-      console.log(e.target.innerWidth);
+      // console.log(e.target.innerWidth);
       setUserSettings(true);
     } else {
       setUserSettings(false);

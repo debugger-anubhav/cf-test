@@ -186,8 +186,11 @@ const ProductDetails = ({params}) => {
         .map(obj => obj.id)
         .includes(params.productId),
     );
-    console.log(inWishList, "whishlist");
   }, []);
+
+  useEffect(() => {
+    console.log(inWishList, "whishlist");
+  }, [inWishList]);
 
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
@@ -385,7 +388,12 @@ const ProductDetails = ({params}) => {
 
   return (
     <div className={styles.main_container}>
-      <ShareModal isModalOpen={isModalOpen} closeModal={closeModal} />
+      <ShareModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        params={params}
+        title={prodDetails?.[0]?.product_name}
+      />
       {showBottomBar && (
         <StickyBottomBar
           productName={prodDetails?.[0]?.product_name}
@@ -490,16 +498,15 @@ const ProductDetails = ({params}) => {
               </>
             ))}
           </div>
-
           <div
             className={`${styles.services_cards_container} ${styles.web}`}
             ref={sliderRef}>
             {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
-                icon={item.icon}
                 key={index}
                 head={item.Heading}
                 desc={item.text}
+                icon={item.icon}
               />
             ))}
           </div>
@@ -556,7 +563,10 @@ const ProductDetails = ({params}) => {
             {soldOut ? (
               <div className={styles.sold_out_div}>
                 <p className={styles.sold_out_txt}>Currently sold out</p>
-                <DeliveryTruck color={"#63798D"} className={"w-6 h-6"} />
+                <img
+                  className={styles.sold_out_icon}
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/sold-out-icon.svg"
+                />
               </div>
             ) : (
               <p className={styles.rating_txt} style={{color: "#63798D"}}>
