@@ -118,14 +118,13 @@ const RecentlyViewedProduct = ({page}) => {
           {/* {homePageReduxData?.recentProduct?.length ? ( */}
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
             {homePageReduxData?.recentProduct?.map((item, index) => {
-              // console.log(item?.image, "jjjjjjjjj")
               return (
                 <>
                   {(item?.image || item?.price) && (
                     <div
                       key={index.toString()}
                       onClick={e => handleCardClick(e, item)}
-                      className={`${styles.child} ${
+                      className={`${styles.child ?? ""}  ${
                         index ===
                           homePageReduxData?.recentProduct?.length - 1 &&
                         "mr-[16px]"
