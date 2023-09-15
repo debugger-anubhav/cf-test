@@ -183,11 +183,10 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(categoryPageReduxData, "category");
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
-        .includes(params.productId),
+        .includes(parseInt(params.productId)),
     );
   }, []);
 
