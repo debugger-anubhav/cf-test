@@ -24,6 +24,7 @@ const CategoryCard = ({
   soldOut,
   seourl,
   subProduct,
+  label,
 }) => {
   const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
@@ -180,19 +181,25 @@ const CategoryCard = ({
             alt="thumbnail image"
             className={styles.img}
           />
-          {soldOut && (
-            <div className={styles.soldout_tag}>
+          {soldOut ? (
+            <div className={`${styles.soldout_div} ${styles.label_tag}`}>
               <RiSparklingFill size={16} color={"#ffffff"} />
               <p className={styles.tag_text}>SOLD OUT</p>
             </div>
+          ) : label === "Trending" ? (
+            <div className={`${styles.trending_div} ${styles.label_tag}`}>
+              <RiSparklingFill size={16} color={"#ffffff"} />
+              <p className={styles.tag_text}>POPULAR</p>
+            </div>
+          ) : label === "New Launch" ? (
+            <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+              <RiSparklingFill size={16} color={"#ffffff"} />
+              <p className={styles.tag_text}>NEW LAUNCH</p>
+            </div>
+          ) : (
+            <div className="hidden"></div>
           )}
         </div>
-
-        {/* {soldOut && (
-        <div className={styles.soldout_tag}>
-          <p className={styles.tag_text}>SOLD OUT</p>
-        </div>
-      )} */}
 
         <div className={styles.desc_div}>
           <h3 className={styles.desc} style={{lineHeight: "normal"}}>
