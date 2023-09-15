@@ -19,7 +19,6 @@ import {useParams, useRouter} from "next/navigation";
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const [userSettings, setUserSettings] = React.useState(false);
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -30,12 +29,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   const params = useParams();
   const router = useRouter();
   const handleresize = e => {
-    if (e.target.innerWidth < 1024) {
-      // console.log(e.target.innerWidth);
-      setUserSettings(true);
-    } else {
-      setUserSettings(false);
-    }
     if (e.target.innerWidth < 640) {
       // if (mobileCityDrawer) return
       setMobileCityDrawer(true);
@@ -170,9 +163,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     <a
                       key={index.toString()}
                       href={
-                        index === 3 &&
-                        userSettings &&
-                        getLocalStorage("user_id") !== null
+                        index === 3 && getLocalStorage("user_id") !== null
                           ? "/usersettings"
                           : item.link
                       }>
