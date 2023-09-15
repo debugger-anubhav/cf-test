@@ -1,5 +1,5 @@
 .main_container {
-  @apply px-4 pb-4;
+  @apply px-4 pb-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] 4xl:px-[160px];
 }
 .main_text {
   @apply font-medium tracking-[-0.28px] text-45454A;

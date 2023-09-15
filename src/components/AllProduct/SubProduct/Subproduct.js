@@ -4,8 +4,14 @@ import SubCategorySection from "../section/SubCategorySection";
 import {ForwardArrow} from "@/assets/icon";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import Footer from "@/components/Common/Footer";
-import CategoryContent from "@/components/Category/categoryContent/categoryContent";
+// import CategoryContent from "@/components/Category/categoryContent/categoryContent";
 import {useRouter} from "next/navigation";
+// import TextContent from "@/components/Common/TextContent";
+import loadable from "@loadable/component";
+import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+  fallback: <ContentSkeleton />,
+});
 
 const Subproduct = () => {
   const router = useRouter();
@@ -35,7 +41,8 @@ const Subproduct = () => {
         </div>
       </div>
       <HasselFreeServicesCards />
-      <CategoryContent />
+      <TextContent params={"home-page"} />
+      {/* <CategoryContent /> */}
       <Footer />
     </>
   );
