@@ -13,6 +13,7 @@ import {
   getCartItems,
   selectedCityName,
   setShowCartItem,
+  addCategory,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -59,6 +60,7 @@ const Header = () => {
       document.body.style.overflow = "auto";
     }
   }, [openSearchbar]);
+
   useEffect(() => {
     const cityId = getLocalStorage("cityId");
     getCityList()
@@ -82,6 +84,19 @@ const Header = () => {
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
+    console.log(!homePageReduxData?.category.length);
+    if (!homePageReduxData?.category.length) {
+      axios
+        .get(baseURL + endPoints.category)
+        .then(res => {
+          dispatch(addCategory(res?.data?.data));
+          console.log("home");
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(addCategory([]));
+        });
+    }
   }, []);
 
   const cityId = getLocalStorage("cityId");
