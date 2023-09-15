@@ -24,7 +24,7 @@ const Footer = ({params}) => {
     {
       head: "Categories",
       points: [
-        {text: "All", link: "https://cityfurnish.com/bangalore/rent"},
+        {text: "All", link: `${cityName}/rent`},
         {text: "Home Furniture", link: `/${cityName}/home-furniture-rental`},
         {text: "Appliances", link: `/${cityName}/home-appliances-rental`},
         {text: "Workstations", link: `/${cityName}/workstations`},
