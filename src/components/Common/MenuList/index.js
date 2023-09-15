@@ -51,10 +51,10 @@ const MenuList = () => {
         </div>
       )}
       <div className={styles.menu_list_right}>
-        <a href="https://cityfurnish.com/pages/offers">
+        <a href="https://test.rentofurniture.com/pages/offers">
           <p className={styles.item_wrap}>Offers</p>
         </a>
-        <a href="https://cityfurnish.com/pages/bulkorder">
+        <a href="https://test.rentofurniture.com/pages/bulkorder">
           <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
             CF for business
           </p>

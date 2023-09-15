@@ -133,7 +133,7 @@ const TrendingProducts = ({params}) => {
         {data?.map((item, index) => (
           <div
             key={index.toString()}
-            className={`${styles.child} ${
+            className={`${styles.child ?? ""} ${
               index === data?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}
             onClick={e => handleCardClick(e, item)}>

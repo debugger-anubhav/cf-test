@@ -94,7 +94,7 @@ const FrequentlyAskedQuestions = ({params}) => {
             );
           })}
         </div>
-        <Link href="https://cityfurnish.com/pages/faq">
+        <Link href="https://test.rentofurniture.com/pages/faq">
           <div className={styles.btn}>
             <p className={styles.btn_txt}>{str.btn_txt}</p>
             <ForwardArrow className={styles.forword_icon} />

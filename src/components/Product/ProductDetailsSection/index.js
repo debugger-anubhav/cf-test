@@ -38,6 +38,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
 import {LiaMoneyBillWaveSolid} from "react-icons/lia";
+import {Skeleton} from "@mui/material";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -61,11 +62,16 @@ const ProductDetails = ({params}) => {
   const carouselData = prodDetails?.[0]?.image?.split(",");
   const lastCaraouselElement = carouselData?.[carouselData?.length - 1];
   if (!lastCaraouselElement) carouselData?.pop();
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 0, value: ""});
-  const [inWishList, setInWishList] = React.useState(false);
+  const [inWishList, setInWishList] = React.useState(
+    categoryPageReduxData.savedProducts
+      .map(obj => obj.id)
+      .includes(parseInt(params.productId)),
+  );
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -82,8 +88,6 @@ const ProductDetails = ({params}) => {
   const toggleRatingDrawer = () => {
     setOpen(!open);
   };
-
-  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   // bottombar visibility conditiionally
   useEffect(() => {
@@ -182,11 +186,11 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(categoryPageReduxData, "category");
+    console.log(categoryPageReduxData.savedProducts, params.productId);
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
-        .includes(params.productId),
+        .includes(parseInt(params.productId)),
     );
   }, []);
 
@@ -208,7 +212,9 @@ const ProductDetails = ({params}) => {
       return;
     }
     // dispatch(addRemoveWhishListitems(!inWishList));
-    !inWishList
+    !categoryPageReduxData.savedProducts
+      .map(obj => obj.id)
+      .includes(parseInt(params.productId))
       ? addwhislistProduct()
           .then(res => {
             getSavedItems()
@@ -526,7 +532,13 @@ const ProductDetails = ({params}) => {
                 className={
                   "w-[30px] h-[30px] xl:w-[40px] xl:h-[40px] cursor-pointer"
                 }
-                color={inWishList ? "#D96060" : "#C0C0C6"}
+                color={
+                  categoryPageReduxData.savedProducts
+                    .map(obj => obj.id)
+                    .includes(parseInt(params.productId))
+                    ? "#D96060"
+                    : "#C0C0C6"
+                }
                 // onClick={() => setInWishList(!inWishList)}
                 onClick={e => {
                   e.preventDefault();
@@ -771,3 +783,52 @@ const ProductDetails = ({params}) => {
 };
 
 export default ProductDetails;
+
+export const SkeletonForProductDetail = () => {
+  return (
+    <div className={styles.skeleton_wrapper}>
+      <div className={styles.container_skeleton}>
+        <div className={styles.left_part}>
+          <Skeleton variant="rectangular" className="w-full" />
+        </div>
+        <div className={styles.right_part}>
+          <div className="h-6 w-full">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-3 w-1/2 my-4">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-3 w-4/6 my-4">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="my-4 flex">
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+            <Skeleton
+              variant="circular"
+              width={50}
+              height={50}
+              className="mr-4"
+            />
+          </div>
+          <div className="h-3 w-1/5 my-2">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+          <div className="h-8 w-4/5 my-2">
+            <Skeleton variant="text" className="w-full" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
