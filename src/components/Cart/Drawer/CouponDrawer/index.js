@@ -32,11 +32,8 @@ const CouponDrawer = ({
     return idsArr.push(item.fc_product.id.toString());
   });
 
-  useEffect(() => {
-    console.log(open);
-  }, [open]);
-
   const handleApplyClick = async couponCode => {
+    setShowError(false);
     try {
       const headers = {
         productIds: idsArr,
@@ -58,7 +55,7 @@ const CouponDrawer = ({
       } else {
         setErrorMsg(res?.data?.data?.msg);
         setShowError(true);
-        applyCouponCode("");
+        // applyCouponCode("");
       }
     } catch (err) {
       console.log(err);
@@ -118,13 +115,16 @@ const CouponDrawer = ({
           <input
             className={styles.input}
             placeholder="Enter Coupon code"
-            onChange={e => setInput(e.target.value)}
+            onChange={e => {
+              setInput(e.target.value);
+              input !== "" && handleApplyClick(input);
+            }}
           />
           <p
             className={styles.apply_text}
             onClick={() => {
-              input !== "" && applyCouponCode(input);
-              toggleDrawer();
+              input !== "" && handleApplyClick(input);
+              // toggleDrawer();
             }}>
             Apply
           </p>
