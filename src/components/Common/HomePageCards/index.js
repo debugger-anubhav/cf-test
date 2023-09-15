@@ -161,9 +161,9 @@ const Card = ({
       }}>
       <div
         onClick={e => handleProductClick(e, productID, seourl)}
-        className={`${styles.wrapper} ${
-          hoverCard && styles.hover_wrapper
-        } ${productWidth} 
+        className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
+          productWidth ?? ""
+        } 
       `}
         onMouseOver={() => {
           isHover && setHoverCard(true);
