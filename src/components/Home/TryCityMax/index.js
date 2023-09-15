@@ -65,7 +65,9 @@ const TryCityMax = () => {
           </p>
           <button
             className={styles.check_button}
-            onClick={() => router.push("https://cityfurnish.com/citymax")}>
+            onClick={() =>
+              router.push("https://test.rentofurniture.com/citymax")
+            }>
             <p className={styles.check_button_paragraph}>Check our plans</p>
             <ForwardArrow
               size={20}
