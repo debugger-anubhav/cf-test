@@ -45,7 +45,7 @@
 }
 
 .header_favorite {
-  @apply flex lg:mr-8 mobile:mr-4 mr-1 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
+  @apply flex lg:mr-8 mobile:mr-4 mr-3 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 
 .header_shopping_card {
@@ -53,7 +53,7 @@
 }
 
 .cart_badge {
-  @apply absolute top-[-6px] left-4 w-5 h-5 rounded-[50%] bg-[#3e688e] text-12 text-fff leading-5 text-center;
+  @apply absolute top-[-6px] mobile:left-4 left-2 mobile:w-5 mobile:h-5 w-4 h-4 rounded-[50%] bg-[#3e688e] mobile:text-12 text-10 text-fff mobile:leading-5 text-center;
 }
 
 .header_profile_icon {
@@ -122,17 +122,7 @@
   @apply relative;
 }
 .header_favorite_count {
-  position: absolute;
-  top: -6px;
-  left: 16px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: #3e688e;
-  font-size: 12px;
-  color: #ffffff;
-  line-height: 20px;
-  text-align: center;
+  @apply mobile:w-5 w-4 h-4 mobile:h-5 absolute top-[-6px] mobile:left-4 left-2 rounded-[50%] bg-primary mobile:text-12 text-10 text-white leading-5 text-center;
 }
 .category_card_in_searchbox img {
   @apply !h-auto;
