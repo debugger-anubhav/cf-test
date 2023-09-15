@@ -160,7 +160,7 @@ const AddressSection = ({setTab}) => {
       <div className={styles.left_div}>
         <div className={styles.head_div} onClick={() => setTab()}>
           <BackIcon size={19} />
-          <h1 className={styles.head}>Go back to checkout</h1>
+          <p className={styles.head}>Go back to checkout</p>
         </div>
 
         {addressArray.length > 0 && (
@@ -206,7 +206,7 @@ const AddressSection = ({setTab}) => {
         )}
 
         <div className={styles.new_address_wrapper}>
-          <h1 className={styles.new_add_head}>Add new address</h1>
+          <h2 className={styles.new_add_head}>Add new address</h2>
 
           <Formik
             initialValues={{
