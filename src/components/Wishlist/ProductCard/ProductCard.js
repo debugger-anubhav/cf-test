@@ -163,7 +163,7 @@ const ProductCard = ({
                 e.stopPropagation();
                 !soldOut
                   ? await notifyAvailibility()
-                  : router.push("https://cityfurnish.com/cart");
+                  : router.push("https://test.rentofurniture.com/cart");
               }}>
               {!soldOut ? "Notify Me" : "  Move to Cart"}
             </button>

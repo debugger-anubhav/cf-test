@@ -5,16 +5,22 @@ import cookie from "react-cookies";
 
 export default function ProfileDropDown({setShowProfileDropdown}) {
   const items = [
-    {item: "My Orders", link: "https://cityfurnish.com/purchases"},
+    {item: "My Orders", link: "https://test.rentofurniture.com/purchases"},
     {
       item: "My Service Requests",
-      link: "https://cityfurnish.com/service-requests",
+      link: "https://test.rentofurniture.com/service-requests",
     },
-    {item: "My Payments", link: "https://cityfurnish.com/payments"},
-    {item: "CF Coins", link: "https://cityfurnish.com/wallet"},
-    {item: "My Invoices", link: "https://cityfurnish.com/invoices"},
-    {item: "Documentation", link: "https://cityfurnish.com/documentation"},
-    {item: "Profile Settings", link: "https://cityfurnish.com/usersettings"},
+    {item: "My Payments", link: "https://test.rentofurniture.com/payments"},
+    {item: "CF Coins", link: "https://test.rentofurniture.com/wallet"},
+    {item: "My Invoices", link: "https://test.rentofurniture.com/invoices"},
+    {
+      item: "Documentation",
+      link: "https://test.rentofurniture.com/documentation",
+    },
+    {
+      item: "Profile Settings",
+      link: "https://test.rentofurniture.com/usersettings",
+    },
     {item: "Logout", link: "link"},
   ];
   const router = useRouter();
