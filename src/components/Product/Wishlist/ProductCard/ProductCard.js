@@ -117,7 +117,7 @@ const ProductCard = ({
       <div>
         <button
           className={styles.move_to_cart_btn}
-          onClick={() => router.push("https://cityfurnish.com/cart")}>
+          onClick={() => router.push("/cart")}>
           Move to Cart
         </button>
       </div>

@@ -91,7 +91,7 @@ const LimetedPreiodDiscount = () => {
           <div
             key={index.toString()}
             onClick={e => handleCardClick(e, item)}
-            className={`${styles.child} ${
+            className={`${styles.child ?? ""}  ${
               index === getLimitedPreiodData?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}>
             <Card

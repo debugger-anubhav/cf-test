@@ -89,7 +89,7 @@ const PreDesignCombos = () => {
             {homePageReduxData?.designComboProduct?.map((item, index) => (
               <div
                 key={index.toString()}
-                className={`${styles.child} ${
+                className={`${styles.child ?? ""}  ${
                   index === homePageReduxData?.designComboProduct?.length - 1 &&
                   "mr-[16px]"
                 } ${isDumy && "pointer-events-none"}`}

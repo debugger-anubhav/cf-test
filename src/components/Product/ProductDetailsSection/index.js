@@ -62,11 +62,16 @@ const ProductDetails = ({params}) => {
   const carouselData = prodDetails?.[0]?.image?.split(",");
   const lastCaraouselElement = carouselData?.[carouselData?.length - 1];
   if (!lastCaraouselElement) carouselData?.pop();
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 0, value: ""});
-  const [inWishList, setInWishList] = React.useState(false);
+  const [inWishList, setInWishList] = React.useState(
+    categoryPageReduxData.savedProducts
+      .map(obj => obj.id)
+      .includes(parseInt(params.productId)),
+  );
   const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -83,8 +88,6 @@ const ProductDetails = ({params}) => {
   const toggleRatingDrawer = () => {
     setOpen(!open);
   };
-
-  const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   // bottombar visibility conditiionally
   useEffect(() => {
@@ -183,6 +186,7 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
+    console.log(categoryPageReduxData.savedProducts, params.productId);
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
@@ -208,7 +212,9 @@ const ProductDetails = ({params}) => {
       return;
     }
     // dispatch(addRemoveWhishListitems(!inWishList));
-    !inWishList
+    !categoryPageReduxData.savedProducts
+      .map(obj => obj.id)
+      .includes(parseInt(params.productId))
       ? addwhislistProduct()
           .then(res => {
             getSavedItems()
@@ -526,7 +532,13 @@ const ProductDetails = ({params}) => {
                 className={
                   "w-[30px] h-[30px] xl:w-[40px] xl:h-[40px] cursor-pointer"
                 }
-                color={inWishList ? "#D96060" : "#C0C0C6"}
+                color={
+                  categoryPageReduxData.savedProducts
+                    .map(obj => obj.id)
+                    .includes(parseInt(params.productId))
+                    ? "#D96060"
+                    : "#C0C0C6"
+                }
                 // onClick={() => setInWishList(!inWishList)}
                 onClick={e => {
                   e.preventDefault();
