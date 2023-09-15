@@ -151,7 +151,7 @@ const ProductDetails = ({params}) => {
     const data = {
       // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
       tempUserId: getLocalStorage("tempUserID") ?? "",
-      userId: getLocalStorage("userId") ?? "",
+      userId: getLocalStorage("user_id") ?? "",
 
       // userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
       productId: params?.productId,
@@ -306,7 +306,7 @@ const ProductDetails = ({params}) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = getLocalStorage("userID");
+    const userId = getLocalStorage("user_id");
     const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
 
