@@ -450,7 +450,7 @@ export const FooterItems = [
         {
           head: "Categories",
           points: [
-            {text: "All", link: "https://cityfurnish.com/bangalore/rent"},
+            {text: "All", link: "/rent"},
             {text: "Categories", link: `/home-furniture-rental`},
             {text: "Home Furniture", link: "/"},
             {text: "Appliances", link: "/"},
@@ -462,15 +462,21 @@ export const FooterItems = [
         {
           head: "Cityfurnish",
           points: [
-            {text: "About US", link: "https://cityfurnish.com/pages/about"},
+            {
+              text: "About US",
+              link: "https://test.rentofurniture.com/pages/about",
+            },
             {
               text: "Refer a Friend",
-              link: "https://cityfurnish.com/pages/refer-a-friend",
+              link: "https://test.rentofurniture.com/referral",
             },
-            {text: "Career", link: "https://cityfurnish.com/pages/careers"},
+            {
+              text: "Career",
+              link: "https://test.rentofurniture.com/pages/careers",
+            },
             {
               text: "Contact US",
-              link: "https://cityfurnish.com/pages/contact-us",
+              link: "https://test.rentofurniture.com/pages/contact-us",
             },
           ],
         },
@@ -478,13 +484,16 @@ export const FooterItems = [
         {
           head: "Information",
           points: [
-            {text: "Blog", link: "https://cityfurnish.com/blog/"},
-            {text: "FAQ", link: "https://cityfurnish.com/pages/faq"},
+            {text: "Blog", link: "https://test.rentofurniture.com/blog/"},
+            {text: "FAQ", link: "https://test.rentofurniture.com/pages/faq"},
             {
               text: "Sample Rental Agreement",
-              link: "https://cityfurnish.com/pages/rentalagreement",
+              link: "https://test.rentofurniture.com/pages/rentalagreement",
             },
-            {text: "Offers", link: "/"},
+            {
+              text: "Offers",
+              link: "https://test.rentofurniture.com/pages/offers",
+            },
           ],
         },
 
@@ -493,11 +502,11 @@ export const FooterItems = [
           points: [
             {
               text: "Privacy Policy",
-              link: "https://cityfurnish.com/pages/privacy-policy",
+              link: "https://test.rentofurniture.com/pages/privacy-policy",
             },
             {
               text: "Terms & Conditions",
-              link: "https://cityfurnish.com/pages/terms-of-use",
+              link: "https://test.rentofurniture.com/pages/terms-of-use",
             },
           ],
         },
