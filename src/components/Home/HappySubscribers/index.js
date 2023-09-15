@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 // import {HappySubscriber} from "@/constants/constant";
@@ -14,8 +14,32 @@ import {baseURL} from "@/network/axios";
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
+  const [isDumy] = React.useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const containerRef = useRef(null);
+  const handleMouseDown = e => {
+    setIsDragging(true);
+    setStartX(e.pageX - containerRef.current.scrollLeft);
+    setScrollLeft(containerRef.current.scrollLeft);
+  };
 
+  const handleMouseMove = e => {
+    if (!isDragging) return;
+
+    const x = e.pageX - containerRef.current.getBoundingClientRect().left;
+    const distance = x - startX;
+    containerRef.current.scrollLeft = scrollLeft - distance;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDragging(false);
+  };
   const getVideosForProductPage = () => {
     axios
       .get(baseURL + endPoints.productPage.happySubscribers(params.productId))
@@ -91,79 +115,6 @@ const HappySubscribers = ({page, params}) => {
 
   const str = string.landing_page.HappySubscriber;
 
-  const sliderRef = useRef(null);
-
-  // useEffect(() => {
-  //   const slider = sliderRef.current;
-  //   if (!slider) return;
-
-  //   let mouseDown = false;
-  //   let startX, scrollLeft;
-
-  //   const startDragging = function (e) {
-  //     mouseDown = true;
-  //     startX = e.pageX - slider.offsetLeft;
-  //     scrollLeft = slider.scrollLeft;
-  //   };
-  //   const stopDragging = function () {
-  //     mouseDown = false;
-  //   };
-
-  //   slider.addEventListener("mousemove", e => {
-  //     e.preventDefault();
-  //     if (!mouseDown) return;
-  //     const x = e.pageX - slider.offsetLeft;
-  //     const scroll = x - startX;
-  //     slider.scrollLeft = scrollLeft - scroll;
-  //   });
-  //   slider.addEventListener("mousedown", startDragging, false);
-  //   slider.addEventListener("mouseup", stopDragging, false);
-  //   slider.addEventListener("mouseleave", stopDragging, false);
-  // }, []);
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    let mouseDown = false;
-    let startX, scrollLeft;
-
-    const startDragging = function (e) {
-      mouseDown = true;
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    };
-    const stopDragging = function () {
-      setIsDumy(false);
-      mouseDown = false;
-    };
-
-    const toggleIsdragging = () => {
-      if (mouseDown && !isDumy) setIsDumy(true);
-    };
-    slider.addEventListener("mousemove", e => {
-      e.preventDefault();
-      if (!mouseDown) return;
-      const x = e.pageX - slider.offsetLeft;
-      const scroll = x - startX;
-      slider.scrollLeft = scrollLeft - scroll;
-    });
-    slider.addEventListener("mousedown", startDragging, false);
-    slider.addEventListener("mouseup", stopDragging, false);
-    slider.addEventListener("mouseleave", stopDragging, false);
-    slider.addEventListener("mousemove", toggleIsdragging);
-
-    return () => {
-      slider.removeEventListener("mousedown", startDragging);
-      slider.removeEventListener("mouseup", stopDragging);
-      slider.removeEventListener("mouseleave", stopDragging);
-      slider.removeEventListener("mousemove", toggleIsdragging);
-    };
-  }, []);
-
-  // const HappySubscriberVideosArray =
-  //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
-
   if (data) {
     return (
       <div
@@ -174,10 +125,16 @@ const HappySubscribers = ({page, params}) => {
         <h2 className={styles.head}>{str.head}</h2>
         <p className={styles.desc}>{str.desc}</p>
 
-        <div className={styles.cards_wrapper} ref={sliderRef}>
+        <div
+          className={styles.cards_wrapper}
+          ref={containerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}>
           {data?.map((item, index) => (
             <div
-              className={`${styles.card_div} ${
+              className={`${styles.card_div}  ${
                 index === data?.length - 1 && "mr-[16px]"
               } ${isDumy && "pointer-events-none"}`}
               key={index.toString()}>
