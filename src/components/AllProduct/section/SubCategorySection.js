@@ -191,19 +191,27 @@ const SubCategorySection = () => {
                       setLocalStorage("categoryId", subItem?.rootID);
                     }}>
                     <div
-                      className="w-[79.2px] ms:w-[245px]"
+                      className={`${styles.card_div}  w-[79.2px] ms:w-[245px]`}
                       key={index.toString()}>
                       <a
                         href={`/${homePageReduxData?.cityName.toLowerCase()}/${
                           item?.seourl
-                        }`}>
-                        <img
-                          src={
-                            "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
-                            subItem?.category_web_image
-                          }
-                          className={`${styles.images}!w-full rounded-[6.4px] ms:rounded-none select-none`}
-                        />
+                        }`}
+                        className={styles.images_anchor}>
+                        <div className="relative overflow-none">
+                          <img
+                            src={
+                              "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                              subItem?.category_web_image
+                            }
+                            className={`${styles.images} !w-full rounded-[6.4px] ms:rounded-none select-none`}
+                            //   onMouseDown={handleMouseDown}
+                            //  onMouseMove={handleMouseMove}
+                            //  onMouseUp={handleMouseUp}
+                            //  onMouseLeave={handleMouseUp}
+                          />
+                          <div className="absolute pointer-events-none top-0 left-0 w-full h-full bg-transparent"></div>
+                        </div>
                       </a>
                     </div>
                     <h3 className={styles.card_text}>{subItem?.cat_name}</h3>

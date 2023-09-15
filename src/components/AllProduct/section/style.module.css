@@ -19,9 +19,22 @@
 .card_text {
   @apply text-sm ms:text-xl w-full font-medium font-Poppins tracking-desc ms:tracking-0.4 text-[#45454A] items-stretch mt-1 ms:mt-3 whitespace-normal;
   align-self: stretch;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  -webkit-user-drag: none;
 }
 .card_container {
   @apply !w-[79.2px] ms:!w-[245px]  whitespace-nowrap;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
 .category_section_container {
   @apply flex w-full overflow-x-scroll gap-[18.8px] ms:gap-6;
@@ -37,4 +50,27 @@
   -moz-box-shadow: none;
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.images_anchor {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.card_div {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
 }
