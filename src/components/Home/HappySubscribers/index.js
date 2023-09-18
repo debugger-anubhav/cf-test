@@ -115,7 +115,7 @@ const HappySubscribers = ({page, params}) => {
 
   const str = string.landing_page.HappySubscriber;
 
-  if (data) {
+  if (data?.length > 0) {
     return (
       <div
         className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
