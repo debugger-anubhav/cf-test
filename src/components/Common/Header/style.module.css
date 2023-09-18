@@ -111,7 +111,9 @@
 .header_favorite_container {
   @apply relative;
 }
-
+.header_favorite_count {
+  @apply mobile:w-5 w-4 h-4 mobile:h-5 absolute top-[-6px] mobile:left-4 left-2 rounded-[50%] bg-primary mobile:text-12 text-10 text-white leading-5 text-center;
+}
 .category_card_in_searchbox img {
   @apply !h-auto;
 }
