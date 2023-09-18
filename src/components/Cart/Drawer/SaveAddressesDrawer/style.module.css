@@ -8,7 +8,7 @@
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
 }
 .card_wrapper {
-  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-4 md:mt-8 cursor-pointer;
+  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-4 md:mt-8;
 }
 .circle {
   @apply border-2 border-[#5774AC] flex justify-center items-center rounded-full w-[14px] h-[14px];

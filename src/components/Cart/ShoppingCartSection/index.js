@@ -56,10 +56,12 @@ const ShoppingCartSection = ({setTab}) => {
   const cityId = getLocalStorage("cityId");
 
   // console.log(userIdToUse, "user id to use");
+  console.log(arr, "arrrr");
 
-  const totalAmount = cartItems.reduce((accumulator, item) => {
-    return accumulator + item?.fc_product?.fc_product_sale_price?.sale_price;
+  const totalAmount = arr.reduce((accumulator, item) => {
+    return accumulator + parseInt(item?.price);
   }, 0);
+  console.log(totalAmount, "totallll");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
@@ -157,13 +159,19 @@ const ShoppingCartSection = ({setTab}) => {
     dispatch(getCouponCodeUsed(value));
   };
 
-  const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
+  const handleUpdateQuantity = async (
+    itemid,
+    productid,
+    newQuantity,
+    itemIndex,
+  ) => {
+    let updatedItems;
     if (newQuantity < 1) {
       setProductId(productid);
       setItemId(itemid);
       openModal();
     } else {
-      const updatedItems = arr.map(item => {
+      updatedItems = arr.map(item => {
         if (item.id === itemid) {
           return {...item, quantity: newQuantity};
         }
@@ -172,15 +180,17 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
+    console.log(arr);
 
     const headers = {
       userId: parseInt(userIdToUse),
-      quantity: arr[itemIndex].quantity,
+      quantity: updatedItems[itemIndex].quantity,
       productId: productid,
     };
+    console.log(headers.quantity, "qaunt in gheader");
     axios
       .post(baseURL + endPoints.addToCart.updateQuantity, headers)
-      .then(res => console.log(res))
+      .then(res => console.log(res, "res in updated qunatity"))
       .catch(err => console.log(err, "error in update qunatity"));
   };
 
@@ -298,10 +308,12 @@ const ShoppingCartSection = ({setTab}) => {
                               {item?.price}
                             </p>
 
-                            <p className={styles.originalPrice}>
-                              <span className={styles.rupeeIcon}>₹</span>
-                              {item?.attr_price}
-                            </p>
+                            {item?.attr_price > item?.price && (
+                              <p className={styles.originalPrice}>
+                                <span className={styles.rupeeIcon}>₹</span>
+                                {item?.attr_price}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>

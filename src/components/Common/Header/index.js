@@ -184,11 +184,17 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text_main_header}
-              onClick={() => router.push("/cityfurnish")}>
-              cityfurnish
-            </p>
+            <a
+              href={"/cityfurnish"}
+              onClick={e => {
+                e.preventDefault();
+              }}>
+              <p
+                className={styles.logo_text_main_header}
+                onClick={() => router.push("/cityfurnish")}>
+                cityfurnish
+              </p>
+            </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
@@ -234,7 +240,7 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex">
+            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
               <span className={styles.header_favorite_container}>
                 <Image
                   src={Icons.Favorite}
@@ -252,9 +258,7 @@ const Header = () => {
                   }}
                 />
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.header_favorite_count}>
-                    {wishListCount}
-                  </span>
+                  <span className={styles.cart_badge}>{wishListCount}</span>
                 ) : (
                   <></>
                 )}
@@ -268,12 +272,18 @@ const Header = () => {
                   className={styles.header_shopping_card}
                   onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
-                />
+                <a
+                  href="/cart"
+                  onClick={e => {
+                    e.preventDefault();
+                  }}>
+                  <Image
+                    src={Icons.shoppingCard}
+                    alt="shopping-card-icon"
+                    className={styles.header_shopping_card}
+                    onClick={() => router.push("/cart")}
+                  />
+                </a>
                 {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
                 )}
