@@ -141,25 +141,29 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       onMouseLeave={() => {
         setAnchorEl("");
       }}>
-      <button
-        onClick={e => handleCategory(e)}
-        className="flex items-center whitespace-nowrap cursor-pointer"
-        onMouseEnter={e => {
-          setAnchorEl(e.currentTarget);
-          hoverRef.current = item;
-        }}>
-        {item}
-        <DownArrow
-          size={20}
-          color={"#45454A"}
-          // onMouseLeave={() => {
-          //   setAnchorEl(null);
-          //   hoverRef.current = "";
-          // }}
-          className={open ? styles.arrow_up : styles.arrow_down}
-        />
-      </button>
-
+      <a
+        href={`/${homePageReduxData?.cityName
+          .replace(/\//g, "-")
+          .toLowerCase()}/${data?.seourl}`}>
+        <button
+          onClick={e => handleCategory(e)}
+          className="flex items-center whitespace-nowrap cursor-pointer"
+          onMouseEnter={e => {
+            setAnchorEl(e.currentTarget);
+            hoverRef.current = item;
+          }}>
+          {item}
+          <DownArrow
+            size={20}
+            color={"#45454A"}
+            // onMouseLeave={() => {
+            //   setAnchorEl(null);
+            //   hoverRef.current = "";
+            // }}
+            className={open ? styles.arrow_up : styles.arrow_down}
+          />
+        </button>
+      </a>
       <Popper
         id={id}
         open={open}

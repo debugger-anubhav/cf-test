@@ -350,33 +350,43 @@ const SubHeader = ({params}) => {
                     getLocalStorage("subCategory")?.replace(/"/g, "") ===
                     subItem?.cat_name;
                   return (
-                    <div
-                      className={
-                        selectedProduct
-                          ? styles.category_container_box_active
-                          : styles.category_container_box
-                      }
-                      onClick={e => handleSelectedProduct(e, subItem, item)}
+                    <a
+                      href={`/${homePageReduxData?.cityName.toLowerCase()}/${
+                        item?.seourl
+                      }`}
+                      onClick={e => {
+                        e.preventDefault();
+                        setLocalStorage("subCategory", subItem?.cat_name);
+                        setLocalStorage("subCategoryId", subItem?.id);
+                      }}
                       key={i.toString()}>
-                      {selectedProduct ? (
-                        <div>
-                          <img
-                            src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
-                            className={styles.selected_icon}
-                          />
-                        </div>
-                      ) : (
-                        <div>
-                          <img
-                            src={`${categoryIconsUrl}${subItem?.icon_image}`}
-                            className={styles.selected_icon}
-                          />
-                        </div>
-                      )}
-                      <p className={styles.category_container}>
-                        {subItem?.cat_name}
-                      </p>
-                    </div>
+                      <div
+                        className={
+                          selectedProduct
+                            ? styles.category_container_box_active
+                            : styles.category_container_box
+                        }
+                        onClick={e => handleSelectedProduct(e, subItem, item)}>
+                        {selectedProduct ? (
+                          <div>
+                            <img
+                              src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
+                              className={styles.selected_icon}
+                            />
+                          </div>
+                        ) : (
+                          <div>
+                            <img
+                              src={`${categoryIconsUrl}${subItem?.icon_image}`}
+                              className={styles.selected_icon}
+                            />
+                          </div>
+                        )}
+                        <p className={styles.category_container}>
+                          {subItem?.cat_name}
+                        </p>
+                      </div>
+                    </a>
                   );
                 });
               } else {

@@ -13,6 +13,9 @@
 }
 .thumbnail {
   @apply min-w-full w-full rounded-lg;
+  /* pointer-events: none; */
+  -webkit-user-drag: none;
+  /* user-select: none; */
 }
 .desc_div {
   @apply flex gap-2 3xl:justify-between mt-[14px];
@@ -49,4 +52,9 @@
 }
 .banner_img {
   @apply w-full h-full cursor-pointer;
+}
+
+.anchor_card {
+  -webkit-user-drag: none;
+  /* pointer-events: none; */
 }

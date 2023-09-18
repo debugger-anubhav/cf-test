@@ -92,11 +92,9 @@ const SubCategorySection = () => {
   //     document.addEventListener('mouseup', handleMouseUp);
   //   }
   // };
-
   const [isScrolling, setIsScrolling] = useState(false);
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
-  console.log(scrollContainerRef, "scrollContainerRef");
 
   const handleMouseDown = e => {
     setIsScrolling(true);
@@ -107,8 +105,6 @@ const SubCategorySection = () => {
     if (!isScrolling) return;
 
     const deltaX = e.clientX - startX;
-
-    // Calculate the new scrollLeft position
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollLeft -= deltaX;
     }

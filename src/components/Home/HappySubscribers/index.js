@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 // import {HappySubscriber} from "@/constants/constant";
@@ -14,7 +14,7 @@ import {baseURL} from "@/network/axios";
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
+  // const [isDumy, setIsDumy] = React.useState(false);
 
   const getVideosForProductPage = () => {
     axios
@@ -91,7 +91,7 @@ const HappySubscribers = ({page, params}) => {
 
   const str = string.landing_page.HappySubscriber;
 
-  const sliderRef = useRef(null);
+  // const sliderRef = useRef(null);
 
   // useEffect(() => {
   //   const slider = sliderRef.current;
@@ -121,46 +121,69 @@ const HappySubscribers = ({page, params}) => {
   //   slider.addEventListener("mouseleave", stopDragging, false);
   // }, []);
 
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
+  // useEffect(() => {
+  //   const slider = sliderRef.current;
+  //   if (!slider) return;
 
-    let mouseDown = false;
-    let startX, scrollLeft;
+  //   let mouseDown = false;
+  //   let startX, scrollLeft;
 
-    const startDragging = function (e) {
-      mouseDown = true;
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    };
-    const stopDragging = function () {
-      setIsDumy(false);
-      mouseDown = false;
-    };
+  //   const startDragging = function (e) {
+  //     mouseDown = true;
+  //     startX = e.pageX - slider.offsetLeft;
+  //     scrollLeft = slider.scrollLeft;
+  //   };
+  //   const stopDragging = function () {
+  //     setIsDumy(false);
+  //     mouseDown = false;
+  //   };
 
-    const toggleIsdragging = () => {
-      if (mouseDown && !isDumy) setIsDumy(true);
-    };
-    slider.addEventListener("mousemove", e => {
-      e.preventDefault();
-      if (!mouseDown) return;
-      const x = e.pageX - slider.offsetLeft;
-      const scroll = x - startX;
-      slider.scrollLeft = scrollLeft - scroll;
-    });
-    slider.addEventListener("mousedown", startDragging, false);
-    slider.addEventListener("mouseup", stopDragging, false);
-    slider.addEventListener("mouseleave", stopDragging, false);
-    slider.addEventListener("mousemove", toggleIsdragging);
+  //   const toggleIsdragging = () => {
+  //     if (mouseDown && !isDumy) setIsDumy(true);
+  //   };
+  //   slider.addEventListener("mousemove", e => {
+  //     e.preventDefault();
+  //     if (!mouseDown) return;
+  //     const x = e.pageX - slider.offsetLeft;
+  //     const scroll = x - startX;
+  //     slider.scrollLeft = scrollLeft - scroll;
+  //   });
+  //   slider.addEventListener("mousedown", startDragging, false);
+  //   slider.addEventListener("mouseup", stopDragging, false);
+  //   slider.addEventListener("mouseleave", stopDragging, false);
+  //   slider.addEventListener("mousemove", toggleIsdragging);
 
-    return () => {
-      slider.removeEventListener("mousedown", startDragging);
-      slider.removeEventListener("mouseup", stopDragging);
-      slider.removeEventListener("mouseleave", stopDragging);
-      slider.removeEventListener("mousemove", toggleIsdragging);
-    };
-  }, []);
+  //   return () => {
+  //     slider.removeEventListener("mousedown", startDragging);
+  //     slider.removeEventListener("mouseup", stopDragging);
+  //     slider.removeEventListener("mouseleave", stopDragging);
+  //     slider.removeEventListener("mousemove", toggleIsdragging);
+  //   };
+  // }, []);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const scrollContainerRef = useRef(null);
+  console.log(scrollContainerRef, "scrollContainerRef");
 
+  const handleMouseDown = e => {
+    setIsScrolling(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMove = e => {
+    if (!isScrolling) return;
+
+    const deltaX = e.clientX - startX;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft -= deltaX;
+    }
+
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsScrolling(false);
+  };
   // const HappySubscriberVideosArray =
   //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
 
@@ -174,12 +197,18 @@ const HappySubscribers = ({page, params}) => {
         <h2 className={styles.head}>{str.head}</h2>
         <p className={styles.desc}>{str.desc}</p>
 
-        <div className={styles.cards_wrapper} ref={sliderRef}>
+        <div
+          className={styles.cards_wrapper}
+          ref={scrollContainerRef}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseUp}>
           {data?.map((item, index) => (
             <div
               className={`${styles.card_div} ${
                 index === data?.length - 1 && "mr-[16px]"
-              } ${isDumy && "pointer-events-none"}`}
+              } ${"pointer-events-none"}`}
               key={index.toString()}>
               <div className={styles.video}>
                 {/* <video className={styles.video_player} ref={videoRef}>
