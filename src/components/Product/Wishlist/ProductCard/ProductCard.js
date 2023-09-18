@@ -7,6 +7,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ProductCard = ({
   desc,
@@ -29,7 +30,8 @@ const ProductCard = ({
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,

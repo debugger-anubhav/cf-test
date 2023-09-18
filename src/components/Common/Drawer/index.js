@@ -15,6 +15,7 @@ import {
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -163,7 +164,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     <a
                       key={index.toString()}
                       href={
-                        index === 3 && getLocalStorage("user_id") !== null
+                        // index === 3 && getLocalStorage("user_id") !== null
+                        index === 3 && decrypt(getLocalStorage("_ga")) !== null
                           ? "/usersettings"
                           : item.link
                       }>

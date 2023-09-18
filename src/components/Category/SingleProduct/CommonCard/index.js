@@ -4,15 +4,12 @@ import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  getLocalStorage,
-  getLocalStorageString,
-  productImageBaseUrl,
-} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -41,7 +38,8 @@ const CategoryCard = ({
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
 
@@ -62,10 +60,18 @@ const CategoryCard = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("user_id");
+  // const userId = getLocalStorageString("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
+  console.log(
+    userId,
+    "category Card",
+    decrypt(getLocalStorage("_ga")),
+    getLocalStorage("_ga"),
+  );
 
   const handleWhislistCard = e => {
     e.stopPropagation();

@@ -53,6 +53,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
               cookie.remove("ci_sessions");
               localStorage.removeItem("tempUserID");
               localStorage.removeItem("user_id");
+              localStorage.removeItem("_ga");
               localStorage.removeItem("user_name");
               localStorage.removeItem("ci_session");
               setShowProfileDropdown(false);

@@ -39,6 +39,7 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
 import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -154,7 +155,8 @@ const ProductDetails = ({params}) => {
     const data = {
       // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
       tempUserId: getLocalStorage("tempUserID") ?? "",
-      userId: getLocalStorage("user_id") ?? "",
+      // userId: getLocalStorage("user_id") ?? "",
+      userId: decrypt(getLocalStorage("_ga")) ?? "",
 
       // userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
       productId: params?.productId,
@@ -203,7 +205,8 @@ const ProductDetails = ({params}) => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  const userId = getLocalStorageString("user_id");
+  // const userId = getLocalStorageString("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -251,7 +254,8 @@ const ProductDetails = ({params}) => {
   const data = {
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
 
     // userId: JSON.parse(localStorage.getItem("user_id")),
     // userId: JSON.parse(localStorage.getItem("user_id")),
@@ -269,7 +273,8 @@ const ProductDetails = ({params}) => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
   const {mutateAsync: removewhislistProduct} = useMutation(
@@ -312,7 +317,8 @@ const ProductDetails = ({params}) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = getLocalStorage("user_id");
+    // const userId = getLocalStorage("user_id");
+    const userId = decrypt(getLocalStorage("_ga"));
     const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
 

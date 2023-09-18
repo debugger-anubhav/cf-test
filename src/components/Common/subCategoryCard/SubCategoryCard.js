@@ -4,10 +4,11 @@ import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch} from "react-redux";
-import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
+import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const SubCategoryCard = ({productID}) => {
   const [inWishList, setInWishList] = useState(false);
@@ -24,7 +25,8 @@ const SubCategoryCard = ({productID}) => {
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
 
@@ -45,10 +47,12 @@ const SubCategoryCard = ({productID}) => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("user_id");
+  // const userId = getLocalStorageString("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
   const includedItem = [
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png",

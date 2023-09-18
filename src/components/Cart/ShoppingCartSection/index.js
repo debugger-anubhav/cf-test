@@ -31,6 +31,7 @@ import {
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ const ShoppingCartSection = ({setTab}) => {
 
   const count = cartItems.length;
 
-  const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
