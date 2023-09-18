@@ -227,9 +227,10 @@ const Footer = ({params}) => {
         <p className={styles.copyTxt}>{text}</p>
         <div
           className={styles.goToTopDiv}
-          onClick={() =>
-            window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-          }>
+          onClick={e => {
+            e.preventDefault();
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          }}>
           <Image
             src={FooterIcons.GoToTopIcon}
             alt="go-to-top-icon"

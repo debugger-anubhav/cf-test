@@ -93,6 +93,7 @@ const CouponDrawer = ({
     getOffersAndCoupons();
   }, []);
 
+  console.log(input, "inputttt");
   const backgroundImageType1 =
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp";
   const backgroundImageType2 =
@@ -117,13 +118,13 @@ const CouponDrawer = ({
             placeholder="Enter Coupon code"
             onChange={e => {
               setInput(e.target.value);
-              input !== "" && handleApplyClick(input);
+              input !== " " && handleApplyClick(input);
             }}
           />
           <p
             className={styles.apply_text}
             onClick={() => {
-              input !== "" && handleApplyClick(input);
+              input !== " " && handleApplyClick(input);
               // toggleDrawer();
             }}>
             Apply
