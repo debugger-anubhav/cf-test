@@ -468,6 +468,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             value={searchTerm}
             onClick={e => e.stopPropagation()}
             onChange={e => handleSearch(e)}
+            autoFocus
           />
           <Image
             src={Icons.Search}
@@ -486,6 +487,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <input
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
+            autoFocus
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             onKeyDown={e => handleSearch(e)}
