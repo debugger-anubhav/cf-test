@@ -91,6 +91,7 @@ const CouponDrawer = ({
     getOffersAndCoupons();
   }, []);
 
+  console.log(input, "inputttt");
   const backgroundImageType1 =
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp";
   const backgroundImageType2 =
