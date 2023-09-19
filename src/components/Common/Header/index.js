@@ -178,6 +178,10 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const handleContextMenu = e => {
+    e.preventDefault(); // Prevent the context menu from opening
+  };
+
   return (
     <>
       <div className={styles.main}>
@@ -242,21 +246,28 @@ const Header = () => {
             )}
             <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
               <span className={styles.header_favorite_container}>
-                <Image
-                  src={Icons.Favorite}
-                  alt="favorite"
-                  className={styles.header_favorite}
-                  onClick={() => {
-                    if (userId) {
-                      router.push("/wishlist");
-                    } else {
-                      // router.push("/wishlist");
-                      router.push(
-                        "https://test.rentofurniture.com/user_sign_up",
-                      );
-                    }
-                  }}
-                />
+                <a
+                  href="/wishlist"
+                  onClick={e => {
+                    e.preventDefault();
+                  }}>
+                  <Image
+                    src={Icons.Favorite}
+                    alt="favorite"
+                    className={styles.header_favorite}
+                    onContextMenu={handleContextMenu}
+                    onClick={() => {
+                      if (userId) {
+                        router.push("/wishlist");
+                      } else {
+                        // router.push("/wishlist");
+                        router.push(
+                          "https://test.rentofurniture.com/user_sign_up",
+                        );
+                      }
+                    }}
+                  />
+                </a>
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
                   <span className={styles.cart_badge}>{wishListCount}</span>
                 ) : (
@@ -282,6 +293,7 @@ const Header = () => {
                     alt="shopping-card-icon"
                     className={styles.header_shopping_card}
                     onClick={() => router.push("/cart")}
+                    onContextMenu={handleContextMenu}
                   />
                 </a>
                 {cartItemsLength > 0 && (

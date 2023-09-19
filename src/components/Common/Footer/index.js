@@ -103,6 +103,10 @@ const Footer = ({params}) => {
     setPoints(array);
   }, [cityName]);
 
+  const handleContextMenu = e => {
+    e.preventDefault(); // Prevent the context menu from opening
+  };
+
   return (
     <div className={styles.footer_wrapper}>
       {content.map((str, index) => {
@@ -234,6 +238,7 @@ const Footer = ({params}) => {
             src={FooterIcons.GoToTopIcon}
             alt="go-to-top-icon"
             className={styles.goToTopIcon}
+            onContextMenu={handleContextMenu}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>
