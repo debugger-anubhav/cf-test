@@ -1,5 +1,5 @@
 .drawer_wrapper {
-  @apply flex w-[430px] pt-16 relative z-[999];
+  @apply max-h-[90vh] sm:h-full sm:max-h-none flex w-[430px] py-6 sm:pt-16 relative z-[999];
 }
 .drawer_close {
   @apply flex mx-8 flex-col;
@@ -33,37 +33,37 @@
   @apply text-24 font-medium text-45454A;
 }
 .city_container {
-  @apply flex flex-wrap w-full mt-8;
+  @apply flex flex-wrap w-full mt-4 lg:mt-8;
 }
 .city_wrapper {
-  @apply flex flex-col xs:w-[110px]  w-[95px]  cursor-pointer p-2 h-[104px] my-4;
+  @apply flex flex-col xs:w-[110px] w-[81px] cursor-pointer p-2 h-[104px] my-4;
 }
 .city_thambnil {
   @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-md;
 }
 .city_name {
-  @apply flex text-14 text-45454A font-Poppins items-center justify-center pt-2 capitalize text-center;
+  @apply flex text-12 sm:text-14  font-Poppins items-center justify-center pt-2 capitalize text-center;
 }
 .city_drawer_wrapper {
-  @apply sm:w-[500px] w-full px-8 lg:px-0 rounded-t-lg;
+  @apply sm:w-[500px] w-full px-4 sm:px-8 lg:px-0 rounded-t-lg;
 }
 .city_drawer_close {
   @apply sm:flex hidden;
 }
 .bottom_city_content {
-  @apply flex w-full flex-col mt-14;
+  @apply flex w-full flex-col mt-8 xs:mt-10 sm:mt-14;
 }
 .bottom_subheading {
   @apply flex text-14 text-71717A font-medium leading-[20px] font-Poppins;
 }
 .bottom_heading {
-  @apply flex sm:hidden rounded border-71717A border my-4 mr-4 py-3 font-Poppins font-medium  justify-center items-center;
+  @apply flex sm:hidden rounded-lg border-71717A border-2 mt-4 sm:mr-4 py-3 text-45454A font-Poppins font-medium text-14 sm:text-14 justify-center items-center;
 }
 .detail_line {
-  @apply flex sm:hidden xs:pb-0 pb-8;
+  @apply flex sm:hidden  pb-8 text-9A9AA2 text-12 leading-5 mt-1;
 }
 .responsive_city_drawer_close_icon {
-  @apply absolute top-0 rounded-[50%]  bg-white w-4 h-4 right-12;
+  @apply absolute top-0 rounded-[50%] bg-white w-4 h-4 right-12;
 }
 .download_qr_wrapper {
   @apply sm:flex hidden my-4 justify-start pr-4;
@@ -78,9 +78,13 @@
   @apply text-[#7895B0] font-bold text-24 leading-[24px];
 }
 .bottom_close_icon {
-  @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4  z-[111];
+  /* @apply absolute w-8 h-8 flex justify-center items-center right-5 bg-white rounded-full top-4  z-[111]; */
   /* -top-11  */
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12 lg:-mt-0;
 }
 .-MuiPaper-root-MuiDrawer-paper {
   @apply !overflow-visible;
+}
+.bottomDrawer {
+  @apply !rounded-t-[20px] sm:!rounded-t-none;
 }

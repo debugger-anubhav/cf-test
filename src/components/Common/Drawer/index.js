@@ -183,7 +183,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       <>
         {mobileCityDrawer && DrawerName !== "menu" && (
           <div
-            className="relative z-[9999]"
+            className={`relative z-[9999]`}
             onClick={() => toggleDrawer("bottom", false)}>
             <div
               className={styles.bottom_close_icon}
@@ -254,7 +254,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     alt="city-image"
                   />
                   {city?.id === 50 ? (
-                    <div className={styles.city_name}>
+                    <div
+                      className={`${
+                        homePageReduxData?.cityName === city?.list_value
+                          ? "text-222 font-medium"
+                          : "text-45454A"
+                      } ${styles.city_name}`}>
                       {city?.list_value.split("/")[0]}/
                       <br className="flex sm:hidden" />
                       {city?.list_value.split("/")[1]}
@@ -288,7 +293,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 </p>
               </div>
               <p className={styles.detail_line}>
-                100k+ People have already downloaded our app 🎉
+                <span className="text-[#7895B0] font-bold">100k+ </span>&nbsp;
+                People have already downloaded our app 🎉
               </p>
             </div>
           </div>
@@ -320,7 +326,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         )}
       </div>
       <SwipeableDrawer
+        classes={{
+          paper:
+            mobileCityDrawer && DrawerName !== "menu" && styles.bottomDrawer,
+        }}
         anchor={mobileCityDrawer && DrawerName !== "menu" ? "bottom" : "left"}
+        className=""
         open={
           mobileCityDrawer && DrawerName !== "menu" ? state.bottom : state.left
         }
