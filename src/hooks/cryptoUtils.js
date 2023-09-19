@@ -1,6 +1,6 @@
 // cryptoUtils.js
-const CryptoJS = require("crypto-js");
-
+// const CryptoJS = require("crypto-js");
+import CryptoJS from "crypto-js";
 // Replace 'YOUR_SECRET_KEY' with your secret key (keep it secure!).
 // const secretKey = crypto.randomBytes(32).toString("hex");
 const secretKey =
