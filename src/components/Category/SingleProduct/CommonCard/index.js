@@ -66,12 +66,6 @@ const CategoryCard = ({
   );
   // const userId = getLocalStorageString("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
-  console.log(
-    userId,
-    "category Card",
-    decrypt(getLocalStorage("_ga")),
-    getLocalStorage("_ga"),
-  );
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -94,7 +88,6 @@ const CategoryCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -110,7 +103,6 @@ const CategoryCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };

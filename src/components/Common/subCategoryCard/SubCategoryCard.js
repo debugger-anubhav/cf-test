@@ -86,7 +86,6 @@ const SubCategoryCard = ({productID}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -102,7 +101,6 @@ const SubCategoryCard = ({productID}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };

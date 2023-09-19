@@ -40,8 +40,6 @@ const ShoppingCartSection = ({setTab}) => {
   const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
 
-  console.log(showData, "loader");
-
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
     setArr(cartItems);
@@ -55,13 +53,9 @@ const ShoppingCartSection = ({setTab}) => {
 
   const cityId = getLocalStorage("cityId");
 
-  // console.log(userIdToUse, "user id to use");
-  console.log(arr, "arrrr");
-
   const totalAmount = arr.reduce((accumulator, item) => {
     return accumulator + parseInt(item?.price);
   }, 0);
-  console.log(totalAmount, "totallll");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
@@ -180,14 +174,12 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
-    console.log(arr);
 
     const headers = {
       userId: parseInt(userIdToUse),
       quantity: updatedItems[itemIndex].quantity,
       productId: productid,
     };
-    console.log(headers.quantity, "qaunt in gheader");
     axios
       .post(baseURL + endPoints.addToCart.updateQuantity, headers)
       .then(res => console.log(res, "res in updated qunatity"))

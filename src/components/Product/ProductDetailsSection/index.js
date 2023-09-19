@@ -164,7 +164,7 @@ const ProductDetails = ({params}) => {
     axios
       .post(baseURL + endPoints.addRecentViewProduct, data)
       .then(res => {
-        console.log(res?.data?.data);
+        console.log();
       })
       .catch(err => {
         console.log(err);
@@ -188,7 +188,6 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(categoryPageReduxData.savedProducts, params.productId);
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
@@ -246,7 +245,6 @@ const ProductDetails = ({params}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };

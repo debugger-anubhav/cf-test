@@ -168,7 +168,6 @@ const Footer = ({params}) => {
                 alt={item?.icon}
                 src={item?.icon}
                 onClick={() =>{ router.push(item.link)
-                console.log("item.link")}}
               />
             ))}
           </div> */}
@@ -216,7 +215,7 @@ const Footer = ({params}) => {
               <img
                 alt={item?.icon}
                 src={item?.icon}
-                onClick={() => console.log("item.link")}
+                // onClick={() => console.log("item.link")}
               />
             </a>
           ))}

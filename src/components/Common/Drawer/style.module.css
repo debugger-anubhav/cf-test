@@ -30,7 +30,7 @@
   @apply flex lg:text-base capitalize text-12 font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
 }
 .select_heading {
-  @apply text-24 font-medium text-45454A;
+  @apply text-20 sm:text-20 font-medium text-45454A;
 }
 .city_container {
   @apply flex flex-wrap w-full mt-8;

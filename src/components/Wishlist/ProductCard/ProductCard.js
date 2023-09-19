@@ -193,7 +193,7 @@ const ProductCard = ({
                     wishlist?
                   </Typography>
                 </Box>
-                <Box>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <button
                     className={styles.cancel_delete_btn}
                     onClick={() => setDeleteIconClick(false)}>

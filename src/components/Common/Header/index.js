@@ -412,7 +412,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       }
       searchesArray.unshift(item);
       const truncatedArray = searchesArray.slice(0, 5);
-      console.log(storedSearches, searchesArray, truncatedArray, item);
       // if (storedSearches?.length) {
       //   setLocalStorage("searches", [...truncatedArray]);
       // } else {

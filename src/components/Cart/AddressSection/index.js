@@ -43,7 +43,6 @@ const AddressSection = ({setTab}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
 
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
-  // console.log(addressArray[0], "lllllll");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -97,7 +96,6 @@ const AddressSection = ({setTab}) => {
   };
 
   const getAllSavedAddresses = () => {
-    console.log("in get all saved");
     axios
       .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
@@ -106,14 +104,12 @@ const AddressSection = ({setTab}) => {
         const newPrimaryAddress = res?.data?.data.find(
           item => item.primary === "Yes",
         );
-        console.log(newPrimaryAddress, "new primary addressss");
         setPrimaryAddress(newPrimaryAddress);
       })
       .catch(err => console.log(err));
   };
 
   const saveUserAddress = async values => {
-    console.log(values);
     return new Promise((resolve, reject) => {
       const headers = {
         userId: parseInt(userIdToUse),
@@ -129,7 +125,6 @@ const AddressSection = ({setTab}) => {
       axios
         .post(baseURL + endPoints.addToCart.addAddress, headers)
         .then(response => {
-          console.log(response?.data?.data, "res in save addes");
           resolve("hii");
         })
         .catch(error => {
@@ -151,7 +146,6 @@ const AddressSection = ({setTab}) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(id, "address id");
   };
   useEffect(() => {
     getAllSavedAddresses();
@@ -221,9 +215,7 @@ const AddressSection = ({setTab}) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
-              console.log("Form submitted with values:", values);
               await saveUserAddress(values);
-              console.log("1");
               getAllSavedAddresses();
               resetForm();
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});

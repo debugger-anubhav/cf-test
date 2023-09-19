@@ -46,7 +46,7 @@ const ProductList = ({params}) => {
   }, [refreshState]);
 
   const data = categoryPageReduxData?.savedProducts;
-  console.log(categoryPageReduxData);
+
   return (
     <>
       <div className={style.conatiner_wrapper}>

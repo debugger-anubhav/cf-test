@@ -111,7 +111,6 @@ const Card = ({
             if (!isSavedComp) {
               setInWishList(prev => !prev);
             }
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -129,7 +128,6 @@ const Card = ({
             if (!isSavedComp) {
               setInWishList(prev => !prev);
             }
-            console.log(res);
           })
           .catch(err => console.log(err));
   };

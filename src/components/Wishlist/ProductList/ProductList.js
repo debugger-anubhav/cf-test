@@ -67,7 +67,6 @@ const ProductList = ({params}) => {
               {data
                 ?.filter(i => i.pq_quantity > 0)
                 ?.map((item, index) => {
-                  console.log(data);
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}
