@@ -153,6 +153,12 @@ const SubCategorySection = () => {
                   href={`/${homePageReduxData?.cityName.toLowerCase()}/${
                     item?.seourl
                   }`}
+                  onClick={() => {
+                    setLocalStorage("categoryId", item?.id);
+                    setLocalStorage("category", item?.cat_name);
+                    setLocalStorage("subCategory", "All");
+                    setLocalStorage("subCategoryId", item?.id);
+                  }}
                   className={styles.viewAllText}>
                   {windowSize[0] > 450
                     ? `View all ${item?.cat_name}`
