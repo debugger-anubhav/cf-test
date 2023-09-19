@@ -79,7 +79,8 @@ const CityShieldDrawerForCart = ({
           /month!
         </p>
         <p className={styles.protect}>
-          Protect your appliances and furniture worth upto ₹70,000{" "}
+          Protect your appliances and furniture worth upto{" "}
+          <span className={styles.rupeeIcon}>₹</span>70,000{" "}
         </p>
 
         <div className={styles.cityshield_prices}>
@@ -96,7 +97,7 @@ const CityShieldDrawerForCart = ({
 
         <div className={styles.arr_wrapper}>
           {benefits.map((item, index) => (
-            <div key={index} className="w-[80px]">
+            <div key={index} className={styles.arr_item}>
               <div className={styles.img_div}>
                 <img src={item.img} />
               </div>

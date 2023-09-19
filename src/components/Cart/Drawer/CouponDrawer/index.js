@@ -13,6 +13,7 @@ const CouponDrawer = ({
   applyCouponCode,
   isMonthly,
   cityId,
+  totalAmount,
 }) => {
   const [isApplied, setIsApplied] = React.useState(false);
   const [appliedIndex, setappliedIndex] = React.useState(null);
@@ -23,7 +24,7 @@ const CouponDrawer = ({
   const [errorMsg, setErrorMsg] = useState("");
 
   const data = useSelector(state => state.cartPageData);
-  const billBreakup = data.billBreakup;
+  // const billBreakup = data.billBreakup;
   const cartItems = data.cartItems;
 
   const idsArr = [];
@@ -38,7 +39,7 @@ const CouponDrawer = ({
       const headers = {
         productIds: idsArr,
         couponCode,
-        cartSubTotal: billBreakup?.cartSubTotal,
+        cartSubTotal: totalAmount,
         paymentMode: isMonthly ? 0 : 1,
         cityId,
         tenure: cartItems?.[0]?.subproduct?.attr_name,
@@ -91,6 +92,7 @@ const CouponDrawer = ({
     getOffersAndCoupons();
   }, []);
 
+  console.log(input, "inputttt");
   const backgroundImageType1 =
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp";
   const backgroundImageType2 =

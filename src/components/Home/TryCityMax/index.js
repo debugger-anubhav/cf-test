@@ -56,25 +56,31 @@ const TryCityMax = () => {
           />
         </div>
         <div className={styles.right_text_section}>
-          <h1 className={styles.tryCity_heading}>
+          <h2 className={styles.tryCity_heading}>
             Try <span className={styles.tryCity_headingMax}>CityMax.</span>
-          </h1>
+          </h2>
           <p className={styles.TryCity_paragraph}>
             Unlimited furniture and appliances for
             <br /> lifetime. Starting at just ₹2,999/month.
           </p>
-          <button
-            className={styles.check_button}
-            onClick={() =>
-              router.push("https://test.rentofurniture.com/citymax")
-            }>
-            <p className={styles.check_button_paragraph}>Check our plans</p>
-            <ForwardArrow
-              size={20}
-              color={"#222"}
-              className={styles.forward_icon}
-            />
-          </button>
+          <a
+            href="https://test.rentofurniture.com/citymax"
+            onClick={e => {
+              e.preventDefault();
+            }}>
+            <button
+              className={styles.check_button}
+              onClick={() =>
+                router.push("https://test.rentofurniture.com/citymax")
+              }>
+              <p className={styles.check_button_paragraph}>Check our plans</p>
+              <ForwardArrow
+                size={20}
+                color={"#222"}
+                className={styles.forward_icon}
+              />
+            </button>
+          </a>
           <div className={styles.benefits_of_city_wrapper}>
             <h2 className={styles.benefits_text}>Benefits of CityMax</h2>
             <hr className={styles.line} />
