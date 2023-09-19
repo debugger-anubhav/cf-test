@@ -83,9 +83,9 @@ const CategorySidebar = () => {
                                 id="sub_category"
                                 value={element?.cat_name}
                                 name="SubCatrgory"
-                                onChange={e =>
-                                  console.log(e.target.value, "e.target.value")
-                                }
+                                // onChange={e =>
+                                //   console.log(e.target.value, "e.target.value")
+                                // }
                               />
                               <p className={style.cat_title}>
                                 {element?.cat_name}
@@ -121,7 +121,6 @@ const CategorySidebar = () => {
                 className="mb-[5px] w-[17px] h-[17px]"
                 onChange={event => {
                   filteredProduct.push(event.target.value);
-                  console.log(event.target.value, "lll");
                 }}
               />
               <h2 className={style.filterContent}>{ele?.filter_name}</h2>

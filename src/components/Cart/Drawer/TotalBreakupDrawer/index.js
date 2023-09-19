@@ -9,7 +9,6 @@ const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
   const [showTotalPriceBreakdown, setShowTotalPriceBreakdown] = useState(false);
   const code = useSelector(state => state.cartPageData.couponCodeUsed);
   const billBreakup = useSelector(state => state.cartPageData.billBreakout);
-  // console.log(code);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {

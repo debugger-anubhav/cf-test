@@ -186,6 +186,8 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                       productID={item?.id}
                       seourl={item?.seourl}
                       subProduct={item?.subProduct}
+                      label={item?.product_label}
+                      soldOut={item?.pq_quantity <= 0}
                     />
                   </div>
                 );

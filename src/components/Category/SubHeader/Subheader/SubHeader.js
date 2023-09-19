@@ -58,6 +58,7 @@ const SubHeader = ({params}) => {
   const [showFilter, setShowFilter] = useState(false);
   const [showData, setShowData] = useState(false);
   const [seoUrl, setSeoUrl] = useState();
+  const [itemCount, setItemCount] = useState(7);
 
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
@@ -223,6 +224,7 @@ const SubHeader = ({params}) => {
     }
     dispatch(addFilteredItem(updatedFilteredList));
   };
+
   const handleApply = () => {
     setPageNo(1);
     dispatch(addSingleProduct([]));
@@ -231,7 +233,18 @@ const SubHeader = ({params}) => {
     dispatch(isFilterApplied(true));
     setFilterListed(true);
     setFilterOpen(false);
+
+    // let filters = "";
+    // for (var i = 0; i < appliedFilter.length; i++) {
+    //   filters += "filter=" + encodeURIComponent(appliedFilter[i]);
+
+    //   if (i < appliedFilter.length - 1) {
+    //     filters += "&";
+    //   }
+    // }
+    // router.push(`?${filters}`);
   };
+
   const handleSort = (item, index) => {
     setPageNo(1);
     setSelectedOption(item);
@@ -295,6 +308,10 @@ const SubHeader = ({params}) => {
       ),
     );
   }, [getAllAndSubCategoryData]);
+
+  const loadMoreItems = () => {
+    setItemCount(itemCount + 7);
+  };
 
   return (
     <>
@@ -434,30 +451,43 @@ const SubHeader = ({params}) => {
                     <div className={styles.mapped_filter}>
                       {filtereData?.map((ele, index) => {
                         return (
-                          <div
-                            className={styles.single_filter_text}
-                            key={index.toString()}
-                            onClick={e =>
-                              handleFilterDivClick(e, ele.filter_tag)
-                            }>
-                            <p htmlFor={index} className={styles.option_text}>
-                              {ele?.filter_name}
-                            </p>
-                            <input
-                              type="checkbox"
-                              id={index}
-                              name={ele.filter_name}
-                              value={ele.filter_tag}
-                              checked={categoryPageReduxData?.filteredItems.includes(
-                                ele?.filter_tag,
-                              )}
-                              className="pr-1 cursor-pointer"
-                              // onChange={e => handleFilteredItems(e)}
-                            />
-                          </div>
+                          <>
+                            {index < itemCount && (
+                              <div
+                                className={styles.single_filter_text}
+                                key={index.toString()}
+                                onClick={e =>
+                                  handleFilterDivClick(e, ele.filter_tag)
+                                }>
+                                <p
+                                  htmlFor={index}
+                                  className={styles.option_text}>
+                                  {ele?.filter_name}
+                                </p>
+                                <input
+                                  type="checkbox"
+                                  id={index}
+                                  name={ele.filter_name}
+                                  value={ele.filter_tag}
+                                  checked={categoryPageReduxData?.filteredItems.includes(
+                                    ele?.filter_tag,
+                                  )}
+                                  className="pr-1 cursor-pointer"
+                                  // onChange={e => handleFilteredItems(e)}
+                                />
+                              </div>
+                            )}
+                          </>
                         );
                       })}
                     </div>
+                    {filtereData.length > itemCount && (
+                      <p
+                        className={styles.see_more_text}
+                        onClick={loadMoreItems}>
+                        See more
+                      </p>
+                    )}
                     <div className="mt-6 w-full flex justify-center">
                       <div
                         className={styles.btn_container}

@@ -9,6 +9,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const AnnouncementBar = () => {
   const dispatch = useDispatch();
@@ -29,7 +30,8 @@ const AnnouncementBar = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,

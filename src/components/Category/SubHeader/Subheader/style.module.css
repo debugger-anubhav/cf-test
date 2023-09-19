@@ -79,7 +79,7 @@
   @apply my-9 mobile:my-[26px] w-full h-[1.5px] bg-[#DDDDDF];
 }
 .btn_container {
-  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[196px] h-[40px] cursor-pointer;
+  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[100%] sm:w-[196px] h-[40px] cursor-pointer;
 }
 .apply_btn {
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
@@ -122,10 +122,10 @@
   scrollbar-color: darkgray lightgray;
 }
 .mapped_filter_mobile {
-  @apply flex flex-col max-h-[259px] px-4;
+  @apply flex flex-col max-h-[259px] pt-[15px];
 }
 .headin_text {
-  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-[30px];
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-[15px];
 }
 .see_more_text {
   @apply text-[#597492] font-Poppins  text-12  font-medium leading-6 underline;
