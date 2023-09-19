@@ -56,14 +56,18 @@ const TryCityMax = () => {
           />
         </div>
         <div className={styles.right_text_section}>
-          <h1 className={styles.tryCity_heading}>
+          <h2 className={styles.tryCity_heading}>
             Try <span className={styles.tryCity_headingMax}>CityMax.</span>
-          </h1>
+          </h2>
           <p className={styles.TryCity_paragraph}>
             Unlimited furniture and appliances for
             <br /> lifetime. Starting at just ₹2,999/month.
           </p>
-          <a className="">
+          <a
+            href="https://test.rentofurniture.com/citymax"
+            onClick={e => {
+              e.preventDefault();
+            }}>
             <button
               className={styles.check_button}
               onClick={() =>

@@ -478,6 +478,14 @@ const ProductDetails = ({params}) => {
       </div>
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
+          <div className={styles.info}>
+            <InformationIcon color={"ffffff"} />
+            <p>
+              {soldOut
+                ? "SOLD OUT"
+                : "39 people ordered this in the last 24hrs"}
+            </p>
+          </div>
           <Carousel
             selectedItem={selectedIndex}
             showThumbs={false}
@@ -512,14 +520,6 @@ const ProductDetails = ({params}) => {
                       alt={`Thumbnail ${index}`}
                       className="w-full h-full"
                     />
-                    <div className={styles.info}>
-                      <InformationIcon color={"ffffff"} />
-                      <p>
-                        {soldOut
-                          ? "SOLD OUT"
-                          : "39 people ordered this in the last 24hrs"}
-                      </p>
-                    </div>
                   </div>
                 )}
               </>
