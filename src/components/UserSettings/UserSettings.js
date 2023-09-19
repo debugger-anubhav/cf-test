@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import {FaChevronRight} from "react-icons/fa6";
+import {getLocalStorage} from "@/constants/constant";
 
 const Servicesdata = [
   {head: "My orders", desc: "See all orders & stay updated on their status."},
@@ -17,17 +18,19 @@ const Servicesdata = [
   },
   {head: "Profile Settings", desc: "Modify name, email or phone number."},
 ];
+
+const userName = getLocalStorage("userName");
 const UserSettings = () => {
   return (
     <div className={styles.main_container}>
       <p className={styles.user_account}>
         Your Account,
-        <span className={styles.main_text}> Pratyush Verma Verma Verma...</span>
+        <span className={styles.main_text}>{userName}</span>
       </p>
       <div className={styles.services_wrapper}>
         {Servicesdata?.map((ele, index) => {
           return (
-            <div key={index.toString()}>
+            <div key={index.toString()} className="cursor-pointer">
               <div className={styles.head_row}>
                 <p className={styles.head_row_text}>{ele.head}</p>
                 <div className={styles.chevron_right_icon}>
