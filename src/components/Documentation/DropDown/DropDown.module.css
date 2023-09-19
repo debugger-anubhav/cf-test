@@ -1,0 +1,4 @@
+.main {
+  @apply rounded-lg border border-gray-300 bg-white text-gray-900 font-Poppins text-base font-normal leading-normal tracking-tight px-4 py-3;
+  width: 502px;
+}

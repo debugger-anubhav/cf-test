@@ -15,6 +15,11 @@ const DocSidebar = () => {
     {heading: "CF coins", link: "ww.com.com"},
     {heading: "Referral Code", link: "ww.com.com"},
   ];
+  const thirdContainerArr = [
+    {heading: "KYC & Documentation", link: "ww.com.com"},
+    {heading: "Profile Settings", link: "ww.com.com"},
+    {heading: "Your Addresses", link: "ww.com.com"},
+  ];
   return (
     <div className={styles.mainContainer}>
       <div className={styles.firstContainer}>
@@ -34,6 +39,13 @@ const DocSidebar = () => {
         setIsActive={setIsActive}
         isActive={isActive}
       />
+      <MenuComp
+        list={thirdContainerArr}
+        heading={"Account"}
+        setIsActive={setIsActive}
+        isActive={isActive}
+      />
+      <div className={styles.logoutTxt}>Logout</div>
     </div>
   );
 };

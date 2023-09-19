@@ -6,6 +6,7 @@
   @apply flex flex-col;
 
   padding-left: 122px;
+  padding-right: 16px;
   background-color: #f7f9fc;
 }
 
@@ -24,16 +25,15 @@
   @apply text-gray-600 font-Poppins text-14 font-normal;
 }
 .userNameText {
-  @apply text-gray-600 font-Poppins text-14 font-medium leading-normal -tracking-tight;
+  @apply text-gray-600 font-Poppins text-14 font-medium leading-normal;
+  letter-spacing: -0.28px;
 }
-.firstContainer {
-  @apply mt-8 pb-4 border-b border-dashed;
-  border-color: #dddddf;
-}
+
 .sectionItems {
-  @apply text-gray-700 font-Poppins text-base font-medium   tracking-tight;
+  @apply text-gray-700 font-Poppins text-base font-medium;
   margin: 6px 0px;
   line-height: 24px;
+  letter-spacing: -0.32px;
 }
 .sectionItemsActive {
   @apply font-Poppins text-base font-medium   tracking-tight;
@@ -41,7 +41,18 @@
   margin: 6px 0px;
   line-height: 24px;
 }
-
+.firstContainer {
+  @apply mt-8 pb-4 border-b border-dashed;
+  border-color: #dddddf;
+}
 .secondContainer {
-  @apply mt-4 border-b border-dashed;
+  @apply mt-4 border-b  border-dashed;
+  padding-bottom: 6px;
+}
+.logoutTxt {
+  @apply font-Poppins text-base font-medium;
+  color: #d96060;
+  margin-top: 34px;
+  line-height: 24px;
+  letter-spacing: -0.32px;
 }
