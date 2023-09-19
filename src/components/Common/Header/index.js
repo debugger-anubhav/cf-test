@@ -458,7 +458,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         className={` ${
           homePageReduxData?.announcementBar
             ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-20 sm:top-20 top-16`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-32 sm:top-32 top-28`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
