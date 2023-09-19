@@ -151,14 +151,18 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       onMouseLeave={() => {
         setAnchorEl("");
       }}>
+      {/* <a
+        href={`/${homePageReduxData?.cityName
+          .replace(/\//g, "-")
+          .toLowerCase()}/${data?.seourl}`}> */}
       <button
         onClick={e => handleCategory(e)}
         className="flex items-center whitespace-nowrap cursor-pointer"
-        onContextMenu={e => handleContextMenu(e)}
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);
           hoverRef.current = item;
-        }}>
+        }}
+        onContextMenu={e => handleContextMenu(e)}>
         {item}
         <DownArrow
           size={20}
@@ -170,7 +174,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           className={open ? styles.arrow_up : styles.arrow_down}
         />
       </button>
-
+      {/* </a> */}
       <Popper
         id={id}
         open={open}

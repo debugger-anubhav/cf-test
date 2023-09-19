@@ -10,5 +10,11 @@
   @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-24 xl:leading-10 xl:tracking-0.48 pb-4 md:pb-6 xl:pb-8;
 }
 .card_wrapper {
-  @apply flex overflow-scroll gap-4 xl:gap-6 3xl:gap-8;
+  @apply flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8;
+}
+
+.scroller_container_card {
+  /* pointer-events: none; */
+
+  /* user-select: none; */
 }

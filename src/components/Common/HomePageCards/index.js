@@ -158,9 +158,8 @@ const Card = ({
   return (
     <a
       href={`/things/${productID}/${seourl}`}
-      onClick={e => {
-        e.preventDefault();
-      }}>
+      onClick={e => e.preventDefault()}
+      className={styles.anchor_card}>
       <div
         onClick={e => handleProductClick(e, productID, seourl)}
         className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
