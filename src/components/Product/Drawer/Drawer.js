@@ -57,7 +57,6 @@ const SideDrawer = ({
               className={styles.close_icon}
               onClick={() => {
                 toggleDrawer();
-                console.log("click");
               }}>
               <Close color={"#45454A"} size={24} className="cursor-pointer" />
             </div>

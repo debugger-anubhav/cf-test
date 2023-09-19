@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import styles from "../../Category/SubHeader/Subheader/style.module.css";
 import {Close, DownPopUpArrow} from "@/assets/icon";
-import {CategoryFilterData, sortByText} from "@/constants/constant";
+import {sortByText} from "@/constants/constant";
 import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -29,16 +29,16 @@ export default function FilterSortDrawer({
     bottom: false,
   });
 
-  const itemCount = 7;
+  const [itemCount, setItemCount] = useState(7);
   const [selectedOption, setSelectedOption] = useState("Default");
 
-  const defaultKey = ["subproducts", "ASC"];
-  const newSortKey = ["created", "DESC"];
-  const highToLowKey = ["sale_price", "DESC"];
-  const lowToHighKey = ["sale_price", "ASC"];
+  const defaultKey = 1;
+  const newSortKey = 2;
+  const highToLowKey = 3;
+  const lowToHighKey = 4;
 
   const loadMoreItems = () => {
-    return prevCount => prevCount + 7;
+    setItemCount(itemCount + 7);
   };
 
   const toggleDrawer = (anchor, open) => event => {
@@ -89,8 +89,8 @@ export default function FilterSortDrawer({
       dispatch(addSortKey(newSortKey));
     } else if (item === "Price Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (item === "Price Hight to low") {
-      dispatch(addSortKey([...highToLowKey]));
+    } else if (item === "Price High to low") {
+      dispatch(addSortKey(highToLowKey));
     } else {
       dispatch(addSortKey(defaultKey));
     }
@@ -127,31 +127,40 @@ export default function FilterSortDrawer({
               <p className={styles.headin_text}>
                 {filterName === "Filter" ? filterName : selectedOption}
               </p>
+              <div className="h-[1px] bg-EDEDEE" />
               <div className={styles.mapped_filter_mobile}>
                 {filtereData?.map((ele, index) => {
                   // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
-                    <div
-                      className={styles.single_filter_text}
-                      key={index.toString()}
-                      onClick={e => handleFilterDivClick(e, ele.filter_tag)}>
-                      <p className={styles.option_text}>{ele?.filter_name}</p>
-                      <input
-                        type="checkbox"
-                        id={index}
-                        name={ele.filter_name}
-                        value={ele.filter_tag}
-                        checked={categoryPageReduxData?.filteredItems.includes(
-                          ele?.filter_tag,
-                        )}
-                        className="pr-1 cursor-pointer"
-                        onChange={e => handleFilteredItems(e)}
-                      />
-                    </div>
+                    <>
+                      {index < itemCount && (
+                        <div
+                          className={styles.single_filter_text}
+                          key={index.toString()}
+                          onClick={e =>
+                            handleFilterDivClick(e, ele.filter_tag)
+                          }>
+                          <p className={styles.option_text}>
+                            {ele?.filter_name}
+                          </p>
+                          <input
+                            type="checkbox"
+                            id={index}
+                            name={ele.filter_name}
+                            value={ele.filter_tag}
+                            checked={categoryPageReduxData?.filteredItems.includes(
+                              ele?.filter_tag,
+                            )}
+                            className="pr-1 cursor-pointer"
+                            onChange={e => handleFilteredItems(e)}
+                          />
+                        </div>
+                      )}
+                    </>
                   );
                 })}
               </div>
-              {itemCount < CategoryFilterData.length && (
+              {filtereData.length > itemCount && (
                 <p className={styles.see_more_text} onClick={loadMoreItems}>
                   See more
                 </p>

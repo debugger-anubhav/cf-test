@@ -96,7 +96,6 @@ const SubCategorySection = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
-  console.log(scrollContainerRef, "scrollContainerRef");
 
   const handleMouseDown = e => {
     setIsScrolling(true);
@@ -140,7 +139,6 @@ const SubCategorySection = () => {
             key={index.toString()}
             // onClick={(e)=>{
             //   scrollContainerRef.current=e.target.current.children
-            //   // console.log(e)
             //     }}
           >
             <div
@@ -172,7 +170,6 @@ const SubCategorySection = () => {
               className={styles.category_section_container}
               onClick={e => {
                 scrollContainerRef.current = e.target;
-                // console.log(e)
               }}
               onMouseDown={handleMouseDown}
               onMouseMove={handleMouseMove}

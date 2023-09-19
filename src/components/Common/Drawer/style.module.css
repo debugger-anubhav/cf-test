@@ -30,7 +30,7 @@
   @apply flex lg:text-base capitalize text-12 font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
 }
 .select_heading {
-  @apply text-24 font-medium text-45454A;
+  @apply text-20 sm:text-20 font-medium text-45454A;
 }
 .city_container {
   @apply flex flex-wrap w-full mt-4 lg:mt-8;
@@ -42,7 +42,7 @@
   @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-md;
 }
 .city_name {
-  @apply flex text-12 sm:text-14  font-Poppins items-center justify-center pt-2 capitalize text-center;
+  @apply flex text-12 sm:text-14 font-Poppins items-center justify-center pt-2 capitalize text-center;
 }
 .city_drawer_wrapper {
   @apply sm:w-[500px] w-full px-4 sm:px-8 lg:px-0 rounded-t-lg;

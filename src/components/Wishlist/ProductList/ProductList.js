@@ -8,6 +8,7 @@ import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
+import {decrypt} from "@/hooks/cryptoUtils";
 const ProductList = ({params}) => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
@@ -24,7 +25,8 @@ const ProductList = ({params}) => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
@@ -44,7 +46,7 @@ const ProductList = ({params}) => {
   }, [refreshState]);
 
   const data = categoryPageReduxData?.savedProducts;
-  console.log(categoryPageReduxData);
+
   return (
     <>
       <div className={style.conatiner_wrapper}>
@@ -65,7 +67,6 @@ const ProductList = ({params}) => {
               {data
                 ?.filter(i => i.pq_quantity > 0)
                 ?.map((item, index) => {
-                  console.log(data);
                   return (
                     <div
                       className={`${style.card_box_product} ${style.child}`}
