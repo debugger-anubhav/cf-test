@@ -84,7 +84,6 @@ const Header = () => {
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
-    console.log(!homePageReduxData?.category.length);
     if (!homePageReduxData?.category.length) {
       axios
         .get(baseURL + endPoints.category)

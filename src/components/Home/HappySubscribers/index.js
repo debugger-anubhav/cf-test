@@ -150,7 +150,7 @@ const HappySubscribers = ({page, params}) => {
                   src={item.file_name}
                   title="YouTube video player"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+                  allowFullScreen></iframe>
                 {/* <div
                 className={styles.play_button_container}
                 onClick={() => handlePlayButtonClick(item.file_name)}></div> */}

@@ -1,0 +1,29 @@
+/* .mainContainer {
+  padding-left: 122px;
+  background-color: green;
+} */
+.mainContainer {
+  @apply flex;
+
+  padding-left: 122px;
+  background-color: blue;
+}
+
+.headingLinks {
+  @apply text-red-500;
+}
+
+@media (max-width: 767px) {
+  .mainContainer {
+    padding-left: 0px; /* Adjust this value to your preferred mobile padding */
+    margin: 0px 16px;
+    background-color: #1673ff;
+  }
+}
+
+.accountText {
+  @apply text-gray-600 font-Poppins text-14 font-normal;
+}
+.fisrtContainer {
+  @apply mt-8;
+}

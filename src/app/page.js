@@ -1,9 +1,7 @@
 "use client";
 
 import React, {useRef} from "react";
-import {store} from "@/store";
-import {Provider} from "react-redux";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+
 // import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
@@ -98,7 +96,6 @@ const CombineSection = loadable(() =>
 
 export default function Home() {
   // const router = useRouter();
-  const queryClient = new QueryClient();
 
   const myElementRef = useRef();
   // if (typeof window !== "undefined") {
@@ -106,40 +103,35 @@ export default function Home() {
   // }
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <div ref={myElementRef} className="large_layout">
-          {useChatScript()}
-          <AnnouncementBar />
-          <Header />
-          <MenuList />
-          <HeroBanner />
-          <RentFurnitureAndAppliances params={"home-page"} />
-          <RecentlyViewedProduct />
-          <TrendingProducts params={"home-page"} />
-          <OffersAndCoupons />
-          <NewlyLaunched />
-          <DownloadForMobile />
-          <PreDesignCombos />
-          <HasselFreeServicesCards />
-          <LimetedPreiodDiscount />
-          <RentNowBanner params={"home-page"} />
-          <TryCityMax />
-          <div className="xl:hidden block">
-            <MediaCoverage />
-          </div>
-          <CustomerRating />
-          <div className="hidden xl:block">
-            <MediaCoverage />
-          </div>
-          <CombineSection />
-          <HappySubscribers params={"home-page"} />
-          <FrequentlyAskedQuestions params={"home-page"} />
-          <TextContent params={"home-page"} />
-          <Footer />
-        </div>
-      </Provider>
-      {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}
-    </QueryClientProvider>
+    <div ref={myElementRef} className="large_layout">
+      {useChatScript()}
+      <AnnouncementBar />
+      <Header />
+      <MenuList />
+      <HeroBanner />
+      <RentFurnitureAndAppliances params={"home-page"} />
+      <RecentlyViewedProduct />
+      <TrendingProducts params={"home-page"} />
+      <OffersAndCoupons />
+      <NewlyLaunched />
+      <DownloadForMobile />
+      <PreDesignCombos />
+      <HasselFreeServicesCards />
+      <LimetedPreiodDiscount />
+      <RentNowBanner params={"home-page"} />
+      <TryCityMax />
+      <div className="xl:hidden block">
+        <MediaCoverage />
+      </div>
+      <CustomerRating />
+      <div className="hidden xl:block">
+        <MediaCoverage />
+      </div>
+      <CombineSection />
+      <HappySubscribers params={"home-page"} />
+      <FrequentlyAskedQuestions params={"home-page"} />
+      <TextContent params={"home-page"} />
+      <Footer />
+    </div>
   );
 }

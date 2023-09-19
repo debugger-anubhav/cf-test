@@ -43,7 +43,7 @@ const ProductVideo = ({params}) => {
             src={pageData?.[0]?.video_name}
             title="YouTube video player"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+            allowFullScreen></iframe>
 
           {/* <div
           className={styles.play_button_container}
