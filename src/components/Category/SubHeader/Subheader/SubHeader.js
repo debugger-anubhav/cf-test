@@ -212,6 +212,7 @@ const SubHeader = ({params}) => {
   const lowToHighKey = 4;
 
   const handleFilterDivClick = (e, filterTag) => {
+    e.preventDefault();
     const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
@@ -526,7 +527,7 @@ const SubHeader = ({params}) => {
           </div> */}
 
             <div className="relative flex">
-              <p className="flex items-center mr-2 text-71717A text-base">
+              <p className="hidden sm:flex items-center mr-2 text-71717A text-base">
                 Sort By
               </p>
               <div

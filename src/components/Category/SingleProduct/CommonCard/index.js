@@ -160,6 +160,7 @@ const CategoryCard = ({
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   return (
     <a
       href={`/things/${productID}/${seourl}`}

@@ -10,6 +10,12 @@ const StickyBottomBar = ({
   isItemInCart,
   soldOut,
 }) => {
+  const discount = Math.round(
+    ((durationArray?.[0]?.attr_price -
+      durationArray?.[duration.currentIndex]?.attr_price) *
+      100) /
+      durationArray?.[0]?.attr_price,
+  ).toFixed(0);
   return (
     <div className={styles.sticky_bar_wrapper}>
       <p className={styles.sticky_bar_head}>{productName}</p>
@@ -30,18 +36,21 @@ const StickyBottomBar = ({
               }}>
               {durationArray?.[0]?.attr_price}
             </p>
-            <div
-              className={styles.discount}
-              style={{
-                display: duration.value === "3" ? "none" : "flex",
-              }}>
-              {`-${Math.round(
+            {discount > 0 && (
+              <div
+                className={styles.discount}
+                style={{
+                  display: duration.value === "3" ? "none" : "flex",
+                }}>
+                {/* {`-${Math.round(
                 ((durationArray?.[0]?.attr_price -
                   durationArray?.[duration.currentIndex]?.attr_price) *
                   100) /
                   durationArray?.[0]?.attr_price,
-              ).toFixed(0)}% OFF`}
-            </div>
+              ).toFixed(0)}% OFF`} */}
+                {`-${discount}% OFF`}
+              </div>
+            )}
           </div>
         </div>
         {/* <span className="text-[#9C9C9C]">+</span> */}
