@@ -13,6 +13,7 @@ import {
   getCartItems,
   selectedCityName,
   setShowCartItem,
+  addCategory,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -51,6 +52,12 @@ const Header = () => {
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
+
+  const cityId = getLocalStorage("cityId");
+  if (!cityId) {
+    setLocalStorage("cityId", 46);
+  }
+
   useEffect(() => {
     // Disable scrolling when the search bar is open
     if (openSearchbar) {
@@ -59,8 +66,10 @@ const Header = () => {
       document.body.style.overflow = "auto";
     }
   }, [openSearchbar]);
+
   useEffect(() => {
-    const cityId = getLocalStorage("cityId");
+    const cityId = getLocalStorage("cityId") || 46;
+
     getCityList()
       .then(res => {
         if (cityId) {
@@ -82,9 +91,20 @@ const Header = () => {
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
+    console.log(!homePageReduxData?.category.length);
+    if (!homePageReduxData?.category.length) {
+      axios
+        .get(baseURL + endPoints.category)
+        .then(res => {
+          dispatch(addCategory(res?.data?.data));
+          console.log("home");
+        })
+        .catch(err => {
+          console.log(err);
+          dispatch(addCategory([]));
+        });
+    }
   }, []);
-
-  const cityId = getLocalStorage("cityId");
 
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,

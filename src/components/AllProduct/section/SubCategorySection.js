@@ -11,57 +11,65 @@ import {
 // import {productImageBaseUrl} from "@/constants/constant";
 
 const SubCategorySection = () => {
-  // const [isDumy, setIsDumy] = React.useState(false);
+  const [isDumy, setIsDumy] = React.useState(false);
   const [windowSize, setWindowSize] = React.useState([
     window.innerWidth,
     window.innerHeight,
   ]);
-
+  const [isRefEle, setRefEle] = useState(false);
   const homePageReduxData = useSelector(state => state.homePagedata);
   const data = homePageReduxData?.allAndSubCategory;
+  // const scrollContainerRefs = {};
 
-  // const sliderRef = useRef(null);
+  // const assignRef = (index) => (element) => {
+  //   scrollContainerRefs[index] = element;
+  //   element=refEle;
+  // };
 
-  // useEffect(() => {
-  //   const slider = sliderRef.current;
-  //   if (!slider) return;
+  const scrollContainerRef5 = useRef(null);
 
-  //   let mouseDown = false;
-  //   let startX, scrollLeft;
+  const handleScrolling = e => {
+    scrollContainerRef5.current = e?.target;
+    const slider = scrollContainerRef5.current;
+    console.log(slider);
+    if (!slider && !isRefEle) return;
 
-  //   const startDragging = e => {
-  //     mouseDown = true;
-  //     startX = e.pageX - slider.offsetLeft;
-  //     scrollLeft = slider.scrollLeft;
-  //   };
-  //   const stopDragging = () => {
-  //     setIsDumy(false);
-  //     mouseDown = false;
-  //   };
+    let mouseDown = false;
+    let startX, scrollLeft;
 
-  //   const toggleIsdragging = () => {
-  //     if (mouseDown && !isDumy) setIsDumy(true);
-  //   };
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
 
-  //   slider.addEventListener("mousemove", e => {
-  //     e.preventDefault();
-  //     if (!mouseDown) return;
-  //     const x = e.pageX - slider.offsetLeft;
-  //     const scroll = x - startX;
-  //     slider.scrollLeft = scrollLeft - scroll;
-  //   });
-  //   slider.addEventListener("mousedown", startDragging, false);
-  //   slider.addEventListener("mouseup", stopDragging, false);
-  //   slider.addEventListener("mouseleave", stopDragging, false);
-  //   slider.addEventListener("mousemove", toggleIsdragging);
+    const toggleIsDragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
 
-  //   return () => {
-  //     slider.removeEventListener("mousedown", startDragging);
-  //     slider.removeEventListener("mouseup", stopDragging);
-  //     slider.removeEventListener("mouseleave", stopDragging);
-  //     slider.removeEventListener("mousemove", toggleIsdragging);
-  //   };
-  //  }, []);
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsDragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
+    };
+  };
 
   // const handleMouseDown = (e) => {
   //   if (sliderRef.current) {
@@ -92,29 +100,28 @@ const SubCategorySection = () => {
   //     document.addEventListener('mouseup', handleMouseUp);
   //   }
   // };
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [startX, setStartX] = useState(null);
-  const scrollContainerRef = useRef(null);
+  // const [isScrolling, setIsScrolling] = useState(false);
+  // const [startX, setStartX] = useState(null);
 
-  const handleMouseDown = e => {
-    setIsScrolling(true);
-    setStartX(e.clientX);
-  };
+  // const handleMouseDown = e => {
+  //   setIsScrolling(true);
+  //   setStartX(e.clientX);
+  // };
 
-  const handleMouseMove = e => {
-    if (!isScrolling) return;
+  // const handleMouseMove = e => {
+  //   if (!isScrolling) return;
 
-    const deltaX = e.clientX - startX;
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= deltaX;
-    }
+  //   const deltaX = e.clientX - startX;
+  //   if (scrollContainerRef.current) {
+  //     scrollContainerRef.current.scrollLeft -= deltaX;
+  //   }
 
-    setStartX(e.clientX);
-  };
+  //   setStartX(e.clientX);
+  // };
 
-  const handleMouseUp = () => {
-    setIsScrolling(false);
-  };
+  // const handleMouseUp = () => {
+  //   setIsScrolling(false);
+  // };
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -132,13 +139,7 @@ const SubCategorySection = () => {
     <div className={styles.container}>
       {data?.map((item, index) => {
         return (
-          <div
-            key={index.toString()}
-            // onClick={(e)=>{
-            //   scrollContainerRef.current=e.target.current.children
-            //   // console.log(e)
-            //     }}
-          >
+          <div key={index.toString()}>
             <div
               className={
                 item?.cat_name === "Home Furniture"
@@ -166,20 +167,31 @@ const SubCategorySection = () => {
             {/* ref={sliderRef} onMouseDown={handleMouseDown} */}
             <div
               className={styles.category_section_container}
-              onClick={e => {
-                scrollContainerRef.current = e.target;
-                // console.log(e)
+              // ref={(element) => (scrollContainerRefs[index] = element)}
+              onMouseOver={e => {
+                setRefEle(true);
+
+                handleScrolling(e);
               }}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
+              onMouseLeave={() => {
+                setRefEle(false);
+                scrollContainerRef5.current = "";
+              }}
+              onClick={e => {
+                scrollContainerRef5.current = e.target;
+              }}
+              // onMouseDown={handleMouseDown}
+              // onMouseMove={handleMouseMove}
+              // onMouseUp={handleMouseUp}
+              // onMouseLeave={handleMouseUp}
               id={index}
               key={index.toString()}>
               {item?.sub_categories.map((subItem, index) => {
                 return (
                   <div
-                    className={`${styles.card_container}`}
+                    className={`${styles.card_container}  ${
+                      isDumy && "pointer-events-none"
+                    }`}
                     key={index.toString()}
                     onClick={() => {
                       setLocalStorage("subCategory", subItem?.cat_name);
@@ -192,25 +204,29 @@ const SubCategorySection = () => {
                       <a
                         href={`/${homePageReduxData?.cityName.toLowerCase()}/${
                           item?.seourl
-                        }`}
-                        className={styles.images_anchor}>
-                        <div className="relative overflow-none">
-                          <img
-                            src={
-                              "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
-                              subItem?.category_web_image
-                            }
-                            className={`${styles.images} !w-full rounded-[6.4px] ms:rounded-none select-none`}
-                            //   onMouseDown={handleMouseDown}
-                            //  onMouseMove={handleMouseMove}
-                            //  onMouseUp={handleMouseUp}
-                            //  onMouseLeave={handleMouseUp}
-                          />
-                          <div className="absolute pointer-events-none top-0 left-0 w-full h-full bg-transparent"></div>
-                        </div>
+                        }`}>
+                        {/* <div className="relative overflow-none"> */}
+                        <img
+                          src={
+                            "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                            subItem?.category_web_image
+                          }
+                          className={`${styles.images} !w-full rounded-[6.4px] ms:rounded-none select-none`}
+                          //   onMouseDown={handleMouseDown}
+                          //  onMouseMove={handleMouseMove}
+                          //  onMouseUp={handleMouseUp}
+                          //  onMouseLeave={handleMouseUp}
+                        />
+                        {/* <div className="absolute pointer-events-none top-0 left-0 w-full h-full bg-transparent"></div> */}
+                        {/* </div> */}
                       </a>
                     </div>
-                    <h3 className={styles.card_text}>{subItem?.cat_name}</h3>
+                    <h3
+                      className={`${styles.card_text} ${
+                        isDumy && "pointer-events-none"
+                      }`}>
+                      {subItem?.cat_name}
+                    </h3>
                   </div>
                 );
               })}

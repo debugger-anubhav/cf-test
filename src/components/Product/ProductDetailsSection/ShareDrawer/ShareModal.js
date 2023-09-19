@@ -91,6 +91,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                   key={index.toString()}
                   target="_blank"
                   rel="noreferrer"
+                  className="outline-none"
                   onClick={e => {
                     if (!item.link) {
                       e.preventDefault(); // Prevent navigation
