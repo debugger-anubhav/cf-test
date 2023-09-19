@@ -138,7 +138,7 @@ const HappySubscribers = ({page, params}) => {
   // const HappySubscriberVideosArray =
   //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
 
-  if (data) {
+  if (data?.length) {
     return (
       <div
         className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
