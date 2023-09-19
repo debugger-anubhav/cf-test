@@ -86,15 +86,15 @@ const SubHeader = ({params}) => {
   }
 
   const handleFilterRemove = index => {
-    if (index > -1) {
+    if (index > -1 && categoryPageReduxData?.filteredItems) {
       const newFilteredItems = [
-        ...categoryPageReduxData?.filteredItems.slice(0, index),
-        ...categoryPageReduxData?.filteredItems.slice(index + 1),
+        ...categoryPageReduxData.filteredItems.slice(0, index),
+        ...categoryPageReduxData.filteredItems.slice(index + 1),
       ];
+
       dispatch(addFilteredItem(newFilteredItems));
     }
   };
-
   useEffect(() => {
     if (getAllAndSubCategoryData?.length) {
       const matchedCategoryName = findSubCategoryByURL(
@@ -199,8 +199,9 @@ const SubHeader = ({params}) => {
     subCategoryId,
     homePageReduxData.categoryId,
     homePageReduxData.subcategoryId,
+    filtereData.length,
   ]);
-
+  console.log(filtereData);
   const handleTitle = item => {
     if (item?.fc_city_category_data?.cat_heading !== title) {
       setTitle(item?.fc_city_category_data?.cat_heading || "");
@@ -212,7 +213,7 @@ const SubHeader = ({params}) => {
   const lowToHighKey = 4;
 
   const handleFilterDivClick = (e, filterTag) => {
-    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
     if (filterIndex === -1) {
@@ -220,11 +221,14 @@ const SubHeader = ({params}) => {
       updatedFilteredList.push(filterTag);
     } else {
       // If the filter is already in the list, remove it
-      updatedFilteredList.splice(filterIndex, 1);
+      updatedFilteredList = [
+        ...updatedFilteredList.slice(0, filterIndex),
+        ...updatedFilteredList.slice(filterIndex + 1),
+      ];
     }
+
     dispatch(addFilteredItem(updatedFilteredList));
   };
-
   const handleApply = () => {
     setPageNo(1);
     dispatch(addSingleProduct([]));
@@ -416,7 +420,7 @@ const SubHeader = ({params}) => {
             setFilterListed={setFilterListed}
           /> */}
             {showFilter && (
-              <div className="relative">
+              <div className="relative" ref={dropDownRefFilter}>
                 <div
                   className={`${styles.filter} relative`}
 
@@ -428,8 +432,7 @@ const SubHeader = ({params}) => {
                       // setFilterOpen(!filterOpen)
                       toggleDropDownFilter();
                       // toggleDropdownSort();
-                    }}
-                    ref={dropDownRefFilter}>
+                    }}>
                     <div className={styles.filter_text_container}>
                       <p className={`${styles.filter_text} text-71717A`}>
                         Filter
