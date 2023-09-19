@@ -33,10 +33,12 @@ const CompleteTheLook = ({params}) => {
         dispatch(addCompleteTheLook([]));
       });
   }, []);
-  const sliderRef = useRef(null);
 
-  useEffect(() => {
-    const slider = sliderRef.current;
+  const scrollerRef2 = useRef(null);
+
+  const handleScrolling = () => {
+    const slider = scrollerRef2.current;
+    console.log(slider);
     if (!slider) return;
 
     let mouseDown = false;
@@ -52,7 +54,7 @@ const CompleteTheLook = ({params}) => {
       mouseDown = false;
     };
 
-    const toggleIsdragging = () => {
+    const toggleIsDragging = () => {
       if (mouseDown && !isDumy) setIsDumy(true);
     };
 
@@ -66,15 +68,16 @@ const CompleteTheLook = ({params}) => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
-    slider.addEventListener("mousemove", toggleIsdragging);
+    slider.addEventListener("mousemove", toggleIsDragging);
 
     return () => {
       slider.removeEventListener("mousedown", startDragging);
       slider.removeEventListener("mouseup", stopDragging);
       slider.removeEventListener("mouseleave", stopDragging);
-      slider.removeEventListener("mousemove", toggleIsdragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
     };
-  }, []);
+  };
+
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
       router.push(`/things/${item.id}/${item.seourl}`);
@@ -86,12 +89,19 @@ const CompleteTheLook = ({params}) => {
       <div className={styles.main_container}>
         <h2 className={styles.heading}>Complete The Look</h2>
 
-        <div className={styles.card_wrapper} ref={sliderRef}>
+        <div
+          className={styles.card_wrapper}
+          ref={scrollerRef2}
+          onMouseOver={() => {
+            handleScrolling();
+          }}>
           {pageData?.completeTheLook?.map((item, index) => (
             <div
               key={index}
               onClick={e => handleCardClick(e, item)}
-              className={`${styles.child} ${isDumy && "pointer-events-none"}`}>
+              className={`${styles.child ?? ""} ${
+                isDumy && "pointer-events-none"
+              }`}>
               <Card
                 cardImage={`${
                   productPageImagesBaseUrl + item?.image?.split(",")[0]
