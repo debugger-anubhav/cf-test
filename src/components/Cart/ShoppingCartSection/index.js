@@ -53,9 +53,13 @@ const ShoppingCartSection = ({setTab}) => {
 
   const cityId = getLocalStorage("cityId");
 
+  // console.log(userIdToUse, "user id to use");
+  console.log(arr, "arrrr");
+
   const totalAmount = arr.reduce((accumulator, item) => {
-    return accumulator + parseInt(item?.price);
+    return accumulator + parseInt(item?.price) * item?.quantity;
   }, 0);
+  console.log(totalAmount, "totallll");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
@@ -174,16 +178,20 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
+    console.log(arr);
 
     const headers = {
       userId: parseInt(userIdToUse),
       quantity: updatedItems[itemIndex].quantity,
       productId: productid,
     };
-    axios
+    console.log(headers.quantity, "qaunt in gheader");
+    await axios
       .post(baseURL + endPoints.addToCart.updateQuantity, headers)
       .then(res => console.log(res, "res in updated qunatity"))
       .catch(err => console.log(err, "error in update qunatity"));
+
+    fetchBill();
   };
 
   const deleteItem = id => {
@@ -519,6 +527,7 @@ const ShoppingCartSection = ({setTab}) => {
                 <p className={styles.total_amount}>
                   <span className={styles.rupeeIcon}>₹</span>
                   {billBreakup?.finalTotalPrice?.toFixed(2)}
+                  {isMonthly ? "/mo" : ""}
                 </p>
               </div>
 

@@ -48,7 +48,7 @@ const Header = () => {
     endPoints.sidebarMenuLists,
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const [topOffset, settopOffset] = useState(0);
+  const [topOffset, settopOffset] = useState(78);
   const [arr, setArr] = React.useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -213,7 +213,7 @@ const Header = () => {
                   onClick={() => {
                     setOpenSearchBar(!openSearchbar);
                     const SCREEN_TYPE_OFFSET =
-                      window.screen.availWidth <= 768 ? 20 : 40;
+                      window.screen.availWidth <= 768 ? 20 : 44;
                     if (window.pageYOffset <= HEADER_HEIGHT) {
                       settopOffset(
                         (!homePageReduxData.announcementBar
@@ -458,7 +458,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         className={` ${
           homePageReduxData?.announcementBar
             ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-32 sm:top-32 top-28`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>

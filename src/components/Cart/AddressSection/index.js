@@ -66,7 +66,7 @@ const AddressSection = ({setTab}) => {
 
     landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
-    postalCode: Yup.string()
+    postalCode: Yup.number()
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 6 digit postal code without spaces or special characters",
@@ -159,17 +159,17 @@ const AddressSection = ({setTab}) => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && (
+        {addressArray.length > 0 && cityName === primaryAddress?.city && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
-            {cityName !== primaryAddress?.city && (
-              <div className={styles.not_belong_wrapper}>
-                <p className={styles.not_belong_text}>
-                  Address does not belong to selected city
-                </p>
-              </div>
-            )}
+            {/* {cityName !== primaryAddress?.city && ( */}
+            {/* // <div className={styles.not_belong_wrapper}>
+              //   <p className={styles.not_belong_text}>
+              //     Address does not belong to selected city
+              //   </p>
+              // </div> */}
+
             <div className={styles.saved_add_upper_div}>
               <h1 className={styles.saved_add_head}>Delivering to</h1>
               <button className={styles.change_btn}>Change</button>
@@ -207,7 +207,7 @@ const AddressSection = ({setTab}) => {
           <Formik
             initialValues={{
               fullName: "",
-              contactNumber: "9929839983",
+              contactNumber: "",
               address: "",
               landmark: "",
               postalCode: "",
@@ -249,8 +249,8 @@ const AddressSection = ({setTab}) => {
                         className={styles.flag}
                       />
                       <Field
-                        type="text"
-                        readOnly
+                        type="mobile"
+                        // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
                         className={styles.contact_input}
@@ -298,7 +298,7 @@ const AddressSection = ({setTab}) => {
                     <div>
                       <p className={styles.form_label}>Postal code</p>
                       <Field
-                        type="text"
+                        type="number"
                         name="postalCode"
                         placeholder="Enter 6 digit postal code"
                         className={styles.form_input}
@@ -438,7 +438,8 @@ const AddressSection = ({setTab}) => {
             </div>
             <p className={otherStyles.total_amount}>
               <span className={otherStyles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
+              {billBreakup?.finalTotalPrice?.toFixed(2)}
+              {billBreakup?.isMonthly && "/mo"}
             </p>
           </div>
           {breakupDrawer && (
