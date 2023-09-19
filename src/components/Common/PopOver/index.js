@@ -136,6 +136,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  const handleContextMenu = e => {
+    e.preventDefault(); // Prevent the default context menu
+    window.open(
+      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+        data.seourl
+      }`,
+      "_blank",
+    );
+  };
+
   return (
     <div
       onMouseLeave={() => {
@@ -144,6 +154,7 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
       <button
         onClick={e => handleCategory(e)}
         className="flex items-center whitespace-nowrap cursor-pointer"
+        onContextMenu={e => handleContextMenu(e)}
         onMouseEnter={e => {
           setAnchorEl(e.currentTarget);
           hoverRef.current = item;
