@@ -161,11 +161,11 @@ const ProductCard = ({
             <button
               className={styles.move_to_cart_btn}
               onClick={async e => {
-                e.preventDefault();
-                e.stopPropagation();
-                !soldOut
-                  ? await notifyAvailibility()
-                  : router.push("https://test.rentofurniture.com/cart");
+                if (!soldOut) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  await notifyAvailibility();
+                }
               }}>
               {!soldOut ? "Notify Me" : "  Move to Cart"}
             </button>

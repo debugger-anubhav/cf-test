@@ -158,16 +158,24 @@
 }
 .services_cards_container {
   @apply flex gap-6 w-full overflow-scroll mt-6 cursor-pointer;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .service_card_wrapper {
   @apply p-4 relative min-w-[211px] md:min-w-[240px] xl:min-w-[295px] rounded-lg;
   border: 1px solid #e3e1dc;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .service_card_head {
   @apply text-222 leading-6 tracking-0.3 lg:mt-6 font-medium;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .service_card_desc {
   @apply text-12 lg:text-14 leading-6 tracking-desc text-71717A mt-1;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .service_card_img {
   @apply absolute top-4 right-4 lg:static w-[22px] h-[22px];
