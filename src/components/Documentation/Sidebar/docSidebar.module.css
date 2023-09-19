@@ -3,27 +3,45 @@
   background-color: green;
 } */
 .mainContainer {
-  @apply flex;
+  @apply flex flex-col;
 
   padding-left: 122px;
-  background-color: blue;
+  background-color: #f7f9fc;
 }
 
-.headingLinks {
-  @apply text-red-500;
-}
+/* .headingLinks {
+  @apply;
+} */
 
 @media (max-width: 767px) {
   .mainContainer {
     padding-left: 0px; /* Adjust this value to your preferred mobile padding */
     margin: 0px 16px;
-    background-color: #1673ff;
   }
 }
 
-.accountText {
+.sectionHeadings {
   @apply text-gray-600 font-Poppins text-14 font-normal;
 }
-.fisrtContainer {
-  @apply mt-8;
+.userNameText {
+  @apply text-gray-600 font-Poppins text-14 font-medium leading-normal -tracking-tight;
+}
+.firstContainer {
+  @apply mt-8 pb-4 border-b border-dashed;
+  border-color: #dddddf;
+}
+.sectionItems {
+  @apply text-gray-700 font-Poppins text-base font-medium   tracking-tight;
+  margin: 6px 0px;
+  line-height: 24px;
+}
+.sectionItemsActive {
+  @apply font-Poppins text-base font-medium   tracking-tight;
+  color: #5774ac;
+  margin: 6px 0px;
+  line-height: 24px;
+}
+
+.secondContainer {
+  @apply mt-4 border-b border-dashed;
 }
