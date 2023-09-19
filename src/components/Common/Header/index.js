@@ -178,8 +178,20 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const handleContextMenu = e => {
+  const handleContextMenu = (e, type) => {
     e.preventDefault(); // Prevent the context menu from opening
+
+    if (type === "cart") {
+      window.open("/cart", "_blank");
+    }
+    if (type === "wishlist") {
+      if (userId) {
+        window.open("/wishlist", "_blank");
+      } else {
+        router.push("https://test.rentofurniture.com/user_sign_up");
+      }
+    }
+    // ref.current?.click();
   };
 
   return (
@@ -246,28 +258,22 @@ const Header = () => {
             )}
             <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
               <span className={styles.header_favorite_container}>
-                <a
-                  href="/wishlist"
-                  onClick={e => {
-                    e.preventDefault();
-                  }}>
-                  <Image
-                    src={Icons.Favorite}
-                    alt="favorite"
-                    className={styles.header_favorite}
-                    onContextMenu={handleContextMenu}
-                    onClick={() => {
-                      if (userId) {
-                        router.push("/wishlist");
-                      } else {
-                        // router.push("/wishlist");
-                        router.push(
-                          "https://test.rentofurniture.com/user_sign_up",
-                        );
-                      }
-                    }}
-                  />
-                </a>
+                <Image
+                  src={Icons.Favorite}
+                  alt="favorite"
+                  className={styles.header_favorite}
+                  onContextMenu={e => handleContextMenu(e, "wishlist")}
+                  onClick={() => {
+                    if (userId) {
+                      router.push("/wishlist");
+                    } else {
+                      // router.push("/wishlist");
+                      router.push(
+                        "https://test.rentofurniture.com/user_sign_up",
+                      );
+                    }
+                  }}
+                />
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
                   <span className={styles.cart_badge}>{wishListCount}</span>
                 ) : (
@@ -283,19 +289,13 @@ const Header = () => {
                   className={styles.header_shopping_card}
                   onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                <a
-                  href="/cart"
-                  onClick={e => {
-                    e.preventDefault();
-                  }}>
-                  <Image
-                    src={Icons.shoppingCard}
-                    alt="shopping-card-icon"
-                    className={styles.header_shopping_card}
-                    onClick={() => router.push("/cart")}
-                    onContextMenu={handleContextMenu}
-                  />
-                </a>
+                <Image
+                  src={Icons.shoppingCard}
+                  alt="shopping-card-icon"
+                  className={styles.header_shopping_card}
+                  onClick={() => router.push("/cart")}
+                  onContextMenu={e => handleContextMenu(e, "cart")}
+                />
                 {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
                 )}
@@ -304,6 +304,7 @@ const Header = () => {
               <Image
                 src={Icons.Profile}
                 alt="profile-icon"
+                onContextMenu={e => handleContextMenu(e, "profile")}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
                   // if (getLocalStorage("user_id") === null) {
