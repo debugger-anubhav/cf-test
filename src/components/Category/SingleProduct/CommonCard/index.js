@@ -4,15 +4,12 @@ import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {
-  getLocalStorage,
-  getLocalStorageString,
-  productImageBaseUrl,
-} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -24,6 +21,7 @@ const CategoryCard = ({
   soldOut,
   seourl,
   subProduct,
+  label,
 }) => {
   const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
@@ -40,7 +38,8 @@ const CategoryCard = ({
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
 
@@ -61,10 +60,12 @@ const CategoryCard = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorageString("user_id");
+  // const userId = getLocalStorageString("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -87,7 +88,6 @@ const CategoryCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -103,7 +103,6 @@ const CategoryCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };
@@ -180,19 +179,25 @@ const CategoryCard = ({
             alt="thumbnail image"
             className={styles.img}
           />
-          {soldOut && (
-            <div className={styles.soldout_tag}>
+          {soldOut ? (
+            <div className={`${styles.soldout_div} ${styles.label_tag}`}>
               <RiSparklingFill size={16} color={"#ffffff"} />
               <p className={styles.tag_text}>SOLD OUT</p>
             </div>
+          ) : label === "Trending" ? (
+            <div className={`${styles.trending_div} ${styles.label_tag}`}>
+              <RiSparklingFill size={16} color={"#ffffff"} />
+              <p className={styles.tag_text}>POPULAR</p>
+            </div>
+          ) : label === "New Launch" ? (
+            <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+              <RiSparklingFill size={16} color={"#ffffff"} />
+              <p className={styles.tag_text}>NEW LAUNCH</p>
+            </div>
+          ) : (
+            <div className="hidden"></div>
           )}
         </div>
-
-        {/* {soldOut && (
-        <div className={styles.soldout_tag}>
-          <p className={styles.tag_text}>SOLD OUT</p>
-        </div>
-      )} */}
 
         <div className={styles.desc_div}>
           <h3 className={styles.desc} style={{lineHeight: "normal"}}>

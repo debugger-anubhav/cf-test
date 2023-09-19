@@ -56,11 +56,11 @@
   color: #71717a;
 }
 .cancel_delete_btn {
-  @apply border rounded-lg py-4 px-10;
+  @apply border-2 rounded-lg py-4 px-6 sm:px-8 w-full font-Poppins text-14 sm:text-16 font-medium;
   border-color: #71717a;
 }
 .confirm_delete_btn {
-  @apply border rounded-lg  py-4 px-10 ml-4;
+  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium;
   background-color: #f6b704;
 }
 .main_container {
