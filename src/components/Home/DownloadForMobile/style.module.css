@@ -10,5 +10,5 @@
 }
 
 .download_image {
-  @apply w-full cursor-pointer;
+  @apply w-full;
 }

@@ -56,7 +56,7 @@ const CityshieldDrawer = ({
           <p className={styles.value_added_txt}>Value added service</p>
           <div className={styles.flexx}>
             <VerifyIcon size={30} color={"#2D9469"} />
-            <p className={styles.city_shield_head}>Cityshield </p>
+            <p className={styles.city_shield_head}>City Shield </p>
           </div>
 
           <p className={styles.opt_for}>
@@ -71,7 +71,7 @@ const CityshieldDrawer = ({
           </p>
 
           <p className={styles.option_text}>
-            Option to opt for CityShield is available at the time of checkout.
+            Option to opt for City Shield is available at the time of checkout.
           </p>
 
           <div className={styles.cityshield_prices}>

@@ -26,7 +26,6 @@ export default function TextContent({params}) {
       )
       .then(res => {
         setData(res?.data?.data);
-        console.log("appliances-rental text-content");
       })
       .catch(err => console.log(err));
   };
@@ -39,7 +38,6 @@ export default function TextContent({params}) {
       )
       .then(res => {
         setData(res?.data);
-        console.log("furniture-rental text content");
       })
       .catch(err => console.log(err));
   };
@@ -75,7 +73,6 @@ export default function TextContent({params}) {
       )}
       {params.category === "furniture-rental" && (
         <>
-          {console.log(data, "data")}
           <div
             dangerouslySetInnerHTML={{__html: data?.data?.cat_meta_keyword}}
             className={styles.apiDataSeo}

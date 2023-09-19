@@ -7,6 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const SavedItem = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,8 @@ const SavedItem = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
 

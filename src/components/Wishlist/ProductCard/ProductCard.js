@@ -3,10 +3,11 @@ import styles from "./style.module.css";
 import {Close, DeleteIcon} from "@/assets/icon";
 import {RiSparklingFill} from "react-icons/ri";
 import {Box, Modal, Typography} from "@mui/material";
-import {getLocalStorage, getLocalStorageString} from "@/constants/constant";
+import {getLocalStorage} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ProductCard = ({
   desc,
@@ -30,7 +31,8 @@ const ProductCard = ({
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
@@ -39,7 +41,7 @@ const ProductCard = ({
   const cityIdStr = parseInt(getLocalStorage("cityId"));
 
   const notifyData = {
-    userId: Number(getLocalStorageString("user_id").split('"').join("")),
+    userId: Number(decrypt(getLocalStorage("_ga"))),
     cityId: cityIdStr,
     productId: productID,
   };
@@ -191,7 +193,7 @@ const ProductCard = ({
                     wishlist?
                   </Typography>
                 </Box>
-                <Box>
+                <Box display={"flex"} justifyContent={"space-between"}>
                   <button
                     className={styles.cancel_delete_btn}
                     onClick={() => setDeleteIconClick(false)}>

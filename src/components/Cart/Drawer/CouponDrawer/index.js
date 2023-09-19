@@ -48,7 +48,6 @@ const CouponDrawer = ({
         headers,
       );
       if (res?.data?.data?.status) {
-        console.log("innnnn");
         setIsApplied(true);
         if (couponCode !== "") applyCouponCode(couponCode);
         toggleDrawer();
@@ -84,7 +83,6 @@ const CouponDrawer = ({
     axios
       .get(baseURL + endPoints.offersAndCupons + `?sortId=${isMonthly ? 0 : 1}`)
       .then(res => {
-        console.log(res, "res in offer and copouns");
         setPageData(res?.data?.data);
       });
   };
@@ -117,13 +115,13 @@ const CouponDrawer = ({
             placeholder="Enter Coupon code"
             onChange={e => {
               setInput(e.target.value);
-              input !== "" && handleApplyClick(input);
+              input !== " " && handleApplyClick(input);
             }}
           />
           <p
             className={styles.apply_text}
             onClick={() => {
-              input !== "" && handleApplyClick(input);
+              input !== " " && handleApplyClick(input);
               // toggleDrawer();
             }}>
             Apply

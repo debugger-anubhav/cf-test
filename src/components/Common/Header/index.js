@@ -27,6 +27,7 @@ import {
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
+import {decrypt, encrypt} from "@/hooks/cryptoUtils";
 
 const HEADER_HEIGHT = 48;
 
@@ -57,6 +58,8 @@ const Header = () => {
   if (!cityId) {
     setLocalStorage("cityId", 46);
   }
+
+  // Example of using decryption
 
   useEffect(() => {
     // Disable scrolling when the search bar is open
@@ -91,13 +94,11 @@ const Header = () => {
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
-    console.log(!homePageReduxData?.category.length);
     if (!homePageReduxData?.category.length) {
       axios
         .get(baseURL + endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
-          console.log("home");
         })
         .catch(err => {
           console.log(err);
@@ -110,7 +111,10 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"))
+    ? decrypt(getLocalStorage("_ga"))
+    : getLocalStorage("user_id");
+
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -153,7 +157,7 @@ const Header = () => {
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
-    userId: getLocalStorage("user_id") ?? "",
+    userId: userId ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID"),
   };
@@ -163,7 +167,9 @@ const Header = () => {
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
         if (userId) {
-          setLocalStorage("user_id", res?.data?.data?.userId);
+          localStorage.removeItem("user_id");
+          const encryptedData = encrypt(res?.data?.data?.userId);
+          setLocalStorage("_ga", encryptedData);
           setLocalStorage("user_name", res?.data?.data?.userName);
         } else {
           setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
@@ -178,11 +184,17 @@ const Header = () => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text_main_header}
-              onClick={() => router.push("/cityfurnish")}>
-              cityfurnish
-            </p>
+            <a
+              href={"/cityfurnish"}
+              onClick={e => {
+                e.preventDefault();
+              }}>
+              <p
+                className={styles.logo_text_main_header}
+                onClick={() => router.push("/cityfurnish")}>
+                cityfurnish
+              </p>
+            </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
@@ -228,7 +240,7 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex">
+            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
               <span className={styles.header_favorite_container}>
                 <Image
                   src={Icons.Favorite}
@@ -246,9 +258,7 @@ const Header = () => {
                   }}
                 />
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.header_favorite_count}>
-                    {wishListCount}
-                  </span>
+                  <span className={styles.cart_badge}>{wishListCount}</span>
                 ) : (
                   <></>
                 )}
@@ -262,12 +272,18 @@ const Header = () => {
                   className={styles.header_shopping_card}
                   onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
-                />
+                <a
+                  href="/cart"
+                  onClick={e => {
+                    e.preventDefault();
+                  }}>
+                  <Image
+                    src={Icons.shoppingCard}
+                    alt="shopping-card-icon"
+                    className={styles.header_shopping_card}
+                    onClick={() => router.push("/cart")}
+                  />
+                </a>
                 {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
                 )}
@@ -278,7 +294,8 @@ const Header = () => {
                 alt="profile-icon"
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  if (getLocalStorage("user_id") === null) {
+                  // if (getLocalStorage("user_id") === null) {
+                  if (decrypt(getLocalStorage("_ga")) === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     toggleDropdown();
@@ -287,12 +304,14 @@ const Header = () => {
                 }}
                 ref={iconRef}
               />
-              {getLocalStorage("user_id") !== null && showProfileDropdown && (
-                <ProfileDropDown
-                  setShowProfileDropdown={setShowProfileDropdown}
-                  showProfileDropdown={showProfileDropdown}
-                />
-              )}
+              {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
+              {decrypt(getLocalStorage("_ga")) !== null &&
+                showProfileDropdown && (
+                  <ProfileDropDown
+                    setShowProfileDropdown={setShowProfileDropdown}
+                    showProfileDropdown={showProfileDropdown}
+                  />
+                )}
             </div>
           </div>
         </div>
@@ -393,7 +412,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       }
       searchesArray.unshift(item);
       const truncatedArray = searchesArray.slice(0, 5);
-      console.log(storedSearches, searchesArray, truncatedArray, item);
       // if (storedSearches?.length) {
       //   setLocalStorage("searches", [...truncatedArray]);
       // } else {

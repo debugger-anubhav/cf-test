@@ -18,6 +18,7 @@ import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const defaultKey = 1;
 const newSortKey = 2;
@@ -58,7 +59,8 @@ const SearchList = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
     }`,

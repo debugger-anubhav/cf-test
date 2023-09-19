@@ -9,6 +9,7 @@ import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const RecentlyViewedProduct = ({page}) => {
   const router = useRouter();
@@ -37,7 +38,8 @@ const RecentlyViewedProduct = ({page}) => {
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
       // JSON.parse(localStorage.getItem("user_id")) ??
       // JSON.parse(localStorage.getItem("tempUserID"))
       // JSON.parse(localStorage.getItem("user_id")) ??
