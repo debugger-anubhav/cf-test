@@ -459,6 +459,7 @@ const ShoppingCartSection = ({setTab}) => {
                   }}
                   isMonthly={isMonthly}
                   cityId={cityId}
+                  totalAmount={totalAmount}
                 />
               )}
 
