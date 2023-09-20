@@ -167,7 +167,7 @@ export default function CategoryPopover({
                 );
               })}
             </div>
-            <div className="mt-6 w-full flex justify-center">
+            <div className=" w-full flex justify-center">
               <div
                 className={styles.btn_container}
                 onClick={() => handleApply()}>
