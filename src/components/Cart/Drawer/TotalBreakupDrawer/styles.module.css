@@ -23,7 +23,7 @@
   @apply mt-4 md:pl-4 pt-2 flex flex-col gap-2;
 }
 .dropdown_row {
-  @apply flex gap-2 md:gap-4 items-start;
+  @apply flex gap-2 md:gap-4 items-start justify-between;
 }
 .prod_name {
   @apply text-71717A text-14 xl:text-16 leading-6;
