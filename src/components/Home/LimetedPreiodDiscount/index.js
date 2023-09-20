@@ -15,6 +15,7 @@ const LimetedPreiodDiscount = () => {
   const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
+  console.log(cityId, "eyewuhw");
 
   const dispatch = useDispatch();
   const {limitedDiscount: getLimitedPreiodData} = useSelector(
