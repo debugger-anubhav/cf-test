@@ -185,16 +185,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           vertical: "bottom",
           horizontal: "left",
         }}
-        sx={
-          {
-            // mb: "0.9rem",
-          }
-        }>
+        sx={{
+          zIndex: 2,
+          // mb: "0.9rem",
+        }}>
         {/* <div className={styles.shadow_box}> */}
         <Box
           className={styles.sub_item_wrapper}
           sx={{
             mt: 2.4,
+
             // boxShadow:3
           }}
           // onMouseLeave={handleClose}
