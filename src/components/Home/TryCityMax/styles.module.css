@@ -106,3 +106,6 @@
 .sidebar_detail_subheading {
   @apply text-base text-71717A font-Poppins leading-6;
 }
+.rupeeIcon {
+  @apply font-Inter;
+}
