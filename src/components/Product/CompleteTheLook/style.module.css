@@ -7,5 +7,5 @@
 }
 
 .card_wrapper {
-  @apply flex overflow-scroll gap-4 xl:gap-6 3xl:gap-8;
+  @apply flex overflow-scroll gap-4 xl:gap-6 3xl:gap-8 mr-4;
 }

@@ -414,7 +414,6 @@ const ProductDetails = ({params}) => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
-  console.log(scrollContainerRef, "scrollContainerRef");
 
   const handleMouseDown = e => {
     setIsScrolling(true);

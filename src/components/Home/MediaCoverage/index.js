@@ -62,7 +62,7 @@ const MediaCoverage = () => {
   return (
     <div className={styles.media_coverage_wrapper}>
       <p className={styles.label}>{str.label}</p>
-      <h1 className={`${styles.heading} mb-8`}>{str.desc}</h1>
+      <h2 className={`${styles.heading} mb-8`}>{str.desc}</h2>
 
       <div className={`${styles.ticker_container} gap-12`}>
         {MediaCoverageImages?.map((imageUrl, index) => (
