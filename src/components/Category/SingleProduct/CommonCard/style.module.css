@@ -1,5 +1,5 @@
 .card_wrapper {
-  @apply p-4 bg-fff cursor-pointer;
+  @apply md:p-4 bg-fff cursor-pointer;
 }
 .card_wrapper:hover {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
@@ -17,7 +17,8 @@
   @apply flex gap-[0.62rem] items-center;
 }
 .desc_div {
-  @apply flex gap-2 3xl:justify-between mt-3;
+  /* @apply flex gap-2 3xl:justify-between mt-3; */
+  @apply flex gap-2 justify-between mt-3;
 }
 .desc {
   @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] h-[54px] font-Poppins;
@@ -34,11 +35,23 @@
 .discount {
   @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
 }
-.soldout_tag {
-  @apply flex p-1 items-center gap-1 absolute top-3 bg-[#3E688E] rounded-[4px];
+.label_tag {
+  @apply flex p-1 items-center h-6 gap-1 absolute top-2 rounded-[4px];
+}
+.soldout_div {
+  @apply bg-[#3E688E];
+}
+.newlylaunch_div {
+  @apply bg-[#207B3A];
+}
+.trending_div {
+  background: var(--purple-purple-800, #4a36b3);
 }
 .tag_text {
-  @apply font-Poppins font-medium  text-12 tracking-0.24 text-white;
+  @apply font-Poppins font-medium text-12 tracking-0.24 text-white;
+}
+.tag_icon {
+  @apply w-4 h-4;
 }
 .rupeeIcon {
   @apply font-Inter;

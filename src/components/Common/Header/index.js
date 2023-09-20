@@ -27,6 +27,7 @@ import {
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
+import {decrypt, encrypt} from "@/hooks/cryptoUtils";
 
 const HEADER_HEIGHT = 48;
 
@@ -47,11 +48,19 @@ const Header = () => {
     endPoints.sidebarMenuLists,
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const [topOffset, settopOffset] = useState(0);
+  const [topOffset, settopOffset] = useState(78);
   const [arr, setArr] = React.useState(null);
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
+
+  const cityId = getLocalStorage("cityId");
+  if (!cityId) {
+    setLocalStorage("cityId", 46);
+  }
+
+  // Example of using decryption
+
   useEffect(() => {
     // Disable scrolling when the search bar is open
     if (openSearchbar) {
@@ -62,7 +71,8 @@ const Header = () => {
   }, [openSearchbar]);
 
   useEffect(() => {
-    const cityId = getLocalStorage("cityId");
+    const cityId = getLocalStorage("cityId") || 46;
+
     getCityList()
       .then(res => {
         if (cityId) {
@@ -89,7 +99,6 @@ const Header = () => {
         .get(baseURL + endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
-          console.log("home");
         })
         .catch(err => {
           console.log(err);
@@ -98,13 +107,14 @@ const Header = () => {
     }
   }, []);
 
-  const cityId = getLocalStorage("cityId");
-
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,
   );
 
-  const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"))
+    ? decrypt(getLocalStorage("_ga"))
+    : getLocalStorage("user_id");
+
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -147,7 +157,7 @@ const Header = () => {
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
-    userId: getLocalStorage("user_id") ?? "",
+    userId: userId ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID"),
   };
@@ -157,7 +167,9 @@ const Header = () => {
       .post(baseURL + endPoints.sessionUserUrl, data)
       .then(res => {
         if (userId) {
-          setLocalStorage("user_id", res?.data?.data?.userId);
+          localStorage.removeItem("user_id");
+          const encryptedData = encrypt(res?.data?.data?.userId);
+          setLocalStorage("_ga", encryptedData);
           setLocalStorage("user_name", res?.data?.data?.userName);
         } else {
           setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
@@ -166,17 +178,39 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
+  const handleContextMenu = (e, type) => {
+    e.preventDefault(); // Prevent the context menu from opening
+
+    if (type === "cart") {
+      window.open("/cart", "_blank");
+    }
+    if (type === "wishlist") {
+      if (userId) {
+        window.open("/wishlist", "_blank");
+      } else {
+        router.push("https://test.rentofurniture.com/user_sign_up");
+      }
+    }
+    // ref.current?.click();
+  };
+
   return (
     <>
       <div className={styles.main}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
-            <p
-              className={styles.logo_text_main_header}
-              onClick={() => router.push("/cityfurnish")}>
-              cityfurnish
-            </p>
+            <a
+              href={"/cityfurnish"}
+              onClick={e => {
+                e.preventDefault();
+              }}>
+              <p
+                className={styles.logo_text_main_header}
+                onClick={() => router.push("/cityfurnish")}>
+                cityfurnish
+              </p>
+            </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer Cities={storeCityList} DrawerName="cities" />
@@ -191,7 +225,7 @@ const Header = () => {
                   onClick={() => {
                     setOpenSearchBar(!openSearchbar);
                     const SCREEN_TYPE_OFFSET =
-                      window.screen.availWidth <= 768 ? 20 : 40;
+                      window.screen.availWidth <= 768 ? 20 : 44;
                     if (window.pageYOffset <= HEADER_HEIGHT) {
                       settopOffset(
                         (!homePageReduxData.announcementBar
@@ -222,12 +256,13 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex">
+            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
               <span className={styles.header_favorite_container}>
                 <Image
                   src={Icons.Favorite}
                   alt="favorite"
                   className={styles.header_favorite}
+                  onContextMenu={e => handleContextMenu(e, "wishlist")}
                   onClick={() => {
                     if (userId) {
                       router.push("/wishlist");
@@ -240,9 +275,7 @@ const Header = () => {
                   }}
                 />
                 {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.header_favorite_count}>
-                    {wishListCount}
-                  </span>
+                  <span className={styles.cart_badge}>{wishListCount}</span>
                 ) : (
                   <></>
                 )}
@@ -261,6 +294,7 @@ const Header = () => {
                   alt="shopping-card-icon"
                   className={styles.header_shopping_card}
                   onClick={() => router.push("/cart")}
+                  onContextMenu={e => handleContextMenu(e, "cart")}
                 />
                 {cartItemsLength > 0 && (
                   <div className={styles.cart_badge}>{cartItemsLength}</div>
@@ -270,9 +304,11 @@ const Header = () => {
               <Image
                 src={Icons.Profile}
                 alt="profile-icon"
+                onContextMenu={e => handleContextMenu(e, "profile")}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  if (getLocalStorage("user_id") === null) {
+                  // if (getLocalStorage("user_id") === null) {
+                  if (decrypt(getLocalStorage("_ga")) === null) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     toggleDropdown();
@@ -281,12 +317,14 @@ const Header = () => {
                 }}
                 ref={iconRef}
               />
-              {getLocalStorage("user_id") !== null && showProfileDropdown && (
-                <ProfileDropDown
-                  setShowProfileDropdown={setShowProfileDropdown}
-                  showProfileDropdown={showProfileDropdown}
-                />
-              )}
+              {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
+              {decrypt(getLocalStorage("_ga")) !== null &&
+                showProfileDropdown && (
+                  <ProfileDropDown
+                    setShowProfileDropdown={setShowProfileDropdown}
+                    showProfileDropdown={showProfileDropdown}
+                  />
+                )}
             </div>
           </div>
         </div>
@@ -387,7 +425,6 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
       }
       searchesArray.unshift(item);
       const truncatedArray = searchesArray.slice(0, 5);
-      console.log(storedSearches, searchesArray, truncatedArray, item);
       // if (storedSearches?.length) {
       //   setLocalStorage("searches", [...truncatedArray]);
       // } else {
@@ -422,7 +459,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
         className={` ${
           homePageReduxData?.announcementBar
             ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-32 sm:top-32 top-28`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
@@ -432,6 +469,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             value={searchTerm}
             onClick={e => e.stopPropagation()}
             onChange={e => handleSearch(e)}
+            autoFocus
           />
           <Image
             src={Icons.Search}
@@ -450,6 +488,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <input
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
+            autoFocus
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             onKeyDown={e => handleSearch(e)}

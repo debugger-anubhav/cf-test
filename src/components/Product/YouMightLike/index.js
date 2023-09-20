@@ -16,7 +16,6 @@ const YouMightLike = ({heading, isbg, params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
   const [isDumy, setIsDumy] = React.useState(false);
-
   const cityId = getLocalStorage("cityId");
 
   useEffect(() => {
@@ -33,10 +32,11 @@ const YouMightLike = ({heading, isbg, params}) => {
       });
   }, []);
 
-  const sliderRef = useRef(null);
+  const scrollerRef1 = useRef(null);
 
-  useEffect(() => {
-    const slider = sliderRef.current;
+  const handleScrolling = () => {
+    const slider = scrollerRef1.current;
+    console.log(slider);
     if (!slider) return;
 
     let mouseDown = false;
@@ -52,7 +52,7 @@ const YouMightLike = ({heading, isbg, params}) => {
       mouseDown = false;
     };
 
-    const toggleIsdragging = () => {
+    const toggleIsDragging = () => {
       if (mouseDown && !isDumy) setIsDumy(true);
     };
 
@@ -66,15 +66,15 @@ const YouMightLike = ({heading, isbg, params}) => {
     slider.addEventListener("mousedown", startDragging, false);
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
-    slider.addEventListener("mousemove", toggleIsdragging);
+    slider.addEventListener("mousemove", toggleIsDragging);
 
     return () => {
       slider.removeEventListener("mousedown", startDragging);
       slider.removeEventListener("mouseup", stopDragging);
       slider.removeEventListener("mouseleave", stopDragging);
-      slider.removeEventListener("mousemove", toggleIsdragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
     };
-  }, []);
+  };
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
@@ -86,12 +86,19 @@ const YouMightLike = ({heading, isbg, params}) => {
       <div className={styles.main_container}>
         <h2 className={styles.heading}>You might also like</h2>
 
-        <div className={styles.card_wrapper} ref={sliderRef}>
+        <div
+          className={`${styles.card_wrapper}`}
+          ref={scrollerRef1}
+          onMouseOver={() => {
+            handleScrolling();
+          }}>
           {pageData?.youMightLike?.map((item, index) => (
             <div
               key={index}
               onClick={e => handleCardClick(e, item)}
-              className={`${styles.child} ${isDumy && "pointer-events-none"}`}>
+              className={`${styles.child ?? ""} ${
+                isDumy && "pointer-events-none"
+              }`}>
               <Card
                 cardImage={`${
                   productPageImagesBaseUrl + item?.image?.split(",")[0]

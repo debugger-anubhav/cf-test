@@ -1,3 +1,5 @@
+"use client";
+
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {
@@ -31,6 +33,7 @@ import {
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -39,8 +42,6 @@ const ShoppingCartSection = ({setTab}) => {
   const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
 
-  console.log(showData, "loader");
-
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
     setArr(cartItems);
@@ -48,17 +49,19 @@ const ShoppingCartSection = ({setTab}) => {
 
   const count = cartItems.length;
 
-  const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");
 
   // console.log(userIdToUse, "user id to use");
+  console.log(arr, "arrrr");
 
-  const totalAmount = cartItems.reduce((accumulator, item) => {
-    return accumulator + item?.fc_product?.fc_product_sale_price?.sale_price;
+  const totalAmount = arr.reduce((accumulator, item) => {
+    return accumulator + parseInt(item?.price) * item?.quantity;
   }, 0);
+  console.log(totalAmount, "totallll");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
@@ -156,13 +159,19 @@ const ShoppingCartSection = ({setTab}) => {
     dispatch(getCouponCodeUsed(value));
   };
 
-  const handleUpdateQuantity = (itemid, productid, newQuantity, itemIndex) => {
+  const handleUpdateQuantity = async (
+    itemid,
+    productid,
+    newQuantity,
+    itemIndex,
+  ) => {
+    let updatedItems;
     if (newQuantity < 1) {
       setProductId(productid);
       setItemId(itemid);
       openModal();
     } else {
-      const updatedItems = arr.map(item => {
+      updatedItems = arr.map(item => {
         if (item.id === itemid) {
           return {...item, quantity: newQuantity};
         }
@@ -171,16 +180,20 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
+    console.log(arr);
 
     const headers = {
       userId: parseInt(userIdToUse),
-      quantity: arr[itemIndex].quantity,
+      quantity: updatedItems[itemIndex].quantity,
       productId: productid,
     };
-    axios
+    console.log(headers.quantity, "qaunt in gheader");
+    await axios
       .post(baseURL + endPoints.addToCart.updateQuantity, headers)
-      .then(res => console.log(res))
+      .then(res => console.log(res, "res in updated qunatity"))
       .catch(err => console.log(err, "error in update qunatity"));
+
+    fetchBill();
   };
 
   const deleteItem = id => {
@@ -297,10 +310,12 @@ const ShoppingCartSection = ({setTab}) => {
                               {item?.price}
                             </p>
 
-                            <p className={styles.originalPrice}>
-                              <span className={styles.rupeeIcon}>₹</span>
-                              {item?.attr_price}
-                            </p>
+                            {item?.attr_price > item?.price && (
+                              <p className={styles.originalPrice}>
+                                <span className={styles.rupeeIcon}>₹</span>
+                                {item?.attr_price}
+                              </p>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -446,6 +461,7 @@ const ShoppingCartSection = ({setTab}) => {
                   }}
                   isMonthly={isMonthly}
                   cityId={cityId}
+                  totalAmount={totalAmount}
                 />
               )}
 
@@ -514,6 +530,7 @@ const ShoppingCartSection = ({setTab}) => {
                 <p className={styles.total_amount}>
                   <span className={styles.rupeeIcon}>₹</span>
                   {billBreakup?.finalTotalPrice?.toFixed(2)}
+                  {isMonthly ? "/mo" : ""}
                 </p>
               </div>
 

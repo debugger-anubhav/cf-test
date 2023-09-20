@@ -103,6 +103,10 @@ const Footer = ({params}) => {
     setPoints(array);
   }, [cityName]);
 
+  const handleContextMenu = e => {
+    e.preventDefault(); // Prevent the context menu from opening
+  };
+
   return (
     <div className={styles.footer_wrapper}>
       {content.map((str, index) => {
@@ -168,7 +172,6 @@ const Footer = ({params}) => {
                 alt={item?.icon}
                 src={item?.icon}
                 onClick={() =>{ router.push(item.link)
-                console.log("item.link")}}
               />
             ))}
           </div> */}
@@ -216,7 +219,7 @@ const Footer = ({params}) => {
               <img
                 alt={item?.icon}
                 src={item?.icon}
-                onClick={() => console.log("item.link")}
+                // onClick={() => console.log("item.link")}
               />
             </a>
           ))}
@@ -227,13 +230,15 @@ const Footer = ({params}) => {
         <p className={styles.copyTxt}>{text}</p>
         <div
           className={styles.goToTopDiv}
-          onClick={() =>
-            window.scrollTo({top: 0, left: 0, behavior: "smooth"})
-          }>
+          onClick={e => {
+            e.preventDefault();
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          }}>
           <Image
             src={FooterIcons.GoToTopIcon}
             alt="go-to-top-icon"
             className={styles.goToTopIcon}
+            onContextMenu={handleContextMenu}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

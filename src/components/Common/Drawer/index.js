@@ -15,6 +15,7 @@ import {
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 export default function CommonDrawer({DrawerName, Cities, data}) {
   const dispatch = useDispatch();
@@ -90,10 +91,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     DrawerName === "menu" ? (
       <div
         role="presentation"
-        onClick={toggleDrawer(anchor, false)}
+        // onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
         className={styles.drawer_wrapper}>
-        <div className={styles.drawer_close}>
+        <div
+          className={styles.drawer_close}
+          onClick={toggleDrawer(anchor, false)}>
           <Close
             color={"#000"}
             size={25}
@@ -163,7 +166,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     <a
                       key={index.toString()}
                       href={
-                        index === 3 && getLocalStorage("user_id") !== null
+                        // index === 3 && getLocalStorage("user_id") !== null
+                        index === 3 && decrypt(getLocalStorage("_ga")) !== null
                           ? "/usersettings"
                           : item.link
                       }>
@@ -183,7 +187,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       <>
         {mobileCityDrawer && DrawerName !== "menu" && (
           <div
-            className="relative z-[9999]"
+            className={`relative z-[9999]`}
             onClick={() => toggleDrawer("bottom", false)}>
             <div
               className={styles.bottom_close_icon}
@@ -202,28 +206,34 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         )}
         <div
           className={`${styles.drawer_wrapper} ${styles.city_drawer_wrapper}`}
-          onClick={toggleDrawer(anchor, false)}
+          // onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}>
           <div
             className={`${styles.drawer_close} ${styles.city_drawer_close}`}
-            onClick={() => {
-              mobileCityDrawer && DrawerName !== "menu"
-                ? toggleDrawer("bottom", false)
-                : toggleDrawer("left", false);
-            }}>
-            <Close
-              color={"#000"}
-              size={25}
-              className={styles.close_icon}
+            // onClick={() => {
+            //   mobileCityDrawer && DrawerName !== "menu"
+            //     ? toggleDrawer("bottom", false)
+            //     : toggleDrawer(anchor, false);
+            // }}
+          >
+            <div
               onClick={() => {
-                mobileCityDrawer && DrawerName !== "menu"
-                  ? toggleDrawer("bottom", false)
-                  : toggleDrawer("left", false);
-              }}
-            />
+                toggleDrawer("left", false);
+              }}>
+              <Close
+                color={"#000"}
+                size={25}
+                className={styles.close_icon}
+                // onClick={() => {
+                //   mobileCityDrawer && DrawerName !== "menu"
+                //     ? toggleDrawer("bottom", false)
+                //     : toggleDrawer(anchor, false);
+                // }}
+              />
+            </div>
           </div>
           <div className={`${styles.drawer_content}`}>
-            <h1 className={styles.select_heading}>Select your city</h1>
+            <p className={styles.select_heading}>Select your city</p>
             <div
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => (
@@ -254,7 +264,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     alt="city-image"
                   />
                   {city?.id === 50 ? (
-                    <div className={styles.city_name}>
+                    <div className={`${styles.city_name}`}>
                       {city?.list_value.split("/")[0]}/
                       <br className="flex sm:hidden" />
                       {city?.list_value.split("/")[1]}
@@ -262,7 +272,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       {/* {city?.id} */}
                     </div>
                   ) : (
-                    <p className={styles.city_name}>{city?.list_value}</p>
+                    <p
+                      className={`${
+                        homePageReduxData?.cityName === city?.list_value
+                          ? "text-[#222] font-medium "
+                          : "text-45454A"
+                      } ${styles.city_name}`}>
+                      {city?.list_value}
+                    </p>
                   )}
                 </div>
               ))}
@@ -288,15 +305,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 </p>
               </div>
               <p className={styles.detail_line}>
-                100k+ People have already downloaded our app 🎉
+                <span className="text-[#7895B0] font-bold">100k+ </span>&nbsp;
+                People have already downloaded our app 🎉
               </p>
             </div>
           </div>
         </div>
       </>
     );
-
-  // console.log(Cities, "Cities")
 
   return (
     <div className={"flex"}>
@@ -320,7 +336,12 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         )}
       </div>
       <SwipeableDrawer
+        classes={{
+          paper:
+            mobileCityDrawer && DrawerName !== "menu" && styles.bottomDrawer,
+        }}
         anchor={mobileCityDrawer && DrawerName !== "menu" ? "bottom" : "left"}
+        className=""
         open={
           mobileCityDrawer && DrawerName !== "menu" ? state.bottom : state.left
         }

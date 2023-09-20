@@ -55,7 +55,11 @@ const AddressDrawer = ({
             {addressArray?.map((item, index) => (
               <div
                 key={index}
-                className={styles.card_wrapper}
+                className={`${
+                  cityName !== item.city
+                    ? "cursor-not-allowed"
+                    : "cursor-pointer"
+                } ${styles.card_wrapper}`}
                 onClick={() => {
                   setSelectedIndex(index);
                   setId(item.id);

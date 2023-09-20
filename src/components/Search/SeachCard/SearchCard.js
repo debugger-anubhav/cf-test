@@ -9,6 +9,7 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const SearchCard = ({
   cardImage,
@@ -32,7 +33,8 @@ const SearchCard = ({
 
   const data = {
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
 
@@ -53,10 +55,12 @@ const SearchCard = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
-  const userId = getLocalStorage("user_id");
+  // const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -79,7 +83,6 @@ const SearchCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res?.data?.dat);
           })
           .catch(err => console.log(err))
       : removewhislistProduct()
@@ -95,7 +98,6 @@ const SearchCard = ({
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };

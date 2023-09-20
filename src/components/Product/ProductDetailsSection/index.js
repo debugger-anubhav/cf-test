@@ -39,6 +39,7 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
 import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -80,7 +81,7 @@ const ProductDetails = ({params}) => {
   const [soldOut, setSoldOut] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
+  // const [dummy,setIsDumy]=useState(false);
   const reviewsPerPage = 4;
   const startIndex = open ? (currentPage - 1) * reviewsPerPage : 0;
   const endIndex = open ? startIndex + reviewsPerPage : 3;
@@ -154,7 +155,8 @@ const ProductDetails = ({params}) => {
     const data = {
       // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
       tempUserId: getLocalStorage("tempUserID") ?? "",
-      userId: getLocalStorage("userId") ?? "",
+      // userId: getLocalStorage("user_id") ?? "",
+      userId: decrypt(getLocalStorage("_ga")) ?? "",
 
       // userId: JSON.parse(localStorage.getItem("user_id")) ?? "",
       productId: params?.productId,
@@ -162,7 +164,7 @@ const ProductDetails = ({params}) => {
     axios
       .post(baseURL + endPoints.addRecentViewProduct, data)
       .then(res => {
-        console.log(res?.data?.data);
+        console.log();
       })
       .catch(err => {
         console.log(err);
@@ -186,7 +188,6 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(categoryPageReduxData.savedProducts, params.productId);
     setInWishList(
       categoryPageReduxData.savedProducts
         .map(obj => obj.id)
@@ -203,7 +204,8 @@ const ProductDetails = ({params}) => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  const userId = getLocalStorageString("user_id");
+  // const userId = getLocalStorageString("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleWhislistCard = e => {
     e.stopPropagation();
@@ -243,7 +245,6 @@ const ProductDetails = ({params}) => {
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
-            console.log(res);
           })
           .catch(err => console.log(err));
   };
@@ -251,7 +252,8 @@ const ProductDetails = ({params}) => {
   const data = {
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    // userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
 
     // userId: JSON.parse(localStorage.getItem("user_id")),
     // userId: JSON.parse(localStorage.getItem("user_id")),
@@ -269,7 +271,8 @@ const ProductDetails = ({params}) => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
   const {mutateAsync: removewhislistProduct} = useMutation(
@@ -312,7 +315,8 @@ const ProductDetails = ({params}) => {
     const headers = {
       "Content-Type": "application/json",
     };
-    const userId = getLocalStorage("userID");
+    // const userId = getLocalStorage("user_id");
+    const userId = decrypt(getLocalStorage("_ga"));
     const tempUserId = getLocalStorage("tempUserID");
     const userIdToUse = userId || tempUserId;
 
@@ -364,35 +368,72 @@ const ProductDetails = ({params}) => {
 
   const averageRating = totalReviews > 0 ? totalRatingSum / totalReviews : 0;
 
-  const sliderRef = useRef(null);
+  // const handleScrolling=(()=>{
+  //   const slider = scrollerRef1.current;
+  //   console.log(slider);
+  //   if (!slider) return;
 
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
+  //   let mouseDown = false;
+  //   let startX, scrollLeft;
 
-    let mouseDown = false;
-    let startX, scrollLeft;
+  //   const startDragging = (e) => {
+  //     mouseDown = true;
+  //     startX = e.pageX - slider.offsetLeft;
+  //     scrollLeft = slider.scrollLeft;
+  //   };
+  //   const stopDragging = () => {
+  //     setIsDumy(false);
+  //     mouseDown = false;
+  //   };
 
-    const startDragging = function (e) {
-      mouseDown = true;
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
-    };
-    const stopDragging = function () {
-      mouseDown = false;
-    };
+  //   const toggleIsDragging = () => {
+  //     if (mouseDown && !isDumy) setIsDumy(true);
+  //   };
 
-    slider.addEventListener("mousemove", e => {
-      e.preventDefault();
-      if (!mouseDown) return;
-      const x = e.pageX - slider.offsetLeft;
-      const scroll = x - startX;
-      slider.scrollLeft = scrollLeft - scroll;
-    });
-    slider.addEventListener("mousedown", startDragging, false);
-    slider.addEventListener("mouseup", stopDragging, false);
-    slider.addEventListener("mouseleave", stopDragging, false);
-  }, []);
+  //   slider.addEventListener("mousemove", (e) => {
+  //     e.preventDefault();
+  //     if (!mouseDown) return;
+  //     const x = e.pageX - slider.offsetLeft;
+  //     const scroll = x - startX;
+  //     slider.scrollLeft = scrollLeft - scroll;
+  //   });
+  //   slider.addEventListener("mousedown", startDragging, false);
+  //   slider.addEventListener("mouseup", stopDragging, false);
+  //   slider.addEventListener("mouseleave", stopDragging, false);
+  //   slider.addEventListener("mousemove", toggleIsDragging);
+
+  //   return () => {
+  //     slider.removeEventListener("mousedown", startDragging);
+  //     slider.removeEventListener("mouseup", stopDragging);
+  //     slider.removeEventListener("mouseleave", stopDragging);
+  //     slider.removeEventListener("mousemove", toggleIsDragging);
+  //   };
+
+  // })
+
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const scrollContainerRef = useRef(null);
+
+  const handleMouseDown = e => {
+    setIsScrolling(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMove = e => {
+    if (!isScrolling) return;
+
+    const deltaX = e.clientX - startX;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft -= deltaX;
+    }
+
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsScrolling(false);
+  };
 
   return (
     <div className={styles.main_container}>
@@ -436,6 +477,14 @@ const ProductDetails = ({params}) => {
       </div>
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
+          <div className={styles.info}>
+            <InformationIcon color={"ffffff"} />
+            <p>
+              {soldOut
+                ? "SOLD OUT"
+                : "39 people ordered this in the last 24hrs"}
+            </p>
+          </div>
           <Carousel
             selectedItem={selectedIndex}
             showThumbs={false}
@@ -470,14 +519,6 @@ const ProductDetails = ({params}) => {
                       alt={`Thumbnail ${index}`}
                       className="w-full h-full"
                     />
-                    <div className={styles.info}>
-                      <InformationIcon color={"ffffff"} />
-                      <p>
-                        {soldOut
-                          ? "SOLD OUT"
-                          : "39 people ordered this in the last 24hrs"}
-                      </p>
-                    </div>
                   </div>
                 )}
               </>
@@ -508,7 +549,14 @@ const ProductDetails = ({params}) => {
           </div>
           <div
             className={`${styles.services_cards_container} ${styles.web}`}
-            ref={sliderRef}>
+            ref={scrollContainerRef}
+            // onMouseOver={()=>{
+            //   handleScrolling()
+            // }}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}>
             {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
                 key={index}
@@ -712,7 +760,9 @@ const ProductDetails = ({params}) => {
 
           <div
             className={`${styles.services_cards_container} ${styles.mobile}`}
-            ref={sliderRef}>
+
+            // ref={sliderRef}
+          >
             {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
                 key={index}

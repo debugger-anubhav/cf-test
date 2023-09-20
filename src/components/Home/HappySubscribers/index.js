@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 // import {HappySubscriber} from "@/constants/constant";
@@ -14,32 +14,8 @@ import {baseURL} from "@/network/axios";
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
   const [data, setData] = React.useState(null);
-  const [isDumy] = React.useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(null);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const containerRef = useRef(null);
-  const handleMouseDown = e => {
-    setIsDragging(true);
-    setStartX(e.pageX - containerRef.current.scrollLeft);
-    setScrollLeft(containerRef.current.scrollLeft);
-  };
+  const [isDumy, setIsDumy] = React.useState(false);
 
-  const handleMouseMove = e => {
-    if (!isDragging) return;
-
-    const x = e.pageX - containerRef.current.getBoundingClientRect().left;
-    const distance = x - startX;
-    containerRef.current.scrollLeft = scrollLeft - distance;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
   const getVideosForProductPage = () => {
     axios
       .get(baseURL + endPoints.productPage.happySubscribers(params.productId))
@@ -115,7 +91,54 @@ const HappySubscribers = ({page, params}) => {
 
   const str = string.landing_page.HappySubscriber;
 
-  if (data) {
+  const containerRef = useRef(null);
+
+  const handleScrolling = () => {
+    const slider = containerRef.current;
+    // console.log(slider);
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsDragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsDragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
+    };
+  };
+
+  // const HappySubscriberVideosArray =
+  //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
+
+  if (data?.length > 0) {
     return (
       <div
         className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
@@ -128,15 +151,17 @@ const HappySubscribers = ({page, params}) => {
         <div
           className={styles.cards_wrapper}
           ref={containerRef}
-          onMouseDown={handleMouseDown}
-          onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}>
+          onMouseOver={handleScrolling}
+          // onMouseDown={handleMouseDown}
+          // onMouseMove={handleMouseMove}
+          // onMouseUp={handleMouseUp}
+          // onMouseLeave={handleMouseLeave}
+        >
           {data?.map((item, index) => (
             <div
               className={`${styles.card_div}  ${
                 index === data?.length - 1 && "mr-[16px]"
-              } ${isDumy && "pointer-events-none"}`}
+              } ${"pointer-events-none"}`}
               key={index.toString()}>
               <div className={styles.video}>
                 {/* <video className={styles.video_player} ref={videoRef}>

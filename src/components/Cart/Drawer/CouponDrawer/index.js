@@ -13,6 +13,7 @@ const CouponDrawer = ({
   applyCouponCode,
   isMonthly,
   cityId,
+  totalAmount,
 }) => {
   const [isApplied, setIsApplied] = React.useState(false);
   const [appliedIndex, setappliedIndex] = React.useState(null);
@@ -23,7 +24,7 @@ const CouponDrawer = ({
   const [errorMsg, setErrorMsg] = useState("");
 
   const data = useSelector(state => state.cartPageData);
-  const billBreakup = data.billBreakup;
+  // const billBreakup = data.billBreakup;
   const cartItems = data.cartItems;
 
   const idsArr = [];
@@ -32,16 +33,13 @@ const CouponDrawer = ({
     return idsArr.push(item.fc_product.id.toString());
   });
 
-  useEffect(() => {
-    console.log(open);
-  }, [open]);
-
   const handleApplyClick = async couponCode => {
+    setShowError(false);
     try {
       const headers = {
         productIds: idsArr,
         couponCode,
-        cartSubTotal: billBreakup?.cartSubTotal,
+        cartSubTotal: totalAmount,
         paymentMode: isMonthly ? 0 : 1,
         cityId,
         tenure: cartItems?.[0]?.subproduct?.attr_name,
@@ -51,14 +49,13 @@ const CouponDrawer = ({
         headers,
       );
       if (res?.data?.data?.status) {
-        console.log("innnnn");
         setIsApplied(true);
         if (couponCode !== "") applyCouponCode(couponCode);
         toggleDrawer();
       } else {
         setErrorMsg(res?.data?.data?.msg);
         setShowError(true);
-        applyCouponCode("");
+        // applyCouponCode("");
       }
     } catch (err) {
       console.log(err);
@@ -87,7 +84,6 @@ const CouponDrawer = ({
     axios
       .get(baseURL + endPoints.offersAndCupons + `?sortId=${isMonthly ? 0 : 1}`)
       .then(res => {
-        console.log(res, "res in offer and copouns");
         setPageData(res?.data?.data);
       });
   };
@@ -96,6 +92,7 @@ const CouponDrawer = ({
     getOffersAndCoupons();
   }, []);
 
+  console.log(input, "inputttt");
   const backgroundImageType1 =
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp";
   const backgroundImageType2 =
@@ -118,13 +115,16 @@ const CouponDrawer = ({
           <input
             className={styles.input}
             placeholder="Enter Coupon code"
-            onChange={e => setInput(e.target.value)}
+            onChange={e => {
+              setInput(e.target.value);
+              input !== " " && handleApplyClick(input);
+            }}
           />
           <p
             className={styles.apply_text}
             onClick={() => {
-              input !== "" && applyCouponCode(input);
-              toggleDrawer();
+              input !== " " && handleApplyClick(input);
+              // toggleDrawer();
             }}>
             Apply
           </p>

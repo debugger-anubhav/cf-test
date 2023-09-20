@@ -22,6 +22,7 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
 import {getSavedAddress} from "@/store/Slices";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const AddressSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -31,7 +32,8 @@ const AddressSection = ({setTab}) => {
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
 
-  const userId = getLocalStorage("user_id");
+  // const userId = getLocalStorage("user_id");
+  const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = getLocalStorage("tempUserID");
   const userIdToUse = userId || tempUserId;
 
@@ -41,7 +43,6 @@ const AddressSection = ({setTab}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
 
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
-  // console.log(addressArray[0], "lllllll");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -65,7 +66,7 @@ const AddressSection = ({setTab}) => {
 
     landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
-    postalCode: Yup.string()
+    postalCode: Yup.number()
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 6 digit postal code without spaces or special characters",
@@ -95,7 +96,6 @@ const AddressSection = ({setTab}) => {
   };
 
   const getAllSavedAddresses = () => {
-    console.log("in get all saved");
     axios
       .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
@@ -104,14 +104,12 @@ const AddressSection = ({setTab}) => {
         const newPrimaryAddress = res?.data?.data.find(
           item => item.primary === "Yes",
         );
-        console.log(newPrimaryAddress, "new primary addressss");
         setPrimaryAddress(newPrimaryAddress);
       })
       .catch(err => console.log(err));
   };
 
   const saveUserAddress = async values => {
-    console.log(values);
     return new Promise((resolve, reject) => {
       const headers = {
         userId: parseInt(userIdToUse),
@@ -127,7 +125,6 @@ const AddressSection = ({setTab}) => {
       axios
         .post(baseURL + endPoints.addToCart.addAddress, headers)
         .then(response => {
-          console.log(response?.data?.data, "res in save addes");
           resolve("hii");
         })
         .catch(error => {
@@ -149,7 +146,6 @@ const AddressSection = ({setTab}) => {
     } catch (error) {
       console.log(error);
     }
-    console.log(id, "address id");
   };
   useEffect(() => {
     getAllSavedAddresses();
@@ -163,17 +159,17 @@ const AddressSection = ({setTab}) => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && (
+        {addressArray.length > 0 && cityName === primaryAddress?.city && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
-            {cityName !== primaryAddress?.city && (
-              <div className={styles.not_belong_wrapper}>
-                <p className={styles.not_belong_text}>
-                  Address does not belong to selected city
-                </p>
-              </div>
-            )}
+            {/* {cityName !== primaryAddress?.city && ( */}
+            {/* // <div className={styles.not_belong_wrapper}>
+              //   <p className={styles.not_belong_text}>
+              //     Address does not belong to selected city
+              //   </p>
+              // </div> */}
+
             <div className={styles.saved_add_upper_div}>
               <h1 className={styles.saved_add_head}>Delivering to</h1>
               <button className={styles.change_btn}>Change</button>
@@ -211,7 +207,7 @@ const AddressSection = ({setTab}) => {
           <Formik
             initialValues={{
               fullName: "",
-              contactNumber: "9929839983",
+              contactNumber: "",
               address: "",
               landmark: "",
               postalCode: "",
@@ -219,9 +215,7 @@ const AddressSection = ({setTab}) => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
-              console.log("Form submitted with values:", values);
               await saveUserAddress(values);
-              console.log("1");
               getAllSavedAddresses();
               resetForm();
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});
@@ -255,8 +249,8 @@ const AddressSection = ({setTab}) => {
                         className={styles.flag}
                       />
                       <Field
-                        type="text"
-                        readOnly
+                        type="mobile"
+                        // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
                         className={styles.contact_input}
@@ -304,7 +298,7 @@ const AddressSection = ({setTab}) => {
                     <div>
                       <p className={styles.form_label}>Postal code</p>
                       <Field
-                        type="text"
+                        type="number"
                         name="postalCode"
                         placeholder="Enter 6 digit postal code"
                         className={styles.form_input}
@@ -444,7 +438,8 @@ const AddressSection = ({setTab}) => {
             </div>
             <p className={otherStyles.total_amount}>
               <span className={otherStyles.rupeeIcon}>₹</span>
-              {billBreakup?.[0]?.finalTotalPrice.toFixed(2)}
+              {billBreakup?.finalTotalPrice?.toFixed(2)}
+              {billBreakup?.isMonthly && "/mo"}
             </p>
           </div>
           {breakupDrawer && (

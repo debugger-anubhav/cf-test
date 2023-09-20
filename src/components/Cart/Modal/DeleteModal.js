@@ -12,6 +12,7 @@ import {useMutation} from "@/hooks/useMutation";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const DeleteModal = ({
   isModalOpen,
@@ -67,13 +68,14 @@ const DeleteModal = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
   const data = {
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: getLocalStorage("tempUserID") ?? "",
-    userId: getLocalStorage("user_id") ?? "",
+    userId: decrypt(getLocalStorage("_ga")) ?? "",
 
     // userId: JSON.parse(localStorage.getItem("user_id")),
     // userId: JSON.parse(localStorage.getItem("user_id")),
@@ -89,7 +91,8 @@ const DeleteModal = ({
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    if (!getLocalStorage("user_id")) {
+    // if (!getLocalStorage("user_id")) {
+    if (decrypt(getLocalStorage("_ga"))) {
       router.push("https://test.rentofurniture.com/user_sign_up");
       return;
     }
