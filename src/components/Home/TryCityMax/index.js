@@ -61,7 +61,8 @@ const TryCityMax = () => {
           </h2>
           <p className={styles.TryCity_paragraph}>
             Unlimited furniture and appliances for
-            <br /> lifetime. Starting at just ₹2,999/month.
+            <br /> lifetime. Starting at just{" "}
+            <span className={styles.rupeeIcon}>₹</span>2,999/month.
           </p>
           <a
             href="https://test.rentofurniture.com/citymax"

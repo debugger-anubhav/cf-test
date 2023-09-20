@@ -29,8 +29,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const params = useParams();
   const router = useRouter();
+
   const handleresize = e => {
-    if (e.target.innerWidth < 640) {
+    if (window.innerWidth < 640) {
       // if (mobileCityDrawer) return
       setMobileCityDrawer(true);
     } else {
@@ -38,23 +39,32 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
       setMobileCityDrawer(false);
     }
   };
+
   React.useEffect(() => {
+    handleresize();
     window.addEventListener("resize", handleresize);
     return () => window.removeEventListener("resize", handleresize);
   }, []);
+
   const hoverRef = React.useRef("");
+
   const toggleDrawer = (anchor, open) => event => {
+    console.log("in togle");
     if (
       event &&
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
+      console.log("in iffff");
       return;
     }
 
     setState({...state, [anchor]: open});
   };
-  React.useEffect(() => {}, [mobileCityDrawer]);
+
+  // console.log(mobileCityDrawer);
+
+  const cityId = getLocalStorage("cityId");
 
   const handleMenu = (e, item) => {
     // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
@@ -84,7 +94,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     }
     // router.push(
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
-    // );
+    // );toggleDrawe
   };
 
   const list = anchor =>
@@ -101,7 +111,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             color={"#000"}
             size={25}
             className={styles.close_icon}
-            onClick={() => toggleDrawer("left", false)}
+            // onClick={() => toggleDrawer("left", false)}
           />
         </div>
         <div className={styles.drawer_content}>
@@ -196,9 +206,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                 color={"#000"}
                 size={20}
                 className={"z-30"}
-                onClick={() => {
-                  toggleDrawer("bottom", false);
-                }}
+                // onClick={() => {
+                //   toggleDrawer("bottom", false);
+                // }}
               />
             </div>
             {/* </p> */}
@@ -216,10 +226,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             //     : toggleDrawer(anchor, false);
             // }}
           >
-            <div
-              onClick={() => {
-                toggleDrawer("left", false);
-              }}>
+            <div onClick={toggleDrawer("left", false)}>
               <Close
                 color={"#000"}
                 size={25}
@@ -258,8 +265,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
                     className={`${styles.city_thambnil} ${
-                      homePageReduxData?.cityName === city?.list_value &&
-                      "border-[2px] border-primary"
+                      cityId === city?.id && "border-[2px] border-primary"
                     }`}
                     alt="city-image"
                   />
@@ -274,7 +280,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   ) : (
                     <p
                       className={`${
-                        homePageReduxData?.cityName === city?.list_value
+                        cityId === city?.id
                           ? "text-[#222] font-medium "
                           : "text-45454A"
                       } ${styles.city_name}`}>
