@@ -152,11 +152,11 @@ const ItemsIncluded = () => {
               )}
             </div>
           </div>
-          {pageDetails?.description && (
+          {pageDetails?.features && (
             <div className={styles.right_div}>
               <p className={styles.info_subhead}>Features</p>
               <div className={styles.features_wrappers}>
-                {pageDetails.description?.map((feature, index) => (
+                {pageDetails.features?.map((feature, index) => (
                   <li key={index} className={styles.feature}>
                     <div className={styles.dot}></div>
                     {feature}
