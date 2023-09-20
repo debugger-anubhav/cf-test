@@ -11,6 +11,7 @@ const DownloadForMobile = () => {
           src={DownloadForWeb}
           alt="download-image-for-web"
           className={styles.download_image}
+          loading="lazy"
         />
         {/* </a> */}
       </div>
@@ -20,6 +21,7 @@ const DownloadForMobile = () => {
           src={DownloadForMobileImg}
           alt="download-image-for-mobile"
           className={styles.download_image}
+          loading="lazy"
         />
         {/* </a> */}
       </div>

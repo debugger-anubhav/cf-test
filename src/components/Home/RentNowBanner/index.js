@@ -103,13 +103,8 @@ const RentNowBanner = ({params}) => {
             <RentNowCard
               cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
               url={item?.url}
-            />
-            {/* <img
-              src={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
               alt={item?.image}
-              className={styles.banner_img}
-              onClick={() => router.push(item?.url)}
-            /> */}
+            />
           </div>
         ))}
       </div>
