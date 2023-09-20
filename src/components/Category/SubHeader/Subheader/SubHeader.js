@@ -212,7 +212,6 @@ const SubHeader = ({params}) => {
   const lowToHighKey = 4;
 
   const handleFilterDivClick = (e, filterTag) => {
-    e.preventDefault();
     let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
@@ -237,16 +236,6 @@ const SubHeader = ({params}) => {
     dispatch(isFilterApplied(true));
     setFilterListed(true);
     setFilterOpen(false);
-
-    // let filters = "";
-    // for (var i = 0; i < appliedFilter.length; i++) {
-    //   filters += "filter=" + encodeURIComponent(appliedFilter[i]);
-
-    //   if (i < appliedFilter.length - 1) {
-    //     filters += "&";
-    //   }
-    // }
-    // router.push(`?${filters}`);
   };
 
   const handleSort = (item, index) => {
@@ -470,7 +459,7 @@ const SubHeader = ({params}) => {
                                 className={styles.single_filter_text}
                                 key={index.toString()}
                                 onClick={e =>
-                                  handleFilterDivClick(e, ele.filter_tag)
+                                  handleFilterDivClick(e, ele?.filter_tag)
                                 }>
                                 <p
                                   htmlFor={index}
@@ -486,7 +475,6 @@ const SubHeader = ({params}) => {
                                     ele?.filter_tag,
                                   )}
                                   className="pr-1 cursor-pointer"
-                                  // onChange={e => handleFilteredItems(e)}
                                 />
                               </div>
                             )}
@@ -501,7 +489,7 @@ const SubHeader = ({params}) => {
                         See more
                       </p>
                     )}
-                    <div className="mt-6 w-full flex justify-center">
+                    <div className="mt-2 w-full flex justify-center">
                       <div
                         className={styles.btn_container}
                         onClick={() => handleApply()}>
