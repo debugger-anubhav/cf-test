@@ -88,8 +88,8 @@ const SubHeader = ({params}) => {
   const handleFilterRemove = index => {
     if (index > -1 && categoryPageReduxData?.filteredItems) {
       const newFilteredItems = [
-        ...categoryPageReduxData.filteredItems.slice(0, index),
-        ...categoryPageReduxData.filteredItems.slice(index + 1),
+        ...categoryPageReduxData?.filteredItems.slice(0, index),
+        ...categoryPageReduxData?.filteredItems.slice(index + 1),
       ];
 
       dispatch(addFilteredItem(newFilteredItems));
@@ -201,7 +201,6 @@ const SubHeader = ({params}) => {
     homePageReduxData.subcategoryId,
     filtereData.length,
   ]);
-  console.log(filtereData);
   const handleTitle = item => {
     if (item?.fc_city_category_data?.cat_heading !== title) {
       setTitle(item?.fc_city_category_data?.cat_heading || "");
