@@ -369,6 +369,7 @@ const SubHeader = ({params}) => {
                         setLocalStorage("subCategory", subItem?.cat_name);
                         setLocalStorage("subCategoryId", subItem?.id);
                       }}
+                      className="mr-3 md:mr-0"
                       key={i.toString()}>
                       <div
                         className={
