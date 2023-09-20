@@ -351,6 +351,10 @@ const ProductDetails = ({params}) => {
     // }, 3000);
   };
 
+  const handleGoToCart = () => {
+    router.push("/cart");
+  };
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -714,8 +718,8 @@ const ProductDetails = ({params}) => {
           </div>
 
           <button
-            onClick={handleAddToCart}
-            disabled={isLoading || isItemInCart || soldOut}
+            onClick={isItemInCart ? handleGoToCart : handleAddToCart}
+            disabled={isLoading || soldOut}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
@@ -723,7 +727,7 @@ const ProductDetails = ({params}) => {
             ) : soldOut ? (
               "Notify me"
             ) : isItemInCart ? (
-              "In cart"
+              "Go To Cart"
             ) : (
               "Add to Cart"
             )}
