@@ -340,7 +340,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         ) : (
           <span className={styles.header_city_name}>
             {/* {homePageReduxData?.cityName} */}
-            {params.city}
+            {params.city || homePageReduxData?.cityName}
             {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
           </span>
         )}

@@ -178,19 +178,8 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const handleContextMenu = (e, type) => {
+  const handleContextMenu = e => {
     e.preventDefault(); // Prevent the context menu from opening
-
-    if (type === "cart") {
-      window.open("/cart", "_blank");
-    }
-    if (type === "wishlist") {
-      if (userId) {
-        window.open("/wishlist", "_blank");
-      } else {
-        router.push("https://test.rentofurniture.com/user_sign_up");
-      }
-    }
     // ref.current?.click();
   };
 
@@ -257,29 +246,35 @@ const Header = () => {
               </div>
             )}
             <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
-              <span className={styles.header_favorite_container}>
-                <Image
-                  src={Icons.Favorite}
-                  alt="favorite"
-                  className={styles.header_favorite}
-                  onContextMenu={e => handleContextMenu(e, "wishlist")}
-                  onClick={() => {
-                    if (userId) {
-                      router.push("/wishlist");
-                    } else {
-                      // router.push("/wishlist");
-                      router.push(
-                        "https://test.rentofurniture.com/user_sign_up",
-                      );
-                    }
-                  }}
-                />
-                {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.cart_badge}>{wishListCount}</span>
-                ) : (
-                  <></>
-                )}
-              </span>
+              <a
+                href={
+                  userId
+                    ? "/cart"
+                    : "https://test.rentofurniture.com/user_sign_up"
+                }>
+                <span className={styles.header_favorite_container}>
+                  <Image
+                    src={Icons.Favorite}
+                    alt="favorite"
+                    className={styles.header_favorite}
+                    onClick={() => {
+                      if (userId) {
+                        router.push("/wishlist");
+                      } else {
+                        // router.push("/wishlist");
+                        router.push(
+                          "https://test.rentofurniture.com/user_sign_up",
+                        );
+                      }
+                    }}
+                  />
+                  {categoryPageReduxData?.savedProducts?.length > 0 ? (
+                    <span className={styles.cart_badge}>{wishListCount}</span>
+                  ) : (
+                    <></>
+                  )}
+                </span>
+              </a>
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">
@@ -289,22 +284,23 @@ const Header = () => {
                   className={styles.header_shopping_card}
                   onClick={() => router.push("https://cityfurnish.com/cart")}
                 /> */}
-                <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("/cart")}
-                  onContextMenu={e => handleContextMenu(e, "cart")}
-                />
-                {cartItemsLength > 0 && (
-                  <div className={styles.cart_badge}>{cartItemsLength}</div>
-                )}
+                <a href={"/cart"}>
+                  <Image
+                    src={Icons.shoppingCard}
+                    alt="shopping-card-icon"
+                    className={styles.header_shopping_card}
+                    onClick={() => router.push("/cart")}
+                  />
+                  {cartItemsLength > 0 && (
+                    <div className={styles.cart_badge}>{cartItemsLength}</div>
+                  )}
+                </a>
               </div>
               {/* </Link> */}
               <Image
                 src={Icons.Profile}
                 alt="profile-icon"
-                onContextMenu={e => handleContextMenu(e, "profile")}
+                onContextMenu={e => handleContextMenu(e)}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
                   if (!decrypt(getLocalStorage("_ga"))) {
