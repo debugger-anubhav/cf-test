@@ -309,6 +309,19 @@ const ProductDetails = ({params}) => {
     return item?.fc_product?.id === parseInt(params.productId);
   });
 
+  const isSameTenure = cartItems?.some(item => {
+    return (
+      parseInt(item?.subproduct?.attr_name?.split(" ")?.[0]) ===
+      parseInt(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])
+    );
+  });
+
+  // console.log(isSameTenure, "sametenure");
+
+  const handleNotSameTenure = () => {
+    alert("plz choose same tenure");
+  };
+
   const handleAddToCart = () => {
     setIsLoading(true);
     const headers = {
@@ -452,7 +465,8 @@ const ProductDetails = ({params}) => {
           duration={duration}
           durationArray={durationArray}
           isLoading={isLoading}
-          handleButtonClick={handleAddToCart}
+          handleAddToCart={handleAddToCart}
+          handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
         />
@@ -721,7 +735,13 @@ const ProductDetails = ({params}) => {
           </div>
 
           <button
-            onClick={isItemInCart ? handleGoToCart : handleAddToCart}
+            onClick={
+              isItemInCart
+                ? handleGoToCart
+                : isSameTenure
+                ? handleAddToCart
+                : handleNotSameTenure
+            }
             disabled={isLoading || soldOut}
             className={styles.btn}
             ref={addToCartButtonRef}>

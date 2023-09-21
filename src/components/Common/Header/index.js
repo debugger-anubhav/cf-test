@@ -307,8 +307,7 @@ const Header = () => {
                 onContextMenu={e => handleContextMenu(e, "profile")}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  // if (getLocalStorage("user_id") === null) {
-                  if (decrypt(getLocalStorage("_ga")) === null) {
+                  if (!decrypt(getLocalStorage("_ga"))) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     toggleDropdown();
@@ -450,16 +449,16 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
-        style={{
-          top: `${
-            !homePageReduxData?.announcementBar ? topOffset : topOffset
-          }px`,
-        }}
+        // style={{
+        //   top: `${
+        //     !homePageReduxData?.announcementBar ? topOffset : topOffset
+        //   }px`,
+        // }}
         ref={modalRef}
         className={` ${
           homePageReduxData?.announcementBar
-            ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-32 sm:top-32 top-28`
+            ? `w-full absolute top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]   lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem]`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
