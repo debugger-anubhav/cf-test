@@ -96,7 +96,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );toggleDrawe
   };
-
+  const userId = decrypt(getLocalStorage("_ga"));
+  console.log(userId);
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -177,8 +178,10 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       key={index.toString()}
                       href={
                         // index === 3 && getLocalStorage("user_id") !== null
-                        index === 3 && decrypt(getLocalStorage("_ga")) !== null
-                          ? "/usersettings"
+                        index === 3
+                          ? userId
+                            ? "/usersettings"
+                            : "https://test.rentofurniture.com/user_sign_up"
                           : item.link
                       }>
                       <p className={styles.menu_item}>{item?.item}</p>
@@ -336,7 +339,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           />
         ) : (
           <span className={styles.header_city_name}>
-            {homePageReduxData?.cityName}
+            {/* {homePageReduxData?.cityName} */}
+            {params.city}
             {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
           </span>
         )}

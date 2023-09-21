@@ -44,6 +44,9 @@ export const endPoints = {
   searchKey: (key = "", cityId = "", sort = "") =>
     `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
 
+  getCategoryIdBySeoUrl: (key = "") =>
+    `fc-categories/getCategoryIdBySeoUrl?seoUrl=${key}`,
+
   productPage: {
     completeTheLook: (id, cityId) =>
       `fc-products/getRecommendedProducts?productId=${id}&cityId=${cityId}`,

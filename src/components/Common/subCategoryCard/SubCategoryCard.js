@@ -113,6 +113,8 @@ const SubCategoryCard = ({productID}) => {
               "https://d3juy0zp6vqec8.cloudfront.net/images/product/Athena%203%20Seater%20Sofa%201.png"
             }
             className="w-[290px]"
+            loading="lazy"
+            alt="Athena-3-Seater-Sofa"
           />
           <span className={style.new_launched}>New Launched</span>
           <span className={style.like}>
@@ -137,7 +139,12 @@ const SubCategoryCard = ({productID}) => {
                 {includedItem?.map((item, index) => {
                   return (
                     <div className={style.single_img} key={index.toString()}>
-                      <img src={item?.img} className="w-[40px] h-[40px]" />
+                      <img
+                        src={item?.img}
+                        className="w-[40px] h-[40px]"
+                        loading="lazy"
+                        alt="Athena-3-Seater-sofa"
+                      />
                     </div>
                   );
                 })}

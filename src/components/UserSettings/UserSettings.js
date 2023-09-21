@@ -1,9 +1,12 @@
 import React from "react";
 import styles from "./style.module.css";
 import {FaChevronRight} from "react-icons/fa6";
+import {useRouter} from "next/navigation";
+import cookie from "react-cookies";
 // import {getLocalStorage} from "@/constants/constant";
 
 export default function UserSettings() {
+  const router = useRouter();
   const Servicesdata = [
     {head: "My orders", desc: "See all orders & stay updated on their status."},
     {
@@ -46,7 +49,19 @@ export default function UserSettings() {
             </div>
           );
         })}
-        <p className={styles.lgout}>Logout</p>
+        <p
+          className={styles.lgout}
+          onClick={() => {
+            cookie.remove("ci_sessions");
+            localStorage.removeItem("tempUserID");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("_ga");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("ci_session");
+            router.push("https://test.rentofurniture.com/logout");
+          }}>
+          Logout
+        </p>
       </div>
     </div>
   );

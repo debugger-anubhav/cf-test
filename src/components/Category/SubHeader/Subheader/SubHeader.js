@@ -30,15 +30,18 @@ import {
   selectedCityId,
   selectedCityName,
 } from "@/store/Slices";
-import {useRouter} from "next/navigation";
+import {useRouter, useParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
+// import axios from "axios";
+// import {baseURL} from "@/network/axios";
 
 const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
   const dropDownRefSort = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
+  const query = useParams();
   const [pageNo, setPageNo] = useState(1);
   const [filterListed, setFilterListed] = useState(false);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
@@ -306,6 +309,16 @@ const SubHeader = ({params}) => {
     setItemCount(itemCount + 7);
   };
 
+  // console.log(query.category, "ppppppppppppppppp");
+
+  // useEffect(() => {
+  //   axios
+  //     .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
+  //     .then(res => {
+  //       console.log(res, "resssssssssss");
+  //     });
+  // }, []);
+
   return (
     <>
       {skeletonOpen ? (
@@ -339,7 +352,8 @@ const SubHeader = ({params}) => {
               </li>
               <li className={styles.list}>
                 <p className={styles.route_text}>
-                  {getLocalStorage("subCategory")?.replace(/"/g, "")}
+                  {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
+                  {query.category}
                 </p>
               </li>
             </ul>

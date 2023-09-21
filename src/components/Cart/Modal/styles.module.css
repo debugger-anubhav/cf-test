@@ -22,7 +22,7 @@
   @apply mt-8 flex gap-4;
 }
 .btn {
-  @apply font-Poppins outline-none flex justify-center text-14 md:text-16 leading-5 font-medium items-center h-[48px] md:h-[54px] w-[156px] md:w-[170px] rounded-lg border-2 cursor-pointer;
+  @apply font-Poppins outline-none flex justify-center text-14 md:text-16 leading-5 font-medium items-center h-[48px] lg:h-[54px] w-[156px] md:w-[170px] rounded-lg border-2 cursor-pointer;
 }
 .yellow_btn {
   @apply bg-F6B704 border-F6B704 text-222;

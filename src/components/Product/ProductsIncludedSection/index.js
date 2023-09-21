@@ -26,6 +26,8 @@ const ItemsIncluded = () => {
               <img
                 src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
                 className={styles.img}
+                loading="lazy"
+                alt={item.product_name}
               />
               <div className={styles.quantity_label}>1x</div>
             </div>
@@ -107,6 +109,8 @@ const ItemsIncluded = () => {
                 productPageImagesBaseUrl + pageDetails?.image.split(",")[0]
               }`}
               className={styles.img}
+              alt={pageDetails?.product_name.replace(/-/g, " ")}
+              loading="lazy"
             />
             <div className={styles.quantity_label}>1x</div>
           </div>

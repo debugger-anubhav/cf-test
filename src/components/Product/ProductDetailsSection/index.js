@@ -196,9 +196,8 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(inWishList, "whishlist");
+    console.log(inWishList, "inWishlist");
   }, [inWishList]);
-
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
@@ -476,7 +475,10 @@ const ProductDetails = ({params}) => {
       <div className={styles.bread_crumps}>
         {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">
-            <a href={index !== 2 && `${item?.link}`}>
+            <a
+              href={index !== 2 && `${item?.link}`}
+              target="_self"
+              rel="noopener">
               <p
                 className={` ${
                   index === arr.length - 1 ? "font-medium" : "font-normal"
@@ -535,8 +537,9 @@ const ProductDetails = ({params}) => {
                   <div key={index} className={styles.prod_img}>
                     <img
                       src={`${productPageImagesBaseUrl + item}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -558,8 +561,9 @@ const ProductDetails = ({params}) => {
                     onClick={() => handleThumbnailClick(index)}>
                     <img
                       src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -647,6 +651,8 @@ const ProductDetails = ({params}) => {
                 <img
                   className={styles.sold_out_icon}
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/sold-out-icon.svg"
+                  alt="sold-out-icon"
+                  loading="lazy"
                 />
               </div>
             ) : (
@@ -762,7 +768,12 @@ const ProductDetails = ({params}) => {
 
           <div className={styles.kyc_wrapper}>
             {/* <BsPersonVcard size={24} /> */}
-            <img src={ProductPageImages.KycDoc} alt="kyc" className="w-6 h-6" />
+            <img
+              src={ProductPageImages.KycDoc}
+              alt="kyc"
+              className="w-6 h-6"
+              loading="lazy"
+            />
             <p className={styles.kyc_text}>{str.kyc}</p>
           </div>
 

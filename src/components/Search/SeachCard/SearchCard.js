@@ -111,15 +111,14 @@ const SearchCard = ({
   }, []);
 
   return (
-    <div
-      className={`${styles.card_wrapper} `}
-      // onMouseOver={() => {
-      //   setHoverCard(true);
-      // }}
-      // onMouseOut={() => setHoverCard(false)}
-    >
+    <div className={`${styles.card_wrapper} `}>
       <div className="relative">
-        <img src={cardImage} alt="thumbnail image" className={styles.img} />
+        <img
+          src={cardImage}
+          alt="thumbnail image"
+          className={styles.img}
+          loading="lazy"
+        />
         {soldOut && (
           <div className={styles.soldout_tag}>
             <RiSparklingFill size={16} color={"#ffffff"} />
@@ -127,12 +126,6 @@ const SearchCard = ({
           </div>
         )}
       </div>
-
-      {/* {soldOut && (
-        <div className={styles.soldout_tag}>
-          <p className={styles.tag_text}>SOLD OUT</p>
-        </div>
-      )} */}
 
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
@@ -142,10 +135,6 @@ const SearchCard = ({
         <Heart
           size={25}
           color={inWishList ? "#D96060" : "#C0C0C6"}
-          // onClick={e => {
-          //   e.preventDefault();
-          //   setInWishList(!inWishList);
-          // }}
           onClick={e => {
             e.preventDefault();
             handleWhislistCard(e);
@@ -167,7 +156,6 @@ const SearchCard = ({
             </h3>
           )}
         </div>
-        {/* {originalPrice !== currentPrice && ( */}
         {currentPrice < originalPrice && parseInt(discount) > 0 && (
           <div className={styles.discount}>{`-${discount} OFF`}</div>
         )}
