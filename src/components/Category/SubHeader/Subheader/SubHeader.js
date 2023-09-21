@@ -384,6 +384,7 @@ const SubHeader = ({params}) => {
                               src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
                               className={styles.selected_icon}
                             />
+                            {console.log(subItem, "ooooooooooooo")}
                           </div>
                         ) : (
                           <div>
@@ -518,7 +519,7 @@ const SubHeader = ({params}) => {
           </div> */}
 
             <div className="relative flex">
-              <p className="hidden sm:flex items-center mr-2 text-71717A text-base">
+              <p className="hidden md:flex items-center mr-2 text-71717A text-base">
                 Sort By
               </p>
               <div
