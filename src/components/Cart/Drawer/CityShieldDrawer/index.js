@@ -99,7 +99,7 @@ const CityShieldDrawerForCart = ({
           {benefits.map((item, index) => (
             <div key={index} className={styles.arr_item}>
               <div className={styles.img_div}>
-                <img src={item.img} />
+                <img src={item.img} alt={item.label} loading="lazy" />
               </div>
               <p
                 className={`${

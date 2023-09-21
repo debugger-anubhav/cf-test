@@ -10,7 +10,12 @@ const BenefitsCta = () => {
     <div className={styles.main_container}>
       <div className={styles.head_div}>
         <p className={styles.head}>{str.cta_head}</p>
-        <img src={ProductPageImages.LeafIcon} className={styles.leaf_icon} />
+        <img
+          src={ProductPageImages.LeafIcon}
+          className={styles.leaf_icon}
+          loading="lazy"
+          alt="LeafIcon"
+        />
       </div>
       <p className={styles.desc}>{str.cta_desc}</p>
       <div className={styles.bg_img}>
@@ -18,7 +23,8 @@ const BenefitsCta = () => {
         <Image
           className="w-ful h-full"
           src={ProductPageImages.CtaImage}
-          alt=""
+          alt="benefits"
+          loading="lazy"
         />
       </div>
     </div>

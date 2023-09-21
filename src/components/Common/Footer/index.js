@@ -229,7 +229,7 @@ const Footer = ({params}) => {
               target="_blank"
               rel="noopener  noreferrer"
               aria-label={item?.icon}>
-              <img alt={item?.icon} src={item?.icon} />
+              <img alt={item?.icon} src={item?.icon} loading="lazy" />
             </a>
           ))}
         </div>

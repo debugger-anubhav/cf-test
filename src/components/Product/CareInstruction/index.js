@@ -32,7 +32,6 @@ const CareInstruction = ({params}) => {
             <div key={index}>
               <img
                 src={`${productPageImagesBaseUrl + item?.file_name}`}
-                // src={HomePageImages.office}
                 className={styles.img}
                 alt="card_img"
               />

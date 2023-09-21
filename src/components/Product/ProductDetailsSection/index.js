@@ -196,9 +196,8 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(inWishList, "whishlist");
+    console.log(inWishList, "inWishlist");
   }, [inWishList]);
-
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
@@ -461,7 +460,10 @@ const ProductDetails = ({params}) => {
       <div className={styles.bread_crumps}>
         {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">
-            <a href={index !== 2 && `${item?.link}`}>
+            <a
+              href={index !== 2 && `${item?.link}`}
+              target="_self"
+              rel="noopener">
               <p
                 className={` ${
                   index === arr.length - 1 ? "font-medium" : "font-normal"
@@ -520,8 +522,9 @@ const ProductDetails = ({params}) => {
                   <div key={index} className={styles.prod_img}>
                     <img
                       src={`${productPageImagesBaseUrl + item}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -543,8 +546,9 @@ const ProductDetails = ({params}) => {
                     onClick={() => handleThumbnailClick(index)}>
                     <img
                       src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -632,6 +636,8 @@ const ProductDetails = ({params}) => {
                 <img
                   className={styles.sold_out_icon}
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/sold-out-icon.svg"
+                  alt="sold-out-icon"
+                  loading="lazy"
                 />
               </div>
             ) : (
@@ -678,33 +684,30 @@ const ProductDetails = ({params}) => {
                     <span className={styles.rupeeIcon}>₹</span>
                     {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <p
-                      className={styles.originalPrice}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      <span className={styles.rupeeIcon}>₹</span>
-                      {durationArray?.[0]?.attr_price}
-                    </p>
-                  )}
+                  {/* {durationArray?.[0]?.attr_price >
+                    durationArray?.[duration.currentIndex]?.attr_price && ( */}
+                  <p
+                    className={styles.originalPrice}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {durationArray?.[0]?.attr_price}
+                  </p>
+                  {/* )} */}
 
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <div
-                      className={styles.discount}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      {`-${Math.round(
-                        ((durationArray?.[0]?.attr_price -
-                          durationArray?.[duration.currentIndex]?.attr_price) *
-                          100) /
-                          durationArray?.[0]?.attr_price,
-                      ).toFixed(0)}% OFF`}
-                    </div>
-                  )}
+                  <div
+                    className={styles.discount}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    {`-${Math.round(
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
+                        100) /
+                        durationArray?.[0]?.attr_price,
+                    ).toFixed(0)}% OFF`}
+                  </div>
                 </div>
               </div>
               {/* <span className="text-[#9C9C9C]">+</span>
@@ -744,7 +747,12 @@ const ProductDetails = ({params}) => {
 
           <div className={styles.kyc_wrapper}>
             {/* <BsPersonVcard size={24} /> */}
-            <img src={ProductPageImages.KycDoc} alt="kyc" className="w-6 h-6" />
+            <img
+              src={ProductPageImages.KycDoc}
+              alt="kyc"
+              className="w-6 h-6"
+              loading="lazy"
+            />
             <p className={styles.kyc_text}>{str.kyc}</p>
           </div>
 
