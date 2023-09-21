@@ -66,42 +66,19 @@ const Card = ({
       decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
     }`,
   );
-  // const userId = getLocalStorageString("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
-  // useEffect(() => {
-  //   const payload = {
-  //     tempUserId: getLocalStorage("tempUserID") ?? "",
-  //     userId: getLocalStorage("user_id") ?? "",
-  //     productId: productID,
-  //   };
-  //   if (updateCount.current > 1) {
-  //     console.log(inWishList, "inWishList");
-  //     if (inWishList === false || categoryPageReduxData.addRemoveWhislitItem === false) {
-  //       getwhislistProduct(payload)
-  //         .then(res => console.log(res?.data?.data))
-  //         .catch(err => console.log(err));
-  //     } else if (inWishList === true || categoryPageReduxData.addRemoveWhislitItem === true) {
-  //       removewhislistProduct(payload)
-  //         .then(res => console.log(res))
-  //         .catch(err => console.log(err));
-  //     }
-  //   }
-  // }, [productID, inWishList, categoryPageReduxData.addRemoveWhislitItem]);
-
   const handleWhislistCard = e => {
     e.stopPropagation();
     if (!userId) {
       router.push("https://test.rentofurniture.com/user_sign_up");
       return;
     }
-    // dispatch(addRemoveWhishListitems(!inWishList));
     !inWishList
       ? addwhislistProduct()
           .then(res => {
             getSavedItems()
               .then(res => {
                 dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
@@ -132,13 +109,6 @@ const Card = ({
           .catch(err => console.log(err));
   };
 
-  // const handleWhislistCard = e => {
-  //   e.stopPropagation();
-  //   if (updateCount.current <= 1) updateCount.current += 1;
-  //   setInWishList(!inWishList);
-  //   dispatch(addRemoveWhishListitems(!inWishList));
-  // };
-
   useEffect(() => {
     setInWishList(
       categoryPageReduxData.savedProducts
@@ -159,7 +129,10 @@ const Card = ({
     <a
       href={`/things/${productID}/${seourl}`}
       onClick={e => e.preventDefault()}
-      className={styles.anchor_card}>
+      className={styles.anchor_card}
+      aria-label={desc}
+      target="_self"
+      rel="noopener">
       <div
         onClick={e => handleProductClick(e, productID, seourl)}
         className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
@@ -175,7 +148,8 @@ const Card = ({
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
-            alt="thumbnail image"
+            alt={desc}
+            loading="lazy"
             className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }

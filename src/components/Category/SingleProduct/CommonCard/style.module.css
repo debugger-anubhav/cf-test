@@ -1,5 +1,5 @@
 .card_wrapper {
-  @apply md:p-4 bg-fff cursor-pointer;
+  @apply md:p-4 bg-fff cursor-pointer mb-6 md:mb-0;
 }
 .card_wrapper:hover {
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
@@ -27,13 +27,13 @@
   @apply mt-1 flex justify-between items-center font-Poppins;
 }
 .originalPrice {
-  @apply text-14 xl:text-18 font-normal tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+  @apply text-14 md:text-12 lg:text-14 xl:text-18 font-normal tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center whitespace-nowrap;
 }
 .currentPrice {
-  @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
+  @apply text-18 md:text-14 lg:text-18  xl:text-24 text-[#222] font-medium font-Poppins flex items-center whitespace-nowrap;
 }
 .discount {
-  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff whitespace-nowrap;
 }
 .label_tag {
   @apply flex p-1 items-center h-6 gap-1 absolute top-2 rounded-[4px];

@@ -47,6 +47,7 @@ const TryCityMax = () => {
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image}`}
+            loading="lazy"
           />
           <img
             src={TryCityMaxBannerMobile}
@@ -68,7 +69,10 @@ const TryCityMax = () => {
             href="https://test.rentofurniture.com/citymax"
             onClick={e => {
               e.preventDefault();
-            }}>
+            }}
+            aria-label="citymax"
+            target="_self"
+            rel="noopener">
             <button
               className={styles.check_button}
               onClick={() =>
@@ -93,6 +97,7 @@ const TryCityMax = () => {
                       src={item?.img}
                       className={styles.card_icon}
                       alt="card-icon"
+                      loading="lazy"
                     />
                     <h3 className={styles.benefit_title}>{item?.title}</h3>
                     <p className={styles.benefit_paragraph}>

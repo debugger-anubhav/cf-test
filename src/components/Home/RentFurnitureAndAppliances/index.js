@@ -91,14 +91,18 @@ const RentFurnitureAndAppliances = ({params}) => {
                 href={`/${homePageReduxData?.cityName
                   .replace(/\//g, "-")
                   .toLowerCase()}/${item?.seourl}`}
-                onClick={e => e.preventDefault()}>
+                onClick={e => e.preventDefault()}
+                aria-label={item?.cat_name}
+                target="_self"
+                rel="noopener">
                 <img
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                     item.category_web_image
                   }
-                  alt="RentFurnitureImage"
+                  alt={item?.cat_name}
                   className={styles.category_img}
+                  loading="lazy"
                 />
               </a>
 

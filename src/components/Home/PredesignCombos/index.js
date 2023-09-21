@@ -8,14 +8,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 
 const PreDesignCombos = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = homePageReduxData.cityId;
+  const cityId = getLocalStorage("cityId");
   const [isDumy, setIsDumy] = React.useState(false);
 
   const {refetch: getPreDesignCombos} = useQuery(

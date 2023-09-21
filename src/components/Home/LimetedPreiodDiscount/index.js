@@ -8,14 +8,12 @@ import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
 import {useRouter} from "next/navigation";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
   const router = useRouter();
-  const homePageReduxData = useSelector(state => state.homePagedata);
-  const cityId = homePageReduxData.cityId;
-  console.log(cityId, "eyewuhw");
+  const cityId = getLocalStorage("cityId");
 
   const dispatch = useDispatch();
   const {limitedDiscount: getLimitedPreiodData} = useSelector(
