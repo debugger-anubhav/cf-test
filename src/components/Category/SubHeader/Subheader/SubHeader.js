@@ -315,7 +315,7 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <a href="/cityfurnish">
+                <a href="/cityfurnish" target="_self" rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>Home</p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
@@ -328,7 +328,9 @@ const SubHeader = ({params}) => {
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${seoUrl?.seourl}`}>
+                    .toLowerCase()}/${seoUrl?.seourl}`}
+                  target="_self"
+                  rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>
                     {getLocalStorage("category")?.replace(/"/g, "")}
                   </p>
@@ -383,14 +385,17 @@ const SubHeader = ({params}) => {
                             <img
                               src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
                               className={styles.selected_icon}
+                              alt={subItem.cat_name}
+                              loading="lazy"
                             />
-                            {console.log(subItem, "ooooooooooooo")}
                           </div>
                         ) : (
                           <div>
                             <img
                               src={`${categoryIconsUrl}${subItem?.icon_image}`}
                               className={styles.selected_icon}
+                              alt={subItem.cat_name}
+                              loading="lazy"
                             />
                           </div>
                         )}

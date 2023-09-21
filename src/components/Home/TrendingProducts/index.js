@@ -7,7 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
@@ -21,7 +21,7 @@ const TrendingProducts = ({params}) => {
   const [data, setData] = React.useState(null);
   const [isDumy, setIsDumy] = React.useState(false);
 
-  const cityId = homePageReduxData.cityId;
+  const cityId = getLocalStorage("cityId");
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
     endPoints.trendingProduct,
