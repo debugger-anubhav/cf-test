@@ -67,7 +67,7 @@
   @apply flex w-[228px] flex-col justify-center right-20 gap-6 rounded-2xl border-[2px] border-71717A absolute bg-white z-50 mt-3 p-4;
 }
 .option_text {
-  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3;
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3 hidden  md:flex;
 }
 .sortBy_container {
   @apply flex  justify-center items-center;

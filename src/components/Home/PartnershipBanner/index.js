@@ -7,7 +7,7 @@ const PartnershipBanner = () => {
   return (
     <div className={styles.partnership_banner}>
       <img
-        alt="partnership"
+        alt="our-reputation"
         src={
           "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
         }

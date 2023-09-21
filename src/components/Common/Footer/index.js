@@ -130,8 +130,9 @@ const Footer = ({params}) => {
                 <a
                   key={index.toString()}
                   href={t.link}
+                  aria-label={t.text}
                   target={t.text === "Furniture Sale" ? "_blank" : "_self"}
-                  rel="noopener noreferrer">
+                  rel="noopener  noreferrer">
                   <p
                     className={styles.points}
                     onClick={() => {
@@ -160,7 +161,12 @@ const Footer = ({params}) => {
             <div>
               <p className={styles.contact}>
                 {" "}
-                <a href={`tel:${str.contact}`}>{str.contact}</a>
+                <a
+                  href={`tel:${str.contact}`}
+                  target="_blank"
+                  rel="noopener  noreferrer">
+                  {str.contact}
+                </a>
               </p>
               <p className={styles.time}>{str.time}</p>
             </div>
@@ -181,7 +187,8 @@ const Footer = ({params}) => {
                 key={index.toString()}
                 href={item.link}
                 target="_blank"
-                rel="noopener noreferrer">
+                rel="noopener  noreferrer"
+                aria-label={item?.icon}>
                 <img
                   alt={item?.icon}
                   src={item?.icon}
@@ -203,7 +210,12 @@ const Footer = ({params}) => {
           />
           <div>
             <p className={styles.contact}>
-              <a href={`tel:${str.contact}`}>{str.contact}</a>
+              <a
+                href={`tel:${str.contact}`}
+                target="_blank"
+                rel="noopener  noreferrer">
+                {str.contact}
+              </a>
             </p>
             <p className={styles.time}>{str.time}</p>
           </div>
@@ -215,12 +227,9 @@ const Footer = ({params}) => {
               key={index.toString()}
               href={item.link}
               target="_blank"
-              rel="noopener noreferrer">
-              <img
-                alt={item?.icon}
-                src={item?.icon}
-                // onClick={() => console.log("item.link")}
-              />
+              rel="noopener  noreferrer"
+              aria-label={item?.icon}>
+              <img alt={item?.icon} src={item?.icon} />
             </a>
           ))}
         </div>
