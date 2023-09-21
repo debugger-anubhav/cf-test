@@ -1,5 +1,5 @@
 .main_container {
-  @apply flex flex-wrap lg:gap-[10px] md:grid md:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4;
+  @apply flex flex-wrap lg:gap-[10px] md:grid md:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 lg:my-4;
   /* grid-template-columns: 1 auto auto; */
 }
 /* .card_box_product {
