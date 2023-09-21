@@ -446,8 +446,9 @@ const SubHeader = ({params}) => {
                     </div>
                     <div>
                       <DownPopUpArrow
-                        size={20}
-                        color={"#45454A"}
+                        // size={20}
+
+                        color={"#71717A"}
                         className={
                           filterOpen ? styles.arrow_up : styles.arrow_down
                         }
@@ -546,8 +547,10 @@ const SubHeader = ({params}) => {
                   <div>
                     <DownPopUpArrow
                       size={20}
-                      color={"#45454A"}
-                      className={sortOpen ? styles.arrow_up : styles.arrow_down}
+                      color={"#597492"}
+                      className={`!text-[#597492] ${
+                        sortOpen ? styles.arrow_up : styles.arrow_down
+                      }`}
                     />
                   </div>
                 </div>
@@ -589,7 +592,7 @@ const SubHeader = ({params}) => {
               </div>
             )}
             <div className="flex items-center justify-center ">
-              <p className={styles.option_text}>Sortby</p>
+              <p className={`hidden md:flex ${styles.option_text}`}>Sortby</p>
               <div className={styles.filter}>
                 <FilterSortDrawer
                   filterName={"Default"}
@@ -604,7 +607,7 @@ const SubHeader = ({params}) => {
           <div className={styles.horizontal_line}></div>
           {categoryPageReduxData?.filteredItems.length !== 0 &&
             filterListed && (
-              <div className="flex flex-wrap">
+              <div className="mb-7 lg:mb-8 flex flex-wrap gap-x-3 lg:gap-x-4 gap-y-2 lg:gap-y-3">
                 <div
                   className={styles.single_filter_mobile}
                   // className={styles.single_filter}
@@ -633,7 +636,7 @@ const SubHeader = ({params}) => {
                         <>
                           <div
                             className={styles.filter_card}
-                            // style={{ background: "red" }}
+                            // style={{background: "red"}}
                             key={index.toString()}>
                             <FilterCard
                               text={item}

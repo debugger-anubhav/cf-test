@@ -5,7 +5,8 @@ const StickyBottomBar = ({
   productName,
   duration,
   durationArray,
-  handleButtonClick,
+  handleAddToCart,
+  handleGoToCart,
   isLoading,
   isItemInCart,
   soldOut,
@@ -63,7 +64,7 @@ const StickyBottomBar = ({
       </div>
 
       <button
-        onClick={handleButtonClick}
+        onClick={isItemInCart ? handleGoToCart : handleAddToCart}
         style={{width: "232px", marginTop: "0px"}}
         disabled={isLoading || isItemInCart || soldOut}
         className={styles.btn}>
@@ -72,7 +73,7 @@ const StickyBottomBar = ({
         ) : soldOut ? (
           "Notify me"
         ) : isItemInCart ? (
-          "In cart"
+          "Go to Cart"
         ) : (
           "Add to Cart"
         )}

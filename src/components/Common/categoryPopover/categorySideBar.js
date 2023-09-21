@@ -84,6 +84,7 @@ export default function FilterSortDrawer({
 
   const handleSort = (item, index) => {
     setPageNo(1);
+    console.log(item);
     setSelectedOption(item);
     if (item === "New") {
       dispatch(addSortKey(newSortKey));
@@ -175,7 +176,7 @@ export default function FilterSortDrawer({
             </div>
           ) : (
             <div className="gap-6 shadow-md w-full rounded-t-2xl bg-white p-4">
-              <p className={styles.headin_text}>{filterName}</p>
+              <p className={styles.headin_text}>Sort By</p>
               <div className="">
                 {sortByText.map((ele, index) => {
                   return (
@@ -213,12 +214,17 @@ export default function FilterSortDrawer({
             className={styles.filterbox}
             onClick={toggleDrawer(anchor, true)}>
             <div className={styles.filter_text_container}>
-              <p className={styles.filter_text}>{filterName}</p>
+              <p
+                className={`${
+                  filterName === "Default" ? "!text-[#597492]" : "!text-71717A"
+                } ${styles.filter_text}`}>
+                {filterName === "Filter" ? filterName : selectedOption}
+              </p>
             </div>
             <div>
               <DownPopUpArrow
                 size={20}
-                color={"#45454A"}
+                color={filterName === "Default" ? "#597492" : "#71717A"}
                 className={state.bottom ? styles.arrow_up : styles.arrow_down}
               />
             </div>
