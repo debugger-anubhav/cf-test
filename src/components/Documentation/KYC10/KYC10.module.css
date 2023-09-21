@@ -1,0 +1,17 @@
+.stepHeading {
+}
+.formHeadingFirst {
+  @apply mt-1;
+}
+.formHeadingSecond {
+  @apply mt-8;
+}
+.formHeadingThird {
+  @apply mt-4;
+}
+.formInputFirst {
+  @apply mt-1;
+}
+.formStepSecond {
+  @apply mt-1;
+}

@@ -1,0 +1,15 @@
+.formHeadings {
+  @apply font-Poppins text-base font-normal;
+  letter-spacing: -0.32px;
+  color: #71717a;
+}
+.formStepHeading {
+  @apply font-Poppins text-base font-medium;
+  letter-spacing: -0.32px;
+  color: #45454a;
+}
+.formInputTxt {
+  @apply font-Poppins text-base font-normal;
+  letter-spacing: -0.32px;
+  color: #71717a;
+}

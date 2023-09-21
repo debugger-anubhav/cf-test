@@ -1,24 +1,39 @@
 import React, {useState} from "react";
 import styles from "./DocMain.module.css";
 import DocSidebar from "../Sidebar/DocSidebar";
-import DropDown from "../DropDown/DropDown";
+// import DropDown from "../DropDown/DropDown";
+import KYC90 from "../KYC90/KYC90";
+import KycHeader from "../KycHeader/KycHeader";
+import KYC10 from "../KYC10/KYC10";
 
 const DocMain = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-  const handleSelectChange = e => {
-    setSelectedOption(e.target.value);
-  };
+  const [selectedOption] = useState("");
+  // const handleSelectChange = e => {
+  //   setSelectedOption(e.target.value);
+  // };
+  // const dummyArray = [
+  //   {value: 1, label: "Option 1"},
+  //   {value: 2, label: "Option 2"},
+  //   {value: 3, label: "Option 3"},
+  //   {value: 4, label: "Option 4"},
+  //   {value: 5, label: "Option 5"},
+  // ];
+
   console.log(selectedOption);
   return (
     <div className={styles.mainContainer}>
       <DocSidebar />
-      <div>
-        <DropDown
+      <div className={styles.kycFormArea}>
+        <KycHeader />
+        <KYC90 />
+        <KYC10 />
+        {/* <DropDown
           selectedOption={selectedOption}
           handleSelectChange={handleSelectChange}
           style={{}}
           useDefaultStyle={false}
-        />
+          options={dummyArray}
+        /> */}
       </div>
     </div>
   );

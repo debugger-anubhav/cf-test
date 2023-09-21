@@ -1,3 +1,6 @@
 .mainContainer {
-  @apply bg-red-500 flex;
+  @apply flex;
+}
+.kycFormArea {
+  @apply ml-16 grow;
 }
