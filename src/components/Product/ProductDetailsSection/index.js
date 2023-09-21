@@ -684,33 +684,30 @@ const ProductDetails = ({params}) => {
                     <span className={styles.rupeeIcon}>₹</span>
                     {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <p
-                      className={styles.originalPrice}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      <span className={styles.rupeeIcon}>₹</span>
-                      {durationArray?.[0]?.attr_price}
-                    </p>
-                  )}
+                  {/* {durationArray?.[0]?.attr_price >
+                    durationArray?.[duration.currentIndex]?.attr_price && ( */}
+                  <p
+                    className={styles.originalPrice}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {durationArray?.[0]?.attr_price}
+                  </p>
+                  {/* )} */}
 
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <div
-                      className={styles.discount}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      {`-${Math.round(
-                        ((durationArray?.[0]?.attr_price -
-                          durationArray?.[duration.currentIndex]?.attr_price) *
-                          100) /
-                          durationArray?.[0]?.attr_price,
-                      ).toFixed(0)}% OFF`}
-                    </div>
-                  )}
+                  <div
+                    className={styles.discount}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    {`-${Math.round(
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
+                        100) /
+                        durationArray?.[0]?.attr_price,
+                    ).toFixed(0)}% OFF`}
+                  </div>
                 </div>
               </div>
               {/* <span className="text-[#9C9C9C]">+</span>
