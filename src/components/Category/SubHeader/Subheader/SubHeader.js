@@ -33,8 +33,8 @@ import {
 import {useRouter, useParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
-// import axios from "axios";
-// import {baseURL} from "@/network/axios";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
@@ -53,6 +53,7 @@ const SubHeader = ({params}) => {
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [title, setTitle] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
@@ -165,14 +166,52 @@ const SubHeader = ({params}) => {
     setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setCategoryId(getLocalStorage("categoryId"));
+  //     setSubCategoryId(getLocalStorage("subCategoryId"));
+  //     setCategory(
+  //       getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
+  //     );
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCategoryId(getLocalStorage("categoryId"));
-      setSubCategoryId(getLocalStorage("subCategoryId"));
-      setCategory(
-        getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
-      );
-    }
+    axios
+      .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
+      .then(res => {
+        setLocalStorage(
+          "category",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setLocalStorage(
+          "categoryId",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setLocalStorage(
+          "subCategory",
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setLocalStorage("subCategoryId", res?.data?.data?.id);
+        setCategory(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setCategoryId(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setSubCategory(
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setSubCategoryId(res?.data?.data?.id);
+      });
   }, []);
 
   const {refetch: getFilterList} = useQuery(
@@ -311,13 +350,7 @@ const SubHeader = ({params}) => {
 
   // console.log(query.category, "ppppppppppppppppp");
 
-  // useEffect(() => {
-  //   axios
-  //     .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
-  //     .then(res => {
-  //       console.log(res, "resssssssssss");
-  //     });
-  // }, []);
+  console.log(subCategoryId, "subCategoryId");
 
   return (
     <>
@@ -345,7 +378,8 @@ const SubHeader = ({params}) => {
                   target="_self"
                   rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>
-                    {getLocalStorage("category")?.replace(/"/g, "")}
+                    {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
+                    {category}
                   </p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
@@ -353,7 +387,7 @@ const SubHeader = ({params}) => {
               <li className={styles.list}>
                 <p className={styles.route_text}>
                   {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
-                  {query.category}
+                  {subCategory}
                 </p>
               </li>
             </ul>
@@ -361,6 +395,7 @@ const SubHeader = ({params}) => {
           <h1 className={styles.heading}>{title}</h1>
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
+              // console.log(item, "llllllllllll", category);
               if (item?.cat_name === category) {
                 handleTitle(item);
                 const subCategoriesWithNewObject = [
@@ -372,6 +407,11 @@ const SubHeader = ({params}) => {
                 ];
 
                 return subCategoriesWithNewObject?.map((subItem, i) => {
+                  // console.log(
+                  //   "lllllllllll",
+                  //   getLocalStorage("subCategory")?.replace(/"/g, ""),
+                  //   subItem,
+                  // );
                   const selectedProduct =
                     getLocalStorage("subCategory")?.replace(/"/g, "") ===
                     subItem?.cat_name;
