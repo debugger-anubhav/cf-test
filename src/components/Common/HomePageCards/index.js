@@ -185,14 +185,6 @@ const Card = ({
             <Heart
               size={25}
               color={inWishList ? "#D96060" : "#C0C0C6"}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   setInWishList(!inWishList);
-              // }}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   handleWhislistCard(e);
-              // }}
               className={"cursor-pointer"}
             />
           </div>

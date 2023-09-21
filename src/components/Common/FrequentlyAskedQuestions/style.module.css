@@ -27,7 +27,7 @@
   opacity: 1;
 }
 .btn {
-  @apply mt-2 bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 h-[56px] w-fit cursor-pointer;
+  @apply mt-2 bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 lg:h-[56px] h-[48px] w-fit cursor-pointer;
 }
 .btn_txt {
   @apply text-[#222] font-medium;
