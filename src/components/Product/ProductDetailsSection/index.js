@@ -316,10 +316,9 @@ const ProductDetails = ({params}) => {
     );
   });
 
-  console.log(isSameTenure, "sametenure");
+  // console.log(isSameTenure, "sametenure");
 
   const handleNotSameTenure = () => {
-    console.log("not same tenure");
     alert("plz choose same tenure");
   };
 
