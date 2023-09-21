@@ -307,8 +307,7 @@ const Header = () => {
                 onContextMenu={e => handleContextMenu(e, "profile")}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  // if (getLocalStorage("user_id") === null) {
-                  if (decrypt(getLocalStorage("_ga")) === null) {
+                  if (!decrypt(getLocalStorage("_ga"))) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     toggleDropdown();
