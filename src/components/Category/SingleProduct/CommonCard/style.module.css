@@ -6,7 +6,7 @@
   /* box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25); */
 }
 .img {
-  @apply w-full min-h-[210px] lg:h-[240px] lg:min-h-[240px] xl:h-full xl:min-h-[280px] 2xl:min-h-[310px] 3xl:min-h-[387px] rounded-lg;
+  @apply w-full min-h-[210px] lg:h-[240px] lg:min-h-[240px] xl:h-full xl:min-h-[280px] xl:max-h-[280px] 2xl:min-h-[310px] 2xl:max-h-[310px] 3xl:min-h-[387px] 3xl:max-h-[387px] rounded-lg;
 }
 .hover_wrapper img {
   @apply animate-fade;
