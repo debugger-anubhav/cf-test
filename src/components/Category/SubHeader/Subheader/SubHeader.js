@@ -33,8 +33,8 @@ import {
 import {useRouter, useParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
-// import axios from "axios";
-// import {baseURL} from "@/network/axios";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
@@ -53,6 +53,7 @@ const SubHeader = ({params}) => {
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [title, setTitle] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
@@ -162,17 +163,54 @@ const SubHeader = ({params}) => {
       dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
-    setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     setCategoryId(getLocalStorage("categoryId"));
+  //     setSubCategoryId(getLocalStorage("subCategoryId"));
+  //     setCategory(
+  //       getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
+  //     );
+  //   }
+  // }, []);
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCategoryId(getLocalStorage("categoryId"));
-      setSubCategoryId(getLocalStorage("subCategoryId"));
-      setCategory(
-        getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
-      );
-    }
+    axios
+      .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
+      .then(res => {
+        setLocalStorage(
+          "category",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setLocalStorage(
+          "categoryId",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setLocalStorage(
+          "subCategory",
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setLocalStorage("subCategoryId", res?.data?.data?.id);
+        setCategory(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setCategoryId(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setSubCategory(
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setSubCategoryId(res?.data?.data?.id);
+      });
   }, []);
 
   const {refetch: getFilterList} = useQuery(
@@ -204,11 +242,7 @@ const SubHeader = ({params}) => {
     homePageReduxData.subcategoryId,
     filtereData.length,
   ]);
-  const handleTitle = item => {
-    if (item?.fc_city_category_data?.cat_heading !== title) {
-      setTitle(item?.fc_city_category_data?.cat_heading || "");
-    }
-  };
+
   const defaultKey = 1;
   const newSortKey = 2;
   const highToLowKey = 3;
@@ -231,7 +265,18 @@ const SubHeader = ({params}) => {
 
     dispatch(addFilteredItem(updatedFilteredList));
   };
+
   const handleApply = () => {
+    // var myArray = ["abc", "xyz"];
+    // var baseUrl = "https://example.com/my-route?";
+
+    // for (var i = 0; i < myArray.length; i++) {
+    //   baseUrl += "filter=" + encodeURIComponent(myArray[i]);
+
+    //   if (i < myArray.length - 1) {
+    //     baseUrl += "&";
+    //   }
+    // }
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
@@ -309,15 +354,22 @@ const SubHeader = ({params}) => {
     setItemCount(itemCount + 7);
   };
 
-  // console.log(query.category, "ppppppppppppppppp");
-
-  // useEffect(() => {
-  //   axios
-  //     .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
-  //     .then(res => {
-  //       console.log(res, "resssssssssss");
-  //     });
-  // }, []);
+  useEffect(() => {
+    getAllAndSubCategoryData.forEach(ele => {
+      if (ele?.cat_name === category) {
+        if (subCategory === "All") {
+          setTitle(
+            ele?.fc_city_category_data?.cat_heading || ele?.page_heading,
+          );
+        } else {
+          const t = ele?.sub_categories.find(
+            el => el?.cat_name === subCategory,
+          );
+          setTitle(t?.fc_city_category_data?.cat_heading || t?.page_heading);
+        }
+      }
+    });
+  }, [getAllAndSubCategoryData, subCategory]);
 
   return (
     <>
@@ -345,7 +397,8 @@ const SubHeader = ({params}) => {
                   target="_self"
                   rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>
-                    {getLocalStorage("category")?.replace(/"/g, "")}
+                    {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
+                    {category}
                   </p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
@@ -353,7 +406,7 @@ const SubHeader = ({params}) => {
               <li className={styles.list}>
                 <p className={styles.route_text}>
                   {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
-                  {query.category}
+                  {subCategory}
                 </p>
               </li>
             </ul>
@@ -362,7 +415,6 @@ const SubHeader = ({params}) => {
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
               if (item?.cat_name === category) {
-                handleTitle(item);
                 const subCategoriesWithNewObject = [
                   {
                     ...item,

@@ -64,7 +64,7 @@ const ProductCard = ({
       <div className="relative">
         <img
           src={hoverCard ? hoverCardImage : cardImage}
-          alt="thumbnail image"
+          alt={desc.replace(/-/g, " ")}
           className={`${styles.thumbnail} ${isImageHeight && "min-h-[240px]"}
           `}
         />
