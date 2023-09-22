@@ -165,16 +165,6 @@ const SubHeader = ({params}) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     setCategoryId(getLocalStorage("categoryId"));
-  //     setSubCategoryId(getLocalStorage("subCategoryId"));
-  //     setCategory(
-  //       getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
-  //     );
-  //   }
-  // }, []);
-
   useEffect(() => {
     axios
       .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
@@ -267,16 +257,6 @@ const SubHeader = ({params}) => {
   };
 
   const handleApply = () => {
-    // var myArray = ["abc", "xyz"];
-    // var baseUrl = "https://example.com/my-route?";
-
-    // for (var i = 0; i < myArray.length; i++) {
-    //   baseUrl += "filter=" + encodeURIComponent(myArray[i]);
-
-    //   if (i < myArray.length - 1) {
-    //     baseUrl += "&";
-    //   }
-    // }
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
