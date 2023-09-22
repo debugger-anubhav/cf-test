@@ -371,8 +371,6 @@ const SubHeader = ({params}) => {
     });
   }, [getAllAndSubCategoryData, subCategory]);
 
-  console.log("pppppppppppppppp", categoryPageReduxData?.filteredItems);
-
   return (
     <>
       {skeletonOpen ? (
