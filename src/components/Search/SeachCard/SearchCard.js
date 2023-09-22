@@ -115,7 +115,7 @@ const SearchCard = ({
       <div className="relative">
         <img
           src={cardImage}
-          alt="thumbnail image"
+          alt={desc.replace(/-/g, " ")}
           className={styles.img}
           loading="lazy"
         />

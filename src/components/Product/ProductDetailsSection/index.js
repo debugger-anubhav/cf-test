@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -81,6 +83,8 @@ const ProductDetails = ({params}) => {
   const [soldOut, setSoldOut] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+
   // const [dummy,setIsDumy]=useState(false);
   const reviewsPerPage = 4;
   const startIndex = open ? (currentPage - 1) * reviewsPerPage : 0;
@@ -319,7 +323,21 @@ const ProductDetails = ({params}) => {
   // console.log(isSameTenure, "sametenure");
 
   const handleNotSameTenure = () => {
-    alert("plz choose same tenure");
+    toast("Please select same tenure as selected for other cart items.", {
+      position: isSmallScreen ? "bottom-right" : "top-right",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      className: isSmallScreen
+        ? `${styles.customToast} ${styles.customToastMobile} `
+        : `${styles.customToast} ${styles.customToastDesktop} `,
+      closeButton: (
+        <button className={styles.custom_close_button}>&#x2715;</button>
+      ),
+    });
+    // alert("plz choose same tenure");
   };
 
   const handleAddToCart = () => {
@@ -384,48 +402,20 @@ const ProductDetails = ({params}) => {
 
   const averageRating = totalReviews > 0 ? totalRatingSum / totalReviews : 0;
 
-  // const handleScrolling=(()=>{
-  //   const slider = scrollerRef1.current;
-  //   console.log(slider);
-  //   if (!slider) return;
-
-  //   let mouseDown = false;
-  //   let startX, scrollLeft;
-
-  //   const startDragging = (e) => {
-  //     mouseDown = true;
-  //     startX = e.pageX - slider.offsetLeft;
-  //     scrollLeft = slider.scrollLeft;
-  //   };
-  //   const stopDragging = () => {
-  //     setIsDumy(false);
-  //     mouseDown = false;
-  //   };
-
-  //   const toggleIsDragging = () => {
-  //     if (mouseDown && !isDumy) setIsDumy(true);
-  //   };
-
-  //   slider.addEventListener("mousemove", (e) => {
-  //     e.preventDefault();
-  //     if (!mouseDown) return;
-  //     const x = e.pageX - slider.offsetLeft;
-  //     const scroll = x - startX;
-  //     slider.scrollLeft = scrollLeft - scroll;
-  //   });
-  //   slider.addEventListener("mousedown", startDragging, false);
-  //   slider.addEventListener("mouseup", stopDragging, false);
-  //   slider.addEventListener("mouseleave", stopDragging, false);
-  //   slider.addEventListener("mousemove", toggleIsDragging);
-
-  //   return () => {
-  //     slider.removeEventListener("mousedown", startDragging);
-  //     slider.removeEventListener("mouseup", stopDragging);
-  //     slider.removeEventListener("mouseleave", stopDragging);
-  //     slider.removeEventListener("mousemove", toggleIsDragging);
-  //   };
-
-  // })
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
 
   const [isScrolling, setIsScrolling] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -453,6 +443,7 @@ const ProductDetails = ({params}) => {
 
   return (
     <div className={styles.main_container}>
+      <ToastContainer />
       <ShareModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
@@ -469,6 +460,9 @@ const ProductDetails = ({params}) => {
           handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
+          cartItems={cartItems}
+          isSameTenure={isSameTenure}
+          handleNotSameTenure={handleNotSameTenure}
         />
       )}
       <div className={styles.bread_crumps}>
@@ -736,7 +730,9 @@ const ProductDetails = ({params}) => {
 
           <button
             onClick={
-              isItemInCart
+              cartItems?.length === 0
+                ? handleAddToCart
+                : isItemInCart
                 ? handleGoToCart
                 : isSameTenure
                 ? handleAddToCart
