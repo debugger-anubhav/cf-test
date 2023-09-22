@@ -160,6 +160,7 @@ const CategoryCard = ({
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   return (
     <a
       href={`/things/${productID}/${seourl}`}
@@ -176,7 +177,7 @@ const CategoryCard = ({
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
-            alt="thumbnail image"
+            alt={desc.replace(/-/g, " ")}
             className={styles.img}
           />
           {soldOut ? (

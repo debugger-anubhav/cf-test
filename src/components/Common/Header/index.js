@@ -180,6 +180,7 @@ const Header = () => {
 
   const handleContextMenu = e => {
     e.preventDefault(); // Prevent the context menu from opening
+    // ref.current?.click();
   };
 
   return (
@@ -245,69 +246,57 @@ const Header = () => {
               </div>
             )}
             <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
-              <span className={styles.header_favorite_container}>
-                <a
-                  href="/wishlist"
-                  onClick={e => {
-                    e.preventDefault();
-                  }}>
+              <a
+                href={
+                  userId
+                    ? "/wishlist"
+                    : "https://test.rentofurniture.com/user_sign_up"
+                }>
+                <span className={styles.header_favorite_container}>
                   <Image
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
-                    onContextMenu={handleContextMenu}
                     onClick={() => {
                       if (userId) {
                         router.push("/wishlist");
                       } else {
-                        // router.push("/wishlist");
                         router.push(
                           "https://test.rentofurniture.com/user_sign_up",
                         );
                       }
                     }}
                   />
-                </a>
-                {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                  <span className={styles.cart_badge}>{wishListCount}</span>
-                ) : (
-                  <></>
-                )}
-              </span>
+                  {categoryPageReduxData?.savedProducts?.length > 0 ? (
+                    <span className={styles.cart_badge}>{wishListCount}</span>
+                  ) : (
+                    <></>
+                  )}
+                </span>
+              </a>
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">
-                {/* <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("https://cityfurnish.com/cart")}
-                /> */}
-                <a
-                  href="/cart"
-                  onClick={e => {
-                    e.preventDefault();
-                  }}>
+                <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
                     className={styles.header_shopping_card}
                     onClick={() => router.push("/cart")}
-                    onContextMenu={handleContextMenu}
                   />
+                  {cartItemsLength > 0 && (
+                    <div className={styles.cart_badge}>{cartItemsLength}</div>
+                  )}
                 </a>
-                {cartItemsLength > 0 && (
-                  <div className={styles.cart_badge}>{cartItemsLength}</div>
-                )}
               </div>
               {/* </Link> */}
               <Image
                 src={Icons.Profile}
                 alt="profile-icon"
+                onContextMenu={e => handleContextMenu(e)}
                 className={`${styles.header_profile_icon} relative`}
                 onClick={() => {
-                  // if (getLocalStorage("user_id") === null) {
-                  if (decrypt(getLocalStorage("_ga")) === null) {
+                  if (!decrypt(getLocalStorage("_ga"))) {
                     router.push("https://test.rentofurniture.com/user_sign_up");
                   } else {
                     toggleDropdown();
@@ -449,16 +438,16 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
-        style={{
-          top: `${
-            !homePageReduxData?.announcementBar ? topOffset : topOffset
-          }px`,
-        }}
+        // style={{
+        //   top: `${
+        //     !homePageReduxData?.announcementBar ? topOffset : topOffset
+        //   }px`,
+        // }}
         ref={modalRef}
         className={` ${
           homePageReduxData?.announcementBar
-            ? `w-full absolute top-[${topOffset}px] md:top-[16px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]  xs:top-32 sm:top-32 top-28`
+            ? `w-full absolute top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]   lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem]`
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
@@ -468,6 +457,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             value={searchTerm}
             onClick={e => e.stopPropagation()}
             onChange={e => handleSearch(e)}
+            autoFocus
           />
           <Image
             src={Icons.Search}
@@ -486,6 +476,7 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
           <input
             placeholder="Search for Furniture, Appliances, etc"
             className={styles.search_input}
+            autoFocus
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
             onKeyDown={e => handleSearch(e)}

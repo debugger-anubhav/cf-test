@@ -1,31 +1,38 @@
 import React from "react";
 import styles from "./style.module.css";
 import {FaChevronRight} from "react-icons/fa6";
-import {getLocalStorage} from "@/constants/constant";
+import {useRouter} from "next/navigation";
+import cookie from "react-cookies";
+// import {getLocalStorage} from "@/constants/constant";
 
-const Servicesdata = [
-  {head: "My orders", desc: "See all orders & stay updated on their status."},
-  {
-    head: "My Service Requests",
-    desc: "Need help with your order or have a request?",
-  },
-  {head: "My Payments", desc: "Track your payment & download statement."},
-  {head: "CF coins", desc: "Check CF coins. Use them when ordering."},
-  {head: "My Invoices", desc: "View and pay invoice."},
-  {
-    head: "KYC & Documentation",
-    desc: "Upload your KYC documents for verification.",
-  },
-  {head: "Profile Settings", desc: "Modify name, email or phone number."},
-];
+export default function UserSettings() {
+  const router = useRouter();
+  const Servicesdata = [
+    {head: "My orders", desc: "See all orders & stay updated on their status."},
+    {
+      head: "My Service Requests",
+      desc: "Need help with your order or have a request?",
+    },
+    {head: "My Payments", desc: "Track your payment & download statement."},
+    {head: "CF coins", desc: "Check CF coins. Use them when ordering."},
+    {head: "My Invoices", desc: "View and pay invoice."},
+    {
+      head: "KYC & Documentation",
+      desc: "Upload your KYC documents for verification.",
+    },
+    {head: "Profile Settings", desc: "Modify name, email or phone number."},
+  ];
 
-const userName = getLocalStorage("userName");
-const UserSettings = () => {
+  // const userName = getLocalStorage("user_name") ?? "";
+
   return (
     <div className={styles.main_container}>
       <p className={styles.user_account}>
         Your Account,
-        <span className={styles.main_text}>{userName}</span>
+        <span className={styles.main_text}>
+          {/* {userName || "Hello User"} */}
+          Hello User
+        </span>
       </p>
       <div className={styles.services_wrapper}>
         {Servicesdata?.map((ele, index) => {
@@ -42,10 +49,22 @@ const UserSettings = () => {
             </div>
           );
         })}
-        <p className={styles.lgout}>Logout</p>
+        <p
+          className={styles.lgout}
+          onClick={() => {
+            cookie.remove("ci_sessions");
+            localStorage.removeItem("tempUserID");
+            localStorage.removeItem("user_id");
+            localStorage.removeItem("_ga");
+            localStorage.removeItem("user_name");
+            localStorage.removeItem("ci_session");
+            router.push("https://test.rentofurniture.com/logout");
+          }}>
+          Logout
+        </p>
       </div>
     </div>
   );
-};
+}
 
-export default UserSettings;
+// export default UserSettings;

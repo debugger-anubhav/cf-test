@@ -72,13 +72,18 @@ const NewlyLaunched = () => {
               onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
               <a
                 onClick={e => e.preventDefault()}
-                href={`/things/${ele.id}/${ele.seourl}`}>
+                href={`/things/${ele.id}/${ele.seourl}`}
+                aria-label={ele?.product_name}
+                target="_self"
+                rel="noopener">
                 <img
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
                     ele?.image?.split(",")[0]
                   }
                   className={styles.img}
+                  alt={ele?.product_name}
+                  loading="lazy"
                 />
               </a>
             </div>

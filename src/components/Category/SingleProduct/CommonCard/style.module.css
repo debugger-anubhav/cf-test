@@ -1,11 +1,12 @@
 .card_wrapper {
-  @apply p-4 bg-fff cursor-pointer;
+  @apply md:p-4 bg-fff cursor-pointer mb-8 md:mb-0;
 }
 .card_wrapper:hover {
-  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25);
+  @apply md:shadow-[0px_4px_20px_0px_rgba(0,0,0,0.25)];
+  /* box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.25); */
 }
 .img {
-  @apply w-full lg:h-[240px] xl:h-full  rounded-lg;
+  @apply w-full min-h-[210px] lg:h-[240px] lg:min-h-[240px] xl:h-full xl:min-h-[280px] xl:max-h-[280px] 2xl:min-h-[310px] 2xl:max-h-[310px] 3xl:min-h-[387px] 3xl:max-h-[387px] rounded-lg;
 }
 .hover_wrapper img {
   @apply animate-fade;
@@ -18,22 +19,22 @@
 }
 .desc_div {
   /* @apply flex gap-2 3xl:justify-between mt-3; */
-  @apply flex gap-2 justify-between mt-3;
+  @apply flex gap-2 justify-between mt-1 lg:mt-3;
 }
 .desc {
-  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] h-[54px] font-Poppins;
+  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] h-[42px] lg:h-[54px] font-Poppins;
 }
 .price_div {
   @apply mt-1 flex justify-between items-center font-Poppins;
 }
 .originalPrice {
-  @apply text-14 xl:text-18 font-normal tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center;
+  @apply text-14 md:text-12 lg:text-14 xl:text-18 font-normal tracking-desc xl:tracking-[-0.36px] text-9A9AA2 line-through font-Poppins flex items-center whitespace-nowrap;
 }
 .currentPrice {
-  @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
+  @apply text-18 md:text-14 lg:text-18  xl:text-24 text-[#222] font-medium font-Poppins flex items-center whitespace-nowrap;
 }
 .discount {
-  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff whitespace-nowrap;
 }
 .label_tag {
   @apply flex p-1 items-center h-6 gap-1 absolute top-2 rounded-[4px];

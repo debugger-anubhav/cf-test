@@ -30,15 +30,18 @@ import {
   selectedCityId,
   selectedCityName,
 } from "@/store/Slices";
-import {useRouter} from "next/navigation";
+import {useRouter, useParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
   const dropDownRefSort = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
+  const query = useParams();
   const [pageNo, setPageNo] = useState(1);
   const [filterListed, setFilterListed] = useState(false);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
@@ -50,6 +53,7 @@ const SubHeader = ({params}) => {
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [subCategoryId, setSubCategoryId] = useState("");
+  const [subCategory, setSubCategory] = useState("");
   const [title, setTitle] = useState("");
   const [filterOpen, setFilterOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
@@ -86,15 +90,15 @@ const SubHeader = ({params}) => {
   }
 
   const handleFilterRemove = index => {
-    if (index > -1) {
+    if (index > -1 && categoryPageReduxData?.filteredItems) {
       const newFilteredItems = [
         ...categoryPageReduxData?.filteredItems.slice(0, index),
         ...categoryPageReduxData?.filteredItems.slice(index + 1),
       ];
+
       dispatch(addFilteredItem(newFilteredItems));
     }
   };
-
   useEffect(() => {
     if (getAllAndSubCategoryData?.length) {
       const matchedCategoryName = findSubCategoryByURL(
@@ -159,17 +163,44 @@ const SubHeader = ({params}) => {
       dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
-    setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCategoryId(getLocalStorage("categoryId"));
-      setSubCategoryId(getLocalStorage("subCategoryId"));
-      setCategory(
-        getLocalStorage("category")?.replace(/"/g, "") ?? "Home Furniture",
-      );
-    }
+    axios
+      .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
+      .then(res => {
+        setLocalStorage(
+          "category",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setLocalStorage(
+          "categoryId",
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setLocalStorage(
+          "subCategory",
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setLocalStorage("subCategoryId", res?.data?.data?.id);
+        setCategory(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.cat_name
+            : res?.data?.data?.cat_name,
+        );
+        setCategoryId(
+          res?.data?.data?.parentCategory
+            ? res?.data?.data?.parentCategory?.id
+            : res?.data?.data?.id,
+        );
+        setSubCategory(
+          res?.data?.data?.parentCategory ? res?.data?.data?.cat_name : "All",
+        );
+        setSubCategoryId(res?.data?.data?.id);
+      });
   }, []);
 
   const {refetch: getFilterList} = useQuery(
@@ -199,20 +230,16 @@ const SubHeader = ({params}) => {
     subCategoryId,
     homePageReduxData.categoryId,
     homePageReduxData.subcategoryId,
+    filtereData.length,
   ]);
 
-  const handleTitle = item => {
-    if (item?.fc_city_category_data?.cat_heading !== title) {
-      setTitle(item?.fc_city_category_data?.cat_heading || "");
-    }
-  };
   const defaultKey = 1;
   const newSortKey = 2;
   const highToLowKey = 3;
   const lowToHighKey = 4;
 
   const handleFilterDivClick = (e, filterTag) => {
-    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
     if (filterIndex === -1) {
@@ -220,8 +247,12 @@ const SubHeader = ({params}) => {
       updatedFilteredList.push(filterTag);
     } else {
       // If the filter is already in the list, remove it
-      updatedFilteredList.splice(filterIndex, 1);
+      updatedFilteredList = [
+        ...updatedFilteredList.slice(0, filterIndex),
+        ...updatedFilteredList.slice(filterIndex + 1),
+      ];
     }
+
     dispatch(addFilteredItem(updatedFilteredList));
   };
 
@@ -233,16 +264,6 @@ const SubHeader = ({params}) => {
     dispatch(isFilterApplied(true));
     setFilterListed(true);
     setFilterOpen(false);
-
-    // let filters = "";
-    // for (var i = 0; i < appliedFilter.length; i++) {
-    //   filters += "filter=" + encodeURIComponent(appliedFilter[i]);
-
-    //   if (i < appliedFilter.length - 1) {
-    //     filters += "&";
-    //   }
-    // }
-    // router.push(`?${filters}`);
   };
 
   const handleSort = (item, index) => {
@@ -313,6 +334,23 @@ const SubHeader = ({params}) => {
     setItemCount(itemCount + 7);
   };
 
+  useEffect(() => {
+    getAllAndSubCategoryData.forEach(ele => {
+      if (ele?.cat_name === category) {
+        if (subCategory === "All") {
+          setTitle(
+            ele?.fc_city_category_data?.cat_heading || ele?.page_heading,
+          );
+        } else {
+          const t = ele?.sub_categories.find(
+            el => el?.cat_name === subCategory,
+          );
+          setTitle(t?.fc_city_category_data?.cat_heading || t?.page_heading);
+        }
+      }
+    });
+  }, [getAllAndSubCategoryData, subCategory]);
+
   return (
     <>
       {skeletonOpen ? (
@@ -322,7 +360,7 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <a href="/cityfurnish">
+                <a href="/cityfurnish" target="_self" rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>Home</p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
@@ -335,16 +373,20 @@ const SubHeader = ({params}) => {
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${seoUrl?.seourl}`}>
+                    .toLowerCase()}/${seoUrl?.seourl}`}
+                  target="_self"
+                  rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>
-                    {getLocalStorage("category")?.replace(/"/g, "")}
+                    {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
+                    {category}
                   </p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
                 <p className={styles.route_text}>
-                  {getLocalStorage("subCategory")?.replace(/"/g, "")}
+                  {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
+                  {subCategory}
                 </p>
               </li>
             </ul>
@@ -353,7 +395,6 @@ const SubHeader = ({params}) => {
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
               if (item?.cat_name === category) {
-                handleTitle(item);
                 const subCategoriesWithNewObject = [
                   {
                     ...item,
@@ -376,6 +417,7 @@ const SubHeader = ({params}) => {
                         setLocalStorage("subCategory", subItem?.cat_name);
                         setLocalStorage("subCategoryId", subItem?.id);
                       }}
+                      className="mr-3 md:mr-0"
                       key={i.toString()}>
                       <div
                         className={
@@ -389,6 +431,8 @@ const SubHeader = ({params}) => {
                             <img
                               src={`${categoryIconsUrl}${subItem?.icon_active_image}`}
                               className={styles.selected_icon}
+                              alt={subItem.cat_name}
+                              loading="lazy"
                             />
                           </div>
                         ) : (
@@ -396,6 +440,8 @@ const SubHeader = ({params}) => {
                             <img
                               src={`${categoryIconsUrl}${subItem?.icon_image}`}
                               className={styles.selected_icon}
+                              alt={subItem.cat_name}
+                              loading="lazy"
                             />
                           </div>
                         )}
@@ -426,7 +472,7 @@ const SubHeader = ({params}) => {
             setFilterListed={setFilterListed}
           /> */}
             {showFilter && (
-              <div className="relative">
+              <div className="relative" ref={dropDownRefFilter}>
                 <div
                   className={`${styles.filter} relative`}
 
@@ -438,8 +484,7 @@ const SubHeader = ({params}) => {
                       // setFilterOpen(!filterOpen)
                       toggleDropDownFilter();
                       // toggleDropdownSort();
-                    }}
-                    ref={dropDownRefFilter}>
+                    }}>
                     <div className={styles.filter_text_container}>
                       <p className={`${styles.filter_text} text-71717A`}>
                         Filter
@@ -447,8 +492,9 @@ const SubHeader = ({params}) => {
                     </div>
                     <div>
                       <DownPopUpArrow
-                        size={20}
-                        color={"#45454A"}
+                        // size={20}
+
+                        color={"#71717A"}
                         className={
                           filterOpen ? styles.arrow_up : styles.arrow_down
                         }
@@ -467,7 +513,7 @@ const SubHeader = ({params}) => {
                                 className={styles.single_filter_text}
                                 key={index.toString()}
                                 onClick={e =>
-                                  handleFilterDivClick(e, ele.filter_tag)
+                                  handleFilterDivClick(e, ele?.filter_tag)
                                 }>
                                 <p
                                   htmlFor={index}
@@ -483,7 +529,6 @@ const SubHeader = ({params}) => {
                                     ele?.filter_tag,
                                   )}
                                   className="pr-1 cursor-pointer"
-                                  // onChange={e => handleFilteredItems(e)}
                                 />
                               </div>
                             )}
@@ -498,7 +543,7 @@ const SubHeader = ({params}) => {
                         See more
                       </p>
                     )}
-                    <div className="mt-6 w-full flex justify-center">
+                    <div className="mt-2 w-full flex justify-center">
                       <div
                         className={styles.btn_container}
                         onClick={() => handleApply()}>
@@ -526,7 +571,7 @@ const SubHeader = ({params}) => {
           </div> */}
 
             <div className="relative flex">
-              <p className="flex items-center mr-2 text-71717A text-base">
+              <p className="hidden md:flex items-center mr-2 text-71717A text-base">
                 Sort By
               </p>
               <div
@@ -548,8 +593,10 @@ const SubHeader = ({params}) => {
                   <div>
                     <DownPopUpArrow
                       size={20}
-                      color={"#45454A"}
-                      className={sortOpen ? styles.arrow_up : styles.arrow_down}
+                      color={"#597492"}
+                      className={`!text-[#597492] ${
+                        sortOpen ? styles.arrow_up : styles.arrow_down
+                      }`}
                     />
                   </div>
                 </div>
@@ -591,7 +638,7 @@ const SubHeader = ({params}) => {
               </div>
             )}
             <div className="flex items-center justify-center ">
-              <p className={styles.option_text}>Sortby</p>
+              <p className={`hidden md:flex ${styles.option_text}`}>Sortby</p>
               <div className={styles.filter}>
                 <FilterSortDrawer
                   filterName={"Default"}
@@ -606,7 +653,7 @@ const SubHeader = ({params}) => {
           <div className={styles.horizontal_line}></div>
           {categoryPageReduxData?.filteredItems.length !== 0 &&
             filterListed && (
-              <div className="flex flex-wrap">
+              <div className="mb-7 lg:mb-8 flex flex-wrap gap-x-3 lg:gap-x-4 gap-y-2 lg:gap-y-3">
                 <div
                   className={styles.single_filter_mobile}
                   // className={styles.single_filter}
@@ -635,7 +682,7 @@ const SubHeader = ({params}) => {
                         <>
                           <div
                             className={styles.filter_card}
-                            // style={{ background: "red" }}
+                            // style={{background: "red"}}
                             key={index.toString()}>
                             <FilterCard
                               text={item}

@@ -141,7 +141,7 @@ const SearchList = () => {
 
       {/* sort by */}
       <div className="relative flex my-8">
-        <p className="hidden sm:flex items-center mr-2 text-71717A text-base">
+        <p className="hidden md:flex items-center mr-2 text-71717A text-base">
           Sort By
         </p>
         <div

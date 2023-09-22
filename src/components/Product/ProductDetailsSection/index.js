@@ -1,4 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
+import {ToastContainer, toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -81,6 +83,8 @@ const ProductDetails = ({params}) => {
   const [soldOut, setSoldOut] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+
   // const [dummy,setIsDumy]=useState(false);
   const reviewsPerPage = 4;
   const startIndex = open ? (currentPage - 1) * reviewsPerPage : 0;
@@ -196,9 +200,8 @@ const ProductDetails = ({params}) => {
   }, []);
 
   useEffect(() => {
-    console.log(inWishList, "whishlist");
+    console.log(inWishList, "inWishlist");
   }, [inWishList]);
-
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
@@ -310,6 +313,33 @@ const ProductDetails = ({params}) => {
     return item?.fc_product?.id === parseInt(params.productId);
   });
 
+  const isSameTenure = cartItems?.some(item => {
+    return (
+      parseInt(item?.subproduct?.attr_name?.split(" ")?.[0]) ===
+      parseInt(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])
+    );
+  });
+
+  // console.log(isSameTenure, "sametenure");
+
+  const handleNotSameTenure = () => {
+    toast("Please select same tenure as selected for other cart items.", {
+      position: isSmallScreen ? "bottom-right" : "top-right",
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      className: isSmallScreen
+        ? `${styles.customToast} ${styles.customToastMobile} `
+        : `${styles.customToast} ${styles.customToastDesktop} `,
+      closeButton: (
+        <button className={styles.custom_close_button}>&#x2715;</button>
+      ),
+    });
+    // alert("plz choose same tenure");
+  };
+
   const handleAddToCart = () => {
     setIsLoading(true);
     const headers = {
@@ -351,6 +381,11 @@ const ProductDetails = ({params}) => {
     // }, 3000);
   };
 
+  const handleGoToCart = () => {
+    console.log("goingg");
+    router.push("/cart");
+  };
+
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -368,53 +403,24 @@ const ProductDetails = ({params}) => {
 
   const averageRating = totalReviews > 0 ? totalRatingSum / totalReviews : 0;
 
-  // const handleScrolling=(()=>{
-  //   const slider = scrollerRef1.current;
-  //   console.log(slider);
-  //   if (!slider) return;
-
-  //   let mouseDown = false;
-  //   let startX, scrollLeft;
-
-  //   const startDragging = (e) => {
-  //     mouseDown = true;
-  //     startX = e.pageX - slider.offsetLeft;
-  //     scrollLeft = slider.scrollLeft;
-  //   };
-  //   const stopDragging = () => {
-  //     setIsDumy(false);
-  //     mouseDown = false;
-  //   };
-
-  //   const toggleIsDragging = () => {
-  //     if (mouseDown && !isDumy) setIsDumy(true);
-  //   };
-
-  //   slider.addEventListener("mousemove", (e) => {
-  //     e.preventDefault();
-  //     if (!mouseDown) return;
-  //     const x = e.pageX - slider.offsetLeft;
-  //     const scroll = x - startX;
-  //     slider.scrollLeft = scrollLeft - scroll;
-  //   });
-  //   slider.addEventListener("mousedown", startDragging, false);
-  //   slider.addEventListener("mouseup", stopDragging, false);
-  //   slider.addEventListener("mouseleave", stopDragging, false);
-  //   slider.addEventListener("mousemove", toggleIsDragging);
-
-  //   return () => {
-  //     slider.removeEventListener("mousedown", startDragging);
-  //     slider.removeEventListener("mouseup", stopDragging);
-  //     slider.removeEventListener("mouseleave", stopDragging);
-  //     slider.removeEventListener("mousemove", toggleIsDragging);
-  //   };
-
-  // })
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
 
   const [isScrolling, setIsScrolling] = useState(false);
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
-  console.log(scrollContainerRef, "scrollContainerRef");
 
   const handleMouseDown = e => {
     setIsScrolling(true);
@@ -438,6 +444,7 @@ const ProductDetails = ({params}) => {
 
   return (
     <div className={styles.main_container}>
+      <ToastContainer />
       <ShareModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
@@ -450,15 +457,22 @@ const ProductDetails = ({params}) => {
           duration={duration}
           durationArray={durationArray}
           isLoading={isLoading}
-          handleButtonClick={handleAddToCart}
+          handleAddToCart={handleAddToCart}
+          handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
+          cartItems={cartItems}
+          isSameTenure={isSameTenure}
+          handleNotSameTenure={handleNotSameTenure}
         />
       )}
       <div className={styles.bread_crumps}>
         {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">
-            <a href={index !== 2 && `${item?.link}`}>
+            <a
+              href={index !== 2 && `${item?.link}`}
+              target="_self"
+              rel="noopener">
               <p
                 className={` ${
                   index === arr.length - 1 ? "font-medium" : "font-normal"
@@ -478,6 +492,14 @@ const ProductDetails = ({params}) => {
       </div>
       <div className={styles.main_section}>
         <div className={styles.carousel_wrapper}>
+          <div className={styles.info}>
+            <InformationIcon color={"ffffff"} />
+            <p>
+              {soldOut
+                ? "SOLD OUT"
+                : "39 people ordered this in the last 24hrs"}
+            </p>
+          </div>
           <Carousel
             selectedItem={selectedIndex}
             showThumbs={false}
@@ -509,17 +531,10 @@ const ProductDetails = ({params}) => {
                   <div key={index} className={styles.prod_img}>
                     <img
                       src={`${productPageImagesBaseUrl + item}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
-                    <div className={styles.info}>
-                      <InformationIcon color={"ffffff"} />
-                      <p>
-                        {soldOut
-                          ? "SOLD OUT"
-                          : "39 people ordered this in the last 24hrs"}
-                      </p>
-                    </div>
                   </div>
                 )}
               </>
@@ -540,8 +555,9 @@ const ProductDetails = ({params}) => {
                     onClick={() => handleThumbnailClick(index)}>
                     <img
                       src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                      alt={`Thumbnail ${index}`}
+                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
                       className="w-full h-full"
+                      loading="lazy"
                     />
                   </div>
                 )}
@@ -629,6 +645,8 @@ const ProductDetails = ({params}) => {
                 <img
                   className={styles.sold_out_icon}
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/sold-out-icon.svg"
+                  alt="sold-out-icon"
+                  loading="lazy"
                 />
               </div>
             ) : (
@@ -675,33 +693,30 @@ const ProductDetails = ({params}) => {
                     <span className={styles.rupeeIcon}>₹</span>
                     {durationArray?.[duration.currentIndex]?.attr_price}
                   </p>
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <p
-                      className={styles.originalPrice}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      <span className={styles.rupeeIcon}>₹</span>
-                      {durationArray?.[0]?.attr_price}
-                    </p>
-                  )}
+                  {/* {durationArray?.[0]?.attr_price >
+                    durationArray?.[duration.currentIndex]?.attr_price && ( */}
+                  <p
+                    className={styles.originalPrice}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {durationArray?.[0]?.attr_price}
+                  </p>
+                  {/* )} */}
 
-                  {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && (
-                    <div
-                      className={styles.discount}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      {`-${Math.round(
-                        ((durationArray?.[0]?.attr_price -
-                          durationArray?.[duration.currentIndex]?.attr_price) *
-                          100) /
-                          durationArray?.[0]?.attr_price,
-                      ).toFixed(0)}% OFF`}
-                    </div>
-                  )}
+                  <div
+                    className={styles.discount}
+                    style={{
+                      display: duration.value === "3" ? "none" : "flex",
+                    }}>
+                    {`-${Math.round(
+                      ((durationArray?.[0]?.attr_price -
+                        durationArray?.[duration.currentIndex]?.attr_price) *
+                        100) /
+                        durationArray?.[0]?.attr_price,
+                    ).toFixed(0)}% OFF`}
+                  </div>
                 </div>
               </div>
               {/* <span className="text-[#9C9C9C]">+</span>
@@ -715,8 +730,16 @@ const ProductDetails = ({params}) => {
           </div>
 
           <button
-            onClick={handleAddToCart}
-            disabled={isLoading || isItemInCart || soldOut}
+            onClick={
+              cartItems?.length === 0
+                ? handleAddToCart
+                : isItemInCart
+                ? handleGoToCart
+                : isSameTenure
+                ? handleAddToCart
+                : handleNotSameTenure
+            }
+            disabled={isLoading || soldOut}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
@@ -724,7 +747,7 @@ const ProductDetails = ({params}) => {
             ) : soldOut ? (
               "Notify me"
             ) : isItemInCart ? (
-              "In cart"
+              "Go To Cart"
             ) : (
               "Add to Cart"
             )}
@@ -741,7 +764,12 @@ const ProductDetails = ({params}) => {
 
           <div className={styles.kyc_wrapper}>
             {/* <BsPersonVcard size={24} /> */}
-            <img src={ProductPageImages.KycDoc} alt="kyc" className="w-6 h-6" />
+            <img
+              src={ProductPageImages.KycDoc}
+              alt="kyc"
+              className="w-6 h-6"
+              loading="lazy"
+            />
             <p className={styles.kyc_text}>{str.kyc}</p>
           </div>
 

@@ -26,6 +26,8 @@ const ItemsIncluded = () => {
               <img
                 src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
                 className={styles.img}
+                loading="lazy"
+                alt={item.product_name}
               />
               <div className={styles.quantity_label}>1x</div>
             </div>
@@ -74,16 +76,21 @@ const ItemsIncluded = () => {
                   </div>
                 </div>
               </div>
-              {item.features && (
+              {item?.description !== "" && (
                 <div className={styles.right_div}>
                   <p className={styles.info_subhead}>Features</p>
                   <div className={styles.features_wrappers}>
-                    {item.features?.map((feature, index) => (
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: item?.description,
+                      }}
+                      className={styles.feature}></div>
+                    {/* {item.features?.map((feature, index) => (
                       <li key={index} className={styles.feature}>
                         <div className={styles.dot}></div>
                         {feature}
                       </li>
-                    ))}
+                    ))} */}
                   </div>
                 </div>
               )}
@@ -102,11 +109,13 @@ const ItemsIncluded = () => {
                 productPageImagesBaseUrl + pageDetails?.image.split(",")[0]
               }`}
               className={styles.img}
+              alt={pageDetails?.product_name.replace(/-/g, " ")}
+              loading="lazy"
             />
             <div className={styles.quantity_label}>1x</div>
           </div>
         </div>
-        <div className={`${styles.info_wrapper}`}>
+        <div className={`${styles.info_wrapper} flex flex-col lg:flex-row`}>
           <div className={styles.left_div}>
             <p className={styles.info_subhead}>Product Information</p>
             <div className={styles.info_list}>
@@ -152,16 +161,20 @@ const ItemsIncluded = () => {
               )}
             </div>
           </div>
-          {pageDetails?.features && (
+          {pageDetails?.description !== "" && (
             <div className={styles.right_div}>
               <p className={styles.info_subhead}>Features</p>
               <div className={styles.features_wrappers}>
-                {pageDetails.features?.map((feature, index) => (
+                <div
+                  dangerouslySetInnerHTML={{__html: pageDetails?.description}}
+                  className={styles.feature}></div>
+
+                {/* {pageDetails.features?.map((feature, index) => (
                   <li key={index} className={styles.feature}>
                     <div className={styles.dot}></div>
                     {feature}
                   </li>
-                ))}
+                ))} */}
               </div>
             </div>
           )}

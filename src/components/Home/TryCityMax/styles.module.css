@@ -23,7 +23,7 @@
   @apply font-Poppins pt-2 font-medium xl:text-24 text-16 leading-normal tracking-[0.48px] text-[#222];
 }
 .check_button {
-  @apply h-[56px] flex items-center py-0 px-8 gap-2 bg-F6B704 rounded-lg mt-8;
+  @apply lg:h-[56px] h-[48px] flex items-center py-0 px-8 gap-2 bg-F6B704 rounded-lg mt-8;
 }
 .check_button_paragraph {
   @apply font-Poppins font-medium text-[#222] leading-5 flex;
@@ -105,4 +105,7 @@
 }
 .sidebar_detail_subheading {
   @apply text-base text-71717A font-Poppins leading-6;
+}
+.rupeeIcon {
+  @apply font-Inter;
 }
