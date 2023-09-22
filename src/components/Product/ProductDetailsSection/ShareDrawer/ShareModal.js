@@ -141,7 +141,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                 <img
                   alt={item?.icon}
                   src={item?.icon}
-                  className="cursor-pointer"
+                  className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8"
                   // onClick={() => console.log("cliked")}
                 />
               </a>

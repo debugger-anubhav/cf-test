@@ -1,6 +1,6 @@
 /* YourComponent.module.css */
 .customModal {
-  @apply md:!px-12 md:!py-12 w-full md:!w-[400px] !h-[192px];
+  @apply md:!px-12 md:!py-12 w-full md:!w-[445px] !h-[192px];
   top: 50% !important;
   left: 50% !important ;
   transform: translate(-50%, -50%) !important;
@@ -15,7 +15,7 @@
   @apply text-20 md:text-24 text-45454A font-medium leading-8 tracking-0.48;
 }
 .share_modal_icons_wrapper {
-  @apply flex gap-[14px] items-center mt-8;
+  @apply flex gap-[19px] md:gap-[16px] items-center mt-8;
 }
 .share_drawer_wrapper {
   @apply w-full h-[150px] px-4 pt-6 pb-8 flex flex-col justify-center;
