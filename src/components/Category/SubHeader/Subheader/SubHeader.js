@@ -163,7 +163,6 @@ const SubHeader = ({params}) => {
       dispatch(addSetProduct([]));
       dispatch(addOutStockProduct([]));
     }
-    setTitle(item?.fc_city_category_data?.cat_heading || "");
   };
 
   // useEffect(() => {
@@ -243,11 +242,7 @@ const SubHeader = ({params}) => {
     homePageReduxData.subcategoryId,
     filtereData.length,
   ]);
-  const handleTitle = item => {
-    if (item?.fc_city_category_data?.cat_heading !== title) {
-      setTitle(item?.fc_city_category_data?.cat_heading || "");
-    }
-  };
+
   const defaultKey = 1;
   const newSortKey = 2;
   const highToLowKey = 3;
@@ -270,7 +265,18 @@ const SubHeader = ({params}) => {
 
     dispatch(addFilteredItem(updatedFilteredList));
   };
+
   const handleApply = () => {
+    // var myArray = ["abc", "xyz"];
+    // var baseUrl = "https://example.com/my-route?";
+
+    // for (var i = 0; i < myArray.length; i++) {
+    //   baseUrl += "filter=" + encodeURIComponent(myArray[i]);
+
+    //   if (i < myArray.length - 1) {
+    //     baseUrl += "&";
+    //   }
+    // }
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
@@ -348,9 +354,24 @@ const SubHeader = ({params}) => {
     setItemCount(itemCount + 7);
   };
 
-  // console.log(query.category, "ppppppppppppppppp");
+  useEffect(() => {
+    getAllAndSubCategoryData.forEach(ele => {
+      if (ele?.cat_name === category) {
+        if (subCategory === "All") {
+          setTitle(
+            ele?.fc_city_category_data?.cat_heading || ele?.page_heading,
+          );
+        } else {
+          const t = ele?.sub_categories.find(
+            el => el?.cat_name === subCategory,
+          );
+          setTitle(t?.fc_city_category_data?.cat_heading || t?.page_heading);
+        }
+      }
+    });
+  }, [getAllAndSubCategoryData, subCategory]);
 
-  console.log(subCategoryId, "subCategoryId");
+  console.log("pppppppppppppppp", categoryPageReduxData?.filteredItems);
 
   return (
     <>
@@ -395,9 +416,7 @@ const SubHeader = ({params}) => {
           <h1 className={styles.heading}>{title}</h1>
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
-              // console.log(item, "llllllllllll", category);
               if (item?.cat_name === category) {
-                handleTitle(item);
                 const subCategoriesWithNewObject = [
                   {
                     ...item,
@@ -407,11 +426,6 @@ const SubHeader = ({params}) => {
                 ];
 
                 return subCategoriesWithNewObject?.map((subItem, i) => {
-                  // console.log(
-                  //   "lllllllllll",
-                  //   getLocalStorage("subCategory")?.replace(/"/g, ""),
-                  //   subItem,
-                  // );
                   const selectedProduct =
                     getLocalStorage("subCategory")?.replace(/"/g, "") ===
                     subItem?.cat_name;
