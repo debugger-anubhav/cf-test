@@ -1,0 +1,73 @@
+.main_container {
+  @apply px-4 mt-4 mb-8 lg:mb-[88px] lg:mt-3 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+
+.bread_crumbs {
+  @apply md:flex md:gap-1 md:items-center md:mb-4 hidden;
+}
+
+.bread_crumbs_text {
+  @apply text-[#71717A] text-14 font-normal leading-6;
+}
+
+.heading {
+  @apply text-20 leading-8 font-medium text-45454A md:tracking-[-0.48px] mb-6 lg:mb-8 tracking-[-0.4px];
+}
+
+.about_desc {
+  @apply text-sm md:text-base font-normal tracking-[-0.28px] md:tracking-[-0.32px] text-[#71717A];
+}
+
+.content_wrapper {
+  @apply flex flex-col lg:flex-row gap-4 md:gap-8 mb-8 lg:mb-[72px];
+}
+
+.section1_wrapper {
+  @apply md:w-[97%] lg:w-[50%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%];
+  /* @apply inline-block */
+}
+
+.section2_wrapper {
+  @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] xl:w-[45%] macbook:w-[40%] 3xl:w-[43%] 3xl:justify-end;
+}
+/* gap-16px */
+.block {
+  @apply px-4 pt-4 pb-6 md:pl-8 md:py-6 md:pr-6 rounded-[8px] border-b-[2px]
+    border-b-EDEDEE bg-[url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/frame-about-us-mobile.webp")]  xl:bg-[url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/frame-about-us.webp")] bg-no-repeat bg-[cover]
+    w-[238px] mobile:w-[50%] ms:w-[238px] xl:w-[269px];
+}
+
+.block_head {
+  @apply text-2xl text-[#597492] font-bold tracking-[-0.48px] mb-1;
+}
+
+.block_desc {
+  @apply text-base font-normal tracking-[-0.32px] text-[#71717a];
+}
+
+.heading2 {
+  @apply text-base lg:text-xl font-medium tracking-[-0.32px] mb-6 lg:mb-8 lg:tracking-[-0.4px] text-45454A;
+}
+
+.team_wrapper {
+  @apply flex flex-col lg:flex-row gap-4 lg:gap-12;
+}
+
+.team_content_wrapper {
+  @apply lg:w-[57%] macbook:w-[62%];
+}
+
+.team_content {
+  @apply text-sm font-normal tracking-[-0.28px] text-[#71717A] md:text-base md:tracking-[-0.32px];
+}
+
+.image_wrapper {
+  @apply flex justify-between mobile:justify-center lg:justify-start mobile:gap-4 xs:gap-10 lg:gap-8 xl:gap-14 lg:w-[43%] macbook:w-[38%];
+}
+
+.image_text {
+  @apply flex whitespace-nowrap justify-center text-12 mobile:text-14  tracking-[-0.28px] md:text-16 leading-8 font-medium md:tracking-[-0.32px] text-45454A;
+}
+.images_container {
+  @apply flex justify-center rounded-full   mb-4;
+}
