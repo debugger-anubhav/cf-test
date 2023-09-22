@@ -249,7 +249,7 @@ const Header = () => {
               <a
                 href={
                   userId
-                    ? "/cart"
+                    ? "/wishlist"
                     : "https://test.rentofurniture.com/user_sign_up"
                 }>
                 <span className={styles.header_favorite_container}>
