@@ -97,7 +97,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     // );toggleDrawe
   };
   const userId = decrypt(getLocalStorage("_ga"));
-  console.log(userId);
   const list = anchor =>
     DrawerName === "menu" ? (
       <div

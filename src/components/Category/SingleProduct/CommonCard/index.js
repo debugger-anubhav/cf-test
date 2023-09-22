@@ -177,7 +177,7 @@ const CategoryCard = ({
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
-            alt="thumbnail image"
+            alt={desc.replace(/-/g, " ")}
             className={styles.img}
           />
           {soldOut ? (

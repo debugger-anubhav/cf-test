@@ -497,18 +497,6 @@ const SubHeader = ({params}) => {
           </div>
 
           <div className={styles.filter_sort_section}>
-            {/* <div> */}
-            {/* <CategoryPopover
-            btnName={"click"}
-            filterName={"Filter"}
-            emptyFilterItem={emptyFilterItem}
-            setfiltereSaved={setfiltereSaved}
-            setEmptyFilterItem={setEmptyFilterItem}
-            filterSaved={filterSaved}
-            isApplyFilter={false}
-            setPageNo={setPageNo}
-            setFilterListed={setFilterListed}
-          /> */}
             {showFilter && (
               <div className="relative" ref={dropDownRefFilter}>
                 <div
@@ -592,21 +580,6 @@ const SubHeader = ({params}) => {
                 )}
               </div>
             )}
-
-            {/* </div> */}
-            {/* <div className="flex items-center justify-center ">
-            <p className={styles.option_text}>Sortby</p>
-            <div>
-              <CategoryPopover
-                btnName={"click"}
-                filterName={"Default"}
-                setfiltereSaved={setfiltereSaved}
-                isApplyFilter={false}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
-          </div> */}
 
             <div className="relative flex">
               <p className="hidden md:flex items-center mr-2 text-71717A text-base">
@@ -696,6 +669,11 @@ const SubHeader = ({params}) => {
                   className={styles.single_filter_mobile}
                   // className={styles.single_filter}
                   onClick={() => {
+                    const url = window?.location.href;
+                    const temp = url.split("?");
+                    temp.splice(1, 1);
+                    const finalUrl = temp.join("?");
+                    router.push(finalUrl);
                     dispatch(addFilteredItem([]));
                     dispatch(addSingleProduct([]));
                     dispatch(addSetProduct([]));

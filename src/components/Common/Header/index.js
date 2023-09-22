@@ -261,7 +261,6 @@ const Header = () => {
                       if (userId) {
                         router.push("/wishlist");
                       } else {
-                        // router.push("/wishlist");
                         router.push(
                           "https://test.rentofurniture.com/user_sign_up",
                         );
@@ -278,12 +277,6 @@ const Header = () => {
               {/* <Link href={`/cart`}> */}
 
               <div className="relative">
-                {/* <Image
-                  src={Icons.shoppingCard}
-                  alt="shopping-card-icon"
-                  className={styles.header_shopping_card}
-                  onClick={() => router.push("https://cityfurnish.com/cart")}
-                /> */}
                 <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}
