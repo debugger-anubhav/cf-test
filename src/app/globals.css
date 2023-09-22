@@ -112,14 +112,14 @@ input[type="radio"]:checked {
   left: 30px !important;
 }
 
-.Toastify__toast-icon {
+/* .Toastify__toast-icon {
   display: none !important;
-}
-.Toastify__close-button--light {
+} */
+/* .Toastify__close-button--light {
   color: white !important;
   opacity: 1 !important;
   margin-top: 0.8rem !important;
-}
-.Toastify__toast-container--top-right {
+} */
+/* .Toastify__toast-container--top-right {
   @apply 3xl:!px-[160px] macbook:!px-[122px] xl:!px-[90px] md:!px-[70px] !px-4 !w-fit !mt-32 !right-0;
-}
+} */

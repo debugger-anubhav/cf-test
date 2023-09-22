@@ -54,6 +54,7 @@ module.exports = {
       screens: {
         mobile: "360px",
         xs: "428px",
+        xs1: "481px",
         ms: "520px",
         macbook: "1440px",
         "3xl": "1660px",
@@ -78,6 +79,9 @@ module.exports = {
       },
       animation: {
         fade: "fadeOut 0.5s ease-in-out",
+      },
+      spacing: {
+        mobile: "calc(100vh - 32px)",
       },
 
       // that is actual animation
