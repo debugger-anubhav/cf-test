@@ -19,6 +19,7 @@ import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 
 const defaultKey = 1;
 const newSortKey = 2;
@@ -257,3 +258,11 @@ const SearchList = () => {
 };
 
 export default SearchList;
+
+export const SearchListSkeleton = () => {
+  return (
+    <div className="mb-8">
+      <RentFurnitureSkeleton />
+    </div>
+  );
+};

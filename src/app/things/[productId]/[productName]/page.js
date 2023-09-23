@@ -7,7 +7,6 @@ import React from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
@@ -18,10 +17,17 @@ import Footer from "@/components/Common/Footer";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
 import loadable from "@loadable/component";
-import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
 
+const ItemsIncluded = loadable(
+  () => import("@/components/Product/ProductsIncludedSection"),
+  {
+    fallback: <ItemsIncludedSkeleton />,
+  },
+);
 const YouMightLike = loadable(
   () => import("@/components/Product/YouMightLike"),
   {

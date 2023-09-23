@@ -882,7 +882,7 @@ export const SkeletonForProductDetail = () => {
           </div>
         </div>
         <div className={styles.right_part}>
-          <div className="h-6 w-full">
+          <div className="h-6 md:w-full w-[80%]">
             <Skeleton variant="text" className="w-full" />
           </div>
           <div className="h-3 w-1/2 my-4">
