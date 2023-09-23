@@ -214,11 +214,11 @@
   @apply flex w-full px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 .container_skeleton {
-  @apply flex w-full gap-6;
+  @apply flex w-full flex-col md:flex-row gap-6;
 }
 .left_part {
-  @apply flex w-1/2 h-80;
+  @apply flex md:w-1/2 w-full flex-col;
 }
 .right_part {
-  @apply flex w-1/2 flex-col;
+  @apply flex md:w-1/2 w-full mx-8 md:mx-0 flex-col overflow-hidden;
 }

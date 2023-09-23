@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
+import {useRouter} from "next/navigation";
 
 const StickyBottomBar = ({
   productName,
@@ -20,6 +21,7 @@ const StickyBottomBar = ({
       100) /
       durationArray?.[0]?.attr_price,
   ).toFixed(0);
+  const router = useRouter();
   return (
     <div className={styles.sticky_bar_wrapper}>
       <p className={styles.sticky_bar_head}>{productName}</p>
@@ -64,7 +66,7 @@ const StickyBottomBar = ({
           cartItems?.length === 0
             ? handleAddToCart
             : isItemInCart
-            ? handleGoToCart
+            ? router.push("/cart")
             : isSameTenure
             ? handleAddToCart
             : handleNotSameTenure

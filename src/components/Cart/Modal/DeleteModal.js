@@ -94,7 +94,7 @@ const DeleteModal = ({
   const handleWhislistCard = e => {
     e.stopPropagation();
     // if (!getLocalStorage("user_id")) {
-    if (decrypt(getLocalStorage("_ga"))) {
+    if (!decrypt(getLocalStorage("_ga"))) {
       router.push("https://test.rentofurniture.com/user_sign_up");
       return;
     }

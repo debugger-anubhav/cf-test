@@ -1,0 +1,17 @@
+.main_container {
+  @apply px-4 mb-8 lg:mb-[88px] md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.content_wrapper {
+  @apply flex flex-col bg-[#457A47] border border-[#457A47] rounded-xl p-4  md:p-8 ms:flex-row ms:gap-6;
+}
+
+.heading {
+  @apply text-lg tracking-[-0.36px] md:text-24  md:leading-5 font-medium md:tracking-[-0.48px] text-[#fff] mb-2 md:mb-6;
+}
+.ans_wrapper {
+  @apply flex gap-[9px];
+}
+
+.ans_text {
+  @apply text-12 tracking-[-0.24px]  font-normal md:tracking-[-0.32px] md:text-base text-[#FFF];
+}

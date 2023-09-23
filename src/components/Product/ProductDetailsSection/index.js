@@ -371,6 +371,7 @@ const ProductDetails = ({params}) => {
   };
 
   const handleGoToCart = () => {
+    console.log("goingg");
     router.push("/cart");
   };
 
@@ -855,10 +856,21 @@ export const SkeletonForProductDetail = () => {
     <div className={styles.skeleton_wrapper}>
       <div className={styles.container_skeleton}>
         <div className={styles.left_part}>
-          <Skeleton variant="rectangular" className="w-full" />
+          <div className="min-h-80 h-80">
+            <Skeleton variant="rectangular" className="w-full h-full" />
+          </div>
+          <div className={styles.left_bottom_cards}>
+            {[1, 2, 3, 4].map((item, index) => {
+              return (
+                <div key={index.toString()} className="w-20 h-20 mr-2">
+                  <Skeleton variant="rectangular" className="w-full h-full " />
+                </div>
+              );
+            })}
+          </div>
         </div>
         <div className={styles.right_part}>
-          <div className="h-6 w-full">
+          <div className="h-6 md:w-full w-[80%]">
             <Skeleton variant="text" className="w-full" />
           </div>
           <div className="h-3 w-1/2 my-4">
