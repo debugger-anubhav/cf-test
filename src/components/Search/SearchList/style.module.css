@@ -136,7 +136,7 @@
   /* grid-template-columns: 1 auto auto; */
 }
 .card_box_product {
-  @apply mr-2 2xl:mr-3 3xl:mr-4 ml-[15px] my-4 p-3 bg-white w-fit last-screen:mx-auto;
+  @apply md:mr-2 2xl:mr-3 3xl:mr-4 md:ml-[15px] my-4 p-3 bg-white w-fit last-screen:mx-auto;
   cursor: pointer;
 }
 .card_box_product:hover {

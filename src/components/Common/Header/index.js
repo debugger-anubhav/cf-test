@@ -572,36 +572,40 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             <div className="mt-6">
               <p className={styles.search_head}>Categories</p>
               <div className={`${styles.categories_wrapper}`}>
-                {homePageReduxData?.category?.map((item, index) => (
-                  <a
-                    key={index.toString()}
-                    href={`${homePageReduxData?.cityName
-                      .replace(/\//g, "-")
-                      .toLowerCase()}/${item?.seourl}`}>
-                    <div
-                      className={styles.category_card_in_searchbox}
-                      onClick={() => {
-                        if (typeof window !== "undefined") {
-                          setLocalStorage("categoryId", item?.rootID);
-                          setLocalStorage("subCategoryId", item?.id);
-                        }
-                      }}>
-                      <img
-                        src={
-                          "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                          item.category_image
-                        }
-                        alt="RentFurnitureImages"
-                        className={styles.categories_img}
-                      />
-                      <div>
-                        <h3 className={styles.category_label}>
-                          {item?.cat_name}
-                        </h3>
+                {homePageReduxData?.category?.map((item, index) => {
+                  return (
+                    <a
+                      key={index.toString()}
+                      href={`${
+                        window?.location.origin
+                      }/${homePageReduxData?.cityName
+                        .replace(/\//g, "-")
+                        .toLowerCase()}/${item?.seourl}`}>
+                      <div
+                        className={styles.category_card_in_searchbox}
+                        onClick={() => {
+                          if (typeof window !== "undefined") {
+                            setLocalStorage("categoryId", item?.rootID);
+                            setLocalStorage("subCategoryId", item?.id);
+                          }
+                        }}>
+                        <img
+                          src={
+                            "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                            item.category_image
+                          }
+                          alt="RentFurnitureImages"
+                          className={styles.categories_img}
+                        />
+                        <div>
+                          <h3 className={styles.category_label}>
+                            {item?.cat_name}
+                          </h3>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                ))}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>
