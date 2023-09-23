@@ -30,10 +30,6 @@ const MenuList = () => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(getAllAndSubCategoryData, "getAllAndSubCategoryData");
-  }, [getAllAndSubCategoryData]);
-
   return (
     <div className={styles.menu_list_wrapper}>
       {loading && !getAllAndSubCategoryData?.length ? (
