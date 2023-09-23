@@ -145,14 +145,10 @@ const SearchList = () => {
         <p className="hidden md:flex items-center mr-2 text-71717A text-base">
           Sort By
         </p>
-        <div
-          className={`${style.filter} relative `}
-          // onClick={() => setFilterOpen(!fi)}
-        >
+        <div className={`${style.filter} relative `}>
           <div
             className={style.filterbox}
             onClick={() => {
-              // setSortOpen(!filterOpen);
               toggleDropdownSort();
             }}
             ref={dropDownRefSort}>
