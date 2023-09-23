@@ -117,7 +117,7 @@ const SearchList = () => {
   };
 
   const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
+    if (!e.target.classList.contains) {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
@@ -213,7 +213,7 @@ const SearchList = () => {
               {searchData?.map((item, index) => {
                 return (
                   <div
-                    className={`${style.card_box_product} ${style.child}`}
+                    className={`${style.card_box_product} child`}
                     key={index.toString()}
                     onClick={e => handleCardClick(e, item)}>
                     <SearchCard

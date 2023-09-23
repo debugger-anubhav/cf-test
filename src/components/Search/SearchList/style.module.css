@@ -132,11 +132,12 @@
   } */
 
 .main_container {
-  @apply flex flex-wrap lg:grid md:grid-cols-3 justify-center md:justify-normal my-4;
+  @apply flex flex-wrap lg:gap-[10px] md:grid xl:grid-cols-3 md:grid-cols-2 justify-center md:justify-normal lg:my-4;
+
   /* grid-template-columns: 1 auto auto; */
 }
 .card_box_product {
-  @apply md:mr-2 2xl:mr-3 3xl:mr-4 md:ml-[15px] my-4 p-3 bg-white w-fit last-screen:mx-auto;
+  @apply my-4 p-3 bg-white w-full last-screen:mx-auto;
   cursor: pointer;
 }
 .card_box_product:hover {
