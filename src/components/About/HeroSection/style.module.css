@@ -62,7 +62,7 @@
 }
 
 .image_wrapper {
-  @apply flex justify-between mobile:justify-center lg:justify-start mobile:gap-4 xs:gap-10 lg:gap-8 xl:gap-14 lg:w-[43%] macbook:w-[38%];
+  @apply flex justify-between mobile:justify-start lg:justify-start mobile:gap-4 xs:gap-10 lg:gap-8 xl:gap-14 lg:w-[43%] macbook:w-[38%];
 }
 
 .image_text {
