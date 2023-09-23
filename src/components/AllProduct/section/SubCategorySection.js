@@ -13,8 +13,8 @@ import {
 const SubCategorySection = () => {
   // const [isDumy, setIsDumy] = React.useState(false);
   const [windowSize, setWindowSize] = React.useState([
-    window.innerWidth,
-    window.innerHeight,
+    window?.innerWidth,
+    window?.innerHeight,
   ]);
   // const [isRefEle, setRefEle] = useState(false);
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -125,13 +125,13 @@ const SubCategorySection = () => {
 
   useEffect(() => {
     const handleWindowResize = () => {
-      setWindowSize([window.innerWidth, window.innerHeight]);
+      setWindowSize([window?.innerWidth, window?.innerHeight]);
     };
 
-    window.addEventListener("resize", handleWindowResize);
+    window?.addEventListener("resize", handleWindowResize);
 
     return () => {
-      window.removeEventListener("resize", handleWindowResize);
+      window?.removeEventListener("resize", handleWindowResize);
     };
   }, []);
 
@@ -171,7 +171,7 @@ const SubCategorySection = () => {
               </div>
             </div>
 
-            <Cards subCategory={item?.sub_categories} item={item} />
+            <Cards subCategory={item?.sub_categories} />
           </div>
         );
       })}
@@ -179,7 +179,7 @@ const SubCategorySection = () => {
   );
 };
 
-const Cards = ({subCategory, item}) => {
+const Cards = ({subCategory}) => {
   const refElement = useRef(null);
   const homePageReduxData = useSelector(state => state.homePagedata);
   // const data = homePageReduxData?.allAndSubCategory;
@@ -249,7 +249,7 @@ const Cards = ({subCategory, item}) => {
               key={index.toString()}>
               <a
                 href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                  item?.seourl
+                  subItem?.seourl
                 }`}>
                 <img
                   src={
