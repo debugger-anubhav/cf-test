@@ -56,9 +56,10 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
     cityId,
     pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
+    filterList: categoryPageReduxData?.filteredItems,
+    // filterList: categoryPageReduxData?.isfilter
+    //   ? categoryPageReduxData?.filteredItems
+    //   : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
 
@@ -66,9 +67,10 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     parentCategoryId: categoryId,
     cityId,
     pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
+    filterList: categoryPageReduxData?.filteredItems,
+    // filterList: categoryPageReduxData?.isfilter
+    //   ? categoryPageReduxData?.filteredItems
+    //   : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
 
@@ -139,7 +141,12 @@ const SingleProduct = ({pageNo, setPageNo}) => {
         })
         .catch(err => console.log(err));
     },
-    [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey],
+    [
+      pageNo,
+      categoryPageReduxData?.isfilter,
+      categoryPageReduxData?.sortKey,
+      categoryPageReduxData?.filteredItems,
+    ],
     subCategoryId,
   );
 

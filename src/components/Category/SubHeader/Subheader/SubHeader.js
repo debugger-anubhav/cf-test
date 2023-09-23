@@ -30,7 +30,7 @@ import {
   selectedCityId,
   selectedCityName,
 } from "@/store/Slices";
-import {useRouter, useParams} from "next/navigation";
+import {useRouter, useParams, useSearchParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
 import axios from "axios";
@@ -42,6 +42,8 @@ const SubHeader = ({params}) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const query = useParams();
+  const searchParams = useSearchParams();
+  const filterFromUrl = searchParams.getAll("filter");
   const [pageNo, setPageNo] = useState(1);
   const [filterListed, setFilterListed] = useState(false);
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
@@ -63,6 +65,19 @@ const SubHeader = ({params}) => {
   const [showData, setShowData] = useState(false);
   const [seoUrl, setSeoUrl] = useState();
   const [itemCount, setItemCount] = useState(7);
+
+  useEffect(() => {
+    setFilterFromUrlToStore();
+  }, [JSON.stringify(filterFromUrl)]);
+
+  const setFilterFromUrlToStore = () => {
+    if (filterFromUrl?.length) {
+      setFilterListed(true);
+      dispatch(addFilteredItem(filterFromUrl));
+    } else {
+      setFilterListed(false);
+    }
+  };
 
   function findSubCategoryByURL(data, browserURL) {
     for (const category of data) {
@@ -88,17 +103,28 @@ const SubHeader = ({params}) => {
     }
     return null;
   }
-
   const handleFilterRemove = index => {
     if (index > -1 && categoryPageReduxData?.filteredItems) {
       const newFilteredItems = [
         ...categoryPageReduxData?.filteredItems.slice(0, index),
         ...categoryPageReduxData?.filteredItems.slice(index + 1),
       ];
-
       dispatch(addFilteredItem(newFilteredItems));
+
+      const filtersQueryParam = newFilteredItems
+        .map(filter => `filter=${encodeURIComponent(filter)}`)
+        .join("&");
+      const newUrl = filtersQueryParam ? `?${filtersQueryParam}` : "";
+
+      // Construct the new URL by replacing the query parameters
+      const updatedUrl = `${window.location.origin}${window.location.pathname}${newUrl}`;
+
+      // Update the URL and Redux state
+      router.push(updatedUrl);
+      dispatch(isFilterApplied(true));
     }
   };
+
   useEffect(() => {
     if (getAllAndSubCategoryData?.length) {
       const matchedCategoryName = findSubCategoryByURL(
@@ -257,6 +283,18 @@ const SubHeader = ({params}) => {
   };
 
   const handleApply = () => {
+    let url = "";
+
+    for (let i = 0; i < categoryPageReduxData?.filteredItems.length; i++) {
+      url +=
+        "filter=" + encodeURIComponent(categoryPageReduxData?.filteredItems[i]);
+
+      if (i < categoryPageReduxData?.filteredItems.length - 1) {
+        url += "&";
+      }
+    }
+    router.push(`?${url}`);
+
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
@@ -459,18 +497,6 @@ const SubHeader = ({params}) => {
           </div>
 
           <div className={styles.filter_sort_section}>
-            {/* <div> */}
-            {/* <CategoryPopover
-            btnName={"click"}
-            filterName={"Filter"}
-            emptyFilterItem={emptyFilterItem}
-            setfiltereSaved={setfiltereSaved}
-            setEmptyFilterItem={setEmptyFilterItem}
-            filterSaved={filterSaved}
-            isApplyFilter={false}
-            setPageNo={setPageNo}
-            setFilterListed={setFilterListed}
-          /> */}
             {showFilter && (
               <div className="relative" ref={dropDownRefFilter}>
                 <div
@@ -503,7 +529,7 @@ const SubHeader = ({params}) => {
                   </div>
                 </div>
                 {filterOpen && (
-                  <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[355px] border-[2px] border-71717A bg-white py-4 ">
+                  <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[370px] border-[2px] border-71717A bg-white py-4 ">
                     <div className={styles.mapped_filter}>
                       {filtereData?.map((ele, index) => {
                         return (
@@ -554,21 +580,6 @@ const SubHeader = ({params}) => {
                 )}
               </div>
             )}
-
-            {/* </div> */}
-            {/* <div className="flex items-center justify-center ">
-            <p className={styles.option_text}>Sortby</p>
-            <div>
-              <CategoryPopover
-                btnName={"click"}
-                filterName={"Default"}
-                setfiltereSaved={setfiltereSaved}
-                isApplyFilter={false}
-                setPageNo={setPageNo}
-                setFilterListed={setFilterListed}
-              />
-            </div>
-          </div> */}
 
             <div className="relative flex">
               <p className="hidden md:flex items-center mr-2 text-71717A text-base">
@@ -658,6 +669,11 @@ const SubHeader = ({params}) => {
                   className={styles.single_filter_mobile}
                   // className={styles.single_filter}
                   onClick={() => {
+                    const url = window?.location.href;
+                    const temp = url.split("?");
+                    temp.splice(1, 1);
+                    const finalUrl = temp.join("?");
+                    router.push(finalUrl);
                     dispatch(addFilteredItem([]));
                     dispatch(addSingleProduct([]));
                     dispatch(addSetProduct([]));
@@ -697,6 +713,11 @@ const SubHeader = ({params}) => {
                   // className={styles.single_filter_mobile}
                   className={styles.single_filter}
                   onClick={() => {
+                    const url = window?.location.href;
+                    const temp = url.split("?");
+                    temp.splice(1, 1);
+                    const finalUrl = temp.join("?");
+                    router.push(finalUrl);
                     dispatch(addFilteredItem([]));
                     dispatch(isFilterApplied(false));
                     dispatch(addSingleProduct([]));
