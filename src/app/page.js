@@ -22,6 +22,7 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -139,6 +140,7 @@ export default function Home() {
           <Footer />
         </div>
       </Provider>
+      <Notifications />
       {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}
     </QueryClientProvider>
   );

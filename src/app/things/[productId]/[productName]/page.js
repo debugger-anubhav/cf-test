@@ -21,6 +21,7 @@ import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const ItemsIncluded = loadable(
   () => import("@/components/Product/ProductsIncludedSection"),
@@ -78,6 +79,7 @@ const ProductPage = () => {
           <Footer />
         </div>
       </Provider>
+      <Notifications type={3} />
     </QueryClientProvider>
   );
 };

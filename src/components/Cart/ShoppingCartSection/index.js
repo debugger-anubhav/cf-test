@@ -1,11 +1,11 @@
 "use client";
-
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {
   categoryIconsUrl,
   getLocalStorage,
   productImageBaseUrl,
+  setLocalStorage,
 } from "@/constants/constant";
 import {
   ArrowForw,
@@ -16,7 +16,6 @@ import {
   VerifyIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
-
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
@@ -93,6 +92,7 @@ const ShoppingCartSection = ({setTab}) => {
     "Faster KYC",
     "No Security Deposit",
   ];
+  const modeOfPayment = getLocalStorage("isMonthly");
 
   const [isChecked, setIsChecked] = useState(true);
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
@@ -101,13 +101,18 @@ const ShoppingCartSection = ({setTab}) => {
   const [isCouponApplied, setIsCouponApplied] = useState(false);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [availCoin, setAvailCoin] = useState(0);
-  const [isMonthly, setIsMonthly] = useState(true);
+  const [isMonthly, setIsMonthly] = useState(
+    modeOfPayment === null ? true : modeOfPayment,
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [code, setCode] = useState("");
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
 
   // const [itemQuantity, setItemQuantity] = useState(1);
+
+  console.log(modeOfPayment, "modeofpaymentt");
+  console.log(isMonthly, "monthlyyyyyy");
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -471,7 +476,10 @@ const ShoppingCartSection = ({setTab}) => {
                 </h2>
                 <div className={styles.monthly_toggler}>
                   <p
-                    onClick={() => setIsMonthly(true)}
+                    onClick={() => {
+                      setIsMonthly(true);
+                      setLocalStorage("isMonthly", true);
+                    }}
                     className={`${
                       isMonthly
                         ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
@@ -480,7 +488,10 @@ const ShoppingCartSection = ({setTab}) => {
                     Monthly
                   </p>
                   <p
-                    onClick={() => setIsMonthly(false)}
+                    onClick={() => {
+                      setIsMonthly(false);
+                      setLocalStorage("isMonthly", false);
+                    }}
                     className={`${
                       isMonthly
                         ? "bg-transparent"
