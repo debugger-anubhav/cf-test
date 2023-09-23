@@ -7,6 +7,7 @@ import React from "react";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {Provider} from "react-redux";
 import CartSection from "@/components/Cart";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const CartPage = () => {
   const queryClient = new QueryClient();
@@ -21,6 +22,7 @@ const CartPage = () => {
           <CartSection />
         </div>
       </Provider>
+      <Notifications />
     </QueryClientProvider>
   );
 };

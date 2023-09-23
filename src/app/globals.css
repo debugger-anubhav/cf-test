@@ -112,6 +112,11 @@ input[type="radio"]:checked {
   left: 30px !important;
 }
 
+/* .Toastify__toast-body {
+  margin: 0px !important;
+ 
+} */
+
 /* .Toastify__toast-icon {
   display: none !important;
 } */

@@ -9,6 +9,7 @@ import {store} from "@/store";
 import Footer from "@/components/Common/Footer";
 import loadable from "@loadable/component";
 import {SearchListSkeleton} from "@/components/Search/SearchList/SearchList";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const SearchList = loadable(
   () => import("@/components/Search/SearchList/SearchList"),
@@ -30,6 +31,7 @@ export default function SearchPage() {
           <Footer />
         </div>
       </Provider>
+      <Notifications />
     </QueryClientProvider>
   );
 }

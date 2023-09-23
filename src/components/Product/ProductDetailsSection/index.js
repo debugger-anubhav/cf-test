@@ -1,6 +1,4 @@
 import React, {useState, useEffect, useRef} from "react";
-import {ToastContainer, toast} from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import styles from "./style.module.css";
 import {Carousel} from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -42,6 +40,7 @@ import SideDrawer from "../Drawer/Drawer";
 import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -83,7 +82,7 @@ const ProductDetails = ({params}) => {
   const [soldOut, setSoldOut] = useState(false);
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 768);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   // const [dummy,setIsDumy]=useState(false);
   const reviewsPerPage = 4;
@@ -230,6 +229,7 @@ const ProductDetails = ({params}) => {
                   return item?.id;
                 });
                 dispatch(addSaveditemID(ids));
+                showToastNotification("Item added to the wishlist", 1);
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
@@ -245,6 +245,7 @@ const ProductDetails = ({params}) => {
                   return item?.id;
                 });
                 dispatch(addSaveditemID(ids));
+                showToastNotification("Item removed from the wishlist", 2);
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
@@ -323,21 +324,10 @@ const ProductDetails = ({params}) => {
   // console.log(isSameTenure, "sametenure");
 
   const handleNotSameTenure = () => {
-    toast("Please select same tenure as selected for other cart items.", {
-      position: isSmallScreen ? "bottom-right" : "top-right",
-      autoClose: 3000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      className: isSmallScreen
-        ? `${styles.customToast} ${styles.customToastMobile} `
-        : `${styles.customToast} ${styles.customToastDesktop} `,
-      closeButton: (
-        <button className={styles.custom_close_button}>&#x2715;</button>
-      ),
-    });
-    // alert("plz choose same tenure");
+    showToastNotification(
+      "Please select same tenure as selected for other cart items.",
+      2,
+    );
   };
 
   const handleAddToCart = () => {
@@ -376,9 +366,8 @@ const ProductDetails = ({params}) => {
         console.log(err);
         setIsLoading(false);
       });
-    // setTimeout(() => {
-    //   setIsLoading(false);
-    // }, 3000);
+
+    showToastNotification("Item added to cart", 1, isSmallScreen);
   };
 
   const handleGoToCart = () => {
@@ -444,7 +433,6 @@ const ProductDetails = ({params}) => {
 
   return (
     <div className={styles.main_container}>
-      <ToastContainer />
       <ShareModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
