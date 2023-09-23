@@ -325,7 +325,7 @@ const ProductDetails = ({params}) => {
   const handleNotSameTenure = () => {
     toast("Please select same tenure as selected for other cart items.", {
       position: isSmallScreen ? "bottom-right" : "top-right",
-      autoClose: false,
+      autoClose: 3000,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: true,
@@ -382,6 +382,7 @@ const ProductDetails = ({params}) => {
   };
 
   const handleGoToCart = () => {
+    console.log("goingg");
     router.push("/cart");
   };
 

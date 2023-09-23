@@ -129,7 +129,7 @@ export default function FilterSortDrawer({
                 {filterName === "Filter" ? filterName : selectedOption}
               </p>
               <div className="h-[1px] bg-EDEDEE" />
-              <div className={styles.mapped_filter_mobile}>
+              <div className={`overflow-scroll ${styles.mapped_filter_mobile}`}>
                 {filtereData?.map((ele, index) => {
                   // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
@@ -168,7 +168,10 @@ export default function FilterSortDrawer({
               )}
               <div className="mt-4 w-full flex justify-center">
                 <div className={styles.btn_container}>
-                  <p className={styles.apply_btn} onClick={() => handleApply()}>
+                  <p
+                    style={{boxShadow: "rgba(0, 0, 0, 0.25)"}}
+                    className={styles.apply_btn}
+                    onClick={() => handleApply()}>
                     Apply
                   </p>
                 </div>
@@ -247,7 +250,8 @@ export default function FilterSortDrawer({
               borderTopRightRadius: "20px",
             }}>
             <div
-              className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
+              // className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
+              className="fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12 lg:-mt-0"
               onClick={toggleDrawer("bottom", false)}>
               <Close size={25} color={"#000"} />
             </div>
