@@ -6,9 +6,16 @@ import MenuList from "@/components/Common/MenuList";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {store} from "@/store";
-import SearchList from "@/components/Search/SearchList/SearchList";
 import Footer from "@/components/Common/Footer";
+import loadable from "@loadable/component";
+import {SearchListSkeleton} from "@/components/Search/SearchList/SearchList";
 
+const SearchList = loadable(
+  () => import("@/components/Search/SearchList/SearchList"),
+  {
+    fallback: <SearchListSkeleton />,
+  },
+);
 export default function SearchPage() {
   const queryClient = new QueryClient();
 

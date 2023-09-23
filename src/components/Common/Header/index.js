@@ -28,6 +28,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
 import {decrypt, encrypt} from "@/hooks/cryptoUtils";
+import {useIsOnMobile} from "@/hooks/useIsOnMobile";
 
 const HEADER_HEIGHT = 48;
 
@@ -35,6 +36,7 @@ const Header = () => {
   const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
+  const isOnMobile = useIsOnMobile();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
@@ -212,6 +214,7 @@ const Header = () => {
                 <div
                   className={styles.search_wrapper}
                   onClick={() => {
+                    console.log("dfjkh");
                     setOpenSearchBar(!openSearchbar);
                     const SCREEN_TYPE_OFFSET =
                       window.screen.availWidth <= 768 ? 20 : 44;
@@ -239,6 +242,7 @@ const Header = () => {
               <div className="hidden md:inline">
                 <SearchModal
                   arr={arr}
+                  isOnMobile={isOnMobile}
                   topOffset={topOffset}
                   openSearchbar={openSearchbar}
                   setOpenSearchBar={setOpenSearchBar}
@@ -323,7 +327,16 @@ const Header = () => {
               className={styles.search_input}
               onClick={() => {
                 setOpenSearchBar(true);
-                settopOffset(65 - window.pageYOffset);
+                console.log("fsdkjhdsfkh");
+                if (window.pageYOffset <= HEADER_HEIGHT) {
+                  settopOffset(21 + HEADER_HEIGHT - window.pageYOffset);
+                } else {
+                  settopOffset(
+                    !homePageReduxData.announcementBar
+                      ? 21
+                      : HEADER_HEIGHT + 21,
+                  );
+                }
               }}
             />
             <Image
@@ -337,6 +350,8 @@ const Header = () => {
             <>
               <SearchModal
                 arr={arr}
+                isOnMobile={isOnMobile}
+                topOffset={topOffset}
                 openSearchbar={openSearchbar}
                 setOpenSearchBar={setOpenSearchBar}
               />
@@ -350,9 +365,10 @@ const Header = () => {
 export default Header;
 
 // search modal component
-const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
+const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
   const modalRef = useRef(null);
   const router = useRouter();
+
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [searchTerm, setSearchTerm] = React.useState("");
   const [searchedData, setSearchedData] = React.useState();
@@ -434,20 +450,24 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
     // console.log(item?.[0]);
     router.push(`/search/${item}`);
   };
+  //
+  const MOBILE_TOP_OFFSET = !homePageReduxData?.announcementBar
+    ? topOffset + 50
+    : topOffset;
 
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
-        // style={{
-        //   top: `${
-        //     !homePageReduxData?.announcementBar ? topOffset : topOffset
-        //   }px`,
-        // }}
+        style={{
+          top: `${isOnMobile ? MOBILE_TOP_OFFSET : topOffset}px`,
+          // top: TOP_OFFSET,
+          // top: `75px`,
+        }}
         ref={modalRef}
         className={` ${
-          homePageReduxData?.announcementBar
-            ? `w-full absolute top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
-            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]   lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem]`
+          homePageReduxData?.announcementBar // OFF
+            ? `w-full absolute md:right-[19%] top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
+            : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px] lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem] `
         }
 `}>
         <div className={styles.search_wrapper_mobile}>
@@ -572,36 +592,40 @@ const SearchModal = ({arr, setOpenSearchBar, openSearchbar, topOffset}) => {
             <div className="mt-6">
               <p className={styles.search_head}>Categories</p>
               <div className={`${styles.categories_wrapper}`}>
-                {homePageReduxData?.category?.map((item, index) => (
-                  <a
-                    key={index.toString()}
-                    href={`${homePageReduxData?.cityName
-                      .replace(/\//g, "-")
-                      .toLowerCase()}/${item?.seourl}`}>
-                    <div
-                      className={styles.category_card_in_searchbox}
-                      onClick={() => {
-                        if (typeof window !== "undefined") {
-                          setLocalStorage("categoryId", item?.rootID);
-                          setLocalStorage("subCategoryId", item?.id);
-                        }
-                      }}>
-                      <img
-                        src={
-                          "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                          item.category_image
-                        }
-                        alt="RentFurnitureImages"
-                        className={styles.categories_img}
-                      />
-                      <div>
-                        <h3 className={styles.category_label}>
-                          {item?.cat_name}
-                        </h3>
+                {homePageReduxData?.category?.map((item, index) => {
+                  return (
+                    <a
+                      key={index.toString()}
+                      href={`${
+                        window?.location.origin
+                      }/${homePageReduxData?.cityName
+                        .replace(/\//g, "-")
+                        .toLowerCase()}/${item?.seourl}`}>
+                      <div
+                        className={styles.category_card_in_searchbox}
+                        onClick={() => {
+                          if (typeof window !== "undefined") {
+                            setLocalStorage("categoryId", item?.rootID);
+                            setLocalStorage("subCategoryId", item?.id);
+                          }
+                        }}>
+                        <img
+                          src={
+                            "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
+                            item.category_image
+                          }
+                          alt="RentFurnitureImages"
+                          className={styles.categories_img}
+                        />
+                        <div>
+                          <h3 className={styles.category_label}>
+                            {item?.cat_name}
+                          </h3>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                ))}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

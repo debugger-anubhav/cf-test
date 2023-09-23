@@ -167,11 +167,12 @@ export default function FilterSortDrawer({
                 </p>
               )}
               <div className="mt-4 w-full flex justify-center">
-                <div className={styles.btn_container}>
+                <div
+                  className={styles.btn_container}
+                  onClick={() => handleApply()}>
                   <p
                     style={{boxShadow: "rgba(0, 0, 0, 0.25)"}}
-                    className={styles.apply_btn}
-                    onClick={() => handleApply()}>
+                    className={styles.apply_btn}>
                     Apply
                   </p>
                 </div>
