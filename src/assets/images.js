@@ -32,6 +32,8 @@ export const DownloadForWeb = Desktop + "download-cityfurnish-mobile-app.webp";
 export const DownloadForMobileImg =
   Mobile + "download-cityfurnish-mobile-app.webp";
 
+export const AboutUs = "https://d3juy0zp6vqec8.cloudfront.net/images";
+
 export const Images = {
   partner,
   DownloadQR,
