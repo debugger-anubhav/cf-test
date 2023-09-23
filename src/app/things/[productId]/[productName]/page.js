@@ -23,6 +23,7 @@ import {useParams} from "next/navigation";
 // import ProductDetails from "@/components/Product/ProductDetailsSection";
 import loadable from "@loadable/component";
 import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
+import Notifications from "@/components/Common/Notifications/Notification";
 const ProductDetails = loadable(
   () => import("@/components/Product/ProductDetailsSection"),
   {
@@ -55,6 +56,7 @@ const ProductPage = () => {
           <Footer />
         </div>
       </Provider>
+      <Notifications type={3} />
     </QueryClientProvider>
   );
 };

@@ -13,6 +13,7 @@ import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const DeleteModal = ({
   isModalOpen,
@@ -55,11 +56,12 @@ const DeleteModal = ({
     };
   }, []);
 
-  const handleDeleteItem = async () => {
+  const handleDeleteItem = async (showToast = true) => {
     updateArr(productId);
     try {
       await axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
       closeModal();
+      showToast && showToastNotification("Item deleted from the cart", 3);
     } catch (error) {
       console.log(error);
     }
@@ -107,13 +109,14 @@ const DeleteModal = ({
                 return item?.id;
               });
               dispatch(addSaveditemID(ids));
+              showToastNotification("Item added to the wishlist", 1);
             })
             .catch(err => console.log(err));
           setInWishList(prev => !prev);
         })
         .catch(err => console.log(err));
 
-    handleDeleteItem();
+    handleDeleteItem(false);
   };
 
   // const handleAddToWishlist = async () => {

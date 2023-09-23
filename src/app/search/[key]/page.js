@@ -8,6 +8,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import {store} from "@/store";
 import SearchList from "@/components/Search/SearchList/SearchList";
 import Footer from "@/components/Common/Footer";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 export default function SearchPage() {
   const queryClient = new QueryClient();
@@ -23,6 +24,7 @@ export default function SearchPage() {
           <Footer />
         </div>
       </Provider>
+      <Notifications />
     </QueryClientProvider>
   );
 }

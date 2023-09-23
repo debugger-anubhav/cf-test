@@ -21,6 +21,7 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
 import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
 import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const SubHeader = loadable(
   () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
@@ -143,6 +144,7 @@ export default function Page() {
           )}
         </div>
       </Provider>
+      <Notifications />
       {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}
     </QueryClientProvider>
   );
