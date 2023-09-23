@@ -217,7 +217,7 @@
   @apply flex w-full gap-6;
 }
 .left_part {
-  @apply flex w-1/2 h-80;
+  @apply flex w-1/2 h-80 flex-col;
 }
 .right_part {
   @apply flex w-1/2 flex-col;
@@ -243,4 +243,7 @@
   @apply !mt-[5px] h-5 min-w-[25px];
   color: #45454a;
   font-weight: bolder;
+}
+.left_bottom_cards {
+  @apply flex w-full my-4;
 }

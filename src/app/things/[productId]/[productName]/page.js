@@ -7,26 +7,43 @@ import React from "react";
 import {store} from "@/store";
 import {Provider} from "react-redux";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
 import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
-import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import CustomerRating from "@/components/Product/CustomerRatings";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
-import YouMightLike from "@/components/Product/YouMightLike";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
-// import ProductDetails from "@/components/Product/ProductDetailsSection";
 import loadable from "@loadable/component";
 import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
+import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+
+const YouMightLike = loadable(
+  () => import("@/components/Product/YouMightLike"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 const ProductDetails = loadable(
   () => import("@/components/Product/ProductDetailsSection"),
   {
     fallback: <SkeletonForProductDetail />,
+  },
+);
+const OffersAndCoupons = loadable(
+  () => import("@/components/Home/OffersAndCoupons"),
+  {
+    fallback: <OffersSkeleton />,
   },
 );
 const ProductPage = () => {
