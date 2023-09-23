@@ -35,7 +35,7 @@ const Footer = ({params}) => {
     {
       head: "Cityfurnish",
       points: [
-        {text: "About US", link: "https://test.rentofurniture.com/pages/about"},
+        {text: "About US", link: "/about"},
         {
           text: "Refer a Friend",
           link: "https://test.rentofurniture.com/pages/refer-a-friend",

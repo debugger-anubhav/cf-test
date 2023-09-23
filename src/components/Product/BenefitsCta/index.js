@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {ProductPageImages} from "@/assets/images";
 import Image from "next/image";
+import {Skeleton} from "@mui/material";
 
 const BenefitsCta = () => {
   const str = string.product_page;
@@ -32,3 +33,11 @@ const BenefitsCta = () => {
 };
 
 export default BenefitsCta;
+
+export const BenefitsCtaSkeleton = () => {
+  return (
+    <div className="w-full h-5 ">
+      <Skeleton variant="rectangular" className="h-full w-full" />
+    </div>
+  );
+};

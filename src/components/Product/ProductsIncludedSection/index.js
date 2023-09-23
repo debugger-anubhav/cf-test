@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {productPageImagesBaseUrl} from "@/constants/constant";
+import {Skeleton} from "@mui/material";
 
 const ItemsIncluded = () => {
   const [selectedItem, setSelectedItem] = useState(0);
@@ -185,3 +186,28 @@ const ItemsIncluded = () => {
 };
 
 export default ItemsIncluded;
+
+export const ItemsIncludedSkeleton = () => {
+  return (
+    <div className={`${styles.main_container} w-full flex flex-col`}>
+      <div className="w-full h-20 flex">
+        <Skeleton variant="rectangular" className="w-20 h-full mr-2" />
+        <Skeleton variant="rectangular" className="w-20 h-full" />
+      </div>
+      <div className="w-full my-4">
+        <div className="h-5 flex w-60 my-4">
+          <Skeleton variant="text" className="w-full h-full" />
+        </div>
+        {[1, 2, 3, 4, 5].map((item, index) => {
+          return (
+            <div className="h-5 flex my-2" key={index.toString()}>
+              <Skeleton variant="text" className="w-40 h-full" />
+              <p className="mx-4">:</p>
+              <Skeleton variant="text" className="w-60 h-full" />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
