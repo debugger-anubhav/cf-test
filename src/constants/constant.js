@@ -464,7 +464,7 @@ export const FooterItems = [
           points: [
             {
               text: "About US",
-              link: "https://test.rentofurniture.com/pages/about",
+              link: "/about",
             },
             {
               text: "Refer a Friend",
