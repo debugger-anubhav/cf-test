@@ -11,7 +11,6 @@ const Footer = ({params}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
-
   const str = {
     why_furni: "Furniture Rental: An Affordable and Flexible Option",
     why_furni_desc:
@@ -20,15 +19,25 @@ const Footer = ({params}) => {
     time: "(09AM to 09PM)",
     go_to_top: "Go to top",
   };
+
   const array = [
     {
       head: "Categories",
       points: [
-        {text: "All", link: `${cityName}/rent`},
-        {text: "Home Furniture", link: `/${cityName}/home-furniture-rental`},
-        {text: "Appliances", link: `/${cityName}/home-appliances-rental`},
-        {text: "Workstations", link: `/${cityName}/workstations`},
-        {text: "Combos", link: `/${cityName}/furniture-rental-packages`},
+        {text: "All", link: `/${cityName.toLowerCase()}/rent`},
+        {
+          text: "Home Furniture",
+          link: `/${cityName.toLowerCase()}/home-furniture-rental`,
+        },
+        {
+          text: "Appliances",
+          link: `/${cityName.toLowerCase()}/home-appliances-rental`,
+        },
+        {text: "Workstations", link: `/${cityName.toLowerCase()}/workstations`},
+        {
+          text: "Combos",
+          link: `/${cityName.toLowerCase()}/furniture-rental-packages`,
+        },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],
     },
