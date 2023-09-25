@@ -19,10 +19,16 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import TextContent from "@/components/Common/TextContent";
-import Subproduct from "@/components/AllProduct/SubProduct/Subproduct";
 import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
+import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct";
 
+const Subproduct = loadable(
+  () => import("@/components/AllProduct/SubProduct/Subproduct"),
+  {
+    fallback: <SubproductSkeleton />,
+  },
+);
 const SubHeader = loadable(
   () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
   {
