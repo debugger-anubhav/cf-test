@@ -2,126 +2,15 @@ import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {ForwardArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
-import {
-  // categoryIconsUrl,
-  // getLocalStorage,
-  setLocalStorage,
-  // sortByText,
-} from "@/constants/constant";
-// import {productImageBaseUrl} from "@/constants/constant";
+import {setLocalStorage} from "@/constants/constant";
 
 const SubCategorySection = () => {
-  // const [isDumy, setIsDumy] = React.useState(false);
   const [windowSize, setWindowSize] = React.useState([
     window?.innerWidth,
     window?.innerHeight,
   ]);
-  // const [isRefEle, setRefEle] = useState(false);
   const homePageReduxData = useSelector(state => state.homePagedata);
   const data = homePageReduxData?.allAndSubCategory;
-  // const scrollContainerRefs = {};
-
-  // const assignRef = (index) => (element) => {
-  //   scrollContainerRefs[index] = element;
-  //   element=refEle;
-  // };
-
-  // const scrollContainerRef5 = useRef(null);
-
-  // const handleScrolling = e => {
-  //   scrollContainerRef5.current = e?.target;
-  //   const slider = scrollContainerRef5.current;
-  //   console.log(slider);
-  //   if (!slider && !isRefEle) return;
-
-  //   let mouseDown = false;
-  //   let startX, scrollLeft;
-
-  //   const startDragging = e => {
-  //     mouseDown = true;
-  //     startX = e.pageX - slider.offsetLeft;
-  //     scrollLeft = slider.scrollLeft;
-  //   };
-  //   const stopDragging = () => {
-  //     setIsDumy(false);
-  //     mouseDown = false;
-  //   };
-
-  //   const toggleIsDragging = () => {
-  //     if (mouseDown && !isDumy) setIsDumy(true);
-  //   };
-
-  //   slider.addEventListener("mousemove", e => {
-  //     e.preventDefault();
-  //     if (!mouseDown) return;
-  //     const x = e.pageX - slider.offsetLeft;
-  //     const scroll = x - startX;
-  //     slider.scrollLeft = scrollLeft - scroll;
-  //   });
-  //   slider.addEventListener("mousedown", startDragging, false);
-  //   slider.addEventListener("mouseup", stopDragging, false);
-  //   slider.addEventListener("mouseleave", stopDragging, false);
-  //   slider.addEventListener("mousemove", toggleIsDragging);
-
-  //   return () => {
-  //     slider.removeEventListener("mousedown", startDragging);
-  //     slider.removeEventListener("mouseup", stopDragging);
-  //     slider.removeEventListener("mouseleave", stopDragging);
-  //     slider.removeEventListener("mousemove", toggleIsDragging);
-  //   };
-  // };
-
-  // const handleMouseDown = (e) => {
-  //   if (sliderRef.current) {
-  //     // Get the initial mouse position
-  //     const initialMouseX = e.clientX;
-  //     let isDragging = true;
-
-  //     // Calculate the initial scroll position
-  //     const initialScrollLeft = sliderRef.current.scrollLeft;
-
-  //     const handleMouseMove = (e) => {
-  //       if (isDragging) {
-  //         // Calculate the new scroll position based on the mouse movement
-  //         const delta = e.clientX - initialMouseX;
-  //         sliderRef.current.scrollLeft = initialScrollLeft - delta;
-  //       }
-  //     };
-
-  //     const handleMouseUp = () => {
-  //       // Stop dragging when the mouse button is released
-  //       isDragging = false;
-  //       document.removeEventListener('mousemove', handleMouseMove);
-  //       document.removeEventListener('mouseup', handleMouseUp);
-  //     };
-
-  //     // Add event listeners for mousemove and mouseup to handle dragging
-  //     document.addEventListener('mousemove', handleMouseMove);
-  //     document.addEventListener('mouseup', handleMouseUp);
-  //   }
-  // };
-  // const [isScrolling, setIsScrolling] = useState(false);
-  // const [startX, setStartX] = useState(null);
-
-  // const handleMouseDown = e => {
-  //   setIsScrolling(true);
-  //   setStartX(e.clientX);
-  // };
-
-  // const handleMouseMove = e => {
-  //   if (!isScrolling) return;
-
-  //   const deltaX = e.clientX - startX;
-  //   if (scrollContainerRef.current) {
-  //     scrollContainerRef.current.scrollLeft -= deltaX;
-  //   }
-
-  //   setStartX(e.clientX);
-  // };
-
-  // const handleMouseUp = () => {
-  //   setIsScrolling(false);
-  // };
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -146,7 +35,6 @@ const SubCategorySection = () => {
                   ? styles.heading_container_home_furniture
                   : styles.heading_container
               }>
-              {/* <div className='flex w-full justify-between'> */}
               <h2 className={styles.heading}>{item?.cat_name}</h2>
               <div className={styles.viewButton}>
                 <a
@@ -182,7 +70,6 @@ const SubCategorySection = () => {
 const Cards = ({subCategory}) => {
   const refElement = useRef(null);
   const homePageReduxData = useSelector(state => state.homePagedata);
-  // const data = homePageReduxData?.allAndSubCategory;
   const [isDumy, setIsDumy] = React.useState(false);
   const handleScrolling = () => {
     const slider = refElement.current;
@@ -272,17 +159,5 @@ const Cards = ({subCategory}) => {
     </div>
   );
 };
-
-// export async function getServerSideProps() {
-//   // Fetch your data here, you can use any data fetching library or API call
-//   const response = await fetch("https://api.example.com/subcategorydata");
-//   const data = await response.json();
-
-//   return {
-//     props: {
-//       data,
-//     },
-//   };
-// }
 
 export default SubCategorySection;
