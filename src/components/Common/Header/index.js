@@ -38,6 +38,7 @@ const Header = () => {
   const router = useRouter();
   const isOnMobile = useIsOnMobile();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
+
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
@@ -153,9 +154,9 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  const toggleDropdown = () => {
-    setShowProfileDropdown(!showProfileDropdown);
-  };
+  // const toggleDropdown = () => {
+  //   setShowProfileDropdown(!showProfileDropdown);
+  // };
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
@@ -214,7 +215,6 @@ const Header = () => {
                 <div
                   className={styles.search_wrapper}
                   onClick={() => {
-                    console.log("dfjkh");
                     setOpenSearchBar(!openSearchbar);
                     const SCREEN_TYPE_OFFSET =
                       window.screen.availWidth <= 768 ? 20 : 44;
@@ -255,7 +255,8 @@ const Header = () => {
                   userId
                     ? "/wishlist"
                     : "https://test.rentofurniture.com/user_sign_up"
-                }>
+                }
+                className="pt-[14px] pb-[14px]">
                 <span className={styles.header_favorite_container}>
                   <Image
                     src={Icons.Favorite}
@@ -280,7 +281,7 @@ const Header = () => {
               </a>
               {/* <Link href={`/cart`}> */}
 
-              <div className="relative">
+              <div className="relative pt-[14px] pb-[14px]">
                 <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}
@@ -294,29 +295,57 @@ const Header = () => {
                 </a>
               </div>
               {/* </Link> */}
-              <Image
-                src={Icons.Profile}
-                alt="profile-icon"
-                onContextMenu={e => handleContextMenu(e)}
-                className={`${styles.header_profile_icon} relative`}
-                onClick={() => {
-                  if (!decrypt(getLocalStorage("_ga"))) {
-                    router.push("https://test.rentofurniture.com/user_sign_up");
-                  } else {
-                    toggleDropdown();
-                    // setShowProfileDropdown(!showProfileDropdown);
-                  }
-                }}
-                ref={iconRef}
-              />
+              <a
+                href={"/usersettings"}
+                rel="noopner noreferrer"
+                target="_blank"
+                aria-label="profile">
+                <div
+                  className="pt-[14px] pb-[14px]"
+                  onMouseLeave={() => {
+                    setShowProfileDropdown(false);
+                  }}>
+                  <Image
+                    src={Icons.Profile}
+                    alt="profile-icon"
+                    onContextMenu={e => handleContextMenu(e)}
+                    className={`${styles.header_profile_icon} relative`}
+                    onClick={() => {
+                      if (!decrypt(getLocalStorage("_ga"))) {
+                        router.push(
+                          "https://test.rentofurniture.com/user_sign_up",
+                        );
+                      } else {
+                        router.push("/usersettings");
+                      }
+                    }}
+                    onMouseEnter={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (decrypt(getLocalStorage("_ga"))) {
+                        setShowProfileDropdown(true);
+                      }
+                    }}
+                    // ref={iconRef}
+                  />
+                </div>
+              </a>
+              {/* </div> */}
               {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
               {decrypt(getLocalStorage("_ga")) !== null &&
                 showProfileDropdown && (
-                  <ProfileDropDown
-                    setShowProfileDropdown={setShowProfileDropdown}
-                    showProfileDropdown={showProfileDropdown}
-                  />
+                  <div
+                    className="pt-[14px]"
+                    onMouseEnter={() => {
+                      setShowProfileDropdown(true);
+                    }}>
+                    <ProfileDropDown
+                      setShowProfileDropdown={setShowProfileDropdown}
+                      showProfileDropdown={showProfileDropdown}
+                    />
+                  </div>
                 )}
+              {/* </div> */}
             </div>
           </div>
         </div>
