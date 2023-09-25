@@ -413,7 +413,13 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
     });
 
     // Store search term in local storage
-    if (e.key === "Enter" || e.type === "click") {
+    if (
+      e.key === "Enter" ||
+      e.type === "click" ||
+      e.key === "Go" ||
+      e.key === "Done" ||
+      e.nativeEvent.inputType === "go"
+    ) {
       if (newSearchTerm.trim() !== "") {
         const prevStoredSearches = getLocalStorage("searches");
         let storedSearches;
@@ -442,6 +448,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
       }
     }
   };
+
   const handleTrending = (item, event) => {
     event.stopPropagation();
     setSearchedData(prev => [...prev, item]);
@@ -505,7 +512,8 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
             className={styles.search_input}
             value={searchTerm}
             onClick={e => e.stopPropagation()}
-            onChange={e => handleSearch(e)}
+            onChange={e => setSearchTerm(e.target.value)}
+            onKeyUp={e => handleSearch(e)}
             autoFocus
           />
           <Image
@@ -528,7 +536,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
             autoFocus
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            onKeyDown={e => handleSearch(e)}
+            onKeyUp={e => handleSearch(e)}
           />
         </div>
 

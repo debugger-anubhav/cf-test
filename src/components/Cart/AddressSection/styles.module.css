@@ -2,7 +2,7 @@
   @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between;
 }
 .left_div {
-  @apply h-[100vh] overflow-scroll;
+  @apply lg:h-[100vh] lg:overflow-y-scroll overflow-x-visible;
 }
 .head_div {
   @apply flex gap-2 items-center cursor-pointer;
@@ -11,7 +11,7 @@
   @apply text-16 xl:text-20 text-45454A leading-6 xl:leading-10 font-medium tracking-0.3 xl:tracking-0.4;
 }
 .saved_address_div {
-  @apply overflow-y-scroll mt-4 lg:mt-6 xl:mt-8 p-4 border border-DDDDDF rounded-xl md:w-[537px] lg:w-full xl:w-[537px] min-h-[127px] hover:border-2 hover:border-5774AC hover:p-[15px] cursor-pointer;
+  @apply overflow-y-scroll mt-4 lg:mt-6 xl:mt-8 p-4 border border-DDDDDF rounded-xl md:w-[537px] lg:w-full xl:w-[516px] macbook:w-[537px] min-h-[127px] hover:border-2 hover:border-5774AC hover:p-[15px] cursor-pointer;
 }
 .saved_address_div:hover .change_btn {
   @apply border-5774AC;
@@ -26,13 +26,13 @@
   @apply w-[73px] xl:w-[79px] border-2 border-71717A h-[26px] flex justify-center items-center rounded-lg text-71717A font-medium text-14 xl:text-16;
 }
 .name_div {
-  @apply flex gap-2 items-center mt-[5.5px] xl:mt-[12.5px];
+  @apply flex gap-2 items-center mt-[5.5px] xl:mt-[12.5px] mb-[10px];
 }
 .saved_name {
   @apply text-222 text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
 }
 .saved_address {
-  @apply text-12 xl:text-14 text-45454A tracking-desc truncate mt-[10px];
+  @apply text-12 xl:text-14 text-45454A tracking-desc truncate;
 }
 .new_address_wrapper {
   @apply mt-8 xl:mt-10;
@@ -49,7 +49,7 @@
   @apply text-71717A text-16 font-medium leading-5;
 }
 .form_field {
-  @apply mt-4;
+  @apply mt-4 w-full xl:w-[516px] macbook:w-[537px];
 }
 .form_label {
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
@@ -58,7 +58,7 @@
   @apply text-14 xl:text-16 outline-none hover:border-71717A w-full h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
 }
 .contact_input {
-  @apply border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+  @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
 .flag {
   @apply w-6 h-6;
@@ -70,7 +70,7 @@
   @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
 }
 .save_btn {
-  @apply mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full h-12 lg:h-14 flex justify-center items-center;
+  @apply mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
 }
 .right_div {
   @apply flex flex-col 4xl:flex-row gap-6;
@@ -110,4 +110,9 @@
 }
 .not_belong_text {
   @apply text-[#D96060] text-12 md:text-16 font-medium leading-5;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+  .left_div {
+    width: 68%;
+  }
 }

@@ -222,3 +222,6 @@
 .right_part {
   @apply flex md:w-1/2 w-full mx-8 md:mx-0 flex-col overflow-hidden;
 }
+.left_bottom_cards {
+  @apply flex w-full mt-4;
+}

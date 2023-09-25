@@ -7,14 +7,18 @@ import {useSelector} from "react-redux";
 const AddressDrawer = ({
   toggleDrawer,
   open,
-  makeAddressPrimary,
-  getAllSavedAddresses,
+  makeDefaultAddress,
+  primaryAddress,
+  // makeAddressPrimary,
+  // getAllSavedAddresses,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const cityName = useSelector(state => state.homePagedata.cityName);
-  const [id, setId] = useState(addressArray?.[0]?.id);
-  const primaryIndex = addressArray.findIndex(item => item.primary === "Yes");
+  const [id, setId] = useState(primaryAddress.id);
+  const primaryIndex = addressArray.findIndex(
+    item => item.id === primaryAddress.id,
+  );
   const [selectedIndex, setSelectedIndex] = useState(primaryIndex);
 
   const handleresize = e => {
@@ -61,8 +65,10 @@ const AddressDrawer = ({
                     : "cursor-pointer"
                 } ${styles.card_wrapper}`}
                 onClick={() => {
-                  setSelectedIndex(index);
-                  setId(item.id);
+                  if (cityName === item.city) {
+                    setSelectedIndex(index);
+                    setId(item.id);
+                  }
                 }}>
                 {cityName !== item.city && (
                   <div className={styles.not_belong_wrapper}>
@@ -72,7 +78,12 @@ const AddressDrawer = ({
                   </div>
                 )}
                 <div className={styles.first_row}>
-                  <div className={`${styles.circle}`}>
+                  <div
+                    className={`${
+                      cityName === item.city
+                        ? "border-[#5774AC]"
+                        : "border-[#9A9AA2]"
+                    } ${styles.circle}`}>
                     <div
                       className={` ${
                         selectedIndex === index ? styles.selected_circle : ""
@@ -82,7 +93,12 @@ const AddressDrawer = ({
                     {item.full_name}, {item.phone}
                   </h2>
                 </div>
-                <p className={styles.address}>{item.address1}</p>
+                <p className={`line-clamp-2 ${styles.address}`}>
+                  {item.address1}
+                </p>
+                <p className={styles.address}>
+                  {item.city}, {item.state}, India
+                </p>
               </div>
             ))}
           </div>
@@ -92,8 +108,9 @@ const AddressDrawer = ({
               className={styles.btn}
               onClick={async () => {
                 try {
-                  await makeAddressPrimary(id);
-                  getAllSavedAddresses();
+                  await makeDefaultAddress(id);
+                  // await makeAddressPrimary(id);
+                  // getAllSavedAddresses();
                   toggleDrawer();
                 } catch (error) {
                   console.error(error);

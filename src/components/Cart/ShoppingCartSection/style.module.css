@@ -8,7 +8,7 @@
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
 }
 .card_wrapper {
-  @apply mt-8 flex flex-col gap-12 xl:gap-16;
+  @apply mt-8 flex flex-col gap-6 xl:gap-8;
 }
 .single_product_wrapper {
   @apply w-fit lg:w-[450px] xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
@@ -28,14 +28,17 @@
 .price_div {
   @apply flex -ml-[104px] md:-ml-[128px] lg:-ml-0 mt-[39px] md:mt-[45px] lg:mt-4 items-center gap-6;
 }
+.deposit_txt {
+  @apply text-71717A text-14 font-medium leading-5;
+}
 .incre_decre_div {
-  @apply flex py-1 px-2 items-center gap-2 xl:gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
+  @apply w-[67px] flex py-1 px-2 items-center gap-2 xl:gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
 }
 .span_item {
   @apply text-18 font-normal hover:bg-[#F2FAFF] hover:text-[#5774AC] cursor-pointer rounded-lg w-[13px] h-6 flex justify-center items-center;
 }
 .currentPrice {
-  @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4 flex items-center;
+  @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4;
 }
 .originalPrice {
   @apply text-9A9AA2 text-14 xl:text-16 tracking-desc xl:tracking-0.3 line-through;
@@ -141,4 +144,8 @@
 }
 .proceed_button {
   @apply mt-6 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+}
+
+.line_break {
+  @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted;
 }

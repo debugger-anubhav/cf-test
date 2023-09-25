@@ -86,42 +86,10 @@ const InverstorAndMedia = () => {
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Our Investors & Advisors</h2>
       <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
-        {/* <div className={styles.investors_wrapper}>
-          {investor.map((ele, index) => {
-            return (
-              <div className={styles.investor_container} key={index.toString()}>
-                <img
-                  className="object-cover"
-                  src={ele.link}
-                  alt={ele.altText}
-                />
-              </div>
-            );
-          })}
-        </div> */}
         <InvestorsCards />
       </div>
       <h2 className={styles.heading}>Media also loves us</h2>
       <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
-        {/* <div className={`${styles.investors_wrapper} xl:flex-wrap`}>
-          {Media.map((ele, index) => {
-            return (
-              // <a
-              //    href={ele.navigation}
-              //   className={`${styles.investor_container} relative`}
-              //   key={index.toString()}
-              //   rel="noopener"
-              //   target="_blank">
-              //   <img className="object-fit" src={ele.link} alt={ele.altText} />
-              //   <div
-              //     className="absolute left-[5px] bottom-[5px] w-[16px] text-[#7A7A71]">
-              //     <TbExternalLink />
-              //   </div>
-              // </a>
-              <Card  />
-            );
-          })}
-        </div> */}
         <MediaCard />
       </div>
       <div className="mr-4 lg:mr-0 mb-8 lg:mb-[88px]">
