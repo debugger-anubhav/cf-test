@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "./DocMain.module.css";
 import DocSidebar from "../Sidebar/DocSidebar";
 // import DropDown from "../DropDown/DropDown";
@@ -7,7 +7,8 @@ import KycHeader from "../KycHeader/KycHeader";
 import KYC10 from "../KYC10/KYC10";
 
 const DocMain = () => {
-  const [selectedOption] = useState("");
+  // const [selectedOption] = useState("");
+
   // const handleSelectChange = e => {
   //   setSelectedOption(e.target.value);
   // };
@@ -19,7 +20,6 @@ const DocMain = () => {
   //   {value: 5, label: "Option 5"},
   // ];
 
-  console.log(selectedOption);
   return (
     <div className={styles.mainContainer}>
       <DocSidebar />

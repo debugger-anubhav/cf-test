@@ -3,7 +3,7 @@
   background-color: green;
 } */
 .mainContainer {
-  @apply flex flex-col;
+  @apply  hidden md:flex flex-col ;
 
   padding-left: 122px;
   padding-right: 16px;

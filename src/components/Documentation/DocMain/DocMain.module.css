@@ -2,5 +2,5 @@
   @apply flex;
 }
 .kycFormArea {
-  @apply ml-16 grow;
+  @apply grow;
 }
