@@ -66,7 +66,7 @@ const AddressSection = ({setTab}) => {
 
     landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
-    postalCode: Yup.number()
+    postalCode: Yup.string()
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 6 digit postal code without spaces or special characters",
@@ -159,7 +159,7 @@ const AddressSection = ({setTab}) => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && cityName === primaryAddress?.city && (
+        {addressArray.length > 0 && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
@@ -249,7 +249,7 @@ const AddressSection = ({setTab}) => {
                         className={styles.flag}
                       />
                       <Field
-                        type="mobile"
+                        type="number"
                         // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
@@ -295,7 +295,7 @@ const AddressSection = ({setTab}) => {
 
                   <div
                     className={`flex flex-col lg:flex-row gap-4 ${styles.form_field}`}>
-                    <div>
+                    <div className="lg:w-[48.5%]">
                       <p className={styles.form_label}>Postal code</p>
                       <Field
                         type="number"
@@ -311,7 +311,7 @@ const AddressSection = ({setTab}) => {
                         }
                       </ErrorMessage>
                     </div>
-                    <div>
+                    <div className="lg:w-[48.5%]">
                       <p className={styles.form_label}>City</p>
                       <Field
                         readOnly
