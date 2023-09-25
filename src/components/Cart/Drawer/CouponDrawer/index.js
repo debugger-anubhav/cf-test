@@ -117,7 +117,7 @@ const CouponDrawer = ({
             placeholder="Enter Coupon code"
             onChange={e => {
               setInput(e.target.value);
-              input !== " " && handleApplyClick(input);
+              // input !== " " && handleApplyClick(input);
             }}
           />
           <p
@@ -214,7 +214,18 @@ const CouponDrawer = ({
                   }}
                   className={styles.line}></div>
                 <div className={styles.copy_div}>
-                  <button id="copy-button" className="text-[#222] flex ">
+                  <button
+                    id="copy-button"
+                    className="text-[#222] flex"
+                    style={{
+                      cursor: isMonthly
+                        ? item.coupon_type === 0
+                          ? "pointer"
+                          : "not-allowed"
+                        : item.coupon_type === 0
+                        ? "not-allowed"
+                        : "pointer",
+                    }}>
                     {isApplied && appliedIndex === index ? "Applied!" : "Apply"}
                   </button>
                 </div>
