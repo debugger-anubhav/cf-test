@@ -11,20 +11,21 @@
   @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-4 md:mt-8;
 }
 .circle {
-  @apply border-2 border-[#5774AC] flex justify-center items-center rounded-full w-[14px] h-[14px];
+  @apply border-2  flex justify-center items-center rounded-full w-[14px] h-[14px];
 }
 .selected_circle {
   @apply bg-5774AC w-[6px] h-[6px] rounded-full;
 }
 .first_row {
-  @apply flex gap-[10px] items-center;
+  @apply flex gap-[10px] items-center mb-[11.5px] md:mb-[12.5px];
 }
 .name {
   @apply text-14 md:text-16 font-medium text-222 font-Inter tracking-desc md:tracking-0.3;
 }
 .address {
-  @apply mt-[11.5px] md:mt-[12.5px] text-12 md:text-14 text-45454A tracking-0.24 md:tracking-desc;
+  @apply text-12 md:text-14 text-45454A tracking-0.24 md:tracking-desc w-full;
 }
+
 .btn_wrapper {
   @apply sticky bottom-0 py-4 w-full;
 }

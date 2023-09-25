@@ -29,6 +29,7 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  // setCityShield,
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
@@ -187,17 +188,18 @@ const ShoppingCartSection = ({setTab}) => {
     }
     // console.log(arr);
 
-    const headers = {
-      userId: parseInt(userIdToUse),
-      quantity: updatedItems[itemIndex].quantity,
-      productId: productid,
-    };
+    if (newQuantity > 0) {
+      const headers = {
+        userId: parseInt(userIdToUse),
+        quantity: updatedItems[itemIndex].quantity,
+        productId: productid,
+      };
 
-    await axios
-      .post(baseURL + endPoints.addToCart.updateQuantity, headers)
-      .then(res => console.log(res, "res in updated qunatity"))
-      .catch(err => console.log(err, "error in update qunatity"));
-
+      await axios
+        .post(baseURL + endPoints.addToCart.updateQuantity, headers)
+        .then(res => console.log(res, "res in updated qunatity"))
+        .catch(err => console.log(err, "error in update qunatity"));
+    }
     fetchBill();
   };
 
@@ -228,6 +230,7 @@ const ShoppingCartSection = ({setTab}) => {
       dispatch(getBillDetails(res?.data?.data));
       // setCode(res?.data?.data?.couponsCode);
       getCouponCodeUsed(res?.data?.data?.couponsCode);
+      // setCityShield(res?.data?.data?.cartSubTotalList);
     } catch (err) {
       console.log(err);
     }
