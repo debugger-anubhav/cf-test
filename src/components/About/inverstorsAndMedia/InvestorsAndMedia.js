@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import styles from "./style.module.css";
 import {AboutUs} from "@/assets/images";
 import {TbExternalLink} from "react-icons/tb";
@@ -64,102 +64,67 @@ const InverstorAndMedia = () => {
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Our Investors & Advisors</h2>
       <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
-        {/* <div className={styles.investors_wrapper}>
-          {investor.map((ele, index) => {
-            return (
-              <div className={styles.investor_container} key={index.toString()}>
-                <img
-                  className="object-cover"
-                  src={ele.link}
-                  alt={ele.altText}
-                />
-              </div>
-            );
-          })}
-        </div> */}
         <InvestorsCards />
       </div>
       <h2 className={styles.heading}>Media also loves us</h2>
       <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
-        {/* <div className={`${styles.investors_wrapper} xl:flex-wrap`}>
-          {Media.map((ele, index) => {
-            return (
-              // <a
-              //    href={ele.navigation}
-              //   className={`${styles.investor_container} relative`}
-              //   key={index.toString()}
-              //   rel="noopener"
-              //   target="_blank">
-              //   <img className="object-fit" src={ele.link} alt={ele.altText} />
-              //   <div
-              //     className="absolute left-[5px] bottom-[5px] w-[16px] text-[#7A7A71]">
-              //     <TbExternalLink />
-              //   </div>
-              // </a>
-              <Card  />
-            );
-          })}
-        </div> */}
         <MediaCard />
       </div>
     </div>
   );
 };
 
-const handleScrolling = (refElement, setIsDumy, isDumy) => {
-  const slider = refElement.current;
-  if (!slider) return;
-
-  let mouseDown = false;
-  let startX, scrollLeft;
-
-  const startDragging = e => {
-    mouseDown = true;
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-  };
-  const stopDragging = () => {
-    setIsDumy(false);
-    mouseDown = false;
-  };
-
-  const toggleIsDragging = () => {
-    if (mouseDown && !isDumy) setIsDumy(true);
-  };
-
-  slider.addEventListener("mousemove", e => {
-    e.preventDefault();
-    if (!mouseDown) return;
-    const x = e.pageX - slider.offsetLeft;
-    const scroll = x - startX;
-    slider.scrollLeft = scrollLeft - scroll;
-  });
-  slider.addEventListener("mousedown", startDragging, false);
-  slider.addEventListener("mouseup", stopDragging, false);
-  slider.addEventListener("mouseleave", stopDragging, false);
-  slider.addEventListener("mousemove", toggleIsDragging);
-
-  return () => {
-    slider.removeEventListener("mousedown", startDragging);
-    slider.removeEventListener("mouseup", stopDragging);
-    slider.removeEventListener("mouseleave", stopDragging);
-    slider.removeEventListener("mousemove", toggleIsDragging);
-  };
-};
-
 const MediaCard = () => {
   const refElement = React.useRef(null);
   const [isDumy, setIsDumy] = React.useState(false);
 
-  useEffect(() => {
-    console.log(isDumy);
-  }, [isDumy]);
+  const handleScrolling = () => {
+    const slider = refElement.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsDragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsDragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
+    };
+  };
+
   return (
     <div
       className={`${styles.investors_wrapper} xl:flex-wrap`}
       ref={refElement}
       onMouseOver={() => {
-        handleScrolling(refElement, setIsDumy, isDumy);
+        handleScrolling();
       }}>
       {Media.map((ele, index) => {
         return (
@@ -186,12 +151,53 @@ const InvestorsCards = () => {
   const investorRef = React.useRef(null);
   const [isDumy, setIsDumy] = React.useState(false);
 
+  const handleScrolling = () => {
+    const slider = investorRef.current;
+    if (!slider) return;
+
+    let mouseDown = false;
+    let startX, scrollLeft;
+
+    const startDragging = e => {
+      mouseDown = true;
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    };
+    const stopDragging = () => {
+      setIsDumy(false);
+      mouseDown = false;
+    };
+
+    const toggleIsDragging = () => {
+      if (mouseDown && !isDumy) setIsDumy(true);
+    };
+
+    slider.addEventListener("mousemove", e => {
+      e.preventDefault();
+      if (!mouseDown) return;
+      const x = e.pageX - slider.offsetLeft;
+      const scroll = x - startX;
+      slider.scrollLeft = scrollLeft - scroll;
+    });
+    slider.addEventListener("mousedown", startDragging, false);
+    slider.addEventListener("mouseup", stopDragging, false);
+    slider.addEventListener("mouseleave", stopDragging, false);
+    slider.addEventListener("mousemove", toggleIsDragging);
+
+    return () => {
+      slider.removeEventListener("mousedown", startDragging);
+      slider.removeEventListener("mouseup", stopDragging);
+      slider.removeEventListener("mouseleave", stopDragging);
+      slider.removeEventListener("mousemove", toggleIsDragging);
+    };
+  };
+
   return (
     <div
       className={styles.investors_wrapper}
       ref={investorRef}
       onMouseOver={() => {
-        handleScrolling(investorRef, isDumy, setIsDumy);
+        handleScrolling();
       }}>
       {investor.map((ele, index) => {
         return (

@@ -464,7 +464,7 @@ export const FooterItems = [
           points: [
             {
               text: "About US",
-              link: "/about",
+              link: "/pages/about",
             },
             {
               text: "Refer a Friend",

@@ -21,7 +21,6 @@
   -moz-box-shadow: none;
   box-shadow: none;
   -webkit-tap-highlight-color: transparent;
-  pointer-events: none;
   -webkit-user-drag: none;
   user-select: none;
 }

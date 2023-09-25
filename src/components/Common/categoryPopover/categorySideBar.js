@@ -17,6 +17,7 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
+import {useRouter} from "next/navigation";
 
 export default function FilterSortDrawer({
   filterName,
@@ -31,6 +32,7 @@ export default function FilterSortDrawer({
 
   const [itemCount, setItemCount] = useState(7);
   const [selectedOption, setSelectedOption] = useState("Default");
+  const router = useRouter();
 
   const defaultKey = 1;
   const newSortKey = 2;
@@ -103,12 +105,24 @@ export default function FilterSortDrawer({
   };
 
   const handleApply = () => {
+    let url = "";
+
+    for (let i = 0; i < categoryPageReduxData?.filteredItems.length; i++) {
+      url +=
+        "filter=" + encodeURIComponent(categoryPageReduxData?.filteredItems[i]);
+
+      if (i < categoryPageReduxData?.filteredItems.length - 1) {
+        url += "&";
+      }
+    }
+    router.push(`?${url}`);
+
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
-    setFilterListed(true);
     dispatch(isFilterApplied(true));
+    setFilterListed(true);
     setState({...state, bottom: false});
   };
 
