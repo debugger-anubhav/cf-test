@@ -1,0 +1,18 @@
+/* Sections  */
+.firstSection {
+  @apply mt-6 md:mt-10 md:ml-16  flex md:block justify-center items-center;
+}
+.secondSection {
+  @apply mt-4 md:mt-8 mx-4 md:mx-0 md:ml-16;
+}
+.thirdSection {
+}
+
+/* texts */
+
+.secondSectionHeaderTxt {
+  @apply font-medium font-Poppins md:text-16 text-14;
+}
+.singleBtn {
+  @apply !ml-0 md:!ml-16 mx-4 md:mx-0 ;
+}

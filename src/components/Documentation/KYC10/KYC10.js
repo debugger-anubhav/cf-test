@@ -4,8 +4,54 @@ import commonStyles from "../common.module.css";
 import DropDown from "../DropDown/DropDown";
 import forwardArrow from "@/assets/common_icons/proceedArrow.svg";
 import Image from "next/image";
+import {Box, Modal, Typography} from "@mui/material";
+import {Close} from "@/assets/icon";
 
+// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+// let src;
+// if (typeof window !== "undefined") {
+//   src = window.screen.availWidth;
+// } else {
+//   src = 767;
+// }
 const KYC10 = () => {
+  const [deleteIconClick, setDeleteIconClick] = React.useState(true);
+  // const [windowWidth, setWindowWidth] = useState(src);
+  // const [state, setState] = React.useState({
+  //   top: false,
+  //   left: false,
+  //   bottom: false,
+  //   right: false,
+  // });
+
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     window.addEventListener("resize", () => {
+  //       setWindowWidth(window.screen.availWidth);
+  //     });
+  //   }
+
+  //   return () => {
+  //     if (typeof window !== "undefined") {
+  //       window.removeEventListener("resize", () => {
+  //         console.log("Removed Event ");
+  //       });
+  //     }
+  //   };
+  // }, []);
+
+  // const toggleDrawer = (anchor, open) => event => {
+  //   if (
+  //     event &&
+  //     event.type === "keydown" &&
+  //     (event.key === "Tab" || event.key === "Shift")
+  //   ) {
+  //     return;
+  //   }
+
+  //   setState({...state, [anchor]: open});
+  // };
+
   return (
     <div>
       <div className={`${styles.stepHeading}`}>
@@ -68,6 +114,78 @@ const KYC10 = () => {
           </button>
         </div>
       </div>
+      {/* <SwipeableDrawer
+        // classes={{
+        //   paper:
+        //     mobileCityDrawer && DrawerName !== "menu" && styles.bottomDrawer,
+        // }}
+        anchor={windowWidth < 767 ? "bottom" : "right"}
+        className=""
+        open={true}
+        onClose={() => {
+          // mobileCityDrawer && DrawerName !== "menu"
+          //   ? toggleDrawer("bottom", true)
+          //   : toggleDrawer("left", true);
+        }}
+        onOpen={() => {
+          // mobileCityDrawer && DrawerName !== "menu"
+          //   ? toggleDrawer("bottom", true)
+          //   : toggleDrawer("left", true);
+        }}>
+        <div>Hola</div>
+      </SwipeableDrawer> */}
+      <Modal
+        open={deleteIconClick}
+        onClose={() => setDeleteIconClick(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        disableRestoreFocus
+        disableEnforceFocus
+        disableAutoFocus>
+        <div className={styles.main_container}>
+          <div>
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <div>
+                <Typography className={styles.delete_item_text}>
+                  Your Progress will be Saved!
+                </Typography>
+                <Box>
+                  <Typography className={styles.delete_confirmation_text}>
+                    Just visit the &quot;KYC & Documentation&quot; page
+                    <br />
+                    whenever you&apos;re ready to pick up where you
+                    <br />
+                    left off.
+                  </Typography>
+                </Box>
+                <Box display={"flex"} justifyContent={"space-between"}>
+                  <button
+                    className={styles.cancel_delete_btn}
+                    onClick={() => setDeleteIconClick(false)}>
+                    Cancel
+                  </button>
+                  <button
+                    className={styles.confirm_delete_btn}
+                    onClick={() => {
+                      // remove();
+                    }}>
+                    Yes, Delete
+                  </button>
+                </Box>
+              </div>
+              <button
+                className={`${styles.close_icon_btn}`}
+                onClick={() => {
+                  setDeleteIconClick(false);
+                }}>
+                <div className={`${styles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
+              </button>
+            </Box>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 };
