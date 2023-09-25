@@ -51,7 +51,7 @@ const ProductList = ({params}) => {
     <>
       <div className={style.conatiner_wrapper}>
         <h1 className={style.heading}>
-          {`Wishlist${data?.length > 0 && ` (${data?.length})`}`}
+          {`Wishlist${data?.length > 0 ? ` (${data?.length})` : "(0)"}`}
         </h1>
       </div>
       {data?.length ? (
