@@ -204,7 +204,8 @@ const SearchList = () => {
               }
             }}
             hasMore={true} // Replace with a condition based on your data source
-            className="!w-full !h-full">
+            className="!w-full !h-full"
+            style={{overflow: "visible"}}>
             <div className={style.main_container}>
               {searchData?.map((item, index) => {
                 return (

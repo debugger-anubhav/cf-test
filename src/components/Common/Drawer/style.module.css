@@ -5,10 +5,10 @@
   @apply flex mx-8 flex-col;
 }
 .drawer_content {
-  @apply flex flex-col;
+  @apply flex flex-col pl-3;
 }
 .close_icon {
-  @apply cursor-pointer mt-[0.3rem];
+  @apply cursor-pointer mt-[0.5rem];
 }
 .logo_text {
   @apply font-semibold md:text-[25px] text-[28px];
