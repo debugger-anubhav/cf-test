@@ -289,7 +289,11 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <a
-                href={!userId ? "" : "/usersettings"}
+                href={
+                  userId
+                    ? "/usersettings"
+                    : "https://test.rentofurniture.com/user_sign_up"
+                }
                 rel="noopner noreferrer"
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
@@ -303,12 +307,12 @@ const Header = () => {
                     alt="profile-icon"
                     className={`${styles.header_profile_icon} relative`}
                     onClick={() => {
-                      if (!userId) {
+                      if (userId) {
+                        router.push("/usersettings");
+                      } else {
                         router.push(
                           "https://test.rentofurniture.com/user_sign_up",
                         );
-                      } else {
-                        router.push("/usersettings");
                       }
                     }}
                     onMouseEnter={e => {
