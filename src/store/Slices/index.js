@@ -163,6 +163,7 @@ export const CartPageSlice = createSlice({
     couponCodeUsed: "",
     savedAddresses: [],
     showCartItems: false,
+    isCityShield: "",
   },
   reducers: {
     getCartItems(state, action) {
@@ -192,6 +193,9 @@ export const CartPageSlice = createSlice({
     },
     setShowCartItem(state, action) {
       state.showCartItems = action.payload;
+    },
+    setCityShield(state, action) {
+      state.isCityShield = action.payload;
     },
   },
 });
@@ -240,6 +244,7 @@ export const {
   getCouponCodeUsed,
   getSavedAddress,
   setShowCartItem,
+  setCityShield,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

@@ -18,7 +18,7 @@ const KYC100 = () => {
           order.
         </div>
       </div>
-      <div>
+      <div className={`${styles.btnContainer} `}>
         <button
           className={`${commonStyles.saveBtn} ${styles.singleBtn} w-full md:w-[168px]`}>
           Go Home

@@ -4,26 +4,50 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import React from "react";
-import OffersAndCoupons from "@/components/Home/OffersAndCoupons";
-import ItemsIncluded from "@/components/Product/ProductsIncludedSection";
 import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
-import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import CustomerRating from "@/components/Product/CustomerRatings";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import Footer from "@/components/Common/Footer";
-import YouMightLike from "@/components/Product/YouMightLike";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
-// import ProductDetails from "@/components/Product/ProductDetailsSection";
 import loadable from "@loadable/component";
+import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
+import Notifications from "@/components/Common/Notifications/Notification";
+
+const ItemsIncluded = loadable(
+  () => import("@/components/Product/ProductsIncludedSection"),
+  {
+    fallback: <ItemsIncludedSkeleton />,
+  },
+);
+const YouMightLike = loadable(
+  () => import("@/components/Product/YouMightLike"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 const ProductDetails = loadable(
   () => import("@/components/Product/ProductDetailsSection"),
   {
     fallback: <SkeletonForProductDetail />,
+  },
+);
+const OffersAndCoupons = loadable(
+  () => import("@/components/Home/OffersAndCoupons"),
+  {
+    fallback: <OffersSkeleton />,
   },
 );
 const ProductPage = () => {
@@ -47,6 +71,7 @@ const ProductPage = () => {
       <HappySubscribers page={"product"} params={params} />
       <QuesAndAns params={params} />
       <Footer />
+      <Notifications type={3} />
     </div>
   );
 };

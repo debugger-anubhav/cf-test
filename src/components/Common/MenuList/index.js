@@ -20,17 +20,19 @@ const MenuList = () => {
   );
 
   useEffect(() => {
-    getAllAndSubCategory()
-      .then(res => {
-        dispatch(addAllAndSubCategory(res?.data?.data));
-        setLoading(false);
-      })
-      .catch(err => console.log(err));
+    if (!getAllAndSubCategoryData?.length) {
+      getAllAndSubCategory()
+        .then(res => {
+          dispatch(addAllAndSubCategory(res?.data?.data));
+          setLoading(false);
+        })
+        .catch(err => console.log(err));
+    }
   }, []);
 
   return (
     <div className={styles.menu_list_wrapper}>
-      {loading ? (
+      {loading && !getAllAndSubCategoryData?.length ? (
         <div className="w-[80%]">
           <Skeleton />
         </div>

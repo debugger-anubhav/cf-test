@@ -6,6 +6,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import loadable from "@loadable/component";
 import MenuList from "@/components/Common/MenuList";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const Footer = loadable(() => import("@/components/Common/Footer"));
 const ProductList = loadable(() =>
@@ -22,6 +23,7 @@ export default function Wishlist() {
       <MenuList />
       <ProductList params={params} />
       <Footer />
+      <Notifications />
     </div>
   );
 }

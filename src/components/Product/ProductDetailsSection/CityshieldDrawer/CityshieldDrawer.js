@@ -42,7 +42,7 @@ const CityshieldDrawer = ({
         anchor={isBottomDrawer ? "bottom" : "right"}
         open={open}
         onClose={toggleDrawer}
-        transitionDuration={600}
+        // transitionDuration={600}
         classes={{paper: styles.customDrawer}}>
         <div className={styles.main_container}>
           <div
@@ -90,7 +90,7 @@ const CityshieldDrawer = ({
             {arr.map((item, index) => (
               <div key={index} className={styles.arr_item}>
                 <div className={styles.img_div}>
-                  <img src={item.img} />
+                  <img src={item.img} loading="lazy" alt={item.label} />
                 </div>
                 <p
                   className={`${

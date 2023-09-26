@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useParams, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import style from "./style.module.css";
 
 // import Card from "@/components/Common/HomePageCards";
@@ -34,7 +34,6 @@ const FrequentlyAskedQuestions = loadable(
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
   const router = useRouter();
-  const {productname} = useParams();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -57,9 +56,10 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
     cityId,
     pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
+    filterList: categoryPageReduxData?.filteredItems,
+    // filterList: categoryPageReduxData?.isfilter
+    //   ? categoryPageReduxData?.filteredItems
+    //   : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
 
@@ -67,15 +67,18 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     parentCategoryId: categoryId,
     cityId,
     pageNo,
-    filterList: categoryPageReduxData?.isfilter
-      ? categoryPageReduxData?.filteredItems
-      : [],
+    filterList: categoryPageReduxData?.filteredItems,
+    // filterList: categoryPageReduxData?.isfilter
+    //   ? categoryPageReduxData?.filteredItems
+    //   : [],
     sortKey: categoryPageReduxData?.sortKey,
   };
 
   const data =
-    productname === "all" || categoryPageReduxData?.isAllProduct
-      ? bodyDataAll
+    getLocalStorage("subCategory")?.replace(/"/g, "") === "All" ||
+    categoryPageReduxData?.isAllProduct
+      ? // productname === "all" || categoryPageReduxData?.isAllProduct
+        bodyDataAll
       : bodyData;
 
   const singleItemLength =
@@ -138,7 +141,12 @@ const SingleProduct = ({pageNo, setPageNo}) => {
         })
         .catch(err => console.log(err));
     },
-    [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey],
+    [
+      pageNo,
+      categoryPageReduxData?.isfilter,
+      categoryPageReduxData?.sortKey,
+      categoryPageReduxData?.filteredItems,
+    ],
     subCategoryId,
   );
 

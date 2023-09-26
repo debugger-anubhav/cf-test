@@ -8,6 +8,7 @@ import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const ProductCard = ({
   desc,
@@ -62,8 +63,8 @@ const ProductCard = ({
     removewhislistProduct()
       .then(res => {
         setDeleteIconClick(false);
-
         refreshFunction(Math.random());
+        showToastNotification("Item deleted from the wishlist", 3);
       })
       .catch(err => console.log(err));
   };
@@ -93,7 +94,7 @@ const ProductCard = ({
           <div className="relative">
             <img
               src={hoverCard ? hoverCardImage : cardImage}
-              alt="thumbnail image"
+              alt={desc.replace(/-/g, " ")}
               className={`${styles.thumbnail} ${
                 isImageHeight && "min-h-[240px]"
               }

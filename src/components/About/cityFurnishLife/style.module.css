@@ -1,0 +1,30 @@
+.main_container {
+  @apply px-4 mb-8 lg:mb-[88px] md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+
+.heading {
+  @apply text-base tracking-[-0.32px] font-medium text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
+}
+
+.images_wrapper {
+  @apply flex  flex-col md:flex-row gap-[9px] md:gap-4;
+}
+
+.image_container {
+  @apply flex flex-col md:w-[50%] gap-[9px] md:gap-4;
+}
+
+.small_images {
+  @apply flex gap-[9px] md:gap-4;
+}
+
+.img_box {
+  @apply w-[50%] h-[132px]  md:h-[142px] lg:h-[235px];
+}
+
+.large_img {
+  @apply flex w-full h-[133px]  md:h-[142px] lg:h-[235px];
+}
+.img_cls {
+  @apply h-full w-full object-cover;
+}

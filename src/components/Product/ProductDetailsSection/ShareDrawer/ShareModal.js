@@ -78,7 +78,8 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
           open={isModalOpen}
           onClose={closeModal}
           classes={{paper: styles.bottomDrawer}}
-          transitionDuration={{enter: 400, exit: 200}}>
+          // transitionDuration={{enter: 200, exit: 200}}
+        >
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
@@ -140,7 +141,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                 <img
                   alt={item?.icon}
                   src={item?.icon}
-                  className="cursor-pointer"
+                  className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8"
                   // onClick={() => console.log("cliked")}
                 />
               </a>

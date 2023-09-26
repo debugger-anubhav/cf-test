@@ -1,11 +1,11 @@
 "use client";
-
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {
   categoryIconsUrl,
   getLocalStorage,
   productImageBaseUrl,
+  setLocalStorage,
 } from "@/constants/constant";
 import {
   ArrowForw,
@@ -16,7 +16,6 @@ import {
   VerifyIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
-
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
@@ -30,6 +29,7 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  // setCityShield,
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
@@ -56,12 +56,10 @@ const ShoppingCartSection = ({setTab}) => {
   const cityId = getLocalStorage("cityId");
 
   // console.log(userIdToUse, "user id to use");
-  console.log(arr, "arrrr");
 
   const totalAmount = arr.reduce((accumulator, item) => {
     return accumulator + parseInt(item?.price) * item?.quantity;
   }, 0);
-  console.log(totalAmount, "totallll");
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
   const cityShieldDiscountAmount = (totalAmount * 6) / 100;
@@ -95,21 +93,29 @@ const ShoppingCartSection = ({setTab}) => {
     "Faster KYC",
     "No Security Deposit",
   ];
+  const modeOfPayment = getLocalStorage("isMonthly");
 
   const [isChecked, setIsChecked] = useState(true);
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
   const [breakupDrawer, setBreakupDrawer] = useState(false);
-  const [isCouponApplied, setIsCouponApplied] = useState(false);
+  const [isCouponApplied, setIsCouponApplied] = useState(
+    data.couponCodeUsed !== "",
+  );
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [availCoin, setAvailCoin] = useState(0);
-  const [isMonthly, setIsMonthly] = useState(true);
+  const [isMonthly, setIsMonthly] = useState(
+    modeOfPayment === null ? true : modeOfPayment,
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [code, setCode] = useState("");
+  const [code, setCode] = useState(data.couponCodeUsed);
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
 
   // const [itemQuantity, setItemQuantity] = useState(1);
+
+  // console.log(modeOfPayment, "modeofpaymentt");
+  // console.log(isMonthly, "monthlyyyyyy");
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -180,19 +186,20 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
-    console.log(arr);
+    // console.log(arr);
 
-    const headers = {
-      userId: parseInt(userIdToUse),
-      quantity: updatedItems[itemIndex].quantity,
-      productId: productid,
-    };
-    console.log(headers.quantity, "qaunt in gheader");
-    await axios
-      .post(baseURL + endPoints.addToCart.updateQuantity, headers)
-      .then(res => console.log(res, "res in updated qunatity"))
-      .catch(err => console.log(err, "error in update qunatity"));
+    if (newQuantity > 0) {
+      const headers = {
+        userId: parseInt(userIdToUse),
+        quantity: updatedItems[itemIndex].quantity,
+        productId: productid,
+      };
 
+      await axios
+        .post(baseURL + endPoints.addToCart.updateQuantity, headers)
+        .then(res => console.log(res, "res in updated qunatity"))
+        .catch(err => console.log(err, "error in update qunatity"));
+    }
     fetchBill();
   };
 
@@ -200,6 +207,10 @@ const ShoppingCartSection = ({setTab}) => {
     dispatch(deleteItems(id));
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
+
+  useEffect(() => {
+    console.log(code, "codeeeeeeeeeeeee");
+  }, [code]);
 
   const fetchBill = async () => {
     try {
@@ -217,6 +228,9 @@ const ShoppingCartSection = ({setTab}) => {
         headers,
       );
       dispatch(getBillDetails(res?.data?.data));
+      // setCode(res?.data?.data?.couponsCode);
+      getCouponCodeUsed(res?.data?.data?.couponsCode);
+      // setCityShield(res?.data?.data?.cartSubTotalList);
     } catch (err) {
       console.log(err);
     }
@@ -225,6 +239,10 @@ const ShoppingCartSection = ({setTab}) => {
   useEffect(() => {
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
+
+  // useEffect(() => {
+  //   data.couponCodeUsed;
+  // }, [third]);
 
   return (
     showData &&
@@ -244,83 +262,89 @@ const ShoppingCartSection = ({setTab}) => {
             <div className={styles.card_wrapper}>
               {arr?.map((item, index) => {
                 return (
-                  <div key={index} className={styles.single_product_wrapper}>
-                    <div className={styles.img_div}>
-                      <img
-                        src={`${
-                          productImageBaseUrl +
-                          "thumb/" +
-                          item.fc_product?.image?.split(",")?.[0]
-                        }`}
-                        alt="product_img"
-                        className={styles.img}
-                      />
-                    </div>
-
-                    <div>
-                      <div className={styles.name_div}>
-                        <p className={styles.product_name}>
-                          {item?.fc_product?.product_name?.replace(/-/g, " ")}
-                        </p>
-                        <div
-                          onClick={() => {
-                            setProductId(item?.fc_product?.id);
-                            setItemId(item?.id);
-                            openModal();
-                          }}>
-                          {" "}
-                          <DeleteIcon className={styles.delete_icon} />
-                        </div>
+                  <>
+                    <div key={index} className={styles.single_product_wrapper}>
+                      <div className={styles.img_div}>
+                        <img
+                          src={`${
+                            productImageBaseUrl +
+                            "thumb/" +
+                            item.fc_product?.image?.split(",")?.[0]
+                          }`}
+                          alt="product_img"
+                          className={styles.img}
+                        />
                       </div>
 
-                      <div className={styles.price_div}>
-                        <div className={styles.incre_decre_div}>
-                          <span
-                            className={styles.span_item}
-                            onClick={() =>
-                              handleUpdateQuantity(
-                                item.id,
-                                item?.fc_product?.id,
-                                item.quantity - 1,
-                                index,
-                              )
-                            }>
-                            -
-                          </span>
-                          {item?.quantity}
-                          <span
-                            className={styles.span_item}
-                            onClick={() =>
-                              handleUpdateQuantity(
-                                item.id,
-                                item?.fc_product?.id,
-                                item.quantity + 1,
-                                index,
-                              )
-                            }>
-                            +
-                          </span>
+                      <div>
+                        <div className={styles.name_div}>
+                          <p className={styles.product_name}>
+                            {item?.fc_product?.product_name?.replace(/-/g, " ")}
+                          </p>
+                          <div
+                            onClick={() => {
+                              setProductId(item?.fc_product?.id);
+                              setItemId(item?.id);
+                              openModal();
+                            }}>
+                            {" "}
+                            <DeleteIcon className={styles.delete_icon} />
+                          </div>
                         </div>
 
-                        <div>
-                          <p className={styles.deposit_txt}>Monthly Rent</p>
-                          <div className="flex items-end gap-2">
-                            <p className={styles.currentPrice}>
-                              <span className={styles.rupeeIcon}>₹</span>
-                              {item?.price}
-                            </p>
+                        <div className={styles.price_div}>
+                          <div className={styles.incre_decre_div}>
+                            <span
+                              className={styles.span_item}
+                              onClick={() =>
+                                handleUpdateQuantity(
+                                  item.id,
+                                  item?.fc_product?.id,
+                                  item.quantity - 1,
+                                  index,
+                                )
+                              }>
+                              -
+                            </span>
+                            {item?.quantity}
+                            <span
+                              className={styles.span_item}
+                              onClick={() =>
+                                handleUpdateQuantity(
+                                  item.id,
+                                  item?.fc_product?.id,
+                                  item.quantity + 1,
+                                  index,
+                                )
+                              }>
+                              +
+                            </span>
+                          </div>
 
-                            {item?.attr_price > item?.price && (
-                              <p className={styles.originalPrice}>
+                          <div>
+                            <p className={styles.deposit_txt}>Monthly Rent</p>
+                            <div className="flex items-center gap-2">
+                              <p className={styles.currentPrice}>
                                 <span className={styles.rupeeIcon}>₹</span>
-                                {item?.attr_price}
+                                {item?.price}
                               </p>
-                            )}
+
+                              {item?.attr_price > item?.price && (
+                                <p className={styles.originalPrice}>
+                                  <span className={styles.rupeeIcon}>₹</span>
+                                  {item?.attr_price}
+                                </p>
+                              )}
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
+
+                    {index !== arr.length - 1 && (
+                      <div className={styles.line_break}></div>
+                    )}
+                  </>
                 );
               })}
             </div>
@@ -441,6 +465,7 @@ const ShoppingCartSection = ({setTab}) => {
                     onClick={() => {
                       setIsCouponApplied(false);
                       setCode("");
+                      dispatch(getCouponCodeUsed(""));
                     }}>
                     Remove
                   </p>
@@ -473,7 +498,16 @@ const ShoppingCartSection = ({setTab}) => {
                 </h2>
                 <div className={styles.monthly_toggler}>
                   <p
-                    onClick={() => setIsMonthly(true)}
+                    onClick={() => {
+                      const prevVal = isMonthly;
+                      const isMonthlyVal = true;
+                      setIsMonthly(true);
+                      setLocalStorage("isMonthly", true);
+                      if (prevVal !== isMonthlyVal) {
+                        setIsCouponApplied(false);
+                        setCode("");
+                      }
+                    }}
                     className={`${
                       isMonthly
                         ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
@@ -482,7 +516,16 @@ const ShoppingCartSection = ({setTab}) => {
                     Monthly
                   </p>
                   <p
-                    onClick={() => setIsMonthly(false)}
+                    onClick={() => {
+                      const prevVal = isMonthly;
+                      const isMonthlyVal = false;
+                      setIsMonthly(false);
+                      setLocalStorage("isMonthly", false);
+                      if (prevVal !== isMonthlyVal) {
+                        setIsCouponApplied(false);
+                        setCode("");
+                      }
+                    }}
                     className={`${
                       isMonthly
                         ? "bg-transparent"

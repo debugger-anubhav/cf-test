@@ -19,6 +19,7 @@ import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 
 const defaultKey = 1;
 const newSortKey = 2;
@@ -116,7 +117,7 @@ const SearchList = () => {
   };
 
   const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
+    if (!e.target.classList.contains) {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
@@ -141,17 +142,13 @@ const SearchList = () => {
 
       {/* sort by */}
       <div className="relative flex my-8">
-        <p className="hidden sm:flex items-center mr-2 text-71717A text-base">
+        <p className="hidden md:flex items-center mr-2 text-71717A text-base">
           Sort By
         </p>
-        <div
-          className={`${style.filter} relative `}
-          // onClick={() => setFilterOpen(!fi)}
-        >
+        <div className={`${style.filter} relative `}>
           <div
             className={style.filterbox}
             onClick={() => {
-              // setSortOpen(!filterOpen);
               toggleDropdownSort();
             }}
             ref={dropDownRefSort}>
@@ -212,7 +209,7 @@ const SearchList = () => {
               {searchData?.map((item, index) => {
                 return (
                   <div
-                    className={`${style.card_box_product} ${style.child}`}
+                    className={`${style.card_box_product} child`}
                     key={index.toString()}
                     onClick={e => handleCardClick(e, item)}>
                     <SearchCard
@@ -257,3 +254,11 @@ const SearchList = () => {
 };
 
 export default SearchList;
+
+export const SearchListSkeleton = () => {
+  return (
+    <div className="mb-8">
+      <RentFurnitureSkeleton />
+    </div>
+  );
+};

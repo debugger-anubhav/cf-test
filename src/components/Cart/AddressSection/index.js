@@ -66,7 +66,7 @@ const AddressSection = ({setTab}) => {
 
     landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
-    postalCode: Yup.number()
+    postalCode: Yup.string()
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 6 digit postal code without spaces or special characters",
@@ -102,8 +102,9 @@ const AddressSection = ({setTab}) => {
         dispatch(getSavedAddress(res?.data?.data));
 
         const newPrimaryAddress = res?.data?.data.find(
-          item => item.primary === "Yes",
+          item => item.city === cityName,
         );
+        console.log(newPrimaryAddress, "primaryy addresss");
         setPrimaryAddress(newPrimaryAddress);
       })
       .catch(err => console.log(err));
@@ -133,20 +134,27 @@ const AddressSection = ({setTab}) => {
     });
   };
 
-  const makeAddressPrimary = async id => {
-    try {
-      const headers = {
-        userId: parseInt(userIdToUse),
-        addressId: id,
-      };
-      await axios.patch(
-        baseURL + endPoints.addToCart.makePrimaryAddress,
-        headers,
-      );
-    } catch (error) {
-      console.log(error);
-    }
+  // const makeAddressPrimary = async id => {
+  //   try {
+  //     const headers = {
+  //       userId: parseInt(userIdToUse),
+  //       addressId: id,
+  //     };
+  //     await axios.patch(
+  //       baseURL + endPoints.addToCart.makePrimaryAddress,
+  //       headers,
+  //     );
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const makeDefaultAddress = id => {
+    const newPrimaryAddress = addressArray.find(item => item.id === id);
+    console.log(newPrimaryAddress);
+    setPrimaryAddress(newPrimaryAddress);
   };
+
   useEffect(() => {
     getAllSavedAddresses();
   }, []);
@@ -159,16 +167,17 @@ const AddressSection = ({setTab}) => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && cityName === primaryAddress?.city && (
+        {addressArray.length > 0 && primaryAddress !== undefined && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
-            {/* {cityName !== primaryAddress?.city && ( */}
-            {/* // <div className={styles.not_belong_wrapper}>
-              //   <p className={styles.not_belong_text}>
-              //     Address does not belong to selected city
-              //   </p>
-              // </div> */}
+            {cityName !== primaryAddress?.city && (
+              <div className={styles.not_belong_wrapper}>
+                <p className={styles.not_belong_text}>
+                  Address does not belong to selected city
+                </p>
+              </div>
+            )}
 
             <div className={styles.saved_add_upper_div}>
               <h1 className={styles.saved_add_head}>Delivering to</h1>
@@ -182,6 +191,9 @@ const AddressSection = ({setTab}) => {
             </div>
 
             <p className={styles.saved_address}>{primaryAddress?.address1}</p>
+            <p className={styles.saved_address}>
+              {primaryAddress?.city}, {primaryAddress?.state}, India
+            </p>
 
             {cityName !== primaryAddress?.city && (
               <div className={styles.add_new_info}>
@@ -196,7 +208,10 @@ const AddressSection = ({setTab}) => {
           <AddressDrawer
             toggleDrawer={toggleAddressDrawer}
             open={addressDrawer}
-            makeAddressPrimary={id => makeAddressPrimary(id)}
+            makeDefaultAddress={id => makeDefaultAddress(id)}
+            primaryAddress={primaryAddress}
+            // setPrimaryAddress={setPrimaryAddress}
+            // makeAddressPrimary={id => makeAddressPrimary(id)}
             getAllSavedAddresses={() => getAllSavedAddresses()}
           />
         )}
@@ -249,7 +264,7 @@ const AddressSection = ({setTab}) => {
                         className={styles.flag}
                       />
                       <Field
-                        type="mobile"
+                        type="number"
                         // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
@@ -295,7 +310,7 @@ const AddressSection = ({setTab}) => {
 
                   <div
                     className={`flex flex-col lg:flex-row gap-4 ${styles.form_field}`}>
-                    <div>
+                    <div className="lg:w-[48.5%]">
                       <p className={styles.form_label}>Postal code</p>
                       <Field
                         type="number"
@@ -311,7 +326,7 @@ const AddressSection = ({setTab}) => {
                         }
                       </ErrorMessage>
                     </div>
-                    <div>
+                    <div className="lg:w-[48.5%]">
                       <p className={styles.form_label}>City</p>
                       <Field
                         readOnly

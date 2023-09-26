@@ -5,6 +5,7 @@ import MenuList from "@/components/Common/MenuList";
 import React from "react";
 
 import CartSection from "@/components/Cart";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const CartPage = () => {
   return (
@@ -13,6 +14,7 @@ const CartPage = () => {
       <Header />
       <MenuList />
       <CartSection />
+      <Notifications />
     </div>
   );
 };

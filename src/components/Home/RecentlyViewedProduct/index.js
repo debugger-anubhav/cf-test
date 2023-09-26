@@ -16,16 +16,6 @@ const RecentlyViewedProduct = ({page}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [isDumy, setIsDumy] = React.useState(false);
-  // const cityIdStr = localStorage
-  //   .getItem("cityId")
-  //   ?.toString()
-  //   ?.replace(/"/g, "");
-
-  // const cityIdStr = localStorage
-  //   .getItem("cityId")
-  //   ?.toString()
-  //   ?.replace(/"/g, "");
-
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -38,19 +28,13 @@ const RecentlyViewedProduct = ({page}) => {
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
-      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
       decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
     }`,
   );
 
   useEffect(() => {
     recentlyViewed()
       .then(res => {
-        // console.log("reccent", res?.data?.data)
         dispatch(addRecentlyViewedProduct(res?.data?.data));
       })
       .catch(err => console.log(err));

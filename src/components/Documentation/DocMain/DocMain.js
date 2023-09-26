@@ -26,8 +26,8 @@ const DocMain = () => {
       <DocSidebar />
       <div className={styles.kycFormArea}>
         <KycHeader />
-        {/* <KYC90 />
-        <KYC10 /> */}
+        {/* <KYC90 /> */}
+        {/* <KYC10 /> */}
         <KYC100 />
         {/* <DropDown
           selectedOption={selectedOption}

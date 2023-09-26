@@ -4,9 +4,17 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 
-import SearchList from "@/components/Search/SearchList/SearchList";
 import Footer from "@/components/Common/Footer";
+import loadable from "@loadable/component";
+import {SearchListSkeleton} from "@/components/Search/SearchList/SearchList";
+import Notifications from "@/components/Common/Notifications/Notification";
 
+const SearchList = loadable(
+  () => import("@/components/Search/SearchList/SearchList"),
+  {
+    fallback: <SearchListSkeleton />,
+  },
+);
 export default function SearchPage() {
   return (
     <div>
@@ -15,6 +23,7 @@ export default function SearchPage() {
       <MenuList />
       <SearchList />
       <Footer />
+      <Notifications />
     </div>
   );
 }

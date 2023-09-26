@@ -161,7 +161,7 @@ const HappySubscribers = ({page, params}) => {
             <div
               className={`${styles.card_div}  ${
                 index === data?.length - 1 && "mr-[16px]"
-              } ${"pointer-events-none"}`}
+              } ${isDumy && "pointer-events-none"}`}
               key={index.toString()}>
               <div className={styles.video}>
                 {/* <video className={styles.video_player} ref={videoRef}>

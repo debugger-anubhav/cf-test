@@ -10,6 +10,7 @@ import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -85,6 +86,7 @@ const CategoryCard = ({
                   return item?.id;
                 });
                 dispatch(addSaveditemID(ids));
+                showToastNotification("Item added to the wishlist", 1);
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
@@ -100,6 +102,7 @@ const CategoryCard = ({
                   return item?.id;
                 });
                 dispatch(addSaveditemID(ids));
+                showToastNotification("Item removed from the wishlist", 2);
               })
               .catch(err => console.log(err));
             setInWishList(prev => !prev);
@@ -177,7 +180,7 @@ const CategoryCard = ({
         <div className="relative">
           <img
             src={hoverCard ? hoverCardImage : cardImage}
-            alt="thumbnail image"
+            alt={desc.replace(/-/g, " ")}
             className={styles.img}
           />
           {soldOut ? (

@@ -136,45 +136,34 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const handleContextMenu = e => {
-    e.preventDefault(); // Prevent the default context menu
-    window.open(
-      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
-        data.seourl
-      }`,
-      "_blank",
-    );
-  };
-
   return (
     <div
       onMouseLeave={() => {
         setAnchorEl("");
       }}>
-      {/* <a
+      <a
         href={`/${homePageReduxData?.cityName
           .replace(/\//g, "-")
-          .toLowerCase()}/${data?.seourl}`}> */}
-      <button
-        onClick={e => handleCategory(e)}
-        className="flex items-center whitespace-nowrap cursor-pointer"
-        onMouseEnter={e => {
-          setAnchorEl(e.currentTarget);
-          hoverRef.current = item;
-        }}
-        onContextMenu={e => handleContextMenu(e)}>
-        {item}
-        <DownArrow
-          size={20}
-          color={"#45454A"}
-          // onMouseLeave={() => {
-          //   setAnchorEl(null);
-          //   hoverRef.current = "";
-          // }}
-          className={open ? styles.arrow_up : styles.arrow_down}
-        />
-      </button>
-      {/* </a> */}
+          .toLowerCase()}/${data?.seourl}`}>
+        <button
+          onClick={e => handleCategory(e)}
+          className="flex items-center whitespace-nowrap cursor-pointer"
+          onMouseEnter={e => {
+            setAnchorEl(e.currentTarget);
+            hoverRef.current = item;
+          }}>
+          {item}
+          <DownArrow
+            size={20}
+            color={"#45454A"}
+            // onMouseLeave={() => {
+            //   setAnchorEl(null);
+            //   hoverRef.current = "";
+            // }}
+            className={open ? styles.arrow_up : styles.arrow_down}
+          />
+        </button>
+      </a>
       <Popper
         id={id}
         open={open}
@@ -185,16 +174,16 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           vertical: "bottom",
           horizontal: "left",
         }}
-        sx={
-          {
-            // mb: "0.9rem",
-          }
-        }>
+        sx={{
+          zIndex: 2,
+          // mb: "0.9rem",
+        }}>
         {/* <div className={styles.shadow_box}> */}
         <Box
           className={styles.sub_item_wrapper}
           sx={{
             mt: 2.4,
+
             // boxShadow:3
           }}
           // onMouseLeave={handleClose}

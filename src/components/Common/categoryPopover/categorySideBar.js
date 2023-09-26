@@ -17,6 +17,7 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
+import {useRouter} from "next/navigation";
 
 export default function FilterSortDrawer({
   filterName,
@@ -31,6 +32,7 @@ export default function FilterSortDrawer({
 
   const [itemCount, setItemCount] = useState(7);
   const [selectedOption, setSelectedOption] = useState("Default");
+  const router = useRouter();
 
   const defaultKey = 1;
   const newSortKey = 2;
@@ -84,6 +86,7 @@ export default function FilterSortDrawer({
 
   const handleSort = (item, index) => {
     setPageNo(1);
+    console.log(item);
     setSelectedOption(item);
     if (item === "New") {
       dispatch(addSortKey(newSortKey));
@@ -102,12 +105,24 @@ export default function FilterSortDrawer({
   };
 
   const handleApply = () => {
+    let url = "";
+
+    for (let i = 0; i < categoryPageReduxData?.filteredItems.length; i++) {
+      url +=
+        "filter=" + encodeURIComponent(categoryPageReduxData?.filteredItems[i]);
+
+      if (i < categoryPageReduxData?.filteredItems.length - 1) {
+        url += "&";
+      }
+    }
+    router.push(`?${url}`);
+
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
-    setFilterListed(true);
     dispatch(isFilterApplied(true));
+    setFilterListed(true);
     setState({...state, bottom: false});
   };
 
@@ -128,7 +143,7 @@ export default function FilterSortDrawer({
                 {filterName === "Filter" ? filterName : selectedOption}
               </p>
               <div className="h-[1px] bg-EDEDEE" />
-              <div className={styles.mapped_filter_mobile}>
+              <div className={`overflow-scroll ${styles.mapped_filter_mobile}`}>
                 {filtereData?.map((ele, index) => {
                   // {CategoryFilterData.slice(0).map((ele, index) => {
                   return (
@@ -166,8 +181,12 @@ export default function FilterSortDrawer({
                 </p>
               )}
               <div className="mt-4 w-full flex justify-center">
-                <div className={styles.btn_container}>
-                  <p className={styles.apply_btn} onClick={() => handleApply()}>
+                <div
+                  className={styles.btn_container}
+                  onClick={() => handleApply()}>
+                  <p
+                    style={{boxShadow: "rgba(0, 0, 0, 0.25)"}}
+                    className={styles.apply_btn}>
                     Apply
                   </p>
                 </div>
@@ -175,7 +194,7 @@ export default function FilterSortDrawer({
             </div>
           ) : (
             <div className="gap-6 shadow-md w-full rounded-t-2xl bg-white p-4">
-              <p className={styles.headin_text}>{filterName}</p>
+              <p className={styles.headin_text}>Sort By</p>
               <div className="">
                 {sortByText.map((ele, index) => {
                   return (
@@ -213,12 +232,17 @@ export default function FilterSortDrawer({
             className={styles.filterbox}
             onClick={toggleDrawer(anchor, true)}>
             <div className={styles.filter_text_container}>
-              <p className={styles.filter_text}>{filterName}</p>
+              <p
+                className={`${
+                  filterName === "Default" ? "!text-[#597492]" : "!text-71717A"
+                } ${styles.filter_text}`}>
+                {filterName === "Filter" ? filterName : selectedOption}
+              </p>
             </div>
             <div>
               <DownPopUpArrow
                 size={20}
-                color={"#45454A"}
+                color={filterName === "Default" ? "#597492" : "#71717A"}
                 className={state.bottom ? styles.arrow_up : styles.arrow_down}
               />
             </div>
@@ -241,7 +265,8 @@ export default function FilterSortDrawer({
               borderTopRightRadius: "20px",
             }}>
             <div
-              className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
+              // className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
+              className="fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12 lg:-mt-0"
               onClick={toggleDrawer("bottom", false)}>
               <Close size={25} color={"#000"} />
             </div>

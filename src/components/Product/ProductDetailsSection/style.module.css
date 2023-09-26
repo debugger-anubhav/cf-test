@@ -20,7 +20,7 @@
   @apply relative w-full h-[270px] md:h-[400px] lg:h-[546px] mt-2 md:mt-0;
 }
 .info {
-  @apply z-[1] flex gap-1 p-1 xl:px-2 xl:py-1 rounded-[4px] absolute top-0 left-0 xl:left-2 text-fff text-12 xl:text-14 xl:font-medium tracking-0.24 xl:tracking-desc uppercase items-center;
+  @apply z-[1] flex gap-1 p-1 xl:px-2 xl:py-1 rounded-[4px] absolute top-2 md:top-0 left-0 xl:left-2 text-fff text-12 xl:text-14 xl:font-medium tracking-0.24 xl:tracking-desc uppercase items-center;
   background: rgba(62, 104, 142, 0.6);
 }
 .arrow_div {
@@ -214,11 +214,14 @@
   @apply flex w-full px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 .container_skeleton {
-  @apply flex w-full gap-6;
+  @apply flex w-full flex-col md:flex-row gap-6;
 }
 .left_part {
-  @apply flex w-1/2 h-80;
+  @apply flex md:w-1/2 w-full flex-col;
 }
 .right_part {
-  @apply flex w-1/2 flex-col;
+  @apply flex md:w-1/2 w-full mx-8 md:mx-0 flex-col overflow-hidden;
+}
+.left_bottom_cards {
+  @apply flex w-full mt-4;
 }

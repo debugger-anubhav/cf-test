@@ -57,7 +57,12 @@ const HeroBanner = () => {
           href={`/${homePageReduxData?.cityName
             .toLowerCase()
             .replace(/\//g, "-")}/rent`}>
-          <img src={HeroFrame} alt="hero-banner" className="w-full" />
+          <img
+            src={HeroFrame}
+            alt="hero-banner"
+            className="w-full"
+            loading="lazy"
+          />
         </a>
       </div>
     </>
