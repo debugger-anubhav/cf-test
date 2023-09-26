@@ -1,0 +1,66 @@
+.formHeadings {
+  @apply font-Poppins md:text-16 text-14 font-normal;
+  letter-spacing: -0.32px;
+  color: #71717a;
+}
+.formStepHeading {
+  @apply font-Poppins md:text-16 text-14 font-medium;
+  letter-spacing: -0.32px;
+  color: #45454a;
+}
+.formInputTxt {
+  @apply font-Poppins md:text-16 text-14 font-normal;
+  letter-spacing: -0.32px;
+  color: #71717a;
+}
+
+.basicInputStyles {
+  @apply bg-white border w-full rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4;
+  letter-spacing: -0.32px;
+  line-height: normal;
+  max-width: 502px;
+  border: 1px solid #dddddf;
+}
+.basicInputStyles:focus {
+  border: 1px solid #71717a;
+  outline: none;
+}
+
+.basicCheckBox {
+  width: 16px;
+  height: 16px;
+}
+.basicCheckBox:checked {
+  accent-color: #5774ac !important;
+  width: 16px;
+  height: 16px;
+}
+.termsTxt {
+  @apply text-14 md:text-16 font-Poppins font-normal;
+  line-height: 30px; /* 187.5% */
+  letter-spacing: -0.32px;
+}
+.laterBtn {
+  height: 56px;
+  padding: 0px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  border: 2px solid var(--grey-grey-600, #71717a);
+}
+.saveBtn {
+  @apply md:ml-4;
+  display: flex;
+  padding: 0px 32px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  border-radius: 8px;
+  background: #f6b704;
+  height: 56px;
+}
+.saveBtn:disabled {
+  background: #ffdf85;
+}

@@ -15,7 +15,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
     {item: "My Invoices", link: "https://test.rentofurniture.com/invoices"},
     {
       item: "Documentation",
-      link: "https://test.rentofurniture.com/documentation",
+      link: "/documentation",
     },
     {
       item: "Profile Settings",

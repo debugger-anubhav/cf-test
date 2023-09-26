@@ -1,0 +1,6 @@
+.mainContainer {
+  @apply flex;
+}
+.kycFormArea {
+  @apply grow;
+}

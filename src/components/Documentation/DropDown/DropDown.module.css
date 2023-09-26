@@ -1,0 +1,60 @@
+/* .main {
+  @apply rounded-lg border border-gray-500 bg-white text-gray-900 font-Poppins text-base font-normal leading-normal tracking-tight px-4 py-3;
+  width: 502px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url("../../../assets//common_icons/downArrowDD.svg") right 16px
+    center no-repeat white;
+  background-size: 25px;
+}
+.main:focus-visible { */
+/* border-style: none !important; */
+/* outline-style: none !important;
+} */
+/* .main:focus-within { */
+/* border-style: none !important; */
+/* background: url("../../../assets//common_icons/upArrowDD.svg") 96% / 15%
+    no-repeat white;
+  background-size: 25px;
+  outline-style: none !important;
+}
+.options {
+  @apply px-4 py-3 block;
+} */
+
+/* CustomSelect.module.css */
+.custom-select {
+  @apply relative bg-white  rounded-xl;
+  max-width: 502px;
+}
+
+.selected-option {
+  @apply flex justify-between bg-white border  rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4;
+  border-top: 1px solid var(--grey-grey-300, #dddddf);
+  letter-spacing: -0.32px;
+  line-height: normal;
+}
+
+.options {
+  @apply hidden absolute bg-white border-b  list-none p-0;
+  border-bottom: 1px solid var(--grey-grey-300, #dddddf);
+}
+
+.option {
+  @apply p-2 cursor-pointer border-b bg-white font-Poppins text-base font-normal py-3 px-4;
+  letter-spacing: -0.32px;
+  line-height: normal;
+  border-bottom: 1px solid var(--grey-grey-300, #dddddf);
+}
+.option:hover {
+  background-color: #eff5ff;
+  color: #5774ac;
+}
+.optionsActive {
+  @apply block;
+}
+
+.ddArrow {
+  @apply !inline-block;
+}
