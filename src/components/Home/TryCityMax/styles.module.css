@@ -109,3 +109,6 @@
 .rupeeIcon {
   @apply font-Inter;
 }
+.skeleton_box {
+  @apply w-full h-full;
+}

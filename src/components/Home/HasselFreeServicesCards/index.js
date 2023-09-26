@@ -21,7 +21,7 @@ const HasselFreeServicesCards = () => {
                   backgroundRepeat: "no-repeat",
                   backgroundSize: "cover",
                 }}>
-                <div className="absolute bottom-4 px-4 3xl:px-8 3xl:pr-20">
+                <div className={style.hassel_heading_wrapper}>
                   <p className={style.heading_text}>{data?.Heading}</p>
                   <p className={style.content}>{data?.text}</p>
                 </div>
