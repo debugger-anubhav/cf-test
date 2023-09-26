@@ -74,10 +74,16 @@
 }
 
 .drawer_wrapper {
-  @apply sm:min-w-[530px] min-w-full w-[100%] sm:w-[530px];
+  @apply sm:min-w-[560px] min-w-full w-[100%] sm:w-[560px] flex;
 }
 .sidebar_wrapper {
-  @apply w-full p-[48px];
+  @apply w-full p-[48px] pr-0 flex;
+}
+.right {
+  @apply flex py-[48px];
+}
+.left {
+  @apply flex flex-col;
 }
 .sidebar_header {
   @apply flex justify-between;
@@ -104,11 +110,17 @@
   @apply font-Poppins text-222 text-20 font-medium leading-6;
 }
 .sidebar_detail_subheading {
-  @apply text-base text-71717A font-Poppins leading-6;
+  @apply text-base text-71717A font-Poppins font-normal leading-[24px] pt-1;
 }
 .rupeeIcon {
   @apply font-Inter;
 }
 .skeleton_box {
   @apply w-full h-full;
+}
+.divider {
+  @apply flex w-[351px] justify-center h-[1px] bg-EDEDEE;
+}
+.drawer_map_wrapper {
+  @apply flex flex-col  items-center w-full justify-center;
 }
