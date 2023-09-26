@@ -179,11 +179,6 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const handleContextMenu = e => {
-    e.preventDefault(); // Prevent the context menu from opening
-    // ref.current?.click();
-  };
-
   return (
     <>
       <div className={styles.main}>
@@ -294,7 +289,7 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <a
-                href={userId ? "/usersettings" : ""}
+                href={!userId ? "" : "/usersettings"}
                 rel="noopner noreferrer"
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
@@ -306,7 +301,6 @@ const Header = () => {
                   <Image
                     src={Icons.Profile}
                     alt="profile-icon"
-                    onContextMenu={e => handleContextMenu(e)}
                     className={`${styles.header_profile_icon} relative`}
                     onClick={() => {
                       if (!userId) {
