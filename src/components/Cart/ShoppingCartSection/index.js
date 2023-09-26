@@ -34,6 +34,7 @@ import {
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt} from "@/hooks/cryptoUtils";
+// import {useRouter} from "next/navigation";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -44,10 +45,12 @@ const ShoppingCartSection = ({setTab}) => {
 
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
+    console.log("in setArr");
     setArr(cartItems);
   }, [cartItems]);
 
   const count = cartItems.length;
+  // const router = useRouter();
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = getLocalStorage("tempUserID");
@@ -237,6 +240,7 @@ const ShoppingCartSection = ({setTab}) => {
   };
 
   useEffect(() => {
+    console.log("in fetch bill");
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
@@ -264,23 +268,32 @@ const ShoppingCartSection = ({setTab}) => {
                 return (
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
-                      <div className={styles.img_div}>
-                        <img
-                          src={`${
-                            productImageBaseUrl +
-                            "thumb/" +
-                            item.fc_product?.image?.split(",")?.[0]
-                          }`}
-                          alt="product_img"
-                          className={styles.img}
-                        />
-                      </div>
+                      <a
+                        href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
+                        <div className={styles.img_div}>
+                          <img
+                            src={`${
+                              productImageBaseUrl +
+                              "thumb/" +
+                              item.fc_product?.image?.split(",")?.[0]
+                            }`}
+                            alt="product_img"
+                            className={styles.img}
+                          />
+                        </div>
+                      </a>
 
                       <div>
                         <div className={styles.name_div}>
-                          <p className={styles.product_name}>
-                            {item?.fc_product?.product_name?.replace(/-/g, " ")}
-                          </p>
+                          <a
+                            href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
+                            <p className={styles.product_name}>
+                              {item?.fc_product?.product_name?.replace(
+                                /-/g,
+                                " ",
+                              )}
+                            </p>
+                          </a>
                           <div
                             onClick={() => {
                               setProductId(item?.fc_product?.id);

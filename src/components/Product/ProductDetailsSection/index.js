@@ -96,13 +96,13 @@ const ProductDetails = ({params}) => {
   // bottombar visibility conditiionally
   useEffect(() => {
     const handleScroll = () => {
+      // console.log(showBottomBar, "showbotoomm");
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-
-      if (scrollPosition + windowHeight >= documentHeight) {
+      if (scrollPosition + windowHeight === documentHeight) {
         setShowBottomBar(false);
-      } else if (scrollPosition > yourScrollThreshold) {
+      } else if (scrollPosition >= yourScrollThreshold) {
         setShowBottomBar(true);
       } else {
         setShowBottomBar(false);
@@ -116,7 +116,7 @@ const ProductDetails = ({params}) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [showBottomBar]);
+  }, []);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -439,6 +439,7 @@ const ProductDetails = ({params}) => {
         params={params}
         title={prodDetails?.[0]?.product_name}
       />
+      {/* {console.log(showBottomBar)} */}
       {showBottomBar && (
         <StickyBottomBar
           productName={prodDetails?.[0]?.product_name}
@@ -804,10 +805,14 @@ const ProductDetails = ({params}) => {
             </div>
             <p className={styles.opt_for}>
               Opt for City Shield today and get covered for accidental damages
-              at ONLY ₹{cityShieldCurrentPrice}
+              at ONLY <span className={styles.rupeeIcon}>₹</span>
+              {cityShieldCurrentPrice}
               /month!
             </p>
-            <p className={styles.protect}>{str.protect}</p>
+            <p className={styles.protect}>
+              Protect your appliances and furniture worth{" "}
+              <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+            </p>
 
             <div className={styles.cityshield_prices}>
               <p className={styles.currentPrice}>

@@ -66,7 +66,7 @@ const StickyBottomBar = ({
           cartItems?.length === 0
             ? handleAddToCart
             : isItemInCart
-            ? router.push("/cart")
+            ? () => router.push("/cart")
             : isSameTenure
             ? handleAddToCart
             : handleNotSameTenure
