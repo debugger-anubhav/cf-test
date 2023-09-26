@@ -248,8 +248,7 @@ const Header = () => {
                   userId
                     ? "/wishlist"
                     : "https://test.rentofurniture.com/user_sign_up"
-                }
-                className="pt-[14px] pb-[14px]">
+                }>
                 <span className={styles.header_favorite_container}>
                   <Image
                     src={Icons.Favorite}
@@ -297,7 +296,7 @@ const Header = () => {
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
                 <div
-                  className="pt-[14px] pb-[14px]"
+                  className="pt-[14px] pb-[16px]"
                   onMouseLeave={() => {
                     setShowProfileDropdown(false);
                   }}>

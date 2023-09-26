@@ -56,6 +56,7 @@ module.exports = {
         xs: "428px",
         xs1: "481px",
         ms: "520px",
+        cxl: "1360px",
         macbook: "1440px",
         "3xl": "1660px",
         "4xl": "1850px",
