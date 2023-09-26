@@ -1,0 +1,27 @@
+.header {
+  @apply font-Poppins md:text-2xl text-lg ml-4 md:ml-16;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px; /* 133.333% */
+  letter-spacing: -0.48px;
+}
+.mainContainer {
+  @apply mt-10;
+}
+.progressBarContainer {
+  @apply mt-2 mb-10 ml-4 md:ml-16;
+  background-color: #d9d9d9;
+  margin-right: 149px !important;
+  height: 4px;
+}
+@media (max-width: 767px) {
+  /* Styles for screens with a maximum width of 767px (typical mobile screens) */
+  .progressBarContainer {
+    margin-right: 16px !important; /* Remove margin on mobile screens */
+  }
+}
+.progressBar {
+  @apply rounded-r-full;
+  height: 4px;
+  background: #67af7b;
+}

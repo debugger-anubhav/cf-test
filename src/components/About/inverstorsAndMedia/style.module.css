@@ -17,3 +17,13 @@
 .investor_container {
   @apply !min-w-[109.5px]  sm:!min-w-[150px] md:!min-w-[219px] xl:!max-w-[219px];
 }
+
+.accolades_cards {
+  @apply border-[2px] border-[#71717A] min-w-[231px] md:max-w-[231px] lg:max-w-[290px] xl:max-w-[308px];
+}
+.accolades_box {
+  @apply flex gap-1 py-1 md:py-1.5 px-2 border-t-[2px] border-[#71717A];
+}
+.accolades_text {
+  @apply text-xs text-[#71717A] capitalize font-medium tracking-[-0.24px];
+}
