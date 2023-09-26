@@ -247,14 +247,13 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
+            <div className="relative items-center flex gap-2 sm:gap-4 lg:gap-0">
               <a
                 href={
                   userId
                     ? "/wishlist"
                     : "https://test.rentofurniture.com/user_sign_up"
-                }
-                className="pt-[14px] pb-[14px]">
+                }>
                 <span className={styles.header_favorite_container}>
                   <Image
                     src={Icons.Favorite}
@@ -279,7 +278,7 @@ const Header = () => {
               </a>
               {/* <Link href={`/cart`}> */}
 
-              <div className="relative pt-[14px] pb-[14px]">
+              <div className="relative">
                 <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}
@@ -299,7 +298,7 @@ const Header = () => {
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
                 <div
-                  className="pt-[14px] pb-[14px]"
+                  className="pt-[14px] pb-[16px]"
                   onMouseLeave={() => {
                     setShowProfileDropdown(false);
                   }}>

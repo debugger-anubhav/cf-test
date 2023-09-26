@@ -1,13 +1,5 @@
-/* .mainContainer {
-  padding-left: 122px;
-  background-color: green;
-} */
 .mainContainer {
-  @apply hidden md:flex flex-col;
-
-  padding-left: 122px;
-  padding-right: 16px;
-  background-color: #f7f9fc;
+  @apply h-full hidden md:flex flex-col pr-4 pl-[70px] xl:pl-[90px] cxl:pl-[122px] font-Poppins bg-[#f7f9fc];
 }
 
 /* .headingLinks {
@@ -20,39 +12,24 @@
     margin: 0px 16px;
   }
 }
-
 .sectionHeadings {
-  @apply text-gray-600 font-Poppins text-14 font-normal;
+  @apply text-6A6A6A font-Poppins text-14 font-normal;
 }
 .userNameText {
-  @apply text-gray-600 font-Poppins text-14 font-medium leading-normal;
-  letter-spacing: -0.28px;
+  @apply text-6A6A6A font-Poppins text-14 font-medium tracking-desc;
 }
-
 .sectionItems {
-  @apply text-gray-700 font-Poppins text-base font-medium;
-  margin: 6px 0px;
-  line-height: 24px;
-  letter-spacing: -0.32px;
+  @apply text-45454A font-Poppins text-base font-medium leading-6 tracking-0.3 my-[6px];
 }
 .sectionItemsActive {
-  @apply font-Poppins text-base font-medium   tracking-tight;
-  color: #5774ac;
-  margin: 6px 0px;
-  line-height: 24px;
+  @apply font-Poppins text-base font-medium leading-6 text-5774AC my-[6px] tracking-tight;
 }
 .firstContainer {
-  @apply mt-8 pb-4 border-b border-dashed;
-  border-color: #dddddf;
+  @apply mt-8 pb-4 border-b border-dashed border-DDDDDF;
 }
 .secondContainer {
-  @apply mt-4 border-b  border-dashed;
-  padding-bottom: 6px;
+  @apply mt-4 border-b pb-[6px] border-dashed;
 }
 .logoutTxt {
-  @apply font-Poppins text-base font-medium;
-  color: #d96060;
-  margin-top: 34px;
-  line-height: 24px;
-  letter-spacing: -0.32px;
+  @apply cursor-pointer font-Poppins text-16 font-medium text-[#d96060] leading-6 tracking-0.3 mt-[34px];
 }

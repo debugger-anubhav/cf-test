@@ -31,7 +31,7 @@
 
 /* for web */
 .main_container_web {
-  @apply hidden font-Poppins lg:flex gap-16 px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] 4xl:px-[160px];
+  @apply hidden font-Poppins lg:flex gap-16 pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:pr-[160px] 4xl:pr-[160px] -mt-6;
 }
 .web_head {
   @apply mt-10 text-45454A text-24 font-medium leading-8 tracking-0.48;
@@ -41,7 +41,7 @@
   border-radius: 0px 8px 8px 0px;
 }
 .card_wrapper {
-  @apply mt-10 flex flex-wrap gap-6;
+  @apply mt-10 flex flex-wrap gap-6 pb-4;
 }
 .card {
   @apply p-6 w-[297px] min-w-[297px] h-[138px] rounded-lg border border-DDDDDF;

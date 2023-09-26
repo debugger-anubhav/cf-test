@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import {FaChevronRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 import cookie from "react-cookies";
+import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 // import {getLocalStorage} from "@/constants/constant";
 
 export default function UserSettings() {
@@ -71,7 +72,10 @@ export default function UserSettings() {
 
       {/* for web view */}
       <div className={styles.main_container_web}>
-        <div className="border border-black min-w-[171px] h-[800px]"></div>
+        {/* <div className="border border-black min-w-[171px] h-[800px]"></div> */}
+        <div className="min-w-fit">
+          <DocSidebar isOverviewSelected={true} />
+        </div>
         <div>
           <h1 className={styles.web_head}>Overview</h1>
           <div className={styles.line_web}></div>
