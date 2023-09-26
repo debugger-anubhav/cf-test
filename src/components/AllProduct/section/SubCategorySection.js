@@ -131,13 +131,13 @@ const Cards = ({subCategory}) => {
               setLocalStorage("subCategoryId", subItem?.id);
               setLocalStorage("categoryId", subItem?.rootID);
             }}>
-            <div
-              className={`${styles.card_div}  w-[79.2px] ms:w-[245px]`}
-              key={index.toString()}>
-              <a
-                href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                  subItem?.seourl
-                }`}>
+            <a
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                .toLowerCase()}/${subItem?.seourl}`}>
+              <div
+                className={`${styles.card_div}  w-[79.2px] ms:w-[245px]`}
+                key={index.toString()}>
                 <img
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
@@ -145,14 +145,14 @@ const Cards = ({subCategory}) => {
                   }
                   className={`${styles.images} !w-full rounded-[6.4px] ms:rounded-none select-none`}
                 />
-              </a>
-            </div>
-            <h3
-              className={`${styles.card_text} ${
-                isDumy && "pointer-events-none"
-              }`}>
-              {subItem?.cat_name}
-            </h3>
+              </div>
+              <h3
+                className={`${styles.card_text} ${
+                  isDumy && "pointer-events-none"
+                }`}>
+                {subItem?.cat_name}
+              </h3>
+            </a>
           </div>
         );
       })}
