@@ -426,7 +426,7 @@ const SubHeader = ({params}) => {
                     .toLowerCase()}/${seoUrl?.seourl}`}
                   target="_self"
                   rel="noopener">
-                  <p className={`${styles.route_text} cursor-pointer`}>
+                  <p className={`${styles.route_text} cursor-pointer `}>
                     {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
                     {category}
                   </p>
@@ -434,7 +434,7 @@ const SubHeader = ({params}) => {
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
-                <p className={styles.route_text}>
+                <p className={`${styles.route_text} !font-medium`}>
                   {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
                   {subCategory}
                 </p>

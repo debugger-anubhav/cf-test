@@ -168,7 +168,7 @@ const ProductCard = ({
                   await notifyAvailibility();
                 }
               }}>
-              {!soldOut ? "Notify Me" : "  Move to Cart"}
+              {!soldOut ? "Notify Me" : "  Move to product page"}
             </button>
           </div>
         </a>

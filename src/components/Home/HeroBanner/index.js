@@ -12,7 +12,7 @@ const HeroBanner = () => {
     <>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
-          <div className="cursor-pointer">
+          <div className={styles.hero_banner_cursor_pointer}>
             <a
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
@@ -24,7 +24,7 @@ const HeroBanner = () => {
               />
             </a>
           </div>
-          <div className="cursor-pointer">
+          <div className={styles.hero_banner_cursor_pointer}>
             <a
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
@@ -36,7 +36,7 @@ const HeroBanner = () => {
               />
             </a>
           </div>
-          <div className="cursor-pointer">
+          <div className={styles.hero_banner_cursor_pointer}>
             <a
               href={`/${homePageReduxData?.cityName
                 .toLowerCase()
