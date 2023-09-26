@@ -3,9 +3,7 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import {Provider} from "react-redux";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {store} from "@/store";
+
 import Footer from "@/components/Common/Footer";
 import loadable from "@loadable/component";
 import {SearchListSkeleton} from "@/components/Search/SearchList/SearchList";
@@ -18,20 +16,14 @@ const SearchList = loadable(
   },
 );
 export default function SearchPage() {
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <div>
-          <AnnouncementBar />
-          <Header />
-          <MenuList />
-          <SearchList />
-          <Footer />
-        </div>
-      </Provider>
+    <div>
+      <AnnouncementBar />
+      <Header />
+      <MenuList />
+      <SearchList />
+      <Footer />
       <Notifications />
-    </QueryClientProvider>
+    </div>
   );
 }
