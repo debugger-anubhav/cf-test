@@ -122,8 +122,8 @@
   @apply hidden md:inline;
 }
 .wishlist_link_wrapper {
-  @apply relative flex gap-2 sm:gap-4 lg:gap-0;
+  @apply relative flex gap-2 items-center sm:gap-4 lg:gap-0;
 }
 .cart_link_wrapper {
-  @apply relative pt-[14px] pb-[14px];
+  @apply relative;
 }
