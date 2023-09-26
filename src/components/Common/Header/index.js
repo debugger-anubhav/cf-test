@@ -154,9 +154,7 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  // const toggleDropdown = () => {
-  //   setShowProfileDropdown(!showProfileDropdown);
-  // };
+
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
@@ -296,9 +294,9 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <a
-                href={"/usersettings"}
+                href={userId ? "/usersettings" : ""}
                 rel="noopner noreferrer"
-                target="_blank"
+                target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
                 <div
                   className="pt-[14px] pb-[14px]"
@@ -311,7 +309,7 @@ const Header = () => {
                     onContextMenu={e => handleContextMenu(e)}
                     className={`${styles.header_profile_icon} relative`}
                     onClick={() => {
-                      if (!decrypt(getLocalStorage("_ga"))) {
+                      if (!userId) {
                         router.push(
                           "https://test.rentofurniture.com/user_sign_up",
                         );
@@ -341,7 +339,6 @@ const Header = () => {
                     }}>
                     <ProfileDropDown
                       setShowProfileDropdown={setShowProfileDropdown}
-                      showProfileDropdown={showProfileDropdown}
                     />
                   </div>
                 )}

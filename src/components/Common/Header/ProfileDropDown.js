@@ -21,7 +21,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
       item: "Profile Settings",
       link: "https://test.rentofurniture.com/usersettings",
     },
-    {item: "Logout", link: "link"},
+    {item: "Logout"},
   ];
   const router = useRouter();
 
@@ -57,7 +57,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
             }`}
             onClick={() => {
               if (index !== items.length - 1) {
-                router.push(ele.link);
+                router.push(ele?.link);
               } else {
                 // remove userid
                 cookie.remove("ci_sessions");
@@ -67,7 +67,6 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
-                router.push("https://test.rentofurniture.com/logout");
               }
             }}>
             {ele.item}
