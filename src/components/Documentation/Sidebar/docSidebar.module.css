@@ -4,7 +4,6 @@
 } */
 .mainContainer {
   @apply hidden md:flex flex-col;
-
   padding-left: 122px;
   padding-right: 16px;
   background-color: #f7f9fc;
@@ -30,13 +29,15 @@
 }
 
 .sectionItems {
-  @apply text-gray-700 font-Poppins text-base font-medium;
+  @apply text-gray-700 font-Poppins  text-base font-medium;
+  width: 179px;
   margin: 6px 0px;
   line-height: 24px;
   letter-spacing: -0.32px;
 }
 .sectionItemsActive {
   @apply font-Poppins text-base font-medium   tracking-tight;
+  width: 179px;
   color: #5774ac;
   margin: 6px 0px;
   line-height: 24px;
