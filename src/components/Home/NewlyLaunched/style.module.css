@@ -3,7 +3,7 @@
 }
 .brown_box {
   @apply justify-center items-center
-   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[181px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border mb-4;
+   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[187px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border mb-4;
 }
 .heading {
   @apply font-Poppins text-20 lg:text-32 font-medium leading-8 tracking-heading text-white w-full lg:w-full pb-4 lg:pb-2;

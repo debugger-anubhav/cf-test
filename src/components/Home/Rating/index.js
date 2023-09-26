@@ -11,13 +11,11 @@ import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {BsFillStarFill} from "react-icons/bs";
 import Rating from "react-rating";
-import {useRouter} from "next/navigation";
 
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
-  const router = useRouter();
 
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const cityIdStr = localStorage
@@ -97,21 +95,26 @@ const CustomerRating = () => {
             </span>
             rating
           </h3>
-          <Image
-            src={HomePageImages.editIcon}
-            alt="editIcon"
-            className={styles.editIcon}
-          />
-          <div
-            className={styles.editBtn}
-            onClick={() =>
-              router.push(
-                "https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU",
-              )
-            }>
-            <EditIcon size={25} />
-            <p className="text-[#222] font-medium">{btntxt}</p>
-          </div>
+
+          <a
+            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
+            target="_blank"
+            rel="noreferrer">
+            <Image
+              src={HomePageImages.editIcon}
+              alt="editIcon"
+              className={styles.editIcon}
+            />
+          </a>
+          <a
+            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
+            target="_blank"
+            rel="noreferrer">
+            <div className={styles.editBtn}>
+              <EditIcon size={25} />
+              <p className="text-[#222] font-medium">{btntxt}</p>
+            </div>
+          </a>
         </div>
         <h3 className={styles.subhead}>{subhead}</h3>
       </div>

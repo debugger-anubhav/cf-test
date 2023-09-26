@@ -120,7 +120,7 @@ const ProductCard = ({
         <button
           className={styles.move_to_cart_btn}
           onClick={() => router.push("/cart")}>
-          Move to Cart
+          Move to product page
         </button>
       </div>
 
