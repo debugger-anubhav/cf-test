@@ -179,11 +179,6 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const handleContextMenu = e => {
-    e.preventDefault(); // Prevent the context menu from opening
-    // ref.current?.click();
-  };
-
   return (
     <>
       <div className={styles.main}>
@@ -237,7 +232,7 @@ const Header = () => {
               </div>
             )}
             {openSearchbar && (
-              <div className="hidden md:inline">
+              <div className={styles.openSearchbar_div}>
                 <SearchModal
                   arr={arr}
                   isOnMobile={isOnMobile}
@@ -247,7 +242,7 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative items-center flex gap-2 sm:gap-4 lg:gap-0">
+            <div className={styles.wishlist_link_wrapper}>
               <a
                 href={
                   userId
@@ -276,9 +271,8 @@ const Header = () => {
                   )}
                 </span>
               </a>
-              {/* <Link href={`/cart`}> */}
 
-              <div className="relative">
+              <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}
@@ -293,7 +287,11 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <a
-                href={userId ? "/usersettings" : ""}
+                href={
+                  userId
+                    ? "/usersettings"
+                    : "https://test.rentofurniture.com/user_sign_up"
+                }
                 rel="noopner noreferrer"
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
@@ -305,15 +303,14 @@ const Header = () => {
                   <Image
                     src={Icons.Profile}
                     alt="profile-icon"
-                    onContextMenu={e => handleContextMenu(e)}
                     className={`${styles.header_profile_icon} relative`}
                     onClick={() => {
-                      if (!userId) {
+                      if (userId) {
+                        router.push("/usersettings");
+                      } else {
                         router.push(
                           "https://test.rentofurniture.com/user_sign_up",
                         );
-                      } else {
-                        router.push("/usersettings");
                       }
                     }}
                     onMouseEnter={e => {

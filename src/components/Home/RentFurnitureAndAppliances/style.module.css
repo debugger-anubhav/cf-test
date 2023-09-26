@@ -55,3 +55,7 @@
 .Skeleton_sub_text {
   @apply text-16 w-2/5;
 }
+
+.skeleton_card_wrapper {
+  @apply lg:h-[300px] md:h-[200px] sm:h-[180px] h-[100px];
+}

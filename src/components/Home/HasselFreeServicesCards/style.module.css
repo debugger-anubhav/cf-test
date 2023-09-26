@@ -17,3 +17,6 @@
 .content {
   @apply flex text-71717A text-16 font-Poppins font-normal leading-6 tracking-0.3 py-2;
 }
+.hassel_heading_wrapper {
+  @apply absolute bottom-4 px-4 3xl:px-8 3xl:pr-20;
+}

@@ -130,7 +130,7 @@ export const RentFurnitureSkeleton = () => {
         {[1, 2, 3, 4, 5, 6].map((item, index) => (
           <div
             key={index.toString()}
-            className={`${styles.card_wrapper} lg:h-[300px] md:h-[200px] sm:h-[180px] h-[100px]`}>
+            className={`${styles.card_wrapper} ${styles.skeleton_card_wrapper}`}>
             <Skeleton variant="rectangular" className="h-full" />
           </div>
         ))}

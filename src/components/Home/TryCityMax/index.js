@@ -122,7 +122,7 @@ export const TryCityMaxSkeleton = () => {
   return (
     <div className={styles.main_wrapper}>
       <div className={styles.left_image_section}>
-        <Skeleton variant="rectangular" className="w-full h-full" />
+        <Skeleton variant="rectangular" className={styles.skeleton_box} />
       </div>
       <div className={`${styles.right_text_section} h-full`}>
         <Skeleton variant="text" className={styles.Skeleton_text} />

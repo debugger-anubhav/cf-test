@@ -145,7 +145,7 @@ export default OffersAndCoupons;
 
 export const OffersSkeleton = () => {
   return (
-    <div className={`flex flex-col my-8 ${styles.wrapper}`}>
+    <div className={`${styles.skeleton_wrapper} ${styles.wrapper}`}>
       <Skeleton variant="text" className={styles.Skeleton_text} />
       <div className={styles.offer_card_skeleton}>
         {[1, 2, 3, 4]?.map((item, index) => (

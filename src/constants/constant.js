@@ -544,8 +544,6 @@ export function getLocalStorage(key) {
   if (typeof window !== "undefined") {
     const data = localStorage.getItem(key);
     return data === "undefined" ? null : JSON.parse(data);
-  } else {
-    return JSON.parse(JSON.stringify({key}));
   }
 }
 export function getLocalStorageString(key, value) {
