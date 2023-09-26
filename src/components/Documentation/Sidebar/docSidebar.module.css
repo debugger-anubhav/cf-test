@@ -1,5 +1,5 @@
 .mainContainer {
-  @apply h-full hidden md:flex flex-col pr-4 pl-[70px] xl:pl-[90px] cxl:pl-[122px] font-Poppins bg-[#f7f9fc];
+  @apply h-full hidden md:flex flex-col  pl-[70px] xl:pl-[90px] cxl:pl-[122px] font-Poppins bg-[#f7f9fc];
 }
 
 /* .headingLinks {
@@ -16,20 +16,24 @@
   @apply text-6A6A6A font-Poppins text-14 font-normal;
 }
 .userNameText {
-  @apply text-6A6A6A font-Poppins text-14 font-medium tracking-desc;
+  @apply text-6A6A6A font-Poppins text-14 font-medium tracking-desc w-[169px] truncate;
 }
 .sectionItems {
-  @apply text-45454A font-Poppins text-base font-medium leading-6 tracking-0.3 my-[6px];
+  @apply text-45454A w-fit pb-[1px] font-Poppins text-base font-medium leading-3 tracking-0.3 my-[18px] hover:pb-0 hover:text-5774AC hover:border-b-[1px] hover:border-b-5774AC cursor-pointer;
 }
 .sectionItemsActive {
-  @apply font-Poppins text-base font-medium leading-6 text-5774AC my-[6px] tracking-tight;
+  @apply font-Poppins text-base font-medium leading-6 text-5774AC my-[6px] tracking-0.3;
 }
 .firstContainer {
   @apply mt-8 pb-4 border-b border-dashed border-DDDDDF;
 }
 .secondContainer {
-  @apply mt-4 border-b pb-[6px] border-dashed;
+  @apply mt-4 border-b pb-[6px] border-dashed pr-4;
+}
+.border_none {
+  @apply !border-b-0 !pb-0;
 }
 .logoutTxt {
-  @apply cursor-pointer font-Poppins text-16 font-medium text-[#d96060] leading-6 tracking-0.3 mt-[34px];
+  @apply w-fit pb-[1px] cursor-pointer font-Poppins text-16 font-medium text-[#d96060] leading-3 tracking-0.3 mt-8
+  hover:pb-0 hover:text-[#d96060] hover:border-b-[1px] hover:border-b-[#d96060];
 }

@@ -24,7 +24,10 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     <div className={styles.mainContainer}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
-        <div className={styles.userNameText}> Pratyush Verma</div>
+        <div className={styles.userNameText}>
+          {" "}
+          Pratyush Verma Verma Verma Verma Verma
+        </div>
         <h2
           className={`${isOverviewSelected ? "!text-5774AC" : "!text-45454A"} ${
             styles.sectionItems
@@ -59,7 +62,10 @@ export default DocSidebar;
 
 const MenuComp = ({list, heading, isActive, setIsActive}) => {
   return (
-    <div className={styles.secondContainer}>
+    <div
+      className={`${heading === "Account" && styles.border_none} ${
+        styles.secondContainer
+      }`}>
       <h2 className={styles.sectionHeadings}>{heading}</h2>
       {list?.map(i => {
         return (
