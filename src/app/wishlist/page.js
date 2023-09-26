@@ -2,9 +2,6 @@
 
 import React from "react";
 import {useParams} from "next/navigation";
-import {store} from "@/store";
-import {Provider} from "react-redux";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import loadable from "@loadable/component";
@@ -17,22 +14,16 @@ const ProductList = loadable(() =>
 );
 
 export default function Wishlist() {
-  const queryClient = new QueryClient();
   const params = useParams();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Provider store={store}>
-        <div className="large_layout">
-          <AnnouncementBar />
-          <Header />
-          <MenuList />
-          <ProductList params={params} />
-          <Footer />
-        </div>
-      </Provider>
+    <div className="large_layout">
+      <AnnouncementBar />
+      <Header />
+      <MenuList />
+      <ProductList params={params} />
+      <Footer />
       <Notifications />
-      {/* <ReactQueryDevtoolsPanel initialIsOpen={false} position={"bottom-left"} /> */}
-    </QueryClientProvider>
+    </div>
   );
 }
