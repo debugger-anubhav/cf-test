@@ -232,7 +232,7 @@ const Header = () => {
               </div>
             )}
             {openSearchbar && (
-              <div className="hidden md:inline">
+              <div className={styles.openSearchbar_div}>
                 <SearchModal
                   arr={arr}
                   isOnMobile={isOnMobile}
@@ -242,7 +242,7 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
+            <div className={styles.wishlist_link_wrapper}>
               <a
                 href={
                   userId
@@ -272,9 +272,8 @@ const Header = () => {
                   )}
                 </span>
               </a>
-              {/* <Link href={`/cart`}> */}
 
-              <div className="relative pt-[14px] pb-[14px]">
+              <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
                   <Image
                     src={Icons.shoppingCard}

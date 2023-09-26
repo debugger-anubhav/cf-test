@@ -45,3 +45,6 @@
 .offer_coupon_skeleton {
   @apply flex mr-4 w-full h-full my-6;
 }
+.skeleton_wrapper {
+  @apply flex flex-col my-8;
+}
