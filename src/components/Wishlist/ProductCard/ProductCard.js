@@ -96,7 +96,7 @@ const ProductCard = ({
               src={hoverCard ? hoverCardImage : cardImage}
               alt={desc.replace(/-/g, " ")}
               className={`${styles.thumbnail} ${
-                isImageHeight && "min-h-[240px]"
+                isImageHeight && "min-h-[272px]"
               }
           `}
             />
@@ -166,6 +166,10 @@ const ProductCard = ({
                   e.preventDefault();
                   e.stopPropagation();
                   await notifyAvailibility();
+                  showToastNotification(
+                    "You will be notified once item is in stock",
+                    2,
+                  );
                 }
               }}>
               {!soldOut ? "Notify Me" : "  Move to product page"}

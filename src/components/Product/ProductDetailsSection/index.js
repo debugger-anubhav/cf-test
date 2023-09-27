@@ -374,6 +374,21 @@ const ProductDetails = ({params}) => {
     console.log("goingg");
     router.push("/cart");
   };
+  const notifyData = {
+    userId: Number(decrypt(getLocalStorage("_ga"))),
+    cityId,
+    productId: Number(params?.productId),
+  };
+  const {mutateAsync: notifyAvailibility} = useMutation(
+    "notify-availability",
+    "POST",
+    endPoints.productPage.notifyAvailability,
+    notifyData,
+  );
+  const handleNotifyMe = async () => {
+    showToastNotification("You will be notified once item is in stock", 2);
+    await notifyAvailibility();
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -447,6 +462,7 @@ const ProductDetails = ({params}) => {
           durationArray={durationArray}
           isLoading={isLoading}
           handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
           handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
@@ -722,7 +738,9 @@ const ProductDetails = ({params}) => {
 
           <button
             onClick={
-              cartItems?.length === 0
+              soldOut
+                ? handleNotifyMe
+                : cartItems?.length === 0
                 ? handleAddToCart
                 : isItemInCart
                 ? handleGoToCart
@@ -730,7 +748,7 @@ const ProductDetails = ({params}) => {
                 ? handleAddToCart
                 : handleNotSameTenure
             }
-            disabled={isLoading || soldOut}
+            disabled={isLoading}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
