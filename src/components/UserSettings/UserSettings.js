@@ -9,20 +9,46 @@ import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 export default function UserSettings() {
   const router = useRouter();
   const Servicesdata = [
-    {head: "My orders", desc: "See all orders & stay updated on their status."},
+    {
+      head: "My orders",
+      desc: "See all orders & stay updated on their status.",
+      link: "https://test.rentofurniture.com/purchases",
+    },
     {
       head: "My Service Requests",
       desc: "Need help with your order or have a request?",
+      link: "https://test.rentofurniture.com/service-requests",
     },
-    {head: "My Payments", desc: "Track your payment & download statement."},
-    {head: "CF coins", desc: "Check CF coins. Use them when ordering."},
-    {head: "My Invoices", desc: "View and pay invoice."},
-    {head: "Referral Code", desc: "Refer a friend and earn 500 CF Coins!"},
+    {
+      head: "My Payments",
+      desc: "Track your payment & download statement.",
+      link: "https://test.rentofurniture.com/payments",
+    },
+    {
+      head: "CF coins",
+      desc: "Check CF coins. Use them when ordering.",
+      link: "https://test.rentofurniture.com/wallet",
+    },
+    {
+      head: "My Invoices",
+      desc: "View and pay invoice.",
+      link: "https://test.rentofurniture.com/invoices",
+    },
+    {
+      head: "Referral Code",
+      desc: "Refer a friend and earn 500 CF Coins!",
+      link: "https://test.rentofurniture.com/referral",
+    },
     {
       head: "KYC & Documentation",
       desc: "Upload your KYC documents for verification.",
+      link: "https://test.rentofurniture.com/documentation",
     },
-    {head: "Profile Settings", desc: "Modify name, email or phone number."},
+    {
+      head: "Profile Settings",
+      desc: "Modify name, email or phone number.",
+      link: "https://test.rentofurniture.com/usersettings",
+    },
     {head: "Your Addresses", desc: "Add or Modify Your Addresses."},
   ];
 
@@ -42,16 +68,22 @@ export default function UserSettings() {
         <div className={styles.services_wrapper}>
           {Servicesdata?.map((ele, index) => {
             return (
-              <div key={index.toString()} className="cursor-pointer">
-                <div className={styles.head_row}>
-                  <p className={styles.head_row_text}>{ele.head}</p>
-                  <div className={styles.chevron_right_icon}>
-                    <FaChevronRight />
+              <a
+                href={ele?.link}
+                target="_blank"
+                rel="noreferrer"
+                key={index.toString()}>
+                <div className="cursor-pointer">
+                  <div className={styles.head_row}>
+                    <p className={styles.head_row_text}>{ele.head}</p>
+                    <div className={styles.chevron_right_icon}>
+                      <FaChevronRight />
+                    </div>
                   </div>
+                  <div className={styles.desc_row}>{ele.desc}</div>
+                  <div className={styles.line_sepration}> </div>
                 </div>
-                <div className={styles.desc_row}>{ele.desc}</div>
-                <div className={styles.line_sepration}> </div>
-              </div>
+              </a>
             );
           })}
           <p
@@ -81,13 +113,19 @@ export default function UserSettings() {
           <div className={styles.line_web}></div>
           <div className={styles.card_wrapper}>
             {Servicesdata?.map((item, index) => (
-              <div className={styles.card} key={index}>
-                <div className={styles.card_first_row}>
-                  <img src="" className={styles.card_icon} />
-                  <p className={styles.card_head}>{item.head}</p>
+              <a
+                href={item?.link}
+                target="_blank"
+                rel="noreferrer"
+                key={index.toString()}>
+                <div className={styles.card}>
+                  <div className={styles.card_first_row}>
+                    <img src="" className={styles.card_icon} />
+                    <p className={styles.card_head}>{item.head}</p>
+                  </div>
+                  <p className={styles.card_desc}>{item.desc}</p>
                 </div>
-                <p className={styles.card_desc}>{item.desc}</p>
-              </div>
+              </a>
             ))}
           </div>
         </div>
