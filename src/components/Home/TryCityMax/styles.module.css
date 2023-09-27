@@ -72,30 +72,23 @@
 .Skeleton_button {
   @apply h-20 w-60;
 }
-
-.drawer_wrapper {
+/* .drawer_wrapper {
   @apply sm:min-w-[560px] min-w-full w-[100%] sm:w-[560px] flex;
 }
 .sidebar_wrapper {
   @apply w-full p-[48px] pr-0 flex;
-}
-.right {
-  @apply flex py-[48px];
-}
-.left {
-  @apply flex flex-col;
-}
+} */
 .sidebar_header {
   @apply flex justify-between;
 }
 .sidebar_header_subheading {
-  @apply text-base text-9A9AA2 font-Poppins font-medium leading-5;
+  @apply text-14 lg:text-16 text-9A9AA2 font-Poppins font-medium leading-5 tracking-desc lg:tracking-0.3;
 }
 .sidebar_header_heading {
-  @apply text-24 font-Poppins text-45454A font-medium leading-8;
+  @apply text-20 lg:text-24 font-Poppins text-45454A font-medium leading-8;
 }
 .sidebar_benefit_wrapper {
-  @apply py-8 flex w-full;
+  @apply py-4 md:py-8 flex w-full;
 }
 .sidebar_number {
   @apply flex;
@@ -107,10 +100,10 @@
   @apply flex flex-col w-full ml-3;
 }
 .sidebar_detail_heading {
-  @apply font-Poppins text-222 text-20 font-medium leading-6;
+  @apply font-Poppins text-222 text-16 lg:text-20 font-medium leading-6 tracking-0.3 lg:tracking-0.4;
 }
 .sidebar_detail_subheading {
-  @apply text-base text-71717A font-Poppins font-normal leading-[24px] pt-1;
+  @apply text-14 lg:text-16 text-71717A font-Poppins font-normal leading-[24px] pt-1 tracking-0.3;
 }
 .rupeeIcon {
   @apply font-Inter;
@@ -123,4 +116,13 @@
 }
 .drawer_map_wrapper {
   @apply flex flex-col  items-center w-full justify-center;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.drawer_main_container {
+  @apply h-[90vh] md:h-full w-full md:w-[530px]  py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
 }

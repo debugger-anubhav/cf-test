@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
 import {useRouter} from "next/navigation";
-import SideDrawer from "./sideDrawer";
+import CityMaxDrawer from "./cityMaxDrawer";
+// import SideDrawer from "./sideDrawer";
 
 const TryCityMax = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const router = useRouter();
   const benefitsOfCity = [
     {
@@ -39,6 +42,10 @@ const TryCityMax = () => {
         "You can pay subscription fee in one go or opt for our no cost EMI plan",
     },
   ];
+
+  const HandleToggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
   return (
     <>
       <div className={styles.main_wrapper}>
@@ -107,7 +114,25 @@ const TryCityMax = () => {
                 );
               })}
             </div>
-            <SideDrawer />
+            <div>
+              <button
+                className={styles.how_it_works_button}
+                onClick={HandleToggleDrawer}>
+                <p className={styles.how_it_works_paragraph}>How it works</p>
+                <ForwardArrow
+                  size={18}
+                  color={"#597492"}
+                  className={styles.forward_arrow}
+                />
+              </button>
+            </div>
+            {isDrawerOpen && (
+              <CityMaxDrawer
+                toggleDrawer={HandleToggleDrawer}
+                open={isDrawerOpen}
+              />
+            )}
+            {/* <SideDrawer /> */}
             <hr className={styles.underline} />
           </div>
         </div>
