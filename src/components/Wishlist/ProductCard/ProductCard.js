@@ -96,7 +96,7 @@ const ProductCard = ({
               src={hoverCard ? hoverCardImage : cardImage}
               alt={desc.replace(/-/g, " ")}
               className={`${styles.thumbnail} ${
-                isImageHeight && "min-h-[240px]"
+                isImageHeight && "min-h-[272px]"
               }
           `}
             />
