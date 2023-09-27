@@ -1,5 +1,6 @@
 import React from "react";
 import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
+import {AiOutlineArrowRight, AiOutlineDelete} from "react-icons/ai";
 import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {
   IoClose,
@@ -50,7 +51,6 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
-import {AiOutlineDelete} from "react-icons/ai";
 import {FaRegCalendar} from "react-icons/fa";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
@@ -287,4 +287,7 @@ export const CalendarIcon = ({size, color, className}) => (
 
 export const VerifiedIcon = ({size, color, className}) => (
   <LuVerified size={size} color={color} className={className} />
+);
+export const OutlineArrowRight = ({size, color, className}) => (
+  <AiOutlineArrowRight size={size} color={color} className={className} />
 );

@@ -59,8 +59,6 @@
   @apply mt-4 md:mt-0;
 }
 
-
 .saveBtn {
-    @apply mt-3 md:mt-0 mb-4 md:mb-0;
-  }
-  
+  @apply mt-3 md:mt-0 mb-4 md:mb-0;
+}

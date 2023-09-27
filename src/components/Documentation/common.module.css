@@ -15,7 +15,7 @@
 }
 
 .basicInputStyles {
-  @apply bg-white border w-full rounded-xl h-11 md:h-14   font-Poppins md:text-16 text-14 font-normal py-3 px-4;
+  @apply bg-white border w-full rounded-xl    font-Poppins md:text-16 text-14 font-normal py-3 px-4;
   letter-spacing: -0.32px;
   line-height: normal;
   max-width: 502px;

@@ -1,17 +1,17 @@
 import React, {useState} from "react";
 import styles from "./DropDown.module.css";
-import downArrowDD from "@/assets/common_icons/downArrowDD.svg";
-import upArrowDD from "@/assets/common_icons/upArrowDD.svg";
-import Image from "next/image";
+import {DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 const DropDown = ({
   handleSelectChange,
   // selectedOption,
   style,
   useDefaultStyle,
   options,
+  setIsDDOpen,
+  setSelectedOption,
+  selectedOption,
 }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleOptionClick = option => {
     setSelectedOption(option);
@@ -25,17 +25,19 @@ const DropDown = ({
         className={`${styles["selected-option"]} ${
           !isOpen ? "border-none" : "!border-[#DDDDDF]"
         }`}
-        onClick={() => setIsOpen(!isOpen)}>
+        onClick={() => {
+          setIsDDOpen(prev => !prev);
+          setIsOpen(!isOpen);
+        }}>
         <span> {selectedOption || "Select an option"}</span>
         <div className={`${styles.ddArrow}`}>
-          {isOpen ? (
-            <Image src={downArrowDD} className={`${styles.ddArrow}`} />
-          ) : (
-            <Image src={upArrowDD} className={`${styles.ddArrow}`} />
-          )}
+          {isOpen ? <DownPopUpArrow size={25} /> : <PopUpArrow size={25} />}
         </div>
       </div>
-      <ul className={isOpen ? styles.options : styles.optionsActive}>
+      <ul
+        className={`${
+          isOpen ? styles.options : styles.optionsActive
+        } !hidden !md:block`}>
         {options.map((option, index) => (
           <li
             className={`${styles.option} ${

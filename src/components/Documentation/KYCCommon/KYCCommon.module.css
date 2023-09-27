@@ -78,3 +78,18 @@
 .close_icon_btn {
   @apply flex justify-start flex-col  pl-8;
 }
+
+.options {
+  @apply hidden absolute bg-white border-b  list-none p-0;
+  border-bottom: 1px solid var(--grey-grey-300, #dddddf);
+}
+
+.option {
+  @apply p-2 cursor-pointer border-b bg-white font-Poppins text-base font-normal py-3 px-4;
+  letter-spacing: -0.32px;
+  line-height: normal;
+  border-bottom: 1px solid var(--grey-grey-300, #dddddf);
+}
+.optionsActive {
+  @apply block;
+}

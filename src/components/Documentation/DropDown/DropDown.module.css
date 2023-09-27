@@ -25,7 +25,7 @@
 
 /* CustomSelect.module.css */
 .custom-select {
-  @apply relative bg-white  rounded-xl;
+  @apply  bg-white  rounded-xl;
   max-width: 502px;
 }
 
@@ -56,5 +56,5 @@
 }
 
 .ddArrow {
-  @apply !inline-block;
+  @apply !inline-block ;
 }

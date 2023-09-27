@@ -1,11 +1,9 @@
 import React from "react";
-import styles from "./KYC10.module.css";
+import styles from "./KYCCommon.module.css";
 import commonStyles from "../common.module.css";
 import DropDown from "../DropDown/DropDown";
-import forwardArrow from "@/assets/common_icons/proceedArrow.svg";
-import Image from "next/image";
+import {OutlineArrowRight, Close} from "@/assets/icon";
 import {Box, Modal, Typography} from "@mui/material";
-import {Close} from "@/assets/icon";
 
 // import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 // let src;
@@ -14,8 +12,12 @@ import {Close} from "@/assets/icon";
 // } else {
 //   src = 767;
 // }
-const KYC10 = () => {
+const KYCCommon = () => {
   const [deleteIconClick, setDeleteIconClick] = React.useState(true);
+  const [isDDOpen, setIsDDOpen] = React.useState(false);
+  const [selectedArr, setSelectedArr] = React.useState([]);
+  const [selectedOption, setSelectedOption] = React.useState(null);
+  console.log(isDDOpen);
   // const [windowWidth, setWindowWidth] = useState(src);
   // const [state, setState] = React.useState({
   //   top: false,
@@ -51,9 +53,19 @@ const KYC10 = () => {
 
   //   setState({...state, [anchor]: open});
   // };
+  const idOptions = [
+    {label: "Passport - Front & back", value: "Passport - Front & back"},
+    {label: "Driving license", value: "Driving license"},
+    {label: "AADHAR card - Front & back", value: "AADHAR card - Front & back"},
+    {label: "Voter ID - Front & back", value: "Voter ID - Front & back"},
+  ];
+
+  const handleOptionClick = option => {
+    setSelectedOption(option);
+  };
 
   return (
-    <div>
+    <div className="relative">
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
       </div>
@@ -67,8 +79,16 @@ const KYC10 = () => {
           Please provide one ID to fetch your credit score
         </span>
       </div>
-      <div className={`${styles.formInputFirst}`}>
-        <DropDown options={[]} />
+      <div
+        className={`${styles.formInputFirst}`}
+        onClick={() => {
+          setSelectedArr(idOptions);
+        }}>
+        <DropDown
+          options={idOptions}
+          setIsDDOpen={setIsDDOpen}
+          selectedOption={selectedOption}
+        />
       </div>
       <div className={`${styles.formInputSecond}`}>
         <input
@@ -100,7 +120,10 @@ const KYC10 = () => {
           </span>
         </div>
       </div>
-      <div className={`${styles.btnGroupContainer} `}>
+      <div
+        className={`${styles.btnGroupContainer} `}
+        // style={isDDOpen ? { display: "none" } : {}}
+      >
         <div className={`${styles.btnGroup} `}>
           <button
             className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
@@ -110,7 +133,7 @@ const KYC10 = () => {
             disabled
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>
-            <Image src={forwardArrow} alt="Forward Arrow Icon" />
+            <OutlineArrowRight />
           </button>
         </div>
       </div>
@@ -134,6 +157,26 @@ const KYC10 = () => {
         }}>
         <div>Hola</div>
       </SwipeableDrawer> */}
+      <div className="relative md:hidden bottom-0 bg-slate-400 z-10 bg-slate-400 w-screen h-full">
+        <div className="absolute bottom-0 ">
+          <ul
+          // className={isDDOpen ? styles.options : styles.optionsActive}
+          >
+            {selectedArr.map((option, index) => (
+              <li
+                className={`${styles.option} ${
+                  index === selectedArr.length - 1
+                    ? "rounded-b-xl border-none"
+                    : ""
+                } ${index === 0 ? "border-t" : ""}`}
+                key={index}
+                onClick={() => handleOptionClick(option)}>
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <Modal
         open={deleteIconClick}
         onClose={() => setDeleteIconClick(false)}
@@ -190,4 +233,4 @@ const KYC10 = () => {
   );
 };
 
-export default KYC10;
+export default KYCCommon;
