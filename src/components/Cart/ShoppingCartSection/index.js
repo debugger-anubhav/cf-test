@@ -399,7 +399,7 @@ const ShoppingCartSection = ({setTab}) => {
                         cityShieldDiscount={cityShieldDiscountPercentage}
                         toggleDrawer={toggleDrawerCityShield}
                         open={cityShieldDrawerOpen}
-                        toggleCheckbox={() => setIsChecked(false)}
+                        toggleCheckbox={bool => setIsChecked(bool)}
                       />
                     )}
                   </div>
