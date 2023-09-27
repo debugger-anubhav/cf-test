@@ -62,42 +62,43 @@ export default function SideDrawer() {
       // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}>
       <div className={styles.sidebar_wrapper}>
-        <div className={styles.sidebar_header}>
-          <div className="flex flex-col">
-            <p className={styles.sidebar_header_subheading}>CityMax</p>
-            <p className={styles.sidebar_header_heading}>How it works</p>
+        <div className={styles.left}>
+          <div className={styles.sidebar_header}>
+            <div className="flex flex-col">
+              <p className={styles.sidebar_header_subheading}>CityMax</p>
+              <p className={styles.sidebar_header_heading}>How it works</p>
+            </div>
           </div>
-          <div
-            className="w-fit cursor-pointer"
-            onClick={e => {
-              toggleDrawer(anchor, false)(e);
-            }}>
-            <Close
-              size={25}
-              color={"#45454A"}
-              // onClick={e => {
-              //   console.log("click1", e.currentTarget);
-              //   toggleDrawer(anchor, false);
-              //   console.log("click2");
-              // }}
-            />
-          </div>
+          {sidebarDetail?.map((item, index) => (
+            <div className={styles.drawer_map_wrapper} key={index.toString()}>
+              <div className={styles.sidebar_benefit_wrapper}>
+                <div className={styles.sidebar_number}>
+                  <p>{index + 1}</p>
+                </div>
+                <div className={styles.sidebar_detailing}>
+                  <p className={styles.sidebar_detail_heading}>
+                    {item.heading}
+                  </p>
+                  <p className={styles.sidebar_detail_subheading}>
+                    {item.subheading}
+                  </p>
+                </div>
+              </div>
+              {index !== sidebarDetail?.length - 1 && (
+                <div className={styles.divider}></div>
+              )}
+            </div>
+          ))}
         </div>
-        {sidebarDetail?.map((item, index) => (
-          <div
-            className={styles.sidebar_benefit_wrapper}
-            key={index.toString()}>
-            <div className={styles.sidebar_number}>
-              <p>{index + 1}</p>
-            </div>
-            <div className={styles.sidebar_detailing}>
-              <p className={styles.sidebar_detail_heading}>{item.heading}</p>
-              <p className={styles.sidebar_detail_subheading}>
-                {item.subheading}
-              </p>
-            </div>
-          </div>
-        ))}
+      </div>
+      <div className={styles.right}>
+        <div
+          className="w-fit cursor-pointer px-8"
+          onClick={e => {
+            toggleDrawer(anchor, false)(e);
+          }}>
+          <Close size={25} color={"#45454A"} />
+        </div>
       </div>
     </div>
   );

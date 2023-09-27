@@ -3,7 +3,7 @@
 }
 .brown_box {
   @apply justify-center items-center
-   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[181px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border mb-4;
+   bg-[#9B4A4A] rounded-lg px-6 py-[26px] h-[187px] lg:h-auto min-w-[141px] md:min-w-[220px] lg:min-w-[340px] macbook:min-w-[372px] border mb-4;
 }
 .heading {
   @apply font-Poppins text-20 lg:text-32 font-medium leading-8 tracking-heading text-white w-full lg:w-full pb-4 lg:pb-2;
@@ -12,7 +12,7 @@
   @apply font-Poppins text-14 lg:text-16 font-medium leading-5 tracking-desc text-white w-1/2;
 }
 .price_tag {
-  @apply absolute bg-[#ffffffcc] px-[12px] py-[6px] border top-2 left-2;
+  @apply absolute bg-[#ffffffcc]  text-[#3E688E] font-medium px-[12px] py-[6px]  top-2 left-2 tracking-[0.24px];
 }
 .img {
   @apply w-full h-full rounded-lg lg:rounded-[4px] gap-4;
