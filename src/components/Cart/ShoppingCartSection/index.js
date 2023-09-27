@@ -29,6 +29,8 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  setCityShield,
+  setCoinsApplied,
   // setCityShield,
   //  getCartItems
 } from "@/store/Slices";
@@ -98,14 +100,14 @@ const ShoppingCartSection = ({setTab}) => {
   ];
   const modeOfPayment = getLocalStorage("isMonthly");
 
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(data.isCityShield);
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(
     data.couponCodeUsed !== "",
   );
-  const [isCoinApplied, setIsCoinApplied] = useState(false);
+  const [isCoinApplied, setIsCoinApplied] = useState(data.isCoinApplied);
   const [availCoin, setAvailCoin] = useState(0);
   const [isMonthly, setIsMonthly] = useState(
     modeOfPayment === null ? true : modeOfPayment,
@@ -232,8 +234,9 @@ const ShoppingCartSection = ({setTab}) => {
       );
       dispatch(getBillDetails(res?.data?.data));
       // setCode(res?.data?.data?.couponsCode);
-      getCouponCodeUsed(res?.data?.data?.couponsCode);
-      // setCityShield(res?.data?.data?.cartSubTotalList);
+      dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
+      dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
+      dispatch(setCityShield(res?.data?.data?.cityshield));
     } catch (err) {
       console.log(err);
     }

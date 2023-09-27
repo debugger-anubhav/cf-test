@@ -8,6 +8,7 @@ const StickyBottomBar = ({
   durationArray,
   handleAddToCart,
   handleGoToCart,
+  handleNotifyMe,
   isLoading,
   isItemInCart,
   soldOut,
@@ -63,7 +64,9 @@ const StickyBottomBar = ({
 
       <button
         onClick={
-          cartItems?.length === 0
+          soldOut
+            ? handleNotifyMe
+            : cartItems?.length === 0
             ? handleAddToCart
             : isItemInCart
             ? () => router.push("/cart")
@@ -72,7 +75,7 @@ const StickyBottomBar = ({
             : handleNotSameTenure
         }
         style={{width: "232px", marginTop: "0px"}}
-        disabled={isLoading || isItemInCart || soldOut}
+        disabled={isLoading || isItemInCart}
         className={styles.btn}>
         {isLoading ? (
           <div className={styles.spinner} />

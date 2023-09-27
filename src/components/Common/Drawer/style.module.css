@@ -39,7 +39,7 @@
   @apply flex flex-col xs:w-[110px] w-[81px] cursor-pointer p-2 h-[104px] my-4;
 }
 .city_thambnil {
-  @apply flex rounded-md w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-md;
+  @apply flex rounded-[6px] w-full p-1 hover:border-[2px] hover:border-primary hover:rounded-[6px];
 }
 .city_name {
   @apply flex text-12 sm:text-14 font-Poppins items-center justify-center pt-2 capitalize text-center;

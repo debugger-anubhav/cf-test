@@ -67,6 +67,7 @@ const ProductDetails = ({params}) => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [durationArray, setDurationArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 0, value: ""});
   const [inWishList, setInWishList] = React.useState(
@@ -74,7 +75,6 @@ const ProductDetails = ({params}) => {
       ?.map(obj => obj.id)
       .includes(parseInt(params.productId)),
   );
-  const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
@@ -116,7 +116,7 @@ const ProductDetails = ({params}) => {
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [showBottomBar]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -374,6 +374,9 @@ const ProductDetails = ({params}) => {
     console.log("goingg");
     router.push("/cart");
   };
+  const handleNotifyMe = () => {
+    showToastNotification("You will be notified once item is in stock", 2);
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -439,7 +442,7 @@ const ProductDetails = ({params}) => {
         params={params}
         title={prodDetails?.[0]?.product_name}
       />
-      {/* {console.log(showBottomBar)} */}
+
       {showBottomBar && (
         <StickyBottomBar
           productName={prodDetails?.[0]?.product_name}
@@ -447,6 +450,7 @@ const ProductDetails = ({params}) => {
           durationArray={durationArray}
           isLoading={isLoading}
           handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
           handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
@@ -674,53 +678,57 @@ const ProductDetails = ({params}) => {
               ))}
             </div>
 
-            <div className={styles.deposit_div}>
-              <div>
-                <p className={styles.deposit_txt}>Monthly Rent</p>
-                <div className={styles.flexx}>
-                  <p className={styles.currentPrice}>
-                    <span className={styles.rupeeIcon}>₹</span>
-                    {durationArray?.[duration.currentIndex]?.attr_price}
-                  </p>
-                  {/* {durationArray?.[0]?.attr_price >
+            {durationArray.length > 0 && (
+              <div className={styles.deposit_div}>
+                <div>
+                  <p className={styles.deposit_txt}>Monthly Rent</p>
+                  <div className={styles.flexx}>
+                    <p className={styles.currentPrice}>
+                      <span className={styles.rupeeIcon}>₹</span>
+                      {durationArray?.[duration.currentIndex]?.attr_price}
+                    </p>
+                    {/* {durationArray?.[0]?.attr_price >
                     durationArray?.[duration.currentIndex]?.attr_price && ( */}
-                  <p
-                    className={styles.originalPrice}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    <span className={styles.rupeeIcon}>₹</span>
-                    {durationArray?.[0]?.attr_price}
-                  </p>
-                  {/* )} */}
+                    <p
+                      className={styles.originalPrice}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      <span className={styles.rupeeIcon}>₹</span>
+                      {durationArray?.[0]?.attr_price}
+                    </p>
+                    {/* )} */}
 
-                  <div
-                    className={styles.discount}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    {`-${Math.round(
-                      ((durationArray?.[0]?.attr_price -
-                        durationArray?.[duration.currentIndex]?.attr_price) *
-                        100) /
-                        durationArray?.[0]?.attr_price,
-                    ).toFixed(0)}% OFF`}
+                    <div
+                      className={styles.discount}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      {`-${Math.round(
+                        ((durationArray?.[0]?.attr_price -
+                          durationArray?.[duration.currentIndex]?.attr_price) *
+                          100) /
+                          durationArray?.[0]?.attr_price,
+                      ).toFixed(0)}% OFF`}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* <span className="text-[#9C9C9C]">+</span>
+                {/* <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
                 <p className={styles.currentPrice}>
                  <span className={styles.rupeeIcon}>₹</span>0
                 </p>
               </div> */}
-            </div>
+              </div>
+            )}
           </div>
 
           <button
             onClick={
-              cartItems?.length === 0
+              soldOut
+                ? handleNotifyMe
+                : cartItems?.length === 0
                 ? handleAddToCart
                 : isItemInCart
                 ? handleGoToCart
@@ -728,7 +736,7 @@ const ProductDetails = ({params}) => {
                 ? handleAddToCart
                 : handleNotSameTenure
             }
-            disabled={isLoading || soldOut}
+            disabled={isLoading}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
