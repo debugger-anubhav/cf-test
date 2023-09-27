@@ -3,7 +3,6 @@ import {toast} from "react-toastify";
 import styles from "./styles.module.css";
 
 export const showToastNotification = (message, type) => {
-  console.log("fdvb");
   //  Type Specification :-
   //  type = 1 indicates green color
   //  type = 2 indicates yellow color

@@ -374,6 +374,9 @@ const ProductDetails = ({params}) => {
     console.log("goingg");
     router.push("/cart");
   };
+  const handleNotifyMe = () => {
+    showToastNotification("You will be notified once item is in stock", 2);
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -447,6 +450,7 @@ const ProductDetails = ({params}) => {
           durationArray={durationArray}
           isLoading={isLoading}
           handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
           handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
@@ -720,7 +724,9 @@ const ProductDetails = ({params}) => {
 
           <button
             onClick={
-              cartItems?.length === 0
+              soldOut
+                ? handleNotifyMe
+                : cartItems?.length === 0
                 ? handleAddToCart
                 : isItemInCart
                 ? handleGoToCart
@@ -728,7 +734,7 @@ const ProductDetails = ({params}) => {
                 ? handleAddToCart
                 : handleNotSameTenure
             }
-            disabled={isLoading || soldOut}
+            disabled={isLoading}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (

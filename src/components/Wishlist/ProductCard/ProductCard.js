@@ -166,6 +166,10 @@ const ProductCard = ({
                   e.preventDefault();
                   e.stopPropagation();
                   await notifyAvailibility();
+                  showToastNotification(
+                    "You will be notified once item is in stock",
+                    2,
+                  );
                 }
               }}>
               {!soldOut ? "Notify Me" : "  Move to product page"}

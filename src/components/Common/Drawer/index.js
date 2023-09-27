@@ -267,7 +267,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
                     className={`${styles.city_thambnil} ${
-                      cityId === city?.id && "border-[2px] border-primary"
+                      cityId === city?.id &&
+                      "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                     }`}
                     alt="city-image"
                   />
