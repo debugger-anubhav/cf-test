@@ -249,20 +249,32 @@ const Header = () => {
                     ? "/wishlist"
                     : "https://test.rentofurniture.com/user_sign_up"
                 }>
-                <span className={styles.header_favorite_container}>
+                <div
+                  className={`w-100 h-100 absolute z-10`}
+                  onClick={() => {
+                    if (userId) {
+                      router.push("/wishlist");
+                    } else {
+                      router.push(
+                        "https://test.rentofurniture.com/user_sign_up",
+                      );
+                    }
+                  }}></div>
+                <span
+                  className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
-                    onClick={() => {
-                      if (userId) {
-                        router.push("/wishlist");
-                      } else {
-                        router.push(
-                          "https://test.rentofurniture.com/user_sign_up",
-                        );
-                      }
-                    }}
+                    // onClick={() => {
+                    //   if (userId) {
+                    //     router.push("/wishlist");
+                    //   } else {
+                    //     router.push(
+                    //       "https://test.rentofurniture.com/user_sign_up",
+                    //     );
+                    //   }
+                    // }}
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 ? (
                     <span className={styles.cart_badge}>{wishListCount}</span>
@@ -274,11 +286,14 @@ const Header = () => {
 
               <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
+                  <div
+                    className={`w-100 h-100 absolute z-10`}
+                    onClick={() => router.push("/cart")}></div>
                   <Image
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
-                    className={styles.header_shopping_card}
-                    onClick={() => router.push("/cart")}
+                    className={`${styles.header_shopping_card} relative z-[-1]`}
+                    // onClick={() => router.push("/cart")}
                   />
                   {cartItemsLength > 0 && (
                     <div className={styles.cart_badge}>{cartItemsLength}</div>
@@ -296,14 +311,12 @@ const Header = () => {
                 target={userId ? "_itSelf" : "_blank"}
                 aria-label="profile">
                 <div
-                  className="pt-[14px] pb-[16px]"
+                  className={`pt-[14px] pb-[16px] ${styles.test}`}
                   onMouseLeave={() => {
                     setShowProfileDropdown(false);
                   }}>
-                  <Image
-                    src={Icons.Profile}
-                    alt="profile-icon"
-                    className={`${styles.header_profile_icon} relative`}
+                  <div
+                    className={`w-100 h-100 absolute z-10`}
                     onClick={() => {
                       if (userId) {
                         router.push("/usersettings");
@@ -312,7 +325,16 @@ const Header = () => {
                           "https://test.rentofurniture.com/user_sign_up",
                         );
                       }
+                    }}></div>
+                  <Image
+                    src={Icons.Profile}
+                    alt="profile-icon"
+                    className={`${styles.header_profile_icon} relative z-[-1]`}
+                    onClick={e => e.preventDefault()}
+                    onContextMenu={e => {
+                      e.preventDefault();
                     }}
+                    aria-disabled={true}
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
