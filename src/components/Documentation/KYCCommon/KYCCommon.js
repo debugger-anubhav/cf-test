@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./KYCCommon.module.css";
 import commonStyles from "../common.module.css";
 import DropDown from "../DropDown/DropDown";
 import {OutlineArrowRight, Close} from "@/assets/icon";
-import {Box, Modal, Typography} from "@mui/material";
+import {
+  Box,
+  Modal,
+  Typography,
+  createTheme,
+  useMediaQuery,
+} from "@mui/material";
+import SelectionCircle from "../SelectionCircle/SelectionCircle";
+
+// import axios from "axios";
+// import { baseURL } from "@/network/axios";
+// import { endPoints } from "@/network/endPoints";
 
 // import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 // let src;
@@ -12,12 +23,35 @@ import {Box, Modal, Typography} from "@mui/material";
 // } else {
 //   src = 767;
 // }
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      md: 768, // Set the 'md' breakpoint to 768 pixels
+    },
+  },
+});
 const KYCCommon = () => {
-  const [deleteIconClick, setDeleteIconClick] = React.useState(true);
-  const [isDDOpen, setIsDDOpen] = React.useState(false);
-  const [selectedArr, setSelectedArr] = React.useState([]);
-  const [selectedOption, setSelectedOption] = React.useState(null);
-  console.log(isDDOpen);
+  const [deleteIconClick, setDeleteIconClick] = useState(false);
+  const [isDDOpen, setIsDDOpen] = useState(false);
+  const [selectedArr, setSelectedArr] = useState([]);
+  const [selectedOption, setSelectedOption] = useState({
+    label: "Passport ",
+    value: "Passport ",
+  });
+  const [formData, setFormData] = useState({
+    idType: "",
+    idNumber: "",
+    dob: "",
+    termsAccepted: false,
+  });
+  const [formErrors, setFormErrors] = useState({
+    idType: "",
+    idNumber: "",
+    dob: "",
+    termsAccepted: "",
+  });
+
+  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   // const [windowWidth, setWindowWidth] = useState(src);
   // const [state, setState] = React.useState({
   //   top: false,
@@ -54,16 +88,60 @@ const KYCCommon = () => {
   //   setState({...state, [anchor]: open});
   // };
   const idOptions = [
-    {label: "Passport - Front & back", value: "Passport - Front & back"},
+    {label: "Passport ", value: "Passport "},
     {label: "Driving license", value: "Driving license"},
-    {label: "AADHAR card - Front & back", value: "AADHAR card - Front & back"},
-    {label: "Voter ID - Front & back", value: "Voter ID - Front & back"},
+    {label: "AADHAR card ", value: "AADHAR card "},
+    {label: "Voter ID ", value: "Voter ID "},
   ];
-
+  // const getOption = () => {
+  //   axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
+  // };
   const handleOptionClick = option => {
     setSelectedOption(option);
   };
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.idType) {
+      errors.idType = "Please select an ID type.";
+    }
+    if (!formData.idNumber) {
+      errors.idNumber = "Please enter your ID number.";
+    }
+    if (!formData.dob) {
+      errors.dob = "Please enter your date of birth.";
+    }
+    if (!formData.termsAccepted) {
+      errors.termsAccepted = "You must accept the terms and conditions.";
+    }
+    return errors;
+  };
+  const handleInputChange = e => {
+    const {name, value} = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
+  const handleCheckboxChange = e => {
+    const {name, checked} = e.target;
+    setFormData({
+      ...formData,
+      [name]: checked,
+    });
+  };
+  const handleSubmit = () => {
+    const errors = validateForm();
+    setFormErrors(errors);
+    if (Object.keys(errors).length === 0) {
+      // Form is valid, submit the data or perform any necessary action
+      // You can send the formData to your API here
+    } else {
+      // Form has errors, handle them as needed
+      // For example, display error messages or prevent submission
+    }
+  };
+  console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
       <div className={`${styles.stepHeading}`}>
@@ -88,13 +166,15 @@ const KYCCommon = () => {
           options={idOptions}
           setIsDDOpen={setIsDDOpen}
           selectedOption={selectedOption}
+          isOpen={isDDOpen}
+          setSelectedOption={setSelectedOption}
         />
       </div>
       <div className={`${styles.formInputSecond}`}>
         <input
           type="text"
           className={`${commonStyles.basicInputStyles}`}
-          placeholder="Enter PAN number"
+          placeholder={`Enter ${selectedOption.value} Number`}
         />
       </div>
       <div className={`${styles.formHeadingThird}`}>
@@ -120,6 +200,9 @@ const KYCCommon = () => {
           </span>
         </div>
       </div>
+      {formErrors.termsAccepted && (
+        <div className="text-red-500">{formErrors.termsAccepted}</div>
+      )}
       <div
         className={`${styles.btnGroupContainer} `}
         // style={isDDOpen ? { display: "none" } : {}}
@@ -131,6 +214,7 @@ const KYCCommon = () => {
           </button>
           <button
             disabled
+            onClick={handleSubmit}
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>
             <OutlineArrowRight />
@@ -157,25 +241,70 @@ const KYCCommon = () => {
         }}>
         <div>Hola</div>
       </SwipeableDrawer> */}
-      <div className="relative md:hidden bottom-0 bg-slate-400 z-10 bg-slate-400 w-screen h-full">
-        <div className="absolute bottom-0 ">
-          <ul
-          // className={isDDOpen ? styles.options : styles.optionsActive}
-          >
+      {/* <div className="relative md:hidden top-0 bg-slate-400 z-10 mx-4 ">
+        <div className="absolute w- bottom-0 ">
+          <ul className={isDDOpen ? styles.optionsActive : styles.options}>
             {selectedArr.map((option, index) => (
               <li
-                className={`${styles.option} ${
+                className={`${styles.option}  ${
                   index === selectedArr.length - 1
                     ? "rounded-b-xl border-none"
                     : ""
                 } ${index === 0 ? "border-t" : ""}`}
                 key={index}
                 onClick={() => handleOptionClick(option)}>
-                {option.label}
+                <span>{option.label}</span> <SelectionCircle showInner={true} />
               </li>
             ))}
           </ul>
         </div>
+      </div> */}
+      <div className="md:hidden">
+        {isMdScreen && (
+          <Modal
+            open={isDDOpen}
+            onClose={() => setIsDDOpen(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            disableRestoreFocus
+            disableEnforceFocus
+            disableAutoFocus>
+            <div className={`${styles.dropdown_container} `}>
+              <div className={`${styles.dropdown_heading} `}>
+                Please provide one ID to fetch your credit score
+              </div>
+              <ul
+                className={`${
+                  isDDOpen ? styles.optionsActive : styles.options
+                } `}>
+                {selectedArr.map((option, index) => (
+                  <li
+                    className={`${styles.option} ${
+                      option?.value === selectedOption?.value
+                        ? "bg-[#EFF5FF]"
+                        : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClick(option)}>
+                    <span>{option.label}</span>{" "}
+                    <SelectionCircle
+                      showInner={option?.value === selectedOption?.value}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${styles.close_icon_btn}`}
+                onClick={() => {
+                  setIsDDOpen(false);
+                }}>
+                <div className={`${styles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
+              </button>
+            </div>
+          </Modal>
+        )}
       </div>
       <Modal
         open={deleteIconClick}
@@ -205,14 +334,14 @@ const KYCCommon = () => {
                   <button
                     className={styles.cancel_delete_btn}
                     onClick={() => setDeleteIconClick(false)}>
-                    Cancel
+                    Go back
                   </button>
                   <button
                     className={styles.confirm_delete_btn}
                     onClick={() => {
                       // remove();
                     }}>
-                    Yes, Delete
+                    Okay,&nbsp;proceed
                   </button>
                 </Box>
               </div>

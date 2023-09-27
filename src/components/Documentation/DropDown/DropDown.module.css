@@ -25,7 +25,7 @@
 
 /* CustomSelect.module.css */
 .custom-select {
-  @apply  bg-white  rounded-xl;
+  @apply bg-white  rounded-xl;
   max-width: 502px;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .option {
-  @apply p-2 cursor-pointer border-b bg-white font-Poppins text-base font-normal py-3 px-4;
+  @apply p-2 cursor-pointer border bg-white font-Poppins text-base font-normal py-3 px-4;
   letter-spacing: -0.32px;
   line-height: normal;
   border-bottom: 1px solid var(--grey-grey-300, #dddddf);
@@ -52,9 +52,9 @@
   color: #5774ac;
 }
 .optionsActive {
-  @apply block;
+  @apply md:block hidden;
 }
 
 .ddArrow {
-  @apply !inline-block ;
+  @apply !inline-block;
 }

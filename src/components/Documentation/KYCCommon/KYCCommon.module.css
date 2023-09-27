@@ -72,11 +72,15 @@
 .main_container {
   @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
 }
+.dropdown_container {
+  @apply bg-white  h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg;
+  width: calc(100% - 32px);
+}
 .close_icon {
   @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;
 }
 .close_icon_btn {
-  @apply flex justify-start flex-col  pl-8;
+  @apply flex justify-start flex-col;
 }
 
 .options {
@@ -85,11 +89,21 @@
 }
 
 .option {
-  @apply p-2 cursor-pointer border-b bg-white font-Poppins text-base font-normal py-3 px-4;
+  @apply flex justify-between cursor-pointer  font-Poppins text-14 font-normal py-3 px-4;
   letter-spacing: -0.32px;
   line-height: normal;
-  border-bottom: 1px solid var(--grey-grey-300, #dddddf);
+  color: #5774ac;
 }
 .optionsActive {
   @apply block;
+}
+
+.dropdown_heading {
+  @apply mx-4 mt-6 mb-2 border-b border-[#EDEDEE];
+  color: var(--grey-grey-700, #45454a);
+  font-family: Poppins;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 }
