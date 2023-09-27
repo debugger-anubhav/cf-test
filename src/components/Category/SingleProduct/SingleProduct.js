@@ -47,8 +47,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     cityIdStr = getLocalStorage("cityId");
   }
 
-  // const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
-
   const cityId = parseFloat(cityIdStr);
 
   const bodyData = {
