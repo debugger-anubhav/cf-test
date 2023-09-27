@@ -8,22 +8,53 @@ import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 
 export default function UserSettings() {
   const router = useRouter();
+  const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [
-    {head: "My orders", desc: "See all orders & stay updated on their status."},
+    {
+      head: "My orders",
+      desc: "See all orders & stay updated on their status.",
+      img: `${url}my-orders.svg`,
+    },
     {
       head: "My Service Requests",
       desc: "Need help with your order or have a request?",
+      img: `${url}my-service-requests.svg`,
     },
-    {head: "My Payments", desc: "Track your payment & download statement."},
-    {head: "CF coins", desc: "Check CF coins. Use them when ordering."},
-    {head: "My Invoices", desc: "View and pay invoice."},
-    {head: "Referral Code", desc: "Refer a friend and earn 500 CF Coins!"},
+    {
+      head: "My Payments",
+      desc: "Track your payment & download statement.",
+      img: `${url}my-payments.svg`,
+    },
+    {
+      head: "CF coins",
+      desc: "Check CF coins. Use them when ordering.",
+      img: `${url}cf-coins.svg`,
+    },
+    {
+      head: "My Invoices",
+      desc: "View and pay invoice.",
+      img: `${url}my-invoices.svg`,
+    },
+    {
+      head: "Referral Code",
+      desc: "Refer a friend and earn 500 CF Coins!",
+      img: `${url}referral-code.svg`,
+    },
     {
       head: "KYC & Documentation",
       desc: "Upload your KYC documents for verification.",
+      img: `${url}kyc-and-documentation.svg`,
     },
-    {head: "Profile Settings", desc: "Modify name, email or phone number."},
-    {head: "Your Addresses", desc: "Add or Modify Your Addresses."},
+    {
+      head: "Profile Settings",
+      desc: "Modify name, email or phone number.",
+      img: `${url}profile-settings.svg`,
+    },
+    {
+      head: "Your Addresses",
+      desc: "Add or Modify Your Addresses.",
+      img: `${url}your-addresses.svg`,
+    },
   ];
 
   // const userName = getLocalStorage("user_name") ?? "";
@@ -83,7 +114,7 @@ export default function UserSettings() {
             {Servicesdata?.map((item, index) => (
               <div className={styles.card} key={index}>
                 <div className={styles.card_first_row}>
-                  <img src="" className={styles.card_icon} />
+                  <img src={item.img} className={styles.card_icon} />
                   <p className={styles.card_head}>{item.head}</p>
                 </div>
                 <p className={styles.card_desc}>{item.desc}</p>
