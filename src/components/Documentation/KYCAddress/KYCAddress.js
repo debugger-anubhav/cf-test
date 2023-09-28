@@ -498,17 +498,19 @@ const KYCAddress = () => {
               disableRestoreFocus
               disableEnforceFocus
               disableAutoFocus>
-              <div className={`${styles.dropdown_container} `}>
-                <div className={`${styles.dropdown_heading} `}>
+              <div className={`${commonStyles.dropdown_container} `}>
+                <div className={`${commonStyles.dropdown_heading} `}>
                   Please provide one ID to fetch your credit score
                 </div>
                 <ul
                   className={`${
-                    perAddModal ? styles.optionsActive : styles.options
+                    perAddModal
+                      ? commonStyles.optionsActive
+                      : commonStyles.options
                   } `}>
                   {selectedArr.map((option, index) => (
                     <li
-                      className={`${styles.option} ${
+                      className={`${commonStyles.option} ${
                         option?.value === selectedOptionPer?.value
                           ? "bg-[#EFF5FF]"
                           : ""
@@ -523,11 +525,11 @@ const KYCAddress = () => {
                   ))}
                 </ul>
                 <button
-                  className={`${styles.close_icon_btn}`}
+                  className={`${commonStyles.close_icon_btn}`}
                   onClick={() => {
                     setPerAddModal(false);
                   }}>
-                  <div className={`${styles.close_icon}`}>
+                  <div className={`${commonStyles.close_icon}`}>
                     <Close size={25} color={"#222222"} />
                   </div>
                 </button>
@@ -541,17 +543,19 @@ const KYCAddress = () => {
               disableRestoreFocus
               disableEnforceFocus
               disableAutoFocus>
-              <div className={`${styles.dropdown_container} `}>
-                <div className={`${styles.dropdown_heading} `}>
+              <div className={`${commonStyles.dropdown_container} `}>
+                <div className={`${commonStyles.dropdown_heading} `}>
                   Please provide one ID to fetch your credit score
                 </div>
                 <ul
                   className={`${
-                    currAddModal ? styles.optionsActive : styles.options
+                    currAddModal
+                      ? commonStyles.optionsActive
+                      : commonStyles.options
                   } `}>
                   {selectedArr.map((option, index) => (
                     <li
-                      className={`${styles.option} ${
+                      className={`${commonStyles.option} ${
                         option?.value === selectedOptionCur?.value
                           ? "bg-[#EFF5FF]"
                           : ""
@@ -566,11 +570,11 @@ const KYCAddress = () => {
                   ))}
                 </ul>
                 <button
-                  className={`${styles.close_icon_btn}`}
+                  className={`${commonStyles.close_icon_btn}`}
                   onClick={() => {
                     setCurrAddModal(false);
                   }}>
-                  <div className={`${styles.close_icon}`}>
+                  <div className={`${commonStyles.close_icon}`}>
                     <Close size={25} color={"#222222"} />
                   </div>
                 </button>

@@ -333,17 +333,17 @@ const KYCCommon = () => {
             disableRestoreFocus
             disableEnforceFocus
             disableAutoFocus>
-            <div className={`${styles.dropdown_container} `}>
-              <div className={`${styles.dropdown_heading} `}>
+            <div className={`${commonStyles.dropdown_container} `}>
+              <div className={`${commonStyles.dropdown_heading} `}>
                 Please provide one ID to fetch your credit score
               </div>
               <ul
                 className={`${
-                  isDDOpen ? styles.optionsActive : styles.options
+                  isDDOpen ? commonStyles.optionsActive : commonStyles.options
                 } `}>
                 {selectedArr.map((option, index) => (
                   <li
-                    className={`${styles.option} ${
+                    className={`${commonStyles.option} ${
                       option?.value === selectedOption?.value
                         ? "bg-[#EFF5FF]"
                         : ""
@@ -358,11 +358,11 @@ const KYCCommon = () => {
                 ))}
               </ul>
               <button
-                className={`${styles.close_icon_btn}`}
+                className={`${commonStyles.close_icon_btn}`}
                 onClick={() => {
                   setIsDDOpen(false);
                 }}>
-                <div className={`${styles.close_icon}`}>
+                <div className={`${commonStyles.close_icon}`}>
                   <Close size={25} color={"#222222"} />
                 </div>
               </button>
