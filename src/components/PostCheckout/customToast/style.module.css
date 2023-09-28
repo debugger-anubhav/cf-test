@@ -1,0 +1,27 @@
+/* CustomToast.css */
+.custom_toast {
+  @apply !flex !justify-between !gap-2 !p-3 !min-h-fit !h-fit !items-start;
+  border-radius: 8px !important;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.12) !important;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: yellow;
+  color: #454545;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.msg {
+  color: #454545;
+  font-family: Poppins !important;
+  line-height: 20px !important;
+}
+
+.custom-toast.show {
+  opacity: 1;
+}
+
+.custom-toast.hide {
+  opacity: 0;
+}

@@ -1,0 +1,57 @@
+.main_container {
+  @apply font-Poppins 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 py-2 xl:py-6;
+}
+.success_icon_div {
+  @apply bg-[#2D9469] w-12 h-12 xl:w-16 xl:h-16 rounded-full flex justify-center items-center;
+}
+.failure_icon_div {
+  @apply bg-[#D96060] w-12 h-12 xl:w-16 xl:h-16 rounded-full flex justify-center items-center;
+}
+.checkIcon {
+  @apply w-6 h-6 xl:w-8 xl:h-8;
+}
+.crossIcon {
+  @apply w-4 h-4 xl:w-6 xl:h-6;
+}
+.head {
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mt-6 xl:mt-10;
+}
+.details_wrapper {
+  @apply xl:mt-3 mt-2;
+}
+.row {
+  @apply flex gap-2;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 leading-6 tracking-desc xl:tracking-0.3;
+}
+.next_step_wrapper {
+  @apply mt-8 xl:mt-12;
+}
+.next_steps_header {
+  @apply text-45454A text-16 xl:text-24 font-medium tracking-0.3 xl:tracking-0.4;
+}
+.steps {
+  @apply mt-2;
+}
+.dot {
+  @apply px-[2px] w-1 h-1 rounded-full bg-71717A mt-[10px] ml-2;
+}
+.fail_desc {
+  @apply text-71717A text-14 xl:text-16 leading-6 tracking-desc xl:tracking-0.3 mt-6 xl:mt-8;
+}
+.need_help_txt {
+  @apply text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 text-45454A mt-6 xl:mt-12;
+}
+.btn_wrapper {
+  @apply flex-col md:flex-row flex gap-3 md:gap-4 mt-6 xl:mt-8;
+}
+.yellowbtn {
+  @apply cursor-pointer mt-6 xl:mt-8 w-full sm:w-[232px] h-12 sm:h-14 bg-F6B704 rounded-lg flex gap-[10px] justify-center items-center text-222 text-16 font-medium leading-5;
+}
+.btn {
+  @apply cursor-pointer w-full sm:w-[232px] h-12 sm:h-14 rounded-lg flex gap-[10px] justify-center items-center text-71717A border-2 border-71717A text-16 font-medium leading-5;
+}
+.phone_link {
+  @apply text-[#48678B] cursor-pointer;
+}
