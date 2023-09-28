@@ -215,7 +215,7 @@ const CouponDrawer = ({
                   className={styles.line}></div>
                 <div className={styles.copy_div}>
                   <button
-                    id="copy-button"
+                    id={index}
                     className="text-[#222] flex"
                     style={{
                       cursor: isMonthly

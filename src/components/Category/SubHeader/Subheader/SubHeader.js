@@ -313,6 +313,10 @@ const SubHeader = ({params}) => {
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
+    // console.log(filterOpen, "filterr opennnn 1");
+    // toggleDropDownFilter();
+    // console.log(filterOpen, "filterr opennnn 2");
+
     setFilterOpen(false);
   };
 
@@ -584,7 +588,7 @@ const SubHeader = ({params}) => {
                         See more
                       </p>
                     )}
-                    <div className="mt-2 w-full flex justify-center">
+                    <div className="mt-2 w-full flex justify-center ">
                       <div
                         className={styles.btn_container}
                         onClick={() => handleApply()}>
