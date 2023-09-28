@@ -112,10 +112,6 @@ const Footer = ({params}) => {
     setPoints(array);
   }, [cityName]);
 
-  const handleContextMenu = e => {
-    e.preventDefault(); // Prevent the context menu from opening
-  };
-
   return (
     <div className={styles.footer_wrapper}>
       {content.map((str, index) => {
@@ -163,7 +159,7 @@ const Footer = ({params}) => {
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
             <Image
-              className={styles.phoneImg}
+              className={`${styles.phoneImg} pointer-events-none`}
               alt="phone-icon"
               src={FooterIcons.Phone}
             />
@@ -201,6 +197,7 @@ const Footer = ({params}) => {
                 <img
                   alt={item?.icon}
                   src={item?.icon}
+                  className="pointer-events-none"
                   onClick={() => console.log("item.link")}
                 />
               </a>
@@ -213,7 +210,7 @@ const Footer = ({params}) => {
       <div className="xl:hidden">
         <div className={styles.contact_div}>
           <Image
-            className={styles.phoneImg}
+            className={`${styles.phoneImg} pointer-events-none`}
             alt="phone-icon"
             src={FooterIcons.Phone}
           />
@@ -238,7 +235,12 @@ const Footer = ({params}) => {
               target="_blank"
               rel="noopener  noreferrer"
               aria-label={item?.icon}>
-              <img alt={item?.icon} src={item?.icon} loading="lazy" />
+              <img
+                alt={item?.icon}
+                src={item?.icon}
+                loading="lazy"
+                className="pointer-events-none"
+              />
             </a>
           ))}
         </div>
@@ -255,8 +257,7 @@ const Footer = ({params}) => {
           <Image
             src={FooterIcons.GoToTopIcon}
             alt="go-to-top-icon"
-            className={styles.goToTopIcon}
-            onContextMenu={handleContextMenu}
+            className={`${styles.goToTopIcon} pointer-events-none`}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

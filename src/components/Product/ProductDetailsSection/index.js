@@ -773,10 +773,11 @@ const ProductDetails = ({params}) => {
 
           <div className={styles.kyc_wrapper}>
             {/* <BsPersonVcard size={24} /> */}
+            <div className={`w-100 h-100 absolute z-10`} />
             <img
               src={ProductPageImages.KycDoc}
               alt="kyc"
-              className="w-6 h-6"
+              className="w-6 h-6 relative z-[-1]"
               loading="lazy"
             />
             <p className={styles.kyc_text}>{str.kyc}</p>

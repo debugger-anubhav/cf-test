@@ -128,11 +128,13 @@ const CustomerRating = () => {
             }`}>
             <div className={styles.row}>
               <div className="flex">
-                <img
-                  src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
-                  alt="profile-pic"
-                  className={styles.img}
-                />
+                <div>
+                  <img
+                    src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
+                    alt="profile-pic"
+                    className={`${styles.img} pointer-events-none`}
+                  />
+                </div>
                 <div className="ml-3 mr-7">
                   <h3 className={styles.name}>{item?.user_name}</h3>
                   <div className="flex gap-2">
