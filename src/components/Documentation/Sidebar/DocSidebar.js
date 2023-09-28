@@ -1,9 +1,12 @@
 import React, {useState} from "react";
 import Link from "next/link";
 import styles from "./docSidebar.module.css";
+import cookie from "react-cookies";
+import {useRouter} from "next/navigation";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
+  const router = useRouter();
 
   const firstContainerArr = [
     {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
@@ -32,6 +35,17 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     },
     {heading: "Your Addresses", link: "/"},
   ];
+
+  const onLogout = () => {
+    router.push("https://test.rentofurniture.com/logout");
+    cookie.remove("ci_sessions");
+    localStorage.removeItem("tempUserID");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("_ga");
+    localStorage.removeItem("user_name");
+    localStorage.removeItem("ci_session");
+  };
+
   return (
     <div className={styles.mainContainer}>
       <div className={styles.firstContainer}>
@@ -65,7 +79,9 @@ const DocSidebar = ({isOverviewSelected = false}) => {
         setIsActive={setIsActive}
         isActive={isActive}
       />
-      <div className={styles.logoutTxt}>Logout</div>
+      <div className={styles.logoutTxt} onClick={onLogout}>
+        Logout
+      </div>
     </div>
   );
 };

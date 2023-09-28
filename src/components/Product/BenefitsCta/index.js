@@ -13,7 +13,7 @@ const BenefitsCta = () => {
         <p className={styles.head}>{str.cta_head}</p>
         <img
           src={ProductPageImages.LeafIcon}
-          className={styles.leaf_icon}
+          className={`${styles.leaf_icon} pointer-events-none`}
           loading="lazy"
           alt="LeafIcon"
         />
@@ -22,7 +22,7 @@ const BenefitsCta = () => {
       <div className={styles.bg_img}>
         {/* <img src={ProductPageImages.CtaImage} /> */}
         <Image
-          className="w-ful h-full"
+          className="w-ful h-full pointer-events-none"
           src={ProductPageImages.CtaImage}
           alt="benefits"
           loading="lazy"

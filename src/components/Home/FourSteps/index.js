@@ -14,6 +14,7 @@ const FourSteps = () => {
         {FourStepsCardData?.map((itemm, index) => (
           <div key={index.toString()} className={styles.card}>
             <div>
+              <div className={`w-100 h-100 absolute z-10`} />
               <img
                 src={itemm?.img1}
                 className={`${
@@ -24,11 +25,11 @@ const FourSteps = () => {
                     : index === 2
                     ? "w-[137px] h-[73.5px]"
                     : "w-[161px] h-[70px]"
-                } md:flex hidden`}
+                } md:flex hidden relative z-[-1]`}
               />
               <img
                 src={itemm?.img2}
-                className={`min-w-[160px] h-[160px] flex md:hidden`}
+                className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
                 // className={`w-full md:hidden`}
               />
             </div>

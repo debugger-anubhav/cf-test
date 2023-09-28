@@ -332,11 +332,15 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             : toggleDrawer("left", true)
         }>
         {DrawerName === "menu" ? (
-          <Image
-            src={Icons.Menu}
-            alt="menu-icon"
-            className={styles.menu_icon_drawer}
-          />
+          <div className="cursor-pointer">
+            <div className={`w-100 h-100 absolute z-10 cursor-pointer`}></div>
+            <Image
+              src={Icons.Menu}
+              alt="menu-icon"
+              // className={styles.menu_icon_drawer}
+              className={`${styles.menu_icon_drawer} cursor-pointer relative z-[-1]`}
+            />
+          </div>
         ) : (
           <span className={styles.header_city_name}>
             {/* {homePageReduxData?.cityName} */}
