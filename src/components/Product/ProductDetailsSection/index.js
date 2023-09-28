@@ -834,17 +834,21 @@ const ProductDetails = ({params}) => {
               <span className={styles.rupeeIcon}>₹</span>70,000{" "}
             </p>
 
-            <div className={styles.cityshield_prices}>
-              <p className={styles.currentPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldCurrentPrice}/mo
-              </p>
-              <p className={styles.originalPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldOriginalPrice} / mo
-              </p>
-              <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
-            </div>
+            {durationArray.length > 0 && (
+              <div className={styles.cityshield_prices}>
+                <p className={styles.currentPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldCurrentPrice}/mo
+                </p>
+                <p className={styles.originalPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldOriginalPrice} / mo
+                </p>
+                <div className={styles.discount}>
+                  -{cityShieldDiscount}% OFF
+                </div>
+              </div>
+            )}
           </div>
 
           {drawerOpen && (
