@@ -38,7 +38,6 @@ const Header = () => {
   const router = useRouter();
   const isOnMobile = useIsOnMobile();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
-
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
@@ -301,21 +300,14 @@ const Header = () => {
                 </a>
               </div>
               {/* </Link> */}
-              <a
-                href={
-                  userId
-                    ? "/usersettings"
-                    : "https://test.rentofurniture.com/user_sign_up"
-                }
-                rel="noopner noreferrer"
-                target={userId ? "_itSelf" : "_blank"}
-                aria-label="profile">
-                <div
-                  className={`pt-[14px] pb-[16px] ${styles.test}`}
-                  onMouseLeave={() => {
-                    setShowProfileDropdown(false);
-                  }}>
-                  <div
+              <div
+                className={`pt-[14px]  pb-[16px] 
+                  
+                  ${styles.test}`}
+                onMouseLeave={() => {
+                  setShowProfileDropdown(false);
+                }}>
+                {/* <div
                     className={`w-100 h-100 absolute z-10`}
                     onClick={() => {
                       if (userId) {
@@ -325,27 +317,43 @@ const Header = () => {
                           "https://test.rentofurniture.com/user_sign_up",
                         );
                       }
-                    }}></div>
-                  <Image
-                    src={Icons.Profile}
-                    alt="profile-icon"
-                    className={`${styles.header_profile_icon} relative z-[-1]`}
-                    onClick={e => e.preventDefault()}
-                    onContextMenu={e => {
-                      e.preventDefault();
-                    }}
-                    aria-disabled={true}
+                    }}></div> */}
+                {/* <Link href={userId
+                    ? "/usersettings"
+                    : "https://test.rentofurniture.com/user_sign_up"}> */}
+                <a
+                  href={
+                    userId
+                      ? "/usersettings"
+                      : "https://test.rentofurniture.com/user_sign_up"
+                  }
+                  rel="noopner noreferrer"
+                  target={userId ? "_itSelf" : "_blank"}
+                  aria-label="profile">
+                  <div
+                    className="relative z-20"
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       if (decrypt(getLocalStorage("_ga"))) {
                         setShowProfileDropdown(true);
                       }
-                    }}
-                    // ref={iconRef}
-                  />
-                </div>
-              </a>
+                    }}>
+                    <Image
+                      src={Icons.Profile}
+                      alt="profile-icon"
+                      className={`${styles.header_profile_icon} relative z-10 pointer-events-none`}
+                      onClick={e => e.preventDefault()}
+                      aria-disabled={true}
+
+                      // ref={iconRef}
+                    />
+                  </div>
+                </a>
+
+                {/* </Link> */}
+              </div>
+
               {/* </div> */}
               {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
               {decrypt(getLocalStorage("_ga")) !== null &&
