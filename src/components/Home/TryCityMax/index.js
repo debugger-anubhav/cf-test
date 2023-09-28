@@ -53,13 +53,13 @@ const TryCityMax = () => {
           <img
             src={TryCityMaxBannerWeb}
             alt="trycity"
-            className={`hidden xl:flex ${styles.tryCity_image}`}
+            className={`hidden xl:flex ${styles.tryCity_image} pointer-events-none`}
             loading="lazy"
           />
           <img
             src={TryCityMaxBannerMobile}
             alt="trycity"
-            className={`xl:hidden ${styles.tryCity_image}`}
+            className={`xl:hidden ${styles.tryCity_image} pointer-events-none`}
             loading="lazy"
           />
         </div>
@@ -100,9 +100,10 @@ const TryCityMax = () => {
               {benefitsOfCity?.map((item, index) => {
                 return (
                   <div className={styles.card_wrapper} key={index.toString()}>
+                    <div className={`w-100 h-100 absolute z-10`} />
                     <Image
                       src={item?.img}
-                      className={styles.card_icon}
+                      className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"
                       loading="lazy"
                     />

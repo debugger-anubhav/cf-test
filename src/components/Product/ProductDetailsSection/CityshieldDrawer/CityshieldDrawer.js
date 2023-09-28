@@ -90,7 +90,13 @@ const CityshieldDrawer = ({
             {arr.map((item, index) => (
               <div key={index} className={styles.arr_item}>
                 <div className={styles.img_div}>
-                  <img src={item.img} loading="lazy" alt={item.label} />
+                  <div className={`w-100 h-100 absolute z-10`} />
+                  <img
+                    src={item.img}
+                    loading="lazy"
+                    alt={item.label}
+                    className="relative z-[-1]"
+                  />
                 </div>
                 <p
                   className={`${

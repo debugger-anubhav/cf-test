@@ -433,7 +433,7 @@ const ShoppingCartSection = ({setTab}) => {
                   <div>
                     <img
                       src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                      className={styles.coin}
+                      className={`${styles.coin} pointer-events-none`}
                     />
                   </div>
                   <div>

@@ -56,6 +56,8 @@ const Header = () => {
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
+  const [profileIconLink, setProfileIconLink] = useState();
+  const [heartIconLink, setHeartIconLink] = useState();
 
   const cityId = getLocalStorage("cityId");
   if (!cityId) {
@@ -179,6 +181,16 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
+  useEffect(() => {
+    if (userId) {
+      setProfileIconLink("/usersettings");
+      setHeartIconLink("/wishlist");
+    } else {
+      setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
+      setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
+    }
+  }, [userId]);
+
   return (
     <>
       <div className={styles.main}>
@@ -226,7 +238,7 @@ const Header = () => {
                   <Image
                     src={Icons.Search}
                     alt="search-icon"
-                    className={styles.header_search_icon}
+                    className={`${styles.header_search_icon} pointer-events-none`}
                   />
                 </div>
               </div>
@@ -243,12 +255,7 @@ const Header = () => {
               </div>
             )}
             <div className={styles.wishlist_link_wrapper}>
-              <a
-                href={
-                  userId
-                    ? "/wishlist"
-                    : "https://test.rentofurniture.com/user_sign_up"
-                }>
+              <a href={heartIconLink}>
                 <div
                   className={`w-100 h-100 absolute z-10`}
                   onClick={() => {
@@ -302,45 +309,30 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <a
-                href={
-                  userId
-                    ? "/usersettings"
-                    : "https://test.rentofurniture.com/user_sign_up"
-                }
+                href={profileIconLink}
                 rel="noopner noreferrer"
-                target={userId ? "_itSelf" : "_blank"}
+                target="_itSelf"
                 aria-label="profile">
                 <div
                   className={`pt-[14px] pb-[16px] ${styles.test}`}
                   onMouseLeave={() => {
                     setShowProfileDropdown(false);
                   }}>
-                  <div
-                    className={`w-100 h-100 absolute z-10`}
-                    onClick={() => {
-                      if (userId) {
-                        router.push("/usersettings");
-                      } else {
-                        router.push(
-                          "https://test.rentofurniture.com/user_sign_up",
-                        );
-                      }
-                    }}></div>
+                  {console.log(userId, "userId")}
                   <Image
                     src={Icons.Profile}
                     alt="profile-icon"
-                    className={`${styles.header_profile_icon} relative z-[-1]`}
-                    onClick={e => e.preventDefault()}
-                    onContextMenu={e => {
-                      e.preventDefault();
-                    }}
+                    className={`${styles.header_profile_icon} pointer-events-none`}
                     aria-disabled={true}
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
-                      if (decrypt(getLocalStorage("_ga"))) {
+                      if (userId) {
                         setShowProfileDropdown(true);
                       }
+                    }}
+                    onClick={() => {
+                      router.push(profileIconLink);
                     }}
                     // ref={iconRef}
                   />
@@ -386,7 +378,7 @@ const Header = () => {
             <Image
               src={Icons.Search}
               alt="search-icon"
-              className={styles.header_search_icon}
+              className={`${styles.header_search_icon} pointer-events-none`}
             />
           </div>
 
@@ -534,7 +526,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
           <Image
             src={Icons.Search}
             alt="search-icon"
-            className={styles.header_search_icon}
+            className={`${styles.header_search_icon} pointer-events-none`}
           />
         </div>
         <div
@@ -543,7 +535,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
           <Image
             src={Icons.Search}
             alt="search-icon"
-            className={styles.header_search_icon}
+            className={`${styles.header_search_icon} pointer-events-none`}
           />
           <input
             placeholder="Search for Furniture, Appliances, etc"
