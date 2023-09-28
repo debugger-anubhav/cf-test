@@ -460,7 +460,7 @@ const SubHeader = ({params}) => {
                   return (
                     <a
                       href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                        item?.seourl
+                        subItem?.seourl
                       }`}
                       onClick={e => {
                         e.preventDefault();

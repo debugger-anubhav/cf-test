@@ -6,19 +6,31 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
 
   const firstContainerArr = [
-    {heading: "My orders", link: "ww.com.com"},
-    {heading: "My Service Requests", link: "ww.com.com"},
-    {heading: "My Payments", link: "ww.com.com"},
-    {heading: "My Invoices", link: "ww.com.com"},
+    {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
+    {
+      heading: "My Service Requests",
+      link: "https://test.rentofurniture.com/service-requests",
+    },
+    {heading: "My Payments", link: "https://test.rentofurniture.com/payments"},
+    {heading: "My Invoices", link: "https://test.rentofurniture.com/invoices"},
   ];
   const secondContainerArr = [
-    {heading: "CF coins", link: "ww.com.com"},
-    {heading: "Referral Code", link: "ww.com.com"},
+    {heading: "CF coins", link: "https://test.rentofurniture.com/wallet"},
+    {
+      heading: "Referral Code",
+      link: "https://test.rentofurniture.com/referral",
+    },
   ];
   const thirdContainerArr = [
-    {heading: "KYC & Documentation", link: "ww.com.com"},
-    {heading: "Profile Settings", link: "ww.com.com"},
-    {heading: "Your Addresses", link: "ww.com.com"},
+    {
+      heading: "KYC & Documentation",
+      link: "https://test.rentofurniture.com/documentation",
+    },
+    {
+      heading: "Profile Settings",
+      link: "https://test.rentofurniture.com/usersettings",
+    },
+    {heading: "Your Addresses", link: "/"},
   ];
   return (
     <div className={styles.mainContainer}>
@@ -70,8 +82,8 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
       {list?.map(i => {
         return (
           <Link
-            key={i.heading}
-            href={String(i.link)}
+            key={i?.heading}
+            href={String(i?.link)}
             className={`${
               isActive === i.heading
                 ? styles.sectionItemsActive
