@@ -21,16 +21,9 @@ const KYCAddress = () => {
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
   const [docsData, setDocsData] = useState([]);
-  const [selectedArr, setSelectedArr] = useState([]);
 
-  const [selectedOptionCur, setSelectedOptionCur] = useState({
-    label: "Pan Number (Recommended)",
-    value: "PAN Number",
-  });
-  const [selectedOptionPer, setSelectedOptionPer] = useState({
-    label: "Pan Number (Recommended)",
-    value: "PAN Number",
-  });
+  const [selectedOptionCur, setSelectedOptionCur] = useState();
+  const [selectedOptionPer, setSelectedOptionPer] = useState();
   const [formData, setFormData] = useState({
     contactNumber: "",
     addressProof: "", // You can add more fields as needed
@@ -239,7 +232,8 @@ const KYCAddress = () => {
         </div>
       </div>
       {formErrors.contactNumber && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div
+          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
           {formErrors.contactNumber}
         </div>
       )}
@@ -248,17 +242,9 @@ const KYCAddress = () => {
           Permanent address proof
         </span>
       </div>
-      <div
-        className={`${styles.formInputFirst}`}
-        onClick={() => {
-          setSelectedArr(
-            docsData[1]?.supported_docs
-              .split(",")
-              ?.map(i => ({label: i, value: i})),
-          );
-        }}>
+      <div className={`${styles.formInputFirst}`}>
         <DropDown
-          options={docsData[0]?.supported_docs
+          options={docsData[1]?.supported_docs
             .split(",")
             ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setPerAddModal}
@@ -283,12 +269,12 @@ const KYCAddress = () => {
                 {formErrors?.addressProof ? (
                   <ExclamationCircleFill
                     color={"#D96060"}
-                    className={"inline-block md:hidden w-5"}
+                    className={`${commonStyles.mdHiddemIcons}`}
                   />
                 ) : (
                   <CheckCircleIcon
                     color={"#2D9469"}
-                    className={"inline-block md:hidden w-5"}
+                    className={`${commonStyles.mdHiddemIcons}`}
                   />
                 )}
               </>
@@ -296,33 +282,35 @@ const KYCAddress = () => {
               <Image
                 src={uploading}
                 alt="Uploading Icon"
-                className="inline-block md:hidden"
+                className={`${commonStyles.mdHiddenIB}`}
               />
             )}
             <Image
               src={uploading}
               alt="Uploading Icon"
-              className="md:inline-block hidden"
+              className={`${commonStyles.mdIBHidden}`}
             />
-            <span className="inline-block pl-2">
+            <span className={`${styles.chooseFile}`}>
               {formData?.addressProof?.name ?? "Choose file"}
             </span>
             {!formErrors.addressProof && formData.addressProof.name ? (
-              <div className={`${styles.correctFile}`}></div>
+              <div className={`${commonStyles.correctFile}`}></div>
             ) : (
               <></>
             )}
           </label>
           {formErrors.addressProof && (
             <>
-              <ReloadIcon className="md:hidden ml-3 w-5 h-5" />
+              <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} />
               <span
                 onClick={e => {
                   e.stopPropagation();
                   setFormData(prev => ({...prev, addressProof: ""}));
                   setFormErrors(prev => ({...prev, addressProof: ""}));
                 }}>
-                <DeleteIcon className="md:hidden ml-4 w-5 h-5" />
+                <DeleteIcon
+                  className={`${commonStyles.mdHiddemIconsML} ml-4`}
+                />
               </span>
             </>
           )}
@@ -340,7 +328,8 @@ const KYCAddress = () => {
         />
       </div>
       {formErrors.addressProof && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div
+          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
           {formErrors.addressProof}
         </div>
       )}
@@ -349,15 +338,7 @@ const KYCAddress = () => {
           Current address proofs
         </span>
       </div>
-      <div
-        className={`${styles.formInputFirst}`}
-        onClick={() => {
-          setSelectedArr(
-            docsData[1]?.supported_docs
-              .split(",")
-              ?.map(i => ({label: i, value: i})),
-          );
-        }}>
+      <div className={`${styles.formInputFirst}`}>
         <DropDown
           options={docsData[1]?.supported_docs
             .split(",")
@@ -385,12 +366,12 @@ const KYCAddress = () => {
                 {formErrors?.currentAddressProof ? (
                   <ExclamationCircleFill
                     color={"#D96060"}
-                    className={"inline-block md:hidden w-5"}
+                    className={`${commonStyles.mdHiddemIcons}`}
                   />
                 ) : (
                   <CheckCircleIcon
                     color={"#2D9469"}
-                    className={"inline-block md:hidden w-5"}
+                    className={`${commonStyles.mdHiddemIcons}`}
                   />
                 )}
               </>
@@ -398,34 +379,34 @@ const KYCAddress = () => {
               <Image
                 src={uploading}
                 alt="Uploading Icon"
-                className="inline-block md:hidden"
+                className={`${commonStyles.mdHiddenIB}`}
               />
             )}
             <Image
               src={uploading}
               alt="Uploading Icon"
-              className="md:inline-block hidden"
+              className={`${commonStyles.mdIBHidden}`}
             />
-            <span className="inline-block pl-2">
+            <span className={`${styles.chooseFile}`}>
               {formData?.currentAddressProof?.name ?? "Choose file"}
             </span>
             {!formErrors.currentAddressProof &&
             formData.currentAddressProof.name ? (
-              <div className={`${styles.correctFile}`}></div>
+              <div className={`${commonStyles.correctFile}`}></div>
             ) : (
               <></>
             )}
           </label>
           {formErrors.currentAddressProof && (
             <>
-              <ReloadIcon className="md:hidden ml-3 w-5 h-5" />
+              <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} />
               <span
                 onClick={e => {
                   e.stopPropagation();
                   setFormData(prev => ({...prev, currentAddressProof: ""}));
                   setFormErrors(prev => ({...prev, currentAddressProof: ""}));
                 }}>
-                <DeleteIcon className="md:hidden ml-4 w-5 h-5" />
+                <DeleteIcon className={`${commonStyles.mdHiddemIcons} ml-4`} />
               </span>
             </>
           )}
@@ -444,7 +425,8 @@ const KYCAddress = () => {
       </div>
 
       {formErrors.currentAddressProof && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div
+          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
           {formErrors.currentAddressProof}
         </div>
       )}
@@ -466,7 +448,8 @@ const KYCAddress = () => {
         </div>
       </div>
       {formErrors.termsAccepted && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div
+          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
           {formErrors.termsAccepted}
         </div>
       )}
@@ -500,7 +483,7 @@ const KYCAddress = () => {
               disableAutoFocus>
               <div className={`${commonStyles.dropdown_container} `}>
                 <div className={`${commonStyles.dropdown_heading} `}>
-                  Please provide one ID to fetch your credit score
+                  Select any permanent address proof
                 </div>
                 <ul
                   className={`${
@@ -508,21 +491,24 @@ const KYCAddress = () => {
                       ? commonStyles.optionsActive
                       : commonStyles.options
                   } `}>
-                  {selectedArr.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option?.value === selectedOptionPer?.value
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClickPer(option)}>
-                      <span>{option.label}</span>{" "}
-                      <SelectionCircle
-                        showInner={option?.value === selectedOptionPer?.value}
-                      />
-                    </li>
-                  ))}
+                  {docsData[1]?.supported_docs
+                    .split(",")
+                    ?.map(i => ({label: i, value: i}))
+                    ?.map((option, index) => (
+                      <li
+                        className={`${commonStyles.option} ${
+                          option?.value === selectedOptionPer?.value
+                            ? "bg-[#EFF5FF]"
+                            : ""
+                        } `}
+                        key={index}
+                        onClick={() => handleOptionClickPer(option)}>
+                        <span>{option.label}</span>{" "}
+                        <SelectionCircle
+                          showInner={option?.value === selectedOptionPer?.value}
+                        />
+                      </li>
+                    ))}
                 </ul>
                 <button
                   className={`${commonStyles.close_icon_btn}`}
@@ -545,7 +531,7 @@ const KYCAddress = () => {
               disableAutoFocus>
               <div className={`${commonStyles.dropdown_container} `}>
                 <div className={`${commonStyles.dropdown_heading} `}>
-                  Please provide one ID to fetch your credit score
+                  Select any current address proof
                 </div>
                 <ul
                   className={`${
@@ -553,21 +539,24 @@ const KYCAddress = () => {
                       ? commonStyles.optionsActive
                       : commonStyles.options
                   } `}>
-                  {selectedArr.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option?.value === selectedOptionCur?.value
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClickCur(option)}>
-                      <span>{option.label}</span>{" "}
-                      <SelectionCircle
-                        showInner={option?.value === selectedOptionCur?.value}
-                      />
-                    </li>
-                  ))}
+                  {docsData[0]?.supported_docs
+                    .split(",")
+                    ?.map(i => ({label: i, value: i}))
+                    .map((option, index) => (
+                      <li
+                        className={`${commonStyles.option} ${
+                          option?.value === selectedOptionCur?.value
+                            ? "bg-[#EFF5FF]"
+                            : ""
+                        } `}
+                        key={index}
+                        onClick={() => handleOptionClickCur(option)}>
+                        <span>{option.label}</span>{" "}
+                        <SelectionCircle
+                          showInner={option?.value === selectedOptionCur?.value}
+                        />
+                      </li>
+                    ))}
                 </ul>
                 <button
                   className={`${commonStyles.close_icon_btn}`}

@@ -9,7 +9,7 @@
   @apply mt-10;
 }
 .progressBarContainer {
-  @apply mt-2 mb-10 ml-4 md:ml-16;
+  @apply mt-2 mb-10 ml-4 md:ml-16 w-fit;
   background-color: #d9d9d9;
   margin-right: 149px !important;
   height: 4px;

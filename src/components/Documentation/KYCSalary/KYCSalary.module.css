@@ -6,7 +6,7 @@
 }
 
 .selContainer {
-  @apply md:p-4 px-4 py-3 inline-block w-full md:w-auto;
+  @apply md:p-4 px-4 py-3 inline-block w-full md:w-auto md:ml-4;
   border-radius: 12px;
   border: 2px solid #dddddf;
 }
@@ -14,13 +14,16 @@
   border: 2px solid #71717a;
 }
 .selHeading {
-  @apply text-14 md:text-16 font-medium font-Poppins;
+  @apply text-14 md:text-16 font-medium font-Poppins flex items-center;
+}
+.selHeadingTxt {
+  @apply ml-2;
 }
 .selDivider {
-  @apply my-2;
+  @apply my-2 hidden md:block;
 }
 .selFooter {
-  @apply text-12 font-normal font-Poppins;
+  @apply text-12 font-normal font-Poppins ml-7 md:ml-0;
 }
 .formHeadingSecond {
   @apply mt-8 mx-4 md:ml-16 flex flex-col md:block;
@@ -61,4 +64,11 @@
 
 .saveBtn {
   @apply mt-3 md:mt-0 mb-4 md:mb-0;
+}
+
+.lableStyle {
+  @apply md:w-[232px] block;
+}
+.chooseFile {
+  @apply inline-block pl-2;
 }

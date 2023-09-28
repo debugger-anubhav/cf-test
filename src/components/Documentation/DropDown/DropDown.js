@@ -26,7 +26,12 @@ const DropDown = ({
         onClick={() => {
           setIsDDOpen(prev => !prev);
         }}>
-        <span> {selectedOption?.value || "Select an option"}</span>
+        <span
+          className={`${
+            selectedOption?.value ? "text-black" : "text-[#71717A]"
+          }`}>
+          {selectedOption?.value || "Select an option"}
+        </span>
         <div className={`${styles.ddArrow}`}>
           {isOpen ? <PopUpArrow size={25} /> : <DownPopUpArrow size={25} />}
         </div>
