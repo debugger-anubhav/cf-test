@@ -1,5 +1,5 @@
 .main_container {
-  @apply font-Poppins 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 py-2 xl:py-6;
+  @apply font-Poppins 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pt-2 pb-20 xl:py-6;
 }
 .success_icon_div {
   @apply bg-[#2D9469] w-12 h-12 xl:w-16 xl:h-16 rounded-full flex justify-center items-center;
