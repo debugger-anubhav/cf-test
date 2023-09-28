@@ -38,7 +38,6 @@ const Header = () => {
   const router = useRouter();
   const isOnMobile = useIsOnMobile();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
-
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
@@ -308,36 +307,42 @@ const Header = () => {
                 </a>
               </div>
               {/* </Link> */}
-              <a
-                href={profileIconLink}
-                rel="noopner noreferrer"
-                target="_itSelf"
-                aria-label="profile">
-                <div
-                  className={`pt-[14px] pb-[16px] ${styles.test}`}
-                  onMouseLeave={() => {
-                    setShowProfileDropdown(false);
-                  }}>
-                  {console.log(userId, "userId")}
-                  <Image
-                    src={Icons.Profile}
-                    alt="profile-icon"
-                    className={`${styles.header_profile_icon} pointer-events-none`}
-                    aria-disabled={true}
+              <div
+                className={`pt-[14px]  pb-[16px] 
+                  
+                  ${styles.test}`}
+                onMouseLeave={() => {
+                  setShowProfileDropdown(false);
+                }}>
+                <a
+                  href={profileIconLink}
+                  rel="noopner noreferrer"
+                  target="_self"
+                  aria-label="profile">
+                  <div
+                    className="relative z-20"
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
                       if (userId) {
                         setShowProfileDropdown(true);
                       }
-                    }}
-                    onClick={() => {
-                      router.push(profileIconLink);
-                    }}
-                    // ref={iconRef}
-                  />
-                </div>
-              </a>
+                    }}>
+                    <Image
+                      src={Icons.Profile}
+                      alt="profile-icon"
+                      className={`${styles.header_profile_icon} relative z-10 pointer-events-none`}
+                      onClick={e => e.preventDefault()}
+                      aria-disabled={true}
+
+                      // ref={iconRef}
+                    />
+                  </div>
+                </a>
+
+                {/* </Link> */}
+              </div>
+
               {/* </div> */}
               {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
               {decrypt(getLocalStorage("_ga")) !== null &&

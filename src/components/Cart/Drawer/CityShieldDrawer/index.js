@@ -122,13 +122,18 @@ const CityShieldDrawerForCart = ({
           ))}
         </div>
 
-        <button className={styles.btn} onClick={toggleDrawer}>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            toggleDrawer();
+            toggleCheckbox(true);
+          }}>
           Continue with Cityshield
         </button>
         <p
           className={styles.risk_text}
           onClick={() => {
-            toggleCheckbox();
+            toggleCheckbox(false);
             toggleDrawer();
           }}>
           No, I wanna risk damaging the furniture & Applicances

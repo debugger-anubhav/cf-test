@@ -14,13 +14,6 @@ const PartnershipBanner = () => {
         loading="lazy"
         className="w-full h-full pointer-events-none"
       />
-      {/* <Image
-        src={partner}
-        alt="partnership"
-        layout="fill"
-        objectFit="cover"
-        className="w-full h-full hidden xl:flex"
-      /> */}
     </div>
   );
 };
