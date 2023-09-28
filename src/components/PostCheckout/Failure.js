@@ -3,31 +3,38 @@ import styles from "./styles.module.css";
 import {ImCross} from "react-icons/im";
 import {ArrowForw, EmailIcon, WhatsappIcon} from "@/assets/icon";
 import {useRouter} from "next/navigation";
-// import {showToastNotification} from "../Common/Notifications/toastUtils";
-import CustomToast from "./customToast/CustomToast";
-// import {toast} from "react-toastify";
+import {
+  showToastNotification,
+  updateToastNotification,
+} from "../Common/Notifications/toastUtils";
 
 const PaymentFailure = () => {
   const router = useRouter();
   const [timer, setTimer] = useState(60);
-  // const [notifyTime, setNotifyTime] = useState(3);
-  // console.log(timer, "timerrr");
 
   useEffect(() => {
     const countdown = setInterval(() => {
       setTimer(prevTimer => prevTimer - 1);
 
-      if (timer <= 1) {
-        clearInterval(countdown);
-        router.push("/cart");
-        // console.log("object");
-      }
-      if (timer <= 3 && timer > 0) {
-        <CustomToast timer={timer} />;
-        // setNotifyTime(prev => prev - 1);
-        // showToastNotification(`ygdwgy in ${notifyTime} seconds`, 3);
+      console.log(timer, "timer");
+      if (timer === 3)
+        showToastNotification(
+          `Redirecting to Cart page in ${timer} seconds`,
+          2,
+        );
+      if (timer < 3 && timer > 0) {
+        updateToastNotification(
+          `Redirecting to Cart page in ${timer} ${
+            timer === 1 ? "second" : "seconds"
+          }`,
+        );
       }
     }, 1000);
+
+    if (timer < 1) {
+      clearInterval(countdown);
+      router.push("/cart");
+    }
     return () => clearInterval(countdown);
   }, [router, timer]);
 
