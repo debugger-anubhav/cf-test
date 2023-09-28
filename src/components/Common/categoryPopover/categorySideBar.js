@@ -114,6 +114,8 @@ export default function FilterSortDrawer({
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
+    console.log("innnn");
+    setState({...state, bottom: false});
     // setFilterOpen(false);
   };
 
