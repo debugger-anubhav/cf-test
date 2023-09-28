@@ -123,7 +123,7 @@ const OffersAndCoupons = ({page}) => {
             <div className={styles.line}></div>
             <div className={styles.copy_div}>
               {item?.coupon_code && (
-                <button id="copy-button" className="text-[#222] flex ">
+                <button id={index} className="text-[#222] flex ">
                   {isCopied && copiedIndex === index ? (
                     "Copied!"
                   ) : (
