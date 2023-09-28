@@ -11,12 +11,12 @@ const PaymentConfirmation = () => {
   useEffect(() => {
     const countdown = setInterval(() => {
       setTimer(prevTimer => prevTimer - 1);
-
-      if (timer <= 1) {
-        clearInterval(countdown); // Stop the countdown
-        router.push("/documentation");
-      }
     }, 1000);
+
+    if (timer <= 1) {
+      clearInterval(countdown); // Stop the countdown
+      router.push("/documentation");
+    }
     return () => clearInterval(countdown);
   }, [router, timer]);
 
@@ -45,7 +45,7 @@ const PaymentConfirmation = () => {
       <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          in {timer > 0 && timer} {timer === 1 ? "second." : "seconds."}
+          in {timer} {timer === 1 ? "second." : "seconds."}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
