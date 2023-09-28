@@ -40,6 +40,7 @@ export const endPoints = {
   addRecentViewProduct: "fc-view-products/createRecentlyViewedProduct",
   addWishListProduct: "fc-product-likes/addToWishlistProduct",
   deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
+  addressProofList: "fc-cibil-require-docs/getAddressDocLists",
 
   searchKey: (key = "", cityId = "", sort = "") =>
     `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,

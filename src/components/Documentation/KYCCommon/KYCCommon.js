@@ -35,8 +35,8 @@ const KYCCommon = () => {
   const [isDDOpen, setIsDDOpen] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [selectedOption, setSelectedOption] = useState({
-    label: "Passport ",
-    value: "Passport ",
+    label: "Pan Number (Recommended)",
+    value: "PAN Number",
   });
   const [formData, setFormData] = useState({
     idType: "",
@@ -88,10 +88,9 @@ const KYCCommon = () => {
   //   setState({...state, [anchor]: open});
   // };
   const idOptions = [
-    {label: "Passport ", value: "Passport "},
+    {label: "PAN Number", value: "PAN Number"},
     {label: "Driving license", value: "Driving license"},
-    {label: "AADHAR card ", value: "AADHAR card "},
-    {label: "Voter ID ", value: "Voter ID "},
+    {label: "Voter ID", value: "Voter ID"},
   ];
   // const getOption = () => {
   //   axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
@@ -100,18 +99,47 @@ const KYCCommon = () => {
     setSelectedOption(option);
   };
   const validateForm = () => {
+    const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+    // const drivingRegex = / ^([A-Z]{2})(\d{2}|\d{3})[a-zA-Z]{0,1}(\d{4})(\d{7})/;
+    const voterIdRegex = /^[A-Z]{3}[0-9]{7}$/;
+    const dateRegex = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
+
     const errors = {};
-    if (!formData.idType) {
-      errors.idType = "Please select an ID type.";
+    switch (selectedOption.value) {
+      case "PAN Number":
+        console.log(
+          panRegex.test(formData.idNumber),
+          formData.idNumber,
+          selectedOption.value,
+        );
+        if (!panRegex.test(formData.idNumber)) {
+          errors.idNumber = "Please enter a valid pan number";
+        } else {
+          errors.idNumber = "";
+        }
+        break;
+      case "Driving license":
+        if (!formData.idNumber) {
+          errors.idNumber = "Please enter a valid driving license";
+        }
+
+        break;
+      case "Voter ID":
+        if (!voterIdRegex.test(formData.idNumber)) {
+          errors.idNumber = "Please enter a valid voter id";
+        }
+        break;
     }
-    if (!formData.idNumber) {
-      errors.idNumber = "Please enter your ID number.";
-    }
-    if (!formData.dob) {
-      errors.dob = "Please enter your date of birth.";
+
+    if (!dateRegex.test(formData.dob)) {
+      errors.dob = "Please enter your date of birth in format DD-MM-YYYY";
+    } else {
+      errors.dob = "";
     }
     if (!formData.termsAccepted) {
       errors.termsAccepted = "You must accept the terms and conditions.";
+    } else {
+      errors.termsAccepted = "";
     }
     return errors;
   };
@@ -123,12 +151,14 @@ const KYCCommon = () => {
     });
   };
 
-  const handleCheckboxChange = e => {
-    const {name, checked} = e.target;
-    setFormData({
-      ...formData,
-      [name]: checked,
+  const handleCheckboxChange = () => {
+    setFormData(prev => {
+      return {
+        ...prev,
+        termsAccepted: !prev.termsAccepted,
+      };
     });
+    validateForm();
   };
   const handleSubmit = () => {
     const errors = validateForm();
@@ -141,7 +171,8 @@ const KYCCommon = () => {
       // For example, display error messages or prevent submission
     }
   };
-  console.log(handleCheckboxChange, handleInputChange);
+
+  // console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
       <div className={`${styles.stepHeading}`}>
@@ -173,10 +204,22 @@ const KYCCommon = () => {
       <div className={`${styles.formInputSecond}`}>
         <input
           type="text"
+          name={"idNumber"}
           className={`${commonStyles.basicInputStyles}`}
           placeholder={`Enter ${selectedOption.value} Number`}
+          onChange={e => {
+            handleInputChange(e);
+          }}
+          // onBlur={e => {
+          //   handleInputBlur(e);
+          // }}
         />
       </div>
+      {formErrors.idNumber && (
+        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+          {formErrors.idNumber}
+        </div>
+      )}
       <div className={`${styles.formHeadingThird}`}>
         <span className={`${commonStyles.formHeadings}`}>
           Date of Birth (DD-MM-YYYY)
@@ -185,13 +228,32 @@ const KYCCommon = () => {
       <div className={`${styles.formInputThird}`}>
         <input
           type="text"
+          name="dob"
           className={`${commonStyles.basicInputStyles}`}
           placeholder="DD-MM-YYYY"
+          value={formData.dob}
+          onChange={e => {
+            handleInputChange(e);
+          }}
+          // onBlur={e => {
+          //   handleInputBlur(e);
+          // }}
         />
       </div>
+      {formErrors.dob && (
+        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+          {formErrors.dob}
+        </div>
+      )}
       <div>
         <div className={`${styles.formTermsSection}`}>
-          <input type="checkbox" className={`${commonStyles.basicCheckBox}`} />
+          <input
+            type="checkbox"
+            className={`${commonStyles.basicCheckBox}`}
+            onChange={e => {
+              handleCheckboxChange(e);
+            }}
+          />
           <span className={`${commonStyles.termsTxt}`}>
             &nbsp;I accept &nbsp;
           </span>
@@ -201,7 +263,9 @@ const KYCCommon = () => {
         </div>
       </div>
       {formErrors.termsAccepted && (
-        <div className="text-red-500">{formErrors.termsAccepted}</div>
+        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+          {formErrors.termsAccepted}
+        </div>
       )}
       <div
         className={`${styles.btnGroupContainer} `}
@@ -213,7 +277,7 @@ const KYCCommon = () => {
             I’ll do it later
           </button>
           <button
-            disabled
+            // disabled
             onClick={handleSubmit}
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>

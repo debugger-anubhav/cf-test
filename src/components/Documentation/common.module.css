@@ -73,3 +73,6 @@
 } */
 .basicFileInput::-webkit-file-upload-button {
 }
+.basicErrorStyles {
+  @apply text-12 my-1 text-[#D96060];
+}

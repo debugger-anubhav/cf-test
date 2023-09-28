@@ -107,3 +107,6 @@
   font-weight: 500;
   line-height: normal;
 }
+.errorTxt{
+  @apply mx-4 md:ml-16;
+}

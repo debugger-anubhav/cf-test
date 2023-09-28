@@ -1,6 +1,10 @@
 import React from "react";
 import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
-import {AiOutlineArrowRight, AiOutlineDelete} from "react-icons/ai";
+import {
+  AiOutlineArrowRight,
+  AiOutlineDelete,
+  AiFillCheckCircle,
+} from "react-icons/ai";
 import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {
   IoClose,
@@ -9,7 +13,7 @@ import {
   IoArrowBack,
   IoPerson,
 } from "react-icons/io5";
-import {TbMailFilled} from "react-icons/tb";
+import {TbMailFilled, TbReload} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
 import {
@@ -18,7 +22,13 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
 } from "react-icons/io";
-import {BsFillStarFill, BsGoogle, BsCheckLg, BsWhatsapp} from "react-icons/bs";
+import {
+  BsFillStarFill,
+  BsGoogle,
+  BsCheckLg,
+  BsWhatsapp,
+  BsExclamationCircleFill,
+} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import {
   MdModeEdit,
@@ -242,6 +252,12 @@ export const InformationIcon = ({size, color, className}) => (
 export const DeleteIcon = ({size, color, className}) => (
   <AiOutlineDelete size={size} color={color} className={className} />
 );
+export const CheckCircleIcon = ({size, color, className}) => (
+  <AiFillCheckCircle size={size} color={color} className={className} />
+);
+export const ReloadIcon = ({size, color, className}) => (
+  <TbReload size={size} color={color} className={className} />
+);
 
 export const ArrowForw = ({size, color, className}) => (
   <IoArrowForward size={size} color={color} className={className} />
@@ -279,6 +295,9 @@ export const PersonIcon = ({size, color, className}) => (
 
 export const WhatsappIcon = ({size, color, className}) => (
   <BsWhatsapp size={size} color={color} className={className} />
+);
+export const ExclamationCircleFill = ({size, color, className}) => (
+  <BsExclamationCircleFill size={size} color={color} className={className} />
 );
 
 export const CalendarIcon = ({size, color, className}) => (

@@ -57,3 +57,10 @@
 .contact_input {
   @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
+.errorTxt {
+  @apply mx-4 md:ml-16;
+}
+.correctFile {
+  @apply border border-[#2D9469] relative md:bottom-[-13px] bottom-[-14px] w-auto;
+}
+/* md:w-[477px] */

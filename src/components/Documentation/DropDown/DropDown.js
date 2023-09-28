@@ -32,7 +32,7 @@ const DropDown = ({
         </div>
       </div>
       <ul className={`${isOpen ? styles.optionsActive : styles.options}  `}>
-        {options.map((option, index) => (
+        {options?.map((option, index) => (
           <li
             className={`${styles.option} ${
               index === options.length - 1 ? "rounded-b-xl border-none" : ""

@@ -2,7 +2,8 @@ import React from "react";
 import styles from "./DocMain.module.css";
 import DocSidebar from "../Sidebar/DocSidebar";
 import KycHeader from "../KycHeader/KycHeader";
-import KYCCommon from "../KYCCommon/KYCCommon";
+// import KYCCommon from "../KYCCommon/KYCCommon";
+import KYCAddress from "../KYCAddress/KYCAddress";
 // import KYCCard from "../KYCCard/KYCCard";
 
 const DocMain = () => {
@@ -11,8 +12,7 @@ const DocMain = () => {
       <DocSidebar />
       <div className={styles.kycFormArea}>
         <KycHeader />
-        {/* <KYCCard /> */}
-        <KYCCommon />
+        <KYCAddress />
       </div>
     </div>
   );
