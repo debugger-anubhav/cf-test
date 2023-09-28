@@ -9,7 +9,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {BsFillStarFill} from "react-icons/bs";
+import {BsStarFill} from "react-icons/bs";
 import Rating from "react-rating";
 
 const CustomerRating = () => {
@@ -141,14 +141,10 @@ const CustomerRating = () => {
                     <Rating
                       stop={5}
                       emptySymbol={
-                        <BsFillStarFill
-                          size={16}
-                          color={"#fff"}
-                          className="mr-1"
-                        />
+                        <BsStarFill size={16} color={"#fff"} className="mr-1" />
                       }
                       fullSymbol={
-                        <BsFillStarFill
+                        <BsStarFill
                           size={16}
                           color={"#FFCB45"}
                           className="mr-1"
