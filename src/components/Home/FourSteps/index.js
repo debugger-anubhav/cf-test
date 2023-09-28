@@ -17,6 +17,7 @@ const FourSteps = () => {
               <div className={`w-100 h-100 absolute z-10`} />
               <img
                 src={itemm?.img1}
+                alt={`step-${index + 1}`}
                 className={`${
                   index === 0
                     ? "w-[80px] h-[80px]"

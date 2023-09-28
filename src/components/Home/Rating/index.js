@@ -97,7 +97,7 @@ const CustomerRating = () => {
           </h3>
 
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
+            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCq…"
             target="_blank"
             rel="noreferrer">
             <Image
