@@ -24,6 +24,7 @@ import {
   MdVerifiedUser,
   MdCheckBox,
   MdOutlineCheckBoxOutlineBlank,
+  MdEmail,
 } from "react-icons/md";
 import {HiOutlineShare} from "react-icons/hi";
 import {LiaTruckMovingSolid} from "react-icons/lia";
@@ -287,4 +288,8 @@ export const CalendarIcon = ({size, color, className}) => (
 
 export const VerifiedIcon = ({size, color, className}) => (
   <LuVerified size={size} color={color} className={className} />
+);
+
+export const EmailIcon = ({size, color, className}) => (
+  <MdEmail size={size} color={color} className={className} />
 );

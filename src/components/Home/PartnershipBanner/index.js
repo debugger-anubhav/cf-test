@@ -12,7 +12,7 @@ const PartnershipBanner = () => {
           "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
         }
         loading="lazy"
-        className="w-full h-full "
+        className="w-full h-full pointer-events-none"
       />
     </div>
   );

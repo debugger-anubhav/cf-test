@@ -101,10 +101,11 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                       copyToClipboard(window.location.href);
                     }
                   }}>
+                  <div className={`w-100 h-100 absolute z-10`} />
                   <img
                     alt={item?.icon}
                     src={item?.icon}
-                    className="cursor-pointer"
+                    className="cursor-pointer relative z-[-1]"
                     // onClick={() => console.log("cliked")}
                   />
                 </a>
@@ -138,10 +139,11 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                     copyToClipboard(window.location.href);
                   }
                 }}>
+                <div className={`w-100 h-100 absolute z-10`} />
                 <img
                   alt={item?.icon}
                   src={item?.icon}
-                  className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8"
+                  className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8 relative z-[-1]"
                   // onClick={() => console.log("cliked")}
                 />
               </a>
