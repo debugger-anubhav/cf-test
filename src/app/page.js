@@ -14,7 +14,7 @@ import loadable from "@loadable/component";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
@@ -73,10 +73,10 @@ import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 //   () => import("@/components/Home/RentNowBanner"),
 //   {fallback: <RentNowBannersSkeleton />},
 // );
-const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-  fallback: <TryCityMaxSkeleton />,
-});
-// const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
+// const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+//   fallback: <TryCityMaxSkeleton />,
+// });
+const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 // const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   fallback: <ProductRowSkeleton />,
 // });
@@ -119,15 +119,15 @@ export default function Home() {
       {/* <HasselFreeServicesCards /> */}
       {/* <LimetedPreiodDiscount /> */}
       {/* <RentNowBanner params={"home-page"} /> */}
-      <TryCityMax />
-      {/* <div className="xl:hidden block">
+      {/* <TryCityMax /> */}
+      <div className="xl:hidden block">
         <MediaCoverage />
       </div>
-      <CustomerRating />
+      {/* <CustomerRating /> */}
       <div className="hidden xl:block">
         <MediaCoverage />
       </div>
-      <CombineSection />
+      {/* <CombineSection />
       <HappySubscribers params={"home-page"} />
       <FrequentlyAskedQuestions params={"home-page"} />
       <TextContent params={"home-page"} />
