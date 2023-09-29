@@ -11,10 +11,10 @@ import HeroBanner from "@/components/Home/HeroBanner";
 import loadable from "@loadable/component";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
-// import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-// import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
-// import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
+import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
+import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
@@ -36,50 +36,50 @@ const RecentlyViewedProduct = loadable(
     fallback: <ProductRowSkeleton />,
   },
 );
-// const TrendingProducts = loadable(
-//   () => import("@/components/Home/TrendingProducts"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
-// const OffersAndCoupons = loadable(
-//   () => import("@/components/Home/OffersAndCoupons"),
-//   {fallback: <OffersSkeleton />},
-// );
-// const NewlyLaunched = loadable(
-//   () => import("@/components/Home/NewlyLaunched"),
-//   {fallback: <NewlyLauncedSkeleton />},
-// );
+const TrendingProducts = loadable(
+  () => import("@/components/Home/TrendingProducts"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const OffersAndCoupons = loadable(
+  () => import("@/components/Home/OffersAndCoupons"),
+  {fallback: <OffersSkeleton />},
+);
+const NewlyLaunched = loadable(
+  () => import("@/components/Home/NewlyLaunched"),
+  {fallback: <NewlyLauncedSkeleton />},
+);
 
-// const DownloadForMobile = loadable(() =>
-//   import("@/components/Home/DownloadForMobile"),
-// );
-// const PreDesignCombos = loadable(
-//   () => import("@/components/Home/PredesignCombos"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
-// const HasselFreeServicesCards = loadable(() =>
-//   import("@/components/Home/HasselFreeServicesCards"),
-// );
-// const LimetedPreiodDiscount = loadable(
-//   () => import("@/components/Home/LimetedPreiodDiscount"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
-// const RentNowBanner = loadable(
-//   () => import("@/components/Home/RentNowBanner"),
-//   {fallback: <RentNowBannersSkeleton />},
-// );
-// const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-//   fallback: <TryCityMaxSkeleton />,
-// });
+const DownloadForMobile = loadable(() =>
+  import("@/components/Home/DownloadForMobile"),
+);
+const PreDesignCombos = loadable(
+  () => import("@/components/Home/PredesignCombos"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const HasselFreeServicesCards = loadable(() =>
+  import("@/components/Home/HasselFreeServicesCards"),
+);
+const LimetedPreiodDiscount = loadable(
+  () => import("@/components/Home/LimetedPreiodDiscount"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const RentNowBanner = loadable(
+  () => import("@/components/Home/RentNowBanner"),
+  {fallback: <RentNowBannersSkeleton />},
+);
+const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+  fallback: <TryCityMaxSkeleton />,
+});
 // const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-// const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-//   fallback: <ProductRowSkeleton />,
-// });
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
 // const HappySubscribers = loadable(() =>
 //   import("@/components/Home/HappySubscribers"),
 // );
@@ -115,19 +115,19 @@ export default function Home() {
       </div>
       <RentFurnitureAndAppliances params={"home-page"} />
       <RecentlyViewedProduct />
-      {/* <TrendingProducts params={"home-page"} /> */}
-      {/* <OffersAndCoupons /> */}
-      {/* <NewlyLaunched /> */}
-      {/* <DownloadForMobile /> */}
-      {/* <PreDesignCombos /> */}
-      {/* <HasselFreeServicesCards /> */}
-      {/* <LimetedPreiodDiscount /> */}
-      {/* <RentNowBanner params={"home-page"} /> */}
-      {/* <TryCityMax /> */}
+      <TrendingProducts params={"home-page"} />
+      <OffersAndCoupons />
+      <NewlyLaunched />
+      <DownloadForMobile />
+      <PreDesignCombos />
+      <HasselFreeServicesCards />
+      <LimetedPreiodDiscount />
+      <RentNowBanner params={"home-page"} />
+      <TryCityMax />
       {/* <div className="xl:hidden block">
         <MediaCoverage />
       </div> */}
-      {/* <CustomerRating /> */}
+      <CustomerRating />
       {/* <div className="hidden xl:block">
         <MediaCoverage />
       </div> */}
