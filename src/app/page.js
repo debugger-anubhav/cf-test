@@ -9,7 +9,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
@@ -60,15 +60,15 @@ import loadable from "@loadable/component";
 //     fallback: <ProductRowSkeleton />,
 //   },
 // );
-const HasselFreeServicesCards = loadable(() =>
-  import("@/components/Home/HasselFreeServicesCards"),
-);
-// const LimetedPreiodDiscount = loadable(
-//   () => import("@/components/Home/LimetedPreiodDiscount"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
+// const HasselFreeServicesCards = loadable(() =>
+//   import("@/components/Home/HasselFreeServicesCards"),
 // );
+const LimetedPreiodDiscount = loadable(
+  () => import("@/components/Home/LimetedPreiodDiscount"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 // const RentNowBanner = loadable(
 //   () => import("@/components/Home/RentNowBanner"),
 //   {fallback: <RentNowBannersSkeleton />},
@@ -116,9 +116,9 @@ export default function Home() {
       {/* <NewlyLaunched /> */}
       {/* <DownloadForMobile /> */}
       {/* <PreDesignCombos /> */}
-      <HasselFreeServicesCards />
-      {/* <LimetedPreiodDiscount />
-      <RentNowBanner params={"home-page"} />
+      {/* <HasselFreeServicesCards /> */}
+      <LimetedPreiodDiscount />
+      {/* <RentNowBanner params={"home-page"} />
       <TryCityMax />
       <div className="xl:hidden block">
         <MediaCoverage />
