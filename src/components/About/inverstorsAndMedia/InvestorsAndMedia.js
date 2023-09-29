@@ -100,10 +100,13 @@ const InverstorAndMedia = () => {
           {accolades?.map((ele, index) => {
             return (
               <div className={styles.accolades_cards} key={index.toString()}>
-                <img src={ele.link} alt={ele.altText} />
+                <img src={ele.link} alt={ele.altText} loading="lazy" />
                 <div className={styles.accolades_box}>
                   <div className="flex justify-center w-[16px]">
-                    <img src={`${AboutUs}/icons/award-icon.svg`} />
+                    <img
+                      src={`${AboutUs}/icons/award-icon.svg`}
+                      loading="lazy"
+                    />
                   </div>
                   <div className="flex flex-col gap-1 w-full">
                     <p className={styles.accolades_text}>{ele.desc}</p>
@@ -183,7 +186,12 @@ const MediaCard = () => {
             key={index.toString()}
             rel="noopener noreferrer"
             target="_blank">
-            <img className="object-fit" src={ele.link} alt={ele.altText} />
+            <img
+              className="object-fit"
+              src={ele.link}
+              alt={ele.altText}
+              loading="lazy"
+            />
             <div className="absolute left-[5px] bottom-[5px] w-[16px] text-[#7A7A71]">
               <TbExternalLink />
             </div>
@@ -253,7 +261,12 @@ const InvestorsCards = () => {
               isDumy && "pointer-events-none"
             }`}
             key={index.toString()}>
-            <img className="object-cover" src={ele.link} alt={ele.altText} />
+            <img
+              className="object-cover"
+              src={ele.link}
+              alt={ele.altText}
+              loading="lazy"
+            />
           </div>
         );
       })}

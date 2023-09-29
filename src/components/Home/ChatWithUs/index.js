@@ -18,17 +18,21 @@ export default function ChatWithUs() {
           <p className={styles.sub_paragraph_details}>
             Write to us at
             <span className={styles.mail_address}>
-              <a href="mailto: hello@cityfurnish.com">hello@cityfurnish.com </a>
+              <a href="mailto:hello@cityfurnish.com" className="text-[#48678B]">
+                hello@cityfurnish.com{" "}
+              </a>
             </span>
             or talk to our customer care representative at
             <span className={styles.mail_address}>
               {" "}
-              <a href={`tel:080-66084700 `}>080-66084700</a>
+              <a href={`tel:080-66084700 `} className="text-[#48678B]">
+                080-66084700
+              </a>
             </span>{" "}
             (9 AM - 9 PM)
           </p>
           <div className={styles.btn_wrapper}>
-            <a href="mailto: hello@cityfurnish.com">
+            <a href="mailto:hello@cityfurnish.com" className="text-[#48678B]">
               <button
                 className={styles.write_to_us_wrapper}
                 onClick={() => {

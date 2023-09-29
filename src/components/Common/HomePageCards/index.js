@@ -137,7 +137,7 @@ const Card = ({
         href={`/things/${productID}/${seourl}`}
         onClick={e => e.preventDefault()}
         className={styles.anchor_card}
-        aria-label={desc}
+        aria-label={desc.replace(/-/g, " ")}
         target="_self"
         rel="noopener">
         <div

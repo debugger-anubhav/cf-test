@@ -22,6 +22,7 @@ const MediaCoverage = () => {
                 src={imageUrl.img}
                 alt={imageUrl.alt}
                 className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
+                loading="lazy"
               />
             </div>
           </>

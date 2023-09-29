@@ -262,6 +262,7 @@ const AddressSection = ({setTab}) => {
                       <img
                         src={`${cityUrl + "india-icon.svg"}`}
                         className={styles.flag}
+                        loading="lazy"
                       />
                       <Field
                         type="number"

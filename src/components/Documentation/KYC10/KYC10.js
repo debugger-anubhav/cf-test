@@ -110,7 +110,7 @@ const KYC10 = () => {
             disabled
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>
-            <Image src={forwardArrow} alt="Forward Arrow Icon" />
+            <Image src={forwardArrow} alt="Forward Arrow Icon" loading="lazy" />
           </button>
         </div>
       </div>

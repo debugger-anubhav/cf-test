@@ -29,9 +29,17 @@ const DropDown = ({
         <span> {selectedOption || "Select an option"}</span>
         <div className={`${styles.ddArrow}`}>
           {isOpen ? (
-            <Image src={downArrowDD} className={`${styles.ddArrow}`} />
+            <Image
+              src={downArrowDD}
+              className={`${styles.ddArrow}`}
+              loading="lazy"
+            />
           ) : (
-            <Image src={upArrowDD} className={`${styles.ddArrow}`} />
+            <Image
+              src={upArrowDD}
+              className={`${styles.ddArrow}`}
+              loading="lazy"
+            />
           )}
         </div>
       </div>

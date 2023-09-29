@@ -95,6 +95,7 @@ const ProductCard = ({
             <img
               src={hoverCard ? hoverCardImage : cardImage}
               alt={desc.replace(/-/g, " ")}
+              loading="lazy"
               className={`${styles.thumbnail} ${
                 isImageHeight && "min-h-[272px]"
               }

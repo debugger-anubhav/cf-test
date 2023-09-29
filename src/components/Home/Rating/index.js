@@ -97,13 +97,14 @@ const CustomerRating = () => {
           </h3>
 
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
+            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCq…"
             target="_blank"
             rel="noreferrer">
             <Image
               src={HomePageImages.editIcon}
               alt="editIcon"
               className={styles.editIcon}
+              loading="lazy"
             />
           </a>
           <a
@@ -133,6 +134,7 @@ const CustomerRating = () => {
                     src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
                     alt="profile-pic"
                     className={`${styles.img} pointer-events-none`}
+                    loading="lazy"
                   />
                 </div>
                 <div className="ml-3 mr-7">
