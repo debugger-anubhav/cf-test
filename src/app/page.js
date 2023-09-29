@@ -107,9 +107,7 @@ export default function Home() {
       {useChatScript()}
       <AnnouncementBar />
       <Header />
-      <div className="min-h-[40px]">
-        <MenuList />
-      </div>
+      <MenuList />
       <div className="lg:min-h-[385px] min-h-[150px]">
         <HeroBanner />
       </div>
