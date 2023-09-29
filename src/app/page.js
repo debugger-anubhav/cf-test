@@ -9,7 +9,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
@@ -77,9 +77,9 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 //   fallback: <TryCityMaxSkeleton />,
 // });
 // const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-  fallback: <ProductRowSkeleton />,
-});
+// const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+//   fallback: <ProductRowSkeleton />,
+// });
 // const HappySubscribers = loadable(() =>
 //   import("@/components/Home/HappySubscribers"),
 // );
@@ -90,9 +90,9 @@ const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   },
 // );
 // const Footer = loadable(() => import("@/components/Common/Footer"));
-// const CombineSection = loadable(() =>
-//   import("@/components/Home/CombineSection"),
-// );
+const CombineSection = loadable(() =>
+  import("@/components/Home/CombineSection"),
+);
 
 export default function Home() {
   // const router = useRouter();
@@ -123,11 +123,11 @@ export default function Home() {
       {/* <div className="xl:hidden block">
         <MediaCoverage />
       </div> */}
-      <CustomerRating />
+      {/* <CustomerRating /> */}
       {/* <div className="hidden xl:block">
         <MediaCoverage />
       </div> */}
-      {/* <CombineSection /> */}
+      <CombineSection />
       {/* <HappySubscribers params={"home-page"} /> */}
       {/* <FrequentlyAskedQuestions params={"home-page"} /> */}
       {/* <TextContent params={"home-page"} /> */}
