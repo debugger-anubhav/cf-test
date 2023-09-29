@@ -105,6 +105,7 @@ export default function Home() {
 
   return (
     <div ref={myElementRef} className="large_layout">
+      <p>for seo testing</p>
       {/* {useChatScript()} */}
       {/* <AnnouncementBar />
       <Header />
