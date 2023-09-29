@@ -5,12 +5,12 @@ import React, {useRef} from "react";
 // import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
-// import Header from "@/components/Common/Header";
-// import HeroBanner from "@/components/Home/HeroBanner";
+import Header from "@/components/Common/Header";
+import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
-// import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
@@ -19,23 +19,23 @@ import loadable from "@loadable/component";
 // import {useChatScript} from "../../useChatScript";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 // import Notifications from "@/components/Common/Notifications/Notification";
-// const MenuList = loadable(() => import("@/components/Common/MenuList"));
+const MenuList = loadable(() => import("@/components/Common/MenuList"));
 
 // const TextContent = loadable(() => import("@/components/Common/TextContent"), {
 //   fallback: <ContentSkeleton />,
 // });
-// const RentFurnitureAndAppliances = loadable(
-//   () => import("@/components/Home/RentFurnitureAndAppliances"),
-//   {
-//     fallback: <RentFurnitureSkeleton />,
-//   },
-// );
-// const RecentlyViewedProduct = loadable(
-//   () => import("@/components/Home/RecentlyViewedProduct"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const RentFurnitureAndAppliances = loadable(
+  () => import("@/components/Home/RentFurnitureAndAppliances"),
+  {
+    fallback: <RentFurnitureSkeleton />,
+  },
+);
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 // const TrendingProducts = loadable(
 //   () => import("@/components/Home/TrendingProducts"),
 //   {
@@ -89,7 +89,7 @@ import loadable from "@loadable/component";
 //     fallback: <FaqsSkeleton />,
 //   },
 // );
-const Footer = loadable(() => import("@/components/Common/Footer"));
+// const Footer = loadable(() => import("@/components/Common/Footer"));
 // const CombineSection = loadable(() =>
 //   import("@/components/Home/CombineSection"),
 // );
@@ -106,11 +106,11 @@ export default function Home() {
     <div ref={myElementRef} className="large_layout">
       {/* {useChatScript()} */}
       <AnnouncementBar />
-      {/* <Header /> */}
-      {/* <MenuList /> */}
-      {/* <HeroBanner /> */}
-      {/* <RentFurnitureAndAppliances params={"home-page"} /> */}
-      {/* <RecentlyViewedProduct /> */}
+      <Header />
+      <MenuList />
+      <HeroBanner />
+      <RentFurnitureAndAppliances params={"home-page"} />
+      <RecentlyViewedProduct />
       {/* <TrendingProducts params={"home-page"} /> */}
       {/* <OffersAndCoupons /> */}
       {/* <NewlyLaunched /> */}
@@ -131,7 +131,7 @@ export default function Home() {
       {/* <HappySubscribers params={"home-page"} /> */}
       {/* <FrequentlyAskedQuestions params={"home-page"} /> */}
       {/* <TextContent params={"home-page"} /> */}
-      <Footer />
+      {/* <Footer /> */}
       {/* <Notifications /> */}
     </div>
   );
