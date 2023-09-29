@@ -30,18 +30,18 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 //     fallback: <RentFurnitureSkeleton />,
 //   },
 // );
-const RecentlyViewedProduct = loadable(
-  () => import("@/components/Home/RecentlyViewedProduct"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-// const TrendingProducts = loadable(
-//   () => import("@/components/Home/TrendingProducts"),
+// const RecentlyViewedProduct = loadable(
+//   () => import("@/components/Home/RecentlyViewedProduct"),
 //   {
 //     fallback: <ProductRowSkeleton />,
 //   },
 // );
+const TrendingProducts = loadable(
+  () => import("@/components/Home/TrendingProducts"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 // const OffersAndCoupons = loadable(
 //   () => import("@/components/Home/OffersAndCoupons"),
 //   {fallback: <OffersSkeleton />},
@@ -111,9 +111,9 @@ export default function Home() {
       {/* <MenuList /> */}
       {/* <HeroBanner /> */}
       {/* <RentFurnitureAndAppliances params={"home-page"} /> */}
-      <RecentlyViewedProduct />
-      {/* <TrendingProducts params={"home-page"} />
-      <OffersAndCoupons />
+      {/* <RecentlyViewedProduct /> */}
+      <TrendingProducts params={"home-page"} />
+      {/* <OffersAndCoupons />
       <NewlyLaunched />
       <DownloadForMobile />
       <PreDesignCombos />
