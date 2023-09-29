@@ -9,11 +9,11 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
-// import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
+import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
@@ -63,16 +63,16 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // const HasselFreeServicesCards = loadable(() =>
 //   import("@/components/Home/HasselFreeServicesCards"),
 // );
-const LimetedPreiodDiscount = loadable(
-  () => import("@/components/Home/LimetedPreiodDiscount"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-// const RentNowBanner = loadable(
-//   () => import("@/components/Home/RentNowBanner"),
-//   {fallback: <RentNowBannersSkeleton />},
+// const LimetedPreiodDiscount = loadable(
+//   () => import("@/components/Home/LimetedPreiodDiscount"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
 // );
+const RentNowBanner = loadable(
+  () => import("@/components/Home/RentNowBanner"),
+  {fallback: <RentNowBannersSkeleton />},
+);
 // const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
 //   fallback: <TryCityMaxSkeleton />,
 // });
@@ -117,9 +117,9 @@ export default function Home() {
       {/* <DownloadForMobile /> */}
       {/* <PreDesignCombos /> */}
       {/* <HasselFreeServicesCards /> */}
-      <LimetedPreiodDiscount />
-      {/* <RentNowBanner params={"home-page"} />
-      <TryCityMax />
+      {/* <LimetedPreiodDiscount /> */}
+      <RentNowBanner params={"home-page"} />
+      {/* <TryCityMax />
       <div className="xl:hidden block">
         <MediaCoverage />
       </div>
