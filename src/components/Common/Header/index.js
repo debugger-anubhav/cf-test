@@ -238,6 +238,7 @@ const Header = () => {
                     src={Icons.Search}
                     alt="search-icon"
                     className={`${styles.header_search_icon} pointer-events-none`}
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -272,6 +273,7 @@ const Header = () => {
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
+                    loading="lazy"
                     // onClick={() => {
                     //   if (userId) {
                     //     router.push("/wishlist");
@@ -298,6 +300,7 @@ const Header = () => {
                   <Image
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
+                    loading="lazy"
                     className={`${styles.header_shopping_card} relative z-[-1]`}
                     // onClick={() => router.push("/cart")}
                   />
@@ -331,6 +334,7 @@ const Header = () => {
                     <Image
                       src={Icons.Profile}
                       alt="profile-icon"
+                      loading="lazy"
                       className={`${styles.header_profile_icon} relative z-10 pointer-events-none`}
                       onClick={e => e.preventDefault()}
                       aria-disabled={true}
@@ -384,6 +388,7 @@ const Header = () => {
               src={Icons.Search}
               alt="search-icon"
               className={`${styles.header_search_icon} pointer-events-none`}
+              loading="lazy"
             />
           </div>
 
@@ -532,6 +537,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
             src={Icons.Search}
             alt="search-icon"
             className={`${styles.header_search_icon} pointer-events-none`}
+            loading="lazy"
           />
         </div>
         <div
@@ -541,6 +547,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
             src={Icons.Search}
             alt="search-icon"
             className={`${styles.header_search_icon} pointer-events-none`}
+            loading="lazy"
           />
           <input
             placeholder="Search for Furniture, Appliances, etc"

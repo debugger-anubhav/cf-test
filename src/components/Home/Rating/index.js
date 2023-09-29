@@ -104,6 +104,7 @@ const CustomerRating = () => {
               src={HomePageImages.editIcon}
               alt="editIcon"
               className={styles.editIcon}
+              loading="lazy"
             />
           </a>
           <a

@@ -7,7 +7,7 @@ const KYC100 = () => {
   return (
     <div>
       <div className={`${styles.firstSection}`}>
-        <Image src={veriTick} alt="Icon for KYC success" />
+        <Image src={veriTick} alt="Icon for KYC success" loading="lazy" />
       </div>
       <div className={`${styles.secondSection}`}>
         <div className={`${styles.secondSectionHeaderTxt}`}>

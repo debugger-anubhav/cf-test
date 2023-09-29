@@ -341,6 +341,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               alt="menu-icon"
               // className={styles.menu_icon_drawer}
               className={`${styles.menu_icon_drawer} cursor-pointer relative z-[-1]`}
+              loading="lazy"
             />
           </div>
         ) : (
