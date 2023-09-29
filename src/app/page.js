@@ -13,8 +13,8 @@ import loadable from "@loadable/component";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
-import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+// import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
+import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
@@ -69,13 +69,13 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 //     fallback: <ProductRowSkeleton />,
 //   },
 // );
-const RentNowBanner = loadable(
-  () => import("@/components/Home/RentNowBanner"),
-  {fallback: <RentNowBannersSkeleton />},
-);
-// const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-//   fallback: <TryCityMaxSkeleton />,
-// });
+// const RentNowBanner = loadable(
+//   () => import("@/components/Home/RentNowBanner"),
+//   {fallback: <RentNowBannersSkeleton />},
+// );
+const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+  fallback: <TryCityMaxSkeleton />,
+});
 // const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 // const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   fallback: <ProductRowSkeleton />,
@@ -118,9 +118,9 @@ export default function Home() {
       {/* <PreDesignCombos /> */}
       {/* <HasselFreeServicesCards /> */}
       {/* <LimetedPreiodDiscount /> */}
-      <RentNowBanner params={"home-page"} />
-      {/* <TryCityMax />
-      <div className="xl:hidden block">
+      {/* <RentNowBanner params={"home-page"} /> */}
+      <TryCityMax />
+      {/* <div className="xl:hidden block">
         <MediaCoverage />
       </div>
       <CustomerRating />
