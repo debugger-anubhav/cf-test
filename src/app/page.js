@@ -12,7 +12,7 @@ import loadable from "@loadable/component";
 // import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
+// import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
@@ -46,14 +46,14 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 //   () => import("@/components/Home/OffersAndCoupons"),
 //   {fallback: <OffersSkeleton />},
 // );
-const NewlyLaunched = loadable(
-  () => import("@/components/Home/NewlyLaunched"),
-  {fallback: <NewlyLauncedSkeleton />},
-);
-
-// const DownloadForMobile = loadable(() =>
-//   import("@/components/Home/DownloadForMobile"),
+// const NewlyLaunched = loadable(
+//   () => import("@/components/Home/NewlyLaunched"),
+//   {fallback: <NewlyLauncedSkeleton />},
 // );
+
+const DownloadForMobile = loadable(() =>
+  import("@/components/Home/DownloadForMobile"),
+);
 // const PreDesignCombos = loadable(
 //   () => import("@/components/Home/PredesignCombos"),
 //   {
@@ -114,9 +114,9 @@ export default function Home() {
       {/* <RecentlyViewedProduct /> */}
       {/* <TrendingProducts params={"home-page"} /> */}
       {/* <OffersAndCoupons /> */}
-      <NewlyLaunched />
-      {/* <DownloadForMobile />
-      <PreDesignCombos />
+      {/* <NewlyLaunched /> */}
+      <DownloadForMobile />
+      {/* <PreDesignCombos />
       <HasselFreeServicesCards />
       <LimetedPreiodDiscount />
       <RentNowBanner params={"home-page"} />
