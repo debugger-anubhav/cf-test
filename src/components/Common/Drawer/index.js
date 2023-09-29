@@ -271,6 +271,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                     }`}
                     alt="city-image"
+                    loading="lazy"
                   />
                   {city?.id === 50 ? (
                     <div className={`${styles.city_name}`}>
@@ -306,6 +307,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                     "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
                   }
                   alt="download-QR"
+                  loading="lazy"
                 />
                 {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
                 <p className={styles.qr_text}>

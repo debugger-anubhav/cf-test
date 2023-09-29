@@ -144,6 +144,7 @@ const Cards = ({subCategory}) => {
                     subItem?.category_web_image
                   }
                   className={`${styles.images} !w-full rounded-[6.4px] ms:rounded-none select-none`}
+                  loading="lazy"
                 />
               </div>
               <h3

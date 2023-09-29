@@ -282,6 +282,7 @@ const ShoppingCartSection = ({setTab}) => {
                             }`}
                             alt="product_img"
                             className={styles.img}
+                            loading="lazy"
                           />
                         </div>
                       </a>
@@ -434,6 +435,7 @@ const ShoppingCartSection = ({setTab}) => {
                     <img
                       src={`${categoryIconsUrl + "cf_coin.svg"}`}
                       className={`${styles.coin} pointer-events-none`}
+                      loading="lazy"
                     />
                   </div>
                   <div>

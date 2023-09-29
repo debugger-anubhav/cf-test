@@ -571,6 +571,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
                     alt={item?.image}
                     className={styles.serach_result_img}
+                    loading="lazy"
                   />
                   <p className={styles.search_result_text}>
                     {item.product_name?.replace(/-/g, " ")}
@@ -590,6 +591,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
                     src={productImageBaseUrl + item?.image?.split(",")[0]}
                     alt={item?.image}
                     className={styles.serach_result_img}
+                    loading="lazy"
                   />
                   <p className={styles.search_result_text}>
                     {item.product_name?.replace(/-/g, " ")}
@@ -665,6 +667,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
                           }
                           alt="RentFurnitureImages"
                           className={styles.categories_img}
+                          loading="lazy"
                         />
                         <div>
                           <h3 className={styles.category_label}>

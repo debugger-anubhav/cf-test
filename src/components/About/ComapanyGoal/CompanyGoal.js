@@ -21,7 +21,7 @@ const CompanyGoal = () => {
           <img
             className=" w-[64px] lg:w-[80px]"
             src={`${AboutUs}/icons/illustration-target.svg`}
-            alt=""
+            alt="illustration-target"
             loading="lazy"
           />
         </div>

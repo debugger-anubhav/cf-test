@@ -199,6 +199,7 @@ const Footer = ({params}) => {
                   src={item?.icon}
                   className="pointer-events-none"
                   onClick={() => console.log("item.link")}
+                  loading="lazy"
                 />
               </a>
             ))}
