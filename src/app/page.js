@@ -80,9 +80,9 @@ import loadable from "@loadable/component";
 // const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   fallback: <ProductRowSkeleton />,
 // });
-// const HappySubscribers = loadable(() =>
-//   import("@/components/Home/HappySubscribers"),
-// );
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
+);
 // const FrequentlyAskedQuestions = loadable(
 //   () => import("@/components/Common/FrequentlyAskedQuestions"),
 //   {
@@ -90,9 +90,9 @@ import loadable from "@loadable/component";
 //   },
 // );
 // const Footer = loadable(() => import("@/components/Common/Footer"));
-const CombineSection = loadable(() =>
-  import("@/components/Home/CombineSection"),
-);
+// const CombineSection = loadable(() =>
+//   import("@/components/Home/CombineSection"),
+// );
 
 export default function Home() {
   // const router = useRouter();
@@ -127,8 +127,8 @@ export default function Home() {
       {/* <div className="hidden xl:block">
         <MediaCoverage />
       </div> */}
-      <CombineSection />
-      {/* <HappySubscribers params={"home-page"} /> */}
+      {/* <CombineSection /> */}
+      <HappySubscribers params={"home-page"} />
       {/* <FrequentlyAskedQuestions params={"home-page"} /> */}
       {/* <TextContent params={"home-page"} /> */}
       {/* <Footer /> */}
