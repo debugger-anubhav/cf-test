@@ -130,6 +130,6 @@
 .mdHiddenIB {
   @apply inline-block md:hidden;
 }
-.mdIBHidden{
-  @apply md:inline-block hidden
+.mdIBHidden {
+  @apply md:inline-block hidden;
 }
