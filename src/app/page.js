@@ -15,15 +15,15 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+// import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
-import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
-import Notifications from "@/components/Common/Notifications/Notification";
+// import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+// import Notifications from "@/components/Common/Notifications/Notification";
 // const MenuList = loadable(() => import("@/components/Common/MenuList"));
 
-const TextContent = loadable(() => import("@/components/Common/TextContent"), {
-  fallback: <ContentSkeleton />,
-});
+// const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+//   fallback: <ContentSkeleton />,
+// });
 // const RentFurnitureAndAppliances = loadable(
 //   () => import("@/components/Home/RentFurnitureAndAppliances"),
 //   {
@@ -80,19 +80,19 @@ const TextContent = loadable(() => import("@/components/Common/TextContent"), {
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });
-const HappySubscribers = loadable(() =>
-  import("@/components/Home/HappySubscribers"),
-);
-const FrequentlyAskedQuestions = loadable(
-  () => import("@/components/Common/FrequentlyAskedQuestions"),
-  {
-    fallback: <FaqsSkeleton />,
-  },
-);
-const Footer = loadable(() => import("@/components/Common/Footer"));
-const CombineSection = loadable(() =>
-  import("@/components/Home/CombineSection"),
-);
+// const HappySubscribers = loadable(() =>
+//   import("@/components/Home/HappySubscribers"),
+// );
+// const FrequentlyAskedQuestions = loadable(
+//   () => import("@/components/Common/FrequentlyAskedQuestions"),
+//   {
+//     fallback: <FaqsSkeleton />,
+//   },
+// );
+// const Footer = loadable(() => import("@/components/Common/Footer"));
+// const CombineSection = loadable(() =>
+//   import("@/components/Home/CombineSection"),
+// );
 
 export default function Home() {
   // const router = useRouter();
@@ -127,12 +127,12 @@ export default function Home() {
       {/* <div className="hidden xl:block">
         <MediaCoverage />
       </div> */}
-      <CombineSection />
-      <HappySubscribers params={"home-page"} />
-      <FrequentlyAskedQuestions params={"home-page"} />
-      <TextContent params={"home-page"} />
-      <Footer />
-      <Notifications />
+      {/* <CombineSection /> */}
+      {/* <HappySubscribers params={"home-page"} /> */}
+      {/* <FrequentlyAskedQuestions params={"home-page"} /> */}
+      {/* <TextContent params={"home-page"} /> */}
+      {/* <Footer /> */}
+      {/* <Notifications /> */}
     </div>
   );
 }
