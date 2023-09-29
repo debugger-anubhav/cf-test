@@ -4,12 +4,11 @@ import React, {useRef} from "react";
 
 // import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
-// import AnnouncementBar from "@/components/Common/AnnouncementBar";
-// import Header from "@/components/Common/Header";
-// import HeroBanner from "@/components/Home/HeroBanner";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import Header from "@/components/Common/Header";
+import HeroBanner from "@/components/Home/HeroBanner";
 
-// import loadable from "@loadable/component";
-// const MenuList = loadable(() => import("@/components/Common/MenuList"));
+import loadable from "@loadable/component";
 // import MenuList from "@/components/Common/MenuList";
 // import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
@@ -17,14 +16,15 @@ import React, {useRef} from "react";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-// import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
-// import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
-// import Notifications from "@/components/Common/Notifications/Notification";
+import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+import Notifications from "@/components/Common/Notifications/Notification";
+const MenuList = loadable(() => import("@/components/Common/MenuList"));
 
-// const TextContent = loadable(() => import("@/components/Common/TextContent"), {
-//   fallback: <ContentSkeleton />,
-// });
+const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+  fallback: <ContentSkeleton />,
+});
 // const RentFurnitureAndAppliances = loadable(
 //   () => import("@/components/Home/RentFurnitureAndAppliances"),
 //   {
@@ -84,13 +84,13 @@ import React, {useRef} from "react";
 // const HappySubscribers = loadable(() =>
 //   import("@/components/Home/HappySubscribers"),
 // );
-// const FrequentlyAskedQuestions = loadable(
-//   () => import("@/components/Common/FrequentlyAskedQuestions"),
-//   {
-//     fallback: <FaqsSkeleton />,
-//   },
-// );
-// const Footer = loadable(() => import("@/components/Common/Footer"));
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
+const Footer = loadable(() => import("@/components/Common/Footer"));
 // const CombineSection = loadable(() =>
 //   import("@/components/Home/CombineSection"),
 // );
@@ -107,34 +107,34 @@ export default function Home() {
     <div ref={myElementRef} className="large_layout">
       <p>for seo testing</p>
       {/* {useChatScript()} */}
-      {/* <AnnouncementBar />
+      <AnnouncementBar />
       <Header />
       <MenuList />
       <HeroBanner />
-      <RentFurnitureAndAppliances params={"home-page"} />
-      <RecentlyViewedProduct />
-      <TrendingProducts params={"home-page"} />
-      <OffersAndCoupons />
-      <NewlyLaunched />
-      <DownloadForMobile />
-      <PreDesignCombos />
-      <HasselFreeServicesCards />
-      <LimetedPreiodDiscount />
-      <RentNowBanner params={"home-page"} />
-      <TryCityMax />
-      <div className="xl:hidden block">
+      {/* <RentFurnitureAndAppliances params={"home-page"} /> */}
+      {/* <RecentlyViewedProduct /> */}
+      {/* <TrendingProducts params={"home-page"} /> */}
+      {/* <OffersAndCoupons /> */}
+      {/* <NewlyLaunched /> */}
+      {/* <DownloadForMobile /> */}
+      {/* <PreDesignCombos /> */}
+      {/* <HasselFreeServicesCards /> */}
+      {/* <LimetedPreiodDiscount /> */}
+      {/* <RentNowBanner params={"home-page"} /> */}
+      {/* <TryCityMax /> */}
+      {/* <div className="xl:hidden block">
         <MediaCoverage />
-      </div>
-      <CustomerRating />
-      <div className="hidden xl:block">
+      </div> */}
+      {/* <CustomerRating /> */}
+      {/* <div className="hidden xl:block">
         <MediaCoverage />
-      </div>
-      <CombineSection /> */}
+      </div> */}
+      {/* <CombineSection /> */}
       {/* <HappySubscribers params={"home-page"} /> */}
-      {/* <FrequentlyAskedQuestions params={"home-page"} />
+      <FrequentlyAskedQuestions params={"home-page"} />
       <TextContent params={"home-page"} />
       <Footer />
-      <Notifications /> */}
+      <Notifications />
     </div>
   );
 }
