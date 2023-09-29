@@ -15,7 +15,7 @@ import loadable from "@loadable/component";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-// import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 // import Notifications from "@/components/Common/Notifications/Notification";
@@ -80,15 +80,15 @@ import loadable from "@loadable/component";
 // const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   fallback: <ProductRowSkeleton />,
 // });
-const HappySubscribers = loadable(() =>
-  import("@/components/Home/HappySubscribers"),
-);
-// const FrequentlyAskedQuestions = loadable(
-//   () => import("@/components/Common/FrequentlyAskedQuestions"),
-//   {
-//     fallback: <FaqsSkeleton />,
-//   },
+// const HappySubscribers = loadable(() =>
+//   import("@/components/Home/HappySubscribers"),
 // );
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
 // const Footer = loadable(() => import("@/components/Common/Footer"));
 // const CombineSection = loadable(() =>
 //   import("@/components/Home/CombineSection"),
@@ -128,8 +128,8 @@ export default function Home() {
         <MediaCoverage />
       </div> */}
       {/* <CombineSection /> */}
-      <HappySubscribers params={"home-page"} />
-      {/* <FrequentlyAskedQuestions params={"home-page"} /> */}
+      {/* <HappySubscribers params={"home-page"} /> */}
+      <FrequentlyAskedQuestions params={"home-page"} />
       {/* <TextContent params={"home-page"} /> */}
       {/* <Footer /> */}
       {/* <Notifications /> */}
