@@ -9,21 +9,21 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-// import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {useChatScript} from "../../useChatScript";
-// import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
-// import Notifications from "@/components/Common/Notifications/Notification";
+import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+import Notifications from "@/components/Common/Notifications/Notification";
 // const MenuList = loadable(() => import("@/components/Common/MenuList"));
 
-// const TextContent = loadable(() => import("@/components/Common/TextContent"), {
-//   fallback: <ContentSkeleton />,
-// });
+const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+  fallback: <ContentSkeleton />,
+});
 // const RentFurnitureAndAppliances = loadable(
 //   () => import("@/components/Home/RentFurnitureAndAppliances"),
 //   {
@@ -76,23 +76,23 @@ import loadable from "@loadable/component";
 // const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
 //   fallback: <TryCityMaxSkeleton />,
 // });
-const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-// const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-//   fallback: <ProductRowSkeleton />,
-// });
-// const HappySubscribers = loadable(() =>
-//   import("@/components/Home/HappySubscribers"),
-// );
-// const FrequentlyAskedQuestions = loadable(
-//   () => import("@/components/Common/FrequentlyAskedQuestions"),
-//   {
-//     fallback: <FaqsSkeleton />,
-//   },
-// );
-// const Footer = loadable(() => import("@/components/Common/Footer"));
-// const CombineSection = loadable(() =>
-//   import("@/components/Home/CombineSection"),
-// );
+// const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
+);
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
+const Footer = loadable(() => import("@/components/Common/Footer"));
+const CombineSection = loadable(() =>
+  import("@/components/Home/CombineSection"),
+);
 
 export default function Home() {
   // const router = useRouter();
@@ -120,19 +120,19 @@ export default function Home() {
       {/* <LimetedPreiodDiscount /> */}
       {/* <RentNowBanner params={"home-page"} /> */}
       {/* <TryCityMax /> */}
-      <div className="xl:hidden block">
+      {/* <div className="xl:hidden block">
         <MediaCoverage />
-      </div>
-      {/* <CustomerRating /> */}
-      <div className="hidden xl:block">
+      </div> */}
+      <CustomerRating />
+      {/* <div className="hidden xl:block">
         <MediaCoverage />
-      </div>
-      {/* <CombineSection />
+      </div> */}
+      <CombineSection />
       <HappySubscribers params={"home-page"} />
       <FrequentlyAskedQuestions params={"home-page"} />
       <TextContent params={"home-page"} />
       <Footer />
-      <Notifications /> */}
+      <Notifications />
     </div>
   );
 }
