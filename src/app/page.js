@@ -9,7 +9,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
@@ -54,15 +54,15 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // const DownloadForMobile = loadable(() =>
 //   import("@/components/Home/DownloadForMobile"),
 // );
-const PreDesignCombos = loadable(
-  () => import("@/components/Home/PredesignCombos"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-// const HasselFreeServicesCards = loadable(() =>
-//   import("@/components/Home/HasselFreeServicesCards"),
+// const PreDesignCombos = loadable(
+//   () => import("@/components/Home/PredesignCombos"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
 // );
+const HasselFreeServicesCards = loadable(() =>
+  import("@/components/Home/HasselFreeServicesCards"),
+);
 // const LimetedPreiodDiscount = loadable(
 //   () => import("@/components/Home/LimetedPreiodDiscount"),
 //   {
@@ -115,9 +115,9 @@ export default function Home() {
       {/* <OffersAndCoupons /> */}
       {/* <NewlyLaunched /> */}
       {/* <DownloadForMobile /> */}
-      <PreDesignCombos />
-      {/* <HasselFreeServicesCards />
-      <LimetedPreiodDiscount />
+      {/* <PreDesignCombos /> */}
+      <HasselFreeServicesCards />
+      {/* <LimetedPreiodDiscount />
       <RentNowBanner params={"home-page"} />
       <TryCityMax />
       <div className="xl:hidden block">
