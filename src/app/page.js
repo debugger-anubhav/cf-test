@@ -5,7 +5,7 @@ import React, {useRef} from "react";
 // import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
+// import Header from "@/components/Common/Header";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
@@ -107,7 +107,7 @@ export default function Home() {
       <p>for seo testing</p>
       {/* {useChatScript()} */}
       <AnnouncementBar />
-      <Header />
+      {/* <Header /> */}
       <MenuList />
       {/* <HeroBanner />
       <RentFurnitureAndAppliances params={"home-page"} />
