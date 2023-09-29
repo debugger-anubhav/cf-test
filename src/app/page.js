@@ -6,11 +6,11 @@ import React, {useRef} from "react";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import Header from "@/components/Common/Header";
-import HeroBanner from "@/components/Home/HeroBanner";
+// import HeroBanner from "@/components/Home/HeroBanner";
 
-// import loadable from "@loadable/component";
+import loadable from "@loadable/component";
 // import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
-// import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
@@ -24,12 +24,12 @@ import HeroBanner from "@/components/Home/HeroBanner";
 // const TextContent = loadable(() => import("@/components/Common/TextContent"), {
 //   fallback: <ContentSkeleton />,
 // });
-// const RentFurnitureAndAppliances = loadable(
-//   () => import("@/components/Home/RentFurnitureAndAppliances"),
-//   {
-//     fallback: <RentFurnitureSkeleton />,
-//   },
-// );
+const RentFurnitureAndAppliances = loadable(
+  () => import("@/components/Home/RentFurnitureAndAppliances"),
+  {
+    fallback: <RentFurnitureSkeleton />,
+  },
+);
 // const RecentlyViewedProduct = loadable(
 //   () => import("@/components/Home/RecentlyViewedProduct"),
 //   {
@@ -109,9 +109,9 @@ export default function Home() {
       <AnnouncementBar />
       {/* <Header /> */}
       {/* <MenuList /> */}
-      <HeroBanner />
-      {/* <RentFurnitureAndAppliances params={"home-page"} />
-      <RecentlyViewedProduct />
+      {/* <HeroBanner /> */}
+      <RentFurnitureAndAppliances params={"home-page"} />
+      {/* <RecentlyViewedProduct />
       <TrendingProducts params={"home-page"} />
       <OffersAndCoupons />
       <NewlyLaunched />
