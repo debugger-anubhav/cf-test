@@ -9,9 +9,9 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
-// import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
@@ -36,16 +36,16 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 //     fallback: <ProductRowSkeleton />,
 //   },
 // );
-const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-// const OffersAndCoupons = loadable(
-//   () => import("@/components/Home/OffersAndCoupons"),
-//   {fallback: <OffersSkeleton />},
+// const TrendingProducts = loadable(
+//   () => import("@/components/Home/TrendingProducts"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
 // );
+const OffersAndCoupons = loadable(
+  () => import("@/components/Home/OffersAndCoupons"),
+  {fallback: <OffersSkeleton />},
+);
 // const NewlyLaunched = loadable(
 //   () => import("@/components/Home/NewlyLaunched"),
 //   {fallback: <NewlyLauncedSkeleton />},
@@ -112,9 +112,9 @@ export default function Home() {
       {/* <HeroBanner /> */}
       {/* <RentFurnitureAndAppliances params={"home-page"} /> */}
       {/* <RecentlyViewedProduct /> */}
-      <TrendingProducts params={"home-page"} />
-      {/* <OffersAndCoupons />
-      <NewlyLaunched />
+      {/* <TrendingProducts params={"home-page"} /> */}
+      <OffersAndCoupons />
+      {/* <NewlyLaunched />
       <DownloadForMobile />
       <PreDesignCombos />
       <HasselFreeServicesCards />
