@@ -9,7 +9,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 // import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
@@ -51,15 +51,15 @@ import loadable from "@loadable/component";
 //   {fallback: <NewlyLauncedSkeleton />},
 // );
 
-const DownloadForMobile = loadable(() =>
-  import("@/components/Home/DownloadForMobile"),
-);
-// const PreDesignCombos = loadable(
-//   () => import("@/components/Home/PredesignCombos"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
+// const DownloadForMobile = loadable(() =>
+//   import("@/components/Home/DownloadForMobile"),
 // );
+const PreDesignCombos = loadable(
+  () => import("@/components/Home/PredesignCombos"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 // const HasselFreeServicesCards = loadable(() =>
 //   import("@/components/Home/HasselFreeServicesCards"),
 // );
@@ -104,7 +104,6 @@ export default function Home() {
 
   return (
     <div ref={myElementRef} className="large_layout">
-      <p>for seo testing</p>
       {/* {useChatScript()} */}
       <AnnouncementBar />
       {/* <Header /> */}
@@ -115,9 +114,9 @@ export default function Home() {
       {/* <TrendingProducts params={"home-page"} /> */}
       {/* <OffersAndCoupons /> */}
       {/* <NewlyLaunched /> */}
-      <DownloadForMobile />
-      {/* <PreDesignCombos />
-      <HasselFreeServicesCards />
+      {/* <DownloadForMobile /> */}
+      <PreDesignCombos />
+      {/* <HasselFreeServicesCards />
       <LimetedPreiodDiscount />
       <RentNowBanner params={"home-page"} />
       <TryCityMax />
