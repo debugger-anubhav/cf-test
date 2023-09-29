@@ -107,8 +107,12 @@ export default function Home() {
       {/* {useChatScript()} */}
       <AnnouncementBar />
       <Header />
-      <MenuList />
-      <HeroBanner />
+      <div className="min-h-[48px]">
+        <MenuList />
+      </div>
+      <div className="lg:min-h-[385px] min-h-[150px]">
+        <HeroBanner />
+      </div>
       <RentFurnitureAndAppliances params={"home-page"} />
       <RecentlyViewedProduct />
       {/* <TrendingProducts params={"home-page"} /> */}
