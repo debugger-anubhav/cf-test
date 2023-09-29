@@ -2,10 +2,12 @@ import {useEffect} from "react";
 
 export const useChatScript = (url, widgetCode) => {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.setAttribute("type", "text/javascript");
+    let script;
+    const timerID = setTimeout(() => {
+      script = document.createElement("script");
+      script.setAttribute("type", "text/javascript");
 
-    const code = `(function (d, w, c) {
+      const code = `(function (d, w, c) {
         if (!d.getElementById("spd-busns-spt")) {
             var n = d.getElementsByTagName('script')[0], s = d.createElement('script');
             var loaded = false;
@@ -34,11 +36,14 @@ export const useChatScript = (url, widgetCode) => {
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
-    script.appendChild(document.createTextNode(code));
-    document.body.appendChild(script);
+      script.appendChild(document.createTextNode(code));
+      document.body.appendChild(script);
+      clearInterval(timerID);
+    }, 3000);
 
     return () => {
       document.body.removeChild(script);
+      clearInterval(timerID);
     };
   }, [url]);
 };

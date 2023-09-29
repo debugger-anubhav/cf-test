@@ -19,7 +19,7 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
-const MenuList = loadable(() => import("@/components/Common/MenuList"));
+import MenuList from "@/components/Common/MenuList";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -107,7 +107,7 @@ export default function Home() {
       {useChatScript()}
       <AnnouncementBar />
       <Header />
-      <div className="min-h-[48px]">
+      <div className="min-h-[40px]">
         <MenuList />
       </div>
       <div className="lg:min-h-[385px] min-h-[150px]">
