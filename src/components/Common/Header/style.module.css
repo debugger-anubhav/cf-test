@@ -38,13 +38,13 @@
   @apply ml-2;
 } */
 .header_favorite {
-  @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
+  @apply flex lg:mr-8 mr-4 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 .header_shopping_card {
   @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4 cursor-pointer;
 }
 .cart_badge {
-  @apply absolute top-[-6px] left-2 lg:left-4 w-4 h-4 lg:w-5 lg:h-5 flex justify-center items-center rounded-[50%] bg-[#3e688e] text-10 lg:text-12 text-fff leading-5 text-center;
+  @apply absolute top-[-6px] left-[0.75rem] lg:left-4 w-4 h-4 lg:w-5 lg:h-5 flex justify-center items-center rounded-[50%] bg-[#3e688e] text-10 lg:text-12 text-fff leading-5 text-center;
 }
 .header_profile_icon {
   @apply lg:flex hidden cursor-pointer;
@@ -59,7 +59,7 @@
   @apply w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px];
 }
 .search_open_details {
-  @apply font-Poppins mt-5 mx-4 md:mx-0 px-4 py-6 xl:w-[345px] md:w-[300px] bg-white border rounded-lg z-[111] md:h-[416px] h-fit overflow-y-scroll;
+  @apply font-Poppins mt-5 mx-4 md:mx-0 px-4 py-6 xl:w-[345px] md:w-[300px] bg-white border rounded-lg z-[111] md:h-[416px] h-[66vh] overflow-y-scroll;
 }
 .pills_wrapper {
   @apply flex flex-wrap gap-2 mt-4;
@@ -116,4 +116,14 @@
 }
 .category_card_in_searchbox img {
   @apply !h-auto;
+}
+
+.openSearchbar_div {
+  @apply hidden md:inline;
+}
+.wishlist_link_wrapper {
+  @apply relative flex gap-2 items-center sm:gap-4 lg:gap-0;
+}
+.cart_link_wrapper {
+  @apply relative;
 }

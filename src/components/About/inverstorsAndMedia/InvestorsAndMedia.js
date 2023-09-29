@@ -12,50 +12,72 @@ const investor = [
 
 const Media = [
   {
-    link: `${AboutUs}/zee-business.webp`,
+    link: `${AboutUs}/zee-business-sq.webp`,
     altText: "zee business",
     navigation:
       "https://www.zeebiz.com/agencies/furniture-rental-startup-cityfurnish-raises-25-million-in-debt-funds-225153",
   },
   {
-    link: `${AboutUs}/business-standard.webp`,
+    link: `${AboutUs}/business-standard-sq.webp`,
     altText: "business standard",
     navigation:
       "https://www.business-standard.com/content/press-releases-ani/cityfurnish-launches-its-furniture-subscription-service-citymax-121112600397_1.html",
   },
   {
-    link: `${AboutUs}/techstory.webp`,
+    link: `${AboutUs}/tech-story-sq.webp`,
     altText: "Techstory coverage",
     navigation: "https://techstory.in/cityfurnish-acquires-funding-24122015/",
   },
   {
-    link: `${AboutUs}/vccircle.webp`,
+    link: `${AboutUs}/vccircle-sq.webp`,
     altText: "VCcircle coverage",
     navigation:
       "https://www.vccircle.com/exclusive-citrus-pays-gupta-backs-furniture-rental-venture-cityfurnish",
   },
   {
-    link: `${AboutUs}/the-economict-times-wealth.webp`,
+    link: `${AboutUs}/the-economic-times-wealth.webp`,
     altText: "economic-wealth",
     navigation:
       "https://economictimes.indiatimes.com/small-biz/startups/newsbuzz/cityfurnish-gets-5-million-from-youtube-founder-others/articleshow/69684428.cms",
   },
   {
-    link: `${AboutUs}/businessline.webp`,
+    link: `${AboutUs}/business-line-sq.webp`,
     altText: "thehindu-businessline",
     navigation:
       "https://www.thehindubusinessline.com/companies/furniture-rental-firm-cityfurnish-scouting-for-4-m/article9876274.ece",
   },
   {
-    link: `${AboutUs}/business-today.webp`,
+    link: `${AboutUs}/business-today-sq.webp`,
     altText: "business-today",
     navigation:
       "https://www.businesstoday.in/magazine/the-buzz/story/cityfurnish-easy-and-affordable-furniture-rental-106225-2018-05-28",
   },
   {
-    link: `${AboutUs}/yourstory.webp`,
+    link: `${AboutUs}/yourstory-sq.webp`,
     altText: "your story coverage for furniture rental",
     navigation: "https://yourstory.com/2016/02/cityfurnish",
+  },
+];
+
+const accolades = [
+  {
+    link: "https://d3juy0zp6vqec8.cloudfront.net/images/e27.webp",
+    altText: "Top 10 Startup in E27-2016",
+    desc: "Top 10 StartupS (2016)",
+    desc2: "- E27",
+  },
+
+  {
+    link: "https://d3juy0zp6vqec8.cloudfront.net/images/small-business-awards-2020.webp",
+    altText: "Home And Home Products of the year 2020 -Enterpreneur India",
+    desc: "Home and Home Products of the year 2020",
+    desc2: "-Entrepreneur India",
+  },
+  {
+    link: "https://d3juy0zp6vqec8.cloudfront.net/images/35-under-35.webp",
+    altText: "35 Under 35 -Enterpreneur India",
+    desc: "35 Under 35",
+    desc2: "-Entrepreneur India",
   },
 ];
 
@@ -69,6 +91,31 @@ const InverstorAndMedia = () => {
       <h2 className={styles.heading}>Media also loves us</h2>
       <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
         <MediaCard />
+      </div>
+      <div className="mr-4 lg:mr-0 mb-8 lg:mb-[88px]">
+        <h2 className={styles.heading}>Accolades</h2>
+        <div
+          className={`${styles.investors_wrapper} xl:
+                  flex-no-wrap`}>
+          {accolades?.map((ele, index) => {
+            return (
+              <div className={styles.accolades_cards} key={index.toString()}>
+                <img src={ele.link} alt={ele.altText} />
+                <div className={styles.accolades_box}>
+                  <div className="flex justify-center w-[16px]">
+                    <img src={`${AboutUs}/icons/award-icon.svg`} />
+                  </div>
+                  <div className="flex flex-col gap-1 w-full">
+                    <p className={styles.accolades_text}>{ele.desc}</p>
+                    <div className="flex justify-end items-end">
+                      <p className={`${styles.accolades_text}`}>{ele.desc2}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

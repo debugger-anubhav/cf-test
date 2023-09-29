@@ -267,7 +267,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
                     className={`${styles.city_thambnil} ${
-                      cityId === city?.id && "border-[2px] border-primary"
+                      cityId === city?.id &&
+                      "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                     }`}
                     alt="city-image"
                   />
@@ -331,11 +332,15 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             : toggleDrawer("left", true)
         }>
         {DrawerName === "menu" ? (
-          <Image
-            src={Icons.Menu}
-            alt="menu-icon"
-            className={styles.menu_icon_drawer}
-          />
+          <div className="cursor-pointer">
+            <div className={`w-100 h-100 absolute z-10 cursor-pointer`}></div>
+            <Image
+              src={Icons.Menu}
+              alt="menu-icon"
+              // className={styles.menu_icon_drawer}
+              className={`${styles.menu_icon_drawer} cursor-pointer relative z-[-1]`}
+            />
+          </div>
         ) : (
           <span className={styles.header_city_name}>
             {/* {homePageReduxData?.cityName} */}

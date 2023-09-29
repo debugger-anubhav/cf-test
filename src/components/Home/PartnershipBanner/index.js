@@ -12,15 +12,8 @@ const PartnershipBanner = () => {
           "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
         }
         loading="lazy"
-        className="w-full h-full "
+        className="w-full h-full pointer-events-none"
       />
-      {/* <Image
-        src={partner}
-        alt="partnership"
-        layout="fill"
-        objectFit="cover"
-        className="w-full h-full hidden xl:flex"
-      /> */}
     </div>
   );
 };

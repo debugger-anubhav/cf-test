@@ -55,6 +55,8 @@ const Header = () => {
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
+  const [profileIconLink, setProfileIconLink] = useState();
+  const [heartIconLink, setHeartIconLink] = useState();
 
   const cityId = getLocalStorage("cityId");
   if (!cityId) {
@@ -153,9 +155,7 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-  const toggleDropdown = () => {
-    setShowProfileDropdown(!showProfileDropdown);
-  };
+
   useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
@@ -180,10 +180,15 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  const handleContextMenu = e => {
-    e.preventDefault(); // Prevent the context menu from opening
-    // ref.current?.click();
-  };
+  useEffect(() => {
+    if (userId) {
+      setProfileIconLink("/usersettings");
+      setHeartIconLink("/wishlist");
+    } else {
+      setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
+      setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
+    }
+  }, [userId]);
 
   return (
     <>
@@ -214,7 +219,6 @@ const Header = () => {
                 <div
                   className={styles.search_wrapper}
                   onClick={() => {
-                    console.log("dfjkh");
                     setOpenSearchBar(!openSearchbar);
                     const SCREEN_TYPE_OFFSET =
                       window.screen.availWidth <= 768 ? 20 : 44;
@@ -233,13 +237,13 @@ const Header = () => {
                   <Image
                     src={Icons.Search}
                     alt="search-icon"
-                    className={styles.header_search_icon}
+                    className={`${styles.header_search_icon} pointer-events-none`}
                   />
                 </div>
               </div>
             )}
             {openSearchbar && (
-              <div className="hidden md:inline">
+              <div className={styles.openSearchbar_div}>
                 <SearchModal
                   arr={arr}
                   isOnMobile={isOnMobile}
@@ -249,27 +253,34 @@ const Header = () => {
                 />
               </div>
             )}
-            <div className="relative flex gap-2 sm:gap-4 lg:gap-0">
-              <a
-                href={
-                  userId
-                    ? "/wishlist"
-                    : "https://test.rentofurniture.com/user_sign_up"
-                }>
-                <span className={styles.header_favorite_container}>
+            <div className={styles.wishlist_link_wrapper}>
+              <a href={heartIconLink}>
+                <div
+                  className={`w-100 h-100 absolute z-10`}
+                  onClick={() => {
+                    if (userId) {
+                      router.push("/wishlist");
+                    } else {
+                      router.push(
+                        "https://test.rentofurniture.com/user_sign_up",
+                      );
+                    }
+                  }}></div>
+                <span
+                  className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
-                    onClick={() => {
-                      if (userId) {
-                        router.push("/wishlist");
-                      } else {
-                        router.push(
-                          "https://test.rentofurniture.com/user_sign_up",
-                        );
-                      }
-                    }}
+                    // onClick={() => {
+                    //   if (userId) {
+                    //     router.push("/wishlist");
+                    //   } else {
+                    //     router.push(
+                    //       "https://test.rentofurniture.com/user_sign_up",
+                    //     );
+                    //   }
+                    // }}
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 ? (
                     <span className={styles.cart_badge}>{wishListCount}</span>
@@ -278,15 +289,17 @@ const Header = () => {
                   )}
                 </span>
               </a>
-              {/* <Link href={`/cart`}> */}
 
-              <div className="relative">
+              <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
+                  <div
+                    className={`w-100 h-100 absolute z-10`}
+                    onClick={() => router.push("/cart")}></div>
                   <Image
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
-                    className={styles.header_shopping_card}
-                    onClick={() => router.push("/cart")}
+                    className={`${styles.header_shopping_card} relative z-[-1]`}
+                    // onClick={() => router.push("/cart")}
                   />
                   {cartItemsLength > 0 && (
                     <div className={styles.cart_badge}>{cartItemsLength}</div>
@@ -294,29 +307,57 @@ const Header = () => {
                 </a>
               </div>
               {/* </Link> */}
-              <Image
-                src={Icons.Profile}
-                alt="profile-icon"
-                onContextMenu={e => handleContextMenu(e)}
-                className={`${styles.header_profile_icon} relative`}
-                onClick={() => {
-                  if (!decrypt(getLocalStorage("_ga"))) {
-                    router.push("https://test.rentofurniture.com/user_sign_up");
-                  } else {
-                    toggleDropdown();
-                    // setShowProfileDropdown(!showProfileDropdown);
-                  }
-                }}
-                ref={iconRef}
-              />
+              <div
+                className={`pt-[14px]  pb-[16px] 
+                  
+                  ${styles.test}`}
+                onMouseLeave={() => {
+                  setShowProfileDropdown(false);
+                }}>
+                <a
+                  href={profileIconLink}
+                  rel="noopner noreferrer"
+                  target="_self"
+                  aria-label="profile">
+                  <div
+                    className="relative z-20"
+                    onMouseEnter={e => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      if (userId) {
+                        setShowProfileDropdown(true);
+                      }
+                    }}>
+                    <Image
+                      src={Icons.Profile}
+                      alt="profile-icon"
+                      className={`${styles.header_profile_icon} relative z-10 pointer-events-none`}
+                      onClick={e => e.preventDefault()}
+                      aria-disabled={true}
+
+                      // ref={iconRef}
+                    />
+                  </div>
+                </a>
+
+                {/* </Link> */}
+              </div>
+
+              {/* </div> */}
               {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
               {decrypt(getLocalStorage("_ga")) !== null &&
                 showProfileDropdown && (
-                  <ProfileDropDown
-                    setShowProfileDropdown={setShowProfileDropdown}
-                    showProfileDropdown={showProfileDropdown}
-                  />
+                  <div
+                    className="pt-[14px]"
+                    onMouseEnter={() => {
+                      setShowProfileDropdown(true);
+                    }}>
+                    <ProfileDropDown
+                      setShowProfileDropdown={setShowProfileDropdown}
+                    />
+                  </div>
                 )}
+              {/* </div> */}
             </div>
           </div>
         </div>
@@ -342,7 +383,7 @@ const Header = () => {
             <Image
               src={Icons.Search}
               alt="search-icon"
-              className={styles.header_search_icon}
+              className={`${styles.header_search_icon} pointer-events-none`}
             />
           </div>
 
@@ -490,7 +531,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
           <Image
             src={Icons.Search}
             alt="search-icon"
-            className={styles.header_search_icon}
+            className={`${styles.header_search_icon} pointer-events-none`}
           />
         </div>
         <div
@@ -499,7 +540,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
           <Image
             src={Icons.Search}
             alt="search-icon"
-            className={styles.header_search_icon}
+            className={`${styles.header_search_icon} pointer-events-none`}
           />
           <input
             placeholder="Search for Furniture, Appliances, etc"

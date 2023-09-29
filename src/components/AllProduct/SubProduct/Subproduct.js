@@ -31,7 +31,7 @@ const Subproduct = () => {
               <ForwardArrow size={12} color={"#71717A"} />
             </li>
             <li className={styles.list}>
-              <p className={styles.route_text}>All Product</p>
+              <p className={`${styles.route_text} !font-medium`}>All Product</p>
             </li>
           </ul>
         </div>

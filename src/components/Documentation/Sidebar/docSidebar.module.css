@@ -1,12 +1,5 @@
-/* .mainContainer {
-  padding-left: 122px;
-  background-color: green;
-} */
 .mainContainer {
-  @apply hidden md:flex flex-col;
-  padding-left: 122px;
-  padding-right: 16px;
-  background-color: #f7f9fc;
+  @apply h-full hidden md:flex flex-col  pl-[70px] sm:pl-[90px] md:pl-[122px] font-Poppins bg-[#f7f9fc];
 }
 
 /* .headingLinks {
@@ -19,41 +12,28 @@
     margin: 0px 16px;
   }
 }
-
 .sectionHeadings {
-  @apply text-gray-600 font-Poppins text-14 font-normal;
+  @apply text-6A6A6A font-Poppins text-14 font-normal;
 }
 .userNameText {
-  @apply text-gray-600 font-Poppins text-14 font-medium leading-normal;
-  letter-spacing: -0.28px;
+  @apply text-6A6A6A font-Poppins text-14 font-medium tracking-desc w-[169px] truncate;
 }
-
 .sectionItems {
-  @apply text-gray-700 font-Poppins  text-base font-medium;
-  width: 179px;
-  margin: 6px 0px;
-  line-height: 24px;
-  letter-spacing: -0.32px;
+  @apply text-45454A w-fit pb-[1px] font-Poppins text-base font-medium leading-3 tracking-0.3 my-[18px] hover:pb-0 hover:text-5774AC hover:border-b-[1px] hover:border-b-5774AC cursor-pointer;
 }
 .sectionItemsActive {
-  @apply font-Poppins text-base font-medium   tracking-tight;
-  width: 179px;
-  color: #5774ac;
-  margin: 6px 0px;
-  line-height: 24px;
+  @apply font-Poppins text-base font-medium leading-6 text-5774AC my-[6px] tracking-0.3;
 }
 .firstContainer {
-  @apply mt-8 pb-4 border-b border-dashed;
-  border-color: #dddddf;
+  @apply mt-8 pb-4 border-b border-dashed border-DDDDDF;
 }
 .secondContainer {
-  @apply mt-4 border-b  border-dashed;
-  padding-bottom: 6px;
+  @apply mt-4 border-b pb-[6px] border-dashed pr-4;
+}
+.border_none {
+  @apply !border-b-0 !pb-0;
 }
 .logoutTxt {
-  @apply font-Poppins text-base font-medium;
-  color: #d96060;
-  margin-top: 34px;
-  line-height: 24px;
-  letter-spacing: -0.32px;
+  @apply w-fit pb-[1px] cursor-pointer font-Poppins text-16 font-medium text-[#d96060] leading-3 tracking-0.3 mt-8
+  hover:pb-0 hover:text-[#d96060] hover:border-b-[1px] hover:border-b-[#d96060];
 }

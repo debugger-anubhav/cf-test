@@ -65,6 +65,7 @@ const SubHeader = ({params}) => {
   const [showData, setShowData] = useState(false);
   const [seoUrl, setSeoUrl] = useState();
   const [itemCount, setItemCount] = useState(7);
+  const [updatedFilter, setUpdatedFilter] = useState([]);
 
   useEffect(() => {
     setFilterFromUrlToStore();
@@ -73,6 +74,7 @@ const SubHeader = ({params}) => {
   const setFilterFromUrlToStore = () => {
     if (filterFromUrl?.length) {
       setFilterListed(true);
+      setUpdatedFilter(filterFromUrl);
       dispatch(addFilteredItem(filterFromUrl));
     } else {
       setFilterListed(false);
@@ -103,8 +105,16 @@ const SubHeader = ({params}) => {
     }
     return null;
   }
+
   const handleFilterRemove = index => {
     if (index > -1 && categoryPageReduxData?.filteredItems) {
+      if (index > -1 && updatedFilter) {
+        const newFilters = [
+          ...updatedFilter.slice(0, index),
+          ...updatedFilter.slice(index + 1),
+        ];
+        setUpdatedFilter(newFilters);
+      }
       const newFilteredItems = [
         ...categoryPageReduxData?.filteredItems.slice(0, index),
         ...categoryPageReduxData?.filteredItems.slice(index + 1),
@@ -265,7 +275,8 @@ const SubHeader = ({params}) => {
   const lowToHighKey = 4;
 
   const handleFilterDivClick = (e, filterTag) => {
-    let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    // let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    let updatedFilteredList = [...updatedFilter];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
     if (filterIndex === -1) {
@@ -278,29 +289,34 @@ const SubHeader = ({params}) => {
         ...updatedFilteredList.slice(filterIndex + 1),
       ];
     }
-
-    dispatch(addFilteredItem(updatedFilteredList));
+    setUpdatedFilter(updatedFilteredList);
+    // dispatch(addFilteredItem(updatedFilteredList));
   };
 
   const handleApply = () => {
     let url = "";
 
-    for (let i = 0; i < categoryPageReduxData?.filteredItems.length; i++) {
-      url +=
-        "filter=" + encodeURIComponent(categoryPageReduxData?.filteredItems[i]);
+    for (let i = 0; i < updatedFilter.length; i++) {
+      url += "filter=" + encodeURIComponent(updatedFilter[i]);
 
-      if (i < categoryPageReduxData?.filteredItems.length - 1) {
+      if (i < updatedFilter.length - 1) {
         url += "&";
       }
     }
     router.push(`?${url}`);
+    console.log(url, "url");
 
+    dispatch(addFilteredItem(updatedFilter));
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
+    // console.log(filterOpen, "filterr opennnn 1");
+    // toggleDropDownFilter();
+    // console.log(filterOpen, "filterr opennnn 2");
+
     setFilterOpen(false);
   };
 
@@ -414,7 +430,7 @@ const SubHeader = ({params}) => {
                     .toLowerCase()}/${seoUrl?.seourl}`}
                   target="_self"
                   rel="noopener">
-                  <p className={`${styles.route_text} cursor-pointer`}>
+                  <p className={`${styles.route_text} cursor-pointer `}>
                     {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
                     {category}
                   </p>
@@ -422,7 +438,7 @@ const SubHeader = ({params}) => {
                 <ForwardArrow size={12} color={"#71717A"} />
               </li>
               <li className={styles.list}>
-                <p className={styles.route_text}>
+                <p className={`${styles.route_text} !font-medium`}>
                   {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
                   {subCategory}
                 </p>
@@ -448,7 +464,7 @@ const SubHeader = ({params}) => {
                   return (
                     <a
                       href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                        item?.seourl
+                        subItem?.seourl
                       }`}
                       onClick={e => {
                         e.preventDefault();
@@ -551,7 +567,10 @@ const SubHeader = ({params}) => {
                                   id={index}
                                   name={ele.filter_name}
                                   value={ele.filter_tag}
-                                  checked={categoryPageReduxData?.filteredItems.includes(
+                                  // checked={categoryPageReduxData?.filteredItems.includes(
+                                  //   ele?.filter_tag,
+                                  // )}
+                                  checked={updatedFilter.includes(
                                     ele?.filter_tag,
                                   )}
                                   className="pr-1 cursor-pointer"
@@ -569,7 +588,7 @@ const SubHeader = ({params}) => {
                         See more
                       </p>
                     )}
-                    <div className="mt-2 w-full flex justify-center">
+                    <div className="mt-2 w-full flex justify-center ">
                       <div
                         className={styles.btn_container}
                         onClick={() => handleApply()}>

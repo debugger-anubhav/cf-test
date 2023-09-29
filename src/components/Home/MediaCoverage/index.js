@@ -12,16 +12,19 @@ const MediaCoverage = () => {
 
       <div className={`${styles.ticker_container} gap-12`}>
         {MediaCoverageImages?.map((imageUrl, index) => (
-          <div
-            key={index.toString()}
-            className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max"
-            aria-hidden="true">
-            <img
-              src={imageUrl.img}
-              alt={imageUrl.alt}
-              className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
-            />
-          </div>
+          <>
+            <div className={`w-100 h-100 absolute z-10`} />
+            <div
+              key={index.toString()}
+              className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative z-[-1]"
+              aria-hidden="true">
+              <img
+                src={imageUrl.img}
+                alt={imageUrl.alt}
+                className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
+              />
+            </div>
+          </>
         ))}
       </div>
     </div>

@@ -67,6 +67,7 @@ const ProductDetails = ({params}) => {
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [durationArray, setDurationArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 0, value: ""});
   const [inWishList, setInWishList] = React.useState(
@@ -74,7 +75,6 @@ const ProductDetails = ({params}) => {
       ?.map(obj => obj.id)
       .includes(parseInt(params.productId)),
   );
-  const [durationArray, setDurationArray] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
@@ -96,13 +96,13 @@ const ProductDetails = ({params}) => {
   // bottombar visibility conditiionally
   useEffect(() => {
     const handleScroll = () => {
+      // console.log(showBottomBar, "showbotoomm");
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-
-      if (scrollPosition + windowHeight >= documentHeight) {
+      if (scrollPosition + windowHeight === documentHeight) {
         setShowBottomBar(false);
-      } else if (scrollPosition > yourScrollThreshold) {
+      } else if (scrollPosition >= yourScrollThreshold) {
         setShowBottomBar(true);
       } else {
         setShowBottomBar(false);
@@ -374,6 +374,21 @@ const ProductDetails = ({params}) => {
     console.log("goingg");
     router.push("/cart");
   };
+  const notifyData = {
+    userId: Number(decrypt(getLocalStorage("_ga"))),
+    cityId,
+    productId: Number(params?.productId),
+  };
+  const {mutateAsync: notifyAvailibility} = useMutation(
+    "notify-availability",
+    "POST",
+    endPoints.productPage.notifyAvailability,
+    notifyData,
+  );
+  const handleNotifyMe = async () => {
+    showToastNotification("You will be notified once item is in stock", 2);
+    await notifyAvailibility();
+  };
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -439,6 +454,7 @@ const ProductDetails = ({params}) => {
         params={params}
         title={prodDetails?.[0]?.product_name}
       />
+
       {showBottomBar && (
         <StickyBottomBar
           productName={prodDetails?.[0]?.product_name}
@@ -446,6 +462,7 @@ const ProductDetails = ({params}) => {
           durationArray={durationArray}
           isLoading={isLoading}
           handleAddToCart={handleAddToCart}
+          handleNotifyMe={handleNotifyMe}
           handleGoToCart={handleGoToCart}
           isItemInCart={isItemInCart}
           soldOut={soldOut}
@@ -673,53 +690,57 @@ const ProductDetails = ({params}) => {
               ))}
             </div>
 
-            <div className={styles.deposit_div}>
-              <div>
-                <p className={styles.deposit_txt}>Monthly Rent</p>
-                <div className={styles.flexx}>
-                  <p className={styles.currentPrice}>
-                    <span className={styles.rupeeIcon}>₹</span>
-                    {durationArray?.[duration.currentIndex]?.attr_price}
-                  </p>
-                  {/* {durationArray?.[0]?.attr_price >
+            {durationArray.length > 0 && (
+              <div className={styles.deposit_div}>
+                <div>
+                  <p className={styles.deposit_txt}>Monthly Rent</p>
+                  <div className={styles.flexx}>
+                    <p className={styles.currentPrice}>
+                      <span className={styles.rupeeIcon}>₹</span>
+                      {durationArray?.[duration.currentIndex]?.attr_price}
+                    </p>
+                    {/* {durationArray?.[0]?.attr_price >
                     durationArray?.[duration.currentIndex]?.attr_price && ( */}
-                  <p
-                    className={styles.originalPrice}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    <span className={styles.rupeeIcon}>₹</span>
-                    {durationArray?.[0]?.attr_price}
-                  </p>
-                  {/* )} */}
+                    <p
+                      className={styles.originalPrice}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      <span className={styles.rupeeIcon}>₹</span>
+                      {durationArray?.[0]?.attr_price}
+                    </p>
+                    {/* )} */}
 
-                  <div
-                    className={styles.discount}
-                    style={{
-                      display: duration.value === "3" ? "none" : "flex",
-                    }}>
-                    {`-${Math.round(
-                      ((durationArray?.[0]?.attr_price -
-                        durationArray?.[duration.currentIndex]?.attr_price) *
-                        100) /
-                        durationArray?.[0]?.attr_price,
-                    ).toFixed(0)}% OFF`}
+                    <div
+                      className={styles.discount}
+                      style={{
+                        display: duration.value === "3" ? "none" : "flex",
+                      }}>
+                      {`-${Math.round(
+                        ((durationArray?.[0]?.attr_price -
+                          durationArray?.[duration.currentIndex]?.attr_price) *
+                          100) /
+                          durationArray?.[0]?.attr_price,
+                      ).toFixed(0)}% OFF`}
+                    </div>
                   </div>
                 </div>
-              </div>
-              {/* <span className="text-[#9C9C9C]">+</span>
+                {/* <span className="text-[#9C9C9C]">+</span>
               <div>
                 <p className={styles.deposit_txt}>Security Deposit</p>
                 <p className={styles.currentPrice}>
                  <span className={styles.rupeeIcon}>₹</span>0
                 </p>
               </div> */}
-            </div>
+              </div>
+            )}
           </div>
 
           <button
             onClick={
-              cartItems?.length === 0
+              soldOut
+                ? handleNotifyMe
+                : cartItems?.length === 0
                 ? handleAddToCart
                 : isItemInCart
                 ? handleGoToCart
@@ -727,7 +748,7 @@ const ProductDetails = ({params}) => {
                 ? handleAddToCart
                 : handleNotSameTenure
             }
-            disabled={isLoading || soldOut}
+            disabled={isLoading}
             className={styles.btn}
             ref={addToCartButtonRef}>
             {isLoading ? (
@@ -752,10 +773,11 @@ const ProductDetails = ({params}) => {
 
           <div className={styles.kyc_wrapper}>
             {/* <BsPersonVcard size={24} /> */}
+            <div className={`w-100 h-100 absolute z-10`} />
             <img
               src={ProductPageImages.KycDoc}
               alt="kyc"
-              className="w-6 h-6"
+              className="w-6 h-6 relative z-[-1]"
               loading="lazy"
             />
             <p className={styles.kyc_text}>{str.kyc}</p>
@@ -804,22 +826,30 @@ const ProductDetails = ({params}) => {
             </div>
             <p className={styles.opt_for}>
               Opt for City Shield today and get covered for accidental damages
-              at ONLY ₹{cityShieldCurrentPrice}
+              at ONLY <span className={styles.rupeeIcon}>₹</span>
+              {cityShieldCurrentPrice}
               /month!
             </p>
-            <p className={styles.protect}>{str.protect}</p>
+            <p className={styles.protect}>
+              Protect your appliances and furniture worth{" "}
+              <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+            </p>
 
-            <div className={styles.cityshield_prices}>
-              <p className={styles.currentPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldCurrentPrice}/mo
-              </p>
-              <p className={styles.originalPrice}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {cityShieldOriginalPrice} / mo
-              </p>
-              <div className={styles.discount}>-{cityShieldDiscount}% OFF</div>
-            </div>
+            {durationArray.length > 0 && (
+              <div className={styles.cityshield_prices}>
+                <p className={styles.currentPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldCurrentPrice}/mo
+                </p>
+                <p className={styles.originalPrice}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {cityShieldOriginalPrice} / mo
+                </p>
+                <div className={styles.discount}>
+                  -{cityShieldDiscount}% OFF
+                </div>
+              </div>
+            )}
           </div>
 
           {drawerOpen && (

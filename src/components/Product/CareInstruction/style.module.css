@@ -42,7 +42,7 @@
   @apply flex mt-8 gap-6 w-full overflow-scroll pl-4 md:pl-0;
 }
 .img {
-  @apply min-w-[281px] h-[240px];
+  @apply min-w-[281px] max-w-[281px] h-[240px] w-full;
 }
 .card_head {
   @apply text-16 xl:text-20 font-medium text-222 leading-normal tracking-0.3 xl:tracking-0.4 mt-3;

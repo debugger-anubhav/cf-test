@@ -29,11 +29,14 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  setCityShield,
+  setCoinsApplied,
   // setCityShield,
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt} from "@/hooks/cryptoUtils";
+// import {useRouter} from "next/navigation";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -44,10 +47,12 @@ const ShoppingCartSection = ({setTab}) => {
 
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
+    console.log("in setArr");
     setArr(cartItems);
   }, [cartItems]);
 
   const count = cartItems.length;
+  // const router = useRouter();
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = getLocalStorage("tempUserID");
@@ -95,14 +100,14 @@ const ShoppingCartSection = ({setTab}) => {
   ];
   const modeOfPayment = getLocalStorage("isMonthly");
 
-  const [isChecked, setIsChecked] = useState(true);
+  const [isChecked, setIsChecked] = useState(data.isCityShield);
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [isCouponApplied, setIsCouponApplied] = useState(
     data.couponCodeUsed !== "",
   );
-  const [isCoinApplied, setIsCoinApplied] = useState(false);
+  const [isCoinApplied, setIsCoinApplied] = useState(data.isCoinApplied);
   const [availCoin, setAvailCoin] = useState(0);
   const [isMonthly, setIsMonthly] = useState(
     modeOfPayment === null ? true : modeOfPayment,
@@ -229,14 +234,16 @@ const ShoppingCartSection = ({setTab}) => {
       );
       dispatch(getBillDetails(res?.data?.data));
       // setCode(res?.data?.data?.couponsCode);
-      getCouponCodeUsed(res?.data?.data?.couponsCode);
-      // setCityShield(res?.data?.data?.cartSubTotalList);
+      dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
+      dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
+      dispatch(setCityShield(res?.data?.data?.cityshield));
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
+    console.log("in fetch bill");
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
@@ -264,23 +271,32 @@ const ShoppingCartSection = ({setTab}) => {
                 return (
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
-                      <div className={styles.img_div}>
-                        <img
-                          src={`${
-                            productImageBaseUrl +
-                            "thumb/" +
-                            item.fc_product?.image?.split(",")?.[0]
-                          }`}
-                          alt="product_img"
-                          className={styles.img}
-                        />
-                      </div>
+                      <a
+                        href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
+                        <div className={styles.img_div}>
+                          <img
+                            src={`${
+                              productImageBaseUrl +
+                              "thumb/" +
+                              item.fc_product?.image?.split(",")?.[0]
+                            }`}
+                            alt="product_img"
+                            className={styles.img}
+                          />
+                        </div>
+                      </a>
 
                       <div>
                         <div className={styles.name_div}>
-                          <p className={styles.product_name}>
-                            {item?.fc_product?.product_name?.replace(/-/g, " ")}
-                          </p>
+                          <a
+                            href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
+                            <p className={styles.product_name}>
+                              {item?.fc_product?.product_name?.replace(
+                                /-/g,
+                                " ",
+                              )}
+                            </p>
+                          </a>
                           <div
                             onClick={() => {
                               setProductId(item?.fc_product?.id);
@@ -383,7 +399,7 @@ const ShoppingCartSection = ({setTab}) => {
                         cityShieldDiscount={cityShieldDiscountPercentage}
                         toggleDrawer={toggleDrawerCityShield}
                         open={cityShieldDrawerOpen}
-                        toggleCheckbox={() => setIsChecked(false)}
+                        toggleCheckbox={bool => setIsChecked(bool)}
                       />
                     )}
                   </div>
@@ -417,7 +433,7 @@ const ShoppingCartSection = ({setTab}) => {
                   <div>
                     <img
                       src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                      className={styles.coin}
+                      className={`${styles.coin} pointer-events-none`}
                     />
                   </div>
                   <div>

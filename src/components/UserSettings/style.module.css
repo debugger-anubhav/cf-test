@@ -1,5 +1,5 @@
-.main_container {
-  @apply px-4 pb-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] 4xl:px-[160px];
+.main_container_mobile {
+  @apply lg:hidden px-4 pb-4 md:px-[70px];
 }
 .main_text {
   @apply font-medium tracking-[-0.28px] text-45454A w-[219px] truncate;
@@ -10,26 +10,51 @@
 .services_wrapper {
   @apply rounded-[8px] border border-EDEDEE p-4;
 }
-
 .head_row {
   @apply mb-1 flex justify-between items-center py-0.5;
 }
 .head_row_text {
   @apply text-5774AC text-base font-medium tracking-[-0.32px];
 }
-
 .chevron_right_icon {
   @apply text-[#222] text-[19.2px];
 }
-
 .desc_row {
   @apply text-9A9AA2 text-xs font-normal  tracking-[-0.24px] mb-4;
 }
-
 .line_sepration {
   @apply h-[1px] bg-EDEDEE mb-4;
 }
-
 .lgout {
   @apply text-[#D96060] text-base font-medium tracking-[-0.32px] py-0.5 cursor-pointer;
+}
+
+/* for web */
+.main_container_web {
+  @apply hidden font-Poppins lg:flex gap-16 pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:pr-[160px] 4xl:pr-[160px] -mt-6;
+}
+.web_head {
+  @apply mt-10 text-45454A text-24 font-medium leading-8 tracking-0.48;
+}
+.line_web {
+  @apply w-full h-1 bg-[#D9D9D9] mt-2;
+  border-radius: 0px 8px 8px 0px;
+}
+.card_wrapper {
+  @apply mt-10 flex flex-wrap gap-6 pb-4;
+}
+.card {
+  @apply p-6 w-[297px] min-w-[297px] h-[138px] rounded-lg border border-DDDDDF hover:p-[23px] hover:border-2 hover:border-5774AC;
+}
+.card_first_row {
+  @apply flex items-center gap-2;
+}
+.card_icon {
+  @apply w-6 h-6;
+}
+.card_head {
+  @apply text-18 xl:text-20 min-w-full font-medium tracking-0.4 text-45454A;
+}
+.card_desc {
+  @apply mt-3 text-9A9AA2 text-16 tracking-0.3;
 }

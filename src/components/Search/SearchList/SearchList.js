@@ -117,9 +117,7 @@ const SearchList = () => {
   };
 
   const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
+    router.push(`/things/${item.id}/${item.seourl}`);
   };
 
   return (
@@ -204,7 +202,8 @@ const SearchList = () => {
               }
             }}
             hasMore={true} // Replace with a condition based on your data source
-            className="!w-full !h-full">
+            className="!w-full !h-full"
+            style={{overflow: "visible"}}>
             <div className={style.main_container}>
               {searchData?.map((item, index) => {
                 return (
@@ -212,29 +211,32 @@ const SearchList = () => {
                     className={`${style.card_box_product} child`}
                     key={index.toString()}
                     onClick={e => handleCardClick(e, item)}>
-                    <SearchCard
-                      productWidth={productCardWidth}
-                      cardImage={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      productImageBaseUrl
-                      desc={item?.product_name}
-                      originalPrice={item?.price}
-                      soldOut={item?.pq_quantity > 0}
-                      currentPrice={item?.sale_price}
-                      isImageHeight={true}
-                      boxShadowHover={true}
-                      hoverCardImage={
-                        item?.image?.split(",")[1] !== ""
-                          ? productImageBaseUrl + item?.image?.split(",")[1]
-                          : productImageBaseUrl + item?.image?.split(",")[0]
-                      }
-                      discount={`${Math.round(
-                        ((item?.price - item?.sale_price) * 100) / item?.price,
-                      ).toFixed(0)}%`}
-                      productID={item?.id}
-                      refreshFunction={setRefreshState}
-                    />
+                    <a href={`/things/${item.id}/${item.seourl}`}>
+                      <SearchCard
+                        productWidth={productCardWidth}
+                        cardImage={`${productImageBaseUrl}${
+                          item?.image?.split(",")[0]
+                        }`}
+                        productImageBaseUrl
+                        desc={item?.product_name}
+                        originalPrice={item?.price}
+                        soldOut={item?.pq_quantity > 0}
+                        currentPrice={item?.sale_price}
+                        isImageHeight={true}
+                        boxShadowHover={true}
+                        hoverCardImage={
+                          item?.image?.split(",")[1] !== ""
+                            ? productImageBaseUrl + item?.image?.split(",")[1]
+                            : productImageBaseUrl + item?.image?.split(",")[0]
+                        }
+                        discount={`${Math.round(
+                          ((item?.price - item?.sale_price) * 100) /
+                            item?.price,
+                        ).toFixed(0)}%`}
+                        productID={item?.id}
+                        refreshFunction={setRefreshState}
+                      />
+                    </a>
                   </div>
                 );
               })}

@@ -99,7 +99,12 @@ const CityShieldDrawerForCart = ({
           {benefits.map((item, index) => (
             <div key={index} className={styles.arr_item}>
               <div className={styles.img_div}>
-                <img src={item.img} alt={item.label} loading="lazy" />
+                <img
+                  src={item.img}
+                  alt={item.label}
+                  loading="lazy"
+                  className="pointer-events-none"
+                />
               </div>
               <p
                 className={`${
@@ -117,13 +122,18 @@ const CityShieldDrawerForCart = ({
           ))}
         </div>
 
-        <button className={styles.btn} onClick={toggleDrawer}>
+        <button
+          className={styles.btn}
+          onClick={() => {
+            toggleDrawer();
+            toggleCheckbox(true);
+          }}>
           Continue with Cityshield
         </button>
         <p
           className={styles.risk_text}
           onClick={() => {
-            toggleCheckbox();
+            toggleCheckbox(false);
             toggleDrawer();
           }}>
           No, I wanna risk damaging the furniture & Applicances

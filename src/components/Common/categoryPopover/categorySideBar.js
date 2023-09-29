@@ -29,6 +29,7 @@ export default function FilterSortDrawer({
   const [state, setState] = React.useState({
     bottom: false,
   });
+  const [updatedFilter, setUpdatedFilter] = useState([]);
 
   const [itemCount, setItemCount] = useState(7);
   const [selectedOption, setSelectedOption] = useState("Default");
@@ -55,7 +56,8 @@ export default function FilterSortDrawer({
   };
 
   const handleFilterDivClick = (e, filterTag) => {
-    const updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    // let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
+    let updatedFilteredList = [...updatedFilter];
     const filterIndex = updatedFilteredList.indexOf(filterTag);
 
     if (filterIndex === -1) {
@@ -63,25 +65,13 @@ export default function FilterSortDrawer({
       updatedFilteredList.push(filterTag);
     } else {
       // If the filter is already in the list, remove it
-      updatedFilteredList.splice(filterIndex, 1);
-    }
-    dispatch(addFilteredItem(updatedFilteredList));
-  };
-
-  const handleFilteredItems = e => {
-    let updatedFilteredList = [...categoryPageReduxData?.filteredItems];
-    if (e.target.checked) {
       updatedFilteredList = [
-        ...categoryPageReduxData?.filteredItems,
-        e.target.value,
+        ...updatedFilteredList.slice(0, filterIndex),
+        ...updatedFilteredList.slice(filterIndex + 1),
       ];
-    } else {
-      updatedFilteredList.splice(
-        categoryPageReduxData?.filteredItems.indexOf(e.target.value),
-        1,
-      );
     }
-    dispatch(addFilteredItem(updatedFilteredList));
+    setUpdatedFilter(updatedFilteredList);
+    // dispatch(addFilteredItem(updatedFilteredList));
   };
 
   const handleSort = (item, index) => {
@@ -107,23 +97,26 @@ export default function FilterSortDrawer({
   const handleApply = () => {
     let url = "";
 
-    for (let i = 0; i < categoryPageReduxData?.filteredItems.length; i++) {
-      url +=
-        "filter=" + encodeURIComponent(categoryPageReduxData?.filteredItems[i]);
+    for (let i = 0; i < updatedFilter.length; i++) {
+      url += "filter=" + encodeURIComponent(updatedFilter[i]);
 
-      if (i < categoryPageReduxData?.filteredItems.length - 1) {
+      if (i < updatedFilter.length - 1) {
         url += "&";
       }
     }
     router.push(`?${url}`);
+    console.log(url, "url");
 
+    dispatch(addFilteredItem(updatedFilter));
     setPageNo(1);
     dispatch(addSingleProduct([]));
     dispatch(addSetProduct([]));
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
+    console.log("innnn");
     setState({...state, bottom: false});
+    // setFilterOpen(false);
   };
 
   const filtereData = categoryPageReduxData?.filterData;
@@ -163,11 +156,12 @@ export default function FilterSortDrawer({
                             id={index}
                             name={ele.filter_name}
                             value={ele.filter_tag}
-                            checked={categoryPageReduxData?.filteredItems.includes(
-                              ele?.filter_tag,
-                            )}
+                            // checked={categoryPageReduxData?.filteredItems.includes(
+                            //   ele?.filter_tag,
+                            // )}
+                            checked={updatedFilter.includes(ele?.filter_tag)}
                             className="pr-1 cursor-pointer"
-                            onChange={e => handleFilteredItems(e)}
+                            // onChange={e => handleFilteredItems(e)}
                           />
                         </div>
                       )}

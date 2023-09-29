@@ -234,36 +234,42 @@ export const HasselFreeData = [
   {
     icon: hasselFreeSection.IconOne,
     backgroungImage: hasselFreeSection.FrameOne,
+    bgImgMobile: "",
     Heading: "Mint new products",
     text: "Assured products. You'll be renting furniture that looks & feels brand new",
   },
   {
     icon: hasselFreeSection.IconTwo,
     backgroungImage: hasselFreeSection.FrameTwo,
+    bgImgMobile: "",
     Heading: "Free shipping",
     text: "Get your furniture delivered to your doorstep with no extra shipping cost",
   },
   {
     icon: hasselFreeSection.IconFour,
     backgroungImage: hasselFreeSection.FrameFour,
+    bgImgMobile: "",
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
   },
   {
     icon: hasselFreeSection.IconSix,
     backgroungImage: hasselFreeSection.FrameSix,
+    bgImgMobile: "",
     Heading: "Free relocation",
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
   {
     icon: hasselFreeSection.IconFive,
     backgroungImage: hasselFreeSection.FrameFive,
+    bgImgMobile: "",
     Heading: "Insurance cover",
     text: "Minor damages or scratches to the rent products will be waived off",
   },
   {
     icon: hasselFreeSection.IconThree,
     backgroungImage: hasselFreeSection.FrameThree,
+    bgImgMobile: "",
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
   },
@@ -544,8 +550,6 @@ export function getLocalStorage(key) {
   if (typeof window !== "undefined") {
     const data = localStorage.getItem(key);
     return data === "undefined" ? null : JSON.parse(data);
-  } else {
-    return JSON.parse(JSON.stringify({key}));
   }
 }
 export function getLocalStorageString(key, value) {

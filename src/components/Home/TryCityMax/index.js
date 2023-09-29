@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
 import {useRouter} from "next/navigation";
-import SideDrawer from "./sideDrawer";
+import CityMaxDrawer from "./cityMaxDrawer";
+// import SideDrawer from "./sideDrawer";
 
 const TryCityMax = () => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const router = useRouter();
   const benefitsOfCity = [
     {
@@ -39,6 +42,10 @@ const TryCityMax = () => {
         "You can pay subscription fee in one go or opt for our no cost EMI plan",
     },
   ];
+
+  const HandleToggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
   return (
     <>
       <div className={styles.main_wrapper}>
@@ -46,13 +53,13 @@ const TryCityMax = () => {
           <img
             src={TryCityMaxBannerWeb}
             alt="trycity"
-            className={`hidden xl:flex ${styles.tryCity_image}`}
+            className={`hidden xl:flex ${styles.tryCity_image} pointer-events-none`}
             loading="lazy"
           />
           <img
             src={TryCityMaxBannerMobile}
             alt="trycity"
-            className={`xl:hidden ${styles.tryCity_image}`}
+            className={`xl:hidden ${styles.tryCity_image} pointer-events-none`}
             loading="lazy"
           />
         </div>
@@ -70,7 +77,7 @@ const TryCityMax = () => {
             onClick={e => {
               e.preventDefault();
             }}
-            aria-label="citymax"
+            aria-label="Check our plans"
             target="_self"
             rel="noopener">
             <button
@@ -93,9 +100,10 @@ const TryCityMax = () => {
               {benefitsOfCity?.map((item, index) => {
                 return (
                   <div className={styles.card_wrapper} key={index.toString()}>
+                    <div className={`w-100 h-100 absolute z-10`} />
                     <Image
                       src={item?.img}
-                      className={styles.card_icon}
+                      className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"
                       loading="lazy"
                     />
@@ -107,7 +115,25 @@ const TryCityMax = () => {
                 );
               })}
             </div>
-            <SideDrawer />
+            <div>
+              <button
+                className={styles.how_it_works_button}
+                onClick={HandleToggleDrawer}>
+                <p className={styles.how_it_works_paragraph}>How it works</p>
+                <ForwardArrow
+                  size={18}
+                  color={"#597492"}
+                  className={styles.forward_arrow}
+                />
+              </button>
+            </div>
+            {isDrawerOpen && (
+              <CityMaxDrawer
+                toggleDrawer={HandleToggleDrawer}
+                open={isDrawerOpen}
+              />
+            )}
+            {/* <SideDrawer /> */}
             <hr className={styles.underline} />
           </div>
         </div>
@@ -122,7 +148,7 @@ export const TryCityMaxSkeleton = () => {
   return (
     <div className={styles.main_wrapper}>
       <div className={styles.left_image_section}>
-        <Skeleton variant="rectangular" className="w-full h-full" />
+        <Skeleton variant="rectangular" className={styles.skeleton_box} />
       </div>
       <div className={`${styles.right_text_section} h-full`}>
         <Skeleton variant="text" className={styles.Skeleton_text} />

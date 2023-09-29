@@ -2,15 +2,17 @@ import React from "react";
 import {toast} from "react-toastify";
 import styles from "./styles.module.css";
 
+let toastId;
+
 export const showToastNotification = (message, type) => {
-  console.log("fdvb");
   //  Type Specification :-
   //  type = 1 indicates green color
   //  type = 2 indicates yellow color
   //  type = 3 indicates red color
 
   const isSmallScreen = window.innerWidth <= 768;
-  toast(message, {
+
+  toastId = toast(message, {
     position: isSmallScreen ? "bottom-right" : "top-right",
     autoClose: 3000,
     hideProgressBar: true,
@@ -35,3 +37,8 @@ export const showToastNotification = (message, type) => {
     ),
   });
 };
+
+export const updateToastNotification = message =>
+  toast.update(toastId, {
+    render: message,
+  });
