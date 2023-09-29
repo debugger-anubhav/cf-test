@@ -11,8 +11,8 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import loadable from "@loadable/component";
 // import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 // import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
-import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-// import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
+// import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
+import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 // import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
@@ -42,14 +42,14 @@ import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 //     fallback: <ProductRowSkeleton />,
 //   },
 // );
-const OffersAndCoupons = loadable(
-  () => import("@/components/Home/OffersAndCoupons"),
-  {fallback: <OffersSkeleton />},
-);
-// const NewlyLaunched = loadable(
-//   () => import("@/components/Home/NewlyLaunched"),
-//   {fallback: <NewlyLauncedSkeleton />},
+// const OffersAndCoupons = loadable(
+//   () => import("@/components/Home/OffersAndCoupons"),
+//   {fallback: <OffersSkeleton />},
 // );
+const NewlyLaunched = loadable(
+  () => import("@/components/Home/NewlyLaunched"),
+  {fallback: <NewlyLauncedSkeleton />},
+);
 
 // const DownloadForMobile = loadable(() =>
 //   import("@/components/Home/DownloadForMobile"),
@@ -113,9 +113,9 @@ export default function Home() {
       {/* <RentFurnitureAndAppliances params={"home-page"} /> */}
       {/* <RecentlyViewedProduct /> */}
       {/* <TrendingProducts params={"home-page"} /> */}
-      <OffersAndCoupons />
-      {/* <NewlyLaunched />
-      <DownloadForMobile />
+      {/* <OffersAndCoupons /> */}
+      <NewlyLaunched />
+      {/* <DownloadForMobile />
       <PreDesignCombos />
       <HasselFreeServicesCards />
       <LimetedPreiodDiscount />
