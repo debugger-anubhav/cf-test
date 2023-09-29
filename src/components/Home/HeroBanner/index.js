@@ -33,6 +33,7 @@ const HeroBanner = () => {
               src={HeroBannerImages.HeroBannerImageOne}
               className={styles.carousel_images}
               alt="hero-banner-1"
+              loading="lazy"
             />
             {/* </a> */}
           </div>
@@ -49,6 +50,7 @@ const HeroBanner = () => {
               src={HeroBannerImages.HeroBannerImageTwo}
               className={styles.carousel_images}
               alt="hero-banner-2"
+              loading="lazy"
             />
             {/* </a> */}
           </div>
@@ -57,6 +59,7 @@ const HeroBanner = () => {
               src={HeroBannerImages.HeroBannerImageThree}
               className={styles.carousel_images}
               alt="hero-banner-3"
+              loading="lazy"
             />
           </div>
         </Carousel>
