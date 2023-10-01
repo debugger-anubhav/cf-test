@@ -11,6 +11,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
+import DocLoader from "../DocLoader/DocLoader";
 
 // import axios from "axios";
 // import { baseURL } from "@/network/axios";
@@ -33,6 +34,7 @@ const theme = createTheme({
 const KYCCommon = () => {
   const [deleteIconClick, setDeleteIconClick] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
+  const [openModal, setModalOpen] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [selectedOption, setSelectedOption] = useState({
     label: "Pan Number (Recommended)",
@@ -422,6 +424,12 @@ const KYCCommon = () => {
           </div>
         </div>
       </Modal>
+      <DocLoader
+        height={"200px"}
+        width={"200px"}
+        open={openModal}
+        setOpen={setModalOpen}
+      />
     </div>
   );
 };

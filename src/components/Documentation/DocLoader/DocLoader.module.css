@@ -1,0 +1,13 @@
+.container {
+  @apply flex items-center flex-col justify-center p-4 pb-10 w-[264px] md:w-[381px] bg-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2;
+  border-radius: 16px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
+}
+.heading {
+  @apply text-18 md:text-24 font-medium;
+}
+.para {
+  @apply text-center md:px-4 mt-3;
+}

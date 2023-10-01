@@ -2,7 +2,6 @@ import React, {useState, useEffect} from "react";
 import styles from "./KYCAddress.module.css";
 import commonStyles from "../common.module.css";
 import Image from "next/image";
-import forwardArrow from "@/assets/common_icons/proceedArrow.svg";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {cityUrl} from "../../../../appConfig";
 import DropDown from "../DropDown/DropDown";
@@ -15,8 +14,11 @@ import {
   Close,
   DeleteIcon,
   ExclamationCircleFill,
+  OutlineArrowRight,
   ReloadIcon,
 } from "@/assets/icon";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 const KYCAddress = () => {
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
@@ -193,6 +195,42 @@ const KYCAddress = () => {
   };
   const submitHandler = () => {
     validateForm();
+    for (const key in formErrors) {
+      if (Object.hasOwnProperty.call(formErrors, key)) {
+        const element = formErrors[key];
+        if (element) {
+          return;
+        }
+      }
+    }
+    const allData = new FormData();
+    allData.append(
+      "permanentAddressProof",
+      JSON.stringify({
+        doc_id: "cf_permanent_address_proof",
+        subDocType: selectedOptionPer.value,
+        docImageName: formData?.addressProof?.name,
+      }),
+    );
+    allData.append(
+      "currentAddressProof",
+      JSON.stringify({
+        doc_id: "cf_delivery_address_proof",
+        subDocType: selectedOptionCur.value,
+        docImageName: formData?.addressProof?.name,
+      }),
+    );
+    allData.append("userId", decrypt(getLocalStorage("_ga")));
+    allData.append("alternateMobNo", formData?.contactNumber);
+    allData.append("docs", formData.addressProof);
+    allData.append("docs", formData.currentAddressProof);
+    allData.append("orderId", "3434");
+    baseInstance
+      .post(baseURL + endPoints.uploadAddressDocs, allData)
+      .then(res => {
+        console(res);
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -466,7 +504,7 @@ const KYCAddress = () => {
             }}
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span>Proceed</span>
-            <Image src={forwardArrow} alt="Forward Arrow Icon" />
+            <OutlineArrowRight />
           </button>
         </div>
       </div>

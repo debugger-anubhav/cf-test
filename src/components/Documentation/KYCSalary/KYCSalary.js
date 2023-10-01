@@ -3,16 +3,18 @@ import styles from "./KYCSalary.module.css";
 import commonStyles from "../common.module.css";
 import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
-import forwardArrow from "@/assets/common_icons/proceedArrow.svg";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CheckCircleIcon,
   DeleteIcon,
   ExclamationCircleFill,
+  OutlineArrowRight,
   ReloadIcon,
 } from "@/assets/icon";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 const allowedFileTypes = [
   "image/jpeg",
   "image/jpg",
@@ -21,7 +23,7 @@ const allowedFileTypes = [
 ];
 const SelectionComp = ({
   headertext,
-  monthsCount,
+  duration,
   setIsSelected,
   type,
   showInner,
@@ -38,19 +40,14 @@ const SelectionComp = ({
       <div className={`${styles.selDivider}`}>
         <hr />
       </div>
-      <div className={`${styles.selFooter} w-max-[173px]`}>
-        Required for Last {monthsCount} months
-      </div>
+      <div className={`${styles.selFooter} w-max-[173px]`}>{duration}</div>
     </div>
   );
 };
 const KYCSalary = () => {
   const [isSelected, setIsSelected] = useState("");
   const [formData, setFormData] = useState({
-    contactNumber: "",
-    addressProof: "", // You can add more fields as needed
     currentAddressProof: "",
-    termsAccepted: false,
   });
   const [formErrors, setFormErrors] = useState({
     contactNumber: "",
@@ -90,11 +87,39 @@ const KYCSalary = () => {
       }
     }
   };
+  const submitHandler = () => {
+    for (const key in formErrors) {
+      if (Object.hasOwnProperty.call(formErrors, key)) {
+        const element = formErrors[key];
+        if (element) {
+          return;
+        }
+      }
+    }
+    const allData = new FormData();
+    allData.append(
+      "financialStatementProof",
+      JSON.stringify({
+        doc_id: "cf_financial_statement",
+        subDocType: isSelected.value,
+        docImageName: formData?.currentAddressProof?.name,
+      }),
+    );
+    allData.append("userId", decrypt(getLocalStorage("_ga")));
+    allData.append("doc", formData.currentAddressProof);
+    allData.append("orderId", "3434");
+    baseInstance
+      .post(baseURL + endPoints.uploadFinancialDoc, allData)
+      .then(res => {
+        console(res);
+      })
+      .catch(err => console.log(err));
+  };
   useEffect(() => {
     getAddProofList();
   }, []);
   return (
-    <div className="cursor-pointer">
+    <div className="">
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
       </div>
@@ -112,33 +137,36 @@ const KYCSalary = () => {
         </span>
       </div>
       <div className={`${styles.selectionBox}`}>
-        <div
-          className={`${styles.selContainer} ${
-            isSelected === "bank" ? " !border-[#3E688E]" : ""
-          }`}>
-          <SelectionComp
-            headertext={"Bank Statement"}
-            monthsCount={"3"}
-            type={"bank"}
-            setIsSelected={setIsSelected}
-            showInner={isSelected === "bank"}
-          />
-        </div>
-        <div className={`${styles.orBox}`}>
-          <span>or</span>
-        </div>
-        <div
-          className={`${styles.selContainer}  ${
-            isSelected === "salary" ? " !border-[#3E688E]" : ""
-          }`}>
-          <SelectionComp
-            headertext={"Salary Slip"}
-            monthsCount={"2"}
-            type={"salary"}
-            setIsSelected={setIsSelected}
-            showInner={isSelected === "salary"}
-          />
-        </div>
+        {docData?.supported_docs_array?.map((item, index) => {
+          return (
+            <>
+              <div
+                key={index}
+                className={`${styles.selContainer} ${
+                  isSelected === docData?.supported_docs?.split(",")?.[index]
+                    ? " !border-[#3E688E]"
+                    : ""
+                } ${index > 0 ? "md:ml-4" : ""}`}>
+                <SelectionComp
+                  headertext={item?.label}
+                  duration={item?.duration}
+                  type={docData?.supported_docs?.split(",")?.[index]}
+                  setIsSelected={setIsSelected}
+                  showInner={
+                    isSelected === docData?.supported_docs?.split(",")?.[index]
+                  }
+                />
+              </div>
+              {index < docData?.supported_docs_array?.length - 1 ? (
+                <div className={`${styles.orBox}`}>
+                  <span>or</span>
+                </div>
+              ) : (
+                <></>
+              )}
+            </>
+          );
+        })}
       </div>
       <div className={`${styles.formInputFirst}`}>
         <div className={`${commonStyles.flexICenter}`}>
@@ -214,6 +242,13 @@ const KYCSalary = () => {
           //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
         />
       </div>
+
+      {formErrors.currentAddressProof && (
+        <div
+          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+          {formErrors.currentAddressProof}
+        </div>
+      )}
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
           <button
@@ -221,10 +256,13 @@ const KYCSalary = () => {
             I’ll do it later
           </button>
           <button
-            disabled
+            // disabled
+            onClick={() => {
+              submitHandler();
+            }}
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Proceed</span>
-            <Image src={forwardArrow} alt="Forward Arrow Icon" />
+            <OutlineArrowRight />
           </button>
         </div>
       </div>
