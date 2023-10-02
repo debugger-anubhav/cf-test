@@ -378,7 +378,7 @@ const KYCAddress = () => {
       </div>
       <div className={`${styles.formInputFirst}`}>
         <DropDown
-          options={docsData[1]?.supported_docs
+          options={docsData[0]?.supported_docs
             .split(",")
             ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setCurrAddModal}
@@ -480,7 +480,8 @@ const KYCAddress = () => {
           <span className={`${commonStyles.termsTxt}`}>
             &nbsp;I accept &nbsp;
           </span>
-          <span className={`${commonStyles.termsTxt} text-[#5774AC] underline`}>
+          <span
+            className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}>
             &nbsp;Terms and Conditions
           </span>
         </div>
@@ -493,123 +494,111 @@ const KYCAddress = () => {
       )}
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
-          <button
-            className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
-            I’ll do it later
+          <button className={`${commonStyles.laterBtn} ${styles.laterBtn}  `}>
+            I&apos;ll do it later
           </button>
           <button
             // disabled
             onClick={() => {
               submitHandler();
             }}
-            className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
+            className={`${commonStyles.saveBtn} ${styles.saveBtn}  `}>
             <span>Proceed</span>
             <OutlineArrowRight />
           </button>
         </div>
       </div>
-      <div className="md:hidden">
-        {isMdScreen && (
-          <>
-            <Modal
-              open={perAddModal}
-              onClose={() => setPerAddModal(false)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              disableRestoreFocus
-              disableEnforceFocus
-              disableAutoFocus>
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select any permanent address proof
-                </div>
-                <ul
-                  className={`${
-                    perAddModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {docsData[1]?.supported_docs
-                    .split(",")
-                    ?.map(i => ({label: i, value: i}))
-                    ?.map((option, index) => (
-                      <li
-                        className={`${commonStyles.option} ${
-                          option?.value === selectedOptionPer?.value
-                            ? "bg-[#EFF5FF]"
-                            : ""
-                        } `}
-                        key={index}
-                        onClick={() => handleOptionClickPer(option)}>
-                        <span>{option.label}</span>{" "}
-                        <SelectionCircle
-                          showInner={option?.value === selectedOptionPer?.value}
-                        />
-                      </li>
-                    ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setPerAddModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
+
+      {isMdScreen && (
+        <>
+          <Modal
+            open={perAddModal}
+            onClose={() => setPerAddModal(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            disableRestoreFocus
+            disableEnforceFocus
+            disableAutoFocus>
+            <div className={`${commonStyles.dropdown_container} `}>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select any permanent address proof
               </div>
-            </Modal>
-            <Modal
-              open={currAddModal}
-              onClose={() => setCurrAddModal(false)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-              disableRestoreFocus
-              disableEnforceFocus
-              disableAutoFocus>
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select any current address proof
+              <ul
+                className={`${
+                  perAddModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {docsData[1]?.supported_docs
+                  .split(",")
+                  ?.map((option, index) => (
+                    <li
+                      className={`${commonStyles.option} ${
+                        option === selectedOptionPer ? "bg-[#EFF5FF]" : ""
+                      } `}
+                      key={index}
+                      onClick={() => handleOptionClickPer(option)}>
+                      <span>{option}</span>{" "}
+                      <SelectionCircle
+                        showInner={option === selectedOptionPer}
+                      />
+                    </li>
+                  ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setPerAddModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
                 </div>
-                <ul
-                  className={`${
-                    currAddModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {docsData[0]?.supported_docs
-                    .split(",")
-                    ?.map(i => ({label: i, value: i}))
-                    .map((option, index) => (
-                      <li
-                        className={`${commonStyles.option} ${
-                          option?.value === selectedOptionCur?.value
-                            ? "bg-[#EFF5FF]"
-                            : ""
-                        } `}
-                        key={index}
-                        onClick={() => handleOptionClickCur(option)}>
-                        <span>{option.label}</span>{" "}
-                        <SelectionCircle
-                          showInner={option?.value === selectedOptionCur?.value}
-                        />
-                      </li>
-                    ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setCurrAddModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
+              </button>
+            </div>
+          </Modal>
+          <Modal
+            open={currAddModal}
+            onClose={() => setCurrAddModal(false)}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+            disableRestoreFocus
+            disableEnforceFocus
+            disableAutoFocus>
+            <div className={`${commonStyles.dropdown_container} `}>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select any current address proof
               </div>
-            </Modal>
-          </>
-        )}
-      </div>
+              <ul
+                className={`${
+                  currAddModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {docsData[0]?.supported_docs.split(",").map((option, index) => (
+                  <li
+                    className={`${commonStyles.option} ${
+                      option === selectedOptionCur ? "bg-[#EFF5FF]" : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClickCur(option)}>
+                    <span>{option}</span>{" "}
+                    <SelectionCircle showInner={option === selectedOptionCur} />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setCurrAddModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
+              </button>
+            </div>
+          </Modal>
+        </>
+      )}
     </div>
   );
 };

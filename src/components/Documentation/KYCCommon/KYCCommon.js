@@ -17,7 +17,7 @@ import DocLoader from "../DocLoader/DocLoader";
 // import { baseURL } from "@/network/axios";
 // import { endPoints } from "@/network/endPoints";
 
-// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 // let src;
 // if (typeof window !== "undefined") {
 //   src = window.screen.availWidth;
@@ -34,6 +34,7 @@ const theme = createTheme({
 const KYCCommon = () => {
   const [deleteIconClick, setDeleteIconClick] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [openModal, setModalOpen] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [selectedOption, setSelectedOption] = useState({
@@ -259,9 +260,13 @@ const KYCCommon = () => {
           <span className={`${commonStyles.termsTxt}`}>
             &nbsp;I accept &nbsp;
           </span>
-          <span className={`${commonStyles.termsTxt} text-[#5774AC] underline`}>
+          <button
+            className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
+            onClick={() => {
+              setDrawerOpen(true);
+            }}>
             &nbsp;Terms and Conditions
-          </span>
+          </button>
         </div>
       </div>
       {formErrors.termsAccepted && (
@@ -287,14 +292,13 @@ const KYCCommon = () => {
           </button>
         </div>
       </div>
-      {/* <SwipeableDrawer
-        // classes={{
-        //   paper:
-        //     mobileCityDrawer && DrawerName !== "menu" && styles.bottomDrawer,
-        // }}
-        anchor={windowWidth < 767 ? "bottom" : "right"}
-        className=""
-        open={true}
+      <SwipeableDrawer
+        classes={{
+          paper: styles.bottomDrawer,
+        }}
+        anchor={isMdScreen ? "bottom" : "right"}
+        className="m-8"
+        open={drawerOpen}
         onClose={() => {
           // mobileCityDrawer && DrawerName !== "menu"
           //   ? toggleDrawer("bottom", true)
@@ -305,73 +309,67 @@ const KYCCommon = () => {
           //   ? toggleDrawer("bottom", true)
           //   : toggleDrawer("left", true);
         }}>
-        <div>Hola</div>
-      </SwipeableDrawer> */}
-      {/* <div className="relative md:hidden top-0 bg-slate-400 z-10 mx-4 ">
-        <div className="absolute w- bottom-0 ">
-          <ul className={isDDOpen ? styles.optionsActive : styles.options}>
-            {selectedArr.map((option, index) => (
-              <li
-                className={`${styles.option}  ${
-                  index === selectedArr.length - 1
-                    ? "rounded-b-xl border-none"
-                    : ""
-                } ${index === 0 ? "border-t" : ""}`}
-                key={index}
-                onClick={() => handleOptionClick(option)}>
-                <span>{option.label}</span> <SelectionCircle showInner={true} />
-              </li>
-            ))}
-          </ul>
+        <div>
+          Holafg t gh sdfg dfg sdfg sdfg sdfg
+          dfsgsfddddddddddddddddddddddddddddddddddddd
         </div>
-      </div> */}
-      <div className="md:hidden">
-        {isMdScreen && (
-          <Modal
-            open={isDDOpen}
-            onClose={() => setIsDDOpen(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            disableRestoreFocus
-            disableEnforceFocus
-            disableAutoFocus>
-            <div className={`${commonStyles.dropdown_container} `}>
-              <div className={`${commonStyles.dropdown_heading} `}>
-                Please provide one ID to fetch your credit score
-              </div>
-              <ul
-                className={`${
-                  isDDOpen ? commonStyles.optionsActive : commonStyles.options
-                } `}>
-                {selectedArr.map((option, index) => (
-                  <li
-                    className={`${commonStyles.option} ${
-                      option?.value === selectedOption?.value
-                        ? "bg-[#EFF5FF]"
-                        : ""
-                    } `}
-                    key={index}
-                    onClick={() => handleOptionClick(option)}>
-                    <span>{option.label}</span>{" "}
-                    <SelectionCircle
-                      showInner={option?.value === selectedOption?.value}
-                    />
-                  </li>
-                ))}
-              </ul>
-              <button
-                className={`${commonStyles.close_icon_btn}`}
-                onClick={() => {
-                  setIsDDOpen(false);
-                }}>
-                <div className={`${commonStyles.close_icon}`}>
-                  <Close size={25} color={"#222222"} />
-                </div>
-              </button>
+        <button
+          className={`${commonStyles.close_icon_btn}`}
+          onClick={() => {
+            setDrawerOpen(false);
+          }}>
+          <div className={`${commonStyles.close_icon}`}>
+            <Close size={25} color={"#222222"} />
+          </div>
+        </button>
+      </SwipeableDrawer>
+
+      {isMdScreen && (
+        <Modal
+          open={isDDOpen}
+          onClose={() => setIsDDOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          disableRestoreFocus
+          disableEnforceFocus
+          disableAutoFocus>
+          <div className={`${commonStyles.dropdown_container} `}>
+            <div className={`${commonStyles.dropdown_heading} `}>
+              Please provide one ID to fetch your credit score
             </div>
-          </Modal>
-        )}
-      </div>
+            <ul
+              className={`${
+                isDDOpen ? commonStyles.optionsActive : commonStyles.options
+              } `}>
+              {selectedArr.map((option, index) => (
+                <li
+                  className={`${commonStyles.option} ${
+                    option?.value === selectedOption?.value
+                      ? "bg-[#EFF5FF]"
+                      : ""
+                  } `}
+                  key={index}
+                  onClick={() => handleOptionClick(option)}>
+                  <span>{option.label}</span>{" "}
+                  <SelectionCircle
+                    showInner={option?.value === selectedOption?.value}
+                  />
+                </li>
+              ))}
+            </ul>
+            <button
+              className={`${commonStyles.close_icon_btn}`}
+              onClick={() => {
+                setIsDDOpen(false);
+              }}>
+              <div className={`${commonStyles.close_icon}`}>
+                <Close size={25} color={"#222222"} />
+              </div>
+            </button>
+          </div>
+        </Modal>
+      )}
+
       <Modal
         open={deleteIconClick}
         onClose={() => setDeleteIconClick(false)}

@@ -3,7 +3,7 @@
 }
 
 .saveBtn {
-  @apply mt-3 md:mt-0 mb-4 md:mb-0;
+  @apply mt-3 md:mt-0 mb-4 md:mb-0 md:w-[232px];
 }
 
 .btnGroupContainer {
@@ -16,7 +16,7 @@
 }
 
 .laterBtn {
-  @apply mt-4 md:mt-0;
+  @apply mt-4 md:mt-0 md:w-[232px];
 }
 
 .formTermsSection {

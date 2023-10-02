@@ -4,8 +4,6 @@ import loader from "@/assets/lottie-files/pageScanning.json";
 import {Modal} from "@mui/material";
 import styles from "./DocLoader.module.css";
 const DocLoader = ({height, width, open, setOpen}) => {
-  console.log(loader);
-
   return (
     <div>
       <Modal

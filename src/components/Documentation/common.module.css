@@ -44,6 +44,10 @@
   line-height: 30px; /* 187.5% */
   letter-spacing: -0.32px;
 }
+.conditionsTxt {
+  @apply text-[#5774AC] underline;
+
+}
 .laterBtn {
   height: 56px;
   padding: 0px 32px;
