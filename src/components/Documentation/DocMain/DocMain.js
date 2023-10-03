@@ -4,8 +4,8 @@ import DocSidebar from "../Sidebar/DocSidebar";
 import KycHeader from "../KycHeader/KycHeader";
 // import KYCSalary from "../KYCSalary/KYCSalary";
 // import KYCCard from "../KYCCard/KYCCard";
-// import KYCCommon from "../KYCCommon/KYCCommon";
-import KYCAddress from "../KYCAddress/KYCAddress";
+import KYCCommon from "../KYCCommon/KYCCommon";
+// import KYCAddress from "../KYCAddress/KYCAddress";
 // import KYC100 from "../KYC100/KYC100";
 
 // import KYCCard from "../KYCCard/KYCCard";
@@ -17,11 +17,11 @@ const DocMain = () => {
         <DocSidebar />
         <div className={styles.kycFormArea}>
           <KycHeader />
-          <KYCAddress />
+          {/* <KYCAddress /> */}
           {/* <KYCCard /> */}
           {/* <KYCSalary /> */}
           {/* <KYC100 /> */}
-          {/* <KYCCommon /> */}
+          <KYCCommon />
         </div>
       </div>
     </div>
