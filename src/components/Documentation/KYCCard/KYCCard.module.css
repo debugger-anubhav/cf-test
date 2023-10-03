@@ -1,0 +1,32 @@
+.stepHeading {
+  @apply mx-4 md:ml-16;
+}
+.formHeadingFirst {
+  @apply mt-1 mx-4 md:ml-16;
+}
+.formHeadingSecond {
+  @apply mt-8 mx-4 md:ml-16;
+}
+.formInputFirst {
+  @apply mt-1 mx-4 md:ml-16 flex items-center;
+}
+.inputStyles {
+  @apply md:ml-2 text-14 md:text-16 flex items-center;
+}
+.btnGroupContainer {
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .btnGroupContainer {
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+}
+.btnGroup {
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+}
+.laterBtn {
+  @apply mt-4 md:mt-0;
+}
+.saveBtn {
+  @apply mt-3 md:mt-0 mb-4 md:mb-0;
+}

@@ -1,50 +1,43 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "./DropDown.module.css";
-import downArrowDD from "@/assets/common_icons/downArrowDD.svg";
-import upArrowDD from "@/assets/common_icons/upArrowDD.svg";
-import Image from "next/image";
+import {DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 const DropDown = ({
   handleSelectChange,
-  // selectedOption,
+  selectedOption,
   style,
   useDefaultStyle,
   options,
+  setIsDDOpen,
+  setSelectedOption,
+  isOpen,
 }) => {
-  const [isOpen, setIsOpen] = useState(true);
-  const [selectedOption, setSelectedOption] = useState(null);
-
   const handleOptionClick = option => {
     setSelectedOption(option);
-    setIsOpen(false);
+    setIsDDOpen(false);
   };
   return (
     <div
       className={`${styles["custom-select"]} ${isOpen ? "active" : ""}`}
-      style={isOpen ? {} : {boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"}}>
+      style={isOpen ? {boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"} : {}}>
       <div
         className={`${styles["selected-option"]} ${
-          !isOpen ? "border-none" : "!border-[#DDDDDF]"
+          isOpen ? "border-none" : "!border-[#DDDDDF]"
         }`}
-        onClick={() => setIsOpen(!isOpen)}>
-        <span> {selectedOption || "Select an option"}</span>
+        onClick={() => {
+          setIsDDOpen(prev => !prev);
+        }}>
+        <span
+          className={`${
+            selectedOption?.value ? "text-black" : "text-[#71717A]"
+          }`}>
+          {selectedOption?.value || "Select an option"}
+        </span>
         <div className={`${styles.ddArrow}`}>
-          {isOpen ? (
-            <Image
-              src={downArrowDD}
-              className={`${styles.ddArrow}`}
-              loading="lazy"
-            />
-          ) : (
-            <Image
-              src={upArrowDD}
-              className={`${styles.ddArrow}`}
-              loading="lazy"
-            />
-          )}
+          {isOpen ? <PopUpArrow size={25} /> : <DownPopUpArrow size={25} />}
         </div>
       </div>
-      <ul className={isOpen ? styles.options : styles.optionsActive}>
-        {options.map((option, index) => (
+      <ul className={`${isOpen ? styles.optionsActive : styles.options}  `}>
+        {options?.map((option, index) => (
           <li
             className={`${styles.option} ${
               index === options.length - 1 ? "rounded-b-xl border-none" : ""
