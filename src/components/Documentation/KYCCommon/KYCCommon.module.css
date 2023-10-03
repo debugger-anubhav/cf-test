@@ -54,27 +54,29 @@
 }
 
 .delete_item_text {
-  @apply text-222 font-medium font-Poppins sm:text-24 text-20;
+  @apply text-222 font-medium font-Poppins md:text-24 text-20;
 }
 
 .delete_confirmation_text {
-  @apply font-normal text-14 sm:text-16 font-Poppins py-8;
+  @apply font-normal text-14 md:text-16 font-Poppins py-8;
   color: #71717a;
 }
 .cancel_delete_btn {
-  @apply border-2 rounded-lg py-4 px-6 sm:px-8 w-full font-Poppins text-14 sm:text-16 font-medium;
+  @apply border-2 rounded-lg py-4 px-6 md:px-8 w-full font-Poppins text-14 md:text-16 font-medium;
   border-color: #71717a;
 }
 .confirm_delete_btn {
-  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium;
+  @apply border rounded-lg py-4 px-6 md:px-8 ml-4 w-full font-Poppins text-16 font-medium;
   background-color: #f6b704;
 }
 .main_container {
-  @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
+  @apply bg-white w-max h-min absolute md:top-1/2 left-1/2 md:transform -translate-x-1/2 md:-translate-y-1/2 rounded-t-3xl md:rounded-none bottom-0 shadow-lg md:p-12 px-4 pt-6 pb-8 flex;
 }
-.close_icon {
-  @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;
+
+.errorTxt {
+  @apply mx-4 md:ml-16;
 }
-.close_icon_btn {
-  @apply flex justify-start flex-col  pl-8;
+.MuiSwipeableDrawer-paper {
+  margin: 16px;
+  width: 16px;
 }
