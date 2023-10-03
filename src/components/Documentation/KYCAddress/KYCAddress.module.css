@@ -57,6 +57,9 @@
 .contact_input {
   @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
+.contact_input::placeholder {
+  @apply font-Poppins font-normal text-16  text-[#71717A];
+}
 .chooseFile {
   @apply inline-block pl-2;
 }

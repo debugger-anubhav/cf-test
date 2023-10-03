@@ -305,8 +305,8 @@ const KYCAddress = () => {
               formErrors.addressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
               !formErrors.addressProof && formData.addressProof.name
-                ? "  !bg-[#F1FFF9] md:!bg-white"
-                : ""
+                ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                : "text-[#71717a]"
             }`}>
             <div className={`${commonStyles.flexICenter}`}>
               {formData?.addressProof.name ? (
@@ -404,8 +404,8 @@ const KYCAddress = () => {
             } ${
               !formErrors.currentAddressProof &&
               formData.currentAddressProof.name
-                ? "  !bg-[#F1FFF9] md:!bg-white"
-                : ""
+                ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                : "text-[#71717a] "
             }`}>
             <div className={`${commonStyles.flexICenter}`}>
               {formData?.currentAddressProof.name ? (
