@@ -18,6 +18,10 @@ import DocLoader from "../DocLoader/DocLoader";
 // import { endPoints } from "@/network/endPoints";
 
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import {baseInstance, baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 // let src;
 // if (typeof window !== "undefined") {
 //   src = window.screen.availWidth;
@@ -35,11 +39,11 @@ const KYCCommon = () => {
   const [progressModal, setProgressModal] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [openModal, setModalOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [selectedOption, setSelectedOption] = useState({
     label: "Pan Number (Recommended)",
-    value: "PAN Number",
+    value: "1",
   });
   const [formData, setFormData] = useState({
     idType: "",
@@ -55,45 +59,33 @@ const KYCCommon = () => {
   });
 
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
-  // const [windowWidth, setWindowWidth] = useState(src);
-  // const [state, setState] = React.useState({
-  //   top: false,
-  //   left: false,
-  //   bottom: false,
-  //   right: false,
-  // });
+  const submitHandler = () => {
+    setSubmitting(true);
+    const data = {
+      docDetail: JSON.stringify({
+        id: selectedOption.value,
+        value: formData.idNumber,
+      }),
+      dob: formData.dob,
+      userId: decrypt(getLocalStorage("_ga")),
+      orderId: "32423423",
+    };
+    baseInstance
+      .post(baseURL + endPoints.getAndSaveCibilScore, data)
+      .then(res => {
+        console(res);
+        setSubmitting(false);
+      })
 
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     window.addEventListener("resize", () => {
-  //       setWindowWidth(window.screen.availWidth);
-  //     });
-  //   }
-
-  //   return () => {
-  //     if (typeof window !== "undefined") {
-  //       window.removeEventListener("resize", () => {
-  //         console.log("Removed Event ");
-  //       });
-  //     }
-  //   };
-  // }, []);
-
-  // const toggleDrawer = (anchor, open) => event => {
-  //   if (
-  //     event &&
-  //     event.type === "keydown" &&
-  //     (event.key === "Tab" || event.key === "Shift")
-  //   ) {
-  //     return;
-  //   }
-
-  //   setState({...state, [anchor]: open});
-  // };
+      .catch(err => {
+        console.log(err);
+        setSubmitting(false);
+      });
+  };
   const idOptions = [
-    {label: "PAN Number", value: "PAN Number"},
-    {label: "Driving license", value: "Driving license"},
-    {label: "Voter ID", value: "Voter ID"},
+    {label: "PAN Number", value: "1"},
+    {label: "Driving license", value: "2"},
+    {label: "Voter ID", value: "3"},
   ];
   // const getOption = () => {
   //   axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
@@ -173,6 +165,7 @@ const KYCCommon = () => {
       // Form has errors, handle them as needed
       // For example, display error messages or prevent submission
     }
+    submitHandler();
   };
 
   // console.log(handleCheckboxChange, handleInputChange);
@@ -505,8 +498,8 @@ const KYCCommon = () => {
       <DocLoader
         height={"200px"}
         width={"200px"}
-        open={openModal}
-        setOpen={setModalOpen}
+        open={submitting}
+        setOpen={setSubmitting}
       />
     </div>
   );
