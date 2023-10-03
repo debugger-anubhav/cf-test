@@ -100,7 +100,7 @@ const KYCCommon = () => {
     const dateRegex = /^(0[1-9]|[1-2][0-9]|3[0-1])-(0[1-9]|1[0-2])-\d{4}$/;
 
     const errors = {};
-    switch (selectedOption.value) {
+    switch (selectedOption.label) {
       case "PAN Number":
         console.log(
           panRegex.test(formData.idNumber),
@@ -159,13 +159,11 @@ const KYCCommon = () => {
     const errors = validateForm();
     setFormErrors(errors);
     if (Object.keys(errors).length === 0) {
-      // Form is valid, submit the data or perform any necessary action
-      // You can send the formData to your API here
+      submitHandler();
     } else {
       // Form has errors, handle them as needed
       // For example, display error messages or prevent submission
     }
-    submitHandler();
   };
 
   // console.log(handleCheckboxChange, handleInputChange);
@@ -202,7 +200,7 @@ const KYCCommon = () => {
           type="text"
           name={"idNumber"}
           className={`${commonStyles.basicInputStyles}`}
-          placeholder={`Enter ${selectedOption.value} Number`}
+          placeholder={`Enter ${selectedOption.label} Number`}
           onChange={e => {
             handleInputChange(e);
           }}
