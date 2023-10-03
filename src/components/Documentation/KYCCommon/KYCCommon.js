@@ -42,8 +42,8 @@ const KYCCommon = () => {
   const [submitting, setSubmitting] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [selectedOption, setSelectedOption] = useState({
-    label: "Pan Number (Recommended)",
-    value: "1",
+    label: "PAN Number (Recommended)",
+    value: "",
   });
   const [formData, setFormData] = useState({
     idType: "",
@@ -101,7 +101,7 @@ const KYCCommon = () => {
 
     const errors = {};
     switch (selectedOption.label) {
-      case "PAN Number":
+      case "PAN Number" || "PAN Number (Recommended)":
         console.log(
           panRegex.test(formData.idNumber),
           formData.idNumber,

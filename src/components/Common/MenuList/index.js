@@ -8,7 +8,7 @@ import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
 
-const MenuList = () => {
+const MenuList = ({hasMb = true}) => {
   const dispatch = useDispatch();
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
@@ -31,7 +31,7 @@ const MenuList = () => {
   }, []);
 
   return (
-    <div className={styles.menu_list_wrapper}>
+    <div className={`${styles.menu_list_wrapper} ${hasMb ? "mb-6" : ""}`}>
       {loading && !getAllAndSubCategoryData?.length ? (
         <div className="w-[80%]">
           <Skeleton />
