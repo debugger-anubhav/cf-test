@@ -1,8 +1,8 @@
 import React from "react";
-import {Player} from "@lottiefiles/react-lottie-player";
 import loader from "@/assets/lottie-files/pageScanning.json";
 import {Modal} from "@mui/material";
 import styles from "./DocLoader.module.css";
+import {Player} from "@lottiefiles/react-lottie-player";
 const DocLoader = ({height, width, open, setOpen}) => {
   return (
     <div>
