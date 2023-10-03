@@ -308,35 +308,37 @@ const KYCAddress = () => {
                 ? "  !bg-[#F1FFF9] md:!bg-white"
                 : ""
             }`}>
-            {formData?.addressProof.name ? (
-              <>
-                {formErrors?.addressProof ? (
-                  <ExclamationCircleFill
-                    color={"#D96060"}
-                    className={`${commonStyles.mdHiddemIcons}`}
-                  />
-                ) : (
-                  <CheckCircleIcon
-                    color={"#2D9469"}
-                    className={`${commonStyles.mdHiddemIcons}`}
-                  />
-                )}
-              </>
-            ) : (
+            <div className={`${commonStyles.flexICenter}`}>
+              {formData?.addressProof.name ? (
+                <>
+                  {formErrors?.addressProof ? (
+                    <ExclamationCircleFill
+                      color={"#D96060"}
+                      className={`${commonStyles.mdHiddemIcons}`}
+                    />
+                  ) : (
+                    <CheckCircleIcon
+                      color={"#2D9469"}
+                      className={`${commonStyles.mdHiddemIcons}`}
+                    />
+                  )}
+                </>
+              ) : (
+                <Image
+                  src={uploading}
+                  alt="Uploading Icon"
+                  className={`${commonStyles.mdHiddenIB}`}
+                />
+              )}
               <Image
                 src={uploading}
                 alt="Uploading Icon"
-                className={`${commonStyles.mdHiddenIB}`}
+                className={`${commonStyles.mdIBHidden}`}
               />
-            )}
-            <Image
-              src={uploading}
-              alt="Uploading Icon"
-              className={`${commonStyles.mdIBHidden}`}
-            />
-            <span className={`${styles.chooseFile}`}>
-              {formData?.addressProof?.name ?? "Choose file"}
-            </span>
+              <span className={`${styles.chooseFile}`}>
+                {formData?.addressProof?.name ?? "Choose file"}
+              </span>
+            </div>
             {!formErrors.addressProof && formData.addressProof.name ? (
               <div className={`${commonStyles.correctFile}`}></div>
             ) : (
@@ -405,35 +407,37 @@ const KYCAddress = () => {
                 ? "  !bg-[#F1FFF9] md:!bg-white"
                 : ""
             }`}>
-            {formData?.currentAddressProof.name ? (
-              <>
-                {formErrors?.currentAddressProof ? (
-                  <ExclamationCircleFill
-                    color={"#D96060"}
-                    className={`${commonStyles.mdHiddemIcons}`}
-                  />
-                ) : (
-                  <CheckCircleIcon
-                    color={"#2D9469"}
-                    className={`${commonStyles.mdHiddemIcons}`}
-                  />
-                )}
-              </>
-            ) : (
+            <div className={`${commonStyles.flexICenter}`}>
+              {formData?.currentAddressProof.name ? (
+                <>
+                  {formErrors?.currentAddressProof ? (
+                    <ExclamationCircleFill
+                      color={"#D96060"}
+                      className={`${commonStyles.mdHiddemIcons}`}
+                    />
+                  ) : (
+                    <CheckCircleIcon
+                      color={"#2D9469"}
+                      className={`${commonStyles.mdHiddemIcons}`}
+                    />
+                  )}
+                </>
+              ) : (
+                <Image
+                  src={uploading}
+                  alt="Uploading Icon"
+                  className={`${commonStyles.mdHiddenIB}`}
+                />
+              )}
               <Image
                 src={uploading}
                 alt="Uploading Icon"
-                className={`${commonStyles.mdHiddenIB}`}
+                className={`${commonStyles.mdIBHidden}`}
               />
-            )}
-            <Image
-              src={uploading}
-              alt="Uploading Icon"
-              className={`${commonStyles.mdIBHidden}`}
-            />
-            <span className={`${styles.chooseFile}`}>
-              {formData?.currentAddressProof?.name ?? "Choose file"}
-            </span>
+              <span className={`${styles.chooseFile}`}>
+                {formData?.currentAddressProof?.name ?? "Choose file"}
+              </span>
+            </div>
             {!formErrors.currentAddressProof &&
             formData.currentAddressProof.name ? (
               <div className={`${commonStyles.correctFile}`}></div>
@@ -542,19 +546,14 @@ const KYCAddress = () => {
             </h2>
             <ul className={` ${commonStyles.termsUL}  `}>
               <li className={` ${commonStyles.termsLI}  `}>
-                By continuing, you agree to allow Cityfurnish India Private
-                Limited to fetch your credit report from CRIF High Mark for the
-                purpose of KYC verification. This consent shall be valid for a
-                period of 6 months.
+                Order fulfillment is subject to approval of documents submitted.
               </li>
               <li className={` ${commonStyles.termsLI}  `}>
-                By clicking the &apos;Proceed&apos; button, you agree to CRIF
-                High Mark Credit Score Terms of Use.
+                Cityfurnish reserves right to cancel order in case of documents
+                rejection.
               </li>
               <li className={` ${commonStyles.termsLI}  `}>
-                You understand that you shall have the option to opt
-                out/unsubscribe from the service by clicking here. Fetching
-                report from the credit bureau will not impact your credit score.
+                It will take 24 hrs to verify your documents after submission.
               </li>
             </ul>
             <button
@@ -680,20 +679,16 @@ const KYCAddress = () => {
                     </h2>
                     <ul className={` ${commonStyles.termsUL}  `}>
                       <li className={` ${commonStyles.termsLI}  `}>
-                        By continuing, you agree to allow Cityfurnish India
-                        Private Limited to fetch your credit report from CRIF
-                        High Mark for the purpose of KYC verification. This
-                        consent shall be valid for a period of 6 months.
+                        Order fulfillment is subject to approval of documents
+                        submitted.
                       </li>
                       <li className={` ${commonStyles.termsLI}  `}>
-                        By clicking the &apos;Proceed&apos; button, you agree to
-                        CRIF High Mark Credit Score Terms of Use.
+                        Cityfurnish reserves right to cancel order in case of
+                        documents rejection.
                       </li>
                       <li className={` ${commonStyles.termsLI}  `}>
-                        You understand that you shall have the option to opt
-                        out/unsubscribe from the service by clicking here.
-                        Fetching report from the credit bureau will not impact
-                        your credit score.
+                        It will take 24 hrs to verify your documents after
+                        submission.
                       </li>
                     </ul>
                     <button
