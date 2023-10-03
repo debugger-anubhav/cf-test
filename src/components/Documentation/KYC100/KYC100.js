@@ -1,13 +1,12 @@
-import Image from "next/image";
 import React from "react";
-import veriTick from "@/assets/common_icons/successTick.jpg";
 import styles from "./KYC100.module.css";
 import commonStyles from "../common.module.css";
+import CongoPopup from "../CongoPopup/CongoPopup";
 const KYC100 = () => {
   return (
     <div>
       <div className={`${styles.firstSection}`}>
-        <Image src={veriTick} alt="Icon for KYC success" loading="lazy" />
+        <CongoPopup width={"200px"} height={"200px"} />
       </div>
       <div className={`${styles.secondSection}`}>
         <div className={`${styles.secondSectionHeaderTxt}`}>

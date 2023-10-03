@@ -1,5 +1,10 @@
 import React from "react";
 import {BiSolidMessage, BiMinus, BiRupee} from "react-icons/bi";
+import {
+  AiOutlineArrowRight,
+  AiOutlineDelete,
+  AiFillCheckCircle,
+} from "react-icons/ai";
 import {FiChevronDown, FiChevronUp} from "react-icons/fi";
 import {
   IoClose,
@@ -8,7 +13,7 @@ import {
   IoArrowBack,
   IoPerson,
 } from "react-icons/io5";
-import {TbMailFilled} from "react-icons/tb";
+import {TbMailFilled, TbReload} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
 import {
@@ -17,7 +22,13 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
 } from "react-icons/io";
-import {BsFillStarFill, BsGoogle, BsCheckLg, BsWhatsapp} from "react-icons/bs";
+import {
+  BsFillStarFill,
+  BsGoogle,
+  BsCheckLg,
+  BsWhatsapp,
+  BsExclamationCircleFill,
+} from "react-icons/bs";
 import {GoPlus} from "react-icons/go";
 import {
   MdModeEdit,
@@ -51,7 +62,6 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
-import {AiOutlineDelete} from "react-icons/ai";
 import {FaRegCalendar} from "react-icons/fa";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
@@ -243,6 +253,12 @@ export const InformationIcon = ({size, color, className}) => (
 export const DeleteIcon = ({size, color, className}) => (
   <AiOutlineDelete size={size} color={color} className={className} />
 );
+export const CheckCircleIcon = ({size, color, className}) => (
+  <AiFillCheckCircle size={size} color={color} className={className} />
+);
+export const ReloadIcon = ({size, color, className}) => (
+  <TbReload size={size} color={color} className={className} />
+);
 
 export const ArrowForw = ({size, color, className}) => (
   <IoArrowForward size={size} color={color} className={className} />
@@ -281,6 +297,9 @@ export const PersonIcon = ({size, color, className}) => (
 export const WhatsappIcon = ({size, color, className}) => (
   <BsWhatsapp size={size} color={color} className={className} />
 );
+export const ExclamationCircleFill = ({size, color, className}) => (
+  <BsExclamationCircleFill size={size} color={color} className={className} />
+);
 
 export const CalendarIcon = ({size, color, className}) => (
   <FaRegCalendar size={size} color={color} className={className} />
@@ -292,4 +311,7 @@ export const VerifiedIcon = ({size, color, className}) => (
 
 export const EmailIcon = ({size, color, className}) => (
   <MdEmail size={size} color={color} className={className} />
+);
+export const OutlineArrowRight = ({size, color, className}) => (
+  <AiOutlineArrowRight size={size} color={color} className={className} />
 );
