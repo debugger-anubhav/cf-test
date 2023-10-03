@@ -162,6 +162,7 @@ const Footer = ({params}) => {
               className={`${styles.phoneImg} pointer-events-none`}
               alt="phone-icon"
               src={FooterIcons.Phone}
+              loading="lazy"
             />
             <div>
               <p className={styles.contact}>
@@ -199,6 +200,7 @@ const Footer = ({params}) => {
                   src={item?.icon}
                   className="pointer-events-none"
                   onClick={() => console.log("item.link")}
+                  loading="lazy"
                 />
               </a>
             ))}
@@ -213,6 +215,7 @@ const Footer = ({params}) => {
             className={`${styles.phoneImg} pointer-events-none`}
             alt="phone-icon"
             src={FooterIcons.Phone}
+            loading="lazy"
           />
           <div>
             <p className={styles.contact}>
@@ -258,6 +261,7 @@ const Footer = ({params}) => {
             src={FooterIcons.GoToTopIcon}
             alt="go-to-top-icon"
             className={`${styles.goToTopIcon} pointer-events-none`}
+            loading="lazy"
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

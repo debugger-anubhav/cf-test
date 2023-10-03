@@ -137,6 +137,7 @@ export default function UserSettings() {
                       src={item?.img}
                       alt={item?.head}
                       className={styles.card_icon}
+                      loading="lazy"
                     />
                     <p className={styles.card_head}>{item.head}</p>
                   </div>

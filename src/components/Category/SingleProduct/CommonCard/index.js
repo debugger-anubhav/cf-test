@@ -182,6 +182,7 @@ const CategoryCard = ({
             src={hoverCard ? hoverCardImage : cardImage}
             alt={desc.replace(/-/g, " ")}
             className={styles.img}
+            loading="lazy"
           />
           {soldOut ? (
             <div className={`${styles.soldout_div} ${styles.label_tag}`}>
@@ -266,6 +267,7 @@ const CategoryCard = ({
                       className={`${styles.included_image} ${
                         isDumy && "pointer-events-none"
                       } `}
+                      loading="lazy"
                     />
                   );
                 })}

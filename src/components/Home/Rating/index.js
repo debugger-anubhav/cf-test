@@ -104,6 +104,7 @@ const CustomerRating = () => {
               src={HomePageImages.editIcon}
               alt="editIcon"
               className={styles.editIcon}
+              loading="lazy"
             />
           </a>
           <a
@@ -133,6 +134,7 @@ const CustomerRating = () => {
                     src={`https://d3juy0zp6vqec8.cloudfront.net/images/google_review/${item?.user_image}`}
                     alt="profile-pic"
                     className={`${styles.img} pointer-events-none`}
+                    loading="lazy"
                   />
                 </div>
                 <div className="ml-3 mr-7">
