@@ -10,7 +10,6 @@ import CareInstruction from "@/components/Product/CareInstruction";
 import CustomerRating from "@/components/Product/CustomerRatings";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
-import Footer from "@/components/Common/Footer";
 import BannerSection from "@/components/Product/BannerSection";
 import {useParams} from "next/navigation";
 import loadable from "@loadable/component";
@@ -19,7 +18,11 @@ import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSecti
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
 import Notifications from "@/components/Common/Notifications/Notification";
+import {FooterSkeleton} from "@/components/Common/Footer";
 
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 const ItemsIncluded = loadable(
   () => import("@/components/Product/ProductsIncludedSection"),
   {

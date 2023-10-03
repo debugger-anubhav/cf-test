@@ -21,10 +21,14 @@ import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
-import Footer from "@/components/Common/Footer";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CustomerRating from "@/components/Home/Rating";
 import CategoryContent from "../categoryContent/categoryContent";
+import {FooterSkeleton} from "@/components/Common/Footer";
+
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 const FrequentlyAskedQuestions = loadable(
   () => import("@/components/Common/FrequentlyAskedQuestions"),
   {

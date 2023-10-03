@@ -6,6 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
 import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
+import {Skeleton} from "@mui/material";
 
 const Footer = ({params}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
@@ -116,13 +117,13 @@ const Footer = ({params}) => {
     <div className={styles.footer_wrapper}>
       {content.map((str, index) => {
         return (
-          <>
+          <div key={index.toString()}>
             <h2 className={styles.head}>{str.cat_heading}</h2>
             <p
               className={styles.desc}
               dangerouslySetInnerHTML={{__html: str.cat_desc}}
             />
-          </>
+          </div>
         );
       })}
 
@@ -146,7 +147,6 @@ const Footer = ({params}) => {
                       } else {
                         setLocalStorage("subCategory", "All");
                       }
-                      // router.push(t?.link);
                     }}>
                     {t?.text}
                   </p>
@@ -177,16 +177,6 @@ const Footer = ({params}) => {
               <p className={styles.time}>{str.time}</p>
             </div>
           </div>
-          {/* <div className={styles.social_media_icons_div}>
-            {FooterIcons?.social_media_icons?.map((item, index) => (
-              <img
-                key={index.toString()}
-                alt={item?.icon}
-                src={item?.icon}
-                onClick={() =>{ router.push(item.link)
-              />
-            ))}
-          </div> */}
           <div className={styles.social_media_icons_div}>
             {FooterIcons?.social_media_icons?.map((item, index) => (
               <a
@@ -270,3 +260,40 @@ const Footer = ({params}) => {
   );
 };
 export default Footer;
+
+export const FooterSkeleton = () => {
+  return (
+    <div className={styles.footer_wrapper_skeleton}>
+      <div className={styles.skeleton_div_wrapper}>
+        {[1, 2, 3, 4, 5, 6].map(item => {
+          return (
+            <div className={styles.pointers_div_skeleton} key={item.toString()}>
+              <div className={styles.head_wrapper_skeleton}>
+                <Skeleton variant="text" className="w-full h-full" />
+              </div>
+              {[1, 2, 3, 4]?.map(item => {
+                return (
+                  <div className={styles.points_skeleton} key={item.toString()}>
+                    <Skeleton variant="text" className="w-full h-full" />
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={styles.line}></div>
+
+      <div className={styles.copyRight_div_skeleton}>
+        <div className={styles.copyright_skeleton}>
+          <Skeleton variant="text" className="w-full h-full" />
+        </div>
+        <div className={styles.goToTopDiv}>
+          <Skeleton variant="circular" width={25} height={25} />
+          <Skeleton variant="text" width={50} height={10} />
+        </div>
+      </div>
+    </div>
+  );
+};
