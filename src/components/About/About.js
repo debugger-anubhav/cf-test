@@ -6,8 +6,11 @@ import HeroSection from "./HeroSection/HeroSection";
 import CompanyGoal from "./ComapanyGoal/CompanyGoal";
 import CityFurnish from "./cityFurnishLife/CityFurnishLife";
 import InverstorAndMedia from "./inverstorsAndMedia/InvestorsAndMedia";
+import {FooterSkeleton} from "@/components/Common/Footer";
 
-const Footer = loadable(() => import("@/components/Common/Footer"));
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 
 const About = () => {
   return (

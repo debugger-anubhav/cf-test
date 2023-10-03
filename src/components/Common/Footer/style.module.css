@@ -10,6 +10,7 @@
 .pointers_div {
   @apply mt-8 flex flex-wrap gap-x-[72px] gap-y-8;
 }
+
 .points_div {
   @apply mt-5 flex flex-col gap-3;
 }
@@ -60,4 +61,26 @@
 }
 .need_help_box {
   @apply hidden xl:block;
+}
+
+.footer_wrapper_skeleton {
+  @apply justify-between pt-6 pb-4 xl:pb-8 bg-[#F5F5F5] flex flex-col px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.head_wrapper_skeleton {
+  @apply xl:w-[140px] w-[100px];
+}
+.pointers_div_skeleton {
+  @apply mt-8 flex flex-col flex-wrap gap-x-[72px];
+}
+.points_skeleton {
+  @apply flex xl:w-[110px] w-[70px] h-1 mt-4;
+}
+.skeleton_div_wrapper {
+  @apply flex w-full justify-between flex-wrap;
+}
+.copyright_skeleton {
+  @apply flex xl:w-[204px] w-[100px] h-3;
+}
+.copyRight_div_skeleton {
+  @apply flex justify-center items-center w-full mt-8 relative;
 }
