@@ -20,6 +20,7 @@ import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
+import {FooterSkeleton} from "@/components/Common/Footer";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -89,7 +90,9 @@ const FrequentlyAskedQuestions = loadable(
     fallback: <FaqsSkeleton />,
   },
 );
-const Footer = loadable(() => import("@/components/Common/Footer"));
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );

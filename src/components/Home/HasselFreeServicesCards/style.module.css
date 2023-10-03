@@ -8,14 +8,14 @@
   @apply flex gap-4 md:gap-5 macbook:gap-7 lg:flex-wrap w-full overflow-x-scroll;
 }
 .card_wrapper {
-  @apply relative min-h-[240px] sm:min-h-[250px] macbook:min-h-[262px] 3xl:min-h-[300px] macbook:min-w-[379px] xl:min-w-[350px]  min-w-[280px] lg:min-w-[274px] rounded-lg flex;
+  @apply relative min-h-[240px] sm:min-h-[250px] macbook:min-h-[262px] 3xl:min-h-[300px] macbook:min-w-[379px] xl:min-w-[350px]  min-w-[280px] lg:min-w-[274px] rounded-lg justify-center;
   flex: 1 0 calc(33.33% - 28px);
 }
 .heading_text {
   @apply flex font-Poppins text-20 font-medium leading-6 tracking-heading;
 }
 .content {
-  @apply flex text-71717A text-16 font-Poppins font-normal leading-6 tracking-0.3 py-2;
+  @apply flex text-71717A text-14 w-[232px] lg:w-fit lg:text-16 font-Poppins font-normal leading-6 tracking-0.3 py-2;
 }
 .hassel_heading_wrapper {
   @apply absolute bottom-4 px-4 3xl:px-8 3xl:pr-20;

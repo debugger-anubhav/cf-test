@@ -17,19 +17,22 @@ import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
-import Footer from "@/components/Common/Footer";
 import {useParams, useRouter} from "next/navigation";
 // import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {FooterSkeleton} from "@/components/Common/Footer";
 const FrequentlyAskedQuestions = loadable(
   () => import("@/components/Common/FrequentlyAskedQuestions"),
   {
     fallback: <FaqsSkeleton />,
   },
 );
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });

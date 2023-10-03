@@ -19,6 +19,7 @@ import TextContent from "@/components/Common/TextContent";
 import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct";
+import {FooterSkeleton} from "@/components/Common/Footer";
 
 const Subproduct = loadable(
   () => import("@/components/AllProduct/SubProduct/Subproduct"),
@@ -97,7 +98,9 @@ const FrequentlyAskedQuestions = loadable(
     fallback: <FaqsSkeleton />,
   },
 );
-const Footer = loadable(() => import("@/components/Common/Footer"));
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
