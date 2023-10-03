@@ -19,7 +19,7 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
-const MenuList = loadable(() => import("@/components/Common/MenuList"));
+import MenuList from "@/components/Common/MenuList";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -80,9 +80,9 @@ const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });
-// const HappySubscribers = loadable(() =>
-//   import("@/components/Home/HappySubscribers"),
-// );
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
+);
 const FrequentlyAskedQuestions = loadable(
   () => import("@/components/Common/FrequentlyAskedQuestions"),
   {
@@ -107,9 +107,7 @@ export default function Home() {
       {useChatScript()}
       <AnnouncementBar />
       <Header />
-      <div className="min-h-[48px]">
-        <MenuList />
-      </div>
+      <MenuList />
       <div className="lg:min-h-[385px] min-h-[150px]">
         <HeroBanner />
       </div>
@@ -132,7 +130,7 @@ export default function Home() {
         <MediaCoverage />
       </div>
       <CombineSection />
-      {/* <HappySubscribers params={"home-page"} /> */}
+      <HappySubscribers params={"home-page"} />
       <FrequentlyAskedQuestions params={"home-page"} />
       <TextContent params={"home-page"} />
       <Footer />
