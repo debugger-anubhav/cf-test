@@ -5,7 +5,12 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {cityUrl} from "../../../../appConfig";
 import DropDown from "../DropDown/DropDown";
-import {Modal, createTheme, useMediaQuery} from "@mui/material";
+import {
+  Modal,
+  SwipeableDrawer,
+  createTheme,
+  useMediaQuery,
+} from "@mui/material";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
@@ -26,6 +31,7 @@ const KYCAddress = () => {
 
   const [selectedOptionCur, setSelectedOptionCur] = useState();
   const [selectedOptionPer, setSelectedOptionPer] = useState();
+  const [drawerOpen, setDrawerOpen] = useState(false);
   const [formData, setFormData] = useState({
     contactNumber: "",
     addressProof: "", // You can add more fields as needed
@@ -472,6 +478,7 @@ const KYCAddress = () => {
         <div className={`${styles.formTermsSection}`}>
           <input
             type="checkbox"
+            checked={formData.termsAccepted}
             className={`${commonStyles.basicCheckBox}`}
             onChange={e => {
               handleCheckboxChange(e);
@@ -481,7 +488,10 @@ const KYCAddress = () => {
             &nbsp;I accept &nbsp;
           </span>
           <span
-            className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}>
+            className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
+            onClick={() => {
+              setDrawerOpen(true);
+            }}>
             &nbsp;Terms and Conditions
           </span>
         </div>
@@ -508,95 +518,214 @@ const KYCAddress = () => {
           </button>
         </div>
       </div>
+      {!isMdScreen && (
+        <SwipeableDrawer
+          classes={{
+            paper: commonStyles.bottomDrawer,
+          }}
+          anchor={isMdScreen ? "bottom" : "right"}
+          className="m-8"
+          open={drawerOpen}
+          onClose={() => {
+            // mobileCityDrawer && DrawerName !== "menu"
+            //   ? toggleDrawer("bottom", true)
+            //   : toggleDrawer("left", true);
+          }}
+          onOpen={() => {
+            // mobileCityDrawer && DrawerName !== "menu"
+            //   ? toggleDrawer("bottom", true)
+            //   : toggleDrawer("left", true);
+          }}>
+          <div className={` ${commonStyles.termsContainer}  `}>
+            <h2 className={` ${commonStyles.termsHeader}  `}>
+              Terms and conditions
+            </h2>
+            <ul className={` ${commonStyles.termsUL}  `}>
+              <li className={` ${commonStyles.termsLI}  `}>
+                By continuing, you agree to allow Cityfurnish India Private
+                Limited to fetch your credit report from CRIF High Mark for the
+                purpose of KYC verification. This consent shall be valid for a
+                period of 6 months.
+              </li>
+              <li className={` ${commonStyles.termsLI}  `}>
+                By clicking the &apos;Proceed&apos; button, you agree to CRIF
+                High Mark Credit Score Terms of Use.
+              </li>
+              <li className={` ${commonStyles.termsLI}  `}>
+                You understand that you shall have the option to opt
+                out/unsubscribe from the service by clicking here. Fetching
+                report from the credit bureau will not impact your credit score.
+              </li>
+            </ul>
+            <button
+              className={` ${commonStyles.termsConfirmBtn}  `}
+              onClick={() => {
+                handleCheckboxChange();
+                setDrawerOpen(false);
+              }}>
+              Okay, understood
+            </button>
+          </div>
+          <div className={` ${commonStyles.termsCrossContainer}  `}>
+            <button
+              className={`${commonStyles.close_icon_btn}`}
+              onClick={() => {
+                setDrawerOpen(false);
+              }}>
+              <div className={`${commonStyles.close_icon}`}>
+                <Close size={25} color={"#222222"} />
+              </div>
+            </button>
+          </div>
+        </SwipeableDrawer>
+      )}
 
       {isMdScreen && (
         <>
           <Modal
-            open={perAddModal}
-            onClose={() => setPerAddModal(false)}
+            open={perAddModal || currAddModal || drawerOpen}
+            onClose={() => {
+              setPerAddModal(false);
+              setCurrAddModal(false);
+              setDrawerOpen(false);
+            }}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             disableRestoreFocus
             disableEnforceFocus
             disableAutoFocus>
-            <div className={`${commonStyles.dropdown_container} `}>
-              <div className={`${commonStyles.dropdown_heading} `}>
-                Select any permanent address proof
-              </div>
-              <ul
-                className={`${
-                  perAddModal
-                    ? commonStyles.optionsActive
-                    : commonStyles.options
-                } `}>
-                {docsData[1]?.supported_docs
-                  .split(",")
-                  ?.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option === selectedOptionPer ? "bg-[#EFF5FF]" : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClickPer(option)}>
-                      <span>{option}</span>{" "}
-                      <SelectionCircle
-                        showInner={option === selectedOptionPer}
-                      />
-                    </li>
-                  ))}
-              </ul>
-              <button
-                className={`${commonStyles.close_icon_btn}`}
-                onClick={() => {
-                  setPerAddModal(false);
-                }}>
-                <div className={`${commonStyles.close_icon}`}>
-                  <Close size={25} color={"#222222"} />
+            <>
+              {perAddModal && (
+                <div className={`${commonStyles.dropdown_container} `}>
+                  <div className={`${commonStyles.dropdown_heading} `}>
+                    Select any permanent address proof
+                  </div>
+                  <ul
+                    className={`${
+                      perAddModal
+                        ? commonStyles.optionsActive
+                        : commonStyles.options
+                    } `}>
+                    {docsData[1]?.supported_docs
+                      .split(",")
+                      ?.map((option, index) => (
+                        <li
+                          className={`${commonStyles.option} ${
+                            option === selectedOptionPer ? "bg-[#EFF5FF]" : ""
+                          } `}
+                          key={index}
+                          onClick={() => handleOptionClickPer(option)}>
+                          <span>{option}</span>{" "}
+                          <SelectionCircle
+                            showInner={option === selectedOptionPer}
+                          />
+                        </li>
+                      ))}
+                  </ul>
+                  <button
+                    className={`${commonStyles.close_icon_btn}`}
+                    onClick={() => {
+                      setPerAddModal(false);
+                    }}>
+                    <div className={`${commonStyles.close_icon}`}>
+                      <Close size={25} color={"#222222"} />
+                    </div>
+                  </button>
                 </div>
-              </button>
-            </div>
+              )}
+              {currAddModal && (
+                <div className={`${commonStyles.dropdown_container} `}>
+                  <div className={`${commonStyles.dropdown_heading} `}>
+                    Select any current address proof
+                  </div>
+                  <ul
+                    className={`${
+                      currAddModal
+                        ? commonStyles.optionsActive
+                        : commonStyles.options
+                    } `}>
+                    {docsData[0]?.supported_docs
+                      .split(",")
+                      .map((option, index) => (
+                        <li
+                          className={`${commonStyles.option} ${
+                            option === selectedOptionCur ? "bg-[#EFF5FF]" : ""
+                          } `}
+                          key={index}
+                          onClick={() => handleOptionClickCur(option)}>
+                          <span>{option}</span>{" "}
+                          <SelectionCircle
+                            showInner={option === selectedOptionCur}
+                          />
+                        </li>
+                      ))}
+                  </ul>
+                  <button
+                    className={`${commonStyles.close_icon_btn}`}
+                    onClick={() => {
+                      setCurrAddModal(false);
+                    }}>
+                    <div className={`${commonStyles.close_icon}`}>
+                      <Close size={25} color={"#222222"} />
+                    </div>
+                  </button>
+                </div>
+              )}
+              {drawerOpen && (
+                <>
+                  <div
+                    className={` ${commonStyles.dropdown_container}  ${commonStyles.termsContainerMD} `}>
+                    <h2 className={` ${commonStyles.termsHeader}  `}>
+                      Terms and conditions
+                    </h2>
+                    <ul className={` ${commonStyles.termsUL}  `}>
+                      <li className={` ${commonStyles.termsLI}  `}>
+                        By continuing, you agree to allow Cityfurnish India
+                        Private Limited to fetch your credit report from CRIF
+                        High Mark for the purpose of KYC verification. This
+                        consent shall be valid for a period of 6 months.
+                      </li>
+                      <li className={` ${commonStyles.termsLI}  `}>
+                        By clicking the &apos;Proceed&apos; button, you agree to
+                        CRIF High Mark Credit Score Terms of Use.
+                      </li>
+                      <li className={` ${commonStyles.termsLI}  `}>
+                        You understand that you shall have the option to opt
+                        out/unsubscribe from the service by clicking here.
+                        Fetching report from the credit bureau will not impact
+                        your credit score.
+                      </li>
+                    </ul>
+                    <button
+                      className={` ${commonStyles.termsConfirmBtn}  `}
+                      onClick={() => {
+                        handleCheckboxChange();
+                        setDrawerOpen(false);
+                      }}>
+                      Okay, understood
+                    </button>
+                    <button
+                      className={`${commonStyles.close_icon_btn}`}
+                      onClick={() => {
+                        setDrawerOpen(false);
+                      }}>
+                      <div className={`${commonStyles.close_icon}`}>
+                        <Close size={25} color={"#222222"} />
+                      </div>
+                    </button>
+                  </div>
+                </>
+              )}
+            </>
           </Modal>
-          <Modal
+          {/* <Modal
             open={currAddModal}
             onClose={() => setCurrAddModal(false)}
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
             disableRestoreFocus
             disableEnforceFocus
-            disableAutoFocus>
-            <div className={`${commonStyles.dropdown_container} `}>
-              <div className={`${commonStyles.dropdown_heading} `}>
-                Select any current address proof
-              </div>
-              <ul
-                className={`${
-                  currAddModal
-                    ? commonStyles.optionsActive
-                    : commonStyles.options
-                } `}>
-                {docsData[0]?.supported_docs.split(",").map((option, index) => (
-                  <li
-                    className={`${commonStyles.option} ${
-                      option === selectedOptionCur ? "bg-[#EFF5FF]" : ""
-                    } `}
-                    key={index}
-                    onClick={() => handleOptionClickCur(option)}>
-                    <span>{option}</span>{" "}
-                    <SelectionCircle showInner={option === selectedOptionCur} />
-                  </li>
-                ))}
-              </ul>
-              <button
-                className={`${commonStyles.close_icon_btn}`}
-                onClick={() => {
-                  setCurrAddModal(false);
-                }}>
-                <div className={`${commonStyles.close_icon}`}>
-                  <Close size={25} color={"#222222"} />
-                </div>
-              </button>
-            </div>
-          </Modal>
+            disableAutoFocus></Modal> */}
         </>
       )}
     </div>

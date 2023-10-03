@@ -32,7 +32,7 @@ const theme = createTheme({
   },
 });
 const KYCCommon = () => {
-  const [deleteIconClick, setDeleteIconClick] = useState(false);
+  const [progressModal, setProgressModal] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openModal, setModalOpen] = useState(false);
@@ -252,6 +252,7 @@ const KYCCommon = () => {
         <div className={`${styles.formTermsSection}`}>
           <input
             type="checkbox"
+            checked={formData.termsAccepted}
             className={`${commonStyles.basicCheckBox}`}
             onChange={e => {
               handleCheckboxChange(e);
@@ -292,87 +293,166 @@ const KYCCommon = () => {
           </button>
         </div>
       </div>
-      <SwipeableDrawer
-        classes={{
-          paper: styles.bottomDrawer,
-        }}
-        anchor={isMdScreen ? "bottom" : "right"}
-        className="m-8"
-        open={drawerOpen}
-        onClose={() => {
-          // mobileCityDrawer && DrawerName !== "menu"
-          //   ? toggleDrawer("bottom", true)
-          //   : toggleDrawer("left", true);
-        }}
-        onOpen={() => {
-          // mobileCityDrawer && DrawerName !== "menu"
-          //   ? toggleDrawer("bottom", true)
-          //   : toggleDrawer("left", true);
-        }}>
-        <div>
-          Holafg t gh sdfg dfg sdfg sdfg sdfg
-          dfsgsfddddddddddddddddddddddddddddddddddddd
-        </div>
-        <button
-          className={`${commonStyles.close_icon_btn}`}
-          onClick={() => {
-            setDrawerOpen(false);
+      {!isMdScreen && (
+        <SwipeableDrawer
+          classes={{
+            paper: commonStyles.bottomDrawer,
+          }}
+          anchor={isMdScreen ? "bottom" : "right"}
+          className="m-8"
+          open={drawerOpen}
+          onClose={() => {
+            // mobileCityDrawer && DrawerName !== "menu"
+            //   ? toggleDrawer("bottom", true)
+            //   : toggleDrawer("left", true);
+          }}
+          onOpen={() => {
+            // mobileCityDrawer && DrawerName !== "menu"
+            //   ? toggleDrawer("bottom", true)
+            //   : toggleDrawer("left", true);
           }}>
-          <div className={`${commonStyles.close_icon}`}>
-            <Close size={25} color={"#222222"} />
-          </div>
-        </button>
-      </SwipeableDrawer>
-
-      {isMdScreen && (
-        <Modal
-          open={isDDOpen}
-          onClose={() => setIsDDOpen(false)}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          disableRestoreFocus
-          disableEnforceFocus
-          disableAutoFocus>
-          <div className={`${commonStyles.dropdown_container} `}>
-            <div className={`${commonStyles.dropdown_heading} `}>
-              Please provide one ID to fetch your credit score
-            </div>
-            <ul
-              className={`${
-                isDDOpen ? commonStyles.optionsActive : commonStyles.options
-              } `}>
-              {selectedArr.map((option, index) => (
-                <li
-                  className={`${commonStyles.option} ${
-                    option?.value === selectedOption?.value
-                      ? "bg-[#EFF5FF]"
-                      : ""
-                  } `}
-                  key={index}
-                  onClick={() => handleOptionClick(option)}>
-                  <span>{option.label}</span>{" "}
-                  <SelectionCircle
-                    showInner={option?.value === selectedOption?.value}
-                  />
-                </li>
-              ))}
+          <div className={` ${commonStyles.termsContainer}  `}>
+            <h2 className={` ${commonStyles.termsHeader}  `}>
+              Terms and conditions
+            </h2>
+            <ul className={` ${commonStyles.termsUL}  `}>
+              <li className={` ${commonStyles.termsLI}  `}>
+                By continuing, you agree to allow Cityfurnish India Private
+                Limited to fetch your credit report from CRIF High Mark for the
+                purpose of KYC verification. This consent shall be valid for a
+                period of 6 months.
+              </li>
+              <li className={` ${commonStyles.termsLI}  `}>
+                By clicking the &apos;Proceed&apos; button, you agree to CRIF
+                High Mark Credit Score Terms of Use.
+              </li>
+              <li className={` ${commonStyles.termsLI}  `}>
+                You understand that you shall have the option to opt
+                out/unsubscribe from the service by clicking here. Fetching
+                report from the credit bureau will not impact your credit score.
+              </li>
             </ul>
+            <button
+              className={` ${commonStyles.termsConfirmBtn}  `}
+              onClick={() => {
+                handleCheckboxChange();
+                setDrawerOpen(false);
+              }}>
+              Okay, understood
+            </button>
+          </div>
+          <div className={` ${commonStyles.termsCrossContainer}  `}>
             <button
               className={`${commonStyles.close_icon_btn}`}
               onClick={() => {
-                setIsDDOpen(false);
+                setDrawerOpen(false);
               }}>
               <div className={`${commonStyles.close_icon}`}>
                 <Close size={25} color={"#222222"} />
               </div>
             </button>
           </div>
+        </SwipeableDrawer>
+      )}
+
+      {isMdScreen && (
+        <Modal
+          open={isDDOpen || drawerOpen}
+          onClose={() => setIsDDOpen(false)}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+          disableRestoreFocus
+          disableEnforceFocus
+          disableAutoFocus>
+          <>
+            {isDDOpen && (
+              <div className={`${commonStyles.dropdown_container} `}>
+                <div className={`${commonStyles.dropdown_heading} `}>
+                  Please provide one ID to fetch your credit score
+                </div>
+                <ul
+                  className={`${
+                    isDDOpen ? commonStyles.optionsActive : commonStyles.options
+                  } `}>
+                  {selectedArr.map((option, index) => (
+                    <li
+                      className={`${commonStyles.option} ${
+                        option?.value === selectedOption?.value
+                          ? "bg-[#EFF5FF]"
+                          : ""
+                      } `}
+                      key={index}
+                      onClick={() => handleOptionClick(option)}>
+                      <span>{option.label}</span>{" "}
+                      <SelectionCircle
+                        showInner={option?.value === selectedOption?.value}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className={`${commonStyles.close_icon_btn}`}
+                  onClick={() => {
+                    setIsDDOpen(false);
+                  }}>
+                  <div className={`${commonStyles.close_icon}`}>
+                    <Close size={25} color={"#222222"} />
+                  </div>
+                </button>
+              </div>
+            )}
+            {drawerOpen && (
+              <>
+                <div
+                  className={` ${commonStyles.dropdown_container}  ${styles.termsContainerMD} `}>
+                  <h2 className={` ${styles.termsHeader}  `}>
+                    Terms and conditions
+                  </h2>
+                  <ul className={` ${styles.termsUL}  `}>
+                    <li className={` ${styles.termsLI}  `}>
+                      By continuing, you agree to allow Cityfurnish India
+                      Private Limited to fetch your credit report from CRIF High
+                      Mark for the purpose of KYC verification. This consent
+                      shall be valid for a period of 6 months.
+                    </li>
+                    <li className={` ${styles.termsLI}  `}>
+                      By clicking the &apos;Proceed&apos; button, you agree to
+                      CRIF High Mark Credit Score Terms of Use.
+                    </li>
+                    <li className={` ${styles.termsLI}  `}>
+                      You understand that you shall have the option to opt
+                      out/unsubscribe from the service by clicking here.
+                      Fetching report from the credit bureau will not impact
+                      your credit score.
+                    </li>
+                  </ul>
+                  <button
+                    className={` ${styles.termsConfirmBtn}  `}
+                    onClick={() => {
+                      handleCheckboxChange();
+                      setDrawerOpen(false);
+                    }}>
+                    Okay, understood
+                  </button>
+                  <button
+                    className={`${commonStyles.close_icon_btn}`}
+                    onClick={() => {
+                      setDrawerOpen(false);
+                    }}>
+                    <div className={`${commonStyles.close_icon}`}>
+                      <Close size={25} color={"#222222"} />
+                    </div>
+                  </button>
+                </div>
+              </>
+            )}
+          </>
         </Modal>
       )}
 
       <Modal
-        open={deleteIconClick}
-        onClose={() => setDeleteIconClick(false)}
+        open={progressModal}
+        onClose={() => setProgressModal(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         disableRestoreFocus
@@ -397,7 +477,7 @@ const KYCCommon = () => {
                 <Box display={"flex"} justifyContent={"space-between"}>
                   <button
                     className={styles.cancel_delete_btn}
-                    onClick={() => setDeleteIconClick(false)}>
+                    onClick={() => setProgressModal(false)}>
                     Go back
                   </button>
                   <button
@@ -412,7 +492,7 @@ const KYCCommon = () => {
               <button
                 className={`${styles.close_icon_btn}`}
                 onClick={() => {
-                  setDeleteIconClick(false);
+                  setProgressModal(false);
                 }}>
                 <div className={`${styles.close_icon}`}>
                   <Close size={25} color={"#222222"} />

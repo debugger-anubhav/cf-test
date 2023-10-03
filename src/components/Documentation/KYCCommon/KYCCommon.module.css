@@ -80,6 +80,3 @@
   margin: 16px;
   width: 16px;
 }
-.bottomDrawer {
-  @apply m-2;
-}

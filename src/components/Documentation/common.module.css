@@ -46,7 +46,6 @@
 }
 .conditionsTxt {
   @apply text-[#5774AC] underline;
-
 }
 .laterBtn {
   height: 56px;
@@ -136,4 +135,38 @@
 }
 .mdIBHidden {
   @apply md:inline-block hidden;
+}
+.bottomDrawer {
+  @apply flex flex-row;
+}
+
+.termsContainer {
+  @apply w-[444px]  mt-12 ml-12;
+}
+.termsCrossContainer {
+  @apply mt-12 mx-8 relative;
+}
+.termsHeader {
+  @apply font-Poppins font-medium text-24;
+  letter-spacing: -0.48px;
+  line-height: 32px;
+}
+.termsUL {
+  @apply mt-8 list-disc list-outside ml-6;
+}
+.termsLI {
+  @apply mt-6 font-Poppins font-normal text-16 text-[#71717A];
+  letter-spacing: -0.32px;
+}
+.termsContainerMD {
+  @apply pt-6 px-4;
+  width: calc(100% - 32px);
+}
+.termsCrossContainerMD {
+  @apply absolute md:static -top-12 cursor-pointer bg-white rounded-full p-1 md:p-0 right-6;
+}
+.termsConfirmBtn {
+  @apply px-8 font-Poppins text-16 font-medium mt-8 py-4 leading-5 w-full md:w-auto;
+  border-radius: 8px;
+  border: 2px solid var(--grey-grey-600, #71717a);
 }
