@@ -69,7 +69,8 @@ const PaymentFailure = () => {
             className={styles.phone_link}
             href={`tel:080-66084700`}
             target="_blank"
-            rel="noopener  noreferrer">
+            rel="noopener  noreferrer"
+            aria-label="080-66084700">
             080-66084700
           </a>
           . Alternatively, you can:
@@ -78,7 +79,8 @@ const PaymentFailure = () => {
           <a
             href="mailto:hello@cityfurnish.com"
             target="_blank"
-            rel="noopener  noreferrer">
+            rel="noopener  noreferrer"
+            aria-label="Write to us">
             <button className={styles.btn}>
               <EmailIcon color={"#71717A"} size={20} />
               Write to us
@@ -87,7 +89,8 @@ const PaymentFailure = () => {
           <a
             href={"https://wa.me/919599197632"}
             target="_blank"
-            rel="noopener  noreferrer">
+            rel="noopener  noreferrer"
+            aria-label="Talk to an agent">
             <button className={styles.btn}>
               <WhatsappIcon color={"#71717A"} size={20} />
               Talk to an agent

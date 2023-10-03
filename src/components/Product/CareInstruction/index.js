@@ -34,6 +34,7 @@ const CareInstruction = ({params}) => {
                 src={`${productPageImagesBaseUrl + item?.file_name}`}
                 className={styles.img}
                 alt="card_img"
+                loading="lazy"
               />
               <p className={styles.card_head}>{item.title}</p>
               <p className={styles.card_desc}>

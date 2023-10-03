@@ -107,6 +107,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                     src={item?.icon}
                     className="cursor-pointer relative z-[-1]"
                     // onClick={() => console.log("cliked")}
+                    loading="lazy"
                   />
                 </a>
               ))}
@@ -145,6 +146,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                   src={item?.icon}
                   className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8 relative z-[-1]"
                   // onClick={() => console.log("cliked")}
+                  loading="lazy"
                 />
               </a>
             ))}

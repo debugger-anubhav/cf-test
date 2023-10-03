@@ -32,7 +32,10 @@ const HappySubscribers = ({page, params}) => {
     axios
       .get(baseURL + endPoints.homePageHappySubscriber)
       .then(res => {
-        setData(res?.data?.data);
+        const timeOutId = setTimeout(() => {
+          setData(res?.data?.data);
+          clearTimeout(timeOutId);
+        }, 1000);
         // console.log("home")
       })
       .catch(err => {
@@ -169,6 +172,7 @@ const HappySubscribers = ({page, params}) => {
                 Your browser does not support the video tag.
               </video> */}
                 <iframe
+                  loading="lazy"
                   width="256"
                   height="152"
                   // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
