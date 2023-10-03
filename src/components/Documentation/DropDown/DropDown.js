@@ -27,13 +27,17 @@ const DropDown = ({
           setIsDDOpen(prev => !prev);
         }}>
         <span
-          className={`${
+          className={` ${styles.selected_txt} ${
             selectedOption?.value ? "text-black" : "text-[#71717A]"
           }`}>
           {selectedOption?.label || "Select an option"}
         </span>
         <div className={`${styles.ddArrow}`}>
-          {isOpen ? <PopUpArrow size={25} /> : <DownPopUpArrow size={25} />}
+          {isOpen ? (
+            <PopUpArrow size={25} className={`${styles.pointer}`} />
+          ) : (
+            <DownPopUpArrow size={25} className={`${styles.pointer}`} />
+          )}
         </div>
       </div>
       <ul className={`${isOpen ? styles.optionsActive : styles.options}  `}>

@@ -56,5 +56,11 @@
 }
 
 .ddArrow {
-  @apply !inline-block;
+  @apply !inline-block cursor-pointer;
+}
+.pointer {
+  @apply cursor-pointer;
+}
+.selected_txt {
+  @apply font-Poppins text-16 font-normal;
 }

@@ -2,8 +2,7 @@ import React, {useState} from "react";
 import styles from "./KYCCard.module.css";
 import commonStyles from "../common.module.css";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
-import forwardArrow from "@/assets/common_icons/proceedArrow.svg";
-import Image from "next/image";
+import {OutlineArrowRight} from "@/assets/icon";
 
 const KYCCard = () => {
   const [selected, setSelected] = useState("");
@@ -70,7 +69,7 @@ const KYCCard = () => {
             disabled
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>
-            <Image src={forwardArrow} alt="Forward Arrow Icon" />
+            <OutlineArrowRight />
           </button>
         </div>
       </div>
