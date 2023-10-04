@@ -1,0 +1,36 @@
+.header {
+  @apply mt-10 text-45454A text-24 font-medium leading-8 tracking-0.48;
+}
+.line {
+  @apply bg-[#D9D9D9] w-full h-1 mt-2;
+}
+.box_wrapper {
+  @apply xl:w-fit mt-10 flex flex-col xl:grid xl:grid-cols-2 4xl:grid-cols-3 gap-6;
+}
+.box {
+  @apply border w-[350px] xl:w-[400px] cxl:w-[444px] p-6 rounded-xl h-[126px] border-DDDDDF bg-fff;
+}
+.box1 {
+  @apply border-dashed justify-center items-center flex;
+}
+.add_icon {
+  @apply w-[29px] h-[29px];
+}
+.name_row {
+  @apply flex justify-between items-center;
+}
+.name {
+  @apply text-14 md:text-16 capitalize font-medium text-222 font-Inter tracking-desc md:tracking-0.3;
+}
+.icon_wrapper {
+  @apply flex gap-3 items-center;
+}
+.editIcon {
+  @apply w-[17px] h-[17px] cursor-pointer text-71717A hover:text-5774AC;
+}
+.deleteIcon {
+  @apply w-[19px] h-[19px] cursor-pointer text-71717A hover:text-[#D96060];
+}
+.address {
+  @apply text-12 md:text-14 text-45454A tracking-0.24 md:tracking-desc w-full;
+}
