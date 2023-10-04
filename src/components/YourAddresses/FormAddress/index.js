@@ -13,7 +13,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
-const EditAddress = ({setTab, tab, id}) => {
+const FormAddress = ({setTab, tab, id}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const selectedItem = addressArray.find(item => item.id === id);
   // console.log(selectedItem, "selcetdeitemmmm");
@@ -90,7 +90,7 @@ const EditAddress = ({setTab, tab, id}) => {
     });
   };
   return (
-    <div>
+    <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
         <div onClick={setTab} className="cursor-pointer">
           <BackIcon className={styles.backArrow} />
@@ -113,10 +113,10 @@ const EditAddress = ({setTab, tab, id}) => {
           }}
           validationSchema={validationSchema}
           onSubmit={async (values, {setSubmitting, resetForm}) => {
-            await saveUserAddress(values);
+            if (tab === 1) await saveUserAddress(values);
             // getAllSavedAddresses();
             // resetForm();
-            await showToastNotification(
+            showToastNotification(
               `${
                 tab === 1
                   ? "Address added successfully"
@@ -237,10 +237,12 @@ const EditAddress = ({setTab, tab, id}) => {
                     </ErrorMessage>
                   </div>
                 </div>
-                <button type="submit" className={styles.btn}>
-                  Proceed
-                  <ArrowForw className={styles.forw_arrow} />
-                </button>
+                <div className={styles.btn_wrapper}>
+                  <button type="submit" className={styles.btn}>
+                    Proceed
+                    <ArrowForw className={styles.forw_arrow} />
+                  </button>
+                </div>
               </div>
             </Form>
           )}
@@ -250,4 +252,4 @@ const EditAddress = ({setTab, tab, id}) => {
   );
 };
 
-export default EditAddress;
+export default FormAddress;

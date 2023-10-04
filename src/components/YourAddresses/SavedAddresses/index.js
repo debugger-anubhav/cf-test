@@ -89,7 +89,8 @@ const SavedAddress = ({setTab, editAddress}) => {
                       </div>
                     </div>
                   </div>
-                  <p className={`truncate mt-[14.5px] ${styles.address}`}>
+                  <p
+                    className={`truncate mt-[13px] md:mt-[14.5px] ${styles.address}`}>
                     {item.address1}
                   </p>
                   <p className={styles.address}>
