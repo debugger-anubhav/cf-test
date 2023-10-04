@@ -459,9 +459,9 @@ const SubHeader = ({params}) => {
                     subItem?.cat_name;
                   return (
                     <a
-                      href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                        subItem?.seourl
-                      }`}
+                      href={`/${homePageReduxData?.cityName
+                        .replace(/\//g, "-")
+                        .toLowerCase()}/${subItem?.seourl}`}
                       onClick={e => {
                         e.preventDefault();
                         setLocalStorage("subCategory", subItem?.cat_name);
