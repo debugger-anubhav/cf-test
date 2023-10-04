@@ -371,7 +371,6 @@ const ProductDetails = ({params}) => {
   };
 
   const handleGoToCart = () => {
-    console.log("goingg");
     router.push("/cart");
   };
   const notifyData = {
