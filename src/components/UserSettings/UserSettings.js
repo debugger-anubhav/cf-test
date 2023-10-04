@@ -4,7 +4,6 @@ import {FaChevronRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 import cookie from "react-cookies";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
-// import {getLocalStorage} from "@/constants/constant";
 
 export default function UserSettings() {
   const router = useRouter();
@@ -43,7 +42,7 @@ export default function UserSettings() {
     {
       head: "Referral Code",
       desc: "Refer a friend and earn 500 CF Coins!",
-      link: "https://test.rentofurniture.com/referral",
+      link: "/referral",
       img: `${url}referral-code.svg`,
     },
     {
@@ -85,8 +84,13 @@ export default function UserSettings() {
                 href={ele?.link}
                 target="_blank"
                 rel="noreferrer"
-                key={index.toString()}>
-                <div className="cursor-pointer">
+                key={index.toString()}
+                onClick={e => {
+                  e.preventDefault();
+                }}>
+                <div
+                  className="cursor-pointer"
+                  onClick={() => router.push(ele?.link)}>
                   <div className={styles.head_row}>
                     <p className={styles.head_row_text}>{ele.head}</p>
                     <div className={styles.chevron_right_icon}>
@@ -130,8 +134,15 @@ export default function UserSettings() {
                 href={item?.link}
                 target="_blank"
                 rel="noreferrer"
-                key={index.toString()}>
-                <div className={styles.card}>
+                key={index.toString()}
+                onClick={e => {
+                  e.preventDefault();
+                }}>
+                <div
+                  className={styles.card}
+                  onClick={() => {
+                    router.push(item?.link);
+                  }}>
                   <div className={styles.card_first_row}>
                     <img
                       src={item?.img}

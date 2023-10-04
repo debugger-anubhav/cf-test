@@ -5,7 +5,12 @@ import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
-import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
+import {
+  getLocalStorage,
+  getLocalStorageString,
+  setLocalStorage,
+} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 const Footer = ({params}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
@@ -19,6 +24,8 @@ const Footer = ({params}) => {
     time: "(09AM to 09PM)",
     go_to_top: "Go to top",
   };
+
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const array = [
     {
@@ -47,7 +54,7 @@ const Footer = ({params}) => {
         {text: "About US", link: "/pages/about"},
         {
           text: "Refer a Friend",
-          link: "https://test.rentofurniture.com/pages/refer-a-friend",
+          link: userId ? "/referral" : "/pages/refer-a-friend",
         },
         {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
         {
@@ -131,27 +138,29 @@ const Footer = ({params}) => {
           <div key={index.toString()} className={styles.head_wrapper}>
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
-              {item.points.map((t, i) => (
-                <a
-                  key={index.toString()}
-                  href={t.link}
-                  aria-label={t.text}
-                  target={t.text === "Furniture Sale" ? "_blank" : "_self"}
-                  rel="noopener  noreferrer">
-                  <p
-                    className={styles.points}
-                    onClick={() => {
-                      if (t?.text === "Workstations") {
-                        setLocalStorage("subCategory", "Workstations");
-                      } else {
-                        setLocalStorage("subCategory", "All");
-                      }
-                      // router.push(t?.link);
-                    }}>
-                    {t?.text}
-                  </p>
-                </a>
-              ))}
+              {item.points.map((t, i) => {
+                return (
+                  <a
+                    key={index.toString()}
+                    href={t.link}
+                    aria-label={t.text}
+                    target={t.text === "Furniture Sale" ? "_blank" : "_self"}
+                    rel="noopener  noreferrer">
+                    <p
+                      className={styles.points}
+                      onClick={() => {
+                        if (t?.text === "Workstations") {
+                          setLocalStorage("subCategory", "Workstations");
+                        } else {
+                          setLocalStorage("subCategory", "All");
+                        }
+                        // router.push(t?.link);
+                      }}>
+                      {t?.text}
+                    </p>
+                  </a>
+                );
+              })}
             </div>
           </div>
         ))}

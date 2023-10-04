@@ -1,13 +1,21 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import styles from "./docSidebar.module.css";
 import cookie from "react-cookies";
 import {useRouter} from "next/navigation";
+import {getLocalStorage} from "@/constants/constant";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
+  const userName = getLocalStorage("user_name");
 
+  useEffect(() => {
+    const url = window?.location.pathname.split("/")[1];
+    if (url === "referral") {
+      setIsActive("Referral Code");
+    }
+  }, []);
   const firstContainerArr = [
     {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
     {
@@ -21,7 +29,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     {heading: "CF coins", link: "https://test.rentofurniture.com/wallet"},
     {
       heading: "Referral Code",
-      link: "https://test.rentofurniture.com/referral",
+      link: "/referral",
     },
   ];
   const thirdContainerArr = [
@@ -50,10 +58,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     <div className={styles.mainContainer}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
-        <div className={styles.userNameText}>
-          {" "}
-          Pratyush Verma Verma Verma Verma Verma
-        </div>
+        <div className={styles.userNameText}>{userName}</div>
         <h2
           className={`${isOverviewSelected ? "!text-5774AC" : "!text-45454A"} ${
             styles.sectionItems
@@ -109,7 +114,6 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
               value={i.heading}
               onClick={e => {
                 e.preventDefault();
-                console.log(e.target.value);
                 setIsActive(e.target.value);
               }}>
               {i.heading}
