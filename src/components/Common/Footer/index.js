@@ -5,7 +5,12 @@ import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
-import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
+import {
+  getLocalStorage,
+  getLocalStorageString,
+  setLocalStorage,
+} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 import {Skeleton} from "@mui/material";
 
 const Footer = ({params}) => {
@@ -20,6 +25,8 @@ const Footer = ({params}) => {
     time: "(09AM to 09PM)",
     go_to_top: "Go to top",
   };
+
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const array = [
     {
@@ -60,7 +67,7 @@ const Footer = ({params}) => {
         {text: "About US", link: "/pages/about"},
         {
           text: "Refer a Friend",
-          link: "https://test.rentofurniture.com/pages/refer-a-friend",
+          link: userId ? "/referral" : "/pages/refer-a-friend",
         },
         {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
         {
