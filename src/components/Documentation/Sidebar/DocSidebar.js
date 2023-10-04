@@ -44,6 +44,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     localStorage.removeItem("_ga");
     localStorage.removeItem("user_name");
     localStorage.removeItem("ci_session");
+    location.reload();
   };
 
   return (

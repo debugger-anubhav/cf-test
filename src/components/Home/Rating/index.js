@@ -11,11 +11,15 @@ import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {BsStarFill} from "react-icons/bs";
 import Rating from "react-rating";
+import {getLocalStorage} from "@/constants/constant";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
 
 const CustomerRating = () => {
   const sectionHeading = "See what people are saying";
   const subhead = "from 1968 customers";
   const btntxt = "Write a review";
+  const [reviewLink, setReviewLink] = React.useState("");
 
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const cityIdStr = localStorage
@@ -40,6 +44,14 @@ const CustomerRating = () => {
       })
       .catch(err => console.log(err));
   }, [cityId]);
+  useEffect(() => {
+    axios
+      .get(baseURL + endPoints.googleReviewsLinks(getLocalStorage("cityId")))
+      .then(res => {
+        setReviewLink(res?.data?.data?.newReviewUri);
+      })
+      .catch(err => console.log(err));
+  }, [getLocalStorage("cityId")]);
 
   const sliderRef = useRef(null);
 
@@ -96,10 +108,7 @@ const CustomerRating = () => {
             rating
           </h3>
 
-          <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
-            target="_blank"
-            rel="noreferrer">
+          <a href={reviewLink} target="_blank" rel="noreferrer">
             <Image
               src={HomePageImages.editIcon}
               alt="editIcon"
@@ -108,7 +117,7 @@ const CustomerRating = () => {
             />
           </a>
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
+            href={reviewLink}
             target="_blank"
             rel="noreferrer"
             className={styles.editlink}>
