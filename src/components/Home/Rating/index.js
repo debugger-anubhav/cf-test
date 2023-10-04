@@ -97,7 +97,7 @@ const CustomerRating = () => {
           </h3>
 
           <a
-            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCq…"
+            href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
             target="_blank"
             rel="noreferrer">
             <Image
@@ -110,7 +110,8 @@ const CustomerRating = () => {
           <a
             href="https://search.google.com/local/writereview?placeid=ChIJoVdRgmEUrjsRNSNLCqgvLdU"
             target="_blank"
-            rel="noreferrer">
+            rel="noreferrer"
+            className={styles.editlink}>
             <div className={styles.editBtn}>
               <EditIcon size={25} />
               <p className="text-[#222] font-medium">{btntxt}</p>
