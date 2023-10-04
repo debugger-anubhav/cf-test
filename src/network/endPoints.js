@@ -3,6 +3,8 @@ export const endPoints = {
   offersAndCupons: "fc-site-offers/getOffersAndCoupons",
   recentlyViewedProduct: "fc-view-products/getRecentlyViewedProducts",
   googleReviews: "fc-google-review-lists/getAllGoogleReviews",
+  googleReviewsLinks: cityId =>
+    `fc-google-location-data/getUrlToWriteReview?cityId=${cityId}`,
   newlylaunchedProduct: "fc-products/getNewLaunchProducts",
   limitedPreiod: "fc-products/getProductsOnSale",
   trendingProduct: "fc-products/getTrendingProducts",
@@ -40,6 +42,11 @@ export const endPoints = {
   addRecentViewProduct: "fc-view-products/createRecentlyViewedProduct",
   addWishListProduct: "fc-product-likes/addToWishlistProduct",
   deleteWishListProduct: "fc-product-likes/deleteWishlistProduct",
+  addressProofList: "fc-cibil-require-docs/getAddressDocLists",
+  uploadAddressDocs: "fc-user-uploaded-docs/uploadAddressDocs",
+  uploadFinancialDoc: "fc-user-uploaded-docs/uploadFinancialDoc",
+  getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
+  getAndSaveCibilScore: "fc-cibil-require-docs/getAndSaveCibilScore",
 
   searchKey: (key = "", cityId = "", sort = "") =>
     `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,

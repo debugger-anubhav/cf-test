@@ -13,6 +13,7 @@ const BannerOne = () => {
             className={styles.img}
             src={`${productPageImagesBaseUrl + bannerImages?.[0]?.file_name}`}
             alt="banner_img"
+            loading="lazy"
           />
         </div>
         <p className={styles.head}>{bannerImages?.[0]?.file_title}</p>

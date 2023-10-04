@@ -3,13 +3,17 @@ import styles from "./style.module.css";
 import SubCategorySection from "../section/SubCategorySection";
 import {ForwardArrow} from "@/assets/icon";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
-import Footer from "@/components/Common/Footer";
 import {useRouter} from "next/navigation";
 import loadable from "@loadable/component";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import {Skeleton} from "@mui/material";
+import {FooterSkeleton} from "@/components/Common/Footer";
+
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
+});
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
 });
 
 const Subproduct = () => {

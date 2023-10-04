@@ -18,6 +18,7 @@ const FourSteps = () => {
               <img
                 src={itemm?.img1}
                 alt={`step-${index + 1}`}
+                loading="lazy"
                 className={`${
                   index === 0
                     ? "w-[80px] h-[80px]"
@@ -32,6 +33,7 @@ const FourSteps = () => {
                 src={itemm?.img2}
                 className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
                 // className={`w-full md:hidden`}
+                loading="lazy"
               />
             </div>
             <h3 className={styles.head1}>{itemm?.head}</h3>

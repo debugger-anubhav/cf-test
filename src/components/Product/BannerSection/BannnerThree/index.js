@@ -19,6 +19,7 @@ const BannerThree = () => {
           alt="banner_img"
           layout="fill"
           objectFit="cover"
+          loading="lazy"
         />
       </div>
     </div>

@@ -11,21 +11,39 @@ const HasselFreeServicesCards = () => {
         <div className={style.card_container}>
           {HasselFreeData?.map((data, index) => {
             return (
-              <div
-                key={index.toString()}
-                className={`${style.card_wrapper} ${
-                  index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
-                }`}
-                style={{
-                  backgroundImage: `url("${data.backgroungImage}")`,
-                  backgroundRepeat: "no-repeat",
-                  backgroundSize: "cover",
-                }}>
-                <div className={style.hassel_heading_wrapper}>
-                  <p className={style.heading_text}>{data?.Heading}</p>
-                  <p className={style.content}>{data?.text}</p>
+              <>
+                <div
+                  key={index.toString()}
+                  className={`${style.card_wrapper} hidden xl:flex ${
+                    index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
+                  }`}
+                  style={{
+                    backgroundImage: `url("${data.backgroungImage}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                  }}>
+                  <div className={style.hassel_heading_wrapper}>
+                    <p className={style.heading_text}>{data?.Heading}</p>
+                    <p className={style.content}>{data?.text}</p>
+                  </div>
                 </div>
-              </div>
+
+                <div
+                  key={index.toString()}
+                  className={`${style.card_wrapper} flex xl:hidden ${
+                    index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
+                  }`}
+                  style={{
+                    backgroundImage: `url("${data.bgImgMobile}")`,
+                    backgroundRepeat: "no-repeat",
+                    backgroundSize: "cover",
+                  }}>
+                  <div className={style.hassel_heading_wrapper}>
+                    <p className={style.heading_text}>{data?.Heading}</p>
+                    <p className={style.content}>{data?.text}</p>
+                  </div>
+                </div>
+              </>
             );
           })}
         </div>

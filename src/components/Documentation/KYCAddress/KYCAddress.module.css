@@ -1,0 +1,66 @@
+.stepHeading {
+  @apply mx-4 md:ml-16;
+}
+
+.saveBtn {
+  @apply mt-3 md:mt-0 mb-4 md:mb-0 md:w-[232px];
+}
+
+.btnGroupContainer {
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .btnGroupContainer {
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.laterBtn {
+  @apply mt-4 md:mt-0 md:w-[232px];
+}
+
+.formTermsSection {
+  @apply mt-6 flex items-center mx-4 md:ml-16;
+}
+
+.stepHeading {
+  @apply mx-4 md:ml-16;
+}
+
+.btnGroup {
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+}
+
+.formHeadingFirst {
+  @apply mt-1 mx-4 md:ml-16;
+}
+.formHeadingSecond {
+  @apply mt-8 mx-4 md:ml-16;
+}
+.formHeadingThird {
+  @apply mt-4 mx-4 md:ml-16;
+}
+
+.formInputFirst {
+  @apply mt-1 mx-4 md:ml-16;
+}
+
+.formInputFirst::-webkit-file-upload-button {
+  visibility: hidden;
+}
+.flag {
+  @apply w-6 h-6;
+}
+.form_input {
+  @apply text-14 xl:text-16 outline-none hover:border-71717A  h-11 md:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+}
+.contact_input {
+  @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.contact_input::placeholder {
+  @apply font-Poppins font-normal text-16  text-[#71717A];
+}
+.chooseFile {
+  @apply inline-block pl-2;
+}
+/* md:w-[477px] */

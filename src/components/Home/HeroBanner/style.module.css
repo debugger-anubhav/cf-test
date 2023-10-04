@@ -1,8 +1,8 @@
 .hero_banner_wrapper {
-  @apply lg:flex hidden 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center cursor-pointer;
+  @apply lg:flex hidden 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center cursor-pointer mt-6;
 }
 .hero_banner_main {
-  @apply md:w-[95%] w-full lg:hidden;
+  @apply w-full lg:hidden;
 }
 .carousel_images {
   @apply w-full rounded-md;

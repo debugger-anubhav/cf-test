@@ -272,7 +272,12 @@ const ShoppingCartSection = ({setTab}) => {
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
                       <a
-                        href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
+                        href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}
+                        aria-label={`${
+                          productImageBaseUrl +
+                          "thumb/" +
+                          item.fc_product?.image?.split(",")?.[0]
+                        }`}>
                         <div className={styles.img_div}>
                           <img
                             src={`${
@@ -282,6 +287,7 @@ const ShoppingCartSection = ({setTab}) => {
                             }`}
                             alt="product_img"
                             className={styles.img}
+                            loading="lazy"
                           />
                         </div>
                       </a>
@@ -289,6 +295,10 @@ const ShoppingCartSection = ({setTab}) => {
                       <div>
                         <div className={styles.name_div}>
                           <a
+                            aria-label={item?.fc_product?.product_name?.replace(
+                              /-/g,
+                              " ",
+                            )}
                             href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}>
                             <p className={styles.product_name}>
                               {item?.fc_product?.product_name?.replace(
@@ -434,6 +444,7 @@ const ShoppingCartSection = ({setTab}) => {
                     <img
                       src={`${categoryIconsUrl + "cf_coin.svg"}`}
                       className={`${styles.coin} pointer-events-none`}
+                      loading="lazy"
                     />
                   </div>
                   <div>
