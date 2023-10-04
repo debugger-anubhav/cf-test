@@ -61,6 +61,7 @@ module.exports = {
         "3xl": "1660px",
         "4xl": "1850px",
         "last-screen": "2000px",
+        custom: "1140px",
       },
       boxShadow: {
         popper_shadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
