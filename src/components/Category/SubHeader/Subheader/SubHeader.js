@@ -321,9 +321,9 @@ const SubHeader = ({params}) => {
     setSelectedOption(item);
     if (item === "New") {
       dispatch(addSortKey(newSortKey));
-    } else if (item === "Price Low to High") {
+    } else if (item === "Price: Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (item === "Price High to low") {
+    } else if (item === "Price: High to low") {
       dispatch(addSortKey(highToLowKey));
     } else {
       dispatch(addSortKey(defaultKey));
