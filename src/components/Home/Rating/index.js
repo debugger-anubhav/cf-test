@@ -18,7 +18,7 @@ import {baseURL} from "@/network/axios";
 const CustomerRating = () => {
   const {reviews} = useSelector(state => state.homePagedata);
   const sectionHeading = "See what people are saying";
-  const subhead = `from ${reviews[0]?.fc_google_location_data[0]?.total_review} customers`;
+  const subhead = `from ${reviews?.[0]?.fc_google_location_data[0]?.total_review} customers`;
   const btntxt = "Write a review";
   const [reviewLink, setReviewLink] = React.useState("");
 
@@ -101,7 +101,7 @@ const CustomerRating = () => {
         <h2 className={styles.head}>{sectionHeading}</h2>
         <div className={styles.upper_div}>
           <h3 className={styles.rating_div}>
-            {reviews[0]?.fc_google_location_data[0]?.average_review}
+            {reviews?.[0]?.fc_google_location_data[0]?.average_review}
             <span className={styles.star}>
               <RatingStar color={"#FFCB45"} size={24} />
             </span>

@@ -3,6 +3,7 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none;
+  overflow-y: visible !important;
 }
 .head {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
