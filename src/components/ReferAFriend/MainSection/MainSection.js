@@ -63,6 +63,10 @@ const socialMediaIcons = [
     // link: `https://www.linkedin.com/shareArticle?mini=true&url=cityfurnish.com/things/${params.productId}/${params.productName}&title=${title}`,
   },
   {
+    icon: `${IconLink}mail.svg`,
+    // link: `https://api.whatsapp.com/send?text=http://cityfurnish.com/things/${params.productId}/${params.productName}`,
+  },
+  {
     icon: `${IconLink}whatsapp_icon.svg`,
     // link: `https://api.whatsapp.com/send?text=http://cityfurnish.com/things/${params.productId}/${params.productName}`,
   },
@@ -188,7 +192,11 @@ const MainSection = () => {
           className={
             userId ? styles.section2_wrapper : styles.section2_wrapper1
           }>
-          <p>asdfghjkl</p>
+          <img
+            src="https://d3juy0zp6vqec8.cloudfront.net/images/refer-a-friend.webp"
+            alt="refer-a-friend"
+            className={styles.refer_a_friend_image}
+          />
         </div>
       </div>
       {/* <div className={styles.how_it_works_button_wrapper}>
