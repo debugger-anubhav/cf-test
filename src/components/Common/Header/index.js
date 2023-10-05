@@ -27,7 +27,12 @@ import {
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
-import {decrypt, encrypt} from "@/hooks/cryptoUtils";
+import {
+  decrypt,
+  decryptBase64,
+  encrypt,
+  encryptBase64,
+} from "@/hooks/cryptoUtils";
 import {useIsOnMobile} from "@/hooks/useIsOnMobile";
 
 const HEADER_HEIGHT = 48;
@@ -119,7 +124,7 @@ const Header = () => {
     ? decrypt(getLocalStorage("_ga"))
     : getLocalStorage("user_id");
 
-  const tempUserId = getLocalStorage("tempUserID");
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
 
   // added for cart icons
@@ -161,7 +166,7 @@ const Header = () => {
   const data = {
     userId: userId ?? "",
     // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    tempUserId: getLocalStorage("tempUserID"),
+    tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
 
   useEffect(() => {
@@ -174,7 +179,10 @@ const Header = () => {
           setLocalStorage("_ga", encryptedData);
           setLocalStorage("user_name", res?.data?.data?.userName);
         } else {
-          setLocalStorage("tempUserID", res?.data?.data?.tempUserId);
+          setLocalStorage(
+            "tempUserID",
+            encryptBase64(res?.data?.data?.tempUserId),
+          );
         }
       })
       .catch(err => console.log(err));

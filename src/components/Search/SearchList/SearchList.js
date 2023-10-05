@@ -18,7 +18,7 @@ import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 
 const defaultKey = 1;
@@ -60,10 +60,8 @@ const SearchList = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
+      decrypt(getLocalStorage("_ga")) ??
+      decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
 

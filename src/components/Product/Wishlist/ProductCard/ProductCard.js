@@ -7,7 +7,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 
 const ProductCard = ({
   desc,
@@ -29,11 +29,8 @@ const ProductCard = ({
   const [hoverCard, setHoverCard] = useState(false);
 
   const data = {
-    tempUserId: getLocalStorage("tempUserID") ?? "",
-    // userId: getLocalStorage("user_id") ?? "",
+    tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
-    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId: productID,
   };
   const router = useRouter();
