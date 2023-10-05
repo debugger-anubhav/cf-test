@@ -38,9 +38,9 @@ const SubCategorySection = () => {
               <h2 className={styles.heading}>{item?.cat_name}</h2>
               <div className={styles.viewButton}>
                 <a
-                  href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                    item?.seourl
-                  }`}
+                  href={`/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${item?.seourl}`}
                   onClick={() => {
                     setLocalStorage("categoryId", item?.id);
                     setLocalStorage("category", item?.cat_name);

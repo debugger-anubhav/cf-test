@@ -52,3 +52,6 @@
 .editBtn {
   @apply hidden xl:flex gap-[10px] px-8 h-[56px] items-center bg-[#F6B704] rounded-lg cursor-pointer;
 }
+.editlink {
+  @apply hidden xl:flex;
+}
