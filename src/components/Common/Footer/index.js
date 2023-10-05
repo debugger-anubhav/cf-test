@@ -5,7 +5,12 @@ import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
-import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
+import {
+  getLocalStorage,
+  getLocalStorageString,
+  setLocalStorage,
+} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 import {Skeleton} from "@mui/material";
 
 const Footer = ({params}) => {
@@ -21,23 +26,37 @@ const Footer = ({params}) => {
     go_to_top: "Go to top",
   };
 
+  const userId = decrypt(getLocalStorage("_ga"));
+
   const array = [
     {
       head: "Categories",
       points: [
-        {text: "All", link: `/${cityName.toLowerCase()}/rent`},
+        {
+          text: "All",
+          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/rent`,
+        },
         {
           text: "Home Furniture",
-          link: `/${cityName.toLowerCase()}/home-furniture-rental`,
+          link: `/${cityName
+            .replace(/\//g, "-")
+            .toLowerCase()}/home-furniture-rental`,
         },
         {
           text: "Appliances",
-          link: `/${cityName.toLowerCase()}/home-appliances-rental`,
+          link: `/${cityName
+            .replace(/\//g, "-")
+            .toLowerCase()}/home-appliances-rental`,
         },
-        {text: "Workstations", link: `/${cityName.toLowerCase()}/workstations`},
+        {
+          text: "Workstations",
+          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/workstations`,
+        },
         {
           text: "Combos",
-          link: `/${cityName.toLowerCase()}/furniture-rental-packages`,
+          link: `/${cityName
+            .replace(/\//g, "-")
+            .toLowerCase()}/furniture-rental-packages`,
         },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],
@@ -48,7 +67,7 @@ const Footer = ({params}) => {
         {text: "About US", link: "/pages/about"},
         {
           text: "Refer a Friend",
-          link: "https://test.rentofurniture.com/pages/refer-a-friend",
+          link: userId ? "/referral" : "/pages/refer-a-friend",
         },
         {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
         {

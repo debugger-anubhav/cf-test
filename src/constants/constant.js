@@ -328,8 +328,8 @@ export const CategoryFilterData = [
 export const sortByText = [
   {text: "Default"},
   {text: "New"},
-  {text: "Price Low to High"},
-  {text: "Price High to low"},
+  {text: "Price: Low to High"},
+  {text: "Price: High to low"},
 ];
 
 export const productItemsIncludedDetails = [

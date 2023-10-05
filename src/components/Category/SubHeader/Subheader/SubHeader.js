@@ -304,7 +304,6 @@ const SubHeader = ({params}) => {
       }
     }
     router.push(`?${url}`);
-    console.log(url, "url");
 
     dispatch(addFilteredItem(updatedFilter));
     setPageNo(1);
@@ -313,9 +312,6 @@ const SubHeader = ({params}) => {
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
-    // console.log(filterOpen, "filterr opennnn 1");
-    // toggleDropDownFilter();
-    // console.log(filterOpen, "filterr opennnn 2");
 
     setFilterOpen(false);
   };
@@ -325,9 +321,9 @@ const SubHeader = ({params}) => {
     setSelectedOption(item);
     if (item === "New") {
       dispatch(addSortKey(newSortKey));
-    } else if (item === "Price Low to High") {
+    } else if (item === "Price: Low to High") {
       dispatch(addSortKey(lowToHighKey));
-    } else if (item === "Price High to low") {
+    } else if (item === "Price: High to low") {
       dispatch(addSortKey(highToLowKey));
     } else {
       dispatch(addSortKey(defaultKey));
@@ -463,13 +459,14 @@ const SubHeader = ({params}) => {
                     subItem?.cat_name;
                   return (
                     <a
-                      href={`/${homePageReduxData?.cityName.toLowerCase()}/${
-                        subItem?.seourl
-                      }`}
+                      href={`/${homePageReduxData?.cityName
+                        .replace(/\//g, "-")
+                        .toLowerCase()}/${subItem?.seourl}`}
                       onClick={e => {
                         e.preventDefault();
                         setLocalStorage("subCategory", subItem?.cat_name);
                         setLocalStorage("subCategoryId", subItem?.id);
+                        dispatch(isFilterApplied(false));
                       }}
                       className="mr-3 md:mr-0"
                       key={i.toString()}>
@@ -693,6 +690,7 @@ const SubHeader = ({params}) => {
                     temp.splice(1, 1);
                     const finalUrl = temp.join("?");
                     router.push(finalUrl);
+                    setUpdatedFilter([]);
                     dispatch(addFilteredItem([]));
                     dispatch(addSingleProduct([]));
                     dispatch(addSetProduct([]));
@@ -737,6 +735,7 @@ const SubHeader = ({params}) => {
                     temp.splice(1, 1);
                     const finalUrl = temp.join("?");
                     router.push(finalUrl);
+                    setUpdatedFilter([]);
                     dispatch(addFilteredItem([]));
                     dispatch(isFilterApplied(false));
                     dispatch(addSingleProduct([]));

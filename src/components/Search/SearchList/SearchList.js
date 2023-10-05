@@ -105,9 +105,9 @@ const SearchList = () => {
     setSelectedOption(item);
     if (item === "New") {
       setSort(newSortKey);
-    } else if (item === "Price Low to High") {
+    } else if (item === "Price: Low to High") {
       setSort(lowToHighKey);
-    } else if (item === "Price High to low") {
+    } else if (item === "Price: High to low") {
       setSort(highToLowKey);
     } else {
       setSort(defaultKey);

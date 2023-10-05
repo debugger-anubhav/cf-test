@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./style.module.css";
-import {useRouter} from "next/navigation";
 
 const StickyBottomBar = ({
   productName,
@@ -22,7 +21,6 @@ const StickyBottomBar = ({
       100) /
       durationArray?.[0]?.attr_price,
   ).toFixed(0);
-  const router = useRouter();
   return (
     <div className={styles.sticky_bar_wrapper}>
       <p className={styles.sticky_bar_head}>{productName}</p>
@@ -68,24 +66,26 @@ const StickyBottomBar = ({
             ? handleNotifyMe
             : cartItems?.length === 0
             ? handleAddToCart
-            : isItemInCart
-            ? () => router.push("/cart")
-            : isSameTenure
+            : // : isItemInCart
+            // ? () => router.push("/cart")
+            isSameTenure
             ? handleAddToCart
             : handleNotSameTenure
         }
         style={{width: "232px", marginTop: "0px"}}
-        disabled={isLoading || isItemInCart}
+        disabled={isLoading}
         className={styles.btn}>
-        {isLoading ? (
-          <div className={styles.spinner} />
-        ) : soldOut ? (
-          "Notify me"
-        ) : isItemInCart ? (
-          "Go to Cart"
-        ) : (
-          "Add to Cart"
-        )}
+        <a href={isItemInCart && `/cart`}>
+          {isLoading ? (
+            <div className={styles.spinner} />
+          ) : soldOut ? (
+            "Notify me"
+          ) : isItemInCart ? (
+            "Go to Cart"
+          ) : (
+            "Add to Cart"
+          )}
+        </a>
       </button>
     </div>
   );
