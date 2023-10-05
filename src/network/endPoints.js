@@ -3,6 +3,8 @@ export const endPoints = {
   offersAndCupons: "fc-site-offers/getOffersAndCoupons",
   recentlyViewedProduct: "fc-view-products/getRecentlyViewedProducts",
   googleReviews: "fc-google-review-lists/getAllGoogleReviews",
+  googleReviewsLinks: cityId =>
+    `fc-google-location-data/getUrlToWriteReview?cityId=${cityId}`,
   newlylaunchedProduct: "fc-products/getNewLaunchProducts",
   limitedPreiod: "fc-products/getProductsOnSale",
   trendingProduct: "fc-products/getTrendingProducts",

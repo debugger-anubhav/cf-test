@@ -115,7 +115,9 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
           />
         </div>
         <div className={styles.drawer_content}>
-          <p className={styles.logo_text}>cityfurnish</p>
+          <a href="/cityfurnish">
+            <p className={styles.logo_text}>cityfurnish</p>
+          </a>
           <div className={styles.menu_list}>
             <a
               href={`/${homePageReduxData?.cityName

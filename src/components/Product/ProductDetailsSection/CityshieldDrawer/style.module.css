@@ -41,7 +41,7 @@
   @apply w-[80px] flex flex-col items-center;
 }
 .img_div {
-  @apply w-[60px] h-[60px] lg:w-[72px] lg:h-[72px] flex;
+  @apply w-[60px] h-[48px] lg:w-[72px] lg:h-[72px] flex;
 }
 .img {
   @apply w-full h-full;
