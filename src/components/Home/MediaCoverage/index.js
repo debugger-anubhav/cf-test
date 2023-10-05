@@ -16,7 +16,7 @@ const MediaCoverage = () => {
             <div className={`w-100 h-100 absolute z-10`} />
             <div
               key={index.toString()}
-              className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative z-[-1]"
+              className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative"
               aria-hidden="true">
               <img
                 src={imageUrl.img}

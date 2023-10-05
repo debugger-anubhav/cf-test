@@ -62,8 +62,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     setState({...state, [anchor]: open});
   };
 
-  // console.log(mobileCityDrawer);
-
   const cityId = getLocalStorage("cityId");
 
   const handleMenu = (e, item) => {
@@ -198,24 +196,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
         </div>
       </div>
     ) : (
-      <>
+      <div>
         {mobileCityDrawer && DrawerName !== "menu" && (
-          <div
-            className={`relative z-[9999]`}
-            onClick={() => toggleDrawer("bottom", false)}>
+          <div>
             <div
               className={styles.bottom_close_icon}
               onClick={toggleDrawer("bottom", false)}>
-              <Close
-                color={"#000"}
-                size={20}
-                className={"z-30"}
-                // onClick={() => {
-                //   toggleDrawer("bottom", false);
-                // }}
-              />
+              <Close color={"#45454A"} size={24} className="cursor-pointer" />
             </div>
-            {/* </p> */}
           </div>
         )}
         <div
@@ -249,7 +237,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => (
                 <div
-                  className={`${styles.city_wrapper} 
+                  className={`${styles.city_wrapper}
                   `}
                   key={index.toString()}
                   onClick={() => {
@@ -324,7 +312,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
             </div>
           </div>
         </div>
-      </>
+      </div>
     );
 
   return (

@@ -41,7 +41,7 @@ export default function FilterSortDrawer({
   const lowToHighKey = 4;
 
   const loadMoreItems = () => {
-    setItemCount(itemCount + 7);
+    setItemCount(filtereData.length);
   };
 
   const toggleDrawer = (anchor, open) => event => {

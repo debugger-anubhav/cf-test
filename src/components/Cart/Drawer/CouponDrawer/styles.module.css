@@ -63,6 +63,7 @@
   @apply !rounded-t-[20px] md:!rounded-t-none;
   /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
   transition-timing-function: ease-in;
+  overflow-y: visible !important;
 }
 .not_applicable_text {
   @apply -mt-4 md:-mt-7 text-14 md:text-16 tracking-desc md:tracking-0.3 text-71717A;
