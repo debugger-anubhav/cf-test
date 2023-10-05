@@ -44,6 +44,7 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none;
+  overflow-y: visible !important;
 }
 
 .container {
