@@ -9,8 +9,6 @@ const AddressDrawer = ({
   open,
   makeDefaultAddress,
   primaryAddress,
-  // makeAddressPrimary,
-  // getAllSavedAddresses,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
@@ -93,11 +91,9 @@ const AddressDrawer = ({
                     {item.full_name}, {item.phone}
                   </h2>
                 </div>
-                <p className={`line-clamp-2 ${styles.address}`}>
-                  {item.address1}
-                </p>
+                <p className={`truncate ${styles.address}`}>{item.address1}</p>
                 <p className={styles.address}>
-                  {item.city}, {item.state}, India
+                  {item.city}, {item.state}
                 </p>
               </div>
             ))}

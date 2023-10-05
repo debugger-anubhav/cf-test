@@ -5,7 +5,7 @@ import {
   AiOutlineDelete,
   AiFillCheckCircle,
 } from "react-icons/ai";
-import {FiChevronDown, FiChevronUp} from "react-icons/fi";
+import {FiChevronDown, FiChevronUp, FiEdit} from "react-icons/fi";
 import {
   IoClose,
   IoCloseOutline,
@@ -63,6 +63,7 @@ import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
 import {FaRegCalendar} from "react-icons/fa";
+import {FaCirclePlus} from "react-icons/fa6";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -209,6 +210,10 @@ export const EditIcon = ({size, color, className}) => (
   <MdModeEdit size={size} color={color} className={className} />
 );
 
+export const EditIcon1 = ({size, color, className}) => (
+  <FiEdit size={size} color={color} className={className} />
+);
+
 export const TrendingIcon = ({size, color, className}) => (
   <HiArrowTrendingUp size={size} color={color} className={className} />
 );
@@ -314,4 +319,7 @@ export const EmailIcon = ({size, color, className}) => (
 );
 export const OutlineArrowRight = ({size, color, className}) => (
   <AiOutlineArrowRight size={size} color={color} className={className} />
+);
+export const AddIcon = ({size, color, className}) => (
+  <FaCirclePlus size={size} color={color} className={className} />
 );
