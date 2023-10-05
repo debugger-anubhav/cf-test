@@ -165,3 +165,7 @@
 .share_modal_icons_wrapper {
   @apply flex gap-[12px] items-center md:ml-4 mt-4 md:mt-0;
 }
+
+.refer_a_friend_image {
+  @apply h-[178px] w-[328px] lg:h-[324px] lg:w-[459px] lg:pb-[99px] lg:px-[22.5px];
+}
