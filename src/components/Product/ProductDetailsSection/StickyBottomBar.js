@@ -72,9 +72,9 @@ const StickyBottomBar = ({
             ? handleAddToCart
             : handleNotSameTenure
         }
-        style={{width: "232px", marginTop: "0px"}}
+        style={{marginTop: "0px"}}
         disabled={isLoading}
-        className={styles.btn}>
+        className={styles.sticky_add_cart_btn}>
         <a href={isItemInCart && `/cart`}>
           {isLoading ? (
             <div className={styles.spinner} />
