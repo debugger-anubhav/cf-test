@@ -213,10 +213,6 @@ const ShoppingCartSection = ({setTab}) => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  useEffect(() => {
-    console.log(code, "codeeeeeeeeeeeee");
-  }, [code]);
-
   const fetchBill = async () => {
     try {
       const headers = {
