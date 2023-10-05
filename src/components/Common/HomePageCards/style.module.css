@@ -12,7 +12,7 @@
   @apply flex gap-[0.62rem] items-center;
 }
 .thumbnail {
-  @apply min-w-full w-full rounded-lg;
+  @apply min-w-full w-full rounded-lg max-h-[268px];
   /* pointer-events: none; */
   -webkit-user-drag: none;
   /* user-select: none; */

@@ -243,7 +243,6 @@ const CategoryCard = ({
             <div className={styles.discount}>{`-${discount} OFF`}</div>
           )}
         </div>
-
         {categoryPageReduxData?.isCombos && (
           <>
             <div className={styles.combos_wrapper}>
