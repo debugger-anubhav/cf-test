@@ -347,7 +347,9 @@ const SubHeader = ({params}) => {
         dropDownRefFilter.current &&
         !dropDownRefFilter.current.contains(event.target)
       ) {
-        setFilterOpen(false);
+        if (event.target.innerHTML !== "See more") {
+          setFilterOpen(false);
+        }
       }
       if (
         dropDownRefSort.current &&
@@ -381,7 +383,7 @@ const SubHeader = ({params}) => {
   }, [getAllAndSubCategoryData]);
 
   const loadMoreItems = () => {
-    setItemCount(itemCount + 7);
+    setItemCount(filtereData.length);
   };
 
   useEffect(() => {

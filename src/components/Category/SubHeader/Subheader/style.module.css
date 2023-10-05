@@ -124,7 +124,7 @@
   scrollbar-color: darkgray lightgray;
 }
 .mapped_filter_mobile {
-  @apply flex flex-col max-h-[259px] pt-[15px];
+  @apply flex flex-col max-h-[335px] pt-[15px];
 }
 .headin_text {
   @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-[15px];
