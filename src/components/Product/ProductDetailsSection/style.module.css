@@ -210,7 +210,7 @@
   @apply hidden lg:flex w-[278px] text-16 xl:text-20 text-45454A font-medium tracking-0.4;
 }
 .sticky_add_cart_btn {
-  @apply cursor-pointer mt-12 bg-btn-primary flex justify-center items-center w-[133px] lg:w-full h-12 xl:h-14 rounded-lg text-16 text-222 font-medium;
+  @apply cursor-pointer mt-12 bg-btn-primary flex justify-center items-center w-[133px] lg:w-[232px] h-12 xl:h-14 rounded-lg text-16 text-222 font-medium;
 }
 .skeleton_wrapper {
   @apply flex w-full px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
