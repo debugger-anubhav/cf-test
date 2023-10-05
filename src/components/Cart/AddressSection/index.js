@@ -192,7 +192,7 @@ const AddressSection = ({setTab}) => {
 
             <p className={styles.saved_address}>{primaryAddress?.address1}</p>
             <p className={styles.saved_address}>
-              {primaryAddress?.city}, {primaryAddress?.state}, India
+              {primaryAddress?.city}, {primaryAddress?.state}
             </p>
 
             {cityName !== primaryAddress?.city && (
@@ -210,9 +210,6 @@ const AddressSection = ({setTab}) => {
             open={addressDrawer}
             makeDefaultAddress={id => makeDefaultAddress(id)}
             primaryAddress={primaryAddress}
-            // setPrimaryAddress={setPrimaryAddress}
-            // makeAddressPrimary={id => makeAddressPrimary(id)}
-            getAllSavedAddresses={() => getAllSavedAddresses()}
           />
         )}
 

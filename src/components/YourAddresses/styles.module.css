@@ -1,0 +1,9 @@
+.main_container {
+  @apply font-Poppins lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:pr-[160px] 4xl:pr-[160px] lg:-mt-6;
+}
+.doc_side_bar {
+  @apply hidden lg:block min-w-fit;
+}
+.right_div {
+  @apply w-full pb-6;
+}
