@@ -8,13 +8,13 @@
   @apply text-16 xl:text-20 text-45454A leading-6 font-medium tracking-0.3 xl:tracking-0.4;
 }
 .box_wrapper {
-  @apply h-[100vh] overflow-y-scroll xl:w-fit mt-6 xl:mt-10 flex flex-col lg:grid lg:grid-cols-2 4xl:grid-cols-3 gap-4 xl:gap-6;
+  @apply h-[100vh] overflow-y-scroll overflow-x-hidden lg:w-fit mt-6 xl:mt-10 flex flex-wrap lg:grid lg:grid-cols-2 4xl:grid-cols-3 gap-4 xl:gap-6;
 }
 .box {
-  @apply border w-full xs:w-[350px] lg:w-[300px] xl:w-[400px] cxl:w-[444px] p-4 xl:p-6 rounded-xl max-h-[102px] md:h-[126px] md:max-h-[126px] border-DDDDDF bg-fff;
+  @apply border w-full xs:w-[300px] xl:w-[400px] cxl:w-[444px] p-4 xl:p-6 rounded-xl max-h-[102px] md:max-h-[126px] border-DDDDDF bg-fff;
 }
 .box1 {
-  @apply border-dashed justify-center items-center flex;
+  @apply border-dashed justify-center items-center flex cursor-pointer;
 }
 .add_icon {
   @apply w-[29px] h-[29px];
@@ -23,7 +23,10 @@
   @apply flex justify-between items-center;
 }
 .name {
-  @apply text-14 md:text-16 capitalize font-medium text-222 font-Inter tracking-desc md:tracking-0.3;
+  @apply text-14 xl:text-16 capitalize font-medium text-222 font-Inter tracking-desc md:tracking-0.3;
+}
+.truncated_text {
+  @apply max-w-[140px] xs:max-w-[120px] xl:max-w-[180px] cxl:max-w-[223px] truncate;
 }
 .icon_wrapper {
   @apply flex gap-3 items-center;
@@ -35,5 +38,5 @@
   @apply w-[19px] h-[19px] cursor-pointer text-71717A hover:text-[#D96060];
 }
 .address {
-  @apply text-12 md:text-14 text-45454A tracking-0.24 md:tracking-desc w-full;
+  @apply text-12 xl:text-14 text-45454A tracking-0.24 md:tracking-desc w-full;
 }

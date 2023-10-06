@@ -4,25 +4,17 @@ import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
 import axios from "axios";
-// import {useSelector} from "react-redux";
-
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {baseURL} from "@/network/axios";
 
 const DeleteAddressModal = ({
   isModalOpen,
   closeModal,
-  productId,
-  userId,
-  updateArr,
   id,
+  getAllSavedAddresses,
 }) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
-
-  //   const dispatch = useDispatch();
-
-  //   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -32,8 +24,6 @@ const DeleteAddressModal = ({
     }
   };
 
-  //   const cityId = parseInt(getLocalStorage("cityId"));
-
   React.useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
@@ -42,15 +32,15 @@ const DeleteAddressModal = ({
     };
   }, []);
 
-  const handleDeleteItem = async (showToast = true) => {
-    updateArr(productId);
+  const handleDelete = async () => {
     try {
-      await axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
-      closeModal();
-      showToast && showToastNotification("Item deleted from the cart", 3);
+      await axios.delete(baseURL + endPoints.yourAddressPage.deleteAddress(id));
     } catch (error) {
-      console.log(error);
+      console.error("Error deleting data:", error);
     }
+    closeModal();
+    getAllSavedAddresses();
+    showToastNotification("Address deleted", 3);
   };
 
   return (
@@ -75,7 +65,7 @@ const DeleteAddressModal = ({
             <div>
               <button
                 className={`${styles.yellow_btn} ${styles.btn}`}
-                onClick={handleDeleteItem}>
+                onClick={handleDelete}>
                 Yes, delete
               </button>
             </div>
@@ -101,7 +91,7 @@ const DeleteAddressModal = ({
             </button>
             <button
               className={`${styles.yellow_btn} ${styles.btn}`}
-              onClick={handleDeleteItem}>
+              onClick={handleDelete}>
               Yes, delete
             </button>
           </div>

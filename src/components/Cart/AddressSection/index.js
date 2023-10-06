@@ -155,6 +155,9 @@ const AddressSection = ({setTab}) => {
     setPrimaryAddress(newPrimaryAddress);
   };
 
+  const handlePayment = () => {
+    console.log("paymentt");
+  };
   useEffect(() => {
     getAllSavedAddresses();
   }, []);
@@ -464,7 +467,9 @@ const AddressSection = ({setTab}) => {
             />
           )}
 
-          <button className={`!mt-6 ${otherStyles.proceed_button}`}>
+          <button
+            onClick={() => handlePayment()}
+            className={`!mt-6 ${otherStyles.proceed_button}`}>
             Proceed to Payment
             <ArrowForw size={19} color={"#222"} />
           </button>
