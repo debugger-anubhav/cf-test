@@ -16,7 +16,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 const FormAddress = ({setTab, tab, id}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const selectedItem = addressArray.find(item => item.id === id);
-  // console.log(selectedItem, "selcetdeitemmmm");
+  console.log(selectedItem, "selcetdeitemmmm");
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
@@ -67,28 +67,51 @@ const FormAddress = ({setTab, tab, id}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
 
   const saveUserAddress = async values => {
-    return new Promise((resolve, reject) => {
-      const headers = {
-        userId: parseInt(userIdToUse),
-        fullName: values.fullName,
-        address: values.address,
-        landMark: values.landmark,
-        postalCode: parseInt(values.postalCode),
-        city: values.city,
-        cityId,
-        phoneNo: parseInt(values.contactNumber),
-      };
+    const headers = {
+      userId: parseInt(userIdToUse),
+      fullName: values.fullName,
+      address: values.address,
+      landMark: values.landmark,
+      postalCode: parseInt(values.postalCode),
+      city: values.city,
+      cityId,
+      phoneNo: parseInt(values.contactNumber),
+    };
 
-      axios
-        .post(baseURL + endPoints.addToCart.addAddress, headers)
-        .then(response => {
-          resolve("hii");
-        })
-        .catch(error => {
-          console.error("API error:", error);
-        });
-    });
+    try {
+      await axios.post(baseURL + endPoints.addToCart.addAddress, headers);
+    } catch (error) {
+      console.error("Error adding data:", error);
+    }
+
+    showToastNotification("Address added successfully", 1);
+    setTab();
   };
+
+  const handleUpdateAddress = async values => {
+    const headers = {
+      id,
+      user_id: parseInt(userIdToUse),
+      full_name: values.fullName,
+      address1: values.address,
+      address2: values.landmark,
+      city: values.city,
+      postal_code: values.postalCode.toString(),
+      phone: values.contactNumber.toString(),
+    };
+    try {
+      await axios.patch(
+        baseURL + endPoints.yourAddressPage.updateAddress,
+        headers,
+      );
+    } catch (error) {
+      console.error("Error updating data:", error);
+    }
+
+    showToastNotification("Address updated successfully", 1);
+    setTab();
+  };
+
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -112,19 +135,11 @@ const FormAddress = ({setTab, tab, id}) => {
             city: tab === 2 ? selectedItem.city : cityName,
           }}
           validationSchema={validationSchema}
-          onSubmit={async (values, {setSubmitting, resetForm}) => {
-            if (tab === 1) await saveUserAddress(values);
+          onSubmit={values => {
+            if (tab === 1) saveUserAddress(values);
+            if (tab === 2) handleUpdateAddress(values);
             // getAllSavedAddresses();
             // resetForm();
-            showToastNotification(
-              `${
-                tab === 1
-                  ? "Address added successfully"
-                  : "Address updated successfully"
-              }`,
-              1,
-            );
-            setTab();
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
@@ -218,13 +233,14 @@ const FormAddress = ({setTab, tab, id}) => {
                       }
                     </ErrorMessage>
                   </div>
-                  <div className="lg:w-[48.5%]">
+                  <div
+                    className="lg:w-[48.5%]"
+                    onClick={() => console.log("hgwehw")}>
                     <p className={formStyles.form_label}>City</p>
                     <Field
                       readOnly
                       type="text"
                       name="city"
-                      value={cityName}
                       placeholder="Enter city"
                       className={formStyles.form_input}
                     />
