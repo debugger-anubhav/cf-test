@@ -8,7 +8,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 
 const SubCategoryCard = ({productID}) => {
   const [inWishList, setInWishList] = useState(false);
@@ -24,7 +24,7 @@ const SubCategoryCard = ({productID}) => {
   const cityId = parseFloat(cityIdStr);
 
   const data = {
-    tempUserId: getLocalStorage("tempUserID") ?? "",
+    tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     // userId: getLocalStorage("user_id") ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
@@ -48,7 +48,8 @@ const SubCategoryCard = ({productID}) => {
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ??
+      decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
   // const userId = getLocalStorageString("user_id");

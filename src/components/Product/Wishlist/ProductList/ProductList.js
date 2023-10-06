@@ -8,7 +8,7 @@ import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 const ProductList = ({params}) => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
@@ -25,10 +25,8 @@ const ProductList = ({params}) => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
-      // JSON.parse(localStorage.getItem("user_id")) ??
-      // JSON.parse(localStorage.getItem("tempUserID"))
+      decrypt(getLocalStorage("_ga")) ??
+      decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
 
