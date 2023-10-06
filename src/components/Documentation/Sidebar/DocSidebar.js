@@ -9,9 +9,9 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
   const userName = getLocalStorage("user_name");
+  const url = window?.location.pathname.split("/")[1];
 
   useEffect(() => {
-    const url = window?.location.pathname.split("/")[1];
     if (url === "referral") {
       setIsActive("Referral Code");
     }
@@ -56,7 +56,10 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   };
 
   return (
-    <div className={styles.mainContainer}>
+    <div
+      className={`${styles.mainContainer} ${
+        url === "referral" && "pb-[220px]"
+      }`}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
         <div className={styles.userNameText}>{userName}</div>

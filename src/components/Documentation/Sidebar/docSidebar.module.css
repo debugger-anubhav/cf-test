@@ -1,5 +1,5 @@
 .mainContainer {
-  @apply h-full hidden md:flex flex-col  pl-[70px] sm:pl-[90px] md:pl-[122px] font-Poppins bg-[#f7f9fc] pb-[150px];
+  @apply h-full hidden md:flex flex-col  pl-[70px] sm:pl-[90px] md:pl-[122px] font-Poppins bg-[#f7f9fc];
 }
 
 /* .headingLinks {
