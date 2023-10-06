@@ -26,3 +26,23 @@ export function decrypt(encryptedData) {
     return decryptedData;
   }
 }
+
+// Function to encrypt data to double base64
+export function encryptBase64(dataToEncode) {
+  if (dataToEncode) {
+    // Encode the data into base64 format
+    const base64EncodedData = btoa(dataToEncode);
+    const data = btoa(base64EncodedData);
+    return data;
+  }
+}
+
+// Function to decrypt data from double base64
+export function decryptBase64(dataToDecode) {
+  if (dataToDecode) {
+    // Decode the data into base64 format
+    const base64DecodedData = atob(dataToDecode);
+    const data = atob(base64DecodedData);
+    return data;
+  }
+}

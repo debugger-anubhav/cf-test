@@ -22,7 +22,7 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
 import {getSavedAddress} from "@/store/Slices";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 
 const AddressSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const AddressSection = ({setTab}) => {
 
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = getLocalStorage("tempUserID");
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");

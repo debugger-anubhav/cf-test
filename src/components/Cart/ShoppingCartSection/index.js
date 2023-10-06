@@ -35,7 +35,7 @@ import {
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 // import {useRouter} from "next/navigation";
 
 const ShoppingCartSection = ({setTab}) => {
@@ -55,7 +55,7 @@ const ShoppingCartSection = ({setTab}) => {
   // const router = useRouter();
 
   const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = getLocalStorage("tempUserID");
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");

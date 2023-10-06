@@ -7,14 +7,14 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getSavedAddress} from "@/store/Slices";
 import {getLocalStorage} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import DeleteAddressModal from "../Modal/DeleteAddressModal";
 import "react-responsive-modal/styles.css";
 
 const SavedAddress = ({setTab, editAddress}) => {
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = getLocalStorage("tempUserID");
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
 

@@ -10,7 +10,7 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const FormAddress = ({setTab, tab, id}) => {
@@ -60,7 +60,7 @@ const FormAddress = ({setTab, tab, id}) => {
     city: Yup.string().required("City is required"),
   });
   const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = getLocalStorage("tempUserID");
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");

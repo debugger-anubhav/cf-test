@@ -8,7 +8,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
 
 const Card = ({
@@ -35,7 +35,7 @@ const Card = ({
 
   const dispatch = useDispatch();
   const data = {
-    tempUserId: getLocalStorage("tempUserID") ?? "",
+    tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     // userId: getLocalStorage("user_id") ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
@@ -65,7 +65,8 @@ const Card = ({
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ?? getLocalStorage("tempUserID")
+      decrypt(getLocalStorage("_ga")) ??
+      decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
   const userId = decrypt(getLocalStorage("_ga"));
