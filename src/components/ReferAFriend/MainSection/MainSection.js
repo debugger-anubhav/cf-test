@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
-import {ForwardArrow} from "@/assets/icon";
+import {ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
 import HowItWorksDrawer from "../HowItWorksDrawer/HowItWorksDrawer";
 import FAQQuestion from "./FAQQuestion";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const FAQ = [
   {
@@ -74,7 +77,8 @@ const socialMediaIcons = [
 
 const MainSection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState();
+  const [code, setCode] = useState();
 
   const userId = decrypt(getLocalStorage("_ga"));
 
@@ -89,6 +93,14 @@ const MainSection = () => {
       setOpenIndex(index);
     }
   };
+
+  useEffect(() => {
+    if (userId) {
+      axios.get(baseURL + endPoints.referAFreind(userId)).then(res => {
+        setCode(res?.data?.data?.referral_code);
+      });
+    }
+  }, []);
 
   const copyToClipboard = text => {
     if (!text) return;
@@ -132,12 +144,12 @@ const MainSection = () => {
           {userId ? (
             <div className={styles.referral_wrapper}>
               <div className={styles.referral_section}>
-                <div className={styles.code}>CF1234567890</div>
+                <div className={styles.code}>{code}</div>
                 <div
                   className={styles.copy_section}
                   onClick={e => {
                     e.preventDefault();
-                    copyToClipboard("CF1234567890");
+                    copyToClipboard(code);
                   }}>
                   <img
                     src={`${IconLink}clipboard.svg`}
@@ -173,7 +185,10 @@ const MainSection = () => {
             </p>
           )}
           {!userId && (
-            <button className={styles.login_btn}>{`Login ->`}</button>
+            <button className={styles.login_btn}>
+              Login
+              <ForwardArrowWithLine />
+            </button>
           )}
           <div className={styles.how_it_works_button_wrapper}>
             <button

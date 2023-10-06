@@ -104,4 +104,6 @@ export const endPoints = {
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
+
+  referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
 };
