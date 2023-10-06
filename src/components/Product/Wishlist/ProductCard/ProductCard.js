@@ -89,7 +89,6 @@ const ProductCard = ({
           onMouseOver={() => setIsHovered(true)}
           onMouseOut={() => setIsHovered(false)}
           onClick={() => {
-            console.log("first");
             setDeleteIconClick(true);
           }}>
           <DeleteIcon

@@ -380,7 +380,6 @@ const Header = () => {
               className={styles.search_input}
               onClick={() => {
                 setOpenSearchBar(true);
-                console.log("fsdkjhdsfkh");
                 if (window.pageYOffset <= HEADER_HEIGHT) {
                   settopOffset(21 + HEADER_HEIGHT - window.pageYOffset);
                 } else {

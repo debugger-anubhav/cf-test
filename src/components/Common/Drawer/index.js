@@ -49,13 +49,11 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
   const hoverRef = React.useRef("");
 
   const toggleDrawer = (anchor, open) => event => {
-    console.log("in togle");
     if (
       event &&
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
     ) {
-      console.log("in iffff");
       return;
     }
 
