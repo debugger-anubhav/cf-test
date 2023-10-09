@@ -56,7 +56,7 @@ const Footer = ({params}) => {
           text: "Combos",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/furniture-rental-packages`,
+            .toLowerCase()}/rental-packages`,
         },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],
