@@ -57,17 +57,6 @@ const CityDrawer = ({
           </div>
         )}
 
-        {/* <div
-          onClick={toggleDrawer}
-          className={
-            !isBottomDrawer && styles.drawer_close && styles.city_drawer_close
-          }>
-          <Close
-            className={customStyles.close_icon}
-            color={"#45454A"}
-            size={24}
-          />
-        </div> */}
         <div className={`${styles.drawer_content}`}>
           <p className={styles.select_heading}>Select your city</p>
           <div
@@ -78,26 +67,15 @@ const CityDrawer = ({
                   `}
                 key={index.toString()}
                 onClick={() => {
-                  // dispatch(selectedCityId(city?.id));
-                  // dispatch(selectedCityName(city?.list_value));
-                  toggleDrawer(false);
                   handleCityChange(city?.list_value);
-                  // if (typeof window !== "undefined") {
-                  //   setLocalStorage("cityId", city?.id);
-                  // }
-                  // const newUrl = window?.location.pathname.split("/");
-                  // newUrl[1] = city.list_value.replace(/\//g, "-").toLowerCase();
-                  // const p = newUrl.join("/");
-                  // params.city ? router.push(p) : window?.location.reload();
                 }}>
-                {/* {console.log(cityName, city?.list_value, "hejh")} */}
                 <img
                   src={cityUrl + city?.list_value_seourl + ".webp"}
                   className={`${styles.city_thambnil} ${
                     cityName === city?.list_value &&
                     "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                   }`}
-                  alt="city-image"
+                  alt={city?.list_value}
                   loading="lazy"
                 />
                 {city?.id === 50 ? (
@@ -105,8 +83,6 @@ const CityDrawer = ({
                     {city?.list_value.split("/")[0]}/
                     <br className="flex sm:hidden" />
                     {city?.list_value.split("/")[1]}
-                    {/* {city?.list_value} */}
-                    {/* {city?.id} */}
                   </div>
                 ) : (
                   <p

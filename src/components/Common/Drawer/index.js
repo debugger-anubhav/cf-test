@@ -259,7 +259,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       cityId === city?.id &&
                       "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                     }`}
-                    alt="city-image"
+                    alt={city?.list_value}
                     loading="lazy"
                   />
                   {city?.id === 50 ? (
