@@ -105,8 +105,6 @@ export default function FilterSortDrawer({
       }
     }
     router.push(`?${url}`);
-    console.log(url, "url");
-
     dispatch(addFilteredItem(updatedFilter));
     setPageNo(1);
     dispatch(addSingleProduct([]));
@@ -114,7 +112,6 @@ export default function FilterSortDrawer({
     dispatch(addOutStockProduct([]));
     dispatch(isFilterApplied(true));
     setFilterListed(true);
-    console.log("innnn");
     setState({...state, bottom: false});
     // setFilterOpen(false);
   };
