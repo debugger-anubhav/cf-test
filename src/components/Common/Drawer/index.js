@@ -220,7 +220,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               <Close
                 color={"#000"}
                 size={25}
-                className={styles.close_icon}
+                className={`!mt-[5px] ${styles.close_icon}`}
+
                 // onClick={() => {
                 //   mobileCityDrawer && DrawerName !== "menu"
                 //     ? toggleDrawer("bottom", false)
@@ -258,7 +259,7 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       cityId === city?.id &&
                       "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
                     }`}
-                    alt="city-image"
+                    alt={city?.list_value}
                     loading="lazy"
                   />
                   {city?.id === 50 ? (

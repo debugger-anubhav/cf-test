@@ -1,0 +1,18 @@
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none;
+  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
+  transition-timing-function: ease-in;
+  overflow-y: visible !important;
+}
+.close_icon {
+  @apply md:mr-8 fixed  right-4 md:left-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.main_container {
+  @apply h-[90vh] md:h-full w-full xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
+}
+.drawer_wrapper {
+  @apply py-6 md:py-12 px-4 md:px-0 font-Poppins w-full md:w-[486px] max-h-[90vh] md:max-h-none md:h-full flex relative;
+}
+/* .city_drawer_wrapper {
+  @apply sm:w-[500px] w-full px-4 sm:px-8 lg:px-0 rounded-t-lg;
+} */

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import formStyles from "../../Cart/AddressSection/styles.module.css";
 import {ArrowForw, BackIcon} from "@/assets/icon";
@@ -12,11 +12,15 @@ import {useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+// import CommonDrawer from "@/components/Common/Drawer";
+import {useAppSelector} from "@/store";
+import CityDrawer from "../Drawer/CityDrawer";
 
 const FormAddress = ({setTab, tab, id}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const selectedItem = addressArray.find(item => item.id === id);
-  console.log(selectedItem, "selcetdeitemmmm");
+  // console.log(selectedItem, "selcetdeitemmmm");
+  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
@@ -62,9 +66,11 @@ const FormAddress = ({setTab, tab, id}) => {
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
-
-  const cityId = getLocalStorage("cityId");
+  const defaultCityId = getLocalStorage("cityId");
   const cityName = useSelector(state => state.homePagedata.cityName);
+
+  const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
+  const [cityId, setCityId] = useState(defaultCityId);
 
   const saveUserAddress = async values => {
     const headers = {
@@ -112,6 +118,21 @@ const FormAddress = ({setTab, tab, id}) => {
     setTab();
   };
 
+  const toggleDrawer = () => {
+    setCityDrawerOpen(!cityDrawerOpen);
+  };
+
+  const handleCityChange = async (val, setFieldValue) => {
+    console.log(val, "valuueeee");
+    // setCity(val);
+    setFieldValue("city", val);
+
+    axios
+      .get(baseURL + endPoints.cityIdByCityName + val)
+      .then(res => setCityId(res?.data?.data?.id))
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -143,6 +164,7 @@ const FormAddress = ({setTab, tab, id}) => {
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
+              {console.log(formik.values, "formikkkk")}
               <div>
                 <div className={formStyles.form_field}>
                   <p className={formStyles.form_label}>Full name</p>
@@ -233,14 +255,31 @@ const FormAddress = ({setTab, tab, id}) => {
                       }
                     </ErrorMessage>
                   </div>
+                  {/* 
+                  {console.log(values, "valuess")} */}
+                  {cityDrawerOpen && (
+                    <CityDrawer
+                      toggleDrawer={toggleDrawer}
+                      Cities={storeCityList}
+                      open={cityDrawerOpen}
+                      cityName={formik.values.city}
+                      handleCityChange={val =>
+                        handleCityChange(val, formik.setFieldValue)
+                      }
+                    />
+                  )}
+
                   <div
                     className="lg:w-[48.5%]"
-                    onClick={() => console.log("hgwehw")}>
+                    onClick={() => {
+                      toggleDrawer(true);
+                    }}>
                     <p className={formStyles.form_label}>City</p>
                     <Field
                       readOnly
                       type="text"
                       name="city"
+                      value={formik.values.city}
                       placeholder="Enter city"
                       className={formStyles.form_input}
                     />
