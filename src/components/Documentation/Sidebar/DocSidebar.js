@@ -9,9 +9,10 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
   const userName = getLocalStorage("user_name");
+  const url =
+    typeof window !== "undefined" && window?.location.pathname.split("/")[1];
 
   useEffect(() => {
-    const url = window?.location.pathname.split("/")[1];
     if (url === "referral") {
       setIsActive("Referral Code");
     }
@@ -45,18 +46,23 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   ];
 
   const onLogout = () => {
-    router.push("https://test.rentofurniture.com/logout");
-    cookie.remove("ci_sessions");
-    localStorage.removeItem("tempUserID");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("_ga");
-    localStorage.removeItem("user_name");
-    localStorage.removeItem("ci_session");
-    location.reload();
+    if (typeof window !== "undefined") {
+      router.push("https://test.rentofurniture.com/logout");
+      cookie.remove("ci_sessions");
+      localStorage.removeItem("tempUserID");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("_ga");
+      localStorage.removeItem("user_name");
+      localStorage.removeItem("ci_session");
+      location.reload();
+    }
   };
 
   return (
-    <div className={styles.mainContainer}>
+    <div
+      className={`${styles.mainContainer} ${
+        url === "referral" && "pb-[220px]"
+      }`}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
         <div className={styles.userNameText}>{userName}</div>

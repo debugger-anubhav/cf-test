@@ -16,7 +16,6 @@ const YourAddressesSection = () => {
       <div className={styles.doc_side_bar}>
         <DocSidebar isOverviewSelected={true} />
       </div>
-
       <div className={styles.right_div}>
         {tab === 0 ? (
           <SavedAddress

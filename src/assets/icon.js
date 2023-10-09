@@ -12,6 +12,7 @@ import {
   IoArrowForward,
   IoArrowBack,
   IoPerson,
+  IoArrowForwardSharp,
 } from "react-icons/io5";
 import {TbMailFilled, TbReload} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
@@ -200,6 +201,10 @@ export const Minus = ({size, color, className}) => (
 
 export const ForwardArrow = ({size, color, className}) => (
   <IoIosArrowForward size={size} color={color} className={className} />
+);
+
+export const ForwardArrowWithLine = ({size, color, className}) => (
+  <IoArrowForwardSharp size={size} color={color} className={className} />
 );
 
 export const BackwardArrow = ({size, color, className}) => (

@@ -89,6 +89,12 @@ export const endPoints = {
     makePrimaryAddress: `fc-shipping-addresses/makeAddressPrimary`,
     addAddress: "fc-shipping-addresses/saveUserAddress",
     checkCouponApplicability: "fc-couponcards/checkCoupon",
+    makePayment: "fc-payments/makePayment",
+  },
+
+  yourAddressPage: {
+    deleteAddress: id => `fc-shipping-addresses/delete?id=${id}`,
+    updateAddress: `fc-shipping-addresses/update`,
   },
 
   // categoryHappySubscriber:
@@ -104,4 +110,6 @@ export const endPoints = {
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
+
+  referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
 };

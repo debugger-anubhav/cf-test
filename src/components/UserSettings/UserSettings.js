@@ -106,12 +106,14 @@ export default function UserSettings() {
           <p
             className={styles.lgout}
             onClick={() => {
-              cookie.remove("ci_sessions");
-              localStorage.removeItem("tempUserID");
-              localStorage.removeItem("user_id");
-              localStorage.removeItem("_ga");
-              localStorage.removeItem("user_name");
-              localStorage.removeItem("ci_session");
+              if (typeof window !== "undefined") {
+                cookie.remove("ci_sessions");
+                localStorage.removeItem("tempUserID");
+                localStorage.removeItem("user_id");
+                localStorage.removeItem("_ga");
+                localStorage.removeItem("user_name");
+                localStorage.removeItem("ci_session");
+              }
               router.push("https://test.rentofurniture.com/logout");
             }}>
             Logout

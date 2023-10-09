@@ -6,7 +6,7 @@ import React from "react";
 
 import UserSettings from "@/components/UserSettings/UserSettings";
 
-const UserSettingsPage = () => {
+const Usersettings = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
@@ -17,4 +17,4 @@ const UserSettingsPage = () => {
   );
 };
 
-export default UserSettingsPage;
+export default Usersettings;
