@@ -9,6 +9,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {useRouter} from "next/navigation";
 
 const FAQ = [
   {
@@ -56,29 +57,12 @@ const FAQ = [
 ];
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
-const socialMediaIcons = [
-  {
-    icon: `${IconLink}facebook.svg`,
-    // link: `https://www.facebook.com/sharer.php?u=cityfurnish.com/things/${params.productId}/${params.productName}`,
-  },
-  {
-    icon: `${IconLink}linkedin.svg`,
-    // link: `https://www.linkedin.com/shareArticle?mini=true&url=cityfurnish.com/things/${params.productId}/${params.productName}&title=${title}`,
-  },
-  {
-    icon: `${IconLink}mail.svg`,
-    // link: `https://api.whatsapp.com/send?text=http://cityfurnish.com/things/${params.productId}/${params.productName}`,
-  },
-  {
-    icon: `${IconLink}whatsapp_icon.svg`,
-    // link: `https://api.whatsapp.com/send?text=http://cityfurnish.com/things/${params.productId}/${params.productName}`,
-  },
-];
 
 const MainSection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState();
   const [code, setCode] = useState();
+  const router = useRouter();
 
   const userId = decrypt(getLocalStorage("_ga"));
 
@@ -97,10 +81,29 @@ const MainSection = () => {
   useEffect(() => {
     if (userId) {
       axios.get(baseURL + endPoints.referAFreind(userId)).then(res => {
-        setCode(res?.data?.data?.referral_code);
+        setCode(res?.data?.data);
       });
     }
   }, []);
+
+  const socialMediaIcons = [
+    {
+      icon: `${IconLink}facebook.svg`,
+      link: `https://www.facebook.com/sharer.php?u=https://rentofurniture.com&quote=${code?.url_string}`,
+    },
+    {
+      icon: `${IconLink}linkedin.svg`,
+      link: `https://www.linkedin.com/shareArticle?mini=true&url=https://cityfurnish.com/&title=${code?.url_string}`,
+    },
+    {
+      icon: `${IconLink}mail.svg`,
+      link: `mailto:?subject=Cityfurnish&body=${code?.url_string}`,
+    },
+    {
+      icon: `${IconLink}whatsapp_icon.svg`,
+      link: `https://api.whatsapp.com/send?text=${code?.url_string}`,
+    },
+  ];
 
   const copyToClipboard = text => {
     if (!text) return;
@@ -116,6 +119,15 @@ const MainSection = () => {
     document.body.removeChild(input);
     showToastNotification("Copied to clipboard!", 1);
     input.value = "";
+  };
+
+  const HandleLogin = () => {
+    router.push("https://test.rentofurniture.com/user_sign_up");
+  };
+
+  const shareBtn = link => {
+    const url = link;
+    typeof window !== "undefined" && window?.open(url, "_blank");
   };
 
   return (
@@ -144,7 +156,7 @@ const MainSection = () => {
           {userId ? (
             <div className={styles.referral_wrapper}>
               <div className={styles.referral_section}>
-                <div className={styles.code}>{code}</div>
+                <div className={styles.code}>{code?.referral_code}</div>
                 <div
                   className={styles.copy_section}
                   onClick={e => {
@@ -169,11 +181,12 @@ const MainSection = () => {
                     className="outline-none"
                     onClick={e => {
                       e.preventDefault();
+                      shareBtn(item.link);
                     }}>
                     <img
                       alt={item?.icon}
                       src={item?.icon}
-                      className="cursor-pointer"
+                      className="cursor-pointer pointer-events-none"
                     />
                   </a>
                 ))}
@@ -185,10 +198,15 @@ const MainSection = () => {
             </p>
           )}
           {!userId && (
-            <button className={styles.login_btn}>
-              Login
-              <ForwardArrowWithLine />
-            </button>
+            <a
+              href="https://test.rentofurniture.com/user_sign_up"
+              target="_blank"
+              rel="noopner noreferrer">
+              <button className={styles.login_btn} onClick={HandleLogin}>
+                Login
+                <ForwardArrowWithLine />
+              </button>
+            </a>
           )}
           <div className={styles.how_it_works_button_wrapper}>
             <button
