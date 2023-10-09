@@ -13,10 +13,13 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     typeof window !== "undefined" && window?.location.pathname.split("/")[1];
 
   useEffect(() => {
-    if (url === "referral") {
-      setIsActive("Referral Code");
+    if (typeof window !== "undefined") {
+      if (url === "referral") {
+        setIsActive("Referral Code");
+      }
     }
   }, []);
+
   const firstContainerArr = [
     {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
     {
@@ -65,7 +68,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       }`}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
-        <div className={styles.userNameText}>{userName}</div>
+        <div className={styles.userNameText}>{userName || "Hello User"}</div>
         <h2
           className={`${isOverviewSelected ? "!text-5774AC" : "!text-45454A"} ${
             styles.sectionItems
@@ -107,10 +110,10 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
         styles.secondContainer
       }`}>
       <h2 className={styles.sectionHeadings}>{heading}</h2>
-      {list?.map(i => {
+      {list?.map((i, index) => {
         return (
           <Link
-            key={i?.heading}
+            key={index.toString()}
             href={String(i?.link)}
             className={`${
               isActive === i.heading

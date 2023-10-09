@@ -47,7 +47,6 @@ const ShoppingCartSection = ({setTab}) => {
 
   const [arr, setArr] = useState(cartItems);
   useEffect(() => {
-    console.log("in setArr");
     setArr(cartItems);
   }, [cartItems]);
 
@@ -59,8 +58,6 @@ const ShoppingCartSection = ({setTab}) => {
   const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");
-
-  // console.log(userIdToUse, "user id to use");
 
   const totalAmount = arr.reduce((accumulator, item) => {
     return accumulator + parseInt(item?.price) * item?.quantity;
@@ -118,9 +115,6 @@ const ShoppingCartSection = ({setTab}) => {
   const [itemId, setItemId] = useState();
 
   // const [itemQuantity, setItemQuantity] = useState(1);
-
-  // console.log(modeOfPayment, "modeofpaymentt");
-  // console.log(isMonthly, "monthlyyyyyy");
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -239,7 +233,6 @@ const ShoppingCartSection = ({setTab}) => {
   };
 
   useEffect(() => {
-    console.log("in fetch bill");
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
