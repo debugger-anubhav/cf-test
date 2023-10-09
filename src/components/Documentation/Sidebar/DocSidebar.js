@@ -17,6 +17,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       setIsActive("Referral Code");
     }
   }, []);
+
   const firstContainerArr = [
     {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
     {
