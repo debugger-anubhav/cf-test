@@ -40,8 +40,6 @@ const SavedAddress = ({setTab, editAddress}) => {
     getAllSavedAddresses();
   }, []);
 
-  console.log(addressArray, "adress");
-
   return (
     <div>
       {isModalOpen && (

@@ -5,7 +5,7 @@
   @apply flex mx-8 flex-col;
 }
 .drawer_content {
-  @apply flex flex-col pl-3;
+  @apply flex flex-col;
 }
 .close_icon {
   @apply cursor-pointer mt-[0.5rem];
@@ -33,7 +33,7 @@
   @apply text-20 sm:text-20 font-medium text-45454A;
 }
 .city_container {
-  @apply flex flex-wrap w-full mt-4 lg:mt-8;
+  @apply flex flex-wrap w-full mt-4;
 }
 .city_wrapper {
   @apply flex flex-col xs:w-[110px] w-[81px] cursor-pointer p-2 h-[104px] my-4;
