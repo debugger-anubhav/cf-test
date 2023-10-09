@@ -222,7 +222,8 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
               <Close
                 color={"#000"}
                 size={25}
-                className={styles.close_icon}
+                className={`!mt-[5px] ${styles.close_icon}`}
+
                 // onClick={() => {
                 //   mobileCityDrawer && DrawerName !== "menu"
                 //     ? toggleDrawer("bottom", false)

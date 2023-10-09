@@ -158,6 +158,7 @@ const AddressSection = ({setTab}) => {
   const handlePayment = () => {
     console.log("paymentt");
   };
+
   useEffect(() => {
     getAllSavedAddresses();
   }, []);
