@@ -8,7 +8,6 @@ const YourAddressesSection = () => {
   const [tab, setTab] = useState(0);
   const [id, setId] = useState();
   const editAddress = id => {
-    console.log(id, "id");
     setId(id);
   };
   return (

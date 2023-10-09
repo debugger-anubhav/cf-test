@@ -96,7 +96,6 @@ const ProductDetails = ({params}) => {
   // bottombar visibility conditiionally
   useEffect(() => {
     const handleScroll = () => {
-      // console.log(showBottomBar, "showbotoomm");
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
@@ -348,7 +347,6 @@ const ProductDetails = ({params}) => {
     axios
       .post(baseURL + endPoints.productPage.addToCart, body, headers)
       .then(res => {
-        // console.log(res, "res in add to cart");
         const apiData = res?.data?.data;
         if (!isItemInCart) {
           dispatch(addItemsToCart(apiData));

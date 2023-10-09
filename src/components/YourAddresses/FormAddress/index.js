@@ -19,7 +19,6 @@ import CityDrawer from "../Drawer/CityDrawer";
 const FormAddress = ({setTab, tab, id}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const selectedItem = addressArray.find(item => item.id === id);
-  // console.log(selectedItem, "selcetdeitemmmm");
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -123,7 +122,6 @@ const FormAddress = ({setTab, tab, id}) => {
   };
 
   const handleCityChange = async (val, setFieldValue) => {
-    console.log(val, "valuueeee");
     // setCity(val);
     setFieldValue("city", val);
 
@@ -164,7 +162,6 @@ const FormAddress = ({setTab, tab, id}) => {
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
-              {console.log(formik.values, "formikkkk")}
               <div>
                 <div className={formStyles.form_field}>
                   <p className={formStyles.form_label}>Full name</p>
@@ -255,8 +252,7 @@ const FormAddress = ({setTab, tab, id}) => {
                       }
                     </ErrorMessage>
                   </div>
-                  {/* 
-                  {console.log(values, "valuess")} */}
+
                   {cityDrawerOpen && (
                     <CityDrawer
                       toggleDrawer={toggleDrawer}
