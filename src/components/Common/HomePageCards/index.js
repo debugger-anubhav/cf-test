@@ -82,7 +82,6 @@ const Card = ({
             getSavedItems()
               .then(res => {
                 dispatch(addSaveditems(res?.data?.data));
-                // console.log("hdhwiujw");
                 showToastNotification("Item added to the wishlist", 1);
                 const ids = res?.data?.data.map(item => {
                   return item?.id;

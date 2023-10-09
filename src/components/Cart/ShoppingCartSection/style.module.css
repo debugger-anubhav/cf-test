@@ -149,3 +149,60 @@
 .line_break {
   @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted;
 }
+
+.main_container_skeleton {
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] flex lg:flex-row flex-col  gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between;
+}
+
+.line_break_skeleton {
+  @apply w-full h-[1px] border-t-2 border-[#DDDDDF] border-dotted my-8;
+}
+.skeleton_right_heading {
+  @apply w-3/5 h-6;
+}
+.skeleton_full_width_height {
+  @apply w-full h-full;
+}
+.right_product_wrapper {
+  @apply mt-8 flex;
+}
+.skeleton_product_img {
+  @apply w-[150px] h-[80px] mr-4;
+}
+.skeleton_details {
+  @apply w-full flex flex-col justify-between;
+}
+.skeleton_product_detail_1 {
+  @apply w-3/5 h-4;
+}
+.skeleton_product_detail_2 {
+  @apply w-6 h-8 ml-12;
+}
+.skeleton_product_detail_3 {
+  @apply w-[100px] h-[50px];
+}
+.skeleton_product_detail_4 {
+  @apply w-1/4 h-2 ml-4;
+}
+.skeleton_full_width_height_curve {
+  @apply w-full h-full rounded-md;
+}
+.skeleton_right_div {
+  @apply lg:w-1/2 w-full 4xl:ml-12;
+}
+.first_box_skelton {
+  @apply w-[85%] h-48;
+}
+
+.second_box_skeleton {
+  @apply w-[85%] h-28 my-4;
+}
+.second_box_skeleton_large {
+  @apply w-[85%] h-28;
+}
+.third_box_skeleton {
+  @apply w-[85%] h-14 my-4;
+}
+.extra_lagre_skeleton {
+  @apply 4xl:flex flex-col hidden w-1/2;
+}
