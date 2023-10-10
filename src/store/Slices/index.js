@@ -172,15 +172,13 @@ export const CartPageSlice = createSlice({
     },
     addItemsToCart(state, action) {
       state.cartItems.push(action.payload);
-      // state.totalNumberOfItems += 1;
     },
     deleteItems(state, action) {
       const itemIndex = state.cartItems.findIndex(
         item => item.fc_product.id === action.payload,
       );
       if (itemIndex !== -1) {
-        state.cartItems.splice(itemIndex, 1); // Remove the item from the array
-        // state.totalQuantity -= 1; // Decrease the total quantity
+        state.cartItems.splice(itemIndex, 1);
       }
     },
     getBillDetails(state, action) {
