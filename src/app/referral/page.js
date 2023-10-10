@@ -16,7 +16,7 @@ const ReferFriendPage = () => {
 
   return (
     <div className="large_layout">
-      <ReferAFriend />
+      <ReferAFriend login />
       <Notifications />
     </div>
   );
