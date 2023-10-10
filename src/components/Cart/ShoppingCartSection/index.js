@@ -185,7 +185,6 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
-    // console.log(arr);
 
     if (newQuantity > 0) {
       const headers = {

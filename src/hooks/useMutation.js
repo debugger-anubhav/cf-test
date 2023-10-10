@@ -16,7 +16,6 @@ export const useMutation = (
   return useReactMutation({
     mutationKey: [mutationKey],
     mutationFn: async payload => {
-      // console.log(payload, "payload")
       return baseInstance({
         method,
         url,

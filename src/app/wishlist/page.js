@@ -8,12 +8,16 @@ import loadable from "@loadable/component";
 import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {FooterSkeleton} from "@/components/Common/Footer";
+import {WishListSkeleton} from "@/components/Wishlist/ProductList/ProductList";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
-const ProductList = loadable(() =>
-  import("@/components/Wishlist/ProductList/ProductList"),
+const ProductList = loadable(
+  () => import("@/components/Wishlist/ProductList/ProductList"),
+  {
+    fallback: <WishListSkeleton />,
+  },
 );
 
 export default function Wishlist() {

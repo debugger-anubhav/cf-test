@@ -156,7 +156,6 @@ const AddressSection = ({setTab}) => {
 
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
-    console.log(newPrimaryAddress);
     setPrimaryAddress(newPrimaryAddress);
   };
 

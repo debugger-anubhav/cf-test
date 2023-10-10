@@ -9,6 +9,7 @@ import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 const ProductList = ({params}) => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
@@ -154,3 +155,11 @@ const ProductList = ({params}) => {
 };
 
 export default ProductList;
+
+export const WishListSkeleton = () => {
+  return (
+    <div className="mb-8">
+      <RentFurnitureSkeleton />
+    </div>
+  );
+};

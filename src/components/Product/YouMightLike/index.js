@@ -36,7 +36,6 @@ const YouMightLike = ({heading, isbg, params}) => {
 
   const handleScrolling = () => {
     const slider = scrollerRef1.current;
-    console.log(slider);
     if (!slider) return;
 
     let mouseDown = false;
