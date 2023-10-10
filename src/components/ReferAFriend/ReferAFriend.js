@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Header from "../Common/Header";
 import loadable from "@loadable/component";
 import MenuList from "../Common/MenuList";
@@ -10,7 +10,11 @@ import {getLocalStorage} from "@/constants/constant";
 const Footer = loadable(() => import("@/components/Common/Footer"));
 
 const ReferAFriend = () => {
-  const isLoogedIn = decrypt(getLocalStorage("_ga"));
+  const [isLoogedIn, setisLoogedIn] = useState();
+  const isLoogedInfromStorage = decrypt(getLocalStorage("_ga"));
+  useEffect(() => {
+    setisLoogedIn(isLoogedInfromStorage);
+  }, [isLoogedInfromStorage]);
   return (
     <div>
       <Header />

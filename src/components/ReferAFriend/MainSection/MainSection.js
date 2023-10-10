@@ -62,9 +62,10 @@ const MainSection = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState();
   const [code, setCode] = useState();
+  const [userId, setuserId] = useState();
   const router = useRouter();
 
-  const userId = decrypt(getLocalStorage("_ga"));
+  const userIdFromStorage = decrypt(getLocalStorage("_ga"));
 
   const HandleToggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -79,12 +80,15 @@ const MainSection = () => {
   };
 
   useEffect(() => {
-    if (userId) {
-      axios.get(baseURL + endPoints.referAFreind(userId)).then(res => {
-        setCode(res?.data?.data);
-      });
+    if (userIdFromStorage) {
+      axios
+        .get(baseURL + endPoints.referAFreind(userIdFromStorage))
+        .then(res => {
+          setCode(res?.data?.data);
+        });
     }
-  }, []);
+    setuserId(userIdFromStorage);
+  }, [userIdFromStorage]);
 
   const socialMediaIcons = [
     {
