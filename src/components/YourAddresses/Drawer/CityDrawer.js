@@ -38,12 +38,8 @@ const CityDrawer = ({
       classes={{paper: customStyles.customDrawer}}>
       <div className={`${customStyles.drawer_wrapper} `}>
         {isBottomDrawer ? (
-          <div onClick={toggleDrawer}>
-            <Close
-              className={customStyles.close_icon}
-              color={"#45454A"}
-              size={24}
-            />
+          <div onClick={toggleDrawer} className={customStyles.close_icon}>
+            <Close color={"#45454A"} size={20} />
           </div>
         ) : (
           <div
