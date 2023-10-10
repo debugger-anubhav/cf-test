@@ -15,7 +15,7 @@ import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {cityUrl} from "../../../../appConfig";
+import {cityUrl, razorpayKey} from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -23,11 +23,14 @@ import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
 import {getSavedAddress} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {useRouter} from "next/navigation";
 
 const AddressSection = ({setTab}) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
-  const [gstNumber, setGstNumber] = useState(false);
+  const [haveGstNumber, sethaveGstNumber] = useState(false);
+  const [gstNumber, setGstNumber] = useState("");
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
@@ -39,10 +42,12 @@ const AddressSection = ({setTab}) => {
 
   const cityId = getLocalStorage("cityId");
 
-  const billBreakup = useSelector(state => state.cartPageData.billBreakout);
+  const data = useSelector(state => state.cartPageData);
+  const billBreakup = data.billBreakout;
   const cityName = useSelector(state => state.homePagedata.cityName);
 
-  const addressArray = useSelector(state => state.cartPageData.savedAddresses);
+  const addressArray = data.savedAddresses;
+  console.log(data, "data in address pafe");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -155,9 +160,106 @@ const AddressSection = ({setTab}) => {
     setPrimaryAddress(newPrimaryAddress);
   };
 
-  const handlePayment = () => {
-    console.log("paymentt");
+  const goToPostCheckout = () => {
+    console.log("in pist checkoutt");
+    router.push("/order/confirmation");
   };
+
+  function loadScript(src) {
+    return new Promise(resolve => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handlePayment() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res);
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
+      userId,
+      cityshield: data.isCityShield,
+      cityId,
+      coins: billBreakup?.coinsUsed,
+      couponsCode: data.couponCodeUsed,
+      paymentMode: getLocalStorage("isMonthly") === true ? 0 : 1,
+      addrId: primaryAddress?.id,
+      isOptWhatsapp: whatsappNotification,
+      gstNumber,
+    });
+    console.log(result.data, "make payment api data");
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
+
+    const {
+      id: orderId,
+      currency,
+      amount_due: amount,
+    } = result.data.data.orderData;
+
+    const {dealCodeNumber} = result.data.data.orderData.notes;
+    const {razCustomerId} = result.data.data.userDetails.customerId;
+
+    const options = {
+      key: razorpayKey, // Enter the Key ID generated from the Dashboard
+      amount,
+      currency,
+      name: "Cityfurnish",
+      description: "Test Transaction",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      order_id: orderId,
+      handler: async function (response) {
+        console.log("response:", response);
+        const data = {
+          // orderCreationId: orderId,
+          // razorpayPaymentId: response.razorpay_payment_id,
+          // razorpayOrderId: response.razorpay_order_id,
+          // razorpaySignature: response.razorpay_signature,
+
+          razorpayPaymentId: response.razorpay_payment_id,
+          dealCodeNumber,
+          razorpayOrderId: response.razorpay_order_id,
+          razCustomerId,
+          razorpaySignature: response.razorpay_signature,
+        };
+
+        const result = await axios.post(
+          baseURL + endPoints.addToCart.successPayment,
+          data,
+        );
+        console.log(result, "resuhu");
+        goToPostCheckout();
+        alert(result.data.message);
+      },
+      prefill: {
+        name: "Rupali Thakur",
+        email: "rupalithegreat@gmail.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#EF534E",
+      },
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+  }
 
   useEffect(() => {
     getAllSavedAddresses();
@@ -388,27 +490,28 @@ const AddressSection = ({setTab}) => {
                   <p className={styles.box_desc}>I have a GST number</p>
                 </div>
                 <div className="cursor-pointer">
-                  {gstNumber ? (
+                  {haveGstNumber ? (
                     <FaToggleOn
                       size={29}
                       color={"#5774AC"}
-                      onClick={() => setGstNumber(false)}
+                      onClick={() => sethaveGstNumber(false)}
                     />
                   ) : (
                     <FaToggleOff
                       color={"#E3E1DC"}
                       size={29}
-                      onClick={() => setGstNumber(true)}
+                      onClick={() => sethaveGstNumber(true)}
                     />
                   )}
                 </div>
               </div>
-              {gstNumber && (
+              {haveGstNumber && (
                 <>
                   <div className="mt-4">
                     <input
                       className={styles.form_input}
                       placeholder="GST number"
+                      onChange={e => setGstNumber(e.target.value)}
                     />
                   </div>
                   <div className="mt-4">
@@ -463,8 +566,6 @@ const AddressSection = ({setTab}) => {
             <TotalBreakup
               toggleDrawer={toggleDrawerBreakup}
               open={breakupDrawer}
-              billBreakup={billBreakup}
-              code={"welcome"}
             />
           )}
 
