@@ -1,0 +1,75 @@
+.conatiner_wrapper {
+  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mb-4;
+}
+.container {
+  @apply hidden w-full xs:block;
+}
+.listings {
+  @apply flex w-full items-center flex-wrap list-none;
+}
+.list {
+  @apply mr-1 relative inline-flex items-center font-Poppins;
+}
+.route_text {
+  @apply text-71717A text-14 font-normal font-Poppins leading-6 pr-1;
+}
+
+.heading {
+  @apply font-Poppins text-24 font-medium leading-10 tracking-heading text-45454A pt-4 pb-8;
+}
+.search_container {
+  @apply hidden gap-2 cursor-pointer md:flex border border-ECECEC rounded-xl bg-white w-[35%] px-4 py-3 items-center mb-8;
+}
+.search_input_field {
+  @apply flex w-full outline-none text-14;
+}
+.search_container:hover {
+  @apply border-71717A;
+}
+.tabs_wrapper {
+  @apply flex overflow-x-scroll w-full mb-8;
+}
+.tab_wrapper {
+  @apply border-b-[1px] cursor-pointer;
+}
+.tab_item {
+  @apply pr-6 pb-2 flex w-max font-Poppins text-16 font-medium tracking-[-0.32px];
+}
+.QuesAnsArray_div {
+  @apply flex flex-col gap-6 mb-12;
+}
+.quesWrapper {
+  @apply flex justify-between lg:gap-3 items-center cursor-pointer;
+}
+.ques {
+  @apply font-medium text-14 md:text-16 leading-normal text-45454A tracking-heading font-Poppins;
+}
+.ans {
+  @apply font-normal text-14 md:text-16 leading-normal text-71717A tracking-heading font-Poppins mt-2;
+  /* @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem]; */
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+.ans_open {
+  max-height: fit-content;
+  opacity: 1;
+}
+.bottom_button_wrapper {
+  @apply mb-[88px];
+}
+.bottom_heading {
+  @apply text-45454A font-Poppins text-20 font-medium tracking-[-0.4px] mb-4;
+}
+.button_wrapper {
+  @apply flex gap-4;
+}
+.contact_btn {
+  @apply flex px-8 border-2 rounded-lg border-71717A text-71717A font-Poppins text-16 font-medium gap-2;
+}
+.request_btn {
+  @apply flex px-8 rounded-lg text-222 font-Poppins text-16 font-medium gap-2 bg-F6B704 tracking-[-0.32px] capitalize;
+}

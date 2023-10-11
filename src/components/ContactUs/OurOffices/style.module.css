@@ -1,0 +1,6 @@
+.wrapper {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full my-[88px];
+}
+.heading_container {
+  @apply text-20  text-45454A font-medium leading-[32px] font-Poppins mt-4;
+}
