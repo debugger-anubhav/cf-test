@@ -31,12 +31,12 @@ import {
   getCouponCodeUsed,
   setCityShield,
   setCoinsApplied,
+  // setCoinsUsed,
   // setCityShield,
   //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-// import {useRouter} from "next/navigation";
 
 const ShoppingCartSection = ({setTab}) => {
   const dispatch = useDispatch();
@@ -185,7 +185,6 @@ const ShoppingCartSection = ({setTab}) => {
 
       setArr(updatedItems);
     }
-    // console.log(arr);
 
     if (newQuantity > 0) {
       const headers = {
@@ -227,6 +226,7 @@ const ShoppingCartSection = ({setTab}) => {
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
       dispatch(setCityShield(res?.data?.data?.cityshield));
+      // dispatch(setCoinsUsed(res?.data?.data?.coins));
     } catch (err) {
       console.log(err);
     }

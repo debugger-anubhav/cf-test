@@ -90,6 +90,7 @@ export const endPoints = {
     addAddress: "fc-shipping-addresses/saveUserAddress",
     checkCouponApplicability: "fc-couponcards/checkCoupon",
     makePayment: "fc-payments/makePayment",
+    successPayment: "fc-payments/postPaymentSuccess",
   },
 
   yourAddressPage: {

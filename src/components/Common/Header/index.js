@@ -507,7 +507,6 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
   }, []);
 
   const onSearchClick = item => {
-    // console.log(item?.[0]);
     router.push(`/search/${item}`);
   };
   //

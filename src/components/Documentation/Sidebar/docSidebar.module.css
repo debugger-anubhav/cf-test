@@ -37,3 +37,22 @@
   @apply w-fit pb-[1px] cursor-pointer font-Poppins text-16 font-medium text-[#d96060] leading-3 tracking-0.3 mt-8
   hover:pb-0 hover:text-[#d96060] hover:border-b-[1px] hover:border-b-[#d96060];
 }
+.mainContainer_skeleton {
+  @apply h-full w-full hidden md:flex flex-col pl-[70px] xl:pl-[90px] macbook1:pl-[122px] font-Poppins bg-[#f7f9fc] pb-[150px];
+}
+.logoutTxt_skeleton {
+  @apply w-20 h-4;
+}
+.skeleton_full_width_height {
+  @apply w-full h-full;
+}
+
+.skeleton_menu_docsidebar {
+  @apply w-full mt-2;
+}
+.skeleton_menu_mapping {
+  @apply w-full mt-4 pb-4 mb-6 border-b border-dashed border-DDDDDF mr-14;
+}
+.firstContainer_skeleton_div {
+  @apply w-36 h-2 mb-2;
+}
