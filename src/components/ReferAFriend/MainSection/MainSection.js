@@ -10,6 +10,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
+import {Skeleton} from "@mui/material";
 
 const FAQ = [
   {
@@ -58,11 +59,13 @@ const FAQ = [
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
-const MainSection = () => {
+const MainSection = ({login}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [openIndex, setOpenIndex] = useState();
   const [code, setCode] = useState();
   const [userId, setuserId] = useState();
+  const [loading, setloading] = useState(true);
+
   const router = useRouter();
 
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
@@ -88,6 +91,7 @@ const MainSection = () => {
         });
     }
     setuserId(userIdFromStorage);
+    setloading(false);
   }, [userIdFromStorage]);
 
   const socialMediaIcons = [
@@ -157,7 +161,39 @@ const MainSection = () => {
               ? "Share your Referral via:"
               : "Your unique Referral Code is ready and waiting for you! 🎉"}
           </p>
-          {userId ? (
+
+          {loading && login && (
+            <div className={`${styles.referral_wrapper_skeleton} `}>
+              <div className="flex w-full">
+                <Skeleton
+                  variant="text"
+                  className={styles.skeleton_full_width_height}
+                />
+              </div>
+              <div className=" flex items-center">
+                <div className="w-[60%] h-12 mt-4">
+                  <Skeleton
+                    variant="rectangular"
+                    className={styles.skeleton_full_width_height}
+                  />
+                </div>
+                <div className="flex items-center">
+                  {[1, 2, 3, 4].map(item => {
+                    return (
+                      <div key={item.toString()} className="w-6 h-6 ml-2">
+                        <Skeleton
+                          variant="circular"
+                          className={styles.skeleton_full_width_height}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {userId && (
             <div className={styles.referral_wrapper}>
               <div className={styles.referral_section}>
                 <div className={styles.code}>{code?.referral_code}</div>
@@ -196,12 +232,15 @@ const MainSection = () => {
                 ))}
               </div>
             </div>
-          ) : (
+          )}
+
+          {!login && (
             <p className={styles.detail_desc}>
               Simply log in to access it now:
             </p>
           )}
-          {!userId && (
+
+          {!login && (
             <a
               href="https://test.rentofurniture.com/user_sign_up"
               target="_blank"
@@ -212,6 +251,7 @@ const MainSection = () => {
               </button>
             </a>
           )}
+
           <div className={styles.how_it_works_button_wrapper}>
             <button
               className={styles.how_it_works_button}
