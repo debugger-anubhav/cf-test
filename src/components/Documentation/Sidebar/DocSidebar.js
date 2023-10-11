@@ -4,6 +4,7 @@ import styles from "./docSidebar.module.css";
 import cookie from "react-cookies";
 import {useRouter} from "next/navigation";
 import {getLocalStorage} from "@/constants/constant";
+import {Skeleton} from "@mui/material";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
@@ -131,6 +132,62 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
           </Link>
         );
       })}
+    </div>
+  );
+};
+
+export const DocSidebarSkeleton = () => {
+  return (
+    <div className={`${styles.mainContainer_skeleton}`}>
+      <div className={styles.firstContainer}>
+        <div className={styles.firstContainer_skeleton_div}>
+          <Skeleton
+            variant="text"
+            className={styles.skeleton_full_width_height}
+          />
+        </div>
+        <div className="w-20 h-4">
+          <Skeleton
+            variant="text"
+            className={styles.skeleton_full_width_height}
+          />
+        </div>
+      </div>
+      <div className={styles.skeleton_menu_docsidebar}>
+        <div>
+          {[1, 2].map(ele => {
+            return (
+              <div
+                className={styles.skeleton_menu_mapping}
+                key={ele.toString()}>
+                <div className="w-36 h-2 mb-6">
+                  <Skeleton
+                    variant="text"
+                    className={styles.skeleton_full_width_height}
+                  />
+                </div>
+
+                {[1, 2, 3, 4].map(item => {
+                  return (
+                    <div className="w-36 h-4 mb-3" key={item.toString}>
+                      <Skeleton
+                        variant="text"
+                        className={styles.skeleton_full_width_height}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <div className={styles.logoutTxt_skeleton}>
+        <Skeleton
+          variant="text"
+          className={styles.skeleton_full_width_height}
+        />
+      </div>
     </div>
   );
 };
