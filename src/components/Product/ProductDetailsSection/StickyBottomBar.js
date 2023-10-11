@@ -60,22 +60,22 @@ const StickyBottomBar = ({
         </div>
       </div>
 
-      <button
-        onClick={
-          soldOut
-            ? handleNotifyMe
-            : cartItems?.length === 0
-            ? handleAddToCart
-            : // : isItemInCart
-            // ? () => router.push("/cart")
-            isSameTenure
-            ? handleAddToCart
-            : handleNotSameTenure
-        }
-        style={{marginTop: "0px"}}
-        disabled={isLoading}
-        className={styles.sticky_add_cart_btn}>
-        <a href={isItemInCart && `/cart`}>
+      <a href={isItemInCart && `/cart`}>
+        <button
+          onClick={
+            soldOut
+              ? handleNotifyMe
+              : cartItems?.length === 0
+              ? handleAddToCart
+              : isItemInCart
+              ? handleGoToCart
+              : isSameTenure
+              ? handleAddToCart
+              : handleNotSameTenure
+          }
+          style={{marginTop: "0px"}}
+          disabled={isLoading}
+          className={styles.sticky_add_cart_btn}>
           {isLoading ? (
             <div className={styles.spinner} />
           ) : soldOut ? (
@@ -85,8 +85,8 @@ const StickyBottomBar = ({
           ) : (
             "Add to Cart"
           )}
-        </a>
-      </button>
+        </button>
+      </a>
     </div>
   );
 };
