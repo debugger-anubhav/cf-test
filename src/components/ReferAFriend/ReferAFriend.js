@@ -42,7 +42,7 @@ const ReferAFriend = ({login}) => {
           )}
         </div>
         <div className="w-full">
-          <MainSection />
+          <MainSection login={login} />
         </div>
       </div>
       <Footer />
