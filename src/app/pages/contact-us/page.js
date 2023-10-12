@@ -8,6 +8,7 @@ import loadable from "@loadable/component";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import ContactSection from "@/components/ContactUs/ContactSection";
 import OurOffices from "@/components/ContactUs/OurOffices";
+import HaveQueries from "@/components/ContactUs/HaveQueries";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -21,6 +22,7 @@ const ContactUs = () => {
       <MenuList />
       <ContactSection />
       <OurOffices />
+      <HaveQueries />
       <Footer />
     </div>
   );
