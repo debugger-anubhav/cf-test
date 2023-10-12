@@ -47,7 +47,7 @@ const AddressSection = ({setTab}) => {
   const cityName = useSelector(state => state.homePagedata.cityName);
 
   const addressArray = data.savedAddresses;
-  console.log(data, "data in address pafe");
+  // console.log(data, "data in address pafe");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -156,12 +156,15 @@ const AddressSection = ({setTab}) => {
 
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
+    // console.log(newPrimaryAddress);
     setPrimaryAddress(newPrimaryAddress);
   };
 
-  const goToPostCheckout = () => {
+  const goToPostCheckout = e => {
     console.log("in pist checkoutt");
-    router.push("/order/confirmation");
+    e === 0
+      ? router.push("/order/failure")
+      : router.push("/order/confirmation");
   };
 
   function loadScript(src) {
@@ -225,26 +228,26 @@ const AddressSection = ({setTab}) => {
       order_id: orderId,
       handler: async function (response) {
         console.log("response:", response);
-        const data = {
-          // orderCreationId: orderId,
-          // razorpayPaymentId: response.razorpay_payment_id,
-          // razorpayOrderId: response.razorpay_order_id,
-          // razorpaySignature: response.razorpay_signature,
-
-          razorpayPaymentId: response.razorpay_payment_id,
-          dealCodeNumber,
-          razorpayOrderId: response.razorpay_order_id,
-          razCustomerId,
-          razorpaySignature: response.razorpay_signature,
-        };
-
-        const result = await axios.post(
-          baseURL + endPoints.addToCart.successPayment,
-          data,
-        );
-        console.log(result, "resuhu");
-        goToPostCheckout();
-        alert(result.data.message);
+        if (response.error) {
+          alert("Payment failed. Please try again.");
+          console.log("gduweuheuiw");
+          goToPostCheckout(0);
+          // Redirect to the failure page
+        } else {
+          const data = {
+            razorpayPaymentId: response.razorpay_payment_id,
+            dealCodeNumber,
+            razorpayOrderId: response.razorpay_order_id,
+            razCustomerId,
+            razorpaySignature: response.razorpay_signature,
+          };
+          const result = await axios.post(
+            baseURL + endPoints.addToCart.successPayment,
+            data,
+          );
+          console.log(result, "result");
+          goToPostCheckout(1);
+        }
       },
       prefill: {
         name: "Rupali Thakur",
@@ -258,6 +261,12 @@ const AddressSection = ({setTab}) => {
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
+
+    paymentObject.on("payment.failed", e => {
+      console.log(e);
+      paymentObject.close();
+      goToPostCheckout(0);
+    });
   }
 
   useEffect(() => {
@@ -569,8 +578,11 @@ const AddressSection = ({setTab}) => {
           )}
 
           <button
+            disabled={!primaryAddress}
             onClick={() => handlePayment()}
-            className={`!mt-6 ${otherStyles.proceed_button}`}>
+            className={`!mt-6 ${!primaryAddress && "!cursor-not-allowed"} ${
+              otherStyles.proceed_button
+            }`}>
             Proceed to Payment
             <ArrowForw size={19} color={"#222"} />
           </button>

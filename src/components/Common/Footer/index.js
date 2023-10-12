@@ -72,7 +72,7 @@ const Footer = ({params}) => {
         {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
         {
           text: "Contact US",
-          link: "https://test.rentofurniture.com/pages/contact-us",
+          link: "/pages/contact-us",
         },
       ],
     },
