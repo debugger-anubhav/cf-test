@@ -1,15 +1,26 @@
 import React from "react";
 import styles from "./style.module.css";
-import {ForwardArrow} from "@/assets/icon";
+import {ForwardArrow, Mail} from "@/assets/icon";
 import {useRouter} from "next/navigation";
+import {FaHeadset, FaPhone} from "react-icons/fa6";
 
 function ContactSection() {
   const router = useRouter();
   const data = [
-    {icon: "icon", heading: "Call 080-66084700", subheading: "(09AM to 09PM)"},
-    {icon: "icon", heading: "Mail", subheading: "hello@cityfurnish.com"},
     {
-      icon: "icon",
+      icon: <FaPhone size={30} className={styles.icon_contact} />,
+      heading: "Call 080-66084700",
+      subheading: "(09AM to 09PM)",
+      link: "tel:080-66084700 ",
+    },
+    {
+      icon: <Mail size={30} className={styles.icon_contact} />,
+      heading: "Mail",
+      subheading: "hello@cityfurnish.com",
+      link: "mailto:hello@cityfurnish.com",
+    },
+    {
+      icon: <FaHeadset size={30} className={styles.icon_contact} />,
       heading: "Raise a service request",
       subheading: "Your requests for orders related help",
     },
@@ -40,13 +51,15 @@ function ContactSection() {
           return (
             <div
               key={index.toString()}
-              className={`${index !== data.length - 1 && styles.box_wrapper}`}>
-              <div className={styles.box_img}>{item.icon}</div>
-              <div className={styles.box_heading}>
-                {item.heading}
-                <ForwardArrow size={19.2} color={"#222"} />
-              </div>
-              <div className={styles.box_subheading}>{item.subheading}</div>
+              className={`${index !== data.length - 1 && styles.box_wrapper} `}>
+              <a href={item?.link}>
+                <div className={styles.box_img}>{item.icon}</div>
+                <div className={styles.box_heading}>
+                  {item.heading}
+                  <ForwardArrow size={19.2} color={"#222"} />
+                </div>
+                <div className={styles.box_subheading}>{item.subheading}</div>
+              </a>
             </div>
           );
         })}
