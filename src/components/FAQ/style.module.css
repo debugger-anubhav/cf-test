@@ -15,28 +15,37 @@
 }
 
 .heading {
-  @apply font-Poppins text-24 font-medium leading-10 tracking-heading text-45454A pt-4 pb-8;
+  @apply font-Poppins text-20 md:text-24 font-medium leading-8 md:leading-10 tracking-[-0.4px] md:tracking-[-0.48px] text-45454A pt-4 pb-6 md:pb-8;
 }
-.search_container {
-  @apply hidden gap-2 cursor-pointer md:flex border border-ECECEC rounded-xl bg-white w-[35%] px-4 py-3 items-center mb-8;
+.searchHeading {
+  @apply flex items-center font-Poppins text-20 md:text-24 font-medium leading-8 md:leading-10 tracking-[-0.4px] md:tracking-[-0.48px] text-45454A;
+}
+.searchHeading:hover {
+  @apply underline underline-offset-4;
+}
+.open_searchbar_main {
+  @apply gap-2 cursor-pointer border border-ECECEC rounded-xl bg-white w-full md:w-[35%]  px-4 py-3 items-center mb-6 md:mb-8;
+}
+.search_wrapper {
+  @apply flex;
 }
 .search_input_field {
-  @apply flex w-full outline-none text-14;
+  @apply flex w-full outline-none text-14 pl-2;
 }
-.search_container:hover {
+.open_searchbar_main:hover {
   @apply border-71717A;
 }
 .tabs_wrapper {
-  @apply flex overflow-x-scroll w-full mb-8;
+  @apply flex overflow-x-scroll w-full mb-6 md:mb-8;
 }
 .tab_wrapper {
   @apply border-b-[1px] cursor-pointer;
 }
 .tab_item {
-  @apply pr-6 pb-2 flex w-max font-Poppins text-16 font-medium tracking-[-0.32px];
+  @apply pr-4 md:pr-6 pb-1 md:pb-2 flex w-max font-Poppins text-14 md:text-16 font-medium tracking-[-0.32px];
 }
 .QuesAnsArray_div {
-  @apply flex flex-col gap-6 mb-12;
+  @apply flex flex-col gap-6 mb-8 md:mb-12;
 }
 .quesWrapper {
   @apply flex justify-between lg:gap-3 items-center cursor-pointer;
@@ -59,17 +68,20 @@
   opacity: 1;
 }
 .bottom_button_wrapper {
-  @apply mb-[88px];
+  @apply mb-12 md:mb-[88px];
 }
 .bottom_heading {
-  @apply text-45454A font-Poppins text-20 font-medium tracking-[-0.4px] mb-4;
+  @apply text-45454A font-Poppins text-16 md:text-20 font-medium tracking-[-0.4px] mb-4;
 }
 .button_wrapper {
-  @apply flex gap-4;
+  @apply flex flex-col md:flex-row gap-4;
 }
 .contact_btn {
-  @apply flex px-8 border-2 rounded-lg border-71717A text-71717A font-Poppins text-16 font-medium gap-2;
+  @apply flex px-5 md:px-8 py-3 border-2 w-full rounded-lg border-71717A text-71717A font-Poppins text-14 md:text-16 font-medium gap-2;
 }
 .request_btn {
-  @apply flex px-8 rounded-lg text-222 font-Poppins text-16 font-medium gap-2 bg-F6B704 tracking-[-0.32px] capitalize;
+  @apply flex px-5 md:px-8 py-3 rounded-lg w-full md:w-1/4 mt-3 md:mt-0 text-222 font-Poppins text-14 md:text-16 font-medium gap-2 bg-F6B704 tracking-[-0.32px] capitalize;
+}
+.noDataText {
+  @apply text-9A9AA2 font-Poppins text-14 md:text-16 font-medium leading-6 tracking-[-0.32px];
 }
