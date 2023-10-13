@@ -41,7 +41,7 @@
   border-radius: 0px 8px 8px 0px;
 }
 .card_wrapper {
-  @apply mt-10 flex flex-wrap gap-6 pb-4;
+  @apply mt-10 flex flex-wrap gap-6 pb-4  cxl:grid cxl:grid-cols-3;
 }
 .card {
   @apply p-6 w-[297px] min-w-[297px] h-[138px] rounded-lg border border-DDDDDF hover:p-[23px] hover:border-2 hover:border-5774AC;
