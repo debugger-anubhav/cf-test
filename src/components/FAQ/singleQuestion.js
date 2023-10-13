@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
 const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
+  console.log(isOpen, "single");
   return (
     <>
       <div className="pb-6">
@@ -16,31 +17,39 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
             )}
           </div>
         </div>
-        <div>
+        <div className={`${!isOpen && "hidden"}`}>
           <div
             dangerouslySetInnerHTML={{__html: item?.ans}}
             className={`${styles.ans} ${isOpen && styles.ans_open}`}
           />
-          <ul
-            className={`${styles.ans} ${isOpen && styles.ans_open}`}
-            style={{listStyle: "inside"}}>
-            {item?.isChildren?.map((ele, idx) => (
-              <li key={idx}>{ele}</li>
-            ))}
-          </ul>
-          <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
-            {item?.afterChild}
-          </p>
-          <ul
-            className={`${styles.ans} ${isOpen && styles.ans_open}`}
-            style={{listStyle: "inside"}}>
-            {item?.secondChild?.map((ele, idx) => (
-              <li key={idx}>{ele}</li>
-            ))}
-          </ul>
-          <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
-            {item?.afterSecondChild}
-          </p>
+          {item?.isChildren?.length && (
+            <ul
+              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+              style={{listStyle: "inside"}}>
+              {item?.isChildren?.map((ele, idx) => (
+                <li key={idx}>{ele}</li>
+              ))}
+            </ul>
+          )}
+          {item?.afterChild && (
+            <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
+              {item?.afterChild}
+            </p>
+          )}
+          {item?.secondChild?.length && (
+            <ul
+              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+              style={{listStyle: "inside"}}>
+              {item?.secondChild?.map((ele, idx) => (
+                <li key={idx}>{ele}</li>
+              ))}
+            </ul>
+          )}
+          {item?.afterSecondChild && (
+            <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
+              {item?.afterSecondChild}
+            </p>
+          )}
         </div>
       </div>
     </>

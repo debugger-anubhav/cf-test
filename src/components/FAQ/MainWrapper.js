@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import style from "./style.module.css";
 import {ForwardArrow} from "@/assets/icon";
-import {Button} from "@mui/material";
 import {AiOutlineSearch} from "react-icons/ai";
 import {
   General,
@@ -30,7 +29,7 @@ const MainWrapper = () => {
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
   const [faqData, setFaqData] = useState();
-  const [openIndex, setOpenIndex] = useState();
+  const [openIndex, setOpenIndex] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState();
 
   const sliderRef = useRef(null);
@@ -96,7 +95,7 @@ const MainWrapper = () => {
     } else if (value === 6) {
       setFaqData(ReferralProgram);
     }
-    setOpenIndex();
+    setOpenIndex(0);
   }, [value]);
 
   useEffect(() => {
@@ -147,7 +146,6 @@ const MainWrapper = () => {
       setOpenIndex(index);
     }
   };
-
   return (
     <div className={style.conatiner_wrapper}>
       <div className={style.container}>
@@ -252,23 +250,23 @@ const MainWrapper = () => {
         <div className={style.bottom_heading}>Need to get in touch?</div>
         <div className={style.button_wrapper}>
           <a href="tel:080-66084700" target="_blank" rel="noopener  noreferrer">
-            <Button variant="outlined" className={style.contact_btn}>
+            <button className={style.contact_btn}>
               <FaPhoneAlt
                 size={18}
                 color={"#71717A"}
-                className="pointer-events-none"
+                className="pointer-events-none mr-[10px]"
               />
               080-66084700
-            </Button>
+            </button>
           </a>
-          <Button variant="contained" className={style.request_btn}>
+          <button className={style.request_btn}>
             <FaHeadset
               size={18}
               color={"#222"}
-              className="pointer-events-none"
+              className="pointer-events-none mr-[10px]"
             />
             Raise a service request
-          </Button>
+          </button>
         </div>
       </div>
     </div>
