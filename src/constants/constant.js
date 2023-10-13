@@ -542,7 +542,7 @@ export const FooterItems = [
           head: "Information",
           points: [
             {text: "Blog", link: "https://test.rentofurniture.com/blog/"},
-            {text: "FAQ", link: "https://test.rentofurniture.com/pages/faq"},
+            {text: "FAQ", link: "/pages/faq"},
             {
               text: "Sample Rental Agreement",
               link: "https://test.rentofurniture.com/pages/rentalagreement",
