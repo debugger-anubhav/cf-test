@@ -1,0 +1,37 @@
+.wrapper {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full;
+}
+.container {
+  @apply hidden w-full xs:block;
+}
+.listings {
+  @apply flex w-full items-center flex-wrap list-none;
+}
+.list {
+  @apply mr-1 relative inline-flex items-center font-Poppins;
+}
+.route_text {
+  @apply text-71717A text-14 font-normal font-Poppins leading-6 pr-1;
+}
+.heading_container {
+  @apply text-20 md:text-24 text-45454A font-medium leading-[32px] font-Poppins mt-4;
+}
+.contact_wrapper {
+  @apply mt-8 flex w-full flex-col lg:flex-row;
+}
+.box_wrapper {
+  @apply lg:pr-16 lg:mr-16 lg:border-r-[1px] lg:border-EDEDEE lg:mb-0 mb-5;
+}
+.box_img {
+  @apply bg-[#F6F5F8] rounded-[50%] h-12 w-12 flex items-center justify-center cursor-pointer;
+}
+.box_heading {
+  @apply text-45454A text-20 flex font-medium font-Poppins items-center w-full lg:justify-start justify-between hover:text-5774AC;
+}
+.box_subheading {
+  @apply text-14 text-9A9AA2 font-medium leading-6;
+}
+
+.icon_contact {
+  @apply text-71717A hover:text-5774AC;
+}
