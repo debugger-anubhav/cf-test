@@ -156,12 +156,10 @@ const AddressSection = ({setTab}) => {
 
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
-    // console.log(newPrimaryAddress);
     setPrimaryAddress(newPrimaryAddress);
   };
 
   const goToPostCheckout = e => {
-    console.log("in pist checkoutt");
     e === 0
       ? router.push("/order/failure")
       : router.push("/order/confirmation");
@@ -227,10 +225,8 @@ const AddressSection = ({setTab}) => {
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       order_id: orderId,
       handler: async function (response) {
-        console.log("response:", response);
         if (response.error) {
           alert("Payment failed. Please try again.");
-          console.log("gduweuheuiw");
           goToPostCheckout(0);
           // Redirect to the failure page
         } else {
@@ -263,7 +259,6 @@ const AddressSection = ({setTab}) => {
     paymentObject.open();
 
     paymentObject.on("payment.failed", e => {
-      console.log(e);
       paymentObject.close();
       goToPostCheckout(0);
     });
