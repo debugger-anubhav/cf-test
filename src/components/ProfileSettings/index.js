@@ -7,21 +7,27 @@ import {ArrowForw} from "@/assets/icon";
 import {cityUrl} from "../../../appConfig";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {getLocalStorage} from "@/constants/constant";
-import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 
 const ProfileSettings = () => {
-  const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = userId || tempUserId;
-
-  const [emailState] = useState("Unverified");
+  const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [countdown, setCountdown] = useState(60);
   const [sentOtp, setSentOtp] = useState(false);
+  const [userDetails, setUserDetails] = useState();
+  const [userId, setUserId] = useState();
+
+  const useridFromStorage = decrypt(getLocalStorage("_ga"));
+  useEffect(() => {
+    setUserId(useridFromStorage);
+    fetchUserDetails();
+  }, []);
+
+  console.log(userDetails, "uyguyg");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -45,16 +51,28 @@ const ProfileSettings = () => {
     email: Yup.string().email().required("email is required"),
   });
 
+  useEffect(() => {
+    let timer;
+    if (countdown > 0 && showOtpInput) {
+      timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+    } else if (countdown === 0) {
+      setShowOtpInput(false);
+    }
+    return () => clearTimeout(timer);
+  }, [countdown, showOtpInput]);
+
   const fetchUserDetails = () => {
     axios
-      .get(baseURL + endPoints.profileSettingPage.getUserDetails(userIdToUse))
-      .then(res => console.log(res))
+      .get(baseURL + endPoints.profileSettingPage.getUserDetails(userId))
+      .then(res => {
+        console.log(res);
+        setUserDetails(res?.data?.data);
+        setEmailState(res?.data?.data?.is_verified);
+      })
       .catch(err => console.log(err));
   };
-
-  useEffect(() => {
-    fetchUserDetails();
-  }, []);
 
   const sendOTP = async email => {
     setCountdown(60);
@@ -78,19 +96,25 @@ const ProfileSettings = () => {
   };
 
   const handleOtpVerification = () => {};
-  console.log(countdown, "timerrr");
+  // console.log(countdown, "timerrr");
 
-  useEffect(() => {
-    let timer;
-    if (countdown > 0 && showOtpInput) {
-      timer = setTimeout(() => {
-        setCountdown(countdown - 1);
-      }, 1000);
-    } else if (countdown === 0) {
-      setShowOtpInput(false);
+  const handleUpdateUserDetails = async values => {
+    try {
+      const headers = {
+        id: userId,
+        full_name: values.fullName,
+        phone_no: values.contactNumber,
+        email: values.email,
+        is_verified: emailState,
+      };
+      axios.patch(
+        baseURL + endPoints.profileSettingPage.updateUserDetails,
+        headers,
+      );
+    } catch (err) {
+      console.log(err);
     }
-    return () => clearTimeout(timer);
-  }, [countdown, showOtpInput]);
+  };
 
   return (
     <div className={styles.main_container}>
@@ -106,12 +130,13 @@ const ProfileSettings = () => {
         <div className={styles.form_wrapper}>
           <Formik
             initialValues={{
-              fullName: "",
-              contactNumber: "",
-              email: "",
+              fullName: userDetails?.full_name,
+              contactNumber: userDetails?.phone_no,
+              email: userDetails?.email,
             }}
             validationSchema={validationSchema}
             onSubmit={values => {
+              handleUpdateUserDetails(values);
               // getAllSavedAddresses();
               // resetForm();
             }}>
@@ -123,6 +148,7 @@ const ProfileSettings = () => {
                     <Field
                       type="text"
                       name="fullName"
+                      value={formik.values.fullName}
                       placeholder="Enter your name"
                       className={formStyles.form_input}
                     />
@@ -148,6 +174,7 @@ const ProfileSettings = () => {
                           type="number"
                           // readOnly
                           name="contactNumber"
+                          value={formik.values.contactNumber}
                           placeholder="Enter 10 digit number "
                           className={formStyles.contact_input}
                         />
@@ -168,9 +195,15 @@ const ProfileSettings = () => {
                       Email
                       <span
                         className={`${
-                          emailState === "Verified" ? styles.green : styles.red
+                          userDetails?.is_verified === "Yes"
+                            ? styles.green
+                            : styles.red
                         }`}>
-                        ({emailState})
+                        (
+                        {userDetails?.is_verified === "Yes"
+                          ? "Verified"
+                          : "Unverified"}
+                        )
                       </span>
                     </p>
                     <div className={`${styles.row} ${formStyles.form_input}`}>
@@ -181,7 +214,7 @@ const ProfileSettings = () => {
                         placeholder="Enter your email"
                         className={formStyles.contact_input}
                       />
-                      {emailState === "Unverified" &&
+                      {userDetails?.is_verified === "No" &&
                         (showOtpInput ? (
                           <p className={`${styles.timerTxt}`}>
                             Resend OTP{" "}
@@ -218,7 +251,7 @@ const ProfileSettings = () => {
                           placeholder="Enter the OTP you just received"
                           className={formStyles.contact_input}
                         />
-                        {emailState === "Unverified" && (
+                        {userDetails?.is_verified === "No" && (
                           <p
                             onClick={handleOtpVerification}
                             className={styles.changeTxt}>

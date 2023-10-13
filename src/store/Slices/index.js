@@ -202,6 +202,26 @@ export const CartPageSlice = createSlice({
   },
 });
 
+export const ProfileSettingSlice = createSlice({
+  name: "UserProfileData",
+  initialState: {
+    name: "",
+    contact: "",
+    email: "",
+  },
+  reducers: {
+    getUserName(state, action) {
+      state.name = action.payload;
+    },
+    getUserContact(state, action) {
+      state.contact = action.payload;
+    },
+    getUserEmail(state, action) {
+      state.email = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -252,3 +272,6 @@ export const {
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
   SeoAppliancePageSlice.actions;
+
+export const {getUserName, getUserContact, getUserEmail} =
+  ProfileSettingSlice.actions;
