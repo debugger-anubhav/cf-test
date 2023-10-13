@@ -19,7 +19,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
     },
     {
       item: "Profile Settings",
-      link: "https://test.rentofurniture.com/usersettings",
+      link: "/profilesettings",
     },
     {item: "Logout"},
   ];

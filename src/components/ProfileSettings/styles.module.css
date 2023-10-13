@@ -1,0 +1,40 @@
+.main_container {
+  @apply font-Poppins lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
+}
+.doc_side_bar {
+  @apply hidden lg:block min-w-fit;
+}
+.right_div {
+  @apply w-full pb-6;
+}
+.form_wrapper {
+  @apply mt-[34px];
+}
+.header {
+  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+}
+.line {
+  @apply bg-[#D9D9D9] w-full h-[2px] lg:h-1 mt-2;
+}
+.btn_wrapper {
+  @apply bg-fff py-4 px-4 md:p-0 fixed md:static -mx-4 md:-mx-0 bottom-0 w-full md:!shadow-none;
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.btn {
+  @apply font-medium text-222 md:mt-8 w-full xl:w-[537px] h-[48px] xl:h-[56px] bg-F6B704 rounded-lg flex justify-center items-center px-4 xl:px-8 gap-1 xl:gap-[10px];
+}
+.changeTxt {
+  @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium cursor-pointer min-w-fit;
+}
+.red {
+  @apply text-[#D96060] pl-1;
+}
+.green {
+  @apply text-[#67AF7B] pl-1;
+}
+.row {
+  @apply flex items-center justify-between;
+}
+.timerTxt {
+  @apply text-16 font-medium leading-6 tracking-0.3 text-9A9AA2 min-w-fit;
+}
