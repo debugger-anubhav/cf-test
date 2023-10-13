@@ -61,7 +61,7 @@ const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 const MainSection = ({login}) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [openIndex, setOpenIndex] = useState();
+  const [openIndex, setOpenIndex] = useState(0);
   const [code, setCode] = useState();
   const [userId, setuserId] = useState();
   const [loading, setloading] = useState(true);
