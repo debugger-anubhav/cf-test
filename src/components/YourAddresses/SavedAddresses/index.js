@@ -38,6 +38,12 @@ const SavedAddress = ({setTab, editAddress}) => {
 
   useEffect(() => {
     getAllSavedAddresses();
+    if (typeof window !== "undefined") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   }, []);
 
   return (

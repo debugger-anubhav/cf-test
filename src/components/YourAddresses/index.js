@@ -10,6 +10,7 @@ const YourAddressesSection = () => {
   const editAddress = id => {
     setId(id);
   };
+
   return (
     <div className={styles.main_container}>
       <div className={styles.doc_side_bar}>
