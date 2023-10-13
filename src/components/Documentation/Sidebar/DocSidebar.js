@@ -46,7 +46,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       heading: "Profile Settings",
       link: "https://test.rentofurniture.com/usersettings",
     },
-    {heading: "Your Addresses", link: "/"},
+    {heading: "Your Addresses", link: "/usersettings/yourAddresses"},
   ];
 
   const onLogout = () => {

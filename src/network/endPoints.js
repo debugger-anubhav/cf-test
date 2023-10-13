@@ -98,6 +98,11 @@ export const endPoints = {
     updateAddress: `fc-shipping-addresses/update`,
   },
 
+  profileSettingPage: {
+    getUserDetails: id => `fc-users/getUserDetails?userId=${id}`,
+    updateUserDetails: `/fc-users/updateUserDetails`,
+  },
+
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 
@@ -111,6 +116,5 @@ export const endPoints = {
   categoryStockOutProduct: "fc-products/getOutOfStockProducts",
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
-
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
 };

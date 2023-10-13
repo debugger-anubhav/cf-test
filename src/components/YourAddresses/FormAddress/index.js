@@ -125,10 +125,12 @@ const FormAddress = ({setTab, tab, id}) => {
     // setCity(val);
     setFieldValue("city", val);
 
-    axios
+    await axios
       .get(baseURL + endPoints.cityIdByCityName + val)
       .then(res => setCityId(res?.data?.data?.id))
       .catch(err => console.log(err));
+
+    toggleDrawer();
   };
 
   return (
