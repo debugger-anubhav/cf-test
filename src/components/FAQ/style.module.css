@@ -36,19 +36,19 @@
   @apply border-71717A;
 }
 .tabs_wrapper {
-  @apply flex overflow-x-scroll w-full mb-6 md:mb-8;
+  @apply flex overflow-x-scroll w-full;
+  /* @apply flex overflow-x-scroll w-full mb-6 md:mb-8; */
 }
 .tab_wrapper {
-  @apply border-b-[1px] cursor-pointer;
+  @apply cursor-pointer border-b-[1px] border-b-[#EDEDEE];
 }
 .tab_item {
-  @apply pr-4 md:pr-6 pb-1 md:pb-2 flex w-max font-Poppins text-14 md:text-16 font-medium tracking-[-0.32px];
+  @apply mr-4 md:mr-6 pb-1 md:pb-2 flex w-max font-Poppins text-14 md:text-16 font-medium tracking-[-0.32px];
 }
 .QuesAnsArray_div {
   @apply flex flex-col gap-6 mb-8 md:mb-12;
-  transition:
-    max-height 0.5s ease-in-out,
-    opacity 0.5s ease-in-out;
+  transition: width 3s;
+  transition-delay: 1s;
 }
 .quesWrapper {
   @apply flex justify-between lg:gap-3 items-center cursor-pointer;
@@ -65,6 +65,11 @@
   max-height: 0;
   opacity: 0;
   overflow: hidden;
+}
+.ans_wrapper {
+  transition:
+    max-height 0.5s ease-in-out,
+    opacity 0.5s ease-in-out;
 }
 .ans_open {
   max-height: fit-content;
