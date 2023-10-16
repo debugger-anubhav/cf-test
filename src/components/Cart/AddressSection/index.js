@@ -21,11 +21,11 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
-import {getSavedAddress} from "@/store/Slices";
+import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 
-const AddressSection = ({setTab}) => {
+const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
@@ -109,7 +109,6 @@ const AddressSection = ({setTab}) => {
         const newPrimaryAddress = res?.data?.data.find(
           item => item.city === cityName,
         );
-        console.log(newPrimaryAddress, "primaryy addresss");
         setPrimaryAddress(newPrimaryAddress);
       })
       .catch(err => console.log(err));
@@ -276,7 +275,9 @@ const AddressSection = ({setTab}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.left_div}>
-        <div className={styles.head_div} onClick={() => setTab(0)}>
+        <div
+          className={styles.head_div}
+          onClick={() => dispatch(setShoppingCartTab(0))}>
           <BackIcon size={19} />
           <p className={styles.head}>Go back to checkout</p>
         </div>

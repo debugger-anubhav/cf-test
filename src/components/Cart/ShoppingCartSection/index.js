@@ -31,6 +31,7 @@ import {
   getCouponCodeUsed,
   setCityShield,
   setCoinsApplied,
+  setShoppingCartTab,
   // setCoinsUsed,
   // setCityShield,
   //  getCartItems
@@ -38,7 +39,7 @@ import {
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 
-const ShoppingCartSection = ({setTab}) => {
+const ShoppingCartSection = () => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.cartPageData);
   const cartItems = data.cartItems;
@@ -604,7 +605,7 @@ const ShoppingCartSection = ({setTab}) => {
 
               <button
                 className={styles.proceed_button}
-                onClick={() => setTab(1)}>
+                onClick={() => dispatch(setShoppingCartTab(1))}>
                 Proceed <ArrowForw size={19} color={"#222"} />
               </button>
             </div>

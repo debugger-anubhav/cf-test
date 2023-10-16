@@ -1,20 +1,22 @@
-import React, {useState} from "react";
+import React from "react";
 import AddressSection from "./AddressSection";
 import ShoppingCartSection from "./ShoppingCartSection";
 import styles from "./ShoppingCartSection/style.module.css";
 import {Skeleton} from "@mui/material";
+import {useSelector} from "react-redux";
 
 const CartSection = () => {
-  const [tab, setTab] = useState(0);
+  // const [tab, setTab] = useState(0);
+  const tab = useSelector(state => state.cartPageData.shoppingCartTab);
   return (
     <div>
       {/* <AddressSection /> */}
       {tab === 0 ? (
         <>
-          <ShoppingCartSection setTab={setTab} />
+          <ShoppingCartSection />
         </>
       ) : (
-        <AddressSection setTab={setTab} />
+        <AddressSection />
       )}
     </div>
   );
