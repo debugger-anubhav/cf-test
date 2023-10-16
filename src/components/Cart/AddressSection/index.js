@@ -1,22 +1,22 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
-import otherStyles from "../ShoppingCartSection/style.module.css";
+// import otherStyles from "../ShoppingCartSection/style.module.css";
 import {
-  ArrowForw,
+  // ArrowForw,
   BackIcon,
-  CalendarIcon,
-  InformationIcon,
-  PersonIcon,
-  VerifiedIcon,
-  WhatsappIcon,
+  // CalendarIcon,
+  // InformationIcon,
+  // PersonIcon,
+  // VerifiedIcon,
+  // WhatsappIcon,
 } from "@/assets/icon";
-import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
-import TotalBreakup from "../Drawer/TotalBreakupDrawer";
+// import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
+// import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 // import {Formik, Form, Field, ErrorMessage} from "formik";
 // import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
 import {razorpayKey} from "../../../../appConfig";
-import AddressDrawer from "../Drawer/SaveAddressesDrawer";
+// import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -30,12 +30,12 @@ const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
-  const [haveGstNumber, sethaveGstNumber] = useState(false);
+  // const [haveGstNumber, sethaveGstNumber] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
-
+  console.log(setWhatsappNotification, setGstNumber);
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
   // const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -45,7 +45,7 @@ const AddressSection = () => {
 
   const data = useSelector(state => state.cartPageData);
   const billBreakup = data.billBreakout;
-  const cityName = useSelector(state => state.homePagedata.cityName);
+  // const cityName = useSelector(state => state.homePagedata.cityName);
 
   const addressArray = data.savedAddresses;
   // console.log(data, "data in address pafe");
@@ -93,13 +93,13 @@ const AddressSection = () => {
   //   city: Yup.string().required("City is required"),
   // });
 
-  const toggleDrawerBreakup = () => {
-    setBreakupDrawer(!breakupDrawer);
-  };
+  // const toggleDrawerBreakup = () => {
+  //   setBreakupDrawer(!breakupDrawer);
+  // };
 
-  const toggleAddressDrawer = () => {
-    setAddressDrawer(!addressDrawer);
-  };
+  // const toggleAddressDrawer = () => {
+  //   setAddressDrawer(!addressDrawer);
+  // };
 
   // const getAllSavedAddresses = () => {
   //   axios
@@ -154,11 +154,10 @@ const AddressSection = () => {
   //   }
   // };
 
-  const makeDefaultAddress = id => {
-    const newPrimaryAddress = addressArray.find(item => item.id === id);
-    // console.log(newPrimaryAddress);
-    setPrimaryAddress(newPrimaryAddress);
-  };
+  // const makeDefaultAddress = id => {
+  //   const newPrimaryAddress = addressArray.find(item => item.id === id);
+  //   setPrimaryAddress(newPrimaryAddress);
+  // };
 
   const goToPostCheckout = e => {
     console.log("in pist checkoutt");
@@ -181,93 +180,93 @@ const AddressSection = () => {
     });
   }
 
-  async function handlePayment() {
-    const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js",
-    );
-    console.log(res);
+  // async function handlePayment() {
+  //   const res = await loadScript(
+  //     "https://checkout.razorpay.com/v1/checkout.js",
+  //   );
+  //   console.log(res);
 
-    if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
-      return;
-    }
+  //   if (!res) {
+  //     alert("Razorpay SDK failed to load. Are you online?");
+  //     return;
+  //   }
 
-    const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
-      userId,
-      cityshield: data.isCityShield,
-      cityId,
-      coins: billBreakup?.coinsUsed,
-      couponsCode: data.couponCodeUsed,
-      paymentMode: getLocalStorage("isMonthly") === true ? 0 : 1,
-      addrId: primaryAddress?.id,
-      isOptWhatsapp: whatsappNotification,
-      gstNumber,
-    });
-    console.log(result.data, "make payment api data");
-    if (!result) {
-      alert("Server error. Are you online?");
-      return;
-    }
+  //   const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
+  //     userId,
+  //     cityshield: data.isCityShield,
+  //     cityId,
+  //     coins: billBreakup?.coinsUsed,
+  //     couponsCode: data.couponCodeUsed,
+  //     paymentMode: getLocalStorage("isMonthly") === true ? 0 : 1,
+  //     addrId: primaryAddress?.id,
+  //     isOptWhatsapp: whatsappNotification,
+  //     gstNumber,
+  //   });
+  //   console.log(result.data, "make payment api data");
+  //   if (!result) {
+  //     alert("Server error. Are you online?");
+  //     return;
+  //   }
 
-    const {
-      id: orderId,
-      currency,
-      amount_due: amount,
-    } = result.data.data.orderData;
+  //   const {
+  //     id: orderId,
+  //     currency,
+  //     amount_due: amount,
+  //   } = result.data.data.orderData;
 
-    const {dealCodeNumber} = result.data.data.orderData.notes;
-    const {razCustomerId} = result.data.data.userDetails.customerId;
+  //   const {dealCodeNumber} = result.data.data.orderData.notes;
+  //   const {razCustomerId} = result.data.data.userDetails.customerId;
 
-    const options = {
-      key: razorpayKey, // Enter the Key ID generated from the Dashboard
-      amount,
-      currency,
-      name: "Cityfurnish",
-      description: "Test Transaction",
-      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
-      order_id: orderId,
-      handler: async function (response) {
-        console.log("response:", response);
-        if (response.error) {
-          alert("Payment failed. Please try again.");
-          console.log("gduweuheuiw");
-          goToPostCheckout(0);
-          // Redirect to the failure page
-        } else {
-          const data = {
-            razorpayPaymentId: response.razorpay_payment_id,
-            dealCodeNumber,
-            razorpayOrderId: response.razorpay_order_id,
-            razCustomerId,
-            razorpaySignature: response.razorpay_signature,
-          };
-          const result = await axios.post(
-            baseURL + endPoints.addToCart.successPayment,
-            data,
-          );
-          console.log(result, "result");
-          goToPostCheckout(1);
-        }
-      },
-      prefill: {
-        name: "Rupali Thakur",
-        email: "rupalithegreat@gmail.com",
-        contact: "9999999999",
-      },
-      theme: {
-        color: "#EF534E",
-      },
-    };
+  //   const options = {
+  //     key: razorpayKey, // Enter the Key ID generated from the Dashboard
+  //     amount,
+  //     currency,
+  //     name: "Cityfurnish",
+  //     description: "Test Transaction",
+  //     image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+  //     order_id: orderId,
+  //     handler: async function (response) {
+  //       console.log("response:", response);
+  //       if (response.error) {
+  //         alert("Payment failed. Please try again.");
+  //         console.log("gduweuheuiw");
+  //         goToPostCheckout(0);
+  //         // Redirect to the failure page
+  //       } else {
+  //         const data = {
+  //           razorpayPaymentId: response.razorpay_payment_id,
+  //           dealCodeNumber,
+  //           razorpayOrderId: response.razorpay_order_id,
+  //           razCustomerId,
+  //           razorpaySignature: response.razorpay_signature,
+  //         };
+  //         const result = await axios.post(
+  //           baseURL + endPoints.addToCart.successPayment,
+  //           data,
+  //         );
+  //         console.log(result, "result");
+  //         goToPostCheckout(1);
+  //       }
+  //     },
+  //     prefill: {
+  //       name: "Rupali Thakur",
+  //       email: "rupalithegreat@gmail.com",
+  //       contact: "9999999999",
+  //     },
+  //     theme: {
+  //       color: "#EF534E",
+  //     },
+  //   };
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+  //   const paymentObject = new window.Razorpay(options);
+  //   paymentObject.open();
 
-    paymentObject.on("payment.failed", e => {
-      console.log(e);
-      paymentObject.close();
-      goToPostCheckout(0);
-    });
-  }
+  //   paymentObject.on("payment.failed", e => {
+  //     console.log(e);
+  //     paymentObject.close();
+  //     goToPostCheckout(0);
+  //   });
+  // }
 
   // useEffect(() => {
   //   getAllSavedAddresses();
@@ -283,7 +282,7 @@ const AddressSection = () => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && primaryAddress !== undefined && (
+        {/* {addressArray.length > 0 && primaryAddress !== undefined && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
@@ -318,8 +317,8 @@ const AddressSection = () => {
               </div>
             )}
           </div>
-        )}
-
+        )} */}
+        {/* 
         {addressDrawer && (
           <AddressDrawer
             toggleDrawer={toggleAddressDrawer}
@@ -327,7 +326,7 @@ const AddressSection = () => {
             makeDefaultAddress={id => makeDefaultAddress(id)}
             primaryAddress={primaryAddress}
           />
-        )}
+        )} */}
 
         <div className={styles.new_address_wrapper}>
           <h2 className={styles.new_add_head}>Add new address</h2>
@@ -468,7 +467,7 @@ const AddressSection = () => {
           </Formik> */}
         </div>
       </div>
-      <div className={styles.right_div}>
+      {/* <div className={styles.right_div}>
         <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
             <div className={styles.box_wrapper_left_div}>
@@ -589,7 +588,7 @@ const AddressSection = () => {
             <ArrowForw size={19} color={"#222"} />
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
