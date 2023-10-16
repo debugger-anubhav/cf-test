@@ -469,7 +469,7 @@ const AddressSection = () => {
         </div>
       </div>
       <div className={styles.right_div}>
-        {/* <div className="gap-6 flex flex-col">
+        <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
             <div className={styles.box_wrapper_left_div}>
               <WhatsappIcon size={24} color={"#48A06C"} />
@@ -550,7 +550,7 @@ const AddressSection = () => {
               few documents for KYC
             </p>
           </div>
-        </div> */}
+        </div>
 
         {/* <div>
           <div
