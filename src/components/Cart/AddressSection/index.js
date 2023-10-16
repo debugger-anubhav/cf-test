@@ -1,143 +1,143 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
-// import otherStyles from "../ShoppingCartSection/style.module.css";
+import otherStyles from "../ShoppingCartSection/style.module.css";
 import {
-  // ArrowForw,
+  ArrowForw,
   BackIcon,
-  // CalendarIcon,
-  // InformationIcon,
-  // PersonIcon,
-  // VerifiedIcon,
-  // WhatsappIcon,
+  CalendarIcon,
+  InformationIcon,
+  PersonIcon,
+  VerifiedIcon,
+  WhatsappIcon,
 } from "@/assets/icon";
-// import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
-// import TotalBreakup from "../Drawer/TotalBreakupDrawer";
-// import {Formik, Form, Field, ErrorMessage} from "formik";
-// import * as Yup from "yup";
+import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
+import TotalBreakup from "../Drawer/TotalBreakupDrawer";
+import {Formik, Form, Field, ErrorMessage} from "formik";
+import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {razorpayKey} from "../../../../appConfig";
-// import AddressDrawer from "../Drawer/SaveAddressesDrawer";
+import {cityUrl, razorpayKey} from "../../../../appConfig";
+import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
-import {setShoppingCartTab} from "@/store/Slices";
-// import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
-  // const [haveGstNumber, sethaveGstNumber] = useState(false);
+  const [haveGstNumber, sethaveGstNumber] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
-  console.log(setWhatsappNotification, setGstNumber);
+
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
-  // const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  // const userIdToUse = userId || tempUserId;
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");
 
   const data = useSelector(state => state.cartPageData);
   const billBreakup = data.billBreakout;
-  // const cityName = useSelector(state => state.homePagedata.cityName);
+  const cityName = useSelector(state => state.homePagedata.cityName);
 
   const addressArray = data.savedAddresses;
   // console.log(data, "data in address pafe");
 
-  // const validationSchema = Yup.object({
-  //   fullName: Yup.string().required("Full name is required"),
-  //   contactNumber: Yup.string()
-  //     .test(
-  //       "no-spaces-special-characters",
-  //       "Please enter a valid 10 digit phone number without spaces or special characters",
-  //       value => {
-  //         return /^[0-9]*$/.test(value);
-  //       },
-  //     )
-  //     .min(
-  //       10,
-  //       "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
-  //     )
-  //     .max(
-  //       10,
-  //       "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
-  //     )
-  //     .required("Contact number is required"),
+  const validationSchema = Yup.object({
+    fullName: Yup.string().required("Full name is required"),
+    contactNumber: Yup.string()
+      .test(
+        "no-spaces-special-characters",
+        "Please enter a valid 10 digit phone number without spaces or special characters",
+        value => {
+          return /^[0-9]*$/.test(value);
+        },
+      )
+      .min(
+        10,
+        "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
+      )
+      .max(
+        10,
+        "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
+      )
+      .required("Contact number is required"),
 
-  //   landmark: Yup.string(),
-  //   address: Yup.string().required("Address is required"),
-  //   postalCode: Yup.string()
-  //     .test(
-  //       "no-spaces-special-characters",
-  //       "Please enter a valid 6 digit postal code without spaces or special characters",
-  //       value => {
-  //         // Check if the value contains any spaces or special characters
-  //         return /^[0-9]*$/.test(value);
-  //       },
-  //     )
-  //     .min(
-  //       6,
-  //       "Oops! Looks like you missed some digits. Please 6 digit postal code.",
-  //     )
-  //     .max(
-  //       6,
-  //       "Oops! It looks like you entered too many digits. Please enter valid 6 digit postal code.",
-  //     )
-  //     .required("Postal code is required"),
-  //   city: Yup.string().required("City is required"),
-  // });
+    landmark: Yup.string(),
+    address: Yup.string().required("Address is required"),
+    postalCode: Yup.string()
+      .test(
+        "no-spaces-special-characters",
+        "Please enter a valid 6 digit postal code without spaces or special characters",
+        value => {
+          // Check if the value contains any spaces or special characters
+          return /^[0-9]*$/.test(value);
+        },
+      )
+      .min(
+        6,
+        "Oops! Looks like you missed some digits. Please 6 digit postal code.",
+      )
+      .max(
+        6,
+        "Oops! It looks like you entered too many digits. Please enter valid 6 digit postal code.",
+      )
+      .required("Postal code is required"),
+    city: Yup.string().required("City is required"),
+  });
 
-  // const toggleDrawerBreakup = () => {
-  //   setBreakupDrawer(!breakupDrawer);
-  // };
+  const toggleDrawerBreakup = () => {
+    setBreakupDrawer(!breakupDrawer);
+  };
 
-  // const toggleAddressDrawer = () => {
-  //   setAddressDrawer(!addressDrawer);
-  // };
+  const toggleAddressDrawer = () => {
+    setAddressDrawer(!addressDrawer);
+  };
 
-  // const getAllSavedAddresses = () => {
-  //   axios
-  //     .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
-  //     .then(res => {
-  //       dispatch(getSavedAddress(res?.data?.data));
+  const getAllSavedAddresses = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+      .then(res => {
+        dispatch(getSavedAddress(res?.data?.data));
 
-  //       const newPrimaryAddress = res?.data?.data.find(
-  //         item => item.city === cityName,
-  //       );
-  //       setPrimaryAddress(newPrimaryAddress);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
+        const newPrimaryAddress = res?.data?.data.find(
+          item => item.city === cityName,
+        );
+        console.log(newPrimaryAddress, "primaryy addresss");
+        setPrimaryAddress(newPrimaryAddress);
+      })
+      .catch(err => console.log(err));
+  };
 
-  // const saveUserAddress = async values => {
-  //   return new Promise((resolve, reject) => {
-  //     const headers = {
-  //       userId: parseInt(userIdToUse),
-  //       fullName: values.fullName,
-  //       address: values.address,
-  //       landMark: values.landmark,
-  //       postalCode: parseInt(values.postalCode),
-  //       city: values.city,
-  //       cityId,
-  //       phoneNo: parseInt(values.contactNumber),
-  //     };
+  const saveUserAddress = async values => {
+    return new Promise((resolve, reject) => {
+      const headers = {
+        userId: parseInt(userIdToUse),
+        fullName: values.fullName,
+        address: values.address,
+        landMark: values.landmark,
+        postalCode: parseInt(values.postalCode),
+        city: values.city,
+        cityId,
+        phoneNo: parseInt(values.contactNumber),
+      };
 
-  //     axios
-  //       .post(baseURL + endPoints.addToCart.addAddress, headers)
-  //       .then(response => {
-  //         resolve("hii");
-  //       })
-  //       .catch(error => {
-  //         console.error("API error:", error);
-  //       });
-  //   });
-  // };
+      axios
+        .post(baseURL + endPoints.addToCart.addAddress, headers)
+        .then(response => {
+          resolve("hii");
+        })
+        .catch(error => {
+          console.error("API error:", error);
+        });
+    });
+  };
 
   // const makeAddressPrimary = async id => {
   //   try {
@@ -154,10 +154,11 @@ const AddressSection = () => {
   //   }
   // };
 
-  // const makeDefaultAddress = id => {
-  //   const newPrimaryAddress = addressArray.find(item => item.id === id);
-  //   setPrimaryAddress(newPrimaryAddress);
-  // };
+  const makeDefaultAddress = id => {
+    const newPrimaryAddress = addressArray.find(item => item.id === id);
+    // console.log(newPrimaryAddress);
+    setPrimaryAddress(newPrimaryAddress);
+  };
 
   const goToPostCheckout = e => {
     console.log("in pist checkoutt");
@@ -180,109 +181,109 @@ const AddressSection = () => {
     });
   }
 
-  // async function handlePayment() {
-  //   const res = await loadScript(
-  //     "https://checkout.razorpay.com/v1/checkout.js",
-  //   );
-  //   console.log(res);
+  async function handlePayment() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res);
 
-  //   if (!res) {
-  //     alert("Razorpay SDK failed to load. Are you online?");
-  //     return;
-  //   }
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
 
-  //   const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
-  //     userId,
-  //     cityshield: data.isCityShield,
-  //     cityId,
-  //     coins: billBreakup?.coinsUsed,
-  //     couponsCode: data.couponCodeUsed,
-  //     paymentMode: getLocalStorage("isMonthly") === true ? 0 : 1,
-  //     addrId: primaryAddress?.id,
-  //     isOptWhatsapp: whatsappNotification,
-  //     gstNumber,
-  //   });
-  //   console.log(result.data, "make payment api data");
-  //   if (!result) {
-  //     alert("Server error. Are you online?");
-  //     return;
-  //   }
+    const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
+      userId,
+      cityshield: data.isCityShield,
+      cityId,
+      coins: billBreakup?.coinsUsed,
+      couponsCode: data.couponCodeUsed,
+      paymentMode: getLocalStorage("isMonthly") === true ? 0 : 1,
+      addrId: primaryAddress?.id,
+      isOptWhatsapp: whatsappNotification,
+      gstNumber,
+    });
+    console.log(result.data, "make payment api data");
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
 
-  //   const {
-  //     id: orderId,
-  //     currency,
-  //     amount_due: amount,
-  //   } = result.data.data.orderData;
+    const {
+      id: orderId,
+      currency,
+      amount_due: amount,
+    } = result.data.data.orderData;
 
-  //   const {dealCodeNumber} = result.data.data.orderData.notes;
-  //   const {razCustomerId} = result.data.data.userDetails.customerId;
+    const {dealCodeNumber} = result.data.data.orderData.notes;
+    const {razCustomerId} = result.data.data.userDetails.customerId;
 
-  //   const options = {
-  //     key: razorpayKey, // Enter the Key ID generated from the Dashboard
-  //     amount,
-  //     currency,
-  //     name: "Cityfurnish",
-  //     description: "Test Transaction",
-  //     image: "https://rentofurniture.com/images/logo/FaviconNew.png",
-  //     order_id: orderId,
-  //     handler: async function (response) {
-  //       console.log("response:", response);
-  //       if (response.error) {
-  //         alert("Payment failed. Please try again.");
-  //         console.log("gduweuheuiw");
-  //         goToPostCheckout(0);
-  //         // Redirect to the failure page
-  //       } else {
-  //         const data = {
-  //           razorpayPaymentId: response.razorpay_payment_id,
-  //           dealCodeNumber,
-  //           razorpayOrderId: response.razorpay_order_id,
-  //           razCustomerId,
-  //           razorpaySignature: response.razorpay_signature,
-  //         };
-  //         const result = await axios.post(
-  //           baseURL + endPoints.addToCart.successPayment,
-  //           data,
-  //         );
-  //         console.log(result, "result");
-  //         goToPostCheckout(1);
-  //       }
-  //     },
-  //     prefill: {
-  //       name: "Rupali Thakur",
-  //       email: "rupalithegreat@gmail.com",
-  //       contact: "9999999999",
-  //     },
-  //     theme: {
-  //       color: "#EF534E",
-  //     },
-  //   };
+    const options = {
+      key: razorpayKey, // Enter the Key ID generated from the Dashboard
+      amount,
+      currency,
+      name: "Cityfurnish",
+      description: "Test Transaction",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      order_id: orderId,
+      handler: async function (response) {
+        console.log("response:", response);
+        if (response.error) {
+          alert("Payment failed. Please try again.");
+          console.log("gduweuheuiw");
+          goToPostCheckout(0);
+          // Redirect to the failure page
+        } else {
+          const data = {
+            razorpayPaymentId: response.razorpay_payment_id,
+            dealCodeNumber,
+            razorpayOrderId: response.razorpay_order_id,
+            razCustomerId,
+            razorpaySignature: response.razorpay_signature,
+          };
+          const result = await axios.post(
+            baseURL + endPoints.addToCart.successPayment,
+            data,
+          );
+          console.log(result, "result");
+          goToPostCheckout(1);
+        }
+      },
+      prefill: {
+        name: "Rupali Thakur",
+        email: "rupalithegreat@gmail.com",
+        contact: "9999999999",
+      },
+      theme: {
+        color: "#EF534E",
+      },
+    };
 
-  //   const paymentObject = new window.Razorpay(options);
-  //   paymentObject.open();
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
 
-  //   paymentObject.on("payment.failed", e => {
-  //     console.log(e);
-  //     paymentObject.close();
-  //     goToPostCheckout(0);
-  //   });
-  // }
+    paymentObject.on("payment.failed", e => {
+      console.log(e);
+      paymentObject.close();
+      goToPostCheckout(0);
+    });
+  }
 
-  // useEffect(() => {
-  //   getAllSavedAddresses();
-  // }, []);
+  useEffect(() => {
+    getAllSavedAddresses();
+  }, []);
 
   return (
     <div className={styles.main_container}>
       <div className={styles.left_div}>
         <div
           className={styles.head_div}
-          onClick={() => dispatch(setShoppingCartTab(0))}>
+          onClick={() => dispatch(setShoppingCartTab(1))}>
           <BackIcon size={19} />
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {/* {addressArray.length > 0 && primaryAddress !== undefined && (
+        {addressArray.length > 0 && primaryAddress !== undefined && (
           <div
             className={styles.saved_address_div}
             onClick={toggleAddressDrawer}>
@@ -317,8 +318,8 @@ const AddressSection = () => {
               </div>
             )}
           </div>
-        )} */}
-        {/* 
+        )}
+
         {addressDrawer && (
           <AddressDrawer
             toggleDrawer={toggleAddressDrawer}
@@ -326,12 +327,12 @@ const AddressSection = () => {
             makeDefaultAddress={id => makeDefaultAddress(id)}
             primaryAddress={primaryAddress}
           />
-        )} */}
+        )}
 
         <div className={styles.new_address_wrapper}>
           <h2 className={styles.new_add_head}>Add new address</h2>
 
-          {/* <Formik
+          <Formik
             initialValues={{
               fullName: "",
               contactNumber: "",
@@ -343,7 +344,7 @@ const AddressSection = () => {
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
               await saveUserAddress(values);
-              // getAllSavedAddresses();
+              getAllSavedAddresses();
               resetForm();
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             }}>
@@ -464,10 +465,10 @@ const AddressSection = () => {
                 </div>
               </Form>
             )}
-          </Formik> */}
+          </Formik>
         </div>
       </div>
-      {/* <div className={styles.right_div}>
+      <div className={styles.right_div}>
         <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
             <div className={styles.box_wrapper_left_div}>
@@ -588,7 +589,7 @@ const AddressSection = () => {
             <ArrowForw size={19} color={"#222"} />
           </button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
