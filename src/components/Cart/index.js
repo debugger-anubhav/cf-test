@@ -1,23 +1,23 @@
 import React from "react";
 import AddressSection from "./AddressSection";
-import ShoppingCartSection from "./ShoppingCartSection";
+// import ShoppingCartSection from "./ShoppingCartSection";
 import styles from "./ShoppingCartSection/style.module.css";
 import {Skeleton} from "@mui/material";
-import {useSelector} from "react-redux";
+// import {useSelector} from "react-redux";
 
 const CartSection = () => {
   // const [tab, setTab] = useState(0);
-  const tab = useSelector(state => state.cartPageData.shoppingCartTab);
+  // const tab = useSelector(state => state.cartPageData.shoppingCartTab);
   return (
     <div>
       {/* <AddressSection /> */}
-      {tab === 0 ? (
+      {/* {tab === 0 ? (
         <>
           <ShoppingCartSection />
         </>
       ) : (
-        <AddressSection />
-      )}
+        )} */}
+      <AddressSection />
     </div>
   );
 };
