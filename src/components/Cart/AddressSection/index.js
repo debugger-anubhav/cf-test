@@ -12,10 +12,10 @@ import {
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
-import {Formik, Form, Field, ErrorMessage} from "formik";
-import * as Yup from "yup";
+// import {Formik, Form, Field, ErrorMessage} from "formik";
+// import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {cityUrl, razorpayKey} from "../../../../appConfig";
+import {razorpayKey} from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -23,7 +23,7 @@ import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
 import {setShoppingCartTab} from "@/store/Slices";
 // import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
-import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {decrypt} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 
 const AddressSection = () => {
@@ -38,8 +38,8 @@ const AddressSection = () => {
 
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = userId || tempUserId;
+  // const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  // const userIdToUse = userId || tempUserId;
 
   const cityId = getLocalStorage("cityId");
 
@@ -50,48 +50,48 @@ const AddressSection = () => {
   const addressArray = data.savedAddresses;
   // console.log(data, "data in address pafe");
 
-  const validationSchema = Yup.object({
-    fullName: Yup.string().required("Full name is required"),
-    contactNumber: Yup.string()
-      .test(
-        "no-spaces-special-characters",
-        "Please enter a valid 10 digit phone number without spaces or special characters",
-        value => {
-          return /^[0-9]*$/.test(value);
-        },
-      )
-      .min(
-        10,
-        "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
-      )
-      .max(
-        10,
-        "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
-      )
-      .required("Contact number is required"),
+  // const validationSchema = Yup.object({
+  //   fullName: Yup.string().required("Full name is required"),
+  //   contactNumber: Yup.string()
+  //     .test(
+  //       "no-spaces-special-characters",
+  //       "Please enter a valid 10 digit phone number without spaces or special characters",
+  //       value => {
+  //         return /^[0-9]*$/.test(value);
+  //       },
+  //     )
+  //     .min(
+  //       10,
+  //       "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
+  //     )
+  //     .max(
+  //       10,
+  //       "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
+  //     )
+  //     .required("Contact number is required"),
 
-    landmark: Yup.string(),
-    address: Yup.string().required("Address is required"),
-    postalCode: Yup.string()
-      .test(
-        "no-spaces-special-characters",
-        "Please enter a valid 6 digit postal code without spaces or special characters",
-        value => {
-          // Check if the value contains any spaces or special characters
-          return /^[0-9]*$/.test(value);
-        },
-      )
-      .min(
-        6,
-        "Oops! Looks like you missed some digits. Please 6 digit postal code.",
-      )
-      .max(
-        6,
-        "Oops! It looks like you entered too many digits. Please enter valid 6 digit postal code.",
-      )
-      .required("Postal code is required"),
-    city: Yup.string().required("City is required"),
-  });
+  //   landmark: Yup.string(),
+  //   address: Yup.string().required("Address is required"),
+  //   postalCode: Yup.string()
+  //     .test(
+  //       "no-spaces-special-characters",
+  //       "Please enter a valid 6 digit postal code without spaces or special characters",
+  //       value => {
+  //         // Check if the value contains any spaces or special characters
+  //         return /^[0-9]*$/.test(value);
+  //       },
+  //     )
+  //     .min(
+  //       6,
+  //       "Oops! Looks like you missed some digits. Please 6 digit postal code.",
+  //     )
+  //     .max(
+  //       6,
+  //       "Oops! It looks like you entered too many digits. Please enter valid 6 digit postal code.",
+  //     )
+  //     .required("Postal code is required"),
+  //   city: Yup.string().required("City is required"),
+  // });
 
   const toggleDrawerBreakup = () => {
     setBreakupDrawer(!breakupDrawer);
@@ -115,29 +115,29 @@ const AddressSection = () => {
   //     .catch(err => console.log(err));
   // };
 
-  const saveUserAddress = async values => {
-    return new Promise((resolve, reject) => {
-      const headers = {
-        userId: parseInt(userIdToUse),
-        fullName: values.fullName,
-        address: values.address,
-        landMark: values.landmark,
-        postalCode: parseInt(values.postalCode),
-        city: values.city,
-        cityId,
-        phoneNo: parseInt(values.contactNumber),
-      };
+  // const saveUserAddress = async values => {
+  //   return new Promise((resolve, reject) => {
+  //     const headers = {
+  //       userId: parseInt(userIdToUse),
+  //       fullName: values.fullName,
+  //       address: values.address,
+  //       landMark: values.landmark,
+  //       postalCode: parseInt(values.postalCode),
+  //       city: values.city,
+  //       cityId,
+  //       phoneNo: parseInt(values.contactNumber),
+  //     };
 
-      axios
-        .post(baseURL + endPoints.addToCart.addAddress, headers)
-        .then(response => {
-          resolve("hii");
-        })
-        .catch(error => {
-          console.error("API error:", error);
-        });
-    });
-  };
+  //     axios
+  //       .post(baseURL + endPoints.addToCart.addAddress, headers)
+  //       .then(response => {
+  //         resolve("hii");
+  //       })
+  //       .catch(error => {
+  //         console.error("API error:", error);
+  //       });
+  //   });
+  // };
 
   // const makeAddressPrimary = async id => {
   //   try {
@@ -332,7 +332,7 @@ const AddressSection = () => {
         <div className={styles.new_address_wrapper}>
           <h2 className={styles.new_add_head}>Add new address</h2>
 
-          <Formik
+          {/* <Formik
             initialValues={{
               fullName: "",
               contactNumber: "",
@@ -465,7 +465,7 @@ const AddressSection = () => {
                 </div>
               </Form>
             )}
-          </Formik>
+          </Formik> */}
         </div>
       </div>
       <div className={styles.right_div}>
