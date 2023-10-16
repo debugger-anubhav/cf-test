@@ -22,7 +22,8 @@ export const HowItWorks = [
       "Submit the necessary documents to complete the KYC process (don't worry, it's completely safe).",
       "Get the delivery and assembly done on the promised date.",
     ],
-    afterChild: "To know more please <b>click here</b>",
+    afterChild:
+      'To know more please <b><a href="https://rentofurniture.com/pages/how-it-works">click here</a></b>',
   },
   {
     que: "Can I get the actual product picture?",

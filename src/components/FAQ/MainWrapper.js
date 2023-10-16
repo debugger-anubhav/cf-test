@@ -95,7 +95,6 @@ const MainWrapper = () => {
     } else if (value === 6) {
       setFaqData(ReferralProgram);
     }
-    setOpenIndex(0);
   }, [value]);
 
   useEffect(() => {
@@ -202,25 +201,29 @@ const MainWrapper = () => {
       </div>
 
       {!searchKeyword && (
-        <div ref={sliderRef} className={style.tabs_wrapper}>
-          {Data?.map((item, index) => {
-            return (
-              <div
-                key={index}
-                className={`${style.tab_wrapper} ${
-                  value === index ? "border-b-[#9A9AA2]" : "border-b-[#EDEDEE]"
-                }`}>
-                <div
-                  className={`${style.tab_item} ${
-                    value === index ? "text-5774AC" : "text-45454A"
-                  }`}
-                  onClick={() => setValue(index)}>
-                  {item}
+        <>
+          <div ref={sliderRef} className={style.tabs_wrapper}>
+            {Data?.map((item, index) => {
+              return (
+                <div key={index} className={`${style.tab_wrapper}`}>
+                  <div
+                    className={`${style.tab_item} ${
+                      value === index
+                        ? "text-5774AC border-b-[1px] border-b-[#9A9AA2]"
+                        : "text-45454A"
+                    }`}
+                    onClick={() => {
+                      setValue(index);
+                      setOpenIndex(0);
+                    }}>
+                    {item}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+          <div className="border-b-[#EDEDEE] h-[1px]"></div>
+        </>
       )}
 
       <div className={style.QuesAnsArray_div}>

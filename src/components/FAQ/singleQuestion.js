@@ -17,7 +17,7 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
             )}
           </div>
         </div>
-        <div className={`${!isOpen && "hidden"}`}>
+        <div className={`${!isOpen && "hidden"} ${styles.ans_wrapper}`}>
           <div
             dangerouslySetInnerHTML={{__html: item?.ans}}
             className={`${styles.ans} ${isOpen && styles.ans_open}`}
@@ -32,9 +32,10 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
             </ul>
           )}
           {item?.afterChild && (
-            <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
-              {item?.afterChild}
-            </p>
+            <div
+              dangerouslySetInnerHTML={{__html: item?.afterChild}}
+              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+            />
           )}
           {item?.secondChild?.length && (
             <ul
