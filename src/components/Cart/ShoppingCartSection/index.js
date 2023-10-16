@@ -602,7 +602,9 @@ const ShoppingCartSection = ({setTab}) => {
                 />
               )}
 
-              <button className={styles.proceed_button} onClick={setTab}>
+              <button
+                className={styles.proceed_button}
+                onClick={() => setTab(1)}>
                 Proceed <ArrowForw size={19} color={"#222"} />
               </button>
             </div>

@@ -11,10 +11,10 @@ const CartSection = () => {
       {/* <AddressSection /> */}
       {tab === 0 ? (
         <>
-          <ShoppingCartSection setTab={() => setTab(1)} />
+          <ShoppingCartSection setTab={setTab} />
         </>
       ) : (
-        <AddressSection setTab={() => setTab(0)} />
+        <AddressSection setTab={setTab} />
       )}
     </div>
   );

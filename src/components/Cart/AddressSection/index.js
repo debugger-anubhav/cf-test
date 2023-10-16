@@ -276,7 +276,7 @@ const AddressSection = ({setTab}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.left_div}>
-        <div className={styles.head_div} onClick={() => setTab()}>
+        <div className={styles.head_div} onClick={() => setTab(0)}>
           <BackIcon size={19} />
           <p className={styles.head}>Go back to checkout</p>
         </div>
