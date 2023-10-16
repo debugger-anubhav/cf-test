@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "./styles.module.css";
 import otherStyles from "../ShoppingCartSection/style.module.css";
 import {
@@ -21,7 +21,8 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
-import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
+import {setShoppingCartTab} from "@/store/Slices";
+// import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 
@@ -100,19 +101,19 @@ const AddressSection = () => {
     setAddressDrawer(!addressDrawer);
   };
 
-  const getAllSavedAddresses = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
-      .then(res => {
-        dispatch(getSavedAddress(res?.data?.data));
+  // const getAllSavedAddresses = () => {
+  //   axios
+  //     .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+  //     .then(res => {
+  //       dispatch(getSavedAddress(res?.data?.data));
 
-        const newPrimaryAddress = res?.data?.data.find(
-          item => item.city === cityName,
-        );
-        setPrimaryAddress(newPrimaryAddress);
-      })
-      .catch(err => console.log(err));
-  };
+  //       const newPrimaryAddress = res?.data?.data.find(
+  //         item => item.city === cityName,
+  //       );
+  //       setPrimaryAddress(newPrimaryAddress);
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   const saveUserAddress = async values => {
     return new Promise((resolve, reject) => {
@@ -268,9 +269,9 @@ const AddressSection = () => {
     });
   }
 
-  useEffect(() => {
-    getAllSavedAddresses();
-  }, []);
+  // useEffect(() => {
+  //   getAllSavedAddresses();
+  // }, []);
 
   return (
     <div className={styles.main_container}>
@@ -343,7 +344,7 @@ const AddressSection = () => {
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
               await saveUserAddress(values);
-              getAllSavedAddresses();
+              // getAllSavedAddresses();
               resetForm();
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             }}>
