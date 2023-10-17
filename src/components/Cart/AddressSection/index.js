@@ -475,7 +475,7 @@ const AddressSection = () => {
               <WhatsappIcon size={24} color={"#48A06C"} />
               <p className={styles.box_desc}>Opt for Whatsapp notification</p>
             </div>
-            {/* <div className="cursor-pointer">
+            <div className="cursor-pointer">
               {whatsappNotification ? (
                 <FaToggleOn
                   size={29}
@@ -489,7 +489,7 @@ const AddressSection = () => {
                   onClick={() => setWhatsappNotification(true)}
                 />
               )}
-            </div> */}
+            </div>
           </div>
 
           <div className={styles.box_wrapper}>
