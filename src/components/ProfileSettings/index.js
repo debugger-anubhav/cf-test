@@ -19,26 +19,16 @@ const ProfileSettings = () => {
   const [countdown, setCountdown] = useState(60);
   const [sentOtp, setSentOtp] = useState(false);
   const [userDetails, setUserDetails] = useState();
-  const [userId, setUserId] = useState();
-
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
+  const [userId, setUserId] = useState(useridFromStorage);
 
   useEffect(() => {
     setUserId(useridFromStorage);
   }, [useridFromStorage]);
 
-  // useEffect(() => {
-  //   setUserId(useridFromStorage);
-  //   console.log(userId, "user idd");
-  // }, [useridFromStorage]);
-
   useEffect(() => {
-    setTimeout(() => {
-      fetchUserDetails();
-    }, 3000);
+    fetchUserDetails();
   }, []);
-
-  console.log(userDetails, "uyguyg");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -75,10 +65,9 @@ const ProfileSettings = () => {
   }, [countdown, showOtpInput]);
 
   const fetchUserDetails = () => {
-    console.log(userId, "userIddd");
     try {
       const response = axios.get(
-        baseURL + `fc-users/getUserDetails?userId=${userId}`,
+        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
       );
       setUserDetails(response?.data?.data);
       setEmailState(response?.data?.data?.is_verified);
