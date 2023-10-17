@@ -471,7 +471,7 @@ const AddressSection = () => {
       <div className={styles.right_div}>
         <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
-            <div className={styles.box_wrapper_left_div}>
+            {/* <div className={styles.box_wrapper_left_div}>
               <WhatsappIcon size={24} color={"#48A06C"} />
               <p className={styles.box_desc}>Opt for Whatsapp notification</p>
             </div>
@@ -489,7 +489,7 @@ const AddressSection = () => {
                   onClick={() => setWhatsappNotification(true)}
                 />
               )}
-            </div>
+            </div> */}
           </div>
 
           <div className={styles.box_wrapper}>
