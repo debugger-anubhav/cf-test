@@ -7,7 +7,7 @@ import {
   CalendarIcon,
   InformationIcon,
   PersonIcon,
-  VerifiedIcon,
+  // VerifiedIcon,
   WhatsappIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
@@ -24,6 +24,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
+import {MdOutlineVerified} from "react-icons/md";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
@@ -499,7 +500,7 @@ const AddressSection = () => {
                   <span className={styles.hash}>#</span>
                   <p className={styles.box_desc}>I have a GST number</p>
                 </div>
-                {/* <div className="cursor-pointer">
+                <div className="cursor-pointer">
                   {haveGstNumber ? (
                     <FaToggleOn
                       size={29}
@@ -513,7 +514,7 @@ const AddressSection = () => {
                       onClick={() => sethaveGstNumber(true)}
                     />
                   )}
-                </div> */}
+                </div>
               </div>
               {haveGstNumber && (
                 <>
@@ -544,7 +545,7 @@ const AddressSection = () => {
           </div>
 
           <div className={styles.kyc_info}>
-            {/* <VerifiedIcon className={styles.verified_icon} /> */}
+            <MdOutlineVerified className={styles.verified_icon} />
             <p className={styles.desc}>
               Once the order has been placed, you might be required to share a
               few documents for KYC

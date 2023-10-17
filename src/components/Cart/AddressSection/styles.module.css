@@ -103,7 +103,7 @@
   @apply min-w-[16px] xl:min-w-[24px] mt-1;
 }
 .verified_icon {
-  @apply min-w-[18px] xl:min-w-[24px] h-6;
+  @apply min-w-[18px] xl:min-w-[22px] h-6;
 }
 .not_belong_wrapper {
   @apply mb-3 rounded-lg bg-[#FFEFEF] border border-DDDDDF px-2 py-1 w-fit;
