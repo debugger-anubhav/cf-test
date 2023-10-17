@@ -470,8 +470,8 @@ const AddressSection = () => {
       </div>
       <div className={styles.right_div}>
         <div className="gap-6 flex flex-col">
-          <div className={styles.box_wrapper}>
-            {/* <div className={styles.box_wrapper_left_div}>
+          {/* <div className={styles.box_wrapper}>
+            <div className={styles.box_wrapper_left_div}>
               <WhatsappIcon size={24} color={"#48A06C"} />
               <p className={styles.box_desc}>Opt for Whatsapp notification</p>
             </div>
@@ -489,7 +489,7 @@ const AddressSection = () => {
                   onClick={() => setWhatsappNotification(true)}
                 />
               )}
-            </div> */}
+            </div>
           </div>
 
           <div className={styles.box_wrapper}>
@@ -499,7 +499,7 @@ const AddressSection = () => {
                   <span className={styles.hash}>#</span>
                   <p className={styles.box_desc}>I have a GST number</p>
                 </div>
-                {/* <div className="cursor-pointer">
+                <div className="cursor-pointer">
                   {haveGstNumber ? (
                     <FaToggleOn
                       size={29}
@@ -513,9 +513,9 @@ const AddressSection = () => {
                       onClick={() => sethaveGstNumber(true)}
                     />
                   )}
-                </div> */}
+                </div>
               </div>
-              {/* {haveGstNumber && (
+              {haveGstNumber && (
                 <>
                   <div className="mt-4">
                     <input
@@ -531,9 +531,9 @@ const AddressSection = () => {
                     />
                   </div>
                 </>
-              )} */}
+              )}
             </div>
-          </div>
+          </div> */}
 
           <div className={styles.tenure_info}>
             <CalendarIcon className={styles.calendar} />
