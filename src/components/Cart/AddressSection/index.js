@@ -469,14 +469,14 @@ const AddressSection = () => {
         </div>
       </div>
       <div className={styles.right_div}>
-        <div className="gap-6 flex flex-col">
+        {/* <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
             <div className={styles.box_wrapper_left_div}>
               <WhatsappIcon size={24} color={"#48A06C"} />
               <p className={styles.box_desc}>Opt for Whatsapp notification</p>
             </div>
             <div className="cursor-pointer">
-              {/* {whatsappNotification ? (
+              {whatsappNotification ? (
                 <FaToggleOn
                   size={29}
                   color={"#5774AC"}
@@ -488,7 +488,7 @@ const AddressSection = () => {
                   size={29}
                   onClick={() => setWhatsappNotification(true)}
                 />
-              )} */}
+              )}
             </div>
           </div>
 
@@ -500,7 +500,7 @@ const AddressSection = () => {
                   <p className={styles.box_desc}>I have a GST number</p>
                 </div>
                 <div className="cursor-pointer">
-                  {/* {haveGstNumber ? (
+                  {haveGstNumber ? (
                     <FaToggleOn
                       size={29}
                       color={"#5774AC"}
@@ -512,10 +512,10 @@ const AddressSection = () => {
                       size={29}
                       onClick={() => sethaveGstNumber(true)}
                     />
-                  )} */}
+                  )}
                 </div>
               </div>
-              {/* {haveGstNumber && (
+              {haveGstNumber && (
                 <>
                   <div className="mt-4">
                     <input
@@ -531,7 +531,7 @@ const AddressSection = () => {
                     />
                   </div>
                 </>
-              )} */}
+              )}
             </div>
           </div>
 
@@ -550,7 +550,7 @@ const AddressSection = () => {
               few documents for KYC
             </p>
           </div>
-        </div>
+        </div> */}
 
         <div>
           <div
