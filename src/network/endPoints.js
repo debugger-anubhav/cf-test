@@ -99,7 +99,7 @@ export const endPoints = {
   },
 
   profileSettingPage: {
-    getUserDetails: id => `fc-users/getUserDetails?userId=${id}`,
+    getUserDetails: userId => `fc-users/getUserDetails?userId=${userId}`,
     updateUserDetails: `/fc-users/updateUserDetails`,
   },
 

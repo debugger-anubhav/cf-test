@@ -22,9 +22,20 @@ const ProfileSettings = () => {
   const [userId, setUserId] = useState();
 
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
+
   useEffect(() => {
     setUserId(useridFromStorage);
-    fetchUserDetails();
+  }, [useridFromStorage]);
+
+  // useEffect(() => {
+  //   setUserId(useridFromStorage);
+  //   console.log(userId, "user idd");
+  // }, [useridFromStorage]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetchUserDetails();
+    }, 3000);
   }, []);
 
   console.log(userDetails, "uyguyg");
@@ -64,14 +75,16 @@ const ProfileSettings = () => {
   }, [countdown, showOtpInput]);
 
   const fetchUserDetails = () => {
-    axios
-      .get(baseURL + endPoints.profileSettingPage.getUserDetails(userId))
-      .then(res => {
-        console.log(res);
-        setUserDetails(res?.data?.data);
-        setEmailState(res?.data?.data?.is_verified);
-      })
-      .catch(err => console.log(err));
+    console.log(userId, "userIddd");
+    try {
+      const response = axios.get(
+        baseURL + `fc-users/getUserDetails?userId=${userId}`,
+      );
+      setUserDetails(response?.data?.data);
+      setEmailState(response?.data?.data?.is_verified);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const sendOTP = async email => {
@@ -142,13 +155,14 @@ const ProfileSettings = () => {
             }}>
             {formik => (
               <Form className={styles.form_wrapper}>
+                {console.log(formik.values, "foormi.valkues")}
                 <div>
                   <div className={formStyles.form_field}>
                     <p className={formStyles.form_label}>Full name</p>
                     <Field
                       type="text"
                       name="fullName"
-                      value={formik.values.fullName}
+                      // value={formik.values.fullName}
                       placeholder="Enter your name"
                       className={formStyles.form_input}
                     />
