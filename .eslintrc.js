@@ -26,6 +26,6 @@ module.exports = {
   plugins: ["react", "prettier"],
   rules: {
     "react/prop-types": "off",
-    "no-unused-vars": "off",
+    // "no-unused-vars": "off",
   },
 };

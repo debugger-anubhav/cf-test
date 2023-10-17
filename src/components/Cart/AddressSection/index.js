@@ -7,7 +7,6 @@ import {
   CalendarIcon,
   InformationIcon,
   PersonIcon,
-  // VerifiedIcon,
   WhatsappIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
