@@ -188,7 +188,7 @@ const Footer = ({params}) => {
                 {" "}
                 <a
                   href={`tel:${str.contact}`}
-                  target="_blank"
+                  target="_self"
                   rel="noopener  noreferrer">
                   {str.contact}
                 </a>
@@ -230,7 +230,7 @@ const Footer = ({params}) => {
             <p className={styles.contact}>
               <a
                 href={`tel:${str.contact}`}
-                target="_blank"
+                target="_self"
                 rel="noopener  noreferrer">
                 {str.contact}
               </a>
