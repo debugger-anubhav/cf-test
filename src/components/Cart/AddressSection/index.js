@@ -472,7 +472,7 @@ const AddressSection = () => {
         <div className="gap-6 flex flex-col">
           <div className={styles.box_wrapper}>
             <div className={styles.box_wrapper_left_div}>
-              {/* <WhatsappIcon size={24} color={"#48A06C"} /> */}
+              <WhatsappIcon size={24} color={"#48A06C"} />
               <p className={styles.box_desc}>Opt for Whatsapp notification</p>
             </div>
             {/* <div className="cursor-pointer">
@@ -536,7 +536,7 @@ const AddressSection = () => {
           </div>
 
           <div className={styles.tenure_info}>
-            {/* <CalendarIcon className={styles.calendar} /> */}
+            <CalendarIcon className={styles.calendar} />
             <p className={styles.desc}>
               Your rental payment and tenure will begin from the date of
               delivery
