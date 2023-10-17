@@ -536,7 +536,7 @@ const AddressSection = () => {
           </div> */}
 
           <div className={styles.tenure_info}>
-            <CalendarIcon className={styles.calendar} />
+            {/* <CalendarIcon className={styles.calendar} /> */}
             <p className={styles.desc}>
               Your rental payment and tenure will begin from the date of
               delivery
@@ -544,7 +544,7 @@ const AddressSection = () => {
           </div>
 
           <div className={styles.kyc_info}>
-            <VerifiedIcon className={styles.verified_icon} />
+            {/* <VerifiedIcon className={styles.verified_icon} /> */}
             <p className={styles.desc}>
               Once the order has been placed, you might be required to share a
               few documents for KYC
