@@ -26,7 +26,7 @@
 /* CustomSelect.module.css */
 .custom-select {
   @apply bg-white  rounded-xl;
-  max-width: 502px;
+  /* max-width: 502px; */
 }
 
 .selected-option {
@@ -52,7 +52,7 @@
   color: #5774ac;
 }
 .optionsActive {
-  @apply md:block hidden;
+  @apply md:block;
 }
 
 .ddArrow {
