@@ -95,7 +95,7 @@ const Footer = ({params}) => {
       points: [
         {
           text: "Privacy Policy",
-          link: "https://test.rentofurniture.com/pages/privacy-policy",
+          link: "/pages/privacy-policy",
         },
         {
           text: "Terms & Conditions",

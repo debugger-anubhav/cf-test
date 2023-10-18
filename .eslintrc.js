@@ -27,5 +27,6 @@ module.exports = {
   rules: {
     "react/prop-types": "off",
     // "no-unused-vars": "off",
+    "react/display-name": "off",
   },
 };
