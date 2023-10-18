@@ -117,4 +117,6 @@ export const endPoints = {
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
+
+  enquiry: "fc-bulk-orders/submitEnquiryForm",
 };
