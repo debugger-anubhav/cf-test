@@ -12,13 +12,14 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
+// import withAuth from "@/components/Hoc/withAuth";
 
 const ProfileSettings = () => {
   const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [countdown, setCountdown] = useState(60);
   const [sentOtp, setSentOtp] = useState(false);
-  const [userDetails, setUserDetails] = useState();
+  const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
   const [userId, setUserId] = useState(useridFromStorage);
 
@@ -64,17 +65,21 @@ const ProfileSettings = () => {
     return () => clearTimeout(timer);
   }, [countdown, showOtpInput]);
 
-  const fetchUserDetails = () => {
+  const fetchUserDetails = async () => {
+    console.log(useridFromStorage, "uiwii");
     try {
-      const response = axios.get(
+      const response = await axios.get(
         baseURL + endPoints.profileSettingPage.getUserDetails(userId),
       );
-      setUserDetails(response?.data?.data);
+      console.log(response?.data?.data, "ressss");
+      setUserDetails({...response?.data?.data});
       setEmailState(response?.data?.data?.is_verified);
     } catch (err) {
       console.log(err);
     }
   };
+
+  // console.log(userDetails, "userrrr");
 
   const sendOTP = async email => {
     setCountdown(60);
@@ -98,12 +103,11 @@ const ProfileSettings = () => {
   };
 
   const handleOtpVerification = () => {};
-  // console.log(countdown, "timerrr");
 
   const handleUpdateUserDetails = async values => {
     try {
       const headers = {
-        id: userId,
+        id: parseInt(userId),
         full_name: values.fullName,
         phone_no: values.contactNumber,
         email: values.email,
@@ -132,10 +136,11 @@ const ProfileSettings = () => {
         <div className={styles.form_wrapper}>
           <Formik
             initialValues={{
-              fullName: userDetails?.full_name,
-              contactNumber: userDetails?.phone_no,
-              email: userDetails?.email,
+              fullName: userDetails?.full_name || "",
+              contactNumber: userDetails?.phone_no || "",
+              email: userDetails?.email || "",
             }}
+            enableReinitialize={true}
             validationSchema={validationSchema}
             onSubmit={values => {
               handleUpdateUserDetails(values);
@@ -144,7 +149,6 @@ const ProfileSettings = () => {
             }}>
             {formik => (
               <Form className={styles.form_wrapper}>
-                {console.log(formik.values, "foormi.valkues")}
                 <div>
                   <div className={formStyles.form_field}>
                     <p className={formStyles.form_label}>Full name</p>
@@ -218,6 +222,7 @@ const ProfileSettings = () => {
                         className={formStyles.contact_input}
                       />
                       {userDetails?.is_verified === "No" &&
+                        formik.values.email !== "" &&
                         (showOtpInput ? (
                           <p className={`${styles.timerTxt}`}>
                             Resend OTP{" "}
@@ -228,6 +233,7 @@ const ProfileSettings = () => {
                         ) : (
                           <p
                             onClick={() => {
+                              console.log(formik, "formiikk");
                               sendOTP(formik.values.email);
                             }}
                             className={styles.changeTxt}>
