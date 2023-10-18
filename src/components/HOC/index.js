@@ -9,21 +9,16 @@ export function AuthProvider(WrappedComponent) {
     const [isAuthenticated, setisAuthenticated] = useState(null);
 
     useEffect(() => {
-      console.log(login, isAuthenticated, "statusssssssss");
-    }, [login, isAuthenticated]);
-    useEffect(() => {
       if (login) {
         setisAuthenticated(true);
       } else {
         setisAuthenticated(false);
       }
-      console.log("first");
     }, [login]);
 
     useEffect(() => {
       if (!isAuthenticated && !login) {
-        console.log(isAuthenticated, "isAuthenticated");
-        router.push("/");
+        router.push("https://test.rentofurniture.com/user_sign_up");
       }
     }, [isAuthenticated]);
 
