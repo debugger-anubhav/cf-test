@@ -2,10 +2,11 @@ import React from "react";
 import styles from "./style.module.css";
 import {ForwardArrow} from "@/assets/icon";
 import string from "@/constants/Constant.json";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 
 const PrivacyPolicyData = () => {
   const router = useRouter();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
