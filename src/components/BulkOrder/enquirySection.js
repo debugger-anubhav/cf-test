@@ -5,7 +5,11 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {cityUrl} from "../../../appConfig";
 import DropDown from "../Documentation/DropDown/DropDown";
-import {ReCAPTCHA} from "react-google-recaptcha";
+import ReCAPTCHA from "react-google-recaptcha";
+import {ForwardArrowWithLine} from "@/assets/icon";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -57,6 +61,29 @@ const EnquirySection = () => {
     console.log(value);
   };
 
+  const handleSubmit = async values => {
+    console.log(values, "values");
+    return new Promise((resolve, reject) => {
+      const payload = {
+        name: values.fullName,
+        email: values.email,
+        phone: values.contactNumber,
+        city: values.city,
+        message: values.message,
+        quantity: selectedOptionPer.value,
+      };
+
+      axios
+        .post(baseURL + endPoints.enquiry, payload)
+        .then(response => {
+          console.log(response, "res");
+        })
+        .catch(error => {
+          console.error("API error:", error);
+        });
+    });
+  };
+
   return (
     <>
       <div className={styles.right_div}>
@@ -76,12 +103,11 @@ const EnquirySection = () => {
               email: "",
               city: "",
               message: "",
-              quantity: "",
+              quantity: selectedOptionPer.value,
             }}
             validationSchema={validationSchema}
-            onSubmit={values => {
-              // getAllSavedAddresses();
-              // resetForm();
+            onSubmit={async values => {
+              await handleSubmit(values);
             }}>
             {formik => (
               <Form className={styles.form_wrapper}>
@@ -209,16 +235,23 @@ const EnquirySection = () => {
                     </ErrorMessage>
                   </div>
 
-                  <div className="w-[500px] h-[200px]">
+                  <div className={styles.recaptcha}>
                     <ReCAPTCHA
-                      sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      sitekey="'6LfkkNoUAAAAAFU8Z7C4zFRH0HhozEWJq-mELpfG"
+                      // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                       onChange={handleRecaptchaVerify}
                     />
                   </div>
 
                   <div className={styles.btn_wrapper}>
-                    <button type="submit" className={styles.btn}>
+                    <button type="submit" className={styles.submit_btn_web}>
                       Submit
+                    </button>
+                    <button type="submit" className={styles.submit_btn_mobile}>
+                      Save & Proceed
+                      <ForwardArrowWithLine
+                        className={styles.submit_btn_icon}
+                      />
                     </button>
                   </div>
                 </div>

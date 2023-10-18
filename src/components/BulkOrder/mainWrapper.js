@@ -6,15 +6,15 @@ import EnquirySection from "./enquirySection";
 import {AboutUs} from "@/assets/images";
 
 const data = [
-  `${AboutUs}/cityfurnish-culture-1.webp`,
-  `${AboutUs}/cityfurnish-culture-6.webp`,
-  `${AboutUs}/cityfurnish-culture-9.webp`,
-  `${AboutUs}/cityfurnish-culture-3.webp`,
-  `${AboutUs}/cityfurnish-culture-7.webp`,
-  `${AboutUs}/cityfurnish-culture-5.webp`,
-  `${AboutUs}/cityfurnish-culture-2.webp`,
-  `${AboutUs}/cityfurnish-culture-4.webp`,
-  `${AboutUs}/cityfurnish-culture-8.webp`,
+  `${AboutUs}/cp_7.webp`,
+  `${AboutUs}/cp_3.webp`,
+  `${AboutUs}/cp_1.webp`,
+  `${AboutUs}/cp_8.webp`,
+  `${AboutUs}/cp_6.webp`,
+  `${AboutUs}/cp_9.webp`,
+  `${AboutUs}/cp_2.webp`,
+  `${AboutUs}/cp_4.webp`,
+  `${AboutUs}/cp_5.webp`,
 ];
 
 const MainWrapper = () => {
@@ -55,24 +55,42 @@ const MainWrapper = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
-        {data?.map((ele, index) => {
-          return (
-            <div
-              key={index}
-              className={
-                index === 0 || index === 6 || index === 7
-                  ? "col-span-2"
-                  : "col-span-1"
-              }>
-              <img
-                alt={ele}
-                className="w-full h-[300px] object-cover"
-                src={ele}
-                loading="lazy"></img>
-            </div>
-          );
-        })}
+      <div>
+        <p className={style.our_project_heading}>Our Projects</p>
+        <div className={style.our_project_image_wrapper}>
+          {data?.map((ele, index) => {
+            return (
+              <>
+                <div
+                  key={index}
+                  className={`${
+                    index === 0 || index === 6 || index === 7
+                      ? "col-span-2"
+                      : "col-span-1"
+                  } ${style.our_project_web}`}>
+                  <img
+                    alt={ele}
+                    className={style.our_project_image}
+                    src={ele}
+                    loading="lazy"></img>
+                </div>
+                <div
+                  key={index}
+                  className={`${
+                    index === 2 || index === 3 || index === 8
+                      ? "col-span-2"
+                      : "col-span-1"
+                  } ${style.our_project_mobile}`}>
+                  <img
+                    alt={ele}
+                    className={style.our_project_image}
+                    src={ele}
+                    loading="lazy"></img>
+                </div>
+              </>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

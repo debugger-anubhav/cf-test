@@ -10,6 +10,8 @@ const DropDown = ({
   setIsDDOpen,
   setSelectedOption,
   isOpen,
+  maxWidth,
+  optionsActive,
 }) => {
   const handleOptionClick = option => {
     setSelectedOption(option);
@@ -18,7 +20,11 @@ const DropDown = ({
   return (
     <div
       className={`${styles["custom-select"]} ${isOpen ? "active" : ""}`}
-      style={isOpen ? {boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"} : {}}>
+      // style={isOpen ? {boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)"} : {}}
+      style={{
+        maxWidth,
+        boxShadow: isOpen ? "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" : "",
+      }}>
       <div
         className={`${styles["selected-option"]} ${
           isOpen ? "border-none" : "!border-[#DDDDDF]"
@@ -40,7 +46,7 @@ const DropDown = ({
           )}
         </div>
       </div>
-      <ul className={`${isOpen ? styles.optionsActive : styles.options}  `}>
+      <ul className={`${isOpen ? optionsActive : styles.options}  `}>
         {options?.map((option, index) => (
           <li
             className={`${styles.option} ${

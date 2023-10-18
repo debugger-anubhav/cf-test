@@ -7,40 +7,46 @@ const data = [
   {
     title: "Hospitality",
     desc: "Furniture for Hotels and Restaurants",
-    img: `${AboutUs}/cityfurnish-culture-1.webp`,
+    img: `${AboutUs}/co_living_co_working.webp`,
   },
   {
     title: "Office",
     desc: "Office Furniture & Other Equipments",
-    img: `${AboutUs}/cityfurnish-culture-2.webp`,
+    img: `${AboutUs}/office.webp`,
   },
   {
     title: "Co-living & co-working",
     desc: "Furniture for Co-work & Co- living",
-    img: `${AboutUs}/cityfurnish-culture-3.webp`,
+    img: `${AboutUs}/hospitality.webp`,
   },
 ];
 
 const NeedsSection = () => {
   return (
     <>
-      <div>Fulfilling all your corporate needs</div>
+      <div className={style.need_heading}>
+        Fulfilling all your corporate needs
+      </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className={style.need_img_wrapper}>
         {data?.map((ele, idx) => {
           return (
             <div key={idx}>
-              <img src={ele?.img} alt={ele?.title} />
-              <div>{ele?.title}</div>
-              <div>{ele?.desc}</div>
+              <img
+                src={ele?.img}
+                alt={ele?.title}
+                className={style.need_image}
+              />
+              <div className={style.need_img_title}>{ele?.title}</div>
+              <div className={style.need_img_desc}>{ele?.desc}</div>
             </div>
           );
         })}
       </div>
 
       <div>
-        <div>Custom Made Products</div>
-        <p>
+        <div className={style.custom_heading}>Custom Made Products</div>
+        <p className={style.custom_desc}>
           Need something unique? We will make it for you. We provide custom made
           furniture as per the demand of your project
         </p>
