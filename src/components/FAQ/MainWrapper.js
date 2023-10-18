@@ -252,7 +252,7 @@ const MainWrapper = () => {
       <div className={style.bottom_button_wrapper}>
         <div className={style.bottom_heading}>Need to get in touch?</div>
         <div className={style.button_wrapper}>
-          <a href="tel:080-66084700" target="_blank" rel="noopener  noreferrer">
+          <a href="tel:080-66084700" target="_self" rel="noopener  noreferrer">
             <button className={style.contact_btn}>
               <FaPhoneAlt
                 size={18}

@@ -9,7 +9,17 @@ import {Skeleton} from "@mui/material";
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
-  const userName = getLocalStorage("user_name");
+  const [userName, setUserName] = useState(null);
+
+  const getUserNameFromLocalStorage = () => {
+    const storedUserName = getLocalStorage("user_name");
+    setUserName(storedUserName || "Hello User");
+  };
+
+  useEffect(() => {
+    getUserNameFromLocalStorage();
+  }, []);
+
   const url =
     typeof window !== "undefined" && window?.location.pathname.split("/")[1];
 
@@ -69,7 +79,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       }`}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
-        <div className={styles.userNameText}>{userName || "Hello User"}</div>
+        <div className={styles.userNameText}>{userName}</div>
         <h2
           className={`${isOverviewSelected ? "!text-5774AC" : "!text-45454A"} ${
             styles.sectionItems

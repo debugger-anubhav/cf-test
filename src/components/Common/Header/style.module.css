@@ -1,5 +1,5 @@
 .main {
-  @apply bg-fff z-[111] sticky top-0;
+  @apply bg-fff z-[1111] sticky top-0;
 }
 .header_wrapper {
   @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between  lg:pt-10  py-5;

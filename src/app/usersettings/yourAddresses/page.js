@@ -6,6 +6,7 @@ import React from "react";
 
 import Notifications from "@/components/Common/Notifications/Notification";
 import YourAddressesSection from "@/components/YourAddresses";
+import {AuthProvider} from "@/components/HOC/index";
 
 const YourAddresses = () => {
   return (
@@ -19,4 +20,4 @@ const YourAddresses = () => {
   );
 };
 
-export default YourAddresses;
+export default AuthProvider(YourAddresses);

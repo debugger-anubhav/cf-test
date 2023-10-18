@@ -1,9 +1,9 @@
 "use client";
+import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import React from "react";
-
+import {AuthProvider} from "@/components/HOC/index";
 import UserSettings from "@/components/UserSettings/UserSettings";
 
 const Usersettings = () => {
@@ -17,4 +17,4 @@ const Usersettings = () => {
   );
 };
 
-export default Usersettings;
+export default AuthProvider(Usersettings);

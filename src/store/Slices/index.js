@@ -165,6 +165,7 @@ export const CartPageSlice = createSlice({
     showCartItems: false,
     isCityShield: false,
     isCoinApplied: false,
+    shoppingCartTab: 0,
   },
   reducers: {
     getCartItems(state, action) {
@@ -198,6 +199,29 @@ export const CartPageSlice = createSlice({
     },
     setCoinsApplied(state, action) {
       state.isCoinApplied = action.payload;
+    },
+    setShoppingCartTab(state, action) {
+      state.shoppingCartTab = action.payload;
+    },
+  },
+});
+
+export const ProfileSettingSlice = createSlice({
+  name: "UserProfileData",
+  initialState: {
+    name: "",
+    contact: "",
+    email: "",
+  },
+  reducers: {
+    getUserName(state, action) {
+      state.name = action.payload;
+    },
+    getUserContact(state, action) {
+      state.contact = action.payload;
+    },
+    getUserEmail(state, action) {
+      state.email = action.payload;
     },
   },
 });
@@ -248,7 +272,11 @@ export const {
   setShowCartItem,
   setCityShield,
   setCoinsApplied,
+  setShoppingCartTab,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
   SeoAppliancePageSlice.actions;
+
+export const {getUserName, getUserContact, getUserEmail} =
+  ProfileSettingSlice.actions;
