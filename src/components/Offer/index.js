@@ -7,6 +7,7 @@ import {baseURL} from "@/network/axios";
 import {useSelector} from "react-redux";
 import {CopyIcon} from "@/assets/icon";
 import content from "@/constants/Constant.json";
+import {Skeleton} from "@mui/material";
 
 const OfferPage = () => {
   const homePageData = useSelector(state => state.homePagedata);
@@ -16,11 +17,15 @@ const OfferPage = () => {
   const [isCopied, setIsCopied] = React.useState(false);
   const [copiedIndex, setCopiedIndex] = React.useState(null);
   const [coupons, setCoupons] = useState([]);
+  const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const getOfferCoupons = () => {
     axios
       .get(baseURL + endPoints.offersAndCupons + `?cityId=${cityId}`)
-      .then(res => setCoupons(res?.data?.data))
+      .then(res => {
+        setCoupons(res?.data?.data);
+        setSkeletonLoading(false);
+      })
       .catch(err => console.log(err));
   };
 
@@ -50,97 +55,103 @@ const OfferPage = () => {
   return (
     <div className={styles.main_container}>
       <h1 className={styles.header}>Offers 🎉</h1>
-      <div className={styles.coupons_wrapper}>
-        {coupons
-          ?.filter(item => item?.coupon_code !== appliedCouponCode)
-          .map((item, index) => (
-            <div key={index} className={styles.card_wrapper}>
-              <p className={styles.top_label}>
-                {item?.price_text}
-                <span className={styles.top_label_span}>
-                  {item?.price_below_text}
-                </span>
-              </p>
-              <div
-                className={`mt-3 ${styles.coupon_card}`}
-                onClick={() => {
-                  handleCopyClick(item.coupon_code);
-                  setCopiedIndex(index);
-                }}>
-                <div
-                  className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.left}`}></div>
-                <div
-                  className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.right}`}></div>
-                <div className="xl:w-full">
-                  <p className={commonStyles.desc}>{`${item?.price_text} ${
-                    item?.max_discount !== "0"
-                      ? `(up to Rs ${item?.max_discount})*`
-                      : ""
-                  } `}</p>
-                  <p className={commonStyles.code}>
-                    Use Code {item?.coupon_code}
+      <div className="flex flex-col">
+        {skeletonLoading ? (
+          <OffersPageSkeleton />
+        ) : (
+          <div className={styles.coupons_wrapper}>
+            {coupons
+              ?.filter(item => item?.coupon_code !== appliedCouponCode)
+              .map((item, index) => (
+                <div key={index} className={styles.card_wrapper}>
+                  <p className={styles.top_label}>
+                    {item?.price_text}
+                    <span className={styles.top_label_span}>
+                      {item?.price_below_text}
+                    </span>
                   </p>
-                </div>
-                <div className={commonStyles.line}></div>
-                <div className={commonStyles.copy_div}>
-                  {item?.coupon_code && (
-                    <button id={index} className="text-[#222] flex ">
-                      {isCopied && copiedIndex === index ? (
-                        "Copied!"
-                      ) : (
-                        <>
-                          <CopyIcon
-                            size={20}
-                            color={"black"}
-                            className={"mr-1"}
-                          />
-                          Copy
-                        </>
+                  <div
+                    className={`mt-3 ${styles.coupon_card}`}
+                    onClick={() => {
+                      handleCopyClick(item.coupon_code);
+                      setCopiedIndex(index);
+                    }}>
+                    <div
+                      className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.left}`}></div>
+                    <div
+                      className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.right}`}></div>
+                    <div className="xl:w-full">
+                      <p className={commonStyles.desc}>{`${item?.price_text} ${
+                        item?.max_discount !== "0"
+                          ? `(up to Rs ${item?.max_discount})*`
+                          : ""
+                      } `}</p>
+                      <p className={commonStyles.code}>
+                        Use Code {item?.coupon_code}
+                      </p>
+                    </div>
+                    <div className={commonStyles.line}></div>
+                    <div className={commonStyles.copy_div}>
+                      {item?.coupon_code && (
+                        <button id={index} className="text-[#222] flex ">
+                          {isCopied && copiedIndex === index ? (
+                            "Copied!"
+                          ) : (
+                            <>
+                              <CopyIcon
+                                size={20}
+                                color={"black"}
+                                className={"mr-1"}
+                              />
+                              Copy
+                            </>
+                          )}
+                        </button>
                       )}
-                    </button>
-                  )}
-                </div>
-              </div>
-              <div className={styles.bottom_description}>
-                {item?.description?.map(item => (
-                  <div key={index} className={styles.desc_row}>
-                    <div className={styles.dot}></div>
-                    <p className={styles.desc}>{item}</p>
+                    </div>
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
-        {cartItems?.[0]?.is_coupon_used === "Yes" && (
-          <div className={styles.card_wrapper}>
-            <p className={styles.top_label}>
-              {appliedCouponObject[0]?.price_text}
-            </p>
-            <div className={styles.coupon_card}>
-              <div
-                className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.left}`}></div>
-              <div
-                className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.right}`}></div>
-              <div className="xl:w-full">
-                <p className={commonStyles.desc}>{`${
-                  appliedCouponObject[0]?.price_text
-                } ${
-                  appliedCouponObject[0]?.max_discount !== "0"
-                    ? `(up to Rs ${appliedCouponObject[0]?.max_discount})*`
-                    : ""
-                } `}</p>
-                <p className={commonStyles.code}>Applied at checkout</p>
-              </div>
-              <div className={commonStyles.line}></div>
-            </div>
-            <div className={styles.bottom_description}>
-              {appliedCouponObject[0]?.description?.map((item, index) => (
-                <div key={index} className={styles.desc_row}>
-                  <div className={styles.dot}></div>
-                  <p className={styles.desc}>{item}</p>
+                  <div className={styles.bottom_description}>
+                    {item?.description?.map(item => (
+                      <div key={index} className={styles.desc_row}>
+                        <div className={styles.dot}></div>
+                        <p className={styles.desc}>{item}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ))}
-            </div>
+            {cartItems?.[0]?.is_coupon_used === "Yes" && (
+              <div className={styles.card_wrapper}>
+                <p className={styles.top_label}>
+                  {appliedCouponObject[0]?.price_text}
+                </p>
+                <div className={styles.coupon_card}>
+                  <div
+                    className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.left}`}></div>
+                  <div
+                    className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.right}`}></div>
+                  <div className="xl:w-full">
+                    <p className={commonStyles.desc}>{`${
+                      appliedCouponObject[0]?.price_text
+                    } ${
+                      appliedCouponObject[0]?.max_discount !== "0"
+                        ? `(up to Rs ${appliedCouponObject[0]?.max_discount})*`
+                        : ""
+                    } `}</p>
+                    <p className={commonStyles.code}>Applied at checkout</p>
+                  </div>
+                  <div className={commonStyles.line}></div>
+                </div>
+                <div className={styles.bottom_description}>
+                  {appliedCouponObject[0]?.description?.map((item, index) => (
+                    <div key={index} className={styles.desc_row}>
+                      <div className={styles.dot}></div>
+                      <p className={styles.desc}>{item}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -161,3 +172,42 @@ const OfferPage = () => {
 };
 
 export default OfferPage;
+
+export const OffersPageSkeleton = () => {
+  return (
+    <div className={styles.main_container_skeleton}>
+      <div className={styles.skeleton_data}>
+        {[1, 2, 3]?.map(ele => {
+          return (
+            <div
+              className={styles.coupons_wrapper_skeleton}
+              key={ele.toString()}>
+              <Skeleton variant="text" className={"w-full h-4"} />
+              <div className="w-full h-20 my-2">
+                <Skeleton
+                  variant="rectangular"
+                  className={styles.Skeleton_full}
+                />
+              </div>
+              <div className={styles.Skeleton_points_wrapper}>
+                {[1, 2, 3, 4]?.map(item => {
+                  return (
+                    <div
+                      key={item.toString()}
+                      className={styles.skeleton_point}>
+                      <Skeleton variant="circular" className={`w-2 h-2 mr-2`} />
+                      <Skeleton
+                        variant="text"
+                        className={styles.Skeleton_full}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

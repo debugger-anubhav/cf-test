@@ -46,3 +46,22 @@
 .terms_desc {
   @apply text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-71717A;
 }
+
+.main_container_skeleton {
+  @apply mt-8;
+}
+.coupons_wrapper_skeleton {
+  @apply flex md:w-[328px] w-full flex-col gap-2;
+}
+.Skeleton_full {
+  @apply w-full h-full;
+}
+.Skeleton_points_wrapper {
+  @apply flex flex-col w-full;
+}
+.skeleton_point {
+  @apply flex w-2/3 mb-1 h-3 items-center;
+}
+.skeleton_data {
+  @apply flex w-full gap-5 flex-wrap;
+}
