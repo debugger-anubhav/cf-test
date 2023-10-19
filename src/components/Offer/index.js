@@ -195,10 +195,14 @@ export const OffersPageSkeleton = () => {
                     <div
                       key={item.toString()}
                       className={styles.skeleton_point}>
-                      <Skeleton variant="circular" className={`w-2 h-2 mr-2`} />
+                      <Skeleton
+                        variant="circular"
+                        className={`!w-2 !h-2 mr-2`}
+                      />
+
                       <Skeleton
                         variant="text"
-                        className={styles.Skeleton_full}
+                        className={`${styles.Skeleton_full} !h-4`}
                       />
                     </div>
                   );
