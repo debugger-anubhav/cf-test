@@ -57,9 +57,9 @@ const MenuList = ({hasMb = true}) => {
       <div className={styles.menu_list_right}>
         <a
           onClick={() => {
-            router.push("/pages/offer");
+            router.push("/pages/offers");
           }}
-          href={"/pages/offer"}>
+          href={"/pages/offers"}>
           <p className={styles.item_wrap}>Offers</p>
         </a>
         <a href="/pages/bulkorder">
