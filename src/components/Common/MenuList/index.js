@@ -62,7 +62,7 @@ const MenuList = ({hasMb = true}) => {
           href={"/pages/offer"}>
           <p className={styles.item_wrap}>Offers</p>
         </a>
-        <a href="https://test.rentofurniture.com/pages/bulkorder">
+        <a href="/pages/bulkorder">
           <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
             CF for business
           </p>
