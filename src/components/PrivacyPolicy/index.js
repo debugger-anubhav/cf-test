@@ -35,9 +35,11 @@ const PrivacyPolicyData = () => {
       <div className={styles.details}>
         <div className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_1.firts_part}
-          <span className={styles.privacy_policy_detail_link}>
+          <a
+            className={styles.privacy_policy_detail_link}
+            href={string.privacy_policy.para_1.link_part}>
             {string.privacy_policy.para_1.link_part}
-          </span>
+          </a>
           {string.privacy_policy.para_1.last_part}
         </div>
       </div>
@@ -45,13 +47,17 @@ const PrivacyPolicyData = () => {
       <div>
         <div className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_2.firts_part}
-          <span className={styles.privacy_policy_detail_link}>
+          <a
+            className={styles.privacy_policy_detail_link}
+            href={string.privacy_policy.para_2.first_link}>
             {string.privacy_policy.para_2.first_link}
-          </span>
+          </a>
           {string.privacy_policy.para_2.second_part}
-          <span className={styles.privacy_policy_detail_link}>
+          <a
+            className={styles.privacy_policy_detail_link}
+            href={string.privacy_policy.para_2.second_link}>
             {string.privacy_policy.para_2.second_link}
-          </span>
+          </a>
           {string.privacy_policy.para_2.last_part}
         </div>
       </div>
@@ -99,9 +105,11 @@ const PrivacyPolicyData = () => {
       <div className={styles.details_fourth}>
         <p className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_4.firts_part}
-          <span className={styles.privacy_policy_detail_link}>
+          <a
+            className={styles.privacy_policy_detail_link}
+            href={string.privacy_policy.para_2.first_link}>
             {string.privacy_policy.para_2.first_link}
-          </span>
+          </a>
         </p>
       </div>
       <div className={styles.last_details}>
