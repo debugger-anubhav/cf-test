@@ -4,6 +4,7 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
+import TermsOfUseData from "@/components/TermOfUseData";
 import loadable from "@loadable/component";
 import {FooterSkeleton} from "@/components/Common/Footer";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
@@ -15,6 +16,7 @@ export default function TermsOfUse() {
       <AnnouncementBar />
       <Header />
       <MenuList />
+      <TermsOfUseData />
       <Footer />
     </div>
   );
