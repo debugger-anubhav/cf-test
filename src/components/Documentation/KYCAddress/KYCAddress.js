@@ -295,6 +295,8 @@ const KYCAddress = () => {
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
           setSelectedOption={setSelectedOptionPer}
+          maxWidth="502px"
+          optionsActive="md:block hidden"
         />
       </div>
       <div className={`${styles.formInputFirst}`}>
@@ -393,6 +395,8 @@ const KYCAddress = () => {
           selectedOption={selectedOptionCur}
           isOpen={currAddModal}
           setSelectedOption={setSelectedOptionCur}
+          maxWidth="502px"
+          optionsActive="md:block hidden"
         />
       </div>
       <div className={`${styles.formInputFirst}`}>

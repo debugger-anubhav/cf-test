@@ -68,7 +68,7 @@ const PaymentFailure = () => {
           <a
             className={styles.phone_link}
             href={`tel:080-66084700`}
-            target="_blank"
+            target="_self"
             rel="noopener  noreferrer"
             aria-label="080-66084700">
             080-66084700

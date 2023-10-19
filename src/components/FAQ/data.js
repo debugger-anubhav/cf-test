@@ -22,7 +22,8 @@ export const HowItWorks = [
       "Submit the necessary documents to complete the KYC process (don't worry, it's completely safe).",
       "Get the delivery and assembly done on the promised date.",
     ],
-    afterChild: "To know more please <b>click here</b>",
+    afterChild:
+      'To know more please <b><a href="https://rentofurniture.com/pages/how-it-works">click here</a></b>',
   },
   {
     que: "Can I get the actual product picture?",
@@ -45,7 +46,7 @@ export const HowItWorks = [
     ans: "Yes, you can reject or return the furniture-either all the products or some of them. You'll get a complete refund for all the returned products",
   },
   {
-    ques: "Are there any particular damage charges?",
+    que: "Are there any particular damage charges?",
     ans: "Yes, if you damage a product in any way, you'll have to pay the damage charges. We offer minor repair services free of cost. But in case of major damage, the subscriber has to pay for damage repair.",
   },
   {
@@ -63,7 +64,7 @@ export const HowItWorks = [
     ans: "We have products from a wide range of brands. The brand of the appliances cannot be confirmed as it depends on availability. But don't worry, all our items go through a strict quality check process to ensure nothing is broken or faulty.",
   },
   {
-    qus: "What will be the condition of the products at the time of delivery?",
+    que: "What will be the condition of the products at the time of delivery?",
     ans: "We always deliver our products in mint condition, i.e. they are restored to their original condition and are subjected to rigorous quality tests before they are delivered to you.",
   },
   {

@@ -1,0 +1,48 @@
+.main_container {
+  @apply font-Poppins px-4 md:px-[70px] lg:px-[70px] xl:px-[90px] macbook:px-[122px] 4xl:px-[130px] xl:mt-7 pb-12 xl:pb-[88px];
+}
+.header {
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.3 xl:tracking-0.48;
+}
+.coupons_wrapper {
+  @apply mt-6 xl:mt-10 flex flex-wrap gap-6 xl:gap-8;
+}
+.card_wrapper {
+  @apply w-[328px] xl:w-[365px];
+}
+.coupon_card {
+  @apply mt-2 xl:mt-3 cursor-pointer h-[100px] w-full relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] justify-between;
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp")
+    no-repeat;
+  background-size: cover;
+}
+.top_label {
+  @apply text-45454A text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 flex items-baseline gap-1;
+}
+.top_label_span {
+  @apply text-9A9AA2 text-14 xl:text-16 tracking-desc xl:tracking-0.3 w-[177px] truncate;
+}
+.bottom_description {
+  @apply mt-2;
+}
+.desc {
+  @apply text-71717A text-12 xl:text-14 tracking-0.24 xl:tracking-desc;
+}
+.desc_row {
+  @apply flex gap-2 items-baseline md:items-center;
+}
+.dot {
+  @apply px-[2px] w-1 h-1 rounded-full bg-71717A ml-2;
+}
+.terms_wrapper {
+  @apply mt-8 xl:mt-[88px];
+}
+.terms_header {
+  @apply text-16 xl:text-20 font-medium leading-normal tracking-0.3 xl:tracking-0.36;
+}
+.terms_list {
+  @apply flex flex-col gap-3 xl:gap-4 xl:mt-8 mt-4;
+}
+.terms_desc {
+  @apply text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-71717A;
+}

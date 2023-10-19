@@ -212,5 +212,55 @@
     "protect": "Protect your appliances and furniture worth ₹70,000 ",
     "cta_head": "By choosing to rent furniture ",
     "cta_desc": "You actively participate in a sustainable lifestyle that promotes resource conservation and waste reduction"
+  },
+  "offer_page": [
+    "Only one offer can be availed per order.",
+    "These offers are not applicable in case of early closure of the order.",
+    "You can avail these offers by simply applying the respective coupon code while checkout.",
+    "For more detail about availing these offers, get in touch with our customer care team."
+  ],
+  "privacy_policy": {
+    "para_1": {
+      "firts_part": "CITYFURNISH INDIA PRIVATE LIMITED owns and operates",
+      "link_part": " https://cityfurnish.com",
+      "last_part": "and understands how important your personal privacy is to you, and we want you to be aware of the kinds of information we collect, how we collect it, how we use it and with whom we share it. When you submit information to us through the Site, you acknowledge and agree to the terms and conditions of this Privacy Policy. We may revise this Privacy Policy from time to time by updating the information posted on the Site. Amendments to the Privacy Policy will be effective when posted. You should therefore periodically visit this page to review the current Privacy Policy, so that you are aware of any such revisions."
+    },
+    "para_2": {
+      "firts_part": "This Privacy Policy covers the information for Cityfurnish India Private Limited('Cityfurnish' and/or 'We') collects from the user(s) ('User(s)' and/or 'You') of",
+      "first_link": " https://cityfurnish.com",
+      "second_part": "This Privacy Policy should be read in conjunction and together with the User Agreement of the Website available on",
+      "second_link": " https://cityfurnish.com/pages/privacy-policy",
+      "last_part": "Personal Information of a User(s) is collected if the User(s) registers with the Website, accesses the Website or take any action on the Website. Here are our privacy principles:"
+    },
+    "principles": {
+      "heading": "Our privacy principles:",
+      "points": [
+        "Providing information to us is your choice.",
+        "You can choose to have the Personal Information provided by You deleted.",
+        "You always have the ability to opt-out of receiving communications from us."
+      ]
+    },
+    "information_collection": {
+      "heading": "Information Collection and Use:",
+      "subheading": "The Personal Information which You may provide to us and/or which we may collect is or could be the following:",
+      "points": [
+        "Your registration details which may include the password provided by You. You may note that We adopt reasonable security measures to protect Your password from being exposed or disclosed to anyone including the Cityfurnish.",
+        "Your shipping, billing, tax registration, and other information pertaining to Your sale or purchase transaction on the Website.",
+        "Your transaction details with the other users of the Website. Your usage behavior of the Website.",
+        "Details of the computer system or computer network which You use to visit the Website and undertake any activity on the Website.",
+        "Your documents and images for verification purpose. Documents submitted are used solely for the purpose of identity, address and order verification.",
+        "Your transaction details with the other users of the Website. Your usage behavior of the Website."
+      ]
+    },
+    "para_3": {
+      "firts_part": "Our primary purposes in collecting information from You are to allow You to use the Website and various features and services offered by the Cityfurnish on or in relation to the Website; contact you for any services provided by Cityfurnish or its affiliates or its various service providers or Cityfurnish business partners and advertisers; to record Your information and details as permitted and required under applicable laws, statutory direction or judiciary orders; to serve various promotion materials and advertising materials to you; and such other uses as provided in the User Agreement and this Privacy Policy. We may also use the information for transactional emails or to provide You with information, direct marketing, online and offline advertising and other materials regarding products, services and other offers from time to time in connection with the Cityfurnish or its parent, subsidiary and affiliated companies ('Cityfurnish Entities') and its joint ventures."
+    },
+    "para_4": {
+      "firts_part": "You can request to remove your data from our platform by writing to us on ",
+      "link": "hello@cityfurnish.com"
+    },
+    "para_5": {
+      "firts_part": "To participate as an Delivery Partner agent, you must permit the Delivery Partner application Services to access location services through the permission system used by your mobile operating system ('Platform') or browser. We may collect the precise location of your device when the Delivery Partner app is running in the foreground or background of your device. We may also derive your approximate location from your IP address. We use your location information to verify that you are present in your preferred region or city when you begin or engage in delivery through the Cityfurnish Services ('Delivery'), connect you with delivery opportunities in your zone, and track the progress and completion of your Deliveries. You can enable the location tracking feature through the settings on your device or Platform or when prompted by the Delivery Partner mobile app. If you choose to disable the location feature through the settings on your device or Platform, Cityfurnish will not receive precise location information from your device, which will prevent you from being able to Trip and receiving delivery opportunities in your area."
+    }
   }
 }
