@@ -57,6 +57,9 @@
 .form_input {
   @apply w-full text-14 xl:text-16 outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
 }
+.form_input_textarea {
+  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+}
 .contact_input {
   @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
@@ -94,7 +97,7 @@
   @apply flex gap-[11px] pl-1 md:w-[440px] lg:w-full xl:w-[440px];
 }
 .kyc_info {
-  @apply flex gap-[11px] -mt-2 md:w-[440px] lg:w-full xl:w-[440px];
+  @apply flex gap-[11px] -mt-2 md:w-[440px] lg:w-full xl:w-[440px] pl-1;
 }
 .desc {
   @apply text-45454A text-12 xl:text-14 tracking-0.24 xl:tracking-desc;
@@ -103,7 +106,7 @@
   @apply min-w-[16px] xl:min-w-[24px] mt-1;
 }
 .verified_icon {
-  @apply min-w-[18px] xl:min-w-[24px] h-6;
+  @apply min-w-[18px] xl:min-w-[22px] h-6;
 }
 .not_belong_wrapper {
   @apply mb-3 rounded-lg bg-[#FFEFEF] border border-DDDDDF px-2 py-1 w-fit;

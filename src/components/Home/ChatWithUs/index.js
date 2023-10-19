@@ -25,7 +25,10 @@ export default function ChatWithUs() {
             or talk to our customer care representative at
             <span className={styles.mail_address}>
               {" "}
-              <a href={`tel:080-66084700 `} className="text-[#48678B]">
+              <a
+                href={`tel:080-66084700 `}
+                target="_self"
+                className="text-[#48678B]">
                 080-66084700
               </a>
             </span>{" "}

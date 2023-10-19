@@ -7,7 +7,6 @@ import {
   CalendarIcon,
   InformationIcon,
   PersonIcon,
-  VerifiedIcon,
   WhatsappIcon,
 } from "@/assets/icon";
 import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
@@ -21,11 +20,12 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
-import {getSavedAddress} from "@/store/Slices";
+import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
+import {MdOutlineVerified} from "react-icons/md";
 
-const AddressSection = ({setTab}) => {
+const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
@@ -271,7 +271,9 @@ const AddressSection = ({setTab}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.left_div}>
-        <div className={styles.head_div} onClick={() => setTab()}>
+        <div
+          className={styles.head_div}
+          onClick={() => dispatch(setShoppingCartTab(1))}>
           <BackIcon size={19} />
           <p className={styles.head}>Go back to checkout</p>
         </div>
@@ -537,7 +539,7 @@ const AddressSection = ({setTab}) => {
           </div>
 
           <div className={styles.kyc_info}>
-            <VerifiedIcon className={styles.verified_icon} />
+            <MdOutlineVerified className={styles.verified_icon} />
             <p className={styles.desc}>
               Once the order has been placed, you might be required to share a
               few documents for KYC

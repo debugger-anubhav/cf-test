@@ -9,6 +9,7 @@ import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import {WishListSkeleton} from "@/components/Wishlist/ProductList/ProductList";
+import {AuthProvider} from "@/components/HOC/index";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -20,7 +21,7 @@ const ProductList = loadable(
   },
 );
 
-export default function Wishlist() {
+const Wishlist = () => {
   const params = useParams();
 
   return (
@@ -33,4 +34,6 @@ export default function Wishlist() {
       <Notifications />
     </div>
   );
-}
+};
+
+export default AuthProvider(Wishlist);

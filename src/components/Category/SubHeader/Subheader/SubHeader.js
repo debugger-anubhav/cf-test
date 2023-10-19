@@ -545,7 +545,7 @@ const SubHeader = ({params}) => {
                 </div>
                 {filterOpen && (
                   <div className=" absolute z-[111] top-12 gap-6 w-[222px] rounded-2xl max-h-[370px] border-[2px] border-71717A bg-white py-4 ">
-                    <div className={styles.mapped_filter}>
+                    <div className={styles.mapped_filter_class}>
                       {filtereData?.map((ele, index) => {
                         return (
                           <>

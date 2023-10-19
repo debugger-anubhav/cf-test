@@ -99,7 +99,7 @@ export const endPoints = {
   },
 
   profileSettingPage: {
-    getUserDetails: id => `fc-users/getUserDetails?userId=${id}`,
+    getUserDetails: userId => `fc-users/getUserDetails?userId=${userId}`,
     updateUserDetails: `/fc-users/updateUserDetails`,
   },
 
@@ -117,4 +117,6 @@ export const endPoints = {
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
+
+  enquiry: "fc-bulk-orders/submitEnquiryForm",
 };
