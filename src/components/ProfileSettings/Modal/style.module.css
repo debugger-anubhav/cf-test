@@ -1,0 +1,43 @@
+.customModal {
+  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-fit !rounded-none font-Poppins;
+  top: 50% !important;
+  left: 50% !important ;
+  transform: translate(-50%, -50%) !important;
+}
+
+.customCloseButton {
+  @apply !top-12 !right-8 !outline-none !border-none !w-[25px] !h-[25px];
+}
+.close_icon {
+  @apply bottom-[180px] fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12;
+}
+.bottomDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8 font-Poppins;
+}
+.head {
+  @apply text-45454A text-24 font-medium leading-8 tracking-0.48;
+}
+.form_input {
+  @apply mt-8 w-full flex items-center justify-between text-14 xl:text-16 outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.contact_input {
+  @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.error {
+  @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
+}
+.flag {
+  @apply w-6 h-6;
+}
+.blue_txt {
+  @apply text-5774AC text-16 font-medium leading-normal tracking-0.3 cursor-pointer;
+}
+.desc {
+  @apply text-71717A text-16 tracking-0.3;
+}
+.unable_txt {
+  @apply mt-4 underline cursor-pointer;
+}
+.error {
+  @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
+}

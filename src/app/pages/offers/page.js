@@ -12,7 +12,7 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
 
-const Offer = () => {
+const Offers = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
@@ -24,4 +24,4 @@ const Offer = () => {
   );
 };
 
-export default Offer;
+export default Offers;

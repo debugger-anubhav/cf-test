@@ -111,3 +111,11 @@ input[type="radio"]:checked {
 #fbots-wdgt {
   left: 30px !important;
 }
+
+/* to hide bydefault arrrows in the input field for number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0; /* Adjust as needed */
+}

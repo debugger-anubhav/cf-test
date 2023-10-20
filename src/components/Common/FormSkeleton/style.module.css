@@ -1,0 +1,18 @@
+.skeleton_wrapper {
+  @apply flex w-full flex-col;
+}
+.skeleton_full {
+  @apply w-full h-full;
+}
+.skeleton_form_field {
+  @apply w-full my-3 flex flex-col;
+}
+.field_heading {
+  @apply w-64 !h-3;
+}
+.field_input {
+  @apply w-full !h-14;
+}
+.skeleton_submit_btn {
+  @apply w-full !h-12 mt-4;
+}

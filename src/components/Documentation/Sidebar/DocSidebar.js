@@ -50,11 +50,11 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const thirdContainerArr = [
     {
       heading: "KYC & Documentation",
-      link: "https://test.rentofurniture.com/documentation",
+      link: "documentation",
     },
     {
       heading: "Profile Settings",
-      link: "https://test.rentofurniture.com/usersettings",
+      link: "/profilesettings",
     },
     {heading: "Your Addresses", link: "/usersettings/yourAddresses"},
   ];
@@ -115,6 +115,8 @@ const DocSidebar = ({isOverviewSelected = false}) => {
 export default DocSidebar;
 
 const MenuComp = ({list, heading, isActive, setIsActive}) => {
+  const router = useRouter();
+
   return (
     <div
       className={`${heading === "Account" && styles.border_none} ${
@@ -125,7 +127,7 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
         return (
           <Link
             key={index.toString()}
-            href={String(i?.link)}
+            href={i?.link}
             className={`${
               isActive === i.heading
                 ? styles.sectionItemsActive
@@ -136,6 +138,7 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
               onClick={e => {
                 e.preventDefault();
                 setIsActive(e.target.value);
+                router.push(i?.link);
               }}>
               {i.heading}
             </button>
