@@ -82,7 +82,6 @@ const ProfileSettings = () => {
   }, [countdown, showOtpInput]);
 
   const fetchUserDetails = async () => {
-    console.log(useridFromStorage, "uiwii");
     try {
       const response = await axios.get(
         baseURL + endPoints.profileSettingPage.getUserDetails(userId),
