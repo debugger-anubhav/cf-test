@@ -549,7 +549,7 @@ export const FooterItems = [
             },
             {
               text: "Offers",
-              link: "https://test.rentofurniture.com/pages/offers",
+              link: "/pages/offers",
             },
           ],
         },
@@ -563,7 +563,7 @@ export const FooterItems = [
             },
             {
               text: "Terms & Conditions",
-              link: "https://test.rentofurniture.com/pages/terms-of-use",
+              link: "/pages/terms-of-use",
             },
           ],
         },

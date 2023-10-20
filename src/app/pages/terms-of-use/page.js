@@ -4,24 +4,20 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
+import TermsOfUseData from "@/components/TermOfUseData";
 import loadable from "@loadable/component";
 import {FooterSkeleton} from "@/components/Common/Footer";
-import OfferPage from "../../../components/Offer";
-
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
-
-const Offer = () => {
+export default function TermsOfUse() {
   return (
     <div className="large_layout">
       <AnnouncementBar />
       <Header />
       <MenuList />
-      <OfferPage />
+      <TermsOfUseData />
       <Footer />
     </div>
   );
-};
-
-export default Offer;
+}

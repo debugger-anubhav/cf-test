@@ -57,12 +57,12 @@ const MenuList = ({hasMb = true}) => {
       <div className={styles.menu_list_right}>
         <a
           onClick={() => {
-            router.push("/pages/offer");
+            router.push("/pages/offers");
           }}
-          href={"/pages/offer"}>
+          href={"/pages/offers"}>
           <p className={styles.item_wrap}>Offers</p>
         </a>
-        <a href="https://test.rentofurniture.com/pages/bulkorder">
+        <a href="/pages/bulkorder">
           <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
             CF for business
           </p>
