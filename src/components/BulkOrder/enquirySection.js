@@ -10,6 +10,7 @@ import {ForwardArrowWithLine} from "@/assets/icon";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {showToastNotification} from "../Common/Notifications/toastUtils";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -62,7 +63,6 @@ const EnquirySection = () => {
   };
 
   const handleSubmit = async values => {
-    console.log(values, "values");
     return new Promise((resolve, reject) => {
       const payload = {
         name: values.fullName,
@@ -76,7 +76,13 @@ const EnquirySection = () => {
       axios
         .post(baseURL + endPoints.enquiry, payload)
         .then(response => {
-          console.log(response, "res");
+          showToastNotification(
+            "Your Enquiry is sent to our team. They will get back to you shortly",
+            1,
+          );
+          setTimeout(() => {
+            typeof window !== "undefined" && window?.location.reload();
+          }, 2000);
         })
         .catch(error => {
           console.error("API error:", error);
