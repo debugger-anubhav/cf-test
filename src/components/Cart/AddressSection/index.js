@@ -39,7 +39,6 @@ const AddressSection = () => {
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
-
   const cityId = getLocalStorage("cityId");
 
   const data = useSelector(state => state.cartPageData);
