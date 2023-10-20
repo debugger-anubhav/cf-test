@@ -1,0 +1,42 @@
+.conatiner_wrapper {
+  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-5 mb-[88px];
+}
+.heading {
+  @apply font-Poppins text-24 font-medium text-45454A pb-10 leading-8 tracking-[-2%];
+}
+.sub_heading {
+  @apply font-Poppins text-20 font-medium text-45454A leading-8 tracking-[-2%];
+}
+.table {
+  @apply mt-8;
+}
+.table_headers {
+  @apply grid grid-cols-12 font-Poppins text-16 font-medium leading-6 text-left text-45454A border-b-[1px] border-EDEDEE pb-2;
+}
+.table_data {
+  @apply grid grid-cols-12 font-Poppins text-16 font-normal leading-6 text-left text-45454A pb-10 pt-6;
+}
+.action_cell {
+  @apply flex flex-col w-[85%] custom:w-3/4;
+}
+.view_btn {
+  @apply border-2 rounded-lg border-71717A;
+}
+.decision_btns {
+  @apply flex justify-between mt-4;
+}
+.approve_btn {
+  @apply text-5774AC cursor-pointer;
+}
+.reject_btn {
+  @apply cursor-pointer;
+}
+.approve_btn:hover {
+  @apply underline;
+}
+.reject_btn:hover {
+  @apply underline;
+}
+.body_cell {
+  @apply flex items-center;
+}

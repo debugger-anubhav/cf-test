@@ -549,7 +549,7 @@ export const FooterItems = [
             },
             {
               text: "Offers",
-              link: "https://test.rentofurniture.com/pages/offers",
+              link: "/pages/offers",
             },
           ],
         },
