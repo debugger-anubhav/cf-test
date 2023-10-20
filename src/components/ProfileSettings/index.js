@@ -12,6 +12,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
+import FormSkeleton from "../Common/FormSkeleton";
 // import withAuth from "@/components/Hoc/withAuth";
 
 const ProfileSettings = () => {
@@ -22,6 +23,7 @@ const ProfileSettings = () => {
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
   const [userId, setUserId] = useState(useridFromStorage);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   useEffect(() => {
     setUserId(useridFromStorage);
@@ -74,6 +76,7 @@ const ProfileSettings = () => {
       console.log(response?.data?.data, "ressss");
       setUserDetails({...response?.data?.data});
       setEmailState(response?.data?.data?.is_verified);
+      setLoadingSkeleton(false);
     } catch (err) {
       console.log(err);
     }
@@ -133,162 +136,171 @@ const ProfileSettings = () => {
         </div>
         <div className={styles.line}></div>
 
-        <div className={styles.form_wrapper}>
-          <Formik
-            initialValues={{
-              fullName: userDetails?.full_name || "",
-              contactNumber: userDetails?.phone_no || "",
-              email: userDetails?.email || "",
-            }}
-            enableReinitialize={true}
-            validationSchema={validationSchema}
-            onSubmit={values => {
-              handleUpdateUserDetails(values);
-              // getAllSavedAddresses();
-              // resetForm();
-            }}>
-            {formik => (
-              <Form className={styles.form_wrapper}>
-                <div>
-                  <div className={formStyles.form_field}>
-                    <p className={formStyles.form_label}>Full name</p>
-                    <Field
-                      type="text"
-                      name="fullName"
-                      // value={formik.values.fullName}
-                      placeholder="Enter your name"
-                      className={formStyles.form_input}
-                    />
-                    <ErrorMessage name="fullName">
-                      {msg =>
-                        formik.touched.fullName && (
-                          <p className={formStyles.error}>{msg} </p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  <div className={formStyles.form_field}>
-                    <p className={formStyles.form_label}>Contact number</p>
-                    <div className={`${styles.row} ${formStyles.form_input}`}>
-                      <div className="flex gap-2 items-center">
-                        <img
-                          src={`${cityUrl + "india-icon.svg"}`}
-                          className={formStyles.flag}
-                          loading="lazy"
-                        />
-                        <Field
-                          type="number"
-                          // readOnly
-                          name="contactNumber"
-                          value={formik.values.contactNumber}
-                          placeholder="Enter 10 digit number "
-                          className={formStyles.contact_input}
-                        />
-                      </div>
-                      <p className={styles.changeTxt}>Change</p>
-                    </div>
-                    <ErrorMessage name="contactNumber">
-                      {msg =>
-                        formik.touched.contactNumber && (
-                          <p className={formStyles.error}>{msg} </p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  <div className={formStyles.form_field}>
-                    <p className={formStyles.form_label}>
-                      Email
-                      <span
-                        className={`${
-                          userDetails?.is_verified === "Yes"
-                            ? styles.green
-                            : styles.red
-                        }`}>
-                        (
-                        {userDetails?.is_verified === "Yes"
-                          ? "Verified"
-                          : "Unverified"}
-                        )
-                      </span>
-                    </p>
-                    <div className={`${styles.row} ${formStyles.form_input}`}>
-                      <Field
-                        type="email"
-                        name="email"
-                        value={formik.values.email}
-                        placeholder="Enter your email"
-                        className={formStyles.contact_input}
-                      />
-                      {userDetails?.is_verified === "No" &&
-                        formik.values.email !== "" &&
-                        (showOtpInput ? (
-                          <p className={`${styles.timerTxt}`}>
-                            Resend OTP{" "}
-                            <span className="font-normal">
-                              {countdown} secs
-                            </span>
-                          </p>
-                        ) : (
-                          <p
-                            onClick={() => {
-                              console.log(formik, "formiikk");
-                              sendOTP(formik.values.email);
-                            }}
-                            className={styles.changeTxt}>
-                            {sentOtp ? "Resend OTP" : "Verify"}
-                          </p>
-                        ))}
-                    </div>
-                    <ErrorMessage name="email">
-                      {msg =>
-                        formik.touched.email && (
-                          <p className={formStyles.error}>{msg}</p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  {showOtpInput && (
+        {loadingSkeleton ? (
+          <div className="w-2/3">
+            <FormSkeleton />
+          </div>
+        ) : (
+          <div className={styles.form_wrapper}>
+            <Formik
+              initialValues={{
+                fullName: userDetails?.full_name || "",
+                contactNumber: userDetails?.phone_no || "",
+                email: userDetails?.email || "",
+              }}
+              enableReinitialize={true}
+              validationSchema={validationSchema}
+              onSubmit={values => {
+                handleUpdateUserDetails(values);
+                // getAllSavedAddresses();
+                // resetForm();
+              }}>
+              {formik => (
+                <Form className={styles.form_wrapper}>
+                  <div>
                     <div className={formStyles.form_field}>
-                      <p className={formStyles.form_label}>Provide your OTP</p>
+                      <p className={formStyles.form_label}>Full name</p>
+                      <Field
+                        type="text"
+                        name="fullName"
+                        // value={formik.values.fullName}
+                        placeholder="Enter your name"
+                        className={formStyles.form_input}
+                      />
+                      <ErrorMessage name="fullName">
+                        {msg =>
+                          formik.touched.fullName && (
+                            <p className={formStyles.error}>{msg} </p>
+                          )
+                        }
+                      </ErrorMessage>
+                    </div>
+
+                    <div className={formStyles.form_field}>
+                      <p className={formStyles.form_label}>Contact number</p>
+                      <div className={`${styles.row} ${formStyles.form_input}`}>
+                        <div className="flex gap-2 items-center">
+                          <img
+                            src={`${cityUrl + "india-icon.svg"}`}
+                            className={formStyles.flag}
+                            loading="lazy"
+                          />
+                          <Field
+                            type="number"
+                            // readOnly
+                            name="contactNumber"
+                            value={formik.values.contactNumber}
+                            placeholder="Enter 10 digit number "
+                            className={formStyles.contact_input}
+                          />
+                        </div>
+                        <p className={styles.changeTxt}>Change</p>
+                      </div>
+                      <ErrorMessage name="contactNumber">
+                        {msg =>
+                          formik.touched.contactNumber && (
+                            <p className={formStyles.error}>{msg} </p>
+                          )
+                        }
+                      </ErrorMessage>
+                    </div>
+
+                    <div className={formStyles.form_field}>
+                      <p className={formStyles.form_label}>
+                        Email
+                        <span
+                          className={`${
+                            userDetails?.is_verified === "Yes"
+                              ? styles.green
+                              : styles.red
+                          }`}>
+                          (
+                          {userDetails?.is_verified === "Yes"
+                            ? "Verified"
+                            : "Unverified"}
+                          )
+                        </span>
+                      </p>
                       <div className={`${styles.row} ${formStyles.form_input}`}>
                         <Field
-                          type="number"
-                          name="otp"
-                          placeholder="Enter the OTP you just received"
+                          type="email"
+                          name="email"
+                          value={formik.values.email}
+                          placeholder="Enter your email"
                           className={formStyles.contact_input}
                         />
-                        {userDetails?.is_verified === "No" && (
-                          <p
-                            onClick={handleOtpVerification}
-                            className={styles.changeTxt}>
-                            Verify
-                          </p>
-                        )}
+                        {userDetails?.is_verified === "No" &&
+                          formik.values.email !== "" &&
+                          (showOtpInput ? (
+                            <p className={`${styles.timerTxt}`}>
+                              Resend OTP{" "}
+                              <span className="font-normal">
+                                {countdown} secs
+                              </span>
+                            </p>
+                          ) : (
+                            <p
+                              onClick={() => {
+                                console.log(formik, "formiikk");
+                                sendOTP(formik.values.email);
+                              }}
+                              className={styles.changeTxt}>
+                              {sentOtp ? "Resend OTP" : "Verify"}
+                            </p>
+                          ))}
                       </div>
-                      {/* <ErrorMessage name="email">
+                      <ErrorMessage name="email">
+                        {msg =>
+                          formik.touched.email && (
+                            <p className={formStyles.error}>{msg}</p>
+                          )
+                        }
+                      </ErrorMessage>
+                    </div>
+
+                    {showOtpInput && (
+                      <div className={formStyles.form_field}>
+                        <p className={formStyles.form_label}>
+                          Provide your OTP
+                        </p>
+                        <div
+                          className={`${styles.row} ${formStyles.form_input}`}>
+                          <Field
+                            type="number"
+                            name="otp"
+                            placeholder="Enter the OTP you just received"
+                            className={formStyles.contact_input}
+                          />
+                          {userDetails?.is_verified === "No" && (
+                            <p
+                              onClick={handleOtpVerification}
+                              className={styles.changeTxt}>
+                              Verify
+                            </p>
+                          )}
+                        </div>
+                        {/* <ErrorMessage name="email">
                         {msg =>
                           formik.touched.email && (
                             <p className={formStyles.error}>{msg}</p>
                           )
                         }
                       </ErrorMessage> */}
-                    </div>
-                  )}
+                      </div>
+                    )}
 
-                  <div className={styles.btn_wrapper}>
-                    <button type="submit" className={styles.btn}>
-                      Save changes
-                      <ArrowForw className={styles.forw_arrow} />
-                    </button>
+                    <div className={styles.btn_wrapper}>
+                      <button type="submit" className={styles.btn}>
+                        Save changes
+                        <ArrowForw className={styles.forw_arrow} />
+                      </button>
+                    </div>
                   </div>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        )}
       </div>
     </div>
   );
