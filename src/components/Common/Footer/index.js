@@ -86,7 +86,7 @@ const Footer = ({params}) => {
           text: "Sample Rental Agreement",
           link: "https://test.rentofurniture.com/pages/rentalagreement",
         },
-        {text: "Offers", link: "https://test.rentofurniture.com/pages/offers"},
+        {text: "Offers", link: "/pages/offers"},
       ],
     },
 

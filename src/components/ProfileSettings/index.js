@@ -8,11 +8,12 @@ import {cityUrl} from "../../../appConfig";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
-
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
-// import withAuth from "@/components/Hoc/withAuth";
+import {showToastNotification} from "../Common/Notifications/toastUtils";
+import ChangeNumber from "./Modal/ChangeNumber";
+import "react-responsive-modal/styles.css";
 
 const ProfileSettings = () => {
   const [emailState, setEmailState] = useState("");
@@ -22,6 +23,8 @@ const ProfileSettings = () => {
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
   const [userId, setUserId] = useState(useridFromStorage);
+  const [otpError, setOtpError] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setUserId(useridFromStorage);
@@ -30,6 +33,14 @@ const ProfileSettings = () => {
   useEffect(() => {
     fetchUserDetails();
   }, []);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -50,17 +61,20 @@ const ProfileSettings = () => {
         "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
       )
       .required("Contact number is required"),
-    email: Yup.string().email().required("email is required"),
+    email: Yup.string()
+      .email("Please enter a valid email.")
+      .required("email is required"),
   });
 
   useEffect(() => {
     let timer;
+
     if (countdown > 0 && showOtpInput) {
       timer = setTimeout(() => {
         setCountdown(countdown - 1);
       }, 1000);
     } else if (countdown === 0) {
-      setShowOtpInput(false);
+      setSentOtp(false);
     }
     return () => clearTimeout(timer);
   }, [countdown, showOtpInput]);
@@ -79,30 +93,70 @@ const ProfileSettings = () => {
     }
   };
 
-  // console.log(userDetails, "userrrr");
-
   const sendOTP = async email => {
     setCountdown(60);
-    // try {
-    //   const headers = {
-    //     email,
-    //   };
-    //   const response = await axios.post(baseURL + endPoints, headers);
+    setOtpError("");
+    try {
+      const headers = {
+        email,
+      };
+      const response = await axios.post(
+        baseURL + endPoints.profileSettingPage.sentOtpToEmail,
+        headers,
+      );
 
-    //   if (response.status === 200) {
-    //     console.log("OTP sent successfully");
-    //   } else {
-    //     const data = await response.data;
-    //     console.log(data.message);
-    //   }
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    setShowOtpInput(true);
-    setSentOtp(true);
+      if (response?.data?.success === true) {
+        console.log("OTP sent successfully");
+        setShowOtpInput(true);
+        setSentOtp(true);
+      } else {
+        const data = await response.data;
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const handleOtpVerification = () => {};
+  const handleEmailChange = val => {
+    if (val !== userDetails?.email) setEmailState("No");
+    else setEmailState(userDetails?.is_verified);
+  };
+
+  const handleOtpVerification = async (email, otp) => {
+    if (countdown === 0) {
+      setOtpError(
+        "Sorry, your OTP has timed out. Please request a new OTP to continue.",
+      );
+    } else {
+      const body = {
+        email,
+        otp,
+      };
+      axios
+        .post(baseURL + endPoints.profileSettingPage.sentOtpToEmail, body, {
+          headers: {
+            userid: userId,
+          },
+        })
+        .then(response => {
+          if (response?.data?.message === "OTP verified successfully") {
+            console.log("OTP verified successfully");
+            setEmailState("Yes");
+            setShowOtpInput(false);
+            setSentOtp(false);
+          } else {
+            console.log(response?.data?.message);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          setOtpError(
+            "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
+          );
+        });
+    }
+  };
 
   const handleUpdateUserDetails = async values => {
     try {
@@ -113,17 +167,25 @@ const ProfileSettings = () => {
         email: values.email,
         is_verified: emailState,
       };
-      axios.patch(
+      await axios.patch(
         baseURL + endPoints.profileSettingPage.updateUserDetails,
         headers,
       );
+      showToastNotification("Your changes are saved successfully", 1);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(sentOtp, "sent otpp");
 
   return (
     <div className={styles.main_container}>
+      <ChangeNumber
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        contactNumber={userDetails?.phone_no}
+        userId={userId}
+      />
       <div className={styles.doc_side_bar}>
         <DocSidebar isOverviewSelected={true} />
       </div>
@@ -139,6 +201,7 @@ const ProfileSettings = () => {
               fullName: userDetails?.full_name || "",
               contactNumber: userDetails?.phone_no || "",
               email: userDetails?.email || "",
+              otp: "",
             }}
             enableReinitialize={true}
             validationSchema={validationSchema}
@@ -186,7 +249,11 @@ const ProfileSettings = () => {
                           className={formStyles.contact_input}
                         />
                       </div>
-                      <p className={styles.changeTxt}>Change</p>
+                      <p
+                        onClick={() => openModal()}
+                        className={styles.changeTxt}>
+                        Change
+                      </p>
                     </div>
                     <ErrorMessage name="contactNumber">
                       {msg =>
@@ -202,15 +269,9 @@ const ProfileSettings = () => {
                       Email
                       <span
                         className={`${
-                          userDetails?.is_verified === "Yes"
-                            ? styles.green
-                            : styles.red
+                          emailState === "Yes" ? styles.green : styles.red
                         }`}>
-                        (
-                        {userDetails?.is_verified === "Yes"
-                          ? "Verified"
-                          : "Unverified"}
-                        )
+                        ({emailState === "Yes" ? "Verified" : "Unverified"})
                       </span>
                     </p>
                     <div className={`${styles.row} ${formStyles.form_input}`}>
@@ -220,10 +281,15 @@ const ProfileSettings = () => {
                         value={formik.values.email}
                         placeholder="Enter your email"
                         className={formStyles.contact_input}
+                        disabled={sentOtp}
+                        onChange={e => {
+                          formik.setFieldValue("email", e.target.value);
+                          handleEmailChange(e.target.value);
+                        }}
                       />
-                      {userDetails?.is_verified === "No" &&
+                      {emailState === "No" &&
                         formik.values.email !== "" &&
-                        (showOtpInput ? (
+                        (showOtpInput && countdown > 0 ? (
                           <p className={`${styles.timerTxt}`}>
                             Resend OTP{" "}
                             <span className="font-normal">
@@ -260,21 +326,22 @@ const ProfileSettings = () => {
                           placeholder="Enter the OTP you just received"
                           className={formStyles.contact_input}
                         />
-                        {userDetails?.is_verified === "No" && (
+                        {emailState === "No" && (
                           <p
-                            onClick={handleOtpVerification}
+                            onClick={() =>
+                              handleOtpVerification(
+                                formik.values.email,
+                                formik.values.otp,
+                              )
+                            }
                             className={styles.changeTxt}>
                             Verify
                           </p>
                         )}
                       </div>
-                      {/* <ErrorMessage name="email">
-                        {msg =>
-                          formik.touched.email && (
-                            <p className={formStyles.error}>{msg}</p>
-                          )
-                        }
-                      </ErrorMessage> */}
+                      {otpError !== "" && (
+                        <p className={formStyles.error}>{otpError}</p>
+                      )}
                     </div>
                   )}
 
