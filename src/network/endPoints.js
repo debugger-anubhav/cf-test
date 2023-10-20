@@ -100,7 +100,10 @@ export const endPoints = {
 
   profileSettingPage: {
     getUserDetails: userId => `fc-users/getUserDetails?userId=${userId}`,
-    updateUserDetails: `/fc-users/updateUserDetails`,
+    updateUserDetails: `fc-users/updateUserDetails`,
+    sentOtpToEmail: `user/verifyemail`,
+    sentOtpToNumber: "user/sendotp_new",
+    verifyOtp: "user/onlyotpverify",
   },
 
   // categoryHappySubscriber:
