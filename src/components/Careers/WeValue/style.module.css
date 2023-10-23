@@ -1,0 +1,6 @@
+.heading {
+  @apply font-Poppins text-20 font-medium text-45454A;
+}
+.wrapper {
+  @apply lg:my-[88px] my-8;
+}

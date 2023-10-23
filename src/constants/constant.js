@@ -529,7 +529,7 @@ export const FooterItems = [
             },
             {
               text: "Career",
-              link: "https://test.rentofurniture.com/pages/careers",
+              link: "/pages/careers",
             },
             {
               text: "Contact US",

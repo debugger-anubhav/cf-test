@@ -69,7 +69,7 @@ const Footer = ({params}) => {
           text: "Refer a Friend",
           link: userId ? "/referral" : "/pages/refer-a-friend",
         },
-        {text: "Career", link: "https://test.rentofurniture.com/pages/careers"},
+        {text: "Career", link: "/pages/careers"},
         {
           text: "Contact US",
           link: "/pages/contact-us",
