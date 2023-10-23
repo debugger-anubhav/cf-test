@@ -2,5 +2,11 @@
   @apply font-Poppins text-20 font-medium text-45454A;
 }
 .wrapper {
-  @apply lg:my-[88px] my-8;
+  @apply px-4  md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] lg:my-[88px] my-8;
+}
+.card_wrapper {
+  @apply mt-8 flex overflow-x-scroll w-full;
+}
+.card {
+  @apply flex mr-3 w-full;
 }

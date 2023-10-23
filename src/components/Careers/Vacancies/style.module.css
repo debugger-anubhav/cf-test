@@ -1,0 +1,12 @@
+.main_container {
+  @apply px-4  md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] lg:mt-[88px] mt-8;
+}
+.heading {
+  @apply text-45454A text-20 font-medium font-Poppins;
+}
+.para {
+  @apply text-71717A text-16 font-Poppins font-normal mt-8;
+}
+.QuesAnsArray_div {
+  @apply flex flex-col gap-6 mt-8;
+}

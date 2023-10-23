@@ -16,7 +16,7 @@
   @apply flex font-Poppins text-45454A text-24 font-medium leading-8;
 }
 .join_us {
-  @apply h-[56px] w-[232px] flex justify-center items-center bg-F6B704 rounded-lg text-222 font-medium   text-16;
+  @apply h-[56px] w-[232px] lg:flex hidden justify-center items-center bg-F6B704 rounded-lg text-222 font-medium   text-16;
 }
 .detailing_row {
   @apply flex flex-col lg:mb-[88px] mb-8 lg:mt-8 mt-6;
