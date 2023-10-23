@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./style.module.css";
 import {useParams} from "next/navigation";
+import {FaCheck} from "react-icons/fa";
 
 const dummyData = [
   {
@@ -35,7 +36,12 @@ const Document = () => {
   return (
     <div className={style.conatiner_wrapper}>
       <div className={style.heading}>Order:#{params?.order_id}</div>
-      <div className={style.sub_heading}>Documentation stage: Autopay done</div>
+      <div className={style.sub_heading}>
+        Documentation stage: Autopay done
+        <div className={style.success_icon_div}>
+          <FaCheck color={"white"} size="16" />
+        </div>
+      </div>
       <div className={style.table}>
         <div className={style.table_headers}>
           <p className="col-span-5">Document Name</p>
