@@ -4,6 +4,7 @@ import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import ProfileSettings from "@/components/ProfileSettings";
+import {Formik} from "formik";
 import React from "react";
 
 const Profilesettings = () => {
@@ -12,7 +13,9 @@ const Profilesettings = () => {
       <AnnouncementBar />
       <Header />
       <MenuList />
-      <ProfileSettings />
+      <Formik>
+        <ProfileSettings />
+      </Formik>
       <Notifications />
     </div>
   );
