@@ -45,10 +45,10 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
       </div>
       {items?.map((ele, index) => (
         <a
-          href={ele.link}
+          href={ele?.link}
           rel="noopener"
           tabIndex="_blank"
-          aria-label={ele.item}
+          aria-label={ele?.item}
           key={index.toString()}>
           <div
             className={`flex mb-4 text-base font-Poppins cursor-pointer whitespace-nowrap hover:text-5774AC hover:underline ${

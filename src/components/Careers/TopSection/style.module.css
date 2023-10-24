@@ -1,0 +1,35 @@
+.main_container {
+  @apply px-4 mt-4 mb-8 lg:mb-[88px] lg:mt-3 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+
+.bread_crumbs {
+  @apply md:flex md:gap-1 md:items-center md:mb-4 hidden;
+}
+
+.bread_crumbs_text {
+  @apply text-[#71717A] text-14 font-normal leading-6;
+}
+.heading_row {
+  @apply flex justify-between;
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A text-24 font-medium leading-8;
+}
+.join_us {
+  @apply h-[56px] w-[232px] lg:flex hidden justify-center items-center bg-F6B704 rounded-lg text-222 font-medium   text-16;
+}
+.detailing_row {
+  @apply flex flex-col lg:mb-[88px] mb-8 lg:mt-8 mt-6;
+}
+.subheading {
+  @apply text-9A9AA2 text-16 font-Poppins font-medium;
+}
+.heading {
+  @apply text-45454A text-20 font-Poppins font-medium;
+}
+.para {
+  @apply text-71717A text-16 font-Poppins font-normal mt-8;
+}
+.gallery_detail {
+  @apply flex flex-col;
+}

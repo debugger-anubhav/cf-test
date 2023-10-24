@@ -17,8 +17,6 @@ const ReferAFriend = ({login}) => {
   const [loading, setloading] = useState(true);
   const isLoogedInfromStorage = decrypt(getLocalStorage("_ga"));
 
-  console.log(login, "hai ya nahiii ye bata");
-
   useEffect(() => {
     if (isLoogedInfromStorage) {
       setisLoogedIn(isLoogedInfromStorage);

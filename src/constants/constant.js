@@ -529,7 +529,7 @@ export const FooterItems = [
             },
             {
               text: "Career",
-              link: "https://test.rentofurniture.com/pages/careers",
+              link: "/pages/careers",
             },
             {
               text: "Contact US",
@@ -541,7 +541,7 @@ export const FooterItems = [
         {
           head: "Information",
           points: [
-            {text: "Blog", link: "https://test.rentofurniture.com/blog/"},
+            {text: "Blog", link: "https://cityfurnish.com/blog/"},
             {text: "FAQ", link: "/pages/faq"},
             {
               text: "Sample Rental Agreement",

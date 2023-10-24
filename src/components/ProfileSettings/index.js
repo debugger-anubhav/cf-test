@@ -14,6 +14,7 @@ import {baseURL} from "@/network/axios";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import ChangeNumber from "./Modal/ChangeNumber";
 import "react-responsive-modal/styles.css";
+import FormSkeleton from "../Common/FormSkeleton";
 
 const ProfileSettings = () => {
   const [emailState, setEmailState] = useState("");
@@ -25,6 +26,7 @@ const ProfileSettings = () => {
   const [userId, setUserId] = useState(useridFromStorage);
   const [otpError, setOtpError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   // const formik1 = useFormikContext();
 
@@ -70,7 +72,7 @@ const ProfileSettings = () => {
       const response = await axios.get(
         baseURL + endPoints.profileSettingPage.getUserDetails(userId),
       );
-      console.log(response?.data?.data, "ressss");
+      setLoadingSkeleton(false);
       setUserDetails({...response?.data?.data});
       setEmailState(response?.data?.data?.is_verified);
     } catch (err) {
@@ -159,7 +161,6 @@ const ProfileSettings = () => {
       console.log(err);
     }
   };
-  console.log(sentOtp, "sent otpp");
 
   return (
     <div className={styles.main_container}>
@@ -172,177 +173,191 @@ const ProfileSettings = () => {
         </div>
         <div className={styles.line}></div>
 
-        <div className={styles.form_wrapper}>
-          <Formik
-            initialValues={{
-              fullName: userDetails?.full_name || "",
-              contactNumber: userDetails?.phone_no || "",
-              email: userDetails?.email || "",
-              otp: "",
-            }}
-            enableReinitialize={true}
-            validationSchema={validationSchema}
-            onSubmit={values => {
-              handleUpdateUserDetails(values);
-            }}>
-            {formik => (
-              <>
-                <Form className={styles.form_wrapper}>
-                  <div>
-                    <div className={formStyles.form_field}>
-                      <p className={formStyles.form_label}>Full name</p>
-                      <Field
-                        type="text"
-                        name="fullName"
-                        // value={formik.values.fullName}
-                        placeholder="Enter your name"
-                        className={formStyles.form_input}
-                      />
-                      <ErrorMessage name="fullName">
-                        {msg =>
-                          formik.touched.fullName && (
-                            <p className={formStyles.error}>{msg} </p>
-                          )
-                        }
-                      </ErrorMessage>
-                    </div>
-
-                    <div className={formStyles.form_field}>
-                      <p className={formStyles.form_label}>Contact number</p>
-                      <div className={`${styles.row} ${formStyles.form_input}`}>
-                        <div className="flex gap-2 items-center">
-                          <img
-                            src={`${cityUrl + "india-icon.svg"}`}
-                            className={formStyles.flag}
-                            loading="lazy"
-                          />
+        <div>
+          {loadingSkeleton ? (
+            <div className="w-2/3">
+              <FormSkeleton />
+            </div>
+          ) : (
+            <div className={styles.form_wrapper}>
+              <Formik
+                initialValues={{
+                  fullName: userDetails?.full_name || "",
+                  contactNumber: userDetails?.phone_no || "",
+                  email: userDetails?.email || "",
+                  otp: "",
+                }}
+                enableReinitialize={true}
+                validationSchema={validationSchema}
+                onSubmit={values => {
+                  handleUpdateUserDetails(values);
+                }}>
+                {formik => (
+                  <>
+                    <Form className={styles.form_wrapper}>
+                      <div>
+                        <div className={formStyles.form_field}>
+                          <p className={formStyles.form_label}>Full name</p>
                           <Field
-                            type="number"
-                            readOnly
-                            name="contactNumber"
-                            value={formik?.values?.contactNumber}
-                            placeholder="Enter 10 digit number "
-                            className={formStyles.contact_input}
+                            type="text"
+                            name="fullName"
+                            // value={formik.values.fullName}
+                            placeholder="Enter your name"
+                            className={formStyles.form_input}
                           />
+                          <ErrorMessage name="fullName">
+                            {msg =>
+                              formik.touched.fullName && (
+                                <p className={formStyles.error}>{msg} </p>
+                              )
+                            }
+                          </ErrorMessage>
                         </div>
-                        <p
-                          onClick={() => openModal()}
-                          className={styles.changeTxt}>
-                          Change
-                        </p>
-                      </div>
-                      <ErrorMessage name="contactNumber">
-                        {msg =>
-                          formik.touched.contactNumber && (
-                            <p className={formStyles.error}>{msg} </p>
-                          )
-                        }
-                      </ErrorMessage>
-                    </div>
 
-                    <div className={formStyles.form_field}>
-                      <p className={formStyles.form_label}>
-                        Email
-                        <span
-                          className={`${
-                            emailState === "Yes" ? styles.green : styles.red
-                          }`}>
-                          ({emailState === "Yes" ? "Verified" : "Unverified"})
-                        </span>
-                      </p>
-                      <div className={`${styles.row} ${formStyles.form_input}`}>
-                        <Field
-                          type="email"
-                          name="email"
-                          value={formik.values.email}
-                          placeholder="Enter your email"
-                          className={formStyles.contact_input}
-                          disabled={sentOtp}
-                          onChange={e => {
-                            formik.setFieldValue("email", e.target.value);
-                            handleEmailChange(e.target.value);
-                          }}
-                        />
-                        {emailState === "No" &&
-                          formik.values.email !== "" &&
-                          (showOtpInput && countdown > 0 ? (
-                            <p className={`${styles.timerTxt}`}>
-                              Resend OTP{" "}
-                              <span className="font-normal">
-                                {countdown} secs
-                              </span>
-                            </p>
-                          ) : (
+                        <div className={formStyles.form_field}>
+                          <p className={formStyles.form_label}>
+                            Contact number
+                          </p>
+                          <div
+                            className={`${styles.row} ${formStyles.form_input}`}>
+                            <div className="flex gap-2 items-center">
+                              <img
+                                src={`${cityUrl + "india-icon.svg"}`}
+                                className={formStyles.flag}
+                                loading="lazy"
+                              />
+                              <Field
+                                type="number"
+                                readOnly
+                                name="contactNumber"
+                                value={formik?.values?.contactNumber}
+                                placeholder="Enter 10 digit number "
+                                className={formStyles.contact_input}
+                              />
+                            </div>
                             <p
-                              onClick={() => {
-                                sendOTP(formik.values.email);
+                              onClick={() => openModal()}
+                              className={styles.changeTxt}>
+                              Change
+                            </p>
+                          </div>
+                          <ErrorMessage name="contactNumber">
+                            {msg =>
+                              formik.touched.contactNumber && (
+                                <p className={formStyles.error}>{msg} </p>
+                              )
+                            }
+                          </ErrorMessage>
+                        </div>
+
+                        <div className={formStyles.form_field}>
+                          <p className={formStyles.form_label}>
+                            Email
+                            <span
+                              className={`${
+                                emailState === "Yes" ? styles.green : styles.red
+                              }`}>
+                              (
+                              {emailState === "Yes" ? "Verified" : "Unverified"}
+                              )
+                            </span>
+                          </p>
+                          <div
+                            className={`${styles.row} ${formStyles.form_input}`}>
+                            <Field
+                              type="email"
+                              name="email"
+                              value={formik.values.email}
+                              placeholder="Enter your email"
+                              className={formStyles.contact_input}
+                              disabled={sentOtp}
+                              onChange={e => {
+                                formik.setFieldValue("email", e.target.value);
+                                handleEmailChange(e.target.value);
                               }}
-                              className={styles.changeTxt}>
-                              {sentOtp ? "Resend OTP" : "Verify"}
-                            </p>
-                          ))}
-                      </div>
-                      <ErrorMessage name="email">
-                        {msg =>
-                          formik.touched.email && (
-                            <p className={formStyles.error}>{msg}</p>
-                          )
-                        }
-                      </ErrorMessage>
-                    </div>
-
-                    {showOtpInput && (
-                      <div className={formStyles.form_field}>
-                        <p className={formStyles.form_label}>
-                          Provide your OTP
-                        </p>
-                        <div
-                          className={`${styles.row} ${formStyles.form_input}`}>
-                          <Field
-                            type="number"
-                            name="otp"
-                            placeholder="Enter the OTP you just received"
-                            className={formStyles.contact_input}
-                          />
-                          {emailState === "No" && (
-                            <p
-                              onClick={() =>
-                                handleOtpVerification(
-                                  formik.values.email,
-                                  formik.values.otp,
-                                )
-                              }
-                              className={styles.changeTxt}>
-                              Verify
-                            </p>
-                          )}
+                            />
+                            {emailState === "No" &&
+                              formik.values.email !== "" &&
+                              (showOtpInput && countdown > 0 ? (
+                                <p className={`${styles.timerTxt}`}>
+                                  Resend OTP{" "}
+                                  <span className="font-normal">
+                                    {countdown} secs
+                                  </span>
+                                </p>
+                              ) : (
+                                <p
+                                  onClick={() => {
+                                    sendOTP(formik.values.email);
+                                  }}
+                                  className={styles.changeTxt}>
+                                  {sentOtp ? "Resend OTP" : "Verify"}
+                                </p>
+                              ))}
+                          </div>
+                          <ErrorMessage name="email">
+                            {msg =>
+                              formik.touched.email && (
+                                <p className={formStyles.error}>{msg}</p>
+                              )
+                            }
+                          </ErrorMessage>
                         </div>
-                        {otpError !== "" && (
-                          <p className={formStyles.error}>{otpError}</p>
-                        )}
-                      </div>
-                    )}
 
-                    <div className={styles.btn_wrapper}>
-                      <button type="submit" className={styles.btn}>
-                        Save changes
-                        <ArrowForw className={styles.forw_arrow} />
-                      </button>
-                    </div>
-                  </div>
-                </Form>
-                <ChangeNumber
-                  isModalOpen={isModalOpen}
-                  closeModal={closeModal}
-                  contactNumber={userDetails.phone_no}
-                  userId={userId}
-                  handleNumberChange={val =>
-                    formik.setFieldValue("contactNumber", val)
-                  }
-                />
-              </>
-            )}
-          </Formik>
+                        {showOtpInput && (
+                          <div className={formStyles.form_field}>
+                            <p className={formStyles.form_label}>
+                              Provide your OTP
+                            </p>
+                            <div
+                              className={`${styles.row} ${formStyles.form_input}`}>
+                              <Field
+                                type="number"
+                                name="otp"
+                                placeholder="Enter the OTP you just received"
+                                className={formStyles.contact_input}
+                              />
+                              {emailState === "No" && (
+                                <p
+                                  onClick={() =>
+                                    handleOtpVerification(
+                                      formik.values.email,
+                                      formik.values.otp,
+                                    )
+                                  }
+                                  className={styles.changeTxt}>
+                                  Verify
+                                </p>
+                              )}
+                            </div>
+                            {otpError !== "" && (
+                              <p className={formStyles.error}>{otpError}</p>
+                            )}
+                          </div>
+                        )}
+
+                        <div className={styles.btn_wrapper}>
+                          <button type="submit" className={styles.btn}>
+                            Save changes
+                            <ArrowForw className={styles.forw_arrow} />
+                          </button>
+                        </div>
+                      </div>
+                    </Form>
+                    <ChangeNumber
+                      isModalOpen={isModalOpen}
+                      closeModal={closeModal}
+                      contactNumber={userDetails.phone_no}
+                      userId={userId}
+                      handleNumberChange={val =>
+                        formik.setFieldValue("contactNumber", val)
+                      }
+                    />
+                  </>
+                )}
+              </Formik>
+            </div>
+          )}
         </div>
       </div>
     </div>
