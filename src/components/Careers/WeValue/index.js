@@ -27,12 +27,12 @@ export default function WeValue() {
         {Data?.map((item, index) => {
           return (
             <div
-              className={styles.card}
-              key={index.toString()}
-              // style={{background:`url(${item.bg})`}}
-            >
-              {/* {item?.title} */}
-              <img src={item.bg} />
+              className={`${styles.card} ${
+                index !== Data.length - 1 ? "lg:mr-6 mr-4" : "mr-0"
+              }`}
+              key={index.toString()}>
+              <img src={item.bg} alt="Snow" className={"w-full"} />
+              <p className={styles.bottom_left}>{item.title}</p>
             </div>
           );
         })}
