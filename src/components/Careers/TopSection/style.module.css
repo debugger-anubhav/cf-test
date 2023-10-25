@@ -1,5 +1,5 @@
 .main_container {
-  @apply px-4 mt-4 mb-8 lg:mb-[88px] lg:mt-3 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+  @apply px-4 mt-4 mb-6  lg:mb-[88px] lg:mt-3 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 
 .bread_crumbs {
@@ -13,7 +13,7 @@
   @apply flex justify-between;
 }
 .main_heading {
-  @apply flex font-Poppins text-45454A text-24 font-medium leading-8;
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
 }
 .join_us {
   @apply h-[56px] w-[232px] lg:flex hidden justify-center items-center bg-F6B704 rounded-lg text-222 font-medium   text-16;
@@ -22,14 +22,20 @@
   @apply flex flex-col lg:mb-[88px] mb-8 lg:mt-8 mt-6;
 }
 .subheading {
-  @apply text-9A9AA2 text-16 font-Poppins font-medium;
+  @apply text-9A9AA2 lg:text-16 text-14 font-Poppins font-medium;
 }
 .heading {
-  @apply text-45454A text-20 font-Poppins font-medium;
+  @apply text-45454A lg:text-20 text-16 font-Poppins font-medium;
 }
 .para {
-  @apply text-71717A text-16 font-Poppins font-normal mt-8;
+  @apply text-71717A lg:text-16 text-14 font-Poppins font-normal lg:mt-8 mt-6;
 }
 .gallery_detail {
   @apply flex flex-col;
+}
+.join_us_sticky {
+  @apply h-[48px] w-full lg:hidden flex justify-center items-center bg-F6B704 rounded-lg text-222 font-medium text-14;
+}
+.sticky_btn_wrapper {
+  @apply flex p-4 bg-white fixed z-[111] bottom-0 w-full;
 }

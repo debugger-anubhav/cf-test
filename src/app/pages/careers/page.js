@@ -8,6 +8,7 @@ import TopSection from "@/components/Careers/TopSection";
 import WeValue from "@/components/Careers/WeValue";
 import OurLocation from "@/components/Careers/OurLocations";
 import Vacancies from "@/components/Careers/Vacancies";
+import Gallery from "@/components/Careers/Gallery";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -19,6 +20,7 @@ export default function Career() {
       <Header />
       <MenuList />
       <TopSection />
+      <Gallery />
       <WeValue />
       <OurLocation />
       <Vacancies />

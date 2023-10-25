@@ -36,18 +36,6 @@ export default function Vacancies() {
       answer:
         "- You can refer as many friends as you want. You get benefit on every successful conversion.<br/>- Referred customer can not club referral benefit with any other offer",
     },
-    {
-      id: 5,
-      question: "Can I Use My Own Referral Code?",
-      answer:
-        "You can not use your own referral code. Cityfurnish reserves the right to revoke referral benefits availed by individuals who share a common address with the referrer",
-    },
-    {
-      id: 6,
-      question: "Other Terms And Conditions",
-      answer:
-        "- Referral program is not appliable on fitness equipments and office furniture. <br/> - Referrer should place an order of min 1000 Rs monthly rental to avail benefit of referral program.<br/>- Cityfurnish reserves the right to revoke referral benefits if they were earned against our terms or close the referral program anytime without any prior intimation",
-    },
   ];
   const [openIndex, setOpenIndex] = useState(0);
   const toggleQuestion = index => {

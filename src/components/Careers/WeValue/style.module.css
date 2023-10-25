@@ -8,5 +8,9 @@
   @apply mt-8 flex overflow-x-scroll w-full;
 }
 .card {
-  @apply flex mr-3 w-full;
+  @apply flex  lg:min-w-[273px] min-w-[250px] w-full relative;
+}
+
+.bottom_left {
+  @apply absolute bottom-8 left-8 text-45454A lg:text-18 text-16 font-medium font-Poppins leading-6;
 }
