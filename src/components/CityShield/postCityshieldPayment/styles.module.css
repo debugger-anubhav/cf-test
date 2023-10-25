@@ -1,0 +1,9 @@
+.icon {
+  @apply w-16 h-16 text-[#FFDD66] my-8;
+}
+.desc {
+  @apply text-71717A text-16 font-medium leading-6 tracking-0.3 mt-8 w-[604px];
+}
+.btn {
+  @apply flex justify-center px-8 items-center rounded-lg bg-F6B704;
+}

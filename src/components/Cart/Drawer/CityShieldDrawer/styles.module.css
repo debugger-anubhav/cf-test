@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins overflow-scroll;
 }
 .city_shield_head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-semibold leading-[30px] text-[#2D9469];
@@ -35,7 +35,7 @@
   @apply text-71717A lg:leading-6 font-Poppins text-12 lg:text-16 tracking-0.24 lg:tracking-normal text-center mt-2;
 }
 .arr_wrapper {
-  @apply flex gap-4 xl:gap-8 mt-8 items-center;
+  @apply flex gap-2 sm:gap-4 xl:gap-8 mt-8 items-center;
 }
 .img_div {
   @apply w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] flex;
@@ -65,7 +65,7 @@
   @apply list-none flex items-baseline gap-2;
 }
 .points_item {
-  @apply text-71717A text-16 leading-6;
+  @apply text-71717A text-14 xl:text-16 leading-normal xl:leading-6;
 }
 .dot {
   @apply px-[2px] w-1 h-1 rounded-full bg-71717A;
