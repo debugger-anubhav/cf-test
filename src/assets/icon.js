@@ -22,6 +22,7 @@ import {
   IoMdArrowDropup,
   IoIosArrowForward,
   IoIosArrowBack,
+  IoMdOpen,
 } from "react-icons/io";
 import {
   BsFillStarFill,
@@ -330,4 +331,8 @@ export const OutlineArrowRight = ({size, color, className}) => (
 );
 export const AddIcon = ({size, color, className}) => (
   <FaCirclePlus size={size} color={color} className={className} />
+);
+
+export const OpenIcon = ({size, color, className}) => (
+  <IoMdOpen size={size} color={color} className={className} />
 );
