@@ -18,7 +18,8 @@ export default function TopSection() {
       </div>
       <div className={styles.heading_row}>
         <div className={styles.main_heading}>
-          {` Don't Just Dream, Do it With Us 🤩`}
+          {` Don't Just Dream, Do it With Us `}
+          <span className="lg:flex hidden"> 🤩</span>
         </div>
         <button className={styles.join_us}>Join us</button>
       </div>
@@ -47,6 +48,9 @@ export default function TopSection() {
           like you. Want coworkers who are as committed, curious, and
           enthusiastic as you? Join our team.
         </p>
+      </div>
+      <div className={styles.sticky_btn_wrapper}>
+        <button className={styles.join_us_sticky}>Join us</button>
       </div>
     </div>
   );
