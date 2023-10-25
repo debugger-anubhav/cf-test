@@ -33,6 +33,7 @@ export const DownloadForMobileImg =
   Mobile + "download-cityfurnish-mobile-app.webp";
 
 export const AboutUs = "https://d3juy0zp6vqec8.cloudfront.net/images";
+export const Career = "https://d3juy0zp6vqec8.cloudfront.net/images";
 
 export const Images = {
   partner,
@@ -47,6 +48,17 @@ export const HomePageImages = {
   office: Desktop + "office.webp",
   studyroom: Desktop + "study-room.webp",
   editIcon,
+};
+
+export const CareerGallery = {
+  first: Career + "/cf_new_1.webp",
+  second: Career + "/cf_new_2.webp",
+  third: Career + "/cf_new_3.webp",
+  fourth: Career + "/cf_new_4.webp",
+  fivth: Career + "/cf_new_5.webp",
+  sixth: Career + "/cf_new_6.webp",
+  seven: Career + "/cf_new_7.webp",
+  eight: Career + "/cf_new_8.webp",
 };
 
 export const HomePageMediaCoverage = {

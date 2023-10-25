@@ -20,7 +20,7 @@ export default function OurLocation() {
           return (
             <li
               className={`${styles.city} ${
-                index !== cities.length - 1 ? "mb-4" : "mb-0"
+                index !== cities.length - 1 ? "lg:mb-4 mb-3" : "mb-0"
               }`}
               key={index.toString()}>
               {item}
