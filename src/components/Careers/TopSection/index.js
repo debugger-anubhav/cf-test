@@ -1,21 +1,11 @@
 import React from "react";
 import styles from "./style.module.css";
-import {ForwardArrow} from "@/assets/icon";
+import BreadCrumbs from "@/components/Common/BreadCrumbs";
 
 export default function TopSection() {
   return (
     <div className={styles.main_container}>
-      <div className={styles.bread_crumbs}>
-        <a href={"/cityFurnish"}>
-          <p className={styles.bread_crumbs_text}>Home</p>
-        </a>
-        <ForwardArrow color={"#71717A"} size={12} />
-        <a href={"/banglore/rent"}>
-          <p className={`${styles.bread_crumbs_text} !font-medium`}>
-            Join Our Team
-          </p>
-        </a>
-      </div>
+      <BreadCrumbs currentPage={"Join Our Team"} />
       <div className={styles.heading_row}>
         <div className={styles.main_heading}>
           {` Don't Just Dream, Do it With Us `}

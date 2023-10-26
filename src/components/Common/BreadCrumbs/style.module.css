@@ -1,0 +1,7 @@
+.bread_crumbs {
+  @apply md:flex md:gap-1 md:items-center md:mb-4 hidden;
+}
+
+.bread_crumbs_text {
+  @apply text-[#71717A] text-14 font-normal leading-6;
+}

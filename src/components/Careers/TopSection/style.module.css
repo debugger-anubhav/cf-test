@@ -2,13 +2,6 @@
   @apply px-4 mt-4 mb-6  lg:mb-[88px] lg:mt-3 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 
-.bread_crumbs {
-  @apply md:flex md:gap-1 md:items-center md:mb-4 hidden;
-}
-
-.bread_crumbs_text {
-  @apply text-[#71717A] text-14 font-normal leading-6;
-}
 .heading_row {
   @apply flex justify-between;
 }
