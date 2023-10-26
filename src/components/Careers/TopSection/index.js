@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./style.module.css";
-import BreadCrumbs from "@/components/Common/BreadCrumbs";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 
 export default function TopSection() {
   return (
     <div className={styles.main_container}>
-      <BreadCrumbs currentPage={"Join Our Team"} />
+      <BreadCrumbsCommon currentPage={"Join Our Team"} />
       <div className={styles.heading_row}>
         <div className={styles.main_heading}>
           {` Don't Just Dream, Do it With Us `}

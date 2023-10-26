@@ -1,0 +1,15 @@
+.wrapper {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+}
+.heading {
+  @apply flex font-Poppins text-45454A lg:text-20 text-16 font-medium leading-8;
+}
+.detail {
+  @apply text-71717A lg:text-16 text-14 font-Poppins lg:mt-8 mt-6;
+}
+.data_box {
+  @apply flex lg:my-12 my-8 flex-col;
+}

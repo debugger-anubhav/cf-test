@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import BreadCrumbs from "@/components/Common/BreadCrumbs";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import Rating from "react-rating";
 import {ArrowForw, RatingStar} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -31,7 +31,7 @@ export default function MainSection() {
 
   return (
     <div className={styles.wrapper}>
-      <BreadCrumbs currentPage={"Feedback"} />
+      <BreadCrumbsCommon currentPage={"Feedback"} />
       <div className={styles.main_heading}>{Heading}</div>
       <div className={styles.sub_heading}>{Subheading}</div>
 
