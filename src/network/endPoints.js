@@ -122,4 +122,5 @@ export const endPoints = {
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
 
   enquiry: "fc-bulk-orders/submitEnquiryForm",
+  feedback: "/ivr-feedbacks/saveFeedback",
 };

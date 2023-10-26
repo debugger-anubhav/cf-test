@@ -2,7 +2,7 @@ import {ForwardArrow} from "@/assets/icon";
 import React from "react";
 import styles from "./style.module.css";
 
-export default function BreadCrumbs({currentPage}) {
+export default function BreadCrumbsCommon({currentPage}) {
   return (
     <div className={styles.bread_crumbs}>
       <a href={"/cityFurnish"}>
