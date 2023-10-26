@@ -13,3 +13,9 @@
 .data_box {
   @apply flex lg:my-12 my-8 flex-col;
 }
+.list_point {
+  @apply flex list-disc justify-start items-center mb-3 w-full;
+}
+.dot {
+  @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
+}

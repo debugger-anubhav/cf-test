@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./style.module.css";
 import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
-import {Data} from "../Data";
+import {Data, Points} from "../Data";
 
 function MainSection() {
   const Heading = "Rental Agreement";
@@ -22,6 +22,28 @@ function MainSection() {
               {index === Data.length - 1 && (
                 <p className={`${styles.detail} !mt-4`}>{item.lastDesc}</p>
               )}
+            </div>
+          );
+        })}
+      </div>
+
+      <div>
+        {Points?.map((item, index) => {
+          return (
+            <div className={styles.data_box} key={index.toString()}>
+              <p className={styles.heading}>{item.heading}</p>
+              <div className={styles.detail}>
+                {item.pointList?.map((point, i) => {
+                  return (
+                    <div key={i.toString()} className={styles.list_point}>
+                      <div className={styles.dot}>
+                        <p className={styles.dot}></p>
+                      </div>
+                      <p className="ml-3">{point}</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}
