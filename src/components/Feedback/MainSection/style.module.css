@@ -1,0 +1,24 @@
+.wrapper {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+}
+.sub_heading {
+  @apply flex font-Poppins text-71717A lg:text-16 lg:my-8 my-6 text-14;
+}
+.rating_row {
+  @apply flex gap-2 flex-col;
+}
+.star {
+  @apply w-5 h-5 mr-2;
+}
+.submit_btn {
+  @apply bg-F6B704 rounded-lg flex gap-[10px] md:text-16 text-14 font-medium text-222 leading-5 lg:h-[56px] h-[48px] md:w-[232px] w-full mt-8 justify-center items-center lg:mb-[88px] mb-[48px];
+}
+.input_wrapper {
+  @apply my-8;
+}
+.textarea {
+  @apply border border-DDDDDF rounded-xl text-71717A text-16 font-Poppins px-4 py-3 outline-none lg:w-[500px] w-full lg:h-[168px] h-[150px];
+}

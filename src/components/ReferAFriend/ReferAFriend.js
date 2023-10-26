@@ -6,11 +6,14 @@ import MainSection from "./MainSection/MainSection";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {DocSidebarSkeleton} from "../Documentation/Sidebar/DocSidebar";
+import {FooterSkeleton} from "@/components/Common/Footer";
 
 const DocSidebar = loadable(() =>
   import("../Documentation/Sidebar/DocSidebar"),
 );
-const Footer = loadable(() => import("@/components/Common/Footer"));
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 
 const ReferAFriend = ({login}) => {
   const [isLoogedIn, setisLoogedIn] = useState(false);
