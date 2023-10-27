@@ -1,0 +1,25 @@
+.wrapper {
+  @apply px-4  md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+}
+
+.card_wrapper {
+  @apply lg:mt-8 mt-6 grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-6 gap-8 lg:mb-[88px] mb-[48px];
+}
+.detail_wrapper {
+  @apply absolute xl:bottom-4 bottom-3 p-4;
+}
+.heading {
+  @apply lg:text-20 text-16 font-medium font-Poppins text-222;
+}
+.detail {
+  @apply lg:text-16 text-14 font-Poppins text-71717A;
+}
+.responsive_deatil_wrapper {
+  @apply p-4 border border-[#E3E1DC] rounded-lg relative w-full;
+}
+.responsive_icon {
+  @apply absolute right-4 top-4;
+}

@@ -610,3 +610,55 @@ export function getLocalStorageString(key, value) {
     return {key, value};
   }
 }
+
+export const BenefitPageData = [
+  {
+    icon: hasselFreeSection.IconThree,
+    backgroungImage: hasselFreeSection.FrameThree,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-installation.webp",
+    Heading: "Free installation",
+    text: "No need to pay for furniture assembly. We will install your furniture for free",
+  },
+  {
+    icon: hasselFreeSection.IconTwo,
+    backgroungImage: hasselFreeSection.FrameTwo,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-shipping.webp",
+    Heading: "Free shipping",
+    text: "Get your furniture delivered to your doorstep with no extra shipping cost",
+  },
+  {
+    icon: hasselFreeSection.IconOne,
+    backgroungImage: hasselFreeSection.FrameOne,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/mint-new-products.webp",
+    Heading: "Mint new products",
+    text: "Assured products. You'll be renting furniture that looks & feels brand new",
+  },
+
+  {
+    icon: hasselFreeSection.IconFour,
+    backgroungImage: hasselFreeSection.FrameFour,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-relocation.webp",
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
+  },
+  {
+    icon: hasselFreeSection.IconFive,
+    backgroungImage: hasselFreeSection.FrameFive,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/insurance-cover.webp",
+    Heading: "Insurance cover",
+    text: "Minor damages or scratches to the rent products will be waived off",
+  },
+  {
+    icon: hasselFreeSection.IconSix,
+    backgroungImage: hasselFreeSection.FrameSix,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/flexible-upgrades.webp",
+    Heading: "Flexible upgrades",
+    text: "Upgrade your house with new products after 6 months of use for free",
+  },
+];
