@@ -12,10 +12,13 @@ const DropDown = ({
   isOpen,
   maxWidth,
   optionsActive,
+  isInitialScreen = false,
+  handleKycState,
 }) => {
   const handleOptionClick = option => {
     setSelectedOption(option);
     setIsDDOpen(false);
+    isInitialScreen && handleKycState(option);
   };
   return (
     <div
@@ -26,7 +29,7 @@ const DropDown = ({
         boxShadow: isOpen ? "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" : "",
       }}>
       <div
-        className={`${styles["selected-option"]} ${
+        className={`mt-1 ${styles["selected-option"]} ${
           isOpen ? "border-none" : "!border-[#DDDDDF]"
         }`}
         onClick={() => {
@@ -34,9 +37,13 @@ const DropDown = ({
         }}>
         <span
           className={` ${styles.selected_txt} ${
-            selectedOption?.value ? "text-black" : "text-[#71717A]"
+            selectedOption?.value || selectedOption?.dealCodeNumber
+              ? "text-black"
+              : "text-[#71717A]"
           }`}>
-          {selectedOption?.label || "Select an option"}
+          {isInitialScreen
+            ? selectedOption?.dealCodeNumber || "Select order"
+            : selectedOption?.label || "Select an option"}
         </span>
         <div className={`${styles.ddArrow}`}>
           {isOpen ? (
@@ -46,7 +53,10 @@ const DropDown = ({
           )}
         </div>
       </div>
-      <ul className={`${isOpen ? optionsActive : styles.options}  `}>
+      <ul
+        className={`${
+          isOpen ? optionsActive : styles.options
+        } max-h-[260px] overflow-scroll`}>
         {options?.map((option, index) => (
           <li
             className={`${styles.option} ${
@@ -54,7 +64,7 @@ const DropDown = ({
             } ${index === 0 ? "border-t" : ""}`}
             key={index}
             onClick={() => handleOptionClick(option)}>
-            {option.label}
+            {isInitialScreen ? option.dealCodeNumber : option.label}
           </li>
         ))}
       </ul>

@@ -24,11 +24,16 @@ import {
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-const KYCAddress = () => {
+import {useSelector} from "react-redux";
+import CommonField from "../CommonField/CommonField";
+
+const KYCAddress = ({handleKycState, step}) => {
+  const selectedOrderId = useSelector(state => state.kycPage.orderId);
+
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
   const [docsData, setDocsData] = useState([]);
-
+  const [orderId] = useState(selectedOrderId);
   const [selectedOptionCur, setSelectedOptionCur] = useState();
   const [selectedOptionPer, setSelectedOptionPer] = useState();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -115,7 +120,7 @@ const KYCAddress = () => {
   };
   const handleContactBlur = () => {
     const regPat = /[!@#$%^&*()_+{}:;<>,.?~\\/\s]/;
-    console.log(regPat.test(formData?.contactNumber), formData?.contactNumber);
+    // console.log(regPat.test(formData?.contactNumber), formData?.contactNumber);
     if (formData?.contactNumber?.length < 10) {
       setFormErrors(prev => ({
         ...prev,
@@ -230,11 +235,12 @@ const KYCAddress = () => {
     allData.append("alternateMobNo", formData?.contactNumber);
     allData.append("docs", formData.addressProof);
     allData.append("docs", formData.currentAddressProof);
-    allData.append("orderId", "3434");
+    allData.append("orderId", orderId);
     baseInstance
       .post(baseURL + endPoints.uploadAddressDocs, allData)
       .then(res => {
-        console(res);
+        console.log(res, "res in upload address");
+        handleKycState(selectedOrderId);
       })
       .catch(err => console.log(err));
   };
@@ -244,8 +250,9 @@ const KYCAddress = () => {
   }, []);
   return (
     <div>
+      <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
-        <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
+        <span className={`${commonStyles.formStepHeading}`}>Step {step}</span>
       </div>
       <div className={`${styles.formHeadingFirst}`}>
         <span className={`${commonStyles.formHeadings}`}>
@@ -307,7 +314,7 @@ const KYCAddress = () => {
               formErrors.addressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
               !formErrors.addressProof && formData.addressProof.name
-                ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                ? " !bg-[#F1FFF9] md:!bg-white text-black"
                 : "text-[#71717a]"
             }`}>
             <div className={`${commonStyles.flexICenter}`}>

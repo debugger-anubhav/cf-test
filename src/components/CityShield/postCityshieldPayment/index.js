@@ -3,8 +3,10 @@ import styles from "./styles.module.css";
 import commonStyles from "../styles.module.css";
 import Breadcrump from "../breadcrump";
 import {FaInfoCircle} from "react-icons/fa";
+import {useRouter} from "next/navigation";
 
-const BreakdownDrawer = () => {
+const PostCityshield = () => {
+  const router = useRouter();
   return (
     <div className={commonStyles.main_container}>
       <Breadcrump />
@@ -16,12 +18,22 @@ const BreakdownDrawer = () => {
         </p>
         <p className={styles.desc}>
           If you have any confusion or want more assistance, you can contact us
-          at 080-66084700.
+          at{" "}
+          <a
+            className={styles.tele}
+            href={`tel:080-66084700`}
+            target="_self"
+            rel="noopener  noreferrer"
+            aria-label="080-66084700">
+            080-66084700
+          </a>
         </p>
-        <button className={styles.btn}>Return to home page</button>
+        <button onClick={() => router.push("/")} className={styles.btn}>
+          Return to home page
+        </button>
       </div>
     </div>
   );
 };
 
-export default BreakdownDrawer;
+export default PostCityshield;

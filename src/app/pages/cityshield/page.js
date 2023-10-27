@@ -16,7 +16,6 @@ export default function Cityshield() {
       <Header />
       <MenuList />
       <CityShieldPage />
-
       <Footer />
     </div>
   );

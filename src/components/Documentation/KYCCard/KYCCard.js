@@ -3,13 +3,17 @@ import styles from "./KYCCard.module.css";
 import commonStyles from "../common.module.css";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {OutlineArrowRight} from "@/assets/icon";
+import CommonField from "../CommonField/CommonField";
+// import {useSelector} from "react-redux";
 
-const KYCCard = () => {
+const KYCCard = ({handleKycState, setKycState}) => {
+  //  const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const [selected, setSelected] = useState("");
   return (
     <div>
+      <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
-        <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
+        <span className={`${commonStyles.formStepHeading}`}>Step 3</span>
       </div>
       <div className={`${styles.formHeadingFirst}`}>
         <span className={`${commonStyles.formHeadings}`}>
@@ -66,7 +70,8 @@ const KYCCard = () => {
             I’ll do it later
           </button>
           <button
-            disabled
+            // disabled
+            onClick={() => setKycState(4)}
             className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
             <span> Save & proceed</span>
             <OutlineArrowRight />

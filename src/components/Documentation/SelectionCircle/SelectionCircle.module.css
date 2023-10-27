@@ -1,5 +1,5 @@
 .outerCircle {
-  @apply rounded-full flex justify-center items-center border-[3px] w-5 h-5 border-[#597492];
+  @apply rounded-full flex justify-center items-center border-[3px] w-5 h-5 border-[#597492] cursor-pointer;
 }
 .innerCircle {
   @apply rounded-full  w-2 h-2 bg-[#597492];
