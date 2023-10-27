@@ -545,7 +545,7 @@ export const FooterItems = [
             {text: "FAQ", link: "/pages/faq"},
             {
               text: "Sample Rental Agreement",
-              link: "https://test.rentofurniture.com/pages/rentalagreement",
+              link: "/pages/rentalagreement",
             },
             {
               text: "Offers",
