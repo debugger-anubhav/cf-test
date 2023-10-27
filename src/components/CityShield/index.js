@@ -1,17 +1,36 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
 import CityShieldContent from "@/components/Cart/Drawer/CityShieldDrawer/cityShieldContent";
 import {ArrowForw, InformationIcon, OpenIcon} from "@/assets/icon";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
 import BreakdownDrawer from "./breakdownDrawer";
 import Breadcrump from "./breadcrump";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
 
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [details, setDetails] = useState();
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  const getUserDetails = () => {
+    axios
+      .get(baseURL + endPoints.cityshieldPage.getUserDetails("409596296"))
+      .then(res => {
+        console.log(res);
+        setDetails(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    getUserDetails();
+  }, []);
+
   return (
     <div className={styles.main_container}>
       <Breadcrump />
@@ -24,7 +43,7 @@ const CityShieldPage = () => {
             <div className={formStyles.form_field}>
               <p className={formStyles.form_label}>Full name</p>
               <input
-                value={"Rupali Thakur"}
+                value={details?.fullName}
                 type="text"
                 name="fullName"
                 className={styles.form_input}
@@ -37,7 +56,7 @@ const CityShieldPage = () => {
               <input
                 name="email"
                 className={styles.form_input}
-                value={"cfh@gmail.com"}
+                value={details?.email}
                 readOnly
               />
             </div>
@@ -45,7 +64,7 @@ const CityShieldPage = () => {
             <div className={formStyles.form_field}>
               <p className={formStyles.form_label}>Order ID</p>
               <input
-                value={"#1234567890"}
+                value={details?.orderId}
                 name="orderId"
                 className={styles.form_input}
                 readOnly
@@ -68,7 +87,7 @@ const CityShieldPage = () => {
             <div className={formStyles.form_field}>
               <p className={formStyles.form_label}>Amount (in Rs.)</p>
               <input
-                value={199}
+                value={details?.amount}
                 name="amount"
                 className={styles.form_input}
                 readOnly
@@ -95,7 +114,11 @@ const CityShieldPage = () => {
         </div>
 
         {drawerOpen && (
-          <BreakdownDrawer toggleDrawer={toggleDrawer} open={drawerOpen} />
+          <BreakdownDrawer
+            toggleDrawer={toggleDrawer}
+            open={drawerOpen}
+            billBreakup={details?.billReciept}
+          />
         )}
       </div>
     </div>
