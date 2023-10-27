@@ -7,6 +7,7 @@ import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import loadable from "@loadable/component";
 import MainSection from "@/components/Feedback/MainSection";
+import Notifications from "@/components/Common/Notifications/Notification";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
@@ -19,6 +20,7 @@ export default function Feedback() {
       <MenuList />
       <MainSection />
       <Footer />
+      <Notifications />
     </div>
   );
 }
