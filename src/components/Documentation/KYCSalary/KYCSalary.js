@@ -15,6 +15,8 @@ import {
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import CommonField from "../CommonField/CommonField";
+import {useSelector} from "react-redux";
 const allowedFileTypes = [
   "image/jpeg",
   "image/jpg",
@@ -44,7 +46,9 @@ const SelectionComp = ({
     </div>
   );
 };
-const KYCSalary = () => {
+const KYCSalary = ({handleKycState}) => {
+  const selectedOrderId = useSelector(state => state.kycPage.orderId);
+
   const [isSelected, setIsSelected] = useState("");
   const [formData, setFormData] = useState({
     currentAddressProof: "",
@@ -107,11 +111,12 @@ const KYCSalary = () => {
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
     allData.append("doc", formData.currentAddressProof);
-    allData.append("orderId", "3434");
+    allData.append("orderId", selectedOrderId);
     baseInstance
       .post(baseURL + endPoints.uploadFinancialDoc, allData)
       .then(res => {
-        console(res);
+        console.log(res);
+        handleKycState(selectedOrderId);
       })
       .catch(err => console.log(err));
   };
@@ -120,8 +125,9 @@ const KYCSalary = () => {
   }, []);
   return (
     <div className="">
+      <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
-        <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
+        <span className={`${commonStyles.formStepHeading}`}>Step 2</span>
       </div>
       <div className={`${styles.formHeadingFirst} `}>
         <div className={`${commonStyles.formHeadings} md:mr-[149px]`}>

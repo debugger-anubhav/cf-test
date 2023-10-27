@@ -1,15 +1,15 @@
 .header {
-  @apply font-Poppins md:text-2xl text-lg ml-4 md:ml-16;
+  @apply font-Poppins md:text-2xl text-lg;
   font-style: normal;
   font-weight: 500;
   line-height: 32px; /* 133.333% */
   letter-spacing: -0.48px;
 }
 .mainContainer {
-  @apply mt-10;
+  @apply md:mt-10;
 }
 .progressBarContainer {
-  @apply mt-2 mb-10 ml-4 md:ml-16;
+  @apply mt-2 mb-10 w-full;
   background-color: #d9d9d9;
   margin-right: 149px !important;
   height: 4px;

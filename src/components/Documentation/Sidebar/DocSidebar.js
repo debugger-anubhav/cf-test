@@ -134,6 +134,7 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
                 : styles.sectionItems
             } block`}>
             <button
+              className={styles.side_label}
               value={i.heading}
               onClick={e => {
                 e.preventDefault();

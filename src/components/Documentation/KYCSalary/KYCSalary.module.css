@@ -1,8 +1,8 @@
-.stepHeading {
-  @apply mx-4 md:ml-16;
-}
+/* .stepHeading {
+  @apply;
+} */
 .formHeadingFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 
 .selContainer {
@@ -15,11 +15,11 @@
   border: 2px solid #71717a;
 }
 .selHeading {
-  @apply text-14 md:text-16 font-medium font-Poppins flex items-center;
+  @apply text-14 md:text-16 font-medium font-Poppins flex items-center gap-2;
 }
-.selHeadingTxt {
+/* .selHeadingTxt {
   @apply ml-2;
-}
+} */
 .selDivider {
   @apply my-2 hidden md:block;
 }
@@ -27,10 +27,10 @@
   @apply text-12 font-normal font-Poppins ml-7 md:ml-0;
 }
 .formHeadingSecond {
-  @apply mt-8 mx-4 md:ml-16 flex flex-col md:block;
+  @apply mt-8  flex flex-col md:block;
 }
 .selectionBox {
-  @apply mt-2 mx-4 md:ml-16;
+  @apply mt-2;
 }
 .orBox {
   @apply md:hidden flex justify-center items-center;
@@ -44,7 +44,7 @@
 }
 
 .formInputFirst {
-  @apply mt-2 mx-4 md:ml-16;
+  @apply mt-2;
 }
 
 .btnGroupContainer {
@@ -57,7 +57,7 @@
 }
 
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
 }
 .laterBtn {
   @apply mt-4 md:mt-0;

@@ -226,6 +226,18 @@ export const ProfileSettingSlice = createSlice({
   },
 });
 
+export const KycPageSlice = createSlice({
+  name: "KycPage",
+  initialState: {
+    orderId: "",
+  },
+  reducers: {
+    getOrderId(state, action) {
+      state.orderId = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -280,3 +292,5 @@ export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
 
 export const {getUserName, getUserContact, getUserEmail} =
   ProfileSettingSlice.actions;
+
+export const {getOrderId} = KycPageSlice.actions;

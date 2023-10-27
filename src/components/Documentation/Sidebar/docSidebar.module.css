@@ -1,5 +1,5 @@
 .mainContainer {
-  @apply mt-1 h-full hidden md:flex flex-col pl-[70px] xl:pl-[90px] macbook1:pl-[122px] font-Poppins bg-[#f7f9fc] pb-[150px];
+  @apply mt-1 min-h-full hidden md:flex flex-col pl-[70px] xl:pl-[90px] macbook1:pl-[122px] font-Poppins bg-[#f7f9fc] pb-[150px];
 }
 
 /* .headingLinks {
@@ -55,4 +55,7 @@
 }
 .firstContainer_skeleton_div {
   @apply w-36 h-2 mb-2;
+}
+.side_label {
+  @apply min-w-fit text-left;
 }

@@ -1,41 +1,41 @@
 /* Heading Styles  */
-.stepHeading {
-  @apply mx-4 md:ml-16;
-}
+/* .stepHeading {
+  @apply;
+} */
 .formHeadingFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 .formHeadingSecond {
-  @apply mt-8 mx-4 md:ml-16;
+  @apply mt-8;
 }
 .formHeadingThird {
-  @apply mt-4 mx-4 md:ml-16;
+  @apply mt-4;
 }
 
 .formStepSecond {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 
 /* Inputs Styles  */
 
 .formInputFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 .formInputSecond {
-  @apply mt-2  flex mx-4 md:ml-16;
+  @apply mt-2  flex;
 }
 .formInputThird {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 
 /* Others */
 
 .formTermsSection {
-  @apply mt-6 flex items-center mx-4 md:ml-16;
+  @apply mt-6 flex items-center;
 }
 
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
 }
 .btnGroupContainer {
   box-shadow: none;
@@ -73,9 +73,9 @@
   @apply bg-white w-max h-min absolute md:top-1/2 left-1/2 md:transform -translate-x-1/2 md:-translate-y-1/2 rounded-t-3xl md:rounded-none bottom-0 shadow-lg md:p-12 px-4 pt-6 pb-8 flex;
 }
 
-.errorTxt {
-  @apply mx-4 md:ml-16;
-}
+/* .errorTxt {
+  @apply;
+} */
 .MuiSwipeableDrawer-paper {
   margin: 16px;
   width: 16px;

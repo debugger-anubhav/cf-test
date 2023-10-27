@@ -2,7 +2,9 @@ import React from "react";
 import styles from "./KYC100.module.css";
 import commonStyles from "../common.module.css";
 import CongoPopup from "../CongoPopup/CongoPopup";
+import {useRouter} from "next/navigation";
 const KYC100 = () => {
+  const router = useRouter();
   return (
     <div>
       <div className={`${styles.firstSection}`}>
@@ -19,6 +21,7 @@ const KYC100 = () => {
       </div>
       <div className={`${styles.btnContainer} `}>
         <button
+          onClick={() => router.push("/")}
           className={`${commonStyles.saveBtn} ${styles.singleBtn} w-full md:w-[168px]`}>
           Go Home
         </button>

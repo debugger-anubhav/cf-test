@@ -1,6 +1,6 @@
-.stepHeading {
+/* .stepHeading {
   @apply mx-4 md:ml-16;
-}
+} */
 
 .saveBtn {
   @apply mt-3 md:mt-0 mb-4 md:mb-0 md:w-[232px];
@@ -20,29 +20,29 @@
 }
 
 .formTermsSection {
-  @apply mt-6 flex items-center mx-4 md:ml-16;
+  @apply mt-6 flex items-center;
 }
 
-.stepHeading {
-  @apply mx-4 md:ml-16;
-}
+/* .stepHeading {
+  @apply;
+} */
 
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static pb-5;
 }
 
 .formHeadingFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 .formHeadingSecond {
-  @apply mt-8 mx-4 md:ml-16;
+  @apply mt-8;
 }
 .formHeadingThird {
-  @apply mt-4 mx-4 md:ml-16;
+  @apply mt-4;
 }
 
 .formInputFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 
 .formInputFirst::-webkit-file-upload-button {
