@@ -111,6 +111,11 @@ export const endPoints = {
     getKycTrack: (userId, orderId) =>
       `fc-crif-scores/getKYCStage?userId=${userId}&orderId=${orderId}`,
   },
+
+  cityshieldPage: {
+    getUserDetails: orderId =>
+      `fc-payments/getCityShieldPageDetails?orderId=${orderId}`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 

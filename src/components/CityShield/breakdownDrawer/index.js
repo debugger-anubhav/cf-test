@@ -4,7 +4,7 @@ import {BackIcon, Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 import styles from "./styles.module.css";
 import commonStyles from "@/components/Cart/Drawer/TotalBreakupDrawer/styles.module.css";
 
-const BreakdownDrawer = ({toggleDrawer, open}) => {
+const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [showTotalPriceBreakdown, setShowTotalPriceBreakdown] = useState(false);
 
@@ -24,16 +24,6 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
     };
   }, []);
 
-  const billBreakup = {
-    cartSubTotalList: [
-      {name: "V-leg 4 Seater Dining", tenure: "1 month", price: "299"},
-      {name: "V-leg 4 Seater Dining", tenure: "1 month", price: "299"},
-      {name: "V-leg 4 Seater Dining", tenure: "1 month", price: "299"},
-    ],
-    finalTotalPrice: 1299.909,
-    gst: 51.1,
-  };
-
   const MonthlyRentOfAllProducts = () => (
     <>
       <h1 className={styles.head}>Monthly rent of all the product(s): </h1>
@@ -41,7 +31,7 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
         {billBreakup?.cartSubTotalList?.map((item, index) => (
           <div key={index} className={commonStyles.dropdown_row}>
             <p className={`min-w-[190px] w-[190px] ${commonStyles.prod_name}`}>
-              {item.name}
+              {item.productName}
             </p>
             <p className={`min-w-fit ${commonStyles.prod_name}`}>
               {item.tenure}
@@ -107,8 +97,7 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
 
                   <p className={commonStyles.total_amount}>
                     <span className={commonStyles.rupeeIcon}>₹</span>
-                    {/* {billBreakup?.cartSubTotal} */}
-                    500
+                    {billBreakup?.cartSubTotal}
                   </p>
                 </div>
 
@@ -119,7 +108,7 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
                         <div key={index} className={commonStyles.dropdown_row}>
                           <p
                             className={`min-w-[190px] w-[190px] ${commonStyles.prod_name}`}>
-                            {item.name}
+                            {item.productName}
                           </p>
                           <p className={`min-w-fit ${commonStyles.prod_name}`}>
                             {item.tenure}
@@ -142,7 +131,8 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
                     <p className={commonStyles.price_label}>Total tenure</p>
                   </div>
                   <p className={commonStyles.total_amount}>
-                    {/* {billBreakup?.itemDiscount} */}9 months or 274 days
+                    {billBreakup?.totalTenureMonths} months or{" "}
+                    {billBreakup?.totalTenureDays} days
                   </p>
                 </div>
 
@@ -152,7 +142,7 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
                   </div>
                   <p className={commonStyles.total_amount}>
                     <span className={commonStyles.rupeeIcon}>₹</span>
-                    1.56
+                    {billBreakup?.perDayPrice}
                   </p>
                 </div>
 
@@ -160,7 +150,9 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
                   <div>
                     <p className={commonStyles.price_label}>Tenure remaining</p>
                   </div>
-                  <p className={commonStyles.total_amount}>182 days </p>
+                  <p className={commonStyles.total_amount}>
+                    {billBreakup?.remainingTenure} days{" "}
+                  </p>
                 </div>
 
                 <div className={commonStyles.line}></div>
@@ -195,7 +187,7 @@ const BreakdownDrawer = ({toggleDrawer, open}) => {
                   <p className={commonStyles.total_txt}>Total</p>
                   <p className={commonStyles.total_amount}>
                     <span className={commonStyles.rupeeIcon}>₹</span>
-                    {billBreakup?.finalTotalPrice?.toFixed(2)}
+                    {parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}
                   </p>
                 </div>
               </div>
