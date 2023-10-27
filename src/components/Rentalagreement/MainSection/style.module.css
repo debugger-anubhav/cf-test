@@ -1,11 +1,11 @@
 .wrapper {
-  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] lg:mb-[88px] mb-[48px];
 }
 .main_heading {
-  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 capitalize;
 }
 .heading {
-  @apply flex font-Poppins text-45454A lg:text-20 text-16 font-medium leading-8;
+  @apply flex font-Poppins text-45454A lg:text-20 text-16 font-medium leading-8 capitalize;
 }
 .detail {
   @apply text-71717A lg:text-16 text-14 font-Poppins lg:mt-8 mt-6;
@@ -14,8 +14,11 @@
   @apply flex lg:my-12 my-8 flex-col;
 }
 .list_point {
-  @apply flex list-disc justify-start items-center mb-3 w-full;
+  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins;
 }
 .dot {
   @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
+}
+.special_subheading {
+  @apply text-45454A lg:text-16 text-14 font-medium font-Poppins lg:mt-8 mt-6;
 }

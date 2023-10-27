@@ -7,7 +7,7 @@ export const Data = [
   {
     heading: "And",
     decription:
-      "The individuals identified as _____________________________________________ ('Subscriber'). The Company and the Subscriber shall individually be referred to as 'Party' and collectively as 'Parties'.",
+      "The individuals identified as _______________________ ('Subscriber'). The Company and the Subscriber shall individually be referred to as 'Party' and collectively as 'Parties'.",
   },
   {
     heading: "Whereas",
@@ -15,6 +15,8 @@ export const Data = [
       "The Company is in the business of offering Solutions with respect to home furniture, office furniture, soft furnishings and fitness equipments on subscription basis.",
     lastDesc:
       "The Subscriber has approached the Company to subscribe to the products and services offered by the Company, and the Company has agreed to provide the same to the Subscriber.",
+    sepcialHeading:
+      "The Parties hereto wish to enter into this Agreement in order to record their mutual understanding.",
   },
 ];
 
@@ -104,6 +106,12 @@ export const Points = [
   },
   {
     heading: "10. Termination",
+    specialHeading1:
+      "Subject to this Agreement, this Agreement can be terminated during the Subscription Period (but only after the expiry of Initial Subscription Period) in following manner:",
+    specialPoint:
+      "Subscriber may terminate the Subscription after giving a 30 days written notice/email with the payment of applicable charges.",
+    specialHeading2:
+      "Following charges will be applicable for early termination:",
     pointList: [
       ` You can cancel your subscription at any time before or within 48 hours after delivery and receive a full refund for the items. Please note that if you cancel after 48 hours, there will be a small early termination fee.`,
       `If you choose a 3-month subscription and wish to cancel before the full term is completed, unfortunately, there won't be a refund. However, if you select a subscription for more than 3 months and cancel before the agreed term, you will receive a refund equivalent to one month's subscription fee.`,
