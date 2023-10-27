@@ -6,15 +6,42 @@ import {ArrowForw, RatingStar} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {useParams, useRouter} from "next/navigation";
+import {showToastNotification} from "../../Common/Notifications/toastUtils";
 
 export default function MainSection() {
+  const params = useParams();
+  const router = useRouter();
   const Heading = "Feedback";
   const Subheading =
     " Getting your words about Cityfurnish is great. Rate us on our recent  interaction and give your valuable feedback.";
   const [isHovered, setIsHovered] = useState(false);
   const [rating, setRating] = useState(0);
+
   const handleSubmit = values => {
-    console.log("sbmit", values);
+    // console.log("sbmit", values);
+    axios
+      .post(baseURL + endPoints.feedback, {
+        feedback_url: "https://test.rentofurniture.com/fb/KLAisk1",
+        customer_contact_no: params.mobilenumber,
+        rating: values.ratingnumber,
+        comment: values.textarea,
+        msgTime: params.unixtimestamp,
+      })
+      .then(res => {
+        // console.log(res, "response");
+        showToastNotification(
+          "Your Feedback is sent to our team. Thank you for your response.",
+          1,
+        );
+        setTimeout(() => {
+          router.push("/");
+        }, 3000);
+      })
+      .catch(err => console.log(err));
   };
   useEffect(() => {
     console.log(isHovered, "state");
