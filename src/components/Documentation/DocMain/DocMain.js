@@ -57,31 +57,21 @@ const DocMain = () => {
     console.log(kycState, "kyc satteeee");
   }, [kycState]);
 
+  const progress = {
+    0: 10,
+    1: isUpfrontPayment ? 50 : 36.6,
+    2: isUpfrontPayment ? 90 : 63.2,
+    3: 90,
+    4: 100,
+  };
+
   return (
     <div>
       <MenuList hasMb={false} />
       <div className={styles.mainContainer}>
         <DocSidebar />
         <div className={styles.kycFormArea}>
-          <KycHeader
-            progress={
-              kycState === 0
-                ? 10
-                : kycState === 1 && isUpfrontPayment
-                ? 50
-                : kycState === 1 && !isUpfrontPayment
-                ? 36.6
-                : kycState === 2 && isUpfrontPayment
-                ? 90
-                : kycState === 2 && !isUpfrontPayment
-                ? 63.2
-                : kycState === 3
-                ? 90
-                : kycState === 4
-                ? 100
-                : 0
-            }
-          />
+          <KycHeader progress={progress[kycState] || 0} />
           <div>
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
@@ -91,13 +81,13 @@ const DocMain = () => {
               <KYCAddress
                 handleKycState={id => handleKycState(id)}
                 step={
-                  isUpfrontPayment && tenure >= 9
-                    ? 1
-                    : isUpfrontPayment && tenure < 9 && creditScore < 650
-                    ? 3
-                    : isUpfrontPayment && tenure < 9 && creditScore >= 650
-                    ? 2
-                    : !isUpfrontPayment && creditScore < 650
+                  isUpfrontPayment
+                    ? tenure >= 9
+                      ? 1
+                      : creditScore < 650
+                      ? 3
+                      : 2
+                    : creditScore < 650
                     ? 2
                     : 3
                 }
