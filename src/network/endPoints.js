@@ -46,7 +46,7 @@ export const endPoints = {
   uploadAddressDocs: "fc-user-uploaded-docs/uploadAddressDocs",
   uploadFinancialDoc: "fc-user-uploaded-docs/uploadFinancialDoc",
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
-  getAndSaveCibilScore: "fc-cibil-require-docs/getAndSaveCibilScore",
+  getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
 
   searchKey: (key = "", cityId = "", sort = "") =>
     `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
@@ -106,6 +106,11 @@ export const endPoints = {
     verifyOtp: "user/onlyotpverify",
   },
 
+  kycPage: {
+    getOrderIds: userId => `fc-payments/getAllOrders?userId=${userId}`,
+    getKycTrack: (userId, orderId) =>
+      `fc-crif-scores/getKYCStage?userId=${userId}&orderId=${orderId}`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 

@@ -1,17 +1,17 @@
-.stepHeading {
-  @apply mx-4 md:ml-16;
-}
+/* .stepHeading {
+  @apply;
+} */
 .formHeadingFirst {
-  @apply mt-1 mx-4 md:ml-16;
+  @apply mt-1;
 }
 .formHeadingSecond {
-  @apply mt-8 mx-4 md:ml-16;
+  @apply mt-8;
 }
 .formInputFirst {
-  @apply mt-1 mx-4 md:ml-16 flex items-center;
+  @apply mt-1 flex items-center gap-2;
 }
 .inputStyles {
-  @apply md:ml-2 text-14 md:text-16 flex items-center;
+  @apply text-14 md:text-16 flex items-center;
 }
 .btnGroupContainer {
   box-shadow: none;
@@ -22,7 +22,7 @@
   }
 }
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static mx-4 md:ml-16;
+  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
 }
 .laterBtn {
   @apply mt-4 md:mt-0;

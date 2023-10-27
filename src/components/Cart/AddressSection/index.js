@@ -213,7 +213,7 @@ const AddressSection = () => {
     } = result.data.data.orderData;
 
     const {dealCodeNumber} = result.data.data.orderData.notes;
-    const {razCustomerId} = result.data.data.userDetails.customerId;
+    const {userDetails} = result.data.data;
 
     const options = {
       key: razorpayKey, // Enter the Key ID generated from the Dashboard
@@ -233,7 +233,7 @@ const AddressSection = () => {
             razorpayPaymentId: response.razorpay_payment_id,
             dealCodeNumber,
             razorpayOrderId: response.razorpay_order_id,
-            razCustomerId,
+            razCustomerId: userDetails.customerId,
             razorpaySignature: response.razorpay_signature,
           };
           const result = await axios.post(
@@ -245,9 +245,9 @@ const AddressSection = () => {
         }
       },
       prefill: {
-        name: "Rupali Thakur",
-        email: "rupalithegreat@gmail.com",
-        contact: "9999999999",
+        name: userDetails?.fullName,
+        email: userDetails?.email,
+        contact: userDetails?.phoneNo,
       },
       theme: {
         color: "#EF534E",
