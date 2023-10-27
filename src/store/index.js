@@ -6,6 +6,7 @@ import {
   SeoAppliancePageSlice,
   CartPageSlice,
   ProfileSettingSlice,
+  KycPageSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     categoryPageData: CategoryPageSlice.reducer,
     cartPageData: CartPageSlice.reducer,
     profileData: ProfileSettingSlice.reducer,
+    kycPage: KycPageSlice.reducer,
   },
 });
 

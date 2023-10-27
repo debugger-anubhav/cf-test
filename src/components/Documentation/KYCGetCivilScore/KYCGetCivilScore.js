@@ -22,6 +22,8 @@ import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import CommonField from "../CommonField/CommonField";
+import {useSelector} from "react-redux";
 // let src;
 // if (typeof window !== "undefined") {
 //   src = window.screen.availWidth;
@@ -35,7 +37,9 @@ const theme = createTheme({
     },
   },
 });
-const KYCCommon = () => {
+const KYCGetCivilScore = ({handleKycState}) => {
+  const selectedOrderId = useSelector(state => state.kycPage.orderId);
+
   const [progressModal, setProgressModal] = useState(false);
   const [isDDOpen, setIsDDOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -68,13 +72,14 @@ const KYCCommon = () => {
       }),
       dob: formData.dob,
       userId: decrypt(getLocalStorage("_ga")),
-      orderId: "32423423",
+      orderId: selectedOrderId,
     };
     baseInstance
       .post(baseURL + endPoints.getAndSaveCibilScore, data)
       .then(res => {
-        console(res);
+        console(res, "res in getcibilsvoreapiiii");
         setSubmitting(false);
+        handleKycState(selectedOrderId);
       })
 
       .catch(err => {
@@ -158,9 +163,12 @@ const KYCCommon = () => {
   const handleSubmit = () => {
     const errors = validateForm();
     setFormErrors(errors);
-    if (Object.keys(errors).length === 0) {
+
+    if (Object.values(errors).every(value => value === "")) {
       submitHandler();
     } else {
+      console.log(errors, "form has some erroers");
+
       // Form has errors, handle them as needed
       // For example, display error messages or prevent submission
     }
@@ -169,6 +177,7 @@ const KYCCommon = () => {
   // console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
+      <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
       </div>
@@ -503,4 +512,4 @@ const KYCCommon = () => {
   );
 };
 
-export default KYCCommon;
+export default KYCGetCivilScore;
