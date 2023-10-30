@@ -133,5 +133,5 @@ export const endPoints = {
 
   enquiry: "fc-bulk-orders/submitEnquiryForm",
   feedback: "ivr-feedbacks/saveFeedback",
-  careerPageData: "fc-zohorecruit-oauthsettings/getCareerPageContent",
+  careerPageData: "fc-jobs/getCareerPageContent",
 };
