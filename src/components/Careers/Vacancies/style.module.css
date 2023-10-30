@@ -10,3 +10,12 @@
 .QuesAnsArray_div {
   @apply flex flex-col gap-6 my-8;
 }
+.divider {
+  @apply bg-EDEDEE h-[1px] w-full;
+}
+.skeleton_divider {
+  @apply bg-EDEDEE h-[2px] w-full my-6;
+}
+.skeleton_for_text {
+  @apply md:w-[300px] w-[200px];
+}
