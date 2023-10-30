@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import Cards from "./Cards";
+import Cards, {MonthlyCard} from "./Cards";
 
 function TenureExtension() {
   return (
@@ -9,8 +9,15 @@ function TenureExtension() {
       <div className={styles.order_row}>
         Your Order ID <span className="ml-14 font-medium">: #438706031</span>
       </div>
-      <div className="my-8">
-        <Cards />
+      <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
+        {[1, 2, 3]?.map((item, index) => {
+          return (
+            <div key={index.toString()}>
+              <Cards />
+            </div>
+          );
+        })}
+        <MonthlyCard />
       </div>
     </div>
   );

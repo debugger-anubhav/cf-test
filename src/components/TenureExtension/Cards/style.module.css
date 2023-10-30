@@ -1,5 +1,5 @@
 .wrapper {
-  @apply border border-EDEDEE rounded-lg flex flex-col bg-fff p-6 gap-6 w-[346px];
+  @apply border border-EDEDEE rounded-lg flex flex-col bg-fff p-6 gap-6 md:w-[346px] w-full;
 }
 .card_type_text {
   @apply w-full text-45454A lg:text-20 text-16 font-medium font-Poppins;
@@ -44,7 +44,7 @@
   @apply flex justify-between items-center;
 }
 .cityshield_wrapper {
-  @apply border border-DDDDDF rounded-xl p-4;
+  @apply border border-DDDDDF rounded-xl p-4 cursor-pointer;
 }
 .cityshield_text {
   @apply mt-4 text-45454A font-Poppins text-14;
@@ -60,4 +60,17 @@
 }
 .total_span {
   @apply text-71717A font-normal ml-1;
+}
+
+.payment_mode_heading {
+  @apply text-71717A text-16 font-Poppins;
+}
+.radio_label {
+  @apply p-4 border border-DDDDDF rounded-xl text-222 text-16 font-Poppins w-full;
+}
+.radio_option {
+  @apply flex gap-2 my-2 items-center;
+}
+.radio_button {
+  @apply w-6 h-6 flex cursor-pointer;
 }
