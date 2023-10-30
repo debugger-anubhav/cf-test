@@ -110,6 +110,8 @@ export const endPoints = {
     getOrderIds: userId => `fc-payments/getAllOrders?userId=${userId}`,
     getKycTrack: (userId, orderId) =>
       `fc-crif-scores/getKYCStage?userId=${userId}&orderId=${orderId}`,
+    registerMandate: `fc-payments/registerMandate`,
+    updatePaymentStatus: `fc-payments/saveMandate`,
   },
 
   cityshieldPage: {

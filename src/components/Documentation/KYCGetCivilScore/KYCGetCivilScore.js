@@ -74,6 +74,8 @@ const KYCGetCivilScore = ({handleKycState}) => {
       userId: decrypt(getLocalStorage("_ga")),
       orderId: selectedOrderId,
     };
+
+    console.log(data);
     baseInstance
       .post(baseURL + endPoints.getAndSaveCibilScore, data)
       .then(res => {
@@ -279,7 +281,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
         className={`${styles.btnGroupContainer} `}
         // style={isDDOpen ? { display: "none" } : {}}
       >
-        <div className={`${styles.btnGroup} `}>
+        <div className={`${styles.btnGroup}`}>
           <button
             className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
             I’ll do it later
