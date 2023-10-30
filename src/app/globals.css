@@ -119,3 +119,9 @@ input[type="number"]::-webkit-outer-spin-button {
   appearance: none;
   margin: 0; /* Adjust as needed */
 }
+/* #spandesc div p{
+  @apply   !text-16 !text-71717A font-Poppins !leading-normal;
+}
+#spandesc div p span{
+  @apply  !text-16 !text-71717A font-Poppins !leading-normal;
+} */

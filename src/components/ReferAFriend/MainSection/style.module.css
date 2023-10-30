@@ -179,3 +179,9 @@
 .skeleton_full_width_height {
   @apply w-full h-full;
 }
+.apply_btn {
+  @apply flex justify-center items-center lg:h-[56px] text-222 lg:text-16 text-14 font-Poppins font-medium lg:w-[#232px] bg-F6B704 rounded-lg  w-[219px] h-[48px];
+}
+.addition_text {
+  @apply font-Poppins lg:text-16 text-14 text-71717A lg:mt-4 mt-2;
+}
