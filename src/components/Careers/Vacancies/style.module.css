@@ -8,5 +8,5 @@
   @apply text-71717A lg:text-16 text-14 font-Poppins font-normal lg:mt-8 mt-6;
 }
 .QuesAnsArray_div {
-  @apply flex flex-col gap-6 mt-8;
+  @apply flex flex-col gap-6 my-8;
 }
