@@ -1,13 +1,13 @@
 "use client";
 
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import React from "react";
-import {FooterSkeleton} from "@/components/Common/Footer";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import loadable from "@loadable/component";
 import MainSection from "@/components/Feedback/MainSection";
 import Notifications from "@/components/Common/Notifications/Notification";
+import {FooterSkeleton} from "@/components/Common/Footer";
+import loadable from "@loadable/component";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });

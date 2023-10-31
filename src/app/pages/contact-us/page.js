@@ -4,11 +4,11 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import loadable from "@loadable/component";
-import {FooterSkeleton} from "@/components/Common/Footer";
 import ContactSection from "@/components/ContactUs/ContactSection";
 import OurOffices from "@/components/ContactUs/OurOffices";
 import HaveQueries from "@/components/ContactUs/HaveQueries";
+import {FooterSkeleton} from "@/components/Common/Footer";
+import loadable from "@loadable/component";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,

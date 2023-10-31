@@ -1,7 +1,7 @@
 "use client";
+import React from "react";
 import BulkOrderMain from "@/components/BulkOrder/BulkOrder";
 import Notifications from "@/components/Common/Notifications/Notification";
-import React from "react";
 
 const BulkOrder = () => {
   return (

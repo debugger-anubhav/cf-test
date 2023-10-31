@@ -1,8 +1,8 @@
 "use client";
+import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import React from "react";
 import Notifications from "@/components/Common/Notifications/Notification";
 import PaymentFailure from "@/components/PostCheckout/Failure";
 
