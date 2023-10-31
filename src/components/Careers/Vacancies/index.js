@@ -47,8 +47,8 @@ export default function Vacancies() {
               return (
                 <div key={index.toString()}>
                   <FAQQuestion
-                    ques={item?.Posting_Title}
-                    ans={item?.Job_Description}
+                    ques={item?.job_title}
+                    ans={item?.job_description}
                     isOpen={index === openIndex}
                     toggleQuestion={() => toggleQuestion(index)}
                     applyBtn={true}

@@ -39,6 +39,7 @@ import {
   MdOutlineCheckBoxOutlineBlank,
   MdEmail,
 } from "react-icons/md";
+
 import {HiOutlineShare} from "react-icons/hi";
 import {LiaTruckMovingSolid} from "react-icons/lia";
 import {RiInformationLine} from "react-icons/ri";
@@ -65,7 +66,12 @@ import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
 import {FaRegCalendar} from "react-icons/fa";
-import {FaCirclePlus, FaLocationDot} from "react-icons/fa6";
+import {
+  FaCirclePlus,
+  FaLocationDot,
+  FaToggleOff,
+  FaToggleOn,
+} from "react-icons/fa6";
 
 const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -335,4 +341,20 @@ export const AddIcon = ({size, color, className}) => (
 
 export const OpenIcon = ({size, color, className}) => (
   <IoMdOpen size={size} color={color} className={className} />
+);
+export const ToggleOff = ({size, color, className, onClick}) => (
+  <FaToggleOff
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
+);
+export const ToggleOn = ({size, color, className, onClick}) => (
+  <FaToggleOn
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
 );
