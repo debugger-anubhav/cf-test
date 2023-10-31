@@ -1,0 +1,18 @@
+.wrapper {
+  @apply flex flex-col md:mt-10 mt-4 md:mb-[88px] mb-8  macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 capitalize;
+}
+.upfront_data {
+  @apply flex flex-col w-full md:my-8 my-4;
+}
+.heading {
+  @apply text-71717A text-16 font-Poppins leading-6 mt-1;
+}
+.heading_span {
+  @apply text-71717A text-16 font-Poppins font-medium leading-6 ml-3;
+}
+.pay_now_btn {
+  @apply flex w-full bg-F6B704 rounded-lg text-222 text-16 font-medium font-Poppins justify-center items-center h-[56px] my-4 sm:w-[232px] gap-[10px];
+}
