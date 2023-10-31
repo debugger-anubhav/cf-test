@@ -42,14 +42,16 @@ function CustomerPayment() {
             placeholder="Please provide the invoice number for payment."
             className={styles.form_input}
           />
-          <div className={styles.all_invoices}>
-            <p className={styles.all_invoice_text}>See my all invoices</p>
-            <OpenIcon
-              color={"#5774AC"}
-              size={25}
-              className={"cursor-pointer"}
-            />
-          </div>
+          <a href="https://cityfurnish.com/invoices">
+            <div className={styles.all_invoices}>
+              <p className={styles.all_invoice_text}>See my all invoices</p>
+              <OpenIcon
+                color={"#5774AC"}
+                size={25}
+                className={"cursor-pointer"}
+              />
+            </div>
+          </a>
         </div>
 
         <div className={styles.form_field}>
