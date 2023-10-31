@@ -8,8 +8,9 @@ import {
   InformationIcon,
   PersonIcon,
   WhatsappIcon,
+  ToggleOff,
+  ToggleOn,
 } from "@/assets/icon";
-import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
@@ -471,13 +472,13 @@ const AddressSection = () => {
             </div>
             <div className="cursor-pointer">
               {whatsappNotification ? (
-                <FaToggleOn
+                <ToggleOn
                   size={29}
                   color={"#5774AC"}
                   onClick={() => setWhatsappNotification(false)}
                 />
               ) : (
-                <FaToggleOff
+                <ToggleOff
                   color={"#E3E1DC"}
                   size={29}
                   onClick={() => setWhatsappNotification(true)}
@@ -495,13 +496,13 @@ const AddressSection = () => {
                 </div>
                 <div className="cursor-pointer">
                   {haveGstNumber ? (
-                    <FaToggleOn
+                    <ToggleOn
                       size={29}
                       color={"#5774AC"}
                       onClick={() => sethaveGstNumber(false)}
                     />
                   ) : (
-                    <FaToggleOff
+                    <ToggleOff
                       color={"#E3E1DC"}
                       size={29}
                       onClick={() => sethaveGstNumber(true)}

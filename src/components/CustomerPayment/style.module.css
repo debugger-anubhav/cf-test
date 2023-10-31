@@ -1,0 +1,35 @@
+.wrapper {
+  @apply flex flex-col md:mt-10 mt-4 md:mb-[88px] mb-8  macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.main_heading {
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 capitalize;
+}
+.form_field {
+  @apply mt-4 w-full xl:w-[516px] macbook:w-[537px];
+}
+.form_label {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
+}
+.form_input {
+  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+}
+
+.flag {
+  @apply w-6 h-6;
+}
+
+.pay_now_btn {
+  @apply flex w-full bg-F6B704 rounded-lg text-222 text-16 font-medium font-Poppins justify-center items-center h-[56px] mt-[48px] sm:w-[232px] gap-[10px];
+}
+.toggleRow {
+  @apply flex mt-3 items-center;
+}
+.toggle_text {
+  @apply ml-2 lg:text-16 text-14 text-71717A font-Poppins;
+}
+.all_invoices {
+  @apply flex justify-between bg-[#F3F5F8] p-3 rounded-xl mt-1 cursor-pointer;
+}
+.all_invoice_text {
+  @apply text-5774AC text-14 font-Poppins;
+}

@@ -12,10 +12,11 @@ import {
   CheckedBox,
   DeleteIcon,
   RightIcon,
+  ToggleOff,
+  ToggleOn,
   UncheckedBox,
   VerifyIcon,
 } from "@/assets/icon";
-import {FaToggleOff, FaToggleOn} from "react-icons/fa6";
 import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
@@ -449,13 +450,13 @@ const ShoppingCartSection = () => {
                 </div>
                 <div className="cursor-pointer">
                   {isCoinApplied ? (
-                    <FaToggleOn
+                    <ToggleOn
                       size={29}
                       color={"#5774AC"}
                       onClick={() => setIsCoinApplied(false)}
                     />
                   ) : (
-                    <FaToggleOff
+                    <ToggleOff
                       color={"#E3E1DC"}
                       size={29}
                       onClick={() => setIsCoinApplied(true)}
