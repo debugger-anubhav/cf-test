@@ -1,11 +1,11 @@
 "use client";
+import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Footer from "@/components/Common/Footer";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import Notifications from "@/components/Common/Notifications/Notification";
+import Footer from "@/components/Common/Footer";
 import Document from "@/components/DocumentsPage/Document";
-import React from "react";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const Documentspage = () => {
   return (

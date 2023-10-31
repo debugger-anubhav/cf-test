@@ -5,9 +5,11 @@ import {useParams} from "next/navigation";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
-
-import loadable from "@loadable/component";
 import MenuList from "@/components/Common/MenuList";
+import Notifications from "@/components/Common/Notifications/Notification";
+import TextContent from "@/components/Common/TextContent";
+import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
+
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
@@ -15,11 +17,9 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import TextContent from "@/components/Common/TextContent";
-import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
-import Notifications from "@/components/Common/Notifications/Notification";
 import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct";
 import {FooterSkeleton} from "@/components/Common/Footer";
+import loadable from "@loadable/component";
 
 const Subproduct = loadable(
   () => import("@/components/AllProduct/SubProduct/Subproduct"),
