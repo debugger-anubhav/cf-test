@@ -65,20 +65,44 @@ const DocMain = () => {
     4: 100,
   };
 
+  const showBackIcon = {
+    0: false,
+    1: creditScore < 650,
+    2: creditScore === null || !(isUpfrontPayment && tenure >= 9),
+    3: true,
+  };
+
+  const prevState = {
+    1: 0,
+    2: creditScore >= 650 ? 0 : 1,
+    3: 2,
+  };
+
   return (
     <div>
       <MenuList hasMb={false} />
       <div className={styles.mainContainer}>
         <DocSidebar />
         <div className={styles.kycFormArea}>
-          <KycHeader progress={progress[kycState] || 0} />
+          <KycHeader
+            progress={progress[kycState] || 0}
+            showBackIcon={showBackIcon[kycState]}
+            setKycState={() => setKycState(prevState[kycState])}
+          />
           <div>
             {kycState === 0 ? (
-              <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
+              <KYCGetCivilScore
+                setKycState={val => setKycState(val)}
+                handleKycState={id => handleKycState(id)}
+              />
             ) : kycState === 1 ? (
-              <KYCSalary handleKycState={id => handleKycState(id)} />
+              <KYCSalary
+                setKycState={val => setKycState(val)}
+                handleKycState={id => handleKycState(id)}
+              />
             ) : kycState === 2 ? (
               <KYCAddress
+                setKycState={val => setKycState(val)}
                 handleKycState={id => handleKycState(id)}
                 step={
                   isUpfrontPayment
@@ -94,8 +118,8 @@ const DocMain = () => {
               />
             ) : kycState === 3 ? (
               <KYCCard
-                handleKycState={id => handleKycState(id)}
                 setKycState={val => setKycState(val)}
+                handleKycState={id => handleKycState(id)}
               />
             ) : kycState === 4 ? (
               <KYC100 handleKycState={id => handleKycState(id)} />

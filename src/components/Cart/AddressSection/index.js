@@ -272,7 +272,9 @@ const AddressSection = () => {
       <div className={styles.left_div}>
         <div
           className={styles.head_div}
-          onClick={() => dispatch(setShoppingCartTab(1))}>
+          onClick={() => {
+            dispatch(setShoppingCartTab(0));
+          }}>
           <BackIcon size={19} />
           <p className={styles.head}>Go back to checkout</p>
         </div>

@@ -1,3 +1,9 @@
+.header_wrapper {
+  @apply flex gap-1 items-center;
+}
+.backIcon {
+  @apply min-w-[24px] min-h-[24px] text-222 cursor-pointer;
+}
 .header {
   @apply font-Poppins md:text-2xl text-lg;
   font-style: normal;
