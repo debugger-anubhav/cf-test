@@ -2,7 +2,14 @@ import React from "react";
 import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
-const FAQQuestion = ({ques, ans, isOpen, toggleQuestion, applyBtn = false}) => {
+const FAQQuestion = ({
+  ques,
+  ans,
+  isOpen,
+  toggleQuestion,
+  applyBtn = false,
+  applyClick,
+}) => {
   return (
     <>
       <div className="pb-6">
@@ -23,7 +30,9 @@ const FAQQuestion = ({ques, ans, isOpen, toggleQuestion, applyBtn = false}) => {
           />
           {applyBtn && isOpen && (
             <div>
-              <button className={styles.apply_btn}>Apply</button>
+              <button className={styles.apply_btn} onClick={applyClick}>
+                Apply
+              </button>
               <p className={styles.addition_text}>
                 Alternatively, you can drop your resume at{" "}
                 <a

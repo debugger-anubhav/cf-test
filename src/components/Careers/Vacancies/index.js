@@ -29,11 +29,16 @@ export default function Vacancies() {
       })
       .catch(err => console.log(err));
   };
+  const handleApply = index => {
+    // router.push(`https://cityfurnish.zohorecruit.com/jobs/Careers/${vacaniesData[index]?.job_id}`)
+    const url = `https://cityfurnish.zohorecruit.com/jobs/Careers/${vacaniesData[index]?.job_id}`;
+    const newTab = window && window.open(url, "_blank");
+    newTab.focus();
+  };
   useEffect(() => {
     getData();
     console.log(vacaniesData);
   }, []);
-
   return (
     <div className={styles.main_container}>
       <p className={styles.heading}>Vacancies</p>
@@ -47,11 +52,12 @@ export default function Vacancies() {
               return (
                 <div key={index.toString()}>
                   <FAQQuestion
-                    ques={item?.Posting_Title}
-                    ans={item?.Job_Description}
+                    ques={item?.job_title}
+                    ans={item?.job_description}
                     isOpen={index === openIndex}
                     toggleQuestion={() => toggleQuestion(index)}
                     applyBtn={true}
+                    applyClick={() => handleApply(index)}
                   />
                   {index < vacaniesData?.length - 1 && (
                     <div className={styles.divider} />

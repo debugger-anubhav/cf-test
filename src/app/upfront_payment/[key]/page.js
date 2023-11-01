@@ -1,27 +1,23 @@
 "use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import loadable from "@loadable/component";
+import {FooterSkeleton} from "@/components/Common/Footer";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-import OfferPage from "../../../components/Offer";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
-
+import UpfrontPayment from "@/components/UpfrontPayment";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
 
-const Offers = () => {
+function UpfrontPaymentPage() {
   return (
     <div className="large_layout">
-      <AnnouncementBar />
       <Header />
       <MenuList />
-      <OfferPage />
+      <UpfrontPayment />
       <Footer />
     </div>
   );
-};
+}
 
-export default Offers;
+export default UpfrontPaymentPage;
