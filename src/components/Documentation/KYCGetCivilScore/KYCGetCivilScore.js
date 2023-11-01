@@ -79,7 +79,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
     baseInstance
       .post(baseURL + endPoints.getAndSaveCibilScore, data)
       .then(res => {
-        console(res, "res in getcibilsvoreapiiii");
+        console.log(res, "res in getcibilsvoreapiiii");
         setSubmitting(false);
         handleKycState(selectedOrderId);
       })
