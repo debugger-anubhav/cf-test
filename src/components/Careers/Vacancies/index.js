@@ -40,7 +40,7 @@ export default function Vacancies() {
     console.log(vacaniesData);
   }, []);
   return (
-    <div className={styles.main_container}>
+    <div className={styles.main_container} id="vacancies-section">
       <p className={styles.heading}>Vacancies</p>
       <p className={styles.para}>{para}</p>
       <div>
