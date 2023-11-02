@@ -91,18 +91,11 @@ const DocMain = () => {
           />
           <div>
             {kycState === 0 ? (
-              <KYCGetCivilScore
-                setKycState={val => setKycState(val)}
-                handleKycState={id => handleKycState(id)}
-              />
+              <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
             ) : kycState === 1 ? (
-              <KYCSalary
-                setKycState={val => setKycState(val)}
-                handleKycState={id => handleKycState(id)}
-              />
+              <KYCSalary handleKycState={id => handleKycState(id)} />
             ) : kycState === 2 ? (
               <KYCAddress
-                setKycState={val => setKycState(val)}
                 handleKycState={id => handleKycState(id)}
                 step={
                   isUpfrontPayment
@@ -117,10 +110,7 @@ const DocMain = () => {
                 }
               />
             ) : kycState === 3 ? (
-              <KYCCard
-                setKycState={val => setKycState(val)}
-                handleKycState={id => handleKycState(id)}
-              />
+              <KYCCard handleKycState={id => handleKycState(id)} />
             ) : kycState === 4 ? (
               <KYC100 handleKycState={id => handleKycState(id)} />
             ) : (
