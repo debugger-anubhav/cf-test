@@ -159,10 +159,10 @@ const AddressSection = () => {
     setPrimaryAddress(newPrimaryAddress);
   };
 
-  const goToPostCheckout = e => {
+  const goToPostCheckout = (e, id) => {
     e === 0
       ? router.push("/order/failure")
-      : router.push("/order/confirmation");
+      : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
   function loadScript(src) {
@@ -242,7 +242,7 @@ const AddressSection = () => {
             data,
           );
           console.log(result, "result");
-          goToPostCheckout(1);
+          goToPostCheckout(1, dealCodeNumber);
         }
       },
       prefill: {

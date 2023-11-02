@@ -1,0 +1,74 @@
+.main_container {
+  @apply font-Poppins  lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
+}
+.doc_side_bar {
+  @apply hidden lg:block min-w-fit;
+}
+.right_div {
+  @apply w-full pb-[88px];
+}
+.header {
+  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+}
+.click_here {
+  @apply text-5774AC underline cursor-pointer pr-1;
+}
+.past_payment_wrapper {
+  @apply xl:flex xl:justify-between items-center xl:h-14 mt-6;
+}
+.amount_wrapper {
+  @apply mt-4 xl:mt-0 flex items-center gap-4;
+}
+.pay_all_btn {
+  @apply px-8 rounded-lg h-12 xl:h-14 bg-F6B704 font-medium text-14 xl:text-16 text-222 tracking-desc xl:tracking-0.3;
+}
+.rupeeIcon {
+  @apply font-Inter pl-2 xl:pl-0;
+}
+.tableContainer {
+  @apply mt-12 !shadow-none;
+}
+.table {
+  border-collapse: collapse;
+}
+.tableHeaderCell {
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 !font-Poppins pl-0 pt-0 pb-0 xl:pr-4 macbook:pr-8;
+}
+.tableCell {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 border-b-0 leading-normal pb-3;
+}
+/* .lastCell {
+  @apply flex gap-4 !font-Poppins py-8 px-0 border-b border-b-EDEDEE;
+} */
+.download_btn {
+  @apply !font-Poppins cursor-pointer text-16 rounded-lg border-2 border-71717A flex justify-center items-center px-5 h-[40px] font-medium text-71717A;
+}
+.pay_btn {
+  @apply w-[108px] cursor-pointer !font-Poppins text-16 bg-F6B704 h-[40px] px-5 items-center rounded-lg font-medium text-222;
+}
+.tableRow {
+  @apply border-b border-b-EDEDEE;
+}
+.show_more_btn {
+  @apply border-71717A border-2 bg-fff rounded-lg  h-14 flex items-center gap-[10px] px-8 mt-4;
+}
+.down_arrow {
+  @apply text-222 w-5 h-5;
+}
+.web {
+  @apply hidden xl:block;
+}
+
+/* for mobile */
+.mobile {
+  @apply xl:hidden mt-8;
+}
+.accordian {
+  @apply p-3 bg-F7F7F8;
+}
+.accord_summary {
+  @apply min-h-fit py-0;
+}

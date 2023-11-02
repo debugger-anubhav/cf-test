@@ -12,7 +12,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import {useSelector} from "react-redux";
 // import {useSelector} from "react-redux";
 
-const KYCCard = ({handleKycState, setKycState}) => {
+const KYCCard = ({handleKycState}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const [selected, setSelected] = useState("");
   const [modeOfPayment, setModeOfPayment] = useState();

@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
-import {useRouter} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
-  const orderId = "#438706031";
+  const searchParams = useSearchParams();
+
+  const oid = searchParams.get("oid");
+
   const [timer, setTimer] = useState(5);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ const PaymentConfirmation = () => {
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
           <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>{orderId}</p>
+          <p className={`font-medium ${styles.desc}`}>{oid}</p>
         </div>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>

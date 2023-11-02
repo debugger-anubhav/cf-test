@@ -13,6 +13,7 @@ import {
   IoArrowBack,
   IoPerson,
   IoArrowForwardSharp,
+  IoChevronDown,
 } from "react-icons/io5";
 import {TbMailFilled, TbReload} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
@@ -341,6 +342,10 @@ export const AddIcon = ({size, color, className}) => (
 
 export const OpenIcon = ({size, color, className}) => (
   <IoMdOpen size={size} color={color} className={className} />
+);
+
+export const DownArrowUnfilled = ({size, color, className}) => (
+  <IoChevronDown size={size} color={color} className={className} />
 );
 export const ToggleOff = ({size, color, className, onClick}) => (
   <FaToggleOff

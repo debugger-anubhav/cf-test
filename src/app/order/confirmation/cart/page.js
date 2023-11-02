@@ -8,7 +8,7 @@ import Notifications from "@/components/Common/Notifications/Notification";
 import PaymentConfirmation from "@/components/PostCheckout/Confirmation";
 // import PaymentFailure from "@/components/PostCheckout/Failure";
 
-const CartPage = () => {
+const index = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
@@ -21,4 +21,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default index;
