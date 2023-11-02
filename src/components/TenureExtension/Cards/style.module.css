@@ -20,10 +20,10 @@
   @apply flex w-full items-center;
 }
 .price {
-  @apply lg:text-20 text-18 font-medium text-222;
+  @apply lg:text-20 text-18 font-medium text-222 flex items-center;
 }
 .price_span {
-  @apply text-9A9AA2 lg:text-16 text-14 mx-4;
+  @apply text-9A9AA2 lg:text-16 text-14 mx-4 stroke-222 line-through;
 }
 .discount {
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;

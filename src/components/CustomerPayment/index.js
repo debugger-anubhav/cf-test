@@ -11,7 +11,7 @@ import {
   ToggleOff,
   ToggleOn,
 } from "@/assets/icon";
-// const coins = 300;
+let AvailableCoins = 300;
 
 function CustomerPayment() {
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
@@ -37,7 +37,18 @@ function CustomerPayment() {
       setshowValidationForAmount(true);
     }
   };
-  // useEffect(()=>{console.log(formData,"formdata")},[formData])
+  const handleUseCoins = value => {
+    // formData?.amount !== ""
+    if (value !== "") {
+      setUseCityfurnishCoins(true);
+      AvailableCoins = AvailableCoins - parseInt(value);
+      if (AvailableCoins < 0) {
+        //  let show_in_amount_field= AvailableCoins
+        value = AvailableCoins;
+        AvailableCoins = 0;
+      }
+    } else setshowValidationForAmount(true);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -139,17 +150,12 @@ function CustomerPayment() {
                   <ToggleOff
                     color={"#E3E1DC"}
                     size={30}
-                    onClick={() => {
-                      // formData?.amount !== ""
-                      formik.values.amount !== ""
-                        ? setUseCityfurnishCoins(true)
-                        : setshowValidationForAmount(true);
-                    }}
+                    onClick={() => handleUseCoins(formik.values.amount)}
                     className={"cursor-pointer"}
                   />
                 )}
                 <span className={styles.toggle_text}>
-                  Use Cityfurnish coins (Available balance: 300)
+                  {` Use Cityfurnish coins (Available balance: ${AvailableCoins})`}
                 </span>
               </div>
               <div className={styles.login_row}>
