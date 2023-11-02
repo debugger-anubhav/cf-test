@@ -20,7 +20,7 @@
   @apply flex w-full items-center;
 }
 .price {
-  @apply lg:text-20 text-18 font-medium text-222;
+  @apply lg:text-20 text-18 font-medium text-222 flex items-center;
 }
 .price_span {
   @apply text-9A9AA2 lg:text-16 text-14 mx-4 stroke-222 line-through;
