@@ -1,41 +1,50 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {Close, RightIcon, VerifyIcon} from "@/assets/icon";
 import DropDown from "@/components/Documentation/DropDown/DropDown";
 import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
+import {Skeleton} from "@mui/material";
 
-function Cards() {
+function Cards({
+  data,
+  items,
+  isChecked,
+  setIsChecked,
+  setcardIndex,
+  index,
+  cardIndex,
+}) {
+  const calculatedPrice =
+    data?.orignalPrice -
+    ((data?.orignalPrice * items?.percent_off) / 100).toFixed(0);
   const DiscountPoints = [
     "No Cost EMI Available",
     "Inclusive GST",
     "No Security Deposit",
   ];
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
+  const [selectedOptionPer, setSelectedOptionPer] = useState(
+    items?.monthOptions[0],
+  );
+  const [perAddModal, setPerAddModal] = useState(false);
+
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
+    setIsChecked(true);
+    setcardIndex(index);
   };
   const toggleDrawerCityShield = () => {
-    setCityShieldDrawerOpen(!cityShieldDrawerOpen);
+    if (isChecked) setCityShieldDrawerOpen(false);
+    else setCityShieldDrawerOpen(true);
   };
-  const monthOptions = [
-    {label: "9 Months", value: "9 Month"},
-    {label: "11 Months", value: "11 Months"},
-    {label: "12 Months", value: "12 Months"},
-    {label: "13 Months", value: "13 Months"},
-    {label: "14 Months", value: "14 Months"},
-    {label: "15 Months", value: "15 Months"},
-    {label: "16 Months", value: "16 Months"},
-  ];
-
-  const [selectedOptionPer, setSelectedOptionPer] = useState(monthOptions[0]);
-  const [perAddModal, setPerAddModal] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  console.log(isChecked);
+  useEffect(() => {
+    if (isChecked) setCityShieldDrawerOpen(false);
+  }, [isChecked]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
-        Long-term pack{" "}
-        <span className={styles.card_type_span}>(9 months+)</span>
+        {items?.title}
+        <span className={styles.card_type_span}>{items?.lightTitle}</span>
       </div>
 
       <div className={styles.monthly_rent_row}>
@@ -43,16 +52,26 @@ function Cards() {
         <div className={styles.price_row}>
           <p className={styles.price}>
             <span className="font-Inter"> ₹</span>
-            1085<span className={styles.price_span}>1276</span>
+            {isNaN(data?.orignalPrice) ||
+            isNaN(parseInt(items?.percent_off)) ? (
+              <span className="flex gap-4">
+                <Skeleton variant="text" className="flex" width={45} />
+                <Skeleton variant="text" className="flex" width={45} />
+              </span>
+            ) : (
+              calculatedPrice
+            )}
+            <span className={styles.price_span}>{data?.orignalPrice}</span>
           </p>
-          <p className={styles.discount}>-15% OFF</p>
+          <p className={styles.discount}>-{items?.percent_off}% OFF</p>
         </div>
         <p className={styles.gst_text}>Inclusive of GST</p>
       </div>
 
       <div className={styles.discount_detail}>
         <p className={styles.discount_point}>
-          Get 15% discount on extension of your tenure by paying upfront.
+          Get {items?.percent_off} discount on extension of your tenure by
+          paying upfront.
         </p>
         <div className="mt-4">
           {DiscountPoints?.map((item, index) => {
@@ -67,31 +86,33 @@ function Cards() {
       </div>
 
       <div className={styles.divider}></div>
-
-      <div className={styles.cityshield_wrapper} onClick={openDrawer}>
-        <div className={`${styles.cityshield_row} `}>
-          <div className={styles.flexx}>
-            <VerifyIcon size={30} color={"#2D9469"} />
-            <p className={styles.city_shield_head}>City shield </p>
+      {!data?.isCityShieldApplied && (
+        <div className={styles.cityshield_wrapper} onClick={openDrawer}>
+          <div className={`${styles.cityshield_row} `}>
+            <div className={styles.flexx}>
+              <VerifyIcon size={30} color={"#2D9469"} />
+              <p className={styles.city_shield_head}>City shield </p>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                className="flex border border-5774AC cursor-pointer"
+                checked={!(cardIndex === index && !isChecked)}
+              />
+            </div>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              className="flex border border-5774AC cursor-pointer"
-            />
-          </div>
+          <p className={styles.cityshield_text}>
+            Get a damage waiver at ONLY <span className="font-Inter">₹</span>
+            {data?.cityshieldAmount}/mo with City Shield.
+            <span className={styles.learn_more}>Learn more</span>
+          </p>
         </div>
-        <p className={styles.cityshield_text}>
-          Get a damage waiver at ONLY <span className="font-Inter">₹</span>56/mo
-          with City Shield.
-          <span className={styles.learn_more}>Learn more</span>
-        </p>
-      </div>
+      )}
       {cityShieldDrawerOpen && (
         <CityShieldDrawerForCart
-          cityShieldCurrentPrice={"0284938493"}
-          cityShieldOriginalPrice={"36473"}
-          cityShieldDiscount={"12"}
+          cityShieldCurrentPrice={calculatedPrice}
+          cityShieldOriginalPrice={data?.orignalPrice}
+          cityShieldDiscount={items?.percent_off}
           toggleDrawer={toggleDrawerCityShield}
           open={cityShieldDrawerOpen}
           toggleCheckbox={bool => setIsChecked(bool)}
@@ -99,7 +120,7 @@ function Cards() {
       )}
       <div className={styles.select_month_wrapper}>
         <DropDown
-          options={monthOptions}
+          options={items?.monthOptions}
           setIsDDOpen={setPerAddModal}
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
@@ -109,11 +130,13 @@ function Cards() {
 
       <div>
         <p className={styles.total}>
-          Total: <span className="font-Inter ml-1"> ₹</span>12,936{" "}
-          <span className={styles.total_span}>for 9 months</span>
+          Total: <span className="font-Inter ml-1"> ₹</span>
+          {selectedOptionPer?.value * calculatedPrice}
+          <span className={styles.total_span}>
+            for {selectedOptionPer?.label}
+          </span>
         </p>
       </div>
-
       <div>
         <button className={styles.pay_now_btn}>Pay now</button>
       </div>
@@ -123,7 +146,11 @@ function Cards() {
 
 export default Cards;
 
-export const MonthlyCard = () => {
+export const MonthlyCard = ({
+  data,
+  monthlyCardIsChecked,
+  setmonthlyCardIsChecked,
+}) => {
   const DiscountPoints = [
     "No Discount",
     "No Cost EMI Available",
@@ -133,9 +160,19 @@ export const MonthlyCard = () => {
 
   const PaymentModeOpt = ["Credit/Debit card", "Netbanking", "UPI"];
   const [selectedOption, setSelectedOption] = useState(0);
+  const [cityShieldDrawerOpenForMonthly, setcityShieldDrawerOpenForMonthly] =
+    useState(false);
 
   const handleOptionChange = index => {
     setSelectedOption(index);
+  };
+  const openDrawerForMonthly = () => {
+    if (monthlyCardIsChecked) setcityShieldDrawerOpenForMonthly(true);
+    setmonthlyCardIsChecked(true);
+  };
+  const toggleDrawerCityShield = () => {
+    if (monthlyCardIsChecked) setcityShieldDrawerOpenForMonthly(false);
+    else setcityShieldDrawerOpenForMonthly(true);
   };
   return (
     <div className={styles.wrapper}>
@@ -148,7 +185,8 @@ export const MonthlyCard = () => {
         <p className={styles.monthly_rent_text}>Monthly Rent</p>
         <div className={styles.price_row}>
           <p className={styles.price}>
-            <span className="font-Inter">₹</span>1276
+            <span className="font-Inter">₹</span>
+            {data?.orignalPrice}
           </p>
         </div>
         <p className={styles.gst_text}>Inclusive of GST</p>
@@ -172,7 +210,7 @@ export const MonthlyCard = () => {
       </div>
       <div className={styles.divider}></div>
 
-      <div className={styles.cityshield_wrapper}>
+      <div className={styles.cityshield_wrapper} onClick={openDrawerForMonthly}>
         <div className={`${styles.cityshield_row} `}>
           <div className={styles.flexx}>
             <VerifyIcon size={30} color={"#2D9469"} />
@@ -182,6 +220,7 @@ export const MonthlyCard = () => {
             <input
               type="checkbox"
               className="flex border border-5774AC cursor-pointer"
+              checked={monthlyCardIsChecked}
             />
           </div>
         </div>
@@ -191,7 +230,16 @@ export const MonthlyCard = () => {
           <span className={styles.learn_more}>Learn more</span>
         </p>
       </div>
-
+      {cityShieldDrawerOpenForMonthly && (
+        <CityShieldDrawerForCart
+          cityShieldCurrentPrice={data?.orignalPrice}
+          // cityShieldOriginalPrice={data?.orignalPrice}
+          // cityShieldDiscount={items?.percent_off}
+          toggleDrawer={toggleDrawerCityShield}
+          open={cityShieldDrawerOpenForMonthly}
+          toggleCheckbox={bool => setmonthlyCardIsChecked(bool)}
+        />
+      )}
       <div className={styles.choose_payment_mode}>
         <p className={styles.payment_mode_heading}>
           Choose your preferred payment mode
