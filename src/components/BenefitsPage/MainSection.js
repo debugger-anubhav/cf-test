@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./style.module.css";
-import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
+// import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import {BenefitPageData} from "@/constants/constant";
 
 function MainSection() {
   return (
     <div className={styles.wrapper}>
-      <BreadCrumbsCommon currentPage={"Benefits"} />
-      <div className={styles.main_heading}>Benefits</div>
+      {/* <BreadCrumbsCommon currentPage={"Benefits"} />
+      <div className={styles.main_heading}>Benefits</div> */}
       <div className="flex">
         <div className={styles.card_wrapper}>
           {BenefitPageData?.map((item, index) => {
