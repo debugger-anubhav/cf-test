@@ -26,7 +26,7 @@
       "menuList3": [
         {
           "item": "How It Works?",
-          "link": "https://test.rentofurniture.com/pages/how-it-works"
+          "link": "/pages/how-it-works"
         },
         {
           "item": "FAQs",

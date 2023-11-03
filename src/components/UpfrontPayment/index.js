@@ -7,6 +7,7 @@ import axios from "axios";
 import {useParams} from "next/navigation";
 import {Skeleton} from "@mui/material";
 import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
+import {loadScript} from "@/constants/constant";
 
 function UpfrontPayment() {
   const Heading = "Upfront Payment";
@@ -28,20 +29,6 @@ function UpfrontPayment() {
   useEffect(() => {
     upfrontApiCall();
   }, []);
-
-  function loadScript(src) {
-    return new Promise(resolve => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
 
   async function handleOpenRazorpay() {
     const res = await loadScript(

@@ -10,26 +10,13 @@ import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useSelector} from "react-redux";
+import {loadScript} from "@/constants/constant";
 // import {useSelector} from "react-redux";
 
 const KYCCard = ({handleKycState}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const [selected, setSelected] = useState("");
   const [modeOfPayment, setModeOfPayment] = useState();
-
-  function loadScript(src) {
-    return new Promise(resolve => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
 
   const updatePaymentStatus = (
     paymentID,
