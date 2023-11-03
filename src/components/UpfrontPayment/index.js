@@ -6,24 +6,106 @@ import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {useParams} from "next/navigation";
 import {Skeleton} from "@mui/material";
+import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
 
 function UpfrontPayment() {
   const Heading = "Upfront Payment";
   const params = useParams();
   const ID = params.key;
   const [apiData, setApiData] = useState(null);
+  const [razorpayData, setRazorpayData] = useState(null);
+
   const upfrontApiCall = () => {
     axios
       .post(baseURL + endPoints.upfrontPayment, {id: ID})
       .then(res => {
         // console.log(res?.data?.data?.data, "ressss");
         setApiData(res?.data?.data?.data);
+        setRazorpayData(res?.data?.data);
       })
       .catch(err => console.log(err));
   };
   useEffect(() => {
     upfrontApiCall();
   }, []);
+
+  function loadScript(src) {
+    return new Promise(resolve => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+
+  async function handleOpenRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res, " res in load script");
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const razOrderId = razorpayData?.raz_order_id;
+    const customerId = razorpayData?.customer_id;
+    console.log(razOrderId, customerId, "huhwiuhij");
+    // const {dealCodeNumber} = result.data.data.orderData.notes;`
+
+    const options = {
+      key: razorpayKeyOwn,
+      order_id: razOrderId,
+      // customer_id: customerId,/
+      name: "Cityfurnish",
+      description: "Easy payment registration",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      handler: async function (res) {
+        if (res.error) {
+          alert("Payment failed. Please try again.");
+        } else {
+          const data = {
+            razorpayPaymentId: res.razorpay_payment_id,
+            dealCodeNumber: ID,
+            razorpayOrderId: res.razorpay_order_id,
+            razCustomerId: customerId,
+            razorpaySignature: res.razorpay_signature,
+            id: razorpayData?.data.recID,
+          };
+          const result = await axios.post(
+            baseURL + endPoints.addToCart.successPayment,
+            data,
+          );
+          console.log(result, "result");
+        }
+      },
+      prefill: {
+        name: razorpayData?.data.name,
+        email: razorpayData?.data.email,
+        contact: razorpayData?.data.phone_no,
+      },
+      theme: {
+        color: RazorpayThemeColor,
+      },
+    };
+
+    console.log(options, "optionss");
+
+    const paymentObject = new window.Razorpay(options);
+
+    paymentObject.on("payment.failed", function (response) {
+      console.log("Payment failed:", response);
+      alert("Payment failed: " + response.error.description);
+    });
+
+    paymentObject.open();
+  }
   return (
     <div className={styles.wrapper}>
       <p className={styles.main_heading}>{Heading}</p>
@@ -58,7 +140,7 @@ function UpfrontPayment() {
         </p>
       </div>
       <div>
-        <button className={styles.pay_now_btn}>
+        <button className={styles.pay_now_btn} onClick={handleOpenRazorpay}>
           Pay now
           <ForwardArrowWithLine size={20} color={"#222222"} />
         </button>
