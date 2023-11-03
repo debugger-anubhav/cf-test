@@ -137,6 +137,7 @@ export const endPoints = {
   feedback: "ivr-feedbacks/saveFeedback",
   careerPageData: "fc-jobs/getCareerPageContent",
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
+  tenureExtensionCreateOrder: "fc-payments/createOrder",
   upfrontPayment: "upfront-collection-statuses/collectUpfrontPayment",
   documentationApprove: id =>
     `fc-user-uploaded-docs/getUsersDocs?dealCodeNumber=${id}`,
