@@ -8,7 +8,7 @@
   @apply flex flex-col w-full md:my-8 my-4;
 }
 .heading {
-  @apply text-71717A text-16 font-Poppins leading-6 mt-1;
+  @apply text-71717A text-16 font-Poppins leading-6 mt-1 flex;
 }
 .heading_span {
   @apply text-71717A text-16 font-Poppins font-medium leading-6 ml-3;
