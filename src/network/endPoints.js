@@ -137,4 +137,5 @@ export const endPoints = {
   feedback: "ivr-feedbacks/saveFeedback",
   careerPageData: "fc-jobs/getCareerPageContent",
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
+  upfrontPayment: "upfront-collection-statuses/collectUpfrontPayment",
 };
