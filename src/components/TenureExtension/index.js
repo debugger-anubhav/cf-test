@@ -88,6 +88,7 @@ function TenureExtension() {
                 cardIndex={cardIndex}
                 setcardIndex={setcardIndex}
                 index={index}
+                orderId={params?.orderId}
               />
             </div>
           );
@@ -97,6 +98,7 @@ function TenureExtension() {
           data={apiData}
           monthlyCardIsChecked={monthlyCardIsChecked}
           setmonthlyCardIsChecked={setmonthlyCardIsChecked}
+          orderId={params?.orderId}
         />
       </div>
     </div>
