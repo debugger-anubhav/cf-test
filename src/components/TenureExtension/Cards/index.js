@@ -4,6 +4,16 @@ import {Close, RightIcon, VerifyIcon} from "@/assets/icon";
 import DropDown from "@/components/Documentation/DropDown/DropDown";
 import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
 import {Skeleton} from "@mui/material";
+import {
+  RazorpayThemeColor,
+  razorpayKey,
+  razorpayKeyOwn,
+} from "../../../../appConfig";
+import {endPoints} from "@/network/endPoints";
+import {baseURL} from "@/network/axios";
+import axios from "axios";
+import {loadScript} from "@/constants/constant";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 function Cards({
   data,
@@ -13,6 +23,7 @@ function Cards({
   setcardIndex,
   index,
   cardIndex,
+  orderId,
 }) {
   const calculatedPrice =
     data?.orignalPrice -
@@ -40,6 +51,87 @@ function Cards({
   useEffect(() => {
     if (isChecked) setCityShieldDrawerOpen(false);
   }, [isChecked]);
+
+  const cartTypeOneHandler = async (res, customerId) => {
+    const data = {
+      razorpayPaymentId: res.razorpay_payment_id,
+      dealCodeNumber: orderId,
+      razorpayOrderId: res.razorpay_order_id,
+      razCustomerId: customerId,
+      razorpaySignature: res.razorpay_signature,
+    };
+    const result = await axios.post(
+      baseURL + endPoints.addToCart.successPayment,
+      data,
+    );
+    console.log(result);
+  };
+
+  async function handleOpenRazorpay(cardType) {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res, " res in load script");
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const result = await axios.post(
+      baseURL + endPoints.tenureExtensionCreateOrder,
+      {
+        dealCodeNumber: parseInt(orderId),
+        mode: "extension",
+        tenure: selectedOptionPer?.value,
+        cf_value: data?.isCityShieldApplied ? 1 : 0,
+      },
+    );
+    console.log(result.data.data, "tenure extension data");
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
+
+    const razOrderId = result.data.data.raz_order_id;
+    const customerId = result.data.data.customer_id;
+    console.log(razOrderId, customerId, "huhwiuhij");
+
+    const options = {
+      key: razorpayKeyOwn,
+      order_id: razOrderId,
+      customer_id: customerId,
+      name: "Cityfurnish",
+      description: "Easy payment registration",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      handler: function (res) {
+        console.log(res, "res in handler");
+        cartTypeOneHandler(res, customerId);
+      },
+      prefill: {
+        name: result?.data?.data?.data?.full_name,
+        email: result?.data?.data?.data?.email,
+        contact: result?.data?.data?.data?.phone_no,
+      },
+      theme: {
+        color: RazorpayThemeColor,
+      },
+    };
+
+    console.log(options, "optionss");
+
+    const paymentObject = new window.Razorpay(options);
+
+    paymentObject.on("payment.failed", function (response) {
+      console.log("Payment failed:", response.error.description);
+      alert("Payment failed: " + response.error.description);
+    });
+
+    paymentObject.open();
+  }
+
+  // console.log(items, data, selectedOptionPer, "itemss");
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -138,7 +230,9 @@ function Cards({
         </p>
       </div>
       <div>
-        <button className={styles.pay_now_btn}>Pay now</button>
+        <button onClick={handleOpenRazorpay} className={styles.pay_now_btn}>
+          Pay now
+        </button>
       </div>
     </div>
   );
@@ -150,6 +244,7 @@ export const MonthlyCard = ({
   data,
   monthlyCardIsChecked,
   setmonthlyCardIsChecked,
+  orderId,
 }) => {
   const DiscountPoints = [
     "No Discount",
@@ -162,6 +257,7 @@ export const MonthlyCard = ({
   const [selectedOption, setSelectedOption] = useState(0);
   const [cityShieldDrawerOpenForMonthly, setcityShieldDrawerOpenForMonthly] =
     useState(false);
+  const [modeOfPayment, setModeOfPayment] = useState("card");
 
   const handleOptionChange = index => {
     setSelectedOption(index);
@@ -174,6 +270,101 @@ export const MonthlyCard = ({
     if (monthlyCardIsChecked) setcityShieldDrawerOpenForMonthly(false);
     else setcityShieldDrawerOpenForMonthly(true);
   };
+
+  const successHandlerCardTwo = (
+    paymentID,
+    modeOfPayment,
+    razorpaySignature,
+    RazorpayOrderIDBeforePayment,
+  ) => {
+    const body = {
+      transactionID: paymentID,
+      mode: modeOfPayment,
+      signature: razorpaySignature,
+      server_orderid: RazorpayOrderIDBeforePayment,
+    };
+    console.log(body, "bodyyy");
+    axios
+      .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
+      .then(response => {
+        console.log(response, "resss");
+        if (response.data.success === true) {
+          showToastNotification(response.data.message, 1);
+        } else {
+          showToastNotification(response.data.message, 3);
+        }
+      })
+      .catch(err => console.log(err, "errr"));
+  };
+
+  async function handleOpenRazorpay() {
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res, " res in load script");
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const result = await axios.post(
+      baseURL + endPoints.kycPage.registerMandate,
+      {
+        dealCodeNumber: orderId,
+        mode: modeOfPayment,
+        cf_value: data?.isCityShieldApplied ? 1 : 0,
+      },
+    );
+    console.log(result.data.data, "tenure extension data");
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
+
+    const razOrderId = result.data.data.raz_order_id;
+    const customerId = result.data.data.customer_id;
+    console.log(razOrderId, customerId, "huhwiuhij");
+
+    const options = {
+      key: razorpayKey,
+      order_id: razOrderId,
+      customer_id: customerId,
+      recurring: "1",
+      name: "Cityfurnish",
+      description: "Easy payment registration",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      handler: function (res) {
+        console.log(res, "res in handler");
+        successHandlerCardTwo(
+          res.razorpay_payment_id,
+          modeOfPayment,
+          res.razorpay_signature,
+          razOrderId,
+        );
+      },
+      prefill: {
+        name: result?.data?.data.name,
+        email: result?.data?.data.email,
+        contact: result?.data?.data.phone_no,
+      },
+      theme: {
+        color: RazorpayThemeColor,
+      },
+    };
+
+    console.log(options, "optionss");
+
+    const paymentObject = new window.Razorpay(options);
+
+    paymentObject.on("payment.failed", function (response) {
+      console.log("Payment failed:", response.error.description);
+      alert("Payment failed: " + response.error.description);
+    });
+
+    paymentObject.open();
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -253,7 +444,16 @@ export const MonthlyCard = ({
                   type="radio"
                   className={styles.radio_button}
                   checked={selectedOption === index}
-                  onChange={() => handleOptionChange(index)}
+                  onChange={() => {
+                    handleOptionChange(index);
+                    setModeOfPayment(
+                      item.includes("banking")
+                        ? "emandate"
+                        : item.includes("card")
+                        ? "card"
+                        : "upi",
+                    );
+                  }}
                 />
                 <label className={styles.radio_label}>{item}</label>
               </div>
@@ -263,7 +463,9 @@ export const MonthlyCard = ({
       </div>
 
       <div>
-        <button className={styles.pay_now_btn}>Pay now</button>
+        <button onClick={handleOpenRazorpay} className={styles.pay_now_btn}>
+          Pay now
+        </button>
       </div>
     </div>
   );

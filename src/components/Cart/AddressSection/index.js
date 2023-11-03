@@ -20,7 +20,7 @@ import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, loadScript} from "@/constants/constant";
 import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
@@ -165,19 +165,19 @@ const AddressSection = () => {
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
-  function loadScript(src) {
-    return new Promise(resolve => {
-      const script = document.createElement("script");
-      script.src = src;
-      script.onload = () => {
-        resolve(true);
-      };
-      script.onerror = () => {
-        resolve(false);
-      };
-      document.body.appendChild(script);
-    });
-  }
+  // function loadScript(src) {
+  //   return new Promise(resolve => {
+  //     const script = document.createElement("script");
+  //     script.src = src;
+  //     script.onload = () => {
+  //       resolve(true);
+  //     };
+  //     script.onerror = () => {
+  //       resolve(false);
+  //     };
+  //     document.body.appendChild(script);
+  //   });
+  // }
 
   async function handlePayment() {
     const res = await loadScript(
