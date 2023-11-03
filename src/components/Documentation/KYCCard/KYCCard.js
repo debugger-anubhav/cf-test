@@ -7,7 +7,7 @@ import CommonField from "../CommonField/CommonField";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {razorpayKey} from "../../../../appConfig";
+import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useSelector} from "react-redux";
 // import {useSelector} from "react-redux";
@@ -120,7 +120,7 @@ const KYCCard = ({handleKycState}) => {
         contact: result?.data?.data.phone_no,
       },
       theme: {
-        color: "#EF534E",
+        color: RazorpayThemeColor,
       },
     };
 

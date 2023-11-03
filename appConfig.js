@@ -25,8 +25,10 @@ export const AppConfig = {
 
 export const cityUrl = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
-// export const razorpayKey = "rzp_test_8xqfCdTnoga4Yi";
+export const razorpayKeyOwn = "rzp_test_8xqfCdTnoga4Yi";
 export const razorpayKey = "rzp_test_dw32j6ggDS3ktY";
+
+export const RazorpayThemeColor = "#3E688E";
 
 // export const productImageBaseUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/";

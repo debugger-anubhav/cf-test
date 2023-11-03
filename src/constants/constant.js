@@ -611,6 +611,10 @@ export function getLocalStorageString(key, value) {
   }
 }
 
+// export function razorPayIntegration(handler, object){
+
+// }
+
 export const BenefitPageData = [
   {
     icon: hasselFreeSection.IconThree,

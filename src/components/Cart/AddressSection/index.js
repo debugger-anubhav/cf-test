@@ -15,7 +15,7 @@ import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {cityUrl, razorpayKey} from "../../../../appConfig";
+import {cityUrl, razorpayKey, RazorpayThemeColor} from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -251,7 +251,7 @@ const AddressSection = () => {
         contact: userDetails?.phoneNo,
       },
       theme: {
-        color: "#EF534E",
+        color: RazorpayThemeColor,
       },
     };
 
