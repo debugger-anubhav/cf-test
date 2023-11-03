@@ -1,0 +1,28 @@
+.main_container {
+  @apply relative  md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none  md:!h-full;
+  overflow-y: visible !important;
+}
+.head {
+  @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-medium leading-8 tracking-0.48;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.total_txt {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-6;
+}
+.input {
+  @apply mt-1 h-12 xl:h-14 border border-DDDDDF rounded-xl px-3 py-4 bg-fff w-full outline-none;
+}
+.toggle_wrapper {
+  @apply flex gap-2 mt-[10px] items-center;
+}
+.btn {
+  @apply bg-F6B704 mt-[34px] flex gap-[10px] w-[231px] font-medium h-12 xl:h-14 rounded-lg items-center justify-center text-14 xl:text-16 text-222 tracking-desc xl:tracking-0.3;
+}
+.proceed_icon {
+  @apply w-5 h-5 xl:w-6 xl:h-6 text-222;
+}
