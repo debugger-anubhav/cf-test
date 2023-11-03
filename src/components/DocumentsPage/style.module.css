@@ -44,6 +44,9 @@
 .success_icon_div {
   @apply bg-[#2D9469] w-[25px] h-[25px] rounded-full flex justify-center items-center ml-1;
 }
+.final_status {
+  @apply text-71717A text-16 font-Poppins;
+}
 /* .checkIcon {
   @apply w-6 h-6;
 } */

@@ -138,4 +138,8 @@ export const endPoints = {
   careerPageData: "fc-jobs/getCareerPageContent",
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
   upfrontPayment: "upfront-collection-statuses/collectUpfrontPayment",
+  documentationApprove: id =>
+    `fc-user-uploaded-docs/getUsersDocs?dealCodeNumber=${id}`,
+  documentationApproveStatusUpdate:
+    "fc-user-uploaded-docs/updateDocumentStatus",
 };
