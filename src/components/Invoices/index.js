@@ -8,15 +8,19 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {DownArrowUnfilled, Plus} from "@/assets/icon";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
+import {DownArrowUnfilled} from "@/assets/icon";
+import Accordian from "./Accordian";
+import PastpaymentDrawer from "./Drawer/PastpaymentDrawer";
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const InvoicePage = () => {
   const [visibleRows, setVisibleRows] = useState(12);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
   const rows = [
     {
       invoiceDate: "2023-10-01",
@@ -141,7 +145,9 @@ const InvoicePage = () => {
 
         <div className={styles.past_payment_wrapper}>
           <p className={styles.desc}>
-            <span className={styles.click_here}>Click here</span>
+            <span onClick={toggleDrawer} className={styles.click_here}>
+              Click here
+            </span>
             to check your past payments
           </p>
           <div className={styles.amount_wrapper}>
@@ -235,48 +241,21 @@ const InvoicePage = () => {
         </div>
 
         <div className={styles.mobile}>
-          <div>
-            {rows.map((row, index) => (
-              <Accordion key={index} className={styles.accordian}>
-                <AccordionSummary
-                  className={styles.accord_summary}
-                  expandIcon={<Plus />}>
-                  <Typography className={styles.tableHeaderCell}>
-                    Invoice Number: {row.invoiceNumber}
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails className={styles.accord_details}>
-                  <Typography className={styles.tableCell}>
-                    Invoice Date: {row.invoiceDate}
-                  </Typography>
-                  <Typography className={styles.tableCell}>
-                    Order Number: {row.orderNumber}
-                  </Typography>
-                  <Typography className={styles.tableCell}>
-                    Invoice Amount: {row.invoiceAmount}
-                  </Typography>
-                  <Typography className={styles.tableCell}>
-                    Amount Due: {row.amountDue}
-                  </Typography>
-                  <Typography className={styles.tableCell}>
-                    Status: {row.status}
-                  </Typography>
-                  <div className="flex gap-4 mt-1">
-                    <button className={styles.download_btn}>Download</button>
-                    <button
-                      className={`${
-                        row.status === "Paid" &&
-                        "!bg-[#FFDF85] !cursor-not-allowed"
-                      } ${styles.pay_btn}`}>
-                      Pay now
-                    </button>
-                  </div>
-                </AccordionDetails>
-              </Accordion>
-            ))}
-          </div>
+          <Accordian
+            rows={rows}
+            visibleRows={visibleRows}
+            handleShowMore={handleShowMore}
+          />
         </div>
       </div>
+
+      {isDrawerOpen && (
+        <PastpaymentDrawer
+          toggleDrawer={toggleDrawer}
+          open={isDrawerOpen}
+          totalAmount={"1200"}
+        />
+      )}
     </div>
   );
 };

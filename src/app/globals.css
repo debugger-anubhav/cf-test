@@ -125,3 +125,17 @@ input[type="number"]::-webkit-outer-spin-button {
 #spandesc div p span{
   @apply  !text-16 !text-71717A font-Poppins !leading-normal;
 } */
+
+/*mui accordian custom styling */
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root.Mui-expanded {
+  margin: 0px !important;
+}
+.css-sh22l5-MuiButtonBase-root-MuiAccordionSummary-root.Mui-expanded {
+  min-height: 0px !important;
+  max-height: fit-content !important;
+  height: fit-content !important;
+}
+
+.css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
+  @apply !mt-0 !mb-3;
+}
