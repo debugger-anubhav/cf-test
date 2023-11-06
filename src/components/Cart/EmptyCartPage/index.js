@@ -13,6 +13,7 @@ const EmptyCartPage = () => {
           className={styles.img}
           src={`${categoryIconsUrl + "empty-cart.svg"}`}
           loading="lazy"
+          alt="empty-cart"
         />
       </div>
       <p className={styles.head}>Your cart is empty!</p>

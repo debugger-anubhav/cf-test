@@ -266,7 +266,11 @@ const KYCAddress = ({handleKycState, step}) => {
       </div>
       <div className={`${styles.formInputFirst} sm:w-[505px]`}>
         <div className={`flex gap-2 items-center ${styles.form_input} `}>
-          <img src={`${cityUrl + "india-icon.svg"}`} className={styles.flag} />
+          <img
+            src={`${cityUrl + "india-icon.svg"}`}
+            className={styles.flag}
+            alt="India-icon"
+          />
           <input
             type="text"
             // readOnly

@@ -373,6 +373,7 @@ const AddressSection = () => {
                         src={`${cityUrl + "india-icon.svg"}`}
                         className={styles.flag}
                         loading="lazy"
+                        alt="India-icon"
                       />
                       <Field
                         type="number"

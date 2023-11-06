@@ -9,12 +9,12 @@ export default function Gallery() {
       <div className={styles.first_col}>
         <img
           src={CareerGallery.first}
-          alt="first-image"
+          alt="life at cityfurnish"
           className={styles.first_image}
         />
         <img
           src={CareerGallery.second}
-          alt="second-image"
+          alt="life at cityfurnish"
           className={styles.second_image}
         />
       </div>
@@ -26,20 +26,20 @@ export default function Gallery() {
           <div className={styles.second_top_col_1}>
             <img
               src={CareerGallery.sixth}
-              alt="sixth-image"
+              alt="life at cityfurnish"
               className={styles.gallery_image_6}
             />
 
             <img
               src={CareerGallery.fourth}
-              alt="fourth-image"
+              alt="life at cityfurnish"
               className={styles.gallery_image_4}
             />
           </div>
           <div className={styles.second_top_col_2}>
             <img
               src={CareerGallery.fivth}
-              alt="fivth-image"
+              alt="life at cityfurnish"
               className={styles.gallery_image_5}
             />
           </div>
@@ -48,7 +48,7 @@ export default function Gallery() {
           <div className={styles.gallery_image_3}>
             <img
               src={CareerGallery.third}
-              alt="third-image"
+              alt="life at cityfurnish"
               className={styles.img_gallery}
             />
           </div>
@@ -60,14 +60,14 @@ export default function Gallery() {
         <div className={styles.gallery_image_7}>
           <img
             src={CareerGallery.seven}
-            alt="seven-image"
+            alt="life at cityfurnish"
             className={styles.img_gallery}
           />
         </div>
         <div className={styles.gallery_image_8}>
           <img
             src={CareerGallery.eight}
-            alt="eight-image"
+            alt="life at cityfurnish"
             className={styles.img_gallery}
           />
         </div>
