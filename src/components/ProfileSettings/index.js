@@ -225,6 +225,7 @@ const ProfileSettings = () => {
                                 src={`${cityUrl + "india-icon.svg"}`}
                                 className={formStyles.flag}
                                 loading="lazy"
+                                alt="India-icon"
                               />
                               <Field
                                 type="number"
