@@ -106,6 +106,7 @@ const InverstorAndMedia = () => {
                     <img
                       src={`${AboutUs}/icons/award-icon.svg`}
                       loading="lazy"
+                      alt="Award-icon"
                     />
                   </div>
                   <div className="flex flex-col gap-1 w-full">

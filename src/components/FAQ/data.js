@@ -23,7 +23,7 @@ export const HowItWorks = [
       "Get the delivery and assembly done on the promised date.",
     ],
     afterChild:
-      'To know more please <b><a href="https://rentofurniture.com/pages/how-it-works">click here</a></b>',
+      'To know more please <b><a href="/pages/how-it-works">click here</a></b>',
   },
   {
     que: "Can I get the actual product picture?",
