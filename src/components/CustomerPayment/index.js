@@ -14,13 +14,22 @@ import {
 let AvailableCoins = 300;
 
 function CustomerPayment() {
+  const currentURL = window?.location?.href;
+  const url = new URL(currentURL);
+  const searchParams = url.searchParams;
+  const emailParam = searchParams.get("email");
+  const nameParam = searchParams.get("name");
+  const amountParam = searchParams.get("amount");
+  const invoiceNumberParam = searchParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    amount: "",
+    fullName: nameParam,
+    email: emailParam,
+    amount: parseInt(amountParam.split(".")[1].split(",").join("")),
+    invoice: invoiceNumberParam,
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
+
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Full name is required")
@@ -29,7 +38,6 @@ function CustomerPayment() {
     email: Yup.string().email().required("Please enter a valid email address."),
     amount: Yup.number().required("Amount is required."),
   });
-
   const handleSubmit = values => {
     console.log(values, "vvvvvvvv");
     setFormData({...formData, values});
@@ -95,7 +103,7 @@ function CustomerPayment() {
             <div className={styles.form_field}>
               <p className={styles.form_label}>Invoice Number (Optional)</p>
               <input
-                type="number"
+                type="text"
                 name="invoice"
                 placeholder="Please provide the invoice number for payment."
                 className={styles.form_input}
