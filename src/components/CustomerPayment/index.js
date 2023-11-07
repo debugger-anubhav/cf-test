@@ -14,6 +14,9 @@ import {
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 function CustomerPayment() {
   const router = useRouter();
@@ -28,6 +31,7 @@ function CustomerPayment() {
   const tempAmountParam = searchParams.get("amount");
   let amountParam = parseInt(tempAmountParam.split(".")[1].split(",").join(""));
   const invoiceNumberParam = searchParams.get("invoice_number");
+
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
@@ -36,8 +40,19 @@ function CustomerPayment() {
     invoice: invoiceNumberParam || "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
-  const [availableCoins, setAvailableCoins] = useState(300);
-  const backToAvailableCoins = 300;
+  const [availableCoins, setAvailableCoins] = useState(0);
+  const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
+
+  const fetchAvailCoins = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCoins(userId))
+      .then(res => {
+        if (res?.data?.data?.length > 0)
+          setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+        setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+      })
+      .catch(err => console.log(err));
+  };
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -47,13 +62,14 @@ function CustomerPayment() {
     email: Yup.string().email().required("Please enter a valid email address."),
     amount: Yup.number().required("Amount is required."),
   });
+
   const handleSubmit = values => {
     setFormData({...formData, values});
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
-    console.log(values, "vvvvvvvv");
   };
+
   const handleUseCoins = value => {
     if (value !== "") {
       setUseCityfurnishCoins(true);
@@ -73,9 +89,11 @@ function CustomerPayment() {
   const handleLogin = () => {
     router.push("https://test.rentofurniture.com/user_sign_up");
   };
+
   useEffect(() => {
-    console.log(formData, "formData");
-  }, [formData]);
+    fetchAvailCoins();
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Customer Payment"} />
