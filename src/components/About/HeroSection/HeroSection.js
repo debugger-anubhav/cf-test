@@ -56,7 +56,6 @@ const HeroSection = () => {
       <h1 className={styles.heading}>About us</h1>
       <div className={styles.content_wrapper}>
         <div className={styles.section1_wrapper}>
-          {/* <p className={`${styles.about_desc} !font-medium`}></p> */}
           <p className={styles.about_desc}>
             <span className="font-medium">{data.hightlight}</span>
             {data.about_first}
