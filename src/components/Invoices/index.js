@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import Table from "@mui/material/Table";
@@ -11,126 +11,70 @@ import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
 import Accordian from "./Accordian";
 import PastpaymentDrawer from "./Drawer/PastpaymentDrawer";
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// import {getLocalStorage} from "@/constants/constant";
+// import {decrypt} from "@/hooks/cryptoUtils";
+import axios from "axios";
+import {endPoints} from "@/network/endPoints";
+import {baseURL} from "@/network/axios";
+import {useRouter} from "next/navigation";
 
 const InvoicePage = () => {
   const [visibleRows, setVisibleRows] = useState(12);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [rows, setRows] = useState([]);
+  const [availCoins, setAvailCoins] = useState();
+  const [isCoinApplied, setIsCoinApplied] = useState(false);
+  const [amountToPay, setAmountToPay] = useState("");
+  const [invoiceNumber, setInvoiceNumber] = useState();
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+  const router = useRouter();
+  // const userId = decrypt(getLocalStorage("_ga"));
+  const userId = 85777;
 
-  const rows = [
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Payment Due",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Payment Due",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-    // Add more rows as needed
-  ];
+  const getInvoicesData = () => {
+    axios
+      .get(baseURL + endPoints.invoicesPage.getMyInvoices(userId, 1))
+      .then(res => {
+        console.log(res?.data, "responseee");
+        setRows(res?.data?.data?.my_invoice);
+        setAvailCoins(res?.data?.data?.my_wallet?.topup_amount);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    getInvoicesData();
+  }, []);
+
+  const getTotalAmountDue = () => {
+    let sum = 0;
+    rows.map(row => (sum = sum + row?.balance));
+    return sum;
+  };
+
+  const AmountDue = getTotalAmountDue();
+
+  const handleDownload = invoiceUrl => {
+    // Create a hidden anchor element
+    const anchor = document.createElement("a");
+    anchor.href = invoiceUrl;
+    anchor.download = "invoice.pdf"; // Set the desired file name
+    document.body.appendChild(anchor);
+
+    // Trigger a click event on the anchor element to initiate the download
+    anchor.click();
+
+    // Remove the anchor element from the DOM
+    document.body.removeChild(anchor);
+  };
+
   const handleShowMore = () => {
     setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
   };
+
   return (
     <div className={styles.main_container}>
       <div className={styles.doc_side_bar}>
@@ -145,7 +89,11 @@ const InvoicePage = () => {
 
         <div className={styles.past_payment_wrapper}>
           <p className={styles.desc}>
-            <span onClick={toggleDrawer} className={styles.click_here}>
+            <span
+              onClick={() => {
+                router.push("/payments");
+              }}
+              className={styles.click_here}>
               Click here
             </span>
             to check your past payments
@@ -153,9 +101,21 @@ const InvoicePage = () => {
           <div className={styles.amount_wrapper}>
             <p className={styles.desc}>
               Total Amount Due: <span className={styles.rupeeIcon}>₹</span>
-              {"1200"}
+              {isCoinApplied
+                ? AmountDue - availCoins > 0
+                  ? AmountDue - availCoins
+                  : 0
+                : AmountDue}
             </p>
-            <button className={styles.pay_all_btn}>Pay all</button>
+            <button
+              onClick={() => {
+                setAmountToPay(AmountDue);
+                setInvoiceNumber(null);
+                toggleDrawer();
+              }}
+              className={styles.pay_all_btn}>
+              Pay all
+            </button>
           </div>
         </div>
 
@@ -194,33 +154,44 @@ const InvoicePage = () => {
                 {rows.slice(0, visibleRows).map((row, index) => (
                   <TableRow key={index} className={styles.tableRow}>
                     <TableCell className={`min-w-[116px] ${styles.tableCell}`}>
-                      {row.invoiceDate}
+                      {row.due_days}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.invoiceNumber}
+                      {row.invoice_number}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.orderNumber}
+                      {row.deal_code}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.invoiceAmount}
+                      {row.total}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.amountDue}
+                      {row.balance}
                     </TableCell>
                     <TableCell
                       className={`${
-                        row.status === "Paid"
+                        row.current_sub_status === "paid"
                           ? "!text-[#67AF7B]"
                           : "!text-[#D96060]"
                       } ${styles.tableCell}`}>
-                      {row.status}
+                      {row.current_sub_status === "paid"
+                        ? "Paid"
+                        : "Payment Due"}
                     </TableCell>
                     <TableCell className={`flex gap-4 ${styles.tableCell}`}>
-                      <button className={styles.download_btn}>Download</button>
                       <button
+                        onClick={() => handleDownload(row.invoice_url)}
+                        className={styles.download_btn}>
+                        Download
+                      </button>
+                      <button
+                        onClick={() => {
+                          setAmountToPay(row.balance);
+                          setInvoiceNumber(row.invoice_number);
+                          toggleDrawer();
+                        }}
                         className={`${
-                          row.status === "Paid" &&
+                          row.current_sub_status === "paid" &&
                           "!bg-[#FFDF85] !cursor-not-allowed"
                         } ${styles.pay_btn}`}>
                         Pay now
@@ -253,7 +224,11 @@ const InvoicePage = () => {
         <PastpaymentDrawer
           toggleDrawer={toggleDrawer}
           open={isDrawerOpen}
-          totalAmount={"1200"}
+          amountDue={amountToPay}
+          availbal={availCoins}
+          isCoinApplied={isCoinApplied}
+          setIsCoinApplied={bool => setIsCoinApplied(bool)}
+          invoiceNumber={invoiceNumber}
         />
       )}
     </div>

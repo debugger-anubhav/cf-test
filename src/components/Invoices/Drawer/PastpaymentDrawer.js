@@ -2,15 +2,53 @@ import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {Close, ForwardArrowWithLine, ToggleOff, ToggleOn} from "@/assets/icon";
 import {Drawer} from "@mui/material";
+import {useRouter} from "next/navigation";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 const PastpaymentDrawer = ({
   toggleDrawer,
   open,
-  totalAmount,
-  availbal = 300,
+  amountDue,
+  availbal,
+  isCoinApplied,
+  setIsCoinApplied,
+  invoiceNumber,
 }) => {
+  const router = useRouter();
+  const userId = decrypt(getLocalStorage("_ga"));
+
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
-  const [isCoinApplied, setIsCoinApplied] = useState(false);
+  // const [isCoinApplied, setIsCoinApplied] = useState(false);
+
+  const handleRedirectToPayment = async () => {
+    try {
+      const response = await axios.get(
+        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
+      );
+
+      const queryParams = {
+        email: response?.data?.data?.email,
+        name: response?.data?.data?.full_name,
+        customer_id: response?.data?.data.cf_customer_id || "CF-126402",
+        amount: `Rs.${amountDue}`,
+      };
+      if (invoiceNumber !== null) {
+        queryParams.invoice_number = invoiceNumber;
+      }
+      const queryString = Object.keys(queryParams)
+        .map(key => `${key}=${encodeURIComponent(queryParams[key])}`)
+        .join("&");
+
+      const url = `/customerpayment?${queryString}`;
+      router.push(url);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -47,7 +85,16 @@ const PastpaymentDrawer = ({
           <p className={styles.head}>Make Payment</p>
           <div className="mt-8 md:pr-8">
             <p className={styles.total_txt}>Total Amount Due</p>
-            <input className={styles.input} value={totalAmount} />
+            <input
+              className={styles.input}
+              value={
+                isCoinApplied
+                  ? amountDue - availbal > 0
+                    ? amountDue - availbal
+                    : 0
+                  : amountDue
+              }
+            />
 
             <div className={styles.toggle_wrapper}>
               <div className="cursor-pointer ">
@@ -66,11 +113,14 @@ const PastpaymentDrawer = ({
                 )}
               </div>
               <p className={styles.total_txt}>
-                Use Cityfurnish coins (Available balance: {availbal})
+                Use Cityfurnish coins (Available balance:{" "}
+                {isCoinApplied ? Math.abs(amountDue - availbal) : availbal})
               </p>
             </div>
 
-            <button className={styles.btn}>
+            <button
+              className={styles.btn}
+              onClick={() => handleRedirectToPayment()}>
               Proceed and pay
               <ForwardArrowWithLine className={styles.proceed_icon} />
             </button>
