@@ -38,6 +38,7 @@ function CustomerPayment() {
     email: emailParam || "",
     amount: amountParam || "",
     invoice: invoiceNumberParam || "",
+    cfCoins: 0,
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
   const [availableCoins, setAvailableCoins] = useState(0);
@@ -68,6 +69,7 @@ function CustomerPayment() {
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
+    console.log(formData, "formdatttta");
   };
 
   const handleUseCoins = value => {
@@ -79,6 +81,7 @@ function CustomerPayment() {
         setAvailableCoins(0);
       } else {
         setAvailableCoins(availableCoins - parseInt(value));
+        setFormData({...formData, cfCoins: parseInt(value)});
         setFormData({...formData, amount: 0});
       }
     } else {
