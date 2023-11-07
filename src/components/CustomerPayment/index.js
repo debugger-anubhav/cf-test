@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import * as Yup from "yup";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -48,26 +48,34 @@ function CustomerPayment() {
     amount: Yup.number().required("Amount is required."),
   });
   const handleSubmit = values => {
-    console.log(values, "vvvvvvvv");
     setFormData({...formData, values});
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
+    console.log(values, "vvvvvvvv");
   };
   const handleUseCoins = value => {
     if (value !== "") {
       setUseCityfurnishCoins(true);
       if (availableCoins < parseInt(value)) {
         amountParam = availableCoins - parseInt(value);
-        setFormData({...formData, amount: amountParam});
+        setFormData({...formData, amount: amountParam * -1});
         setAvailableCoins(0);
-      } else setAvailableCoins(availableCoins - parseInt(value));
-    } else setshowValidationForAmount(true);
+      } else {
+        setAvailableCoins(availableCoins - parseInt(value));
+        setFormData({...formData, amount: 0});
+      }
+    } else {
+      setshowValidationForAmount(true);
+    }
   };
 
   const handleLogin = () => {
     router.push("https://test.rentofurniture.com/user_sign_up");
   };
+  useEffect(() => {
+    console.log(formData, "formData");
+  }, [formData]);
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Customer Payment"} />
@@ -117,6 +125,8 @@ function CustomerPayment() {
                 name="invoice"
                 placeholder="Please provide the invoice number for payment."
                 className={styles.form_input}
+                value={formik.values.invoice}
+                onChange={e => formik.setFieldValue("invoice", e.target.value)}
               />
 
               <a href="https://cityfurnish.com/invoices">
@@ -142,10 +152,13 @@ function CustomerPayment() {
                 className={styles.form_input}
                 onChange={e => {
                   setFormData({...formData, amount: e.target.value});
-                  formik.values.amount = e.target.value;
+                  formik.setFieldValue("amount", e.target.value);
                   setshowValidationForAmount(false);
                   formik.touched.amount = false;
                 }}
+                value={
+                  useCityfurnishCoins ? formData.amount : formik.values.amount
+                }
               />
               <ErrorMessage name="amount">
                 {msg =>
