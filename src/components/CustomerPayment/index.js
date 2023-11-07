@@ -23,10 +23,10 @@ function CustomerPayment() {
   const invoiceNumberParam = searchParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: nameParam,
-    email: emailParam,
-    amount: parseInt(amountParam.split(".")[1].split(",").join("")),
-    invoice: invoiceNumberParam,
+    fullName: nameParam || "",
+    email: emailParam || "",
+    amount: parseInt(amountParam.split(".")[1].split(",").join("")) || "",
+    invoice: invoiceNumberParam || "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
 
@@ -108,6 +108,7 @@ function CustomerPayment() {
                 placeholder="Please provide the invoice number for payment."
                 className={styles.form_input}
               />
+
               <a href="https://cityfurnish.com/invoices">
                 <div className={styles.all_invoices}>
                   <p className={styles.all_invoice_text}>See my all invoices</p>
