@@ -118,6 +118,11 @@ export const endPoints = {
     getUserDetails: orderId =>
       `fc-payments/getCityShieldPageDetails?orderId=${orderId}`,
   },
+
+  invoicesPage: {
+    getMyInvoices: (userId, page) =>
+      `fc-invoice-payments/getMyInvoices?userId=${userId}&page=${page}`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 
@@ -132,7 +137,6 @@ export const endPoints = {
   categoryFilterOption: "fc-products/getProductFilters",
   categoryInstruction: "fc-care-instructions/getProductCareInstructions",
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
-
   enquiry: "fc-bulk-orders/submitEnquiryForm",
   feedback: "ivr-feedbacks/saveFeedback",
   careerPageData: "fc-jobs/getCareerPageContent",
