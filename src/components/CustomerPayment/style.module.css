@@ -34,5 +34,5 @@
   @apply text-5774AC text-14 font-Poppins;
 }
 .login_row {
-  @apply lg:text-16 text-14 font-Poppins text-71717A;
+  @apply lg:text-16 text-14 font-Poppins text-71717A mt-1;
 }

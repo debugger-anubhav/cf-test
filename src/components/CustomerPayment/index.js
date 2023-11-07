@@ -11,24 +11,33 @@ import {
   ToggleOff,
   ToggleOn,
 } from "@/assets/icon";
-let AvailableCoins = 300;
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
+import {useRouter} from "next/navigation";
 
 function CustomerPayment() {
+  const router = useRouter();
+  const userId = decrypt(getLocalStorage("_ga"))
+    ? decrypt(getLocalStorage("_ga"))
+    : getLocalStorage("user_id");
   const currentURL = window?.location?.href;
   const url = new URL(currentURL);
   const searchParams = url.searchParams;
   const emailParam = searchParams.get("email");
   const nameParam = searchParams.get("name");
-  const amountParam = searchParams.get("amount");
+  const tempAmountParam = searchParams.get("amount");
+  let amountParam = parseInt(tempAmountParam.split(".")[1].split(",").join(""));
   const invoiceNumberParam = searchParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
     email: emailParam || "",
-    amount: parseInt(amountParam.split(".")[1].split(",").join("")) || "",
+    amount: amountParam || "",
     invoice: invoiceNumberParam || "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
+  const [availableCoins, setAvailableCoins] = useState(300);
+  const backToAvailableCoins = 300;
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -46,18 +55,19 @@ function CustomerPayment() {
     }
   };
   const handleUseCoins = value => {
-    // formData?.amount !== ""
     if (value !== "") {
       setUseCityfurnishCoins(true);
-      AvailableCoins = AvailableCoins - parseInt(value);
-      if (AvailableCoins < 0) {
-        //  let show_in_amount_field= AvailableCoins
-        value = AvailableCoins;
-        AvailableCoins = 0;
-      }
+      if (availableCoins < parseInt(value)) {
+        amountParam = availableCoins - parseInt(value);
+        setFormData({...formData, amount: amountParam});
+        setAvailableCoins(0);
+      } else setAvailableCoins(availableCoins - parseInt(value));
     } else setshowValidationForAmount(true);
   };
 
+  const handleLogin = () => {
+    router.push("https://test.rentofurniture.com/user_sign_up");
+  };
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Customer Payment"} />
@@ -147,31 +157,40 @@ function CustomerPayment() {
               {showValidationForAmount && (
                 <p className={formStyles.error}>Please enter a valid number.</p>
               )}
-              <div className={styles.toggleRow}>
-                {useCityfurnishCoins ? (
-                  <ToggleOn
-                    size={30}
-                    color={"#5774AC"}
-                    onClick={() => setUseCityfurnishCoins(false)}
-                    className={"cursor-pointer"}
-                  />
-                ) : (
-                  <ToggleOff
-                    color={"#E3E1DC"}
-                    size={30}
-                    onClick={() => handleUseCoins(formik.values.amount)}
-                    className={"cursor-pointer"}
-                  />
-                )}
-                <span className={styles.toggle_text}>
-                  {` Use Cityfurnish coins (Available balance: ${AvailableCoins})`}
-                </span>
-              </div>
-              <div className={styles.login_row}>
-                {" "}
-                <span className="text-5774AC">Login </span>to use Cityfurnish
-                coins
-              </div>
+              {userId ? (
+                <div className={styles.toggleRow}>
+                  {useCityfurnishCoins ? (
+                    <ToggleOn
+                      size={30}
+                      color={"#5774AC"}
+                      onClick={() => {
+                        setUseCityfurnishCoins(false);
+                        setAvailableCoins(backToAvailableCoins);
+                      }}
+                      className={"cursor-pointer"}
+                    />
+                  ) : (
+                    <ToggleOff
+                      color={"#E3E1DC"}
+                      size={30}
+                      onClick={() => handleUseCoins(formik.values.amount)}
+                      className={"cursor-pointer"}
+                    />
+                  )}
+                  <span className={styles.toggle_text}>
+                    {` Use Cityfurnish coins (Available balance: ${availableCoins})`}
+                  </span>
+                </div>
+              ) : (
+                <div className={styles.login_row}>
+                  <span
+                    className="text-5774AC cursor-pointer"
+                    onClick={() => handleLogin()}>
+                    Login{" "}
+                  </span>
+                  to use Cityfurnish coins
+                </div>
+              )}
             </div>
 
             <div className={styles.form_field}>
