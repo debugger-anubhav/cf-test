@@ -23,7 +23,10 @@ function CustomerPayment() {
   const userId = decrypt(getLocalStorage("_ga"))
     ? decrypt(getLocalStorage("_ga"))
     : getLocalStorage("user_id");
-  const currentURL = window?.location?.href;
+  let currentURL = "";
+  if (typeof window !== "undefined") {
+    currentURL = window?.location?.href;
+  }
   const url = new URL(currentURL);
   const searchParams = url.searchParams;
   const emailParam = searchParams.get("email");
