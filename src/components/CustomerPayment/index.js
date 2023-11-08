@@ -12,11 +12,12 @@ import {
   ToggleOn,
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 
 function CustomerPayment() {
   const router = useRouter();
@@ -64,12 +65,96 @@ function CustomerPayment() {
     amount: Yup.number().required("Amount is required."),
   });
 
+  const handlePayment = async () => {
+    console.log("innnn");
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js",
+    );
+    console.log(res);
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const result = await axios.post(
+      baseURL + endPoints.customerPayment.createCustomerPayment,
+      {
+        full_name: formData.fullName,
+        email: formData.email,
+        price: formData.amount,
+        user_invoice_number: formData.invoice,
+        cfCoins: formData.cfCoins,
+        notes: formData.notes || "",
+      },
+    );
+    console.log(result.data, "make payment api data");
+    if (!result) {
+      alert("Server error. Are you online?");
+      return;
+    }
+
+    const data = result.data.data;
+    console.log(data);
+
+    // const {dealCodeNumber} = result.data.data.orderData.notes;
+    const userDetails = result.data.data.data;
+
+    const options = {
+      key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
+      amount: formData.amount,
+      name: "Cityfurnish",
+      description: "Test Transaction",
+      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      order_id: data.raz_order_id,
+      customer_id: data.customer_id,
+      handler: async function (response) {
+        console.log(response, "responsse in handler");
+        const body = {
+          transactionID: response.razorpay_payment_id,
+          auth_raz_order_id: response.razorpay_order_id,
+          fullName: userDetails?.full_name,
+          paymentSource: "",
+          signature: response.razorpay_signature,
+          email: userDetails?.email,
+          invoiceNumber: formData?.invoice,
+          cfCoins: formData.cfCoins,
+          notes: formData.notes || "",
+          recId: userDetails.recID,
+        };
+        const result = await axios.post(
+          baseURL + endPoints.customerPayment.savePayment,
+          body,
+        );
+        console.log(result);
+      },
+      prefill: {
+        name: userDetails?.full_name,
+        email: userDetails?.email,
+        contact: userDetails?.phone_no,
+      },
+      theme: {
+        color: RazorpayThemeColor,
+      },
+    };
+
+    console.log(options, "optionss");
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.open();
+
+    paymentObject.on("payment.failed", e => {
+      console.log(e);
+    });
+  };
+
   const handleSubmit = values => {
     setFormData({...formData, values});
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdatttta");
+    handlePayment();
   };
 
   const handleUseCoins = value => {
@@ -237,7 +322,10 @@ function CustomerPayment() {
               />
             </div>
 
-            <button className={styles.pay_now_btn} type="submit">
+            <button
+              // onClick={() => handlePayment()}
+              className={styles.pay_now_btn}
+              type="submit">
               Pay now
               <ForwardArrowWithLine size={20} color={"#222222"} />
             </button>
