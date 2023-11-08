@@ -34,7 +34,7 @@ function CustomerPayment() {
   const tempAmountParam = searchParams.get("amount");
   let amountParam = parseInt(tempAmountParam.split(".")[1].split(",").join(""));
   const invoiceNumberParam = searchParams.get("invoice_number");
-
+  console.log(invoiceNumberParam, "kdjfksdjfksd");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
