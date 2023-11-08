@@ -23,18 +23,18 @@ function CustomerPayment() {
   const userId = decrypt(getLocalStorage("_ga"))
     ? decrypt(getLocalStorage("_ga"))
     : getLocalStorage("user_id");
-  let currentURL = "";
-  if (typeof window !== "undefined") {
-    currentURL = window?.location?.href;
-  }
-  const url = new URL(currentURL);
-  const searchParams = url.searchParams;
-  const emailParam = searchParams.get("email");
-  const nameParam = searchParams.get("name");
-  const tempAmountParam = searchParams.get("amount");
-  let amountParam = parseInt(tempAmountParam.split(".")[1].split(",").join(""));
-  const invoiceNumberParam = searchParams.get("invoice_number");
-  console.log(invoiceNumberParam, "kdjfksdjfksd");
+
+  const currentURL = typeof window !== "undefined" ? window.location.href : "";
+  const urlParams = new URLSearchParams(currentURL.split("?")[1]);
+
+  const emailParam = urlParams.get("email");
+  const nameParam = urlParams.get("name");
+  const tempAmountParam = urlParams.get("amount");
+  let amountParam = parseInt(
+    tempAmountParam?.split(".")[1].split(",").join(""),
+    10,
+  );
+  const invoiceNumberParam = urlParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(false);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
