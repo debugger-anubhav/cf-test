@@ -123,6 +123,11 @@ export const endPoints = {
     getMyInvoices: (userId, page) =>
       `fc-invoice-payments/getMyInvoices?userId=${userId}&page=${page}`,
   },
+
+  customerPayment: {
+    createCustomerPayment: `fc-payments/createCustomerPaymentOrder`,
+    savePayment: `fc-payments/saveCustomerPayment`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 
