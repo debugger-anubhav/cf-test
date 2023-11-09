@@ -315,8 +315,8 @@ function CustomerPayment() {
                           </div>
                         )}
                         <p className={styles.toggle_text}>
-                          Use Cityfurnish coins (Available balance: $
-                          {availableCoins || ""})
+                          Use Cityfurnish coins (Available balance :{" "}
+                          {availableCoins})
                         </p>
                       </div>
                     ) : (
