@@ -14,7 +14,7 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
   };
   return (
     <div>
-      {rows.slice(0, visibleRows).map((row, index) => (
+      {rows?.slice(0, visibleRows).map((row, index) => (
         <Accordion
           expanded={expanded === `panel${index}`}
           key={index}
@@ -32,35 +32,33 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: {row.invoiceNumber}
+              Invoice Number: {row.invoice_number}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date:</span>{" "}
-              {row.invoiceDate}
+              <span className="font-medium">Invoice Date:</span> {row.date}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Amount:</span>{" "}
-              {row.invoiceAmount}
+              <span className="font-medium">Invoice Amount:</span> {row.total}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Balance:</span> {row.amountDue}
+              <span className="font-medium">Balance:</span> {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Status: </span>
               <span
                 className={`${
-                  row.status === "Paid" ? "text-[#67AF7B]" : "text-[#D96060]"
+                  row.status === "void" ? "text-[#67AF7B]" : "text-[#D96060]"
                 }`}>
-                {row.status}
+                {row.status === "void" ? "Paid" : "Overdue"}
               </span>
             </Typography>
           </AccordionDetails>
         </Accordion>
       ))}
 
-      {visibleRows < rows.length && (
+      {visibleRows < rows?.length && (
         <button className={styles.show_more_btn} onClick={handleShowMore}>
           See More
           <DownArrowUnfilled className={styles.down_arrow} />

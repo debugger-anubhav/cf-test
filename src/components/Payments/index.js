@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import Invoices from "./invoices";
@@ -6,8 +6,32 @@ import Payment from "./payments";
 import CreditNotes from "./creditNotes";
 import Refunds from "./refunds";
 import RetainerInvoice from "./retainerInvoice/index";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const PaymentPage = () => {
+  // const userId = decrypt(getLocalStorage("_ga"));
+  const userId = 85777;
+
+  const [paymentDetails, setPaymentDetails] = useState();
+
+  const fetchMyPayments = () => {
+    axios
+      .get(baseURL + endPoints.myPaymentsPage.getMyPayments(userId))
+      .then(res => {
+        console.log(res?.data?.data);
+        setPaymentDetails(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchMyPayments();
+  }, []);
+
+  console.log(paymentDetails, "paymentdetailss");
+
   // const rows = [
   //   {
   //     invoiceDate: "2023-10-01",
@@ -134,25 +158,27 @@ const PaymentPage = () => {
         <div className={styles.amount_wrapper}>
           <p className={styles.desc}>
             Total invoices: <span className={styles.rupeeIcon}>₹</span>
-            {"1200"}
+            {paymentDetails?.toBePaid}
           </p>
           <p className={styles.desc}>
             Total payment: <span className={styles.rupeeIcon}>₹</span>
-            {"1200"}
+            {paymentDetails?.toBePaid - paymentDetails?.balance}
           </p>
           <p className={styles.desc}>
             Balance: <span className={styles.rupeeIcon}>₹</span>
-            {"1200"}
+            {paymentDetails?.balance}
           </p>
           <button className={styles.pay_all_btn}>Download statement</button>
         </div>
 
         <div>
-          <Invoices />
-          <Payment />
-          <CreditNotes />
-          <RetainerInvoice />
-          <Refunds />
+          <Invoices rows={paymentDetails?.invoices} />
+          <Payment rows={paymentDetails?.payments} />
+          <CreditNotes rows={paymentDetails?.creditNotes} />
+          {paymentDetails?.retainer && (
+            <RetainerInvoice rows={paymentDetails?.retainer} />
+          )}
+          {paymentDetails?.refund && <Refunds rows={paymentDetails.refund} />}
         </div>
       </div>
     </div>

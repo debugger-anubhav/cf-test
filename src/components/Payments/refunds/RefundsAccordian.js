@@ -5,6 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import {DownArrowUnfilled, Minus, Plus} from "@/assets/icon";
+import {format} from "date-fns";
 
 const RefundsAccordian = ({rows, handleShowMore, visibleRows}) => {
   const [expanded, setExpanded] = React.useState(null);
@@ -14,7 +15,7 @@ const RefundsAccordian = ({rows, handleShowMore, visibleRows}) => {
   };
   return (
     <div>
-      {rows.slice(0, visibleRows).map((row, index) => (
+      {rows?.slice(0, visibleRows).map((row, index) => (
         <Accordion
           expanded={expanded === `panel${index}`}
           key={index}
@@ -37,30 +38,32 @@ const RefundsAccordian = ({rows, handleShowMore, visibleRows}) => {
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date :</span>{" "}
-              {row.invoiceDate}
+              <span className="font-medium">Invoice Date :</span> {row.date}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Amount:</span>{" "}
-              {row.invoiceAmount}
+              <span className="font-medium">Invoice Number:</span>{" "}
+              {row.invoice_numbers ? row.invoice_numbers : "NA"}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium"> Amount Refunded:</span>{" "}
-              {row.amountRefunded}
+              {row.bcy_refunded_amount}
             </Typography>{" "}
             <Typography className={styles.tableCell}>
               <span className="font-medium"> Refund Date:</span>{" "}
-              {row.refundDate}
+              {`${format(
+                new Date(row.last_modified_time),
+                "d LLL, yyyy : hh:mm a",
+              )}`}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Payment Number: </span>
-              <span>{row.paymentNumber}</span>
+              <span>{row.payment_number}</span>
             </Typography>
           </AccordionDetails>
         </Accordion>
       ))}
 
-      {visibleRows < rows.length && (
+      {visibleRows < rows?.length && (
         <button className={styles.show_more_btn} onClick={handleShowMore}>
           See More
           <DownArrowUnfilled className={styles.down_arrow} />

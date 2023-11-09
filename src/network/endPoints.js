@@ -117,6 +117,7 @@ export const endPoints = {
   cityshieldPage: {
     getUserDetails: orderId =>
       `fc-payments/getCityShieldPageDetails?orderId=${orderId}`,
+    payment: `fc-payments/cfCarePayment`,
   },
 
   invoicesPage: {
@@ -127,6 +128,11 @@ export const endPoints = {
   customerPayment: {
     createCustomerPayment: `fc-payments/createCustomerPaymentOrder`,
     savePayment: `fc-payments/saveCustomerPayment`,
+  },
+
+  myPaymentsPage: {
+    getMyPayments: userId =>
+      `fc-invoice-payments/getMyPayments?userId=${userId}`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
