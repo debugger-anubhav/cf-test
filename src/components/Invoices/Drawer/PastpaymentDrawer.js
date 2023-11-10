@@ -128,13 +128,12 @@ const PastpaymentDrawer = ({
             <button
               className={styles.btn}
               onClick={async () => {
-                if (isCoinApplied) {
-                  console.log("innnn");
-                  await dispatch(getCoinsState(true));
-                  await dispatch(
-                    getAvailableCoins(Math.abs(amountDue - availbal)),
-                  );
-                }
+                await dispatch(getCoinsState(isCoinApplied));
+                await dispatch(
+                  getAvailableCoins(
+                    isCoinApplied ? Math.abs(amountDue - availbal) : availbal,
+                  ),
+                );
                 handleRedirectToPayment();
               }}>
               Proceed and pay

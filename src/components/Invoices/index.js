@@ -22,7 +22,7 @@ const InvoicePage = () => {
   const [visibleRows, setVisibleRows] = useState(12);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [rows, setRows] = useState([]);
-  const [availCoins, setAvailCoins] = useState();
+  const [availCoins, setAvailCoins] = useState(0);
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [amountToPay, setAmountToPay] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState();
