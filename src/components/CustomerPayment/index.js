@@ -17,9 +17,13 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
+import {useSelector} from "react-redux";
 
 function CustomerPayment() {
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
+
+  const iop = useSelector(state => state.invoicePage);
+  console.log(iop, "ueueui");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
