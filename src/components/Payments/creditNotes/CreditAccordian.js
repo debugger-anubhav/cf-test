@@ -5,6 +5,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import {DownArrowUnfilled, Minus, Plus} from "@/assets/icon";
+import {format} from "date-fns";
 
 const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
   const [expanded, setExpanded] = React.useState(null);
@@ -14,7 +15,7 @@ const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
   };
   return (
     <div>
-      {rows.slice(0, visibleRows).map((row, index) => (
+      {rows?.slice(0, visibleRows).map((row, index) => (
         <Accordion
           expanded={expanded === `panel${index}`}
           key={index}
@@ -32,21 +33,21 @@ const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Applied Invoice: {row.appliedInvoice}
+              Applied Invoice: {row.applied_invoices}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Credit Note Number:</span>{" "}
-              {row.creditNoteNumber}
+              {row.creditnote_number}
             </Typography>
 
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount:</span> {row.amount}
+              <span className="font-medium">Amount:</span> {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Credit Note Date:</span>{" "}
-              {row.creditNoteDate}
+              {`${format(new Date(row.created_time), "d LLL, yyyy : hh:mm a")}`}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Status: </span>
@@ -56,7 +57,7 @@ const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
         </Accordion>
       ))}
 
-      {visibleRows < rows.length && (
+      {visibleRows < rows?.length && (
         <button className={styles.show_more_btn} onClick={handleShowMore}>
           See More
           <DownArrowUnfilled className={styles.down_arrow} />

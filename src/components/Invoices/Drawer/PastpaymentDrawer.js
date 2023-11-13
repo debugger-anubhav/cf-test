@@ -8,6 +8,8 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import {useDispatch} from "react-redux";
+import {getAvailableCoins, getCoinsState} from "@/store/Slices";
 
 const PastpaymentDrawer = ({
   toggleDrawer,
@@ -20,9 +22,10 @@ const PastpaymentDrawer = ({
 }) => {
   const router = useRouter();
   const userId = decrypt(getLocalStorage("_ga"));
-
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   // const [isCoinApplied, setIsCoinApplied] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleRedirectToPayment = async () => {
     try {
@@ -102,13 +105,17 @@ const PastpaymentDrawer = ({
                   <ToggleOn
                     size={29}
                     color={"#5774AC"}
-                    onClick={() => setIsCoinApplied(false)}
+                    onClick={() => {
+                      setIsCoinApplied(false);
+                    }}
                   />
                 ) : (
                   <ToggleOff
                     color={"#E3E1DC"}
                     size={29}
-                    onClick={() => setIsCoinApplied(true)}
+                    onClick={() => {
+                      setIsCoinApplied(true);
+                    }}
                   />
                 )}
               </div>
@@ -120,7 +127,15 @@ const PastpaymentDrawer = ({
 
             <button
               className={styles.btn}
-              onClick={() => handleRedirectToPayment()}>
+              onClick={async () => {
+                await dispatch(getCoinsState(isCoinApplied));
+                await dispatch(
+                  getAvailableCoins(
+                    isCoinApplied ? Math.abs(amountDue - availbal) : availbal,
+                  ),
+                );
+                handleRedirectToPayment();
+              }}>
               Proceed and pay
               <ForwardArrowWithLine className={styles.proceed_icon} />
             </button>

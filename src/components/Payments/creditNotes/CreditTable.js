@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "../styles.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,15 +8,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
+import {format} from "date-fns";
 
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const CreditTable = ({rows}) => {
-  const [visibleRows, setVisibleRows] = useState(12);
+const CreditTable = ({rows, handleShowMore, visibleRows}) => {
+  // const date = new Date(rows?.created_time);
 
-  const handleShowMore = () => {
-    setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
-  };
+  // Format the date and time
+  // const formattedDateTime = format(
+  //   rows?.created_time,
+  //   "dd MMM, yyyy : hh:mm a",
+  //   {
+  //     locale: enUS,
+  //   },
+  // );
+
   return (
     <>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -40,17 +47,22 @@ const CreditTable = ({rows}) => {
           </TableHead>
 
           <TableBody>
-            {rows.slice(0, visibleRows).map((row, index) => (
+            {rows?.slice(0, visibleRows).map((row, index) => (
               <TableRow key={index} className={styles.tableRow}>
                 <TableCell className={`${styles.tableCell}`}>
-                  {row.appliedInvoice}
+                  {row.applied_invoices}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
-                  {row.creditNoteNumber}
+                  {row.creditnote_number}
                 </TableCell>
-                <TableCell className={styles.tableCell}>{row.amount}</TableCell>
                 <TableCell className={styles.tableCell}>
-                  {row.creditNoteDate}
+                  {row.balance}
+                </TableCell>
+                <TableCell className={styles.tableCell}>
+                  {`${format(
+                    new Date(row.created_time),
+                    "d LLL, yyyy : hh:mm a",
+                  )}`}
                 </TableCell>
 
                 <TableCell
@@ -63,7 +75,7 @@ const CreditTable = ({rows}) => {
           </TableBody>
         </Table>
 
-        {visibleRows < rows.length && (
+        {visibleRows < rows?.length && (
           <button className={styles.show_more_btn} onClick={handleShowMore}>
             See More
             <DownArrowUnfilled className={styles.down_arrow} />

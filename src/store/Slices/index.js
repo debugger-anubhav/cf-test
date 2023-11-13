@@ -238,6 +238,22 @@ export const KycPageSlice = createSlice({
   },
 });
 
+export const InvoiceSlice = createSlice({
+  name: "InvoicePage",
+  initialState: {
+    isCoinApplied: false,
+    availableCoins: 0,
+  },
+  reducers: {
+    getCoinsState(state, action) {
+      state.isCoinApplied = action.payload;
+    },
+    getAvailableCoins(state, action) {
+      state.availableCoins = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -294,3 +310,5 @@ export const {getUserName, getUserContact, getUserEmail} =
   ProfileSettingSlice.actions;
 
 export const {getOrderId} = KycPageSlice.actions;
+
+export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
