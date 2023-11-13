@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "../styles.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,12 +11,7 @@ import {DownArrowUnfilled} from "@/assets/icon";
 
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const InvoiceTable = ({rows}) => {
-  const [visibleRows, setVisibleRows] = useState(12);
-
-  const handleShowMore = () => {
-    setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
-  };
+const InvoiceTable = ({rows, visibleRows, handleShowMore}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -41,34 +36,32 @@ const InvoiceTable = ({rows}) => {
           </TableHead>
 
           <TableBody>
-            {rows.slice(0, visibleRows).map((row, index) => (
+            {rows?.slice(0, visibleRows).map((row, index) => (
               <TableRow key={index} className={styles.tableRow}>
                 <TableCell className={`${styles.tableCell}`}>
-                  {row.invoiceDate}
+                  {row.date}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
-                  {row.invoiceNumber}
+                  {row.invoice_number}
                 </TableCell>
-                <TableCell className={styles.tableCell}>
-                  {row.invoiceAmount}
-                </TableCell>
+                <TableCell className={styles.tableCell}>{row.total}</TableCell>
                 <TableCell className={styles.tableCell}>
                   {row.balance}
                 </TableCell>
                 <TableCell
                   className={`!mr-0 ${
-                    row.status === "Paid"
+                    row.status === "void"
                       ? "!text-[#67AF7B]"
                       : "!text-[#D96060]"
                   } ${styles.tableCell}`}>
-                  {row.status}
+                  {row.status === "void" ? "Paid" : "Overdue"}
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
 
-        {visibleRows < rows.length && (
+        {visibleRows < rows?.length && (
           <button className={styles.show_more_btn} onClick={handleShowMore}>
             See More
             <DownArrowUnfilled className={styles.down_arrow} />

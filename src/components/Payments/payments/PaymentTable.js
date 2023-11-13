@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import styles from "../styles.module.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,15 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
+import {format} from "date-fns";
 
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const PaymentTable = ({rows}) => {
-  const [visibleRows, setVisibleRows] = useState(12);
-
-  const handleShowMore = () => {
-    setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
-  };
+const PaymentTable = ({rows, visibleRows, handleShowMore}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -45,30 +41,31 @@ const PaymentTable = ({rows}) => {
           </TableHead>
 
           <TableBody>
-            {rows.slice(0, visibleRows).map((row, index) => (
+            {rows?.slice(0, visibleRows).map((row, index) => (
               <TableRow key={index} className={styles.tableRow}>
                 <TableCell className={`${styles.tableCell}`}>
-                  {row.invoiceDate}
+                  {row.date}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
-                  {row.invoiceNumber}
+                  {row.invoice_numbers ? row.invoice_numbers : "NA"}
                 </TableCell>
 
+                <TableCell className={styles.tableCell}>{row.amount}</TableCell>
                 <TableCell className={styles.tableCell}>
-                  {row.amountPaid}
-                </TableCell>
-                <TableCell className={styles.tableCell}>
-                  {row.paymentDate}
+                  {`${format(
+                    new Date(row.created_time),
+                    "d LLL, yyyy : hh:mm a",
+                  )}`}
                 </TableCell>
                 <TableCell className={`${styles.tableCell}`}>
-                  {row.paymentNumber}
+                  {row.payment_number}
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
 
-        {visibleRows < rows.length && (
+        {visibleRows < rows?.length && (
           <button className={styles.show_more_btn} onClick={handleShowMore}>
             See More
             <DownArrowUnfilled className={styles.down_arrow} />
