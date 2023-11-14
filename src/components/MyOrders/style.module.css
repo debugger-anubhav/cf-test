@@ -1,0 +1,91 @@
+.main_container {
+  @apply font-Poppins lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
+}
+.doc_side_bar {
+  @apply hidden lg:block min-w-fit;
+}
+.right_div {
+  @apply w-full pb-6 rounded border border-DDDDDF mt-10;
+}
+.header_wrapper {
+  @apply flex;
+}
+.header {
+  @apply text-24 font-medium leading-10 tracking-0.48 py-4 px-6 cursor-pointer border;
+}
+.selected_tab {
+  @apply text-5774AC border-transparent;
+}
+.not_selected_tab {
+  @apply bg-F7F7F8 border-DDDDDF;
+}
+.sub_container {
+  @apply mt-8  flex gap-6 border-b border-b-EDEDEE items-center;
+}
+.menu_wrapper {
+  @apply flex gap-2 items-center pb-2 border-b cursor-pointer;
+}
+.menu_item {
+  @apply text-16 font-medium tracking-0.3;
+}
+.warning_icon {
+  @apply w-5 h-5;
+}
+
+.box {
+  @apply w-full mt-8;
+}
+.upperBox {
+  @apply bg-[#f9f9f9] rounded-t-lg p-4 border border-EDEDEE flex justify-between;
+}
+.grad_bg {
+  background: linear-gradient(90deg, #f9efef 0%, #f9f9f9 100%) !important;
+}
+.left_part {
+  @apply flex gap-2 items-center;
+}
+.status {
+  @apply text-45454A text-16 font-medium tracking-0.3;
+}
+.date {
+  @apply text-71717A text-14 tracking-desc;
+}
+.help_txt {
+  @apply text-5774AC text-14;
+}
+.lower_box {
+  @apply cursor-pointer p-4 flex justify-between items-center gap-4 border border-EDEDEE border-t-transparent;
+}
+.lower_box:hover {
+  background: linear-gradient(90deg, #fff 0%, #fff 88.9%, #ececec 100%);
+}
+
+.img_wrapper {
+  @apply relative;
+  width: 80px;
+  height: 60.15px;
+}
+.quantity_label {
+  @apply w-6 h-6 absolute bottom-1 right-1 bg-fff text-71717A text-12 font-medium leading-3 flex justify-center items-center;
+  border-radius: 2px;
+  border: 1px solid #71717a;
+}
+.optional_div {
+  @apply border-b border-b-EDEDEE border-x border-x-EDEDEE px-4 py-5;
+}
+.optional_txt {
+  @apply text-71717A text-16 tracking-0.3;
+}
+.highlighted_txt {
+  @apply text-5774AC underline cursor-pointer;
+}
+.for_arrow {
+  @apply cursor-pointer border-71717A hover:border-5774AC p-5;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.lower_box:hover .for_arrow {
+  @apply border-5774AC;
+}
