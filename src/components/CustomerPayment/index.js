@@ -179,18 +179,22 @@ function CustomerPayment() {
   useEffect(() => {
     setuserId(userIdFromStorage);
   }, [userIdFromStorage]);
+
   useEffect(() => {
     fetchAvailCoins();
   }, [userId]);
+
   useEffect(() => {
     setFormData({
       fullName: nameParam || "",
       email: emailParam || "",
-      amount: amountParam || "",
+      amount: amountParam || 0,
       invoice: invoiceNumberParam || "",
       cfCoins: 0,
     });
-    setLoadingSkeleton(false);
+    setTimeout(() => {
+      setLoadingSkeleton(false);
+    }, 1000);
   }, [nameParam, emailParam, amountParam, invoiceNumberParam]);
 
   return (
