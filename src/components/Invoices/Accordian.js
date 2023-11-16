@@ -6,7 +6,14 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import {DownArrowUnfilled, Minus, Plus} from "@/assets/icon";
 
-const Accordian = ({rows, handleShowMore, visibleRows}) => {
+const Accordian = ({
+  rows,
+  handleShowMore,
+  visibleRows,
+  setAmountToPay,
+  toggleDrawer,
+  setInvoiceNumber,
+}) => {
   const [expanded, setExpanded] = React.useState("panel0");
 
   const handleChange = panel => (event, newExpanded) => {
@@ -63,6 +70,12 @@ const Accordian = ({rows, handleShowMore, visibleRows}) => {
             <div className="flex gap-4 mt-1">
               <button className={styles.download_btn}>Download</button>
               <button
+                disabled={row.current_sub_status === "paid"}
+                onClick={() => {
+                  setAmountToPay(row.balance);
+                  setInvoiceNumber(row.invoice_number);
+                  toggleDrawer();
+                }}
                 className={`${
                   row.status === "Paid" && "!bg-[#FFDF85] !cursor-not-allowed"
                 } ${styles.pay_btn}`}>
