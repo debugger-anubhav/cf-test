@@ -185,6 +185,7 @@ const InvoicePage = () => {
                         Download
                       </button>
                       <button
+                        disabled={row.current_sub_status === "paid"}
                         onClick={() => {
                           setAmountToPay(row.balance);
                           setInvoiceNumber(row.invoice_number);
@@ -216,6 +217,9 @@ const InvoicePage = () => {
             rows={rows}
             visibleRows={visibleRows}
             handleShowMore={handleShowMore}
+            setInvoiceNumber={val => setInvoiceNumber(val)}
+            toggleDrawer={toggleDrawer}
+            setAmountToPay={val => setAmountToPay(val)}
           />
         </div>
       </div>

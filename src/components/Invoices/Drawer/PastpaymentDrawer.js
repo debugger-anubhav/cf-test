@@ -23,6 +23,7 @@ const PastpaymentDrawer = ({
   const router = useRouter();
   const userId = decrypt(getLocalStorage("_ga"));
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
+  const [amount, setAmount] = useState(amountDue);
   // const [isCoinApplied, setIsCoinApplied] = useState(false);
 
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ const PastpaymentDrawer = ({
         email: response?.data?.data?.email,
         name: response?.data?.data?.full_name,
         customer_id: response?.data?.data.cf_customer_id || "CF-126402",
-        amount: `Rs.${amountDue}`,
+        amount: `Rs.${amount}`,
       };
       if (invoiceNumber !== null) {
         queryParams.invoice_number = invoiceNumber;
@@ -88,16 +89,7 @@ const PastpaymentDrawer = ({
           <p className={styles.head}>Make Payment</p>
           <div className="mt-8 md:pr-8">
             <p className={styles.total_txt}>Total Amount Due</p>
-            <input
-              className={styles.input}
-              value={
-                isCoinApplied
-                  ? amountDue - availbal > 0
-                    ? amountDue - availbal
-                    : 0
-                  : amountDue
-              }
-            />
+            <input className={styles.input} value={amount} />
 
             <div className={styles.toggle_wrapper}>
               <div className="cursor-pointer ">
@@ -107,6 +99,7 @@ const PastpaymentDrawer = ({
                     color={"#5774AC"}
                     onClick={() => {
                       setIsCoinApplied(false);
+                      setAmount(amountDue);
                     }}
                   />
                 ) : (
@@ -115,6 +108,9 @@ const PastpaymentDrawer = ({
                     size={29}
                     onClick={() => {
                       setIsCoinApplied(true);
+                      setAmount(
+                        amountDue - availbal > 0 ? amountDue - availbal : 0,
+                      );
                     }}
                   />
                 )}

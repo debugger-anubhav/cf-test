@@ -134,6 +134,10 @@ export const endPoints = {
     getMyPayments: userId =>
       `fc-invoice-payments/getMyPayments?userId=${userId}`,
   },
+
+  myOrdersPage: {
+    getAllOrders: `fc-payments/getAllOrderDetails`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 
