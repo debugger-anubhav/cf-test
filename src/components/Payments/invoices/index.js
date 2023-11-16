@@ -4,7 +4,7 @@ import styles from "../styles.module.css";
 import InvoiceTable from "./InvoiceTable";
 import InvoiceAccordian from "./InvoiceAccordian";
 
-const Invoices = ({rows}) => {
+const Invoices = ({rows, loadingSkeleton}) => {
   const [visibleRows, setVisibleRows] = useState(12);
 
   const handleShowMore = () => {
@@ -64,6 +64,7 @@ const Invoices = ({rows}) => {
           rows={rows}
           visibleRows={visibleRows}
           handleShowMore={handleShowMore}
+          loadingSkeleton={loadingSkeleton}
         />
       </div>
       <div className={styles.mobile}>

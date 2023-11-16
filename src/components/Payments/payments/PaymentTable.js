@@ -9,10 +9,11 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
 import {format} from "date-fns";
+import InvoicesSkeleton from "@/components/Invoices/InvoicesSkeleton";
 
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const PaymentTable = ({rows, visibleRows, handleShowMore}) => {
+const PaymentTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -39,30 +40,35 @@ const PaymentTable = ({rows, visibleRows, handleShowMore}) => {
               </TableCell>
             </TableRow>
           </TableHead>
+          {loadingSkeleton ? (
+            <InvoicesSkeleton />
+          ) : (
+            <TableBody>
+              {rows?.slice(0, visibleRows).map((row, index) => (
+                <TableRow key={index} className={styles.tableRow}>
+                  <TableCell className={`${styles.tableCell}`}>
+                    {row.date}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.invoice_numbers ? row.invoice_numbers : "NA"}
+                  </TableCell>
 
-          <TableBody>
-            {rows?.slice(0, visibleRows).map((row, index) => (
-              <TableRow key={index} className={styles.tableRow}>
-                <TableCell className={`${styles.tableCell}`}>
-                  {row.date}
-                </TableCell>
-                <TableCell className={styles.tableCell}>
-                  {row.invoice_numbers ? row.invoice_numbers : "NA"}
-                </TableCell>
-
-                <TableCell className={styles.tableCell}>{row.amount}</TableCell>
-                <TableCell className={styles.tableCell}>
-                  {`${format(
-                    new Date(row.created_time),
-                    "d LLL, yyyy : hh:mm a",
-                  )}`}
-                </TableCell>
-                <TableCell className={`${styles.tableCell}`}>
-                  {row.payment_number}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+                  <TableCell className={styles.tableCell}>
+                    {row.amount}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {`${format(
+                      new Date(row.created_time),
+                      "d LLL, yyyy : hh:mm a",
+                    )}`}
+                  </TableCell>
+                  <TableCell className={`${styles.tableCell}`}>
+                    {row.payment_number}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
         </Table>
 
         {visibleRows < rows?.length && (
