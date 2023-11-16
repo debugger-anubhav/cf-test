@@ -13,12 +13,15 @@ const Accordian = ({
   setAmountToPay,
   toggleDrawer,
   setInvoiceNumber,
+  handleDownload,
 }) => {
   const [expanded, setExpanded] = React.useState("panel0");
 
   const handleChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+
+  console.log(rows, "eiwiu");
   return (
     <div>
       {rows.slice(0, visibleRows).map((row, index) => (
@@ -39,36 +42,39 @@ const Accordian = ({
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: {row.invoiceNumber}
+              Invoice Number: {row.invoice_number}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date:</span>{" "}
-              {row.invoiceDate}
+              <span className="font-medium">Invoice Date:</span> {row.due_days}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Order Number:</span>{" "}
-              {row.orderNumber}
+              <span className="font-medium">Order Number:</span> {row.deal_code}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Amount:</span>{" "}
-              {row.invoiceAmount}
+              <span className="font-medium">Invoice Amount:</span> {row.total}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount Due:</span> {row.amountDue}
+              <span className="font-medium">Amount Due:</span> {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Status: </span>
               <span
                 className={`${
-                  row.status === "Paid" ? "text-[#67AF7B]" : "text-[#D96060]"
+                  row.current_sub_status === "paid"
+                    ? "text-[#67AF7B]"
+                    : "text-[#D96060]"
                 }`}>
-                {row.status}
+                {row.current_sub_status === "paid" ? "Paid" : "Payment Due"}
               </span>
             </Typography>
             <div className="flex gap-4 mt-1">
-              <button className={styles.download_btn}>Download</button>
+              <button
+                onClick={() => handleDownload(row.invoice_url)}
+                className={styles.download_btn}>
+                Download
+              </button>
               <button
                 disabled={row.current_sub_status === "paid"}
                 onClick={() => {
@@ -77,7 +83,8 @@ const Accordian = ({
                   toggleDrawer();
                 }}
                 className={`${
-                  row.status === "Paid" && "!bg-[#FFDF85] !cursor-not-allowed"
+                  row.current_sub_status === "paid" &&
+                  "!bg-[#FFDF85] !cursor-not-allowed"
                 } ${styles.pay_btn}`}>
                 Pay now
               </button>
