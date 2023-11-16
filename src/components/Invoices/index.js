@@ -220,6 +220,7 @@ const InvoicePage = () => {
             setInvoiceNumber={val => setInvoiceNumber(val)}
             toggleDrawer={toggleDrawer}
             setAmountToPay={val => setAmountToPay(val)}
+            handleDownload={url => handleDownload(url)}
           />
         </div>
       </div>
