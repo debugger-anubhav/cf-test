@@ -15,6 +15,7 @@ const PaymentPage = () => {
   const userId = 85777;
 
   const [paymentDetails, setPaymentDetails] = useState();
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   const fetchMyPayments = () => {
     axios
@@ -22,8 +23,12 @@ const PaymentPage = () => {
       .then(res => {
         console.log(res?.data?.data);
         setPaymentDetails(res?.data?.data);
+        setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoadingSkeleton(false);
+      });
   };
 
   useEffect(() => {
@@ -172,8 +177,14 @@ const PaymentPage = () => {
         </div>
 
         <div>
-          <Invoices rows={paymentDetails?.invoices} />
-          <Payment rows={paymentDetails?.payments} />
+          <Invoices
+            rows={paymentDetails?.invoices}
+            loadingSkeleton={loadingSkeleton}
+          />
+          <Payment
+            rows={paymentDetails?.payments}
+            loadingSkeleton={loadingSkeleton}
+          />
           <CreditNotes rows={paymentDetails?.creditNotes} />
           {paymentDetails?.retainer && (
             <RetainerInvoice rows={paymentDetails?.retainer} />
