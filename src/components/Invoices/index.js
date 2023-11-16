@@ -17,6 +17,7 @@ import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
+import InvoicesSkeleton from "./InvoicesSkeleton";
 
 const InvoicePage = () => {
   const [visibleRows, setVisibleRows] = useState(12);
@@ -26,6 +27,7 @@ const InvoicePage = () => {
   const [isCoinApplied, setIsCoinApplied] = useState(false);
   const [amountToPay, setAmountToPay] = useState("");
   const [invoiceNumber, setInvoiceNumber] = useState();
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -41,8 +43,12 @@ const InvoicePage = () => {
         console.log(res?.data, "responseee");
         setRows(res?.data?.data?.my_invoice);
         setAvailCoins(res?.data?.data?.my_wallet?.topup_amount);
+        setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoadingSkeleton(false);
+      });
   };
 
   useEffect(() => {
@@ -149,58 +155,62 @@ const InvoicePage = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-
-              <TableBody>
-                {rows.slice(0, visibleRows).map((row, index) => (
-                  <TableRow key={index} className={styles.tableRow}>
-                    <TableCell className={`min-w-[116px] ${styles.tableCell}`}>
-                      {row.due_days}
-                    </TableCell>
-                    <TableCell className={styles.tableCell}>
-                      {row.invoice_number}
-                    </TableCell>
-                    <TableCell className={styles.tableCell}>
-                      {row.deal_code}
-                    </TableCell>
-                    <TableCell className={styles.tableCell}>
-                      {row.total}
-                    </TableCell>
-                    <TableCell className={styles.tableCell}>
-                      {row.balance}
-                    </TableCell>
-                    <TableCell
-                      className={`${
-                        row.current_sub_status === "paid"
-                          ? "!text-[#67AF7B]"
-                          : "!text-[#D96060]"
-                      } ${styles.tableCell}`}>
-                      {row.current_sub_status === "paid"
-                        ? "Paid"
-                        : "Payment Due"}
-                    </TableCell>
-                    <TableCell className={`flex gap-4 ${styles.tableCell}`}>
-                      <button
-                        onClick={() => handleDownload(row.invoice_url)}
-                        className={styles.download_btn}>
-                        Download
-                      </button>
-                      <button
-                        disabled={row.current_sub_status === "paid"}
-                        onClick={() => {
-                          setAmountToPay(row.balance);
-                          setInvoiceNumber(row.invoice_number);
-                          toggleDrawer();
-                        }}
+              {loadingSkeleton ? (
+                <InvoicesSkeleton />
+              ) : (
+                <TableBody>
+                  {rows.slice(0, visibleRows).map((row, index) => (
+                    <TableRow key={index} className={styles.tableRow}>
+                      <TableCell
+                        className={`min-w-[116px] ${styles.tableCell}`}>
+                        {row.due_days}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.invoice_number}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.deal_code}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.total}
+                      </TableCell>
+                      <TableCell className={styles.tableCell}>
+                        {row.balance}
+                      </TableCell>
+                      <TableCell
                         className={`${
-                          row.current_sub_status === "paid" &&
-                          "!bg-[#FFDF85] !cursor-not-allowed"
-                        } ${styles.pay_btn}`}>
-                        Pay now
-                      </button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
+                          row.current_sub_status === "paid"
+                            ? "!text-[#67AF7B]"
+                            : "!text-[#D96060]"
+                        } ${styles.tableCell}`}>
+                        {row.current_sub_status === "paid"
+                          ? "Paid"
+                          : "Payment Due"}
+                      </TableCell>
+                      <TableCell className={`flex gap-4 ${styles.tableCell}`}>
+                        <button
+                          onClick={() => handleDownload(row.invoice_url)}
+                          className={styles.download_btn}>
+                          Download
+                        </button>
+                        <button
+                          disabled={row.current_sub_status === "paid"}
+                          onClick={() => {
+                            setAmountToPay(row.balance);
+                            setInvoiceNumber(row.invoice_number);
+                            toggleDrawer();
+                          }}
+                          className={`${
+                            row.current_sub_status === "paid" &&
+                            "!bg-[#FFDF85] !cursor-not-allowed"
+                          } ${styles.pay_btn}`}>
+                          Pay now
+                        </button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              )}
             </Table>
 
             {visibleRows < rows.length && (

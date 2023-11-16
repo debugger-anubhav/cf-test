@@ -8,10 +8,11 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
+import InvoicesSkeleton from "@/components/Invoices/InvoicesSkeleton";
 
 // import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const InvoiceTable = ({rows, visibleRows, handleShowMore}) => {
+const InvoiceTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -34,31 +35,36 @@ const InvoiceTable = ({rows, visibleRows, handleShowMore}) => {
               <TableCell className={styles.tableHeaderCell}>Status</TableCell>
             </TableRow>
           </TableHead>
-
-          <TableBody>
-            {rows?.slice(0, visibleRows).map((row, index) => (
-              <TableRow key={index} className={styles.tableRow}>
-                <TableCell className={`${styles.tableCell}`}>
-                  {row.date}
-                </TableCell>
-                <TableCell className={styles.tableCell}>
-                  {row.invoice_number}
-                </TableCell>
-                <TableCell className={styles.tableCell}>{row.total}</TableCell>
-                <TableCell className={styles.tableCell}>
-                  {row.balance}
-                </TableCell>
-                <TableCell
-                  className={`!mr-0 ${
-                    row.status === "void"
-                      ? "!text-[#67AF7B]"
-                      : "!text-[#D96060]"
-                  } ${styles.tableCell}`}>
-                  {row.status === "void" ? "Paid" : "Overdue"}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          {loadingSkeleton ? (
+            <InvoicesSkeleton />
+          ) : (
+            <TableBody>
+              {rows?.slice(0, visibleRows).map((row, index) => (
+                <TableRow key={index} className={styles.tableRow}>
+                  <TableCell className={`${styles.tableCell}`}>
+                    {row.date}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.invoice_number}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.total}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {row.balance}
+                  </TableCell>
+                  <TableCell
+                    className={`!mr-0 ${
+                      row.status === "void"
+                        ? "!text-[#67AF7B]"
+                        : "!text-[#D96060]"
+                    } ${styles.tableCell}`}>
+                    {row.status === "void" ? "Paid" : "Overdue"}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          )}
         </Table>
 
         {visibleRows < rows?.length && (
