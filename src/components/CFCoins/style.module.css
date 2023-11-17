@@ -1,0 +1,18 @@
+.main_container {
+  @apply font-Poppins  lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
+}
+.doc_side_bar {
+  @apply hidden lg:block min-w-fit;
+}
+.right_div {
+  @apply w-full pb-[88px];
+}
+.header {
+  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+}
+.sub_head {
+  @apply text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 text-45454A mt-8 xl:mt-12;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-8;
+}
