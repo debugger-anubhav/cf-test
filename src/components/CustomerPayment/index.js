@@ -19,8 +19,11 @@ import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {useSelector} from "react-redux";
 import FormSkeleton from "../Common/FormSkeleton";
+import {useRouter} from "next/navigation";
 
 function CustomerPayment() {
+  const router = useRouter();
+
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
 
   const coinsReduxValue = useSelector(state => state.invoicePage);
@@ -129,6 +132,7 @@ function CustomerPayment() {
           body,
         );
         console.log(result);
+        router.push("/customerpayment/successp");
       },
       prefill: {
         name: userDetails?.full_name,

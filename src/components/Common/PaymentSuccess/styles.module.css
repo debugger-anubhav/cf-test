@@ -1,0 +1,25 @@
+.main_container {
+  @apply font-Poppins 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pt-2 pb-20 xl:py-6;
+}
+.success_icon_div {
+  @apply bg-[#2D9469] w-12 h-12 xl:w-16 xl:h-16 rounded-full flex justify-center items-center;
+}
+.checkIcon {
+  @apply w-6 h-6 xl:w-8 xl:h-8;
+}
+.head {
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mt-6 xl:mt-10;
+}
+.details_wrapper {
+  @apply xl:mt-8 mt-6;
+}
+.row {
+  @apply flex gap-2;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 leading-6 tracking-desc xl:tracking-0.3;
+}
+
+.yellowbtn {
+  @apply cursor-pointer mt-6 xl:mt-8 w-full sm:w-[232px] h-12 sm:h-14 bg-F6B704 rounded-lg flex gap-[10px] justify-center items-center text-222 text-16 font-medium leading-5;
+}
