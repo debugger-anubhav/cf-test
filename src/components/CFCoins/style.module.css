@@ -1,5 +1,5 @@
 .main_container {
-  @apply font-Poppins  lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
+  @apply font-Poppins lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
 }
 .doc_side_bar {
   @apply hidden lg:block min-w-fit;
@@ -15,4 +15,22 @@
 }
 .desc {
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-8;
+}
+.current_bal_heading {
+  @apply lg:text-16 text-14 text-45454A font-medium font-Poppins;
+}
+.current_bal_subheading {
+  @apply lg:text-20 text-16 font-Poppins text-9A9AA2;
+}
+.card {
+  @apply flex px-4 py-6 rounded-xl flex-col lg:min-w-[167px] min-w-[150px] bg-222;
+}
+.card_heading {
+  @apply flex font-Poppins lg:text-16 text-14 font-medium mt-6 mb-2 text-fff;
+}
+.card_subheading {
+  @apply flex font-Poppins text-[#C0C0C6] text-12;
+}
+.card_icon {
+  @apply h-8 w-8;
 }
