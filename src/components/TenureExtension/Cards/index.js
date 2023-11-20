@@ -14,6 +14,7 @@ import {baseURL} from "@/network/axios";
 import axios from "axios";
 import {loadScript} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {useRouter} from "next/navigation";
 
 function Cards({
   data,
@@ -38,6 +39,7 @@ function Cards({
     items?.monthOptions[0],
   );
   const [perAddModal, setPerAddModal] = useState(false);
+  const router = useRouter();
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -65,6 +67,7 @@ function Cards({
       data,
     );
     console.log(result);
+    router.push("/offline/response/Success");
   };
 
   async function handleOpenRazorpay(cardType) {
@@ -253,6 +256,8 @@ export const MonthlyCard = ({
     "No Security Deposit",
   ];
 
+  const router = useRouter();
+
   const PaymentModeOpt = ["Credit/Debit card", "Netbanking", "UPI"];
   const [selectedOption, setSelectedOption] = useState(0);
   const [cityShieldDrawerOpenForMonthly, setcityShieldDrawerOpenForMonthly] =
@@ -289,7 +294,8 @@ export const MonthlyCard = ({
       .then(response => {
         console.log(response, "resss");
         if (response.data.success === true) {
-          showToastNotification(response.data.message, 1);
+          // showToastNotification(response.data.message, 1);
+          router.push("/offline/response/Success");
         } else {
           showToastNotification(response.data.message, 3);
         }

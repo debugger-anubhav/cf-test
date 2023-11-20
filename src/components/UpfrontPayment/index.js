@@ -4,12 +4,13 @@ import {ForwardArrowWithLine} from "@/assets/icon";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
 import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
 
 function UpfrontPayment() {
+  const router = useRouter();
   const Heading = "Upfront Payment";
   const params = useParams();
   const ID = params.key;
@@ -70,6 +71,7 @@ function UpfrontPayment() {
             data,
           );
           console.log(result, "result");
+          router.push("/offline/response/Success");
         }
       },
       prefill: {

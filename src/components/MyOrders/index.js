@@ -25,12 +25,19 @@ const MyOrders = () => {
   const userId = decrypt(getLocalStorage("_ga"));
   console.log(userId);
 
-  const fetchOrdersDetails = () => {
+  const fetchOrdersDetails = filter => {
     const body = {
       userId,
     };
+    const body1 = {
+      userId,
+      filter,
+    };
     axios
-      .post(baseURL + endPoints.myOrdersPage.getAllOrders, body)
+      .post(
+        baseURL + endPoints.myOrdersPage.getAllOrders,
+        filter ? body : body1,
+      )
       .then(res => {
         console.log(res, "resss");
         setData(res?.data?.data);
@@ -65,7 +72,7 @@ const MyOrders = () => {
           </h1>
         </div>
 
-        <div className="px-6">
+        <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
             {MenuList.map((item, index) => (
               <div
@@ -87,7 +94,9 @@ const MyOrders = () => {
                 {(index === 1 || index === 5) && (
                   <WarningIcon
                     color={index === 1 ? "#F6B704" : "#D96060"}
-                    className={styles.warning_icon}
+                    className={`${selectedMenu === index && "!opacity-100"} ${
+                      styles.warning_icon
+                    }`}
                   />
                 )}
               </div>
@@ -117,7 +126,8 @@ const MyOrders = () => {
                       </p>
                     </div>
                   </div>
-                  <div>
+                  <div className={styles.dotted_line}></div>
+                  <div className={styles.status_wrapper}>
                     <p className={styles.status}>
                       Order no: #{item.dealCodeNumber}
                     </p>
@@ -126,26 +136,30 @@ const MyOrders = () => {
                 </div>
 
                 <div className={styles.lower_box}>
-                  {JSON.parse(item.fc_paymentData).map((product, index) => {
-                    return (
-                      <div key={index} className={styles.img_wrapper}>
-                        <img
-                          src={`${
-                            productPageImagesBaseUrl +
-                            "thumb/" +
-                            product.product_image.split(",")[0]
-                          }`}
-                          alt={item.product_name}
-                          className="w-full h-full"
-                          loading="lazy"
-                        />
-                        <div className={styles.quantity_label}>
-                          {product.quantity}x
+                  <div className="flex items-center gap-3 xl:gap-4">
+                    {JSON.parse(item.fc_paymentData).map((product, index) => {
+                      return (
+                        <div key={index} className={styles.img_wrapper}>
+                          <img
+                            src={`${
+                              productPageImagesBaseUrl +
+                              "thumb/" +
+                              product.product_image.split(",")[0]
+                            }`}
+                            alt={item.product_name}
+                            className="w-full h-full"
+                            loading="lazy"
+                          />
+                          <div className={styles.quantity_label}>
+                            {product.quantity}x
+                          </div>
                         </div>
-                      </div>
-                    );
-                  })}
-                  <i className={styles.for_arrow}></i>
+                      );
+                    })}
+                  </div>
+                  <div className={styles.arrow_wrapper}>
+                    <i className={styles.for_arrow}></i>
+                  </div>
                 </div>
 
                 {(item.zoho_sub_status === "KYC In Progress" ||
