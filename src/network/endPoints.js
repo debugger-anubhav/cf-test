@@ -162,4 +162,7 @@ export const endPoints = {
     `fc-user-uploaded-docs/getUsersDocs?dealCodeNumber=${id}`,
   documentationApproveStatusUpdate:
     "fc-user-uploaded-docs/updateDocumentStatus",
+
+  cfCoinsGetTransactions: id =>
+    `fc-wallet-transactions/getMyTransaction?userId=${id}`,
 };
