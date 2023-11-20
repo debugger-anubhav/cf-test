@@ -7,6 +7,15 @@
 .right_div {
   @apply w-full pb-[88px];
 }
+.cf_info_div {
+  @apply w-full flex gap-8 lg:flex-row flex-col justify-between;
+}
+.cf_info_left {
+  @apply lg:w-[60%] w-full;
+}
+.cf_info_right {
+  @apply lg:w-[40%] w-full flex gap-6 lg:justify-end;
+}
 .header {
   @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
 }
@@ -23,7 +32,7 @@
   @apply lg:text-20 text-16 font-Poppins text-9A9AA2;
 }
 .card {
-  @apply flex px-4 py-6 rounded-xl flex-col lg:min-w-[167px] min-w-[150px] bg-222;
+  @apply flex px-4 py-6 rounded-xl flex-col lg:min-w-[167px] min-w-[150px] bg-no-repeat bg-cover;
 }
 .card_heading {
   @apply flex font-Poppins lg:text-16 text-14 font-medium mt-6 mb-2 text-fff;

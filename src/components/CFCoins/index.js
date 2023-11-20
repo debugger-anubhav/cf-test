@@ -56,8 +56,8 @@ export default function CFCoins() {
       </div>
       <div className={styles.right_div}>
         <p className={styles.header}>Cityfurnish Coins</p>
-        <div className="w-full flex gap-8 lg:flex-row flex-col justify-between">
-          <div className="lg:w-[60%] w-full">
+        <div className={styles.cf_info_div}>
+          <div className={styles.cf_info_left}>
             <div className="flex items-center gap-3 mt-8">
               <div>
                 <img src={cfCoinIcon} />
@@ -73,10 +73,15 @@ export default function CFCoins() {
               while placing order.
             </p>
           </div>
-          <div className="lg:w-[40%] w-full flex gap-6 lg:justify-end">
+          <div className={styles.cf_info_right}>
             {Cards?.map((item, index) => {
               return (
-                <div key={index.toString()} className={styles.card}>
+                <div
+                  key={index.toString()}
+                  className={styles.card}
+                  style={{
+                    backgroundImage: `URL('https://d3juy0zp6vqec8.cloudfront.net/images/icons/bg.webp')`,
+                  }}>
                   <img src={item.icon} className={styles.card_icon} />
                   <p className={styles.card_heading}>{item.heading}</p>
                   <p className={styles.card_subheading}>{item.subheading}</p>
