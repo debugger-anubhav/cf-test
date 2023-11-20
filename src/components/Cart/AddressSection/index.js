@@ -15,7 +15,11 @@ import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
-import {cityUrl, razorpayKey, RazorpayThemeColor} from "../../../../appConfig";
+import {
+  cityUrl,
+  razorpayKeyOwn,
+  RazorpayThemeColor,
+} from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -76,7 +80,6 @@ const AddressSection = () => {
         "no-spaces-special-characters",
         "Please enter a valid 6 digit postal code without spaces or special characters",
         value => {
-          // Check if the value contains any spaces or special characters
           return /^[0-9]*$/.test(value);
         },
       )
@@ -139,21 +142,6 @@ const AddressSection = () => {
     });
   };
 
-  // const makeAddressPrimary = async id => {
-  //   try {
-  //     const headers = {
-  //       userId: parseInt(userIdToUse),
-  //       addressId: id,
-  //     };
-  //     await axios.patch(
-  //       baseURL + endPoints.addToCart.makePrimaryAddress,
-  //       headers,
-  //     );
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
     setPrimaryAddress(newPrimaryAddress);
@@ -164,20 +152,6 @@ const AddressSection = () => {
       ? router.push("/order/failure")
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
-
-  // function loadScript(src) {
-  //   return new Promise(resolve => {
-  //     const script = document.createElement("script");
-  //     script.src = src;
-  //     script.onload = () => {
-  //       resolve(true);
-  //     };
-  //     script.onerror = () => {
-  //       resolve(false);
-  //     };
-  //     document.body.appendChild(script);
-  //   });
-  // }
 
   async function handlePayment() {
     const res = await loadScript(
@@ -217,7 +191,7 @@ const AddressSection = () => {
     const {userDetails} = result.data.data;
 
     const options = {
-      key: razorpayKey, // Enter the Key ID generated from the Dashboard
+      key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
       amount,
       currency,
       name: "Cityfurnish",
@@ -237,6 +211,7 @@ const AddressSection = () => {
             razCustomerId: userDetails.customerId,
             razorpaySignature: response.razorpay_signature,
           };
+
           const result = await axios.post(
             baseURL + endPoints.addToCart.successPayment,
             data,
@@ -259,6 +234,7 @@ const AddressSection = () => {
     paymentObject.open();
 
     paymentObject.on("payment.failed", e => {
+      console.log(e, "erroerss");
       paymentObject.close();
       goToPostCheckout(0);
     });

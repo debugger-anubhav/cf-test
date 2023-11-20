@@ -23,13 +23,13 @@
   @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 border-b border-b-EDEDEE items-center w-full overflow-scroll;
 }
 .menu_wrapper {
-  @apply flex gap-2 items-center pb-1 xl:pb-2 border-b cursor-pointer;
+  @apply flex gap-2 items-center pb-1 xl:pb-2 border-b cursor-pointer min-w-fit;
 }
 .menu_item {
   @apply text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 w-max;
 }
 .warning_icon {
-  @apply w-5 h-5 opacity-50;
+  @apply w-5 h-5;
 }
 .box {
   @apply w-full mt-6 xl:mt-8;
@@ -67,6 +67,9 @@
 .img_wrapper {
   @apply relative w-[80px] h-[60.15px];
 }
+.more_div {
+  @apply border-2 border-71717A bg-[#F9F9F9] rounded-sm w-[80px] h-[60.15px] flex justify-center items-center text-71717A font-medium text-16;
+}
 .quantity_label {
   @apply rounded-sm border border-71717A w-6 h-6 absolute bottom-1 right-1 bg-fff text-71717A text-12 font-medium leading-3 flex justify-center items-center;
 }
@@ -80,7 +83,7 @@
   @apply text-5774AC underline cursor-pointer;
 }
 .for_arrow {
-  @apply cursor-pointer border-71717A hover:border-5774AC p-[10px] xl:p-4 mr-3;
+  @apply cursor-pointer border-71717A hover:border-5774AC p-2 xl:p-4 xl:mr-3;
   border-width: 0 2px 2px 0;
   display: inline-block;
   transform: rotate(-45deg);

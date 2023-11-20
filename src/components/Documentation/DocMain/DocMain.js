@@ -13,8 +13,8 @@ import KYC100 from "../KYC100/KYC100";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
-import {useDispatch} from "react-redux";
-import {getOrderId} from "@/store/Slices";
+import {useDispatch, useSelector} from "react-redux";
+import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
@@ -25,7 +25,10 @@ const DocMain = () => {
   const [creditScore, setCreditScore] = useState();
   const dispatch = useDispatch();
 
-  console.log(isUpfrontPayment, kycState, tenure, creditScore, "detailsss");
+  const orderIdFromOrderpage = useSelector(state => state.order.orderId);
+  console.log(orderIdFromOrderpage, "orderIdFromOrderpage");
+
+  // console.log(isUpfrontPayment, kycState, tenure, creditScore, "detailsss");
 
   // const handleGetOrderId = option => {
   //   console.log(option, "opti[ojjoij");
@@ -38,12 +41,11 @@ const DocMain = () => {
 
   const handleKycState = async orderId => {
     dispatch(getOrderId(orderId));
-    console.log(userid, orderId, "kwjewji");
     try {
       const response = await axios.get(
         baseURL + endPoints.kycPage.getKycTrack(userid, orderId),
       );
-      console.log(response, "responsee");
+      // console.log(response, "responsee");
       setKycState(response?.data?.data?.state?.state);
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);
       setTenure(parseInt(response?.data?.data?.tenure));
@@ -56,6 +58,13 @@ const DocMain = () => {
   useEffect(() => {
     console.log(kycState, "kyc satteeee");
   }, [kycState]);
+
+  useEffect(() => {
+    if (orderIdFromOrderpage) {
+      handleKycState(orderIdFromOrderpage);
+      dispatch(setOrderIdFromOrderPage(null));
+    }
+  }, []);
 
   const progress = {
     0: 10,

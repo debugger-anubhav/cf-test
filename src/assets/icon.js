@@ -75,7 +75,7 @@ import {
   FaToggleOn,
 } from "react-icons/fa6";
 
-const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
+export const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 export const FooterIcons = {
   Phone,
