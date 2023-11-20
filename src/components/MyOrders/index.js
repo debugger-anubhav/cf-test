@@ -244,7 +244,7 @@ const MyOrders = () => {
                           );
                           console.log("2");
                           router.push(`/documentation`);
-                        }
+                        } else router.push(`/cart`);
                       }}>
                       <p className={styles.optional_txt}>
                         <span className={styles.highlighted_txt}>
