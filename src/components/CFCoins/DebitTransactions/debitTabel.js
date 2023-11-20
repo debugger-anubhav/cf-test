@@ -8,10 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import InvoicesSkeleton from "@/components/Invoices/InvoicesSkeleton";
+import {format} from "date-fns";
 
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-const DebitTable = ({rows, visibleRows, loadingSkeleton}) => {
+const DebitTable = ({rows, loadingSkeleton}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -39,23 +38,23 @@ const DebitTable = ({rows, visibleRows, loadingSkeleton}) => {
             <InvoicesSkeleton />
           ) : (
             <TableBody>
-              {rows?.slice(0, visibleRows).map((row, index) => (
+              {rows?.map((row, index) => (
                 <TableRow key={index} className={styles.tableRow}>
                   <TableCell className={`${styles.tableCell}`}>
-                    {/* {row.date} */}
-                    {row.invoiceDate}
+                    {row?.created_at?.split("T")[0]}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.invoice_number} */}
-                    {row.invoiceNumber}
+                    {row.order_id}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.total} */}
-                    -₹97.00
+                    <span className="font-Inter"></span>-{" "}
+                    <span className="font-Inter">₹</span> {row.amount}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.balance} */}
-                    2022-05-17 18:44:22
+                    {`${format(
+                      new Date(row.created_at),
+                      "yyyy-mm-dd  hh:mm:ss",
+                    )}`}
                   </TableCell>
                 </TableRow>
               ))}

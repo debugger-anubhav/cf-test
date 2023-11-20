@@ -8,10 +8,9 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import InvoicesSkeleton from "@/components/Invoices/InvoicesSkeleton";
+import {format} from "date-fns";
 
-// import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
-const CreditTransactionTabel = ({rows, visibleRows, loadingSkeleton}) => {
+const CreditTransactionTabel = ({rows, loadingSkeleton}) => {
   return (
     <div>
       <TableContainer component={Paper} className={styles.tableContainer}>
@@ -21,14 +20,17 @@ const CreditTransactionTabel = ({rows, visibleRows, loadingSkeleton}) => {
               className={styles.tableRow}
               style={{verticalAlign: "baseline"}}>
               <TableCell className={styles.tableHeaderCell}>
-                Invoice Date
+                Transaction ID
               </TableCell>
               <TableCell className={styles.tableHeaderCell}>
-                Invoice Number
+                Credit Mode
               </TableCell>
 
               <TableCell className={styles.tableHeaderCell}>
-                Coins Used
+                Coins Gained
+              </TableCell>
+              <TableCell className={styles.tableHeaderCell}>
+                Expires on
               </TableCell>
               <TableCell className={styles.tableHeaderCell}>
                 Transaction Date
@@ -39,23 +41,29 @@ const CreditTransactionTabel = ({rows, visibleRows, loadingSkeleton}) => {
             <InvoicesSkeleton />
           ) : (
             <TableBody>
-              {rows?.slice(0, visibleRows).map((row, index) => (
-                <TableRow key={index} className={styles.tableRow}>
+              {rows?.map((row, index) => (
+                <TableRow key={index.toString()} className={styles.tableRow}>
                   <TableCell className={`${styles.tableCell}`}>
-                    {/* {row.date} */}
-                    {row.invoiceDate}
+                    {row.txnid}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.invoice_number} */}
-                    {row.invoiceNumber}
+                    {row.payment_mode === "CC"
+                      ? "Credit Card"
+                      : row.payment_mode === "DC"
+                      ? "Debit Card"
+                      : row.payment_mode}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.total} */}
-                    -₹97.00
+                    + <span className="font-Inter">₹</span> {row.amount}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    {/* {row.balance} */}
-                    2022-05-17 18:44:22
+                    {row.expire_on}
+                  </TableCell>
+                  <TableCell className={styles.tableCell}>
+                    {`${format(
+                      new Date(row.created_at),
+                      "yyyy-mm-dd  hh:mm:ss",
+                    )}`}
                   </TableCell>
                 </TableRow>
               ))}

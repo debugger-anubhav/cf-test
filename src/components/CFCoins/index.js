@@ -1,41 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import DocSidebar from "@/components/Documentation/Sidebar/DocSidebar";
 import DebitTransactions from "./DebitTransactions";
 import CreditTransactions from "./CreditTransactions";
+import axios from "axios";
+import {endPoints} from "@/network/endPoints";
+import {baseURL} from "@/network/axios";
 
 export default function CFCoins() {
   const cfCoinIcon =
     "https://d3juy0zp6vqec8.cloudfront.net/images/icons/cf-coins.svg";
-  const [loadingSkeleton, setLoadingSkeleton] = useState(false);
-  console.log(setLoadingSkeleton);
-  const rows = [
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Payment Due",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Payment Due",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      orderNumber: "9999999999",
-      invoiceAmount: "₹9,999",
-      amountDue: 100.0,
-      status: "Paid",
-    },
-  ];
-
+  //   const userId = decrypt(getLocalStorage("_ga"));
+  // const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  // const userIdToUse = userId || tempUserId;
+  const userIdToUse = 85757;
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
+  const [debitRows, setDebitRows] = useState(null);
+  const [creditRows, setCreditRows] = useState(null);
   const Cards = [
     {
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/instant-checkout-icon.svg",
@@ -48,6 +29,22 @@ export default function CFCoins() {
       subheading: "Benefits and offers using CF coins",
     },
   ];
+  const getTransactions = () => {
+    axios
+      .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
+      .then(res => {
+        const temp = res?.data?.data;
+        setDebitRows(
+          temp.filter(i => i.mode === "debit" && i.order_id != null),
+        );
+        setCreditRows(temp.filter(i => i.mode === "credit"));
+        setLoadingSkeleton(false);
+      })
+      .catch(err => console.log(err));
+  };
+  useEffect(() => {
+    getTransactions();
+  }, []);
 
   return (
     <div className={styles.main_container}>
@@ -91,8 +88,14 @@ export default function CFCoins() {
           </div>
         </div>
         <div>
-          <DebitTransactions rows={rows} loadingSkeleton={loadingSkeleton} />
-          <CreditTransactions rows={rows} loadingSkeleton={loadingSkeleton} />
+          <DebitTransactions
+            rows={debitRows}
+            loadingSkeleton={loadingSkeleton}
+          />
+          <CreditTransactions
+            rows={creditRows}
+            loadingSkeleton={loadingSkeleton}
+          />
         </div>
       </div>
     </div>

@@ -5,8 +5,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import {Minus, Plus} from "@/assets/icon";
+import {format} from "date-fns";
 
-const CreditTransactionAccordian = ({rows, visibleRows}) => {
+const CreditTransactionAccordian = ({rows}) => {
   const [expanded, setExpanded] = React.useState(null);
 
   const handleChange = panel => (event, newExpanded) => {
@@ -14,10 +15,10 @@ const CreditTransactionAccordian = ({rows, visibleRows}) => {
   };
   return (
     <div>
-      {rows?.slice(0, visibleRows).map((row, index) => (
+      {rows?.map((row, index) => (
         <Accordion
           expanded={expanded === `panel${index}`}
-          key={index}
+          key={index.toString()}
           onChange={handleChange(`panel${index}`)}
           className={`${expanded === `panel${index}` && "bg-F7F7F8"} ${
             styles.accordian
@@ -32,26 +33,29 @@ const CreditTransactionAccordian = ({rows, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: INV-KR-999999999
-              {/* {row.invoice_number} */}
+              Transaction ID: {row.txnid}
             </Typography>
           </AccordionSummary>
 
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date:</span>
-              {/* {row.date} */}
-              2023-10-24
+              <span className="font-medium">Credit Mode:</span>
+              {row.payment_mode === "CC"
+                ? "Credit Card"
+                : row.payment_mode === "DC"
+                ? "Debit Card"
+                : row.payment_mode}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Coins Used:</span>
-              {/* {row.total} */}
-              +₹97.00
+              <span className="font-medium">Coins Gained:</span>+
+              <span className="font-Inter">₹</span> {row.amount}
+            </Typography>
+            <Typography className={styles.tableCell}>
+              <span className="font-medium">Expires on:</span> {row.expire_on}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Transaction Date:</span>{" "}
-              {/* {row.balance} */}
-              2022-05-17 18:44:22
+              {`${format(new Date(row.created_at), "yyyy-mm-dd  hh:mm:ss")}`}
             </Typography>
           </AccordionDetails>
         </Accordion>
