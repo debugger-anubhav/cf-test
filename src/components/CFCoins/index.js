@@ -17,6 +17,7 @@ export default function CFCoins() {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [debitRows, setDebitRows] = useState(null);
   const [creditRows, setCreditRows] = useState(null);
+  const [availableCoins, setAvailableCoins] = useState(0);
   const Cards = [
     {
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/instant-checkout-icon.svg",
@@ -42,8 +43,18 @@ export default function CFCoins() {
       })
       .catch(err => console.log(err));
   };
+  const fetchAvailCoins = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+      .then(res => {
+        if (res?.data?.data?.length > 0)
+          setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+      })
+      .catch(err => console.log(err));
+  };
   useEffect(() => {
     getTransactions();
+    fetchAvailCoins();
   }, []);
 
   return (
@@ -61,7 +72,9 @@ export default function CFCoins() {
               </div>
               <div>
                 <p className={styles.current_bal_heading}>Current balance</p>
-                <p className={styles.current_bal_subheading}>300</p>
+                <p className={styles.current_bal_subheading}>
+                  {availableCoins}
+                </p>
               </div>
             </div>
 
