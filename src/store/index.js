@@ -8,6 +8,7 @@ import {
   ProfileSettingSlice,
   KycPageSlice,
   InvoiceSlice,
+  orderSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -21,6 +22,7 @@ export const store = configureStore({
     profileData: ProfileSettingSlice.reducer,
     kycPage: KycPageSlice.reducer,
     invoicePage: InvoiceSlice.reducer,
+    order: orderSlice.reducer,
   },
 });
 
