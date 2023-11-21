@@ -254,6 +254,18 @@ export const InvoiceSlice = createSlice({
   },
 });
 
+export const orderSlice = createSlice({
+  name: "orderPage",
+  initialState: {
+    orderId: null,
+  },
+  reducers: {
+    setOrderIdFromOrderPage: (state, action) => {
+      state.orderId = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -312,3 +324,5 @@ export const {getUserName, getUserContact, getUserEmail} =
 export const {getOrderId} = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
+
+export const {setOrderIdFromOrderPage} = orderSlice.actions;

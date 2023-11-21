@@ -16,7 +16,7 @@ const PaymentFailure = () => {
     const countdown = setInterval(() => {
       setTimer(prevTimer => prevTimer - 1);
 
-      console.log(timer, "timer");
+      // console.log(timer, "timer");
       if (timer === 3)
         showToastNotification(
           `Redirecting to Cart page in ${timer} seconds`,
