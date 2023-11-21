@@ -1,16 +1,15 @@
 import React from "react";
 import styles from "./styles.module.css";
 import commonStyles from "../styles.module.css";
-import Breadcrump from "../breadcrump";
 import {FaInfoCircle} from "react-icons/fa";
 import {useRouter} from "next/navigation";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 
 const PostCityshield = () => {
   const router = useRouter();
   return (
     <div className={commonStyles.main_container}>
-      <Breadcrump />
-
+      <BreadCrumbsCommon currentPage={"Citysheild"} />
       <div>
         <FaInfoCircle className={styles.icon} />
         <p className={commonStyles.head}>

@@ -4,7 +4,7 @@ import CityShieldContent from "@/components/Cart/Drawer/CityShieldDrawer/cityShi
 import {ArrowForw, InformationIcon, OpenIcon} from "@/assets/icon";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
 import BreakdownDrawer from "./breakdownDrawer";
-import Breadcrump from "./breadcrump";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
@@ -13,13 +13,9 @@ import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import PostCityshield from "./postCityshieldPayment";
 
-// import { useSearchParams } from "next/navigation";
-// import {useRouter} from "next/navigation";
-
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [details, setDetails] = useState();
-  // const router = useRouter();
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const parts = currentURL.split("/");
   const orderId = parts[parts.length - 1];
@@ -62,7 +58,6 @@ const CityShieldPage = () => {
         cfCoins: "",
       },
     );
-    console.log(result.data, "make payment api data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -113,8 +108,6 @@ const CityShieldPage = () => {
       },
     };
 
-    console.log(options, "optionss");
-
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
 
@@ -127,7 +120,7 @@ const CityShieldPage = () => {
     details &&
     (details.is_cf_care === 0 ? (
       <div className={styles.main_container}>
-        <Breadcrump />
+        <BreadCrumbsCommon currentPage={"Citysheild"} />
 
         <h1 className={styles.head}>Secure Your Coverage with City Shield</h1>
 
