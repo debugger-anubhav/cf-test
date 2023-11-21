@@ -2,7 +2,6 @@ import React from "react";
 import styles from "./KycHeader.module.css";
 import {BackIcon} from "@/assets/icon";
 const KycHeader = ({progress, setKycState, showBackIcon}) => {
-  console.log(showBackIcon, "shoe back icon");
   return (
     <div className={styles.mainContainer}>
       <div className={styles.header_wrapper}>
