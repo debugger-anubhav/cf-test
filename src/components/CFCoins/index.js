@@ -6,14 +6,16 @@ import CreditTransactions from "./CreditTransactions";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 export default function CFCoins() {
   const cfCoinIcon =
     "https://d3juy0zp6vqec8.cloudfront.net/images/icons/cf-coins.svg";
-  //   const userId = decrypt(getLocalStorage("_ga"));
-  // const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  // const userIdToUse = userId || tempUserId;
-  const userIdToUse = 85757;
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = userId || tempUserId;
+  // const userIdToUse = 85757;
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [debitRows, setDebitRows] = useState(null);
   const [creditRows, setCreditRows] = useState(null);
