@@ -6,6 +6,7 @@ import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import ProfileSettings from "@/components/ProfileSettings";
+import {AuthProvider} from "@/components/HOC/index";
 
 const Profilesettings = () => {
   return (
@@ -21,4 +22,4 @@ const Profilesettings = () => {
   );
 };
 
-export default Profilesettings;
+export default AuthProvider(Profilesettings);

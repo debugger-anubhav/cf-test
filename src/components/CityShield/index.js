@@ -4,7 +4,7 @@ import CityShieldContent from "@/components/Cart/Drawer/CityShieldDrawer/cityShi
 import {ArrowForw, InformationIcon, OpenIcon} from "@/assets/icon";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
 import BreakdownDrawer from "./breakdownDrawer";
-import Breadcrump from "./breadcrump";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
@@ -127,7 +127,7 @@ const CityShieldPage = () => {
     details &&
     (details.is_cf_care === 0 ? (
       <div className={styles.main_container}>
-        <Breadcrump />
+        <BreadCrumbsCommon currentPage={"Citysheild"} />
 
         <h1 className={styles.head}>Secure Your Coverage with City Shield</h1>
 
