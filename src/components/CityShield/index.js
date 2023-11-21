@@ -13,13 +13,9 @@ import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import PostCityshield from "./postCityshieldPayment";
 
-// import { useSearchParams } from "next/navigation";
-// import {useRouter} from "next/navigation";
-
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [details, setDetails] = useState();
-  // const router = useRouter();
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const parts = currentURL.split("/");
   const orderId = parts[parts.length - 1];
@@ -62,7 +58,6 @@ const CityShieldPage = () => {
         cfCoins: "",
       },
     );
-    console.log(result.data, "make payment api data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -112,8 +107,6 @@ const CityShieldPage = () => {
         color: RazorpayThemeColor,
       },
     };
-
-    console.log(options, "optionss");
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
