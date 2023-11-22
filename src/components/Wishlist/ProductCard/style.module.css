@@ -60,11 +60,10 @@
   border-color: #71717a;
 }
 .confirm_delete_btn {
-  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium;
-  background-color: #f6b704;
+  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium bg-[#f6b704] whitespace-nowrap;
 }
 .main_container {
-  @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
+  @apply bg-white sm:w-max w-full h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
 }
 .close_icon {
   @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;
