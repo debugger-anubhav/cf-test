@@ -5,20 +5,20 @@
   @apply hidden lg:block min-w-fit;
 }
 .right_div {
-  @apply w-full pb-6 rounded border border-DDDDDF xl:mt-10;
+  @apply w-full pb-6 md:rounded border border-DDDDDF xl:mt-10;
 }
 .header_wrapper {
-  @apply flex;
+  @apply flex bg-F7F7F8 border-b-DDDDDF md:rounded;
 }
 .header {
-  @apply text-20 xl:text-24 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.48  py-4 px-4 xl:px-6 cursor-pointer border;
+  @apply min-w-max text-20 xl:text-24 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.48 py-4 px-4 xl:px-6 cursor-pointer border-b border-r border-DDDDDF;
 }
 .selected_tab {
-  @apply text-5774AC border-transparent;
+  @apply text-5774AC border-b-fff border-b bg-fff;
 }
-.not_selected_tab {
-  @apply bg-F7F7F8 border-DDDDDF;
-}
+/* .not_selected_tab {
+  @apply border-DDDDDF;
+} */
 .sub_container {
   @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 border-b border-b-EDEDEE items-center w-full overflow-scroll;
 }
@@ -97,4 +97,13 @@
 }
 .lower_box:hover .arrow_wrapper {
   transform: translate(10px, 0px);
+}
+.subscrip_note_wrapper {
+  @apply w-full macbook:w-[829px] p-2 mt-8 flex gap-2 items-start self-stretch rounded-lg bg-[#f4f5f8];
+}
+.subscrip_note_txt {
+  @apply text-71717A text-12 tracking-0.24;
+}
+.subscrip_icon {
+  @apply min-w-[16px] h-[16px] text-71717A;
 }

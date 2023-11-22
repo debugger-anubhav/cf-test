@@ -23,16 +23,16 @@ const ProfileSettings = () => {
   const [sentOtp, setSentOtp] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
-  const [userId, setUserId] = useState(useridFromStorage);
+  // const [userId, setUserId] = useState(useridFromStorage);
   const [otpError, setOtpError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   // const formik1 = useFormikContext();
 
-  useEffect(() => {
-    setUserId(useridFromStorage);
-  }, [useridFromStorage]);
+  // useEffect(() => {
+  //   setUserId(useridFromStorage);
+  // }, [useridFromStorage]);
 
   useEffect(() => {
     fetchUserDetails();
@@ -70,7 +70,8 @@ const ProfileSettings = () => {
     // console.log(useridFromStorage, "uiwii");
     try {
       const response = await axios.get(
-        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
+        baseURL +
+          endPoints.profileSettingPage.getUserDetails(useridFromStorage),
       );
       setLoadingSkeleton(false);
       setUserDetails({...response?.data?.data});
@@ -84,12 +85,17 @@ const ProfileSettings = () => {
     setCountdown(60);
     setOtpError("");
     try {
-      const headers = {
+      const body = {
         email,
       };
       const response = await axios.post(
         baseURL + endPoints.profileSettingPage.sentOtpToEmail,
-        headers,
+        body,
+        {
+          headers: {
+            userid: useridFromStorage,
+          },
+        },
       );
 
       if (response?.data?.success === true) {
@@ -122,7 +128,7 @@ const ProfileSettings = () => {
       axios
         .post(baseURL + endPoints.profileSettingPage.sentOtpToEmail, body, {
           headers: {
-            userid: userId,
+            userid: useridFromStorage,
           },
         })
         .then(response => {
@@ -146,7 +152,7 @@ const ProfileSettings = () => {
   const handleUpdateUserDetails = async values => {
     try {
       const headers = {
-        id: parseInt(userId),
+        id: parseInt(useridFromStorage),
         full_name: values.fullName,
         phone_no: values.contactNumber,
         email: values.email,
@@ -349,7 +355,7 @@ const ProfileSettings = () => {
                       isModalOpen={isModalOpen}
                       closeModal={closeModal}
                       contactNumber={userDetails.phone_no}
-                      userId={userId}
+                      userId={useridFromStorage}
                       handleNumberChange={val =>
                         formik.setFieldValue("contactNumber", val)
                       }

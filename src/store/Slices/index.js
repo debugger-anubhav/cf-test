@@ -266,6 +266,26 @@ export const orderSlice = createSlice({
   },
 });
 
+export const paymentSuccessSlice = createSlice({
+  name: "paymentSuccessPage",
+  initialState: {
+    TransactionReferenceNumber: "",
+    PGTransactionID: "",
+    amountPaid: 0,
+  },
+  reducers: {
+    setTransactionReferenceNumber: (state, action) => {
+      state.TransactionReferenceNumber = action.payload;
+    },
+    setPGTransactionID: (state, action) => {
+      state.PGTransactionID = action.payload;
+    },
+    setAmountPaid: (state, action) => {
+      state.amountPaid = action.payload;
+    },
+  },
+});
+
 export const {
   addCityList,
   offersAndCuponsList,
@@ -326,3 +346,9 @@ export const {getOrderId} = KycPageSlice.actions;
 export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
 
 export const {setOrderIdFromOrderPage} = orderSlice.actions;
+
+export const {
+  setTransactionReferenceNumber,
+  setPGTransactionID,
+  setAmountPaid,
+} = paymentSuccessSlice.actions;

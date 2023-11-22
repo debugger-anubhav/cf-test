@@ -8,9 +8,16 @@ import {useParams, useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
 import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
+import {
+  setAmountPaid,
+  setPGTransactionID,
+  setTransactionReferenceNumber,
+} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 function UpfrontPayment() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const Heading = "Upfront Payment";
   const params = useParams();
   const ID = params.key;
@@ -71,7 +78,10 @@ function UpfrontPayment() {
             data,
           );
           console.log(result, "result");
-          router.push("/offline/response/Success");
+          dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
+          dispatch(setPGTransactionID(res.razorpay_payment_id));
+          dispatch(setAmountPaid(apiData?.amount));
+          router.push("/success/payment");
         }
       },
       prefill: {
