@@ -8,6 +8,7 @@ import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import CFCoins from "@/components/CFCoins";
+import {AuthProvider} from "@/components/HOC/index";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -26,4 +27,4 @@ const Wallet = () => {
   );
 };
 
-export default Wallet;
+export default AuthProvider(Wallet);

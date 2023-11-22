@@ -4,11 +4,11 @@ import React from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
-
 import Footer from "@/components/Common/Footer";
 import PaymentPage from "../../components/Payments";
+import {AuthProvider} from "@/components/HOC/index";
 
-const Invoices = () => {
+const Payments = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
@@ -20,4 +20,4 @@ const Invoices = () => {
   );
 };
 
-export default Invoices;
+export default AuthProvider(Payments);

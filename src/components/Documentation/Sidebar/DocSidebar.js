@@ -37,11 +37,11 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       heading: "My Service Requests",
       link: "https://test.rentofurniture.com/service-requests",
     },
-    {heading: "My Payments", link: "https://test.rentofurniture.com/payments"},
-    {heading: "My Invoices", link: "https://test.rentofurniture.com/invoices"},
+    {heading: "My Payments", link: "/payments"},
+    {heading: "My Invoices", link: "/invoices"},
   ];
   const secondContainerArr = [
-    {heading: "CF coins", link: "https://test.rentofurniture.com/wallet"},
+    {heading: "CF coins", link: "/wallet"},
     {
       heading: "Referral Code",
       link: "/referral",

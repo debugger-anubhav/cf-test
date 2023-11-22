@@ -10,9 +10,9 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
       item: "My Service Requests",
       link: "https://test.rentofurniture.com/service-requests",
     },
-    {item: "My Payments", link: "https://test.rentofurniture.com/payments"},
-    {item: "CF Coins", link: "https://test.rentofurniture.com/wallet"},
-    {item: "My Invoices", link: "https://test.rentofurniture.com/invoices"},
+    {item: "My Payments", link: "/payments"},
+    {item: "CF Coins", link: "/wallet"},
+    {item: "My Invoices", link: "/invoices"},
     {
       item: "Documentation",
       link: "/documentation",

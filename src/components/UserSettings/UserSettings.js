@@ -24,19 +24,19 @@ export default function UserSettings() {
     {
       head: "My Payments",
       desc: "Track your payment & download statement.",
-      link: "https://test.rentofurniture.com/payments",
+      link: "/payments",
       img: `${url}my-payments.svg`,
     },
     {
       head: "CF coins",
       desc: "Check CF coins. Use them when ordering.",
-      link: "https://test.rentofurniture.com/wallet",
+      link: "/wallet",
       img: `${url}cf-coins.svg`,
     },
     {
       head: "My Invoices",
       desc: "View and pay invoice.",
-      link: "https://test.rentofurniture.com/invoices",
+      link: "/invoices",
       img: `${url}my-invoices.svg`,
     },
     {
@@ -48,14 +48,14 @@ export default function UserSettings() {
     {
       head: "KYC & Documentation",
       desc: "Upload your KYC documents for verification.",
-      link: "https://test.rentofurniture.com/documentation",
+      link: "/documentation",
       img: `${url}kyc-and-documentation.svg`,
     },
     {
       head: "Profile Settings",
       desc: "Modify name, email or phone number.",
       img: `${url}profile-settings.svg`,
-      link: "https://test.rentofurniture.com/usersettings",
+      link: "/profilesettings",
     },
     {
       head: "Your Addresses",
