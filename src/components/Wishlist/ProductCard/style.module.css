@@ -1,5 +1,5 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
+  @apply w-full sm:w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
   /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] ; */
 }
 .hover_wrapper img {
@@ -30,7 +30,7 @@
   @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
 }
 .discount {
-  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff whitespace-nowrap;
 }
 .item_included_container {
   @apply flex px-[8px] py-[4px] items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
