@@ -32,7 +32,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   }, []);
 
   const firstContainerArr = [
-    {heading: "My orders", link: "https://test.rentofurniture.com/purchases"},
+    {heading: "My orders", link: "/purchases"},
     {
       heading: "My Service Requests",
       link: "https://test.rentofurniture.com/service-requests",

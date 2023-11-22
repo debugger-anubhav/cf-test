@@ -114,12 +114,15 @@ const InvoicePage = () => {
                 : AmountDue}
             </p>
             <button
+              disabled={AmountDue === 0}
               onClick={() => {
                 setAmountToPay(AmountDue);
                 setInvoiceNumber(null);
                 toggleDrawer();
               }}
-              className={styles.pay_all_btn}>
+              className={`${
+                AmountDue === 0 && "!bg-[#FFDF85] !cursor-not-allowed"
+              } ${styles.pay_all_btn}`}>
               Pay all
             </button>
           </div>

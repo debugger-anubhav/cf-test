@@ -15,6 +15,12 @@ import axios from "axios";
 import {loadScript} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useRouter} from "next/navigation";
+import {
+  setAmountPaid,
+  setPGTransactionID,
+  setTransactionReferenceNumber,
+} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 function Cards({
   data,
@@ -40,6 +46,7 @@ function Cards({
   );
   const [perAddModal, setPerAddModal] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const openDrawer = () => {
     setCityShieldDrawerOpen(true);
@@ -54,7 +61,7 @@ function Cards({
     if (isChecked) setCityShieldDrawerOpen(false);
   }, [isChecked]);
 
-  const cartTypeOneHandler = async (res, customerId) => {
+  const cartTypeOneHandler = async (res, customerId, amount) => {
     const data = {
       razorpayPaymentId: res.razorpay_payment_id,
       dealCodeNumber: orderId,
@@ -67,7 +74,10 @@ function Cards({
       data,
     );
     console.log(result);
-    router.push("/offline/response/Success");
+    dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
+    dispatch(setPGTransactionID(res.razorpay_payment_id));
+    dispatch(setAmountPaid(amount));
+    router.push("/success/payment");
   };
 
   async function handleOpenRazorpay(cardType) {
@@ -109,7 +119,11 @@ function Cards({
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       handler: function (res) {
         console.log(res, "res in handler");
-        cartTypeOneHandler(res, customerId);
+        cartTypeOneHandler(
+          res,
+          customerId,
+          selectedOptionPer?.value * calculatedPrice,
+        );
       },
       prefill: {
         name: result?.data?.data?.data?.full_name,
@@ -257,6 +271,7 @@ export const MonthlyCard = ({
   ];
 
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const PaymentModeOpt = ["Credit/Debit card", "Netbanking", "UPI"];
   const [selectedOption, setSelectedOption] = useState(0);
@@ -295,7 +310,10 @@ export const MonthlyCard = ({
         console.log(response, "resss");
         if (response.data.success === true) {
           // showToastNotification(response.data.message, 1);
-          router.push("/offline/response/Success");
+          dispatch(setTransactionReferenceNumber(RazorpayOrderIDBeforePayment));
+          dispatch(setPGTransactionID(paymentID));
+          dispatch(setAmountPaid(1));
+          router.push("/success/payment");
         } else {
           showToastNotification(response.data.message, 3);
         }
