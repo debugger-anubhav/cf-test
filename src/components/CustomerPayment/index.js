@@ -17,12 +17,18 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import FormSkeleton from "../Common/FormSkeleton";
 import {useRouter} from "next/navigation";
+import {
+  setAmountPaid,
+  setPGTransactionID,
+  setTransactionReferenceNumber,
+} from "@/store/Slices";
 
 function CustomerPayment() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
   const coinsReduxValue = useSelector(state => state.invoicePage);
   // console.log(coinsReduxValue, "ueueui");
@@ -129,7 +135,10 @@ function CustomerPayment() {
           body,
         );
         console.log(result);
-        router.push("/customerpayment/successp");
+        dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
+        dispatch(setPGTransactionID(response.razorpay_payment_id));
+        dispatch(setAmountPaid(formData.amount));
+        router.push("/success/payment");
       },
       prefill: {
         name: userDetails?.full_name,

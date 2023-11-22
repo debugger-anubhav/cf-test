@@ -1,5 +1,5 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
+  @apply w-full sm:w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
   /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] ; */
 }
 .hover_wrapper img {
@@ -30,7 +30,7 @@
   @apply text-18 xl:text-24 text-[#222] font-medium font-Poppins flex items-center;
 }
 .discount {
-  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff;
+  @apply bg-[#207B3A] font-Poppins flex justify-center items-center rounded-3xl px-1 w-[4.25rem] xl:w-[93px] xl:h-[26px] h-5 text-12 xl:text-16 xl:py-2 leading-4 text-fff whitespace-nowrap;
 }
 .item_included_container {
   @apply flex px-[8px] py-[4px] items-center absolute rounded-lg border-[1px] border-[#E3E1DC] top-3 left-3 bg-white;
@@ -60,11 +60,10 @@
   border-color: #71717a;
 }
 .confirm_delete_btn {
-  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium;
-  background-color: #f6b704;
+  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium bg-[#f6b704] whitespace-nowrap;
 }
 .main_container {
-  @apply bg-white w-max h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
+  @apply bg-white sm:w-max w-full h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;
 }
 .close_icon {
   @apply absolute sm:static -top-12 cursor-pointer bg-white rounded-full p-1 sm:p-0 right-6;

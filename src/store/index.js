@@ -9,6 +9,7 @@ import {
   KycPageSlice,
   InvoiceSlice,
   orderSlice,
+  paymentSuccessSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -23,6 +24,7 @@ export const store = configureStore({
     kycPage: KycPageSlice.reducer,
     invoicePage: InvoiceSlice.reducer,
     order: orderSlice.reducer,
+    successPayment: paymentSuccessSlice.reducer,
   },
 });
 
