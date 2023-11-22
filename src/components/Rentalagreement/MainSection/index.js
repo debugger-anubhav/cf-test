@@ -9,7 +9,7 @@ function MainSection() {
     'This Subscription Agreement ("Agreement") is made and deemed executed on the date _____________ ("Subscription Date")by the Company at _____________ ("City").';
   return (
     <div className={styles.wrapper}>
-      <BreadCrumbsCommon currentPage={" Rental Agreement"} />
+      <BreadCrumbsCommon currentPage={"Rental Agreement"} />
       <div className={styles.main_heading}>{Heading}</div>
       <div className={styles.detail}>{Subheading}</div>
 

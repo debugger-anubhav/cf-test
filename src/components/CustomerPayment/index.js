@@ -23,9 +23,7 @@ import {useRouter} from "next/navigation";
 
 function CustomerPayment() {
   const router = useRouter();
-
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
-
   const coinsReduxValue = useSelector(state => state.invoicePage);
   // console.log(coinsReduxValue, "ueueui");
 
@@ -71,7 +69,6 @@ function CustomerPayment() {
   });
 
   const handlePayment = async () => {
-    console.log("innnn");
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
@@ -194,12 +191,12 @@ function CustomerPayment() {
       email: emailParam || "",
       amount: amountParam || 0,
       invoice: invoiceNumberParam || "",
-      cfCoins: 0,
+      cfCoins: availableCoins,
     });
     setTimeout(() => {
       setLoadingSkeleton(false);
     }, 1000);
-  }, [nameParam, emailParam, amountParam, invoiceNumberParam]);
+  }, [nameParam, emailParam, amountParam, invoiceNumberParam, availableCoins]);
 
   return (
     <div className={styles.wrapper}>
