@@ -1,9 +1,19 @@
-import {BackIcon} from "@/assets/icon";
+import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import React from "react";
 import styles from "./style.module.css";
 
 function CreateNewRequest() {
   const orderInfo = [
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
+    {id: "01232", img: "img"},
     {id: "01232", img: "img"},
     {id: "01232", img: "img"},
     {id: "01232", img: "img"},
@@ -30,6 +40,11 @@ function CreateNewRequest() {
             </div>
           );
         })}
+      </div>
+      <div className={styles.bottom_row}>
+        <button className={styles.proceed_btn}>
+          Proceed <ForwardArrowWithLine />
+        </button>
       </div>
     </div>
   );

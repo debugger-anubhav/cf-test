@@ -33,11 +33,17 @@
   @apply my-8 text-71717A text-16 font-Poppins;
 }
 .info_wrapper {
-  @apply flex flex-col w-full gap-6;
+  @apply flex flex-col w-full gap-6 h-[350px] overflow-y-scroll;
 }
 .order_row {
   @apply flex w-full gap-2 items-center;
 }
 .radio_button {
-  @apply w-[25px] h-[25px] bg-5774AC;
+  @apply w-[25px] h-[25px] bg-5774AC cursor-pointer;
+}
+.bottom_row {
+  @apply flex w-full items-center fixed bottom-0 bg-white;
+}
+.proceed_btn {
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6;
 }
