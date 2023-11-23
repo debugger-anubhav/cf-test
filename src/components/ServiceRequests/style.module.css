@@ -19,3 +19,25 @@
 .des_wrapper {
   @apply flex justify-between w-full items-center mt-8 gap-8;
 }
+.rightDrawer {
+  @apply p-12 pr-8 w-[530px];
+}
+
+.content_wrapper {
+  @apply flex w-full flex-col;
+}
+.main_heading {
+  @apply flex font-Poppins font-medium text-24 leading-[32px] w-full gap-2 text-45454A items-center;
+}
+.sub_heading {
+  @apply my-8 text-71717A text-16 font-Poppins;
+}
+.info_wrapper {
+  @apply flex flex-col w-full gap-6;
+}
+.order_row {
+  @apply flex w-full gap-2 items-center;
+}
+.radio_button {
+  @apply w-[25px] h-[25px] bg-5774AC;
+}
