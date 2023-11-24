@@ -47,3 +47,21 @@
 .proceed_btn {
   @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6;
 }
+.product_img {
+  @apply w-[80px] h-[80px] rounded-lg;
+}
+.request_type {
+  @apply text-16 text-5774AC font-medium font-Poppins;
+}
+.divider_row {
+  @apply flex w-full items-center;
+}
+.doted_line {
+  @apply border-b border-dotted border-DDDDDF w-1/2 h-[1px];
+}
+.or_text {
+  @apply text-71717A text-12 px-1;
+}
+.request_info_div {
+  @apply flex justify-between items-center  py-4   w-full;
+}
