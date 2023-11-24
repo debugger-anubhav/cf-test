@@ -1,0 +1,67 @@
+.main_container {
+  @apply font-Poppins w-full pb-6 mt-6 xl:mt-10;
+}
+.header_wrapper {
+  @apply flex items-center justify-between w-full;
+}
+.headers_left_div {
+  @apply flex items-center gap-2;
+}
+.headers_right_div {
+  @apply flex items-center gap-2 rounded-lg bg-[#f3f5f8] px-2 py-1;
+}
+.backArrow {
+  @apply text-222 w-6 h-6;
+}
+.header {
+  @apply text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+}
+.status_icon {
+  @apply w-6 h-6;
+}
+.status {
+  @apply text-45454A text-16 font-medium tracking-0.3;
+}
+.sub_container {
+  @apply flex justify-between mt-8;
+}
+.progress_wrapper {
+  @apply flex flex-col items-center gap-2;
+}
+.upper_map {
+  @apply flex items-center;
+}
+.progress_icon_wrapper {
+  @apply flex items-center;
+}
+.progress_circle {
+  @apply w-[18px] h-[18px] rounded-full border-2 flex justify-center items-center;
+}
+.active_status {
+  @apply border-[#2D9469] bg-[#2D9469];
+}
+.inactive_status {
+  @apply border-EDEDEE text-71717A text-12 font-semibold;
+}
+.check_icon {
+  @apply text-fff w-[10px] h-[10px];
+}
+.line {
+  @apply w-[80px] h-[2px];
+}
+.lower_map {
+  @apply flex items-center gap-6;
+}
+.progress_status {
+  @apply text-center text-71717A text-14 font-semibold leading-5 tracking-desc max-w-[74px];
+}
+.drawer_button {
+  @apply flex justify-center items-center  w-[232px] h-14 rounded-lg border-71717A border-2 text-16 text-71717A font-medium
+   leading-5;
+}
+.sub_container_right_div {
+  @apply flex flex-col gap-4 items-center;
+}
+.need_help_txt {
+  @apply text-5774AC text-16 underline;
+}

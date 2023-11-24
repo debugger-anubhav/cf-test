@@ -1,0 +1,57 @@
+.main_container {
+  @apply flex  justify-between;
+}
+.products_wrapper {
+  @apply border border-DDDDDF rounded-lg  w-[579px];
+}
+.order_date_wrapper {
+  @apply bg-F9F9F9 p-4 text-16 tracking-0.3 text-71717A rounded-t-lg;
+}
+.bold_txt {
+  @apply font-medium;
+}
+.single_order_wrapper {
+  @apply p-4 flex items-center gap-4 border-t border-DDDDDF;
+}
+.img_wrapper {
+  @apply relative w-[80px] h-[60.15px];
+}
+.quantity_label {
+  @apply rounded-sm border border-71717A w-6 h-6 absolute bottom-1 right-1 bg-fff text-71717A text-12 font-medium leading-3 flex justify-center items-center;
+}
+.prod_name {
+  @apply text-16 text-45454A font-medium tracking-0.3 max-w-[337px];
+}
+.tenure {
+  @apply mt-1 text-71717A text-16 tracking-0.3;
+}
+.box {
+  @apply rounded-lg border border-DDDDDF p-4 w-[329px];
+}
+.box_header {
+  @apply text-20 font-medium leading-10 tracking-0.4;
+}
+.amount_div {
+  @apply flex justify-between items-center;
+}
+.rupeeIcon {
+  @apply font-Inter;
+}
+.flex_div {
+  @apply flex items-center mt-2 gap-1 cursor-pointer;
+}
+.view_breakup_txt {
+  @apply text-5774AC text-16 underline tracking-0.3 leading-6;
+}
+.forward_icon {
+  @apply text-5774AC w-6 h-6;
+}
+.name_div {
+  @apply flex gap-2 items-center mt-[5.5px] xl:mt-[12.5px];
+}
+.saved_name {
+  @apply text-222 text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
+}
+.address {
+  @apply mt-3 text-45454A text-14 tracking-desc w-[70%] line-clamp-2;
+}
