@@ -4,21 +4,28 @@ import {format} from "date-fns";
 import {useRouter} from "next/navigation";
 import React from "react";
 import {useDispatch} from "react-redux";
-import styles from "./style.module.css";
+import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
 
-const CommonContainer = ({index, item, visibleImages, tab, containerRef}) => {
+export const statusToImageMap = {
+  "Out for Delivery": "out-for-delivery.svg",
+  "KYC In Progress": "kyc-pending.svg",
+  "Delivery Scheduled": "dellivery-scheduled.svg",
+  Delivered: "delivered.svg",
+  Cancelled: "cancelled.svg",
+  "Refund Processed": "returned.svg",
+  "Payment Failed": "payment-failed.svg",
+};
+const CommonContainer = ({
+  index,
+  item,
+  visibleImages,
+  tab,
+  containerRef,
+  setPart,
+}) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const statusToImageMap = {
-    "Out for Delivery": "out-for-delivery.svg",
-    "KYC In Progress": "kyc-pending.svg",
-    "Delivery Scheduled": "dellivery-scheduled.svg",
-    Delivered: "delivered.svg",
-    Cancelled: "cancelled.svg",
-    "Refund Processed": "returned.svg",
-    "Payment Failed": "payment-failed.svg",
-  };
   return (
     <div>
       <div key={index} className={styles.box}>
@@ -63,6 +70,9 @@ const CommonContainer = ({index, item, visibleImages, tab, containerRef}) => {
         <div
           className={styles.lower_box}
           id="image-gallery-container"
+          onClick={() => {
+            setPart(2);
+          }}
           ref={containerRef}>
           <div className="flex items-center gap-3 xl:gap-4">
             {JSON.parse(item?.fc_paymentData)

@@ -137,6 +137,8 @@ export const endPoints = {
 
   myOrdersPage: {
     getAllOrders: `fc-payments/getAllOrderDetails`,
+    getOrderSummary: (dealCodeNumber, userId) =>
+      `fc-payments/getOfflineInvoiceData?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
