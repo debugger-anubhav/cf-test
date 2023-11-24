@@ -35,7 +35,8 @@ function CreateNewRequest() {
         {orderInfo?.map((item, index) => {
           return (
             <div key={index.toString()} className={styles.order_row}>
-              <input type="radio" className="radio_button" />
+              <input type="radio" className={styles.radio_button} />
+              <img className={styles.product_img} src="" />
               <label>Order no:#{item.id}</label>
             </div>
           );
