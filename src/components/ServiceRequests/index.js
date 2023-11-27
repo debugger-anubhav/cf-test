@@ -9,7 +9,8 @@ import {Drawer} from "@mui/material";
 // import CencelOrder from "./CencelOrder";
 // import Buy from "./Buy";
 // import Repair from "./Repair";
-import ChangeBillCycle from "./ChangeBillCycle";
+// import ChangeBillCycle from "./ChangeBillCycle";
+import SwapProduct from "./SwapProduct";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -55,7 +56,8 @@ function ServiceRequets() {
                 {/* <CencelOrder /> */}
                 {/* <Buy /> */}
                 {/* <Repair /> */}
-                <ChangeBillCycle />
+                {/* <ChangeBillCycle /> */}
+                <SwapProduct />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
