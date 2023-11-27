@@ -5,7 +5,8 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 // import CreateNewRequest from "./CreateNewRequest";
 import {Drawer} from "@mui/material";
-import ServiceRequestType from "./ServiceRequestType";
+// import ServiceRequestType from "./ServiceRequestType";
+import CencelOrder from "./CencelOrder";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -47,7 +48,8 @@ function ServiceRequets() {
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
                 {/* <CreateNewRequest /> */}
-                <ServiceRequestType />
+                {/* <ServiceRequestType /> */}
+                <CencelOrder />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
