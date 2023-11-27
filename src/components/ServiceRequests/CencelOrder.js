@@ -53,15 +53,15 @@ function CencelOrder() {
         <BackIcon />
         Cencel order
       </div>
-      <Select
-        options={cencellationOptions}
-        classNames={"bg-red-900"}
-        styles={customStyles}
-        onChange={handleChange}
-        placeholder="Reason for cancellation"
-      />
+      <div className={styles.cancellation_info}>
+        <Select
+          options={cencellationOptions}
+          classNames={"bg-red-900"}
+          styles={customStyles}
+          onChange={handleChange}
+          placeholder="Reason for cancellation"
+        />
 
-      <div className="">
         <p className={styles.form_label}>Your comment (optional)</p>
         <input
           type="text"
