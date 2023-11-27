@@ -74,3 +74,12 @@
 .cancellation_info {
   @apply flex w-full my-8 flex-col;
 }
+.buy_info {
+  @apply flex flex-col w-full my-8;
+}
+.product_to_buy_wrapper {
+  @apply flex;
+}
+.product_imge_thambnil {
+  @apply w-6 h-6 rounded;
+}
