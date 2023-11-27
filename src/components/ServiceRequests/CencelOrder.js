@@ -3,6 +3,36 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Select from "react-select";
 
+export const customStylesForSelect = {
+  control: (baseStyles, state) => ({
+    ...baseStyles,
+    padding: "4px 16px",
+    borderRadius: "12px",
+    outline: "none",
+    cursor: "pointer",
+    ".css-1u9des2-indicatorSeparator": {
+      display: "none",
+    },
+    border: "1px solid  #DDDDDF",
+    boxShadow: 0,
+    "&:hover": {
+      border: "1px solid #71717A",
+    },
+  }),
+  option: (base, state) => ({
+    ...base,
+    color: state.isSelected ? "#5774AC" : "#222",
+    backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "#EFF5FF",
+      color: "#5774AC",
+    },
+    fonetSize: "16px",
+    borderBottom: "1px solid #DDDDDF",
+  }),
+};
+
 function CencelOrder() {
   const cencellationOptions = [
     {value: "1", label: "Wrong items selected"},
@@ -18,50 +48,21 @@ function CencelOrder() {
     setSelected(selectedOption);
     console.log(selected);
   };
-  const customStyles = {
-    control: (baseStyles, state) => ({
-      ...baseStyles,
-      padding: "4px 16px",
-      borderRadius: "12px",
-      outline: "none",
-      cursor: "pointer",
-      ".css-1u9des2-indicatorSeparator": {
-        display: "none",
-      },
-      border: "1px solid  #DDDDDF",
-      boxShadow: 0,
-      "&:hover": {
-        border: "1px solid #71717A",
-      },
-    }),
-    option: (base, state) => ({
-      ...base,
-      color: state.isSelected ? "#5774AC" : "#222",
-      backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
-      "&:hover": {
-        cursor: "pointer",
-        backgroundColor: "#EFF5FF",
-        color: "#5774AC",
-      },
-      fonetSize: "16px",
-      borderBottom: "1px solid #DDDDDF",
-    }),
-  };
+
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
         <BackIcon />
         Cencel order
       </div>
-      <Select
-        options={cencellationOptions}
-        classNames={"bg-red-900"}
-        styles={customStyles}
-        onChange={handleChange}
-        placeholder="Reason for cancellation"
-      />
+      <div className={styles.cancellation_info}>
+        <Select
+          options={cencellationOptions}
+          styles={customStylesForSelect}
+          onChange={handleChange}
+          placeholder="Reason for cancellation"
+        />
 
-      <div className="">
         <p className={styles.form_label}>Your comment (optional)</p>
         <input
           type="text"

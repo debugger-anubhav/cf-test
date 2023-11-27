@@ -139,3 +139,10 @@ input[type="number"]::-webkit-outer-spin-button {
 .css-o4b71y-MuiAccordionSummary-content.Mui-expanded {
   @apply !mt-0 !mb-3;
 }
+.buy_checkbox_info {
+  @apply flex gap-1 mt-[15px] items-center;
+}
+.buy_checkbox_info .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+  color: #5774ac !important;
+  padding: 0 !important;
+}
