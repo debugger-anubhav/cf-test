@@ -45,7 +45,7 @@
   @apply flex w-full items-center fixed bottom-0 bg-white;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;

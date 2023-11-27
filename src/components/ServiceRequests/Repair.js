@@ -70,7 +70,7 @@ function Repair() {
                   <p className={styles.desc}>Repair details</p>
                   <input
                     type="text"
-                    placeholder="Enter repair details."
+                    placeholder="Enter repair details"
                     className={styles.form_input_textarea}
                   />
                 </div>
