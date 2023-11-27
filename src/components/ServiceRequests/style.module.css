@@ -83,3 +83,6 @@
 .product_imge_thambnil {
   @apply w-6 h-6 rounded;
 }
+.repair_info {
+  @apply flex flex-col gap-2 mt-6 border border-DDDDDF p-4 rounded-lg;
+}
