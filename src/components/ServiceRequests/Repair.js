@@ -34,7 +34,7 @@ function Repair() {
         {[1, 2, 3]?.map((item, index) => (
           <div className={styles.repair_info} key={index.toString()}>
             <div className="flex gap-2 items-center">
-              {istoggled ? (
+              {index === toggleIndex && istoggled ? (
                 <BsToggleOn
                   color={"#5774AC"}
                   size={28}
@@ -55,7 +55,7 @@ function Repair() {
               )}
               <p className={styles.desc}>Jane Queen Size Bed</p>
             </div>
-            {istoggled && (
+            {index === toggleIndex && istoggled && (
               <div>
                 <div className="mt-4 flex flex-col">
                   <p className={styles.desc}>Reason for repair</p>
