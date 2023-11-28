@@ -1,7 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
-import {BackIcon, ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
+import {
+  BackIcon,
+  DownArrowUnfilled,
+  ForwardArrow,
+  ForwardArrowWithLine,
+} from "@/assets/icon";
 import {IoIosSwap} from "react-icons/io";
+import {BsSearch} from "react-icons/bs";
 
 function SwapProduct() {
   const ProductInfo = [
@@ -12,6 +18,7 @@ function SwapProduct() {
       title: "Alexa 6 Seater Dining Table with 4 Chairs and Bench",
     },
   ];
+  const [searchModalOpen, setsearchModalOpen] = useState(false);
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -62,8 +69,34 @@ function SwapProduct() {
         </div>
       </div>
 
-      <div className={styles.search_div}>
+      <div className="w-full">
         <p className={styles.swap_heading}>Select product to swap to</p>
+        <div className="relative">
+          <div className={styles.search_wrapper}>
+            <BsSearch />
+            <input
+              className={styles.search_input}
+              type="text"
+              placeholder="Search for Furniture, Appliances, etc"
+              onClick={() => setsearchModalOpen(true)}
+            />
+            <DownArrowUnfilled />
+          </div>
+          {searchModalOpen && (
+            <div
+              className={`${styles.search_modal} absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg `}>
+              {[1, 2, 3, 4]?.map((item, index) => (
+                <div
+                  className={"flex w-full gap-3 cursor-pointer items-center"}
+                  key={index.toString()}
+                  onClick={() => setsearchModalOpen(false)}>
+                  <img src="" className={styles.product_imge_thambnil} />
+                  <p className={styles.desc}>Jade Queen Size Bed</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

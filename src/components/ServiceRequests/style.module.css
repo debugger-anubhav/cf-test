@@ -95,3 +95,12 @@
 .swap_heading {
   @apply font-Poppins font-medium text-16 text-71717A;
 }
+.search_wrapper {
+  @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 mt-6;
+}
+.search_input {
+  @apply outline-none  w-full;
+}
+.search_modal {
+  @apply flex px-4 py-6 w-full;
+}
