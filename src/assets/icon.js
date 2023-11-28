@@ -308,8 +308,13 @@ export const RightIcon = ({size, color, className}) => (
   <BsCheckLg size={size} color={color} className={className} />
 );
 
-export const BackIcon = ({size, color, className}) => (
-  <IoArrowBack size={size} color={color} className={className} />
+export const BackIcon = ({size, color, className, onClick}) => (
+  <IoArrowBack
+    size={size}
+    color={color}
+    className={className}
+    onClick={onClick}
+  />
 );
 
 export const PersonIcon = ({size, color, className}) => (
