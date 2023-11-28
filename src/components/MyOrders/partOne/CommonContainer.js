@@ -22,7 +22,7 @@ const CommonContainer = ({
   visibleImages,
   tab,
   containerRef,
-  setPart,
+  getSingleOrderDetails,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -71,7 +71,7 @@ const CommonContainer = ({
           className={styles.lower_box}
           id="image-gallery-container"
           onClick={() => {
-            setPart(2);
+            getSingleOrderDetails(item.dealCodeNumber);
           }}
           ref={containerRef}>
           <div className="flex items-center gap-3 xl:gap-4">

@@ -8,7 +8,7 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "./CommonContainer";
 
-const AllOrders = ({setPart}) => {
+const AllOrders = ({setPart, getSingleOrderDetails}) => {
   const containerRef = useRef(null);
   const [tab, setTab] = useState(0);
   const [selectedMenuOrder, setSelectedMenuOrder] = useState(0);
@@ -104,18 +104,18 @@ const AllOrders = ({setPart}) => {
     <div className={styles.main_container}>
       <div className={styles.right_div}>
         <div className={styles.header_wrapper}>
-          <h1
+          <p
             onClick={() => setTab(0)}
             className={`${tab === 0 && styles.selected_tab} ${styles.header}`}>
             My orders
-          </h1>
-          <h1
+          </p>
+          <p
             onClick={() => setTab(1)}
             className={`${
               tab === 1 ? styles.selected_tab : "!border-r-transparent"
             } ${styles.header}`}>
             My Subscriptions
-          </h1>
+          </p>
           <div className={`w-full !border-r-0 ${styles.header}`}></div>
         </div>
 
@@ -182,7 +182,7 @@ const AllOrders = ({setPart}) => {
                     visibleImages={visibleImages}
                     tab={tab}
                     containerRef={containerRef}
-                    setPart={setPart}
+                    getSingleOrderDetails={getSingleOrderDetails}
                   />
                 </div>
               );

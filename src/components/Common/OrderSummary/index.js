@@ -6,10 +6,17 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {ForwardArrowWithLine, PersonIcon} from "@/assets/icon";
+import TotalBreakup from "@/components/Cart/Drawer/TotalBreakupDrawer";
+import {useDispatch} from "react-redux";
+import {getBillDetails} from "@/store/Slices";
+import {format} from "date-fns";
 
 const OrderSummary = ({orderNumber}) => {
+  const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [data, setData] = useState();
   const userId = decrypt(getLocalStorage("_ga"));
+
+  const dispatch = useDispatch();
   const getOrderSummary = () => {
     axios
       .get(
@@ -18,6 +25,7 @@ const OrderSummary = ({orderNumber}) => {
       .then(res => {
         console.log(res, "resss");
         setData(res?.data?.data);
+        dispatch(getBillDetails(res?.data?.data?.bill));
       })
       .catch(err => console.log(err));
   };
@@ -26,15 +34,30 @@ const OrderSummary = ({orderNumber}) => {
     getOrderSummary();
   }, []);
 
+  const toggleDrawerBreakup = () => {
+    setBreakupDrawer(!breakupDrawer);
+  };
+
+  // const formattedDate = format(data?.orderDate, "d MMMM, yyyy");
+  // const formattedTime = format(data?.orderDate, "h:mm a");
+
   return (
     <div className={styles.main_container}>
       <div className={styles.products_wrapper}>
         <div className={styles.order_date_wrapper}>
-          <p>
-            Order placed on{" "}
-            <span className={styles.bold_txt}>3rd Jun, 2023</span> at{" "}
-            <span className={styles.bold_txt}>6:04 pm</span>
-          </p>
+          {data && (
+            <p>
+              Order placed on{" "}
+              <span className={styles.bold_txt}>
+                {" "}
+                {`${format(new Date(data.orderDate), "d LLL, yyyy")}`}
+              </span>{" "}
+              at{" "}
+              <span className={styles.bold_txt}>
+                {`${format(new Date(data.orderDate), "h:mm a")}`}
+              </span>
+            </p>
+          )}
         </div>
 
         <div>
@@ -62,10 +85,30 @@ const OrderSummary = ({orderNumber}) => {
 
       <div>
         <div className={styles.box}>
+          <p className={styles.box_header}>Address:</p>
+          <div className={styles.name_div}>
+            <PersonIcon color={"#2D9469"} className={"w-5 h-5"} />
+            <p className={styles.saved_name}>
+              {(data?.address.fullName, data?.address?.phone)}
+            </p>
+          </div>
+          <p className={styles.address}>
+            {data?.address?.address1}
+            {""} {data?.address?.city} {""}
+            {data?.address?.state}
+          </p>
+        </div>
+        <div className="h-4 xl:h-6"></div>
+
+        <div
+          className={`hover:border-5774AC cursor-pointer ${styles.box}`}
+          onClick={() => setBreakupDrawer(true)}>
           <p className={styles.box_header}>Payment details:</p>
           <div className={styles.amount_div}>
-            <p>Paid using ni ptaaa</p>
-            <p>
+            <p className={`!text-71717A ${styles.saved_name}`}>
+              Paid using ni ptaaa
+            </p>
+            <p className={styles.amount}>
               <span className={styles.rupeeIcon}>₹</span>
               {data?.bill?.finalTotalPrice?.toFixed(2)}
             </p>
@@ -75,20 +118,12 @@ const OrderSummary = ({orderNumber}) => {
             <ForwardArrowWithLine className={styles.forward_icon} />
           </div>
         </div>
-        <div className="h-6"></div>
-        <div className={styles.box}>
-          <p className={styles.box_header}>Address:</p>
-          <div className={styles.name_div}>
-            <PersonIcon color={"#2D9469"} className={"w-5 h-5"} />
-            <p className={styles.saved_name}>
-              {"full_name"}, {"99009988789"}
-            </p>
-          </div>
-          <p className={styles.address}>
-            {data?.address?.address1}
-            {data?.address?.state}
-          </p>
-        </div>
+        {breakupDrawer && (
+          <TotalBreakup
+            toggleDrawer={toggleDrawerBreakup}
+            open={breakupDrawer}
+          />
+        )}
       </div>
     </div>
   );
