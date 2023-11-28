@@ -1,11 +1,11 @@
 .main_container {
-  @apply flex  justify-between;
+  @apply flex flex-col gap-6 xl:flex-row xl:justify-between 2xl:gap-32 2xl:justify-normal;
 }
 .products_wrapper {
-  @apply border border-DDDDDF rounded-lg  w-[579px];
+  @apply border border-DDDDDF rounded-lg h-fit w-full xl:w-[579px];
 }
 .order_date_wrapper {
-  @apply bg-F9F9F9 p-4 text-16 tracking-0.3 text-71717A rounded-t-lg;
+  @apply bg-F9F9F9 xl:p-4 px-4 py-3 text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-71717A rounded-t-lg;
 }
 .bold_txt {
   @apply font-medium;
@@ -14,22 +14,22 @@
   @apply p-4 flex items-center gap-4 border-t border-DDDDDF;
 }
 .img_wrapper {
-  @apply relative w-[80px] h-[60.15px];
+  @apply relative min-w-[80px] h-[60.15px];
 }
 .quantity_label {
   @apply rounded-sm border border-71717A w-6 h-6 absolute bottom-1 right-1 bg-fff text-71717A text-12 font-medium leading-3 flex justify-center items-center;
 }
 .prod_name {
-  @apply text-16 text-45454A font-medium tracking-0.3 max-w-[337px];
+  @apply text-14 xl:text-16 text-45454A font-medium tracking-desc xl:tracking-0.3 xl:max-w-[337px];
 }
 .tenure {
-  @apply mt-1 text-71717A text-16 tracking-0.3;
+  @apply mt-1 text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
 }
 .box {
   @apply rounded-lg border border-DDDDDF p-4 w-[329px];
 }
 .box_header {
-  @apply text-20 font-medium leading-10 tracking-0.4;
+  @apply text-16 xl:text-20 font-medium leading-10 tracking-0.3 xl:tracking-0.4;
 }
 .amount_div {
   @apply flex justify-between items-center;
@@ -38,13 +38,16 @@
   @apply font-Inter;
 }
 .flex_div {
-  @apply flex items-center mt-2 gap-1 cursor-pointer;
+  @apply flex items-center mt-1 xl:mt-2 gap-1 cursor-pointer;
 }
 .view_breakup_txt {
-  @apply text-5774AC text-16 underline tracking-0.3 leading-6;
+  @apply text-5774AC text-14 xl:text-16 tracking-desc xl:tracking-0.3 underline leading-6;
+}
+.amount {
+  @apply text-16 text-222 tracking-0.3;
 }
 .forward_icon {
-  @apply text-5774AC w-6 h-6;
+  @apply text-5774AC w-4 h-4 xl:w-6 xl:h-6;
 }
 .name_div {
   @apply flex gap-2 items-center mt-[5.5px] xl:mt-[12.5px];
@@ -53,5 +56,5 @@
   @apply text-222 text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
 }
 .address {
-  @apply mt-3 text-45454A text-14 tracking-desc w-[70%] line-clamp-2;
+  @apply mt-[6px] xl:mt-3 text-45454A text-12 xl:text-14 tracking-0.24 xl:tracking-desc xl:w-[90%];
 }
