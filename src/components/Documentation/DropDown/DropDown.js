@@ -30,7 +30,7 @@ const DropDown = ({
       }}>
       <div
         className={`mt-1 ${styles["selected-option"]} ${
-          isOpen ? "border-none" : "!border-[#DDDDDF]"
+          isOpen ? "border-none" : "border-[#DDDDDF]"
         }`}
         onClick={() => {
           setIsDDOpen(prev => !prev);

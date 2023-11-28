@@ -3,8 +3,14 @@ import styles from "./style.module.css";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
-import CreateNewRequest from "./CreateNewRequest";
+// import CreateNewRequest from "./CreateNewRequest";
 import {Drawer} from "@mui/material";
+// import ServiceRequestType from "./ServiceRequestType";
+// import CencelOrder from "./CencelOrder";
+// import Buy from "./Buy";
+// import Repair from "./Repair";
+// import ChangeBillCycle from "./ChangeBillCycle";
+import SwapProduct from "./SwapProduct";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -45,7 +51,13 @@ function ServiceRequets() {
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
-                <CreateNewRequest />
+                {/* <CreateNewRequest /> */}
+                {/* <ServiceRequestType /> */}
+                {/* <CencelOrder /> */}
+                {/* <Buy /> */}
+                {/* <Repair /> */}
+                {/* <ChangeBillCycle /> */}
+                <SwapProduct />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}

@@ -8,10 +8,10 @@
   @apply w-full pb-[88px];
 }
 .header {
-  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-Poppins font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
 }
 .desc {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 font-Poppins;
 }
 .createRequestBtn {
   @apply bg-F6B704 rounded-lg w-fit px-8 lg:h-[56px] h-[48px] flex gap-[10px] text-16 font-medium font-Poppins whitespace-nowrap items-center;
@@ -45,5 +45,53 @@
   @apply flex w-full items-center fixed bottom-0 bg-white;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins;
+}
+.product_img {
+  @apply w-[80px] h-[80px] rounded-lg;
+}
+.request_type {
+  @apply text-16 text-5774AC font-medium font-Poppins;
+}
+.divider_row {
+  @apply flex w-full items-center;
+}
+.doted_line {
+  @apply border-b border-dotted border-DDDDDF w-1/2 h-[1px];
+}
+.or_text {
+  @apply text-71717A text-12 px-1 font-Poppins;
+}
+.request_info_div {
+  @apply flex justify-between items-center  cursor-pointer py-4   w-full;
+}
+.form_input_textarea {
+  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1 font-Poppins;
+}
+.form_label {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal mt-8 mb-1 font-Poppins;
+}
+.cancellation_info {
+  @apply flex w-full my-8 flex-col;
+}
+.buy_info {
+  @apply flex flex-col w-full my-8;
+}
+.product_to_buy_wrapper {
+  @apply flex;
+}
+.product_imge_thambnil {
+  @apply w-6 h-6 rounded;
+}
+.repair_info {
+  @apply flex flex-col gap-2 mt-6 border border-DDDDDF p-4 rounded-lg;
+}
+.selected_product_info_wrapper {
+  @apply flex justify-between my-8;
+}
+.swap_info {
+  @apply flex py-2 px-3 gap-2 bg-F7F7F8 rounded-[20px] items-center;
+}
+.swap_heading {
+  @apply font-Poppins font-medium text-16 text-71717A;
 }
