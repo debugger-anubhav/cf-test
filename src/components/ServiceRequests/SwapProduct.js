@@ -61,7 +61,8 @@ function SwapProduct() {
           <IoIosSwap color="#9A9AA2" size={22} />
         </div>
       </div>
-      <div>
+
+      <div className={styles.search_div}>
         <p className={styles.swap_heading}>Select product to swap to</p>
       </div>
     </div>
