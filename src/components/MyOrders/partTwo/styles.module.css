@@ -1,32 +1,32 @@
 .main_container {
-  @apply font-Poppins w-full pb-6 mt-6 xl:mt-10;
+  @apply font-Poppins w-full pb-6 xl:mt-10 px-4 xl:p-0;
 }
 .header_wrapper {
-  @apply flex items-center justify-between w-full;
+  @apply flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between 2xl:justify-normal 2xl:gap-[36rem] w-full;
 }
 .headers_left_div {
-  @apply flex items-center gap-2;
+  @apply flex items-center gap-2 cursor-pointer;
 }
 .headers_right_div {
-  @apply flex items-center gap-2 rounded-lg bg-[#f3f5f8] px-2 py-1;
+  @apply flex items-center gap-1 w-fit xl:gap-2 rounded-lg bg-[#f3f5f8] px-2 py-1;
 }
 .backArrow {
-  @apply text-222 w-6 h-6;
+  @apply text-222 w-5 h-5 xl:w-6 xl:h-6;
 }
 .header {
   @apply text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
 }
 .status_icon {
-  @apply w-6 h-6;
+  @apply w-5 h-5 xl:w-6 xl:h-6;
 }
 .status {
-  @apply text-45454A text-16 font-medium tracking-0.3;
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
 }
 .sub_container {
-  @apply flex justify-between mt-8;
+  @apply flex-col xl:flex-row flex xl:justify-between 2xl:justify-normal 2xl:gap-[22rem] xl:mt-8 mt-5 gap-8;
 }
 .progress_wrapper {
-  @apply flex flex-col items-center gap-2;
+  @apply flex flex-col items-center gap-2 w-fit;
 }
 .upper_map {
   @apply flex items-center;
@@ -43,25 +43,28 @@
 .inactive_status {
   @apply border-EDEDEE text-71717A text-12 font-semibold;
 }
+.animated_circle {
+  @apply !text-[#2D9469];
+}
 .check_icon {
   @apply text-fff w-[10px] h-[10px];
 }
 .line {
-  @apply w-[80px] h-[2px];
+  @apply w-[47px] xl:w-[80px] h-[2px];
 }
 .lower_map {
-  @apply flex items-center gap-6;
+  @apply flex items-center gap-[3px] xl:gap-6;
 }
 .progress_status {
-  @apply text-center text-71717A text-14 font-semibold leading-5 tracking-desc max-w-[74px];
+  @apply text-center text-71717A text-12 xl:text-14 font-semibold leading-5 tracking-0.24 xl:tracking-desc max-w-[63px] xl:max-w-[74px];
 }
 .drawer_button {
-  @apply flex justify-center items-center  w-[232px] h-14 rounded-lg border-71717A border-2 text-16 text-71717A font-medium
+  @apply flex justify-center items-center cursor-pointer w-[188px] xl:w-[232px] h-12 xl:h-14 rounded-lg border-71717A border-2 text-14 xl:text-16 text-71717A font-medium
    leading-5;
 }
 .sub_container_right_div {
-  @apply flex flex-col gap-4 items-center;
+  @apply flex flex-col gap-4 xl:items-center;
 }
 .need_help_txt {
-  @apply text-5774AC text-16 underline;
+  @apply text-5774AC text-14 xl:text-16 underline cursor-pointer tracking-desc xl:tracking-0.3;
 }

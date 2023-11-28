@@ -37,7 +37,7 @@ import {useIsOnMobile} from "@/hooks/useIsOnMobile";
 
 const HEADER_HEIGHT = 48;
 
-const Header = () => {
+const Header = ({zIndex}) => {
   const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -200,7 +200,7 @@ const Header = () => {
 
   return (
     <>
-      <div className={styles.main}>
+      <div className={`${zIndex === "none" && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />

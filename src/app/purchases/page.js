@@ -6,11 +6,11 @@ import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MyOrders from "@/components/MyOrders";
 
-const Profilesettings = () => {
+const index = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
-      <Header />
+      <Header zIndex={"none"} />
       <MenuList />
       <MyOrders />
       <Notifications />
@@ -18,4 +18,4 @@ const Profilesettings = () => {
   );
 };
 
-export default Profilesettings;
+export default index;

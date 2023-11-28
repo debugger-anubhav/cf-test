@@ -1,0 +1,71 @@
+/* YourComponent.module.css */
+.customModal {
+  @apply md:!px-12 md:!py-12 w-full md:!w-[605px] font-Poppins !h-fit !rounded-none;
+  top: 47% !important;
+  left: 50% !important ;
+  transform: translate(-50%, -50%) !important;
+}
+
+.customCloseButton {
+  @apply !top-12 !right-8 !outline-none !border-none;
+  min-width: 14px !important;
+  height: 14px !important;
+}
+.modal_head {
+  @apply text-20 md:text-24 text-45454A font-medium leading-8 tracking-0.48;
+}
+
+/* .drawer_wrapper {
+  @apply w-full md:w-fit h-[150px] md:h-fit px-4 pt-6 pb-8 flex flex-col justify-center;
+  border-radius: 20px 20px 0px 0px !important;
+} */
+.close_icon {
+  @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-16;
+}
+.bottomDrawer {
+  @apply font-Poppins !overflow-scroll !rounded-t-[20px] md:!rounded-t-none w-full h-[90vh] px-4 pt-6;
+}
+.desc_wrapper {
+  @apply mt-8 flex flex-col gap-1 xl:gap-2;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+}
+.prefferd_wrapper {
+  @apply mt-8;
+}
+.map_wrapper {
+  @apply mt-3 xl:mt-4 flex flex-wrap items-center gap-3;
+}
+.map_item_wrapper {
+  @apply py-3 px-4 xl:p-4 rounded-xl border border-DDDDDF bg-fff flex flex-col items-center;
+}
+.outer_circle {
+  @apply w-[18px] h-[18px] flex justify-center items-center rounded-full border-2 border-[#597492] cursor-pointer;
+}
+.inner_circle {
+  @apply w-[8px] h-[8px] rounded-full bg-[#597492];
+}
+.date {
+  @apply text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-222 mt-2;
+}
+.day {
+  @apply text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-71717A;
+}
+.pref_time_wrapper {
+  @apply mt-4 flex gap-2 items-center;
+}
+.time {
+  @apply rounded-xl border border-DDDDDF bg-fff p-4 text-14 xl:text-16 text-222 tracking-desc xl:tracking-0.3;
+}
+.btn_wrapper {
+  @apply w-full justify-center md:justify-normal mt-4 xl:mt-8 flex -mx-4 px-4 gap-4 absolute  md:static bottom-0 py-4 md:py-6 md:!shadow-none;
+  background: #fff;
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.cancel_btn {
+  @apply cursor-pointer rounded-lg border-2 border-71717A bg-fff flex justify-center items-center w-[154px] xl:w-[170px] h-12 xl:h-14 text-12 xl:text-16 font-medium text-71717A;
+}
+.modify_btn {
+  @apply cursor-pointer rounded-lg border-2 border-transparent bg-F6B704 flex justify-center items-center w-[154px] xl:w-[170px] h-12 xl:h-14 text-14 xl:text-16 font-medium text-222;
+}
