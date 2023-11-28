@@ -107,3 +107,6 @@
 .swap_second_screen {
   @apply w-full;
 }
+.transferownership_wrapper {
+  @apply flex flex-col my-8 w-full h-4/5 overflow-y-scroll;
+}
