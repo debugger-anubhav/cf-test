@@ -1,0 +1,232 @@
+import React, {useState} from "react";
+import styles from "./style.module.css";
+import {BackIcon, ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
+import {ErrorMessage, Field, Form, Formik} from "formik";
+import * as Yup from "yup";
+import formStyles from "../Cart/AddressSection/styles.module.css";
+import {cityUrl} from "../../../appConfig";
+import {AddressDrawerContent} from "../Cart/Drawer/SaveAddressesDrawer";
+import {getSavedAddress} from "@/store/Slices";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+function Transferownership() {
+  const dispatch = useDispatch();
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = userId || tempUserId;
+  const data = useSelector(state => state.cartPageData);
+  const addressArray = data.savedAddresses;
+
+  const validationSchema = Yup.object({
+    fullName: Yup.string()
+      .required("Full name is required")
+      .min(2, "Name should be of atleast 2 characters long"),
+    contactNumber: Yup.string()
+      .test(
+        "no-spaces-special-characters",
+        "Please enter a valid 10 digit phone number without spaces or special characters",
+        value => {
+          return /^[0-9]*$/.test(value);
+        },
+      )
+      .min(
+        10,
+        "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
+      )
+      .max(
+        10,
+        "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
+      )
+      .required("Contact number is required"),
+    email: Yup.string().email().required("Please enter a valid email address."),
+  });
+
+  const [addressDrawer, setAddressDrawer] = useState(false);
+  const [primaryAddress, setPrimaryAddress] = useState();
+  const [id, setId] = useState(primaryAddress?.id);
+
+  const makeDefaultAddress = id => {
+    const newPrimaryAddress = addressArray.find(item => item.id === id);
+    setPrimaryAddress(newPrimaryAddress);
+  };
+  const getAllSavedAddresses = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+      .then(res => {
+        console.log(res?.data?.data, "resss");
+        dispatch(getSavedAddress(res?.data?.data));
+        setAddressDrawer(!addressDrawer);
+      })
+      .catch(err => console.log(err));
+  };
+  const toggleDrawer = () => {
+    setAddressDrawer(!addressDrawer);
+  };
+  const handleSubmit = async values => {};
+
+  return (
+    <div className={`${styles.content_wrapper} flex-row`}>
+      <div className={styles.main_heading}>
+        <BackIcon className={"cursor-pointer"} />
+        Transfer ownership
+      </div>
+      {addressDrawer ? (
+        <div className="h-full">
+          <AddressDrawerContent
+            // makeDefaultAddress={makeDefaultAddress}
+            primaryAddress={primaryAddress}
+            setId={setId}
+          />
+          <div className={styles.bottom_row}>
+            <button
+              className={
+                "border-2 px-8 lg:h-[56px] h-[48px] items-center w-[393px] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8"
+              }
+              onClick={async () => {
+                try {
+                  makeDefaultAddress(id);
+                  toggleDrawer();
+                } catch (error) {
+                  console.error(error);
+                }
+              }}>
+              Proceed <ForwardArrow />
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className={styles.transferownership_wrapper}>
+          <p className={styles.desc}>New owner contact details</p>
+          <Formik
+            initialValues={{
+              fullName: "",
+              contactNumber: "",
+              email: "",
+              message: "",
+            }}
+            validationSchema={validationSchema}
+            onSubmit={async values => {
+              await handleSubmit(values);
+            }}>
+            {formik => (
+              <Form className={styles.form_wrapper}>
+                <div>
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Full name</p>
+                    <Field
+                      type="text"
+                      name="fullName"
+                      placeholder="Enter your name"
+                      className={styles.form_input_textarea}
+                    />
+                    <ErrorMessage name="fullName">
+                      {msg =>
+                        formik.touched.fullName && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Contact number</p>
+                    <div className={`${styles.row} ${formStyles.form_input}`}>
+                      <div className="flex gap-2 items-center">
+                        <img
+                          src={`${cityUrl + "india-icon.svg"}`}
+                          className={formStyles.flag}
+                          loading="lazy"
+                          alt="India-icon"
+                        />
+                        <Field
+                          type="number"
+                          // readOnly
+                          name="contactNumber"
+                          placeholder="Enter 10 digit number "
+                          className={formStyles.contact_input}
+                        />
+                      </div>
+                    </div>
+                    <ErrorMessage name="contactNumber">
+                      {msg =>
+                        formik.touched.contactNumber && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Email</p>
+                    <Field
+                      type="email"
+                      name="email"
+                      placeholder="Enter your email"
+                      className={formStyles.form_input}
+                    />
+                    <ErrorMessage name="email">
+                      {msg =>
+                        formik.touched.email && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>
+                      Your comment (optional)
+                    </p>
+                    <input
+                      type="text"
+                      placeholder="Please share any specific instructions or provide feedback."
+                      className={styles.form_input_textarea}
+                    />
+                  </div>
+
+                  <div className={styles.bottom_row}>
+                    <button className={styles.proceed_btn} type="submit">
+                      Create request <ForwardArrowWithLine />
+                    </button>
+                  </div>
+                </div>
+              </Form>
+            )}
+          </Formik>
+          <div>
+            <p className="mt-8 font-medium text-20 font-Poppins">Address</p>
+
+            <div
+              className={` ${styles.request_info_div} border-b `}
+              onClick={() => {
+                getAllSavedAddresses();
+              }}>
+              <div className="flex gap-2 items-center">
+                <p className={styles.request_type}>Select from saved address</p>
+              </div>
+              <div className="flex">
+                <ForwardArrow />
+              </div>
+            </div>
+            <div className={` ${styles.request_info_div}`}>
+              <div className="flex gap-2 items-center">
+                <p className={styles.request_type}>
+                  Select Add new saved address
+                </p>
+              </div>
+              <div className="flex">
+                <ForwardArrow />
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default Transferownership;
