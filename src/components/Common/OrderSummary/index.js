@@ -10,9 +10,11 @@ import TotalBreakup from "@/components/Cart/Drawer/TotalBreakupDrawer";
 import {useDispatch} from "react-redux";
 import {getBillDetails} from "@/store/Slices";
 import {format} from "date-fns";
+import ReviewDrawer from "./reviewDrawer";
 
-const OrderSummary = ({orderNumber}) => {
+const OrderSummary = ({orderNumber, isDelivered}) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
+  const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
   const userId = decrypt(getLocalStorage("_ga"));
 
@@ -38,8 +40,9 @@ const OrderSummary = ({orderNumber}) => {
     setBreakupDrawer(!breakupDrawer);
   };
 
-  // const formattedDate = format(data?.orderDate, "d MMMM, yyyy");
-  // const formattedTime = format(data?.orderDate, "h:mm a");
+  const toggleReviewDrawer = () => {
+    setReviewDrawer(!reviewDrawer);
+  };
 
   return (
     <div className={styles.main_container}>
@@ -74,10 +77,29 @@ const OrderSummary = ({orderNumber}) => {
                 />
                 <div className={styles.quantity_label}>{item?.quantity}x</div>
               </div>
-              <div>
+              <div className="w-full">
                 <p className={styles.prod_name}>{item.product_name}</p>
-                <p className={styles.tenure}>{item.subproduct_attr_name}</p>
+                <div className={styles.tenure_div}>
+                  <p className={styles.tenure}>
+                    Tenure: {item.subproduct_attr_name}
+                  </p>
+                  {isDelivered && (
+                    <p
+                      onClick={toggleReviewDrawer}
+                      className={`${styles.review} ${styles.view_breakup_txt}`}>
+                      Write Review
+                    </p>
+                  )}
+                </div>
               </div>
+              {reviewDrawer && (
+                <ReviewDrawer
+                  toggleDrawer={toggleReviewDrawer}
+                  open={reviewDrawer}
+                  productImage={item?.product_image?.split(",")[0]}
+                  productName={item?.product_name}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -87,9 +109,9 @@ const OrderSummary = ({orderNumber}) => {
         <div className={styles.box}>
           <p className={styles.box_header}>Address:</p>
           <div className={styles.name_div}>
-            <PersonIcon color={"#2D9469"} className={"w-5 h-5"} />
+            <PersonIcon color={"#2D9469"} className={styles.person_icon} />
             <p className={styles.saved_name}>
-              {(data?.address.fullName, data?.address?.phone)}
+              {data?.address?.fullName}, {data?.address?.phone}
             </p>
           </div>
           <p className={styles.address}>

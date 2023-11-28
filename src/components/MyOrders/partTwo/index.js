@@ -8,8 +8,8 @@ import {CircularProgressbar} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import {useRouter} from "next/navigation";
-import {setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+import {openScheduleModal, setOrderIdFromOrderPage} from "@/store/Slices";
+import {useDispatch, useSelector} from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
 
@@ -18,19 +18,25 @@ const OrderDetails = ({setPart, data}) => {
   const dispatch = useDispatch();
   const stepsCompleted = data?.stage;
 
+  const modalStateFromRedux = useSelector(
+    state => state.order.isScheduleModalOpen,
+  );
+  console.log(modalStateFromRedux);
+
   const [isModalopen, setIsModalopen] = useState(false);
   const drawerPerStepsCompleted = {
     0: "Retry Payment",
     1: "Complete KYC now",
     2: data?.allStages?.[1] === "Cancellation Processed" && "Reorder",
     3:
-      data?.allStages?.[2].status === "Refund Processed"
+      data?.allStages?.[2] === "Refund Processed"
         ? "Reorder"
         : "Manage delivery slot",
   };
 
   const toggleModal = () => {
     setIsModalopen(!isModalopen);
+    dispatch(openScheduleModal(!modalStateFromRedux));
   };
 
   return (
@@ -160,7 +166,10 @@ const OrderDetails = ({setPart, data}) => {
       )}
 
       <div className="mt-8">
-        <OrderSummary orderNumber={data?.dealCodeNumber} />
+        <OrderSummary
+          orderNumber={data?.dealCodeNumber}
+          isDelivered={stepsCompleted === 5}
+        />
       </div>
     </div>
   );
