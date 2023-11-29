@@ -1,0 +1,43 @@
+.main_container {
+  @apply relative  md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] pt-6 pb-24 md:pb-6 md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none  md:!h-full;
+  overflow-y: visible !important;
+}
+.head {
+  @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-medium leading-8 tracking-0.48;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.wrapper {
+  @apply flex gap-4 items-center mt-8;
+}
+.img {
+  @apply w-[80px] h-[60px];
+}
+.rating_row {
+  @apply flex gap-1 mt-1;
+}
+.star {
+  @apply w-5 h-5 mr-1;
+}
+.input_area {
+  @apply mt-8 text-222 text-14 xl:text-16 tracking-desc xl:tracking-0.3 border border-DDDDDF hover:border-71717A min-h-[168px] max-h-[168px] px-4 py-3 w-full rounded-xl outline-none placeholder:text-14 xl:placeholder:text-16 placeholder:text-71717A placeholder:tracking-desc xl:placeholder:tracking-0.3;
+}
+.btn_wrapper {
+  @apply -mx-4 xs:-mx-7 md:-mx-0 md:!shadow-none fixed bottom-0 md:static w-full justify-center md:justify-normal flex items-center md:mt-8 p-4 md:p-0;
+  background: #fff;
+  box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.btn {
+  @apply cursor-pointer w-full md:w-fit rounded-lg border-2 border-71717A flex gap-[10px] px-8 h-12 xl:h-14
+   justify-center items-center  text-14 xl:text-16 text-71717A;
+}
+.arrow {
+  @apply text-71717A w-4 h-4 xl:w-5 xl:h-5;
+}
+.err {
+  @apply text-[#d96060] text-12 leading-4 tracking-0.24;
+}

@@ -1,11 +1,11 @@
 .main_container {
-  @apply font-Poppins w-full pb-6 xl:mt-10 px-4 xl:p-0;
+  @apply font-Poppins w-full pb-6 pt-4 xl:mt-10 px-4 xl:p-0;
 }
 .header_wrapper {
   @apply flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between 2xl:justify-normal 2xl:gap-[36rem] w-full;
 }
 .headers_left_div {
-  @apply flex items-center gap-2 cursor-pointer;
+  @apply flex items-center gap-2 cursor-pointer hover:underline;
 }
 .headers_right_div {
   @apply flex items-center gap-1 w-fit xl:gap-2 rounded-lg bg-[#f3f5f8] px-2 py-1;

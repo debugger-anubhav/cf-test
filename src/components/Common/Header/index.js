@@ -200,7 +200,7 @@ const Header = ({zIndex}) => {
 
   return (
     <>
-      <div className={`${zIndex === "none" && "!z-0"} ${styles.main}`}>
+      <div className={`${zIndex && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
