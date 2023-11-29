@@ -75,24 +75,34 @@ function Transferownership() {
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
     setPrimaryAddress(newPrimaryAddress);
+    toggleDrawer();
   };
+
   const getAllSavedAddresses = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
         console.log(res?.data?.data, "resss");
         dispatch(getSavedAddress(res?.data?.data));
+        const newPrimaryAddress = res?.data?.data.find(
+          item => item.city === cityName,
+        );
+        setPrimaryAddress(newPrimaryAddress);
         setAddressDrawer(!addressDrawer);
       })
       .catch(err => console.log(err));
   };
+
   const toggleDrawer = () => {
     setAddressDrawer(!addressDrawer);
   };
+
   const handleSubmit = async values => {};
+
   useEffect(() => {
     console.log(primaryAddress, "primaryAddress");
   }, [primaryAddress]);
+
   return (
     <div className={`${styles.content_wrapper} flex-row`}>
       {addressDrawer ? (
@@ -105,7 +115,7 @@ function Transferownership() {
             Saved addresses
           </div>
           <AddressDrawerContent
-            makeDefaultAddress={makeDefaultAddress}
+            makeDefaultAddress={id => makeDefaultAddress(id)}
             primaryAddress={primaryAddress}
             setId={setId}
           />
@@ -117,7 +127,7 @@ function Transferownership() {
               onClick={async () => {
                 try {
                   makeDefaultAddress(id);
-                  toggleDrawer();
+                  //   toggleDrawer();
                   setShowAddressFields(true);
                 } catch (error) {
                   console.error(error);
@@ -141,10 +151,10 @@ function Transferownership() {
                 contactNumber: "",
                 email: "",
                 message: "",
-                address: "",
-                landmark: "",
-                postalCode: "",
-                city: cityName,
+                address: primaryAddress?.address1,
+                landmark: primaryAddress?.address2,
+                postalCode: primaryAddress?.postal_code,
+                city: primaryAddress?.city,
               }}
               validationSchema={validationSchema}
               onSubmit={async values => {
