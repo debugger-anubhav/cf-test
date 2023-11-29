@@ -1,0 +1,10 @@
+.main_container {
+  @apply md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] pt-6 pb-24 md:pb-6 md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none md:!h-full p-4 xs:p-7 md:py-12 md:pl-12 md:pr-16 pr-8 w-full md:w-[530px];
+  overflow-y: visible !important;
+}
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
