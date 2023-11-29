@@ -5,7 +5,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 
-function ServiceRequestType({orderId, isHelpDrawer}) {
+function ServiceRequestType({orderId, isHelpDrawer, title}) {
   const [services, setServices] = useState();
   // const orderInfo = [
   //   {icon: "icon", title: "Cancel order"},
@@ -33,7 +33,7 @@ function ServiceRequestType({orderId, isHelpDrawer}) {
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
         {!isHelpDrawer && <BackIcon />}
-        {isHelpDrawer ? "Need help with..." : "Service request type"}
+        {title}
       </div>
       <div className={` my-6 flex w-full flex-col mt-4`}>
         {services?.map((item, index) => {
