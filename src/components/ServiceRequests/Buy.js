@@ -3,19 +3,23 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
 
-function Buy() {
+function Buy({heading}) {
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
         <BackIcon />
-        Cencel order
+        {heading}
       </div>
       <div className={styles.buy_info}>
-        <p className={styles.desc}>
-          We are glad that you liked our products and considering to buy them.
+        {heading === "Buy" && (
+          <p className={styles.desc}>
+            We are glad that you liked our products and considering to buy them.
+          </p>
+        )}
+        <p className={`${styles.desc} ${heading === "Buy" && "mt-8"}`}>
+          Select products to <span className="lowercase">{heading}</span>
         </p>
-        <p className={`${styles.desc} mt-8`}>Select products to buy</p>
         <div className="product_to_buy_wrapper">
           {[1, 2, 3]?.map((item, index) => (
             <div key={index.toString()} className={"buy_checkbox_info"}>

@@ -341,7 +341,7 @@ function Transferownership() {
             </Formik>
             {!showAddressFields && (
               <div>
-                <p className="mt-8 font-medium text-20 font-Poppins">Address</p>
+                <p className={styles.main_sub_heading}>Address</p>
                 <div
                   className={` ${styles.request_info_div} border-b `}
                   onClick={() => {

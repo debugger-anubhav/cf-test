@@ -110,3 +110,6 @@
 .transferownership_wrapper {
   @apply flex flex-col my-8 w-full h-4/5 overflow-y-scroll;
 }
+.main_sub_heading {
+  @apply mt-8 font-medium text-20 font-Poppins;
+}
