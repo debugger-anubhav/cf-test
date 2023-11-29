@@ -12,7 +12,8 @@ import {Drawer} from "@mui/material";
 // import Repair from "./Repair";
 // import ChangeBillCycle from "./ChangeBillCycle";
 // import SwapProduct from "./SwapProduct";
-import ExtendTenure from "./ExtendTenure";
+// import ExtendTenure from "./ExtendTenure";
+import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -54,14 +55,21 @@ function ServiceRequets() {
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
                 {/* <CreateNewRequest /> */}
-                {/* <ServiceRequestType /> */}
+                {/* <ServiceRequestType 
+                  orderId={"121"}
+                  title={"Service request type"}
+                /> */}
                 {/* <CencelOrder /> */}
                 {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
                 {/* <ChangeBillCycle /> */}
                 {/* <SwapProduct /> */}
                 {/* <Transferownership /> */}
-                <ExtendTenure />
+                {/* <ExtendTenure /> */}
+                <PickupReasonCommonScreen
+                  title="Requirement Fulfilled"
+                  subTitle={"dynamic subtitle"}
+                />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}

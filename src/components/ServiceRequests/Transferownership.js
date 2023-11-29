@@ -124,9 +124,7 @@ function Transferownership() {
           />
           <div className={styles.bottom_row}>
             <button
-              className={
-                "border-2 px-8 lg:h-[56px] h-[48px] items-center w-[393px] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8"
-              }
+              className={styles.plain_btn}
               onClick={async () => {
                 try {
                   makeDefaultAddress(id);
