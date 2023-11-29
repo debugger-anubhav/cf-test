@@ -8,29 +8,41 @@ import {CircularProgressbar} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import {useRouter} from "next/navigation";
-import {setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+import {openScheduleModal, setOrderIdFromOrderPage} from "@/store/Slices";
+import {useDispatch, useSelector} from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
+import ServiceDrawer from "./ServiceDrawer/ServiceDrawer";
 
 const OrderDetails = ({setPart, data}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const stepsCompleted = data?.stage;
 
+  const modalStateFromRedux = useSelector(
+    state => state.order.isScheduleModalOpen,
+  );
+  console.log(modalStateFromRedux);
+
   const [isModalopen, setIsModalopen] = useState(false);
+  const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
   const drawerPerStepsCompleted = {
     0: "Retry Payment",
     1: "Complete KYC now",
     2: data?.allStages?.[1] === "Cancellation Processed" && "Reorder",
     3:
-      data?.allStages?.[2].status === "Refund Processed"
+      data?.allStages?.[2] === "Refund Processed"
         ? "Reorder"
         : "Manage delivery slot",
   };
 
   const toggleModal = () => {
     setIsModalopen(!isModalopen);
+    dispatch(openScheduleModal(!modalStateFromRedux));
+  };
+
+  const toggleServiceDrawer = () => {
+    setServiceDrawerOpen(!serviceDrawerOpen);
   };
 
   return (
@@ -151,7 +163,9 @@ const OrderDetails = ({setPart, data}) => {
               {drawerPerStepsCompleted[stepsCompleted]}
             </div>
           )}
-          <p className={styles.need_help_txt}>Need Help with your order?</p>
+          <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
+            Need Help with your order?
+          </p>
         </div>
       </div>
 
@@ -159,8 +173,19 @@ const OrderDetails = ({setPart, data}) => {
         <ManageSchedule isModalOpen={isModalopen} closeModal={toggleModal} />
       )}
 
+      {serviceDrawerOpen && (
+        <ServiceDrawer
+          open={serviceDrawerOpen}
+          toggleDrawer={toggleServiceDrawer}
+          orderId={data?.dealCodeNumber}
+        />
+      )}
+
       <div className="mt-8">
-        <OrderSummary orderNumber={data?.dealCodeNumber} />
+        <OrderSummary
+          orderNumber={data?.dealCodeNumber}
+          isDelivered={stepsCompleted === 5}
+        />
       </div>
     </div>
   );

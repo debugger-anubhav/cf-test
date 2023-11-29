@@ -6,12 +6,13 @@ import PastRequests from "./PastRequests";
 // import CreateNewRequest from "./CreateNewRequest";
 import {Drawer} from "@mui/material";
 // import ServiceRequestType from "./ServiceRequestType";
-import Transferownership from "./Transferownership";
+// import Transferownership from "./Transferownership";
 // import CencelOrder from "./CencelOrder";
 // import Buy from "./Buy";
 // import Repair from "./Repair";
 // import ChangeBillCycle from "./ChangeBillCycle";
 // import SwapProduct from "./SwapProduct";
+import ExtendTenure from "./ExtendTenure";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -55,11 +56,12 @@ function ServiceRequets() {
                 {/* <CreateNewRequest /> */}
                 {/* <ServiceRequestType /> */}
                 {/* <CencelOrder /> */}
-                {/* <Buy /> */}
+                {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
                 {/* <ChangeBillCycle /> */}
                 {/* <SwapProduct /> */}
-                <Transferownership />
+                {/* <Transferownership /> */}
+                <ExtendTenure />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
