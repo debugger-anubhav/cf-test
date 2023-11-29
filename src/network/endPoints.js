@@ -141,6 +141,8 @@ export const endPoints = {
       `fc-payments/getOfflineInvoiceData?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
     getOrderStage: orderNumber =>
       `fc-payments/getOrderStages?dealCodeNumber=${orderNumber}`,
+    getServiceRequest: orderId =>
+      `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${orderId}`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",

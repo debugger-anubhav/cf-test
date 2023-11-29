@@ -12,6 +12,7 @@ import {openScheduleModal, setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
+import ServiceDrawer from "./ServiceDrawer/ServiceDrawer";
 
 const OrderDetails = ({setPart, data}) => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const OrderDetails = ({setPart, data}) => {
   console.log(modalStateFromRedux);
 
   const [isModalopen, setIsModalopen] = useState(false);
+  const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
   const drawerPerStepsCompleted = {
     0: "Retry Payment",
     1: "Complete KYC now",
@@ -37,6 +39,10 @@ const OrderDetails = ({setPart, data}) => {
   const toggleModal = () => {
     setIsModalopen(!isModalopen);
     dispatch(openScheduleModal(!modalStateFromRedux));
+  };
+
+  const toggleServiceDrawer = () => {
+    setServiceDrawerOpen(!serviceDrawerOpen);
   };
 
   return (
@@ -157,12 +163,22 @@ const OrderDetails = ({setPart, data}) => {
               {drawerPerStepsCompleted[stepsCompleted]}
             </div>
           )}
-          <p className={styles.need_help_txt}>Need Help with your order?</p>
+          <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
+            Need Help with your order?
+          </p>
         </div>
       </div>
 
       {isModalopen && (
         <ManageSchedule isModalOpen={isModalopen} closeModal={toggleModal} />
+      )}
+
+      {serviceDrawerOpen && (
+        <ServiceDrawer
+          open={serviceDrawerOpen}
+          toggleDrawer={toggleServiceDrawer}
+          orderId={data?.dealCodeNumber}
+        />
       )}
 
       <div className="mt-8">

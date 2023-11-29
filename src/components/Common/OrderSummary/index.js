@@ -128,7 +128,7 @@ const OrderSummary = ({orderNumber, isDelivered}) => {
           <p className={styles.box_header}>Payment details:</p>
           <div className={styles.amount_div}>
             <p className={`!text-71717A ${styles.saved_name}`}>
-              Paid using ni ptaaa
+              Paid using {data?.bill?.mode}
             </p>
             <p className={styles.amount}>
               <span className={styles.rupeeIcon}>₹</span>
