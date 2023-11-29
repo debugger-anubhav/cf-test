@@ -13,6 +13,8 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
+import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
+import {useAppSelector} from "@/store";
 
 function Transferownership() {
   const dispatch = useDispatch();
@@ -22,6 +24,8 @@ function Transferownership() {
   const data = useSelector(state => state.cartPageData);
   const addressArray = data.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
+  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Full name is required")
@@ -70,6 +74,7 @@ function Transferownership() {
   const [primaryAddress, setPrimaryAddress] = useState();
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [id, setId] = useState(primaryAddress?.id);
+  const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
 
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
@@ -151,16 +156,16 @@ function Transferownership() {
                 message: "",
                 address: primaryAddress
                   ? primaryAddress.address1
-                  : addressArray[0].address1,
+                  : addressArray[0]?.address1,
                 landmark: primaryAddress
                   ? primaryAddress.address2
-                  : addressArray[0].address2,
+                  : addressArray[0]?.address2,
                 postalCode: primaryAddress
                   ? primaryAddress.postal_code
-                  : addressArray[0].postal_code,
+                  : addressArray[0]?.postal_code,
                 city: primaryAddress
                   ? primaryAddress.city
-                  : addressArray[0].city,
+                  : addressArray[0]?.city,
               }}
               validationSchema={validationSchema}
               onSubmit={async values => {
@@ -297,6 +302,7 @@ function Transferownership() {
                             value={cityName}
                             placeholder="Enter city"
                             className={formStyles.form_input}
+                            onClick={() => setCityDrawerOpen(!cityDrawerOpen)}
                           />
                           <ErrorMessage name="city">
                             {msg =>
@@ -306,6 +312,21 @@ function Transferownership() {
                             }
                           </ErrorMessage>
                         </div>
+
+                        {cityDrawerOpen && (
+                          <CityDrawer
+                            toggleDrawer={() =>
+                              setCityDrawerOpen(!cityDrawerOpen)
+                            }
+                            Cities={storeCityList}
+                            open={cityDrawerOpen}
+                            cityName={formik.values.city}
+                            handleCityChange={val => {
+                              formik.setFieldValue("city", val);
+                              setCityDrawerOpen(!cityDrawerOpen);
+                            }}
+                          />
+                        )}
                       </div>
                     )}
 
