@@ -13,7 +13,8 @@ import {Drawer} from "@mui/material";
 // import ChangeBillCycle from "./ChangeBillCycle";
 // import SwapProduct from "./SwapProduct";
 // import ExtendTenure from "./ExtendTenure";
-import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
+// import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
+import Relocation from "./Relocation";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -66,10 +67,12 @@ function ServiceRequets() {
                 {/* <SwapProduct /> */}
                 {/* <Transferownership /> */}
                 {/* <ExtendTenure /> */}
-                <PickupReasonCommonScreen
+                {/* <PickupReasonCommonScreen
                   title="Requirement Fulfilled"
                   subTitle={"dynamic subtitle"}
-                />
+                /> */}
+                <Relocation />
+
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
