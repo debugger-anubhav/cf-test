@@ -31,7 +31,7 @@ const ServiceDrawer = ({toggleDrawer, open, orderId}) => {
         onClose={toggleDrawer}
         classes={{paper: styles.customDrawer}}
         transitionDuration={{enter: 400, exit: 200}}>
-        <div className="flex w-full gap-8">
+        <div className="flex w-full gap-8 h-full overflow-scroll md:overflow-visible">
           <ServiceRequestType orderId={orderId} isHelpDrawer />
           <div onClick={toggleDrawer} className={styles.close_icon}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
