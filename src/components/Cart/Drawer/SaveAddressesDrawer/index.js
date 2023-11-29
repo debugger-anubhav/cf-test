@@ -76,7 +76,6 @@ export default AddressDrawer;
 
 export const AddressDrawerContent = ({primaryAddress, setId}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
-  console.log(primaryAddress, "addresss");
   const primaryIndex = addressArray.findIndex(
     item => item?.id === primaryAddress?.id,
   );

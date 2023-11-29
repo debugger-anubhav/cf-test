@@ -22,7 +22,6 @@ function Transferownership() {
   const data = useSelector(state => state.cartPageData);
   const addressArray = data.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
-
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Full name is required")
@@ -82,7 +81,6 @@ function Transferownership() {
     axios
       .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
-        console.log(res?.data?.data, "resss");
         dispatch(getSavedAddress(res?.data?.data));
         const newPrimaryAddress = res?.data?.data.find(
           item => item.city === cityName,
@@ -147,14 +145,22 @@ function Transferownership() {
             <p className={styles.desc}>New owner contact details</p>
             <Formik
               initialValues={{
-                fullName: "",
-                contactNumber: "",
+                fullName: primaryAddress && primaryAddress.full_name,
+                contactNumber: primaryAddress && primaryAddress.phone,
                 email: "",
                 message: "",
-                address: primaryAddress?.address1,
-                landmark: primaryAddress?.address2,
-                postalCode: primaryAddress?.postal_code,
-                city: primaryAddress?.city,
+                address: primaryAddress
+                  ? primaryAddress.address1
+                  : addressArray[0].address1,
+                landmark: primaryAddress
+                  ? primaryAddress.address2
+                  : addressArray[0].address2,
+                postalCode: primaryAddress
+                  ? primaryAddress.postal_code
+                  : addressArray[0].postal_code,
+                city: primaryAddress
+                  ? primaryAddress.city
+                  : addressArray[0].city,
               }}
               validationSchema={validationSchema}
               onSubmit={async values => {
