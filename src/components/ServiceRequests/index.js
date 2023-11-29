@@ -5,7 +5,7 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 // import CreateNewRequest from "./CreateNewRequest";
 import {Drawer} from "@mui/material";
-import ServiceRequestType from "./ServiceRequestType";
+// import ServiceRequestType from "./ServiceRequestType";
 // import Transferownership from "./Transferownership";
 // import CencelOrder from "./CencelOrder";
 // import Buy from "./Buy";
@@ -13,6 +13,7 @@ import ServiceRequestType from "./ServiceRequestType";
 // import ChangeBillCycle from "./ChangeBillCycle";
 // import SwapProduct from "./SwapProduct";
 // import ExtendTenure from "./ExtendTenure";
+import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -54,10 +55,10 @@ function ServiceRequets() {
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
                 {/* <CreateNewRequest /> */}
-                <ServiceRequestType
+                {/* <ServiceRequestType 
                   orderId={"121"}
                   title={"Service request type"}
-                />
+                /> */}
                 {/* <CencelOrder /> */}
                 {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
@@ -65,6 +66,10 @@ function ServiceRequets() {
                 {/* <SwapProduct /> */}
                 {/* <Transferownership /> */}
                 {/* <ExtendTenure /> */}
+                <PickupReasonCommonScreen
+                  title="Requirement Fulfilled"
+                  subTitle={"dynamic subtitle"}
+                />
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
