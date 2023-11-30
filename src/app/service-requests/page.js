@@ -4,7 +4,7 @@ import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import Footer from "@/components/Common/Footer";
-import {AuthProvider} from "@/components/HOC/index";
+// import {AuthProvider} from "@/components/HOC/index";
 import ServiceRequests from "@/components/ServiceRequests/index";
 
 const ServiceRequestPage = () => {
@@ -19,4 +19,4 @@ const ServiceRequestPage = () => {
   );
 };
 
-export default AuthProvider(ServiceRequestPage);
+export default ServiceRequestPage;

@@ -10,44 +10,20 @@ import {
   TableRow,
 } from "@mui/material";
 import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
+import {format} from "date-fns";
 
-function PastRequests() {
+function PastRequests({pastRequestData}) {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
+  const [rows, setRows] = useState(pastRequestData);
+
   useEffect(() => {
     setLoadingSkeleton(false);
   }, []);
-  const rows = [
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      invoiceAmount: "₹9,999",
-      balance: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      invoiceAmount: "₹9,999",
-      balance: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      invoiceAmount: "₹9,999",
-      balance: 100.0,
-      status: "Paid",
-    },
-    {
-      invoiceDate: "2023-10-01",
-      invoiceNumber: "INV-KR-999999999",
-      invoiceAmount: "₹9,999",
-      balance: 100.0,
-      status: "Paid",
-    },
 
-    // Add more rows as needed
-  ];
+  useEffect(() => {
+    setRows(pastRequestData);
+  }, [pastRequestData]);
+
   return (
     <div>
       <div className={styles.web}>
@@ -84,20 +60,32 @@ function PastRequests() {
               <TableBody>
                 {rows?.map((row, index) => (
                   <TableRow key={index} className={styles.tableRow}>
-                    <TableCell className={styles.tableCell}>order id</TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.invoiceNumber}
+                      {row?.order_id}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.balance}
+                      {row?.zoho_case_id}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.balance}
+                      {row?.request_type}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row.invoiceDate}
+                      {row?.scheduled_datetime
+                        ? `${format(
+                            new Date(row?.scheduled_datetime),
+                            "yyyy-mm-dd",
+                          )}`
+                        : "NA"}
                     </TableCell>
-                    <TableCell>{row.status}</TableCell>
+                    <TableCell className={styles.tableCell}>
+                      {`${format(
+                        new Date(row?.created_date),
+                        "d LLL, yyyy : hh:mm a",
+                      )}`}
+                    </TableCell>
+                    <TableCell className="text-71717A font-Poppins">
+                      {row?.status}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
