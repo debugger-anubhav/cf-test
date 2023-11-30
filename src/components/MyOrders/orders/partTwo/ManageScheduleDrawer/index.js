@@ -1,13 +1,17 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
-const ManageSchedule = ({isModalOpen, closeModal}) => {
+const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [selectedDates, setSelectedDates] = useState([]);
   const [prefTime, setPrefTime] = useState(true);
+  const [scheduleDates, setScheduleDates] = useState();
   const handleresize = e => {
     if (window.innerWidth < 768) {
       setIsBottomShareDrawer(true);
@@ -23,32 +27,49 @@ const ManageSchedule = ({isModalOpen, closeModal}) => {
     };
   }, []);
 
-  const scheduleDates = [
-    {
-      date: "12th",
-      day: "Thu",
-    },
-    {
-      date: "13th",
-      day: "Fri",
-    },
-    {
-      date: "14th",
-      day: "Sat",
-    },
-    {
-      date: "15th",
-      day: "Sun",
-    },
-    {
-      date: "16th",
-      day: "Mon",
-    },
-    {
-      date: "17th",
-      day: "Tue",
-    },
-  ];
+  // const scheduleDates = [
+  //   {
+  //     date: "12th",
+  //     day: "Thu",
+  //   },
+  //   {
+  //     date: "13th",
+  //     day: "Fri",
+  //   },
+  //   {
+  //     date: "14th",
+  //     day: "Sat",
+  //   },
+  //   {
+  //     date: "15th",
+  //     day: "Sun",
+  //   },
+  //   {
+  //     date: "16th",
+  //     day: "Mon",
+  //   },
+  //   {
+  //     date: "17th",
+  //     day: "Tue",
+  //   },
+  // ];
+
+  const getDeliverySlots = () => {
+    const body = {
+      deal_id: 994778442,
+      zoho_case_id: 74375,
+    };
+    axios
+      .get(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
+      .then(res => {
+        console.log(res, "yguywgy");
+        setScheduleDates(res?.data?.data?.data);
+      });
+  };
+
+  useEffect(() => {
+    getDeliverySlots();
+  }, []);
 
   const handleDateClick = clickedDate => {
     // Check if the clicked date is already in the selectedDates array
@@ -81,7 +102,7 @@ const ManageSchedule = ({isModalOpen, closeModal}) => {
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred date:</p>
         <div className={styles.map_wrapper}>
-          {scheduleDates.map((item, index) => (
+          {scheduleDates?.map((item, index) => (
             <div
               key={index}
               className={styles.map_item_wrapper}
