@@ -1,10 +1,10 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
-// import CreateNewRequest from "./CreateNewRequest";
 import {Drawer} from "@mui/material";
+import CreateNewRequest from "./CreateNewRequest";
 // import ServiceRequestType from "./ServiceRequestType";
 // import Transferownership from "./Transferownership";
 // import CencelOrder from "./CencelOrder";
@@ -14,10 +14,16 @@ import {Drawer} from "@mui/material";
 // import SwapProduct from "./SwapProduct";
 // import ExtendTenure from "./ExtendTenure";
 // import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
-import Relocation from "./Relocation";
+// import Relocation from "./Relocation";
+import axios from "axios";
+import {endPoints} from "@/network/endPoints";
+import {baseURL} from "@/network/axios";
 
 function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [pastRequestData, setPastRequestData] = useState(null);
+  const [createRequestData, setCreateRequestData] = useState(null);
+
   const openModal = () => {
     setOpenDrawer(true);
   };
@@ -25,6 +31,21 @@ function ServiceRequets() {
   const closeModal = () => {
     setOpenDrawer(false);
   };
+
+  const getServiceRequestData = () => {
+    axios
+      .get(baseURL + endPoints.serviceRequestPage.getServiceRequestData(85757))
+      .then(res => {
+        setPastRequestData(res?.data?.data?.serviceRequestData);
+        setCreateRequestData(res?.data?.data?.paymentData);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    getServiceRequestData();
+  }, []);
+
   return (
     <div className={styles.main_container}>
       <div className={styles.doc_side_bar}>
@@ -55,7 +76,7 @@ function ServiceRequets() {
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
-                {/* <CreateNewRequest /> */}
+                <CreateNewRequest createRequestData={createRequestData} />
                 {/* <ServiceRequestType 
                   orderId={"121"}
                   title={"Service request type"}
@@ -71,7 +92,7 @@ function ServiceRequets() {
                   title="Requirement Fulfilled"
                   subTitle={"dynamic subtitle"}
                 /> */}
-                <Relocation />
+                {/* <Relocation /> */}
 
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
@@ -85,7 +106,7 @@ function ServiceRequets() {
           )}
         </div>
         <div>
-          <PastRequests />
+          <PastRequests pastRequestData={pastRequestData} />
         </div>
       </div>
     </div>

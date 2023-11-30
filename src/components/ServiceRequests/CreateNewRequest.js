@@ -1,25 +1,15 @@
+import React, {useEffect, useState} from "react";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
-import React from "react";
 import styles from "./style.module.css";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 
-function CreateNewRequest() {
-  const orderInfo = [
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-    {id: "01232", img: "img"},
-  ];
+function CreateNewRequest({createRequestData}) {
+  const [data, setData] = useState(createRequestData);
+
+  useEffect(() => {
+    setData(createRequestData);
+  }, []);
+
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -32,12 +22,47 @@ function CreateNewRequest() {
       </div>
 
       <div className={styles.info_wrapper}>
-        {orderInfo?.map((item, index) => {
+        {data?.map((item, index) => {
+          const parsedData = JSON.parse(item?.fc_paymentData);
+          const arr =
+            parsedData.length > 4 ? parsedData.slice(0, 3) : parsedData;
           return (
             <div key={index.toString()} className={styles.order_row}>
               <input type="radio" className={styles.radio_button} />
-              <img className={styles.product_img} src="" />
-              <label>Order no:#{item.id}</label>
+              <div className={styles.images_wraper}>
+                {/* {JSON.parse(item?.fc_paymentData)?.map((ele, i) => { */}
+                {arr?.map((ele, i) => {
+                  return (
+                    <div key={i.toString()}>
+                      {" "}
+                      <img
+                        src={`${
+                          productPageImagesBaseUrl +
+                          "thumb/" +
+                          ele.product_image?.split(",")[0]
+                        }`}
+                        alt={ele?.product_name}
+                        className={`${
+                          parsedData.length === 1
+                            ? "w-full h-full"
+                            : parsedData.length === 2
+                            ? `w-[48px] h-[48px] absolute ${
+                                i === 0 ? "top-0 left-0" : "bottom-0 right-0"
+                              }`
+                            : "w-[37px] h-[37px]"
+                        } rounded-lg object-cover`}
+                        loading="lazy"
+                      />
+                    </div>
+                  );
+                })}
+                {parsedData?.length > 4 && (
+                  <div className={styles.counter_box}>
+                    +{parsedData?.length - 3}
+                  </div>
+                )}
+              </div>
+              <label>Order no:#{item?.dealCodeNumber}</label>
             </div>
           );
         })}

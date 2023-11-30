@@ -39,7 +39,7 @@
   @apply flex w-full gap-2 items-center;
 }
 .radio_button {
-  @apply w-[25px] h-[25px] bg-5774AC cursor-pointer;
+  @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
   @apply flex w-full items-center fixed bottom-0 bg-white;
@@ -124,4 +124,10 @@
 }
 .plain_btn {
   @apply border-2 px-8 lg:h-[56px] h-[48px] items-center w-[393px] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8;
+}
+.counter_box {
+  @apply border border-71717A text-71717A text-12 flex justify-center items-center w-[37px] h-[37px] rounded-lg;
+}
+.images_wraper {
+  @apply flex gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
 }
