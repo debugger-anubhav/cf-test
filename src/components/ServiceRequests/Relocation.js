@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {BackIcon} from "@/assets/icon";
+import {
+  BackIcon,
+  CheckCircleIcon,
+  DeleteIcon,
+  ExclamationCircleFill,
+  ForwardArrowWithLine,
+  ReloadIcon,
+} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
@@ -9,6 +16,9 @@ import {baseURL} from "@/network/axios";
 import axios from "axios";
 import DropDown from "../Documentation/DropDown/DropDown";
 import {endPoints} from "@/network/endPoints";
+import uploading from "@/assets/common_icons/uploading.jpg";
+import Image from "next/image";
+import commonStyles from "@/components/Documentation/common.module.css";
 
 function Relocation() {
   const [docsData, setDocsData] = useState([]);
@@ -16,6 +26,60 @@ function Relocation() {
   const [selectedOptionPer, setSelectedOptionPer] = useState(
     "Select any current address proof",
   );
+
+  const [formData, setFormData] = useState({
+    addressProof: "",
+    currentAddressProof: "",
+  });
+  const [formErrors, setFormErrors] = useState({
+    addressProof: "",
+    currentAddressProof: "",
+  });
+  const allowedFileTypes = [
+    "image/jpeg",
+    "image/jpg",
+    "image/png",
+    "application/pdf",
+  ];
+  const handleFileInputChange = e => {
+    const file = e.target.files[0];
+    if (e.target.name === "addressProof") {
+      if (file) {
+        setFormData(prev => {
+          return {...prev, addressProof: file};
+        });
+        if (!allowedFileTypes.includes(file.type)) {
+          setFormErrors(prev => ({
+            ...prev,
+            addressProof: "Please select jpg,png, pdf or jpeg file",
+          }));
+        } else {
+          setFormErrors(prev => ({
+            ...prev,
+            addressProof: "",
+          }));
+        }
+      }
+    }
+    if (e.target.name === "currrentAdd") {
+      if (file) {
+        setFormData(prev => {
+          return {...prev, currentAddressProof: file};
+        });
+        if (!allowedFileTypes.includes(file.type)) {
+          setFormErrors(prev => ({
+            ...prev,
+            currentAddressProof: "Please select jpg,png, pdf or jpeg file",
+          }));
+        } else {
+          setFormErrors(prev => ({
+            ...prev,
+            currentAddressProof: "",
+          }));
+        }
+      }
+    }
+  };
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -195,19 +259,112 @@ function Relocation() {
                     optionsActive="md:block hidden"
                     placeholder="Select any current address proof"
                   />
-                  <Field
+
+                  <input
                     type="file"
-                    name="file"
-                    placeholder="Enter your city"
-                    className={formStyles.form_input}
+                    name="addressProof"
+                    id="addressProof"
+                    style={{display: "none"}}
+                    onChange={e => {
+                      handleFileInputChange(e);
+                    }}
                   />
-                  <ErrorMessage name="city">
-                    {msg =>
-                      formik.touched.city && (
-                        <p className={formStyles.error}>{msg} </p>
-                      )
-                    }
-                  </ErrorMessage>
+                </div>
+
+                <div className={`mt-4`}>
+                  <div className="flex items-center">
+                    <label
+                      htmlFor="currrentAdd"
+                      className={`${
+                        commonStyles.basicInputStyles
+                      } md:w-[232px] block mt-2 mb-8 ${
+                        formErrors.currentAddressProof &&
+                        "  !bg-[#FFF1F1] md:!bg-white"
+                      } ${
+                        !formErrors.currentAddressProof &&
+                        formData.currentAddressProof.name
+                          ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                          : "text-[#71717a] "
+                      }`}>
+                      <div className={`${commonStyles.flexICenter}`}>
+                        {formData?.currentAddressProof.name ? (
+                          <>
+                            {formErrors?.currentAddressProof ? (
+                              <ExclamationCircleFill
+                                color={"#D96060"}
+                                className={`${commonStyles.mdHiddemIcons}`}
+                              />
+                            ) : (
+                              <CheckCircleIcon
+                                color={"#2D9469"}
+                                className={`${commonStyles.mdHiddemIcons}`}
+                              />
+                            )}
+                          </>
+                        ) : (
+                          <Image
+                            src={uploading}
+                            alt="Uploading Icon"
+                            className={`${commonStyles.mdHiddenIB}`}
+                          />
+                        )}
+                        <Image
+                          src={uploading}
+                          alt="Uploading Icon"
+                          className={`${commonStyles.mdIBHidden}`}
+                        />
+                        <span className={`${styles.chooseFile} pl-2`}>
+                          {formData?.currentAddressProof?.name ?? "Choose file"}
+                        </span>
+                      </div>
+                      {!formErrors.currentAddressProof &&
+                      formData.currentAddressProof.name ? (
+                        <div className={`${commonStyles.correctFile}`}></div>
+                      ) : (
+                        <></>
+                      )}
+                    </label>
+                    {formErrors.currentAddressProof && (
+                      <>
+                        <ReloadIcon
+                          className={`${commonStyles.mdHiddemIconsML}`}
+                        />
+                        <span
+                          onClick={e => {
+                            e.stopPropagation();
+                            setFormData(prev => ({
+                              ...prev,
+                              currentAddressProof: "",
+                            }));
+                            setFormErrors(prev => ({
+                              ...prev,
+                              currentAddressProof: "",
+                            }));
+                          }}>
+                          <DeleteIcon
+                            className={`${commonStyles.mdHiddemIcons} ml-4`}
+                          />
+                        </span>
+                      </>
+                    )}
+                  </div>
+
+                  <input
+                    type="file"
+                    name="currrentAdd"
+                    id="currrentAdd"
+                    style={{display: "none"}}
+                    onChange={e => {
+                      handleFileInputChange(e);
+                    }}
+                    //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
+                  />
+                </div>
+
+                <div className={styles.bottom_row}>
+                  <button className={styles.proceed_btn}>
+                    Create request <ForwardArrowWithLine />
+                  </button>
                 </div>
               </div>
             </Form>

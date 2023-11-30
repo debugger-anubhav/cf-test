@@ -168,6 +168,7 @@ const KYCAddress = ({handleKycState, step}) => {
       };
     });
   };
+
   const validateForm = () => {
     if (!formData?.addressProof.name) {
       setFormErrors(prev => {
@@ -204,6 +205,7 @@ const KYCAddress = ({handleKycState, step}) => {
     }
     handleContactBlur();
   };
+
   const submitHandler = () => {
     validateForm();
     for (const key in formErrors) {
