@@ -28,9 +28,12 @@ function CreateNewRequest({createRequestData}) {
             parsedData.length > 4 ? parsedData.slice(0, 3) : parsedData;
           return (
             <div key={index.toString()} className={styles.order_row}>
-              <input type="radio" className={styles.radio_button} />
+              <input
+                type="radio"
+                className={styles.radio_button}
+                name="radioGroup"
+              />
               <div className={styles.images_wraper}>
-                {/* {JSON.parse(item?.fc_paymentData)?.map((ele, i) => { */}
                 {arr?.map((ele, i) => {
                   return (
                     <div key={i.toString()}>
