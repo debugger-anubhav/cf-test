@@ -163,9 +163,11 @@ const OrderDetails = ({setPart, data}) => {
               {drawerPerStepsCompleted[stepsCompleted]}
             </div>
           )}
-          <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
-            Need Help with your order?
-          </p>
+          {stepsCompleted > 0 && (
+            <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
+              Need Help with your order?
+            </p>
+          )}
         </div>
       </div>
 

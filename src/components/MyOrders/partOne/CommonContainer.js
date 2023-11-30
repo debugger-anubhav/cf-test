@@ -2,10 +2,11 @@ import {productPageImagesBaseUrl} from "@/constants/constant";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
-import React from "react";
+import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
+import ServiceDrawer from "../partTwo/ServiceDrawer/ServiceDrawer";
 
 export const statusToImageMap = {
   "Out for Delivery": "out-for-delivery.svg",
@@ -26,6 +27,12 @@ const CommonContainer = ({
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
+
+  const toggleServiceDrawer = () => {
+    setServiceDrawerOpen(!serviceDrawerOpen);
+  };
+
   return (
     <div>
       <div key={index} className={styles.box}>
@@ -63,9 +70,21 @@ const CommonContainer = ({
                 ? `Order no: #${item.dealCodeNumber}`
                 : `Subscription no: #${item.dealCodeNumber}`}
             </p>
-            <p className={styles.help_txt}>Need Help?</p>
+            {item.status !== "Pending" && (
+              <p onClick={toggleServiceDrawer} className={styles.help_txt}>
+                Need Help?
+              </p>
+            )}
           </div>
         </div>
+
+        {serviceDrawerOpen && (
+          <ServiceDrawer
+            open={serviceDrawerOpen}
+            toggleDrawer={toggleServiceDrawer}
+            orderId={item.dealCodeNumber}
+          />
+        )}
 
         <div
           className={styles.lower_box}

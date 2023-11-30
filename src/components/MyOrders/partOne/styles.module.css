@@ -50,7 +50,7 @@
   @apply text-71717A text-12 xl:text-14 tracking-0.24 xl:tracking-desc;
 }
 .help_txt {
-  @apply text-5774AC text-12 xl:text-14;
+  @apply text-5774AC text-12 xl:text-14 cursor-pointer;
 }
 .lower_box {
   @apply cursor-pointer p-4 flex justify-between items-center border border-EDEDEE border-t-transparent;
