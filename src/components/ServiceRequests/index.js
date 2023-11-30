@@ -113,7 +113,7 @@ function ServiceRequets() {
             </Drawer>
           )}
         </div>
-        {pastRequestData.length > 0 ? (
+        {pastRequestData?.length > 0 ? (
           <div>
             <PastRequests pastRequestData={pastRequestData} />
           </div>
