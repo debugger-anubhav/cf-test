@@ -1,0 +1,24 @@
+.right_div {
+  @apply w-full pb-6 md:rounded border border-DDDDDF xl:mt-10;
+}
+.sub_container {
+  @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 border-b border-b-EDEDEE items-center w-full overflow-scroll;
+}
+.menu_wrapper {
+  @apply flex gap-2 items-center pb-1 xl:pb-2 border-b cursor-pointer min-w-fit;
+}
+.menu_item {
+  @apply text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 w-max;
+}
+.warning_icon {
+  @apply w-5 h-5;
+}
+.subscrip_note_wrapper {
+  @apply w-full macbook:w-[829px] p-2 mt-8 flex gap-2 items-start self-stretch rounded-lg bg-[#f4f5f8];
+}
+.subscrip_note_txt {
+  @apply text-71717A text-12 tracking-0.24;
+}
+.subscrip_icon {
+  @apply min-w-[16px] h-[16px] text-71717A;
+}

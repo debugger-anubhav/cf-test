@@ -6,7 +6,7 @@ import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
-import ServiceDrawer from "../partTwo/ServiceDrawer/ServiceDrawer";
+import ServiceDrawer from "../orders/partTwo/ServiceDrawer/ServiceDrawer";
 
 export const statusToImageMap = {
   "Out for Delivery": "out-for-delivery.svg",
@@ -16,6 +16,8 @@ export const statusToImageMap = {
   Cancelled: "cancelled.svg",
   "Refund Processed": "returned.svg",
   "Payment Failed": "payment-failed.svg",
+  Active: "active-subscription.svg",
+  Inactive: "inactive-subscription.svg",
 };
 const CommonContainer = ({
   index,
@@ -58,7 +60,7 @@ const CommonContainer = ({
                   : item.zoho_sub_status}
               </p>
               <p className={styles.date}>
-                Ordered placed on{" "}
+                {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
                 {`${format(new Date(item.created), "d LLL, yyyy")}`}
               </p>
             </div>
@@ -68,7 +70,7 @@ const CommonContainer = ({
             <p className={styles.status}>
               {tab === 0
                 ? `Order no: #${item.dealCodeNumber}`
-                : `Subscription no: #${item.dealCodeNumber}`}
+                : `Subscription no: #${item.subscriptionNumber}`}
             </p>
             {item.status !== "Pending" && (
               <p onClick={toggleServiceDrawer} className={styles.help_txt}>
