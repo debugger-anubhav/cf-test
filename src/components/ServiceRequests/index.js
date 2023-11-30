@@ -18,8 +18,13 @@ import CreateNewRequest from "./CreateNewRequest";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 function ServiceRequets() {
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = userId || tempUserId;
   const [openDrawer, setOpenDrawer] = useState(false);
   const [pastRequestData, setPastRequestData] = useState(null);
   const [createRequestData, setCreateRequestData] = useState(null);
@@ -34,7 +39,10 @@ function ServiceRequets() {
 
   const getServiceRequestData = () => {
     axios
-      .get(baseURL + endPoints.serviceRequestPage.getServiceRequestData(85757))
+      .get(
+        baseURL +
+          endPoints.serviceRequestPage.getServiceRequestData(userIdToUse),
+      )
       .then(res => {
         setPastRequestData(res?.data?.data?.serviceRequestData);
         setCreateRequestData(res?.data?.data?.paymentData);
@@ -105,9 +113,11 @@ function ServiceRequets() {
             </Drawer>
           )}
         </div>
-        <div>
-          <PastRequests pastRequestData={pastRequestData} />
-        </div>
+        {pastRequestData.length > 0 ? (
+          <div>
+            <PastRequests pastRequestData={pastRequestData} />
+          </div>
+        ) : null}
       </div>
     </div>
   );
