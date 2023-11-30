@@ -171,4 +171,9 @@ export const endPoints = {
 
   cfCoinsGetTransactions: id =>
     `fc-wallet-transactions/getMyTransaction?userId=${id}`,
+
+  serviceRequestPage: {
+    getServiceRequestData: id =>
+      `fc-zoho-crms/getServiceRequestData?userId=${id}`,
+  },
 };
