@@ -2,10 +2,11 @@ import {productPageImagesBaseUrl} from "@/constants/constant";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
-import React from "react";
+import React, {useState} from "react";
 import {useDispatch} from "react-redux";
 import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
+import ServiceDrawer from "../orders/partTwo/ServiceDrawer/ServiceDrawer";
 
 export const statusToImageMap = {
   "Out for Delivery": "out-for-delivery.svg",
@@ -15,6 +16,8 @@ export const statusToImageMap = {
   Cancelled: "cancelled.svg",
   "Refund Processed": "returned.svg",
   "Payment Failed": "payment-failed.svg",
+  Active: "active-subscription.svg",
+  Inactive: "inactive-subscription.svg",
 };
 const CommonContainer = ({
   index,
@@ -26,6 +29,12 @@ const CommonContainer = ({
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
+
+  const toggleServiceDrawer = () => {
+    setServiceDrawerOpen(!serviceDrawerOpen);
+  };
+
   return (
     <div>
       <div key={index} className={styles.box}>
@@ -51,7 +60,7 @@ const CommonContainer = ({
                   : item.zoho_sub_status}
               </p>
               <p className={styles.date}>
-                Ordered placed on{" "}
+                {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
                 {`${format(new Date(item.created), "d LLL, yyyy")}`}
               </p>
             </div>
@@ -61,11 +70,23 @@ const CommonContainer = ({
             <p className={styles.status}>
               {tab === 0
                 ? `Order no: #${item.dealCodeNumber}`
-                : `Subscription no: #${item.dealCodeNumber}`}
+                : `Subscription no: #${item.subscriptionNumber}`}
             </p>
-            <p className={styles.help_txt}>Need Help?</p>
+            {item.status !== "Pending" && (
+              <p onClick={toggleServiceDrawer} className={styles.help_txt}>
+                Need Help?
+              </p>
+            )}
           </div>
         </div>
+
+        {serviceDrawerOpen && (
+          <ServiceDrawer
+            open={serviceDrawerOpen}
+            toggleDrawer={toggleServiceDrawer}
+            orderId={item.dealCodeNumber}
+          />
+        )}
 
         <div
           className={styles.lower_box}

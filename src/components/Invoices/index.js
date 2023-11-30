@@ -190,7 +190,7 @@ const InvoicePage = () => {
                           ? "Paid"
                           : "Payment Due"}
                       </TableCell>
-                      <TableCell className={`flex gap-4 ${styles.tableCell}`}>
+                      <TableCell className={`!flex gap-4 ${styles.tableCell}`}>
                         <button
                           onClick={() => handleDownload(row.invoice_url)}
                           className={styles.download_btn}>

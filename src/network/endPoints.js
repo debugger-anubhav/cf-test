@@ -175,5 +175,7 @@ export const endPoints = {
   serviceRequestPage: {
     getServiceRequestData: id =>
       `fc-zoho-crms/getServiceRequestData?userId=${id}`,
+    getServiceRequestOptions: dealCodeNumber =>
+      `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${dealCodeNumber}`,
   },
 };
