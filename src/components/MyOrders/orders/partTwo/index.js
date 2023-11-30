@@ -1,9 +1,7 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {BackIcon, IconLink} from "@/assets/icon";
-import {statusToImageMap} from "../partOne/CommonContainer";
 import {ImCheckmark} from "react-icons/im";
-import OrderSummary from "../../Common/OrderSummary";
 import {CircularProgressbar} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
@@ -13,6 +11,8 @@ import {useDispatch, useSelector} from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
 import ServiceDrawer from "./ServiceDrawer/ServiceDrawer";
+import OrderSummary from "@/components/Common/OrderSummary";
+import {statusToImageMap} from "../../common/CommonContainer";
 
 const OrderDetails = ({setPart, data}) => {
   const router = useRouter();
@@ -163,9 +163,11 @@ const OrderDetails = ({setPart, data}) => {
               {drawerPerStepsCompleted[stepsCompleted]}
             </div>
           )}
-          <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
-            Need Help with your order?
-          </p>
+          {stepsCompleted > 0 && (
+            <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
+              Need Help with your order?
+            </p>
+          )}
         </div>
       </div>
 

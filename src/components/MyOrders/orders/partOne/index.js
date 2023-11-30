@@ -1,22 +1,20 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "./styles.module.css";
-import {Close, IconLink, InformationIcon} from "@/assets/icon";
+import {IconLink} from "@/assets/icon";
 import {getLocalStorage} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
-import CommonContainer from "./CommonContainer";
+import CommonContainer from "../../common/CommonContainer";
+import Header from "../../common/Header";
 
-const AllOrders = ({setPart, getSingleOrderDetails}) => {
+const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   const containerRef = useRef(null);
-  const [tab, setTab] = useState(0);
   const [selectedMenuOrder, setSelectedMenuOrder] = useState(0);
-  const [selectedSubscriptionMenu, setSelectedSubscriptionMenu] = useState(0);
   const [ordersData, setOrdersData] = useState([]);
   const [visibleImages, setVisibleImages] = useState(5); // Initial number of visible images
   const [containerWidth, setContainerWidth] = useState(0);
-  const [showSubscripNote, setShowSubscripNote] = useState(true);
 
   const MenuList0 = [
     {label: "All orders"},
@@ -36,15 +34,6 @@ const AllOrders = ({setPart, getSingleOrderDetails}) => {
       icon: `${IconLink + "payment-failed-warning-normal.svg"}`,
     },
   ];
-
-  const MenuList1 = [
-    {label: "All Subscriptions"},
-    {label: "Active Subscriptions"},
-    {label: "Inactive Subscriptions"},
-  ];
-
-  const MenuList = tab === 0 ? MenuList0 : MenuList1;
-  const mapData = tab === 0 ? ordersData : [];
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,7 +56,7 @@ const AllOrders = ({setPart, getSingleOrderDetails}) => {
         console.log("9090");
         setContainerWidth(containerRef.current.offsetWidth);
       }
-    }, 500);
+    }, 1000);
   }, []);
 
   useEffect(() => {
@@ -103,46 +92,28 @@ const AllOrders = ({setPart, getSingleOrderDetails}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.right_div}>
-        <div className={styles.header_wrapper}>
-          <p
-            onClick={() => setTab(0)}
-            className={`${tab === 0 && styles.selected_tab} ${styles.header}`}>
-            My orders
-          </p>
-          <p
-            onClick={() => setTab(1)}
-            className={`${
-              tab === 1 ? styles.selected_tab : "!border-r-transparent"
-            } ${styles.header}`}>
-            My Subscriptions
-          </p>
-          <div className={`w-full !border-r-0 ${styles.header}`}></div>
-        </div>
+        <Header tab={tab} setTab={val => setTab(val)} />
 
         <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
-            {MenuList.map((item, index) => (
+            {MenuList0.map((item, index) => (
               <div
                 className={`${
-                  (tab === 0 ? selectedMenuOrder : selectedSubscriptionMenu) ===
-                  index
+                  selectedMenuOrder === index
                     ? "text-5774AC border-b-9A9AA2"
                     : "text-45454A border-b-transparent"
                 } ${styles.menu_wrapper}`}
                 key={index}
                 onClick={() => {
-                  tab === 0
-                    ? setSelectedMenuOrder(index)
-                    : setSelectedSubscriptionMenu(index);
-                  tab === 0 &&
-                    fetchOrdersDetails(index !== 0 ? item.value : null);
+                  setSelectedMenuOrder(index);
+                  fetchOrdersDetails(index !== 0 ? item.value : null);
                 }}>
                 <p
                   className={`
                    ${styles.menu_item}`}>
                   {item.label}
                 </p>
-                {tab === 0 && item.icon && (
+                {item.icon && (
                   <img
                     className={styles.warning_icon}
                     src={
@@ -154,25 +125,8 @@ const AllOrders = ({setPart, getSingleOrderDetails}) => {
             ))}
           </div>
 
-          {tab === 1 && showSubscripNote && (
-            <div className={styles.subscrip_note_wrapper}>
-              <InformationIcon className={`mt-0.5 ${styles.subscrip_icon}`} />
-              <p className={styles.subscrip_note_txt}>
-                Once you order, Your order is automatically made into a
-                subscription. You can extend your current subscription, cancel
-                or renew your old subscription.
-              </p>
-              <div
-                onClick={() => {
-                  setShowSubscripNote(false);
-                }}>
-                <Close className={`cursor-pointer ${styles.subscrip_icon}`} />
-              </div>
-            </div>
-          )}
-
           <div className={styles.orders_wrapper}>
-            {mapData?.map((item, index) => {
+            {ordersData?.map((item, index) => {
               console.log(visibleImages, "visibleee");
               return (
                 <div key={index}>
@@ -180,7 +134,7 @@ const AllOrders = ({setPart, getSingleOrderDetails}) => {
                     item={item}
                     index={index}
                     visibleImages={visibleImages}
-                    tab={tab}
+                    tab={0}
                     containerRef={containerRef}
                     getSingleOrderDetails={getSingleOrderDetails}
                   />
