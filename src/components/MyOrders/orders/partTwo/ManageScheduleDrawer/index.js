@@ -6,6 +6,7 @@ import {Drawer} from "@mui/material";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {format} from "date-fns";
 
 const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
@@ -60,10 +61,10 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       zoho_case_id: 74375,
     };
     axios
-      .get(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
+      .post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
         console.log(res, "yguywgy");
-        setScheduleDates(res?.data?.data?.data);
+        setScheduleDates(res?.data?.data?.data?.data);
       });
   };
 
@@ -114,7 +115,9 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
                   }`}></div>
               </div>
 
-              <p className={styles.date}>{item.date}</p>
+              <p className={styles.date}>
+                {format(new Date(item?.date), "do")}
+              </p>
               <p className={styles.day}>{item.day}</p>
             </div>
           ))}
