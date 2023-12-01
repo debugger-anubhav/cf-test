@@ -143,6 +143,7 @@ export const endPoints = {
       `fc-payments/getOrderStages?dealCodeNumber=${orderNumber}`,
     getServiceRequest: orderId =>
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${orderId}`,
+    getDeliverySlots: `fc-payments/getSlots`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",

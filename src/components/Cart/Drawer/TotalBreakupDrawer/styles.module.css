@@ -21,10 +21,10 @@
   @apply flex justify-between mt-4 items-start;
 }
 .dropdown_wrapper {
-  @apply mt-4 md:pl-4 pt-2 flex flex-col gap-2;
+  @apply mt-3 lg:mt-4 pl-2 md:pl-4 pt-2 flex flex-col gap-2;
 }
 .dropdown_row {
-  @apply flex gap-2 md:gap-4 items-start justify-between;
+  @apply flex gap-2 md:gap-4 items-start;
 }
 .prod_name {
   @apply text-71717A text-14 xl:text-16 leading-6;
