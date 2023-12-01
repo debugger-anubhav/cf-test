@@ -23,16 +23,9 @@ const ProfileSettings = () => {
   const [sentOtp, setSentOtp] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
-  // const [userId, setUserId] = useState(useridFromStorage);
   const [otpError, setOtpError] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-
-  // const formik1 = useFormikContext();
-
-  // useEffect(() => {
-  //   setUserId(useridFromStorage);
-  // }, [useridFromStorage]);
 
   useEffect(() => {
     fetchUserDetails();
