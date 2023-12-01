@@ -6,11 +6,9 @@ import PastRequests from "./PastRequests";
 import {Drawer} from "@mui/material";
 import CreateNewRequest from "./CreateNewRequest";
 // import Transferownership from "./Transferownership";
-// import CencelOrder from "./CencelOrder";
 // import Buy from "./Buy";
 // import Repair from "./Repair";
 // import ChangeBillCycle from "./ChangeBillCycle";
-// import SwapProduct from "./SwapProduct";
 // import ExtendTenure from "./ExtendTenure";
 // import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
 // import Relocation from "./Relocation";
@@ -83,12 +81,13 @@ function ServiceRequets() {
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
-                <CreateNewRequest createRequestData={createRequestData} />
-                {/* <CencelOrder /> */}
+                <CreateNewRequest
+                  createRequestData={createRequestData}
+                  setOpenDrawer={setOpenDrawer}
+                />
                 {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
                 {/* <ChangeBillCycle /> */}
-                {/* <SwapProduct /> */}
                 {/* <Transferownership /> */}
                 {/* <ExtendTenure /> */}
                 {/* <PickupReasonCommonScreen

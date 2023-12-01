@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {
   BackIcon,
@@ -8,29 +8,37 @@ import {
 } from "@/assets/icon";
 import {IoIosSwap} from "react-icons/io";
 import {BsSearch} from "react-icons/bs";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 
-function SwapProduct() {
-  const ProductInfo = [
-    {icon: "icon", title: "Jane Queen Size Bed"},
-    {icon: "icon", title: "Jane Queen Size Bed"},
-    {
-      icon: "icon",
-      title: "Alexa 6 Seater Dining Table with 4 Chairs and Bench",
-    },
-  ];
+function SwapProduct({prevScreen, data}) {
+  // const ProductInfo = [
+  //   {icon: "icon", title: "Jane Queen Size Bed"},
+  //   {icon: "icon", title: "Jane Queen Size Bed"},
+  //   {
+  //     icon: "icon",
+  //     title: "Alexa 6 Seater Dining Table with 4 Chairs and Bench",
+  //   },
+  // ];
   const [searchModalOpen, setsearchModalOpen] = useState(false);
   const [showSwapScreen, setShowSwapScreen] = useState(1);
+  const [ProductInfo, setProductInfo] = useState(data);
+
+  useEffect(() => {
+    setProductInfo(data);
+  }, [data]);
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => {
-            showSwapScreen === 2 && setShowSwapScreen(1);
+            if (showSwapScreen === 2) setShowSwapScreen(1);
+            else prevScreen(true);
           }}
           className={"cursor-pointer"}
         />
         Swap product
       </div>
+
       <div
         className={`${styles.swap_first_screen} ${
           showSwapScreen === 1 ? "flex flex-col" : "hidden"
@@ -50,10 +58,14 @@ function SwapProduct() {
                 <div className="flex gap-2 items-center">
                   <img
                     className={styles.product_imge_thambnil}
-                    src=""
-                    alt="icon"
+                    src={`${
+                      productPageImagesBaseUrl +
+                      "thumb/" +
+                      item.product_image?.split(",")[0]
+                    }`}
+                    alt={item.product_name}
                   />
-                  <p className={styles.request_type}>{item.title}</p>
+                  <p className={styles.request_type}>{item.product_name}</p>
                 </div>
                 <div className="flex">
                   <ForwardArrow />
