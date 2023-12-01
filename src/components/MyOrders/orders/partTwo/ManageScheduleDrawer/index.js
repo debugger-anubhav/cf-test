@@ -6,13 +6,17 @@ import {Drawer} from "@mui/material";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {format} from "date-fns";
+import {format, parse} from "date-fns";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [selectedDates, setSelectedDates] = useState([]);
-  const [prefTime, setPrefTime] = useState(true);
   const [scheduleDates, setScheduleDates] = useState();
+  const [currentDate, setCurrentDate] = useState();
+
+  const userId = decrypt(getLocalStorage("_ga"));
   const handleresize = e => {
     if (window.innerWidth < 768) {
       setIsBottomShareDrawer(true);
@@ -28,43 +32,24 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
     };
   }, []);
 
-  // const scheduleDates = [
-  //   {
-  //     date: "12th",
-  //     day: "Thu",
-  //   },
-  //   {
-  //     date: "13th",
-  //     day: "Fri",
-  //   },
-  //   {
-  //     date: "14th",
-  //     day: "Sat",
-  //   },
-  //   {
-  //     date: "15th",
-  //     day: "Sun",
-  //   },
-  //   {
-  //     date: "16th",
-  //     day: "Mon",
-  //   },
-  //   {
-  //     date: "17th",
-  //     day: "Tue",
-  //   },
-  // ];
+  let scheduledTime;
 
   const getDeliverySlots = () => {
     const body = {
-      deal_id: 994778442,
-      zoho_case_id: 74375,
+      deal_id: orderId,
+      user_id: userId,
     };
     axios
       .post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
         console.log(res, "yguywgy");
+        const inputTime = res?.data?.data?.time;
+        const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
+        scheduledTime = format(parsedTime, "h:mm a");
         setScheduleDates(res?.data?.data?.data?.data);
+        setCurrentDate(
+          format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
+        );
       });
   };
 
@@ -93,7 +78,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       <h1 className={styles.modal_head}>Manage delivery slot</h1>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>
-          Current scheduled date: 13rd Oct, 2023 at 9:00 am
+          Current scheduled date: {currentDate} at {scheduledTime}
         </p>
         <p className={styles.desc}>
           Select to change slot as per your preference
@@ -127,10 +112,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred time:</p>
         <div className={styles.pref_time_wrapper}>
-          <div
-            className={styles.outer_circle}
-            onClick={() => setPrefTime(!prefTime)}>
-            <div className={`${prefTime ? styles.inner_circle : ""}`}></div>
+          <div className={styles.outer_circle}>
+            <div className={styles.inner_circle}></div>
           </div>
           <p className={styles.time}>9:00 am to 5:00 pm</p>
         </div>

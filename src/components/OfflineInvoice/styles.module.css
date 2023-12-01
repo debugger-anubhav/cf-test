@@ -1,0 +1,7 @@
+.main_container {
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] font-Poppins pb-8 xl:pb-[80px];
+}
+
+.header {
+  @apply mb-6 xl:my-8 text-20 xl:text-24 font-medium leading-10 tracking-0.4 xl:tracking-0.48;
+}
