@@ -16,7 +16,8 @@ import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 
-function Transferownership() {
+function TransferOwnership({prevScreen}) {
+  console.log(prevScreen, "prevScreen");
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -25,7 +26,6 @@ function Transferownership() {
   const addressArray = data.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
-
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Full name is required")
@@ -113,7 +113,9 @@ function Transferownership() {
           <div className={styles.main_heading}>
             <BackIcon
               className={"cursor-pointer"}
-              onClick={() => setAddressDrawer(!addressDrawer)}
+              onClick={() => {
+                setAddressDrawer(!addressDrawer);
+              }}
             />
             Saved addresses
           </div>
@@ -141,7 +143,10 @@ function Transferownership() {
       ) : (
         <div>
           <div className={styles.main_heading}>
-            <BackIcon className={"cursor-pointer"} />
+            <BackIcon
+              className={"cursor-pointer"}
+              onClick={() => prevScreen(true)}
+            />
             Transfer ownership
           </div>
           <div className={styles.transferownership_wrapper}>
@@ -354,7 +359,9 @@ function Transferownership() {
                     <ForwardArrow />
                   </div>
                 </div>
-                <div className={` ${styles.request_info_div}`}>
+                <div
+                  className={` ${styles.request_info_div}`}
+                  onClick={() => setShowAddressFields(true)}>
                   <div className="flex gap-2 items-center">
                     <p className={styles.request_type}>
                       Select Add new saved address
@@ -373,4 +380,4 @@ function Transferownership() {
   );
 }
 
-export default Transferownership;
+export default TransferOwnership;

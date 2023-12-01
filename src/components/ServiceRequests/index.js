@@ -5,8 +5,6 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 import {Drawer} from "@mui/material";
 import CreateNewRequest from "./CreateNewRequest";
-// import Transferownership from "./Transferownership";
-// import Buy from "./Buy";
 // import Repair from "./Repair";
 // import ChangeBillCycle from "./ChangeBillCycle";
 // import ExtendTenure from "./ExtendTenure";
@@ -85,10 +83,8 @@ function ServiceRequets() {
                   createRequestData={createRequestData}
                   setOpenDrawer={setOpenDrawer}
                 />
-                {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
                 {/* <ChangeBillCycle /> */}
-                {/* <Transferownership /> */}
                 {/* <ExtendTenure /> */}
                 {/* <PickupReasonCommonScreen
                   title="Requirement Fulfilled"
