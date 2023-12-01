@@ -9,6 +9,7 @@ import SwapProduct from "./SwapProduct";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import Buy from "./Buy";
+import TransferOwnership from "./TransferOwnership";
 
 function ServiceRequestType({
   orderId,
@@ -111,6 +112,9 @@ function ServiceRequestType({
           )}
           {selectedType === "Upgrade" && (
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
+          )}
+          {selectedType === "Transfer Ownership" && (
+            <TransferOwnership prevScreen={setCurrentScreen} />
           )}
           {selectedType === "Buy" && (
             <Buy
