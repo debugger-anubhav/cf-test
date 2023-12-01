@@ -33,7 +33,7 @@ export const customStylesForSelect = {
   }),
 };
 
-function CencelOrder() {
+function CencelOrder({prevScreen}) {
   const cencellationOptions = [
     {value: "1", label: "Wrong items selected"},
     {value: "2", label: "Late delivery"},
@@ -52,7 +52,10 @@ function CencelOrder() {
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon
+          onClick={() => prevScreen(true)}
+          className={"cursor-pointer"}
+        />
         Cencel order
       </div>
       <div className={styles.cancellation_info}>
@@ -69,7 +72,10 @@ function CencelOrder() {
           placeholder="Please share any specific instructions or provide feedback."
           className={styles.form_input_textarea}
         />
-        <button className={`${styles.proceed_btn} !w-fit`}>
+        <button
+          className={`${styles.proceed_btn}  !w-fit ${
+            selected === null ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+          }`}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>
