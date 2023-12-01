@@ -46,7 +46,6 @@ function CreateNewRequest({createRequestData}) {
                     type="radio"
                     className={styles.radio_button}
                     name="radioGroup"
-                    checked={selectedOption === index}
                     onChange={() => setSelectedOption(index)}
                   />
                   <div className={styles.images_wraper}>
@@ -90,8 +89,13 @@ function CreateNewRequest({createRequestData}) {
           </div>
           <div className={styles.bottom_row}>
             <button
-              className={styles.proceed_btn}
-              onClick={() => handleProceed()}>
+              className={`${styles.proceed_btn} ${
+                selectedOption === null
+                  ? "!bg-[#FFDF85] !cursor-not-allowed"
+                  : ``
+              }`}
+              onClick={() => handleProceed()}
+              disabled={selectedOption === null}>
               Proceed <ForwardArrowWithLine />
             </button>
           </div>

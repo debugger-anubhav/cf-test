@@ -5,7 +5,6 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 import {Drawer} from "@mui/material";
 import CreateNewRequest from "./CreateNewRequest";
-// import ServiceRequestType from "./ServiceRequestType";
 // import Transferownership from "./Transferownership";
 // import CencelOrder from "./CencelOrder";
 // import Buy from "./Buy";
@@ -85,10 +84,6 @@ function ServiceRequets() {
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full gap-8">
                 <CreateNewRequest createRequestData={createRequestData} />
-                {/* <ServiceRequestType 
-                  orderId={"121"}
-                  title={"Service request type"}
-                /> */}
                 {/* <CencelOrder /> */}
                 {/* <Buy heading="Buy"/> */}
                 {/* <Repair /> */}
