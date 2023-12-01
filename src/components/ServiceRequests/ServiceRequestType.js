@@ -8,6 +8,7 @@ import CancelOrder from "./CancelOrder";
 import SwapProduct from "./SwapProduct";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import Buy from "./Buy";
 
 function ServiceRequestType({
   orderId,
@@ -110,6 +111,13 @@ function ServiceRequestType({
           )}
           {selectedType === "Upgrade" && (
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
+          )}
+          {selectedType === "Buy" && (
+            <Buy
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              heading="Buy"
+            />
           )}
         </>
       )}

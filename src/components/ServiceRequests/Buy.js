@@ -1,16 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 
-function Buy({heading}) {
+function Buy({heading, prevScreen, data}) {
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
+  const [selected, setSelected] = useState(false);
+
+  const handleChangeCheckbox = () => {
+    setSelected(event.target.checked);
+  };
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon onClick={() => prevScreen(true)} />
         {heading}
       </div>
+
       <div className={styles.buy_info}>
         {heading === "Buy" && (
           <p className={styles.desc}>
@@ -21,11 +28,19 @@ function Buy({heading}) {
           Select products to <span className="lowercase">{heading}</span>
         </p>
         <div className="product_to_buy_wrapper">
-          {[1, 2, 3]?.map((item, index) => (
+          {data?.map((item, index) => (
             <div key={index.toString()} className={"buy_checkbox_info"}>
-              <Checkbox {...label} />
-              <img src="" className={styles.product_imge_thambnil} />
-              <p className={styles.desc}>Jane Queen Size Bed</p>
+              <Checkbox {...label} onChange={handleChangeCheckbox} />
+              <img
+                className={styles.product_imge_thambnil}
+                src={`${
+                  productPageImagesBaseUrl +
+                  "thumb/" +
+                  item?.product_image?.split(",")[0]
+                }`}
+                alt={item?.product_name}
+              />
+              <p className={styles.desc}>{item?.product_name}</p>
             </div>
           ))}
         </div>
@@ -38,8 +53,12 @@ function Buy({heading}) {
             className={styles.form_input_textarea}
           />
         </div>
+
         <div className={styles.bottom_row}>
-          <button className={styles.proceed_btn}>
+          <button
+            className={`${styles.proceed_btn} ${
+              !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+            }`}>
             Create request <ForwardArrowWithLine />
           </button>
         </div>
