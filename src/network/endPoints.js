@@ -177,5 +177,7 @@ export const endPoints = {
       `fc-zoho-crms/getServiceRequestData?userId=${id}`,
     getServiceRequestOptions: dealCodeNumber =>
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${dealCodeNumber}`,
+    getProductLists: (dealCodeNumber, userId) =>
+      `fc-payments/getProductLists?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
   },
 };

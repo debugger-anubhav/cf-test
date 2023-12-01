@@ -4,7 +4,7 @@ import styles from "./style.module.css";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 import ServiceRequestType from "./ServiceRequestType";
 
-function CreateNewRequest({createRequestData}) {
+function CreateNewRequest({createRequestData, setOpenDrawer}) {
   const [data, setData] = useState(createRequestData);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showNextComponent, setShowNextComponent] = useState(false);
@@ -23,11 +23,15 @@ function CreateNewRequest({createRequestData}) {
         <ServiceRequestType
           orderId={data[selectedOption]?.dealCodeNumber}
           title={"Service request type"}
+          setShowNextComponent={setShowNextComponent}
         />
       ) : (
         <div className={styles.content_wrapper}>
           <div className={styles.main_heading}>
-            <BackIcon />
+            <BackIcon
+              onClick={() => setOpenDrawer(false)}
+              className={"cursor-pointer"}
+            />
             Create a new request
           </div>
 
@@ -46,8 +50,8 @@ function CreateNewRequest({createRequestData}) {
                     type="radio"
                     className={styles.radio_button}
                     name="radioGroup"
-                    checked={selectedOption === index}
                     onChange={() => setSelectedOption(index)}
+                    checked={selectedOption === index}
                   />
                   <div className={styles.images_wraper}>
                     {arr?.map((ele, i) => {
@@ -90,8 +94,13 @@ function CreateNewRequest({createRequestData}) {
           </div>
           <div className={styles.bottom_row}>
             <button
-              className={styles.proceed_btn}
-              onClick={() => handleProceed()}>
+              className={`${styles.proceed_btn} ${
+                selectedOption === null
+                  ? "!bg-[#FFDF85] !cursor-not-allowed"
+                  : ``
+              }`}
+              onClick={() => handleProceed()}
+              disabled={selectedOption === null}>
               Proceed <ForwardArrowWithLine />
             </button>
           </div>
