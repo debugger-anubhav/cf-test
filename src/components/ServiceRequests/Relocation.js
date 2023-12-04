@@ -20,7 +20,7 @@ import uploading from "@/assets/common_icons/uploading.jpg";
 import Image from "next/image";
 import commonStyles from "@/components/Documentation/common.module.css";
 
-function Relocation() {
+function Relocation({prevScreen}) {
   const [docsData, setDocsData] = useState([]);
   const [perAddModal, setPerAddModal] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
@@ -139,7 +139,10 @@ function Relocation() {
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon
+          onClick={() => prevScreen(true)}
+          className={"cursor-pointer"}
+        />
         Relocation
       </div>
       <div className={styles.buy_info}>

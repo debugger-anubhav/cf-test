@@ -14,7 +14,10 @@ function Buy({heading, prevScreen, data}) {
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon onClick={() => prevScreen(true)} />
+        <BackIcon
+          onClick={() => prevScreen(true)}
+          className={"cursor-pointer"}
+        />
         {heading}
       </div>
 
