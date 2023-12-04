@@ -86,6 +86,7 @@ function Buy({heading, prevScreen, data}) {
               </>
             ) : (
               <div className={styles.bottom_row}>
+                <div className="w-full h-1 bg-222"></div>
                 <button
                   className={`${styles.proceed_btn} ${
                     !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``

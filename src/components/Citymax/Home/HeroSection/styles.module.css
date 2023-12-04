@@ -1,0 +1,54 @@
+.main {
+  @apply pt-14 pb-10;
+  background: linear-gradient(
+    180deg,
+    #d0e2ee 0%,
+    #f7f7f8 25.09%,
+    #f7f7f8 51.29%,
+    #f7f7f8 86.46%,
+    #fff 100%
+  );
+}
+.header {
+  @apply text-45454A text-[56px] font-bold leading-[64px] tracking-[-1.12px] text-center;
+}
+.max {
+  @apply text-5774AC;
+}
+.tag_line {
+  @apply text-center text-71717A text-16 tracking-0.3 mt-2 font-medium;
+}
+.center {
+  @apply flex justify-center;
+}
+.monthly_toggler {
+  @apply mt-16 p-1 flex items-center justify-between bg-[#747474] rounded-xl w-fit h-[44px];
+}
+.pref_mode_text {
+  @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
+}
+.card_wrapper {
+  @apply flex-wrap mt-12 gap-8;
+}
+.card {
+  @apply p-6 rounded-lg border border-EDEDEE bg-[#fffefe] cursor-pointer;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+}
+.card_head {
+  @apply text-45454A font-medium tracking-0.48 text-24;
+}
+.card_desc {
+  @apply text-71717A text-16 font-medium leading-5;
+}
+.card_offer {
+  @apply mt-6 text-71717A text-16 tracking-0.3;
+}
+.card_price {
+  @apply text-222 text-24 font-medium tracking-0.48 mt-6;
+}
+.rupeeIcon {
+  @apply font-Inter;
+}
+.btn {
+  @apply mt-6 rounded-lg bg-F6B704 px-8 h-14 w-full flex justify-center items-center text-222 text-16 font-medium;
+}
