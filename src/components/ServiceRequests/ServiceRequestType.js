@@ -146,6 +146,13 @@ function ServiceRequestType({
           {selectedType === "Relocation" && (
             <Relocation prevScreen={setCurrentScreen} />
           )}
+          {selectedType === "Request Order Pickup" && (
+            <Buy
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              heading="Request order pickup"
+            />
+          )}
         </>
       )}
     </>
