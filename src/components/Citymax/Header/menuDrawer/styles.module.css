@@ -1,0 +1,31 @@
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none !overflow-y-visible md:!overflow-y-scroll;
+  transition-timing-function: ease-in;
+}
+.close_icon {
+  @apply md:mr-8 fixed left-4 md:left-8 w-5 h-5 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-[0px];
+}
+.drawer_wrapper {
+  @apply py-6 md:py-[72px] px-4 md:pr-12 md:pl-[84px] font-Poppins w-full md:w-[400px] max-h-[90vh] md:max-h-none md:h-full relative;
+}
+.logo {
+  @apply w-[101px] h-6;
+}
+.content_wrapper {
+  @apply mt-8 flex flex-col gap-8 h-full overflow-scroll;
+}
+.map_wrapper {
+  @apply flex flex-col gap-4;
+}
+.map_item {
+  @apply text-14 lg:text-16 text-45454A tracking-desc lg:tracking-0.3 font-medium;
+}
+.line {
+  @apply bg-EDEDEE w-full h-[1px];
+}
+.button {
+  @apply rounded-lg text-16 font-medium text-71717A tracking-0.3 border-2 border-71717A px-8 w-full h-14 py-2 flex justify-center items-center gap-[10px];
+}
+.home_icon {
+  @apply w-6 h-5 text-222;
+}
