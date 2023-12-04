@@ -10,6 +10,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import Buy from "./Buy";
 import TransferOwnership from "./TransferOwnership";
+import Repair from "./Repair";
 
 function ServiceRequestType({
   orderId,
@@ -122,6 +123,9 @@ function ServiceRequestType({
               data={productDetail}
               heading="Buy"
             />
+          )}
+          {selectedType === "Repair" && (
+            <Repair prevScreen={setCurrentScreen} data={productDetail} />
           )}
         </>
       )}

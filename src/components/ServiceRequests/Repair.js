@@ -2,10 +2,10 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
-import {customStylesForSelect} from "./CencelOrder";
+import {customStylesForSelect} from "./CancelOrder";
 import Select from "react-select";
 
-function Repair() {
+function Repair({prevScreen, data}) {
   const [istoggled, setIstoggled] = useState(false);
   const [toggleIndex, setToggleIndex] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -20,18 +20,20 @@ function Repair() {
 
   const handleChange = selectedOption => {
     setSelected(selectedOption);
-    console.log(selected, toggleIndex);
   };
 
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon
+          onClick={() => prevScreen(true)}
+          className={"cursor-pointer"}
+        />
         Repair
       </div>
       <div className={styles.buy_info}>
         <p className={styles.desc}>Select products to repair</p>
-        {[1, 2, 3]?.map((item, index) => (
+        {data?.map((item, index) => (
           <div className={styles.repair_info} key={index.toString()}>
             <div className="flex gap-2 items-center">
               {index === toggleIndex && istoggled ? (
@@ -41,7 +43,9 @@ function Repair() {
                   onClick={() => {
                     setIstoggled(!istoggled);
                     setToggleIndex(index);
+                    setSelected(null);
                   }}
+                  className="cursor-pointer"
                 />
               ) : (
                 <ToggleOff
@@ -50,10 +54,12 @@ function Repair() {
                   onClick={() => {
                     setIstoggled(!istoggled);
                     setToggleIndex(index);
+                    setSelected(null);
                   }}
+                  className="cursor-pointer"
                 />
               )}
-              <p className={styles.desc}>Jane Queen Size Bed</p>
+              <p className={styles.desc}>{item?.product_name}</p>
             </div>
             {index === toggleIndex && istoggled && (
               <div>
@@ -79,7 +85,13 @@ function Repair() {
           </div>
         ))}
         <div className={styles.bottom_row}>
-          <button className={styles.proceed_btn}>
+          <button
+            className={`${styles.proceed_btn}  ${
+              selected === null || !istoggled
+                ? "!bg-[#FFDF85] !cursor-not-allowed"
+                : ``
+            }`}
+            disabled={selected === null}>
             Create request <ForwardArrowWithLine />
           </button>
         </div>
