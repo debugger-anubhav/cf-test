@@ -3,13 +3,16 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
 
-function ChangeBillCycle() {
+function ChangeBillCycle({prevScreen}) {
   const [istoggled, setIstoggled] = useState(false);
 
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon
+          onClick={() => prevScreen(true)}
+          className={"cursor-pointer"}
+        />
         Change bill cycle
       </div>
       <div className={styles.buy_info}>
@@ -19,6 +22,7 @@ function ChangeBillCycle() {
               color={"#5774AC"}
               size={28}
               onClick={() => setIstoggled(!istoggled)}
+              className="cursor-pointer"
             />
           ) : (
             <ToggleOff
@@ -27,6 +31,7 @@ function ChangeBillCycle() {
               onClick={() => {
                 setIstoggled(!istoggled);
               }}
+              className="cursor-pointer"
             />
           )}
           <p className={styles.desc}>Align Bill Cycle to 1st day of Month</p>
@@ -39,7 +44,10 @@ function ChangeBillCycle() {
             className={styles.form_input_textarea}
           />
         </div>
-        <button className={`${styles.proceed_btn} !w-fit`}>
+        <button
+          className={`${styles.proceed_btn} ${
+            !istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+          } !w-fit`}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

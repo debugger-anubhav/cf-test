@@ -2,11 +2,14 @@ import React from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 
-function PickupReasonCommonScreen({title, subTitle}) {
+function PickupReasonCommonScreen({title, subTitle, setCurrentScreen}) {
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
-        <BackIcon />
+        <BackIcon
+          onClick={() => setCurrentScreen(1)}
+          className={"cursor-pointer"}
+        />
         {title}
       </div>
       <div className={styles.buy_info}>
@@ -23,7 +26,10 @@ function PickupReasonCommonScreen({title, subTitle}) {
         </div>
       )}
 
-      <button className={styles.proceed_btn}>
+      <button
+        className={`${styles.proceed_btn} ${
+          title !== "Other" && title !== "Requirement Fulfilled" ? "!mt-0" : ""
+        }`}>
         Repair product(s)
         <ForwardArrowWithLine />
       </button>

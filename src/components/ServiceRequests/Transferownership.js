@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -17,7 +17,6 @@ import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 
 function TransferOwnership({prevScreen}) {
-  console.log(prevScreen, "prevScreen");
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -100,11 +99,13 @@ function TransferOwnership({prevScreen}) {
     setAddressDrawer(!addressDrawer);
   };
 
-  const handleSubmit = async values => {};
+  const handleSubmit = async values => {
+    console.log(values, "ppppppp");
+  };
 
-  useEffect(() => {
-    console.log(primaryAddress, "primaryAddress");
-  }, [primaryAddress]);
+  // useEffect(() => {
+  //   console.log(primaryAddress, "primaryAddress");
+  // }, [primaryAddress]);
 
   return (
     <div className={`${styles.content_wrapper} flex-row`}>
@@ -334,7 +335,14 @@ function TransferOwnership({prevScreen}) {
                     )}
 
                     <div className={styles.bottom_row}>
-                      <button className={styles.proceed_btn} type="submit">
+                      <button
+                        className={`${styles.proceed_btn} ${
+                          !formik.isValid
+                            ? "!bg-[#FFDF85] !cursor-not-allowed"
+                            : ``
+                        }`}
+                        type="submit"
+                        disabled={!formik.isValid || formik.isSubmitting}>
                         Create request <ForwardArrowWithLine />
                       </button>
                     </div>
