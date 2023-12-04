@@ -48,8 +48,11 @@ export const endPoints = {
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
 
-  searchKey: (key = "", cityId = "", sort = "") =>
-    `fc-products/search?searchKey=${key}&&cityId=${cityId}&sortKey=${sort}`,
+  searchKey: (key = "", cityId = "", sort = "") => {
+    console.log("key:", key);
+    console.log("cityId:", cityId);
+    return `fc-products/search?searchKey=${key.trim()}&&cityId=${cityId}&sortKey=${sort}`;
+  },
 
   getCategoryIdBySeoUrl: (key = "") =>
     `fc-categories/getCategoryIdBySeoUrl?seoUrl=${key}`,
