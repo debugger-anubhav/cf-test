@@ -365,7 +365,10 @@ function Relocation({prevScreen}) {
                 </div>
 
                 <div className={styles.bottom_row}>
-                  <button className={styles.proceed_btn}>
+                  <button
+                    className={`${styles.proceed_btn} ${
+                      formik.isValid ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+                    }`}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>
