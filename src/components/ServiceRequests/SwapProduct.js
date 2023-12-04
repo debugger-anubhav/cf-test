@@ -8,12 +8,16 @@ import {
 } from "@/assets/icon";
 import {IoIosSwap} from "react-icons/io";
 import {BsSearch} from "react-icons/bs";
-import {productPageImagesBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 function SwapProduct({prevScreen, data}) {
   const [showSwapScreen, setShowSwapScreen] = useState(1);
   const [ProductInfo, setProductInfo] = useState(data);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProductForSwap, setSelectedProductForSwap] = useState(null);
 
   useEffect(() => {
     setProductInfo(data);
@@ -71,15 +75,20 @@ function SwapProduct({prevScreen, data}) {
           </div>
         </div>
       ) : (
-        <SecondScreen data={selectedProduct} />
+        <SecondScreen
+          data={selectedProduct}
+          setSelectedProductForSwap={setSelectedProductForSwap}
+        />
       )}
 
       <div className={styles.bottom_row}>
         <button
           className={`${styles.proceed_btn} ${
-            showSwapScreen === 1 ? "!bg-[#FFDF85] !cursor-not-allowed" : ""
+            showSwapScreen === 1 || selectedProductForSwap === null
+              ? "!bg-[#FFDF85] !cursor-not-allowed"
+              : ""
           }`}
-          disabled={showSwapScreen === 1}>
+          disabled={showSwapScreen === 1 || selectedProductForSwap === null}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>
@@ -89,8 +98,21 @@ function SwapProduct({prevScreen, data}) {
 
 export default SwapProduct;
 
-const SecondScreen = ({data}) => {
+const SecondScreen = ({data, setSelectedProductForSwap}) => {
+  const city = getLocalStorage("cityId");
   const [searchModalOpen, setsearchModalOpen] = useState(false);
+  const [inputKey, setInputKey] = useState("");
+  const [productData, setProductData] = useState(null);
+  const searchApi = () => {
+    axios
+      .get(baseURL + endPoints.searchKey(inputKey, city))
+      .then(res => setProductData(res?.data?.data?.products))
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    searchApi();
+  }, [inputKey]);
   return (
     <div className={`${styles.swap_second_screen} flex flex-col`}>
       <div className={styles.selected_product_info_wrapper}>
@@ -118,20 +140,37 @@ const SecondScreen = ({data}) => {
             className={styles.search_input}
             type="text"
             placeholder="Search for Furniture, Appliances, etc"
-            onClick={() => setsearchModalOpen(true)}
+            // onClick={() => setsearchModalOpen(true)}
+            onChange={e => {
+              setsearchModalOpen(true);
+              setInputKey(e.target.value);
+            }}
+            value={inputKey}
           />
           <DownArrowUnfilled />
         </div>
         {searchModalOpen && (
           <div
-            className={`${styles.search_modal} absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg `}>
-            {[1, 2, 3, 4]?.map((item, index) => (
+            className={`${styles.search_modal} absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg max-h-[250px] h-[250px] overflow-y-scroll`}>
+            {productData?.map((item, index) => (
               <div
                 className={"flex w-full gap-3 cursor-pointer items-center"}
                 key={index.toString()}
-                onClick={() => setsearchModalOpen(false)}>
-                <img src="" className={styles.product_imge_thambnil} />
-                <p className={styles.desc}>Jade Queen Size Bed</p>
+                onClick={() => {
+                  setInputKey(item?.product_name);
+                  setSelectedProductForSwap(productData[index]);
+                  setsearchModalOpen(false);
+                }}>
+                <img
+                  src={`${
+                    productPageImagesBaseUrl +
+                    "thumb/" +
+                    item?.image?.split(",")[0]
+                  }`}
+                  className={styles.product_imge_thambnil}
+                  alt={item?.seourl}
+                />
+                <p className={styles.desc}>{item?.product_name}</p>
               </div>
             ))}
           </div>
