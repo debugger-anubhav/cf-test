@@ -11,8 +11,9 @@ import {useDispatch} from "react-redux";
 import {getBillDetails} from "@/store/Slices";
 import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
+import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
 
-const OrderSummary = ({orderNumber, isDelivered}) => {
+const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
@@ -106,7 +107,10 @@ const OrderSummary = ({orderNumber, isDelivered}) => {
       </div>
 
       <div>
-        <div className={styles.box}>
+        <div
+          className={`${
+            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!min-w-max"
+          } ${styles.box}`}>
           <p className={styles.box_header}>Address:</p>
           <div className={styles.name_div}>
             <PersonIcon color={"#2D9469"} className={styles.person_icon} />
@@ -123,23 +127,34 @@ const OrderSummary = ({orderNumber, isDelivered}) => {
         <div className="h-4 xl:h-6"></div>
 
         <div
-          className={`hover:border-5774AC cursor-pointer ${styles.box}`}
-          onClick={() => setBreakupDrawer(true)}>
+          className={`hover:border-5774AC cursor-pointer ${
+            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!min-w-max"
+          } ${styles.box}`}
+          onClick={() => {
+            isOfflineInvoice ? console.log("not") : setBreakupDrawer(true);
+          }}>
           <p className={styles.box_header}>Payment details:</p>
-          <div className={styles.amount_div}>
-            <p className={`!text-71717A ${styles.saved_name}`}>
-              Paid using {data?.bill?.mode}
-            </p>
-            <p className={styles.amount}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {data?.bill?.finalTotalPrice?.toFixed(2)}
-            </p>
-          </div>
-          <div className={styles.flex_div}>
-            <p className={styles.view_breakup_txt}>View cart breakup</p>
-            <ForwardArrowWithLine className={styles.forward_icon} />
-          </div>
+          {isOfflineInvoice ? (
+            <BillContent isOfflineInvoice={isOfflineInvoice} />
+          ) : (
+            <>
+              <div className={styles.amount_div}>
+                <p className={`!text-71717A ${styles.saved_name}`}>
+                  Paid using {data?.bill?.mode}
+                </p>
+                <p className={styles.amount}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {data?.bill?.finalTotalPrice?.toFixed(2)}
+                </p>
+              </div>
+              <div className={styles.flex_div}>
+                <p className={styles.view_breakup_txt}>View cart breakup</p>
+                <ForwardArrowWithLine className={styles.forward_icon} />
+              </div>
+            </>
+          )}
         </div>
+
         {breakupDrawer && (
           <TotalBreakup
             toggleDrawer={toggleDrawerBreakup}

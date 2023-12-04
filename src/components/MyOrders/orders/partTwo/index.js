@@ -172,7 +172,11 @@ const OrderDetails = ({setPart, data}) => {
       </div>
 
       {isModalopen && (
-        <ManageSchedule isModalOpen={isModalopen} closeModal={toggleModal} />
+        <ManageSchedule
+          isModalOpen={isModalopen}
+          closeModal={toggleModal}
+          orderId={data?.dealCodeNumber}
+        />
       )}
 
       {serviceDrawerOpen && (
