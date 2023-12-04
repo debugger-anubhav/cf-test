@@ -10,6 +10,10 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import Buy from "./Buy";
 import TransferOwnership from "./TransferOwnership";
+import Repair from "./Repair";
+import ExtendTenure from "./ExtendTenure";
+import ChangeBillCycle from "./ChangeBillCycle";
+import Relocation from "./Relocation";
 
 function ServiceRequestType({
   orderId,
@@ -121,6 +125,32 @@ function ServiceRequestType({
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Buy"
+            />
+          )}
+          {selectedType === "Installation" && (
+            <Buy
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              heading="Installation"
+            />
+          )}
+          {selectedType === "Repair" && (
+            <Repair prevScreen={setCurrentScreen} data={productDetail} />
+          )}
+          {selectedType === "Extend Tenure" && (
+            <ExtendTenure prevScreen={setCurrentScreen} />
+          )}
+          {selectedType === "Change Bill Cycle" && (
+            <ChangeBillCycle prevScreen={setCurrentScreen} />
+          )}
+          {selectedType === "Relocation" && (
+            <Relocation prevScreen={setCurrentScreen} />
+          )}
+          {selectedType === "Request Order Pickup" && (
+            <Buy
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              heading="Request order pickup"
             />
           )}
         </>
