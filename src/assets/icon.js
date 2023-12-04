@@ -4,6 +4,7 @@ import {
   AiOutlineArrowRight,
   AiOutlineDelete,
   AiFillCheckCircle,
+  AiFillHome,
 } from "react-icons/ai";
 import {FiChevronDown, FiChevronUp, FiEdit} from "react-icons/fi";
 import {
@@ -373,4 +374,8 @@ export const ToggleOn = ({size, color, className, onClick}) => (
     className={className}
     onClick={onClick}
   />
+);
+
+export const Home = ({size, color, className}) => (
+  <AiFillHome size={size} color={color} className={className} />
 );
