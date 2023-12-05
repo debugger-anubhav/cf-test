@@ -82,6 +82,7 @@ function SwapProduct({prevScreen, data}) {
       )}
 
       <div className={styles.bottom_row}>
+        <div className={styles.bottom_line}></div>
         <button
           className={`${styles.proceed_btn} ${
             showSwapScreen === 1 || selectedProductForSwap === null

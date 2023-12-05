@@ -5,11 +5,6 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 import {Drawer} from "@mui/material";
 import CreateNewRequest from "./CreateNewRequest";
-// import Repair from "./Repair";
-// import ChangeBillCycle from "./ChangeBillCycle";
-// import ExtendTenure from "./ExtendTenure";
-// import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
-// import Relocation from "./Relocation";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
@@ -83,15 +78,6 @@ function ServiceRequets() {
                   createRequestData={createRequestData}
                   setOpenDrawer={setOpenDrawer}
                 />
-                {/* <Repair /> */}
-                {/* <ChangeBillCycle /> */}
-                {/* <ExtendTenure /> */}
-                {/* <PickupReasonCommonScreen
-                  title="Requirement Fulfilled"
-                  subTitle={"dynamic subtitle"}
-                /> */}
-                {/* <Relocation /> */}
-
                 <div className={styles.close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
