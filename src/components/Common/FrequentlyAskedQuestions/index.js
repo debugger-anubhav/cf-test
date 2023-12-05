@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import SingleQuestion from "./singleQuestion";
-import {ForwardArrow} from "@/assets/icon";
+import {ForwardArrow, DownArrowUnfilled} from "@/assets/icon";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
@@ -10,9 +10,14 @@ import Link from "next/link";
 
 // h2 h3 p
 
-const FrequentlyAskedQuestions = ({params}) => {
+const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   const str = string.common_components.FAQ;
   const [faqs, setFaqs] = React.useState(null);
+  const [visibleQues, setVisibleQues] = useState(7);
+
+  const handleShowMore = () => {
+    setVisibleQues(prevVisibleRows => prevVisibleRows + 5);
+  };
   const [openIndex, setOpenIndex] = React.useState(null);
   const {refetch: getFaqsLandingPage} = useQuery(
     "faqsLandingPage",
@@ -76,28 +81,40 @@ const FrequentlyAskedQuestions = ({params}) => {
       <h2 className={styles.head}>{str.header}</h2>
       <div>
         <div className={styles.QuesAnsArray_div}>
-          {faqs?.map((item, index) => {
+          {faqs?.slice(0, visibleQues).map((item, index) => {
             return (
-              index < 7 && (
-                <div key={index.toString()}>
-                  <SingleQuestion
-                    ques={item?.question}
-                    ans={item?.answer}
-                    isOpen={index === openIndex}
-                    toggleQuestion={() => toggleQuestion(index)}
-                  />
-                  {index < 6 && <div className="bg-EDEDEE h-[1px] w-full" />}
-                </div>
-              )
+              // index < 7 && (
+              <div key={index.toString()}>
+                <SingleQuestion
+                  ques={item?.question}
+                  ans={item?.answer}
+                  isOpen={index === openIndex}
+                  toggleQuestion={() => toggleQuestion(index)}
+                />
+                {index !== faqs.slice(0, visibleQues).length - 1 && (
+                  <div className="bg-EDEDEE h-[1px] w-full" />
+                )}
+              </div>
             );
+            // );
           })}
         </div>
-        <Link href="/pages/faq">
-          <div className={styles.btn}>
-            <p className={styles.btn_txt}>{str.btn_txt}</p>
-            <ForwardArrow className={styles.forword_icon} />
-          </div>
-        </Link>
+
+        {isCitymax ? (
+          visibleQues < faqs?.length && (
+            <button className={styles.show_more_div} onClick={handleShowMore}>
+              See More FAQs
+              <DownArrowUnfilled className={styles.down_arrow} />
+            </button>
+          )
+        ) : (
+          <Link href="/pages/faq">
+            <div className={styles.btn}>
+              <p className={styles.btn_txt}>{str.btn_txt}</p>
+              <ForwardArrow className={styles.forword_icon} />
+            </div>
+          </Link>
+        )}
       </div>
     </div>
   );

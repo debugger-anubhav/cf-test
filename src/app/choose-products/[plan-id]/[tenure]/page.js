@@ -1,16 +1,14 @@
 "use client";
 import CitymaxHeader from "@/components/Citymax/Header";
-import CitymaxHome from "@/components/Citymax/Home";
 import React from "react";
-import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
 import Footer from "@/components/Common/Footer";
+import CitymaxPlanDetail from "../../../../components/Citymax/PlanDetails";
 
 const CitymaxPage = () => {
   return (
     <div className="large_layout">
       <CitymaxHeader />
-      <CitymaxHome />
-      <FrequentlyAskedQuestions isCitymax />
+      <CitymaxPlanDetail />
       <Footer />
     </div>
   );

@@ -53,6 +53,15 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       });
   };
 
+  const updateSlot = async () => {
+    const body = {
+      slot: "2024-1-10 09:00:00",
+      orderId: "1711239253",
+      zohoCaseId: "553136",
+    };
+    await axios.post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body);
+  };
+
   useEffect(() => {
     getDeliverySlots();
   }, []);
@@ -123,7 +132,9 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
         <button className={styles.cancel_btn} onClick={closeModal}>
           Cancel
         </button>
-        <button className={styles.modify_btn}>Modify</button>
+        <button onClick={() => updateSlot()} className={styles.modify_btn}>
+          Modify
+        </button>
       </div>
     </>
   );
