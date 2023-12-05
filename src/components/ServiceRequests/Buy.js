@@ -76,6 +76,7 @@ function Buy({heading, prevScreen, data}) {
                   />
                 </div>
                 <div className={styles.bottom_row}>
+                  <div className={styles.bottom_line}></div>
                   <button
                     className={`${styles.proceed_btn} ${
                       !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
@@ -86,6 +87,7 @@ function Buy({heading, prevScreen, data}) {
               </>
             ) : (
               <div className={styles.bottom_row}>
+                <div className={styles.bottom_line}></div>
                 <button
                   className={`${styles.proceed_btn} ${
                     !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``

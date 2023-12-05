@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {BackIcon, ForwardArrow, IconLink} from "@/assets/icon";
+import {BackIcon, ForwardArrow} from "@/assets/icon";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -82,7 +82,7 @@ function ServiceRequestType({
                   <div className="flex gap-2 items-center">
                     <img
                       className={styles.request_type_icon}
-                      src={IconLink + "kyc-pending-warning-active.svg"}
+                      src={item.image}
                       alt="icon"
                     />
                     <p className={styles.request_type}>{item.optionValue}</p>
@@ -114,7 +114,7 @@ function ServiceRequestType({
           {selectedType === "Cancel Order" && (
             <CancelOrder prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Upgrade" && (
+          {selectedType === "Swap product" && (
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "Transfer Ownership" && (

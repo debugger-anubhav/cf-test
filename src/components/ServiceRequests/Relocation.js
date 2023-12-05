@@ -280,7 +280,7 @@ function Relocation({prevScreen}) {
                       htmlFor="currrentAdd"
                       className={`${
                         commonStyles.basicInputStyles
-                      } md:w-[232px] block mt-2 mb-8 ${
+                      } md:w-[232px] block mt-2 mb-12 ${
                         formErrors.currentAddressProof &&
                         "  !bg-[#FFF1F1] md:!bg-white"
                       } ${
@@ -365,7 +365,11 @@ function Relocation({prevScreen}) {
                 </div>
 
                 <div className={styles.bottom_row}>
-                  <button className={styles.proceed_btn}>
+                  <div className={styles.bottom_line}></div>
+                  <button
+                    className={`${styles.proceed_btn} ${
+                      formik.isValid ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+                    }`}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>

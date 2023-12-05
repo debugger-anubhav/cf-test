@@ -82,6 +82,7 @@ function SwapProduct({prevScreen, data}) {
       )}
 
       <div className={styles.bottom_row}>
+        <div className={styles.bottom_line}></div>
         <button
           className={`${styles.proceed_btn} ${
             showSwapScreen === 1 || selectedProductForSwap === null
@@ -150,8 +151,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
           <DownArrowUnfilled />
         </div>
         {searchModalOpen && (
-          <div
-            className={`${styles.search_modal} absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg max-h-[250px] h-[250px] overflow-y-scroll`}>
+          <div className={`${styles.search_modal}`}>
             {productData?.map((item, index) => (
               <div
                 className={"flex w-full gap-3 cursor-pointer items-center"}
