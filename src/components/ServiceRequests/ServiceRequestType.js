@@ -114,7 +114,7 @@ function ServiceRequestType({
           {selectedType === "Cancel Order" && (
             <CancelOrder prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Upgrade" && (
+          {selectedType === "Swap product" && (
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "Transfer Ownership" && (

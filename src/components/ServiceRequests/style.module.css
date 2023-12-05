@@ -42,7 +42,10 @@
   @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
-  @apply flex w-full items-center fixed bottom-0 bg-white;
+  @apply flex flex-col w-[530px] right-0 items-center fixed bottom-0 bg-white;
+}
+.bottom_line {
+  @apply w-full h-[2px] bg-DDDDDF;
 }
 .proceed_btn {
   @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins;

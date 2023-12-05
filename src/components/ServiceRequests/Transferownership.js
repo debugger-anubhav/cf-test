@@ -335,6 +335,7 @@ function TransferOwnership({prevScreen}) {
                     )}
 
                     <div className={styles.bottom_row}>
+                      <div className={styles.bottom_line}></div>
                       <button
                         className={`${styles.proceed_btn} ${
                           !formik.isValid
