@@ -12,7 +12,7 @@ function PickupReasonCommonScreen({title, subTitle, setCurrentScreen}) {
         />
         {title}
       </div>
-      <div className={styles.buy_info}>
+      <div className={"flex flex-col w-full my-8"}>
         <p className={styles.desc}>{subTitle}</p>
       </div>
       {(title === "Other" || title === "Requirement Fulfilled") && (
@@ -35,9 +35,11 @@ function PickupReasonCommonScreen({title, subTitle, setCurrentScreen}) {
       </button>
 
       {title !== "Other" && title !== "Requirement Fulfilled" ? (
-        <button className={`${styles.plain_btn} !mt-0`}>
-          No, let me proceed with pickup <ForwardArrowWithLine />
-        </button>
+        <div className="flex justify-center">
+          <button className={`${styles.plain_btn} !mt-0 justify-center`}>
+            No, let me proceed with pickup <ForwardArrowWithLine />
+          </button>
+        </div>
       ) : null}
     </div>
   );

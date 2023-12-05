@@ -18,6 +18,7 @@ function ServiceRequets() {
   const [openDrawer, setOpenDrawer] = useState(false);
   const [pastRequestData, setPastRequestData] = useState(null);
   const [createRequestData, setCreateRequestData] = useState(null);
+  const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
   const openModal = () => {
     setOpenDrawer(true);
@@ -39,6 +40,22 @@ function ServiceRequets() {
       })
       .catch(err => console.log(err));
   };
+
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsBottomDrawer(true);
+    } else {
+      setIsBottomDrawer(false);
+    }
+  };
+
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
 
   useEffect(() => {
     getServiceRequestData();
@@ -64,7 +81,7 @@ function ServiceRequets() {
           </button>
           {openDrawer && (
             <Drawer
-              anchor={"right"}
+              anchor={isBottomDrawer ? "bottom" : "right"}
               open={openModal}
               onClose={() => {
                 closeModal();
@@ -73,12 +90,19 @@ function ServiceRequets() {
               }}
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
-              <div className="flex w-full gap-8">
+              <div className="flex w-full md:gap-8">
                 <CreateNewRequest
                   createRequestData={createRequestData}
                   setOpenDrawer={setOpenDrawer}
                 />
-                <div className={styles.close_icon} onClick={closeModal}>
+                <div className={`md:flex hidden`} onClick={closeModal}>
+                  <Close
+                    color={"#45454A"}
+                    size={24}
+                    className="cursor-pointer"
+                  />
+                </div>
+                <div className={styles.mobile_close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
                     size={24}
