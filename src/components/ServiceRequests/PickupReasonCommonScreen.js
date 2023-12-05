@@ -12,7 +12,7 @@ function PickupReasonCommonScreen({title, subTitle, setCurrentScreen}) {
         />
         {title}
       </div>
-      <div className={styles.buy_info}>
+      <div className={"flex flex-col w-full my-8"}>
         <p className={styles.desc}>{subTitle}</p>
       </div>
       {(title === "Other" || title === "Requirement Fulfilled") && (

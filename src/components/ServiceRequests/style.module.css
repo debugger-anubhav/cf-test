@@ -4,6 +4,9 @@
 .doc_side_bar {
   @apply hidden lg:block min-w-fit;
 }
+.mobile_close_icon {
+  @apply fixed right-4 w-6 h-6 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[80px];
+}
 .detail_div {
   @apply w-full pb-[88px];
 }
@@ -17,10 +20,10 @@
   @apply bg-F6B704 rounded-lg w-fit px-8 lg:h-[56px] h-[48px] flex gap-[10px] text-16 font-medium font-Poppins whitespace-nowrap items-center;
 }
 .des_wrapper {
-  @apply flex justify-between w-full items-center mt-8 gap-8;
+  @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
 .rightDrawer {
-  @apply p-12 pr-8 w-[530px];
+  @apply p-12 pr-8 md:w-[530px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
 }
 
 .content_wrapper {
@@ -78,7 +81,7 @@
   @apply flex w-full my-8 flex-col;
 }
 .buy_info {
-  @apply flex flex-col w-full my-8;
+  @apply flex flex-col w-full my-8 md:h-[420px] overflow-y-scroll;
 }
 .product_to_buy_wrapper {
   @apply flex;
@@ -105,7 +108,7 @@
   @apply outline-none  w-full;
 }
 .search_modal {
-  @apply flex px-4 py-6 w-full;
+  @apply flex px-4 py-6 w-full absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] md:h-[240px] h-[190px] overflow-y-scroll;
 }
 .swap_second_screen {
   @apply w-full;
