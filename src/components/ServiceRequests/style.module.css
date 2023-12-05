@@ -23,7 +23,7 @@
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
 .rightDrawer {
-  @apply p-12 pr-8 md:w-[530px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
+  @apply md:p-12 p-4 pr-8 md:w-[530px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
 }
 
 .content_wrapper {
@@ -45,13 +45,13 @@
   @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
-  @apply flex flex-col w-[530px] right-0 items-center fixed bottom-0 bg-white;
+  @apply flex flex-col md:w-[530px] w-full right-0 items-center fixed bottom-0 bg-white;
 }
 .bottom_line {
   @apply w-full h-[2px] bg-DDDDDF;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-[393px]   px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
@@ -114,7 +114,7 @@
   @apply w-full;
 }
 .transferownership_wrapper {
-  @apply flex flex-col my-8 w-full h-4/5 overflow-y-scroll;
+  @apply flex flex-col my-8 w-full md:h-[420px] overflow-y-scroll;
 }
 .main_sub_heading {
   @apply mt-8 font-medium text-20 font-Poppins;
@@ -129,7 +129,7 @@
   @apply cursor-pointer mt-8 flex justify-center h-12 xl:h-14 px-8 items-center rounded-lg border-2 border-71717A text-14 xl:text-16 font-medium text-71717A leading-5;
 }
 .plain_btn {
-  @apply border-2 px-8 lg:h-[56px] h-[48px] items-center w-[393px] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8;
+  @apply border-2 px-8 lg:h-[56px] h-[48px] items-center md:w-[393px] w-[95%] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8;
 }
 .counter_box {
   @apply border border-71717A text-71717A text-12 flex justify-center items-center w-[37px] h-[37px] rounded-lg;

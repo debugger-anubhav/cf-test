@@ -35,9 +35,11 @@ function PickupReasonCommonScreen({title, subTitle, setCurrentScreen}) {
       </button>
 
       {title !== "Other" && title !== "Requirement Fulfilled" ? (
-        <button className={`${styles.plain_btn} !mt-0`}>
-          No, let me proceed with pickup <ForwardArrowWithLine />
-        </button>
+        <div className="flex justify-center">
+          <button className={`${styles.plain_btn} !mt-0 justify-center`}>
+            No, let me proceed with pickup <ForwardArrowWithLine />
+          </button>
+        </div>
       ) : null}
     </div>
   );
