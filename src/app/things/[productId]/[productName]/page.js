@@ -74,7 +74,7 @@ const ProductPage = () => {
       <HappySubscribers page={"product"} params={params} />
       <QuesAndAns params={params} />
       <Footer />
-      <Notifications type={3} />
+      <Notifications />
     </div>
   );
 };
