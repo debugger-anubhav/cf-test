@@ -4,7 +4,8 @@ import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Select from "react-select";
 
 import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {setServiceRequestDrawer} from "@/store/Slices";
 
 export const customStylesForSelect = {
   control: (baseStyles, state) => ({
@@ -37,6 +38,7 @@ export const customStylesForSelect = {
 };
 
 function CencelOrder({prevScreen, data}) {
+  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -52,7 +54,6 @@ function CencelOrder({prevScreen, data}) {
 
   const handleChange = selectedOption => {
     setSelected(selectedOption);
-    console.log(selected);
   };
 
   const handleRequest = () => {
@@ -63,6 +64,7 @@ function CencelOrder({prevScreen, data}) {
       type: selectedType,
     };
     CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
   };
 
   return (

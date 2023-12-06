@@ -10,12 +10,18 @@ import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+import {setServiceRequestDrawer} from "@/store/Slices";
 
 function ServiceRequets() {
+  const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
-  const [openDrawer, setOpenDrawer] = useState(false);
+  const openDrawerValue = useSelector(
+    state => state.homePagedata.serviceRequestDrawer,
+  );
+  const [openDrawer, setOpenDrawer] = useState(openDrawerValue);
   const [pastRequestData, setPastRequestData] = useState(null);
   const [createRequestData, setCreateRequestData] = useState(null);
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
@@ -61,6 +67,16 @@ function ServiceRequets() {
     getServiceRequestData();
   }, []);
 
+  useEffect(() => {
+    if (openDrawerValue === false) {
+      setOpenDrawer(false);
+    }
+  }, [openDrawerValue]);
+
+  useEffect(() => {
+    dispatch(setServiceRequestDrawer(openDrawer));
+  }, [openDrawer]);
+
   return (
     <div className={styles.main_container}>
       <div className={styles.doc_side_bar}>
@@ -86,7 +102,6 @@ function ServiceRequets() {
               onClose={() => {
                 closeModal();
                 setOpenDrawer(false);
-                // setStartCountdown(false);
               }}
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
