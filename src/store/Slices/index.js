@@ -25,6 +25,8 @@ export const HomepageSlice = createSlice({
     categoryId: "",
     catHeading: "",
     inWishList: false,
+    serviceRequestType: "",
+    serviceRequestDrawer: false,
   },
   reducers: {
     addWhishListProduc(state, action) {
@@ -90,6 +92,12 @@ export const HomepageSlice = createSlice({
     },
     addCategoryHeading(state, action) {
       state.catHeading = action.payload;
+    },
+    setServiceRequestType(state, action) {
+      state.serviceRequestType = action.payload;
+    },
+    setServiceRequestDrawer(state, action) {
+      state.serviceRequestDrawer = action.payload;
     },
   },
 });
@@ -312,6 +320,8 @@ export const {
   addCategoryId,
   addCategoryHeading,
   addWhishListProduc,
+  setServiceRequestType,
+  setServiceRequestDrawer,
 } = HomepageSlice.actions;
 
 export const {

@@ -5,6 +5,10 @@ import {
   HomePageFourSteps,
   hasselFreeSection,
 } from "@/assets/images";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import axios from "axios";
 
 export const RentFurniture = [
   {
@@ -679,3 +683,43 @@ export const BenefitPageData = [
     text: "Upgrade your house with new products after 6 months of use for free",
   },
 ];
+
+// for service request
+const userId = decrypt(getLocalStorage("_ga"));
+const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+const userIdToUse = userId || tempUserId;
+export const CreateRequestPayload = {
+  user_id: userIdToUse,
+  deal_id: "",
+  description: "",
+  repair_details: "",
+  Pickup_Request_Type: "",
+  pickup_reason: "",
+  Possible_Values: "",
+  cancel_order_reason: "",
+  type: "",
+  pickup_request_date: "",
+  requested_date: "",
+  selected_product_name: "",
+  address1: "",
+  address2: "",
+  city: "",
+  state: "",
+  postal_code: "",
+  phone_alternate: "",
+  upgrade_product: "",
+  full_name: "",
+  mobile_number: "",
+  email: "",
+  repair_reason: "",
+};
+
+export const CreateRequest = CreateRequestPayload => {
+  axios
+    .post(
+      baseURL + endPoints.serviceRequestPage.createRequest,
+      CreateRequestPayload,
+    )
+    .then(res => console.log("created request success", res))
+    .catch(err => console.log(err));
+};

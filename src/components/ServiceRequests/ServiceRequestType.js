@@ -14,6 +14,8 @@ import Repair from "./Repair";
 import ExtendTenure from "./ExtendTenure";
 import ChangeBillCycle from "./ChangeBillCycle";
 import Relocation from "./Relocation";
+import {useDispatch} from "react-redux";
+import {setServiceRequestType} from "@/store/Slices";
 
 function ServiceRequestType({
   orderId,
@@ -21,6 +23,7 @@ function ServiceRequestType({
   title,
   setShowNextComponent,
 }) {
+  const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const [servicesType, setServicesType] = useState();
   const [selectedType, setSelectedType] = useState(null);
@@ -52,6 +55,10 @@ function ServiceRequestType({
     getProductLists();
   }, []);
 
+  useEffect(() => {
+    dispatch(setServiceRequestType(selectedType));
+  }, [selectedType]);
+
   return (
     <>
       {currentScreen ? (
@@ -76,7 +83,7 @@ function ServiceRequestType({
                       : "border-0"
                   } ${styles.request_info_div}`}
                   onClick={() => {
-                    setSelectedType(item.optionValue);
+                    setSelectedType(item.key);
                     setCurrentScreen(false);
                   }}>
                   <div className="flex gap-2 items-center">
@@ -111,42 +118,42 @@ function ServiceRequestType({
         </div>
       ) : (
         <>
-          {selectedType === "Cancel Order" && (
-            <CancelOrder prevScreen={setCurrentScreen} />
+          {selectedType === "cancellation" && (
+            <CancelOrder prevScreen={setCurrentScreen} data={productDetail} />
           )}
-          {selectedType === "Swap product" && (
+          {selectedType === "upgrade" && (
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
           )}
-          {selectedType === "Transfer Ownership" && (
+          {selectedType === "ownership" && (
             <TransferOwnership prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Buy" && (
+          {selectedType === "buy" && (
             <Buy
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Buy"
             />
           )}
-          {selectedType === "Installation" && (
+          {selectedType === "installation" && (
             <Buy
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Installation"
             />
           )}
-          {selectedType === "Repair" && (
+          {selectedType === "repair" && (
             <Repair prevScreen={setCurrentScreen} data={productDetail} />
           )}
-          {selectedType === "Extend Tenure" && (
+          {selectedType === "full_extension" && (
             <ExtendTenure prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Change Bill Cycle" && (
+          {selectedType === "change_bill_cycle" && (
             <ChangeBillCycle prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Relocation" && (
+          {selectedType === "relocation" && (
             <Relocation prevScreen={setCurrentScreen} />
           )}
-          {selectedType === "Request Order Pickup" && (
+          {selectedType === "request_pickup" && (
             <Buy
               prevScreen={setCurrentScreen}
               data={productDetail}
