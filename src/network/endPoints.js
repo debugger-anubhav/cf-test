@@ -49,8 +49,6 @@ export const endPoints = {
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
 
   searchKey: (key = "", cityId = "", sort = "") => {
-    console.log("key:", key);
-    console.log("cityId:", cityId);
     return `fc-products/search?searchKey=${key.trim()}&&cityId=${cityId}&sortKey=${sort}`;
   },
 
@@ -147,6 +145,7 @@ export const endPoints = {
     getServiceRequest: orderId =>
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${orderId}`,
     getDeliverySlots: `fc-payments/getSlots`,
+    updateSlot: `fc-payments/updateSlot`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
@@ -183,5 +182,6 @@ export const endPoints = {
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${dealCodeNumber}`,
     getProductLists: (dealCodeNumber, userId) =>
       `fc-payments/getProductLists?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
+    createRequest: "fc-zoho-crms/submitServiceRequest",
   },
 };

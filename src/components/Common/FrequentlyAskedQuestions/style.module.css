@@ -39,3 +39,11 @@
 .faq_skeleton_wrapper {
   @apply flex my-8 w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] justify-between;
 }
+
+.show_more_div {
+  @apply flex gap-2 items-center text-5774AC text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 cursor-pointer;
+  color: #5774ac;
+}
+.down_arrow {
+  @apply text-222 w-5 h-5 xl:h-6 xl:w-6;
+}

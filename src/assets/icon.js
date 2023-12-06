@@ -6,7 +6,7 @@ import {
   AiFillCheckCircle,
   AiFillHome,
 } from "react-icons/ai";
-import {FiChevronDown, FiChevronUp, FiEdit} from "react-icons/fi";
+import {FiChevronDown, FiChevronUp, FiEdit, FiLock} from "react-icons/fi";
 import {
   IoClose,
   IoCloseOutline,
@@ -17,7 +17,7 @@ import {
   IoChevronDown,
   IoWarning,
 } from "react-icons/io5";
-import {TbMailFilled, TbReload} from "react-icons/tb";
+import {TbMailFilled, TbReload, TbSparkles} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
 import {
@@ -378,4 +378,12 @@ export const ToggleOn = ({size, color, className, onClick}) => (
 
 export const Home = ({size, color, className}) => (
   <AiFillHome size={size} color={color} className={className} />
+);
+
+export const Sparkles = ({size, color, className}) => (
+  <TbSparkles size={size} color={color} className={className} />
+);
+
+export const Lock = ({size, color, className}) => (
+  <FiLock size={size} color={color} className={className} />
 );

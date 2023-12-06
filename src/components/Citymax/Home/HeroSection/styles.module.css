@@ -1,5 +1,5 @@
 .main {
-  @apply pt-14 pb-10;
+  @apply pt-10 xl:pt-14 pb-8 xl:pb-10 -mx-4 md:-mx-0;
   background: linear-gradient(
     180deg,
     #d0e2ee 0%,
@@ -10,45 +10,55 @@
   );
 }
 .header {
-  @apply text-45454A text-[56px] font-bold leading-[64px] tracking-[-1.12px] text-center;
+  @apply text-45454A text-24 xl:text-[56px] font-bold leading-8 xl:leading-[64px] tracking-0.48 xl:tracking-[-1.12px] text-center;
 }
 .max {
   @apply text-5774AC;
 }
 .tag_line {
-  @apply text-center text-71717A text-16 tracking-0.3 mt-2 font-medium;
+  @apply text-center text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-2 font-medium;
 }
 .center {
   @apply flex justify-center;
 }
 .monthly_toggler {
-  @apply mt-16 p-1 flex items-center justify-between bg-[#747474] rounded-xl w-fit h-[44px];
+  @apply mt-10 xl:mt-16 p-1 flex items-center justify-between bg-[#747474] rounded-xl w-fit h-[44px];
 }
 .pref_mode_text {
   @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
 }
 .card_wrapper {
-  @apply flex-wrap mt-12 gap-8;
+  @apply flex-wrap mt-8 xl:mt-12 gap-8;
 }
 .card {
-  @apply p-6 rounded-lg border border-EDEDEE bg-[#fffefe] cursor-pointer;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.08);
+  @apply p-6 rounded-lg cursor-pointer relative w-[328px];
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/card-for-plans-pc.webp")
+    no-repeat;
+  background-size: cover;
 }
 .card_head {
-  @apply text-45454A font-medium tracking-0.48 text-24;
+  @apply text-45454A font-medium tracking-0.36 xl:tracking-0.48 text-18 xl:text-24;
 }
 .card_desc {
-  @apply text-71717A text-16 font-medium leading-5;
+  @apply text-71717A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 leading-5;
 }
 .card_offer {
-  @apply mt-6 text-71717A text-16 tracking-0.3;
+  @apply mt-4 xl:mt-6 text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
 }
 .card_price {
-  @apply text-222 text-24 font-medium tracking-0.48 mt-6;
+  @apply text-222 text-18 xl:text-24 font-medium tracking-0.36 xl:tracking-0.48 mt-6;
 }
 .rupeeIcon {
   @apply font-Inter;
 }
 .btn {
-  @apply mt-6 rounded-lg bg-F6B704 px-8 h-14 w-full flex justify-center items-center text-222 text-16 font-medium;
+  @apply mt-6 rounded-lg bg-F6B704 px-8 h-12 xl:h-14 w-full flex justify-center items-center text-222 text-14 xl:text-16 font-medium;
+}
+.tag {
+  @apply absolute flex left-4 -top-3 justify-center items-center p-1 gap-1 text-fff text-12 font-medium tracking-0.24 uppercase;
+  border-radius: 4px;
+  background: #4a36b3;
+}
+.leaf_icon {
+  @apply w-[14px] h-[13px];
 }
