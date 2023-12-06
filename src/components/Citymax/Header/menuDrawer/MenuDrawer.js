@@ -1,30 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Close, Home} from "@/assets/icon";
+import {Close} from "@/assets/icon";
 import styles from "./styles.module.css";
 import Image from "next/image";
 import logo from "../logo.jpg";
 import {useRouter} from "next/navigation";
+import {IconLink} from "../../../../assets/icon";
 
 const MenuDrawer = ({toggleDrawer, open}) => {
-  const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const router = useRouter();
-
-  const handleresize = e => {
-    if (window.innerWidth < 768) {
-      setIsBottomDrawer(true);
-    } else {
-      setIsBottomDrawer(false);
-    }
-  };
-
-  React.useEffect(() => {
-    handleresize();
-    window.addEventListener("resize", handleresize);
-    return () => {
-      window.removeEventListener("resize", handleresize);
-    };
-  }, []);
 
   const arr1 = [
     {
@@ -78,7 +62,7 @@ const MenuDrawer = ({toggleDrawer, open}) => {
   ];
   return (
     <SwipeableDrawer
-      anchor={isBottomDrawer ? "bottom" : "left"}
+      anchor="left"
       open={open}
       onClose={toggleDrawer}
       classes={{paper: styles.customDrawer}}>
@@ -133,7 +117,10 @@ const MenuDrawer = ({toggleDrawer, open}) => {
 
           <div className={styles.button} onClick={() => router.push("/")}>
             <p className={styles.back_txt}>Back to Cityfurnish</p>
-            <Home className={styles.home_icon} />
+            <img
+              src={`${IconLink + "home-cityfurnish.svg"}`}
+              className={styles.home_icon}
+            />
           </div>
         </div>
       </div>

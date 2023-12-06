@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
+import {IconLink} from "@/assets/icon";
 
 const HeroSection = () => {
   const [isHalfYearly, setHalfYearly] = useState(true);
@@ -15,6 +16,7 @@ const HeroSection = () => {
       desc: "Best suited for a 3BHK apartment",
       offer: "13 products @ just",
       price: "6779",
+      tag: "Popular",
     },
     {
       head: "CityMax Ultra",
@@ -82,6 +84,17 @@ const HeroSection = () => {
               {item.price}/mo
             </p>
             <button className={styles.btn}>Select plan</button>
+            {item.tag && (
+              <div className={styles.tag}>
+                <img
+                  src={`${IconLink + "popular-icon.svg"}`}
+                  className={styles.leaf_icon}
+                  loading="lazy"
+                  alt="LeafIcon"
+                />
+                {item.tag}
+              </div>
+            )}
           </div>
         ))}
       </div>

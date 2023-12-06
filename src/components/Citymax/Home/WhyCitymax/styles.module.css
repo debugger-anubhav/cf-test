@@ -1,0 +1,33 @@
+.main {
+  @apply font-Poppins;
+}
+.head {
+  @apply mt-8 mb-6  xl:my-8 text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48;
+}
+.card_wrapper {
+  @apply flex w-full overflow-scroll xl:overflow-auto xl:flex-wrap gap-6 h-[260px] xl:h-fit;
+}
+.card {
+  @apply min-w-[190px] xl:w-[379px] h-full xl:h-[221px] px-4 py-6 xl:p-6 rounded-xl;
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/black-banner-pc.webp")
+    no-repeat;
+  background-size: cover;
+}
+.icon {
+  @apply w-8 h-8 xl:w-12 xl:h-12;
+}
+.card_head {
+  @apply text-20 text-fff font-medium tracking-0.4 mt-6 line-clamp-2;
+}
+.desc {
+  @apply text-[#C0C0C6] text-14 tracking-desc mt-2;
+}
+.how_it_works_button {
+  @apply w-fit flex items-center mt-5 xl:mt-16 pb-1 xl:pb-2 border-b border-b-9A9AA2;
+}
+.how_it_works_paragraph {
+  @apply font-Poppins font-medium text-16 xl:text-20 leading-7 tracking-0.3 xl:tracking-0.4 text-[#597492] flex;
+}
+.forward_arrow {
+  @apply flex justify-center items-center mx-1 my-1;
+}
