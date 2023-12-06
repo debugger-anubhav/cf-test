@@ -720,6 +720,6 @@ export const CreateRequest = CreateRequestPayload => {
       baseURL + endPoints.serviceRequestPage.createRequest,
       CreateRequestPayload,
     )
-    .then(res => console.log("create request api", res))
+    .then(res => console.log("created request success", res))
     .catch(err => console.log(err));
 };
