@@ -3,6 +3,9 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Select from "react-select";
 
+import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
+import {useSelector} from "react-redux";
+
 export const customStylesForSelect = {
   control: (baseStyles, state) => ({
     ...baseStyles,
@@ -33,7 +36,10 @@ export const customStylesForSelect = {
   }),
 };
 
-function CencelOrder({prevScreen}) {
+function CencelOrder({prevScreen, data}) {
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
   const cencellationOptions = [
     {value: "1", label: "Wrong items selected"},
     {value: "2", label: "Late delivery"},
@@ -47,6 +53,16 @@ function CencelOrder({prevScreen}) {
   const handleChange = selectedOption => {
     setSelected(selectedOption);
     console.log(selected);
+  };
+
+  const handleRequest = () => {
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      Possible_Values: selected.label,
+      type: selectedType,
+    };
+    CreateRequest(payload);
   };
 
   return (
@@ -75,7 +91,8 @@ function CencelOrder({prevScreen}) {
         <button
           className={`${styles.proceed_btn}  !w-fit ${
             selected === null ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
-          }`}>
+          }`}
+          onClick={handleRequest}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>
