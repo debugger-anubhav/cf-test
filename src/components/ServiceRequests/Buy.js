@@ -2,18 +2,50 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
-import {productPageImagesBaseUrl} from "@/constants/constant";
+import {
+  CreateRequest,
+  productPageImagesBaseUrl,
+  CreateRequestPayload,
+} from "@/constants/constant";
 import PickupReasonOptions from "./PickupReasonOptions";
+import {useDispatch, useSelector} from "react-redux";
+import {setServiceRequestDrawer} from "@/store/Slices";
 
 function Buy({heading, prevScreen, data}) {
+  const dispatch = useDispatch();
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
-  const [selected, setSelected] = useState(false);
+  // const [selected, setSelected] = useState(false);
   const [showPickupReason, setShowPickupReason] = useState(false);
   const [Screen, setScreen] = useState(1);
+  const [description, setDescription] = useState("");
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
-  const handleChangeCheckbox = () => {
-    setSelected(event.target.checked);
+  const handleChangeCheckbox = (index, e) => {
+    const productName = e.target.value;
+    setSelectedProducts(prevSelected => {
+      if (prevSelected.includes(productName)) {
+        return prevSelected.filter(name => name !== productName);
+      } else {
+        return [...prevSelected, productName];
+      }
+    });
   };
+
+  const handleCreateRequest = () => {
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      selected_product_name: selectedProducts.join(", "),
+      description,
+    };
+    CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
+  };
+
   return (
     <>
       {showPickupReason && Screen === 2 ? (
@@ -49,8 +81,9 @@ function Buy({heading, prevScreen, data}) {
                 <div key={index.toString()} className={"buy_checkbox_info"}>
                   <Checkbox
                     {...label}
-                    onChange={handleChangeCheckbox}
-                    checked={selected}
+                    onChange={e => handleChangeCheckbox(index, e)}
+                    checked={selectedProducts.includes(item.product_name)}
+                    value={item.product_name}
                   />
                   <img
                     className={styles.product_imge_thambnil}
@@ -73,14 +106,18 @@ function Buy({heading, prevScreen, data}) {
                     type="text"
                     placeholder="Please share any specific instructions or provide feedback."
                     className={styles.form_input_textarea}
+                    onChange={e => setDescription(e.target.value)}
                   />
                 </div>
                 <div className={styles.bottom_row}>
                   <div className={styles.bottom_line}></div>
                   <button
                     className={`${styles.proceed_btn} ${
-                      !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
-                    }`}>
+                      selectedProducts.length === 0
+                        ? "!bg-[#FFDF85] !cursor-not-allowed"
+                        : ``
+                    }`}
+                    onClick={() => handleCreateRequest()}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>
@@ -90,7 +127,9 @@ function Buy({heading, prevScreen, data}) {
                 <div className={styles.bottom_line}></div>
                 <button
                   className={`${styles.proceed_btn} ${
-                    !selected ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
+                    selectedProducts.length === 0
+                      ? "!bg-[#FFDF85] !cursor-not-allowed"
+                      : ``
                   }`}
                   onClick={() => {
                     setShowPickupReason(true);
