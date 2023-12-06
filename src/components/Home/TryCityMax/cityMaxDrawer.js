@@ -73,26 +73,31 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
                 <p className={styles.sidebar_header_heading}>How it works</p>
               </div>
             </div>
-            {sidebarDetail?.map((item, index) => (
-              <div className={styles.drawer_map_wrapper} key={index.toString()}>
-                <div className={styles.sidebar_benefit_wrapper}>
-                  <div className={styles.sidebar_number}>
-                    <p>{index + 1}</p>
+
+            <div>
+              {sidebarDetail?.map((item, index) => (
+                <div
+                  className={styles.drawer_map_wrapper}
+                  key={index.toString()}>
+                  <div className={styles.sidebar_benefit_wrapper}>
+                    <div className={styles.sidebar_number}>
+                      <p>{index + 1}</p>
+                    </div>
+                    <div className={styles.sidebar_detailing}>
+                      <p className={styles.sidebar_detail_heading}>
+                        {item.heading}
+                      </p>
+                      <p className={styles.sidebar_detail_subheading}>
+                        {item.subheading}
+                      </p>
+                    </div>
                   </div>
-                  <div className={styles.sidebar_detailing}>
-                    <p className={styles.sidebar_detail_heading}>
-                      {item.heading}
-                    </p>
-                    <p className={styles.sidebar_detail_subheading}>
-                      {item.subheading}
-                    </p>
-                  </div>
+                  {index !== sidebarDetail?.length - 1 && (
+                    <div className={styles.divider}></div>
+                  )}
                 </div>
-                {index !== sidebarDetail?.length - 1 && (
-                  <div className={styles.divider}></div>
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

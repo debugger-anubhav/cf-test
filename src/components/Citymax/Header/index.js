@@ -2,7 +2,7 @@
 import React, {useEffect, useState, useRef} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
-import {Home, Icons} from "@/assets/icon";
+import {Icons} from "@/assets/icon";
 import CommonDrawer from "@/components/Common/Drawer/index";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
@@ -31,7 +31,7 @@ import {
 } from "@/hooks/cryptoUtils";
 import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
-import logo from "./logo.jpg";
+import {IconLink} from "../../../assets/icon";
 
 const CitymaxHeader = ({zIndex}) => {
   const iconRef = useRef(null);
@@ -208,7 +208,7 @@ const CitymaxHeader = ({zIndex}) => {
               <div
                 className={styles.logo}
                 onClick={() => router.push("/cityfurnish")}>
-                <Image src={logo} className="w-full h-full" />
+                <img src={`${IconLink + "citymax_final.svg"}`} />
               </div>
             </a>
             <div className={styles.header_city_wrapper}>
@@ -218,7 +218,10 @@ const CitymaxHeader = ({zIndex}) => {
             </div>
 
             <div className={styles.cityfurnish_wrapper}>
-              <Home className={styles.home_icon} />
+              <img
+                src={`${IconLink + "home-cityfurnish.svg"}`}
+                className={styles.home_icon}
+              />
               <p className={styles.cityfurnish_txt}>cityfurnish</p>
             </div>
           </div>

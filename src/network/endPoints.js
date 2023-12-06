@@ -147,6 +147,7 @@ export const endPoints = {
     getServiceRequest: orderId =>
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${orderId}`,
     getDeliverySlots: `fc-payments/getSlots`,
+    updateSlot: `fc-payments/updateSlot`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
