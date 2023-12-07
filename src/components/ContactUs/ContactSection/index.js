@@ -23,7 +23,7 @@ function ContactSection() {
       icon: <FaHeadset size={30} className={styles.icon_contact} />,
       heading: "Raise a service request",
       subheading: "Your requests for orders related help",
-      link: "https://cityfurnish.com/service-requests",
+      link: "/service-requests",
     },
   ];
   return (

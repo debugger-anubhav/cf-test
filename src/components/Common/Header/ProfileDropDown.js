@@ -5,10 +5,10 @@ import cookie from "react-cookies";
 
 export default function ProfileDropDown({setShowProfileDropdown}) {
   const items = [
-    {item: "My Orders", link: "https://test.rentofurniture.com/purchases"},
+    {item: "My Orders", link: "/purchases"},
     {
       item: "My Service Requests",
-      link: "https://test.rentofurniture.com/service-requests",
+      link: "/service-requests",
     },
     {item: "My Payments", link: "/payments"},
     {item: "CF Coins", link: "/wallet"},

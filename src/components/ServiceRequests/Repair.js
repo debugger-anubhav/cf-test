@@ -1,15 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
 import {customStylesForSelect} from "./CancelOrder";
 import Select from "react-select";
+import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+import {setServiceRequestDrawer} from "@/store/Slices";
 
 function Repair({prevScreen, data}) {
-  const [istoggled, setIstoggled] = useState(false);
-  const [toggleIndex, setToggleIndex] = useState(null);
-  const [selected, setSelected] = useState(null);
-  // const [selectedProducts, setSelectedProducts] = useState([]);
+  const dispatch = useDispatch();
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
+
+  const [toggleStates, setToggleStates] = useState(
+    data.map(() => ({istoggled: false, selected: null, detail: null})),
+  );
 
   const repairOptions = [
     {value: "1", label: "Wrong items selected"},
@@ -19,12 +26,67 @@ function Repair({prevScreen, data}) {
     {value: "5", label: "Other"},
   ];
 
-  const handleChange = selectedOption => {
-    setSelected(selectedOption);
+  const handleChange = (selectedOption, index) => {
+    setToggleStates(prevStates =>
+      prevStates.map((state, i) =>
+        i === index ? {...state, selected: selectedOption} : state,
+      ),
+    );
   };
-  useEffect(() => {
-    console.log("selected", selected);
-  }, [selected]);
+  const handleDetailChange = (e, index) => {
+    setToggleStates(prevStates =>
+      prevStates.map((state, i) =>
+        i === index ? {...state, detail: e.target.value} : state,
+      ),
+    );
+  };
+
+  const handleCreateRequest = () => {
+    const selectedData = toggleStates
+      .filter(state => state.istoggled && state.selected !== null)
+      .map((state, index) => ({
+        product_name: data[index]?.product_name,
+        repair_reason: `${data[index]?.product_name} : ${
+          state.selected.label || "NA"
+        }  `,
+        repair_details: state.detail || " ",
+      }));
+
+    const tempSelectedProductName = selectedData?.map(item => {
+      return item.product_name;
+    });
+
+    const tempRepairReason = selectedData?.map(item => {
+      return item.repair_reason;
+    });
+
+    const tempRepairDetails = selectedData?.map(item => {
+      return item.repair_details;
+    });
+
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      selected_product_name: tempSelectedProductName.join(", "),
+      repair_reason: tempRepairReason.join(", "),
+      repair_details: tempRepairDetails.join(", "),
+    };
+    CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
+    setToggleStates(data.map(() => ({istoggled: false, selected: null})));
+  };
+
+  const handleToggle = index => {
+    setToggleStates(prevStates =>
+      prevStates.map((state, i) =>
+        i === index
+          ? {...state, istoggled: !state.istoggled, selected: "NA"}
+          : state,
+      ),
+    );
+  };
+
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -39,39 +101,33 @@ function Repair({prevScreen, data}) {
         {data?.map((item, index) => (
           <div className={styles.repair_info} key={index.toString()}>
             <div className="flex gap-2 items-center">
-              {index === toggleIndex && istoggled ? (
+              {toggleStates[index].istoggled ? (
                 <BsToggleOn
                   color={"#5774AC"}
                   size={28}
-                  onClick={() => {
-                    setIstoggled(false);
-                    setToggleIndex(index);
-                    setSelected(null);
-                  }}
+                  onClick={() => handleToggle(index)}
                   className="cursor-pointer"
                 />
               ) : (
                 <ToggleOff
                   size={28}
                   color={"#E3E1DC"}
-                  onClick={() => {
-                    setIstoggled(true);
-                    setToggleIndex(index);
-                    // setSelected(null);
-                  }}
+                  onClick={() => handleToggle(index)}
                   className="cursor-pointer"
                 />
               )}
               <p className={styles.desc}>{item?.product_name}</p>
             </div>
-            {index === toggleIndex && istoggled && (
+            {toggleStates[index].istoggled && (
               <div>
                 <div className="mt-4 flex flex-col">
                   <p className={styles.desc}>Reason for repair</p>
                   <Select
                     options={repairOptions}
                     styles={customStylesForSelect}
-                    onChange={handleChange}
+                    onChange={selectedOption =>
+                      handleChange(selectedOption, index)
+                    }
                     placeholder="Select a reason for repair"
                   />
                 </div>
@@ -81,6 +137,7 @@ function Repair({prevScreen, data}) {
                     type="text"
                     placeholder="Enter repair details"
                     className={styles.form_input_textarea}
+                    onChange={e => handleDetailChange(e, index)}
                   />
                 </div>
               </div>
@@ -89,13 +146,15 @@ function Repair({prevScreen, data}) {
         ))}
         <div className={styles.bottom_row}>
           <div className={styles.bottom_line}></div>
+
           <button
             className={`${styles.proceed_btn}  ${
-              selected === null || !istoggled
-                ? "!bg-[#FFDF85] !cursor-not-allowed"
-                : ``
+              toggleStates.some(state => state.istoggled && state.selected)
+                ? ""
+                : "!bg-[#FFDF85] !cursor-not-allowed"
             }`}
-            disabled={selected === null}>
+            disabled={!toggleStates.some(state => state.istoggled)}
+            onClick={handleCreateRequest}>
             Create request <ForwardArrowWithLine />
           </button>
         </div>
