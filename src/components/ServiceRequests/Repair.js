@@ -4,8 +4,16 @@ import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
 import {customStylesForSelect} from "./CancelOrder";
 import Select from "react-select";
+import {CreateRequestPayload} from "@/constants/constant";
+// import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
 
 function Repair({prevScreen, data}) {
+  // const dispatch = useDispatch();
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
+
   const [istoggled, setIstoggled] = useState(false);
   const [toggleIndex, setToggleIndex] = useState(null);
   const [selected, setSelected] = useState(null);
@@ -22,6 +30,20 @@ function Repair({prevScreen, data}) {
   const handleChange = selectedOption => {
     setSelected(selectedOption);
   };
+
+  const handleCreateRequest = () => {
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      selected_product_name: "",
+      repair_reason: "",
+    };
+    console.log(payload, "payload");
+    // CreateRequest(payload);
+    // dispatch(setServiceRequestDrawer(false));
+  };
+
   useEffect(() => {
     console.log("selected", selected);
   }, [selected]);
@@ -95,7 +117,8 @@ function Repair({prevScreen, data}) {
                 ? "!bg-[#FFDF85] !cursor-not-allowed"
                 : ``
             }`}
-            disabled={selected === null}>
+            disabled={selected === null}
+            onClick={handleCreateRequest}>
             Create request <ForwardArrowWithLine />
           </button>
         </div>

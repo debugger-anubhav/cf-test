@@ -12,13 +12,13 @@ export default function UserSettings() {
     {
       head: "My orders",
       desc: "See all orders & stay updated on their status.",
-      link: "https://test.rentofurniture.com/purchases",
+      link: "/purchases",
       img: `${url}my-orders.svg`,
     },
     {
       head: "My Service Requests",
       desc: "Need help with your order or have a request?",
-      link: "https://test.rentofurniture.com/service-requests",
+      link: "/service-requests",
       img: `${url}my-service-requests.svg`,
     },
     {

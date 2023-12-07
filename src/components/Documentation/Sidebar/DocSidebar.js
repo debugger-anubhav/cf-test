@@ -35,7 +35,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     {heading: "My orders", link: "/purchases"},
     {
       heading: "My Service Requests",
-      link: "https://test.rentofurniture.com/service-requests",
+      link: "/service-requests",
     },
     {heading: "My Payments", link: "/payments"},
     {heading: "My Invoices", link: "/invoices"},
