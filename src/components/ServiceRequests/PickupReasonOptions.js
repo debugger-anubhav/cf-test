@@ -3,29 +3,32 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrow} from "@/assets/icon";
 import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
 
-function PickupReasonOptions({setScreen}) {
+function PickupReasonOptions({setScreen, selectedProducts, data}) {
   const [selectedPickupReason, setSelectedPickupReason] = useState(null);
   const [showCommonPickupScreen, setShowCommonPickupScreen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(1);
 
   const PickupReasons = [
-    "Faced problems in service",
-    "Faced problems in products",
-    "Moving out of country",
-    "Moving to other city",
-    "Want to purchase things now",
-    "Moving to fully furnished property",
-    "Did not like the products",
-    "Requirement Fulfilled",
-    "Other",
+    {title: "Faced problems in service", btnName: "Repair product(s)"},
+    {title: "Faced problems in products", btnName: "Repair product(s)"},
+    {title: "Moving out of country", btnName: "Ownership transfer"},
+    {title: "Moving to other city", btnName: "Relocation"},
+    {title: "Want to purchase things now", btnName: "Buy product(s)"},
+    {title: "Moving to fully furnished property", btnName: "Buy product(s)"},
+    {title: "Did not like the products", btnName: "Swap product(s)"},
+    {title: "Requirement Fulfilled", btnName: "Create request"},
+    {title: "Other", btnName: "Create request"},
   ];
+
   return (
     <>
       {showCommonPickupScreen && currentScreen === 2 ? (
         <PickupReasonCommonScreen
-          title={selectedPickupReason}
+          reason={selectedPickupReason}
           subTitle={"We are sorry to hear that. This is what we can offer."}
           setCurrentScreen={setCurrentScreen}
+          selectedProducts={selectedProducts}
+          data={data}
         />
       ) : (
         <div className={styles.content_wrapper}>
@@ -53,7 +56,7 @@ function PickupReasonOptions({setScreen}) {
                     setCurrentScreen(2);
                   }}>
                   <div className="flex gap-2 items-center">
-                    <p className={styles.request_type}>{item}</p>
+                    <p className={styles.request_type}>{item.title}</p>
                   </div>
                   <div className="flex">
                     <ForwardArrow />

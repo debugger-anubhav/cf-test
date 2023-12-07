@@ -2,9 +2,28 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
+import {useDispatch, useSelector} from "react-redux";
+import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
+import {setServiceRequestDrawer} from "@/store/Slices";
 
-function ChangeBillCycle({prevScreen}) {
+function ChangeBillCycle({prevScreen, data}) {
+  const dispatch = useDispatch();
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
   const [istoggled, setIstoggled] = useState(true);
+  const [description, setDescription] = useState("");
+
+  const handleCreateRequest = () => {
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      description,
+    };
+    CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
+  };
 
   return (
     <div className={styles.content_wrapper}>
@@ -54,12 +73,13 @@ function ChangeBillCycle({prevScreen}) {
             type="text"
             placeholder="Please share any specific instructions or provide feedback."
             className={styles.form_input_textarea}
+            onChange={e => setDescription(e.target.value)}
           />
         </div>
         <button
           className={`${styles.proceed_btn} !w-fit `}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
-        >
+          onClick={handleCreateRequest}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

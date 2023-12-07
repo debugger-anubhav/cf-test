@@ -125,7 +125,10 @@ function ServiceRequestType({
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "ownership" && (
-            <TransferOwnership prevScreen={setCurrentScreen} />
+            <TransferOwnership
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+            />
           )}
           {selectedType === "buy" && (
             <Buy
@@ -148,10 +151,13 @@ function ServiceRequestType({
             <ExtendTenure prevScreen={setCurrentScreen} />
           )}
           {selectedType === "change_bill_cycle" && (
-            <ChangeBillCycle prevScreen={setCurrentScreen} />
+            <ChangeBillCycle
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+            />
           )}
           {selectedType === "relocation" && (
-            <Relocation prevScreen={setCurrentScreen} />
+            <Relocation prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "request_pickup" && (
             <Buy
