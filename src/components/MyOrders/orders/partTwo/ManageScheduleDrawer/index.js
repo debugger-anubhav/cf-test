@@ -12,9 +12,10 @@ import {getLocalStorage} from "@/constants/constant";
 
 const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
-  const [selectedDates, setSelectedDates] = useState([]);
-  const [scheduleDates, setScheduleDates] = useState();
+  const [slotData, setSlotdata] = useState();
+  const [selectedDate, setSelectedDate] = useState();
   const [currentDate, setCurrentDate] = useState();
+  const [scheduledTime, setScheduledTime] = useState();
 
   const userId = decrypt(getLocalStorage("_ga"));
   const handleresize = e => {
@@ -32,8 +33,6 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
     };
   }, []);
 
-  let scheduledTime;
-
   const getDeliverySlots = () => {
     const body = {
       deal_id: orderId,
@@ -43,44 +42,40 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       .post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
         console.log(res, "yguywgy");
+        setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
         const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
-        scheduledTime = format(parsedTime, "h:mm a");
-        setScheduleDates(res?.data?.data?.data?.data);
-        setCurrentDate(
-          format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
-        );
+        setScheduledTime(format(parsedTime, "h:mm a"));
+
+        res?.data?.data?.tmpDateMatch &&
+          setCurrentDate(
+            format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
+          );
       });
   };
 
+  console.log(slotData, "slotData");
   const updateSlot = async () => {
     const body = {
-      slot: "2024-1-10 09:00:00",
-      orderId: "1711239253",
-      zohoCaseId: "553136",
+      slot: `${selectedDate} 09:00:00`,
+      orderId,
+      zohoCaseId: slotData?.zohoCaseId,
     };
-    await axios.post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body);
+    try {
+      const response = await axios.post(
+        baseURL + endPoints.myOrdersPage.updateSlot,
+        body,
+      );
+      console.log(response, "responeseee");
+      closeModal();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     getDeliverySlots();
   }, []);
-
-  const handleDateClick = clickedDate => {
-    // Check if the clicked date is already in the selectedDates array
-    if (selectedDates.includes(clickedDate)) {
-      // If it is, remove it from the array
-      setSelectedDates(prevSelectedDates =>
-        prevSelectedDates.filter(date => date !== clickedDate),
-      );
-    } else {
-      // If it's not, add it to the array
-      setSelectedDates(prevSelectedDates => [
-        ...prevSelectedDates,
-        clickedDate,
-      ]);
-    }
-  };
 
   const ModalContent = () => (
     <>
@@ -97,18 +92,19 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred date:</p>
         <div className={styles.map_wrapper}>
-          {scheduleDates?.map((item, index) => (
+          {slotData?.data?.data?.map((item, index) => (
             <div
               key={index}
               className={styles.map_item_wrapper}
-              onClick={() => handleDateClick(item.date)}>
+              onClick={() => {
+                setSelectedDate(item.date);
+              }}>
               <div className={styles.outer_circle}>
                 <div
                   className={`${
-                    selectedDates.includes(item.date) ? styles.inner_circle : ""
+                    selectedDate === item.date ? styles.inner_circle : ""
                   }`}></div>
               </div>
-
               <p className={styles.date}>
                 {format(new Date(item?.date), "do")}
               </p>
@@ -132,7 +128,12 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
         <button className={styles.cancel_btn} onClick={closeModal}>
           Cancel
         </button>
-        <button onClick={() => updateSlot()} className={styles.modify_btn}>
+        <button
+          disabled={!selectedDate}
+          onClick={() => updateSlot()}
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
+            styles.modify_btn
+          }`}>
           Modify
         </button>
       </div>

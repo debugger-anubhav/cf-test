@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
+import {useParams, useRouter} from "next/navigation";
 import {
   BackIcon,
   ForwardArrowWithLine,
@@ -8,66 +9,113 @@ import {
   Rupee,
   Sparkles,
 } from "../../../assets/icon";
+// import ProductsDrawer from "./ProductsDrawer/ProductsDrawer";
+import {productImageBaseUrl} from "@/constants/constant";
+import CitymaxDetailPageDrawer from "./CitymaxDetailPageDrawer/index";
 
 const CitymaxPlanDetail = () => {
-  const [isHalfYearly, setHalfYearly] = useState(true);
+  const router = useRouter();
+  const params = useParams();
+  const [isHalfYearly, setHalfYearly] = useState(params.tenure === 6);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [roomId, setRoomId] = useState();
+  const [slotId, setSlotId] = useState();
+  const [drawerType, setDrawerType] = useState();
+
   const dummy = [
     {
       type: "Bedroom 1",
+      roomId: 1,
       ameneties: [
         {
           icon: "",
           name: "Bed",
+          slotId: 1,
         },
         {
           icon: "",
           name: "Bedside Table",
+          slotId: 2,
         },
         {
           icon: "",
           name: "Matress",
+          slotId: 3,
         },
       ],
     },
     {
       type: "Bedroom 2",
+      roomId: 2,
       ameneties: [
         {
           icon: "",
           name: "Bed",
+          slotId: 1,
         },
         {
           icon: "",
           name: "Bedside Table",
+          slotId: 2,
         },
         {
           icon: "",
           name: "Matress",
+          slotId: 3,
         },
       ],
     },
     {
       type: "Living Room",
+      roomId: 3,
       ameneties: [
         {
           icon: "",
           name: "Sofa set",
+          slotId: 1,
         },
         {
           icon: "",
           name: "Coffee Table",
+          slotId: 2,
         },
         {
           icon: "",
           name: "Storage and organizers",
+          slotId: 3,
         },
       ],
     },
   ];
+  const [arr, setArr] = useState(dummy);
+
+  const toggleDrawer = type => {
+    setDrawerType(type);
+    setOpenDrawer(!openDrawer);
+  };
+
+  const handleAddItem = imgurl => {
+    console.log("innnn");
+    const index = arr.findIndex(t => t.roomId === roomId);
+    const indexOfCategory = arr[index].ameneties.findIndex(
+      c => c.slotId === slotId,
+    );
+    console.log(index, indexOfCategory, "logicc");
+    const newArr = [...arr];
+    newArr[index].ameneties[indexOfCategory] = {
+      ...newArr[index].ameneties[indexOfCategory],
+      selectedProduct: imgurl,
+    };
+    setArr(newArr);
+    toggleDrawer();
+  };
+
   return (
     <div className={styles.main}>
       <div className={styles.left_div}>
-        <div className={styles.header_wrapper}>
+        <div
+          className={styles.header_wrapper}
+          onClick={() => router.push(`/citymax`)}>
           <BackIcon className={styles.back_icon} />
           <h1 className={styles.head}>CityMax Pro</h1>
         </div>
@@ -77,7 +125,7 @@ const CitymaxPlanDetail = () => {
         </p>
 
         <div className={styles.plans_wrapper}>
-          {dummy.map((item, index) => (
+          {arr.map((item, index) => (
             <div key={index}>
               <div className={styles.type_wrapper}>
                 <p className={styles.type_txt}>{item.type}</p>
@@ -87,12 +135,30 @@ const CitymaxPlanDetail = () => {
               </div>
               <div className={styles.amen_wrapper}>
                 {item.ameneties.map((t, i) => (
-                  <div key={i} className={styles.amenity_box}>
-                    <img
-                      src={IconLink + t.icon}
-                      className={styles.product_icon}
-                    />
-                    <p className={styles.product_name}>{t.name}</p>
+                  <div
+                    onClick={() => {
+                      toggleDrawer(1);
+                      setRoomId(item.roomId);
+                      setSlotId(t.slotId);
+                    }}
+                    key={i}
+                    className={styles.amenity_box}>
+                    {t.selectedProduct ? (
+                      // <div>
+                      <img
+                        src={productImageBaseUrl + t.selectedProduct}
+                        className="w-full h-full"
+                      />
+                    ) : (
+                      // </div>
+                      <>
+                        <img
+                          src={IconLink + t.icon}
+                          className={styles.product_icon}
+                        />
+                        <p className={styles.product_name}>{t.name}</p>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
@@ -100,6 +166,15 @@ const CitymaxPlanDetail = () => {
           ))}
         </div>
       </div>
+
+      {openDrawer && (
+        <CitymaxDetailPageDrawer
+          open={openDrawer}
+          toggleDrawer={toggleDrawer}
+          handleAddItem={handleAddItem}
+          type={drawerType}
+        />
+      )}
 
       <div className={styles.right_div}>
         <div className={styles.monthly_toggler}>
@@ -127,6 +202,7 @@ const CitymaxPlanDetail = () => {
           </p>
         </div>
         <div
+          onClick={() => toggleDrawer(2)}
           className={`${styles.plan_div} ${styles.right_div_content_wrapper}`}>
           <p className={styles.bold_text}>Current plan: CityMax Pro</p>
           <p className={styles.change_txt}>change</p>

@@ -1,9 +1,11 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
+import {useRouter} from "next/navigation";
 
 const HeroSection = () => {
   const [isHalfYearly, setHalfYearly] = useState(true);
+  const router = useRouter();
   const arr = [
     {
       head: "CityMax Ultra",
@@ -75,7 +77,12 @@ const HeroSection = () => {
 
       <div className={`${styles.center} ${styles.card_wrapper}`}>
         {arr.map((item, index) => (
-          <div key={index} className={styles.card}>
+          <div
+            key={index}
+            className={styles.card}
+            onClick={() =>
+              router.push(`/choose-products/8878/${isHalfYearly ? 6 : 12}`)
+            }>
             <p className={styles.card_head}>{item.head}</p>
             <p className={styles.card_desc}>{item.desc}</p>
             <p className={styles.card_offer}>{item.offer}</p>
