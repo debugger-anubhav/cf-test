@@ -3,6 +3,7 @@ import CitymaxHeader from "@/components/Citymax/Header";
 import React from "react";
 import Footer from "@/components/Common/Footer";
 import CitymaxPlanDetail from "../../../../components/Citymax/PlanDetails";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const CitymaxPage = () => {
   return (
@@ -10,6 +11,7 @@ const CitymaxPage = () => {
       <CitymaxHeader />
       <CitymaxPlanDetail />
       <Footer />
+      <Notifications />
     </div>
   );
 };

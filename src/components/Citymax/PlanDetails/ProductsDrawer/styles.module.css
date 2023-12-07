@@ -1,0 +1,72 @@
+/* .main_container {
+  @apply h-[90vh] md:h-full w-full xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
+} */
+.header {
+  @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
+}
+/* .close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none !h-[90vh] md:!h-full;
+  transition-timing-function: ease-in;
+  overflow-y: visible !important; */
+/* } */
+.main_wrapper {
+  @apply flex flex-col gap-8 mt-8 overflow-y-scroll h-full overflow-x-visible pb-8;
+}
+.product_details_wrapper {
+  @apply w-[579px] flex  gap-6;
+}
+.carousel_wrapper {
+  @apply w-[273px];
+}
+.product_image {
+  @apply w-full h-[204px] relative;
+}
+.thumbnail_container {
+  @apply flex gap-2 mt-4;
+}
+.thumbnail_img {
+  @apply w-12 h-9 border-2 cursor-pointer;
+}
+.label_tag {
+  @apply items-center flex gap-1 w-[120px] h-6 rounded bg-[#207B3A] p-1 absolute left-0 top-2 text-fff text-12 font-medium tracking-0.24;
+}
+.sparkel_icon {
+  @apply w-[14px] h-[14px];
+}
+.right_div {
+  @apply w-full;
+}
+.product_name_wrapper {
+  @apply flex justify-between items-center;
+}
+.product_name {
+  @apply text-71717A text-18 font-medium tracking-0.36;
+}
+.heart {
+  @apply w-5 h-5 cursor-pointer;
+}
+.prod_info_wrapper {
+  @apply mt-6;
+}
+.info_row {
+  @apply flex mt-1  items-baseline;
+}
+.colon {
+  @apply mr-2 text-16 font-medium;
+}
+.info_details {
+  @apply capitalize text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal text-71717A;
+}
+.info_label {
+  @apply capitalize font-medium min-w-[80px] lg:min-w-[60px] xl:min-w-[85px]  text-45454A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
+}
+.add_btn {
+  @apply mt-8 rounded-lg w-[173px] h-14 flex justify-center items-center text-71717A text-16 font-medium leading-5;
+  border: 2px solid var(--grey-grey-600, #71717a);
+}
+.line_break {
+  @apply border-b border-b-DDDDDF border-dashed  w-full mt-8;
+}
