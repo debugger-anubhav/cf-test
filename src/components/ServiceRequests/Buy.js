@@ -49,7 +49,11 @@ function Buy({heading, prevScreen, data}) {
   return (
     <>
       {showPickupReason && Screen === 2 ? (
-        <PickupReasonOptions setScreen={setScreen} />
+        <PickupReasonOptions
+          setScreen={setScreen}
+          selectedProducts={selectedProducts}
+          data={data}
+        />
       ) : (
         <div className={styles.content_wrapper}>
           <div className={styles.main_heading}>
