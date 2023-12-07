@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
@@ -9,6 +9,7 @@ function Repair({prevScreen, data}) {
   const [istoggled, setIstoggled] = useState(false);
   const [toggleIndex, setToggleIndex] = useState(null);
   const [selected, setSelected] = useState(null);
+  // const [selectedProducts, setSelectedProducts] = useState([]);
 
   const repairOptions = [
     {value: "1", label: "Wrong items selected"},
@@ -21,7 +22,9 @@ function Repair({prevScreen, data}) {
   const handleChange = selectedOption => {
     setSelected(selectedOption);
   };
-
+  useEffect(() => {
+    console.log("selected", selected);
+  }, [selected]);
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -41,7 +44,7 @@ function Repair({prevScreen, data}) {
                   color={"#5774AC"}
                   size={28}
                   onClick={() => {
-                    setIstoggled(!istoggled);
+                    setIstoggled(false);
                     setToggleIndex(index);
                     setSelected(null);
                   }}
@@ -52,9 +55,9 @@ function Repair({prevScreen, data}) {
                   size={28}
                   color={"#E3E1DC"}
                   onClick={() => {
-                    setIstoggled(!istoggled);
+                    setIstoggled(true);
                     setToggleIndex(index);
-                    setSelected(null);
+                    // setSelected(null);
                   }}
                   className="cursor-pointer"
                 />
