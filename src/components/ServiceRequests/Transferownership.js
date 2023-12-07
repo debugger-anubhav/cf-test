@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -6,25 +6,33 @@ import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {cityUrl} from "../../../appConfig";
 import {AddressDrawerContent} from "../Cart/Drawer/SaveAddressesDrawer";
-import {getSavedAddress} from "@/store/Slices";
+import {getSavedAddress, setServiceRequestDrawer} from "@/store/Slices";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import {
+  getLocalStorage,
+  CreateRequestPayload,
+  CreateRequest,
+} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 
-function TransferOwnership({prevScreen}) {
+function TransferOwnership({prevScreen, data}) {
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
-  const data = useSelector(state => state.cartPageData);
-  const addressArray = data.savedAddresses;
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
+  );
+  const cartPageData = useSelector(state => state.cartPageData);
+  const addressArray = cartPageData.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+
   const validationSchema = Yup.object({
     fullName: Yup.string()
       .required("Full name is required")
@@ -74,6 +82,7 @@ function TransferOwnership({prevScreen}) {
   const [showAddressFields, setShowAddressFields] = useState(false);
   const [id, setId] = useState(primaryAddress?.id);
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
+  const [description, setDescription] = useState("");
 
   const makeDefaultAddress = id => {
     const newPrimaryAddress = addressArray.find(item => item.id === id);
@@ -100,12 +109,28 @@ function TransferOwnership({prevScreen}) {
   };
 
   const handleSubmit = async values => {
-    console.log(values, "ppppppp");
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      description,
+      full_name: values.fullName,
+      mobile_number: values.contactNumber,
+      email: values.email,
+      postal_code: values.postalCode,
+      city: values.city,
+      address1: values.address,
+      address2: values.landmark,
+      state: primaryAddress.state,
+    };
+    CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
+    console.log(payload, "ppppppppppp");
   };
 
-  // useEffect(() => {
-  //   console.log(primaryAddress, "primaryAddress");
-  // }, [primaryAddress]);
+  useEffect(() => {
+    console.log(primaryAddress, "primaryAddress");
+  }, [primaryAddress]);
 
   return (
     <div className={`${styles.content_wrapper} flex-row`}>
@@ -248,6 +273,7 @@ function TransferOwnership({prevScreen}) {
                         type="text"
                         placeholder="Please share any specific instructions or provide feedback."
                         className={styles.form_input_textarea}
+                        onChange={e => setDescription(e.target.value)}
                       />
                     </div>
                     {showAddressFields && (
@@ -331,6 +357,14 @@ function TransferOwnership({prevScreen}) {
                             }}
                           />
                         )}
+
+                        <div
+                          className="mt-4 mb-8 text-5774AC text-16 font-medium font-Poppins cursor-pointer"
+                          onClick={() => {
+                            setAddressDrawer(!addressDrawer);
+                          }}>
+                          Want to select a different address?
+                        </div>
                       </div>
                     )}
 

@@ -125,7 +125,10 @@ function ServiceRequestType({
             <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "ownership" && (
-            <TransferOwnership prevScreen={setCurrentScreen} />
+            <TransferOwnership
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+            />
           )}
           {selectedType === "buy" && (
             <Buy
