@@ -51,6 +51,7 @@ function CencelOrder({prevScreen, data}) {
   ];
 
   const [selected, setSelected] = useState(null);
+  const [description, setDescription] = useState("");
 
   const handleChange = selectedOption => {
     setSelected(selectedOption);
@@ -62,6 +63,7 @@ function CencelOrder({prevScreen, data}) {
       deal_id: data[0]?.dealCodeNumber,
       Possible_Values: selected.label,
       type: selectedType,
+      description,
     };
     CreateRequest(payload);
     dispatch(setServiceRequestDrawer(false));
@@ -74,7 +76,7 @@ function CencelOrder({prevScreen, data}) {
           onClick={() => prevScreen(true)}
           className={"cursor-pointer"}
         />
-        Cencel order
+        Cancel order
       </div>
       <div className={styles.cancellation_info}>
         <Select
@@ -89,6 +91,7 @@ function CencelOrder({prevScreen, data}) {
           type="text"
           placeholder="Please share any specific instructions or provide feedback."
           className={styles.form_input_textarea}
+          onChange={e => setDescription(e.target.value)}
         />
         <button
           className={`${styles.proceed_btn}  !w-fit ${
