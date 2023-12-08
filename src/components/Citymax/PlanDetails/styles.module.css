@@ -1,20 +1,26 @@
 .main {
-  @apply flex flex-col xl:flex-row items-start gap-6 justify-between font-Poppins w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-11 mb-20;
+  @apply font-Poppins w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 xl:mt-11 mb-12 xl:mb-20;
 }
 .header_wrapper {
-  @apply flex gap-2 items-center;
+  @apply flex gap-2 items-center cursor-pointer;
+}
+.left_div {
+  @apply xl:w-[53%];
+}
+.container {
+  @apply flex flex-col-reverse xl:flex-row  justify-between;
 }
 .back_icon {
-  @apply w-7 h-7;
+  @apply w-5 h-5 xl:w-7 xl:h-7;
 }
 .head {
-  @apply text-45454A text-32 font-medium leading-10 tracking-0.6;
+  @apply text-45454A text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;
 }
 .tag_line {
-  @apply text-9A9AA2 text-16 font-medium leading-5 tracking-0.3 mt-1;
+  @apply text-9A9AA2 text-14 xl:text-16 font-medium leading-5 tracking-desc xl:tracking-0.3;
 }
 .right_div {
-  @apply flex flex-col gap-6;
+  @apply flex flex-col gap-4 xl:gap-6 mt-8 xl:-mt-16;
 }
 .monthly_toggler {
   @apply p-1 flex items-center justify-between bg-[#747474] rounded-xl w-fit h-[44px];
@@ -23,53 +29,67 @@
   @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
 }
 .right_div_content_wrapper {
-  @apply p-4 w-[427px] rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-5774AC bg-fff;
+  @apply p-4 w-full md:w-[427px] rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-5774AC bg-fff;
 }
 .plan_div {
   @apply flex justify-between items-center cursor-pointer;
 }
 .price_div {
-  @apply flex  gap-3;
+  @apply flex gap-3;
 }
 .bold_text {
-  @apply text-45454A text-20 leading-10 tracking-0.4 font-medium;
+  @apply text-45454A text-16 xl:text-20 xl:leading-10 tracking-0.3 xl:tracking-0.4 font-medium;
 }
 .change_txt {
-  @apply text-5774AC text-16 leading-5 tracking-0.3 underline;
+  @apply text-5774AC text-14 xl:text-16 leading-5 tracking-desc xl:tracking-0.3 underline;
 }
 .icon {
   @apply text-222 w-6 h-6;
 }
 .price_type {
-  @apply text-45454A text-14 tracking-desc;
+  @apply text-45454A text-12 xl:text-14 tracking-0.24 xl:tracking-desc;
 }
 .rupee {
   @apply font-Inter;
 }
 .proceed_btn {
-  @apply bg-F6B704 rounded-lg flex justify-center items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14;
+  @apply bg-F6B704 rounded-lg justify-center w-full xs1:w-[328px] xl:w-full items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14;
 }
 .plans_wrapper {
-  @apply mt-12 flex flex-col gap-12;
+  @apply w-full xs1:w-fit xl:w-full mt-8 xl:mt-12 flex flex-col gap-8 xl:gap-12;
 }
 .type_wrapper {
   @apply flex justify-between items-center;
 }
 .type_txt {
-  @apply text-20 text-45454A font-medium tracking-0.4;
+  @apply text-16 xl:text-20 text-45454A font-medium tracking-0.3 xl:tracking-0.4;
 }
 .selected_text {
-  @apply text-16 text-71717A font-medium tracking-0.3;
+  @apply text-14 xl:text-16 text-71717A font-medium tracking-desc xl:tracking-0.3;
 }
 .amen_wrapper {
-  @apply flex gap-6 mt-8;
+  @apply flex gap-4 xl:gap-6 mt-6 xl:mt-8 w-full overflow-scroll;
 }
 .amenity_box {
-  @apply cursor-pointer w-[160px] h-[200px] flex flex-col gap-1 justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] hover:border-5774AC bg-[#f6f5f8] hover:bg-[#E0F0FF];
+  @apply cursor-pointer min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px] flex flex-col gap-1 justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] hover:border-5774AC bg-[#f6f5f8] hover:bg-[#E0F0FF];
 }
 .product_icon {
   @apply w-8 h-8;
 }
 .product_name {
   @apply text-71717A text-14 font-medium tracking-desc text-center;
+}
+.selected_box_lowerdiv {
+  @apply w-full p-3 bg-[#E3E1DC] rounded-b-lg;
+}
+.selected_slot_img {
+  @apply w-full h-[90px] xl:h-[134px] rounded-t-lg;
+}
+.selected_slot_name {
+  @apply text-45454A line-clamp-2 text-12 xl:text-14 font-medium tracking-0.24 xl:tracking-desc;
+}
+.cross {
+  @apply absolute text-5774AC right-2 top-2 w-6 h-6 p-1;
+  border-radius: 13.333px;
+  background: var(--white-white-80, rgba(255, 255, 255, 0.8));
 }
