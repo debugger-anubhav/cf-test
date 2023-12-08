@@ -1,13 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {
-  BackIcon,
-  CheckCircleIcon,
-  DeleteIcon,
-  ExclamationCircleFill,
-  ForwardArrowWithLine,
-  ReloadIcon,
-} from "@/assets/icon";
+import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
@@ -18,7 +11,8 @@ import DropDown from "../Documentation/DropDown/DropDown";
 import {endPoints} from "@/network/endPoints";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import Image from "next/image";
-import commonStyles from "@/components/Documentation/common.module.css";
+import {FaCheckCircle} from "react-icons/fa";
+import {IoIosCloseCircle} from "react-icons/io";
 
 function Relocation({prevScreen}) {
   const [docsData, setDocsData] = useState([]);
@@ -151,7 +145,7 @@ function Relocation({prevScreen}) {
         />
         Relocation
       </div>
-      <div className={styles.buy_info}>
+      <div className={`${styles.buy_info} !h-full`}>
         <Formik
           initialValues={{
             contactNumber: "",
@@ -168,7 +162,7 @@ function Relocation({prevScreen}) {
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
-              <div>
+              <div className="relative">
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Alternative number</p>
                   <div className={`${styles.row} ${formStyles.form_input}`}>
@@ -285,82 +279,66 @@ function Relocation({prevScreen}) {
                   />
                 </div>
 
-                <div className={`mt-4`}>
-                  <div className="flex items-center">
-                    <label
-                      htmlFor="currrentAdd"
-                      className={`${
-                        commonStyles.basicInputStyles
-                      } md:w-[232px] block mt-2 mb-12 ${
-                        formErrors.currentAddressProof &&
-                        "  !bg-[#FFF1F1] md:!bg-white"
-                      } ${
-                        !formErrors.currentAddressProof &&
-                        formData.currentAddressProof.name
-                          ? "  !bg-[#F1FFF9] md:!bg-white text-black"
-                          : "text-[#71717a] "
-                      }`}>
-                      <div className={`${commonStyles.flexICenter}`}>
-                        {formData?.currentAddressProof.name ? (
-                          <>
-                            {formErrors?.currentAddressProof ? (
-                              <ExclamationCircleFill
-                                color={"#D96060"}
-                                className={`${commonStyles.mdHiddemIcons}`}
-                              />
-                            ) : (
-                              <CheckCircleIcon
-                                color={"#2D9469"}
-                                className={`${commonStyles.mdHiddemIcons}`}
-                              />
-                            )}
-                          </>
-                        ) : (
+                <div className={`mt-4  `}>
+                  <div
+                    className={`${
+                      !formErrors.currentAddressProof &&
+                      formData.currentAddressProof.name
+                        ? " w-[90%] "
+                        : "w-full"
+                    }flex `}>
+                    <div
+                      className={`flex items-center w-full relative ${styles.demo}`}>
+                      <label
+                        htmlFor="currrentAdd"
+                        className={`${formStyles.form_input} !h-fit w-full pr-2 mb-12`}>
+                        <div className={`flex w-full items-center`}>
                           <Image
                             src={uploading}
                             alt="Uploading Icon"
-                            className={`${commonStyles.mdHiddenIB}`}
+                            className={`h-full`}
                           />
-                        )}
-                        <Image
-                          src={uploading}
-                          alt="Uploading Icon"
-                          className={`${commonStyles.mdIBHidden}`}
-                        />
-                        <span className={`${styles.chooseFile} pl-2`}>
-                          {formData?.currentAddressProof?.name ?? "Choose file"}
-                        </span>
-                      </div>
+                          <>
+                            <span
+                              className={`${styles.chooseFile} px-2 break-normal `}>
+                              {formData?.currentAddressProof?.name ??
+                                "Choose file"}
+                            </span>
+                          </>
+                        </div>
+
+                        {!formErrors.currentAddressProof &&
+                          formData.currentAddressProof.name && (
+                            <div className={`${styles.running_line}`}></div>
+                          )}
+                      </label>
                       {!formErrors.currentAddressProof &&
-                      formData.currentAddressProof.name ? (
-                        <div className={`${commonStyles.correctFile}`}></div>
-                      ) : (
-                        <></>
-                      )}
-                    </label>
-                    {formErrors.currentAddressProof && (
-                      <>
-                        <ReloadIcon
-                          className={`${commonStyles.mdHiddemIconsML}`}
-                        />
-                        <span
-                          onClick={e => {
-                            e.stopPropagation();
-                            setFormData(prev => ({
-                              ...prev,
-                              currentAddressProof: "",
-                            }));
-                            setFormErrors(prev => ({
-                              ...prev,
-                              currentAddressProof: "",
-                            }));
-                          }}>
-                          <DeleteIcon
-                            className={`${commonStyles.mdHiddemIcons} ml-4`}
-                          />
-                        </span>
-                      </>
-                    )}
+                        formData.currentAddressProof.name && (
+                          <div
+                            className="flex items-center absolute right-[-24px]"
+                            onClick={e => {
+                              e.stopPropagation();
+                              setFormData(prev => ({
+                                ...prev,
+                                currentAddressProof: "",
+                              }));
+                              setFormErrors(prev => ({
+                                ...prev,
+                                currentAddressProof: "",
+                              }));
+                            }}>
+                            <FaCheckCircle
+                              color="#2D9469"
+                              className={styles.showCheckCircle}
+                            />
+                            <IoIosCloseCircle
+                              color="#D96060"
+                              size={20}
+                              className={styles.showDeleteIcon}
+                            />
+                          </div>
+                        )}
+                    </div>
                   </div>
 
                   <input
