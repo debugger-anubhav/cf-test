@@ -121,18 +121,27 @@ const ProductCard = ({
               showThumbs={false}
               showArrows={false}
               showStatus={false}
-              showIndicators={false}
-              onChange={handleThumbnailClick}>
-              {[{}, {}, {}, {}, {}]?.map((image, index) => (
+              onChange={handleThumbnailClick}
+              renderIndicator={(onClickHandler, isSelected, index) => {
+                return (
+                  <li
+                    className={styles.indicatorStyle}
+                    style={{background: isSelected ? "#597492" : "#ffffff"}}
+                    onClick={onClickHandler}
+                    onKeyDown={onClickHandler}
+                    value={index}
+                    key={index}
+                    role="button"
+                    tabIndex={0}
+                  />
+                );
+              }}>
+              {item?.image?.split(",")?.map((crouselImg, index) => (
                 <>
-                  {item && (
+                  {crouselImg && (
                     <div key={index} className={styles.product_image}>
                       <img
-                        src={
-                          productImageBaseUrl +
-                          "thumb/" +
-                          "vesta-king-bed-with-storage-1679296687.webp"
-                        }
+                        src={productImageBaseUrl + "thumb/" + crouselImg}
                         alt="eheh"
                         className="w-full h-full"
                         loading="lazy"
@@ -152,7 +161,7 @@ const ProductCard = ({
           </div>
 
           <div className={styles.thumbnail_container}>
-            {[{}, {}, {}, {}, {}].map((image, index) => (
+            {item?.image?.split(",")?.map((image, index) => (
               <>
                 {image && (
                   <div
@@ -164,11 +173,7 @@ const ProductCard = ({
                     key={index}
                     onClick={() => handleThumbnailClick(mainIndex, index)}>
                     <img
-                      src={`${
-                        productImageBaseUrl +
-                        "thumb/" +
-                        "vesta-king-bed-with-storage-1679296687.webp"
-                      }`}
+                      src={`${productImageBaseUrl + "thumb/" + image}`}
                       alt={"jjjuj"}
                       className="w-full h-full"
                       loading="lazy"
@@ -182,7 +187,7 @@ const ProductCard = ({
 
         <div className={styles.right_div}>
           <div className={styles.product_name_wrapper}>
-            <p className={styles.product_name}>Alexa 6 Seater Dining Table </p>
+            <p className={styles.product_name}>{item.product_name}</p>
             <div
               id={productID}
               onClick={e => {
@@ -197,16 +202,16 @@ const ProductCard = ({
           </div>
           <div className={styles.prod_info_wrapper}>
             {[
-              {label: "Brand", value: "placeholder placeholder "},
+              {label: "Brand", value: item.brand},
               {
                 label: "Size",
-                value: "L x W x H: 72 inches x 36 inches x 18 inches ",
+                value: item.dimension,
               },
               {
                 label: "Material",
-                value: "FOAM(Supporting foam), 1-inch PU",
+                value: item.material,
               },
-              {label: "Color", value: "placeholder placeholder"},
+              {label: "Color", value: item.colour},
             ].map((info, infoIndex) => (
               <div className={styles.info_row} key={infoIndex}>
                 <p className={styles.info_label}>{info.label}</p>
@@ -218,7 +223,7 @@ const ProductCard = ({
 
           <button
             onClick={() =>
-              handleAddItem("vesta-king-bed-with-storage-1679296687.webp")
+              handleAddItem(item.image?.split(",")[0], item.product_name)
             }
             className={styles.add_btn}>
             Add item
