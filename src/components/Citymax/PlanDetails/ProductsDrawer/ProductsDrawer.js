@@ -1,21 +1,34 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
-// import {Drawer} from "@mui/material";
-// import {Close} from "@/assets/icon";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ProductCard from "./ProductCard";
+import {useParams} from "next/navigation";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
-const ProductsDrawer = ({handleAddItem}) => {
-  // const [isBottomDrawer, setIsBottomDrawer] = useState(false);
+const ProductsDrawer = ({handleAddItem, slotId, roomId}) => {
   const [selectedIndexes, setSelectedIndexes] = useState(Array(4).fill(0));
+  const [productsArr, setProductsArr] = useState();
+  const params = useParams();
+  const fetchAssociatedSlotData = () => {
+    const body = {
+      product_id: params.planId,
+      room_id: roomId,
+      slot_id: slotId,
+      cityId: 46,
+    };
+    axios
+      .post(baseURL + endPoints.cityMaxPage.getAssociateSlotData, body)
+      .then(res => {
+        setProductsArr(res?.data?.data?.associated_products);
+      })
+      .catch(err => console.log(err));
+  };
 
-  // const handleresize = e => {
-  //   if (window.innerWidth < 768) {
-  //     setIsBottomDrawer(true);
-  //   } else {
-  //     setIsBottomDrawer(false);
-  //   }
-  // };
+  useEffect(() => {
+    fetchAssociatedSlotData();
+  }, []);
 
   const handleThumbnailClick = (setIndex, index) => {
     const newSelectedIndexes = [...selectedIndexes];
@@ -23,39 +36,20 @@ const ProductsDrawer = ({handleAddItem}) => {
     setSelectedIndexes(newSelectedIndexes);
   };
 
-  // React.useEffect(() => {
-  //   handleresize();
-  //   window.addEventListener("resize", handleresize);
-  //   return () => {
-  //     window.removeEventListener("resize", handleresize);
-  //   };
-  // }, []);
-
-  const productsArr = [{isAlt: true}, {}, {}, {}];
+  // const productsArr = [{isAlt: true}, {}, {}, {}];
 
   return (
     <div>
-      {/* <Drawer
-        anchor={isBottomDrawer ? "bottom" : "right"}
-        open={open}
-        onClose={toggleDrawer}
-        classes={{paper: styles.customDrawer}}>
-        {" "}
-        <div className={styles.main_container}>
-          <div className={styles.close_icon} onClick={toggleDrawer}>
-            <Close color={"#45454A"} size={24} className="cursor-pointer" />
-          </div> */}
-
       <h2 className={styles.header}>Add a product</h2>
       <div className={styles.main_wrapper}>
-        {productsArr.map((item, mainIndex) => (
+        {productsArr?.map((item, mainIndex) => (
           <>
             <div key={mainIndex}>
               <ProductCard
                 handleThumbnailClick={handleThumbnailClick}
                 length={productsArr.length}
                 mainIndex={mainIndex}
-                item={item}
+                item={item.productDetails[0]}
                 selectedIndexes={selectedIndexes}
                 handleAddItem={handleAddItem}
               />
@@ -67,8 +61,6 @@ const ProductsDrawer = ({handleAddItem}) => {
         ))}
       </div>
     </div>
-    // </Drawer>
-    // </div>
   );
 };
 

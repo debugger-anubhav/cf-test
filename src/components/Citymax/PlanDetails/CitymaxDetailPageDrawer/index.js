@@ -5,7 +5,15 @@ import {Close} from "@/assets/icon";
 import ChangePlanDrawer from "../ChangePlan/ChangePlanDrawer";
 import ProductsDrawer from "../ProductsDrawer/ProductsDrawer";
 
-const CitymaxDetailPageDrawer = ({toggleDrawer, open, handleAddItem, type}) => {
+const CitymaxDetailPageDrawer = ({
+  toggleDrawer,
+  open,
+  handleAddItem,
+  type,
+  isHalfYearly,
+  slotId,
+  roomId,
+}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
   const handleresize = e => {
@@ -37,7 +45,11 @@ const CitymaxDetailPageDrawer = ({toggleDrawer, open, handleAddItem, type}) => {
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
           {type === 1 ? (
-            <ProductsDrawer handleAddItem={handleAddItem} />
+            <ProductsDrawer
+              handleAddItem={handleAddItem}
+              slotId={slotId}
+              roomId={roomId}
+            />
           ) : (
             <ChangePlanDrawer />
           )}
