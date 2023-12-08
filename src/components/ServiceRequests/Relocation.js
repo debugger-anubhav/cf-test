@@ -124,6 +124,7 @@ function Relocation({prevScreen}) {
       .required("Postal code is required"),
     city: Yup.string().required("City is required"),
   });
+
   const getAddProofList = () => {
     axios
       .get(baseURL + endPoints.addressProofList)
@@ -132,10 +133,15 @@ function Relocation({prevScreen}) {
       })
       .catch(err => console.log(err));
   };
-  const handleSubmit = values => {};
+
+  const handleSubmit = values => {
+    console.log(values, "formikValues");
+  };
+
   useEffect(() => {
     getAddProofList();
   }, []);
+
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -150,6 +156,11 @@ function Relocation({prevScreen}) {
           initialValues={{
             contactNumber: "",
             city: "",
+            address: "",
+            landmark: "",
+            postalCode: "",
+            addressProof: formData.addressProof,
+            currentAddressProof: formData.currentAddressProof,
           }}
           validationSchema={validationSchema}
           onSubmit={values => {
@@ -197,7 +208,7 @@ function Relocation({prevScreen}) {
                   <ErrorMessage name="address">
                     {msg =>
                       formik.touched.address && (
-                        <p className={styles.error}>{msg}</p>
+                        <p className={formStyles.error}>{msg}</p>
                       )
                     }
                   </ErrorMessage>
@@ -225,7 +236,7 @@ function Relocation({prevScreen}) {
                   <ErrorMessage name="postalCode">
                     {msg =>
                       formik.touched.postalCode && (
-                        <p className={styles.error}>{msg} </p>
+                        <p className={formStyles.error}>{msg} </p>
                       )
                     }
                   </ErrorMessage>
