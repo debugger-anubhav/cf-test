@@ -8,5 +8,5 @@
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !h-[90vh] md:!h-full;
   transition-timing-function: ease-in;
-  overflow-y: visible !important;
+  /* overflow-y: visible !important; */
 }

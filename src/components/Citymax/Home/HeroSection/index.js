@@ -1,44 +1,27 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
-import {IconLink} from "@/assets/icon";
-import {useRouter} from "next/navigation";
+import CommonCard from "../../Common/CommonCard";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const HeroSection = () => {
   const [isHalfYearly, setHalfYearly] = useState(true);
-  const router = useRouter();
-  const arr = [
-    {
-      head: "CityMax Ultra",
-      desc: "Best suited for a 3BHK apartment",
-      offer: "13 products @ just",
-      price: "6779",
-    },
-    {
-      head: "CityMax Ultra",
-      desc: "Best suited for a 3BHK apartment",
-      offer: "13 products @ just",
-      price: "6779",
-      tag: "Popular",
-    },
-    {
-      head: "CityMax Ultra",
-      desc: "Best suited for a 3BHK apartment",
-      offer: "13 products @ just",
-      price: "6779",
-    },
-    {
-      head: "CityMax Ultra",
-      desc: "Best suited for a 3BHK apartment",
-      offer: "13 products @ just",
-      price: "6779",
-    },
-    {
-      head: "CityMax Ultra",
-      desc: "Best suited for a 3BHK apartment",
-      offer: "13 products @ just",
-      price: "6779",
-    },
-  ];
+  const [plans, setPlans] = useState();
+
+  const fetchPlans = () => {
+    axios
+      .get(baseURL + endPoints.cityMaxPage.getAllPlans)
+      .then(res => {
+        setPlans(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    fetchPlans();
+  }, []);
+
   return (
     <div className={styles.main}>
       <h1 className={styles.header}>
@@ -76,34 +59,21 @@ const HeroSection = () => {
       </div>
 
       <div className={`${styles.center} ${styles.card_wrapper}`}>
-        {arr.map((item, index) => (
-          <div
-            key={index}
-            className={styles.card}
-            onClick={() =>
-              router.push(`/choose-products/8878/${isHalfYearly ? 6 : 12}`)
-            }>
-            <p className={styles.card_head}>{item.head}</p>
-            <p className={styles.card_desc}>{item.desc}</p>
-            <p className={styles.card_offer}>{item.offer}</p>
-            <p className={styles.card_price}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {item.price}/mo
-            </p>
-            <button className={styles.btn}>Select plan</button>
-            {item.tag && (
-              <div className={styles.tag}>
-                <img
-                  src={`${IconLink + "popular-icon.svg"}`}
-                  className={styles.leaf_icon}
-                  loading="lazy"
-                  alt="LeafIcon"
-                />
-                {item.tag}
-              </div>
-            )}
-          </div>
-        ))}
+        {plans?.citymax_plans
+          ?.filter(item =>
+            isHalfYearly
+              ? item.attr_name === "6 Months"
+              : item.attr_name === "12 Months",
+          )
+          .map((item, index) => (
+            <div key={index} className="md:w-[328px]">
+              <CommonCard
+                isHalfYearly={isHalfYearly}
+                item={item}
+                plans={plans}
+              />
+            </div>
+          ))}
       </div>
     </div>
   );

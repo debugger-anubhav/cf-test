@@ -147,6 +147,13 @@ export const endPoints = {
     getDeliverySlots: `fc-payments/getSlots`,
     updateSlot: `fc-payments/updateSlot`,
   },
+
+  cityMaxPage: {
+    getAllPlans: `citymax/getFrp`,
+    getRoomData: (prodId, tenure) =>
+      `citymax/getCitymaxPlanData?frp_product_id=${prodId}&tenure_selected=${tenure}`,
+    getAssociateSlotData: `citymax/getAssociateData`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 

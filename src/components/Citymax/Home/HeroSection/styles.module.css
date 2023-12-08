@@ -30,35 +30,6 @@
 .card_wrapper {
   @apply flex-wrap mt-8 xl:mt-12 gap-8;
 }
-.card {
-  @apply p-6 rounded-lg cursor-pointer relative w-[328px];
-  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/card-for-plans-pc.webp")
-    no-repeat;
-  background-size: cover;
-}
-.card_head {
-  @apply text-45454A font-medium tracking-0.36 xl:tracking-0.48 text-18 xl:text-24;
-}
-.card_desc {
-  @apply text-71717A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 leading-5;
-}
-.card_offer {
-  @apply mt-4 xl:mt-6 text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
-}
-.card_price {
-  @apply text-222 text-18 xl:text-24 font-medium tracking-0.36 xl:tracking-0.48 mt-6;
-}
-.rupeeIcon {
-  @apply font-Inter;
-}
-.btn {
-  @apply mt-6 rounded-lg bg-F6B704 px-8 h-12 xl:h-14 w-full flex justify-center items-center text-222 text-14 xl:text-16 font-medium;
-}
-.tag {
-  @apply absolute flex left-4 -top-3 justify-center items-center p-1 gap-1 text-fff text-12 font-medium tracking-0.24 uppercase;
-  border-radius: 4px;
-  background: #4a36b3;
-}
 .leaf_icon {
   @apply w-[14px] h-[13px];
 }
