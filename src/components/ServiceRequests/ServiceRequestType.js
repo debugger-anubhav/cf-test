@@ -9,13 +9,13 @@ import SwapProduct from "./SwapProduct";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import Buy from "./Buy";
-import TransferOwnership from "./TransferOwnership";
 import Repair from "./Repair";
 import ExtendTenure from "./ExtendTenure";
 import ChangeBillCycle from "./ChangeBillCycle";
 import Relocation from "./Relocation";
 import {useDispatch} from "react-redux";
 import {setServiceRequestType} from "@/store/Slices";
+import TransferOwnership from "./TransferOwnership";
 
 function ServiceRequestType({
   orderId,
