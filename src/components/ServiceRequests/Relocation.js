@@ -364,9 +364,9 @@ function Relocation({prevScreen}) {
                         ...formData,
                         addressProof: selectedOptionPer?.label,
                       });
-                      console.log(formik.values, "valuessssss");
-                      console.log(formData, "kkkkkkkk");
-                      console.log(formErrors, "errrrrrrrrrrrrr");
+                      // console.log(formik.values, "valuessssss");
+                      // console.log(formData, "kkkkkkkk");
+                      // console.log(formErrors, "errrrrrrrrrrrrr");
                     }}>
                     Create request <ForwardArrowWithLine />
                   </button>
