@@ -5,6 +5,7 @@ import {
   HomePageFourSteps,
   hasselFreeSection,
 } from "@/assets/images";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -720,6 +721,12 @@ export const CreateRequest = CreateRequestPayload => {
       baseURL + endPoints.serviceRequestPage.createRequest,
       CreateRequestPayload,
     )
-    .then(res => console.log("created request success", res))
+    .then(res => {
+      console.log("created request success", res);
+      showToastNotification(
+        res?.data?.data?.msg,
+        res?.data?.data?.status === true ? 2 : 3,
+      );
+    })
     .catch(err => console.log(err));
 };

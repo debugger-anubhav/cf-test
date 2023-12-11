@@ -43,6 +43,7 @@ function Buy({heading, prevScreen, data}) {
       description,
     };
     CreateRequest(payload);
+
     dispatch(setServiceRequestDrawer(false));
   };
 

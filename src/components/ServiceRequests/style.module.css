@@ -137,3 +137,44 @@
 .images_wraper {
   @apply flex gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
 }
+
+.running_line {
+  width: 80%;
+  height: 2px;
+  background: green;
+  position: absolute;
+  transform: translate(0, 100%);
+}
+
+.running_line::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: animate 3s linear;
+}
+
+@keyframes animate {
+  100% {
+    left: 100%;
+  }
+  0% {
+    left: 0;
+  }
+}
+
+.showCheckCircle {
+  @apply flex mb-2;
+}
+.showDeleteIcon {
+  @apply hidden mb-2;
+}
+.demo:hover .showDeleteIcon {
+  @apply flex;
+}
+.demo:hover .showCheckCircle {
+  @apply hidden;
+}
