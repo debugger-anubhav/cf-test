@@ -125,7 +125,6 @@ function TransferOwnership({prevScreen, data}) {
     };
     CreateRequest(payload);
     dispatch(setServiceRequestDrawer(false));
-    console.log(payload, "ppppppppppp");
   };
 
   useEffect(() => {
