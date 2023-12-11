@@ -74,3 +74,26 @@
 .line_break {
   @apply border-b border-b-DDDDDF border-dashed  w-full mt-8;
 }
+
+.swap_div {
+  @apply mt-8 flex flex-col gap-8;
+}
+.swap_prod_wrapper {
+  @apply flex justify-between items-center;
+}
+.selec_prod_label {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+}
+.swap_prod_name {
+  @apply text-222 text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-1;
+}
+.swap_prod_img {
+  @apply w-6 h-6 rounded;
+}
+.swap_icon_wrapper {
+  @apply flex items-center justify-center px-3 py-2 gap-2 rounded-[20px] border border-F7F7F8 bg-F7F7F8;
+  backdrop-filter: blur(40px);
+}
+.swap_icon {
+  @apply text-9A9AA2;
+}
