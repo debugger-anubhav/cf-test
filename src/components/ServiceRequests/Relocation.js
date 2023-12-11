@@ -37,24 +37,6 @@ function Relocation({prevScreen}) {
   ];
   const handleFileInputChange = e => {
     const file = e.target.files[0];
-    if (e.target.name === "addressProof") {
-      if (file) {
-        setFormData(prev => {
-          return {...prev, addressProof: file};
-        });
-        if (!allowedFileTypes.includes(file.type)) {
-          setFormErrors(prev => ({
-            ...prev,
-            addressProof: "Please select jpg,png, pdf or jpeg file",
-          }));
-        } else {
-          setFormErrors(prev => ({
-            ...prev,
-            addressProof: "",
-          }));
-        }
-      }
-    }
     if (e.target.name === "currrentAdd") {
       if (file) {
         setFormData(prev => {
@@ -97,8 +79,8 @@ function Relocation({prevScreen}) {
       )
       .required("Contact number is required"),
     email: Yup.string().email().required("Please enter a valid email address."),
-    landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
+    addressProof: Yup.string().required("Address Proof is required"),
     postalCode: Yup.string()
       .test(
         "no-spaces-special-characters",
@@ -153,7 +135,7 @@ function Relocation({prevScreen}) {
             address: "",
             landmark: "",
             postalCode: "",
-            addressProof: formData.addressProof,
+            addressProof: "",
             currentAddressProof: formData.currentAddressProof,
           }}
           validationSchema={validationSchema}
@@ -255,28 +237,41 @@ function Relocation({prevScreen}) {
 
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Current address proof</p>
-                  <DropDown
-                    options={docsData[1]?.supported_docs
-                      .split(",")
-                      ?.map(i => ({label: i, value: i}))}
-                    setIsDDOpen={setPerAddModal}
-                    selectedOption={selectedOptionPer}
-                    isOpen={perAddModal}
-                    setSelectedOption={setSelectedOptionPer}
-                    maxWidth="502px"
-                    optionsActive="md:block hidden"
-                    placeholder="Select any current address proof"
-                  />
+                  <label htmlFor="addressProof">
+                    <DropDown
+                      options={docsData[1]?.supported_docs
+                        .split(",")
+                        ?.map(i => ({label: i, value: i}))}
+                      setIsDDOpen={setPerAddModal}
+                      selectedOption={selectedOptionPer}
+                      isOpen={perAddModal}
+                      setSelectedOption={setSelectedOptionPer}
+                      maxWidth="502px"
+                      optionsActive="md:block hidden"
+                      placeholder="Select any current address proof"
+                    />
+                  </label>
 
-                  <input
-                    type="file"
+                  <Field
+                    as="select"
                     name="addressProof"
-                    id="addressProof"
                     style={{display: "none"}}
                     onChange={e => {
-                      handleFileInputChange(e);
+                      console.log("eeeeeeeeeeee");
+
+                      formik.setFieldValue(
+                        "addressProof",
+                        selectedOptionPer?.label,
+                      );
                     }}
                   />
+                  <ErrorMessage name="addressProof">
+                    {msg =>
+                      formik.touched.addressProof && (
+                        <p className={formStyles.error}>{msg} </p>
+                      )
+                    }
+                  </ErrorMessage>
                 </div>
 
                 <div className={`mt-4  `}>
@@ -356,9 +351,18 @@ function Relocation({prevScreen}) {
                 <div className={styles.bottom_row}>
                   <div className={styles.bottom_line}></div>
                   <button
+                    // type="submit"
                     className={`${styles.proceed_btn} ${
                       formik.isValid ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
-                    }`}>
+                    }`}
+                    onClick={() => {
+                      setFormData({
+                        ...formData,
+                        addressProof: selectedOptionPer?.label,
+                      });
+                      console.log(formik.values, "valuessssss");
+                      console.log(formData, "kkkkkkkk");
+                    }}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>

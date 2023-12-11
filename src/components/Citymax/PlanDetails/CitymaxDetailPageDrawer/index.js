@@ -10,9 +10,10 @@ const CitymaxDetailPageDrawer = ({
   open,
   handleAddItem,
   type,
-  isHalfYearly,
+  headType,
   slotId,
   roomId,
+  swapProductDetails,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
@@ -49,6 +50,8 @@ const CitymaxDetailPageDrawer = ({
               handleAddItem={handleAddItem}
               slotId={slotId}
               roomId={roomId}
+              headType={headType}
+              swapProductDetails={swapProductDetails}
             />
           ) : (
             <ChangePlanDrawer />

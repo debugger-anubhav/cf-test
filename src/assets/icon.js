@@ -16,6 +16,7 @@ import {
   IoArrowForwardSharp,
   IoChevronDown,
   IoWarning,
+  IoSwapHorizontalSharp,
 } from "react-icons/io5";
 import {TbMailFilled, TbReload, TbSparkles} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
@@ -386,4 +387,8 @@ export const Sparkles = ({size, color, className}) => (
 
 export const Lock = ({size, color, className}) => (
   <FiLock size={size} color={color} className={className} />
+);
+
+export const SwapIcon = ({size, color, className}) => (
+  <IoSwapHorizontalSharp size={size} color={color} className={className} />
 );
