@@ -142,7 +142,7 @@ const ProductCard = ({
                     <div key={index} className={styles.product_image}>
                       <img
                         src={productImageBaseUrl + "thumb/" + crouselImg}
-                        alt="eheh"
+                        alt={item?.product_name}
                         className="w-full h-full"
                         loading="lazy"
                       />
@@ -174,7 +174,7 @@ const ProductCard = ({
                     onClick={() => handleThumbnailClick(mainIndex, index)}>
                     <img
                       src={`${productImageBaseUrl + "thumb/" + image}`}
-                      alt={"jjjuj"}
+                      alt={""}
                       className="w-full h-full"
                       loading="lazy"
                     />

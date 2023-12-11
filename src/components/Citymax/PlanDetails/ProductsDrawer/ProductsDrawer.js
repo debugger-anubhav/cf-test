@@ -6,8 +6,16 @@ import {useParams} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {productImageBaseUrl} from "@/constants/constant";
+import {SwapIcon} from "@/assets/icon";
 
-const ProductsDrawer = ({handleAddItem, slotId, roomId}) => {
+const ProductsDrawer = ({
+  handleAddItem,
+  slotId,
+  roomId,
+  headType,
+  swapProductDetails,
+}) => {
   const [selectedIndexes, setSelectedIndexes] = useState(Array(4).fill(0));
   const [productsArr, setProductsArr] = useState();
   const params = useParams();
@@ -40,7 +48,29 @@ const ProductsDrawer = ({handleAddItem, slotId, roomId}) => {
 
   return (
     <div>
-      <h2 className={styles.header}>Add a product</h2>
+      <h2 className={styles.header}>
+        {headType === 1 ? "Add a product" : "Swap product"}
+      </h2>
+      {headType === 2 && (
+        <div className={styles.swap_div}>
+          <div className={styles.swap_prod_wrapper}>
+            <div>
+              <p className={styles.selec_prod_label}>Selected product:</p>
+              <p className={styles.swap_prod_name}>{swapProductDetails.name}</p>
+            </div>
+            <div className={styles.swap_icon_wrapper}>
+              <img
+                src={productImageBaseUrl + swapProductDetails.img}
+                className={styles.swap_prod_img}
+              />
+              <SwapIcon className={styles.swap_icon} />
+            </div>
+          </div>
+          <p className={`font-medium ${styles.selec_prod_label}`}>
+            Select product to swap to
+          </p>
+        </div>
+      )}
       <div className={styles.main_wrapper}>
         {productsArr?.map((item, mainIndex) => (
           <>

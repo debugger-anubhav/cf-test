@@ -67,11 +67,20 @@
 .selected_text {
   @apply text-14 xl:text-16 text-71717A font-medium tracking-desc xl:tracking-0.3;
 }
+.same_above_txt {
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-[30px];
+}
+.checkbox {
+  @apply w-5 h-5 xl:w-6 xl:h-6 cursor-pointer;
+}
 .amen_wrapper {
   @apply flex gap-4 xl:gap-6 mt-6 xl:mt-8 w-full overflow-scroll;
 }
+.slot {
+  @apply min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px];
+}
 .amenity_box {
-  @apply cursor-pointer min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px] flex flex-col gap-1 justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] hover:border-5774AC bg-[#f6f5f8] hover:bg-[#E0F0FF];
+  @apply p-3 cursor-pointer w-full h-full gap-1 flex flex-col justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] hover:border-5774AC bg-[#f6f5f8] hover:bg-[#E0F0FF];
 }
 .product_icon {
   @apply w-8 h-8;
@@ -80,10 +89,11 @@
   @apply text-71717A text-14 font-medium tracking-desc text-center;
 }
 .selected_box_lowerdiv {
-  @apply w-full p-3 bg-[#E3E1DC] rounded-b-lg;
+  @apply w-full p-3  rounded-b-lg h-[60px] xl:h-[66px] flex items-center justify-center;
 }
 .selected_slot_img {
-  @apply w-full h-[90px] xl:h-[134px] rounded-t-lg;
+  @apply min-h-[90px] xl:min-h-[134px] 
+   rounded-t-lg;
 }
 .selected_slot_name {
   @apply text-45454A line-clamp-2 text-12 xl:text-14 font-medium tracking-0.24 xl:tracking-desc;
