@@ -36,7 +36,7 @@
   @apply my-8 text-71717A text-16 font-Poppins;
 }
 .info_wrapper {
-  @apply flex flex-col w-full gap-6 h-[80vh] overflow-y-scroll;
+  @apply flex flex-col w-full gap-6 md:h-[80vh] h-[600px] overflow-y-scroll;
 }
 .order_row {
   @apply flex w-full gap-2 items-center;
