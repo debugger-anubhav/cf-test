@@ -5,10 +5,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
 import {setServiceRequestDrawer} from "@/store/Slices";
 import Repair from "./Repair";
-import TransferOwnership from "./TransferOwnership";
 import Relocation from "./Relocation";
 import SwapProduct from "./SwapProduct";
 import Buy from "./Buy";
+import TransferOwnership from "./TransferOwnership";
 
 function PickupReasonCommonScreen({
   reason,
