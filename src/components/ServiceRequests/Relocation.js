@@ -36,7 +36,6 @@ function Relocation({prevScreen}) {
     "application/pdf",
   ];
   const handleFileInputChange = e => {
-    console.log("lllllllllllllllllll", e);
     const file = e.target.files[0];
     if (e.target.name === "currrentAdd") {
       if (file) {
@@ -279,10 +278,14 @@ function Relocation({prevScreen}) {
                         : "w-full"
                     }flex `}>
                     <div
-                      className={`flex items-center w-full relative ${styles.demo}`}>
+                      className={`flex flex-col items-center w-full relative ${styles.demo}`}>
                       <label
                         htmlFor="currrentAdd"
-                        className={`${formStyles.form_input} !h-fit w-full pr-2 mb-12`}>
+                        className={`${
+                          formStyles.form_input
+                        } !h-fit w-full pr-2 ${
+                          formErrors.currentAddressProof ? "mb-1" : "mb-12"
+                        }`}>
                         <div className={`flex w-full items-center`}>
                           <Image
                             src={uploading}
@@ -329,6 +332,12 @@ function Relocation({prevScreen}) {
                             />
                           </div>
                         )}
+                      {formErrors.currentAddressProof && (
+                        <div
+                          className={`${formStyles.error} w-full text-left mb-12`}>
+                          {formErrors.currentAddressProof}
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -357,6 +366,7 @@ function Relocation({prevScreen}) {
                       });
                       console.log(formik.values, "valuessssss");
                       console.log(formData, "kkkkkkkk");
+                      console.log(formErrors, "errrrrrrrrrrrrr");
                     }}>
                     Create request <ForwardArrowWithLine />
                   </button>
