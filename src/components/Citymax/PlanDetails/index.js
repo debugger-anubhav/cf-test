@@ -3,12 +3,14 @@ import styles from "./styles.module.css";
 import {useParams, useRouter} from "next/navigation";
 import {
   BackIcon,
+  CheckedBox,
   Close,
   ForwardArrowWithLine,
   // IconLink,
   Lock,
   Rupee,
   Sparkles,
+  UncheckedBox,
 } from "../../../assets/icon";
 import {productImageBaseUrl} from "@/constants/constant";
 import CitymaxDetailPageDrawer from "./CitymaxDetailPageDrawer/index";
@@ -26,6 +28,14 @@ const CitymaxPlanDetail = () => {
   const [drawerType, setDrawerType] = useState();
   const [data, setData] = useState();
   const [planDetailsArray, setPlanDetailsArray] = useState();
+  const [headType, setHeadType] = useState(1);
+  const [swapProductDetails, setSwapProductDetails] = useState({
+    img: "",
+    name: "",
+  });
+  // const [isChecked, setIsChecked] = useState(false);
+  const [isCheckedMap, setIsCheckedMap] = useState({});
+  // const [selectedProductsBedroom1, setSelectedProductsBedroom1] = useState({});
 
   const toggleDrawer = type => {
     setDrawerType(type);
@@ -53,6 +63,27 @@ const CitymaxPlanDetail = () => {
   console.log(planDetailsArray, "srrrrrr");
   console.log(data, "data");
 
+  const handleSelectItem = (item, slot, headType) => {
+    setRoomId(item?.fc_frp_room?.id);
+    setSlotId(slot.slot_id);
+    setHeadType(headType);
+    setSwapProductDetails({
+      img: slot.selectedProduct || "",
+      name: slot.selectedProdName || "",
+    });
+
+    // if (item.fc_frp_room.room_name.includes("Bedroom") && headType === 1) {
+    //   setSelectedProductsBedroom1(prev => ({
+    //     ...prev,
+    //     [slot.slot_id]: {
+    //       selectedProdName: slot.selectedProdName,
+    //       selectedProduct: slot.selectedProduct,
+    //     },
+    //   }));
+    // }
+    toggleDrawer(1);
+  };
+
   const handleAddItem = (imgurl, productName) => {
     const index = planDetailsArray.findIndex(t => t.fc_frp_room.id === roomId);
     const indexOfCategory = planDetailsArray[
@@ -70,11 +101,105 @@ const CitymaxPlanDetail = () => {
       };
     }
     setPlanDetailsArray(newArr);
+
+    // if (
+    //   planDetailsArray[index].fc_frp_room.room_name.includes("Bedroom") &&
+    //   headType === 1
+    // ) {
+    //   setSelectedProductsBedroom1(prev => ({
+    //     ...prev,
+    //     [planDetailsArray[index].fc_frp_room.fc_frp_slot_associations[
+    //       indexOfCategory
+    //     ].slot_id]: {
+    //       selectedProdName:
+    //         planDetailsArray[index].fc_frp_room.fc_frp_slot_associations[
+    //           indexOfCategory
+    //         ].slot_id.selectedProdName,
+    //       selectedProduct:
+    //         planDetailsArray[index].fc_frp_room.fc_frp_slot_associations[
+    //           indexOfCategory
+    //         ].slot_id.selectedProduct,
+    //     },
+    //   }));
+    // }
     toggleDrawer();
   };
 
-  console.log(params, "paramsss");
+  // const handleDeleteSelectedItem = (e, item, selectedItem) => {
+  //   console.log("innn delete");
+  //   e.stopPropagation();
+  //   delete selectedItem.selectedProdName;
+  //   delete selectedItem.selectedProduct;
+  // };
 
+  const handleDeleteSelectedItem = (e, item, selectedItem) => {
+    e.stopPropagation();
+    // Delete the keys directly within the function
+    delete selectedItem.selectedProdName;
+    delete selectedItem.selectedProduct;
+
+    // Update the state to trigger a re-render
+    setPlanDetailsArray(prevPlanDetailsArray => {
+      const updatedArray = prevPlanDetailsArray.map(room => {
+        console.log(room.room_id, item.fc_frp_room.id, "iuieij");
+        if (room.id === item.fc_frp_room.id) {
+          const updatedAssociations =
+            room.fc_frp_room.fc_frp_slot_associations.map(association => {
+              if (association.id === selectedItem.id) {
+                return {
+                  ...association,
+                  selectedProdName: undefined,
+                  selectedProduct: undefined,
+                };
+              }
+              return association;
+            });
+          return {...room, fc_frp_slot_associations: updatedAssociations};
+        }
+        return room;
+      });
+      return updatedArray;
+    });
+  };
+
+  const handleCheckRepeat = (item, index) => {
+    console.log("isme aaa raha h");
+    setIsCheckedMap(prevIsCheckedMap => {
+      const updatedIsCheckedMap = {...prevIsCheckedMap};
+      updatedIsCheckedMap[item.fc_frp_room.id] =
+        !prevIsCheckedMap[item.fc_frp_room.id];
+      return updatedIsCheckedMap;
+    });
+
+    if (!isCheckedMap[item.room_id]) {
+      console.log("innnns");
+
+      const newArr = [...planDetailsArray];
+      newArr[index].fc_frp_room.fc_frp_slot_associations = [
+        ...newArr[index - 1].fc_frp_room.fc_frp_slot_associations,
+      ];
+      setPlanDetailsArray([...newArr]);
+      console.log(newArr, "fsdfiyushsjkfnvb");
+      // newArr[index].fc_frp_room.fc_frp_slot_associations[indexOfCategory] = {
+      //   ...newArr[index].fc_frp_room.fc_frp_slot_associations[indexOfCategory],
+      //   selectedProduct: imgurl,
+      //   selectedProdName: productName,
+      // };
+
+      // const updateAssociation = newArr[
+      //   index
+      // ].fc_frp_room.fc_frp_slot_associations.map(element => ({
+      //   selectedProduct: "Alexa Queen Bed",
+      //   selectedProdName: "lalalala",
+      //   ...element,
+      // }));
+
+      // newArr[index].fc_frp_room.fc_frp_slot_associations = updateAssociation;
+      // setPlanDetailsArray(newArr);
+    }
+  };
+
+  console.log(isCheckedMap, "ejkwejwui");
   return (
     <div className={styles.main}>
       <div
@@ -103,73 +228,120 @@ const CitymaxPlanDetail = () => {
                 );
               const countOfSelectedSlots = selectedSlotsArray.length;
               return (
-                <div key={index}>
-                  <div className={styles.type_wrapper}>
-                    <p className={styles.type_txt}>
-                      {item?.fc_frp_room?.room_name}
-                    </p>
-                    <p className={styles.selected_text}>
-                      <span className="hidden xl:block">
-                        {countOfSelectedSlots} out of {slotsLength} products
-                        selected
-                      </span>
-                      <span className="xl:hidden">
-                        {countOfSelectedSlots}/{slotsLength}
-                      </span>
-                    </p>
-                  </div>
-                  <div className={styles.amen_wrapper}>
-                    {item?.fc_frp_room?.fc_frp_slot_associations?.map(
-                      (t, i) => (
-                        <div
-                          onClick={() => {
-                            toggleDrawer(1);
-                            setRoomId(item?.fc_frp_room?.id);
-                            setSlotId(t.slot_id);
-                          }}
-                          key={i}
-                          className={`${
-                            t.selectedProduct && "!border-none hover:!bg-none"
-                          } ${styles.amenity_box}`}>
-                          {t.selectedProduct ? (
-                            <div className="w-full">
-                              <div className="relative">
-                                <img
-                                  src={productImageBaseUrl + t.selectedProduct}
-                                  className={styles.selected_slot_img}
-                                />
-                                <Close
-                                  className={styles.cross}
-                                  onClick={() => toggleDrawer(1)}
-                                />
+                <>
+                  <div key={index}>
+                    <div className={styles.type_wrapper}>
+                      <p className={styles.type_txt}>
+                        {item?.fc_frp_room?.room_name}
+                      </p>
+                      <p className={styles.selected_text}>
+                        <span className="hidden xl:block">
+                          {countOfSelectedSlots} out of {slotsLength} products
+                          selected
+                        </span>
+                        <span className="xl:hidden">
+                          {countOfSelectedSlots}/{slotsLength}
+                        </span>
+                      </p>
+                    </div>
+                    {(item?.fc_frp_room?.room_name === "Bedroom 1" ||
+                      item?.fc_frp_room?.room_name === "Bedroom 2") && (
+                      <div className="flex gap-1 mt-8 -mb-4 items-center">
+                        {isCheckedMap[item.room_id] ? (
+                          <div onClick={() => handleCheckRepeat(item)}>
+                            <CheckedBox
+                              color={"#5774AC"}
+                              className={styles.checkbox}
+                            />
+                          </div>
+                        ) : (
+                          <div
+                            onClick={() => {
+                              // setIsChecked(true);
+                              handleCheckRepeat(item, index);
+                            }}>
+                            <UncheckedBox
+                              color={"#5774AC"}
+                              className={styles.checkbox}
+                            />
+                          </div>
+                        )}
+                        <p className={styles.same_above_txt}>
+                          Same as above bedroom
+                        </p>
+                      </div>
+                    )}
+                    <div className={styles.amen_wrapper}>
+                      {item?.fc_frp_room?.fc_frp_slot_associations?.map(
+                        (t, i) => (
+                          <div key={i} className={styles.slot}>
+                            {t.selectedProduct ? (
+                              <div
+                                className={`w-full h-full ${
+                                  !isCheckedMap[item.room_id] &&
+                                  "cursor-pointer"
+                                }`}
+                                onClick={e => {
+                                  !isCheckedMap[item.room_id] &&
+                                    handleSelectItem(item, t, 2);
+                                }}>
+                                <div
+                                  className={`relative ${
+                                    isCheckedMap[item.room_id] && "opacity-60"
+                                  }`}>
+                                  <img
+                                    src={
+                                      productImageBaseUrl + t.selectedProduct
+                                    }
+                                    className={styles.selected_slot_img}
+                                  />
+                                  <div
+                                    onClick={e =>
+                                      !isCheckedMap[item.room_id] &&
+                                      handleDeleteSelectedItem(e, item, t)
+                                    }>
+                                    <Close className={styles.cross} />
+                                  </div>
+                                </div>
+                                <div
+                                  className={`${
+                                    !isCheckedMap[item.room_id] &&
+                                    "bg-[#E3E1DC]"
+                                  } ${styles.selected_box_lowerdiv}`}>
+                                  <p
+                                    className={`${
+                                      isCheckedMap[item.room_id] &&
+                                      "!text-71717A"
+                                    } ${styles.selected_slot_name}`}>
+                                    {t.selectedProdName}
+                                  </p>
+                                </div>
                               </div>
-                              <div className={styles.selected_box_lowerdiv}>
-                                <p className={styles.selected_slot_name}>
-                                  {t.selectedProdName}
+                            ) : (
+                              <div
+                                className={styles.amenity_box}
+                                onClick={() => {
+                                  handleSelectItem(item, t, 1);
+                                }}>
+                                <img
+                                  src={
+                                    "https://rentofurniture.com/images/frp_slots/" +
+                                    t.fc_frp_slot.slot_image
+                                  }
+                                  className={styles.product_icon}
+                                />
+                                <p className={styles.product_name}>
+                                  {" "}
+                                  {t.fc_frp_slot.slot_name}
                                 </p>
                               </div>
-                            </div>
-                          ) : (
-                            // </div>
-                            <>
-                              <img
-                                src={
-                                  "https://rentofurniture.com/images/frp_slots/" +
-                                  t.fc_frp_slot.slot_image
-                                }
-                                className={styles.product_icon}
-                              />
-                              <p className={styles.product_name}>
-                                {" "}
-                                {t.fc_frp_slot.slot_name}
-                              </p>
-                            </>
-                          )}
-                        </div>
-                      ),
-                    )}
+                            )}
+                          </div>
+                        ),
+                      )}
+                    </div>
                   </div>
-                </div>
+                </>
               );
             })}
           </div>
@@ -184,6 +356,8 @@ const CitymaxPlanDetail = () => {
             isHalfYearly={isHalfYearly}
             slotId={slotId}
             roomId={roomId}
+            headType={headType}
+            swapProductDetails={swapProductDetails}
           />
         )}
 
