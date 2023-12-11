@@ -36,6 +36,7 @@ function Relocation({prevScreen}) {
     "application/pdf",
   ];
   const handleFileInputChange = e => {
+    console.log("lllllllllllllllllll", e);
     const file = e.target.files[0];
     if (e.target.name === "currrentAdd") {
       if (file) {
@@ -257,12 +258,7 @@ function Relocation({prevScreen}) {
                     name="addressProof"
                     style={{display: "none"}}
                     onChange={e => {
-                      console.log("eeeeeeeeeeee");
-
-                      formik.setFieldValue(
-                        "addressProof",
-                        selectedOptionPer?.label,
-                      );
+                      handleFileInputChange(e);
                     }}
                   />
                   <ErrorMessage name="addressProof">
@@ -344,7 +340,6 @@ function Relocation({prevScreen}) {
                     onChange={e => {
                       handleFileInputChange(e);
                     }}
-                    //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
                   />
                 </div>
 
