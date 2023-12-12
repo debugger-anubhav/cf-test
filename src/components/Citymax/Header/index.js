@@ -38,6 +38,8 @@ const CitymaxHeader = ({zIndex}) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
+
   // const [openSearchbar] = React.useState(false);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
@@ -190,7 +192,7 @@ const CitymaxHeader = ({zIndex}) => {
 
   return (
     <>
-      <div className={`${zIndex && "!z-0"} ${styles.main}`}>
+      <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <div onClick={toggleDrawer}>

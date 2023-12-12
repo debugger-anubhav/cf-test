@@ -18,6 +18,7 @@ const ProductsDrawer = ({
 }) => {
   const [selectedIndexes, setSelectedIndexes] = useState(Array(4).fill(0));
   const [productsArr, setProductsArr] = useState();
+  const [upgradedProductsArr, setUpgradedProductsArr] = useState();
   const params = useParams();
   const fetchAssociatedSlotData = () => {
     const body = {
@@ -30,6 +31,7 @@ const ProductsDrawer = ({
       .post(baseURL + endPoints.cityMaxPage.getAssociateSlotData, body)
       .then(res => {
         setProductsArr(res?.data?.data?.associated_products);
+        setUpgradedProductsArr(res?.data?.data?.associated_premium_products);
       })
       .catch(err => console.log(err));
   };
@@ -80,6 +82,7 @@ const ProductsDrawer = ({
                 length={productsArr.length}
                 mainIndex={mainIndex}
                 item={item.productDetails[0]}
+                quantity={item.city_quantity}
                 selectedIndexes={selectedIndexes}
                 handleAddItem={handleAddItem}
               />
@@ -89,6 +92,41 @@ const ProductsDrawer = ({
             )}
           </>
         ))}
+      </div>
+
+      <div>
+        {upgradedProductsArr?.length > 0 && (
+          <>
+            <div>
+              <p className={styles.optional_text}>Optional Upgrades</p>
+              <p className={styles.info_details}>
+                Pay little bit extra and upgrade to any of the following
+                products...
+              </p>
+            </div>
+
+            <div className={styles.main_wrapper}>
+              {upgradedProductsArr?.map((item, mainIndex) => (
+                <>
+                  <div key={mainIndex}>
+                    <ProductCard
+                      handleThumbnailClick={handleThumbnailClick}
+                      length={productsArr.length}
+                      mainIndex={mainIndex}
+                      item={item.productDetails[0]}
+                      quantity={item.city_quantity}
+                      selectedIndexes={selectedIndexes}
+                      handleAddItem={handleAddItem}
+                    />
+                  </div>
+                  {mainIndex < length - 1 && (
+                    <div className={styles.line_break}></div>
+                  )}
+                </>
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

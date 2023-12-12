@@ -150,9 +150,12 @@ export const endPoints = {
 
   cityMaxPage: {
     getAllPlans: `citymax/getFrp`,
-    getRoomData: (prodId, tenure) =>
-      `citymax/getCitymaxPlanData?frp_product_id=${prodId}&tenure_selected=${tenure}`,
+    getRoomData: (prodId, tenure, userId) =>
+      `citymax/getCitymaxPlanData?frp_product_id=${prodId}&tenure_selected=${tenure}&userId=${userId}`,
     getAssociateSlotData: `citymax/getAssociateData`,
+    sentProductsToCart: `citymax/addAssociateProduct`,
+    deleteCartItems: userId =>
+      `fc-shopping-carts/delete?userId=${userId}&emptyCart=true`,
   },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
