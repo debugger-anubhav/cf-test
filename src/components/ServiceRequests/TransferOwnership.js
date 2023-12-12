@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -126,10 +126,6 @@ function TransferOwnership({prevScreen, data}) {
     CreateRequest(payload);
     dispatch(setServiceRequestDrawer(false));
   };
-
-  useEffect(() => {
-    console.log(primaryAddress, "primaryAddress");
-  }, [primaryAddress]);
 
   return (
     <div className={`${styles.content_wrapper} flex-row`}>
@@ -370,11 +366,14 @@ function TransferOwnership({prevScreen, data}) {
                     <div className={styles.bottom_row}>
                       <div className={styles.bottom_line}></div>
                       <button
-                        className={`${styles.proceed_btn} ${
-                          !formik.isValid
+                        className={`
+                        mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0
+                        ${
+                          formik.isValidating
                             ? "!bg-[#FFDF85] !cursor-not-allowed"
-                            : ``
-                        }`}
+                            : `bg-F6B704`
+                        }
+                        `}
                         type="submit"
                         disabled={!formik.isValid || formik.isSubmitting}>
                         Create request <ForwardArrowWithLine />

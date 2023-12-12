@@ -1,84 +1,32 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {cityUrl} from "../../../appConfig";
-import {baseURL} from "@/network/axios";
-import axios from "axios";
-import DropDown from "../Documentation/DropDown/DropDown";
-import {endPoints} from "@/network/endPoints";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import Image from "next/image";
 import {FaCheckCircle} from "react-icons/fa";
 import {IoIosCloseCircle} from "react-icons/io";
+import Select from "react-select";
+import {setServiceRequestDrawer} from "@/store/Slices";
+import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
 
-function Relocation({prevScreen}) {
-  const [docsData, setDocsData] = useState([]);
-  const [perAddModal, setPerAddModal] = useState(false);
-  const [selectedOptionPer, setSelectedOptionPer] = useState(
-    "Select any current address proof",
+function Relocation({prevScreen, data}) {
+  const dispatch = useDispatch();
+  const selectedType = useSelector(
+    state => state.homePagedata.serviceRequestType,
   );
 
-  const [formData, setFormData] = useState({
-    addressProof: "",
-    currentAddressProof: "",
-  });
-  const [formErrors, setFormErrors] = useState({
-    addressProof: "",
-    currentAddressProof: "",
-  });
-  const allowedFileTypes = [
-    "image/jpeg",
-    "image/jpg",
-    "image/png",
-    "application/pdf",
+  const doctsData = [
+    {label: "PAN Number", value: "1"},
+    {label: "Driving license", value: "2"},
+    {label: "Voter ID", value: "3"},
   ];
-  const handleFileInputChange = e => {
-    const file = e.target.files[0];
-    if (e.target.name === "addressProof") {
-      if (file) {
-        setFormData(prev => {
-          return {...prev, addressProof: file};
-        });
-        if (!allowedFileTypes.includes(file.type)) {
-          setFormErrors(prev => ({
-            ...prev,
-            addressProof: "Please select jpg,png, pdf or jpeg file",
-          }));
-        } else {
-          setFormErrors(prev => ({
-            ...prev,
-            addressProof: "",
-          }));
-        }
-      }
-    }
-    if (e.target.name === "currrentAdd") {
-      if (file) {
-        setFormData(prev => {
-          return {...prev, currentAddressProof: file};
-        });
-        if (!allowedFileTypes.includes(file.type)) {
-          setFormErrors(prev => ({
-            ...prev,
-            currentAddressProof: "Please select jpg,png, pdf or jpeg file",
-          }));
-        } else {
-          setFormErrors(prev => ({
-            ...prev,
-            currentAddressProof: "",
-          }));
-        }
-      }
-    }
-  };
 
   const validationSchema = Yup.object({
-    fullName: Yup.string()
-      .required("Full name is required")
-      .min(2, "Name should be of atleast 2 characters long"),
     contactNumber: Yup.string()
       .test(
         "no-spaces-special-characters",
@@ -96,9 +44,11 @@ function Relocation({prevScreen}) {
         "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
       )
       .required("Contact number is required"),
-    email: Yup.string().email().required("Please enter a valid email address."),
-    landmark: Yup.string(),
     address: Yup.string().required("Address is required"),
+    addressProof: Yup.string().required("Address Proof is required"),
+    currentAddressProof: Yup.string().required(
+      "Please upload the address proof",
+    ),
     postalCode: Yup.string()
       .test(
         "no-spaces-special-characters",
@@ -119,22 +69,52 @@ function Relocation({prevScreen}) {
     city: Yup.string().required("City is required"),
   });
 
-  const getAddProofList = () => {
-    axios
-      .get(baseURL + endPoints.addressProofList)
-      .then(res => {
-        setDocsData(res?.data?.data);
-      })
-      .catch(err => console.log(err));
-  };
-
   const handleSubmit = values => {
-    console.log(values, "formikValues");
+    const payload = {
+      ...CreateRequestPayload,
+      deal_id: data[0]?.dealCodeNumber,
+      type: selectedType,
+      mobile_number: values.contactNumber,
+      postal_code: values.postalCode,
+      city: values.city,
+      address1: values.address,
+      address2: values.landmark,
+      // addressProof: "",
+      file: values.currentAddressProof,
+    };
+    CreateRequest(payload);
+    dispatch(setServiceRequestDrawer(false));
   };
 
-  useEffect(() => {
-    getAddProofList();
-  }, []);
+  const customStylesForSelect = {
+    control: baseStyles => ({
+      ...baseStyles,
+      padding: "4px 8px",
+      borderRadius: "12px",
+      outline: "none",
+      cursor: "pointer",
+      ".css-1u9des2-indicatorSeparator": {
+        display: "none",
+      },
+      boxShadow: 0,
+      "&:hover": {
+        border: "1px solid #71717A",
+      },
+      fontSize: "14px",
+      color: "#71717A",
+    }),
+    option: (base, state) => ({
+      ...base,
+      backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
+      "&:hover": {
+        cursor: "pointer",
+        backgroundColor: "#EFF5FF",
+        color: "#5774AC",
+      },
+      fonetSize: "14px",
+      color: "#71717A",
+    }),
+  };
 
   return (
     <div className={styles.content_wrapper}>
@@ -153,8 +133,8 @@ function Relocation({prevScreen}) {
             address: "",
             landmark: "",
             postalCode: "",
-            addressProof: formData.addressProof,
-            currentAddressProof: formData.currentAddressProof,
+            addressProof: "",
+            currentAddressProof: "",
           }}
           validationSchema={validationSchema}
           onSubmit={values => {
@@ -253,112 +233,111 @@ function Relocation({prevScreen}) {
                   </ErrorMessage>
                 </div>
 
-                <div className={"mt-4"}>
+                <div className="mt-4 flex flex-col">
                   <p className={formStyles.form_label}>Current address proof</p>
-                  <DropDown
-                    options={docsData[1]?.supported_docs
-                      .split(",")
-                      ?.map(i => ({label: i, value: i}))}
-                    setIsDDOpen={setPerAddModal}
-                    selectedOption={selectedOptionPer}
-                    isOpen={perAddModal}
-                    setSelectedOption={setSelectedOptionPer}
-                    maxWidth="502px"
-                    optionsActive="md:block hidden"
+                  <Select
+                    name="addressProof"
+                    options={doctsData}
+                    styles={customStylesForSelect}
+                    onChange={selectedOption => {
+                      formik.setFieldValue(
+                        "addressProof",
+                        selectedOption.label,
+                      );
+                    }}
                     placeholder="Select any current address proof"
                   />
-
-                  <input
-                    type="file"
-                    name="addressProof"
-                    id="addressProof"
-                    style={{display: "none"}}
-                    onChange={e => {
-                      handleFileInputChange(e);
-                    }}
-                  />
+                  <ErrorMessage name="addressProof">
+                    {msg =>
+                      formik.touched.addressProof && (
+                        <p className={formStyles.error}>{msg}</p>
+                      )
+                    }
+                  </ErrorMessage>
                 </div>
 
-                <div className={`mt-4  `}>
-                  <div
-                    className={`${
-                      !formErrors.currentAddressProof &&
-                      formData.currentAddressProof.name
-                        ? " w-[90%] "
-                        : "w-full"
-                    }flex `}>
-                    <div
-                      className={`flex items-center w-full relative ${styles.demo}`}>
-                      <label
-                        htmlFor="currrentAdd"
-                        className={`${formStyles.form_input} !h-fit w-full pr-2 mb-12`}>
-                        <div className={`flex w-full items-center`}>
-                          <Image
-                            src={uploading}
-                            alt="Uploading Icon"
-                            className={`h-full`}
-                          />
-                          <>
-                            <span
-                              className={`${styles.chooseFile} px-2 break-normal `}>
-                              {formData?.currentAddressProof?.name ??
-                                "Choose file"}
-                            </span>
-                          </>
-                        </div>
-
-                        {!formErrors.currentAddressProof &&
-                          formData.currentAddressProof.name && (
-                            <div className={`${styles.running_line}`}></div>
-                          )}
-                      </label>
-                      {!formErrors.currentAddressProof &&
-                        formData.currentAddressProof.name && (
-                          <div
-                            className="flex items-center absolute right-[-24px]"
-                            onClick={e => {
-                              e.stopPropagation();
-                              setFormData(prev => ({
-                                ...prev,
-                                currentAddressProof: "",
-                              }));
-                              setFormErrors(prev => ({
-                                ...prev,
-                                currentAddressProof: "",
-                              }));
-                            }}>
-                            <FaCheckCircle
-                              color="#2D9469"
-                              className={styles.showCheckCircle}
-                            />
-                            <IoIosCloseCircle
-                              color="#D96060"
-                              size={20}
-                              className={styles.showDeleteIcon}
-                            />
-                          </div>
-                        )}
-                    </div>
-                  </div>
-
+                <div
+                  className={`mt-4 flex mb-16 ${styles.demo} ${
+                    !formik.values.currentAddressProof ? "flex-col" : "flex-row"
+                  }`}>
                   <input
                     type="file"
-                    name="currrentAdd"
-                    id="currrentAdd"
-                    style={{display: "none"}}
-                    onChange={e => {
-                      handleFileInputChange(e);
-                    }}
-                    //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
+                    id="currentAddProof"
+                    name="currentAddressProof"
+                    placeholder="choose file"
+                    className={`hidden`}
+                    onChange={e =>
+                      formik.setFieldValue(
+                        "currentAddressProof",
+                        e.target.files[0],
+                      )
+                    }
                   />
+                  <label
+                    htmlFor="currentAddProof"
+                    className={`${
+                      formStyles.form_input
+                    } flex items-center !h-full cursor-pointer ${
+                      formik.values.currentAddressProof && "!max-w-[95%] !w-fit"
+                    } `}>
+                    <div className={`flex w-full flex-col `}>
+                      <div className="flex items-center">
+                        <Image
+                          src={uploading}
+                          alt="Uploading Icon"
+                          className={`h-full`}
+                        />
+                        <span className="text-14 font-Poppins text-71717A pl-2">
+                          {formik.values.currentAddressProof
+                            ? formik.values.currentAddressProof.name
+                            : "Choose file"}
+                        </span>
+                      </div>
+                      {formik.values.currentAddressProof && (
+                        <div
+                          className={`${styles.running_line} bottom-[3px]`}></div>
+                      )}
+                    </div>
+                  </label>
+
+                  <div>
+                    {formik.values.currentAddressProof && (
+                      <div className="flex items-center mt-8 ml-2">
+                        <FaCheckCircle
+                          color="#2D9469"
+                          className={styles.showCheckCircle}
+                        />
+                        <IoIosCloseCircle
+                          color="#D96060"
+                          size={20}
+                          className={styles.showDeleteIcon}
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <ErrorMessage name="currentAddressProof">
+                    {msg =>
+                      formik.touched.currentAddressProof && (
+                        <p className={formStyles.error}>{msg} </p>
+                      )
+                    }
+                  </ErrorMessage>
                 </div>
 
                 <div className={styles.bottom_row}>
                   <div className={styles.bottom_line}></div>
                   <button
-                    className={`${styles.proceed_btn} ${
-                      formik.isValid ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
-                    }`}>
+                    type="submit"
+                    className={`${styles.proceed_btn} bg-none ${
+                      !formik.isValid
+                        ? "!bg-[#FFDF85] !cursor-not-allowed"
+                        : `!bg-F6B704`
+                    }`}
+                    onClick={() => {
+                      if (!formik.isValid) {
+                        console.log("errors", formik.errors);
+                      }
+                    }}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>

@@ -12,6 +12,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import {setServiceRequestDrawer} from "@/store/Slices";
+import PastRequestAccordian from "./PastRequestAccordian";
 
 function ServiceRequets() {
   const dispatch = useDispatch();
@@ -130,7 +131,12 @@ function ServiceRequets() {
         </div>
         {pastRequestData?.length > 0 ? (
           <div>
-            <PastRequests pastRequestData={pastRequestData} />
+            <div className={styles.web}>
+              <PastRequests pastRequestData={pastRequestData} />
+            </div>
+            <div className={styles.mobile}>
+              <PastRequestAccordian pastRequestData={pastRequestData} />
+            </div>
           </div>
         ) : null}
       </div>

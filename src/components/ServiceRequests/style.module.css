@@ -1,6 +1,12 @@
 .main_container {
   @apply font-Poppins  lg:flex lg:gap-12 xl:gap-16 px-4 lg:pl-0 md:px-[70px] lg:pr-[70px] xl:pr-[90px] macbook:pr-[122px] 4xl:pr-[130px] lg:-mt-6;
 }
+.web {
+  @apply hidden xl:block;
+}
+.mobile {
+  @apply xl:hidden mt-3;
+}
 .doc_side_bar {
   @apply hidden lg:block min-w-fit;
 }
@@ -139,10 +145,9 @@
 }
 
 .running_line {
-  width: 80%;
+  width: 100%;
   height: 2px;
   background: green;
-  position: absolute;
   transform: translate(0, 100%);
 }
 
@@ -167,10 +172,11 @@
 }
 
 .showCheckCircle {
-  @apply flex mb-2;
+  @apply flex;
 }
+
 .showDeleteIcon {
-  @apply hidden mb-2;
+  @apply hidden;
 }
 .demo:hover .showDeleteIcon {
   @apply flex;
