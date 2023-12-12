@@ -36,14 +36,14 @@ const PastRequestAccordian = ({pastRequestData}) => {
                 <Plus className={styles.exapnd_icon} />
               )
             }>
-            <Typography className={styles.tableCell}>
+            <Typography className={`${styles.tableHeaderCell}`}>
               <span className="font-medium">Ticket Id:</span>
               {row?.zoho_case_id}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
-            <Typography className={`${styles.tableHeaderCell}`}>
-              Order Id: {row?.order_id}
+            <Typography className={styles.tableCell}>
+              <span className="font-medium"> Order Id:</span> {row?.order_id}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Request Type:</span>{" "}
