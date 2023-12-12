@@ -145,10 +145,9 @@
 }
 
 .running_line {
-  width: 80%;
+  width: 100%;
   height: 2px;
   background: green;
-  position: absolute;
   transform: translate(0, 100%);
 }
 
@@ -173,10 +172,11 @@
 }
 
 .showCheckCircle {
-  @apply flex mb-2;
+  @apply flex;
 }
+
 .showDeleteIcon {
-  @apply hidden mb-2;
+  @apply hidden;
 }
 .demo:hover .showDeleteIcon {
   @apply flex;
