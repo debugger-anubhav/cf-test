@@ -121,7 +121,7 @@ function TransferOwnership({prevScreen, data}) {
       city: values.city,
       address1: values.address,
       address2: values.landmark,
-      state: primaryAddress.state,
+      state: primaryAddress ? primaryAddress.state : "",
     };
     CreateRequest(payload);
     dispatch(setServiceRequestDrawer(false));
@@ -284,7 +284,7 @@ function TransferOwnership({prevScreen, data}) {
                           <ErrorMessage name="address">
                             {msg =>
                               formik.touched.address && (
-                                <p className={styles.error}>{msg}</p>
+                                <p className={formStyles.error}>{msg}</p>
                               )
                             }
                           </ErrorMessage>
@@ -312,27 +312,28 @@ function TransferOwnership({prevScreen, data}) {
                           <ErrorMessage name="postalCode">
                             {msg =>
                               formik.touched.postalCode && (
-                                <p className={styles.error}>{msg} </p>
+                                <p className={formStyles.error}>{msg} </p>
                               )
                             }
                           </ErrorMessage>
                         </div>
 
-                        <div className="mt-4">
+                        <div
+                          className="mt-4"
+                          onClick={() => setCityDrawerOpen(!cityDrawerOpen)}>
                           <p className={formStyles.form_label}>City</p>
                           <Field
                             readOnly
                             type="text"
                             name="city"
-                            value={cityName}
+                            value={formik.values.city}
                             placeholder="Enter city"
                             className={formStyles.form_input}
-                            onClick={() => setCityDrawerOpen(!cityDrawerOpen)}
                           />
                           <ErrorMessage name="city">
                             {msg =>
                               formik.touched.city && (
-                                <p className={styles.error}>{msg} </p>
+                                <p className={formStyles.error}>{msg} </p>
                               )
                             }
                           </ErrorMessage>
@@ -369,13 +370,18 @@ function TransferOwnership({prevScreen, data}) {
                         className={`
                         mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0
                         ${
-                          formik.isValidating
+                          !formik.isValid
                             ? "!bg-[#FFDF85] !cursor-not-allowed"
-                            : `bg-F6B704`
+                            : `!bg-F6B704`
                         }
                         `}
                         type="submit"
-                        disabled={!formik.isValid || formik.isSubmitting}>
+                        // disabled={!formik.isValid }
+                        onClick={values => {
+                          if (!formik.isValid) {
+                            console.log(formik.errors);
+                          }
+                        }}>
                         Create request <ForwardArrowWithLine />
                       </button>
                     </div>
