@@ -1,5 +1,5 @@
 .main_wrapper {
-  @apply flex flex-col items-center mx-4 pt-6 pb-4 xl:py-14;
+  @apply flex flex-col items-center mx-4 pb-4 xl:py-14;
 }
 .img {
   @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px];
