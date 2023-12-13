@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -13,12 +13,17 @@ import Select from "react-select";
 import {setServiceRequestDrawer} from "@/store/Slices";
 import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
+import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
+import {useAppSelector} from "@/store";
 
 function Relocation({prevScreen, data}) {
   const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+
+  const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
 
   const doctsData = [
     {label: "PAN Number", value: "1"},
@@ -216,13 +221,16 @@ function Relocation({prevScreen, data}) {
                   </ErrorMessage>
                 </div>
 
-                <div className={"mt-4"}>
+                <div
+                  className={"mt-4"}
+                  onClick={() => setCityDrawerOpen(!cityDrawerOpen)}>
                   <p className={formStyles.form_label}>City</p>
                   <Field
                     type="text"
                     name="city"
                     placeholder="Enter your city"
                     className={formStyles.form_input}
+                    value={formik.values.city}
                   />
                   <ErrorMessage name="city">
                     {msg =>
@@ -232,7 +240,18 @@ function Relocation({prevScreen, data}) {
                     }
                   </ErrorMessage>
                 </div>
-
+                {cityDrawerOpen && (
+                  <CityDrawer
+                    toggleDrawer={() => setCityDrawerOpen(!cityDrawerOpen)}
+                    Cities={storeCityList}
+                    open={cityDrawerOpen}
+                    cityName={formik.values.city}
+                    handleCityChange={val => {
+                      formik.setFieldValue("city", val);
+                      setCityDrawerOpen(!cityDrawerOpen);
+                    }}
+                  />
+                )}
                 <div className="mt-4 flex flex-col">
                   <p className={formStyles.form_label}>Current address proof</p>
                   <Select
