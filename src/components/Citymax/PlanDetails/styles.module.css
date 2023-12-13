@@ -53,7 +53,7 @@
   @apply font-Inter;
 }
 .proceed_btn {
-  @apply bg-F6B704 rounded-lg justify-center w-full xs1:w-[328px] xl:w-full items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14;
+  @apply bg-F6B704 rounded-lg flex justify-center w-full xs1:w-[328px] xl:w-full items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14;
 }
 .plans_wrapper {
   @apply w-full xs1:w-fit xl:w-full mt-8 xl:mt-12 flex flex-col gap-8 xl:gap-12;
@@ -80,7 +80,7 @@
   @apply min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px];
 }
 .amenity_box {
-  @apply p-3 cursor-pointer w-full h-full gap-1 flex flex-col justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] hover:border-5774AC bg-[#f6f5f8] hover:bg-[#E0F0FF];
+  @apply p-3 w-full h-full gap-1 flex flex-col justify-center items-center border-2 border-dashed rounded-lg border-[#c0c0c6] bg-[#f6f5f8];
 }
 .product_icon {
   @apply w-8 h-8;
