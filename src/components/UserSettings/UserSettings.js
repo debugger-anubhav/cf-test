@@ -128,7 +128,7 @@ export default function UserSettings() {
         <div className="min-w-fit">
           <DocSidebar isOverviewSelected={true} />
         </div>
-        <div>
+        <div className="w-full">
           <h1 className={styles.web_head}>Overview</h1>
           <div className={styles.line_web}></div>
           <div className={styles.card_wrapper}>

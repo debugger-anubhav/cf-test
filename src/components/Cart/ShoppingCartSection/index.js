@@ -406,7 +406,7 @@ const ShoppingCartSection = () => {
                   </div>
                 </div>
 
-                <p>Insurance value</p>
+                <p className={styles.insuranceText}>Insurance value</p>
                 <div className="flex items-end gap-2">
                   <p className={styles.currentPrice}>
                     <span className={styles.rupeeIcon}>₹</span>

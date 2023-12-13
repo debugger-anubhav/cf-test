@@ -16,11 +16,11 @@
         {"item": "Furniture Sale", "link": "https://zior.in/"},
         {
           "item": "CF For Businesses",
-          "link": "https://test.rentofurniture.com/pages/bulkorder"
+          "link": "/bulkorder"
         },
         {
           "item": "Pay your dues",
-          "link": "https://test.rentofurniture.com/customerpayment"
+          "link": "/customerpayment"
         }
       ],
       "menuList3": [

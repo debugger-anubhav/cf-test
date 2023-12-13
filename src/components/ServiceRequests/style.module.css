@@ -29,7 +29,7 @@
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
 .rightDrawer {
-  @apply md:p-12 p-4 pr-8 md:w-[530px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
+  @apply md:p-12 p-4 pr-8 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
 }
 
 .content_wrapper {
@@ -51,7 +51,7 @@
   @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
-  @apply flex flex-col md:w-[530px] w-full right-0 items-center fixed bottom-0 bg-white;
+  @apply flex flex-col md:w-[530px] 3xl:w-[680px] w-full right-0 items-center fixed bottom-0 bg-white;
 }
 .bottom_line {
   @apply w-full h-[2px] bg-DDDDDF;
@@ -87,7 +87,7 @@
   @apply flex w-full my-8 flex-col;
 }
 .buy_info {
-  @apply flex flex-col w-full my-8 md:h-[420px] overflow-y-scroll;
+  @apply flex flex-col w-full my-8 overflow-y-scroll;
 }
 .product_to_buy_wrapper {
   @apply flex;
@@ -114,7 +114,7 @@
   @apply outline-none  w-full;
 }
 .search_modal {
-  @apply flex px-4 py-6 w-full absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] md:h-[240px] h-[190px] overflow-y-scroll;
+  @apply flex px-4 py-6 w-full absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] 3xl:max-h-[600px] 3xl:h-[400px] md:h-[240px] h-[190px] overflow-y-scroll;
 }
 .swap_second_screen {
   @apply w-full;
@@ -183,4 +183,7 @@
 }
 .demo:hover .showCheckCircle {
   @apply hidden;
+}
+.transfer_create_btn {
+  @apply mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
