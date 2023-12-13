@@ -18,8 +18,9 @@ const ProductCard = ({
   mainIndex,
   item,
   isSavedComp,
-  productID = 4323,
+  // productID = 4323,
   handleAddItem,
+  quantity,
 }) => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -36,7 +37,7 @@ const ProductCard = ({
 
   const wishlistApiBody = {
     userId: decrypt(getLocalStorage("_ga")),
-    productId: productID,
+    productId: item?.id,
   };
 
   const {mutateAsync: addwhislistProduct} = useMutation(
@@ -105,9 +106,7 @@ const ProductCard = ({
 
   useEffect(() => {
     setInWishList(
-      categoryPageReduxData.savedProducts
-        .map(obj => obj.id)
-        .includes(productID),
+      categoryPageReduxData.savedProducts.map(obj => obj.id).includes(item?.id),
     );
     updateCount.current += 1;
   }, []);
@@ -189,7 +188,7 @@ const ProductCard = ({
           <div className={styles.product_name_wrapper}>
             <p className={styles.product_name}>{item.product_name}</p>
             <div
-              id={productID}
+              id={item?.id}
               onClick={e => {
                 handleWhislistCard(e);
               }}>
@@ -221,13 +220,31 @@ const ProductCard = ({
             ))}
           </div>
 
-          <button
-            onClick={() =>
-              handleAddItem(item.image?.split(",")[0], item.product_name)
-            }
-            className={styles.add_btn}>
-            Add item
-          </button>
+          <div className={styles.btn_wrapper}>
+            <button
+              disabled={quantity < 1}
+              onClick={() =>
+                handleAddItem(
+                  item.image?.split(",")[0],
+                  item.product_name,
+                  item.id,
+                  parseInt(item?.additional_amount),
+                )
+              }
+              className={`${
+                quantity > 0
+                  ? "text-71717A border-71717A cursor-pointer"
+                  : "text-9A9AA2 border-9A9AA2 cursor-default"
+              } ${styles.add_btn}`}>
+              {quantity > 0 ? "Add item " : "Out of stock"}
+            </button>
+            {item?.additional_amount && (
+              <p className={styles.additional_amount}>
+                + <span className={styles.rupee_icon}>₹</span>
+                {item.additional_amount}/mo
+              </p>
+            )}
+          </div>
         </div>
       </div>
     </div>

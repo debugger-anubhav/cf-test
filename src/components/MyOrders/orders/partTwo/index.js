@@ -6,7 +6,7 @@ import {CircularProgressbar} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import {useRouter} from "next/navigation";
-import {openScheduleModal, setOrderIdFromOrderPage} from "@/store/Slices";
+import {reduxSetModalState, setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
@@ -19,9 +19,7 @@ const OrderDetails = ({setPart, data}) => {
   const dispatch = useDispatch();
   const stepsCompleted = data?.stage;
 
-  const modalStateFromRedux = useSelector(
-    state => state.order.isScheduleModalOpen,
-  );
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   console.log(modalStateFromRedux);
 
   const [isModalopen, setIsModalopen] = useState(false);
@@ -38,7 +36,7 @@ const OrderDetails = ({setPart, data}) => {
 
   const toggleModal = () => {
     setIsModalopen(!isModalopen);
-    dispatch(openScheduleModal(!modalStateFromRedux));
+    dispatch(reduxSetModalState(!modalStateFromRedux));
   };
 
   const toggleServiceDrawer = () => {

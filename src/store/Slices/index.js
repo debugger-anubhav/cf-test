@@ -266,14 +266,14 @@ export const orderSlice = createSlice({
   name: "orderPage",
   initialState: {
     orderId: null,
-    isScheduleModalOpen: false,
+    isModalOpen: false,
   },
   reducers: {
     setOrderIdFromOrderPage: (state, action) => {
       state.orderId = action.payload;
     },
-    openScheduleModal: (state, action) => {
-      state.isScheduleModalOpen = action.payload;
+    reduxSetModalState: (state, action) => {
+      state.isModalOpen = action.payload;
     },
   },
 });
@@ -359,7 +359,7 @@ export const {getOrderId} = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
 
-export const {setOrderIdFromOrderPage, openScheduleModal} = orderSlice.actions;
+export const {setOrderIdFromOrderPage, reduxSetModalState} = orderSlice.actions;
 
 export const {
   setTransactionReferenceNumber,
