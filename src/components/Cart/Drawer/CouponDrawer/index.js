@@ -88,6 +88,8 @@ const CouponDrawer = ({
       });
   };
 
+  console.log(pageData, "pageeedata");
+
   useEffect(() => {
     getOffersAndCoupons();
   }, []);
@@ -96,6 +98,14 @@ const CouponDrawer = ({
     "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp";
   const backgroundImageType2 =
     "https://d3juy0zp6vqec8.cloudfront.net/images/icons/inactive-grey-coupon.webp";
+
+  const getTextColor = (item, isMonthly) => {
+    if (isMonthly) {
+      return item.coupon_type !== 1 ? "#CCC5F4" : "#CCCCCC";
+    } else {
+      return item.coupon_type === 0 ? "#CCCCCC" : "#CCC5F4";
+    }
+  };
 
   return (
     <Drawer
@@ -140,14 +150,14 @@ const CouponDrawer = ({
                 key={index.toString()}
                 style={{
                   background: isMonthly
-                    ? item.coupon_type === 0
+                    ? item.coupon_type === 0 || item.coupon_type === 2
                       ? `url(${backgroundImageType1})`
                       : `url(${backgroundImageType2})`
                     : item.coupon_type === 0
                     ? `url(${backgroundImageType2})`
                     : `url(${backgroundImageType1})`,
                   cursor: isMonthly
-                    ? item.coupon_type === 0
+                    ? item.coupon_type === 0 || item.coupon_type === 2
                       ? "pointer"
                       : "not-allowed"
                     : item.coupon_type === 0
@@ -157,8 +167,8 @@ const CouponDrawer = ({
                 className={`${styles.card}`}
                 onClick={() => {
                   if (
-                    (isMonthly && item.coupon_type === 0) ||
-                    (!isMonthly && item.coupon_type === 1)
+                    (isMonthly && item.coupon_type !== 1) ||
+                    (!isMonthly && item.coupon_type !== 0)
                   ) {
                     handleApplyClick(item.coupon_code);
                     setappliedIndex(index);
@@ -169,13 +179,7 @@ const CouponDrawer = ({
                 <div className="xl:w-[210px]">
                   <p
                     style={{
-                      color: isMonthly
-                        ? item.coupon_type === 0
-                          ? "#CCC5F4"
-                          : "#CCCCCC"
-                        : item.coupon_type === 0
-                        ? "#CCCCCC"
-                        : "#CCC5F4",
+                      color: getTextColor(item, isMonthly),
                     }}
                     className={`${styles.desc}`}>{`${item?.price_text} ${
                     item?.max_discount !== "0"
@@ -185,13 +189,7 @@ const CouponDrawer = ({
                   {item?.price_below_text && (
                     <p
                       style={{
-                        color: isMonthly
-                          ? item.coupon_type === 0
-                            ? "#CCC5F4"
-                            : "#CCCCCC"
-                          : item.coupon_type === 0
-                          ? "#CCCCCC"
-                          : "#CCC5F4",
+                        color: getTextColor(item, isMonthly),
                       }}
                       className={`${styles.desc}`}>
                       {item?.price_below_text}
@@ -204,7 +202,7 @@ const CouponDrawer = ({
                 <div
                   style={{
                     borderColor: isMonthly
-                      ? item.coupon_type === 0
+                      ? item.coupon_type !== 1
                         ? "#7e6dd5"
                         : "#B4B4B4"
                       : item.coupon_type === 0
@@ -218,7 +216,7 @@ const CouponDrawer = ({
                     className="text-[#222] flex"
                     style={{
                       cursor: isMonthly
-                        ? item.coupon_type === 0
+                        ? item.coupon_type !== 1
                           ? "pointer"
                           : "not-allowed"
                         : item.coupon_type === 0

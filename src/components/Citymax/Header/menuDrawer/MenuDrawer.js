@@ -2,8 +2,6 @@ import React from "react";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {Close} from "@/assets/icon";
 import styles from "./styles.module.css";
-import Image from "next/image";
-import logo from "../logo.jpg";
 import {useRouter} from "next/navigation";
 import {IconLink} from "../../../../assets/icon";
 
@@ -70,7 +68,11 @@ const MenuDrawer = ({toggleDrawer, open}) => {
         <div onClick={toggleDrawer} className={styles.close_icon}>
           <Close color={"#45454A"} size={20} />
         </div>
-        <Image className={styles.logo} src={logo} />
+        <img
+          className={styles.logo}
+          src={`${IconLink + "citymax_final.svg"}`}
+        />
+
         <div className={styles.content_wrapper}>
           <div className={styles.map_wrapper}>
             {arr1.map((item, index) => (

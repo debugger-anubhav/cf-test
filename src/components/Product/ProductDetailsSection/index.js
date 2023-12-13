@@ -306,21 +306,19 @@ const ProductDetails = ({params}) => {
     return item?.fc_product?.id === parseInt(params.productId);
   });
 
-  const isSameTenure = cartItems?.some(item => {
-    return (
-      parseInt(item?.subproduct?.attr_name?.split(" ")?.[0]) ===
-      parseInt(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])
-    );
-  });
+  // const isSameTenure = cartItems?.some(item => {
+  //   return (
+  //     parseInt(item?.subproduct?.attr_name?.split(" ")?.[0]) ===
+  //     parseInt(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])
+  //   );
+  // });
 
-  // console.log(isSameTenure, "sametenure");
-
-  const handleNotSameTenure = () => {
-    showToastNotification(
-      "Please select same tenure as selected for other cart items.",
-      2,
-    );
-  };
+  // const handleNotSameTenure = () => {
+  //   showToastNotification(
+  //     "Please select same tenure as selected for other cart items.",
+  //     2,
+  //   );
+  // };
 
   const handleAddToCart = () => {
     setIsLoading(true);
@@ -348,8 +346,13 @@ const ProductDetails = ({params}) => {
       .post(baseURL + endPoints.productPage.addToCart, body, headers)
       .then(res => {
         const apiData = res?.data?.data;
-        if (!isItemInCart) {
-          dispatch(addItemsToCart(apiData));
+        if (res?.data?.data?.status === false)
+          showToastNotification(res?.data?.data?.message, 2);
+        else {
+          if (!isItemInCart) {
+            dispatch(addItemsToCart(apiData));
+            showToastNotification("Item added to cart", 1, isSmallScreen);
+          }
         }
         setIsLoading(false);
       })
@@ -357,8 +360,6 @@ const ProductDetails = ({params}) => {
         console.log(err);
         setIsLoading(false);
       });
-
-    showToastNotification("Item added to cart", 1, isSmallScreen);
   };
 
   const handleGoToCart = () => {
@@ -457,8 +458,8 @@ const ProductDetails = ({params}) => {
           isItemInCart={isItemInCart}
           soldOut={soldOut}
           cartItems={cartItems}
-          isSameTenure={isSameTenure}
-          handleNotSameTenure={handleNotSameTenure}
+          // isSameTenure={isSameTenure}
+          // handleNotSameTenure={handleNotSameTenure}
         />
       )}
       <div className={styles.bread_crumps}>
@@ -734,9 +735,7 @@ const ProductDetails = ({params}) => {
                 ? handleAddToCart
                 : isItemInCart
                 ? handleGoToCart
-                : isSameTenure
-                ? handleAddToCart
-                : handleNotSameTenure
+                : handleAddToCart
             }
             disabled={isLoading}
             className={styles.btn}

@@ -3,14 +3,13 @@ import styles from "./styles.module.css";
 import {useParams, useRouter} from "next/navigation";
 import {
   BackIcon,
-  CheckedBox,
+  // CheckedBox,
   Close,
   ForwardArrowWithLine,
-  // IconLink,
   Lock,
   Rupee,
   Sparkles,
-  UncheckedBox,
+  // UncheckedBox,
 } from "../../../assets/icon";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import CitymaxDetailPageDrawer from "./CitymaxDetailPageDrawer/index";
@@ -27,7 +26,10 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 const CitymaxPlanDetail = () => {
   const router = useRouter();
   const params = useParams();
+  const userId = decrypt(getLocalStorage("_ga"));
   const dispatch = useDispatch();
+  const cartItems = useSelector(state => state.cartPageData.cartItems);
+  console.log(cartItems, "hwhuehu");
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const [isHalfYearly, setHalfYearly] = useState(params.tenure === "6");
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -42,12 +44,17 @@ const CitymaxPlanDetail = () => {
     img: "",
     name: "",
   });
-  const [isCheckedMap, setIsCheckedMap] = useState({});
+  const [
+    isCheckedMap,
+    //  setIsCheckedMap
+  ] = useState({});
+
   const [totalSlots, setTotalSlots] = useState(0);
-  const [totalFilledSlots, setTotalFilledSlots] = useState(0);
+  // const [totalFilledSlots, setTotalFilledSlots] = useState(0);
   const [modalCategory, setModalCategory] = useState(1);
   const [selectedItemsArr, setSelectedItemsArr] = useState();
   const [additionalChargeItems, setAdditionalChargeItems] = useState();
+  const [totalAdditionalAmount, setTotalAdditionalAmount] = useState();
 
   const toggleDrawer = type => {
     setDrawerType(type);
@@ -59,6 +66,11 @@ const CitymaxPlanDetail = () => {
     dispatch(reduxSetModalState(!modalStateFromRedux));
   };
 
+  const isItemInCart = cartItems?.some(item => {
+    return item?.fc_product?.id === parseInt(params.planId);
+  });
+
+  console.log(isItemInCart, "isItemInCart");
   const getRoomData = () => {
     axios
       .get(
@@ -128,13 +140,7 @@ const CitymaxPlanDetail = () => {
     toggleDrawer();
   };
 
-  const handleDeleteSelectedItem = (
-    e,
-    item,
-    selectedItem,
-    index,
-    innerIndex,
-  ) => {
+  const handleDeleteSelectedItem = (e, index, innerIndex) => {
     e.stopPropagation();
     const tempArray = {...planDetailsArray[index]};
     const updatedAssociations = {
@@ -150,46 +156,43 @@ const CitymaxPlanDetail = () => {
     setPlanDetailsArray([...planDetailsArray]);
   };
 
-  const handleCheckRepeat = (item, index) => {
-    console.log("isme aaa raha h");
-    setIsCheckedMap(prevIsCheckedMap => {
-      const updatedIsCheckedMap = {...prevIsCheckedMap};
-      updatedIsCheckedMap[item.fc_frp_room.id] =
-        !prevIsCheckedMap[item.fc_frp_room.id];
-      return updatedIsCheckedMap;
-    });
+  // CITYMAX SAME AS ABOV LOGIC (USEFUL FOR FUTURE)
 
-    if (!isCheckedMap[item.room_id]) {
-      console.log("innnns");
-      console.log(index);
+  // const handleCheckRepeat = (item, index) => {
+  //   console.log("isme aaa raha h");
+  //   setIsCheckedMap(prevIsCheckedMap => {
+  //     const updatedIsCheckedMap = {...prevIsCheckedMap};
+  //     updatedIsCheckedMap[item.fc_frp_room.id] =
+  //       !prevIsCheckedMap[item.fc_frp_room.id];
+  //     return updatedIsCheckedMap;
+  //   });
 
-      const newArr = [...planDetailsArray];
-      newArr[index].fc_frp_room.fc_frp_slot_associations = newArr[
-        index - 1
-      ].fc_frp_room.fc_frp_slot_associations?.map(item => item);
-      setPlanDetailsArray(prev => [...newArr]);
-    }
-  };
+  //   if (!isCheckedMap[item.room_id]) {
+  //     console.log("innnns");
+  //     console.log(index);
 
-  useEffect(() => {
-    planDetailsArray?.forEach(item => {
-      // const slotsLength = item?.fc_frp_room?.fc_frp_slot_associations.length;
-      const selectedSlotsArray =
-        item?.fc_frp_room?.fc_frp_slot_associations.filter(
-          slot => "selectedProduct" in slot,
-        );
-      // console.log(selectedSlotsArray, "selectedSlotsArray");
-      const countOfSelectedSlots = selectedSlotsArray?.length;
+  //     const newArr = [...planDetailsArray];
+  //     newArr[index].fc_frp_room.fc_frp_slot_associations = newArr[
+  //       index - 1
+  //     ].fc_frp_room.fc_frp_slot_associations?.map(item => item);
+  //     setPlanDetailsArray(prev => [...newArr]);
+  //   }
+  // };
 
-      setTotalFilledSlots(
-        prevTotalFilledSlots => prevTotalFilledSlots + countOfSelectedSlots,
-      );
-    });
-  }, [planDetailsArray]);
+  // useEffect(() => {
+  //   planDetailsArray?.forEach(item => {
+  //     const selectedSlotsArray =
+  //       item?.fc_frp_room?.fc_frp_slot_associations.filter(
+  //         slot => "selectedProduct" in slot,
+  //       );
 
-  // console.log(totalSlots, totalFilledSlots, "kkkkkkkkkkkk");
+  //     const countOfSelectedSlots = selectedSlotsArray?.length;
 
-  const userId = decrypt(getLocalStorage("_ga"));
+  //     setTotalFilledSlots(
+  //       prevTotalFilledSlots => prevTotalFilledSlots + countOfSelectedSlots,
+  //     );
+  //   });
+  // }, [planDetailsArray]);
 
   const generatePayload = (selectedItems, useAdditionalAmount) => {
     const payload = {};
@@ -218,29 +221,6 @@ const CitymaxPlanDetail = () => {
     return payload;
   };
 
-  // const generateUpgradeItemsPayload = selectedItems => {
-  //   const payload = {};
-  //   selectedItems.forEach(item => {
-  //     const {planId, roomId, slotId, productId, additionalAmount} = item;
-
-  //     if (!payload[planId]) {
-  //       payload[planId] = {};
-  //     }
-
-  //     if (!payload[planId][roomId]) {
-  //       payload[planId][roomId] = {};
-  //     }
-
-  //     if (!payload[planId][roomId][slotId]) {
-  //       payload[planId][roomId][slotId] = {};
-  //     }
-
-  //     payload[planId][roomId][slotId][productId] = [additionalAmount];
-  //   });
-
-  //   return payload;
-  // };
-
   const handleAddAssociatedProducts = async cartId => {
     const payload = generatePayload(selectedItemsArr);
     console.log(payload, "payload");
@@ -250,20 +230,6 @@ const CitymaxPlanDetail = () => {
         additionalChargeItems,
         true,
       ),
-      // selected_sub_products_additonal_rent: {
-      //   4039: {
-      //     1: {
-      //       11: {
-      //         3893: [300],
-      //       },
-      //     },
-      //     2: {
-      //       6: {
-      //         4004: [400],
-      //       },
-      //     },
-      //   },
-      // },
       frp_product_cart_id: cartId,
       product_id: data?.productDetails[0]?.id,
       cateory_id: data?.productDetails[0]?.category_id.split(","),
@@ -276,6 +242,7 @@ const CitymaxPlanDetail = () => {
       },
       attr_name_id: 38585,
       attribute_values: data?.PrdAttrArr?.[isHalfYearly ? "6" : "12"]?.pid,
+      user_id: userId,
     };
     axios
       .post(baseURL + endPoints.cityMaxPage.sentProductsToCart, body)
@@ -290,7 +257,7 @@ const CitymaxPlanDetail = () => {
     const headers = {
       "Content-Type": "application/json",
     };
-    // const userId = getLocalStorage("user_id");
+
     const body = {
       mqty: 1,
       userId: parseInt(userId),
@@ -315,7 +282,7 @@ const CitymaxPlanDetail = () => {
           if (openModal) setModalCategory(2);
           else toggleModal();
         } else if (res?.data?.data?.status === true) {
-          dispatch(addItemsToCart(apiData));
+          if (!isItemInCart) dispatch(addItemsToCart(apiData));
           handleAddAssociatedProducts(res?.data?.data?.fc_shopping_carts_id);
           showToastNotification("Added to cart", 1);
         } else showToastNotification("Something went wrong", 3);
@@ -326,6 +293,43 @@ const CitymaxPlanDetail = () => {
   };
 
   useEffect(() => {
+    const newArr = [];
+    const upgradeItemsArr = [];
+    planDetailsArray?.forEach((item, i) => {
+      item?.fc_frp_room?.fc_frp_slot_associations?.forEach((a, b) => {
+        if (a.selectedProduct) {
+          const payloadItem = {
+            planId: params.planId,
+            roomId: item.fc_frp_room.id,
+            slotId: a.slot_id,
+            productId: a.seletedProductId,
+          };
+          newArr.push(payloadItem);
+        }
+        if (a.additionalAmount) {
+          const payloadItem = {
+            planId: params.planId,
+            roomId: item.fc_frp_room.id,
+            slotId: a.slot_id,
+            productId: a.seletedProductId,
+            additionalAmount: parseInt(a.additionalAmount),
+          };
+          upgradeItemsArr.push(payloadItem);
+        }
+      });
+    });
+    setSelectedItemsArr(newArr);
+    setAdditionalChargeItems(upgradeItemsArr);
+    setTotalAdditionalAmount(
+      upgradeItemsArr?.reduce(
+        (accumulator, currentItem) =>
+          accumulator + (currentItem.additionalAmount || 0),
+        0,
+      ),
+    );
+  }, [planDetailsArray]);
+
+  useEffect(() => {
     console.log(selectedItemsArr, "selectedddd");
     console.log(additionalChargeItems, "additionalll");
   }, [selectedItemsArr, additionalChargeItems]);
@@ -334,35 +338,7 @@ const CitymaxPlanDetail = () => {
     <button
       className={styles.proceed_btn}
       onClick={() => {
-        const newArr = [];
-        const upgradeItemsArr = [];
-        planDetailsArray.forEach((item, i) => {
-          item.fc_frp_room.fc_frp_slot_associations.forEach((a, b) => {
-            if (a.selectedProduct) {
-              const payloadItem = {
-                planId: params.planId,
-                roomId: item.fc_frp_room.id,
-                slotId: a.slot_id,
-                productId: a.seletedProductId,
-              };
-              newArr.push(payloadItem);
-            }
-            if (a.additionalAmount) {
-              const payloadItem = {
-                planId: 9088,
-                roomId: item.fc_frp_room.id,
-                slotId: a.slot_id,
-                productId: a.seletedProductId,
-                additionalAmount: parseInt(a.additionalAmount),
-              };
-              upgradeItemsArr.push(payloadItem);
-            }
-          });
-        });
-        setSelectedItemsArr(newArr);
-        setAdditionalChargeItems(upgradeItemsArr);
-
-        if (totalFilledSlots === totalSlots) {
+        if (selectedItemsArr?.length === totalSlots) {
           handleAddToCart();
           setModalCategory(2);
         } else {
@@ -402,9 +378,7 @@ const CitymaxPlanDetail = () => {
                   slot => "selectedProduct" in slot,
                 );
               const countOfSelectedSlots = selectedSlotsArray.length;
-              // totalSlots = totalSlots + slotsLength;
-              // totalFilledSlots = totalFilledSlots + countOfSelectedSlots;
-              console.log(totalSlots, totalFilledSlots, "kkkkkkkkkkkk");
+              console.log(totalSlots, selectedItemsArr?.length, "kkkkkkkkkkkk");
               return (
                 <>
                   <div key={index}>
@@ -422,7 +396,10 @@ const CitymaxPlanDetail = () => {
                         </span>
                       </p>
                     </div>
-                    {(item?.fc_frp_room?.room_name === "Bedroom 1" ||
+
+                    {/* CITYMAX SAME AS ABOV LOGIC (USEFUL FOR FUTURE) */}
+
+                    {/* {(item?.fc_frp_room?.room_name === "Bedroom 1" ||
                       item?.fc_frp_room?.room_name === "Bedroom 2") && (
                       <div className="flex gap-1 mt-8 -mb-4 items-center">
                         {isCheckedMap[item.room_id] ? (
@@ -448,7 +425,8 @@ const CitymaxPlanDetail = () => {
                           Same as above bedroom
                         </p>
                       </div>
-                    )}
+                    )} */}
+
                     <div className={styles.amen_wrapper}>
                       {item?.fc_frp_room?.fc_frp_slot_associations?.map(
                         (t, i) => (
@@ -476,13 +454,7 @@ const CitymaxPlanDetail = () => {
                                   <div
                                     onClick={e =>
                                       !isCheckedMap[item.room_id] &&
-                                      handleDeleteSelectedItem(
-                                        e,
-                                        item,
-                                        t,
-                                        index,
-                                        i,
-                                      )
+                                      handleDeleteSelectedItem(e, index, i)
                                     }>
                                     <Close className={styles.cross} />
                                   </div>
@@ -553,7 +525,6 @@ const CitymaxPlanDetail = () => {
           <ProceedModal
             closeModal={toggleModal}
             isModalOpen={openModal}
-            // isSomeSlotsMissed={totalFilledSlots !== totalSlots}
             modalCategory={modalCategory}
             handleAddToCart={handleAddToCart}
           />
@@ -610,7 +581,8 @@ const CitymaxPlanDetail = () => {
                 <p className={styles.price_type}>Upgrades Rental Amount</p>
                 <p className={styles.bold_text}>
                   <span className={styles.rupee}>₹</span>
-                  {data?.tenure_additional_price} /mo
+                  {totalAdditionalAmount}/mo
+                  {/* {data?.tenure_additional_price} /mo */}
                 </p>
               </div>
             </div>

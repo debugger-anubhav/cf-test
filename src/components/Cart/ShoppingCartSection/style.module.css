@@ -26,10 +26,13 @@
   @apply cursor-pointer text-16 xl:text-20 w-[192px] xl:w-[321px] macbook:w-[337px] h-12 xl:h-fit leading-6 tracking-0.3 xl:tracking-0.4 text-45454A font-medium;
 }
 .price_div {
-  @apply flex -ml-[104px] md:-ml-[128px] lg:-ml-0 mt-[39px] md:mt-[45px] lg:mt-4 items-center gap-6;
+  @apply flex -ml-[104px] md:-ml-[128px] lg:-ml-0 mt-[39px] md:mt-[45px] lg:mt-4 items-center;
 }
 .deposit_txt {
   @apply text-71717A text-14 font-medium leading-5;
+}
+.plus {
+  @apply text-[#9C9C9C] text-18 leading-6;
 }
 .incre_decre_div {
   @apply flex py-1 px-2 items-center gap-2 xl:gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
@@ -205,4 +208,36 @@
 }
 .extra_lagre_skeleton {
   @apply 4xl:flex flex-col hidden w-1/2;
+}
+
+/* citymax cart css */
+.included_items_dropdown_input {
+  @apply w-full mt-8 p-4 rounded-lg border border-DDDDDF bg-fff flex items-center justify-between z-10;
+}
+.dropdown_input_left {
+  @apply flex gap-2 items-center;
+}
+.dropdown_included_box_icon {
+  @apply w-[25px] h-[25px] xl:w-[30px] xl:h-[30px];
+}
+.dropdown_input_label {
+  @apply text-45454A text-16 xl:text-20 font-medium leading-6 tracking-0.3 xl:tracking-0.4;
+}
+.change_btn {
+  @apply rounded-lg border border-DDDDDF px-2 py-1 font-medium text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3 hover:border-5774AC hover:border-2 hover:px-[7px] hover:py-[3px];
+}
+.dropdown_shadow_effect {
+  @apply rounded-lg border border-DDDDDF h-4 w-[90%] lg:w-[95%] xl:w-[505px] -mt-2;
+}
+.dropdown_wrapper {
+  @apply py-4 flex flex-col gap-4 xl:gap-6 mt-4 xl:mt-6 rounded-lg border border-DDDDDF;
+}
+.included_products_wrapper {
+  @apply px-4 flex gap-2 xl:gap-4 items-center;
+}
+.included_prod_img {
+  @apply w-12 h-9 rounded;
+}
+.included_prod_name {
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
 }
