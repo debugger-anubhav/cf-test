@@ -17,7 +17,7 @@
   @apply cursor-pointer min-w-[96px] h-[71px] md:min-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:h-[98px];
 }
 .img {
-  @apply w-full h-full;
+  @apply w-full h-full rounded;
 }
 .name_div {
   @apply flex gap-2 xl:gap-4;
@@ -240,4 +240,7 @@
 }
 .included_prod_name {
   @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
+}
+.insuranceText {
+  @apply text-71717A font-medium text-14 font-Poppins;
 }
