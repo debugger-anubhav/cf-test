@@ -367,8 +367,7 @@ function TransferOwnership({prevScreen, data}) {
                     <div className={styles.bottom_row}>
                       <div className={styles.bottom_line}></div>
                       <button
-                        className={`
-                        mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0
+                        className={`${styles.transfer_create_btn}
                         ${
                           !formik.isValid
                             ? "!bg-[#FFDF85] !cursor-not-allowed"
