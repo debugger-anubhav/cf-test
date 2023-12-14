@@ -29,7 +29,6 @@ const CitymaxPlanDetail = () => {
   const userId = decrypt(getLocalStorage("_ga"));
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cartPageData.cartItems);
-  console.log(cartItems, "hwhuehu");
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const [isHalfYearly, setHalfYearly] = useState(params.tenure === "6");
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -70,7 +69,6 @@ const CitymaxPlanDetail = () => {
     return item?.fc_product?.id === parseInt(params.planId);
   });
 
-  console.log(isItemInCart, "isItemInCart");
   const getRoomData = () => {
     axios
       .get(
@@ -104,7 +102,7 @@ const CitymaxPlanDetail = () => {
     getRoomData();
   }, []);
 
-  console.log(planDetailsArray, "srrrrrr");
+  // console.log(planDetailsArray, "srrrrrr");
 
   const handleSelectItem = (item, slot, headType) => {
     setRoomId(item?.fc_frp_room?.id);
@@ -159,7 +157,6 @@ const CitymaxPlanDetail = () => {
   // CITYMAX SAME AS ABOV LOGIC (USEFUL FOR FUTURE)
 
   // const handleCheckRepeat = (item, index) => {
-  //   console.log("isme aaa raha h");
   //   setIsCheckedMap(prevIsCheckedMap => {
   //     const updatedIsCheckedMap = {...prevIsCheckedMap};
   //     updatedIsCheckedMap[item.fc_frp_room.id] =
@@ -222,8 +219,6 @@ const CitymaxPlanDetail = () => {
   };
 
   const handleAddAssociatedProducts = async cartId => {
-    const payload = generatePayload(selectedItemsArr);
-    console.log(payload, "payload");
     const body = {
       selected_sub_products: generatePayload(selectedItemsArr),
       selected_sub_products_additonal_rent: generatePayload(
@@ -248,7 +243,7 @@ const CitymaxPlanDetail = () => {
       .post(baseURL + endPoints.cityMaxPage.sentProductsToCart, body)
       .then(res => {
         console.log(res?.data?.data);
-        toggleModal();
+        openModal && toggleModal();
       })
       .catch(err => console.log(err));
   };
@@ -338,7 +333,9 @@ const CitymaxPlanDetail = () => {
     <button
       className={styles.proceed_btn}
       onClick={() => {
-        if (selectedItemsArr?.length === totalSlots) {
+        if (selectedItemsArr?.length < 1)
+          showToastNotification("You haven`t selected any product", 2);
+        else if (selectedItemsArr?.length === totalSlots) {
           handleAddToCart();
           setModalCategory(2);
         } else {
@@ -378,7 +375,7 @@ const CitymaxPlanDetail = () => {
                   slot => "selectedProduct" in slot,
                 );
               const countOfSelectedSlots = selectedSlotsArray.length;
-              console.log(totalSlots, selectedItemsArr?.length, "kkkkkkkkkkkk");
+
               return (
                 <>
                   <div key={index}>

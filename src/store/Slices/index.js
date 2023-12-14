@@ -51,7 +51,6 @@ export const HomepageSlice = createSlice({
       state.cityId = action.payload;
     },
     selectedCityName(state, action) {
-      // console.log(action.payload, "actions");
       state.cityName = action.payload;
     },
     addProductName(state, action) {
@@ -189,6 +188,9 @@ export const CartPageSlice = createSlice({
       if (itemIndex !== -1) {
         state.cartItems.splice(itemIndex, 1);
       }
+    },
+    emptyCart(state, action) {
+      state.cartItems.splice(0, state.cartItems.length);
     },
     getBillDetails(state, action) {
       state.billBreakout = action.payload;
@@ -347,6 +349,7 @@ export const {
   setCityShield,
   setCoinsApplied,
   setShoppingCartTab,
+  emptyCart,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
