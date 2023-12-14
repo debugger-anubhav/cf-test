@@ -12,8 +12,6 @@ const StickyBottomBar = ({
   isItemInCart,
   soldOut,
   cartItems,
-  isSameTenure,
-  handleNotSameTenure,
 }) => {
   const discount = Math.round(
     ((durationArray?.[0]?.attr_price -
@@ -69,9 +67,7 @@ const StickyBottomBar = ({
               ? handleAddToCart
               : isItemInCart
               ? handleGoToCart
-              : isSameTenure
-              ? handleAddToCart
-              : handleNotSameTenure
+              : handleAddToCart
           }
           style={{marginTop: "0px"}}
           disabled={isLoading}

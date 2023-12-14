@@ -11,6 +11,8 @@ import {
   ArrowForw,
   CheckedBox,
   DeleteIcon,
+  DropDownArrow,
+  DropUpArrow,
   RightIcon,
   ToggleOff,
   ToggleOn,
@@ -39,6 +41,7 @@ import {
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {useRouter} from "next/navigation";
 
 const ShoppingCartSection = () => {
   const dispatch = useDispatch();
@@ -53,7 +56,7 @@ const ShoppingCartSection = () => {
   }, [cartItems]);
 
   const count = cartItems.length;
-  // const router = useRouter();
+  const router = useRouter();
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -75,17 +78,6 @@ const ShoppingCartSection = () => {
             cityShieldOriginalAmount,
         ).toFixed(0)
       : 0;
-
-  // const fetchCartItems = () => {
-  //   axios
-  //     .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
-  //     .then(res => {
-  //       console.log(res, "res in fetch itemms");
-  //       setArr(res?.data?.data);
-  //       dispatch(getCartItems(res?.data?.data));
-  //     })
-  //     .catch(err => console.log(err));
-  // };
 
   const monthlyModeFeatures = [
     "Get additional coupon upto 8%",
@@ -115,6 +107,7 @@ const ShoppingCartSection = () => {
   const [code, setCode] = useState(data.couponCodeUsed);
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   // const [itemQuantity, setItemQuantity] = useState(1);
 
@@ -135,10 +128,6 @@ const ShoppingCartSection = () => {
   useEffect(() => {
     fetchAvailCoins();
   }, []);
-
-  // const closeDrawer = () => {
-  //   setCityShieldDrawerOpen(false);
-  // };
 
   const toggleDrawerCityShield = () => {
     setCityShieldDrawerOpen(!cityShieldDrawerOpen);
@@ -259,6 +248,7 @@ const ShoppingCartSection = () => {
             <h1 className={styles.head}>Shopping cart ({count})</h1>
             <div className={styles.card_wrapper}>
               {arr?.map((item, index) => {
+                console.log(arr, item, "arrrrr");
                 return (
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
@@ -309,34 +299,39 @@ const ShoppingCartSection = () => {
                           </div>
                         </div>
 
-                        <div className={styles.price_div}>
-                          <div className={styles.incre_decre_div}>
-                            <span
-                              className={styles.span_item}
-                              onClick={() =>
-                                handleUpdateQuantity(
-                                  item.id,
-                                  item?.fc_product?.id,
-                                  item.quantity - 1,
-                                  index,
-                                )
-                              }>
-                              -
-                            </span>
-                            {item?.quantity}
-                            <span
-                              className={styles.span_item}
-                              onClick={() =>
-                                handleUpdateQuantity(
-                                  item.id,
-                                  item?.fc_product?.id,
-                                  item.quantity + 1,
-                                  index,
-                                )
-                              }>
-                              +
-                            </span>
-                          </div>
+                        <div
+                          className={`${
+                            item?.is_frp === 1 ? "gap-2" : "gap-6"
+                          } ${styles.price_div}`}>
+                          {item?.is_frp !== 1 && (
+                            <div className={styles.incre_decre_div}>
+                              <span
+                                className={styles.span_item}
+                                onClick={() =>
+                                  handleUpdateQuantity(
+                                    item.id,
+                                    item?.fc_product?.id,
+                                    item.quantity - 1,
+                                    index,
+                                  )
+                                }>
+                                -
+                              </span>
+                              {item?.quantity}
+                              <span
+                                className={styles.span_item}
+                                onClick={() =>
+                                  handleUpdateQuantity(
+                                    item.id,
+                                    item?.fc_product?.id,
+                                    item.quantity + 1,
+                                    index,
+                                  )
+                                }>
+                                +
+                              </span>
+                            </div>
+                          )}
 
                           <div>
                             <p className={styles.deposit_txt}>Monthly Rent</p>
@@ -354,6 +349,24 @@ const ShoppingCartSection = () => {
                               )}
                             </div>
                           </div>
+
+                          {arr[0]?.is_frp === 1 && (
+                            <>
+                              <span className={styles.plus}>+</span>
+
+                              <div>
+                                <p className={styles.deposit_txt}>
+                                  Upgrades Rental Amount
+                                </p>
+                                <div className="flex items-center gap-2">
+                                  <p className={styles.currentPrice}>
+                                    <span className={styles.rupeeIcon}>₹</span>
+                                    {item?.additional_rent}/mo
+                                  </p>
+                                </div>
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -365,6 +378,74 @@ const ShoppingCartSection = () => {
                 );
               })}
             </div>
+
+            {/* for citymax */}
+            {arr[0]?.is_frp === 1 && (
+              <>
+                <div className="flex flex-col items-center">
+                  <div className={styles.included_items_dropdown_input}>
+                    <div className={styles.dropdown_input_left}>
+                      <img
+                        src=""
+                        className={styles.dropdown_included_box_icon}
+                      />
+                      <p className={styles.dropdown_input_label}>
+                        Contains: {arr[0]?.includedProducts.length} items
+                      </p>
+                      <button
+                        onClick={() =>
+                          router.push(
+                            `/choose-products/${
+                              arr[0]?.subproduct?.product_id
+                            }/${arr[0]?.subproduct?.attr_name?.split(" ")[0]}`,
+                          )
+                        }
+                        className={styles.change_btn}>
+                        Change
+                      </button>
+                    </div>
+                    <div
+                      className="cursor-pointer"
+                      onClick={() => setOpenDropdown(!openDropdown)}>
+                      {openDropdown ? (
+                        <DropUpArrow size={24} />
+                      ) : (
+                        <DropDownArrow size={24} />
+                      )}
+                    </div>
+                  </div>
+                  {!openDropdown && (
+                    <div className={styles.dropdown_shadow_effect}></div>
+                  )}
+                </div>
+                {openDropdown && (
+                  <div className={styles.dropdown_wrapper}>
+                    {arr[0]?.includedProducts?.map((item, index) => (
+                      <>
+                        <div
+                          key={index}
+                          className={styles.included_products_wrapper}>
+                          <img
+                            className={styles.included_prod_img}
+                            src={
+                              productImageBaseUrl +
+                              "thumb/" +
+                              item.fc_product?.image?.split(",")?.[0]
+                            }
+                          />
+                          <p className={styles.included_prod_name}>
+                            {item?.fc_product?.product_name?.replace(/-/g, " ")}
+                          </p>
+                        </div>
+                        {index !== arr[0]?.includedProducts.length - 1 && (
+                          <div className={styles.line_break}></div>
+                        )}
+                      </>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
           </div>
 
           <div className={styles.right_div} id="rightDiv">
@@ -429,70 +510,74 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
-              <div className={styles.coins_div}>
-                <div className={styles.coins_left_div}>
-                  <div>
-                    <img
-                      src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                      className={`${styles.coin} pointer-events-none`}
-                      loading="lazy"
-                    />
+              {arr[0]?.is_frp !== 1 && (
+                <div className={styles.coins_div}>
+                  <div className={styles.coins_left_div}>
+                    <div>
+                      <img
+                        src={`${categoryIconsUrl + "cf_coin.svg"}`}
+                        className={`${styles.coin} pointer-events-none`}
+                        loading="lazy"
+                      />
+                    </div>
+                    <div>
+                      <p className={styles.coin_txt}>Use Cityfurnish coins</p>
+                      <p className={styles.avail_bal}>
+                        Available balance:{" "}
+                        {isCoinApplied
+                          ? availCoin - billBreakup?.coinsUsed
+                          : availCoin}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className={styles.coin_txt}>Use Cityfurnish coins</p>
-                    <p className={styles.avail_bal}>
-                      Available balance:{" "}
-                      {isCoinApplied
-                        ? availCoin - billBreakup?.coinsUsed
-                        : availCoin}
-                    </p>
+                  <div className="cursor-pointer">
+                    {isCoinApplied ? (
+                      <ToggleOn
+                        size={29}
+                        color={"#5774AC"}
+                        onClick={() => setIsCoinApplied(false)}
+                      />
+                    ) : (
+                      <ToggleOff
+                        color={"#E3E1DC"}
+                        size={29}
+                        onClick={() => setIsCoinApplied(true)}
+                      />
+                    )}
                   </div>
                 </div>
-                <div className="cursor-pointer">
-                  {isCoinApplied ? (
-                    <ToggleOn
-                      size={29}
-                      color={"#5774AC"}
-                      onClick={() => setIsCoinApplied(false)}
-                    />
+              )}
+
+              {arr[0]?.is_frp !== 1 && (
+                <div
+                  className={styles.coupons_wrapper}
+                  onClick={() => {
+                    !isCouponApplied && setCouponDrawerOpen(true);
+                    // checkCoupon();
+                  }}>
+                  <p className={styles.offer_text}>
+                    {isCouponApplied
+                      ? `${code} applied🎉`
+                      : "Apply Offers & Coupon🎉"}
+                  </p>
+                  {isCouponApplied ? (
+                    <p
+                      className={styles.remove_txt}
+                      // onClick={handleRemoveCode}
+                      onClick={() => {
+                        setIsCouponApplied(false);
+                        setCode("");
+                        dispatch(getCouponCodeUsed(""));
+                      }}>
+                      Remove
+                    </p>
                   ) : (
-                    <ToggleOff
-                      color={"#E3E1DC"}
-                      size={29}
-                      onClick={() => setIsCoinApplied(true)}
-                    />
+                    <div onClick={() => setCouponDrawerOpen(true)}>
+                      <ArrowForw color={"#3E688E"} className={styles.arrow} />
+                    </div>
                   )}
                 </div>
-              </div>
-
-              <div
-                className={styles.coupons_wrapper}
-                onClick={() => {
-                  !isCouponApplied && setCouponDrawerOpen(true);
-                  // checkCoupon();
-                }}>
-                <p className={styles.offer_text}>
-                  {isCouponApplied
-                    ? `${code} applied🎉`
-                    : "Apply Offers & Coupon🎉"}
-                </p>
-                {isCouponApplied ? (
-                  <p
-                    className={styles.remove_txt}
-                    // onClick={handleRemoveCode}
-                    onClick={() => {
-                      setIsCouponApplied(false);
-                      setCode("");
-                      dispatch(getCouponCodeUsed(""));
-                    }}>
-                    Remove
-                  </p>
-                ) : (
-                  <div onClick={() => setCouponDrawerOpen(true)}>
-                    <ArrowForw color={"#3E688E"} className={styles.arrow} />
-                  </div>
-                )}
-              </div>
+              )}
 
               {couponDrawerOpen && (
                 <CouponDrawer
@@ -508,70 +593,70 @@ const ShoppingCartSection = () => {
                 />
               )}
 
-              {/* hit and try */}
-
-              <div className={styles.payment_mode}>
-                <h2 className={styles.pref_mode_head}>
-                  Preferred payment mode:
-                </h2>
-                <div className={styles.monthly_toggler}>
-                  <p
-                    onClick={() => {
-                      const prevVal = isMonthly;
-                      const isMonthlyVal = true;
-                      setIsMonthly(true);
-                      setLocalStorage("isMonthly", true);
-                      if (prevVal !== isMonthlyVal) {
-                        setIsCouponApplied(false);
-                        setCode("");
-                      }
-                    }}
-                    className={`${
-                      isMonthly
-                        ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
-                        : "bg-transparent"
-                    } ${styles.pref_mode_text}`}>
-                    Monthly
-                  </p>
-                  <p
-                    onClick={() => {
-                      const prevVal = isMonthly;
-                      const isMonthlyVal = false;
-                      setIsMonthly(false);
-                      setLocalStorage("isMonthly", false);
-                      if (prevVal !== isMonthlyVal) {
-                        setIsCouponApplied(false);
-                        setCode("");
-                      }
-                    }}
-                    className={`${
-                      isMonthly
-                        ? "bg-transparent"
-                        : "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
-                    } ${styles.pref_mode_text}`}>
-                    Upfront
-                  </p>
+              {arr[0]?.is_frp !== 1 && (
+                <div className={styles.payment_mode}>
+                  <h2 className={styles.pref_mode_head}>
+                    Preferred payment mode:
+                  </h2>
+                  <div className={styles.monthly_toggler}>
+                    <p
+                      onClick={() => {
+                        const prevVal = isMonthly;
+                        const isMonthlyVal = true;
+                        setIsMonthly(true);
+                        setLocalStorage("isMonthly", true);
+                        if (prevVal !== isMonthlyVal) {
+                          setIsCouponApplied(false);
+                          setCode("");
+                        }
+                      }}
+                      className={`${
+                        isMonthly
+                          ? "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                          : "bg-transparent"
+                      } ${styles.pref_mode_text}`}>
+                      Monthly
+                    </p>
+                    <p
+                      onClick={() => {
+                        const prevVal = isMonthly;
+                        const isMonthlyVal = false;
+                        setIsMonthly(false);
+                        setLocalStorage("isMonthly", false);
+                        if (prevVal !== isMonthlyVal) {
+                          setIsCouponApplied(false);
+                          setCode("");
+                        }
+                      }}
+                      className={`${
+                        isMonthly
+                          ? "bg-transparent"
+                          : "bg-[#5774AC] shadow-[0px_2px_4px_0px_rgba(0,0,0,0.25)]"
+                      } ${styles.pref_mode_text}`}>
+                      Upfront
+                    </p>
+                  </div>
+                  <div className={styles.pref_mode_features_wrappper}>
+                    {isMonthly
+                      ? monthlyModeFeatures.map((item, index) => (
+                          <ul key={index} className={styles.payment_mode_list}>
+                            <RightIcon color={"#2D9469"} size={13} />
+                            <li className={styles.payment_mode_feature}>
+                              {item}
+                            </li>
+                          </ul>
+                        ))
+                      : upfrontModeFeatures.map((item, index) => (
+                          <ul key={index} className={styles.payment_mode_list}>
+                            <RightIcon color={"#2D9469"} size={13} />
+                            <li className={styles.payment_mode_feature}>
+                              {item}
+                            </li>
+                          </ul>
+                        ))}
+                  </div>
                 </div>
-                <div className={styles.pref_mode_features_wrappper}>
-                  {isMonthly
-                    ? monthlyModeFeatures.map((item, index) => (
-                        <ul key={index} className={styles.payment_mode_list}>
-                          <RightIcon color={"#2D9469"} size={13} />
-                          <li className={styles.payment_mode_feature}>
-                            {item}
-                          </li>
-                        </ul>
-                      ))
-                    : upfrontModeFeatures.map((item, index) => (
-                        <ul key={index} className={styles.payment_mode_list}>
-                          <RightIcon color={"#2D9469"} size={13} />
-                          <li className={styles.payment_mode_feature}>
-                            {item}
-                          </li>
-                        </ul>
-                      ))}
-                </div>
-              </div>
+              )}
             </div>
 
             <div>

@@ -10,9 +10,12 @@ const BillContent = ({
   showTotalPriceBreakdown,
   isOfflineInvoice,
 }) => {
-  const code = useSelector(state => state.cartPageData.couponCodeUsed);
-  const billBreakup = useSelector(state => state.cartPageData.billBreakout);
-  console.log(billBreakup, "ue");
+  const pagedata = useSelector(state => state.cartPageData);
+  const code = pagedata.couponCodeUsed;
+  const billBreakup = pagedata.billBreakout;
+  const isCitymaxBill = pagedata.cartItems[0]?.is_frp === 1;
+
+  console.log(pagedata, "ue");
 
   return (
     <>
@@ -80,17 +83,19 @@ const BillContent = ({
           </p>
         </div>
 
-        <div className={styles.row}>
-          <div>
-            <p className={styles.price_label}>
-              Coupon discount {isCouponApplied && code}
+        {!isCitymaxBill && (
+          <div className={styles.row}>
+            <div>
+              <p className={styles.price_label}>
+                Coupon discount {isCouponApplied && code}
+              </p>
+            </div>
+            <p className={styles.total_amount} style={{color: "#2D9469"}}>
+              <span className={styles.rupeeIcon}>-₹</span>
+              {billBreakup?.couponDiscount}
             </p>
           </div>
-          <p className={styles.total_amount} style={{color: "#2D9469"}}>
-            <span className={styles.rupeeIcon}>-₹</span>
-            {billBreakup?.couponDiscount}
-          </p>
-        </div>
+        )}
 
         <div className={styles.line}></div>
 
@@ -128,15 +133,17 @@ const BillContent = ({
 
         <div className={styles.line}></div>
 
-        <div className={styles.row}>
-          <div>
-            <p className={styles.price_label}>Cityfurnish coins used</p>
+        {!isCitymaxBill && (
+          <div className={styles.row}>
+            <div>
+              <p className={styles.price_label}>Cityfurnish coins used</p>
+            </div>
+            <p className={styles.total_amount} style={{color: "#2D9469"}}>
+              <span className={styles.rupeeIcon}>-₹</span>
+              {billBreakup?.coinsUsed}
+            </p>
           </div>
-          <p className={styles.total_amount} style={{color: "#2D9469"}}>
-            <span className={styles.rupeeIcon}>-₹</span>
-            {billBreakup?.coinsUsed}
-          </p>
-        </div>
+        )}
 
         <div className={styles.line}></div>
 
