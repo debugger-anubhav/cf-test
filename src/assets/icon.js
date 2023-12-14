@@ -27,6 +27,8 @@ import {
   IoIosArrowForward,
   IoIosArrowBack,
   IoMdOpen,
+  IoIosArrowDown,
+  IoIosArrowUp,
 } from "react-icons/io";
 import {
   BsFillStarFill,
@@ -170,6 +172,12 @@ export const DownArrow = ({size, color, className}) => (
 );
 export const UpArrow = ({size, color, className}) => (
   <IoMdArrowDropup size={size} color={color} className={className} />
+);
+export const DropDownArrow = ({size, color, className}) => (
+  <IoIosArrowDown size={size} color={color} className={className} />
+);
+export const DropUpArrow = ({size, color, className}) => (
+  <IoIosArrowUp size={size} color={color} className={className} />
 );
 
 export const Heart = ({size, color, className, onClick}) => (
