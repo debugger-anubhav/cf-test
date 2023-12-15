@@ -248,7 +248,6 @@ const ShoppingCartSection = () => {
             <h1 className={styles.head}>Shopping cart ({count})</h1>
             <div className={styles.card_wrapper}>
               {arr?.map((item, index) => {
-                console.log(arr, item, "arrrrr");
                 return (
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
