@@ -20,7 +20,7 @@
   @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
 }
 .privacy_policy_detail_link {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
 }
 .details {
   @apply lg:my-8 my-6;
