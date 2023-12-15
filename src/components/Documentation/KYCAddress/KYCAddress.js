@@ -629,7 +629,7 @@ const KYCAddress = ({handleKycState, step}) => {
                           className={`${commonStyles.option} ${
                             option === selectedOptionPer ? "bg-[#EFF5FF]" : ""
                           } `}
-                          key={index}
+                          key={index.toString()}
                           onClick={() => handleOptionClickPer(option)}>
                           <span>{option}</span>{" "}
                           <SelectionCircle
@@ -667,7 +667,7 @@ const KYCAddress = ({handleKycState, step}) => {
                           className={`${commonStyles.option} ${
                             option === selectedOptionCur ? "bg-[#EFF5FF]" : ""
                           } `}
-                          key={index}
+                          key={index.toString()}
                           onClick={() => handleOptionClickCur(option)}>
                           <span>{option}</span>{" "}
                           <SelectionCircle

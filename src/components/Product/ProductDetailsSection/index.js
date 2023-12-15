@@ -464,7 +464,7 @@ const ProductDetails = ({params}) => {
       )}
       <div className={styles.bread_crumps}>
         {arr?.map((item, index) => (
-          <div key={index} className="flex gap-2">
+          <div key={index.toString()} className="flex gap-2">
             <a
               href={index !== 2 && `${item?.link}`}
               target="_self"
@@ -524,7 +524,7 @@ const ProductDetails = ({params}) => {
             {carouselData?.map((item, index) => (
               <>
                 {item && (
-                  <div key={index} className={styles.prod_img}>
+                  <div key={index.toString()} className={styles.prod_img}>
                     <img
                       src={`${productPageImagesBaseUrl + item}`}
                       alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
@@ -547,7 +547,7 @@ const ProductDetails = ({params}) => {
                         ? "border-[#5F789D]"
                         : "border-fff"
                     }`}
-                    key={index}
+                    key={index.toString()}
                     onClick={() => handleThumbnailClick(index)}>
                     <img
                       src={`${productPageImagesBaseUrl + "thumb/" + image}`}
@@ -570,9 +570,9 @@ const ProductDetails = ({params}) => {
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}>
-            {HasselFreeDataForProductPage.map((item, index) => (
+            {HasselFreeDataForProductPage?.map((item, index) => (
               <ServiceCard
-                key={index}
+                key={index.toString()}
                 head={item.Heading}
                 desc={item.text}
                 icon={item.icon}
@@ -661,8 +661,8 @@ const ProductDetails = ({params}) => {
             </p>
 
             <div className={styles.circle_div}>
-              {durationArray.map((item, index) => (
-                <div key={index}>
+              {durationArray?.map((item, index) => (
+                <div key={index.toString()}>
                   <div
                     className={`${
                       duration.currentIndex === index
@@ -791,9 +791,9 @@ const ProductDetails = ({params}) => {
 
             // ref={sliderRef}
           >
-            {HasselFreeDataForProductPage.map((item, index) => (
+            {HasselFreeDataForProductPage?.map((item, index) => (
               <ServiceCard
-                key={index}
+                key={index.toString()}
                 head={item.Heading}
                 desc={item.text}
                 icon={item.icon}
@@ -879,7 +879,7 @@ export const SkeletonForProductDetail = () => {
             <Skeleton variant="rectangular" className="w-full h-full" />
           </div>
           <div className={styles.left_bottom_cards}>
-            {[1, 2, 3, 4].map((item, index) => {
+            {[1, 2, 3, 4].map(index => {
               return (
                 <div key={index.toString()} className="w-20 h-20 mr-2">
                   <Skeleton variant="rectangular" className="w-full h-full " />

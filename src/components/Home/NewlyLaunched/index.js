@@ -106,7 +106,7 @@ export const NewlyLauncedSkeleton = () => {
         <Skeleton className={styles.skeleton_box} variant="rectangular" />
       </div>
       <div className={styles.skeleton_images_wrapper}>
-        {[1, 2, 3, 4, 5, 6].map((item, index) => (
+        {[1, 2, 3, 4, 5, 6].map(index => (
           <div
             className={styles.Newlylaunced_skeleton_wrapper}
             key={index.toString()}>

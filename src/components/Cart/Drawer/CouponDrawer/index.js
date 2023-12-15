@@ -29,7 +29,7 @@ const CouponDrawer = ({
 
   const idsArr = [];
 
-  cartItems.map(item => {
+  cartItems?.map(item => {
     return idsArr.push(item.fc_product.id.toString());
   });
 

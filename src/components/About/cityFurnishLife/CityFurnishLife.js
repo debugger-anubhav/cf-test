@@ -29,7 +29,7 @@ const CityFurnish = () => {
     <div className={styles.main_container}>
       <h2 className={styles.heading}>{data.heading}</h2>
       <div className={styles.images_wrapper}>
-        {data.images.map((ele, index) => {
+        {data.images?.map((ele, index) => {
           return (
             <div className={styles.image_container} key={index.toString()}>
               <div className={styles.small_images}>

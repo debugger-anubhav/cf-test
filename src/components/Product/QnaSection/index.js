@@ -47,7 +47,7 @@ const QuesAndAns = ({params}) => {
         <h1 className={styles.head}>Product QnA</h1>
         <div className={styles.ques_ans_wrapper}>
           {pageData?.slice(0, 3).map((item, index) => (
-            <div key={index} className={styles.ques_ans_div}>
+            <div key={index.toString()} className={styles.ques_ans_div}>
               <div className={styles.single_row}>
                 <p className={styles.ques}> Q:</p>
                 <p className={styles.ques}>{item.question}</p>

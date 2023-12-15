@@ -96,14 +96,14 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
 
         <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
-            {MenuList0.map((item, index) => (
+            {MenuList0?.map((item, index) => (
               <div
                 className={`${
                   selectedMenuOrder === index
                     ? "text-5774AC border-b-9A9AA2"
                     : "text-45454A border-b-transparent"
                 } ${styles.menu_wrapper}`}
-                key={index}
+                key={index.toString()}
                 onClick={() => {
                   setSelectedMenuOrder(index);
                   fetchOrdersDetails(index !== 0 ? item.value : null);
@@ -129,7 +129,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
             {ordersData?.map((item, index) => {
               console.log(visibleImages, "visibleee");
               return (
-                <div key={index}>
+                <div key={index.toString()}>
                   <CommonContainer
                     item={item}
                     index={index}

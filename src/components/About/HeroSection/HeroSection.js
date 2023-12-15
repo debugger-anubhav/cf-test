@@ -63,7 +63,7 @@ const HeroSection = () => {
           <p className={styles.about_desc}>{data.about_second}</p>
         </div>
         <div className={styles.section2_wrapper}>
-          {data.blocks_data.map((ele, index) => {
+          {data.blocks_data?.map((ele, index) => {
             return (
               <div className={styles.block} key={index.toString()}>
                 <p className={styles.block_head}>{ele.head}</p>
@@ -76,7 +76,7 @@ const HeroSection = () => {
       <h2 className={styles.heading2}>Founding team</h2>
       <div className={styles.team_wrapper}>
         <div className={styles.image_wrapper}>
-          {data.founding_images.map((ele, index) => {
+          {data.founding_images?.map((ele, index) => {
             return (
               <div className={styles.image_card} key={index.toString()}>
                 <div className={styles.images_container}>

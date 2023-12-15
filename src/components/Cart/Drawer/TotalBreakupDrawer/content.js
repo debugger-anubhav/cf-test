@@ -52,7 +52,7 @@ const BillContent = ({
           <>
             <div className={styles.dropdown_wrapper}>
               {billBreakup?.cartSubTotalList?.map((item, index) => (
-                <div key={index} className={styles.dropdown_row}>
+                <div key={index.toString()} className={styles.dropdown_row}>
                   <p
                     className={`xl:min-w-[190px] w-[190px] ${styles.prod_name}`}>
                     {item.name}

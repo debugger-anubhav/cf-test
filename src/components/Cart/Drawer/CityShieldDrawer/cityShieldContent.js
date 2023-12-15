@@ -69,7 +69,7 @@ const CityShieldContent = ({
       )}
 
       <div className={styles.arr_wrapper}>
-        {benefits.map((item, index) => (
+        {benefits?.map((item, index) => (
           <div key={index} className={styles.arr_item}>
             <div className={styles.img_div}>
               <img
@@ -119,8 +119,8 @@ const CityShieldContent = ({
       <div className={styles.points_wrappper}>
         <div>
           <p className={styles.cover_head}>What is covered?</p>
-          {coveredPoints.map((item, index) => (
-            <ul key={index} className={styles.list}>
+          {coveredPoints?.map((item, index) => (
+            <ul key={index.toString()} className={styles.list}>
               <div className={styles.dot}></div>
               <li className={styles.points_item}>{item}</li>
             </ul>
@@ -129,8 +129,8 @@ const CityShieldContent = ({
 
         <div className="mt-6">
           <p className={styles.cover_head}>What is not covered?</p>
-          {uncoveredPoints.map((item, index) => (
-            <ul key={index} className={styles.list}>
+          {uncoveredPoints?.map((item, index) => (
+            <ul key={index.toString()} className={styles.list}>
               <div className={styles.dot}></div>
               <li key={index} className={styles.points_item}>
                 {item}

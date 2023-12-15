@@ -23,7 +23,7 @@ const ItemsIncluded = () => {
               className={`border-[4px] p-1 relative ${
                 selectedItem === index ? "border-[#5F789D]" : "border-fff"
               }`}
-              key={index}>
+              key={index.toString()}>
               <img
                 src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
                 className={styles.img}
@@ -37,7 +37,7 @@ const ItemsIncluded = () => {
         <div>
           {pageDetails?.subProduct?.map((item, index) => (
             <div
-              key={index}
+              key={index.toString()}
               className={`${
                 selectedItem === index ? "flex flex-col lg:flex-row" : "hidden"
               } ${styles.info_wrapper}`}>
@@ -198,7 +198,7 @@ export const ItemsIncludedSkeleton = () => {
         <div className="h-5 flex w-60 my-4">
           <Skeleton variant="text" className="w-full h-full" />
         </div>
-        {[1, 2, 3, 4, 5].map((item, index) => {
+        {[1, 2, 3, 4, 5].map(index => {
           return (
             <div className="h-5 flex my-2" key={index.toString()}>
               <Skeleton variant="text" className="w-40 h-full" />

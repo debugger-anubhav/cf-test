@@ -119,7 +119,7 @@ const Cards = ({subCategory}) => {
       onMouseOver={() => {
         handleScrolling();
       }}>
-      {subCategory.map((subItem, index) => {
+      {subCategory?.map((subItem, index) => {
         return (
           <div
             className={`${styles.card_container}  ${

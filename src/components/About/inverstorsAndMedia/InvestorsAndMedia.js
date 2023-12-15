@@ -177,7 +177,7 @@ const MediaCard = () => {
       onMouseOver={() => {
         handleScrolling();
       }}>
-      {Media.map((ele, index) => {
+      {Media?.map((ele, index) => {
         return (
           <a
             href={ele.navigation}
@@ -255,7 +255,7 @@ const InvestorsCards = () => {
       onMouseOver={() => {
         handleScrolling();
       }}>
-      {investor.map((ele, index) => {
+      {investor?.map((ele, index) => {
         return (
           <div
             className={`${styles.investor_container} ${

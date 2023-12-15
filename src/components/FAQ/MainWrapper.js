@@ -205,7 +205,7 @@ const MainWrapper = () => {
           <div ref={sliderRef} className={style.tabs_wrapper}>
             {Data?.map((item, index) => {
               return (
-                <div key={index} className={`${style.tab_wrapper}`}>
+                <div key={index.toString()} className={`${style.tab_wrapper}`}>
                   <div
                     className={`${style.tab_item} ${
                       value === index

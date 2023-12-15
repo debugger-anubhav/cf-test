@@ -87,8 +87,8 @@ const CityshieldDrawer = ({
           </div>
 
           <div className={styles.arr_wrapper}>
-            {arr.map((item, index) => (
-              <div key={index} className={styles.arr_item}>
+            {arr?.map((item, index) => (
+              <div key={index.toString()} className={styles.arr_item}>
                 <div className={styles.img_div}>
                   <div className={`w-100 h-100 absolute z-10`} />
                   <img
