@@ -143,7 +143,9 @@ export const ProductSet = () => {
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
                     return (
-                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                      <div
+                        key={index.toString()}
+                        onClick={e => handleCardClick(e, item)}>
                         <CategoryCard
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]

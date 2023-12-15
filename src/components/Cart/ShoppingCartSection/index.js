@@ -250,7 +250,9 @@ const ShoppingCartSection = () => {
               {arr?.map((item, index) => {
                 return (
                   <>
-                    <div key={index} className={styles.single_product_wrapper}>
+                    <div
+                      key={index.toString()}
+                      className={styles.single_product_wrapper}>
                       <a
                         href={`/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`}
                         aria-label={`${
@@ -422,7 +424,7 @@ const ShoppingCartSection = () => {
                     {arr[0]?.includedProducts?.map((item, index) => (
                       <>
                         <div
-                          key={index}
+                          key={index.toString()}
                           className={styles.included_products_wrapper}>
                           <img
                             className={styles.included_prod_img}
@@ -638,15 +640,19 @@ const ShoppingCartSection = () => {
                   <div className={styles.pref_mode_features_wrappper}>
                     {isMonthly
                       ? monthlyModeFeatures.map((item, index) => (
-                          <ul key={index} className={styles.payment_mode_list}>
+                          <ul
+                            key={index.toString()}
+                            className={styles.payment_mode_list}>
                             <RightIcon color={"#2D9469"} size={13} />
                             <li className={styles.payment_mode_feature}>
                               {item}
                             </li>
                           </ul>
                         ))
-                      : upfrontModeFeatures.map((item, index) => (
-                          <ul key={index} className={styles.payment_mode_list}>
+                      : upfrontModeFeatures?.map((item, index) => (
+                          <ul
+                            key={index.toString()}
+                            className={styles.payment_mode_list}>
                             <RightIcon color={"#2D9469"} size={13} />
                             <li className={styles.payment_mode_feature}>
                               {item}

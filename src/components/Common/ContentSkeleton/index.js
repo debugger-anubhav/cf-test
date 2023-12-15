@@ -5,7 +5,7 @@ import styles from "./styles.module.css";
 export const ContentSkeleton = () => {
   return (
     <div className={styles.main_containor}>
-      {[1, 2, 3, 4, 5]?.map((item, index) => (
+      {[1, 2, 3, 4, 5]?.map(index => (
         <div className={styles.wrapper} key={index.toString()}>
           <div className={styles.Skeleton_text}>
             <Skeleton variant="text" className="w-full h-full" />

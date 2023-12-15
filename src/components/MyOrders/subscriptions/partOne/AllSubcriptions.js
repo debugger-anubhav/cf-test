@@ -125,14 +125,14 @@ const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
         <Header tab={tab} setTab={setTab} />
         <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
-            {MenuList1.map((item, index) => (
+            {MenuList1?.map((item, index) => (
               <div
                 className={`${
                   selectedSubscriptionMenu === index
                     ? "text-5774AC border-b-9A9AA2"
                     : "text-45454A border-b-transparent"
                 } ${styles.menu_wrapper}`}
-                key={index}
+                key={index.toString()}
                 onClick={() => {
                   setSelectedSubscriptionMenu(index);
                 }}>
@@ -166,7 +166,7 @@ const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
             {subscriptionData?.map((item, index) => {
               console.log(visibleImages, "visibleee");
               return (
-                <div key={index}>
+                <div key={index.toString()}>
                   <CommonContainer
                     item={item}
                     index={index}

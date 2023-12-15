@@ -129,7 +129,7 @@ export const RentFurnitureSkeleton = () => {
       <Skeleton variant="text" className={styles.Skeleton_text} />
       <Skeleton variant="text" className={styles.Skeleton_sub_text} />
       <div className={`${styles.card_div}`}>
-        {[1, 2, 3, 4, 5, 6].map((item, index) => (
+        {[1, 2, 3, 4, 5, 6].map(index => (
           <div
             key={index.toString()}
             className={`${styles.card_wrapper} ${styles.skeleton_card_wrapper}`}>

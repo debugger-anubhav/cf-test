@@ -29,7 +29,7 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
       <h1 className={styles.head}>Monthly rent of all the product(s): </h1>
       <div className={commonStyles.dropdown_wrapper}>
         {billBreakup?.cartSubTotalList?.map((item, index) => (
-          <div key={index} className={commonStyles.dropdown_row}>
+          <div key={index.toString()} className={commonStyles.dropdown_row}>
             <p className={`min-w-[190px] w-[190px] ${commonStyles.prod_name}`}>
               {item.productName}
             </p>
@@ -105,7 +105,9 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                   <>
                     <div className={commonStyles.dropdown_wrapper}>
                       {billBreakup?.cartSubTotalList?.map((item, index) => (
-                        <div key={index} className={commonStyles.dropdown_row}>
+                        <div
+                          key={index.toString()}
+                          className={commonStyles.dropdown_row}>
                           <p
                             className={`min-w-[190px] w-[190px] ${commonStyles.prod_name}`}>
                             {item.productName}

@@ -75,9 +75,9 @@ const MenuDrawer = ({toggleDrawer, open}) => {
 
         <div className={styles.content_wrapper}>
           <div className={styles.map_wrapper}>
-            {arr1.map((item, index) => (
+            {arr1?.map((item, index) => (
               <div
-                key={index}
+                key={index.toString()}
                 onClick={() => console.log(item.link)}
                 className={styles.map_item}>
                 {item.label}
@@ -88,9 +88,9 @@ const MenuDrawer = ({toggleDrawer, open}) => {
           <div className={styles.line}></div>
 
           <div className={styles.map_wrapper}>
-            {arr2.map((item, index) => (
+            {arr2?.map((item, index) => (
               <div
-                key={index}
+                key={index.toString()}
                 onClick={() => console.log(item.link)}
                 className={styles.map_item}>
                 {item.label}
@@ -101,9 +101,9 @@ const MenuDrawer = ({toggleDrawer, open}) => {
           <div className={styles.line}></div>
 
           <div className={styles.map_wrapper}>
-            {arr3.map((item, index) => (
+            {arr3?.map((item, index) => (
               <div
-                key={index}
+                key={index.toString()}
                 onClick={() => console.log(item.link)}
                 className={styles.map_item}>
                 {item.label}

@@ -164,7 +164,7 @@ export const TryCityMaxSkeleton = () => {
         />
         <Skeleton variant="text" height={"0.5rem"} width={"100%"} />
         <div className=" flex flex-wrap">
-          {[1, 2].map((i, index) => (
+          {[1, 2].map(index => (
             <div className=" w-[40%] mr-10" key={index.toString()}>
               <Skeleton variant="text" height={"400px"} />
             </div>

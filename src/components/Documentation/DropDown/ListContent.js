@@ -32,7 +32,7 @@ const ListContent = ({
             className={`${styles.option} ${
               index === options.length - 1 ? "rounded-b-xl border-none" : ""
             } ${index === 0 ? "border-t" : ""}`}
-            key={index}
+            key={index.toString()}
             onClick={() => handleOptionClick(option)}>
             {isInitialScreen ? option.dealCodeNumber : option.label}
           </li>

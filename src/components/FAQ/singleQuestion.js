@@ -27,7 +27,7 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
               className={`${styles.ans} ${isOpen && styles.ans_open}`}
               style={{listStyle: "inside"}}>
               {item?.isChildren?.map((ele, idx) => (
-                <li key={idx}>{ele}</li>
+                <li key={idx.toString()}>{ele}</li>
               ))}
             </ul>
           )}
@@ -42,7 +42,7 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
               className={`${styles.ans} ${isOpen && styles.ans_open}`}
               style={{listStyle: "inside"}}>
               {item?.secondChild?.map((ele, idx) => (
-                <li key={idx}>{ele}</li>
+                <li key={idx.toString()}>{ele}</li>
               ))}
             </ul>
           )}

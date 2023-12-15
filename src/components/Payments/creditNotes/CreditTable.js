@@ -48,7 +48,7 @@ const CreditTable = ({rows, handleShowMore, visibleRows}) => {
 
           <TableBody>
             {rows?.slice(0, visibleRows).map((row, index) => (
-              <TableRow key={index} className={styles.tableRow}>
+              <TableRow key={index.toString()} className={styles.tableRow}>
                 <TableCell className={`${styles.tableCell}`}>
                   {row.applied_invoices}
                 </TableCell>

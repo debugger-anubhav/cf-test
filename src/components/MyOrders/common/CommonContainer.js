@@ -100,7 +100,7 @@ const CommonContainer = ({
               ?.slice(0, visibleImages)
               .map((product, index) => {
                 return (
-                  <div key={index} className={styles.img_wrapper}>
+                  <div key={index.toString()} className={styles.img_wrapper}>
                     <img
                       src={`${
                         productPageImagesBaseUrl +

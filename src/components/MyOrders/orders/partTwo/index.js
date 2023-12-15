@@ -132,7 +132,9 @@ const OrderDetails = ({setPart, data}) => {
           </div>
           <div className={styles.lower_map}>
             {data?.allStages?.map((item, index) => (
-              <div key={index} className={styles.progress_icon_wrapper}>
+              <div
+                key={index.toString()}
+                className={styles.progress_icon_wrapper}>
                 <p className={styles.progress_status}>{item}</p>
               </div>
             ))}

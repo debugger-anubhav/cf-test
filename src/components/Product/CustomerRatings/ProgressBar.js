@@ -46,7 +46,7 @@ const RatingProgressBar = ({ratings}) => {
   return (
     <div className="mt-6">
       {arr.map((item, index) => (
-        <div key={index} className={styles.single_progress_bar}>
+        <div key={index.toString()} className={styles.single_progress_bar}>
           <p className={styles.star_value}>
             {arr.length - index}
             <span>

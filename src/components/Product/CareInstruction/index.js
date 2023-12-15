@@ -29,7 +29,7 @@ const CareInstruction = ({params}) => {
         <h2 className={styles.head}>Care Instructions</h2>
         <div className={styles.card_wrapper}>
           {pageData?.careInstructions?.map((item, index) => (
-            <div key={index}>
+            <div key={index.toString()}>
               <img
                 src={`${productPageImagesBaseUrl + item?.file_name}`}
                 className={styles.img}

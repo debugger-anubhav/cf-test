@@ -106,7 +106,9 @@ const ProductCard = ({
 
   useEffect(() => {
     setInWishList(
-      categoryPageReduxData.savedProducts.map(obj => obj.id).includes(item?.id),
+      categoryPageReduxData.savedProducts
+        ?.map(obj => obj.id)
+        .includes(item?.id),
     );
     updateCount.current += 1;
   }, []);
@@ -138,7 +140,9 @@ const ProductCard = ({
               {item?.image?.split(",")?.map((crouselImg, index) => (
                 <>
                   {crouselImg && (
-                    <div key={index} className={styles.product_image}>
+                    <div
+                      key={index.toString()}
+                      className={styles.product_image}>
                       <img
                         src={productImageBaseUrl + "thumb/" + crouselImg}
                         alt={item?.product_name}
@@ -148,7 +152,6 @@ const ProductCard = ({
                       {item.isAlt && (
                         <div className={styles.label_tag}>
                           <Sparkles className={styles.sparkel_icon} />
-                          {/* <img /> */}
                           <p>Recommended</p>
                         </div>
                       )}
@@ -169,7 +172,7 @@ const ProductCard = ({
                         ? "border-5774AC"
                         : "border-fff"
                     }`}
-                    key={index}
+                    key={index.toString()}
                     onClick={() => handleThumbnailClick(mainIndex, index)}>
                     <img
                       src={`${productImageBaseUrl + "thumb/" + image}`}
@@ -212,7 +215,7 @@ const ProductCard = ({
               },
               {label: "Color", value: item.colour},
             ].map((info, infoIndex) => (
-              <div className={styles.info_row} key={infoIndex}>
+              <div className={styles.info_row} key={infoIndex.toString()}>
                 <p className={styles.info_label}>{info.label}</p>
                 <p className={styles.colon}>:</p>
                 <p className={styles.info_details}>{info.value}</p>

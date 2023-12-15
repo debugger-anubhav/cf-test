@@ -61,7 +61,7 @@ export const SubproductSkeleton = () => {
         </div>
 
         <div className="my-4 w-full">
-          {[1, 2, 3, 4].map((item, index) => {
+          {[1, 2, 3, 4].map(index => {
             return (
               <div className="w-full flex flex-col my-4" key={index.toString()}>
                 <div className=" my-4 flex justify-between">
@@ -73,7 +73,7 @@ export const SubproductSkeleton = () => {
                   </div>
                 </div>
                 <div className="flex">
-                  {[1, 2, 3, 4].map((item, index) => {
+                  {[1, 2, 3, 4].map(index => {
                     return (
                       <div
                         className={styles.card_container_skeleton}

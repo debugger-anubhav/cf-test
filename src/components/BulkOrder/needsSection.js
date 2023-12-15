@@ -31,7 +31,7 @@ const NeedsSection = () => {
       <div className={style.need_img_wrapper}>
         {data?.map((ele, idx) => {
           return (
-            <div key={idx}>
+            <div key={idx.toString()}>
               <img
                 src={ele?.img}
                 alt={ele?.title}

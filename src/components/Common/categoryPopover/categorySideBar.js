@@ -187,7 +187,7 @@ export default function FilterSortDrawer({
             <div className="gap-6 shadow-md w-full rounded-t-2xl bg-white p-4">
               <p className={styles.headin_text}>Sort By</p>
               <div className="">
-                {sortByText.map((ele, index) => {
+                {sortByText?.map((ele, index) => {
                   return (
                     <div
                       onClick={() => handleSort(ele?.text, index)}

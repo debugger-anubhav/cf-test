@@ -39,7 +39,7 @@ const DebitTable = ({rows, loadingSkeleton}) => {
           ) : (
             <TableBody>
               {rows?.map((row, index) => (
-                <TableRow key={index} className={styles.tableRow}>
+                <TableRow key={index.toString()} className={styles.tableRow}>
                   <TableCell className={`${styles.tableCell}`}>
                     {row?.created_at?.split("T")[0]}
                   </TableCell>

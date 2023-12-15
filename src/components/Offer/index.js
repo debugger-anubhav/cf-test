@@ -63,7 +63,7 @@ const OfferPage = () => {
             {coupons
               ?.filter(item => item?.coupon_code !== appliedCouponCode)
               .map((item, index) => (
-                <div key={index} className={styles.card_wrapper}>
+                <div key={index.toString()} className={styles.card_wrapper}>
                   <p className={styles.top_label}>
                     {item?.price_text}
                     <span className={styles.top_label_span}>
@@ -112,7 +112,7 @@ const OfferPage = () => {
                   </div>
                   <div className={styles.bottom_description}>
                     {item?.description?.map(item => (
-                      <div key={index} className={styles.desc_row}>
+                      <div key={index.toString()} className={styles.desc_row}>
                         <div className={styles.dot}></div>
                         <p className={styles.desc}>{item}</p>
                       </div>
@@ -144,7 +144,7 @@ const OfferPage = () => {
                 </div>
                 <div className={styles.bottom_description}>
                   {appliedCouponObject[0]?.description?.map((item, index) => (
-                    <div key={index} className={styles.desc_row}>
+                    <div key={index.toString()} className={styles.desc_row}>
                       <div className={styles.dot}></div>
                       <p className={styles.desc}>{item}</p>
                     </div>
@@ -160,7 +160,7 @@ const OfferPage = () => {
         <h2 className={styles.terms_heading}>Terms and Conditions:</h2>
         <div className={styles.terms_list}>
           {content?.offer_page?.map((item, index) => (
-            <div key={index} className={styles.desc_row}>
+            <div key={index.toString()} className={styles.desc_row}>
               <div className={styles.dot}></div>
               <p className={styles.terms_desc}>{item}</p>
             </div>
