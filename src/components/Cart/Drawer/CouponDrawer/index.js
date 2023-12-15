@@ -88,8 +88,6 @@ const CouponDrawer = ({
       });
   };
 
-  console.log(pageData, "pageeedata");
-
   useEffect(() => {
     getOffersAndCoupons();
   }, []);

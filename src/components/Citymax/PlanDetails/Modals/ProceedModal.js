@@ -9,8 +9,9 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {deleteItems} from "@/store/Slices";
+// import {deleteItems} from "@/store/Slices";
 import {useDispatch} from "react-redux";
+import {emptyCart} from "@/store/Slices";
 // import axios from "axios";
 // import {baseURL} from "@/network/axios";
 // import {endPoints} from "@/network/endPoints";
@@ -26,8 +27,8 @@ const ProceedModal = ({
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const params = useParams();
+  console.log(params, "paramsss");
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
-  console.log(modalCategory, "isSomeSlotsMissed");
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -54,10 +55,8 @@ const ProceedModal = ({
       const response = await axios.get(
         baseURL + endPoints.cityMaxPage.deleteCartItems(userId),
       );
-      console.log(response);
-      dispatch(deleteItems(params.planId));
-      // setArr(arr.filter(t => t.fc_product.id !== id));
-
+      console.log(response, "res in emptycartt");
+      dispatch(emptyCart());
       handleAddToCart();
     } catch (err) {
       console.log(err);
