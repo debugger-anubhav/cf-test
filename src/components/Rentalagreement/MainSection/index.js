@@ -66,7 +66,12 @@ function MainSection() {
                       </div>
                       {index === 20 ? (
                         <p className="ml-3">
-                          <span className="font-medium text-45454A">
+                          <span
+                            className={` ${
+                              words[0] !== "The"
+                                ? "text-45454A font-medium"
+                                : "font-normal text-71717A"
+                            }`}>
                             {words[0]}
                           </span>{" "}
                           {words.slice(1).join(" ")}
@@ -93,6 +98,7 @@ function MainSection() {
                 {item.points?.map((point, i) => {
                   return (
                     <p key={i.toString()} className={styles.list_point}>
+                      <span className="mr-2">{i + 1}.</span>
                       {point}
                     </p>
                   );

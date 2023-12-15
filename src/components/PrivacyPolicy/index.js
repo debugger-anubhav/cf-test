@@ -87,11 +87,12 @@ const PrivacyPolicyData = () => {
         {string.privacy_policy.information_collection.points?.map(
           (item, index) => {
             return (
-              <li
-                key={index.toString()}
-                className={styles.privacy_policy_detail_point}>
-                {item}
-              </li>
+              <div key={index.toString()} className={styles.list_point}>
+                <div className={` lg:mt-6 mt-5 mr-2`}>
+                  <p className={styles.dot}></p>
+                </div>
+                <li className={styles.privacy_policy_detail_point}>{item}</li>
+              </div>
             );
           },
         )}
