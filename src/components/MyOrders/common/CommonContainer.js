@@ -9,16 +9,29 @@ import {IconLink} from "@/assets/icon";
 import ServiceDrawer from "../orders/partTwo/ServiceDrawer/ServiceDrawer";
 
 export const statusToImageMap = {
-  "Out for Delivery": "out-for-delivery.svg",
-  "KYC In Progress": "kyc-pending.svg",
-  "Delivery Scheduled": "dellivery-scheduled.svg",
-  Delivered: "delivered.svg",
-  Cancelled: "cancelled.svg",
-  "Refund Processed": "returned.svg",
-  "Payment Failed": "payment-failed.svg",
-  Active: "active-subscription.svg",
-  Inactive: "inactive-subscription.svg",
+  "out for delivery": "out-for-delivery.svg",
+  "kyc in progress": "kyc-pending.svg",
+  "delivery scheduled": "dellivery-scheduled.svg",
+  delivered: "delivered.svg",
+  "delivered - partial": "delivered.svg",
+  cancelled: "cancelled.svg",
+  "refund processed": "returned.svg",
+  "refund requested": "returned.svg",
+  "order failed": "payment-failed.svg",
+  active: "active-subscription.svg",
+  inactive: "inactive-subscription.svg",
 };
+
+export const statusLabels = {
+  "kyc in progress": "KYC Pending",
+  "refund processed": "Refunded",
+  "refund requested": "Refunded",
+  cancelled: "Cancellation Requested",
+  "delivered - partial": "Partial Delivered",
+  "kyc docs under review": "KYC Under Review",
+  "kyc completed": "KYC Approved",
+};
+
 const CommonContainer = ({
   index,
   item,
@@ -46,18 +59,16 @@ const CommonContainer = ({
             <img
               src={
                 IconLink +
-                (statusToImageMap[item.zoho_sub_status] || "payment-failed.svg")
+                (statusToImageMap[item.zoho_sub_status.toLowerCase()] ||
+                  "payment-failed.svg")
               }
             />
             <div>
               <p className={styles.status}>
                 {item.status === "Pending"
-                  ? "Payment Failed"
-                  : item.zoho_sub_status === "KYC In Progress"
-                  ? "KYC Pending"
-                  : item.zoho_sub_status === "Refund Processed"
-                  ? "Returned"
-                  : item.zoho_sub_status}
+                  ? "Order Failed"
+                  : statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                    item.zoho_sub_status}
               </p>
               <p className={styles.date}>
                 {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
@@ -92,6 +103,7 @@ const CommonContainer = ({
           className={styles.lower_box}
           id="image-gallery-container"
           onClick={() => {
+            console.log(item.dealCodeNumber, "deallll");
             getSingleOrderDetails(item.dealCodeNumber);
           }}
           ref={containerRef}>

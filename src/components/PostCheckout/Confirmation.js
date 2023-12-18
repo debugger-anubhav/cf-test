@@ -2,10 +2,13 @@ import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
 import {useRouter, useSearchParams} from "next/navigation";
+import {setOrderIdFromOrderPage} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const dispatch = useDispatch();
 
   const oid = searchParams.get("oid");
 
@@ -18,6 +21,7 @@ const PaymentConfirmation = () => {
 
     if (timer <= 1) {
       clearInterval(countdown); // Stop the countdown
+      dispatch(setOrderIdFromOrderPage(oid));
       router.push("/documentation");
     }
     return () => clearInterval(countdown);

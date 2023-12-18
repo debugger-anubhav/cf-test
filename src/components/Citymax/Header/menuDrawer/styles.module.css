@@ -18,7 +18,7 @@
   @apply flex flex-col gap-4;
 }
 .map_item {
-  @apply text-14 lg:text-16 text-45454A tracking-desc lg:tracking-0.3 font-medium;
+  @apply text-14 lg:text-16 text-45454A tracking-desc lg:tracking-0.3 font-medium cursor-pointer;
 }
 .line {
   @apply bg-EDEDEE w-full h-[1px];

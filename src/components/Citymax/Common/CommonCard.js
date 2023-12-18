@@ -4,9 +4,10 @@ import {IconLink} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 const CommonCard = ({isHalfYearly, item, plans}) => {
   const router = useRouter();
-  const productNameArray = item.product_name.split(" ");
-  productNameArray.pop();
-  const modifiedProductName = productNameArray.join("");
+
+  // const productNameArray = item.product_name.split(" ");
+  // productNameArray.pop();
+  // const modifiedProductName = productNameArray.join("");
 
   return (
     <div
@@ -15,9 +16,7 @@ const CommonCard = ({isHalfYearly, item, plans}) => {
         router.push(`/choose-products/${item.id}/${isHalfYearly ? 6 : 12}`)
       }>
       <p className={styles.card_head}>{item.product_name}</p>
-      <p className={styles.card_desc}>
-        Best suited for a {modifiedProductName} apartment
-      </p>
+      <p className={styles.card_desc}>{item.description}</p>
       <p className={styles.card_offer}>
         {plans.slots[item.id].length} products @ just
       </p>

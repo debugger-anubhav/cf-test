@@ -4,9 +4,13 @@ import CommonCard from "../../Common/CommonCard";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsHalfYearlyState} from "@/store/Slices";
 
 const HeroSection = () => {
-  const [isHalfYearly, setHalfYearly] = useState(true);
+  const dispatch = useDispatch();
+  const state = useSelector(state => state?.citymax?.isHalfYearly);
+  const [isHalfYearly, setHalfYearly] = useState(state);
   const [plans, setPlans] = useState();
 
   const fetchPlans = () => {
@@ -36,6 +40,7 @@ const HeroSection = () => {
           <p
             onClick={() => {
               setHalfYearly(true);
+              dispatch(setIsHalfYearlyState(true));
             }}
             className={`${
               isHalfYearly
@@ -47,6 +52,7 @@ const HeroSection = () => {
           <p
             onClick={() => {
               setHalfYearly(false);
+              dispatch(setIsHalfYearlyState(false));
             }}
             className={`${
               isHalfYearly
