@@ -31,7 +31,7 @@ export default function TermsOfUseData() {
         <a
           href="https://www.cityfurnish.com"
           target="_self"
-          className={styles.terms_of_use_links}>
+          className={`${styles.terms_of_use_links} underline`}>
           https://www.cityfurnish.com
         </a>
         {string.terms_of_use.first_para}
@@ -53,7 +53,7 @@ export default function TermsOfUseData() {
                     <a
                       href="https://www.cityfurnish.com"
                       target="_self"
-                      className={styles.terms_of_use_links}>
+                      className={`${styles.general_point} pl-1`}>
                       https://www.cityfurnish.com
                     </a>
                     {item}
