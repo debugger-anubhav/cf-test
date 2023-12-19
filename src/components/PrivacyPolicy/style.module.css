@@ -20,7 +20,7 @@
   @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
 }
 .privacy_policy_detail_link {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer;
 }
 .details {
   @apply lg:my-8 my-6;
@@ -30,7 +30,7 @@
   @apply lg:text-20 text-16 text-45454A font-Poppins font-medium;
 }
 .privacy_policy_detail_point {
-  @apply lg:text-16 text-14 lg:mt-4 mt-3 text-71717A font-Poppins font-normal list-none;
+  @apply lg:text-16 text-14 lg:mt-4 mt-3 text-71717A font-Poppins font-normal;
 }
 .last_details {
   @apply lg:mb-[88px] mb-[48px];
@@ -43,10 +43,4 @@
 }
 .details_principles {
   @apply lg:my-[88px] my-[32px];
-}
-.list_point {
-  @apply flex list-disc justify-start mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins;
-}
-.dot {
-  @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
 }

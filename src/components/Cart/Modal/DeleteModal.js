@@ -41,7 +41,7 @@ const DeleteModal = ({
   React.useEffect(() => {
     setInWishList(
       categoryPageReduxData.savedProducts
-        ?.map(obj => obj.id)
+        .map(obj => obj.id)
         .includes(productId),
     );
   }, []);

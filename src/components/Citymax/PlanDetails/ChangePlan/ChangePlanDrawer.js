@@ -29,7 +29,7 @@ const ChangePlanDrawer = ({isHalfYearly}) => {
               : item.attr_name === "12 Months",
           )
           .map((item, index) => (
-            <div key={index.toString()} className="md:w-[393px]">
+            <div key={index} className="md:w-[393px]">
               <CommonCard
                 item={item}
                 isHalfYearly={isHalfYearly}

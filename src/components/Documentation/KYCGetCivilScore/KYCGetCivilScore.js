@@ -376,14 +376,14 @@ const KYCGetCivilScore = ({handleKycState}) => {
                   className={`${
                     isDDOpen ? commonStyles.optionsActive : commonStyles.options
                   } `}>
-                  {selectedArr?.map((option, index) => (
+                  {selectedArr.map((option, index) => (
                     <li
                       className={`${commonStyles.option} ${
                         option?.value === selectedOption?.value
                           ? "bg-[#EFF5FF]"
                           : ""
                       } `}
-                      key={index.toString()}
+                      key={index}
                       onClick={() => handleOptionClick(option)}>
                       <span>{option.label}</span>{" "}
                       <SelectionCircle

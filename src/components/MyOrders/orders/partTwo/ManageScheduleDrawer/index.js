@@ -94,7 +94,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
         <div className={styles.map_wrapper}>
           {slotData?.data?.data?.map((item, index) => (
             <div
-              key={index.toString()}
+              key={index}
               className={styles.map_item_wrapper}
               onClick={() => {
                 setSelectedDate(item.date);

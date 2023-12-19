@@ -66,7 +66,7 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
 
         <div>
           {data?.productsList?.map((item, index) => (
-            <div className={styles.single_order_wrapper} key={index.toString()}>
+            <div className={styles.single_order_wrapper} key={index}>
               <div className={styles.img_wrapper}>
                 <img
                   className="w-full h-full"

@@ -2,7 +2,7 @@
   @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full lg:my-[88px] my-[48px];
 }
 .heading_container {
-  @apply md:text-20 text-16 text-45454A font-medium leading-[32px] font-Poppins;
+  @apply text-20  text-45454A font-medium leading-[32px] font-Poppins;
 }
 
 .box_detail_container {
@@ -12,7 +12,7 @@
   @apply flex mt-8 w-full flex-wrap gap-x-[72px];
 }
 .box_heading {
-  @apply md:text-16 text-14  text-45454A font-medium font-Poppins;
+  @apply text-16  text-45454A font-medium font-Poppins;
 }
 .box_subheading {
   @apply text-14  text-71717A font-Poppins;

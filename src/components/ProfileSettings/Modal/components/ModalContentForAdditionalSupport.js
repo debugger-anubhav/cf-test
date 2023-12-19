@@ -37,9 +37,7 @@ const ModalContentForAdditionalSupport = ({problemType, setModalCategory}) => {
           <div className={styles.line}></div>
 
           <div>
-            <a href="tel:080-66084700">
-              <p className={styles.blue_txt}>Contact Customer Support</p>
-            </a>
+            <p className={styles.blue_txt}>Contact Customer Support</p>
           </div>
         </div>
       </div>

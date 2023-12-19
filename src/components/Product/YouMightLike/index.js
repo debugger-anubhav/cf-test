@@ -93,7 +93,7 @@ const YouMightLike = ({heading, isbg, params}) => {
           }}>
           {pageData?.youMightLike?.map((item, index) => (
             <div
-              key={index.toString()}
+              key={index}
               onClick={e => handleCardClick(e, item)}
               className={`${styles.child ?? ""} ${
                 isDumy && "pointer-events-none"

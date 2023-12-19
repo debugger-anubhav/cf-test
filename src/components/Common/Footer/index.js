@@ -134,7 +134,7 @@ const Footer = ({params}) => {
 
   return (
     <div className={styles.footer_wrapper}>
-      {content?.map((str, index) => {
+      {content.map((str, index) => {
         return (
           <div key={index.toString()}>
             <h2 className={styles.head}>{str.cat_heading}</h2>
@@ -151,9 +151,9 @@ const Footer = ({params}) => {
           <div key={index.toString()} className={styles.head_wrapper}>
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
-              {item.points?.map((t, i) => (
+              {item.points.map((t, i) => (
                 <a
-                  key={i.toString()}
+                  key={index.toString()}
                   href={t.link}
                   aria-label={t.text}
                   target={t.text === "Furniture Sale" ? "_blank" : "_self"}

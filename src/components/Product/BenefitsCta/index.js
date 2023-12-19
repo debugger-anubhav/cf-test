@@ -20,6 +20,7 @@ const BenefitsCta = () => {
       </div>
       <p className={styles.desc}>{str.cta_desc}</p>
       <div className={styles.bg_img}>
+        {/* <img src={ProductPageImages.CtaImage} /> */}
         <Image
           className="w-ful h-full pointer-events-none"
           src={ProductPageImages.CtaImage}

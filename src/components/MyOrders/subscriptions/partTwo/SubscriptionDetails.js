@@ -33,7 +33,9 @@ const SubscriptionDetails = ({setPart}) => {
         </div>
         <div className={styles.headers_right_div}>
           <img
-            src={IconLink + statusToImageMap[data?.zoho_sub_status]}
+            src={
+              IconLink + statusToImageMap[data?.zoho_sub_status.toLowerCase()]
+            }
             className={styles.status_icon}
           />
           <p className={styles.status}> {data?.zoho_sub_status}</p>
