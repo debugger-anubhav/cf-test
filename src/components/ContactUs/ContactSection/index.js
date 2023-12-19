@@ -58,10 +58,10 @@ function ContactSection() {
               <a href={item?.link} className={styles.link_tag}>
                 <div className={styles.box_img}>{item.icon}</div>
                 <div className={styles.detail_wrapper}>
-                  <div className={styles.box_heading}>
+                  <p className={styles.box_heading}>
                     {item.heading}
                     <ForwardArrow size={19.2} color={"#222"} />
-                  </div>
+                  </p>
                   <div className={styles.box_subheading}>{item.subheading}</div>
                 </div>
               </a>
