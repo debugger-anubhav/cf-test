@@ -53,7 +53,7 @@
   overflow-y: visible !important;
 }
 .risk_text {
-  @apply md:text-16 text-14 text-[#5774AC] mt-4 underline cursor-pointer text-center xs:text-left;
+  @apply md:text-16 text-14 text-[#5774AC] mt-4 underline cursor-pointer text-center;
 }
 .points_wrappper {
   @apply mt-16;

@@ -35,11 +35,11 @@ const CategoryContent = () => {
     <div className={styles.wrapper}>
       {categoryPageReduxData?.categorTextContent?.map((ele, index) => {
         return (
-          <div key={index.toString()}>
+          <>
             <div
               dangerouslySetInnerHTML={{__html: ele?.cat_meta_keyword}}
               className={styles.apiData}></div>
-          </div>
+          </>
         );
       })}
     </div>

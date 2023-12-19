@@ -62,7 +62,7 @@ const MainWrapper = () => {
             return (
               <>
                 <div
-                  key={index.toString()}
+                  key={index}
                   className={`${
                     index === 0 || index === 6 || index === 7
                       ? "col-span-2"

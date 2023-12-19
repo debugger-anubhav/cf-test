@@ -41,7 +41,7 @@ const RetainerTable = ({rows, visibleRows, handleShowMore}) => {
 
           <TableBody>
             {rows?.slice(0, visibleRows).map((row, index) => (
-              <TableRow key={index.toString()} className={styles.tableRow}>
+              <TableRow key={index} className={styles.tableRow}>
                 <TableCell className={`${styles.tableCell}`}>
                   {row.date}
                 </TableCell>

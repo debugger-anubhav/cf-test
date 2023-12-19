@@ -76,7 +76,7 @@ const ProductsDrawer = ({
       <div className={styles.main_wrapper}>
         {productsArr?.map((item, mainIndex) => (
           <>
-            <div key={mainIndex.toString()}>
+            <div key={mainIndex}>
               <ProductCard
                 handleThumbnailClick={handleThumbnailClick}
                 length={productsArr.length}
@@ -108,7 +108,7 @@ const ProductsDrawer = ({
             <div className={styles.main_wrapper}>
               {upgradedProductsArr?.map((item, mainIndex) => (
                 <>
-                  <div key={mainIndex.toString()}>
+                  <div key={mainIndex}>
                     <ProductCard
                       handleThumbnailClick={handleThumbnailClick}
                       length={productsArr.length}

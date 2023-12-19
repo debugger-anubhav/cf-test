@@ -19,7 +19,11 @@ import {endPoints} from "@/network/endPoints";
 import "react-responsive-modal/styles.css";
 import ProceedModal from "./Modals/ProceedModal";
 import {useDispatch, useSelector} from "react-redux";
-import {addItemsToCart, reduxSetModalState} from "@/store/Slices";
+import {
+  addItemsToCart,
+  reduxSetModalState,
+  setIsHalfYearlyState,
+} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
@@ -358,7 +362,9 @@ const CitymaxPlanDetail = () => {
           {data?.associatedProductsData?.[0]?.product_name}
         </h1>
       </div>
-      <p className={styles.tag_line}>Best suited for a 2BHK apartment</p>
+      <p className={styles.tag_line}>
+        {data?.productDetails?.[0]?.description}
+      </p>
 
       <div className={styles.container}>
         <div className={styles.left_div}>
@@ -532,6 +538,7 @@ const CitymaxPlanDetail = () => {
             <p
               onClick={() => {
                 setHalfYearly(true);
+                dispatch(setIsHalfYearlyState(true));
               }}
               className={`${
                 isHalfYearly
@@ -543,6 +550,7 @@ const CitymaxPlanDetail = () => {
             <p
               onClick={() => {
                 setHalfYearly(false);
+                dispatch(setIsHalfYearlyState(false));
               }}
               className={`${
                 isHalfYearly

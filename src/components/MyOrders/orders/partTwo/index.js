@@ -2,9 +2,7 @@ import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {BackIcon, IconLink} from "@/assets/icon";
 import {ImCheckmark} from "react-icons/im";
-import {CircularProgressbar} from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import ChangingProgressProvider from "./ChangingProgressProvider";
 import {useRouter} from "next/navigation";
 import {reduxSetModalState, setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,26 +10,23 @@ import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
 import ServiceDrawer from "./ServiceDrawer/ServiceDrawer";
 import OrderSummary from "@/components/Common/OrderSummary";
-import {statusToImageMap} from "../../common/CommonContainer";
+import {statusLabels, statusToImageMap} from "../../common/CommonContainer";
 
 const OrderDetails = ({setPart, data}) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const stepsCompleted = data?.stage;
+  const stepsCompleted = data?.stagesData?.length;
+  const orderStatus = data?.stagesData[stepsCompleted - 1]?.zoho_sub_status;
+  console.log(data, orderStatus, "data");
 
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
-  console.log(modalStateFromRedux);
 
   const [isModalopen, setIsModalopen] = useState(false);
   const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
   const drawerPerStepsCompleted = {
-    0: "Retry Payment",
-    1: "Complete KYC now",
-    2: data?.allStages?.[1] === "Cancellation Processed" && "Reorder",
-    3:
-      data?.allStages?.[2] === "Refund Processed"
-        ? "Reorder"
-        : "Manage delivery slot",
+    "order failed": "Retry Payment",
+    "kyc in progress": "Complete KYC now",
+    "delivery scheduled": "Change delivery slot",
   };
 
   const toggleModal = () => {
@@ -43,6 +38,16 @@ const OrderDetails = ({setPart, data}) => {
     setServiceDrawerOpen(!serviceDrawerOpen);
   };
 
+  const isUnhappyCustomeFlow = data?.stagesData?.some(
+    item => item.zoho_sub_status === "Cancelled",
+  );
+
+  const checkStatus = isUnhappyCustomeFlow
+    ? data?.stagesData[stepsCompleted - 3]?.zoho_sub_status.toLowerCase()
+    : orderStatus?.toLowerCase();
+  console.log(checkStatus, orderStatus, "checkStatus");
+  console.log(isUnhappyCustomeFlow, "isUnhappyCustomeFlow");
+
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -50,119 +55,127 @@ const OrderDetails = ({setPart, data}) => {
           <div>
             <BackIcon className={styles.backArrow} />
           </div>
-          <h1 className={styles.header}>Order no: #{data?.dealCodeNumber}</h1>
+          <h1 className={styles.header}>Order no: #{data?.order_id}</h1>
         </div>
         <div className={styles.headers_right_div}>
           <img
-            src={
-              IconLink +
-              (statusToImageMap[data?.zoho_sub_status] || "payment-failed.svg")
-            }
+            src={IconLink + statusToImageMap[orderStatus?.toLowerCase()]}
             className={styles.status_icon}
           />
           <p className={styles.status}>
-            {" "}
-            {data?.status === "Pending"
-              ? "Payment Failed"
-              : data?.zoho_sub_status === "KYC In Progress"
-              ? "KYC Pending"
-              : data?.zoho_sub_status === "Refund Processed"
-              ? "Returned"
-              : data?.zoho_sub_status}
+            {statusLabels[orderStatus?.toLowerCase()] || orderStatus}
           </p>
         </div>
       </div>
 
       <div className={styles.sub_container}>
-        <div className={styles.progress_wrapper}>
-          <div className={styles.upper_map}>
-            {data?.allStages?.map((item, index) => (
-              <div key={index} className={styles.progress_icon_wrapper}>
-                {index !== stepsCompleted || index === 0 ? (
+        <div className={styles.upper_map}>
+          {data?.stagesData?.map((item, index) => {
+            return (
+              <div key={index} className={styles.progress_map_item}>
+                <div
+                  className={`${
+                    index < stepsCompleted - 1
+                      ? styles.active_status
+                      : styles.inactive_status
+                  } ${styles.progress_circle}`}>
+                  {index < stepsCompleted - 1 ? (
+                    <ImCheckmark className={styles.check_icon} />
+                  ) : (
+                    <div className={styles.inner_circle}></div>
+                  )}
+                </div>
+                {index !== data?.stagesData.length - 1 && (
                   <div
                     className={`${
-                      index < stepsCompleted
-                        ? styles.active_status
-                        : styles.inactive_status
-                    } ${styles.progress_circle}`}>
-                    {index < stepsCompleted ? (
-                      <ImCheckmark className={styles.check_icon} />
-                    ) : (
-                      index + 1
+                      drawerPerStepsCompleted[checkStatus] &&
+                      (isUnhappyCustomeFlow
+                        ? index === data?.stagesData?.length - 3
+                        : index === data?.stagesData?.length - 1) &&
+                      (checkStatus === "delivery scheduled"
+                        ? "!h-[94px] -mt-[64px] md:-mt-0"
+                        : "!h-[144px] -mt-[112px] md:-mt-0")
+                    } ${styles.line} `}></div>
+                )}
+                {index === data?.stagesData.length - 1 &&
+                  drawerPerStepsCompleted[checkStatus] &&
+                  (isUnhappyCustomeFlow
+                    ? index === data?.stagesData?.length - 3
+                    : index === data?.stagesData?.length - 1) && (
+                    <div
+                      className={`md:!hidden ${
+                        checkStatus === "delivery scheduled"
+                          ? "!h-[65px] -mt-[62px]"
+                          : "!h-[117px] -mt-[112px]"
+                      } ${styles.line}`}></div>
+                  )}
+                <div>
+                  <p className={styles.progress_status}>
+                    {" "}
+                    {statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                      item.zoho_sub_status}
+                  </p>
+                  {(isUnhappyCustomeFlow
+                    ? index === data?.stagesData?.length - 3
+                    : index === data?.stagesData?.length - 1) &&
+                    drawerPerStepsCompleted[checkStatus] && (
+                      <div className="md:!hidden">
+                        {(checkStatus === "kyc in progress" ||
+                          checkStatus === "order failed") && (
+                          <p className={`mt-[30px] ${styles.progress_status}`}>
+                            {checkStatus === "kyc in progress"
+                              ? "KYC documentation required"
+                              : "Payment required"}
+                          </p>
+                        )}
+                        <button
+                          disabled={isUnhappyCustomeFlow}
+                          className={`mt-4 ${
+                            isUnhappyCustomeFlow &&
+                            styles.drawer_disabled_button
+                          } ${styles.drawer_button}`}
+                          onClick={() => {
+                            if (checkStatus === "kyc in progress") {
+                              dispatch(setOrderIdFromOrderPage(data?.order_id));
+                              router.push("/documentation");
+                            } else if (checkStatus === "delivery scheduled") {
+                              toggleModal();
+                            } else {
+                              router.push("/cart");
+                            }
+                          }}>
+                          {drawerPerStepsCompleted[checkStatus]}
+                        </button>
+                      </div>
                     )}
-                  </div>
-                ) : (
-                  <div className={`w-[18px] h-[18px]`}>
-                    <ChangingProgressProvider values={[0, 25, 50, 75, 100]}>
-                      {percentage => (
-                        <CircularProgressbar
-                          value={percentage}
-                          text={index + 1}
-                          strokeWidth={10}
-                          styles={{
-                            path: {
-                              stroke: "#2D9469",
-                              transition: "stroke-dashoffset 1s ease-in-out",
-                            },
-                            trail: {
-                              stroke: "#EDEDEE",
-                            },
-                            text: {
-                              fill: "#2D9469",
-                              fontSize: "60px",
-                              fontWeight: 700,
-                              fontFamily: "Poppins",
-                            },
-                          }}
-                        />
-                      )}
-                    </ChangingProgressProvider>
-                  </div>
-                )}
-                {index !== data.allStages.length - 1 && (
-                  <div
-                    className={`${
-                      index < stepsCompleted
-                        ? styles.active_status
-                        : `!bg-EDEDEE ${styles.inactive_status}`
-                    } ${styles.line}`}></div>
-                )}
+                </div>
               </div>
-            ))}
-          </div>
-          <div className={styles.lower_map}>
-            {data?.allStages?.map((item, index) => (
-              <div
-                key={index.toString()}
-                className={styles.progress_icon_wrapper}>
-                <p className={styles.progress_status}>{item}</p>
-              </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
 
         <div className={styles.sub_container_right_div}>
-          {stepsCompleted < 4 && drawerPerStepsCompleted[stepsCompleted] && (
-            <div
-              className={styles.drawer_button}
-              onClick={() => {
-                if (
-                  drawerPerStepsCompleted[stepsCompleted] === "Complete KYC now"
-                ) {
-                  dispatch(setOrderIdFromOrderPage(data?.dealCodeNumber));
-                  router.push("/documentation");
-                } else if (
-                  drawerPerStepsCompleted[stepsCompleted] ===
-                  "Manage delivery slot"
-                ) {
-                  toggleModal();
-                } else {
-                  router.push("/cart");
-                }
-              }}>
-              {drawerPerStepsCompleted[stepsCompleted]}
-            </div>
-          )}
+          <div className="hidden md:block">
+            {drawerPerStepsCompleted[checkStatus] && (
+              <button
+                disabled={isUnhappyCustomeFlow}
+                className={`${
+                  isUnhappyCustomeFlow && styles.drawer_disabled_button
+                } ${styles.drawer_button}`}
+                onClick={() => {
+                  if (checkStatus === "complete kyc now") {
+                    dispatch(setOrderIdFromOrderPage(data?.order_id));
+                    router.push("/documentation");
+                  } else if (checkStatus === "delivery scheduled") {
+                    toggleModal();
+                  } else {
+                    router.push("/cart");
+                  }
+                }}>
+                {drawerPerStepsCompleted[checkStatus]}
+              </button>
+            )}
+          </div>
           {stepsCompleted > 0 && (
             <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
               Need Help with your order?
@@ -175,7 +188,7 @@ const OrderDetails = ({setPart, data}) => {
         <ManageSchedule
           isModalOpen={isModalopen}
           closeModal={toggleModal}
-          orderId={data?.dealCodeNumber}
+          orderId={data?.order_id}
         />
       )}
 
@@ -183,13 +196,13 @@ const OrderDetails = ({setPart, data}) => {
         <ServiceDrawer
           open={serviceDrawerOpen}
           toggleDrawer={toggleServiceDrawer}
-          orderId={data?.dealCodeNumber}
+          orderId={data?.order_id}
         />
       )}
 
       <div className="mt-8">
         <OrderSummary
-          orderNumber={data?.dealCodeNumber}
+          orderNumber={data?.order_id}
           isDelivered={stepsCompleted === 5}
         />
       </div>

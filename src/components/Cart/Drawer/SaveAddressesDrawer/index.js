@@ -87,7 +87,7 @@ export const AddressDrawerContent = ({primaryAddress, setId}) => {
       <div className={styles.item_wrapper}>
         {addressArray?.map((item, index) => (
           <div
-            key={index.toString()}
+            key={index}
             className={`${
               cityName !== item.city ? "cursor-not-allowed" : "cursor-pointer"
             } ${styles.card_wrapper}`}

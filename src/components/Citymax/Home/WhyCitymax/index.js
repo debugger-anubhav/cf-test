@@ -46,8 +46,8 @@ const WhyCitymax = () => {
     <div className={styles.main}>
       <p className={styles.head}>Why CityMax?</p>
       <div className={styles.card_wrapper}>
-        {cardData?.map((item, index) => (
-          <div key={index.toString()} className={styles.card}>
+        {cardData.map((item, index) => (
+          <div key={index} className={styles.card}>
             <img src={`${IconLink + item.icon}`} className={styles.icon} />
             <p className={styles.card_head}>{item.head}</p>
             <p className={styles.desc}>{item.desc}</p>
