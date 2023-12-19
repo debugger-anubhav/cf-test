@@ -194,4 +194,8 @@ export const endPoints = {
       `fc-payments/getProductLists?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
     createRequest: "fc-zoho-crms/submitServiceRequest",
   },
+
+  login: {
+    verifyOtp: `user/verifyotp_new`,
+  },
 };
