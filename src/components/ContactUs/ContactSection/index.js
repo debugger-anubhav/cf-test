@@ -52,14 +52,18 @@ function ContactSection() {
           return (
             <div
               key={index.toString()}
-              className={`${index !== data.length - 1 && styles.box_wrapper} `}>
-              <a href={item?.link}>
+              className={`${
+                index !== data.length - 1 && styles.box_wrapper
+              } flex flex-col `}>
+              <a href={item?.link} className={styles.link_tag}>
                 <div className={styles.box_img}>{item.icon}</div>
-                <div className={styles.box_heading}>
-                  {item.heading}
-                  <ForwardArrow size={19.2} color={"#222"} />
+                <div className={styles.detail_wrapper}>
+                  <p className={styles.box_heading}>
+                    {item.heading}
+                    <ForwardArrow size={19.2} color={"#222"} />
+                  </p>
+                  <div className={styles.box_subheading}>{item.subheading}</div>
                 </div>
-                <div className={styles.box_subheading}>{item.subheading}</div>
               </a>
             </div>
           );
