@@ -15,7 +15,7 @@ function Repair({prevScreen, data}) {
   );
 
   const [toggleStates, setToggleStates] = useState(
-    data?.map(() => ({istoggled: false, selected: null, detail: null})),
+    data.map(() => ({istoggled: false, selected: null, detail: null})),
   );
 
   const repairOptions = [

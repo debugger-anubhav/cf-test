@@ -183,7 +183,7 @@ export const DocSidebarSkeleton = () => {
 
                 {[1, 2, 3, 4].map(item => {
                   return (
-                    <div className="w-36 h-4 mb-3" key={item.toString()}>
+                    <div className="w-36 h-4 mb-3" key={item.toString}>
                       <Skeleton
                         variant="text"
                         className={styles.skeleton_full_width_height}

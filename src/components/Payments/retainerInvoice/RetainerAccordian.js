@@ -18,7 +18,7 @@ const RetianerAccordian = ({rows, handleShowMore, visibleRows}) => {
       {rows?.slice(0, visibleRows).map((row, index) => (
         <Accordion
           expanded={expanded === `panel${index}`}
-          key={index.toString()}
+          key={index}
           onChange={handleChange(`panel${index}`)}
           className={`${expanded === `panel${index}` && "bg-F7F7F8"} ${
             styles.accordian

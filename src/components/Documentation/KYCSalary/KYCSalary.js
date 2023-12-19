@@ -147,7 +147,7 @@ const KYCSalary = ({handleKycState}) => {
           return (
             <>
               <div
-                key={index.toString()}
+                key={index}
                 className={`${styles.selContainer} ${
                   isSelected === docData?.supported_docs?.split(",")?.[index]
                     ? " !border-[#3E688E]"

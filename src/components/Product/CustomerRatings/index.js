@@ -67,7 +67,7 @@ const CustomerRating = ({params}) => {
           endIndex={endIndex}
         /> */}
           {pageData?.customerReviews?.slice(0, 3).map((item, index) => (
-            <div key={index.toString()} className={styles.single_rating_div}>
+            <div key={index} className={styles.single_rating_div}>
               <div className="flex gap-2">
                 <Rating
                   stop={5}

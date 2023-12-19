@@ -129,7 +129,7 @@ export const FaqsSkeleton = () => {
       </div>
       <div className="w-[45%]">
         <div className={styles.QuesAnsArray_div}>
-          {[1, 2, 3, 4, 5]?.map(index => {
+          {[1, 2, 3, 4, 5]?.map((item, index) => {
             return (
               <div key={index.toString()}>
                 <Skeleton variant="text" className={"text-16 w-full"} />

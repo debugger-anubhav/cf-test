@@ -24,12 +24,15 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
       iconActive: `${IconLink + "kyc-pending-warning-active.svg"}`,
       icon: `${IconLink + "kyc-pending-warning-normal.svg"}`,
     },
-    {label: "Delivered", value: "delivered"},
+    // {label: "Delivered", value: "delivered"},
+    {label: "KYC Under Review", value: "kyc_under_review"},
     {label: "Active Orders", value: "active_order"},
-    {label: "Cancelled/Returned", value: "cancelled"},
+    {label: "Inactive Orders", value: "inactive_order"},
+
+    // {label: "Cancelled/Returned", value: "cancelled"},
     {
-      label: "Payment Failed",
-      value: "payment_failed",
+      label: "Order Failed",
+      value: "order_failed",
       iconActive: `${IconLink + "payment-failed-warning-active.svg"}`,
       icon: `${IconLink + "payment-failed-warning-normal.svg"}`,
     },
@@ -96,14 +99,14 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
 
         <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
-            {MenuList0?.map((item, index) => (
+            {MenuList0.map((item, index) => (
               <div
                 className={`${
                   selectedMenuOrder === index
                     ? "text-5774AC border-b-9A9AA2"
                     : "text-45454A border-b-transparent"
                 } ${styles.menu_wrapper}`}
-                key={index.toString()}
+                key={index}
                 onClick={() => {
                   setSelectedMenuOrder(index);
                   fetchOrdersDetails(index !== 0 ? item.value : null);
@@ -129,7 +132,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
             {ordersData?.map((item, index) => {
               console.log(visibleImages, "visibleee");
               return (
-                <div key={index.toString()}>
+                <div key={index}>
                   <CommonContainer
                     item={item}
                     index={index}

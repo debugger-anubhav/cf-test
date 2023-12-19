@@ -280,6 +280,18 @@ export const orderSlice = createSlice({
   },
 });
 
+export const citymaxSlice = createSlice({
+  name: "citymax",
+  initialState: {
+    isHalfYearly: true,
+  },
+  reducers: {
+    setIsHalfYearlyState: (state, action) => {
+      state.isHalfYearly = action.payload;
+    },
+  },
+});
+
 export const paymentSuccessSlice = createSlice({
   name: "paymentSuccessPage",
   initialState: {
@@ -369,3 +381,5 @@ export const {
   setPGTransactionID,
   setAmountPaid,
 } = paymentSuccessSlice.actions;
+
+export const {setIsHalfYearlyState} = citymaxSlice.actions;

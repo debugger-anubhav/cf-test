@@ -10,6 +10,7 @@ import {
   InvoiceSlice,
   orderSlice,
   paymentSuccessSlice,
+  citymaxSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -25,6 +26,7 @@ export const store = configureStore({
     invoicePage: InvoiceSlice.reducer,
     order: orderSlice.reducer,
     successPayment: paymentSuccessSlice.reducer,
+    citymax: citymaxSlice.reducer,
   },
 });
 

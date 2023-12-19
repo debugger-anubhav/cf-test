@@ -163,9 +163,7 @@ const InvoicePage = () => {
               ) : (
                 <TableBody>
                   {rows.slice(0, visibleRows).map((row, index) => (
-                    <TableRow
-                      key={index.toString()}
-                      className={styles.tableRow}>
+                    <TableRow key={index} className={styles.tableRow}>
                       <TableCell
                         className={`min-w-[116px] ${styles.tableCell}`}>
                         {row.due_days}

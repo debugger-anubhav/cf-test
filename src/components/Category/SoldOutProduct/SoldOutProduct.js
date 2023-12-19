@@ -173,7 +173,7 @@ export const SoldOutProduct = () => {
                         (item, index) => {
                           return (
                             <div
-                              key={index.toString()}
+                              key={index}
                               onClick={e => handleCardClick(e, item)}>
                               <CategoryCard
                                 cardImage={`${productImageBaseUrl}${
