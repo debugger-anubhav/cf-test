@@ -14,7 +14,7 @@ function MainSectionHowWork() {
       <div className={styles.video_wrapper}>
         <iframe
           loading="lazy"
-          src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
+          src="https://www.youtube.com/embed/Tx50ddNJk9c"
           title="YouTube video player"
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
