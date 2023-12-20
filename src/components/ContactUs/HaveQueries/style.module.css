@@ -2,7 +2,7 @@
   @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full;
 }
 .heading_container {
-  @apply text-20  text-45454A font-medium leading-[32px] font-Poppins;
+  @apply md:text-20 text-16 text-45454A font-medium leading-[32px] font-Poppins;
 }
 .QuesAnsArray_div {
   @apply lg:w-1/2 w-full mt-8;
@@ -11,7 +11,7 @@
   @apply bg-[#F6B704] rounded-lg flex  items-center justify-center gap-[10px] px-8 lg:h-[56px] h-[48px] w-fit cursor-pointer lg:mb-[88px] mb-[48px];
 }
 .btn_txt {
-  @apply text-[#222] font-medium;
+  @apply text-[#222] font-medium font-Poppins;
 }
 .forword_icon {
   @apply w-4 h-4 xl:w-5 xl:h-5;
