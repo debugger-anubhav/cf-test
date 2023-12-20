@@ -32,6 +32,7 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  reduxSetModalState,
   setCityShield,
   setCoinsApplied,
   setShoppingCartTab,
@@ -42,10 +43,12 @@ import {
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
+import LoginModal from "@/components/LoginPopups/index";
 
 const ShoppingCartSection = () => {
   const dispatch = useDispatch();
   const data = useSelector(state => state.cartPageData);
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const cartItems = data.cartItems;
   const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
@@ -104,10 +107,12 @@ const ShoppingCartSection = () => {
     modeOfPayment === null ? true : modeOfPayment,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const [code, setCode] = useState(data.couponCodeUsed);
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
 
   // const [itemQuantity, setItemQuantity] = useState(1);
 
@@ -143,10 +148,12 @@ const ShoppingCartSection = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(reduxSetModalState(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    dispatch(reduxSetModalState(false));
   };
 
   const applyCouponCode = value => {
@@ -227,9 +234,15 @@ const ShoppingCartSection = () => {
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
-  // useEffect(() => {
-  //   data.couponCodeUsed;
-  // }, [third]);
+  const toggleLoginModal = () => {
+    dispatch(reduxSetModalState(!modalStateFromRedux));
+    setLoginModal(!loginModal);
+  };
+
+  const handleCheckLogin = () => {
+    if (isLogin) dispatch(setShoppingCartTab(1));
+    else toggleLoginModal();
+  };
 
   return (
     showData &&
@@ -242,6 +255,16 @@ const ShoppingCartSection = () => {
           id={itemId}
           userId={parseInt(userIdToUse)}
           updateArr={id => deleteItem(id)}
+        />
+
+        <LoginModal
+          closeModal={toggleLoginModal}
+          isModalOpen={loginModal}
+          setIsLogin={bool => {
+            setIsLogin(bool);
+            dispatch(setShoppingCartTab(1));
+          }}
+          isCheckoutPage
         />
         <div className={styles.main_container}>
           <div className={styles.left_div} id="leftDiv">
@@ -690,7 +713,9 @@ const ShoppingCartSection = () => {
 
               <button
                 className={styles.proceed_button}
-                onClick={() => dispatch(setShoppingCartTab(1))}>
+                onClick={() => {
+                  handleCheckLogin();
+                }}>
                 Proceed <ArrowForw size={19} color={"#222"} />
               </button>
             </div>
