@@ -15,8 +15,11 @@ import {showToastNotification} from "../Common/Notifications/toastUtils";
 import ChangeNumber from "./Modal/ChangeNumber";
 import "react-responsive-modal/styles.css";
 import FormSkeleton from "../Common/FormSkeleton";
+import {reduxSetModalState} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const ProfileSettings = () => {
+  const dispatch = useDispatch();
   const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [countdown, setCountdown] = useState(60);
@@ -33,10 +36,12 @@ const ProfileSettings = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(reduxSetModalState(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    dispatch(reduxSetModalState(false));
   };
 
   const validationSchema = Yup.object({
