@@ -31,7 +31,11 @@ import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
 import {format} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
-import {addItemsToCart, getProductDetails} from "@/store/Slices";
+import {
+  addItemsToCart,
+  getProductDetails,
+  reduxSetModalState,
+} from "@/store/Slices";
 import {useMutation} from "@/hooks/useMutation";
 import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
@@ -41,6 +45,8 @@ import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const ProductDetails = ({params}) => {
   const str = string.product_page;
@@ -83,6 +89,9 @@ const ProductDetails = ({params}) => {
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const {checkAuthentication} = useAuthentication();
+  const [loginModal, setLoginModal] = useState(false);
 
   // const [dummy,setIsDumy]=useState(false);
   const reviewsPerPage = 4;
@@ -91,6 +100,18 @@ const ProductDetails = ({params}) => {
 
   const toggleRatingDrawer = () => {
     setOpen(!open);
+  };
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
+  };
+  const validateAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
   };
 
   // bottombar visibility conditiionally
@@ -202,51 +223,56 @@ const ProductDetails = ({params}) => {
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  // const userId = getLocalStorageString("user_id");
-  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleWhislistCard = e => {
     e.stopPropagation();
-    if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
-      return;
+    validateAuth();
+    if (isLogin) {
+      router.push("/wishlist");
+
+      // if (!userId) {
+      //   router.push("https://test.rentofurniture.com/user_sign_up");
+      //   return;
+      // }
+      // dispatch(addRemoveWhishListitems(!inWishList));
+      !categoryPageReduxData.savedProducts
+        .map(obj => obj.id)
+        .includes(parseInt(params.productId))
+        ? addwhislistProduct()
+            .then(res => {
+              getSavedItems()
+                .then(res => {
+                  dispatch(addSaveditems(res?.data?.data));
+                  // addSaveditemID
+                  const ids = res?.data?.data.map(item => {
+                    return item?.id;
+                  });
+                  dispatch(addSaveditemID(ids));
+                  showToastNotification("Item added to the wishlist", 1);
+                })
+                .catch(err => console.log(err));
+              setInWishList(prev => !prev);
+            })
+            .catch(err => console.log(err))
+        : removewhislistProduct()
+            .then(res => {
+              getSavedItems()
+                .then(res => {
+                  dispatch(addSaveditems(res?.data?.data));
+                  // addSaveditemID
+                  const ids = res?.data?.data.map(item => {
+                    return item?.id;
+                  });
+                  dispatch(addSaveditemID(ids));
+                  showToastNotification("Item removed from the wishlist", 2);
+                })
+                .catch(err => console.log(err));
+              setInWishList(prev => !prev);
+            })
+            .catch(err => console.log(err));
+    } else {
+      toggleLoginModal(true);
     }
-    // dispatch(addRemoveWhishListitems(!inWishList));
-    !categoryPageReduxData.savedProducts
-      .map(obj => obj.id)
-      .includes(parseInt(params.productId))
-      ? addwhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-                showToastNotification("Item added to the wishlist", 1);
-              })
-              .catch(err => console.log(err));
-            setInWishList(prev => !prev);
-          })
-          .catch(err => console.log(err))
-      : removewhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-                showToastNotification("Item removed from the wishlist", 2);
-              })
-              .catch(err => console.log(err));
-            setInWishList(prev => !prev);
-          })
-          .catch(err => console.log(err));
   };
 
   const data = {
@@ -439,6 +465,13 @@ const ProductDetails = ({params}) => {
 
   return (
     <div className={styles.main_container}>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        setIsLogin={bool => {
+          setIsLogin(bool);
+        }}
+      />
       <ShareModal
         isModalOpen={isModalOpen}
         closeModal={closeModal}
