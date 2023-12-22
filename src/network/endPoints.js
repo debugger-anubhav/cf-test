@@ -197,5 +197,6 @@ export const endPoints = {
 
   login: {
     verifyOtp: `user/verifyotp_new`,
+    isAuthenticate: `user/isAuthentic`,
   },
 };

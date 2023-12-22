@@ -5,15 +5,13 @@ import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
-import {
-  getLocalStorage,
-  getLocalStorageString,
-  setLocalStorage,
-} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
+
 import {Skeleton} from "@mui/material";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const Footer = ({params}) => {
+  const {checkAuthentication} = useAuthentication();
   const cityName = useSelector(state => state.homePagedata.cityName);
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
@@ -26,7 +24,16 @@ const Footer = ({params}) => {
     go_to_top: "Go to top",
   };
 
-  const userId = decrypt(getLocalStorage("_ga"));
+  const [isLogin, setIsLogin] = useState();
+  // const userId = decrypt(getLocalStorage("_ga"));
+  const handleAuthentication = async () => {
+    const isAuth = await checkAuthentication();
+    setIsLogin(isAuth);
+  };
+
+  useEffect(() => {
+    handleAuthentication();
+  }, []);
 
   const array = [
     {
@@ -67,7 +74,7 @@ const Footer = ({params}) => {
         {text: "About US", link: "/pages/about"},
         {
           text: "Refer a Friend",
-          link: userId ? "/referral" : "/pages/refer-a-friend",
+          link: isLogin ? "/referral" : "/pages/refer-a-friend",
         },
         {text: "Career", link: "/pages/careers"},
         {
