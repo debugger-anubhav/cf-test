@@ -10,6 +10,7 @@ const ModalContentForNumber = ({
   setContact,
   setProblemType,
   setOtp,
+  isLoginModal,
 }) => {
   const validationSchema = Yup.object({
     contactNumber: Yup.string()
@@ -32,7 +33,9 @@ const ModalContentForNumber = ({
   });
   return (
     <>
-      <h1 className={styles.head}>Change number</h1>
+      <h1 className={styles.head}>
+        {isLoginModal ? "Let’s get started" : "Change number"}
+      </h1>
       <Formik
         validationSchema={validationSchema}
         initialValues={{
@@ -53,13 +56,12 @@ const ModalContentForNumber = ({
                 />
                 <Field
                   type="number"
-                  autofocus={true}
+                  // autofocus={true}
                   name="contactNumber"
                   placeholder="Enter 10 digit number "
                   className={styles.contact_input}
                   value={formik.values.contactNumber}
                   onChange={e => {
-                    console.log(e, "ee");
                     formik.setFieldValue("contactNumber", e.target.value);
                     // setContact(e.target.value);
                   }}
@@ -70,7 +72,7 @@ const ModalContentForNumber = ({
                 onClick={() => {
                   if (formik.isValid) {
                     setContact(formik.values.contactNumber);
-                    handleSentOtp();
+                    handleSentOtp(formik.values.contactNumber);
                     setProblemType(1);
                     setOtp("");
                   }

@@ -14,6 +14,7 @@ import {
   selectedCityName,
   setShowCartItem,
   addCategory,
+  reduxSetModalState,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -32,8 +33,12 @@ import {
 import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
 import {IconLink} from "../../../assets/icon";
+import {useAuthentication} from "@/hooks/checkAuthentication";
+import "react-responsive-modal/styles.css";
+import LoginModal from "@/components/LoginPopups";
 
 const CitymaxHeader = ({zIndex}) => {
+  const {checkAuthentication} = useAuthentication();
   const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -55,10 +60,19 @@ const CitymaxHeader = ({zIndex}) => {
 
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  console.log(categoryPageReduxData, "categoryPageReduxData");
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
-  const [profileIconLink, setProfileIconLink] = useState();
-  const [heartIconLink, setHeartIconLink] = useState();
+  // const [profileIconLink, setProfileIconLink] = useState();
+  // const [heartIconLink, setHeartIconLink] = useState();
   const [menuDrawer, setMenuDrawer] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [click, setClick] = useState();
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
+  };
 
   const cityId = getLocalStorage("cityId");
   if (!cityId) {
@@ -108,20 +122,23 @@ const CitymaxHeader = ({zIndex}) => {
     state => state.cartPageData.cartItems.length,
   );
 
-  const userId = decrypt(getLocalStorage("_ga"))
-    ? decrypt(getLocalStorage("_ga"))
-    : getLocalStorage("user_id");
-
+  const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = userId || tempUserId;
 
-  // added for cart icons
-  const fetchCartItems = () => {
+  const validateAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+    const userIdToUse = isAuthenticated ? userId : tempUserId;
+    fetchCartItems(userIdToUse);
+  };
+
+  const fetchCartItems = userIdToUse => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        // console.log(res, "res in fetch itemms");
-        // setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
       })
@@ -132,7 +149,7 @@ const CitymaxHeader = ({zIndex}) => {
   };
 
   useEffect(() => {
-    fetchCartItems();
+    validateAuth();
   }, []);
 
   useEffect(() => {
@@ -176,15 +193,15 @@ const CitymaxHeader = ({zIndex}) => {
       .catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-    if (userId) {
-      setProfileIconLink("/usersettings");
-      setHeartIconLink("/wishlist");
-    } else {
-      setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
-      setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
-    }
-  }, [userId]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     setProfileIconLink("/usersettings");
+  //     setHeartIconLink("/wishlist");
+  //   } else {
+  //     setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
+  //     setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
+  //   }
+  // }, [userId]);
 
   const toggleDrawer = () => {
     setMenuDrawer(!menuDrawer);
@@ -192,6 +209,18 @@ const CitymaxHeader = ({zIndex}) => {
 
   return (
     <>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        setIsLogin={bool => {
+          setIsLogin(bool);
+        }}
+        handleChangeRoute={() => {
+          if (click === "profile") router.push(`/usersettings`);
+          else if (click === "wishlist") router.push(`/wishlist`);
+        }}
+      />
+
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
@@ -199,7 +228,12 @@ const CitymaxHeader = ({zIndex}) => {
               <RxHamburgerMenu className={styles.hamburger} />
             </div>
             {menuDrawer && (
-              <MenuDrawer open={menuDrawer} toggleDrawer={toggleDrawer} />
+              <MenuDrawer
+                open={menuDrawer}
+                toggleDrawer={toggleDrawer}
+                toggleLoginModal={val => toggleLoginModal(val)}
+                setClick={val => setClick(val)}
+              />
             )}
 
             <a
@@ -230,18 +264,20 @@ const CitymaxHeader = ({zIndex}) => {
 
           <div className={styles.header_right_wrapper}>
             <div className={styles.wishlist_link_wrapper}>
-              <a href={heartIconLink}>
-                <div
-                  className={`w-100 h-100 absolute z-10`}
-                  onClick={() => {
-                    if (userId) {
-                      router.push("/wishlist");
-                    } else {
-                      router.push(
-                        "https://test.rentofurniture.com/user_sign_up",
-                      );
-                    }
-                  }}></div>
+              <a
+                href={isLogin && `/wishlist`}
+                onClick={() => {
+                  setClick("wishlist");
+                  if (isLogin) {
+                    router.push("/wishlist");
+                  } else {
+                    toggleLoginModal(true);
+                    // router.push(
+                    //   "https://test.rentofurniture.com/user_sign_up",
+                    // );
+                  }
+                }}>
+                <div className={`w-100 h-100 absolute z-10`}></div>
                 <span
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
@@ -249,15 +285,6 @@ const CitymaxHeader = ({zIndex}) => {
                     alt="favorite"
                     className={styles.header_favorite}
                     loading="lazy"
-                    // onClick={() => {
-                    //   if (userId) {
-                    //     router.push("/wishlist");
-                    //   } else {
-                    //     router.push(
-                    //       "https://test.rentofurniture.com/user_sign_up",
-                    //     );
-                    //   }
-                    // }}
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 ? (
                     <span className={styles.cart_badge}>{wishListCount}</span>
@@ -293,7 +320,12 @@ const CitymaxHeader = ({zIndex}) => {
                   setShowProfileDropdown(false);
                 }}>
                 <a
-                  href={profileIconLink}
+                  onClick={() => {
+                    setClick("profile");
+                    if (isLogin) router.push("/usersettings");
+                    else toggleLoginModal(true);
+                  }}
+                  href={isLogin && "/usersettings"}
                   rel="noopner noreferrer"
                   target="_self"
                   aria-label="profile">
@@ -302,7 +334,7 @@ const CitymaxHeader = ({zIndex}) => {
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
-                      if (userId) {
+                      if (isLogin) {
                         setShowProfileDropdown(true);
                       }
                     }}>

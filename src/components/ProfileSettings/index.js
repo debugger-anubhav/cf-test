@@ -15,8 +15,11 @@ import {showToastNotification} from "../Common/Notifications/toastUtils";
 import ChangeNumber from "./Modal/ChangeNumber";
 import "react-responsive-modal/styles.css";
 import FormSkeleton from "../Common/FormSkeleton";
+import {reduxSetModalState} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const ProfileSettings = () => {
+  const dispatch = useDispatch();
   const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [countdown, setCountdown] = useState(60);
@@ -33,10 +36,12 @@ const ProfileSettings = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(reduxSetModalState(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    dispatch(reduxSetModalState(false));
   };
 
   const validationSchema = Yup.object({
@@ -60,7 +65,6 @@ const ProfileSettings = () => {
   }, [countdown, showOtpInput]);
 
   const fetchUserDetails = async () => {
-    // console.log(useridFromStorage, "uiwii");
     try {
       const response = await axios.get(
         baseURL +
@@ -144,7 +148,7 @@ const ProfileSettings = () => {
 
   const handleUpdateUserDetails = async values => {
     try {
-      const headers = {
+      const body = {
         id: parseInt(useridFromStorage),
         full_name: values.fullName,
         phone_no: values.contactNumber,
@@ -153,7 +157,7 @@ const ProfileSettings = () => {
       };
       await axios.patch(
         baseURL + endPoints.profileSettingPage.updateUserDetails,
-        headers,
+        body,
       );
       showToastNotification("Your changes are saved successfully", 1);
     } catch (err) {

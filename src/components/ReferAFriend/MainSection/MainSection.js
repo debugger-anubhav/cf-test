@@ -9,8 +9,12 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {reduxSetModalState} from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
+import "react-responsive-modal/styles.css";
+import {useRouter} from "next/navigation";
 
 const FAQ = [
   {
@@ -65,13 +69,21 @@ const MainSection = ({login}) => {
   const [code, setCode] = useState();
   const [userId, setuserId] = useState();
   const [loading, setloading] = useState(true);
+  const [loginModal, setLoginModal] = useState(false);
 
   const router = useRouter();
+  const dispatch = useDispatch();
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
 
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
 
   const HandleToggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const toggleLoginModal = () => {
+    dispatch(reduxSetModalState(!modalStateFromRedux));
+    setLoginModal(!loginModal);
   };
 
   const toggleQuestion = index => {
@@ -88,7 +100,8 @@ const MainSection = ({login}) => {
         .get(baseURL + endPoints.referAFreind(userIdFromStorage))
         .then(res => {
           setCode(res?.data?.data);
-        });
+        })
+        .catch(err => console.log(err, "err in referal code"));
     }
     setuserId(userIdFromStorage);
     setloading(false);
@@ -130,7 +143,8 @@ const MainSection = ({login}) => {
   };
 
   const HandleLogin = () => {
-    router.push("https://test.rentofurniture.com/user_sign_up");
+    // router.push("https://test.rentofurniture.com/user_sign_up");
+    toggleLoginModal();
   };
 
   const shareBtn = link => {
@@ -140,6 +154,14 @@ const MainSection = ({login}) => {
 
   return (
     <div className={styles.main_container}>
+      <LoginModal
+        closeModal={toggleLoginModal}
+        isModalOpen={loginModal}
+        // setIsLogin={bool => {
+        //   setIsLogin(bool);
+        // }}
+        handleChangeRoute={() => router.push("/referral")}
+      />
       <h1 className={styles.heading}>Referral Code</h1>
       {userId && <div className={styles.line_web}></div>}
       <div
@@ -241,15 +263,15 @@ const MainSection = ({login}) => {
           )}
 
           {!login && (
-            <a
-              href="https://test.rentofurniture.com/user_sign_up"
-              target="_blank"
-              rel="noopner noreferrer">
-              <button className={styles.login_btn} onClick={HandleLogin}>
-                Login
-                <ForwardArrowWithLine />
-              </button>
-            </a>
+            // <a
+            //   // href="https://test.rentofurniture.com/user_sign_up"
+            //   target="_blank"
+            //   rel="noopner noreferrer">
+            <button className={styles.login_btn} onClick={HandleLogin}>
+              Login
+              <ForwardArrowWithLine />
+            </button>
+            // </a>
           )}
 
           <div className={styles.how_it_works_button_wrapper}>

@@ -32,6 +32,7 @@ import {
   deleteItems,
   getBillDetails,
   getCouponCodeUsed,
+  reduxSetModalState,
   setCityShield,
   setCoinsApplied,
   setShoppingCartTab,
@@ -42,15 +43,23 @@ import {
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
+import LoginModal from "@/components/LoginPopups/index";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const ShoppingCartSection = () => {
+  const {checkAuthentication} = useAuthentication();
+
   const dispatch = useDispatch();
   const data = useSelector(state => state.cartPageData);
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const cartItems = data.cartItems;
   const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
 
   const [arr, setArr] = useState(cartItems);
+  const [userDetails, setUserDetails] = useState();
+
+  // console.log(userDetails, "userDetails");
   useEffect(() => {
     setArr(cartItems);
   }, [cartItems]);
@@ -104,10 +113,13 @@ const ShoppingCartSection = () => {
     modeOfPayment === null ? true : modeOfPayment,
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const [code, setCode] = useState(data.couponCodeUsed);
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   // const [itemQuantity, setItemQuantity] = useState(1);
 
@@ -143,10 +155,12 @@ const ShoppingCartSection = () => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(reduxSetModalState(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    dispatch(reduxSetModalState(false));
   };
 
   const applyCouponCode = value => {
@@ -227,9 +241,53 @@ const ShoppingCartSection = () => {
     fetchBill();
   }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
 
-  // useEffect(() => {
-  //   data.couponCodeUsed;
-  // }, [third]);
+  const toggleLoginModal = () => {
+    dispatch(reduxSetModalState(!modalStateFromRedux));
+    setLoginModal(!loginModal);
+  };
+
+  const handleCheckLogin = () => {
+    if (isLogin) {
+      if (userDetails?.full_name && userDetails?.email)
+        dispatch(setShoppingCartTab(1));
+      else {
+        setIsSetupProfile(true);
+        toggleLoginModal();
+      }
+    } else toggleLoginModal();
+  };
+
+  const fetchUserDetails = async () => {
+    // console.log(useridFromStorage, "uiwii");
+    try {
+      const response = await axios.get(
+        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
+      );
+
+      setUserDetails(response?.data?.data);
+      console.log(response?.data?.data, "userrrrr");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const validateAuth = async () => {
+    const isValid = await checkAuthentication();
+    console.log(isValid, "response from isauthencate");
+    if (isValid === true) {
+      setIsLogin(true);
+      fetchUserDetails();
+    } else setIsLogin(false);
+  };
+
+  useEffect(() => {
+    validateAuth();
+    console.log("innnn cookiessss");
+  }, []);
+
+  const handleChangeRoute = () => {
+    dispatch(setShoppingCartTab(1));
+  };
 
   return (
     showData &&
@@ -242,6 +300,21 @@ const ShoppingCartSection = () => {
           id={itemId}
           userId={parseInt(userIdToUse)}
           updateArr={id => deleteItem(id)}
+          setIsLogin={bool => {
+            setIsLogin(bool);
+          }}
+        />
+
+        <LoginModal
+          closeModal={toggleLoginModal}
+          isModalOpen={loginModal}
+          setIsLogin={bool => {
+            setIsLogin(bool);
+            // dispatch(setShoppingCartTab(1));
+          }}
+          isCheckoutPage
+          handleChangeRoute={handleChangeRoute}
+          isSetupProfile={isSetupProfile}
         />
         <div className={styles.main_container}>
           <div className={styles.left_div} id="leftDiv">
@@ -690,8 +763,16 @@ const ShoppingCartSection = () => {
 
               <button
                 className={styles.proceed_button}
-                onClick={() => dispatch(setShoppingCartTab(1))}>
-                Proceed <ArrowForw size={19} color={"#222"} />
+                onClick={() => {
+                  handleCheckLogin();
+                  // dispatch(setShoppingCartTab(1));
+                }}>
+                {isLogin
+                  ? userDetails?.full_name && userDetails?.email
+                    ? "Proceed"
+                    : "Set up your account to proceed"
+                  : "Login to proceed"}
+                <ArrowForw size={19} color={"#222"} />
               </button>
             </div>
           </div>
