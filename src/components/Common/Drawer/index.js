@@ -17,16 +17,29 @@ import {
 import {useParams, useRouter} from "next/navigation";
 import {decrypt} from "@/hooks/cryptoUtils";
 
-export default function CommonDrawer({DrawerName, Cities, data}) {
+import "react-responsive-modal/styles.css";
+
+export default function CommonDrawer({
+  DrawerName,
+  Cities,
+  data,
+  toggleEmptyCartModal,
+  setCity,
+}) {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
+
   const params = useParams();
   const router = useRouter();
 
@@ -93,6 +106,29 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     // );toggleDrawe
   };
   const userId = decrypt(getLocalStorage("_ga"));
+
+  // const CheckCartItems = (city, index) => {
+  //   if (cartItemsLength < 1) handleCityChange(city, index);
+  //   else {
+  //     toggleDrawer("left", false);
+  //     console.log("inside elsee");
+  //     console.log("yup");
+  //   }
+  // };
+
+  const handleCityChange = (city, index) => {
+    dispatch(selectedCityId(city?.id));
+    dispatch(selectedCityName(city?.list_value));
+    toggleDrawer("bottom", false);
+    if (typeof window !== "undefined") {
+      setLocalStorage("cityId", city?.id);
+    }
+    const newUrl = window?.location.pathname.split("/");
+    newUrl[1] = city.list_value.replace(/\//g, "-").toLowerCase();
+    const p = newUrl.join("/");
+    params.city ? router.push(p) : window?.location.reload();
+  };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -240,18 +276,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   `}
                   key={index.toString()}
                   onClick={() => {
-                    dispatch(selectedCityId(city?.id));
-                    dispatch(selectedCityName(city?.list_value));
-                    toggleDrawer("bottom", false);
-                    if (typeof window !== "undefined") {
-                      setLocalStorage("cityId", city?.id);
+                    if (cartItemsLength < 1) handleCityChange(city, index);
+                    else {
+                      console.log("elsee");
+                      // toggleDrawer("bottom", false);
+                      setState({...state, left: false});
+                      setCity(city);
+                      toggleEmptyCartModal(true);
                     }
-                    const newUrl = window?.location.pathname.split("/");
-                    newUrl[1] = city.list_value
-                      .replace(/\//g, "-")
-                      .toLowerCase();
-                    const p = newUrl.join("/");
-                    params.city ? router.push(p) : window?.location.reload();
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
@@ -267,8 +299,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       {city?.list_value.split("/")[0]}/
                       <br className="flex sm:hidden" />
                       {city?.list_value.split("/")[1]}
-                      {/* {city?.list_value} */}
-                      {/* {city?.id} */}
                     </div>
                   ) : (
                     <p
