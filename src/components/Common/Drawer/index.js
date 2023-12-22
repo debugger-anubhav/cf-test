@@ -15,9 +15,7 @@ import {
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
-import {decrypt} from "@/hooks/cryptoUtils";
-
-import "react-responsive-modal/styles.css";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 export default function CommonDrawer({
   DrawerName,
@@ -26,6 +24,7 @@ export default function CommonDrawer({
   toggleEmptyCartModal,
   setCity,
 }) {
+  const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cartItemsLength = useSelector(
@@ -39,6 +38,7 @@ export default function CommonDrawer({
   });
 
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState();
 
   const params = useParams();
   const router = useRouter();
@@ -75,6 +75,16 @@ export default function CommonDrawer({
 
   const cityId = getLocalStorage("cityId");
 
+  const handleAuthentication = async () => {
+    const isAuth = await checkAuthentication();
+    console.log(isAuth, "isAuth");
+    setIsLogin(isAuth);
+  };
+
+  React.useEffect(() => {
+    handleAuthentication();
+  }, []);
+
   const handleMenu = (e, item) => {
     // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     let previousSubCategory;
@@ -105,16 +115,7 @@ export default function CommonDrawer({
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );toggleDrawe
   };
-  const userId = decrypt(getLocalStorage("_ga"));
-
-  // const CheckCartItems = (city, index) => {
-  //   if (cartItemsLength < 1) handleCityChange(city, index);
-  //   else {
-  //     toggleDrawer("left", false);
-  //     console.log("inside elsee");
-  //     console.log("yup");
-  //   }
-  // };
+  // const userId = decrypt(getLocalStorage("_ga"));
 
   const handleCityChange = (city, index) => {
     dispatch(selectedCityId(city?.id));
@@ -211,11 +212,7 @@ export default function CommonDrawer({
                       key={index.toString()}
                       href={
                         // index === 3 && getLocalStorage("user_id") !== null
-                        index === 3
-                          ? userId
-                            ? "/usersettings"
-                            : "https://test.rentofurniture.com/user_sign_up"
-                          : item.link
+                        index === 3 ? isLogin && "/usersettings" : item.link
                       }>
                       <p className={styles.menu_item}>{item?.item}</p>
                     </a>
