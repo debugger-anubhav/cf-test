@@ -106,12 +106,65 @@ const ProductDetails = ({params}) => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
   };
+
+  const addWishlistItem = () => {
+    addwhislistProduct()
+      .then(res => {
+        getSavedItems()
+          .then(res => {
+            dispatch(addSaveditems(res?.data?.data));
+            // addSaveditemID
+            const ids = res?.data?.data.map(item => {
+              return item?.id;
+            });
+            dispatch(addSaveditemID(ids));
+            showToastNotification("Item added to the wishlist", 1);
+          })
+          .catch(err => console.log(err));
+        setInWishList(prev => !prev);
+      })
+      .catch(err => console.log(err));
+  };
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
     console.log(isAuthenticated, "response from isauthencate");
-    if (isAuthenticated === true) {
+
+    // if (isAuthenticated === true) {
+    //   setIsLogin(true);
+    // } else setIsLogin(false);
+
+    if (isAuthenticated) {
+      console.log("come in is login", isLogin);
+      // if (!userId) {
+      //   router.push("https://test.rentofurniture.com/user_sign_up");
+      //   return;
+      // }
       setIsLogin(true);
-    } else setIsLogin(false);
+      !categoryPageReduxData.savedProducts
+        .map(obj => obj.id)
+        .includes(parseInt(params.productId))
+        ? addWishlistItem()
+        : removewhislistProduct()
+            .then(res => {
+              getSavedItems()
+                .then(res => {
+                  dispatch(addSaveditems(res?.data?.data));
+                  // addSaveditemID
+                  const ids = res?.data?.data.map(item => {
+                    return item?.id;
+                  });
+                  dispatch(addSaveditemID(ids));
+                  showToastNotification("Item removed from the wishlist", 2);
+                })
+                .catch(err => console.log(err));
+              setInWishList(prev => !prev);
+            })
+            .catch(err => console.log(err));
+    } else {
+      setIsLogin(false);
+      toggleLoginModal(true);
+      console.log("come in is not logging");
+    }
   };
 
   // bottombar visibility conditiionally
@@ -218,6 +271,7 @@ const ProductDetails = ({params}) => {
   useEffect(() => {
     console.log(inWishList, "inWishlist");
   }, [inWishList]);
+
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
@@ -227,52 +281,6 @@ const ProductDetails = ({params}) => {
   const handleWhislistCard = e => {
     e.stopPropagation();
     validateAuth();
-    if (isLogin) {
-      router.push("/wishlist");
-
-      // if (!userId) {
-      //   router.push("https://test.rentofurniture.com/user_sign_up");
-      //   return;
-      // }
-      // dispatch(addRemoveWhishListitems(!inWishList));
-      !categoryPageReduxData.savedProducts
-        .map(obj => obj.id)
-        .includes(parseInt(params.productId))
-        ? addwhislistProduct()
-            .then(res => {
-              getSavedItems()
-                .then(res => {
-                  dispatch(addSaveditems(res?.data?.data));
-                  // addSaveditemID
-                  const ids = res?.data?.data.map(item => {
-                    return item?.id;
-                  });
-                  dispatch(addSaveditemID(ids));
-                  showToastNotification("Item added to the wishlist", 1);
-                })
-                .catch(err => console.log(err));
-              setInWishList(prev => !prev);
-            })
-            .catch(err => console.log(err))
-        : removewhislistProduct()
-            .then(res => {
-              getSavedItems()
-                .then(res => {
-                  dispatch(addSaveditems(res?.data?.data));
-                  // addSaveditemID
-                  const ids = res?.data?.data.map(item => {
-                    return item?.id;
-                  });
-                  dispatch(addSaveditemID(ids));
-                  showToastNotification("Item removed from the wishlist", 2);
-                })
-                .catch(err => console.log(err));
-              setInWishList(prev => !prev);
-            })
-            .catch(err => console.log(err));
-    } else {
-      toggleLoginModal(true);
-    }
   };
 
   const data = {
