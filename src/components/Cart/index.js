@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 
 const CartSection = () => {
   const tab = useSelector(state => state.cartPageData.shoppingCartTab);
+
   return (
     <div>
       {tab === 0 ? (

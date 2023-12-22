@@ -13,8 +13,19 @@ import ModalContentForAdditionalSupport from "@/components/ProfileSettings/Modal
 import ModalContentForMultipleEmails from "./components/ModalContentForMultipleEmails";
 import ModalContentForSettingProfile from "./components/ModalContentForSettingProfile";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
+import {useCookies} from "react-cookie";
 
-const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
+const LoginModal = ({
+  isModalOpen,
+  closeModal,
+  setIsLogin,
+  isCheckoutPage,
+  handleChangeRoute,
+  isSetupProfile,
+}) => {
+  const [setCookie] = useCookies(["authToken"]);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
   const [contact, setContact] = useState();
@@ -23,9 +34,14 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
   const [countdown, setCountdown] = useState(30);
   const [startCountdown, setStartCountdown] = useState(false);
   const [otp, setOtp] = useState("");
+  const [userId, setUserId] = useState();
+  const [emailArr, setEmailArr] = useState();
+
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
   React.useEffect(() => {
-    setModalCategory("multipleEmails");
+    if (isSetupProfile) setModalCategory("setUpAccount");
+    else setModalCategory("changeNumber");
   }, [isModalOpen]);
 
   useEffect(() => {
@@ -57,10 +73,10 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
   };
   React.useEffect(() => {
     handleresize();
-    window.addEventListener("resize", handleresize); // Add resize event listener
+    window.addEventListener("resize", handleresize);
     // setStartCountdown(false);
     return () => {
-      window.removeEventListener("resize", handleresize); // Clean up when component unmounts
+      window.removeEventListener("resize", handleresize);
     };
   }, []);
 
@@ -98,6 +114,7 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
         mobile_number: contact,
         otp,
         email,
+        tempUserId,
       };
 
       axios
@@ -106,16 +123,35 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
           setProblemType("");
           console.log(response);
           if (response?.data?.status_code === 200) {
-            setIsLogin(true);
-            !isCheckoutPage && closeModal();
-            showToastNotification("Login successfully", 1);
+            if (response?.data?.message === "login_success") {
+              if (isCheckoutPage) setIsLogin(true);
+              setUserId(response?.data?.data?.id);
+              const encryptedData = encrypt(
+                response?.data?.data?.id.toString(),
+              );
+              setLocalStorage("_ga", encryptedData);
+              console.log(response.data.data.access_token, "kwkqwo");
+              setCookie("authToken", response?.data?.data?.access_token);
+
+              if (isCheckoutPage) setModalCategory("setUpAccount");
+              else {
+                console.log("innnn");
+                closeModal();
+                handleChangeRoute();
+                // dispatch(setShoppingCartTab(1));
+              }
+              showToastNotification("Login successfully", 1);
+            } else if (
+              response?.data?.message ===
+              "Multiple registered user found. Please enter registered email."
+            ) {
+              setEmailArr(response?.data?.data?.data);
+              setModalCategory("multipleEmails");
+            }
           }
-          // handleNumberChange(contact);
-          // closeModal();
-          // showToastNotification("Login successfully", 1);
         })
         .catch(err => {
-          console.log(err, "err in verif");
+          console.log(err, "err in verif ctachhh");
           if (err?.response?.data?.message === "Invalid OTP")
             setOtpError(
               "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
@@ -127,7 +163,7 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
 
   const handleMultipleEmails = email => {
     handleVerification(otp, email);
-    isCheckoutPage && setModalCategory("setUpAccount");
+    // isCheckoutPage && setModalCategory("setUpAccount");
   };
 
   const handleStartCountdown = () => {
@@ -156,7 +192,7 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
           problemType={problemType}
           setModalCategory={val => setModalCategory(val)}
           countdown={countdown}
-          handleSentOtp={handleSentOtp}
+          handleSentOtp={() => handleSentOtp(contact)}
           handleStartCountdown={handleStartCountdown}
           setStartCountdown={val => setStartCountdown(val)}
           otp={otp}
@@ -165,7 +201,7 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
       ) : modalCategory === "resendOtp" ? (
         <ModalContentForResendOtp
           countdown={countdown}
-          handleSentOtp={handleSentOtp}
+          handleSentOtp={() => handleSentOtp(contact)}
           handleStartCountdown={handleStartCountdown}
           problemType={problemType}
           setCountdown={val => setCountdown(val)}
@@ -182,9 +218,14 @@ const LoginModal = ({isModalOpen, closeModal, setIsLogin, isCheckoutPage}) => {
           contact={contact}
           setModalCategory={val => setModalCategory(val)}
           handleMultipleEmails={handleMultipleEmails}
+          data={emailArr}
         />
       ) : modalCategory === "setUpAccount" ? (
-        <ModalContentForSettingProfile />
+        <ModalContentForSettingProfile
+          userId={userId}
+          closeModal={closeModal}
+          handleChangeRoute={handleChangeRoute}
+        />
       ) : null}
     </>
   );

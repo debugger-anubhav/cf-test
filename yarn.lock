@@ -2998,7 +2998,7 @@
   "resolved" "https://registry.npmjs.org/react-circular-progressbar/-/react-circular-progressbar-2.1.0.tgz"
   "version" "2.1.0"
 
-"react-cookie@^6.1.0":
+"react-cookie@^6.1.1":
   "integrity" "sha512-fuFRpf8LH6SfmVMowDUIRywJF5jAUDUWrm0EI5VdXfTl5bPcJ7B0zWbuYpT0Tvikx7Gs18MlvAT+P+744dUz2g=="
   "resolved" "https://registry.npmjs.org/react-cookie/-/react-cookie-6.1.1.tgz"
   "version" "6.1.1"

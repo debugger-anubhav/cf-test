@@ -65,7 +65,6 @@ const ProfileSettings = () => {
   }, [countdown, showOtpInput]);
 
   const fetchUserDetails = async () => {
-    // console.log(useridFromStorage, "uiwii");
     try {
       const response = await axios.get(
         baseURL +
@@ -149,7 +148,7 @@ const ProfileSettings = () => {
 
   const handleUpdateUserDetails = async values => {
     try {
-      const headers = {
+      const body = {
         id: parseInt(useridFromStorage),
         full_name: values.fullName,
         phone_no: values.contactNumber,
@@ -158,7 +157,7 @@ const ProfileSettings = () => {
       };
       await axios.patch(
         baseURL + endPoints.profileSettingPage.updateUserDetails,
-        headers,
+        body,
       );
       showToastNotification("Your changes are saved successfully", 1);
     } catch (err) {

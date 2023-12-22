@@ -14,6 +14,7 @@ import {
   selectedCityName,
   setShowCartItem,
   addCategory,
+  reduxSetModalState,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -34,11 +35,15 @@ import {
   encryptBase64,
 } from "@/hooks/cryptoUtils";
 import {useIsOnMobile} from "@/hooks/useIsOnMobile";
+import LoginModal from "@/components/LoginPopups";
+import "react-responsive-modal/styles.css";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const HEADER_HEIGHT = 48;
 
 const Header = () => {
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
+  const {checkAuthentication} = useAuthentication();
 
   const iconRef = useRef(null);
   const dispatch = useDispatch();
@@ -62,8 +67,16 @@ const Header = () => {
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
-  const [profileIconLink, setProfileIconLink] = useState();
-  const [heartIconLink, setHeartIconLink] = useState();
+  // const [profileIconLink, setProfileIconLink] = useState();
+  // const [heartIconLink, setHeartIconLink] = useState();
+  const [isLogin, setIsLogin] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [click, setClick] = useState();
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
+  };
 
   const cityId = getLocalStorage("cityId");
   if (!cityId) {
@@ -129,6 +142,16 @@ const Header = () => {
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
 
+  const validateAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+    const userIdToUse = isAuthenticated ? userId : tempUserId;
+    fetchCartItems(userIdToUse);
+  };
+
   // added for cart icons
   const fetchCartItems = () => {
     axios
@@ -146,8 +169,12 @@ const Header = () => {
   };
 
   useEffect(() => {
-    fetchCartItems();
+    validateAuth();
   }, []);
+
+  // useEffect(() => {
+  //   fetchCartItems();
+  // }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -190,18 +217,29 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-    if (userId) {
-      setProfileIconLink("/usersettings");
-      setHeartIconLink("/wishlist");
-    } else {
-      setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
-      setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
-    }
-  }, [userId]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     setProfileIconLink("/usersettings");
+  //     setHeartIconLink("/wishlist");
+  //   } else {
+  //     setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
+  //     setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
+  //   }
+  // }, [userId]);
 
   return (
     <>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        setIsLogin={bool => {
+          setIsLogin(bool);
+        }}
+        handleChangeRoute={() => {
+          if (click === "profile") router.push(`/usersettings`);
+          else if (click === "wishlist") router.push(`/wishlist`);
+        }}
+      />
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
@@ -265,18 +303,32 @@ const Header = () => {
               </div>
             )}
             <div className={styles.wishlist_link_wrapper}>
-              <a href={heartIconLink}>
+              <a
+                className="cursor-pointer"
+                href={isLogin && `/wishlist`}
+                onClick={() => {
+                  setClick("wishlist");
+                  if (isLogin) {
+                    router.push("/wishlist");
+                  } else {
+                    toggleLoginModal(true);
+                    // router.push(
+                    //   "https://test.rentofurniture.com/user_sign_up",
+                    // );
+                  }
+                }}>
                 <div
                   className={`w-100 h-100 absolute z-10`}
-                  onClick={() => {
-                    if (userId) {
-                      router.push("/wishlist");
-                    } else {
-                      router.push(
-                        "https://test.rentofurniture.com/user_sign_up",
-                      );
-                    }
-                  }}></div>
+                  // onClick={() => {
+                  //   if (userId) {
+                  //     router.push("/wishlist");
+                  //   } else {
+                  //     router.push(
+                  //       "https://test.rentofurniture.com/user_sign_up",
+                  //     );
+                  //   }
+                  // }}
+                ></div>
                 <span
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
@@ -328,7 +380,13 @@ const Header = () => {
                   setShowProfileDropdown(false);
                 }}>
                 <a
-                  href={profileIconLink}
+                  className="cursor-pointer"
+                  onClick={() => {
+                    setClick("profile");
+                    if (isLogin) router.push("/usersettings");
+                    else toggleLoginModal(true);
+                  }}
+                  href={isLogin && "/usersettings"}
                   rel="noopner noreferrer"
                   target="_self"
                   aria-label="profile">
@@ -337,7 +395,7 @@ const Header = () => {
                     onMouseEnter={e => {
                       e.preventDefault();
                       e.stopPropagation();
-                      if (userId) {
+                      if (isLogin) {
                         setShowProfileDropdown(true);
                       }
                     }}>
