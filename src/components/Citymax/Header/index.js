@@ -34,9 +34,8 @@ import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
 import {IconLink} from "../../../assets/icon";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
-import {useCookies} from "react-cookie";
+import LoginModal from "@/components/LoginPopups";
 
 const CitymaxHeader = ({zIndex}) => {
   const {checkAuthentication} = useAuthentication();
@@ -67,7 +66,6 @@ const CitymaxHeader = ({zIndex}) => {
   // const [heartIconLink, setHeartIconLink] = useState();
   const [menuDrawer, setMenuDrawer] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [cookies] = useCookies(["authToken"]);
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
 
@@ -152,7 +150,7 @@ const CitymaxHeader = ({zIndex}) => {
 
   useEffect(() => {
     validateAuth();
-  }, [cookies]);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -222,6 +220,7 @@ const CitymaxHeader = ({zIndex}) => {
           else if (click === "wishlist") router.push(`/wishlist`);
         }}
       />
+
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
@@ -232,7 +231,8 @@ const CitymaxHeader = ({zIndex}) => {
               <MenuDrawer
                 open={menuDrawer}
                 toggleDrawer={toggleDrawer}
-                toggleLoginModal={toggleLoginModal}
+                toggleLoginModal={val => toggleLoginModal(val)}
+                setClick={val => setClick(val)}
               />
             )}
 
