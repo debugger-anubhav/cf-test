@@ -56,13 +56,12 @@ const ModalContentForNumber = ({
                 />
                 <Field
                   type="number"
-                  autofocus={true}
+                  // autofocus={true}
                   name="contactNumber"
                   placeholder="Enter 10 digit number "
                   className={styles.contact_input}
                   value={formik.values.contactNumber}
                   onChange={e => {
-                    console.log(e, "ee");
                     formik.setFieldValue("contactNumber", e.target.value);
                     // setContact(e.target.value);
                   }}

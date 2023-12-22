@@ -9,11 +9,15 @@ import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useMutation} from "@/hooks/useMutation";
-import {useRouter} from "next/navigation";
+
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+
+import {reduxSetModalState} from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const DeleteModal = ({
   isModalOpen,
@@ -22,11 +26,19 @@ const DeleteModal = ({
   userId,
   updateArr,
   id,
+  setIsLogin,
 }) => {
+  const {checkAuthentication} = useAuthentication();
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [inWishList, setInWishList] = React.useState(false);
   const dispatch = useDispatch();
-  const router = useRouter();
+  const [loginModal, setLoginModal] = useState(false);
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
+
+  const toggleLoginModal = () => {
+    dispatch(reduxSetModalState(!modalStateFromRedux));
+    setLoginModal(!loginModal);
+  };
 
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
@@ -92,14 +104,15 @@ const DeleteModal = ({
     data,
   );
 
-  const handleWhislistCard = e => {
+  const handleWhislistCard = async e => {
     e.stopPropagation();
-    // if (!getLocalStorage("user_id")) {
-    if (!decrypt(getLocalStorage("_ga"))) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
+    const isAuthenticated = await checkAuthentication();
+    // if (!decrypt(getLocalStorage("_ga")))
+    if (!isAuthenticated) {
+      closeModal();
+      toggleLoginModal();
       return;
     }
-
     !inWishList &&
       addwhislistProduct()
         .then(res => {
@@ -136,6 +149,12 @@ const DeleteModal = ({
 
   return (
     <div>
+      <LoginModal
+        closeModal={toggleLoginModal}
+        isModalOpen={loginModal}
+        setIsLogin={setIsLogin}
+        isCheckoutPage
+      />
       {isBottomShareDrawer ? (
         <Drawer
           anchor={"bottom"}

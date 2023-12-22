@@ -5,16 +5,28 @@ import styles from "./styles.module.css";
 import {useRouter} from "next/navigation";
 import {IconLink} from "../../../../assets/icon";
 import string from "@/constants/Constant.json";
-import {getLocalStorage} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
+// import {useDispatch, useSelector} from "react-redux";
+// import {reduxSetModalState} from "@/store/Slices";
+// import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 import {useSelector} from "react-redux";
 
-const MenuDrawer = ({toggleDrawer, open}) => {
+const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
+  const {checkAuthentication} = useAuthentication();
   const router = useRouter();
+  // const dispatch = useDispatch();
   const [plans, setPlans] = useState();
+  // const [loginModal, setLoginModal] = useState(false);
+  const [isLogin, setIsLogin] = useState();
+
+  // const toggleLoginModal = bool => {
+  //   toggleDrawer();
+  //   dispatch(reduxSetModalState(bool));
+  //   setLoginModal(bool);
+  // };
 
   const isHalfYearly = useSelector(state => state?.citymax?.isHalfYearly);
 
@@ -31,58 +43,18 @@ const MenuDrawer = ({toggleDrawer, open}) => {
     fetchPlans();
   }, []);
 
-  // const arr1 = [
-  //   {
-  //     label: "CityMax Ultra",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "CityMax Pro",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "CityMax Lite",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "CityMax Mini",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "CityMax Appliances",
-  //     link: "",
-  //   },
-  // ];
-  // const arr2 = [
-  //   {
-  //     label: "Furniture Sale",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "CF For Businesses",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "Pay your dues",
-  //     link: "",
-  //   },
-  // ];
-  // const arr3 = [
-  //   {
-  //     label: "How It Works?",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "FAQs",
-  //     link: "",
-  //   },
-  //   {
-  //     label: "Contact us",
-  //     link: "",
-  //   },
-  // ];
+  // const userId = getLocalStorage(decrypt("_ga"));
 
-  const userId = getLocalStorage(decrypt("_ga"));
+  const handleAuthentication = async () => {
+    const isAuth = await checkAuthentication();
+    console.log(isAuth, "isAuth");
+    setIsLogin(isAuth);
+  };
+
+  useEffect(() => {
+    handleAuthentication();
+  }, []);
+
   return (
     <SwipeableDrawer
       anchor="left"
@@ -122,6 +94,17 @@ const MenuDrawer = ({toggleDrawer, open}) => {
 
           <div className={styles.line}></div>
 
+          {/* <LoginModal
+            closeModal={() => toggleLoginModal(false)}
+            isModalOpen={loginModal}
+            // setIsLogin={bool => {
+            //   setIsLogin(bool);
+            // }}
+            handleChangeRoute={() => {
+              router.push("/usersettings");
+            }}
+          /> */}
+
           <div className={styles.map_wrapper}>
             {string.landing_page.header.menuList2?.map((item, index) => (
               <>
@@ -147,12 +130,19 @@ const MenuDrawer = ({toggleDrawer, open}) => {
                   className={styles.map_item}
                   target={index === 0 ? "_blank" : "_self"}
                   rel="noreferrer"
+                  onClick={() => {
+                    if (isLogin) router.push("/usersettings");
+                    else {
+                      toggleDrawer();
+                      setClick("profile");
+                      toggleLoginModal(true);
+                    }
+                  }}
                   href={
                     index === 3
-                      ? userId
-                        ? "/usersettings"
-                        : "https://test.rentofurniture.com/user_sign_up"
-                      : item.link
+                      ? isLogin && "/usersettings"
+                      : // : "https://test.rentofurniture.com/user_sign_up"
+                        item.link
                   }>
                   {item?.item}
                 </a>

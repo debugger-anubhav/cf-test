@@ -6,12 +6,8 @@ const ModalContentForMultipleEmails = ({
   setModalCategory,
   setStartCountdown,
   handleMultipleEmails,
+  data,
 }) => {
-  const data = [
-    "dummyemaildummyemaildummyemail@abc.com",
-    "dummyemail@abc.com",
-    "dummyemail@aboc.com",
-  ];
   const [selectedEmail, setSelectedEmail] = useState(data[0]);
 
   return (
