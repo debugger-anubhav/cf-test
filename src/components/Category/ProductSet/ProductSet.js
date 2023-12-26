@@ -21,6 +21,9 @@ export const ProductSet = () => {
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
 
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
@@ -143,7 +146,11 @@ export const ProductSet = () => {
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
                     return (
-                      <div key={index} onClick={e => handleCardClick(e, item)}>
+                      <div
+                        key={index}
+                        onClick={e => {
+                          !reduxStateOfLoginPopup && handleCardClick(e, item);
+                        }}>
                         <CategoryCard
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]

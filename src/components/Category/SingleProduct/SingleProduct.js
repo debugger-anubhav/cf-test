@@ -40,6 +40,9 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
 
   let categoryId;
   let subCategoryId;
@@ -177,7 +180,11 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
                 return (
-                  <div key={index} onClick={e => handleCardClick(e, item)}>
+                  <div
+                    key={index}
+                    onClick={e => {
+                      !reduxStateOfLoginPopup && handleCardClick(e, item);
+                    }}>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]

@@ -10,6 +10,9 @@ import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
+import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
 
 const Card = ({
   desc,
@@ -26,14 +29,29 @@ const Card = ({
   productID,
   seourl,
   isSavedComp = false,
-  isSmallScreen,
 }) => {
+  const {checkAuthentication} = useAuthentication();
   const [inWishList, setInWishList] = useState(isSavedComp || false);
   const [hoverCard, setHoverCard] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(reduxSetModalState(loginModal));
+    dispatch(setLoginPopupState(loginModal));
+  }, [loginModal]);
+
+  const toggleLoginModal = bool => {
+    console.log(bool, "bool");
+    setLoginModal(bool);
+  };
+
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     // userId: getLocalStorage("user_id") ?? "",
@@ -69,13 +87,9 @@ const Card = ({
       decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
-  const userId = decrypt(getLocalStorage("_ga"));
-  const handleWhislistCard = e => {
-    e.stopPropagation();
-    if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
-      return;
-    }
+  // const userId = decrypt(getLocalStorage("_ga"));
+
+  const addToWishlist = () => {
     !inWishList
       ? addwhislistProduct()
           .then(res => {
@@ -114,6 +128,15 @@ const Card = ({
           })
           .catch(err => console.log(err));
   };
+  const handleWhislistCard = async e => {
+    e.stopPropagation();
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === false) {
+      console.log("inside false");
+      toggleLoginModal(true);
+    } else addToWishlist();
+  };
 
   useEffect(() => {
     setInWishList(
@@ -133,15 +156,26 @@ const Card = ({
 
   return (
     <>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        handleChangeRoute={() => {
+          console.log("in handlechangerouteee");
+          // call this if you want to show the red heart exactly after login
+          // addToWishlist();
+        }}
+      />
       <a
-        href={`/things/${productID}/${seourl}`}
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         onClick={e => e.preventDefault()}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"
         rel="noopener">
         <div
-          onClick={e => handleProductClick(e, productID, seourl)}
+          onClick={e => {
+            !reduxStateOfLoginPopup && handleProductClick(e, productID, seourl);
+          }}
           className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
             productWidth ?? ""
           } 

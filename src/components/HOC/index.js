@@ -11,9 +11,9 @@ export function AuthProvider(WrappedComponent) {
     const [isAuthenticated, setisAuthenticated] = useState(null);
 
     const validateAuth = async () => {
-      const isAuthenticated = await checkAuthentication();
-      console.log(isAuthenticated, "response from isauthencate");
-      if (isAuthenticated === true) {
+      const isLogin = await checkAuthentication();
+      console.log(isLogin, "response from isauthencate");
+      if (isLogin === true) {
         setisAuthenticated(true);
       } else setisAuthenticated(false);
     };
@@ -23,10 +23,11 @@ export function AuthProvider(WrappedComponent) {
     }, []);
 
     useEffect(() => {
-      if (!isAuthenticated) {
+      if (isAuthenticated === false) {
+        console.log("in baddd");
         router.push("/cityfurnish");
       }
-    }, [isAuthenticated]);
+    }, []);
 
     if (isAuthenticated) {
       return <WrappedComponent {...props} />;

@@ -431,7 +431,7 @@ const Header = () => {
                 <a
                   className="cursor-pointer"
                   onClick={() => {
-                    setClick("profile");
+                    // setClick("profile");
                     if (isLogin) router.push("/usersettings");
                     else toggleLoginModal(true);
                   }}

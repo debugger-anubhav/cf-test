@@ -16,6 +16,9 @@ const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
 
   const [paramsCityId, setParamsCityId] = React.useState(46);
   const [data, setData] = React.useState(null);
@@ -136,7 +139,9 @@ const TrendingProducts = ({params}) => {
             className={`${styles.child ?? ""} ${
               index === data?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}
-            onClick={e => handleCardClick(e, item)}>
+            onClick={e => {
+              !reduxStateOfLoginPopup && handleCardClick(e, item);
+            }}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={

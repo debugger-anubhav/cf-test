@@ -13,6 +13,9 @@ const SavedItem = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const [isDumy, setIsDumy] = React.useState(false);
   const sliderRef = useRef(null);
 
@@ -104,7 +107,9 @@ const SavedItem = () => {
             <div
               className={`flex flex-wrap mr-4 mb-4 ${styles.child}`}
               key={index.toString()}
-              onClick={e => handleCardClick(e, item)}>
+              onClick={e => {
+                !reduxStateOfLoginPopup && handleCardClick(e, item);
+              }}>
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 desc={item?.product_name}

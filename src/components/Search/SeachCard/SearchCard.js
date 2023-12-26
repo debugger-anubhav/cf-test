@@ -26,6 +26,7 @@ const SearchCard = ({
 }) => {
   const {checkAuthentication} = useAuthentication();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+
   const dispatch = useDispatch();
   const [inWishList, setInWishList] = React.useState(false);
   const [loginModal, setLoginModal] = useState(false);
@@ -71,7 +72,6 @@ const SearchCard = ({
     }`,
   );
   // const userId = getLocalStorage("user_id");
-  const userId = decrypt(getLocalStorage("_ga"));
 
   const addToWishlist = () => {
     !inWishList
@@ -111,13 +111,11 @@ const SearchCard = ({
 
   const handleWhislistCard = async e => {
     e.stopPropagation();
-    if (!userId) {
-      const isAuthenticated = await checkAuthentication();
-      console.log(isAuthenticated, "response from isauthencate");
-      if (isAuthenticated === false) {
-        console.log("inside false");
-        toggleLoginModal(true);
-      }
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === false) {
+      console.log("inside false");
+      toggleLoginModal(true);
     } else addToWishlist();
     // dispatch(addRemoveWhishListitems(!inWishList));
   };
