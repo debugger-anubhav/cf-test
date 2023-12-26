@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import InfiniteScroll from "react-infinite-scroll-component";
 import {
@@ -32,6 +32,10 @@ const SearchList = () => {
   const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
+  console.log(reduxStateOfLoginPopup, "reduxStateOfLoginPopup");
   const dropDownRefSort = useRef(null);
   const [selectedOption, setSelectedOption] = useState("Default");
   const [sortOpen, setSortOpen] = useState(false);
@@ -115,7 +119,7 @@ const SearchList = () => {
   };
 
   const handleCardClick = (e, item) => {
-    router.push(`/things/${item.id}/${item.seourl}`);
+    !reduxStateOfLoginPopup && router.push(`/things/${item.id}/${item.seourl}`);
   };
 
   return (
@@ -209,7 +213,11 @@ const SearchList = () => {
                     className={`${style.card_box_product} child`}
                     key={index.toString()}
                     onClick={e => handleCardClick(e, item)}>
-                    <a href={`/things/${item.id}/${item.seourl}`}>
+                    <a
+                      href={
+                        !reduxStateOfLoginPopup &&
+                        `/things/${item.id}/${item.seourl}`
+                      }>
                       <SearchCard
                         productWidth={productCardWidth}
                         cardImage={`${productImageBaseUrl}${

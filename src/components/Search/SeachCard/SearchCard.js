@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
@@ -8,9 +8,12 @@ import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
-import {useRouter} from "next/navigation";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
+import "react-responsive-modal/styles.css";
 
 const SearchCard = ({
   cardImage,
@@ -21,11 +24,18 @@ const SearchCard = ({
   productID,
   soldOut,
 }) => {
-  const [inWishList, setInWishList] = React.useState(false);
+  const {checkAuthentication} = useAuthentication();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-
   const dispatch = useDispatch();
-  const router = useRouter();
+  const [inWishList, setInWishList] = React.useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    dispatch(setLoginPopupState(bool));
+    setLoginModal(bool);
+  };
+
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -63,13 +73,7 @@ const SearchCard = ({
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
 
-  const handleWhislistCard = e => {
-    e.stopPropagation();
-    if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
-      return;
-    }
-    // dispatch(addRemoveWhishListitems(!inWishList));
+  const addToWishlist = () => {
     !inWishList
       ? addwhislistProduct()
           .then(res => {
@@ -105,6 +109,19 @@ const SearchCard = ({
           .catch(err => console.log(err));
   };
 
+  const handleWhislistCard = async e => {
+    e.stopPropagation();
+    if (!userId) {
+      const isAuthenticated = await checkAuthentication();
+      console.log(isAuthenticated, "response from isauthencate");
+      if (isAuthenticated === false) {
+        console.log("inside false");
+        toggleLoginModal(true);
+      }
+    } else addToWishlist();
+    // dispatch(addRemoveWhishListitems(!inWishList));
+  };
+
   useEffect(() => {
     setInWishList(
       categoryPageReduxData.savedProducts
@@ -115,6 +132,15 @@ const SearchCard = ({
 
   return (
     <div className={`${styles.card_wrapper} `}>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        handleChangeRoute={() => {
+          console.log("in handlechangerouteee");
+          // call this if you want to show the red heart exactly after login
+          // addToWishlist();
+        }}
+      />
       <div className="relative">
         <img
           src={cardImage}
