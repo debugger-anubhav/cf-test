@@ -67,7 +67,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
-                router.push("https://test.rentofurniture.com/logout");
+                router.push("/cityfurnish");
               }
             }}>
             {ele.item}
