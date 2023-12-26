@@ -90,7 +90,6 @@ const ProductDetails = ({params}) => {
   const [open, setOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
 
   // const [dummy,setIsDumy]=useState(false);
@@ -100,7 +99,6 @@ const ProductDetails = ({params}) => {
 
   const toggleRatingDrawer = () => {
     setOpen(!open);
-    console.log(isLogin);
   };
 
   const toggleLoginModal = bool => {
@@ -478,9 +476,6 @@ const ProductDetails = ({params}) => {
       <LoginModal
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
-        setIsLogin={bool => {
-          setIsLogin(bool);
-        }}
         handleChangeRoute={() => {
           console.log("in handlechangerouteee");
           // call this if you want to show the red heart exactly after login

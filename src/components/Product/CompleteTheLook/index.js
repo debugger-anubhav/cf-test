@@ -15,6 +15,9 @@ const CompleteTheLook = ({params}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const [isDumy, setIsDumy] = React.useState(false);
 
   const cityId = getLocalStorage("cityId");
@@ -98,7 +101,9 @@ const CompleteTheLook = ({params}) => {
           {pageData?.completeTheLook?.map((item, index) => (
             <div
               key={index}
-              onClick={e => handleCardClick(e, item)}
+              onClick={e => {
+                !reduxStateOfLoginPopup && handleCardClick(e, item);
+              }}
               className={`${styles.child ?? ""} ${
                 isDumy && "pointer-events-none"
               }`}>

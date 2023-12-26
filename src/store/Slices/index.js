@@ -27,6 +27,7 @@ export const HomepageSlice = createSlice({
     inWishList: false,
     serviceRequestType: "",
     serviceRequestDrawer: false,
+    loginPopupState: false,
   },
   reducers: {
     addWhishListProduc(state, action) {
@@ -97,6 +98,9 @@ export const HomepageSlice = createSlice({
     },
     setServiceRequestDrawer(state, action) {
       state.serviceRequestDrawer = action.payload;
+    },
+    setLoginPopupState(state, action) {
+      state.loginPopupState = action.payload;
     },
   },
 });
@@ -336,6 +340,7 @@ export const {
   addWhishListProduc,
   setServiceRequestType,
   setServiceRequestDrawer,
+  setLoginPopupState,
 } = HomepageSlice.actions;
 
 export const {

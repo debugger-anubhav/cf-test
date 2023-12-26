@@ -39,6 +39,7 @@ import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 const HEADER_HEIGHT = 48;
 
@@ -215,6 +216,12 @@ const Header = () => {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
 
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
+  );
+
   useEffect(() => {
     axios
       .post(baseURL + endPoints.sessionUserUrl, data)
@@ -230,6 +237,15 @@ const Header = () => {
             encryptBase64(res?.data?.data?.tempUserId),
           );
         }
+      })
+      .catch(err => console.log(err));
+    getSavedItems()
+      .then(res => {
+        dispatch(addSaveditems(res?.data?.data));
+        const ids = res?.data?.data.map(item => {
+          return item?.id;
+        });
+        dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
   }, []);
@@ -415,7 +431,7 @@ const Header = () => {
                 <a
                   className="cursor-pointer"
                   onClick={() => {
-                    setClick("profile");
+                    // setClick("profile");
                     if (isLogin) router.push("/usersettings");
                     else toggleLoginModal(true);
                   }}

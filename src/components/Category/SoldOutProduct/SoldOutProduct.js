@@ -45,6 +45,9 @@ export const SoldOutProduct = () => {
   const dispatch = useDispatch();
   const {productname} = useParams();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   // const homePageReduxData = useSelector(state => state.homePagedata);
 
   const outStockItemLength =
@@ -174,7 +177,10 @@ export const SoldOutProduct = () => {
                           return (
                             <div
                               key={index}
-                              onClick={e => handleCardClick(e, item)}>
+                              onClick={e => {
+                                !reduxStateOfLoginPopup &&
+                                  handleCardClick(e, item);
+                              }}>
                               <CategoryCard
                                 cardImage={`${productImageBaseUrl}${
                                   item?.image?.split(",")[0]
