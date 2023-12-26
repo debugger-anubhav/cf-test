@@ -21,12 +21,16 @@ import {useDispatch, useSelector} from "react-redux";
 import FormSkeleton from "../Common/FormSkeleton";
 import {useRouter} from "next/navigation";
 import {
+  reduxSetModalState,
   setAmountPaid,
   setPGTransactionID,
   setTransactionReferenceNumber,
 } from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 function CustomerPayment() {
+  const {checkAuthentication} = useAuthentication();
   const router = useRouter();
   const dispatch = useDispatch();
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
@@ -53,6 +57,25 @@ function CustomerPayment() {
   const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
   const [userId, setuserId] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
+  };
+
+  const validateAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+  };
+
+  useEffect(() => {
+    validateAuth();
+  }, []);
 
   const fetchAvailCoins = () => {
     axios
@@ -209,6 +232,11 @@ function CustomerPayment() {
 
   return (
     <div className={styles.wrapper}>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        handleChangeRoute={() => setIsLogin(true)}
+      />
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />
         <div className={styles.main_heading}> Pay Your Dues</div>
@@ -272,7 +300,7 @@ function CustomerPayment() {
                         }
                       />
 
-                      <a href="https://cityfurnish.com/invoices">
+                      <a href="/invoices">
                         <div className={styles.all_invoices}>
                           <p className={styles.all_invoice_text}>
                             See my all invoices
@@ -319,7 +347,7 @@ function CustomerPayment() {
                           Please enter a valid number.
                         </p>
                       )}
-                      {userId ? (
+                      {isLogin ? (
                         <div className={styles.toggleRow}>
                           {useCityfurnishCoins ? (
                             <div>
@@ -353,7 +381,10 @@ function CustomerPayment() {
                       ) : (
                         <div className={styles.login_row}>
                           <a
-                            href="https://test.rentofurniture.com/user_sign_up"
+                            onClick={() => {
+                              toggleLoginModal(true);
+                            }}
+                            // href="https://test.rentofurniture.com/user_sign_up"
                             className="text-5774AC cursor-pointer">
                             Login{" "}
                           </a>
