@@ -19,7 +19,9 @@ const EmptyCartPage = () => {
       <p className={styles.head}>Your cart is empty!</p>
 
       <p className={styles.desc}>Add items to it now.</p>
-      <button className={styles.btn} onClick={() => router.push("/")}>
+      <button
+        className={styles.btn}
+        onClick={() => router.push("/cityfurnish")}>
         Start renting <ArrowForw size={19} color={"#222"} />
       </button>
     </div>

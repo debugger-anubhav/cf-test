@@ -67,3 +67,14 @@
 .address {
   @apply mt-[6px] xl:mt-3 text-45454A text-12 xl:text-14 tracking-0.24 xl:tracking-desc xl:w-[90%];
 }
+
+/* for citymx */
+.plan_contain_txt {
+  @apply text-71717A text-14 xl:text-16 italic font-medium tracking-0.3 pl-4 mb-4;
+}
+.included_item_wrapper {
+  @apply flex pl-7 xl:pl-8 py-4 pr-0 xl:pr-4 gap-4 border-t border-DDDDDF;
+}
+.included_prod_img {
+  @apply w-[80px] h-[60px];
+}

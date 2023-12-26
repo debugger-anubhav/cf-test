@@ -55,7 +55,10 @@ function TenureExtension() {
   const getApiData = () => {
     axios
       .get(baseURL + endPoints.tenureExtension, {
-        params: {cfCareValue: isChecked ? 1 : 0, dealCodeNumber: 1398542883},
+        params: {
+          cfCareValue: isChecked ? 1 : 0,
+          dealCodeNumber: params?.orderId,
+        },
       })
       .then(res => {
         if (!isChecked) {

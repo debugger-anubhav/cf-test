@@ -210,7 +210,7 @@ const ProductDetails = ({params}) => {
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err, "err");
       });
   };
 
