@@ -23,6 +23,8 @@ export default function CommonDrawer({
   data,
   toggleEmptyCartModal,
   setCity,
+  setClick,
+  toggleLoginModal,
 }) {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
@@ -210,6 +212,14 @@ export default function CommonDrawer({
                   ) : (
                     <a
                       key={index.toString()}
+                      onClick={() => {
+                        if (isLogin) router.push("/usersettings");
+                        else {
+                          setState({...state, left: false});
+                          setClick("profile");
+                          toggleLoginModal(true);
+                        }
+                      }}
                       href={
                         // index === 3 && getLocalStorage("user_id") !== null
                         index === 3 ? isLogin && "/usersettings" : item.link

@@ -260,7 +260,12 @@ const Header = () => {
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
-            <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
+            <CommonDrawer
+              data={storeSideBarMenuLists}
+              DrawerName="menu"
+              toggleLoginModal={toggleLoginModal}
+              setClick={val => setClick(val)}
+            />
             <a
               href={"/cityfurnish"}
               onClick={e => {
