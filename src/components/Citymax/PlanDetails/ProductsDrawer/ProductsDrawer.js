@@ -15,6 +15,8 @@ const ProductsDrawer = ({
   roomId,
   headType,
   swapProductDetails,
+  toggleLoginModal,
+  toggleDrawer,
 }) => {
   const [selectedIndexes, setSelectedIndexes] = useState(Array(4).fill(0));
   const [productsArr, setProductsArr] = useState();
@@ -85,6 +87,8 @@ const ProductsDrawer = ({
                 quantity={item.city_quantity}
                 selectedIndexes={selectedIndexes}
                 handleAddItem={handleAddItem}
+                toggleLoginModal={toggleLoginModal}
+                toggleDrawer={toggleDrawer}
               />
             </div>
             {mainIndex < length - 1 && (
@@ -117,6 +121,8 @@ const ProductsDrawer = ({
                       quantity={item.city_quantity}
                       selectedIndexes={selectedIndexes}
                       handleAddItem={handleAddItem}
+                      toggleDrawer={toggleDrawer}
+                      toggleLoginModal={toggleLoginModal}
                     />
                   </div>
                   {mainIndex < length - 1 && (

@@ -5,12 +5,12 @@ import {Carousel} from "react-responsive-carousel";
 import styles from "./styles.module.css";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useDispatch, useSelector} from "react-redux";
-import {useRouter} from "next/navigation";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
 import {useMutation} from "@/hooks/useMutation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const ProductCard = ({
   handleThumbnailClick,
@@ -18,12 +18,13 @@ const ProductCard = ({
   mainIndex,
   item,
   isSavedComp,
-  // productID = 4323,
   handleAddItem,
   quantity,
+  toggleLoginModal,
+  toggleDrawer,
 }) => {
+  const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
-  const router = useRouter();
   const [inWishList, setInWishList] = useState(isSavedComp || false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const updateCount = useRef(0);
@@ -59,49 +60,53 @@ const ProductCard = ({
     `?cityId=${cityId}&userId=${userId}`,
   );
 
-  const handleWhislistCard = e => {
+  const handleWhislistCard = async e => {
     e.stopPropagation();
-    if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
-      return;
-    }
-    !inWishList
-      ? addwhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                showToastNotification("Item added to the wishlist", 1);
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-              })
-              .catch(err => console.log(err));
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === false) {
+      console.log("inside false");
+      toggleDrawer();
+      toggleLoginModal(true);
+    } else {
+      !inWishList
+        ? addwhislistProduct()
+            .then(res => {
+              getSavedItems()
+                .then(res => {
+                  dispatch(addSaveditems(res?.data?.data));
+                  showToastNotification("Item added to the wishlist", 1);
+                  const ids = res?.data?.data.map(item => {
+                    return item?.id;
+                  });
+                  dispatch(addSaveditemID(ids));
+                })
+                .catch(err => console.log(err));
 
-            if (!isSavedComp) {
-              setInWishList(prev => !prev);
-            }
-          })
-          .catch(err => console.log(err))
-      : removewhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                showToastNotification("Item removed from the wishlist", 2);
-                // addSaveditemID
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-              })
-              .catch(err => console.log(err));
-            if (!isSavedComp) {
-              setInWishList(prev => !prev);
-            }
-          })
-          .catch(err => console.log(err));
+              if (!isSavedComp) {
+                setInWishList(prev => !prev);
+              }
+            })
+            .catch(err => console.log(err))
+        : removewhislistProduct()
+            .then(res => {
+              getSavedItems()
+                .then(res => {
+                  dispatch(addSaveditems(res?.data?.data));
+                  showToastNotification("Item removed from the wishlist", 2);
+                  // addSaveditemID
+                  const ids = res?.data?.data.map(item => {
+                    return item?.id;
+                  });
+                  dispatch(addSaveditemID(ids));
+                })
+                .catch(err => console.log(err));
+              if (!isSavedComp) {
+                setInWishList(prev => !prev);
+              }
+            })
+            .catch(err => console.log(err));
+    }
   };
 
   useEffect(() => {

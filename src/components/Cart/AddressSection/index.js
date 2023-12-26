@@ -209,6 +209,7 @@ const AddressSection = () => {
             razorpayOrderId: response.razorpay_order_id,
             razCustomerId: userDetails.customerId,
             razorpaySignature: response.razorpay_signature,
+            cfCoins: billBreakup?.coinsUsed,
           };
 
           const result = await axios.post(
