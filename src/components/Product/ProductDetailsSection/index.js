@@ -49,6 +49,7 @@ import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const ProductDetails = ({params}) => {
+  const {checkAuthentication} = useAuthentication();
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
@@ -90,7 +91,6 @@ const ProductDetails = ({params}) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const {checkAuthentication} = useAuthentication();
   const [loginModal, setLoginModal] = useState(false);
 
   // const [dummy,setIsDumy]=useState(false);
@@ -100,71 +100,12 @@ const ProductDetails = ({params}) => {
 
   const toggleRatingDrawer = () => {
     setOpen(!open);
+    console.log(isLogin);
   };
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
-  };
-
-  const addWishlistItem = () => {
-    addwhislistProduct()
-      .then(res => {
-        getSavedItems()
-          .then(res => {
-            dispatch(addSaveditems(res?.data?.data));
-            // addSaveditemID
-            const ids = res?.data?.data.map(item => {
-              return item?.id;
-            });
-            dispatch(addSaveditemID(ids));
-            showToastNotification("Item added to the wishlist", 1);
-          })
-          .catch(err => console.log(err));
-        setInWishList(prev => !prev);
-      })
-      .catch(err => console.log(err));
-  };
-  const validateAuth = async () => {
-    const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
-
-    // if (isAuthenticated === true) {
-    //   setIsLogin(true);
-    // } else setIsLogin(false);
-
-    if (isAuthenticated) {
-      console.log("come in is login", isLogin);
-      // if (!userId) {
-      //   router.push("https://test.rentofurniture.com/user_sign_up");
-      //   return;
-      // }
-      setIsLogin(true);
-      !categoryPageReduxData.savedProducts
-        .map(obj => obj.id)
-        .includes(parseInt(params.productId))
-        ? addWishlistItem()
-        : removewhislistProduct()
-            .then(res => {
-              getSavedItems()
-                .then(res => {
-                  dispatch(addSaveditems(res?.data?.data));
-                  // addSaveditemID
-                  const ids = res?.data?.data.map(item => {
-                    return item?.id;
-                  });
-                  dispatch(addSaveditemID(ids));
-                  showToastNotification("Item removed from the wishlist", 2);
-                })
-                .catch(err => console.log(err));
-              setInWishList(prev => !prev);
-            })
-            .catch(err => console.log(err));
-    } else {
-      setIsLogin(false);
-      toggleLoginModal(true);
-      console.log("come in is not logging");
-    }
   };
 
   // bottombar visibility conditiionally
@@ -271,22 +212,75 @@ const ProductDetails = ({params}) => {
   useEffect(() => {
     console.log(inWishList, "inWishlist");
   }, [inWishList]);
-
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
+  // const userId = getLocalStorageString("user_id");
+  // const userId = decrypt(getLocalStorage("_ga"));
 
-  const handleWhislistCard = e => {
+  const addToWishlist = () => {
+    // dispatch(addRemoveWhishListitems(!inWishList));
+    !categoryPageReduxData.savedProducts
+      .map(obj => obj.id)
+      .includes(parseInt(params.productId))
+      ? addwhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                console.log("in res of gertsaved");
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+                console.log(res?.data?.data, "res?.data?.data");
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                console.log(ids, "isdddss");
+                dispatch(addSaveditemID(ids));
+                showToastNotification("Item added to the wishlist", 1);
+              })
+              .catch(err => console.log(err));
+            setInWishList(true);
+          })
+          .catch(err => console.log(err))
+      : removewhislistProduct()
+          .then(res => {
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                // addSaveditemID
+
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                console.log(ids, "isdddss");
+                dispatch(addSaveditemID(ids));
+                showToastNotification("Item removed from the wishlist", 2);
+              })
+              .catch(err => console.log(err));
+            setInWishList(false);
+          })
+          .catch(err => console.log(err));
+  };
+
+  const handleWhislistCard = async e => {
     e.stopPropagation();
-    validateAuth();
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === false) {
+      console.log("inside false");
+      toggleLoginModal(true);
+    }
+    // if (!userId) {
+    //   router.push("https://test.rentofurniture.com/user_sign_up");
+    //   return;
+    // }
+    else addToWishlist();
   };
 
   const data = {
-    tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
-    userId: decrypt(getLocalStorage("_ga")) ?? "",
-
+    userId: decrypt(getLocalStorage("_ga")),
     productId: params?.productId,
   };
 
@@ -300,10 +294,7 @@ const ProductDetails = ({params}) => {
   const {refetch: getSavedItems} = useQuery(
     "saved-items",
     endPoints.savedItems,
-    `?cityId=${cityId}&userId=${
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
-    }`,
+    `?cityId=${cityId}&userId=${decrypt(getLocalStorage("_ga"))}`,
   );
   const {mutateAsync: removewhislistProduct} = useMutation(
     "remove-wishlist",
@@ -471,20 +462,30 @@ const ProductDetails = ({params}) => {
     setIsScrolling(false);
   };
 
+  console.log(
+    categoryPageReduxData.savedProducts,
+    "categoryPageReduxData.savedProducts",
+  );
+
   return (
     <div className={styles.main_container}>
+      <ShareModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+        params={params}
+        title={prodDetails?.[0]?.product_name}
+      />
       <LoginModal
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
         setIsLogin={bool => {
           setIsLogin(bool);
         }}
-      />
-      <ShareModal
-        isModalOpen={isModalOpen}
-        closeModal={closeModal}
-        params={params}
-        title={prodDetails?.[0]?.product_name}
+        handleChangeRoute={() => {
+          console.log("in handlechangerouteee");
+          // call this if you want to show the red heart exactly after login
+          // addToWishlist();
+        }}
       />
 
       {showBottomBar && (
@@ -503,6 +504,7 @@ const ProductDetails = ({params}) => {
           // handleNotSameTenure={handleNotSameTenure}
         />
       )}
+
       <div className={styles.bread_crumps}>
         {arr?.map((item, index) => (
           <div key={index} className="flex gap-2">

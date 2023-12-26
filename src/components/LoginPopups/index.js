@@ -138,7 +138,7 @@ const LoginModal = ({
               else {
                 console.log("innnn");
                 closeModal();
-                handleChangeRoute();
+                handleChangeRoute && handleChangeRoute();
                 // dispatch(setShoppingCartTab(1));
               }
               showToastNotification("Login successfully", 1);

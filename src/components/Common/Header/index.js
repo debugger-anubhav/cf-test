@@ -77,6 +77,10 @@ const Header = () => {
   const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
   const [cityForModal, setCityForModal] = useState();
 
+  useEffect(() => {
+    console.log(categoryPageReduxData, "categoryPageReduxData");
+  }, [categoryPageReduxData]);
+
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
@@ -201,7 +205,9 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+  useEffect(() => {
+    console.log(categoryPageReduxData?.savedProducts?.length);
+  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",
@@ -260,7 +266,12 @@ const Header = () => {
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
-            <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
+            <CommonDrawer
+              data={storeSideBarMenuLists}
+              DrawerName="menu"
+              toggleLoginModal={toggleLoginModal}
+              setClick={val => setClick(val)}
+            />
             <a
               href={"/cityfurnish"}
               onClick={e => {

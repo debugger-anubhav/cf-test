@@ -50,14 +50,40 @@ const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
 
   const dispatch = useDispatch();
+  const router = useRouter();
   const data = useSelector(state => state.cartPageData);
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const cartItems = data.cartItems;
   const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
+  const modeOfPayment = getLocalStorage("isMonthly");
 
   const [arr, setArr] = useState(cartItems);
   const [userDetails, setUserDetails] = useState();
+  const [isChecked, setIsChecked] = useState(data.isCityShield);
+  const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
+  const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
+  const [breakupDrawer, setBreakupDrawer] = useState(false);
+  const [isCouponApplied, setIsCouponApplied] = useState(
+    data.couponCodeUsed !== "",
+  );
+  const [isCoinApplied, setIsCoinApplied] = useState(data.isCoinApplied);
+  const [availCoin, setAvailCoin] = useState(0);
+  const [isMonthly, setIsMonthly] = useState(
+    modeOfPayment === null ? true : modeOfPayment,
+  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loginModal, setLoginModal] = useState(false);
+  const [code, setCode] = useState(data.couponCodeUsed);
+  const [productId, setProductId] = useState();
+  const [itemId, setItemId] = useState();
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const [isSetupProfile, setIsSetupProfile] = useState(false);
+
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = isLogin ? userId : tempUserId;
 
   // console.log(userDetails, "userDetails");
   useEffect(() => {
@@ -65,12 +91,6 @@ const ShoppingCartSection = () => {
   }, [cartItems]);
 
   const count = cartItems.length;
-  const router = useRouter();
-
-  const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = userId || tempUserId;
-
   const cityId = getLocalStorage("cityId");
 
   const totalAmount = arr.reduce((accumulator, item) => {
@@ -98,28 +118,6 @@ const ShoppingCartSection = () => {
     "Faster KYC",
     "No Security Deposit",
   ];
-  const modeOfPayment = getLocalStorage("isMonthly");
-
-  const [isChecked, setIsChecked] = useState(data.isCityShield);
-  const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
-  const [couponDrawerOpen, setCouponDrawerOpen] = useState(false);
-  const [breakupDrawer, setBreakupDrawer] = useState(false);
-  const [isCouponApplied, setIsCouponApplied] = useState(
-    data.couponCodeUsed !== "",
-  );
-  const [isCoinApplied, setIsCoinApplied] = useState(data.isCoinApplied);
-  const [availCoin, setAvailCoin] = useState(0);
-  const [isMonthly, setIsMonthly] = useState(
-    modeOfPayment === null ? true : modeOfPayment,
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
-  const [code, setCode] = useState(data.couponCodeUsed);
-  const [productId, setProductId] = useState();
-  const [itemId, setItemId] = useState();
-  const [openDropdown, setOpenDropdown] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
-  const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   // const [itemQuantity, setItemQuantity] = useState(1);
 
@@ -282,7 +280,6 @@ const ShoppingCartSection = () => {
 
   useEffect(() => {
     validateAuth();
-    console.log("innnn cookiessss");
   }, []);
 
   const handleChangeRoute = () => {

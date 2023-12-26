@@ -85,25 +85,45 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
                 </div>
                 <div className="w-full">
                   <p className={styles.prod_name}>{item.product_name}</p>
-                  <div className={styles.tenure_div}>
-                    <p className={styles.tenure}>
-                      Tenure: {item.subproduct_attr_name}
-                    </p>
-                    {isDelivered && (
-                      <p
-                        onClick={toggleReviewDrawer}
-                        className={`${styles.review} ${styles.view_breakup_txt}`}>
-                        Write Review
+
+                  {isOfflineInvoice ? (
+                    <div>
+                      <p className={styles.tenure}>
+                        Quantity: <span className={styles.rupeeIcon}>₹</span>
+                        {item?.quantity}
                       </p>
-                    )}
-                  </div>
+                      <p className={styles.tenure}>
+                        Refundable deposit:{" "}
+                        <span className={styles.rupeeIcon}>₹</span>
+                        {item?.product_shipping_cost}
+                      </p>
+                      <p className={styles.tenure}>
+                        Monthly Rent:{" "}
+                        <span className={styles.rupeeIcon}>₹</span>
+                        {item?.price}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className={styles.tenure_div}>
+                      <p className={styles.tenure}>
+                        Tenure: {item.subproduct_attr_name}
+                      </p>
+                      {isDelivered && (
+                        <p
+                          onClick={toggleReviewDrawer}
+                          className={`${styles.review} ${styles.view_breakup_txt}`}>
+                          Write Review
+                        </p>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
 
               {item?.includedProducts && (
                 <>
                   <p className={styles.plan_contain_txt}>
-                    This plan contains 4 items
+                    This plan contains {item?.includedProducts?.length} items
                   </p>
                   {item?.includedProducts?.map((p, i) => (
                     <div key={i} className={styles.included_item_wrapper}>

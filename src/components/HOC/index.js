@@ -1,24 +1,30 @@
 import React, {useState, useEffect} from "react";
-import {getLocalStorage} from "@/constants/constant";
+// import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 export function AuthProvider(WrappedComponent) {
   return props => {
+    const {checkAuthentication} = useAuthentication();
     const router = useRouter();
-    const login = getLocalStorage("_ga");
+    // const login = getLocalStorage("_ga");
     const [isAuthenticated, setisAuthenticated] = useState(null);
 
-    useEffect(() => {
-      if (login) {
+    const validateAuth = async () => {
+      const isAuthenticated = await checkAuthentication();
+      console.log(isAuthenticated, "response from isauthencate");
+      if (isAuthenticated === true) {
         setisAuthenticated(true);
-      } else {
-        setisAuthenticated(false);
-      }
-    }, [login]);
+      } else setisAuthenticated(false);
+    };
 
     useEffect(() => {
-      if (!isAuthenticated && !login) {
-        router.push("https://test.rentofurniture.com/user_sign_up");
+      validateAuth();
+    }, []);
+
+    useEffect(() => {
+      if (!isAuthenticated) {
+        router.push("/");
       }
     }, [isAuthenticated]);
 
