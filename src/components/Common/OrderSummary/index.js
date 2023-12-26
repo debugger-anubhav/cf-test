@@ -1,6 +1,10 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
-import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
+import {
+  getLocalStorage,
+  productImageBaseUrl,
+  productPageImagesBaseUrl,
+} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -66,33 +70,77 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
 
         <div>
           {data?.productsList?.map((item, index) => (
-            <div className={styles.single_order_wrapper} key={index}>
-              <div className={styles.img_wrapper}>
-                <img
-                  className="w-full h-full"
-                  src={`${
-                    productPageImagesBaseUrl +
-                    "thumb/" +
-                    item?.product_image?.split(",")[0]
-                  }`}
-                />
-                <div className={styles.quantity_label}>{item?.quantity}x</div>
-              </div>
-              <div className="w-full">
-                <p className={styles.prod_name}>{item.product_name}</p>
-                <div className={styles.tenure_div}>
-                  <p className={styles.tenure}>
-                    Tenure: {item.subproduct_attr_name}
-                  </p>
-                  {isDelivered && (
-                    <p
-                      onClick={toggleReviewDrawer}
-                      className={`${styles.review} ${styles.view_breakup_txt}`}>
-                      Write Review
-                    </p>
+            <div key={index}>
+              <div className={styles.single_order_wrapper}>
+                <div className={styles.img_wrapper}>
+                  <img
+                    className="w-full h-full"
+                    src={`${
+                      productPageImagesBaseUrl +
+                      "thumb/" +
+                      item?.product_image?.split(",")[0]
+                    }`}
+                  />
+                  <div className={styles.quantity_label}>{item?.quantity}x</div>
+                </div>
+                <div className="w-full">
+                  <p className={styles.prod_name}>{item.product_name}</p>
+
+                  {isOfflineInvoice ? (
+                    <div>
+                      <p className={styles.tenure}>
+                        Quantity: <span className={styles.rupeeIcon}>₹</span>
+                        {item?.quantity}
+                      </p>
+                      <p className={styles.tenure}>
+                        Refundable deposit:{" "}
+                        <span className={styles.rupeeIcon}>₹</span>
+                        {item?.product_shipping_cost}
+                      </p>
+                      <p className={styles.tenure}>
+                        Monthly Rent:{" "}
+                        <span className={styles.rupeeIcon}>₹</span>
+                        {item?.price}
+                      </p>
+                    </div>
+                  ) : (
+                    <div className={styles.tenure_div}>
+                      <p className={styles.tenure}>
+                        Tenure: {item.subproduct_attr_name}
+                      </p>
+                      {isDelivered && (
+                        <p
+                          onClick={toggleReviewDrawer}
+                          className={`${styles.review} ${styles.view_breakup_txt}`}>
+                          Write Review
+                        </p>
+                      )}
+                    </div>
                   )}
                 </div>
               </div>
+
+              {item?.includedProducts && (
+                <>
+                  <p className={styles.plan_contain_txt}>
+                    This plan contains {item?.includedProducts?.length} items
+                  </p>
+                  {item?.includedProducts?.map((p, i) => (
+                    <div key={i} className={styles.included_item_wrapper}>
+                      <img
+                        className={styles.included_prod_img}
+                        src={
+                          productImageBaseUrl +
+                          p?.fc_product?.image?.split(",")?.[0]
+                        }
+                      />
+                      <p className={styles.prod_name}>
+                        {p?.fc_product?.product_name}
+                      </p>
+                    </div>
+                  ))}
+                </>
+              )}
               {reviewDrawer && (
                 <ReviewDrawer
                   toggleDrawer={toggleReviewDrawer}

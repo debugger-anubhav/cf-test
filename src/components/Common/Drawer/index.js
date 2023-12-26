@@ -15,18 +15,33 @@ import {
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
-export default function CommonDrawer({DrawerName, Cities, data}) {
+export default function CommonDrawer({
+  DrawerName,
+  Cities,
+  data,
+  toggleEmptyCartModal,
+  setCity,
+  setClick,
+  toggleLoginModal,
+}) {
+  const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState();
+
   const params = useParams();
   const router = useRouter();
 
@@ -62,6 +77,16 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
 
   const cityId = getLocalStorage("cityId");
 
+  const handleAuthentication = async () => {
+    const isAuth = await checkAuthentication();
+    console.log(isAuth, "isAuth");
+    setIsLogin(isAuth);
+  };
+
+  React.useEffect(() => {
+    handleAuthentication();
+  }, []);
+
   const handleMenu = (e, item) => {
     // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     let previousSubCategory;
@@ -92,7 +117,21 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );toggleDrawe
   };
-  const userId = decrypt(getLocalStorage("_ga"));
+  // const userId = decrypt(getLocalStorage("_ga"));
+
+  const handleCityChange = (city, index) => {
+    dispatch(selectedCityId(city?.id));
+    dispatch(selectedCityName(city?.list_value));
+    toggleDrawer("bottom", false);
+    if (typeof window !== "undefined") {
+      setLocalStorage("cityId", city?.id);
+    }
+    const newUrl = window?.location.pathname.split("/");
+    newUrl[1] = city.list_value.replace(/\//g, "-").toLowerCase();
+    const p = newUrl.join("/");
+    params.city ? router.push(p) : window?.location.reload();
+  };
+
   const list = anchor =>
     DrawerName === "menu" ? (
       <div
@@ -173,13 +212,17 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   ) : (
                     <a
                       key={index.toString()}
+                      onClick={() => {
+                        if (isLogin) router.push("/usersettings");
+                        else {
+                          setState({...state, left: false});
+                          setClick("profile");
+                          toggleLoginModal(true);
+                        }
+                      }}
                       href={
                         // index === 3 && getLocalStorage("user_id") !== null
-                        index === 3
-                          ? userId
-                            ? "/usersettings"
-                            : "https://test.rentofurniture.com/user_sign_up"
-                          : item.link
+                        index === 3 ? isLogin && "/usersettings" : item.link
                       }>
                       <p className={styles.menu_item}>{item?.item}</p>
                     </a>
@@ -240,18 +283,14 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                   `}
                   key={index.toString()}
                   onClick={() => {
-                    dispatch(selectedCityId(city?.id));
-                    dispatch(selectedCityName(city?.list_value));
-                    toggleDrawer("bottom", false);
-                    if (typeof window !== "undefined") {
-                      setLocalStorage("cityId", city?.id);
+                    if (cartItemsLength < 1) handleCityChange(city, index);
+                    else {
+                      console.log("elsee");
+                      // toggleDrawer("bottom", false);
+                      setState({...state, left: false});
+                      setCity(city);
+                      toggleEmptyCartModal(true);
                     }
-                    const newUrl = window?.location.pathname.split("/");
-                    newUrl[1] = city.list_value
-                      .replace(/\//g, "-")
-                      .toLowerCase();
-                    const p = newUrl.join("/");
-                    params.city ? router.push(p) : window?.location.reload();
                   }}>
                   <img
                     src={cityUrl + city?.list_value_seourl + ".webp"}
@@ -267,8 +306,6 @@ export default function CommonDrawer({DrawerName, Cities, data}) {
                       {city?.list_value.split("/")[0]}/
                       <br className="flex sm:hidden" />
                       {city?.list_value.split("/")[1]}
-                      {/* {city?.list_value} */}
-                      {/* {city?.id} */}
                     </div>
                   ) : (
                     <p

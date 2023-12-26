@@ -5,6 +5,7 @@ import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MyOrders from "@/components/MyOrders";
+import {AuthProvider} from "@/components/HOC/index";
 
 const index = () => {
   return (
@@ -18,4 +19,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default AuthProvider(index);

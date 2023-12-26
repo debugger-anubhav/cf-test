@@ -24,13 +24,15 @@ import {
   reduxSetModalState,
   setIsHalfYearlyState,
 } from "@/store/Slices";
-import {decrypt} from "@/hooks/cryptoUtils";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const CitymaxPlanDetail = () => {
+  const {checkAuthentication} = useAuthentication();
   const router = useRouter();
   const params = useParams();
-  const userId = decrypt(getLocalStorage("_ga"));
   const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
@@ -58,6 +60,23 @@ const CitymaxPlanDetail = () => {
   const [selectedItemsArr, setSelectedItemsArr] = useState();
   const [additionalChargeItems, setAdditionalChargeItems] = useState();
   const [totalAdditionalAmount, setTotalAdditionalAmount] = useState();
+  const [loginModal, setLoginModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  const userIdToUse = isLogin ? userId : tempUserId;
+
+  const validateAuth = async () => {
+    const isValid = await checkAuthentication();
+    if (isValid === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+  };
+
+  useEffect(() => {
+    validateAuth();
+  }, []);
 
   const toggleDrawer = type => {
     setDrawerType(type);
@@ -67,6 +86,11 @@ const CitymaxPlanDetail = () => {
   const toggleModal = () => {
     setOpenModal(!openModal);
     dispatch(reduxSetModalState(!modalStateFromRedux));
+  };
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
   };
 
   const isItemInCart = cartItems?.some(item => {
@@ -80,7 +104,7 @@ const CitymaxPlanDetail = () => {
           endPoints.cityMaxPage.getRoomData(
             params.planId,
             params.tenure,
-            userId,
+            userIdToUse,
           ),
       )
       .then(res => {
@@ -241,7 +265,7 @@ const CitymaxPlanDetail = () => {
       },
       attr_name_id: 38585,
       attribute_values: data?.PrdAttrArr?.[isHalfYearly ? "6" : "12"]?.pid,
-      user_id: userId,
+      user_id: userIdToUse,
     };
     axios
       .post(baseURL + endPoints.cityMaxPage.sentProductsToCart, body)
@@ -259,7 +283,7 @@ const CitymaxPlanDetail = () => {
 
     const body = {
       mqty: 1,
-      userId: parseInt(userId),
+      userId: parseInt(userIdToUse),
       sellId: data?.productDetails[0]?.sellerid,
       price: data?.PrdAttrArr?.[isHalfYearly ? "6" : "12"]?.price,
       categoryId: data?.productDetails[0]?.category_id,
@@ -354,6 +378,10 @@ const CitymaxPlanDetail = () => {
 
   return (
     <div className={styles.main}>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+      />
       <div
         className={styles.header_wrapper}
         onClick={() => router.push(`/citymax`)}>
@@ -521,6 +549,7 @@ const CitymaxPlanDetail = () => {
             roomId={roomId}
             headType={headType}
             swapProductDetails={swapProductDetails}
+            toggleLoginModal={toggleLoginModal}
           />
         )}
 

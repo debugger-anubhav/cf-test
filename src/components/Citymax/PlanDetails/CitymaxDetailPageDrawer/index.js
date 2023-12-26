@@ -14,6 +14,7 @@ const CitymaxDetailPageDrawer = ({
   slotId,
   roomId,
   swapProductDetails,
+  toggleLoginModal,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
@@ -52,6 +53,8 @@ const CitymaxDetailPageDrawer = ({
               roomId={roomId}
               headType={headType}
               swapProductDetails={swapProductDetails}
+              toggleLoginModal={toggleLoginModal}
+              toggleDrawer={toggleDrawer}
             />
           ) : (
             <ChangePlanDrawer />

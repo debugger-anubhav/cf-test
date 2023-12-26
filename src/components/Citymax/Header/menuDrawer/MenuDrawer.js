@@ -14,7 +14,7 @@ import axios from "axios";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {useSelector} from "react-redux";
 
-const MenuDrawer = ({toggleDrawer, open, toggleLoginModal}) => {
+const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
   const {checkAuthentication} = useAuthentication();
   const router = useRouter();
   // const dispatch = useDispatch();
@@ -134,6 +134,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal}) => {
                     if (isLogin) router.push("/usersettings");
                     else {
                       toggleDrawer();
+                      setClick("profile");
                       toggleLoginModal(true);
                     }
                   }}

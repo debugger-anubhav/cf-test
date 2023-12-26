@@ -38,6 +38,7 @@ import {useIsOnMobile} from "@/hooks/useIsOnMobile";
 import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
 
 const HEADER_HEIGHT = 48;
 
@@ -72,10 +73,23 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
+  const [emptyModal, setEmptyModal] = useState(false);
+  const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
+  const [cityForModal, setCityForModal] = useState();
+
+  useEffect(() => {
+    console.log(categoryPageReduxData, "categoryPageReduxData");
+  }, [categoryPageReduxData]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
+  };
+
+  const toggleEmptyCartModal = bool => {
+    console.log("inn");
+    dispatch(reduxSetModalState(bool));
+    setEmptyModal(bool);
   };
 
   const cityId = getLocalStorage("cityId");
@@ -135,12 +149,12 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  const userId = decrypt(getLocalStorage("_ga"))
-    ? decrypt(getLocalStorage("_ga"))
-    : getLocalStorage("user_id");
+  // const userId = decrypt(getLocalStorage("_ga"))
+  //   ? decrypt(getLocalStorage("_ga"))
+  //   : getLocalStorage("user_id");
 
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = userId || tempUserId;
+  // const userIdToUse = userId || tempUserId;
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
@@ -149,11 +163,12 @@ const Header = () => {
       setIsLogin(true);
     } else setIsLogin(false);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
+    setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
   };
 
   // added for cart icons
-  const fetchCartItems = () => {
+  const fetchCartItems = userIdToUse => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
@@ -190,7 +205,9 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+  useEffect(() => {
+    console.log(categoryPageReduxData?.savedProducts?.length);
+  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",
@@ -240,10 +257,21 @@ const Header = () => {
           else if (click === "wishlist") router.push(`/wishlist`);
         }}
       />
+      <EmptyCartModal
+        isModalOpen={emptyModal}
+        closeModal={() => toggleEmptyCartModal(false)}
+        userId={userId}
+        city={cityForModal}
+      />
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
-            <CommonDrawer data={storeSideBarMenuLists} DrawerName="menu" />
+            <CommonDrawer
+              data={storeSideBarMenuLists}
+              DrawerName="menu"
+              toggleLoginModal={toggleLoginModal}
+              setClick={val => setClick(val)}
+            />
             <a
               href={"/cityfurnish"}
               onClick={e => {
@@ -257,7 +285,12 @@ const Header = () => {
             </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
-                <CommonDrawer Cities={storeCityList} DrawerName="cities" />
+                <CommonDrawer
+                  Cities={storeCityList}
+                  DrawerName="cities"
+                  toggleEmptyCartModal={toggleEmptyCartModal}
+                  setCity={val => setCityForModal(val)}
+                />
               </div>
             </div>
           </div>

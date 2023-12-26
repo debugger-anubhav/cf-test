@@ -34,9 +34,9 @@ import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
 import {IconLink} from "../../../assets/icon";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
-import {useCookies} from "react-cookie";
+import LoginModal from "@/components/LoginPopups";
+import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 const CitymaxHeader = ({zIndex}) => {
   const {checkAuthentication} = useAuthentication();
@@ -61,15 +61,20 @@ const CitymaxHeader = ({zIndex}) => {
 
   const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  console.log(categoryPageReduxData, "categoryPageReduxData");
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   // const [profileIconLink, setProfileIconLink] = useState();
   // const [heartIconLink, setHeartIconLink] = useState();
   const [menuDrawer, setMenuDrawer] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [cookies] = useCookies(["authToken"]);
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
+
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+
+  useEffect(() => {
+    console.log(categoryPageReduxData, "categoryPageReduxData");
+  }, [categoryPageReduxData]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -81,7 +86,11 @@ const CitymaxHeader = ({zIndex}) => {
     setLocalStorage("cityId", 46);
   }
 
-  // Example of using decryption
+  const {refetch: getSavedItems} = useQuery(
+    "saved-items",
+    endPoints.savedItems,
+    `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
+  );
 
   useEffect(() => {
     const cityId = getLocalStorage("cityId") || 46;
@@ -118,14 +127,20 @@ const CitymaxHeader = ({zIndex}) => {
           dispatch(addCategory([]));
         });
     }
+    getSavedItems()
+      .then(res => {
+        dispatch(addSaveditems(res?.data?.data));
+        const ids = res?.data?.data.map(item => {
+          return item?.id;
+        });
+        dispatch(addSaveditemID(ids));
+      })
+      .catch(err => console.log(err));
   }, []);
 
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,
   );
-
-  const userId = decrypt(getLocalStorage("_ga"));
-  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
@@ -152,7 +167,7 @@ const CitymaxHeader = ({zIndex}) => {
 
   useEffect(() => {
     validateAuth();
-  }, [cookies]);
+  }, []);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -168,7 +183,9 @@ const CitymaxHeader = ({zIndex}) => {
     };
   }, []);
 
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+  useEffect(() => {
+    console.log(categoryPageReduxData?.savedProducts?.length, "guyywhuhui");
+  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",
@@ -222,6 +239,7 @@ const CitymaxHeader = ({zIndex}) => {
           else if (click === "wishlist") router.push(`/wishlist`);
         }}
       />
+
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
@@ -232,7 +250,8 @@ const CitymaxHeader = ({zIndex}) => {
               <MenuDrawer
                 open={menuDrawer}
                 toggleDrawer={toggleDrawer}
-                toggleLoginModal={toggleLoginModal}
+                toggleLoginModal={val => toggleLoginModal(val)}
+                setClick={val => setClick(val)}
               />
             )}
 

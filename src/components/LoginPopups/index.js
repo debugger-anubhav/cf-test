@@ -25,7 +25,7 @@ const LoginModal = ({
   handleChangeRoute,
   isSetupProfile,
 }) => {
-  const [setCookie] = useCookies(["authToken"]);
+  const [cookies, setCookie] = useCookies(["authToken"]);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
   const [contact, setContact] = useState();
@@ -132,12 +132,13 @@ const LoginModal = ({
               setLocalStorage("_ga", encryptedData);
               console.log(response.data.data.access_token, "kwkqwo");
               setCookie("authToken", response?.data?.data?.access_token);
+              console.log(cookies, "cookies");
 
               if (isCheckoutPage) setModalCategory("setUpAccount");
               else {
                 console.log("innnn");
                 closeModal();
-                handleChangeRoute();
+                handleChangeRoute && handleChangeRoute();
                 // dispatch(setShoppingCartTab(1));
               }
               showToastNotification("Login successfully", 1);
