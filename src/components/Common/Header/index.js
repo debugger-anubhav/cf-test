@@ -77,6 +77,10 @@ const Header = () => {
   const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
   const [cityForModal, setCityForModal] = useState();
 
+  useEffect(() => {
+    console.log(categoryPageReduxData, "categoryPageReduxData");
+  }, [categoryPageReduxData]);
+
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
@@ -201,7 +205,9 @@ const Header = () => {
     };
   }, []);
 
-  useEffect(() => {}, [categoryPageReduxData?.savedProducts?.length]);
+  useEffect(() => {
+    console.log(categoryPageReduxData?.savedProducts?.length);
+  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",
