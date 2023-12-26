@@ -124,7 +124,7 @@ const LoginModal = ({
           console.log(response);
           if (response?.data?.status_code === 200) {
             if (response?.data?.message === "login_success") {
-              if (isCheckoutPage) setIsLogin(true);
+              setIsLogin && setIsLogin(true);
               setUserId(response?.data?.data?.id);
               const encryptedData = encrypt(
                 response?.data?.data?.id.toString(),
