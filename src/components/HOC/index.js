@@ -24,7 +24,7 @@ export function AuthProvider(WrappedComponent) {
 
     useEffect(() => {
       if (!isAuthenticated) {
-        router.push("/");
+        router.push("/cityfurnish");
       }
     }, [isAuthenticated]);
 
