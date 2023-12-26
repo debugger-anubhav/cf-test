@@ -15,6 +15,9 @@ const RecentlyViewedProduct = ({page}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const [isDumy, setIsDumy] = React.useState(false);
   let cityIdStr;
 
@@ -110,7 +113,9 @@ const RecentlyViewedProduct = ({page}) => {
                   {(item?.image || item?.price) && (
                     <div
                       key={index.toString()}
-                      onClick={e => handleCardClick(e, item)}
+                      onClick={e => {
+                        !reduxStateOfLoginPopup && handleCardClick(e, item);
+                      }}
                       className={`${styles.child ?? ""}  ${
                         index ===
                           homePageReduxData?.recentProduct?.length - 1 &&

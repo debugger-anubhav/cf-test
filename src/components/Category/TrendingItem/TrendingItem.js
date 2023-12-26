@@ -14,6 +14,9 @@ const TrendingItem = () => {
   const [isDumy, setIsDumy] = React.useState(false);
   // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const sliderRef = useRef(null);
 
   const cityIdStr = localStorage
@@ -92,7 +95,9 @@ const TrendingItem = () => {
             key={index.toString()}
             className={`${styles.child}flex flex-wrap mr-4 mb-4
             `}
-            onClick={e => handleCardClick(e, item)}>
+            onClick={e => {
+              !reduxStateOfLoginPopup && handleCardClick(e, item);
+            }}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={

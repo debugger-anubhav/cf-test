@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
@@ -11,6 +11,9 @@ import {useQuery} from "@/hooks/useQuery";
 import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
+import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import LoginModal from "@/components/LoginPopups";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -24,11 +27,15 @@ const CategoryCard = ({
   subProduct,
   label,
 }) => {
+  const {checkAuthentication} = useAuthentication();
   const [hoverCard, setHoverCard] = React.useState(false);
   const [inWishList, setInWishList] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const [isDumy, setIsDumy] = React.useState(false);
-
+  const [loginModal, setLoginModal] = useState(false);
   const dispatch = useDispatch();
   const router = useRouter();
   const cityIdStr = localStorage
@@ -36,6 +43,16 @@ const CategoryCard = ({
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
+
+  useEffect(() => {
+    dispatch(reduxSetModalState(loginModal));
+    dispatch(setLoginPopupState(loginModal));
+  }, [loginModal]);
+
+  const toggleLoginModal = bool => {
+    console.log(bool, "bool");
+    setLoginModal(bool);
+  };
 
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
@@ -66,16 +83,10 @@ const CategoryCard = ({
       decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
-  // const userId = getLocalStorageString("user_id");
-  const userId = decrypt(getLocalStorage("_ga"));
 
-  const handleWhislistCard = e => {
-    e.stopPropagation();
-    if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
-      return;
-    }
-    // dispatch(addRemoveWhishListitems(!inWishList));
+  // const userId = decrypt(getLocalStorage("_ga"));
+
+  const addToWishlist = () => {
     !inWishList
       ? addwhislistProduct()
           .then(res => {
@@ -111,6 +122,18 @@ const CategoryCard = ({
           .catch(err => console.log(err));
   };
 
+  const handleWhislistCard = async e => {
+    e.stopPropagation();
+    const isAuthenticated = await checkAuthentication();
+    console.log(isAuthenticated, "response from isauthencate");
+    if (isAuthenticated === false) {
+      console.log("inside false");
+      toggleLoginModal(true);
+    } else addToWishlist();
+
+    // dispatch(addRemoveWhishListitems(!inWishList));
+  };
+
   useEffect(() => {
     setInWishList(
       categoryPageReduxData.savedProducts
@@ -120,7 +143,7 @@ const CategoryCard = ({
   }, []);
   const handleProductClick = (e, productID, seourl) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${productID}/${seourl}`);
+      !reduxStateOfLoginPopup && router.push(`/things/${productID}/${seourl}`);
     }
   };
   const sliderRef = useRef(null);
@@ -166,118 +189,129 @@ const CategoryCard = ({
   }, []);
 
   return (
-    <a
-      href={`/things/${productID}/${seourl}`}
-      onClick={e => {
-        e.preventDefault();
-      }}>
-      <div
-        className={`${styles.card_wrapper} `}
-        onMouseOver={() => {
-          setHoverCard(true);
+    <>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        handleChangeRoute={() => {
+          console.log("in handlechangerouteee");
+          // call this if you want to show the red heart exactly after login
+          // addToWishlist();
         }}
-        onMouseOut={() => setHoverCard(false)}
-        onClick={e => handleProductClick(e, productID, seourl)}>
-        <div className="relative">
-          <img
-            src={hoverCard ? hoverCardImage : cardImage}
-            alt={desc.replace(/-/g, " ")}
-            className={styles.img}
-            loading="lazy"
-          />
-          {soldOut ? (
-            <div className={`${styles.soldout_div} ${styles.label_tag}`}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.tag_text}>SOLD OUT</p>
-            </div>
-          ) : label === "Trending" ? (
-            <div className={`${styles.trending_div} ${styles.label_tag}`}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.tag_text}>POPULAR</p>
-            </div>
-          ) : label === "New Launch" ? (
-            <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.tag_text}>NEW LAUNCH</p>
-            </div>
-          ) : (
-            <div className="hidden"></div>
-          )}
-        </div>
-
-        <div className={styles.desc_div}>
-          <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-            {/* {desc} */}
-            {desc.replace(/-/g, " ")}
-          </h3>
-          <Heart
-            size={25}
-            color={inWishList ? "#D96060" : "#C0C0C6"}
-            // onClick={e => {
-            //   e.preventDefault();
-            //   setInWishList(!inWishList);
-            // }}
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              handleWhislistCard(e);
-            }}
-            className={"cursor-pointer"}
-          />
-        </div>
-        <div className={styles.price_div}>
-          <div className={styles.card_price_wrap}>
-            <h3 className={`${styles.currentPrice} flex`}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {`${currentPrice} /mo`}
-            </h3>
-
-            {currentPrice < originalPrice && (
-              <h3 className={`${styles.originalPrice} flex`}>
-                <span className={styles.rupeeIcon}>₹</span>
-                {`${originalPrice} /mo`}
-              </h3>
+      />
+      <a
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+        onClick={e => {
+          e.preventDefault();
+        }}>
+        <div
+          className={`${styles.card_wrapper} `}
+          onMouseOver={() => {
+            setHoverCard(true);
+          }}
+          onMouseOut={() => setHoverCard(false)}
+          onClick={e => handleProductClick(e, productID, seourl)}>
+          <div className="relative">
+            <img
+              src={hoverCard ? hoverCardImage : cardImage}
+              alt={desc.replace(/-/g, " ")}
+              className={styles.img}
+              loading="lazy"
+            />
+            {soldOut ? (
+              <div className={`${styles.soldout_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>SOLD OUT</p>
+              </div>
+            ) : label === "Trending" ? (
+              <div className={`${styles.trending_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>POPULAR</p>
+              </div>
+            ) : label === "New Launch" ? (
+              <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>NEW LAUNCH</p>
+              </div>
+            ) : (
+              <div className="hidden"></div>
             )}
           </div>
-          {/* {originalPrice !== currentPrice && ( */}
-          {currentPrice < originalPrice && parseInt(discount) > 0 && (
-            <div className={styles.discount}>{`-${discount} OFF`}</div>
+
+          <div className={styles.desc_div}>
+            <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+              {/* {desc} */}
+              {desc.replace(/-/g, " ")}
+            </h3>
+            <Heart
+              size={25}
+              color={inWishList ? "#D96060" : "#C0C0C6"}
+              // onClick={e => {
+              //   e.preventDefault();
+              //   setInWishList(!inWishList);
+              // }}
+              onClick={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleWhislistCard(e);
+              }}
+              className={"cursor-pointer"}
+            />
+          </div>
+          <div className={styles.price_div}>
+            <div className={styles.card_price_wrap}>
+              <h3 className={`${styles.currentPrice} flex`}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {`${currentPrice} /mo`}
+              </h3>
+
+              {currentPrice < originalPrice && (
+                <h3 className={`${styles.originalPrice} flex`}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {`${originalPrice} /mo`}
+                </h3>
+              )}
+            </div>
+            {/* {originalPrice !== currentPrice && ( */}
+            {currentPrice < originalPrice && parseInt(discount) > 0 && (
+              <div className={styles.discount}>{`-${discount} OFF`}</div>
+            )}
+          </div>
+          {categoryPageReduxData?.isCombos && (
+            <>
+              <div className={styles.combos_wrapper}>
+                <p
+                  className={`${styles.items_included} ${
+                    subProduct?.length === 0 && styles.no_included
+                  }`}>
+                  {subProduct?.length} items included
+                </p>
+                <div className={styles.combos_images} ref={sliderRef}>
+                  {subProduct?.length === 0 && (
+                    <p className={styles.no_included_image}></p>
+                  )}
+                  {subProduct?.map((item, index) => {
+                    return (
+                      <img
+                        key={index.toString()}
+                        src={`${productImageBaseUrl}${
+                          item?.image?.split(",")[0]
+                        }`}
+                        alt="Product Image"
+                        className={`${styles.included_image} ${
+                          isDumy && "pointer-events-none"
+                        } `}
+                        loading="lazy"
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </>
           )}
         </div>
-        {categoryPageReduxData?.isCombos && (
-          <>
-            <div className={styles.combos_wrapper}>
-              <p
-                className={`${styles.items_included} ${
-                  subProduct?.length === 0 && styles.no_included
-                }`}>
-                {subProduct?.length} items included
-              </p>
-              <div className={styles.combos_images} ref={sliderRef}>
-                {subProduct?.length === 0 && (
-                  <p className={styles.no_included_image}></p>
-                )}
-                {subProduct?.map((item, index) => {
-                  return (
-                    <img
-                      key={index.toString()}
-                      src={`${productImageBaseUrl}${
-                        item?.image?.split(",")[0]
-                      }`}
-                      alt="Product Image"
-                      className={`${styles.included_image} ${
-                        isDumy && "pointer-events-none"
-                      } `}
-                      loading="lazy"
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    </a>
+      </a>
+    </>
   );
 };
 

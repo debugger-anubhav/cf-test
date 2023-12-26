@@ -15,6 +15,9 @@ const PreDesignCombos = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const cityId = getLocalStorage("cityId");
   const [isDumy, setIsDumy] = React.useState(false);
 
@@ -93,7 +96,9 @@ const PreDesignCombos = () => {
                   index === homePageReduxData?.designComboProduct?.length - 1 &&
                   "mr-[16px]"
                 } ${isDumy && "pointer-events-none"}`}
-                onClick={e => handleCardClick(e, item)}>
+                onClick={e => {
+                  !reduxStateOfLoginPopup && handleCardClick(e, item);
+                }}>
                 <Card
                   cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                   // hoverCard="false"

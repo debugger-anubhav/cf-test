@@ -19,6 +19,9 @@ const LimetedPreiodDiscount = () => {
   const {limitedDiscount: getLimitedPreiodData} = useSelector(
     state => state.homePagedata,
   );
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
   const [isDumy, setIsDumy] = React.useState(false);
   const {refetch: getLimitedPeriodDiscount} = useQuery(
     "limited-discount",
@@ -89,7 +92,9 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div
             key={index.toString()}
-            onClick={e => handleCardClick(e, item)}
+            onClick={e => {
+              !reduxStateOfLoginPopup && handleCardClick(e, item);
+            }}
             className={`${styles.child ?? ""}  ${
               index === getLimitedPreiodData?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}>
