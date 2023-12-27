@@ -78,7 +78,7 @@ const ShoppingCartSection = () => {
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
@@ -274,12 +274,13 @@ const ShoppingCartSection = () => {
     console.log(isValid, "response from isauthencate");
     if (isValid === true) {
       setIsLogin(true);
-      fetchUserDetails();
+      // fetchUserDetails();
     } else setIsLogin(false);
   };
 
   useEffect(() => {
     validateAuth();
+    fetchUserDetails();
   }, []);
 
   const handleChangeRoute = () => {
@@ -580,7 +581,7 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
-              {arr[0]?.is_frp !== 1 && (
+              {arr[0]?.is_frp !== 1 && isLogin && (
                 <div className={styles.coins_div}>
                   <div className={styles.coins_left_div}>
                     <div>

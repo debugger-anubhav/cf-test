@@ -15,7 +15,8 @@ import ModalContentForSettingProfile from "./components/ModalContentForSettingPr
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import {useCookies} from "react-cookie";
+// import {useCookies} from "react-cookie";
+import Cookies from "universal-cookie";
 
 const LoginModal = ({
   isModalOpen,
@@ -25,7 +26,8 @@ const LoginModal = ({
   handleChangeRoute,
   isSetupProfile,
 }) => {
-  const [cookies, setCookie] = useCookies(["authToken"]);
+  const cookies = new Cookies();
+  // const [cookies, setCookie] = useCookies(["authToken"]);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
   const [contact, setContact] = useState();
@@ -121,9 +123,9 @@ const LoginModal = ({
         .post(baseURL + endPoints.login.verifyOtp, body)
         .then(response => {
           setProblemType("");
-          console.log(response);
+          console.log(response, "reponseee");
           if (response?.data?.status_code === 200) {
-            if (response?.data?.message === "login_success") {
+            if (response?.data?.message === "Login Successfully.!") {
               setIsLogin && setIsLogin(true);
               setUserId(response?.data?.data?.id);
               const encryptedData = encrypt(
@@ -132,7 +134,8 @@ const LoginModal = ({
               setLocalStorage("_ga", encryptedData);
               // console.log(response.data.data.access_token, "kwkqwo");
               if (response?.data?.data?.access_token)
-                setCookie("authToken", response?.data?.data?.access_token);
+                // setCookie("authToken", response?.data?.data?.access_token);
+                cookies.set("authToken", response?.data?.data?.access_token);
               console.log(cookies, "cookies");
 
               if (isCheckoutPage) setModalCategory("setUpAccount");

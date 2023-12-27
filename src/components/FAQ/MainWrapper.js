@@ -263,12 +263,14 @@ const MainWrapper = () => {
             </button>
           </a>
           <button className={style.request_btn}>
-            <FaHeadset
-              size={18}
-              color={"#222"}
-              className="pointer-events-none mr-[10px]"
-            />
-            Raise a service request
+            <a href="/service-requests" className="flex">
+              <FaHeadset
+                size={18}
+                color={"#222"}
+                className="pointer-events-none mr-[10px]"
+              />
+              Raise a service request
+            </a>
           </button>
         </div>
       </div>
