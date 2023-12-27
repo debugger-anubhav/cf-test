@@ -27,6 +27,7 @@ const DeleteModal = ({
   updateArr,
   id,
   setIsLogin,
+  isLogin,
 }) => {
   const {checkAuthentication} = useAuthentication();
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
@@ -83,17 +84,14 @@ const DeleteModal = ({
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
       // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
+      isLogin
+        ? decrypt(getLocalStorage("_ga"))
+        : decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
   const data = {
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
-
-    // userId: JSON.parse(localStorage.getItem("user_id")),
-    // userId: JSON.parse(localStorage.getItem("user_id")),
     productId,
   };
 
@@ -107,7 +105,7 @@ const DeleteModal = ({
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
-    // if (!decrypt(getLocalStorage("_ga")))
+
     if (!isAuthenticated) {
       closeModal();
       toggleLoginModal();
@@ -132,20 +130,6 @@ const DeleteModal = ({
 
     handleDeleteItem(false);
   };
-
-  // const handleAddToWishlist = async () => {
-  //   updateArr(productId);
-  //   try {
-  //     const headers = {
-  //       userId,
-  //       productId,
-  //     };
-  //     await axios.post(baseURL + endPoints.addWishListProduct, headers);
-  //     handleDeleteItem();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <div>

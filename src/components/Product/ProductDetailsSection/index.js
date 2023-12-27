@@ -345,15 +345,16 @@ const ProductDetails = ({params}) => {
   //   );
   // };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     setIsLoading(true);
+    const isAuthenticated = await checkAuthentication();
     const headers = {
       "Content-Type": "application/json",
     };
     // const userId = getLocalStorage("user_id");
     const userId = decrypt(getLocalStorage("_ga"));
     const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-    const userIdToUse = userId || tempUserId;
+    const userIdToUse = isAuthenticated ? userId : tempUserId;
 
     const body = {
       userId: parseInt(userIdToUse),

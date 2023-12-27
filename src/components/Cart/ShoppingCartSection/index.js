@@ -300,6 +300,7 @@ const ShoppingCartSection = () => {
           setIsLogin={bool => {
             setIsLogin(bool);
           }}
+          isLogin={isLogin}
         />
 
         <LoginModal

@@ -71,7 +71,7 @@ const Header = () => {
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
   // const [profileIconLink, setProfileIconLink] = useState();
   // const [heartIconLink, setHeartIconLink] = useState();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
   const [emptyModal, setEmptyModal] = useState(false);
@@ -150,22 +150,33 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  // const userId = decrypt(getLocalStorage("_ga"))
-  //   ? decrypt(getLocalStorage("_ga"))
-  //   : getLocalStorage("user_id");
-
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  // const userIdToUse = userId || tempUserId;validateAut
+
+  const getSavedItems = userIdToUse => {
+    axios
+      .get(
+        baseURL +
+          endPoints.savedItems +
+          `?cityId=${cityId}&userId=${userIdToUse}`,
+      )
+      .then(res => {
+        dispatch(addSaveditems(res?.data?.data));
+        const ids = res?.data?.data.map(item => {
+          return item?.id;
+        });
+        dispatch(addSaveditemID(ids));
+      })
+      .catch(err => console.log(err));
+  };
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
     console.log(isAuthenticated, "response from isauthencate");
-    if (isAuthenticated === true) {
-      setIsLogin(true);
-    } else setIsLogin(false);
+    setIsLogin(isAuthenticated);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
     setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
+    getSavedItems(userIdToUse);
   };
 
   // added for cart icons
@@ -186,7 +197,7 @@ const Header = () => {
 
   useEffect(() => {
     validateAuth();
-  }, []);
+  }, [isLogin]);
 
   // useEffect(() => {
   //   fetchCartItems();
@@ -216,11 +227,11 @@ const Header = () => {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
 
-  const {refetch: getSavedItems} = useQuery(
-    "saved-items",
-    endPoints.savedItems,
-    `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
-  );
+  // const {refetch: getSavedItems} = useQuery(
+  //   "saved-items",
+  //   endPoints.savedItems,
+  //   `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
+  // );
 
   useEffect(() => {
     axios
@@ -241,17 +252,7 @@ const Header = () => {
       .catch(err => console.log(err));
   }, []);
 
-  useEffect(() => {
-    getSavedItems()
-      .then(res => {
-        dispatch(addSaveditems(res?.data?.data));
-        const ids = res?.data?.data.map(item => {
-          return item?.id;
-        });
-        dispatch(addSaveditemID(ids));
-      })
-      .catch(err => console.log(err));
-  }, [isLogin]);
+  useEffect(() => {}, [isLogin]);
 
   // useEffect(() => {
   //   if (userId) {

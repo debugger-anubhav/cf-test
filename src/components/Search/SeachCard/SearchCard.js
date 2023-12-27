@@ -23,6 +23,7 @@ const SearchCard = ({
   discount,
   productID,
   soldOut,
+  isLogin,
 }) => {
   const {checkAuthentication} = useAuthentication();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -67,8 +68,9 @@ const SearchCard = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
+      isLogin
+        ? decrypt(getLocalStorage("_ga"))
+        : decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
   // const userId = getLocalStorage("user_id");
