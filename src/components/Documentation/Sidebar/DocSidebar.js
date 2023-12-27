@@ -5,10 +5,12 @@ import cookie from "react-cookies";
 import {useRouter} from "next/navigation";
 import {getLocalStorage} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
+import Cookies from "universal-cookie";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
+  const authCookies = new Cookies();
   const [userName, setUserName] = useState(null);
 
   const getUserNameFromLocalStorage = () => {
@@ -62,7 +64,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const onLogout = () => {
     if (typeof window !== "undefined") {
       cookie.remove("ci_sessions");
-      cookie.remove("authToken");
+      authCookies.remove("authToken");
       localStorage.removeItem("tempUserID");
       localStorage.removeItem("user_id");
       localStorage.removeItem("_ga");

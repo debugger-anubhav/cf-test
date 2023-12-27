@@ -4,9 +4,11 @@ import {FaChevronRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
 import cookie from "react-cookies";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
+import Cookies from "universal-cookie";
 
 export default function UserSettings() {
   const router = useRouter();
+  const authCookies = new Cookies();
   const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [
     {
@@ -109,7 +111,7 @@ export default function UserSettings() {
             onClick={() => {
               if (typeof window !== "undefined") {
                 cookie.remove("ci_sessions");
-                cookie.remove("authToken");
+                authCookies.remove("authToken");
                 localStorage.removeItem("tempUserID");
                 localStorage.removeItem("user_id");
                 localStorage.removeItem("_ga");
