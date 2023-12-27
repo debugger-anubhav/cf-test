@@ -67,7 +67,8 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
-                router.push("/cityfurnish");
+                cookie.remove("authToken");
+                router.push("/");
               }
             }}>
             {ele.item}
