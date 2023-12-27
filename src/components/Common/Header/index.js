@@ -155,7 +155,7 @@ const Header = () => {
   //   : getLocalStorage("user_id");
 
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  // const userIdToUse = userId || tempUserId;
+  // const userIdToUse = userId || tempUserId;validateAut
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
@@ -239,6 +239,9 @@ const Header = () => {
         }
       })
       .catch(err => console.log(err));
+  }, []);
+
+  useEffect(() => {
     getSavedItems()
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
@@ -248,7 +251,7 @@ const Header = () => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [isLogin]);
 
   // useEffect(() => {
   //   if (userId) {
