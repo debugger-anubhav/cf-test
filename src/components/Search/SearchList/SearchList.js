@@ -20,6 +20,7 @@ import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const defaultKey = 1;
 const newSortKey = 2;
@@ -27,6 +28,7 @@ const highToLowKey = 3;
 const lowToHighKey = 4;
 
 const SearchList = () => {
+  const {checkAuthentication} = useAuthentication();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
   const router = useRouter();
@@ -44,6 +46,7 @@ const SearchList = () => {
 
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
     const url = window?.location.pathname.split("/");
@@ -64,10 +67,19 @@ const SearchList = () => {
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
+      isLogin
+        ? decrypt(getLocalStorage("_ga"))
+        : decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
+
+  const validateAuth = async () => {
+    const isValid = await checkAuthentication();
+    console.log(isValid, "response from isauthencate");
+    if (isValid === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+  };
 
   useEffect(() => {
     getSavedItems()
@@ -83,6 +95,7 @@ const SearchList = () => {
   }, [refreshState]);
 
   useEffect(() => {
+    validateAuth();
     function handleClickOutside(event) {
       if (
         dropDownRefSort.current &&

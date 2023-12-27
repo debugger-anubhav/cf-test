@@ -61,7 +61,6 @@ const DocSidebar = ({isOverviewSelected = false}) => {
 
   const onLogout = () => {
     if (typeof window !== "undefined") {
-      router.push("https://test.rentofurniture.com/logout");
       cookie.remove("ci_sessions");
       localStorage.removeItem("tempUserID");
       localStorage.removeItem("user_id");
@@ -69,6 +68,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       localStorage.removeItem("user_name");
       localStorage.removeItem("ci_session");
       location.reload();
+      router.push("/cityfurnish");
     }
   };
 

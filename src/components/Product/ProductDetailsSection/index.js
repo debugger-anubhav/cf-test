@@ -132,10 +132,12 @@ const ProductDetails = ({params}) => {
 
   const openModal = () => {
     setIsModalOpen(true);
+    dispatch(reduxSetModalState(true));
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    dispatch(reduxSetModalState(false));
   };
 
   const GetProductDetails = () => {

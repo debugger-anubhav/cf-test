@@ -127,6 +127,9 @@ const CitymaxHeader = ({zIndex}) => {
           dispatch(addCategory([]));
         });
     }
+  }, []);
+
+  useEffect(() => {
     getSavedItems()
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
@@ -136,7 +139,7 @@ const CitymaxHeader = ({zIndex}) => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [isLogin]);
 
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,

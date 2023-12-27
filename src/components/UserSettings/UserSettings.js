@@ -115,7 +115,7 @@ export default function UserSettings() {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
               }
-              router.push("https://test.rentofurniture.com/logout");
+              router.push("/cityfurnish");
             }}>
             Logout
           </p>
