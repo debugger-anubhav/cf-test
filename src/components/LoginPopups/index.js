@@ -130,8 +130,9 @@ const LoginModal = ({
                 response?.data?.data?.id.toString(),
               );
               setLocalStorage("_ga", encryptedData);
-              console.log(response.data.data.access_token, "kwkqwo");
-              setCookie("authToken", response?.data?.data?.access_token);
+              // console.log(response.data.data.access_token, "kwkqwo");
+              if (response?.data?.data?.access_token)
+                setCookie("authToken", response?.data?.data?.access_token);
               console.log(cookies, "cookies");
 
               if (isCheckoutPage) setModalCategory("setUpAccount");
