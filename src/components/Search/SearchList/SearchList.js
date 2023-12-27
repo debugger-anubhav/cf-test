@@ -12,7 +12,6 @@ import SearchCard from "../SeachCard/SearchCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {useQuery} from "@/hooks/useQuery";
 import {baseURL} from "@/network/axios";
 import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
@@ -46,7 +45,7 @@ const SearchList = () => {
 
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
 
   useEffect(() => {
     const url = window?.location.pathname.split("/");
@@ -63,35 +62,47 @@ const SearchList = () => {
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
   const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
-  const {refetch: getSavedItems} = useQuery(
-    "saved-items",
-    endPoints.savedItems,
-    `?cityId=${cityId}&userId=${
-      isLogin
-        ? decrypt(getLocalStorage("_ga"))
-        : decryptBase64(getLocalStorage("tempUserID"))
-    }`,
-  );
 
-  const validateAuth = async () => {
-    const isValid = await checkAuthentication();
-    console.log(isValid, "response from isauthencate");
-    if (isValid === true) {
-      setIsLogin(true);
-    } else setIsLogin(false);
-  };
+  // const {refetch: getSavedItems} = useQuery(
+  //   "saved-items",
+  //   endPoints.savedItems,
+  //   `?cityId=${cityId}&userId=${
+  //     isLogin
+  //       ? decrypt(getLocalStorage("_ga"))
+  //       : decryptBase64(getLocalStorage("tempUserID"))
+  //   }`,
+  // );
 
-  useEffect(() => {
-    getSavedItems()
+  const getSavedItems = isValid => {
+    axios
+      .get(
+        baseURL +
+          endPoints.savedItems +
+          `?cityId=${cityId}&userId=${
+            isValid
+              ? decrypt(getLocalStorage("_ga"))
+              : decryptBase64(getLocalStorage("tempUserID"))
+          }`,
+      )
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
-        // addSaveditemID
         const ids = res?.data?.data.map(item => {
           return item?.id;
         });
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
+  };
+
+  const validateAuth = async () => {
+    const isValid = await checkAuthentication();
+    console.log(isValid, "response from isauthencate");
+    setIsLogin(isValid);
+    getSavedItems(isValid);
+  };
+
+  useEffect(() => {
+    getSavedItems();
   }, [refreshState]);
 
   useEffect(() => {
@@ -254,6 +265,7 @@ const SearchList = () => {
                         ).toFixed(0)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
+                        isLogin={isLogin}
                       />
                     </a>
                   </div>
