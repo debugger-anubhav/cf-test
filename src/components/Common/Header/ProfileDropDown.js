@@ -73,7 +73,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
 
                 // cookie.remove("authToken");
                 authCookies.remove("authToken");
-                router.push("/");
+                router.push("/cityfurnish");
               }
             }}>
             {ele.item}
