@@ -109,6 +109,7 @@ export default function UserSettings() {
             onClick={() => {
               if (typeof window !== "undefined") {
                 cookie.remove("ci_sessions");
+                cookie.remove("authToken");
                 localStorage.removeItem("tempUserID");
                 localStorage.removeItem("user_id");
                 localStorage.removeItem("_ga");

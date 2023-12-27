@@ -10,8 +10,10 @@ import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const RecentlyViewedProduct = ({page}) => {
+  const {checkAuthentication} = useAuthentication();
   const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -19,6 +21,7 @@ const RecentlyViewedProduct = ({page}) => {
     state => state.homePagedata.loginPopupState,
   );
   const [isDumy, setIsDumy] = React.useState(false);
+  const [isLogin, setIsLogin] = React.useState(null);
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -31,18 +34,25 @@ const RecentlyViewedProduct = ({page}) => {
     "recently-view",
     endPoints.recentlyViewedProduct,
     `?cityId=${cityId}&userId=${
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
+      isLogin
+        ? decrypt(getLocalStorage("_ga"))
+        : decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
 
+  const isAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    setIsLogin(isAuthenticated);
+  };
+
   useEffect(() => {
+    isAuth();
     recentlyViewed()
       .then(res => {
         dispatch(addRecentlyViewedProduct(res?.data?.data));
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [isLogin]);
 
   const sliderRef = useRef(null);
 

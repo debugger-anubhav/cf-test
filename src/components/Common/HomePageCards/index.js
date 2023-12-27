@@ -78,16 +78,12 @@ const Card = ({
     endPoints.deleteWishListProduct,
     data,
   );
+
   const {refetch: getSavedItems} = useQuery(
     "saved-items",
     endPoints.savedItems,
-    `?cityId=${cityId}&userId=${
-      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
-      decrypt(getLocalStorage("_ga")) ??
-      decryptBase64(getLocalStorage("tempUserID"))
-    }`,
+    `?cityId=${cityId}&userId=${decrypt(getLocalStorage("_ga"))}`,
   );
-  // const userId = decrypt(getLocalStorage("_ga"));
 
   const addToWishlist = () => {
     !inWishList
