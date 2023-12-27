@@ -1,14 +1,19 @@
-import {useCookies} from "react-cookie";
+// import {useCookies} from "react-cookie";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import Cookies from "universal-cookie";
+// eslint-disable-next-line camelcase
+// import cookie from "react-cookies";
 
 export const useAuthentication = () => {
-  const [cookies, removeCookie] = useCookies(["authToken"]);
-  const token = cookies.authToken;
-  console.log(token, "token");
+  // const [cookies, removeCookie] = useCookies(["authToken"]);
+  // const token = cookies.authToken;
 
   const checkAuthentication = async () => {
+    const cookies = new Cookies();
+    const token = cookies.get("authToken");
+    console.log(token, " token in authen func");
     // if (!token) {
     //   localStorage.removeItem("user_id");
     //   localStorage.removeItem("_ga");
@@ -29,7 +34,8 @@ export const useAuthentication = () => {
       } else {
         localStorage.removeItem("user_id");
         localStorage.removeItem("_ga");
-        removeCookie("authToken");
+        // removeCookie("authToken");
+        cookies.remove("authToken");
 
         return false;
       }
