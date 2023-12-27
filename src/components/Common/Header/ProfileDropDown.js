@@ -2,8 +2,11 @@ import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import React from "react";
 import cookie from "react-cookies";
+import Cookies from "universal-cookie";
 
 export default function ProfileDropDown({setShowProfileDropdown}) {
+  const authCookies = new Cookies();
+
   const items = [
     {item: "My Orders", link: "/purchases"},
     {
@@ -67,7 +70,9 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
-                cookie.remove("authToken");
+
+                // cookie.remove("authToken");
+                authCookies.remove("authToken");
                 router.push("/");
               }
             }}>
