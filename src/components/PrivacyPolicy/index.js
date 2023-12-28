@@ -46,12 +46,16 @@ const PrivacyPolicyData = () => {
 
       <div>
         <div className={styles.privacy_policy_detail_text}>
-          {string.privacy_policy.para_2.firts_part}
+          {/* {string.privacy_policy.para_2.firts_part} */}
+          This Privacy Policy covers the information for Cityfurnish India
+          Private Limited("Cityfurnish" and/or "We") collects from the user(s)
+          ("User(s)" and/or "You") of
           <a
             className={styles.privacy_policy_detail_link}
             href={string.privacy_policy.para_2.first_link}>
             {string.privacy_policy.para_2.first_link}
           </a>
+          <span className="px-1">("website")</span>
           {string.privacy_policy.para_2.second_part}
           <a
             className={styles.privacy_policy_detail_link}
@@ -87,11 +91,16 @@ const PrivacyPolicyData = () => {
         {string.privacy_policy.information_collection.points?.map(
           (item, index) => {
             return (
-              <li
-                key={index.toString()}
-                className={styles.privacy_policy_detail_point}>
-                {item}
-              </li>
+              <div key={index.toString()} className={styles.list_point}>
+                <div className={` mt-2 mr-2`}>
+                  <p className={styles.dot}></p>
+                </div>
+                <div
+                  key={index.toString()}
+                  className={styles.privacy_policy_detail_text}>
+                  {item}
+                </div>
+              </div>
             );
           },
         )}
@@ -100,6 +109,7 @@ const PrivacyPolicyData = () => {
       <div>
         <p className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_3.firts_part}
+          ("Cityfurnish Entities") and its joint ventures.
         </p>
       </div>
       <div className={styles.details_fourth}>
@@ -115,6 +125,10 @@ const PrivacyPolicyData = () => {
       <div className={styles.last_details}>
         <p className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_5.firts_part}
+          ("Platform")
+          {string.privacy_policy.para_5.second_part}
+          ("Delivery"),
+          {string.privacy_policy.para_5.third_part}
         </p>
       </div>
     </div>

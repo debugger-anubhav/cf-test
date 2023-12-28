@@ -20,7 +20,7 @@
   @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
 }
 .privacy_policy_detail_link {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
 }
 .details {
   @apply lg:my-8 my-6;
@@ -43,4 +43,10 @@
 }
 .details_principles {
   @apply lg:my-[88px] my-[32px];
+}
+.dot {
+  @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
+}
+.list_point {
+  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins;
 }
