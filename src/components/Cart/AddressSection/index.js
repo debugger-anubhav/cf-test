@@ -10,9 +10,11 @@ import {
   WhatsappIcon,
   ToggleOff,
   ToggleOn,
+  PopUpArrow,
+  DownPopUpArrow,
 } from "@/assets/icon";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import {Formik, Form, Field, ErrorMessage, useFormikContext} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -33,12 +35,14 @@ import {MdOutlineVerified} from "react-icons/md";
 const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const formik = useFormikContext();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
   const [haveGstNumber, sethaveGstNumber] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
+  const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
 
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
@@ -49,9 +53,11 @@ const AddressSection = () => {
   const data = useSelector(state => state.cartPageData);
   const billBreakup = data.billBreakout;
   const cityName = useSelector(state => state.homePagedata.cityName);
-
+  const isOfflineCustomer = useSelector(
+    state => state.cartPageData.isOfflineCustomer,
+  );
+  console.log(isOfflineCustomer, "isOfflineCustomeruiiui pagll");
   const addressArray = data.savedAddresses;
-  // console.log(data, "data in address pafe");
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -93,7 +99,10 @@ const AddressSection = () => {
       )
       .required("Postal code is required"),
     city: Yup.string().required("City is required"),
+    orderType: Yup.string().required("Order type is required"),
   });
+
+  const orderTypeOptions = ["New Order", "Swap product"];
 
   const toggleDrawerBreakup = () => {
     setBreakupDrawer(!breakupDrawer);
@@ -240,6 +249,27 @@ const AddressSection = () => {
     });
   }
 
+  const handleOfflineOrder = () => {
+    console.log(formik, "valuesss");
+    // const body = {
+    //   user_name: "chetan malviya",
+    //   email: "chetanmalviya924@gmail.com",
+    //   mobile_no: "8839597780",
+    //   alert_mobile_no: "7554254524",
+    //   address1: "testing ,33",
+    //   address2: "test",
+    //   state: "Karnataka",
+    //   postal_code: "560004",
+    //   city: "Bangalore",
+    //   rental_amount: 599.13,
+    //   cf_care_option: 1,
+    //   order_type: "new-order",
+    //   order_number: "",
+    //   payment_type: 1,
+    //   userId: 85757,
+    // };
+  };
+
   useEffect(() => {
     getAllSavedAddresses();
   }, []);
@@ -256,42 +286,43 @@ const AddressSection = () => {
           <p className={styles.head}>Go back to checkout</p>
         </div>
 
-        {addressArray.length > 0 && primaryAddress !== undefined && (
-          <div
-            className={styles.saved_address_div}
-            onClick={toggleAddressDrawer}>
-            {cityName !== primaryAddress?.city && (
-              <div className={styles.not_belong_wrapper}>
-                <p className={styles.not_belong_text}>
-                  Address does not belong to selected city
+        {addressArray.length > 0 &&
+          primaryAddress !== undefined &&
+          isOfflineCustomer !== 1 && (
+            <div
+              className={styles.saved_address_div}
+              onClick={toggleAddressDrawer}>
+              {cityName !== primaryAddress?.city && (
+                <div className={styles.not_belong_wrapper}>
+                  <p className={styles.not_belong_text}>
+                    Address does not belong to selected city
+                  </p>
+                </div>
+              )}
+              <div className={styles.saved_add_upper_div}>
+                <h1 className={styles.saved_add_head}>Delivering to</h1>
+                <button className={styles.change_btn}>Change</button>
+              </div>
+              <div className={styles.name_div}>
+                <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
+                <p className={styles.saved_name}>
+                  {primaryAddress?.full_name}, {primaryAddress?.phone}
                 </p>
               </div>
-            )}
 
-            <div className={styles.saved_add_upper_div}>
-              <h1 className={styles.saved_add_head}>Delivering to</h1>
-              <button className={styles.change_btn}>Change</button>
-            </div>
-            <div className={styles.name_div}>
-              <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
-              <p className={styles.saved_name}>
-                {primaryAddress?.full_name}, {primaryAddress?.phone}
+              <p className={styles.saved_address}>{primaryAddress?.address1}</p>
+              <p className={styles.saved_address}>
+                {primaryAddress?.city}, {primaryAddress?.state}
               </p>
+
+              {cityName !== primaryAddress?.city && (
+                <div className={styles.add_new_info}>
+                  <InformationIcon size={20} color={"#71717A"} />
+                  <p className={styles.add_new_info_text}>Add new address </p>
+                </div>
+              )}
             </div>
-
-            <p className={styles.saved_address}>{primaryAddress?.address1}</p>
-            <p className={styles.saved_address}>
-              {primaryAddress?.city}, {primaryAddress?.state}
-            </p>
-
-            {cityName !== primaryAddress?.city && (
-              <div className={styles.add_new_info}>
-                <InformationIcon size={20} color={"#71717A"} />
-                <p className={styles.add_new_info_text}>Add new address </p>
-              </div>
-            )}
-          </div>
-        )}
+          )}
 
         {addressDrawer && (
           <AddressDrawer
@@ -313,6 +344,9 @@ const AddressSection = () => {
               landmark: "",
               postalCode: "",
               city: cityName,
+              orderNumber: "",
+              orderType: "",
+              alternateContactNumber: "",
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
@@ -324,6 +358,75 @@ const AddressSection = () => {
             {formik => (
               <Form className={styles.form_wrapper}>
                 <div className={styles.form_wrapper}>
+                  {isOfflineCustomer === 1 && (
+                    <>
+                      <div className={styles.form_field}>
+                        <p className={styles.form_label}>Order Type</p>
+                        <div className={`!h-fit ${styles.form_input}`}>
+                          <div className={styles.order_type_field}>
+                            <Field
+                              name="orderType"
+                              placeholder="Select your order type"
+                              value={formik.values.orderType}
+                            />
+                            <div
+                              onClick={() =>
+                                setOpenOrderTypeDropdown(!openOrderTypeDropdown)
+                              }>
+                              {openOrderTypeDropdown ? (
+                                <PopUpArrow
+                                  color={"#71717A"}
+                                  className="w-5 h-5 cursor-pointer"
+                                />
+                              ) : (
+                                <DownPopUpArrow
+                                  color={"#71717A"}
+                                  className="w-5 h-5 cursor-pointer"
+                                />
+                              )}
+                            </div>
+                          </div>
+
+                          {openOrderTypeDropdown &&
+                            orderTypeOptions.map((option, index) => (
+                              <option
+                                className={`${index === 1 ? "!pb-0" : "mt-3"} ${
+                                  styles.ordertype_option
+                                }`}
+                                key={index}
+                                value={option}
+                                onClick={() => {
+                                  formik.setFieldValue("orderType", option);
+                                  setOpenOrderTypeDropdown(
+                                    !openOrderTypeDropdown,
+                                  );
+                                }}>
+                                {option}
+                              </option>
+                            ))}
+                        </div>
+                        <ErrorMessage name="orderType">
+                          {msg =>
+                            formik.touched.orderType && (
+                              <p className={styles.error}>{msg} </p>
+                            )
+                          }
+                        </ErrorMessage>
+                      </div>
+                      <div className={styles.form_field}>
+                        <p className={styles.form_label}>
+                          Order Number (Optional)
+                        </p>
+                        <Field
+                          type="number"
+                          name="orderNumber"
+                          placeholder="Please provide the order number for payment."
+                          className={styles.form_input}
+                        />
+                      </div>
+                    </>
+                  )}
+
                   <div className={styles.form_field}>
                     <p className={styles.form_label}>Full name</p>
                     <Field
@@ -366,6 +469,28 @@ const AddressSection = () => {
                         )
                       }
                     </ErrorMessage>
+                  </div>
+
+                  <div className={styles.form_field}>
+                    <p className={styles.form_label}>
+                      Alternative number (Optional)
+                    </p>
+                    <div
+                      className={`flex gap-2 items-center ${styles.form_input}`}>
+                      <img
+                        src={`${cityUrl + "india-icon.svg"}`}
+                        className={styles.flag}
+                        loading="lazy"
+                        alt="India-icon"
+                      />
+                      <Field
+                        type="number"
+                        // readOnly
+                        name="alternateContactNumber"
+                        placeholder="Enter 10 digit number "
+                        className={styles.contact_input}
+                      />
+                    </div>
                   </div>
 
                   <div className={styles.form_field}>
@@ -433,9 +558,11 @@ const AddressSection = () => {
                       </ErrorMessage>
                     </div>
                   </div>
-                  <button type="submit" className={styles.save_btn}>
-                    Save & Proceed
-                  </button>
+                  {isOfflineCustomer !== 1 && (
+                    <button type="submit" className={styles.save_btn}>
+                      Save & Proceed
+                    </button>
+                  )}
                 </div>
               </Form>
             )}
@@ -443,88 +570,90 @@ const AddressSection = () => {
         </div>
       </div>
       <div className={styles.right_div}>
-        <div className="gap-6 flex flex-col">
-          <div className={styles.box_wrapper}>
-            <div className={styles.box_wrapper_left_div}>
-              <WhatsappIcon size={24} color={"#48A06C"} />
-              <p className={styles.box_desc}>Opt for Whatsapp notification</p>
-            </div>
-            <div className="cursor-pointer">
-              {whatsappNotification ? (
-                <ToggleOn
-                  size={29}
-                  color={"#5774AC"}
-                  onClick={() => setWhatsappNotification(false)}
-                />
-              ) : (
-                <ToggleOff
-                  color={"#E3E1DC"}
-                  size={29}
-                  onClick={() => setWhatsappNotification(true)}
-                />
-              )}
-            </div>
-          </div>
-
-          <div className={styles.box_wrapper}>
-            <div className="w-full">
-              <div className="flex gap-4 justify-between items-center">
-                <div className={styles.box_wrapper_left_div}>
-                  <span className={styles.hash}>#</span>
-                  <p className={styles.box_desc}>I have a GST number</p>
-                </div>
-                <div className="cursor-pointer">
-                  {haveGstNumber ? (
-                    <ToggleOn
-                      size={29}
-                      color={"#5774AC"}
-                      onClick={() => sethaveGstNumber(false)}
-                    />
-                  ) : (
-                    <ToggleOff
-                      color={"#E3E1DC"}
-                      size={29}
-                      onClick={() => sethaveGstNumber(true)}
-                    />
-                  )}
-                </div>
+        {isOfflineCustomer !== 1 && (
+          <div className="gap-6 flex flex-col">
+            <div className={styles.box_wrapper}>
+              <div className={styles.box_wrapper_left_div}>
+                <WhatsappIcon size={24} color={"#48A06C"} />
+                <p className={styles.box_desc}>Opt for Whatsapp notification</p>
               </div>
-              {haveGstNumber && (
-                <>
-                  <div className="mt-4">
-                    <input
-                      className={styles.form_input}
-                      placeholder="GST number"
-                      onChange={e => setGstNumber(e.target.value)}
-                    />
+              <div className="cursor-pointer">
+                {whatsappNotification ? (
+                  <ToggleOn
+                    size={29}
+                    color={"#5774AC"}
+                    onClick={() => setWhatsappNotification(false)}
+                  />
+                ) : (
+                  <ToggleOff
+                    color={"#E3E1DC"}
+                    size={29}
+                    onClick={() => setWhatsappNotification(true)}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className={styles.box_wrapper}>
+              <div className="w-full">
+                <div className="flex gap-4 justify-between items-center">
+                  <div className={styles.box_wrapper_left_div}>
+                    <span className={styles.hash}>#</span>
+                    <p className={styles.box_desc}>I have a GST number</p>
                   </div>
-                  <div className="mt-4">
-                    <input
-                      className={styles.form_input}
-                      placeholder="Company name"
-                    />
+                  <div className="cursor-pointer">
+                    {haveGstNumber ? (
+                      <ToggleOn
+                        size={29}
+                        color={"#5774AC"}
+                        onClick={() => sethaveGstNumber(false)}
+                      />
+                    ) : (
+                      <ToggleOff
+                        color={"#E3E1DC"}
+                        size={29}
+                        onClick={() => sethaveGstNumber(true)}
+                      />
+                    )}
                   </div>
-                </>
-              )}
+                </div>
+                {haveGstNumber && (
+                  <>
+                    <div className="mt-4">
+                      <input
+                        className={styles.form_input}
+                        placeholder="GST number"
+                        onChange={e => setGstNumber(e.target.value)}
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <input
+                        className={styles.form_input}
+                        placeholder="Company name"
+                      />
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+
+            <div className={styles.tenure_info}>
+              <CalendarIcon className={styles.calendar} />
+              <p className={styles.desc}>
+                Your rental payment and tenure will begin from the date of
+                delivery
+              </p>
+            </div>
+
+            <div className={styles.kyc_info}>
+              <MdOutlineVerified className={styles.verified_icon} />
+              <p className={styles.desc}>
+                Once the order has been placed, you might be required to share a
+                few documents for KYC
+              </p>
             </div>
           </div>
-
-          <div className={styles.tenure_info}>
-            <CalendarIcon className={styles.calendar} />
-            <p className={styles.desc}>
-              Your rental payment and tenure will begin from the date of
-              delivery
-            </p>
-          </div>
-
-          <div className={styles.kyc_info}>
-            <MdOutlineVerified className={styles.verified_icon} />
-            <p className={styles.desc}>
-              Once the order has been placed, you might be required to share a
-              few documents for KYC
-            </p>
-          </div>
-        </div>
+        )}
 
         <div>
           <div
@@ -555,7 +684,9 @@ const AddressSection = () => {
 
           <button
             disabled={!primaryAddress}
-            onClick={() => handlePayment()}
+            onClick={() => {
+              isOfflineCustomer === 1 ? handleOfflineOrder() : handlePayment();
+            }}
             className={`!mt-6 ${!primaryAddress && "!cursor-not-allowed"} ${
               otherStyles.proceed_button
             }`}>
