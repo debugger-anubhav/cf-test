@@ -119,3 +119,10 @@
     width: 68%;
   }
 }
+
+.order_type_field {
+  @apply flex justify-between items-center w-full text-14 xl:text-16 placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.ordertype_option {
+  @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer;
+}

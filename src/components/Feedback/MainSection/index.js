@@ -38,7 +38,7 @@ export default function MainSection() {
           1,
         );
         setTimeout(() => {
-          router.push("/");
+          router.push("/cityfurnish");
         }, 3000);
       })
       .catch(err => console.log(err));
