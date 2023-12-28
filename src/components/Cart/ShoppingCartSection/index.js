@@ -35,6 +35,7 @@ import {
   reduxSetModalState,
   setCityShield,
   setCoinsApplied,
+  setIsOfflineCustomer,
   setShoppingCartTab,
   // setCoinsUsed,
   // setCityShield,
@@ -264,6 +265,9 @@ const ShoppingCartSection = () => {
 
       setUserDetails(response?.data?.data);
       console.log(response?.data?.data, "userrrrr");
+      dispatch(
+        setIsOfflineCustomer(parseInt(response?.data?.data?.is_offline_user)),
+      );
     } catch (err) {
       console.log(err);
     }
@@ -274,13 +278,13 @@ const ShoppingCartSection = () => {
     console.log(isValid, "response from isauthencate");
     if (isValid === true) {
       setIsLogin(true);
-      // fetchUserDetails();
+      fetchUserDetails();
     } else setIsLogin(false);
   };
 
   useEffect(() => {
     validateAuth();
-    fetchUserDetails();
+    // fetchUserDetails();
   }, []);
 
   const handleChangeRoute = () => {
@@ -581,43 +585,45 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
-              {arr[0]?.is_frp !== 1 && isLogin && (
-                <div className={styles.coins_div}>
-                  <div className={styles.coins_left_div}>
-                    <div>
-                      <img
-                        src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                        className={`${styles.coin} pointer-events-none`}
-                        loading="lazy"
-                      />
+              {arr[0]?.is_frp !== 1 &&
+                isLogin &&
+                !userDetails?.is_offline_user && (
+                  <div className={styles.coins_div}>
+                    <div className={styles.coins_left_div}>
+                      <div>
+                        <img
+                          src={`${categoryIconsUrl + "cf_coin.svg"}`}
+                          className={`${styles.coin} pointer-events-none`}
+                          loading="lazy"
+                        />
+                      </div>
+                      <div>
+                        <p className={styles.coin_txt}>Use Cityfurnish coins</p>
+                        <p className={styles.avail_bal}>
+                          Available balance:{" "}
+                          {isCoinApplied
+                            ? availCoin - billBreakup?.coinsUsed
+                            : availCoin}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className={styles.coin_txt}>Use Cityfurnish coins</p>
-                      <p className={styles.avail_bal}>
-                        Available balance:{" "}
-                        {isCoinApplied
-                          ? availCoin - billBreakup?.coinsUsed
-                          : availCoin}
-                      </p>
+                    <div className="cursor-pointer">
+                      {isCoinApplied ? (
+                        <ToggleOn
+                          size={29}
+                          color={"#5774AC"}
+                          onClick={() => setIsCoinApplied(false)}
+                        />
+                      ) : (
+                        <ToggleOff
+                          color={"#E3E1DC"}
+                          size={29}
+                          onClick={() => setIsCoinApplied(true)}
+                        />
+                      )}
                     </div>
                   </div>
-                  <div className="cursor-pointer">
-                    {isCoinApplied ? (
-                      <ToggleOn
-                        size={29}
-                        color={"#5774AC"}
-                        onClick={() => setIsCoinApplied(false)}
-                      />
-                    ) : (
-                      <ToggleOff
-                        color={"#E3E1DC"}
-                        size={29}
-                        onClick={() => setIsCoinApplied(true)}
-                      />
-                    )}
-                  </div>
-                </div>
-              )}
+                )}
 
               {arr[0]?.is_frp !== 1 && (
                 <div

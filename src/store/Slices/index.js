@@ -177,6 +177,7 @@ export const CartPageSlice = createSlice({
     isCityShield: false,
     isCoinApplied: false,
     shoppingCartTab: 0,
+    isOfflineCustomer: 0,
   },
   reducers: {
     getCartItems(state, action) {
@@ -216,6 +217,9 @@ export const CartPageSlice = createSlice({
     },
     setShoppingCartTab(state, action) {
       state.shoppingCartTab = action.payload;
+    },
+    setIsOfflineCustomer(state, action) {
+      state.isOfflineCustomer = action.payload;
     },
   },
 });
@@ -367,6 +371,7 @@ export const {
   setCoinsApplied,
   setShoppingCartTab,
   emptyCart,
+  setIsOfflineCustomer,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

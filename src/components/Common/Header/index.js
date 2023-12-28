@@ -75,8 +75,11 @@ const Header = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
   const [emptyModal, setEmptyModal] = useState(false);
-  const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
+  // const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
   const [cityForModal, setCityForModal] = useState();
+
+  const userId = decrypt(getLocalStorage("_ga"));
+  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
   useEffect(() => {
     console.log(categoryPageReduxData, "categoryPageReduxData");
@@ -150,8 +153,6 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-
   const getSavedItems = userIdToUse => {
     axios
       .get(
@@ -174,7 +175,7 @@ const Header = () => {
     console.log(isAuthenticated, "response from isauthencate");
     setIsLogin(isAuthenticated);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
-    setUserId(userIdToUse);
+    // setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
     getSavedItems(userIdToUse);
   };
@@ -280,7 +281,7 @@ const Header = () => {
       <EmptyCartModal
         isModalOpen={emptyModal}
         closeModal={() => toggleEmptyCartModal(false)}
-        userId={userId}
+        userId={isLogin ? userId : tempUserId}
         city={cityForModal}
       />
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
