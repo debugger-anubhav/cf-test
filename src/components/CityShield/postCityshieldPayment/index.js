@@ -27,7 +27,9 @@ const PostCityshield = () => {
             080-66084700
           </a>
         </p>
-        <button onClick={() => router.push("/")} className={styles.btn}>
+        <button
+          onClick={() => router.push("/cityfurnish")}
+          className={styles.btn}>
           Return to home page
         </button>
       </div>
