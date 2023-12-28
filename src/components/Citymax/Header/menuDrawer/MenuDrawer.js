@@ -151,7 +151,9 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
             ))}
           </div>
 
-          <div className={styles.button} onClick={() => router.push("/")}>
+          <div
+            className={styles.button}
+            onClick={() => router.push("/cityfurnish")}>
             <p className={styles.back_txt}>Back to Cityfurnish</p>
             <img
               src={`${IconLink + "home-cityfurnish.svg"}`}

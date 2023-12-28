@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
   console.log(details, "detailss");
 
   useEffect(() => {
-    if (details.TransactionReferenceNumber === "") router.push("/");
+    if (details.TransactionReferenceNumber === "") router.push("/cityfurnish");
   }, []);
 
   return (

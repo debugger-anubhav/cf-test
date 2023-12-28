@@ -21,7 +21,7 @@ const KYC100 = () => {
       </div>
       <div className={`${styles.btnContainer} `}>
         <button
-          onClick={() => router.push("/")}
+          onClick={() => router.push("/cityfurnish")}
           className={`${commonStyles.saveBtn} ${styles.singleBtn} w-full md:w-[168px]`}>
           Go Home
         </button>
