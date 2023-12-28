@@ -14,6 +14,11 @@ import {
 import SingleQuestion from "./singleQuestion";
 import {FaHeadset, FaPhoneAlt} from "react-icons/fa";
 import {BiArrowBack} from "react-icons/bi";
+import LoginModal from "@/components/LoginPopups";
+import {useAuthentication} from "@/hooks/checkAuthentication";
+import {useDispatch} from "react-redux";
+import {reduxSetModalState} from "@/store/Slices";
+import {useRouter} from "next/navigation";
 
 const Data = [
   "General",
@@ -26,11 +31,29 @@ const Data = [
 ];
 
 const MainWrapper = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
   const [faqData, setFaqData] = useState();
   const [openIndex, setOpenIndex] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState();
+  const [loginModal, setLoginModal] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+
+  const {checkAuthentication} = useAuthentication();
+
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
+  };
+
+  const validateAuth = async () => {
+    const isAuthenticated = await checkAuthentication();
+    if (isAuthenticated === true) {
+      setIsLogin(true);
+    } else setIsLogin(false);
+  };
 
   const sliderRef = useRef(null);
 
@@ -138,6 +161,10 @@ const MainWrapper = () => {
     };
   }, []);
 
+  useEffect(() => {
+    validateAuth();
+  }, []);
+
   const toggleQuestion = index => {
     if (openIndex === index) {
       setOpenIndex(null);
@@ -147,6 +174,11 @@ const MainWrapper = () => {
   };
   return (
     <div className={style.conatiner_wrapper}>
+      <LoginModal
+        closeModal={() => toggleLoginModal(false)}
+        isModalOpen={loginModal}
+        handleChangeRoute={() => setIsLogin(true)}
+      />
       <div className={style.container}>
         <ul className={style.listings}>
           <li className={style.list}>
@@ -262,15 +294,19 @@ const MainWrapper = () => {
               080-66084700
             </button>
           </a>
-          <button className={style.request_btn}>
-            <a href="/service-requests" className="flex">
-              <FaHeadset
-                size={18}
-                color={"#222"}
-                className="pointer-events-none mr-[10px]"
-              />
-              Raise a service request
-            </a>
+          <button
+            className={style.request_btn}
+            onClick={() =>
+              isLogin
+                ? router.push("/service-requests")
+                : toggleLoginModal(true)
+            }>
+            <FaHeadset
+              size={18}
+              color={"#222"}
+              className="pointer-events-none mr-[10px]"
+            />
+            Raise a service request
           </button>
         </div>
       </div>
