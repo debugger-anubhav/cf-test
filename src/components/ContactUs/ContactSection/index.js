@@ -26,6 +26,7 @@ function ContactSection() {
       link: "/service-requests",
     },
   ];
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
