@@ -24,7 +24,7 @@
   @apply flex w-[225px] h-[2px] bg-EDEDEE mt-4;
 }
 .menu_icon_drawer {
-  @apply flex xl:w-10 xl:h-10 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 items-center cursor-pointer;
+  @apply flex xl:w-10 xl:h-10 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 min-h-[16px] min-w-[16px] items-center cursor-pointer;
 }
 .header_city_name {
   @apply flex lg:text-base capitalize text-12 font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;

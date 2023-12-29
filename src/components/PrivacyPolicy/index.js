@@ -118,7 +118,7 @@ const PrivacyPolicyData = () => {
           <a
             className={styles.privacy_policy_detail_link}
             href={string.privacy_policy.para_2.first_link}>
-            {string.privacy_policy.para_2.first_link}
+            {string.privacy_policy.para_4.link}
           </a>
         </p>
       </div>
