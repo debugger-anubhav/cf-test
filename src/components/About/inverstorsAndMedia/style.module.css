@@ -7,7 +7,7 @@
 }
 
 .investors_wrapper {
-  @apply flex w-full gap-4 md:gap-6 overflow-x-scroll xl:flex-wrap;
+  @apply xl:grid xl:grid-cols-5 flex w-full gap-4 md:gap-6 overflow-x-scroll xl:flex-wrap;
 }
 
 .investors_wrapper::-webkit-scrollbar {
@@ -15,7 +15,7 @@
   display: none;
 }
 .investor_container {
-  @apply !min-w-[109.5px]  sm:!min-w-[150px] md:!min-w-[219px] xl:!max-w-[219px];
+  @apply !min-w-[109.5px]  sm:!min-w-[150px] md:!min-w-[219px] xl:!max-w-full xl:!min-w-full;
 }
 
 .accolades_cards {
