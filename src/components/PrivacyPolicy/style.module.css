@@ -48,5 +48,5 @@
   @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
 }
 .list_point {
-  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins;
+  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins ml-2;
 }

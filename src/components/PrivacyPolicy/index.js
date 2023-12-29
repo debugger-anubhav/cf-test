@@ -85,7 +85,7 @@ const PrivacyPolicyData = () => {
         <p className={styles.privacy_policy_detail_heading}>
           {string.privacy_policy.information_collection.heading}
         </p>
-        <p className={`${styles.privacy_policy_detail_text} lg:mt-4 mt-3`}>
+        <p className={`${styles.privacy_policy_detail_text} lg:mt-4 mt-3 mb-4`}>
           {string.privacy_policy.information_collection.subheading}
         </p>
         {string.privacy_policy.information_collection.points?.map(
