@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./style.module.css";
-import {ForwardArrow} from "@/assets/icon";
 import {AboutUs} from "@/assets/images";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
+
 const data = {
   hightlight:
     "Cityfurnish is a leading Furniture and Appliances Rental Brand in India. ",
@@ -42,14 +43,10 @@ const data = {
 const HeroSection = () => {
   return (
     <div className={styles.main_container}>
-      <div className={styles.bread_crumbs}>
-        <a href={"/"}>
-          <p className={styles.bread_crumbs_text}>Home</p>
-        </a>
-        <ForwardArrow color={"#71717A"} size={12} />
-        <p className={`${styles.bread_crumbs_text} !font-medium`}>About Us</p>
+      <BreadCrumbsCommon currentPage={"About Us"} />
+      <div>
+        <h1 className={styles.heading}>About us</h1>
       </div>
-      <h1 className={styles.heading}>About us</h1>
       <div className={styles.content_wrapper}>
         <div className={styles.section1_wrapper}>
           <p className={styles.about_desc}>

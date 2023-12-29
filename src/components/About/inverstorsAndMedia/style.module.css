@@ -7,7 +7,7 @@
 }
 
 .investors_wrapper {
-  @apply xl:grid xl:grid-cols-5 flex w-full gap-4 md:gap-6 overflow-x-scroll xl:flex-wrap;
+  @apply xl:grid xl:grid-cols-5 flex w-full gap-4 md:gap-6 overflow-x-scroll;
 }
 
 .investors_wrapper::-webkit-scrollbar {

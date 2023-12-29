@@ -23,7 +23,6 @@ export default function Vacancies() {
     axios
       .get(baseURL + endPoints.careerPageData)
       .then(res => {
-        console.log(res?.data?.data, "response");
         setVacaniesData(res?.data?.data);
         setLoadingSkeleton(false);
       })
@@ -37,7 +36,6 @@ export default function Vacancies() {
   };
   useEffect(() => {
     getData();
-    console.log(vacaniesData);
   }, []);
   return (
     <div className={styles.main_container} id="vacancies-section">

@@ -67,7 +67,6 @@ function CustomerPayment() {
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === true) {
       setIsLogin(true);
     } else setIsLogin(false);

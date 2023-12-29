@@ -72,10 +72,6 @@ const CitymaxHeader = ({zIndex}) => {
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
-  useEffect(() => {
-    console.log(categoryPageReduxData, "categoryPageReduxData");
-  }, [categoryPageReduxData]);
-
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
@@ -147,7 +143,6 @@ const CitymaxHeader = ({zIndex}) => {
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === true) {
       setIsLogin(true);
     } else setIsLogin(false);
@@ -185,10 +180,6 @@ const CitymaxHeader = ({zIndex}) => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-    console.log(categoryPageReduxData?.savedProducts?.length, "guyywhuhui");
-  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",

@@ -352,11 +352,6 @@ const CitymaxPlanDetail = () => {
     );
   }, [planDetailsArray]);
 
-  useEffect(() => {
-    console.log(selectedItemsArr, "selectedddd");
-    console.log(additionalChargeItems, "additionalll");
-  }, [selectedItemsArr, additionalChargeItems]);
-
   const ProceedButton = () => (
     <button
       className={styles.proceed_btn}

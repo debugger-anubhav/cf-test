@@ -76,7 +76,6 @@ export default function FilterSortDrawer({
 
   const handleSort = (item, index) => {
     setPageNo(1);
-    console.log(item);
     setSelectedOption(item);
     if (item === "New") {
       dispatch(addSortKey(newSortKey));

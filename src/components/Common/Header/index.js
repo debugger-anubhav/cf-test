@@ -81,10 +81,6 @@ const Header = () => {
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
-  useEffect(() => {
-    console.log(categoryPageReduxData, "categoryPageReduxData");
-  }, [categoryPageReduxData]);
-
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
@@ -172,7 +168,6 @@ const Header = () => {
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     setIsLogin(isAuthenticated);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
     // setUserId(userIdToUse);
@@ -217,10 +212,6 @@ const Header = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-    console.log(categoryPageReduxData?.savedProducts?.length);
-  }, [categoryPageReduxData?.savedProducts?.length]);
 
   const data = {
     userId: userId ?? "",
