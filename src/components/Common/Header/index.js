@@ -294,13 +294,13 @@ const Header = () => {
               setClick={val => setClick(val)}
             />
             <a
-              href={"/cityfurnish"}
+              href={"/"}
               onClick={e => {
                 e.preventDefault();
               }}>
               <p
                 className={styles.logo_text_main_header}
-                onClick={() => router.push("/cityfurnish")}>
+                onClick={() => router.push("/")}>
                 cityfurnish
               </p>
             </a>

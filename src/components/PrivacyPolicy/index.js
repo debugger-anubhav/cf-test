@@ -13,10 +13,10 @@ const PrivacyPolicyData = () => {
         <ul className={styles.listings}>
           <li className={styles.list}>
             <a
-              href={"/cityfurnish"}
+              href={"/"}
               className={styles.route_text}
               onClick={() => {
-                router.push("/cityfurnish");
+                router.push("/");
               }}>
               Home
             </a>

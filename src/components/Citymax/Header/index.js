@@ -259,13 +259,11 @@ const CitymaxHeader = ({zIndex}) => {
             )}
 
             <a
-              href={"/cityfurnish"}
+              href={"/"}
               onClick={e => {
                 e.preventDefault();
               }}>
-              <div
-                className={styles.logo}
-                onClick={() => router.push("/cityfurnish")}>
+              <div className={styles.logo} onClick={() => router.push("/")}>
                 <img src={`${IconLink + "citymax_final.svg"}`} />
               </div>
             </a>

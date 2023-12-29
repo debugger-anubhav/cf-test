@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
   console.log(details, "detailss");
 
   useEffect(() => {
-    if (details.TransactionReferenceNumber === "") router.push("/cityfurnish");
+    if (details.TransactionReferenceNumber === "") router.push("/");
   }, []);
 
   return (
@@ -65,9 +65,7 @@ const PaymentSuccess = () => {
         </div>
       </div>
 
-      <div
-        onClick={() => router.push("/cityfurnish")}
-        className={styles.yellowbtn}>
+      <div onClick={() => router.push("/")} className={styles.yellowbtn}>
         Return to home page
       </div>
     </div>

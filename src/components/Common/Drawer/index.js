@@ -150,7 +150,7 @@ export default function CommonDrawer({
           />
         </div>
         <div className={styles.drawer_content}>
-          <a href="/cityfurnish">
+          <a href="/">
             <p className={styles.logo_text}>cityfurnish</p>
           </a>
           <div className={styles.menu_list}>

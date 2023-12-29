@@ -412,7 +412,7 @@ const SubHeader = ({params}) => {
           <div className={styles.container}>
             <ul className={styles.listings}>
               <li className={styles.list}>
-                <a href="/cityfurnish" target="_self" rel="noopener">
+                <a href="/" target="_self" rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer`}>Home</p>
                 </a>
                 <ForwardArrow size={12} color={"#71717A"} />
