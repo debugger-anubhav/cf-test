@@ -49,14 +49,16 @@ export default function TermsOfUseData() {
                 {index === 0 ? (
                   <p>
                     {`You agree to the terms and conditions outlined in this Terms
-                    of Use ("Terms of Use") with respect to`}
-                    <a
-                      href="https://www.cityfurnish.com"
-                      target="_self"
-                      className={styles.terms_of_use_links}>
-                      https://www.cityfurnish.com
-                    </a>
-                    {item}
+                    of Use ("Terms of Use") with respect to `}
+                    <span>
+                      <a
+                        href="https://www.cityfurnish.com"
+                        target="_self"
+                        className={`${styles.terms_of_use_links} !no-underline !text-71717A mr-2 `}>
+                        https://www.cityfurnish.com
+                      </a>
+                      ("Cityfurnish"/"Website").{item}
+                    </span>
                   </p>
                 ) : (
                   <>{item}</>

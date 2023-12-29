@@ -29,5 +29,5 @@
   @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
 }
 .terms_of_use_links {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
 }
