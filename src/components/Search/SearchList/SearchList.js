@@ -96,7 +96,6 @@ const SearchList = () => {
 
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
-    console.log(isValid, "response from isauthencate");
     setIsLogin(isValid);
     getSavedItems(isValid);
   };

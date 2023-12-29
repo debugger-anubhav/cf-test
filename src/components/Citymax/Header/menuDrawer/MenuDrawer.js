@@ -47,7 +47,6 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
 
   const handleAuthentication = async () => {
     const isAuth = await checkAuthentication();
-    console.log(isAuth, "isAuth");
     setIsLogin(isAuth);
   };
 

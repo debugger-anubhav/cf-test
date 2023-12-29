@@ -3,7 +3,7 @@ import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
-import {useParams, useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -26,8 +26,7 @@ const ProceedModal = ({
   const router = useRouter();
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
-  const params = useParams();
-  console.log(params, "paramsss");
+
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {

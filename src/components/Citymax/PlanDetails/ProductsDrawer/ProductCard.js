@@ -63,7 +63,6 @@ const ProductCard = ({
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === false) {
       console.log("inside false");
       toggleDrawer();

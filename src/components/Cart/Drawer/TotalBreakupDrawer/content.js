@@ -15,8 +15,6 @@ const BillContent = ({
   const billBreakup = pagedata.billBreakout;
   const isCitymaxBill = pagedata.cartItems[0]?.is_frp === 1;
 
-  console.log(pagedata, "ue");
-
   return (
     <>
       <div className={styles.breakup_wrapper}>

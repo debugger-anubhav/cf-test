@@ -12,7 +12,6 @@ export function AuthProvider(WrappedComponent) {
 
     const validateAuth = async () => {
       const isLogin = await checkAuthentication();
-      console.log(isLogin, "response from isauthencate");
       setisAuthenticated(isLogin);
       if (isLogin === false) {
         console.log("in baddd");
