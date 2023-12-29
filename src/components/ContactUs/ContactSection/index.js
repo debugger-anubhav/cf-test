@@ -1,11 +1,10 @@
 import React from "react";
 import styles from "./style.module.css";
 import {ForwardArrow, Mail} from "@/assets/icon";
-import {useRouter} from "next/navigation";
 import {FaHeadset, FaPhone} from "react-icons/fa6";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 
 function ContactSection() {
-  const router = useRouter();
   const data = [
     {
       icon: <FaPhone size={30} className={styles.icon_contact} />,
@@ -29,24 +28,8 @@ function ContactSection() {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.container}>
-        <ul className={styles.listings}>
-          <li className={styles.list}>
-            <a
-              href={"/"}
-              className={styles.route_text}
-              onClick={() => {
-                router.push("/");
-              }}>
-              Home
-            </a>
-            <ForwardArrow size={12} color={"#71717A"} />
-          </li>
-          <li className={styles.list}>
-            <p className={`${styles.route_text} !font-medium`}>Contact Us</p>
-          </li>
-        </ul>
-      </div>
+      <BreadCrumbsCommon currentPage={"Contact Us"} />
+
       <div className={styles.heading_container}>Contact Us</div>
       <div className={styles.contact_wrapper}>
         {data?.map((item, index) => {
