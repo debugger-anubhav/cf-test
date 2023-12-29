@@ -18,7 +18,17 @@ function MainSection() {
           return (
             <div className={styles.data_box} key={index.toString()}>
               <p className={styles.heading}>{item.heading}</p>
-              <p className={styles.detail}>{item.decription}</p>
+              <p className={styles.detail}>
+                {item.heading === "And" ? (
+                  <span>
+                    {item.decription1}
+                    {item.decription2}
+                  </span>
+                ) : (
+                  item.decription
+                )}
+              </p>
+
               {index === Data.length - 1 && (
                 <>
                   <p className={`${styles.detail} !mt-4`}>{item.lastDesc}</p>
