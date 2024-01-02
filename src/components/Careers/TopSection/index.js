@@ -9,11 +9,19 @@ export default function TopSection() {
       <div className={styles.heading_row}>
         <div className={styles.main_heading}>
           {` Don't Just Dream, Do it With Us `}
-          <span className="lg:flex hidden"> 🤩</span>
+          <span className="lg:flex hidden ml-2"> 🤩</span>
         </div>
-        <a href="#vacancies-section">
-          <button className={styles.join_us}>Join us</button>
-        </a>
+        {/* <a href="#vacancies-section"> */}
+        <button
+          className={styles.join_us}
+          onClick={() =>
+            document.getElementById("vacancies-section").scrollIntoView({
+              behavior: "smooth",
+            })
+          }>
+          Join us
+        </button>
+        {/* </a> */}
       </div>
       <div className={styles.detailing_row}>
         <p className={styles.subheading}>We Believe in</p>
