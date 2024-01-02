@@ -54,7 +54,6 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       });
   };
 
-  console.log(slotData, "slotData");
   const updateSlot = async () => {
     const body = {
       slot: `${selectedDate} 09:00:00`,

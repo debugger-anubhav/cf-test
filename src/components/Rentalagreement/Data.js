@@ -6,8 +6,10 @@ export const Data = [
   },
   {
     heading: "And",
-    decription:
-      "The individuals identified as _______________________ ('Subscriber'). The Company and the Subscriber shall individually be referred to as 'Party' and collectively as 'Parties'.",
+    decription1:
+      'The individuals identified as _______________________ ("Subscriber"). ',
+    decription2:
+      " The Company and the Subscriber shall individually be referred to as 'Party' and collectively as 'Parties'.",
   },
   {
     heading: "Whereas",

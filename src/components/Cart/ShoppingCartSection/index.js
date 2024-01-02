@@ -277,7 +277,6 @@ const ShoppingCartSection = () => {
 
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
-    console.log(isValid, "response from isauthencate");
     if (isValid === true) {
       setIsLogin(true);
       fetchUserDetails();

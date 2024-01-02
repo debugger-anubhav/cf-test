@@ -7,25 +7,25 @@ function OurOffices() {
     {
       heading: "Gurgaon Office",
       subheading:
-        "819 - P, 3rd Floor, Netaji Subhash MargSector 47, Gurugram, Haryana - 122018",
+        "819 - P, 3rd Floor, Netaji Subhash Marg Sector 47, Gurugram, Haryana - 122018",
     },
     {
       heading: "Bangalore Office",
       subheading:
-        "2nd Floor, D, 310, 6th Cross Rd, 1st Block ,Koramangala Bengaluru, Karnataka - 560035",
+        "2nd Floor, D, 310, 6th Cross Rd, 1st Block, Koramangala Bengaluru, Karnataka - 560035",
     },
     {
       heading: "Noida Office",
-      subheading: "#72, Shahadra Sector-141,Noida, UP",
+      subheading: "#72, Shahadra Sector-141, Noida, UP",
     },
     {
       heading: "Pune Office",
       subheading:
-        "Unit No. 11, Mulberry Gardens, Hadapsar, Pune,Maharashtra - 411028",
+        "Unit No. 11, Mulberry Gardens, Hadapsar, Pune, Maharashtra - 411028",
     },
     {
       heading: "Mumbai Office",
-      subheading: "Yadav Nagar, Chandivali, Powai Mumbai,Maharashtra - 400072",
+      subheading: "Yadav Nagar, Chandivali, Powai Mumbai, Maharashtra - 400072",
     },
   ];
   return (

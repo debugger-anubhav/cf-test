@@ -11,8 +11,15 @@ function MainSection() {
             return (
               <div key={index.toString()} className="relative">
                 <div className="sm:flex hidden">
-                  <img src={item.backgroungImage} alt={item.Heading} />
+                  <img
+                    src={
+                      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/frame-about-us.webp"
+                    }
+                    alt={item.Heading}
+                    className="max-w-[320px] max-h-[194px]"
+                  />
                   <div className={styles.detail_wrapper}>
+                    <img src={item.icon} className="mb-4 w-11 h-11" />
                     <p className={styles.heading}>{item.Heading}</p>
                     <p className={styles.detail}>{item.text}</p>
                   </div>

@@ -118,7 +118,7 @@ export default function UserSettings() {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
               }
-              router.push("/cityfurnish");
+              router.push("/");
             }}>
             Logout
           </p>

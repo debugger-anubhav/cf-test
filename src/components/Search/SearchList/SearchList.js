@@ -96,7 +96,6 @@ const SearchList = () => {
 
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
-    console.log(isValid, "response from isauthencate");
     setIsLogin(isValid);
     getSavedItems(isValid);
   };
@@ -151,7 +150,7 @@ const SearchList = () => {
       <div className={style.container}>
         <ul className={style.listings}>
           <li className={style.list}>
-            <a href="/cityfurnish">
+            <a href="/">
               <p className={`${style.route_text} cursor-pointer`}>Home</p>
             </a>
             <ForwardArrow size={12} color={"#71717A"} />

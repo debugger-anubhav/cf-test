@@ -47,7 +47,6 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
 
   const handleAuthentication = async () => {
     const isAuth = await checkAuthentication();
-    console.log(isAuth, "isAuth");
     setIsLogin(isAuth);
   };
 
@@ -151,9 +150,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
             ))}
           </div>
 
-          <div
-            className={styles.button}
-            onClick={() => router.push("/cityfurnish")}>
+          <div className={styles.button} onClick={() => router.push("/")}>
             <p className={styles.back_txt}>Back to Cityfurnish</p>
             <img
               src={`${IconLink + "home-cityfurnish.svg"}`}

@@ -40,7 +40,6 @@ const CityShieldPage = () => {
     getUserDetails();
   }, []);
   const handlePayment = async () => {
-    console.log("innnn");
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );

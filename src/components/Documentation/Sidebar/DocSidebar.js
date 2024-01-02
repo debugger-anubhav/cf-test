@@ -71,7 +71,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       localStorage.removeItem("user_name");
       localStorage.removeItem("ci_session");
       location.reload();
-      router.push("/cityfurnish");
+      router.push("/");
     }
   };
 

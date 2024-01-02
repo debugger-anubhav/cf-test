@@ -14,7 +14,6 @@ const data = {
     {
       link1: `${AboutUs}/cityfurnish-culture-7.webp`,
       link2: `${AboutUs}/cityfurnish-culture-5.webp`,
-      // link3:`${AboutUs}/cityfurnish-culture-3.webp`
       link3: `${AboutUs}/cityfurnish-culture-2.webp`,
       link4: `${AboutUs}/cityfurnish-culture-4.webp`,
       link5: `${AboutUs}/cityfurnish-culture-8.webp`,

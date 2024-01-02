@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./style.module.css";
-import {ForwardArrow} from "@/assets/icon";
 import {AboutUs} from "@/assets/images";
+import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
+
 const data = {
   hightlight:
-    "Cityfurnish is a leading Furniture and Appliances Rental Brand in India.",
+    "Cityfurnish is a leading Furniture and Appliances Rental Brand in India. ",
   about_first:
     "With a team of experienced artisans, the brand creates beautiful and durable pieces that blend traditional and modern styles. Our furniture is inspired by the Indian urban user and how they live in their homes.",
   about_second:
@@ -42,18 +43,10 @@ const data = {
 const HeroSection = () => {
   return (
     <div className={styles.main_container}>
-      <div className={styles.bread_crumbs}>
-        <a href={"/cityFurnish"}>
-          <p className={styles.bread_crumbs_text}>Home</p>
-        </a>
-        <ForwardArrow color={"#71717A"} size={12} />
-        <a href={"/banglore/rent"}>
-          <p className={`${styles.bread_crumbs_text} !font-medium`}>
-            All Products
-          </p>
-        </a>
+      <BreadCrumbsCommon currentPage={"About Us"} />
+      <div>
+        <h1 className={styles.heading}>About us</h1>
       </div>
-      <h1 className={styles.heading}>About us</h1>
       <div className={styles.content_wrapper}>
         <div className={styles.section1_wrapper}>
           <p className={styles.about_desc}>

@@ -12,11 +12,10 @@ export function AuthProvider(WrappedComponent) {
 
     const validateAuth = async () => {
       const isLogin = await checkAuthentication();
-      console.log(isLogin, "response from isauthencate");
       setisAuthenticated(isLogin);
       if (isLogin === false) {
         console.log("in baddd");
-        router.push("/cityfurnish");
+        router.push("/");
       }
     };
 
@@ -28,7 +27,7 @@ export function AuthProvider(WrappedComponent) {
     //   setTimeout(() => {
     //     if (isAuthenticated === false) {
     //       console.log("in baddd");
-    //       router.push("/cityfurnish");
+    //       router.push("/");
     //     }
     //   }, 1000);
     // }, []);
