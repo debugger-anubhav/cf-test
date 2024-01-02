@@ -7,10 +7,10 @@ export default function TopSection() {
     <div className={styles.main_container}>
       <BreadCrumbsCommon currentPage={"Join Our Team"} />
       <div className={styles.heading_row}>
-        <div className={styles.main_heading}>
+        <h1 className={styles.main_heading}>
           {` Don't Just Dream, Do it With Us `}
           <span className="lg:flex hidden ml-2"> 🤩</span>
-        </div>
+        </h1>
         {/* <a href="#vacancies-section"> */}
         <button
           className={styles.join_us}
@@ -24,8 +24,8 @@ export default function TopSection() {
         {/* </a> */}
       </div>
       <div className={styles.detailing_row}>
-        <p className={styles.subheading}>We Believe in</p>
-        <p className={styles.heading}>Action. Community. Quality.</p>
+        <h3 className={styles.subheading}>We Believe in</h3>
+        <h2 className={styles.heading}>Action. Community. Quality.</h2>
         <p className={styles.para}>
           {`At Cityfurnish, we're building an on-demand furniture and appliances
           startup that is delighting many customers across India with quality

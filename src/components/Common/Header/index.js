@@ -255,7 +255,23 @@ const Header = () => {
   //     setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
   //   }
   // }, [userId]);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const windowHeight = window.innerHeight;
+      if (window.scrollY > 104 && windowHeight > 104) {
+        setHasScrolled(true);
+      } else {
+        setHasScrolled(false);
+      }
+    };
 
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <>
       <LoginModal
@@ -275,7 +291,11 @@ const Header = () => {
         userId={isLogin ? userId : tempUserId}
         city={cityForModal}
       />
-      <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
+      <div
+        className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}
+        style={{
+          boxShadow: hasScrolled ? "0 4px 4px 0 rgba(0,0,0,.06)" : "none",
+        }}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <CommonDrawer
