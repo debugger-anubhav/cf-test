@@ -11,6 +11,16 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 
+export const CityToStateMapping = {
+  Delhi: "Delhi",
+  Mumbai: "Maharashtra",
+  Bangalore: "Karnataka",
+  Pune: "Maharashtra",
+  Gurgaon: "Haryana",
+  "Ghaziabad/Noida": "Uttar Pradesh",
+  Hyderabad: "Telangana",
+};
+
 export const RentFurniture = [
   {
     img: HomePageImages.bedroom,
