@@ -158,6 +158,11 @@ export const endPoints = {
     deleteCartItems: userId =>
       `fc-shopping-carts/delete?userId=${userId}&emptyCart=true`,
   },
+
+  offlinePayment: {
+    getOfflineCutomerDetails: orderId =>
+      `fc-payments/getOfflinePageDetails?dealCodeNumber=${orderId}`,
+  },
   // categoryHappySubscriber:
   //   "fc-care-instructions/getCategoryPageHappyCustomerStories",
 

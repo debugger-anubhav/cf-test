@@ -1,0 +1,22 @@
+.main_container {
+  @apply font-Poppins 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pb-20;
+}
+.head {
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mt-6 xl:mt-10;
+}
+.details_wrapper {
+  @apply xl:mt-8 mt-6;
+}
+.row {
+  @apply flex gap-2;
+}
+.desc {
+  @apply text-71717A text-14 xl:text-16 leading-6 tracking-desc xl:tracking-0.3;
+}
+.rupeeicon {
+  @apply font-Inter;
+}
+
+.yellowbtn {
+  @apply cursor-pointer mt-8 xl:mt-12 w-full sm:w-[232px] h-12 sm:h-14 bg-F6B704 rounded-lg flex gap-[10px] justify-center items-center text-222 text-16 font-medium leading-5;
+}
