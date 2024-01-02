@@ -27,7 +27,7 @@ function HaveQueries() {
   };
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading_container}>Have Queries?</div>
+      <h2 className={styles.heading_container}>Have Queries?</h2>
 
       <div className={styles.QuesAnsArray_div}>
         {FAQ?.map((item, index) => {

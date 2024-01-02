@@ -23,9 +23,9 @@ const PrivacyPolicyData = () => {
             <ForwardArrow size={12} color={"#71717A"} />
           </li>
           <li className={styles.list}>
-            <p className={`${styles.route_text} !font-medium`}>
+            <h1 className={`${styles.route_text} !font-medium`}>
               Privacy Policy
-            </p>
+            </h1>
           </li>
         </ul>
       </div>
@@ -67,9 +67,9 @@ const PrivacyPolicyData = () => {
       </div>
 
       <div className={styles.details_principles}>
-        <p className={styles.privacy_policy_detail_heading}>
+        <h2 className={styles.privacy_policy_detail_heading}>
           {string.privacy_policy.principles.heading}
-        </p>
+        </h2>
         {string.privacy_policy.principles.points?.map((item, index) => {
           return (
             <li
@@ -82,9 +82,9 @@ const PrivacyPolicyData = () => {
       </div>
 
       <div className={styles.details_information_collection}>
-        <p className={styles.privacy_policy_detail_heading}>
+        <h2 className={styles.privacy_policy_detail_heading}>
           {string.privacy_policy.information_collection.heading}
-        </p>
+        </h2>
         <p className={`${styles.privacy_policy_detail_text} lg:mt-4 mt-3 mb-4`}>
           {string.privacy_policy.information_collection.subheading}
         </p>
@@ -116,9 +116,9 @@ const PrivacyPolicyData = () => {
         <p className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_4.firts_part}
           <a
-            className={styles.privacy_policy_detail_link}
-            href={string.privacy_policy.para_2.first_link}>
-            {string.privacy_policy.para_4.link}
+            href="mailto:hello@cityfurnish.com"
+            className={styles.privacy_policy_detail_link}>
+            hello@cityfurnish.com{" "}
           </a>
         </p>
       </div>

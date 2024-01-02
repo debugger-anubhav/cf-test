@@ -6,7 +6,7 @@ function MainSectionHowWork() {
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"How It Works"} />
-      <div className={styles.main_heading}>How It Works</div>
+      <h1 className={styles.main_heading}>How It Works</h1>
       <div className={styles.sub_heading}>
         Following is the process of placing order on Cityfurnish. Alternatively
         you can also call our customer care to place an order.

@@ -10,7 +10,7 @@ function MainSection() {
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Rental Agreement"} />
-      <div className={styles.main_heading}>{Heading}</div>
+      <h1 className={styles.main_heading}>{Heading}</h1>
       <div className={styles.detail}>{Subheading}</div>
 
       <div>
@@ -46,7 +46,7 @@ function MainSection() {
         {Points?.map((item, index) => {
           return (
             <div className={styles.data_box} key={index.toString()}>
-              <p className={styles.heading}>{item.heading}</p>
+              <h2 className={styles.heading}>{item.heading}</h2>
               {index === 0 && (
                 <p className={styles.special_subheading}>
                   In this Agreement, unless the context otherwise requires, the

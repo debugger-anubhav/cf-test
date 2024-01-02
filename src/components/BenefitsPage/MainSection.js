@@ -20,7 +20,7 @@ function MainSection() {
                   />
                   <div className={styles.detail_wrapper}>
                     <img src={item.icon} className="mb-4 w-11 h-11" />
-                    <p className={styles.heading}>{item.Heading}</p>
+                    <h3 className={styles.heading}>{item.Heading}</h3>
                     <p className={styles.detail}>{item.text}</p>
                   </div>
                 </div>

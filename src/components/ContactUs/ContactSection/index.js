@@ -30,7 +30,7 @@ function ContactSection() {
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Contact Us"} />
 
-      <div className={styles.heading_container}>Contact Us</div>
+      <h1 className={styles.heading_container}>Contact Us</h1>
       <div className={styles.contact_wrapper}>
         {data?.map((item, index) => {
           return (
@@ -42,10 +42,10 @@ function ContactSection() {
               <a href={item?.link} className={styles.link_tag}>
                 <div className={styles.box_img}>{item.icon}</div>
                 <div className={styles.detail_wrapper}>
-                  <p className={styles.box_heading}>
+                  <h3 className={styles.box_heading}>
                     {item.heading}
                     <ForwardArrow size={19.2} color={"#222"} />
-                  </p>
+                  </h3>
                   <div className={styles.box_subheading}>{item.subheading}</div>
                 </div>
               </a>

@@ -11,7 +11,7 @@
 }
 
 .heading {
-  @apply text-20 leading-8 font-medium text-45454A md:tracking-[-0.48px] mb-6 lg:mb-8 tracking-[-0.4px];
+  @apply lg:text-24 text-20 leading-8 font-medium text-45454A md:tracking-[-0.48px] mb-6 lg:mb-8 tracking-[-0.4px];
 }
 
 .about_desc {

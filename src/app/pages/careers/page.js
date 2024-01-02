@@ -9,6 +9,7 @@ import Vacancies from "@/components/Careers/Vacancies";
 import Gallery from "@/components/Careers/Gallery";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -17,6 +18,7 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 export default function Career() {
   return (
     <div className="large_layout">
+      <AnnouncementBar />
       <Header />
       <MenuList />
       <TopSection />
