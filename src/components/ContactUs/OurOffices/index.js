@@ -30,7 +30,7 @@ function OurOffices() {
   ];
   return (
     <div className={styles.wrapper}>
-      <div className={styles.heading_container}>Our Offices</div>
+      <h2 className={styles.heading_container}>Our Offices</h2>
       <div className={styles.box_wrraper}>
         {data?.map((item, index) => (
           <div key={index.toString()} className={styles.box_detail_container}>
@@ -38,7 +38,7 @@ function OurOffices() {
               <LocationIcon size={20} color={"#71717A"} className={"mr-2"} />
             </div>
             <div>
-              <div className={styles.box_heading}>{item.heading}</div>
+              <h3 className={styles.box_heading}>{item.heading}</h3>
               <div className={styles.box_subheading}>{item.subheading}</div>
             </div>
           </div>

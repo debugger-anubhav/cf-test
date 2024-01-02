@@ -26,7 +26,7 @@ export default function TermsOfUseData() {
           </li>
         </ul>
       </div>
-      <div className={styles.heading_container}>Terms Of Use</div>
+      <h1 className={styles.heading_container}>Terms Of Use</h1>
       <div className={styles.terms_of_use_detail_text}>
         <a
           href="https://www.cityfurnish.com"
@@ -38,7 +38,7 @@ export default function TermsOfUseData() {
       </div>
       <div className={styles.general_wrapper}>
         <div className={styles.terms_of_use_general}>
-          <div className={styles.general_heading}>General</div>
+          <h2 className={styles.general_heading}>General</h2>
           {string.terms_of_use.general?.map((item, index) => {
             return (
               <div
