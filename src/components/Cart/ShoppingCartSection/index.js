@@ -53,6 +53,7 @@ const ShoppingCartSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const data = useSelector(state => state.cartPageData);
+  const homePageReduxData = useSelector(state => state.homePagedata);
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const cartItems = data.cartItems;
   const billBreakup = data.billBreakout;
@@ -79,11 +80,12 @@ const ShoppingCartSection = () => {
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [isLogin, setIsLogin] = useState();
+  const [isLogin, setIsLogin] = useState(homePageReduxData.isLogin);
   const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+  console.log(isLogin, "wjhei");
   const userIdToUse = isLogin ? userId : tempUserId;
 
   // console.log(userDetails, "userDetails");
@@ -238,7 +240,7 @@ const ShoppingCartSection = () => {
 
   useEffect(() => {
     fetchBill();
-  }, [isCoinApplied, isChecked, isMonthly, isCouponApplied]);
+  }, [isCoinApplied, isChecked, isMonthly, isCouponApplied, isLogin]);
 
   const toggleLoginModal = () => {
     dispatch(reduxSetModalState(!modalStateFromRedux));

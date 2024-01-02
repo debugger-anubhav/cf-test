@@ -272,6 +272,7 @@ const Header = () => {
         isModalOpen={loginModal}
         setIsLogin={bool => {
           setIsLogin(bool);
+          dispatch(setIsLogin(bool));
         }}
         handleChangeRoute={() => {
           if (click === "profile") router.push(`/usersettings`);

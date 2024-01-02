@@ -92,6 +92,7 @@ export const endPoints = {
     checkCouponApplicability: "fc-couponcards/checkCoupon",
     makePayment: "fc-payments/makePayment",
     successPayment: "fc-payments/postPaymentSuccess",
+    offlinePayment: `fc-payments/placeOfflineOrder`,
   },
 
   yourAddressPage: {
