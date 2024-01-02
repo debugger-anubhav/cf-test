@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styles from "./styles.module.css";
 import otherStyles from "../ShoppingCartSection/style.module.css";
 import {
@@ -14,7 +14,7 @@ import {
   DownPopUpArrow,
 } from "@/assets/icon";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
-import {Formik, Form, Field, ErrorMessage, useFormikContext} from "formik";
+import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -26,16 +26,21 @@ import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {getLocalStorage, loadScript} from "@/constants/constant";
+import {
+  CityToStateMapping,
+  getLocalStorage,
+  loadScript,
+} from "@/constants/constant";
 import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 import {MdOutlineVerified} from "react-icons/md";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const formik = useFormikContext();
+  // const formik = useFormikContext();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
   const [haveGstNumber, sethaveGstNumber] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
@@ -43,6 +48,8 @@ const AddressSection = () => {
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
   const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
+  // const [formState, setFormState] = useState({});
+  const formikRef = useRef(null);
 
   // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
@@ -56,7 +63,7 @@ const AddressSection = () => {
   const isOfflineCustomer = useSelector(
     state => state.cartPageData.isOfflineCustomer,
   );
-  console.log(isOfflineCustomer, "isOfflineCustomeruiiui pagll");
+  // console.log(isOfflineCustomer, "isOfflineCustomeruiiui pagll");
   const addressArray = data.savedAddresses;
 
   const validationSchema = Yup.object({
@@ -249,25 +256,35 @@ const AddressSection = () => {
     });
   }
 
-  const handleOfflineOrder = () => {
-    console.log(formik, "valuesss");
-    // const body = {
-    //   user_name: "chetan malviya",
-    //   email: "chetanmalviya924@gmail.com",
-    //   mobile_no: "8839597780",
-    //   alert_mobile_no: "7554254524",
-    //   address1: "testing ,33",
-    //   address2: "test",
-    //   state: "Karnataka",
-    //   postal_code: "560004",
-    //   city: "Bangalore",
-    //   rental_amount: 599.13,
-    //   cf_care_option: 1,
-    //   order_type: "new-order",
-    //   order_number: "",
-    //   payment_type: 1,
-    //   userId: 85757,
-    // };
+  const handleOfflineOrder = values => {
+    const body = {
+      user_name: values.fullName,
+      email: "trupali96@gmail.com",
+      mobile_no: values.contactNumber,
+      alert_mobile_no: values.alternateContactNumber || "",
+      address1: values.address,
+      address2: values.landmark,
+      state: CityToStateMapping[cityName] || "",
+      postal_code: values.postalCode,
+      city: cityName,
+      rental_amount: 1300,
+      cf_care_option: data.isCityShield ? 1 : 0,
+      order_type: values.orderType,
+      order_number: values.orderNumber || "",
+      payment_type: 1,
+      userId: parseInt(userIdToUse),
+    };
+
+    axios
+      .post(baseURL + endPoints.addToCart.offlinePayment, body)
+      .then(res => {
+        console.log(res, "res in offlinePayment");
+        if (res?.data?.data?.success === "1") {
+          showToastNotification("Advanced payment is done successfully.", 1);
+          router.push("/");
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
@@ -333,10 +350,12 @@ const AddressSection = () => {
           />
         )}
 
-        <div className={styles.new_address_wrapper}>
+        <div className={styles.new_address_wrapperformikRef}>
           <h2 className={styles.new_add_head}>Add new address</h2>
 
           <Formik
+            innerRef={f => (formikRef.current = f)}
+            // ref={formikRef}
             initialValues={{
               fullName: "",
               contactNumber: "",
@@ -350,9 +369,13 @@ const AddressSection = () => {
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
-              await saveUserAddress(values);
-              getAllSavedAddresses();
-              resetForm();
+              if (isOfflineCustomer === 1) {
+                handleOfflineOrder(values);
+              } else {
+                await saveUserAddress(values);
+                getAllSavedAddresses();
+                resetForm();
+              }
               window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             }}>
             {formik => (
@@ -363,16 +386,19 @@ const AddressSection = () => {
                       <div className={styles.form_field}>
                         <p className={styles.form_label}>Order Type</p>
                         <div className={`!h-fit ${styles.form_input}`}>
-                          <div className={styles.order_type_field}>
+                          <div
+                            className={styles.order_type_field}
+                            onClick={() =>
+                              setOpenOrderTypeDropdown(!openOrderTypeDropdown)
+                            }>
                             <Field
+                              className="outline-none border-none cursor-pointer"
                               name="orderType"
                               placeholder="Select your order type"
                               value={formik.values.orderType}
+                              readOnly
                             />
-                            <div
-                              onClick={() =>
-                                setOpenOrderTypeDropdown(!openOrderTypeDropdown)
-                              }>
+                            <div>
                               {openOrderTypeDropdown ? (
                                 <PopUpArrow
                                   color={"#71717A"}
@@ -559,7 +585,10 @@ const AddressSection = () => {
                     </div>
                   </div>
                   {isOfflineCustomer !== 1 && (
-                    <button type="submit" className={styles.save_btn}>
+                    <button
+                      type="submit"
+                      className={styles.save_btn}
+                      id="form_submitP_btn">
                       Save & Proceed
                     </button>
                   )}
@@ -683,9 +712,11 @@ const AddressSection = () => {
           )}
 
           <button
-            disabled={!primaryAddress}
+            disabled={isOfflineCustomer !== 1 && !primaryAddress}
             onClick={() => {
-              isOfflineCustomer === 1 ? handleOfflineOrder() : handlePayment();
+              if (isOfflineCustomer === 1) {
+                formikRef?.current?.submitForm();
+              } else handlePayment();
             }}
             className={`!mt-6 ${!primaryAddress && "!cursor-not-allowed"} ${
               otherStyles.proceed_button
