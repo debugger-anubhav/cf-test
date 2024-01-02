@@ -9,7 +9,7 @@ export default function BreadCrumbsCommon({currentPage}) {
         <p className={styles.bread_crumbs_text}>Home</p>
       </a>
       <ForwardArrow color={"#71717A"} size={12} />
-      <p className={`${styles.bread_crumbs_text} !font-medium`}>
+      <p className={`${styles.bread_crumbs_text} !font-medium font-Poppins`}>
         {currentPage}
       </p>
     </div>
