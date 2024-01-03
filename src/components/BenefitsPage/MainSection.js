@@ -27,7 +27,7 @@ function MainSection() {
                 <div className="sm:hidden flex">
                   <div className={styles.responsive_deatil_wrapper}>
                     <img
-                      src={item.icon}
+                      src={item.updatedMobileIcon}
                       className={styles.responsive_icon}
                       alt={item.Heading}
                     />
