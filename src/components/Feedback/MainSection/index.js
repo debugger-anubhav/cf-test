@@ -59,7 +59,7 @@ export default function MainSection() {
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Feedback"} />
-      <div className={styles.main_heading}>{Heading}</div>
+      <h1 className={styles.main_heading}>{Heading}</h1>
       <div className={styles.sub_heading}>{Subheading}</div>
 
       <Formik
@@ -102,7 +102,9 @@ export default function MainSection() {
                 <ErrorMessage name="ratingnumber">
                   {msg =>
                     formik.touched.ratingnumber && (
-                      <p className={formStyles.error}>{msg} </p>
+                      <p className={`${formStyles.error} !mt-0 md:mt-1`}>
+                        {msg}{" "}
+                      </p>
                     )
                   }
                 </ErrorMessage>
@@ -117,7 +119,9 @@ export default function MainSection() {
                 <ErrorMessage name="textarea">
                   {msg =>
                     formik.touched.textarea && (
-                      <p className={formStyles.error}>{msg} </p>
+                      <p className={`${formStyles.error} !mt-0 md:mt-1`}>
+                        {msg}{" "}
+                      </p>
                     )
                   }
                 </ErrorMessage>
