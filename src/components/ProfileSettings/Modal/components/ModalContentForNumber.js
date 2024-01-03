@@ -78,7 +78,7 @@ const ModalContentForNumber = ({
                   }
                 }}
                 type="submit"
-                className={`${styles.blue_txt} whitespace-nowrap`}>
+                className={styles.blue_txt}>
                 Send OTP
               </button>
             </div>
