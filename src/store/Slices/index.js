@@ -103,7 +103,7 @@ export const HomepageSlice = createSlice({
     setLoginPopupState(state, action) {
       state.loginPopupState = action.payload;
     },
-    setIsLogin(state, action) {
+    setLoginState(state, action) {
       state.isLogin = action.payload;
     },
   },
@@ -349,7 +349,7 @@ export const {
   setServiceRequestType,
   setServiceRequestDrawer,
   setLoginPopupState,
-  setIsLogin,
+  setLoginState,
 } = HomepageSlice.actions;
 
 export const {
