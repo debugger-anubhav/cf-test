@@ -32,7 +32,7 @@ function MainSection() {
                       alt={item.Heading}
                     />
                     <p className={styles.heading}>{item.Heading}</p>
-                    <p className={`${styles.detail} mr-4 pt-1`}>{item.text}</p>
+                    <p className={`${styles.detail} pt-1`}>{item.text}</p>
                   </div>
                 </div>
               </div>
