@@ -196,7 +196,7 @@ const MainWrapper = () => {
       </div>
 
       <div>
-        <h1 className={style.heading}>
+        <h1 className={`${style.heading} !pt-0 md:!pt-4`}>
           {searchKeyword ? (
             <p
               className={style.searchHeading}
