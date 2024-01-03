@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import {ForwardArrow} from "@/assets/icon";
 import {AiOutlineSearch} from "react-icons/ai";
 import {
-  General,
+  // General,
   DeliveryAndInstalation,
   HowItWorks,
   OurServices,
@@ -21,7 +21,7 @@ import {reduxSetModalState} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 
 const Data = [
-  "General",
+  // "General",
   "How it works",
   "Delivery & installation",
   "Payment and billing",
@@ -60,11 +60,11 @@ const MainWrapper = () => {
   useEffect(() => {
     const temp = [];
     if (searchKeyword) {
-      General.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
+      // General.forEach(ele => {
+      //   if (ele?.que?.includes(searchKeyword)) {
+      //     temp.push(ele);
+      //   }
+      // });
       HowItWorks.forEach(ele => {
         if (ele?.que?.includes(searchKeyword)) {
           temp.push(ele);
@@ -97,25 +97,27 @@ const MainWrapper = () => {
       });
       if (temp?.length) setFaqData(temp);
       else setFaqData([]);
-    } else {
-      setFaqData(General);
     }
+    // else {
+    //   setFaqData(General);
+    // }
   }, [searchKeyword]);
 
   useEffect(() => {
+    // if (value === 0) {
+    //   setFaqData(General);
+    // } else
     if (value === 0) {
-      setFaqData(General);
-    } else if (value === 1) {
       setFaqData(HowItWorks);
-    } else if (value === 2) {
+    } else if (value === 1) {
       setFaqData(DeliveryAndInstalation);
-    } else if (value === 3) {
+    } else if (value === 2) {
       setFaqData(PaymentAndBilling);
-    } else if (value === 4) {
+    } else if (value === 3) {
       setFaqData(OurServices);
-    } else if (value === 5) {
+    } else if (value === 4) {
       setFaqData(WhyCityFurnish);
-    } else if (value === 6) {
+    } else if (value === 5) {
       setFaqData(ReferralProgram);
     }
   }, [value]);
@@ -201,7 +203,8 @@ const MainWrapper = () => {
               onClick={() => {
                 setSearchKeyword("");
                 setValue(0);
-                setFaqData(General);
+                // setFaqData(General);
+                setFaqData(HowItWorks);
               }}>
               <BiArrowBack
                 size={24}

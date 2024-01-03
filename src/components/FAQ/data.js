@@ -1,17 +1,17 @@
-export const General = [
-  {
-    que: "Order related help",
-    ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
-  },
-  {
-    que: "Installation related help",
-    ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
-  },
-  {
-    que: "Raise a service request",
-    ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
-  },
-];
+// export const General = [
+//   {
+//     que: "Order related help",
+//     ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
+//   },
+//   {
+//     que: "Installation related help",
+//     ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
+//   },
+//   {
+//     que: "Raise a service request",
+//     ans: "Lorem ipsum dolor sit amet consectetur. Urna viverra semper arcu diam. Felis morbi et nec viverra curabitur. Imperdiet mattis ut venenatis turpis ac ipsum. Viverra venenatis diam leo facilisis cras. Nisi vitae mauris sed orci elementum turpis blandit consectetur. Facilisi morbi aliquam ut massa.",
+//   },
+// ];
 
 export const HowItWorks = [
   {
