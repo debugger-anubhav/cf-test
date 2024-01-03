@@ -126,16 +126,20 @@ const LoginModal = ({
           console.log(response, "reponseee");
           if (response?.data?.status_code === 200) {
             if (response?.data?.message === "Login Successfully.!") {
-              setIsLogin && setIsLogin(true);
+              if (setIsLogin) {
+                setIsLogin(true);
+              } else console.log("esles");
               setUserId(response?.data?.data?.id);
               const encryptedData = encrypt(
                 response?.data?.data?.id.toString(),
               );
               setLocalStorage("_ga", encryptedData);
+
               // console.log(response.data.data.access_token, "kwkqwo");
-              if (response?.data?.data?.access_token)
-                // setCookie("authToken", response?.data?.data?.access_token);
+              if (response?.data?.data?.access_token) {
+                console.log("in settoken");
                 cookies.set("authToken", response?.data?.data?.access_token);
+              }
               console.log(cookies, "cookies");
 
               if (isCheckoutPage) setModalCategory("setUpAccount");

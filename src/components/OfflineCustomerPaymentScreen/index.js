@@ -16,15 +16,20 @@ const OfflinePayment = () => {
   console.log(params);
   const [details, setDetails] = useState();
 
+  const mapData = ["Advanced payment", "Final payment"];
+
   useEffect(() => {
     axios
-      .get(baseURL + endPoints.offlinePayment.getOfflineCutomerDetails(47807))
+      .get(
+        baseURL +
+          endPoints.offlinePayment.getOfflineCutomerDetails(
+            parseInt(params.orderId),
+          ),
+      )
       .then(res => {
         setDetails(res?.data?.data);
       });
   }, []);
-
-  const mapData = ["Advanced payment", "Final payment"];
 
   async function handleOpenRazorpay() {
     const res = await loadScript(
@@ -40,7 +45,7 @@ const OfflinePayment = () => {
     const result = await axios.post(
       baseURL + endPoints.tenureExtensionCreateOrder,
       {
-        dealCodeNumber: "47807",
+        dealCodeNumber: params.orderId,
         mode: "offline",
       },
     );
@@ -65,11 +70,11 @@ const OfflinePayment = () => {
         console.log(response, "response in handlerfunc");
         if (response.error) {
           alert("Payment failed. Please try again.");
-          // Redirect to the failure page
+          router.push("/order/failure");
         } else {
           const data = {
             razorpayPaymentId: response.razorpay_payment_id,
-            dealCodeNumber: 47807,
+            dealCodeNumber: params.orderId,
             razorpayOrderId: response.razorpay_order_id,
             razCustomerId: customerId,
             razorpaySignature: response.razorpay_signature,
@@ -80,7 +85,7 @@ const OfflinePayment = () => {
             data,
           );
           console.log(res, "result in handler");
-          router.push("/");
+          router.push(`/order/confirmation/cart?oid=${params.orderId}`);
         }
       },
       prefill: {

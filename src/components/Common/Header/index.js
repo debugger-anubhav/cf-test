@@ -15,6 +15,7 @@ import {
   setShowCartItem,
   addCategory,
   reduxSetModalState,
+  setLoginState,
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
@@ -279,7 +280,7 @@ const Header = () => {
         isModalOpen={loginModal}
         setIsLogin={bool => {
           setIsLogin(bool);
-          dispatch(setIsLogin(bool));
+          dispatch(setLoginState(bool));
         }}
         handleChangeRoute={() => {
           if (click === "profile") router.push(`/usersettings`);
