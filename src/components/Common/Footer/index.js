@@ -13,6 +13,7 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 const Footer = ({params}) => {
   const {checkAuthentication} = useAuthentication();
   const cityName = useSelector(state => state.homePagedata.cityName);
+  const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const currentYear = new Date().getFullYear();
   const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
   const str = {
@@ -25,6 +26,11 @@ const Footer = ({params}) => {
   };
 
   const [isLogin, setIsLogin] = useState();
+  useEffect(() => {
+    setIsLogin(reduxLoginState);
+  }, [reduxLoginState]);
+
+  console.log(isLogin, reduxLoginState, "footer");
   // const userId = decrypt(getLocalStorage("_ga"));
   const handleAuthentication = async () => {
     const isAuth = await checkAuthentication();
@@ -33,7 +39,7 @@ const Footer = ({params}) => {
 
   useEffect(() => {
     handleAuthentication();
-  }, []);
+  }, [isLogin]);
 
   const array = [
     {
@@ -158,10 +164,16 @@ const Footer = ({params}) => {
           <div key={index.toString()} className={styles.head_wrapper}>
             <h2 className={`!text-[#222] ${styles.head}`}>{item.head}</h2>
             <div className={styles.points_div}>
-              {item.points.map((t, i) => (
+              {item?.points?.map((t, i) => (
                 <a
                   key={index.toString()}
-                  href={t.link}
+                  href={
+                    t.text === "Refer a Friend"
+                      ? isLogin
+                        ? "/referral"
+                        : "/pages/refer-a-friend"
+                      : t.link
+                  }
                   aria-label={t.text}
                   target={t.text === "Furniture Sale" ? "_blank" : "_self"}
                   rel="noopener  noreferrer">

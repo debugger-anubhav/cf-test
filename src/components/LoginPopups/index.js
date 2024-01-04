@@ -17,6 +17,8 @@ import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 // import {useCookies} from "react-cookie";
 import Cookies from "universal-cookie";
+import {setLoginState} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const LoginModal = ({
   isModalOpen,
@@ -27,6 +29,7 @@ const LoginModal = ({
   isSetupProfile,
 }) => {
   const cookies = new Cookies();
+  const dispatch = useDispatch();
   // const [cookies, setCookie] = useCookies(["authToken"]);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
@@ -129,6 +132,7 @@ const LoginModal = ({
               if (setIsLogin) {
                 setIsLogin(true);
               } else console.log("esles");
+              dispatch(setLoginState(true));
               setUserId(response?.data?.data?.id);
               const encryptedData = encrypt(
                 response?.data?.data?.id.toString(),
@@ -141,7 +145,7 @@ const LoginModal = ({
                 cookies.set("authToken", response?.data?.data?.access_token);
               }
               console.log(cookies, "cookies");
-
+              showToastNotification("Login successfully", 1);
               if (isCheckoutPage) setModalCategory("setUpAccount");
               else {
                 console.log("innnn");
@@ -149,7 +153,6 @@ const LoginModal = ({
                 handleChangeRoute && handleChangeRoute();
                 // dispatch(setShoppingCartTab(1));
               }
-              showToastNotification("Login successfully", 1);
             } else if (
               response?.data?.message ===
               "Multiple registered user found. Please enter registered email."

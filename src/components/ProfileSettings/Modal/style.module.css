@@ -1,5 +1,5 @@
 .customModal {
-  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-fit !rounded-none font-Poppins !min-w-fit !border-none !outline-none;
+  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-[220px] overflow-y-hidden !rounded-none font-Poppins !border-none !outline-none;
   top: 50% !important;
   left: 50% !important ;
   transform: translate(-50%, -50%) !important;
