@@ -9,7 +9,7 @@ export default function TopSection() {
       <div className={styles.heading_row}>
         <h1 className={styles.main_heading}>
           {` Don't Just Dream, Do it With Us `}
-          <span className="lg:flex hidden ml-2"> 🤩</span>
+          <span className="ml-0"> 🤩</span>
         </h1>
         {/* <a href="#vacancies-section"> */}
         <button
