@@ -50,7 +50,7 @@ const HeroSection = () => {
       <div className={styles.content_wrapper}>
         <div className={styles.section1_wrapper}>
           <p className={styles.about_desc}>
-            <span className="font-medium">{data.hightlight}</span>
+            <span className="font-medium font-Poppins">{data.hightlight}</span>
             {data.about_first}
           </p>
           <p className={styles.about_desc}>{data.about_second}</p>
@@ -88,7 +88,9 @@ const HeroSection = () => {
         <div className={styles.team_content_wrapper}>
           <p className={styles.team_content}>
             {data.founding_team_first}
-            <span className="font-medium">{data.founding_highlight}</span>
+            <span className="font-medium font-Poppins">
+              {data.founding_highlight}
+            </span>
             {data.founding_team_last}
           </p>
         </div>

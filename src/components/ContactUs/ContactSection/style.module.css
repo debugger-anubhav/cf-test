@@ -22,6 +22,7 @@
 .box_wrapper {
   @apply lg:pr-16 lg:mr-16 lg:border-r-[1px] lg:border-EDEDEE lg:mb-0 mb-5;
 }
+
 .box_img {
   @apply bg-[#F6F5F8] rounded-[50%] md:h-12 md:w-12 h-5 w-5 flex items-center justify-center cursor-pointer;
 }
@@ -42,4 +43,18 @@
 }
 .detail_wrapper {
   @apply flex flex-col w-full;
+}
+
+.main_div_wrapper:hover .icon_contact {
+  @apply text-5774AC;
+}
+.main_div_wrapper:hover .box_heading {
+  @apply text-5774AC;
+}
+.main_div_wrapper .arrow {
+  transition: transform 0.3s ease;
+}
+
+.main_div_wrapper:hover .arrow {
+  transform: translateX(10px);
 }
