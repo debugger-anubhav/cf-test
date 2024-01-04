@@ -6,7 +6,7 @@
   @apply flex justify-between;
 }
 .main_heading {
-  @apply font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+  @apply font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 flex items-center;
 }
 .join_us {
   @apply h-[56px] w-[232px] lg:flex hidden justify-center items-center bg-F6B704 rounded-lg text-222 font-medium   text-16;
