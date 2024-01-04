@@ -50,7 +50,7 @@ export default function TermsOfUseData() {
                   <p>
                     {`You agree to the terms and conditions outlined in this Terms
                     of Use ("Terms of Use") with respect to `}
-                    <span>
+                    <span className="break-words">
                       <a
                         href="https://www.cityfurnish.com"
                         target="_self"

@@ -77,7 +77,9 @@ function MainSection() {
                       {index === 20 ? (
                         <p className="ml-3">
                           <span className="font-medium text-45454A">
-                            {words[0]}
+                            {i !== 4
+                              ? words[0]
+                              : "Governing Law and Jurisdiction:"}
                           </span>{" "}
                           {words.slice(1).join(" ")}
                         </p>

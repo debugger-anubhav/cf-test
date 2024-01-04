@@ -3,7 +3,7 @@
 }
 
 .heading {
-  @apply text-base tracking-[-0.32px] font-medium text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
+  @apply text-base tracking-[-0.32px] font-medium font-Poppins text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
 }
 
 .images_wrapper {

@@ -23,11 +23,11 @@
   @apply text-20 text-45454A font-Poppins font-medium lg:mb-8 mb-6;
 }
 .general_point {
-  @apply lg:text-16 text-14 font-Poppins text-71717A font-normal;
+  @apply lg:text-16 text-14 font-Poppins text-71717A font-normal tracking-[-0.32px];
 }
 .terms_of_use_detail_text {
-  @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
+  @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[-0.32px];
 }
 .terms_of_use_links {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[-0.32px] cursor-pointer underline;
 }
