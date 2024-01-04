@@ -17,11 +17,12 @@ const SavedItem = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const loginStateFromRedux = useSelector(state => state.homePagedata.isLogin);
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
   const [isDumy, setIsDumy] = React.useState(false);
-  const [isLogin, setIsLogin] = React.useState();
+  const [isLogin, setIsLogin] = React.useState(loginStateFromRedux);
   const sliderRef = useRef(null);
 
   const cityIdStr = localStorage

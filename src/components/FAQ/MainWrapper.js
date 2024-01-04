@@ -16,7 +16,7 @@ import {FaHeadset, FaPhoneAlt} from "react-icons/fa";
 import {BiArrowBack} from "react-icons/bi";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {reduxSetModalState} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 
@@ -33,15 +33,19 @@ const Data = [
 const MainWrapper = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const {checkAuthentication} = useAuthentication();
+  const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
   const [faqData, setFaqData] = useState();
   const [openIndex, setOpenIndex] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState();
   const [loginModal, setLoginModal] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
 
-  const {checkAuthentication} = useAuthentication();
+  useEffect(() => {
+    setIsLogin(reduxLoginState);
+  }, [reduxLoginState]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -165,7 +169,7 @@ const MainWrapper = () => {
 
   useEffect(() => {
     validateAuth();
-  }, []);
+  }, [isLogin]);
 
   const toggleQuestion = index => {
     if (openIndex === index) {
@@ -179,7 +183,7 @@ const MainWrapper = () => {
       <LoginModal
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
-        handleChangeRoute={() => setIsLogin(true)}
+        setIsLogin={bool => setIsLogin(bool)}
       />
       <div className={style.container}>
         <ul className={style.listings}>

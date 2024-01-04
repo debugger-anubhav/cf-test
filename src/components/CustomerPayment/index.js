@@ -39,6 +39,7 @@ function CustomerPayment() {
   const dispatch = useDispatch();
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
   const coinsReduxValue = useSelector(state => state.invoicePage);
+  const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   // console.log(coinsReduxValue, "ueueui");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
@@ -61,8 +62,12 @@ function CustomerPayment() {
   const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
   const [userId, setuserId] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
+
+  useEffect(() => {
+    setIsLogin(reduxLoginState);
+  }, [reduxLoginState]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -78,7 +83,7 @@ function CustomerPayment() {
 
   useEffect(() => {
     validateAuth();
-  }, []);
+  }, [isLogin]);
 
   const fetchAvailCoins = () => {
     axios
@@ -238,7 +243,7 @@ function CustomerPayment() {
       <LoginModal
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
-        handleChangeRoute={() => setIsLogin(true)}
+        setIsLogin={bool => setIsLogin(bool)}
       />
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />

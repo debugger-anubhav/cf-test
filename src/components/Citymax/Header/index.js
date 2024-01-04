@@ -37,6 +37,7 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 import "react-responsive-modal/styles.css";
 import LoginModal from "@/components/LoginPopups";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import ProfileDropDown from "@/components/Common/Header/ProfileDropDown";
 
 const CitymaxHeader = ({zIndex}) => {
   const {checkAuthentication} = useAuthentication();
@@ -65,12 +66,18 @@ const CitymaxHeader = ({zIndex}) => {
   // const [profileIconLink, setProfileIconLink] = useState();
   // const [heartIconLink, setHeartIconLink] = useState();
   const [menuDrawer, setMenuDrawer] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+
+  useEffect(() => {
+    setIsLogin(homePageReduxData.isLogin);
+  }, [homePageReduxData.isLogin]);
+
+  console.log(isLogin, homePageReduxData.isLogin, "huh");
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -165,7 +172,7 @@ const CitymaxHeader = ({zIndex}) => {
 
   useEffect(() => {
     validateAuth();
-  }, []);
+  }, [isLogin]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -367,7 +374,11 @@ const CitymaxHeader = ({zIndex}) => {
                     className="pt-[14px]"
                     onMouseEnter={() => {
                       setShowProfileDropdown(true);
-                    }}></div>
+                    }}>
+                    <ProfileDropDown
+                      setShowProfileDropdown={setShowProfileDropdown}
+                    />
+                  </div>
                 )}
             </div>
           </div>

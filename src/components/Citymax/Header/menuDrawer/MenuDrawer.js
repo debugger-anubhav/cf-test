@@ -17,18 +17,14 @@ import {useSelector} from "react-redux";
 const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
   const {checkAuthentication} = useAuthentication();
   const router = useRouter();
-  // const dispatch = useDispatch();
+  const loginStateFromRedux = useSelector(state => state.homePagedata.isLogin);
+  const isHalfYearly = useSelector(state => state?.citymax?.isHalfYearly);
   const [plans, setPlans] = useState();
-  // const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState();
 
-  // const toggleLoginModal = bool => {
-  //   toggleDrawer();
-  //   dispatch(reduxSetModalState(bool));
-  //   setLoginModal(bool);
-  // };
-
-  const isHalfYearly = useSelector(state => state?.citymax?.isHalfYearly);
+  useEffect(() => {
+    setIsLogin(loginStateFromRedux);
+  }, [loginStateFromRedux]);
 
   const fetchPlans = () => {
     axios
@@ -52,7 +48,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
 
   useEffect(() => {
     handleAuthentication();
-  }, []);
+  }, [isLogin]);
 
   return (
     <SwipeableDrawer

@@ -34,11 +34,10 @@ const DeleteModal = ({
   const [inWishList, setInWishList] = React.useState(false);
   const dispatch = useDispatch();
   const [loginModal, setLoginModal] = useState(false);
-  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
 
-  const toggleLoginModal = () => {
-    dispatch(reduxSetModalState(!modalStateFromRedux));
-    setLoginModal(!loginModal);
+  const toggleLoginModal = bool => {
+    dispatch(reduxSetModalState(bool));
+    setLoginModal(bool);
   };
 
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -108,7 +107,7 @@ const DeleteModal = ({
 
     if (!isAuthenticated) {
       closeModal();
-      toggleLoginModal();
+      toggleLoginModal(true);
       return;
     }
     !inWishList &&
@@ -134,7 +133,7 @@ const DeleteModal = ({
   return (
     <div>
       <LoginModal
-        closeModal={toggleLoginModal}
+        closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
         setIsLogin={setIsLogin}
         isCheckoutPage

@@ -64,15 +64,13 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
               } else {
                 // remove userid
                 cookie.remove("ci_sessions");
+                authCookies.remove("authToken");
                 localStorage.removeItem("tempUserID");
                 localStorage.removeItem("user_id");
                 localStorage.removeItem("_ga");
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
-
-                // cookie.remove("authToken");
-                authCookies.remove("authToken");
                 router.push("/");
               }
             }}>
