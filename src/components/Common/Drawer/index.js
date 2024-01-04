@@ -28,22 +28,25 @@ export default function CommonDrawer({
 }) {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
+  const params = useParams();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,
   );
+  const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState();
 
-  const params = useParams();
-  const router = useRouter();
+  React.useEffect(() => {
+    setIsLogin(reduxLoginState);
+  }, [reduxLoginState]);
 
   const handleresize = e => {
     if (window.innerWidth < 640) {
@@ -85,7 +88,7 @@ export default function CommonDrawer({
 
   React.useEffect(() => {
     handleAuthentication();
-  }, []);
+  }, [isLogin]);
 
   const handleMenu = (e, item) => {
     // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));

@@ -36,11 +36,7 @@ import {
   setCityShield,
   setCoinsApplied,
   setIsOfflineCustomer,
-  setLoginState,
   setShoppingCartTab,
-  // setCoinsUsed,
-  // setCityShield,
-  //  getCartItems
 } from "@/store/Slices";
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
@@ -81,13 +77,17 @@ const ShoppingCartSection = () => {
   const [productId, setProductId] = useState();
   const [itemId, setItemId] = useState();
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [isLogin, setIsLogin] = useState(homePageReduxData.isLogin);
+  const [isLogin, setIsLogin] = useState();
   const [isSetupProfile, setIsSetupProfile] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   console.log(isLogin, "wjhei");
   const userIdToUse = isLogin ? userId : tempUserId;
+
+  useEffect(() => {
+    setIsLogin(homePageReduxData.isLogin);
+  }, [homePageReduxData.isLogin]);
 
   // console.log(userDetails, "userDetails");
   useEffect(() => {
@@ -315,8 +315,6 @@ const ShoppingCartSection = () => {
           isModalOpen={loginModal}
           setIsLogin={bool => {
             setIsLogin(bool);
-            dispatch(setLoginState(bool));
-            // dispatch(setShoppingCartTab(1));
           }}
           isCheckoutPage
           handleChangeRoute={handleChangeRoute}

@@ -178,11 +178,26 @@ const MainSection = ({login}) => {
             Share your Referral Code with friends, both you and your friend get
             500 CF Coins.
           </p>
-          <p className={`${styles.detail_heading} mt-6 md:mt-10`}>
-            {userId
-              ? "Share your Referral via:"
-              : "Your unique Referral Code is ready and waiting for you! 🎉"}
-          </p>
+          <div className={`${styles.detail_heading} mt-6 md:mt-10`}>
+            {userId ? (
+              "Share your Referral via:"
+            ) : (
+              <>
+                <div className="flex">
+                  <p>
+                    Your unique Referral Code is ready and waiting for you!{" "}
+                    <span>
+                      <img
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                        alt="paty_icon"
+                        className="w-[18px] h-[18px] ml-2 inline-block"
+                      />
+                    </span>
+                  </p>
+                </div>
+              </>
+            )}
+          </div>
 
           {loading && login && (
             <div className={`${styles.referral_wrapper_skeleton} `}>
