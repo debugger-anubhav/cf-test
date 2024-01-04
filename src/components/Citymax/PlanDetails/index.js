@@ -359,9 +359,11 @@ const CitymaxPlanDetail = () => {
         if (selectedItemsArr?.length < 1)
           showToastNotification("You haven`t selected any product", 2);
         else if (selectedItemsArr?.length === totalSlots) {
+          console.log(1, totalSlots);
           handleAddToCart();
           setModalCategory(2);
         } else {
+          console.log(2);
           setModalCategory(1);
           toggleModal();
         }
