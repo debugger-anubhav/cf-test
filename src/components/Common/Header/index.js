@@ -84,8 +84,6 @@ const Header = () => {
   useEffect(() => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
-  console.log(homePageReduxData.isLogin, "homePageReduxData.isLogin");
-  console.log(isLogin, "isloginnn");
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));

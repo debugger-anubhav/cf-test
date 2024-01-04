@@ -89,13 +89,15 @@ const ModalContentForNumber = ({
                 </button>
               )}
             </div>
-            <ErrorMessage name="contactNumber">
-              {msg =>
-                formik.touched.contactNumber && (
-                  <p className={styles.error}>{msg} </p>
-                )
-              }
-            </ErrorMessage>
+            <div className="h-6 mt-1">
+              <ErrorMessage name="contactNumber">
+                {msg =>
+                  formik.touched.contactNumber && (
+                    <p className={styles.error}>{msg} </p>
+                  )
+                }
+              </ErrorMessage>
+            </div>
           </Form>
         )}
       </Formik>
