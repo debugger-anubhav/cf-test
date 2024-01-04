@@ -94,36 +94,38 @@ const ChangeNumber = ({
   };
 
   const handleVerification = otp => {
-    if (countdown === 0) {
-      setOtpError(
-        "Sorry, your OTP has timed out. Please request a new OTP to continue.",
-      );
-    } else {
-      const body = {
-        mobile_number: contact,
-        otp,
-      };
+    // if (countdown === 0) {
+    //   setOtpError(
+    //     "Sorry, your OTP has timed out. Please request a new OTP to continue.",
+    //   );
+    // } else {
+    const body = {
+      mobile_number: contact,
+      otp,
+    };
 
-      axios
-        .post(baseURL + endPoints.profileSettingPage.verifyOtp, body, {
-          headers: {
-            userid: userId,
-          },
-        })
-        .then(response => {
-          setProblemType("");
-          handleNumberChange(contact);
-          closeModal();
-          showToastNotification("Number verified successfully", 1);
-        })
-        .catch(err => {
-          console.log(err, "err in verif");
+    axios
+      .post(baseURL + endPoints.profileSettingPage.verifyOtp, body, {
+        headers: {
+          userid: userId,
+        },
+      })
+      .then(response => {
+        setProblemType("");
+        handleNumberChange(contact);
+        closeModal();
+        showToastNotification("Number verified successfully", 1);
+      })
+      .catch(err => {
+        console.log(err, "err in verif");
+        if (err.response?.data?.data?.timeout) setOtpError("timeout");
+        else
           setOtpError(
             "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
           );
-          setProblemType(2);
-        });
-    }
+        setProblemType(2);
+      });
+    // }
   };
 
   const handleStartCountdown = () => {

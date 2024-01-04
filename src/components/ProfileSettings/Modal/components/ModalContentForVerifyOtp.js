@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "../style.module.css";
+import {keyPressForContactField} from "@/constants/constant";
 
 const ModalContentForVerifyOtp = ({
   contact,
@@ -36,6 +37,7 @@ const ModalContentForVerifyOtp = ({
           <input
             placeholder="Enter the OTP you just received"
             type="number"
+            onKeyPress={keyPressForContactField}
             value={otp}
             className={styles.contact_input}
             autoFocus

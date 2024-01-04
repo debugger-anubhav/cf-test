@@ -3,6 +3,8 @@
   top: 50% !important;
   left: 50% !important ;
   transform: translate(-50%, -50%) !important;
+  outline: none !important;
+  border: none !important;
 }
 .customCloseButton {
   @apply !top-12 !right-8 !outline-none !border-none !w-[20px] !h-[20px];

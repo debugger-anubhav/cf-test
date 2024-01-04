@@ -171,7 +171,7 @@ const OfflinePayment = () => {
         <div className={styles.row}>
           <p className={styles.desc}>
             Please pay due amount of <span className={styles.rupeeicon}>₹</span>
-            400 to confirm your order
+            {details?.due_amount} to confirm your order
           </p>
         </div>
       </div>
