@@ -658,6 +658,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-installation.webp",
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-installation-icon.svg",
   },
   {
     icon: hasselFreeSection.IconTwo,
@@ -666,6 +668,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-shipping.webp",
     Heading: "Free shipping",
     text: "Get your furniture delivered to your doorstep with no extra shipping cost",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-shipping-icon.svg",
   },
   {
     icon: hasselFreeSection.IconOne,
@@ -674,6 +678,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/mint-new-products.webp",
     Heading: "Mint new products",
     text: "Assured products. You'll be renting furniture that looks & feels brand new",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/mint-new-products-icon.svg",
   },
 
   {
@@ -683,6 +689,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-relocation.webp",
     Heading: "Free relocation",
     text: "Planning to relocate? We’ll help you relocate your furniture for free",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-relocation-icon.svg",
   },
   {
     icon: hasselFreeSection.IconFive,
@@ -691,6 +699,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/insurance-cover.webp",
     Heading: "Insurance cover",
     text: "Minor damages or scratches to the rent products will be waived off",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/insurance-cover-icon.svg",
   },
   {
     icon: hasselFreeSection.IconSix,
@@ -699,6 +709,8 @@ export const BenefitPageData = [
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/flexible-upgrades.webp",
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
+    updatedMobileIcon:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/icons/flexible-upgrades-icon.svg",
   },
 ];
 
