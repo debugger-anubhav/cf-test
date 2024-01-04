@@ -1,8 +1,9 @@
 .customModal {
-  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-fit !rounded-none font-Poppins !min-w-fit;
+  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-fit !rounded-none font-Poppins !min-w-fit !border-none !outline-none;
   top: 50% !important;
   left: 50% !important ;
   transform: translate(-50%, -50%) !important;
+  outline: none !important;
 }
 .customCloseButton {
   @apply !top-12 !right-8 !outline-none !border-none !w-[25px] !h-[25px];

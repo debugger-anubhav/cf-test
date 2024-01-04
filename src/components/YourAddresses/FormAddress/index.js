@@ -9,7 +9,7 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, keyPressForContactField} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 // import CommonDrawer from "@/components/Common/Drawer";
@@ -194,6 +194,7 @@ const FormAddress = ({setTab, tab, id}) => {
                     />
                     <Field
                       type="number"
+                      onKeyPress={keyPressForContactField}
                       // readOnly
                       name="contactNumber"
                       placeholder="Enter 10 digit number "
@@ -243,6 +244,7 @@ const FormAddress = ({setTab, tab, id}) => {
                     <p className={formStyles.form_label}>Postal code</p>
                     <Field
                       type="number"
+                      onKeyPress={keyPressForContactField}
                       name="postalCode"
                       placeholder="Enter 6 digit postal code"
                       className={formStyles.form_input}
