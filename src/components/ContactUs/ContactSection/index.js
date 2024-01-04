@@ -38,13 +38,17 @@ function ContactSection() {
               key={index.toString()}
               className={`${
                 index !== data.length - 1 && styles.box_wrapper
-              } flex flex-col `}>
+              } flex flex-col ${styles.main_div_wrapper}`}>
               <a href={item?.link} className={styles.link_tag}>
                 <div className={styles.box_img}>{item.icon}</div>
                 <div className={styles.detail_wrapper}>
                   <h3 className={styles.box_heading}>
                     {item.heading}
-                    <ForwardArrow size={19.2} color={"#222"} />
+                    <ForwardArrow
+                      size={19.2}
+                      color={"#222"}
+                      className={styles.arrow}
+                    />
                   </h3>
                   <div className={styles.box_subheading}>{item.subheading}</div>
                 </div>

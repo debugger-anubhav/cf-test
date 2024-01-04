@@ -238,19 +238,22 @@ const MainWrapper = () => {
           />
         </div>
       </div>
-
       {!searchKeyword && (
-        <>
+        <div>
           <div ref={sliderRef} className={style.tabs_wrapper}>
             {Data?.map((item, index) => {
               return (
-                <div key={index} className={`${style.tab_wrapper}`}>
+                <div
+                  key={index}
+                  className={`${style.tab_wrapper} border-b-[1px] border-b-[#EDEDEE]`}>
                   <div
                     className={`${style.tab_item} ${
                       value === index
                         ? "text-5774AC border-b-[1px] border-b-[#9A9AA2]"
                         : "text-45454A"
-                    }`}
+                    }
+                    ${index !== Data.length - 1 ? "mr-4 md:mr-6" : "mr-0"}
+                    `}
                     onClick={() => {
                       setValue(index);
                       setOpenIndex(0);
@@ -262,7 +265,7 @@ const MainWrapper = () => {
             })}
           </div>
           <div className="border-b-[#EDEDEE] h-[1px]"></div>
-        </>
+        </div>
       )}
 
       <div className={style.QuesAnsArray_div}>

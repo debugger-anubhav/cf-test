@@ -17,10 +17,10 @@
   @apply text-20 lg:text-24 text-45454A font-medium leading-[32px] font-Poppins mt-4;
 }
 .privacy_policy_detail_text {
-  @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[0.32px];
+  @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[-0.32px];
 }
 .privacy_policy_detail_link {
-  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[0.32px] cursor-pointer underline;
+  @apply lg:text-16 text-14 font-Poppins text-5774AC tracking-[-0.32px] cursor-pointer underline;
 }
 .details {
   @apply lg:my-8 my-6;

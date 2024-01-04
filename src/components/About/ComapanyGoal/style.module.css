@@ -6,12 +6,12 @@
 }
 
 .heading {
-  @apply text-lg tracking-[-0.36px] md:text-24  md:leading-5 font-medium md:tracking-[-0.48px] text-[#fff] mb-2 md:mb-6;
+  @apply text-lg tracking-[-0.36px] md:text-24  md:leading-5 font-Poppins font-medium md:tracking-[-0.48px] text-[#fff] mb-2 md:mb-6;
 }
 .ans_wrapper {
   @apply flex gap-[9px];
 }
 
 .ans_text {
-  @apply text-12 tracking-[-0.24px]  font-normal md:tracking-[-0.32px] md:text-base text-[#FFF];
+  @apply text-12 tracking-[-0.24px]  font-normal font-Poppins md:tracking-[-0.32px] md:text-base text-[#FFF];
 }

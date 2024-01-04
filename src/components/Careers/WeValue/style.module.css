@@ -1,5 +1,5 @@
 .heading {
-  @apply font-Poppins text-20 font-medium text-45454A;
+  @apply font-Poppins lg:text-20 text-16 font-medium text-45454A;
 }
 .wrapper {
   @apply px-4  md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] lg:my-[88px] my-8;

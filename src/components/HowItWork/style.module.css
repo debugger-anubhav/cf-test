@@ -11,5 +11,5 @@
   @apply mb-[88px];
 }
 .iframe_wrapper {
-  @apply lg:w-[853px] lg:h-[480px] sm:w-[653px] sm:h-[380px] w-full;
+  @apply lg:w-[853px] lg:h-[480px] sm:w-[653px] sm:h-[380px] w-full border-none;
 }

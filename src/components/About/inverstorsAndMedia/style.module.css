@@ -3,7 +3,7 @@
 }
 
 .heading {
-  @apply text-base tracking-[-0.32px] font-medium text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
+  @apply text-base tracking-[-0.32px] font-medium font-Poppins text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
 }
 
 .investors_wrapper {
@@ -25,5 +25,5 @@
   @apply flex gap-1 py-1 md:py-1.5 px-2 border-t-[2px] border-[#71717A];
 }
 .accolades_text {
-  @apply text-xs text-[#71717A] capitalize font-medium tracking-[-0.24px];
+  @apply text-xs text-[#71717A] capitalize font-medium font-Poppins tracking-[-0.24px];
 }

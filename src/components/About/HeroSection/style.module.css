@@ -7,15 +7,15 @@
 }
 
 .bread_crumbs_text {
-  @apply text-[#71717A] text-14 font-normal leading-6;
+  @apply text-[#71717A] text-14 font-normal font-Poppins leading-6;
 }
 
 .heading {
-  @apply lg:text-24 text-20 leading-8 font-medium text-45454A md:tracking-[-0.48px] mb-6 lg:mb-8 tracking-[-0.4px];
+  @apply lg:text-24 text-20 leading-8 font-medium font-Poppins text-45454A md:tracking-[-0.48px] mb-6 lg:mb-8 tracking-[-0.4px];
 }
 
 .about_desc {
-  @apply text-sm md:text-base font-normal tracking-[-0.28px] md:tracking-[-0.32px] text-[#71717A];
+  @apply text-sm md:text-base font-normal font-Poppins tracking-[-0.28px] md:tracking-[-0.32px] text-[#71717A];
 }
 
 .content_wrapper {
@@ -39,15 +39,15 @@
 }
 
 .block_head {
-  @apply text-2xl text-[#597492] font-bold tracking-[-0.48px] mb-1;
+  @apply text-2xl text-[#597492] font-bold font-Poppins tracking-[-0.48px] mb-1;
 }
 
 .block_desc {
-  @apply text-base font-normal tracking-[-0.32px] text-[#71717a];
+  @apply text-base font-normal font-Poppins tracking-[-0.32px] text-[#71717a];
 }
 
 .heading2 {
-  @apply text-base lg:text-xl font-medium tracking-[-0.32px] mb-6 lg:mb-8 lg:tracking-[-0.4px] text-45454A;
+  @apply text-base lg:text-xl font-medium font-Poppins tracking-[-0.32px] mb-6 lg:mb-8 lg:tracking-[-0.4px] text-45454A;
 }
 
 .team_wrapper {
@@ -59,7 +59,7 @@
 }
 
 .team_content {
-  @apply text-sm font-normal tracking-[-0.28px] text-[#71717A] md:text-base md:tracking-[-0.32px];
+  @apply text-sm font-normal font-Poppins tracking-[-0.28px] text-[#71717A] md:text-base md:tracking-[-0.32px];
 }
 
 .image_wrapper {
@@ -67,7 +67,7 @@
 }
 
 .image_text {
-  @apply flex whitespace-nowrap justify-center text-12 mobile:text-14  tracking-[-0.28px] md:text-16 leading-8 font-medium md:tracking-[-0.32px] text-45454A;
+  @apply flex whitespace-nowrap justify-center text-12 mobile:text-14  tracking-[-0.28px] md:text-16 leading-8 font-medium font-Poppins md:tracking-[-0.32px] text-45454A;
 }
 .images_container {
   @apply flex justify-center rounded-full   mb-4;
