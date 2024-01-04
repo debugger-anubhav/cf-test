@@ -12,7 +12,11 @@ import {
   ToggleOn,
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage, loadScript} from "@/constants/constant";
+import {
+  getLocalStorage,
+  keyPressForContactField,
+  loadScript,
+} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -319,6 +323,7 @@ function CustomerPayment() {
                       </p>
                       <Field
                         type="number"
+                        onKeyPress={keyPressForContactField}
                         name="amount"
                         placeholder="Enter the amount to be paid"
                         className={styles.form_input}

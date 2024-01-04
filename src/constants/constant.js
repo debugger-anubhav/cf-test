@@ -21,6 +21,13 @@ export const CityToStateMapping = {
   Hyderabad: "Telangana",
 };
 
+export const keyPressForContactField = event => {
+  // Prevent 'e' and '-' characters
+  if (event.key === "e" || event.key === "-") {
+    event.preventDefault();
+  }
+};
+
 export const RentFurniture = [
   {
     img: HomePageImages.bedroom,

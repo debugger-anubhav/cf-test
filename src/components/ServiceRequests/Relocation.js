@@ -11,7 +11,11 @@ import {FaCheckCircle} from "react-icons/fa";
 import {IoIosCloseCircle} from "react-icons/io";
 import Select from "react-select";
 import {setServiceRequestDrawer} from "@/store/Slices";
-import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
+import {
+  CreateRequest,
+  CreateRequestPayload,
+  keyPressForContactField,
+} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
@@ -160,6 +164,7 @@ function Relocation({prevScreen, data}) {
                       />
                       <Field
                         type="number"
+                        onKeyPress={keyPressForContactField}
                         // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
@@ -208,6 +213,7 @@ function Relocation({prevScreen, data}) {
                   <p className={formStyles.form_label}>Postal code</p>
                   <Field
                     type="number"
+                    onKeyPress={keyPressForContactField}
                     name="postalCode"
                     placeholder="Enter 6 digit postal code"
                     className={formStyles.form_input}

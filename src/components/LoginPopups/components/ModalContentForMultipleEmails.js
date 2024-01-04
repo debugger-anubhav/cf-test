@@ -26,8 +26,8 @@ const ModalContentForMultipleEmails = ({
       </div>
       <div className="mt-8">
         <p className={styles.desc}>
-          Looks like your mobile number is linked to 3 different email
-          addresses.
+          Looks like your mobile number is linked to {data?.length} different
+          email addresses.
         </p>
         <p className={`font-medium ${styles.desc}`}>
           Please select and verify your email email from the list below:
