@@ -6,7 +6,7 @@
 }
 
 .card_wrapper {
-  @apply lg:mt-8 mt-6 grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-6 gap-8 lg:mb-[88px] mb-[48px];
+  @apply lg:mt-8 mt-6 grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 xl:gap-6 gap-6 lg:mb-[88px] mb-[48px];
 }
 .detail_wrapper {
   @apply absolute xl:bottom-0 bottom-3 p-4;
