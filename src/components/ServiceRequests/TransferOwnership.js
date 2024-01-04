@@ -15,6 +15,7 @@ import {
   getLocalStorage,
   CreateRequestPayload,
   CreateRequest,
+  keyPressForContactField,
 } from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
@@ -227,6 +228,7 @@ function TransferOwnership({prevScreen, data}) {
                           />
                           <Field
                             type="number"
+                            onKeyPress={keyPressForContactField}
                             // readOnly
                             name="contactNumber"
                             placeholder="Enter 10 digit number "
@@ -305,6 +307,7 @@ function TransferOwnership({prevScreen, data}) {
                           <p className={formStyles.form_label}>Postal code</p>
                           <Field
                             type="number"
+                            onKeyPress={keyPressForContactField}
                             name="postalCode"
                             placeholder="Enter 6 digit postal code"
                             className={formStyles.form_input}

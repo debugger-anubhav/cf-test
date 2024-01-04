@@ -29,6 +29,7 @@ import {endPoints} from "@/network/endPoints";
 import {
   CityToStateMapping,
   getLocalStorage,
+  keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
 import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
@@ -445,6 +446,7 @@ const AddressSection = () => {
                         </p>
                         <Field
                           type="number"
+                          onKeyPress={keyPressForContactField}
                           name="orderNumber"
                           placeholder="Please provide the order number for payment."
                           className={styles.form_input}
@@ -482,6 +484,7 @@ const AddressSection = () => {
                       />
                       <Field
                         type="number"
+                        onKeyPress={keyPressForContactField}
                         // readOnly
                         name="contactNumber"
                         placeholder="Enter 10 digit number "
@@ -511,6 +514,7 @@ const AddressSection = () => {
                       />
                       <Field
                         type="number"
+                        onKeyPress={keyPressForContactField}
                         // readOnly
                         name="alternateContactNumber"
                         placeholder="Enter 10 digit number "
@@ -553,6 +557,7 @@ const AddressSection = () => {
                       <p className={styles.form_label}>Postal code</p>
                       <Field
                         type="number"
+                        onKeyPress={keyPressForContactField}
                         name="postalCode"
                         placeholder="Enter 6 digit postal code"
                         className={styles.form_input}

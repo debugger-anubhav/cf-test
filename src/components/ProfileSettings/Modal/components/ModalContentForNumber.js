@@ -3,6 +3,7 @@ import styles from "../style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {cityUrl} from "../../../../../appConfig";
 import * as Yup from "yup";
+import {keyPressForContactField} from "@/constants/constant";
 
 const ModalContentForNumber = ({
   contactNumber,
@@ -29,8 +30,9 @@ const ModalContentForNumber = ({
         10,
         "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
       )
-      .required("Contact number is required"),
+      .required(""),
   });
+
   return (
     <>
       <h1 className={styles.head}>
@@ -39,13 +41,14 @@ const ModalContentForNumber = ({
       <Formik
         validationSchema={validationSchema}
         initialValues={{
-          contactNumber,
+          contactNumber: contactNumber || "",
         }}
         onSubmit={values => {
           console.log(values);
         }}>
         {formik => (
           <Form>
+            {console.log(formik, "formikkk")}
             <div className={styles.form_input}>
               <div className="flex justify-center gap-2">
                 <img
@@ -56,6 +59,7 @@ const ModalContentForNumber = ({
                 />
                 <Field
                   type="number"
+                  onKeyPress={keyPressForContactField}
                   // autofocus={true}
                   name="contactNumber"
                   placeholder="Enter 10 digit number "
@@ -67,20 +71,23 @@ const ModalContentForNumber = ({
                   }}
                 />
               </div>
-
-              <button
-                onClick={() => {
-                  if (formik.isValid) {
-                    setContact(formik.values.contactNumber);
-                    handleSentOtp(formik.values.contactNumber);
-                    setProblemType(1);
-                    setOtp("");
-                  }
-                }}
-                type="submit"
-                className={styles.blue_txt}>
-                Send OTP
-              </button>
+              {formik.values.contactNumber.length > 0 && (
+                <button
+                  onClick={() => {
+                    if (formik.isValid) {
+                      setContact(formik.values.contactNumber);
+                      handleSentOtp(formik.values.contactNumber);
+                      setProblemType(1);
+                      setOtp("");
+                    }
+                  }}
+                  type="submit"
+                  className={`${!formik.isValid && "!text-9A9AA2"} ${
+                    styles.blue_txt
+                  } whitespace-nowrap`}>
+                  Send OTP
+                </button>
+              )}
             </div>
             <ErrorMessage name="contactNumber">
               {msg =>

@@ -36,6 +36,7 @@ import {
   setCityShield,
   setCoinsApplied,
   setIsOfflineCustomer,
+  setLoginState,
   setShoppingCartTab,
   // setCoinsUsed,
   // setCityShield,
@@ -314,6 +315,7 @@ const ShoppingCartSection = () => {
           isModalOpen={loginModal}
           setIsLogin={bool => {
             setIsLogin(bool);
+            dispatch(setLoginState(bool));
             // dispatch(setShoppingCartTab(1));
           }}
           isCheckoutPage
