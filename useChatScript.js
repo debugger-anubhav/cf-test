@@ -4,7 +4,7 @@ export const useChatScript = (url, widgetCode) => {
   useEffect(() => {
     let script;
     const timerID = setTimeout(() => {
-      script = document.createElement("script");
+      script = document?.createElement("script");
       script.setAttribute("type", "text/javascript");
 
       const code = `(function (d, w, c) {
@@ -36,13 +36,16 @@ export const useChatScript = (url, widgetCode) => {
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
-      script.appendChild(document.createTextNode(code));
-      document.body.appendChild(script);
+      script.appendChild(document?.createTextNode(code));
+      document?.body?.appendChild(script);
       clearInterval(timerID);
     }, 3000);
 
     return () => {
-      document.body.removeChild(script);
+      // document?.body?.removeChild(script);
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
       clearInterval(timerID);
     };
   }, [url]);
