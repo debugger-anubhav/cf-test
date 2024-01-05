@@ -10,7 +10,9 @@ function MainSection() {
   return (
     <div className={styles.wrapper}>
       <BreadCrumbsCommon currentPage={"Rental Agreement"} />
-      <h1 className={styles.main_heading}>{Heading}</h1>
+      <h1 className={`${styles.main_heading} !tracking-[-0.48px]`}>
+        {Heading}
+      </h1>
       <div className={styles.detail}>{Subheading}</div>
 
       <div>
@@ -76,15 +78,21 @@ function MainSection() {
                       </div>
                       {index === 20 ? (
                         <p className="ml-3">
-                          <span className="font-medium text-45454A">
-                            {i !== 4
+                          <span className="font-medium text-45454A tracking-[-0.32px] font-Poppins ">
+                            {i === 4
+                              ? "Governing Law and Jurisdiction"
+                              : i === 6
+                              ? "Entire Agreement:"
+                              : i !== 7
                               ? words[0]
-                              : "Governing Law and Jurisdiction:"}
+                              : ""}
                           </span>{" "}
                           {words.slice(1).join(" ")}
                         </p>
                       ) : (
-                        <p className="ml-3">{point}</p>
+                        <p className="ml-3 tracking-[-0.32px] font-Poppins">
+                          {point}
+                        </p>
                       )}
                     </div>
                   );
@@ -99,7 +107,7 @@ function MainSection() {
         {AnnexureData?.map((item, index) => {
           return (
             <div key={index.toString()}>
-              <p className={styles.heading}>{item.heading}</p>
+              <h2 className={styles.heading}>{item.heading}</h2>
               <p className={styles.special_subheading}>{item.subheading}</p>
               <div className="mt-4">
                 {item.points?.map((point, i) => {

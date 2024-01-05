@@ -23,13 +23,15 @@ const PrivacyPolicyData = () => {
             <ForwardArrow size={12} color={"#71717A"} />
           </li>
           <li className={styles.list}>
-            <h1 className={`${styles.route_text} !font-medium`}>
+            <p className={`${styles.route_text} !font-medium `}>
               Privacy Policy
-            </h1>
+            </p>
           </li>
         </ul>
       </div>
-      <div className={styles.heading_container}>Privacy Policy</div>
+      <h1 className={`${styles.heading_container} !tracking-[-0.48px]`}>
+        Privacy Policy
+      </h1>
 
       {/* details  */}
       <div className={styles.details}>

@@ -5,7 +5,7 @@
   @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
 }
 .sub_heading {
-  @apply flex font-Poppins text-71717A lg:text-16 lg:my-8 my-6 text-14;
+  @apply flex font-Poppins text-71717A lg:text-16 lg:my-8 my-6 text-14 leading-[0];
 }
 .rating_row {
   @apply flex gap-2 flex-col;
@@ -19,6 +19,8 @@
 .input_wrapper {
   @apply my-8;
 }
+
 .textarea {
-  @apply border border-DDDDDF rounded-xl text-71717A text-14 font-Poppins px-4 py-3 outline-none lg:w-[500px] w-full lg:h-[168px] h-[150px];
+  @apply border border-DDDDDF rounded-xl text-71717A text-14 font-Poppins px-4 py-3 outline-none lg:w-[500px] w-full lg:h-[168px] h-[150px] max-h-[168px];
+  resize: none;
 }
