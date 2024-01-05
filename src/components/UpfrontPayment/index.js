@@ -28,7 +28,7 @@ function UpfrontPayment() {
     axios
       .post(baseURL + endPoints.upfrontPayment, {id: ID})
       .then(res => {
-        // console.log(res?.data?.data?.data, "ressss");
+        console.log(res?.data?.data?.data, "ressss in upfront");
         setApiData(res?.data?.data?.data);
         setRazorpayData(res?.data?.data);
       })
@@ -72,6 +72,7 @@ function UpfrontPayment() {
             razCustomerId: customerId,
             razorpaySignature: res.razorpay_signature,
             id: razorpayData?.data.recID,
+            mode: "upfront_payment",
           };
           const result = await axios.post(
             baseURL + endPoints.addToCart.successPayment,

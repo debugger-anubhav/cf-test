@@ -1,7 +1,9 @@
 import {getLocalStorage} from "@/constants/constant";
+import {setShoppingCartTab} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 import React from "react";
 import cookie from "react-cookies";
+import {useDispatch} from "react-redux";
 import Cookies from "universal-cookie";
 
 export default function ProfileDropDown({setShowProfileDropdown}) {
@@ -27,6 +29,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
     {item: "Logout"},
   ];
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const userName = getLocalStorage("user_name") ?? "";
   return (
@@ -71,6 +74,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
+                dispatch(setShoppingCartTab(0));
                 router.push("/");
               }
             }}>
