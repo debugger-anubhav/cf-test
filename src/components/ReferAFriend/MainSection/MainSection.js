@@ -190,7 +190,7 @@ const MainSection = ({login}) => {
                       <img
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
-                        className="w-[18px] h-[18px] ml-2 inline-block"
+                        className="w-[24px] h-[24px] ml-2 inline-block"
                       />
                     </span>
                   </p>
