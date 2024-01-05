@@ -1,5 +1,5 @@
 .main_container {
-  @apply justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 md:mt-9;
+  @apply justify-center md:justify-normal 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 md:mt-9;
 }
 
 .product_wrapper {

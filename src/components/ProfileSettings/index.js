@@ -113,37 +113,38 @@ const ProfileSettings = () => {
   };
 
   const handleOtpVerification = async (email, otp) => {
-    if (countdown === 0) {
-      setOtpError(
-        "Sorry, your OTP has timed out. Please request a new OTP to continue.",
-      );
-    } else {
-      const body = {
-        email,
-        otp,
-      };
-      axios
-        .post(baseURL + endPoints.profileSettingPage.sentOtpToEmail, body, {
-          headers: {
-            userid: useridFromStorage,
-          },
-        })
-        .then(response => {
-          if (response?.data?.message === "OTP verified successfully") {
-            setEmailState("Yes");
-            setShowOtpInput(false);
-            setSentOtp(false);
-          } else {
-            console.log(response?.data?.message);
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          setOtpError(
-            "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
-          );
-        });
-    }
+    // if (countdown === 0) {
+    //   setOtpError(
+    //     "Sorry, your OTP has timed out. Please request a new OTP to continue.",
+    //   );
+    // } else {
+
+    const body = {
+      email,
+      otp,
+    };
+    axios
+      .post(baseURL + endPoints.profileSettingPage.sentOtpToEmail, body, {
+        headers: {
+          userid: useridFromStorage,
+        },
+      })
+      .then(response => {
+        if (response?.data?.message === "OTP verified successfully") {
+          setEmailState("Yes");
+          setShowOtpInput(false);
+          setSentOtp(false);
+          setOtpError("");
+        } else {
+          console.log(response?.data?.message);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setOtpError(
+          "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
+        );
+      });
   };
 
   const handleUpdateUserDetails = async values => {

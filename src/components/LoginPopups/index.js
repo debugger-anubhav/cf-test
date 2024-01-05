@@ -148,8 +148,15 @@ const LoginModal = ({
               }
               console.log(cookies, "cookies");
               showToastNotification("Login successfully", 1);
-              if (isCheckoutPage) setModalCategory("setUpAccount");
-              else {
+              if (isCheckoutPage) {
+                if (
+                  response?.data?.data?.full_name &&
+                  response?.data?.data?.email
+                ) {
+                  closeModal();
+                  handleChangeRoute();
+                } else setModalCategory("setUpAccount");
+              } else {
                 console.log("innnn");
                 closeModal();
                 handleChangeRoute && handleChangeRoute();
