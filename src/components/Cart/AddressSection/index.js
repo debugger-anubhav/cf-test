@@ -41,7 +41,6 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 const AddressSection = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  // const formik = useFormikContext();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
   const [haveGstNumber, sethaveGstNumber] = useState(false);
   const [gstNumber, setGstNumber] = useState("");
@@ -107,7 +106,11 @@ const AddressSection = () => {
       )
       .required("Postal code is required"),
     city: Yup.string().required("City is required"),
-    orderType: Yup.string().required("Order type is required"),
+    orderType: Yup.string().when("offlineCustomer", {
+      is: true,
+      then: () => Yup.string().required("Order type is required"),
+      otherwise: () => Yup.string(),
+    }),
   });
 
   const orderTypeOptions = ["New Order", "Swap product"];
@@ -351,7 +354,7 @@ const AddressSection = () => {
           />
         )}
 
-        <div className={styles.new_address_wrapperformikRef}>
+        <div className={styles.new_address_wrapper}>
           <h2 className={styles.new_add_head}>Add new address</h2>
 
           <Formik
@@ -367,12 +370,16 @@ const AddressSection = () => {
               orderNumber: "",
               orderType: "",
               alternateContactNumber: "",
+              offlineCustomer: isOfflineCustomer === 1,
             }}
             validationSchema={validationSchema}
             onSubmit={async (values, {setSubmitting, resetForm}) => {
+              console.log(1);
               if (isOfflineCustomer === 1) {
+                console.log("in if");
                 handleOfflineOrder(values);
               } else {
+                console.log("in else");
                 await saveUserAddress(values);
                 getAllSavedAddresses();
                 resetForm();
@@ -500,28 +507,30 @@ const AddressSection = () => {
                     </ErrorMessage>
                   </div>
 
-                  <div className={styles.form_field}>
-                    <p className={styles.form_label}>
-                      Alternative number (Optional)
-                    </p>
-                    <div
-                      className={`flex gap-2 items-center ${styles.form_input}`}>
-                      <img
-                        src={`${cityUrl + "india-icon.svg"}`}
-                        className={styles.flag}
-                        loading="lazy"
-                        alt="India-icon"
-                      />
-                      <Field
-                        type="number"
-                        onKeyPress={keyPressForContactField}
-                        // readOnly
-                        name="alternateContactNumber"
-                        placeholder="Enter 10 digit number "
-                        className={styles.contact_input}
-                      />
+                  {isOfflineCustomer === 1 && (
+                    <div className={styles.form_field}>
+                      <p className={styles.form_label}>
+                        Alternative number (Optional)
+                      </p>
+                      <div
+                        className={`flex gap-2 items-center ${styles.form_input}`}>
+                        <img
+                          src={`${cityUrl + "india-icon.svg"}`}
+                          className={styles.flag}
+                          loading="lazy"
+                          alt="India-icon"
+                        />
+                        <Field
+                          type="number"
+                          onKeyPress={keyPressForContactField}
+                          // readOnly
+                          name="alternateContactNumber"
+                          placeholder="Enter 10 digit number "
+                          className={styles.contact_input}
+                        />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className={styles.form_field}>
                     <p className={styles.form_label}>Address</p>
@@ -590,10 +599,7 @@ const AddressSection = () => {
                     </div>
                   </div>
                   {isOfflineCustomer !== 1 && (
-                    <button
-                      type="submit"
-                      className={styles.save_btn}
-                      id="form_submitP_btn">
+                    <button type="submit" className={styles.save_btn}>
                       Save & Proceed
                     </button>
                   )}
