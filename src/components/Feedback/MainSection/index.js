@@ -25,7 +25,7 @@ export default function MainSection() {
     // console.log("sbmit", values);
     axios
       .post(baseURL + endPoints.feedback, {
-        feedback_url: "https://test.rentofurniture.com/fb/KLAisk1",
+        feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
         rating: values.ratingnumber,
         comment: values.textarea,
