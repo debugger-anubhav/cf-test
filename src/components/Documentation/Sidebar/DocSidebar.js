@@ -6,10 +6,13 @@ import {useRouter} from "next/navigation";
 import {getLocalStorage} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
 import Cookies from "universal-cookie";
+import {setShoppingCartTab} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
   const router = useRouter();
+  const dispatch = useDispatch();
   const authCookies = new Cookies();
   const [userName, setUserName] = useState(null);
 
@@ -71,6 +74,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       localStorage.removeItem("user_name");
       localStorage.removeItem("ci_session");
       location.reload();
+      dispatch(setShoppingCartTab(0));
       router.push("/");
     }
   };
