@@ -1,5 +1,5 @@
 .wrapper {
-  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full;
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] w-full;
 }
 .container {
   @apply hidden w-full xs:block;

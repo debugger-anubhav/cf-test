@@ -1,5 +1,5 @@
 .wrapper {
-  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] w-full lg:my-[88px] my-[48px];
+  @apply px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] w-full lg:my-[88px] my-[48px];
 }
 .heading_container {
   @apply md:text-20 text-16 text-45454A font-medium leading-[32px] font-Poppins;
