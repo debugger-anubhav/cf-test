@@ -35,7 +35,7 @@ export const useAuthentication = () => {
         localStorage.removeItem("user_id");
         localStorage.removeItem("_ga");
         // removeCookie("authToken");
-        cookies.remove("authToken");
+        cookies.remove("authToken", {path: "/"});
 
         return false;
       }

@@ -142,7 +142,9 @@ const LoginModal = ({
               // console.log(response.data.data.access_token, "kwkqwo");
               if (response?.data?.data?.access_token) {
                 console.log("in settoken");
-                cookies.set("authToken", response?.data?.data?.access_token);
+                cookies.set("authToken", response?.data?.data?.access_token, {
+                  path: "/",
+                });
               }
               console.log(cookies, "cookies");
               showToastNotification("Login successfully", 1);
