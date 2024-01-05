@@ -8,13 +8,13 @@
   @apply flex w-full items-center flex-wrap list-none;
 }
 .list {
-  @apply mr-1 relative inline-flex items-center font-Poppins;
+  @apply mr-1 relative inline-flex items-center font-Poppins tracking-[-0.32px];
 }
 .route_text {
-  @apply text-71717A text-14 font-normal font-Poppins leading-6 pr-1;
+  @apply text-71717A text-14 font-normal font-Poppins leading-6 pr-1 tracking-[-0.32px];
 }
 .heading_container {
-  @apply text-20 lg:text-24 text-45454A font-medium leading-[32px] font-Poppins mt-4;
+  @apply text-20 lg:text-24 text-45454A font-medium leading-[32px] font-Poppins mt-4 tracking-[-0.32px];
 }
 .privacy_policy_detail_text {
   @apply lg:text-16 text-14 font-Poppins text-71717A tracking-[-0.32px];
@@ -27,10 +27,10 @@
 }
 
 .privacy_policy_detail_heading {
-  @apply lg:text-20 text-16 text-45454A font-Poppins font-medium;
+  @apply lg:text-20 text-16 text-45454A font-Poppins font-medium tracking-[-0.4px];
 }
 .privacy_policy_detail_point {
-  @apply lg:text-16 text-14 lg:mt-4 mt-3 text-71717A font-Poppins font-normal;
+  @apply lg:text-16 text-14 lg:mt-4 mt-3 text-71717A font-Poppins font-normal tracking-[-0.32px];
 }
 .last_details {
   @apply lg:mb-[88px] mb-[48px];
@@ -48,5 +48,5 @@
   @apply w-[5px] h-[5px]  rounded-[50%] bg-71717A;
 }
 .list_point {
-  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins ml-2;
+  @apply flex list-disc justify-start  mb-3 w-full text-71717A lg:text-16 text-14 font-Poppins ml-2 tracking-[-0.32px];
 }
