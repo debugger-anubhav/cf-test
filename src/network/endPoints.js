@@ -179,6 +179,7 @@ export const endPoints = {
   referAFreind: id => `fc-referral-codes/getReferralCode?userId=${id}`,
   enquiry: "fc-bulk-orders/submitEnquiryForm",
   feedback: "ivr-feedbacks/saveFeedback",
+  getFeedbackData: "ivr-feedbacks/getFeedbackData",
   careerPageData: "fc-jobs/getCareerPageContent",
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
   tenureExtensionCreateOrder: "fc-payments/createOrder",

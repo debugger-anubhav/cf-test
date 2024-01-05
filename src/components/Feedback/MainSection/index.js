@@ -20,6 +20,7 @@ export default function MainSection() {
     " Getting your words about Cityfurnish is great. Rate us on our recent  interaction and give your valuable feedback.";
   const [isHovered, setIsHovered] = useState(false);
   const [rating, setRating] = useState(0);
+  const [feedbackData, setFeedbackData] = useState(null);
 
   const handleSubmit = values => {
     // console.log("sbmit", values);
@@ -43,6 +44,18 @@ export default function MainSection() {
       })
       .catch(err => console.log(err));
   };
+  const getFeedbackData = () => {
+    axios
+      .post(baseURL + endPoints.getFeedbackData, {
+        feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
+        customer_contact_no: params.mobilenumber,
+      })
+      .then(res => {
+        console.log(feedbackData, "res");
+        setFeedbackData(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  };
   useEffect(() => {
     console.log(isHovered, "state");
   }, [isHovered]);
@@ -55,6 +68,8 @@ export default function MainSection() {
       "Please rate the feedback out of 5 stars",
     ),
   });
+
+  useEffect(() => getFeedbackData(), []);
 
   return (
     <div className={styles.wrapper}>
