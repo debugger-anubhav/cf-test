@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
 import FAQQuestion from "@/components/ReferAFriend/MainSection/FAQQuestion";
-import {ForwardArrow} from "@/assets/icon";
+import {FaAngleRight} from "react-icons/fa6";
+import {ForwardArrowWithLineBold} from "../../../assets/icon";
 
 function HaveQueries() {
   const [openIndex, setOpenIndex] = useState(0);
@@ -50,7 +51,9 @@ function HaveQueries() {
         <a href="/pages/faq">
           <div className={styles.btn}>
             <p className={styles.btn_txt}>See more FAQs</p>
-            <ForwardArrow className={styles.forword_icon} />
+            {/* <ForwardArrow className={styles.forword_icon} /> */}
+            <FaAngleRight className={`${styles.forword_icon} hidden md:flex`} />
+            <ForwardArrowWithLineBold className={"flex md:hidden"} />
           </div>
         </a>
       </div>

@@ -18,6 +18,13 @@ import {
   IoWarning,
   IoSwapHorizontalSharp,
 } from "react-icons/io5";
+import {
+  FaArrowRight,
+  FaCirclePlus,
+  FaLocationDot,
+  FaToggleOff,
+  FaToggleOn,
+} from "react-icons/fa6";
 import {TbMailFilled, TbReload, TbSparkles} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
 import {PiCopySimpleBold} from "react-icons/pi";
@@ -70,12 +77,6 @@ import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
 import {FaRegCalendar} from "react-icons/fa";
-import {
-  FaCirclePlus,
-  FaLocationDot,
-  FaToggleOff,
-  FaToggleOn,
-} from "react-icons/fa6";
 
 export const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -222,6 +223,9 @@ export const ForwardArrow = ({size, color, className}) => (
 
 export const ForwardArrowWithLine = ({size, color, className}) => (
   <IoArrowForwardSharp size={size} color={color} className={className} />
+);
+export const ForwardArrowWithLineBold = ({size, color, className}) => (
+  <FaArrowRight size={size} color={color} className={className} />
 );
 
 export const BackwardArrow = ({size, color, className}) => (
