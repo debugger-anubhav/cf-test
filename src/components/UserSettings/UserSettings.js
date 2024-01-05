@@ -36,7 +36,7 @@ export default function UserSettings() {
       head: "CF coins",
       desc: "Check CF coins. Use them when ordering.",
       link: "/wallet",
-      img: `${url}cf-coins.svg`,
+      img: `${url}cf-coins-b-w.svg`,
     },
     {
       head: "My Invoices",

@@ -54,7 +54,19 @@ const OfferPage = () => {
 
   return (
     <div className={styles.main_container}>
-      <h1 className={styles.header}>Offers 🎉</h1>
+      <div className="flex">
+        <h1 className={styles.header}>
+          Offers
+          <span>
+            <img
+              src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+              alt="paty_icon"
+              className="w-[24px] h-[24px] ml-2 inline-block"
+            />
+          </span>
+        </h1>
+      </div>
+      {/* <h1 className={styles.header}>Offers 🎉</h1> */}
       <div className="flex flex-col">
         {skeletonLoading ? (
           <OffersPageSkeleton />
