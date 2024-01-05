@@ -51,8 +51,8 @@ export default function MainSection() {
         customer_contact_no: params.mobilenumber,
       })
       .then(res => {
-        console.log(feedbackData, "res");
         setFeedbackData(res?.data?.data);
+        setRating(res?.data?.data?.rating);
       })
       .catch(err => console.log(err));
   };
@@ -78,9 +78,10 @@ export default function MainSection() {
       <div className={styles.sub_heading}>{Subheading}</div>
 
       <Formik
+        enableReinitialize
         initialValues={{
-          ratingnumber: "",
-          textarea: "",
+          ratingnumber: feedbackData ? feedbackData.rating : "",
+          textarea: feedbackData ? feedbackData.comment : "",
         }}
         validationSchema={validationSchema}
         onSubmit={values => {
@@ -130,7 +131,7 @@ export default function MainSection() {
                   as="textarea"
                   placeholder="Let us know how we can improve ourselves?"
                   className={styles.textarea}
-                  values="textarea"></Field>
+                  values={formik.values.textarea}></Field>
                 <ErrorMessage name="textarea">
                   {msg =>
                     formik.touched.textarea && (
