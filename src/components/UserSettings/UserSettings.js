@@ -5,9 +5,12 @@ import {useRouter} from "next/navigation";
 import cookie from "react-cookies";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import Cookies from "universal-cookie";
+import {setShoppingCartTab} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 export default function UserSettings() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const authCookies = new Cookies();
   const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [
@@ -33,7 +36,7 @@ export default function UserSettings() {
       head: "CF coins",
       desc: "Check CF coins. Use them when ordering.",
       link: "/wallet",
-      img: `${url}cf-coins.svg`,
+      img: `${url}cf-coins-b-w.svg`,
     },
     {
       head: "My Invoices",
@@ -117,6 +120,7 @@ export default function UserSettings() {
                 localStorage.removeItem("_ga");
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
+                dispatch(setShoppingCartTab(0));
               }
               router.push("/");
             }}>

@@ -8,10 +8,10 @@
   @apply md:flex items-center gap-2 hidden py-3;
 }
 .crumpItem {
-  @apply text-14 leading-6 text-71717A;
+  @apply text-14 leading-6 text-71717A font-Poppins;
 }
 .head {
-  @apply text-45454A text-20 xl:text-24 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.48 mt-1;
+  @apply text-45454A  font-Poppins text-20 xl:text-24 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.48 mt-1;
 }
 .wrapper {
   @apply flex flex-col xl:flex-row gap-8 xl:justify-between macbook:gap-[92px] macbook:justify-normal 3xl:gap-[180px] mt-4;

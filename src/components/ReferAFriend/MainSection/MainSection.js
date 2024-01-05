@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
-import {ForwardArrow, ForwardArrowWithLine} from "@/assets/icon";
+import {ForwardArrow} from "@/assets/icon";
 import HowItWorksDrawer from "../HowItWorksDrawer/HowItWorksDrawer";
 import FAQQuestion from "./FAQQuestion";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -15,6 +15,7 @@ import {reduxSetModalState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
 import {useRouter} from "next/navigation";
+import {FaArrowRight} from "react-icons/fa";
 
 const FAQ = [
   {
@@ -284,7 +285,7 @@ const MainSection = ({login}) => {
             //   rel="noopner noreferrer">
             <button className={styles.login_btn} onClick={HandleLogin}>
               Login
-              <ForwardArrowWithLine />
+              <FaArrowRight />
             </button>
             // </a>
           )}
