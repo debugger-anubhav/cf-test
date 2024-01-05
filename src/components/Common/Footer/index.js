@@ -100,6 +100,7 @@ const Footer = ({params}) => {
           link: "/pages/rentalagreement",
         },
         {text: "Offers", link: "/pages/offers"},
+        {text: "Benefits", link: "/pages/benefits"},
       ],
     },
 

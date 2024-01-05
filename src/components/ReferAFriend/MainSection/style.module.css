@@ -167,7 +167,8 @@
 }
 
 .refer_a_friend_image {
-  @apply h-[178px] w-[328px] lg:h-[324px] 4xl:h-[385px] lg:w-[459px] 2xl:w-full lg:pb-[99px] lg:px-[22.5px] pointer-events-none object-cover;
+  @apply w-full h-full lg:w-[459px] lg:h-[324px]   lg:pb-[99px] lg:px-[22.5px] pointer-events-none;
+  /* @apply h-[178px] w-[328px] lg:h-[324px] 4xl:h-[385px] lg:w-[459px] 2xl:w-full lg:pb-[99px] lg:px-[22.5px] pointer-events-none object-cover; */
 }
 
 .referral_wrapper_skeleton {
