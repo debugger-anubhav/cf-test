@@ -12,7 +12,7 @@
   @apply absolute xl:bottom-0 bottom-3 p-4;
 }
 .heading {
-  @apply lg:text-16 text-14 font-medium font-Poppins text-222;
+  @apply lg:text-20 text-16 font-medium font-Poppins text-222 tracking-[-0.4px];
 }
 .detail {
   @apply lg:text-14 text-12 font-Poppins text-71717A;
