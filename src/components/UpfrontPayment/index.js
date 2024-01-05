@@ -140,9 +140,14 @@ function UpfrontPayment() {
         </p>
       </div>
       <div>
-        <button className={styles.pay_now_btn} onClick={handleOpenRazorpay}>
-          Pay now
-          <ForwardArrowWithLine size={20} color={"#222222"} />
+        <button
+          disabled={apiData?.payment_status === 2}
+          className={styles.pay_now_btn}
+          onClick={handleOpenRazorpay}>
+          {apiData?.payment_status === 2 ? "Payment Already Paid" : "Pay now"}
+          {apiData?.payment_status !== 2 && (
+            <ForwardArrowWithLine size={20} color={"#222222"} />
+          )}
         </button>
       </div>
     </div>
