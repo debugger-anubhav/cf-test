@@ -3,5 +3,5 @@
 }
 
 .bread_crumbs_text {
-  @apply text-[#71717A] text-14 font-normal leading-6;
+  @apply text-[#71717A] text-14 font-normal font-Poppins leading-6;
 }

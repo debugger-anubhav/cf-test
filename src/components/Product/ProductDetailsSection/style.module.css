@@ -8,7 +8,7 @@
   @apply lg:flex items-center gap-2 hidden;
 }
 .crumpItem {
-  @apply text-14 leading-6 text-71717A;
+  @apply text-14 leading-6 text-71717A font-Poppins;
 }
 .carousel_wrapper {
   @apply w-full lg:w-[60%] macbook:w-[727px] 4xl:w-[55%] relative;
