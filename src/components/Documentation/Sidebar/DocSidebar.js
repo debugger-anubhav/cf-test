@@ -67,7 +67,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const onLogout = () => {
     if (typeof window !== "undefined") {
       cookie.remove("ci_sessions");
-      authCookies.remove("authToken");
+      authCookies.remove("authToken", {path: "/"});
       localStorage.removeItem("tempUserID");
       localStorage.removeItem("user_id");
       localStorage.removeItem("_ga");
