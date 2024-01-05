@@ -112,6 +112,12 @@ input[type="radio"]:checked {
   left: 30px !important;
 }
 
+@media screen and (max-width: 750px) {
+  #mobile-chat-container {
+    display: none;
+  }
+}
+
 /* to hide bydefault arrrows in the input field for number */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
