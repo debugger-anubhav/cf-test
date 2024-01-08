@@ -2,14 +2,14 @@
   @apply px-4  md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 .main_heading {
-  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
+  @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 tracking-[-0.48px];
 }
 .sub_heading {
-  @apply lg:text-16 text-14 font-Poppins text-71717A my-8;
+  @apply lg:text-16 text-14 font-Poppins text-71717A my-8 tracking-[-0.32px];
 }
 .video_wrapper {
   @apply mb-[88px];
 }
 .iframe_wrapper {
-  @apply lg:w-[853px] lg:h-[480px] sm:w-[653px] sm:h-[380px] w-full border-none;
+  @apply lg:w-[853px] lg:h-[480px] sm:w-[653px] sm:h-[380px] h-[200px] w-full border-none;
 }

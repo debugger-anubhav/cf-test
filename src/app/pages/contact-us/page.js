@@ -16,15 +16,17 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 
 const ContactUs = () => {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <ContactSection />
-      <OurOffices />
-      <HaveQueries />
-      <Footer />
-    </div>
+    <>
+      <div className="large_layout">
+        <AnnouncementBar />
+        <Header />
+        <MenuList />
+        <ContactSection />
+        <OurOffices />
+        <HaveQueries />
+        <Footer />
+      </div>
+    </>
   );
 };
 

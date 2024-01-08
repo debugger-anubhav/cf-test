@@ -20,7 +20,9 @@ function MainSection() {
                   />
                   <div className={styles.detail_wrapper}>
                     <img src={item.icon} className="mb-6 w-11 h-11" />
-                    <h3 className={`${styles.heading} mb-2`}>{item.Heading}</h3>
+                    <h3 className={`${styles.heading} mb-2 tracking-[-0.4px]`}>
+                      {item.Heading}
+                    </h3>
                     <p className={styles.detail}>{item.text}</p>
                   </div>
                 </div>
@@ -31,7 +33,9 @@ function MainSection() {
                       className={styles.responsive_icon}
                       alt={item.Heading}
                     />
-                    <p className={styles.heading}>{item.Heading}</p>
+                    <p className={`${styles.heading} tracking-[-0.4px]`}>
+                      {item.Heading}
+                    </p>
                     <p className={`${styles.detail} pt-1`}>{item.text}</p>
                   </div>
                 </div>
