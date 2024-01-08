@@ -21,7 +21,7 @@ function BenefitPage() {
         <BreadCrumbsCommon currentPage={"Benefits"} />
         <h1
           className={
-            "flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8"
+            "flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8 tracking-[0.48px]"
           }>
           Benefits
         </h1>

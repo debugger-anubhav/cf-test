@@ -15,7 +15,7 @@
   @apply lg:text-20 text-16 font-medium font-Poppins text-222 tracking-[-0.4px];
 }
 .detail {
-  @apply lg:text-14 text-12 font-Poppins text-71717A;
+  @apply lg:text-14 text-12 font-Poppins text-71717A tracking-[-0.28px];
 }
 .responsive_deatil_wrapper {
   @apply p-4 border border-[#E3E1DC] rounded-lg relative w-full;
