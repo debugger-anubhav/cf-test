@@ -127,20 +127,33 @@ const MainSection = ({login}) => {
     },
   ];
 
+  // const copyToClipboard = text => {
+  //   if (!text) return;
+
+  //   // Create a temporary input element to copy text
+  //   const input = document.createElement("input");
+  //   input.style.position = "fixed";
+  //   input.style.opacity = 0;
+  //   input.value = text;
+  //   document.body.appendChild(input);
+  //   input.select();
+  //   document.execCommand("copy");
+  //   document.body.removeChild(input);
+  //   showToastNotification("Copied to clipboard!", 1);
+  //   input.value = "";
+  // };
+
   const copyToClipboard = text => {
     if (!text) return;
-
-    // Create a temporary input element to copy text
     const input = document.createElement("input");
     input.style.position = "fixed";
     input.style.opacity = 0;
-    input.value = text;
+    input.value = text.referral_code;
     document.body.appendChild(input);
     input.select();
     document.execCommand("copy");
     document.body.removeChild(input);
     showToastNotification("Copied to clipboard!", 1);
-    input.value = "";
   };
 
   const HandleLogin = () => {
@@ -303,6 +316,7 @@ const MainSection = ({login}) => {
             </button>
           </div>
         </div>
+
         <div
           className={
             userId ? styles.section2_wrapper : styles.section2_wrapper1
