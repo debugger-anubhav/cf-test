@@ -20,7 +20,7 @@
   @apply w-5 h-5 xl:w-6 xl:h-6;
 }
 .status {
-  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 capitalize;
 }
 .sub_container {
   @apply flex-col xl:flex-row flex xl:justify-between 2xl:w-[1070px] xl:mt-8 mt-5 gap-8;
