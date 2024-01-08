@@ -1,5 +1,5 @@
 .main_container {
-  @apply pl-4 mb-8 lg:mb-[88px] md:pl-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
+  @apply pl-4 mb-[48px] lg:mb-[88px] md:pl-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px];
 }
 
 .heading {
