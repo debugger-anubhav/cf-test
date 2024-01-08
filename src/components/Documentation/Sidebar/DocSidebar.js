@@ -81,9 +81,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
 
   return (
     <div
-      className={`${styles.mainContainer} ${
-        url === "referral" && "pb-[220px]"
-      }`}>
+      className={`${styles.mainContainer} ${url === "referral" && "h-full"}`}>
       <div className={styles.firstContainer}>
         <div className={styles.sectionHeadings}>Your Account,</div>
         <div className={styles.userNameText}>{userName}</div>

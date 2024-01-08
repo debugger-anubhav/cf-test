@@ -167,7 +167,7 @@ const MainSection = ({login}) => {
   };
 
   return (
-    <div className={styles.main_container}>
+    <div className={`${styles.main_container} ${userId && "lg:!pl-[64px]"}`}>
       <LoginModal
         closeModal={toggleLoginModal}
         isModalOpen={loginModal}
@@ -337,7 +337,7 @@ const MainSection = ({login}) => {
       )}
       {/* <hr className={styles.underline} /> */}
 
-      <div className={styles.section1_wrapper}>
+      <div className={`${styles.section1_wrapper} !mt-0`}>
         <div className={styles.freq_asked_que_wrapper}>
           <h2 className={styles.head}>
             For all other questions regarding Referrals:
