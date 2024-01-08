@@ -106,38 +106,40 @@ export default function Home() {
   // }
 
   return (
-    <div ref={myElementRef} className="large_layout">
-      {useChatScript()}
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <div className="lg:min-h-[385px] min-h-[150px]">
-        <HeroBanner />
+    <>
+      <div ref={myElementRef} className="large_layout">
+        {useChatScript()}
+        <AnnouncementBar />
+        <Header />
+        <MenuList />
+        <div className="lg:min-h-[385px] min-h-[150px]">
+          <HeroBanner />
+        </div>
+        <RentFurnitureAndAppliances params={"home-page"} />
+        <RecentlyViewedProduct />
+        <TrendingProducts params={"home-page"} />
+        <OffersAndCoupons />
+        <NewlyLaunched />
+        <DownloadForMobile />
+        <PreDesignCombos />
+        <HasselFreeServicesCards />
+        <LimetedPreiodDiscount />
+        <RentNowBanner params={"home-page"} />
+        <TryCityMax />
+        <div className="xl:hidden block">
+          <MediaCoverage />
+        </div>
+        <CustomerRating />
+        <div className="hidden xl:block">
+          <MediaCoverage />
+        </div>
+        <CombineSection />
+        <HappySubscribers params={"home-page"} />
+        <FrequentlyAskedQuestions params={"home-page"} />
+        <TextContent params={"home-page"} />
+        <Footer />
+        <Notifications />
       </div>
-      <RentFurnitureAndAppliances params={"home-page"} />
-      <RecentlyViewedProduct />
-      <TrendingProducts params={"home-page"} />
-      <OffersAndCoupons />
-      <NewlyLaunched />
-      <DownloadForMobile />
-      <PreDesignCombos />
-      <HasselFreeServicesCards />
-      <LimetedPreiodDiscount />
-      <RentNowBanner params={"home-page"} />
-      <TryCityMax />
-      <div className="xl:hidden block">
-        <MediaCoverage />
-      </div>
-      <CustomerRating />
-      <div className="hidden xl:block">
-        <MediaCoverage />
-      </div>
-      <CombineSection />
-      <HappySubscribers params={"home-page"} />
-      <FrequentlyAskedQuestions params={"home-page"} />
-      <TextContent params={"home-page"} />
-      <Footer />
-      <Notifications />
-    </div>
+    </>
   );
 }
