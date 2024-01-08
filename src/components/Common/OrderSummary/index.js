@@ -17,29 +17,45 @@ import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
 
-const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
+const OrderSummary = ({
+  orderNumber,
+  isDelivered,
+  isOfflineInvoice,
+  isSubscriptionPage,
+  subscriptionData,
+}) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
+  const [isCitymaxBill, setIsCitymaxBill] = useState(false);
   const userId = decrypt(getLocalStorage("_ga"));
+
+  console.log(subscriptionData, "subscriptionData");
 
   const dispatch = useDispatch();
   const getOrderSummary = () => {
-    axios
-      .get(
-        baseURL + endPoints.myOrdersPage.getOrderSummary(orderNumber, userId),
-      )
-      .then(res => {
-        console.log(res, "resss");
-        setData(res?.data?.data);
-        dispatch(getBillDetails(res?.data?.data?.bill));
-      })
-      .catch(err => console.log(err));
+    if (isSubscriptionPage) {
+      setData(subscriptionData);
+      dispatch(getBillDetails(subscriptionData?.bill));
+      setIsCitymaxBill(false);
+    } else {
+      axios
+        .get(
+          baseURL + endPoints.myOrdersPage.getOrderSummary(orderNumber, userId),
+        )
+        .then(res => {
+          console.log(res, "resss");
+          setData(res?.data?.data);
+          dispatch(getBillDetails(res?.data?.data?.bill));
+          setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   useEffect(() => {
     getOrderSummary();
-  }, []);
+  }, [subscriptionData]);
 
   const toggleDrawerBreakup = () => {
     setBreakupDrawer(!breakupDrawer);
@@ -52,33 +68,49 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.products_wrapper}>
-        <div className={styles.order_date_wrapper}>
-          {data && (
+        {data && (
+          <div className={styles.order_date_wrapper}>
             <p>
               Order placed on{" "}
               <span className={styles.bold_txt}>
                 {" "}
-                {`${format(new Date(data.orderDate), "d LLL, yyyy")}`}
+                {subscriptionData
+                  ? `${format(new Date(data?.start_date), "d LLL, yyyy")}`
+                  : `${format(new Date(data.orderDate), "d LLL, yyyy")}`}
               </span>{" "}
-              at{" "}
-              <span className={styles.bold_txt}>
-                {`${format(new Date(data.orderDate), "h:mm a")}`}
-              </span>
+              {!isSubscriptionPage && (
+                <>
+                  at{" "}
+                  <span className={styles.bold_txt}>
+                    {`${format(new Date(data?.orderDate), "h:mm a")}`}
+                  </span>
+                </>
+              )}
             </p>
-          )}
-        </div>
+          </div>
+        )}
 
         <div>
           {data?.productsList?.map((item, index) => (
             <div key={index}>
-              <div className={styles.single_order_wrapper}>
-                <div className={styles.img_wrapper}>
+              <div
+                className={`${isOfflineInvoice && "!items-start"} ${
+                  styles.single_order_wrapper
+                }`}>
+                <div
+                  className={`${
+                    isOfflineInvoice && "xl:!h-[90px] xl:!min-w-[120px]"
+                  } ${styles.img_wrapper}`}>
                   <img
                     className="w-full h-full"
                     src={`${
-                      productPageImagesBaseUrl +
-                      "thumb/" +
-                      item?.product_image?.split(",")[0]
+                      isSubscriptionPage
+                        ? productPageImagesBaseUrl +
+                          "thumb/" +
+                          item?.image?.split(",")[0]
+                        : productPageImagesBaseUrl +
+                          "thumb/" +
+                          item?.product_image?.split(",")[0]
                     }`}
                   />
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
@@ -87,7 +119,7 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
                   <p className={styles.prod_name}>{item.product_name}</p>
 
                   {isOfflineInvoice ? (
-                    <div>
+                    <div className="mt-2">
                       <p className={styles.tenure}>
                         Quantity: <span className={styles.rupeeIcon}>₹</span>
                         {item?.quantity}
@@ -106,7 +138,10 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
                   ) : (
                     <div className={styles.tenure_div}>
                       <p className={styles.tenure}>
-                        Tenure: {item.subproduct_attr_name}
+                        Tenure:{" "}
+                        {subscriptionData
+                          ? `${data?.tenure} months`
+                          : item.subproduct_attr_name}
                       </p>
                       {isDelivered && (
                         <p
@@ -183,7 +218,10 @@ const OrderSummary = ({orderNumber, isDelivered, isOfflineInvoice}) => {
           }}>
           <p className={styles.box_header}>Payment details:</p>
           {isOfflineInvoice ? (
-            <BillContent isOfflineInvoice={isOfflineInvoice} />
+            <BillContent
+              isOfflineInvoice={isOfflineInvoice}
+              isCitymaxBill={isCitymaxBill}
+            />
           ) : (
             <>
               <div className={styles.amount_div}>

@@ -147,6 +147,7 @@ export const endPoints = {
       `fc-zoho-crms/getServiceRequestOptions?dealCodeNumber=${orderId}`,
     getDeliverySlots: `fc-payments/getSlots`,
     updateSlot: `fc-payments/updateSlot`,
+    getSubscriptionData: `fc-zb-recurring-invoices/getSubscriptionData`,
   },
 
   cityMaxPage: {

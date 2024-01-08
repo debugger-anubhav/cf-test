@@ -1,16 +1,11 @@
 import React from "react";
-import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 export const metadata = {
-  title: "Cityfurnish",
-  description:
-    "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.",
-  icons: {
-    icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.ico",
-  },
+  title: "Cityfurnish- Refer a friend and get extra benefits",
+  description: "Cityfurnish Friends Referral Program",
 };
 
 export default function RootLayout({children}) {

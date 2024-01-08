@@ -1,25 +1,43 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {BackIcon, IconLink} from "@/assets/icon";
 import OrderSummary from "@/components/Common/OrderSummary";
 import {statusToImageMap} from "../../common/CommonContainer";
 import styles from "../../orders/partTwo/styles.module.css";
 import ServiceDrawer from "../../orders/partTwo/ServiceDrawer/ServiceDrawer";
 import {useRouter} from "next/navigation";
+import {useSelector} from "react-redux";
+import {format} from "date-fns";
 
-const SubscriptionDetails = ({setPart}) => {
+const SubscriptionDetails = ({setPart, subscriptionData}) => {
   const router = useRouter();
-  //   const dispatch = useDispatch();
-
-  const data = {
-    subsciptionNumber: "43093421",
-    zoho_sub_status: "Active",
-  };
+  const subsciptionNumber = useSelector(state => state.order.subscriptionId);
+  const [singleSubscriptionData, setSingleSubscriptionData] = useState();
 
   const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
   const toggleServiceDrawer = () => {
     setServiceDrawerOpen(!serviceDrawerOpen);
   };
 
+  const getSingleOrderDetails = () => {
+    const filteredData = subscriptionData.filter(
+      t => parseInt(t.dealCodeNumber) === parseInt(subsciptionNumber),
+    );
+    setSingleSubscriptionData(filteredData[0]);
+  };
+
+  useEffect(() => {
+    getSingleOrderDetails();
+  }, []);
+
+  console.log(singleSubscriptionData, "singleSubscriptionData");
+
+  let expiryDate;
+  if (singleSubscriptionData) {
+    expiryDate = format(
+      new Date(singleSubscriptionData?.end_date),
+      "d LLL, yyyy",
+    );
+  }
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -28,24 +46,25 @@ const SubscriptionDetails = ({setPart}) => {
             <BackIcon className={styles.backArrow} />
           </div>
           <h1 className={styles.header}>
-            Subscription no: #{data?.subsciptionNumber}
+            Subscription no: #{singleSubscriptionData?.dealCodeNumber}
           </h1>
         </div>
         <div className={styles.headers_right_div}>
           <img
             src={
-              IconLink + statusToImageMap[data?.zoho_sub_status.toLowerCase()]
+              IconLink +
+              statusToImageMap[singleSubscriptionData?.status.toLowerCase()]
             }
             className={styles.status_icon}
           />
-          <p className={styles.status}> {data?.zoho_sub_status}</p>
+          <p className={styles.status}>{singleSubscriptionData?.status}</p>
         </div>
       </div>
 
       <div className={styles.sub_container}>
         <div>
           <p className="text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3">
-            Your Subscription expired on 3rd Jun, 2023 at 6:04 pm
+            Your Subscription expired on {expiryDate}
           </p>
         </div>
 
@@ -53,17 +72,19 @@ const SubscriptionDetails = ({setPart}) => {
           <div
             className={styles.drawer_button}
             onClick={() => {
-              if (data?.zoho_sub_status === "Active")
+              if (singleSubscriptionData?.status.toLowerCase() === "active")
                 router.push(
-                  `/upfront_tenure_extension/${data?.subsciptionNumber}`,
+                  `/upfront_tenure_extension/${singleSubscriptionData?.dealCodeNumber}`,
                 );
               else router.push(`/cart`);
             }}>
-            {data?.zoho_sub_status === "Active" ? "Extend" : "Renew"}{" "}
+            {singleSubscriptionData?.status.toLowerCase() === "active"
+              ? "Extend"
+              : "Renew"}{" "}
             Subscription
           </div>
 
-          {data?.zoho_sub_status === "Active" ? (
+          {singleSubscriptionData?.status.toLowerCase() === "active" ? (
             <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
               Need Help with your order?
             </p>
@@ -77,12 +98,16 @@ const SubscriptionDetails = ({setPart}) => {
         <ServiceDrawer
           open={serviceDrawerOpen}
           toggleDrawer={toggleServiceDrawer}
-          orderId={619694057}
+          orderId={singleSubscriptionData?.dealCodeNumber}
         />
       )}
 
       <div className="mt-8">
-        <OrderSummary orderNumber={619694057} />
+        <OrderSummary
+          subscriptionData={singleSubscriptionData}
+          orderNumber={singleSubscriptionData?.dealCodeNumber}
+          isSubscriptionPage={true}
+        />
       </div>
     </div>
   );
