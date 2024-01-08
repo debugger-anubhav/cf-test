@@ -109,7 +109,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                 key={index}
                 onClick={() => {
                   setSelectedMenuOrder(index);
-                  fetchOrdersDetails(index !== 0 ? item.value : null);
+                  fetchOrdersDetails(item?.value);
                 }}>
                 <p
                   className={`

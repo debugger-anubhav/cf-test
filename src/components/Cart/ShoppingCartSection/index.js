@@ -287,7 +287,7 @@ const ShoppingCartSection = () => {
   useEffect(() => {
     validateAuth();
     // fetchUserDetails();
-  }, []);
+  }, [isLogin]);
 
   const handleChangeRoute = () => {
     dispatch(setShoppingCartTab(1));

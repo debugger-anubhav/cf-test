@@ -48,6 +48,9 @@ const CommonContainer = ({
     setServiceDrawerOpen(!serviceDrawerOpen);
   };
 
+  const productDetails =
+    tab === 0 ? JSON.parse(item?.fc_paymentData) : item?.productsList;
+
   return (
     <div>
       <div key={index} className={styles.box}>
@@ -58,21 +61,28 @@ const CommonContainer = ({
           <div className={styles.left_part}>
             <img
               src={
-                IconLink +
-                (statusToImageMap[item.zoho_sub_status.toLowerCase()] ||
-                  "payment-failed.svg")
+                tab === 0
+                  ? IconLink +
+                      statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
+                    "payment-failed.svg"
+                  : IconLink + statusToImageMap[item?.status]
               }
             />
             <div>
               <p className={styles.status}>
-                {item.status === "Pending"
-                  ? "Order Failed"
-                  : statusLabels[item.zoho_sub_status.toLowerCase()] ||
-                    item.zoho_sub_status}
+                {tab === 0
+                  ? item.status === "Pending"
+                    ? "Order Failed"
+                    : statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                      item.zoho_sub_status
+                  : item.status}
               </p>
               <p className={styles.date}>
                 {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
-                {`${format(new Date(item.created), "d LLL, yyyy")}`}
+                {`${format(
+                  new Date(tab === 0 ? item.created : item.start_date),
+                  "d LLL, yyyy",
+                )}`}
               </p>
             </div>
           </div>
@@ -81,9 +91,9 @@ const CommonContainer = ({
             <p className={styles.status}>
               {tab === 0
                 ? `Order no: #${item.dealCodeNumber}`
-                : `Subscription no: #${item.subscriptionNumber}`}
+                : `Subscription no: #${item.dealCodeNumber}`}
             </p>
-            {item.status !== "Pending" && (
+            {item.status !== "Pending" && item.status !== "inactive" && (
               <p onClick={toggleServiceDrawer} className={styles.help_txt}>
                 Need Help?
               </p>
@@ -108,30 +118,32 @@ const CommonContainer = ({
           }}
           ref={containerRef}>
           <div className="flex items-center gap-3 xl:gap-4">
-            {JSON.parse(item?.fc_paymentData)
-              ?.slice(0, visibleImages)
-              .map((product, index) => {
-                return (
-                  <div key={index} className={styles.img_wrapper}>
-                    <img
-                      src={`${
-                        productPageImagesBaseUrl +
-                        "thumb/" +
-                        product?.product_image?.split(",")[0]
-                      }`}
-                      alt={product?.product_name}
-                      className="w-full h-full"
-                      loading="lazy"
-                    />
-                    <div className={styles.quantity_label}>
-                      {product?.quantity}x
-                    </div>
+            {productDetails?.slice(0, visibleImages).map((product, index) => {
+              return (
+                <div key={index} className={styles.img_wrapper}>
+                  <img
+                    src={`${
+                      tab === 0
+                        ? productPageImagesBaseUrl +
+                          "thumb/" +
+                          product?.product_image?.split(",")[0]
+                        : productPageImagesBaseUrl +
+                          "thumb/" +
+                          product?.image?.split(",")[0]
+                    }`}
+                    alt={product?.product_name}
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                  <div className={styles.quantity_label}>
+                    {product?.quantity}x
                   </div>
-                );
-              })}
-            {JSON.parse(item?.fc_paymentData)?.length > visibleImages && (
+                </div>
+              );
+            })}
+            {productDetails?.length > visibleImages && (
               <div className={styles.more_div}>
-                +{JSON.parse(item?.fc_paymentData).length - visibleImages}
+                +{productDetails.length - visibleImages}
               </div>
             )}
           </div>
