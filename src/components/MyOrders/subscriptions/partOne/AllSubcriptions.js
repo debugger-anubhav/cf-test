@@ -9,18 +9,25 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "../../common/CommonContainer";
 import Header from "../../common/Header";
 
-const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
+const AllSubcriptions = ({
+  setPart,
+  tab,
+  setTab,
+  data,
+  getSingleOrderDetails,
+  getAllSubscriptionDetails,
+}) => {
   const containerRef = useRef(null);
   const [selectedSubscriptionMenu, setSelectedSubscriptionMenu] = useState(0);
-  const [subscriptionData, setSubscriptionData] = useState([]);
+
   const [visibleImages, setVisibleImages] = useState(5);
   const [containerWidth, setContainerWidth] = useState(0);
   const [showSubscripNote, setShowSubscripNote] = useState(true);
 
   const MenuList1 = [
     {label: "All Subscriptions"},
-    {label: "Active Subscriptions"},
-    {label: "Inactive Subscriptions"},
+    {label: "Active Subscriptions", value: "active"},
+    {label: "Inactive Subscriptions", value: "inactive"},
   ];
 
   useEffect(() => {
@@ -58,66 +65,7 @@ const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
   const userId = decrypt(getLocalStorage("_ga"));
   console.log(userId);
 
-  const fetchSubscriptionDetails = filter => {
-    setSubscriptionData([
-      {
-        id: 72705,
-        subscriptionNumber: "280705685",
-        created: "2023-10-09T18:25:17.000Z",
-        zoho_sub_status: "Active",
-        status: "Paid",
-        attr_name: "12 Months",
-        fc_paymentData:
-          '[{"product_id": 3907, "quantity": "1", "product_name": "Bristol Sofa Set", "product_image": "bristol_sofa_set.webp,"}]',
-      },
-      {
-        id: 72705,
-        subscriptionNumber: "280705685",
-        created: "2023-10-09T18:25:17.000Z",
-        zoho_sub_status: "Active",
-        status: "Paid",
-        attr_name: "12 Months",
-        fc_paymentData:
-          '[{"product_id": 3907, "quantity": "1", "product_name": "Bristol Sofa Set", "product_image": "bristol_sofa_set.webp,"}]',
-      },
-      {
-        id: 72705,
-        subscriptionNumber: "280705685",
-        created: "2023-10-09T18:25:17.000Z",
-        zoho_sub_status: "Inactive",
-        status: "Paid",
-        attr_name: "12 Months",
-        fc_paymentData:
-          '[{"product_id": 3907, "quantity": "1", "product_name": "Bristol Sofa Set", "product_image": "bristol_sofa_set.webp,"}]',
-      },
-      {
-        id: 72705,
-        subscriptionNumber: "280705685",
-        created: "2023-10-09T18:25:17.000Z",
-        zoho_sub_status: "Inactive",
-        status: "Paid",
-        attr_name: "12 Months",
-        fc_paymentData:
-          '[{"product_id": 3907, "quantity": "1", "product_name": "Bristol Sofa Set", "product_image": "bristol_sofa_set.webp,"}]',
-      },
-    ]);
-
-    // const body = {
-    //   userId,
-    //   filter,
-    // };
-    // axios
-    //   .post(baseURL + endPoints.myOrdersPage.getAllOrders, body)
-    //   .then(res => {
-    //     console.log(res, "resss");
-    //     setOrdersData(res?.data?.data);
-    //   })
-    //   .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    fetchSubscriptionDetails();
-  }, []);
+  console.log(data, "data");
 
   return (
     <div className={styles.main_container}>
@@ -135,6 +83,7 @@ const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
                 key={index}
                 onClick={() => {
                   setSelectedSubscriptionMenu(index);
+                  getAllSubscriptionDetails(item?.value);
                 }}>
                 <p
                   className={`
@@ -163,7 +112,7 @@ const AllSubcriptions = ({getSingleOrderDetails, tab, setTab}) => {
           )}
 
           <div className={styles.orders_wrapper}>
-            {subscriptionData?.map((item, index) => {
+            {data?.map((item, index) => {
               console.log(visibleImages, "visibleee");
               return (
                 <div key={index}>

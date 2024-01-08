@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import React from "react";
 import styles from "./styles.module.css";
 import {DownPopUpArrow, PopUpArrow} from "@/assets/icon";
@@ -9,11 +10,14 @@ const BillContent = ({
   setShowTotalPriceBreakdown,
   showTotalPriceBreakdown,
   isOfflineInvoice,
+  isCitymaxBill,
 }) => {
   const pagedata = useSelector(state => state.cartPageData);
   const code = pagedata.couponCodeUsed;
   const billBreakup = pagedata.billBreakout;
-  const isCitymaxBill = pagedata.cartItems[0]?.is_frp === 1;
+
+  console.log(isCitymaxBill, "isCitymaxBillisCitymaxBill");
+  console.log(!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount"));
 
   return (
     <>
@@ -77,22 +81,25 @@ const BillContent = ({
           </div>
           <p className={styles.total_amount} style={{color: "#2D9469"}}>
             <span className={styles.rupeeIcon}>-₹</span>
-            {billBreakup?.itemDiscount}
+            {billBreakup?.itemDiscount.toFixed(2)}
           </p>
         </div>
 
-        {!isCitymaxBill && (
-          <div className={styles.row}>
-            <div>
-              <p className={styles.price_label}>
-                Coupon discount {isCouponApplied && code}
+        {!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount") && (
+          <>
+            {console.log("ejkw")}
+            <div className={styles.row}>
+              <div>
+                <p className={styles.price_label}>
+                  Coupon discount {isCouponApplied && code}
+                </p>
+              </div>
+              <p className={styles.total_amount} style={{color: "#2D9469"}}>
+                <span className={styles.rupeeIcon}>-₹</span>
+                {billBreakup?.couponDiscount}
               </p>
             </div>
-            <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>-₹</span>
-              {billBreakup?.couponDiscount}
-            </p>
-          </div>
+          </>
         )}
 
         <div className={styles.line}></div>
@@ -113,7 +120,7 @@ const BillContent = ({
           </div>
           <p className={styles.total_amount} style={{color: "#2D9469"}}>
             <span className={styles.rupeeIcon}>₹</span>
-            {billBreakup?.deliveryAndInstallation}
+            {billBreakup?.deliveryAndInstallation || 0}
           </p>
         </div>
 
@@ -125,22 +132,24 @@ const BillContent = ({
           </div>
           <p className={styles.total_amount}>
             <span className={styles.rupeeIcon}>₹</span>
-            {billBreakup?.gst}
+            {billBreakup?.gst.toFixed(2)}
           </p>
         </div>
 
-        <div className={styles.line}></div>
+        {!isCitymaxBill && billBreakup.hasOwnProperty("coinsUsed") && (
+          <>
+            <div className={styles.line}></div>
 
-        {!isCitymaxBill && (
-          <div className={styles.row}>
-            <div>
-              <p className={styles.price_label}>Cityfurnish coins used</p>
+            <div className={styles.row}>
+              <div>
+                <p className={styles.price_label}>Cityfurnish coins used</p>
+              </div>
+              <p className={styles.total_amount} style={{color: "#2D9469"}}>
+                <span className={styles.rupeeIcon}>-₹</span>
+                {billBreakup?.coinsUsed}
+              </p>
             </div>
-            <p className={styles.total_amount} style={{color: "#2D9469"}}>
-              <span className={styles.rupeeIcon}>-₹</span>
-              {billBreakup?.coinsUsed}
-            </p>
-          </div>
+          </>
         )}
 
         <div className={styles.line}></div>

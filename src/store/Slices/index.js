@@ -281,6 +281,7 @@ export const orderSlice = createSlice({
   initialState: {
     orderId: null,
     isModalOpen: false,
+    subscriptionId: null,
   },
   reducers: {
     setOrderIdFromOrderPage: (state, action) => {
@@ -288,6 +289,9 @@ export const orderSlice = createSlice({
     },
     reduxSetModalState: (state, action) => {
       state.isModalOpen = action.payload;
+    },
+    setSubscriptionNumber: (state, action) => {
+      state.subscriptionId = action.payload;
     },
   },
 });
@@ -389,7 +393,11 @@ export const {getOrderId} = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
 
-export const {setOrderIdFromOrderPage, reduxSetModalState} = orderSlice.actions;
+export const {
+  setOrderIdFromOrderPage,
+  reduxSetModalState,
+  setSubscriptionNumber,
+} = orderSlice.actions;
 
 export const {
   setTransactionReferenceNumber,
