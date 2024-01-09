@@ -133,3 +133,7 @@
 .recaptcha {
   @apply mt-4 mb-6 md:mb-8;
 }
+
+.textarea::placeholder {
+  @apply text-16;
+}

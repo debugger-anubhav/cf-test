@@ -19,11 +19,11 @@
 }
 
 .img_box {
-  @apply w-[50%] h-[132px]  md:h-[142px] lg:h-[235px];
+  @apply w-[50%] h-full  md:h-[142px] lg:h-[235px] 3xl:h-[280px];
 }
 
 .large_img {
-  @apply flex w-full h-[133px]  md:h-[142px] lg:h-[235px];
+  @apply flex w-full h-full  md:h-[142px] lg:h-[235px] 3xl:h-[280px];
 }
 .img_cls {
   @apply h-full w-full object-cover;

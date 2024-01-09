@@ -5,6 +5,7 @@ import MenuList from "@/components/Common/MenuList";
 import CustomerPayment from "@/components/CustomerPayment";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
@@ -12,6 +13,7 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 function CustomerPaymentPage() {
   return (
     <div className="large_layout">
+      <AnnouncementBar />
       <Header />
       <MenuList />
       <CustomerPayment />

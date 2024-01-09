@@ -13,6 +13,7 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
       <head>
+        <meta name="Title" content="We are Hiring | Careers @ Cityfurnish" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link

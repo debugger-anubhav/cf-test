@@ -126,3 +126,12 @@
 .ordertype_option {
   @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer;
 }
+.form_input::placeholder {
+  @apply text-14 xl:text-16;
+}
+.contact_input::placeholder {
+  @apply text-14 xl:text-16;
+}
+.form_input_textarea ::placeholder {
+  @apply text-14 xl:text-16;
+}

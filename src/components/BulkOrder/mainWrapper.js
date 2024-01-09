@@ -6,15 +6,15 @@ import EnquirySection from "./enquirySection";
 import {AboutUs} from "@/assets/images";
 
 const data = [
+  `${AboutUs}/cp_1.webp`,
   `${AboutUs}/cp_7.webp`,
   `${AboutUs}/cp_3.webp`,
-  `${AboutUs}/cp_1.webp`,
-  `${AboutUs}/cp_8.webp`,
   `${AboutUs}/cp_6.webp`,
   `${AboutUs}/cp_9.webp`,
   `${AboutUs}/cp_2.webp`,
-  `${AboutUs}/cp_4.webp`,
+  `${AboutUs}/cp_8.webp`,
   `${AboutUs}/cp_5.webp`,
+  `${AboutUs}/cp_4.webp`,
 ];
 
 const MainWrapper = () => {
