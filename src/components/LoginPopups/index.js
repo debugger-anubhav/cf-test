@@ -147,7 +147,6 @@ const LoginModal = ({
                 });
               }
               console.log(cookies, "cookies");
-              showToastNotification("Login successfully", 1);
               if (isCheckoutPage) {
                 if (
                   response?.data?.data?.full_name &&
@@ -169,6 +168,7 @@ const LoginModal = ({
               setEmailArr(response?.data?.data?.data);
               setModalCategory("multipleEmails");
             }
+            showToastNotification("Login successfully", 1);
           }
         })
         .catch(err => {
