@@ -34,7 +34,8 @@ export default function CFCoins() {
   ];
   const getTransactions = () => {
     axios
-      .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
+      // .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
+      .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))
       .then(res => {
         const temp = res?.data?.data;
         setDebitRows(

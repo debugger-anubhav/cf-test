@@ -95,7 +95,7 @@ const EnquirySection = () => {
     <>
       <div className={styles.right_div}>
         <div>
-          <h1 className={styles.enquiry_heading}>Enquiry</h1>
+          <h2 className={styles.enquiry_heading}>Enquiry</h2>
           <div className={styles.enquiry_description}>
             Mention your requirements in brief & we will get back to you
             promptly
