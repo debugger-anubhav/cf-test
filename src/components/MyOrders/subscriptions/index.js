@@ -19,7 +19,7 @@ const SubscriptionPage = ({tab, setTab}) => {
 
   const getAllSubscriptionDetails = async filter => {
     const body = {
-      userId: 85757,
+      userId,
       filter,
     };
     try {
