@@ -230,7 +230,7 @@ const OrderSummary = ({
                 </p>
                 <p className={styles.amount}>
                   <span className={styles.rupeeIcon}>₹</span>
-                  {data?.bill?.finalTotalPrice?.toFixed(2)}
+                  {parseInt(data?.bill?.finalTotalPrice).toFixed(2)}
                 </p>
               </div>
               <div className={styles.flex_div}>

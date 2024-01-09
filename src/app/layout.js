@@ -17,7 +17,23 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
       <head>
+        {/* <meta name="Title" content="Cityfurnish" /> */}
+        <meta
+          name="facebook-domain-verification"
+          content="5qetjkn16z0nh00u71i0iw25oljz0h"
+        />
+        <meta
+          name="google-site-verification"
+          content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
+        />
+        <meta name="robots" content="noindex" />
+        <meta name="robots" content="nofollow" />
+        <meta name="googlebot" content="noindex" />
+        <meta name="robots" content="noindex,nofollow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <meta
+          name="google-signin-client_id"
+          content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"

@@ -125,7 +125,7 @@ const EnquirySection = () => {
                       type="text"
                       name="fullName"
                       placeholder="Enter your name"
-                      className={formStyles.form_input}
+                      className={`${formStyles.form_input}`}
                     />
                     <ErrorMessage name="fullName">
                       {msg =>
@@ -234,7 +234,7 @@ const EnquirySection = () => {
                       as="textarea"
                       rows="6"
                       placeholder="Enter your message"
-                      className={formStyles.form_input_textarea}></Field>
+                      className={styles.textarea}></Field>
                     <ErrorMessage name="message">
                       {msg =>
                         formik.touched.message && (

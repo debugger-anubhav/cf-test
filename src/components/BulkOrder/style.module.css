@@ -98,9 +98,12 @@
   @appply h-full w-full object-cover pointer-events-none;
 }
 .need_img_title {
-  @apply font-Poppins text-14 md:text-16 font-medium text-45454A pb-1;
+  @apply font-Poppins text-14 md:text-16 font-medium text-45454A pb-1 mt-[8px];
 }
-
+.textarea {
+  @apply border border-DDDDDF rounded-xl text-71717A text-14 font-Poppins px-4 py-3 outline-none w-full lg:h-[168px] h-[150px] max-h-[168px];
+  resize: none;
+}
 .need_img_desc {
   @apply hidden md:flex font-Poppins text-14 font-normal text-71717A;
 }
@@ -129,4 +132,8 @@
 }
 .recaptcha {
   @apply mt-4 mb-6 md:mb-8;
+}
+
+.textarea::placeholder {
+  @apply text-16;
 }

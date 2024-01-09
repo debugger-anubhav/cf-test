@@ -80,7 +80,7 @@ function ServiceRequets() {
 
   return (
     <div className={styles.main_container}>
-      <div className={styles.doc_side_bar}>
+      <div className={styles.doc_side_bar} style={{height: "initial"}}>
         <DocSidebar isOverviewSelected={true} />
       </div>
       <div className={styles.detail_div}>

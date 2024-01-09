@@ -63,9 +63,9 @@ const CommonContainer = ({
               src={
                 tab === 0
                   ? IconLink +
-                      statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
-                    "payment-failed.svg"
-                  : IconLink + statusToImageMap[item?.status]
+                    (statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
+                      "payment-failed.svg")
+                  : IconLink + statusToImageMap[item?.status?.toLowerCase()]
               }
             />
             <div>
@@ -75,7 +75,7 @@ const CommonContainer = ({
                     ? "Order Failed"
                     : statusLabels[item.zoho_sub_status.toLowerCase()] ||
                       item.zoho_sub_status
-                  : item.status}
+                  : item.status.toLowerCase()}
               </p>
               <p className={styles.date}>
                 {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}

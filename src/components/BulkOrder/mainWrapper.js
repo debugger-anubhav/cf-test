@@ -6,15 +6,15 @@ import EnquirySection from "./enquirySection";
 import {AboutUs} from "@/assets/images";
 
 const data = [
+  `${AboutUs}/cp_1.webp`,
   `${AboutUs}/cp_7.webp`,
   `${AboutUs}/cp_3.webp`,
-  `${AboutUs}/cp_1.webp`,
-  `${AboutUs}/cp_8.webp`,
   `${AboutUs}/cp_6.webp`,
   `${AboutUs}/cp_9.webp`,
   `${AboutUs}/cp_2.webp`,
-  `${AboutUs}/cp_4.webp`,
+  `${AboutUs}/cp_8.webp`,
   `${AboutUs}/cp_5.webp`,
+  `${AboutUs}/cp_4.webp`,
 ];
 
 const MainWrapper = () => {
@@ -24,12 +24,14 @@ const MainWrapper = () => {
         <ul className={style.listings}>
           <li className={style.list}>
             <a href="/">
-              <p className={`${style.route_text} cursor-pointer`}>Home</p>
+              <p className={`${style.route_text} cursor-pointer font-Poppins`}>
+                Home
+              </p>
             </a>
             <ForwardArrow size={12} color={"#71717A"} />
           </li>
           <li className={style.list}>
-            <p className={`${style.route_text} !font-medium`}>
+            <p className={`${style.route_text} !font-medium font-Poppins`}>
               CF for business
             </p>
           </li>

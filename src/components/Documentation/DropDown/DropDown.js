@@ -55,9 +55,7 @@ const DropDown = ({
       </div>
 
       <ul
-        className={`${
-          isOpen ? optionsActive : styles.options
-        } max-h-[260px] overflow-scroll`}>
+        className={`${isOpen ? optionsActive : styles.options} max-h-[260px]`}>
         {options?.map((option, index) => (
           <li
             className={`${styles.option} ${

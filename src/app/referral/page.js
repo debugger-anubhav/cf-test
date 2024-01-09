@@ -5,6 +5,7 @@ import ReferAFriend from "@/components/ReferAFriend/ReferAFriend";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
 
 const ReferFriendPage = () => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const ReferFriendPage = () => {
 
   return (
     <div className="large_layout">
+      <AnnouncementBar />
       <ReferAFriend login />
       <Notifications />
     </div>

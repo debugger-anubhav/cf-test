@@ -5,7 +5,7 @@
   @apply flex font-Poppins text-45454A lg:text-24 text-20 font-medium leading-8;
 }
 .sub_heading {
-  @apply flex font-Poppins text-71717A lg:text-16 lg:my-8 my-6 text-14 leading-[0];
+  @apply flex font-Poppins text-71717A lg:text-16 lg:my-8 my-6 text-14 tracking-[-0.32px];
 }
 .rating_row {
   @apply flex gap-2 flex-col;

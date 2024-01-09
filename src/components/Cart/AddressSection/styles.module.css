@@ -55,13 +55,13 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
 }
 .form_input {
-  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 mt-1;
 }
 .form_input_textarea {
-  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
+  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 mt-1;
 }
 .contact_input {
-  @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+  @apply text-14 xl:text-16 w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16;
 }
 .flag {
   @apply w-6 h-6;
@@ -125,4 +125,13 @@
 }
 .ordertype_option {
   @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer;
+}
+.form_input::placeholder {
+  @apply text-14 xl:text-16;
+}
+.contact_input::placeholder {
+  @apply text-14 xl:text-16;
+}
+.form_input_textarea ::placeholder {
+  @apply text-14 xl:text-16;
 }

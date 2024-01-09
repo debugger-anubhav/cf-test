@@ -132,7 +132,7 @@ export default function UserSettings() {
       {/* for web view */}
       <div className={styles.main_container_web}>
         {/* <div className="border border-black min-w-[171px] h-[800px]"></div> */}
-        <div className="min-w-fit">
+        <div className="min-w-fit" style={{height: "initial"}}>
           <DocSidebar isOverviewSelected={true} />
         </div>
         <div className="w-full">
