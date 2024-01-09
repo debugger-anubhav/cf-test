@@ -22,7 +22,7 @@ const ProfileSettings = () => {
   const dispatch = useDispatch();
   const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
-  const [countdown, setCountdown] = useState(60);
+  const [countdown, setCountdown] = useState(30);
   const [sentOtp, setSentOtp] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
@@ -79,7 +79,7 @@ const ProfileSettings = () => {
   };
 
   const sendOTP = async email => {
-    setCountdown(60);
+    setCountdown(30);
     setOtpError("");
     try {
       const body = {
@@ -199,7 +199,7 @@ const ProfileSettings = () => {
                 {formik => (
                   <>
                     <Form className={styles.form_wrapper}>
-                      <div>
+                      <div className={styles.form_div_wrapper}>
                         <div className={formStyles.form_field}>
                           <p className={formStyles.form_label}>Full name</p>
                           <Field
@@ -272,6 +272,7 @@ const ProfileSettings = () => {
                             <Field
                               type="email"
                               name="email"
+                              readOnly={userDetails?.email !== ""}
                               value={formik.values.email}
                               placeholder="Enter your email"
                               className={formStyles.contact_input}
@@ -296,7 +297,12 @@ const ProfileSettings = () => {
                                     sendOTP(formik.values.email);
                                   }}
                                   className={styles.changeTxt}>
-                                  {sentOtp ? "Resend OTP" : "Verify"}
+                                  {sentOtp
+                                    ? "Resend OTP"
+                                    : countdown === 30
+                                    ? "Verify"
+                                    : "Resend OTP"}
+                                  {/* Resend OTP */}
                                 </p>
                               ))}
                           </div>
@@ -342,7 +348,12 @@ const ProfileSettings = () => {
                         )}
 
                         <div className={styles.btn_wrapper}>
-                          <button type="submit" className={styles.btn}>
+                          <button
+                            disabled={emailState === "No"}
+                            type="submit"
+                            className={`${
+                              emailState === "No" && "!bg-[#FFDF85]"
+                            } ${styles.btn}`}>
                             Save changes
                             <ArrowForw className={styles.forw_arrow} />
                           </button>

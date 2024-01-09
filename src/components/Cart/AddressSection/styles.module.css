@@ -49,7 +49,7 @@
   @apply text-71717A text-16 font-medium leading-5;
 }
 .form_field {
-  @apply mt-4 w-full xl:w-[516px] macbook:w-[537px];
+  @apply mt-4 w-full xl:w-[516px] macbook1:w-[537px];
 }
 .form_label {
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
