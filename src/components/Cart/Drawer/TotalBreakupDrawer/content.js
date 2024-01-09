@@ -158,7 +158,7 @@ const BillContent = ({
           <p className={styles.total_txt}>Total</p>
           <p className={styles.total_amount}>
             <span className={styles.rupeeIcon}>₹</span>
-            {billBreakup?.finalTotalPrice?.toFixed(2)}
+            {parseInt(billBreakup?.finalTotalPrice).toFixed(2)}
           </p>
         </div>
       </div>

@@ -84,13 +84,16 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
             Subscription
           </div>
 
-          {singleSubscriptionData?.status.toLowerCase() === "active" ? (
-            <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
-              Need Help with your order?
-            </p>
-          ) : (
-            <div className={styles.drawer_button}>Download invoice</div>
-          )}
+          {
+            singleSubscriptionData?.status.toLowerCase() === "active" && (
+              <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
+                Need Help with your order?
+              </p>
+            )
+            //  : (
+            //   <div className={styles.drawer_button}>Download invoice</div>
+            // )
+          }
         </div>
       </div>
 

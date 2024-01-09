@@ -26,7 +26,7 @@
   @apply flex justify-between items-center xl:block;
 }
 .status {
-  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3;
+  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 capitalize;
 }
 .date {
   @apply text-71717A text-12 xl:text-14 tracking-0.24 xl:tracking-desc;
