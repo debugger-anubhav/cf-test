@@ -49,7 +49,10 @@ export default function CFCoins() {
         );
         setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setLoadingSkeleton(false);
+        console.log(err);
+      });
   };
   const fetchAvailCoins = () => {
     axios

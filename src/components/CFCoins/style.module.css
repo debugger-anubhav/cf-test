@@ -5,7 +5,7 @@
   @apply hidden lg:block min-w-fit;
 }
 .right_div {
-  @apply w-full pb-[88px];
+  @apply w-full lg:pb-[88px] pb-8;
 }
 .cf_info_div {
   @apply w-full flex gap-8 lg:flex-row flex-col justify-between;
