@@ -17,13 +17,13 @@
   @apply lg:w-[40%] w-full flex gap-6 lg:justify-end;
 }
 .header {
-  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
+  @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48 font-Poppins;
 }
 .sub_head {
-  @apply text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 text-45454A mt-8 xl:mt-12;
+  @apply text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 text-45454A mt-8 xl:mt-12 font-Poppins;
 }
 .desc {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-8;
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-8 font-Poppins;
 }
 .current_bal_heading {
   @apply lg:text-16 text-14 text-45454A font-medium font-Poppins tracking-[-0.32px];

@@ -30,7 +30,7 @@ const Footer = ({params}) => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
 
-  console.log(isLogin, reduxLoginState, "footer");
+  // console.log(isLogin, reduxLoginState, "footer");
   // const userId = decrypt(getLocalStorage("_ga"));
   const handleAuthentication = async () => {
     const isAuth = await checkAuthentication();
