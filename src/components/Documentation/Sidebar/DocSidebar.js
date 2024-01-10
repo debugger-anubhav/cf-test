@@ -7,10 +7,13 @@ import {getLocalStorage} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
 import Cookies from "universal-cookie";
 import {setShoppingCartTab} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const DocSidebar = ({isOverviewSelected = false}) => {
   const [isActive, setIsActive] = useState();
+  const fetchActiveDocItem = useSelector(
+    state => state.homePagedata.docSidebarActiveItem,
+  );
   const router = useRouter();
   const dispatch = useDispatch();
   const authCookies = new Cookies();
@@ -20,7 +23,6 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     const storedUserName = getLocalStorage("user_name");
     setUserName(storedUserName || "Hello User");
   };
-
   useEffect(() => {
     getUserNameFromLocalStorage();
   }, []);
@@ -61,7 +63,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       heading: "Profile Settings",
       link: "/profilesettings",
     },
-    {heading: "Your Addresses", link: "/usersettings/yourAddresses"},
+    {heading: "Your Addresses", link: "/usersettings/youraddresses"},
   ];
 
   const onLogout = () => {
@@ -86,9 +88,9 @@ const DocSidebar = ({isOverviewSelected = false}) => {
         <div className={styles.sectionHeadings}>Your Account,</div>
         <div className={styles.userNameText}>{userName}</div>
         <h2
-          className={`${isOverviewSelected ? "!text-5774AC" : "!text-45454A"} ${
-            styles.sectionItems
-          } !mt-10 !mb-0`}>
+          className={`${
+            fetchActiveDocItem === "Overview" ? "!text-5774AC" : "!text-45454A"
+          } ${styles.sectionItems} !mt-10 !mb-0`}>
           Overview
         </h2>
       </div>
@@ -121,6 +123,9 @@ export default DocSidebar;
 
 const MenuComp = ({list, heading, isActive, setIsActive}) => {
   const router = useRouter();
+  const fetchActiveDocItem = useSelector(
+    state => state.homePagedata.docSidebarActiveItem,
+  );
 
   return (
     <div
@@ -145,7 +150,11 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
                 e.preventDefault();
                 setIsActive(e.target.value);
                 router.push(i?.link);
-              }}>
+              }}
+              // style={i.heading == fetchActiveDocItem && {color: "#5774AC"}}
+              style={
+                i.heading === fetchActiveDocItem ? {color: "#5774AC"} : {}
+              }>
               {i.heading}
             </button>
           </Link>

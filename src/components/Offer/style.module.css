@@ -8,7 +8,7 @@
   @apply mt-6 xl:mt-10 flex flex-wrap gap-6 xl:gap-8;
 }
 .card_wrapper {
-  @apply w-[328px] xl:w-[365px];
+  @apply w-full xs1:w-[328px] xl:w-[365px];
 }
 .coupon_card {
   @apply mt-2 xl:mt-3 cursor-pointer h-[100px] w-full relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] justify-between;
@@ -17,10 +17,10 @@
   background-size: cover;
 }
 .top_label {
-  @apply text-45454A text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 flex items-baseline gap-1;
+  @apply text-45454A text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 leading-[18px] xl:leading-[22px];
 }
 .top_label_span {
-  @apply text-9A9AA2 text-14 xl:text-16 tracking-desc xl:tracking-0.3 w-[177px] truncate;
+  @apply text-9A9AA2 text-14 xl:text-16 tracking-desc xl:tracking-0.3 block;
 }
 .bottom_description {
   @apply mt-2;
@@ -45,6 +45,10 @@
 }
 .terms_desc {
   @apply text-14 xl:text-16 tracking-desc xl:tracking-0.3 text-71717A;
+}
+.line {
+  @apply right-32 3xl:right-40 absolute top-0 bottom-0;
+  border-left: 2px dashed #7e6dd5;
 }
 
 .main_container_skeleton {

@@ -33,21 +33,22 @@ const DebitAccordian = ({rows, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: {row.created_at}
+              Invoice Number: {row.order_id}
             </Typography>
           </AccordionSummary>
 
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date:</span>
-              {row.created_at}
+              <span className="font-medium">Invoice Date: </span>
+              {row?.created_at?.split("T")[0]}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Coins Used:</span>+{" "}
-              <span className="font-Inter">₹</span> {row.amount}
+              <span className="font-medium">Coins Used: </span>+{" "}
+              <span className="font-Inter">₹</span>
+              {row.amount}
             </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Transaction Date:</span>{" "}
+            <Typography className={`${styles.tableCell} !pb-0`}>
+              <span className="font-medium">Transaction Date: </span>{" "}
               {`${format(new Date(row.created_at), "yyyy-mm-dd  hh:mm:ss")}`}
             </Typography>
           </AccordionDetails>

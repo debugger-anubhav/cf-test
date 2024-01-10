@@ -131,7 +131,7 @@ const LoginModal = ({
             if (response?.data?.message === "Login Successfully.!") {
               if (setIsLogin) {
                 setIsLogin(true);
-              } else console.log("esles");
+              }
               dispatch(setLoginState(true));
               setUserId(response?.data?.data?.id);
               const encryptedData = encrypt(
@@ -161,6 +161,7 @@ const LoginModal = ({
                 handleChangeRoute && handleChangeRoute();
                 // dispatch(setShoppingCartTab(1));
               }
+              showToastNotification("Login successfully", 1);
             } else if (
               response?.data?.message ===
               "Multiple registered user found. Please enter registered email."
@@ -168,7 +169,6 @@ const LoginModal = ({
               setEmailArr(response?.data?.data?.data);
               setModalCategory("multipleEmails");
             }
-            showToastNotification("Login successfully", 1);
           }
         })
         .catch(err => {

@@ -33,17 +33,26 @@ export default function CFCoins() {
     },
   ];
   const getTransactions = () => {
+    console.log("first");
     axios
       .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
+      // .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))
       .then(res => {
         const temp = res?.data?.data;
         setDebitRows(
-          temp.filter(i => i.mode === "debit" && i.order_id != null),
+          temp
+            .filter(i => i.mode === "debit" && i.order_id != null)
+            ?.sort((a, b) => b.created_at - a.created_at),
         );
-        setCreditRows(temp.filter(i => i.mode === "credit"));
+        setCreditRows(temp.filter(i => i.mode === "credit"))?.sort(
+          (a, b) => b.created_at - a.created_at,
+        );
         setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setLoadingSkeleton(false);
+        console.log(err);
+      });
   };
   const fetchAvailCoins = () => {
     axios
@@ -65,7 +74,9 @@ export default function CFCoins() {
         <DocSidebar isOverviewSelected={true} />
       </div>
       <div className={styles.right_div}>
-        <p className={styles.header}>Cityfurnish Coins</p>
+        <h1 className={`${styles.header} tracking-[-0.48px]`}>
+          Cityfurnish Coins
+        </h1>
         <div className={styles.cf_info_div}>
           <div className={styles.cf_info_left}>
             <div className="flex items-center gap-3 mt-8">
@@ -107,6 +118,9 @@ export default function CFCoins() {
             rows={debitRows}
             loadingSkeleton={loadingSkeleton}
           />
+          {debitRows?.length === 0 && (
+            <div className="h-[1px] w-full bg-EDEDEE mt-8 lg:hidden"> </div>
+          )}
           <CreditTransactions
             rows={creditRows}
             loadingSkeleton={loadingSkeleton}

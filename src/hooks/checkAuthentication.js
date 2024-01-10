@@ -13,7 +13,7 @@ export const useAuthentication = () => {
   const checkAuthentication = async () => {
     const cookies = new Cookies();
     const token = cookies.get("authToken");
-    console.log(token, " token in authen func");
+    // console.log(token, " token in authen func");
     // if (!token) {
     //   localStorage.removeItem("user_id");
     //   localStorage.removeItem("_ga");
@@ -32,10 +32,10 @@ export const useAuthentication = () => {
       if (response.data.message === true) {
         return true;
       } else {
+        cookies.remove("authToken", {path: "/"});
         localStorage.removeItem("user_id");
         localStorage.removeItem("_ga");
         // removeCookie("authToken");
-        cookies.remove("authToken", {path: "/"});
 
         return false;
       }
