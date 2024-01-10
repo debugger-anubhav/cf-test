@@ -77,7 +77,7 @@ const OfferPage = () => {
               .map((item, index) => (
                 <div key={index} className={styles.card_wrapper}>
                   <p className={styles.top_label}>
-                    {item?.price_text}
+                    {item?.price_text}{" "}
                     <span className={styles.top_label_span}>
                       {item?.price_below_text}
                     </span>
@@ -102,7 +102,7 @@ const OfferPage = () => {
                         Use Code {item?.coupon_code}
                       </p>
                     </div>
-                    <div className={commonStyles.line}></div>
+                    <div className={styles.line}></div>
                     <div className={commonStyles.copy_div}>
                       {item?.coupon_code && (
                         <button id={index} className="text-[#222] flex ">
