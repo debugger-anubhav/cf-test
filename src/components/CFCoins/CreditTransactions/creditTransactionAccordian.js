@@ -39,7 +39,7 @@ const CreditTransactionAccordian = ({rows}) => {
 
           <AccordionDetails className={styles.accord_details}>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Credit Mode:</span>
+              <span className="font-medium">Credit Mode: </span>
               {row.payment_mode === "CC"
                 ? "Credit Card"
                 : row.payment_mode === "DC"
@@ -47,14 +47,14 @@ const CreditTransactionAccordian = ({rows}) => {
                 : row.payment_mode}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Coins Gained:</span>+
+              <span className="font-medium">Coins Gained: </span>+
               <span className="font-Inter">₹</span> {row.amount}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Expires on:</span> {row.expire_on}
+              <span className="font-medium">Expires on: </span> {row.expire_on}
             </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Transaction Date:</span>{" "}
+            <Typography className={`${styles.tableCell} !pb-0`}>
+              <span className="font-medium">Transaction Date: </span>{" "}
               {`${format(new Date(row.created_at), "yyyy-mm-dd  hh:mm:ss")}`}
             </Typography>
           </AccordionDetails>
