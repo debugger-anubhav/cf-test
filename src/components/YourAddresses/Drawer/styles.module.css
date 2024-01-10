@@ -11,7 +11,7 @@
   @apply h-[90vh] md:h-full w-full xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
 }
 .drawer_wrapper {
-  @apply py-6 md:py-12 px-4 md:px-0 font-Poppins w-full md:w-[486px] max-h-[90vh] md:max-h-none md:h-full flex relative;
+  @apply py-6 md:py-12 px-4 md:px-0 font-Poppins w-full md:w-[486px] max-h-[90vh] md:max-h-none md:h-full flex relative overflow-scroll;
 }
 /* .city_drawer_wrapper {
   @apply sm:w-[500px] w-full px-4 sm:px-8 lg:px-0 rounded-t-lg;
