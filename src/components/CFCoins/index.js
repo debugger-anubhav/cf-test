@@ -35,13 +35,17 @@ export default function CFCoins() {
   const getTransactions = () => {
     axios
       .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
-      // .get(baseURL + endPoints.cfCoinsGetTransactions('85757'))
+      // .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))
       .then(res => {
         const temp = res?.data?.data;
         setDebitRows(
-          temp.filter(i => i.mode === "debit" && i.order_id != null),
+          temp
+            .filter(i => i.mode === "debit" && i.order_id != null)
+            .sort((a, b) => b.created_at - a.created_at),
         );
-        setCreditRows(temp.filter(i => i.mode === "credit"));
+        setCreditRows(temp.filter(i => i.mode === "credit")).sort(
+          (a, b) => b.created_at - a.created_at,
+        );
         setLoadingSkeleton(false);
       })
       .catch(err => console.log(err));
@@ -108,6 +112,9 @@ export default function CFCoins() {
             rows={debitRows}
             loadingSkeleton={loadingSkeleton}
           />
+          {debitRows?.length === 0 && (
+            <div className="h-[1px] w-full bg-EDEDEE mt-8 lg:hidden"> </div>
+          )}
           <CreditTransactions
             rows={creditRows}
             loadingSkeleton={loadingSkeleton}

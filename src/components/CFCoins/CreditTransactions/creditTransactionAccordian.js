@@ -53,7 +53,7 @@ const CreditTransactionAccordian = ({rows}) => {
             <Typography className={styles.tableCell}>
               <span className="font-medium">Expires on: </span> {row.expire_on}
             </Typography>
-            <Typography className={styles.tableCell}>
+            <Typography className={`${styles.tableCell} !pb-0`}>
               <span className="font-medium">Transaction Date: </span>{" "}
               {`${format(new Date(row.created_at), "yyyy-mm-dd  hh:mm:ss")}`}
             </Typography>

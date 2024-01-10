@@ -62,7 +62,7 @@ const CreditTransactionTabel = ({rows, loadingSkeleton}) => {
                   <TableCell className={styles.tableCell}>
                     {`${format(
                       new Date(row.created_at),
-                      "yyyy-mm-dd  hh:mm:ss",
+                      "yyyy-MM-dd  hh:mm:ss",
                     )}`}
                   </TableCell>
                 </TableRow>
