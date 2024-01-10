@@ -87,7 +87,7 @@
 }
 
 .need_heading {
-  @apply font-Poppins text-20 font-medium tracking-[-0.4px] text-45454A pb-6 md:pb-8 mt-8 md:mt-0;
+  @apply font-Poppins lg:text-20  text-16 font-medium tracking-[-0.4px] text-45454A pb-6 md:pb-8 mt-8 md:mt-0;
 }
 
 .need_img_wrapper {
@@ -115,7 +115,7 @@
   @apply hidden md:flex font-Poppins text-16 font-normal text-71717A pb-8;
 }
 .our_project_heading {
-  @apply font-Poppins text-24 font-medium text-45454A mt-8 md:mt-[88px] mb-6 md:mb-8;
+  @apply font-Poppins lg:text-24 text-16 font-medium text-45454A mt-8 md:mt-[88px] mb-6 md:mb-8;
 }
 
 .our_project_image_wrapper {
