@@ -21,7 +21,7 @@
   box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
 }
 .btn {
-  @apply font-medium text-222 md:mt-8 w-full xl:w-[537px] h-[48px] xl:h-[56px] bg-F6B704 rounded-lg flex justify-center items-center px-4 xl:px-8 gap-1 xl:gap-[10px];
+  @apply font-medium text-222 md:mt-8 w-full xl:w-[516px] macbook1:w-[537px] h-[48px] xl:h-[56px] bg-F6B704 rounded-lg flex justify-center items-center px-4 xl:px-8 gap-1 xl:gap-[10px];
 }
 .changeTxt {
   @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium cursor-pointer min-w-fit;

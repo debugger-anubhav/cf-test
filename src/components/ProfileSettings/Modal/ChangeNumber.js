@@ -73,13 +73,13 @@ const ChangeNumber = ({
     setModalCategory(val);
   };
 
-  const handleSentOtp = async () => {
+  const handleSentOtp = async number => {
     setCountdown(30);
     setOtpError("");
     setModalCategory("verifyOtp");
 
     const header = {
-      mobile_number: contact,
+      mobile_number: number,
     };
     try {
       const response = await axios.post(
@@ -118,7 +118,10 @@ const ChangeNumber = ({
       })
       .catch(err => {
         console.log(err, "err in verif");
-        if (err.response?.data?.data?.timeout) setOtpError("timeout");
+        if (err.response?.data?.data?.timeout)
+          setOtpError(
+            "Sorry, your OTP has timed out. Please request a new OTP to continue.",
+          );
         else
           setOtpError(
             "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
@@ -139,7 +142,7 @@ const ChangeNumber = ({
       {modalCategory === "changeNumber" ? (
         <ModalContentForNumber
           setModalCategory={val => handleModalCategory(val)}
-          contactNumber={contact}
+          contactNumber={contactNumber}
           setContact={e => setContact(e)}
           handleSentOtp={handleSentOtp}
           setProblemType={val => setProblemType(val)}
@@ -162,7 +165,7 @@ const ChangeNumber = ({
       ) : modalCategory === "resendOtp" ? (
         <ModalContentForResendOtp
           countdown={countdown}
-          handleSentOtp={handleSentOtp}
+          handleSentOtp={() => handleSentOtp(contact)}
           handleStartCountdown={handleStartCountdown}
           problemType={problemType}
           setCountdown={val => setCountdown(val)}

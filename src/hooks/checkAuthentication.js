@@ -32,10 +32,10 @@ export const useAuthentication = () => {
       if (response.data.message === true) {
         return true;
       } else {
+        cookies.remove("authToken", {path: "/"});
         localStorage.removeItem("user_id");
         localStorage.removeItem("_ga");
         // removeCookie("authToken");
-        cookies.remove("authToken", {path: "/"});
 
         return false;
       }

@@ -66,7 +66,7 @@ export default function UserSettings() {
       head: "Your Addresses",
       desc: "Add or Modify Your Addresses.",
       img: `${url}your-addresses.svg`,
-      link: "/usersettings/yourAddresses",
+      link: "/usersettings/youraddresses",
     },
   ];
 

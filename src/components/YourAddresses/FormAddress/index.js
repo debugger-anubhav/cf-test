@@ -221,7 +221,7 @@ const FormAddress = ({setTab, tab, id}) => {
                   <ErrorMessage name="address">
                     {msg =>
                       formik.touched.address && (
-                        <p className={formStyles.error}>{msg}</p>
+                        <p className={`${formStyles.error}`}>{msg}</p>
                       )
                     }
                   </ErrorMessage>
