@@ -26,7 +26,7 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-8;
 }
 .current_bal_heading {
-  @apply lg:text-16 text-14 text-45454A font-medium font-Poppins;
+  @apply lg:text-16 text-14 text-45454A font-medium font-Poppins tracking-[-0.32px];
 }
 .current_bal_subheading {
   @apply lg:text-20 text-16 font-Poppins text-9A9AA2;
@@ -35,10 +35,10 @@
   @apply flex px-4 py-6 rounded-xl flex-col lg:min-w-[167px] min-w-[150px] bg-no-repeat bg-cover;
 }
 .card_heading {
-  @apply flex font-Poppins lg:text-16 text-14 font-medium mt-6 mb-2 text-fff;
+  @apply flex font-Poppins lg:text-16 text-14 font-medium mt-6 mb-2 text-fff tracking-[-0.32px];
 }
 .card_subheading {
-  @apply flex font-Poppins text-[#C0C0C6] text-12;
+  @apply flex font-Poppins text-[#C0C0C6] text-12 tracking-[-0.24px];
 }
 .card_icon {
   @apply h-8 w-8;

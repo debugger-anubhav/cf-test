@@ -74,7 +74,9 @@ export default function CFCoins() {
         <DocSidebar isOverviewSelected={true} />
       </div>
       <div className={styles.right_div}>
-        <p className={styles.header}>Cityfurnish Coins</p>
+        <h1 className={`${styles.header} tracking-[-0.48px]`}>
+          Cityfurnish Coins
+        </h1>
         <div className={styles.cf_info_div}>
           <div className={styles.cf_info_left}>
             <div className="flex items-center gap-3 mt-8">
