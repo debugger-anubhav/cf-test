@@ -363,7 +363,7 @@ const ProfileSettings = () => {
                     <ChangeNumber
                       isModalOpen={isModalOpen}
                       closeModal={closeModal}
-                      contactNumber={userDetails.phone_no}
+                      contactNumber={formik.values.contactNumber}
                       userId={useridFromStorage}
                       handleNumberChange={val =>
                         formik.setFieldValue("contactNumber", val)

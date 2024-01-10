@@ -40,7 +40,7 @@ const DeleteAddressModal = ({
     }
     closeModal();
     getAllSavedAddresses();
-    showToastNotification("Address deleted", 3);
+    showToastNotification("Address deleted", 1);
   };
 
   return (
@@ -55,7 +55,7 @@ const DeleteAddressModal = ({
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
-          <h1 className={styles.head}>Delete item? </h1>
+          <h1 className={styles.head}>Delete address? </h1>
           <div className={styles.btn_wrapper}>
             <button
               className={`${styles.white_btn} ${styles.btn}`}
@@ -82,7 +82,7 @@ const DeleteAddressModal = ({
             overlay: styles.customOverlay,
             closeButton: styles.customCloseButton,
           }}>
-          <h1 className={styles.head}>Delete item? </h1>
+          <h1 className={styles.head}>Delete address? </h1>
           <div className={styles.btn_wrapper}>
             <button
               className={`${styles.white_btn} ${styles.btn}`}

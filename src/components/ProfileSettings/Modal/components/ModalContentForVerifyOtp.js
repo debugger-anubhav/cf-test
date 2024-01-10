@@ -71,7 +71,7 @@ const ModalContentForVerifyOtp = ({
           <p
             onClick={async () => {
               if (countdown === 0) {
-                await handleSentOtp();
+                await handleSentOtp(contact);
                 handleStartCountdown();
               }
             }}
