@@ -94,26 +94,24 @@ const InverstorAndMedia = () => {
       </div>
       <div className="mr-4 lg:mr-0 mb-8 lg:mb-[88px]">
         <h2 className={styles.heading}>Accolades</h2>
-        <div
-          className={`${styles.investors_wrapper} xl:
-                  flex-no-wrap`}>
+        <div className={`flex overflow-x-scroll xl:gap-6 gap-4 w-full`}>
           {accolades?.map((ele, index) => {
             return (
               <div className={styles.accolades_cards} key={index.toString()}>
                 <img src={ele.link} alt={ele.altText} loading="lazy" />
                 <div className={styles.accolades_box}>
-                  <div className="flex justify-center w-[16px]">
+                  <div className="flex justify-center w-[16px] items-baseline pt-[1px] ">
                     <img
                       src={`${AboutUs}/icons/award-icon.svg`}
                       loading="lazy"
                       alt="Award-icon"
                     />
                   </div>
-                  <div className="flex flex-col gap-1 w-full">
+                  <div className="flex flex-col gap-1 w-full mb-4 lg:mb-0">
                     <p className={styles.accolades_text}>{ele.desc}</p>
-                    <div className="flex justify-end items-end">
-                      <p className={`${styles.accolades_text}`}>{ele.desc2}</p>
-                    </div>
+                  </div>
+                  <div className="flex justify-end items-end absolute right-2 bottom-1 pt-2">
+                    <p className={`${styles.accolades_text}`}>{ele.desc2}</p>
                   </div>
                 </div>
               </div>
