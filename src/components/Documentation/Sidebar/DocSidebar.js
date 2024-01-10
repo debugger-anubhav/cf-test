@@ -63,7 +63,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
       heading: "Profile Settings",
       link: "/profilesettings",
     },
-    {heading: "Your Addresses", link: "/usersettings/yourAddresses"},
+    {heading: "Your Addresses", link: "/usersettings/youraddresses"},
   ];
 
   const onLogout = () => {

@@ -5,7 +5,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getSavedAddress} from "@/store/Slices";
+import {getSavedAddress, reduxSetModalState} from "@/store/Slices";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import DeleteAddressModal from "../Modal/DeleteAddressModal";
@@ -20,6 +20,11 @@ const SavedAddress = ({setTab, editAddress}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [id, setId] = useState();
+
+  const toggleModal = bool => {
+    setIsModalOpen(bool);
+    dispatch(reduxSetModalState(bool));
+  };
 
   const getAllSavedAddresses = async () => {
     await axios
@@ -51,7 +56,7 @@ const SavedAddress = ({setTab, editAddress}) => {
       {isModalOpen && (
         <DeleteAddressModal
           isModalOpen={isModalOpen}
-          closeModal={() => setIsModalOpen(false)}
+          closeModal={() => toggleModal(false)}
           id={id}
           getAllSavedAddresses={getAllSavedAddresses}
         />
@@ -89,7 +94,7 @@ const SavedAddress = ({setTab, editAddress}) => {
                   <div
                     onClick={() => {
                       setId(item.id);
-                      setIsModalOpen(true);
+                      toggleModal(true);
                     }}>
                     <DeleteIcon className={styles.deleteIcon} />
                   </div>
