@@ -51,6 +51,7 @@
   @apply flex flex-col h-[90vh];
 }
 .item_wrapper {
+  @apply pb-[147px];
   flex: 1;
   overflow-y: auto;
 }

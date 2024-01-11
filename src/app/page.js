@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useRef} from "react";
+import React, {useEffect, useRef} from "react";
 
 // import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
 
@@ -104,6 +104,23 @@ export default function Home() {
   // if (typeof window !== "undefined") {
   //   setLocalStorage("cityId", 46);
   // }
+
+  // added
+  useEffect(() => {
+    const handleTouchStart = event => {
+      if (event.touches.length > 1) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener("touchstart", handleTouchStart, {
+      passive: false,
+    });
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+    };
+  }, []);
 
   return (
     <>
