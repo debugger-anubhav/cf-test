@@ -416,11 +416,14 @@ const Header = () => {
                     //   }
                     // }}
                   />
-                  {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                    <span className={styles.cart_badge}>{wishListCount}</span>
-                  ) : (
-                    <></>
-                  )}
+                  {
+                    categoryPageReduxData?.savedProducts?.length > 0 && (
+                      <div className={styles.cart_badge}>{wishListCount}</div>
+                    )
+                    // ) : (
+                    //   <></>
+                    // )
+                  }
                 </span>
               </a>
 
