@@ -6,18 +6,6 @@ module.exports = {
     domains: ["d3juy0zp6vqec8.cloudfront.net"],
   },
   distDir: "build",
-
-  // added
-  reactStrictMode: true,
-  head: {
-    meta: [
-      {
-        name: "viewport",
-        content:
-          "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
-      },
-    ],
-  },
 };
 
 // module.exports = nextConfig;
