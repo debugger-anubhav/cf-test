@@ -1,5 +1,5 @@
 .main_container {
-  @apply h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins overflow-scroll;
+  @apply w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins overflow-scroll;
 }
 .city_shield_head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-semibold leading-[30px] text-[#2D9469];
@@ -48,8 +48,8 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90vh] md:!max-h-full;
-  animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-  transition-timing-function: ease-in;
+  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
+  /* transition-timing-function: ease-in; */
   overflow-y: visible !important;
 }
 .risk_text {
