@@ -172,3 +172,9 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: none !important;
   }
 }
+
+/* atriall */
+body {
+  touch-action: manipulation;
+  user-select: none;
+}
