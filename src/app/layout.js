@@ -26,6 +26,10 @@ export default function RootLayout({children}) {
           name="google-site-verification"
           content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
         />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        />
         <meta name="robots" content="noindex" />
         <meta name="robots" content="nofollow" />
         <meta name="googlebot" content="noindex" />
