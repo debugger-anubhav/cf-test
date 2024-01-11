@@ -90,8 +90,8 @@ const DocSidebar = ({isOverviewSelected = false}) => {
         <h2
           className={`${
             fetchActiveDocItem === "Overview" ? "!text-5774AC" : "!text-45454A"
-          } ${styles.sectionItems} !mt-10 !mb-0`}>
-          Overview
+          } ${styles.sectionItems} !mt-10 !mb-0 hover:!text-5774AC`}>
+          <a href="/usersettings">Overview</a>
         </h2>
       </div>
       <MenuComp
