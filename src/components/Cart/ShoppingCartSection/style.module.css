@@ -14,7 +14,7 @@
   @apply w-fit lg:w-[450px] xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
 }
 .img_div {
-  @apply cursor-pointer min-w-[96px] h-[71px] md:min-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:h-[98px];
+  @apply cursor-pointer min-w-[96px] max-w-[96px] h-[71px] md:min-w-[112px] md:max-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:max-w-[132px] xl:h-[98px];
 }
 .img {
   @apply w-full h-full rounded;
