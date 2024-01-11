@@ -33,7 +33,7 @@
   border-collapse: collapse;
 } */
 .tableHeaderCell {
-  @apply !text-45454A !text-14 xl:!text-16 !font-medium !tracking-[-0.28px] xl:!tracking-[-0.32px] !font-Poppins pl-0 pt-0 pb-0 xl:!pr-4 cxl:!pr-28;
+  @apply !text-45454A !text-14 xl:!text-16 !font-medium !tracking-[-0.28px] xl:!tracking-[-0.32px] !font-Poppins pl-0 pt-0 pb-0 xl:!pr-4 cxl:!pr-8;
 }
 .tableCell {
   @apply whitespace-nowrap !max-w-fit !text-71717A !text-14 xl:!text-16 !tracking-[-0.28px] xl:!tracking-[-0.32px] !font-Poppins xl:py-8 pl-0 !w-fit pr-0 border-b-0 leading-normal pb-3;
