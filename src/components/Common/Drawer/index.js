@@ -305,7 +305,7 @@ export default function CommonDrawer({
                     loading="lazy"
                   />
                   {city?.id === 50 ? (
-                    <div className={`${styles.city_name}`}>
+                    <div className={`text-45454A ${styles.city_name}`}>
                       {city?.list_value.split("/")[0]}/
                       <br className="flex sm:hidden" />
                       {city?.list_value.split("/")[1]}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {FaChevronRight} from "react-icons/fa6";
 import {useRouter} from "next/navigation";
@@ -7,11 +7,22 @@ import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import Cookies from "universal-cookie";
 import {setShoppingCartTab} from "@/store/Slices";
 import {useDispatch} from "react-redux";
+import {getLocalStorage} from "@/constants/constant";
 
 export default function UserSettings() {
   const router = useRouter();
   const dispatch = useDispatch();
   const authCookies = new Cookies();
+  const [userName, setUserName] = useState(null);
+
+  const getUserNameFromLocalStorage = () => {
+    const storedUserName = getLocalStorage("user_name");
+    setUserName(storedUserName || "Hello User");
+  };
+  useEffect(() => {
+    getUserNameFromLocalStorage();
+  }, []);
+
   const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [
     {
@@ -78,10 +89,7 @@ export default function UserSettings() {
       <div className={styles.main_container_mobile}>
         <p className={styles.user_account}>
           Your Account,
-          <span className={styles.main_text}>
-            {/* {userName || "Hello User"} */}
-            Hello User
-          </span>
+          <span className={styles.main_text}>{userName || "Hello User"}</span>
         </p>
         <div className={styles.services_wrapper}>
           {Servicesdata?.map((ele, index) => {

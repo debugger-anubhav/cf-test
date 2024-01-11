@@ -1,5 +1,5 @@
 .drawer_wrapper {
-  @apply max-h-[90vh] sm:h-full sm:max-h-none flex w-[430px] py-6 sm:pt-16 relative;
+  @apply max-h-[90vh] sm:h-full sm:max-h-none flex w-[430px] py-6 sm:pt-16 relative overflow-scroll;
 }
 .drawer_close {
   @apply flex mx-8 flex-col;
