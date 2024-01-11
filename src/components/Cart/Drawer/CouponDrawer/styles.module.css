@@ -21,7 +21,7 @@
   @apply text-5774AC text-14 md:text-16 font-medium tracking-0.3 cursor-pointer;
 }
 .coupons_wrapper {
-  @apply mt-8 flex flex-col gap-4 md:gap-8 overflow-x-hidden overflow-y-scroll h-[80%];
+  @apply mt-8 flex flex-col gap-4 md:gap-8 overflow-x-hidden overflow-y-scroll h-[100vh];
 }
 .card {
   @apply 3xl:h-[135px] h-[100px] w-full md:w-[365px] justify-between 2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px];
@@ -60,7 +60,7 @@
   @apply flex mr-4 w-full h-full my-6;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90vh] md:!max-h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-full;
   /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
   /* transition-timing-function: ease-in; */
   overflow-y: visible !important;
