@@ -1,5 +1,5 @@
 .main_container {
-  @apply relative h-[90vh] md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply relative w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .head {
   @apply font-Poppins text-16 mobile:text-20 xl:text-24 font-medium leading-8 tracking-0.48;
@@ -43,7 +43,7 @@
   @apply text-[#D96060] text-12 md:text-16 font-medium leading-5;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !h-[90vh] md:!h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90vh] md:!max-h-full;
   overflow-y: visible !important;
 }
 
