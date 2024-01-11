@@ -387,19 +387,8 @@ const Header = () => {
                     // );
                   }
                 }}>
+                <div className={`w-100 h-100 absolute z-10`}></div>
                 <div
-                  className={`w-100 h-100 absolute z-10`}
-                  // onClick={() => {
-                  //   if (userId) {
-                  //     router.push("/wishlist");
-                  //   } else {
-                  //     router.push(
-                  //       "https://test.rentofurniture.com/user_sign_up",
-                  //     );
-                  //   }
-                  // }}
-                ></div>
-                <span
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
                     src={Icons.Favorite}
@@ -416,15 +405,10 @@ const Header = () => {
                     //   }
                     // }}
                   />
-                  {
-                    categoryPageReduxData?.savedProducts?.length > 0 && (
-                      <div className={styles.cart_badge}>{wishListCount}</div>
-                    )
-                    // ) : (
-                    //   <></>
-                    // )
-                  }
-                </span>
+                  {categoryPageReduxData?.savedProducts?.length > 0 && (
+                    <div className={styles.cart_badge}>{wishListCount}</div>
+                  )}
+                </div>
               </a>
 
               <div className={styles.cart_link_wrapper}>
