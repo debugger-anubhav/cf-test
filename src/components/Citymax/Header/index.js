@@ -89,11 +89,11 @@ const CitymaxHeader = ({zIndex}) => {
     setLocalStorage("cityId", 46);
   }
 
-  const {refetch: getSavedItems} = useQuery(
-    "saved-items",
-    endPoints.savedItems,
-    `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
-  );
+  // const {refetch: getSavedItems} = useQuery(
+  //   "saved-items",
+  //   endPoints.savedItems,
+  //   `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
+  // );
 
   useEffect(() => {
     const cityId = getLocalStorage("cityId") || 46;
@@ -132,8 +132,17 @@ const CitymaxHeader = ({zIndex}) => {
     }
   }, []);
 
-  useEffect(() => {
-    getSavedItems()
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
+
+  const getSavedItems = userIdToUse => {
+    axios
+      .get(
+        baseURL +
+          endPoints.savedItems +
+          `?cityId=${cityId}&userId=${userIdToUse}`,
+      )
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
         const ids = res?.data?.data.map(item => {
@@ -142,11 +151,7 @@ const CitymaxHeader = ({zIndex}) => {
         dispatch(addSaveditemID(ids));
       })
       .catch(err => console.log(err));
-  }, [isLogin]);
-
-  const cartItemsLength = useSelector(
-    state => state.cartPageData.cartItems.length,
-  );
+  };
 
   const validateAuth = async () => {
     const isAuthenticated = await checkAuthentication();
@@ -155,6 +160,7 @@ const CitymaxHeader = ({zIndex}) => {
     } else setIsLogin(false);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
     fetchCartItems(userIdToUse);
+    getSavedItems(userIdToUse);
   };
 
   const fetchCartItems = userIdToUse => {
@@ -296,7 +302,7 @@ const CitymaxHeader = ({zIndex}) => {
                   }
                 }}>
                 <div className={`w-100 h-100 absolute z-10`}></div>
-                <span
+                <div
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
                     src={Icons.Favorite}
@@ -304,12 +310,10 @@ const CitymaxHeader = ({zIndex}) => {
                     className={styles.header_favorite}
                     loading="lazy"
                   />
-                  {categoryPageReduxData?.savedProducts?.length > 0 ? (
-                    <span className={styles.cart_badge}>{wishListCount}</span>
-                  ) : (
-                    <></>
+                  {categoryPageReduxData?.savedProducts?.length > 0 && (
+                    <div className={styles.cart_badge}>{wishListCount}</div>
                   )}
-                </span>
+                </div>
               </a>
 
               <div className={styles.cart_link_wrapper}>

@@ -1,12 +1,11 @@
 .main_container {
-  @apply h-[90vh] md:h-full w-full xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
+  @apply w-full h-full overflow-scroll xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
 }
-
 .close_icon {
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !h-[90vh] md:!h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-full;
   transition-timing-function: ease-in;
-  /* overflow-y: visible !important; */
+  overflow-y: visible !important;
 }
