@@ -4,7 +4,7 @@ import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 export const metadata = {
-  title: "Cityfurnish Customer Support | Contact Us",
+  title: "Cityfurnish Customer Support | Contact Us - cityfurnish.com",
   description:
     "Contact Cityfurnish Customer Support at hello@cityfurnish.com for your inquiries or suggestions. We will be happy to help you.",
 };
@@ -15,7 +15,7 @@ export default function RootLayout({children}) {
       <head>
         <meta
           name="Title"
-          content="Cityfurnish Customer Support | Contact Us"
+          content="Cityfurnish Customer Support | Contact Us - cityfurnish.com"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
