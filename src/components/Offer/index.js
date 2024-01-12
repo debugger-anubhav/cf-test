@@ -96,7 +96,7 @@ const OfferPage = () => {
                     <div
                       className={`3xl:!top-[42px] ${commonStyles.ellipse} ${commonStyles.right}`}></div>
                     <div className="xl:w-full">
-                      <p className={commonStyles.desc}>{`${item?.price_text} ${
+                      <p className={styles.offer_txt}>{`${item?.price_text} ${
                         item?.max_discount !== "0"
                           ? `(up to Rs ${item?.max_discount})`
                           : ""

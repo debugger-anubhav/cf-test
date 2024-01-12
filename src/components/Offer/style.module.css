@@ -31,6 +31,9 @@
 .desc_row {
   @apply flex gap-2 items-baseline md:items-center;
 }
+.offer_txt {
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal;
+}
 .dot {
   @apply px-[2px] w-1 h-1 rounded-full bg-71717A ml-2;
 }

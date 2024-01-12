@@ -14,7 +14,7 @@
   @apply p-4 flex xl:items-center gap-4 border-t border-DDDDDF;
 }
 .img_wrapper {
-  @apply relative min-w-[80px] h-[60.15px];
+  @apply relative min-w-[80px] max-w-[80px] h-[60.15px];
 }
 .quantity_label {
   @apply rounded-sm border border-71717A w-6 h-6 absolute bottom-1 right-1 bg-fff text-71717A text-12 font-medium leading-3 flex justify-center items-center;
