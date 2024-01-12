@@ -38,6 +38,7 @@ import "react-responsive-modal/styles.css";
 import LoginModal from "@/components/LoginPopups";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import ProfileDropDown from "@/components/Common/Header/ProfileDropDown";
+import EmptyCartModal from "@/components/Common/Drawer/EmptyModal/EmptyCartModal";
 
 const CitymaxHeader = ({zIndex}) => {
   const {checkAuthentication} = useAuthentication();
@@ -69,6 +70,8 @@ const CitymaxHeader = ({zIndex}) => {
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
+  const [cityForModal, setCityForModal] = useState();
+  const [emptyModal, setEmptyModal] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -233,6 +236,12 @@ const CitymaxHeader = ({zIndex}) => {
     setMenuDrawer(!menuDrawer);
   };
 
+  const toggleEmptyCartModal = bool => {
+    console.log("inn");
+    dispatch(reduxSetModalState(bool));
+    setEmptyModal(bool);
+  };
+
   return (
     <>
       <LoginModal
@@ -245,6 +254,12 @@ const CitymaxHeader = ({zIndex}) => {
           if (click === "profile") router.push(`/usersettings`);
           else if (click === "wishlist") router.push(`/wishlist`);
         }}
+      />
+      <EmptyCartModal
+        isModalOpen={emptyModal}
+        closeModal={() => toggleEmptyCartModal(false)}
+        userId={isLogin ? userId : tempUserId}
+        city={cityForModal}
       />
 
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
@@ -273,7 +288,12 @@ const CitymaxHeader = ({zIndex}) => {
             </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
-                <CommonDrawer Cities={storeCityList} DrawerName="cities" />
+                <CommonDrawer
+                  Cities={storeCityList}
+                  DrawerName="cities"
+                  toggleEmptyCartModal={toggleEmptyCartModal}
+                  setCity={val => setCityForModal(val)}
+                />
               </div>
             </div>
 
