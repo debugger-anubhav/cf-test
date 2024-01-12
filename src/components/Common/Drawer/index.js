@@ -280,48 +280,51 @@ export default function CommonDrawer({
             <p className={styles.select_heading}>Select your city</p>
             <div
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
-              {Cities?.map((city, index) => (
-                <div
-                  className={`${styles.city_wrapper}
+              {Cities?.map((city, index) => {
+                console.log(city, "cityyy");
+                return (
+                  <div
+                    className={`${styles.city_wrapper}
                   `}
-                  key={index.toString()}
-                  onClick={() => {
-                    if (cartItemsLength < 1) handleCityChange(city, index);
-                    else {
-                      console.log("elsee");
-                      // toggleDrawer("bottom", false);
-                      setState({...state, left: false});
-                      setCity(city);
-                      toggleEmptyCartModal(true);
-                    }
-                  }}>
-                  <img
-                    src={cityUrl + city?.list_value_seourl + ".webp"}
-                    className={`${styles.city_thambnil} ${
-                      cityId === city?.id &&
-                      "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
-                    }`}
-                    alt={city?.list_value}
-                    loading="lazy"
-                  />
-                  {city?.id === 50 ? (
-                    <div className={`text-45454A ${styles.city_name}`}>
-                      {city?.list_value.split("/")[0]}/
-                      <br className="flex sm:hidden" />
-                      {city?.list_value.split("/")[1]}
-                    </div>
-                  ) : (
-                    <p
-                      className={`${
-                        cityId === city?.id
-                          ? "text-[#222] font-medium "
-                          : "text-45454A"
-                      } ${styles.city_name}`}>
-                      {city?.list_value}
-                    </p>
-                  )}
-                </div>
-              ))}
+                    key={index.toString()}
+                    onClick={() => {
+                      if (cartItemsLength < 1) handleCityChange(city, index);
+                      else {
+                        console.log("elsee");
+                        // toggleDrawer("bottom", false);
+                        setState({...state, left: false});
+                        setCity(city);
+                        toggleEmptyCartModal(true);
+                      }
+                    }}>
+                    <img
+                      src={cityUrl + city?.list_value_seourl + ".webp"}
+                      className={`${styles.city_thambnil} ${
+                        cityId === city?.id &&
+                        "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
+                      }`}
+                      alt={city?.list_value}
+                      loading="lazy"
+                    />
+                    {city?.id === 50 ? (
+                      <div className={`text-45454A ${styles.city_name}`}>
+                        {city?.list_value.split("/")[0]}/
+                        <br className="flex sm:hidden" />
+                        {city?.list_value.split("/")[1]}
+                      </div>
+                    ) : (
+                      <p
+                        className={`${
+                          cityId === city?.id
+                            ? "text-[#222] font-medium "
+                            : "text-45454A"
+                        } ${styles.city_name}`}>
+                        {city?.list_value}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
             <div className={styles.bottom_city_content}>
               <p className={styles.bottom_subheading}>
