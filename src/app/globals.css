@@ -183,8 +183,3 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
-/* atriall */
-body {
-  touch-action: manipulation;
-  user-select: none;
-}

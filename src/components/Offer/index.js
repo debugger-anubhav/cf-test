@@ -98,7 +98,7 @@ const OfferPage = () => {
                     <div className="xl:w-full">
                       <p className={commonStyles.desc}>{`${item?.price_text} ${
                         item?.max_discount !== "0"
-                          ? `(up to Rs ${item?.max_discount})*`
+                          ? `(up to Rs ${item?.max_discount})`
                           : ""
                       } `}</p>
                       <p className={commonStyles.code}>
@@ -150,7 +150,7 @@ const OfferPage = () => {
                       appliedCouponObject[0]?.price_text
                     } ${
                       appliedCouponObject[0]?.max_discount !== "0"
-                        ? `(up to Rs ${appliedCouponObject[0]?.max_discount})*`
+                        ? `(up to Rs ${appliedCouponObject[0]?.max_discount})`
                         : ""
                     } `}</p>
                     <p className={commonStyles.code}>Applied at checkout</p>
