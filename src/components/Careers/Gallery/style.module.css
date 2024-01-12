@@ -36,10 +36,10 @@
   @apply w-full h-[140px] object-cover;
 }
 .gallery_image_4 {
-  @apply w-full h-full object-cover;
+  @apply w-full h-full macbook:h-[224px] object-cover;
 }
 .gallery_image_5 {
-  @apply w-full lg:h-[376px] h-[200px] object-cover;
+  @apply w-full lg:h-[382px] h-[200px] object-cover;
 }
 .gallery_image_3 {
   @apply w-full lg:h-[245px] h-[200px];
@@ -48,7 +48,7 @@
   @apply w-full lg:h-[214px] h-[200px];
 }
 .gallery_image_8 {
-  @apply w-full lg:h-[408px] h-[200px];
+  @apply w-full lg:h-[413px] h-[200px];
 }
 .img_gallery {
   @apply w-full h-full object-cover;

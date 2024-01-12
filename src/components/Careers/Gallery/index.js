@@ -86,8 +86,7 @@ export default function Gallery() {
           alt="life at cityfurnish"
           className={styles.mobile_image}
         />
-        <div className={"grid grid-cols-2 w-full gap-2"}>
-          {/* <div className={'flex w-full gap-2'}> */}
+        <div className={"grid grid-cols-2 w-full h-full gap-2"}>
           <img
             src={CareerGalleryMobile.sixth}
             alt="life at cityfurnish"
