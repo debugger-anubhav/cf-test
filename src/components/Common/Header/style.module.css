@@ -32,7 +32,7 @@
   @apply hidden gap-2 cursor-pointer md:flex border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;
 }
 .search_input {
-  @apply flex w-full outline-none text-14;
+  @apply flex w-full outline-none tracking-desc text-14 text-45454A font-Poppins placeholder:font-Poppins placeholder:text-14 placeholder:text-9A9AA2 placeholder:tracking-desc;
 }
 /* .header_search_icon {
   @apply ml-2;
