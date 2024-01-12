@@ -51,7 +51,7 @@ const ProductsDrawer = ({
   // const productsArr = [{isAlt: true}, {}, {}, {}];
 
   return (
-    <div>
+    <div className={styles.main}>
       <h2 className={styles.header}>
         {headType === 1 ? "Add a product" : "Swap product"}
       </h2>

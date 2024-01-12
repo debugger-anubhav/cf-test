@@ -1,5 +1,5 @@
 .main_container {
-  @apply w-full h-full overflow-scroll xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
+  @apply w-full  xl:w-fit py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
 }
 .close_icon {
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
