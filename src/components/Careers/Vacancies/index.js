@@ -26,7 +26,10 @@ export default function Vacancies() {
         setVacaniesData(res?.data?.data);
         setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoadingSkeleton(false);
+      });
   };
   const handleApply = index => {
     // router.push(`https://cityfurnish.zohorecruit.com/jobs/Careers/${vacaniesData[index]?.job_id}`)

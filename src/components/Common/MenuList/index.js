@@ -28,7 +28,10 @@ const MenuList = ({hasMb = true}) => {
         dispatch(addAllAndSubCategory(res?.data?.data));
         setLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoading(false);
+      });
     // }
   }, []);
 
