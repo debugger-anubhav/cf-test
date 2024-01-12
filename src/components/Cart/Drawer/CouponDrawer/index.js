@@ -117,124 +117,128 @@ const CouponDrawer = ({
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
         </div>
 
-        <h2 className={styles.header}>Offers & coupons</h2>
-        <div className={styles.input_div}>
-          <input
-            className={styles.input}
-            placeholder="Enter Coupon code"
-            onChange={e => {
-              setInput(e.target.value);
-              // input !== " " && handleApplyClick(input);
-            }}
-          />
-          <p
-            className={styles.apply_text}
-            onClick={() => {
-              input !== " " && handleApplyClick(input);
-              // toggleDrawer();
-            }}>
-            Apply
-          </p>
-        </div>
+        <div className="overflow-scroll max-h-[100vh]">
+          <h2 className={styles.header}>Offers & coupons</h2>
+          <div className={styles.input_div}>
+            <input
+              className={styles.input}
+              placeholder="Enter Coupon code"
+              onChange={e => {
+                setInput(e.target.value);
+                // input !== " " && handleApplyClick(input);
+              }}
+            />
+            <p
+              className={styles.apply_text}
+              onClick={() => {
+                input !== " " && handleApplyClick(input);
+                // toggleDrawer();
+              }}>
+              Apply
+            </p>
+          </div>
 
-        {!couponStatus && showError && (
-          <p className={styles.error}>{errorMsg}</p>
-        )}
+          {!couponStatus && showError && (
+            <p className={styles.error}>{errorMsg}</p>
+          )}
 
-        <div className={styles.coupons_wrapper}>
-          {pageData?.map((item, index) => (
-            <>
-              <div
-                key={index.toString()}
-                style={{
-                  background: isMonthly
-                    ? item.coupon_type === 0 || item.coupon_type === 2
-                      ? `url(${backgroundImageType1})`
-                      : `url(${backgroundImageType2})`
-                    : item.coupon_type === 0
-                    ? `url(${backgroundImageType2})`
-                    : `url(${backgroundImageType1})`,
-                  cursor: isMonthly
-                    ? item.coupon_type === 0 || item.coupon_type === 2
-                      ? "pointer"
-                      : "not-allowed"
-                    : item.coupon_type === 0
-                    ? "not-allowed"
-                    : "pointer",
-                }}
-                className={`${styles.card}`}
-                onClick={() => {
-                  if (
-                    (isMonthly && item.coupon_type !== 1) ||
-                    (!isMonthly && item.coupon_type !== 0)
-                  ) {
-                    handleApplyClick(item.coupon_code);
-                    setappliedIndex(index);
-                  }
-                }}>
-                <div className={`${styles.ellipse} ${styles.left}`}></div>
-                <div className={`${styles.ellipse} ${styles.right}`}></div>
-                <div className="xl:w-[210px]">
-                  <p
-                    style={{
-                      color: getTextColor(item, isMonthly),
-                    }}
-                    className={`${styles.desc}`}>{`${item?.price_text} ${
-                    item?.max_discount !== "0"
-                      ? `(up to Rs ${item?.max_discount})*`
-                      : ""
-                  } `}</p>
-                  {item?.price_below_text && (
+          <div className={styles.coupons_wrapper}>
+            {pageData?.map((item, index) => (
+              <>
+                <div
+                  key={index.toString()}
+                  style={{
+                    background: isMonthly
+                      ? item.coupon_type === 0 || item.coupon_type === 2
+                        ? `url(${backgroundImageType1})`
+                        : `url(${backgroundImageType2})`
+                      : item.coupon_type === 0
+                      ? `url(${backgroundImageType2})`
+                      : `url(${backgroundImageType1})`,
+                    cursor: isMonthly
+                      ? item.coupon_type === 0 || item.coupon_type === 2
+                        ? "pointer"
+                        : "not-allowed"
+                      : item.coupon_type === 0
+                      ? "not-allowed"
+                      : "pointer",
+                  }}
+                  className={`${styles.card}`}
+                  onClick={() => {
+                    if (
+                      (isMonthly && item.coupon_type !== 1) ||
+                      (!isMonthly && item.coupon_type !== 0)
+                    ) {
+                      handleApplyClick(item.coupon_code);
+                      setappliedIndex(index);
+                    }
+                  }}>
+                  <div className={`${styles.ellipse} ${styles.left}`}></div>
+                  <div className={`${styles.ellipse} ${styles.right}`}></div>
+                  <div className="xl:w-[210px]">
                     <p
                       style={{
                         color: getTextColor(item, isMonthly),
                       }}
-                      className={`${styles.desc}`}>
-                      {item?.price_below_text}
+                      className={`${styles.desc}`}>{`${item?.price_text} ${
+                      item?.max_discount !== "0"
+                        ? `(up to Rs ${item?.max_discount})*`
+                        : ""
+                    } `}</p>
+                    {item?.price_below_text && (
+                      <p
+                        style={{
+                          color: getTextColor(item, isMonthly),
+                        }}
+                        className={`${styles.desc}`}>
+                        {item?.price_below_text}
+                      </p>
+                    )}
+                    <p className={styles.code}>
+                      Use Code &quot;{item?.coupon_code}&quot;
                     </p>
-                  )}
-                  <p className={styles.code}>
-                    Use Code &quot;{item?.coupon_code}&quot;
-                  </p>
-                </div>
-                <div
-                  style={{
-                    borderColor: isMonthly
-                      ? item.coupon_type !== 1
-                        ? "#7e6dd5"
-                        : "#B4B4B4"
-                      : item.coupon_type === 0
-                      ? "#B4B4B4"
-                      : "#7e6dd5",
-                  }}
-                  className={styles.line}></div>
-                <div className={styles.copy_div}>
-                  <button
-                    id={index}
-                    className="text-[#222] flex"
+                  </div>
+                  <div
                     style={{
-                      cursor: isMonthly
+                      borderColor: isMonthly
                         ? item.coupon_type !== 1
-                          ? "pointer"
-                          : "not-allowed"
+                          ? "#7e6dd5"
+                          : "#B4B4B4"
                         : item.coupon_type === 0
-                        ? "not-allowed"
-                        : "pointer",
-                    }}>
-                    {isApplied && appliedIndex === index ? "Applied!" : "Apply"}
-                  </button>
+                        ? "#B4B4B4"
+                        : "#7e6dd5",
+                    }}
+                    className={styles.line}></div>
+                  <div className={styles.copy_div}>
+                    <button
+                      id={index}
+                      className="text-[#222] flex"
+                      style={{
+                        cursor: isMonthly
+                          ? item.coupon_type !== 1
+                            ? "pointer"
+                            : "not-allowed"
+                          : item.coupon_type === 0
+                          ? "not-allowed"
+                          : "pointer",
+                      }}>
+                      {isApplied && appliedIndex === index
+                        ? "Applied!"
+                        : "Apply"}
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {((isMonthly && item.coupon_type === 1) ||
-                (!isMonthly && item.coupon_type === 0)) && (
-                <p className={styles.not_applicable_text}>
-                  *Applicable for {`${isMonthly ? "upfront" : "monthly"}`}{" "}
-                  payment only
-                </p>
-              )}
-            </>
-          ))}
+                {((isMonthly && item.coupon_type === 1) ||
+                  (!isMonthly && item.coupon_type === 0)) && (
+                  <p className={styles.not_applicable_text}>
+                    *Applicable for {`${isMonthly ? "upfront" : "monthly"}`}{" "}
+                    payment only
+                  </p>
+                )}
+              </>
+            ))}
+          </div>
         </div>
       </div>
     </Drawer>

@@ -10,10 +10,10 @@ import content from "@/constants/Constant.json";
 import {Skeleton} from "@mui/material";
 
 const OfferPage = () => {
-  const homePageData = useSelector(state => state.homePagedata);
+  // const homePageData = useSelector(state => state.homePagedata);
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   const appliedCouponCode = cartItems?.[0]?.couponCode;
-  const cityId = homePageData.cityId;
+  // const cityId = homePageData.cityId;
   const [isCopied, setIsCopied] = React.useState(false);
   const [copiedIndex, setCopiedIndex] = React.useState(null);
   const [coupons, setCoupons] = useState([]);
@@ -21,12 +21,15 @@ const OfferPage = () => {
 
   const getOfferCoupons = () => {
     axios
-      .get(baseURL + endPoints.offersAndCupons + `?cityId=${cityId}`)
+      .get(baseURL + endPoints.offersAndCuponsForOfferPage)
       .then(res => {
         setCoupons(res?.data?.data);
         setSkeletonLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setSkeletonLoading(false);
+      });
   };
 
   const appliedCouponObject = coupons.filter(

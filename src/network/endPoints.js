@@ -1,6 +1,7 @@
 export const endPoints = {
   cityList: "fc-list-values/getAllCities",
   offersAndCupons: "fc-site-offers/getOffersAndCoupons",
+  offersAndCuponsForOfferPage: "fc-site-offers/getOffersAndCouponsPageData",
   recentlyViewedProduct: "fc-view-products/getRecentlyViewedProducts",
   googleReviews: "fc-google-review-lists/getAllGoogleReviews",
   googleReviewsLinks: cityId =>
