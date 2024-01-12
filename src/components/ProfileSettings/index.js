@@ -75,6 +75,7 @@ const ProfileSettings = () => {
       setEmailState(response?.data?.data?.is_verified);
     } catch (err) {
       console.log(err);
+      setLoadingSkeleton(false);
     }
   };
 

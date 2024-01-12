@@ -1,8 +1,8 @@
 .wrapper {
-  @apply flex lg:flex-row flex-col max-w-full w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] gap-4;
+  @apply lg:flex-row flex-col max-w-full w-full px-4 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] gap-4;
 }
 .first_col {
-  @apply flex flex-col lg:max-w-[25%] lg:w-3/12 w-full gap-4;
+  @apply flex flex-col lg:max-w-[341px] w-full gap-4;
 }
 .second_col {
   @apply flex flex-col lg:max-w-[50%] lg:w-1/2 w-full gap-4;
@@ -17,29 +17,29 @@
   @apply lg:h-[258px] h-[200px] w-full object-cover;
 }
 .second_image {
-  @apply lg:h-[366px] h-[200px] w-full object-cover;
+  @apply lg:h-[371px] h-[200px] w-full object-cover;
 }
 
 .third_col {
-  @apply flex flex-col  lg:max-w-[25%] lg:w-3/12  w-full gap-4;
+  @apply flex flex-col  lg:max-w-[291px] lg:w-3/12  w-full gap-4;
 }
 .gallery_image {
   @apply w-full h-full;
 }
 .second_top_col_1 {
-  @apply lg:w-[25%] w-full gap-4 flex lg:flex-col;
+  @apply lg:w-[272px] w-full gap-4 flex lg:flex-col;
 }
 .second_top_col_2 {
-  @apply lg:w-[75%] w-full;
+  @apply w-full;
 }
 .gallery_image_6 {
-  @apply w-full lg:h-[132px] h-[140px] object-cover;
+  @apply w-full h-[140px] object-cover;
 }
 .gallery_image_4 {
-  @apply w-full lg:h-[228px] h-[140px] object-cover;
+  @apply w-full h-full macbook:h-[224px] object-cover;
 }
 .gallery_image_5 {
-  @apply w-full lg:h-[376px] h-[200px] object-cover;
+  @apply w-full lg:h-[382px] h-[200px] object-cover;
 }
 .gallery_image_3 {
   @apply w-full lg:h-[245px] h-[200px];
@@ -48,8 +48,11 @@
   @apply w-full lg:h-[214px] h-[200px];
 }
 .gallery_image_8 {
-  @apply w-full lg:h-[408px] h-[200px];
+  @apply w-full lg:h-[413px] h-[200px];
 }
 .img_gallery {
   @apply w-full h-full object-cover;
+}
+.mobile_image {
+  @apply w-full h-full;
 }

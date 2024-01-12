@@ -51,16 +51,26 @@ export const HomePageImages = {
 };
 
 export const CareerGallery = {
-  first: Career + "/cf_new_1.webp",
-  second: Career + "/cf_new_2.webp",
-  third: Career + "/cf_new_3.webp",
-  fourth: Career + "/cf_new_4.webp",
-  fivth: Career + "/cf_new_5.webp",
-  sixth: Career + "/cf_new_6.webp",
-  seven: Career + "/cf_new_7.webp",
-  eight: Career + "/cf_new_8.webp",
+  first: Career + "/career_cf_web_3.webp",
+  second: Career + "/career_cf_web_4.webp",
+  third: Career + "/career_cf_web_1.webp",
+  fourth: Career + "/career_cf_web_6.webp",
+  fivth: Career + "/career_cf_web_2.webp",
+  sixth: Career + "/career_cf_web_5.webp",
+  seven: Career + "/career_cf_web_7.webp",
+  eight: Career + "/career_cf_web_8.webp",
 };
-
+export const CareerGalleryMobile = {
+  first: Career + "/career_cf_mob_3.webp",
+  second: Career + "/career_cf_mob_4.webp",
+  third: Career + "/career_cf_mob_1.webp",
+  fourth: Career + "/career_cf_mob_6.webp",
+  fivth: Career + "/career_cf_mob_2.webp",
+  sixth: Career + "/career_cf_mob_5.webp",
+  seven: Career + "/career_cf_mob_7.webp",
+  eight: Career + "/career_cf_mob_8.webp",
+};
+// https://d3juy0zp6vqec8.cloudfront.net/images/career_cf_web_1.webp
 export const HomePageMediaCoverage = {
   icon1: MediaIcons + "business-line.webp",
   icon2: MediaIcons + "ani.webp",
