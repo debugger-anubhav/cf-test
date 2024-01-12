@@ -181,5 +181,9 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .css-u7qq7e {
   padding-top: 0 !important;
-  padding-bottom: 0 !important;
+  /* padding-bottom: 0 !important; */
+}
+.css-1wz20g3.Mui-expanded::before {
+  top: -16px !important;
+  opacity: 1 !important;
 }

@@ -14,7 +14,7 @@
   @apply fixed right-4 w-6 h-6 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[80px];
 }
 .detail_div {
-  @apply w-full pb-[88px];
+  @apply w-full lg:pb-[88px] pb-[48px];
 }
 .header {
   @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-Poppins font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;

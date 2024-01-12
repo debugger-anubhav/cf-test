@@ -49,7 +49,7 @@ const DebitAccordian = ({rows, visibleRows}) => {
             </Typography>
             <Typography className={`${styles.tableCell} !pb-0`}>
               <span className="font-medium">Transaction Date: </span>{" "}
-              {`${format(new Date(row.created_at), "yyyy-mm-dd  hh:mm:ss")}`}
+              {`${format(new Date(row.created_at), "yyyy-MM-dd  hh:mm:ss")}`}
             </Typography>
           </AccordionDetails>
         </Accordion>
