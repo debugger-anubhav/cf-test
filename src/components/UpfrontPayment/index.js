@@ -155,17 +155,18 @@ function UpfrontPayment() {
       )}
 
       <div>
-        <button
-          disabled={apiData?.payment_status === 2}
-          className={`${styles.pay_now_btn} ${
-            apiData?.payment_status === 2 && "!mt-0"
-          } `}
-          onClick={handleOpenRazorpay}>
-          {apiData?.payment_status === 2 ? "Return to home page" : "Pay now"}
-          {apiData?.payment_status !== 2 && (
+        {apiData?.payment_status === 2 ? (
+          <button className={`${styles.pay_now_btn} "!mt-0"`}>
+            <a href="/">Return to home page</a>
+          </button>
+        ) : (
+          <button
+            className={`${styles.pay_now_btn} `}
+            onClick={handleOpenRazorpay}>
+            Pay now
             <ForwardArrowWithLine size={20} color={"#222222"} />
-          )}
-        </button>
+          </button>
+        )}
       </div>
     </div>
   );
