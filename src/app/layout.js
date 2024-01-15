@@ -47,6 +47,27 @@ export default function RootLayout({children}) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+              {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": "Cityfunrish",
+                "image": "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
+                "description": "Discover comfort and style with Cityfurnish, India's premier furniture rental brand. We've curated a diverse selection of furniture and furnishings to enhance the style and convenience of your home. Our pieces draw inspiration from the way people live in Indian cities, blending elements from different eras for a unique living experience. Experience the simplicity of renting furniture with Cityfurnish – we provide affordable packages and convenient payment options, ensuring your home is both stylish and hassle-free.",
+                "aggregateRating": {
+                  "@type": "AggregateRating",
+                  "ratingValue": "4.4",
+                  "bestRating": "5",
+                  "worstRating": "1",
+                  "ratingCount": "1895"
+                }
+              }
+            `,
+          }}
+        />
       </head>
       <body>
         <ReduxProvider>
