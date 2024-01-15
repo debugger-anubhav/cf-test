@@ -337,7 +337,8 @@ const MainSection = ({login}) => {
       )}
       {/* <hr className={styles.underline} /> */}
 
-      <div className={`${styles.section1_wrapper}`}>
+      <div
+        className={`${styles.section1_wrapper} ${userId && "4xl:!mt-[-20px]"}`}>
         <div className={styles.freq_asked_que_wrapper}>
           <h2 className={styles.head}>
             For all other questions regarding Referrals:
