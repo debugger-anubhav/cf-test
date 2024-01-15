@@ -96,13 +96,12 @@ export default function MainSection() {
                     <RatingStar color={"#CACACC"} className={styles.star} />
                   }
                   fullSymbol={
-                    rating > 0 ? (
-                      <RatingStar color={"#F6B704"} className={styles.star} />
-                    ) : isHovered ? (
-                      <RatingStar color={"#EAD18A"} className={styles.star} />
-                    ) : (
-                      <RatingStar color={"#F6B704"} className={styles.star} />
-                    )
+                    <RatingStar
+                      className={`${styles.star} ${
+                        rating > 0 ? "!text-[#F6B704]" : "text-[#CACACC]"
+                      } hover:!text-[#EAD18A] `}
+                      color={`${isHovered && "#EAD18A"}`}
+                    />
                   }
                   onClick={ratingValue => {
                     formik.setFieldValue("ratingnumber", ratingValue);
