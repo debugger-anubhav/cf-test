@@ -511,7 +511,7 @@ const Header = () => {
             <Image
               src={Icons.Search}
               alt="search-icon"
-              className={`${styles.header_search_icon} pointer-events-none`}
+              className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
               loading="lazy"
             />
           </div>
@@ -659,7 +659,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
           <Image
             src={Icons.Search}
             alt="search-icon"
-            className={`${styles.header_search_icon} pointer-events-none`}
+            className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
             loading="lazy"
           />
         </div>
