@@ -193,63 +193,63 @@ const LoginModal = ({
     setStartCountdown(true);
   };
 
-  const ModalContent = () => (
-    <>
-      {modalCategory === "changeNumber" ? (
-        <ModalContentForNumber
-          setModalCategory={val => handleModalCategory(val)}
-          // contactNumber={contact}
-          setContact={e => setContact(e)}
-          handleSentOtp={handleSentOtp}
-          setProblemType={val => setProblemType(val)}
-          setOtp={e => setOtp(e)}
-          isLoginModal
-        />
-      ) : modalCategory === "verifyOtp" ? (
-        <ModalContentForVerifyOtp
-          contact={contact}
-          handleVerification={() => handleVerification(otp)}
-          otpError={otpError}
-          problemType={problemType}
-          setModalCategory={val => setModalCategory(val)}
-          countdown={countdown}
-          handleSentOtp={() => handleSentOtp(contact)}
-          handleStartCountdown={handleStartCountdown}
-          setStartCountdown={val => setStartCountdown(val)}
-          otp={otp}
-          setOtp={e => setOtp(e)}
-        />
-      ) : modalCategory === "resendOtp" ? (
-        <ModalContentForResendOtp
-          countdown={countdown}
-          handleSentOtp={() => handleSentOtp(contact)}
-          handleStartCountdown={handleStartCountdown}
-          problemType={problemType}
-          setCountdown={val => setCountdown(val)}
-          setModalCategory={val => setModalCategory(val)}
-          setOtp={e => setOtp(e)}
-        />
-      ) : modalCategory === "additionalSupport" ? (
-        <ModalContentForAdditionalSupport
-          problemType={problemType}
-          setModalCategory={val => setModalCategory(val)}
-        />
-      ) : modalCategory === "multipleEmails" ? (
-        <ModalContentForMultipleEmails
-          contact={contact}
-          setModalCategory={val => setModalCategory(val)}
-          handleMultipleEmails={handleMultipleEmails}
-          data={emailArr}
-        />
-      ) : modalCategory === "setUpAccount" ? (
-        <ModalContentForSettingProfile
-          userId={userId}
-          closeModal={closeModal}
-          handleChangeRoute={handleChangeRoute}
-        />
-      ) : null}
-    </>
-  );
+  // const ModalContent = () => (
+  //   <>
+  //     {modalCategory === "changeNumber" ? (
+  //       <ModalContentForNumber
+  //         setModalCategory={val => handleModalCategory(val)}
+  //         // contactNumber={contact}
+  //         setContact={e => setContact(e)}
+  //         handleSentOtp={handleSentOtp}
+  //         setProblemType={val => setProblemType(val)}
+  //         setOtp={e => setOtp(e)}
+  //         isLoginModal
+  //       />
+  //     ) : modalCategory === "verifyOtp" ? (
+  //       <ModalContentForVerifyOtp
+  //         contact={contact}
+  //         handleVerification={() => handleVerification(otp)}
+  //         otpError={otpError}
+  //         problemType={problemType}
+  //         setModalCategory={val => setModalCategory(val)}
+  //         countdown={countdown}
+  //         handleSentOtp={() => handleSentOtp(contact)}
+  //         handleStartCountdown={handleStartCountdown}
+  //         setStartCountdown={val => setStartCountdown(val)}
+  //         otp={otp}
+  //         setOtp={e => setOtp(e)}
+  //       />
+  //     ) : modalCategory === "resendOtp" ? (
+  //       <ModalContentForResendOtp
+  //         countdown={countdown}
+  //         handleSentOtp={() => handleSentOtp(contact)}
+  //         handleStartCountdown={handleStartCountdown}
+  //         problemType={problemType}
+  //         setCountdown={val => setCountdown(val)}
+  //         setModalCategory={val => setModalCategory(val)}
+  //         setOtp={e => setOtp(e)}
+  //       />
+  //     ) : modalCategory === "additionalSupport" ? (
+  //       <ModalContentForAdditionalSupport
+  //         problemType={problemType}
+  //         setModalCategory={val => setModalCategory(val)}
+  //       />
+  //     ) : modalCategory === "multipleEmails" ? (
+  //       <ModalContentForMultipleEmails
+  //         contact={contact}
+  //         setModalCategory={val => setModalCategory(val)}
+  //         handleMultipleEmails={handleMultipleEmails}
+  //         data={emailArr}
+  //       />
+  //     ) : modalCategory === "setUpAccount" ? (
+  //       <ModalContentForSettingProfile
+  //         userId={userId}
+  //         closeModal={closeModal}
+  //         handleChangeRoute={handleChangeRoute}
+  //       />
+  //     ) : null}
+  //   </>
+  // );
 
   return (
     <div>
@@ -266,7 +266,30 @@ const LoginModal = ({
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
-          <ModalContent />
+          <ModalContent
+            modalCategory={modalCategory}
+            setModalCategory={setModalCategory}
+            contact={contact}
+            handleSentOtp={handleSentOtp}
+            setProblemType={setProblemType}
+            setOtp={setOtp}
+            isLoginModal={true}
+            handleVerification={handleVerification}
+            otpError={otpError}
+            problemType={problemType}
+            countdown={countdown}
+            handleStartCountdown={handleStartCountdown}
+            setStartCountdown={setStartCountdown}
+            otp={otp}
+            userId={userId}
+            closeModal={closeModal}
+            handleChangeRoute={handleChangeRoute}
+            emailArr={emailArr}
+            handleMultipleEmails={handleMultipleEmails}
+            setCountdown={setCountdown}
+            handleModalCategory={handleModalCategory}
+            setContact={setContact}
+          />
         </Drawer>
       ) : (
         <Modal
@@ -281,7 +304,30 @@ const LoginModal = ({
             overlay: styles.customOverlay,
             closeButton: styles.customCloseButton,
           }}>
-          <ModalContent />
+          <ModalContent
+            modalCategory={modalCategory}
+            setModalCategory={setModalCategory}
+            contact={contact}
+            handleSentOtp={handleSentOtp}
+            setProblemType={setProblemType}
+            setOtp={setOtp}
+            isLoginModal={true}
+            handleVerification={handleVerification}
+            otpError={otpError}
+            problemType={problemType}
+            countdown={countdown}
+            handleStartCountdown={handleStartCountdown}
+            setStartCountdown={setStartCountdown}
+            otp={otp}
+            userId={userId}
+            closeModal={closeModal}
+            handleChangeRoute={handleChangeRoute}
+            emailArr={emailArr}
+            handleMultipleEmails={handleMultipleEmails}
+            setCountdown={setCountdown}
+            handleModalCategory={handleModalCategory}
+            setContact={setContact}
+          />
         </Modal>
       )}
     </div>
@@ -289,3 +335,82 @@ const LoginModal = ({
 };
 
 export default LoginModal;
+
+const ModalContent = ({
+  modalCategory,
+  setModalCategory,
+  contact,
+  handleSentOtp,
+  setProblemType,
+  setOtp,
+  isLoginModal,
+  handleVerification,
+  otpError,
+  problemType,
+  countdown,
+  handleStartCountdown,
+  setStartCountdown,
+  otp,
+  userId,
+  closeModal,
+  handleChangeRoute,
+  emailArr,
+  handleMultipleEmails,
+  setCountdown,
+  setContact,
+}) => (
+  <>
+    {modalCategory === "changeNumber" ? (
+      <ModalContentForNumber
+        setModalCategory={val => setModalCategory(val)}
+        setContact={e => setContact(e)}
+        handleSentOtp={handleSentOtp}
+        setProblemType={val => setProblemType(val)}
+        setOtp={e => setOtp(e)}
+        isLoginModal={isLoginModal}
+      />
+    ) : modalCategory === "verifyOtp" ? (
+      <ModalContentForVerifyOtp
+        contact={contact}
+        handleVerification={() => handleVerification(otp)}
+        otpError={otpError}
+        problemType={problemType}
+        setModalCategory={val => setModalCategory(val)}
+        countdown={countdown}
+        handleSentOtp={() => handleSentOtp(contact)}
+        handleStartCountdown={handleStartCountdown}
+        setStartCountdown={val => setStartCountdown(val)}
+        otp={otp}
+        setOtp={e => setOtp(e)}
+      />
+    ) : modalCategory === "resendOtp" ? (
+      <ModalContentForResendOtp
+        countdown={countdown}
+        handleSentOtp={() => handleSentOtp(contact)}
+        handleStartCountdown={handleStartCountdown}
+        problemType={problemType}
+        setCountdown={val => setCountdown(val)}
+        setModalCategory={val => setModalCategory(val)}
+        setOtp={e => setOtp(e)}
+      />
+    ) : modalCategory === "additionalSupport" ? (
+      <ModalContentForAdditionalSupport
+        problemType={problemType}
+        setModalCategory={val => setModalCategory(val)}
+      />
+    ) : modalCategory === "multipleEmails" ? (
+      <ModalContentForMultipleEmails
+        contact={contact}
+        setModalCategory={val => setModalCategory(val)}
+        handleMultipleEmails={handleMultipleEmails}
+        data={emailArr}
+      />
+    ) : modalCategory === "setUpAccount" ? (
+      <ModalContentForSettingProfile
+        userId={userId}
+        closeModal={closeModal}
+        handleChangeRoute={handleChangeRoute}
+      />
+    ) : null}
+  </>
+);
