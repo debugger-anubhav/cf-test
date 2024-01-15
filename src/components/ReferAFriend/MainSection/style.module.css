@@ -17,7 +17,7 @@
   @apply text-16 md:text-20 font-Poppins font-medium tracking-[-0.4px] leading-normal text-45454A;
 }
 .line_web {
-  @apply hidden md:flex w-full h-1 bg-[#D9D9D9] mt-2;
+  @apply hidden md:flex w-full h-1 bg-[#D9D9D9] mt-2 mb-[40px];
   border-radius: 0px 8px 8px 0px;
 }
 
@@ -26,11 +26,11 @@
 }
 
 .section1_wrapper1 {
-  @apply md:w-[97%] lg:w-[50%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%];
+  @apply md:w-[97%] lg:w-[50%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%] mt-[40px];
   /* @apply inline-block */
 }
 .section1_wrapper {
-  @apply md:w-[97%] lg:w-[60%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%] lg:mt-[40px] mt-[24px];
+  @apply md:w-[97%] lg:w-[60%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%] mt-6 lg:mt-0;
   /* @apply inline-block */
 }
 
@@ -56,10 +56,10 @@
 }
 
 .section2_wrapper1 {
-  @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] xl:w-[45%] macbook:w-[100%] 3xl:w-[100%%] 3xl:justify-end;
+  @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] xl:w-[45%] macbook:w-[40%] 3xl:w-[35%] 3xl:justify-end;
 }
 .section2_wrapper {
-  @apply flex flex-col mobile:flex-row gap-3 lg:w-[40%] xl:w-[45%] macbook:w-[40%] 3xl:w-[43%] 3xl:justify-end lg:pt-[40px];
+  @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] 2xl:w-[45%]  3xl:w-[35%] 3xl:justify-end;
 }
 /* gap-16px */
 .block {
