@@ -63,6 +63,7 @@ function CustomerPayment() {
     amount: amountParam || 0,
     invoice: invoiceNumberParam || "",
     cfCoins: availableCoins,
+    notes: "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
   const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
@@ -70,7 +71,7 @@ function CustomerPayment() {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
-
+  const [redirctInvoice, setRedirctInvoice] = useState(false);
   useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
@@ -166,6 +167,7 @@ function CustomerPayment() {
           cfCoins: formData.cfCoins,
           notes: formData.notes || "",
           recId: userDetails.recID,
+          amount: formData.amount,
         };
         const result = await axios.post(
           baseURL + endPoints.customerPayment.savePayment,
@@ -199,7 +201,6 @@ function CustomerPayment() {
 
   const handleSubmit = values => {
     console.log(values, "values");
-    // setFormData({...formData, values});
     setFormData({
       ...formData,
       fullName: values.fullName,
@@ -212,6 +213,7 @@ function CustomerPayment() {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdata");
+
     handlePayment();
   };
 
@@ -252,6 +254,11 @@ function CustomerPayment() {
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
         setIsLogin={bool => setIsLogin(bool)}
+        handleChangeRoute={() => {
+          if (redirctInvoice) {
+            router.push("/invoices");
+          }
+        }}
       />
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />
@@ -276,6 +283,10 @@ function CustomerPayment() {
                         name="fullName"
                         placeholder="Enter your name"
                         className={formStyles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("fullName", e.target.value);
+                          setFormData({...formData, fullName: e.target.value});
+                        }}
                       />
                       <ErrorMessage name="fullName">
                         {msg =>
@@ -292,6 +303,10 @@ function CustomerPayment() {
                         name="email"
                         placeholder="Enter your email"
                         className={formStyles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("email", e.target.value);
+                          setFormData({...formData, email: e.target.value});
+                        }}
                       />
                       <ErrorMessage name="email">
                         {msg =>
@@ -317,18 +332,27 @@ function CustomerPayment() {
                         }}
                       />
 
-                      <a href="/invoices">
-                        <div className={styles.all_invoices}>
-                          <p className={styles.all_invoice_text}>
-                            See my all invoices
-                          </p>
-                          <OpenIcon
-                            color={"#5774AC"}
-                            size={25}
-                            className={"cursor-pointer"}
-                          />
-                        </div>
-                      </a>
+                      {/* <a href="/invoices"> */}
+                      <div
+                        className={styles.all_invoices}
+                        onClick={() => {
+                          if (isLogin) {
+                            router.push("/invoices");
+                          } else {
+                            toggleLoginModal(true);
+                            setRedirctInvoice(true);
+                          }
+                        }}>
+                        <p className={styles.all_invoice_text}>
+                          See my all invoices
+                        </p>
+                        <OpenIcon
+                          color={"#5774AC"}
+                          size={25}
+                          className={"cursor-pointer"}
+                        />
+                      </div>
+                      {/* </a> */}
                     </div>
 
                     <div className={styles.form_field}>
@@ -420,6 +444,10 @@ function CustomerPayment() {
                         name="notes"
                         placeholder="Enter if you have any notes"
                         className={styles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("notes", e.target.value);
+                          setFormData({...formData, notes: e.target.value});
+                        }}
                       />
                     </div>
 
