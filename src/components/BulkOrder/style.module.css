@@ -57,7 +57,7 @@
   @apply ml-1;
 }
 .enquiry_heading {
-  @apply font-Poppins text-20 font-medium tracking-[-0.4px] text-45454A pb-1;
+  @apply font-Poppins lg:text-20 text-16 font-medium tracking-[-0.4px] text-45454A pb-1;
 }
 .enquiry_description {
   @apply font-Poppins text-14 md:text-16 font-normal tracking-[-0.32px] text-71717A pb-6 md:pb-8;
