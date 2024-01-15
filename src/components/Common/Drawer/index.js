@@ -281,7 +281,7 @@ export default function CommonDrawer({
             <div
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => {
-                console.log(city, "cityyy");
+                // console.log(city, "cityyy");
                 return (
                   <div
                     className={`${styles.city_wrapper}

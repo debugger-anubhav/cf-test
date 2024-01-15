@@ -56,9 +56,15 @@ function CustomerPayment() {
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
     coinsReduxValue.isCoinApplied,
   );
-  const [formData, setFormData] = useState(null);
-  const [showValidationForAmount, setshowValidationForAmount] = useState(false);
   const [availableCoins, setAvailableCoins] = useState(0);
+  const [formData, setFormData] = useState({
+    fullName: nameParam || "",
+    email: emailParam || "",
+    amount: amountParam || 0,
+    invoice: invoiceNumberParam || "",
+    cfCoins: availableCoins,
+  });
+  const [showValidationForAmount, setshowValidationForAmount] = useState(false);
   const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
   const [userId, setuserId] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
@@ -192,11 +198,20 @@ function CustomerPayment() {
   };
 
   const handleSubmit = values => {
-    setFormData({...formData, values});
+    console.log(values, "values");
+    // setFormData({...formData, values});
+    setFormData({
+      ...formData,
+      fullName: values.fullName,
+      email: values.email,
+      amount: values.amount,
+      invoice: values.invoice,
+      cfCoins: availableCoins,
+    });
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
-    console.log(formData, "formdatttta");
+    console.log(formData, "formdata");
     handlePayment();
   };
 
@@ -226,13 +241,6 @@ function CustomerPayment() {
   }, [userId]);
 
   useEffect(() => {
-    setFormData({
-      fullName: nameParam || "",
-      email: emailParam || "",
-      amount: amountParam || 0,
-      invoice: invoiceNumberParam || "",
-      cfCoins: availableCoins,
-    });
     setTimeout(() => {
       setLoadingSkeleton(false);
     }, 1000);
@@ -303,9 +311,10 @@ function CustomerPayment() {
                         placeholder="Please provide the invoice number for payment."
                         className={styles.form_input}
                         value={formik.values.invoice}
-                        onChange={e =>
-                          formik.setFieldValue("invoice", e.target.value)
-                        }
+                        onChange={e => {
+                          formik.setFieldValue("invoice", e.target.value);
+                          setFormData({...formData, invoice: e.target.value});
+                        }}
                       />
 
                       <a href="/invoices">
