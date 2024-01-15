@@ -63,6 +63,7 @@ function CustomerPayment() {
     amount: amountParam || 0,
     invoice: invoiceNumberParam || "",
     cfCoins: availableCoins,
+    notes: "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
   const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
@@ -199,7 +200,6 @@ function CustomerPayment() {
 
   const handleSubmit = values => {
     console.log(values, "values");
-    // setFormData({...formData, values});
     setFormData({
       ...formData,
       fullName: values.fullName,
@@ -212,6 +212,7 @@ function CustomerPayment() {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdata");
+
     handlePayment();
   };
 
@@ -276,6 +277,10 @@ function CustomerPayment() {
                         name="fullName"
                         placeholder="Enter your name"
                         className={formStyles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("fullName", e.target.value);
+                          setFormData({...formData, fullName: e.target.value});
+                        }}
                       />
                       <ErrorMessage name="fullName">
                         {msg =>
@@ -292,6 +297,10 @@ function CustomerPayment() {
                         name="email"
                         placeholder="Enter your email"
                         className={formStyles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("email", e.target.value);
+                          setFormData({...formData, email: e.target.value});
+                        }}
                       />
                       <ErrorMessage name="email">
                         {msg =>
@@ -420,6 +429,10 @@ function CustomerPayment() {
                         name="notes"
                         placeholder="Enter if you have any notes"
                         className={styles.form_input}
+                        onChange={e => {
+                          formik.setFieldValue("notes", e.target.value);
+                          setFormData({...formData, notes: e.target.value});
+                        }}
                       />
                     </div>
 
