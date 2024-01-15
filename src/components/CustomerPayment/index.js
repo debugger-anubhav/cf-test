@@ -71,7 +71,7 @@ function CustomerPayment() {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
-
+  const [redirctInvoice, setRedirctInvoice] = useState(false);
   useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
@@ -254,6 +254,11 @@ function CustomerPayment() {
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
         setIsLogin={bool => setIsLogin(bool)}
+        handleChangeRoute={() => {
+          if (redirctInvoice) {
+            router.push("/invoices");
+          }
+        }}
       />
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />
@@ -335,6 +340,7 @@ function CustomerPayment() {
                             router.push("/invoices");
                           } else {
                             toggleLoginModal(true);
+                            setRedirctInvoice(true);
                           }
                         }}>
                         <p className={styles.all_invoice_text}>
