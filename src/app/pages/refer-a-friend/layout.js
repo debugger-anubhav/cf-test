@@ -4,7 +4,7 @@ import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 export const metadata = {
-  title: "Cityfurnish- Referral Program",
+  title: "Cityfurnish- Refer a friend and get extra benefits",
   description: "Cityfurnish Friends Referral Program",
 };
 
