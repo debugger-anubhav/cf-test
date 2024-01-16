@@ -278,12 +278,17 @@ const CitymaxHeader = ({zIndex}) => {
             )}
 
             <a
-              href={"/"}
+              href={"/citymax"}
               onClick={e => {
                 e.preventDefault();
               }}>
-              <div className={styles.logo} onClick={() => router.push("/")}>
-                <img src={`${IconLink + "citymax_final.svg"}`} />
+              <div
+                className={styles.logo}
+                onClick={() => router.push("/citymax")}>
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/citymax_logo.png"
+                  alt="CityMax"
+                />
               </div>
             </a>
             <div className={styles.header_city_wrapper}>
@@ -297,13 +302,19 @@ const CitymaxHeader = ({zIndex}) => {
               </div>
             </div>
 
-            <div className={styles.cityfurnish_wrapper}>
-              <img
-                src={`${IconLink + "home-cityfurnish.svg"}`}
-                className={styles.home_icon}
-              />
-              <p className={styles.cityfurnish_txt}>cityfurnish</p>
-            </div>
+            <a href="/" target="_blank">
+              <div
+                className={styles.cityfurnish_wrapper}
+                // onClick={() => router.push("/")}
+              >
+                <img
+                  src={`${IconLink + "home-cityfurnish.svg"}`}
+                  className={styles.home_icon}
+                  alt="cityfurnish"
+                />
+                <p className={styles.cityfurnish_txt}>cityfurnish</p>
+              </div>
+            </a>
           </div>
 
           <div className={styles.header_right_wrapper}>

@@ -146,13 +146,15 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
             ))}
           </div>
 
-          <div className={styles.button} onClick={() => router.push("/")}>
-            <p className={styles.back_txt}>Back to Cityfurnish</p>
-            <img
-              src={`${IconLink + "home-cityfurnish.svg"}`}
-              className={styles.home_icon}
-            />
-          </div>
+          <a href="/" target="_blank" className="cursor-pointer">
+            <div className={styles.button}>
+              <p className={styles.back_txt}>Back to Cityfurnish</p>
+              <img
+                src={`${IconLink + "home-cityfurnish.svg"}`}
+                className={styles.home_icon}
+              />
+            </div>
+          </a>
         </div>
       </div>
     </SwipeableDrawer>

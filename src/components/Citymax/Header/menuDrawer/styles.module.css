@@ -21,7 +21,7 @@
   @apply text-14 lg:text-16 text-45454A tracking-desc lg:tracking-0.3 font-medium cursor-pointer;
 }
 .line {
-  @apply bg-EDEDEE w-full h-[1px];
+  @apply w-full border-b border-b-EDEDEE;
 }
 .button {
   @apply rounded-lg text-14 xl:text-16 font-medium text-71717A tracking-desc xl:tracking-0.3 border-2 border-71717A px-5 xl:px-8 w-full h-12 xl:h-14 py-2 flex justify-center items-center gap-1 md:gap-[10px];
