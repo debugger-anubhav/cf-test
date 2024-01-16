@@ -55,7 +55,7 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
 }
 .form_input {
-  @apply w-full tracking-desc xl:tracking-0.3   outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1;
+  @apply w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16  outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1;
 }
 .form_input_textarea {
   @apply placeholder:text-left -mb-[7px] w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1;
@@ -136,12 +136,12 @@
   @apply text-14 xl:text-16;
 }
 
-@media only screen and (max-width: 768px) {
-  /* For mobile phones: to oprevent zooming in ios */
+/* For mobile phones: to oprevent zooming in ios */
+/* @media only screen and (max-width: 768px) {
   .form_input .contact_input .form_input_textarea .textarea .order_type_field {
     font-size: 14px;
     transform: scale(0.875);
     transform-origin: left center;
     margin-right: -14.28%;
   }
-}
+} */
