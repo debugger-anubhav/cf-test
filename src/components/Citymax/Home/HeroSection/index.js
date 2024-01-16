@@ -72,7 +72,7 @@ const HeroSection = () => {
               : item.attr_name === "12 Months",
           )
           .map((item, index) => (
-            <div key={index} className="md:w-[328px]">
+            <div key={index} className="w-full md:w-[328px]">
               <CommonCard
                 isHalfYearly={isHalfYearly}
                 item={item}

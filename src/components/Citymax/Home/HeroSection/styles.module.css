@@ -28,7 +28,7 @@
   @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
 }
 .card_wrapper {
-  @apply flex-wrap mt-8 xl:mt-12 gap-8;
+  @apply flex-wrap mt-8 xl:mt-12 gap-8 mx-4;
 }
 .leaf_icon {
   @apply w-[14px] h-[13px];

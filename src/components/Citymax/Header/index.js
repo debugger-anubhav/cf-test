@@ -285,7 +285,10 @@ const CitymaxHeader = ({zIndex}) => {
               <div
                 className={styles.logo}
                 onClick={() => router.push("/citymax")}>
-                <img src={`${IconLink + "citymax_final.svg"}`} alt="CityMax" />
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/citymax_logo.png"
+                  alt="CityMax"
+                />
               </div>
             </a>
             <div className={styles.header_city_wrapper}>
