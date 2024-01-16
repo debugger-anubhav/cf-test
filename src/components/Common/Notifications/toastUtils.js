@@ -14,7 +14,7 @@ export const showToastNotification = (message, type) => {
 
   toastId = toast(message, {
     position: isSmallScreen ? "bottom-right" : "top-right",
-    autoClose: 90000,
+    autoClose: 3000,
     hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
