@@ -266,14 +266,19 @@ const ProfileSettings = () => {
                             </span> */}
                           </p>
                           <div
-                            className={`${styles.row} ${formStyles.form_input}`}>
+                            className={`${
+                              userDetails?.email !== "" && "!cursor-not-allowed"
+                            } ${styles.row} ${formStyles.form_input}`}>
                             <Field
                               type="email"
                               name="email"
                               readOnly={userDetails?.email !== ""}
                               value={formik.values.email}
                               placeholder="Enter your email"
-                              className={formStyles.contact_input}
+                              className={`${
+                                userDetails?.email !== "" &&
+                                "!cursor-not-allowed"
+                              } ${formStyles.contact_input}`}
                               disabled={sentOtp}
                               onChange={e => {
                                 formik.setFieldValue("email", e.target.value);
