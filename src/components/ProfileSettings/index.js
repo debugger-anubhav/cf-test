@@ -12,14 +12,11 @@ import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
-import ChangeNumber from "./Modal/ChangeNumber";
 import "react-responsive-modal/styles.css";
 import FormSkeleton from "../Common/FormSkeleton";
-import {reduxSetModalState} from "@/store/Slices";
-import {useDispatch} from "react-redux";
 
 const ProfileSettings = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [emailState, setEmailState] = useState("");
   const [showOtpInput, setShowOtpInput] = useState(false);
   const [countdown, setCountdown] = useState(30);
@@ -27,22 +24,22 @@ const ProfileSettings = () => {
   const [userDetails, setUserDetails] = useState({});
   const useridFromStorage = decrypt(getLocalStorage("_ga"));
   const [otpError, setOtpError] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   useEffect(() => {
     fetchUserDetails();
   }, []);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-    dispatch(reduxSetModalState(true));
-  };
+  // const openModal = () => {
+  //   setIsModalOpen(true);
+  //   dispatch(reduxSetModalState(true));
+  // };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    dispatch(reduxSetModalState(false));
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   dispatch(reduxSetModalState(false));
+  // };
 
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
@@ -224,8 +221,8 @@ const ProfileSettings = () => {
                             Contact number
                           </p>
                           <div
-                            className={`${styles.row} ${formStyles.form_input}`}>
-                            <div className="flex gap-2 items-center">
+                            className={`!cursor-not-allowed  ${styles.row} ${formStyles.form_input}`}>
+                            <div className="!cursor-not-allowed  flex gap-2 items-center">
                               <img
                                 src={`${cityUrl + "india-icon.svg"}`}
                                 className={formStyles.flag}
@@ -238,14 +235,14 @@ const ProfileSettings = () => {
                                 name="contactNumber"
                                 value={formik?.values?.contactNumber}
                                 placeholder="Enter 10 digit number "
-                                className={formStyles.contact_input}
+                                className={`!cursor-not-allowed ${formStyles.contact_input}`}
                               />
                             </div>
-                            <p
+                            {/* <p
                               onClick={() => openModal()}
                               className={styles.changeTxt}>
                               Change
-                            </p>
+                            </p> */}
                           </div>
                           <ErrorMessage name="contactNumber">
                             {msg =>
@@ -259,14 +256,14 @@ const ProfileSettings = () => {
                         <div className={formStyles.form_field}>
                           <p className={formStyles.form_label}>
                             Email
-                            <span
+                            {/* <span
                               className={`${
                                 emailState === "Yes" ? styles.green : styles.red
                               }`}>
                               (
                               {emailState === "Yes" ? "Verified" : "Unverified"}
                               )
-                            </span>
+                            </span> */}
                           </p>
                           <div
                             className={`${styles.row} ${formStyles.form_input}`}>
@@ -361,7 +358,7 @@ const ProfileSettings = () => {
                         </div>
                       </div>
                     </Form>
-                    <ChangeNumber
+                    {/* <ChangeNumber
                       isModalOpen={isModalOpen}
                       closeModal={closeModal}
                       contactNumber={formik.values.contactNumber}
@@ -369,7 +366,7 @@ const ProfileSettings = () => {
                       handleNumberChange={val =>
                         formik.setFieldValue("contactNumber", val)
                       }
-                    />
+                    /> */}
                   </>
                 )}
               </Formik>
