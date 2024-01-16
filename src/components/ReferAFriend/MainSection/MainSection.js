@@ -22,13 +22,13 @@ const FAQ = [
     id: 0,
     question: "Who Can Refer?",
     answer:
-      "Only Cityfurnish customers can use referral program to refer their friends and family",
+      "Only Cityfurnish customers can use referral program to refer their friends and family.",
   },
   {
     id: 1,
     question: "How Can I Refer?",
     answer:
-      "Referred customer can not club referral benefit with any other offer.",
+      "You can share your referral code on any social platform such as Facebook, Twitter, WhatsApp, etc. from our Referral Page or you can even mail your link to your friends and family.",
     // answer:
     //   "You can share your referral code on any social platform such as Facebook, Twitter, WhatsApp, etc. from our Referral Page or you can even mail your link to your friends and family.",
   },
@@ -48,7 +48,7 @@ const FAQ = [
     id: 4,
     question: "Is There A Limit On Benefit?",
     answer:
-      "- You can refer as many friends as you want. You get benefit on every successful conversion.<br/>- Referred customer can not club referral benefit with any other offer",
+      "- You can refer as many friends as you want. You get benefit on every successful conversion.<br/>- Referred customer can not club referral benefit with any other offer.",
   },
   {
     id: 5,
