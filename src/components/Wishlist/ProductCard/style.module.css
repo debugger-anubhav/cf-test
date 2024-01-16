@@ -15,10 +15,10 @@
   @apply min-w-full w-full rounded-lg;
 }
 .desc_div {
-  @apply flex gap-2 justify-between mt-3;
+  @apply flex gap-3 justify-between mt-3;
 }
 .desc {
-  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-[15.3rem] lg:w-[20.3rem] xl:h-[54px] font-Poppins;
+  @apply text-14 xl:text-18 font-medium tracking-desc xl:tracking-[-0.36px] text-71717A w-full xl:h-[54px] font-Poppins;
 }
 .price_div {
   @apply mt-1 flex justify-between items-center font-Poppins;
@@ -48,19 +48,18 @@
   @apply bg-btn-primary  text-222 font-medium py-[14px] lg:py-[16px] w-full rounded cursor-pointer mt-3;
 }
 .delete_item_text {
-  @apply text-222 font-medium font-Poppins sm:text-24 text-20;
+  @apply !text-45454A !font-medium !font-Poppins sm:!text-24 !text-20 !leading-[32px] !tracking-[-0.48px];
 }
 
 .delete_confirmation_text {
-  @apply font-normal text-14 sm:text-16 font-Poppins py-8;
-  color: #71717a;
+  @apply !font-normal !text-14 sm:!text-16 !font-Poppins !py-8 !text-71717A !tracking-[-0.32px];
 }
 .cancel_delete_btn {
-  @apply border-2 rounded-lg py-4 px-6 sm:px-8 w-full font-Poppins text-14 sm:text-16 font-medium;
+  @apply border-2 rounded-lg  !font-Poppins text-14 sm:text-16 font-medium lg:h-[56px] h-[48px] items-center justify-center flex lg:w-[172px] w-[156px];
   border-color: #71717a;
 }
 .confirm_delete_btn {
-  @apply border rounded-lg py-4 px-6 sm:px-8 ml-4 w-full font-Poppins text-16 font-medium bg-[#f6b704] whitespace-nowrap;
+  @apply border rounded-lg  ml-4  font-Poppins text-16 font-medium bg-[#f6b704] whitespace-nowrap lg:h-[56px] h-[48px] items-center justify-center flex lg:w-[172px] w-[156px];
 }
 .main_container {
   @apply bg-white sm:w-max w-full h-min absolute sm:top-1/2 left-1/2 sm:transform -translate-x-1/2 sm:-translate-y-1/2 rounded-t-3xl sm:rounded-none bottom-0 shadow-lg sm:p-12 px-4 pt-6 pb-8 flex;

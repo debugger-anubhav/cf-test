@@ -91,7 +91,7 @@ const ProductCard = ({
           <div className="relative">
             <img
               src={hoverCard ? hoverCardImage : cardImage}
-              alt={desc.replace(/-/g, " ")}
+              alt={desc?.replace(/-/g, " ")}
               loading="lazy"
               className={`${styles.thumbnail} ${
                 isImageHeight && "min-h-[272px]"
@@ -115,7 +115,7 @@ const ProductCard = ({
           </div>
           <div className={styles.desc_div}>
             <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-              {desc.replace(/-/g, " ")}
+              {desc?.replace(/-/g, " ")}
             </h3>
             <span
               onMouseOver={() => setIsHovered(true)}
