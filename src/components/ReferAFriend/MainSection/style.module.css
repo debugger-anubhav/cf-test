@@ -61,6 +61,9 @@
 .section2_wrapper {
   @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] 2xl:w-[45%]  3xl:w-[35%] 3xl:justify-end;
 }
+.img_wrapper_wl {
+  @apply w-[328px] h-[178px] lg:min-w-[459px] lg:min-h-[324px] lg:w-[459px] lg:h-[324px] lg:pb-[99px] lg:px-[22px];
+}
 /* gap-16px */
 .block {
   @apply px-4 pt-4 pb-6 md:pl-8 md:py-6 md:pr-6 rounded-[8px] border-b-[2px] xl:border-r-[1px] xl:border-b-0

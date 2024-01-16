@@ -319,12 +319,14 @@ const MainSection = ({login}) => {
 
         <div
           className={
-            userId ? styles.section2_wrapper : styles.section2_wrapper1
+            // userId ? styles.section2_wrapper : styles.section2_wrapper1
+            styles.img_wrapper_wl
           }>
           <img
             src="https://d3juy0zp6vqec8.cloudfront.net/images/refer-a-friend.webp"
             alt="refer-a-friend"
-            className={styles.refer_a_friend_image}
+            className="w-full h-full"
+            // className={styles.refer_a_friend_image}
           />
         </div>
       </div>
