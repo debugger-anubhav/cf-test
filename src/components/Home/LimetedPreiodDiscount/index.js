@@ -109,7 +109,7 @@ const LimetedPreiodDiscount = () => {
               originalPrice={item?.price}
               currentPrice={item?.sale_price}
               discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.price,
+                ((item?.price - item?.sale_price) * 100) / item?.sale_price,
               ).toFixed(0)}%`}
               productID={item?.id}
               seourl={item?.seourl}

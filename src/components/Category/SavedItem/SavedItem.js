@@ -148,7 +148,7 @@ const SavedItem = () => {
                 }
                 discount={`${Math.round(
                   ((item?.price - item?.fc_product_sale_price) * 100) /
-                    item?.price,
+                    item?.fc_product_sale_price,
                 ).toFixed(0)}%`}
                 productID={item?.id}
                 seourl={item?.seourl}
