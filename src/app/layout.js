@@ -18,6 +18,18 @@ export default function RootLayout({children}) {
     <html lang="en">
       <head>
         {/* <meta name="Title" content="Cityfurnish" /> */}
+        {/* <title>
+          Rent Premium Furniture & Home Appliances Online - Cityfurnish
+        </title> */}
+        <meta
+          name="Title"
+          content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
+        />
+        <meta
+          name="description"
+          content="Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad."
+        />
+
         <meta
           name="facebook-domain-verification"
           content="5qetjkn16z0nh00u71i0iw25oljz0h"

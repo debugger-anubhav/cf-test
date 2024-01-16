@@ -58,7 +58,7 @@ const MainWrapper = () => {
       </div>
 
       <div>
-        <p className={style.our_project_heading}>Our Projects</p>
+        <h2 className={style.our_project_heading}>Our Projects</h2>
         <div className={style.our_project_image_wrapper}>
           {data?.map((ele, index) => {
             return (
