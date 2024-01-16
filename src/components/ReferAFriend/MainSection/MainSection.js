@@ -60,7 +60,7 @@ const FAQ = [
     id: 6,
     question: "Other Terms And Conditions",
     answer:
-      "- Referral program is not appliable on fitness equipments and office furniture. <br/> -Referrer should place an order of min ₹1000 monthly rental to avail benefit of referral program.<br/>-Cityfurnish reserves the right to revoke referral benefits if they were earned against our terms or close the referral program anytime without any prior intimation.",
+      "- Referral program is not appliable on fitness equipments and office furniture. <br/> -Referrer should place an order of min <span style='font-family:Inter'>₹</span>1000 monthly rental to avail benefit of referral program.<br/>-Cityfurnish reserves the right to revoke referral benefits if they were earned against our terms or close the referral program anytime without any prior intimation.",
     // "."
   },
 ];
