@@ -135,7 +135,7 @@ const ProductList = ({params}) => {
                         // }
                         discount={`${Math.round(
                           ((item?.price - item?.fc_product_sale_price) * 100) /
-                            item?.price,
+                            item?.fc_product_sale_price,
                         ).toFixed(2)}%`}
                         productID={item?.id}
                         refreshFunction={setRefreshState}
