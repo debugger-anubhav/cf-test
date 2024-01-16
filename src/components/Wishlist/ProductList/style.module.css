@@ -17,8 +17,7 @@
   @apply flex justify-center w-full h-auto;
 }
 .heading {
-  @apply text-45454A font-Poppins text-24 font-medium leading-8 tracking-headingOne pt-6 pb-4 xs:block;
-  font-feature-settings: "ss02" on;
+  @apply text-45454A font-Poppins lg:text-24 text-20 font-medium leading-8 tracking-headingOne lg:pt-6 lg:pb-4 xs:block;
 }
 .category_wrapper {
   @apply flex w-full overflow-x-scroll;
