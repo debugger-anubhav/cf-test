@@ -26,7 +26,7 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
     {
       heading: "Select Tenure of Subscription",
       subheading:
-        "Select your preferred duration of subscription. Don't worry, you can extend it later if need be",
+        "Select your preferred duration of subscription. Don't worry, you can extend it later if need be.",
     },
     {
       heading: "Select a Plan",
@@ -35,17 +35,17 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
     {
       heading: "Choose The Products",
       subheading:
-        "Click on each placeholder box and choose the furniture and appliances you like",
+        "Click on each placeholder box and choose the furniture and appliances you like.",
     },
     {
       heading: "Complete the Order & On Boarding Process",
       subheading:
-        "Pay the subscription fee and upload documents required for KYC",
+        "Pay the subscription fee and upload documents required for KYC.",
     },
     {
       heading: "Take The Delivery",
       subheading:
-        "We will deliver your products within 4 days after KYC completion",
+        "We will deliver your products within 4 days after KYC completion.",
     },
     {
       heading: "Return or Extend",

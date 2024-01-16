@@ -22,7 +22,7 @@ const CommonCard = ({isHalfYearly, item, plans}) => {
       </p>
       <p className={styles.card_price}>
         <span className={styles.rupeeIcon}>₹</span>
-        {item.sale_price}/mo
+        {item.attr_price}/mo
       </p>
       <button className={styles.btn}>Select plan</button>
       {item.tag && (

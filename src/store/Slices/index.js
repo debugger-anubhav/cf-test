@@ -303,7 +303,7 @@ export const orderSlice = createSlice({
 export const citymaxSlice = createSlice({
   name: "citymax",
   initialState: {
-    isHalfYearly: true,
+    isHalfYearly: false,
   },
   reducers: {
     setIsHalfYearlyState: (state, action) => {

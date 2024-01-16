@@ -44,12 +44,12 @@ const WhyCitymax = () => {
 
   return (
     <div className={styles.main}>
-      <p className={styles.head}>Why CityMax?</p>
+      <h2 className={styles.head}>Why CityMax?</h2>
       <div className={styles.card_wrapper}>
         {cardData.map((item, index) => (
           <div key={index} className={styles.card}>
             <img src={`${IconLink + item.icon}`} className={styles.icon} />
-            <p className={styles.card_head}>{item.head}</p>
+            <h3 className={styles.card_head}>{item.head}</h3>
             <p className={styles.desc}>{item.desc}</p>
           </div>
         ))}
