@@ -5,7 +5,7 @@
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
 }
 .main_wrapper {
-  @apply flex flex-col gap-8 mt-8 overflow-y-scroll h-full overflow-x-visible pb-8;
+  @apply flex flex-col gap-8 mt-8 overflow-x-visible pb-8;
 }
 .optional_text {
   @apply text-20 text-45454A font-medium mb-1 tracking-0.4;

@@ -17,7 +17,7 @@
   @apply text-45454A text-20 xl:text-24 font-medium leading-8 xl:tracking-0.48 min-w-fit;
 }
 .desc {
-  @apply mt-8 text-14 xl:text-14 text-71717A tracking-desc xl:tracking-0.3;
+  @apply mt-8 text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3;
 }
 .btn_wrapper_horizon {
   @apply flex gap-4 items-center mt-8;
@@ -26,8 +26,8 @@
   @apply flex flex-col gap-6 mt-8;
 }
 .white_btn {
-  @apply cursor-pointer h-12 xl:h-14 w-full flex justify-center items-center px-8 rounded-lg text-14 xl:text-16 font-medium text-71717A border-2 border-71717A bg-fff;
+  @apply cursor-pointer h-12 xl:h-14 w-full flex justify-center items-center px-4 rounded-lg text-14 xl:text-16 font-medium text-71717A border-2 border-71717A bg-fff;
 }
 .yellow_btn {
-  @apply cursor-pointer h-12 xl:h-14 w-full flex justify-center items-center px-8 text-222 text-14 xl:text-16 font-medium rounded-lg bg-F6B704;
+  @apply cursor-pointer h-12 xl:h-14 w-full flex justify-center items-center px-4  text-222 text-14 xl:text-16 font-medium rounded-lg bg-F6B704;
 }
