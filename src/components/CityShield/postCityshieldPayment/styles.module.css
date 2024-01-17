@@ -2,7 +2,7 @@
   @apply w-12 h-12 xl:w-16 xl:h-16 text-[#FFDD66] mb-6 xl:my-8;
 }
 .desc {
-  @apply text-71717A text-14 xl:text-16 font-medium xl:leading-6 tracking-desc xl:tracking-0.3 mt-6 xl:mt-8 xl:w-[604px];
+  @apply text-71717A text-14 xl:text-16  xl:leading-6 tracking-desc xl:tracking-0.3 mt-6 xl:mt-8 xl:w-[604px];
 }
 .btn {
   @apply flex justify-center px-8 items-center rounded-lg bg-F6B704 h-12 xl:h-14 mt-6 xl:mt-8 text-16 text-222 font-medium w-full md:w-fit;

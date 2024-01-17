@@ -90,11 +90,11 @@ const ProceedModal = ({
             <button
               className={styles.yellow_btn}
               onClick={() => handleEmptyCart()}>
-              Yes, remove it and add Citymax plan
+              Yes, remove it and add current Citymax plan
             </button>
             <button
               className={styles.yellow_btn}
-              onClick={() => router.push("./cart")}>
+              onClick={() => router.push("/cart")}>
               Go to cart and place existing order
             </button>
             <button onClick={closeModal} className={styles.white_btn}>

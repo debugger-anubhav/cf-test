@@ -62,6 +62,7 @@ const CitymaxPlanDetail = () => {
   const [totalAdditionalAmount, setTotalAdditionalAmount] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -308,6 +309,7 @@ const CitymaxPlanDetail = () => {
           if (!isItemInCart) dispatch(addItemsToCart(apiData));
           handleAddAssociatedProducts(res?.data?.data?.fc_shopping_carts_id);
           showToastNotification("Added to cart", 1);
+          router.push("/cart");
         } else showToastNotification("Something went wrong", 3);
       })
       .catch(err => {
@@ -503,6 +505,8 @@ const CitymaxPlanDetail = () => {
                               </div>
                             ) : (
                               <div
+                                onMouseOver={() => setIsHover(true)}
+                                onMouseOut={() => setIsHover(false)}
                                 className={`${
                                   !isCheckedMap[item.room_id] &&
                                   "hover:border-5774AC hover:bg-[#E0F0FF] cursor-pointer"
@@ -513,8 +517,11 @@ const CitymaxPlanDetail = () => {
                                 }}>
                                 <img
                                   src={
-                                    "https://rentofurniture.com/images/frp_slots/" +
-                                    t.fc_frp_slot.slot_image
+                                    isHover
+                                      ? "https://rentofurniture.com/images/frp_slots/" +
+                                        t.fc_frp_slot.slot_image
+                                      : "https://rentofurniture.com/images/frp_slots/" +
+                                        t.fc_frp_slot.slot_image
                                   }
                                   className={styles.product_icon}
                                 />
@@ -588,7 +595,7 @@ const CitymaxPlanDetail = () => {
           </div>
           <div
             onClick={() => toggleDrawer(2)}
-            className={`${styles.plan_div} ${styles.right_div_content_wrapper}`}>
+            className={`hover:border-[2px] hover:p-[15px] hover:border-5774AC ${styles.plan_div} ${styles.right_div_content_wrapper}`}>
             <p className={styles.bold_text}>
               Current plan: {data?.associatedProductsData?.[0]?.product_name}
             </p>

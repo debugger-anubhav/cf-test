@@ -182,7 +182,7 @@ export const CartPageSlice = createSlice({
     couponCodeUsed: "",
     savedAddresses: [],
     showCartItems: false,
-    isCityShield: false,
+    isCityShield: true,
     isCoinApplied: false,
     shoppingCartTab: 0,
     isOfflineCustomer: 0,

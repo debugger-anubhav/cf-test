@@ -29,7 +29,7 @@
   @apply text-fff text-16 font-medium px-4 py-[6px] rounded-[10px] cursor-pointer;
 }
 .right_div_content_wrapper {
-  @apply p-4 w-full md:w-[427px] rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-5774AC bg-fff;
+  @apply p-4 w-full md:w-[427px] rounded-lg border border-DDDDDF  bg-fff;
 }
 .plan_div {
   @apply flex justify-between items-center cursor-pointer;
