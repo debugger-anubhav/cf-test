@@ -159,6 +159,7 @@ const ProfileSettings = () => {
         body,
       );
       showToastNotification("Your changes are saved successfully", 1);
+      typeof window !== "undefined" && window?.location.reload();
     } catch (err) {
       console.log(err);
     }
