@@ -10,7 +10,7 @@ const CitymaxPage = () => {
     <div className="large_layout">
       <CitymaxHeader />
       <CitymaxHome />
-      <FrequentlyAskedQuestions isCitymax />
+      <FrequentlyAskedQuestions isCitymax params={"citymax"} />
       <Footer />
     </div>
   );

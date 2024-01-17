@@ -30,7 +30,7 @@ import {
   encrypt,
   encryptBase64,
 } from "@/hooks/cryptoUtils";
-import {RxHamburgerMenu} from "react-icons/rx";
+// import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
 import {IconLink} from "../../../assets/icon";
 import {useAuthentication} from "@/hooks/checkAuthentication";
@@ -266,7 +266,14 @@ const CitymaxHeader = ({zIndex}) => {
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
             <div onClick={toggleDrawer}>
-              <RxHamburgerMenu className={styles.hamburger} />
+              <Image
+                src={Icons.Menu}
+                alt="menu-icon"
+                // className={styles.menu_icon_drawer}
+                className={styles.hamburger_icon}
+                loading="lazy"
+              />
+              {/* <RxHamburgerMenu className={styles.hamburger} /> */}
             </div>
             {menuDrawer && (
               <MenuDrawer
@@ -350,7 +357,7 @@ const CitymaxHeader = ({zIndex}) => {
               <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
                   <div
-                    className={`w-100 h-100 absolute z-10`}
+                    className={`w-100 h-100 absolute z-10 cursor-pointer`}
                     onClick={() => router.push("/cart")}></div>
                   <Image
                     src={Icons.shoppingCard}
@@ -366,9 +373,7 @@ const CitymaxHeader = ({zIndex}) => {
               </div>
               {/* </Link> */}
               <div
-                className={`pt-[14px]  pb-[16px] 
-                  
-                  ${styles.test}`}
+                className={`pt-[14px]  pb-[16px] cursor-pointer  ${styles.test}`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
                 }}>

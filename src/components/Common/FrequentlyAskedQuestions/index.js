@@ -7,6 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import Link from "next/link";
+import axios from "axios";
 
 // h2 h3 p
 
@@ -36,6 +37,12 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     endPoints.categortFaq,
     `?parentCategoryId=27`,
   );
+  const getFaqsCitymax = () => {
+    axios
+      .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
+      .then(res => setFaqs(res?.data?.data?.content))
+      .catch(err => console.log(err));
+  };
 
   const toggleQuestion = index => {
     if (openIndex === index) {
@@ -66,6 +73,8 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
           setFaqs(res?.data?.data);
         })
         .catch(err => console.log(err));
+    } else if (params === "citymax") {
+      getFaqsCitymax();
     } else {
       getFaqsLandingPage()
         .then(res => {
