@@ -31,9 +31,9 @@ const HeroSection = () => {
       <h1 className={styles.header}>
         Rent <span className={styles.max}>MAX</span>, pay less.
       </h1>
-      <p className={styles.tag_line}>
+      <h2 className={styles.tag_line}>
         Simple plans for complete home furnishing
-      </p>
+      </h2>
 
       <div className={styles.center}>
         <div className={styles.monthly_toggler}>

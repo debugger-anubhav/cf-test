@@ -52,6 +52,16 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
       subheading:
         "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
     },
+    {
+      heading: "Return or Extend",
+      subheading:
+        "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
+    },
+    {
+      heading: "Return or Extend",
+      subheading:
+        "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
+    },
   ];
 
   return (
@@ -74,7 +84,7 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
               </div>
             </div>
 
-            <div>
+            <div className="h-[90vh] overflow-scroll pb-[130px] md:pb-0 ">
               {sidebarDetail?.map((item, index) => (
                 <div
                   className={styles.drawer_map_wrapper}

@@ -2,19 +2,20 @@
   @apply bg-fff z-[1111] sticky top-0;
 }
 .header_wrapper {
-  @apply font-Poppins cursor-pointer relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between py-4;
+  @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between py-4;
 }
-.hamburger {
-  @apply w-6 h-6 xl:w-8 xl:h-8;
+
+.hamburger_icon {
+  @apply cursor-pointer relative z-[-1] flex xl:w-10 xl:h-10 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 min-h-[16px] min-w-[16px] items-center;
 }
 .logo {
-  @apply w-[84px] h-5 xl:w-[123px] xl:h-[30px];
+  @apply w-[84px] h-5 xl:w-[123px] xl:h-[30px] cursor-pointer;
 }
 .home_icon {
   @apply w-5 h-[19px];
 }
 .cityfurnish_wrapper {
-  @apply xl:flex flex-col hidden items-center;
+  @apply xl:flex flex-col hidden items-center cursor-pointer;
 }
 .cityfurnish_txt {
   @apply text-12 text-222 font-medium text-center;
@@ -25,9 +26,7 @@
 .header_right_wrapper {
   @apply flex items-center;
 }
-.menu_icon {
-  @apply flex lg:mr-6 mr-4 lg:w-8 lg:h-8 w-6 h-6;
-}
+
 .header_city_wrapper {
   @apply flex items-center;
 }
@@ -48,17 +47,17 @@
 }
 
 .header_favorite_container {
-  @apply relative;
+  @apply relative cursor-pointer;
 }
 .header_favorite_count {
   @apply mobile:w-5 w-4 h-4 mobile:h-5 absolute top-[-6px] mobile:left-4 left-2 rounded-[50%] bg-primary mobile:text-12 text-10 text-white leading-5 text-center;
 }
 
 .wishlist_link_wrapper {
-  @apply relative flex gap-2 items-center sm:gap-4 lg:gap-0;
+  @apply relative flex gap-2 items-center sm:gap-4 lg:gap-0 cursor-pointer;
 }
 .cart_link_wrapper {
-  @apply relative;
+  @apply relative cursor-pointer;
 }
 .end_line {
   @apply h-2 w-full hidden xl:flex;
