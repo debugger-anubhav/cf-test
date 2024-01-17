@@ -16,7 +16,6 @@ import PastpaymentDrawer from "./Drawer/PastpaymentDrawer";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
-import {useRouter} from "next/navigation";
 import InvoicesSkeleton from "./InvoicesSkeleton";
 
 const InvoicePage = () => {
@@ -32,7 +31,7 @@ const InvoicePage = () => {
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
-  const router = useRouter();
+
   // const userId = decrypt(getLocalStorage("_ga"));
   const userId = 85777;
 
@@ -95,13 +94,15 @@ const InvoicePage = () => {
 
         <div className={styles.past_payment_wrapper}>
           <p className={styles.desc}>
-            <span
-              onClick={() => {
-                router.push("/payments");
-              }}
-              className={styles.click_here}>
-              Click here
-            </span>
+            <a href="/payments" target="_blank">
+              <span
+                // onClick={() => {
+                //   router.push("/payments");
+                // }}
+                className={styles.click_here}>
+                Click here
+              </span>
+            </a>
             to check your past payments
           </p>
           <div className={styles.amount_wrapper}>
@@ -163,7 +164,11 @@ const InvoicePage = () => {
               ) : (
                 <TableBody>
                   {rows.slice(0, visibleRows).map((row, index) => (
-                    <TableRow key={index} className={styles.tableRow}>
+                    <TableRow
+                      key={index}
+                      className={`${
+                        index === rows.length - 1 && "!border-b-0"
+                      } ${styles.tableRow}`}>
                       <TableCell
                         className={`min-w-[116px] ${styles.tableCell}`}>
                         {row.due_days}
