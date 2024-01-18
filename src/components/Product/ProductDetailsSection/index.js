@@ -463,11 +463,6 @@ const ProductDetails = ({params}) => {
     setIsScrolling(false);
   };
 
-  console.log(
-    categoryPageReduxData.savedProducts,
-    "categoryPageReduxData.savedProducts",
-  );
-
   return (
     <div className={styles.main_container}>
       <ShareModal

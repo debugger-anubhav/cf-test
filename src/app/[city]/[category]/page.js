@@ -20,6 +20,7 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
+import CategoryPageLayout from "./layout";
 
 const Subproduct = loadable(
   () => import("@/components/AllProduct/SubProduct/Subproduct"),
@@ -107,45 +108,49 @@ const CombineSection = loadable(() =>
 
 export default function Page() {
   const params = useParams();
+  const nameOfCity =
+    (params?.city).charAt(0).toUpperCase() + (params?.city).slice(1);
 
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      {params.category === "appliances-rental" ||
-      params.category === "furniture-rental" ? (
-        <div>
-          <HeroBanner />
-          <RentFurnitureAndAppliances params={params} />
-          <RecentlyViewedProduct />
-          <TrendingProducts params={params} />
-          <OffersAndCoupons />
-          <NewlyLaunched />
-          <DownloadForMobile />
-          <PreDesignCombos />
-          <HasselFreeServicesCards />
-          <LimetedPreiodDiscount />
-          <RentNowBanner params={params} />
-          <TryCityMax />
-          <CustomerRating />
-          <MediaCoverage />
-          <CombineSection />
-          <HappySubscribers params={params} page={params.category} />
-          <FrequentlyAskedQuestions params={params} />
-          <TextContent params={params} />
-          <Footer />
-        </div>
-      ) : params.category === "rent" ? (
-        <div>
-          <Subproduct />
-        </div>
-      ) : (
-        <div>
-          <SubHeader params={params} />
-        </div>
-      )}
-      <Notifications />
-    </div>
+    <CategoryPageLayout cityName={nameOfCity}>
+      <div className="large_layout">
+        <AnnouncementBar />
+        <Header />
+        <MenuList />
+        {params.category === "appliances-rental" ||
+        params.category === "furniture-rental" ? (
+          <div>
+            <HeroBanner />
+            <RentFurnitureAndAppliances params={params} />
+            <RecentlyViewedProduct />
+            <TrendingProducts params={params} />
+            <OffersAndCoupons />
+            <NewlyLaunched />
+            <DownloadForMobile />
+            <PreDesignCombos />
+            <HasselFreeServicesCards />
+            <LimetedPreiodDiscount />
+            <RentNowBanner params={params} />
+            <TryCityMax />
+            <CustomerRating />
+            <MediaCoverage />
+            <CombineSection />
+            <HappySubscribers params={params} page={params.category} />
+            <FrequentlyAskedQuestions params={params} />
+            <TextContent params={params} />
+            <Footer />
+          </div>
+        ) : params.category === "rent" ? (
+          <div>
+            <Subproduct />
+          </div>
+        ) : (
+          <div>
+            <SubHeader params={params} />
+          </div>
+        )}
+        <Notifications />
+      </div>
+    </CategoryPageLayout>
   );
 }
