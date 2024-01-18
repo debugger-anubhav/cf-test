@@ -5,7 +5,7 @@
   @apply hidden lg:block min-w-fit;
 }
 .right_div {
-  @apply w-full pb-[88px];
+  @apply pb-[88px];
 }
 .header {
   @apply mt-4 lg:mt-10 text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48;
@@ -35,10 +35,10 @@
   border-collapse: collapse;
 }
 .tableHeaderCell {
-  @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 !font-Poppins pl-0 pt-0 pb-0 xl:pr-4 macbook:pr-8;
+  @apply !text-45454A !text-14 xl:!text-16 !font-medium !tracking-desc xl:!tracking-0.3 !font-Poppins pl-0 pt-0 pb-0 xl:pr-4 macbook:pr-8;
 }
 .tableCell {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 border-b-0 leading-normal pb-3;
+  @apply !text-71717A !text-14 xl:!text-16 !tracking-desc xl:!tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 !border-b-0 leading-normal pb-3;
 }
 /* .lastCell {
   @apply flex gap-4 !font-Poppins py-8 px-0 border-b border-b-EDEDEE;
@@ -50,7 +50,7 @@
   @apply w-[144px] xl:w-[108px] cursor-pointer !font-Poppins text-14 xl:text-16 bg-F6B704 h-[40px] px-5 items-center rounded-lg font-medium text-222;
 }
 .tableRow {
-  @apply border-b border-b-EDEDEE;
+  @apply !border-b !border-b-EDEDEE;
 }
 .show_more_btn {
   @apply border-71717A border-2 bg-fff rounded-lg h-12 text-14 xl:text-16 xl:h-14 flex items-center gap-1 xl:gap-[10px] px-8 mt-4;

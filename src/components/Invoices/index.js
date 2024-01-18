@@ -126,6 +126,17 @@ const InvoicePage = () => {
               } ${styles.pay_all_btn}`}>
               Pay all
             </button>
+            {isDrawerOpen && (
+              <PastpaymentDrawer
+                toggleDrawer={toggleDrawer}
+                open={isDrawerOpen}
+                amountDue={amountToPay}
+                availbal={availCoins}
+                isCoinApplied={isCoinApplied}
+                setIsCoinApplied={bool => setIsCoinApplied(bool)}
+                invoiceNumber={invoiceNumber}
+              />
+            )}
           </div>
         </div>
 
@@ -186,7 +197,7 @@ const InvoicePage = () => {
                         {row.balance}
                       </TableCell>
                       <TableCell
-                        className={`${
+                        className={`!font-medium ${
                           row.current_sub_status === "paid"
                             ? "!text-[#67AF7B]"
                             : "!text-[#D96060]"
@@ -242,18 +253,6 @@ const InvoicePage = () => {
           />
         </div>
       </div>
-
-      {isDrawerOpen && (
-        <PastpaymentDrawer
-          toggleDrawer={toggleDrawer}
-          open={isDrawerOpen}
-          amountDue={amountToPay}
-          availbal={availCoins}
-          isCoinApplied={isCoinApplied}
-          setIsCoinApplied={bool => setIsCoinApplied(bool)}
-          invoiceNumber={invoiceNumber}
-        />
-      )}
     </div>
   );
 };
