@@ -387,7 +387,7 @@ const SubHeader = ({params}) => {
   };
 
   useEffect(() => {
-    getAllAndSubCategoryData.forEach(ele => {
+    getAllAndSubCategoryData?.forEach(ele => {
       if (ele?.cat_name === category) {
         if (subCategory === "All") {
           setTitle(

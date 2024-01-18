@@ -19,6 +19,7 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {FooterSkeleton} from "@/components/Common/Footer";
+import SpecificPageLayout from "./layout";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -55,27 +56,29 @@ const OffersAndCoupons = loadable(
 );
 const ProductPage = () => {
   const params = useParams();
-
+  const dataForMeta = (params?.productName).replace(/-/g, " ");
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <ProductDetails category={"Home Furniture"} params={params} />
-      <OffersAndCoupons page={"product"} />
-      <ItemsIncluded noOfItems={5} />
-      <BenefitsCta />
-      <CompleteTheLook params={params} />
-      <BannerSection params={params} />
-      <CareInstruction params={params} />
-      <RecentlyViewedProduct page={"product"} />
-      <YouMightLike params={params} />
-      <CustomerRating params={params} />
-      <HappySubscribers page={"product"} params={params} />
-      <QuesAndAns params={params} />
-      <Footer />
-      <Notifications />
-    </div>
+    <SpecificPageLayout productName={dataForMeta}>
+      <div className="large_layout">
+        <AnnouncementBar />
+        <Header />
+        <MenuList />
+        <ProductDetails category={"Home Furniture"} params={params} />
+        <OffersAndCoupons page={"product"} />
+        <ItemsIncluded noOfItems={5} />
+        <BenefitsCta />
+        <CompleteTheLook params={params} />
+        <BannerSection params={params} />
+        <CareInstruction params={params} />
+        <RecentlyViewedProduct page={"product"} />
+        <YouMightLike params={params} />
+        <CustomerRating params={params} />
+        <HappySubscribers page={"product"} params={params} />
+        <QuesAndAns params={params} />
+        <Footer />
+        <Notifications />
+      </div>
+    </SpecificPageLayout>
   );
 };
 
