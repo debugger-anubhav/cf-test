@@ -98,7 +98,11 @@ const ShoppingCartSection = () => {
   const cityId = getLocalStorage("cityId");
 
   const totalAmount = arr.reduce((accumulator, item) => {
-    return accumulator + parseInt(item?.price) * item?.quantity;
+    return (
+      accumulator +
+      parseInt(item?.price) * item?.quantity +
+      (parseInt(item.additional_rent) || 0) * item?.quantity
+    );
   }, 0);
 
   const cityShieldOriginalAmount = (totalAmount * 10) / 100;
@@ -414,7 +418,7 @@ const ShoppingCartSection = () => {
                             <div className="flex items-center gap-2">
                               <p className={styles.currentPrice}>
                                 <span className={styles.rupeeIcon}>₹</span>
-                                {item?.price}
+                                {parseInt(item?.price).toFixed(0)}
                               </p>
 
                               {item?.attr_price > item?.price && (

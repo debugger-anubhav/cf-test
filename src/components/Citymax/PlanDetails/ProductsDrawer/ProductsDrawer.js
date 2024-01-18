@@ -18,9 +18,9 @@ const ProductsDrawer = ({
   toggleLoginModal,
   toggleDrawer,
 }) => {
-  const [selectedIndexes, setSelectedIndexes] = useState(Array(4).fill(0));
   const [productsArr, setProductsArr] = useState();
   const [upgradedProductsArr, setUpgradedProductsArr] = useState();
+  const [selectedIndexes, setSelectedIndexes] = useState();
   const params = useParams();
   const fetchAssociatedSlotData = () => {
     const body = {
@@ -34,6 +34,10 @@ const ProductsDrawer = ({
       .then(res => {
         setProductsArr(res?.data?.data?.associated_products);
         setUpgradedProductsArr(res?.data?.data?.associated_premium_products);
+        const totalProdLength =
+          res?.data?.data?.associated_products?.length +
+          res?.data?.data?.associated_premium_products?.length;
+        setSelectedIndexes(Array(totalProdLength).fill(0));
       })
       .catch(err => console.log(err));
   };
@@ -42,9 +46,14 @@ const ProductsDrawer = ({
     fetchAssociatedSlotData();
   }, []);
 
+  console.log(selectedIndexes, "selectedIndexes");
+
   const handleThumbnailClick = (setIndex, index) => {
+    console.log("inthumbail click", selectedIndexes);
     const newSelectedIndexes = [...selectedIndexes];
+    console.log(newSelectedIndexes, "11");
     newSelectedIndexes[setIndex] = index;
+    console.log(newSelectedIndexes, selectedIndexes, "chanes dikh rhe h kyaa");
     setSelectedIndexes(newSelectedIndexes);
   };
 

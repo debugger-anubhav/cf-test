@@ -11,5 +11,5 @@
   @apply text-9A9AA2 text-14 xl:text-16 font-medium font-Poppins leading-5 tracking-desc xl:tracking-0.3;
 }
 .btn {
-  @apply mt-10 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply font-Poppins mt-10 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }

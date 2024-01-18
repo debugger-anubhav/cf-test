@@ -25,7 +25,7 @@ const CommonCard = ({isHalfYearly, item, plans}) => {
         {item.attr_price}/mo
       </p>
       <button className={styles.btn}>Select plan</button>
-      {item.tag && (
+      {item.product_label && (
         <div className={styles.tag}>
           <img
             src={`${IconLink + "popular-icon.svg"}`}
@@ -33,7 +33,7 @@ const CommonCard = ({isHalfYearly, item, plans}) => {
             loading="lazy"
             alt="LeafIcon"
           />
-          {item.tag}
+          {item.product_label}
         </div>
       )}
     </div>

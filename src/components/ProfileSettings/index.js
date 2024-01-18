@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import {ArrowForw} from "@/assets/icon";
 import {cityUrl} from "../../../appConfig";
 import formStyles from "../Cart/AddressSection/styles.module.css";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
@@ -158,6 +158,8 @@ const ProfileSettings = () => {
         baseURL + endPoints.profileSettingPage.updateUserDetails,
         body,
       );
+      setLocalStorage("user_name", values.fullName);
+      typeof window !== "undefined" && window?.location.reload();
       showToastNotification("Your changes are saved successfully", 1);
     } catch (err) {
       console.log(err);

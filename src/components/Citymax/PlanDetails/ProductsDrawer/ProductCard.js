@@ -124,7 +124,7 @@ const ProductCard = ({
               showThumbs={false}
               showArrows={false}
               showStatus={false}
-              onChange={handleThumbnailClick}
+              // onChange={handleThumbnailClick}
               renderIndicator={(onClickHandler, isSelected, index) => {
                 return (
                   <li

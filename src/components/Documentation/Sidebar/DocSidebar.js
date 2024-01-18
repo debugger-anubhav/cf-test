@@ -19,13 +19,14 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const authCookies = new Cookies();
   const [userName, setUserName] = useState(null);
 
-  const getUserNameFromLocalStorage = () => {
-    const storedUserName = getLocalStorage("user_name");
-    setUserName(storedUserName || "Hello User");
-  };
+  const userNameFromLocalStorage = getLocalStorage("user_name");
+
   useEffect(() => {
-    getUserNameFromLocalStorage();
-  }, []);
+    const user = userNameFromLocalStorage || "Hello User";
+    setUserName(user);
+  }, [userNameFromLocalStorage]);
+
+  // const userName = getLocalStorage("user_name") || "Hello User";
 
   const url =
     typeof window !== "undefined" && window?.location.pathname.split("/")[1];
