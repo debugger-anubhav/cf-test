@@ -563,6 +563,7 @@ const CitymaxPlanDetail = () => {
             isModalOpen={openModal}
             modalCategory={modalCategory}
             handleAddToCart={handleAddToCart}
+            userIdToUse={userIdToUse}
           />
         )}
 

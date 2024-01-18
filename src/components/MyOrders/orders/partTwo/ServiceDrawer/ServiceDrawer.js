@@ -4,7 +4,7 @@ import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import ServiceRequestType from "@/components/ServiceRequests/ServiceRequestType";
 
-const ServiceDrawer = ({toggleDrawer, open, orderId}) => {
+const ServiceDrawer = ({toggleDrawer, open, orderId, invoiceUrl}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
   const handleresize = e => {
@@ -36,6 +36,7 @@ const ServiceDrawer = ({toggleDrawer, open, orderId}) => {
             orderId={orderId}
             isHelpDrawer
             title="Need help with..."
+            invoiceUrl={invoiceUrl}
           />
           <div onClick={toggleDrawer} className={styles.close_icon}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />

@@ -63,6 +63,7 @@ const AddressSection = () => {
   const isOfflineCustomer = useSelector(
     state => state.cartPageData.isOfflineCustomer,
   );
+
   // console.log(isOfflineCustomer, "isOfflineCustomeruiiui pagll");
   const addressArray = data.savedAddresses;
 

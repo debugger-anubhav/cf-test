@@ -27,7 +27,7 @@ import {
 } from "react-icons/fa6";
 import {TbMailFilled, TbReload, TbSparkles} from "react-icons/tb";
 import {VscHeartFilled} from "react-icons/vsc";
-import {PiCopySimpleBold} from "react-icons/pi";
+import {PiCopySimpleBold, PiSmileySadBold} from "react-icons/pi";
 import {
   IoMdArrowDropdown,
   IoMdArrowDropup,
@@ -401,4 +401,8 @@ export const Lock = ({size, color, className}) => (
 
 export const SwapIcon = ({size, color, className}) => (
   <IoSwapHorizontalSharp size={size} color={color} className={className} />
+);
+
+export const SadEmoji = ({size, color, className}) => (
+  <PiSmileySadBold size={size} color={color} className={className} />
 );

@@ -13,6 +13,7 @@ import {
   DeleteIcon,
   DropDownArrow,
   DropUpArrow,
+  IconLink,
   RightIcon,
   ToggleOff,
   ToggleOn,
@@ -92,6 +93,9 @@ const ShoppingCartSection = () => {
   // console.log(userDetails, "userDetails");
   useEffect(() => {
     setArr(cartItems);
+    if (cartItems[0]?.is_frp === 1) {
+      setLocalStorage("isMonthly", false);
+    }
   }, [cartItems]);
 
   const count = cartItems.length;
@@ -225,7 +229,7 @@ const ShoppingCartSection = () => {
         cityId,
         coins: isCoinApplied ? availCoin : 0,
         couponsCode: code,
-        paymentMode: isMonthly ? 0 : 1,
+        paymentMode: getLocalStorage("isMonthly") ? 0 : 1,
       };
 
       const res = await axios.post(
@@ -466,7 +470,7 @@ const ShoppingCartSection = () => {
                   <div className={styles.included_items_dropdown_input}>
                     <div className={styles.dropdown_input_left}>
                       <img
-                        src=""
+                        src={IconLink + "citymax-box.svg"}
                         className={styles.dropdown_included_box_icon}
                       />
                       <p className={styles.dropdown_input_label}>

@@ -40,7 +40,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   }, []);
 
   const firstContainerArr = [
-    {heading: "My orders", link: "/purchases"},
+    {heading: "My Orders", link: "/purchases"},
     {
       heading: "My Service Requests",
       link: "/service-requests",

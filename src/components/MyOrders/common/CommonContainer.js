@@ -106,6 +106,7 @@ const CommonContainer = ({
             open={serviceDrawerOpen}
             toggleDrawer={toggleServiceDrawer}
             orderId={item.dealCodeNumber}
+            invoiceUrl={item?.url}
           />
         )}
 

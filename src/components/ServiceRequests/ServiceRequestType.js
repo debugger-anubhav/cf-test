@@ -22,6 +22,7 @@ function ServiceRequestType({
   isHelpDrawer,
   title,
   setShowNextComponent,
+  invoiceUrl,
 }) {
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
@@ -58,6 +59,19 @@ function ServiceRequestType({
   useEffect(() => {
     dispatch(setServiceRequestType(selectedType));
   }, [selectedType]);
+
+  const handleDownload = () => {
+    const anchor = document.createElement("a");
+    anchor.href = invoiceUrl;
+    anchor.download = "invoice.pdf"; // Set the desired file name
+    document.body.appendChild(anchor);
+
+    // Trigger a click event on the anchor element to initiate the download
+    anchor.click();
+
+    // Remove the anchor element from the DOM
+    document.body.removeChild(anchor);
+  };
 
   return (
     <>
@@ -112,7 +126,11 @@ function ServiceRequestType({
           {isHelpDrawer && (
             <div>
               <p className={styles.additional_content}>Additionally</p>
-              <button className={styles.download_btn}>Download invoice</button>
+              <button
+                onClick={() => handleDownload()}
+                className={styles.download_btn}>
+                Download invoice
+              </button>
             </div>
           )}
         </div>
