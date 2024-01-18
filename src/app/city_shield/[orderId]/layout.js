@@ -1,5 +1,5 @@
 import React from "react";
-import "../globals.css";
+import "../../globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
