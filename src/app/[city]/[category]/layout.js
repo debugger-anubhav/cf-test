@@ -10,8 +10,10 @@ export const metadata = {
   description: "",
 };
 export default function CategoryPageLayout({children, cityName}) {
-  const pageTitle = `Furniture on Rent in ${cityName} - Cityfurnish`;
-  pageDescription = `Get home furniture on rent in ${cityName}. Check our rental furniture range for bedroom, living room, dining room and rent furniture from the comfort of your home.`;
+  const pageTitle = `Rent Premium Furniture & Home Appliances in ${cityName} - Cityfurnish`;
+  //   pageDescription = `Get home furniture on rent in ${cityName}. Check our rental furniture range for bedroom, living room, dining room and rent furniture from the comfort of your home.`;
+  pageDescription = `Make your home with us. Rent furniture and home appliances online from  ${cityName}'s leading furniture rental company. Free home delivery and installation.`;
+
   return (
     <html lang="en">
       <head>
