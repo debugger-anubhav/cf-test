@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "./styles.module.css";
-import {IconLink} from "@/assets/icon";
+import {IconLink, SadEmoji} from "@/assets/icon";
 import {getLocalStorage} from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
@@ -129,21 +129,42 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
           </div>
 
           <div className={styles.orders_wrapper}>
-            {ordersData?.map((item, index) => {
-              console.log(visibleImages, "visibleee");
-              return (
-                <div key={index}>
-                  <CommonContainer
-                    item={item}
-                    index={index}
-                    visibleImages={visibleImages}
-                    tab={0}
-                    containerRef={containerRef}
-                    getSingleOrderDetails={getSingleOrderDetails}
-                  />
-                </div>
-              );
-            })}
+            {ordersData.length > 0 ? (
+              ordersData?.map((item, index) => {
+                console.log(visibleImages, "visibleee");
+                return (
+                  <div key={index}>
+                    <CommonContainer
+                      item={item}
+                      index={index}
+                      visibleImages={visibleImages}
+                      tab={0}
+                      containerRef={containerRef}
+                      getSingleOrderDetails={getSingleOrderDetails}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <div className={styles.no_orders_div}>
+                <SadEmoji color={"#9A9AA2"} size={36} />
+                <p className={styles.no_order_desc}>
+                  We are unable to find orders.{" "}
+                  {selectedMenuOrder !== 0 &&
+                    "Try going to a different category or go to"}{" "}
+                  {selectedMenuOrder !== 0 && (
+                    <span
+                      onClick={() => {
+                        setSelectedMenuOrder(0);
+                        fetchOrdersDetails();
+                      }}
+                      className="text-5774AC cursor-pointer">
+                      All orders.
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

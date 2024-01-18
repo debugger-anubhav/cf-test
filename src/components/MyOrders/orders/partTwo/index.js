@@ -197,6 +197,7 @@ const OrderDetails = ({setPart, data}) => {
           open={serviceDrawerOpen}
           toggleDrawer={toggleServiceDrawer}
           orderId={data?.order_id}
+          invoiceUrl=""
         />
       )}
 

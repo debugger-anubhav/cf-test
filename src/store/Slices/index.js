@@ -186,6 +186,7 @@ export const CartPageSlice = createSlice({
     isCoinApplied: false,
     shoppingCartTab: 0,
     isOfflineCustomer: 0,
+    isCitymaxOrder: false,
   },
   reducers: {
     getCartItems(state, action) {
@@ -228,6 +229,9 @@ export const CartPageSlice = createSlice({
     },
     setIsOfflineCustomer(state, action) {
       state.isOfflineCustomer = action.payload;
+    },
+    setCitymaxOrder(state, action) {
+      state.isCitymaxOrder = action.payload;
     },
   },
 });
@@ -386,6 +390,7 @@ export const {
   setShoppingCartTab,
   emptyCart,
   setIsOfflineCustomer,
+  setCitymaxOrder,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

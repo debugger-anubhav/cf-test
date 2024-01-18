@@ -14,11 +14,17 @@
   @apply w-5 h-5;
 }
 .subscrip_note_wrapper {
-  @apply w-full macbook:w-[829px] p-2 mt-8 flex gap-2 items-start self-stretch rounded-lg bg-[#f4f5f8];
+  @apply w-full macbook:w-fit p-2 mt-8 flex gap-2 items-start self-stretch rounded-lg bg-[#f4f5f8];
 }
 .subscrip_note_txt {
   @apply text-71717A text-12 tracking-0.24;
 }
 .subscrip_icon {
   @apply min-w-[16px] h-[16px] text-71717A;
+}
+.no_orders_div {
+  @apply mt-8;
+}
+.no_order_desc {
+  @apply mt-4 text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
 }
