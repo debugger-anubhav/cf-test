@@ -1,8 +1,8 @@
 .main_container {
-  @apply relative  md:h-fit w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6  md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
+  @apply relative  w-full md:w-[400px] lg:w-[480px] xl:w-[581px] py-6 md:py-12 px-4 xs:px-7 md:px-12 font-Poppins;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none  md:!h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none h-fit md:!h-full;
   overflow-y: visible !important;
 }
 .head {

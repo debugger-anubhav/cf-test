@@ -159,8 +159,10 @@ const ProfileSettings = () => {
         body,
       );
       setLocalStorage("user_name", values.fullName);
-      typeof window !== "undefined" && window?.location.reload();
-      showToastNotification("Your changes are saved successfully", 1);
+      if (typeof window !== "undefined") {
+        window.location.reload();
+        showToastNotification("Your changes are saved successfully", 1);
+      }
     } catch (err) {
       console.log(err);
     }
