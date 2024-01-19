@@ -166,7 +166,7 @@ export default function CommonDrawer({
                 onMouseEnter={e => {
                   hoverRef.current = "All";
                 }}>
-                All
+                All products
               </p>
             </a>
             {data?.map((item, index) => (
@@ -185,6 +185,9 @@ export default function CommonDrawer({
                 </p>
               </a>
             ))}
+            <a href={"/citymax"}>
+              <p className={styles.menu_item}>CityMax</p>
+            </a>
           </div>
           <div className={styles.divider}></div>
           <div className={styles.menu_list}>
