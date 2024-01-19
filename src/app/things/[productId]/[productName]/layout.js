@@ -39,14 +39,13 @@
 // RootLayout.propTypes = {
 //   children: PropTypes.element,
 // };
-
 import React from "react";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 let pageDescription = "";
-// const metadata = {
+//  const metadata = {
 //   title: "",
 //   description: "",
 // };
