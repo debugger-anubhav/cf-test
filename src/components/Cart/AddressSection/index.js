@@ -663,6 +663,7 @@ const AddressSection = () => {
                     <div className="mt-4">
                       <input
                         className={styles.form_input}
+                        type="number"
                         placeholder="GST number"
                         onChange={e => setGstNumber(e.target.value)}
                       />
@@ -724,13 +725,18 @@ const AddressSection = () => {
           )}
 
           <button
-            disabled={isOfflineCustomer !== 1 && !primaryAddress}
+            disabled={
+              (isOfflineCustomer !== 1 && !primaryAddress) ||
+              (haveGstNumber && gstNumber === "")
+            }
             onClick={() => {
               if (isOfflineCustomer === 1) {
                 formikRef?.current?.submitForm();
               } else handlePayment();
             }}
-            className={`!mt-6 ${!primaryAddress && "!cursor-not-allowed"} ${
+            className={`!mt-6 ${
+              haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
+            } ${!primaryAddress && "!cursor-not-allowed"} ${
               otherStyles.proceed_button
             }`}>
             Proceed to Payment
