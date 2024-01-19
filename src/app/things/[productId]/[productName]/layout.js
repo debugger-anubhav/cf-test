@@ -39,23 +39,19 @@
 // RootLayout.propTypes = {
 //   children: PropTypes.element,
 // };
-
 import React from "react";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
-import {metadata} from "@/app/layout";
 
 let pageDescription = "";
-// const metadata = {
+//  const metadata = {
 //   title: "",
 //   description: "",
 // };
 export default function SpecificPageLayout({children, productName}) {
   const pageTitle = `Rent Furniture Online - ${productName}`;
   pageDescription = `Furniture Rental - Rent ${productName} Online in India - by Cityfurnish. Door Step Delivery, High-Quality Products, Easy Terms.`;
-  metadata.title = "";
-  metadata.description = "";
   return (
     <html lang="en">
       <head>
