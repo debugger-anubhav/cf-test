@@ -6,6 +6,7 @@ import {
   // CheckedBox,
   Close,
   ForwardArrowWithLine,
+  IconLink,
   Lock,
   Rupee,
   Sparkles,
@@ -62,7 +63,7 @@ const CitymaxPlanDetail = () => {
   const [totalAdditionalAmount, setTotalAdditionalAmount] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
-  const [isHover, setIsHover] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState({rowIndex: -1, itemIndex: -1});
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -354,6 +355,12 @@ const CitymaxPlanDetail = () => {
     );
   }, [planDetailsArray]);
 
+  const handleHover = (rowIndex, itemIndex, isHovered) => {
+    setHoveredItem(
+      isHovered ? {rowIndex, itemIndex} : {rowIndex: -1, itemIndex: -1},
+    );
+  };
+
   const ProceedButton = () => (
     <button
       className={styles.proceed_btn}
@@ -361,11 +368,10 @@ const CitymaxPlanDetail = () => {
         if (selectedItemsArr?.length < 1)
           showToastNotification("You haven`t selected any product", 2);
         else if (selectedItemsArr?.length === totalSlots) {
-          console.log(1, totalSlots);
+          // console.log(1, totalSlots);
           handleAddToCart();
           setModalCategory(2);
         } else {
-          console.log(2);
           setModalCategory(1);
           toggleModal();
         }
@@ -459,80 +465,88 @@ const CitymaxPlanDetail = () => {
 
                     <div className={styles.amen_wrapper}>
                       {item?.fc_frp_room?.fc_frp_slot_associations?.map(
-                        (t, i) => (
-                          <div key={i} className={styles.slot}>
-                            {t.selectedProduct ? (
-                              <div
-                                className={`w-full h-full ${
-                                  !isCheckedMap[item.room_id] &&
-                                  "cursor-pointer"
-                                }`}
-                                onClick={e => {
-                                  !isCheckedMap[item.room_id] &&
-                                    handleSelectItem(item, t, 2);
-                                }}>
+                        (t, i) => {
+                          return (
+                            <div key={i} className={styles.slot}>
+                              {t.selectedProduct ? (
                                 <div
-                                  className={`relative ${
-                                    isCheckedMap[item.room_id] && "opacity-80"
-                                  }`}>
-                                  <img
-                                    src={
-                                      productImageBaseUrl + t.selectedProduct
-                                    }
-                                    className={styles.selected_slot_img}
-                                  />
+                                  className={`w-full h-full ${
+                                    !isCheckedMap[item.room_id] &&
+                                    "cursor-pointer"
+                                  }`}
+                                  onClick={e => {
+                                    !isCheckedMap[item.room_id] &&
+                                      handleSelectItem(item, t, 2);
+                                  }}>
                                   <div
-                                    onClick={e =>
+                                    className={`relative ${
+                                      isCheckedMap[item.room_id] && "opacity-80"
+                                    }`}>
+                                    <img
+                                      src={
+                                        productImageBaseUrl + t.selectedProduct
+                                      }
+                                      className={styles.selected_slot_img}
+                                    />
+                                    <div
+                                      onClick={e =>
+                                        !isCheckedMap[item.room_id] &&
+                                        handleDeleteSelectedItem(e, index, i)
+                                      }>
+                                      <Close className={styles.cross} />
+                                    </div>
+                                  </div>
+                                  <div
+                                    className={`${
                                       !isCheckedMap[item.room_id] &&
-                                      handleDeleteSelectedItem(e, index, i)
-                                    }>
-                                    <Close className={styles.cross} />
+                                      "bg-[#E3E1DC]"
+                                    } ${styles.selected_box_lowerdiv}`}>
+                                    <p
+                                      className={`${
+                                        isCheckedMap[item.room_id] &&
+                                        "!text-71717A"
+                                      } ${styles.selected_slot_name}`}>
+                                      {t.selectedProdName}
+                                    </p>
                                   </div>
                                 </div>
+                              ) : (
                                 <div
-                                  className={`${
+                                  onMouseEnter={() => {
+                                    handleHover(index, i, true);
+                                  }}
+                                  onMouseLeave={() => {
+                                    handleHover(index, i, false);
+                                  }}
+                                  className={`
+                                  ${
                                     !isCheckedMap[item.room_id] &&
-                                    "bg-[#E3E1DC]"
-                                  } ${styles.selected_box_lowerdiv}`}>
-                                  <p
-                                    className={`${
-                                      isCheckedMap[item.room_id] &&
-                                      "!text-71717A"
-                                    } ${styles.selected_slot_name}`}>
-                                    {t.selectedProdName}
+                                    "hover:border-5774AC hover:bg-[#E0F0FF] cursor-pointer"
+                                  } 
+                                  ${styles.amenity_box}`}
+                                  onClick={() => {
+                                    !isCheckedMap[item.room_id] &&
+                                      handleSelectItem(item, t, 1);
+                                  }}>
+                                  <img
+                                    src={
+                                      hoveredItem.rowIndex === index &&
+                                      hoveredItem.itemIndex === i
+                                        ? IconLink +
+                                          t.fc_frp_slot.slot_active_image
+                                        : IconLink + t.fc_frp_slot.slot_image
+                                    }
+                                    className={styles.product_icon}
+                                  />
+                                  <p className={styles.product_name}>
+                                    {" "}
+                                    {t.fc_frp_slot.slot_name}
                                   </p>
                                 </div>
-                              </div>
-                            ) : (
-                              <div
-                                onMouseOver={() => setIsHover(true)}
-                                onMouseOut={() => setIsHover(false)}
-                                className={`${
-                                  !isCheckedMap[item.room_id] &&
-                                  "hover:border-5774AC hover:bg-[#E0F0FF] cursor-pointer"
-                                } ${styles.amenity_box}`}
-                                onClick={() => {
-                                  !isCheckedMap[item.room_id] &&
-                                    handleSelectItem(item, t, 1);
-                                }}>
-                                <img
-                                  src={
-                                    isHover
-                                      ? "https://rentofurniture.com/images/frp_slots/" +
-                                        t.fc_frp_slot.slot_image
-                                      : "https://rentofurniture.com/images/frp_slots/" +
-                                        t.fc_frp_slot.slot_image
-                                  }
-                                  className={styles.product_icon}
-                                />
-                                <p className={styles.product_name}>
-                                  {" "}
-                                  {t.fc_frp_slot.slot_name}
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                        ),
+                              )}
+                            </div>
+                          );
+                        },
                       )}
                     </div>
                   </div>

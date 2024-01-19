@@ -55,8 +55,8 @@
 .risk_text {
   @apply md:text-16 text-14 text-[#5774AC] mt-4 underline cursor-pointer text-center;
 }
-.points_wrappper {
-  @apply mt-16;
+.dashed_line {
+  @apply my-8 border-b border-dashed border-DDDDDF;
 }
 .cover_head {
   @apply text-45454A text-16 font-medium leading-6 pb-2;
