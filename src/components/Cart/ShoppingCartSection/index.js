@@ -44,6 +44,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 import LoginModal from "@/components/LoginPopups/index";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -184,12 +185,21 @@ const ShoppingCartSection = () => {
     productid,
     newQuantity,
     itemIndex,
+    maxQuantity,
   ) => {
+    console.log(maxQuantity, "maxxxx");
     let updatedItems;
     if (newQuantity < 1) {
+      console.log(1);
       setProductId(productid);
       setItemId(itemid);
       openModal();
+    } else if (newQuantity > maxQuantity) {
+      console.log(2);
+      showToastNotification(
+        "Sorry, We have limited quantity available for this product.",
+        3,
+      );
     } else {
       updatedItems = arr.map(item => {
         if (item.id === itemid) {
@@ -201,16 +211,19 @@ const ShoppingCartSection = () => {
       setArr(updatedItems);
     }
 
-    if (newQuantity > 0) {
+    if (newQuantity > 0 && newQuantity <= maxQuantity) {
       const headers = {
         userId: parseInt(userIdToUse),
         quantity: updatedItems[itemIndex].quantity,
         productId: productid,
+        cityId,
       };
 
       await axios
         .post(baseURL + endPoints.addToCart.updateQuantity, headers)
-        .then(res => console.log(res, "res in updated qunatity"))
+        .then(res => {
+          console.log(res, "res in updated qunatity");
+        })
         .catch(err => console.log(err, "error in update qunatity"));
     }
     fetchBill();
@@ -410,6 +423,8 @@ const ShoppingCartSection = () => {
                                     item?.fc_product?.id,
                                     item.quantity + 1,
                                     index,
+                                    item?.fc_product?.fc_city_product_quantity
+                                      ?.quantity,
                                   )
                                 }>
                                 +

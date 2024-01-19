@@ -116,6 +116,8 @@ const CityShieldContent = ({
         </>
       )}
 
+      <div className={styles.dashed_line}></div>
+
       <div className={styles.points_wrappper}>
         <div>
           <p className={styles.cover_head}>What is covered?</p>

@@ -55,6 +55,13 @@ const MenuList = ({hasMb = true}) => {
               </div>
             );
           })}
+          <a
+            rel="noopner noreferrer"
+            target="_self"
+            aria-label="citymax"
+            href="/citymax">
+            <div className={styles.item_wrap}>CityMax</div>
+          </a>
         </div>
       )}
       <div className={styles.menu_list_right}>
