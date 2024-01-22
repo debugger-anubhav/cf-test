@@ -1,6 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "../../orders/partOne/styles.module.css";
-import {Close, InformationIcon} from "@/assets/icon";
+import {Close, InformationIcon, SadEmoji} from "@/assets/icon";
 import {getLocalStorage} from "@/constants/constant";
 // import axios from "axios";
 // import {baseURL} from "@/network/axios";
@@ -112,21 +112,42 @@ const AllSubcriptions = ({
           )}
 
           <div className={styles.orders_wrapper}>
-            {data?.map((item, index) => {
-              console.log(visibleImages, "visibleee");
-              return (
-                <div key={index}>
-                  <CommonContainer
-                    item={item}
-                    index={index}
-                    visibleImages={visibleImages}
-                    tab={1}
-                    containerRef={containerRef}
-                    getSingleOrderDetails={getSingleOrderDetails}
-                  />
-                </div>
-              );
-            })}
+            {data?.length > 0 ? (
+              data?.map((item, index) => {
+                console.log(visibleImages, "visibleee");
+                return (
+                  <div key={index}>
+                    <CommonContainer
+                      item={item}
+                      index={index}
+                      visibleImages={visibleImages}
+                      tab={1}
+                      containerRef={containerRef}
+                      getSingleOrderDetails={getSingleOrderDetails}
+                    />
+                  </div>
+                );
+              })
+            ) : (
+              <div className={styles.no_orders_div}>
+                <SadEmoji color={"#9A9AA2"} size={36} />
+                <p className={styles.no_order_desc}>
+                  We are unable to find subscriptions.{" "}
+                  {selectedSubscriptionMenu !== 0 &&
+                    "Try going to a different category or go to"}{" "}
+                  {selectedSubscriptionMenu !== 0 && (
+                    <span
+                      onClick={() => {
+                        setSelectedSubscriptionMenu(0);
+                        getAllSubscriptionDetails();
+                      }}
+                      className="text-5774AC cursor-pointer">
+                      All subscriptions.
+                    </span>
+                  )}
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

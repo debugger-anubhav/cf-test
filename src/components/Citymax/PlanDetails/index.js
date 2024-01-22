@@ -64,10 +64,19 @@ const CitymaxPlanDetail = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [hoveredItem, setHoveredItem] = useState({rowIndex: -1, itemIndex: -1});
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = isLogin ? userId : tempUserId;
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  }, []);
 
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
@@ -513,10 +522,12 @@ const CitymaxPlanDetail = () => {
                               ) : (
                                 <div
                                   onMouseEnter={() => {
-                                    handleHover(index, i, true);
+                                    !isSmallScreen &&
+                                      handleHover(index, i, true);
                                   }}
                                   onMouseLeave={() => {
-                                    handleHover(index, i, false);
+                                    !isSmallScreen &&
+                                      handleHover(index, i, false);
                                   }}
                                   className={`
                                   ${
