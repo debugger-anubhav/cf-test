@@ -1,5 +1,5 @@
 .main {
-  @apply h-[90vh] overflow-scroll pb-8;
+  @apply h-[90vh] overflow-scroll pb-[100px] md:pb-0;
 }
 .header {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
