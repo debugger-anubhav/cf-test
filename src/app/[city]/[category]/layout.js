@@ -5,10 +5,10 @@ import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import "../../globals.css";
 
 let pageDescription = "";
-export const metadata = {
-  title: "",
-  description: "",
-};
+// export const metadata = {
+//   title: "",
+//   description: "",
+// };
 export default function CategoryPageLayout({children, cityName}) {
   const pageTitle = `Rent Premium Furniture & Home Appliances in ${cityName} - Cityfurnish`;
   //   pageDescription = `Get home furniture on rent in ${cityName}. Check our rental furniture range for bedroom, living room, dining room and rent furniture from the comfort of your home.`;
