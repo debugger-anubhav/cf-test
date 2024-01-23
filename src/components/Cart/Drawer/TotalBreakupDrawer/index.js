@@ -85,7 +85,6 @@ const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
           </>
         )}
       </div>
-      ;
     </Drawer>
   );
 };
