@@ -94,6 +94,7 @@ export const endPoints = {
     makePayment: "fc-payments/makePayment",
     successPayment: "fc-payments/postPaymentSuccess",
     offlinePayment: `fc-payments/placeOfflineOrder`,
+    fetchMonthlyCities: `fc-shopping-carts/fetchMonthlyCity`,
   },
 
   yourAddressPage: {
