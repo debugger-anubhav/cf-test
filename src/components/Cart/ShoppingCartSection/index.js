@@ -81,6 +81,7 @@ const ShoppingCartSection = () => {
   const [openDropdown, setOpenDropdown] = useState(false);
   const [isLogin, setIsLogin] = useState();
   const [isSetupProfile, setIsSetupProfile] = useState(false);
+  const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -138,6 +139,20 @@ const ShoppingCartSection = () => {
     setCityShieldDrawerOpen(true);
   };
 
+  const fetchMonthlyCities = () => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchMonthlyCities)
+      .then(res => {
+        console.log(res, "res in cities");
+        console.log(cityId, "cityid");
+        const isMonthlyCity = res?.data?.data.includes(cityId.toString());
+        console.log(isMonthlyCity, "bool");
+        setShowMonthlyToggle(isMonthlyCity);
+        if (isMonthlyCity === false) setLocalStorage("isMonthly", false);
+      })
+      .catch(err => console.log(err));
+  };
+
   const fetchAvailCoins = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
@@ -149,6 +164,7 @@ const ShoppingCartSection = () => {
   };
 
   useEffect(() => {
+    fetchMonthlyCities();
     fetchAvailCoins();
   }, []);
 
@@ -694,7 +710,7 @@ const ShoppingCartSection = () => {
                 />
               )}
 
-              {arr[0]?.is_frp !== 1 && (
+              {arr[0]?.is_frp !== 1 && showMonthlyToggle && (
                 <div className={styles.payment_mode}>
                   <h2 className={styles.pref_mode_head}>
                     Preferred payment mode:
