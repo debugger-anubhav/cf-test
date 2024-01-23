@@ -110,7 +110,7 @@ export default function Page() {
   const params = useParams();
   const nameOfCity =
     (params?.city).charAt(0).toUpperCase() + (params?.city).slice(1);
-
+  console.log("first");
   return (
     <CategoryPageLayout cityName={nameOfCity}>
       <div className="large_layout">
