@@ -39,7 +39,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   );
   const getFaqsCitymax = () => {
     axios
-      .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
+      .post("https://test.rentofurniture.com/ajxapi/frp_faq_details")
       .then(res => setFaqs(res?.data?.data?.content))
       .catch(err => console.log(err));
   };
