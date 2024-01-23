@@ -10,7 +10,7 @@
   @apply !top-12 !right-8 !outline-none !border-none !w-[25px] !h-[25px];
 }
 .close_icon {
-  @apply bottom-[180px] fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12;
+  @apply bottom-[180px] fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[44px];
 }
 .bottomDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8;

@@ -201,13 +201,11 @@ const CityShieldPage = () => {
             <CityShieldContent />
           </div>
 
-          {drawerOpen && (
-            <BreakdownDrawer
-              toggleDrawer={toggleDrawer}
-              open={drawerOpen}
-              billBreakup={details?.billReciept}
-            />
-          )}
+          <BreakdownDrawer
+            toggleDrawer={toggleDrawer}
+            open={drawerOpen}
+            billBreakup={details?.billReciept}
+          />
         </div>
       </div>
     ) : (

@@ -258,17 +258,15 @@ const FormAddress = ({setTab, tab, id}) => {
                     </ErrorMessage>
                   </div>
 
-                  {cityDrawerOpen && (
-                    <CityDrawer
-                      toggleDrawer={toggleDrawer}
-                      Cities={storeCityList}
-                      open={cityDrawerOpen}
-                      cityName={formik.values.city}
-                      handleCityChange={val =>
-                        handleCityChange(val, formik.setFieldValue)
-                      }
-                    />
-                  )}
+                  <CityDrawer
+                    toggleDrawer={toggleDrawer}
+                    Cities={storeCityList}
+                    open={cityDrawerOpen}
+                    cityName={formik.values.city}
+                    handleCityChange={val =>
+                      handleCityChange(val, formik.setFieldValue)
+                    }
+                  />
 
                   <div
                     className="lg:w-[48.5%]"

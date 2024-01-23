@@ -217,16 +217,16 @@ function Cards({
           </p>
         </div>
       )}
-      {cityShieldDrawerOpen && (
-        <CityShieldDrawerForCart
-          cityShieldCurrentPrice={calculatedPrice}
-          cityShieldOriginalPrice={data?.orignalPrice}
-          cityShieldDiscount={items?.percent_off}
-          toggleDrawer={toggleDrawerCityShield}
-          open={cityShieldDrawerOpen}
-          toggleCheckbox={bool => setIsChecked(bool)}
-        />
-      )}
+
+      <CityShieldDrawerForCart
+        cityShieldCurrentPrice={calculatedPrice}
+        cityShieldOriginalPrice={data?.orignalPrice}
+        cityShieldDiscount={items?.percent_off}
+        toggleDrawer={toggleDrawerCityShield}
+        open={cityShieldDrawerOpen}
+        toggleCheckbox={bool => setIsChecked(bool)}
+      />
+
       <div className={styles.select_month_wrapper}>
         <DropDown
           options={items?.monthOptions}
@@ -445,16 +445,16 @@ export const MonthlyCard = ({
           <span className={styles.learn_more}>Learn more</span>
         </p>
       </div>
-      {cityShieldDrawerOpenForMonthly && (
-        <CityShieldDrawerForCart
-          cityShieldCurrentPrice={data?.orignalPrice}
-          // cityShieldOriginalPrice={data?.orignalPrice}
-          // cityShieldDiscount={items?.percent_off}
-          toggleDrawer={toggleDrawerCityShield}
-          open={cityShieldDrawerOpenForMonthly}
-          toggleCheckbox={bool => setmonthlyCardIsChecked(bool)}
-        />
-      )}
+
+      <CityShieldDrawerForCart
+        cityShieldCurrentPrice={data?.orignalPrice}
+        // cityShieldOriginalPrice={data?.orignalPrice}
+        // cityShieldDiscount={items?.percent_off}
+        toggleDrawer={toggleDrawerCityShield}
+        open={cityShieldDrawerOpenForMonthly}
+        toggleCheckbox={bool => setmonthlyCardIsChecked(bool)}
+      />
+
       <div className={styles.choose_payment_mode}>
         <p className={styles.payment_mode_heading}>
           Choose your preferred payment mode

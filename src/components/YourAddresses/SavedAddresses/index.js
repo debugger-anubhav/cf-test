@@ -53,14 +53,12 @@ const SavedAddress = ({setTab, editAddress}) => {
 
   return (
     <div>
-      {isModalOpen && (
-        <DeleteAddressModal
-          isModalOpen={isModalOpen}
-          closeModal={() => toggleModal(false)}
-          id={id}
-          getAllSavedAddresses={getAllSavedAddresses}
-        />
-      )}
+      <DeleteAddressModal
+        isModalOpen={isModalOpen}
+        closeModal={() => toggleModal(false)}
+        id={id}
+        getAllSavedAddresses={getAllSavedAddresses}
+      />
 
       <h1 className={styles.header}>Your Addresses</h1>
       <div className={styles.line}></div>

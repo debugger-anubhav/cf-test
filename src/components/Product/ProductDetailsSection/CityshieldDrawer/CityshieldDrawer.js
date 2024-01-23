@@ -42,7 +42,7 @@ const CityshieldDrawer = ({
         anchor={isBottomDrawer ? "bottom" : "right"}
         open={open}
         onClose={toggleDrawer}
-        // transitionDuration={600}
+        transitionDuration={{enter: 400, exit: 200}}
         classes={{paper: styles.customDrawer}}>
         <div className={styles.main_container}>
           <div

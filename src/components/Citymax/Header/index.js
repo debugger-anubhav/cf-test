@@ -261,6 +261,12 @@ const CitymaxHeader = ({zIndex}) => {
         userId={isLogin ? userId : tempUserId}
         city={cityForModal}
       />
+      <MenuDrawer
+        open={menuDrawer}
+        toggleDrawer={toggleDrawer}
+        toggleLoginModal={val => toggleLoginModal(val)}
+        setClick={val => setClick(val)}
+      />
 
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
@@ -275,14 +281,6 @@ const CitymaxHeader = ({zIndex}) => {
               />
               {/* <RxHamburgerMenu className={styles.hamburger} /> */}
             </div>
-            {menuDrawer && (
-              <MenuDrawer
-                open={menuDrawer}
-                toggleDrawer={toggleDrawer}
-                toggleLoginModal={val => toggleLoginModal(val)}
-                setClick={val => setClick(val)}
-              />
-            )}
 
             <a
               href={"/citymax"}

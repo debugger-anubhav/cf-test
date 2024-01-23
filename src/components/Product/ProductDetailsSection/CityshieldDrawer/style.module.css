@@ -54,7 +54,6 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none;
-  animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
   transition-timing-function: ease-in;
   overflow-y: visible !important;
 }
@@ -62,13 +61,11 @@
   @apply font-Inter;
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .customDrawer {
     animation: bounceLR 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; /* Apply the animation */
-  }
-}
 
-@keyframes bounceLR {
+/* @keyframes bounceLR {
   0%,
   20%,
   50%,
@@ -91,4 +88,4 @@
   70% {
     transform: translateY(-5px);
   }
-}
+} */

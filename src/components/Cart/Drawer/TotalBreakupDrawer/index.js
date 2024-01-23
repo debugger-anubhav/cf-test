@@ -60,7 +60,8 @@ const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
       anchor={isBottomDrawer ? "bottom" : "right"}
       open={open}
       onClose={toggleDrawer}
-      classes={{paper: styles.customDrawer}}>
+      classes={{paper: styles.customDrawer}}
+      transitionDuration={{enter: 400, exit: 200}}>
       <div className={styles.main_container}>
         <div
           className={styles.close_icon}

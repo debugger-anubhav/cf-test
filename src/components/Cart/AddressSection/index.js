@@ -297,222 +297,192 @@ const AddressSection = () => {
   }, []);
 
   return (
-    <div className={styles.main_container}>
-      <div className={styles.left_div}>
-        <div
-          className={styles.head_div}
-          onClick={() => {
-            dispatch(setShoppingCartTab(0));
-          }}>
-          <BackIcon size={19} />
-          <p className={styles.head}>Go back to checkout</p>
-        </div>
+    <>
+      <TotalBreakup toggleDrawer={toggleDrawerBreakup} open={breakupDrawer} />
+      <AddressDrawer
+        toggleDrawer={toggleAddressDrawer}
+        open={addressDrawer}
+        makeDefaultAddress={id => makeDefaultAddress(id)}
+        primaryAddress={primaryAddress}
+      />
+      <div className={styles.main_container}>
+        <div className={styles.left_div}>
+          <div
+            className={styles.head_div}
+            onClick={() => {
+              dispatch(setShoppingCartTab(0));
+            }}>
+            <BackIcon size={19} />
+            <p className={styles.head}>Go back to checkout</p>
+          </div>
 
-        {addressArray.length > 0 &&
-          primaryAddress !== undefined &&
-          isOfflineCustomer !== 1 && (
-            <div
-              className={styles.saved_address_div}
-              onClick={toggleAddressDrawer}>
-              {cityName !== primaryAddress?.city && (
-                <div className={styles.not_belong_wrapper}>
-                  <p className={styles.not_belong_text}>
-                    Address does not belong to selected city
+          {addressArray.length > 0 &&
+            primaryAddress !== undefined &&
+            isOfflineCustomer !== 1 && (
+              <div
+                className={styles.saved_address_div}
+                onClick={toggleAddressDrawer}>
+                {cityName !== primaryAddress?.city && (
+                  <div className={styles.not_belong_wrapper}>
+                    <p className={styles.not_belong_text}>
+                      Address does not belong to selected city
+                    </p>
+                  </div>
+                )}
+                <div className={styles.saved_add_upper_div}>
+                  <h1 className={styles.saved_add_head}>Delivering to</h1>
+                  <button className={styles.change_btn}>Change</button>
+                </div>
+                <div className={styles.name_div}>
+                  <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
+                  <p className={styles.saved_name}>
+                    {primaryAddress?.full_name}, {primaryAddress?.phone}
                   </p>
                 </div>
-              )}
-              <div className={styles.saved_add_upper_div}>
-                <h1 className={styles.saved_add_head}>Delivering to</h1>
-                <button className={styles.change_btn}>Change</button>
-              </div>
-              <div className={styles.name_div}>
-                <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
-                <p className={styles.saved_name}>
-                  {primaryAddress?.full_name}, {primaryAddress?.phone}
+
+                <p className={styles.saved_address}>
+                  {primaryAddress?.address1}
                 </p>
+                <p className={styles.saved_address}>
+                  {primaryAddress?.city}, {primaryAddress?.state}
+                </p>
+
+                {cityName !== primaryAddress?.city && (
+                  <div className={styles.add_new_info}>
+                    <InformationIcon size={20} color={"#71717A"} />
+                    <p className={styles.add_new_info_text}>Add new address </p>
+                  </div>
+                )}
               </div>
+            )}
 
-              <p className={styles.saved_address}>{primaryAddress?.address1}</p>
-              <p className={styles.saved_address}>
-                {primaryAddress?.city}, {primaryAddress?.state}
-              </p>
+          <div className={styles.new_address_wrapper}>
+            <h2 className={styles.new_add_head}>Add new address</h2>
 
-              {cityName !== primaryAddress?.city && (
-                <div className={styles.add_new_info}>
-                  <InformationIcon size={20} color={"#71717A"} />
-                  <p className={styles.add_new_info_text}>Add new address </p>
-                </div>
-              )}
-            </div>
-          )}
-
-        {addressDrawer && (
-          <AddressDrawer
-            toggleDrawer={toggleAddressDrawer}
-            open={addressDrawer}
-            makeDefaultAddress={id => makeDefaultAddress(id)}
-            primaryAddress={primaryAddress}
-          />
-        )}
-
-        <div className={styles.new_address_wrapper}>
-          <h2 className={styles.new_add_head}>Add new address</h2>
-
-          <Formik
-            innerRef={f => (formikRef.current = f)}
-            // ref={formikRef}
-            initialValues={{
-              fullName: "",
-              contactNumber: "",
-              address: "",
-              landmark: "",
-              postalCode: "",
-              city: cityName,
-              orderNumber: "",
-              orderType: "",
-              alternateContactNumber: "",
-              offlineCustomer: isOfflineCustomer === 1,
-            }}
-            validationSchema={validationSchema}
-            onSubmit={async (values, {setSubmitting, resetForm}) => {
-              console.log(1);
-              if (isOfflineCustomer === 1) {
-                console.log("in if");
-                handleOfflineOrder(values);
-              } else {
-                console.log("in else");
-                await saveUserAddress(values);
-                getAllSavedAddresses();
-                resetForm();
-              }
-              window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-            }}>
-            {formik => (
-              <Form className={styles.form_wrapper}>
-                <div className={styles.form_wrapper}>
-                  {isOfflineCustomer === 1 && (
-                    <>
-                      <div className={styles.form_field}>
-                        <p className={styles.form_label}>Order Type</p>
-                        <div className={`!h-fit ${styles.form_input}`}>
-                          <div
-                            className={styles.order_type_field}
-                            onClick={() =>
-                              setOpenOrderTypeDropdown(!openOrderTypeDropdown)
-                            }>
-                            <Field
-                              className="outline-none border-none cursor-pointer"
-                              name="orderType"
-                              placeholder="Select your order type"
-                              value={formik.values.orderType}
-                              readOnly
-                            />
-                            <div>
-                              {openOrderTypeDropdown ? (
-                                <PopUpArrow
-                                  color={"#71717A"}
-                                  className="w-5 h-5 cursor-pointer"
-                                />
-                              ) : (
-                                <DownPopUpArrow
-                                  color={"#71717A"}
-                                  className="w-5 h-5 cursor-pointer"
-                                />
-                              )}
+            <Formik
+              innerRef={f => (formikRef.current = f)}
+              // ref={formikRef}
+              initialValues={{
+                fullName: "",
+                contactNumber: "",
+                address: "",
+                landmark: "",
+                postalCode: "",
+                city: cityName,
+                orderNumber: "",
+                orderType: "",
+                alternateContactNumber: "",
+                offlineCustomer: isOfflineCustomer === 1,
+              }}
+              validationSchema={validationSchema}
+              onSubmit={async (values, {setSubmitting, resetForm}) => {
+                console.log(1);
+                if (isOfflineCustomer === 1) {
+                  console.log("in if");
+                  handleOfflineOrder(values);
+                } else {
+                  console.log("in else");
+                  await saveUserAddress(values);
+                  getAllSavedAddresses();
+                  resetForm();
+                }
+                window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+              }}>
+              {formik => (
+                <Form className={styles.form_wrapper}>
+                  <div className={styles.form_wrapper}>
+                    {isOfflineCustomer === 1 && (
+                      <>
+                        <div className={styles.form_field}>
+                          <p className={styles.form_label}>Order Type</p>
+                          <div className={`!h-fit ${styles.form_input}`}>
+                            <div
+                              className={styles.order_type_field}
+                              onClick={() =>
+                                setOpenOrderTypeDropdown(!openOrderTypeDropdown)
+                              }>
+                              <Field
+                                className="outline-none border-none cursor-pointer"
+                                name="orderType"
+                                placeholder="Select your order type"
+                                value={formik.values.orderType}
+                                readOnly
+                              />
+                              <div>
+                                {openOrderTypeDropdown ? (
+                                  <PopUpArrow
+                                    color={"#71717A"}
+                                    className="w-5 h-5 cursor-pointer"
+                                  />
+                                ) : (
+                                  <DownPopUpArrow
+                                    color={"#71717A"}
+                                    className="w-5 h-5 cursor-pointer"
+                                  />
+                                )}
+                              </div>
                             </div>
+
+                            {openOrderTypeDropdown &&
+                              orderTypeOptions.map((option, index) => (
+                                <option
+                                  className={`${
+                                    index === 1 ? "!pb-0" : "mt-3"
+                                  } ${styles.ordertype_option}`}
+                                  key={index}
+                                  value={option}
+                                  onClick={() => {
+                                    formik.setFieldValue("orderType", option);
+                                    setOpenOrderTypeDropdown(
+                                      !openOrderTypeDropdown,
+                                    );
+                                  }}>
+                                  {option}
+                                </option>
+                              ))}
                           </div>
-
-                          {openOrderTypeDropdown &&
-                            orderTypeOptions.map((option, index) => (
-                              <option
-                                className={`${index === 1 ? "!pb-0" : "mt-3"} ${
-                                  styles.ordertype_option
-                                }`}
-                                key={index}
-                                value={option}
-                                onClick={() => {
-                                  formik.setFieldValue("orderType", option);
-                                  setOpenOrderTypeDropdown(
-                                    !openOrderTypeDropdown,
-                                  );
-                                }}>
-                                {option}
-                              </option>
-                            ))}
+                          <ErrorMessage name="orderType">
+                            {msg =>
+                              formik.touched.orderType && (
+                                <p className={styles.error}>{msg} </p>
+                              )
+                            }
+                          </ErrorMessage>
                         </div>
-                        <ErrorMessage name="orderType">
-                          {msg =>
-                            formik.touched.orderType && (
-                              <p className={styles.error}>{msg} </p>
-                            )
-                          }
-                        </ErrorMessage>
-                      </div>
-                      <div className={styles.form_field}>
-                        <p className={styles.form_label}>
-                          Order Number (Optional)
-                        </p>
-                        <Field
-                          type="number"
-                          onKeyPress={keyPressForContactField}
-                          name="orderNumber"
-                          placeholder="Please provide the order number for payment."
-                          className={styles.form_input}
-                        />
-                      </div>
-                    </>
-                  )}
+                        <div className={styles.form_field}>
+                          <p className={styles.form_label}>
+                            Order Number (Optional)
+                          </p>
+                          <Field
+                            type="number"
+                            onKeyPress={keyPressForContactField}
+                            name="orderNumber"
+                            placeholder="Please provide the order number for payment."
+                            className={styles.form_input}
+                          />
+                        </div>
+                      </>
+                    )}
 
-                  <div className={styles.form_field}>
-                    <p className={styles.form_label}>Full name</p>
-                    <Field
-                      type="text"
-                      name="fullName"
-                      placeholder="Enter your name"
-                      className={styles.form_input}
-                    />
-                    <ErrorMessage name="fullName">
-                      {msg =>
-                        formik.touched.fullName && (
-                          <p className={styles.error}>{msg} </p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  <div className={styles.form_field}>
-                    <p className={styles.form_label}>Contact number</p>
-                    <div
-                      className={`flex gap-2 items-center ${styles.form_input}`}>
-                      <img
-                        src={`${cityUrl + "india-icon.svg"}`}
-                        className={styles.flag}
-                        loading="lazy"
-                        alt="India-icon"
-                      />
-                      <Field
-                        type="number"
-                        onKeyPress={keyPressForContactField}
-                        // readOnly
-                        name="contactNumber"
-                        placeholder="Enter 10 digit number "
-                        className={styles.contact_input}
-                      />
-                    </div>
-                    <ErrorMessage name="contactNumber">
-                      {msg =>
-                        formik.touched.contactNumber && (
-                          <p className={styles.error}>{msg} </p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  {isOfflineCustomer === 1 && (
                     <div className={styles.form_field}>
-                      <p className={styles.form_label}>
-                        Alternative number (Optional)
-                      </p>
+                      <p className={styles.form_label}>Full name</p>
+                      <Field
+                        type="text"
+                        name="fullName"
+                        placeholder="Enter your name"
+                        className={styles.form_input}
+                      />
+                      <ErrorMessage name="fullName">
+                        {msg =>
+                          formik.touched.fullName && (
+                            <p className={styles.error}>{msg} </p>
+                          )
+                        }
+                      </ErrorMessage>
+                    </div>
+
+                    <div className={styles.form_field}>
+                      <p className={styles.form_label}>Contact number</p>
                       <div
                         className={`flex gap-2 items-center ${styles.form_input}`}>
                         <img
@@ -525,226 +495,256 @@ const AddressSection = () => {
                           type="number"
                           onKeyPress={keyPressForContactField}
                           // readOnly
-                          name="alternateContactNumber"
+                          name="contactNumber"
                           placeholder="Enter 10 digit number "
                           className={styles.contact_input}
                         />
                       </div>
-                    </div>
-                  )}
-
-                  <div className={styles.form_field}>
-                    <p className={styles.form_label}>Address</p>
-                    <Field
-                      as="textarea"
-                      name="address"
-                      placeholder="Enter your address here including flat/building no."
-                      className={`${styles.textarea} ${styles.form_input}`}
-                    />
-                    <ErrorMessage name="address">
-                      {msg =>
-                        formik.touched.address && (
-                          <p className={styles.error}>{msg}</p>
-                        )
-                      }
-                    </ErrorMessage>
-                  </div>
-
-                  <div className={styles.form_field}>
-                    <p className={styles.form_label}>
-                      Nearest Landmark (optional)
-                    </p>
-                    <Field
-                      name="landmark"
-                      placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
-                      className={styles.form_input}
-                    />
-                  </div>
-
-                  <div
-                    className={`flex flex-col lg:flex-row gap-4 ${styles.form_field}`}>
-                    <div className="lg:w-[48.5%]">
-                      <p className={styles.form_label}>Postal code</p>
-                      <Field
-                        type="number"
-                        onKeyPress={keyPressForContactField}
-                        name="postalCode"
-                        placeholder="Enter 6 digit postal code"
-                        className={styles.form_input}
-                      />
-                      <ErrorMessage name="postalCode">
+                      <ErrorMessage name="contactNumber">
                         {msg =>
-                          formik.touched.postalCode && (
+                          formik.touched.contactNumber && (
                             <p className={styles.error}>{msg} </p>
                           )
                         }
                       </ErrorMessage>
                     </div>
-                    <div className="lg:w-[48.5%]">
-                      <p className={styles.form_label}>City</p>
+
+                    {isOfflineCustomer === 1 && (
+                      <div className={styles.form_field}>
+                        <p className={styles.form_label}>
+                          Alternative number (Optional)
+                        </p>
+                        <div
+                          className={`flex gap-2 items-center ${styles.form_input}`}>
+                          <img
+                            src={`${cityUrl + "india-icon.svg"}`}
+                            className={styles.flag}
+                            loading="lazy"
+                            alt="India-icon"
+                          />
+                          <Field
+                            type="number"
+                            onKeyPress={keyPressForContactField}
+                            // readOnly
+                            name="alternateContactNumber"
+                            placeholder="Enter 10 digit number "
+                            className={styles.contact_input}
+                          />
+                        </div>
+                      </div>
+                    )}
+
+                    <div className={styles.form_field}>
+                      <p className={styles.form_label}>Address</p>
                       <Field
-                        readOnly
-                        type="text"
-                        name="city"
-                        value={cityName}
-                        placeholder="Enter city"
-                        className={styles.form_input}
+                        as="textarea"
+                        name="address"
+                        placeholder="Enter your address here including flat/building no."
+                        className={`${styles.textarea} ${styles.form_input}`}
                       />
-                      <ErrorMessage name="city">
+                      <ErrorMessage name="address">
                         {msg =>
-                          formik.touched.city && (
-                            <p className={styles.error}>{msg} </p>
+                          formik.touched.address && (
+                            <p className={styles.error}>{msg}</p>
                           )
                         }
                       </ErrorMessage>
                     </div>
-                  </div>
-                  {isOfflineCustomer !== 1 && (
-                    <button type="submit" className={styles.save_btn}>
-                      Save & Proceed
-                    </button>
-                  )}
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
-      </div>
-      <div className={styles.right_div}>
-        {isOfflineCustomer !== 1 && (
-          <div className="gap-6 flex flex-col">
-            <div className={styles.box_wrapper}>
-              <div className={styles.box_wrapper_left_div}>
-                <WhatsappIcon size={24} color={"#48A06C"} />
-                <p className={styles.box_desc}>Opt for Whatsapp notification</p>
-              </div>
-              <div className="cursor-pointer">
-                {whatsappNotification ? (
-                  <ToggleOn
-                    size={29}
-                    color={"#5774AC"}
-                    onClick={() => setWhatsappNotification(false)}
-                  />
-                ) : (
-                  <ToggleOff
-                    color={"#E3E1DC"}
-                    size={29}
-                    onClick={() => setWhatsappNotification(true)}
-                  />
-                )}
-              </div>
-            </div>
 
-            <div className={styles.box_wrapper}>
-              <div className="w-full">
-                <div className="flex gap-4 justify-between items-center">
-                  <div className={styles.box_wrapper_left_div}>
-                    <span className={styles.hash}>#</span>
-                    <p className={styles.box_desc}>I have a GST number</p>
-                  </div>
-                  <div className="cursor-pointer">
-                    {haveGstNumber ? (
-                      <ToggleOn
-                        size={29}
-                        color={"#5774AC"}
-                        onClick={() => sethaveGstNumber(false)}
+                    <div className={styles.form_field}>
+                      <p className={styles.form_label}>
+                        Nearest Landmark (optional)
+                      </p>
+                      <Field
+                        name="landmark"
+                        placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
+                        className={styles.form_input}
                       />
-                    ) : (
-                      <ToggleOff
-                        color={"#E3E1DC"}
-                        size={29}
-                        onClick={() => sethaveGstNumber(true)}
-                      />
+                    </div>
+
+                    <div
+                      className={`flex flex-col lg:flex-row gap-4 ${styles.form_field}`}>
+                      <div className="lg:w-[48.5%]">
+                        <p className={styles.form_label}>Postal code</p>
+                        <Field
+                          type="number"
+                          onKeyPress={keyPressForContactField}
+                          name="postalCode"
+                          placeholder="Enter 6 digit postal code"
+                          className={styles.form_input}
+                        />
+                        <ErrorMessage name="postalCode">
+                          {msg =>
+                            formik.touched.postalCode && (
+                              <p className={styles.error}>{msg} </p>
+                            )
+                          }
+                        </ErrorMessage>
+                      </div>
+                      <div className="lg:w-[48.5%]">
+                        <p className={styles.form_label}>City</p>
+                        <Field
+                          readOnly
+                          type="text"
+                          name="city"
+                          value={cityName}
+                          placeholder="Enter city"
+                          className={styles.form_input}
+                        />
+                        <ErrorMessage name="city">
+                          {msg =>
+                            formik.touched.city && (
+                              <p className={styles.error}>{msg} </p>
+                            )
+                          }
+                        </ErrorMessage>
+                      </div>
+                    </div>
+                    {isOfflineCustomer !== 1 && (
+                      <button type="submit" className={styles.save_btn}>
+                        Save & Proceed
+                      </button>
                     )}
                   </div>
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
+        <div className={styles.right_div}>
+          {isOfflineCustomer !== 1 && (
+            <div className="gap-6 flex flex-col">
+              <div className={styles.box_wrapper}>
+                <div className={styles.box_wrapper_left_div}>
+                  <WhatsappIcon size={24} color={"#48A06C"} />
+                  <p className={styles.box_desc}>
+                    Opt for Whatsapp notification
+                  </p>
                 </div>
-                {haveGstNumber && (
-                  <>
-                    <div className="mt-4">
-                      <input
-                        className={styles.form_input}
-                        type="number"
-                        placeholder="GST number"
-                        onChange={e => setGstNumber(e.target.value)}
-                      />
+                <div className="cursor-pointer">
+                  {whatsappNotification ? (
+                    <ToggleOn
+                      size={29}
+                      color={"#5774AC"}
+                      onClick={() => setWhatsappNotification(false)}
+                    />
+                  ) : (
+                    <ToggleOff
+                      color={"#E3E1DC"}
+                      size={29}
+                      onClick={() => setWhatsappNotification(true)}
+                    />
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.box_wrapper}>
+                <div className="w-full">
+                  <div className="flex gap-4 justify-between items-center">
+                    <div className={styles.box_wrapper_left_div}>
+                      <span className={styles.hash}>#</span>
+                      <p className={styles.box_desc}>I have a GST number</p>
                     </div>
-                    <div className="mt-4">
-                      <input
-                        className={styles.form_input}
-                        placeholder="Company name"
-                      />
+                    <div className="cursor-pointer">
+                      {haveGstNumber ? (
+                        <ToggleOn
+                          size={29}
+                          color={"#5774AC"}
+                          onClick={() => sethaveGstNumber(false)}
+                        />
+                      ) : (
+                        <ToggleOff
+                          color={"#E3E1DC"}
+                          size={29}
+                          onClick={() => sethaveGstNumber(true)}
+                        />
+                      )}
                     </div>
-                  </>
-                )}
+                  </div>
+                  {haveGstNumber && (
+                    <>
+                      <div className="mt-4">
+                        <input
+                          className={styles.form_input}
+                          type="number"
+                          placeholder="GST number"
+                          onChange={e => setGstNumber(e.target.value)}
+                        />
+                      </div>
+                      <div className="mt-4">
+                        <input
+                          className={styles.form_input}
+                          placeholder="Company name"
+                        />
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              <div className={styles.tenure_info}>
+                <CalendarIcon className={styles.calendar} />
+                <p className={styles.desc}>
+                  Your rental payment and tenure will begin from the date of
+                  delivery
+                </p>
+              </div>
+
+              <div className={styles.kyc_info}>
+                <MdOutlineVerified className={styles.verified_icon} />
+                <p className={styles.desc}>
+                  Once the order has been placed, you might be required to share
+                  a few documents for KYC
+                </p>
               </div>
             </div>
-
-            <div className={styles.tenure_info}>
-              <CalendarIcon className={styles.calendar} />
-              <p className={styles.desc}>
-                Your rental payment and tenure will begin from the date of
-                delivery
-              </p>
-            </div>
-
-            <div className={styles.kyc_info}>
-              <MdOutlineVerified className={styles.verified_icon} />
-              <p className={styles.desc}>
-                Once the order has been placed, you might be required to share a
-                few documents for KYC
-              </p>
-            </div>
-          </div>
-        )}
-
-        <div>
-          <div
-            className={`!mt-0 ${otherStyles.cart_breakup}`}
-            onClick={() => setBreakupDrawer(true)}>
-            <div>
-              <p className={otherStyles.total_text}>Total:</p>
-              <div className={otherStyles.breakup_wrapper}>
-                <p className={otherStyles.view_cart_text}>View cart breakup</p>
-                <ArrowForw
-                  color={"#5774AC"}
-                  className={otherStyles.for_arrow}
-                />
-              </div>
-            </div>
-            <p className={otherStyles.total_amount}>
-              <span className={otherStyles.rupeeIcon}>₹</span>
-              {billBreakup?.finalTotalPrice?.toFixed(2)}
-              {billBreakup?.isMonthly && "/mo"}
-            </p>
-          </div>
-          {breakupDrawer && (
-            <TotalBreakup
-              toggleDrawer={toggleDrawerBreakup}
-              open={breakupDrawer}
-            />
           )}
 
-          <button
-            disabled={
-              (isOfflineCustomer !== 1 && !primaryAddress) ||
-              (haveGstNumber && gstNumber === "")
-            }
-            onClick={() => {
-              if (isOfflineCustomer === 1) {
-                formikRef?.current?.submitForm();
-              } else handlePayment();
-            }}
-            className={`!mt-6 ${
-              haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
-            } ${!primaryAddress && "!cursor-not-allowed"} ${
-              otherStyles.proceed_button
-            }`}>
-            Proceed to Payment
-            <ArrowForw size={19} color={"#222"} />
-          </button>
+          <div>
+            <div
+              className={`!mt-0 ${otherStyles.cart_breakup}`}
+              onClick={() => setBreakupDrawer(true)}>
+              <div>
+                <p className={otherStyles.total_text}>Total:</p>
+                <div className={otherStyles.breakup_wrapper}>
+                  <p className={otherStyles.view_cart_text}>
+                    View cart breakup
+                  </p>
+                  <ArrowForw
+                    color={"#5774AC"}
+                    className={otherStyles.for_arrow}
+                  />
+                </div>
+              </div>
+              <p className={otherStyles.total_amount}>
+                <span className={otherStyles.rupeeIcon}>₹</span>
+                {billBreakup?.finalTotalPrice?.toFixed(2)}
+                {billBreakup?.isMonthly && "/mo"}
+              </p>
+            </div>
+
+            <button
+              disabled={
+                (isOfflineCustomer !== 1 && !primaryAddress) ||
+                (haveGstNumber && gstNumber === "")
+              }
+              onClick={() => {
+                if (isOfflineCustomer === 1) {
+                  formikRef?.current?.submitForm();
+                } else handlePayment();
+              }}
+              className={`!mt-6 ${
+                haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
+              } ${!primaryAddress && "!cursor-not-allowed"} ${
+                otherStyles.proceed_button
+              }`}>
+              Proceed to Payment
+              <ArrowForw size={19} color={"#222"} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

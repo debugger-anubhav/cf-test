@@ -44,6 +44,7 @@ const WhyCitymax = () => {
 
   return (
     <div className={styles.main}>
+      <CityMaxDrawer toggleDrawer={HandleToggleDrawer} open={isDrawerOpen} />
       <h2 className={styles.head}>Why CityMax?</h2>
       <div className={styles.card_wrapper}>
         {cardData.map((item, index) => (
@@ -65,9 +66,6 @@ const WhyCitymax = () => {
           className={styles.forward_arrow}
         />
       </button>
-      {isDrawerOpen && (
-        <CityMaxDrawer toggleDrawer={HandleToggleDrawer} open={isDrawerOpen} />
-      )}
     </div>
   );
 };

@@ -877,29 +877,26 @@ const ProductDetails = ({params}) => {
             )}
           </div>
 
-          {drawerOpen && (
-            <CityshieldDrawer
-              toggleDrawer={toggleDrawer}
-              open={drawerOpen}
-              cityShieldCurrentPrice={cityShieldCurrentPrice}
-              cityShieldOriginalPrice={cityShieldOriginalPrice}
-              cityShieldDiscount={cityShieldDiscount}
-            />
-          )}
+          <CityshieldDrawer
+            toggleDrawer={toggleDrawer}
+            open={drawerOpen}
+            cityShieldCurrentPrice={cityShieldCurrentPrice}
+            cityShieldOriginalPrice={cityShieldOriginalPrice}
+            cityShieldDiscount={cityShieldDiscount}
+          />
         </div>
       </div>
-      {open && (
-        <SideDrawer
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-          endIndex={endIndex}
-          startIndex={startIndex}
-          toggleDrawer={toggleRatingDrawer}
-          open={open}
-          totalReviews={totalReviews}
-          drawerType={"ratings"}
-        />
-      )}
+
+      <SideDrawer
+        setCurrentPage={setCurrentPage}
+        currentPage={currentPage}
+        endIndex={endIndex}
+        startIndex={startIndex}
+        toggleDrawer={toggleRatingDrawer}
+        open={open}
+        totalReviews={totalReviews}
+        drawerType={"ratings"}
+      />
     </div>
   );
 };
