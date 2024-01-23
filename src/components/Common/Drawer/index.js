@@ -158,6 +158,29 @@ export default function CommonDrawer({
           </a>
           <div className={styles.menu_list}>
             <a
+              className="lg:hidden"
+              onClick={() => {
+                if (isLogin) router.push("/usersettings");
+                else {
+                  setState({...state, left: false});
+                  setClick("profile");
+                  toggleLoginModal(true);
+                }
+              }}
+              href={isLogin && "/usersettings"}>
+              <div className={`flex gap-1 items-center ${styles.menu_item}`}>
+                <Image
+                  src={Icons.Profile}
+                  alt="profile-icon"
+                  loading="lazy"
+                  className={`${styles.profile_icon} `}
+                  aria-disabled={true}
+                />
+                <p>Profile</p>
+              </div>
+            </a>
+            <div className={`lg:!hidden ${styles.divider}`}></div>
+            <a
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
                 .toLowerCase()}/rent`}>
@@ -169,7 +192,7 @@ export default function CommonDrawer({
                 All products
               </p>
             </a>
-            <p>demooooooooo</p>
+
             {data?.map((item, index) => (
               <a
                 key={index.toString()}
@@ -189,9 +212,9 @@ export default function CommonDrawer({
             <a href={"/citymax"}>
               <p className={styles.menu_item}>CityMax</p>
             </a>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.menu_list}>
+
+            <div className={styles.divider}></div>
+
             {string.landing_page.header.menuList2?.map((item, index) => (
               <a
                 key={index.toString()}
@@ -206,9 +229,9 @@ export default function CommonDrawer({
                 </p>
               </a>
             ))}
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.menu_list}>
+
+            <div className={styles.divider}></div>
+
             {string.landing_page.header.menuList3?.map((item, index) => {
               return (
                 <>
@@ -218,6 +241,7 @@ export default function CommonDrawer({
                     </a>
                   ) : (
                     <a
+                      className="hidden lg:block"
                       key={index.toString()}
                       onClick={() => {
                         if (isLogin) router.push("/usersettings");
@@ -235,7 +259,7 @@ export default function CommonDrawer({
                     </a>
                   )}
                   {index === 2 && (
-                    <div className={`${styles.divider} mb-6`}></div>
+                    <div className={`!hidden lg:!flex ${styles.divider}`}></div>
                   )}
                 </>
               );

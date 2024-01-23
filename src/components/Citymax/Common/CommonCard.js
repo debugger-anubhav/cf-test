@@ -33,7 +33,9 @@ const CommonCard = ({isHalfYearly, item, plans}) => {
             loading="lazy"
             alt="LeafIcon"
           />
-          {item.product_label}
+          {item.product_label.toLowerCase() === "trending"
+            ? "Popular"
+            : item.product_label}
         </div>
       )}
     </div>
