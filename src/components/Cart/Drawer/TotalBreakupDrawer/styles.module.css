@@ -2,14 +2,14 @@
   @apply w-full md:w-[497px] py-6 md:py-12 px-4 xs:px-7 md:pl-12 md:pr-[75px] font-Poppins overflow-scroll;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90vh] md:!max-h-[100%] md:!h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-[100%] md:!h-full;
   overflow-y: visible !important;
 }
 .head {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
 }
 .close_icon {
-  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[64px] md:-mt-0;
 }
 .breakup_wrapper {
   @apply mt-8;

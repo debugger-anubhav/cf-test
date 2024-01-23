@@ -13,7 +13,8 @@
   @apply bottom-[250px] sm:bottom-[232px] fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center;
 }
 .bottomDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8;
+  @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8 !h-fit;
+  overflow-y: visible !important;
 }
 .head {
   @apply text-45454A text-20 md:text-24 font-medium leading-8 tracking-0.48 font-Poppins;

@@ -13,7 +13,8 @@
   @apply md:bottom-[180px] fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-16 md:-mt-12;
 }
 .bottomDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8 font-Poppins;
+  @apply !rounded-t-[20px] md:!rounded-t-none !px-4 !pt-6 !pb-8 font-Poppins !h-fit;
+  overflow-y: visible !important;
 }
 .header_wrapper {
   @apply flex items-center gap-2;

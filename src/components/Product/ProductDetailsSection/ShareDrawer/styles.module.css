@@ -22,8 +22,9 @@
   border-radius: 20px 20px 0px 0px !important;
 }
 .close_icon {
-  @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12;
+  @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[44px];
 }
 .bottomDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none;
+  @apply !rounded-t-[20px] md:!rounded-t-none !h-fit;
+  overflow-y: visible !important;
 }
