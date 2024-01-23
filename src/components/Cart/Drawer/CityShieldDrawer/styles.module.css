@@ -77,13 +77,11 @@
   @apply w-[80px] flex flex-col items-center;
 }
 
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
   .customDrawer {
     animation: bounceLR 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; /* Apply the animation */
-  }
-}
 
-@keyframes bounceLR {
+/* @keyframes bounceLR {
   0%,
   20%,
   50%,
@@ -106,4 +104,4 @@
   70% {
     transform: translateY(-5px);
   }
-}
+} */

@@ -184,22 +184,18 @@ const OrderDetails = ({setPart, data}) => {
         </div>
       </div>
 
-      {isModalopen && (
-        <ManageSchedule
-          isModalOpen={isModalopen}
-          closeModal={toggleModal}
-          orderId={data?.order_id}
-        />
-      )}
+      <ManageSchedule
+        isModalOpen={isModalopen}
+        closeModal={toggleModal}
+        orderId={data?.order_id}
+      />
 
-      {serviceDrawerOpen && (
-        <ServiceDrawer
-          open={serviceDrawerOpen}
-          toggleDrawer={toggleServiceDrawer}
-          orderId={data?.order_id}
-          invoiceUrl=""
-        />
-      )}
+      <ServiceDrawer
+        open={serviceDrawerOpen}
+        toggleDrawer={toggleServiceDrawer}
+        orderId={data?.order_id}
+        invoiceUrl=""
+      />
 
       <div className="mt-8">
         <OrderSummary

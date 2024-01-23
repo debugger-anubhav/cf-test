@@ -127,12 +127,12 @@ const TryCityMax = () => {
                 />
               </button>
             </div>
-            {isDrawerOpen && (
-              <CityMaxDrawer
-                toggleDrawer={HandleToggleDrawer}
-                open={isDrawerOpen}
-              />
-            )}
+
+            <CityMaxDrawer
+              toggleDrawer={HandleToggleDrawer}
+              open={isDrawerOpen}
+            />
+
             {/* <SideDrawer /> */}
             <hr className={styles.underline} />
           </div>

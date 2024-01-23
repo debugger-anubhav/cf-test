@@ -396,6 +396,26 @@ const CitymaxPlanDetail = () => {
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
       />
+      <ProceedModal
+        closeModal={toggleModal}
+        isModalOpen={openModal}
+        modalCategory={modalCategory}
+        handleAddToCart={handleAddToCart}
+        userIdToUse={userIdToUse}
+      />
+      <CitymaxDetailPageDrawer
+        open={openDrawer}
+        toggleDrawer={toggleDrawer}
+        handleAddItem={handleAddItem}
+        type={drawerType}
+        isHalfYearly={isHalfYearly}
+        slotId={slotId}
+        roomId={roomId}
+        headType={headType}
+        swapProductDetails={swapProductDetails}
+        toggleLoginModal={toggleLoginModal}
+      />
+
       <div
         className={styles.header_wrapper}
         onClick={() => router.push(`/citymax`)}>
@@ -566,31 +586,6 @@ const CitymaxPlanDetail = () => {
             })}
           </div>
         </div>
-
-        {openDrawer && (
-          <CitymaxDetailPageDrawer
-            open={openDrawer}
-            toggleDrawer={toggleDrawer}
-            handleAddItem={handleAddItem}
-            type={drawerType}
-            isHalfYearly={isHalfYearly}
-            slotId={slotId}
-            roomId={roomId}
-            headType={headType}
-            swapProductDetails={swapProductDetails}
-            toggleLoginModal={toggleLoginModal}
-          />
-        )}
-
-        {openModal && (
-          <ProceedModal
-            closeModal={toggleModal}
-            isModalOpen={openModal}
-            modalCategory={modalCategory}
-            handleAddToCart={handleAddToCart}
-            userIdToUse={userIdToUse}
-          />
-        )}
 
         <div className={styles.right_div}>
           <div className={styles.monthly_toggler}>

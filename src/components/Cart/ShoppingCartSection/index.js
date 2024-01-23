@@ -357,6 +357,35 @@ const ShoppingCartSection = () => {
           handleChangeRoute={handleChangeRoute}
           isSetupProfile={isSetupProfile}
         />
+
+        <CouponDrawer
+          toggleDrawer={toggleDrawerCoupon}
+          open={couponDrawerOpen}
+          applyCouponCode={val => {
+            applyCouponCode(val);
+            fetchBill();
+          }}
+          isMonthly={isMonthly}
+          cityId={cityId}
+          totalAmount={totalAmount}
+        />
+
+        <CityShieldDrawerForCart
+          cityShieldCurrentPrice={cityShieldDiscountAmount}
+          cityShieldOriginalPrice={cityShieldOriginalAmount}
+          cityShieldDiscount={cityShieldDiscountPercentage}
+          toggleDrawer={toggleDrawerCityShield}
+          open={cityShieldDrawerOpen}
+          toggleCheckbox={bool => setIsChecked(bool)}
+        />
+
+        <TotalBreakup
+          toggleDrawer={toggleDrawerBreakup}
+          open={breakupDrawer}
+          code={code}
+          isCouponApplied={isCouponApplied}
+        />
+
         <div className={styles.main_container}>
           <div className={styles.left_div} id="leftDiv">
             <h1 className={styles.head}>Shopping cart ({count})</h1>
@@ -589,16 +618,6 @@ const ShoppingCartSection = () => {
                         />
                       </div>
                     )}
-                    {cityShieldDrawerOpen && (
-                      <CityShieldDrawerForCart
-                        cityShieldCurrentPrice={cityShieldDiscountAmount}
-                        cityShieldOriginalPrice={cityShieldOriginalAmount}
-                        cityShieldDiscount={cityShieldDiscountPercentage}
-                        toggleDrawer={toggleDrawerCityShield}
-                        open={cityShieldDrawerOpen}
-                        toggleCheckbox={bool => setIsChecked(bool)}
-                      />
-                    )}
                   </div>
                 </div>
 
@@ -696,20 +715,6 @@ const ShoppingCartSection = () => {
                 </div>
               )}
 
-              {couponDrawerOpen && (
-                <CouponDrawer
-                  toggleDrawer={toggleDrawerCoupon}
-                  open={couponDrawerOpen}
-                  applyCouponCode={val => {
-                    applyCouponCode(val);
-                    fetchBill();
-                  }}
-                  isMonthly={isMonthly}
-                  cityId={cityId}
-                  totalAmount={totalAmount}
-                />
-              )}
-
               {arr[0]?.is_frp !== 1 && showMonthlyToggle && (
                 <div className={styles.payment_mode}>
                   <h2 className={styles.pref_mode_head}>
@@ -796,15 +801,6 @@ const ShoppingCartSection = () => {
                   {isMonthly ? "/mo" : ""}
                 </p>
               </div>
-
-              {breakupDrawer && (
-                <TotalBreakup
-                  toggleDrawer={toggleDrawerBreakup}
-                  open={breakupDrawer}
-                  code={code}
-                  isCouponApplied={isCouponApplied}
-                />
-              )}
 
               <button
                 className={styles.proceed_button}

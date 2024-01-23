@@ -320,7 +320,7 @@ export default function CommonDrawer({
                       else {
                         console.log("elsee");
                         // toggleDrawer("bottom", false);
-                        setState({...state, left: false});
+                        setState({...state, left: false, bottom: false});
                         setCity(city);
                         toggleEmptyCartModal(true);
                       }

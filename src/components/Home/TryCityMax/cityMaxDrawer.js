@@ -69,8 +69,8 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
       anchor={isBottomDrawer ? "bottom" : "right"}
       open={open}
       onClose={toggleDrawer}
-      classes={{paper: styles.customDrawer}}>
-      {" "}
+      classes={{paper: styles.customDrawer}}
+      transitionDuration={{enter: 400, exit: 200}}>
       <div className={styles.drawer_main_container}>
         <div className={styles.close_icon} onClick={toggleDrawer}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />

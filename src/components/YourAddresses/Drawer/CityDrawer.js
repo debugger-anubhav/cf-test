@@ -35,7 +35,8 @@ const CityDrawer = ({
       anchor={isBottomDrawer ? "bottom" : "left"}
       open={open}
       onClose={toggleDrawer}
-      classes={{paper: customStyles.customDrawer}}>
+      classes={{paper: customStyles.customDrawer}}
+      transitionDuration={{enter: 400, exit: 200}}>
       <div className={`${customStyles.drawer_wrapper} `}>
         {isBottomDrawer ? (
           <div onClick={toggleDrawer} className={customStyles.close_icon}>

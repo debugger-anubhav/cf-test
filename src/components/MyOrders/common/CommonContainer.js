@@ -101,14 +101,12 @@ const CommonContainer = ({
           </div>
         </div>
 
-        {serviceDrawerOpen && (
-          <ServiceDrawer
-            open={serviceDrawerOpen}
-            toggleDrawer={toggleServiceDrawer}
-            orderId={item.dealCodeNumber}
-            invoiceUrl={item?.url}
-          />
-        )}
+        <ServiceDrawer
+          open={serviceDrawerOpen}
+          toggleDrawer={toggleServiceDrawer}
+          orderId={item.dealCodeNumber}
+          invoiceUrl={item?.url}
+        />
 
         <div
           className={styles.lower_box}

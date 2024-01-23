@@ -176,14 +176,13 @@ const OrderSummary = ({
                   ))}
                 </>
               )}
-              {reviewDrawer && (
-                <ReviewDrawer
-                  toggleDrawer={toggleReviewDrawer}
-                  open={reviewDrawer}
-                  productImage={item?.product_image?.split(",")[0]}
-                  productName={item?.product_name}
-                />
-              )}
+
+              <ReviewDrawer
+                toggleDrawer={toggleReviewDrawer}
+                open={reviewDrawer}
+                productImage={item?.product_image?.split(",")[0]}
+                productName={item?.product_name}
+              />
             </div>
           ))}
         </div>
@@ -241,12 +240,7 @@ const OrderSummary = ({
           )}
         </div>
 
-        {breakupDrawer && (
-          <TotalBreakup
-            toggleDrawer={toggleDrawerBreakup}
-            open={breakupDrawer}
-          />
-        )}
+        <TotalBreakup toggleDrawer={toggleDrawerBreakup} open={breakupDrawer} />
       </div>
     </div>
   );
