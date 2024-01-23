@@ -45,10 +45,10 @@ import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
 let pageDescription = "";
-export const metadata = {
-  title: "",
-  description: "",
-};
+// export const metadata = {
+//   title: "",
+//   description: "",
+// };
 export default function SpecificPageLayout({children, productName}) {
   const pageTitle = `Rent Furniture Online - ${productName}`;
   pageDescription = `Furniture Rental - Rent ${productName} Online in India - by Cityfurnish. Door Step Delivery, High-Quality Products, Easy Terms.`;

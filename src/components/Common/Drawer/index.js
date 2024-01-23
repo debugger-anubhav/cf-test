@@ -169,6 +169,7 @@ export default function CommonDrawer({
                 All products
               </p>
             </a>
+            <p>demooooooooo</p>
             {data?.map((item, index) => (
               <a
                 key={index.toString()}
