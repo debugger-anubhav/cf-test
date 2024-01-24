@@ -11,8 +11,8 @@ import Paper from "@mui/material/Paper";
 import {DownArrowUnfilled} from "@/assets/icon";
 import Accordian from "./Accordian";
 import PastpaymentDrawer from "./Drawer/PastpaymentDrawer";
-// import {getLocalStorage} from "@/constants/constant";
-// import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
 import {baseURL} from "@/network/axios";
@@ -32,8 +32,8 @@ const InvoicePage = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
 
-  // const userId = decrypt(getLocalStorage("_ga"));
-  const userId = 85777;
+  const userId = decrypt(getLocalStorage("_ga"));
+  // const userId = 85777;
 
   const getInvoicesData = () => {
     axios
