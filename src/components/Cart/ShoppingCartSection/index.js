@@ -85,7 +85,6 @@ const ShoppingCartSection = () => {
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  console.log(isLogin, "wjhei");
   const userIdToUse = isLogin ? userId : tempUserId;
 
   useEffect(() => {
@@ -143,8 +142,6 @@ const ShoppingCartSection = () => {
     axios
       .get(baseURL + endPoints.addToCart.fetchMonthlyCities)
       .then(res => {
-        console.log(res, "res in cities");
-        console.log(cityId, "cityid");
         const isMonthlyCity = res?.data?.data.includes(cityId.toString());
         console.log(isMonthlyCity, "bool");
         setShowMonthlyToggle(isMonthlyCity);
@@ -206,12 +203,10 @@ const ShoppingCartSection = () => {
     console.log(maxQuantity, "maxxxx");
     let updatedItems;
     if (newQuantity < 1) {
-      console.log(1);
       setProductId(productid);
       setItemId(itemid);
       openModal();
     } else if (newQuantity > maxQuantity) {
-      console.log(2);
       showToastNotification(
         "Sorry, We have limited quantity available for this product.",
         3,
@@ -297,7 +292,6 @@ const ShoppingCartSection = () => {
   };
 
   const fetchUserDetails = async () => {
-    // console.log(useridFromStorage, "uiwii");
     try {
       const response = await axios.get(
         baseURL + endPoints.profileSettingPage.getUserDetails(userId),

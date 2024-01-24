@@ -33,7 +33,6 @@ export default function CFCoins() {
     },
   ];
   const getTransactions = () => {
-    console.log("first");
     axios
       .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
       // .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))

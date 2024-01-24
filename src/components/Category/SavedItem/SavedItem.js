@@ -43,7 +43,6 @@ const SavedItem = () => {
   // );
 
   const getSavedItems = isAuthenticated => {
-    console.log(isAuthenticated, "isAuthenticated");
     axios
       .get(
         baseURL +
@@ -148,7 +147,7 @@ const SavedItem = () => {
                 }
                 discount={`${Math.round(
                   ((item?.price - item?.fc_product_sale_price) * 100) /
-                    item?.fc_product_sale_price,
+                    item?.price,
                 ).toFixed(0)}%`}
                 productID={item?.id}
                 seourl={item?.seourl}

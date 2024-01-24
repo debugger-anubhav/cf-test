@@ -91,7 +91,6 @@ const Header = () => {
   };
 
   const toggleEmptyCartModal = bool => {
-    console.log("inn");
     dispatch(reduxSetModalState(bool));
     setEmptyModal(bool);
   };

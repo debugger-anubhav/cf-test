@@ -64,7 +64,6 @@ const AddressSection = () => {
     state => state.cartPageData.isOfflineCustomer,
   );
 
-  // console.log(isOfflineCustomer, "isOfflineCustomeruiiui pagll");
   const addressArray = data.savedAddresses;
 
   const validationSchema = Yup.object({
@@ -132,7 +131,6 @@ const AddressSection = () => {
         const newPrimaryAddress = res?.data?.data.find(
           item => item.city === cityName,
         );
-        console.log(newPrimaryAddress, "primaryy addresss");
         setPrimaryAddress(newPrimaryAddress);
       })
       .catch(err => console.log(err));
@@ -195,7 +193,6 @@ const AddressSection = () => {
       isOptWhatsapp: whatsappNotification,
       gstNumber,
     });
-    console.log(result.data, "make payment api data");
     if (!result) {
       alert("Server error. Are you online?");
       return;

@@ -47,14 +47,9 @@ const ProductsDrawer = ({
     fetchAssociatedSlotData();
   }, []);
 
-  console.log(selectedIndexes, "selectedIndexes");
-
   const handleThumbnailClick = (setIndex, index) => {
-    console.log("inthumbail click", selectedIndexes);
     const newSelectedIndexes = [...selectedIndexes];
-    console.log(newSelectedIndexes, "11");
     newSelectedIndexes[setIndex] = index;
-    console.log(newSelectedIndexes, selectedIndexes, "chanes dikh rhe h kyaa");
     setSelectedIndexes(newSelectedIndexes);
   };
 
