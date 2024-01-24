@@ -143,7 +143,7 @@ const ShoppingCartSection = () => {
       .get(baseURL + endPoints.addToCart.fetchMonthlyCities)
       .then(res => {
         const isMonthlyCity = res?.data?.data.includes(cityId.toString());
-        console.log(isMonthlyCity, "bool");
+
         setShowMonthlyToggle(isMonthlyCity);
         if (isMonthlyCity === false) setLocalStorage("isMonthly", false);
       })
@@ -200,7 +200,6 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
-    console.log(maxQuantity, "maxxxx");
     let updatedItems;
     if (newQuantity < 1) {
       setProductId(productid);
@@ -298,7 +297,7 @@ const ShoppingCartSection = () => {
       );
 
       setUserDetails(response?.data?.data);
-      console.log(response?.data?.data, "userrrrr");
+
       dispatch(
         setIsOfflineCustomer(parseInt(response?.data?.data?.is_offline_user)),
       );
@@ -323,6 +322,10 @@ const ShoppingCartSection = () => {
   const handleChangeRoute = () => {
     dispatch(setShoppingCartTab(1));
   };
+
+  const isOfflineCustomer = useSelector(
+    state => state.cartPageData.isOfflineCustomer,
+  );
 
   return (
     showData &&
@@ -496,7 +499,8 @@ const ShoppingCartSection = () => {
                                 {parseInt(item?.price).toFixed(0)}
                               </p>
 
-                              {item?.attr_price > item?.price && (
+                              {parseInt(item?.attr_price) >
+                                parseInt(item?.price) && (
                                 <p className={styles.originalPrice}>
                                   <span className={styles.rupeeIcon}>₹</span>
                                   {item?.attr_price}
@@ -655,45 +659,43 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
-              {arr[0]?.is_frp !== 1 &&
-                isLogin &&
-                !userDetails?.is_offline_user && (
-                  <div className={styles.coins_div}>
-                    <div className={styles.coins_left_div}>
-                      <div>
-                        <img
-                          src={`${categoryIconsUrl + "cf_coin.svg"}`}
-                          className={`${styles.coin} pointer-events-none`}
-                          loading="lazy"
-                        />
-                      </div>
-                      <div>
-                        <p className={styles.coin_txt}>Use Cityfurnish coins</p>
-                        <p className={styles.avail_bal}>
-                          Available balance:{" "}
-                          {isCoinApplied
-                            ? availCoin - billBreakup?.coinsUsed
-                            : availCoin}
-                        </p>
-                      </div>
+              {arr[0]?.is_frp !== 1 && isLogin && isOfflineCustomer === 0 && (
+                <div className={styles.coins_div}>
+                  <div className={styles.coins_left_div}>
+                    <div>
+                      <img
+                        src={`${categoryIconsUrl + "cf_coin.svg"}`}
+                        className={`${styles.coin} pointer-events-none`}
+                        loading="lazy"
+                      />
                     </div>
-                    <div className="cursor-pointer">
-                      {isCoinApplied ? (
-                        <ToggleOn
-                          size={29}
-                          color={"#5774AC"}
-                          onClick={() => setIsCoinApplied(false)}
-                        />
-                      ) : (
-                        <ToggleOff
-                          color={"#E3E1DC"}
-                          size={29}
-                          onClick={() => setIsCoinApplied(true)}
-                        />
-                      )}
+                    <div>
+                      <p className={styles.coin_txt}>Use Cityfurnish coins</p>
+                      <p className={styles.avail_bal}>
+                        Available balance:{" "}
+                        {isCoinApplied
+                          ? availCoin - billBreakup?.coinsUsed
+                          : availCoin}
+                      </p>
                     </div>
                   </div>
-                )}
+                  <div className="cursor-pointer">
+                    {isCoinApplied ? (
+                      <ToggleOn
+                        size={29}
+                        color={"#5774AC"}
+                        onClick={() => setIsCoinApplied(false)}
+                      />
+                    ) : (
+                      <ToggleOff
+                        color={"#E3E1DC"}
+                        size={29}
+                        onClick={() => setIsCoinApplied(true)}
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
 
               {arr[0]?.is_frp !== 1 && (
                 <div

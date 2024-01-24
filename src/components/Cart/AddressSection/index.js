@@ -129,7 +129,7 @@ const AddressSection = () => {
       .then(res => {
         dispatch(getSavedAddress(res?.data?.data));
         const newPrimaryAddress = res?.data?.data.find(item =>
-          item.city.includes(cityName),
+          cityName.includes(item.city),
         );
         setPrimaryAddress(newPrimaryAddress);
       })

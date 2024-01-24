@@ -9,10 +9,12 @@ import RetainerInvoice from "./retainerInvoice/index";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 const PaymentPage = () => {
-  // const userId = decrypt(getLocalStorage("_ga"));
-  const userId = 85777;
+  const userId = decrypt(getLocalStorage("_ga"));
+  // const userId = 85777;
 
   const [paymentDetails, setPaymentDetails] = useState();
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
@@ -36,117 +38,6 @@ const PaymentPage = () => {
   }, []);
 
   console.log(paymentDetails, "paymentdetailss");
-
-  // const rows = [
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Payment Due",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Payment Due",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   {
-  //     invoiceDate: "2023-10-01",
-  //     invoiceNumber: "INV-KR-999999999",
-  //     orderNumber: "9999999999",
-  //     invoiceAmount: "₹9,999",
-  //     amountDue: 100.0,
-  //     status: "Paid",
-  //   },
-  //   // Add more rows as needed
-  // ];
-  // const handleShowMore = () => {
-  //   setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
-  // };
   return (
     <div className={styles.main_container}>
       <div className={styles.doc_side_bar} style={{height: "initial"}}>
