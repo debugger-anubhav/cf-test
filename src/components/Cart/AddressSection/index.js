@@ -319,7 +319,7 @@ const AddressSection = () => {
               <div
                 className={styles.saved_address_div}
                 onClick={toggleAddressDrawer}>
-                {cityName !== primaryAddress?.city && (
+                {!cityName.includes(primaryAddress?.city) && (
                   <div className={styles.not_belong_wrapper}>
                     <p className={styles.not_belong_text}>
                       Address does not belong to selected city
