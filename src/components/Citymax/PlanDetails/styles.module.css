@@ -1,5 +1,5 @@
 .main {
-  @apply font-Poppins w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 xl:mt-11 mb-12 xl:mb-20;
+  @apply font-Poppins w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] pl-4 xl:mt-11 mb-12 xl:mb-20;
 }
 .header_wrapper {
   @apply flex gap-2 items-center cursor-pointer;
@@ -17,10 +17,10 @@
   @apply text-45454A text-20 xl:text-32 font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;
 }
 .tag_line {
-  @apply text-9A9AA2 text-14 xl:text-16 font-medium leading-5 tracking-desc xl:tracking-0.3;
+  @apply text-9A9AA2 text-14 xl:text-16 font-medium leading-5 tracking-desc xl:tracking-0.3 mr-4 md:mr-0;
 }
 .right_div {
-  @apply flex flex-col gap-4 xl:gap-6 mt-8 xl:-mt-16;
+  @apply flex flex-col gap-4 xl:gap-6 mt-8 xl:-mt-16 pr-4 md:pr-0;
 }
 .monthly_toggler {
   @apply p-1 flex items-center justify-between bg-[#747474] rounded-xl w-fit h-[44px];
@@ -53,13 +53,13 @@
   @apply font-Inter;
 }
 .proceed_btn {
-  @apply bg-F6B704 rounded-lg flex justify-center w-full xs1:w-[328px] xl:w-full items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14;
+  @apply bg-F6B704 rounded-lg flex justify-center w-full xs1:w-[328px] xl:w-full items-center gap-[10px] text-14 xl:text-16 leading-5 text-222 font-medium h-12 xl:h-14 mr-4 md:mr-0;
 }
 .plans_wrapper {
   @apply w-full xs1:w-fit xl:w-full mt-8 xl:mt-12 flex flex-col gap-8 xl:gap-12;
 }
 .type_wrapper {
-  @apply flex justify-between items-center;
+  @apply flex justify-between items-center mr-4 md:mr-0;
 }
 .type_txt {
   @apply text-16 xl:text-20 text-45454A font-medium tracking-0.3 xl:tracking-0.4;
@@ -74,7 +74,7 @@
   @apply w-5 h-5 xl:w-6 xl:h-6 cursor-pointer;
 }
 .amen_wrapper {
-  @apply flex gap-4 xl:gap-6 mt-6 xl:mt-8 w-full overflow-scroll;
+  @apply flex gap-4 xl:gap-6 mt-6 xl:mt-8 w-full overflow-scroll pr-4 md:pr-0;
 }
 .slot {
   @apply min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px];
