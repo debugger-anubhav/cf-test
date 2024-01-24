@@ -141,8 +141,6 @@ const CitymaxPlanDetail = () => {
     getRoomData();
   }, []);
 
-  // console.log(planDetailsArray, "srrrrrr");
-
   const handleSelectItem = (item, slot, headType) => {
     setRoomId(item?.fc_frp_room?.id);
     setSlotId(slot.slot_id);

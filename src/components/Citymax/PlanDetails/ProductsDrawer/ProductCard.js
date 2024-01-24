@@ -64,7 +64,6 @@ const ProductCard = ({
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
     if (isAuthenticated === false) {
-      console.log("inside false");
       toggleDrawer();
       toggleLoginModal(true);
     } else {

@@ -309,7 +309,6 @@ export default function CommonDrawer({
             <div
               className={`${styles.city_container} justify-center sm:justify-start items-center`}>
               {Cities?.map((city, index) => {
-                // console.log(city, "cityyy");
                 return (
                   <div
                     className={`${styles.city_wrapper}
@@ -318,7 +317,6 @@ export default function CommonDrawer({
                     onClick={() => {
                       if (cartItemsLength < 1) handleCityChange(city, index);
                       else {
-                        console.log("elsee");
                         // toggleDrawer("bottom", false);
                         setState({...state, left: false, bottom: false});
                         setCity(city);

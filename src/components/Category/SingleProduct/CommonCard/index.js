@@ -124,12 +124,9 @@ const CategoryCard = ({
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === false) {
       toggleLoginModal(true);
     } else addToWishlist();
-
-    // dispatch(addRemoveWhishListitems(!inWishList));
   };
 
   useEffect(() => {

@@ -43,7 +43,6 @@ const SavedItem = () => {
   // );
 
   const getSavedItems = isAuthenticated => {
-    console.log(isAuthenticated, "isAuthenticated");
     axios
       .get(
         baseURL +
