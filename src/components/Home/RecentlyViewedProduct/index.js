@@ -143,7 +143,7 @@ const RecentlyViewedProduct = ({page}) => {
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.product_sale_price) * 100) /
-                            item?.product_sale_price,
+                            item?.price,
                         ).toFixed(0)}%`}
                         originalPrice={item?.price}
                         currentPrice={item?.product_sale_price}

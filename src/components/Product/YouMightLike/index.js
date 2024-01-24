@@ -108,7 +108,7 @@ const YouMightLike = ({heading, isbg, params}) => {
                   productPageImagesBaseUrl + item?.image?.split(",")[0]
                 }`}
                 discount={`${Math.round(
-                  ((item?.price - item?.sale_price) * 100) / item?.sale_price,
+                  ((item?.price - item?.sale_price) * 100) / item?.price,
                 ).toFixed(0)}%`}
                 originalPrice={item?.price}
                 currentPrice={item?.sale_price}
