@@ -80,6 +80,8 @@ const ProductList = ({params}) => {
                           item?.image?.split(",")[0]
                         }`}
                         productImageBaseUrl
+                        showincludedItem={item?.product_label}
+                        itemIncluded={item?.subProduct.length}
                         desc={item?.product_name}
                         originalPrice={item?.price}
                         soldOut={item?.pq_quantity > 0}
@@ -118,6 +120,8 @@ const ProductList = ({params}) => {
                         }`}
                         productImageBaseUrl
                         desc={item?.product_name}
+                        itemIncluded={item?.subProduct.length}
+                        showincludedItem={item?.product_label}
                         originalPrice={item?.price}
                         soldOut={item?.pq_quantity > 0}
                         currentPrice={item?.fc_product_sale_price}

@@ -29,7 +29,6 @@ const ProductCard = ({
   const [deleteIconClick, setDeleteIconClick] = React.useState(false);
   const [isHovered, setIsHovered] = React.useState(false);
   const [hoverCard, setHoverCard] = useState(false);
-
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
@@ -98,13 +97,26 @@ const ProductCard = ({
               }
           `}
             />
-            {showincludedItem && (
+            {/* {showincludedItem && (
               <div className={styles.item_included_container}>
                 <p
                   className={
                     styles.item_icluded_text
                   }>{`${itemIncluded} items included`}</p>
               </div>
+            )} */}
+            {showincludedItem === "Trending" ? (
+              <div className={`${styles.trending_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>POPULAR</p>
+              </div>
+            ) : showincludedItem === "New Launch" ? (
+              <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>NEW LAUNCH</p>
+              </div>
+            ) : (
+              <div className="hidden"></div>
             )}
             {!soldOut && (
               <div className={styles.soldout_tag}>
