@@ -269,7 +269,7 @@ const AddressSection = () => {
       state: CityToStateMapping[cityName] || "",
       postal_code: values.postalCode,
       city: cityName,
-      rental_amount: 1300,
+      rental_amount: billBreakup?.finalTotalPrice?.toFixed(2),
       cf_care_option: data.isCityShield ? 1 : 0,
       order_type: values.orderType,
       order_number: values.orderNumber || "",
