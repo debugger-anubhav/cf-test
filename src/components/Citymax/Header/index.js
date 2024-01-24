@@ -271,7 +271,7 @@ const CitymaxHeader = ({zIndex}) => {
       <div className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}>
         <div className={styles.header_wrapper}>
           <div className={styles.header_left_wrapper}>
-            <div onClick={toggleDrawer}>
+            <div onClick={toggleDrawer} className="cursor-pointer">
               <Image
                 src={Icons.Menu}
                 alt="menu-icon"
