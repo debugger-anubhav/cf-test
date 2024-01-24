@@ -11,7 +11,7 @@
   @apply mt-8 flex flex-col gap-6 xl:gap-8;
 }
 .single_product_wrapper {
-  @apply w-fit lg:w-[450px] xl:w-[537px] xl:h-[98px] flex gap-2 md:gap-4 xl:gap-6;
+  @apply w-fit lg:w-[450px] xl:w-[537px]  flex gap-2 md:gap-4 xl:gap-6;
 }
 .img_div {
   @apply cursor-pointer min-w-[96px] max-w-[96px] h-[71px] md:min-w-[112px] md:max-w-[112px] md:h-[80px]  xl:min-w-[132px] xl:max-w-[132px] xl:h-[98px];
@@ -23,7 +23,7 @@
   @apply flex gap-2 xl:gap-4;
 }
 .product_name {
-  @apply cursor-pointer text-16 xl:text-20 w-[192px] xl:w-[321px] macbook:w-[337px] h-12 xl:h-fit leading-6 tracking-0.3 xl:tracking-0.4 text-45454A font-medium;
+  @apply cursor-pointer text-16 xl:text-20 w-[192px] xl:w-[321px] macbook:w-[337px] h-12 lg:h-fit leading-6 tracking-0.3 xl:tracking-0.4 text-45454A font-medium;
 }
 .price_div {
   @apply flex -ml-[104px] md:-ml-[128px] lg:-ml-0 mt-[39px] md:mt-[45px] lg:mt-4 items-center;
