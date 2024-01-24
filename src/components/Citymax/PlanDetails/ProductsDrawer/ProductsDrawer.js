@@ -6,7 +6,7 @@ import {useParams} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {productImageBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {SwapIcon} from "@/assets/icon";
 
 const ProductsDrawer = ({
@@ -22,12 +22,13 @@ const ProductsDrawer = ({
   const [upgradedProductsArr, setUpgradedProductsArr] = useState();
   const [selectedIndexes, setSelectedIndexes] = useState();
   const params = useParams();
+  const cityId = getLocalStorage("cityId");
   const fetchAssociatedSlotData = () => {
     const body = {
       product_id: params.planId,
       room_id: roomId,
       slot_id: slotId,
-      cityId: 46,
+      cityId,
     };
     axios
       .post(baseURL + endPoints.cityMaxPage.getAssociateSlotData, body)

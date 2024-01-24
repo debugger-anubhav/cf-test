@@ -2,7 +2,8 @@
   @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between;
 }
 .left_div {
-  @apply lg:h-[100vh] xl:h-[800px] lg:overflow-y-scroll lg:overflow-x-hidden;
+  @apply pb-6;
+  /* @apply lg:h-[100vh] xl:h-[800px] lg:overflow-y-scroll lg:overflow-x-hidden; */
 }
 .head {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;

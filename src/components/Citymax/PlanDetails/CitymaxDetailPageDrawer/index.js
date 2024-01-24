@@ -15,6 +15,7 @@ const CitymaxDetailPageDrawer = ({
   roomId,
   swapProductDetails,
   toggleLoginModal,
+  isHalfYearly,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
@@ -57,7 +58,7 @@ const CitymaxDetailPageDrawer = ({
               toggleDrawer={toggleDrawer}
             />
           ) : (
-            <ChangePlanDrawer />
+            <ChangePlanDrawer isHalfYearly={isHalfYearly} />
           )}
         </div>
       </Drawer>
