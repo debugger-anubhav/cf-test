@@ -128,8 +128,8 @@ const AddressSection = () => {
       .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
         dispatch(getSavedAddress(res?.data?.data));
-        const newPrimaryAddress = res?.data?.data.find(
-          item => item.city === cityName,
+        const newPrimaryAddress = res?.data?.data.find(item =>
+          item.city.includes(cityName),
         );
         setPrimaryAddress(newPrimaryAddress);
       })

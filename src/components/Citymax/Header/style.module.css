@@ -9,7 +9,7 @@
   @apply cursor-pointer relative z-[-1] flex xl:w-10 xl:h-10 lg:w-8 lg:h-8 mobile:w-6 mobile:h-6 w-4 h-4 min-h-[16px] min-w-[16px] items-center;
 }
 .logo {
-  @apply w-[84px] h-5 xl:w-[123px] xl:h-[30px] cursor-pointer;
+  @apply w-[84px] h-5 xl:w-[188px] xl:h-[44px] cursor-pointer;
 }
 .home_icon {
   @apply w-5 h-[19px];

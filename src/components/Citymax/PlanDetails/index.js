@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import styles from "./styles.module.css";
 import {useParams, useRouter} from "next/navigation";
 import {
@@ -65,6 +65,7 @@ const CitymaxPlanDetail = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [hoveredItem, setHoveredItem] = useState({rowIndex: -1, itemIndex: -1});
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  // const [isDumy, setIsDumy] = React.useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -77,6 +78,30 @@ const CitymaxPlanDetail = () => {
       setIsSmallScreen(false);
     }
   }, []);
+
+  const [isScrolling, setIsScrolling] = useState(false);
+  const [startX, setStartX] = useState(null);
+  const scrollContainerRef = useRef(null);
+
+  const handleMouseDown = e => {
+    setIsScrolling(true);
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMove = e => {
+    if (!isScrolling) return;
+
+    const deltaX = e.clientX - startX;
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollLeft -= deltaX;
+    }
+
+    setStartX(e.clientX);
+  };
+
+  const handleMouseUp = () => {
+    setIsScrolling(false);
+  };
 
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
@@ -490,11 +515,20 @@ const CitymaxPlanDetail = () => {
                       </div>
                     )} */}
 
-                    <div className={styles.amen_wrapper}>
+                    <div
+                      className={styles.amen_wrapper}
+                      ref={scrollContainerRef}
+                      // onMouseOver={()=>{
+                      //   handleScrolling()
+                      // }}
+                      onMouseDown={handleMouseDown}
+                      onMouseMove={handleMouseMove}
+                      onMouseUp={handleMouseUp}
+                      onMouseLeave={handleMouseUp}>
                       {item?.fc_frp_room?.fc_frp_slot_associations?.map(
                         (t, i) => {
                           return (
-                            <div key={i} className={styles.slot}>
+                            <div key={i} className={`${styles.slot}`}>
                               {t.selectedProduct ? (
                                 <div
                                   className={`w-full h-full ${
