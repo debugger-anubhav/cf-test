@@ -118,7 +118,7 @@
   @apply flex flex-col items-center w-full justify-center;
 }
 .customDrawer {
-  @apply !rounded-t-[20px] md:!rounded-t-none !overflow-y-visible max-h-[90%] md:max-h-full;
+  @apply !rounded-t-[20px] md:!rounded-t-none !overflow-y-visible !max-h-[90%] md:!max-h-full;
 }
 .close_icon {
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
