@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
 import {useParams, useRouter} from "next/navigation";
 import {
@@ -65,7 +65,6 @@ const CitymaxPlanDetail = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [hoveredItem, setHoveredItem] = useState({rowIndex: -1, itemIndex: -1});
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  // const [isDumy, setIsDumy] = React.useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -79,28 +78,25 @@ const CitymaxPlanDetail = () => {
     }
   }, []);
 
-  const [isScrolling, setIsScrolling] = useState(false);
-  const [startX, setStartX] = useState(null);
-  const scrollContainerRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const handleMouseDown = e => {
-    setIsScrolling(true);
-    setStartX(e.clientX);
+    setIsDragging(true);
+    setStartX(e.pageX - e.currentTarget.offsetLeft);
+    setScrollLeft(e.currentTarget.scrollLeft);
   };
 
   const handleMouseMove = e => {
-    if (!isScrolling) return;
-
-    const deltaX = e.clientX - startX;
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollLeft -= deltaX;
-    }
-
-    setStartX(e.clientX);
+    if (!isDragging) return;
+    const x = e.pageX - e.currentTarget.offsetLeft;
+    const walk = (x - startX) * 3;
+    e.currentTarget.scrollLeft = scrollLeft - walk;
   };
 
   const handleMouseUp = () => {
-    setIsScrolling(false);
+    setIsDragging(false);
   };
 
   const validateAuth = async () => {
@@ -516,11 +512,7 @@ const CitymaxPlanDetail = () => {
                     )} */}
 
                     <div
-                      className={styles.amen_wrapper}
-                      ref={scrollContainerRef}
-                      // onMouseOver={()=>{
-                      //   handleScrolling()
-                      // }}
+                      className={`${styles.amen_wrapper}`}
                       onMouseDown={handleMouseDown}
                       onMouseMove={handleMouseMove}
                       onMouseUp={handleMouseUp}
