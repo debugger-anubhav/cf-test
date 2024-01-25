@@ -38,7 +38,7 @@
   @apply flex gap-2 sm:gap-4 xl:gap-8 mt-8 items-center;
 }
 .img_div {
-  @apply w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] flex;
+  @apply w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] flex 3xl:w-full 3xl:h-full;
 }
 .btn {
   @apply w-full mt-8 px-8 font-Poppins justify-center text-14 lg:text-16 flex items-center text-71717A font-medium h-[48px] lg:h-14 rounded-lg border-2 border-71717A;
