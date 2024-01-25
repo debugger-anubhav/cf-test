@@ -62,13 +62,13 @@
   @apply text-45454A text-16 font-medium leading-6 pb-2;
 }
 .list {
-  @apply list-none flex items-baseline gap-2;
+  @apply list-none flex gap-2;
 }
 .points_item {
   @apply text-71717A text-14 xl:text-16 leading-normal xl:leading-6;
 }
 .dot {
-  @apply px-[2px] w-1 h-1 rounded-full bg-71717A;
+  @apply px-[2px] w-1 h-1 rounded-full bg-71717A mt-[10px];
 }
 .rupeeIcon {
   @apply font-Inter;

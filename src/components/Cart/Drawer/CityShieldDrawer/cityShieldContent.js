@@ -31,7 +31,7 @@ const CityShieldContent = ({
     "Burglary or theft of the product(s)",
   ];
   return (
-    <div className="h-[100vh] overflow-scroll pb-[200px] md:pb-0">
+    <div className="h-[100vh] 2xl:h-full overflow-scroll pb-[200px] md:pb-0">
       <p className={styles.value_added_txt}>Value added service</p>
       <div className={styles.flexx}>
         <VerifyIcon size={30} color={"#2D9469"} />

@@ -37,9 +37,8 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
               {item.tenure}
             </p>
             <p className={commonStyles.total_amount}>
-              <span className={commonStyles.rupeeIcon}>₹</span>
-
-              {item.price}
+              {item?.price && <span className={commonStyles.rupeeIcon}>₹</span>}
+              {item?.price}
             </p>
           </div>
         ))}
@@ -97,7 +96,9 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                   </div>
 
                   <p className={commonStyles.total_amount}>
-                    <span className={commonStyles.rupeeIcon}>₹</span>
+                    {billBreakup?.cartSubTotal && (
+                      <span className={commonStyles.rupeeIcon}>₹</span>
+                    )}
                     {billBreakup?.cartSubTotal}
                   </p>
                 </div>
@@ -115,9 +116,10 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                             {item.tenure}
                           </p>
                           <p className={commonStyles.total_amount}>
-                            <span className={commonStyles.rupeeIcon}>₹</span>
-
-                            {item.price}
+                            {item?.price && (
+                              <span className={commonStyles.rupeeIcon}>₹</span>
+                            )}
+                            {item?.price}
                           </p>
                         </div>
                       ))}
@@ -142,7 +144,9 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                     <p className={commonStyles.price_label}>Tenure/day</p>
                   </div>
                   <p className={commonStyles.total_amount}>
-                    <span className={commonStyles.rupeeIcon}>₹</span>
+                    {billBreakup?.perDayPrice && (
+                      <span className={commonStyles.rupeeIcon}>₹</span>
+                    )}
                     {billBreakup?.perDayPrice}
                   </p>
                 </div>
@@ -165,8 +169,10 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                     </p>
                   </div>
                   <p className={commonStyles.total_amount}>
-                    <span className={commonStyles.rupeeIcon}>₹</span>
-                    283.8
+                    {billBreakup?.remainingCityShieldAmount && (
+                      <span className={commonStyles.rupeeIcon}>₹</span>
+                    )}
+                    {billBreakup?.remainingCityShieldAmount}
                   </p>
                 </div>
 
@@ -177,7 +183,9 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                     <p className={commonStyles.price_label}>GST (18%)</p>
                   </div>
                   <p className={commonStyles.total_amount}>
-                    <span className={commonStyles.rupeeIcon}>₹</span>
+                    {billBreakup?.gst && (
+                      <span className={commonStyles.rupeeIcon}>₹</span>
+                    )}
                     {billBreakup?.gst}
                   </p>
                 </div>
@@ -187,7 +195,9 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                 <div className={commonStyles.row}>
                   <p className={commonStyles.total_txt}>Total</p>
                   <p className={commonStyles.total_amount}>
-                    <span className={commonStyles.rupeeIcon}>₹</span>
+                    {billBreakup?.finalTotalPrice && (
+                      <span className={commonStyles.rupeeIcon}>₹</span>
+                    )}
                     {parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}
                   </p>
                 </div>
