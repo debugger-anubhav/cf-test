@@ -12,10 +12,12 @@ import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import PostCityshield from "./postCityshieldPayment";
+import {format, parseISO} from "date-fns";
 
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [details, setDetails] = useState();
+  const [orderDate, setOrderDate] = useState();
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const parts = currentURL.split("/");
   const orderId = parts[parts.length - 1];
@@ -32,6 +34,9 @@ const CityShieldPage = () => {
       .then(res => {
         console.log(res);
         setDetails(res?.data?.data);
+        const parsedDate = parseISO(res?.data?.data?.created);
+        const formattedDate = format(parsedDate, "MMM dd, yyyy");
+        setOrderDate(formattedDate);
       })
       .catch(err => console.log(err));
   };
@@ -39,6 +44,7 @@ const CityShieldPage = () => {
   useEffect(() => {
     getUserDetails();
   }, []);
+
   const handlePayment = async () => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
@@ -165,9 +171,7 @@ const CityShieldPage = () => {
                   e.preventDefault();
                 }}>
                 <div className={styles.orderid_info_div}>
-                  <p className={styles.orderid_txt}>
-                    Order Date : May 19, 2023
-                  </p>
+                  <p className={styles.orderid_txt}>Order Date : {orderDate}</p>
                   <OpenIcon color={"#5774AC"} className={styles.open_icon} />
                 </div>
               </a>
