@@ -25,8 +25,7 @@
 
 /* CustomSelect.module.css */
 .custom-select {
-  @apply bg-white  rounded-xl;
-  /* max-width: 502px; */
+  @apply bg-white w-full lg:w-[502px] rounded-xl;
 }
 
 .selected-option {
@@ -52,7 +51,7 @@
   color: #5774ac;
 }
 .optionsActive {
-  @apply md:block;
+  @apply hidden md:block;
 }
 
 .ddArrow {
@@ -63,4 +62,38 @@
 }
 .selected_txt {
   @apply font-Poppins text-16 font-normal;
+}
+
+/* example.module.css */
+
+.dropdown {
+  @apply max-h-[260px] overflow-y-scroll;
+}
+
+.dropdown::-webkit-scrollbar {
+  width: auto !important;
+}
+
+.dropdown::-webkit-scrollbar-track {
+  width: auto !important;
+  background-color: #ebebeb !important;
+}
+
+/* Handle */
+.dropdown::-webkit-scrollbar-thumb {
+  background-color: #c0c0c0;
+  border-radius: 3px !important;
+}
+.dropdown::-webkit-scrollbar-arrow {
+  color: black;
+}
+
+.close_icon {
+  @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+.customDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-full;
+  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
+  /* transition-timing-function: ease-in; */
+  overflow-y: visible !important;
 }
