@@ -75,7 +75,10 @@
 }
 .amen_wrapper {
   @apply flex gap-4 xl:gap-6 mt-6 xl:mt-8 w-full overflow-scroll pr-4 md:pr-0;
+  user-select: none;
+  -webkit-user-drag: none;
 }
+
 .slot {
   @apply min-w-[120px] max-w-[120px] h-[150px] xl:min-w-[160px] xl:max-w-[160px] xl:h-[200px];
 }
