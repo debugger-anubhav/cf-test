@@ -163,10 +163,7 @@ const CityShieldPage = () => {
                 />
               </div>
 
-              <a
-                href={"https://test.rentofurniture.com/purchases"}
-                target="_blank"
-                rel="noreferrer">
+              <a href={"/purchases"} target="_blank" rel="noreferrer">
                 <div className={styles.orderid_info_div}>
                   <p className={styles.orderid_txt}>Order Date : {orderDate}</p>
                   <OpenIcon color={"#5774AC"} className={styles.open_icon} />

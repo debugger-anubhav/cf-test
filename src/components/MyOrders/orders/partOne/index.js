@@ -40,12 +40,10 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("in handle resize");
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
       }
     };
-    console.log("in useeffect 1");
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => {
@@ -56,23 +54,19 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   useLayoutEffect(() => {
     setTimeout(() => {
       if (containerRef.current) {
-        console.log("9090");
         setContainerWidth(containerRef.current.offsetWidth);
       }
     }, 1000);
   }, []);
 
   useEffect(() => {
-    console.log("in useeffect 2");
     const newVisibleImages = Math.floor((containerWidth - 200) / 92); // Adjust as needed
     newVisibleImages > 2
       ? setVisibleImages(newVisibleImages)
       : setVisibleImages(2);
-    console.log(containerWidth, "containerrr");
   }, [containerWidth]);
 
   const userId = decrypt(getLocalStorage("_ga"));
-  console.log(userId);
 
   const fetchOrdersDetails = filter => {
     const body = {
@@ -131,7 +125,6 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
           <div className={styles.orders_wrapper}>
             {ordersData.length > 0 ? (
               ordersData?.map((item, index) => {
-                console.log(visibleImages, "visibleee");
                 return (
                   <div key={index}>
                     <CommonContainer
