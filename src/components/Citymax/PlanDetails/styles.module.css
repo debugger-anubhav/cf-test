@@ -2,7 +2,7 @@
   @apply font-Poppins w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] pl-4 xl:mt-11 mb-12 xl:mb-20;
 }
 .header_wrapper {
-  @apply flex gap-2 items-center cursor-pointer;
+  @apply flex gap-2 items-center cursor-pointer mt-4 xl:mt-0;
 }
 .left_div {
   @apply xl:w-[53%];
