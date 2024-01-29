@@ -421,7 +421,7 @@ const CitymaxHeader = ({zIndex}) => {
           </div>
         </div>
       </div>
-      <div className={styles.end_line}></div>
+      {/* <div className={styles.end_line}></div> */}
     </>
   );
 };
