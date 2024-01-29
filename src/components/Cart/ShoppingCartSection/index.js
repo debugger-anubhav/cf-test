@@ -91,7 +91,6 @@ const ShoppingCartSection = () => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
 
-  // console.log(userDetails, "userDetails");
   useEffect(() => {
     setArr(cartItems);
     if (cartItems[0]?.is_frp === 1) {

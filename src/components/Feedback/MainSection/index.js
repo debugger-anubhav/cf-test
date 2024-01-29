@@ -23,7 +23,6 @@ export default function MainSection() {
   const [feedbackData, setFeedbackData] = useState(null);
 
   const handleSubmit = values => {
-    // console.log("sbmit", values);
     axios
       .post(baseURL + endPoints.feedback, {
         feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,

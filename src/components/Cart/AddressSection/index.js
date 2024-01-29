@@ -373,12 +373,9 @@ const AddressSection = () => {
               }}
               validationSchema={validationSchema}
               onSubmit={async (values, {setSubmitting, resetForm}) => {
-                console.log(1);
                 if (isOfflineCustomer === 1) {
-                  console.log("in if");
                   handleOfflineOrder(values);
                 } else {
-                  console.log("in else");
                   await saveUserAddress(values);
                   getAllSavedAddresses();
                   resetForm();

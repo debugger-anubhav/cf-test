@@ -108,7 +108,6 @@ function Cards({
 
     const razOrderId = result.data.data.raz_order_id;
     const customerId = result.data.data.customer_id;
-    console.log(razOrderId, customerId, "huhwiuhij");
 
     const options = {
       key: razorpayKeyOwn,

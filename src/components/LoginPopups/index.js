@@ -141,12 +141,10 @@ const LoginModal = ({
 
               // console.log(response.data.data.access_token, "kwkqwo");
               if (response?.data?.data?.access_token) {
-                console.log("in settoken");
                 cookies.set("authToken", response?.data?.data?.access_token, {
                   path: "/",
                 });
               }
-              console.log(cookies, "cookies");
               if (isCheckoutPage) {
                 if (
                   response?.data?.data?.full_name &&
@@ -156,7 +154,6 @@ const LoginModal = ({
                   handleChangeRoute();
                 } else setModalCategory("setUpAccount");
               } else {
-                console.log("innnn");
                 closeModal();
                 handleChangeRoute && handleChangeRoute();
                 // dispatch(setShoppingCartTab(1));

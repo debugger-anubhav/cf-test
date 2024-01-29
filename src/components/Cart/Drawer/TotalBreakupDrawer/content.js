@@ -16,9 +16,6 @@ const BillContent = ({
   const code = pagedata.couponCodeUsed;
   const billBreakup = pagedata.billBreakout;
 
-  console.log(isCitymaxBill, "isCitymaxBillisCitymaxBill");
-  console.log(!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount"));
-
   return (
     <>
       <div className={styles.breakup_wrapper}>
@@ -87,7 +84,6 @@ const BillContent = ({
 
         {!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount") && (
           <>
-            {console.log("ejkw")}
             <div className={styles.row}>
               <div>
                 <p className={styles.price_label}>
