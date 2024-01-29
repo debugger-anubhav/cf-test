@@ -72,7 +72,7 @@ const Document = () => {
                     </div>
                     <div className={`col-span-2 ${style.action_cell}`}>
                       <button className={style.view_btn}>
-                        <a href={item?.image} target="_self">
+                        <a href={item?.image} target="_blank" rel="noreferrer">
                           View
                         </a>
                       </button>
