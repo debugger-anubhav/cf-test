@@ -64,6 +64,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
     newVisibleImages > 2
       ? setVisibleImages(newVisibleImages)
       : setVisibleImages(2);
+    console.log(containerWidth, "containerrr");
   }, [containerWidth]);
 
   const userId = decrypt(getLocalStorage("_ga"));

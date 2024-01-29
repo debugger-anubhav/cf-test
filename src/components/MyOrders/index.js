@@ -8,7 +8,7 @@ const index = () => {
   const [tab, setTab] = useState(0);
   useEffect(() => {
     console.log(tab, "tab");
-  }, [tab]);
+  }, [setTab]);
 
   return (
     <div className={styles.main_container}>

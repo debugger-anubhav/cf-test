@@ -30,8 +30,6 @@ const OrderSummary = ({
   const [isCitymaxBill, setIsCitymaxBill] = useState(false);
   const userId = decrypt(getLocalStorage("_ga"));
 
-  console.log(subscriptionData, "subscriptionData");
-
   const dispatch = useDispatch();
   const getOrderSummary = () => {
     if (isSubscriptionPage) {
@@ -66,7 +64,7 @@ const OrderSummary = ({
   };
 
   return (
-    <div className={styles.main_container}>
+    <div className={`${styles.main_container}`}>
       <div className={styles.products_wrapper}>
         {data && (
           <div className={styles.order_date_wrapper}>

@@ -43,7 +43,6 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       .then(res => {
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
-        console.log(inputTime, res, "ppppppppppppppppppppp");
         const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
         setScheduledTime(format(parsedTime, "h:mm a"));
 
