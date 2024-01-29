@@ -17,13 +17,14 @@ import DocLoader from "../DocLoader/DocLoader";
 // import { baseURL } from "@/network/axios";
 // import { endPoints } from "@/network/endPoints";
 
-import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import CommonField from "../CommonField/CommonField";
 import {useSelector} from "react-redux";
+import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer/index";
 // let src;
 // if (typeof window !== "undefined") {
 //   src = window.screen.availWidth;
@@ -179,6 +180,11 @@ const KYCGetCivilScore = ({handleKycState}) => {
   // console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
+      <TermsAndConditionsDrawer
+        open={drawerOpen}
+        toggleDrawer={bool => setDrawerOpen(bool)}
+        isCivilScorePage
+      />
       <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 1</span>
@@ -246,7 +252,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
         />
       </div>
       {formErrors.dob && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles}`}>
           {formErrors.dob}
         </div>
       )}
@@ -273,7 +279,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
         </div>
       </div>
       {formErrors.termsAccepted && (
-        <div className={`${commonStyles.basicErrorStyles} ${styles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles} `}>
           {formErrors.termsAccepted}
         </div>
       )}
@@ -295,71 +301,10 @@ const KYCGetCivilScore = ({handleKycState}) => {
           </button>
         </div>
       </div>
-      {!isMdScreen && (
-        <SwipeableDrawer
-          classes={{
-            paper: commonStyles.bottomDrawer,
-          }}
-          anchor={isMdScreen ? "bottom" : "right"}
-          className="m-8"
-          open={drawerOpen}
-          onClose={() => {
-            // mobileCityDrawer && DrawerName !== "menu"
-            //   ? toggleDrawer("bottom", true)
-            //   : toggleDrawer("left", true);
-          }}
-          onOpen={() => {
-            // mobileCityDrawer && DrawerName !== "menu"
-            //   ? toggleDrawer("bottom", true)
-            //   : toggleDrawer("left", true);
-          }}>
-          <div className={` ${commonStyles.termsContainer}  `}>
-            <h2 className={` ${commonStyles.termsHeader}  `}>
-              Terms and conditions
-            </h2>
-            <ul className={` ${commonStyles.termsUL}  `}>
-              <li className={` ${commonStyles.termsLI}  `}>
-                By continuing, you agree to allow Cityfurnish India Private
-                Limited to fetch your credit report from CRIF High Mark for the
-                purpose of KYC verification. This consent shall be valid for a
-                period of 6 months.
-              </li>
-              <li className={` ${commonStyles.termsLI}  `}>
-                By clicking the &apos;Proceed&apos; button, you agree to CRIF
-                High Mark Credit Score Terms of Use.
-              </li>
-              <li className={` ${commonStyles.termsLI}  `}>
-                You understand that you shall have the option to opt
-                out/unsubscribe from the service by clicking here. Fetching
-                report from the credit bureau will not impact your credit score.
-              </li>
-            </ul>
-            <button
-              className={` ${commonStyles.termsConfirmBtn}  `}
-              onClick={() => {
-                handleCheckboxChange();
-                setDrawerOpen(false);
-              }}>
-              Okay, understood
-            </button>
-          </div>
-          <div className={` ${commonStyles.termsCrossContainer}  `}>
-            <button
-              className={`${commonStyles.close_icon_btn}`}
-              onClick={() => {
-                setDrawerOpen(false);
-              }}>
-              <div className={`${commonStyles.close_icon}`}>
-                <Close size={25} color={"#222222"} />
-              </div>
-            </button>
-          </div>
-        </SwipeableDrawer>
-      )}
 
       {isMdScreen && (
         <Modal
-          open={isDDOpen || drawerOpen}
+          open={isDDOpen}
           onClose={() => setIsDDOpen(false)}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
@@ -402,51 +347,6 @@ const KYCGetCivilScore = ({handleKycState}) => {
                   </div>
                 </button>
               </div>
-            )}
-            {drawerOpen && (
-              <>
-                <div
-                  className={` ${commonStyles.dropdown_container}  ${styles.termsContainerMD} `}>
-                  <h2 className={` ${styles.termsHeader}  `}>
-                    Terms and conditions
-                  </h2>
-                  <ul className={` ${styles.termsUL}  `}>
-                    <li className={` ${styles.termsLI}  `}>
-                      By continuing, you agree to allow Cityfurnish India
-                      Private Limited to fetch your credit report from CRIF High
-                      Mark for the purpose of KYC verification. This consent
-                      shall be valid for a period of 6 months.
-                    </li>
-                    <li className={` ${styles.termsLI}  `}>
-                      By clicking the &apos;Proceed&apos; button, you agree to
-                      CRIF High Mark Credit Score Terms of Use.
-                    </li>
-                    <li className={` ${styles.termsLI}  `}>
-                      You understand that you shall have the option to opt
-                      out/unsubscribe from the service by clicking here.
-                      Fetching report from the credit bureau will not impact
-                      your credit score.
-                    </li>
-                  </ul>
-                  <button
-                    className={` ${styles.termsConfirmBtn}  `}
-                    onClick={() => {
-                      handleCheckboxChange();
-                      setDrawerOpen(false);
-                    }}>
-                    Okay, understood
-                  </button>
-                  <button
-                    className={`${commonStyles.close_icon_btn}`}
-                    onClick={() => {
-                      setDrawerOpen(false);
-                    }}>
-                    <div className={`${commonStyles.close_icon}`}>
-                      <Close size={25} color={"#222222"} />
-                    </div>
-                  </button>
-                </div>
-              </>
             )}
           </>
         </Modal>

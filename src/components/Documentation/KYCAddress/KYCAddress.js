@@ -5,12 +5,7 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {cityUrl} from "../../../../appConfig";
 import DropDown from "../DropDown/DropDown";
-import {
-  Modal,
-  SwipeableDrawer,
-  createTheme,
-  useMediaQuery,
-} from "@mui/material";
+import {Modal, createTheme, useMediaQuery} from "@mui/material";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
@@ -26,6 +21,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useSelector} from "react-redux";
 import CommonField from "../CommonField/CommonField";
+import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
 
 const KYCAddress = ({handleKycState, step}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
@@ -221,7 +217,7 @@ const KYCAddress = ({handleKycState, step}) => {
       "permanentAddressProof",
       JSON.stringify({
         doc_id: "cf_permanent_address_proof",
-        subDocType: selectedOptionPer.value,
+        subDocType: selectedOptionPer?.value,
         docImageName: formData?.addressProof?.name,
       }),
     );
@@ -252,7 +248,12 @@ const KYCAddress = ({handleKycState, step}) => {
   }, []);
   return (
     <div>
+      <TermsAndConditionsDrawer
+        open={drawerOpen}
+        toggleDrawer={bool => setDrawerOpen(bool)}
+      />
       <CommonField handleKycState={handleKycState} />
+
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step {step}</span>
       </div>
@@ -289,8 +290,7 @@ const KYCAddress = ({handleKycState, step}) => {
         </div>
       </div>
       {formErrors.contactNumber && (
-        <div
-          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles}`}>
           {formErrors.contactNumber}
         </div>
       )}
@@ -389,8 +389,7 @@ const KYCAddress = ({handleKycState, step}) => {
         />
       </div>
       {formErrors.addressProof && (
-        <div
-          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles} `}>
           {formErrors.addressProof}
         </div>
       )}
@@ -490,8 +489,7 @@ const KYCAddress = ({handleKycState, step}) => {
       </div>
 
       {formErrors.currentAddressProof && (
-        <div
-          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles} `}>
           {formErrors.currentAddressProof}
         </div>
       )}
@@ -509,7 +507,7 @@ const KYCAddress = ({handleKycState, step}) => {
             &nbsp;I accept &nbsp;
           </span>
           <span
-            className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
+            className={`cursor-pointer ${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
             onClick={() => {
               setDrawerOpen(true);
             }}>
@@ -518,8 +516,7 @@ const KYCAddress = ({handleKycState, step}) => {
         </div>
       </div>
       {formErrors.termsAccepted && (
-        <div
-          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+        <div className={`${commonStyles.basicErrorStyles}`}>
           {formErrors.termsAccepted}
         </div>
       )}
@@ -539,67 +536,11 @@ const KYCAddress = ({handleKycState, step}) => {
           </button>
         </div>
       </div>
-      {!isMdScreen && (
-        <SwipeableDrawer
-          classes={{
-            paper: commonStyles.bottomDrawer,
-          }}
-          anchor={isMdScreen ? "bottom" : "right"}
-          className="m-8"
-          open={drawerOpen}
-          onClose={() => {
-            // mobileCityDrawer && DrawerName !== "menu"
-            //   ? toggleDrawer("bottom", true)
-            //   : toggleDrawer("left", true);
-          }}
-          onOpen={() => {
-            // mobileCityDrawer && DrawerName !== "menu"
-            //   ? toggleDrawer("bottom", true)
-            //   : toggleDrawer("left", true);
-          }}>
-          <div className={` ${commonStyles.termsContainer}  `}>
-            <h2 className={` ${commonStyles.termsHeader}  `}>
-              Terms and conditions
-            </h2>
-            <ul className={` ${commonStyles.termsUL}  `}>
-              <li className={` ${commonStyles.termsLI}  `}>
-                Order fulfillment is subject to approval of documents submitted.
-              </li>
-              <li className={` ${commonStyles.termsLI}  `}>
-                Cityfurnish reserves right to cancel order in case of documents
-                rejection.
-              </li>
-              <li className={` ${commonStyles.termsLI}  `}>
-                It will take 24 hrs to verify your documents after submission.
-              </li>
-            </ul>
-            <button
-              className={` ${commonStyles.termsConfirmBtn}  `}
-              onClick={() => {
-                handleCheckboxChange();
-                setDrawerOpen(false);
-              }}>
-              Okay, understood
-            </button>
-          </div>
-          <div className={` ${commonStyles.termsCrossContainer}  `}>
-            <button
-              className={`${commonStyles.close_icon_btn}`}
-              onClick={() => {
-                setDrawerOpen(false);
-              }}>
-              <div className={`${commonStyles.close_icon}`}>
-                <Close size={25} color={"#222222"} />
-              </div>
-            </button>
-          </div>
-        </SwipeableDrawer>
-      )}
 
       {isMdScreen && (
         <>
           <Modal
-            open={perAddModal || currAddModal || drawerOpen}
+            open={perAddModal || currAddModal}
             onClose={() => {
               setPerAddModal(false);
               setCurrAddModal(false);
@@ -686,47 +627,6 @@ const KYCAddress = ({handleKycState, step}) => {
                     </div>
                   </button>
                 </div>
-              )}
-              {drawerOpen && (
-                <>
-                  <div
-                    className={` ${commonStyles.dropdown_container}  ${commonStyles.termsContainerMD} `}>
-                    <h2 className={` ${commonStyles.termsHeader}  `}>
-                      Terms and conditions
-                    </h2>
-                    <ul className={` ${commonStyles.termsUL}  `}>
-                      <li className={` ${commonStyles.termsLI}  `}>
-                        Order fulfillment is subject to approval of documents
-                        submitted.
-                      </li>
-                      <li className={` ${commonStyles.termsLI}  `}>
-                        Cityfurnish reserves right to cancel order in case of
-                        documents rejection.
-                      </li>
-                      <li className={` ${commonStyles.termsLI}  `}>
-                        It will take 24 hrs to verify your documents after
-                        submission.
-                      </li>
-                    </ul>
-                    <button
-                      className={` ${commonStyles.termsConfirmBtn}  `}
-                      onClick={() => {
-                        handleCheckboxChange();
-                        setDrawerOpen(false);
-                      }}>
-                      Okay, understood
-                    </button>
-                    <button
-                      className={`${commonStyles.close_icon_btn}`}
-                      onClick={() => {
-                        setDrawerOpen(false);
-                      }}>
-                      <div className={`${commonStyles.close_icon}`}>
-                        <Close size={25} color={"#222222"} />
-                      </div>
-                    </button>
-                  </div>
-                </>
               )}
             </>
           </Modal>

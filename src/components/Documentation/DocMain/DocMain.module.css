@@ -2,5 +2,5 @@
   @apply flex gap-4 md:gap-6 xl:gap-16 px-4 md:pl-0 md:pr-[70px] xl:pr-[90px] macbook:pr-[120px];
 }
 .kycFormArea {
-  @apply grow;
+  @apply grow pb-6;
 }
