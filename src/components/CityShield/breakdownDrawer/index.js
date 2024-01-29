@@ -165,10 +165,14 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                 <div className={commonStyles.row}>
                   <div>
                     <p className={commonStyles.price_label}>
-                      Remaining Cityshield amount (1.56 x 182)
+                      {/* Remaining Cityshield amount (1.56 x 182) */}
+                      Remaining Cityshield amount{" "}
+                      {billBreakup?.perDayPrice && billBreakup?.remainingTenure
+                        ? `${billBreakup?.perDayPrice} x  ${billBreakup?.remainingTenure}`
+                        : ""}
                     </p>
                   </div>
-                  <p className={commonStyles.total_amount}>
+                  <p className={`${commonStyles.total_amount} pl-2`}>
                     {billBreakup?.remainingCityShieldAmount && (
                       <span className={commonStyles.rupeeIcon}>₹</span>
                     )}
