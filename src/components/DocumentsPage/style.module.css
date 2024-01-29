@@ -50,3 +50,6 @@
 /* .checkIcon {
   @apply w-6 h-6;
 } */
+.table_body {
+  @apply min-h-[10vh];
+}
