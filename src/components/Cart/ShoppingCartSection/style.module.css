@@ -54,7 +54,7 @@
   @apply 4xl:flex 4xl:gap-7;
 }
 .city_shield_div {
-  @apply p-4 md:w-[440px] lg:w-full xl:w-[440px] bg-fff border border-DDDDDF rounded-xl hover:border-2 hover:p-[15px] hover:border-[#3E688E];
+  @apply p-4 md:w-[440px] lg:w-full xl:w-[440px] bg-fff border border-DDDDDF rounded-xl hover:border-2 hover:p-[15px] hover:border-[#5774AC];
 }
 .city_shield_head {
   @apply text-16 mobile:text-20 pl-1 font-semibold leading-[30px] text-[#2D9469] uppercase;
@@ -75,7 +75,7 @@
   @apply text-[#5774AC] underline cursor-pointer;
 }
 .coupons_wrapper {
-  @apply cursor-pointer flex md:w-[440px] lg:w-full xl:w-[440px] xl:h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-4 border-[2px] border-transparent hover:border-[#3E688E];
+  @apply cursor-pointer flex md:w-[440px] lg:w-full xl:w-[440px] xl:h-[56px] px-4 py-3 justify-between items-center rounded-lg mt-4 border-[2px] border-transparent hover:border-[#5774AC];
   background: linear-gradient(138deg, #e8f0f6 0%, #fffaeb 99.38%);
 }
 .offer_text {
@@ -88,7 +88,7 @@
   @apply text-[#D96060] text-16 underline cursor-pointer;
 }
 .coins_div {
-  @apply w-full md:w-[440px] lg:w-full xl:w-[440px] p-4 hover:border-[#3E688E] hover:border-[2px] border border-[#dddddf] mt-4 flex justify-between items-center;
+  @apply w-full md:w-[440px] lg:w-full xl:w-[440px] p-4 hover:border-[#5774AC] hover:border-[2px] border border-[#dddddf] mt-4 flex justify-between items-center;
   border-radius: 8.092px;
   border: 1px solid #dddddf;
 }
