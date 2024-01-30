@@ -4,6 +4,10 @@ import {FaCheck} from "react-icons/fa";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch} from "react-redux";
+import axios from "axios";
+import {baseURL} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {Skeleton} from "@mui/material";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
@@ -13,6 +17,8 @@ const PaymentConfirmation = () => {
   const oid = searchParams.get("oid");
 
   const [timer, setTimer] = useState(5);
+  const [transactionId, setTransactionId] = useState(null);
+  const [skeletonLoder, setSkeletonLoder] = useState(true);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -26,6 +32,22 @@ const PaymentConfirmation = () => {
     }
     return () => clearInterval(countdown);
   }, [router, timer]);
+
+  const getTransactionId = id => {
+    axios
+      .get(baseURL + endPoints.addToCart.getTransactionId(id))
+      .then(res => {
+        setTransactionId(res?.data?.data?.paypal_transaction_id);
+        setSkeletonLoder(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setSkeletonLoder(false);
+      });
+  };
+  useEffect(() => {
+    getTransactionId(oid);
+  }, []);
 
   return (
     <div className={styles.main_container}>
@@ -45,7 +67,11 @@ const PaymentConfirmation = () => {
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
           <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>pay_LY7pOUBt3WggBC</p>
+          {skeletonLoder ? (
+            <Skeleton variant="text" width={100} />
+          ) : (
+            <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
+          )}
         </div>
       </div>
 

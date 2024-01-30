@@ -95,6 +95,8 @@ export const endPoints = {
     successPayment: "fc-payments/postPaymentSuccess",
     offlinePayment: `fc-payments/placeOfflineOrder`,
     fetchMonthlyCities: `fc-shopping-carts/fetchMonthlyCity`,
+    getTransactionId: dealCodeNumber =>
+      `fc-payments/getTrasactionId?dealCodeNumber=${dealCodeNumber}`,
   },
 
   yourAddressPage: {
