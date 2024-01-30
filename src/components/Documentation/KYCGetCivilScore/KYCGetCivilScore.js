@@ -100,6 +100,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
   // };
   const handleOptionClick = option => {
     setSelectedOption(option);
+    setIsDDOpen(false);
   };
   const validateForm = () => {
     const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;

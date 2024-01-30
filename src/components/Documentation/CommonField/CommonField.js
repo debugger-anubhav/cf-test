@@ -16,6 +16,7 @@ const CommonField = ({handleKycState}) => {
     dealCodeNumber: selectedOrderId,
   });
   const [options, setOptions] = useState([]);
+  const [orderIdsModal, setOrderIdsModal] = useState(false);
 
   const userid = decrypt(getLocalStorage("_ga"));
 
@@ -32,6 +33,14 @@ const CommonField = ({handleKycState}) => {
     getAllOrderIds();
   }, []);
 
+  const handleChangeOption = newOption => {
+    // Update the selected option state
+    console.log("innnn");
+    setSelectedOption({
+      dealCodeNumber: newOption.dealCodeNumber,
+    });
+  };
+
   return (
     <div className="sm:w-[505px] mb-8">
       <p className="text-71717A text-16 tracking-0.3 font-Poppins">
@@ -40,12 +49,16 @@ const CommonField = ({handleKycState}) => {
       <div>
         <DropDown
           isOpen={isDDOpen}
+          orderIdsModal={orderIdsModal}
+          setOrderIdsModal={val => setOrderIdsModal(val)}
           setIsDDOpen={setIsDDOpen}
           selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
+          // setSelectedOption={setSelectedOption}
+          setSelectedOption={option => handleChangeOption(option)}
           options={options}
           isInitialScreen={true}
           handleKycState={option => handleKycState(option?.dealCodeNumber)}
+          isCommonField={true}
         />
       </div>
     </div>
