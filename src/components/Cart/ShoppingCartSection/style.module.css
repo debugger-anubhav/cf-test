@@ -88,7 +88,7 @@
   @apply text-[#D96060] text-16 underline cursor-pointer;
 }
 .coins_div {
-  @apply w-full md:w-[440px] lg:w-full xl:w-[440px] p-4 hover:border-[#3E688E] hover:border-[1.5px] border border-[#dddddf] mt-4 flex justify-between items-center;
+  @apply w-full md:w-[440px] lg:w-full xl:w-[440px] p-4 hover:border-[#3E688E] hover:border-[2px] border border-[#dddddf] mt-4 flex justify-between items-center;
   border-radius: 8.092px;
   border: 1px solid #dddddf;
 }
@@ -105,7 +105,7 @@
   @apply text-9A9AA2 font-medium text-12 xl:text-14  leading-5 tracking-0.24 xl:tracking-desc;
 }
 .cart_breakup {
-  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[1.5px] hover:border-[#5774AC] flex justify-between mt-4;
+  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[2px] hover:border-[#5774AC] flex justify-between mt-4;
 }
 .breakup_wrapper {
   @apply flex gap-1 items-center mt-1 xl:mt-[11px] 4xl:mt-0;
