@@ -167,7 +167,7 @@ const AddressSection = () => {
 
   const goToPostCheckout = (e, id) => {
     e === 0
-      ? router.push("/order/failure")
+      ? window?.location?.replace("/order/failure")
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
@@ -261,8 +261,7 @@ const AddressSection = () => {
     paymentObject.on("payment.failed", e => {
       console.log(e, "erroerss");
       closeRazorPay().then(() => {
-        // goToPostCheckout(0);
-        window?.location?.replace("/order/failure");
+        goToPostCheckout(0);
       });
     });
   }

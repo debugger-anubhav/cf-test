@@ -70,7 +70,8 @@ const OfflinePayment = () => {
         console.log(response, "response in handlerfunc");
         if (response.error) {
           alert("Payment failed. Please try again.");
-          router.push("/order/failure");
+          // router.push("/order/failure");
+          window?.location?.replace("/order/failure");
         } else {
           const data = {
             razorpayPaymentId: response.razorpay_payment_id,
