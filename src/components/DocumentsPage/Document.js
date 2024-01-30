@@ -16,7 +16,7 @@ const Document = () => {
     axios
       .get(baseURL + endPoints.documentationApprove(orderId))
       .then(res => {
-        setApiData(res?.data?.data?.docsData);
+        setApiData(res?.data?.data);
       })
       .catch(err => console.log(err));
   };
@@ -41,10 +41,17 @@ const Document = () => {
     <div className={style.conatiner_wrapper}>
       <div className={style.heading}>Order:#{orderId}</div>
       <div className={style.sub_heading}>
-        Documentation stage: Autopay done
-        <div className={style.success_icon_div}>
-          <FaCheck color={"white"} size="16" />
-        </div>
+        Documentation stage:
+        {apiData?.autoPay === "true" ? (
+          <span className="pl-1"> Autopay done</span>
+        ) : (
+          <span className="pl-1 text-[#D96060]">Documents still pending</span>
+        )}
+        {apiData?.autoPay === "true" && (
+          <div className={style.success_icon_div}>
+            <FaCheck color={"white"} size="16" />
+          </div>
+        )}
       </div>
       <div className={style.table}>
         <div className={style.table_headers}>
@@ -56,12 +63,12 @@ const Document = () => {
         <div className={style.table_body}>
           {apiData ? (
             <>
-              {apiData?.map((item, index) => {
+              {apiData?.docsData?.map((item, index) => {
                 return (
                   <div
                     key={item?.id}
                     className={`${style.table_data} ${
-                      index < apiData?.length - 1 &&
+                      index < apiData?.docsData?.length - 1 &&
                       "border-b-[1px] border-EDEDEE"
                     }`}>
                     <div className={`col-span-5 mr-4 ${style.body_cell}`}>

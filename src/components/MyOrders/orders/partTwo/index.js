@@ -17,7 +17,6 @@ const OrderDetails = ({setPart, data}) => {
   const dispatch = useDispatch();
   const stepsCompleted = data?.stagesData?.length;
   const orderStatus = data?.stagesData[stepsCompleted - 1]?.zoho_sub_status;
-  console.log(data, orderStatus, "data");
 
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
 
@@ -45,8 +44,6 @@ const OrderDetails = ({setPart, data}) => {
   const checkStatus = isUnhappyCustomeFlow
     ? data?.stagesData[stepsCompleted - 3]?.zoho_sub_status.toLowerCase()
     : orderStatus?.toLowerCase();
-  console.log(checkStatus, orderStatus, "checkStatus");
-  console.log(isUnhappyCustomeFlow, "isUnhappyCustomeFlow");
 
   return (
     <div className={styles.main_container}>
@@ -68,7 +65,7 @@ const OrderDetails = ({setPart, data}) => {
         </div>
       </div>
 
-      <div className={styles.sub_container}>
+      <div className={`${styles.sub_container}`}>
         <div className={styles.upper_map}>
           {data?.stagesData?.map((item, index) => {
             return (

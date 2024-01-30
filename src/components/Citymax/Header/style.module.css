@@ -3,6 +3,7 @@
 }
 .header_wrapper {
   @apply font-Poppins relative flex w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 justify-between py-4;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
 }
 
 .hamburger_icon {
@@ -59,8 +60,8 @@
 .cart_link_wrapper {
   @apply relative cursor-pointer;
 }
-.end_line {
+/* .end_line {
   @apply h-2 w-full hidden xl:flex;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
-}
+} */

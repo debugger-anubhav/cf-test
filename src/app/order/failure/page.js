@@ -6,7 +6,7 @@ import MenuList from "@/components/Common/MenuList";
 import Notifications from "@/components/Common/Notifications/Notification";
 import PaymentFailure from "@/components/PostCheckout/Failure";
 
-const CartPage = () => {
+const CartPageFailure = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
@@ -18,4 +18,4 @@ const CartPage = () => {
   );
 };
 
-export default CartPage;
+export default CartPageFailure;

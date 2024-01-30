@@ -14,7 +14,6 @@ const OrderPage = ({tab, setTab}) => {
       const response = await axios.get(
         baseURL + endPoints.myOrdersPage.getOrderStage(orderNumber),
       );
-      console.log(response);
       setOrderData(response?.data?.data);
     } catch (err) {
       console.log(err);

@@ -14,7 +14,6 @@ export function AuthProvider(WrappedComponent) {
       const isLogin = await checkAuthentication();
       setisAuthenticated(isLogin);
       if (isLogin === false) {
-        console.log("in baddd");
         router.push("/");
       }
     };

@@ -109,10 +109,9 @@ const CommonContainer = ({
         />
 
         <div
-          className={styles.lower_box}
+          className={`${styles.lower_box} `}
           id="image-gallery-container"
           onClick={() => {
-            console.log(item.dealCodeNumber, "deallll");
             getSingleOrderDetails(item.dealCodeNumber);
           }}
           ref={containerRef}>

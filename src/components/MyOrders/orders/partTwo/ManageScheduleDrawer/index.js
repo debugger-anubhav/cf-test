@@ -41,7 +41,6 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
     axios
       .post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
-        console.log(res, "yguywgy");
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
         const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
