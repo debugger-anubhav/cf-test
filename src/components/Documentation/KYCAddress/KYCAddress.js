@@ -5,13 +5,13 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {cityUrl} from "../../../../appConfig";
 import DropDown from "../DropDown/DropDown";
-import {Modal, createTheme, useMediaQuery} from "@mui/material";
+// import {Modal, createTheme, useMediaQuery} from "@mui/material";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import SelectionCircle from "../SelectionCircle/SelectionCircle";
+// import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {
   CheckCircleIcon,
-  Close,
+  // Close,
   DeleteIcon,
   ExclamationCircleFill,
   OutlineArrowRight,
@@ -28,10 +28,10 @@ const KYCAddress = ({handleKycState, step}) => {
 
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
-  const [docsData, setDocsData] = useState([]);
+  const [docsData, setDocsData] = useState();
   const [orderId] = useState(selectedOrderId);
-  const [selectedOptionCur, setSelectedOptionCur] = useState();
-  const [selectedOptionPer, setSelectedOptionPer] = useState();
+  const [selectedOptionCur, setSelectedOptionCur] = useState({});
+  const [selectedOptionPer, setSelectedOptionPer] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [formData, setFormData] = useState({
     contactNumber: "",
@@ -45,14 +45,14 @@ const KYCAddress = ({handleKycState, step}) => {
     currentAddressProof: "",
     termsAccepted: "",
   });
-  const theme = createTheme({
-    breakpoints: {
-      values: {
-        md: 768, // Set the 'md' breakpoint to 768 pixels
-      },
-    },
-  });
-  const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+  // const theme = createTheme({
+  //   breakpoints: {
+  //     values: {
+  //       md: 768, // Set the 'md' breakpoint to 768 pixels
+  //     },
+  //   },
+  // });
+  // const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   const getAddProofList = () => {
     baseInstance
       .get(baseURL + endPoints.addressProofList)
@@ -109,10 +109,14 @@ const KYCAddress = ({handleKycState, step}) => {
     }
   };
   const handleOptionClickPer = option => {
+    console.log("in per", option);
     setSelectedOptionPer(option);
+    setPerAddModal(false);
   };
   const handleOptionClickCur = option => {
+    console.log("in currrr", option);
     setSelectedOptionCur(option);
+    setCurrAddModal(false);
   };
   const handleContactBlur = () => {
     const regPat = /[!@#$%^&*()_+{}:;<>,.?~\\/\s]/;
@@ -217,7 +221,7 @@ const KYCAddress = ({handleKycState, step}) => {
       "permanentAddressProof",
       JSON.stringify({
         doc_id: "cf_permanent_address_proof",
-        subDocType: selectedOptionPer?.value,
+        subDocType: selectedOptionPer,
         docImageName: formData?.addressProof?.name,
       }),
     );
@@ -225,7 +229,7 @@ const KYCAddress = ({handleKycState, step}) => {
       "currentAddressProof",
       JSON.stringify({
         doc_id: "cf_delivery_address_proof",
-        subDocType: selectedOptionCur.value,
+        subDocType: selectedOptionCur,
         docImageName: formData?.addressProof?.name,
       }),
     );
@@ -300,8 +304,9 @@ const KYCAddress = ({handleKycState, step}) => {
         </span>
       </div>
       <div className={`${styles.formInputFirst}`}>
+        {console.log(selectedOptionPer, "oooooooooooo")}
         <DropDown
-          options={docsData[1]?.supported_docs
+          options={docsData?.[1]?.supported_docs
             .split(",")
             ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setPerAddModal}
@@ -310,6 +315,15 @@ const KYCAddress = ({handleKycState, step}) => {
           setSelectedOption={setSelectedOptionPer}
           maxWidth="502px"
           optionsActive="md:block hidden"
+          currAddModal={currAddModal}
+          perAddModal={perAddModal}
+          docsData={docsData}
+          setCurrAddModal={setCurrAddModal}
+          setPerAddModal={setPerAddModal}
+          handleOptionClickCur={handleOptionClickCur}
+          handleOptionClickPer={handleOptionClickPer}
+          selectedOptionPer={selectedOptionPer}
+          selectedOptionCur={selectedOptionCur}
         />
       </div>
       <div className={`${styles.formInputFirst}`}>
@@ -399,8 +413,9 @@ const KYCAddress = ({handleKycState, step}) => {
         </span>
       </div>
       <div className={`${styles.formInputFirst}`}>
+        {console.log(selectedOptionCur, "iiii")}
         <DropDown
-          options={docsData[0]?.supported_docs
+          options={docsData?.[0]?.supported_docs
             .split(",")
             ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setCurrAddModal}
@@ -409,6 +424,15 @@ const KYCAddress = ({handleKycState, step}) => {
           setSelectedOption={setSelectedOptionCur}
           maxWidth="502px"
           optionsActive="md:block hidden"
+          currAddModal={currAddModal}
+          perAddModal={perAddModal}
+          docsData={docsData}
+          setCurrAddModal={setCurrAddModal}
+          setPerAddModal={setPerAddModal}
+          handleOptionClickCur={handleOptionClickCur}
+          handleOptionClickPer={handleOptionClickPer}
+          selectedOptionCur={selectedOptionCur}
+          selectedOptionPer={selectedOptionPer}
         />
       </div>
       <div className={`${styles.formInputFirst}`}>
@@ -536,110 +560,6 @@ const KYCAddress = ({handleKycState, step}) => {
           </button>
         </div>
       </div>
-
-      {isMdScreen && (
-        <>
-          <Modal
-            open={perAddModal || currAddModal}
-            onClose={() => {
-              setPerAddModal(false);
-              setCurrAddModal(false);
-              setDrawerOpen(false);
-            }}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            disableRestoreFocus
-            disableEnforceFocus
-            disableAutoFocus>
-            <>
-              {perAddModal && (
-                <div className={`${commonStyles.dropdown_container} `}>
-                  <div className={`${commonStyles.dropdown_heading} `}>
-                    Select any permanent address proof
-                  </div>
-                  <ul
-                    className={`${
-                      perAddModal
-                        ? commonStyles.optionsActive
-                        : commonStyles.options
-                    } `}>
-                    {docsData[1]?.supported_docs
-                      .split(",")
-                      ?.map((option, index) => (
-                        <li
-                          className={`${commonStyles.option} ${
-                            option === selectedOptionPer ? "bg-[#EFF5FF]" : ""
-                          } `}
-                          key={index}
-                          onClick={() => handleOptionClickPer(option)}>
-                          <span>{option}</span>{" "}
-                          <SelectionCircle
-                            showInner={option === selectedOptionPer}
-                          />
-                        </li>
-                      ))}
-                  </ul>
-                  <button
-                    className={`${commonStyles.close_icon_btn}`}
-                    onClick={() => {
-                      setPerAddModal(false);
-                    }}>
-                    <div className={`${commonStyles.close_icon}`}>
-                      <Close size={25} color={"#222222"} />
-                    </div>
-                  </button>
-                </div>
-              )}
-              {currAddModal && (
-                <div className={`${commonStyles.dropdown_container} `}>
-                  <div className={`${commonStyles.dropdown_heading} `}>
-                    Select any current address proof
-                  </div>
-                  <ul
-                    className={`${
-                      currAddModal
-                        ? commonStyles.optionsActive
-                        : commonStyles.options
-                    } `}>
-                    {docsData[0]?.supported_docs
-                      .split(",")
-                      .map((option, index) => (
-                        <li
-                          className={`${commonStyles.option} ${
-                            option === selectedOptionCur ? "bg-[#EFF5FF]" : ""
-                          } `}
-                          key={index}
-                          onClick={() => handleOptionClickCur(option)}>
-                          <span>{option}</span>{" "}
-                          <SelectionCircle
-                            showInner={option === selectedOptionCur}
-                          />
-                        </li>
-                      ))}
-                  </ul>
-                  <button
-                    className={`${commonStyles.close_icon_btn}`}
-                    onClick={() => {
-                      setCurrAddModal(false);
-                    }}>
-                    <div className={`${commonStyles.close_icon}`}>
-                      <Close size={25} color={"#222222"} />
-                    </div>
-                  </button>
-                </div>
-              )}
-            </>
-          </Modal>
-          {/* <Modal
-            open={currAddModal}
-            onClose={() => setCurrAddModal(false)}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            disableRestoreFocus
-            disableEnforceFocus
-            disableAutoFocus></Modal> */}
-        </>
-      )}
     </div>
   );
 };
