@@ -21,7 +21,7 @@
   @apply flex justify-between mt-4 items-start;
 }
 .dropdown_wrapper {
-  @apply mt-3 lg:mt-4 pl-2 md:pl-4 pt-2 flex flex-col gap-2;
+  @apply mt-3 lg:mt-4 pl-2 md:pl-4 pt-2 flex flex-col gap-2 font-Poppins;
 }
 .dropdown_row {
   @apply flex gap-2 md:gap-4 items-start;

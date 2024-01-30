@@ -698,9 +698,16 @@ const ShoppingCartSection = () => {
 
               {arr[0]?.is_frp !== 1 && (
                 <div
-                  className={styles.coupons_wrapper}
+                  className={`${styles.coupons_wrapper} border-[4px] border-green-700`}
                   onClick={() => {
-                    !isCouponApplied && setCouponDrawerOpen(true);
+                    if (isCouponApplied) {
+                      console.log("first");
+                      setIsCouponApplied(false);
+                      setCode("");
+                      dispatch(getCouponCodeUsed(""));
+                    } else {
+                      setCouponDrawerOpen(true);
+                    }
                     // checkCoupon();
                   }}>
                   <p className={styles.offer_text}>
@@ -709,16 +716,7 @@ const ShoppingCartSection = () => {
                       : "Apply Offers & Coupon🎉"}
                   </p>
                   {isCouponApplied ? (
-                    <p
-                      className={styles.remove_txt}
-                      // onClick={handleRemoveCode}
-                      onClick={() => {
-                        setIsCouponApplied(false);
-                        setCode("");
-                        dispatch(getCouponCodeUsed(""));
-                      }}>
-                      Remove
-                    </p>
+                    <p className={styles.remove_txt}>Remove</p>
                   ) : (
                     <div onClick={() => setCouponDrawerOpen(true)}>
                       <ArrowForw color={"#3E688E"} className={styles.arrow} />

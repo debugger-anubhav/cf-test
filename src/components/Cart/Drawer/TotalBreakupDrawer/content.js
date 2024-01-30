@@ -49,7 +49,8 @@ const BillContent = ({
 
         {(showTotalPriceBreakdown || isOfflineInvoice) && (
           <>
-            <div className={styles.dropdown_wrapper}>
+            <div
+              className={`${styles.dropdown_wrapper} bg-[#FFFFF2] pb-2 pr-2`}>
               {billBreakup?.cartSubTotalList?.map((item, index) => (
                 <div key={index} className={styles.dropdown_row}>
                   <p
