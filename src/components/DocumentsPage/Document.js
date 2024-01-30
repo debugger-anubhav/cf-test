@@ -78,10 +78,12 @@ const Document = () => {
                       {item?.doc_type}
                     </div>
                     <div className={`col-span-2 ${style.action_cell}`}>
-                      <button className={style.view_btn}>
-                        <a href={item?.image} target="_blank" rel="noreferrer">
-                          View
-                        </a>
+                      <button
+                        className={style.view_btn}
+                        onClick={() => window?.open(item?.image, "_blank")}>
+                        {/* <a href={item?.image} target="_blank" rel="noreferrer"> */}
+                        View
+                        {/* </a> */}
                       </button>
                       {item?.status === 0 && (
                         <div className={style.decision_btns}>

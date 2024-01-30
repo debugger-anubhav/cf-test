@@ -30,7 +30,7 @@ const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
   const CartSubtotalContent = () => (
     <>
       <h1 className={styles.head}>Cart Subtotal: </h1>
-      <div className={styles.dropdown_wrapper}>
+      <div className={`${styles.dropdown_wrapper} bg-[#FFFFF2]`}>
         {billBreakup?.cartSubTotalList?.map((item, index) => (
           <div key={index} className={styles.dropdown_row}>
             <p className={`min-w-[190px] w-[190px] ${styles.prod_name}`}>
