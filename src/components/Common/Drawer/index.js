@@ -82,7 +82,6 @@ export default function CommonDrawer({
 
   const handleAuthentication = async () => {
     const isAuth = await checkAuthentication();
-    console.log(isAuth, "isAuth");
     setIsLogin(isAuth);
   };
 

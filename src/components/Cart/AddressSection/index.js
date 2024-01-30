@@ -251,10 +251,19 @@ const AddressSection = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
 
+    function closeRazorPay() {
+      return new Promise((resolve, reject) => {
+        paymentObject.close();
+        resolve(1);
+      });
+    }
+
     paymentObject.on("payment.failed", e => {
       console.log(e, "erroerss");
-      paymentObject.close();
-      goToPostCheckout(0);
+      closeRazorPay().then(() => {
+        // goToPostCheckout(0);
+        window?.location?.replace("/order/failure");
+      });
     });
   }
 
