@@ -715,8 +715,15 @@ const ShoppingCartSection = () => {
                   }}>
                   <p className={styles.offer_text}>
                     {isCouponApplied
-                      ? `${code} applied🎉`
-                      : "Apply Offers & Coupon🎉"}
+                      ? `${code} applied`
+                      : "   Apply Offers & Coupon"}
+                    <span>
+                      <img
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                        alt="paty_icon"
+                        className="w-[24px] h-[24px] inline-block ml-2"
+                      />
+                    </span>
                   </p>
                   {isCouponApplied ? (
                     <p className={styles.remove_txt}>Remove</p>
