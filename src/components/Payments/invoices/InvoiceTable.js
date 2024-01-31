@@ -57,11 +57,11 @@ const InvoiceTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
                   </TableCell>
                   <TableCell
                     className={`!mr-0 ${
-                      row.status === "void"
+                      row.status === "Paid"
                         ? "!text-[#67AF7B]"
                         : "!text-[#D96060]"
                     } ${styles.tableCell}`}>
-                    {row.status === "void" ? "Paid" : "Overdue"}
+                    {row.status === "Paid" ? "Paid" : "Overdue"}
                   </TableCell>
                 </TableRow>
               ))}

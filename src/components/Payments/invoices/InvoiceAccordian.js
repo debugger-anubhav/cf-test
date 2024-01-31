@@ -53,9 +53,9 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
               <span className="font-medium">Status: </span>
               <span
                 className={`${
-                  row.status === "void" ? "text-[#67AF7B]" : "text-[#D96060]"
+                  row.status === "Paid" ? "text-[#67AF7B]" : "text-[#D96060]"
                 }`}>
-                {row.status === "void" ? "Paid" : "Overdue"}
+                {row.status === "Paid" ? "Paid" : "Overdue"}
               </span>
             </Typography>
           </AccordionDetails>
