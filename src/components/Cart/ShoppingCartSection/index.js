@@ -150,8 +150,11 @@ const ShoppingCartSection = () => {
   };
 
   const fetchAvailCoins = () => {
+    const isAuthenticated = checkAuthentication();
+    setIsLogin(isAuthenticated);
+    const id = isAuthenticated ? userId : tempUserId;
     axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+      .get(baseURL + endPoints.addToCart.fetchCoins(id))
       .then(res => {
         if (res?.data?.data?.length > 0)
           setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
