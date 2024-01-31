@@ -39,6 +39,7 @@ import {
   setIsOfflineCustomer,
   setShoppingCartTab,
 } from "@/store/Slices";
+
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
@@ -336,9 +337,12 @@ const ShoppingCartSection = () => {
         userId: userId && userId,
         cityId,
       })
-      .then(res => setIsDeletedProduct(res?.data?.data?.isDeleted))
+      .then(res => {
+        setIsDeletedProduct(res?.data?.data?.isDeleted);
+      })
       .catch(err => console.log(err));
   };
+
   useEffect(() => {
     CheckProductQuantity();
   }, []);
@@ -848,9 +852,7 @@ const ShoppingCartSection = () => {
                 onClick={() => {
                   handleCheckLogin();
                   // dispatch(setShoppingCartTab(1));
-                  if (isLogin) {
-                    CheckProductQuantity();
-                  }
+                  // CheckProductQuantity();
                 }}>
                 {isLogin
                   ? userDetails?.full_name && userDetails?.email

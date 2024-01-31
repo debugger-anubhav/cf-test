@@ -32,7 +32,12 @@ import {
   keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
-import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
+import {
+  getCartItems,
+  getSavedAddress,
+  setShoppingCartTab,
+  setShowCartItem,
+} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 import {MdOutlineVerified} from "react-icons/md";
@@ -298,16 +303,33 @@ const AddressSection = () => {
       })
       .catch(err => console.log(err));
   };
-
+  const fetchCartItems = userIdToUse => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+      .then(res => {
+        dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(setShowCartItem(true));
+      });
+  };
   const CheckProductQuantity = () => {
     axios
       .post(baseURL + endPoints.addToCart.checkProductQuantity, {
         userId: userId && userId,
         cityId,
       })
-      .then(res => setIsDeletedProduct(res?.data?.data?.isDeleted))
+      .then(res => {
+        setIsDeletedProduct(res?.data?.data?.isDeleted);
+        fetchCartItems(userId);
+      })
       .catch(err => console.log(err));
   };
+  useEffect(() => {
+    CheckProductQuantity();
+  }, []);
   useEffect(() => {
     if (isDeletedProduct) {
       showToastNotification(
