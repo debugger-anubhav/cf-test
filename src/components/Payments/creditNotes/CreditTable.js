@@ -56,6 +56,7 @@ const CreditTable = ({rows, handleShowMore, visibleRows}) => {
                   {row.creditnote_number}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
+                  <span className="font-Inter">₹</span>
                   {row.balance}
                 </TableCell>
                 <TableCell className={styles.tableCell}>

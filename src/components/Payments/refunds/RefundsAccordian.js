@@ -46,6 +46,7 @@ const RefundsAccordian = ({rows, handleShowMore, visibleRows}) => {
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium"> Amount Refunded:</span>{" "}
+              <span className="font-Inter">₹</span>
               {row.bcy_refunded_amount}
             </Typography>{" "}
             <Typography className={styles.tableCell}>

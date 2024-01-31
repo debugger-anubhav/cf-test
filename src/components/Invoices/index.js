@@ -190,9 +190,11 @@ const InvoicePage = () => {
                         {row.deal_code}
                       </TableCell>
                       <TableCell className={styles.tableCell}>
+                        <span className="font-Inter">₹</span>
                         {row.total}
                       </TableCell>
                       <TableCell className={styles.tableCell}>
+                        <span className="font-Inter">₹</span>
                         {row.balance}
                       </TableCell>
                       <TableCell

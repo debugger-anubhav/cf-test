@@ -48,9 +48,11 @@ const InvoiceTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
                     {row.invoice_number}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
+                    <span className="font-Inter">₹</span>
                     {row.total}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
+                    <span className="font-Inter">₹</span>
                     {row.balance}
                   </TableCell>
                   <TableCell

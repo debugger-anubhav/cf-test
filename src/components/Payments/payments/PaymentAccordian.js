@@ -45,7 +45,9 @@ const PaymentAccordian = ({rows, handleShowMore, visibleRows}) => {
               {row.invoice_numbers ? row.invoice_numbers : "NA"}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount Paid:</span> {row.amount}
+              <span className="font-medium">Amount Paid:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.amount}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Payment Date:</span>{" "}
