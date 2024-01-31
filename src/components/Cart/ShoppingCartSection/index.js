@@ -82,6 +82,7 @@ const ShoppingCartSection = () => {
   const [isLogin, setIsLogin] = useState();
   const [isSetupProfile, setIsSetupProfile] = useState(false);
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
+  const [isDeletedProduct, setIsDeletedProduct] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -329,6 +330,26 @@ const ShoppingCartSection = () => {
     state => state.cartPageData.isOfflineCustomer,
   );
 
+  const CheckProductQuantity = () => {
+    axios
+      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
+        userId: userId && userId,
+        cityId: cityId,
+      })
+      .then(res => setIsDeletedProduct(res?.data?.data?.isDeleted))
+      .catch(err => console.log(err));
+  };
+  useEffect(() => {
+    CheckProductQuantity();
+  }, []);
+  useEffect(() => {
+    if (isDeletedProduct) {
+      showToastNotification(
+        "Item(s) in your cart are currently out of stock",
+        3,
+      );
+    }
+  }, [isDeletedProduct]);
   return (
     showData &&
     (count > 0 ? (
@@ -827,6 +848,9 @@ const ShoppingCartSection = () => {
                 onClick={() => {
                   handleCheckLogin();
                   // dispatch(setShoppingCartTab(1));
+                  if (isLogin) {
+                    CheckProductQuantity();
+                  }
                 }}>
                 {isLogin
                   ? userDetails?.full_name && userDetails?.email

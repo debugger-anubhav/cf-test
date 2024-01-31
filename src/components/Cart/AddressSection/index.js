@@ -48,6 +48,8 @@ const AddressSection = () => {
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
   const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
+  const [isDeletedProduct, setIsDeletedProduct] = useState(false);
+
   // const [formState, setFormState] = useState({});
   const formikRef = useRef(null);
 
@@ -296,6 +298,24 @@ const AddressSection = () => {
       })
       .catch(err => console.log(err));
   };
+
+  const CheckProductQuantity = () => {
+    axios
+      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
+        userId: userId && userId,
+        cityId: cityId,
+      })
+      .then(res => setIsDeletedProduct(res?.data?.data?.isDeleted))
+      .catch(err => console.log(err));
+  };
+  useEffect(() => {
+    if (isDeletedProduct) {
+      showToastNotification(
+        "Item(s) in your cart are currently out of stock",
+        3,
+      );
+    }
+  }, [isDeletedProduct]);
 
   useEffect(() => {
     getAllSavedAddresses();
@@ -731,6 +751,7 @@ const AddressSection = () => {
                 (haveGstNumber && gstNumber === "")
               }
               onClick={() => {
+                CheckProductQuantity();
                 if (isOfflineCustomer === 1) {
                   formikRef?.current?.submitForm();
                 } else handlePayment();

@@ -97,6 +97,7 @@ export const endPoints = {
     fetchMonthlyCities: `fc-shopping-carts/fetchMonthlyCity`,
     getTransactionId: dealCodeNumber =>
       `fc-payments/getTrasactionId?dealCodeNumber=${dealCodeNumber}`,
+    checkProductQuantity: `fc-shopping-carts/checkCartProductQuantity`,
   },
 
   yourAddressPage: {
