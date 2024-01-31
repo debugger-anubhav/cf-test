@@ -334,7 +334,7 @@ const ShoppingCartSection = () => {
     axios
       .post(baseURL + endPoints.addToCart.checkProductQuantity, {
         userId: userId && userId,
-        cityId: cityId,
+        cityId,
       })
       .then(res => setIsDeletedProduct(res?.data?.data?.isDeleted))
       .catch(err => console.log(err));
