@@ -15,10 +15,10 @@
 }
 
 .basicInputStyles {
-  @apply bg-white border w-full rounded-xl    font-Poppins md:text-16 text-14 font-normal py-3 px-4;
+  @apply bg-white border w-full lg:w-[502px] rounded-xl  font-Poppins md:text-16 text-14 font-normal py-3 px-4;
   letter-spacing: -0.32px;
   line-height: normal;
-  max-width: 502px;
+
   border: 1px solid #dddddf;
 }
 .basicInputStyles:focus {
@@ -122,15 +122,80 @@
 .errorTxt {
   @apply mx-4 md:ml-16;
 }
-.correctFile {
+/* .correctFile {
   @apply border border-[#2D9469] relative md:bottom-[-13px] bottom-[-14px] w-full rounded-lg;
+} */
+
+.correctFile {
+  @apply md:bottom-[-13px] bottom-[-14px] w-full rounded-lg;
+  position: relative;
+  width: 100%;
+  height: 2px;
+  /* overflow: hidden; */
+}
+
+.correctFile::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Adjust the height of the line as needed */
+  background-color: #2d9469;
+  animation: slideAnimation 2s linear forwards; /* Adjust the duration as needed */
+}
+
+@keyframes slideAnimation {
+  100% {
+    left: 100%;
+  }
+  0% {
+    left: 0;
+  }
+  /* 0% {
+    width: 0;
+  }
+  99.9999999% {
+    width: 100%;
+    background-color: #2d9469;
+  }
+  100% {
+    width: 0;
+  } */
+}
+
+.correctFile {
+  width: 100%;
+  height: 2px;
+  background: green;
+  transform: translate(0, 100%);
+}
+
+.correctFile::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  animation: animate 1.5s linear;
+}
+
+@keyframes animate {
+  100% {
+    left: 100%;
+  }
+  0% {
+    left: 0;
+  }
 }
 
 .flexICenter {
   @apply flex items-center;
 }
 .mdHiddemIcons {
-  @apply inline-block md:hidden !w-5 !h-5;
+  @apply inline-block md:hidden !w-4 !h-4 cursor-pointer;
 }
 .mdHiddemIconsML {
   @apply md:hidden ml-3 w-5 h-5;

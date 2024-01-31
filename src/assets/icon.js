@@ -17,6 +17,7 @@ import {
   IoChevronDown,
   IoWarning,
   IoSwapHorizontalSharp,
+  IoCloseCircleSharp,
 } from "react-icons/io5";
 import {
   FaArrowRight,
@@ -76,7 +77,7 @@ import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 import {LuRefreshCcw, LuVerified} from "react-icons/lu";
 import {HiArrowTrendingUp} from "react-icons/hi2";
 
-import {FaRegCalendar} from "react-icons/fa";
+import {FaRegCalendar, FaCheckCircle} from "react-icons/fa";
 
 export const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
@@ -405,4 +406,12 @@ export const SwapIcon = ({size, color, className}) => (
 
 export const SadEmoji = ({size, color, className}) => (
   <PiSmileySadBold size={size} color={color} className={className} />
+);
+
+export const CheckFillIcon = ({size, color, className}) => (
+  <FaCheckCircle size={size} color={color} className={className} />
+);
+
+export const CloseCircleIcon = ({size, color, className}) => (
+  <IoCloseCircleSharp size={size} color={color} className={className} />
 );
