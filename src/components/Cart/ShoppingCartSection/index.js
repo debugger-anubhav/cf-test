@@ -364,6 +364,7 @@ const ShoppingCartSection = () => {
           isMonthly={isMonthly}
           cityId={cityId}
           totalAmount={totalAmount}
+          isCouponApplied={isCouponApplied}
         />
 
         <CityShieldDrawerForCart
@@ -701,7 +702,6 @@ const ShoppingCartSection = () => {
                   className={`${styles.coupons_wrapper} border-[4px] border-green-700`}
                   onClick={() => {
                     if (isCouponApplied) {
-                      console.log("first");
                       setIsCouponApplied(false);
                       setCode("");
                       dispatch(getCouponCodeUsed(""));
