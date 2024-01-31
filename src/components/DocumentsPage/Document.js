@@ -11,6 +11,10 @@ const Document = () => {
   const params = useParams();
   const orderId = params?.order_id;
   const [apiData, setApiData] = useState(null);
+  const handleViewButtonClick = imageUrl => {
+    console.log("Image URL:", imageUrl);
+    window?.open(imageUrl, "_blank");
+  };
 
   const documentApproveApiCall = () => {
     axios
@@ -80,10 +84,8 @@ const Document = () => {
                     <div className={`col-span-2 ${style.action_cell}`}>
                       <button
                         className={style.view_btn}
-                        onClick={() => window?.open(item?.image, "_blank")}>
-                        {/* <a href={item?.image} target="_blank" rel="noreferrer"> */}
+                        onClick={() => handleViewButtonClick(item?.image)}>
                         View
-                        {/* </a> */}
                       </button>
                       {item?.status === 0 && (
                         <div className={style.decision_btns}>
