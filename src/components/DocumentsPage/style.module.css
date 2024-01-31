@@ -1,5 +1,5 @@
 .conatiner_wrapper {
-  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-5 mb-[88px];
+  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-5 mb-[88px] min-h-[60vh];
 }
 .heading {
   @apply font-Poppins text-24 font-medium text-45454A pb-10 leading-8 tracking-[-2%];

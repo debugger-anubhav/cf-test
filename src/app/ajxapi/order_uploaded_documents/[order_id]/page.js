@@ -14,9 +14,7 @@ const Documentspage = () => {
       <Header />
       <MenuList />
       <Document />
-      <div className="2xl:absolute bottom-0 w-full">
-        <Footer />
-      </div>
+      <Footer />
       <Notifications />
     </div>
   );
