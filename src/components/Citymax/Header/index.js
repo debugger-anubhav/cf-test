@@ -80,8 +80,6 @@ const CitymaxHeader = ({zIndex}) => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
 
-  console.log(isLogin, homePageReduxData.isLogin, "huh");
-
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);

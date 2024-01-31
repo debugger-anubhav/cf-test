@@ -54,6 +54,7 @@ const PaymentTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
                   </TableCell>
 
                   <TableCell className={styles.tableCell}>
+                    <span className="font-Inter">₹</span>
                     {row.amount}
                   </TableCell>
                   <TableCell className={styles.tableCell}>

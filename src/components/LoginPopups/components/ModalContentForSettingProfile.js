@@ -30,7 +30,6 @@ const ModalContentForSettingProfile = ({
         full_name: values.fullName,
         email: values.email,
       };
-      console.log("intryyy1");
       await axios.patch(
         baseURL + endPoints.profileSettingPage.updateUserDetails,
         body,

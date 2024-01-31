@@ -40,18 +40,22 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
               <span className="font-medium">Invoice Date:</span> {row.date}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Amount:</span> {row.total}
+              <span className="font-medium">Invoice Amount:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.total}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Balance:</span> {row.balance}
+              <span className="font-medium">Balance:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Status: </span>
               <span
                 className={`${
-                  row.status === "void" ? "text-[#67AF7B]" : "text-[#D96060]"
+                  row.status === "Paid" ? "text-[#67AF7B]" : "text-[#D96060]"
                 }`}>
-                {row.status === "void" ? "Paid" : "Overdue"}
+                {row.status === "Paid" ? "Paid" : "Overdue"}
               </span>
             </Typography>
           </AccordionDetails>

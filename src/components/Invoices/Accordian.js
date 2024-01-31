@@ -53,10 +53,14 @@ const Accordian = ({
               <span className="font-medium">Order Number:</span> {row.deal_code}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Amount:</span> {row.total}
+              <span className="font-medium">Invoice Amount:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.total}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount Due:</span> {row.balance}
+              <span className="font-medium">Amount Due:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Status: </span>

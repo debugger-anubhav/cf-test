@@ -51,6 +51,7 @@ const RefundsTable = ({rows, visibleRows, handleShowMore}) => {
                 </TableCell>
 
                 <TableCell className={styles.tableCell}>
+                  <span className="font-Inter">₹</span>
                   {row.bcy_refunded_amount}
                 </TableCell>
                 <TableCell className={styles.tableCell}>

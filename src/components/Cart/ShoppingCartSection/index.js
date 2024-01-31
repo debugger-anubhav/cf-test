@@ -39,6 +39,7 @@ import {
   setIsOfflineCustomer,
   setShoppingCartTab,
 } from "@/store/Slices";
+
 import EmptyCartPage from "../EmptyCartPage";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
@@ -82,6 +83,7 @@ const ShoppingCartSection = () => {
   const [isLogin, setIsLogin] = useState();
   const [isSetupProfile, setIsSetupProfile] = useState(false);
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
+  const [isDeletedProduct, setIsDeletedProduct] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -91,7 +93,6 @@ const ShoppingCartSection = () => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
 
-  // console.log(userDetails, "userDetails");
   useEffect(() => {
     setArr(cartItems);
     if (cartItems[0]?.is_frp === 1) {
@@ -151,8 +152,11 @@ const ShoppingCartSection = () => {
   };
 
   const fetchAvailCoins = () => {
+    const isAuthenticated = checkAuthentication();
+    setIsLogin(isAuthenticated);
+    const id = isAuthenticated ? userId : tempUserId;
     axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+      .get(baseURL + endPoints.addToCart.fetchCoins(id))
       .then(res => {
         if (res?.data?.data?.length > 0)
           setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
@@ -327,6 +331,29 @@ const ShoppingCartSection = () => {
     state => state.cartPageData.isOfflineCustomer,
   );
 
+  const CheckProductQuantity = () => {
+    axios
+      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
+        userId: userId && userId,
+        cityId,
+      })
+      .then(res => {
+        setIsDeletedProduct(res?.data?.data?.isDeleted);
+      })
+      .catch(err => console.log(err));
+  };
+
+  useEffect(() => {
+    CheckProductQuantity();
+  }, []);
+  useEffect(() => {
+    if (isDeletedProduct) {
+      showToastNotification(
+        "Item(s) in your cart are currently out of stock",
+        3,
+      );
+    }
+  }, [isDeletedProduct]);
   return (
     showData &&
     (count > 0 ? (
@@ -365,6 +392,7 @@ const ShoppingCartSection = () => {
           isMonthly={isMonthly}
           cityId={cityId}
           totalAmount={totalAmount}
+          isCouponApplied={isCouponApplied}
         />
 
         <CityShieldDrawerForCart
@@ -699,27 +727,31 @@ const ShoppingCartSection = () => {
 
               {arr[0]?.is_frp !== 1 && (
                 <div
-                  className={styles.coupons_wrapper}
+                  className={`${styles.coupons_wrapper} border-[4px] border-green-700`}
                   onClick={() => {
-                    !isCouponApplied && setCouponDrawerOpen(true);
+                    if (isCouponApplied) {
+                      setIsCouponApplied(false);
+                      setCode("");
+                      dispatch(getCouponCodeUsed(""));
+                    } else {
+                      setCouponDrawerOpen(true);
+                    }
                     // checkCoupon();
                   }}>
                   <p className={styles.offer_text}>
                     {isCouponApplied
-                      ? `${code} applied🎉`
-                      : "Apply Offers & Coupon🎉"}
+                      ? `${code} applied`
+                      : "   Apply Offers & Coupon"}
+                    <span>
+                      <img
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                        alt="paty_icon"
+                        className="w-[24px] h-[24px] inline-block ml-2"
+                      />
+                    </span>
                   </p>
                   {isCouponApplied ? (
-                    <p
-                      className={styles.remove_txt}
-                      // onClick={handleRemoveCode}
-                      onClick={() => {
-                        setIsCouponApplied(false);
-                        setCode("");
-                        dispatch(getCouponCodeUsed(""));
-                      }}>
-                      Remove
-                    </p>
+                    <p className={styles.remove_txt}>Remove</p>
                   ) : (
                     <div onClick={() => setCouponDrawerOpen(true)}>
                       <ArrowForw color={"#3E688E"} className={styles.arrow} />
@@ -820,6 +852,7 @@ const ShoppingCartSection = () => {
                 onClick={() => {
                   handleCheckLogin();
                   // dispatch(setShoppingCartTab(1));
+                  // CheckProductQuantity();
                 }}>
                 {isLogin
                   ? userDetails?.full_name && userDetails?.email

@@ -32,7 +32,12 @@ import {
   keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
-import {getSavedAddress, setShoppingCartTab} from "@/store/Slices";
+import {
+  getCartItems,
+  getSavedAddress,
+  setShoppingCartTab,
+  setShowCartItem,
+} from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 import {MdOutlineVerified} from "react-icons/md";
@@ -48,6 +53,8 @@ const AddressSection = () => {
   const [addressDrawer, setAddressDrawer] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState();
   const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
+  const [isDeletedProduct, setIsDeletedProduct] = useState(false);
+
   // const [formState, setFormState] = useState({});
   const formikRef = useRef(null);
 
@@ -167,7 +174,7 @@ const AddressSection = () => {
 
   const goToPostCheckout = (e, id) => {
     e === 0
-      ? router.push("/order/failure")
+      ? window?.location?.replace("/order/failure")
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
@@ -251,10 +258,18 @@ const AddressSection = () => {
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
 
+    function closeRazorPay() {
+      return new Promise((resolve, reject) => {
+        paymentObject.close();
+        resolve(1);
+      });
+    }
+
     paymentObject.on("payment.failed", e => {
       console.log(e, "erroerss");
-      paymentObject.close();
-      goToPostCheckout(0);
+      closeRazorPay().then(() => {
+        goToPostCheckout(0);
+      });
     });
   }
 
@@ -288,6 +303,41 @@ const AddressSection = () => {
       })
       .catch(err => console.log(err));
   };
+  const fetchCartItems = userIdToUse => {
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+      .then(res => {
+        dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(setShowCartItem(true));
+      });
+  };
+  const CheckProductQuantity = () => {
+    axios
+      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
+        userId: userId && userId,
+        cityId,
+      })
+      .then(res => {
+        setIsDeletedProduct(res?.data?.data?.isDeleted);
+        fetchCartItems(userId);
+      })
+      .catch(err => console.log(err));
+  };
+  useEffect(() => {
+    CheckProductQuantity();
+  }, []);
+  useEffect(() => {
+    if (isDeletedProduct) {
+      showToastNotification(
+        "Item(s) in your cart are currently out of stock",
+        3,
+      );
+    }
+  }, [isDeletedProduct]);
 
   useEffect(() => {
     getAllSavedAddresses();
@@ -373,12 +423,9 @@ const AddressSection = () => {
               }}
               validationSchema={validationSchema}
               onSubmit={async (values, {setSubmitting, resetForm}) => {
-                console.log(1);
                 if (isOfflineCustomer === 1) {
-                  console.log("in if");
                   handleOfflineOrder(values);
                 } else {
-                  console.log("in else");
                   await saveUserAddress(values);
                   getAllSavedAddresses();
                   resetForm();
@@ -726,6 +773,7 @@ const AddressSection = () => {
                 (haveGstNumber && gstNumber === "")
               }
               onClick={() => {
+                CheckProductQuantity();
                 if (isOfflineCustomer === 1) {
                   formikRef?.current?.submitForm();
                 } else handlePayment();

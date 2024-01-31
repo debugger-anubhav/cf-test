@@ -116,7 +116,6 @@ const SearchCard = ({
     const isAuthenticated = await checkAuthentication();
     console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === false) {
-      console.log("inside false");
       toggleLoginModal(true);
     } else addToWishlist();
     // dispatch(addRemoveWhishListitems(!inWishList));

@@ -16,9 +16,6 @@ const BillContent = ({
   const code = pagedata.couponCodeUsed;
   const billBreakup = pagedata.billBreakout;
 
-  console.log(isCitymaxBill, "isCitymaxBillisCitymaxBill");
-  console.log(!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount"));
-
   return (
     <>
       <div className={styles.breakup_wrapper}>
@@ -52,7 +49,8 @@ const BillContent = ({
 
         {(showTotalPriceBreakdown || isOfflineInvoice) && (
           <>
-            <div className={styles.dropdown_wrapper}>
+            <div
+              className={`${styles.dropdown_wrapper} bg-[#FFFFF2] pb-2 pr-2`}>
               {billBreakup?.cartSubTotalList?.map((item, index) => (
                 <div key={index} className={styles.dropdown_row}>
                   <p
@@ -87,7 +85,6 @@ const BillContent = ({
 
         {!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount") && (
           <>
-            {console.log("ejkw")}
             <div className={styles.row}>
               <div>
                 <p className={styles.price_label}>

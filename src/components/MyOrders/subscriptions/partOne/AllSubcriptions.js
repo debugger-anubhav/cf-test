@@ -32,12 +32,10 @@ const AllSubcriptions = ({
 
   useEffect(() => {
     const handleResize = () => {
-      console.log("in handle resize");
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
       }
     };
-    console.log("in useeffect 1");
     window.addEventListener("resize", handleResize);
     handleResize();
     return () => {
@@ -54,7 +52,6 @@ const AllSubcriptions = ({
   }, []);
 
   useEffect(() => {
-    console.log("in useeffect 2");
     const newVisibleImages = Math.floor((containerWidth - 200) / 92); // Adjust as needed
     newVisibleImages > 2
       ? setVisibleImages(newVisibleImages)
@@ -64,8 +61,6 @@ const AllSubcriptions = ({
 
   const userId = decrypt(getLocalStorage("_ga"));
   console.log(userId);
-
-  console.log(data, "data");
 
   return (
     <div className={styles.main_container}>

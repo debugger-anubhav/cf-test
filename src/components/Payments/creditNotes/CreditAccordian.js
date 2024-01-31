@@ -43,7 +43,9 @@ const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
             </Typography>
 
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount:</span> {row.balance}
+              <span className="font-medium">Amount:</span>{" "}
+              <span className="font-Inter">₹</span>
+              {row.balance}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Credit Note Date:</span>{" "}

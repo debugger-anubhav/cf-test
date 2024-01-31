@@ -14,6 +14,7 @@ const CouponDrawer = ({
   isMonthly,
   cityId,
   totalAmount,
+  isCouponApplied,
 }) => {
   const [isApplied, setIsApplied] = React.useState(false);
   const [appliedIndex, setappliedIndex] = React.useState(null);
@@ -222,7 +223,7 @@ const CouponDrawer = ({
                           ? "not-allowed"
                           : "pointer",
                       }}>
-                      {isApplied && appliedIndex === index
+                      {isApplied && isCouponApplied && appliedIndex === index
                         ? "Applied!"
                         : "Apply"}
                     </button>
