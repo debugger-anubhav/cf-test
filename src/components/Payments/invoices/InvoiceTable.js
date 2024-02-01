@@ -56,12 +56,12 @@ const InvoiceTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
                     {row.balance}
                   </TableCell>
                   <TableCell
-                    className={`!mr-0 ${
-                      row.status === "Paid"
+                    className={`!mr-0${styles.tableCell} ${
+                      row.status === "paid"
                         ? "!text-[#67AF7B]"
                         : "!text-[#D96060]"
-                    } ${styles.tableCell}`}>
-                    {row.status === "Paid" ? "Paid" : "Overdue"}
+                    } `}>
+                    {row.status === "paid" ? "Paid" : "Overdue"}
                   </TableCell>
                 </TableRow>
               ))}
