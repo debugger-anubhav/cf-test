@@ -85,8 +85,6 @@ const KYCAddress = ({handleKycState, step}) => {
       return file[key];
     });
     const newArr = temp.concat(fileArray);
-    console.log(file, newArr, fileArray, "nwarrr");
-
     if (e.target.name === "addressProof") {
       if (file) {
         setFormData(prev => {
@@ -139,14 +137,12 @@ const KYCAddress = ({handleKycState, step}) => {
   };
 
   const handleOptionClickPer = option => {
-    console.log("in per", option);
     setFormErrors({...formErrors, addressProofType: ""});
     setFormData({...formData, addressProofType: option?.value});
     setSelectedOptionPer(option);
     setPerAddModal(false);
   };
   const handleOptionClickCur = option => {
-    console.log("in currrr", option);
     setFormErrors({...formErrors, currentAddressProofType: ""});
     setFormData({...formData, currentAddressProofType: option?.value});
     setSelectedOptionCur(option);
@@ -265,8 +261,6 @@ const KYCAddress = ({handleKycState, step}) => {
     handleContactBlur();
   };
 
-  console.log(formData, formErrors, "ejwheuh");
-
   const submitHandler = () => {
     validateForm();
     for (const key in formErrors) {
@@ -294,14 +288,11 @@ const KYCAddress = ({handleKycState, step}) => {
         // docImageName: formData?.addressProof?.name,
       }),
     );
-
-    console.log(formData.addressProof, "addresss");
     allData.append("userId", decrypt(getLocalStorage("_ga")));
     allData.append("alternateMobNo", formData?.contactNumber);
     for (let i = 0; i < formData.addressProof.length; i++) {
       allData.append("cf_permanent_address_proof", formData.addressProof[i]);
     }
-    // allData.append("cf_permanent_address_proof", formData.addressProof);
     for (let i = 0; i < formData.currentAddressProof.length; i++) {
       allData.append(
         "cf_delivery_address_proof",
@@ -310,11 +301,9 @@ const KYCAddress = ({handleKycState, step}) => {
     }
     // allData.append("cf_delivery_address_proof", formData.currentAddressProof);
     allData.append("orderId", orderId);
-    console.log(allData, "allldata");
     baseInstance
       .post(baseURL + endPoints.uploadAddressDocs, allData)
       .then(res => {
-        console.log(res, "res in upload address");
         handleKycState(selectedOrderId);
       })
       .catch(err => console.log(err));
