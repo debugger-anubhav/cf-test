@@ -69,6 +69,10 @@ const PastpaymentDrawer = ({
       window.removeEventListener("resize", handleresize);
     };
   }, []);
+
+  React.useEffect(() => {
+    setAmount(amountDue);
+  }, [amountDue]);
   return (
     <Drawer
       anchor={isBottomDrawer ? "bottom" : "right"}
