@@ -10,12 +10,14 @@ import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 // import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {
-  CheckCircleIcon,
+  CheckFillIcon,
+  CloseCircleIcon,
+  // CheckCircleIcon,
   // Close,
   DeleteIcon,
   ExclamationCircleFill,
   OutlineArrowRight,
-  ReloadIcon,
+  // ReloadIcon,
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -35,14 +37,18 @@ const KYCAddress = ({handleKycState, step}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [formData, setFormData] = useState({
     contactNumber: "",
-    addressProof: "", // You can add more fields as needed
-    currentAddressProof: "",
+    addressProof: [], // You can add more fields as needed
+    addressProofType: "",
+    currentAddressProof: [],
+    currentAddressProofType: "",
     termsAccepted: false,
   });
   const [formErrors, setFormErrors] = useState({
     contactNumber: "",
     addressProof: "",
+    addressProofType: "",
     currentAddressProof: "",
+    currentAddressProofType: "",
     termsAccepted: "",
   });
   // const theme = createTheme({
@@ -69,14 +75,24 @@ const KYCAddress = ({handleKycState, step}) => {
   ];
 
   const handleFileInputChange = e => {
-    const file = e.target.files[0];
-    console.log(file);
+    const file = e.target.files;
+    const temp =
+      e.target.name === "addressProof"
+        ? [...formData.addressProof]
+        : [...formData.currentAddressProof];
+
+    const fileArray = Object.keys(file).map(key => {
+      return file[key];
+    });
+    const newArr = temp.concat(fileArray);
+    console.log(file, newArr, fileArray, "nwarrr");
+
     if (e.target.name === "addressProof") {
       if (file) {
         setFormData(prev => {
-          return {...prev, addressProof: file};
+          return {...prev, addressProof: newArr};
         });
-        if (!allowedFileTypes.includes(file.type)) {
+        if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
           setFormErrors(prev => ({
             ...prev,
             addressProof: "Please select jpg,png, pdf or jpeg file",
@@ -92,9 +108,9 @@ const KYCAddress = ({handleKycState, step}) => {
     if (e.target.name === "currrentAdd") {
       if (file) {
         setFormData(prev => {
-          return {...prev, currentAddressProof: file};
+          return {...prev, currentAddressProof: newArr};
         });
-        if (!allowedFileTypes.includes(file.type)) {
+        if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
           setFormErrors(prev => ({
             ...prev,
             currentAddressProof: "Please select jpg,png, pdf or jpeg file",
@@ -108,13 +124,31 @@ const KYCAddress = ({handleKycState, step}) => {
       }
     }
   };
+
+  const handleDeleteFile = (val, index) => {
+    if (val === "addressProof") {
+      const temp = [...formData.addressProof];
+      temp.splice(index, 1);
+      setFormData({...formData, addressProof: temp});
+    }
+    if (val === "currentAddProof") {
+      const temp = [...formData.currentAddressProof];
+      temp.splice(index, 1);
+      setFormData({...formData, currentAddressProof: temp});
+    }
+  };
+
   const handleOptionClickPer = option => {
     console.log("in per", option);
+    setFormErrors({...formErrors, addressProofType: ""});
+    setFormData({...formData, addressProofType: option?.value});
     setSelectedOptionPer(option);
     setPerAddModal(false);
   };
   const handleOptionClickCur = option => {
     console.log("in currrr", option);
+    setFormErrors({...formErrors, currentAddressProofType: ""});
+    setFormData({...formData, currentAddressProofType: option?.value});
     setSelectedOptionCur(option);
     setCurrAddModal(false);
   };
@@ -170,7 +204,7 @@ const KYCAddress = ({handleKycState, step}) => {
   };
 
   const validateForm = () => {
-    if (!formData?.addressProof.name) {
+    if (!formData?.addressProof?.[0]?.name) {
       setFormErrors(prev => {
         return {...prev, addressProof: "Please upload the address proof"};
       });
@@ -179,7 +213,7 @@ const KYCAddress = ({handleKycState, step}) => {
         return {...prev, addressProof: ""};
       });
     }
-    if (!formData?.currentAddressProof.name) {
+    if (!formData?.currentAddressProof?.[0]?.name) {
       setFormErrors(prev => {
         return {
           ...prev,
@@ -203,8 +237,35 @@ const KYCAddress = ({handleKycState, step}) => {
         return {...prev, termsAccepted: ""};
       });
     }
+    if (!formData?.addressProofType) {
+      setFormErrors(prev => {
+        return {
+          ...prev,
+          addressProofType: "Please select the address proof type.",
+        };
+      });
+    } else {
+      setFormErrors(prev => {
+        return {...prev, addressProofType: ""};
+      });
+    }
+    if (!formData?.currentAddressProofType) {
+      setFormErrors(prev => {
+        return {
+          ...prev,
+          currentAddressProofType: "Please select the address proof type.",
+        };
+      });
+    } else {
+      setFormErrors(prev => {
+        return {...prev, currentAddressProofType: ""};
+      });
+    }
+
     handleContactBlur();
   };
+
+  console.log(formData, formErrors, "ejwheuh");
 
   const submitHandler = () => {
     validateForm();
@@ -221,23 +282,35 @@ const KYCAddress = ({handleKycState, step}) => {
       "permanentAddressProof",
       JSON.stringify({
         doc_id: "cf_permanent_address_proof",
-        subDocType: selectedOptionPer,
-        docImageName: formData?.addressProof?.name,
+        subDocType: selectedOptionPer?.value,
+        // docImageName: formData?.addressProof?.name,
       }),
     );
     allData.append(
       "currentAddressProof",
       JSON.stringify({
         doc_id: "cf_delivery_address_proof",
-        subDocType: selectedOptionCur,
-        docImageName: formData?.addressProof?.name,
+        subDocType: selectedOptionCur?.value,
+        // docImageName: formData?.addressProof?.name,
       }),
     );
+
+    console.log(formData.addressProof, "addresss");
     allData.append("userId", decrypt(getLocalStorage("_ga")));
     allData.append("alternateMobNo", formData?.contactNumber);
-    allData.append("docs", formData.addressProof);
-    allData.append("docs", formData.currentAddressProof);
+    for (let i = 0; i < formData.addressProof.length; i++) {
+      allData.append("cf_permanent_address_proof", formData.addressProof[i]);
+    }
+    // allData.append("cf_permanent_address_proof", formData.addressProof);
+    for (let i = 0; i < formData.currentAddressProof.length; i++) {
+      allData.append(
+        "cf_delivery_address_proof",
+        formData.currentAddressProof[i],
+      );
+    }
+    // allData.append("cf_delivery_address_proof", formData.currentAddressProof);
     allData.append("orderId", orderId);
+    console.log(allData, "allldata");
     baseInstance
       .post(baseURL + endPoints.uploadAddressDocs, allData)
       .then(res => {
@@ -250,6 +323,7 @@ const KYCAddress = ({handleKycState, step}) => {
   useEffect(() => {
     getAddProofList();
   }, []);
+
   return (
     <div>
       <TermsAndConditionsDrawer
@@ -304,7 +378,6 @@ const KYCAddress = ({handleKycState, step}) => {
         </span>
       </div>
       <div className={`${styles.formInputFirst}`}>
-        {console.log(selectedOptionPer, "oooooooooooo")}
         <DropDown
           options={docsData?.[1]?.supported_docs
             .split(",")
@@ -313,107 +386,156 @@ const KYCAddress = ({handleKycState, step}) => {
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
           setSelectedOption={setSelectedOptionPer}
-          maxWidth="502px"
+          maxWidth=""
           optionsActive="md:block hidden"
           currAddModal={currAddModal}
           perAddModal={perAddModal}
           docsData={docsData}
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
-          handleOptionClickCur={handleOptionClickCur}
+          // handleOptionClickCur={handleOptionClickCur}
           handleOptionClickPer={handleOptionClickPer}
           selectedOptionPer={selectedOptionPer}
           selectedOptionCur={selectedOptionCur}
+          addressScreen
         />
       </div>
-      <div className={`${styles.formInputFirst}`}>
+      {formErrors.addressProofType && (
+        <div className={`${commonStyles.basicErrorStyles}`}>
+          {formErrors.addressProofType}
+        </div>
+      )}
+
+      {formData?.addressProof?.length > 0 &&
+        formData?.addressProof?.map((item, index) => (
+          <div key={index} className={styles.map_row_wrapper}>
+            <div className={`${styles.formInputFirst}`}>
+              <div className="flex items-center">
+                <label
+                  // htmlFor="currrentAdd"
+                  className={`${
+                    commonStyles.basicInputStyles
+                  } md:w-[232px] block ${
+                    formErrors.addressProof && "  !bg-[#FFF1F1] md:!bg-white"
+                  } ${
+                    !formErrors.addressProof &&
+                    formData.addressProof?.length > 0
+                      ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                      : "text-[#71717a] "
+                  }`}>
+                  <div className={`${commonStyles.flexICenter} `}>
+                    <>
+                      {formErrors?.addressProof ? (
+                        <ExclamationCircleFill
+                          color={"#D96060"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      ) : (
+                        <CheckFillIcon
+                          color={"#2D9469"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      )}
+                    </>
+
+                    <Image
+                      src={uploading}
+                      alt="Uploading Icon"
+                      className={`${commonStyles.mdIBHidden}`}
+                    />
+                    <span className={`${styles.chooseFile}`}>{item?.name}</span>
+                  </div>
+                  {!formErrors.addressProof &&
+                  formData.addressProof?.length > 0 ? (
+                    <div className={`${commonStyles.correctFile}`}></div>
+                  ) : (
+                    <></>
+                  )}
+                </label>
+                <span
+                  onClick={e => {
+                    handleDeleteFile("addressProof", item);
+                  }}>
+                  <DeleteIcon
+                    color={"#71717A"}
+                    className={`${commonStyles.mdHiddemIcons} ml-3`}
+                  />
+                </span>
+              </div>
+            </div>
+            <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
+              <CheckFillIcon
+                color={"#2D9469"}
+                className={styles.showCheckCircle}
+              />
+              <div onClick={() => handleDeleteFile("addressProof", index)}>
+                <CloseCircleIcon
+                  color={"#D96060"}
+                  className={styles.showDeleteIcon}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+      <div className={`${styles.formInputFirst} !mt-2`}>
         <div className="flex items-center">
           <label
             htmlFor="addressProof"
-            className={`${commonStyles.basicInputStyles} md:w-[232px] block  ${
+            className={`${
+              commonStyles.basicInputStyles
+            } md:w-[232px] block cursor-pointer  ${
               formErrors.addressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
-              !formErrors.addressProof && formData.addressProof.name
-                ? " !bg-[#F1FFF9] md:!bg-white text-black"
-                : "text-[#71717a]"
+              // !formErrors.addressProof &&
+              // formData.addressProof &&
+              // formData.addressProof?.length === 1
+              //   ? " !bg-[#F1FFF9] md:!bg-white text-black"
+              "text-[#71717a]"
             }`}>
             <div className={`${commonStyles.flexICenter}`}>
-              {formData?.addressProof.name ? (
-                <>
-                  {formErrors?.addressProof ? (
-                    <ExclamationCircleFill
-                      color={"#D96060"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  ) : (
-                    <CheckCircleIcon
-                      color={"#2D9469"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  )}
-                </>
-              ) : (
-                <Image
-                  src={uploading}
-                  alt="Uploading Icon"
-                  className={`${commonStyles.mdHiddenIB}`}
-                />
-              )}
+              <Image
+                src={uploading}
+                alt="Uploading Icon"
+                className={`${commonStyles.mdHiddenIB}`}
+              />
+
               <Image
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
               />
-              <span className={`${styles.chooseFile}`}>
-                {formData?.addressProof?.name ?? "Choose file"}
-              </span>
+              <span className={`${styles.chooseFile}`}>Choose file(s)</span>
             </div>
-            {!formErrors.addressProof && formData.addressProof.name ? (
-              <div className={`${commonStyles.correctFile}`}></div>
-            ) : (
-              <></>
-            )}
           </label>
-          {formErrors.addressProof && (
-            <>
-              <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} />
-              <span
-                onClick={e => {
-                  e.stopPropagation();
-                  setFormData(prev => ({...prev, addressProof: ""}));
-                  setFormErrors(prev => ({...prev, addressProof: ""}));
-                }}>
-                <DeleteIcon
-                  className={`${commonStyles.mdHiddemIconsML} ml-4`}
-                />
-              </span>
-            </>
-          )}
         </div>
 
         <input
           type="file"
+          multiple
+          accept="image/jpeg,image/jpg,image/png,application/pdf"
           name="addressProof"
           id="addressProof"
-          style={{display: "none"}}
+          style={{display: "none", cursor: "pointer"}}
           onChange={e => {
             handleFileInputChange(e);
           }}
           //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
         />
       </div>
+
       {formErrors.addressProof && (
         <div className={`${commonStyles.basicErrorStyles} `}>
           {formErrors.addressProof}
         </div>
       )}
+
       <div className={`${styles.formHeadingThird}`}>
         <span className={`${commonStyles.formHeadings}`}>
           Current address proofs
         </span>
       </div>
       <div className={`${styles.formInputFirst}`}>
-        {console.log(selectedOptionCur, "iiii")}
         <DropDown
           options={docsData?.[0]?.supported_docs
             .split(",")
@@ -422,7 +544,7 @@ const KYCAddress = ({handleKycState, step}) => {
           selectedOption={selectedOptionCur}
           isOpen={currAddModal}
           setSelectedOption={setSelectedOptionCur}
-          maxWidth="502px"
+          maxWidth=""
           optionsActive="md:block hidden"
           currAddModal={currAddModal}
           perAddModal={perAddModal}
@@ -430,25 +552,107 @@ const KYCAddress = ({handleKycState, step}) => {
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
           handleOptionClickCur={handleOptionClickCur}
-          handleOptionClickPer={handleOptionClickPer}
+          // handleOptionClickPer={handleOptionClickPer}
           selectedOptionCur={selectedOptionCur}
           selectedOptionPer={selectedOptionPer}
+          addressScreen
         />
       </div>
-      <div className={`${styles.formInputFirst}`}>
+      {formErrors.currentAddressProofType && (
+        <div className={`${commonStyles.basicErrorStyles}`}>
+          {formErrors.currentAddressProofType}
+        </div>
+      )}
+
+      {formData?.currentAddressProof?.length > 0 &&
+        formData?.currentAddressProof?.map((item, index) => (
+          <div key={index} className={styles.map_row_wrapper}>
+            <div className={`${styles.formInputFirst}  cursor-pointer`}>
+              <div className="flex items-center">
+                <label
+                  className={`${
+                    commonStyles.basicInputStyles
+                  } md:w-[232px] block ${
+                    formErrors.currentAddressProof &&
+                    "  !bg-[#FFF1F1] md:!bg-white"
+                  } ${
+                    !formErrors.currentAddressProof &&
+                    formData?.currentAddressProof?.length > 0
+                      ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+                      : "text-[#71717a] "
+                  }`}>
+                  <div className={`${commonStyles.flexICenter} `}>
+                    <>
+                      {formErrors?.currentAddressProof ? (
+                        <ExclamationCircleFill
+                          color={"#D96060"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      ) : (
+                        <CheckFillIcon
+                          color={"#2D9469"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      )}
+                    </>
+
+                    <Image
+                      src={uploading}
+                      alt="Uploading Icon"
+                      className={`${commonStyles.mdIBHidden}`}
+                    />
+                    <span className={`${styles.chooseFile}`}>{item?.name}</span>
+                  </div>
+                  {!formErrors.currentAddressProof &&
+                  formData.currentAddressProof?.length > 0 ? (
+                    <div className={`${commonStyles.correctFile}`}></div>
+                  ) : (
+                    <></>
+                  )}
+                </label>
+                <span
+                  onClick={e => {
+                    handleDeleteFile("currentAddProof", item);
+                  }}>
+                  <DeleteIcon
+                    color={"#71717A"}
+                    className={`${commonStyles.mdHiddemIcons} ml-3`}
+                  />
+                </span>
+              </div>
+            </div>
+            <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
+              <CheckFillIcon
+                color="#2D9469"
+                className={styles.showCheckCircle}
+              />
+              <div onClick={() => handleDeleteFile("currentAddProof", index)}>
+                <CloseCircleIcon
+                  color="#D96060"
+                  className={styles.showDeleteIcon}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+
+      <div className={`${styles.formInputFirst} !mt-2`}>
         <div className="flex items-center">
           <label
             htmlFor="currrentAdd"
-            className={`${commonStyles.basicInputStyles} md:w-[232px] block ${
+            className={`${
+              commonStyles.basicInputStyles
+            } md:w-[232px] block cursor-pointer  ${
               formErrors.currentAddressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
-              !formErrors.currentAddressProof &&
-              formData.currentAddressProof.name
-                ? "  !bg-[#F1FFF9] md:!bg-white text-black"
-                : "text-[#71717a] "
+              // !formErrors.currentAddressProof &&
+              // formData.currentAddressProof &&
+              // formData.currentAddressProof?.length === 1
+              //   ? "  !bg-[#F1FFF9] md:!bg-white text-black"
+              "text-[#71717a] "
             }`}>
-            <div className={`${commonStyles.flexICenter}`}>
-              {formData?.currentAddressProof.name ? (
+            <div className={`${commonStyles.flexICenter} `}>
+              {formData?.currentAddressProof?.length === 1 ? (
                 <>
                   {formErrors?.currentAddressProof ? (
                     <ExclamationCircleFill
@@ -456,7 +660,7 @@ const KYCAddress = ({handleKycState, step}) => {
                       className={`${commonStyles.mdHiddemIcons}`}
                     />
                   ) : (
-                    <CheckCircleIcon
+                    <CheckFillIcon
                       color={"#2D9469"}
                       className={`${commonStyles.mdHiddemIcons}`}
                     />
@@ -474,41 +678,21 @@ const KYCAddress = ({handleKycState, step}) => {
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
               />
-              <span className={`${styles.chooseFile}`}>
-                {formData?.currentAddressProof?.name ?? "Choose file"}
-              </span>
+              <span className={`${styles.chooseFile}`}>Choose file(s)</span>
             </div>
-            {!formErrors.currentAddressProof &&
-            formData.currentAddressProof.name ? (
-              <div className={`${commonStyles.correctFile}`}></div>
-            ) : (
-              <></>
-            )}
           </label>
-          {formErrors.currentAddressProof && (
-            <>
-              <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} />
-              <span
-                onClick={e => {
-                  e.stopPropagation();
-                  setFormData(prev => ({...prev, currentAddressProof: ""}));
-                  setFormErrors(prev => ({...prev, currentAddressProof: ""}));
-                }}>
-                <DeleteIcon className={`${commonStyles.mdHiddemIcons} ml-4`} />
-              </span>
-            </>
-          )}
         </div>
 
         <input
           type="file"
+          multiple
+          accept="image/jpeg,image/jpg,image/png,application/pdf"
           name="currrentAdd"
           id="currrentAdd"
-          style={{display: "none"}}
+          style={{display: "none", cursor: "pointer"}}
           onChange={e => {
             handleFileInputChange(e);
           }}
-          //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
         />
       </div>
 
@@ -517,6 +701,7 @@ const KYCAddress = ({handleKycState, step}) => {
           {formErrors.currentAddressProof}
         </div>
       )}
+
       <div>
         <div className={`${styles.formTermsSection}`}>
           <input

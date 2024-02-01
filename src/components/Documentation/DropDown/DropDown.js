@@ -30,13 +30,16 @@ const DropDown = ({
   handleOptionClickPer,
   orderIdsModal,
   setOrderIdsModal,
-  selectedOptionOrderid,
-  isCommonField,
+  addressScreen,
 }) => {
   const handleOptionClick = option => {
     console.log(option, "optionnnn");
-    setSelectedOption(option);
-    setIsDDOpen(false);
+    if (addressScreen) {
+      perAddModal ? handleOptionClickPer(option) : handleOptionClickCur(option);
+    } else {
+      setSelectedOption(option);
+      setIsDDOpen(false);
+    }
     isInitialScreen && handleKycState(option);
   };
 
@@ -50,10 +53,10 @@ const DropDown = ({
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const permanentAddOptions = docsData?.[1]?.supported_docs
-    .split(",")
+    ?.split(",")
     ?.map(i => ({label: i, value: i}));
   const currentAddressOptions = docsData?.[0]?.supported_docs
-    .split(",")
+    ?.split(",")
     ?.map(i => ({label: i, value: i}));
   return (
     <>

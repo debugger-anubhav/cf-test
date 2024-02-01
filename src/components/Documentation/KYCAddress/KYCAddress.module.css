@@ -3,7 +3,7 @@
 } */
 
 .saveBtn {
-  @apply mt-3 md:mt-0 mb-4 md:mb-0 md:w-[232px];
+  @apply mt-3 md:mt-0 mb-4 md:mb-0 md:w-[232px] font-Poppins font-medium text-14 xl:text-16;
 }
 
 .btnGroupContainer {
@@ -16,7 +16,7 @@
 }
 
 .laterBtn {
-  @apply mt-4 md:mt-0 md:w-[232px];
+  @apply mt-4 md:mt-0 md:w-[232px] font-Poppins text-71717A font-medium text-14 xl:text-16;
 }
 
 .formTermsSection {
@@ -42,7 +42,7 @@
 }
 
 .formInputFirst {
-  @apply mt-1;
+  @apply mt-1 w-full lg:w-[505px];
 }
 
 .formInputFirst::-webkit-file-upload-button {
@@ -67,4 +67,41 @@
 
 .close_icon {
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
+}
+
+.showCheckCircle {
+  @apply flex w-[18px] h-[18px];
+  /* animation: slideIn 2s forwards; */
+}
+
+.showDeleteIcon {
+  @apply hidden w-5 h-5;
+  /* animation: slideIn 3s normal; */
+}
+
+.map_row_wrapper {
+  @apply flex items-center mt-1;
+}
+
+.check_wrapper {
+  @apply items-center ml-2 cursor-pointer;
+  animation: slideIn 1.5s normal;
+}
+.map_row_wrapper:hover .showDeleteIcon {
+  @apply flex;
+}
+.map_row_wrapper:hover .showCheckCircle {
+  @apply hidden;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  99.999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
