@@ -44,10 +44,11 @@
 }
 
 .formInputFirst {
-  @apply mt-2;
+  @apply mt-2 w-full;
 }
 
 .btnGroupContainer {
+  @apply -mx-4 md:-mx-0;
   box-shadow: none;
 }
 @media (max-width: 767px) {
@@ -57,7 +58,7 @@
 }
 
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
+  @apply flex flex-col px-4 md:px-0 md:flex-row md:mt-8 bg-fff -mb-6 md:-mb-0 bottom-0 mt-4 md:static;
 }
 .laterBtn {
   @apply mt-4 md:mt-0;
@@ -68,8 +69,38 @@
 }
 
 .lableStyle {
-  @apply md:w-[232px] block;
+  @apply block;
 }
 .chooseFile {
   @apply inline-block pl-2;
+}
+.input_wrapper {
+  @apply flex items-center w-full lg:w-fit;
+}
+.check_wrapper {
+  @apply items-center ml-2 cursor-pointer;
+  animation: slideIn 1.5s normal;
+}
+.showDeleteIcon {
+  @apply hidden w-5 h-5;
+}
+.showCheckCircle {
+  @apply flex w-[18px] h-[18px];
+}
+.input_wrapper:hover .showDeleteIcon {
+  @apply flex;
+}
+.input_wrapper:hover .showCheckCircle {
+  @apply hidden;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  99.999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

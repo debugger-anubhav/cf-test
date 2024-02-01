@@ -6,11 +6,12 @@ import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
-  CheckCircleIcon,
+  CheckFillIcon,
+  CloseCircleIcon,
   DeleteIcon,
   ExclamationCircleFill,
   OutlineArrowRight,
-  ReloadIcon,
+  // ReloadIcon,
 } from "@/assets/icon";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -51,15 +52,14 @@ const KYCSalary = ({handleKycState}) => {
 
   const [isSelected, setIsSelected] = useState("");
   const [formData, setFormData] = useState({
-    currentAddressProof: "",
+    financialDocumentProof: "",
   });
   const [formErrors, setFormErrors] = useState({
-    contactNumber: "",
     addressProof: "",
-    currentAddressProof: "",
-    termsAccepted: "",
+    financialDocumentProof: "",
   });
   const [docData, setDocsData] = useState();
+  const [isUploading, setIsUploading] = useState(false);
   console.log(docData);
   const getAddProofList = () => {
     baseInstance
@@ -72,23 +72,27 @@ const KYCSalary = ({handleKycState}) => {
   };
 
   const handleFileInputChange = e => {
+    console.log("eeee");
+    setIsUploading(false);
     const file = e.target.files[0];
 
     if (file) {
       setFormData(prev => {
-        return {...prev, currentAddressProof: file};
+        return {...prev, financialDocumentProof: file};
       });
       if (!allowedFileTypes.includes(file.type)) {
         setFormErrors(prev => ({
           ...prev,
-          currentAddressProof: "Please select jpg,png, pdf or jpeg file",
+          financialDocumentProof: "Please select jpg,png, pdf or jpeg file",
         }));
       } else {
         setFormErrors(prev => ({
           ...prev,
-          currentAddressProof: "",
+          financialDocumentProof: "",
         }));
       }
+
+      setIsUploading(true);
     }
   };
   const submitHandler = () => {
@@ -106,11 +110,11 @@ const KYCSalary = ({handleKycState}) => {
       JSON.stringify({
         doc_id: "cf_financial_statement",
         subDocType: isSelected.value,
-        docImageName: formData?.currentAddressProof?.name,
+        docImageName: formData?.financialDocumentProof?.name,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
-    allData.append("doc", formData.currentAddressProof);
+    allData.append("doc", formData.financialDocumentProof);
     allData.append("orderId", selectedOrderId);
     baseInstance
       .post(baseURL + endPoints.uploadFinancialDoc, allData)
@@ -123,6 +127,20 @@ const KYCSalary = ({handleKycState}) => {
   useEffect(() => {
     getAddProofList();
   }, []);
+
+  console.log(
+    !formErrors.financialDocumentProof &&
+      formData.financialDocumentProof.name &&
+      isUploading,
+    "llllllllllll",
+  );
+
+  const handleDeleteFile = e => {
+    e.stopPropagation();
+    setFormData(prev => ({...prev, financialDocumentProof: ""}));
+    setFormErrors(prev => ({...prev, financialDocumentProof: ""}));
+  };
+
   return (
     <div className="">
       <CommonField handleKycState={handleKycState} />
@@ -174,85 +192,108 @@ const KYCSalary = ({handleKycState}) => {
           );
         })}
       </div>
-      <div className={`${styles.formInputFirst}`}>
-        <div className={`${commonStyles.flexICenter}`}>
-          <label
-            htmlFor="currrentAdd"
-            className={`${commonStyles.basicInputStyles} ${styles.lableStyle} ${
-              formErrors.currentAddressProof && "  !bg-[#FFF1F1] md:!bg-white"
-            } ${
-              !formErrors.currentAddressProof &&
-              formData.currentAddressProof.name
-                ? "  !bg-[#F1FFF9] md:!bg-white"
-                : ""
-            }`}>
-            <div className={`${commonStyles.flexICenter}`}>
-              {formData?.currentAddressProof.name ? (
-                <>
-                  {formErrors?.currentAddressProof ? (
-                    <ExclamationCircleFill
-                      color={"#D96060"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  ) : (
-                    <CheckCircleIcon
-                      color={"#2D9469"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  )}
-                </>
-              ) : (
+
+      <div className={styles.input_wrapper}>
+        <div className={`${styles.formInputFirst}`}>
+          <div className={`${commonStyles.flexICenter}`}>
+            <label
+              htmlFor="currrentAdd"
+              className={`${commonStyles.basicInputStyles} ${
+                styles.lableStyle
+              } ${
+                formErrors.financialDocumentProof &&
+                "  !bg-[#FFF1F1] md:!bg-white"
+              } ${
+                !formErrors.financialDocumentProof &&
+                formData.financialDocumentProof.name
+                  ? "  !bg-[#F1FFF9] md:!bg-white"
+                  : ""
+              }`}>
+              <div className={`${commonStyles.flexICenter}`}>
+                {formData?.financialDocumentProof.name ? (
+                  <>
+                    {formErrors?.financialDocumentProof ? (
+                      <ExclamationCircleFill
+                        color={"#D96060"}
+                        className={`${commonStyles.mdHiddemIcons}`}
+                      />
+                    ) : (
+                      <div className={commonStyles.animate_check_icon}>
+                        <CheckFillIcon
+                          color={"#2D9469"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      </div>
+                    )}
+                  </>
+                ) : (
+                  <Image
+                    src={uploading}
+                    alt="Uploading Icon"
+                    className={`${commonStyles.mdHiddenIB}`}
+                  />
+                )}
                 <Image
                   src={uploading}
                   alt="Uploading Icon"
-                  className={`${commonStyles.mdHiddenIB}`}
+                  className={`${commonStyles.mdIBHidden}`}
                 />
-              )}
-              <Image
-                src={uploading}
-                alt="Uploading Icon"
-                className={`${commonStyles.mdIBHidden}`}
-              />
-              <span className={`${styles.chooseFile}`}>
-                {formData?.currentAddressProof?.name ?? "Choose file"}
-              </span>
-            </div>
-            {!formErrors.currentAddressProof &&
-            formData.currentAddressProof.name ? (
-              <div className={`${commonStyles.correctFile} `}></div>
-            ) : (
-              <></>
-            )}{" "}
-          </label>
-          {formErrors.currentAddressProof && (
-            <div className="flex">
-              <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} />
-              <span
-                onClick={e => {
-                  e.stopPropagation();
-                  setFormData(prev => ({...prev, currentAddressProof: ""}));
-                  setFormErrors(prev => ({...prev, currentAddressProof: ""}));
-                }}>
-                <DeleteIcon className="md:hidden ml-4 w-5 h-5" />
-              </span>
-            </div>
-          )}
+                <span className={`${styles.chooseFile}`}>
+                  {formData?.financialDocumentProof?.name ?? "Choose file"}
+                </span>
+              </div>
+              {!formErrors.financialDocumentProof &&
+              formData.financialDocumentProof.name &&
+              isUploading ? (
+                <div className={`${commonStyles.correctFile} `}></div>
+              ) : (
+                <></>
+              )}{" "}
+            </label>
+            {formData.financialDocumentProof.name && (
+              <div className="flex cursor-pointer">
+                {/* <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} /> */}
+                <span
+                  onClick={e => {
+                    handleDeleteFile(e);
+                  }}>
+                  <DeleteIcon className=" md:hidden ml-4 w-5 h-5" />
+                </span>
+              </div>
+            )}
+          </div>
+          <input
+            type="file"
+            id="currrentAdd"
+            accept="image/jpeg,image/jpg,image/png,application/pdf"
+            style={{display: "none"}}
+            onChange={e => {
+              handleFileInputChange(e);
+            }}
+            //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
+          />
         </div>
-        <input
-          type="file"
-          id="currrentAdd"
-          style={{display: "none"}}
-          onChange={e => {
-            handleFileInputChange(e);
-          }}
-          //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
-        />
+
+        {formData?.financialDocumentProof?.name && (
+          <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
+            <CheckFillIcon
+              color={"#2D9469"}
+              className={styles.showCheckCircle}
+            />
+            <div onClick={e => handleDeleteFile(e)}>
+              <CloseCircleIcon
+                color={"#D96060"}
+                className={styles.showDeleteIcon}
+              />
+            </div>
+          </div>
+        )}
       </div>
 
-      {formErrors.currentAddressProof && (
+      {formErrors.financialDocumentProof && (
         <div
           className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
-          {formErrors.currentAddressProof}
+          {formErrors.financialDocumentProof}
         </div>
       )}
       <div className={`${styles.btnGroupContainer} `}>

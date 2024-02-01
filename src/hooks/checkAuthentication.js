@@ -41,6 +41,9 @@ export const useAuthentication = () => {
       }
     } catch (error) {
       console.error("Error checking authentication:", error);
+      cookies.remove("authToken", {path: "/"});
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("_ga");
       return false;
     }
   };
