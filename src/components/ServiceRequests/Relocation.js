@@ -76,6 +76,7 @@ function Relocation({prevScreen, data}) {
       )
       .required("Postal code is required"),
     city: Yup.string().required("City is required"),
+    landmark: Yup.string().required("Landmark is required"),
   });
 
   const handleSubmit = values => {
@@ -199,14 +200,19 @@ function Relocation({prevScreen, data}) {
                 </div>
 
                 <div className={"mt-4"}>
-                  <p className={formStyles.form_label}>
-                    Nearest Landmark (optional)
-                  </p>
+                  <p className={formStyles.form_label}>Nearest Landmark</p>
                   <Field
                     name="landmark"
                     placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
                     className={formStyles.form_input}
                   />
+                  <ErrorMessage name="landmark">
+                    {msg =>
+                      formik.touched.landmark && (
+                        <p className={`${formStyles.error}`}>{msg}</p>
+                      )
+                    }
+                  </ErrorMessage>
                 </div>
 
                 <div className="mt-4">

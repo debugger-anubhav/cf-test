@@ -52,6 +52,7 @@
   @apply text-[#5774AC] underline;
 }
 .laterBtn {
+  @apply font-Poppins font-medium;
   color: #71717a;
   height: 56px;
   padding: 0px 32px;
@@ -62,7 +63,7 @@
   border: 2px solid #71717a;
 }
 .saveBtn {
-  @apply md:ml-4;
+  @apply md:ml-4 font-Poppins font-medium;
   display: flex;
   padding: 0px 32px;
   justify-content: center;
@@ -200,6 +201,21 @@
 .mdHiddemIconsML {
   @apply md:hidden ml-3 w-5 h-5;
 }
+.animate_check_icon {
+  animation: slideIn 1.5s normal;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  99.999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .mdHiddenIB {
   @apply inline-block md:hidden;
 }
