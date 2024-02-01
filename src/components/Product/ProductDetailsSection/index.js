@@ -312,6 +312,13 @@ const ProductDetails = ({params}) => {
 
   const addToCartButtonRef = useRef(null);
 
+  const productDiscount = Math.round(
+    ((durationArray?.[0]?.attr_price -
+      durationArray?.[duration.currentIndex]?.attr_price) *
+      100) /
+      durationArray?.[0]?.attr_price,
+  ).toFixed(0);
+
   const cityShieldCurrentPrice =
     (durationArray[duration.currentIndex]?.attr_price * 6) / 100;
 
@@ -737,18 +744,15 @@ const ProductDetails = ({params}) => {
                     </p>
                     {/* )} */}
 
-                    <div
-                      className={styles.discount}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      {`-${Math.round(
-                        ((durationArray?.[0]?.attr_price -
-                          durationArray?.[duration.currentIndex]?.attr_price) *
-                          100) /
-                          durationArray?.[0]?.attr_price,
-                      ).toFixed(0)}% OFF`}
-                    </div>
+                    {productDiscount > 0 && (
+                      <div
+                        className={styles.discount}
+                        style={{
+                          display: duration.value === "3" ? "none" : "flex",
+                        }}>
+                        -{productDiscount}% OFF
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* <span className="text-[#9C9C9C]">+</span>
@@ -869,9 +873,11 @@ const ProductDetails = ({params}) => {
                   <span className={styles.rupeeIcon}>₹</span>
                   {cityShieldOriginalPrice} / mo
                 </p>
-                <div className={styles.discount}>
-                  -{cityShieldDiscount}% OFF
-                </div>
+                {cityShieldDiscount > 0 && (
+                  <div className={styles.discount}>
+                    -{cityShieldDiscount}% OFF
+                  </div>
+                )}
               </div>
             )}
           </div>
