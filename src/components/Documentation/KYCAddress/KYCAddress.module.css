@@ -80,7 +80,7 @@
 }
 
 .map_row_wrapper {
-  @apply flex items-center mt-1;
+  @apply flex items-center mt-1 w-full lg:w-fit;
 }
 
 .check_wrapper {

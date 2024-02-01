@@ -75,6 +75,7 @@ const KYCAddress = ({handleKycState, step}) => {
   ];
 
   const handleFileInputChange = e => {
+    console.log(e, "innn");
     const file = e.target.files;
     const temp =
       e.target.name === "addressProof"
@@ -454,7 +455,7 @@ const KYCAddress = ({handleKycState, step}) => {
                 </span>
               </div>
             </div>
-            <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
+            <div className={`hidden md:flex ${styles.check_wrapper}`}>
               <CheckFillIcon
                 color={"#2D9469"}
                 className={styles.showCheckCircle}
@@ -509,6 +510,7 @@ const KYCAddress = ({handleKycState, step}) => {
           id="addressProof"
           style={{display: "none", cursor: "pointer"}}
           onChange={e => {
+            console.log("inn");
             handleFileInputChange(e);
           }}
           //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}

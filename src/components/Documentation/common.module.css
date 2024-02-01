@@ -120,9 +120,9 @@
   font-weight: 500;
   line-height: normal;
 }
-.errorTxt {
+/* .errorTxt {
   @apply mx-4 md:ml-16;
-}
+} */
 /* .correctFile {
   @apply border border-[#2D9469] relative md:bottom-[-13px] bottom-[-14px] w-full rounded-lg;
 } */
