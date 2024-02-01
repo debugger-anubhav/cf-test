@@ -40,7 +40,7 @@ const FormAddress = ({setTab, tab, id}) => {
       )
       .required("Contact number is required"),
 
-    landmark: Yup.string(),
+    landmark: Yup.string().required("Landmark is required"),
     address: Yup.string().required("Address is required"),
     postalCode: Yup.string()
       .test(
@@ -228,14 +228,19 @@ const FormAddress = ({setTab, tab, id}) => {
                 </div>
 
                 <div className={formStyles.form_field}>
-                  <p className={formStyles.form_label}>
-                    Nearest Landmark (optional)
-                  </p>
+                  <p className={formStyles.form_label}>Nearest Landmark</p>
                   <Field
                     name="landmark"
                     placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
                     className={formStyles.form_input}
                   />
+                  <ErrorMessage name="landmark">
+                    {msg =>
+                      formik.touched.landmark && (
+                        <p className={`${formStyles.error}`}>{msg}</p>
+                      )
+                    }
+                  </ErrorMessage>
                 </div>
 
                 <div

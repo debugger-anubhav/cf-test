@@ -93,7 +93,7 @@ const AddressSection = () => {
       )
       .required("Contact number is required"),
 
-    landmark: Yup.string(),
+    landmark: Yup.string().required("Landmark is required"),
     address: Yup.string().required("Address is required"),
     postalCode: Yup.string()
       .test(
@@ -394,7 +394,7 @@ const AddressSection = () => {
                   {primaryAddress?.city}, {primaryAddress?.state}
                 </p>
 
-                {cityName !== primaryAddress?.city && (
+                {!cityName.includes(primaryAddress?.city) && (
                   <div className={styles.add_new_info}>
                     <InformationIcon size={20} color={"#71717A"} />
                     <p className={styles.add_new_info_text}>Add new address </p>
@@ -596,14 +596,19 @@ const AddressSection = () => {
                     </div>
 
                     <div className={styles.form_field}>
-                      <p className={styles.form_label}>
-                        Nearest Landmark (optional)
-                      </p>
+                      <p className={styles.form_label}>Nearest Landmark</p>
                       <Field
                         name="landmark"
                         placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
                         className={styles.form_input}
                       />
+                      <ErrorMessage name="landmark">
+                        {msg =>
+                          formik.touched.landmark && (
+                            <p className={`${styles.error}`}>{msg}</p>
+                          )
+                        }
+                      </ErrorMessage>
                     </div>
 
                     <div

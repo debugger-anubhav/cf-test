@@ -420,10 +420,12 @@ const KYCAddress = ({handleKycState, step}) => {
                           className={`${commonStyles.mdHiddemIcons}`}
                         />
                       ) : (
-                        <CheckFillIcon
-                          color={"#2D9469"}
-                          className={`${commonStyles.mdHiddemIcons}`}
-                        />
+                        <div className={commonStyles.animate_check_icon}>
+                          <CheckFillIcon
+                            color={"#2D9469"}
+                            className={`${commonStyles.mdHiddemIcons}`}
+                          />
+                        </div>
                       )}
                     </>
 
@@ -578,10 +580,12 @@ const KYCAddress = ({handleKycState, step}) => {
                           className={`${commonStyles.mdHiddemIcons}`}
                         />
                       ) : (
-                        <CheckFillIcon
-                          color={"#2D9469"}
-                          className={`${commonStyles.mdHiddemIcons}`}
-                        />
+                        <div className={commonStyles.animate_check_icon}>
+                          <CheckFillIcon
+                            color={"#2D9469"}
+                            className={`${commonStyles.mdHiddemIcons}`}
+                          />
+                        </div>
                       )}
                     </>
 
@@ -641,27 +645,12 @@ const KYCAddress = ({handleKycState, step}) => {
               "text-[#71717a] "
             }`}>
             <div className={`${commonStyles.flexICenter} `}>
-              {formData?.currentAddressProof?.length === 1 ? (
-                <>
-                  {formErrors?.currentAddressProof ? (
-                    <ExclamationCircleFill
-                      color={"#D96060"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  ) : (
-                    <CheckFillIcon
-                      color={"#2D9469"}
-                      className={`${commonStyles.mdHiddemIcons}`}
-                    />
-                  )}
-                </>
-              ) : (
-                <Image
-                  src={uploading}
-                  alt="Uploading Icon"
-                  className={`${commonStyles.mdHiddenIB}`}
-                />
-              )}
+              <Image
+                src={uploading}
+                alt="Uploading Icon"
+                className={`${commonStyles.mdHiddenIB}`}
+              />
+
               <Image
                 src={uploading}
                 alt="Uploading Icon"
