@@ -178,6 +178,22 @@ const AddressSection = () => {
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
+  async function checkCartQunatity(val) {
+    try {
+      const res = await axios.post(
+        baseURL + endPoints.addToCart.checkProductQuantity,
+        {
+          userId: userId && userId,
+          cityId,
+        },
+      );
+      setIsDeletedProduct(res?.data?.data?.isDeleted);
+      fetchCartItems(userId, val);
+    } catch (err) {
+      console.log("in tryyyy");
+    }
+  }
+
   async function handlePayment() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
@@ -303,33 +319,27 @@ const AddressSection = () => {
       })
       .catch(err => console.log(err));
   };
-  const fetchCartItems = userIdToUse => {
+  const fetchCartItems = (userIdToUse, val) => {
     axios
       .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
+        if (res?.data?.data?.length === 0) {
+          dispatch(setShoppingCartTab(0));
+        } else {
+          val === 0 && handlePayment();
+        }
       })
       .catch(err => {
         console.log(err);
         dispatch(setShowCartItem(true));
       });
   };
-  const CheckProductQuantity = () => {
-    axios
-      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
-        userId: userId && userId,
-        cityId,
-      })
-      .then(res => {
-        setIsDeletedProduct(res?.data?.data?.isDeleted);
-        fetchCartItems(userId);
-      })
-      .catch(err => console.log(err));
-  };
   useEffect(() => {
-    CheckProductQuantity();
+    checkCartQunatity();
   }, []);
+
   useEffect(() => {
     if (isDeletedProduct) {
       showToastNotification(
@@ -773,10 +783,9 @@ const AddressSection = () => {
                 (haveGstNumber && gstNumber === "")
               }
               onClick={() => {
-                CheckProductQuantity();
                 if (isOfflineCustomer === 1) {
                   formikRef?.current?.submitForm();
-                } else handlePayment();
+                } else checkCartQunatity(0);
               }}
               className={`!mt-6 ${
                 haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
