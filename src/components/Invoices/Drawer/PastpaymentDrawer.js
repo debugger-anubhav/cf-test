@@ -16,6 +16,7 @@ const PastpaymentDrawer = ({
   open,
   amountDue,
   availbal,
+  setAvailbal,
   isCoinApplied,
   setIsCoinApplied,
   invoiceNumber,
@@ -24,8 +25,9 @@ const PastpaymentDrawer = ({
   const userId = decrypt(getLocalStorage("_ga"));
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [amount, setAmount] = useState(amountDue);
+  const originalCoin = availbal;
   // const [isCoinApplied, setIsCoinApplied] = useState(false);
-
+  console.log(availbal, "oooooooooooo");
   const dispatch = useDispatch();
 
   const handleRedirectToPayment = async () => {
@@ -73,6 +75,7 @@ const PastpaymentDrawer = ({
   React.useEffect(() => {
     setAmount(amountDue);
   }, [amountDue]);
+  // React.useEffect(()=>{console.log(isCoinApplied,"pppppp")},[isCoinApplied])
   return (
     <Drawer
       anchor={isBottomDrawer ? "bottom" : "right"}
@@ -101,8 +104,9 @@ const PastpaymentDrawer = ({
                   size={29}
                   color={"#5774AC"}
                   onClick={() => {
-                    setIsCoinApplied(false);
                     setAmount(amountDue);
+                    setIsCoinApplied(false);
+                    setAvailbal(originalCoin);
                   }}
                 />
               ) : (
@@ -112,15 +116,33 @@ const PastpaymentDrawer = ({
                   onClick={() => {
                     setIsCoinApplied(true);
                     setAmount(
-                      amountDue - availbal > 0 ? amountDue - availbal : 0,
+                      availbal > amountDue ? 0 : Math.abs(availbal - amountDue),
                     );
+                    isCoinApplied &&
+                      setAvailbal(
+                        availbal > amountDue
+                          ? 0
+                          : Math.abs(availbal - amountDue),
+                      );
                   }}
                 />
               )}
             </div>
             <p className={styles.total_txt}>
-              Use Cityfurnish coins (Available balance:{" "}
-              {isCoinApplied ? Math.abs(amountDue - availbal) : availbal})
+              Use Cityfurnish coins (Available balance:
+              {isCoinApplied
+                ? amountDue < availbal
+                  ? availbal - amount
+                  : 0
+                : Math.abs(availbal)}
+              {/* {availbal === 0
+                ? 0
+                : isCoinApplied
+                ? amountDue < availbal
+                  ? availbal - amount
+                  : 0
+                : Math.abs(availbal)} */}
+              )
             </p>
           </div>
 
