@@ -1,5 +1,5 @@
 .main_container {
-  @apply flex flex-col gap-6 xl:flex-row xl:gap-8 macbook1:justify-between 2xl:justify-normal 2xl:gap-[10rem];
+  @apply flex flex-col gap-6 xl:flex-row xl:gap-8;
 }
 .products_wrapper {
   @apply border border-DDDDDF rounded-lg h-fit w-full md:w-[579px] xl:w-full macbook1:w-[579px];

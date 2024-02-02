@@ -119,7 +119,7 @@ const OrderSummary = ({
                   {isOfflineInvoice ? (
                     <div className="mt-2">
                       <p className={styles.tenure}>
-                        Quantity: <span className={styles.rupeeIcon}>₹</span>
+                        Quantity:
                         {item?.quantity}
                       </p>
                       <p className={styles.tenure}>
@@ -189,7 +189,7 @@ const OrderSummary = ({
       <div>
         <div
           className={`${
-            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!min-w-max"
+            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!w-[424px]"
           } ${styles.box}`}>
           <p className={styles.box_header}>Address:</p>
           <div className={styles.name_div}>
@@ -208,7 +208,7 @@ const OrderSummary = ({
 
         <div
           className={`hover:border-5774AC cursor-pointer ${
-            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!min-w-max"
+            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!w-[424px]"
           } ${styles.box}`}
           onClick={() => {
             isOfflineInvoice ? console.log("not") : setBreakupDrawer(true);
