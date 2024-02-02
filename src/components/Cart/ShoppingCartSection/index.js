@@ -32,12 +32,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   deleteItems,
   getBillDetails,
+  getCartItems,
   getCouponCodeUsed,
   reduxSetModalState,
   setCityShield,
   setCoinsApplied,
   setIsOfflineCustomer,
   setShoppingCartTab,
+  setShowCartItem,
 } from "@/store/Slices";
 
 import EmptyCartPage from "../EmptyCartPage";
@@ -99,6 +101,20 @@ const ShoppingCartSection = () => {
       setLocalStorage("isMonthly", false);
     }
   }, [cartItems]);
+
+  const fetchCartItems = isValid => {
+    const id = isValid ? userId : tempUserId;
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, id))
+      .then(res => {
+        dispatch(getCartItems(res?.data?.data));
+        dispatch(setShowCartItem(true));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(setShowCartItem(true));
+      });
+  };
 
   const count = cartItems.length;
   const cityId = getLocalStorage("cityId");
@@ -316,6 +332,7 @@ const ShoppingCartSection = () => {
       setIsLogin(true);
       fetchUserDetails();
     } else setIsLogin(false);
+    fetchCartItems(isValid);
   };
 
   useEffect(() => {
