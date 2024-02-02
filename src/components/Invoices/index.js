@@ -53,6 +53,9 @@ const InvoicePage = () => {
   useEffect(() => {
     getInvoicesData();
   }, []);
+  useEffect(() => {
+    console.log(availCoins, "aaaaaaaa");
+  }, [availCoins]);
 
   const getTotalAmountDue = () => {
     let sum = 0;
@@ -66,13 +69,11 @@ const InvoicePage = () => {
     // Create a hidden anchor element
     const anchor = document.createElement("a");
     anchor.href = invoiceUrl;
-    anchor.download = "invoice.pdf"; // Set the desired file name
+    anchor.download = "invoice.pdf";
     document.body.appendChild(anchor);
 
-    // Trigger a click event on the anchor element to initiate the download
     anchor.click();
 
-    // Remove the anchor element from the DOM
     document.body.removeChild(anchor);
   };
 
@@ -95,13 +96,7 @@ const InvoicePage = () => {
         <div className={styles.past_payment_wrapper}>
           <p className={styles.desc}>
             <a href="/payments" target="_blank">
-              <span
-                // onClick={() => {
-                //   router.push("/payments");
-                // }}
-                className={styles.click_here}>
-                Click here
-              </span>
+              <span className={styles.click_here}>Click here</span>
             </a>
             to check your past payments
           </p>
@@ -132,8 +127,9 @@ const InvoicePage = () => {
               open={isDrawerOpen}
               amountDue={amountToPay}
               availbal={availCoins}
+              setAvailbal={setAvailCoins}
               isCoinApplied={isCoinApplied}
-              setIsCoinApplied={bool => setIsCoinApplied(bool)}
+              setIsCoinApplied={setIsCoinApplied}
               invoiceNumber={invoiceNumber}
             />
           </div>

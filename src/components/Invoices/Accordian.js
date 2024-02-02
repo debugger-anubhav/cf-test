@@ -21,7 +21,6 @@ const Accordian = ({
     setExpanded(newExpanded ? panel : false);
   };
 
-  console.log(rows, "eiwiu");
   return (
     <div>
       {rows.slice(0, visibleRows).map((row, index) => (
