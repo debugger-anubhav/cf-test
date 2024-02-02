@@ -201,69 +201,44 @@ const KYCAddress = ({handleKycState, step}) => {
   };
 
   const validateForm = () => {
+    const error = formErrors;
+
     if (!formData?.addressProof?.[0]?.name) {
-      setFormErrors(prev => {
-        return {...prev, addressProof: "Please upload the address proof"};
-      });
+      error.addressProof = "Please upload the address proof";
     } else {
-      setFormErrors(prev => {
-        return {...prev, addressProof: ""};
-      });
+      error.addressProof = "";
     }
     if (!formData?.currentAddressProof?.[0]?.name) {
-      setFormErrors(prev => {
-        return {
-          ...prev,
-          currentAddressProof: "Please upload the address proof",
-        };
-      });
+      error.currentAddressProof = "Please upload the address proof";
     } else {
-      setFormErrors(prev => {
-        return {...prev, currentAddressProof: ""};
-      });
+      error.currentAddressProof = "";
     }
     if (!formData?.termsAccepted) {
-      setFormErrors(prev => {
-        return {
-          ...prev,
-          termsAccepted: "You must accept the terms and conditions.",
-        };
-      });
+      error.termsAccepted = "You must accept the terms and conditions.";
     } else {
-      setFormErrors(prev => {
-        return {...prev, termsAccepted: ""};
-      });
+      error.termsAccepted = "";
     }
     if (!formData?.addressProofType) {
-      setFormErrors(prev => {
-        return {
-          ...prev,
-          addressProofType: "Please select the address proof type.",
-        };
-      });
+      error.addressProofType = "Please select the address proof type.";
     } else {
-      setFormErrors(prev => {
-        return {...prev, addressProofType: ""};
-      });
+      error.addressProofType = "";
     }
     if (!formData?.currentAddressProofType) {
-      setFormErrors(prev => {
-        return {
-          ...prev,
-          currentAddressProofType: "Please select the address proof type.",
-        };
-      });
+      error.currentAddressProofType = "Please select the address proof type.";
     } else {
-      setFormErrors(prev => {
-        return {...prev, currentAddressProofType: ""};
-      });
+      error.currentAddressProofType = "";
     }
-
+    setFormErrors(error);
     handleContactBlur();
+    // console.log(error, "jjj");
+    // console.log(Object.values(formErrors), "Object.values(formErrors)");
+    // console.log(Object.values(error).filter(Boolean).length, "lllll");
+    return !!Object.values(error).filter(Boolean).length;
   };
 
   const submitHandler = () => {
-    validateForm();
+    const isError = validateForm();
+    if (isError) return;
     for (const key in formErrors) {
       if (Object.hasOwnProperty.call(formErrors, key)) {
         const element = formErrors[key];
@@ -302,12 +277,19 @@ const KYCAddress = ({handleKycState, step}) => {
     }
     // allData.append("cf_delivery_address_proof", formData.currentAddressProof);
     allData.append("orderId", orderId);
-    baseInstance
-      .post(baseURL + endPoints.uploadAddressDocs, allData)
-      .then(res => {
-        handleKycState(selectedOrderId);
-      })
-      .catch(err => console.log(err));
+    console.log(formErrors, "ooooo");
+    console.log(
+      Object.values(formErrors).filter(Boolean).length === 0,
+      "pppppppppppp",
+    );
+    if (Object.values(formErrors).filter(Boolean).length === 0) {
+      baseInstance
+        .post(baseURL + endPoints.uploadAddressDocs, allData)
+        .then(res => {
+          handleKycState(selectedOrderId);
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   useEffect(() => {
@@ -383,7 +365,7 @@ const KYCAddress = ({handleKycState, step}) => {
           docsData={docsData}
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
-          // handleOptionClickCur={handleOptionClickCur}
+          handleOptionClickCur={handleOptionClickCur}
           handleOptionClickPer={handleOptionClickPer}
           selectedOptionPer={selectedOptionPer}
           selectedOptionCur={selectedOptionCur}
@@ -545,7 +527,7 @@ const KYCAddress = ({handleKycState, step}) => {
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
           handleOptionClickCur={handleOptionClickCur}
-          // handleOptionClickPer={handleOptionClickPer}
+          handleOptionClickPer={handleOptionClickPer}
           selectedOptionCur={selectedOptionCur}
           selectedOptionPer={selectedOptionPer}
           addressScreen
