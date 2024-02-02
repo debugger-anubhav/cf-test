@@ -33,8 +33,12 @@ import {
   loadScript,
 } from "@/constants/constant";
 import {
+  getBillDetails,
   getCartItems,
+  getCouponCodeUsed,
   getSavedAddress,
+  setCityShield,
+  setCoinsApplied,
   setShoppingCartTab,
   setShowCartItem,
 } from "@/store/Slices";
@@ -118,6 +122,11 @@ const AddressSection = () => {
       then: () => Yup.string().required("Order type is required"),
       otherwise: () => Yup.string(),
     }),
+    customerPaidAmount: Yup.string().when("offlineCustomer", {
+      is: true,
+      then: () => Yup.string().required("Customer paid amount is required"),
+      otherwise: () => Yup.string(),
+    }),
   });
 
   const orderTypeOptions = ["New Order", "Swap product"];
@@ -178,7 +187,31 @@ const AddressSection = () => {
       : router.push(`/order/confirmation/cart?oid=${id}`);
   };
 
-  async function checkCartQunatity(val) {
+  const fetchBill = async () => {
+    try {
+      const headers = {
+        userId: parseInt(userIdToUse),
+        cityshield: data.isCityShield,
+        cityId,
+        coins: billBreakup?.coinsUsed,
+        couponsCode: data.couponCodeUsed,
+        paymentMode: getLocalStorage("isMonthly") ? 0 : 1,
+      };
+
+      const res = await axios.post(
+        baseURL + endPoints.addToCart.fetchBill,
+        headers,
+      );
+      dispatch(getBillDetails(res?.data?.data));
+      dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
+      dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
+      dispatch(setCityShield(res?.data?.data?.cityshield));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  async function checkCartQunatity(val, action) {
     try {
       const res = await axios.post(
         baseURL + endPoints.addToCart.checkProductQuantity,
@@ -188,7 +221,13 @@ const AddressSection = () => {
         },
       );
       setIsDeletedProduct(res?.data?.data?.isDeleted);
-      fetchCartItems(userId, val);
+      if (val === "offlineCustomer") {
+        if (res?.data?.data?.isDeleted) dispatch(setShoppingCartTab(0));
+        else formikRef?.current?.submitForm();
+      } else {
+        fetchCartItems(userId, val);
+        fetchBill();
+      }
     } catch (err) {
       console.log("in tryyyy");
     }
@@ -300,14 +339,14 @@ const AddressSection = () => {
       state: CityToStateMapping[cityName] || "",
       postal_code: values.postalCode,
       city: cityName,
-      rental_amount: billBreakup?.finalTotalPrice?.toFixed(2),
+      // rental_amount: billBreakup?.finalTotalPrice?.toFixed(2),
+      rental_amount: values.customerPaidAmount,
       cf_care_option: data.isCityShield ? 1 : 0,
       order_type: values.orderType,
       order_number: values.orderNumber || "",
       payment_type: 1,
       userId: parseInt(userIdToUse),
     };
-
     axios
       .post(baseURL + endPoints.addToCart.offlinePayment, body)
       .then(res => {
@@ -337,7 +376,7 @@ const AddressSection = () => {
       });
   };
   useEffect(() => {
-    checkCartQunatity();
+    checkCartQunatity(1);
   }, []);
 
   useEffect(() => {
@@ -429,6 +468,7 @@ const AddressSection = () => {
                 orderNumber: "",
                 orderType: "",
                 alternateContactNumber: "",
+                customerPaidAmount: "",
                 offlineCustomer: isOfflineCustomer === 1,
               }}
               validationSchema={validationSchema}
@@ -659,6 +699,30 @@ const AddressSection = () => {
                         </ErrorMessage>
                       </div>
                     </div>
+
+                    {isOfflineCustomer === 1 && (
+                      <div className={styles.form_field}>
+                        <p className={styles.form_label}>
+                          Customer Paid Amount
+                        </p>
+
+                        <Field
+                          type="number"
+                          onKeyPress={keyPressForContactField}
+                          name="customerPaidAmount"
+                          placeholder="Enter amount customer paid"
+                          className={styles.form_input}
+                        />
+                        <ErrorMessage name="customerPaidAmount">
+                          {msg =>
+                            formik.touched.customerPaidAmount && (
+                              <p className={styles.error}>{msg} </p>
+                            )
+                          }
+                        </ErrorMessage>
+                      </div>
+                    )}
+
                     {isOfflineCustomer !== 1 && (
                       <button type="submit" className={styles.save_btn}>
                         Save & Proceed
@@ -789,7 +853,10 @@ const AddressSection = () => {
               }
               onClick={() => {
                 if (isOfflineCustomer === 1) {
-                  formikRef?.current?.submitForm();
+                  checkCartQunatity(
+                    "offlineCustomer",
+                    formikRef?.current?.submitForm(),
+                  );
                 } else checkCartQunatity(0);
               }}
               className={`!mt-6 ${
