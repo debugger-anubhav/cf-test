@@ -382,7 +382,7 @@ const AddressSection = () => {
   useEffect(() => {
     if (isDeletedProduct) {
       showToastNotification(
-        "Item(s) in your cart are currently out of stock",
+        "Cart quantities updated based on items in stock. Some items may now have zero quantity and therefore, out of stock.",
         3,
       );
     }
