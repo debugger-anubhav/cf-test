@@ -40,7 +40,6 @@ function CustomerPayment() {
   const userIdFromStorage = decrypt(getLocalStorage("_ga"));
   const coinsReduxValue = useSelector(state => state.invoicePage);
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
-  // console.log(coinsReduxValue, "ueueui");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -72,6 +71,16 @@ function CustomerPayment() {
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [redirctInvoice, setRedirctInvoice] = useState(false);
+  useEffect(() => {
+    setFormData({
+      fullName: nameParam || "",
+      email: emailParam || "",
+      amount: amountParam || 0,
+      invoice: invoiceNumberParam || "",
+      cfCoins: coinsReduxValue.availableCoins,
+      notes: "",
+    });
+  }, [urlParams]);
   useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
@@ -238,9 +247,9 @@ function CustomerPayment() {
     setuserId(userIdFromStorage);
   }, [userIdFromStorage]);
 
-  useEffect(() => {
-    fetchAvailCoins();
-  }, [userId]);
+  // useEffect(() => {
+  //   fetchAvailCoins();
+  // }, [userId]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -399,6 +408,7 @@ function CustomerPayment() {
                                 onClick={() => {
                                   setUseCityfurnishCoins(false);
                                   setAvailableCoins(backToAvailableCoins);
+                                  fetchAvailCoins();
                                 }}
                                 className={"cursor-pointer"}
                               />

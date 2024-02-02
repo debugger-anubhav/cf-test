@@ -148,9 +148,9 @@ const PastpaymentDrawer = ({
 
           <button
             className={styles.btn}
-            onClick={async () => {
-              await dispatch(getCoinsState(isCoinApplied));
-              await dispatch(
+            onClick={() => {
+              dispatch(getCoinsState(isCoinApplied));
+              dispatch(
                 getAvailableCoins(
                   isCoinApplied ? Math.abs(amountDue - availbal) : availbal,
                 ),
