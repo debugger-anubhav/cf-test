@@ -14,7 +14,7 @@
   @apply text-16 xl:text-20 font-medium tracking-0.3 xl:tracking-0.4 text-45454A mt-8 xl:mt-12;
 }
 .desc {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+  @apply flex text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
 }
 
 .amount_wrapper {

@@ -346,7 +346,8 @@ function CustomerPayment() {
                         className={styles.all_invoices}
                         onClick={() => {
                           if (isLogin) {
-                            router.push("/invoices");
+                            // router.push("/invoices");
+                            window?.open("/invoices", "_blank");
                           } else {
                             toggleLoginModal(true);
                             setRedirctInvoice(true);

@@ -35,7 +35,11 @@ function OurOffices() {
         {data?.map((item, index) => (
           <div key={index.toString()} className={styles.box_detail_container}>
             <div>
-              <LocationIcon size={20} color={"#71717A"} className={"mr-2"} />
+              <LocationIcon
+                size={20}
+                color={"#71717A"}
+                className={"mr-2 mt-[2px] lg:mt-0"}
+              />
             </div>
             <div>
               <h3 className={styles.box_heading}>{item.heading}</h3>

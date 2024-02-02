@@ -24,7 +24,7 @@
 }
 
 .box_img {
-  @apply bg-[#F6F5F8] rounded-[50%] md:h-12 md:w-12 h-5 w-5 flex items-center justify-center cursor-pointer;
+  @apply bg-[#F6F5F8] rounded-[50%] lg:h-12 lg:w-12 h-10 w-10 px-[10px] lg:px-0 flex items-center justify-center cursor-pointer;
 }
 
 .box_heading {
