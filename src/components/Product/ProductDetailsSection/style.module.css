@@ -178,7 +178,7 @@
   -webkit-user-drag: none;
 }
 .service_card_img {
-  @apply absolute top-4 right-4 lg:static w-[22px] h-[22px];
+  @apply absolute lg:top-4 lg:right-4 top-0 right-0 lg:static w-[22px] h-[22px];
 }
 .mobile {
   @apply lg:hidden;
