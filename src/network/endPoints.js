@@ -103,6 +103,7 @@ export const endPoints = {
   yourAddressPage: {
     deleteAddress: id => `fc-shipping-addresses/delete?id=${id}`,
     updateAddress: `fc-shipping-addresses/update`,
+    postalCode: "user/isPostalCodeServiceable",
   },
 
   profileSettingPage: {
