@@ -25,7 +25,7 @@ import {useSelector} from "react-redux";
 import CommonField from "../CommonField/CommonField";
 import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
 
-const KYCAddress = ({handleKycState, step}) => {
+const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
 
   const [currAddModal, setCurrAddModal] = useState(false);
@@ -35,6 +35,7 @@ const KYCAddress = ({handleKycState, step}) => {
   const [selectedOptionCur, setSelectedOptionCur] = useState({});
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
+
   const [formData, setFormData] = useState({
     contactNumber: "",
     addressProof: [], // You can add more fields as needed
@@ -59,6 +60,7 @@ const KYCAddress = ({handleKycState, step}) => {
   //   },
   // });
   // const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
+
   const getAddProofList = () => {
     baseInstance
       .get(baseURL + endPoints.addressProofList)
@@ -203,12 +205,12 @@ const KYCAddress = ({handleKycState, step}) => {
   const validateForm = () => {
     const error = formErrors;
 
-    if (!formData?.addressProof?.[0]?.name) {
+    if (!formData?.addressProof?.length > 0) {
       error.addressProof = "Please upload the address proof";
     } else {
       error.addressProof = "";
     }
-    if (!formData?.currentAddressProof?.[0]?.name) {
+    if (!formData?.currentAddressProof?.length > 0) {
       error.currentAddressProof = "Please upload the address proof";
     } else {
       error.currentAddressProof = "";
@@ -296,6 +298,35 @@ const KYCAddress = ({handleKycState, step}) => {
     getAddProofList();
   }, []);
 
+  useEffect(() => {
+    if (isReupload) {
+      const addressProof = cibilDocsData?.cf_permanent_address_proof;
+      const currentAddressProof = cibilDocsData?.cf_delivery_address_proof;
+
+      setFormData({
+        ...formData,
+        contactNumber: cibilDocsData?.userDocs?.[0]?.ownercontact,
+        addressProof,
+        currentAddressProof,
+        currentAddressProofType: currentAddressProof?.[0]?.sub_doc_type || "",
+        addressProofType: addressProof?.[0]?.sub_doc_type || "",
+      });
+      setFormErrors({
+        ...formErrors,
+        addressProof:
+          cibilDocsData?.cf_permanent_address_proof?.length === 0
+            ? "Need to reupload document as it is rejected by our team"
+            : "",
+        currentAddressProof:
+          cibilDocsData?.cf_delivery_address_proof?.length === 0
+            ? "Need to reupload document as it is rejected by our team"
+            : "",
+      });
+    }
+  }, []);
+
+  console.log(formData, "formdata");
+
   return (
     <div>
       <TermsAndConditionsDrawer
@@ -327,6 +358,7 @@ const KYCAddress = ({handleKycState, step}) => {
           <input
             type="text"
             // readOnly
+            value={formData.contactNumber}
             name="contactNumber"
             placeholder="Enter 10 digit number "
             className={styles.contact_input}
@@ -370,6 +402,7 @@ const KYCAddress = ({handleKycState, step}) => {
           selectedOptionPer={selectedOptionPer}
           selectedOptionCur={selectedOptionCur}
           addressScreen
+          value={formData?.addressProofType}
         />
       </div>
       {formErrors.addressProofType && (
@@ -417,10 +450,15 @@ const KYCAddress = ({handleKycState, step}) => {
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
                     />
-                    <span className={`${styles.chooseFile}`}>{item?.name}</span>
+                    <span className={`${styles.chooseFile}`}>
+                      {item?.name || item?.doc_name}
+                    </span>
                   </div>
-                  {!formErrors.addressProof &&
-                  formData.addressProof?.length > 0 ? (
+                  {isReupload &&
+                  cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
+                    <></>
+                  ) : !formErrors.addressProof &&
+                    formData.addressProof?.length > 0 ? (
                     <div className={`${commonStyles.correctFile}`}></div>
                   ) : (
                     <></>
@@ -437,18 +475,28 @@ const KYCAddress = ({handleKycState, step}) => {
                 </span>
               </div>
             </div>
-            <div className={`hidden md:flex ${styles.check_wrapper}`}>
-              <CheckFillIcon
-                color={"#2D9469"}
-                className={styles.showCheckCircle}
-              />
-              <div onClick={() => handleDeleteFile("addressProof", index)}>
-                <CloseCircleIcon
-                  color={"#D96060"}
-                  className={styles.showDeleteIcon}
+            {isReupload &&
+            cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
+              <div className="hidden md:flex ml-2">
+                <CheckFillIcon
+                  color={"#2D9469"}
+                  className="w-[18px] h-[18px]"
                 />
               </div>
-            </div>
+            ) : (
+              <div className={`hidden md:flex ${styles.check_wrapper}`}>
+                <CheckFillIcon
+                  color={"#2D9469"}
+                  className={styles.showCheckCircle}
+                />
+                <div onClick={() => handleDeleteFile("addressProof", index)}>
+                  <CloseCircleIcon
+                    color={"#D96060"}
+                    className={styles.showDeleteIcon}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         ))}
 
@@ -457,8 +505,11 @@ const KYCAddress = ({handleKycState, step}) => {
           <label
             htmlFor="addressProof"
             className={`${
-              commonStyles.basicInputStyles
-            } md:w-[232px] block cursor-pointer  ${
+              isReupload &&
+              cibilDocsData?.cf_permanent_address_proof?.length > 0
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            } ${commonStyles.basicInputStyles} md:w-[232px] block ${
               formErrors.addressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
               // !formErrors.addressProof &&
@@ -485,12 +536,16 @@ const KYCAddress = ({handleKycState, step}) => {
         </div>
 
         <input
+          disabled={
+            isReupload
+              ? cibilDocsData?.cf_permanent_address_proof?.length > 0
+              : false
+          }
           type="file"
           multiple
           accept="image/jpeg,image/jpg,image/png,application/pdf"
           name="addressProof"
-          id="addressProof"
-          style={{display: "none", cursor: "pointer"}}
+          style={{display: "none"}}
           onChange={e => {
             console.log("inn");
             handleFileInputChange(e);
@@ -531,6 +586,7 @@ const KYCAddress = ({handleKycState, step}) => {
           selectedOptionCur={selectedOptionCur}
           selectedOptionPer={selectedOptionPer}
           addressScreen
+          value={formData?.currentAddressProofType}
         />
       </div>
       {formErrors.currentAddressProofType && (
@@ -578,7 +634,9 @@ const KYCAddress = ({handleKycState, step}) => {
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
                     />
-                    <span className={`${styles.chooseFile}`}>{item?.name}</span>
+                    <span className={`${styles.chooseFile}`}>
+                      {item?.name || item?.doc_name}
+                    </span>
                   </div>
                   {!formErrors.currentAddressProof &&
                   formData.currentAddressProof?.length > 0 ? (
@@ -618,8 +676,10 @@ const KYCAddress = ({handleKycState, step}) => {
           <label
             htmlFor="currrentAdd"
             className={`${
-              commonStyles.basicInputStyles
-            } md:w-[232px] block cursor-pointer  ${
+              isReupload && cibilDocsData?.cf_delivery_address_proof?.length > 0
+                ? "cursor-not-allowed"
+                : "cursor-pointer"
+            } ${commonStyles.basicInputStyles} md:w-[232px] block   ${
               formErrors.currentAddressProof && "  !bg-[#FFF1F1] md:!bg-white"
             } ${
               // !formErrors.currentAddressProof &&
