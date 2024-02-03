@@ -341,27 +341,31 @@ function CustomerPayment() {
                         }}
                       />
 
-                      {/* <a href="/invoices"> */}
-                      <div
-                        className={styles.all_invoices}
+                      <a
+                        href={isLogin && `/invoices`}
                         onClick={() => {
-                          if (isLogin) {
-                            router.push("/invoices");
-                          } else {
-                            toggleLoginModal(true);
-                            setRedirctInvoice(true);
-                          }
-                        }}>
-                        <p className={styles.all_invoice_text}>
-                          See my all invoices
-                        </p>
-                        <OpenIcon
-                          color={"#5774AC"}
-                          size={25}
-                          className={"cursor-pointer"}
-                        />
-                      </div>
-                      {/* </a> */}
+                          isLogin && router.push("/invoices");
+                        }}
+                        target="_blank"
+                        rel="noreferrer">
+                        <div
+                          className={styles.all_invoices}
+                          onClick={() => {
+                            if (!isLogin) {
+                              toggleLoginModal(true);
+                              setRedirctInvoice(true);
+                            }
+                          }}>
+                          <p className={styles.all_invoice_text}>
+                            See my all invoices
+                          </p>
+                          <OpenIcon
+                            color={"#5774AC"}
+                            size={25}
+                            className={"cursor-pointer"}
+                          />
+                        </div>
+                      </a>
                     </div>
 
                     <div className={styles.form_field}>

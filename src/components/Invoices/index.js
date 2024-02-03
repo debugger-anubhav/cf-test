@@ -142,7 +142,7 @@ const InvoicePage = () => {
                 <TableRow
                   className={styles.tableRow}
                   style={{verticalAlign: "baseline"}}>
-                  <TableCell className={styles.tableHeaderCell}>
+                  <TableCell className={`${styles.tableHeaderCell} !px-0`}>
                     Invoice Date
                   </TableCell>
                   <TableCell className={styles.tableHeaderCell}>
@@ -176,7 +176,7 @@ const InvoicePage = () => {
                         index === rows.length - 1 && "!border-b-0"
                       } ${styles.tableRow}`}>
                       <TableCell
-                        className={`min-w-[116px] ${styles.tableCell}`}>
+                        className={`min-w-[116px] ${styles.tableCell} !px-0`}>
                         {row.due_days}
                       </TableCell>
                       <TableCell className={styles.tableCell}>
@@ -194,11 +194,13 @@ const InvoicePage = () => {
                         {row.balance}
                       </TableCell>
                       <TableCell
-                        className={`!font-medium ${
+                        className={`!font-medium 
+                        ${styles.tableCellStatus}
+                        ${
                           row.current_sub_status === "paid"
                             ? "!text-[#67AF7B]"
                             : "!text-[#D96060]"
-                        } ${styles.tableCell}`}>
+                        } `}>
                         {row.current_sub_status === "paid"
                           ? "Paid"
                           : "Payment Due"}

@@ -845,28 +845,29 @@ const AddressSection = () => {
                 {billBreakup?.isMonthly && "/mo"}
               </p>
             </div>
-
-            <button
-              disabled={
-                (isOfflineCustomer !== 1 && !primaryAddress) ||
-                (haveGstNumber && gstNumber === "")
-              }
-              onClick={() => {
-                if (isOfflineCustomer === 1) {
-                  checkCartQunatity(
-                    "offlineCustomer",
-                    formikRef?.current?.submitForm(),
-                  );
-                } else checkCartQunatity(0);
-              }}
-              className={`!mt-6 ${
-                haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
-              } ${!primaryAddress && "!cursor-not-allowed"} ${
-                otherStyles.proceed_button
-              }`}>
-              Proceed to Payment
-              <ArrowForw size={19} color={"#222"} />
-            </button>
+            <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
+              <button
+                disabled={
+                  (isOfflineCustomer !== 1 && !primaryAddress) ||
+                  (haveGstNumber && gstNumber === "")
+                }
+                onClick={() => {
+                  if (isOfflineCustomer === 1) {
+                    checkCartQunatity(
+                      "offlineCustomer",
+                      formikRef?.current?.submitForm(),
+                    );
+                  } else checkCartQunatity(0);
+                }}
+                className={`${
+                  haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
+                } ${!primaryAddress && "!cursor-not-allowed"} ${
+                  otherStyles.proceed_button
+                }`}>
+                Proceed to Payment
+                <ArrowForw size={19} color={"#222"} />
+              </button>
+            </div>
           </div>
         </div>
       </div>

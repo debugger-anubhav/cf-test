@@ -116,7 +116,7 @@ const PastpaymentDrawer = ({
                   onClick={() => {
                     setIsCoinApplied(true);
                     setAmount(
-                      availbal > amountDue ? 0 : Math.abs(availbal - amountDue),
+                      availbal > amountDue ? 1 : Math.abs(availbal - amountDue),
                     );
                     isCoinApplied &&
                       setAvailbal(

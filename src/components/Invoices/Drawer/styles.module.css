@@ -21,7 +21,7 @@
   @apply flex gap-2 mt-[10px] items-center;
 }
 .btn {
-  @apply bg-F6B704 mt-[34px] flex gap-[10px] w-[231px] font-medium h-12 xl:h-14 rounded-lg items-center justify-center text-14 xl:text-16 text-222 tracking-desc xl:tracking-0.3;
+  @apply bg-F6B704 mt-[34px] flex gap-[10px] w-full md:w-[231px] font-medium h-12 xl:h-14 rounded-lg items-center justify-center text-14 xl:text-16 text-222 tracking-desc xl:tracking-0.3;
 }
 .proceed_icon {
   @apply w-5 h-5 xl:w-6 xl:h-6 text-222;
