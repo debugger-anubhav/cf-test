@@ -77,7 +77,7 @@
   @apply mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
 }
 .right_div {
-  @apply flex flex-col 4xl:flex-row gap-6;
+  @apply flex flex-col 4xl:flex-row gap-6 pb-[100px] lg:pb-0;
 }
 .box_wrapper {
   @apply flex gap-4 justify-between items-center p-4 border border-DDDDDF rounded-lg hover:border-2 hover:border-5774AC hover:p-[15px] md:w-[440px] lg:w-full xl:w-[440px];

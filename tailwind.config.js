@@ -67,6 +67,7 @@ module.exports = {
       },
       boxShadow: {
         popper_shadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)",
+        sticky_btn: "0px -1px 4px 0px #00000040",
       },
       letterSpacing: {
         heading: "-0.4px",

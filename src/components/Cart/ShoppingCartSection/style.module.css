@@ -1,5 +1,5 @@
 .main_container {
-  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between;
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between pb-[100px] lg:pb-0;
 }
 .left_div {
   @apply pb-6;
@@ -147,7 +147,7 @@
   @apply text-14 leading-5 text-71717A tracking-desc;
 }
 .proceed_button {
-  @apply mt-6 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 
 .line_break {

@@ -863,21 +863,22 @@ const ShoppingCartSection = () => {
                   {isMonthly ? "/mo" : ""}
                 </p>
               </div>
-
-              <button
-                className={styles.proceed_button}
-                onClick={() => {
-                  handleCheckLogin();
-                  // dispatch(setShoppingCartTab(1));
-                  // CheckProductQuantity();
-                }}>
-                {isLogin
-                  ? userDetails?.full_name && userDetails?.email
-                    ? "Proceed"
-                    : "Set up your account to proceed"
-                  : "Login to proceed"}
-                <ArrowForw size={19} color={"#222"} />
-              </button>
+              <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
+                <button
+                  className={styles.proceed_button}
+                  onClick={() => {
+                    handleCheckLogin();
+                    // dispatch(setShoppingCartTab(1));
+                    // CheckProductQuantity();
+                  }}>
+                  {isLogin
+                    ? userDetails?.full_name && userDetails?.email
+                      ? "Proceed"
+                      : "Set up your account to proceed"
+                    : "Login to proceed"}
+                  <ArrowForw size={19} color={"#222"} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
