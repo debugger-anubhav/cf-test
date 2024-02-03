@@ -40,6 +40,10 @@
 .tableCell {
   @apply !text-71717A !text-14 xl:!text-16 !tracking-desc xl:!tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 !border-b-0 leading-normal pb-3;
 }
+.tableCellStatus {
+  @apply !text-14 xl:!text-16 !tracking-desc xl:!tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 !border-b-0 leading-normal pb-3;
+}
+
 /* .lastCell {
   @apply flex gap-4 !font-Poppins py-8 px-0 border-b border-b-EDEDEE;
 } */
