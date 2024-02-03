@@ -344,7 +344,7 @@ function CustomerPayment() {
                       <a
                         href={isLogin && `/invoices`}
                         onClick={() => {
-                          isLogin && router.push("/pages/offers");
+                          isLogin && router.push("/invoices");
                         }}
                         target="_blank"
                         rel="noreferrer">
