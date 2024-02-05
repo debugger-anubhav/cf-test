@@ -31,6 +31,7 @@ const DropDown = ({
   orderIdsModal,
   setOrderIdsModal,
   addressScreen,
+  value,
 }) => {
   const handleOptionClick = option => {
     console.log(option, "optionnnn");
@@ -42,6 +43,8 @@ const DropDown = ({
     }
     isInitialScreen && handleKycState(option);
   };
+
+  console.log(value, "valueee");
 
   const theme = createTheme({
     breakpoints: {
@@ -209,29 +212,32 @@ const DropDown = ({
         }}>
         <div
           className={`mt-1 rounded-xl border-[#DDDDDF] ${
-            styles["selected-option"]
-          } ${isOpen && !isMdScreen ? "!rounded-b-none" : ""}`}
+            value && "!cursor-not-allowed"
+          } ${styles["selected-option"]} ${
+            isOpen && !isMdScreen ? "!rounded-b-none" : ""
+          }`}
           onClick={() => {
-            setIsDDOpen(prev => !prev);
-            isInitialScreen && isMdScreen && setOrderIdsModal(!orderIdsModal);
-            // setCurrAddModal(prev => !prev);
-            // setPerAddModal(prev => !prev);
+            if (!value) {
+              setIsDDOpen(prev => !prev);
+              isInitialScreen && isMdScreen && setOrderIdsModal(!orderIdsModal);
+            }
           }}>
           <span
             className={` ${styles.selected_txt} ${
-              selectedOption?.value || selectedOption?.dealCodeNumber
+              selectedOption?.value || value || selectedOption?.dealCodeNumber
                 ? "text-black"
                 : "text-[#71717A]"
             }`}>
             {isInitialScreen
               ? selectedOption?.dealCodeNumber || "Select order"
-              : selectedOption?.label || "Select an option"}
+              : selectedOption?.label || value || "Select an option"}
           </span>
-          <div className={`${styles.ddArrow}`}>
+          <div
+            className={`${value && "!cursor-not-allowed"} ${styles.ddArrow}`}>
             {isOpen && !isMdScreen ? (
-              <PopUpArrow size={25} className={`${styles.pointer}`} />
+              <PopUpArrow size={25} />
             ) : (
-              <DownPopUpArrow size={25} className={`${styles.pointer}`} />
+              <DownPopUpArrow size={25} />
             )}
           </div>
         </div>
