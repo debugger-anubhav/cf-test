@@ -86,7 +86,9 @@ const PaymentPage = () => {
             loadingSkeleton={loadingSkeleton}
           />
           <Payment
-            rows={paymentDetails?.payments}
+            rows={paymentDetails?.payments?.sort(
+              (a, b) => new Date(b.created_time) - new Date(a.created_time),
+            )}
             loadingSkeleton={loadingSkeleton}
           />
           <CreditNotes rows={paymentDetails?.creditNotes} />
