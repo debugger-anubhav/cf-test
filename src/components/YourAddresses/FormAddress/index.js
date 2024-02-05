@@ -70,7 +70,6 @@ const FormAddress = ({setTab, tab, id}) => {
 
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
   const [cityId, setCityId] = useState(defaultCityId);
-
   const saveUserAddress = async values => {
     const headers = {
       userId: parseInt(userIdToUse),
@@ -88,7 +87,6 @@ const FormAddress = ({setTab, tab, id}) => {
     } catch (error) {
       console.error("Error adding data:", error);
     }
-
     showToastNotification("Address added successfully", 1);
     setTab();
   };
@@ -133,6 +131,25 @@ const FormAddress = ({setTab, tab, id}) => {
     toggleDrawer();
   };
 
+  const checkPostalCode = async values => {
+    try {
+      const res = await axios.post(
+        baseURL + endPoints.yourAddressPage.postalCode,
+        {
+          postalCode: parseInt(values.postalCode),
+        },
+      );
+      if (res?.data?.status === false) {
+        showToastNotification("Your postal code is not serviceable.", 3);
+      } else {
+        if (tab === 1) saveUserAddress(values);
+        if (tab === 2) handleUpdateAddress(values);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -157,10 +174,7 @@ const FormAddress = ({setTab, tab, id}) => {
           }}
           validationSchema={validationSchema}
           onSubmit={values => {
-            if (tab === 1) saveUserAddress(values);
-            if (tab === 2) handleUpdateAddress(values);
-            // getAllSavedAddresses();
-            // resetForm();
+            checkPostalCode(values);
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
