@@ -23,6 +23,8 @@ const DocMain = () => {
   const [isUpfrontPayment, setIsUpfrontPayment] = useState(false);
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
+  const [cibilDocsData, setCibilDocsData] = useState();
+  const [isReupload, setIsReupload] = useState(false);
   const dispatch = useDispatch();
 
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
@@ -50,6 +52,8 @@ const DocMain = () => {
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);
       setTenure(parseInt(response?.data?.data?.tenure));
       setCreditScore(parseInt(response?.data?.data?.credit_score));
+      setCibilDocsData(response?.data?.data?.cibilDocsData);
+      setIsReupload(response?.data?.data?.cibilDocsData?.userDocs?.length > 0);
     } catch (err) {
       console.log(err);
     }
@@ -102,10 +106,15 @@ const DocMain = () => {
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
             ) : kycState === 1 ? (
-              <KYCSalary handleKycState={id => handleKycState(id)} />
+              <KYCSalary
+                cibilDocsData={cibilDocsData}
+                handleKycState={id => handleKycState(id)}
+                isReupload={isReupload}
+              />
             ) : kycState === 2 ? (
               <KYCAddress
                 handleKycState={id => handleKycState(id)}
+                cibilDocsData={cibilDocsData}
                 step={
                   isUpfrontPayment
                     ? tenure >= 9
@@ -117,6 +126,7 @@ const DocMain = () => {
                     ? 2
                     : 3
                 }
+                isReupload={isReupload}
               />
             ) : kycState === 3 ? (
               <KYCCard handleKycState={id => handleKycState(id)} />

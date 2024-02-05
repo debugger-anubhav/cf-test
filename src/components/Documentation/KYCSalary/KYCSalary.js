@@ -43,29 +43,31 @@ const SelectionComp = ({
       <div className={`${styles.selDivider}`}>
         <hr />
       </div>
-      <div className={`${styles.selFooter} w-max-[173px]`}>{duration}</div>
+      <div className={`${styles.selFooter} w-max-[173px]`}>
+        Required for <span className="font-medium">{duration}</span>
+      </div>
     </div>
   );
 };
-const KYCSalary = ({handleKycState}) => {
+const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
-
-  const [isSelected, setIsSelected] = useState("");
+  const [docData, setDocsData] = useState();
+  const [isUploading, setIsUploading] = useState(false);
+  const [isSelected, setIsSelected] = useState();
   const [formData, setFormData] = useState({
     financialDocumentProof: "",
   });
   const [formErrors, setFormErrors] = useState({
-    addressProof: "",
+    // addressProof: "",
     financialDocumentProof: "",
   });
-  const [docData, setDocsData] = useState();
-  const [isUploading, setIsUploading] = useState(false);
   console.log(docData);
   const getAddProofList = () => {
     baseInstance
       .get(baseURL + endPoints.getFinacialDocList)
       .then(res => {
         setDocsData(res?.data?.data);
+        setIsSelected(res?.data?.data?.supported_docs?.split(",")?.[0]);
         console.log(res?.data?.data);
       })
       .catch(err => console.log(err));
@@ -80,6 +82,7 @@ const KYCSalary = ({handleKycState}) => {
       setFormData(prev => {
         return {...prev, financialDocumentProof: file};
       });
+
       if (!allowedFileTypes.includes(file.type)) {
         setFormErrors(prev => ({
           ...prev,
@@ -96,6 +99,18 @@ const KYCSalary = ({handleKycState}) => {
     }
   };
   const submitHandler = () => {
+    console.log("imnn clickkk");
+    const error = formErrors;
+    if (!formData?.financialDocumentProof?.name) {
+      error.financialDocumentProof = "Please upload the salary slip proof";
+    } else {
+      error.financialDocumentProof = "";
+    }
+    setFormErrors(error);
+    console.log(error, "errooorr");
+
+    if (error.financialDocumentProof !== "") return;
+
     for (const key in formErrors) {
       if (Object.hasOwnProperty.call(formErrors, key)) {
         const element = formErrors[key];
@@ -128,12 +143,17 @@ const KYCSalary = ({handleKycState}) => {
     getAddProofList();
   }, []);
 
-  console.log(
-    !formErrors.financialDocumentProof &&
-      formData.financialDocumentProof.name &&
-      isUploading,
-    "llllllllllll",
-  );
+  // useEffect(() => {
+  //   if (isReupload) {
+  //     setFormErrors({
+  //       ...formErrors,
+  //       financialDocumentProof:
+  //         cibilDocsData?.cf_financial_statement?.length === 0
+  //           ? "Need to reupload document as it is rejected by our team"
+  //           : "",
+  //     });
+  //   }
+  // }, []);
 
   const handleDeleteFile = e => {
     e.stopPropagation();
@@ -168,7 +188,7 @@ const KYCSalary = ({handleKycState}) => {
                 key={index}
                 className={`${styles.selContainer} ${
                   isSelected === docData?.supported_docs?.split(",")?.[index]
-                    ? " !border-[#3E688E]"
+                    ? "!border-2 !border-[#3E688E]"
                     : ""
                 } ${index > 0 ? "md:ml-4" : ""}`}>
                 <SelectionComp
@@ -198,7 +218,7 @@ const KYCSalary = ({handleKycState}) => {
           <div className={`${commonStyles.flexICenter}`}>
             <label
               htmlFor="currrentAdd"
-              className={`${commonStyles.basicInputStyles} ${
+              className={`cursor-pointer ${commonStyles.basicInputStyles} ${
                 styles.lableStyle
               } ${
                 formErrors.financialDocumentProof &&
@@ -274,6 +294,12 @@ const KYCSalary = ({handleKycState}) => {
           />
         </div>
 
+        {/* {formErrors.financialDocumentProof && (
+          <div className={`${commonStyles.basicErrorStyles} `}>
+            {formErrors.financialDocumentProof}
+          </div>
+        )} */}
+
         {formData?.financialDocumentProof?.name && (
           <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
             <CheckFillIcon
@@ -290,9 +316,10 @@ const KYCSalary = ({handleKycState}) => {
         )}
       </div>
 
+      {console.log(formErrors, formErrors.financialDocumentProof, "formerrors")}
       {formErrors.financialDocumentProof && (
         <div
-          className={`${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+          className={` ${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
           {formErrors.financialDocumentProof}
         </div>
       )}
