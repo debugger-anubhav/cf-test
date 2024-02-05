@@ -49,8 +49,10 @@ const CreditTable = ({rows, handleShowMore, visibleRows}) => {
           <TableBody>
             {rows?.slice(0, visibleRows).map((row, index) => (
               <TableRow key={index} className={styles.tableRow}>
-                <TableCell className={`${styles.tableCell}`}>
-                  {row.applied_invoices}
+                <TableCell
+                  className={`
+                !text-71717A !text-14 xl:!text-16 !tracking-[-0.28px] xl:!tracking-[-0.32px] !font-Poppins xl:py-8 pl-0 pr-0 !border-b-0 leading-normal pb-3 !flex flex-wrap whitespace-break-spaces !w-[190px] !min-w-[190px] !max-w-[200px] `}>
+                  {row.applied_invoices.split(",").join(", ")}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
                   {row.creditnote_number}

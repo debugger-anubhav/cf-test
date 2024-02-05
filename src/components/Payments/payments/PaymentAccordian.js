@@ -33,7 +33,7 @@ const PaymentAccordian = ({rows, handleShowMore, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: {row.invoice_numbers}
+              Payment Number: {row.payment_number}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>
@@ -45,9 +45,7 @@ const PaymentAccordian = ({rows, handleShowMore, visibleRows}) => {
               {row.invoice_numbers ? row.invoice_numbers : "NA"}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount Paid:</span>{" "}
-              <span className="font-Inter">₹</span>
-              {row.amount}
+              <span className="font-medium">Amount Paid:</span> {row.amount}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Payment Date:</span>{" "}
