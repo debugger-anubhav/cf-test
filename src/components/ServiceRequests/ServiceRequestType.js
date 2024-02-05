@@ -16,6 +16,7 @@ import Relocation from "./Relocation";
 import {useDispatch} from "react-redux";
 import {setServiceRequestType} from "@/store/Slices";
 import TransferOwnership from "./TransferOwnership";
+import {useRouter} from "next/navigation";
 
 function ServiceRequestType({
   orderId,
@@ -25,6 +26,7 @@ function ServiceRequestType({
   invoiceUrl,
 }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const userId = decrypt(getLocalStorage("_ga"));
   const [servicesType, setServicesType] = useState();
   const [selectedType, setSelectedType] = useState(null);
@@ -60,18 +62,18 @@ function ServiceRequestType({
     dispatch(setServiceRequestType(selectedType));
   }, [selectedType]);
 
-  const handleDownload = () => {
-    const anchor = document.createElement("a");
-    anchor.href = invoiceUrl;
-    anchor.download = "invoice.pdf"; // Set the desired file name
-    document.body.appendChild(anchor);
+  // const handleDownload = () => {
+  //   const anchor = document.createElement("a");
+  //   anchor.href = invoiceUrl;
+  //   anchor.download = "invoice.pdf"; // Set the desired file name
+  //   document.body.appendChild(anchor);
 
-    // Trigger a click event on the anchor element to initiate the download
-    anchor.click();
+  //   // Trigger a click event on the anchor element to initiate the download
+  //   anchor.click();
 
-    // Remove the anchor element from the DOM
-    document.body.removeChild(anchor);
-  };
+  //   // Remove the anchor element from the DOM
+  //   document.body.removeChild(anchor);
+  // };
 
   return (
     <>
@@ -127,7 +129,9 @@ function ServiceRequestType({
             <div>
               <p className={styles.additional_content}>Additionally</p>
               <button
-                onClick={() => handleDownload()}
+                onClick={() =>
+                  router.push(`view-purchase/${userId}/${orderId}`)
+                }
                 className={styles.download_btn}>
                 Download invoice
               </button>
