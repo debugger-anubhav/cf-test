@@ -38,7 +38,7 @@ function OurOffices() {
               <LocationIcon
                 size={20}
                 color={"#71717A"}
-                className={"mr-2 mt-[4px] lg:mt-0"}
+                className={"mr-2 !mt-[4px] "}
               />
             </div>
             <div>
