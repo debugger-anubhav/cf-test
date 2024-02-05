@@ -17,7 +17,9 @@ import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import CommonField from "../CommonField/CommonField";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import DoItLater from "../DoItLaterModal/DoItLater";
+import {reduxSetModalState} from "@/store/Slices";
 const allowedFileTypes = [
   "image/jpeg",
   "image/jpg",
@@ -50,10 +52,12 @@ const SelectionComp = ({
   );
 };
 const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
+  const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const [docData, setDocsData] = useState();
   const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
+  const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState({
     financialDocumentProof: "",
   });
@@ -161,8 +165,17 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
     setFormErrors(prev => ({...prev, financialDocumentProof: ""}));
   };
 
+  const toggleDoItLaterToggle = bool => {
+    setOpenModal(bool);
+    dispatch(reduxSetModalState(bool));
+  };
+
   return (
     <div className="">
+      <DoItLater
+        closeModal={() => toggleDoItLaterToggle(false)}
+        isModalOpen={openModal}
+      />
       <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 2</span>
@@ -326,6 +339,7 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
           <button
+            onClick={() => toggleDoItLaterToggle(true)}
             className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
             I’ll do it later
           </button>

@@ -23,8 +23,10 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import CommonField from "../CommonField/CommonField";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer/index";
+import {reduxSetModalState} from "@/store/Slices";
+import DoItLater from "../DoItLaterModal/DoItLater";
 // let src;
 // if (typeof window !== "undefined") {
 //   src = window.screen.availWidth;
@@ -39,6 +41,7 @@ const theme = createTheme({
   },
 });
 const KYCGetCivilScore = ({handleKycState}) => {
+  const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
 
   const [progressModal, setProgressModal] = useState(false);
@@ -46,6 +49,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
     label: "PAN Number (Recommended)",
     value: "",
@@ -178,9 +182,18 @@ const KYCGetCivilScore = ({handleKycState}) => {
     }
   };
 
+  const toggleDoItLaterToggle = bool => {
+    setOpenModal(bool);
+    dispatch(reduxSetModalState(bool));
+  };
+
   // console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
+      <DoItLater
+        closeModal={() => toggleDoItLaterToggle(false)}
+        isModalOpen={openModal}
+      />
       <TermsAndConditionsDrawer
         open={drawerOpen}
         toggleDrawer={bool => setDrawerOpen(bool)}
@@ -290,6 +303,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
       >
         <div className={`${styles.btnGroup}`}>
           <button
+            onClick={() => toggleDoItLaterToggle(true)}
             className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
             I’ll do it later
           </button>

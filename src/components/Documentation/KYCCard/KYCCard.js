@@ -9,14 +9,18 @@ import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {loadScript} from "@/constants/constant";
+import {reduxSetModalState} from "@/store/Slices";
+import DoItLater from "../DoItLaterModal/DoItLater";
 // import {useSelector} from "react-redux";
 
 const KYCCard = ({handleKycState}) => {
+  const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const [selected, setSelected] = useState("");
   const [modeOfPayment, setModeOfPayment] = useState();
+  const [openModal, setOpenModal] = useState(false);
 
   const updatePaymentStatus = (
     paymentID,
@@ -127,8 +131,16 @@ const KYCCard = ({handleKycState}) => {
     //   paymentObject.close();
     // });
   }
+  const toggleDoItLaterToggle = bool => {
+    setOpenModal(bool);
+    dispatch(reduxSetModalState(bool));
+  };
   return (
     <div>
+      <DoItLater
+        closeModal={() => toggleDoItLaterToggle(false)}
+        isModalOpen={openModal}
+      />
       <CommonField handleKycState={handleKycState} />
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 3</span>
@@ -186,6 +198,7 @@ const KYCCard = ({handleKycState}) => {
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
           <button
+            onClick={() => toggleDoItLaterToggle(true)}
             className={`${commonStyles.laterBtn} ${styles.laterBtn} md:w-[232px] `}>
             I’ll do it later
           </button>
