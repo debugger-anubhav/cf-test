@@ -734,14 +734,17 @@ const ProductDetails = ({params}) => {
                     </p>
                     {/* {durationArray?.[0]?.attr_price >
                     durationArray?.[duration.currentIndex]?.attr_price && ( */}
-                    <p
-                      className={styles.originalPrice}
-                      style={{
-                        display: duration.value === "3" ? "none" : "flex",
-                      }}>
-                      <span className={styles.rupeeIcon}>₹</span>
-                      {durationArray?.[0]?.attr_price}
-                    </p>
+                    {durationArray?.[duration.currentIndex]?.attr_price !==
+                      durationArray?.[0]?.attr_price && (
+                      <p
+                        className={styles.originalPrice}
+                        style={{
+                          display: duration.value === "3" ? "none" : "flex",
+                        }}>
+                        <span className={styles.rupeeIcon}>₹</span>
+                        {durationArray?.[0]?.attr_price}
+                      </p>
+                    )}
                     {/* )} */}
 
                     {productDiscount > 0 && (
