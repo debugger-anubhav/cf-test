@@ -33,7 +33,7 @@ const RefundsAccordian = ({rows, handleShowMore, visibleRows}) => {
               )
             }>
             <Typography className={`${styles.tableHeaderCell}`}>
-              Invoice Number: {row.invoiceNumber}
+              Payment Number: {row.payment_number}
             </Typography>
           </AccordionSummary>
           <AccordionDetails className={styles.accord_details}>

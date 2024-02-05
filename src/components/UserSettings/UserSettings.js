@@ -89,7 +89,9 @@ export default function UserSettings() {
       <div className={styles.main_container_mobile}>
         <p className={styles.user_account}>
           Your Account,
-          <span className={styles.main_text}>{userName || "Hello User"}</span>
+          <span className={`${styles.main_text} ml-[4px]`}>
+            {userName || "Hello User"}
+          </span>
         </p>
         <div className={styles.services_wrapper}>
           {Servicesdata?.map((ele, index) => {
