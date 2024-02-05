@@ -46,6 +46,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
 import {MdOutlineVerified} from "react-icons/md";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const AddressSection = () => {
   const [primaryAddress, setPrimaryAddress] = useState();
   const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // const [formState, setFormState] = useState({});
   const formikRef = useRef(null);
@@ -278,6 +280,8 @@ const AddressSection = () => {
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       order_id: orderId,
       handler: async function (response) {
+        console.log(1);
+        setLoading(true);
         if (response.error) {
           alert("Payment failed. Please try again.");
           goToPostCheckout(0);
@@ -296,6 +300,8 @@ const AddressSection = () => {
             baseURL + endPoints.addToCart.successPayment,
             data,
           );
+          console.log(2);
+          setLoading(false);
           console.log(result, "result");
           goToPostCheckout(1, dealCodeNumber);
         }
@@ -402,6 +408,7 @@ const AddressSection = () => {
         primaryAddress={primaryAddress}
       />
       <div className={styles.main_container}>
+        {loading && <LoaderComponent loading={loading} />}
         <div className={styles.left_div}>
           <div
             className={styles.head_div}
