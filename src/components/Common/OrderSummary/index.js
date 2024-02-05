@@ -206,9 +206,11 @@ const OrderSummary = ({
         <div className="h-4 xl:h-6"></div>
 
         <div
-          className={` cursor-pointer ${
-            isOfflineInvoice && "!w-full xs:!w-[408px] xl:!w-[424px]"
-          } ${styles.box}`}
+          className={`${
+            !isOfflineInvoice && "hover:border-5774AC cursor-pointer"
+          } ${isOfflineInvoice && " !w-full xs:!w-[408px] xl:!w-[424px]"} ${
+            styles.box
+          }`}
           onClick={() => {
             isOfflineInvoice ? console.log("not") : setBreakupDrawer(true);
           }}>
