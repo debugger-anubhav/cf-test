@@ -31,7 +31,7 @@
   @apply text-45454A text-16 md:text-20 flex font-medium font-Poppins items-center w-full lg:justify-start justify-between hover:text-5774AC;
 }
 .box_subheading {
-  @apply md:text-14 text-12 text-9A9AA2 font-medium lg:leading-6;
+  @apply md:text-14 text-12 text-9A9AA2 font-medium font-Poppins lg:leading-6;
 }
 
 .icon_contact {
