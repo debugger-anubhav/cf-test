@@ -21,11 +21,15 @@ import {
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import CommonField from "../CommonField/CommonField";
 import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
+import DoItLater from "../DoItLaterModal/DoItLater";
+import {reduxSetModalState} from "@/store/Slices";
 
 const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
+  const dispatch = useDispatch();
+
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
 
   const [currAddModal, setCurrAddModal] = useState(false);
@@ -35,6 +39,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
   const [selectedOptionCur, setSelectedOptionCur] = useState({});
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
   const [formData, setFormData] = useState({
     contactNumber: "",
@@ -325,13 +330,20 @@ const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
     }
   }, []);
 
-  console.log(formData, "formdata");
+  const toggleDoItLaterToggle = bool => {
+    setOpenModal(bool);
+    dispatch(reduxSetModalState(bool));
+  };
 
   return (
     <div>
       <TermsAndConditionsDrawer
         open={drawerOpen}
         toggleDrawer={bool => setDrawerOpen(bool)}
+      />
+      <DoItLater
+        closeModal={() => toggleDoItLaterToggle(false)}
+        isModalOpen={openModal}
       />
       <CommonField handleKycState={handleKycState} />
 
@@ -753,7 +765,9 @@ const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
       )}
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
-          <button className={`${commonStyles.laterBtn} ${styles.laterBtn}  `}>
+          <button
+            onClick={() => toggleDoItLaterToggle(true)}
+            className={`${commonStyles.laterBtn} ${styles.laterBtn}  `}>
             I&apos;ll do it later
           </button>
           <button

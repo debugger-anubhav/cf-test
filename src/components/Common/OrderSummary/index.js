@@ -119,8 +119,7 @@ const OrderSummary = ({
                   {isOfflineInvoice ? (
                     <div className="mt-2">
                       <p className={styles.tenure}>
-                        Quantity:
-                        {item?.quantity}
+                        Quantity: {item?.quantity}
                       </p>
                       <p className={styles.tenure}>
                         Refundable deposit:{" "}
@@ -207,7 +206,7 @@ const OrderSummary = ({
         <div className="h-4 xl:h-6"></div>
 
         <div
-          className={`hover:border-5774AC cursor-pointer ${
+          className={` cursor-pointer ${
             isOfflineInvoice && "!w-full xs:!w-[408px] xl:!w-[424px]"
           } ${styles.box}`}
           onClick={() => {
