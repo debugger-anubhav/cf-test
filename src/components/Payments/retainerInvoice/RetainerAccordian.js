@@ -41,7 +41,7 @@ const RetianerAccordian = ({rows, handleShowMore, visibleRows}) => {
               <span className="font-medium">Invoice Date:</span> {row.date}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium"> Invoice Number:</span>{" "}
+              <span className="font-medium"> Invoice Id:</span>{" "}
               {row.invoice_numbers ? row.invoice_numbers : "NA"}
             </Typography>
             <Typography className={styles.tableCell}>

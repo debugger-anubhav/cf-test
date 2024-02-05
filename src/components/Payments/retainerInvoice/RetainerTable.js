@@ -25,7 +25,7 @@ const RetainerTable = ({rows, visibleRows, handleShowMore}) => {
                 Invoice Date
               </TableCell>
               <TableCell className={styles.tableHeaderCell}>
-                Invoice Number
+                Invoice ID
               </TableCell>
               <TableCell className={styles.tableHeaderCell}>
                 Amount Paid
