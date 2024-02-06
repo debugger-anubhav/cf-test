@@ -25,9 +25,6 @@ const CreditTransactionAccordian = ({rows}) => {
           }`}>
           <AccordionSummary
             className={styles.accord_summary}
-            sx={{
-              bgcolor: "#f7f7f8",
-            }}
             expandIcon={
               expanded === `panel${index}` ? (
                 <Minus className={`mt-3 ${styles.exapnd_icon}`} />
