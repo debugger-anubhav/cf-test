@@ -127,6 +127,7 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
   const fetchActiveDocItem = useSelector(
     state => state.homePagedata.docSidebarActiveItem,
   );
+  console.log(isActive, "lll");
 
   return (
     <div
