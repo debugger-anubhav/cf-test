@@ -17,7 +17,6 @@ import {
   IoChevronDown,
   IoWarning,
   IoSwapHorizontalSharp,
-  IoCloseCircleSharp,
 } from "react-icons/io5";
 import {
   FaArrowRight,
@@ -52,6 +51,7 @@ import {
   MdCheckBox,
   MdOutlineCheckBoxOutlineBlank,
   MdEmail,
+  MdDelete,
 } from "react-icons/md";
 
 import {HiOutlineShare} from "react-icons/hi";
@@ -412,6 +412,6 @@ export const CheckFillIcon = ({size, color, className}) => (
   <FaCheckCircle size={size} color={color} className={className} />
 );
 
-export const CloseCircleIcon = ({size, color, className}) => (
-  <IoCloseCircleSharp size={size} color={color} className={className} />
+export const DeleteIconFilled = ({size, color, className}) => (
+  <MdDelete size={size} color={color} className={className} />
 );

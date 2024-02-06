@@ -15,13 +15,12 @@ export default function UserSettings() {
   const authCookies = new Cookies();
   const [userName, setUserName] = useState(null);
 
-  const getUserNameFromLocalStorage = () => {
-    const storedUserName = getLocalStorage("user_name");
-    setUserName(storedUserName || "Hello User");
-  };
+  const userNameFromLocalStorage = getLocalStorage("user_name");
+
   useEffect(() => {
-    getUserNameFromLocalStorage();
-  }, []);
+    const user = userNameFromLocalStorage || "Hello User";
+    setUserName(user);
+  }, [userNameFromLocalStorage]);
 
   const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [

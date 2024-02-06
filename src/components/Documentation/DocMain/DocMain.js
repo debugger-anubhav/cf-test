@@ -25,9 +25,10 @@ const DocMain = () => {
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
   const [isReupload, setIsReupload] = useState(false);
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
+
   console.log(orderIdFromOrderpage, "orderIdFromOrderpage");
 
   // console.log(isUpfrontPayment, kycState, tenure, creditScore, "detailsss");
@@ -58,10 +59,6 @@ const DocMain = () => {
       console.log(err);
     }
   };
-
-  useEffect(() => {
-    console.log(kycState, "kyc satteeee");
-  }, [kycState]);
 
   useEffect(() => {
     if (orderIdFromOrderpage) {

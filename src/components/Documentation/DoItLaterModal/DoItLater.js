@@ -30,8 +30,9 @@ const DoItLater = ({isModalOpen, closeModal}) => {
     <>
       <h1 className={styles.head}>Your Progress will be Saved!</h1>
       <p className={styles.desc}>
-        Just visit the "KYC & Documentation" page whenever you're ready to pick
-        up where you left off.
+        Just visit the{" "}
+        <span className="font-medium">"KYC & Documentation"</span> page whenever
+        you're ready to pick up where you left off.
       </p>
       <div className={styles.btn_wrapper}>
         <button
