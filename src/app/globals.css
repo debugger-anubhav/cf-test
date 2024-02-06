@@ -192,7 +192,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-bottom: 0 !important;
   border-bottom: none !important;
 }
-.MuiPaper-elevation.Mui-expanded::before {
+.MuiPaper-elevation::before {
   border-bottom-width: 1px !important;
   border-color: #ededee !important;
 }
