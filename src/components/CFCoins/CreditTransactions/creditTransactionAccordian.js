@@ -48,7 +48,8 @@ const CreditTransactionAccordian = ({rows}) => {
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Coins Gained: </span>+
-              <span className="font-Inter">₹</span> {row.amount}
+              <span className="font-Inter">₹</span>
+              {row.amount}
             </Typography>
             <Typography className={styles.tableCell}>
               <span className="font-medium">Expires on: </span> {row.expire_on}

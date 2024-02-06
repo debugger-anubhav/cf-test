@@ -43,7 +43,7 @@ const DebitAccordian = ({rows, visibleRows}) => {
               {row?.created_at?.split("T")[0]}
             </Typography>
             <Typography className={styles.tableCell}>
-              <span className="font-medium">Coins Used: </span>-{" "}
+              <span className="font-medium">Coins Used: </span>-
               <span className="font-Inter">₹</span>
               {row.amount}
             </Typography>
