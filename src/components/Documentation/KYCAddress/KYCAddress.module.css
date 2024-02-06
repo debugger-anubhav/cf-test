@@ -74,12 +74,16 @@
 }
 
 .showCheckCircle {
-  @apply flex w-[18px] h-[18px];
+  @apply flex w-5 h-5;
   /* animation: slideIn 2s forwards; */
 }
 
 .showDeleteIcon {
-  @apply hidden w-5 h-5;
+  @apply hidden w-5 h-5 justify-center items-center rounded-full bg-[#D96060] p-1;
+}
+
+.delete_icon_filled {
+  @apply w-full h-full;
   /* animation: slideIn 3s normal; */
 }
 

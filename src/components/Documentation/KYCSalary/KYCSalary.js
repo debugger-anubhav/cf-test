@@ -7,9 +7,11 @@ import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CheckFillIcon,
-  CloseCircleIcon,
+  Close,
   DeleteIcon,
+  DeleteIconFilled,
   ExclamationCircleFill,
+  InformationIcon,
   OutlineArrowRight,
   // ReloadIcon,
 } from "@/assets/icon";
@@ -58,6 +60,7 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
   const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
   const [openModal, setOpenModal] = useState(false);
+  const [showReuploadNote, setShowReuploadNote] = useState(true);
   const [formData, setFormData] = useState({
     financialDocumentProof: "",
   });
@@ -147,17 +150,17 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
     getAddProofList();
   }, []);
 
-  // useEffect(() => {
-  //   if (isReupload) {
-  //     setFormErrors({
-  //       ...formErrors,
-  //       financialDocumentProof:
-  //         cibilDocsData?.cf_financial_statement?.length === 0
-  //           ? "Need to reupload document as it is rejected by our team"
-  //           : "",
-  //     });
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (isReupload) {
+      setFormErrors({
+        ...formErrors,
+        financialDocumentProof:
+          "Please re-upload these documents as these got rejected by our team.",
+      });
+    } else {
+      setFormData({financialDocumentProof: ""});
+    }
+  }, [selectedOrderId]);
 
   const handleDeleteFile = e => {
     e.stopPropagation();
@@ -177,6 +180,24 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
         isModalOpen={openModal}
       />
       <CommonField handleKycState={handleKycState} />
+
+      {isReupload && showReuploadNote && (
+        <div className={commonStyles.reupload_note_wrapper}>
+          <InformationIcon className={`mt-0.5 ${commonStyles.reupload_icon}`} />
+          <p className={commonStyles.reupload_note_txt}>
+            Your document(s) have been rejected by our team for not meeting the
+            necessary standards. Please re-upload them to proceed with KYC
+            process.
+          </p>
+          <div
+            onClick={() => {
+              setShowReuploadNote(false);
+            }}>
+            <Close className={`cursor-pointer ${commonStyles.reupload_icon}`} />
+          </div>
+        </div>
+      )}
+
       <div className={`${styles.stepHeading}`}>
         <span className={`${commonStyles.formStepHeading}`}>Step 2</span>
       </div>
@@ -315,15 +336,13 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
 
         {formData?.financialDocumentProof?.name && (
           <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
-            <CheckFillIcon
-              color={"#2D9469"}
-              className={styles.showCheckCircle}
-            />
-            <div onClick={e => handleDeleteFile(e)}>
-              <CloseCircleIcon
-                color={"#D96060"}
-                className={styles.showDeleteIcon}
-              />
+            <div className={styles.showCheckCircle}>
+              <CheckFillIcon color={"#2D9469"} className="w-full h-full" />
+            </div>
+            <div
+              className={styles.showDeleteIcon}
+              onClick={e => handleDeleteFile(e)}>
+              <DeleteIconFilled color={"#D96060"} className="w-full h-full" />
             </div>
           </div>
         )}

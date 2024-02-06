@@ -82,10 +82,10 @@
   animation: slideIn 1.5s normal;
 }
 .showDeleteIcon {
-  @apply hidden w-5 h-5;
+  @apply hidden w-5 h-5 justify-center items-center rounded-full bg-[#D96060] p-1;
 }
 .showCheckCircle {
-  @apply flex w-[18px] h-[18px];
+  @apply flex w-5 h-5;
 }
 .input_wrapper:hover .showDeleteIcon {
   @apply flex;

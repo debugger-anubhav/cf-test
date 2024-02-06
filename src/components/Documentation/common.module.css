@@ -262,3 +262,13 @@
 .input_placeholders {
   @apply font-Poppins font-normal text-16  text-[#71717A];
 }
+
+.reupload_note_wrapper {
+  @apply w-full xl:w-fit p-2 my-4 xl:my-8 flex gap-2 items-start self-stretch rounded-lg bg-[#FCEFEF] leading-4;
+}
+.reupload_note_txt {
+  @apply text-71717A text-12 tracking-0.24 font-Poppins;
+}
+.reupload_icon {
+  @apply min-w-[16px] h-[16px] text-71717A;
+}
