@@ -148,8 +148,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
     }
   };
 
-  console.log(perAddModal, currAddModal, "hhhu");
-
   const handleOptionClickPer = option => {
     setFormErrors({...formErrors, addressProofType: ""});
     setFormData({...formData, addressProofType: option?.value});

@@ -14,7 +14,8 @@ const KYC100 = () => {
         <div className={`${styles.secondSectionHeaderTxt}`}>
           Congratulations! You have submitted your KYC documents
         </div>
-        <div className={`${styles.secondSectionPara}`}>
+        <div
+          className={`${styles.secondSectionHeaderTxt} ${styles.secondSectionPara}`}>
           We will take 24 hours to verify your KYC and start processing your
           order.
         </div>

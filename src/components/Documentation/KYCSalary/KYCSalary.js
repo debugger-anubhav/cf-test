@@ -252,17 +252,7 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
           <div className={`${commonStyles.flexICenter}`}>
             <label
               htmlFor="currrentAdd"
-              className={`cursor-pointer ${commonStyles.basicInputStyles} ${
-                styles.lableStyle
-              } ${
-                formErrors.financialDocumentProof &&
-                "  !bg-[#FFF1F1] md:!bg-white"
-              } ${
-                !formErrors.financialDocumentProof &&
-                formData.financialDocumentProof.name
-                  ? "  !bg-[#F1FFF9] md:!bg-white"
-                  : ""
-              }`}>
+              className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle}`}>
               <div className={`${commonStyles.flexICenter}`}>
                 {formData?.financialDocumentProof.name ? (
                   <>

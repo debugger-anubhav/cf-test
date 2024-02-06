@@ -43,12 +43,12 @@ const DocMain = () => {
   const userid = decrypt(getLocalStorage("_ga"));
 
   const handleKycState = async orderId => {
-    dispatch(getOrderId(orderId));
     try {
       const response = await axios.get(
         baseURL + endPoints.kycPage.getKycTrack(userid, orderId),
       );
       // console.log(response, "responsee");
+      dispatch(getOrderId(orderId));
       setKycState(response?.data?.data?.state?.state);
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);
       setTenure(parseInt(response?.data?.data?.tenure));
