@@ -42,7 +42,11 @@ const CreditTransactionTabel = ({rows, loadingSkeleton}) => {
           ) : (
             <TableBody>
               {rows?.map((row, index) => (
-                <TableRow key={index.toString()} className={styles.tableRow}>
+                <TableRow
+                  key={index.toString()}
+                  className={`${styles.tableRow} ${
+                    rows.length - 1 === index && `!border-b-0`
+                  }`}>
                   <TableCell className={`${styles.tableCell}`}>
                     {row.txnid}
                   </TableCell>
