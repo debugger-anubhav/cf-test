@@ -127,7 +127,9 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
   const fetchActiveDocItem = useSelector(
     state => state.homePagedata.docSidebarActiveItem,
   );
-
+  useEffect(() => {
+    console.log(fetchActiveDocItem, "pppppppppp");
+  }, []);
   return (
     <div
       className={`${heading === "Account" && styles.border_none} ${
