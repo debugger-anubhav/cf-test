@@ -20,9 +20,10 @@ const DebitAccordian = ({rows, visibleRows}) => {
           expanded={expanded === `panel${index}`}
           key={index}
           onChange={handleChange(`panel${index}`)}
-          className={`${expanded === `panel${index}` && "bg-F7F7F8"} ${
-            styles.accordian
-          }`}>
+          className={`${expanded === `panel${index}` && "bg-F7F7F8"}
+          ${
+            index === rows?.slice(0, visibleRows)?.length - 1 && "!border-b-0"
+          } `}>
           <AccordionSummary
             className={styles.accord_summary}
             expandIcon={

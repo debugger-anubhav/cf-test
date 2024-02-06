@@ -71,7 +71,7 @@
   @apply xl:hidden mt-8;
 }
 .accordian {
-  @apply xl:p-3 shadow-none border-b-0 rounded-none;
+  @apply xl:p-3 shadow-none rounded-none;
 }
 .accordian.Mui-expanded {
   @apply !my-0;
