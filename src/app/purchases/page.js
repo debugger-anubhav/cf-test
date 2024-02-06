@@ -12,7 +12,7 @@ import {setDocSidebarActiveItem} from "@/store/Slices";
 const index = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(setDocSidebarActiveItem("My orders"));
+    dispatch(setDocSidebarActiveItem("My Orders"));
   }, []);
   return (
     <div className="large_layout">

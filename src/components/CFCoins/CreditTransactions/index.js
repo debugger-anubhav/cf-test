@@ -7,6 +7,7 @@ const CreditTransactions = ({rows, loadingSkeleton}) => {
   return (
     <>
       <p className={styles.sub_head}>My Transactions (Credit)</p>
+
       <div className={styles.web}>
         <CreditTransactionTabel rows={rows} loadingSkeleton={loadingSkeleton} />
       </div>

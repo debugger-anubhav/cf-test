@@ -20,9 +20,7 @@ const CreditTransactionAccordian = ({rows}) => {
           expanded={expanded === `panel${index}`}
           key={index.toString()}
           onChange={handleChange(`panel${index}`)}
-          className={`${expanded === `panel${index}` && "bg-F7F7F8"} ${
-            styles.accordian
-          }`}>
+          className={`${expanded === `panel${index}` && "bg-F7F7F8"} `}>
           <AccordionSummary
             className={styles.accord_summary}
             expandIcon={
