@@ -30,6 +30,7 @@ export const statusLabels = {
   "delivered - partial": "Partial Delivered",
   "kyc docs under review": "KYC Under Review",
   "kyc completed": "KYC Approved",
+  "out for delivery": "Out for Delivery",
 };
 
 const CommonContainer = ({
@@ -60,6 +61,7 @@ const CommonContainer = ({
           } ${styles.upperBox}`}>
           <div className={styles.left_part}>
             <img
+              className="w-10 h-10"
               src={
                 tab === 0
                   ? IconLink +
