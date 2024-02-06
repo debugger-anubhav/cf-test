@@ -16,7 +16,7 @@ const OrderDetails = ({setPart, data}) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const stepsCompleted = data?.stagesData?.length;
-  const orderStatus = data?.stagesData[stepsCompleted - 1]?.zoho_sub_status;
+  const orderStatus = data?.stagesData?.[stepsCompleted - 1]?.zoho_sub_status;
 
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
 

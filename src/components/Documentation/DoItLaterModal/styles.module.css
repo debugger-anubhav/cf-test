@@ -20,7 +20,7 @@
   @apply text-45454A text-20 md:text-24 font-medium leading-8 tracking-0.48 font-Poppins;
 }
 .desc {
-  @apply mt-8 text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3;
+  @apply mt-8 text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3 font-Poppins;
 }
 .btn_wrapper {
   @apply mt-8 flex gap-4;
