@@ -136,6 +136,7 @@ const LoginModal = ({
             setUserId(response?.data?.data?.id);
             const encryptedData = encrypt(response?.data?.data?.id.toString());
             setLocalStorage("_ga", encryptedData);
+            setLocalStorage("user_name", response?.data?.data?.full_name);
 
             // console.log(response.data.data.access_token, "kwkqwo");
             if (response?.data?.data?.access_token) {
