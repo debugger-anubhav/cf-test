@@ -1,9 +1,9 @@
 /* Sections  */
 .firstSection {
-  @apply mt-6 md:mt-10 md:ml-16  flex justify-center items-center md:justify-start;
+  @apply mt-6 md:mt-10 flex justify-center items-center md:justify-start;
 }
 .secondSection {
-  @apply mt-4 md:mt-8 mx-4 md:mx-0 md:ml-16;
+  @apply mt-4 md:mt-8;
 }
 .thirdSection {
 }
@@ -11,13 +11,16 @@
 /* texts */
 
 .secondSectionHeaderTxt {
-  @apply font-medium font-Poppins md:text-16 text-14;
+  @apply text-45454A font-medium font-Poppins xl:text-16 text-14 leading-[21px] tracking-desc xl:tracking-0.3;
+}
+.secondSectionPara {
+  @apply !text-71717A !font-normal;
 }
 .singleBtn {
-  @apply !ml-0  md:!ml-16 mx-4 md:mx-0 md:mt-8;
+  @apply !ml-0 md:mt-8;
 }
 .btnContainer {
-  @apply p-4 md:p-0 absolute md:static bottom-0 w-full;
+  @apply p-4 md:p-0 absolute md:static bottom-0 w-full -ml-4 md:-ml-0;
   box-shadow: none;
 }
 @media (max-width: 767px) {

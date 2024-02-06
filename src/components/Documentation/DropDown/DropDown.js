@@ -45,8 +45,6 @@ const DropDown = ({
     isInitialScreen && handleKycState(option);
   };
 
-  console.log(value, "valueee");
-
   const theme = createTheme({
     breakpoints: {
       values: {
