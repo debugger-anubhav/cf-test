@@ -183,7 +183,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .MuiPaper-elevation {
   box-shadow: none !important;
   padding: 0.75rem 0 !important;
-  border-bottom-width: 1px !important;
+  /* border-bottom-width: 1px !important; */
   border-color: #ededee !important;
 }
 .Mui-expanded {
@@ -191,4 +191,8 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   border-bottom: none !important;
+}
+.Mui-expanded::before {
+  border-bottom-width: 1px !important;
+  border-color: #ededee !important;
 }
