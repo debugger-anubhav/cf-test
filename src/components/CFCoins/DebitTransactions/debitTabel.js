@@ -47,8 +47,8 @@ const DebitTable = ({rows, loadingSkeleton}) => {
                     {row.order_id}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    <span className="font-Inter"></span>-{" "}
-                    <span className="font-Inter">₹</span> {row.amount}
+                    -<span className="font-Inter">₹</span>
+                    {row.amount}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
                     {`${format(

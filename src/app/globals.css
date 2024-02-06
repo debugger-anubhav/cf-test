@@ -162,7 +162,9 @@ input[type="number"]::-webkit-outer-spin-button {
     @apply !bg-F7F7F8 !mb-[12px];
   }
 }
-
+.css-67l5gl {
+  @apply !shadow-none;
+}
 .css-15v22id-MuiAccordionDetails-root {
   @apply !p-0;
 }
@@ -186,4 +188,7 @@ input[type="number"]::-webkit-outer-spin-button {
 .css-1wz20g3.Mui-expanded::before {
   top: -16px !important;
   opacity: 1 !important;
+}
+.MuiPaper-elevation {
+  box-shadow: none !important;
 }

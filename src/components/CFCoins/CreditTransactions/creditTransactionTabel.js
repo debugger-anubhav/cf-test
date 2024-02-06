@@ -54,7 +54,8 @@ const CreditTransactionTabel = ({rows, loadingSkeleton}) => {
                       : row.payment_mode}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
-                    + <span className="font-Inter">₹</span> {row.amount}
+                    +<span className="font-Inter">₹</span>
+                    {row.amount}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
                     {row.expire_on}
