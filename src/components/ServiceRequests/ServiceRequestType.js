@@ -23,7 +23,7 @@ function ServiceRequestType({
   isHelpDrawer,
   title,
   setShowNextComponent,
-  invoiceUrl,
+  isSubscription,
 }) {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -125,7 +125,7 @@ function ServiceRequestType({
           <div className={`${styles.request_type} mt-7`}>Chat with us</div>
 
           {/* additional */}
-          {isHelpDrawer && (
+          {isHelpDrawer && !isSubscription && (
             <div>
               <p className={styles.additional_content}>Additionally</p>
               <button

@@ -2,7 +2,7 @@
   @apply font-Poppins w-full pb-6 pt-4 xl:mt-10 px-4 xl:p-0;
 }
 .header_wrapper {
-  @apply flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between  2xl:w-[1070px] w-full;
+  @apply flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between w-full;
 }
 .headers_left_div {
   @apply flex items-center gap-2 cursor-pointer hover:underline;
@@ -23,13 +23,13 @@
   @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 capitalize;
 }
 .sub_container {
-  @apply flex-col xl:flex-row flex xl:justify-between 2xl:w-[1070px] xl:mt-8 mt-5 gap-8;
+  @apply flex-col xl:flex-row flex xl:justify-between w-full xl:mt-8 mt-5 gap-8;
 }
 /* .progress_wrapper {
   @apply flex flex-col items-center gap-2 w-fit;
 } */
 .upper_map {
-  @apply flex flex-col md:flex-row items-start gap-7 md:gap-4 xl:w-[61%] 2xl:w-fit md:overflow-x-scroll;
+  @apply flex flex-col md:flex-row items-start gap-7 md:gap-4 lg:w-[500px] macbook1:w-[572px] 2xl:w-[600px] 3xl:w-[61%] 4xl:w-fit md:overflow-x-scroll;
 }
 .progress_map_item {
   @apply flex md:flex-col items-baseline md:items-center relative gap-[13px] md:gap-0;

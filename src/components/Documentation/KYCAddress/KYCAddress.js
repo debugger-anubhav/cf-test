@@ -28,10 +28,11 @@ import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
 import DoItLater from "../DoItLaterModal/DoItLater";
 import {reduxSetModalState} from "@/store/Slices";
 
-const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
+const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   const dispatch = useDispatch();
 
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
+  const isReupload = cibilDocsData?.userDocs?.length > 0;
 
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
@@ -308,6 +309,8 @@ const KYCAddress = ({handleKycState, step, cibilDocsData, isReupload}) => {
   useEffect(() => {
     getAddProofList();
   }, []);
+
+  console.log(isReupload, "oopo");
 
   useEffect(() => {
     if (isReupload) {

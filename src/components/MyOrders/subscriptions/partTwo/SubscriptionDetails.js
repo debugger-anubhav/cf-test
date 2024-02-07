@@ -102,6 +102,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
           open={serviceDrawerOpen}
           toggleDrawer={toggleServiceDrawer}
           orderId={singleSubscriptionData?.dealCodeNumber}
+          isSubscription={true}
         />
       )}
 
