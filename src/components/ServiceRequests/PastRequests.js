@@ -10,8 +10,9 @@ import {
   TableRow,
 } from "@mui/material";
 import {format} from "date-fns";
+import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
 
-function PastRequests({pastRequestData}) {
+function PastRequests({pastRequestData, loadingSkeleton}) {
   const [rows, setRows] = useState(pastRequestData);
 
   useEffect(() => {
@@ -48,39 +49,42 @@ function PastRequests({pastRequestData}) {
                 <TableCell className={styles.tableHeaderCell}>Status</TableCell>
               </TableRow>
             </TableHead>
-
-            <TableBody>
-              {rows?.map((row, index) => (
-                <TableRow key={index} className={styles.tableRow}>
-                  <TableCell className={styles.tableCell}>
-                    {row?.order_id}
-                  </TableCell>
-                  <TableCell className={styles.tableCell}>
-                    {row?.zoho_case_id}
-                  </TableCell>
-                  <TableCell className={`${styles.tableCell} capitalize`}>
-                    {row?.request_type}
-                  </TableCell>
-                  <TableCell className={styles.tableCell}>
-                    {row?.scheduled_datetime
-                      ? `${format(
-                          new Date(row?.scheduled_datetime),
-                          "yyyy-mm-dd",
-                        )}`
-                      : "NA"}
-                  </TableCell>
-                  <TableCell className={styles.tableCell}>
-                    {`${format(
-                      new Date(row?.created_date),
-                      "d LLL, yyyy : hh:mm a",
-                    )}`}
-                  </TableCell>
-                  <TableCell className="text-71717A !font-Poppins">
-                    {row?.sub_status}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
+            {loadingSkeleton ? (
+              <InvoicesSkeleton />
+            ) : (
+              <TableBody>
+                {rows?.map((row, index) => (
+                  <TableRow key={index} className={styles.tableRow}>
+                    <TableCell className={styles.tableCell}>
+                      {row?.order_id}
+                    </TableCell>
+                    <TableCell className={styles.tableCell}>
+                      {row?.zoho_case_id}
+                    </TableCell>
+                    <TableCell className={`${styles.tableCell} capitalize`}>
+                      {row?.request_type}
+                    </TableCell>
+                    <TableCell className={styles.tableCell}>
+                      {row?.scheduled_datetime
+                        ? `${format(
+                            new Date(row?.scheduled_datetime),
+                            "yyyy-mm-dd",
+                          )}`
+                        : "NA"}
+                    </TableCell>
+                    <TableCell className={styles.tableCell}>
+                      {`${format(
+                        new Date(row?.created_date),
+                        "d LLL, yyyy : hh:mm a",
+                      )}`}
+                    </TableCell>
+                    <TableCell className="text-71717A !font-Poppins">
+                      {row?.sub_status}
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            )}
           </Table>
         </TableContainer>
       </div>
