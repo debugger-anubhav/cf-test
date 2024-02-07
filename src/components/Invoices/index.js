@@ -33,7 +33,6 @@ const InvoicePage = () => {
   };
 
   const userId = decrypt(getLocalStorage("_ga"));
-  // const userId = 85777;
 
   const getInvoicesData = () => {
     axios
@@ -53,9 +52,6 @@ const InvoicePage = () => {
   useEffect(() => {
     getInvoicesData();
   }, []);
-  useEffect(() => {
-    console.log(availCoins, "aaaaaaaa");
-  }, [availCoins]);
 
   const getTotalAmountDue = () => {
     let sum = 0;

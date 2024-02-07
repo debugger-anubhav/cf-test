@@ -277,6 +277,7 @@ export const InvoiceSlice = createSlice({
   initialState: {
     isCoinApplied: false,
     availableCoins: 0,
+    usedCoins: 0,
   },
   reducers: {
     getCoinsState(state, action) {
@@ -284,6 +285,9 @@ export const InvoiceSlice = createSlice({
     },
     getAvailableCoins(state, action) {
       state.availableCoins = action.payload;
+    },
+    setUsedCoins(state, action) {
+      state.usedCoins = action.payload;
     },
   },
 });
@@ -405,7 +409,8 @@ export const {getUserName, getUserContact, getUserEmail} =
 
 export const {getOrderId, setCibilDocsData} = KycPageSlice.actions;
 
-export const {getAvailableCoins, getCoinsState} = InvoiceSlice.actions;
+export const {getAvailableCoins, getCoinsState, setUsedCoins} =
+  InvoiceSlice.actions;
 
 export const {
   setOrderIdFromOrderPage,
