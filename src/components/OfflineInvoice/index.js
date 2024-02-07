@@ -8,7 +8,11 @@ const OfflineInvoice = () => {
   return (
     <div className={styles.main_container}>
       <h1 className={styles.header}>Order no: #{params.orderId}</h1>
-      <OrderSummary isOfflineInvoice orderNumber={params.orderId} />
+      <OrderSummary
+        isOfflineInvoice
+        orderNumber={params.orderId}
+        paramUserId={params.userId}
+      />
     </div>
   );
 };

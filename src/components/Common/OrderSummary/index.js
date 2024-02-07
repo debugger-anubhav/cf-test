@@ -16,6 +16,7 @@ import {getBillDetails} from "@/store/Slices";
 import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
+import {useRouter} from "next/navigation";
 
 const OrderSummary = ({
   orderNumber,
@@ -24,7 +25,9 @@ const OrderSummary = ({
   isSubscriptionPage,
   subscriptionData,
   isOrderFailed,
+  paramUserId,
 }) => {
+  const router = useRouter();
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
@@ -33,6 +36,12 @@ const OrderSummary = ({
 
   const dispatch = useDispatch();
   const getOrderSummary = () => {
+    if (isOfflineInvoice) {
+      if (userId !== paramUserId) {
+        console.log("innn uuiweu");
+        router.push("/");
+      }
+    }
     if (isSubscriptionPage) {
       setData(subscriptionData);
       dispatch(getBillDetails(subscriptionData?.bill));
@@ -40,13 +49,21 @@ const OrderSummary = ({
     } else {
       axios
         .get(
-          baseURL + endPoints.myOrdersPage.getOrderSummary(orderNumber, userId),
+          baseURL +
+            endPoints.myOrdersPage.getOrderSummary(
+              orderNumber,
+              isOfflineInvoice ? paramUserId : userId,
+            ),
         )
         .then(res => {
           console.log(res, "resss");
           setData(res?.data?.data);
-          dispatch(getBillDetails(res?.data?.data?.bill));
-          setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
+          if (res?.data?.data?.productsList?.length === 0) router.push("/");
+          else {
+            console.log("in kkkk");
+            dispatch(getBillDetails(res?.data?.data?.bill));
+            setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
+          }
         })
         .catch(err => console.log(err));
     }
@@ -74,14 +91,17 @@ const OrderSummary = ({
               <span className={styles.bold_txt}>
                 {" "}
                 {subscriptionData
-                  ? `${format(new Date(data?.start_date), "d LLL, yyyy")}`
-                  : `${format(new Date(data.orderDate), "d LLL, yyyy")}`}
+                  ? data?.start_date &&
+                    `${format(new Date(data?.start_date), "d LLL, yyyy")}`
+                  : data?.orderDate &&
+                    `${format(new Date(data?.orderDate), "d LLL, yyyy")}`}
               </span>{" "}
               {!isSubscriptionPage && (
                 <>
                   at{" "}
                   <span className={styles.bold_txt}>
-                    {`${format(new Date(data?.orderDate), "h:mm a")}`}
+                    {data?.orderDate &&
+                      `${format(new Date(data?.orderDate), "h:mm a")}`}
                   </span>
                 </>
               )}
