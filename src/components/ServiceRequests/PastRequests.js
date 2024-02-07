@@ -58,7 +58,7 @@ function PastRequests({pastRequestData}) {
                   <TableCell className={styles.tableCell}>
                     {row?.zoho_case_id}
                   </TableCell>
-                  <TableCell className={styles.tableCell}>
+                  <TableCell className={`${styles.tableCell} capitalize`}>
                     {row?.request_type}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
@@ -75,8 +75,8 @@ function PastRequests({pastRequestData}) {
                       "d LLL, yyyy : hh:mm a",
                     )}`}
                   </TableCell>
-                  <TableCell className="text-71717A font-Poppins">
-                    {row?.status}
+                  <TableCell className="text-71717A !font-Poppins">
+                    {row?.sub_status}
                   </TableCell>
                 </TableRow>
               ))}
