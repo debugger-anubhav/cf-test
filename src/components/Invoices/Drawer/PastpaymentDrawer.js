@@ -39,7 +39,7 @@ const PastpaymentDrawer = ({
         email: response?.data?.data?.email,
         name: response?.data?.data?.full_name,
         customer_id: response?.data?.data.cf_customer_id || "CF-126402",
-        amount: `Rs.${amount}`,
+        amount: `Rs.${amountDue}`,
       };
       if (invoiceNumber !== null) {
         queryParams.invoice_number = invoiceNumber;
