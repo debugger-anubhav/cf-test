@@ -24,14 +24,12 @@ const DocMain = () => {
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
-  const [isReupload, setIsReupload] = useState(false);
+  // const [isReupload, setIsReupload] = useState(false);
 
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
 
   console.log(orderIdFromOrderpage, "orderIdFromOrderpage");
-
-  // console.log(isUpfrontPayment, kycState, tenure, creditScore, "detailsss");
 
   // const handleGetOrderId = option => {
   //   console.log(option, "opti[ojjoij");
@@ -39,7 +37,6 @@ const DocMain = () => {
   //   handleKycState(option?.dealCodeNumber);
   // };
 
-  // const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const userid = decrypt(getLocalStorage("_ga"));
 
   const handleKycState = async orderId => {
@@ -54,7 +51,6 @@ const DocMain = () => {
       setTenure(parseInt(response?.data?.data?.tenure));
       setCreditScore(parseInt(response?.data?.data?.credit_score));
       setCibilDocsData(response?.data?.data?.cibilDocsData);
-      setIsReupload(response?.data?.data?.cibilDocsData?.userDocs?.length > 0);
     } catch (err) {
       console.log(err);
     }
@@ -106,7 +102,6 @@ const DocMain = () => {
               <KYCSalary
                 cibilDocsData={cibilDocsData}
                 handleKycState={id => handleKycState(id)}
-                isReupload={isReupload}
               />
             ) : kycState === 2 ? (
               <KYCAddress
@@ -123,7 +118,6 @@ const DocMain = () => {
                     ? 2
                     : 3
                 }
-                isReupload={isReupload}
               />
             ) : kycState === 3 ? (
               <KYCCard handleKycState={id => handleKycState(id)} />

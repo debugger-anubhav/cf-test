@@ -53,9 +53,10 @@ const SelectionComp = ({
     </div>
   );
 };
-const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
+const KYCSalary = ({handleKycState, cibilDocsData}) => {
   const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
+  const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [docData, setDocsData] = useState();
   const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
@@ -332,7 +333,7 @@ const KYCSalary = ({handleKycState, isReupload, cibilDocsData}) => {
             <div
               className={styles.showDeleteIcon}
               onClick={e => handleDeleteFile(e)}>
-              <DeleteIconFilled color={"#D96060"} className="w-full h-full" />
+              <DeleteIconFilled color={"#ffffff"} className="w-full h-full" />
             </div>
           </div>
         )}
