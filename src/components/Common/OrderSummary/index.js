@@ -23,6 +23,7 @@ const OrderSummary = ({
   isOfflineInvoice,
   isSubscriptionPage,
   subscriptionData,
+  isOrderFailed,
 }) => {
   const [breakupDrawer, setBreakupDrawer] = useState(false);
   const [reviewDrawer, setReviewDrawer] = useState(false);
@@ -205,39 +206,41 @@ const OrderSummary = ({
         </div>
         <div className="h-4 xl:h-6"></div>
 
-        <div
-          className={`${
-            !isOfflineInvoice && "hover:border-5774AC cursor-pointer"
-          } ${isOfflineInvoice && " !w-full xs:!w-[408px] xl:!w-[424px]"} ${
-            styles.box
-          }`}
-          onClick={() => {
-            isOfflineInvoice ? console.log("not") : setBreakupDrawer(true);
-          }}>
-          <p className={styles.box_header}>Payment details:</p>
-          {isOfflineInvoice ? (
-            <BillContent
-              isOfflineInvoice={isOfflineInvoice}
-              isCitymaxBill={isCitymaxBill}
-            />
-          ) : (
-            <>
-              <div className={styles.amount_div}>
-                <p className={`!text-71717A ${styles.saved_name}`}>
-                  Paid using {data?.bill?.mode}
-                </p>
-                <p className={styles.amount}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {parseInt(data?.bill?.finalTotalPrice).toFixed(2)}
-                </p>
-              </div>
-              <div className={styles.flex_div}>
-                <p className={styles.view_breakup_txt}>View cart breakup</p>
-                <ForwardArrowWithLine className={styles.forward_icon} />
-              </div>
-            </>
-          )}
-        </div>
+        {!isOrderFailed && (
+          <div
+            className={`${
+              !isOfflineInvoice && "hover:border-5774AC cursor-pointer"
+            } ${isOfflineInvoice && " !w-full xs:!w-[408px] xl:!w-[424px]"} ${
+              styles.box
+            }`}
+            onClick={() => {
+              isOfflineInvoice ? console.log("not") : setBreakupDrawer(true);
+            }}>
+            <p className={styles.box_header}>Payment details:</p>
+            {isOfflineInvoice ? (
+              <BillContent
+                isOfflineInvoice={isOfflineInvoice}
+                isCitymaxBill={isCitymaxBill}
+              />
+            ) : (
+              <>
+                <div className={styles.amount_div}>
+                  <p className={`!text-71717A ${styles.saved_name}`}>
+                    Paid using {data?.bill?.mode}
+                  </p>
+                  <p className={styles.amount}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {parseInt(data?.bill?.finalTotalPrice).toFixed(2)}
+                  </p>
+                </div>
+                <div className={styles.flex_div}>
+                  <p className={styles.view_breakup_txt}>View cart breakup</p>
+                  <ForwardArrowWithLine className={styles.forward_icon} />
+                </div>
+              </>
+            )}
+          </div>
+        )}
 
         <TotalBreakup toggleDrawer={toggleDrawerBreakup} open={breakupDrawer} />
       </div>

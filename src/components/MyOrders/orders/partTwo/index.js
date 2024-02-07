@@ -198,6 +198,7 @@ const OrderDetails = ({setPart, data}) => {
         <OrderSummary
           orderNumber={data?.order_id}
           isDelivered={stepsCompleted === 5}
+          isOrderFailed={orderStatus?.toLowerCase() === "order failed"}
         />
       </div>
     </div>
