@@ -134,19 +134,19 @@ function ServiceRequets() {
             </Drawer>
           )}
         </div>
-        {/* {pastRequestData?.length > 0 ? ( */}
-        <div>
-          <div className={styles.web}>
-            <PastRequests
-              pastRequestData={pastRequestData}
-              loadingSkeleton={loadingSkeleton}
-            />
-          </div>
-          <div className={styles.mobile}>
-            <PastRequestAccordian pastRequestData={pastRequestData} />
-          </div>
+        <div className={styles.web}>
+          <PastRequests
+            pastRequestData={pastRequestData}
+            loadingSkeleton={loadingSkeleton}
+          />
         </div>
-        {/* ) : null} */}
+        <div>
+          {pastRequestData?.length > 0 ? (
+            <div className={styles.mobile}>
+              <PastRequestAccordian pastRequestData={pastRequestData} />
+            </div>
+          ) : null}
+        </div>
       </div>
     </div>
   );
