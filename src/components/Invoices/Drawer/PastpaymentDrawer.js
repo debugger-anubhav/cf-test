@@ -75,7 +75,6 @@ const PastpaymentDrawer = ({
   React.useEffect(() => {
     setAmount(amountDue);
   }, [amountDue]);
-  // React.useEffect(()=>{console.log(isCoinApplied,"pppppp")},[isCoinApplied])
   return (
     <Drawer
       anchor={isBottomDrawer ? "bottom" : "right"}
@@ -136,7 +135,7 @@ const PastpaymentDrawer = ({
               Use Cityfurnish coins (Available balance:
               {isCoinApplied
                 ? amountDue < availbal
-                  ? availbal - amount
+                  ? availbal - amountDue
                   : 0
                 : Math.abs(availbal)}
               {/* {availbal === 0
