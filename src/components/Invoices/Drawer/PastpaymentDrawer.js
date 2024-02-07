@@ -9,7 +9,7 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch} from "react-redux";
-import {getAvailableCoins, getCoinsState} from "@/store/Slices";
+import {getAvailableCoins, getCoinsState, setUsedCoins} from "@/store/Slices";
 
 const PastpaymentDrawer = ({
   toggleDrawer,
@@ -27,7 +27,6 @@ const PastpaymentDrawer = ({
   const [amount, setAmount] = useState(amountDue);
   const originalCoin = availbal;
   // const [isCoinApplied, setIsCoinApplied] = useState(false);
-  console.log(availbal, "oooooooooooo");
   const dispatch = useDispatch();
 
   const handleRedirectToPayment = async () => {
@@ -140,13 +139,6 @@ const PastpaymentDrawer = ({
                   ? availbal - amountDue
                   : 0
                 : Math.abs(availbal)}
-              {/* {availbal === 0
-                ? 0
-                : isCoinApplied
-                ? amountDue < availbal
-                  ? availbal - amount
-                  : 0
-                : Math.abs(availbal)} */}
               )
             </p>
           </div>
@@ -160,6 +152,12 @@ const PastpaymentDrawer = ({
                   isCoinApplied ? Math.abs(amountDue - availbal) : availbal,
                 ),
               );
+              if (isCoinApplied) {
+                const temp = availbal - amountDue;
+                const remaingCoins =
+                  availbal > amountDue ? availbal - temp : availbal;
+                dispatch(setUsedCoins(Math.abs(remaingCoins)));
+              }
               handleRedirectToPayment();
             }}>
             Proceed and pay

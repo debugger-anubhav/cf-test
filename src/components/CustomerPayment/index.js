@@ -252,6 +252,10 @@ function CustomerPayment() {
   // }, [userId]);
 
   useEffect(() => {
+    console.log(coinsReduxValue?.usedCoins, "reduxxxxxxxxxxxxx");
+  }, [coinsReduxValue]);
+
+  useEffect(() => {
     setTimeout(() => {
       setLoadingSkeleton(false);
     }, 1000);

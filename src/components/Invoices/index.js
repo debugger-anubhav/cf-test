@@ -52,9 +52,6 @@ const InvoicePage = () => {
   useEffect(() => {
     getInvoicesData();
   }, []);
-  useEffect(() => {
-    console.log(availCoins, "aaaaaaaa");
-  }, [availCoins]);
 
   const getTotalAmountDue = () => {
     let sum = 0;
