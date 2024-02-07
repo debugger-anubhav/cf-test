@@ -82,6 +82,7 @@ const PastpaymentDrawer = ({
       onClose={() => {
         toggleDrawer();
         setIsCoinApplied(false);
+        setAmount(amountDue);
       }}
       transitionDuration={{enter: 400, exit: 200}}
       classes={{paper: styles.customDrawer}}>
@@ -91,6 +92,7 @@ const PastpaymentDrawer = ({
           onClick={() => {
             toggleDrawer();
             setIsCoinApplied(false);
+            setAmount(amountDue);
           }}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
         </div>
