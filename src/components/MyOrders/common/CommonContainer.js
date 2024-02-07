@@ -18,6 +18,9 @@ export const statusToImageMap = {
   "refund processed": "returned.svg",
   "refund requested": "returned.svg",
   "order failed": "payment-failed.svg",
+  "kyc docs under review": "kyc-under-review.svg",
+  "kyc rejected": "kyc-rejected.svg",
+  "kyc appproved": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
 };
@@ -51,6 +54,10 @@ const CommonContainer = ({
 
   const productDetails =
     tab === 0 ? JSON.parse(item?.fc_paymentData) : item?.productsList;
+
+  const handleOpenChatBot = () => {
+    console.log("jwq");
+  };
 
   return (
     <div>
@@ -95,10 +102,16 @@ const CommonContainer = ({
                 ? `Order no: #${item.dealCodeNumber}`
                 : `Subscription no: #${item.dealCodeNumber}`}
             </p>
-            {item.status !== "Pending" && item.status !== "inactive" && (
-              <p onClick={toggleServiceDrawer} className={styles.help_txt}>
-                Need Help?
+            {item.status.toLowerCase() === "pending" ? (
+              <p onClick={handleOpenChatBot} className={styles.help_txt}>
+                Chat with us
               </p>
+            ) : (
+              item.status.toLowerCase() !== "inactive" && (
+                <p onClick={toggleServiceDrawer} className={styles.help_txt}>
+                  Need Help?
+                </p>
+              )
             )}
           </div>
         </div>
@@ -108,6 +121,7 @@ const CommonContainer = ({
           toggleDrawer={toggleServiceDrawer}
           orderId={item.dealCodeNumber}
           invoiceUrl={item?.url}
+          isSubscription={tab === 1}
         />
 
         <div
@@ -154,20 +168,24 @@ const CommonContainer = ({
 
         {tab === 0 &&
           (item.zoho_sub_status === "KYC In Progress" ||
-            item.status === "Pending") && (
+            item.status === "Pending" ||
+            item.zoho_sub_status === "KYC Rejected") && (
             <div
               className={styles.optional_div}
               onClick={() => {
-                if (item.zoho_sub_status === "KYC In Progress") {
+                if (item.status === "Pending") router.push(`/cart`);
+                else {
                   dispatch(setOrderIdFromOrderPage(item.dealCodeNumber));
                   router.push(`/documentation`);
-                } else router.push(`/cart`);
+                }
               }}>
               <p className={styles.optional_txt}>
                 <span className={styles.highlighted_txt}>
                   {item.status === "Pending"
                     ? "Retry Payment"
-                    : "Complete KYC now"}
+                    : item.zoho_sub_status === "KYC In Progress"
+                    ? "Complete KYC now"
+                    : "Re-upload document(s)"}
                 </span>{" "}
                 to proceed with your order
               </p>

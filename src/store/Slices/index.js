@@ -260,10 +260,14 @@ export const KycPageSlice = createSlice({
   name: "KycPage",
   initialState: {
     orderId: "",
+    cibilDocsData: "",
   },
   reducers: {
     getOrderId(state, action) {
       state.orderId = action.payload;
+    },
+    setCibilDocsData(state, action) {
+      state.cibilDocsData = action.payload;
     },
   },
 });
@@ -403,7 +407,7 @@ export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
 export const {getUserName, getUserContact, getUserEmail} =
   ProfileSettingSlice.actions;
 
-export const {getOrderId} = KycPageSlice.actions;
+export const {getOrderId, setCibilDocsData} = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState, setUsedCoins} =
   InvoiceSlice.actions;
