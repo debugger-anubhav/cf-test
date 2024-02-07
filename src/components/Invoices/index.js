@@ -33,7 +33,6 @@ const InvoicePage = () => {
   };
 
   const userId = decrypt(getLocalStorage("_ga"));
-  // const userId = 85777;
 
   const getInvoicesData = () => {
     axios

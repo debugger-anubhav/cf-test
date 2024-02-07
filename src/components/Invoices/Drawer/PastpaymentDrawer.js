@@ -80,7 +80,10 @@ const PastpaymentDrawer = ({
     <Drawer
       anchor={isBottomDrawer ? "bottom" : "right"}
       open={open}
-      onClose={toggleDrawer}
+      onClose={() => {
+        toggleDrawer();
+        setIsCoinApplied(false);
+      }}
       transitionDuration={{enter: 400, exit: 200}}
       classes={{paper: styles.customDrawer}}>
       <div className={styles.main_container}>
@@ -88,6 +91,7 @@ const PastpaymentDrawer = ({
           className={styles.close_icon}
           onClick={() => {
             toggleDrawer();
+            setIsCoinApplied(false);
           }}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
         </div>
