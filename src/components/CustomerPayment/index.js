@@ -49,7 +49,6 @@ function CustomerPayment() {
   const tempAmountParam = urlParams.get("amount");
   let amountParam = parseInt(
     tempAmountParam?.split(".")[1]?.split(",").join(""),
-    10,
   );
   const invoiceNumberParam = urlParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
@@ -59,7 +58,7 @@ function CustomerPayment() {
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
     email: emailParam || "",
-    amount: amountParam || 0,
+    amount: amountParam || 1,
     invoice: invoiceNumberParam || "",
     cfCoins: availableCoins,
     notes: "",
@@ -75,12 +74,21 @@ function CustomerPayment() {
     setFormData({
       fullName: nameParam || "",
       email: emailParam || "",
-      amount: amountParam || 0,
+      amount: amountParam || 1,
       invoice: invoiceNumberParam || "",
-      cfCoins: coinsReduxValue.availableCoins,
+      cfCoins: coinsReduxValue?.usedCoins,
       notes: "",
     });
-  }, [urlParams]);
+  }, [currentURL]);
+
+  useEffect(() => {
+    if (coinsReduxValue?.usedCoins > 0) {
+      const amountAfterUsedCoins =
+        parseInt(amountParam) - coinsReduxValue?.usedCoins;
+      console.log(amountParam, amountAfterUsedCoins, "amountParam");
+    }
+  }, [currentURL]);
+
   useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
@@ -247,19 +255,20 @@ function CustomerPayment() {
     setuserId(userIdFromStorage);
   }, [userIdFromStorage]);
 
-  // useEffect(() => {
-  //   fetchAvailCoins();
-  // }, [userId]);
-
   useEffect(() => {
-    console.log(coinsReduxValue?.usedCoins, "reduxxxxxxxxxxxxx");
-  }, [coinsReduxValue]);
+    if (urlParams.size > 0) {
+      console.log(urlParams.size, "size");
+      setTimeout(() => {
+        handleSubmit(formData);
+      }, 1001);
+    }
+  }, [currentURL]);
 
   useEffect(() => {
     setTimeout(() => {
       setLoadingSkeleton(false);
     }, 1000);
-  }, [nameParam, emailParam, amountParam, invoiceNumberParam, availableCoins]);
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -388,11 +397,7 @@ function CustomerPayment() {
                           setshowValidationForAmount(false);
                           formik.touched.amount = false;
                         }}
-                        value={
-                          useCityfurnishCoins
-                            ? formData.amount
-                            : formik.values.amount
-                        }
+                        value={formData.amount}
                       />
                       <ErrorMessage name="amount">
                         {msg =>
@@ -408,7 +413,8 @@ function CustomerPayment() {
                       )}
                       {isLogin ? (
                         <div className={styles.toggleRow}>
-                          {useCityfurnishCoins ? (
+                          {useCityfurnishCoins &&
+                          coinsReduxValue?.usedCoins > 0 ? (
                             <div>
                               <ToggleOn
                                 size={30}
