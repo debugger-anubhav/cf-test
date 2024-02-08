@@ -95,7 +95,7 @@ function CencelOrder({prevScreen, data}) {
           className={`${styles.proceed_btn}  !w-fit ${
             selected === null ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
           }`}
-          onClick={handleRequest}>
+          onClick={() => handleRequest()}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>
