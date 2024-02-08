@@ -187,3 +187,9 @@
 .transfer_create_btn {
   @apply mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
+.contact_input {
+  @apply w-full outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
+}
+.contact_input::placeholder {
+  @apply font-Poppins font-normal text-16  text-[#71717A];
+}

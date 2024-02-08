@@ -5,6 +5,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import CancelOrder from "./CancelOrder";
+import CancelMandate from "./CancelMandate";
 import SwapProduct from "./SwapProduct";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -186,6 +187,13 @@ function ServiceRequestType({
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Request order pickup"
+            />
+          )}
+          {selectedType === "cancel_mandate" && (
+            <CancelMandate
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              heading="Cancel mandate"
             />
           )}
         </>

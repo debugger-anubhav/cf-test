@@ -88,7 +88,6 @@ function Relocation({prevScreen, data}) {
       city: values.city,
       address1: values.address,
       address2: values.landmark,
-      // addressProof: "",
       file: values.currentAddressProof,
     };
     trailCreateSR(payload);
