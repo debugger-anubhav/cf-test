@@ -4,12 +4,11 @@ import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
 import {customStylesForSelect} from "./CancelOrder";
 import Select from "react-select";
-import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {CreateRequestPayload} from "@/constants/constant";
+import {useSelector} from "react-redux";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function Repair({prevScreen, data}) {
-  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -17,6 +16,7 @@ function Repair({prevScreen, data}) {
   const [toggleStates, setToggleStates] = useState(
     data.map(() => ({istoggled: false, selected: null, detail: null})),
   );
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const repairOptions = [
     {value: "1", label: "Wrong items selected"},
@@ -72,8 +72,7 @@ function Repair({prevScreen, data}) {
       repair_reason: tempRepairReason.join(", "),
       repair_details: tempRepairDetails.join(", "),
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
     setToggleStates(data.map(() => ({istoggled: false, selected: null})));
   };
 

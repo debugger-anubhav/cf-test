@@ -3,21 +3,19 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
 import {
-  CreateRequest,
   productPageImagesBaseUrl,
   CreateRequestPayload,
 } from "@/constants/constant";
 import PickupReasonOptions from "./PickupReasonOptions";
-import {useDispatch, useSelector} from "react-redux";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function Buy({heading, prevScreen, data}) {
-  const dispatch = useDispatch();
+  const {trailCreateSR} = CommonCreateRequestApi();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
-  // const [selected, setSelected] = useState(false);
   const [showPickupReason, setShowPickupReason] = useState(false);
   const [Screen, setScreen] = useState(1);
   const [description, setDescription] = useState("");
@@ -42,9 +40,7 @@ function Buy({heading, prevScreen, data}) {
       selected_product_name: selectedProducts.join(", "),
       description,
     };
-    CreateRequest(payload);
-
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   return (

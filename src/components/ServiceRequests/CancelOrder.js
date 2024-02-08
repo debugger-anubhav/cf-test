@@ -3,9 +3,9 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Select from "react-select";
 
-import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {CreateRequestPayload} from "@/constants/constant";
+import {useSelector} from "react-redux";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 export const customStylesForSelect = {
   control: (baseStyles, state) => ({
@@ -38,7 +38,6 @@ export const customStylesForSelect = {
 };
 
 function CencelOrder({prevScreen, data}) {
-  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -52,7 +51,7 @@ function CencelOrder({prevScreen, data}) {
 
   const [selected, setSelected] = useState(null);
   const [description, setDescription] = useState("");
-
+  const {trailCreateSR} = CommonCreateRequestApi();
   const handleChange = selectedOption => {
     setSelected(selectedOption);
   };
@@ -65,8 +64,7 @@ function CencelOrder({prevScreen, data}) {
       type: selectedType,
       description,
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   return (

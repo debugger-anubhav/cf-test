@@ -70,8 +70,10 @@ function ServiceRequets() {
   }, []);
 
   useEffect(() => {
-    getServiceRequestData();
-  }, []);
+    if (!openDrawerValue) {
+      getServiceRequestData();
+    }
+  }, [openDrawerValue]);
 
   useEffect(() => {
     if (openDrawerValue === false) {

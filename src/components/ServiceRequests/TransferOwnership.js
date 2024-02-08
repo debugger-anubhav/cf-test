@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {cityUrl} from "../../../appConfig";
 import {AddressDrawerContent} from "../Cart/Drawer/SaveAddressesDrawer";
-import {getSavedAddress, setServiceRequestDrawer} from "@/store/Slices";
+import {getSavedAddress} from "@/store/Slices";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -14,12 +14,12 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {
   getLocalStorage,
   CreateRequestPayload,
-  CreateRequest,
   keyPressForContactField,
 } from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function TransferOwnership({prevScreen, data}) {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ function TransferOwnership({prevScreen, data}) {
   const addressArray = cartPageData.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -109,7 +110,7 @@ function TransferOwnership({prevScreen, data}) {
     setAddressDrawer(!addressDrawer);
   };
 
-  const handleSubmit = async values => {
+  const handleSubmit = values => {
     const payload = {
       ...CreateRequestPayload,
       deal_id: data[0]?.dealCodeNumber,
@@ -124,8 +125,7 @@ function TransferOwnership({prevScreen, data}) {
       address2: values.landmark,
       state: primaryAddress ? primaryAddress.state : "",
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   return (

@@ -10,24 +10,23 @@ import Image from "next/image";
 import {FaCheckCircle} from "react-icons/fa";
 import {IoIosCloseCircle} from "react-icons/io";
 import Select from "react-select";
-import {setServiceRequestDrawer} from "@/store/Slices";
 import {
-  CreateRequest,
   CreateRequestPayload,
   keyPressForContactField,
 } from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function Relocation({prevScreen, data}) {
-  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
 
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const doctsData = [
     {label: "PAN Number", value: "1"},
@@ -92,8 +91,7 @@ function Relocation({prevScreen, data}) {
       // addressProof: "",
       file: values.currentAddressProof,
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   const customStylesForSelect = {
