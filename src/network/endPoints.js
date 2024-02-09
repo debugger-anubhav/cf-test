@@ -213,4 +213,6 @@ export const endPoints = {
     verifyOtp: `user/verifyotp_web`,
     isAuthenticate: `user/isAuthentic`,
   },
+
+  downloadPDF: "user/exportpaymentweb",
 };
