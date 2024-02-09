@@ -37,9 +37,10 @@ function CustomerPayment() {
   const {checkAuthentication} = useAuthentication();
   const router = useRouter();
   const dispatch = useDispatch();
-  const userIdFromStorage = decrypt(getLocalStorage("_ga"));
+  const userId = decrypt(getLocalStorage("_ga"));
   const coinsReduxValue = useSelector(state => state.invoicePage);
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
+  console.log(coinsReduxValue, "lll");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -47,13 +48,14 @@ function CustomerPayment() {
   const emailParam = urlParams.get("email");
   const nameParam = urlParams.get("name");
   const tempAmountParam = urlParams.get("amount");
-  let amountParam = parseInt(
+  const amountParam = parseInt(
     tempAmountParam?.split(".")[1]?.split(",").join(""),
   );
   const invoiceNumberParam = urlParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
     coinsReduxValue.isCoinApplied,
   );
+  // console.log(useCityfurnishCoins, "mmm");
   const [availableCoins, setAvailableCoins] = useState(0);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
@@ -64,30 +66,61 @@ function CustomerPayment() {
     notes: "",
   });
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
-  const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
-  const [userId, setuserId] = useState(null);
+  // const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
+  // const [userId, setuserId] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [redirctInvoice, setRedirctInvoice] = useState(false);
-  useEffect(() => {
-    setFormData({
-      fullName: nameParam || "",
-      email: emailParam || "",
-      amount: amountParam || 1,
-      invoice: invoiceNumberParam || "",
-      cfCoins: coinsReduxValue?.usedCoins,
-      notes: "",
-    });
-  }, [currentURL]);
+  const [topupAmount, setTopupAmount] = useState();
+  // useEffect(() => {
+  //   setFormData({
+  //     fullName: nameParam || "",
+  //     email: emailParam || "",
+  //     amount: amountParam || 1,
+  //     invoice: invoiceNumberParam || "",
+  //     cfCoins: coinsReduxValue?.usedCoins,
+  //     notes: "",
+  //   });
+  // }, [currentURL]);
 
   useEffect(() => {
-    if (coinsReduxValue?.usedCoins > 0) {
-      const amountAfterUsedCoins =
-        parseInt(amountParam) - coinsReduxValue?.usedCoins;
-      console.log(amountParam, amountAfterUsedCoins, "amountParam");
+    if (urlParams.size > 0) {
+      let amount = amountParam;
+      if (coinsReduxValue?.isCoinApplied === true) {
+        console.log("in nottt");
+        amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
+        console.log(amountParam, amount, "amountParam");
+      }
+
+      const temp = formData;
+      temp.fullName = nameParam;
+      temp.email = emailParam;
+      temp.amount = amount;
+      temp.invoice = invoiceNumberParam;
+      temp.cfCoins = coinsReduxValue?.usedCoins;
+      temp.notes = "";
+      console.log(temp, "temppp");
+      setFormData(temp);
+      handleSubmit(temp);
+      // if (urlParams.size > 0) {
+      //   console.log(urlParams.size, "size");
+      //   setTimeout(() => {
+      //     handleSubmit(formData);
+      //   }, 1001);
+      // }
+      console.log(formData, "h");
     }
   }, [currentURL]);
+
+  // useEffect(() => {
+  //   if (urlParams.size > 0) {
+  //     console.log(urlParams.size, "size");
+  //     setTimeout(() => {
+  //       handleSubmit(formData);
+  //     }, 1001);
+  //   }
+  // }, [currentURL]);
 
   useEffect(() => {
     setIsLogin(reduxLoginState);
@@ -110,15 +143,29 @@ function CustomerPayment() {
   }, [isLogin]);
 
   const fetchAvailCoins = () => {
+    console.log("insoideee");
     axios
       .get(baseURL + endPoints.addToCart.fetchCoins(userId))
       .then(res => {
-        if (res?.data?.data?.length > 0)
-          setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-        setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+        if (res?.data?.data?.length > 0) {
+          const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
+          setTopupAmount(availAmount);
+          if (coinsReduxValue.isCoinApplied)
+            setAvailableCoins(
+              amountParam - availAmount > 0
+                ? 0
+                : Math.abs(amountParam - availAmount),
+            );
+          else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+          // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+        }
       })
       .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    fetchAvailCoins();
+  }, []);
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -218,51 +265,42 @@ function CustomerPayment() {
 
   const handleSubmit = values => {
     console.log(values, "values");
-    setFormData({
-      ...formData,
-      fullName: values.fullName,
-      email: values.email,
-      amount: values.amount,
-      invoice: values.invoice,
-      cfCoins: availableCoins,
-    });
+    // setFormData({
+    //   ...formData,
+    //   fullName: values.fullName,
+    //   email: values.email,
+    //   amount: values.amount,
+    //   invoice: values.invoice,
+    //   cfCoins: availableCoins,
+    // });
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdata");
-
     handlePayment();
   };
 
-  const handleUseCoins = value => {
-    if (value !== "") {
-      setUseCityfurnishCoins(true);
-      if (availableCoins < parseInt(value)) {
-        amountParam = availableCoins - parseInt(value);
-        setFormData({...formData, amount: amountParam * -1});
-        setAvailableCoins(0);
-      } else {
-        setAvailableCoins(availableCoins - parseInt(value));
-        setFormData({...formData, cfCoins: parseInt(value)});
-        setFormData({...formData, amount: 0});
-      }
-    } else {
-      setshowValidationForAmount(true);
-    }
-  };
+  // const handleUseCoins = value => {
+  //   console.log(value);
+  //   if (value !== "") {
+  //     setUseCityfurnishCoins(true);
+  //     if (availableCoins < parseInt(value)) {
+  //       amountParam = availableCoins - parseInt(value);
+  //       setFormData({...formData, amount: amountParam * -1});
+  //       setAvailableCoins(0);
+  //     } else {
+  //       setAvailableCoins(availableCoins - parseInt(value));
+  //       setFormData({...formData, cfCoins: parseInt(value)});
+  //       setFormData({...formData, amount: 0});
+  //     }
+  //   } else {
+  //     setshowValidationForAmount(true);
+  //   }
+  // };
 
-  useEffect(() => {
-    setuserId(userIdFromStorage);
-  }, [userIdFromStorage]);
-
-  useEffect(() => {
-    if (urlParams.size > 0) {
-      console.log(urlParams.size, "size");
-      setTimeout(() => {
-        handleSubmit(formData);
-      }, 1001);
-    }
-  }, [currentURL]);
+  // useEffect(() => {
+  //   setuserId(userIdFromStorage);
+  // }, [userIdFromStorage]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -413,16 +451,20 @@ function CustomerPayment() {
                       )}
                       {isLogin ? (
                         <div className={styles.toggleRow}>
-                          {useCityfurnishCoins &&
-                          coinsReduxValue?.usedCoins > 0 ? (
+                          {/* {useCityfurnishCoins ? (
                             <div>
                               <ToggleOn
                                 size={30}
                                 color={"#5774AC"}
                                 onClick={() => {
                                   setUseCityfurnishCoins(false);
-                                  setAvailableCoins(backToAvailableCoins);
+                                  // setAvailableCoins(backToAvailableCoins);
                                   fetchAvailCoins();
+
+                                  setFormData({
+                                    ...formData,
+                                    amount: amountParam || "",
+                                  });
                                 }}
                                 className={"cursor-pointer"}
                               />
@@ -438,6 +480,51 @@ function CustomerPayment() {
                                 className={"cursor-pointer"}
                               />
                             </div>
+                          )} */}
+
+                          {useCityfurnishCoins ? (
+                            <ToggleOn
+                              size={29}
+                              color={"#5774AC"}
+                              onClick={() => {
+                                // setAmount(amountDue);
+                                setUseCityfurnishCoins(false);
+                                setAvailableCoins(topupAmount);
+                                setFormData({
+                                  ...formData,
+                                  amount: amountParam || "",
+                                });
+                              }}
+                            />
+                          ) : (
+                            <ToggleOff
+                              color={"#E3E1DC"}
+                              size={29}
+                              onClick={() => {
+                                setUseCityfurnishCoins(true);
+                                console.log(formik.values.amount, "pp");
+                                setAvailableCoins(
+                                  amountParam - topupAmount > 0
+                                    ? 0
+                                    : Math.abs(amountParam - topupAmount),
+                                );
+                                setFormData({
+                                  ...formData,
+                                  amount:
+                                    topupAmount > amountParam
+                                      ? 1
+                                      : Math.abs(topupAmount - amountParam),
+                                });
+                                console.log(formik.values.amount, "poo");
+
+                                // setAmount(
+                                //   availbal > amountDue
+                                //     ? 1
+                                //     : Math.abs(availbal - amountDue),
+                                // );
+                                // isCoinApplied &&
+                              }}
+                            />
                           )}
                           <p className={styles.toggle_text}>
                             Use Cityfurnish coins (Available balance :{" "}
