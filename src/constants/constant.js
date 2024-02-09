@@ -751,12 +751,10 @@ export const CreateRequest = CreateRequestPayload => {
       CreateRequestPayload,
     )
     .then(res => {
-      // console.log("created request success", res);
       showToastNotification(
         res?.data?.data?.msg,
         res?.data?.data?.status === true ? 2 : 3,
       );
-      window?.location?.reload();
     })
     .catch(err => console.log(err));
 };

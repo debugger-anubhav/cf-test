@@ -26,6 +26,7 @@ function ServiceRequets() {
   const [pastRequestData, setPastRequestData] = useState(null);
   const [createRequestData, setCreateRequestData] = useState(null);
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   const openModal = () => {
     setOpenDrawer(true);
@@ -44,8 +45,12 @@ function ServiceRequets() {
       .then(res => {
         setPastRequestData(res?.data?.data?.serviceRequestData);
         setCreateRequestData(res?.data?.data?.paymentData);
+        setLoadingSkeleton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setLoadingSkeleton(false);
+      });
   };
 
   const handleresize = e => {
@@ -65,8 +70,10 @@ function ServiceRequets() {
   }, []);
 
   useEffect(() => {
-    getServiceRequestData();
-  }, []);
+    if (!openDrawerValue) {
+      getServiceRequestData();
+    }
+  }, [openDrawerValue]);
 
   useEffect(() => {
     if (openDrawerValue === false) {
@@ -129,16 +136,19 @@ function ServiceRequets() {
             </Drawer>
           )}
         </div>
-        {pastRequestData?.length > 0 ? (
-          <div>
-            <div className={styles.web}>
-              <PastRequests pastRequestData={pastRequestData} />
-            </div>
+        <div className={styles.web}>
+          <PastRequests
+            pastRequestData={pastRequestData}
+            loadingSkeleton={loadingSkeleton}
+          />
+        </div>
+        <div>
+          {pastRequestData?.length > 0 ? (
             <div className={styles.mobile}>
               <PastRequestAccordian pastRequestData={pastRequestData} />
             </div>
-          </div>
-        ) : null}
+          ) : null}
+        </div>
       </div>
     </div>
   );

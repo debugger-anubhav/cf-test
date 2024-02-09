@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
-import {useDispatch, useSelector} from "react-redux";
-import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
+import {CreateRequestPayload} from "@/constants/constant";
 import Repair from "./Repair";
 import Relocation from "./Relocation";
 import SwapProduct from "./SwapProduct";
 import Buy from "./Buy";
 import TransferOwnership from "./TransferOwnership";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function PickupReasonCommonScreen({
   reason,
@@ -16,14 +16,15 @@ function PickupReasonCommonScreen({
   setCurrentScreen,
   selectedProducts,
   data,
+  pickupRequestType,
 }) {
-  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
 
   const [description, setDescription] = useState("");
   const [showScreenName, setShowScreenName] = useState(null);
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -31,11 +32,11 @@ function PickupReasonCommonScreen({
       deal_id: data[0]?.dealCodeNumber,
       selected_product_name: selectedProducts.join(", "),
       type: selectedType,
+      Pickup_Request_Type: pickupRequestType,
       pickup_reason: reason.title,
       description,
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
   return (
     <>

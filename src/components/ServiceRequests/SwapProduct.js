@@ -11,17 +11,15 @@ import {BsSearch} from "react-icons/bs";
 import {
   getLocalStorage,
   productPageImagesBaseUrl,
-  CreateRequest,
   CreateRequestPayload,
 } from "@/constants/constant";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {useDispatch, useSelector} from "react-redux";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function SwapProduct({prevScreen, data}) {
-  const dispatch = useDispatch();
   const [showSwapScreen, setShowSwapScreen] = useState(1);
   const [ProductInfo, setProductInfo] = useState(data);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -29,6 +27,7 @@ function SwapProduct({prevScreen, data}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -38,8 +37,7 @@ function SwapProduct({prevScreen, data}) {
       upgrade_product: selectedProductForSwap?.product_name,
       selected_product_name: selectedProduct?.product_name,
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   useEffect(() => {

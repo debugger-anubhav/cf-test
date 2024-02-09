@@ -2,17 +2,17 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
-import {useDispatch, useSelector} from "react-redux";
-import {CreateRequest, CreateRequestPayload} from "@/constants/constant";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
+import {CreateRequestPayload} from "@/constants/constant";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function ChangeBillCycle({prevScreen, data}) {
-  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
   const [istoggled, setIstoggled] = useState(true);
   const [description, setDescription] = useState("");
+  const {trailCreateSR} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -21,8 +21,7 @@ function ChangeBillCycle({prevScreen, data}) {
       type: selectedType,
       description,
     };
-    CreateRequest(payload);
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   return (
@@ -79,7 +78,7 @@ function ChangeBillCycle({prevScreen, data}) {
         <button
           className={`${styles.proceed_btn} !w-fit `}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
-          onClick={handleCreateRequest}>
+          onClick={() => handleCreateRequest()}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

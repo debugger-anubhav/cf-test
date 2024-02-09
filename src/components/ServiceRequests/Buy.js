@@ -1,27 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
 import {
-  CreateRequest,
   productPageImagesBaseUrl,
   CreateRequestPayload,
 } from "@/constants/constant";
 import PickupReasonOptions from "./PickupReasonOptions";
-import {useDispatch, useSelector} from "react-redux";
-import {setServiceRequestDrawer} from "@/store/Slices";
+import {useSelector} from "react-redux";
+import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function Buy({heading, prevScreen, data}) {
-  const dispatch = useDispatch();
+  const {trailCreateSR} = CommonCreateRequestApi();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
-  // const [selected, setSelected] = useState(false);
   const [showPickupReason, setShowPickupReason] = useState(false);
   const [Screen, setScreen] = useState(1);
   const [description, setDescription] = useState("");
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [pickupRequestType, setPickupRequestType] = useState("");
 
   const handleChangeCheckbox = (index, e) => {
     const productName = e.target.value;
@@ -34,6 +33,25 @@ function Buy({heading, prevScreen, data}) {
     });
   };
 
+  const [arr, setArr] = useState([]);
+  useEffect(() => {
+    if (data) {
+      const s = new Set();
+      for (let i = 0; i <= data.length - 1; i++) {
+        s.add(data[i]?.product_name);
+      }
+      setArr([...s]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (selectedProducts.slice(",").length === arr.length) {
+      setPickupRequestType("Full");
+    } else {
+      setPickupRequestType("Partial");
+    }
+  }, [selectedProducts, arr]);
+
   const handleCreateRequest = () => {
     const payload = {
       ...CreateRequestPayload,
@@ -42,9 +60,7 @@ function Buy({heading, prevScreen, data}) {
       selected_product_name: selectedProducts.join(", "),
       description,
     };
-    CreateRequest(payload);
-
-    dispatch(setServiceRequestDrawer(false));
+    trailCreateSR(payload);
   };
 
   return (
@@ -54,6 +70,7 @@ function Buy({heading, prevScreen, data}) {
           setScreen={setScreen}
           selectedProducts={selectedProducts}
           data={data}
+          pickupRequestType={pickupRequestType}
         />
       ) : (
         <div className={styles.content_wrapper}>
