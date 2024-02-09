@@ -16,6 +16,7 @@ function PickupReasonCommonScreen({
   setCurrentScreen,
   selectedProducts,
   data,
+  pickupRequestType,
 }) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
@@ -31,6 +32,7 @@ function PickupReasonCommonScreen({
       deal_id: data[0]?.dealCodeNumber,
       selected_product_name: selectedProducts.join(", "),
       type: selectedType,
+      Pickup_Request_Type: pickupRequestType,
       pickup_reason: reason.title,
       description,
     };

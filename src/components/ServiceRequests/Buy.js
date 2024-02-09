@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
 import Checkbox from "@mui/material/Checkbox";
@@ -20,6 +20,7 @@ function Buy({heading, prevScreen, data}) {
   const [Screen, setScreen] = useState(1);
   const [description, setDescription] = useState("");
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [pickupRequestType, setPickupRequestType] = useState("");
 
   const handleChangeCheckbox = (index, e) => {
     const productName = e.target.value;
@@ -31,6 +32,25 @@ function Buy({heading, prevScreen, data}) {
       }
     });
   };
+
+  const [arr, setArr] = useState([]);
+  useEffect(() => {
+    if (data) {
+      const s = new Set();
+      for (let i = 0; i <= data.length - 1; i++) {
+        s.add(data[i]?.product_name);
+      }
+      setArr([...s]);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (selectedProducts.slice(",").length === arr.length) {
+      setPickupRequestType("Full");
+    } else {
+      setPickupRequestType("Partial");
+    }
+  }, [selectedProducts, arr]);
 
   const handleCreateRequest = () => {
     const payload = {
@@ -50,6 +70,7 @@ function Buy({heading, prevScreen, data}) {
           setScreen={setScreen}
           selectedProducts={selectedProducts}
           data={data}
+          pickupRequestType={pickupRequestType}
         />
       ) : (
         <div className={styles.content_wrapper}>

@@ -3,7 +3,12 @@ import styles from "./style.module.css";
 import {BackIcon, ForwardArrow} from "@/assets/icon";
 import PickupReasonCommonScreen from "./PickupReasonCommonScreen";
 
-function PickupReasonOptions({setScreen, selectedProducts, data}) {
+function PickupReasonOptions({
+  setScreen,
+  selectedProducts,
+  data,
+  pickupRequestType,
+}) {
   const [selectedPickupReason, setSelectedPickupReason] = useState(null);
   const [showCommonPickupScreen, setShowCommonPickupScreen] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(1);
@@ -29,6 +34,7 @@ function PickupReasonOptions({setScreen, selectedProducts, data}) {
           setCurrentScreen={setCurrentScreen}
           selectedProducts={selectedProducts}
           data={data}
+          pickupRequestType={pickupRequestType}
         />
       ) : (
         <div className={styles.content_wrapper}>
