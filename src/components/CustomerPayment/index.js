@@ -60,7 +60,7 @@ function CustomerPayment() {
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
     email: emailParam || "",
-    amount: amountParam || 1,
+    amount: amountParam || "",
     invoice: invoiceNumberParam || "",
     cfCoins: availableCoins,
     notes: "",
@@ -73,6 +73,8 @@ function CustomerPayment() {
   const [loginModal, setLoginModal] = useState(false);
   const [redirctInvoice, setRedirctInvoice] = useState(false);
   const [topupAmount, setTopupAmount] = useState();
+  const [primaryAmount, setPrimaryAmount] = useState("");
+
   // useEffect(() => {
   //   setFormData({
   //     fullName: nameParam || "",
@@ -84,8 +86,33 @@ function CustomerPayment() {
   //   });
   // }, [currentURL]);
 
+  const fetchAvailCoins = () => {
+    console.log("insoideee");
+    axios
+      .get(baseURL + endPoints.addToCart.fetchCoins(userId))
+      .then(res => {
+        if (res?.data?.data?.length > 0) {
+          const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
+          setTopupAmount(availAmount);
+          if (coinsReduxValue.isCoinApplied) {
+            console.log(availAmount, amountParam, "in coinn");
+            setAvailableCoins(
+              amountParam - availAmount > 0
+                ? 0
+                : Math.abs(amountParam - availAmount),
+            );
+          } else
+            setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+          // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
   useEffect(() => {
+    fetchAvailCoins();
     if (urlParams.size > 0) {
+      setPrimaryAmount(amountParam);
       let amount = amountParam;
       if (coinsReduxValue?.isCoinApplied === true) {
         console.log("in nottt");
@@ -93,34 +120,19 @@ function CustomerPayment() {
         console.log(amountParam, amount, "amountParam");
       }
 
-      const temp = formData;
+      const temp = {};
       temp.fullName = nameParam;
       temp.email = emailParam;
-      temp.amount = amount;
+      temp.amount = amount <= 0 ? 1 : amount;
       temp.invoice = invoiceNumberParam;
       temp.cfCoins = coinsReduxValue?.usedCoins;
       temp.notes = "";
       console.log(temp, "temppp");
       setFormData(temp);
       handleSubmit(temp);
-      // if (urlParams.size > 0) {
-      //   console.log(urlParams.size, "size");
-      //   setTimeout(() => {
-      //     handleSubmit(formData);
-      //   }, 1001);
-      // }
       console.log(formData, "h");
     }
   }, [currentURL]);
-
-  // useEffect(() => {
-  //   if (urlParams.size > 0) {
-  //     console.log(urlParams.size, "size");
-  //     setTimeout(() => {
-  //       handleSubmit(formData);
-  //     }, 1001);
-  //   }
-  // }, [currentURL]);
 
   useEffect(() => {
     setIsLogin(reduxLoginState);
@@ -142,30 +154,9 @@ function CustomerPayment() {
     validateAuth();
   }, [isLogin]);
 
-  const fetchAvailCoins = () => {
-    console.log("insoideee");
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(userId))
-      .then(res => {
-        if (res?.data?.data?.length > 0) {
-          const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
-          setTopupAmount(availAmount);
-          if (coinsReduxValue.isCoinApplied)
-            setAvailableCoins(
-              amountParam - availAmount > 0
-                ? 0
-                : Math.abs(amountParam - availAmount),
-            );
-          else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-          // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-        }
-      })
-      .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    fetchAvailCoins();
-  }, []);
+  // useEffect(() => {
+  //   fetchAvailCoins();
+  // }, []);
 
   const validationSchema = Yup.object({
     fullName: Yup.string()
@@ -176,7 +167,7 @@ function CustomerPayment() {
     amount: Yup.number().required("Amount is required."),
   });
 
-  const handlePayment = async () => {
+  const handlePayment = async values => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
@@ -190,12 +181,12 @@ function CustomerPayment() {
     const result = await axios.post(
       baseURL + endPoints.customerPayment.createCustomerPayment,
       {
-        full_name: formData.fullName,
-        email: formData.email,
-        price: formData.amount,
-        user_invoice_number: formData.invoice,
-        cfCoins: formData.cfCoins,
-        notes: formData.notes || "",
+        full_name: values.fullName,
+        email: values.email,
+        price: values.amount,
+        user_invoice_number: values.invoice,
+        cfCoins: values.cfCoins,
+        notes: values.notes || "",
       },
     );
     console.log(result.data, "make payment api data");
@@ -212,7 +203,7 @@ function CustomerPayment() {
 
     const options = {
       key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
-      amount: formData.amount,
+      amount: values.amount,
       name: "Cityfurnish",
       description: "Test Transaction",
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
@@ -227,11 +218,11 @@ function CustomerPayment() {
           paymentSource: "",
           signature: response.razorpay_signature,
           email: userDetails?.email,
-          invoiceNumber: formData?.invoice,
-          cfCoins: formData.cfCoins,
-          notes: formData.notes || "",
+          invoiceNumber: values?.invoice,
+          cfCoins: values.cfCoins,
+          notes: values.notes || "",
           recId: userDetails.recID,
-          amount: formData.amount,
+          amount: values.amount,
         };
         const result = await axios.post(
           baseURL + endPoints.customerPayment.savePayment,
@@ -240,7 +231,7 @@ function CustomerPayment() {
         console.log(result);
         dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
         dispatch(setPGTransactionID(response.razorpay_payment_id));
-        dispatch(setAmountPaid(formData.amount));
+        dispatch(setAmountPaid(values.amount));
         router.push("/success/payment");
       },
       prefill: {
@@ -277,7 +268,7 @@ function CustomerPayment() {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdata");
-    handlePayment();
+    handlePayment(values);
   };
 
   // const handleUseCoins = value => {
@@ -345,7 +336,7 @@ function CustomerPayment() {
                         className={formStyles.form_input}
                         onChange={e => {
                           formik.setFieldValue("fullName", e.target.value);
-                          setFormData({...formData, fullName: e.target.value});
+                          // setFormData({...formData, fullName: e.target.value});
                         }}
                       />
                       <ErrorMessage name="fullName">
@@ -365,7 +356,7 @@ function CustomerPayment() {
                         className={formStyles.form_input}
                         onChange={e => {
                           formik.setFieldValue("email", e.target.value);
-                          setFormData({...formData, email: e.target.value});
+                          // setFormData({...formData, email: e.target.value});
                         }}
                       />
                       <ErrorMessage name="email">
@@ -388,7 +379,7 @@ function CustomerPayment() {
                         value={formik.values.invoice}
                         onChange={e => {
                           formik.setFieldValue("invoice", e.target.value);
-                          setFormData({...formData, invoice: e.target.value});
+                          // setFormData({...formData, invoice: e.target.value});
                         }}
                       />
 
@@ -430,12 +421,17 @@ function CustomerPayment() {
                         placeholder="Enter the amount to be paid"
                         className={styles.form_input}
                         onChange={e => {
-                          setFormData({...formData, amount: e.target.value});
+                          // setFormData({...formData, amount: e.target.value});
                           formik.setFieldValue("amount", e.target.value);
                           setshowValidationForAmount(false);
                           formik.touched.amount = false;
+                          setPrimaryAmount(e.target.value);
                         }}
-                        value={formData.amount}
+                        value={
+                          !useCityfurnishCoins
+                            ? primaryAmount
+                            : formik.values.amount
+                        }
                       />
                       <ErrorMessage name="amount">
                         {msg =>
@@ -490,10 +486,11 @@ function CustomerPayment() {
                                 // setAmount(amountDue);
                                 setUseCityfurnishCoins(false);
                                 setAvailableCoins(topupAmount);
-                                setFormData({
-                                  ...formData,
-                                  amount: amountParam || "",
-                                });
+                                // setFormData({
+                                //   ...formData,
+                                //   amount: amountParam || "",
+                                // });
+                                formik.setFieldValue("amount", primaryAmount);
                               }}
                             />
                           ) : (
@@ -501,28 +498,43 @@ function CustomerPayment() {
                               color={"#E3E1DC"}
                               size={29}
                               onClick={() => {
-                                setUseCityfurnishCoins(true);
-                                console.log(formik.values.amount, "pp");
-                                setAvailableCoins(
-                                  amountParam - topupAmount > 0
-                                    ? 0
-                                    : Math.abs(amountParam - topupAmount),
-                                );
-                                setFormData({
-                                  ...formData,
-                                  amount:
-                                    topupAmount > amountParam
-                                      ? 1
-                                      : Math.abs(topupAmount - amountParam),
-                                });
-                                console.log(formik.values.amount, "poo");
+                                if (formik.values.amount !== "") {
+                                  console.log("onclickkk");
+                                  setUseCityfurnishCoins(true);
+                                  console.log(
+                                    formik.values.amount,
+                                    "pp",
+                                    topupAmount,
+                                  );
+                                  setAvailableCoins(
+                                    formik.values.amount - topupAmount > 0
+                                      ? 0
+                                      : Math.abs(
+                                          formik.values.amount - topupAmount,
+                                        ),
+                                  );
+                                  // setFormData({
+                                  //   ...formData,
+                                  //   amount:
+                                  //     topupAmount > amountParam
+                                  //       ? 1
+                                  //       : Math.abs(topupAmount - amountParam),
+                                  // });
+                                  console.log(formik.values.amount, "poo");
 
-                                // setAmount(
-                                //   availbal > amountDue
-                                //     ? 1
-                                //     : Math.abs(availbal - amountDue),
-                                // );
-                                // isCoinApplied &&
+                                  formik.setFieldValue(
+                                    "amount",
+                                    formik.values.amount - topupAmount > 0
+                                      ? formik.values.amount - topupAmount
+                                      : 1,
+                                  );
+                                  // setAmount(
+                                  //   availbal > amountDue
+                                  //     ? 1
+                                  //     : Math.abs(availbal - amountDue),
+                                  // );
+                                  // isCoinApplied &&
+                                }
                               }}
                             />
                           )}
@@ -557,7 +569,7 @@ function CustomerPayment() {
                         className={styles.form_input}
                         onChange={e => {
                           formik.setFieldValue("notes", e.target.value);
-                          setFormData({...formData, notes: e.target.value});
+                          // setFormData({...formData, notes: e.target.value});
                         }}
                       />
                     </div>
