@@ -146,6 +146,7 @@ const PastpaymentDrawer = ({
           <button
             className={styles.btn}
             onClick={() => {
+              console.log(isCoinApplied, "kkk");
               dispatch(getCoinsState(isCoinApplied));
               dispatch(
                 getAvailableCoins(
@@ -157,7 +158,7 @@ const PastpaymentDrawer = ({
                 const remaingCoins =
                   availbal > amountDue ? availbal - temp : availbal;
                 dispatch(setUsedCoins(Math.abs(remaingCoins)));
-              }
+              } else dispatch(setUsedCoins(0));
               handleRedirectToPayment();
             }}>
             Proceed and pay

@@ -87,7 +87,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
           {
             singleSubscriptionData?.status.toLowerCase() === "active" && (
               <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
-                Need Help with your order?
+                Need Help with your Subscription?
               </p>
             )
             //  : (

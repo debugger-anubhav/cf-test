@@ -55,10 +55,6 @@ const CommonContainer = ({
   const productDetails =
     tab === 0 ? JSON.parse(item?.fc_paymentData) : item?.productsList;
 
-  const handleOpenChatBot = () => {
-    console.log("jwq");
-  };
-
   return (
     <div>
       <div key={index} className={styles.box}>
@@ -103,9 +99,14 @@ const CommonContainer = ({
                 : `Subscription no: #${item.dealCodeNumber}`}
             </p>
             {item.status.toLowerCase() === "pending" ? (
-              <p onClick={handleOpenChatBot} className={styles.help_txt}>
+              <a
+                href={"https://wa.me/919205006188"}
+                target="_blank"
+                rel="noopener  noreferrer"
+                aria-label="Talk to an agent"
+                className={styles.help_txt}>
                 Chat with us
-              </p>
+              </a>
             ) : (
               item.status.toLowerCase() !== "inactive" && (
                 <p onClick={toggleServiceDrawer} className={styles.help_txt}>
