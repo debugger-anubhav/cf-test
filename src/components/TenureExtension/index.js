@@ -16,7 +16,7 @@ function TenureExtension() {
 
   const CardData = [
     {
-      title: "Long-term pack",
+      title: "Long-term pack ",
       lightTitle: "(9 months+)",
       percent_off: 15,
       monthOptions: [
@@ -74,8 +74,8 @@ function TenureExtension() {
     <div className={styles.wrapper}>
       <div className={styles.main_heading}>Tenure Extension</div>
       <div className={styles.order_row}>
-        Your Order ID{" "}
-        <span className="ml-14 font-medium">: #{params?.orderId}</span>
+        Your Order ID:
+        <span className="font-medium ml-2">#{params?.orderId}</span>
       </div>
       <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
         {CardData?.map((item, index) => {

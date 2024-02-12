@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {Close, RightIcon, VerifyIcon} from "@/assets/icon";
+import {
+  CheckedBox,
+  Close,
+  RightIcon,
+  UncheckedBox,
+  VerifyIcon,
+} from "@/assets/icon";
 import DropDown from "@/components/Documentation/DropDown/DropDown";
 import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
 import {Skeleton} from "@mui/material";
@@ -45,6 +51,8 @@ function Cards({
     items?.monthOptions[0],
   );
   const [perAddModal, setPerAddModal] = useState(false);
+  // const [isChecked, setIsChecked] = useState(isChecked);
+
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -169,7 +177,10 @@ function Cards({
             ) : (
               calculatedPrice
             )}
-            <span className={styles.price_span}>{data?.orignalPrice}</span>
+            <span className={`${styles.price_span} font-normal font-Poppins`}>
+              <span className="font-Inter"> ₹</span>
+              {data?.orignalPrice}
+            </span>
           </p>
           <p className={styles.discount}>-{items?.percent_off}% OFF</p>
         </div>
@@ -178,7 +189,7 @@ function Cards({
 
       <div className={styles.discount_detail}>
         <p className={styles.discount_point}>
-          Get {items?.percent_off} discount on extension of your tenure by
+          Get {items?.percent_off}% discount on extension of your tenure by
           paying upfront.
         </p>
         <div className="mt-4">
@@ -201,12 +212,31 @@ function Cards({
               <VerifyIcon size={30} color={"#2D9469"} />
               <p className={styles.city_shield_head}>City shield </p>
             </div>
-            <div>
+            {/* <div>
               <input
                 type="checkbox"
                 className="flex border border-5774AC cursor-pointer"
                 checked={!(cardIndex === index && !isChecked)}
               />
+            </div> */}
+            <div>
+              {isChecked ? (
+                <div onClick={openDrawer}>
+                  <CheckedBox
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
+              ) : (
+                <div onClick={() => setIsChecked(true)}>
+                  <UncheckedBox
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
+              )}
             </div>
           </div>
           <p className={styles.cityshield_text}>
@@ -216,7 +246,6 @@ function Cards({
           </p>
         </div>
       )}
-
       <CityShieldDrawerForCart
         cityShieldCurrentPrice={calculatedPrice}
         cityShieldOriginalPrice={data?.orignalPrice}
@@ -264,7 +293,7 @@ export const MonthlyCard = ({
 }) => {
   const DiscountPoints = [
     "No Discount",
-    "No Cost EMI Available",
+    "No Cost EMI Not Available",
     "Inclusive GST",
     "No Security Deposit",
   ];
@@ -391,8 +420,10 @@ export const MonthlyCard = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
-        Monthly Billing{" "}
-        <span className={styles.card_type_span}>via Bank Mandate</span>
+        Monthly Billing
+        <span className={`${styles.card_type_span} ml-2`}>
+          via Bank Mandate
+        </span>
       </div>
 
       <div className={styles.monthly_rent_row}>
@@ -430,12 +461,31 @@ export const MonthlyCard = ({
             <VerifyIcon size={30} color={"#2D9469"} />
             <p className={styles.city_shield_head}>City shield </p>
           </div>
-          <div>
+          {/* <div>
             <input
               type="checkbox"
               className="flex border border-5774AC cursor-pointer"
               checked={monthlyCardIsChecked}
             />
+          </div> */}
+          <div>
+            {monthlyCardIsChecked ? (
+              <div onClick={openDrawerForMonthly}>
+                <CheckedBox
+                  size={20}
+                  color={"#5774AC"}
+                  className={"cursor-pointer"}
+                />
+              </div>
+            ) : (
+              <div onClick={() => setmonthlyCardIsChecked(true)}>
+                <UncheckedBox
+                  size={20}
+                  color={"#5774AC"}
+                  className={"cursor-pointer"}
+                />
+              </div>
+            )}
           </div>
         </div>
         <p className={styles.cityshield_text}>

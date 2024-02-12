@@ -1,14 +1,14 @@
 .wrapper {
-  @apply border border-EDEDEE rounded-lg flex flex-col bg-fff p-6 gap-6 md:w-[346px] w-full;
+  @apply border border-EDEDEE rounded-lg flex flex-col bg-fff p-6 lg:gap-6 gap-4 md:w-[346px] w-full;
 }
 .card_type_text {
-  @apply w-full text-45454A lg:text-20 text-16 font-medium font-Poppins;
+  @apply w-full text-45454A lg:text-20 text-16 font-medium font-Poppins whitespace-nowrap;
 }
 .card_type_span {
   @apply w-full text-9A9AA2 lg:text-16 text-14 font-medium font-Poppins;
 }
 .monthly_rent_row {
-  @apply flex flex-col w-full lg:mt-6 mt-4;
+  @apply flex flex-col w-full;
 }
 .monthly_rent_text {
   @apply text-71717A text-14 font-medium;
@@ -23,7 +23,7 @@
   @apply lg:text-20 text-18 font-medium text-222 flex items-center;
 }
 .price_span {
-  @apply text-9A9AA2 lg:text-16 text-14 mx-4 stroke-222 line-through;
+  @apply text-9A9AA2 lg:text-16 text-14 mx-2 stroke-222 line-through;
 }
 .discount {
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
@@ -44,7 +44,7 @@
   @apply flex justify-between items-center;
 }
 .cityshield_wrapper {
-  @apply border border-DDDDDF rounded-xl p-4 cursor-pointer;
+  @apply border border-DDDDDF rounded-xl p-4 cursor-pointer hover:border-2 hover:p-[15px] hover:border-[#5774AC];
 }
 .cityshield_text {
   @apply mt-4 text-45454A font-Poppins text-14;
