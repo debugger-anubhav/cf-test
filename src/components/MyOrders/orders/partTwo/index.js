@@ -45,10 +45,6 @@ const OrderDetails = ({setPart, data}) => {
     ? data?.stagesData[stepsCompleted - 3]?.zoho_sub_status.toLowerCase()
     : orderStatus?.toLowerCase();
 
-  const handleOpenChatBot = () => {
-    console.log("chatt");
-  };
-
   return (
     <div className={styles.main_container}>
       <div className={styles.header_wrapper}>
@@ -179,9 +175,14 @@ const OrderDetails = ({setPart, data}) => {
           </div>
           {stepsCompleted > 0 &&
           orderStatus?.toLowerCase() === "order failed" ? (
-            <p onClick={handleOpenChatBot} className={styles.need_help_txt}>
+            <a
+              href={"https://wa.me/919205006188"}
+              target="_blank"
+              rel="noopener  noreferrer"
+              aria-label="Talk to an agent"
+              className={styles.need_help_txt}>
               Chat with us
-            </p>
+            </a>
           ) : (
             <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
               Need Help with your order?

@@ -86,53 +86,56 @@ function CustomerPayment() {
   //   });
   // }, [currentURL]);
 
-  const fetchAvailCoins = () => {
+  const fetchAvailCoins = async () => {
     console.log("insoideee");
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(userId))
-      .then(res => {
-        if (res?.data?.data?.length > 0) {
-          const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
-          setTopupAmount(availAmount);
-          if (coinsReduxValue.isCoinApplied) {
-            console.log(availAmount, amountParam, "in coinn");
-            setAvailableCoins(
-              amountParam - availAmount > 0
-                ? 0
-                : Math.abs(amountParam - availAmount),
-            );
-          } else
-            setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-          // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+    try {
+      const res = await axios.get(
+        baseURL + endPoints.addToCart.fetchCoins(userId),
+      );
+
+      if (res?.data?.data?.length > 0) {
+        const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
+        console.log(availAmount, "jewjiw");
+        setTopupAmount(availAmount);
+        if (coinsReduxValue.isCoinApplied) {
+          console.log(availAmount, amountParam, "in coinn");
+          setAvailableCoins(
+            amountParam - availAmount > 0
+              ? 0
+              : Math.abs(amountParam - availAmount),
+          );
+        } else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+        // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
+      }
+      if (urlParams.size > 0) {
+        setPrimaryAmount(amountParam);
+        let amount = amountParam;
+        if (coinsReduxValue?.isCoinApplied === true) {
+          console.log("in nottt");
+          amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
+          console.log(amountParam, amount, "amountParam");
         }
-      })
-      .catch(err => console.log(err));
+
+        const temp = {};
+        temp.fullName = nameParam;
+        temp.email = emailParam;
+        temp.amount = amount <= 0 ? 1 : amount;
+        temp.invoice = invoiceNumberParam;
+        temp.cfCoins = coinsReduxValue?.usedCoins;
+        temp.notes = "";
+        console.log(temp, "temppp");
+        setFormData(temp);
+        handleSubmit(temp);
+        console.log(formData, "h");
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
     fetchAvailCoins();
-    if (urlParams.size > 0) {
-      setPrimaryAmount(amountParam);
-      let amount = amountParam;
-      if (coinsReduxValue?.isCoinApplied === true) {
-        console.log("in nottt");
-        amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
-        console.log(amountParam, amount, "amountParam");
-      }
-
-      const temp = {};
-      temp.fullName = nameParam;
-      temp.email = emailParam;
-      temp.amount = amount <= 0 ? 1 : amount;
-      temp.invoice = invoiceNumberParam;
-      temp.cfCoins = coinsReduxValue?.usedCoins;
-      temp.notes = "";
-      console.log(temp, "temppp");
-      setFormData(temp);
-      handleSubmit(temp);
-      console.log(formData, "h");
-    }
-  }, [currentURL]);
+  }, [currentURL, userId]);
 
   useEffect(() => {
     setIsLogin(reduxLoginState);
@@ -178,15 +181,21 @@ function CustomerPayment() {
       return;
     }
 
+    console.log(
+      topupAmount,
+      availableCoins,
+      topupAmount - availableCoins,
+      "topupAmount - availableCoins",
+    );
     const result = await axios.post(
       baseURL + endPoints.customerPayment.createCustomerPayment,
       {
-        full_name: values.fullName,
-        email: values.email,
-        price: values.amount,
-        user_invoice_number: values.invoice,
-        cfCoins: values.cfCoins,
-        notes: values.notes || "",
+        full_name: values?.fullName,
+        email: values?.email,
+        price: values?.amount,
+        user_invoice_number: values?.invoice,
+        cfCoins: topupAmount - availableCoins,
+        notes: values?.notes || "",
       },
     );
     console.log(result.data, "make payment api data");
@@ -195,34 +204,34 @@ function CustomerPayment() {
       return;
     }
 
-    const data = result.data.data;
+    const data = result?.data?.data;
     console.log(data);
 
     // const {dealCodeNumber} = result.data.data.orderData.notes;
-    const userDetails = result.data.data.data;
+    const userDetails = result?.data?.data?.data;
 
     const options = {
       key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
-      amount: values.amount,
+      amount: values?.amount,
       name: "Cityfurnish",
       description: "Test Transaction",
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
-      order_id: data.raz_order_id,
-      customer_id: data.customer_id,
+      order_id: data?.raz_order_id,
+      customer_id: data?.customer_id,
       handler: async function (response) {
         console.log(response, "responsse in handler");
         const body = {
-          transactionID: response.razorpay_payment_id,
-          auth_raz_order_id: response.razorpay_order_id,
+          transactionID: response?.razorpay_payment_id,
+          auth_raz_order_id: response?.razorpay_order_id,
           fullName: userDetails?.full_name,
           paymentSource: "",
-          signature: response.razorpay_signature,
+          signature: response?.razorpay_signature,
           email: userDetails?.email,
           invoiceNumber: values?.invoice,
-          cfCoins: values.cfCoins,
-          notes: values.notes || "",
-          recId: userDetails.recID,
-          amount: values.amount,
+          cfCoins: topupAmount - availableCoins,
+          notes: values?.notes || "",
+          recId: userDetails?.recID,
+          amount: values?.amount,
         };
         const result = await axios.post(
           baseURL + endPoints.customerPayment.savePayment,
