@@ -16,7 +16,7 @@ function TenureExtension() {
 
   const CardData = [
     {
-      title: "Long-term pack",
+      title: "Long-term pack ",
       lightTitle: "(9 months+)",
       percent_off: 15,
       monthOptions: [

@@ -178,7 +178,7 @@ function Cards({
 
       <div className={styles.discount_detail}>
         <p className={styles.discount_point}>
-          Get {items?.percent_off} discount on extension of your tenure by
+          Get {items?.percent_off}% discount on extension of your tenure by
           paying upfront.
         </p>
         <div className="mt-4">
