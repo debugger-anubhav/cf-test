@@ -12,7 +12,7 @@ const offineInvoive = () => {
       <AnnouncementBar />
       <Header />
       <MenuList />
-      <OfflineInvoice />
+      <OfflineInvoice userIdCheck={true} />
     </div>
   );
 };

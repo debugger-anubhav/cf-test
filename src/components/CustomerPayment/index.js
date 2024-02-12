@@ -32,6 +32,7 @@ import {
 } from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {showToastNotification} from "../Common/Notifications/toastUtils";
 
 function CustomerPayment() {
   const {checkAuthentication} = useAuthentication();
@@ -184,80 +185,88 @@ function CustomerPayment() {
       return;
     }
 
-    const result = await axios.post(
-      baseURL + endPoints.customerPayment.createCustomerPayment,
-      {
-        full_name: values?.fullName,
-        email: values?.email,
-        price: values?.amount,
-        user_invoice_number: values?.invoice,
-        cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
-        notes: values?.notes || "",
-      },
-    );
-    // console.log(result.data, "make payment api data");
-    if (!result) {
-      alert("Server error. Are you online?");
-      return;
-    }
-
-    const data = result?.data?.data;
-    // console.log(data);
-
-    // const {dealCodeNumber} = result.data.data.orderData.notes;
-    const userDetails = result?.data?.data?.data;
-
-    const options = {
-      key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
-      amount: values?.amount,
-      name: "Cityfurnish",
-      description: "Test Transaction",
-      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
-      order_id: data?.raz_order_id,
-      customer_id: data?.customer_id,
-      handler: async function (response) {
-        console.log(response, "responsse in handler");
-        const body = {
-          transactionID: response?.razorpay_payment_id,
-          auth_raz_order_id: response?.razorpay_order_id,
-          fullName: userDetails?.full_name,
-          paymentSource: "",
-          signature: response?.razorpay_signature,
-          email: userDetails?.email,
-          invoiceNumber: values?.invoice,
+    try {
+      const result = await axios.post(
+        baseURL + endPoints.customerPayment.createCustomerPayment,
+        {
+          full_name: values?.fullName,
+          email: values?.email,
+          price: values?.amount,
+          user_invoice_number: values?.invoice,
           cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
           notes: values?.notes || "",
-          recId: userDetails?.recID,
-          amount: values?.amount,
-        };
-        const result = await axios.post(
-          baseURL + endPoints.customerPayment.savePayment,
-          body,
-        );
-        console.log(result);
-        dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
-        dispatch(setPGTransactionID(response.razorpay_payment_id));
-        dispatch(setAmountPaid(values.amount));
-        router.push("/success/payment");
-      },
-      prefill: {
-        name: userDetails?.full_name,
-        email: userDetails?.email,
-        contact: userDetails?.phone_no,
-      },
-      theme: {
-        color: RazorpayThemeColor,
-      },
-    };
+        },
+      );
+      if (!result) {
+        alert("Server error. Are you online?");
+        return;
+      }
 
-    // console.log(options, "optionss");
+      // console.log(result.data, "make payment api data");
 
-    const paymentObject = new window.Razorpay(options);
-    paymentObject.open();
+      const data = result?.data?.data;
+      console.log(data, "data");
 
-    paymentObject.on("payment.failed", e => {
-      console.log(e);
-    });
+      // const {dealCodeNumber} = result.data.data.orderData.notes;
+      const userDetails = result?.data?.data?.data;
+
+      const options = {
+        key: razorpayKeyOwn, // Enter the Key ID generated from the Dashboard
+        amount: values?.amount,
+        name: "Cityfurnish",
+        description: "Test Transaction",
+        image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+        order_id: data?.raz_order_id,
+        customer_id: data?.customer_id,
+        handler: async function (response) {
+          console.log(response, "responsse in handler");
+          const body = {
+            transactionID: response?.razorpay_payment_id,
+            auth_raz_order_id: response?.razorpay_order_id,
+            fullName: userDetails?.full_name,
+            paymentSource: "",
+            signature: response?.razorpay_signature,
+            email: userDetails?.email,
+            invoiceNumber: values?.invoice,
+            cfCoins: isAutoRazor
+              ? values?.cfCoins
+              : topupAmount - availableCoins,
+            notes: values?.notes || "",
+            recId: userDetails?.recID,
+            amount: values?.amount,
+          };
+          const result = await axios.post(
+            baseURL + endPoints.customerPayment.savePayment,
+            body,
+          );
+          console.log(result);
+          dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
+          dispatch(setPGTransactionID(response.razorpay_payment_id));
+          dispatch(setAmountPaid(values.amount));
+          router.push("/success/payment");
+        },
+        prefill: {
+          name: userDetails?.full_name,
+          email: userDetails?.email,
+          contact: userDetails?.phone_no,
+        },
+        theme: {
+          color: RazorpayThemeColor,
+        },
+      };
+
+      // console.log(options, "optionss");
+
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.open();
+
+      paymentObject.on("payment.failed", e => {
+        console.log(e, "eeeee");
+      });
+    } catch (error) {
+      console.log(error?.response?.data?.message, "error");
+      showToastNotification(error?.response?.data?.message, 1);
+    }
   };
 
   const handleSubmit = (values, isAutoRazor) => {

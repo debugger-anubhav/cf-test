@@ -124,6 +124,14 @@ const AddressSection = () => {
       then: () => Yup.string().required("Order type is required"),
       otherwise: () => Yup.string(),
     }),
+    email: Yup.string()
+      .email()
+      .when("offlineCustomer", {
+        is: true,
+        then: () =>
+          Yup.string().email().required("Please enter a valid email address."),
+        otherwise: () => Yup.string().email(),
+      }),
     customerPaidAmount: Yup.string().when("offlineCustomer", {
       is: true,
       then: () => Yup.string().required("Customer paid amount is required"),
@@ -337,7 +345,7 @@ const AddressSection = () => {
   const handleOfflineOrder = values => {
     const body = {
       user_name: values.fullName,
-      email: "trupali96@gmail.com",
+      email: values.email,
       mobile_no: values.contactNumber,
       alert_mobile_no: values.alternateContactNumber || "",
       address1: values.address,
@@ -474,6 +482,7 @@ const AddressSection = () => {
                 city: cityName,
                 orderNumber: "",
                 orderType: "",
+                email: "",
                 alternateContactNumber: "",
                 customerPaidAmount: "",
                 offlineCustomer: isOfflineCustomer === 1,
@@ -555,8 +564,7 @@ const AddressSection = () => {
                             Order Number (Optional)
                           </p>
                           <Field
-                            type="number"
-                            onKeyPress={keyPressForContactField}
+                            type="text"
                             name="orderNumber"
                             placeholder="Please provide the order number for payment."
                             className={styles.form_input}
@@ -576,6 +584,23 @@ const AddressSection = () => {
                       <ErrorMessage name="fullName">
                         {msg =>
                           formik.touched.fullName && (
+                            <p className={styles.error}>{msg} </p>
+                          )
+                        }
+                      </ErrorMessage>
+                    </div>
+
+                    <div className={styles.form_field}>
+                      <p className={styles.form_label}>Email</p>
+                      <Field
+                        type="text"
+                        name="email"
+                        placeholder="Enter your email"
+                        className={styles.form_input}
+                      />
+                      <ErrorMessage name="email">
+                        {msg =>
+                          formik.touched.email && (
                             <p className={styles.error}>{msg} </p>
                           )
                         }

@@ -36,12 +36,6 @@ const OrderSummary = ({
 
   const dispatch = useDispatch();
   const getOrderSummary = () => {
-    if (isOfflineInvoice) {
-      if (userId !== paramUserId) {
-        console.log("innn uuiweu");
-        router.push("/");
-      }
-    }
     if (isSubscriptionPage) {
       setData(subscriptionData);
       dispatch(getBillDetails(subscriptionData?.bill));

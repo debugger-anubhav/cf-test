@@ -6,6 +6,7 @@ import CustomerPayment from "@/components/CustomerPayment";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import Notifications from "@/components/Common/Notifications/Notification";
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
@@ -18,6 +19,7 @@ function CustomerPaymentPage() {
       <MenuList />
       <CustomerPayment />
       <Footer />
+      <Notifications />
     </div>
   );
 }
