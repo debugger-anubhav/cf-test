@@ -106,27 +106,29 @@ function CustomerPayment() {
           );
         } else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
         // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-      }
-      if (urlParams.size > 0) {
-        setPrimaryAmount(amountParam);
-        let amount = amountParam;
-        if (coinsReduxValue?.isCoinApplied === true) {
-          console.log("in nottt");
-          amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
-          console.log(amountParam, amount, "amountParam");
-        }
 
-        const temp = {};
-        temp.fullName = nameParam;
-        temp.email = emailParam;
-        temp.amount = amount <= 0 ? 1 : amount;
-        temp.invoice = invoiceNumberParam;
-        temp.cfCoins = coinsReduxValue?.usedCoins;
-        temp.notes = "";
-        console.log(temp, "temppp");
-        setFormData(temp);
-        handleSubmit(temp);
-        console.log(formData, "h");
+        if (urlParams.size > 0) {
+          console.log("bad me");
+          setPrimaryAmount(amountParam);
+          let amount = amountParam;
+          if (coinsReduxValue?.isCoinApplied === true) {
+            console.log("in nottt");
+            amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
+            console.log(amountParam, amount, "amountParam");
+          }
+
+          const temp = {};
+          temp.fullName = nameParam;
+          temp.email = emailParam;
+          temp.amount = amount <= 0 ? 1 : amount;
+          temp.invoice = invoiceNumberParam;
+          temp.cfCoins = coinsReduxValue?.usedCoins;
+          temp.notes = "";
+          // console.log(temp, "temppp");
+          setFormData(temp);
+          handleSubmit(temp, true);
+          // console.log(formData, "h");
+        }
       }
     } catch (err) {
       console.log(err);
@@ -170,23 +172,18 @@ function CustomerPayment() {
     amount: Yup.number().required("Amount is required."),
   });
 
-  const handlePayment = async values => {
+  const handlePayment = async (values, isAutoRazor) => {
+    console.log(isAutoRazor, "oooo");
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res);
+    // console.log(res);
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
 
-    console.log(
-      topupAmount,
-      availableCoins,
-      topupAmount - availableCoins,
-      "topupAmount - availableCoins",
-    );
     const result = await axios.post(
       baseURL + endPoints.customerPayment.createCustomerPayment,
       {
@@ -194,18 +191,18 @@ function CustomerPayment() {
         email: values?.email,
         price: values?.amount,
         user_invoice_number: values?.invoice,
-        cfCoins: topupAmount - availableCoins,
+        cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
         notes: values?.notes || "",
       },
     );
-    console.log(result.data, "make payment api data");
+    // console.log(result.data, "make payment api data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
     }
 
     const data = result?.data?.data;
-    console.log(data);
+    // console.log(data);
 
     // const {dealCodeNumber} = result.data.data.orderData.notes;
     const userDetails = result?.data?.data?.data;
@@ -228,7 +225,7 @@ function CustomerPayment() {
           signature: response?.razorpay_signature,
           email: userDetails?.email,
           invoiceNumber: values?.invoice,
-          cfCoins: topupAmount - availableCoins,
+          cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
           notes: values?.notes || "",
           recId: userDetails?.recID,
           amount: values?.amount,
@@ -253,7 +250,7 @@ function CustomerPayment() {
       },
     };
 
-    console.log(options, "optionss");
+    // console.log(options, "optionss");
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
@@ -263,8 +260,8 @@ function CustomerPayment() {
     });
   };
 
-  const handleSubmit = values => {
-    console.log(values, "values");
+  const handleSubmit = (values, isAutoRazor) => {
+    console.log(values, isAutoRazor, "values in handelsubmit");
     // setFormData({
     //   ...formData,
     //   fullName: values.fullName,
@@ -277,7 +274,7 @@ function CustomerPayment() {
       setshowValidationForAmount(true);
     }
     console.log(formData, "formdata");
-    handlePayment(values);
+    handlePayment(values, isAutoRazor);
   };
 
   // const handleUseCoins = value => {
@@ -508,7 +505,6 @@ function CustomerPayment() {
                               size={29}
                               onClick={() => {
                                 if (formik.values.amount !== "") {
-                                  console.log("onclickkk");
                                   setUseCityfurnishCoins(true);
                                   console.log(
                                     formik.values.amount,
