@@ -8,7 +8,7 @@
   @apply w-full text-9A9AA2 lg:text-16 text-14 font-medium font-Poppins;
 }
 .monthly_rent_row {
-  @apply flex flex-col w-full lg:mt-6 mt-4;
+  @apply flex flex-col w-full;
 }
 .monthly_rent_text {
   @apply text-71717A text-14 font-medium;
@@ -44,7 +44,7 @@
   @apply flex justify-between items-center;
 }
 .cityshield_wrapper {
-  @apply border border-DDDDDF rounded-xl p-4 cursor-pointer;
+  @apply border border-DDDDDF rounded-xl p-4 cursor-pointer hover:border-2 hover:p-[15px] hover:border-[#5774AC];
 }
 .cityshield_text {
   @apply mt-4 text-45454A font-Poppins text-14;
