@@ -105,7 +105,7 @@ const ProductCard = ({
                   }>{`${itemIncluded} items included`}</p>
               </div>
             )} */}
-            {showincludedItem === "Trending" ? (
+            {/* {showincludedItem === "Trending" ? (
               <div className={`${styles.trending_div} ${styles.label_tag}`}>
                 <RiSparklingFill size={16} color={"#ffffff"} />
                 <p className={styles.tag_text}>POPULAR</p>
@@ -123,6 +123,25 @@ const ProductCard = ({
                 <RiSparklingFill size={16} color={"#ffffff"} />
                 <p className={styles.tag_text}>SOLD OUT</p>
               </div>
+            )} */}
+
+            {!soldOut ? (
+              <div className={`${styles.soldout_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>SOLD OUT</p>
+              </div>
+            ) : showincludedItem === "Trending" ? (
+              <div className={`${styles.trending_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>POPULAR</p>
+              </div>
+            ) : showincludedItem === "New Launch" ? (
+              <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.tag_text}>NEW LAUNCH</p>
+              </div>
+            ) : (
+              <div className="hidden"></div>
             )}
           </div>
           <div className={styles.desc_div}>
@@ -163,7 +182,7 @@ const ProductCard = ({
 
             {/* {originalPrice !== currentPrice && ( */}
             {currentPrice < originalPrice && parseInt(discount) > 0 && (
-              <div className={styles.discount}>-{discount} OFF</div>
+              <div className={styles.discount}>-{parseInt(discount)} OFF</div>
             )}
           </div>
           <div>
