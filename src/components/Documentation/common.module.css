@@ -112,7 +112,7 @@
 }
 
 .dropdown_heading {
-  @apply mx-4 mt-6 mb-2 border-b border-[#EDEDEE];
+  @apply mx-4 mt-6 mb-3 border-b border-[#EDEDEE] pb-3;
   color: var(--grey-grey-700, #45454a);
   font-family: Poppins;
   font-size: 16px;
