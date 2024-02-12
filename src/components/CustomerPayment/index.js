@@ -95,6 +95,7 @@ function CustomerPayment() {
 
       if (res?.data?.data?.length > 0) {
         const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
+        console.log(availAmount, "jewjiw");
         setTopupAmount(availAmount);
         if (coinsReduxValue.isCoinApplied) {
           console.log(availAmount, amountParam, "in coinn");
@@ -106,6 +107,27 @@ function CustomerPayment() {
         } else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
         // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
       }
+      if (urlParams.size > 0) {
+        setPrimaryAmount(amountParam);
+        let amount = amountParam;
+        if (coinsReduxValue?.isCoinApplied === true) {
+          console.log("in nottt");
+          amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
+          console.log(amountParam, amount, "amountParam");
+        }
+
+        const temp = {};
+        temp.fullName = nameParam;
+        temp.email = emailParam;
+        temp.amount = amount <= 0 ? 1 : amount;
+        temp.invoice = invoiceNumberParam;
+        temp.cfCoins = coinsReduxValue?.usedCoins;
+        temp.notes = "";
+        console.log(temp, "temppp");
+        setFormData(temp);
+        handleSubmit(temp);
+        console.log(formData, "h");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -113,28 +135,7 @@ function CustomerPayment() {
 
   useEffect(() => {
     fetchAvailCoins();
-    if (urlParams.size > 0) {
-      setPrimaryAmount(amountParam);
-      let amount = amountParam;
-      if (coinsReduxValue?.isCoinApplied === true) {
-        console.log("in nottt");
-        amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
-        console.log(amountParam, amount, "amountParam");
-      }
-
-      const temp = {};
-      temp.fullName = nameParam;
-      temp.email = emailParam;
-      temp.amount = amount <= 0 ? 1 : amount;
-      temp.invoice = invoiceNumberParam;
-      temp.cfCoins = coinsReduxValue?.usedCoins;
-      temp.notes = "";
-      console.log(temp, "temppp");
-      setFormData(temp);
-      handleSubmit(temp);
-      console.log(formData, "h");
-    }
-  }, [currentURL]);
+  }, [currentURL, userId]);
 
   useEffect(() => {
     setIsLogin(reduxLoginState);
@@ -180,6 +181,12 @@ function CustomerPayment() {
       return;
     }
 
+    console.log(
+      topupAmount,
+      availableCoins,
+      topupAmount - availableCoins,
+      "topupAmount - availableCoins",
+    );
     const result = await axios.post(
       baseURL + endPoints.customerPayment.createCustomerPayment,
       {
