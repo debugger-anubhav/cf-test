@@ -420,8 +420,10 @@ export const MonthlyCard = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
-        Monthly Billing{" "}
-        <span className={styles.card_type_span}>via Bank Mandate</span>
+        Monthly Billing
+        <span className={`${styles.card_type_span} ml-2`}>
+          via Bank Mandate
+        </span>
       </div>
 
       <div className={styles.monthly_rent_row}>
