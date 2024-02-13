@@ -8,7 +8,7 @@ import commonStyles from "../common.module.css";
 const DropDown = ({
   handleSelectChange,
   selectedOption,
-  style,
+  tenureStyle,
   useDefaultStyle,
   options,
   setIsDDOpen,
@@ -44,7 +44,6 @@ const DropDown = ({
     }
     isInitialScreen && handleKycState(option);
   };
-
   const theme = createTheme({
     breakpoints: {
       values: {
@@ -202,6 +201,8 @@ const DropDown = ({
 
       <div
         className={`${styles["custom-select"]} ${
+          tenureStyle && "!w-full cursor-pointer"
+        } ${
           isOpen && !isMdScreen
             ? "md:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
             : ""
