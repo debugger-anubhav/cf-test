@@ -60,7 +60,7 @@ const DropDown = ({
     ?.split(",")
     ?.map(i => ({label: i, value: i}));
   return (
-    <>
+    <div className={`${tenureStyle && "relative h-[54px]"}`}>
       {isMdScreen && (
         <Modal
           open={currAddModal || perAddModal || orderIdsModal}
@@ -201,7 +201,7 @@ const DropDown = ({
 
       <div
         className={`${styles["custom-select"]} ${
-          tenureStyle && "!w-full cursor-pointer"
+          tenureStyle && "!w-full cursor-pointer absolute "
         } ${
           isOpen && !isMdScreen
             ? "md:shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)]"
@@ -258,7 +258,7 @@ const DropDown = ({
           ))}
         </ul>
       </div>
-    </>
+    </div>
   );
 };
 
