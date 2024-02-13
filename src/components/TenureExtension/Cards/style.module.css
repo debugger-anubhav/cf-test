@@ -2,34 +2,34 @@
   @apply border border-EDEDEE rounded-lg flex flex-col bg-fff p-6 lg:gap-6 gap-4 md:w-[346px] w-full;
 }
 .card_type_text {
-  @apply w-full text-45454A lg:text-20 text-16 font-medium font-Poppins whitespace-nowrap;
+  @apply w-full text-45454A lg:text-20 lg:tracking-0.4 text-16 tracking-0.3 font-medium font-Poppins whitespace-nowrap;
 }
 .card_type_span {
-  @apply w-full text-9A9AA2 lg:text-16 text-14 font-medium font-Poppins;
+  @apply w-full text-9A9AA2 lg:text-16 lg:tracking-0.4 text-14 tracking-0.3 font-medium font-Poppins;
 }
 .monthly_rent_row {
   @apply flex flex-col w-full;
 }
 .monthly_rent_text {
-  @apply text-71717A text-14 font-medium;
+  @apply text-71717A text-14 tracking-0.3 font-Poppins font-medium;
 }
 .gst_text {
-  @apply text-71717A text-12;
+  @apply text-71717A text-12 tracking-0.24 font-Poppins;
 }
 .price_row {
   @apply flex w-full items-center;
 }
 .price {
-  @apply lg:text-20 text-18 font-medium text-222 flex items-center;
+  @apply lg:text-20 lg:tracking-0.4 tracking-0.3 text-18 font-medium text-222 font-Poppins flex items-center;
 }
 .price_span {
-  @apply text-9A9AA2 lg:text-16 text-14 mx-2 stroke-222 line-through;
+  @apply text-9A9AA2 lg:text-16 lg:tracking-0.3 text-14 tracking-desc font-Poppins mx-2 stroke-222 line-through;
 }
 .discount {
-  @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 xl:text-16 leading-5 xl:leading-normal text-fff;
+  @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 tracking-0.24 xl:text-16 xl:tracking-0.3 leading-5 xl:leading-normal text-fff;
 }
 .discount_point {
-  @apply text-71717A lg:text-16 text-14 font-Poppins flex items-center gap-2;
+  @apply text-71717A lg:text-16 lg:tracking-0.3 text-14 tracking-desc font-Poppins flex items-center gap-2;
 }
 .divider {
   @apply h-2 w-full border-b-[1px] border-dashed border-DDDDDF;
@@ -38,7 +38,7 @@
   @apply flex items-center gap-2;
 }
 .city_shield_head {
-  @apply text-16 mobile:text-20 font-semibold leading-[30px] text-[#2D9469] uppercase;
+  @apply text-16 tracking-0.3 mobile:tracking-0.4 mobile:text-20 font-semibold leading-[30px] text-[#2D9469] uppercase font-Poppins;
 }
 .cityshield_row {
   @apply flex justify-between items-center;
@@ -47,30 +47,30 @@
   @apply border border-DDDDDF rounded-xl p-4 cursor-pointer hover:border-2 hover:p-[15px] hover:border-[#5774AC];
 }
 .cityshield_text {
-  @apply mt-4 text-45454A font-Poppins text-14;
+  @apply mt-4 text-45454A font-Poppins text-14 tracking-desc;
 }
 .learn_more {
   @apply text-5774AC underline cursor-pointer ml-1;
 }
 .pay_now_btn {
-  @apply flex w-full bg-F6B704 rounded-lg text-222 text-16 font-medium font-Poppins justify-center items-center h-[56px];
+  @apply flex w-full bg-F6B704 rounded-lg text-222 lg:text-16 text-14 lg:tracking-0.3 tracking-desc font-medium font-Poppins justify-center items-center lg:h-[56px] h-[48px];
 }
 .total {
-  @apply flex text-16 text-222 font-Poppins font-medium leading-6;
+  @apply flex text-16 tracking-0.3 text-222 font-Poppins font-medium leading-6;
 }
 .total_span {
   @apply text-71717A font-normal ml-1;
 }
 
 .payment_mode_heading {
-  @apply text-71717A text-16 font-Poppins;
+  @apply text-71717A lg:text-16 text-14 lg:tracking-0.3 tracking-desc font-Poppins;
 }
 .radio_label {
-  @apply p-4 border border-DDDDDF rounded-xl text-222 text-16 font-Poppins w-full;
+  @apply text-222 lg:border lg:border-DDDDDF lg:p-4 lg:rounded-xl lg:text-16 text-14 lg:tracking-0.3 tracking-desc font-Poppins w-full cursor-pointer;
 }
 .radio_option {
-  @apply flex gap-2 my-2 items-center;
+  @apply flex gap-2 my-2 items-center border border-DDDDDF lg:border-none rounded-xl lg:rounded-none lg:p-0 p-3 cursor-pointer;
 }
 .radio_button {
-  @apply w-6 h-6 flex cursor-pointer;
+  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }

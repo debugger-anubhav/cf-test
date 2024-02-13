@@ -291,11 +291,8 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     }
     // allData.append("cf_delivery_address_proof", formData.currentAddressProof);
     allData.append("orderId", orderId);
-    console.log(formErrors, "ooooo");
-    console.log(
-      Object.values(formErrors).filter(Boolean).length === 0,
-      "pppppppppppp",
-    );
+    console.log(formErrors, "formErrors");
+
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
         .post(baseURL + endPoints.uploadAddressDocs, allData)
@@ -309,8 +306,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   useEffect(() => {
     getAddProofList();
   }, []);
-
-  console.log(isReupload, "oopo");
 
   useEffect(() => {
     if (isReupload) {
@@ -354,7 +349,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         termsAccepted: "",
       });
     }
-    console.log("fjkdsh");
   }, [selectedOrderId]);
 
   const toggleDoItLaterToggle = bool => {

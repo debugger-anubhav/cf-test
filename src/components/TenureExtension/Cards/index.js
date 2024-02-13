@@ -47,6 +47,7 @@ function Cards({
     "No Security Deposit",
   ];
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
+  const [orderIdsModal, setOrderIdsModal] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
     items?.monthOptions[0],
   );
@@ -142,8 +143,6 @@ function Cards({
       },
     };
 
-    console.log(options, "optionss");
-
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
@@ -154,8 +153,9 @@ function Cards({
     paymentObject.open();
   }
 
-  // console.log(items, data, selectedOptionPer, "itemss");
-
+  useEffect(() => {
+    console.log(data, "333333333333");
+  }, [data]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -196,11 +196,21 @@ function Cards({
           {DiscountPoints?.map((item, index) => {
             return (
               <p className={styles.discount_point} key={index.toString()}>
-                <RightIcon color={"#2D9469"} size={20} />
-                {item}
+                <span className="flex gap-1">
+                  <RightIcon color={"#2D9469"} size={20} />
+                  {item}
+                </span>
               </p>
             );
           })}
+          <p className={styles.discount_point}>
+            {data?.isCityShieldApplied && (
+              <span className="flex gap-1">
+                <RightIcon color={"#2D9469"} size={20} />
+                City Shield
+              </span>
+            )}
+          </p>
         </div>
       </div>
 
@@ -241,7 +251,7 @@ function Cards({
           </div>
           <p className={styles.cityshield_text}>
             Get a damage waiver at ONLY <span className="font-Inter">₹</span>
-            {data?.cityshieldAmount}/mo with City Shield.
+            {Number(data?.cityShieldAmount).toFixed(2)}/mo with City Shield.
             <span className={styles.learn_more}>Learn more</span>
           </p>
         </div>
@@ -262,6 +272,9 @@ function Cards({
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
           setSelectedOption={setSelectedOptionPer}
+          tenureStyle={true}
+          setOrderIdsModal={val => setOrderIdsModal(val)}
+          orderIdsModal={orderIdsModal}
         />
       </div>
 
@@ -331,7 +344,6 @@ export const MonthlyCard = ({
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
     };
-    console.log(body, "bodyyy");
     axios
       .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
@@ -368,7 +380,6 @@ export const MonthlyCard = ({
         cf_value: data?.isCityShieldApplied ? 1 : 0,
       },
     );
-    console.log(result.data.data, "tenure extension data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -512,7 +523,19 @@ export const MonthlyCard = ({
         <div>
           {PaymentModeOpt?.map((item, index) => {
             return (
-              <div className={styles.radio_option} key={index.toString()}>
+              <div
+                className={styles.radio_option}
+                key={index.toString()}
+                onClick={() => {
+                  handleOptionChange(index);
+                  setModeOfPayment(
+                    item.includes("banking")
+                      ? "emandate"
+                      : item.includes("card")
+                      ? "card"
+                      : "upi",
+                  );
+                }}>
                 <input
                   type="radio"
                   className={styles.radio_button}
