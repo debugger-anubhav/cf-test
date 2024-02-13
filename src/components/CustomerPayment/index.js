@@ -265,7 +265,7 @@ function CustomerPayment() {
       });
     } catch (error) {
       console.log(error?.response?.data?.message, "error");
-      showToastNotification(error?.response?.data?.message, 1);
+      showToastNotification(error?.response?.data?.message, 2);
     }
   };
 
