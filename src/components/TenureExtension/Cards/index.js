@@ -523,7 +523,19 @@ export const MonthlyCard = ({
         <div>
           {PaymentModeOpt?.map((item, index) => {
             return (
-              <div className={styles.radio_option} key={index.toString()}>
+              <div
+                className={styles.radio_option}
+                key={index.toString()}
+                onClick={() => {
+                  handleOptionChange(index);
+                  setModeOfPayment(
+                    item.includes("banking")
+                      ? "emandate"
+                      : item.includes("card")
+                      ? "card"
+                      : "upi",
+                  );
+                }}>
                 <input
                   type="radio"
                   className={styles.radio_button}
