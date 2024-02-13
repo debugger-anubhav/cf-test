@@ -243,10 +243,13 @@ const AddressSection = () => {
     }
   }
 
-  const checkPostalCode = async val => {
+  const checkPostalCode = async (type, values) => {
+    console.log(type, values, "llll");
     const postalCode =
-      val === "offlineCustomer"
+      type === "offlineCustomer"
         ? formikRef?.current?.values?.postalCode
+        : type === "onlineCustomer"
+        ? values?.postalCode
         : primaryAddress?.postal_code;
     try {
       const res = await axios.post(
@@ -258,7 +261,8 @@ const AddressSection = () => {
       if (res?.data?.status === false) {
         showToastNotification("Your postal code is not serviceable.", 3);
       } else {
-        checkCartQunatity(val);
+        if (type === "onlineCustomer") saveUserAddress(values);
+        else checkCartQunatity(type);
       }
     } catch (err) {
       console.log(err);
@@ -514,7 +518,8 @@ const AddressSection = () => {
                 if (isOfflineCustomer === 1) {
                   handleOfflineOrder(values);
                 } else {
-                  await saveUserAddress(values);
+                  await checkPostalCode("onlineCustomer", values);
+                  // saveUserAddress(values);
                   getAllSavedAddresses();
                   resetForm();
                 }

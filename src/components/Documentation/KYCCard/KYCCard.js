@@ -155,6 +155,7 @@ const KYCCard = ({handleKycState}) => {
           Choose your preferred payment mode
         </span>
       </div>
+
       <div
         className={`${styles.formInputFirst}`}
         onClick={() => {
@@ -175,6 +176,7 @@ const KYCCard = ({handleKycState}) => {
           <span> Credit/Debit card</span>
         </div>
       </div>
+
       <div
         className={`${styles.formInputFirst} `}
         onClick={() => {
@@ -195,6 +197,28 @@ const KYCCard = ({handleKycState}) => {
           <span> Netbanking</span>
         </div>
       </div>
+
+      <div
+        className={`${styles.formInputFirst} `}
+        onClick={() => {
+          setSelected("upi");
+          setModeOfPayment("upi");
+        }}>
+        <div className={`hidden md:block`}>
+          <SelectionCircle showInner={selected === "upi"} />
+        </div>
+        <div
+          type="text"
+          className={`${commonStyles.basicInputStyles} ${styles.inputStyles} ${
+            selected === "upi" ? "!border-[#71717A]" : ""
+          }`}>
+          <div className={`md:hidden inline-block mr-2`}>
+            <SelectionCircle showInner={selected === "upi"} />
+          </div>
+          <span> UPI</span>
+        </div>
+      </div>
+
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
           <button
