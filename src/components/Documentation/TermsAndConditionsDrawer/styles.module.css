@@ -18,7 +18,7 @@
   @apply flex flex-col gap-6 mt-8;
 }
 .dot {
-  @apply px-[2px] w-1 h-1 rounded-full bg-71717A mt-2;
+  @apply px-[2px] w-1 h-1 rounded-full bg-71717A mt-2 xl:mt-[10px];
 }
 .point_wrapper {
   @apply flex gap-2;
