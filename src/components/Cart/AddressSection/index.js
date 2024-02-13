@@ -221,7 +221,7 @@ const AddressSection = () => {
     }
   };
 
-  async function checkCartQunatity(val, action) {
+  async function checkCartQunatity(val) {
     try {
       const res = await axios.post(
         baseURL + endPoints.addToCart.checkProductQuantity,
@@ -242,6 +242,28 @@ const AddressSection = () => {
       console.log("in tryyyy");
     }
   }
+
+  const checkPostalCode = async val => {
+    const postalCode =
+      val === "offlineCustomer"
+        ? formikRef?.current?.values?.postalCode
+        : primaryAddress?.postal_code;
+    try {
+      const res = await axios.post(
+        baseURL + endPoints.yourAddressPage.postalCode,
+        {
+          postalCode: parseInt(postalCode),
+        },
+      );
+      if (res?.data?.status === false) {
+        showToastNotification("Your postal code is not serviceable.", 3);
+      } else {
+        checkCartQunatity(val);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   async function handlePayment() {
     const res = await loadScript(
@@ -368,7 +390,7 @@ const AddressSection = () => {
         if (res?.data?.data?.success === "1") {
           showToastNotification("Advanced payment is done successfully.", 1);
           router.push("/");
-        }
+        } else showToastNotification(res?.data?.data?.msg, 3);
       })
       .catch(err => console.log(err));
   };
@@ -885,11 +907,9 @@ const AddressSection = () => {
                 }
                 onClick={() => {
                   if (isOfflineCustomer === 1) {
-                    checkCartQunatity(
-                      "offlineCustomer",
-                      formikRef?.current?.submitForm(),
-                    );
-                  } else checkCartQunatity(0);
+                    checkPostalCode("offlineCustomer");
+                    // checkCartQunatity("offlineCustomer");
+                  } else checkPostalCode(0);
                 }}
                 className={`${
                   haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
