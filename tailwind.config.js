@@ -113,3 +113,9 @@ module.exports = {
   },
   plugins: [],
 };
+
+// text-20 tracking-0.4
+// text-24 tracking-0.48
+// text-16 tracking-0.3
+// text-14 tracking-desc
+// text-12 tracking-0.24
