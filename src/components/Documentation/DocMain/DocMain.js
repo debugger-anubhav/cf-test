@@ -29,8 +29,6 @@ const DocMain = () => {
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
 
-  console.log(orderIdFromOrderpage, "orderIdFromOrderpage");
-
   // const handleGetOrderId = option => {
   //   console.log(option, "opti[ojjoij");
   //   dispatch(getOrderId(option?.dealCodeNumber));

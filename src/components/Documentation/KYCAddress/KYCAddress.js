@@ -84,7 +84,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     "application/pdf",
   ];
 
-  useEffect(() => {}, []);
+  // useEffect(() => {}, []);
 
   const handleFileInputChange = e => {
     console.log(e, "innn");
@@ -309,6 +309,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
   useEffect(() => {
     if (isReupload) {
+      console.log("inn");
       const addressProof = cibilDocsData?.cf_permanent_address_proof;
       const currentAddressProof = cibilDocsData?.cf_delivery_address_proof;
 

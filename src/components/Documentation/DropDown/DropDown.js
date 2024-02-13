@@ -40,7 +40,7 @@ const DropDown = ({
     } else {
       setSelectedOption(option);
       setIsDDOpen(false);
-      setOrderIdsModal(false);
+      setOrderIdsModal && setOrderIdsModal(false);
     }
     isInitialScreen && handleKycState(option);
   };

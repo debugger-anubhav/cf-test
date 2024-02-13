@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./KYCCommon.module.css";
 import commonStyles from "../common.module.css";
 import DropDown from "../DropDown/DropDown";
@@ -67,6 +67,40 @@ const KYCGetCivilScore = ({handleKycState}) => {
     termsAccepted: "",
   });
 
+  // const formatBirthdate = input => {
+  //   // Remove any non-numeric characters
+  //   const cleaned = input.replace(/\D/g, "");
+  //   // Format as DD-MM-YYYY
+  //   const formatted = cleaned.replace(/(\d{2})(\d{2})(\d{4})/, "$1-$2-$3");
+  //   return formatted;
+  // };
+
+  // Function to handle input change
+  const handleInputDob = event => {
+    let input = event.target.value;
+    console.log(input, input.length, "input");
+
+    // Remove any non-numeric characters
+    if (input.length !== 3 && input.length !== 6)
+      input = input.replace(/\D/g, "");
+    else if (input.charAt(2) === "-" && input.length === 4) {
+      console.log("jjij");
+    } else input = input.replace(/[^\d-]/g, "");
+
+    // Limit input to 8 digits
+    input = input.slice(0, 8);
+
+    // Insert hyphens if not present
+    if (input.length > 2 && input.charAt(2) !== "-") {
+      input = input.slice(0, 2) + "-" + input.slice(2);
+    }
+    if (input.length > 5 && input.charAt(5) !== "-") {
+      input = input.slice(0, 5) + "-" + input.slice(5);
+    }
+
+    setFormData({...formData, dob: input});
+  };
+
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   const submitHandler = () => {
     setSubmitting(true);
@@ -107,6 +141,10 @@ const KYCGetCivilScore = ({handleKycState}) => {
     setIsDDOpen(false);
   };
   const validateForm = () => {
+    console.log(
+      selectedOption.label === "PAN Number (Recommended)",
+      "selected option",
+    );
     const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
     // const drivingRegex = / ^([A-Z]{2})(\d{2}|\d{3})[a-zA-Z]{0,1}(\d{4})(\d{7})/;
     const voterIdRegex = /^[A-Z]{3}[0-9]{7}$/;
@@ -114,11 +152,13 @@ const KYCGetCivilScore = ({handleKycState}) => {
 
     const errors = {};
     switch (selectedOption.label) {
-      case "PAN Number" || "PAN Number (Recommended)":
+      case "PAN Number":
+      case "PAN Number (Recommended)":
         console.log(
           panRegex.test(formData.idNumber),
           formData.idNumber,
           selectedOption.value,
+          "mmmmmm",
         );
         if (!panRegex.test(formData.idNumber)) {
           errors.idNumber = "Please enter a valid pan number";
@@ -171,6 +211,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
   const handleSubmit = () => {
     const errors = validateForm();
     setFormErrors(errors);
+    console.log(errors, "errores");
 
     if (Object.values(errors).every(value => value === "")) {
       submitHandler();
@@ -186,6 +227,21 @@ const KYCGetCivilScore = ({handleKycState}) => {
     setOpenModal(bool);
     dispatch(reduxSetModalState(bool));
   };
+
+  useEffect(() => {
+    setFormData({
+      idType: "",
+      idNumber: "",
+      dob: "",
+      termsAccepted: false,
+    });
+    setFormErrors({
+      idType: "",
+      idNumber: "",
+      dob: "",
+      termsAccepted: "",
+    });
+  }, [selectedOrderId]);
 
   // console.log(handleCheckboxChange, handleInputChange);
   return (
@@ -231,7 +287,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
           type="text"
           name={"idNumber"}
           className={`${commonStyles.basicInputStyles}`}
-          placeholder={`Enter ${selectedOption.label} Number`}
+          placeholder={`Enter ${selectedOption.label}`}
           onChange={e => {
             handleInputChange(e);
           }}
@@ -258,7 +314,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
           placeholder="DD-MM-YYYY"
           value={formData.dob}
           onChange={e => {
-            handleInputChange(e);
+            handleInputDob(e);
           }}
           // onBlur={e => {
           //   handleInputBlur(e);
