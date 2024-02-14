@@ -70,18 +70,20 @@ function Cards({
     if (isChecked) setCityShieldDrawerOpen(false);
   }, [isChecked]);
 
-  const cartTypeOneHandler = async (res, customerId, amount) => {
-    const data = {
+  const cartTypeOneHandler = async (res, customerId, amount, recId) => {
+    const body = {
       razorpayPaymentId: res.razorpay_payment_id,
       dealCodeNumber: orderId,
       razorpayOrderId: res.razorpay_order_id,
       razCustomerId: customerId,
       razorpaySignature: res.razorpay_signature,
       mode: "extension",
+      cf_value: data?.isCityShieldApplied ? 1 : 0,
+      id: recId,
     };
     const result = await axios.post(
       baseURL + endPoints.addToCart.successPayment,
-      data,
+      body,
     );
     console.log(result);
     dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
@@ -118,6 +120,7 @@ function Cards({
 
     const razOrderId = result.data.data.raz_order_id;
     const customerId = result.data.data.customer_id;
+    const recId = result?.data?.data?.data?.recID;
 
     const options = {
       key: razorpayKeyOwn,
@@ -132,6 +135,7 @@ function Cards({
           res,
           customerId,
           selectedOptionPer?.value * calculatedPrice,
+          recId,
         );
       },
       prefill: {
