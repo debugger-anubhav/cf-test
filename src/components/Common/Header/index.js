@@ -26,7 +26,7 @@ import {
   setLocalStorage,
 } from "@/constants/constant";
 import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseURL, baseInstance} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
 import {
   decrypt,
@@ -153,12 +153,8 @@ const Header = () => {
   );
 
   const getSavedItems = userIdToUse => {
-    axios
-      .get(
-        baseURL +
-          endPoints.savedItems +
-          `?cityId=${cityId}&userId=${userIdToUse}`,
-      )
+    baseInstance
+      .get(endPoints.savedItems + `?cityId=${cityId}&userId=${userIdToUse}`)
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
         const ids = res?.data?.data.map(item => {
