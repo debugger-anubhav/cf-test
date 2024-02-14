@@ -333,6 +333,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             : "",
       });
     } else {
+      console.log("in elsee");
       setFormData({
         contactNumber: "",
         addressProof: [],
@@ -514,15 +515,18 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                     <></>
                   )}
                 </label>
-                <span
-                  onClick={e => {
-                    handleDeleteFile("addressProof", item);
-                  }}>
-                  <DeleteIcon
-                    color={"#71717A"}
-                    className={`${commonStyles.mdHiddemIcons} ml-3`}
-                  />
-                </span>
+                {!isReupload &&
+                  !cibilDocsData?.cf_permanent_address_proof?.length > 0 && (
+                    <span
+                      onClick={e => {
+                        handleDeleteFile("addressProof", item);
+                      }}>
+                      <DeleteIcon
+                        color={"#71717A"}
+                        className={`${commonStyles.mdHiddemIcons} ml-3`}
+                      />
+                    </span>
+                  )}
               </div>
             </div>
             {isReupload &&
@@ -693,15 +697,18 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                     <></>
                   )}
                 </label>
-                <span
-                  onClick={e => {
-                    handleDeleteFile("currentAddProof", item);
-                  }}>
-                  <DeleteIcon
-                    color={"#71717A"}
-                    className={`${commonStyles.mdHiddemIcons} ml-3`}
-                  />
-                </span>
+                {!isReupload &&
+                  !cibilDocsData?.cf_delivery_address_proof?.length > 0 && (
+                    <span
+                      onClick={e => {
+                        handleDeleteFile("currentAddProof", item);
+                      }}>
+                      <DeleteIcon
+                        color={"#71717A"}
+                        className={`${commonStyles.mdHiddemIcons} ml-3`}
+                      />
+                    </span>
+                  )}
               </div>
             </div>
             <div className={`!hidden md:!flex ${styles.check_wrapper}`}>

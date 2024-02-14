@@ -22,7 +22,7 @@ import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 
 import {
   decrypt,
@@ -138,12 +138,8 @@ const CitymaxHeader = ({zIndex}) => {
   );
 
   const getSavedItems = userIdToUse => {
-    axios
-      .get(
-        baseURL +
-          endPoints.savedItems +
-          `?cityId=${cityId}&userId=${userIdToUse}`,
-      )
+    baseInstance
+      .get(endPoints.savedItems + `?cityId=${cityId}&userId=${userIdToUse}`)
       .then(res => {
         dispatch(addSaveditems(res?.data?.data));
         const ids = res?.data?.data.map(item => {

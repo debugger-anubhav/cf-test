@@ -5,9 +5,9 @@ import {Close, ForwardArrowWithLine} from "@/assets/icon";
 import PastRequests from "./PastRequests";
 import {Drawer} from "@mui/material";
 import CreateNewRequest from "./CreateNewRequest";
-import axios from "axios";
+
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
@@ -37,11 +37,8 @@ function ServiceRequets() {
   };
 
   const getServiceRequestData = () => {
-    axios
-      .get(
-        baseURL +
-          endPoints.serviceRequestPage.getServiceRequestData(userIdToUse),
-      )
+    baseInstance
+      .get(endPoints.serviceRequestPage.getServiceRequestData(userIdToUse))
       .then(res => {
         setPastRequestData(res?.data?.data?.serviceRequestData);
         setCreateRequestData(res?.data?.data?.paymentData);

@@ -9,8 +9,7 @@ import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const SavedItem = () => {
   const {checkAuthentication} = useAuthentication();
@@ -43,10 +42,9 @@ const SavedItem = () => {
   // );
 
   const getSavedItems = isAuthenticated => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.savedItems +
+        endPoints.savedItems +
           `?cityId=${cityId}&userId=${
             isAuthenticated
               ? decrypt(getLocalStorage("_ga"))

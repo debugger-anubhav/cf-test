@@ -7,9 +7,8 @@ import {
 } from "@/assets/images";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 
 export const CityToStateMapping = {
   Delhi: "Delhi",
@@ -745,11 +744,8 @@ export const CreateRequestPayload = {
 };
 
 export const CreateRequest = CreateRequestPayload => {
-  axios
-    .post(
-      baseURL + endPoints.serviceRequestPage.createRequest,
-      CreateRequestPayload,
-    )
+  baseInstance
+    .post(endPoints.serviceRequestPage.createRequest, CreateRequestPayload)
     .then(res => {
       showToastNotification(
         res?.data?.data?.msg,
