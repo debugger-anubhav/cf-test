@@ -263,7 +263,7 @@ const DropDown = ({
               setIsDDOpen(prev => !prev);
               isInitialScreen && isMdScreen && setOrderIdsModal(!orderIdsModal);
             }
-            isMdScreen && setTenureModal(true);
+            isMdScreen && tenureModal && setTenureModal(true);
           }}>
           <span
             className={` ${styles.selected_txt} ${

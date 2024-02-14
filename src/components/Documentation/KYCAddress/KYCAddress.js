@@ -516,18 +516,17 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                     <></>
                   )}
                 </label>
-                {!isReupload &&
-                  !cibilDocsData?.cf_permanent_address_proof?.length > 0 && (
-                    <span
-                      onClick={e => {
-                        handleDeleteFile("addressProof", item);
-                      }}>
-                      <DeleteIcon
-                        color={"#71717A"}
-                        className={`${commonStyles.mdHiddemIcons} ml-3`}
-                      />
-                    </span>
-                  )}
+                {cibilDocsData?.cf_permanent_address_proof?.length === 0 && (
+                  <span
+                    onClick={e => {
+                      handleDeleteFile("addressProof", item);
+                    }}>
+                    <DeleteIcon
+                      color={"#71717A"}
+                      className={`${commonStyles.mdHiddemIcons} ml-3`}
+                    />
+                  </span>
+                )}
               </div>
             </div>
             {isReupload &&
@@ -699,40 +698,53 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       </div>
                     </>
                   </div>
-                  {!formErrors.currentAddressProof &&
-                  formData.currentAddressProof?.length > 0 ? (
+                  {isReupload &&
+                  cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
+                    <></>
+                  ) : !formErrors.currentAddressProof &&
+                    formData.currentAddressProof?.length > 0 ? (
                     <div className={`${commonStyles.correctFile}`}></div>
                   ) : (
                     <></>
                   )}
                 </label>
-                {isReupload &&
-                  !cibilDocsData?.cf_delivery_address_proof?.length > 0 && (
-                    <span
-                      onClick={e => {
-                        handleDeleteFile("currentAddProof", item);
-                      }}>
-                      <DeleteIcon
-                        color={"#71717A"}
-                        className={`${commonStyles.mdHiddemIcons} ml-3`}
-                      />
-                    </span>
-                  )}
+                {cibilDocsData?.cf_delivery_address_proof?.length === 0 && (
+                  <span
+                    onClick={e => {
+                      handleDeleteFile("currentAddProof", item);
+                    }}>
+                    <DeleteIcon
+                      color={"#71717A"}
+                      className={`${commonStyles.mdHiddemIcons} ml-3`}
+                    />
+                  </span>
+                )}
               </div>
             </div>
-            <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
-              <div className={styles.showCheckCircle}>
-                <CheckFillIcon color="#2D9469" className="w-full h-full" />
-              </div>
-              <div
-                className={styles.showDeleteIcon}
-                onClick={() => handleDeleteFile("currentAddProof", index)}>
-                <DeleteIconFilled
-                  color="#ffffff"
-                  className={styles.delete_icon_filled}
+
+            {isReupload &&
+            cibilDocsData?.cf_delivery_address_proof?.length > 0 ? (
+              <div className="hidden md:flex ml-2">
+                <CheckFillIcon
+                  color={"#2D9469"}
+                  className="w-[18px] h-[18px]"
                 />
               </div>
-            </div>
+            ) : (
+              <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
+                <div className={styles.showCheckCircle}>
+                  <CheckFillIcon color="#2D9469" className="w-full h-full" />
+                </div>
+                <div
+                  className={styles.showDeleteIcon}
+                  onClick={() => handleDeleteFile("currentAddProof", index)}>
+                  <DeleteIconFilled
+                    color="#ffffff"
+                    className={styles.delete_icon_filled}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         ))}
 
