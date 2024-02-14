@@ -33,6 +33,7 @@ import {
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
+import LoaderComponent from "../Common/Loader/LoaderComponent";
 
 function CustomerPayment() {
   const {checkAuthentication} = useAuthentication();
@@ -75,6 +76,7 @@ function CustomerPayment() {
   const [redirctInvoice, setRedirctInvoice] = useState(false);
   const [topupAmount, setTopupAmount] = useState();
   const [primaryAmount, setPrimaryAmount] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // useEffect(() => {
   //   setFormData({
@@ -219,6 +221,7 @@ function CustomerPayment() {
         order_id: data?.raz_order_id,
         customer_id: data?.customer_id,
         handler: async function (response) {
+          setLoading(true);
           console.log(response, "responsse in handler");
           const body = {
             transactionID: response?.razorpay_payment_id,
@@ -235,15 +238,21 @@ function CustomerPayment() {
             recId: userDetails?.recID,
             amount: values?.amount,
           };
-          const result = await axios.post(
-            baseURL + endPoints.customerPayment.savePayment,
-            body,
-          );
-          console.log(result);
-          dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
-          dispatch(setPGTransactionID(response.razorpay_payment_id));
-          dispatch(setAmountPaid(values.amount));
-          router.push("/success/payment");
+          try {
+            const result = await axios.post(
+              baseURL + endPoints.customerPayment.savePayment,
+              body,
+            );
+            console.log(result);
+            dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
+            dispatch(setPGTransactionID(response.razorpay_payment_id));
+            dispatch(setAmountPaid(values.amount));
+            setLoading(true);
+            router.push("/success/payment");
+          } catch (error) {
+            setLoading(false);
+            console.log(error);
+          }
         },
         prefill: {
           name: userDetails?.full_name,
@@ -326,6 +335,7 @@ function CustomerPayment() {
           }
         }}
       />
+      {loading && <LoaderComponent loading={loading} />}
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />
         <div className={styles.main_heading}> Pay Your Dues</div>
