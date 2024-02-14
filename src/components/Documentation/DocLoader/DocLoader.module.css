@@ -6,8 +6,8 @@
   box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.25);
 }
 .heading {
-  @apply text-18 md:text-24 font-medium;
+  @apply text-18 md:text-24 font-medium font-Poppins leading-8 tracking-[-0.36px] md:tracking-0.48 text-45454A;
 }
 .para {
-  @apply text-center md:px-4 mt-3;
+  @apply text-center md:px-4 mt-3 text-71717A text-16 tracking-0.3 leading-6;
 }

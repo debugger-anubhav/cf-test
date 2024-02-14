@@ -77,6 +77,7 @@ function Cards({
       razorpayOrderId: res.razorpay_order_id,
       razCustomerId: customerId,
       razorpaySignature: res.razorpay_signature,
+      mode: "extension",
     };
     const result = await axios.post(
       baseURL + endPoints.addToCart.successPayment,

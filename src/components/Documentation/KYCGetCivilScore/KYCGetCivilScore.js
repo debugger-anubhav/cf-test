@@ -336,15 +336,13 @@ const KYCGetCivilScore = ({handleKycState}) => {
               handleCheckboxChange(e);
             }}
           />
-          <span className={`${commonStyles.termsTxt}`}>
-            &nbsp;I accept &nbsp;
-          </span>
+          <span className={`${commonStyles.termsTxt}`}>I accept</span>
           <button
             className={`${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
             onClick={() => {
               setDrawerOpen(true);
             }}>
-            &nbsp;Terms and Conditions
+            Terms and Conditions
           </button>
         </div>
       </div>
