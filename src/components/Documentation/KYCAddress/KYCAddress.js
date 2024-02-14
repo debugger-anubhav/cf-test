@@ -786,15 +786,13 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
               handleCheckboxChange(e);
             }}
           />
-          <span className={`${commonStyles.termsTxt}`}>
-            &nbsp;I accept &nbsp;
-          </span>
+          <span className={`${commonStyles.termsTxt}`}>I accept</span>
           <span
             className={`cursor-pointer ${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
             onClick={() => {
               setDrawerOpen(true);
             }}>
-            &nbsp;Terms and Conditions
+            Terms and Conditions
           </span>
         </div>
       </div>
