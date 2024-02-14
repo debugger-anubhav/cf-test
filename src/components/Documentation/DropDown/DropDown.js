@@ -43,7 +43,7 @@ const DropDown = ({
       setSelectedOption(option);
       setIsDDOpen(false);
       setOrderIdsModal && setOrderIdsModal(false);
-      setTenureModal(false);
+      tenureModal && setTenureModal(false);
     }
     isInitialScreen && handleKycState(option);
   };
@@ -70,9 +70,9 @@ const DropDown = ({
           onClose={() => {
             if (isInitialScreen) setOrderIdsModal(false);
             else {
-              setPerAddModal(false);
+              perAddModal && setPerAddModal(false);
               currAddModal && setCurrAddModal(false);
-              setTenureModal(false);
+              tenureModal && setTenureModal(false);
             }
           }}
           aria-labelledby="modal-modal-title"
