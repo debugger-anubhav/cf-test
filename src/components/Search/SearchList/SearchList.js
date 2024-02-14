@@ -12,7 +12,7 @@ import SearchCard from "../SeachCard/SearchCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {baseURL} from "@/network/axios";
+import {baseURL, baseInstance} from "@/network/axios";
 import axios from "axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
@@ -74,10 +74,9 @@ const SearchList = () => {
   // );
 
   const getSavedItems = isValid => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.savedItems +
+        endPoints.savedItems +
           `?cityId=${cityId}&userId=${
             isValid
               ? decrypt(getLocalStorage("_ga"))

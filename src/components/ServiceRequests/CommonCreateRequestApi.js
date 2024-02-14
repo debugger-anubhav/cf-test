@@ -1,5 +1,4 @@
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {useDispatch} from "react-redux";
@@ -9,8 +8,8 @@ export const CommonCreateRequestApi = () => {
 
   const trailCreateSR = async CreateRequestPayload => {
     try {
-      const response = await axios.post(
-        baseURL + endPoints.serviceRequestPage.createRequest,
+      const response = await baseInstance.post(
+        endPoints.serviceRequestPage.createRequest,
         CreateRequestPayload,
       );
 

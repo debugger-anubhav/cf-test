@@ -3,9 +3,8 @@ import styles from "../style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {ArrowForw} from "@/assets/icon";
 import * as Yup from "yup";
-import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -30,8 +29,8 @@ const ModalContentForSettingProfile = ({
         full_name: values.fullName,
         email: values.email,
       };
-      await axios.patch(
-        baseURL + endPoints.profileSettingPage.updateUserDetails,
+      await baseInstance.patch(
+        endPoints.profileSettingPage.updateUserDetails,
         body,
       );
       closeModal();

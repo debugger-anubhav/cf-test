@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrow} from "@/assets/icon";
 import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import CancelOrder from "./CancelOrder";
 import CancelMandate from "./CancelMandate";
@@ -35,8 +35,8 @@ function ServiceRequestType({
   const [productDetail, setProductDetail] = useState(null);
 
   const getServicesType = () => {
-    axios
-      .get(baseURL + endPoints.myOrdersPage.getServiceRequest(orderId))
+    baseInstance
+      .get(endPoints.myOrdersPage.getServiceRequest(orderId))
       .then(res => {
         setServicesType(res?.data?.data);
       })

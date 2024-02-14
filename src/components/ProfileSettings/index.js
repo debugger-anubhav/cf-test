@@ -10,7 +10,7 @@ import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import "react-responsive-modal/styles.css";
 import FormSkeleton from "../Common/FormSkeleton";
@@ -154,8 +154,8 @@ const ProfileSettings = () => {
         email: values.email,
         is_verified: emailState,
       };
-      await axios.patch(
-        baseURL + endPoints.profileSettingPage.updateUserDetails,
+      await baseInstance.patch(
+        endPoints.profileSettingPage.updateUserDetails,
         body,
       );
       setLocalStorage("user_name", values.fullName);

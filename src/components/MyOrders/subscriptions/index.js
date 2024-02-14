@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import AllSubcriptions from "./partOne/AllSubcriptions";
 import SubscriptionDetails from "./partTwo/SubscriptionDetails";
@@ -23,8 +22,8 @@ const SubscriptionPage = ({tab, setTab}) => {
       filter,
     };
     try {
-      const response = await axios.post(
-        baseURL + endPoints.myOrdersPage.getSubscriptionData,
+      const response = await baseInstance.post(
+        endPoints.myOrdersPage.getSubscriptionData,
         body,
       );
       console.log(response);
