@@ -9,6 +9,8 @@ const DropDown = ({
   handleSelectChange,
   selectedOption,
   tenureStyle,
+  tenureModal,
+  setTenureModal,
   useDefaultStyle,
   options,
   setIsDDOpen,
@@ -41,6 +43,7 @@ const DropDown = ({
       setSelectedOption(option);
       setIsDDOpen(false);
       setOrderIdsModal && setOrderIdsModal(false);
+      tenureModal && setTenureModal(false);
     }
     isInitialScreen && handleKycState(option);
   };
@@ -63,12 +66,13 @@ const DropDown = ({
     <div className={`${tenureStyle && "relative h-[54px]"}`}>
       {isMdScreen && (
         <Modal
-          open={currAddModal || perAddModal || orderIdsModal}
+          open={currAddModal || perAddModal || orderIdsModal || tenureModal}
           onClose={() => {
             if (isInitialScreen) setOrderIdsModal(false);
             else {
-              setPerAddModal(false);
-              setCurrAddModal(false);
+              perAddModal && setPerAddModal(false);
+              currAddModal && setCurrAddModal(false);
+              tenureModal && setTenureModal(false);
             }
           }}
           aria-labelledby="modal-modal-title"
@@ -195,6 +199,44 @@ const DropDown = ({
                 </button>
               </div>
             )}
+            {tenureModal && (
+              <div className={`${commonStyles.dropdown_container} `}>
+                <div className={`${commonStyles.dropdown_heading} `}>
+                  Select tenure
+                </div>
+                <ul
+                  className={`${
+                    tenureModal
+                      ? commonStyles.optionsActive
+                      : commonStyles.options
+                  } `}>
+                  {options?.map((option, index) => (
+                    <li
+                      className={`${commonStyles.option} ${
+                        option?.label === selectedOption?.label
+                          ? "bg-[#EFF5FF]"
+                          : ""
+                      } `}
+                      key={index}
+                      onClick={() => handleOptionClick(option)}>
+                      <span>{option.label}</span>{" "}
+                      <SelectionCircle
+                        showInner={option?.label === selectedOption?.label}
+                      />
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  className={`${commonStyles.close_icon_btn}`}
+                  onClick={() => {
+                    setTenureModal(false);
+                  }}>
+                  <div className={`${commonStyles.close_icon}`}>
+                    <Close size={25} color={"#222222"} />
+                  </div>
+                </button>
+              </div>
+            )}
           </>
         </Modal>
       )}
@@ -221,6 +263,7 @@ const DropDown = ({
               setIsDDOpen(prev => !prev);
               isInitialScreen && isMdScreen && setOrderIdsModal(!orderIdsModal);
             }
+            isMdScreen && setTenureModal(true);
           }}>
           <span
             className={` ${styles.selected_txt} ${

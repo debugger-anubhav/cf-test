@@ -41,7 +41,7 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
-const HEADER_HEIGHT = 48;
+const HEADER_HEIGHT = 32;
 
 const Header = () => {
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
@@ -601,11 +601,6 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
       }
       searchesArray.unshift(item);
       const truncatedArray = searchesArray.slice(0, 5);
-      // if (storedSearches?.length) {
-      //   setLocalStorage("searches", [...truncatedArray]);
-      // } else {
-      //   setLocalStorage("searches", truncatedArray);
-      // }
       setLocalStorage("searches", [...truncatedArray]);
     });
     const itm = [item];
@@ -622,9 +617,10 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
     router.push(`/search/${item}`);
   };
   //
+  const tempTopOffset = 75;
   const MOBILE_TOP_OFFSET = !homePageReduxData?.announcementBar
-    ? topOffset + 50
-    : topOffset;
+    ? tempTopOffset + 50
+    : tempTopOffset;
 
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
