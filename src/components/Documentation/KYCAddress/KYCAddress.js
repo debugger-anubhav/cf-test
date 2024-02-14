@@ -11,7 +11,6 @@ import {endPoints} from "@/network/endPoints";
 // import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {
   CheckFillIcon,
-  Close,
   // CheckCircleIcon,
   // Close,
   DeleteIcon,
@@ -27,12 +26,14 @@ import CommonField from "../CommonField/CommonField";
 import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
 import DoItLater from "../DoItLaterModal/DoItLater";
 import {reduxSetModalState} from "@/store/Slices";
+import RejectedDocsComponent from "./RejectedDocsComponent";
 
 const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   const dispatch = useDispatch();
 
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
+  console.log(selectedOrderId, isReupload);
 
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
@@ -42,7 +43,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  const [showReuploadNote, setShowReuploadNote] = useState(true);
+  // const [showReuploadNote, setShowReuploadNote] = useState(true);
 
   const [formData, setFormData] = useState({
     contactNumber: "",
@@ -321,17 +322,17 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         currentAddressProofType: currentAddressProof?.[0]?.sub_doc_type || "",
         addressProofType: addressProof?.[0]?.sub_doc_type || "",
       });
-      setFormErrors({
-        ...formErrors,
-        addressProof:
-          cibilDocsData?.cf_permanent_address_proof?.length === 0
-            ? "Please re-upload these documents as these got rejected by our team."
-            : "",
-        currentAddressProof:
-          cibilDocsData?.cf_delivery_address_proof?.length === 0
-            ? "Please re-upload these documents as these got rejected by our team."
-            : "",
-      });
+      // setFormErrors({
+      //   ...formErrors,
+      //   addressProof:
+      //     cibilDocsData?.cf_permanent_address_proof?.length === 0
+      //       ? "Please re-upload these documents as these got rejected by our team."
+      //       : "",
+      //   currentAddressProof:
+      //     cibilDocsData?.cf_delivery_address_proof?.length === 0
+      //       ? "Please re-upload these documents as these got rejected by our team."
+      //       : "",
+      // });
     } else {
       console.log("in elsee");
       setFormData({
@@ -350,7 +351,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         termsAccepted: "",
       });
     }
-  }, [selectedOrderId]);
+  }, [selectedOrderId, isReupload]);
 
   const toggleDoItLaterToggle = bool => {
     setOpenModal(bool);
@@ -369,7 +370,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
       />
       <CommonField handleKycState={handleKycState} />
 
-      {isReupload && showReuploadNote && (
+      {isReupload && (
         <div className={commonStyles.reupload_note_wrapper}>
           <InformationIcon className={`mt-0.5 ${commonStyles.reupload_icon}`} />
           <p className={commonStyles.reupload_note_txt}>
@@ -377,12 +378,12 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             necessary standards. Please re-upload them to proceed with KYC
             process.
           </p>
-          <div
+          {/* <div
             onClick={() => {
               setShowReuploadNote(false);
             }}>
             <Close className={`cursor-pointer ${commonStyles.reupload_icon}`} />
-          </div>
+          </div> */}
         </div>
       )}
 
@@ -556,6 +557,14 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
           </div>
         ))}
 
+      {isReupload &&
+        cibilDocsData?.cf_permanent_address_proof?.length === 0 && (
+          <RejectedDocsComponent
+            array={cibilDocsData?.userDocs}
+            docType={"cf_permanent_address_proof"}
+          />
+        )}
+
       <div className={`${styles.formInputFirst} !mt-2`}>
         <div className="flex items-center">
           <label
@@ -697,7 +706,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                     <></>
                   )}
                 </label>
-                {!isReupload &&
+                {isReupload &&
                   !cibilDocsData?.cf_delivery_address_proof?.length > 0 && (
                     <span
                       onClick={e => {
@@ -726,6 +735,13 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             </div>
           </div>
         ))}
+
+      {isReupload && cibilDocsData?.cf_delivery_address_proof?.length === 0 && (
+        <RejectedDocsComponent
+          array={cibilDocsData?.userDocs}
+          docType={"cf_delivery_address_proof"}
+        />
+      )}
 
       <div className={`${styles.formInputFirst} !mt-2`}>
         <div className="flex items-center">

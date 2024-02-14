@@ -272,3 +272,21 @@
 .reupload_icon {
   @apply min-w-[16px] h-[16px] text-71717A;
 }
+.rejected_docs_wrapper {
+  @apply bg-[#FCEFEF] px-3 py-2 rounded-xl w-full lg:w-[505px] mt-2;
+}
+.rejected_array {
+  @apply flex flex-col gap-2 mt-2;
+}
+.rejected_head {
+  @apply text-12 xl:text-14 tracking-desc leading-[18px] xl:leading-[21px] font-medium text-71717A;
+}
+.rejected_doc_map_row {
+  @apply flex justify-between gap-1;
+}
+.rejected_doc_name {
+  @apply text-12 xl:text-14 tracking-desc leading-[18px] xl:leading-[21px] text-5774AC font-Poppins w-full truncate;
+}
+.download_file_arrow {
+  @apply w-[18px] h-[18px] text-5774AC cursor-pointer;
+}
