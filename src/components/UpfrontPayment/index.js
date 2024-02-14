@@ -15,6 +15,7 @@ import {
 } from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {FaCircleInfo} from "react-icons/fa6";
+import LoaderComponent from "../Common/Loader/LoaderComponent";
 function UpfrontPayment() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ function UpfrontPayment() {
   const ID = params.key;
   const [apiData, setApiData] = useState(null);
   const [razorpayData, setRazorpayData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const upfrontApiCall = () => {
     axios
@@ -65,6 +67,7 @@ function UpfrontPayment() {
         if (res.error) {
           alert("Payment failed. Please try again.");
         } else {
+          setLoading(true);
           const data = {
             razorpayPaymentId: res.razorpay_payment_id,
             dealCodeNumber: ID,
@@ -74,15 +77,21 @@ function UpfrontPayment() {
             id: razorpayData?.data.recID,
             mode: "upfront_payment",
           };
-          const result = await axios.post(
-            baseURL + endPoints.addToCart.successPayment,
-            data,
-          );
-          console.log(result, "result");
-          dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
-          dispatch(setPGTransactionID(res.razorpay_payment_id));
-          dispatch(setAmountPaid(apiData?.amount));
-          router.push("/success/payment");
+          try {
+            const result = await axios.post(
+              baseURL + endPoints.addToCart.successPayment,
+              data,
+            );
+            console.log(result, "result");
+            dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
+            dispatch(setPGTransactionID(res.razorpay_payment_id));
+            dispatch(setAmountPaid(apiData?.amount));
+            setLoading(false);
+            router.push("/success/payment");
+          } catch (err) {
+            setLoading(false);
+            console.log(err);
+          }
         }
       },
       prefill: {
@@ -108,6 +117,7 @@ function UpfrontPayment() {
   }
   return (
     <div className={styles.wrapper}>
+      {loading && <LoaderComponent loading={loading} />}
       <p className={styles.main_heading}>{Heading}</p>
       {apiData?.payment_status === 2 ? (
         <>
@@ -153,7 +163,6 @@ function UpfrontPayment() {
           </p>
         </div>
       )}
-
       <div>
         {apiData?.payment_status === 2 ? (
           <button className={`${styles.pay_now_btn} "!mt-0"`}>
