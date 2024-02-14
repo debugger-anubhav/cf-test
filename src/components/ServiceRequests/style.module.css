@@ -11,7 +11,7 @@
   @apply hidden lg:block min-w-fit;
 }
 .mobile_close_icon {
-  @apply fixed md:hidden right-4 w-6 h-6 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[55px];
+  @apply fixed md:hidden right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[55px];
 }
 .detail_div {
   @apply w-full lg:pb-[88px] pb-[48px];
@@ -29,7 +29,7 @@
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
 .rightDrawer {
-  @apply md:p-12 p-4 pr-8 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none min-h-[600px] h-auto md:h-full max-h-[690px] md:max-h-full;
+  @apply md:p-12 p-4 pr-8 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none md:min-h-[600px] h-fit md:h-full min-h-fit max-h-[90vh] md:max-h-full;
 }
 
 .content_wrapper {
