@@ -37,6 +37,7 @@ function Cards({
   index,
   cardIndex,
   orderId,
+  setLoading,
 }) {
   const calculatedPrice =
     data?.orignalPrice -
@@ -71,6 +72,7 @@ function Cards({
   }, [isChecked]);
 
   const cartTypeOneHandler = async (res, customerId, amount, recId) => {
+    setLoading(true);
     const body = {
       razorpayPaymentId: res.razorpay_payment_id,
       dealCodeNumber: orderId,
@@ -81,15 +83,21 @@ function Cards({
       cf_value: data?.isCityShieldApplied ? 1 : 0,
       id: recId,
     };
-    const result = await axios.post(
-      baseURL + endPoints.addToCart.successPayment,
-      body,
-    );
-    console.log(result);
-    dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
-    dispatch(setPGTransactionID(res.razorpay_payment_id));
-    dispatch(setAmountPaid(amount));
-    router.push("/success/payment");
+    try {
+      const result = await axios.post(
+        baseURL + endPoints.addToCart.successPayment,
+        body,
+      );
+      console.log(result);
+      dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
+      dispatch(setPGTransactionID(res.razorpay_payment_id));
+      dispatch(setAmountPaid(amount));
+      setLoading(false);
+      router.push("/success/payment");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   async function handleOpenRazorpay(cardType) {
@@ -308,6 +316,7 @@ export const MonthlyCard = ({
   monthlyCardIsChecked,
   setmonthlyCardIsChecked,
   orderId,
+  setLoading,
 }) => {
   const DiscountPoints = [
     "No Discount",
@@ -343,6 +352,7 @@ export const MonthlyCard = ({
     razorpaySignature,
     RazorpayOrderIDBeforePayment,
   ) => {
+    setLoading(true);
     const body = {
       transactionID: paymentID,
       mode: modeOfPayment,
@@ -358,12 +368,17 @@ export const MonthlyCard = ({
           dispatch(setTransactionReferenceNumber(RazorpayOrderIDBeforePayment));
           dispatch(setPGTransactionID(paymentID));
           dispatch(setAmountPaid(1));
+          setLoading(false);
           router.push("/success/payment");
         } else {
+          setLoading(false);
           showToastNotification(response.data.message, 3);
         }
       })
-      .catch(err => console.log(err, "errr"));
+      .catch(err => {
+        setLoading(false);
+        console.log(err, "errr");
+      });
   };
 
   async function handleOpenRazorpay() {

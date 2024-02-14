@@ -5,6 +5,7 @@ import {useParams} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import LoaderComponent from "../Common/Loader/LoaderComponent";
 
 function TenureExtension() {
   const params = useParams();
@@ -13,6 +14,7 @@ function TenureExtension() {
   const [isChecked, setIsChecked] = useState(true);
   const [singleCardData, setsingleCardData] = useState(null);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const CardData = [
     {
@@ -72,6 +74,7 @@ function TenureExtension() {
   }, [isChecked]);
   return (
     <div className={styles.wrapper}>
+      {loading && <LoaderComponent loading={loading} />}
       <div className={styles.main_heading}>Tenure Extension</div>
       <div className={styles.order_row}>
         Your Order ID:
@@ -92,6 +95,7 @@ function TenureExtension() {
                 setcardIndex={setcardIndex}
                 index={index}
                 orderId={params?.orderId}
+                setLoading={setLoading}
               />
             </div>
           );
@@ -102,6 +106,7 @@ function TenureExtension() {
           monthlyCardIsChecked={monthlyCardIsChecked}
           setmonthlyCardIsChecked={setmonthlyCardIsChecked}
           orderId={params?.orderId}
+          setLoading={setLoading}
         />
       </div>
     </div>
