@@ -48,13 +48,11 @@ function Cards({
     "No Security Deposit",
   ];
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
-  const [orderIdsModal, setOrderIdsModal] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
     items?.monthOptions[0],
   );
   const [perAddModal, setPerAddModal] = useState(false);
-  // const [isChecked, setIsChecked] = useState(isChecked);
-
+  const [tenureModal, setTenureModal] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -166,9 +164,6 @@ function Cards({
     paymentObject.open();
   }
 
-  useEffect(() => {
-    console.log(data, "333333333333");
-  }, [data]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -235,13 +230,6 @@ function Cards({
               <VerifyIcon size={30} color={"#2D9469"} />
               <p className={styles.city_shield_head}>City shield </p>
             </div>
-            {/* <div>
-              <input
-                type="checkbox"
-                className="flex border border-5774AC cursor-pointer"
-                checked={!(cardIndex === index && !isChecked)}
-              />
-            </div> */}
             <div>
               {isChecked ? (
                 <div onClick={openDrawer}>
@@ -281,13 +269,14 @@ function Cards({
       <div className={styles.select_month_wrapper}>
         <DropDown
           options={items?.monthOptions}
-          setIsDDOpen={setPerAddModal}
+          setIsDDOpen={val => setPerAddModal(val)}
+          setPerAddModal={val => setPerAddModal(val)}
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
           setSelectedOption={setSelectedOptionPer}
           tenureStyle={true}
-          setOrderIdsModal={val => setOrderIdsModal(val)}
-          orderIdsModal={orderIdsModal}
+          setTenureModal={val => setTenureModal(val)}
+          tenureModal={tenureModal}
         />
       </div>
 
