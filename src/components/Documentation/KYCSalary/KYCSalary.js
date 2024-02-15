@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./KYCSalary.module.css";
 import commonStyles from "../common.module.css";
+import addressFormStyles from "../KYCAddress/KYCAddress.module.css";
 import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance, baseURL} from "@/network/axios";
@@ -10,7 +11,6 @@ import {
   Close,
   DeleteIcon,
   DeleteIconFilled,
-  ExclamationCircleFill,
   InformationIcon,
   OutlineArrowRight,
   // ReloadIcon,
@@ -22,6 +22,7 @@ import CommonField from "../CommonField/CommonField";
 import {useDispatch, useSelector} from "react-redux";
 import DoItLater from "../DoItLaterModal/DoItLater";
 import {reduxSetModalState} from "@/store/Slices";
+import RejectedDocsComponent from "../KYCAddress/RejectedDocsComponent";
 const allowedFileTypes = [
   "image/jpeg",
   "image/jpg",
@@ -58,18 +59,18 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [docData, setDocsData] = useState();
-  const [isUploading, setIsUploading] = useState(false);
+  // const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [showReuploadNote, setShowReuploadNote] = useState(true);
   const [formData, setFormData] = useState({
-    financialDocumentProof: "",
+    financialDocumentProof: [],
   });
   const [formErrors, setFormErrors] = useState({
     // addressProof: "",
     financialDocumentProof: "",
   });
-  console.log(docData);
+  console.log(docData, isSelected, "selecege");
   const getAddProofList = () => {
     baseInstance
       .get(baseURL + endPoints.getFinacialDocList)
@@ -83,15 +84,20 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
 
   const handleFileInputChange = e => {
     console.log("eeee");
-    setIsUploading(false);
-    const file = e.target.files[0];
+    // setIsUploading(false);
+    const file = e.target.files;
+    const temp = [...formData.financialDocumentProof];
+    const fileArray = Object.keys(file).map(key => {
+      return file[key];
+    });
+    const newArr = temp.concat(fileArray);
 
     if (file) {
       setFormData(prev => {
-        return {...prev, financialDocumentProof: file};
+        return {...prev, financialDocumentProof: newArr};
       });
 
-      if (!allowedFileTypes.includes(file.type)) {
+      if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
         setFormErrors(prev => ({
           ...prev,
           financialDocumentProof: "Please select jpg,png, pdf or jpeg file",
@@ -103,13 +109,13 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
         }));
       }
 
-      setIsUploading(true);
+      // setIsUploading(true);
     }
   };
   const submitHandler = () => {
     console.log("imnn clickkk");
     const error = formErrors;
-    if (!formData?.financialDocumentProof?.name) {
+    if (!formData?.financialDocumentProof?.length > 0) {
       error.financialDocumentProof = "Please upload the salary slip proof";
     } else {
       error.financialDocumentProof = "";
@@ -119,25 +125,28 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
 
     if (error.financialDocumentProof !== "") return;
 
-    for (const key in formErrors) {
-      if (Object.hasOwnProperty.call(formErrors, key)) {
-        const element = formErrors[key];
-        if (element) {
-          return;
-        }
-      }
-    }
+    // for (const key in formErrors) {
+    //   if (Object.hasOwnProperty.call(formErrors, key)) {
+    //     const element = formErrors[key];
+    //     if (element) {
+    //       return;
+    //     }
+    //   }
+    // }
     const allData = new FormData();
     allData.append(
       "financialStatementProof",
       JSON.stringify({
         doc_id: "cf_financial_statement",
-        subDocType: isSelected.value,
-        docImageName: formData?.financialDocumentProof?.name,
+        subDocType: isSelected,
+        // docImageName: formData?.financialDocumentProof?.name,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
-    allData.append("doc", formData.financialDocumentProof);
+    for (let i = 0; i < formData.financialDocumentProof.length; i++) {
+      allData.append("doc", formData.financialDocumentProof[i]);
+    }
+    // allData.append("doc", formData.financialDocumentProof);
     allData.append("orderId", selectedOrderId);
     baseInstance
       .post(baseURL + endPoints.uploadFinancialDoc, allData)
@@ -152,20 +161,23 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   }, []);
 
   useEffect(() => {
-    if (isReupload) {
-      setFormErrors({
-        ...formErrors,
-        financialDocumentProof:
-          "Please re-upload these documents as these got rejected by our team.",
-      });
-    } else {
-      setFormData({financialDocumentProof: ""});
-    }
+    // if (isReupload) {
+    //   setFormErrors({
+    //     ...formErrors,
+    //     financialDocumentProof:
+    //       "Please re-upload these documents as these got rejected by our team.",
+    //   });
+    // } else {
+    setFormData({financialDocumentProof: ""});
+    // }
   }, [selectedOrderId]);
 
-  const handleDeleteFile = e => {
+  const handleDeleteFile = (e, index) => {
     e.stopPropagation();
-    setFormData(prev => ({...prev, financialDocumentProof: ""}));
+    const temp = [...formData.financialDocumentProof];
+    temp.splice(index, 1);
+    setFormData({...formData, financialDocumentProof: temp});
+    // setFormData(prev => ({...prev, financialDocumentProof: ""}));
     setFormErrors(prev => ({...prev, financialDocumentProof: ""}));
   };
 
@@ -248,16 +260,101 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
         })}
       </div>
 
+      {formData?.financialDocumentProof?.length > 0 &&
+        formData?.financialDocumentProof?.map((item, index) => (
+          <div key={index} className={addressFormStyles.map_row_wrapper}>
+            <div className={`${styles.formInputFirst}`}>
+              <div className="flex items-center">
+                <label
+                  className={`${commonStyles.basicInputStyles} md:w-[232px] block  
+                       text-black                
+                  }`}>
+                  <div
+                    className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
+                    <Image
+                      src={uploading}
+                      alt="Uploading Icon"
+                      className={`${commonStyles.mdIBHidden}`}
+                    />
+                    <span className={`${styles.chooseFile}`}>
+                      {item?.name || item?.doc_name}
+                    </span>
+                    <>
+                      <div className={commonStyles.animate_check_icon}>
+                        <CheckFillIcon
+                          color={"#2D9469"}
+                          className={`${commonStyles.mdHiddemIcons}`}
+                        />
+                      </div>
+                    </>
+                  </div>
+                  {!formErrors.financialDocumentProof ? (
+                    <div className={`${commonStyles.correctFile}`}></div>
+                  ) : (
+                    <></>
+                  )}
+                </label>
+                {/* {cibilDocsData?.cf_financial_statement?.length === 0 && ( */}
+                <span
+                  onClick={e => {
+                    handleDeleteFile(e, index);
+                  }}>
+                  <DeleteIcon
+                    color={"#71717A"}
+                    className={`${commonStyles.mdHiddemIcons} ml-3`}
+                  />
+                </span>
+                {/* )} */}
+              </div>
+            </div>
+            {/* {
+            isReupload &&
+            cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
+              <div className="hidden md:flex ml-2">
+                <CheckFillIcon
+                  color={"#2D9469"}
+                  className="w-[18px] h-[18px]"
+                />
+              </div>
+            ) : ( */}
+            <div
+              className={`hidden md:flex ${addressFormStyles.check_wrapper}`}>
+              <div
+                className={addressFormStyles.showCheckCircle}
+                id="showCheckCircle">
+                <CheckFillIcon color="#2D9469" className="w-full h-full" />
+              </div>
+              <div
+                id="showDeleteIcon"
+                className={addressFormStyles.showDeleteIcon}
+                onClick={e => handleDeleteFile(e, index)}>
+                <DeleteIconFilled
+                  color={"#ffffff"}
+                  className={addressFormStyles.delete_icon_filled}
+                />
+              </div>
+            </div>
+            {/* )} */}
+          </div>
+        ))}
+
+      {isReupload && (
+        <RejectedDocsComponent
+          array={cibilDocsData?.userDocs}
+          docType={"cf_financial_statement"}
+        />
+      )}
+
       <div className={styles.input_wrapper}>
         <div className={`${styles.formInputFirst}`}>
           <div className={`${commonStyles.flexICenter}`}>
             <label
-              htmlFor="currrentAdd"
-              className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle}`}>
+              htmlFor="financialDoc"
+              className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle} text-[#71717a]`}>
               <div className={`${commonStyles.flexICenter}`}>
-                {formData?.financialDocumentProof.name ? (
-                  <>
-                    {formErrors?.financialDocumentProof ? (
+                {/* {formData?.financialDocumentProof?.length > 0 ? ( */}
+                <>
+                  {/* {formErrors?.financialDocumentProof ? (
                       <ExclamationCircleFill
                         color={"#D96060"}
                         className={`${commonStyles.mdHiddemIcons}`}
@@ -269,31 +366,22 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                           className={`${commonStyles.mdHiddemIcons}`}
                         />
                       </div>
-                    )}
-                  </>
-                ) : (
-                  <Image
-                    src={uploading}
-                    alt="Uploading Icon"
-                    className={`${commonStyles.mdHiddenIB}`}
-                  />
-                )}
+                    )} */}
+                </>
+                {/* ) : ( */}
+                <Image
+                  src={uploading}
+                  alt="Uploading Icon"
+                  className={`${commonStyles.mdHiddenIB}`}
+                />
+                {/* )} */}
                 <Image
                   src={uploading}
                   alt="Uploading Icon"
                   className={`${commonStyles.mdIBHidden}`}
                 />
-                <span className={`${styles.chooseFile}`}>
-                  {formData?.financialDocumentProof?.name ?? "Choose file"}
-                </span>
+                <span className={`${styles.chooseFile}`}>Choose file(s)</span>
               </div>
-              {!formErrors.financialDocumentProof &&
-              formData.financialDocumentProof.name &&
-              isUploading ? (
-                <div className={`${commonStyles.correctFile} `}></div>
-              ) : (
-                <></>
-              )}{" "}
             </label>
             {formData.financialDocumentProof.name && (
               <div className="flex cursor-pointer">
@@ -308,10 +396,11 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             )}
           </div>
           <input
+            multiple
             type="file"
-            id="currrentAdd"
+            id="financialDoc"
             accept="image/jpeg,image/jpg,image/png,application/pdf"
-            style={{display: "none"}}
+            style={{display: "none", cursor: "pointer"}}
             onChange={e => {
               handleFileInputChange(e);
             }}
@@ -323,20 +412,21 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
           <div className={`${commonStyles.basicErrorStyles} `}>
             {formErrors.financialDocumentProof}
           </div>
+
         )} */}
 
-        {formData?.financialDocumentProof?.name && (
+        {/* {formData?.financialDocumentProof?.name && (
           <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
             <div className={styles.showCheckCircle}>
               <CheckFillIcon color={"#2D9469"} className="w-full h-full" />
             </div>
             <div
               className={styles.showDeleteIcon}
-              onClick={e => handleDeleteFile(e)}>
+              onClick={e => handleDeleteFile(encodeURI)}>
               <DeleteIconFilled color={"#ffffff"} className="w-full h-full" />
             </div>
           </div>
-        )}
+        )} */}
       </div>
 
       {console.log(formErrors, formErrors.financialDocumentProof, "formerrors")}

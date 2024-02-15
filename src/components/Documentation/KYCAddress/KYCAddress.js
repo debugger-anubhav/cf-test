@@ -353,6 +353,8 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     }
   }, [selectedOrderId, isReupload]);
 
+  console.log(formData, "formdata");
+
   const toggleDoItLaterToggle = bool => {
     setOpenModal(bool);
     dispatch(reduxSetModalState(bool));
@@ -488,7 +490,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       : "text-[#71717a] "
                   }`}>
                   <div
-                    className={`${commonStyles.flexICenter} justify-between md:justify-normal`}>
+                    className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                     <Image
                       src={uploading}
                       alt="Uploading Icon"
@@ -573,13 +575,9 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
               cibilDocsData?.cf_permanent_address_proof?.length > 0
                 ? "cursor-not-allowed"
                 : "cursor-pointer"
-            } ${commonStyles.basicInputStyles} md:w-[232px] block  ${
-              // !formErrors.addressProof &&
-              // formData.addressProof &&
-              // formData.addressProof?.length === 1
-              //   ? " !bg-[#F1FFF9] md:!bg-white text-black"
-              "text-[#71717a]"
-            }`}>
+            } ${
+              commonStyles.basicInputStyles
+            } md:w-[232px] block  text-[#71717a]`}>
             <div className={`${commonStyles.flexICenter}`}>
               <Image
                 src={uploading}
@@ -680,7 +678,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       : "text-[#71717a] "
                   }`}>
                   <div
-                    className={`${commonStyles.flexICenter} justify-between md:justify-normal`}>
+                    className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                     <Image
                       src={uploading}
                       alt="Uploading Icon"
@@ -699,7 +697,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                     </>
                   </div>
                   {isReupload &&
-                  cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
+                  cibilDocsData?.cf_delivery_address_proof?.length > 0 ? (
                     <></>
                   ) : !formErrors.currentAddressProof &&
                     formData.currentAddressProof?.length > 0 ? (
