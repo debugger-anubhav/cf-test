@@ -59,13 +59,10 @@
   @apply text-14 xl:text-16 outline-none hover:border-71717A  h-11 md:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1;
 }
 .contact_input {
-  @apply w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
-}
-.contact_input::placeholder {
-  @apply font-Poppins font-normal text-16  text-[#71717A];
+  @apply w-full border-none outline-none bg-transparent placeholder:text-14 xl:placeholder:text-16 placeholder:text-71717A placeholder:tracking-desc xl:placeholder:tracking-0.3;
 }
 .chooseFile {
-  @apply inline-block pl-2;
+  @apply inline-block pl-2 w-full truncate;
 }
 /* md:w-[477px] */
 
