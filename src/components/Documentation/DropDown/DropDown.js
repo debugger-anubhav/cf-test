@@ -35,6 +35,7 @@ const DropDown = ({
   addressScreen,
   value,
 }) => {
+  console.log(tenureModal, "tenure");
   const handleOptionClick = option => {
     console.log(option, "optionnnn");
     if (addressScreen) {
@@ -269,7 +270,7 @@ const DropDown = ({
               setIsDDOpen(prev => !prev);
               isInitialScreen && isMdScreen && setOrderIdsModal(!orderIdsModal);
             }
-            isMdScreen && tenureModal && setTenureModal(true);
+            isMdScreen && setTenureModal && setTenureModal(true);
           }}>
           <span
             className={` ${styles.selected_txt} ${

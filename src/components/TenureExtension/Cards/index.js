@@ -33,6 +33,7 @@ function Cards({
   items,
   isChecked,
   setIsChecked,
+  setIsCheckedArray,
   setcardIndex,
   index,
   cardIndex,
@@ -163,7 +164,9 @@ function Cards({
 
     paymentObject.open();
   }
-
+  useEffect(() => {
+    console.log(cardIndex, "radioactive");
+  }, [cardIndex]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -240,7 +243,14 @@ function Cards({
                   />
                 </div>
               ) : (
-                <div onClick={() => setIsChecked(true)}>
+                <div
+                  onClick={() => {
+                    setIsCheckedArray(prevState => {
+                      const newArray = [...prevState];
+                      newArray[index] = !newArray[index];
+                      return newArray;
+                    });
+                  }}>
                   <UncheckedBox
                     size={20}
                     color={"#5774AC"}

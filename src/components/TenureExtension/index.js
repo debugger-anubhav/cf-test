@@ -15,7 +15,6 @@ function TenureExtension() {
   const [singleCardData, setsingleCardData] = useState(null);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
-
   const CardData = [
     {
       title: "Long-term pack ",
@@ -54,6 +53,10 @@ function TenureExtension() {
       ],
     },
   ];
+  const [isCheckedArray, setIsCheckedArray] = useState(
+    Array(CardData.length).fill(true),
+  );
+
   const getApiData = () => {
     axios
       .get(baseURL + endPoints.tenureExtension, {
@@ -72,6 +75,14 @@ function TenureExtension() {
   useEffect(() => {
     getApiData();
   }, [isChecked]);
+
+  const handleSetIsChecked = (index, isChecked) => {
+    const newArray = [...isCheckedArray];
+    newArray[index] = isChecked;
+    setIsCheckedArray(newArray);
+    setIsChecked(isChecked);
+  };
+
   return (
     <div className={styles.wrapper}>
       {loading && <LoaderComponent loading={loading} />}
@@ -89,10 +100,11 @@ function TenureExtension() {
               <Cards
                 data={temp}
                 items={item}
-                isChecked={isChecked}
-                setIsChecked={setIsChecked}
+                isChecked={isCheckedArray[index]}
+                setIsChecked={isChecked => handleSetIsChecked(index, isChecked)}
                 cardIndex={cardIndex}
-                setcardIndex={setcardIndex}
+                setIsCheckedArray={setIsCheckedArray}
+                setcardIndex={val => setcardIndex(val)}
                 index={index}
                 orderId={params?.orderId}
                 setLoading={setLoading}
