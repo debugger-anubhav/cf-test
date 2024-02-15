@@ -81,7 +81,7 @@ const BillContent = ({
           </div>
           <p className={styles.total_amount} style={{color: "#2D9469"}}>
             <span className={styles.rupeeIcon}>-₹</span>
-            {billBreakup?.itemDiscount?.toFixed(2)}
+            {parseInt(billBreakup?.itemDiscount)?.toFixed(2)}
           </p>
         </div>
 
@@ -131,7 +131,7 @@ const BillContent = ({
           </div>
           <p className={styles.total_amount}>
             <span className={styles.rupeeIcon}>₹</span>
-            {billBreakup?.gst?.toFixed(2)}
+            {parseInt(billBreakup?.gst)?.toFixed(2)}
           </p>
         </div>
 
@@ -157,7 +157,7 @@ const BillContent = ({
           <p className={styles.total_txt}>Total</p>
           <p className={styles.total_amount}>
             <span className={styles.rupeeIcon}>₹</span>
-            {parseInt(billBreakup?.finalTotalPrice).toFixed(2)}
+            {parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}
           </p>
         </div>
       </div>
