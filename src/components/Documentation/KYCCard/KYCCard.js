@@ -18,8 +18,8 @@ import DoItLater from "../DoItLaterModal/DoItLater";
 const KYCCard = ({handleKycState}) => {
   const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
-  const [selected, setSelected] = useState("");
-  const [modeOfPayment, setModeOfPayment] = useState();
+  const [selected, setSelected] = useState("cc");
+  const [modeOfPayment, setModeOfPayment] = useState("card");
   const [openModal, setOpenModal] = useState(false);
 
   const updatePaymentStatus = (
