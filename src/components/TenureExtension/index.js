@@ -100,8 +100,6 @@ function TenureExtension() {
               <Cards
                 data={temp}
                 items={item}
-                // isChecked={isChecked}
-                // setIsChecked={setIsChecked}
                 isChecked={isCheckedArray[index]}
                 setIsChecked={isChecked => handleSetIsChecked(index, isChecked)}
                 cardIndex={cardIndex}

@@ -54,7 +54,6 @@ function Cards({
   );
   const [perAddModal, setPerAddModal] = useState(false);
   const [tenureModal, setTenureModal] = useState(false);
-  const [radioActive, setRadioActive] = useState(null);
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -62,7 +61,6 @@ function Cards({
     setCityShieldDrawerOpen(true);
     setIsChecked(true);
     setcardIndex(index);
-    setRadioActive(index);
   };
   const toggleDrawerCityShield = () => {
     if (isChecked) setCityShieldDrawerOpen(false);
@@ -167,8 +165,8 @@ function Cards({
     paymentObject.open();
   }
   useEffect(() => {
-    console.log(radioActive, cardIndex, "radioactive");
-  }, [radioActive, cardIndex]);
+    console.log(cardIndex, "radioactive");
+  }, [cardIndex]);
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -246,10 +244,6 @@ function Cards({
                 </div>
               ) : (
                 <div
-                  // onClick={() => {
-                  //   setIsChecked(true);
-                  //   setRadioActive(cardIndex);
-                  // }}
                   onClick={() => {
                     setIsCheckedArray(prevState => {
                       const newArray = [...prevState];
