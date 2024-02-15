@@ -29,9 +29,8 @@
 }
 
 .selected-option {
-  @apply flex justify-between bg-white border  rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4;
+  @apply flex justify-between bg-white border  rounded-xl font-Poppins tracking-desc xl:tracking-0.3 xl:text-16 text-14 font-normal py-3 px-4;
   border-top: 1px solid var(--grey-grey-300, #dddddf);
-  letter-spacing: -0.32px;
   line-height: normal;
 }
 
@@ -61,7 +60,7 @@
   @apply cursor-pointer;
 }
 .selected_txt {
-  @apply font-Poppins text-16 font-normal;
+  @apply tracking-desc xl:tracking-0.3 font-Poppins text-14 xl:text-16 font-normal;
 }
 
 /* example.module.css */
