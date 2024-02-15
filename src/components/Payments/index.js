@@ -210,7 +210,6 @@ const PaymentPage = () => {
   useEffect(() => {
     fetchMyPayments();
   }, []);
-
   const htmlStringToPdf = async htmlString => {
     try {
       const iframe = document.createElement("iframe");
@@ -219,18 +218,14 @@ const PaymentPage = () => {
       const iframedoc = iframe.contentDocument || iframe.contentWindow.document;
       iframedoc.body.innerHTML = htmlString;
 
-      const canvas = await html2canvas(iframedoc.body, {});
+      // Increase canvas resolution
+      const canvas = await html2canvas(iframedoc.body, {scale: 2.5}); // Adjust scale as needed
       const imgData = canvas.toDataURL("image/png");
       const doc = new JsPDF({
         format: "a4",
         unit: "mm",
       });
-
-      const scaleFactor = 210 / canvas.width;
-      const imgWidth = canvas.width * scaleFactor;
-      const imgHeight = canvas.height * scaleFactor;
-
-      doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+      doc.addImage(imgData, "PNG", 0, 0, 210, 297);
       const pdfBlob = doc.output("blob");
       document.body.removeChild(iframe);
 
@@ -314,3 +309,35 @@ const PaymentPage = () => {
 };
 
 export default PaymentPage;
+
+// const htmlStringToPdf = async htmlString => {
+//   try {
+//     const iframe = document.createElement("iframe");
+//     iframe.style.visibility = "hidden";
+//     document.body.appendChild(iframe);
+//     const iframedoc = iframe.contentDocument || iframe.contentWindow.document;
+//     iframedoc.body.innerHTML = htmlString;
+
+//     const canvas = await html2canvas(iframedoc.body, {});
+//     const imgData = canvas.toDataURL("image/png");
+//     const doc = new JsPDF({
+//       format: "a4",
+//       unit: "mm",
+//     });
+
+//     const scaleFactor = 210 / canvas.width;
+//     const imgWidth = canvas.width * scaleFactor;
+//     const imgHeight = canvas.height * scaleFactor;
+
+//     doc.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+//     const pdfBlob = doc.output("blob");
+//     document.body.removeChild(iframe);
+
+//     const link = document.createElement("a");
+//     link.href = URL.createObjectURL(pdfBlob);
+//     link.download = "payment_statement.pdf";
+//     link.click();
+//   } catch (error) {
+//     console.error("Error generating PDF:", error);
+//   }
+// };
