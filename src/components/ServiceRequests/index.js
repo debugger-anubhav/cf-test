@@ -110,11 +110,22 @@ function ServiceRequets() {
               }}
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
-              <div className="flex w-full md:gap-8">
-                <CreateNewRequest
-                  createRequestData={createRequestData}
-                  setOpenDrawer={setOpenDrawer}
-                />
+              <div className="flex w-full md:gap-8 overflow-auto">
+                <div>
+                  <div
+                    className={styles.mobile_close_icon}
+                    onClick={closeModal}>
+                    <Close
+                      color={"#45454A"}
+                      size={24}
+                      className="cursor-pointer"
+                    />
+                  </div>
+                  <CreateNewRequest
+                    createRequestData={createRequestData}
+                    setOpenDrawer={setOpenDrawer}
+                  />
+                </div>
                 <div className={`md:flex hidden`} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
@@ -122,13 +133,13 @@ function ServiceRequets() {
                     className="cursor-pointer"
                   />
                 </div>
-                <div className={styles.mobile_close_icon} onClick={closeModal}>
+                {/* <div className={styles.mobile_close_icon} onClick={closeModal}>
                   <Close
                     color={"#45454A"}
                     size={24}
                     className="cursor-pointer"
-                  />
-                </div>
+                  /> */}
+                {/* </div> */}
               </div>
             </Drawer>
           )}

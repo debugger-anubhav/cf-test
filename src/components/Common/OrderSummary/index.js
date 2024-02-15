@@ -152,7 +152,7 @@ const OrderSummary = ({
                       <p className={styles.tenure}>
                         Tenure:{" "}
                         {subscriptionData
-                          ? `${data?.tenure} months`
+                          ? `${data?.tenure}`
                           : item.subproduct_attr_name}
                       </p>
                       {isDelivered && (
