@@ -116,10 +116,9 @@ function Cards({
         dealCodeNumber: parseInt(orderId),
         mode: "extension",
         tenure: selectedOptionPer?.value,
-        cf_value: data?.isCityShieldApplied ? 1 : 0,
+        cf_value: isChecked ? 1 : 0,
       },
     );
-    console.log(result.data.data, "tenure extension data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -164,9 +163,7 @@ function Cards({
 
     paymentObject.open();
   }
-  useEffect(() => {
-    console.log(cardIndex, "radioactive");
-  }, [cardIndex]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.card_type_text}>
@@ -390,13 +387,13 @@ export const MonthlyCard = ({
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-
+    console.log(monthlyCardIsChecked, "dcdcdscsd");
     const result = await axios.post(
       baseURL + endPoints.kycPage.registerMandate,
       {
         dealCodeNumber: orderId,
         mode: modeOfPayment,
-        cf_value: data?.isCityShieldApplied ? 1 : 0,
+        cf_value: monthlyCardIsChecked ? 1 : 0,
       },
     );
     if (!result) {
@@ -434,8 +431,6 @@ export const MonthlyCard = ({
         color: RazorpayThemeColor,
       },
     };
-
-    console.log(options, "optionss");
 
     const paymentObject = new window.Razorpay(options);
 

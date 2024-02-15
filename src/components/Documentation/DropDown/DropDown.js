@@ -36,7 +36,6 @@ const DropDown = ({
   value,
 }) => {
   const handleOptionClick = option => {
-    console.log(option, "optionnnn");
     if (addressScreen) {
       perAddModal ? handleOptionClickPer(option) : handleOptionClickCur(option);
     } else {
