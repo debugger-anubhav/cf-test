@@ -116,7 +116,7 @@ function TenureExtension() {
         <MonthlyCard
           data={apiData}
           monthlyCardIsChecked={monthlyCardIsChecked}
-          setmonthlyCardIsChecked={setmonthlyCardIsChecked}
+          setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
           orderId={params?.orderId}
           setLoading={setLoading}
         />
