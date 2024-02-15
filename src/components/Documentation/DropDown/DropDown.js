@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./DropDown.module.css";
 import {Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
-import {Modal, createTheme, useMediaQuery} from "@mui/material";
+import {Drawer, createTheme, useMediaQuery} from "@mui/material";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import commonStyles from "../common.module.css";
 
@@ -63,184 +63,190 @@ const DropDown = ({
   const currentAddressOptions = docsData?.[0]?.supported_docs
     ?.split(",")
     ?.map(i => ({label: i, value: i}));
+
   return (
     <div className={`${tenureStyle && "relative h-[54px]"}`}>
-      {isMdScreen && (
-        <Modal
-          open={currAddModal || perAddModal || orderIdsModal || tenureModal}
-          onClose={() => {
-            if (isInitialScreen) setOrderIdsModal(false);
-            else {
-              perAddModal && setPerAddModal(false);
-              currAddModal && setCurrAddModal(false);
-              tenureModal && setTenureModal(false);
-            }
-          }}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-          disableRestoreFocus
-          disableEnforceFocus
-          disableAutoFocus>
-          <>
-            {perAddModal && (
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select any permanent address proof
-                </div>
-                <ul
-                  className={`${
-                    perAddModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {permanentAddOptions?.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option?.label === selectedOptionPer?.lebel
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClickPer(option)}>
-                      <span>{option?.label}</span>{" "}
-                      <SelectionCircle
-                        showInner={option?.label === selectedOptionPer?.label}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setPerAddModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
+      <Drawer
+        anchor={"bottom"}
+        classes={{paper: styles.customDrawer}}
+        open={
+          isMdScreen &&
+          (currAddModal || perAddModal || orderIdsModal || tenureModal)
+        }
+        onClose={() => {
+          if (isInitialScreen) setOrderIdsModal(false);
+          else {
+            perAddModal && setPerAddModal(false);
+            currAddModal && setCurrAddModal(false);
+            tenureModal && setTenureModal(false);
+          }
+        }}
+        // aria-labelledby="modal-modal-title"
+        // aria-describedby="modal-modal-description" disableRestoreFocus
+        // disableEnforceFocus disableAutoFocus
+      >
+        <>
+          {perAddModal && (
+            // <div className={`${commonStyles.dropdown_container} `}>
+            <div>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select any permanent address proof
               </div>
-            )}
-            {currAddModal && (
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select any current address proof
+              <ul
+                className={`${
+                  perAddModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {permanentAddOptions?.map((option, index) => (
+                  <li
+                    className={`${commonStyles.option} ${
+                      option?.label === selectedOptionPer?.lebel
+                        ? "bg-[#EFF5FF]"
+                        : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClickPer(option)}>
+                    <span>{option?.label}</span>{" "}
+                    <SelectionCircle
+                      showInner={option?.label === selectedOptionPer?.label}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setPerAddModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
                 </div>
-                <ul
-                  className={`${
-                    currAddModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {currentAddressOptions?.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option?.label === selectedOptionCur?.label
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClickCur(option)}>
-                      <span>{option?.label}</span>{" "}
-                      <SelectionCircle
-                        showInner={option?.label === selectedOptionCur?.label}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setCurrAddModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
+              </button>
+            </div>
+          )}
+          {currAddModal && (
+            // <div className={`${commonStyles.dropdown_container} `}>
+            <div>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select any current address proof
               </div>
-            )}
-            {orderIdsModal && (
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select order
+              <ul
+                className={`${
+                  currAddModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {currentAddressOptions?.map((option, index) => (
+                  <li
+                    className={`${commonStyles.option} ${
+                      option?.label === selectedOptionCur?.label
+                        ? "bg-[#EFF5FF]"
+                        : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClickCur(option)}>
+                    <span>{option?.label}</span>{" "}
+                    <SelectionCircle
+                      showInner={option?.label === selectedOptionCur?.label}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setCurrAddModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
                 </div>
-                <ul
-                  className={`${
-                    orderIdsModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {options?.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
+              </button>
+            </div>
+          )}
+          {orderIdsModal && (
+            // <div className={`${commonStyles.dropdown_container} `}>
+            <div>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select order
+              </div>
+              <ul
+                className={`${
+                  orderIdsModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {options?.map((option, index) => (
+                  <li
+                    className={`${commonStyles.option} ${
+                      option?.dealCodeNumber === selectedOption?.dealCodeNumber
+                        ? "bg-[#EFF5FF]"
+                        : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClick(option)}>
+                    <span>{option.dealCodeNumber}</span>{" "}
+                    <SelectionCircle
+                      showInner={
                         option?.dealCodeNumber ===
                         selectedOption?.dealCodeNumber
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClick(option)}>
-                      <span>{option.dealCodeNumber}</span>{" "}
-                      <SelectionCircle
-                        showInner={
-                          option?.dealCodeNumber ===
-                          selectedOption?.dealCodeNumber
-                        }
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setOrderIdsModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
-              </div>
-            )}
-            {tenureModal && (
-              <div className={`${commonStyles.dropdown_container} `}>
-                <div className={`${commonStyles.dropdown_heading} `}>
-                  Select tenure
+                      }
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setOrderIdsModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
                 </div>
-                <ul
-                  className={`${
-                    tenureModal
-                      ? commonStyles.optionsActive
-                      : commonStyles.options
-                  } `}>
-                  {options?.map((option, index) => (
-                    <li
-                      className={`${commonStyles.option} ${
-                        option?.label === selectedOption?.label
-                          ? "bg-[#EFF5FF]"
-                          : ""
-                      } `}
-                      key={index}
-                      onClick={() => handleOptionClick(option)}>
-                      <span>{option.label}</span>{" "}
-                      <SelectionCircle
-                        showInner={option?.label === selectedOption?.label}
-                      />
-                    </li>
-                  ))}
-                </ul>
-                <button
-                  className={`${commonStyles.close_icon_btn}`}
-                  onClick={() => {
-                    setTenureModal(false);
-                  }}>
-                  <div className={`${commonStyles.close_icon}`}>
-                    <Close size={25} color={"#222222"} />
-                  </div>
-                </button>
+              </button>
+            </div>
+          )}
+          {tenureModal && (
+            // <div className={`${commonStyles.dropdown_container} `}>
+            <div>
+              <div className={`${commonStyles.dropdown_heading} `}>
+                Select tenure
               </div>
-            )}
-          </>
-        </Modal>
-      )}
+              <ul
+                className={`${
+                  tenureModal
+                    ? commonStyles.optionsActive
+                    : commonStyles.options
+                } `}>
+                {options?.map((option, index) => (
+                  <li
+                    className={`${commonStyles.option} ${
+                      option?.label === selectedOption?.label
+                        ? "bg-[#EFF5FF]"
+                        : ""
+                    } `}
+                    key={index}
+                    onClick={() => handleOptionClick(option)}>
+                    <span>{option.label}</span>{" "}
+                    <SelectionCircle
+                      showInner={option?.label === selectedOption?.label}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <button
+                className={`${commonStyles.close_icon_btn}`}
+                onClick={() => {
+                  setTenureModal(false);
+                }}>
+                <div className={`${commonStyles.close_icon}`}>
+                  <Close size={25} color={"#222222"} />
+                </div>
+              </button>
+            </div>
+          )}
+        </>
+      </Drawer>
 
       <div
         className={`${styles["custom-select"]} ${
