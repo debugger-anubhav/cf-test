@@ -9,6 +9,7 @@ import LongTermCard from "./Cards/LongTermCard";
 import MidTermCard from "./Cards/MidTermCard";
 import ShortTermCard from "./Cards/ShortTermCard";
 import {MonthlyCard} from "./Cards";
+import {Skeleton} from "@mui/material";
 
 function TenureExtension() {
   const params = useParams();
@@ -71,7 +72,10 @@ function TenureExtension() {
         setIsCityShieldApplied(res?.data?.data?.isCityShieldApplied);
         setCalledParantApi(true);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setCalledParantApi(true);
+      });
   };
 
   useEffect(() => {
@@ -93,7 +97,7 @@ function TenureExtension() {
         Your Order ID:
         <span className="font-medium ml-2">#{params?.orderId}</span>
       </div>
-      {calledParantApi && (
+      {calledParantApi ? (
         <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
           <LongTermCard
             items={CardData[0]}
@@ -127,6 +131,20 @@ function TenureExtension() {
             orderId={params?.orderId}
             setLoading={setLoading}
           />
+        </div>
+      ) : (
+        <div className="flex gap-8 mt-4 flex-wrap">
+          {[1, 2, 3, 4].map(item => {
+            return (
+              <Skeleton
+                key={item.toString()}
+                variant="rectangular"
+                width={300}
+                height={400}
+                className="w-full h-full"
+              />
+            );
+          })}
         </div>
       )}
     </div>
