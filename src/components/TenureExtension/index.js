@@ -1,21 +1,23 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import Cards, {MonthlyCard} from "./Cards";
 import {useParams} from "next/navigation";
 import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
+import LongTermCard from "./Cards/LongTermCard";
+import MidTermCard from "./Cards/MidTermCard";
+import ShortTermCard from "./Cards/ShortTermCard";
+import {MonthlyCard} from "./Cards";
 
 function TenureExtension() {
   const params = useParams();
-  const [apiData, setapiData] = useState(null);
-  const [cardIndex, setcardIndex] = useState(null);
   const [isChecked, setIsChecked] = useState(true);
-  const [singleCardData, setsingleCardData] = useState(null);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
-  const [selectdMonth, setSelectdMonth] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isCityShieldApplied, setIsCityShieldApplied] = useState(null);
+  const [calledParantApi, setCalledParantApi] = useState(false);
+
   const CardData = [
     {
       title: "Long-term pack ",
@@ -57,26 +59,24 @@ function TenureExtension() {
   const [isCheckedArray, setIsCheckedArray] = useState(
     Array(CardData.length).fill(true),
   );
-
-  const getApiData = () => {
+  console.log(isCityShieldApplied, isChecked, "checking");
+  const parantApi = () => {
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {
-          cfCareValue: isChecked ? 1 : 0,
           dealCodeNumber: params?.orderId,
-          month: selectdMonth,
         },
       })
       .then(res => {
-        if (!isChecked) {
-          setsingleCardData(res?.data?.data);
-        } else setapiData(res?.data?.data);
+        setIsCityShieldApplied(res?.data?.data?.isCityShieldApplied);
+        setCalledParantApi(true);
       })
       .catch(err => console.log(err));
   };
+
   useEffect(() => {
-    getApiData();
-  }, [isChecked, selectdMonth]);
+    parantApi();
+  }, []);
 
   const handleSetIsChecked = (index, isChecked) => {
     const newArray = [...isCheckedArray];
@@ -93,37 +93,42 @@ function TenureExtension() {
         Your Order ID:
         <span className="font-medium ml-2">#{params?.orderId}</span>
       </div>
-      <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
-        {CardData?.map((item, index) => {
-          const temp =
-            index === cardIndex && !isChecked ? singleCardData : apiData;
-          return (
-            <div key={index.toString()}>
-              <Cards
-                data={temp}
-                items={item}
-                isChecked={isCheckedArray[index]}
-                setIsChecked={isChecked => handleSetIsChecked(index, isChecked)}
-                cardIndex={cardIndex}
-                setIsCheckedArray={setIsCheckedArray}
-                setcardIndex={val => setcardIndex(val)}
-                index={index}
-                orderId={params?.orderId}
-                setLoading={setLoading}
-                setSelectdMonth={val => setSelectdMonth(val)}
-              />
-            </div>
-          );
-        })}
+      {calledParantApi && (
+        <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
+          <LongTermCard
+            items={CardData[0]}
+            isChecked={isCheckedArray[0]}
+            setIsChecked={isChecked => handleSetIsChecked(0, isChecked)}
+            orderId={params?.orderId}
+            setLoading={setLoading}
+            dealCodeNumber={params?.orderId}
+          />
 
-        <MonthlyCard
-          data={apiData}
-          monthlyCardIsChecked={monthlyCardIsChecked}
-          setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
-          orderId={params?.orderId}
-          setLoading={setLoading}
-        />
-      </div>
+          <MidTermCard
+            items={CardData[1]}
+            isChecked={isCheckedArray[1]}
+            setIsChecked={isChecked => handleSetIsChecked(1, isChecked)}
+            orderId={params?.orderId}
+            setLoading={setLoading}
+            dealCodeNumber={params?.orderId}
+          />
+          <ShortTermCard
+            items={CardData[2]}
+            isChecked={isCheckedArray[2]}
+            setIsChecked={isChecked => handleSetIsChecked(2, isChecked)}
+            orderId={params?.orderId}
+            setLoading={setLoading}
+            dealCodeNumber={params?.orderId}
+          />
+          <MonthlyCard
+            dealCodeNumber={params?.orderId}
+            monthlyCardIsChecked={monthlyCardIsChecked}
+            setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
+            orderId={params?.orderId}
+            setLoading={setLoading}
+          />
+        </div>
+      )}
     </div>
   );
 }
