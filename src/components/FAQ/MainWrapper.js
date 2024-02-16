@@ -70,32 +70,32 @@ const MainWrapper = () => {
       //   }
       // });
       HowItWorks.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       DeliveryAndInstalation.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       PaymentAndBilling.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       OurServices.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       WhyCityFurnish.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       ReferralProgram.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
@@ -234,7 +234,7 @@ const MainWrapper = () => {
             placeholder="Search help in FAQs"
             className={style.search_input_field}
             value={searchKeyword}
-            onChange={e => setSearchKeyword(e.target.value)}
+            onChange={e => setSearchKeyword(e.target.value.toLowerCase())}
           />
         </div>
       </div>
