@@ -2,14 +2,13 @@
   @apply font-Poppins my-12 xl:my-[88px];
 }
 .img_wrapper {
-  @apply relative w-full h-[270px] md:h-[320px] xl:h-[487px] 3xl:h-[600px];
+  @apply relative w-full;
 }
 .img {
   @apply min-w-full h-full;
 }
 .desc_div {
-  @apply w-[336px] md:w-[400px] xl:w-[552px] h-fit px-4 xl:px-6 py-4 z-50 top-12 right-5 xl:right-[128px] overflow-hidden;
-  position: absolute;
+  @apply absolute w-[336px] md:w-[400px] xl:w-[552px] h-fit px-4 xl:px-6 py-4 z-50 top-12 right-5 xl:right-[128px] overflow-hidden;
   background: rgba(255, 255, 255, 0.9);
 }
 .head {

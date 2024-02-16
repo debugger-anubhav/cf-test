@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./style.module.css";
-import Image from "next/image";
 import {useSelector} from "react-redux";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 
@@ -13,12 +12,12 @@ const BannerThree = () => {
         <p className={styles.desc}>{bannerImages?.[0]?.file_description}</p>
       </div>
       <div className={styles.img_wrapper}>
-        <Image
+        <img
           className={styles.img}
           src={`${productPageImagesBaseUrl + bannerImages?.[2]?.file_name}`}
           alt="banner_img"
-          layout="fill"
-          objectFit="cover"
+          // layout="fill"
+          // objectFit="cover"
           loading="lazy"
         />
       </div>
