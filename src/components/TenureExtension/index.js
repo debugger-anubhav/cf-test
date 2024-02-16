@@ -14,6 +14,7 @@ function TenureExtension() {
   const [isChecked, setIsChecked] = useState(true);
   const [singleCardData, setsingleCardData] = useState(null);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
+  const [selectdMonth, setSelectdMonth] = useState(null);
   const [loading, setLoading] = useState(false);
   const CardData = [
     {
@@ -63,6 +64,7 @@ function TenureExtension() {
         params: {
           cfCareValue: isChecked ? 1 : 0,
           dealCodeNumber: params?.orderId,
+          month: selectdMonth,
         },
       })
       .then(res => {
@@ -74,7 +76,7 @@ function TenureExtension() {
   };
   useEffect(() => {
     getApiData();
-  }, [isChecked]);
+  }, [isChecked, selectdMonth]);
 
   const handleSetIsChecked = (index, isChecked) => {
     const newArray = [...isCheckedArray];
@@ -108,6 +110,7 @@ function TenureExtension() {
                 index={index}
                 orderId={params?.orderId}
                 setLoading={setLoading}
+                setSelectdMonth={val => setSelectdMonth(val)}
               />
             </div>
           );

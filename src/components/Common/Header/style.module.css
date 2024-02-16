@@ -57,7 +57,7 @@
   @apply flex md:hidden justify-center items-center;
 }
 .search_wrapper_mobile {
-  @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative mb-4 rounded-lg;
+  @apply mx-4 flex md:hidden cursor-pointer border border-ECECEC bg-white px-4 py-2 relative mb-4 rounded-lg justify-between;
 }
 .search_details_wrapper {
   @apply w-full absolute top-[112px] md:top-[60px] lg:top-[88px] md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px];
