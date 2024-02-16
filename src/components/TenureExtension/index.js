@@ -62,6 +62,7 @@ function TenureExtension() {
   );
   console.log(isCityShieldApplied, isChecked, "checking");
   const parantApi = () => {
+    console.log("in parent ");
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {
@@ -106,6 +107,7 @@ function TenureExtension() {
             orderId={params?.orderId}
             setLoading={setLoading}
             dealCodeNumber={params?.orderId}
+            isCityShieldApplied={isCityShieldApplied}
           />
 
           <MidTermCard
@@ -115,6 +117,7 @@ function TenureExtension() {
             orderId={params?.orderId}
             setLoading={setLoading}
             dealCodeNumber={params?.orderId}
+            isCityShieldApplied={isCityShieldApplied}
           />
           <ShortTermCard
             items={CardData[2]}
@@ -123,6 +126,7 @@ function TenureExtension() {
             orderId={params?.orderId}
             setLoading={setLoading}
             dealCodeNumber={params?.orderId}
+            isCityShieldApplied={isCityShieldApplied}
           />
           <MonthlyCard
             dealCodeNumber={params?.orderId}
