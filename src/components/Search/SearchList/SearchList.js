@@ -20,6 +20,7 @@ import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import SortDropdown from "./SortDropdown";
 
 const defaultKey = 1;
 const newSortKey = 2;
@@ -179,7 +180,7 @@ const SearchList = () => {
                 {selectedOption}
               </p>
             </div>
-            <div>
+            <div className="cursor-pointer">
               <DownPopUpArrow
                 size={20}
                 color={"#45454A"}
@@ -188,29 +189,14 @@ const SearchList = () => {
             </div>
           </div>
         </div>
-        {sortOpen && (
-          <div className="gap-6 absolute z-[111] top-12 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4 sm:ml-16">
-            {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
-            {sortByText?.map((ele, index) => {
-              return (
-                <div
-                  className={style.sorted_text}
-                  key={index.toString()}
-                  onClick={() => handleSort(ele?.text, index)}>
-                  <p className={style.option_text}>{ele.text}</p>
-                  <input
-                    type="radio"
-                    id={index}
-                    name="sortBy"
-                    value={ele.text}
-                    className="cursor-pointer"
-                    checked={selectedOption === ele.text}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        )}
+
+        <SortDropdown
+          isDropdownOpen={sortOpen}
+          closeDropdown={() => setSortOpen(false)}
+          sortByText={sortByText}
+          handleSort={handleSort}
+          selectedOption={selectedOption}
+        />
       </div>
 
       {/* Horizontal line */}
