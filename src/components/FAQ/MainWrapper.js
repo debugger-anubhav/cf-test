@@ -43,6 +43,15 @@ const MainWrapper = () => {
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState();
 
+  const dynamicData = {
+    0: HowItWorks,
+    1: DeliveryAndInstalation,
+    2: PaymentAndBilling,
+    3: OurServices,
+    4: WhyCityFurnish,
+    5: ReferralProgram,
+  };
+
   useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
@@ -70,60 +79,44 @@ const MainWrapper = () => {
       //   }
       // });
       HowItWorks.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       DeliveryAndInstalation.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       PaymentAndBilling.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       OurServices.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       WhyCityFurnish.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       ReferralProgram.forEach(ele => {
-        if (ele?.que?.includes(searchKeyword)) {
+        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
           temp.push(ele);
         }
       });
       if (temp?.length) setFaqData(temp);
       else setFaqData([]);
+    } else {
+      setFaqData(dynamicData[value]);
     }
-    // else {
-    //   setFaqData(General);
-    // }
   }, [searchKeyword]);
 
   useEffect(() => {
-    // if (value === 0) {
-    //   setFaqData(General);
-    // } else
-    if (value === 0) {
-      setFaqData(HowItWorks);
-    } else if (value === 1) {
-      setFaqData(DeliveryAndInstalation);
-    } else if (value === 2) {
-      setFaqData(PaymentAndBilling);
-    } else if (value === 3) {
-      setFaqData(OurServices);
-    } else if (value === 4) {
-      setFaqData(WhyCityFurnish);
-    } else if (value === 5) {
-      setFaqData(ReferralProgram);
-    }
+    setFaqData(dynamicData[value]);
   }, [value]);
 
   useEffect(() => {
@@ -234,7 +227,7 @@ const MainWrapper = () => {
             placeholder="Search help in FAQs"
             className={style.search_input_field}
             value={searchKeyword}
-            onChange={e => setSearchKeyword(e.target.value)}
+            onChange={e => setSearchKeyword(e.target.value.toLowerCase())}
           />
         </div>
       </div>

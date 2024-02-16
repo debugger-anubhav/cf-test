@@ -14,9 +14,11 @@ const BannerTwo = () => {
           alt="banner_img"
           loading="lazy"
         />
-        <div className={styles.desc_div}>
-          <p className={styles.desc}>{bannerImages?.[1]?.file_description}</p>
-        </div>
+        {bannerImages?.[1]?.file_description && (
+          <div className={styles.desc_div}>
+            <p className={styles.desc}>{bannerImages[1].file_description}</p>
+          </div>
+        )}
       </div>
     </div>
   );
