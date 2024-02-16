@@ -116,7 +116,7 @@ function Cards({
         dealCodeNumber: parseInt(orderId),
         mode: "extension",
         tenure: selectedOptionPer?.value,
-        cf_value: isChecked ? 1 : 0,
+        cf_value: isChecked && !data?.isCityShieldApplied ? 1 : 0,
       },
     );
     if (!result) {
