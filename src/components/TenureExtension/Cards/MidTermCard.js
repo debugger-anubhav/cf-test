@@ -24,6 +24,7 @@ function MidTermCard({
   orderId,
   setLoading,
   dealCodeNumber,
+  isCityShieldApplied,
 }) {
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
@@ -152,10 +153,11 @@ function MidTermCard({
   }
 
   const getApiData = () => {
+    console.log(isCityShieldApplied, "midterm card");
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {
-          cfCareValue: apiData?.isCityShieldApplied ? 0 : isChecked ? 1 : 0,
+          cfCareValue: isCityShieldApplied ? 0 : isChecked ? 1 : 0,
           dealCodeNumber,
           month: selectedOptionPer.value,
         },
