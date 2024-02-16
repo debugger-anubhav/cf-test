@@ -2,24 +2,25 @@
   @apply font-Poppins my-12 xl:my-[88px];
 }
 .img_wrapper {
-  @apply relative w-full;
+  @apply relative w-full h-[270px] md:h-[320px] xl:h-auto;
 }
 .img {
   @apply min-w-full h-full;
 }
 .desc_div {
-  @apply absolute w-[336px] md:w-[400px] xl:w-[552px] h-fit px-4 xl:px-6 py-4 z-50 top-12 right-5 xl:right-[128px] overflow-hidden;
+  @apply mx-4 xl:mx-0  xl:w-[552px] h-fit px-4 xl:px-6 py-4 z-50 top-4 xl:top-12 right-5 xl:right-[128px] overflow-hidden;
+  position: absolute;
   background: rgba(255, 255, 255, 0.9);
 }
 .head {
   @apply text-16 md:text-20 xl:text-24 text-[#2A2A2A] font-semibold tracking-0.48 truncate;
 }
 .desc {
-  @apply xl:mt-3 hidden xl:flex text-71717A text-12 xl:text-16 tracking-0.24 xl:tracking-0.3;
+  @apply xl:mt-3 hidden xl:flex text-71717A text-12 xl:text-16 tracking-0.24 xl:tracking-0.3 line-clamp-2 xl:line-clamp-3;
   width: 100%;
   /* this code clamps based on specified lines */
-  overflow: hidden;
+  /* overflow: hidden;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 3; */
   display: -webkit-box;
 }
