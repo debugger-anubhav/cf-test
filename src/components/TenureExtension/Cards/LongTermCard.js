@@ -155,7 +155,7 @@ function LongTermCard({
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {
-          cfCareValue: isChecked ? 1 : 0,
+          cfCareValue: apiData?.isCityShieldApplied ? 0 : isChecked ? 1 : 0,
           dealCodeNumber,
           month: selectedOptionPer.value,
         },
@@ -168,7 +168,7 @@ function LongTermCard({
 
   useEffect(() => {
     getApiData();
-  }, [selectedOptionPer]);
+  }, [selectedOptionPer, isChecked]);
 
   return (
     <div className={styles.wrapper}>
