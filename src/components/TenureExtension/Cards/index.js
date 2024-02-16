@@ -39,7 +39,9 @@ function Cards({
   cardIndex,
   orderId,
   setLoading,
+  setSelectdMonth,
 }) {
+  console.log(data, "datatatatata");
   const calculatedPrice =
     data?.orignalPrice -
     ((data?.orignalPrice * items?.percent_off) / 100).toFixed(0);
@@ -69,6 +71,10 @@ function Cards({
   useEffect(() => {
     if (isChecked) setCityShieldDrawerOpen(false);
   }, [isChecked]);
+
+  useEffect(() => {
+    setSelectdMonth(selectedOptionPer.value);
+  }, [selectedOptionPer]);
 
   const cartTypeOneHandler = async (res, customerId, amount, recId) => {
     setLoading(true);
@@ -183,7 +189,7 @@ function Cards({
                 <Skeleton variant="text" className="flex" width={45} />
               </span>
             ) : (
-              calculatedPrice
+              <>{data?.discountedPrice}</>
             )}
             <span className={`${styles.price_span} font-normal font-Poppins`}>
               <span className="font-Inter"> ₹</span>
@@ -290,7 +296,8 @@ function Cards({
       <div>
         <p className={styles.total}>
           Total: <span className="font-Inter ml-1"> ₹</span>
-          {selectedOptionPer?.value * calculatedPrice}
+          {/* {selectedOptionPer?.value * calculatedPrice} */}
+          {data?.totalPrice}
           <span className={styles.total_span}>
             for {selectedOptionPer?.label}
           </span>
