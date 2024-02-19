@@ -26,7 +26,7 @@ import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import DeleteModal from "../Modal/DeleteModal";
 import "react-responsive-modal/styles.css";
 import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -313,8 +313,8 @@ const ShoppingCartSection = () => {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
+      const response = await baseInstance.get(
+        endPoints.profileSettingPage.getUserDetails(userId),
       );
 
       setUserDetails(response?.data?.data);

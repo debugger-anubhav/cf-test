@@ -3,8 +3,7 @@ import styles from "./styles.module.css";
 import {Close, ForwardArrowWithLine, ToggleOff, ToggleOn} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import {useRouter} from "next/navigation";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -31,8 +30,8 @@ const PastpaymentDrawer = ({
 
   const handleRedirectToPayment = async () => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.profileSettingPage.getUserDetails(userId),
+      const response = await baseInstance.get(
+        endPoints.profileSettingPage.getUserDetails(userId),
       );
 
       const queryParams = {
