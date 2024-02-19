@@ -6,7 +6,7 @@ import uploading from "@/assets/common_icons/uploading.jpg";
 import {cityUrl} from "../../../../appConfig";
 import DropDown from "../DropDown/DropDown";
 // import {Modal, createTheme, useMediaQuery} from "@mui/material";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 // import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {
@@ -72,7 +72,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
   const getAddProofList = () => {
     baseInstance
-      .get(baseURL + endPoints.addressProofList)
+      .get(endPoints.addressProofList)
       .then(res => {
         setDocsData(res?.data?.data);
       })

@@ -164,7 +164,7 @@ const SearchList = () => {
       </div>
 
       {/* sort by */}
-      <div className="relative flex my-8">
+      <div className="relative flex mb-4 xl:my-8">
         <p className="hidden md:flex items-center mr-2 text-71717A text-base">
           Sort By
         </p>
@@ -182,8 +182,8 @@ const SearchList = () => {
             </div>
             <div className="cursor-pointer">
               <DownPopUpArrow
-                size={20}
-                color={"#45454A"}
+                // size={20}
+                color={"#597492"}
                 className={sortOpen ? style.arrow_up : style.arrow_down}
               />
             </div>

@@ -50,3 +50,6 @@
 .banner_img {
   @apply w-full h-full cursor-pointer;
 }
+.img {
+  @apply rounded-lg;
+}
