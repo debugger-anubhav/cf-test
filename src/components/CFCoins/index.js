@@ -3,9 +3,9 @@ import styles from "./style.module.css";
 import DocSidebar from "@/components/Documentation/Sidebar/DocSidebar";
 import DebitTransactions from "./DebitTransactions";
 import CreditTransactions from "./CreditTransactions";
-import axios from "axios";
+
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
@@ -33,8 +33,8 @@ export default function CFCoins() {
     },
   ];
   const getTransactions = () => {
-    axios
-      .get(baseURL + endPoints.cfCoinsGetTransactions(userIdToUse))
+    baseInstance
+      .get(endPoints.cfCoinsGetTransactions(userIdToUse))
       // .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))
       .then(res => {
         const temp = res?.data?.data;
@@ -54,8 +54,8 @@ export default function CFCoins() {
       });
   };
   const fetchAvailCoins = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchCoins(userIdToUse))
       .then(res => {
         if (res?.data?.data?.length > 0)
           setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));

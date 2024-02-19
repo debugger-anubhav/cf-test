@@ -2,8 +2,7 @@ import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "./styles.module.css";
 import {IconLink, SadEmoji} from "@/assets/icon";
 import {getLocalStorage} from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "../../common/CommonContainer";
@@ -74,8 +73,8 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
       userId,
       filter,
     };
-    axios
-      .post(baseURL + endPoints.myOrdersPage.getAllOrders, body)
+    baseInstance
+      .post(endPoints.myOrdersPage.getAllOrders, body)
       .then(res => {
         console.log(res, "resss");
         setOrdersData(res?.data?.data);

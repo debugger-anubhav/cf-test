@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import AllOrders from "./partOne";
 import OrderDetails from "./partTwo";
@@ -11,8 +10,8 @@ const OrderPage = ({tab, setTab}) => {
 
   const getSingleOrderDetails = async orderNumber => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.myOrdersPage.getOrderStage(orderNumber),
+      const response = await baseInstance.get(
+        endPoints.myOrdersPage.getOrderStage(orderNumber),
       );
       setOrderData(response?.data?.data);
     } catch (err) {

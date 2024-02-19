@@ -296,7 +296,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
-        .post(baseURL + endPoints.uploadAddressDocs, allData)
+        .post(endPoints.uploadAddressDocs, allData)
         .then(res => {
           handleKycState(selectedOrderId);
         })

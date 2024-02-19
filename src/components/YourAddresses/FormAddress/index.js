@@ -5,7 +5,7 @@ import {ArrowForw, BackIcon} from "@/assets/icon";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {cityUrl} from "../../../../appConfig";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {useSelector} from "react-redux";
@@ -83,7 +83,7 @@ const FormAddress = ({setTab, tab, id}) => {
     };
 
     try {
-      await axios.post(baseURL + endPoints.addToCart.addAddress, headers);
+      await baseInstance.post(endPoints.addToCart.addAddress, headers);
     } catch (error) {
       console.error("Error adding data:", error);
     }
@@ -103,8 +103,8 @@ const FormAddress = ({setTab, tab, id}) => {
       phone: values.contactNumber.toString(),
     };
     try {
-      await axios.patch(
-        baseURL + endPoints.yourAddressPage.updateAddress,
+      await baseInstance.patch(
+        endPoints.yourAddressPage.updateAddress,
         headers,
       );
     } catch (error) {

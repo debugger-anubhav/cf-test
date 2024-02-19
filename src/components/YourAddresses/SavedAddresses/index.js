@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {AddIcon, DeleteIcon, EditIcon1} from "@/assets/icon";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getSavedAddress, reduxSetModalState} from "@/store/Slices";
@@ -27,8 +26,8 @@ const SavedAddress = ({setTab, editAddress}) => {
   };
 
   const getAllSavedAddresses = async () => {
-    await axios
-      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+    await baseInstance
+      .get(endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
         dispatch(getSavedAddress(res?.data?.data));
 

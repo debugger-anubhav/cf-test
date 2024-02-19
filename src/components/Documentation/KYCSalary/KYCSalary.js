@@ -149,7 +149,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     // allData.append("doc", formData.financialDocumentProof);
     allData.append("orderId", selectedOrderId);
     baseInstance
-      .post(baseURL + endPoints.uploadFinancialDoc, allData)
+      .post(endPoints.uploadFinancialDoc, allData)
       .then(res => {
         console.log(res);
         handleKycState(selectedOrderId);
