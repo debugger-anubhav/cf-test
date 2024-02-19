@@ -4,7 +4,7 @@ import commonStyles from "../common.module.css";
 import addressFormStyles from "../KYCAddress/KYCAddress.module.css";
 import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CheckFillIcon,
@@ -73,7 +73,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   console.log(docData, isSelected, "selecege");
   const getAddProofList = () => {
     baseInstance
-      .get(baseURL + endPoints.getFinacialDocList)
+      .get(endPoints.getFinacialDocList)
       .then(res => {
         setDocsData(res?.data?.data);
         setIsSelected(res?.data?.data?.supported_docs?.split(",")?.[0]);

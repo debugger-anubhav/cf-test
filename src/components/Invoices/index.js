@@ -13,9 +13,8 @@ import Accordian from "./Accordian";
 import PastpaymentDrawer from "./Drawer/PastpaymentDrawer";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
-import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import InvoicesSkeleton from "./InvoicesSkeleton";
 
 const InvoicePage = () => {
@@ -35,8 +34,8 @@ const InvoicePage = () => {
   const userId = decrypt(getLocalStorage("_ga"));
 
   const getInvoicesData = () => {
-    axios
-      .get(baseURL + endPoints.invoicesPage.getMyInvoices(userId, 1))
+    baseInstance
+      .get(endPoints.invoicesPage.getMyInvoices(userId, 1))
       .then(res => {
         console.log(res?.data, "responseee");
         setRows(res?.data?.data?.my_invoice);

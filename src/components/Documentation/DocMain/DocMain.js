@@ -10,9 +10,9 @@ import KYCSalary from "../KYCSalary/KYCSalary";
 import KYCAddress from "../KYCAddress/KYCAddress";
 import KYCCard from "../KYCCard/KYCCard";
 import KYC100 from "../KYC100/KYC100";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
+
 import {useDispatch, useSelector} from "react-redux";
 import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -39,8 +39,8 @@ const DocMain = () => {
 
   const handleKycState = async orderId => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.kycPage.getKycTrack(userid, orderId),
+      const response = await baseInstance.get(
+        endPoints.kycPage.getKycTrack(userid, orderId),
       );
       // console.log(response, "responsee");
       dispatch(getOrderId(orderId));

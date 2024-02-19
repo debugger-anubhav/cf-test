@@ -2,7 +2,7 @@
   @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
 }
 .container {
-  @apply hidden w-full xs:block;
+  @apply hidden w-full xl:block;
 }
 .listings {
   @apply flex w-full items-center flex-wrap list-none;
@@ -17,7 +17,7 @@
   @apply flex justify-center w-full h-auto;
 }
 .heading {
-  @apply hidden text-45454A font-Poppins text-24 font-medium leading-10 tracking-headingOne pt-6 pb-4 xs:block;
+  @apply hidden text-45454A font-Poppins text-24 font-medium leading-10 tracking-headingOne pt-6 pb-4 md:block;
   font-feature-settings: "ss02" on;
 }
 .category_wrapper {
@@ -36,10 +36,10 @@
   @apply text-71717A font-Poppins text-12 md:text-14 font-medium leading-normal md:leading-[20.274px] tracking-desc flex justify-center whitespace-nowrap;
 }
 .filter_sort_section {
-  @apply xs:flex hidden justify-between items-center pt-12;
+  @apply md:flex hidden justify-between items-center pt-12;
 }
 .filter_sort_section_mobile {
-  @apply xs:hidden flex justify-between items-center pt-4;
+  @apply md:hidden flex justify-between items-center pt-4;
 }
 .filter {
   @apply flex px-4 py-2  items-center gap-2 min-w-[85px] h-[34px] lg:min-w-[213px] lg:h-[40px] rounded-2xl border-[2px] border-[#71717A] relative cursor-pointer;
@@ -87,10 +87,10 @@
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
 }
 .single_filter {
-  @apply hidden px-4 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] w-fit h-[34px] lg:h-[40px] ms:flex cursor-pointer;
+  @apply hidden px-4 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] w-fit h-[34px] lg:h-[40px] md:flex cursor-pointer;
 }
 .single_filter_mobile {
-  @apply flex px-4 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] h-[34px] ms:hidden cursor-pointer;
+  @apply flex px-4 py-2 justify-center items-center gap-2 rounded-2xl border-[2px] border-71717A bg-[#FFF] h-[34px] md:hidden cursor-pointer;
 }
 .clear_All {
   @apply text-71717A font-Poppins text-12 ms:text-14 font-medium leading-6;
