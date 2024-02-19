@@ -62,7 +62,7 @@ const PaymentConfirmation = () => {
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
           <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>{oid}</p>
+          <p className={`font-medium ${styles.desc}`}>#{oid}</p>
         </div>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
