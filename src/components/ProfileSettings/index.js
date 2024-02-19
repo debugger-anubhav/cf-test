@@ -63,9 +63,8 @@ const ProfileSettings = () => {
 
   const fetchUserDetails = async () => {
     try {
-      const response = await axios.get(
-        baseURL +
-          endPoints.profileSettingPage.getUserDetails(useridFromStorage),
+      const response = await baseInstance.get(
+        endPoints.profileSettingPage.getUserDetails(useridFromStorage),
       );
       setLoadingSkeleton(false);
       setUserDetails({...response?.data?.data});

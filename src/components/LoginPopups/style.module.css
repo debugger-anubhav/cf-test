@@ -103,7 +103,7 @@
   @apply mt-6 text-71717A font-medium text-16 rounded-lg border-2 border-71717A flex justify-center items-center h-14 px-8 w-full;
 }
 .yellow_proceed_button {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 
 @media only screen and (max-width: 768px) {
