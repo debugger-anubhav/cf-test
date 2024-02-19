@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrow} from "@/assets/icon";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import CancelOrder from "./CancelOrder";
 import CancelMandate from "./CancelMandate";
@@ -44,10 +43,8 @@ function ServiceRequestType({
   };
 
   const getProductLists = () => {
-    axios
-      .get(
-        baseURL + endPoints.serviceRequestPage.getProductLists(orderId, userId),
-      )
+    baseInstance
+      .get(endPoints.serviceRequestPage.getProductLists(orderId, userId))
       .then(res => {
         setProductDetail(res?.data?.data);
       })
