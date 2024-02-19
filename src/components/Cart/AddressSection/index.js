@@ -393,7 +393,10 @@ const AddressSection = () => {
         console.log(res, "res in offlinePayment");
         if (res?.data?.data?.success === "1") {
           showToastNotification("Advanced payment is done successfully.", 1);
-          router.push("/");
+          // router.push("/");
+          setTimeout(() => {
+            router.push("/purchases");
+          }, 3000);
         } else showToastNotification(res?.data?.data?.msg, 3);
       })
       .catch(err => console.log(err));

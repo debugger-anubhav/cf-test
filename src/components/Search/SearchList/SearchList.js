@@ -164,7 +164,7 @@ const SearchList = () => {
       </div>
 
       {/* sort by */}
-      <div className="relative flex mb-4 xl:my-8">
+      <div className="relative flex  xl:mt-8">
         <p className="hidden md:flex items-center mr-2 text-71717A text-base">
           Sort By
         </p>
@@ -200,7 +200,7 @@ const SearchList = () => {
       </div>
 
       {/* Horizontal line */}
-      <div className="bg-DDDDDF h-[2px] w-full"></div>
+      <div className="bg-DDDDDF mb-[10px] mt-[26px] xl:my-9 h-[2px] w-full"></div>
 
       {searchData?.length ? (
         <div>
