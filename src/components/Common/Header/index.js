@@ -80,7 +80,6 @@ const Header = () => {
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-
   useEffect(() => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
@@ -93,6 +92,7 @@ const Header = () => {
   const toggleEmptyCartModal = bool => {
     dispatch(reduxSetModalState(bool));
     setEmptyModal(bool);
+    console.log(click);
   };
 
   const cityId = getLocalStorage("cityId");
@@ -152,7 +152,10 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
+  console.log(cartItemsLength, wishListCount, "kkk");
+
   const getSavedItems = userIdToUse => {
+    console.log(baseInstance, "base instanec");
     baseInstance
       .get(endPoints.savedItems + `?cityId=${cityId}&userId=${userIdToUse}`)
       .then(res => {
@@ -279,10 +282,6 @@ const Header = () => {
         setIsLogin={bool => {
           setIsLogin(bool);
           // dispatch(setLoginState(bool));
-        }}
-        handleChangeRoute={() => {
-          if (click === "profile") router.push(`/usersettings`);
-          else if (click === "wishlist") router.push(`/wishlist`);
         }}
       />
       <EmptyCartModal

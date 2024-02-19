@@ -16,9 +16,11 @@ const baseInstance = axios.create({
 });
 // const fetchedToken = "abcdjdyhsi";
 // const token = fetchedToken || null;
-
+console.log(authToken, "tokenn");
 baseInstance.interceptors.request.use(config => {
-  config.headers.Authorization = authToken;
+  if (!config.headers.Authorization) {
+    config.headers.Authorization = authToken;
+  }
   return config;
 });
 

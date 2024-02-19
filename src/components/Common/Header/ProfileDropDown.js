@@ -75,7 +75,8 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 localStorage.removeItem("ci_session");
                 setShowProfileDropdown(false);
                 dispatch(setShoppingCartTab(0));
-                router.push("/");
+                // router.push("/");
+                window.open("/", "_self");
               }
             }}>
             {ele.item}
