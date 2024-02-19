@@ -24,7 +24,7 @@ import {
 } from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
 import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CityToStateMapping,
@@ -150,8 +150,8 @@ const AddressSection = () => {
   };
 
   const getAllSavedAddresses = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
         dispatch(getSavedAddress(res?.data?.data));
         const newPrimaryAddress = res?.data?.data.find(item =>
@@ -175,8 +175,8 @@ const AddressSection = () => {
         phoneNo: parseInt(values.contactNumber),
       };
 
-      axios
-        .post(baseURL + endPoints.addToCart.addAddress, headers)
+      baseInstance
+        .post(endPoints.addToCart.addAddress, headers)
         .then(response => {
           resolve("hii");
         })
@@ -280,7 +280,7 @@ const AddressSection = () => {
       return;
     }
 
-    const result = await axios.post(baseURL + endPoints.addToCart.makePayment, {
+    const result = await baseInstance.post(endPoints.addToCart.makePayment, {
       userId,
       cityshield: data.isCityShield,
       cityId,
@@ -387,8 +387,8 @@ const AddressSection = () => {
       payment_type: 1,
       userId: parseInt(userIdToUse),
     };
-    axios
-      .post(baseURL + endPoints.addToCart.offlinePayment, body)
+    baseInstance
+      .post(endPoints.addToCart.offlinePayment, body)
       .then(res => {
         console.log(res, "res in offlinePayment");
         if (res?.data?.data?.success === "1") {

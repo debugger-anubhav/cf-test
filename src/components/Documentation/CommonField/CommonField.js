@@ -1,8 +1,7 @@
 import React, {useState, useEffect} from "react";
 
 import DropDown from "../DropDown/DropDown";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -21,8 +20,8 @@ const CommonField = ({handleKycState}) => {
   const userid = decrypt(getLocalStorage("_ga"));
 
   const getAllOrderIds = () => {
-    axios
-      .get(baseURL + endPoints.kycPage.getOrderIds(userid))
+    baseInstance
+      .get(endPoints.kycPage.getOrderIds(userid))
       .then(res => {
         setOptions(res?.data?.data);
       })

@@ -3,8 +3,8 @@ import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {format, parse} from "date-fns";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -38,8 +38,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       deal_id: orderId,
       user_id: userId,
     };
-    axios
-      .post(baseURL + endPoints.myOrdersPage.getDeliverySlots, body)
+    baseInstance
+      .post(endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
@@ -62,8 +62,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       zohoCaseId: slotData?.zohoCaseId,
     };
     try {
-      const response = await axios.post(
-        baseURL + endPoints.myOrdersPage.updateSlot,
+      const response = await baseInstance.post(
+        endPoints.myOrdersPage.updateSlot,
         body,
       );
       console.log(response, "responeseee");
