@@ -11,26 +11,27 @@ const Payments = ({rows, loadingSkeleton}) => {
   const handleShowMore = () => {
     setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
   };
-  return (
-    <>
-      <p className={styles.sub_head}>Payments</p>
-      <div className={styles.web}>
-        <PaymentTable
-          rows={rows}
-          visibleRows={visibleRows}
-          handleShowMore={handleShowMore}
-          loadingSkeleton={loadingSkeleton}
-        />
-      </div>
-      <div className={styles.mobile}>
-        <PaymentAccordian
-          rows={rows}
-          visibleRows={visibleRows}
-          handleShowMore={handleShowMore}
-        />
-      </div>
-    </>
-  );
+  if (rows?.length > 0)
+    return (
+      <>
+        <p className={styles.sub_head}>Payments</p>
+        <div className={styles.web}>
+          <PaymentTable
+            rows={rows}
+            visibleRows={visibleRows}
+            handleShowMore={handleShowMore}
+            loadingSkeleton={loadingSkeleton}
+          />
+        </div>
+        <div className={styles.mobile}>
+          <PaymentAccordian
+            rows={rows}
+            visibleRows={visibleRows}
+            handleShowMore={handleShowMore}
+          />
+        </div>
+      </>
+    );
 };
 
 export default Payments;

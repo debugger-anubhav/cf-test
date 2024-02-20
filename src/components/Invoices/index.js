@@ -60,18 +60,6 @@ const InvoicePage = () => {
 
   const AmountDue = getTotalAmountDue();
 
-  const handleDownload = invoiceUrl => {
-    // Create a hidden anchor element
-    const anchor = document.createElement("a");
-    anchor.href = invoiceUrl;
-    anchor.download = "invoice.pdf";
-    document.body.appendChild(anchor);
-
-    anchor.click();
-
-    document.body.removeChild(anchor);
-  };
-
   const handleShowMore = () => {
     setVisibleRows(prevVisibleRows => prevVisibleRows + 10);
   };
@@ -201,11 +189,16 @@ const InvoicePage = () => {
                           : "Payment Due"}
                       </TableCell>
                       <TableCell className={`!flex gap-4 ${styles.tableCell}`}>
-                        <button
-                          onClick={() => handleDownload(row.invoice_url)}
-                          className={styles.download_btn}>
-                          Download
-                        </button>
+                        <a
+                          href={row.invoice_url}
+                          target="_blank"
+                          rel="noreferrer">
+                          <button
+                            // onClick={() => handleDownload(row.invoice_url)}
+                            className={styles.download_btn}>
+                            Download
+                          </button>
+                        </a>
                         <button
                           disabled={row.current_sub_status === "paid"}
                           onClick={() => {
@@ -243,9 +236,14 @@ const InvoicePage = () => {
             setInvoiceNumber={val => setInvoiceNumber(val)}
             toggleDrawer={toggleDrawer}
             setAmountToPay={val => setAmountToPay(val)}
-            handleDownload={url => handleDownload(url)}
           />
         </div>
+
+        {!loadingSkeleton && rows.length === 0 && (
+          <p className={styles.no_invoices_txt}>
+            When you place an order successfully, invoice will be shown here.
+          </p>
+        )}
       </div>
     </div>
   );

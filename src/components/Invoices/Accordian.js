@@ -73,11 +73,13 @@ const Accordian = ({
               </span>
             </Typography>
             <div className="flex gap-4 mt-1">
-              <button
-                onClick={() => handleDownload(row.invoice_url)}
-                className={styles.download_btn}>
-                Download
-              </button>
+              <a href={row.invoice_url} target="_blank" rel="noreferrer">
+                <button
+                  // onClick={() => handleDownload(row.invoice_url)}
+                  className={styles.download_btn}>
+                  Download
+                </button>
+              </a>
               <button
                 disabled={row.current_sub_status === "paid"}
                 onClick={() => {

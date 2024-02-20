@@ -274,9 +274,11 @@ function LongTermCard({
         </div>
       )}
       <CityShieldDrawerForCart
-        cityShieldCurrentPrice={calculatedPrice}
-        cityShieldOriginalPrice={apiData?.orignalPrice}
-        cityShieldDiscount={items?.percent_off}
+        cityShieldCurrentPrice={apiData?.cityShieldAmount}
+        cityShieldOriginalPrice={parseInt(
+          (apiData?.cityShieldAmount * 10) / 6,
+        ).toFixed(2)}
+        cityShieldDiscount={40}
         toggleDrawer={toggleDrawerCityShield}
         open={cityShieldDrawerOpen}
         toggleCheckbox={bool => setIsChecked(bool)}
