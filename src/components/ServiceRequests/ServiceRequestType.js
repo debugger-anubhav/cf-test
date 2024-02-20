@@ -76,7 +76,7 @@ function ServiceRequestType({
   return (
     <>
       {currentScreen ? (
-        <div className={styles.content_wrapper}>
+        <div className={`${styles.content_wrapper} !pb-4`}>
           <div className={styles.main_heading}>
             {!isHelpDrawer && (
               <BackIcon

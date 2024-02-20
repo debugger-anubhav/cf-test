@@ -152,7 +152,8 @@ function Relocation({prevScreen, data}) {
               <div className="relative">
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Alternative number</p>
-                  <div className={`${styles.row} ${formStyles.form_input}`}>
+                  <div
+                    className={`${styles.row} ${formStyles.form_input} flex items-center`}>
                     <div className="flex gap-2 items-center">
                       <img
                         src={`${cityUrl + "india-icon.svg"}`}
@@ -306,7 +307,7 @@ function Relocation({prevScreen, data}) {
                     className={`${
                       formStyles.form_input
                     } flex items-center !h-full cursor-pointer ${
-                      formik.values.currentAddressProof && "!max-w-[95%] !w-fit"
+                      formik.values.currentAddressProof && "!max-w-[95%] w-fit"
                     } `}>
                     <div className={`flex w-full flex-col `}>
                       <div className="flex items-center">
