@@ -446,27 +446,62 @@ const ProductDetails = ({params}) => {
   }, []);
 
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isScrollingForThumnail, setIsScrollingForThumnail] = useState(false);
   const [startX, setStartX] = useState(null);
   const scrollContainerRef = useRef(null);
+  const scrollContainerRefForThumbnail = useRef(null);
 
   const handleMouseDown = e => {
+    console.log("in mouse down");
     setIsScrolling(true);
     setStartX(e.clientX);
   };
 
+  const handleMouseDownForThumnail = e => {
+    console.log("in mouse down");
+    setIsScrollingForThumnail(true);
+    setStartX(e.clientX);
+  };
+
   const handleMouseMove = e => {
+    console.log("inn");
     if (!isScrolling) return;
 
     const deltaX = e.clientX - startX;
     if (scrollContainerRef.current) {
+      console.log(1);
       scrollContainerRef.current.scrollLeft -= deltaX;
     }
+    // if (scrollContainerRefForThumbnail.current) {
+    //   scrollContainerRef.current.scrollLeft -= deltaX;
+    // }
+
+    setStartX(e.clientX);
+  };
+
+  const handleMouseMoveThumbnail = e => {
+    // console.log("inn");
+    if (!isScrollingForThumnail) return;
+
+    const deltaX = e.clientX - startX;
+    if (scrollContainerRefForThumbnail.current) {
+      console.log(1);
+      scrollContainerRefForThumbnail.current.scrollLeft -= deltaX;
+    }
+    // if (scrollContainerRefForThumbnail.current) {
+    //   scrollContainerRef.current.scrollLeft -= deltaX;
+    // }
 
     setStartX(e.clientX);
   };
 
   const handleMouseUp = () => {
+    console.log("in mouse upp");
     setIsScrolling(false);
+  };
+  const handleMouseUpForThumbnail = () => {
+    console.log("in mouse upp");
+    setIsScrollingForThumnail(false);
   };
 
   return (
@@ -579,7 +614,16 @@ const ProductDetails = ({params}) => {
             ))}
           </Carousel>
 
-          <div className={styles.thumbnail_container}>
+          <div
+            className={styles.thumbnail_container}
+            ref={scrollContainerRefForThumbnail}
+            // onMouseOver={()=>{
+            //   handleScrolling()
+            // }}
+            onMouseDown={handleMouseDownForThumnail}
+            onMouseMove={handleMouseMoveThumbnail}
+            onMouseUp={handleMouseUpForThumbnail}
+            onMouseLeave={handleMouseUpForThumbnail}>
             {prodDetails?.[0]?.image?.split(",")?.map((image, index) => (
               <>
                 {image && (

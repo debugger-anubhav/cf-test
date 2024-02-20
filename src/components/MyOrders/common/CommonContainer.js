@@ -103,9 +103,8 @@ const CommonContainer = ({
                 href={"https://wa.me/919205006188"}
                 target="_blank"
                 rel="noopener  noreferrer"
-                aria-label="Talk to an agent"
-                className={styles.help_txt}>
-                Chat with us
+                aria-label="Talk to an agent">
+                <p className={styles.help_txt}>Chat with us</p>
               </a>
             ) : (
               item.status.toLowerCase() !== "inactive" && (

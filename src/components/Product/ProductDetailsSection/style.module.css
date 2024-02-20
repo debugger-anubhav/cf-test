@@ -37,10 +37,12 @@
   @apply right-2;
 }
 .thumbnail_container {
-  @apply hidden lg:flex gap-4  mt-6;
+  @apply hidden lg:flex gap-4 w-full overflow-scroll mt-6;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .thumbnail_img {
-  @apply p-1 w-[8rem] 4xl:w-[10rem] h-[5.6rem] 4xl:h-[7rem] border-[2.497px] cursor-pointer;
+  @apply p-1 min-w-[7.1rem] 4xl:min-w-[10rem] h-[5.6rem] 4xl:h-[7rem] border-[2.497px] cursor-pointer;
 }
 .header_div {
   @apply flex gap-2;

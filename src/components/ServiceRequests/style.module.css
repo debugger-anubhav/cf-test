@@ -129,10 +129,10 @@
 /* additional */
 
 .additional_content {
-  @apply mt-12 text-20 tracking-0.4 text-45454A font-medium;
+  @apply mt-12 text-20 tracking-0.4 text-45454A font-medium font-Poppins;
 }
 .download_btn {
-  @apply cursor-pointer mt-8 flex justify-center h-12 xl:h-14 px-8 items-center rounded-lg border-2 border-71717A text-14 xl:text-16 font-medium text-71717A leading-5;
+  @apply font-Poppins cursor-pointer mt-8 flex justify-center h-12 xl:h-14 px-8 items-center rounded-lg border-2 border-71717A text-14 xl:text-16 font-medium text-71717A leading-5;
 }
 .plain_btn {
   @apply border-2 px-8 lg:h-[56px] h-[48px] items-center md:w-[393px] w-[95%] border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center my-8;
