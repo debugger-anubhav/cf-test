@@ -152,8 +152,6 @@ const Header = () => {
     state => state.cartPageData.cartItems.length,
   );
 
-  console.log(cartItemsLength, wishListCount, "kkk");
-
   const getSavedItems = userIdToUse => {
     console.log(baseInstance, "base instanec");
     baseInstance

@@ -145,7 +145,6 @@ const PastpaymentDrawer = ({
           <button
             className={styles.btn}
             onClick={() => {
-              console.log(isCoinApplied, "kkk");
               dispatch(getCoinsState(isCoinApplied));
               dispatch(
                 getAvailableCoins(

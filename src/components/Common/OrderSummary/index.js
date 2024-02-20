@@ -54,7 +54,6 @@ const OrderSummary = ({
           setData(res?.data?.data);
           if (res?.data?.data?.productsList?.length === 0) router.push("/");
           else {
-            console.log("in kkkk");
             dispatch(getBillDetails(res?.data?.data?.bill));
             setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
           }

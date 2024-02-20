@@ -7,6 +7,8 @@ import Select from "react-select";
 import {CreateRequestPayload} from "@/constants/constant";
 import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 function Repair({prevScreen, data}) {
   const selectedType = useSelector(
@@ -17,14 +19,15 @@ function Repair({prevScreen, data}) {
     data.map(() => ({istoggled: false, selected: null, detail: null})),
   );
   const {trailCreateSR} = CommonCreateRequestApi();
-
-  const repairOptions = [
-    {value: "1", label: "Wrong items selected"},
-    {value: "2", label: "Late delivery"},
-    {value: "3", label: "Want to buy items"},
-    {value: "4", label: "Items not required anymore"},
-    {value: "5", label: "Other"},
-  ];
+  const [repairOptions, setRepairOptions] = useState(null);
+  const getRepairOption = productName => {
+    baseInstance
+      .get(endPoints.serviceRequestPage.getRepairOptions(productName))
+      .then(res => {
+        setRepairOptions(res?.data?.data);
+      })
+      .catch(err => console.log(err));
+  };
 
   const handleChange = (selectedOption, index) => {
     setToggleStates(prevStates =>
@@ -111,13 +114,18 @@ function Repair({prevScreen, data}) {
                 <ToggleOff
                   size={28}
                   color={"#E3E1DC"}
-                  onClick={() => handleToggle(index)}
+                  onClick={() => {
+                    handleToggle(index);
+                    console.log("first");
+                    // getRepairOption('Alexa Single Bed');
+                    getRepairOption(item?.product_name);
+                  }}
                   className="cursor-pointer"
                 />
               )}
               <p className={styles.desc}>{item?.product_name}</p>
             </div>
-            {toggleStates[index].istoggled && (
+            {toggleStates[index].istoggled && repairOptions?.length > 0 && (
               <div>
                 <div className="mt-4 flex flex-col">
                   <p className={styles.desc}>Reason for repair</p>

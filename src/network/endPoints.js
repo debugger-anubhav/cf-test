@@ -207,6 +207,8 @@ export const endPoints = {
     getProductLists: (dealCodeNumber, userId) =>
       `fc-payments/getProductLists?dealCodeNumber=${dealCodeNumber}&userId=${userId}`,
     createRequest: "fc-zoho-crms/submitServiceRequest",
+    getRepairOptions: productName =>
+      `fc-product-repairs/getRepairReasonList?productName=${productName}`,
   },
 
   login: {
