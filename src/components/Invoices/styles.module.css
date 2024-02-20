@@ -65,6 +65,9 @@
 .web {
   @apply hidden xl:block;
 }
+.no_invoices_txt {
+  @apply mt-6 xl:mt-8 text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3 leading-6;
+}
 
 /* for mobile */
 .mobile {

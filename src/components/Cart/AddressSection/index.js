@@ -369,6 +369,7 @@ const AddressSection = () => {
   }
 
   const handleOfflineOrder = values => {
+    setLoading(true);
     const body = {
       user_name: values.fullName,
       email: values.email,
@@ -384,22 +385,26 @@ const AddressSection = () => {
       cf_care_option: data.isCityShield ? 1 : 0,
       order_type: values.orderType,
       order_number: values.orderNumber || "",
-      payment_type: 1,
+      payment_type: getLocalStorage("isMonthly") === true ? 0 : 1,
       userId: parseInt(userIdToUse),
     };
     baseInstance
       .post(endPoints.addToCart.offlinePayment, body)
       .then(res => {
         console.log(res, "res in offlinePayment");
+        setLoading(false);
         if (res?.data?.data?.success === "1") {
           showToastNotification("Advanced payment is done successfully.", 1);
           // router.push("/");
           setTimeout(() => {
             router.push("/purchases");
-          }, 3000);
+          }, 4000);
         } else showToastNotification(res?.data?.data?.msg, 3);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        setLoading(false);
+        console.log(err);
+      });
   };
   const fetchCartItems = (userIdToUse, val) => {
     axios
