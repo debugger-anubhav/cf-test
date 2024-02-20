@@ -23,18 +23,22 @@ export const customStylesForSelect = {
       border: "1px solid #71717A",
     },
   }),
-  option: (base, state) => ({
-    ...base,
-    color: state.isSelected ? "#5774AC" : "#222",
-    backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
-    "&:hover": {
-      cursor: "pointer",
-      backgroundColor: "#EFF5FF",
-      color: "#5774AC",
-    },
-    fonetSize: "16px",
-    borderBottom: "1px solid #DDDDDF",
-  }),
+  option: (base, state) => {
+    const isLastOption =
+      state.options.indexOf(state.data) === state.options.length - 1;
+    return {
+      ...base,
+      color: state.isSelected ? "#5774AC" : "#222",
+      backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
+      "&:hover": {
+        cursor: "pointer",
+        backgroundColor: "#EFF5FF",
+        color: "#5774AC",
+      },
+      fonetSize: "16px",
+      borderBottom: isLastOption ? "none" : "1px solid #DDDDDF",
+    };
+  },
 };
 
 function CencelOrder({prevScreen, data}) {

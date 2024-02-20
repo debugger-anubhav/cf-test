@@ -113,7 +113,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     }
   };
   const submitHandler = () => {
-    console.log("imnn clickkk");
     const error = formErrors;
     if (!formData?.financialDocumentProof?.length > 0) {
       error.financialDocumentProof = "Please upload the salary slip proof";

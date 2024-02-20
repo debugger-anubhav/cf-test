@@ -48,7 +48,6 @@ const ModalContentForNumber = ({
         }}>
         {formik => (
           <Form>
-            {console.log(formik, "formikkk")}
             <div className={styles.form_input}>
               <div className="flex justify-center gap-2">
                 <img
