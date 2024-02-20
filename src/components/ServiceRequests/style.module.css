@@ -32,7 +32,7 @@
   @apply md:p-12 px-4 py-6 pr-8 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
 }
 .content_wrapper {
-  @apply flex w-full flex-col pb-[80px] overflow-scroll h-full;
+  @apply flex w-full flex-col sm:pb-[50px] pb-[55px] overflow-scroll h-full;
 }
 .main_heading {
   @apply flex font-Poppins font-medium text-24 leading-[32px] w-full gap-2 text-45454A items-center;
