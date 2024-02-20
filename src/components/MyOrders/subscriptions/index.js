@@ -12,6 +12,7 @@ const SubscriptionPage = ({tab, setTab}) => {
   const dispatch = useDispatch();
   const [part, setPart] = useState(1);
   const [subscriptionData, setsubscriptionData] = useState();
+  const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const userId = decrypt(getLocalStorage("_ga"));
   console.log(userId);
@@ -28,8 +29,10 @@ const SubscriptionPage = ({tab, setTab}) => {
       );
       console.log(response);
       setsubscriptionData(response?.data?.data);
+      setSkeletonLoading(false);
     } catch (err) {
       console.log(err);
+      setSkeletonLoading(false);
     }
     // setPart(2);
   };
@@ -50,6 +53,7 @@ const SubscriptionPage = ({tab, setTab}) => {
             setPart(2);
           }}
           getAllSubscriptionDetails={getAllSubscriptionDetails}
+          skeletonLoading={skeletonLoading}
         />
       ) : (
         <SubscriptionDetails
