@@ -9,7 +9,11 @@ import {baseInstance, baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import axios from "axios";
 import {useSelector} from "react-redux";
-import {getLocalStorage, keyPressForContactField} from "@/constants/constant";
+import {
+  getLocalStorage,
+  handleWheel,
+  keyPressForContactField,
+} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 // import CommonDrawer from "@/components/Common/Drawer";
@@ -209,6 +213,7 @@ const FormAddress = ({setTab, tab, id}) => {
                     <Field
                       type="number"
                       onKeyPress={keyPressForContactField}
+                      onWheel={handleWheel}
                       // readOnly
                       name="contactNumber"
                       placeholder="Enter 10 digit number "
@@ -264,6 +269,7 @@ const FormAddress = ({setTab, tab, id}) => {
                     <Field
                       type="number"
                       onKeyPress={keyPressForContactField}
+                      onWheel={handleWheel}
                       name="postalCode"
                       placeholder="Enter 6 digit postal code"
                       className={formStyles.form_input}

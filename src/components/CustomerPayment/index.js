@@ -14,6 +14,7 @@ import {
 import {decrypt} from "@/hooks/cryptoUtils";
 import {
   getLocalStorage,
+  handleWheel,
   keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
@@ -442,6 +443,7 @@ function CustomerPayment() {
                       <Field
                         type="number"
                         onKeyPress={keyPressForContactField}
+                        onWheel={handleWheel}
                         name="amount"
                         placeholder="Enter the amount to be paid"
                         className={styles.form_input}

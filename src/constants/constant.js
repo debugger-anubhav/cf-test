@@ -27,6 +27,16 @@ export const keyPressForContactField = event => {
   }
 };
 
+export const handleKeyDown = event => {
+  if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+    event.preventDefault();
+  }
+};
+
+export const handleWheel = event => {
+  event.target.blur();
+};
+
 export const RentFurniture = [
   {
     img: HomePageImages.bedroom,
