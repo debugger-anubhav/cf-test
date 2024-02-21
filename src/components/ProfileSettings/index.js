@@ -231,7 +231,7 @@ const ProfileSettings = () => {
                             Contact number
                           </p>
                           <div
-                            className={`!cursor-not-allowed  ${styles.row} ${formStyles.form_input}`}>
+                            className={`!cursor-not-allowed  ${styles.row} ${formStyles.form_input} flex`}>
                             <div className="!cursor-not-allowed  flex gap-2 items-center">
                               <img
                                 src={`${cityUrl + "india-icon.svg"}`}
