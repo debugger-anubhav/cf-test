@@ -7,8 +7,7 @@ import formStyles from "../Cart/AddressSection/styles.module.css";
 import {cityUrl} from "../../../appConfig";
 import {AddressDrawerContent} from "../Cart/Drawer/SaveAddressesDrawer";
 import {getSavedAddress} from "@/store/Slices";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {
@@ -94,8 +93,8 @@ function TransferOwnership({prevScreen, data}) {
   };
 
   const getAllSavedAddresses = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchSavedAddress(userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchSavedAddress(userIdToUse))
       .then(res => {
         dispatch(getSavedAddress(res?.data?.data));
         const newPrimaryAddress = res?.data?.data.find(

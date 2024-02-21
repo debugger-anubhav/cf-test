@@ -106,7 +106,7 @@ function CustomerPayment() {
           setAvailableCoins(
             amountParam - availAmount > 0
               ? 0
-              : Math.abs(amountParam - availAmount),
+              : Math.abs(amountParam - availAmount) + 1,
           );
         } else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
         // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
@@ -537,7 +537,7 @@ function CustomerPayment() {
                                       ? 0
                                       : Math.abs(
                                           formik.values.amount - topupAmount,
-                                        ),
+                                        ) + 1,
                                   );
                                   // setFormData({
                                   //   ...formData,
