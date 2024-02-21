@@ -78,7 +78,7 @@
   @apply flex justify-between items-center cursor-pointer py-4 w-full;
 }
 .form_input_textarea {
-  @apply w-full text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1 font-Poppins;
+  @apply w-full text-14 tracking-[-0.28px] xl:text-16 xl:tracking-[-0.32px] outline-none hover:border-71717A px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3 mt-1 font-Poppins resize-none leading-[24px];
 }
 .form_label {
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal mt-8 mb-1 font-Poppins;

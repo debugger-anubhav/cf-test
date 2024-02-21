@@ -75,7 +75,7 @@ function CancelMandate({prevScreen, data, heading}) {
             <div className={styles.cancellation_info}>
               <div className={"mt-4"}>
                 <p className={formStyles.form_label}>Alternative number</p>
-                <div className={`${styles.row} ${formStyles.form_input}`}>
+                <div className={`${styles.row} ${formStyles.form_input} flex`}>
                   <div className="flex gap-2 items-center">
                     <img
                       src={`${cityUrl + "india-icon.svg"}`}
@@ -104,11 +104,11 @@ function CancelMandate({prevScreen, data, heading}) {
               </div>
 
               <p className={styles.form_label}>Your comment (optional)</p>
-              <input
-                type="text"
+              <textarea
                 placeholder="Please share any specific instructions or provide feedback."
                 className={styles.form_input_textarea}
                 onChange={e => setDescription(e.target.value)}
+                rows={2}
               />
               <button
                 type="submit"

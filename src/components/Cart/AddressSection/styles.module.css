@@ -56,10 +56,10 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
 }
 .form_input {
-  @apply w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16  outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1;
+  @apply w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16  outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1 resize-none;
 }
 .form_input_textarea {
-  @apply placeholder:text-left -mb-[7px] w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1;
+  @apply placeholder:text-left -mb-[7px] w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 resize-none mt-1;
 }
 .contact_input {
   @apply tracking-desc xl:tracking-0.3 text-14 xl:text-16 w-full border-none outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3;
