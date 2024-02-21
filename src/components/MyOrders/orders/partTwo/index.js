@@ -160,7 +160,7 @@ const OrderDetails = ({setPart, data}) => {
                   isUnhappyCustomeFlow && styles.drawer_disabled_button
                 } ${styles.drawer_button}`}
                 onClick={() => {
-                  if (checkStatus === "complete kyc now") {
+                  if (checkStatus === "kyc in progress") {
                     dispatch(setOrderIdFromOrderPage(data?.order_id));
                     router.push("/documentation");
                   } else if (checkStatus === "delivery scheduled") {
