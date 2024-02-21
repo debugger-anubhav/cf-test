@@ -68,11 +68,11 @@ function ChangeBillCycle({prevScreen, data}) {
         </div>
         <div className="mt-8">
           <p className={styles.desc}>Your comment (optional)</p>
-          <input
-            type="text"
+          <textarea
             placeholder="Please share any specific instructions or provide feedback."
             className={styles.form_input_textarea}
             onChange={e => setDescription(e.target.value)}
+            rows={2}
           />
         </div>
         <button
