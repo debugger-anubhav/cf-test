@@ -14,15 +14,55 @@ function PickupReasonOptions({
   const [currentScreen, setCurrentScreen] = useState(1);
 
   const PickupReasons = [
-    {title: "Faced problems in service", btnName: "Repair product(s)"},
-    {title: "Faced problems in products", btnName: "Repair product(s)"},
-    {title: "Moving out of country", btnName: "Ownership transfer"},
-    {title: "Moving to other city", btnName: "Relocation"},
-    {title: "Want to purchase things now", btnName: "Buy product(s)"},
-    {title: "Moving to fully furnished property", btnName: "Buy product(s)"},
-    {title: "Did not like the products", btnName: "Swap product(s)"},
-    {title: "Requirement Fulfilled", btnName: "Create request"},
-    {title: "Other", btnName: "Create request"},
+    {
+      title: "Faced problems in service",
+      btnName: "Repair product(s)",
+      subTitle: "We are sorry to hear that. This is what we can offer.",
+    },
+    {
+      title: "Faced problems in products",
+      btnName: "Repair product(s)",
+      subTitle: "We are sorry to hear that. This is what we can offer.",
+    },
+    {
+      title: "Moving out of country",
+      btnName: "Ownership transfer",
+      subTitle:
+        "That’s great news, wish you a happy journey. If you like our services, you can refer to your friends and family.",
+    },
+    {
+      title: "Moving to other city",
+      btnName: "Relocation",
+      subTitle:
+        "We are happy to introduce you our intra or intercity relocation services within our serviceable metro cities.",
+    },
+    {
+      title: "Want to purchase things now",
+      btnName: "Buy product(s)",
+      subTitle:
+        "Buy our ECO-FRIENDLY AND BUYBACK GUARANTEED home furniture at Zior",
+    },
+    {
+      title: "Moving to fully furnished property",
+      btnName: "Buy product(s)",
+      subTitle:
+        "Now you can swap your existing products with our wide range of products/furniture for your new home.",
+    },
+    {
+      title: "Did not like the products",
+      btnName: "Swap product(s)",
+      subTitle: "We are sorry to hear that. This is what we can offer.",
+    },
+    {
+      title: "Requirement Fulfilled",
+      btnName: "Create request",
+      subTitle: "Please share your valuable feedback with us.",
+    },
+    {
+      title: "Other",
+      btnName: "Create request",
+      subTitle: "Please share your valuable feedback with us.",
+    },
   ];
 
   return (
@@ -30,7 +70,7 @@ function PickupReasonOptions({
       {showCommonPickupScreen && currentScreen === 2 ? (
         <PickupReasonCommonScreen
           reason={selectedPickupReason}
-          subTitle={"We are sorry to hear that. This is what we can offer."}
+          subTitle={selectedPickupReason.subTitle}
           setCurrentScreen={setCurrentScreen}
           selectedProducts={selectedProducts}
           data={data}
