@@ -7,6 +7,7 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "../../common/CommonContainer";
 import Header from "../../common/Header";
+import {Skeleton} from "@mui/material";
 
 const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   const containerRef = useRef(null);
@@ -14,6 +15,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   const [ordersData, setOrdersData] = useState([]);
   const [visibleImages, setVisibleImages] = useState(5); // Initial number of visible images
   const [containerWidth, setContainerWidth] = useState(0);
+  const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const MenuList0 = [
     {label: "All orders"},
@@ -78,8 +80,12 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
       .then(res => {
         console.log(res, "resss");
         setOrdersData(res?.data?.data);
+        setSkeletonLoading(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setSkeletonLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -121,44 +127,63 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
               </div>
             ))}
           </div>
-
-          <div className={styles.orders_wrapper}>
-            {ordersData.length > 0 ? (
-              ordersData?.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <CommonContainer
-                      item={item}
-                      index={index}
-                      visibleImages={visibleImages}
-                      tab={0}
-                      containerRef={containerRef}
-                      getSingleOrderDetails={getSingleOrderDetails}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <div className={styles.no_orders_div}>
-                <SadEmoji color={"#9A9AA2"} size={36} />
-                <p className={styles.no_order_desc}>
-                  We are unable to find orders.{" "}
-                  {selectedMenuOrder !== 0 &&
-                    "Try going to a different category or go to"}{" "}
-                  {selectedMenuOrder !== 0 && (
-                    <span
-                      onClick={() => {
-                        setSelectedMenuOrder(0);
-                        fetchOrdersDetails();
-                      }}
-                      className="text-5774AC cursor-pointer">
-                      All orders.
-                    </span>
-                  )}
-                </p>
-              </div>
-            )}
-          </div>
+          {skeletonLoading ? (
+            <div className="w-full gap-4">
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full mb-8"
+              />
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full mb-8"
+              />
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full mb-8"
+              />
+            </div>
+          ) : (
+            <div className={styles.orders_wrapper}>
+              {ordersData.length > 0 ? (
+                ordersData?.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <CommonContainer
+                        item={item}
+                        index={index}
+                        visibleImages={visibleImages}
+                        tab={0}
+                        containerRef={containerRef}
+                        getSingleOrderDetails={getSingleOrderDetails}
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <div className={styles.no_orders_div}>
+                  <SadEmoji color={"#9A9AA2"} size={36} />
+                  <p className={styles.no_order_desc}>
+                    We are unable to find orders.{" "}
+                    {selectedMenuOrder !== 0 &&
+                      "Try going to a different category or go to"}{" "}
+                    {selectedMenuOrder !== 0 && (
+                      <span
+                        onClick={() => {
+                          setSelectedMenuOrder(0);
+                          fetchOrdersDetails();
+                        }}
+                        className="text-5774AC cursor-pointer">
+                        All orders.
+                      </span>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

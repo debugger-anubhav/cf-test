@@ -8,6 +8,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "../../common/CommonContainer";
 import Header from "../../common/Header";
+import {Skeleton} from "@mui/material";
 
 const AllSubcriptions = ({
   setPart,
@@ -16,6 +17,7 @@ const AllSubcriptions = ({
   data,
   getSingleOrderDetails,
   getAllSubscriptionDetails,
+  skeletonLoading,
 }) => {
   const containerRef = useRef(null);
   const [selectedSubscriptionMenu, setSelectedSubscriptionMenu] = useState(0);
@@ -105,45 +107,64 @@ const AllSubcriptions = ({
               </div>
             </div>
           )}
-
-          <div className={styles.orders_wrapper}>
-            {data?.length > 0 ? (
-              data?.map((item, index) => {
-                console.log(visibleImages, "visibleee");
-                return (
-                  <div key={index}>
-                    <CommonContainer
-                      item={item}
-                      index={index}
-                      visibleImages={visibleImages}
-                      tab={1}
-                      containerRef={containerRef}
-                      getSingleOrderDetails={getSingleOrderDetails}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <div className={styles.no_orders_div}>
-                <SadEmoji color={"#9A9AA2"} size={36} />
-                <p className={styles.no_order_desc}>
-                  We are unable to find subscriptions.{" "}
-                  {selectedSubscriptionMenu !== 0 &&
-                    "Try going to a different category or go to"}{" "}
-                  {selectedSubscriptionMenu !== 0 && (
-                    <span
-                      onClick={() => {
-                        setSelectedSubscriptionMenu(0);
-                        getAllSubscriptionDetails();
-                      }}
-                      className="text-5774AC cursor-pointer">
-                      All subscriptions.
-                    </span>
-                  )}
-                </p>
-              </div>
-            )}
-          </div>
+          {skeletonLoading ? (
+            <div className="w-full gap-4">
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full my-8"
+              />
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full mb-8"
+              />
+              <Skeleton
+                variant="rectangular"
+                height={"120px"}
+                className="h-full"
+              />
+            </div>
+          ) : (
+            <div className={styles.orders_wrapper}>
+              {data?.length > 0 ? (
+                data?.map((item, index) => {
+                  console.log(visibleImages, "visibleee");
+                  return (
+                    <div key={index}>
+                      <CommonContainer
+                        item={item}
+                        index={index}
+                        visibleImages={visibleImages}
+                        tab={1}
+                        containerRef={containerRef}
+                        getSingleOrderDetails={getSingleOrderDetails}
+                      />
+                    </div>
+                  );
+                })
+              ) : (
+                <div className={styles.no_orders_div}>
+                  <SadEmoji color={"#9A9AA2"} size={36} />
+                  <p className={styles.no_order_desc}>
+                    We are unable to find subscriptions.{" "}
+                    {selectedSubscriptionMenu !== 0 &&
+                      "Try going to a different category or go to"}{" "}
+                    {selectedSubscriptionMenu !== 0 && (
+                      <span
+                        onClick={() => {
+                          setSelectedSubscriptionMenu(0);
+                          getAllSubscriptionDetails();
+                        }}
+                        className="text-5774AC cursor-pointer">
+                        All subscriptions.
+                      </span>
+                    )}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>
