@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {
   CreateRequestPayload,
+  handleWheel,
   keyPressForContactField,
 } from "@/constants/constant";
 import {cityUrl} from "../../../appConfig";
@@ -84,6 +85,7 @@ function CancelMandate({prevScreen, data, heading}) {
                     />
                     <Field
                       type="number"
+                      onWheel={handleWheel}
                       onKeyPress={keyPressForContactField}
                       // readOnly
                       name="contactNumber"

@@ -11,7 +11,7 @@ import axios from "axios";
 import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
-import {keyPressForContactField} from "@/constants/constant";
+import {handleWheel, keyPressForContactField} from "@/constants/constant";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -165,6 +165,7 @@ const EnquirySection = () => {
                         />
                         <Field
                           onKeyPress={keyPressForContactField}
+                          onWheel={handleWheel}
                           type="number"
                           // readOnly
                           name="contactNumber"

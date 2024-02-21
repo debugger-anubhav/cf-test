@@ -12,6 +12,7 @@ import {IoIosCloseCircle} from "react-icons/io";
 import Select from "react-select";
 import {
   CreateRequestPayload,
+  handleWheel,
   keyPressForContactField,
 } from "@/constants/constant";
 import {useSelector} from "react-redux";
@@ -170,6 +171,7 @@ function Relocation({prevScreen, data}) {
                       />
                       <Field
                         type="number"
+                        onWheel={handleWheel}
                         onKeyPress={keyPressForContactField}
                         // readOnly
                         name="contactNumber"
@@ -225,6 +227,7 @@ function Relocation({prevScreen, data}) {
                   <Field
                     type="number"
                     onKeyPress={keyPressForContactField}
+                    onWheel={handleWheel}
                     name="postalCode"
                     placeholder="Enter 6 digit postal code"
                     className={formStyles.form_input}

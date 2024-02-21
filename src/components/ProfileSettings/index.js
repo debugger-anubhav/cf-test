@@ -6,7 +6,11 @@ import * as Yup from "yup";
 import {ArrowForw} from "@/assets/icon";
 import {cityUrl} from "../../../appConfig";
 import formStyles from "../Cart/AddressSection/styles.module.css";
-import {getLocalStorage, setLocalStorage} from "@/constants/constant";
+import {
+  getLocalStorage,
+  handleWheel,
+  setLocalStorage,
+} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 import axios from "axios";
 import {endPoints} from "@/network/endPoints";
@@ -333,6 +337,7 @@ const ProfileSettings = () => {
                               className={`${styles.row} ${formStyles.form_input}`}>
                               <Field
                                 type="number"
+                                onWheel={handleWheel}
                                 name="otp"
                                 placeholder="Enter the OTP you just received"
                                 className={formStyles.contact_input}
