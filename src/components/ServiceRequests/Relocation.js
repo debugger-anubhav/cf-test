@@ -104,11 +104,10 @@ function Relocation({prevScreen, data}) {
         display: "none",
       },
       boxShadow: 0,
-      "&:hover": {
-        border: "1px solid #71717A",
-      },
+
       fontSize: "14px",
       color: "#71717A",
+      border: "none",
     }),
     option: (base, state) => ({
       ...base,
@@ -120,6 +119,14 @@ function Relocation({prevScreen, data}) {
       },
       fonetSize: "14px",
       color: "#71717A",
+    }),
+    container: provided => ({
+      ...provided,
+      border: "1px solid #DDDDDF",
+      borderRadius: "12px",
+      "&:hover": {
+        border: "1px solid #71717A",
+      },
     }),
   };
 
