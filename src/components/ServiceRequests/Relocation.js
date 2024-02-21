@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
+import {BackIcon, DeleteIconFilled, ForwardArrowWithLine} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
@@ -8,7 +8,7 @@ import {cityUrl} from "../../../appConfig";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import Image from "next/image";
 import {FaCheckCircle} from "react-icons/fa";
-import {IoIosCloseCircle} from "react-icons/io";
+// import {IoIosCloseCircle} from "react-icons/io";
 import Select from "react-select";
 import {
   CreateRequestPayload,
@@ -19,6 +19,7 @@ import {useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import commonStyles from "@/components/Documentation/common.module.css";
 
 function Relocation({prevScreen, data}) {
   const selectedType = useSelector(
@@ -130,6 +131,8 @@ function Relocation({prevScreen, data}) {
       },
     }),
   };
+
+  // const handleDeleteFile = (val, index) => {};
 
   return (
     <div className={styles.content_wrapper}>
@@ -334,23 +337,28 @@ function Relocation({prevScreen, data}) {
                       </div>
                       {formik.values.currentAddressProof && (
                         <div
-                          className={`${styles.running_line} bottom-[3px]`}></div>
+                          className={`${commonStyles.correctFile} bottom-[3px]`}></div>
                       )}
                     </div>
                   </label>
 
-                  <div>
+                  <div className={styles.check_wrapper}>
                     {formik.values.currentAddressProof && (
-                      <div className="flex items-center mt-8 ml-2">
+                      <div className={styles.check_wrapper}>
                         <FaCheckCircle
                           color="#2D9469"
                           className={styles.showCheckCircle}
                         />
-                        <IoIosCloseCircle
-                          color="#D96060"
-                          size={20}
+                        <div
                           className={styles.showDeleteIcon}
-                        />
+                          onClick={() =>
+                            formik.setFieldValue("currentAddressProof", "")
+                          }>
+                          <DeleteIconFilled
+                            color="#ffffff"
+                            className={styles.delete_icon_filled}
+                          />
+                        </div>
                       </div>
                     )}
                   </div>
