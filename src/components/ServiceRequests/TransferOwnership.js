@@ -218,7 +218,8 @@ function TransferOwnership({prevScreen, data}) {
 
                     <div className={"mt-4"}>
                       <p className={formStyles.form_label}>Contact number</p>
-                      <div className={`${styles.row} ${formStyles.form_input}`}>
+                      <div
+                        className={`${styles.row} ${formStyles.form_input} flex`}>
                         <div className="flex gap-2 items-center">
                           <img
                             src={`${cityUrl + "india-icon.svg"}`}
