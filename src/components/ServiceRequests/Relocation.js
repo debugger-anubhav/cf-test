@@ -81,18 +81,34 @@ function Relocation({prevScreen, data}) {
   });
 
   const handleSubmit = values => {
-    const payload = {
-      ...CreateRequestPayload,
-      deal_id: data[0]?.dealCodeNumber,
-      type: selectedType,
-      mobile_number: values.contactNumber,
-      postal_code: values.postalCode,
-      city: values.city,
-      address1: values.address,
-      address2: values.landmark,
-      file: values.currentAddressProof,
-    };
-    trailCreateSR(payload);
+    const allData = new FormData();
+    for (const key in CreateRequestPayload) {
+      if (Object.hasOwnProperty.call(CreateRequestPayload, key)) {
+        allData.append(key, CreateRequestPayload[key]);
+      }
+    }
+    allData.append("file", values?.currentAddressProof);
+    allData.set("deal_id", data[0]?.dealCodeNumber);
+    allData.set("type", selectedType);
+    allData.set("mobile_number", values.contactNumber);
+    allData.set("postal_code", values.postalCode);
+    allData.set("city", values.city);
+    allData.set("address1", values.address);
+    allData.set("address2", values.landmark);
+    allData.set("postal_code", values.postalCode);
+
+    // const payload = {
+    //   ...CreateRequestPayload,
+    //   deal_id: data[0]?.dealCodeNumber,
+    //   type: selectedType,
+    //   mobile_number: values.contactNumber,
+    //   postal_code: values.postalCode,
+    //   city: values.city,
+    //   address1: values.address,
+    //   address2: values.landmark,
+    // };
+
+    trailCreateSR(allData);
   };
 
   const customStylesForSelect = {
@@ -303,7 +319,9 @@ function Relocation({prevScreen, data}) {
                     !formik.values.currentAddressProof ? "flex-col" : "flex-row"
                   }`}>
                   <input
+                    disabled={formik?.values?.currentAddressProof !== ""}
                     type="file"
+                    accept="image/jpeg,image/jpg,image/png,application/pdf"
                     id="currentAddProof"
                     name="currentAddressProof"
                     placeholder="choose file"
@@ -320,7 +338,8 @@ function Relocation({prevScreen, data}) {
                     className={`${
                       formStyles.form_input
                     } flex items-center !h-full cursor-pointer ${
-                      formik.values.currentAddressProof && "!max-w-[95%] w-fit"
+                      formik.values.currentAddressProof &&
+                      "!max-w-[95%] w-fit !cursor-default"
                     } `}>
                     <div className={`flex w-full flex-col `}>
                       <div className="flex items-center">
