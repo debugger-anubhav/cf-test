@@ -172,7 +172,7 @@
 }
 
 .showCheckCircle {
-  @apply flex;
+  @apply flex w-5 h-5;
 }
 
 .showDeleteIcon {
@@ -192,4 +192,23 @@
 }
 .contact_input::placeholder {
   @apply font-Poppins font-normal text-16  text-[#71717A];
+}
+
+.showDeleteIcon {
+  @apply hidden w-5 h-5 justify-center items-center rounded-full bg-[#D96060] p-1;
+}
+.check_wrapper {
+  @apply flex items-center cursor-pointer ml-2;
+  animation: slideIn 1.5s normal;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  99.999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
