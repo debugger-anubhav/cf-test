@@ -774,7 +774,7 @@ const AddressSection = () => {
                         </p>
 
                         <Field
-                          type="number"
+                          type="text"
                           onKeyPress={keyPressForContactField}
                           name="customerPaidAmount"
                           placeholder="Enter amount customer paid"

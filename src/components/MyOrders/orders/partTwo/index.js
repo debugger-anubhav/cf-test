@@ -207,7 +207,7 @@ const OrderDetails = ({setPart, data}) => {
       <div className="mt-8">
         <OrderSummary
           orderNumber={data?.order_id}
-          isDelivered={stepsCompleted === 5}
+          isDelivered={orderStatus?.toLowerCase() === "delivered"}
           isOrderFailed={orderStatus?.toLowerCase() === "order failed"}
         />
       </div>

@@ -24,7 +24,7 @@
   @apply flex gap-2;
 }
 .list_item {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 font-Poppins;
+  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 font-Poppins font-medium;
 }
 .btn {
   @apply font-medium cursor-pointer mt-8 border-71717A border-2 rounded-lg w-full md:w-[207px] h-12 xl:h-14 flex justify-center items-center;

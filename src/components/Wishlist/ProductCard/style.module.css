@@ -1,5 +1,5 @@
 .wrapper {
-  @apply w-full sm:w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem];
+  @apply w-full sm:w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] font-Poppins;
   /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] ; */
 }
 .hover_wrapper img {
