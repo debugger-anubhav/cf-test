@@ -3,7 +3,7 @@ import styles from "../style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {cityUrl} from "../../../../../appConfig";
 import * as Yup from "yup";
-import {keyPressForContactField} from "@/constants/constant";
+import {handleWheel, keyPressForContactField} from "@/constants/constant";
 
 const ModalContentForNumber = ({
   contactNumber,
@@ -59,6 +59,7 @@ const ModalContentForNumber = ({
                 <Field
                   type="number"
                   onKeyPress={keyPressForContactField}
+                  onWheel={handleWheel}
                   // autofocus={true}
                   name="contactNumber"
                   placeholder="Enter 10 digit number "

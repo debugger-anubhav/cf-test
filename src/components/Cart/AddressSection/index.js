@@ -29,6 +29,7 @@ import {endPoints} from "@/network/endPoints";
 import {
   CityToStateMapping,
   getLocalStorage,
+  handleWheel,
   keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
@@ -655,7 +656,7 @@ const AddressSection = () => {
                         <Field
                           type="number"
                           onKeyPress={keyPressForContactField}
-                          // readOnly
+                          onWheel={handleWheel}
                           name="contactNumber"
                           placeholder="Enter 10 digit number "
                           className={styles.contact_input}
@@ -687,6 +688,7 @@ const AddressSection = () => {
                             type="number"
                             onKeyPress={keyPressForContactField}
                             // readOnly
+                            onWheel={handleWheel}
                             name="alternateContactNumber"
                             placeholder="Enter 10 digit number "
                             className={styles.contact_input}
@@ -735,6 +737,7 @@ const AddressSection = () => {
                         <Field
                           type="number"
                           onKeyPress={keyPressForContactField}
+                          onWheel={handleWheel}
                           name="postalCode"
                           placeholder="Enter 6 digit postal code"
                           className={styles.form_input}
@@ -774,12 +777,14 @@ const AddressSection = () => {
                         </p>
 
                         <Field
-                          type="text"
+                          type="number"
+                          onWheel={handleWheel}
                           onKeyPress={keyPressForContactField}
                           name="customerPaidAmount"
                           placeholder="Enter amount customer paid"
                           className={styles.form_input}
                         />
+
                         <ErrorMessage name="customerPaidAmount">
                           {msg =>
                             formik.touched.customerPaidAmount && (
@@ -855,6 +860,7 @@ const AddressSection = () => {
                     <>
                       <div className="mt-4">
                         <input
+                          onWheel={handleWheel}
                           className={styles.form_input}
                           type="number"
                           placeholder="GST number"
