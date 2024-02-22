@@ -43,6 +43,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
   // const [showReuploadNote, setShowReuploadNote] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -262,6 +263,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         }
       }
     }
+    setDisableButton(true);
     const allData = new FormData();
     allData.append(
       "permanentAddressProof",
@@ -299,8 +301,12 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         .post(endPoints.uploadAddressDocs, allData)
         .then(res => {
           handleKycState(selectedOrderId);
+          setDisableButton(false);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          setDisableButton(false);
+        });
     }
   };
 
@@ -322,17 +328,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         currentAddressProofType: currentAddressProof?.[0]?.sub_doc_type || "",
         addressProofType: addressProof?.[0]?.sub_doc_type || "",
       });
-      // setFormErrors({
-      //   ...formErrors,
-      //   addressProof:
-      //     cibilDocsData?.cf_permanent_address_proof?.length === 0
-      //       ? "Please re-upload these documents as these got rejected by our team."
-      //       : "",
-      //   currentAddressProof:
-      //     cibilDocsData?.cf_delivery_address_proof?.length === 0
-      //       ? "Please re-upload these documents as these got rejected by our team."
-      //       : "",
-      // });
     } else {
       console.log("in elsee");
       setFormData({
@@ -352,8 +347,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
       });
     }
   }, [selectedOrderId, isReupload]);
-
-  console.log(formData, "formdata");
 
   const toggleDoItLaterToggle = bool => {
     setOpenModal(bool);
@@ -838,15 +831,17 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         <div className={`${styles.btnGroup} `}>
           <button
             onClick={() => toggleDoItLaterToggle(true)}
-            className={`${commonStyles.laterBtn} ${styles.laterBtn}  `}>
+            className={`${commonStyles.laterBtn} ${styles.laterBtn}   `}>
             I&apos;ll do it later
           </button>
           <button
-            // disabled
+            disabled={disableButton}
             onClick={() => {
               submitHandler();
             }}
-            className={`${commonStyles.saveBtn} ${styles.saveBtn}  `}>
+            className={`${commonStyles.saveBtn} ${styles.saveBtn} ${
+              disableButton && "!bg-[#FFDF85]"
+            } `}>
             <span>Proceed</span>
             <OutlineArrowRight />
           </button>
