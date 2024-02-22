@@ -422,11 +422,18 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <div
-                className={`pt-[14px]  pb-[16px] 
+                className={`pt-[14px] pb-[16px] pl-8
                   
                   ${styles.test}`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
+                }}
+                onMouseEnter={e => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (isLogin) {
+                    setShowProfileDropdown(true);
+                  }
                 }}>
                 <a
                   className="cursor-pointer"
