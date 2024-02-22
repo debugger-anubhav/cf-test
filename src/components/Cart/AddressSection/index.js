@@ -125,6 +125,11 @@ const AddressSection = () => {
       then: () => Yup.string().required("Order type is required"),
       otherwise: () => Yup.string(),
     }),
+    orderNumber: Yup.string().when("orderType", {
+      is: orderType => orderType === "Swap product",
+      then: () => Yup.string().required("Order number is required"),
+      otherwise: () => Yup.string(),
+    }),
     email: Yup.string()
       .email()
       .when("offlineCustomer", {
@@ -596,15 +601,20 @@ const AddressSection = () => {
                           </ErrorMessage>
                         </div>
                         <div className={styles.form_field}>
-                          <p className={styles.form_label}>
-                            Order Number (Optional)
-                          </p>
+                          <p className={styles.form_label}>Order Number</p>
                           <Field
                             type="text"
                             name="orderNumber"
                             placeholder="Please provide the order number for payment."
                             className={styles.form_input}
                           />
+                          <ErrorMessage name="orderNumber">
+                            {msg =>
+                              formik.touched.orderNumber && (
+                                <p className={styles.error}>{msg} </p>
+                              )
+                            }
+                          </ErrorMessage>
                         </div>
                       </>
                     )}
