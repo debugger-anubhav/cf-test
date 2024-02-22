@@ -18,7 +18,7 @@ const PastRequestAccordian = ({pastRequestData}) => {
           <div
             key={index.toString()}
             className={`${
-              index === indexOfActiveAcc && showAccSummary && " mt-2"
+              index === indexOfActiveAcc && showAccSummary && " mt-4"
             }`}>
             <div
               className={`flex justify-between w-full px-3 pt-6 cursor-pointer items-center ${
@@ -76,7 +76,7 @@ const PastRequestAccordian = ({pastRequestData}) => {
             {index !== rows.length - 1 && (
               <div
                 className={`bg-EDEDEE h-[1px] w-full ${
-                  index === indexOfActiveAcc && showAccSummary && "mt-2"
+                  index === indexOfActiveAcc && showAccSummary && "mt-4"
                 }`}></div>
             )}
           </div>
