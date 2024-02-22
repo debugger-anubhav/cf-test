@@ -1,64 +1,80 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "../styles.module.css";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
 import {DownArrowUnfilled, Minus, Plus} from "@/assets/icon";
 import {format} from "date-fns";
 
 const PaymentAccordian = ({rows, handleShowMore, visibleRows}) => {
-  const [expanded, setExpanded] = React.useState(null);
+  const [indexOfActiveAcc, setIndexOfActiveAcc] = useState(null);
+  const [showAccSummary, setshowAccSummary] = useState(false);
 
-  const handleChange = panel => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false);
-  };
   return (
     <div>
-      {rows?.slice(0, visibleRows).map((row, index) => (
-        <Accordion
-          expanded={expanded === `panel${index}`}
-          key={index}
-          onChange={handleChange(`panel${index}`)}
-          className={`${expanded === `panel${index}` && "bg-F7F7F8"} ${
-            styles.accordian
-          }`}>
-          <AccordionSummary
-            className={styles.accord_summary}
-            expandIcon={
-              expanded === `panel${index}` ? (
-                <Minus className={`mt-3 ${styles.exapnd_icon}`} />
+      {rows?.slice(0, visibleRows)?.map((row, index) => {
+        return (
+          <div
+            key={index.toString()}
+            className={`${
+              index === indexOfActiveAcc && showAccSummary && " mt-4"
+            }`}>
+            <div
+              className={`flex justify-between w-full px-3 pt-6 cursor-pointer items-center ${
+                index === indexOfActiveAcc && showAccSummary
+                  ? "pb-3 !pt-3 bg-F7F7F8"
+                  : "pb-6"
+              }`}
+              onClick={() => {
+                setIndexOfActiveAcc(index);
+                setshowAccSummary(!showAccSummary);
+              }}>
+              <p className={`${styles.tableHeaderCell}`}>
+                Payment Number: {row.payment_number}
+              </p>
+              {index === indexOfActiveAcc && showAccSummary ? (
+                <Minus className={`${styles.exapnd_icon}`} />
               ) : (
                 <Plus className={styles.exapnd_icon} />
-              )
-            }>
-            <Typography className={`${styles.tableHeaderCell}`}>
-              Payment Number: {row.payment_number}
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails className={styles.accord_details}>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Date:</span> {row.date}
-            </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Invoice Number:</span>{" "}
-              {row.invoice_numbers ? row.invoice_numbers : "NA"}
-            </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Amount Paid:</span> {row.amount}
-            </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Payment Date:</span>{" "}
-              {`${format(new Date(row.created_time), "d LLL, yyyy : hh:mm a")}`}
-            </Typography>
-            <Typography className={styles.tableCell}>
-              <span className="font-medium">Payment Number: </span>
-              {row.payment_number}
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
+              )}
+            </div>
 
+            <div
+              className={`w-full flex-col px-3 cursor-pointer ${
+                index === indexOfActiveAcc && showAccSummary
+                  ? "flex bg-F7F7F8"
+                  : "hidden"
+              }`}
+              onClick={() => setshowAccSummary(!showAccSummary)}>
+              <div className={styles.tableCell}>
+                <span className="font-medium">Invoice Date:</span> {row.date}
+              </div>
+              <div className={styles.tableCell}>
+                <span className="font-medium">Invoice Number:</span>{" "}
+                {row.invoice_numbers ? row.invoice_numbers : "NA"}
+              </div>
+              <div className={styles.tableCell}>
+                <span className="font-medium">Amount Paid:</span> {row.amount}
+              </div>
+              <div className={styles.tableCell}>
+                <span className="font-medium">Payment Date:</span>{" "}
+                {`${format(
+                  new Date(row.created_time),
+                  "d LLL, yyyy : hh:mm a",
+                )}`}
+              </div>
+              <div className={styles.tableCell}>
+                <span className="font-medium">Payment Number: </span>
+                {row.payment_number}
+              </div>
+            </div>
+
+            {index !== rows.length - 1 && (
+              <div
+                className={`bg-EDEDEE h-[1px] w-full ${
+                  index === indexOfActiveAcc && showAccSummary && "mt-4"
+                }`}></div>
+            )}
+          </div>
+        );
+      })}
       {visibleRows < rows?.length && (
         <button className={styles.show_more_btn} onClick={handleShowMore}>
           See More

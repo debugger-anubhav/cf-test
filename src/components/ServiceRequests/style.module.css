@@ -35,7 +35,7 @@
   @apply flex w-full flex-col sm:pb-[50px] pb-[55px] overflow-scroll h-full;
 }
 .main_heading {
-  @apply flex font-Poppins font-medium text-24 leading-[32px] w-full gap-2 text-45454A items-center;
+  @apply flex font-Poppins font-medium text-24 tracking-[-0.48px] leading-[32px] w-full gap-2 text-45454A items-center;
 }
 .sub_heading {
   @apply my-8 text-71717A text-16 font-Poppins;
@@ -57,7 +57,7 @@
   @apply w-full h-[2px] bg-DDDDDF;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
@@ -114,7 +114,7 @@
   @apply outline-none  w-full;
 }
 .search_modal {
-  @apply flex px-4 py-6 w-full absolute z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] 3xl:max-h-[600px] 3xl:h-[400px] md:h-[240px] h-[190px] overflow-y-scroll;
+  @apply flex px-4 py-6 w-full z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] 3xl:max-h-[600px] 3xl:h-[400px] md:h-[240px] h-[190px] overflow-y-scroll;
 }
 .swap_second_screen {
   @apply w-full;
@@ -123,7 +123,7 @@
   @apply flex flex-col my-8 w-full md:h-[420px] overflow-y-scroll;
 }
 .main_sub_heading {
-  @apply mt-8 font-medium text-20 font-Poppins;
+  @apply mt-8 font-medium text-20 font-Poppins tracking-[-0.4px];
 }
 
 /* additional */
