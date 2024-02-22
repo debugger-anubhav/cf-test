@@ -50,6 +50,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
   const [submitting, setSubmitting] = useState(false);
   const [selectedArr, setSelectedArr] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [disableButton, setDisableButton] = useState(false);
   const [selectedOption, setSelectedOption] = useState({
     label: "PAN Number (Recommended)",
     value: "",
@@ -104,6 +105,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
   const isMdScreen = useMediaQuery(theme.breakpoints.down("md"));
   const submitHandler = () => {
     setSubmitting(true);
+    setDisableButton(true);
     const data = {
       docDetail: JSON.stringify({
         id: selectedOption.value,
@@ -121,17 +123,19 @@ const KYCGetCivilScore = ({handleKycState}) => {
         console.log(res, "res in getcibilsvoreapiiii");
         setSubmitting(false);
         handleKycState(selectedOrderId);
+        setDisableButton(false);
       })
 
       .catch(err => {
         console.log(err);
         setSubmitting(false);
+        setDisableButton(false);
       });
   };
   const idOptions = [
     {label: "PAN Number", value: "1"},
-    {label: "Driving license", value: "2"},
-    {label: "Voter ID", value: "3"},
+    // {label: "Driving license", value: "2"},
+    // {label: "Voter ID", value: "3"},
   ];
   // const getOption = () => {
   //   axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
@@ -362,9 +366,11 @@ const KYCGetCivilScore = ({handleKycState}) => {
             I’ll do it later
           </button>
           <button
-            // disabled
+            disabled={disableButton}
             onClick={handleSubmit}
-            className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
+            className={`${commonStyles.saveBtn} ${
+              styles.saveBtn
+            } md:w-[232px] ${disableButton && "!bg-[#FFDF85]"} `}>
             <span> Save & proceed</span>
             <OutlineArrowRight />
           </button>

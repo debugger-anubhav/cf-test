@@ -63,6 +63,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   const [isSelected, setIsSelected] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [showReuploadNote, setShowReuploadNote] = useState(true);
+  const [disableButton, setDisableButton] = useState(false);
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
   });
@@ -132,6 +133,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     //     }
     //   }
     // }
+    setDisableButton(true);
     const allData = new FormData();
     allData.append(
       "financialStatementProof",
@@ -152,8 +154,12 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
       .then(res => {
         console.log(res);
         handleKycState(selectedOrderId);
+        setDisableButton(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setDisableButton(false);
+      });
   };
   useEffect(() => {
     getAddProofList();
@@ -443,11 +449,13 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             I’ll do it later
           </button>
           <button
-            // disabled
+            disabled={disableButton}
             onClick={() => {
               submitHandler();
             }}
-            className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px] `}>
+            className={`${commonStyles.saveBtn} ${
+              styles.saveBtn
+            } md:w-[232px] ${disableButton && "!bg-[#FFDF85]"} `}>
             <span> Proceed</span>
             <OutlineArrowRight />
           </button>

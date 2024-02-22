@@ -131,7 +131,7 @@ function ServiceRequestType({
                   router.push(`view-purchase/${userId}/${orderId}`)
                 }
                 className={styles.download_btn}>
-                Download invoice
+                View invoice
               </button>
             </div>
           )}
