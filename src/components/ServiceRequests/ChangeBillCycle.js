@@ -12,6 +12,7 @@ function ChangeBillCycle({prevScreen, data}) {
   );
   const [istoggled, setIstoggled] = useState(true);
   const [description, setDescription] = useState("");
+  const [billCycleDay, setBillCycleDay] = useState(null);
   const {trailCreateSR} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
@@ -20,10 +21,17 @@ function ChangeBillCycle({prevScreen, data}) {
       deal_id: data[0]?.dealCodeNumber,
       type: selectedType,
       description,
+      billCycleDay: parseInt(billCycleDay),
     };
     trailCreateSR(payload);
   };
 
+  const handleBillCycleDayChange = e => {
+    const value = e.target.value;
+    if (value >= 0 && value <= 31) {
+      setBillCycleDay(value);
+    }
+  };
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -59,9 +67,11 @@ function ChangeBillCycle({prevScreen, data}) {
             <div className="mt-8">
               <p className={styles.desc}>Suggest your preferred start date</p>
               <input
-                type="date"
+                type="number"
                 placeholder="Enter a number"
                 className={styles.form_input_textarea}
+                onChange={handleBillCycleDayChange}
+                value={billCycleDay}
               />
             </div>
           )}

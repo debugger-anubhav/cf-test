@@ -751,6 +751,7 @@ export const CreateRequestPayload = {
   mobile_number: "",
   email: "",
   repair_reason: "",
+  billCycleDay: "",
 };
 
 export const CreateRequest = CreateRequestPayload => {
