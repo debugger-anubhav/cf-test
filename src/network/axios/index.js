@@ -16,7 +16,7 @@ const baseInstance = axios.create({
 });
 // const fetchedToken = "abcdjdyhsi";
 // const token = fetchedToken || null;
-console.log(authToken, "tokenn");
+
 baseInstance.interceptors.request.use(config => {
   if (!config.headers.Authorization) {
     config.headers.Authorization = authToken;
