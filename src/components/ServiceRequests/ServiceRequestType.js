@@ -168,7 +168,7 @@ function ServiceRequestType({
             <Repair prevScreen={setCurrentScreen} data={productDetail} />
           )}
           {selectedType === "full_extension" && (
-            <ExtendTenure prevScreen={setCurrentScreen} />
+            <ExtendTenure prevScreen={setCurrentScreen} orderId={orderId} />
           )}
           {selectedType === "change_bill_cycle" && (
             <ChangeBillCycle
