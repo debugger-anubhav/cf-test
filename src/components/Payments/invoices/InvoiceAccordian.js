@@ -18,7 +18,7 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
             <div
               className={`flex justify-between w-full px-3 pt-6 cursor-pointer items-center ${
                 index === indexOfActiveAcc && showAccSummary
-                  ? "pb-3 pt-3 bg-F7F7F8"
+                  ? "pb-3 !pt-3 bg-F7F7F8"
                   : "pb-6"
               }`}
               onClick={() => {
