@@ -17,7 +17,7 @@ export const CommonCreateRequestApi = () => {
         dispatch(setServiceRequestDrawer(false));
         showToastNotification(
           response?.data?.data?.msg,
-          response?.data?.data?.status === true ? 2 : 3,
+          response?.data?.data?.status === true ? 1 : 3,
         );
       }
     } catch (error) {
