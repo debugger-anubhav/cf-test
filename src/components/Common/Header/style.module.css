@@ -45,7 +45,7 @@
   @apply flex lg:mr-8 mr-4 mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
 }
 .header_shopping_card {
-  @apply flex lg:mr-8 mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
+  @apply flex mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
 }
 .cart_badge {
   @apply absolute top-[-6px] left-[0.75rem] lg:left-4 w-4 h-4 lg:w-5 lg:h-5 flex justify-center items-center rounded-[50%] bg-[#3e688e] text-10 lg:text-12 text-fff leading-5 text-center;
