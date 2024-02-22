@@ -57,7 +57,7 @@
   @apply w-full h-[2px] bg-DDDDDF;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
