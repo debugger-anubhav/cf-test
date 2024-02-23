@@ -78,7 +78,7 @@ const CommonContainer = ({
                 {tab === 0
                   ? item.status === "Pending"
                     ? item.is_offline_placed === "1"
-                      ? "KYC Pending"
+                      ? "Amount Pending"
                       : "Order Failed"
                     : statusLabels[item.zoho_sub_status.toLowerCase()] ||
                       item.zoho_sub_status

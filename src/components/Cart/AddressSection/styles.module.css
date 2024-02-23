@@ -125,7 +125,10 @@
   @apply cursor-pointer flex justify-between items-center w-full text-14 xl:text-16 placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
 .ordertype_option {
-  @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer;
+  @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer text-16 tracking-0.3 leading-6;
+}
+.ordertype_option_mobile {
+  @apply flex justify-between h-[45px] items-center cursor-pointer text-14 text-5774AC font-medium tracking-desc leading-6;
 }
 .form_input::placeholder {
   @apply text-14 xl:text-16;
@@ -137,6 +140,19 @@
   @apply text-14 xl:text-16;
 }
 
+.close_icon {
+  @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[64px];
+}
+.bottomDrawer {
+  @apply !rounded-t-[20px] md:!rounded-t-none !pt-6 pb-8 !h-fit px-4;
+  overflow-y: visible !important;
+}
+.drawer_head {
+  @apply text-16 leading-6 font-medium text-45454A;
+}
+.line {
+  @apply border-b border-EDEDEE my-3;
+}
 /* For mobile phones: to oprevent zooming in ios */
 /* @media only screen and (max-width: 768px) {
   .form_input .contact_input .form_input_textarea .textarea .order_type_field {
