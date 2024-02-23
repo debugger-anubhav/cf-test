@@ -525,6 +525,7 @@ const Header = () => {
                 topOffset={topOffset}
                 openSearchbar={openSearchbar}
                 setOpenSearchBar={setOpenSearchBar}
+                hasScrolled={hasScrolled}
               />
             </>
           )}
@@ -629,18 +630,28 @@ const SearchModal = ({
     router.push(`/search/${item}`);
   };
   //
-  const tempTopOffset = 75;
-  const MOBILE_TOP_OFFSET = !homePageReduxData?.announcementBar
-    ? tempTopOffset + 50
-    : tempTopOffset;
+  const [tempTopOffset, setTempTopOffset] = useState("78px");
+
+  useEffect(() => {
+    if (!hasScrolled && isOnMobile) {
+      setTempTopOffset("132px");
+    }
+    if (isOnMobile && hasScrolled) {
+      setTempTopOffset("78px");
+    }
+    if (homePageReduxData?.announcementBar && isOnMobile) {
+      setTempTopOffset("78px");
+    }
+    if (homePageReduxData?.announcementBar && !isOnMobile) {
+      setTempTopOffset("32px");
+    }
+  }, [hasScrolled, isOnMobile]);
 
   return (
     <div className={styles.backdrop} onClick={() => setOpenSearchBar(false)}>
       <div
         style={{
-          top: `${isOnMobile ? MOBILE_TOP_OFFSET : topOffset}px`,
-          // top: TOP_OFFSET,
-          // top: `75px`,
+          top: tempTopOffset,
         }}
         ref={modalRef}
         className={` ${
