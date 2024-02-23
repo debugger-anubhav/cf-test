@@ -326,20 +326,19 @@ export const HasselFreeData = [
   {
     icon: hasselFreeSection.IconFour,
     backgroungImage: hasselFreeSection.FrameThree,
-    bgImgMobile:
-      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/flexible-upgrades.webp",
 
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-installation.webp",
     Heading: "Free installation",
     text: "No need to pay for furniture assembly. We will install your furniture for free",
   },
   {
     icon: hasselFreeSection.IconSix,
     backgroungImage: hasselFreeSection.FrameFour,
-
-    Heading: "Free relocation",
-    text: "Planning to relocate? We’ll help you relocate your furniture for free",
     bgImgMobile:
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-relocation.webp",
+    Heading: "Free relocation",
+    text: "Planning to relocate? We’ll help you relocate your furniture for free",
   },
   {
     icon: hasselFreeSection.IconFive,
@@ -351,12 +350,12 @@ export const HasselFreeData = [
   },
   {
     icon: hasselFreeSection.IconThree,
+    bgImgMobile:
+      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/flexible-upgrades.webp",
 
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
     backgroungImage: hasselFreeSection.FrameSix,
-    bgImgMobile:
-      "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-installation.webp",
   },
 ];
 
