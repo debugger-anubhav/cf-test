@@ -50,7 +50,6 @@ const OrderSummary = ({
             ),
         )
         .then(res => {
-          console.log(res, "resss");
           setData(res?.data?.data);
           if (res?.data?.data?.productsList?.length === 0) router.push("/");
           else {

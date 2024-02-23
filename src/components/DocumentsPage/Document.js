@@ -32,7 +32,6 @@ const Document = () => {
         id: item?.id,
       })
       .then(res => {
-        console.log(res?.data, "ressss");
         documentApproveApiCall();
       })
       .catch(err => console.log(err));

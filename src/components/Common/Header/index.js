@@ -272,6 +272,9 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  useState(() => {
+    console.log("hasScrolled", hasScrolled);
+  }, [hasScrolled]);
   return (
     <>
       <LoginModal
