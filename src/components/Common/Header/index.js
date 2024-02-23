@@ -153,7 +153,7 @@ const Header = () => {
   );
 
   const getSavedItems = userIdToUse => {
-    console.log(baseInstance, "base instanec");
+    // console.log(baseInstance, "base instanec");
     baseInstance
       .get(endPoints.savedItems + `?cityId=${cityId}&userId=${userIdToUse}`)
       .then(res => {
@@ -272,9 +272,7 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  useState(() => {
-    console.log("hasScrolled", hasScrolled);
-  }, [hasScrolled]);
+
   return (
     <>
       <LoginModal
@@ -364,6 +362,7 @@ const Header = () => {
                   topOffset={topOffset}
                   openSearchbar={openSearchbar}
                   setOpenSearchBar={setOpenSearchBar}
+                  hasScrolled={hasScrolled}
                 />
               </div>
             )}
@@ -537,7 +536,13 @@ const Header = () => {
 export default Header;
 
 // search modal component
-const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
+const SearchModal = ({
+  arr,
+  setOpenSearchBar,
+  isOnMobile,
+  topOffset,
+  hasScrolled,
+}) => {
   const modalRef = useRef(null);
   const router = useRouter();
 
@@ -643,6 +648,7 @@ const SearchModal = ({arr, setOpenSearchBar, isOnMobile, topOffset}) => {
             ? `w-full absolute md:right-[19%] top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
             : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px] lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem] `
         }
+        ${hasScrolled && "md:!top-[26px] !top-[82px] "}
 `}>
         <div className={styles.search_wrapper_mobile}>
           <input
