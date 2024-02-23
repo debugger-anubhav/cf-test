@@ -325,7 +325,8 @@ export const HasselFreeData = [
   },
   {
     icon: hasselFreeSection.IconFour,
-    backgroungImage: hasselFreeSection.FrameFour,
+    backgroungImage: hasselFreeSection.FrameThree,
+
     bgImgMobile:
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-installation.webp",
     Heading: "Free installation",
@@ -333,7 +334,7 @@ export const HasselFreeData = [
   },
   {
     icon: hasselFreeSection.IconSix,
-    backgroungImage: hasselFreeSection.FrameSix,
+    backgroungImage: hasselFreeSection.FrameFour,
     bgImgMobile:
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/free-relocation.webp",
     Heading: "Free relocation",
@@ -349,11 +350,12 @@ export const HasselFreeData = [
   },
   {
     icon: hasselFreeSection.IconThree,
-    backgroungImage: hasselFreeSection.FrameThree,
     bgImgMobile:
       "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/flexible-upgrades.webp",
+
     Heading: "Flexible upgrades",
     text: "Upgrade your house with new products after 6 months of use for free",
+    backgroungImage: hasselFreeSection.FrameSix,
   },
 ];
 
