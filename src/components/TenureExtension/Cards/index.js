@@ -91,7 +91,6 @@ export const MonthlyCard = ({
     axios
       .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
-        console.log(response, "resss");
         if (response.data.success === true) {
           // showToastNotification(response.data.message, 1);
           dispatch(setTransactionReferenceNumber(RazorpayOrderIDBeforePayment));

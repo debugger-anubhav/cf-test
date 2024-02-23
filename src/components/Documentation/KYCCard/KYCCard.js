@@ -36,11 +36,9 @@ const KYCCard = ({handleKycState}) => {
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
     };
-    console.log(body, "bodyyy");
     axios
       .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
-        console.log(response, "resss");
         if (response.data.success === true) {
           showToastNotification(response.data.message, 1);
           handleKycState(selectedOrderId);
