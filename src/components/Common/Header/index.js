@@ -659,7 +659,7 @@ const SearchModal = ({
             ? `w-full absolute md:right-[19%] top-[75px] xs:top-[70px] ms:top-[75px] md:top-[30px] lg:top-[44px] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px]`
             : `w-full absolute md:right-[19%] lg:right-[21%] xl:right-[19%] xl:w-[345px] md:w-[300px] lg:top-24 md:top-20 xs:top-32 sm:top-32 top-[7.5rem] `
         }
-        ${hasScrolled && "md:!top-[26px] !top-[82px] "}
+        ${hasScrolled && "md:!top-[26px] !top-[70px] "}
 `}>
         <div className={styles.search_wrapper_mobile}>
           <input
