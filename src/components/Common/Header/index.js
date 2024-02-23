@@ -634,7 +634,7 @@ const SearchModal = ({
 
   useEffect(() => {
     if (!hasScrolled && isOnMobile) {
-      setTempTopOffset("132px");
+      setTempTopOffset("119px");
     }
     if (isOnMobile && hasScrolled) {
       setTempTopOffset("78px");
