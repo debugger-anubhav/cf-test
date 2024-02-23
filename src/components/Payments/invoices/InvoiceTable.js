@@ -60,7 +60,7 @@ const InvoiceTable = ({rows, visibleRows, handleShowMore, loadingSkeleton}) => {
                       row.status === "paid"
                         ? "!text-[#67AF7B]"
                         : "!text-[#D96060]"
-                    } !font-medium !font-Poppins`}>
+                    } !font-medium !font-Poppins !text-14 xl:!text-16`}>
                     {row.status === "paid" ? "Paid" : "Overdue"}
                   </TableCell>
                 </TableRow>

@@ -48,6 +48,7 @@ import {useRouter} from "next/navigation";
 import {MdOutlineVerified} from "react-icons/md";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
+import OrderTypeDrawer from "./OrderTypeDrawer";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
@@ -574,9 +575,24 @@ const AddressSection = () => {
                               </div>
                             </div>
 
-                            {openOrderTypeDropdown &&
+                            <OrderTypeDrawer
+                              closeDropdown={() =>
+                                setOpenOrderTypeDropdown(false)
+                              }
+                              handleClick={option => {
+                                formik.setFieldValue("orderType", option);
+                                setOpenOrderTypeDropdown(
+                                  !openOrderTypeDropdown,
+                                );
+                              }}
+                              selectedValue={formik.values.orderType}
+                              isDropdownOpen={openOrderTypeDropdown}
+                              orderTypeOptions={orderTypeOptions}
+                            />
+
+                            {/* {openOrderTypeDropdown &&
                               orderTypeOptions.map((option, index) => (
-                                <option
+                                <div
                                   className={`${
                                     index === 1 ? "!pb-0" : "mt-3"
                                   } ${styles.ordertype_option}`}
@@ -589,8 +605,8 @@ const AddressSection = () => {
                                     );
                                   }}>
                                   {option}
-                                </option>
-                              ))}
+                                </div>
+                              ))} */}
                           </div>
                           <ErrorMessage name="orderType">
                             {msg =>
