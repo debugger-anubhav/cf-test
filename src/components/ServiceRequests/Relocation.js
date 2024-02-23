@@ -88,6 +88,7 @@ function Relocation({prevScreen, data}) {
       }
     }
     allData.append("file", values?.currentAddressProof);
+    allData.append("documentType", values?.addressProof);
     allData.set("deal_id", data[0]?.dealCodeNumber);
     allData.set("type", selectedType);
     allData.set("mobile_number", values.contactNumber);
