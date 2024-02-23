@@ -33,7 +33,7 @@ function ChangeBillCycle({prevScreen, data}) {
     }
   };
   return (
-    <div className={styles.content_wrapper}>
+    <div className={`${styles.content_wrapper} !overflow-visible`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}
@@ -41,7 +41,7 @@ function ChangeBillCycle({prevScreen, data}) {
         />
         Change bill cycle
       </div>
-      <div className={styles.buy_info}>
+      <div className={`${styles.buy_info} !overflow-visible`}>
         <div className="border border-DDDDDF p-4 rounded-lg">
           <div className="flex gap-2 items-center">
             {istoggled ? (
@@ -86,7 +86,7 @@ function ChangeBillCycle({prevScreen, data}) {
           />
         </div>
         <button
-          className={`${styles.proceed_btn} !w-fit `}
+          className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] `}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
           onClick={() => handleCreateRequest()}>
           Create request <ForwardArrowWithLine />
