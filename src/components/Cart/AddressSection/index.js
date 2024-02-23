@@ -576,7 +576,7 @@ const AddressSection = () => {
 
                             {openOrderTypeDropdown &&
                               orderTypeOptions.map((option, index) => (
-                                <option
+                                <div
                                   className={`${
                                     index === 1 ? "!pb-0" : "mt-3"
                                   } ${styles.ordertype_option}`}
@@ -589,7 +589,7 @@ const AddressSection = () => {
                                     );
                                   }}>
                                   {option}
-                                </option>
+                                </div>
                               ))}
                           </div>
                           <ErrorMessage name="orderType">
