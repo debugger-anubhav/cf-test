@@ -239,7 +239,9 @@ const OrderSummary = ({
               <>
                 <div className={styles.amount_div}>
                   <p className={`!text-71717A ${styles.saved_name}`}>
-                    Paid using {data?.bill?.mode}
+                    {data?.bill?.mode.toLowerCase() === "offline"
+                      ? "Paid offline"
+                      : `Paid using ${data?.bill?.mode}`}
                   </p>
                   <p className={styles.amount}>
                     <span className={styles.rupeeIcon}>₹</span>
