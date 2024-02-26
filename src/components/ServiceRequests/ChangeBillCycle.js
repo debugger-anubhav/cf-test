@@ -28,7 +28,7 @@ function ChangeBillCycle({prevScreen, data}) {
 
   const handleBillCycleDayChange = e => {
     const value = e.target.value;
-    if (value >= 0 && value <= 31) {
+    if (value >= 0 && value <= 28) {
       setBillCycleDay(value);
     }
   };
@@ -65,7 +65,7 @@ function ChangeBillCycle({prevScreen, data}) {
           </div>
           {!istoggled && (
             <div className="mt-8">
-              <p className={styles.desc}>Suggest your preferred start date</p>
+              <p className={styles.desc}>Suggest your preferred start day</p>
               <input
                 type="number"
                 placeholder="Enter a number"
