@@ -66,7 +66,7 @@ function PickupReasonOptions({
   ];
 
   return (
-    <div className="md:pr-4 2xl:pr-0">
+    <div>
       {showCommonPickupScreen && currentScreen === 2 ? (
         <PickupReasonCommonScreen
           reason={selectedPickupReason}
