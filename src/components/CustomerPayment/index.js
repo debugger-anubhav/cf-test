@@ -276,7 +276,6 @@ function CustomerPayment() {
   };
 
   // const handleUseCoins = value => {
-  //   console.log(value);
   //   if (value !== "") {
   //     setUseCityfurnishCoins(true);
   //     if (availableCoins < parseInt(value)) {

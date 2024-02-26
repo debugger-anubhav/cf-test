@@ -25,7 +25,6 @@ export function AuthProvider(WrappedComponent) {
     // useEffect(() => {
     //   setTimeout(() => {
     //     if (isAuthenticated === false) {
-    //       console.log("in baddd");
     //       router.push("/");
     //     }
     //   }, 1000);

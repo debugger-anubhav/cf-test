@@ -30,7 +30,6 @@ const DocMain = () => {
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
 
   // const handleGetOrderId = option => {
-  //   console.log(option, "opti[ojjoij");
   //   dispatch(getOrderId(option?.dealCodeNumber));
   //   handleKycState(option?.dealCodeNumber);
   // };
@@ -42,7 +41,6 @@ const DocMain = () => {
       const response = await baseInstance.get(
         endPoints.kycPage.getKycTrack(userid, orderId),
       );
-      // console.log(response, "responsee");
       dispatch(getOrderId(orderId));
       setKycState(response?.data?.data?.state?.state);
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);

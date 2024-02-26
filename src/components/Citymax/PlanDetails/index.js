@@ -223,9 +223,6 @@ const CitymaxPlanDetail = () => {
   //   });
 
   //   if (!isCheckedMap[item.room_id]) {
-  //     console.log("innnns");
-  //     console.log(index);
-
   //     const newArr = [...planDetailsArray];
   //     newArr[index].fc_frp_room.fc_frp_slot_associations = newArr[
   //       index - 1
