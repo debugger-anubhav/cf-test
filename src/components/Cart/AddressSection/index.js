@@ -548,7 +548,7 @@ const AddressSection = () => {
                                 setOpenOrderTypeDropdown(!openOrderTypeDropdown)
                               }>
                               <Field
-                                className="outline-none border-none cursor-pointer"
+                                className={styles.order_type_field}
                                 name="orderType"
                                 placeholder="Select your order type"
                                 value={formik.values.orderType}

@@ -58,6 +58,9 @@
 .form_input {
   @apply w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16  outline-none hover:border-71717A h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 mt-1 resize-none;
 }
+.order_type_field {
+  @apply outline-none border-none cursor-pointer placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3;
+}
 .form_input_textarea {
   @apply placeholder:text-left -mb-[7px] w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none hover:border-71717A xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl placeholder:text-14 placeholder:text-71717A placeholder:xl:text-16 placeholder:tracking-desc placeholder:xs:tracking-0.3 resize-none mt-1;
 }
@@ -125,7 +128,7 @@
   @apply cursor-pointer flex justify-between items-center w-full text-14 xl:text-16 placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
 }
 .ordertype_option {
-  @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer text-16 tracking-0.3 leading-6;
+  @apply py-3 -mx-3 px-3 border-t border-t-DDDDDF cursor-pointer text-16 tracking-0.3 leading-6 hover:bg-[#EFF5FF] hover:text-5774AC;
 }
 .ordertype_option_mobile {
   @apply flex justify-between h-[45px] items-center cursor-pointer text-14 text-5774AC font-medium tracking-desc leading-6;
