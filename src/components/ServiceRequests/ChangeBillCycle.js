@@ -28,7 +28,7 @@ function ChangeBillCycle({prevScreen, data}) {
 
   const handleBillCycleDayChange = e => {
     const value = e.target.value;
-    if (value >= 0 && value <= 28) {
+    if (value > 0 && value <= 28) {
       setBillCycleDay(value);
     }
   };
@@ -72,6 +72,8 @@ function ChangeBillCycle({prevScreen, data}) {
                 className={styles.form_input_textarea}
                 onChange={handleBillCycleDayChange}
                 value={billCycleDay}
+                min="1"
+                max="28"
               />
             </div>
           )}

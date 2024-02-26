@@ -283,7 +283,9 @@ function TransferOwnership({prevScreen, data}) {
                             as="textarea"
                             name="address"
                             placeholder="Enter your address here including flat/building no."
-                            className={formStyles.form_input}
+                            // className={formStyles.form_input}
+                            className={styles.form_input_textarea}
+                            row={2}
                           />
                           <ErrorMessage name="address">
                             {msg =>
@@ -299,9 +301,12 @@ function TransferOwnership({prevScreen, data}) {
                             Nearest Landmark
                           </p>
                           <Field
+                            as="textarea"
                             name="landmark"
                             placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
-                            className={formStyles.form_input}
+                            // className={formStyles.form_input}
+                            className={styles.form_input_textarea}
+                            row={2}
                           />
                           <ErrorMessage name="landmark">
                             {msg =>
