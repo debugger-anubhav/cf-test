@@ -72,6 +72,7 @@ const CommonContainer = ({
                       "payment-failed.svg")
                   : IconLink + statusToImageMap[item?.status?.toLowerCase()]
               }
+              loading="lazy"
             />
             <div>
               <p className={styles.status}>

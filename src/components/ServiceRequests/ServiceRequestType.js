@@ -105,6 +105,7 @@ function ServiceRequestType({
                       className={styles.request_type_icon}
                       src={item.image}
                       alt="icon"
+                      loading="lazy"
                     />
                     <p className={styles.request_type}>{item.optionValue}</p>
                   </div>

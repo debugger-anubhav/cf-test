@@ -115,6 +115,7 @@ function Buy({heading, prevScreen, data}) {
                       item?.product_image?.split(",")[0]
                     }`}
                     alt={item?.product_name}
+                    loading="lazy"
                   />
                   <p className={styles.desc}>{item?.product_name}</p>
                 </div>

@@ -84,6 +84,7 @@ function SwapProduct({prevScreen, data}) {
                         item.product_image?.split(",")[0]
                       }`}
                       alt={item.product_name}
+                      loading="lazy"
                     />
                     <p className={styles.request_type}>{item.product_name}</p>
                   </div>
@@ -152,6 +153,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
               data.product_image?.split(",")[0]
             }`}
             alt={"product-image"}
+            loading="lazy"
           />
           <IoIosSwap color="#9A9AA2" size={22} />
         </div>
@@ -192,6 +194,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
                   }`}
                   className={styles.product_imge_thambnil}
                   alt={item?.seourl}
+                  loading="lazy"
                 />
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>

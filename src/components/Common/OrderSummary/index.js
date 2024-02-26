@@ -123,6 +123,7 @@ const OrderSummary = ({
                           "thumb/" +
                           item?.product_image?.split(",")[0]
                     }`}
+                    loading="lazy"
                   />
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
                 </div>
@@ -178,6 +179,7 @@ const OrderSummary = ({
                           productImageBaseUrl +
                           p?.fc_product?.image?.split(",")?.[0]
                         }
+                        loading="lazy"
                       />
                       <p className={styles.prod_name}>
                         {p?.fc_product?.product_name}

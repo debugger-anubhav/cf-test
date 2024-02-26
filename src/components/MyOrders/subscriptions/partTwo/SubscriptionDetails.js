@@ -53,6 +53,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
               IconLink +
               statusToImageMap[singleSubscriptionData?.status.toLowerCase()]
             }
+            loading="lazy"
             className={styles.status_icon}
             alt="icon"
           />

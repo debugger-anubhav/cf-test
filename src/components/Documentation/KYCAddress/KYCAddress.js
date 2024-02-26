@@ -397,6 +397,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             src={`${cityUrl + "india-icon.svg"}`}
             className={styles.flag}
             alt="India-icon"
+            loading="lazy"
           />
           <input
             type="text"
