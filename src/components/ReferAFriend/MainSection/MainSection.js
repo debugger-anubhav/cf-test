@@ -208,6 +208,7 @@ const MainSection = ({login}) => {
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] ml-2 inline-block"
+                        loading="lazy"
                       />
                     </span>
                   </p>
@@ -261,6 +262,7 @@ const MainSection = ({login}) => {
                     src={`${IconLink}clipboard.svg`}
                     alt="copy"
                     className="mr-2"
+                    loading="lazy"
                   />
                   <span>copy</span>
                 </div>
@@ -281,6 +283,7 @@ const MainSection = ({login}) => {
                       alt={item?.icon}
                       src={item?.icon}
                       className="cursor-pointer pointer-events-none"
+                      loading="lazy"
                     />
                   </a>
                 ))}
@@ -330,6 +333,7 @@ const MainSection = ({login}) => {
             alt="refer-a-friend"
             className="w-full h-full"
             // className={styles.refer_a_friend_image}
+            loading="lazy"
           />
         </div>
       </div>

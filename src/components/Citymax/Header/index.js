@@ -286,6 +286,7 @@ const CitymaxHeader = ({zIndex}) => {
                 <img
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/citymax_logo.png"
                   alt="CityMax"
+                  loading="lazy"
                 />
               </div>
             </a>

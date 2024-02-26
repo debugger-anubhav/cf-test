@@ -348,6 +348,7 @@ function Relocation({prevScreen, data}) {
                           src={uploading}
                           alt="Uploading Icon"
                           className={`h-full`}
+                          loading="lazy"
                         />
                         <span className="text-14 font-Poppins text-71717A pl-2">
                           {formik.values.currentAddressProof

@@ -595,6 +595,7 @@ const ShoppingCartSection = () => {
                         src={IconLink + "citymax-box.svg"}
                         className={styles.dropdown_included_box_icon}
                         alt="icon"
+                        loading="lazy"
                       />
                       <p className={styles.dropdown_input_label}>
                         Contains: {arr[0]?.includedProducts.length} items
@@ -640,6 +641,7 @@ const ShoppingCartSection = () => {
                               item.fc_product?.image?.split(",")?.[0]
                             }
                             alt="product-image"
+                            loading="lazy"
                           />
                           <p className={styles.included_prod_name}>
                             {item?.fc_product?.product_name?.replace(/-/g, " ")}
@@ -769,6 +771,7 @@ const ShoppingCartSection = () => {
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] inline-block ml-2"
+                        loading="lazy"
                       />
                     </span>
                   </p>

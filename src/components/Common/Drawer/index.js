@@ -375,6 +375,7 @@ export default function CommonDrawer({
                       src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                       alt="paty_icon"
                       className="!w-[24px] h-[24px] inline-block ml-2"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -387,6 +388,7 @@ export default function CommonDrawer({
                     src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                     alt="paty_icon"
                     className="!w-[16px] h-[16px] inline-block ml-2"
+                    loading="lazy"
                   />
                 </div>
               </div>

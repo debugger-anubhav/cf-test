@@ -55,7 +55,6 @@ const CategoryCard = ({
 
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
-    // userId: getLocalStorage("user_id") ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
@@ -77,13 +76,10 @@ const CategoryCard = ({
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${
-      // getLocalStorage("user_id") ?? getLocalStorage("tempUserID")
       decrypt(getLocalStorage("_ga")) ??
       decryptBase64(getLocalStorage("tempUserID"))
     }`,
   );
-
-  // const userId = decrypt(getLocalStorage("_ga"));
 
   const addToWishlist = () => {
     !inWishList
@@ -92,7 +88,6 @@ const CategoryCard = ({
             getSavedItems()
               .then(res => {
                 dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
@@ -108,7 +103,6 @@ const CategoryCard = ({
             getSavedItems()
               .then(res => {
                 dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
@@ -234,16 +228,11 @@ const CategoryCard = ({
 
           <div className={styles.desc_div}>
             <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-              {/* {desc} */}
               {desc.replace(/-/g, " ")}
             </h3>
             <Heart
               size={25}
               color={inWishList ? "#D96060" : "#C0C0C6"}
-              // onClick={e => {
-              //   e.preventDefault();
-              //   setInWishList(!inWishList);
-              // }}
               onClick={e => {
                 e.preventDefault();
                 e.stopPropagation();
@@ -266,7 +255,6 @@ const CategoryCard = ({
                 </h3>
               )}
             </div>
-            {/* {originalPrice !== currentPrice && ( */}
             {currentPrice < originalPrice && parseInt(discount) > 0 && (
               <div className={styles.discount}>{`-${discount} OFF`}</div>
             )}

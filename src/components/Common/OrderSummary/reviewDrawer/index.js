@@ -52,6 +52,7 @@ const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
               <img
                 className="w-full h-full"
                 src={`${productPageImagesBaseUrl + "thumb/" + productImage}`}
+                loading="lazy"
               />
             </div>
             <div>

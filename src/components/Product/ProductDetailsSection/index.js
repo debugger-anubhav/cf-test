@@ -584,7 +584,7 @@ const ProductDetails = ({params}) => {
                     <img
                       src={`${productPageImagesBaseUrl + item}`}
                       alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
-                      className="w-full h-full"
+                      className="!w-[99%] h-full"
                       loading="lazy"
                     />
                   </div>

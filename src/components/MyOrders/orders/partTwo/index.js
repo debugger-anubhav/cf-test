@@ -59,6 +59,7 @@ const OrderDetails = ({setPart, data}) => {
             src={IconLink + statusToImageMap[orderStatus?.toLowerCase()]}
             className={styles.status_icon}
             alt="icon"
+            loading="lazy"
           />
           <p className={styles.status}>
             {statusLabels[orderStatus?.toLowerCase()] || orderStatus}

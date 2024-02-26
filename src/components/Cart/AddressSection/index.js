@@ -63,10 +63,8 @@ const AddressSection = () => {
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  // const [formState, setFormState] = useState({});
   const formikRef = useRef(null);
 
-  // const userId = getLocalStorage("user_id");
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
@@ -322,7 +320,6 @@ const AddressSection = () => {
         if (response.error) {
           alert("Payment failed. Please try again.");
           goToPostCheckout(0);
-          // Redirect to the failure page
         } else {
           const data = {
             razorpayPaymentId: response.razorpay_payment_id,
@@ -396,7 +393,6 @@ const AddressSection = () => {
         setLoading(false);
         if (res?.data?.data?.success === "1") {
           showToastNotification("Advanced payment is done successfully.", 1);
-          // router.push("/");
           setTimeout(() => {
             router.push("/purchases");
           }, 4000);
@@ -507,7 +503,6 @@ const AddressSection = () => {
 
             <Formik
               innerRef={f => (formikRef.current = f)}
-              // ref={formikRef}
               initialValues={{
                 fullName: "",
                 contactNumber: "",

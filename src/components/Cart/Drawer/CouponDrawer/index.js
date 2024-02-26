@@ -56,7 +56,6 @@ const CouponDrawer = ({
       } else {
         setErrorMsg(res?.data?.data?.msg);
         setShowError(true);
-        // applyCouponCode("");
       }
     } catch (err) {
       console.log(err);

@@ -35,7 +35,6 @@ export default function CFCoins() {
   const getTransactions = () => {
     baseInstance
       .get(endPoints.cfCoinsGetTransactions(userIdToUse))
-      // .get(baseURL + endPoints.cfCoinsGetTransactions("85757"))
       .then(res => {
         const temp = res?.data?.data;
         setDebitRows(
@@ -80,7 +79,7 @@ export default function CFCoins() {
           <div className={styles.cf_info_left}>
             <div className="flex items-center gap-3 mt-8">
               <div>
-                <img src={cfCoinIcon} alt="cf-coin" />
+                <img src={cfCoinIcon} alt="cf-coin" loading="lazy" />
               </div>
               <div>
                 <p className={styles.current_bal_heading}>Current balance</p>
@@ -108,6 +107,7 @@ export default function CFCoins() {
                     src={item.icon}
                     className={styles.card_icon}
                     alt="icon"
+                    loading="lazy"
                   />
                   <p className={styles.card_heading}>{item.heading}</p>
                   <p className={styles.card_subheading}>{item.subheading}</p>

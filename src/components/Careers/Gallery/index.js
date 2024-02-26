@@ -12,11 +12,13 @@ export default function Gallery() {
             src={CareerGallery.first}
             alt="life at cityfurnish"
             className={styles.first_image}
+            loading="lazy"
           />
           <img
             src={CareerGallery.second}
             alt="life at cityfurnish"
             className={styles.second_image}
+            loading="lazy"
           />
         </div>
 
@@ -29,12 +31,14 @@ export default function Gallery() {
                 src={CareerGallery.sixth}
                 alt="life at cityfurnish"
                 className={styles.gallery_image_6}
+                loading="lazy"
               />
 
               <img
                 src={CareerGallery.fourth}
                 alt="life at cityfurnish"
                 className={styles.gallery_image_4}
+                loading="lazy"
               />
             </div>
             <div className={styles.second_top_col_2}>
@@ -42,6 +46,7 @@ export default function Gallery() {
                 src={CareerGallery.fivth}
                 alt="life at cityfurnish"
                 className={styles.gallery_image_5}
+                loading="lazy"
               />
             </div>
           </div>
@@ -51,6 +56,7 @@ export default function Gallery() {
                 src={CareerGallery.third}
                 alt="life at cityfurnish"
                 className={styles.img_gallery}
+                loading="lazy"
               />
             </div>
           </div>
@@ -63,6 +69,7 @@ export default function Gallery() {
               src={CareerGallery.seven}
               alt="life at cityfurnish"
               className={styles.img_gallery}
+              loading="lazy"
             />
           </div>
           <div className={styles.gallery_image_8}>
@@ -70,6 +77,7 @@ export default function Gallery() {
               src={CareerGallery.eight}
               alt="life at cityfurnish"
               className={styles.img_gallery}
+              loading="lazy"
             />
           </div>
         </div>
@@ -80,18 +88,28 @@ export default function Gallery() {
           src={CareerGalleryMobile.first}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
         <img
           src={CareerGalleryMobile.second}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
         <div className={"flex w-full h-full gap-2"}>
           <div className="w-1/2 flex">
-            <img src={CareerGalleryMobile.sixth} alt="life at cityfurnish" />
+            <img
+              src={CareerGalleryMobile.sixth}
+              alt="life at cityfurnish"
+              loading="lazy"
+            />
           </div>
           <div className="w-1/2 flex">
-            <img src={CareerGalleryMobile.fourth} alt="life at cityfurnish" />
+            <img
+              src={CareerGalleryMobile.fourth}
+              alt="life at cityfurnish"
+              loading="lazy"
+            />
           </div>
         </div>
 
@@ -99,21 +117,25 @@ export default function Gallery() {
           src={CareerGalleryMobile.eight}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
         <img
           src={CareerGalleryMobile.third}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
         <img
           src={CareerGalleryMobile.fivth}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
         <img
           src={CareerGalleryMobile.seven}
           alt="life at cityfurnish"
           className={styles.mobile_image}
+          loading="lazy"
         />
       </div>
     </>
