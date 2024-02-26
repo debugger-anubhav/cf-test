@@ -50,9 +50,11 @@ const OrderTypeDrawer = ({
       ) : (
         orderTypeOptions.map((option, index) => (
           <div
-            className={`${index === 1 ? "!pb-0" : "mt-3"} ${
-              styles.ordertype_option
-            }`}
+            className={`${
+              index === 1
+                ? "!pb-0 rounded-b-xl hover:!pb-3 hover:!-mb-3"
+                : "mt-3 "
+            } ${styles.ordertype_option}`}
             key={index}
             value={option}
             onClick={() => {

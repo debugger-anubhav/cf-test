@@ -43,6 +43,7 @@ const CommonContainer = ({
   tab,
   containerRef,
   getSingleOrderDetails,
+  offlineCustomer,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
