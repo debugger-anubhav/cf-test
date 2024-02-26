@@ -121,7 +121,15 @@ function ServiceRequestType({
             <div className={styles.or_text}>OR</div>
             <div className={styles.doted_line}></div>
           </div>
-          <div className={`${styles.request_type} mt-7`}>Chat with us</div>
+          <div className={`${styles.request_type} mt-7`}>
+            <a
+              href={"https://wa.me/919205006188"}
+              target="_blank"
+              rel="noopener  noreferrer"
+              aria-label="Talk to an agent">
+              Chat with us
+            </a>
+          </div>
 
           {/* additional */}
           {isHelpDrawer && !isSubscription && (
