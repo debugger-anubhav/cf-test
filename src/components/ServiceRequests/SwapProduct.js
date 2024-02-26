@@ -151,6 +151,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
               "thumb/" +
               data.product_image?.split(",")[0]
             }`}
+            alt={"product-image"}
           />
           <IoIosSwap color="#9A9AA2" size={22} />
         </div>

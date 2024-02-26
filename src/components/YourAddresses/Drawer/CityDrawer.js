@@ -109,7 +109,6 @@ const CityDrawer = ({
                 alt="download-QR"
                 loading="lazy"
               />
-              {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
               <div className={`${styles.qr_text}`}>
                 <p className={styles.qr_text_span}>100+</p>
                 <div>

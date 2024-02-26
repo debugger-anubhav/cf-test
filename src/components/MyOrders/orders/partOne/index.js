@@ -120,6 +120,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                     src={
                       selectedMenuOrder === index ? item.iconActive : item.icon
                     }
+                    alt="warning-icon"
                   />
                 )}
               </div>

@@ -34,6 +34,7 @@ const FourSteps = () => {
                 className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
                 // className={`w-full md:hidden`}
                 loading="lazy"
+                alt={`step-${index + 1}`}
               />
             </div>
             <h3 className={styles.head1}>{itemm?.head}</h3>

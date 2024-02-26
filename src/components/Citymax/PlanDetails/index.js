@@ -536,6 +536,7 @@ const CitymaxPlanDetail = () => {
                                         productImageBaseUrl + t.selectedProduct
                                       }
                                       className={styles.selected_slot_img}
+                                      alt="product-image"
                                     />
                                     <div
                                       onClick={e =>
@@ -588,6 +589,7 @@ const CitymaxPlanDetail = () => {
                                         : IconLink + t.fc_frp_slot.slot_image
                                     }
                                     className={styles.product_icon}
+                                    alt={"product-image"}
                                   />
                                   <p className={styles.product_name}>
                                     {" "}
