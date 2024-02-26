@@ -218,7 +218,8 @@ function Relocation({prevScreen, data}) {
                     className={formStyles.form_input}
                     row={2}
                   /> */}
-                  <textarea
+                  <Field
+                    as="textarea"
                     name="address"
                     placeholder="Enter your address here including flat/building no."
                     className={styles.form_input_textarea}
@@ -241,8 +242,9 @@ function Relocation({prevScreen, data}) {
                       className={formStyles.form_input}
                       row={2}
                     /> */}
-                  <textarea
+                  <Field
                     name="landmark"
+                    as="textarea"
                     placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
                     className={styles.form_input_textarea}
                     rows={2}
