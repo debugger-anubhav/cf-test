@@ -89,7 +89,7 @@ function PickupReasonCommonScreen({
               reason.title !== "Requirement Fulfilled"
                 ? "!mt-0"
                 : ""
-            }`}
+            } !w-full`}
             onClick={() => {
               if (reason.btnName === "Create request") {
                 handleCreateRequest();
@@ -107,7 +107,7 @@ function PickupReasonCommonScreen({
               <button
                 className={`${styles.plain_btn} !mt-0 justify-center`}
                 onClick={handleCreateRequest}>
-                No, let me proceed with pickup <ForwardArrowWithLine />
+                No, let me proceed with pickup
               </button>
             </div>
           ) : null}
