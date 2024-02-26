@@ -107,7 +107,6 @@ export default function Home() {
 
   // added
   useEffect(() => {
-    console.log(process.env.NODE_ENV, "[[[[[[[[[[");
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
         event.preventDefault();

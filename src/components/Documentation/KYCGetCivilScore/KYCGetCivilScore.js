@@ -79,13 +79,11 @@ const KYCGetCivilScore = ({handleKycState}) => {
   // Function to handle input change
   const handleInputDob = event => {
     let input = event.target.value;
-    console.log(input, input.length, "input");
-
     // Remove any non-numeric characters
     if (input.length !== 3 && input.length !== 6)
       input = input.replace(/\D/g, "");
     else if (input.charAt(2) === "-" && input.length === 4) {
-      console.log("jjij");
+      console.log(input);
     } else input = input.replace(/[^\d-]/g, "");
 
     // Limit input to 8 digits
@@ -116,11 +114,9 @@ const KYCGetCivilScore = ({handleKycState}) => {
       orderId: selectedOrderId,
     };
 
-    console.log(data);
     baseInstance
       .post(baseURL + endPoints.getAndSaveCibilScore, data)
       .then(res => {
-        console.log(res, "res in getcibilsvoreapiiii");
         setSubmitting(false);
         handleKycState(selectedOrderId);
         setDisableButton(false);
@@ -145,10 +141,6 @@ const KYCGetCivilScore = ({handleKycState}) => {
     setIsDDOpen(false);
   };
   const validateForm = () => {
-    console.log(
-      selectedOption.label === "PAN Number (Recommended)",
-      "selected option",
-    );
     const panRegex = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
     // const drivingRegex = / ^([A-Z]{2})(\d{2}|\d{3})[a-zA-Z]{0,1}(\d{4})(\d{7})/;
     const voterIdRegex = /^[A-Z]{3}[0-9]{7}$/;
@@ -158,12 +150,6 @@ const KYCGetCivilScore = ({handleKycState}) => {
     switch (selectedOption.label) {
       case "PAN Number":
       case "PAN Number (Recommended)":
-        console.log(
-          panRegex.test(formData.idNumber),
-          formData.idNumber,
-          selectedOption.value,
-          "mmmmmm",
-        );
         if (!panRegex.test(formData.idNumber)) {
           errors.idNumber = "Please enter a valid pan number";
         } else {
@@ -215,8 +201,6 @@ const KYCGetCivilScore = ({handleKycState}) => {
   const handleSubmit = () => {
     const errors = validateForm();
     setFormErrors(errors);
-    console.log(errors, "errores");
-
     if (Object.values(errors).every(value => value === "")) {
       submitHandler();
     } else {
@@ -247,7 +231,6 @@ const KYCGetCivilScore = ({handleKycState}) => {
     });
   }, [selectedOrderId]);
 
-  // console.log(handleCheckboxChange, handleInputChange);
   return (
     <div className="relative">
       <DoItLater

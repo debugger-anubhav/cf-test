@@ -29,8 +29,6 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
     getSingleOrderDetails();
   }, []);
 
-  console.log(singleSubscriptionData, "singleSubscriptionData");
-
   let expiryDate;
   if (singleSubscriptionData) {
     expiryDate = format(

@@ -71,21 +71,17 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     // addressProof: "",
     financialDocumentProof: "",
   });
-  console.log(docData, isSelected, "selecege");
   const getAddProofList = () => {
     baseInstance
       .get(endPoints.getFinacialDocList)
       .then(res => {
         setDocsData(res?.data?.data);
         setIsSelected(res?.data?.data?.supported_docs?.split(",")?.[0]);
-        console.log(res?.data?.data);
       })
       .catch(err => console.log(err));
   };
 
   const handleFileInputChange = e => {
-    console.log("eeee");
-    // setIsUploading(false);
     const file = e.target.files;
     const temp = [...formData.financialDocumentProof];
     const fileArray = Object.keys(file).map(key => {
@@ -121,8 +117,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
       error.financialDocumentProof = "";
     }
     setFormErrors(error);
-    console.log(error, "errooorr");
-
     if (error.financialDocumentProof !== "") return;
 
     // for (const key in formErrors) {
@@ -434,7 +428,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
         )} */}
       </div>
 
-      {console.log(formErrors, formErrors.financialDocumentProof, "formerrors")}
       {formErrors.financialDocumentProof && (
         <div
           className={` ${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>

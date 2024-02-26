@@ -34,7 +34,6 @@ const CommonField = ({handleKycState}) => {
 
   const handleChangeOption = newOption => {
     // Update the selected option state
-    console.log("innnn");
     setSelectedOption({
       dealCodeNumber: newOption.dealCodeNumber,
     });

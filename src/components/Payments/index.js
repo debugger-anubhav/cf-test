@@ -173,7 +173,6 @@ const PaymentPage = () => {
     baseInstance
       .get(endPoints.myPaymentsPage.getMyPayments(userId))
       .then(res => {
-        console.log(res?.data?.data);
         setPaymentDetails(res?.data?.data);
         setLoadingSkeleton(false);
       })
@@ -196,7 +195,6 @@ const PaymentPage = () => {
         },
       )
       .then(res => {
-        console.log(res?.data?.data?.download_url, "ppppppppppppppppp");
         window?.open(res?.data?.data?.download_url);
       })
       .catch(err => console.log(err, "download"));

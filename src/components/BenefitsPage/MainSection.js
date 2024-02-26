@@ -19,7 +19,11 @@ function MainSection() {
                     className="max-w-[320px] max-h-[194px]"
                   />
                   <div className={styles.detail_wrapper}>
-                    <img src={item.icon} className="mb-6 w-11 h-11" />
+                    <img
+                      src={item.icon}
+                      className="mb-6 w-11 h-11"
+                      alt="icon"
+                    />
                     <h3 className={`${styles.heading} mb-2 tracking-[-0.4px]`}>
                       {item.Heading}
                     </h3>

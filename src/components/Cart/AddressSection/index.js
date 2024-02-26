@@ -246,12 +246,11 @@ const AddressSection = () => {
         fetchBill();
       }
     } catch (err) {
-      console.log("in tryyyy");
+      console.log(err);
     }
   }
 
   const checkPostalCode = async (type, values) => {
-    console.log(type, values, "llll");
     const postalCode =
       type === "offlineCustomer"
         ? formikRef?.current?.values?.postalCode
@@ -280,8 +279,6 @@ const AddressSection = () => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res);
-
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -321,7 +318,6 @@ const AddressSection = () => {
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       order_id: orderId,
       handler: async function (response) {
-        console.log(1);
         setLoading(true);
         if (response.error) {
           alert("Payment failed. Please try again.");
@@ -341,7 +337,6 @@ const AddressSection = () => {
             baseURL + endPoints.addToCart.successPayment,
             data,
           );
-          console.log(2);
           setLoading(false);
           console.log(result, "result");
           goToPostCheckout(1, dealCodeNumber);
@@ -398,7 +393,6 @@ const AddressSection = () => {
     baseInstance
       .post(endPoints.addToCart.offlinePayment, body)
       .then(res => {
-        console.log(res, "res in offlinePayment");
         setLoading(false);
         if (res?.data?.data?.success === "1") {
           showToastNotification("Advanced payment is done successfully.", 1);

@@ -6,7 +6,6 @@ const RejectedDocsComponent = ({array, docType}) => {
   const fileBaseUrl = "https://d3juy0zp6vqec8.cloudfront.net/";
   const handleOpenFile = (dirName, fileName) => {
     const imageUrl = fileBaseUrl + dirName + "/" + fileName;
-    console.log("Image URL:", imageUrl);
     window?.open(imageUrl, "_blank");
   };
 

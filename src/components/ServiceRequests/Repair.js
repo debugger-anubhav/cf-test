@@ -116,7 +116,6 @@ function Repair({prevScreen, data}) {
                   color={"#E3E1DC"}
                   onClick={() => {
                     handleToggle(index);
-                    console.log("first");
                     // getRepairOption('Alexa Single Bed');
                     getRepairOption(item?.product_name);
                   }}

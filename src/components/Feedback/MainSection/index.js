@@ -32,7 +32,6 @@ export default function MainSection() {
         msgTime: params.unixtimestamp,
       })
       .then(res => {
-        // console.log(res, "response");
         showToastNotification(
           "Your Feedback is sent to our team. Thank you for your response.",
           1,
@@ -55,10 +54,6 @@ export default function MainSection() {
       })
       .catch(err => console.log(err));
   };
-  useEffect(() => {
-    console.log(isHovered, "state");
-  }, [isHovered]);
-
   const validationSchema = Yup.object({
     textarea: Yup.string().required(
       "Your Feedback is important to us! Please let us know how we can improve ourselves?",

@@ -145,7 +145,6 @@ function MidTermCard({
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
-      console.log("Payment failed:", response.error.description);
       alert("Payment failed: " + response.error.description);
     });
 
@@ -153,7 +152,6 @@ function MidTermCard({
   }
 
   const getApiData = () => {
-    console.log(isCityShieldApplied, "midterm card");
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {

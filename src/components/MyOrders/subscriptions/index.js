@@ -15,7 +15,6 @@ const SubscriptionPage = ({tab, setTab}) => {
   const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const userId = decrypt(getLocalStorage("_ga"));
-  console.log(userId);
 
   const getAllSubscriptionDetails = async filter => {
     const body = {
@@ -27,7 +26,6 @@ const SubscriptionPage = ({tab, setTab}) => {
         endPoints.myOrdersPage.getSubscriptionData,
         body,
       );
-      console.log(response);
       setsubscriptionData(response?.data?.data);
       setSkeletonLoading(false);
     } catch (err) {

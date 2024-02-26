@@ -3,7 +3,6 @@ import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
 const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
-  console.log(isOpen, "single");
   return (
     <>
       <div className="pb-6">

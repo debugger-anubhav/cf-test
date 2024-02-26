@@ -5,7 +5,6 @@ import styles from "./styles.module.css";
 // import Image from "next/image";
 
 const LoaderComponent = ({loading}) => {
-  console.log("in loading");
   return (
     <div className={` ${styles.loader_container}`}>
       {/* <Image src={gif} alt="loading" height={"200"} width={"200"} /> */}

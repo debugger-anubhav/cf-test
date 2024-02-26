@@ -60,9 +60,8 @@ function TenureExtension() {
   const [isCheckedArray, setIsCheckedArray] = useState(
     Array(CardData.length).fill(true),
   );
-  console.log(isCityShieldApplied, isChecked, "checking");
+  console.log(isChecked, "checking");
   const parantApi = () => {
-    console.log("in parent ");
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {

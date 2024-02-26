@@ -1,11 +1,6 @@
 import React, {useEffect, useLayoutEffect, useRef, useState} from "react";
 import styles from "../../orders/partOne/styles.module.css";
 import {Close, InformationIcon, SadEmoji} from "@/assets/icon";
-import {getLocalStorage} from "@/constants/constant";
-// import axios from "axios";
-// import {baseURL} from "@/network/axios";
-// import {endPoints} from "@/network/endPoints";
-import {decrypt} from "@/hooks/cryptoUtils";
 import CommonContainer from "../../common/CommonContainer";
 import Header from "../../common/Header";
 import {Skeleton} from "@mui/material";
@@ -59,9 +54,6 @@ const AllSubcriptions = ({
       ? setVisibleImages(newVisibleImages)
       : setVisibleImages(2);
   }, [containerWidth]);
-
-  const userId = decrypt(getLocalStorage("_ga"));
-  console.log(userId);
 
   return (
     <div className={styles.main_container}>
@@ -128,7 +120,6 @@ const AllSubcriptions = ({
             <div className={styles.orders_wrapper}>
               {data?.length > 0 ? (
                 data?.map((item, index) => {
-                  console.log(visibleImages, "visibleee");
                   return (
                     <div key={index}>
                       <CommonContainer

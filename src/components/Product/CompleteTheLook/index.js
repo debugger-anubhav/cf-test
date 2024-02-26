@@ -41,7 +41,6 @@ const CompleteTheLook = ({params}) => {
 
   const handleScrolling = () => {
     const slider = scrollerRef2.current;
-    console.log(slider);
     if (!slider) return;
 
     let mouseDown = false;

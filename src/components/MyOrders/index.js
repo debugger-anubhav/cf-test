@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./style.module.css";
 import DocSidebar from "../Documentation/Sidebar/DocSidebar";
 import OrderPage from "./orders";
@@ -6,9 +6,6 @@ import SubscriptionPage from "./subscriptions";
 
 const index = () => {
   const [tab, setTab] = useState(0);
-  useEffect(() => {
-    console.log(tab, "tab");
-  }, [setTab]);
 
   return (
     <div className={styles.main_container}>
