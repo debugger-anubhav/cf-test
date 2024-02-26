@@ -537,6 +537,7 @@ const CitymaxPlanDetail = () => {
                                       }
                                       className={styles.selected_slot_img}
                                       alt="product-image"
+                                      loading="lazy"
                                     />
                                     <div
                                       onClick={e =>
@@ -590,6 +591,7 @@ const CitymaxPlanDetail = () => {
                                     }
                                     className={styles.product_icon}
                                     alt={"product-image"}
+                                    loading="lazy"
                                   />
                                   <p className={styles.product_name}>
                                     {" "}

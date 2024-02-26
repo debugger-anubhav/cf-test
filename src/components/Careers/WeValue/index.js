@@ -32,7 +32,12 @@ export default function WeValue() {
                 index !== Data.length - 1 ? "lg:mr-6 mr-4" : "mr-0"
               }`}
               key={index.toString()}>
-              <img src={item.bg} alt={item.title} className={"w-full"} />
+              <img
+                src={item.bg}
+                alt={item.title}
+                className={"w-full"}
+                loading="lazy"
+              />
               <p className={styles.bottom_left}>{item.title}</p>
             </div>
           );

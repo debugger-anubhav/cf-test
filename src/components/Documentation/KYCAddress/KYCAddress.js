@@ -569,12 +569,14 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdHiddenIB}`}
+                loading="lazy"
               />
 
               <Image
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
+                loading="lazy"
               />
               <span className={`${styles.chooseFile}`}>Choose file(s)</span>
             </div>
@@ -668,6 +670,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       src={uploading}
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
+                      loading="lazy"
                     />
                     <span className={`${styles.chooseFile}`}>
                       {item?.name || item?.doc_name}
@@ -758,12 +761,14 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdHiddenIB}`}
+                loading="lazy"
               />
 
               <Image
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
+                loading="lazy"
               />
               <span className={`${styles.chooseFile}`}>Choose file(s)</span>
             </div>

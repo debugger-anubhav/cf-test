@@ -36,6 +36,7 @@ const NeedsSection = () => {
                 src={ele?.img}
                 alt={ele?.title}
                 className={style.need_image}
+                loading="lazy"
               />
               <div className={style.need_img_title}>{ele?.title}</div>
               <div className={style.need_img_desc}>{ele?.desc}</div>

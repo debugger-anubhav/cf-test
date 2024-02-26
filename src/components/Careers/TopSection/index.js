@@ -15,6 +15,7 @@ export default function TopSection() {
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star_struck.svg"
               alt="paty_icon"
               className="w-[24px] h-[24px] inline-block"
+              loading="lazy"
             />
           </span>
         </h1>

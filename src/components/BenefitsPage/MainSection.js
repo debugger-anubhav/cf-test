@@ -17,12 +17,14 @@ function MainSection() {
                     }
                     alt={item.Heading}
                     className="max-w-[320px] max-h-[194px]"
+                    loading="lazy"
                   />
                   <div className={styles.detail_wrapper}>
                     <img
                       src={item.icon}
                       className="mb-6 w-11 h-11"
                       alt="icon"
+                      loading="lazy"
                     />
                     <h3 className={`${styles.heading} mb-2 tracking-[-0.4px]`}>
                       {item.Heading}
@@ -36,6 +38,7 @@ function MainSection() {
                       src={item.updatedMobileIcon}
                       className={styles.responsive_icon}
                       alt={item.Heading}
+                      loading="lazy"
                     />
                     <p className={`${styles.heading} tracking-[-0.4px]`}>
                       {item.Heading}

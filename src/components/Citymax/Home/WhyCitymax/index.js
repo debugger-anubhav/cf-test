@@ -53,6 +53,7 @@ const WhyCitymax = () => {
               src={`${IconLink + item.icon}`}
               className={styles.icon}
               alt="icon"
+              loading="lazy"
             />
             <h3 className={styles.card_head}>{item.head}</h3>
             <p className={styles.desc}>{item.desc}</p>

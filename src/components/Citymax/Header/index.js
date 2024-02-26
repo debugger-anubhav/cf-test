@@ -286,6 +286,7 @@ const CitymaxHeader = ({zIndex}) => {
                 <img
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/citymax_logo.png"
                   alt="CityMax"
+                  loading="lazy"
                 />
               </div>
             </a>
@@ -309,6 +310,7 @@ const CitymaxHeader = ({zIndex}) => {
                   src={`${IconLink + "home-cityfurnish.svg"}`}
                   className={styles.home_icon}
                   alt="cityfurnish"
+                  loading="lazy"
                 />
                 <p className={styles.cityfurnish_txt}>cityfurnish</p>
               </div>
