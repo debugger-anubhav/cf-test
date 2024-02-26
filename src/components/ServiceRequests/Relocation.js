@@ -211,11 +211,18 @@ function Relocation({prevScreen, data}) {
 
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Address</p>
-                  <Field
+                  {/* <Field
                     as="textarea"
                     name="address"
                     placeholder="Enter your address here including flat/building no."
                     className={formStyles.form_input}
+                    row={2}
+                  /> */}
+                  <textarea
+                    name="address"
+                    placeholder="Enter your address here including flat/building no."
+                    className={styles.form_input_textarea}
+                    rows={2}
                   />
                   <ErrorMessage name="address">
                     {msg =>
@@ -228,10 +235,17 @@ function Relocation({prevScreen, data}) {
 
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Nearest Landmark</p>
-                  <Field
+                  {/* <Field
+                      as="textarea"
+                      name="landmark"
+                      className={formStyles.form_input}
+                      row={2}
+                    /> */}
+                  <textarea
                     name="landmark"
                     placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
-                    className={formStyles.form_input}
+                    className={styles.form_input_textarea}
+                    rows={2}
                   />
                   <ErrorMessage name="landmark">
                     {msg =>
