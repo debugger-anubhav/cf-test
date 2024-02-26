@@ -108,7 +108,7 @@ function Repair({prevScreen, data}) {
                   color={"#5774AC"}
                   size={28}
                   onClick={() => handleToggle(index)}
-                  className="cursor-pointer"
+                  className="cursor-pointer min-w-[2rem]"
                 />
               ) : (
                 <ToggleOff
@@ -119,7 +119,7 @@ function Repair({prevScreen, data}) {
                     // getRepairOption('Alexa Single Bed');
                     getRepairOption(item?.product_name);
                   }}
-                  className="cursor-pointer"
+                  className="cursor-pointer min-w-[2rem]"
                 />
               )}
               <p className={styles.desc}>{item?.product_name}</p>
