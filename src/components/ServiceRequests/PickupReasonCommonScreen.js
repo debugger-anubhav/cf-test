@@ -39,7 +39,7 @@ function PickupReasonCommonScreen({
     trailCreateSR(payload);
   };
   return (
-    <>
+    <div>
       {showScreenName === reason.btnName ? (
         <>
           {showScreenName === "Repair product(s)" && (
@@ -113,7 +113,7 @@ function PickupReasonCommonScreen({
           ) : null}
         </div>
       )}
-    </>
+    </div>
   );
 }
 
