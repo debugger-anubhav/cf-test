@@ -25,7 +25,7 @@ export default function UserSettings() {
   const url = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
   const Servicesdata = [
     {
-      head: "My orders",
+      head: "My Orders",
       desc: "See all orders & stay updated on their status.",
       link: "/purchases",
       img: `${url}my-orders.svg`,
@@ -43,7 +43,7 @@ export default function UserSettings() {
       img: `${url}my-payments.svg`,
     },
     {
-      head: "CF coins",
+      head: "CF Coins",
       desc: "Check CF coins. Use them when ordering.",
       link: "/wallet",
       img: `${url}cf-coins-b-w.svg`,

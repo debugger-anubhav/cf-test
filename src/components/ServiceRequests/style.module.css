@@ -57,7 +57,7 @@
   @apply w-full h-[2px] bg-DDDDDF;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
+  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
@@ -102,7 +102,7 @@
   @apply flex justify-between my-8;
 }
 .swap_info {
-  @apply flex py-2 px-3 gap-2 bg-F7F7F8 rounded-[20px] items-center;
+  @apply flex py-2 px-3 gap-2 bg-F7F7F8 rounded-[20px] items-center h-fit min-w-[80px];
 }
 .swap_heading {
   @apply font-Poppins font-medium text-16 text-71717A;
