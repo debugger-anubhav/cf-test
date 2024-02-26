@@ -594,6 +594,7 @@ const ShoppingCartSection = () => {
                       <img
                         src={IconLink + "citymax-box.svg"}
                         className={styles.dropdown_included_box_icon}
+                        alt="icon"
                       />
                       <p className={styles.dropdown_input_label}>
                         Contains: {arr[0]?.includedProducts.length} items
@@ -638,6 +639,7 @@ const ShoppingCartSection = () => {
                               "thumb/" +
                               item.fc_product?.image?.split(",")?.[0]
                             }
+                            alt="product-image"
                           />
                           <p className={styles.included_prod_name}>
                             {item?.fc_product?.product_name?.replace(/-/g, " ")}
@@ -714,6 +716,7 @@ const ShoppingCartSection = () => {
                         src={`${categoryIconsUrl + "cf_coin.svg"}`}
                         className={`${styles.coin} pointer-events-none`}
                         loading="lazy"
+                        alt="icon"
                       />
                     </div>
                     <div>

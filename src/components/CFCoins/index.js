@@ -80,7 +80,7 @@ export default function CFCoins() {
           <div className={styles.cf_info_left}>
             <div className="flex items-center gap-3 mt-8">
               <div>
-                <img src={cfCoinIcon} />
+                <img src={cfCoinIcon} alt="cf-coin" />
               </div>
               <div>
                 <p className={styles.current_bal_heading}>Current balance</p>
@@ -104,7 +104,11 @@ export default function CFCoins() {
                   style={{
                     backgroundImage: `URL('https://d3juy0zp6vqec8.cloudfront.net/images/icons/bg.webp')`,
                   }}>
-                  <img src={item.icon} className={styles.card_icon} />
+                  <img
+                    src={item.icon}
+                    className={styles.card_icon}
+                    alt="icon"
+                  />
                   <p className={styles.card_heading}>{item.heading}</p>
                   <p className={styles.card_subheading}>{item.subheading}</p>
                 </div>

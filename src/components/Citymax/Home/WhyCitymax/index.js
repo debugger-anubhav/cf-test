@@ -49,7 +49,11 @@ const WhyCitymax = () => {
       <div className={styles.card_wrapper}>
         {cardData.map((item, index) => (
           <div key={index} className={styles.card}>
-            <img src={`${IconLink + item.icon}`} className={styles.icon} />
+            <img
+              src={`${IconLink + item.icon}`}
+              className={styles.icon}
+              alt="icon"
+            />
             <h3 className={styles.card_head}>{item.head}</h3>
             <p className={styles.desc}>{item.desc}</p>
           </div>

@@ -151,7 +151,6 @@ const ProductCard = ({
                       {item.isAlt && (
                         <div className={styles.label_tag}>
                           <Sparkles className={styles.sparkel_icon} />
-                          {/* <img /> */}
                           <p>Recommended</p>
                         </div>
                       )}
