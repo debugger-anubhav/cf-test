@@ -165,6 +165,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                         offlineCustomer={
                           ordersData?.[0]?.is_offline_placed === "1"
                         }
+                        offlineUserId={ordersData?.[index]?.user_id}
                       />
                     </div>
                   );
