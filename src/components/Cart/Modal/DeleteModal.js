@@ -176,7 +176,6 @@ const DeleteModal = ({
           styles={{}}
           open={isModalOpen}
           onClose={closeModal}
-          // center={true}
           classNames={{
             modal: styles.customModal,
             overlay: styles.customOverlay,

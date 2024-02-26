@@ -7,7 +7,6 @@ import {
   sortByText,
 } from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
-// import CategoryPopover from "@/components/Common/categoryPopover/CategoryPopover";
 import {useDispatch, useSelector} from "react-redux";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBar";
@@ -533,8 +532,6 @@ const SubHeader = ({params}) => {
                     </div>
                     <div>
                       <DownPopUpArrow
-                        // size={20}
-
                         color={"#71717A"}
                         className={
                           filterOpen ? styles.arrow_up : styles.arrow_down
@@ -566,9 +563,6 @@ const SubHeader = ({params}) => {
                                   id={index}
                                   name={ele.filter_name}
                                   value={ele.filter_tag}
-                                  // checked={categoryPageReduxData?.filteredItems.includes(
-                                  //   ele?.filter_tag,
-                                  // )}
                                   checked={updatedFilter.includes(
                                     ele?.filter_tag,
                                   )}
@@ -632,7 +626,6 @@ const SubHeader = ({params}) => {
               </div>
               {sortOpen && (
                 <div className="gap-6 absolute z-[111] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
-                  {/* // <div className="gap-6 shadow-md w-[222px] rounded-[20px] border-[2px] border-71717A py-4"> */}
                   {sortByText?.map((ele, index) => {
                     return (
                       <div
@@ -717,7 +710,6 @@ const SubHeader = ({params}) => {
                         <>
                           <div
                             className={styles.filter_card}
-                            // style={{background: "red"}}
                             key={index.toString()}>
                             <FilterCard
                               text={item}
@@ -729,7 +721,6 @@ const SubHeader = ({params}) => {
                     })
                   : null}
                 <div
-                  // className={styles.single_filter_mobile}
                   className={styles.single_filter}
                   onClick={() => {
                     const url = window?.location.href;

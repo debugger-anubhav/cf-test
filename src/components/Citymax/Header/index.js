@@ -310,7 +310,6 @@ const CitymaxHeader = ({zIndex}) => {
                   src={`${IconLink + "home-cityfurnish.svg"}`}
                   className={styles.home_icon}
                   alt="cityfurnish"
-                  loading="lazy"
                 />
                 <p className={styles.cityfurnish_txt}>cityfurnish</p>
               </div>

@@ -42,7 +42,6 @@ export const useChatScript = (url, widgetCode) => {
     }, 3000);
 
     return () => {
-      // document?.body?.removeChild(script);
       if (script && script.parentNode) {
         script.parentNode.removeChild(script);
       }

@@ -12,7 +12,6 @@ const TrendingItem = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isDumy, setIsDumy] = React.useState(false);
-  // const homePageReduxData = useSelector(state => state.homePagedata);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,

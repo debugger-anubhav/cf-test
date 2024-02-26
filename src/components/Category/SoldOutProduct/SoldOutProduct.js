@@ -18,7 +18,6 @@ import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
 import {useParams, useRouter} from "next/navigation";
-// import CareInstruction from "@/components/Product/CareInstruction";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
@@ -48,7 +47,6 @@ export const SoldOutProduct = () => {
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
-  // const homePageReduxData = useSelector(state => state.homePagedata);
 
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
@@ -250,7 +248,6 @@ export const SoldOutProduct = () => {
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          {/* <CareInstruction params={{ productId: "4096", productName: "4096" }} /> */}
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
