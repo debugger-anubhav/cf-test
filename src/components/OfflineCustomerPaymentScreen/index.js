@@ -104,7 +104,10 @@ const OfflinePayment = () => {
   }
 
   return (
-    <div className={styles.main_container}>
+    <div
+      className={`${!details?.dealCodeNumber && "h-[41vh]"} ${
+        styles.main_container
+      }`}>
       <p className={styles.head}>Offline Payment</p>
       <div className="mt-6 xl:mt-8">
         <div className={otherStyles.upper_map}>
@@ -113,14 +116,14 @@ const OfflinePayment = () => {
               <div key={index} className={otherStyles.progress_map_item}>
                 <div
                   className={`${
-                    index === 0
-                      ? otherStyles.active_status
-                      : otherStyles.inactive_status
+                    index === 1 && details?.dealCodeNumber
+                      ? otherStyles.inactive_status
+                      : otherStyles.active_status
                   } ${otherStyles.progress_circle}`}>
-                  {index === 0 ? (
-                    <ImCheckmark className={otherStyles.check_icon} />
-                  ) : (
+                  {index === 1 && details?.dealCodeNumber ? (
                     <div className={otherStyles.inner_circle}></div>
+                  ) : (
+                    <ImCheckmark className={otherStyles.check_icon} />
                   )}
                 </div>
 
@@ -133,46 +136,60 @@ const OfflinePayment = () => {
           })}
         </div>
       </div>
+
       <div className={styles.details_wrapper}>
-        <div className={styles.row}>
-          <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>
-            Your Order ID
+        {details?.dealCodeNumber ? (
+          <>
+            <div className={styles.row}>
+              <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>
+                Your Order ID
+              </p>
+              <p className={styles.desc}>:</p>
+              <p className={`font-medium ${styles.desc}`}>
+                {details?.dealCodeNumber}
+              </p>
+            </div>
+            <div className={styles.row}>
+              <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>
+                Advance Paid
+              </p>
+              <p className={styles.desc}>:</p>
+              <p className={`font-medium ${styles.desc}`}>
+                <span className={styles.rupeeicon}>₹</span>
+                {details?.advance_rental}
+              </p>
+            </div>
+            <div className={styles.row}>
+              <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>
+                Due amount
+              </p>
+              <p className={styles.desc}>:</p>
+              <p className={`font-medium ${styles.desc}`}>
+                <span className={styles.rupeeicon}>₹</span>
+                {details?.due_amount}
+              </p>
+            </div>
+            <div className={styles.row}>
+              <p className={styles.desc}>
+                Please pay due amount of{" "}
+                <span className={styles.rupeeicon}>₹</span>
+                {details?.due_amount} to confirm your order
+              </p>
+            </div>
+          </>
+        ) : (
+          <p className={styles.payment_already_done_txt}>
+            Payment already paid for your order
           </p>
-          <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>
-            {details?.dealCodeNumber}
-          </p>
-        </div>
-        <div className={styles.row}>
-          <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>
-            Advance Paid
-          </p>
-          <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>
-            <span className={styles.rupeeicon}>₹</span>
-            {details?.advance_rental}
-          </p>
-        </div>
-        <div className={styles.row}>
-          <p className={`w-[123px] md:w-[236px] ${styles.desc}`}>Due amount</p>
-          <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>
-            <span className={styles.rupeeicon}>₹</span>
-            {details?.due_amount}
-          </p>
-        </div>
-        <div className={styles.row}>
-          <p className={styles.desc}>
-            Please pay due amount of <span className={styles.rupeeicon}>₹</span>
-            {details?.due_amount} to confirm your order
-          </p>
-        </div>
+        )}
       </div>
 
-      <div onClick={handleOpenRazorpay} className={styles.yellowbtn}>
-        Pay now
-        <ArrowForw size={19} color={"#222"} />
-      </div>
+      {details?.dealCodeNumber && (
+        <div onClick={handleOpenRazorpay} className={styles.yellowbtn}>
+          Pay now
+          <ArrowForw size={19} color={"#222"} />
+        </div>
+      )}
     </div>
   );
 };

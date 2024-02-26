@@ -20,3 +20,6 @@
 .yellowbtn {
   @apply cursor-pointer mt-8 xl:mt-12 w-full sm:w-[232px] h-12 sm:h-14 bg-F6B704 rounded-lg flex gap-[10px] justify-center items-center text-222 text-16 font-medium leading-5;
 }
+.payment_already_done_txt {
+  @apply text-16 xl:text-20 text-45454A font-medium leading-6 xl:leading-[30px];
+}

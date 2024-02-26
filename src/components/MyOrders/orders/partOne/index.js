@@ -162,6 +162,9 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                         tab={0}
                         containerRef={containerRef}
                         getSingleOrderDetails={getSingleOrderDetails}
+                        offlineCustomer={
+                          ordersData?.[0]?.is_offline_placed === "1"
+                        }
                       />
                     </div>
                   );
