@@ -1,4 +1,4 @@
-import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
+import {productPageImagesBaseUrl} from "@/constants/constant";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {format} from "date-fns";
 import {useRouter} from "next/navigation";
@@ -7,7 +7,6 @@ import {useDispatch} from "react-redux";
 import styles from "./styles.module.css";
 import {IconLink} from "@/assets/icon";
 import ServiceDrawer from "../orders/partTwo/ServiceDrawer/ServiceDrawer";
-import {decrypt} from "@/hooks/cryptoUtils";
 
 export const statusToImageMap = {
   "out for delivery": "out-for-delivery.svg",
@@ -45,11 +44,11 @@ const CommonContainer = ({
   containerRef,
   getSingleOrderDetails,
   offlineCustomer,
+  offlineUserId,
 }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [serviceDrawerOpen, setServiceDrawerOpen] = useState(false);
-  const userId = decrypt(getLocalStorage("_ga"));
 
   const toggleServiceDrawer = () => {
     setServiceDrawerOpen(!serviceDrawerOpen);
@@ -136,7 +135,7 @@ const CommonContainer = ({
           onClick={() => {
             if (offlineCustomer) {
               router.push(
-                `view-purchase-offline/${userId}/${item.dealCodeNumber}`,
+                `view-purchase-offline/${offlineUserId}/${item.dealCodeNumber}`,
               );
             } else getSingleOrderDetails(item.dealCodeNumber);
           }}
