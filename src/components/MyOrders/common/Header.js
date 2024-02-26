@@ -7,7 +7,7 @@ const Header = ({setTab, tab, offlineCustomer}) => {
       <p
         onClick={() => setTab(0)}
         className={`${tab === 0 && styles.selected_tab} ${styles.header}`}>
-        My orders
+        My Orders
       </p>
       <p
         onClick={() => {
