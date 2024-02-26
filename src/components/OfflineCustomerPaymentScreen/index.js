@@ -13,7 +13,6 @@ import {ArrowForw} from "@/assets/icon";
 const OfflinePayment = () => {
   const params = useParams();
   const router = useRouter();
-  console.log(params);
   const [details, setDetails] = useState();
 
   const mapData = ["Advanced payment", "Final payment"];
@@ -35,7 +34,6 @@ const OfflinePayment = () => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res, " res in load script");
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
@@ -49,7 +47,6 @@ const OfflinePayment = () => {
         mode: "offline",
       },
     );
-    console.log(result.data.data, "tenure extension data");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -57,7 +54,6 @@ const OfflinePayment = () => {
 
     const razOrderId = result.data.data.raz_order_id;
     const customerId = result.data.data.customer_id;
-    console.log(razOrderId, customerId, "huhwiuhij");
 
     const options = {
       key: razorpayKeyOwn,
@@ -67,7 +63,6 @@ const OfflinePayment = () => {
       description: "Easy payment registration",
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       handler: async function (response) {
-        console.log(response, "response in handlerfunc");
         if (response.error) {
           alert("Payment failed. Please try again.");
           // router.push("/order/failure");
@@ -99,12 +94,9 @@ const OfflinePayment = () => {
       },
     };
 
-    console.log(options, "optionss");
-
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
-      console.log("Payment failed:", response.error.description);
       alert("Payment failed: " + response.error.description);
     });
 

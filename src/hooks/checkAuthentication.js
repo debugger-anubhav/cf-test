@@ -13,7 +13,6 @@ export const useAuthentication = () => {
   const checkAuthentication = async () => {
     const cookies = new Cookies();
     const token = cookies.get("authToken");
-    // console.log(token, " token in authen func");
     // if (!token) {
     //   localStorage.removeItem("user_id");
     //   localStorage.removeItem("_ga");

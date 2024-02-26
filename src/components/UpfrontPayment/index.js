@@ -30,7 +30,6 @@ function UpfrontPayment() {
     axios
       .post(baseURL + endPoints.upfrontPayment, {id: ID})
       .then(res => {
-        console.log(res?.data?.data?.data, "ressss in upfront");
         setApiData(res?.data?.data?.data);
         setRazorpayData(res?.data?.data);
       })
@@ -44,8 +43,6 @@ function UpfrontPayment() {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res, " res in load script");
-
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -53,8 +50,6 @@ function UpfrontPayment() {
 
     const razOrderId = razorpayData?.raz_order_id;
     const customerId = razorpayData?.customer_id;
-    console.log(razOrderId, customerId, "huhwiuhij");
-    // const {dealCodeNumber} = result.data.data.orderData.notes;`
 
     const options = {
       key: razorpayKeyOwn,
@@ -104,12 +99,9 @@ function UpfrontPayment() {
       },
     };
 
-    console.log(options, "optionss");
-
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
-      console.log("Payment failed:", response);
       alert("Payment failed: " + response.error.description);
     });
 

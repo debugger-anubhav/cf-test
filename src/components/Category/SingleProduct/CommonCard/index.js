@@ -189,7 +189,6 @@ const CategoryCard = ({
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
         handleChangeRoute={() => {
-          console.log("in handlechangerouteee");
           // call this if you want to show the red heart exactly after login
           // addToWishlist();
         }}

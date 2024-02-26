@@ -153,7 +153,6 @@ function LongTermCard({
   }
 
   const getApiData = () => {
-    console.log(isCityShieldApplied, "long term card");
     axios
       .get(baseURL + endPoints.tenureExtension, {
         params: {

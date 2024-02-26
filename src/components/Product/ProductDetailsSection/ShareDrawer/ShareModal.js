@@ -143,7 +143,6 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
                   alt={item?.icon}
                   src={item?.icon}
                   className="cursor-pointer w-[30px] h-[30px] md:w-8 md:h-8 relative z-[-1]"
-                  // onClick={() => console.log("cliked")}
                   loading="lazy"
                 />
               </a>

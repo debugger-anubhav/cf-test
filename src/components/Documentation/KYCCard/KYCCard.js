@@ -59,8 +59,6 @@ const KYCCard = ({handleKycState}) => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res, " res in load script");
-
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
@@ -74,7 +72,6 @@ const KYCCard = ({handleKycState}) => {
         source: "new",
       },
     );
-    console.log(result.data.data, "reguster mandate apii");
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -82,7 +79,6 @@ const KYCCard = ({handleKycState}) => {
 
     const razOrderId = result.data.data.raz_order_id;
     const customerId = result.data.data.customer_id;
-    console.log(razOrderId, customerId, "huhwiuhij");
     // const {dealCodeNumber} = result.data.data.orderData.notes;`
 
     const options = {
@@ -94,7 +90,6 @@ const KYCCard = ({handleKycState}) => {
       description: "Easy payment registration",
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       handler: function (res) {
-        console.log(res, "res in handler");
         updatePaymentStatus(
           res.razorpay_payment_id,
           res.razorpay_order_id,
@@ -114,13 +109,10 @@ const KYCCard = ({handleKycState}) => {
       },
     };
 
-    console.log(options, "optionss");
-
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
       // Handle payment failure here
-      console.log("Payment failed:", response.error.description);
       alert("Payment failed: " + response.error.description);
     });
 

@@ -43,7 +43,6 @@ function CustomerPayment() {
   const userId = decrypt(getLocalStorage("_ga"));
   const coinsReduxValue = useSelector(state => state.invoicePage);
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
-  console.log(coinsReduxValue, "lll");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -58,7 +57,6 @@ function CustomerPayment() {
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
     coinsReduxValue.isCoinApplied,
   );
-  // console.log(useCityfurnishCoins, "mmm");
   const [availableCoins, setAvailableCoins] = useState(0);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
@@ -91,7 +89,6 @@ function CustomerPayment() {
   // }, [currentURL]);
 
   const fetchAvailCoins = async () => {
-    console.log("insoideee");
     try {
       const res = await axios.get(
         baseURL + endPoints.addToCart.fetchCoins(userId),
@@ -99,10 +96,8 @@ function CustomerPayment() {
 
       if (res?.data?.data?.length > 0) {
         const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
-        console.log(availAmount, "jewjiw");
         setTopupAmount(availAmount);
         if (coinsReduxValue.isCoinApplied) {
-          console.log(availAmount, amountParam, "in coinn");
           setAvailableCoins(
             amountParam - availAmount > 0
               ? 0
@@ -112,13 +107,10 @@ function CustomerPayment() {
         // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
 
         if (urlParams.size > 0) {
-          console.log("bad me");
           setPrimaryAmount(amountParam);
           let amount = amountParam;
           if (coinsReduxValue?.isCoinApplied === true) {
-            console.log("in nottt");
             amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
-            console.log(amountParam, amount, "amountParam");
           }
 
           const temp = {};
@@ -128,10 +120,8 @@ function CustomerPayment() {
           temp.invoice = invoiceNumberParam;
           temp.cfCoins = coinsReduxValue?.usedCoins;
           temp.notes = "";
-          // console.log(temp, "temppp");
           setFormData(temp);
           handleSubmit(temp, true);
-          // console.log(formData, "h");
         }
       }
     } catch (err) {
@@ -177,11 +167,9 @@ function CustomerPayment() {
   });
 
   const handlePayment = async (values, isAutoRazor) => {
-    console.log(isAutoRazor, "oooo");
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    // console.log(res);
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
@@ -205,10 +193,7 @@ function CustomerPayment() {
         return;
       }
 
-      // console.log(result.data, "make payment api data");
-
       const data = result?.data?.data;
-      console.log(data, "data");
 
       // const {dealCodeNumber} = result.data.data.orderData.notes;
       const userDetails = result?.data?.data?.data;
@@ -223,7 +208,6 @@ function CustomerPayment() {
         customer_id: data?.customer_id,
         handler: async function (response) {
           setLoading(true);
-          console.log(response, "responsse in handler");
           const body = {
             transactionID: response?.razorpay_payment_id,
             auth_raz_order_id: response?.razorpay_order_id,
@@ -265,8 +249,6 @@ function CustomerPayment() {
         },
       };
 
-      // console.log(options, "optionss");
-
       const paymentObject = new window.Razorpay(options);
       paymentObject.open();
 
@@ -274,13 +256,11 @@ function CustomerPayment() {
         console.log(e, "eeeee");
       });
     } catch (error) {
-      console.log(error?.response?.data?.message, "error");
       showToastNotification(error?.response?.data?.message, 2);
     }
   };
 
   const handleSubmit = (values, isAutoRazor) => {
-    console.log(values, isAutoRazor, "values in handelsubmit");
     // setFormData({
     //   ...formData,
     //   fullName: values.fullName,
@@ -292,7 +272,6 @@ function CustomerPayment() {
     if (values.amount === "") {
       setshowValidationForAmount(true);
     }
-    console.log(formData, "formdata");
     handlePayment(values, isAutoRazor);
   };
 
@@ -527,11 +506,7 @@ function CustomerPayment() {
                               onClick={() => {
                                 if (formik.values.amount !== "") {
                                   setUseCityfurnishCoins(true);
-                                  console.log(
-                                    formik.values.amount,
-                                    "pp",
-                                    topupAmount,
-                                  );
+
                                   setAvailableCoins(
                                     formik.values.amount - topupAmount > 0
                                       ? 0
@@ -546,7 +521,6 @@ function CustomerPayment() {
                                   //       ? 1
                                   //       : Math.abs(topupAmount - amountParam),
                                   // });
-                                  console.log(formik.values.amount, "poo");
 
                                   formik.setFieldValue(
                                     "amount",

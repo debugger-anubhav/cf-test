@@ -12,7 +12,6 @@ const Document = () => {
   const orderId = params?.order_id;
   const [apiData, setApiData] = useState(null);
   const handleViewButtonClick = imageUrl => {
-    console.log("Image URL:", imageUrl);
     window?.open(imageUrl, "_blank");
   };
 

@@ -241,7 +241,6 @@ const ShoppingCartSection = () => {
       setArr(updatedItems);
     }
 
-    console.log(newQuantity > 0 && newQuantity <= maxQuantity, "pppp");
     if (newQuantity > 0 && newQuantity <= maxQuantity) {
       const headers = {
         userId: parseInt(userIdToUse),

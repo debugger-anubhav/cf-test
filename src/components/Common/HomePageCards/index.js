@@ -48,7 +48,6 @@ const Card = ({
   }, [loginModal]);
 
   const toggleLoginModal = bool => {
-    console.log(bool, "bool");
     setLoginModal(bool);
   };
 
@@ -127,7 +126,6 @@ const Card = ({
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === false) {
       toggleLoginModal(true);
     } else addToWishlist();

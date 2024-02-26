@@ -37,7 +37,6 @@ const SearchList = () => {
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
-  console.log(reduxStateOfLoginPopup, "reduxStateOfLoginPopup");
   const dropDownRefSort = useRef(null);
   const [selectedOption, setSelectedOption] = useState("Default");
   const [sortOpen, setSortOpen] = useState(false);

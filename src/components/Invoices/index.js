@@ -37,7 +37,6 @@ const InvoicePage = () => {
     baseInstance
       .get(endPoints.invoicesPage.getMyInvoices(userId, 1))
       .then(res => {
-        console.log(res?.data, "responseee");
         setRows(res?.data?.data?.my_invoice);
         setAvailCoins(res?.data?.data?.my_wallet?.topup_amount);
         setLoadingSkeleton(false);

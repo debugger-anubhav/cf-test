@@ -126,11 +126,9 @@ const LoginModal = ({
       .post(baseURL + endPoints.login.verifyOtp, body)
       .then(response => {
         setProblemType("");
-        console.log(response, "reponseee");
         if (response?.data?.status_code === 200) {
           if (response?.data?.message === "Login Successfully.!") {
             if (response?.data?.data?.access_token) {
-              console.log(1);
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
               });
@@ -138,12 +136,9 @@ const LoginModal = ({
               baseInstance.defaults.headers.common.Authorization =
                 response?.data?.data?.access_token;
             }
-            console.log(2);
             const encryptedData = encrypt(response?.data?.data?.id.toString());
             setLocalStorage("_ga", encryptedData);
             setLocalStorage("user_name", response?.data?.data?.full_name);
-            // console.log(response.data.data.access_token, "kwkqwo");
-            console.log(3);
             if (setIsLogin) {
               setIsLogin(true);
             }

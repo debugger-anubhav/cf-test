@@ -32,7 +32,6 @@ const CityShieldPage = () => {
     axios
       .get(baseURL + endPoints.cityshieldPage.getUserDetails(orderId))
       .then(res => {
-        console.log(res);
         setDetails(res?.data?.data);
         const parsedDate = parseISO(res?.data?.data?.created);
         const formattedDate = format(parsedDate, "MMM dd, yyyy");
@@ -49,7 +48,6 @@ const CityShieldPage = () => {
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res);
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
@@ -69,8 +67,6 @@ const CityShieldPage = () => {
     }
 
     const data = result.data.data;
-    console.log(data);
-
     // const {dealCodeNumber} = result.data.data.orderData.notes;
     const userDetails = result.data.data.completeOrder;
 

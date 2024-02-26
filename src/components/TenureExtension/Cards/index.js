@@ -113,13 +113,10 @@ export const MonthlyCard = ({
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res, " res in load script");
-
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    console.log(monthlyCardIsChecked, "dcdcdscsd");
     const result = await axios.post(
       baseURL + endPoints.kycPage.registerMandate,
       {
@@ -136,7 +133,6 @@ export const MonthlyCard = ({
 
     const razOrderId = result.data.data.raz_order_id;
     const customerId = result.data.data.customer_id;
-    console.log(razOrderId, customerId, "huhwiuhij");
 
     const options = {
       key: razorpayKey,
@@ -147,7 +143,6 @@ export const MonthlyCard = ({
       description: "Easy payment registration",
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       handler: function (res) {
-        console.log(res, "res in handler");
         successHandlerCardTwo(
           res.razorpay_payment_id,
           modeOfPayment,

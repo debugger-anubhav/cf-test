@@ -11,9 +11,7 @@ const OfflineInvoice = ({userIdCheck}) => {
   const userId = decrypt(getLocalStorage("_ga"));
   useEffect(() => {
     if (userIdCheck) {
-      console.log(":inn");
       if (userId !== params.userId) {
-        console.log("innn uuiweu");
         router.push("/");
       }
     }

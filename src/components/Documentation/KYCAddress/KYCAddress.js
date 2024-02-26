@@ -33,7 +33,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
-  console.log(selectedOrderId, isReupload);
 
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
@@ -89,7 +88,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   // useEffect(() => {}, []);
 
   const handleFileInputChange = e => {
-    console.log(e, "innn");
     const file = e.target.files;
     const temp =
       e.target.name === "addressProof"
@@ -167,7 +165,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   };
   const handleContactBlur = () => {
     const regPat = /[!@#$%^&*()_+{}:;<>,.?~\\/\s]/;
-    // console.log(regPat.test(formData?.contactNumber), formData?.contactNumber);
     if (formData?.contactNumber?.length < 10) {
       setFormErrors(prev => ({
         ...prev,
@@ -294,8 +291,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     }
     // allData.append("cf_delivery_address_proof", formData.currentAddressProof);
     allData.append("orderId", orderId);
-    console.log(formErrors, "formErrors");
-
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
         .post(endPoints.uploadAddressDocs, allData)
@@ -316,7 +311,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
   useEffect(() => {
     if (isReupload) {
-      console.log("inn");
       const addressProof = cibilDocsData?.cf_permanent_address_proof;
       const currentAddressProof = cibilDocsData?.cf_delivery_address_proof;
 
@@ -329,7 +323,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
         addressProofType: addressProof?.[0]?.sub_doc_type || "",
       });
     } else {
-      console.log("in elsee");
       setFormData({
         contactNumber: "",
         addressProof: [],
@@ -601,7 +594,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
           id="addressProof"
           style={{display: "none"}}
           onChange={e => {
-            console.log("inn");
             handleFileInputChange(e);
           }}
           //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}

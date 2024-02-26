@@ -10,7 +10,6 @@ const PaymentSuccess = () => {
   const formattedDateTime = format(currentDateTime, "MMMM d, yyyy, h:mm a");
   const router = useRouter();
   const details = useSelector(state => state.successPayment);
-  console.log(details, "detailss");
 
   useEffect(() => {
     if (details.TransactionReferenceNumber === "") router.push("/");

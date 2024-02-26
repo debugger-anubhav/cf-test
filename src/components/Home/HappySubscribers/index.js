@@ -98,7 +98,6 @@ const HappySubscribers = ({page, params}) => {
 
   const handleScrolling = () => {
     const slider = containerRef.current;
-    // console.log(slider);
     if (!slider) return;
 
     let mouseDown = false;

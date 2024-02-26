@@ -153,7 +153,6 @@ const Header = () => {
   );
 
   const getSavedItems = userIdToUse => {
-    // console.log(baseInstance, "base instanec");
     baseInstance
       .get(endPoints.savedItems + `?cityId=${cityId}&userId=${userIdToUse}`)
       .then(res => {

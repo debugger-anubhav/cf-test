@@ -83,9 +83,6 @@ const CategorySidebar = () => {
                                 id="sub_category"
                                 value={element?.cat_name}
                                 name="SubCatrgory"
-                                // onChange={e =>
-                                //   console.log(e.target.value, "e.target.value")
-                                // }
                               />
                               <p className={style.cat_title}>
                                 {element?.cat_name}

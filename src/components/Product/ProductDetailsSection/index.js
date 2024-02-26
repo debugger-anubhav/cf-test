@@ -178,7 +178,7 @@ const ProductDetails = ({params}) => {
     axios
       .post(baseURL + endPoints.addRecentViewProduct, data)
       .then(res => {
-        console.log();
+        console.log(res);
       })
       .catch(err => {
         console.log(err);
@@ -209,9 +209,6 @@ const ProductDetails = ({params}) => {
     );
   }, []);
 
-  useEffect(() => {
-    console.log(inWishList, "inWishlist");
-  }, [inWishList]);
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
@@ -229,14 +226,10 @@ const ProductDetails = ({params}) => {
           .then(res => {
             getSavedItems()
               .then(res => {
-                console.log("in res of gertsaved");
                 dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
-                console.log(res?.data?.data, "res?.data?.data");
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
-                console.log(ids, "isdddss");
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item added to the wishlist", 1);
               })
@@ -254,7 +247,6 @@ const ProductDetails = ({params}) => {
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
-                console.log(ids, "isdddss");
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item removed from the wishlist", 2);
               })
@@ -267,7 +259,6 @@ const ProductDetails = ({params}) => {
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
-    console.log(isAuthenticated, "response from isauthencate");
     if (isAuthenticated === false) {
       toggleLoginModal(true);
     }
@@ -452,24 +443,20 @@ const ProductDetails = ({params}) => {
   const scrollContainerRefForThumbnail = useRef(null);
 
   const handleMouseDown = e => {
-    console.log("in mouse down");
     setIsScrolling(true);
     setStartX(e.clientX);
   };
 
   const handleMouseDownForThumnail = e => {
-    console.log("in mouse down");
     setIsScrollingForThumnail(true);
     setStartX(e.clientX);
   };
 
   const handleMouseMove = e => {
-    console.log("inn");
     if (!isScrolling) return;
 
     const deltaX = e.clientX - startX;
     if (scrollContainerRef.current) {
-      console.log(1);
       scrollContainerRef.current.scrollLeft -= deltaX;
     }
     // if (scrollContainerRefForThumbnail.current) {
@@ -480,30 +467,22 @@ const ProductDetails = ({params}) => {
   };
 
   const handleMouseMoveThumbnail = e => {
-    // console.log("inn");
     if (!isScrollingForThumnail) return;
 
     const deltaX = e.clientX - startX;
     if (scrollContainerRefForThumbnail.current) {
-      console.log(1);
       scrollContainerRefForThumbnail.current.scrollLeft -= deltaX;
     }
-    // if (scrollContainerRefForThumbnail.current) {
-    //   scrollContainerRef.current.scrollLeft -= deltaX;
-    // }
-
     setStartX(e.clientX);
   };
 
   const handleMouseUp = () => {
-    console.log("in mouse upp");
     setIsScrolling(false);
   };
   const handleMouseUpForThumbnail = () => {
-    console.log("in mouse upp");
     setIsScrollingForThumnail(false);
   };
-
+  console.log(inWishList);
   return (
     <div className={styles.main_container}>
       <ShareModal
