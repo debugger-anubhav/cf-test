@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-const Header = ({setTab, tab}) => {
+const Header = ({setTab, tab, offlineCustomer}) => {
   return (
     <div className={styles.header_wrapper}>
       <p
@@ -10,8 +10,10 @@ const Header = ({setTab, tab}) => {
         My orders
       </p>
       <p
-        onClick={() => setTab(1)}
-        className={`${
+        onClick={() => {
+          if (!offlineCustomer) setTab(1);
+        }}
+        className={`${offlineCustomer && "!cursor-not-allowed"} ${
           tab === 1 ? styles.selected_tab : "!border-r-transparent"
         } ${styles.header}`}>
         My Subscriptions

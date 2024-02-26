@@ -78,6 +78,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
       .post(endPoints.myOrdersPage.getAllOrders, body)
       .then(res => {
         setOrdersData(res?.data?.data);
+
         setSkeletonLoading(false);
       })
       .catch(err => {
@@ -93,7 +94,11 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   return (
     <div className={styles.main_container}>
       <div className={styles.right_div}>
-        <Header tab={tab} setTab={val => setTab(val)} />
+        <Header
+          tab={tab}
+          setTab={val => setTab(val)}
+          offlineCustomer={ordersData?.[0]?.is_offline_placed === "1"}
+        />
 
         <div className="px-4 xl:px-6">
           <div className={styles.sub_container}>
