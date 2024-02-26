@@ -143,7 +143,7 @@ input[type="number"]::-webkit-outer-spin-button {
   @apply flex gap-1 mt-[15px] items-center;
 }
 .buy_checkbox_info .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
-  color: #5774ac !important;
+  accent-color: #5774ac !important;
   padding: 0 !important;
 }
 
@@ -199,4 +199,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .accordian {
   border-bottom: 1px solid #ededee !important;
+}
+
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked,
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
+  accent-color: #5774ac !important;
+  color: #5774ac !important;
 }
