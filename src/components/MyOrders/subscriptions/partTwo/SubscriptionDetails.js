@@ -54,6 +54,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
               statusToImageMap[singleSubscriptionData?.status.toLowerCase()]
             }
             className={styles.status_icon}
+            alt="icon"
           />
           <p className={styles.status}>{singleSubscriptionData?.status}</p>
         </div>

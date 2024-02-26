@@ -109,16 +109,27 @@ const CityDrawer = ({
                 alt="download-QR"
                 loading="lazy"
               />
-              {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
-              <p className={styles.qr_text}>
-                <span className={styles.qr_text_span}>100+</span>People have
-                already downloaded our app 🎉
-              </p>
+              <div className={`${styles.qr_text}`}>
+                <p className={styles.qr_text_span}>100+</p>
+                <div>
+                  <span>People have already downloaded our app</span>
+                  <img
+                    src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                    alt="paty_icon"
+                    className="!w-[24px] h-[24px] inline-block ml-2"
+                  />
+                </div>
+              </div>
             </div>
-            <p className={styles.detail_line}>
-              <span className="text-[#7895B0] font-bold">100k+ </span>&nbsp;
-              People have already downloaded our app 🎉
-            </p>
+            <div className={styles.detail_line}>
+              <p className="text-[#7895B0] font-bold">100k+ </p>&nbsp;
+              <p>People have already downloaded our app </p>
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                alt="paty_icon"
+                className="!w-[16px] h-[16px] inline-block ml-2"
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -64,6 +64,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
         <img
           className={styles.logo}
           src={`${IconLink + "citymax_final.svg"}`}
+          alt="icon"
         />
 
         <div className={styles.content_wrapper}>
@@ -153,6 +154,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
               <img
                 src={`${IconLink + "home-cityfurnish.svg"}`}
                 className={styles.home_icon}
+                alt="home-icon"
               />
             </div>
           </a>
