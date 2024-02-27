@@ -53,7 +53,9 @@ const PastRequestAccordian = ({pastRequestData}) => {
               </div>
               <div className={styles.tableCell}>
                 <span className="font-medium">Request Type:</span>{" "}
-                {row?.request_type.replace(/_/g, " ")}
+                <span className="capitalize">
+                  {row?.request_type.replace(/_/g, " ")}
+                </span>
               </div>
               <div className={styles.tableCell}>
                 <span className="font-medium">Scheduled Date:</span>{" "}
