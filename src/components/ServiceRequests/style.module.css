@@ -35,10 +35,10 @@
   @apply flex w-full flex-col sm:pb-[50px] pb-[55px] overflow-scroll h-full;
 }
 .main_heading {
-  @apply flex font-Poppins font-medium text-24 tracking-[-0.48px] leading-[32px] w-full gap-2 text-45454A items-center;
+  @apply flex font-Poppins font-medium lg:text-24 text-20 lg:tracking-[-0.48px] tracking-[-0.4px] leading-[32px] w-full gap-2 text-45454A items-center;
 }
 .sub_heading {
-  @apply my-8 text-71717A text-16 font-Poppins;
+  @apply my-8 text-71717A lg:text-16 tracking-[-0.3px] text-14 font-Poppins;
 }
 .info_wrapper {
   @apply flex flex-col w-full gap-6 h-full overflow-scroll;
@@ -63,7 +63,7 @@
   @apply w-[80px] h-[80px] rounded-lg;
 }
 .request_type {
-  @apply text-16 text-5774AC font-medium font-Poppins;
+  @apply lg:text-16 text-14 text-5774AC font-medium font-Poppins;
 }
 .divider_row {
   @apply flex w-full items-center;

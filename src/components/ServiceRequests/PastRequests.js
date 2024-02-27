@@ -62,7 +62,7 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                       {row?.zoho_case_id}
                     </TableCell>
                     <TableCell className={`${styles.tableCell} capitalize`}>
-                      {row?.request_type}
+                      {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
                       {row?.scheduled_datetime
