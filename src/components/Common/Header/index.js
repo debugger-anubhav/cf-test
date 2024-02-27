@@ -423,7 +423,7 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <div
-                className={`pt-[14px] pb-[16px] pl-8
+                className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8
                   
                   ${styles.test}`}
                 onMouseLeave={() => {

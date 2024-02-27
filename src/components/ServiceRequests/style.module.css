@@ -63,7 +63,7 @@
   @apply w-[80px] h-[80px] rounded-lg;
 }
 .request_type {
-  @apply lg:text-16 text-14 text-5774AC font-medium font-Poppins;
+  @apply lg:text-16 lg:tracking-0.3    text-14 text-5774AC font-medium font-Poppins;
 }
 .divider_row {
   @apply flex w-full items-center;

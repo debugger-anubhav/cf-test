@@ -70,7 +70,7 @@ const PastRequestAccordian = ({pastRequestData}) => {
               </div>
               <div className={styles.tableCell}>
                 <span className="font-medium">Status: </span>
-                {row?.status}
+                {row?.sub_status}
               </div>
             </div>
             {index !== rows.length - 1 && (
