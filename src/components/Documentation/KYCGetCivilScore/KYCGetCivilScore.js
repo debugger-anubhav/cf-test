@@ -12,13 +12,7 @@ import {
 } from "@mui/material";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import DocLoader from "../DocLoader/DocLoader";
-
-// import axios from "axios";
-// import { baseURL } from "@/network/axios";
-// import { endPoints } from "@/network/endPoints";
-
-// import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -115,7 +109,7 @@ const KYCGetCivilScore = ({handleKycState}) => {
     };
 
     baseInstance
-      .post(baseURL + endPoints.getAndSaveCibilScore, data)
+      .post(endPoints.getAndSaveCibilScore, data)
       .then(res => {
         setSubmitting(false);
         handleKycState(selectedOrderId);

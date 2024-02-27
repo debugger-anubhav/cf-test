@@ -8,8 +8,7 @@ import string from "@/constants/Constant.json";
 import {useDispatch} from "react-redux";
 import {getSubscribersVideos} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
@@ -17,8 +16,8 @@ const HappySubscribers = ({page, params}) => {
   const [isDumy, setIsDumy] = React.useState(false);
 
   const getVideosForProductPage = () => {
-    axios
-      .get(baseURL + endPoints.productPage.happySubscribers(params.productId))
+    baseInstance
+      .get(endPoints.productPage.happySubscribers(params.productId))
       .then(res => {
         dispatch(getSubscribersVideos(res?.data?.data));
         setData(res?.data?.data);
@@ -29,8 +28,8 @@ const HappySubscribers = ({page, params}) => {
       });
   };
   const getVideosForHomePage = () => {
-    axios
-      .get(baseURL + endPoints.homePageHappySubscriber)
+    baseInstance
+      .get(endPoints.homePageHappySubscriber)
       .then(res => {
         const timeOutId = setTimeout(() => {
           setData(res?.data?.data);
@@ -44,8 +43,8 @@ const HappySubscribers = ({page, params}) => {
       });
   };
   const getVideosForSeoAppliancesPage = () => {
-    axios
-      .get(baseURL + endPoints.seoApplianceHappyCustomer)
+    baseInstance
+      .get(endPoints.seoApplianceHappyCustomer)
       .then(res => {
         setData(res?.data?.data);
         // console.log("appliances-rental")
@@ -55,8 +54,8 @@ const HappySubscribers = ({page, params}) => {
       });
   };
   const getVideosForSeoFurniturePage = () => {
-    axios
-      .get(baseURL + endPoints.seoFurnitureHappyCustomer)
+    baseInstance
+      .get(endPoints.seoFurnitureHappyCustomer)
       .then(res => {
         setData(res?.data?.data);
         // console.log("furniture-rental")
@@ -66,8 +65,8 @@ const HappySubscribers = ({page, params}) => {
       });
   };
   const getVideosForCategoryPage = () => {
-    axios
-      .get(baseURL + endPoints.categoryHappySubscriber(params))
+    baseInstance
+      .get(endPoints.categoryHappySubscriber(params))
       .then(res => {
         setData(res?.data?.data);
       })

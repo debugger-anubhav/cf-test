@@ -3,8 +3,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import ModalContentForNumber from "./components/ModalContentForNumber";
 import ModalContentForVerifyOtp from "./components/ModalContentForVerifyOtp";
@@ -30,7 +29,6 @@ const LoginModal = ({
 }) => {
   const cookies = new Cookies();
   const dispatch = useDispatch();
-  // const [cookies, setCookie] = useCookies(["authToken"]);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
   const [contact, setContact] = useState();
@@ -98,8 +96,8 @@ const LoginModal = ({
       mobile_number: number,
     };
     try {
-      const response = await axios.post(
-        baseURL + endPoints.profileSettingPage.sentOtpToNumber,
+      const response = await baseInstance.post(
+        endPoints.profileSettingPage.sentOtpToNumber,
         header,
       );
       console.log(response, "response in number otpp");
@@ -122,8 +120,8 @@ const LoginModal = ({
       tempUserId,
     };
 
-    axios
-      .post(baseURL + endPoints.login.verifyOtp, body)
+    baseInstance
+      .post(endPoints.login.verifyOtp, body)
       .then(response => {
         setProblemType("");
         if (response?.data?.status_code === 200) {

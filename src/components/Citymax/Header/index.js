@@ -21,8 +21,6 @@ import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
 
 import {
   decrypt,
@@ -39,6 +37,7 @@ import LoginModal from "@/components/LoginPopups";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import ProfileDropDown from "@/components/Common/Header/ProfileDropDown";
 import EmptyCartModal from "@/components/Common/Drawer/EmptyModal/EmptyCartModal";
+import {baseInstance} from "@/network/axios";
 
 const CitymaxHeader = ({zIndex}) => {
   const {checkAuthentication} = useAuthentication();
@@ -121,8 +120,8 @@ const CitymaxHeader = ({zIndex}) => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
     if (!homePageReduxData?.category.length) {
-      axios
-        .get(baseURL + endPoints.category)
+      baseInstance
+        .get(endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
         })
@@ -161,8 +160,8 @@ const CitymaxHeader = ({zIndex}) => {
   };
 
   const fetchCartItems = userIdToUse => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
@@ -198,8 +197,8 @@ const CitymaxHeader = ({zIndex}) => {
   };
 
   useEffect(() => {
-    axios
-      .post(baseURL + endPoints.sessionUserUrl, data)
+    baseInstance
+      .post(endPoints.sessionUserUrl, data)
       .then(res => {
         if (userId) {
           localStorage.removeItem("user_id");

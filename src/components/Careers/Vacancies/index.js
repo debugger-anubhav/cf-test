@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import FAQQuestion from "@/components/ReferAFriend/MainSection/FAQQuestion";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
+import {baseInstance} from "@/network/axios";
 
 export default function Vacancies() {
   const para =
@@ -20,8 +19,8 @@ export default function Vacancies() {
     }
   };
   const getData = () => {
-    axios
-      .get(baseURL + endPoints.careerPageData)
+    baseInstance
+      .get(endPoints.careerPageData)
       .then(res => {
         setVacaniesData(res?.data?.data);
         setLoadingSkeleton(false);

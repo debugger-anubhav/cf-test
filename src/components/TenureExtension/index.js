@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {useParams} from "next/navigation";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
 import LongTermCard from "./Cards/LongTermCard";
@@ -10,6 +8,7 @@ import MidTermCard from "./Cards/MidTermCard";
 import ShortTermCard from "./Cards/ShortTermCard";
 import {MonthlyCard} from "./Cards";
 import {Skeleton} from "@mui/material";
+import {baseInstance} from "@/network/axios";
 
 function TenureExtension() {
   const params = useParams();
@@ -62,8 +61,8 @@ function TenureExtension() {
   );
   console.log(isChecked, "checking");
   const parantApi = () => {
-    axios
-      .get(baseURL + endPoints.tenureExtension, {
+    baseInstance
+      .get(endPoints.tenureExtension, {
         params: {
           dealCodeNumber: params?.orderId,
         },

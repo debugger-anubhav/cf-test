@@ -13,11 +13,10 @@ import {
   productPageImagesBaseUrl,
   CreateRequestPayload,
 } from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import {baseInstance} from "@/network/axios";
 
 function SwapProduct({prevScreen, data}) {
   const [showSwapScreen, setShowSwapScreen] = useState(1);
@@ -128,8 +127,8 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
   const [inputKey, setInputKey] = useState("");
   const [productData, setProductData] = useState(null);
   const searchApi = () => {
-    axios
-      .get(baseURL + endPoints.searchKey(inputKey, city))
+    baseInstance
+      .get(endPoints.searchKey(inputKey, city))
       .then(res => setProductData(res?.data?.data?.products))
       .catch(err => console.log(err));
   };

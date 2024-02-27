@@ -5,8 +5,6 @@ import {
   productImageBaseUrl,
   productPageImagesBaseUrl,
 } from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {ForwardArrowWithLine, PersonIcon} from "@/assets/icon";
@@ -17,6 +15,7 @@ import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
 import {useRouter} from "next/navigation";
+import {baseInstance} from "@/network/axios";
 
 const OrderSummary = ({
   orderNumber,
@@ -41,13 +40,12 @@ const OrderSummary = ({
       dispatch(getBillDetails(subscriptionData?.bill));
       setIsCitymaxBill(false);
     } else {
-      axios
+      baseInstance
         .get(
-          baseURL +
-            endPoints.myOrdersPage.getOrderSummary(
-              orderNumber,
-              isOfflineInvoice ? paramUserId : userId,
-            ),
+          endPoints.myOrdersPage.getOrderSummary(
+            orderNumber,
+            isOfflineInvoice ? paramUserId : userId,
+          ),
         )
         .then(res => {
           setData(res?.data?.data);

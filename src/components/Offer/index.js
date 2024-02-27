@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import commonStyles from "@/components/Home/OffersAndCoupons/style.module.css";
-import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
 import {useSelector} from "react-redux";
 import {CopyIcon} from "@/assets/icon";
 import content from "@/constants/Constant.json";
 import {Skeleton} from "@mui/material";
+import {baseInstance} from "@/network/axios";
 
 const OfferPage = () => {
   // const homePageData = useSelector(state => state.homePagedata);
@@ -20,8 +19,8 @@ const OfferPage = () => {
   const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const getOfferCoupons = () => {
-    axios
-      .get(baseURL + endPoints.offersAndCuponsForOfferPage)
+    baseInstance
+      .get(endPoints.offersAndCuponsForOfferPage)
       .then(res => {
         setCoupons(res?.data?.data);
         setSkeletonLoading(false);

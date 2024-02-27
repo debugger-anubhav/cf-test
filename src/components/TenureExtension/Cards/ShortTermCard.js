@@ -6,8 +6,6 @@ import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
 import {Skeleton} from "@mui/material";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../../appConfig";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
-import axios from "axios";
 import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import {
@@ -16,6 +14,7 @@ import {
   setTransactionReferenceNumber,
 } from "@/store/Slices";
 import {useDispatch} from "react-redux";
+import {baseInstance} from "@/network/axios";
 
 function ShortTermCard({
   items,
@@ -71,8 +70,8 @@ function ShortTermCard({
       id: recId,
     };
     try {
-      const result = await axios.post(
-        baseURL + endPoints.addToCart.successPayment,
+      const result = await baseInstance.post(
+        endPoints.addToCart.successPayment,
         body,
       );
       console.log(result, "result");
@@ -96,8 +95,8 @@ function ShortTermCard({
       return;
     }
 
-    const result = await axios.post(
-      baseURL + endPoints.tenureExtensionCreateOrder,
+    const result = await baseInstance.post(
+      endPoints.tenureExtensionCreateOrder,
       {
         dealCodeNumber: parseInt(orderId),
         mode: "extension",
@@ -149,8 +148,8 @@ function ShortTermCard({
   }
 
   const getApiData = () => {
-    axios
-      .get(baseURL + endPoints.tenureExtension, {
+    baseInstance
+      .get(endPoints.tenureExtension, {
         params: {
           cfCareValue: isCityShieldApplied ? 0 : isChecked ? 1 : 0,
           dealCodeNumber,

@@ -6,11 +6,10 @@ import {ArrowForw, RatingStar} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useParams, useRouter} from "next/navigation";
 import {showToastNotification} from "../../Common/Notifications/toastUtils";
+import {baseInstance} from "@/network/axios";
 
 export default function MainSection() {
   const params = useParams();
@@ -23,8 +22,8 @@ export default function MainSection() {
   const [feedbackData, setFeedbackData] = useState(null);
 
   const handleSubmit = values => {
-    axios
-      .post(baseURL + endPoints.feedback, {
+    baseInstance
+      .post(endPoints.feedback, {
         feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
         rating: values.ratingnumber,
@@ -43,8 +42,8 @@ export default function MainSection() {
       .catch(err => console.log(err));
   };
   const getFeedbackData = () => {
-    axios
-      .post(baseURL + endPoints.getFeedbackData, {
+    baseInstance
+      .post(endPoints.getFeedbackData, {
         feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
       })

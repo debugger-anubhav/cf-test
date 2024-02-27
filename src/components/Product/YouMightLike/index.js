@@ -6,10 +6,9 @@ import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import {addYouMightLike} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {baseInstance} from "@/network/axios";
 
 const YouMightLike = ({heading, isbg, params}) => {
   const router = useRouter();
@@ -22,10 +21,8 @@ const YouMightLike = ({heading, isbg, params}) => {
   const cityId = getLocalStorage("cityId");
 
   useEffect(() => {
-    axios
-      .get(
-        baseURL + endPoints.productPage.youMightLike(params.productId, cityId),
-      )
+    baseInstance
+      .get(endPoints.productPage.youMightLike(params.productId, cityId))
       .then(res => {
         dispatch(addYouMightLike(res?.data?.data));
       })

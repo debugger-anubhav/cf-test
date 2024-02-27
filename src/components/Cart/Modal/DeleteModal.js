@@ -4,8 +4,7 @@ import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
-import axios from "axios";
+import {baseInstance} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useMutation} from "@/hooks/useMutation";
@@ -71,7 +70,7 @@ const DeleteModal = ({
   const handleDeleteItem = async (showToast = true) => {
     updateArr(productId);
     try {
-      await axios.get(baseURL + endPoints.addToCart.deleteItem(id, userId));
+      await baseInstance.get(endPoints.addToCart.deleteItem(id, userId));
       closeModal();
       showToast && showToastNotification("Item deleted from the cart", 3);
     } catch (error) {

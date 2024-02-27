@@ -4,8 +4,7 @@ import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
-import axios from "axios";
+import {baseInstance} from "@/network/axios";
 import {emptyCart, selectedCityId, selectedCityName} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {setLocalStorage} from "@/constants/constant";
@@ -48,8 +47,8 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
 
   const handleEmptyCart = async () => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.cityMaxPage.deleteCartItems(userId),
+      const response = await baseInstance.get(
+        endPoints.cityMaxPage.deleteCartItems(userId),
       );
       console.log(response, "res in emptycartt");
       dispatch(emptyCart());

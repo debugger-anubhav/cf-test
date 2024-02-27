@@ -3,14 +3,13 @@ import React, {useState, useEffect} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import ModalContentForNumber from "./components/ModalContentForNumber";
 import ModalContentForVerifyOtp from "./components/ModalContentForVerifyOtp";
 import ModalContentForResendOtp from "./components/ModalContentForResendOtp";
 import ModalContentForAdditionalSupport from "./components/ModalContentForAdditionalSupport";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {baseInstance} from "@/network/axios";
 
 const ChangeNumber = ({
   isModalOpen,
@@ -82,8 +81,8 @@ const ChangeNumber = ({
       mobile_number: number,
     };
     try {
-      const response = await axios.post(
-        baseURL + endPoints.profileSettingPage.sentOtpToNumber,
+      const response = await baseInstance.post(
+        endPoints.profileSettingPage.sentOtpToNumber,
         header,
       );
       console.log(response, "response in number otpp");
@@ -104,8 +103,8 @@ const ChangeNumber = ({
       otp,
     };
 
-    axios
-      .post(baseURL + endPoints.profileSettingPage.verifyOtp, body, {
+    baseInstance
+      .post(endPoints.profileSettingPage.verifyOtp, body, {
         headers: {
           userid: userId,
         },

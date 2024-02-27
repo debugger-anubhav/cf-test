@@ -3,11 +3,10 @@ import styles from "./styles.module.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import ProductCard from "./ProductCard";
 import {useParams} from "next/navigation";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {SwapIcon} from "@/assets/icon";
+import {baseInstance} from "@/network/axios";
 
 const ProductsDrawer = ({
   handleAddItem,
@@ -30,8 +29,8 @@ const ProductsDrawer = ({
       slot_id: slotId,
       cityId,
     };
-    axios
-      .post(baseURL + endPoints.cityMaxPage.getAssociateSlotData, body)
+    baseInstance
+      .post(endPoints.cityMaxPage.getAssociateSlotData, body)
       .then(res => {
         setProductsArr(res?.data?.data?.associated_products);
         setUpgradedProductsArr(res?.data?.data?.associated_premium_products);

@@ -23,8 +23,6 @@ import {
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import ShareModal from "./ShareDrawer/ShareModal";
@@ -47,6 +45,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {baseInstance} from "@/network/axios";
 
 const ProductDetails = ({params}) => {
   const {checkAuthentication} = useAuthentication();
@@ -141,11 +140,8 @@ const ProductDetails = ({params}) => {
   };
 
   const GetProductDetails = () => {
-    axios
-      .get(
-        baseURL +
-          endPoints.productPage.singleProductDetails(params.productId, cityId),
-      )
+    baseInstance
+      .get(endPoints.productPage.singleProductDetails(params.productId, cityId))
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
@@ -156,10 +152,8 @@ const ProductDetails = ({params}) => {
   };
 
   const getDurationRent = () => {
-    axios
-      .get(
-        baseURL + endPoints.productPage.monthlyRent(params.productId, cityId),
-      )
+    baseInstance
+      .get(endPoints.productPage.monthlyRent(params.productId, cityId))
       .then(res => {
         setDurationArray(res?.data?.data);
       })
@@ -175,8 +169,8 @@ const ProductDetails = ({params}) => {
 
       productId: params?.productId,
     };
-    axios
-      .post(baseURL + endPoints.addRecentViewProduct, data)
+    baseInstance
+      .post(endPoints.addRecentViewProduct, data)
       .then(res => {
         console.log(res);
       })
@@ -365,8 +359,8 @@ const ProductDetails = ({params}) => {
         durationArray[duration.currentIndex]?.attr_name?.split(" ")[0],
       ),
     };
-    axios
-      .post(baseURL + endPoints.productPage.addToCart, body, headers)
+    baseInstance
+      .post(endPoints.productPage.addToCart, body, headers)
       .then(res => {
         const apiData = res?.data?.data;
         if (res?.data?.data?.status === false)

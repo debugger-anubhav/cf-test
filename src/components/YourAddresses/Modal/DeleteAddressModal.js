@@ -4,9 +4,8 @@ import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const DeleteAddressModal = ({
   isModalOpen,
@@ -34,7 +33,7 @@ const DeleteAddressModal = ({
 
   const handleDelete = async () => {
     try {
-      await axios.delete(baseURL + endPoints.yourAddressPage.deleteAddress(id));
+      await baseInstance.delete(endPoints.yourAddressPage.deleteAddress(id));
     } catch (error) {
       console.error("Error deleting data:", error);
     }

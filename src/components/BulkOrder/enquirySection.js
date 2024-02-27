@@ -7,11 +7,10 @@ import {cityUrl} from "../../../appConfig";
 import DropDown from "../Documentation/DropDown/DropDown";
 import ReCAPTCHA from "react-google-recaptcha";
 import {ForwardArrowWithLine} from "@/assets/icon";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
+import {baseInstance} from "@/network/axios";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -74,8 +73,8 @@ const EnquirySection = () => {
         quantity: selectedOptionPer.value,
       };
 
-      axios
-        .post(baseURL + endPoints.enquiry, payload)
+      baseInstance
+        .post(endPoints.enquiry, payload)
         .then(response => {
           showToastNotification(
             "Your Enquiry is sent to our team. They will get back to you shortly",

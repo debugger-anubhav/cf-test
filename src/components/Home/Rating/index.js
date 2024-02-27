@@ -12,8 +12,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {BsStarFill} from "react-icons/bs";
 import Rating from "react-rating";
 import {getLocalStorage} from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const CustomerRating = () => {
   const {reviews} = useSelector(state => state.homePagedata);
@@ -45,8 +44,8 @@ const CustomerRating = () => {
       .catch(err => console.log(err));
   }, [cityId]);
   useEffect(() => {
-    axios
-      .get(baseURL + endPoints.googleReviewsLinks(getLocalStorage("cityId")))
+    baseInstance
+      .get(endPoints.googleReviewsLinks(getLocalStorage("cityId")))
       .then(res => {
         setReviewLink(res?.data?.data?.newReviewUri);
       })

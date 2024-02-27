@@ -25,8 +25,7 @@ import {
   productImageBaseUrl,
   setLocalStorage,
 } from "@/constants/constant";
-import axios from "axios";
-import {baseURL, baseInstance} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import ProfileDropDown from "./ProfileDropDown";
 import {
   decrypt,
@@ -136,8 +135,8 @@ const Header = () => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
     if (!homePageReduxData?.category.length) {
-      axios
-        .get(baseURL + endPoints.category)
+      baseInstance
+        .get(endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
         })
@@ -176,8 +175,8 @@ const Header = () => {
 
   // added for cart icons
   const fetchCartItems = userIdToUse => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
         // console.log(res, "res in fetch itemms");
         // setArr(res?.data?.data);
@@ -225,8 +224,8 @@ const Header = () => {
   // );
 
   useEffect(() => {
-    axios
-      .post(baseURL + endPoints.sessionUserUrl, data)
+    baseInstance
+      .post(endPoints.sessionUserUrl, data)
       .then(res => {
         if (userId) {
           localStorage.removeItem("user_id");
@@ -556,7 +555,7 @@ const SearchModal = ({
     setSearchTerm(newSearchTerm);
     const city = getLocalStorage("cityId");
 
-    axios.get(baseURL + endPoints.searchKey(newSearchTerm, city)).then(res => {
+    baseInstance.get(endPoints.searchKey(newSearchTerm, city)).then(res => {
       setSearchApiData(res?.data?.data);
     });
 
@@ -600,7 +599,7 @@ const SearchModal = ({
   const handleTrending = (item, event) => {
     event.stopPropagation();
     setSearchedData(prev => [...prev, item]);
-    axios.get(baseURL + endPoints.searchKey + item).then(res => {
+    baseInstance.get(endPoints.searchKey + item).then(res => {
       setSearchApiData(res?.data?.data);
       const storedSearches = getLocalStorage("searches");
       const searchesArray = storedSearches?.length ? storedSearches : [];

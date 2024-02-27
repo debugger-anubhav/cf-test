@@ -163,7 +163,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                         containerRef={containerRef}
                         getSingleOrderDetails={getSingleOrderDetails}
                         offlineCustomer={
-                          ordersData?.[0]?.is_offline_placed === "1"
+                          ordersData?.[index]?.is_offline_placed === "1"
                         }
                         offlineUserId={ordersData?.[index]?.user_id}
                       />

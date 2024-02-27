@@ -7,7 +7,7 @@ import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import Link from "next/link";
-import axios from "axios";
+import {baseInstance} from "@/network/axios";
 
 // h2 h3 p
 
@@ -38,7 +38,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     `?parentCategoryId=27`,
   );
   const getFaqsCitymax = () => {
-    axios
+    baseInstance
       .post("https://test.rentofurniture.com/ajxapi/frp_faq_details")
       .then(res => setFaqs(res?.data?.data?.content))
       .catch(err => console.log(err));

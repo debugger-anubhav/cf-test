@@ -12,9 +12,8 @@ import {
   setLocalStorage,
 } from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
-import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import "react-responsive-modal/styles.css";
 import FormSkeleton from "../Common/FormSkeleton";
@@ -86,8 +85,8 @@ const ProfileSettings = () => {
       const body = {
         email,
       };
-      const response = await axios.post(
-        baseURL + endPoints.profileSettingPage.sentOtpToEmail,
+      const response = await baseInstance.post(
+        endPoints.profileSettingPage.sentOtpToEmail,
         body,
         {
           headers: {
@@ -124,8 +123,8 @@ const ProfileSettings = () => {
       email,
       otp,
     };
-    axios
-      .post(baseURL + endPoints.profileSettingPage.sentOtpToEmail, body, {
+    baseInstance
+      .post(endPoints.profileSettingPage.sentOtpToEmail, body, {
         headers: {
           userid: useridFromStorage,
         },
