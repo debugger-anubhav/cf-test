@@ -28,10 +28,21 @@ function ChangeBillCycle({prevScreen, data}) {
 
   const handleBillCycleDayChange = e => {
     const value = e.target.value;
-    if (value > 0 && value <= 28) {
-      setBillCycleDay(value);
+    const sanitizedValue = value.replace(/^0+/, "");
+    if (/^\d*$/.test(sanitizedValue)) {
+      if (sanitizedValue === "") {
+        setBillCycleDay("");
+      } else {
+        const intValue = parseInt(sanitizedValue);
+        if (intValue >= 1 && intValue <= 28) {
+          setBillCycleDay(intValue);
+        } else {
+          setBillCycleDay("");
+        }
+      }
     }
   };
+
   return (
     <div className={`${styles.content_wrapper} !overflow-visible`}>
       <div className={styles.main_heading}>
