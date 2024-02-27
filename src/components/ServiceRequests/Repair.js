@@ -151,7 +151,7 @@ function Repair({prevScreen, data}) {
           </div>
         ))}
         <div className={styles.bottom_row}>
-          <div className={styles.bottom_line}></div>
+          {/* <div className={styles.bottom_line}></div> */}
 
           <button
             className={`${styles.proceed_btn}  ${

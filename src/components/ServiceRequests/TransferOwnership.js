@@ -383,7 +383,7 @@ function TransferOwnership({prevScreen, data}) {
                     )}
 
                     <div className={styles.bottom_row}>
-                      <div className={styles.bottom_line}></div>
+                      {/* <div className={styles.bottom_line}></div> */}
                       <button
                         className={`${styles.transfer_create_btn}
                         ${

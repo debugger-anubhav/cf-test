@@ -104,7 +104,7 @@ function SwapProduct({prevScreen, data}) {
       )}
 
       <div className={styles.bottom_row}>
-        <div className={styles.bottom_line}></div>
+        {/* <div className={styles.bottom_line}></div> */}
         <button
           className={`${styles.proceed_btn} ${
             showSwapScreen === 1 || selectedProductForSwap === null
@@ -159,7 +159,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
         </div>
       </div>
       <p className={styles.swap_heading}>Select product to swap to</p>
-      <div className="relative">
+      <div className="relative min-h-[40vh]">
         <div className={styles.search_wrapper}>
           <BsSearch />
           <input
