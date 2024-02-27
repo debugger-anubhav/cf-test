@@ -90,7 +90,7 @@ function CreateNewRequest({createRequestData, setOpenDrawer}) {
                       </div>
                     )}
                   </div>
-                  <label className="cursor-pointer">
+                  <label className="cursor-pointer text-71717A">
                     Order no: #
                     <span className="text-71717A">{item?.dealCodeNumber}</span>
                   </label>
