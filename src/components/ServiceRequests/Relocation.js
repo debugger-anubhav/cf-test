@@ -406,7 +406,7 @@ function Relocation({prevScreen, data}) {
                 </div>
 
                 <div className={styles.bottom_row}>
-                  <div className={styles.bottom_line}></div>
+                  {/* <div className={styles.bottom_line}></div> */}
                   <button
                     type="submit"
                     className={`${styles.proceed_btn} bg-none ${

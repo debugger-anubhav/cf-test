@@ -45,25 +45,26 @@
   /* @apply flex flex-col w-full gap-6 md:h-[80vh] h-[600px] overflow-y-scroll; */
 }
 .order_row {
-  @apply flex w-full gap-2 items-center;
+  @apply flex w-full gap-2 items-center cursor-pointer;
 }
 .radio_button {
   @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
   @apply flex flex-col md:w-[530px] 3xl:w-[680px] w-full right-0 items-center fixed bottom-0 bg-white;
+  box-shadow: 0px -1px 4px 0px #00000040;
 }
 .bottom_line {
-  @apply w-full h-[2px] bg-DDDDDF;
+  @apply bg-DDDDDF;
 }
 .proceed_btn {
-  @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
+  @apply lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] lg:mb-6 mb-4 outline-none font-Poppins mx-4 md:mx-0;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
 }
 .request_type {
-  @apply lg:text-16 text-14 text-5774AC font-medium font-Poppins;
+  @apply lg:text-16 lg:tracking-0.3    text-14 text-5774AC font-medium font-Poppins;
 }
 .divider_row {
   @apply flex w-full items-center;
@@ -87,7 +88,7 @@
   @apply flex w-full my-8 flex-col;
 }
 .buy_info {
-  @apply flex flex-col w-full my-8 overflow-y-scroll;
+  @apply flex flex-col w-full my-8 mb-8 sm:mb-12 lg:mb-8 overflow-y-scroll;
 }
 .product_to_buy_wrapper {
   @apply flex;
@@ -108,7 +109,7 @@
   @apply font-Poppins font-medium text-16 text-71717A;
 }
 .search_wrapper {
-  @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 mt-6;
+  @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 lg:mt-6 mt-[4px];
 }
 .search_input {
   @apply outline-none  w-full;

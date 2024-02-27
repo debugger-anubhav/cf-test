@@ -54,21 +54,19 @@ function ChangeBillCycle({prevScreen, data}) {
       </div>
       <div className={`${styles.buy_info} !overflow-visible`}>
         <div className="border border-DDDDDF p-4 rounded-lg">
-          <div className="flex gap-2 items-center">
+          <div
+            className="flex gap-2 items-center cursor-pointer"
+            onClick={() => setIstoggled(!istoggled)}>
             {istoggled ? (
               <BsToggleOn
                 color={"#5774AC"}
                 size={28}
-                onClick={() => setIstoggled(!istoggled)}
                 className="cursor-pointer"
               />
             ) : (
               <ToggleOff
                 size={28}
                 color={"#E3E1DC"}
-                onClick={() => {
-                  setIstoggled(!istoggled);
-                }}
                 className="cursor-pointer"
               />
             )}

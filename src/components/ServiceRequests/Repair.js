@@ -102,23 +102,28 @@ function Repair({prevScreen, data}) {
         <p className={styles.desc}>Select products to repair</p>
         {data?.map((item, index) => (
           <div className={styles.repair_info} key={index.toString()}>
-            <div className="flex gap-2 items-center">
+            <div
+              className="flex gap-2 items-center cursor-pointer"
+              onClick={() => {
+                handleToggle(index);
+                getRepairOption(item?.product_name);
+              }}>
               {toggleStates[index].istoggled ? (
                 <BsToggleOn
                   color={"#5774AC"}
                   size={28}
-                  onClick={() => handleToggle(index)}
+                  // onClick={() => handleToggle(index)}
                   className="cursor-pointer min-w-[2rem]"
                 />
               ) : (
                 <ToggleOff
                   size={28}
                   color={"#E3E1DC"}
-                  onClick={() => {
-                    handleToggle(index);
-                    // getRepairOption('Alexa Single Bed');
-                    getRepairOption(item?.product_name);
-                  }}
+                  // onClick={() => {
+                  //   handleToggle(index);
+                  //   // getRepairOption('Alexa Single Bed');
+                  //   getRepairOption(item?.product_name);
+                  // }}
                   className="cursor-pointer min-w-[2rem]"
                 />
               )}
@@ -151,7 +156,7 @@ function Repair({prevScreen, data}) {
           </div>
         ))}
         <div className={styles.bottom_row}>
-          <div className={styles.bottom_line}></div>
+          {/* <div className={styles.bottom_line}></div> */}
 
           <button
             className={`${styles.proceed_btn}  ${
