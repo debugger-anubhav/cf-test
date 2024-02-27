@@ -45,7 +45,10 @@ function CreateNewRequest({createRequestData, setOpenDrawer}) {
               const arr =
                 parsedData.length > 4 ? parsedData.slice(0, 3) : parsedData;
               return (
-                <div key={index.toString()} className={styles.order_row}>
+                <div
+                  key={index.toString()}
+                  className={styles.order_row}
+                  onClick={() => setSelectedOption(index)}>
                   <input
                     type="radio"
                     className={styles.radio_button}
@@ -87,7 +90,9 @@ function CreateNewRequest({createRequestData, setOpenDrawer}) {
                       </div>
                     )}
                   </div>
-                  <label>Order no: #{item?.dealCodeNumber}</label>
+                  <label className="cursor-pointer">
+                    Order no: #{item?.dealCodeNumber}
+                  </label>
                 </div>
               );
             })}

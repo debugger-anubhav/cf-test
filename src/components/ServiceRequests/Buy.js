@@ -22,8 +22,8 @@ function Buy({heading, prevScreen, data}) {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [pickupRequestType, setPickupRequestType] = useState("");
 
-  const handleChangeCheckbox = (index, e) => {
-    const productName = e.target.value;
+  const handleChangeCheckbox = (index, name) => {
+    const productName = name;
     setSelectedProducts(prevSelected => {
       if (prevSelected.includes(productName)) {
         return prevSelected.filter(name => name !== productName);
@@ -100,7 +100,13 @@ function Buy({heading, prevScreen, data}) {
             )}
             <div className="product_to_buy_wrapper">
               {data?.map((item, index) => (
-                <div key={index.toString()} className={"buy_checkbox_info"}>
+                <div
+                  key={index.toString()}
+                  className={"buy_checkbox_info cursor-pointer"}
+                  onClick={index => {
+                    selectedProducts.includes(item.product_name);
+                    handleChangeCheckbox(index, item.product_name);
+                  }}>
                   <input
                     {...label}
                     type="checkbox"
@@ -109,7 +115,6 @@ function Buy({heading, prevScreen, data}) {
                     value={item?.product_name}
                     className="w-6 h-[22px] rounded cursor-pointer mr-[7px]"
                     checked={selectedProducts.includes(item.product_name)}
-                    onChange={e => handleChangeCheckbox(index, e)}
                   />
                   {/* <Checkbox
                     {...label}
