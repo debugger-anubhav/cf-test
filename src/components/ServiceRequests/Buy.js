@@ -157,7 +157,7 @@ function Buy({heading, prevScreen, data}) {
               </>
             ) : (
               <div className={styles.bottom_row}>
-                <div className={styles.bottom_line}></div>
+                {/* <div className={styles.bottom_line}></div> */}
                 <button
                   className={`${styles.proceed_btn} ${
                     selectedProducts.length === 0

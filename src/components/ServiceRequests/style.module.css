@@ -55,7 +55,7 @@
   box-shadow: 0px -1px 4px 0px #00000040;
 }
 .bottom_line {
-  @apply w-full h-[2px] bg-DDDDDF;
+  @apply bg-DDDDDF;
 }
 .proceed_btn {
   @apply mt-8 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
