@@ -87,7 +87,7 @@ function CreateNewRequest({createRequestData, setOpenDrawer}) {
                       </div>
                     )}
                   </div>
-                  <label>Order no:#{item?.dealCodeNumber}</label>
+                  <label>Order no: #{item?.dealCodeNumber}</label>
                 </div>
               );
             })}

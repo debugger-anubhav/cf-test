@@ -112,34 +112,37 @@ function ServiceRequets() {
               transitionDuration={{enter: 400, exit: 200}}>
               <div className="flex w-full md:gap-4 2xl:gap-8 overflow-auto">
                 <div className="w-full">
-                  <div
-                    className={styles.mobile_close_icon}
-                    onClick={closeModal}>
-                    <Close
-                      color={"#45454A"}
-                      size={24}
-                      className="cursor-pointer"
-                    />
+                  <div className={styles.mobile_close_icon}>
+                    <div
+                      onClick={() => {
+                        setOpenDrawer(false);
+                      }}
+                      className="h-[24px]">
+                      <Close
+                        color={"#45454A"}
+                        size={24}
+                        className="cursor-pointer"
+                      />
+                    </div>
                   </div>
                   <CreateNewRequest
                     createRequestData={createRequestData}
                     setOpenDrawer={setOpenDrawer}
                   />
                 </div>
-                <div className={`md:flex hidden`} onClick={closeModal}>
-                  <Close
-                    color={"#45454A"}
-                    size={24}
-                    className="cursor-pointer"
-                  />
+                <div className={`md:flex hidden `}>
+                  <div
+                    onClick={() => {
+                      setOpenDrawer(false);
+                    }}
+                    className="h-[24px]">
+                    <Close
+                      color={"#45454A"}
+                      size={24}
+                      className="cursor-pointer "
+                    />
+                  </div>
                 </div>
-                {/* <div className={styles.mobile_close_icon} onClick={closeModal}>
-                  <Close
-                    color={"#45454A"}
-                    size={24}
-                    className="cursor-pointer"
-                  /> */}
-                {/* </div> */}
               </div>
             </Drawer>
           )}
