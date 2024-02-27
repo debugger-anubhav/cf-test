@@ -39,7 +39,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   );
   const getFaqsCitymax = () => {
     baseInstance
-      .post("https://test.rentofurniture.com/ajxapi/frp_faq_details")
+      .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
       .then(res => setFaqs(res?.data?.data?.content))
       .catch(err => console.log(err));
   };

@@ -214,6 +214,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
   };
 
   const validateForm = () => {
+    const regPat = /[!@#$%^&*()_+{}:;<>,.?~\\/\s]/;
     const error = formErrors;
 
     if (!formData?.addressProof?.length > 0) {
@@ -241,17 +242,37 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     } else {
       error.currentAddressProofType = "";
     }
+    if (formData?.contactNumber?.length < 10) {
+      error.contactNumber =
+        "Oops! Looks like you missed some digits. Please enter complete 10 digit number.";
+    } else if (
+      formData?.contactNumber?.length > 10 &&
+      regPat.test(formData?.contactNumber)
+    ) {
+      error.contactNumber =
+        "Please enter a valid 10 digit phone number without spaces or special characters.";
+    } else if (formData?.contactNumber?.length > 10) {
+      error.contactNumber =
+        "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.";
+    } else {
+      error.contactNumber = "";
+    }
+
     setFormErrors(error);
-    handleContactBlur();
+    console.log(error, "oopopop");
+    // handleContactBlur();
     // console.log(error, "jjj");
     // console.log(Object.values(formErrors), "Object.values(formErrors)");
     // console.log(Object.values(error).filter(Boolean).length, "lllll");
     return !!Object.values(error).filter(Boolean).length;
   };
+  console.log(formData, "formErrors");
 
   const submitHandler = () => {
     const isError = validateForm();
-    if (isError) return;
+    if (isError) {
+      return;
+    }
     for (const key in formErrors) {
       if (Object.hasOwnProperty.call(formErrors, key)) {
         const element = formErrors[key];
@@ -483,7 +504,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
                     />
-                    <span className={`${styles.chooseFile}`}>
+                    <span className={`!pl-0 ${styles.chooseFile}`}>
                       {item?.name || item?.doc_name}
                     </span>
                     <>
@@ -673,7 +694,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                       className={`${commonStyles.mdIBHidden}`}
                       loading="lazy"
                     />
-                    <span className={`${styles.chooseFile}`}>
+                    <span className={`!pl-0 ${styles.chooseFile}`}>
                       {item?.name || item?.doc_name}
                     </span>
                     <>
