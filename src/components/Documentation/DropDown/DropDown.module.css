@@ -29,9 +29,8 @@
 }
 
 .selected-option {
-  @apply flex justify-between bg-white border  rounded-xl font-Poppins tracking-desc xl:tracking-0.3 xl:text-16 text-14 font-normal py-3 px-4;
+  @apply flex items-center justify-between bg-white border  rounded-xl font-Poppins tracking-desc xl:tracking-0.3 xl:text-16 text-14 font-normal py-3 px-4;
   border-top: 1px solid var(--grey-grey-300, #dddddf);
-  line-height: normal;
 }
 
 .options {

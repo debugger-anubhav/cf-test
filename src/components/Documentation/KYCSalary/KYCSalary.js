@@ -276,7 +276,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                       className={`${commonStyles.mdIBHidden}`}
                       loading="lazy"
                     />
-                    <span className={`${styles.chooseFile}`}>
+                    <span className={`!pl-0 ${styles.chooseFile}`}>
                       {item?.name || item?.doc_name}
                     </span>
                     <>

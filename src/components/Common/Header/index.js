@@ -422,8 +422,7 @@ const Header = () => {
               </div>
               {/* </Link> */}
               <div
-                className={`pt-[14px] pb-[16px] pl-8
-                  
+                className={`pt-[14px] pb-[16px] pl-8 lg:flex hidden            
                   ${styles.test}`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
