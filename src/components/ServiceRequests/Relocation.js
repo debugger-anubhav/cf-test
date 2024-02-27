@@ -118,7 +118,7 @@ function Relocation({prevScreen, data}) {
         display: "none",
       },
       boxShadow: 0,
-
+      minHeight: "45px",
       fontSize: "14px",
       color: "#71717A",
       border: "none",
@@ -290,7 +290,9 @@ function Relocation({prevScreen, data}) {
                   />
                 )}
                 <div className="mt-4 flex flex-col">
-                  <p className={formStyles.form_label}>Current address proof</p>
+                  <p className={`${formStyles.form_label} mb-1`}>
+                    Current address proof
+                  </p>
                   <Select
                     name="addressProof"
                     options={doctsData}
