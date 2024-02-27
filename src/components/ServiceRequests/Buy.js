@@ -107,7 +107,7 @@ function Buy({heading, prevScreen, data}) {
                     id={index}
                     name={item?.product_name}
                     value={item?.product_name}
-                    className="w-6 h-6 rounded cursor-pointer"
+                    className="w-6 h-[22px] rounded cursor-pointer mr-[7px]"
                     checked={selectedProducts.includes(item.product_name)}
                     onChange={e => handleChangeCheckbox(index, e)}
                   />
