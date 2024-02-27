@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import {
   productPageImagesBaseUrl,
   CreateRequestPayload,
@@ -101,12 +101,22 @@ function Buy({heading, prevScreen, data}) {
             <div className="product_to_buy_wrapper">
               {data?.map((item, index) => (
                 <div key={index.toString()} className={"buy_checkbox_info"}>
-                  <Checkbox
+                  <input
+                    {...label}
+                    type="checkbox"
+                    id={index}
+                    name={item?.product_name}
+                    value={item?.product_name}
+                    className="w-5 h-5 !outline-2 !outline-[#5774ac] rounded cursor-pointer"
+                    checked={selectedProducts.includes(item.product_name)}
+                    onChange={e => handleChangeCheckbox(index, e)}
+                  />
+                  {/* <Checkbox
                     {...label}
                     onChange={e => handleChangeCheckbox(index, e)}
                     checked={selectedProducts.includes(item.product_name)}
                     value={item.product_name}
-                  />
+                  /> */}
                   <img
                     className={styles.product_imge_thambnil}
                     src={`${
