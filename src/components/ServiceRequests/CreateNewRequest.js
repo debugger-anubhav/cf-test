@@ -91,7 +91,8 @@ function CreateNewRequest({createRequestData, setOpenDrawer}) {
                     )}
                   </div>
                   <label className="cursor-pointer">
-                    Order no: #{item?.dealCodeNumber}
+                    Order no: #
+                    <span className="text-71717A">{item?.dealCodeNumber}</span>
                   </label>
                 </div>
               );
