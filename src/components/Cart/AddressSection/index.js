@@ -23,8 +23,7 @@ import {
   RazorpayThemeColor,
 } from "../../../../appConfig";
 import AddressDrawer from "../Drawer/SaveAddressesDrawer";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CityToStateMapping,
@@ -213,8 +212,8 @@ const AddressSection = () => {
         paymentMode: getLocalStorage("isMonthly") ? 0 : 1,
       };
 
-      const res = await axios.post(
-        baseURL + endPoints.addToCart.fetchBill,
+      const res = await baseInstance.post(
+        endPoints.addToCart.fetchBill,
         headers,
       );
       dispatch(getBillDetails(res?.data?.data));
@@ -228,8 +227,8 @@ const AddressSection = () => {
 
   async function checkCartQunatity(val) {
     try {
-      const res = await axios.post(
-        baseURL + endPoints.addToCart.checkProductQuantity,
+      const res = await baseInstance.post(
+        endPoints.addToCart.checkProductQuantity,
         {
           userId: userId && userId,
           cityId,
@@ -256,8 +255,8 @@ const AddressSection = () => {
         ? values?.postalCode
         : primaryAddress?.postal_code;
     try {
-      const res = await axios.post(
-        baseURL + endPoints.yourAddressPage.postalCode,
+      const res = await baseInstance.post(
+        endPoints.yourAddressPage.postalCode,
         {
           postalCode: parseInt(postalCode),
         },
@@ -330,8 +329,8 @@ const AddressSection = () => {
             cfCoins: billBreakup?.coinsUsed,
           };
 
-          const result = await axios.post(
-            baseURL + endPoints.addToCart.successPayment,
+          const result = await baseInstance.post(
+            endPoints.addToCart.successPayment,
             data,
           );
           setLoading(false);
@@ -404,8 +403,8 @@ const AddressSection = () => {
       });
   };
   const fetchCartItems = (userIdToUse, val) => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
+    baseInstance
+      .get(endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));

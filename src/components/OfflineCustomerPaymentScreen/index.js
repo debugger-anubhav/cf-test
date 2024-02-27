@@ -2,13 +2,12 @@ import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {ImCheckmark} from "react-icons/im";
 import otherStyles from "../MyOrders/orders/partTwo/styles.module.css";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useParams, useRouter} from "next/navigation";
 import {loadScript} from "@/constants/constant";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {ArrowForw} from "@/assets/icon";
+import {baseInstance} from "@/network/axios";
 
 const OfflinePayment = () => {
   const params = useParams();
@@ -18,12 +17,11 @@ const OfflinePayment = () => {
   const mapData = ["Advanced payment", "Final payment"];
 
   useEffect(() => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.offlinePayment.getOfflineCutomerDetails(
-            parseInt(params.orderId),
-          ),
+        endPoints.offlinePayment.getOfflineCutomerDetails(
+          parseInt(params.orderId),
+        ),
       )
       .then(res => {
         setDetails(res?.data?.data);
@@ -40,8 +38,8 @@ const OfflinePayment = () => {
       return;
     }
 
-    const result = await axios.post(
-      baseURL + endPoints.tenureExtensionCreateOrder,
+    const result = await baseInstance.post(
+      endPoints.tenureExtensionCreateOrder,
       {
         dealCodeNumber: params.orderId,
         mode: "offline",
@@ -76,8 +74,8 @@ const OfflinePayment = () => {
             razorpaySignature: response.razorpay_signature,
           };
 
-          const res = await axios.post(
-            baseURL + endPoints.addToCart.successPayment,
+          const res = await baseInstance.post(
+            endPoints.addToCart.successPayment,
             data,
           );
           console.log(res, "result in handler");

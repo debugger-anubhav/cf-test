@@ -12,8 +12,7 @@ import SearchCard from "../SeachCard/SearchCard";
 import style from "./style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {baseURL, baseInstance} from "@/network/axios";
-import axios from "axios";
+import {baseInstance} from "@/network/axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
@@ -52,7 +51,7 @@ const SearchList = () => {
     const key = url[url.length - 1].replace(/%20/g, " ");
     setSearchKey(key);
 
-    axios.get(baseURL + endPoints.searchKey(key, city, sort)).then(res => {
+    baseInstance.get(endPoints.searchKey(key, city, sort)).then(res => {
       setSearchData(res?.data?.data?.products);
     });
   }, [sort]);

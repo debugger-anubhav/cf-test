@@ -10,8 +10,6 @@ import {
 import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
-import axios from "axios";
 import {loadScript} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useRouter} from "next/navigation";
@@ -21,6 +19,7 @@ import {
   setTransactionReferenceNumber,
 } from "@/store/Slices";
 import {useDispatch} from "react-redux";
+import {baseInstance} from "@/network/axios";
 
 export const MonthlyCard = ({
   monthlyCardIsChecked,
@@ -46,8 +45,8 @@ export const MonthlyCard = ({
   const [modeOfPayment, setModeOfPayment] = useState("card");
   const [apiData, setApiData] = useState(null);
   const getApiData = () => {
-    axios
-      .get(baseURL + endPoints.tenureExtension, {
+    baseInstance
+      .get(endPoints.tenureExtension, {
         params: {
           cfCareValue: monthlyCardIsChecked ? 1 : 0,
           dealCodeNumber,
@@ -88,8 +87,8 @@ export const MonthlyCard = ({
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
     };
-    axios
-      .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
+    baseInstance
+      .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
           // showToastNotification(response.data.message, 1);
@@ -117,15 +116,12 @@ export const MonthlyCard = ({
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
-    const result = await axios.post(
-      baseURL + endPoints.kycPage.registerMandate,
-      {
-        dealCodeNumber,
-        mode: modeOfPayment,
-        cf_value: monthlyCardIsChecked ? 1 : 0,
-        source: "extention",
-      },
-    );
+    const result = await baseInstance.post(endPoints.kycPage.registerMandate, {
+      dealCodeNumber,
+      mode: modeOfPayment,
+      cf_value: monthlyCardIsChecked ? 1 : 0,
+      source: "extention",
+    });
     if (!result) {
       alert("Server error. Are you online?");
       return;

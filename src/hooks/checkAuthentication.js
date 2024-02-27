@@ -1,6 +1,5 @@
 // import {useCookies} from "react-cookie";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import Cookies from "universal-cookie";
 // eslint-disable-next-line camelcase
@@ -18,8 +17,8 @@ export const useAuthentication = () => {
     //   localStorage.removeItem("_ga");
     // }
     try {
-      const response = await axios.post(
-        baseURL + endPoints.login.isAuthenticate,
+      const response = await baseInstance.post(
+        endPoints.login.isAuthenticate,
         {},
         {
           headers: {

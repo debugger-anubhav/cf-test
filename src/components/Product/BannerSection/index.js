@@ -4,19 +4,18 @@ import BannerTwo from "./BannerTwo";
 import BannerThree from "./BannnerThree";
 import BannerFive from "./BannerFive";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {useDispatch, useSelector} from "react-redux";
 import {getBannerImages} from "@/store/Slices";
 import ProductVideo from "./ProductVideo";
+import {baseInstance} from "@/network/axios";
 
 const BannerSection = ({params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData.bannerImages);
 
   const getBannerImagesFunction = () => {
-    axios
-      .get(baseURL + endPoints.productPage.bannerImages(params.productId))
+    baseInstance
+      .get(endPoints.productPage.bannerImages(params.productId))
       .then(res => {
         dispatch(getBannerImages(res?.data?.data));
       })

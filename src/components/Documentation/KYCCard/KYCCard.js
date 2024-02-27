@@ -4,8 +4,6 @@ import commonStyles from "../common.module.css";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {OutlineArrowRight} from "@/assets/icon";
 import CommonField from "../CommonField/CommonField";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
@@ -13,6 +11,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {loadScript} from "@/constants/constant";
 import {reduxSetModalState} from "@/store/Slices";
 import DoItLater from "../DoItLaterModal/DoItLater";
+import {baseInstance} from "@/network/axios";
 // import {useSelector} from "react-redux";
 
 const KYCCard = ({handleKycState}) => {
@@ -36,8 +35,8 @@ const KYCCard = ({handleKycState}) => {
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
     };
-    axios
-      .post(baseURL + endPoints.kycPage.updatePaymentStatus, body)
+    baseInstance
+      .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
           showToastNotification(response.data.message, 1);
@@ -64,14 +63,11 @@ const KYCCard = ({handleKycState}) => {
       return;
     }
 
-    const result = await axios.post(
-      baseURL + endPoints.kycPage.registerMandate,
-      {
-        dealCodeNumber: selectedOrderId,
-        mode: modeOfPayment,
-        source: "new",
-      },
-    );
+    const result = await baseInstance.post(endPoints.kycPage.registerMandate, {
+      dealCodeNumber: selectedOrderId,
+      mode: modeOfPayment,
+      source: "new",
+    });
     if (!result) {
       alert("Server error. Are you online?");
       return;

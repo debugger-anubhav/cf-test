@@ -5,14 +5,14 @@ import {ArrowForw, InformationIcon, OpenIcon} from "@/assets/icon";
 import formStyles from "@/components/Cart/AddressSection/styles.module.css";
 import BreakdownDrawer from "./breakdownDrawer";
 import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
+
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
 import PostCityshield from "./postCityshieldPayment";
 import {format, parseISO} from "date-fns";
+import {baseInstance} from "@/network/axios";
 
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -29,8 +29,8 @@ const CityShieldPage = () => {
   const router = useRouter();
 
   const getUserDetails = () => {
-    axios
-      .get(baseURL + endPoints.cityshieldPage.getUserDetails(orderId))
+    baseInstance
+      .get(endPoints.cityshieldPage.getUserDetails(orderId))
       .then(res => {
         setDetails(res?.data?.data);
         const parsedDate = parseISO(res?.data?.data?.created);
@@ -54,13 +54,10 @@ const CityShieldPage = () => {
       return;
     }
 
-    const result = await axios.post(
-      baseURL + endPoints.cityshieldPage.payment,
-      {
-        dealCodeNumber: orderId,
-        cfCoins: "",
-      },
-    );
+    const result = await baseInstance.post(endPoints.cityshieldPage.payment, {
+      dealCodeNumber: orderId,
+      cfCoins: "",
+    });
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -91,8 +88,8 @@ const CityShieldPage = () => {
             mode: "cfCareUpgrade",
             id: data.dataObj.recID,
           };
-          const result = await axios.post(
-            baseURL + endPoints.addToCart.successPayment,
+          const result = await baseInstance.post(
+            endPoints.addToCart.successPayment,
             body,
           );
           console.log(result, "result");

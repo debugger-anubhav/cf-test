@@ -5,14 +5,13 @@ import styles from "./styles.module.css";
 import {useRouter} from "next/navigation";
 import {IconLink} from "../../../../assets/icon";
 import string from "@/constants/Constant.json";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 // import {useDispatch, useSelector} from "react-redux";
 // import {reduxSetModalState} from "@/store/Slices";
 // import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {useSelector} from "react-redux";
+import {baseInstance} from "@/network/axios";
 
 const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
   const {checkAuthentication} = useAuthentication();
@@ -27,8 +26,8 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
   }, [loginStateFromRedux]);
 
   const fetchPlans = () => {
-    axios
-      .get(baseURL + endPoints.cityMaxPage.getAllPlans)
+    baseInstance
+      .get(endPoints.cityMaxPage.getAllPlans)
       .then(res => {
         setPlans(res?.data?.data);
       })

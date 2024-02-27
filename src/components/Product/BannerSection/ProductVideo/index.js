@@ -1,10 +1,9 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {getProductVideos} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
+import {baseInstance} from "@/network/axios";
 
 const ProductVideo = ({params}) => {
   const dispatch = useDispatch();
@@ -19,8 +18,8 @@ const ProductVideo = ({params}) => {
   // };
 
   const getVideos = () => {
-    axios
-      .get(baseURL + endPoints.productPage.productVideos(params.productId))
+    baseInstance
+      .get(endPoints.productPage.productVideos(params.productId))
       .then(res => {
         dispatch(getProductVideos(res?.data?.data));
       })

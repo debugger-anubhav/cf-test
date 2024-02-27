@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
 import {Close} from "@/assets/icon";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 import {useSelector} from "react-redux";
 
 const CouponDrawer = ({
@@ -45,8 +44,8 @@ const CouponDrawer = ({
         cityId,
         tenure: cartItems?.[0]?.subproduct?.attr_name,
       };
-      const res = await axios.post(
-        baseURL + endPoints.addToCart.checkCouponApplicability,
+      const res = await baseInstance.post(
+        endPoints.addToCart.checkCouponApplicability,
         headers,
       );
       if (res?.data?.data?.status) {
@@ -81,8 +80,8 @@ const CouponDrawer = ({
   }, []);
 
   const getOffersAndCoupons = () => {
-    axios
-      .get(baseURL + endPoints.offersAndCupons + `?sortId=${isMonthly ? 0 : 1}`)
+    baseInstance
+      .get(endPoints.offersAndCupons + `?sortId=${isMonthly ? 0 : 1}`)
       .then(res => {
         setPageData(res?.data?.data);
       });

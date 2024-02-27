@@ -32,8 +32,7 @@ import {
 import {useRouter, useParams, useSearchParams} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
@@ -201,8 +200,8 @@ const SubHeader = ({params}) => {
   };
 
   useEffect(() => {
-    axios
-      .get(baseURL + endPoints.getCategoryIdBySeoUrl(query.category))
+    baseInstance
+      .get(endPoints.getCategoryIdBySeoUrl(query.category))
       .then(res => {
         setLocalStorage(
           "category",

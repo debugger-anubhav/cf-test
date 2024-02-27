@@ -9,10 +9,9 @@ import {
   setSeoFurnitureRentalSubCategory,
 } from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
 import {setLocalStorage} from "@/constants/constant";
+import {baseInstance} from "@/network/axios";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
@@ -24,8 +23,8 @@ const RentFurnitureAndAppliances = ({params}) => {
 
   useEffect(() => {
     if (params?.category === "appliances-rental") {
-      axios
-        .get(baseURL + endPoints.seoApplianceRentalSubCategory)
+      baseInstance
+        .get(endPoints.seoApplianceRentalSubCategory)
         .then(res => {
           dispatch(setSeoApplianceRentalSubCategory(res?.data?.data));
           // console.log("appliances-rental")
@@ -35,8 +34,8 @@ const RentFurnitureAndAppliances = ({params}) => {
           dispatch(setSeoApplianceRentalSubCategory([]));
         });
     } else if (params?.category === "furniture-rental") {
-      axios
-        .get(baseURL + endPoints.seoFurnitureRentalSubCategory)
+      baseInstance
+        .get(endPoints.seoFurnitureRentalSubCategory)
         .then(res => {
           dispatch(setSeoFurnitureRentalSubCategory(res?.data?.data));
           // console.log("furniture-rental")
@@ -46,8 +45,8 @@ const RentFurnitureAndAppliances = ({params}) => {
           dispatch(setSeoFurnitureRentalSubCategory([]));
         });
     } else {
-      axios
-        .get(baseURL + endPoints.category)
+      baseInstance
+        .get(endPoints.category)
         .then(res => {
           dispatch(addCategory(res?.data?.data));
           // console.log("home")

@@ -14,8 +14,6 @@ import {
 } from "../../../assets/icon";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import CitymaxDetailPageDrawer from "./CitymaxDetailPageDrawer/index";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import "react-responsive-modal/styles.css";
 import ProceedModal from "./Modals/ProceedModal";
@@ -29,6 +27,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {baseInstance} from "@/network/axios";
 
 const CitymaxPlanDetail = () => {
   const {checkAuthentication} = useAuthentication();
@@ -130,14 +129,13 @@ const CitymaxPlanDetail = () => {
   });
 
   const getRoomData = () => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.cityMaxPage.getRoomData(
-            params.planId,
-            params.tenure,
-            userIdToUse,
-          ),
+        endPoints.cityMaxPage.getRoomData(
+          params.planId,
+          params.tenure,
+          userIdToUse,
+        ),
       )
       .then(res => {
         setData(res?.data?.data);
@@ -294,8 +292,8 @@ const CitymaxPlanDetail = () => {
       attribute_values: data?.PrdAttrArr?.[isHalfYearly ? "6" : "12"]?.pid,
       user_id: userIdToUse,
     };
-    axios
-      .post(baseURL + endPoints.cityMaxPage.sentProductsToCart, body)
+    baseInstance
+      .post(endPoints.cityMaxPage.sentProductsToCart, body)
       .then(res => {
         console.log(res?.data?.data);
         openModal && toggleModal();
@@ -321,8 +319,8 @@ const CitymaxPlanDetail = () => {
       product_shipping_cost: parseInt(data?.productDetails[0]?.shipping_cost),
       product_tax_cost: 0,
     };
-    axios
-      .post(baseURL + endPoints.productPage.addToCart, body, headers)
+    baseInstance
+      .post(endPoints.productPage.addToCart, body, headers)
       .then(res => {
         const apiData = res?.data?.data;
         if (

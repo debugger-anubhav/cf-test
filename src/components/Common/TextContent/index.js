@@ -1,16 +1,15 @@
 import React, {useEffect} from "react";
 import styles from "./style.module.css";
-import axios from "axios";
 import {endPoints} from "@/network/endPoints";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 export default function TextContent({params}) {
   const [data, setData] = React.useState();
   const [paramsCityId, setParamsCityId] = React.useState(46);
 
   const HomePageText = () => {
-    axios
-      .get(baseURL + endPoints.homePageTextContent)
+    baseInstance
+      .get(endPoints.homePageTextContent)
       .then(res => {
         setData(res?.data?.data);
         // console.log("home");
@@ -18,10 +17,9 @@ export default function TextContent({params}) {
       .catch(err => console.log(err));
   };
   const SeoAppliancesPageText = () => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.seoAppliancesTextContent +
+        endPoints.seoAppliancesTextContent +
           `?cityId=${paramsCityId}&categoryId=26`,
       )
       .then(res => {
@@ -30,10 +28,9 @@ export default function TextContent({params}) {
       .catch(err => console.log(err));
   };
   const SeoFurniturePageText = () => {
-    axios
+    baseInstance
       .get(
-        baseURL +
-          endPoints.seoFurnitureTextContent +
+        endPoints.seoFurnitureTextContent +
           `?cityId=${paramsCityId}&categoryId=27`,
       )
       .then(res => {
@@ -46,8 +43,8 @@ export default function TextContent({params}) {
       params?.category === "appliances-rental" ||
       params?.category === "furniture-rental"
     ) {
-      axios
-        .get(baseURL + endPoints.cityIdByCityName + params?.city)
+      baseInstance
+        .get(endPoints.cityIdByCityName + params?.city)
         .then(res => setParamsCityId(res?.data?.data?.id))
         .catch(err => console.log(err));
     }

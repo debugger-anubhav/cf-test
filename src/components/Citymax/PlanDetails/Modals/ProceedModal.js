@@ -4,15 +4,10 @@ import styles from "./styles.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
 import {useRouter} from "next/navigation";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-// import {deleteItems} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {emptyCart} from "@/store/Slices";
-// import axios from "axios";
-// import {baseURL} from "@/network/axios";
-// import {endPoints} from "@/network/endPoints";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const ProceedModal = ({
   isModalOpen,
@@ -49,8 +44,8 @@ const ProceedModal = ({
 
   const handleEmptyCart = async () => {
     try {
-      const response = await axios.get(
-        baseURL + endPoints.cityMaxPage.deleteCartItems(userIdToUse),
+      const response = await baseInstance.get(
+        endPoints.cityMaxPage.deleteCartItems(userIdToUse),
       );
       console.log(response, "res in emptycartt");
       dispatch(emptyCart());

@@ -25,8 +25,7 @@ import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import DeleteModal from "../Modal/DeleteModal";
 import "react-responsive-modal/styles.css";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {
@@ -104,8 +103,8 @@ const ShoppingCartSection = () => {
 
   const fetchCartItems = isValid => {
     const id = isValid ? userId : tempUserId;
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCartItems(cityId, id))
+    baseInstance
+      .get(endPoints.addToCart.fetchCartItems(cityId, id))
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
@@ -156,8 +155,8 @@ const ShoppingCartSection = () => {
   };
 
   const fetchMonthlyCities = () => {
-    axios
-      .get(baseURL + endPoints.addToCart.fetchMonthlyCities)
+    baseInstance
+      .get(endPoints.addToCart.fetchMonthlyCities)
       .then(res => {
         const isMonthlyCity = res?.data?.data.includes(cityId.toString());
 
@@ -171,8 +170,8 @@ const ShoppingCartSection = () => {
     const isAuthenticated = checkAuthentication();
     setIsLogin(isAuthenticated);
     const id = isAuthenticated ? userId : tempUserId;
-    axios
-      .get(baseURL + endPoints.addToCart.fetchCoins(id))
+    baseInstance
+      .get(endPoints.addToCart.fetchCoins(id))
       .then(res => {
         if (res?.data?.data?.length > 0)
           setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
@@ -249,8 +248,8 @@ const ShoppingCartSection = () => {
         cityId,
       };
 
-      await axios
-        .post(baseURL + endPoints.addToCart.updateQuantity, headers)
+      await baseInstance
+        .post(endPoints.addToCart.updateQuantity, headers)
         .then(res => {
           console.log(res, "res in updated qunatity");
         })
@@ -275,8 +274,8 @@ const ShoppingCartSection = () => {
         paymentMode: getLocalStorage("isMonthly") ? 0 : 1,
       };
 
-      const res = await axios.post(
-        baseURL + endPoints.addToCart.fetchBill,
+      const res = await baseInstance.post(
+        endPoints.addToCart.fetchBill,
         headers,
       );
       dispatch(getBillDetails(res?.data?.data));
@@ -349,8 +348,8 @@ const ShoppingCartSection = () => {
   );
 
   const CheckProductQuantity = () => {
-    axios
-      .post(baseURL + endPoints.addToCart.checkProductQuantity, {
+    baseInstance
+      .post(endPoints.addToCart.checkProductQuantity, {
         userId: userId && userId,
         cityId,
       })

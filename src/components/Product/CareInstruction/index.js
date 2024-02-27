@@ -2,18 +2,17 @@ import React, {useEffect} from "react";
 import styles from "./style.module.css";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 // import {productPageImagesBaseUrl} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import {addCareInstructions} from "@/store/Slices";
+import {baseInstance} from "@/network/axios";
 
 const CareInstruction = ({params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
   useEffect(() => {
-    axios
-      .get(baseURL + endPoints.productPage.careInstructions(params.productId))
+    baseInstance
+      .get(endPoints.productPage.careInstructions(params.productId))
       .then(res => {
         dispatch(addCareInstructions(res?.data?.data));
       })

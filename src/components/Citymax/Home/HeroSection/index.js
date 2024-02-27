@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
 import CommonCard from "../../Common/CommonCard";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsHalfYearlyState} from "@/store/Slices";
+import {baseInstance} from "@/network/axios";
 
 const HeroSection = () => {
   const dispatch = useDispatch();
@@ -14,8 +13,8 @@ const HeroSection = () => {
   const [plans, setPlans] = useState();
 
   const fetchPlans = () => {
-    axios
-      .get(baseURL + endPoints.cityMaxPage.getAllPlans)
+    baseInstance
+      .get(endPoints.cityMaxPage.getAllPlans)
       .then(res => {
         setPlans(res?.data?.data);
       })

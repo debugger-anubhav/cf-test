@@ -156,8 +156,7 @@ import Payment from "./payments";
 import CreditNotes from "./creditNotes";
 import Refunds from "./refunds";
 import RetainerInvoice from "./retainerInvoice/index";
-import axios from "axios";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
@@ -182,9 +181,9 @@ const PaymentPage = () => {
       });
   };
   const downloadAPI = () => {
-    axios
+    baseInstance
       .post(
-        baseURL + endPoints.downloadPDF,
+        endPoints.downloadPDF,
         {
           statement_format: "pdf",
         },

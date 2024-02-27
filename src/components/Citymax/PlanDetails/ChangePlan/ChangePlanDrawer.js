@@ -1,15 +1,14 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import CommonCard from "../../Common/CommonCard";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 
 const ChangePlanDrawer = ({isHalfYearly}) => {
   const [plans, setPlans] = useState();
   const fetchPlans = () => {
-    axios
-      .get(baseURL + endPoints.cityMaxPage.getAllPlans)
+    baseInstance
+      .get(endPoints.cityMaxPage.getAllPlans)
       .then(res => {
         setPlans(res?.data?.data);
       })

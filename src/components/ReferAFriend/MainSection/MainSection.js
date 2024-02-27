@@ -6,8 +6,6 @@ import FAQQuestion from "./FAQQuestion";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,6 +14,7 @@ import LoginModal from "@/components/LoginPopups";
 import "react-responsive-modal/styles.css";
 import {useRouter} from "next/navigation";
 import {FaArrowRight} from "react-icons/fa";
+import {baseInstance} from "@/network/axios";
 
 const FAQ = [
   {
@@ -100,8 +99,8 @@ const MainSection = ({login}) => {
 
   useEffect(() => {
     if (userIdFromStorage) {
-      axios
-        .get(baseURL + endPoints.referAFreind(userIdFromStorage))
+      baseInstance
+        .get(endPoints.referAFreind(userIdFromStorage))
         .then(res => {
           setCode(res?.data?.data);
         })

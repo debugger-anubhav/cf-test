@@ -5,9 +5,8 @@ import {ArrowForw, BackIcon} from "@/assets/icon";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
 import {cityUrl} from "../../../../appConfig";
-import {baseInstance, baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 import {useSelector} from "react-redux";
 import {
   getLocalStorage,
@@ -127,8 +126,8 @@ const FormAddress = ({setTab, tab, id}) => {
     // setCity(val);
     setFieldValue("city", val);
 
-    await axios
-      .get(baseURL + endPoints.cityIdByCityName + val)
+    await baseInstance
+      .get(endPoints.cityIdByCityName + val)
       .then(res => setCityId(res?.data?.data?.id))
       .catch(err => console.log(err));
 
@@ -137,8 +136,8 @@ const FormAddress = ({setTab, tab, id}) => {
 
   const checkPostalCode = async values => {
     try {
-      const res = await axios.post(
-        baseURL + endPoints.yourAddressPage.postalCode,
+      const res = await baseInstance.post(
+        endPoints.yourAddressPage.postalCode,
         {
           postalCode: parseInt(values.postalCode),
         },

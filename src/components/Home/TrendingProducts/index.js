@@ -8,9 +8,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {useRouter} from "next/navigation";
+import {baseInstance} from "@/network/axios";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
@@ -46,8 +45,8 @@ const TrendingProducts = ({params}) => {
       params?.category === "appliances-rental" ||
       params?.category === "furniture-rental"
     ) {
-      axios
-        .get(baseURL + endPoints.cityIdByCityName + params?.city)
+      baseInstance
+        .get(endPoints.cityIdByCityName + params?.city)
         .then(res => setParamsCityId(res?.data?.data?.id))
         .catch(err => console.log(err));
     }

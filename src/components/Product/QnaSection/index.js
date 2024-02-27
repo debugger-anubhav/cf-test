@@ -3,10 +3,10 @@ import styles from "./style.module.css";
 import SideDrawer from "../Drawer/Drawer";
 import {getProductQuesAns} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+
 import {useDispatch, useSelector} from "react-redux";
 import {format} from "date-fns";
+import {baseInstance} from "@/network/axios";
 
 const QuesAndAns = ({params}) => {
   const [open, setOpen] = useState(false);
@@ -19,8 +19,8 @@ const QuesAndAns = ({params}) => {
   const pageData = useSelector(state => state.productPageData.qna);
 
   const getQuesAnsFunction = () => {
-    axios
-      .get(baseURL + endPoints.productPage.qna(params.productId))
+    baseInstance
+      .get(endPoints.productPage.qna(params.productId))
       .then(res => {
         dispatch(getProductQuesAns(res?.data?.data));
       })

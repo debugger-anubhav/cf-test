@@ -18,8 +18,7 @@ import {
   keyPressForContactField,
   loadScript,
 } from "@/constants/constant";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
+
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
@@ -35,6 +34,7 @@ import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
+import {baseInstance} from "@/network/axios";
 
 function CustomerPayment() {
   const {checkAuthentication} = useAuthentication();
@@ -90,8 +90,8 @@ function CustomerPayment() {
 
   const fetchAvailCoins = async () => {
     try {
-      const res = await axios.get(
-        baseURL + endPoints.addToCart.fetchCoins(userId),
+      const res = await baseInstance.get(
+        endPoints.addToCart.fetchCoins(userId),
       );
 
       if (res?.data?.data?.length > 0) {
@@ -177,8 +177,8 @@ function CustomerPayment() {
     }
 
     try {
-      const result = await axios.post(
-        baseURL + endPoints.customerPayment.createCustomerPayment,
+      const result = await baseInstance.post(
+        endPoints.customerPayment.createCustomerPayment,
         {
           full_name: values?.fullName,
           email: values?.email,
@@ -224,8 +224,8 @@ function CustomerPayment() {
             amount: values?.amount,
           };
           try {
-            const result = await axios.post(
-              baseURL + endPoints.customerPayment.savePayment,
+            const result = await baseInstance.post(
+              endPoints.customerPayment.savePayment,
               body,
             );
             console.log(result);

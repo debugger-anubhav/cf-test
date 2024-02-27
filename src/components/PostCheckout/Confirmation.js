@@ -4,10 +4,9 @@ import {FaCheck} from "react-icons/fa";
 import {useRouter, useSearchParams} from "next/navigation";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch} from "react-redux";
-import axios from "axios";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
+import {baseInstance} from "@/network/axios";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
@@ -34,8 +33,8 @@ const PaymentConfirmation = () => {
   }, [router, timer]);
 
   const getTransactionId = id => {
-    axios
-      .get(baseURL + endPoints.addToCart.getTransactionId(id))
+    baseInstance
+      .get(endPoints.addToCart.getTransactionId(id))
       .then(res => {
         setTransactionId(res?.data?.data?.paypal_transaction_id);
         setSkeletonLoder(false);

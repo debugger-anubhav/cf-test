@@ -2,10 +2,9 @@ import React, {useState, useEffect} from "react";
 import style from "./style.module.css";
 import {useParams} from "next/navigation";
 import {FaCheck} from "react-icons/fa";
-import {baseURL} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 import {Skeleton} from "@mui/material";
+import {baseInstance} from "@/network/axios";
 
 const Document = () => {
   const params = useParams();
@@ -16,8 +15,8 @@ const Document = () => {
   };
 
   const documentApproveApiCall = () => {
-    axios
-      .get(baseURL + endPoints.documentationApprove(orderId))
+    baseInstance
+      .get(endPoints.documentationApprove(orderId))
       .then(res => {
         setApiData(res?.data?.data);
       })
@@ -25,8 +24,8 @@ const Document = () => {
   };
 
   const statusUpdateApiCall = (item, updatedStatus) => {
-    axios
-      .patch(baseURL + endPoints.documentationApproveStatusUpdate, {
+    baseInstance
+      .patch(endPoints.documentationApproveStatusUpdate, {
         status: updatedStatus,
         id: item?.id,
       })

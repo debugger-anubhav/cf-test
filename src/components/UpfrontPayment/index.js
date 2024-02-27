@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {ForwardArrowWithLine} from "@/assets/icon";
-import {baseURL} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import axios from "axios";
 import {useParams, useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
 import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
@@ -27,8 +26,8 @@ function UpfrontPayment() {
   const [loading, setLoading] = useState(false);
 
   const upfrontApiCall = () => {
-    axios
-      .post(baseURL + endPoints.upfrontPayment, {id: ID})
+    baseInstance
+      .post(endPoints.upfrontPayment, {id: ID})
       .then(res => {
         setApiData(res?.data?.data?.data);
         setRazorpayData(res?.data?.data);
@@ -73,8 +72,8 @@ function UpfrontPayment() {
             mode: "upfront_payment",
           };
           try {
-            const result = await axios.post(
-              baseURL + endPoints.addToCart.successPayment,
+            const result = await baseInstance.post(
+              endPoints.addToCart.successPayment,
               data,
             );
             console.log(result, "result");
