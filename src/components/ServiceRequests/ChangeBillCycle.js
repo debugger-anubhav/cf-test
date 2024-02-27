@@ -28,10 +28,21 @@ function ChangeBillCycle({prevScreen, data}) {
 
   const handleBillCycleDayChange = e => {
     const value = e.target.value;
-    if (value >= 0 && value <= 31) {
-      setBillCycleDay(value);
+    const sanitizedValue = value.replace(/^0+/, "");
+    if (/^\d*$/.test(sanitizedValue)) {
+      if (sanitizedValue === "") {
+        setBillCycleDay("");
+      } else {
+        const intValue = parseInt(sanitizedValue);
+        if (intValue >= 1 && intValue <= 28) {
+          setBillCycleDay(intValue);
+        } else {
+          setBillCycleDay("");
+        }
+      }
     }
   };
+
   return (
     <div className={`${styles.content_wrapper} !overflow-visible`}>
       <div className={styles.main_heading}>
@@ -65,13 +76,15 @@ function ChangeBillCycle({prevScreen, data}) {
           </div>
           {!istoggled && (
             <div className="mt-8">
-              <p className={styles.desc}>Suggest your preferred start date</p>
+              <p className={styles.desc}>Suggest your preferred start day</p>
               <input
                 type="number"
                 placeholder="Enter a number"
                 className={styles.form_input_textarea}
                 onChange={handleBillCycleDayChange}
                 value={billCycleDay}
+                min="1"
+                max="28"
               />
             </div>
           )}

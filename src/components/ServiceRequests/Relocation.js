@@ -1,6 +1,12 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
-import {BackIcon, DeleteIconFilled, ForwardArrowWithLine} from "@/assets/icon";
+import {
+  BackIcon,
+  DeleteIconFilled,
+  DropDownArrow,
+  DropUpArrow,
+  ForwardArrowWithLine,
+} from "@/assets/icon";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
@@ -8,7 +14,6 @@ import {cityUrl} from "../../../appConfig";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import Image from "next/image";
 import {FaCheckCircle} from "react-icons/fa";
-// import {IoIosCloseCircle} from "react-icons/io";
 import Select from "react-select";
 import {
   CreateRequestPayload,
@@ -28,6 +33,8 @@ function Relocation({prevScreen, data}) {
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
 
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const {trailCreateSR} = CommonCreateRequestApi();
 
   const doctsData = [
@@ -97,18 +104,6 @@ function Relocation({prevScreen, data}) {
     allData.set("address1", values.address);
     allData.set("address2", values.landmark);
     allData.set("postal_code", values.postalCode);
-
-    // const payload = {
-    //   ...CreateRequestPayload,
-    //   deal_id: data[0]?.dealCodeNumber,
-    //   type: selectedType,
-    //   mobile_number: values.contactNumber,
-    //   postal_code: values.postalCode,
-    //   city: values.city,
-    //   address1: values.address,
-    //   address2: values.landmark,
-    // };
-
     trailCreateSR(allData);
   };
 
@@ -150,7 +145,6 @@ function Relocation({prevScreen, data}) {
   };
 
   // const handleDeleteFile = (val, index) => {};
-
   return (
     <div className={styles.content_wrapper}>
       <div className={styles.main_heading}>
@@ -211,13 +205,6 @@ function Relocation({prevScreen, data}) {
 
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Address</p>
-                  {/* <Field
-                    as="textarea"
-                    name="address"
-                    placeholder="Enter your address here including flat/building no."
-                    className={formStyles.form_input}
-                    row={2}
-                  /> */}
                   <Field
                     as="textarea"
                     name="address"
@@ -236,12 +223,6 @@ function Relocation({prevScreen, data}) {
 
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Nearest Landmark</p>
-                  {/* <Field
-                      as="textarea"
-                      name="landmark"
-                      className={formStyles.form_input}
-                      row={2}
-                    /> */}
                   <Field
                     name="landmark"
                     as="textarea"
@@ -321,6 +302,20 @@ function Relocation({prevScreen, data}) {
                       );
                     }}
                     placeholder="Select any current address proof"
+                    onMenuOpen={() => setIsDropdownOpen(true)}
+                    onMenuClose={() => setIsDropdownOpen(false)}
+                    components={{
+                      IndicatorSeparator: () => null,
+                      DropdownIndicator: () => (
+                        <div>
+                          {isDropdownOpen ? (
+                            <DropUpArrow color={"#71717A"} size={21} />
+                          ) : (
+                            <DropDownArrow size={21} color={"#71717A"} />
+                          )}
+                        </div>
+                      ),
+                    }}
                   />
                   <ErrorMessage name="addressProof">
                     {msg =>
