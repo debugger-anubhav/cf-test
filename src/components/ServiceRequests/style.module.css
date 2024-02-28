@@ -51,7 +51,7 @@
   @apply w-[20px] h-[20px] bg-5774AC cursor-pointer;
 }
 .bottom_row {
-  @apply flex flex-col md:w-[530px] 3xl:w-[680px] w-full right-0 items-center fixed bottom-0 bg-white;
+  @apply flex flex-col md:w-[530px] 3xl:w-[680px] w-full max-w-full right-0 items-center fixed bottom-0 z-[9999] bg-white;
   box-shadow: 0px -1px 4px 0px #00000040;
 }
 .bottom_line {

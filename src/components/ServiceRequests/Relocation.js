@@ -146,31 +146,31 @@ function Relocation({prevScreen, data}) {
 
   // const handleDeleteFile = (val, index) => {};
   return (
-    <div className={styles.content_wrapper}>
-      <div className={styles.main_heading}>
-        <BackIcon
-          onClick={() => prevScreen(true)}
-          className={"cursor-pointer"}
-        />
-        Relocation
-      </div>
-      <div className={`${styles.buy_info} !h-full`}>
-        <Formik
-          initialValues={{
-            contactNumber: "",
-            city: "",
-            address: "",
-            landmark: "",
-            postalCode: "",
-            addressProof: "",
-            currentAddressProof: "",
-          }}
-          validationSchema={validationSchema}
-          onSubmit={values => {
-            handleSubmit(values);
-          }}>
-          {formik => (
-            <Form className={styles.form_wrapper}>
+    <Formik
+      initialValues={{
+        contactNumber: "",
+        city: "",
+        address: "",
+        landmark: "",
+        postalCode: "",
+        addressProof: "",
+        currentAddressProof: "",
+      }}
+      validationSchema={validationSchema}
+      onSubmit={values => {
+        handleSubmit(values);
+      }}>
+      {formik => (
+        <Form className={styles.form_wrapper}>
+          <div className={`${styles.content_wrapper} !pb-[25px] `}>
+            <div className={styles.main_heading}>
+              <BackIcon
+                onClick={() => prevScreen(true)}
+                className={"cursor-pointer"}
+              />
+              Relocation
+            </div>
+            <div className={`${styles.buy_info} !h-full`}>
               <div className="relative">
                 <div className={"mt-4"}>
                   <p className={formStyles.form_label}>Alternative number</p>
@@ -405,8 +405,7 @@ function Relocation({prevScreen, data}) {
                   </ErrorMessage>
                 </div>
 
-                <div className={styles.bottom_row}>
-                  {/* <div className={styles.bottom_line}></div> */}
+                {/* <div className={styles.bottom_row}>
                   <button
                     type="submit"
                     className={`${styles.proceed_btn} bg-none ${
@@ -421,13 +420,29 @@ function Relocation({prevScreen, data}) {
                     }}>
                     Create request <ForwardArrowWithLine />
                   </button>
-                </div>
+                </div> */}
               </div>
-            </Form>
-          )}
-        </Formik>
-      </div>
-    </div>
+            </div>
+          </div>
+          <div className={styles.bottom_row}>
+            <button
+              type="submit"
+              className={`${styles.proceed_btn} bg-none ${
+                !formik.isValid
+                  ? "!bg-[#FFDF85] !cursor-not-allowed"
+                  : `!bg-F6B704`
+              }`}
+              onClick={() => {
+                if (!formik.isValid) {
+                  console.log("errors", formik.errors);
+                }
+              }}>
+              Create request <ForwardArrowWithLine />
+            </button>
+          </div>
+        </Form>
+      )}
+    </Formik>
   );
 }
 

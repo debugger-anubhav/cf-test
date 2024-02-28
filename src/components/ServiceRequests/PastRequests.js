@@ -78,7 +78,7 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                         "d LLL, yyyy : hh:mm a",
                       )}`}
                     </TableCell>
-                    <TableCell className="!text-71717A lg:!text-16 !font-Poppins">
+                    <TableCell className="!text-71717A lg:!text-16 tracking-0.3 !font-Poppins">
                       {row?.sub_status}
                     </TableCell>
                   </TableRow>
