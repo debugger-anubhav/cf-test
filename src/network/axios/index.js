@@ -30,7 +30,7 @@ baseInstance.interceptors.request.use(config => {
   }
   const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
   const apiKey = createEncryptedHash(plaintext, secretKey);
-  config.headers.api_key = apiKey;
+  config.headers.Apikey = apiKey;
   return config;
 });
 

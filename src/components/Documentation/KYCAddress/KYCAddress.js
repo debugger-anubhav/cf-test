@@ -258,15 +258,15 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
       error.contactNumber = "";
     }
 
-    setFormErrors(error);
     console.log(error, "oopopop");
+    setFormErrors(error);
     // handleContactBlur();
     // console.log(error, "jjj");
     // console.log(Object.values(formErrors), "Object.values(formErrors)");
     // console.log(Object.values(error).filter(Boolean).length, "lllll");
     return !!Object.values(error).filter(Boolean).length;
   };
-  console.log(formData, "formErrors");
+  console.log(formErrors, "formErrors");
 
   const submitHandler = () => {
     const isError = validateForm();
