@@ -69,7 +69,8 @@ const DocMain = () => {
 
   const showBackIcon = {
     0: false,
-    1: creditScore < 650,
+    1: false,
+    // 1: creditScore < 650,
     2: creditScore === null || !(isUpfrontPayment && tenure >= 9),
     3: true,
   };

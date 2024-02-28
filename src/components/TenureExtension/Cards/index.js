@@ -120,7 +120,7 @@ export const MonthlyCard = ({
       dealCodeNumber,
       mode: modeOfPayment,
       cf_value: monthlyCardIsChecked ? 1 : 0,
-      source: "extention",
+      source: "extension",
     });
     if (!result) {
       alert("Server error. Are you online?");
