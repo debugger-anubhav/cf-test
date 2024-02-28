@@ -22,7 +22,7 @@ const baseInstance = axios.create({
   baseURL,
 });
 
-console.log("env", process.env.NOODE_ENV);
+console.log("env", process.env.NODE_ENV);
 
 dotenv.config({
   path: `../../../.env.${process.env.NODE_ENV}`,
