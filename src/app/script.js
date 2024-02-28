@@ -1,25 +1,16 @@
-import {useRouter} from "next/navigation";
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 
 const Script = () => {
-  const router = useRouter();
+  const [pathname, setPathname] = useState(false);
+
   useEffect(() => {
-    if (router.pathname) {
-      // Get the current URL pathname
-      const {pathname} = router;
+    const currentPathname = window?.location?.pathname;
+    const isCityFurnish = currentPathname.includes("test.rentofurniture.com/");
+    setPathname(isCityFurnish);
+    console.log(isCityFurnish, "isCityFurnish");
+  }, []);
+  console.log(pathname, "pathname");
 
-      // Check if the URL contains 'test.rentofurniture.com'
-      const isTestRentOfFurniture = pathname.includes(
-        "test.rentofurniture.com",
-      );
-
-      // Set PROD_ENV based on the URL condition
-      const PROD_ENV = !isTestRentOfFurniture;
-
-      console.log(PROD_ENV, "issssssssssss");
-    }
-  }, [router.pathname]);
-  // Define the PROD_ENV variable
   const PROD_ENV = false;
 
   // Check if PROD_ENV is true
