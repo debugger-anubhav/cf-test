@@ -21,7 +21,6 @@ import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
-import Script from "./script";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -157,7 +156,6 @@ export default function Home() {
         <TextContent params={"home-page"} />
         <Footer />
         <Notifications />
-        <Script />
       </div>
     </>
   );

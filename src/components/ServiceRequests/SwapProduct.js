@@ -160,19 +160,18 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
       <p className={styles.swap_heading}>Select product to swap to</p>
       <div className="relative min-h-[40vh]">
         <div className={styles.search_wrapper}>
-          <BsSearch />
+          <BsSearch color={"#222222"} size={24} />
           <input
             className={styles.search_input}
             type="text"
             placeholder="Search for Furniture, Appliances, etc"
-            // onClick={() => setsearchModalOpen(true)}
             onChange={e => {
               setsearchModalOpen(true);
               setInputKey(e.target.value);
             }}
             value={inputKey}
           />
-          <DownArrowUnfilled />
+          <DownArrowUnfilled size={16} />
         </div>
         {searchModalOpen && (
           <div className={`${styles.search_modal}`}>

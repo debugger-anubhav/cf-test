@@ -109,10 +109,10 @@
   @apply font-Poppins font-medium text-16 text-71717A;
 }
 .search_wrapper {
-  @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 lg:mt-6 mt-[4px];
+  @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 lg:mt-6 mt-[4px] h-[40px];
 }
 .search_input {
-  @apply outline-none  w-full;
+  @apply outline-none  w-full text-14 text-[#222222] placeholder:text-9A9AA2 placeholder:text-14 font-Poppins tracking-desc;
 }
 .search_modal {
   @apply flex px-4 py-6 w-full z-10 bg-fff my-2 border border-ECECEC gap-6 flex-col rounded-lg md:max-h-[240px] 3xl:max-h-[600px] 3xl:h-[400px] md:h-[240px] h-[190px] overflow-y-scroll;
