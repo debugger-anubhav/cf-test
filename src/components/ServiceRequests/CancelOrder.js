@@ -8,21 +8,23 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 export const customStylesForSelect = {
-  control: (baseStyles, state) => ({
+  control: baseStyles => ({
     ...baseStyles,
-    padding: "4px 16px",
+    padding: "4px 8px",
     borderRadius: "12px",
     outline: "none",
     cursor: "pointer",
     ".css-1u9des2-indicatorSeparator": {
       display: "none",
     },
-    border: "1px solid  #DDDDDF",
     boxShadow: 0,
-    "&:hover": {
-      border: "1px solid #71717A",
-    },
+    minHeight: "45px",
+    fontSize: "14px",
+    color: "#71717A",
+    border: "none",
+    fontFaimly: "poppins",
   }),
+
   option: (base, state) => {
     const isLastOption =
       state.options.indexOf(state.data) === state.options.length - 1;
@@ -39,6 +41,14 @@ export const customStylesForSelect = {
       borderBottom: isLastOption ? "none" : "1px solid #DDDDDF",
     };
   },
+  container: provided => ({
+    ...provided,
+    border: "1px solid #DDDDDF",
+    borderRadius: "12px",
+    "&:hover": {
+      border: "1px solid #71717A",
+    },
+  }),
 };
 
 function CencelOrder({prevScreen, data}) {
@@ -96,7 +106,7 @@ function CencelOrder({prevScreen, data}) {
           rows={2}
         />
         <button
-          className={`${styles.proceed_btn}  !w-fit ${
+          className={`${styles.proceed_btn}  !w-fit !ml-0 ${
             selected === null ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
           }`}
           onClick={() => handleRequest()}>
