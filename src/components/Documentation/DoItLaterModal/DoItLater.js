@@ -7,7 +7,7 @@ import {Drawer} from "@mui/material";
 import {useRouter} from "next/navigation";
 
 const DoItLater = ({isModalOpen, closeModal}) => {
-  const router = useRouter;
+  const router = useRouter();
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
