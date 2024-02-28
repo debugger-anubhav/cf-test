@@ -22,16 +22,14 @@ const baseInstance = axios.create({
   baseURL,
 });
 
-console.log("env", process.env.NODE_ENV);
+// console.log("env", process.env.NODE_ENV);
 
 dotenv.config({
   path: `../../../.env.${process.env.NODE_ENV}`,
 });
 
-const mySecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+// const mySecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
 const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
-
-console.log("secret key", mySecretKey);
 
 baseInstance.interceptors.request.use(config => {
   if (!config.headers.Authorization) {

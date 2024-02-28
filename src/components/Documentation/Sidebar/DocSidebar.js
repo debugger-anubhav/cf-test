@@ -151,9 +151,10 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
               onClick={e => {
                 e.preventDefault();
                 setIsActive(e.target.value);
-                if (isActive === "KYC & Documentation")
+                if (e.target.value === "KYC & Documentation") {
+                  console.log("inn");
                   window?.open(i?.link, "_self");
-                else router.push(i?.link);
+                } else router.push(i?.link);
               }}
               // style={i.heading == fetchActiveDocItem && {color: "#5774AC"}}
               style={
