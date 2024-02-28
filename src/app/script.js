@@ -5,13 +5,12 @@ const Script = () => {
 
   useEffect(() => {
     const currentHostname = window?.location?.hostname;
-    const isCityFurnish = currentHostname === "test.rentofurniture.com";
+    const isCityFurnish = currentHostname === "cityfurnish.com/";
     setPathname(isCityFurnish);
     console.log(isCityFurnish, "isCityFurnish");
   }, []);
-  console.log(pathname, "pathname");
 
-  const PROD_ENV = false;
+  const PROD_ENV = pathname;
 
   // Check if PROD_ENV is true
   if (PROD_ENV) {
