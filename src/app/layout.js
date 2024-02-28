@@ -3,6 +3,7 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
+import Script from "./script";
 
 export const metadata = {
   title: "Cityfurnish",
@@ -29,10 +30,6 @@ export default function RootLayout({children}) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
-        <meta name="robots" content="noindex" />
-        <meta name="robots" content="nofollow" />
-        <meta name="googlebot" content="noindex" />
-        <meta name="robots" content="noindex,nofollow" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"
@@ -67,6 +64,7 @@ export default function RootLayout({children}) {
             `,
           }}
         />
+        <Script />
       </head>
       <body>
         <ReduxProvider>
