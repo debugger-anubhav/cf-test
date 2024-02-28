@@ -29,6 +29,7 @@ dotenv.config({
 });
 
 const mySecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
 
 console.log("secret key", mySecretKey);
 
@@ -37,7 +38,7 @@ baseInstance.interceptors.request.use(config => {
     config.headers.Authorization = authToken;
   }
   const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
-  const apiKey = createEncryptedHash(plaintext, mySecretKey);
+  const apiKey = createEncryptedHash(plaintext, tempSecretKey);
   config.headers.Apikey = apiKey;
   return config;
 });
