@@ -4,8 +4,8 @@ const Script = () => {
   const [pathname, setPathname] = useState(false);
 
   useEffect(() => {
-    const currentPathname = window?.location?.pathname;
-    const isCityFurnish = currentPathname.includes("test.rentofurniture.com/");
+    const currentHostname = window?.location?.hostname;
+    const isCityFurnish = currentHostname === "test.rentofurniture.com";
     setPathname(isCityFurnish);
     console.log(isCityFurnish, "isCityFurnish");
   }, []);
