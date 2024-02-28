@@ -82,7 +82,7 @@
   @apply flex justify-between items-center;
 }
 .selec_prod_label {
-  @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3;
+  @apply text-71717A text-16 tracking-0.3;
 }
 .swap_prod_name {
   @apply text-222 text-14 xl:text-16 tracking-desc xl:tracking-0.3 mt-1;
