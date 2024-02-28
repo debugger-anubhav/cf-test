@@ -5,71 +5,64 @@ import {format} from "date-fns";
 
 const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
   const [indexOfActiveAcc, setIndexOfActiveAcc] = useState(null);
-  const [showAccSummary, setshowAccSummary] = useState(false);
-
+  const toggleAccordion = index => {
+    setIndexOfActiveAcc(indexOfActiveAcc === index ? null : index);
+  };
   return (
     <div>
       {rows?.slice(0, visibleRows)?.map((row, index) => {
+        const isActive = index === indexOfActiveAcc;
         return (
           <div
             key={index.toString()}
-            className={`${
-              index === indexOfActiveAcc && showAccSummary && " mt-4"
-            }`}>
+            className={`${isActive && styles.active} ${isActive && "mt-4"}`}>
             <div
               className={`flex justify-between w-full px-3 pt-6 cursor-pointer items-center ${
-                index === indexOfActiveAcc && showAccSummary
-                  ? "pb-3 !pt-3 bg-F7F7F8"
-                  : "pb-6"
+                isActive ? "pb-3 !pt-3 bg-F7F7F8" : "pb-6"
               }`}
-              onClick={() => {
-                setIndexOfActiveAcc(index);
-                setshowAccSummary(!showAccSummary);
-              }}>
+              onClick={() => toggleAccordion(index)}>
               <p className={`${styles.tableHeaderCell}`}>
                 Applied Invoice: {row.applied_invoices}
               </p>
-              {index === indexOfActiveAcc && showAccSummary ? (
+              {isActive ? (
                 <Minus className={`${styles.exapnd_icon}`} />
               ) : (
                 <Plus className={styles.exapnd_icon} />
               )}
             </div>
+            {isActive && (
+              <div
+                className={`w-full flex-col px-3 cursor-pointer ${
+                  isActive ? "flex bg-F7F7F8" : "hidden"
+                }`}
+                onClick={() => setIndexOfActiveAcc(null)}>
+                <div className={styles.tableCell}>
+                  <span className="font-medium">Credit Note Number:</span>{" "}
+                  {row.creditnote_number}
+                </div>
 
-            <div
-              className={`w-full flex-col px-3 cursor-pointer ${
-                index === indexOfActiveAcc && showAccSummary
-                  ? "flex bg-F7F7F8"
-                  : "hidden"
-              }`}
-              onClick={() => setshowAccSummary(!showAccSummary)}>
-              <div className={styles.tableCell}>
-                <span className="font-medium">Credit Note Number:</span>{" "}
-                {row.creditnote_number}
+                <div className={styles.tableCell}>
+                  <span className="font-medium">Amount:</span>{" "}
+                  <span className="font-Inter">₹</span>
+                  {row.balance}
+                </div>
+                <div className={styles.tableCell}>
+                  <span className="font-medium">Credit Note Date:</span>{" "}
+                  {`${format(
+                    new Date(row.created_time),
+                    "d LLL, yyyy : hh:mm a",
+                  )}`}
+                </div>
+                <div className={styles.tableCell}>
+                  <span className="font-medium">Status: </span>
+                  <span>{row.status}</span>
+                </div>
               </div>
-
-              <div className={styles.tableCell}>
-                <span className="font-medium">Amount:</span>{" "}
-                <span className="font-Inter">₹</span>
-                {row.balance}
-              </div>
-              <div className={styles.tableCell}>
-                <span className="font-medium">Credit Note Date:</span>{" "}
-                {`${format(
-                  new Date(row.created_time),
-                  "d LLL, yyyy : hh:mm a",
-                )}`}
-              </div>
-              <div className={styles.tableCell}>
-                <span className="font-medium">Status: </span>
-                <span>{row.status}</span>
-              </div>
-            </div>
-
+            )}
             {index !== rows.length - 1 && (
               <div
                 className={`bg-EDEDEE h-[1px] w-full ${
-                  index === indexOfActiveAcc && showAccSummary && "mt-4"
+                  isActive && "mt-4"
                 }`}></div>
             )}
           </div>

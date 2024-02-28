@@ -33,7 +33,8 @@ const InvoiceAccordian = ({rows, handleShowMore, visibleRows}) => {
               <div
                 className={`w-full flex-col px-3 cursor-pointer ${
                   isActive ? "flex bg-F7F7F8" : "hidden"
-                }`}>
+                }`}
+                onClick={() => setIndexOfActiveAcc(null)}>
                 <div className={styles.tableCell}>
                   <span className="font-medium">Invoice Date:</span> {row.date}
                 </div>
