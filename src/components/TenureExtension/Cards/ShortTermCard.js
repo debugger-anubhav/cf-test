@@ -66,7 +66,7 @@ function ShortTermCard({
       razCustomerId: customerId,
       razorpaySignature: res.razorpay_signature,
       mode: "extension",
-      cf_value: apiData?.isCityShieldApplied ? 1 : 0,
+      cf_value: isChecked && !apiData?.isCityShieldApplied ? 1 : 0,
       id: recId,
     };
     try {
