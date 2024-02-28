@@ -30,10 +30,6 @@ export default function RootLayout({children}) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
-        {/* <meta name="robots" content="noindex" />
-        <meta name="robots" content="nofollow" />
-        <meta name="googlebot" content="noindex" />
-        <meta name="robots" content="noindex,nofollow" /> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"
