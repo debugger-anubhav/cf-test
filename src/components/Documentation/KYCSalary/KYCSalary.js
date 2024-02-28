@@ -116,7 +116,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     } else {
       error.financialDocumentProof = "";
     }
-    setFormErrors(error);
+    setFormErrors({...error});
     if (error.financialDocumentProof !== "") return;
 
     // for (const key in formErrors) {

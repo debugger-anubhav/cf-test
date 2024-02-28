@@ -72,7 +72,7 @@
   @apply block;
 }
 .chooseFile {
-  @apply inline-block pl-2;
+  @apply inline-block pl-2 max-w-[249px] lg:w-full truncate;
 }
 .input_wrapper {
   @apply flex items-center w-full lg:w-fit;
