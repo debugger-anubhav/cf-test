@@ -90,87 +90,87 @@ function Repair({prevScreen, data}) {
   };
 
   return (
-    <div className={styles.content_wrapper}>
-      <div className={styles.main_heading}>
-        <BackIcon
-          onClick={() => prevScreen(true)}
-          className={"cursor-pointer"}
-        />
-        Repair
-      </div>
-      <div className={styles.buy_info}>
-        <p className={styles.desc}>Select products to repair</p>
-        {data?.map((item, index) => (
-          <div className={styles.repair_info} key={index.toString()}>
-            <div
-              className="flex gap-2 items-center cursor-pointer"
-              onClick={() => {
-                handleToggle(index);
-                getRepairOption(item?.product_name);
-              }}>
-              {toggleStates[index].istoggled ? (
-                <BsToggleOn
-                  color={"#5774AC"}
-                  size={28}
-                  // onClick={() => handleToggle(index)}
-                  className="cursor-pointer min-w-[2rem]"
-                />
-              ) : (
-                <ToggleOff
-                  size={28}
-                  color={"#E3E1DC"}
-                  // onClick={() => {
-                  //   handleToggle(index);
-                  //   // getRepairOption('Alexa Single Bed');
-                  //   getRepairOption(item?.product_name);
-                  // }}
-                  className="cursor-pointer min-w-[2rem]"
-                />
-              )}
-              <p className={styles.desc}>{item?.product_name}</p>
-            </div>
-            {toggleStates[index].istoggled && repairOptions?.length > 0 && (
-              <div>
-                <div className="mt-4 flex flex-col">
-                  <p className={styles.desc}>Reason for repair</p>
-                  <Select
-                    options={repairOptions}
-                    styles={customStylesForSelect}
-                    onChange={selectedOption =>
-                      handleChange(selectedOption, index)
-                    }
-                    placeholder="Select a reason for repair"
+    <>
+      <div className={styles.content_wrapper}>
+        <div className={styles.main_heading}>
+          <BackIcon
+            onClick={() => prevScreen(true)}
+            className={"cursor-pointer"}
+          />
+          Repair
+        </div>
+        <div className={styles.buy_info}>
+          <p className={styles.desc}>Select products to repair</p>
+          {data?.map((item, index) => (
+            <div className={styles.repair_info} key={index.toString()}>
+              <div
+                className="flex gap-2 items-center cursor-pointer"
+                onClick={() => {
+                  handleToggle(index);
+                  getRepairOption(item?.product_name);
+                }}>
+                {toggleStates[index].istoggled ? (
+                  <BsToggleOn
+                    color={"#5774AC"}
+                    size={28}
+                    // onClick={() => handleToggle(index)}
+                    className="cursor-pointer min-w-[2rem]"
                   />
-                </div>
-                <div className="mt-4">
-                  <p className={styles.desc}>Repair details</p>
-                  <input
-                    type="text"
-                    placeholder="Enter repair details"
-                    className={styles.form_input_textarea}
-                    onChange={e => handleDetailChange(e, index)}
+                ) : (
+                  <ToggleOff
+                    size={28}
+                    color={"#E3E1DC"}
+                    // onClick={() => {
+                    //   handleToggle(index);
+                    //   // getRepairOption('Alexa Single Bed');
+                    //   getRepairOption(item?.product_name);
+                    // }}
+                    className="cursor-pointer min-w-[2rem]"
                   />
-                </div>
+                )}
+                <p className={styles.desc}>{item?.product_name}</p>
               </div>
-            )}
-          </div>
-        ))}
-        <div className={styles.bottom_row}>
-          {/* <div className={styles.bottom_line}></div> */}
-
-          <button
-            className={`${styles.proceed_btn}  ${
-              toggleStates.some(state => state.istoggled && state.selected)
-                ? ""
-                : "!bg-[#FFDF85] !cursor-not-allowed"
-            }`}
-            disabled={!toggleStates.some(state => state.istoggled)}
-            onClick={handleCreateRequest}>
-            Create request <ForwardArrowWithLine />
-          </button>
+              {toggleStates[index].istoggled && repairOptions?.length > 0 && (
+                <div>
+                  <div className="mt-4 flex flex-col">
+                    <p className={styles.desc}>Reason for repair</p>
+                    <Select
+                      options={repairOptions}
+                      styles={customStylesForSelect}
+                      onChange={selectedOption =>
+                        handleChange(selectedOption, index)
+                      }
+                      placeholder="Select a reason for repair"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <p className={styles.desc}>Repair details</p>
+                    <input
+                      type="text"
+                      placeholder="Enter repair details"
+                      className={styles.form_input_textarea}
+                      onChange={e => handleDetailChange(e, index)}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
       </div>
-    </div>
+      <div className={styles.bottom_row}>
+        <button
+          className={`${styles.proceed_btn}  ${
+            toggleStates.some(state => state.istoggled && state.selected)
+              ? ""
+              : "!bg-[#FFDF85] !cursor-not-allowed"
+          }`}
+          disabled={!toggleStates.some(state => state.istoggled)}
+          onClick={handleCreateRequest}>
+          Create request <ForwardArrowWithLine />
+        </button>
+      </div>
+    </>
   );
 }
 

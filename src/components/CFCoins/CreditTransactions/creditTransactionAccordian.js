@@ -9,7 +9,10 @@ import {format} from "date-fns";
 
 const CreditTransactionAccordian = ({rows}) => {
   const [expanded, setExpanded] = React.useState(null);
-
+  // const [indexOfActiveAcc, setIndexOfActiveAcc] = useState(null);
+  // const toggleAccordion = index => {
+  //   setIndexOfActiveAcc(indexOfActiveAcc === index ? null : index);
+  // };
   const handleChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };

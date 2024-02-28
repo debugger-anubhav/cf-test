@@ -20,6 +20,7 @@
 .category_img {
   width: 100%;
   height: auto;
+  border-radius: 4px;
   /* @apply w-[98px] h-[98px] md:w-[198px] md:h-[180px] lg:w-[230px] lg:h-[220px] xl:h-[300px] xl:w-[330px] macbook:h-[367px] macbook:w-[371px] 3xl:w-[420px] 3xl:h-[420px] rounded-lg md:rounded-none; */
 }
 .label_wrapper {

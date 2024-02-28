@@ -59,7 +59,7 @@ function PickupReasonCommonScreen({
           )}
         </>
       ) : (
-        <div className={styles.content_wrapper}>
+        <div className={`${styles.content_wrapper} max-w-full`}>
           <div className={styles.main_heading}>
             <BackIcon
               onClick={() => setCurrentScreen(1)}
@@ -89,7 +89,7 @@ function PickupReasonCommonScreen({
               reason.title !== "Requirement Fulfilled"
                 ? "!mt-0"
                 : ""
-            } !w-full`}
+            } !mx-auto`}
             onClick={() => {
               if (reason.btnName === "Create request") {
                 handleCreateRequest();

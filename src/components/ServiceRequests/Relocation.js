@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import styles from "./style.module.css";
 import {
   BackIcon,
@@ -143,19 +143,21 @@ function Relocation({prevScreen, data}) {
       },
     }),
   };
+  const formikRef = useRef(null);
 
   // const handleDeleteFile = (val, index) => {};
   return (
-    <div className={styles.content_wrapper}>
-      <div className={styles.main_heading}>
-        <BackIcon
-          onClick={() => prevScreen(true)}
-          className={"cursor-pointer"}
-        />
-        Relocation
-      </div>
-      <div className={`${styles.buy_info} !h-full`}>
+    <>
+      <div className={`${styles.content_wrapper} !pb-[25px] `}>
+        <div className={styles.main_heading}>
+          <BackIcon
+            onClick={() => prevScreen(true)}
+            className={"cursor-pointer"}
+          />
+          Relocation
+        </div>
         <Formik
+          innerRef={f => (formikRef.current = f)}
           initialValues={{
             contactNumber: "",
             city: "",
@@ -171,242 +173,244 @@ function Relocation({prevScreen, data}) {
           }}>
           {formik => (
             <Form className={styles.form_wrapper}>
-              <div className="relative">
-                <div className={"mt-4"}>
-                  <p className={formStyles.form_label}>Alternative number</p>
-                  <div
-                    className={`${styles.row} ${formStyles.form_input} flex items-center`}>
-                    <div className="flex gap-2 items-center">
-                      <img
-                        src={`${cityUrl + "india-icon.svg"}`}
-                        className={formStyles.flag}
-                        loading="lazy"
-                        alt="India-icon"
-                      />
-                      <Field
-                        type="number"
-                        onWheel={handleWheel}
-                        onKeyPress={keyPressForContactField}
-                        // readOnly
-                        name="contactNumber"
-                        placeholder="Enter 10 digit number "
-                        className={formStyles.contact_input}
-                      />
-                    </div>
-                  </div>
-                  <ErrorMessage name="contactNumber">
-                    {msg =>
-                      formik.touched.contactNumber && (
-                        <p className={formStyles.error}>{msg} </p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-
-                <div className={"mt-4"}>
-                  <p className={formStyles.form_label}>Address</p>
-                  <Field
-                    as="textarea"
-                    name="address"
-                    placeholder="Enter your address here including flat/building no."
-                    className={styles.form_input_textarea}
-                    rows={2}
-                  />
-                  <ErrorMessage name="address">
-                    {msg =>
-                      formik.touched.address && (
-                        <p className={formStyles.error}>{msg}</p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-
-                <div className={"mt-4"}>
-                  <p className={formStyles.form_label}>Nearest Landmark</p>
-                  <Field
-                    name="landmark"
-                    as="textarea"
-                    placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
-                    className={styles.form_input_textarea}
-                    rows={2}
-                  />
-                  <ErrorMessage name="landmark">
-                    {msg =>
-                      formik.touched.landmark && (
-                        <p className={`${formStyles.error}`}>{msg}</p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-
-                <div className="mt-4">
-                  <p className={formStyles.form_label}>Postal code</p>
-                  <Field
-                    type="number"
-                    onKeyPress={keyPressForContactField}
-                    onWheel={handleWheel}
-                    name="postalCode"
-                    placeholder="Enter 6 digit postal code"
-                    className={formStyles.form_input}
-                  />
-                  <ErrorMessage name="postalCode">
-                    {msg =>
-                      formik.touched.postalCode && (
-                        <p className={formStyles.error}>{msg} </p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-
-                <div
-                  className={"mt-4"}
-                  onClick={() => setCityDrawerOpen(!cityDrawerOpen)}>
-                  <p className={formStyles.form_label}>City</p>
-                  <Field
-                    type="text"
-                    name="city"
-                    placeholder="Enter your city"
-                    className={formStyles.form_input}
-                    value={formik.values.city}
-                  />
-                  <ErrorMessage name="city">
-                    {msg =>
-                      formik.touched.city && (
-                        <p className={formStyles.error}>{msg} </p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-                {cityDrawerOpen && (
-                  <CityDrawer
-                    toggleDrawer={() => setCityDrawerOpen(!cityDrawerOpen)}
-                    Cities={storeCityList}
-                    open={cityDrawerOpen}
-                    cityName={formik.values.city}
-                    handleCityChange={val => {
-                      formik.setFieldValue("city", val);
-                      setCityDrawerOpen(!cityDrawerOpen);
-                    }}
-                  />
-                )}
-                <div className="mt-4 flex flex-col">
-                  <p className={`${formStyles.form_label} mb-1`}>
-                    Current address proof
-                  </p>
-                  <Select
-                    name="addressProof"
-                    options={doctsData}
-                    styles={customStylesForSelect}
-                    onChange={selectedOption => {
-                      formik.setFieldValue(
-                        "addressProof",
-                        selectedOption.label,
-                      );
-                    }}
-                    placeholder="Select any current address proof"
-                    onMenuOpen={() => setIsDropdownOpen(true)}
-                    onMenuClose={() => setIsDropdownOpen(false)}
-                    components={{
-                      IndicatorSeparator: () => null,
-                      DropdownIndicator: () => (
-                        <div>
-                          {isDropdownOpen ? (
-                            <DropUpArrow color={"#71717A"} size={21} />
-                          ) : (
-                            <DropDownArrow size={21} color={"#71717A"} />
-                          )}
-                        </div>
-                      ),
-                    }}
-                  />
-                  <ErrorMessage name="addressProof">
-                    {msg =>
-                      formik.touched.addressProof && (
-                        <p className={formStyles.error}>{msg}</p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
-
-                <div
-                  className={`mt-4 flex mb-16 ${styles.demo} ${
-                    !formik.values.currentAddressProof ? "flex-col" : "flex-row"
-                  }`}>
-                  <input
-                    disabled={formik?.values?.currentAddressProof !== ""}
-                    type="file"
-                    accept="image/jpeg,image/jpg,image/png,application/pdf"
-                    id="currentAddProof"
-                    name="currentAddressProof"
-                    placeholder="choose file"
-                    className={`hidden`}
-                    onChange={e =>
-                      formik.setFieldValue(
-                        "currentAddressProof",
-                        e.target.files[0],
-                      )
-                    }
-                  />
-                  <label
-                    htmlFor="currentAddProof"
-                    className={`${
-                      formStyles.form_input
-                    } flex items-center !h-full cursor-pointer ${
-                      formik.values.currentAddressProof &&
-                      "!max-w-[95%] w-fit !cursor-default"
-                    } `}>
-                    <div className={`flex w-full flex-col `}>
-                      <div className="flex items-center">
-                        <Image
-                          src={uploading}
-                          alt="Uploading Icon"
-                          className={`h-full`}
+              <div className={`${styles.buy_info} !h-full`}>
+                <div className="relative">
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Alternative number</p>
+                    <div
+                      className={`${styles.row} ${formStyles.form_input} flex items-center`}>
+                      <div className="flex gap-2 items-center">
+                        <img
+                          src={`${cityUrl + "india-icon.svg"}`}
+                          className={formStyles.flag}
                           loading="lazy"
+                          alt="India-icon"
                         />
-                        <span className="text-14 font-Poppins text-71717A pl-2">
-                          {formik.values.currentAddressProof
-                            ? formik.values.currentAddressProof.name
-                            : "Choose file"}
-                        </span>
+                        <Field
+                          type="number"
+                          onWheel={handleWheel}
+                          onKeyPress={keyPressForContactField}
+                          // readOnly
+                          name="contactNumber"
+                          placeholder="Enter 10 digit number "
+                          className={formStyles.contact_input}
+                        />
                       </div>
+                    </div>
+                    <ErrorMessage name="contactNumber">
+                      {msg =>
+                        formik.touched.contactNumber && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Address</p>
+                    <Field
+                      as="textarea"
+                      name="address"
+                      placeholder="Enter your address here including flat/building no."
+                      className={styles.form_input_textarea}
+                      rows={2}
+                    />
+                    <ErrorMessage name="address">
+                      {msg =>
+                        formik.touched.address && (
+                          <p className={formStyles.error}>{msg}</p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className={"mt-4"}>
+                    <p className={formStyles.form_label}>Nearest Landmark</p>
+                    <Field
+                      name="landmark"
+                      as="textarea"
+                      placeholder="Enter your nearest landmark (eg. school, office, park, etc) "
+                      className={styles.form_input_textarea}
+                      rows={2}
+                    />
+                    <ErrorMessage name="landmark">
+                      {msg =>
+                        formik.touched.landmark && (
+                          <p className={`${formStyles.error}`}>{msg}</p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div className="mt-4">
+                    <p className={formStyles.form_label}>Postal code</p>
+                    <Field
+                      type="number"
+                      onKeyPress={keyPressForContactField}
+                      onWheel={handleWheel}
+                      name="postalCode"
+                      placeholder="Enter 6 digit postal code"
+                      className={formStyles.form_input}
+                    />
+                    <ErrorMessage name="postalCode">
+                      {msg =>
+                        formik.touched.postalCode && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div
+                    className={"mt-4"}
+                    onClick={() => setCityDrawerOpen(!cityDrawerOpen)}>
+                    <p className={formStyles.form_label}>City</p>
+                    <Field
+                      type="text"
+                      name="city"
+                      placeholder="Enter your city"
+                      className={formStyles.form_input}
+                      value={formik.values.city}
+                    />
+                    <ErrorMessage name="city">
+                      {msg =>
+                        formik.touched.city && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+                  {cityDrawerOpen && (
+                    <CityDrawer
+                      toggleDrawer={() => setCityDrawerOpen(!cityDrawerOpen)}
+                      Cities={storeCityList}
+                      open={cityDrawerOpen}
+                      cityName={formik.values.city}
+                      handleCityChange={val => {
+                        formik.setFieldValue("city", val);
+                        setCityDrawerOpen(!cityDrawerOpen);
+                      }}
+                    />
+                  )}
+                  <div className="mt-4 flex flex-col">
+                    <p className={`${formStyles.form_label} mb-1`}>
+                      Current address proof
+                    </p>
+                    <Select
+                      name="addressProof"
+                      options={doctsData}
+                      styles={customStylesForSelect}
+                      onChange={selectedOption => {
+                        formik.setFieldValue(
+                          "addressProof",
+                          selectedOption.label,
+                        );
+                      }}
+                      placeholder="Select any current address proof"
+                      onMenuOpen={() => setIsDropdownOpen(true)}
+                      onMenuClose={() => setIsDropdownOpen(false)}
+                      components={{
+                        IndicatorSeparator: () => null,
+                        DropdownIndicator: () => (
+                          <div>
+                            {isDropdownOpen ? (
+                              <DropUpArrow color={"#71717A"} size={21} />
+                            ) : (
+                              <DropDownArrow size={21} color={"#71717A"} />
+                            )}
+                          </div>
+                        ),
+                      }}
+                    />
+                    <ErrorMessage name="addressProof">
+                      {msg =>
+                        formik.touched.addressProof && (
+                          <p className={formStyles.error}>{msg}</p>
+                        )
+                      }
+                    </ErrorMessage>
+                  </div>
+
+                  <div
+                    className={`mt-4 flex mb-16 ${styles.demo} ${
+                      !formik.values.currentAddressProof
+                        ? "flex-col"
+                        : "flex-row"
+                    }`}>
+                    <input
+                      disabled={formik?.values?.currentAddressProof !== ""}
+                      type="file"
+                      accept="image/jpeg,image/jpg,image/png,application/pdf"
+                      id="currentAddProof"
+                      name="currentAddressProof"
+                      placeholder="choose file"
+                      className={`hidden`}
+                      onChange={e =>
+                        formik.setFieldValue(
+                          "currentAddressProof",
+                          e.target.files[0],
+                        )
+                      }
+                    />
+                    <label
+                      htmlFor="currentAddProof"
+                      className={`${
+                        formStyles.form_input
+                      } flex items-center !h-full cursor-pointer ${
+                        formik.values.currentAddressProof &&
+                        "!max-w-[95%] w-fit !cursor-default"
+                      } `}>
+                      <div className={`flex w-full flex-col `}>
+                        <div className="flex items-center">
+                          <Image
+                            src={uploading}
+                            alt="Uploading Icon"
+                            className={`h-full`}
+                            loading="lazy"
+                          />
+                          <span className="text-14 font-Poppins text-71717A pl-2">
+                            {formik.values.currentAddressProof
+                              ? formik.values.currentAddressProof.name
+                              : "Choose file"}
+                          </span>
+                        </div>
+                        {formik.values.currentAddressProof && (
+                          <div
+                            className={`${commonStyles.correctFile} bottom-[3px]`}></div>
+                        )}
+                      </div>
+                    </label>
+
+                    <div className={styles.check_wrapper}>
                       {formik.values.currentAddressProof && (
-                        <div
-                          className={`${commonStyles.correctFile} bottom-[3px]`}></div>
+                        <div className={styles.check_wrapper}>
+                          <FaCheckCircle
+                            color="#2D9469"
+                            className={styles.showCheckCircle}
+                          />
+                          <div
+                            className={styles.showDeleteIcon}
+                            onClick={() =>
+                              formik.setFieldValue("currentAddressProof", "")
+                            }>
+                            <DeleteIconFilled
+                              color="#ffffff"
+                              className={styles.delete_icon_filled}
+                            />
+                          </div>
+                        </div>
                       )}
                     </div>
-                  </label>
-
-                  <div className={styles.check_wrapper}>
-                    {formik.values.currentAddressProof && (
-                      <div className={styles.check_wrapper}>
-                        <FaCheckCircle
-                          color="#2D9469"
-                          className={styles.showCheckCircle}
-                        />
-                        <div
-                          className={styles.showDeleteIcon}
-                          onClick={() =>
-                            formik.setFieldValue("currentAddressProof", "")
-                          }>
-                          <DeleteIconFilled
-                            color="#ffffff"
-                            className={styles.delete_icon_filled}
-                          />
-                        </div>
-                      </div>
-                    )}
+                    <ErrorMessage name="currentAddressProof">
+                      {msg =>
+                        formik.touched.currentAddressProof && (
+                          <p className={formStyles.error}>{msg} </p>
+                        )
+                      }
+                    </ErrorMessage>
                   </div>
-                  <ErrorMessage name="currentAddressProof">
-                    {msg =>
-                      formik.touched.currentAddressProof && (
-                        <p className={formStyles.error}>{msg} </p>
-                      )
-                    }
-                  </ErrorMessage>
-                </div>
 
-                <div className={styles.bottom_row}>
-                  {/* <div className={styles.bottom_line}></div> */}
+                  {/* <div className={styles.bottom_row}>
                   <button
                     type="submit"
                     className={`${styles.proceed_btn} bg-none ${
@@ -421,13 +425,51 @@ function Relocation({prevScreen, data}) {
                     }}>
                     Create request <ForwardArrowWithLine />
                   </button>
+                </div> */}
                 </div>
               </div>
+              {/* <div className={styles.bottom_row}>
+            <button
+              type="submit"
+              className={`${styles.proceed_btn} bg-none ${
+                !formik.isValid
+                  ? "!bg-[#FFDF85] !cursor-not-allowed"
+                  : `!bg-F6B704`
+              }`}
+              onClick={() => {
+                if (!formik.isValid) {
+                  console.log("errors", formik.errors);
+                }
+              }}>
+              Create request <ForwardArrowWithLine />
+            </button>
+          </div> */}
             </Form>
           )}
         </Formik>
       </div>
-    </div>
+
+      <div className={styles.bottom_row}>
+        <button
+          type="submit"
+          className={`${styles.proceed_btn} bg-none 
+         ${
+           !formikRef?.current?.isValid
+             ? "!bg-[#FFDF85] !cursor-not-allowed"
+             : `!bg-F6B704`
+         }
+         `}
+          onClick={() => {
+            //  if (!formik.isValid) {
+            //    console.log("errors", formik.errors);
+            //  }
+            console.log(formikRef.current, "pppppp");
+            formikRef?.current?.submitForm();
+          }}>
+          Create request <ForwardArrowWithLine />
+        </button>
+      </div>
+    </>
   );
 }
 

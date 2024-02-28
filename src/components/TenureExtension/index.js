@@ -50,9 +50,9 @@ function TenureExtension() {
       lightTitle: "(3-5 months)",
       percent_off: 5,
       monthOptions: [
-        {label: "5 Months", value: 5},
-        {label: "4 Months", value: 4},
         {label: "3 Months", value: 3},
+        {label: "4 Months", value: 4},
+        {label: "5 Months", value: 5},
       ],
     },
   ];

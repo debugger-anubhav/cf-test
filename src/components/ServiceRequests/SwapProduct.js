@@ -43,67 +43,67 @@ function SwapProduct({prevScreen, data}) {
     setProductInfo(data);
   }, [data]);
   return (
-    <div className={styles.content_wrapper}>
-      <div className={styles.main_heading}>
-        <BackIcon
-          onClick={() => {
-            if (showSwapScreen === 2) setShowSwapScreen(1);
-            else prevScreen(true);
-          }}
-          className={"cursor-pointer"}
-        />
-        Swap product
-      </div>
-      {showSwapScreen === 1 ? (
-        <div
-          className={`${styles.swap_first_screen} ${
-            showSwapScreen === 1 ? "flex flex-col" : "hidden"
-          } `}>
-          <div className={styles.buy_info}>
-            <p className={styles.desc}>Select products to swap</p>
-            <div>
-              {ProductInfo?.map((item, index) => (
-                <div
-                  key={index.toString()}
-                  className={` ${
-                    index !== ProductInfo.length - 1
-                      ? " border-b border-EDEDEE"
-                      : "border-0"
-                  } ${styles.request_info_div}`}
-                  onClick={() => {
-                    setSelectedProduct(item);
-                    setShowSwapScreen(2);
-                  }}>
-                  <div className="flex gap-2 items-center">
-                    <img
-                      className={styles.product_imge_thambnil}
-                      src={`${
-                        productPageImagesBaseUrl +
-                        "thumb/" +
-                        item.product_image?.split(",")[0]
-                      }`}
-                      alt={item.product_name}
-                      loading="lazy"
-                    />
-                    <p className={styles.request_type}>{item.product_name}</p>
+    <>
+      <div className={styles.content_wrapper}>
+        <div className={styles.main_heading}>
+          <BackIcon
+            onClick={() => {
+              if (showSwapScreen === 2) setShowSwapScreen(1);
+              else prevScreen(true);
+            }}
+            className={"cursor-pointer"}
+          />
+          Swap product
+        </div>
+        {showSwapScreen === 1 ? (
+          <div
+            className={`${styles.swap_first_screen} ${
+              showSwapScreen === 1 ? "flex flex-col" : "hidden"
+            } `}>
+            <div className={styles.buy_info}>
+              <p className={styles.desc}>Select products to swap</p>
+              <div>
+                {ProductInfo?.map((item, index) => (
+                  <div
+                    key={index.toString()}
+                    className={` ${
+                      index !== ProductInfo.length - 1
+                        ? " border-b border-EDEDEE"
+                        : "border-0"
+                    } ${styles.request_info_div}`}
+                    onClick={() => {
+                      setSelectedProduct(item);
+                      setShowSwapScreen(2);
+                    }}>
+                    <div className="flex gap-2 items-center">
+                      <img
+                        className={styles.product_imge_thambnil}
+                        src={`${
+                          productPageImagesBaseUrl +
+                          "thumb/" +
+                          item.product_image?.split(",")[0]
+                        }`}
+                        alt={item.product_name}
+                        loading="lazy"
+                      />
+                      <p className={styles.request_type}>{item.product_name}</p>
+                    </div>
+                    <div className="flex">
+                      <ForwardArrow />
+                    </div>
                   </div>
-                  <div className="flex">
-                    <ForwardArrow />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <SecondScreen
-          data={selectedProduct}
-          setSelectedProductForSwap={setSelectedProductForSwap}
-        />
-      )}
-
+        ) : (
+          <SecondScreen
+            data={selectedProduct}
+            setSelectedProductForSwap={setSelectedProductForSwap}
+          />
+        )}
+      </div>
       <div className={styles.bottom_row}>
-        {/* <div className={styles.bottom_line}></div> */}
         <button
           className={`${styles.proceed_btn} ${
             showSwapScreen === 1 || selectedProductForSwap === null
@@ -115,7 +115,7 @@ function SwapProduct({prevScreen, data}) {
           Create request <ForwardArrowWithLine />
         </button>
       </div>
-    </div>
+    </>
   );
 }
 

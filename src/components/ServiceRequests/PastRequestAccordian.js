@@ -150,7 +150,7 @@ const PastRequestAccordian = ({pastRequestData}) => {
                   {row?.scheduled_datetime
                     ? `${format(
                         new Date(row?.scheduled_datetime),
-                        "yyyy-mm-dd",
+                        "yyyy-MM-dd",
                       )}`
                     : "NA"}
                 </div>
