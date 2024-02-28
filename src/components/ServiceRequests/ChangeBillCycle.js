@@ -97,7 +97,7 @@ function ChangeBillCycle({prevScreen, data}) {
           />
         </div>
         <button
-          className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] `}
+          className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] !ml-0 `}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
           onClick={() => handleCreateRequest()}>
           Create request <ForwardArrowWithLine />
