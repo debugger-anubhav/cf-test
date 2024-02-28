@@ -260,6 +260,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
 
     console.log(error, "oopopop");
     setFormErrors(error);
+    console.log(formErrors, "formErrors");
     // handleContactBlur();
     // console.log(error, "jjj");
     // console.log(Object.values(formErrors), "Object.values(formErrors)");
