@@ -61,7 +61,7 @@ export const MonthlyCard = ({
 
   useEffect(() => {
     getApiData();
-  }, [selectedOption]);
+  }, [selectedOption, monthlyCardIsChecked]);
   const handleOptionChange = index => {
     setSelectedOption(index);
   };
@@ -88,6 +88,7 @@ export const MonthlyCard = ({
       server_orderid: RazorpayOrderIDBeforePayment,
       source: "extension",
       dealCodeNumber,
+      cfValue: monthlyCardIsChecked ? 1 : 0,
     };
     baseInstance
       .post(endPoints.kycPage.updatePaymentStatus, body)
