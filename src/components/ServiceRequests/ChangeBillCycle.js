@@ -44,7 +44,7 @@ function ChangeBillCycle({prevScreen, data}) {
   };
 
   return (
-    <div className={`${styles.content_wrapper} !overflow-visible`}>
+    <div className={`${styles.content_wrapper} !overflow-visible !pb-0`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}
@@ -52,7 +52,7 @@ function ChangeBillCycle({prevScreen, data}) {
         />
         Change bill cycle
       </div>
-      <div className={`${styles.buy_info} !overflow-visible`}>
+      <div className={`${styles.buy_info} !overflow-visible !mb-0`}>
         <div className="border border-DDDDDF p-4 rounded-lg">
           <div
             className="flex gap-2 items-center cursor-pointer"

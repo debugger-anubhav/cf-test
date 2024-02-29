@@ -106,7 +106,7 @@
   @apply flex py-2 px-3 gap-2 bg-F7F7F8 rounded-[20px] items-center h-fit min-w-[80px];
 }
 .swap_heading {
-  @apply font-Poppins font-medium text-16 text-71717A;
+  @apply font-Poppins font-medium lg:text-16 lg:tracking-0.3 tracking-desc mb-1 text-14 text-71717A;
 }
 .search_wrapper {
   @apply flex w-full items-center gap-2 border border-ECECEC rounded-lg px-4 py-2 lg:mt-6 mt-[4px] h-[40px];

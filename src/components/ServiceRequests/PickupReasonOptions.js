@@ -77,7 +77,7 @@ function PickupReasonOptions({
           pickupRequestType={pickupRequestType}
         />
       ) : (
-        <div className={styles.content_wrapper}>
+        <div className={`${styles.content_wrapper} !pb-0`}>
           <div className={styles.main_heading}>
             <BackIcon
               onClick={() => setScreen(1)}

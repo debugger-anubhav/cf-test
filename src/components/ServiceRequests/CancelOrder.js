@@ -82,7 +82,7 @@ function CencelOrder({prevScreen, data}) {
   };
 
   return (
-    <div className={styles.content_wrapper}>
+    <div className={`${styles.content_wrapper} !pb-0 !overflow-auto`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}
@@ -90,7 +90,7 @@ function CencelOrder({prevScreen, data}) {
         />
         Cancel order
       </div>
-      <div className={styles.cancellation_info}>
+      <div className={`${styles.cancellation_info} !mb-0`}>
         <Select
           options={cencellationOptions}
           styles={customStylesForSelect}
