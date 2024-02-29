@@ -61,7 +61,7 @@ export const MonthlyCard = ({
 
   useEffect(() => {
     getApiData();
-  }, [selectedOption]);
+  }, [selectedOption, monthlyCardIsChecked]);
   const handleOptionChange = index => {
     setSelectedOption(index);
   };
