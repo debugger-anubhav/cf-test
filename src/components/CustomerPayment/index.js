@@ -310,7 +310,8 @@ function CustomerPayment() {
         setIsLogin={bool => setIsLogin(bool)}
         handleChangeRoute={() => {
           if (redirctInvoice) {
-            router.push("/invoices");
+            // router.push("/invoices");
+            window?.location?.open("/invoices", "_blank");
           }
         }}
       />
