@@ -134,7 +134,7 @@ const CitymaxPlanDetail = () => {
         endPoints.cityMaxPage.getRoomData(
           params.planId,
           params.tenure,
-          userIdToUse,
+          userId || userIdToUse,
         ),
       )
       .then(res => {
