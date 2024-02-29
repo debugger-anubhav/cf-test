@@ -90,12 +90,13 @@ function CencelOrder({prevScreen, data}) {
         />
         Cancel order
       </div>
-      <div className={`${styles.cancellation_info} !mb-0`}>
+      <div className={`${styles.cancellation_info} !mb-2`}>
         <Select
           options={cencellationOptions}
           styles={customStylesForSelect}
           onChange={handleChange}
           placeholder="Reason for cancellation"
+          isSearchable={false}
         />
 
         <p className={styles.form_label}>Your comment (optional)</p>
