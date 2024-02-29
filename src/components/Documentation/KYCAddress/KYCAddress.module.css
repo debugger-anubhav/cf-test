@@ -62,7 +62,7 @@
   @apply w-full border-none outline-none bg-transparent placeholder:text-14 xl:placeholder:text-16 placeholder:text-71717A placeholder:tracking-desc xl:placeholder:tracking-0.3 placeholder:font-Poppins;
 }
 .chooseFile {
-  @apply inline-block pl-2 max-w-[249px] lg:w-full truncate;
+  @apply inline-block pl-2 max-w-[249px] lg:max-w-full lg:w-full truncate;
 }
 /* md:w-[477px] */
 

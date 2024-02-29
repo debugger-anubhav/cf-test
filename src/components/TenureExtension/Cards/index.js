@@ -86,6 +86,8 @@ export const MonthlyCard = ({
       mode: modeOfPayment,
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
+      source: "extension",
+      dealCodeNumber,
     };
     baseInstance
       .post(endPoints.kycPage.updatePaymentStatus, body)
