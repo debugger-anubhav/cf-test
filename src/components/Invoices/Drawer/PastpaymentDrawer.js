@@ -137,7 +137,7 @@ const PastpaymentDrawer = ({
                 ? amountDue < availbal
                   ? availbal - amountDue
                   : 0
-                : Math.abs(availbal)}
+                : Math.abs(availbal) + 1}
               )
             </p>
           </div>
