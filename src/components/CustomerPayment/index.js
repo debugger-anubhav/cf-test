@@ -140,6 +140,7 @@ function CustomerPayment() {
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
+    setRedirctInvoice(true);
   };
 
   const validateAuth = async () => {
@@ -310,7 +311,8 @@ function CustomerPayment() {
         setIsLogin={bool => setIsLogin(bool)}
         handleChangeRoute={() => {
           if (redirctInvoice) {
-            router.push("/invoices");
+            // router.push("/invoices");
+            window?.location?.open("/invoices", "_blank");
           }
         }}
       />
@@ -389,9 +391,6 @@ function CustomerPayment() {
 
                       <a
                         href={isLogin && `/invoices`}
-                        onClick={() => {
-                          isLogin && router.push("/invoices");
-                        }}
                         target="_blank"
                         rel="noreferrer">
                         <div
@@ -399,7 +398,6 @@ function CustomerPayment() {
                           onClick={() => {
                             if (!isLogin) {
                               toggleLoginModal(true);
-                              setRedirctInvoice(true);
                             }
                           }}>
                           <p className={styles.all_invoice_text}>
