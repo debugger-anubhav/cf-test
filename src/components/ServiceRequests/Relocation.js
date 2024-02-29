@@ -2,6 +2,7 @@ import React, {useState, useRef} from "react";
 import styles from "./style.module.css";
 import {
   BackIcon,
+  DeleteIcon,
   DeleteIconFilled,
   DropDownArrow,
   DropUpArrow,
@@ -331,77 +332,108 @@ function Relocation({prevScreen, data}) {
                       }
                     </ErrorMessage>
                   </div>
-
-                  <div
-                    className={`mt-4 flex mb-16 ${styles.demo} ${
-                      !formik.values.currentAddressProof
-                        ? "flex-col"
-                        : "flex-row"
-                    }`}>
-                    <input
-                      disabled={formik?.values?.currentAddressProof !== ""}
-                      type="file"
-                      accept="image/jpeg,image/jpg,image/png,application/pdf"
-                      id="currentAddProof"
-                      name="currentAddressProof"
-                      placeholder="choose file"
-                      className={`hidden`}
-                      onChange={e =>
-                        formik.setFieldValue(
-                          "currentAddressProof",
-                          e.target.files[0],
-                        )
-                      }
-                    />
-                    <label
-                      htmlFor="currentAddProof"
-                      className={`${
-                        formStyles.form_input
-                      } flex items-center !h-full cursor-pointer ${
-                        formik.values.currentAddressProof &&
-                        "!max-w-[95%] w-fit !cursor-default"
-                      } `}>
-                      <div className={`flex w-full flex-col `}>
-                        <div className="flex items-center">
-                          <Image
-                            src={uploading}
-                            alt="Uploading Icon"
-                            className={`h-full`}
-                            loading="lazy"
-                          />
-                          <span className="text-14 font-Poppins text-71717A pl-2">
-                            {formik.values.currentAddressProof
-                              ? formik.values.currentAddressProof.name
-                              : "Choose file"}
-                          </span>
+                  <div className="mb-16 ">
+                    <div
+                      className={`mt-4 flex items-center ${styles.demo}  ${
+                        !formik.values.currentAddressProof
+                          ? "flex-col"
+                          : "flex-row"
+                      }`}>
+                      <input
+                        disabled={formik?.values?.currentAddressProof !== ""}
+                        type="file"
+                        accept="image/jpeg,image/jpg,image/png,application/pdf"
+                        id="currentAddProof"
+                        name="currentAddressProof"
+                        placeholder="choose file"
+                        className={`hidden`}
+                        onChange={e =>
+                          formik.setFieldValue(
+                            "currentAddressProof",
+                            e.target.files[0],
+                          )
+                        }
+                      />
+                      <label
+                        htmlFor="currentAddProof"
+                        className={`${
+                          formStyles.form_input
+                        } flex items-center !h-full cursor-pointer ${
+                          formik.values.currentAddressProof &&
+                          "!max-w-[95%] w-fit !cursor-default"
+                        } `}>
+                        <div className={`flex w-full flex-col `}>
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                              <Image
+                                src={uploading}
+                                alt="Uploading Icon"
+                                className={`h-full  ${
+                                  formik.values.currentAddressProof &&
+                                  "hidden md:flex"
+                                }`}
+                                loading="lazy"
+                              />
+                              <span className="text-14 font-Poppins text-71717A">
+                                {formik.values.currentAddressProof
+                                  ? formik.values.currentAddressProof.name
+                                  : "Choose file"}
+                              </span>
+                            </div>
+                            {formik.values.currentAddressProof && (
+                              <div className={commonStyles.animate_check_icon}>
+                                <FaCheckCircle
+                                  color="#2D9469"
+                                  className={commonStyles.mdHiddemIcons}
+                                />
+                              </div>
+                            )}
+                          </div>
+                          {formik.values.currentAddressProof && (
+                            <div
+                              className={`${commonStyles.correctFile} bottom-[3px]`}></div>
+                          )}
                         </div>
+                      </label>
+
+                      <div>
                         {formik.values.currentAddressProof && (
-                          <div
-                            className={`${commonStyles.correctFile} bottom-[3px]`}></div>
+                          <>
+                            <div
+                              className={commonStyles.animate_check_icon}
+                              onClick={() =>
+                                formik.setFieldValue("currentAddressProof", "")
+                              }>
+                              <DeleteIcon
+                                color={"#71717A"}
+                                className={`ml-3 ${commonStyles.mdHiddemIcons}`}
+                              />
+                            </div>
+                            <div
+                              className={`!hidden md:!flex ${styles.check_wrapper}`}>
+                              <FaCheckCircle
+                                color="#2D9469"
+                                className={styles.showCheckCircle}
+                              />
+                              <div
+                                className={styles.showDeleteIcon}
+                                onClick={() =>
+                                  formik.setFieldValue(
+                                    "currentAddressProof",
+                                    "",
+                                  )
+                                }>
+                                <DeleteIconFilled
+                                  color="#ffffff"
+                                  className={styles.delete_icon_filled}
+                                />
+                              </div>
+                            </div>
+                          </>
                         )}
                       </div>
-                    </label>
-
-                    <div className={styles.check_wrapper}>
-                      {formik.values.currentAddressProof && (
-                        <div className={styles.check_wrapper}>
-                          <FaCheckCircle
-                            color="#2D9469"
-                            className={styles.showCheckCircle}
-                          />
-                          <div
-                            className={styles.showDeleteIcon}
-                            onClick={() =>
-                              formik.setFieldValue("currentAddressProof", "")
-                            }>
-                            <DeleteIconFilled
-                              color="#ffffff"
-                              className={styles.delete_icon_filled}
-                            />
-                          </div>
-                        </div>
-                      )}
                     </div>
+
                     <ErrorMessage name="currentAddressProof">
                       {msg =>
                         formik.touched.currentAddressProof && (
