@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
 import LongTermCard from "./Cards/LongTermCard";
@@ -12,6 +12,7 @@ import {baseInstance} from "@/network/axios";
 
 function TenureExtension() {
   const params = useParams();
+  const router = useRouter();
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -68,8 +69,11 @@ function TenureExtension() {
         },
       })
       .then(res => {
-        setIsCityShieldApplied(res?.data?.data?.isCityShieldApplied);
-        setCalledParantApi(true);
+        if (res?.data?.data?.totalPrice === 0) router.push("/");
+        else {
+          setIsCityShieldApplied(res?.data?.data?.isCityShieldApplied);
+          setCalledParantApi(true);
+        }
       })
       .catch(err => {
         console.log(err);
