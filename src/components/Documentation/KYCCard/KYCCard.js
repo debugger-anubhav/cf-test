@@ -34,6 +34,8 @@ const KYCCard = ({handleKycState}) => {
       mode: modeOfPayment,
       signature: razorpaySignature,
       server_orderid: RazorpayOrderIDBeforePayment,
+      source: "new",
+      dealCodeNumber: selectedOrderId,
     };
     baseInstance
       .post(endPoints.kycPage.updatePaymentStatus, body)
