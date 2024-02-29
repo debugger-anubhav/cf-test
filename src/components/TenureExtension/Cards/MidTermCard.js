@@ -35,9 +35,9 @@ function MidTermCard({
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const calculatedPrice =
-    apiData?.orignalPrice -
-    ((apiData?.orignalPrice * items?.percent_off) / 100).toFixed(0);
+  // const calculatedPrice =
+  //   apiData?.orignalPrice -
+  //   ((apiData?.orignalPrice * items?.percent_off) / 100).toFixed(0);
 
   const DiscountPoints = [
     "No Cost EMI Available",
@@ -124,12 +124,7 @@ function MidTermCard({
       image: "https://rentofurniture.com/images/logo/FaviconNew.png",
       handler: function (res) {
         console.log(res, "res in handler");
-        cartTypeOneHandler(
-          res,
-          customerId,
-          selectedOptionPer?.value * calculatedPrice,
-          recId,
-        );
+        cartTypeOneHandler(res, customerId, apiData?.totalPrice, recId);
       },
       prefill: {
         name: result?.data?.data?.data?.full_name,
