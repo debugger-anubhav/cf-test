@@ -19,8 +19,6 @@ const DocSidebar = ({isOverviewSelected = false}) => {
   const authCookies = new Cookies();
   const [userName, setUserName] = useState(null);
 
-  console.log(isActive, "hdewehu");
-
   const userNameFromLocalStorage = getLocalStorage("user_name");
 
   useEffect(() => {
