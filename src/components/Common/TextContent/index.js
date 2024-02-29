@@ -72,14 +72,14 @@ export default function TextContent({params}) {
         <>
           <div
             dangerouslySetInnerHTML={{__html: data?.data?.cat_meta_keyword}}
-            className={styles.apiDataSeo}
+            // className={styles.apiDataSeo}
           />
         </>
       )}
       {params.category === "appliances-rental" && (
         <div
           dangerouslySetInnerHTML={{__html: data?.cat_meta_keyword}}
-          className={styles.apiDataSeo}
+          // className={styles.apiDataSeo}
         />
       )}
     </div>

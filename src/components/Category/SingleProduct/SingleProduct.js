@@ -223,7 +223,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />
-          <CategoryContent />
+          <CategoryContent subCategoryId={subCategoryId} />
           <Footer />
         </>
       ) : null}

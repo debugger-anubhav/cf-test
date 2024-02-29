@@ -15,13 +15,17 @@ function ExtendTenure({prevScreen, orderId}) {
           setCount(count - 1);
         }, 1000);
       } else {
-        window?.open(`/upfront_tenure_extension/${orderId}`, "_blank");
+        window?.open(
+          `/upfront_tenure_extension/${orderId}`,
+          "_blank",
+          "noopener noreferrer",
+        );
         dispatch(setServiceRequestDrawer(false));
       }
     }
   }, [count]);
   return (
-    <div className={styles.content_wrapper}>
+    <div className={`${styles.content_wrapper} !pb-0`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}
@@ -29,7 +33,7 @@ function ExtendTenure({prevScreen, orderId}) {
         />
         Extend tenure
       </div>
-      <div className={styles.buy_info}>
+      <div className={`${styles.buy_info} !mb-0`}>
         <p className={styles.desc}>
           {` Ready to extend your tenure? You'll be redirected to our Tenure
           Extension page. See you there!`}

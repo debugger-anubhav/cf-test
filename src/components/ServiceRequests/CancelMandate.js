@@ -55,7 +55,7 @@ function CancelMandate({prevScreen, data, heading}) {
 
   return (
     <>
-      <div className={styles.content_wrapper}>
+      <div className={`${styles.content_wrapper} md:!pb-0 md:!h-auto`}>
         <div className={styles.main_heading}>
           <BackIcon
             onClick={() => prevScreen(true)}
@@ -125,10 +125,10 @@ function CancelMandate({prevScreen, data, heading}) {
           !formikRef?.current?.isValid
             ? "!bg-[#FFDF85] !cursor-not-allowed "
             : ``
-        } !hidden lg:flex`}>
+        } !hidden md:!flex`}>
         Create request <ForwardArrowWithLine />
       </button>
-      <div className={`${styles.bottom_row} flex lg:!hidden`}>
+      <div className={`${styles.bottom_row} !flex md:!hidden`}>
         <div className="flex w-full">
           <button
             type="submit"
