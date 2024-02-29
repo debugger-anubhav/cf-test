@@ -6,15 +6,15 @@ import {getLocalStorage} from "@/constants/constant";
 import {addCategoryTextContent} from "@/store/Slices/categorySlice";
 import {useDispatch, useSelector} from "react-redux";
 
-const CategoryContent = () => {
+const CategoryContent = ({subCategoryId}) => {
   let cityIdStr;
-  let categoryId;
+  // let categoryId;
   const dispatch = useDispatch();
 
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
 
   if (typeof window !== "undefined") {
-    categoryId = getLocalStorage("categoryId");
+    // categoryId = getLocalStorage("categoryId");
     cityIdStr = getLocalStorage("cityId");
   }
   const cityId = parseFloat(cityIdStr);
@@ -22,7 +22,7 @@ const CategoryContent = () => {
   const {refetch: getCategoryText} = useQuery(
     "category-content",
     endPoints.categoryContent,
-    `?cityId=${cityId}&categoryId=${categoryId}`,
+    `?cityId=${cityId}&categoryId=${subCategoryId}`,
   );
 
   useEffect(() => {
