@@ -88,7 +88,7 @@ export const MonthlyCard = ({
       server_orderid: RazorpayOrderIDBeforePayment,
       source: "extension",
       dealCodeNumber,
-      cfValue: monthlyCardIsChecked ? 1 : 0,
+      cfValue: monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
     };
     baseInstance
       .post(endPoints.kycPage.updatePaymentStatus, body)
@@ -122,7 +122,7 @@ export const MonthlyCard = ({
     const result = await baseInstance.post(endPoints.kycPage.registerMandate, {
       dealCodeNumber,
       mode: modeOfPayment,
-      cf_value: monthlyCardIsChecked ? 1 : 0,
+      cf_value: monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
       source: "extension",
     });
     if (!result) {
@@ -207,45 +207,49 @@ export const MonthlyCard = ({
       </div>
       <div className={styles.divider}></div>
 
-      <div className={styles.cityshield_wrapper} onClick={openDrawerForMonthly}>
-        <div className={`${styles.cityshield_row} `}>
-          <div className={styles.flexx}>
-            <VerifyIcon size={30} color={"#2D9469"} />
-            <p className={styles.city_shield_head}>City shield </p>
-          </div>
-          {/* <div>
+      {!apiData?.isCityShieldApplied && (
+        <div
+          className={styles.cityshield_wrapper}
+          onClick={openDrawerForMonthly}>
+          <div className={`${styles.cityshield_row} `}>
+            <div className={styles.flexx}>
+              <VerifyIcon size={30} color={"#2D9469"} />
+              <p className={styles.city_shield_head}>City shield </p>
+            </div>
+            {/* <div>
             <input
               type="checkbox"
               className="flex border border-5774AC cursor-pointer"
               checked={monthlyCardIsChecked}
             />
           </div> */}
-          <div>
-            {monthlyCardIsChecked ? (
-              <div onClick={openDrawerForMonthly}>
-                <CheckedBox
-                  size={20}
-                  color={"#5774AC"}
-                  className={"cursor-pointer"}
-                />
-              </div>
-            ) : (
-              <div onClick={() => setmonthlyCardIsChecked(true)}>
-                <UncheckedBox
-                  size={20}
-                  color={"#5774AC"}
-                  className={"cursor-pointer"}
-                />
-              </div>
-            )}
+            <div>
+              {monthlyCardIsChecked ? (
+                <div onClick={openDrawerForMonthly}>
+                  <CheckedBox
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
+              ) : (
+                <div onClick={() => setmonthlyCardIsChecked(true)}>
+                  <UncheckedBox
+                    size={20}
+                    color={"#5774AC"}
+                    className={"cursor-pointer"}
+                  />
+                </div>
+              )}
+            </div>
           </div>
+          <p className={styles.cityshield_text}>
+            Get a damage waiver at ONLY <span className="font-Inter">₹</span>
+            56/mo with City Shield.
+            <span className={styles.learn_more}>Learn more</span>
+          </p>
         </div>
-        <p className={styles.cityshield_text}>
-          Get a damage waiver at ONLY <span className="font-Inter">₹</span>56/mo
-          with City Shield.
-          <span className={styles.learn_more}>Learn more</span>
-        </p>
-      </div>
+      )}
 
       <CityShieldDrawerForCart
         cityShieldCurrentPrice={apiData?.orignalPrice}

@@ -185,8 +185,7 @@ function CustomerPayment() {
           email: values?.email,
           price: values?.amount,
           user_invoice_number: values?.invoice,
-          // cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
-          cfCoins: topupAmount - availableCoins,
+          cfCoins: isAutoRazor ? values?.cfCoins : topupAmount - availableCoins,
           notes: values?.notes || "",
         },
       );
@@ -218,7 +217,9 @@ function CustomerPayment() {
             signature: response?.razorpay_signature,
             email: userDetails?.email,
             invoiceNumber: values?.invoice,
-            cfCoins: topupAmount - availableCoins,
+            cfCoins: isAutoRazor
+              ? values?.cfCoins
+              : topupAmount - availableCoins,
             notes: values?.notes || "",
             recId: userDetails?.recID,
             amount: values?.amount,

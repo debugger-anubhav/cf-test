@@ -282,7 +282,7 @@
   @apply text-12 xl:text-14 tracking-desc leading-[18px] xl:leading-[21px] font-medium text-71717A;
 }
 .rejected_doc_map_row {
-  @apply flex justify-between gap-1;
+  @apply flex justify-between gap-1 cursor-pointer;
 }
 .rejected_doc_name {
   @apply text-12 xl:text-14 tracking-desc leading-[18px] xl:leading-[21px] text-5774AC font-Poppins w-full truncate;

@@ -125,7 +125,7 @@ const PastpaymentDrawer = ({
                       setAvailbal(
                         availbal > amountDue
                           ? 0
-                          : Math.abs(availbal - amountDue),
+                          : Math.abs(availbal - amountDue) + 1,
                       );
                   }}
                 />
@@ -135,9 +135,9 @@ const PastpaymentDrawer = ({
               Use Cityfurnish coins (Available balance:
               {isCoinApplied
                 ? amountDue < availbal
-                  ? availbal - amountDue
+                  ? availbal - amountDue + 1
                   : 0
-                : Math.abs(availbal) + 1}
+                : Math.abs(availbal)}
               )
             </p>
           </div>
@@ -152,10 +152,17 @@ const PastpaymentDrawer = ({
                 ),
               );
               if (isCoinApplied) {
-                const temp = availbal - amountDue;
+                // const temp = availbal - amountDue;
+                // const remaingCoins =
+                //   amountDue - availbal > 0
+                //     ? 0
+                //     : Math.abs(amountDue - availbal) + 1;
                 const remaingCoins =
-                  availbal > amountDue ? availbal - temp : availbal;
-                dispatch(setUsedCoins(Math.abs(remaingCoins)));
+                  amountDue - availbal > 0
+                    ? availbal
+                    : Math.abs(availbal - amountDue) + 1;
+                // availbal > amountDue ? availbal - temp : availbal;
+                dispatch(setUsedCoins(Math.abs(availbal - remaingCoins)));
               }
               handleRedirectToPayment();
             }}>
