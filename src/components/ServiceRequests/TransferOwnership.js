@@ -394,9 +394,7 @@ function TransferOwnership({prevScreen, data}) {
                     className={` ${styles.request_info_div}`}
                     onClick={() => setShowAddressFields(true)}>
                     <div className="flex gap-2 items-center">
-                      <p className={styles.request_type}>
-                        Add new saved address
-                      </p>
+                      <p className={styles.request_type}>Add new address</p>
                     </div>
                     <div className="flex">
                       <ForwardArrow />

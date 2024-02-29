@@ -59,7 +59,8 @@ function PickupReasonCommonScreen({
           )}
         </>
       ) : (
-        <div className={`${styles.content_wrapper} max-w-full`}>
+        <div
+          className={`${styles.content_wrapper} max-w-full !pb-0 !overflow-auto`}>
           <div className={styles.main_heading}>
             <BackIcon
               onClick={() => setCurrentScreen(1)}
@@ -89,7 +90,7 @@ function PickupReasonCommonScreen({
               reason.title !== "Requirement Fulfilled"
                 ? "!mt-0"
                 : ""
-            } !mx-auto`}
+            } !mx-auto !w-full lg:w-full`}
             onClick={() => {
               if (reason.btnName === "Create request") {
                 handleCreateRequest();
@@ -105,7 +106,7 @@ function PickupReasonCommonScreen({
           reason.title !== "Requirement Fulfilled" ? (
             <div className="flex justify-center">
               <button
-                className={`${styles.plain_btn} !mt-0 justify-center`}
+                className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}
                 onClick={handleCreateRequest}>
                 No, let me proceed with pickup
               </button>

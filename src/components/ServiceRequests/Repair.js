@@ -145,11 +145,12 @@ function Repair({prevScreen, data}) {
                   </div>
                   <div className="mt-4">
                     <p className={styles.desc}>Repair details</p>
-                    <input
-                      type="text"
+
+                    <textarea
                       placeholder="Enter repair details"
                       className={styles.form_input_textarea}
                       onChange={e => handleDetailChange(e, index)}
+                      rows={2}
                     />
                   </div>
                 </div>
