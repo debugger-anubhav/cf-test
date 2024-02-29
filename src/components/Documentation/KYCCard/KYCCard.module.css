@@ -14,6 +14,7 @@
   @apply text-14 md:text-16 flex items-center;
 }
 .btnGroupContainer {
+  @apply -mx-4 md:-mx-0;
   box-shadow: none;
 }
 @media (max-width: 767px) {
@@ -22,7 +23,7 @@
   }
 }
 .btnGroup {
-  @apply flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
+  @apply px-4 md:px-0 flex flex-col md:flex-row md:mt-8 relative bottom-0 mt-4 md:static;
 }
 .laterBtn {
   @apply mt-4 md:mt-0;
