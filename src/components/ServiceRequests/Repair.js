@@ -20,6 +20,7 @@ function Repair({prevScreen, data}) {
   );
   const {trailCreateSR} = CommonCreateRequestApi();
   const [repairOptions, setRepairOptions] = useState(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const getRepairOption = productName => {
     baseInstance
       .get(endPoints.serviceRequestPage.getRepairOptions(productName))
@@ -102,7 +103,15 @@ function Repair({prevScreen, data}) {
         <div className={`${styles.buy_info}`}>
           <p className={styles.desc}>Select products to repair</p>
           {data?.map((item, index) => (
-            <div className={`${styles.repair_info}`} key={index.toString()}>
+            <div
+              className={`${styles.repair_info} ${
+                index === data.length - 1 &&
+                repairOptions &&
+                repairOptions?.length > 4 &&
+                isDropdownOpen &&
+                "!mb-[11rem]"
+              }`}
+              key={index.toString()}>
               <div
                 className="flex gap-2 items-center cursor-pointer"
                 onClick={() => {
@@ -142,6 +151,8 @@ function Repair({prevScreen, data}) {
                       }
                       placeholder="Select a reason for repair"
                       isSearchable={false}
+                      onMenuOpen={() => setIsDropdownOpen(true)}
+                      onMenuClose={() => setIsDropdownOpen(false)}
                     />
                   </div>
                   <div className="mt-4">

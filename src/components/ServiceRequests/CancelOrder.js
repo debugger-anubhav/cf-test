@@ -48,6 +48,7 @@ export const customStylesForSelect = {
     "&:hover": {
       border: "1px solid #71717A",
     },
+    zIndex: 9999,
   }),
 };
 
