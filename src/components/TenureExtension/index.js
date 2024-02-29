@@ -134,6 +134,7 @@ function TenureExtension() {
             dealCodeNumber={params?.orderId}
             monthlyCardIsChecked={monthlyCardIsChecked}
             setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
+            isCityShieldApplied={isCityShieldApplied}
             orderId={params?.orderId}
             setLoading={setLoading}
           />

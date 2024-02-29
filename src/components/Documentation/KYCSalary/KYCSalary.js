@@ -8,7 +8,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CheckFillIcon,
-  Close,
+  // Close,
   DeleteIcon,
   DeleteIconFilled,
   InformationIcon,
@@ -62,7 +62,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   // const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
   const [openModal, setOpenModal] = useState(false);
-  const [showReuploadNote, setShowReuploadNote] = useState(true);
+  // const [showReuploadNote, setShowReuploadNote] = useState(true);
   const [disableButton, setDisableButton] = useState(false);
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -193,7 +193,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
       />
       <CommonField handleKycState={handleKycState} />
 
-      {isReupload && showReuploadNote && (
+      {isReupload && (
         <div className={commonStyles.reupload_note_wrapper}>
           <InformationIcon className={`mt-0.5 ${commonStyles.reupload_icon}`} />
           <p className={commonStyles.reupload_note_txt}>
@@ -201,12 +201,12 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             necessary standards. Please re-upload them to proceed with KYC
             process.
           </p>
-          <div
+          {/* <div
             onClick={() => {
               setShowReuploadNote(false);
             }}>
             <Close className={`cursor-pointer ${commonStyles.reupload_icon}`} />
-          </div>
+          </div> */}
         </div>
       )}
 
