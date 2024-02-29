@@ -306,6 +306,7 @@ function Relocation({prevScreen, data}) {
                           selectedOption.label,
                         );
                       }}
+                      isSearchable={false}
                       placeholder="Select any current address proof"
                       onMenuOpen={() => setIsDropdownOpen(true)}
                       onMenuClose={() => setIsDropdownOpen(false)}

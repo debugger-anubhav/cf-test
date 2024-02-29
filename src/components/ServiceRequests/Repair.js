@@ -99,10 +99,10 @@ function Repair({prevScreen, data}) {
           />
           Repair
         </div>
-        <div className={styles.buy_info}>
+        <div className={`${styles.buy_info}`}>
           <p className={styles.desc}>Select products to repair</p>
           {data?.map((item, index) => (
-            <div className={styles.repair_info} key={index.toString()}>
+            <div className={`${styles.repair_info}`} key={index.toString()}>
               <div
                 className="flex gap-2 items-center cursor-pointer"
                 onClick={() => {
@@ -141,6 +141,7 @@ function Repair({prevScreen, data}) {
                         handleChange(selectedOption, index)
                       }
                       placeholder="Select a reason for repair"
+                      isSearchable={false}
                     />
                   </div>
                   <div className="mt-4">
