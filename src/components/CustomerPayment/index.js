@@ -422,7 +422,7 @@ function CustomerPayment() {
                         Enter amount (in <span className="font-Inter">₹</span>)
                       </p>
                       <div className={`${styles.form_input} gap-2  `}>
-                        <p className="text-14 lg:text-16 text-71717A line-through">
+                        <p className="text-14 xl:text-16 tracking-desc text-71717A xl:tracking-0.3 line-through font-Poppins">
                           {useCityfurnishCoins
                             ? formik.values.amount - topupAmount > 0
                               ? primaryAmount
@@ -435,7 +435,7 @@ function CustomerPayment() {
                           onWheel={handleWheel}
                           name="amount"
                           placeholder="Enter the amount to be paid"
-                          className="outline-none w-full disabled:bg-transparent"
+                          className={styles.amount_input}
                           onChange={e => {
                             // setFormData({...formData, amount: e.target.value});
                             if (!useCityfurnishCoins) {
