@@ -52,9 +52,8 @@
   @apply text-[#5774AC] underline;
 }
 .laterBtn {
-  @apply font-Poppins font-medium;
+  @apply font-Poppins font-medium h-12 lg:h-14;
   color: #71717a;
-  height: 56px;
   padding: 0px 32px;
   justify-content: center;
   align-items: center;
@@ -63,7 +62,7 @@
   border: 2px solid #71717a;
 }
 .saveBtn {
-  @apply md:ml-4 font-Poppins font-medium;
+  @apply md:ml-4 font-Poppins font-medium h-12 lg:h-14;
   display: flex;
   padding: 0px 32px;
   justify-content: center;
@@ -72,7 +71,6 @@
   align-self: stretch;
   border-radius: 8px;
   background: #f6b704;
-  height: 56px;
 }
 .saveBtn:disabled {
   background: #ffdf85;
