@@ -12,6 +12,7 @@ import {loadScript} from "@/constants/constant";
 import {reduxSetModalState} from "@/store/Slices";
 import DoItLater from "../DoItLaterModal/DoItLater";
 import {baseInstance} from "@/network/axios";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 // import {useSelector} from "react-redux";
 
 const KYCCard = ({handleKycState}) => {
@@ -20,6 +21,7 @@ const KYCCard = ({handleKycState}) => {
   const [selected, setSelected] = useState("cc");
   const [modeOfPayment, setModeOfPayment] = useState("card");
   const [openModal, setOpenModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const updatePaymentStatus = (
     paymentID,
@@ -29,6 +31,7 @@ const KYCCard = ({handleKycState}) => {
     razorpaySignature,
     RazorpayOrderIDBeforePayment,
   ) => {
+    setLoading(true);
     const body = {
       transactionID: paymentID,
       mode: modeOfPayment,
@@ -43,6 +46,7 @@ const KYCCard = ({handleKycState}) => {
         if (response.data.success === true) {
           showToastNotification(response.data.message, 1);
           handleKycState(selectedOrderId);
+          setLoading(false);
           // setKycState(4);
           // setTimeout(function () {
           //   window.location.reload();
@@ -50,10 +54,14 @@ const KYCCard = ({handleKycState}) => {
           // } else if (response.data.status_code === 301) {
           //   showToastNotification(response.data.message, 3);
         } else {
+          setLoading(false);
           showToastNotification(response.data.message, 3);
         }
       })
-      .catch(err => console.log(err, "errr"));
+      .catch(err => {
+        setLoading(false);
+        console.log(err, "errr");
+      });
   };
 
   async function handleOpenRazorpay() {
@@ -126,6 +134,7 @@ const KYCCard = ({handleKycState}) => {
   };
   return (
     <div>
+      {loading && <LoaderComponent loading={loading} />}
       <DoItLater
         closeModal={() => toggleDoItLaterToggle(false)}
         isModalOpen={openModal}
