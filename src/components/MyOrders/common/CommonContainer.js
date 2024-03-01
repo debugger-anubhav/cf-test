@@ -80,7 +80,7 @@ const CommonContainer = ({
               <p className={styles.status}>
                 {tab === 0
                   ? item.status === "Pending"
-                    ? item.is_offline_placed === "1"
+                    ? item.is_offline_user === "1"
                       ? "Amount Pending"
                       : "Order Failed"
                     : statusLabels[item.zoho_sub_status.toLowerCase()] ||

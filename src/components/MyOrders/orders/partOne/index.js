@@ -97,7 +97,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
         <Header
           tab={tab}
           setTab={val => setTab(val)}
-          offlineCustomer={ordersData?.[0]?.is_offline_placed === "1"}
+          offlineCustomer={ordersData?.[0]?.is_offline_user === "1"}
         />
 
         <div className="px-4 xl:px-6">
@@ -163,7 +163,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                         containerRef={containerRef}
                         getSingleOrderDetails={getSingleOrderDetails}
                         offlineCustomer={
-                          ordersData?.[index]?.is_offline_placed === "1"
+                          ordersData?.[index]?.is_offline_user === "1"
                         }
                         offlineUserId={ordersData?.[index]?.user_id}
                       />
