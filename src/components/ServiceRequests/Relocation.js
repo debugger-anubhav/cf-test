@@ -374,7 +374,7 @@ function Relocation({prevScreen, data}) {
                                 }`}
                                 loading="lazy"
                               />
-                              <span className="text-14 font-Poppins text-71717A">
+                              <span className="text-14 font-Poppins text-71717A max-w-[237px] md:max-w-[280px] truncate">
                                 {formik.values.currentAddressProof
                                   ? formik.values.currentAddressProof.name
                                   : "Choose file"}
