@@ -421,26 +421,38 @@ function CustomerPayment() {
                       <p className={styles.form_label}>
                         Enter amount (in <span className="font-Inter">₹</span>)
                       </p>
-                      <Field
-                        type="number"
-                        onKeyPress={keyPressForContactField}
-                        onWheel={handleWheel}
-                        name="amount"
-                        placeholder="Enter the amount to be paid"
-                        className={styles.form_input}
-                        onChange={e => {
-                          // setFormData({...formData, amount: e.target.value});
-                          formik.setFieldValue("amount", e.target.value);
-                          setshowValidationForAmount(false);
-                          formik.touched.amount = false;
-                          setPrimaryAmount(e.target.value);
-                        }}
-                        value={
-                          !useCityfurnishCoins
-                            ? primaryAmount
-                            : formik.values.amount
-                        }
-                      />
+                      <div className={`${styles.form_input} gap-2  `}>
+                        <p className="text-14 lg:text-16 text-71717A line-through">
+                          {useCityfurnishCoins
+                            ? formik.values.amount - topupAmount > 0
+                              ? primaryAmount
+                              : primaryAmount - 1
+                            : ""}
+                        </p>
+                        <Field
+                          type="number"
+                          onKeyPress={keyPressForContactField}
+                          onWheel={handleWheel}
+                          name="amount"
+                          placeholder="Enter the amount to be paid"
+                          className="outline-none w-full disabled:bg-transparent"
+                          onChange={e => {
+                            // setFormData({...formData, amount: e.target.value});
+                            if (!useCityfurnishCoins) {
+                              formik.setFieldValue("amount", e.target.value);
+                              setshowValidationForAmount(false);
+                              formik.touched.amount = false;
+                              setPrimaryAmount(e.target.value);
+                            }
+                          }}
+                          disabled={useCityfurnishCoins}
+                          value={
+                            !useCityfurnishCoins
+                              ? primaryAmount
+                              : formik.values.amount
+                          }
+                        />
+                      </div>
                       <ErrorMessage name="amount">
                         {msg =>
                           formik.touched.amount && (
