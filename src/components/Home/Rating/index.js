@@ -26,7 +26,8 @@ const CustomerRating = () => {
     .getItem("cityId")
     ?.toString()
     ?.replace(/"/g, "");
-  const cityId = parseFloat(cityIdStr);
+  const tempCityId = parseFloat(cityIdStr);
+  const cityId = tempCityId === 52 ? 50 : tempCityId;
 
   const {refetch: getGoogleReviews} = useQuery(
     "google-reviews",

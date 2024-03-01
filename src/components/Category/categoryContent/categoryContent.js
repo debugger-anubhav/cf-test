@@ -38,7 +38,7 @@ const CategoryContent = ({subCategoryId}) => {
           <>
             <div
               dangerouslySetInnerHTML={{__html: ele?.cat_meta_keyword}}
-              className={styles.apiData}></div>
+              className={styles.dynamic_keyword}></div>
           </>
         );
       })}

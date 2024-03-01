@@ -1,4 +1,4 @@
-.main_container {
+/* .main_container {
   @apply flex flex-col w-full mt-8 pl-4 md:px-[70px] 
   xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-12 xl:py-12;
 }
@@ -30,7 +30,6 @@
   @apply text-[#9A9AA2] font-Poppins;
   font-size: 14px !important;
   font-family: "poppins" !important;
-  /* @apply pt-4 pb-2 font-Poppins text-[#45454A] text-20 font-medium; */
 }
 .apiData h2 font span {
   @apply font-Poppins font-medium text-[#45454A];
@@ -40,4 +39,144 @@
 .apiData h3 font span {
   @apply font-Poppins font-medium text-[#45454A];
   font-size: 20px !important;
+} */
+
+.dynamic_keyword {
+  @apply flex flex-col w-full mt-8 pl-4 md:px-[70px] 
+  xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-12 xl:py-12;
+}
+.dynamic_keyword h1,
+.dynamic_keyword h1 b,
+.dynamic_keyword h2,
+.dynamic_keyword h2 b,
+.dynamic_keyword h3,
+.dynamic_keyword h3 b,
+.dynamic_keyword h4,
+.dynamic_keyword h4 b {
+  font-family: Poppins, sans-serif !important;
+  line-height: 32px !important;
+  font-weight: 500 !important;
+  margin-bottom: 8px !important;
+  color: #45454a !important;
+  margin-top: 16px !important;
+}
+.dynamic_keyword ol,
+.dynamic_keyword ul {
+  padding-inline-start: 25px !important;
+  margin-top: 8px !important;
+}
+.dynamic_keyword h1,
+.dynamic_keyword h1 b {
+  font-size: 18px !important;
+}
+.dynamic_keyword h2,
+.dynamic_keyword h2 b {
+  font-size: 18px !important;
+}
+.dynamic_keyword h3,
+.dynamic_keyword h3 b {
+  font-size: 18px !important;
+}
+.dynamic_keyword h4,
+.dynamic_keyword h4 b {
+  font-size: 18px !important;
+}
+.dynamic_keyword b,
+.dynamic_keyword div,
+.dynamic_keyword p,
+.dynamic_keyword span {
+  font-family: Poppins, sans-serif !important;
+  font-size: 16px !important;
+  color: #71717a !important;
+  line-height: 24px !important;
+  text-align: justify !important;
+}
+.dynamic_keyword div,
+.dynamic_keyword p,
+.dynamic_keyword span {
+  font-weight: 400 !important;
+  margin-top: 0px !important;
+}
+.dynamic_keyword b {
+  font-weight: 600 !important;
+}
+.dynamic_keyword ol {
+  list-style-type: decimal !important;
+}
+.dynamic_keyword ol li,
+.dynamic_keyword ul li {
+  padding-left: 5px;
+  line-height: 28px;
+}
+.dynamic_keyword ul {
+  list-style-type: disc !important;
+}
+.dynamic_keyword p a {
+  font-weight: 600;
+  color: #71717a !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .dynamic_keyword h1,
+  .dynamic_keyword h1 b,
+  .dynamic_keyword h2,
+  .dynamic_keyword h2 b,
+  .dynamic_keyword h3,
+  .dynamic_keyword h3 b,
+  .dynamic_keyword h4,
+  .dynamic_keyword h4 b {
+    font-family: Poppins, sans-serif !important;
+    line-height: 24px !important;
+    font-weight: 500 !important;
+    margin-bottom: 8px !important;
+    color: #3a3a3a !important;
+  }
+  .dynamic_keyword ol,
+  .dynamic_keyword ul {
+    padding-inline-start: 25px !important;
+    margin-top: 8px !important;
+  }
+  .dynamic_keyword h2,
+  .dynamic_keyword h2 b {
+    font-size: 16px !important;
+  }
+  .dynamic_keyword h3,
+  .dynamic_keyword h3 b {
+    font-size: 16px !important;
+  }
+  .dynamic_keyword h4,
+  .dynamic_keyword h4 b {
+    font-size: 16px !important;
+  }
+  .dynamic_keyword b,
+  .dynamic_keyword div,
+  .dynamic_keyword p,
+  .dynamic_keyword span {
+    font-family: Poppins, sans-serif !important;
+    font-size: 14px !important;
+    color: #6a6a6a !important;
+    line-height: 20px !important;
+    text-align: justify !important;
+  }
+  .dynamic_keyword div,
+  .dynamic_keyword p,
+  .dynamic_keyword span {
+    font-weight: 400 !important;
+  }
+  .dynamic_keyword b {
+    font-weight: 600 !important;
+  }
+  .dynamic_keyword ol {
+    list-style-type: decimal !important;
+  }
+  .dynamic_keyword ol li,
+  .dynamic_keyword ul li {
+    padding-left: 5px;
+    line-height: 20px;
+    margin-bottom: 10px;
+    font-size: 14px !important;
+  }
+  .dynamic_keyword ul {
+    list-style-type: disc !important;
+  }
 }

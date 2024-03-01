@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import styles from "./style.module.css";
+import styles from "../../Category/categoryContent/style.module.css";
 import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
 
@@ -61,8 +61,8 @@ export default function TextContent({params}) {
         <>
           {data?.map((item, index) => (
             <div
+              className={styles.dynamic_keyword}
               dangerouslySetInnerHTML={{__html: item.meta_keyword}}
-              className={styles.apiData}
               key={index.toString()}
             />
           ))}
@@ -72,14 +72,14 @@ export default function TextContent({params}) {
         <>
           <div
             dangerouslySetInnerHTML={{__html: data?.data?.cat_meta_keyword}}
-            // className={styles.apiDataSeo}
+            className={styles.dynamic_keyword}
           />
         </>
       )}
       {params.category === "appliances-rental" && (
         <div
           dangerouslySetInnerHTML={{__html: data?.cat_meta_keyword}}
-          // className={styles.apiDataSeo}
+          className={styles.dynamic_keyword}
         />
       )}
     </div>
