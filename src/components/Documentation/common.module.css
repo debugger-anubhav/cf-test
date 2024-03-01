@@ -128,7 +128,7 @@
 } */
 
 .correctFile {
-  @apply md:bottom-[-13px] bottom-[-14px] w-full rounded-lg;
+  @apply -bottom-[10px] w-full rounded-lg;
   position: relative;
   width: 100%;
   height: 2px;
@@ -143,6 +143,7 @@
   width: 100%;
   height: 2px; /* Adjust the height of the line as needed */
   background-color: #2d9469;
+  border-radius: 8px;
   animation: slideAnimation 2s linear forwards; /* Adjust the duration as needed */
 }
 
@@ -168,7 +169,7 @@
 .correctFile {
   width: 100%;
   height: 2px;
-  background: green;
+  background: #2d9469;
   transform: translate(0, 100%);
 }
 
