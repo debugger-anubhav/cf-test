@@ -52,8 +52,8 @@ function CustomerPayment() {
   const tempAmountParam = urlParams.get("amount");
   let amountParam;
 
-  if (tempAmountParam.includes("Rs.")) {
-    amountParam = parseInt(tempAmountParam.split(".")[1].split(",").join(""));
+  if (tempAmountParam?.includes("Rs.")) {
+    amountParam = parseInt(tempAmountParam?.split(".")[1].split(",").join(""));
   } else {
     amountParam = parseInt(tempAmountParam);
   }
