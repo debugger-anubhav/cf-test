@@ -435,14 +435,17 @@ function CustomerPayment() {
                           onWheel={handleWheel}
                           name="amount"
                           placeholder="Enter the amount to be paid"
-                          className="outline-none w-full"
+                          className="outline-none w-full disabled:bg-transparent"
                           onChange={e => {
                             // setFormData({...formData, amount: e.target.value});
-                            formik.setFieldValue("amount", e.target.value);
-                            setshowValidationForAmount(false);
-                            formik.touched.amount = false;
-                            setPrimaryAmount(e.target.value);
+                            if (!useCityfurnishCoins) {
+                              formik.setFieldValue("amount", e.target.value);
+                              setshowValidationForAmount(false);
+                              formik.touched.amount = false;
+                              setPrimaryAmount(e.target.value);
+                            }
                           }}
+                          disabled={useCityfurnishCoins}
                           value={
                             !useCityfurnishCoins
                               ? primaryAmount
