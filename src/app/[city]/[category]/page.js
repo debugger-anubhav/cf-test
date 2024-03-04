@@ -122,8 +122,24 @@ export default function Page() {
       .then(res => setMetaApiData(res?.data?.data[0]))
       .catch(err => console.log(err, "metadata"));
   };
+  const getSeoMetaData = () => {
+    const catId = params.category === "appliances-rental" ? 26 : 27;
+    baseInstance
+      .get(endPoints.seoMetaData(nameOfCity.toLowerCase(), catId))
+      .then(res => {
+        setMetaApiData(res?.data?.data);
+      })
+      .catch(err => console.log(err, "error"));
+  };
   useEffect(() => {
-    getMetaData();
+    if (
+      params.category === "appliances-rental" ||
+      params.category === "furniture-rental"
+    ) {
+      getSeoMetaData();
+    } else {
+      getMetaData();
+    }
   }, []);
   return (
     <CategoryPageLayout cityName={nameOfCity} metaData={metaApiData}>
