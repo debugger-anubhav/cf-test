@@ -49,6 +49,8 @@ export const endPoints = {
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
   categoryMetaData: "fc-city-category-datas/getCategoryPageData",
+  seoMetaData: (cityName, catId) =>
+    `fc-city-category-seo-data/getSeoPageMetaData?cityName=${cityName}&categoryId=${catId}`,
   searchKey: (key = "", cityId = "", sort = "") => {
     return `fc-products/search?searchKey=${key.trim()}&&cityId=${cityId}&sortKey=${sort}`;
   },
