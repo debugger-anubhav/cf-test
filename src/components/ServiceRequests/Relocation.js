@@ -461,22 +461,6 @@ function Relocation({prevScreen, data}) {
                 </div> */}
                 </div>
               </div>
-              {/* <div className={styles.bottom_row}>
-            <button
-              type="submit"
-              className={`${styles.proceed_btn} bg-none ${
-                !formik.isValid
-                  ? "!bg-[#FFDF85] !cursor-not-allowed"
-                  : `!bg-F6B704`
-              }`}
-              onClick={() => {
-                if (!formik.isValid) {
-                  console.log("errors", formik.errors);
-                }
-              }}>
-              Create request <ForwardArrowWithLine />
-            </button>
-          </div> */}
             </Form>
           )}
         </Formik>
