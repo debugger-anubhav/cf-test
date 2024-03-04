@@ -48,7 +48,7 @@ export const endPoints = {
   uploadFinancialDoc: "fc-user-uploaded-docs/uploadFinancialDoc",
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
-
+  categoryMetaData: "fc-city-category-datas/getCategoryPageData",
   searchKey: (key = "", cityId = "", sort = "") => {
     return `fc-products/search?searchKey=${key.trim()}&&cityId=${cityId}&sortKey=${sort}`;
   },

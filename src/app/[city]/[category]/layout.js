@@ -9,18 +9,17 @@ let pageDescription = "";
 //   title: "",
 //   description: "",
 // };
-export default function CategoryPageLayout({children, cityName}) {
+export default function CategoryPageLayout({children, cityName, metaData}) {
   const pageTitle = `Rent Premium Furniture & Home Appliances in ${cityName} - Cityfurnish`;
-  //   pageDescription = `Get home furniture on rent in ${cityName}. Check our rental furniture range for bedroom, living room, dining room and rent furniture from the comfort of your home.`;
   pageDescription = `Make your home with us. Rent furniture and home appliances online from  ${cityName}'s leading furniture rental company. Free home delivery and installation.`;
-
+  console.log(metaData, "metadataaaaaaaaaaaaaaaaaa");
   return (
     <html lang="en">
       <head>
         {cityName && (
           <>
-            <title>{pageTitle}</title>
-            <meta name="title" content={pageTitle} />
+            <title>{metaData && metaData?.cat_meta_title}</title>
+            <meta name="title" content={metaData?.cat_meta_title} />
             <meta name="description" content={pageDescription} />
           </>
         )}

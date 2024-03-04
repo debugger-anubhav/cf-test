@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {useParams} from "next/navigation";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
@@ -105,13 +105,28 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 export default function Page() {
   const params = useParams();
   const nameOfCity =
     (params?.city).charAt(0).toUpperCase() + (params?.city).slice(1);
+  const [metaApiData, setMetaApiData] = useState(null);
+  const getMetaData = () => {
+    baseInstance
+      .post(endPoints.categoryMetaData, {
+        cityName: nameOfCity.toLowerCase(),
+        seourl: params?.category,
+      })
+      .then(res => setMetaApiData(res?.data?.data[0]))
+      .catch(err => console.log(err, "metadata"));
+  };
+  useEffect(() => {
+    getMetaData();
+  }, []);
   return (
-    <CategoryPageLayout cityName={nameOfCity}>
+    <CategoryPageLayout cityName={nameOfCity} metaData={metaApiData}>
       <div className="large_layout">
         <AnnouncementBar />
         <Header />
