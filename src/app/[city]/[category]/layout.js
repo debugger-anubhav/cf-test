@@ -10,7 +10,7 @@ let pageDescription = "";
 //   description: "",
 // };
 export default function CategoryPageLayout({children, cityName, metaData}) {
-  const pageTitle = `Rent Premium Furniture & Home Appliances in ${cityName} - Cityfurnish`;
+  // const pageTitle = `Rent Premium Furniture & Home Appliances in ${cityName} - Cityfurnish`;
   pageDescription = `Make your home with us. Rent furniture and home appliances online from  ${cityName}'s leading furniture rental company. Free home delivery and installation.`;
   console.log(metaData, "metadataaaaaaaaaaaaaaaaaa");
   return (

@@ -21,6 +21,8 @@ import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct"
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
 import CategoryPageLayout from "./layout";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 const Subproduct = loadable(
   () => import("@/components/AllProduct/SubProduct/Subproduct"),
@@ -105,8 +107,6 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
 
 export default function Page() {
   const params = useParams();
