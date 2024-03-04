@@ -110,7 +110,7 @@ function ServiceRequets() {
               }}
               classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
-              <div className="flex w-full md:gap-4 2xl:gap-8 overflow-auto">
+              <div className="flex w-full md:gap-8 overflow-auto">
                 <div className="w-full">
                   <div className={styles.mobile_close_icon}>
                     <div
@@ -135,7 +135,7 @@ function ServiceRequets() {
                     onClick={() => {
                       setOpenDrawer(false);
                     }}
-                    className="h-[24px]">
+                    className="h-[24px] mt-12 mr-8">
                     <Close
                       color={"#45454A"}
                       size={24}

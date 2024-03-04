@@ -28,11 +28,14 @@
 .des_wrapper {
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
+/* .rightDrawer {
+  @apply md:p-12 px-4 py-6 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
+} */
 .rightDrawer {
-  @apply md:p-12 px-4 py-6 pr-8 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
+  @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
 }
 .content_wrapper {
-  @apply flex w-full flex-col sm:pb-[50px] pb-[55px] overflow-scroll h-full;
+  @apply flex w-full flex-col sm:pb-[50px] pb-[55px] mb-6 overflow-scroll h-full px-4 md:py-12 md:pl-12 md:pr-0;
 }
 .main_heading {
   @apply flex font-Poppins font-medium lg:text-24 text-20 lg:tracking-[-0.48px] tracking-[-0.4px] leading-[32px] w-full gap-2 text-45454A items-center;
@@ -54,17 +57,24 @@
   @apply flex flex-col md:w-[530px] 3xl:w-[680px] w-full max-w-full right-0 items-center fixed bottom-0 z-[9999] bg-white;
   box-shadow: 0px -1px 4px 0px #00000040;
 }
+.bottom_row_formik {
+  @apply absolute flex flex-col justify-center px-4 md:pl-12 md:pr-[89px] items-center -mx-4 md:-mx-12 bottom-0 z-[9999] w-full bg-white py-4 md:pt-8 md:pb-6;
+  box-shadow: 0px -1px 4px 0px #00000040;
+}
 .bottom_line {
   @apply bg-DDDDDF;
 }
 .proceed_btn {
   @apply lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] lg:mb-6 mb-4 outline-none font-Poppins mx-4 md:mx-0;
 }
+.form_submit_btn {
+  @apply w-full rounded-lg bg-F6B704 font-medium text-222 px-8 min-h-[48px] h-12 lg:h-14 flex items-center justify-center gap-[10px] outline-none font-Poppins;
+}
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
 }
 .request_type {
-  @apply lg:text-16 lg:tracking-0.3    text-14 text-5774AC font-medium font-Poppins;
+  @apply lg:text-16 lg:tracking-0.3  text-14 text-5774AC font-medium font-Poppins;
 }
 .divider_row {
   @apply flex w-full items-center;
