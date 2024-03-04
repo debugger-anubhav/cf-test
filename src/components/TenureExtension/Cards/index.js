@@ -27,6 +27,7 @@ export const MonthlyCard = ({
   orderId,
   setLoading,
   dealCodeNumber,
+  isCityShieldApplied,
 }) => {
   const DiscountPoints = [
     "No Discount",
@@ -48,7 +49,10 @@ export const MonthlyCard = ({
     baseInstance
       .get(endPoints.tenureExtension, {
         params: {
-          cfCareValue: monthlyCardIsChecked ? 1 : 0,
+          // cfCareValue: monthlyCardIsChecked ? 1 : 0,
+          cfCareValue: isCityShieldApplied ? 0 : monthlyCardIsChecked ? 1 : 0,
+
+          // cfCareValue:monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
           dealCodeNumber,
           month: selectedOption,
         },
@@ -203,6 +207,14 @@ export const MonthlyCard = ({
               </p>
             );
           })}
+          <p className={styles.discount_point}>
+            {apiData?.isCityShieldApplied && (
+              <span className="flex gap-1">
+                <RightIcon color={"#2D9469"} size={20} />
+                City Shield
+              </span>
+            )}
+          </p>
         </div>
       </div>
       <div className={styles.divider}></div>
@@ -245,7 +257,8 @@ export const MonthlyCard = ({
           </div>
           <p className={styles.cityshield_text}>
             Get a damage waiver at ONLY <span className="font-Inter">₹</span>
-            56/mo with City Shield.
+            <span> {Number(apiData?.cityShieldAmount).toFixed(2)}</span>/mo with
+            City Shield.
             <span className={styles.learn_more}>Learn more</span>
           </p>
         </div>
