@@ -148,6 +148,21 @@ function TransferOwnership({prevScreen, data}) {
               primaryAddress={primaryAddress}
               setId={setId}
             />
+            <div className={styles.bottom_row_formik}>
+              <button
+                className={`!my-0 !w-full ${styles.plain_btn}`}
+                onClick={async () => {
+                  try {
+                    makeDefaultAddress(id);
+
+                    setShowAddressFields(true);
+                  } catch (error) {
+                    console.error(error);
+                  }
+                }}>
+                Proceed <ForwardArrow />
+              </button>
+            </div>
           </div>
         ) : (
           <div>
@@ -370,11 +385,46 @@ function TransferOwnership({prevScreen, data}) {
                         </div>
                       )}
                     </div>
+                    <div>
+                      {addressDrawer ? (
+                        <div className={styles.bottom_row_formik}>
+                          <button
+                            className={styles.plain_btn}
+                            onClick={async () => {
+                              try {
+                                makeDefaultAddress(id);
+
+                                setShowAddressFields(true);
+                              } catch (error) {
+                                console.error(error);
+                              }
+                            }}>
+                            Proceed <ForwardArrow />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className={styles.bottom_row_formik}>
+                          <button
+                            className={`${styles.form_submit_btn}
+                        ${
+                          !formikRef?.current?.isValid
+                            ? "!bg-[#FFDF85] !cursor-not-allowed"
+                            : `!bg-F6B704`
+                        }
+                        `}
+                            onClick={() => {
+                              formikRef?.current?.submitForm();
+                            }}>
+                            Create request <ForwardArrowWithLine />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </Form>
                 )}
               </Formik>
               {!showAddressFields && (
-                <div>
+                <div className="md:mb-6">
                   <p className={styles.main_sub_heading}>Address</p>
                   <div
                     className={` ${styles.request_info_div} border-b `}
@@ -406,7 +456,7 @@ function TransferOwnership({prevScreen, data}) {
           </div>
         )}
       </div>
-      <div>
+      {/* <div>
         {addressDrawer ? (
           <div className={styles.bottom_row}>
             <button
@@ -414,7 +464,7 @@ function TransferOwnership({prevScreen, data}) {
               onClick={async () => {
                 try {
                   makeDefaultAddress(id);
-                  //   toggleDrawer();
+
                   setShowAddressFields(true);
                 } catch (error) {
                   console.error(error);
@@ -425,7 +475,6 @@ function TransferOwnership({prevScreen, data}) {
           </div>
         ) : (
           <div className={styles.bottom_row}>
-            {/* <div className={styles.bottom_line}></div> */}
             <button
               className={`${styles.transfer_create_btn}
                         ${
@@ -434,8 +483,6 @@ function TransferOwnership({prevScreen, data}) {
                             : `!bg-F6B704`
                         }
                         `}
-              type="submit"
-              // disabled={!formik.isValid }
               onClick={() => {
                 formikRef?.current?.submitForm();
               }}>
@@ -443,7 +490,7 @@ function TransferOwnership({prevScreen, data}) {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
     </>
   );
 }

@@ -115,11 +115,34 @@ function CancelMandate({prevScreen, data, heading}) {
                   rows={2}
                 />
               </div>
+              <button
+                type="submit"
+                className={`${styles.proceed_btn}  !w-fit ${
+                  !formikRef?.current?.isValid
+                    ? "!bg-[#FFDF85] !cursor-not-allowed "
+                    : ``
+                } !hidden md:!flex`}>
+                Create request <ForwardArrowWithLine />
+              </button>
+              <div className={`${styles.bottom_row_formik} !flex md:!hidden`}>
+                <div className="flex w-full">
+                  <button
+                    type="submit"
+                    className={`${styles.form_submit_btn}  !w-full ${
+                      !formikRef?.current?.isValid
+                        ? "!bg-[#FFDF85] !cursor-not-allowed"
+                        : ``
+                    }`}
+                    onClick={() => formikRef?.current?.submitForm()}>
+                    Create request <ForwardArrowWithLine />
+                  </button>
+                </div>
+              </div>
             </Form>
           )}
         </Formik>
       </div>
-      <button
+      {/* <button
         type="submit"
         className={`${styles.proceed_btn}  !w-fit ${
           !formikRef?.current?.isValid
@@ -141,7 +164,7 @@ function CancelMandate({prevScreen, data, heading}) {
             Create request <ForwardArrowWithLine />
           </button>
         </div>
-      </div>
+      </div> */}
     </>
   );
 }
