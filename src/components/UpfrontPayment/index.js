@@ -24,6 +24,7 @@ function UpfrontPayment() {
   const [apiData, setApiData] = useState(null);
   const [razorpayData, setRazorpayData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [skeletonLoader, setSkeletonLoader] = useState(true);
 
   const upfrontApiCall = () => {
     baseInstance
@@ -31,8 +32,12 @@ function UpfrontPayment() {
       .then(res => {
         setApiData(res?.data?.data?.data);
         setRazorpayData(res?.data?.data);
+        setSkeletonLoader(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setSkeletonLoader(false);
+      });
   };
   useEffect(() => {
     upfrontApiCall();
@@ -124,7 +129,7 @@ function UpfrontPayment() {
         <div className={styles.upfront_data}>
           <p className={styles.heading}>
             Your Order ID
-            {apiData ? (
+            {!skeletonLoader ? (
               <span className={styles.heading_span}>
                 : #{apiData?.order_id}
               </span>
@@ -134,7 +139,7 @@ function UpfrontPayment() {
           </p>
           <p className={styles.heading}>
             Tenure
-            {apiData ? (
+            {!skeletonLoader ? (
               <span className={styles.heading_span}>: {apiData?.tenure}</span>
             ) : (
               <Skeleton variant="text" width={100} className="ml-3" />
@@ -142,7 +147,7 @@ function UpfrontPayment() {
           </p>
           <p className={styles.heading}>
             Upfront amount
-            {apiData ? (
+            {!skeletonLoader ? (
               <span className={styles.heading_span}>
                 {" "}
                 : <span className="font-Inter">₹</span>
