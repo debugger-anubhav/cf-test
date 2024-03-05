@@ -129,7 +129,7 @@ const SearchCard = ({
   }, []);
 
   return (
-    <div className={`${styles.card_wrapper} `}>
+    <div className={`${styles.wrapper} `}>
       <LoginModal
         closeModal={() => toggleLoginModal(false)}
         isModalOpen={loginModal}
@@ -173,13 +173,13 @@ const SearchCard = ({
         <div className={styles.card_price_wrap}>
           <h3 className={`${styles.currentPrice} flex`}>
             <span className={styles.rupeeIcon}>₹</span>
-            {`${currentPrice} /mo`}
+            {`${currentPrice}/mo`}
           </h3>
 
           {currentPrice < originalPrice && (
             <h3 className={`${styles.originalPrice} flex`}>
               <span className={styles.rupeeIcon}>₹</span>
-              {`${originalPrice} /mo`}
+              {`${originalPrice}/mo`}
             </h3>
           )}
         </div>
