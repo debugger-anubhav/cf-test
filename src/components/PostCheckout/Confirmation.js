@@ -54,9 +54,9 @@ const PaymentConfirmation = () => {
         <FaCheck color={"white"} className={styles.checkIcon} />
       </div>
 
-      <p className={styles.head}>
+      <h1 className={styles.head}>
         Congratulations! We have received your order.
-      </p>
+      </h1>
       <div className={styles.details_wrapper}>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>

@@ -21,9 +21,9 @@ const PaymentSuccess = () => {
         <FaCheck color={"white"} className={styles.checkIcon} />
       </div>
 
-      <p className={styles.head}>
+      <h1 className={styles.head}>
         Congratulations! Your transaction is successful.
-      </p>
+      </h1>
       <div className="mt-6 xl:mt-8">
         <p className={styles.desc}>
           You can note down the following details for future reference.
