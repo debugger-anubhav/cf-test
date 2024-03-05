@@ -114,7 +114,7 @@ function UpfrontPayment() {
   return (
     <div className={styles.wrapper}>
       {loading && <LoaderComponent loading={loading} />}
-      <p className={styles.main_heading}>{Heading}</p>
+      <h1 className={styles.main_heading}>{Heading}</h1>
       {apiData?.payment_status === 2 ? (
         <>
           <FaCircleInfo

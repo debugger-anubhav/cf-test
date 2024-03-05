@@ -324,7 +324,7 @@ function CustomerPayment() {
       {loading && <LoaderComponent loading={loading} />}
       <div>
         <BreadCrumbsCommon currentPage={"Customer Payment"} />
-        <div className={styles.main_heading}> Pay Your Dues</div>
+        <h1 className={styles.main_heading}> Pay Your Dues</h1>
         {loadingSkeleton ? (
           <div className="w-2/3">
             <FormSkeleton />

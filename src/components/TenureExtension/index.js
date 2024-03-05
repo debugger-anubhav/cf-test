@@ -95,7 +95,7 @@ function TenureExtension() {
   return (
     <div className={styles.wrapper}>
       {loading && <LoaderComponent loading={loading} />}
-      <div className={styles.main_heading}>Tenure Extension</div>
+      <h1 className={styles.main_heading}>Tenure Extension</h1>
       <div className={styles.order_row}>
         Your Order ID:
         <span className="font-medium ml-2">#{params?.orderId}</span>

@@ -40,7 +40,7 @@ const Document = () => {
 
   return (
     <div className={style.conatiner_wrapper}>
-      <div className={style.heading}>Order:#{orderId}</div>
+      <h1 className={style.heading}>Order:#{orderId}</h1>
       <div className={style.sub_heading}>
         Documentation stage:
         {apiData?.autoPay === "true" ? (

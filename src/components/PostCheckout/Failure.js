@@ -43,9 +43,9 @@ const PaymentFailure = () => {
         <ImCross color={"white"} className={styles.checkIcon} />
       </div>
 
-      <p className={styles.head}>
+      <h1 className={styles.head}>
         Oops! Your payment couldn’t be processed. Please try again.
-      </p>
+      </h1>
 
       <div className={styles.fail_desc}>
         <p className={styles.desc}>
