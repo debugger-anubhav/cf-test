@@ -12,9 +12,9 @@ const PostCityshield = () => {
       <BreadCrumbsCommon currentPage={"Citysheild"} />
       <div>
         <FaInfoCircle className={styles.icon} />
-        <p className={commonStyles.head}>
+        <h1 className={commonStyles.head}>
           Looks like City Shield is already active for your order.
-        </p>
+        </h1>
         <p className={styles.desc}>
           If you have any confusion or want more assistance, you can contact us
           at{" "}

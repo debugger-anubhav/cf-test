@@ -35,7 +35,7 @@ const SubCategorySection = () => {
                   ? styles.heading_container_home_furniture
                   : styles.heading_container
               }>
-              <h2 className={styles.heading}>{item?.cat_name}</h2>
+              <h1 className={styles.heading}>{item?.cat_name}</h1>
               <div className={styles.viewButton}>
                 <a
                   href={`/${homePageReduxData?.cityName
