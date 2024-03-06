@@ -24,7 +24,7 @@ import {baseInstance} from "@/network/axios";
 export const MonthlyCard = ({
   monthlyCardIsChecked,
   setmonthlyCardIsChecked,
-  orderId,
+  recurringId,
   setLoading,
   dealCodeNumber,
   isCityShieldApplied,
@@ -49,12 +49,10 @@ export const MonthlyCard = ({
     baseInstance
       .get(endPoints.tenureExtension, {
         params: {
-          // cfCareValue: monthlyCardIsChecked ? 1 : 0,
           cfCareValue: isCityShieldApplied ? 0 : monthlyCardIsChecked ? 1 : 0,
-
-          // cfCareValue:monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
           dealCodeNumber,
           month: selectedOption,
+          recurringId,
         },
       })
       .then(res => {
@@ -93,6 +91,7 @@ export const MonthlyCard = ({
       source: "extension",
       dealCodeNumber,
       cfValue: monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
+      recurringId,
     };
     baseInstance
       .post(endPoints.kycPage.updatePaymentStatus, body)
@@ -128,6 +127,7 @@ export const MonthlyCard = ({
       mode: modeOfPayment,
       cf_value: monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
       source: "extension",
+      recurringId,
     });
     if (!result) {
       alert("Server error. Are you online?");

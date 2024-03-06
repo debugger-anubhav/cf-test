@@ -29,3 +29,12 @@
   @apply font-Poppins font-medium text-[#45454A];
   font-size: 20px !important;
 }
+.style_dynamic_keyword_SV8RQ ol li,
+.style_dynamic_keyword_SV8RQ ul li {
+  padding-left: 5px;
+  line-height: 28px;
+  font-family: Poppins, sans-serif !important;
+  font-size: 16px !important;
+  color: #71717a !important;
+  text-align: justify !important;
+}
