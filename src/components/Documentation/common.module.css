@@ -117,7 +117,6 @@
   @apply -bottom-[10px] w-full rounded-lg;
   position: relative;
   height: 2px;
-  background: #2d9469;
   transform: translate(0, 100%);
 }
 
@@ -128,17 +127,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: white;
   border-radius: 8px;
   animation: animate 1.5s linear;
 }
 
 @keyframes animate {
   100% {
-    left: 100%;
+    width: 100%;
+    background: transparent;
+  }
+  99.999% {
+    background: #2d9469;
   }
   0% {
-    left: 0;
+    width: 0%;
+    background: #2d9469;
   }
 }
 
