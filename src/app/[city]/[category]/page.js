@@ -17,25 +17,24 @@
 // }
 import React from "react";
 import CatAnnouncement from "./CatAnnouncement";
-import Header from "@/components/Common/Header";
+import CatHeader from "./CatHeader";
 import CatMenu from "./CatMenu";
+import CatSubHeader from "./CatSubHeader";
 
 async function create() {
   const data = "hello";
-  console.log("Data fetched:", data);
   return data;
 }
 
 export default async function Page() {
   const data = await create();
-
+  console.log(data);
   return (
     <>
-      <p>{data}</p>
-      {/* <div>pageeeee {data}</div> */}
       <CatAnnouncement />
-      <Header />
+      <CatHeader />
       <CatMenu />
+      <CatSubHeader />
     </>
   );
 }
