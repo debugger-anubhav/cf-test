@@ -191,6 +191,8 @@ export const endPoints = {
   getFeedbackData: "ivr-feedbacks/getFeedbackData",
   careerPageData: "fc-jobs/getCareerPageContent",
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
+  getDealCodeNumberFromRecId: recId =>
+    `fc-zb-recurring-invoices/getRecurringDealCodeNumber?recurringId=${recId}`,
   tenureExtensionCreateOrder: "fc-payments/createOrder",
   upfrontPayment: "upfront-collection-statuses/collectUpfrontPayment",
   documentationApprove: id =>
