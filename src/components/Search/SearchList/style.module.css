@@ -130,16 +130,16 @@
   @apply text-[#597492] font-Poppins  text-12  font-medium leading-6 underline;
 }
 /* .popover_wrapper{
-    @apply !left-[90px] bg-red-400;
+    @apply !left-[90px] bg-red-400;`
   } */
 
 .main_container {
-  @apply flex flex-wrap lg:gap-[10px] md:grid xl:grid-cols-3 md:grid-cols-2 justify-center md:justify-normal lg:my-4;
+  @apply flex flex-wrap lg:gap-[10px] md:grid lg:grid-cols-3 md:grid-cols-2 justify-center md:justify-normal lg:my-4;
 
   /* grid-template-columns: 1 auto auto; */
 }
 .card_box_product {
-  @apply my-4 md:p-4 bg-white w-full last-screen:mx-auto;
+  @apply my-4 md:p-4 bg-white last-screen:mx-auto lg:w-full md:w-[20rem] sm:w-[18rem] w-full cursor-pointer;
   cursor: pointer;
 }
 .card_box_product:hover {

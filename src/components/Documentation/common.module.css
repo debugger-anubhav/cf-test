@@ -75,9 +75,6 @@
 .saveBtn:disabled {
   background: #ffdf85;
 }
-/* .basicFileInput{
-
-} */
 .basicFileInput::-webkit-file-upload-button {
 }
 .basicErrorStyles {
@@ -85,7 +82,6 @@
 }
 .dropdown_container {
   @apply bg-white w-full max-h-[90%] md:max-h-full h-min absolute md:top-1/2 left-1/2 md:transform -translate-x-1/2 md:-translate-y-1/2 rounded-t-3xl md:rounded-none bottom-0 shadow-lg;
-  /* width: calc(100% - 32px); */
 }
 .close_icon {
   @apply absolute md:static -top-12 cursor-pointer bg-white rounded-full p-1 md:p-0 right-6;
@@ -93,7 +89,6 @@
 .close_icon_btn {
   @apply flex justify-start flex-col;
 }
-
 .options {
   @apply hidden absolute bg-white border-b  list-none p-0;
   border-bottom: 1px solid var(--grey-grey-300, #dddddf);
@@ -118,56 +113,10 @@
   font-weight: 500;
   line-height: normal;
 }
-/* .errorTxt {
-  @apply mx-4 md:ml-16;
-} */
-/* .correctFile {
-  @apply border border-[#2D9469] relative md:bottom-[-13px] bottom-[-14px] w-full rounded-lg;
-} */
-
 .correctFile {
   @apply -bottom-[10px] w-full rounded-lg;
   position: relative;
-  width: 100%;
   height: 2px;
-  /* overflow: hidden; */
-}
-
-.correctFile::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px; /* Adjust the height of the line as needed */
-  background-color: #2d9469;
-  border-radius: 8px;
-  animation: slideAnimation 2s linear forwards; /* Adjust the duration as needed */
-}
-
-@keyframes slideAnimation {
-  100% {
-    left: 100%;
-  }
-  0% {
-    left: 0;
-  }
-  /* 0% {
-    width: 0;
-  }
-  99.9999999% {
-    width: 100%;
-    background-color: #2d9469;
-  }
-  100% {
-    width: 0;
-  } */
-}
-
-.correctFile {
-  width: 100%;
-  height: 2px;
-  background: #2d9469;
   transform: translate(0, 100%);
 }
 
@@ -178,16 +127,21 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: white;
+  border-radius: 8px;
   animation: animate 1.5s linear;
 }
 
 @keyframes animate {
   100% {
-    left: 100%;
+    width: 100%;
+    background: transparent;
+  }
+  99.999% {
+    background: #2d9469;
   }
   0% {
-    left: 0;
+    width: 0%;
+    background: #2d9469;
   }
 }
 
