@@ -20,7 +20,7 @@ function MidTermCard({
   items,
   isChecked,
   setIsChecked,
-  orderId,
+  recurringId,
   setLoading,
   dealCodeNumber,
   isCityShieldApplied,
@@ -61,13 +61,14 @@ function MidTermCard({
     setLoading(true);
     const body = {
       razorpayPaymentId: res.razorpay_payment_id,
-      dealCodeNumber: orderId,
+      dealCodeNumber,
       razorpayOrderId: res.razorpay_order_id,
       razCustomerId: customerId,
       razorpaySignature: res.razorpay_signature,
       mode: "extension",
       cf_value: isChecked && !apiData?.isCityShieldApplied ? 1 : 0,
       id: recId,
+      recurringId,
     };
     try {
       const result = await baseInstance.post(
@@ -100,10 +101,11 @@ function MidTermCard({
     const result = await baseInstance.post(
       endPoints.tenureExtensionCreateOrder,
       {
-        dealCodeNumber: parseInt(orderId),
+        dealCodeNumber,
         mode: "extension",
         tenure: selectedOptionPer?.value,
         cf_value: isChecked && !apiData?.isCityShieldApplied ? 1 : 0,
+        recurringId,
       },
     );
     if (!result) {
@@ -152,6 +154,7 @@ function MidTermCard({
           cfCareValue: isCityShieldApplied ? 0 : isChecked ? 1 : 0,
           dealCodeNumber,
           month: selectedOptionPer.value,
+          recurringId,
         },
       })
       .then(res => {

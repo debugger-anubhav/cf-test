@@ -17,7 +17,8 @@ function TenureExtension() {
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
   const [isCityShieldApplied, setIsCityShieldApplied] = useState(null);
-  const [calledParantApi, setCalledParantApi] = useState(false);
+  const [calledparentApi, setCalledparentApi] = useState(false);
+  const [dealCodeNumber, setDealCodeNumber] = useState();
 
   const CardData = [
     {
@@ -61,28 +62,43 @@ function TenureExtension() {
     Array(CardData.length).fill(true),
   );
   console.log(isChecked, "checking");
-  const parantApi = () => {
+  const parentApi = async orderId => {
     baseInstance
       .get(endPoints.tenureExtension, {
         params: {
-          dealCodeNumber: params?.orderId,
+          dealCodeNumber: orderId,
+          recurringId: params?.recurringId,
         },
       })
       .then(res => {
         if (res?.data?.data?.totalPrice === 0) router.push("/");
         else {
           setIsCityShieldApplied(res?.data?.data?.isCityShieldApplied);
-          setCalledParantApi(true);
+          setCalledparentApi(true);
         }
       })
       .catch(err => {
         console.log(err);
-        setCalledParantApi(true);
+        setCalledparentApi(true);
       });
   };
 
+  const getDealCodeNumber = async () => {
+    try {
+      const response = await baseInstance.get(
+        endPoints.getDealCodeNumberFromRecId(params?.recurringId),
+      );
+      console.log(response, "responses");
+      setDealCodeNumber(response?.data?.data?.dealcodenumber);
+      parentApi(response?.data?.data?.dealcodenumber);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    parantApi();
+    getDealCodeNumber();
+    // parentApi();
   }, []);
 
   const handleSetIsChecked = (index, isChecked) => {
@@ -98,17 +114,17 @@ function TenureExtension() {
       <h1 className={styles.main_heading}>Tenure Extension</h1>
       <div className={styles.order_row}>
         Your Order ID:
-        <span className="font-medium ml-2">#{params?.orderId}</span>
+        <span className="font-medium ml-2">#{dealCodeNumber}</span>
       </div>
-      {calledParantApi ? (
+      {calledparentApi ? (
         <div className="my-8 flex flex-wrap gap-8 md:justify-start justify-center">
           <LongTermCard
             items={CardData[0]}
             isChecked={isCheckedArray[0]}
             setIsChecked={isChecked => handleSetIsChecked(0, isChecked)}
-            orderId={params?.orderId}
+            recurringId={params?.recurringId}
             setLoading={setLoading}
-            dealCodeNumber={params?.orderId}
+            dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
 
@@ -116,26 +132,26 @@ function TenureExtension() {
             items={CardData[1]}
             isChecked={isCheckedArray[1]}
             setIsChecked={isChecked => handleSetIsChecked(1, isChecked)}
-            orderId={params?.orderId}
+            recurringId={params?.recurringId}
             setLoading={setLoading}
-            dealCodeNumber={params?.orderId}
+            dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
           <ShortTermCard
             items={CardData[2]}
             isChecked={isCheckedArray[2]}
             setIsChecked={isChecked => handleSetIsChecked(2, isChecked)}
-            orderId={params?.orderId}
+            recurringId={params?.recurringId}
             setLoading={setLoading}
-            dealCodeNumber={params?.orderId}
+            dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
           <MonthlyCard
-            dealCodeNumber={params?.orderId}
+            dealCodeNumber={dealCodeNumber}
             monthlyCardIsChecked={monthlyCardIsChecked}
             setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
             isCityShieldApplied={isCityShieldApplied}
-            orderId={params?.orderId}
+            recurringId={params?.recurringId}
             setLoading={setLoading}
           />
         </div>
