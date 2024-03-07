@@ -24,6 +24,7 @@ import HappySubscribers from "@/components/SSRPageSeo/SsrHappySubscribers";
 import FrequentlyAskedQuestions from "@/components/SSRPageSeo/SsrFrequentlyAskedQuestions";
 import TextContent from "@/components/SSRPageSeo/SsrTextContent";
 import Footer from "@/components/SSRPageSeo/SsrFooter";
+import Subproduct from "./RentAllProducts";
 
 export async function getServerSideProps(context) {
   const {nameOfCity, category} = context.params;
@@ -121,8 +122,7 @@ export default async function Page(params) {
         </div>
       ) : pageName === "rent" ? (
         <div>
-          {/* <Subproduct /> */}
-          "seconddddd"
+          <Subproduct />
         </div>
       ) : (
         <div>
