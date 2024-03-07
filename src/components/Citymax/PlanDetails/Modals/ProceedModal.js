@@ -44,10 +44,9 @@ const ProceedModal = ({
 
   const handleEmptyCart = async () => {
     try {
-      const response = await baseInstance.get(
+      await baseInstance.get(
         endPoints.cityMaxPage.deleteCartItems(userIdToUse),
       );
-      console.log(response, "res in emptycartt");
       dispatch(emptyCart());
       handleAddToCart();
     } catch (err) {

@@ -230,11 +230,11 @@ function CustomerPayment() {
             amount: values?.amount,
           };
           try {
-            const result = await baseInstance.post(
+            await baseInstance.post(
               endPoints.customerPayment.savePayment,
               body,
             );
-            console.log(result);
+
             dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
             dispatch(setPGTransactionID(response.razorpay_payment_id));
             dispatch(setAmountPaid(values.amount));

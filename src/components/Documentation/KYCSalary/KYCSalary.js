@@ -145,8 +145,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     allData.append("orderId", selectedOrderId);
     baseInstance
       .post(endPoints.uploadFinancialDoc, allData)
-      .then(res => {
-        console.log(res);
+      .then(() => {
         handleKycState(selectedOrderId);
         setDisableButton(false);
       })

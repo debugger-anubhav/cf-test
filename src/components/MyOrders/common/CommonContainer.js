@@ -135,7 +135,6 @@ const CommonContainer = ({
           id="image-gallery-container"
           onClick={() => {
             if (offlineCustomer) {
-              console.log("in iff");
               router.push(
                 `view-purchase-offline/${offlineUserId}/${item.dealCodeNumber}`,
               );

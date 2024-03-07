@@ -71,11 +71,7 @@ function MidTermCard({
       recurringId,
     };
     try {
-      const result = await baseInstance.post(
-        endPoints.addToCart.successPayment,
-        body,
-      );
-      console.log(result);
+      await baseInstance.post(endPoints.addToCart.successPayment, body);
       dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
       dispatch(setPGTransactionID(res.razorpay_payment_id));
       dispatch(setAmountPaid(amount));
@@ -91,7 +87,6 @@ function MidTermCard({
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
     );
-    console.log(res, " res in load script");
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");

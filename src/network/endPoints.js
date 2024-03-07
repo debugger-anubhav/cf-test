@@ -193,6 +193,8 @@ export const endPoints = {
   tenureExtension: "fc-payments/getTenureExtenssionPrice",
   getDealCodeNumberFromRecId: recId =>
     `fc-zb-recurring-invoices/getRecurringDealCodeNumber?recurringId=${recId}`,
+  getRecurringIdFromOrderId: orderId =>
+    `fc-zb-recurring-invoices/getRecurringIdByDealCodeNumber?dealCodeNumber=${orderId}`,
   tenureExtensionCreateOrder: "fc-payments/createOrder",
   upfrontPayment: "upfront-collection-statuses/collectUpfrontPayment",
   documentationApprove: id =>

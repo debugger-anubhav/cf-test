@@ -257,17 +257,10 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
     } else {
       error.contactNumber = "";
     }
-
-    console.log(error, "oopopop");
     setFormErrors({...error});
-    console.log(formErrors, "formErrors");
     // handleContactBlur();
-    // console.log(error, "jjj");
-    // console.log(Object.values(formErrors), "Object.values(formErrors)");
-    // console.log(Object.values(error).filter(Boolean).length, "lllll");
     return !!Object.values(error).filter(Boolean).length;
   };
-  console.log(formErrors, "formErrors");
 
   const submitHandler = () => {
     const isError = validateForm();
