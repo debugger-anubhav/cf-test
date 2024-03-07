@@ -47,10 +47,7 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
 
   const handleEmptyCart = async () => {
     try {
-      const response = await baseInstance.get(
-        endPoints.cityMaxPage.deleteCartItems(userId),
-      );
-      console.log(response, "res in emptycartt");
+      await baseInstance.get(endPoints.cityMaxPage.deleteCartItems(userId));
       dispatch(emptyCart());
       handleCityChange();
     } catch (err) {

@@ -86,7 +86,6 @@ const ModalContentForSettingProfile = ({
                 className={styles.contact_input}
                 value={formik.values.email}
                 onChange={e => {
-                  console.log(e, "ee");
                   formik.setFieldValue("email", e.target.value);
                 }}
               />

@@ -88,11 +88,7 @@ const CityShieldPage = () => {
             mode: "cfCareUpgrade",
             id: data.dataObj.recID,
           };
-          const result = await baseInstance.post(
-            endPoints.addToCart.successPayment,
-            body,
-          );
-          console.log(result, "result");
+          await baseInstance.post(endPoints.addToCart.successPayment, body);
           router.push(`/city_shield/${orderId}`);
         }
       },

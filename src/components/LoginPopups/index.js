@@ -96,11 +96,10 @@ const LoginModal = ({
       mobile_number: number,
     };
     try {
-      const response = await baseInstance.post(
+      await baseInstance.post(
         endPoints.profileSettingPage.sentOtpToNumber,
         header,
       );
-      console.log(response, "response in number otpp");
       setModalCategory("verifyOtp");
     } catch (err) {
       console.log(err);
@@ -167,7 +166,6 @@ const LoginModal = ({
         }
       })
       .catch(err => {
-        console.log(err, "err in verif ctachhh");
         if (err?.response?.data?.message === "Invalid OTP")
           setOtpError(
             "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",

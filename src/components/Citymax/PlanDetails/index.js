@@ -336,8 +336,8 @@ const CitymaxPlanDetail = () => {
           router.push("/cart");
         } else showToastNotification("Something went wrong", 3);
       })
-      .catch(err => {
-        console.log(err);
+      .catch(() => {
+        // console.log(err);
       });
   };
 

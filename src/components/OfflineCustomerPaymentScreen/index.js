@@ -74,11 +74,8 @@ const OfflinePayment = () => {
             razorpaySignature: response.razorpay_signature,
           };
 
-          const res = await baseInstance.post(
-            endPoints.addToCart.successPayment,
-            data,
-          );
-          console.log(res, "result in handler");
+          await baseInstance.post(endPoints.addToCart.successPayment, data);
+
           router.push(`/order/confirmation/cart?oid=${params.orderId}`);
         }
       },

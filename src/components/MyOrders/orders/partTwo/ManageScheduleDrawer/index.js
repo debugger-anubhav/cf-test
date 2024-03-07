@@ -62,11 +62,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       zohoCaseId: slotData?.zohoCaseId,
     };
     try {
-      const response = await baseInstance.post(
-        endPoints.myOrdersPage.updateSlot,
-        body,
-      );
-      console.log(response, "responeseee");
+      await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
       closeModal();
     } catch (err) {
       console.log(err);

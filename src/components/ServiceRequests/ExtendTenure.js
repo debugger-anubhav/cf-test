@@ -3,11 +3,29 @@ import styles from "./style.module.css";
 import {BackIcon} from "@/assets/icon";
 import {useDispatch} from "react-redux";
 import {setServiceRequestDrawer} from "@/store/Slices";
+import {endPoints} from "@/network/endPoints";
+import {baseInstance} from "@/network/axios";
 
 function ExtendTenure({prevScreen, orderId}) {
   const dispatch = useDispatch();
-
   const [count, setCount] = useState(5);
+  const [recurringId, setRecurringId] = useState();
+
+  const getRecurringId = async () => {
+    try {
+      const response = await baseInstance.get(
+        endPoints.getRecurringIdFromOrderId(orderId),
+      );
+      console.log(response, "responses");
+      setRecurringId(response?.data?.data?.recurring_zo_id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    getRecurringId();
+  }, []);
+
   useEffect(() => {
     for (let i = 0; i <= 4; i++) {
       if (count > 1) {
@@ -16,7 +34,7 @@ function ExtendTenure({prevScreen, orderId}) {
         }, 1000);
       } else {
         window?.open(
-          `/upfront_tenure_extension/${orderId}`,
+          `/upfront_tenure_extension/${recurringId}`,
           "_blank",
           "noopener noreferrer",
         );
@@ -24,6 +42,7 @@ function ExtendTenure({prevScreen, orderId}) {
       }
     }
   }, [count]);
+
   return (
     <div className={`${styles.content_wrapper} !pb-0`}>
       <div className={styles.main_heading}>
