@@ -116,6 +116,16 @@
   color: #71717a !important;
 }
 
+.style_dynamic_keyword_SV8RQ ol li,
+.style_dynamic_keyword_SV8RQ ul li {
+  padding-left: 5px;
+  line-height: 28px;
+  font-family: Poppins, sans-serif !important;
+  font-size: 16px !important;
+  color: #71717a !important;
+  text-align: justify !important;
+}
+
 @media only screen and (max-width: 767px) {
   .dynamic_keyword h1,
   .dynamic_keyword h1 b,
