@@ -122,6 +122,7 @@ const OrderSummary = ({
                           item?.product_image?.split(",")[0]
                     }`}
                     loading="lazy"
+                    alt={item.product_name}
                   />
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
                 </div>
@@ -178,6 +179,7 @@ const OrderSummary = ({
                           p?.fc_product?.image?.split(",")?.[0]
                         }
                         loading="lazy"
+                        alt={p?.fc_product?.product_name}
                       />
                       <p className={styles.prod_name}>
                         {p?.fc_product?.product_name}
