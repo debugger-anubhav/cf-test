@@ -71,6 +71,7 @@ const ProductsDrawer = ({
                 src={productImageBaseUrl + swapProductDetails.img}
                 className={styles.swap_prod_img}
                 loading="lazy"
+                alt={swapProductDetails.name}
               />
               <SwapIcon className={styles.swap_icon} />
             </div>
