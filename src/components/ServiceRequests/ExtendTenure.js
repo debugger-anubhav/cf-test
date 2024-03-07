@@ -6,8 +6,20 @@ import {setServiceRequestDrawer} from "@/store/Slices";
 
 function ExtendTenure({prevScreen, orderId}) {
   const dispatch = useDispatch();
-
   const [count, setCount] = useState(5);
+
+  // const getDealCodeNumber = async () => {
+  //   try {
+  //     const response = await baseInstance.get(
+  //       endPoints.getDealCodeNumberFromRecId(params?.recurringId),
+  //     );
+  //     console.log(response, "responses");
+  //     setDealCodeNumber(response?.data?.data?.dealcodenumber);
+  //     parentApi(response?.data?.data?.dealcodenumber);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   useEffect(() => {
     for (let i = 0; i <= 4; i++) {
       if (count > 1) {

@@ -150,7 +150,6 @@ const MenuComp = ({list, heading, isActive, setIsActive}) => {
                 e.preventDefault();
                 setIsActive(e.target.value);
                 if (e.target.value === "KYC & Documentation") {
-                  console.log("inn");
                   window?.open(i?.link, "_self");
                 } else router.push(i?.link);
               }}

@@ -59,7 +59,7 @@ const EnquirySection = () => {
 
   const handleRecaptchaVerify = value => {
     // if (value) setIsVerified(true);
-    console.log(value);
+    // console.log(value);
   };
 
   const handleSubmit = async values => {
