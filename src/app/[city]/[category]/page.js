@@ -139,5 +139,8 @@ export async function generateMetadata({params}) {
   return {
     title: data?.data?.cat_meta_title,
     description: data?.data?.cat_meta_desc,
+    alternates: {
+      canonical: `/${params.city}/${params?.category}`,
+    },
   };
 }
