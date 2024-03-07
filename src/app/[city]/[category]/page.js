@@ -136,11 +136,23 @@ export default async function Page(params) {
 export async function generateMetadata({params}) {
   const data = await create(params);
   // console.log("metadtatadtdatdtadatatd", data.data);
+
   return {
     title: data?.data?.cat_meta_title,
     description: data?.data?.cat_meta_desc,
     alternates: {
       canonical: data?.data?.cat_header_code_snippet,
+    },
+    openGraph: {
+      url: data?.data?.cat_header_code_snippet,
+      title: data?.data?.cat_meta_title,
+      description: data?.data?.cat_meta_desc,
+      siteName: "Cityfurnish",
+      images: {
+        url: "",
+        width: 800,
+        height: 600,
+      },
     },
   };
 }
