@@ -91,44 +91,52 @@ async function create(params) {
 }
 
 export default async function Page(params) {
+  const metaData = await create(params?.params);
+
   const propParams = params?.params;
   const pageName = params?.params?.category;
+  // console.log(metaData,"pp")
   return (
     <>
-      <CatAnnouncement />
-      <CatHeader />
-      <CatMenu />
-      {pageName === "appliances-rental" || pageName === "furniture-rental" ? (
-        <div>
-          <HeroBanner />
-          <RentFurnitureAndAppliances params={propParams} />
-          <RecentlyViewedProduct />
-          <TrendingProducts params={propParams} />
-          <OffersAndCoupons />
-          <NewlyLaunched />
-          <DownloadForMobile />
-          <PreDesignCombos />
-          <HasselFreeServicesCards />
-          <LimetedPreiodDiscount />
-          <RentNowBanner params={propParams} />
-          <TryCityMax />
-          <CustomerRating />
-          <MediaCoverage />
-          <CombineSection />
-          <HappySubscribers params={propParams} page={pageName} />
-          <FrequentlyAskedQuestions params={propParams} />
-          <TextContent params={propParams} />
-          <Footer />
-        </div>
-      ) : pageName === "rent" ? (
-        <div>
-          <Subproduct />
-        </div>
-      ) : (
-        <div>
-          <CatSubHeader params={params?.params} />
-        </div>
-      )}
+      <head>
+        <meta name="Title" content={metaData?.data?.cat_meta_title} />
+      </head>
+      <body>
+        <CatAnnouncement />
+        <CatHeader />
+        <CatMenu />
+        {pageName === "appliances-rental" || pageName === "furniture-rental" ? (
+          <div>
+            <HeroBanner />
+            <RentFurnitureAndAppliances params={propParams} />
+            <RecentlyViewedProduct />
+            <TrendingProducts params={propParams} />
+            <OffersAndCoupons />
+            <NewlyLaunched />
+            <DownloadForMobile />
+            <PreDesignCombos />
+            <HasselFreeServicesCards />
+            <LimetedPreiodDiscount />
+            <RentNowBanner params={propParams} />
+            <TryCityMax />
+            <CustomerRating />
+            <MediaCoverage />
+            <CombineSection />
+            <HappySubscribers params={propParams} page={pageName} />
+            <FrequentlyAskedQuestions params={propParams} />
+            <TextContent params={propParams} />
+            <Footer />
+          </div>
+        ) : pageName === "rent" ? (
+          <div>
+            <Subproduct />
+          </div>
+        ) : (
+          <div>
+            <CatSubHeader params={params?.params} />
+          </div>
+        )}
+      </body>
     </>
   );
 }
@@ -152,6 +160,10 @@ export async function generateMetadata({params}) {
         url: "",
         width: 800,
         height: 600,
+      },
+      customMeta: {
+        name: "Title",
+        content: "abababababababababab",
       },
     },
   };
