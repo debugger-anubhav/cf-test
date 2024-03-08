@@ -6,7 +6,7 @@ import {
   hasselFreeSection,
 } from "@/assets/images";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
-import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+// import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 
@@ -726,11 +726,11 @@ export const BenefitPageData = [
 ];
 
 // for service request
-const userId = decrypt(getLocalStorage("_ga"));
-const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-const userIdToUse = userId || tempUserId;
+// const userId = decrypt(getLocalStorage("_ga"));
+// const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
+// const userIdToUse = userId || tempUserId;
 export const CreateRequestPayload = {
-  user_id: userIdToUse,
+  user_id: 12333333,
   deal_id: "",
   description: "",
   repair_details: "",

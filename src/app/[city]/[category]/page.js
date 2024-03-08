@@ -1,186 +1,166 @@
-"use client";
-
-import React, {useEffect, useState} from "react";
-import {useParams} from "next/navigation";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import HeroBanner from "@/components/Home/HeroBanner";
-import MenuList from "@/components/Common/MenuList";
-import Notifications from "@/components/Common/Notifications/Notification";
-import TextContent from "@/components/Common/TextContent";
-import SubHeaderSkeleton from "@/components/Category/SubHeader/Subheader/SubHeaderSkeleton";
-
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
-import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
-import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
-import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import {SubproductSkeleton} from "@/components/AllProduct/SubProduct/Subproduct";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
-import CategoryPageLayout from "./layout";
-import {baseInstance} from "@/network/axios";
+import React from "react";
+import CatAnnouncement from "./CatAnnouncement";
+import CatHeader from "./CatHeader";
+import CatMenu from "./CatMenu";
+import CatSubHeader from "./CatSubHeader";
 import {endPoints} from "@/network/endPoints";
+import CryptoJS from "crypto-js";
+import HeroBanner from "../../../components/SSRPageSeo/SsrHeroBanner";
+import RentFurnitureAndAppliances from "@/components/SSRPageSeo/SsrRentFurnitureAndAppliances";
+import RecentlyViewedProduct from "@/components/SSRPageSeo/SsrRecentlyViewedProduct";
+import TrendingProducts from "@/components/SSRPageSeo/SsrTrendingProducts";
+import OffersAndCoupons from "@/components/SSRPageSeo/SsrOffersAndCoupons";
+import NewlyLaunched from "@/components/SSRPageSeo/SsrNewlyLaunched";
+import DownloadForMobile from "@/components/SSRPageSeo/SsrDownloadForMobile";
+import PreDesignCombos from "@/components/SSRPageSeo/SsrPreDesignCombos";
+import HasselFreeServicesCards from "@/components/SSRPageSeo/SsrHasselFreeServicesCards";
+import LimetedPreiodDiscount from "@/components/SSRPageSeo/SsrLimetedPreiodDiscount";
+import RentNowBanner from "@/components/SSRPageSeo/SsrRentNowBanner";
+import TryCityMax from "@/components/SSRPageSeo/SsrTryCityMax";
+import CustomerRating from "@/components/SSRPageSeo/SsrCustomerRating";
+import MediaCoverage from "@/components/SSRPageSeo/SsrMediaCoverage";
+import CombineSection from "@/components/SSRPageSeo/SsrCombineSection";
+import HappySubscribers from "@/components/SSRPageSeo/SsrHappySubscribers";
+import FrequentlyAskedQuestions from "@/components/SSRPageSeo/SsrFrequentlyAskedQuestions";
+import TextContent from "@/components/SSRPageSeo/SsrTextContent";
+import Footer from "@/components/SSRPageSeo/SsrFooter";
+import Subproduct from "./RentAllProducts";
 
-const Subproduct = loadable(
-  () => import("@/components/AllProduct/SubProduct/Subproduct"),
-  {
-    fallback: <SubproductSkeleton />,
-  },
-);
-const SubHeader = loadable(
-  () => import("@/components/Category/SubHeader/Subheader/SubHeader"),
-  {
-    fallback: <SubHeaderSkeleton />,
-  },
-);
-const RentFurnitureAndAppliances = loadable(
-  () => import("@/components/Home/RentFurnitureAndAppliances"),
-  {
-    fallback: <RentFurnitureSkeleton />,
-  },
-);
-const RecentlyViewedProduct = loadable(
-  () => import("@/components/Home/RecentlyViewedProduct"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const OffersAndCoupons = loadable(
-  () => import("@/components/Home/OffersAndCoupons"),
-  {fallback: <OffersSkeleton />},
-);
-const NewlyLaunched = loadable(
-  () => import("@/components/Home/NewlyLaunched"),
-  {fallback: <NewlyLauncedSkeleton />},
-);
+export async function getServerSideProps(context) {
+  const {nameOfCity, category} = context.params;
+  try {
+    const data = await create(nameOfCity, category);
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
+}
 
-const DownloadForMobile = loadable(() =>
-  import("@/components/Home/DownloadForMobile"),
-);
-const PreDesignCombos = loadable(
-  () => import("@/components/Home/PredesignCombos"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const HasselFreeServicesCards = loadable(() =>
-  import("@/components/Home/HasselFreeServicesCards"),
-);
-const LimetedPreiodDiscount = loadable(
-  () => import("@/components/Home/LimetedPreiodDiscount"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const RentNowBanner = loadable(
-  () => import("@/components/Home/RentNowBanner"),
-  {fallback: <RentNowBannersSkeleton />},
-);
-const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-  fallback: <TryCityMaxSkeleton />,
-});
-const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-  fallback: <ProductRowSkeleton />,
-});
-const HappySubscribers = loadable(() =>
-  import("@/components/Home/HappySubscribers"),
-);
-const FrequentlyAskedQuestions = loadable(
-  () => import("@/components/Common/FrequentlyAskedQuestions"),
-  {
-    fallback: <FaqsSkeleton />,
-  },
-);
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-const CombineSection = loadable(() =>
-  import("@/components/Home/CombineSection"),
-);
-
-export default function Page() {
-  const params = useParams();
-  const nameOfCity =
-    (params?.city).charAt(0).toUpperCase() + (params?.city).slice(1);
-  const [metaApiData, setMetaApiData] = useState(null);
-  const getMetaData = () => {
-    baseInstance
-      .post(endPoints.categoryMetaData, {
-        cityName: nameOfCity.toLowerCase(),
-        seourl: params?.category,
-      })
-      .then(res => setMetaApiData(res?.data?.data[0]))
-      .catch(err => console.log(err, "metadata"));
+async function create(params) {
+  const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
+  const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
+  const createEncryptedHash = (text, secretKey) => {
+    const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
+    return encrypted;
   };
-  const getSeoMetaData = () => {
+  const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+
+  if (
+    params.category === "appliances-rental" ||
+    params.category === "furniture-rental"
+  ) {
     const catId = params.category === "appliances-rental" ? 26 : 27;
-    baseInstance
-      .get(endPoints.seoMetaData(nameOfCity.toLowerCase(), catId))
-      .then(res => {
-        setMetaApiData(res?.data?.data);
-      })
-      .catch(err => console.log(err, "error"));
-  };
-  useEffect(() => {
-    if (
-      params.category === "appliances-rental" ||
-      params.category === "furniture-rental"
-    ) {
-      getSeoMetaData();
-    } else {
-      getMetaData();
-    }
-  }, []);
+    const data = await fetch(
+      "https://test.rentofurniture.com/api/" +
+        endPoints.seoMetaData(params.city?.toLowerCase(), catId),
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Apikey: apiKey,
+        },
+      },
+    );
+    return data.json();
+  } else {
+    const data = await fetch(
+      "https://test.rentofurniture.com/api/" + endPoints.categoryMetaData,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Apikey: apiKey,
+        },
+        body: JSON.stringify({
+          cityName: params.city?.toLowerCase(),
+          seourl: params.category,
+        }),
+      },
+    );
+    return data.json();
+  }
+}
+
+export default async function Page(params) {
+  const metaData = await create(params?.params);
+
+  const propParams = params?.params;
+  const pageName = params?.params?.category;
+  // console.log(metaData,"pp")
   return (
-    <CategoryPageLayout cityName={nameOfCity} metaData={metaApiData}>
-      <div className="large_layout">
-        <AnnouncementBar />
-        <Header />
-        <MenuList />
-        {params.category === "appliances-rental" ||
-        params.category === "furniture-rental" ? (
+    <>
+      <head>
+        <meta name="Title" content={metaData?.data?.cat_meta_title} />
+      </head>
+      <body>
+        <CatAnnouncement />
+        <CatHeader />
+        <CatMenu />
+        {pageName === "appliances-rental" || pageName === "furniture-rental" ? (
           <div>
             <HeroBanner />
-            <RentFurnitureAndAppliances params={params} />
+            <RentFurnitureAndAppliances params={propParams} />
             <RecentlyViewedProduct />
-            <TrendingProducts params={params} />
+            <TrendingProducts params={propParams} />
             <OffersAndCoupons />
             <NewlyLaunched />
             <DownloadForMobile />
             <PreDesignCombos />
             <HasselFreeServicesCards />
             <LimetedPreiodDiscount />
-            <RentNowBanner params={params} />
+            <RentNowBanner params={propParams} />
             <TryCityMax />
             <CustomerRating />
             <MediaCoverage />
             <CombineSection />
-            <HappySubscribers params={params} page={params.category} />
-            <FrequentlyAskedQuestions params={params} />
-            <TextContent params={params} />
+            <HappySubscribers params={propParams} page={pageName} />
+            <FrequentlyAskedQuestions params={propParams} />
+            <TextContent params={propParams} />
             <Footer />
           </div>
-        ) : params.category === "rent" ? (
+        ) : pageName === "rent" ? (
           <div>
             <Subproduct />
           </div>
         ) : (
           <div>
-            <SubHeader params={params} />
+            <CatSubHeader params={params?.params} />
           </div>
         )}
-        <Notifications />
-      </div>
-    </CategoryPageLayout>
+      </body>
+    </>
   );
+}
+
+export async function generateMetadata({params}) {
+  const data = await create(params);
+  // console.log("metadtatadtdatdtadatatd", data.data);
+
+  return {
+    title: data?.data?.cat_meta_title,
+    description: data?.data?.cat_meta_desc,
+    alternates: {
+      canonical: data?.data?.cat_header_code_snippet,
+    },
+    openGraph: {
+      url: data?.data?.cat_header_code_snippet,
+      title: data?.data?.cat_meta_title,
+      description: data?.data?.cat_meta_desc,
+      siteName: "Cityfurnish",
+      images: {
+        url: "",
+        width: 800,
+        height: 600,
+      },
+    },
+  };
 }

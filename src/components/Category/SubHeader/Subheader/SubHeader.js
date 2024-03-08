@@ -151,7 +151,7 @@ const SubHeader = ({params}) => {
     }
 
     if (homePageReduxData?.cityList?.length) {
-      const id = findIdByURL(homePageReduxData?.cityList, params.city);
+      const id = findIdByURL(homePageReduxData?.cityList, params?.city);
       if (id !== null) {
         setLocalStorage("cityId", id);
         dispatch(selectedCityId(id));
