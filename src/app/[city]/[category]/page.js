@@ -143,13 +143,13 @@ export default async function Page(params) {
 
 export async function generateMetadata({params}) {
   const data = await create(params);
-  // console.log("metadtatadtdatdtadatatd", data.data);
+  // console.log("metadtatadtdatdtadatatd", params);
 
   return {
     title: data?.data?.cat_meta_title,
     description: data?.data?.cat_meta_desc,
     alternates: {
-      canonical: data?.data?.cat_header_code_snippet,
+      canonical: `https://cityfurnish.com/${params.city}/${params.category}`,
     },
     openGraph: {
       url: data?.data?.cat_header_code_snippet,
