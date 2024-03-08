@@ -27,7 +27,7 @@ function LongTermCard({
 }) {
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
-    items?.monthOptions[0],
+    items?.monthOptions[3],
   );
   const [perAddModal, setPerAddModal] = useState(false);
   const [tenureModal, setTenureModal] = useState(false);
