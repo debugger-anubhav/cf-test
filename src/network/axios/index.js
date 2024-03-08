@@ -27,23 +27,7 @@ const baseInstance = axios.create({
 dotenv.config({
   path: `../../../.env.${process.env.NODE_ENV}`,
 });
-
 const mySecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
-const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
-console.log(
-  tempSecretKey === mySecretKey,
-  mySecretKey.length,
-  tempSecretKey.length,
-  mySecretKey,
-  tempSecretKey,
-  mySecretKey.trim(),
-  mySecretKey.trim().length,
-  typeof mySecretKey,
-  "here" + mySecretKey + "there",
-  tempSecretKey === String(mySecretKey),
-  "checkkkk",
-);
-
 baseInstance.interceptors.request.use(config => {
   if (!config.headers.Authorization) {
     config.headers.Authorization = authToken;
