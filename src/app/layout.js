@@ -12,6 +12,18 @@ export const metadata = {
   icons: {
     icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.ico",
   },
+  openGraph: {
+    type: "website",
+    title: "Cityfurnish",
+    description:
+      "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad",
+    siteName: "Cityfurnish",
+    images: {
+      url: "",
+      width: 800,
+      height: 600,
+    },
+  },
 };
 
 export default function RootLayout({children}) {
