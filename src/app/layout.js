@@ -19,7 +19,7 @@ export const metadata = {
       "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad",
     siteName: "Cityfurnish",
     images: {
-      url: "",
+      url: "https://d3juy0zp6vqec8.cloudfront.net/images/cityfurnish-og-image.webp",
       width: 800,
       height: 600,
     },

@@ -1,85 +1,85 @@
-"use client";
-
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
 import React from "react";
-import BenefitsCta from "@/components/Product/BenefitsCta";
-import CompleteTheLook from "@/components/Product/CompleteTheLook";
-import CareInstruction from "@/components/Product/CareInstruction";
-import CustomerRating from "@/components/Product/CustomerRatings";
-import HappySubscribers from "@/components/Home/HappySubscribers";
-import QuesAndAns from "@/components/Product/QnaSection";
-import BannerSection from "@/components/Product/BannerSection";
-import {useParams} from "next/navigation";
-import loadable from "@loadable/component";
-import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
-import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
-import Notifications from "@/components/Common/Notifications/Notification";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import SpecificPageLayout from "./layout";
+import CryptoJS from "crypto-js";
+import ProductDetailComponents from "./SsrProductComponents";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-const ItemsIncluded = loadable(
-  () => import("@/components/Product/ProductsIncludedSection"),
-  {
-    fallback: <ItemsIncludedSkeleton />,
-  },
-);
-const YouMightLike = loadable(
-  () => import("@/components/Product/YouMightLike"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const RecentlyViewedProduct = loadable(
-  () => import("@/components/Home/RecentlyViewedProduct"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const ProductDetails = loadable(
-  () => import("@/components/Product/ProductDetailsSection"),
-  {
-    fallback: <SkeletonForProductDetail />,
-  },
-);
-const OffersAndCoupons = loadable(
-  () => import("@/components/Home/OffersAndCoupons"),
-  {
-    fallback: <OffersSkeleton />,
-  },
-);
-const ProductPage = () => {
-  const params = useParams();
-  const dataForMeta = (params?.productName).replace(/-/g, " ");
-  return (
-    <SpecificPageLayout productName={dataForMeta}>
-      <div className="large_layout">
-        <AnnouncementBar />
-        <Header />
-        <MenuList />
-        <ProductDetails category={"Home Furniture"} params={params} />
-        <OffersAndCoupons page={"product"} />
-        <ItemsIncluded noOfItems={5} />
-        <BenefitsCta />
-        <CompleteTheLook params={params} />
-        <BannerSection params={params} />
-        <CareInstruction params={params} />
-        <RecentlyViewedProduct page={"product"} />
-        <YouMightLike params={params} />
-        <CustomerRating params={params} />
-        <HappySubscribers page={"product"} params={params} />
-        <QuesAndAns params={params} />
-        <Footer />
-        <Notifications />
-      </div>
-    </SpecificPageLayout>
+export async function getServerSideProps(context) {
+  const {productId} = context.params;
+  console.log(context.params, "ooooooooooooooo");
+  try {
+    const data = await create(productId);
+    return {
+      props: {
+        data,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return {
+      props: {
+        data: null,
+      },
+    };
+  }
+}
+
+async function create(params) {
+  const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+  const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
+  const createEncryptedHash = (text, secretKey) => {
+    const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
+    return encrypted;
+  };
+  const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+
+  const data = await fetch(
+    // `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=3847`,
+    `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=${params?.productId}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Apikey: apiKey,
+      },
+    },
   );
-};
+  return data.json();
+}
 
-export default ProductPage;
+export default async function Page(params) {
+  const metaData = await create(params.params);
+  // console.log(params,"pppppppp")
+  return (
+    <>
+      <head>
+        <meta name="Title" content={metaData?.data?.meta_title} />
+      </head>
+      <body>
+        <ProductDetailComponents />
+      </body>
+    </>
+  );
+}
+
+export async function generateMetadata({params}) {
+  const data = await create(params);
+  // console.log("metadtatadtdatdtadatatd", data.data);
+  const Title = data?.data?.meta_title
+    ? data?.data?.meta_title
+    : `Rent Furniture Online - ${params.productName}`;
+  const Description = data?.data?.meta_description
+    ? data?.data?.meta_description
+    : `Furniture Rental - Rent ${params.productName} Online in India - by Cityfurnish. Door Step Delivery, High-Quality Products, Easy Terms.`;
+  return {
+    title: Title,
+    description: Description,
+    alternates: {
+      canonical: `https://cityfurnish.com/things/${params.productId}/${params.productName}`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/things/${params.productId}/${params.productName}`,
+      title: Title,
+      description: Description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
