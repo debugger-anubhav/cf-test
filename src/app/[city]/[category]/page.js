@@ -46,7 +46,8 @@ export async function getServerSideProps(context) {
 }
 
 async function create(params) {
-  const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
+  // const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
+  const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
   const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
   const createEncryptedHash = (text, secretKey) => {
     const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
