@@ -146,7 +146,7 @@ export const FaqsSkeleton = () => {
             );
           })}
         </div>
-        <Skeleton variant="text" className={"w-40 h-20 mt-2"} />
+        <Skeleton variant="text" className={"w-40 h-20 mt-2"} height={80} />
       </div>
     </div>
   );
