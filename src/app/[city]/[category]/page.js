@@ -161,10 +161,6 @@ export async function generateMetadata({params}) {
         width: 800,
         height: 600,
       },
-      customMeta: {
-        name: "Title",
-        content: "abababababababababab",
-      },
     },
   };
 }
