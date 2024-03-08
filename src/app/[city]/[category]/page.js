@@ -96,11 +96,19 @@ export default async function Page(params) {
 
   const propParams = params?.params;
   const pageName = params?.params?.category;
+
   // console.log(metaData,"pp")
   return (
     <>
       <head>
-        <meta name="Title" content={metaData?.data?.cat_meta_title} />
+        {pageName === "rent" ? (
+          <meta
+            name="Title"
+            content={`Rent Premium Furniture & Home Appliances in ${propParams?.city} - Cityfurnish`}
+          />
+        ) : (
+          <meta name="Title" content={metaData?.data?.cat_meta_title} />
+        )}
       </head>
       <body>
         <CatAnnouncement />
@@ -144,24 +152,33 @@ export default async function Page(params) {
 
 export async function generateMetadata({params}) {
   const data = await create(params);
-  // console.log("metadtatadtdatdtadatatd", params);
+  // console.log("metadtatadtdatdtadatatd", data?.data);
+  let metaTitle;
+  let metaDescription;
+
+  if (params?.category === "rent") {
+    metaTitle = `Rent Premium Furniture & Home Appliances in ${params?.city} - Cityfurnish`;
+    metaDescription = `Make your home with us. Rent furniture and home appliances online from ${params?.city}'s leading furniture rental company. Free home delivery and installation.`;
+  } else {
+    metaTitle = data?.data?.cat_meta_title;
+    metaDescription = data?.data?.cat_meta_desc;
+  }
 
   return {
-    title: data?.data?.cat_meta_title,
-    description: data?.data?.cat_meta_desc,
+    title: metaTitle,
+    description: metaDescription,
     alternates: {
       canonical: `https://cityfurnish.com/${params.city}/${params.category}`,
     },
     openGraph: {
-      url: data?.data?.cat_header_code_snippet,
-      title: data?.data?.cat_meta_title,
-      description: data?.data?.cat_meta_desc,
+      url: `https://cityfurnish.com/${params.city}/${params.category}`,
+      title: metaTitle,
+      description: metaDescription,
       siteName: "Cityfurnish",
-      images: {
-        url: "",
-        width: 800,
-        height: 600,
-      },
     },
   };
 }
+
+// when meta data is coming blank from api
+// metaTitle = 'Rent Premium Furniture & Home Appliances Online - Cityfurnish';
+// meta_description = 'Furniture rental made easy with CityFurnish. Rent home furniture online, including living room furniture, for as long as you need it. Available in major Indian cities like Noida, Delhi, Hyderabad, Mumbai, Gurgaon, Pune and Bangalore. Download our furniture rental app for convenience and flexibility.';

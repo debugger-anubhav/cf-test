@@ -46,7 +46,8 @@ async function create(params) {
 }
 
 export default async function Page(params) {
-  const metaData = await create(params);
+  const metaData = await create(params.params);
+  // console.log(params,"pppppppp")
   return (
     <>
       <head>
@@ -75,15 +76,10 @@ export async function generateMetadata({params}) {
       canonical: `https://cityfurnish.com/things/${params.productId}/${params.productName}`,
     },
     openGraph: {
-      url: data?.data?.cat_header_code_snippet,
+      url: `https://cityfurnish.com/things/${params.productId}/${params.productName}`,
       title: Title,
       description: Description,
       siteName: "Cityfurnish",
-      images: {
-        url: "",
-        width: 800,
-        height: 600,
-      },
     },
   };
 }
