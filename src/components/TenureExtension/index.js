@@ -30,11 +30,6 @@ function TenureExtension() {
         {label: "10 Months", value: 10},
         {label: "11 Months", value: 11},
         {label: "12 Months", value: 12},
-        {label: "13 Months", value: 13},
-        {label: "14 Months", value: 14},
-        {label: "15 Months", value: 15},
-        {label: "16 Months", value: 16},
-        {label: "17 Months", value: 17},
       ],
     },
     {

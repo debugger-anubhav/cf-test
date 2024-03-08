@@ -85,7 +85,6 @@ const ShoppingCartSection = () => {
   const [isSetupProfile, setIsSetupProfile] = useState(false);
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
-
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = isLogin ? userId : tempUserId;
@@ -263,7 +262,7 @@ const ShoppingCartSection = () => {
     // setArr(arr.filter(t => t.fc_product.id !== id));
   };
 
-  const fetchBill = async () => {
+  const fetchBill = async showMsg => {
     try {
       const headers = {
         userId: parseInt(userIdToUse),
@@ -283,7 +282,11 @@ const ShoppingCartSection = () => {
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
       dispatch(setCityShield(res?.data?.data?.cityshield));
-      // dispatch(setCoinsUsed(res?.data?.data?.coins));
+      if (showMsg) {
+        if (res?.data?.data?.msg?.length > 0) {
+          showToastNotification(res?.data?.data?.msg, 2);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -291,7 +294,11 @@ const ShoppingCartSection = () => {
 
   useEffect(() => {
     fetchBill();
-  }, [isCoinApplied, isChecked, isMonthly, isCouponApplied, isLogin]);
+  }, [isChecked, isMonthly, isCouponApplied, isLogin]);
+
+  useEffect(() => {
+    fetchBill(true);
+  }, [isCoinApplied]);
 
   const toggleLoginModal = () => {
     dispatch(reduxSetModalState(!modalStateFromRedux));
@@ -336,7 +343,6 @@ const ShoppingCartSection = () => {
 
   useEffect(() => {
     validateAuth();
-    // fetchUserDetails();
   }, [isLogin]);
 
   const handleChangeRoute = () => {
@@ -741,7 +747,9 @@ const ShoppingCartSection = () => {
                       <ToggleOff
                         color={"#E3E1DC"}
                         size={29}
-                        onClick={() => setIsCoinApplied(true)}
+                        onClick={() => {
+                          setIsCoinApplied(true);
+                        }}
                       />
                     )}
                   </div>
@@ -759,7 +767,6 @@ const ShoppingCartSection = () => {
                     } else {
                       setCouponDrawerOpen(true);
                     }
-                    // checkCoupon();
                   }}>
                   <p className={styles.offer_text}>
                     {isCouponApplied
