@@ -34,6 +34,13 @@ console.log(
   tempSecretKey === mySecretKey,
   mySecretKey.length,
   tempSecretKey.length,
+  mySecretKey,
+  tempSecretKey,
+  mySecretKey.trim(),
+  mySecretKey.trim().length,
+  typeof mySecretKey,
+  "here" + mySecretKey + "there",
+  tempSecretKey === String(mySecretKey),
   "checkkkk",
 );
 
