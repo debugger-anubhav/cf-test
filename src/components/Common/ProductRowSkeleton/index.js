@@ -10,7 +10,11 @@ export const ProductRowSkeleton = () => {
       <div className={styles.Skeleton_row}>
         {[1, 2, 3, 4]?.map((item, index) => (
           <div className={styles.Skeleton_wrapper} key={index.toString()}>
-            <Skeleton variant="rectangular" className={styles.skeleton_main} />
+            <Skeleton
+              variant="rectangular"
+              className={styles.skeleton_main}
+              height={"100%"}
+            />
           </div>
         ))}
       </div>
