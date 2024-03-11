@@ -12,6 +12,9 @@ export const metadata = {
   icons: {
     icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.ico",
   },
+  alternates: {
+    canonical: `https://cityfurnish.com`,
+  },
   openGraph: {
     type: "website",
     title: "Cityfurnish",
