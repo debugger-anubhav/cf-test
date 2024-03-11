@@ -5,6 +5,7 @@ import MenuList from "../Common/MenuList";
 import Footer from "../Common/Footer";
 import MainWrapper from "./mainWrapper";
 import AnnouncementBar from "../Common/AnnouncementBar";
+import Notifications from "@/components/Common/Notifications/Notification";
 
 const BulkOrderMain = () => {
   return (
@@ -14,6 +15,7 @@ const BulkOrderMain = () => {
       <MenuList />
       <MainWrapper />
       <Footer />
+      <Notifications />
     </div>
   );
 };

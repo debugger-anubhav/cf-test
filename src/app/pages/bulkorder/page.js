@@ -1,15 +1,30 @@
-"use client";
 import React from "react";
-import BulkOrderMain from "@/components/BulkOrder/BulkOrder";
-import Notifications from "@/components/Common/Notifications/Notification";
+import BulkOrderMain from "./SsrBulkorder";
 
-const BulkOrder = () => {
+export default async function BulkOrderPage() {
   return (
-    <div className="large_layout">
+    <>
+      <meta name="Title" content="Cityfurnish | Bulk Order" />
       <BulkOrderMain />
-      <Notifications />
-    </div>
+    </>
   );
-};
+}
 
-export default BulkOrder;
+export async function generateMetadata() {
+  const title = "Cityfurnish | Bulk Order";
+  const description =
+    "Place Bulk Order. Office Furniture, Hotel Furniture, Restaurant Furniture";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/bulkorder`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/bulkorder`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
