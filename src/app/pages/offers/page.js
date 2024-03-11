@@ -1,27 +1,29 @@
-"use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import OfferPage from "../../../components/Offer";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
+import Offers from "./SsrOffers";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-
-const Offers = () => {
+export default async function OffersPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <OfferPage />
-      <Footer />
-    </div>
+    <>
+      <meta name="Title" content="Cityfurnish Offers and Discount Coupons" />
+      <Offers />
+    </>
   );
-};
+}
 
-export default Offers;
+export async function generateMetadata() {
+  const title = "Cityfurnish Offers and Discount Coupons";
+  const description = "Cityfurnish Offers and Discount Coupons";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/offers`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/offers`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
