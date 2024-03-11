@@ -1,33 +1,32 @@
-"use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import ContactSection from "@/components/ContactUs/ContactSection";
-import OurOffices from "@/components/ContactUs/OurOffices";
-import HaveQueries from "@/components/ContactUs/HaveQueries";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
+import ContactUs from "./SsrContact";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-
-const ContactUs = () => {
+export default async function AboutPage() {
   return (
     <>
-      <div className="large_layout">
-        <AnnouncementBar />
-        <Header />
-        <MenuList />
-        <ContactSection />
-        <OurOffices />
-        <HaveQueries />
-        <Footer />
-      </div>
+      <meta
+        name="Title"
+        content="Cityfurnish Customer Support | Contact Us - cityfurnish.com"
+      />
+      <ContactUs />
     </>
   );
-};
+}
 
-export default ContactUs;
+export async function generateMetadata() {
+  return {
+    title: "Cityfurnish Customer Support | Contact Us - cityfurnish.com",
+    description:
+      "Contact Cityfurnish Customer Support at hello@cityfurnish.com for your inquiries or suggestions. We will be happy to help you.",
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/contact-us`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/contact-us`,
+      title: "Cityfurnish Customer Support | Contact Us - cityfurnish.com",
+      description:
+        "Contact Cityfurnish Customer Support at hello@cityfurnish.com for your inquiries or suggestions. We will be happy to help you.",
+      siteName: "Cityfurnish",
+    },
+  };
+}

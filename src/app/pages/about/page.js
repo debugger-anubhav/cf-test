@@ -23,5 +23,11 @@ export async function generateMetadata() {
     alternates: {
       canonical: `https://cityfurnish.com/pages/about`,
     },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/about`,
+      title: Title,
+      description: Description,
+      siteName: "Cityfurnish",
+    },
   };
 }
