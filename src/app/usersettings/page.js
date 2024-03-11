@@ -1,26 +1,30 @@
-"use client";
-import React, {useEffect} from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import {AuthProvider} from "@/components/HOC/index";
-import UserSettings from "@/components/UserSettings/UserSettings";
-import {useDispatch} from "react-redux";
-import {setDocSidebarActiveItem} from "@/store/Slices";
+import React from "react";
+import UsersettingsComponents from "./SsrUserSettings";
 
-const Usersettings = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setDocSidebarActiveItem("Overview"));
-  }, []);
+export default async function UserSettingsPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <UserSettings />
-    </div>
+    <>
+      <meta name="Title" content="Settings" />
+      <UsersettingsComponents />
+    </>
   );
-};
+}
 
-export default AuthProvider(Usersettings);
+export async function generateMetadata() {
+  const title = "Settings";
+  const description =
+    "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/usersettings`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/usersettings`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}

@@ -1,26 +1,30 @@
-"use client";
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import Notifications from "@/components/Common/Notifications/Notification";
-import {CartPageSkeleton} from "@/components/Cart";
-import loadable from "@loadable/component";
+import CartComponents from "./SsrCart";
 
-const CartSection = loadable(() => import("@/components/Cart"), {
-  fallback: <CartPageSkeleton />,
-});
-
-const CartPage = () => {
+export default async function CartPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <CartSection />
-      <Notifications />
-    </div>
+    <>
+      <meta name="Title" content="Conveniently Rent Furniture and Appliances" />
+      <CartComponents />
+    </>
   );
-};
+}
 
-export default CartPage;
+export async function generateMetadata() {
+  const title = "Conveniently Rent Furniture and Appliances";
+  const description =
+    "Make your shopping cart to Discover the convenience of Rented furniture and appliances hassle-free, and enjoy flexible rental plans, doorstep delivery, and seamless transactions. Start building your dream home today!";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/cart`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/cart`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
