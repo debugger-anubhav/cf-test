@@ -6,7 +6,7 @@ import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import Script from "./script";
 
 export const metadata = {
-  title: "Cityfurnish",
+  title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
   description:
     "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.",
   icons: {
@@ -17,7 +17,8 @@ export const metadata = {
   },
   openGraph: {
     type: "website",
-    title: "Cityfurnish",
+    locale: "en_US",
+    title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
     description:
       "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad",
     siteName: "Cityfurnish",
@@ -33,6 +34,10 @@ export default function RootLayout({children}) {
   return (
     <html lang="en">
       <head>
+        <meta
+          property="article:publisher"
+          content="https://www.facebook.com/cityFurnishRental"
+        />
         <meta
           name="facebook-domain-verification"
           content="5qetjkn16z0nh00u71i0iw25oljz0h"
