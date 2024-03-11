@@ -1,27 +1,29 @@
-"use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import PrivacyPolicyData from "../../../components/PrivacyPolicy";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
+import PrivacyPolicy from "./SsrPrivacyPolicy";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-
-function PrivacyPolicy() {
+export default async function PrivacyPolicyPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <PrivacyPolicyData />
-      <Footer />
-    </div>
+    <>
+      <meta name="Title" content="Privacy Policy" />
+      <PrivacyPolicy />
+    </>
   );
 }
 
-export default PrivacyPolicy;
+export async function generateMetadata() {
+  const title = "Privacy Policy";
+  const description = "Privacy Policy";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/privacy-policy`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/privacy-policy`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}

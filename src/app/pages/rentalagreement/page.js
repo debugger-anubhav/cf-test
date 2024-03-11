@@ -13,7 +13,7 @@ export default async function RentalAgreementPage() {
 export async function generateMetadata() {
   const title = "Cityfurnish Sample Rental Agreement";
   const description =
-    "CCheck Our Sample Rental Agreement - A Customer Friendly Approach.";
+    "Check Our Sample Rental Agreement - A Customer Friendly Approach.";
   return {
     title,
     description,
