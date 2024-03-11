@@ -1,23 +1,29 @@
-"use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import TermsOfUseData from "@/components/TermOfUseData";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-export default function TermsOfUse() {
+import TermsOfUse from "./SsrTermUse";
+
+export default async function TermUsePage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <TermsOfUseData />
-      <Footer />
-    </div>
+    <>
+      <meta name="Title" content="Cityfurnish.com | Terms of Use" />
+      <TermsOfUse />
+    </>
   );
+}
+
+export async function generateMetadata() {
+  const title = "Cityfurnish.com | Terms of Use";
+  const description = "Check CityfurnishTerms of Using Website";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/terms-of-use`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/terms-of-use`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
 }

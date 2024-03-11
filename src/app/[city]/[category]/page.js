@@ -100,17 +100,15 @@ export default async function Page(params) {
   // console.log(metaData,"pp")
   return (
     <>
-      <head>
-        {pageName === "rent" ? (
-          <meta
-            name="Title"
-            content={`Rent Premium Furniture & Home Appliances in ${propParams?.city} - Cityfurnish`}
-          />
-        ) : (
-          <meta name="Title" content={metaData?.data?.cat_meta_title} />
-        )}
-      </head>
-      <body>
+      {pageName === "rent" ? (
+        <meta
+          name="Title"
+          content={`Rent Premium Furniture & Home Appliances in ${propParams?.city} - Cityfurnish`}
+        />
+      ) : (
+        <meta name="Title" content={metaData?.data?.cat_meta_title} />
+      )}
+      <div>
         <CatAnnouncement />
         <CatHeader />
         <CatMenu />
@@ -145,7 +143,7 @@ export default async function Page(params) {
             <CatSubHeader params={params?.params} />
           </div>
         )}
-      </body>
+      </div>
     </>
   );
 }
