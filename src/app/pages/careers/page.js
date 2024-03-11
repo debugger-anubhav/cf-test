@@ -1,32 +1,30 @@
-"use client";
 import React from "react";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import TopSection from "@/components/Careers/TopSection";
-import WeValue from "@/components/Careers/WeValue";
-import OurLocation from "@/components/Careers/OurLocations";
-import Vacancies from "@/components/Careers/Vacancies";
-import Gallery from "@/components/Careers/Gallery";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import Career from "./SsrCareers";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-
-export default function Career() {
+export default async function CareerPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <TopSection />
-      <Gallery />
-      <WeValue />
-      <OurLocation />
-      <Vacancies />
-      <Footer />
-    </div>
+    <>
+      <meta name="Title" content="We are Hiring | Careers @ Cityfurnish" />
+      <Career />
+    </>
   );
+}
+
+export async function generateMetadata() {
+  const title = "We are Hiring | Careers @ Cityfurnish";
+  const description =
+    "We are Hiring | At Cityfurnish we are building an on-demand furniture and appliances rental startup";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/careers`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/careers`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
 }

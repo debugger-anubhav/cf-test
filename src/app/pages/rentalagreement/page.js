@@ -1,25 +1,30 @@
-"use client";
-
 import React from "react";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import MainSection from "../../../components/Rentalagreement/MainSection";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import loadable from "@loadable/component";
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-function Rentalagreement() {
+import Rentalagreement from "./SsrRentalAgreement";
+
+export default async function RentalAgreementPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <MainSection />
-      <Footer />
-    </div>
+    <>
+      <meta name="Title" content="Cityfurnish Sample Rental Agreement" />
+      <Rentalagreement />
+    </>
   );
 }
 
-export default Rentalagreement;
+export async function generateMetadata() {
+  const title = "Cityfurnish Sample Rental Agreement";
+  const description =
+    "Check Our Sample Rental Agreement - A Customer Friendly Approach.";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/rentalagreement`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/rentalagreement`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
