@@ -7,6 +7,12 @@ export const metadata = {
   title: "My Wallet",
   description:
     "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.",
+  alternates: {
+    canonical: `https://cityfurnish.com/wallet`,
+  },
+  openGraph: {
+    url: `https://cityfurnish.com/wallet`,
+  },
 };
 
 export default function RootLayout({children}) {

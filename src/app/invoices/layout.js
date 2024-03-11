@@ -14,6 +14,9 @@ export const metadata = {
   alternates: {
     canonical: `https://cityfurnish.com/invoices`,
   },
+  openGraph: {
+    url: `https://cityfurnish.com/invoices`,
+  },
 };
 
 export default function RootLayout({children}) {

@@ -1,29 +1,33 @@
-"use client";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import React, {useEffect} from "react";
+import React from "react";
+import YourAddressesComponents from "./SsrYourAddresses";
 
-import Notifications from "@/components/Common/Notifications/Notification";
-import YourAddressesSection from "@/components/YourAddresses";
-import {AuthProvider} from "@/components/HOC/index";
-import {useDispatch} from "react-redux";
-import {setDocSidebarActiveItem} from "@/store/Slices";
-
-const YourAddresses = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setDocSidebarActiveItem("Your Addresses"));
-  }, []);
+export default async function YourAddressesPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <YourAddressesSection />
-      <Notifications />
-    </div>
+    <>
+      <meta
+        name="Title"
+        content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
+      />
+      <YourAddressesComponents />
+    </>
   );
-};
+}
 
-export default AuthProvider(YourAddresses);
+export async function generateMetadata() {
+  const title = "Shipping Address";
+  const description =
+    "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/settings/shipping`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/settings/shipping`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
