@@ -1,7 +1,7 @@
 import React from "react";
 import Career from "./SsrCareers";
 
-export default async function AboutPage() {
+export default async function CareerPage() {
   return (
     <>
       <meta name="Title" content="We are Hiring | Careers @ Cityfurnish" />

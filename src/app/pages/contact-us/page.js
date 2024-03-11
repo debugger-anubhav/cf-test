@@ -1,7 +1,7 @@
 import React from "react";
 import ContactUs from "./SsrContact";
 
-export default async function AboutPage() {
+export default async function ContactPage() {
   return (
     <>
       <meta

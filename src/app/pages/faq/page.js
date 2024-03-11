@@ -1,15 +1,33 @@
-"use client";
 import React from "react";
-import FAQMain from "@/components/FAQ/FAQ";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import FAQMain from "./SsrFaq";
 
-const FAQ = () => {
+export default async function FAQ() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
+    <>
+      <meta
+        name="Title"
+        content="Furniture Rental - Frequently Asked Questions"
+      />
       <FAQMain />
-    </div>
+    </>
   );
-};
+}
 
-export default FAQ;
+export async function generateMetadata() {
+  const title = "Furniture Rental - Frequently Asked Questions";
+  const description =
+    "Cityfurnish.com: Answers of Frequently Asked Quetions for Furniture Rental";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/faq`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/faq`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
