@@ -1,27 +1,32 @@
-"use client";
-import React, {useEffect} from "react";
-import {useRouter} from "next/navigation";
-import Notifications from "@/components/Common/Notifications/Notification";
-import ReferAFriend from "@/components/ReferAFriend/ReferAFriend";
-import {getLocalStorage} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import React from "react";
+import ReferFriendComponents from "./SsrRefer";
 
-const ReferFriendPage = () => {
-  const router = useRouter();
-  const isLoogedIn = decrypt(getLocalStorage("_ga"));
-
-  useEffect(() => {
-    if (isLoogedIn) router.push("/referral");
-  }, []);
-
+export default async function ReferAFriendPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <ReferAFriend login={false} />
-      <Notifications />
-    </div>
+    <>
+      <meta
+        name="Title"
+        content="Cityfurnish- Refer a friend and get extra benefits"
+      />
+      <ReferFriendComponents />
+    </>
   );
-};
+}
 
-export default ReferFriendPage;
+export async function generateMetadata() {
+  const title = "Cityfurnish- Refer a friend and get extra benefits";
+  const description = "Cityfurnish Friends Referral Program";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/refer-a-friend`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/pages/refer-a-friend`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
