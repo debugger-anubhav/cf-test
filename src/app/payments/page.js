@@ -1,29 +1,33 @@
-"use client";
-import React, {useEffect} from "react";
+import React from "react";
+import PaymentsComponents from "./SsrPayments";
 
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import MenuList from "@/components/Common/MenuList";
-import Footer from "@/components/Common/Footer";
-import PaymentPage from "../../components/Payments";
-import {AuthProvider} from "@/components/HOC/index";
-import {setDocSidebarActiveItem} from "@/store/Slices";
-import {useDispatch} from "react-redux";
-
-const Payments = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setDocSidebarActiveItem("My Payments"));
-  }, []);
+export default async function PaymentsPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <PaymentPage />
-      <Footer />
-    </div>
+    <>
+      <meta
+        name="Title"
+        content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
+      />
+      <PaymentsComponents />
+    </>
   );
-};
+}
 
-export default AuthProvider(Payments);
+export async function generateMetadata() {
+  const title = "My Account - Payments";
+  const description =
+    "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/payments`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/payments`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
