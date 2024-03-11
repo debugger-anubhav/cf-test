@@ -1,39 +1,30 @@
-"use client";
-
 import React from "react";
-import {useParams} from "next/navigation";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import Header from "@/components/Common/Header";
-import loadable from "@loadable/component";
-import MenuList from "@/components/Common/MenuList";
-import Notifications from "@/components/Common/Notifications/Notification";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import {WishListSkeleton} from "@/components/Wishlist/ProductList/ProductList";
-import {AuthProvider} from "@/components/HOC/index";
+import Wishlist from "./SsrWishlist";
 
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
-const ProductList = loadable(
-  () => import("@/components/Wishlist/ProductList/ProductList"),
-  {
-    fallback: <WishListSkeleton />,
-  },
-);
-
-const Wishlist = () => {
-  const params = useParams();
-
+export default async function WishlistPage() {
   return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <Header />
-      <MenuList />
-      <ProductList params={params} />
-      <Footer />
-      <Notifications />
-    </div>
+    <>
+      <meta name="Title" content="Product Listing" />
+      <Wishlist />
+    </>
   );
-};
+}
 
-export default AuthProvider(Wishlist);
+export async function generateMetadata() {
+  const title = "Product Listing";
+  const description =
+    "Rent Premium Furniture & Home Appliances Online - Cityfurnish";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/wishlist`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/wishlist`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}

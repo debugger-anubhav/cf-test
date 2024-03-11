@@ -1,19 +1,33 @@
-"use client";
-import CitymaxHeader from "@/components/Citymax/Header";
-import CitymaxHome from "@/components/Citymax/Home";
 import React from "react";
-import FrequentlyAskedQuestions from "@/components/Common/FrequentlyAskedQuestions";
-import Footer from "@/components/Common/Footer";
+import CitymaxComponents from "./SsrCitymax";
 
-const CitymaxPage = () => {
+export default async function CitymaxPage() {
   return (
-    <div className="large_layout">
-      <CitymaxHeader />
-      <CitymaxHome />
-      <FrequentlyAskedQuestions isCitymax params={"citymax"} />
-      <Footer />
-    </div>
+    <>
+      <meta
+        name="Title"
+        content="Rent Premium Furniture and Home Appliances - Citymax"
+      />
+      <CitymaxComponents />
+    </>
   );
-};
+}
 
-export default CitymaxPage;
+export async function generateMetadata() {
+  const title = "Rent Premium Furniture and Home Appliances - Citymax";
+  const description =
+    "Rent Furniture and Appliances on a Monthly Rental Subscription Plan from Citymax. We Provide Renting Services in Bangalore, Mumbai, Pune, Delhi, Gurgaon, Noida, Hyderabad.";
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `https://cityfurnish.com/citymax`,
+    },
+    openGraph: {
+      url: `https://cityfurnish.com/citymax`,
+      title,
+      description,
+      siteName: "Cityfurnish",
+    },
+  };
+}
