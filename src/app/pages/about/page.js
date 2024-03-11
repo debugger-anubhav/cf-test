@@ -1,14 +1,27 @@
-"use client";
 import React from "react";
-import About from "@/components/About/About";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-const AboutPage = () => {
-  return (
-    <div className="large_layout">
-      <AnnouncementBar />
-      <About />
-    </div>
-  );
-};
+import About from "./SsrAbout";
+import CatAnnouncement from "../../[city]/[category]/CatAnnouncement";
 
-export default AboutPage;
+export default async function AboutPage() {
+  return (
+    <>
+      <meta name="Title" content="Furniture Rental - About Us" />
+      <div className="large_layout">
+        <CatAnnouncement />
+        <About />
+      </div>
+    </>
+  );
+}
+
+export async function generateMetadata() {
+  const Title = "Furniture Rental - About Us";
+  const Description = "Cityfurnish.com: About Us";
+  return {
+    title: Title,
+    description: Description,
+    alternates: {
+      canonical: `https://cityfurnish.com/pages/about`,
+    },
+  };
+}

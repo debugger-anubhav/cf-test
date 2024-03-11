@@ -4,7 +4,7 @@ import ProductDetailComponents from "./SsrProductComponents";
 
 export async function getServerSideProps(context) {
   const {productId} = context.params;
-  console.log(context.params, "ooooooooooooooo");
+  // console.log(context.params, "ooooooooooooooo");
   try {
     const data = await create(productId);
     return {
@@ -50,12 +50,8 @@ export default async function Page(params) {
   // console.log(params,"pppppppp")
   return (
     <>
-      <head>
-        <meta name="Title" content={metaData?.data?.meta_title} />
-      </head>
-      <body>
-        <ProductDetailComponents />
-      </body>
+      <meta name="Title" content={metaData?.data?.meta_title} />
+      <ProductDetailComponents />
     </>
   );
 }
