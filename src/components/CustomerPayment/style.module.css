@@ -34,7 +34,7 @@
   @apply ml-2 tracking-desc xl:tracking-0.3 xl:text-16 text-14 text-71717A font-Poppins;
 }
 .all_invoices {
-  @apply flex justify-between bg-[#F3F5F8] p-3 rounded-xl mt-1 cursor-pointer;
+  @apply flex justify-between items-center bg-[#F3F5F8] p-3 rounded-xl mt-1 cursor-pointer;
 }
 .all_invoice_text {
   @apply text-5774AC text-12 font-Poppins;
