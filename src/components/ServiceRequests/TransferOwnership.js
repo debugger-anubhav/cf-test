@@ -412,9 +412,10 @@ function TransferOwnership({prevScreen, data}) {
                             : `!bg-F6B704`
                         }
                         `}
-                            onClick={() => {
-                              formikRef?.current?.submitForm();
-                            }}>
+                            // onClick={() => {
+                            //   formikRef?.current?.submitForm();
+                            // }}
+                          >
                             Create request <ForwardArrowWithLine />
                           </button>
                         </div>
