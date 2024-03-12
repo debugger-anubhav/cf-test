@@ -1,9 +1,6 @@
-import {decrypt} from "dotenv";
 import {useEffect} from "react";
-import {getLocalStorage} from "@/constants/constant";
-export const useChatScript = (url, widgetCode) => {
-  const userId = decrypt(getLocalStorage("_ga"));
 
+export const useChatScript = (url, widgetCode) => {
   useEffect(() => {
     let script;
     const timerID = setTimeout(() => {
@@ -35,7 +32,7 @@ export const useChatScript = (url, widgetCode) => {
         }
     })(document, window, function () {
         Freshbots.initiateWidget({autoInitChat: false, getClientParams: function () {
-                return {"cstmr::xtrInfrmtn:${userId}": ""};
+                return {"cstmr::xtrInfrmtn:userID": ""};
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
