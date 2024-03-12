@@ -51,7 +51,7 @@ function CustomerPayment() {
   const nameParam = urlParams.get("name");
   const tempAmountParam = urlParams.get("amount");
   const amountParam = parseInt(tempAmountParam);
-
+  // console.log(amountParam,"amountParamamountParam")
   // if (tempAmountParam?.includes("Rs.")) {
   //   amountParam = parseInt(tempAmountParam?.split(".")[1].split(",").join(""));
   // } else {
