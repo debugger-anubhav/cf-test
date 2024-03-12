@@ -237,7 +237,7 @@ function CustomerPayment() {
 
             dispatch(setTransactionReferenceNumber(response.razorpay_order_id));
             dispatch(setPGTransactionID(response.razorpay_payment_id));
-            dispatch(setAmountPaid(values.amount));
+            dispatch(setAmountPaid(values.amount + body.cfCoins));
             setLoading(true);
             router.push("/success/payment");
           } catch (error) {
@@ -406,7 +406,7 @@ function CustomerPayment() {
                             }
                           }}>
                           <p className={styles.all_invoice_text}>
-                            See my all invoices
+                            See my invoices
                           </p>
                           <OpenIcon
                             color={"#5774AC"}
@@ -564,10 +564,10 @@ function CustomerPayment() {
                               toggleLoginModal(true);
                             }}
                             // href="https://test.rentofurniture.com/user_sign_up"
-                            className="text-5774AC cursor-pointer">
+                            className="text-5774AC cursor-pointer !tracking-desc xl:!tracking-0.3">
                             Login{" "}
                           </a>
-                          <span className="text-71717A">
+                          <span className="text-71717A !tracking-desc xl:!tracking-0.3">
                             to use Cityfurnish coins
                           </span>
                         </div>
