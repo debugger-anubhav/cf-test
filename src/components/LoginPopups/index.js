@@ -125,6 +125,8 @@ const LoginModal = ({
         setProblemType("");
         if (response?.data?.status_code === 200) {
           if (response?.data?.message === "Login Successfully.!") {
+            const event = new Event("login");
+            window?.dispatchEvent(event);
             if (response?.data?.data?.access_token) {
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",

@@ -1,7 +1,25 @@
+import {getLocalStorage} from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
 import {useEffect} from "react";
 
 export const useChatScript = (url, widgetCode) => {
+  let userId = decrypt(getLocalStorage("_ga"));
+  // console.log(userId, "userIdToUse");
+
+  function getData() {
+    // console.log("evenet comeeeee")
+    userId = decrypt(getLocalStorage("_ga"));
+  }
+
   useEffect(() => {
+    window.addEventListener("login", getData);
+    return () => {
+      window.removeEventListener("login", getData);
+    };
+  }, []);
+
+  useEffect(() => {
+    // console.log("userrrr ddddd", userId)
     let script;
     const timerID = setTimeout(() => {
       script = document?.createElement("script");
@@ -32,7 +50,7 @@ export const useChatScript = (url, widgetCode) => {
         }
     })(document, window, function () {
         Freshbots.initiateWidget({autoInitChat: false, getClientParams: function () {
-                return {"cstmr::xtrInfrmtn:userID": ""};
+                return {"cstmr::xtrInfrmtn:${userId}": ""};
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
@@ -47,5 +65,5 @@ export const useChatScript = (url, widgetCode) => {
       }
       clearInterval(timerID);
     };
-  }, [url]);
+  }, [url, userId]);
 };
