@@ -378,7 +378,8 @@ function TransferOwnership({prevScreen, data}) {
                           <div
                             className="mt-4 mb-8 text-5774AC text-16 font-medium font-Poppins cursor-pointer"
                             onClick={() => {
-                              setAddressDrawer(!addressDrawer);
+                              getAllSavedAddresses();
+                              // setAddressDrawer(!addressDrawer);
                             }}>
                             Want to select a different address?
                           </div>
