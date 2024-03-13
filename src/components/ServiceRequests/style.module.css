@@ -68,7 +68,7 @@
   @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 md:w-[80%] w-[95%] px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] lg:mb-6 mb-4 outline-none font-Poppins mx-4 md:mx-0;
 }
 .form_submit_btn {
-  @apply w-full rounded-lg bg-F6B704 font-medium text-222 px-8 min-h-[48px] h-12 lg:h-14 flex items-center justify-center gap-[10px] outline-none font-Poppins;
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 w-full rounded-lg bg-F6B704 font-medium text-222 px-8 min-h-[48px] h-12 lg:h-14 flex items-center justify-center gap-[10px] outline-none font-Poppins;
 }
 .product_img {
   @apply w-[80px] h-[80px] rounded-lg;
@@ -196,7 +196,7 @@
   @apply hidden;
 }
 .transfer_create_btn {
-  @apply mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 mt-8 rounded-lg bg-[#FFDF85] font-medium text-222 md:w-[393px] w-[95%] px-8 h-12 lg:h-14 flex items-center justify-center gap-[10px] mb-6 outline-none font-Poppins mx-4 md:mx-0;
 }
 .contact_input {
   @apply w-full outline-none bg-transparent placeholder:text-14 placeholder:text-71717A placeholder:tracking-0.3;
