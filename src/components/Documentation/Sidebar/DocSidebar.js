@@ -71,6 +71,7 @@ const DocSidebar = ({isOverviewSelected = false}) => {
     if (typeof window !== "undefined") {
       cookie.remove("ci_sessions");
       authCookies.remove("authToken", {path: "/"});
+      authCookies.remove("userId", {path: "/"});
       localStorage.removeItem("tempUserID");
       localStorage.removeItem("user_id");
       localStorage.removeItem("_ga");

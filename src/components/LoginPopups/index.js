@@ -131,9 +131,11 @@ const LoginModal = ({
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
               });
-
-              baseInstance.defaults.headers.common.Authorization =
-                response?.data?.data?.access_token;
+              if (response?.data?.data?.id) {
+                cookies.set("userId", response?.data?.data?.id, {
+                  path: "/",
+                });
+              }
             }
             const encryptedData = encrypt(response?.data?.data?.id.toString());
             setLocalStorage("_ga", encryptedData);

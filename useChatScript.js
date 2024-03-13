@@ -1,25 +1,12 @@
-import {getLocalStorage} from "@/constants/constant";
-import {decrypt} from "@/hooks/cryptoUtils";
+import Cookies from "universal-cookie";
+
 import {useEffect} from "react";
 
 export const useChatScript = (url, widgetCode) => {
-  let userId = decrypt(getLocalStorage("_ga"));
-  console.log(userId, "userIdToUse");
-
-  function getData() {
-    console.log("evenet comeeeee");
-    userId = decrypt(getLocalStorage("_ga"));
-  }
+  const cookies = new Cookies();
+  const userId = cookies.get("userId");
 
   useEffect(() => {
-    window.addEventListener("login", getData);
-    return () => {
-      window.removeEventListener("login", getData);
-    };
-  }, []);
-
-  useEffect(() => {
-    console.log("userrrr ddddd", userId);
     let script;
     const timerID = setTimeout(() => {
       script = document?.createElement("script");
