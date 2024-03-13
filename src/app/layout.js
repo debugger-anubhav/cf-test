@@ -3,7 +3,6 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
-import Script from "./script";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -29,8 +28,10 @@ export const metadata = {
     },
   },
 };
-
 export default function RootLayout({children}) {
+  const login = "";
+  const AMPLITUDE_ID = "";
+
   return (
     <html lang="en">
       <head>
@@ -50,6 +51,10 @@ export default function RootLayout({children}) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
+        <meta
+          property="article:publisher"
+          content="https://www.facebook.com/cityFurnishRental/"
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"
@@ -63,6 +68,11 @@ export default function RootLayout({children}) {
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="https://cityfurnish.com/addon/assets/logo/favicon.png"></link>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -84,7 +94,205 @@ export default function RootLayout({children}) {
             `,
           }}
         />
-        <Script />
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+             (function(){
+               var r;
+               (e=r=r||{}).A="identify";
+               e.B="trackPageView";
+               e.C="fireEmailCaptureEvent";
+               e.D="fireCustomGoal";
+               e.E="firePurchaseEvent";
+               var e="//j.northbeam.io/ota-sp/00488aed-b518-497e-8667-4954d2545f82.js";
+               function t(e){
+                 for(var n=[],r=1;r<arguments.length;r++)n[r-1]=arguments[r];
+                 a.push({fnName:e,args:n})
+               }
+               var a=[],n=((n={_q:a})[r.A]=function(e,n){return t(r.A,e,n)},n[r.B]=function(){return t(r.B)},n[r.C]=function(e,n){return t(r.C,e,n)},n[r.D]=function(e,n){return t(r.D,e,n)},n[r.E]=function(e){return t(r.E,e)},window?.Northbeam=n,document?.createElement("script"));
+               n.async=!0;
+               n.src=e;
+               document?.head.appendChild(n);
+             })();
+           `,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                   !function (f, b, e, v, n, t, s)
+                      {
+                        if (f.fbq)
+                         return;
+                       n = f.fbq = function () {
+                         n.callMethod ?
+                                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                       };
+                       if (!f._fbq)
+                        f._fbq = n;
+                       n.push = n;
+                       n.loaded = !0;
+                       n.version = '2.0';
+                       n.queue = [];
+                       t = b.createElement(e);
+                       t.async = !0;
+                       t.src = v;
+                       s = b.getElementsByTagName(e)[0];
+                       s.parentNode.insertBefore(t, s)
+                       }(window, document, 'script',
+                        'https://connect.facebook.net/en_US/fbevents.js');
+                       fbq('init', '713012115962029');
+                       fbq('track', 'PageView');
+                       `,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{display: "none"}}
+              src="https://www.facebook.com/tr?id=713012115962029&ev=PageView&noscript=1"
+              alt="Facebook Pixel"
+            />
+          </noscript>
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-05PLBRM6KD');
+        if (typeof gtag === 'function' && '${login}' !== '') {
+          gtag('set', 'user_id', '${login}');
+        }
+      `,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                _linkedin_partner_id = "4895321";
+    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+  `,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+    (function (l) {
+      if (!l) {
+        window.lintrk = function (a, b) {
+          window.lintrk.q.push([a, b])
+        };
+        window.lintrk.q = []
+      }
+      var s = document.getElementsByTagName("script")[0];
+      var b = document.createElement("script");
+      b.type = "text/javascript";
+      b.async = true;
+      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+      s.parentNode.insertBefore(b, s);
+    })(window.lintrk);
+  `,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{display: "none"}}
+              alt=""
+              src="https://px.ads.linkedin.com/collect/?pid=4895321&fmt=gif"
+            />
+          </noscript>
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-PF4G2HJ')`,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-PF4G2HJ"
+              height="0"
+              width="0"
+              style={{display: "none", visibility: "hidden"}}></iframe>
+          </noscript>
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+  !function(){"use strict";!function(e,t){var n=e.amplitude||{_q:[],_iq:{}};if(n.invoked)e.console&&console.error&&console.error("Amplitude snippet has been loaded.");else{var r=function(e,t){e.prototype[t]=function(){return this._q.push({name:t,args:Array.prototype.slice.call(arguments,0)}),this}},s=function(e,t,n){return function(r){e._q.push({name:t,args:Array.prototype.slice.call(n,0),resolve:r})}},o=function(e,t,n){e[t]=function(){if(n)return{promise:new Promise(s(e,t,Array.prototype.slice.call(arguments)))}}},i=function(e){for(var t=0;t<m.length;t++)o(e,m[t],!1);for(var n=0;n<g.length;n++)o(e,g[n],!0)};n.invoked=!0;var u=t.createElement("script");u.type="text/javascript",u.integrity="sha384-x0ik2D45ZDEEEpYpEuDpmj05fY91P7EOZkgdKmq4dKL/ZAVcufJ+nULFtGn0HIZE",u.crossOrigin="anonymous",u.async=!0,u.src="https://cdn.amplitude.com/libs/analytics-browser-2.0.0-min.js.gz",u.onload=function(){e.amplitude.runQueuedFunctions||console.log("[Amplitude] Error: could not load SDK")};var a=t.getElementsByTagName("script")[0];a.parentNode.insertBefore(u,a);for(var c=function(){return this._q=[],this},p=["add","append","clearAll","prepend","set","setOnce","unset","preInsert","postInsert","remove","getUserProperties"],l=0;l<p.length;l++)r(c,p[l]);n.Identify=c;for(var d=function(){return this._q=[],this},f=["getEventProperties","setProductId","setQuantity","setPrice","setRevenue","setRevenueType","setEventProperties"],v=0;v<f.length;v++)r(d,f[v]);n.Revenue=d;var m=["getDeviceId","setDeviceId","getSessionId","setSessionId","getUserId","setUserId","setOptOut","setTransport","reset","extendSession"],g=["init","add","remove","track","logEvent","identify","groupIdentify","setGroup","revenue","flush"];i(n),n.createInstance=function(e){return n._iq[e]={_q:[]},i(n._iq[e]),n._iq[e]},e.amplitude=n}}(window,document)}();
+
+  amplitude.init("${AMPLITUDE_ID}");`,
+            }}
+          />
+        )}
+
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: ` !function(e,t,n,s,u,a)
+            {e.twq ||
+              ((s = e.twq =
+                function () {
+                  s.exe ? s.exe.apply(s, arguments) : s.queue.push(arguments);
+                }),
+              (s.version = "1.1"),
+              (s.queue = []),
+              (u = t.createElement(n)),
+              (u.async = !0),
+              (u.src = "https://static.ads-twitter.com/uwt.js"),
+              (a = t.getElementsByTagName(n)[0]),
+              a.parentNode.insertBefore(u, a))}
+            (window,document,'script'); twq('config','ofz28');`,
+            }}></script>
+        )}
       </head>
       <body>
         <ReduxProvider>
