@@ -38,3 +38,16 @@
   color: #71717a !important;
   text-align: justify !important;
 }
+.style_dynamic_keyword__SV8RQ {
+  margin-top: 2rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.dynamic_keyword {
+  padding-right: 1rem !important;
+}

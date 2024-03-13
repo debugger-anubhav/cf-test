@@ -52,7 +52,7 @@
   @apply text-[#5774AC] underline;
 }
 .laterBtn {
-  @apply font-Poppins font-medium h-12 lg:h-14;
+  @apply font-Poppins tracking-desc xl:tracking-0.3 text-14 xl:text-16 font-medium h-12 lg:h-14;
   color: #71717a;
   padding: 0px 32px;
   justify-content: center;
@@ -62,7 +62,7 @@
   border: 2px solid #71717a;
 }
 .saveBtn {
-  @apply md:ml-4 font-Poppins font-medium h-12 lg:h-14;
+  @apply tracking-desc xl:tracking-0.3 text-14 xl:text-16 md:ml-4 font-Poppins font-medium h-12 lg:h-14;
   display: flex;
   padding: 0px 32px;
   justify-content: center;
