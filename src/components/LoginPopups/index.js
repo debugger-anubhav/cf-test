@@ -131,11 +131,6 @@ const LoginModal = ({
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
               });
-              if (response?.data?.data?.id) {
-                cookies.set("userId", response?.data?.data?.id, {
-                  path: "/",
-                });
-              }
             }
             const encryptedData = encrypt(response?.data?.data?.id.toString());
             setLocalStorage("_ga", encryptedData);
@@ -143,6 +138,9 @@ const LoginModal = ({
             if (setIsLogin) {
               setIsLogin(true);
             }
+            cookies.set("userId", encryptedData, {
+              path: "/",
+            });
             dispatch(setLoginState(true));
             setUserId(response?.data?.data?.id);
 

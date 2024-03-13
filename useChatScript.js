@@ -1,11 +1,12 @@
 import Cookies from "universal-cookie";
 
 import {useEffect} from "react";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 export const useChatScript = (url, widgetCode) => {
   const cookies = new Cookies();
-  const userId = cookies.get("userId");
 
+  const userId = decrypt(cookies.get("userId"));
   useEffect(() => {
     let script;
     const timerID = setTimeout(() => {
