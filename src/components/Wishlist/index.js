@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import {useParams} from "next/navigation";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import loadable from "@loadable/component";
@@ -22,14 +21,12 @@ const ProductList = loadable(
 );
 
 const Wishlist = () => {
-  const params = useParams();
-
   return (
     <div className="large_layout">
       <AnnouncementBar />
       <Header />
       <MenuList />
-      <ProductList params={params} />
+      <ProductList />
       <Footer />
       <Notifications />
     </div>
