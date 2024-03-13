@@ -4,10 +4,10 @@ import {useEffect} from "react";
 
 export const useChatScript = (url, widgetCode) => {
   let userId = decrypt(getLocalStorage("_ga"));
-  // console.log(userId, "userIdToUse");
+  console.log(userId, "userIdToUse");
 
   function getData() {
-    // console.log("evenet comeeeee")
+    console.log("evenet comeeeee");
     userId = decrypt(getLocalStorage("_ga"));
   }
 
@@ -19,7 +19,7 @@ export const useChatScript = (url, widgetCode) => {
   }, []);
 
   useEffect(() => {
-    // console.log("userrrr ddddd", userId)
+    console.log("userrrr ddddd", userId);
     let script;
     const timerID = setTimeout(() => {
       script = document?.createElement("script");
