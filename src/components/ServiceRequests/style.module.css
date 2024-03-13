@@ -23,7 +23,7 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 font-Poppins;
 }
 .createRequestBtn {
-  @apply bg-F6B704 rounded-lg w-fit px-8 lg:h-[56px] h-[48px] flex gap-[10px] text-16 font-medium font-Poppins whitespace-nowrap items-center;
+  @apply bg-F6B704 rounded-lg w-fit px-8 lg:h-[56px] h-[48px] flex gap-[10px] text-14 lg:text-16 font-medium font-Poppins whitespace-nowrap items-center tracking-desc lg:tracking-0.3;
 }
 .des_wrapper {
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
