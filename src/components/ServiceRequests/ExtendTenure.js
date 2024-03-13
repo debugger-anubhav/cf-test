@@ -5,9 +5,11 @@ import {useDispatch} from "react-redux";
 import {setServiceRequestDrawer} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
+import {useRouter} from "next/navigation";
 
 function ExtendTenure({prevScreen, orderId}) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const [count, setCount] = useState(5);
   const [recurringId, setRecurringId] = useState();
 
@@ -26,6 +28,25 @@ function ExtendTenure({prevScreen, orderId}) {
     getRecurringId();
   }, []);
 
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  console.log(isSmallScreen, "issmalljnuiwehu");
+
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsSmallScreen(true);
+    } else {
+      setIsSmallScreen(false);
+    }
+  };
+
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
+
   useEffect(() => {
     for (let i = 0; i <= 4; i++) {
       if (count > 1) {
@@ -33,11 +54,15 @@ function ExtendTenure({prevScreen, orderId}) {
           setCount(count - 1);
         }, 1000);
       } else {
-        window?.open(
-          `/upfront_tenure_extension/${recurringId}`,
-          "_blank",
-          "noopener noreferrer",
-        );
+        if (isSmallScreen) {
+          router.push(`/upfront_tenure_extension/${recurringId}`);
+        } else {
+          window?.open(
+            `/upfront_tenure_extension/${recurringId}`,
+            "_blank",
+            "noopener noreferrer",
+          );
+        }
         dispatch(setServiceRequestDrawer(false));
       }
     }
