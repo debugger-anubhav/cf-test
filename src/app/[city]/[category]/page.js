@@ -25,11 +25,20 @@ import FrequentlyAskedQuestions from "@/components/SSRPageSeo/SsrFrequentlyAsked
 import TextContent from "@/components/SSRPageSeo/SsrTextContent";
 import Footer from "@/components/SSRPageSeo/SsrFooter";
 import Subproduct from "./RentAllProducts";
+import {redirect} from "next/navigation";
+
+const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
+const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
+const createEncryptedHash = (text, secretKey) => {
+  const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
+  return encrypted;
+};
 
 export async function getServerSideProps(context) {
   const {nameOfCity, category} = context.params;
   try {
     const data = await create(nameOfCity, category);
+
     return {
       props: {
         data,
@@ -47,12 +56,6 @@ export async function getServerSideProps(context) {
 
 async function create(params) {
   // const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
-  const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
-  const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
-  const createEncryptedHash = (text, secretKey) => {
-    const encrypted = CryptoJS.AES.encrypt(text, secretKey).toString();
-    return encrypted;
-  };
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
 
   if (
@@ -91,61 +94,104 @@ async function create(params) {
   }
 }
 
+async function getAllCitiesList() {
+  const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  console.log("apiii", apiKey);
+  try {
+    const data = await fetch(
+      "https://test.rentofurniture.com/api/" + endPoints.cityList,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Apikey: apiKey,
+        },
+      },
+    );
+
+    return data.json();
+  } catch (error) {
+    console.log(error, "error in citiess");
+  }
+}
+
+// function handleRedirect(req, res) {
+//   res.setHeader("Location", "/destination-page");
+//   res.statusCode = 302; // 302 Found - Temporary Redirect
+//   res.end();
+// }
+
 export default async function Page(params) {
   const metaData = await create(params?.params);
-
   const propParams = params?.params;
   const pageName = params?.params?.category;
+  const cityList = await getAllCitiesList();
+  console.log(cityList, propParams, "dataaaaa");
 
-  // console.log(metaData,"pp")
-  return (
-    <>
-      {pageName === "rent" ? (
-        <meta
-          name="Title"
-          content={`Rent Premium Furniture & Home Appliances in ${propParams?.city} - Cityfurnish`}
-        />
-      ) : (
-        <meta name="Title" content={metaData?.data?.cat_meta_title} />
-      )}
-      <div>
-        <CatAnnouncement />
-        <CatHeader />
-        <CatMenu />
-        {pageName === "appliances-rental" || pageName === "furniture-rental" ? (
-          <div>
-            <HeroBanner />
-            <RentFurnitureAndAppliances params={propParams} />
-            <RecentlyViewedProduct />
-            <TrendingProducts params={propParams} />
-            <OffersAndCoupons />
-            <NewlyLaunched />
-            <DownloadForMobile />
-            <PreDesignCombos />
-            <HasselFreeServicesCards />
-            <LimetedPreiodDiscount />
-            <RentNowBanner params={propParams} />
-            <TryCityMax />
-            <CustomerRating />
-            <MediaCoverage />
-            <CombineSection />
-            <HappySubscribers params={propParams} page={pageName} />
-            <FrequentlyAskedQuestions params={propParams} />
-            <TextContent params={propParams} />
-            <Footer />
-          </div>
-        ) : pageName === "rent" ? (
-          <div>
-            <Subproduct />
-          </div>
+  // function isValidRoute() {
+  //   const isVal = data.includes(propParams?.city);
+  //   return isVal;
+  // }
+
+  // console.log(isValidRoute());
+
+  // if (propParams?.city === "pune")
+  if (
+    cityList?.data?.some(o => o.list_value.toLowerCase() === propParams?.city)
+  ) {
+    return (
+      <>
+        {pageName === "rent" ? (
+          <meta
+            name="Title"
+            content={`Rent Premium Furniture & Home Appliances in ${propParams?.city} - Cityfurnish`}
+          />
         ) : (
-          <div>
-            <CatSubHeader params={params?.params} />
-          </div>
+          <meta name="Title" content={metaData?.data?.cat_meta_title} />
         )}
-      </div>
-    </>
-  );
+        <div>
+          <CatAnnouncement />
+          <CatHeader />
+          <CatMenu />
+          {pageName === "appliances-rental" ||
+          pageName === "furniture-rental" ? (
+            <div>
+              <HeroBanner />
+              <RentFurnitureAndAppliances params={propParams} />
+              <RecentlyViewedProduct />
+              <TrendingProducts params={propParams} />
+              <OffersAndCoupons />
+              <NewlyLaunched />
+              <DownloadForMobile />
+              <PreDesignCombos />
+              <HasselFreeServicesCards />
+              <LimetedPreiodDiscount />
+              <RentNowBanner params={propParams} />
+              <TryCityMax />
+              <CustomerRating />
+              <MediaCoverage />
+              <CombineSection />
+              <HappySubscribers params={propParams} page={pageName} />
+              <FrequentlyAskedQuestions params={propParams} />
+              <TextContent params={propParams} />
+              <Footer />
+            </div>
+          ) : pageName === "rent" ? (
+            <div>
+              <Subproduct />
+            </div>
+          ) : (
+            <div>
+              <CatSubHeader params={params?.params} />
+            </div>
+          )}
+        </div>
+      </>
+    );
+  } else {
+    // console.log(metaData, data, "pp");
+    redirect("/");
+  }
 }
 
 export async function generateMetadata({params}) {
