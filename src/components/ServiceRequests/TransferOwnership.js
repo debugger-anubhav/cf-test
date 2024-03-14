@@ -378,7 +378,8 @@ function TransferOwnership({prevScreen, data}) {
                           <div
                             className="mt-4 mb-8 text-5774AC text-16 font-medium font-Poppins cursor-pointer"
                             onClick={() => {
-                              setAddressDrawer(!addressDrawer);
+                              getAllSavedAddresses();
+                              // setAddressDrawer(!addressDrawer);
                             }}>
                             Want to select a different address?
                           </div>
@@ -412,9 +413,10 @@ function TransferOwnership({prevScreen, data}) {
                             : `!bg-F6B704`
                         }
                         `}
-                            onClick={() => {
-                              formikRef?.current?.submitForm();
-                            }}>
+                            // onClick={() => {
+                            //   formikRef?.current?.submitForm();
+                            // }}
+                          >
                             Create request <ForwardArrowWithLine />
                           </button>
                         </div>

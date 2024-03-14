@@ -101,7 +101,7 @@ export const FooterIcons = {
       icon: `${IconLink}linkedin.svg`,
       link: "https://www.linkedin.com/company/cityfurnish/",
     },
-    {icon: `${IconLink}twitter.svg`, link: "https://twitter.com/CityFurnish"},
+    {icon: `${IconLink}twitter.svg`, link: "https://twitter.com/CityFurnish1"},
     {
       icon: `${IconLink}pinterest.svg`,
       link: "https://in.pinterest.com/cityfurnish/",
@@ -133,7 +133,7 @@ export const ShareIconsForProductPage = {
     },
     {
       icon: `${IconLink}twitter.svg`,
-      link: "https://twitter.com/CityFurnish",
+      link: "https://twitter.com/CityFurnish1",
       shareLink: "",
     },
     {icon: `${IconLink}clipboard.svg`, link: "link", shareLink: ""},

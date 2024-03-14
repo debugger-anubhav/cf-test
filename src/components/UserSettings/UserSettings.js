@@ -122,8 +122,10 @@ export default function UserSettings() {
             className={styles.lgout}
             onClick={() => {
               if (typeof window !== "undefined") {
+                console.log("logoutttttttttt22222222222");
                 cookie.remove("ci_sessions");
                 authCookies.remove("authToken", {path: "/"});
+                authCookies.remove("userId", {path: "/"});
                 localStorage.removeItem("tempUserID");
                 localStorage.removeItem("user_id");
                 localStorage.removeItem("_ga");

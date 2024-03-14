@@ -10,7 +10,7 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
-const ProductList = ({params}) => {
+const ProductList = () => {
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
   const [refreshState, setRefreshState] = useState(1);

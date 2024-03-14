@@ -133,7 +133,8 @@ function CancelMandate({prevScreen, data, heading}) {
                         ? "!bg-[#FFDF85] !cursor-not-allowed"
                         : ``
                     }`}
-                    onClick={() => formikRef?.current?.submitForm()}>
+                    // onClick={() => formikRef?.current?.submitForm()}
+                  >
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>

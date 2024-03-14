@@ -172,6 +172,7 @@
   .dynamic_keyword p,
   .dynamic_keyword span {
     font-weight: 400 !important;
+    padding-right: 8px !important;
   }
   .dynamic_keyword b {
     font-weight: 600 !important;

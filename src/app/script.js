@@ -9,7 +9,6 @@ const Script = () => {
     const currentHostname = window?.location?.hostname;
     const isCityFurnish = currentHostname === "cityfurnish.com/";
     setPathname(isCityFurnish);
-    console.log(isCityFurnish, "isCityFurnish");
   }, []);
 
   const PROD_ENV = pathname;

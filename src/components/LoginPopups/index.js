@@ -125,11 +125,12 @@ const LoginModal = ({
         setProblemType("");
         if (response?.data?.status_code === 200) {
           if (response?.data?.message === "Login Successfully.!") {
+            const event = new Event("login");
+            window?.dispatchEvent(event);
             if (response?.data?.data?.access_token) {
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
               });
-
               baseInstance.defaults.headers.common.Authorization =
                 response?.data?.data?.access_token;
             }
@@ -139,6 +140,9 @@ const LoginModal = ({
             if (setIsLogin) {
               setIsLogin(true);
             }
+            cookies.set("userId", encryptedData, {
+              path: "/",
+            });
             dispatch(setLoginState(true));
             setUserId(response?.data?.data?.id);
 
