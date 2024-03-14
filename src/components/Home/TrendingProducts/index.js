@@ -48,7 +48,7 @@ const TrendingProducts = ({params}) => {
       baseInstance
         .get(endPoints.cityIdByCityName + params?.city)
         .then(res => setParamsCityId(res?.data?.data?.id))
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 
@@ -60,14 +60,14 @@ const TrendingProducts = ({params}) => {
           dispatch(setSeoApplianceCrowd(res?.data?.data));
           setData(res?.data?.data);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params?.category === "furniture-rental") {
       getSeoFurnitureTrendProduct()
         .then(res => {
           setData(res?.data?.data);
           // console.log("seooFurniture-rentaleeeeeeeeeee")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else {
       getTrendyProducts()
         .then(res => {
@@ -75,7 +75,7 @@ const TrendingProducts = ({params}) => {
           setData(res?.data?.data);
           dispatch(addtrendingproduct(res?.data?.data));
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 

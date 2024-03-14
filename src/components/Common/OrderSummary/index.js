@@ -55,7 +55,7 @@ const OrderSummary = ({
             setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   };
 

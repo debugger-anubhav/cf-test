@@ -41,7 +41,7 @@ const ProductList = () => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, [refreshState]);
 
   const data = categoryPageReduxData?.savedProducts;

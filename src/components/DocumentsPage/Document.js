@@ -20,7 +20,7 @@ const Document = () => {
       .then(res => {
         setApiData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const statusUpdateApiCall = (item, updatedStatus) => {
@@ -32,7 +32,7 @@ const Document = () => {
       .then(res => {
         documentApproveApiCall();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   useEffect(() => {
     documentApproveApiCall();

@@ -104,7 +104,7 @@ const MainSection = ({login}) => {
         .then(res => {
           setCode(res?.data?.data);
         })
-        .catch(err => console.log(err, "err in referal code"));
+        .catch(err => console.log(err?.message || "some error"));
     }
     setuserId(userIdFromStorage);
     setloading(false);

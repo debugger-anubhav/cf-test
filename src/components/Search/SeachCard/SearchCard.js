@@ -89,10 +89,10 @@ const SearchCard = ({
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item added to the wishlist", 1);
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(prev => !prev);
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log(err?.message || "some error"))
       : removewhislistProduct()
           .then(res => {
             getSavedItems()
@@ -105,10 +105,10 @@ const SearchCard = ({
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item removed from the wishlist", 2);
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(prev => !prev);
           })
-          .catch(err => console.log(err));
+          .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleWhislistCard = async e => {

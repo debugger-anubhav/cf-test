@@ -20,7 +20,7 @@ const BannerSection = ({params}) => {
         dispatch(getBannerImages(res?.data?.data));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
 

@@ -29,7 +29,7 @@ const SubscriptionPage = ({tab, setTab}) => {
       setsubscriptionData(response?.data?.data);
       setSkeletonLoading(false);
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
       setSkeletonLoading(false);
     }
     // setPart(2);

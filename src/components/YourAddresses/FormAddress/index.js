@@ -129,7 +129,7 @@ const FormAddress = ({setTab, tab, id}) => {
     await baseInstance
       .get(endPoints.cityIdByCityName + val)
       .then(res => setCityId(res?.data?.data?.id))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
 
     toggleDrawer();
   };
@@ -149,7 +149,7 @@ const FormAddress = ({setTab, tab, id}) => {
         if (tab === 2) handleUpdateAddress(values);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

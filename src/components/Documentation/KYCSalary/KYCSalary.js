@@ -78,7 +78,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
         setDocsData(res?.data?.data);
         setIsSelected(res?.data?.data?.supported_docs?.split(",")?.[0]);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleFileInputChange = e => {
@@ -150,7 +150,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
         setDisableButton(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setDisableButton(false);
       });
   };

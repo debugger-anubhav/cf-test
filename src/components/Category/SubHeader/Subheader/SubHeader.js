@@ -257,7 +257,7 @@ const SubHeader = ({params}) => {
           dispatch(addFilterData(res?.data?.data));
           setShowData(true);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, [
     categoryId,

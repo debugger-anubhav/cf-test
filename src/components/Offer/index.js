@@ -26,7 +26,7 @@ const OfferPage = () => {
         setSkeletonLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setSkeletonLoading(false);
       });
   };

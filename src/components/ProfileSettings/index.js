@@ -73,7 +73,7 @@ const ProfileSettings = () => {
       setUserDetails({...response?.data?.data});
       setEmailState(response?.data?.data?.is_verified);
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
       setLoadingSkeleton(false);
     }
   };
@@ -140,7 +140,7 @@ const ProfileSettings = () => {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setOtpError(
           "The OTP you entered is not valid. Please make sure you entered the OTP correctly and try again.",
         );
@@ -169,7 +169,7 @@ const ProfileSettings = () => {
         window.location.reload();
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

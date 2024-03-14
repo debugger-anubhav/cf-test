@@ -14,7 +14,7 @@ export default function TextContent({params}) {
         setData(res?.data?.data);
         // console.log("home");
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const SeoAppliancesPageText = () => {
     baseInstance
@@ -25,7 +25,7 @@ export default function TextContent({params}) {
       .then(res => {
         setData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const SeoFurniturePageText = () => {
     baseInstance
@@ -36,7 +36,7 @@ export default function TextContent({params}) {
       .then(res => {
         setData(res?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   useEffect(() => {
     if (
@@ -46,7 +46,7 @@ export default function TextContent({params}) {
       baseInstance
         .get(endPoints.cityIdByCityName + params?.city)
         .then(res => setParamsCityId(res?.data?.data?.id))
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 

@@ -41,7 +41,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     baseInstance
       .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
       .then(res => setFaqs(res?.data?.data?.content))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const toggleQuestion = index => {
@@ -59,20 +59,20 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
           setFaqs(res?.data?.data);
           // console.log("appliances-rental")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params?.category === "furniture-rental") {
       getFaqsSeoFurniturePage()
         .then(res => {
           setFaqs(res?.data?.data);
           // console.log("furniture-rental")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params === "category") {
       getFaqsCategory()
         .then(res => {
           setFaqs(res?.data?.data);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params === "citymax") {
       getFaqsCitymax();
     } else {
@@ -81,7 +81,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
           setFaqs(res?.data?.data);
           // console.log("home")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 

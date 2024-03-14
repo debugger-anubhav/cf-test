@@ -82,7 +82,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
         setSkeletonLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setSkeletonLoading(false);
       });
   };

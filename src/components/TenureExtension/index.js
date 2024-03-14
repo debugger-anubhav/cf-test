@@ -73,7 +73,7 @@ function TenureExtension() {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setCalledparentApi(true);
       });
   };
@@ -87,7 +87,7 @@ function TenureExtension() {
       setDealCodeNumber(response?.data?.data?.dealcodenumber);
       parentApi(response?.data?.data?.dealcodenumber);
     } catch (error) {
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
 

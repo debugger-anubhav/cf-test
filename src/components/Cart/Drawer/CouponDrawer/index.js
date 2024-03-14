@@ -57,7 +57,7 @@ const CouponDrawer = ({
         setShowError(true);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

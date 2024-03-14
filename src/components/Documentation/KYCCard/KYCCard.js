@@ -60,7 +60,7 @@ const KYCCard = ({handleKycState}) => {
       })
       .catch(err => {
         setLoading(false);
-        console.log(err, "errr");
+        console.log(err?.message, "errr");
       });
   };
 

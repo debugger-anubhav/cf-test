@@ -21,7 +21,7 @@ function ExtendTenure({prevScreen, orderId}) {
       console.log(response, "responses");
       setRecurringId(response?.data?.data?.recurring_zo_id);
     } catch (error) {
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
   useEffect(() => {

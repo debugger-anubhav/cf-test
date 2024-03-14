@@ -89,7 +89,7 @@ const SearchList = () => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const validateAuth = async () => {

@@ -27,7 +27,7 @@ const YouMightLike = ({heading, isbg, params}) => {
         dispatch(addYouMightLike(res?.data?.data));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(addYouMightLike([]));
       });
   }, []);

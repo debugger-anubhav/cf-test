@@ -104,7 +104,7 @@ function TransferOwnership({prevScreen, data}) {
         setPrimaryAddress(newPrimaryAddress);
         setAddressDrawer(!addressDrawer);
       })
-      .catch(err => console.log(err, "err"));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const toggleDrawer = () => {

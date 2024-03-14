@@ -39,7 +39,7 @@ function ServiceRequestType({
       .then(res => {
         setServicesType(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const getProductLists = () => {
@@ -48,7 +48,7 @@ function ServiceRequestType({
       .then(res => {
         setProductDetail(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

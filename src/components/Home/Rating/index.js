@@ -42,7 +42,7 @@ const CustomerRating = () => {
       .then(res => {
         dispatch(addGoogleReviews(res?.data?.data));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, [cityId]);
   useEffect(() => {
     baseInstance
@@ -50,7 +50,7 @@ const CustomerRating = () => {
       .then(res => {
         setReviewLink(res?.data?.data?.newReviewUri);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, [getLocalStorage("cityId")]);
 
   const sliderRef = useRef(null);

@@ -29,7 +29,7 @@ const MenuList = ({hasMb = true}) => {
         setLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setLoading(false);
       });
     // }
