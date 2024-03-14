@@ -160,7 +160,7 @@ const Header = () => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(() => console.log(""));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const validateAuth = async () => {
