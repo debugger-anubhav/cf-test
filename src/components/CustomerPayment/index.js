@@ -130,7 +130,7 @@ function CustomerPayment() {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -242,7 +242,7 @@ function CustomerPayment() {
             router.push("/success/payment");
           } catch (error) {
             setLoading(false);
-            console.log(error);
+            console.log(error?.message || "some error");
           }
         },
         prefill: {

@@ -147,7 +147,7 @@ const ProductDetails = ({params}) => {
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
       })
       .catch(err => {
-        console.log(err, "err");
+        console.log(err?.message || "some message");
       });
   };
 
@@ -158,7 +158,7 @@ const ProductDetails = ({params}) => {
         setDurationArray(res?.data?.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
 
@@ -175,7 +175,7 @@ const ProductDetails = ({params}) => {
         console.log(res);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   }, []);
 
@@ -227,10 +227,10 @@ const ProductDetails = ({params}) => {
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item added to the wishlist", 1);
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(true);
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log(err?.message || "some error"))
       : removewhislistProduct()
           .then(res => {
             getSavedItems()
@@ -244,10 +244,10 @@ const ProductDetails = ({params}) => {
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item removed from the wishlist", 2);
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(false);
           })
-          .catch(err => console.log(err));
+          .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleWhislistCard = async e => {
@@ -389,7 +389,7 @@ const ProductDetails = ({params}) => {
         setIsLoading(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setIsLoading(false);
       });
   };

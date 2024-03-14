@@ -33,7 +33,7 @@ const CustomerRating = ({params}) => {
         dispatch(getCustomerReviews(res?.data?.data));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(getCustomerReviews([]));
       });
   };

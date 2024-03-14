@@ -62,7 +62,7 @@ const ProductCard = ({
         refreshFunction(Math.random());
         showToastNotification("Item deleted from the wishlist", 3);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const handleProductClick = (e, productID, seourl) => {
     if (!e.target.classList.contains(styles.child)) {

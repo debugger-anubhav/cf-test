@@ -88,7 +88,7 @@ const ChangeNumber = ({
       console.log(response, "response in number otpp");
       setModalCategory("verifyOtp");
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -116,7 +116,6 @@ const ChangeNumber = ({
         showToastNotification("Number verified successfully", 1);
       })
       .catch(err => {
-        console.log(err, "err in verif");
         if (err.response?.data?.data?.timeout)
           setOtpError(
             "Sorry, your OTP has timed out. Please request a new OTP to continue.",

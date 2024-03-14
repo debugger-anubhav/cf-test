@@ -40,7 +40,7 @@ const PaymentConfirmation = () => {
         setSkeletonLoder(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setSkeletonLoder(false);
       });
   };

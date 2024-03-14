@@ -50,7 +50,7 @@ const PastpaymentDrawer = ({
       const url = `/customerpayment?${queryString}`;
       router.push(url);
     } catch (error) {
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
 

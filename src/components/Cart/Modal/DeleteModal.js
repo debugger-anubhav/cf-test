@@ -74,7 +74,7 @@ const DeleteModal = ({
       closeModal();
       showToast && showToastNotification("Item deleted from the cart", 3);
     } catch (error) {
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
   const {refetch: getSavedItems} = useQuery(
@@ -121,10 +121,10 @@ const DeleteModal = ({
               dispatch(addSaveditemID(ids));
               showToastNotification("Item added to the wishlist", 1);
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err?.message || "some error"));
           setInWishList(prev => !prev);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
 
     handleDeleteItem(false);
   };
@@ -156,7 +156,7 @@ const DeleteModal = ({
                   handleWhislistCard(e);
                   // handleDeleteItem();
                 } catch (error) {
-                  console.error(error);
+                  console.log(error?.message);
                 }
               }}>
               Save to favorites
@@ -188,7 +188,7 @@ const DeleteModal = ({
                   handleWhislistCard(e);
                   // handleDeleteItem();
                 } catch (error) {
-                  console.error(error);
+                  console.log(error?.message);
                 }
               }}
               className={`${styles.white_btn} ${styles.btn}`}>

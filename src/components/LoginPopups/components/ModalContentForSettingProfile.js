@@ -37,7 +37,7 @@ const ModalContentForSettingProfile = ({
       showToastNotification("Your details are saved successfully", 1);
       handleChangeRoute();
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
   return (

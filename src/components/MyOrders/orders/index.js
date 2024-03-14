@@ -15,7 +15,7 @@ const OrderPage = ({tab, setTab}) => {
       );
       setOrderData(response?.data?.data);
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
     setPart(2);
   };

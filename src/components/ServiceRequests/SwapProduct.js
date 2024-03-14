@@ -130,7 +130,7 @@ const SecondScreen = ({data, setSelectedProductForSwap}) => {
     baseInstance
       .get(endPoints.searchKey(inputKey, city))
       .then(res => setProductData(res?.data?.data?.products))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

@@ -65,7 +65,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
       closeModal();
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

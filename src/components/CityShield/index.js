@@ -37,7 +37,7 @@ const CityShieldPage = () => {
         const formattedDate = format(parsedDate, "MMM dd, yyyy");
         setOrderDate(formattedDate);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

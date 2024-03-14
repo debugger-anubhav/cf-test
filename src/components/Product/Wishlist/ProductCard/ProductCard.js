@@ -48,7 +48,7 @@ const ProductCard = ({
 
         refreshFunction(Math.random());
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   return (

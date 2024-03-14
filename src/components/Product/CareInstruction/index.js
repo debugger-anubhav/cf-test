@@ -17,7 +17,7 @@ const CareInstruction = ({params}) => {
         dispatch(addCareInstructions(res?.data?.data));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(addCareInstructions([]));
       });
   }, []);

@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.log("Error fetching data:", error?.message);
     return {
       props: {
         data: null,
@@ -111,7 +111,7 @@ async function getAllCitiesList() {
 
     return data.json();
   } catch (error) {
-    console.log(error, "error in citiess");
+    console.log(error?.message);
   }
 }
 

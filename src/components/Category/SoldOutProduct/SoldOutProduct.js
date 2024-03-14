@@ -135,7 +135,7 @@ export const SoldOutProduct = () => {
           }
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {

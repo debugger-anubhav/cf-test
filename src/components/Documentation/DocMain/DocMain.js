@@ -48,7 +48,7 @@ const DocMain = () => {
       setCreditScore(parseInt(response?.data?.data?.credit_score));
       setCibilDocsData(response?.data?.data?.cibilDocsData);
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

@@ -45,7 +45,7 @@ function ServiceRequets() {
         setLoadingSkeleton(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setLoadingSkeleton(false);
       });
   };

@@ -153,7 +153,7 @@ const CitymaxPlanDetail = () => {
         );
         setTotalSlots(slots);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {
@@ -298,7 +298,7 @@ const CitymaxPlanDetail = () => {
         console.log(res?.data?.data);
         openModal && toggleModal();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleAddToCart = () => {
@@ -337,7 +337,7 @@ const CitymaxPlanDetail = () => {
         } else showToastNotification("Something went wrong", 3);
       })
       .catch(() => {
-        // console.log(err);
+        // console.log(err?.message || "some error");
       });
   };
 

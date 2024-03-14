@@ -39,7 +39,7 @@ export default function MainSection() {
           router.push("/");
         }, 3000);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const getFeedbackData = () => {
     baseInstance
@@ -51,7 +51,7 @@ export default function MainSection() {
         setFeedbackData(res?.data?.data);
         setRating(res?.data?.data?.rating);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const validationSchema = Yup.object({
     textarea: Yup.string().required(

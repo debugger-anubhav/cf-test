@@ -49,7 +49,7 @@ export default function CFCoins() {
       })
       .catch(err => {
         setLoadingSkeleton(false);
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
   const fetchAvailCoins = () => {
@@ -59,7 +59,7 @@ export default function CFCoins() {
         if (res?.data?.data?.length > 0)
           setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   useEffect(() => {
     getTransactions();

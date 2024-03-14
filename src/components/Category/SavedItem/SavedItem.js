@@ -58,7 +58,7 @@ const SavedItem = () => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const isAuth = async () => {

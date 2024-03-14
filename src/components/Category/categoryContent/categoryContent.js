@@ -28,7 +28,7 @@
 //   useEffect(() => {
 //     getCategoryText()
 //       .then(res => dispatch(addCategoryTextContent(res?.data?.data)))
-//       .catch(err => console.log(err));
+//       .catch(err => console.log(err?.message || "some error"));
 //   }, []);
 
 //   return (
@@ -75,7 +75,7 @@ const CategoryContent = ({subCategoryId}) => {
   useEffect(() => {
     getCategoryText()
       .then(res => dispatch(addCategoryTextContent(res?.data?.data)))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, []);
 
   const removeInlineStyles = html => {

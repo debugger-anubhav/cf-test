@@ -31,21 +31,21 @@ const RentNowBanner = ({params}) => {
           setRentNowBanner(res?.data?.data);
           // console.log("homepage")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params?.category === "appliances-rental") {
       getSeoApplianceBanners()
         .then(res => {
           setRentNowBanner(res?.data?.data);
           // console.log("appliances-rental")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     } else if (params?.category === "furniture-rental") {
       getSeoFurnitureBanners()
         .then(res => {
           setRentNowBanner(res?.data?.data);
           // console.log("furniture-rental")
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 

@@ -109,7 +109,7 @@ const ShoppingCartSection = () => {
         dispatch(setShowCartItem(true));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(setShowCartItem(true));
       });
   };
@@ -162,7 +162,7 @@ const ShoppingCartSection = () => {
         setShowMonthlyToggle(isMonthlyCity);
         if (isMonthlyCity === false) setLocalStorage("isMonthly", false);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const fetchAvailCoins = () => {
@@ -175,7 +175,7 @@ const ShoppingCartSection = () => {
         if (res?.data?.data?.length > 0)
           setAvailCoin(parseInt(res?.data?.data?.[0]?.topup_amount));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {
@@ -252,7 +252,7 @@ const ShoppingCartSection = () => {
         .then(res => {
           console.log(res, "res in updated qunatity");
         })
-        .catch(err => console.log(err, "error in update qunatity"));
+        .catch(err => console.log(err?.message));
     }
     fetchBill();
   };
@@ -288,7 +288,7 @@ const ShoppingCartSection = () => {
         }
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -328,7 +328,7 @@ const ShoppingCartSection = () => {
         setIsOfflineCustomer(parseInt(response?.data?.data?.is_offline_user)),
       );
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -362,7 +362,7 @@ const ShoppingCartSection = () => {
       .then(res => {
         setIsDeletedProduct(res?.data?.data?.isDeleted);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

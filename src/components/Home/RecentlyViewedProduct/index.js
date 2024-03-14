@@ -51,7 +51,7 @@ const RecentlyViewedProduct = ({page}) => {
       .then(res => {
         dispatch(addRecentlyViewedProduct(res?.data?.data));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, [isLogin]);
 
   const sliderRef = useRef(null);

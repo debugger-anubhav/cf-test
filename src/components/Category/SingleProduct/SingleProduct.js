@@ -144,7 +144,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             }
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     },
     [
       pageNo,

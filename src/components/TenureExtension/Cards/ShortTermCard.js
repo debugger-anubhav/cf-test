@@ -83,7 +83,7 @@ function ShortTermCard({
       router.push("/success/payment");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
 
@@ -157,7 +157,7 @@ function ShortTermCard({
       .then(res => {
         setApiData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {
