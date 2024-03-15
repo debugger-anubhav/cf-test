@@ -192,10 +192,6 @@ const Header = () => {
     validateAuth();
   }, [isLogin]);
 
-  // useEffect(() => {
-  //   fetchCartItems();
-  // }, []);
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (iconRef.current && !iconRef.current.contains(event.target)) {
