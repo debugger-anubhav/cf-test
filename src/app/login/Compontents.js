@@ -22,8 +22,7 @@ import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import LoginModal from "@/components/LoginPopups";
-import {useDispatch, useSelector} from "react-redux";
-import {reduxSetModalState} from "@/store/Slices";
+import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -104,7 +103,6 @@ const CombineSection = loadable(() =>
 );
 
 export default function LoginComponents() {
-  const dispatch = useDispatch();
   const router = useRouter();
   const myElementRef = useRef();
   useEffect(() => {
@@ -143,7 +141,6 @@ export default function LoginComponents() {
   }, [homePageReduxData?.loginPopupState]);
 
   const toggleLoginModal = bool => {
-    dispatch(reduxSetModalState(bool));
     setLoginModal(bool);
     router.push("/");
   };
@@ -160,7 +157,7 @@ export default function LoginComponents() {
       <div ref={myElementRef} className="large_layout">
         {useChatScript()}
         <AnnouncementBar />
-        <Header />
+        <Header page="login" />
         <MenuList />
         <div className="lg:min-h-[385px] min-h-[150px]">
           <HeroBanner />
