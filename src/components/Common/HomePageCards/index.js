@@ -92,6 +92,7 @@ const Card = ({
               .then(res => {
                 dispatch(addSaveditems(res?.data?.data));
                 showToastNotification("Item added to the wishlist", 1);
+                window?.fbq("track", "AddToWishlist");
                 const ids = res?.data?.data.map(item => {
                   return item?.id;
                 });
