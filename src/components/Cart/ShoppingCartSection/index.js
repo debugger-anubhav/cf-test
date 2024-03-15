@@ -123,6 +123,7 @@ const ShoppingCartSection = () => {
         window?.gtag("event", "begin_checkout", {
           items: eventItems,
         });
+        window?.fbq("track", "InitiateCheckout");
       })
       .catch(err => {
         console.log(err?.message || "some error");
