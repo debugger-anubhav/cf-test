@@ -16,7 +16,7 @@ const PaymentSuccess = () => {
     baseInstance
       .get(endPoints.addToCart.paymentSuccessScript)
       .then(res => console.log(res, "ressssss"))
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {
