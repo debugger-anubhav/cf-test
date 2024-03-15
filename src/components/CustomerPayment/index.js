@@ -51,7 +51,8 @@ function CustomerPayment() {
   const nameParam = urlParams.get("name");
   const tempAmountParam = urlParams.get("amount");
   const amountParam = parseInt(tempAmountParam);
-  // console.log(amountParam,"amountParamamountParam")
+  const queryParam = urlParams.get("q");
+  // console.log(urlParams, queryParam, "urllparam");
   // if (tempAmountParam?.includes("Rs.")) {
   //   amountParam = parseInt(tempAmountParam?.split(".")[1].split(",").join(""));
   // } else {
@@ -92,6 +93,24 @@ function CustomerPayment() {
   //     notes: "",
   //   });
   // }, [currentURL]);
+
+  const redirectToSomething = async () => {
+    try {
+      const response = await baseInstance.get(
+        `short-urls/shortUrlToLong/${queryParam}`,
+      );
+
+      if (response?.data?.data) router.push(response?.data?.data);
+    } catch (err) {
+      console.log(err?.message || "some error");
+    }
+  };
+
+  useEffect(() => {
+    if (queryParam) {
+      redirectToSomething();
+    }
+  }, []);
 
   const fetchAvailCoins = async () => {
     try {
