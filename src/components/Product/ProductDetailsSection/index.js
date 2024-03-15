@@ -145,6 +145,20 @@ const ProductDetails = ({params}) => {
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
+        const scriptData = res?.data?.data?.[0];
+        window?.gtag("event", "view_item", {
+          items: [
+            {
+              id: scriptData?.id,
+              name: scriptData?.product_name,
+              brand: scriptData?.brand,
+              category: scriptData?.category_name,
+              list_position: 1,
+              quantity: scriptData?.quantity,
+              price: scriptData?.price,
+            },
+          ],
+        });
       })
       .catch(err => {
         console.log(err?.message || "some message");
@@ -226,6 +240,7 @@ const ProductDetails = ({params}) => {
                 });
                 dispatch(addSaveditemID(ids));
                 showToastNotification("Item added to the wishlist", 1);
+                window?.fbq("track", "AddToWishlist");
               })
               .catch(err => console.log(err?.message || "some error"));
             setInWishList(true);
@@ -337,21 +352,6 @@ const ProductDetails = ({params}) => {
   // };
 
   const handleAddToCart = async () => {
-    // window?.gtag("event", "add_to_cart", {
-    //   items: [
-    //     {
-    //       id: "CHLOEKINGBED-GREY",
-    //       name: "Chloe King Size Double Bed in Grey Color",
-    //       list_name: "Search Results",
-    //       brand: "Cityfurnish",
-    //       category: "Home Furniture",
-    //       list_position: 1,
-    //       quantity: 1,
-    //       price: "899",
-    //     },
-    //   ],
-    // });
-
     setIsLoading(true);
     const isAuthenticated = await checkAuthentication();
     const headers = {
@@ -384,6 +384,21 @@ const ProductDetails = ({params}) => {
           if (!isItemInCart) {
             dispatch(addItemsToCart(apiData));
             showToastNotification("Item added to cart", 1, isSmallScreen);
+            window?.gtag("event", "add_to_cart", {
+              items: [
+                {
+                  id: body?.productId,
+                  name: prodDetails?.[0]?.product_name,
+                  list_name: "Search Results",
+                  brand: "Cityfurnish",
+                  category: prodDetails?.[0]?.category_name,
+                  list_position: 1,
+                  quantity: body?.quantity,
+                  price: body?.price,
+                },
+              ],
+            });
+            console.log("Analytics----Add to cart");
           }
         }
         setIsLoading(false);

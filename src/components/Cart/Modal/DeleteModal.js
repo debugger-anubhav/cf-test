@@ -120,6 +120,7 @@ const DeleteModal = ({
               });
               dispatch(addSaveditemID(ids));
               showToastNotification("Item added to the wishlist", 1);
+              window?.fbq("track", "AddToWishlist");
             })
             .catch(err => console.log(err?.message || "some error"));
           setInWishList(prev => !prev);
