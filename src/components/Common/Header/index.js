@@ -42,7 +42,7 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 
 const HEADER_HEIGHT = 32;
 
-const Header = () => {
+const Header = ({page}) => {
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const {checkAuthentication} = useAuthentication();
 
@@ -283,7 +283,9 @@ const Header = () => {
         city={cityForModal}
       />
       <div
-        className={`${modalStateFromRedux && "!z-0"} ${styles.main}`}
+        className={` ${styles.main} ${modalStateFromRedux && "!z-0"}  ${
+          page === "login" && "!z-0"
+        }`}
         style={{
           boxShadow: hasScrolled ? "0 4px 4px 0 rgba(0,0,0,.06)" : "none",
         }}>
