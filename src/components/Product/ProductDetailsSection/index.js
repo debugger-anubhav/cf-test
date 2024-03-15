@@ -337,21 +337,6 @@ const ProductDetails = ({params}) => {
   // };
 
   const handleAddToCart = async () => {
-    // window?.gtag("event", "add_to_cart", {
-    //   items: [
-    //     {
-    //       id: "CHLOEKINGBED-GREY",
-    //       name: "Chloe King Size Double Bed in Grey Color",
-    //       list_name: "Search Results",
-    //       brand: "Cityfurnish",
-    //       category: "Home Furniture",
-    //       list_position: 1,
-    //       quantity: 1,
-    //       price: "899",
-    //     },
-    //   ],
-    // });
-
     setIsLoading(true);
     const isAuthenticated = await checkAuthentication();
     const headers = {
@@ -384,6 +369,21 @@ const ProductDetails = ({params}) => {
           if (!isItemInCart) {
             dispatch(addItemsToCart(apiData));
             showToastNotification("Item added to cart", 1, isSmallScreen);
+            window?.gtag("event", "add_to_cart", {
+              items: [
+                {
+                  id: body?.productId,
+                  name: prodDetails?.[0]?.product_name,
+                  list_name: "Search Results",
+                  brand: "Cityfurnish",
+                  category: prodDetails?.[0]?.category_name,
+                  list_position: 1,
+                  quantity: body?.quantity,
+                  price: body?.price,
+                },
+              ],
+            });
+            console.log("Analytics----Add to cart");
           }
         }
         setIsLoading(false);
