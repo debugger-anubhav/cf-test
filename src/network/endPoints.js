@@ -100,7 +100,8 @@ export const endPoints = {
     getTransactionId: dealCodeNumber =>
       `fc-payments/getTrasactionId?dealCodeNumber=${dealCodeNumber}`,
     checkProductQuantity: `fc-shopping-carts/checkCartProductQuantity`,
-    paymentSuccessScript: `fc-payments/getPaymentSuccessScriptData/878906731/90192`,
+    paymentSuccessScript: (orderId, userId) =>
+      `fc-payments/getPaymentSuccessScriptData/${orderId}/${userId}`,
   },
 
   yourAddressPage: {

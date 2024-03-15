@@ -7,11 +7,14 @@ import {useDispatch} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
+// import {getLocalStorage} from "@/constants/constant";
+// import {decrypt} from "@/hooks/cryptoUtils";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const dispatch = useDispatch();
+  // const userId = decrypt(getLocalStorage("_ga"));
 
   const oid = searchParams.get("oid");
 
@@ -32,6 +35,56 @@ const PaymentConfirmation = () => {
     return () => clearInterval(countdown);
   }, [router, timer]);
 
+  // const getPaymentScript = () => {
+  //   baseInstance
+  //     .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
+  //     .then(res => {
+  //       console.log(res, "ressssss");
+
+  //       const scriptData = res?.data?.data;
+
+  //       const eventItems = [];
+  //       res?.data?.data?.forEach((product, index) => {
+  //         const item = {
+  //           productId: product.id,
+  //           productName: product?.name,
+  //           quantity: product?.quantity,
+  //           price: product?.price,
+  //           brand: product?.brand,
+  //           list_position: index + 1,
+  //         };
+  //         eventItems.push(item);
+  //       });
+  //       console.log(eventItems, "eventItems");
+
+  //       window?.Northbeam.firePurchaseEvent({
+  //         id: scriptData?.transaction_id,
+  //         totalPrice: scriptData?.value,
+  //         shippingPrice: scriptData?.shipping,
+  //         taxPrice: scriptData?.tax,
+  //         coupons: "WELCOME10",
+  //         currency: scriptData?.currency,
+  //         customerId: "CF-11011",
+  //         lineItems: eventItems,
+  //       });
+
+  //       window?.gtag("event", "purchase", {
+  //         transaction_id: scriptData?.transaction_id,
+  //         value: scriptData?.value,
+  //         currency: scriptData?.currency,
+  //         tax: scriptData?.tax,
+  //         shipping: scriptData?.shipping,
+  //         items: eventItems,
+  //       });
+  //       window?.fbq("track", "Purchase", {
+  //         currency: scriptData?.currency,
+  //         value: scriptData?.value,
+  //       });
+  //       window?.lintrk("track", {conversion_id: 11504433});
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
   const getTransactionId = id => {
     baseInstance
       .get(endPoints.addToCart.getTransactionId(id))
@@ -46,6 +99,7 @@ const PaymentConfirmation = () => {
   };
   useEffect(() => {
     getTransactionId(oid);
+    // getPaymentScript();
   }, []);
 
   return (
