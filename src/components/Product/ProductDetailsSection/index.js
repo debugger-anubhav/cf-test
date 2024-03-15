@@ -145,6 +145,20 @@ const ProductDetails = ({params}) => {
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
+        const scriptData = res?.data?.data?.[0];
+        window?.gtag("event", "view_item", {
+          items: [
+            {
+              id: scriptData?.id,
+              name: scriptData?.product_name,
+              brand: scriptData?.brand,
+              category: scriptData?.category_name,
+              list_position: 1,
+              quantity: scriptData?.quantity,
+              price: scriptData?.price,
+            },
+          ],
+        });
       })
       .catch(err => {
         console.log(err?.message || "some message");
