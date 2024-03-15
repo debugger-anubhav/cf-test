@@ -109,12 +109,12 @@ const CitymaxHeader = ({zIndex}) => {
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
     getTrendingSearch()
       .then(res => {
         // setArr(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
 
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
@@ -126,7 +126,7 @@ const CitymaxHeader = ({zIndex}) => {
           dispatch(addCategory(res?.data?.data));
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           dispatch(addCategory([]));
         });
     }
@@ -146,7 +146,7 @@ const CitymaxHeader = ({zIndex}) => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const validateAuth = async () => {
@@ -167,7 +167,7 @@ const CitymaxHeader = ({zIndex}) => {
         dispatch(setShowCartItem(true));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(setShowCartItem(true));
       });
   };
@@ -212,7 +212,7 @@ const CitymaxHeader = ({zIndex}) => {
           );
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, []);
 
   // useEffect(() => {

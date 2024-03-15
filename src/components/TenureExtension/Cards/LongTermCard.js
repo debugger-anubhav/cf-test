@@ -79,7 +79,7 @@ function LongTermCard({
       router.push("/success/payment");
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
 
@@ -154,7 +154,7 @@ function LongTermCard({
       .then(res => {
         setApiData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

@@ -91,7 +91,6 @@ const Header = () => {
   const toggleEmptyCartModal = bool => {
     dispatch(reduxSetModalState(bool));
     setEmptyModal(bool);
-    console.log(click);
   };
 
   const cityId = getLocalStorage("cityId");
@@ -124,12 +123,12 @@ const Header = () => {
         dispatch(addCityList(res?.data?.data));
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
     getTrendingSearch()
       .then(res => {
         setArr(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
 
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
@@ -141,7 +140,7 @@ const Header = () => {
           dispatch(addCategory(res?.data?.data));
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           dispatch(addCategory([]));
         });
     }
@@ -161,7 +160,7 @@ const Header = () => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const validateAuth = async () => {
@@ -184,7 +183,7 @@ const Header = () => {
         dispatch(setShowCartItem(true));
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(setShowCartItem(true));
       });
   };
@@ -239,7 +238,7 @@ const Header = () => {
           );
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   }, []);
 
   useEffect(() => {}, [isLogin]);
@@ -299,6 +298,7 @@ const Header = () => {
               DrawerName="menu"
               toggleLoginModal={toggleLoginModal}
               setClick={val => setClick(val)}
+              click={click}
             />
             <a
               href={"/"}

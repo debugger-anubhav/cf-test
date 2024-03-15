@@ -51,7 +51,7 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
       dispatch(emptyCart());
       handleCityChange();
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 

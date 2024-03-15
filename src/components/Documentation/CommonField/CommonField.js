@@ -25,7 +25,7 @@ const CommonField = ({handleKycState}) => {
       .then(res => {
         setOptions(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

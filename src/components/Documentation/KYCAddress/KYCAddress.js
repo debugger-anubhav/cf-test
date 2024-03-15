@@ -76,7 +76,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
       .then(res => {
         setDocsData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
   const allowedFileTypes = [
     "image/jpeg",
@@ -314,7 +314,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
           setDisableButton(false);
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           setDisableButton(false);
         });
     }

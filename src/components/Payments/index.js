@@ -26,7 +26,7 @@ const PaymentPage = () => {
         setLoadingSkeleton(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setLoadingSkeleton(false);
       });
   };
@@ -46,7 +46,7 @@ const PaymentPage = () => {
       .then(res => {
         window?.open(res?.data?.data?.download_url);
       })
-      .catch(err => console.log(err, "download"));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleDownload = () => {

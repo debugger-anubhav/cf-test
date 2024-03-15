@@ -79,13 +79,13 @@ const ProductCard = ({
                   });
                   dispatch(addSaveditemID(ids));
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err?.message || "some error"));
 
               if (!isSavedComp) {
                 setInWishList(prev => !prev);
               }
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err?.message || "some error"))
         : removewhislistProduct()
             .then(res => {
               getSavedItems()
@@ -98,12 +98,12 @@ const ProductCard = ({
                   });
                   dispatch(addSaveditemID(ids));
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err?.message || "some error"));
               if (!isSavedComp) {
                 setInWishList(prev => !prev);
               }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log(err?.message || "some error"));
     }
   };
 

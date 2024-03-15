@@ -23,7 +23,7 @@ const HappySubscribers = ({page, params}) => {
         setData(res?.data?.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(getSubscribersVideos([]));
       });
   };
@@ -38,7 +38,7 @@ const HappySubscribers = ({page, params}) => {
         // console.log("home")
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(getSubscribersVideos([]));
       });
   };
@@ -50,7 +50,7 @@ const HappySubscribers = ({page, params}) => {
         // console.log("appliances-rental")
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
   const getVideosForSeoFurniturePage = () => {
@@ -61,7 +61,7 @@ const HappySubscribers = ({page, params}) => {
         // console.log("furniture-rental")
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
   const getVideosForCategoryPage = () => {
@@ -71,7 +71,7 @@ const HappySubscribers = ({page, params}) => {
         setData(res?.data?.data);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
 

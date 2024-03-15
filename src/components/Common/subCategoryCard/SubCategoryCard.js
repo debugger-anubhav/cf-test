@@ -85,10 +85,10 @@ const SubCategoryCard = ({productID}) => {
                 });
                 dispatch(addSaveditemID(ids));
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(prev => !prev);
           })
-          .catch(err => console.log(err))
+          .catch(err => console.log(err?.message || "some error"))
       : removewhislistProduct()
           .then(res => {
             getSavedItems()
@@ -100,10 +100,10 @@ const SubCategoryCard = ({productID}) => {
                 });
                 dispatch(addSaveditemID(ids));
               })
-              .catch(err => console.log(err));
+              .catch(err => console.log(err?.message || "some error"));
             setInWishList(prev => !prev);
           })
-          .catch(err => console.log(err));
+          .catch(err => console.log(err?.message || "some error"));
   };
   return (
     <div className={style.main_card_container}>

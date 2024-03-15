@@ -21,7 +21,7 @@ export const CommonCreateRequestApi = () => {
         );
       }
     } catch (error) {
-      console.log(error);
+      console.log(error?.message || "some error");
     }
   };
 

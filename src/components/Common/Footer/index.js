@@ -136,7 +136,7 @@ const Footer = ({params}) => {
         .then(res => {
           setContent(res?.data?.data);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 

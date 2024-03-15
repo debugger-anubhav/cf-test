@@ -58,7 +58,7 @@ export const MonthlyCard = ({
       .then(res => {
         setApiData(res?.data?.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {
@@ -110,7 +110,7 @@ export const MonthlyCard = ({
       })
       .catch(err => {
         setLoading(false);
-        console.log(err, "errr");
+        console.log(err?.message || "some error");
       });
   };
 

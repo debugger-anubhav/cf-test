@@ -163,7 +163,7 @@ const AddressSection = () => {
         );
         setPrimaryAddress(newPrimaryAddress);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   const saveUserAddress = async values => {
@@ -221,7 +221,7 @@ const AddressSection = () => {
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
       dispatch(setCityShield(res?.data?.data?.cityshield));
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -243,7 +243,7 @@ const AddressSection = () => {
         fetchBill();
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   }
 
@@ -268,7 +268,7 @@ const AddressSection = () => {
         else checkCartQunatity(type);
       }
     } catch (err) {
-      console.log(err);
+      console.log(err?.message || "some error");
     }
   };
 
@@ -399,7 +399,7 @@ const AddressSection = () => {
       })
       .catch(err => {
         setLoading(false);
-        console.log(err);
+        console.log(err?.message || "some error");
       });
   };
   const fetchCartItems = (userIdToUse, val) => {
@@ -415,7 +415,7 @@ const AddressSection = () => {
         }
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         dispatch(setShowCartItem(true));
       });
   };

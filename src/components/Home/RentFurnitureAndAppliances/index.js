@@ -30,7 +30,7 @@ const RentFurnitureAndAppliances = ({params}) => {
           // console.log("appliances-rental")
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           dispatch(setSeoApplianceRentalSubCategory([]));
         });
     } else if (params?.category === "furniture-rental") {
@@ -41,7 +41,7 @@ const RentFurnitureAndAppliances = ({params}) => {
           // console.log("furniture-rental")
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           dispatch(setSeoFurnitureRentalSubCategory([]));
         });
     } else {
@@ -52,7 +52,7 @@ const RentFurnitureAndAppliances = ({params}) => {
           // console.log("home")
         })
         .catch(err => {
-          console.log(err);
+          console.log(err?.message || "some error");
           dispatch(addCategory([]));
         });
     }

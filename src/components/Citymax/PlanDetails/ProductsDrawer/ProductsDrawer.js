@@ -39,7 +39,7 @@ const ProductsDrawer = ({
           res?.data?.data?.associated_premium_products?.length;
         setSelectedIndexes(Array(totalProdLength).fill(0));
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

@@ -35,7 +35,7 @@ function UpfrontPayment() {
         setSkeletonLoader(false);
       })
       .catch(err => {
-        console.log(err);
+        console.log(err?.message || "some error");
         setSkeletonLoader(false);
       });
   };
@@ -89,7 +89,7 @@ function UpfrontPayment() {
             router.push("/success/payment");
           } catch (err) {
             setLoading(false);
-            console.log(err);
+            console.log(err?.message || "some error");
           }
         }
       },

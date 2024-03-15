@@ -37,7 +37,7 @@ const SavedAddress = ({setTab, editAddress}) => {
         // console.log(newPrimaryAddress, "primaryy addresss");
         // setPrimaryAddress(newPrimaryAddress);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err?.message || "some error"));
   };
 
   useEffect(() => {

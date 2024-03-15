@@ -765,5 +765,5 @@ export const CreateRequest = CreateRequestPayload => {
         res?.data?.data?.status === true ? 2 : 3,
       );
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err?.message || "some error"));
 };
