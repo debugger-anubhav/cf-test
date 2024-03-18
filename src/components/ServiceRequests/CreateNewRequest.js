@@ -9,6 +9,7 @@ function CreateNewRequest({createRequestData, setOpenDrawer, loadingSkeleton}) {
   const [data, setData] = useState(createRequestData);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showNextComponent, setShowNextComponent] = useState(false);
+  const [loading, setLoading] = useState(loadingSkeleton);
 
   const handleProceed = () => {
     setShowNextComponent(true);
@@ -17,6 +18,9 @@ function CreateNewRequest({createRequestData, setOpenDrawer, loadingSkeleton}) {
   useEffect(() => {
     setData(createRequestData);
   }, []);
+  useEffect(() => {
+    setLoading(loadingSkeleton);
+  }, [loadingSkeleton]);
 
   return (
     <>
@@ -40,7 +44,7 @@ function CreateNewRequest({createRequestData, setOpenDrawer, loadingSkeleton}) {
             <div className={styles.sub_heading}>
               Select the order for which you would like to raise a request
             </div>
-            {loadingSkeleton ? (
+            {loading ? (
               <div className="flex gap-4 flex-col">
                 <Skeleton variant="text" width={"100%"} height={30} />
                 <Skeleton variant="text" width={"100%"} height={30} />
