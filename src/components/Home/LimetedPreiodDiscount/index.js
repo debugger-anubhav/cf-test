@@ -99,13 +99,13 @@ const LimetedPreiodDiscount = () => {
               index === getLimitedPreiodData?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}>
             <Card
-              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               desc={item.product_name}
-              hoverCardImage={
+              cardImage={
                 item?.image?.split(",").filter(item => item).length > 1
                   ? productImageBaseUrl + item?.image?.split(",")[1]
                   : productImageBaseUrl + item?.image?.split(",")[0]
               }
+              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               originalPrice={item?.price}
               currentPrice={item?.sale_price}
               discount={`${Math.round(
