@@ -119,7 +119,6 @@ const ShoppingCartSection = () => {
           };
           eventItems.push(item);
         });
-        console.log(eventItems, "eventItems");
         window?.gtag("event", "begin_checkout", {
           items: eventItems,
         });

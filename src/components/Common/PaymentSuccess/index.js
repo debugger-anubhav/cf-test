@@ -4,23 +4,14 @@ import {FaCheck} from "react-icons/fa";
 import {format} from "date-fns";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
 
 const PaymentSuccess = () => {
   const currentDateTime = new Date();
   const formattedDateTime = format(currentDateTime, "MMMM d, yyyy, h:mm a");
   const router = useRouter();
   const details = useSelector(state => state.successPayment);
-  const getPaymentScript = () => {
-    baseInstance
-      .get(endPoints.addToCart.paymentSuccessScript)
-      .then(res => console.log(res, "ressssss"))
-      .catch(err => console.log(err?.message || "some error"));
-  };
 
   useEffect(() => {
-    getPaymentScript();
     if (details.TransactionReferenceNumber === "") router.push("/");
   }, []);
 

@@ -55,8 +55,6 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        console.log(eventItems, "eventItems");
-
         window?.Northbeam.firePurchaseEvent({
           id: scriptData?.transaction_id,
           totalPrice: scriptData?.value,
