@@ -7,6 +7,7 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {Skeleton} from "@mui/material";
 import {useRouter} from "next/navigation";
+import {productImageBaseUrl} from "@/constants/constant";
 const NewlyLaunched = () => {
   const router = useRouter();
   const heading = strings.landing_page.Newlylaunced.heading;
@@ -78,8 +79,11 @@ const NewlyLaunched = () => {
                 rel="noopener">
                 <img
                   src={
-                    "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
-                    ele?.image?.split(",")[0]
+                    // "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
+                    // ele?.image?.split(",")[0]
+                    ele?.image?.split(",").filter(item => item).length > 1
+                      ? productImageBaseUrl + ele?.image?.split(",")[1]
+                      : productImageBaseUrl + ele?.image?.split(",")[0]
                   }
                   className={styles.img}
                   alt={ele?.product_name}
