@@ -9,7 +9,6 @@ import {endPoints} from "@/network/endPoints";
 
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import PostCityshield from "./postCityshieldPayment";
 import {format, parseISO} from "date-fns";
 import {baseInstance} from "@/network/axios";
@@ -25,8 +24,6 @@ const CityShieldPage = () => {
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
-
-  const router = useRouter();
 
   const getUserDetails = () => {
     baseInstance
@@ -89,7 +86,8 @@ const CityShieldPage = () => {
             id: data.dataObj.recID,
           };
           await baseInstance.post(endPoints.addToCart.successPayment, body);
-          router.push(`/city_shield/${orderId}`);
+          // router.push(`/city_shield/${orderId}`);
+          window?.open(`/city_shield/${orderId}`, "_self");
         }
       },
       prefill: {
