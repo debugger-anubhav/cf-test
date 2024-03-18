@@ -142,8 +142,14 @@ const TrendingProducts = ({params}) => {
               !reduxStateOfLoginPopup && handleCardClick(e, item);
             }}>
             <Card
-              cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              hoverCardImage={
+              // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              // hoverCardImage={
+              //   item?.image?.split(",").filter(item => item).length > 1
+              //     ? productImageBaseUrl + item?.image?.split(",")[1]
+              //     : productImageBaseUrl + item?.image?.split(",")[0]
+              // }
+              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              cardImage={
                 item?.image?.split(",").filter(item => item).length > 1
                   ? productImageBaseUrl + item?.image?.split(",")[1]
                   : productImageBaseUrl + item?.image?.split(",")[0]

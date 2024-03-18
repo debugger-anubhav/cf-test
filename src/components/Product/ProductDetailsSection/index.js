@@ -76,11 +76,7 @@ const ProductDetails = ({params}) => {
   const [durationArray, setDurationArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [duration, setDuration] = useState({currentIndex: 0, value: ""});
-  const [inWishList, setInWishList] = React.useState(
-    categoryPageReduxData?.savedProducts
-      ?.map(obj => obj.id)
-      .includes(parseInt(params.productId)),
-  );
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [showBottomBar, setShowBottomBar] = useState(false);
@@ -209,24 +205,13 @@ const ProductDetails = ({params}) => {
     GetProductDetails();
   }, []);
 
-  useEffect(() => {
-    setInWishList(
-      categoryPageReduxData.savedProducts
-        .map(obj => obj.id)
-        .includes(parseInt(params.productId)),
-    );
-  }, []);
-
   const router = useRouter();
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
-  // const userId = getLocalStorageString("user_id");
-  // const userId = decrypt(getLocalStorage("_ga"));
 
   const addToWishlist = () => {
-    // dispatch(addRemoveWhishListitems(!inWishList));
     !categoryPageReduxData.savedProducts
       .map(obj => obj.id)
       .includes(parseInt(params.productId))
@@ -243,7 +228,6 @@ const ProductDetails = ({params}) => {
                 window?.fbq("track", "AddToWishlist");
               })
               .catch(err => console.log(err?.message || "some error"));
-            setInWishList(true);
           })
           .catch(err => console.log(err?.message || "some error"))
       : removewhislistProduct()
@@ -260,7 +244,6 @@ const ProductDetails = ({params}) => {
                 showToastNotification("Item removed from the wishlist", 2);
               })
               .catch(err => console.log(err?.message || "some error"));
-            setInWishList(false);
           })
           .catch(err => console.log(err?.message || "some error"));
   };
@@ -506,7 +489,6 @@ const ProductDetails = ({params}) => {
   const handleMouseUpForThumbnail = () => {
     setIsScrollingForThumnail(false);
   };
-  console.log(inWishList);
   return (
     <div className={styles.main_container}>
       <ShareModal
@@ -689,7 +671,6 @@ const ProductDetails = ({params}) => {
                     ? "#D96060"
                     : "#C0C0C6"
                 }
-                // onClick={() => setInWishList(!inWishList)}
                 onClick={e => {
                   e.preventDefault();
                   e.stopPropagation();

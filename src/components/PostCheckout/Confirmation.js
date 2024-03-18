@@ -79,6 +79,7 @@ const PaymentConfirmation = () => {
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
+        console.log("come in confirmation screen");
       })
       .catch(err => console.log(err));
   };
