@@ -128,6 +128,7 @@ function ServiceRequets() {
                   <CreateNewRequest
                     createRequestData={createRequestData}
                     setOpenDrawer={setOpenDrawer}
+                    loadingSkeleton={loadingSkeleton}
                   />
                 </div>
                 <div className={`md:flex hidden `}>
