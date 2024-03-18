@@ -96,7 +96,6 @@ async function create(params) {
 
 async function getAllCitiesList() {
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
-  console.log("apiii", apiKey);
   try {
     const data = await fetch(
       "https://test.rentofurniture.com/api/" + endPoints.cityList,
@@ -126,16 +125,6 @@ export default async function Page(params) {
   const propParams = params?.params;
   const pageName = params?.params?.category;
   const cityList = await getAllCitiesList();
-  console.log(cityList, propParams, "dataaaaa");
-
-  // function isValidRoute() {
-  //   const isVal = data.includes(propParams?.city);
-  //   return isVal;
-  // }
-
-  // console.log(isValidRoute());
-
-  // if (propParams?.city === "pune")
   if (
     cityList?.data?.some(o => o.list_value.toLowerCase() === propParams?.city)
   ) {
