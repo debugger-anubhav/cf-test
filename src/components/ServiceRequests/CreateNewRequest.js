@@ -9,18 +9,19 @@ function CreateNewRequest({createRequestData, setOpenDrawer, loadingSkeleton}) {
   const [data, setData] = useState(createRequestData);
   const [selectedOption, setSelectedOption] = useState(null);
   const [showNextComponent, setShowNextComponent] = useState(false);
-  const [loading, setLoading] = useState(loadingSkeleton);
+  const [loading, setLoading] = useState(true);
 
   const handleProceed = () => {
     setShowNextComponent(true);
   };
 
   useEffect(() => {
-    setData(createRequestData);
-  }, []);
-  useEffect(() => {
     setLoading(loadingSkeleton);
   }, [loadingSkeleton]);
+
+  useEffect(() => {
+    setData(createRequestData);
+  }, [createRequestData]);
 
   return (
     <>
