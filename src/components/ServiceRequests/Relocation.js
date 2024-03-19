@@ -36,7 +36,7 @@ function Relocation({prevScreen, data}) {
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
 
   const doctsData = [
     {label: "PAN Number", value: "1"},
@@ -105,7 +105,7 @@ function Relocation({prevScreen, data}) {
     allData.set("address1", values.address);
     allData.set("address2", values.landmark);
     allData.set("postal_code", values.postalCode);
-    trailCreateSR(allData);
+    CreateSRApiCall(allData);
   };
 
   const customStylesForSelect = {

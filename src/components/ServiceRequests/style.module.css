@@ -230,3 +230,9 @@
 .CancelMandate_indian_icon_wrapper {
   @apply flex gap-2 items-center;
 }
+.change_bill_cycle_container {
+  @apply border border-DDDDDF p-4 rounded-lg;
+}
+.change_bill_cycle_toggle_wrapper {
+  @apply flex gap-2 items-center cursor-pointer;
+}

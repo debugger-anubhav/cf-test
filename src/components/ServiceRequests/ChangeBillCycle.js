@@ -13,7 +13,7 @@ function ChangeBillCycle({prevScreen, data}) {
   const [istoggled, setIstoggled] = useState(true);
   const [description, setDescription] = useState("");
   const [billCycleDay, setBillCycleDay] = useState(null);
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -23,7 +23,7 @@ function ChangeBillCycle({prevScreen, data}) {
       description,
       billCycleDay: parseInt(billCycleDay),
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
 
   const handleBillCycleDayChange = e => {
@@ -53,9 +53,9 @@ function ChangeBillCycle({prevScreen, data}) {
         Change bill cycle
       </div>
       <div className={`${styles.buy_info} !overflow-visible !mb-0`}>
-        <div className="border border-DDDDDF p-4 rounded-lg">
+        <div className={styles.change_bill_cycle_container}>
           <div
-            className="flex gap-2 items-center cursor-pointer"
+            className={styles.change_bill_cycle_toggle_wrapper}
             onClick={() => setIstoggled(!istoggled)}>
             {istoggled ? (
               <BsToggleOn

@@ -11,7 +11,7 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
 function Buy({heading, prevScreen, data}) {
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -60,7 +60,7 @@ function Buy({heading, prevScreen, data}) {
       selected_product_name: selectedProducts.join(", "),
       description,
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
 
   return (

@@ -6,7 +6,7 @@ import {setServiceRequestDrawer} from "@/store/Slices";
 export const CommonCreateRequestApi = () => {
   const dispatch = useDispatch();
 
-  const trailCreateSR = async CreateRequestPayload => {
+  const CreateSRApiCall = async CreateRequestPayload => {
     try {
       const response = await baseInstance.post(
         endPoints.serviceRequestPage.createRequest,
@@ -25,5 +25,5 @@ export const CommonCreateRequestApi = () => {
     }
   };
 
-  return {trailCreateSR};
+  return {CreateSRApiCall};
 };

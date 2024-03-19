@@ -26,7 +26,7 @@ function SwapProduct({prevScreen, data}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -36,7 +36,7 @@ function SwapProduct({prevScreen, data}) {
       upgrade_product: selectedProductForSwap?.product_name,
       selected_product_name: selectedProduct?.product_name,
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
 
   useEffect(() => {

@@ -18,7 +18,7 @@ function Repair({prevScreen, data}) {
   const [toggleStates, setToggleStates] = useState(
     data.map(() => ({istoggled: false, selected: null, detail: null})),
   );
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
   const [repairOptions, setRepairOptions] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const getRepairOption = productName => {
@@ -76,7 +76,7 @@ function Repair({prevScreen, data}) {
       repair_reason: tempRepairReason.join(", "),
       repair_details: tempRepairDetails.join(", "),
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
     setToggleStates(data.map(() => ({istoggled: false, selected: null})));
   };
 

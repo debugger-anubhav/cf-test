@@ -24,7 +24,7 @@ function PickupReasonCommonScreen({
 
   const [description, setDescription] = useState("");
   const [showScreenName, setShowScreenName] = useState(null);
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
     const payload = {
@@ -36,7 +36,7 @@ function PickupReasonCommonScreen({
       pickup_reason: reason.title,
       description,
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
   return (
     <div>

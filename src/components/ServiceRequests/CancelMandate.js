@@ -20,7 +20,7 @@ function CancelMandate({prevScreen, data, heading}) {
   );
 
   const [description, setDescription] = useState("");
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
   const formikRef = useRef(null);
 
   const handleSubmit = values => {
@@ -31,7 +31,7 @@ function CancelMandate({prevScreen, data, heading}) {
       mobile_number: values.contactNumber,
       description,
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
   const validationSchema = Yup.object({
     contactNumber: Yup.string()

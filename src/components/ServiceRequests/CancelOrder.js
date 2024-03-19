@@ -64,7 +64,7 @@ function CencelOrder({prevScreen, data}) {
 
   const [selected, setSelected] = useState(null);
   const [description, setDescription] = useState("");
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
   const handleChange = selectedOption => {
     setSelected(selectedOption);
   };
@@ -77,7 +77,7 @@ function CencelOrder({prevScreen, data}) {
       type: selectedType,
       description,
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
 
   return (

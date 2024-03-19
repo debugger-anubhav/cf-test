@@ -33,7 +33,7 @@ function TransferOwnership({prevScreen, data}) {
   const addressArray = cartPageData.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
-  const {trailCreateSR} = CommonCreateRequestApi();
+  const {CreateSRApiCall} = CommonCreateRequestApi();
   const formikRef = useRef(null);
 
   const validationSchema = Yup.object({
@@ -126,7 +126,7 @@ function TransferOwnership({prevScreen, data}) {
       address2: values.landmark,
       state: primaryAddress ? primaryAddress.state : "",
     };
-    trailCreateSR(payload);
+    CreateSRApiCall(payload);
   };
 
   return (
