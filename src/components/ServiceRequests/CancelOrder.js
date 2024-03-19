@@ -24,23 +24,21 @@ export const customStylesForSelect = {
     border: "none",
     fontFaimly: "poppins",
   }),
-
-  option: (base, state) => {
-    const isLastOption =
-      state.options.indexOf(state.data) === state.options.length - 1;
-    return {
-      ...base,
-      color: state.isSelected ? "#5774AC" : "#222",
-      backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
-      "&:hover": {
-        cursor: "pointer",
-        backgroundColor: "#EFF5FF",
-        color: "#5774AC",
-      },
-      fonetSize: "16px",
-      borderBottom: isLastOption ? "none" : "1px solid #DDDDDF",
-    };
-  },
+  option: (base, state) => ({
+    ...base,
+    backgroundColor: state.isSelected ? "#EFF5FF" : "#fff",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "#EFF5FF",
+      color: "#5774AC",
+    },
+    fonetSize: "14px",
+    color: "#71717A",
+    fontFaimly: "poppins",
+    "&:placeholder": {
+      color: "#71717A",
+    },
+  }),
   container: provided => ({
     ...provided,
     border: "1px solid #DDDDDF",
@@ -48,7 +46,7 @@ export const customStylesForSelect = {
     "&:hover": {
       border: "1px solid #71717A",
     },
-    zIndex: 9999,
+    fontFaimly: "poppins",
   }),
 };
 
