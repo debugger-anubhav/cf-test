@@ -266,8 +266,6 @@ export const MonthlyCard = ({
 
       <CityShieldDrawerForCart
         cityShieldCurrentPrice={apiData?.orignalPrice}
-        // cityShieldOriginalPrice={data?.orignalPrice}
-        // cityShieldDiscount={items?.percent_off}
         toggleDrawer={toggleDrawerCityShield}
         open={cityShieldDrawerOpenForMonthly}
         toggleCheckbox={bool => setmonthlyCardIsChecked(bool)}

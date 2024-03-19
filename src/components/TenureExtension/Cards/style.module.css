@@ -74,3 +74,6 @@
 .radio_button {
   @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }
+.div_flex {
+  @apply flex;
+}
