@@ -306,12 +306,15 @@ export const FooterSkeleton = () => {
           return (
             <div className={styles.pointers_div_skeleton} key={item.toString()}>
               <div className={styles.head_wrapper_skeleton}>
-                <Skeleton variant="text" className="w-full h-full" />
+                <Skeleton variant="text" className={styles.full_width_height} />
               </div>
               {[1, 2, 3, 4]?.map(item => {
                 return (
                   <div className={styles.points_skeleton} key={item.toString()}>
-                    <Skeleton variant="text" className="w-full h-full" />
+                    <Skeleton
+                      variant="text"
+                      className={styles.full_width_height}
+                    />
                   </div>
                 );
               })}
@@ -324,7 +327,7 @@ export const FooterSkeleton = () => {
 
       <div className={styles.copyRight_div_skeleton}>
         <div className={styles.copyright_skeleton}>
-          <Skeleton variant="text" className="w-full h-full" />
+          <Skeleton variant="text" className={styles.full_width_height} />
         </div>
         <div className={styles.goToTopDiv}>
           <Skeleton variant="circular" width={25} height={25} />

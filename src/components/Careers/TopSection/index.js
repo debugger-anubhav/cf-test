@@ -14,7 +14,7 @@ export default function TopSection() {
             <img
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star_struck.svg"
               alt="paty_icon"
-              className="w-[24px] h-[24px] inline-block"
+              className={styles.star_struck_image}
               loading="lazy"
             />
           </span>
@@ -30,25 +30,6 @@ export default function TopSection() {
         </button>
       </div>
 
-      {/* <div className={styles.heading_row}>
-        <h1 className={styles.main_heading}>
-          {` Don't Just Dream, Do it With Us `}
-          <img
-            src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star_struck.svg"
-            alt="start_icon"
-            className="w-[18px] h-[18px] inline-block"
-          />
-        </h1>
-        <button
-          className={styles.join_us}
-          onClick={() =>
-            document.getElementById("vacancies-section").scrollIntoView({
-              behavior: "smooth",
-            })
-          }>
-          Join us
-        </button>
-      </div> */}
       <div className={styles.detailing_row}>
         <h3 className={styles.subheading}>We Believe in</h3>
         <h2 className={styles.heading}>Action. Community. Quality.</h2>

@@ -9,13 +9,18 @@
 .investors_wrapper {
   @apply xl:grid xl:grid-cols-5 flex w-full gap-4 md:gap-6 overflow-x-scroll;
 }
-
+.investor_wrapper_style {
+  @apply mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px];
+}
 .investors_wrapper::-webkit-scrollbar {
   width: none;
   display: none;
 }
 .investor_container {
   @apply !min-w-[109.5px]  sm:!min-w-[150px] md:!min-w-[219px] xl:!max-w-full xl:!min-w-full;
+}
+.main_card_wrapper {
+  @apply mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px];
 }
 
 .accolades_cards {
@@ -27,4 +32,22 @@
 }
 .accolades_text {
   @apply text-xs text-[#71717A] capitalize font-medium font-Poppins tracking-[-0.24px];
+}
+.Accolades_section {
+  @apply mr-4 lg:mr-0 mb-8 lg:mb-[88px];
+}
+.Accolads_data {
+  @apply flex overflow-x-scroll xl:gap-6 gap-4 w-full;
+}
+.image_wrapper {
+  @apply flex justify-center w-[16px] items-baseline pt-[1px];
+}
+.accolades_text_wrapper {
+  @apply flex flex-col gap-1 w-full mb-4 lg:mb-0;
+}
+.accolades_second_text_wrapper {
+  @apply flex justify-end items-end absolute right-2 bottom-1 pt-2;
+}
+.tabexternal_link_wrapper {
+  @apply absolute left-[5px] bottom-[5px] w-[16px] text-[#7A7A71];
 }

@@ -6,10 +6,6 @@
   @apply text-base tracking-[-0.32px] font-medium font-Poppins text-45454A mb-6 md:text-xl md:tracking-[-0.4px] lg:mb-8;
 }
 
-.images_wrapper {
-  @apply flex  flex-col md:flex-row gap-[9px] md:gap-4;
-}
-
 .image_container {
   @apply flex flex-col md:w-[50%] gap-[9px] md:gap-4;
 }
@@ -27,4 +23,10 @@
 }
 .img_cls {
   @apply h-full w-full object-cover;
+}
+.images_wrapper_1 {
+  @apply hidden md:flex md:flex-row  md:gap-4;
+}
+.images_wrapper_for_mobile {
+  @apply flex  flex-col gap-[9px]  md:hidden;
 }

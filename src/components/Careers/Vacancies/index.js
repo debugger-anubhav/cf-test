@@ -31,7 +31,6 @@ export default function Vacancies() {
       });
   };
   const handleApply = index => {
-    // router.push(`https://cityfurnish.zohorecruit.com/jobs/Careers/${vacaniesData[index]?.job_id}`)
     const url = `https://cityfurnish.zohorecruit.com/jobs/Careers/${vacaniesData[index]?.job_id}`;
     const newTab = window && window.open(url, "_blank");
     newTab.focus();

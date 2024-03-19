@@ -85,32 +85,32 @@ const InverstorAndMedia = () => {
   return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Our Investors & Advisors</h2>
-      <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
+      <div className={styles.investor_wrapper_style}>
         <InvestorsCards />
       </div>
       <h2 className={styles.heading}>Media also loves us</h2>
-      <div className="mr-4 md:mr-6 xl:mr-0 mb-8 lg:mb-[88px]">
+      <div className={styles.main_card_wrapper}>
         <MediaCard />
       </div>
-      <div className="mr-4 lg:mr-0 mb-8 lg:mb-[88px]">
+      <div className={styles.Accolades_section}>
         <h2 className={styles.heading}>Accolades</h2>
-        <div className={`flex overflow-x-scroll xl:gap-6 gap-4 w-full`}>
+        <div className={styles.Accolads_data}>
           {accolades?.map((ele, index) => {
             return (
               <div className={styles.accolades_cards} key={index.toString()}>
                 <img src={ele.link} alt={ele.altText} loading="lazy" />
                 <div className={styles.accolades_box}>
-                  <div className="flex justify-center w-[16px] items-baseline pt-[1px] ">
+                  <div className={styles.image_wrapper}>
                     <img
                       src={`${AboutUs}/icons/award-icon.svg`}
                       loading="lazy"
                       alt="Award-icon"
                     />
                   </div>
-                  <div className="flex flex-col gap-1 w-full mb-4 lg:mb-0">
+                  <div className={styles.accolades_text_wrapper}>
                     <p className={styles.accolades_text}>{ele.desc}</p>
                   </div>
-                  <div className="flex justify-end items-end absolute right-2 bottom-1 pt-2">
+                  <div className={styles.accolades_second_text_wrapper}>
                     <p className={`${styles.accolades_text}`}>{ele.desc2}</p>
                   </div>
                 </div>
@@ -191,7 +191,7 @@ const MediaCard = () => {
               alt={ele.altText}
               loading="lazy"
             />
-            <div className="absolute left-[5px] bottom-[5px] w-[16px] text-[#7A7A71]">
+            <div className={styles.tabexternal_link_wrapper}>
               <TbExternalLink />
             </div>
           </a>

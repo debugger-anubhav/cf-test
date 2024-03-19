@@ -10,7 +10,7 @@ const CompanyGoal = () => {
   return (
     <div className={styles.main_container}>
       <div className={styles.content_wrapper}>
-        <div className="ms:w-[80%] md:w-[85%]  lg:w-[90%] xl:w-[95%]">
+        <div className={styles.heading_wrapper}>
           <h2 className={styles.heading}>{data.heading}</h2>
           <p className={`${styles.ans_text} hidden ms:flex lg:jusitfy-start`}>
             {data.ans}
@@ -19,7 +19,7 @@ const CompanyGoal = () => {
         <div className={`${styles.ans_wrapper} ms:justify-start`}>
           <p className={`${styles.ans_text} ms:hidden`}>{data.ans}</p>
           <img
-            className=" w-[64px] lg:w-[80px]"
+            className={styles.illustration_img}
             src={`${AboutUs}/icons/illustration-target.svg`}
             alt="illustration-target"
             loading="lazy"

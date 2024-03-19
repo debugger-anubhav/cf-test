@@ -50,7 +50,7 @@ const HeroSection = () => {
       <div className={styles.content_wrapper}>
         <div className={styles.section1_wrapper}>
           <p className={styles.about_desc}>
-            <span className="font-medium font-Poppins">{data.hightlight}</span>
+            <span className={styles.highlight_text}>{data.hightlight}</span>
             {data.about_first}
           </p>
           <p className={styles.about_desc}>{data.about_second}</p>
@@ -74,7 +74,7 @@ const HeroSection = () => {
               <div className={styles.image_card} key={index.toString()}>
                 <div className={styles.images_container}>
                   <img
-                    className="w-[78px] mobile:w-[96px] rounded-full border-[2px] border-[#71717A]"
+                    className={styles.img_style}
                     src={ele.link}
                     alt={ele.name}
                     loading="lazy"
@@ -88,7 +88,7 @@ const HeroSection = () => {
         <div className={styles.team_content_wrapper}>
           <p className={styles.team_content}>
             {data.founding_team_first}
-            <span className="font-medium font-Poppins">
+            <span className={styles.founding_highlight}>
               {data.founding_highlight}
             </span>
             {data.founding_team_last}

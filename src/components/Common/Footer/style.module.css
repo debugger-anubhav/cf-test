@@ -84,3 +84,6 @@
 .copyRight_div_skeleton {
   @apply flex justify-center items-center w-full mt-8 relative;
 }
+.full_width_height {
+  @apply w-full h-full;
+}

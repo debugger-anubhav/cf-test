@@ -97,14 +97,14 @@ export default function Gallery() {
           loading="lazy"
         />
         <div className={"flex w-full h-full gap-2"}>
-          <div className="w-1/2 flex">
+          <div className={styles.CareerGalleryMobile_img_wrapper}>
             <img
               src={CareerGalleryMobile.sixth}
               alt="life at cityfurnish"
               loading="lazy"
             />
           </div>
-          <div className="w-1/2 flex">
+          <div className={styles.CareerGalleryMobile_img_wrapper}>
             <img
               src={CareerGalleryMobile.fourth}
               alt="life at cityfurnish"

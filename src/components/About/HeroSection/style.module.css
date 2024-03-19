@@ -72,3 +72,12 @@
 .images_container {
   @apply flex justify-center rounded-full   mb-4;
 }
+.highlight_text {
+  @apply font-medium font-Poppins;
+}
+.img_style {
+  @apply w-[78px] mobile:w-[96px] rounded-full border-[2px] border-[#71717A];
+}
+.founding_highlight {
+  @apply font-medium font-Poppins;
+}

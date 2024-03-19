@@ -40,12 +40,10 @@ const data = {
 };
 
 const CityFurnish = () => {
-  //   const [isIndex, setIndex] = useState(1);
   return (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>{data.heading}</h2>
-      {/* <div className={styles.images_wrapper}> */}
-      <div className={"hidden md:flex md:flex-row  md:gap-4"}>
+      <div className={styles.images_wrapper_1}>
         {data.images.map((ele, index) => {
           return (
             <div className={styles.image_container} key={index.toString()}>
@@ -113,7 +111,7 @@ const CityFurnish = () => {
           );
         })}
       </div>
-      <div className={"flex  flex-col gap-[9px]  md:hidden"}>
+      <div className={styles.images_wrapper_for_mobile}>
         {data.imagesForMobile.map((ele, index) => {
           return (
             <div className={styles.image_container} key={index.toString()}>

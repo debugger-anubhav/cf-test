@@ -56,3 +56,6 @@
 .mobile_image {
   @apply w-full h-full;
 }
+.CareerGalleryMobile_img_wrapper {
+  @apply w-1/2 flex;
+}
