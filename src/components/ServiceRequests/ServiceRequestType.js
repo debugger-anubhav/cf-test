@@ -86,7 +86,7 @@ function ServiceRequestType({
             )}
             {title}
           </div>
-          <div className={` my-6 flex w-full flex-col mt-4`}>
+          <div className={styles.service_type_wrapper}>
             {servicesType?.map((item, index) => {
               return (
                 <div
@@ -100,7 +100,7 @@ function ServiceRequestType({
                     setSelectedType(item.key);
                     setCurrentScreen(false);
                   }}>
-                  <div className="flex gap-2 items-center">
+                  <div className={styles.request_type_icon_wrapper}>
                     <img
                       className={styles.request_type_icon}
                       src={item.image}

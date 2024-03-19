@@ -46,7 +46,7 @@ function CreateNewRequest({createRequestData, setOpenDrawer, loadingSkeleton}) {
               Select the order for which you would like to raise a request
             </div>
             {loading ? (
-              <div className="flex gap-4 flex-col">
+              <div className={styles.create_new_request_skeleton_wrapper}>
                 <Skeleton variant="text" width={"100%"} height={30} />
                 <Skeleton variant="text" width={"100%"} height={30} />
                 <Skeleton variant="text" width={"100%"} height={30} />

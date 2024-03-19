@@ -236,3 +236,57 @@
 .change_bill_cycle_toggle_wrapper {
   @apply flex gap-2 items-center cursor-pointer;
 }
+.create_new_request_skeleton_wrapper {
+  @apply flex gap-4 flex-col;
+}
+.common_drawer_wrapper {
+  @apply flex w-full md:gap-8 overflow-auto;
+}
+.web_close_icon_wrapper {
+  @apply h-[24px] mt-12 mr-8;
+}
+.pickup_reason_btn_wrapper {
+  @apply flex justify-center;
+}
+.pickup_reason_subtitle {
+  @apply flex flex-col w-full my-8;
+}
+.pickup_reason_opt {
+  @apply flex gap-2 items-center;
+}
+.pickup_reason_opt_wrapper {
+  @apply my-6 flex w-full flex-col mt-4;
+}
+.relocation_indian_icon_wrapper {
+  @apply flex gap-2 items-center;
+}
+.relocation_current_add_wrapper {
+  @apply mt-4 flex flex-col;
+}
+.relocation_upload_doc_wrapper {
+  @apply flex w-full flex-col;
+}
+.relocation_upload_doc_first_part {
+  @apply flex items-center justify-between;
+}
+.relocation_choose_file_span {
+  @apply text-14 font-Poppins text-71717A max-w-[237px] md:max-w-[280px] truncate;
+}
+.relocation_upload_icon_wrapper {
+  @apply flex items-center gap-2;
+}
+.repair_toggle_wrapper {
+  @apply flex gap-2 items-center cursor-pointer;
+}
+.repair_toggle_icon {
+  @apply cursor-pointer min-w-[2rem];
+}
+.reson_for_repair_wrapper {
+  @apply mt-4 flex flex-col;
+}
+.request_type_icon_wrapper {
+  @apply flex gap-2 items-center;
+}
+.service_type_wrapper {
+  @apply my-6 flex w-full flex-col mt-4;
+}

@@ -113,7 +113,7 @@ function Repair({prevScreen, data}) {
               }`}
               key={index.toString()}>
               <div
-                className="flex gap-2 items-center cursor-pointer"
+                className={styles.repair_toggle_wrapper}
                 onClick={() => {
                   handleToggle(index);
                   getRepairOption(item?.product_name);
@@ -122,26 +122,20 @@ function Repair({prevScreen, data}) {
                   <BsToggleOn
                     color={"#5774AC"}
                     size={28}
-                    // onClick={() => handleToggle(index)}
-                    className="cursor-pointer min-w-[2rem]"
+                    className={styles.repair_toggle_icon}
                   />
                 ) : (
                   <ToggleOff
                     size={28}
                     color={"#E3E1DC"}
-                    // onClick={() => {
-                    //   handleToggle(index);
-                    //   // getRepairOption('Alexa Single Bed');
-                    //   getRepairOption(item?.product_name);
-                    // }}
-                    className="cursor-pointer min-w-[2rem]"
+                    className={styles.repair_toggle_icon}
                   />
                 )}
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
               {toggleStates[index].istoggled && repairOptions?.length > 0 && (
                 <div>
-                  <div className="mt-4 flex flex-col">
+                  <div className={styles.reson_for_repair_wrapper}>
                     <p className={styles.desc}>Reason for repair</p>
                     <Select
                       options={repairOptions}

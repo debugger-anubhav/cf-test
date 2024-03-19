@@ -86,7 +86,7 @@ function PickupReasonOptions({
             Pickup reason
           </div>
 
-          <div className={` my-6 flex w-full flex-col mt-4`}>
+          <div className={styles.pickup_reason_opt_wrapper}>
             {PickupReasons?.map((item, index) => {
               return (
                 <div
@@ -101,7 +101,7 @@ function PickupReasonOptions({
                     setShowCommonPickupScreen(true);
                     setCurrentScreen(2);
                   }}>
-                  <div className="flex gap-2 items-center">
+                  <div className={styles.pickup_reason_opt}>
                     <p className={styles.request_type}>{item.title}</p>
                   </div>
                   <div className="flex">

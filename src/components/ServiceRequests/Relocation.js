@@ -180,7 +180,7 @@ function Relocation({prevScreen, data}) {
                     <p className={formStyles.form_label}>Alternative number</p>
                     <div
                       className={`${styles.row} ${formStyles.form_input} flex items-center`}>
-                      <div className="flex gap-2 items-center">
+                      <div className={styles.relocation_indian_icon_wrapper}>
                         <img
                           src={`${cityUrl + "india-icon.svg"}`}
                           className={formStyles.flag}
@@ -293,7 +293,7 @@ function Relocation({prevScreen, data}) {
                       }}
                     />
                   )}
-                  <div className="mt-4 flex flex-col">
+                  <div className={styles.relocation_current_add_wrapper}>
                     <p className={`${formStyles.form_label} mb-1`}>
                       Current address proof
                     </p>
@@ -362,9 +362,11 @@ function Relocation({prevScreen, data}) {
                           formik.values.currentAddressProof &&
                           "!max-w-[95%] w-fit !cursor-default"
                         } `}>
-                        <div className={`flex w-full flex-col `}>
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
+                        <div className={styles.relocation_upload_doc_wrapper}>
+                          <div
+                            className={styles.relocation_upload_doc_first_part}>
+                            <div
+                              className={styles.relocation_upload_icon_wrapper}>
                               <Image
                                 src={uploading}
                                 alt="Uploading Icon"
@@ -374,7 +376,8 @@ function Relocation({prevScreen, data}) {
                                 }`}
                                 loading="lazy"
                               />
-                              <span className="text-14 font-Poppins text-71717A max-w-[237px] md:max-w-[280px] truncate">
+                              <span
+                                className={styles.relocation_choose_file_span}>
                                 {formik.values.currentAddressProof
                                   ? formik.values.currentAddressProof.name
                                   : "Choose file"}
@@ -481,27 +484,6 @@ function Relocation({prevScreen, data}) {
           )}
         </Formik>
       </div>
-
-      {/* <div className={styles.bottom_row}>
-        <button
-          type="submit"
-          className={`${styles.proceed_btn} bg-none 
-         ${
-           !formikRef?.current?.isValid
-             ? "!bg-[#FFDF85] !cursor-not-allowed"
-             : `!bg-F6B704`
-         }
-         `}
-          onClick={() => {
-            //  if (!formik.isValid) {
-            //    console.log("errors", formik.errors);
-            //  }
-            console.log(formikRef.current, "pppppp");
-            formikRef?.current?.submitForm();
-          }}>
-          Create request <ForwardArrowWithLine />
-        </button>
-      </div> */}
     </>
   );
 }

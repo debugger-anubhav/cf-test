@@ -68,7 +68,7 @@ function PickupReasonCommonScreen({
             />
             {reason.title}
           </div>
-          <div className={"flex flex-col w-full my-8"}>
+          <div className={styles.pickup_reason_subtitle}>
             <p className={styles.desc}>{subTitle}</p>
           </div>
           {(reason.title === "Other" ||
@@ -104,7 +104,7 @@ function PickupReasonCommonScreen({
 
           {reason.title !== "Other" &&
           reason.title !== "Requirement Fulfilled" ? (
-            <div className="flex justify-center">
+            <div className={styles.pickup_reason_btn_wrapper}>
               <button
                 className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}
                 onClick={handleCreateRequest}>

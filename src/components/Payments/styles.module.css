@@ -78,3 +78,9 @@
 .accordionSummary.Mui-expanded {
   @apply rounded-none min-h-fit max-h-fit p-0 m-0 border-b-0;
 }
+.past_request_accordian_wrapper {
+  @apply flex justify-between w-full px-3 pt-6 cursor-pointer items-center;
+}
+.past_request_accordian_details {
+  @apply w-full flex-col px-3 cursor-pointer flex bg-F7F7F8;
+}

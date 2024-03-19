@@ -23,9 +23,7 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
     <div>
       <div className={styles.web}>
         <TableContainer component={Paper} className={styles.tableContainer}>
-          <p className="text-20 text-45454A font-medium font-Poppins mb-8">
-            Your past requests
-          </p>
+          <p className={styles.past_request_heading}>Your past requests</p>
           <Table className={styles.table}>
             <TableHead>
               <TableRow
