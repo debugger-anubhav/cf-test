@@ -153,6 +153,7 @@ function Repair({prevScreen, data}) {
                       isSearchable={false}
                       onMenuOpen={() => setIsDropdownOpen(true)}
                       onMenuClose={() => setIsDropdownOpen(false)}
+                      className="font-Poppins placeholder:!text-71717A text-71717A"
                     />
                   </div>
                   <div className="mt-4">
