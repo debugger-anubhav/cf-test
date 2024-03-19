@@ -46,7 +46,6 @@ const SearchCard = ({
 
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
-    // userId: getLocalStorage("user_id") ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
@@ -157,7 +156,6 @@ const SearchCard = ({
 
       <div className={styles.desc_div}>
         <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-          {/* {desc} */}
           {desc.replace(/-/g, " ")}
         </h3>
         <Heart

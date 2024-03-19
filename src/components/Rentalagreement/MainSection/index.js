@@ -78,7 +78,7 @@ function MainSection() {
                       </div>
                       {index === 20 ? (
                         <p className="ml-3">
-                          <span className="font-medium text-45454A tracking-[-0.32px] font-Poppins ">
+                          <span className={styles.speacial_heading}>
                             {i === 4
                               ? "Governing Law and Jurisdiction"
                               : i === 6
@@ -90,9 +90,7 @@ function MainSection() {
                           {words.slice(1).join(" ")}
                         </p>
                       ) : (
-                        <p className="ml-3 tracking-[-0.32px] font-Poppins">
-                          {point}
-                        </p>
+                        <p className={styles.points_wrraper}>{point}</p>
                       )}
                     </div>
                   );

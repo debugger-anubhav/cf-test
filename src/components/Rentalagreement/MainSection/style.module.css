@@ -22,3 +22,9 @@
 .special_subheading {
   @apply text-45454A lg:text-16 text-14 font-medium font-Poppins lg:mt-8 mt-6 tracking-[-0.32px];
 }
+.speacial_heading {
+  @apply font-medium text-45454A tracking-[-0.32px] font-Poppins;
+}
+.points_wrraper {
+  @apply ml-3 tracking-[-0.32px] font-Poppins;
+}

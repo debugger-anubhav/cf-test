@@ -1,0 +1,9 @@
+.wrapper {
+  @apply large_layout flex -mt-6 w-full h-full;
+}
+.container {
+  @apply min-w-fit hidden lg:flex;
+}
+.full_width {
+  @apply w-full;
+}

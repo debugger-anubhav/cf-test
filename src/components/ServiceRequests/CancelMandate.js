@@ -80,7 +80,7 @@ function CancelMandate({prevScreen, data, heading}) {
                   <p className={formStyles.form_label}>Alternative number</p>
                   <div
                     className={`${styles.row} ${formStyles.form_input} flex`}>
-                    <div className="flex gap-2 items-center">
+                    <div className={styles.CancelMandate_indian_icon_wrapper}>
                       <img
                         src={`${cityUrl + "india-icon.svg"}`}
                         className={formStyles.flag}
@@ -143,29 +143,6 @@ function CancelMandate({prevScreen, data, heading}) {
           )}
         </Formik>
       </div>
-      {/* <button
-        type="submit"
-        className={`${styles.proceed_btn}  !w-fit ${
-          !formikRef?.current?.isValid
-            ? "!bg-[#FFDF85] !cursor-not-allowed "
-            : ``
-        } !hidden md:!flex`}>
-        Create request <ForwardArrowWithLine />
-      </button>
-      <div className={`${styles.bottom_row} !flex md:!hidden`}>
-        <div className="flex w-full">
-          <button
-            type="submit"
-            className={`${styles.proceed_btn}  !w-full ${
-              !formikRef?.current?.isValid
-                ? "!bg-[#FFDF85] !cursor-not-allowed"
-                : ``
-            }`}
-            onClick={() => formikRef?.current?.submitForm()}>
-            Create request <ForwardArrowWithLine />
-          </button>
-        </div>
-      </div> */}
     </>
   );
 }

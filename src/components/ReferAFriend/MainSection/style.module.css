@@ -189,3 +189,6 @@
 .addition_text {
   @apply font-Poppins lg:text-16 text-14 text-71717A lg:mt-4 mt-2;
 }
+.mail_content {
+  @apply text-5774AC underline font-medium;
+}

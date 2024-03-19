@@ -56,7 +56,7 @@ const HowItWorksDrawer = ({toggleDrawer, open}) => {
         <div>
           <div>
             <div className={styles.sidebar_header}>
-              <div className="flex flex-col">
+              <div className={styles.subheader_wrapper}>
                 <p className={styles.sidebar_header_heading}>How it works</p>
                 <p className={styles.sidebar_header_subheading}>
                   Become our brand ambassador and earn CF Coins everytime you

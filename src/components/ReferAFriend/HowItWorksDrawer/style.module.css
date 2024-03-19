@@ -41,3 +41,6 @@
 .drawer_main_container {
   @apply h-fit md:h-full w-full md:w-[530px] mt-6 md:mt-12 px-4 xs:px-7 md:pl-12 md:pr-[89px] font-Poppins;
 }
+.subheader_wrapper {
+  @apply flex flex-col;
+}

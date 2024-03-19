@@ -162,10 +162,8 @@ const SearchList = () => {
       </div>
 
       {/* sort by */}
-      <div className="relative flex  xl:mt-8">
-        <p className="hidden md:flex items-center mr-2 text-71717A text-base">
-          Sort By
-        </p>
+      <div className={StyleSheet.sort_div_wrapper}>
+        <p className={style.sort_by_text}>Sort By</p>
         <div className={`${style.filter} relative `}>
           <div
             className={style.filterbox}
@@ -198,7 +196,7 @@ const SearchList = () => {
       </div>
 
       {/* Horizontal line */}
-      <div className="bg-DDDDDF mb-[10px] mt-[26px] xl:my-9 h-[2px] w-full"></div>
+      <div className={style.horizontal_line_next}></div>
 
       {searchData?.length ? (
         <div>

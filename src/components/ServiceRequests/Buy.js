@@ -100,7 +100,7 @@ function Buy({heading, prevScreen, data}) {
                   <span className="lowercase">{heading}</span>
                 </p>
               )}
-              <div className="product_to_buy_wrapper">
+              <div className={styles.product_to_buy_wrapper}>
                 {data?.map((item, index) => (
                   <div
                     key={index.toString()}
@@ -115,15 +115,9 @@ function Buy({heading, prevScreen, data}) {
                       id={index}
                       name={item?.product_name}
                       value={item?.product_name}
-                      className="w-6 h-[22px] rounded cursor-pointer mr-[7px]"
+                      className={styles.buy_checkbox_style}
                       checked={selectedProducts.includes(item.product_name)}
                     />
-                    {/* <Checkbox
-                    {...label}
-                    onChange={e => handleChangeCheckbox(index, e)}
-                    checked={selectedProducts.includes(item.product_name)}
-                    value={item.product_name}
-                  /> */}
                     <img
                       className={styles.product_imge_thambnil}
                       src={`${
@@ -149,35 +143,9 @@ function Buy({heading, prevScreen, data}) {
                       rows={2}
                     />
                   </div>
-                  {/* <div className={styles.bottom_row}>
-                  <div className={styles.bottom_line}></div>
-                  <button
-                    className={`${styles.proceed_btn} ${
-                      selectedProducts.length === 0
-                        ? "!bg-[#FFDF85] !cursor-not-allowed"
-                        : ``
-                    }`}
-                    onClick={() => handleCreateRequest()}>
-                    Create request <ForwardArrowWithLine />
-                  </button>
-                </div> */}
                 </>
               ) : (
                 <></>
-                // <div className={styles.bottom_row} >
-                //   <button
-                //     className={`${styles.proceed_btn} ${
-                //       selectedProducts.length === 0
-                //         ? "!bg-[#FFDF85] !cursor-not-allowed"
-                //         : ``
-                //     }`}
-                //     onClick={() => {
-                //       setShowPickupReason(true);
-                //       setScreen(2);
-                //     }}>
-                //     Proceed <ForwardArrowWithLine />
-                //   </button>
-                // </div>
               )}
             </div>
           </div>

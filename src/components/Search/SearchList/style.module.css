@@ -175,3 +175,12 @@
 .dropdown_wrapper_desk {
   @apply gap-6 absolute z-[111] top-12 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4 md:ml-[56px];
 }
+.sort_by_text {
+  @apply hidden md:flex items-center mr-2 text-71717A text-base;
+}
+.sort_div_wrapper {
+  @apply relative flex  xl:mt-8;
+}
+.horizontal_line_next {
+  @apply bg-DDDDDF mb-[10px] mt-[26px] xl:my-9 h-[2px] w-full;
+}

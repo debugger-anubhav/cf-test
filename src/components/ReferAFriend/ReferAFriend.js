@@ -7,6 +7,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {DocSidebarSkeleton} from "../Documentation/Sidebar/DocSidebar";
 import {FooterSkeleton} from "@/components/Common/Footer";
+import styles from "./style.module.css";
 
 const DocSidebar = loadable(() =>
   import("../Documentation/Sidebar/DocSidebar"),
@@ -34,15 +35,15 @@ const ReferAFriend = ({login}) => {
       <Header />
       <MenuList />
       {/* @apply hidden font-Poppins lg:flex gap-16 pr-[70px] xl:pr-[90px]macbook:pr-[122px] 3xl:pr-[160px] 4xl:pr-[160px] -mt-6; */}
-      <div className="large_layout flex -mt-6 w-full h-full">
-        <div className="min-w-fit hidden lg:flex" style={{height: "initial"}}>
+      <div className={styles.wrapper}>
+        <div className={styles.container} style={{height: "initial"}}>
           {loading && login ? (
             <DocSidebarSkeleton />
           ) : (
             isLoogedIn && <DocSidebar />
           )}
         </div>
-        <div className="w-full">
+        <div className={styles.full_width}>
           <MainSection login={login} />
         </div>
       </div>

@@ -37,7 +37,7 @@ const FAQQuestion = ({
                 Alternatively, you can drop your resume at{" "}
                 <a
                   href="mailto:hello@cityfurnish.com"
-                  className="text-5774AC underline font-medium">
+                  className={styles.mail_content}>
                   hr@cityfurnish.com
                 </a>
               </p>

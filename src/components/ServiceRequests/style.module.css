@@ -101,7 +101,7 @@
   @apply flex flex-col w-full my-8 mb-8 sm:mb-12 lg:mb-8 overflow-y-scroll;
 }
 .product_to_buy_wrapper {
-  @apply flex;
+  @apply flex flex-col;
 }
 .product_imge_thambnil {
   @apply w-6 h-6 rounded;
@@ -222,4 +222,11 @@
   100% {
     opacity: 1;
   }
+}
+
+.buy_checkbox_style {
+  @apply w-6 h-[22px] rounded cursor-pointer mr-[7px];
+}
+.CancelMandate_indian_icon_wrapper {
+  @apply flex gap-2 items-center;
 }
