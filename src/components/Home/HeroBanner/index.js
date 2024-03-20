@@ -1,5 +1,4 @@
 "use client";
-// import {HeroBannerText} from "@/constants/constant";
 import {HeroBannerImages, HeroFrame} from "@/assets/images";
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -17,7 +16,7 @@ const HeroBanner = () => {
     );
   };
   return (
-    <>
+    <div>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
         <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
@@ -30,31 +29,23 @@ const HeroBanner = () => {
               className={styles.carousel_images}
               alt="hero-banner-1"
             />
-            {/* </a> */}
           </div>
           <div
             className={styles.hero_banner_cursor_pointer}
             onClick={() => {
               handleRedirection();
             }}>
-            {/* <a
-              href={`/${homePageReduxData?.cityName
-                .replace(/\//g, "-")
-                .toLowerCase()}/rent`}> */}
             <img
               src={HeroBannerImages.HeroBannerImageTwo}
               className={styles.carousel_images}
               alt="hero-banner-2"
-              loading="lazy"
             />
-            {/* </a> */}
           </div>
           <div className={styles.hero_banner_cursor_pointer}>
             <img
               src={HeroBannerImages.HeroBannerImageThree}
               className={styles.carousel_images}
               alt="hero-banner-3"
-              loading="lazy"
             />
           </div>
         </Carousel>
@@ -65,10 +56,10 @@ const HeroBanner = () => {
           href={`/${homePageReduxData?.cityName
             .toLowerCase()
             .replace(/\//g, "-")}/rent`}>
-          <img src={HeroFrame} alt="hero-banner" className="w-full" />
+          <img src={HeroFrame} alt="hero-banner" />
         </a>
       </div>
-    </>
+    </div>
   );
 };
 export default HeroBanner;
