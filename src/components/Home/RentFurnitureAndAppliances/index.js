@@ -91,7 +91,6 @@ const RentFurnitureAndAppliances = ({params}) => {
                   .replace(/\//g, "-")
                   .toLowerCase()}/${item?.seourl}`}
                 onClick={e => e.preventDefault()}
-                aria-label={item?.cat_name}
                 target="_self"
                 rel="noopener">
                 <img

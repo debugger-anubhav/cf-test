@@ -5,7 +5,7 @@
   @apply xl:w-[589px] xl:h-[720px] w-full xl:relative;
 }
 .tryCity_image {
-  @apply rounded-lg w-full;
+  @apply rounded-lg w-full  pointer-events-none;
 }
 .right_text_section {
   @apply xl:w-[50%] w-full mt-4;
