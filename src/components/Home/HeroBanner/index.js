@@ -25,15 +25,10 @@ const HeroBanner = () => {
             onClick={() => {
               handleRedirection();
             }}>
-            {/* <a
-              href={`/${homePageReduxData?.cityName
-                .replace(/\//g, "-")
-                .toLowerCase()}/rent`}> */}
             <img
               src={HeroBannerImages.HeroBannerImageOne}
               className={styles.carousel_images}
               alt="hero-banner-1"
-              loading="lazy"
             />
             {/* </a> */}
           </div>
@@ -70,12 +65,7 @@ const HeroBanner = () => {
           href={`/${homePageReduxData?.cityName
             .toLowerCase()
             .replace(/\//g, "-")}/rent`}>
-          <img
-            src={HeroFrame}
-            alt="hero-banner"
-            className="w-full"
-            loading="lazy"
-          />
+          <img src={HeroFrame} alt="hero-banner" className="w-full" />
         </a>
       </div>
     </>
