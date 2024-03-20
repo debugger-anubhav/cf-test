@@ -76,6 +76,7 @@ export default function RootLayout({children}) {
         <script
           type="application/ld+json"
           async
+          defer
           dangerouslySetInnerHTML={{
             __html: `
               {
@@ -99,6 +100,7 @@ export default function RootLayout({children}) {
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             async
+            defer
             dangerouslySetInnerHTML={{
               __html: `
              (function(){
@@ -125,6 +127,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `
@@ -170,6 +173,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
           />
@@ -177,6 +181,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `
@@ -196,6 +201,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `
@@ -209,6 +215,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `
@@ -245,6 +252,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `(function (w, d, s, l, i) {
@@ -272,6 +280,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: `
@@ -284,6 +293,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
+            defer
             async
             dangerouslySetInnerHTML={{
               __html: ` !function(e,t,n,s,u,a)
