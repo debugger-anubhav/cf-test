@@ -4,11 +4,11 @@ import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
 import React, {useEffect, useRef} from "react";
 import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
 import {useRouter} from "next/navigation";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {baseInstance} from "@/network/axios";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
@@ -23,17 +23,18 @@ const LimetedPreiodDiscount = () => {
     state => state.homePagedata.loginPopupState,
   );
   const [isDumy, setIsDumy] = React.useState(false);
-  const getLimitedPeriodDiscount = () => {
-    baseInstance
-      .get(endPoints.limitedPreiod + `?cityId=${cityId}`)
+  const {refetch: getLimitedPeriodDiscount} = useQuery(
+    "limited-discount",
+    endPoints.limitedPreiod,
+    `?cityId=${cityId}`,
+  );
+
+  useEffect(() => {
+    getLimitedPeriodDiscount()
       .then(res => {
         dispatch(addLimitedPreiodDiscount(res?.data?.data));
       })
       .catch(err => console.log(err?.message || "some error"));
-  };
-
-  useEffect(() => {
-    getLimitedPeriodDiscount();
   }, []);
 
   const sliderRef = useRef(null);

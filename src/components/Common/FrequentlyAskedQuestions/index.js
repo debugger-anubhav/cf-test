@@ -20,6 +20,10 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     setVisibleQues(prevVisibleRows => prevVisibleRows + 5);
   };
   const [openIndex, setOpenIndex] = React.useState(null);
+  const {refetch: getFaqsLandingPage} = useQuery(
+    "faqsLandingPage",
+    endPoints.faqsLandingPage,
+  );
   const {refetch: getFaqsSeoAppliancePage} = useQuery(
     "faqsSeoAppliancePage",
     endPoints.seoApplianceFaqs,
@@ -33,13 +37,6 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     endPoints.categortFaq,
     `?parentCategoryId=27`,
   );
-  const getFaqsLandingPage = () => {
-    baseInstance
-      .get(endPoints.faqsLandingPage)
-      .then(res => setFaqs(res?.data?.data))
-      .catch(err => console.log(err?.message || "some error"));
-  };
-
   const getFaqsCitymax = () => {
     baseInstance
       .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
@@ -79,7 +76,12 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     } else if (params === "citymax") {
       getFaqsCitymax();
     } else {
-      getFaqsLandingPage();
+      getFaqsLandingPage()
+        .then(res => {
+          setFaqs(res?.data?.data);
+          // console.log("home")
+        })
+        .catch(err => console.log(err?.message || "some error"));
     }
   }, []);
 
