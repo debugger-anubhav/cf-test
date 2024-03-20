@@ -9,7 +9,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {BsStarFill} from "react-icons/bs";
+import {FaStar} from "react-icons/fa";
 import Rating from "react-rating";
 import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
@@ -153,14 +153,10 @@ const CustomerRating = () => {
                     <Rating
                       stop={5}
                       emptySymbol={
-                        <BsStarFill size={16} color={"#fff"} className="mr-1" />
+                        <FaStar size={16} color={"#fff"} className="mr-1" />
                       }
                       fullSymbol={
-                        <BsStarFill
-                          size={16}
-                          color={"#FFCB45"}
-                          className="mr-1"
-                        />
+                        <FaStar size={16} color={"#FFCB45"} className="mr-1" />
                       }
                       initialRating={
                         item?.fc_google_location_data[0]?.average_review
