@@ -1,5 +1,5 @@
 "use client";
-import {HeroBannerImages, HeroFrame} from "@/assets/images";
+import {HeroBannerImages} from "@/assets/images";
 import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
@@ -56,7 +56,12 @@ const HeroBanner = () => {
           href={`/${homePageReduxData?.cityName
             .toLowerCase()
             .replace(/\//g, "-")}/rent`}>
-          <img src={HeroFrame} alt="hero-banner" />
+          <img
+            src={
+              "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp"
+            }
+            alt="hero-banner"
+          />
         </a>
       </div>
     </div>
