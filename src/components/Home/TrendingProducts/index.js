@@ -24,11 +24,7 @@ const TrendingProducts = ({params}) => {
   const [isDumy, setIsDumy] = React.useState(false);
 
   const cityId = getLocalStorage("cityId");
-  const {refetch: getTrendyProducts} = useQuery(
-    "trendy-product",
-    endPoints.trendingProduct,
-    `?cityId=${cityId}&userId=${85757}`,
-  );
+
   const {refetch: getSeoApplianceTrendProduct} = useQuery(
     "seo-appliance-trend-product",
     endPoints.seoApplianceTtrendingProduct,
@@ -39,6 +35,16 @@ const TrendingProducts = ({params}) => {
     endPoints.seoFurnitureTtrendingProduct,
     paramsCityId,
   );
+
+  const getTrendyProducts = () => {
+    baseInstance
+      .get(endPoints.trendingProduct + `?cityId=${cityId}&userId=${85757}`)
+      .then(res => {
+        setData(res?.data?.data);
+        dispatch(addtrendingproduct(res?.data?.data));
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
 
   useEffect(() => {
     if (
@@ -69,13 +75,7 @@ const TrendingProducts = ({params}) => {
         })
         .catch(err => console.log(err?.message || "some error"));
     } else {
-      getTrendyProducts()
-        .then(res => {
-          // console.log("hommmmmmeeeeeeeeeeeeeeeeee")
-          setData(res?.data?.data);
-          dispatch(addtrendingproduct(res?.data?.data));
-        })
-        .catch(err => console.log(err?.message || "some error"));
+      getTrendyProducts();
     }
   }, []);
 

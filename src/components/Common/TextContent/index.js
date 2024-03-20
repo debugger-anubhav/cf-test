@@ -12,7 +12,6 @@ export default function TextContent({params}) {
       .get(endPoints.homePageTextContent)
       .then(res => {
         setData(res?.data?.data);
-        // console.log("home");
       })
       .catch(err => console.log(err?.message || "some error"));
   };

@@ -4,10 +4,10 @@ import PopOver from "../PopOver";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addAllAndSubCategory} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
 import {useRouter} from "next/navigation";
+import {baseInstance} from "@/network/axios";
 
 const MenuList = ({hasMb = true}) => {
   const dispatch = useDispatch();
@@ -16,14 +16,9 @@ const MenuList = ({hasMb = true}) => {
     state => state.homePagedata,
   );
   const [loading, setLoading] = React.useState(true);
-  const {refetch: getAllAndSubCategory} = useQuery(
-    "category",
-    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
-  );
-
-  useEffect(() => {
-    // if (!getAllAndSubCategoryData?.length) {
-    getAllAndSubCategory()
+  const getAllAndSubCategory = () => {
+    baseInstance
+      .get(endPoints.allAndSubCategory + `?cityId=${getLocalStorage("cityId")}`)
       .then(res => {
         dispatch(addAllAndSubCategory(res?.data?.data));
         setLoading(false);
@@ -32,7 +27,10 @@ const MenuList = ({hasMb = true}) => {
         console.log(err?.message || "some error");
         setLoading(false);
       });
-    // }
+  };
+
+  useEffect(() => {
+    getAllAndSubCategory();
   }, []);
 
   return (
