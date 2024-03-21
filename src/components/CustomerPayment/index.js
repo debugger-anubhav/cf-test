@@ -41,6 +41,8 @@ function CustomerPayment() {
   const router = useRouter();
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
+  const userName = getLocalStorage("user_name");
+  const userEmail = getLocalStorage("user_email");
   const coinsReduxValue = useSelector(state => state.invoicePage);
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
 
@@ -63,6 +65,7 @@ function CustomerPayment() {
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
     coinsReduxValue.isCoinApplied,
   );
+  const [isLogin, setIsLogin] = useState();
   const [availableCoins, setAvailableCoins] = useState(0);
   const [formData, setFormData] = useState({
     fullName: nameParam || "",
@@ -72,28 +75,20 @@ function CustomerPayment() {
     cfCoins: availableCoins,
     notes: "",
   });
+  useEffect(() => {
+    if (isLogin) {
+      setFormData({...formData, fullName: userName, email: userEmail});
+    }
+  }, [isLogin]);
+
   const [showValidationForAmount, setshowValidationForAmount] = useState(false);
-  // const [backToAvailableCoins, setBackToAvailableCoins] = useState(0);
-  // const [userId, setuserId] = useState(null);
+
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-  const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [redirctInvoice, setRedirctInvoice] = useState(false);
   const [topupAmount, setTopupAmount] = useState();
   const [primaryAmount, setPrimaryAmount] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   setFormData({
-  //     fullName: nameParam || "",
-  //     email: emailParam || "",
-  //     amount: amountParam || 1,
-  //     invoice: invoiceNumberParam || "",
-  //     cfCoins: coinsReduxValue?.usedCoins,
-  //     notes: "",
-  //   });
-  // }, [currentURL]);
-
   const redirectToSomething = async () => {
     try {
       const response = await baseInstance.get(
@@ -177,10 +172,6 @@ function CustomerPayment() {
   useEffect(() => {
     validateAuth();
   }, [isLogin]);
-
-  // useEffect(() => {
-  //   fetchAvailCoins();
-  // }, []);
 
   const validationSchema = Yup.object({
     fullName: Yup.string()

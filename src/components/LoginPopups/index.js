@@ -137,6 +137,8 @@ const LoginModal = ({
             const encryptedData = encrypt(response?.data?.data?.id.toString());
             setLocalStorage("_ga", encryptedData);
             setLocalStorage("user_name", response?.data?.data?.full_name);
+            setLocalStorage("user_email", response?.data?.data?.email);
+
             if (setIsLogin) {
               setIsLogin(true);
             }
