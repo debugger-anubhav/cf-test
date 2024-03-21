@@ -152,37 +152,35 @@ function Repair({prevScreen, data}) {
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
               {/* {toggleStates[index].istoggled && repairOptions?.length > 0 && ( */}
-              {toggleStates[index].istoggled &&
-                toggleStates[index].options &&
-                repairOptions?.length > 0 && (
-                  <div>
-                    <div className={styles.reson_for_repair_wrapper}>
-                      <p className={styles.desc}>Reason for repair</p>
-                      <Select
-                        options={repairOptions}
-                        styles={customStylesForSelect}
-                        onChange={selectedOption =>
-                          handleChange(selectedOption, index)
-                        }
-                        placeholder="Select a reason for repair"
-                        isSearchable={false}
-                        onMenuOpen={() => setIsDropdownOpen(true)}
-                        onMenuClose={() => setIsDropdownOpen(false)}
-                        className="font-Poppins placeholder:!text-71717A text-71717A"
-                      />
-                    </div>
-                    <div className="mt-4">
-                      <p className={styles.desc}>Repair details</p>
-
-                      <textarea
-                        placeholder="Enter repair details"
-                        className={styles.form_input_textarea}
-                        onChange={e => handleDetailChange(e, index)}
-                        rows={2}
-                      />
-                    </div>
+              {toggleStates[index].istoggled && toggleStates[index].options && (
+                <div>
+                  <div className={styles.reson_for_repair_wrapper}>
+                    <p className={styles.desc}>Reason for repair</p>
+                    <Select
+                      options={repairOptions}
+                      styles={customStylesForSelect}
+                      onChange={selectedOption =>
+                        handleChange(selectedOption, index)
+                      }
+                      placeholder="Select a reason for repair"
+                      isSearchable={false}
+                      onMenuOpen={() => setIsDropdownOpen(true)}
+                      onMenuClose={() => setIsDropdownOpen(false)}
+                      className="font-Poppins placeholder:!text-71717A text-71717A"
+                    />
                   </div>
-                )}
+                  <div className="mt-4">
+                    <p className={styles.desc}>Repair details</p>
+
+                    <textarea
+                      placeholder="Enter repair details"
+                      className={styles.form_input_textarea}
+                      onChange={e => handleDetailChange(e, index)}
+                      rows={2}
+                    />
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
