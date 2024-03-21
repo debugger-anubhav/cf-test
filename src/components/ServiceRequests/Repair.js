@@ -16,16 +16,29 @@ function Repair({prevScreen, data}) {
   );
 
   const [toggleStates, setToggleStates] = useState(
-    data.map(() => ({istoggled: false, selected: null, detail: null})),
+    data.map(() => ({
+      istoggled: false,
+      selected: null,
+      detail: null,
+      options: false,
+    })),
   );
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const [repairOptions, setRepairOptions] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const getRepairOption = productName => {
+  const getRepairOption = (productName, index) => {
     baseInstance
       .get(endPoints.serviceRequestPage.getRepairOptions(productName))
       .then(res => {
         setRepairOptions(res?.data?.data);
+
+        setToggleStates(prevStates =>
+          prevStates.map((state, i) =>
+            i === index
+              ? {...state, options: res?.data?.data?.length > 0}
+              : state,
+          ),
+        );
       })
       .catch(err => console.log(err?.message || "some error"));
   };
@@ -37,6 +50,7 @@ function Repair({prevScreen, data}) {
       ),
     );
   };
+
   const handleDetailChange = (e, index) => {
     setToggleStates(prevStates =>
       prevStates.map((state, i) =>
@@ -83,11 +97,13 @@ function Repair({prevScreen, data}) {
   const handleToggle = index => {
     setToggleStates(prevStates =>
       prevStates.map((state, i) =>
-        i === index
-          ? {...state, istoggled: !state.istoggled, selected: "NA"}
-          : state,
+        i === index ? {...state, istoggled: !state.istoggled} : state,
       ),
     );
+
+    if (!toggleStates[index].istoggled) {
+      getRepairOption(data[index]?.product_name, index);
+    }
   };
 
   return (
@@ -117,7 +133,7 @@ function Repair({prevScreen, data}) {
                 onClick={() => {
                   handleToggle(index);
                   if (!toggleStates[index].istoggled) {
-                    getRepairOption(item?.product_name);
+                    getRepairOption(item?.product_name, index);
                   }
                 }}>
                 {toggleStates[index].istoggled ? (
@@ -135,35 +151,38 @@ function Repair({prevScreen, data}) {
                 )}
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
-              {toggleStates[index].istoggled && repairOptions?.length > 0 && (
-                <div>
-                  <div className={styles.reson_for_repair_wrapper}>
-                    <p className={styles.desc}>Reason for repair</p>
-                    <Select
-                      options={repairOptions}
-                      styles={customStylesForSelect}
-                      onChange={selectedOption =>
-                        handleChange(selectedOption, index)
-                      }
-                      placeholder="Select a reason for repair"
-                      isSearchable={false}
-                      onMenuOpen={() => setIsDropdownOpen(true)}
-                      onMenuClose={() => setIsDropdownOpen(false)}
-                      className="font-Poppins placeholder:!text-71717A text-71717A"
-                    />
-                  </div>
-                  <div className="mt-4">
-                    <p className={styles.desc}>Repair details</p>
+              {/* {toggleStates[index].istoggled && repairOptions?.length > 0 && ( */}
+              {toggleStates[index].istoggled &&
+                toggleStates[index].options &&
+                repairOptions?.length > 0 && (
+                  <div>
+                    <div className={styles.reson_for_repair_wrapper}>
+                      <p className={styles.desc}>Reason for repair</p>
+                      <Select
+                        options={repairOptions}
+                        styles={customStylesForSelect}
+                        onChange={selectedOption =>
+                          handleChange(selectedOption, index)
+                        }
+                        placeholder="Select a reason for repair"
+                        isSearchable={false}
+                        onMenuOpen={() => setIsDropdownOpen(true)}
+                        onMenuClose={() => setIsDropdownOpen(false)}
+                        className="font-Poppins placeholder:!text-71717A text-71717A"
+                      />
+                    </div>
+                    <div className="mt-4">
+                      <p className={styles.desc}>Repair details</p>
 
-                    <textarea
-                      placeholder="Enter repair details"
-                      className={styles.form_input_textarea}
-                      onChange={e => handleDetailChange(e, index)}
-                      rows={2}
-                    />
+                      <textarea
+                        placeholder="Enter repair details"
+                        className={styles.form_input_textarea}
+                        onChange={e => handleDetailChange(e, index)}
+                        rows={2}
+                      />
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
           ))}
         </div>
