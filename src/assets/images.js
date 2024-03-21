@@ -4,14 +4,6 @@ import editIcon from "./home_page_assets/rating/editIcon.svg";
 // demo produt page  images
 import CtaImage from "./product_cta.svg";
 
-// download for app section
-import downloadBanner from "./home_page_assets/downloadForMobile/DownloadBanner.svg";
-import DownloadBackgroundImage from "./home_page_assets/downloadForMobile/DownloadBackgroundImage.svg";
-import appleIcon from "./home_page_assets/downloadForMobile/appleIcon.svg";
-import androidIcon from "./home_page_assets/downloadForMobile/androidIcon.svg";
-import QrCode from "./home_page_assets/downloadForMobile/QrCode.svg";
-import backgroungImageDesk from "./home_page_assets/downloadForMobile/backgroungImageDesk.svg";
-import mobileDesktop from "./home_page_assets/downloadForMobile/mobileDesktop.svg";
 import DownloadQR from "@/assets/header/download-QR.svg";
 
 const Desktop = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
@@ -26,7 +18,6 @@ export const TryCityMaxBannerMobile = Mobile + "city-max.webp";
 
 export const HeroFrame = Desktop + "hero-banner-main.webp";
 
-// export const DownloadForWeb = Desktop + "download-cityfurnish-mobile-app.webp";
 export const DownloadForWeb = Desktop + "download-cityfurnish-mobile-app.webp";
 
 export const DownloadForMobileImg =
@@ -101,16 +92,6 @@ export const HomePageFourSteps = {
   cardMob2: Mobile + "step2.webp",
   cardMob3: Mobile + "step3.webp",
   cardMob4: Mobile + "step4.webp",
-};
-
-export const downloadBannersImages = {
-  downloadBanner,
-  DownloadBackgroundImage,
-  appleIcon,
-  androidIcon,
-  QrCode,
-  backgroungImageDesk,
-  mobileDesktop,
 };
 
 export const hasselFreeSection = {
