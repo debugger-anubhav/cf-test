@@ -6,6 +6,8 @@ import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
+import herobanner from "@/assets/home_page_assets/hero-banner-main.webp";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -56,12 +58,13 @@ const HeroBanner = () => {
           href={`/${homePageReduxData?.cityName
             .toLowerCase()
             .replace(/\//g, "-")}/rent`}>
-          <img
+          {/* <img
             src={
               "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp"
             }
             alt="hero-banner"
-          />
+          /> */}
+          <Image src={herobanner} alt="hero-banner" />
         </a>
       </div>
     </div>
