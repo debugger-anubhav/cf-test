@@ -161,6 +161,8 @@ const ProfileSettings = () => {
         body,
       );
       setLocalStorage("user_name", values.fullName);
+      setLocalStorage("user_email", values.email);
+
       if (typeof window !== "undefined") {
         window.onload = () => {
           showToastNotification("Your changes are saved successfully", 1);

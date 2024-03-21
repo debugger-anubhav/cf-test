@@ -227,6 +227,7 @@ const Header = ({page}) => {
           const encryptedData = encrypt(res?.data?.data?.userId);
           setLocalStorage("_ga", encryptedData);
           setLocalStorage("user_name", res?.data?.data?.userName);
+          setLocalStorage("user_email", res?.data?.data?.email);
         } else {
           setLocalStorage(
             "tempUserID",
