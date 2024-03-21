@@ -19,7 +19,7 @@ function Repair({prevScreen, data}) {
     data.map(() => ({istoggled: false, selected: null, detail: null})),
   );
   const {CreateSRApiCall} = CommonCreateRequestApi();
-  const [repairOptions, setRepairOptions] = useState(null);
+  const [repairOptions, setRepairOptions] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const getRepairOption = productName => {
     baseInstance
@@ -116,7 +116,9 @@ function Repair({prevScreen, data}) {
                 className={styles.repair_toggle_wrapper}
                 onClick={() => {
                   handleToggle(index);
-                  getRepairOption(item?.product_name);
+                  if (!toggleStates[index].istoggled) {
+                    getRepairOption(item?.product_name);
+                  }
                 }}>
                 {toggleStates[index].istoggled ? (
                   <BsToggleOn
