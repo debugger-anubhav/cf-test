@@ -12,6 +12,8 @@ const DownloadForMobile = () => {
           alt="download-image-for-web"
           className={styles.download_image}
           loading="lazy"
+          width={"100%"}
+          height={"100%"}
         />
         {/* </a> */}
       </div>
@@ -22,6 +24,8 @@ const DownloadForMobile = () => {
           alt="download-image-for-mobile"
           className={styles.download_image}
           loading="lazy"
+          width={"100%"}
+          height={"100%"}
         />
         {/* </a> */}
       </div>

@@ -373,9 +373,6 @@ const Header = ({page}) => {
                     router.push("/wishlist");
                   } else {
                     toggleLoginModal(true);
-                    // router.push(
-                    //   "https://test.rentofurniture.com/user_sign_up",
-                    // );
                   }
                 }}>
                 <div className={`w-100 h-100 absolute z-10`}></div>
@@ -386,15 +383,6 @@ const Header = ({page}) => {
                     alt="favorite"
                     className={styles.header_favorite}
                     loading="lazy"
-                    // onClick={() => {
-                    //   if (userId) {
-                    //     router.push("/wishlist");
-                    //   } else {
-                    //     router.push(
-                    //       "https://test.rentofurniture.com/user_sign_up",
-                    //     );
-                    //   }
-                    // }}
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 && (
                     <div className={styles.cart_badge}>{wishListCount}</div>
@@ -411,7 +399,6 @@ const Header = ({page}) => {
                     alt="shopping-card-icon"
                     loading="lazy"
                     className={`${styles.header_shopping_card} relative z-[-1]`}
-                    // onClick={() => router.push("/cart")}
                   />
                   {cartItemsLength > 0 && (
                     <div className={styles.cart_badge}>{cartItemsLength}</div>
