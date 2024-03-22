@@ -76,8 +76,8 @@ const TryCityMax = () => {
               e.preventDefault();
             }}
             aria-label="Check our plans"
-            target="_self"
-            rel="noopener">
+            target="_blank"
+            rel="noopener noreferrer">
             <button
               className={styles.check_button}
               onClick={() =>
