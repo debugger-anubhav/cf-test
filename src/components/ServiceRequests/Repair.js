@@ -126,7 +126,7 @@ function Repair({prevScreen, data}) {
                 repairOptions?.length > 4 &&
                 isDropdownOpen &&
                 "!mb-[11rem]"
-              }`}
+              } `}
               key={index.toString()}>
               <div
                 className={styles.repair_toggle_wrapper}

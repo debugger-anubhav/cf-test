@@ -232,7 +232,7 @@
   @apply flex flex-col gap-2 mt-2;
 }
 .rejected_head {
-  @apply text-12 xl:text-14 tracking-desc leading-[18px] xl:leading-[21px] font-medium text-71717A;
+  @apply text-12 xl:text-14 font-Poppins tracking-desc leading-[18px] xl:leading-[21px] font-medium text-71717A;
 }
 .rejected_doc_map_row {
   @apply flex justify-between gap-1 cursor-pointer;

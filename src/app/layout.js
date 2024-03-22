@@ -55,6 +55,10 @@ export default function RootLayout({children}) {
           property="article:publisher"
           content="https://www.facebook.com/cityFurnishRental/"
         />
+        <meta httpEquiv="Content-Encoding" content="gzip" />
+        {/* <!-- clear cache --> */}
+        <meta httpEquiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
+        <meta httpEquiv="Pragma" content="no-cache" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"

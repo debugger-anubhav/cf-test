@@ -153,10 +153,19 @@ const CustomerRating = () => {
                     <Rating
                       stop={5}
                       emptySymbol={
-                        <FaStar size={16} color={"#fff"} className="mr-1" />
+                        <div>
+                          <FaStar size={16} color={"#fff"} className="mr-1" />
+                        </div>
                       }
                       fullSymbol={
-                        <FaStar size={16} color={"#FFCB45"} className="mr-1" />
+                        // <img src='https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg' width={'16px'}/>
+                        <div>
+                          <FaStar
+                            size={16}
+                            color={"#FFCB45"}
+                            className="mr-1"
+                          />
+                        </div>
                       }
                       initialRating={
                         item?.fc_google_location_data[0]?.average_review
