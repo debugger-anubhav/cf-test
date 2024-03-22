@@ -4,14 +4,12 @@ import Image from "next/image";
 import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
-import {useRouter} from "next/navigation";
 import CityMaxDrawer from "./cityMaxDrawer";
 // import SideDrawer from "./sideDrawer";
 
 const TryCityMax = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
-  const router = useRouter();
   const benefitsOfCity = [
     {
       id: 1,
@@ -72,24 +70,17 @@ const TryCityMax = () => {
           </p>
           <a
             href="https://test.rentofurniture.com/citymax"
-            onClick={e => {
-              e.preventDefault();
-            }}
             aria-label="Check our plans"
             target="_blank"
-            rel="noopener noreferrer">
-            <button
-              className={styles.check_button}
-              onClick={() =>
-                router.push("https://test.rentofurniture.com/citymax")
-              }>
+            rel="noreferrer">
+            <div className={styles.check_button}>
               <p className={styles.check_button_paragraph}>Check our plans</p>
               <ForwardArrow
                 size={20}
                 color={"#222"}
                 className={styles.forward_icon}
               />
-            </button>
+            </div>
           </a>
           <div className={styles.benefits_of_city_wrapper}>
             <h2 className={styles.benefits_text}>Benefits of CityMax</h2>
