@@ -152,9 +152,9 @@ export default function CommonDrawer({
           />
         </div>
         <div className={styles.drawer_content}>
-          <a href="/">
-            <p className={styles.logo_text}>cityfurnish</p>
-          </a>
+          <p className={styles.logo_text}>
+            <a href="/">cityfurnish</a>
+          </p>
           <div className={styles.menu_list}>
             <a
               className="lg:hidden"
@@ -179,54 +179,50 @@ export default function CommonDrawer({
               </div>
             </a>
             <div className={`lg:!hidden ${styles.divider}`}></div>
-            <a
-              href={`/${homePageReduxData?.cityName
-                .replace(/\//g, "-")
-                .toLowerCase()}/rent`}>
-              <p
-                className={styles.menu_item}
-                onMouseEnter={e => {
-                  hoverRef.current = "All";
-                }}>
-                All products
-              </p>
-            </a>
-
-            {data?.map((item, index) => (
+            <p
+              className={styles.menu_item}
+              onMouseEnter={e => {
+                hoverRef.current = "All";
+              }}>
               <a
-                key={index.toString()}
                 href={`/${homePageReduxData?.cityName
                   .replace(/\//g, "-")
-                  .toLowerCase()}/${item?.seourl}`}>
-                <p
-                  className={styles.menu_item}
-                  value={item}
-                  onClick={e => {
-                    handleMenu(e, item);
-                  }}>
-                  {item?.cat_name}
-                </p>
+                  .toLowerCase()}/rent`}>
+                All products
               </a>
+            </p>
+
+            {data?.map((item, index) => (
+              <p
+                className={styles.menu_item}
+                value={item}
+                key={index.toString()}
+                onClick={e => {
+                  handleMenu(e, item);
+                }}>
+                <a
+                  href={`/${homePageReduxData?.cityName
+                    .replace(/\//g, "-")
+                    .toLowerCase()}/${item?.seourl}`}>
+                  {item?.cat_name}
+                </a>
+              </p>
             ))}
-            <a href={"/citymax"}>
-              <p className={styles.menu_item}>CityMax</p>
-            </a>
+            <p className={styles.menu_item}>
+              <a href={"/citymax"}>CityMax</a>
+            </p>
 
             <div className={styles.divider}></div>
 
             {string.landing_page.header.menuList2?.map((item, index) => (
-              <a
-                key={index.toString()}
-                href={item.link}
-                target={index === 0 ? "_blank" : "_self"}
-                rel="noreferrer">
-                <p
-                  className={styles.menu_item}
-                  // onClick={() => router.push(item.link)}
-                >
+              <p className={styles.menu_item} key={index.toString()}>
+                <a
+                  href={item.link}
+                  target={index === 0 ? "_blank" : "_self"}
+                  rel="noreferrer">
                   {item?.item}
-                </p>
-              </a>
+                </a>
+              </p>
             ))}
 
             <div className={styles.divider}></div>
@@ -235,12 +231,12 @@ export default function CommonDrawer({
               return (
                 <>
                   {index !== 3 ? (
-                    <a key={index.toString()} href={item.link}>
-                      <p className={styles.menu_item}>{item?.item}</p>
-                    </a>
+                    <p className={styles.menu_item} key={index.toString()}>
+                      <a href={item.link}>{item?.item}</a>
+                    </p>
                   ) : (
-                    <a
-                      className="hidden lg:block"
+                    <p
+                      className={`${styles.menu_item} hidden lg:block`}
                       key={index.toString()}
                       onClick={() => {
                         if (isLogin) router.push("/usersettings");
@@ -249,13 +245,14 @@ export default function CommonDrawer({
                           setClick("profile");
                           toggleLoginModal(true);
                         }
-                      }}
-                      href={
-                        // index === 3 && getLocalStorage("user_id") !== null
-                        index === 3 ? isLogin && "/usersettings" : item.link
-                      }>
-                      <p className={styles.menu_item}>{item?.item}</p>
-                    </a>
+                      }}>
+                      <a
+                        href={
+                          index === 3 ? isLogin && "/usersettings" : item.link
+                        }>
+                        {item?.item}
+                      </a>
+                    </p>
                   )}
                   {index === 2 && (
                     <div className={`!hidden lg:!flex ${styles.divider}`}></div>

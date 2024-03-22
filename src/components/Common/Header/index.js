@@ -401,7 +401,6 @@ const Header = ({page}) => {
                   )}
                 </div>
               </a>
-
               <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
                   <div
