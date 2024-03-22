@@ -52,16 +52,6 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
       subheading:
         "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
     },
-    {
-      heading: "Return or Extend",
-      subheading:
-        "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
-    },
-    {
-      heading: "Return or Extend",
-      subheading:
-        "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
-    },
   ];
 
   return (
