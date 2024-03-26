@@ -98,7 +98,7 @@
   @apply flex w-full my-8 flex-col;
 }
 .buy_info {
-  @apply flex flex-col w-full my-8 mb-8 sm:mb-12 lg:mb-8 overflow-y-scroll;
+  @apply flex flex-col w-full my-8 mb-8 sm:mb-12 lg:mb-8 overflow-y-scroll xl:overflow-y-visible xl:mb-16;
 }
 .product_to_buy_wrapper {
   @apply flex flex-col;
