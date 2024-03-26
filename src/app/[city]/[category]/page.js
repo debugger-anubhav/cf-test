@@ -185,7 +185,6 @@ export default async function Page(params) {
 
 export async function generateMetadata({params}) {
   const data = await create(params);
-  // console.log("metadtatadtdatdtadatatd", data?.data);
   let metaTitle;
   let metaDescription;
 

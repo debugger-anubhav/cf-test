@@ -381,7 +381,7 @@ const ProductDetails = ({params}) => {
                 },
               ],
             });
-            console.log("Analytics----Add to cart");
+            // console.log("Analytics----Add to cart");
           }
         }
         setIsLoading(false);
