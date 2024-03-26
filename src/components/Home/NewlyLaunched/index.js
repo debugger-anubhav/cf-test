@@ -107,14 +107,24 @@ export const NewlyLauncedSkeleton = () => {
   return (
     <div className={styles.main_container}>
       <div className={`${styles.skeleton_brown_box}`}>
-        <Skeleton className={styles.skeleton_box} variant="rectangular" />
+        <Skeleton
+          className={styles.skeleton_box}
+          variant="rectangular"
+          width={"100%"}
+          height={"100%"}
+        />
       </div>
       <div className={styles.skeleton_images_wrapper}>
         {[1, 2, 3, 4, 5, 6].map((item, index) => (
           <div
             className={styles.Newlylaunced_skeleton_wrapper}
             key={index.toString()}>
-            <Skeleton className={styles.skeleton_box} variant="rectangular" />
+            <Skeleton
+              className={styles.skeleton_box}
+              variant="rectangular"
+              width={"100%"}
+              height={"100%"}
+            />
           </div>
         ))}
       </div>

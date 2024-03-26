@@ -137,25 +137,37 @@ export const TryCityMaxSkeleton = () => {
   return (
     <div className={styles.main_wrapper}>
       <div className={styles.left_image_section}>
-        <Skeleton variant="rectangular" className={styles.skeleton_box} />
+        <Skeleton
+          variant="rectangular"
+          className={styles.skeleton_box}
+          width={"100%"}
+          height={"100%"}
+        />
       </div>
       <div className={`${styles.right_text_section} h-full`}>
-        <Skeleton variant="text" className={styles.Skeleton_text} />
         <Skeleton
           variant="text"
-          className={`${styles.Skeleton_text} w-[80%]`}
+          className={styles.Skeleton_text}
+          width={"100%"}
+          height={"100%"}
+        />
+        <Skeleton
+          variant="text"
+          className={`${styles.Skeleton_text} w-[80%] `}
+          height={"100%"}
         />
         <Skeleton variant="text" className={styles.Skeleton_button} />
         <Skeleton
           variant="text"
           className={`${styles.Skeleton_text} mt-10 mb-4`}
           width={"140px"}
+          height={"100%"}
         />
         <Skeleton variant="text" height={"0.5rem"} width={"100%"} />
         <div className=" flex flex-wrap">
           {[1, 2].map((i, index) => (
             <div className=" w-[40%] mr-10" key={index.toString()}>
-              <Skeleton variant="text" height={"400px"} />
+              <Skeleton variant="text" height={"400px"} width={"100%"} />
             </div>
           ))}
         </div>

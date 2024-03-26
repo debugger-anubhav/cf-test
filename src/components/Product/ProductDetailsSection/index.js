@@ -945,11 +945,7 @@ export const SkeletonForProductDetail = () => {
       <div className={styles.container_skeleton}>
         <div className={styles.left_part}>
           <div className="min-h-80 h-80">
-            <Skeleton
-              variant="rectangular"
-              height={"100%"}
-              className="w-full h-full"
-            />
+            <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
           </div>
           <div className={styles.left_bottom_cards}>
             {[1, 2, 3, 4].map((item, index) => {
@@ -957,8 +953,8 @@ export const SkeletonForProductDetail = () => {
                 <div key={index.toString()} className="w-20 h-20 mr-2">
                   <Skeleton
                     variant="rectangular"
+                    width={"100%"}
                     height={"100%"}
-                    className="w-full h-full "
                   />
                 </div>
               );
@@ -967,13 +963,13 @@ export const SkeletonForProductDetail = () => {
         </div>
         <div className={styles.right_part}>
           <div className="h-6 md:w-full w-[80%]">
-            <Skeleton variant="text" className="w-full" height={"100%"} />
+            <Skeleton variant="text" width={"100%"} height={"100%"} />
           </div>
           <div className="h-3 w-1/2 my-4">
-            <Skeleton variant="text" className="w-full" height={"100%"} />
+            <Skeleton variant="text" width={"100%"} height={"100%"} />
           </div>
           <div className="h-3 w-4/6 my-4">
-            <Skeleton variant="text" className="w-full" height={"100%"} />
+            <Skeleton variant="text" width={"100%"} height={"100%"} />
           </div>
           <div className="my-4 flex">
             <Skeleton
@@ -996,10 +992,10 @@ export const SkeletonForProductDetail = () => {
             />
           </div>
           <div className="h-3 w-1/5 my-2">
-            <Skeleton variant="text" className="w-full" height={"100%"} />
+            <Skeleton variant="text" width={"100%"} height={"100%"} />
           </div>
           <div className="h-8 w-4/5 my-2">
-            <Skeleton variant="text" className="w-full" height={"100%"} />
+            <Skeleton variant="text" width={"100%"} height={"100%"} />
           </div>
         </div>
       </div>
