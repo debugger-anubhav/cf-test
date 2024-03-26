@@ -2,8 +2,6 @@
 
 import React, {useEffect, useRef, useState} from "react";
 
-// import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";

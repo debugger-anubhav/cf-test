@@ -93,7 +93,7 @@ const CategoryContent = ({subCategoryId}) => {
       {categoryPageReduxData?.categorTextContent?.map((ele, index) => {
         return (
           <div
-            key={index} // Assuming index can be used as key since no unique identifier provided
+            key={index}
             className={styles.dynamic_keyword}
             dangerouslySetInnerHTML={{
               __html: removeInlineStyles(ele?.cat_meta_keyword),

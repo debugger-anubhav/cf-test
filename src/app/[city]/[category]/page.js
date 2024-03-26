@@ -114,12 +114,6 @@ async function getAllCitiesList() {
   }
 }
 
-// function handleRedirect(req, res) {
-//   res.setHeader("Location", "/destination-page");
-//   res.statusCode = 302; // 302 Found - Temporary Redirect
-//   res.end();
-// }
-
 export default async function Page(params) {
   const metaData = await create(params?.params);
   const propParams = params?.params;

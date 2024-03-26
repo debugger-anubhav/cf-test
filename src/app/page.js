@@ -2,8 +2,6 @@
 
 import React, {useEffect, useRef} from "react";
 
-// import   { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools'
-
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
@@ -98,12 +96,7 @@ const CombineSection = loadable(() =>
 );
 
 export default function Home() {
-  // const router = useRouter();
-
   const myElementRef = useRef();
-  // if (typeof window !== "undefined") {
-  //   setLocalStorage("cityId", 46);
-  // }
 
   // added
   useEffect(() => {

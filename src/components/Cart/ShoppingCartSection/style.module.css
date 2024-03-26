@@ -105,7 +105,7 @@
   @apply text-9A9AA2 font-medium text-12 xl:text-14  leading-5 tracking-0.24 xl:tracking-desc;
 }
 .cart_breakup {
-  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[2px] hover:p-[15px] hover:border-[#5774AC] flex justify-between mt-4;
+  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[2px] hover:p-[15px] hover:border-[#5774AC] flex justify-between mt-4 flex-col;
 }
 .breakup_wrapper {
   @apply flex gap-1 items-center mt-1 xl:mt-[11px] 4xl:mt-0;
@@ -244,4 +244,7 @@
 }
 .insuranceText {
   @apply text-71717A font-medium text-14 font-Poppins;
+}
+.refundable_chip {
+  @apply bg-[#E3F3E8] font-Poppins text-14 text-45454A font-medium tracking-[-2%] leading-[21px] px-2 py-1 w-fit my-3;
 }

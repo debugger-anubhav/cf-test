@@ -151,7 +151,6 @@ export const Icons = {
   Favorite,
   Menu,
   shoppingCard,
-  // CityFurnishLogo,
   Profile,
   Search,
 };
