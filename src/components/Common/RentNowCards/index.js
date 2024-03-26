@@ -34,10 +34,11 @@ const RentNowCard = ({cardImage, url, alt}) => {
         target="_self"
         rel="noopener">
         <img
+          width={"100%"}
+          height={"100%"}
           src={cardImage}
           className={styles?.banner_img}
           alt={imageAlt}
-          loading="lazy"
         />
       </a>
     </div>

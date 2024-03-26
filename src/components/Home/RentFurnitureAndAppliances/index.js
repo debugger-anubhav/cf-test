@@ -102,7 +102,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                   className={styles.category_img}
                   loading="lazy"
                   width={"100%"}
-                  height={"auto"}
+                  height={"100%"}
                 />
               </a>
 

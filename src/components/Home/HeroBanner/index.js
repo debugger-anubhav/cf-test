@@ -61,6 +61,8 @@ const HeroBanner = () => {
               "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp"
             }
             alt="hero-banner"
+            width={"100%"}
+            height={"100%"}
           />
         </a>
       </div>
