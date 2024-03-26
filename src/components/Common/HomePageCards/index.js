@@ -185,6 +185,8 @@ const Card = ({
               src={hoverCard ? hoverCardImage : cardImage}
               alt={desc}
               loading="lazy"
+              width={"100%"}
+              height={"100%"}
               className={`${styles.thumbnail}
           ${hoverCard && styles.card_image_hover} 
           }
