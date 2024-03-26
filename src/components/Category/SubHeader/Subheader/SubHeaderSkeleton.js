@@ -34,7 +34,7 @@ export default function SubHeaderSkeleton() {
         <div className={styles.card_wrraper}>
           {[1, 2, 3, 4, 5, 6, 7, 8, 9]?.map((item, index) => (
             <div className={styles.div} key={index.toString()}>
-              <Skeleton variant="rectangular" className="" height={300} />
+              <Skeleton variant="rectangular" width={"100%"} height={300} />
             </div>
           ))}
         </div>
