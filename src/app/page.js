@@ -19,78 +19,90 @@ import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
+import pMinDelay from "p-min-delay";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
 const RentFurnitureAndAppliances = loadable(
-  () => import("@/components/Home/RentFurnitureAndAppliances"),
+  () => pMinDelay(import("@/components/Home/RentFurnitureAndAppliances"), 5),
   {
     fallback: <RentFurnitureSkeleton />,
   },
 );
 const RecentlyViewedProduct = loadable(
-  () => import("@/components/Home/RecentlyViewedProduct"),
+  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 10),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
+  () => pMinDelay(import("@/components/Home/TrendingProducts"), 15),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const OffersAndCoupons = loadable(
-  () => import("@/components/Home/OffersAndCoupons"),
+  () => pMinDelay(import("@/components/Home/OffersAndCoupons"), 20),
   {fallback: <OffersSkeleton />},
 );
 const NewlyLaunched = loadable(
-  () => import("@/components/Home/NewlyLaunched"),
+  () => pMinDelay(import("@/components/Home/NewlyLaunched"), 25),
   {fallback: <NewlyLauncedSkeleton />},
 );
 
 const DownloadForMobile = loadable(() =>
-  import("@/components/Home/DownloadForMobile"),
+  pMinDelay(import("@/components/Home/DownloadForMobile"), 30),
 );
 const PreDesignCombos = loadable(
-  () => import("@/components/Home/PredesignCombos"),
+  () => pMinDelay(import("@/components/Home/PredesignCombos"), 35),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const HasselFreeServicesCards = loadable(() =>
-  import("@/components/Home/HasselFreeServicesCards"),
+  pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 40),
 );
 const LimetedPreiodDiscount = loadable(
-  () => import("@/components/Home/LimetedPreiodDiscount"),
+  () => pMinDelay(import("@/components/Home/LimetedPreiodDiscount"), 45),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const RentNowBanner = loadable(
-  () => import("@/components/Home/RentNowBanner"),
+  () => pMinDelay(import("@/components/Home/RentNowBanner"), 50),
   {fallback: <RentNowBannersSkeleton />},
 );
-const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-  fallback: <TryCityMaxSkeleton />,
-});
-const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
-const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-  fallback: <ProductRowSkeleton />,
-});
+const TryCityMax = loadable(
+  () => pMinDelay(import("@/components/Home/TryCityMax"), 55),
+  {
+    fallback: <TryCityMaxSkeleton />,
+  },
+);
+const CustomerRating = loadable(
+  () => pMinDelay(import("@/components/Home/Rating"), 60),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
+const MediaCoverage = loadable(() =>
+  pMinDelay(import("@/components/Home/MediaCoverage"), 70),
+);
 const HappySubscribers = loadable(() =>
-  import("@/components/Home/HappySubscribers"),
+  pMinDelay(import("@/components/Home/HappySubscribers"), 75),
 );
 const FrequentlyAskedQuestions = loadable(
-  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  () => pMinDelay(import("@/components/Common/FrequentlyAskedQuestions"), 80),
   {
     fallback: <FaqsSkeleton />,
   },
 );
-const Footer = loadable(() => import("@/components/Common/Footer"), {
-  fallback: <FooterSkeleton />,
-});
+const Footer = loadable(
+  () => pMinDelay(import("@/components/Common/Footer"), 85),
+  {
+    fallback: <FooterSkeleton />,
+  },
+);
 const CombineSection = loadable(() =>
   import("@/components/Home/CombineSection"),
 );
