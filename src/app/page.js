@@ -25,80 +25,80 @@ const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
 const RentFurnitureAndAppliances = loadable(
-  () => pMinDelay(import("@/components/Home/RentFurnitureAndAppliances"), 5),
+  () => pMinDelay(import("@/components/Home/RentFurnitureAndAppliances"), 20),
   {
     fallback: <RentFurnitureSkeleton />,
   },
 );
 const RecentlyViewedProduct = loadable(
-  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 10),
+  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 40),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const TrendingProducts = loadable(
-  () => pMinDelay(import("@/components/Home/TrendingProducts"), 15),
+  () => pMinDelay(import("@/components/Home/TrendingProducts"), 60),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const OffersAndCoupons = loadable(
-  () => pMinDelay(import("@/components/Home/OffersAndCoupons"), 20),
+  () => pMinDelay(import("@/components/Home/OffersAndCoupons"), 80),
   {fallback: <OffersSkeleton />},
 );
 const NewlyLaunched = loadable(
-  () => pMinDelay(import("@/components/Home/NewlyLaunched"), 25),
+  () => pMinDelay(import("@/components/Home/NewlyLaunched"), 100),
   {fallback: <NewlyLauncedSkeleton />},
 );
 
 const DownloadForMobile = loadable(() =>
-  pMinDelay(import("@/components/Home/DownloadForMobile"), 30),
+  pMinDelay(import("@/components/Home/DownloadForMobile"), 120),
 );
 const PreDesignCombos = loadable(
-  () => pMinDelay(import("@/components/Home/PredesignCombos"), 35),
+  () => pMinDelay(import("@/components/Home/PredesignCombos"), 140),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const HasselFreeServicesCards = loadable(() =>
-  pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 40),
+  pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 160),
 );
 const LimetedPreiodDiscount = loadable(
-  () => pMinDelay(import("@/components/Home/LimetedPreiodDiscount"), 45),
+  () => pMinDelay(import("@/components/Home/LimetedPreiodDiscount"), 180),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const RentNowBanner = loadable(
-  () => pMinDelay(import("@/components/Home/RentNowBanner"), 50),
+  () => pMinDelay(import("@/components/Home/RentNowBanner"), 200),
   {fallback: <RentNowBannersSkeleton />},
 );
 const TryCityMax = loadable(
-  () => pMinDelay(import("@/components/Home/TryCityMax"), 55),
+  () => pMinDelay(import("@/components/Home/TryCityMax"), 220),
   {
     fallback: <TryCityMaxSkeleton />,
   },
 );
 const CustomerRating = loadable(
-  () => pMinDelay(import("@/components/Home/Rating"), 60),
+  () => pMinDelay(import("@/components/Home/Rating"), 240),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
 const MediaCoverage = loadable(() =>
-  pMinDelay(import("@/components/Home/MediaCoverage"), 70),
+  pMinDelay(import("@/components/Home/MediaCoverage"), 260),
 );
 const HappySubscribers = loadable(() =>
-  pMinDelay(import("@/components/Home/HappySubscribers"), 75),
+  pMinDelay(import("@/components/Home/HappySubscribers"), 280),
 );
 const FrequentlyAskedQuestions = loadable(
-  () => pMinDelay(import("@/components/Common/FrequentlyAskedQuestions"), 80),
+  () => pMinDelay(import("@/components/Common/FrequentlyAskedQuestions"), 300),
   {
     fallback: <FaqsSkeleton />,
   },
 );
 const Footer = loadable(
-  () => pMinDelay(import("@/components/Common/Footer"), 85),
+  () => pMinDelay(import("@/components/Common/Footer"), 320),
   {
     fallback: <FooterSkeleton />,
   },
