@@ -224,5 +224,5 @@ export const endPoints = {
     isAuthenticate: `user/isAuthentic`,
   },
 
-  downloadPDF: "user/exportpayment",
+  downloadPDF: "user/exportpaymentweb",
 };
