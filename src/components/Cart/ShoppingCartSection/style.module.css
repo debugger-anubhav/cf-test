@@ -164,9 +164,7 @@
 .skeleton_right_heading {
   @apply w-3/5 h-6;
 }
-.skeleton_full_width_height {
-  @apply w-full h-full;
-}
+
 .right_product_wrapper {
   @apply mt-8 flex;
 }
@@ -189,7 +187,7 @@
   @apply w-1/4 h-2 ml-4;
 }
 .skeleton_full_width_height_curve {
-  @apply w-full h-full rounded-md;
+  @apply rounded-md;
 }
 .skeleton_right_div {
   @apply lg:w-1/2 w-full 4xl:ml-12;
@@ -245,6 +243,9 @@
 .insuranceText {
   @apply text-71717A font-medium text-14 font-Poppins;
 }
-.refundable_chip {
-  @apply bg-[#E3F3E8] font-Poppins text-14 text-45454A font-medium tracking-[-2%] leading-[21px] px-2 py-1 w-fit my-3;
+.refundable_chip_text {
+  @apply bg-[#E3F3E8] font-Poppins text-14 text-45454A font-normal tracking-[-2%] leading-[21px] px-2 py-1 w-fit my-3 rounded;
+}
+.refundable_chip_span {
+  @apply font-Poppins font-medium text-14 text-45454A leading-[16.94px];
 }

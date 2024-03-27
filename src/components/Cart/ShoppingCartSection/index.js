@@ -893,10 +893,12 @@ const ShoppingCartSection = () => {
                 </div>
                 {isMonthly && (
                   <div>
-                    <p className={styles.refundable_chip}>
+                    <p className={styles.refundable_chip_text}>
                       Refundable Security Deposit:
                       <span className="font-Inter pl-1">₹</span>
-                      {billBreakup?.refundableDeposite}
+                      <span className={styles.refundable_chip_span}>
+                        {billBreakup?.refundableDeposite}
+                      </span>
                     </p>
                   </div>
                 )}

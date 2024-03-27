@@ -28,10 +28,7 @@ export const CartPageSkeleton = () => {
     <div className={`${styles.main_container_skeleton} `}>
       <div className="lg:w-1/2 w-full" id="leftDiv">
         <div className={styles.skeleton_right_heading}>
-          <Skeleton
-            variant="text"
-            className={styles.skeleton_full_width_height}
-          />
+          <Skeleton variant="text" width={"100%"} height={"100%"} />
         </div>
         {[1, 2, 3]?.map(item => {
           return (
@@ -40,40 +37,35 @@ export const CartPageSkeleton = () => {
                 <div className={styles.skeleton_product_img}>
                   <Skeleton
                     variant="rectangular"
-                    className={styles.skeleton_full_width_height}
+                    width={"100%"}
+                    height={"100%"}
                   />
                 </div>
                 <div className={styles.skeleton_details}>
                   <div className="flex">
                     <div className={styles.skeleton_product_detail_1}>
-                      <Skeleton
-                        variant="text"
-                        className={styles.skeleton_full_width_height}
-                      />
+                      <Skeleton variant="text" width={"100%"} height={"100%"} />
                     </div>
                     <div className={styles.skeleton_product_detail_2}>
                       <Skeleton
                         variant="rectangular"
-                        className={styles.skeleton_full_width_height}
+                        width={"100%"}
+                        height={"100%"}
                       />
                     </div>
                   </div>
                   <div className="flex w-full">
                     <div className={styles.skeleton_product_detail_3}>
-                      <Skeleton
-                        variant="text"
-                        className={styles.skeleton_full_width_height}
-                      />
+                      <Skeleton variant="text" width={"100%"} height={"100%"} />
                     </div>
                     <div className={styles.skeleton_product_detail_4}>
                       <Skeleton
                         variant="text"
-                        className={`${styles.skeleton_full_width_height} my-2`}
+                        className={` my-2`}
+                        width={"100%"}
+                        height={"100%"}
                       />
-                      <Skeleton
-                        variant="text"
-                        className={styles.skeleton_full_width_height}
-                      />
+                      <Skeleton variant="text" width={"100%"} height={"100%"} />
                     </div>
                   </div>
                 </div>
@@ -92,18 +84,24 @@ export const CartPageSkeleton = () => {
                 <Skeleton
                   variant="rectangular"
                   className={styles.skeleton_full_width_height_curve}
+                  width={"100%"}
+                  height={"100%"}
                 />
               </div>
               <div className={styles.second_box_skeleton}>
                 <Skeleton
                   variant="rectangular"
                   className={styles.skeleton_full_width_height_curve}
+                  width={"100%"}
+                  height={"100%"}
                 />
               </div>
               <div className={styles.third_box_skeleton}>
                 <Skeleton
                   variant="rectangular"
                   className={styles.skeleton_full_width_height_curve}
+                  width={"100%"}
+                  height={"100%"}
                 />
               </div>
             </div>
@@ -116,12 +114,16 @@ export const CartPageSkeleton = () => {
           <Skeleton
             variant="rectangular"
             className={styles.skeleton_full_width_height_curve}
+            width={"100%"}
+            height={"100%"}
           />
         </div>
         <div className={styles.third_box_skeleton}>
           <Skeleton
             variant="rectangular"
             className={styles.skeleton_full_width_height_curve}
+            width={"100%"}
+            height={"100%"}
           />
         </div>
       </div>

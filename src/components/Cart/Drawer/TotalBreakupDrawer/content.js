@@ -75,7 +75,7 @@ const BillContent = ({
 
         <div className={styles.line}></div>
 
-        <div className={styles.row}>
+        {/* <div className={styles.row}>
           <div>
             <p className={styles.price_label}>Items discount</p>
           </div>
@@ -83,7 +83,7 @@ const BillContent = ({
             <span className={styles.rupeeIcon}>-₹</span>
             {parseInt(billBreakup?.itemDiscount)?.toFixed(2)}
           </p>
-        </div>
+        </div> */}
 
         {!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount") && (
           <>
