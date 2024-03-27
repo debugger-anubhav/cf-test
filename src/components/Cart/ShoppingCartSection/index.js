@@ -47,6 +47,7 @@ import {useRouter} from "next/navigation";
 import LoginModal from "@/components/LoginPopups/index";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import Image from "next/image";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -787,11 +788,13 @@ const ShoppingCartSection = () => {
                       ? `${code} applied`
                       : "   Apply Offers & Coupon"}
                     <span>
-                      <img
+                      <Image
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] inline-block ml-2"
                         loading="lazy"
+                        width={24}
+                        height={24}
                       />
                     </span>
                   </p>

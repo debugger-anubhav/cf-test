@@ -7,6 +7,7 @@ import {CopyIcon} from "@/assets/icon";
 import content from "@/constants/Constant.json";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
+import Image from "next/image";
 
 const OfferPage = () => {
   // const homePageData = useSelector(state => state.homePagedata);
@@ -60,11 +61,13 @@ const OfferPage = () => {
         <h1 className={styles.header}>
           Offers
           <span>
-            <img
+            <Image
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
               alt="paty_icon"
               className="w-[24px] h-[24px] ml-2 inline-block"
               loading="lazy"
+              width={24}
+              height={24}
             />
           </span>
         </h1>

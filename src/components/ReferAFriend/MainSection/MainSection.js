@@ -15,6 +15,7 @@ import "react-responsive-modal/styles.css";
 import {useRouter} from "next/navigation";
 import {FaArrowRight} from "react-icons/fa";
 import {baseInstance} from "@/network/axios";
+import Image from "next/image";
 
 const FAQ = [
   {
@@ -203,11 +204,13 @@ const MainSection = ({login}) => {
                   <p>
                     Your unique Referral Code is ready and waiting for you!{" "}
                     <span>
-                      <img
+                      <Image
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] ml-2 inline-block"
                         loading="lazy"
+                        width={24}
+                        height={24}
                       />
                     </span>
                   </p>

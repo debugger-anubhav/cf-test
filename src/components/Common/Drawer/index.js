@@ -368,11 +368,13 @@ export default function CommonDrawer({
                   <p className={styles.qr_text_span}>100+</p>
                   <div>
                     <span>People have already downloaded our app</span>
-                    <img
+                    <Image
                       src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                       alt="paty_icon"
                       className="!w-[24px] h-[24px] inline-block ml-2"
                       loading="lazy"
+                      width={24}
+                      height={24}
                     />
                   </div>
                 </div>
@@ -381,11 +383,13 @@ export default function CommonDrawer({
                 <p className="text-[#7895B0] font-bold">100k+ </p>&nbsp;
                 <div>
                   <span>People have already downloaded our app</span>
-                  <img
+                  <Image
                     src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                     alt="paty_icon"
                     className="!w-[16px] h-[16px] inline-block ml-2"
                     loading="lazy"
+                    width={16}
+                    height={16}
                   />
                 </div>
               </div>
