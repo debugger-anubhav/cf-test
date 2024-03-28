@@ -31,7 +31,7 @@ const RentFurnitureAndAppliances = loadable(
   },
 );
 const RecentlyViewedProduct = loadable(
-  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 40),
+  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 30),
   {
     fallback: <ProductRowSkeleton />,
   },

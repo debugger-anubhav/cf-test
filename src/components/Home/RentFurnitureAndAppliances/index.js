@@ -12,6 +12,7 @@ import {endPoints} from "@/network/endPoints";
 import {useRouter} from "next/navigation";
 import {setLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
+import Image from "next/image";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
@@ -93,7 +94,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                 onClick={e => e.preventDefault()}
                 target="_self"
                 rel="noopener">
-                <img
+                <Image
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                     item.category_web_image
@@ -101,8 +102,8 @@ const RentFurnitureAndAppliances = ({params}) => {
                   alt={item?.cat_name}
                   className={styles.category_img}
                   loading="lazy"
-                  width={"100%"}
-                  height={"100%"}
+                  width={742}
+                  height={734}
                 />
               </a>
 
