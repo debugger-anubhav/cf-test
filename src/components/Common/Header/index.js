@@ -788,7 +788,7 @@ const SearchModal = ({
                             setLocalStorage("subCategoryId", item?.id);
                           }
                         }}>
-                        <img
+                        <Image
                           src={
                             "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
                             item.category_image
@@ -796,6 +796,8 @@ const SearchModal = ({
                           alt="RentFurnitureImages"
                           className={styles.categories_img}
                           loading="lazy"
+                          width={88}
+                          height={100}
                         />
                         <div>
                           <h3 className={styles.category_label}>

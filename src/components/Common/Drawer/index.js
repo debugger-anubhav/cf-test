@@ -319,7 +319,7 @@ export default function CommonDrawer({
                         toggleEmptyCartModal(true);
                       }
                     }}>
-                    <img
+                    <Image
                       src={cityUrl + city?.list_value_seourl + ".webp"}
                       className={`${styles.city_thambnil} ${
                         cityId === city?.id &&
@@ -327,6 +327,8 @@ export default function CommonDrawer({
                       }`}
                       alt={city?.list_value}
                       loading="lazy"
+                      width={100}
+                      height={100}
                     />
                     {city?.id === 50 ? (
                       <div className={`text-45454A ${styles.city_name}`}>
