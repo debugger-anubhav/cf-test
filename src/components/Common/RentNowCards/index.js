@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {useRouter} from "next/navigation";
 import {useSelector} from "react-redux";
+import Image from "next/image";
 
 const RentNowCard = ({cardImage, url, alt}) => {
   const router = useRouter();
@@ -15,7 +16,6 @@ const RentNowCard = ({cardImage, url, alt}) => {
       setURL(
         url.replace(/\[city\]/g, cityName.replace(/\//g, "-").toLowerCase()),
       );
-      // router.push(url); // Navigate to the URL
     } else {
       setURL(url); // Navigate to the URL
     }
@@ -33,9 +33,9 @@ const RentNowCard = ({cardImage, url, alt}) => {
         aria-label={imageAlt}
         target="_self"
         rel="noopener">
-        <img
-          width={"100%"}
-          height={"100%"}
+        <Image
+          width={272}
+          height={388}
           src={cardImage}
           className={styles?.banner_img}
           alt={imageAlt}
