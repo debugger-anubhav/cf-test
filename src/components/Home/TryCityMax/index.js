@@ -48,15 +48,19 @@ const TryCityMax = () => {
     <>
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
-          <img
+          <Image
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image} `}
+            width={589}
+            height={720}
           />
-          <img
+          <Image
             src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
+            width={589}
+            height={720}
           />
         </div>
         <div className={styles.right_text_section}>
