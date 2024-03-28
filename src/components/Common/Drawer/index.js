@@ -358,12 +358,14 @@ export default function CommonDrawer({
                 Download mobile app
               </button>
               <div className={styles.download_qr_wrapper}>
-                <img
+                <Image
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
                   }
                   alt="download-QR"
                   loading="lazy"
+                  width={300}
+                  height={300}
                 />
                 {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
                 <div className={styles.qr_text}>

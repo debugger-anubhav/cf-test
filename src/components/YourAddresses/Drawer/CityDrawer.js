@@ -103,12 +103,14 @@ const CityDrawer = ({
               Download mobile app
             </button>
             <div className={styles.download_qr_wrapper}>
-              <img
+              <Image
                 src={
                   "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
                 }
                 alt="download-QR"
                 loading="lazy"
+                width={300}
+                height={300}
               />
               <div className={`${styles.qr_text}`}>
                 <p className={styles.qr_text_span}>100+</p>
