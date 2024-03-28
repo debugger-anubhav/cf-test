@@ -2,10 +2,7 @@ import React, {useState, useEffect} from "react";
 import styles from "./styles.module.css";
 import Rating from "react-rating";
 import {RatingStar} from "@/assets/icon";
-// import RatingProgressBar from "./ProgressBar";
-// import {ProductRatings} from "@/constants/constant";
 import SideDrawer from "../Drawer/Drawer";
-// import ReviewsSection from "./ReviewsSection";
 import RatingBar from "./RatingBar";
 import {useDispatch, useSelector} from "react-redux";
 import {getCustomerReviews} from "@/store/Slices";
@@ -57,11 +54,6 @@ const CustomerRating = ({params}) => {
         </div>
 
         <div className={styles.right_div}>
-          {/* <ReviewsSection
-          open={open}
-          startIndex={startIndex}
-          endIndex={endIndex}
-        /> */}
           {pageData?.customerReviews?.slice(0, 3).map((item, index) => (
             <div key={index} className={styles.single_rating_div}>
               <div className="flex gap-2">

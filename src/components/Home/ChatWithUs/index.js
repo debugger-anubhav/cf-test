@@ -49,11 +49,7 @@ export default function ChatWithUs() {
                 <p className={styles.write_to_us_text}>Write to us</p>
               </button>
             </a>
-            <div
-              className={styles.chat_now_wrapper}
-              // onClick={() => setShowChat(true)}
-            >
-              {/* <BiSolidMessage className={styles.message_icon} /> */}
+            <div className={styles.chat_now_wrapper}>
               <Message
                 size={20}
                 color={"#222"}

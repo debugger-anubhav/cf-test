@@ -293,7 +293,6 @@ function ShortTermCard({
       <div>
         <p className={styles.total}>
           Total: <span className="font-Inter ml-1"> ₹</span>
-          {/* {selectedOptionPer?.value * calculatedPrice} */}
           {apiData?.totalPrice}
           <span className={styles.total_span}>
             for {selectedOptionPer?.label}

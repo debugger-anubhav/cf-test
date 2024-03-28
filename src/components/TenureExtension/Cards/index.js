@@ -228,13 +228,7 @@ export const MonthlyCard = ({
               <VerifyIcon size={30} color={"#2D9469"} />
               <p className={styles.city_shield_head}>City shield </p>
             </div>
-            {/* <div>
-            <input
-              type="checkbox"
-              className="flex border border-5774AC cursor-pointer"
-              checked={monthlyCardIsChecked}
-            />
-          </div> */}
+
             <div>
               {monthlyCardIsChecked ? (
                 <div onClick={openDrawerForMonthly}>

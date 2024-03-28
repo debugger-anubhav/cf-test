@@ -1,4 +1,3 @@
-/* YourComponent.module.css */
 .customModal {
   @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-[216px] !rounded-none !outline-none !border-none;
   top: 50% !important;

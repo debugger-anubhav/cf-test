@@ -25,18 +25,14 @@
 .sub_container {
   @apply flex-col xl:flex-row flex xl:justify-between w-full xl:mt-8 mt-5 gap-8;
 }
-/* .progress_wrapper {
-  @apply flex flex-col items-center gap-2 w-fit;
-} */
+
 .upper_map {
   @apply flex flex-col md:flex-row items-start gap-7 md:gap-4 lg:w-[500px] macbook1:w-[572px] 2xl:w-[600px] 3xl:w-[61%] 4xl:w-fit md:overflow-x-scroll;
 }
 .progress_map_item {
   @apply flex md:flex-col items-baseline md:items-center relative gap-[13px] md:gap-0;
 }
-/* .progress_icon_wrapper {
-  @apply flex  relative gap-4;
-} */
+
 .progress_circle {
   @apply w-5 h-[19px] md:w-[22px] md:h-[22px] rounded-full  flex justify-center items-center;
 }
@@ -58,9 +54,7 @@
 .line {
   @apply w-[2px] md:w-full h-[29px] md:!h-[2px] bg-EDEDEE absolute left-[9px] md:left-[69%] xl:left-[65%] top-full md:top-[11px];
 }
-/* .lower_map {
-  @apply flex items-center gap-[3px] xl:gap-6;
-} */
+
 .progress_status {
   @apply md:mt-2 md:text-center text-45454A md:text-71717A text-14 font-medium md:font-semibold leading-5 tracking-desc md:min-w-[73px] md:max-w-[73px] xl:max-w-[89px];
 }

@@ -18,9 +18,5 @@
 .desc {
   @apply xl:mt-3 hidden xl:flex text-71717A text-12 xl:text-16 tracking-0.24 xl:tracking-0.3 line-clamp-2 xl:line-clamp-3;
   width: 100%;
-  /* this code clamps based on specified lines */
-  /* overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3; */
   display: -webkit-box;
 }

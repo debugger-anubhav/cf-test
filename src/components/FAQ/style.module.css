@@ -60,7 +60,6 @@
 }
 .ans {
   @apply font-normal text-14 md:text-16 leading-normal text-71717A tracking-heading font-Poppins mt-2;
-  /* @apply text-14 lg:text-16 font-normal leading-5 lg:leading-6 lg:tracking-0.3 text-45454A mt-2 w-[18.6rem] lg:w-[39.69rem] 3xl:w-[44rem]; */
   transition:
     max-height 0.5s ease-in-out,
     opacity 0.5s ease-in-out;
@@ -79,8 +78,6 @@
   transition:
     max-height 0.5s ease-in-out,
     opacity 0.5s ease-in-out;
-  /* max-height: 0; */
-  /* opacity: 0; */
   overflow: hidden;
 }
 .bottom_button_wrapper {

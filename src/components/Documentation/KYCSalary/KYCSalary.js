@@ -270,7 +270,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                     className={`${commonStyles.mdHiddemIcons} ml-3`}
                   />
                 </span>
-                {/* )} */}
               </div>
             </div>
 
@@ -314,7 +313,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                   className={`${commonStyles.mdHiddenIB}`}
                   loading="lazy"
                 />
-                {/* )} */}
                 <Image
                   src={uploading}
                   alt="Uploading Icon"

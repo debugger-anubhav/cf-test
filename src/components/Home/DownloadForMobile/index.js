@@ -6,7 +6,6 @@ const DownloadForMobile = () => {
   return (
     <div className={styles.main_container}>
       <div className={styles.web_container}>
-        {/* <a href="http://3.109.156.217/api/get-app-on-devices/getAppOnDevice"> */}
         <img
           src={DownloadForWeb}
           alt="download-image-for-web"
@@ -14,10 +13,8 @@ const DownloadForMobile = () => {
           width={"100%"}
           height={"100%"}
         />
-        {/* </a> */}
       </div>
       <div className={styles.mobile_container}>
-        {/* <a href="http://3.109.156.217/api/get-app-on-devices/getAppOnDevice"> */}
         <img
           src={DownloadForMobileImg}
           alt="download-image-for-mobile"
@@ -25,7 +22,6 @@ const DownloadForMobile = () => {
           width={"100%"}
           height={"100%"}
         />
-        {/* </a> */}
       </div>
     </div>
   );

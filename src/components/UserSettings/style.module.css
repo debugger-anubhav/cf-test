@@ -29,7 +29,6 @@
   @apply text-[#D96060] text-base font-medium tracking-[-0.32px] py-0.5 cursor-pointer;
 }
 
-/* for web */
 .main_container_web {
   @apply hidden font-Poppins lg:flex gap-16 pr-[70px] xl:pr-[90px] macbook:pr-[122px] 3xl:pr-[160px] 4xl:pr-[160px] -mt-6;
 }

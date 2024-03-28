@@ -28,9 +28,7 @@
 .des_wrapper {
   @apply flex justify-between w-full lg:items-center mt-8 gap-8 lg:flex-row flex-col;
 }
-/* .rightDrawer {
-  @apply md:p-12 px-4 py-6 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
-} */
+
 .rightDrawer {
   @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
 }
@@ -45,7 +43,6 @@
 }
 .info_wrapper {
   @apply flex flex-col w-full gap-6 h-full overflow-scroll;
-  /* @apply flex flex-col w-full gap-6 md:h-[80vh] h-[600px] overflow-y-scroll; */
 }
 .order_row {
   @apply flex w-full gap-2 items-center cursor-pointer;

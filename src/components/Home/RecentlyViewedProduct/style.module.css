@@ -10,5 +10,5 @@
   @apply flex overflow-x-scroll overflow-y-hidden gap-4 xl:gap-6 3xl:gap-8;
 }
 .recentlyViewed_main::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }

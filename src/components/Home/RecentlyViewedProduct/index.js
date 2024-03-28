@@ -115,7 +115,6 @@ const RecentlyViewedProduct = ({page}) => {
               Recently Viewed products
             </h2>
           ) : null}
-          {/* {homePageReduxData?.recentProduct?.length ? ( */}
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
             {homePageReduxData?.recentProduct?.map((item, index) => {
               return (
@@ -157,7 +156,6 @@ const RecentlyViewedProduct = ({page}) => {
               );
             })}
           </div>
-          {/* // ) : null} */}
         </div>
       ) : null}
     </>

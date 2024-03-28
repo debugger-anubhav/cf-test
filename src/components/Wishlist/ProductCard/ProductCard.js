@@ -169,18 +169,14 @@ const ProductCard = ({
                 <span className={styles.rupeeIcon}>₹</span>
                 {`${currentPrice} /mo`}
               </h3>
-              {
-                // currentPrice >= originalPrice ? (
-                originalPrice > currentPrice ? (
-                  <h3 className={`${styles.originalPrice} flex`}>
-                    <span className={styles.rupeeIcon}>₹</span>
-                    {`${originalPrice} /mo`}
-                  </h3>
-                ) : null
-              }
+              {originalPrice > currentPrice ? (
+                <h3 className={`${styles.originalPrice} flex`}>
+                  <span className={styles.rupeeIcon}>₹</span>
+                  {`${originalPrice} /mo`}
+                </h3>
+              ) : null}
             </div>
 
-            {/* {originalPrice !== currentPrice && ( */}
             {currentPrice < originalPrice && parseInt(discount) > 0 && (
               <div className={styles.discount}>-{parseInt(discount)}% OFF</div>
             )}

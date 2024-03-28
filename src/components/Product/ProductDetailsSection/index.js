@@ -760,8 +760,6 @@ const ProductDetails = ({params}) => {
                       <span className={styles.rupeeIcon}>₹</span>
                       {durationArray?.[duration.currentIndex]?.attr_price}
                     </p>
-                    {/* {durationArray?.[0]?.attr_price >
-                    durationArray?.[duration.currentIndex]?.attr_price && ( */}
                     {durationArray?.[duration.currentIndex]?.attr_price !==
                       durationArray?.[0]?.attr_price && (
                       <p
@@ -773,7 +771,6 @@ const ProductDetails = ({params}) => {
                         {durationArray?.[0]?.attr_price}
                       </p>
                     )}
-                    {/* )} */}
 
                     {productDiscount > 0 && (
                       <div
@@ -831,7 +828,6 @@ const ProductDetails = ({params}) => {
           </div>
 
           <div className={styles.kyc_wrapper}>
-            {/* <BsPersonVcard size={24} /> */}
             <div className={`w-100 h-100 absolute z-10`} />
             <img
               src={ProductPageImages.KycDoc}
@@ -844,7 +840,6 @@ const ProductDetails = ({params}) => {
 
           {prodDetails?.[0]?.installation_charge.replace(/-/g, " ") > 0 && (
             <div className={styles.installation_wrapper}>
-              {/* <BsPersonVcard size={24} /> */}
               <LiaMoneyBillWaveSolid
                 color={"#45454A"}
                 className="min-w-[24px] min-h-[24px]"
@@ -857,10 +852,7 @@ const ProductDetails = ({params}) => {
           )}
 
           <div
-            className={`${styles.services_cards_container} ${styles.mobile}`}
-
-            // ref={sliderRef}
-          >
+            className={`${styles.services_cards_container} ${styles.mobile}`}>
             {HasselFreeDataForProductPage.map((item, index) => (
               <ServiceCard
                 key={index}

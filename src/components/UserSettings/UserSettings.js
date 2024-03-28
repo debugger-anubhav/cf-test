@@ -80,11 +80,8 @@ export default function UserSettings() {
     },
   ];
 
-  // const userName = getLocalStorage("user_name") ?? "";
-
   return (
     <>
-      {/* for mobile view */}
       <div className={styles.main_container_mobile}>
         <p className={styles.user_account}>
           Your Account,
@@ -139,9 +136,7 @@ export default function UserSettings() {
         </div>
       </div>
 
-      {/* for web view */}
       <div className={styles.main_container_web}>
-        {/* <div className="border border-black min-w-[171px] h-[800px]"></div> */}
         <div className="min-w-fit" style={{height: "initial"}}>
           <DocSidebar isOverviewSelected={true} />
         </div>

@@ -72,7 +72,6 @@ const OfferPage = () => {
           </span>
         </h1>
       </div>
-      {/* <h1 className={styles.header}>Offers 🎉</h1> */}
       <div className="flex flex-col">
         {skeletonLoading ? (
           <OffersPageSkeleton />

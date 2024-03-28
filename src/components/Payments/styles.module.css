@@ -29,9 +29,7 @@
 .tableContainer {
   @apply mt-8 !shadow-none;
 }
-/* .table {
-  border-collapse: collapse;
-} */
+
 .tableHeaderCell {
   @apply !text-45454A !text-14 xl:!text-16 !font-medium !tracking-[-0.28px] xl:!tracking-[-0.32px] !font-Poppins pl-0 pt-0 pb-0 xl:!pr-4 cxl:!pr-8;
 }
@@ -56,7 +54,6 @@
   @apply hidden xl:block;
 }
 
-/* for mobile */
 .mobile {
   @apply xl:hidden mt-3;
 }

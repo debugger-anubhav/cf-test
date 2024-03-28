@@ -47,9 +47,7 @@
 .final_status {
   @apply text-71717A text-16 font-Poppins;
 }
-/* .checkIcon {
-  @apply w-6 h-6;
-} */
+
 .table_body {
   @apply min-h-[10vh];
 }

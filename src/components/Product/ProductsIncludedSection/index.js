@@ -86,12 +86,6 @@ const ItemsIncluded = () => {
                         __html: item?.description,
                       }}
                       className={styles.feature}></div>
-                    {/* {item.features?.map((feature, index) => (
-                      <li key={index} className={styles.feature}>
-                        <div className={styles.dot}></div>
-                        {feature}
-                      </li>
-                    ))} */}
                   </div>
                 </div>
               )}

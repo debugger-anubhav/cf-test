@@ -1,6 +1,3 @@
-/* .stepHeading {
-  @apply;
-} */
 .formHeadingFirst {
   @apply mt-1;
 }
@@ -17,9 +14,7 @@
 .selHeading {
   @apply capitalize text-14 tracking-desc md:tracking-0.3 md:text-16 text-222 font-Poppins flex items-center gap-2;
 }
-/* .selHeadingTxt {
-  @apply ml-2;
-} */
+
 .selDivider {
   @apply my-2 hidden md:block;
 }

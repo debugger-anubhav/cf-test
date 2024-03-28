@@ -31,7 +31,7 @@
   @apply mt-6 xl:mt-8 flex gap-4 xl:gap-6 w-full overflow-scroll;
 }
 .card_wrapper::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }
 .card {
   @apply p-6 rounded-lg bg-fff min-w-[290px] xl:min-w-[371px];

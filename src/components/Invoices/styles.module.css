@@ -44,9 +44,6 @@
   @apply !text-14 xl:!text-16 !tracking-desc xl:!tracking-0.3 !font-Poppins xl:py-8 pl-0 xl:pr-4 macbook:pr-8 !border-b-0 leading-normal pb-3;
 }
 
-/* .lastCell {
-  @apply flex gap-4 !font-Poppins py-8 px-0 border-b border-b-EDEDEE;
-} */
 .download_btn {
   @apply !font-Poppins cursor-pointer text-14 xl:text-16 rounded-lg border-2 border-71717A flex justify-center items-center px-5 h-[40px] font-medium text-71717A w-[144px] xl:w-fit;
 }
@@ -69,7 +66,6 @@
   @apply mt-6 xl:mt-8 text-14 xl:text-16 text-71717A tracking-desc xl:tracking-0.3 leading-6;
 }
 
-/* for mobile */
 .mobile {
   @apply xl:hidden mt-8;
 }

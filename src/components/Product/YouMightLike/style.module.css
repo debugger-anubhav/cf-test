@@ -12,9 +12,3 @@
 .card_wrapper {
   @apply flex overflow-x-scroll gap-4 xl:gap-6 3xl:gap-8 mr-4;
 }
-
-.scroller_container_card {
-  /* pointer-events: none; */
-
-  /* user-select: none; */
-}

@@ -33,7 +33,6 @@ const PrivacyPolicyData = () => {
         Privacy Policy
       </h1>
 
-      {/* details  */}
       <div className={styles.details}>
         <div className={styles.privacy_policy_detail_text}>
           {string.privacy_policy.para_1.firts_part}
@@ -48,7 +47,6 @@ const PrivacyPolicyData = () => {
 
       <div>
         <div className={styles.privacy_policy_detail_text}>
-          {/* {string.privacy_policy.para_2.firts_part} */}
           This Privacy Policy covers the information for Cityfurnish India
           Private Limited("Cityfurnish" and/or "We") collects from the user(s)
           ("User(s)" and/or "You") of

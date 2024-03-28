@@ -38,15 +38,10 @@ const ProductVideo = ({params}) => {
         <div className={styles.video}>
           <iframe
             className={styles.video}
-            // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
             src={pageData?.[0]?.video_name}
             title="YouTube video player"
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen></iframe>
-
-          {/* <div
-          className={styles.play_button_container}
-          onClick={() => handlePlayButtonClick()}></div> */}
         </div>
         <div>
           <p className={styles.head}>{pageData?.[0]?.file_title}</p>

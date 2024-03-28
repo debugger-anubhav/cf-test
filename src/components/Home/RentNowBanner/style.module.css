@@ -4,11 +4,6 @@
 .banner_card {
   @apply flex gap-x-3 md:gap-x-4 3xl:gap-x-6 w-full overflow-x-scroll;
 }
-.banner_wrapper {
-  /* @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px] relative; */
-  /* @apply lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px]; */
-  /* @apply lg:w-full lg:h-full; */
-}
 .banner_img {
   @apply w-full h-full cursor-pointer;
 }
@@ -36,12 +31,11 @@
   @apply flex overflow-x-scroll overflow-y-hidden gap-4 xl:gap-6 3xl:gap-8;
 }
 .recentlyViewed_main::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
+  display: none;
 }
 
 .wrapper {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
-  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
 }
 .hover_wrapper img {
   @apply animate-fade;

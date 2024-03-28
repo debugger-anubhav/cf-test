@@ -3,8 +3,6 @@
 import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
-// import {HappySubscriber} from "@/constants/constant";
-// import {useHorizontalScroll} from "@/hooks/useHorizontalScroll";
 import {useDispatch} from "react-redux";
 import {getSubscribersVideos} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
@@ -136,9 +134,6 @@ const HappySubscribers = ({page, params}) => {
     };
   };
 
-  // const HappySubscriberVideosArray =
-  //   page === "product" ? productPageSubscribersVideos : HappySubscriber;
-
   if (data?.length > 0) {
     return (
       <div
@@ -152,12 +147,7 @@ const HappySubscribers = ({page, params}) => {
         <div
           className={styles.cards_wrapper}
           ref={containerRef}
-          onMouseOver={handleScrolling}
-          // onMouseDown={handleMouseDown}
-          // onMouseMove={handleMouseMove}
-          // onMouseUp={handleMouseUp}
-          // onMouseLeave={handleMouseLeave}
-        >
+          onMouseOver={handleScrolling}>
           {data?.map((item, index) => (
             <div
               className={`${styles.card_div}  ${
@@ -165,10 +155,6 @@ const HappySubscribers = ({page, params}) => {
               } ${isDumy && "pointer-events-none"}`}
               key={index.toString()}>
               <div className={styles.video}>
-                {/* <video className={styles.video_player} ref={videoRef}>
-                <source src={item.file_name} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video> */}
                 <iframe
                   loading="lazy"
                   width="256"
@@ -178,9 +164,6 @@ const HappySubscribers = ({page, params}) => {
                   title="YouTube video player"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen></iframe>
-                {/* <div
-                className={styles.play_button_container}
-                onClick={() => handlePlayButtonClick(item.file_name)}></div> */}
               </div>
               <h3 className={styles.video_name}>{item?.title}</h3>
               <p className={styles.video_desc}>

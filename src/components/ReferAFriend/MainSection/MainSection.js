@@ -29,8 +29,6 @@ const FAQ = [
     question: "How Can I Refer?",
     answer:
       "You can share your referral code on any social platform such as Facebook, Twitter, WhatsApp, etc. from our Referral Page or you can even mail your link to your friends and family.",
-    // answer:
-    //   "You can share your referral code on any social platform such as Facebook, Twitter, WhatsApp, etc. from our Referral Page or you can even mail your link to your friends and family.",
   },
   {
     id: 2,
@@ -61,7 +59,6 @@ const FAQ = [
     question: "Other Terms And Conditions",
     answer:
       "- Referral program is not appliable on fitness equipments and office furniture. <br/> -Referrer should place an order of min <span style='font-family:Inter'>₹</span>1000 monthly rental to avail benefit of referral program.<br/>-Cityfurnish reserves the right to revoke referral benefits if they were earned against our terms or close the referral program anytime without any prior intimation.",
-    // "."
   },
 ];
 
@@ -130,22 +127,6 @@ const MainSection = ({login}) => {
     },
   ];
 
-  // const copyToClipboard = text => {
-  //   if (!text) return;
-
-  //   // Create a temporary input element to copy text
-  //   const input = document.createElement("input");
-  //   input.style.position = "fixed";
-  //   input.style.opacity = 0;
-  //   input.value = text;
-  //   document.body.appendChild(input);
-  //   input.select();
-  //   document.execCommand("copy");
-  //   document.body.removeChild(input);
-  //   showToastNotification("Copied to clipboard!", 1);
-  //   input.value = "";
-  // };
-
   const copyToClipboard = text => {
     if (!text) return;
     const input = document.createElement("input");
@@ -160,7 +141,6 @@ const MainSection = ({login}) => {
   };
 
   const HandleLogin = () => {
-    // router.push("https://test.rentofurniture.com/user_sign_up");
     toggleLoginModal();
   };
 
@@ -174,16 +154,11 @@ const MainSection = ({login}) => {
       <LoginModal
         closeModal={toggleLoginModal}
         isModalOpen={loginModal}
-        // setIsLogin={bool => {
-        //   setIsLogin(bool);
-        // }}
         handleChangeRoute={() => router.push("/referral")}
       />
       <h1 className={styles.heading}>Referral Code</h1>
       {userId && <div className={styles.line_web}></div>}
-      <div
-        // className={userId ? styles.content_wrapper : styles.content_wrapper1}>
-        className={styles.content_wrapper1}>
+      <div className={styles.content_wrapper1}>
         <div
           className={
             userId ? styles.section1_wrapper : styles.section1_wrapper1
@@ -300,15 +275,10 @@ const MainSection = ({login}) => {
           )}
 
           {!login && (
-            // <a
-            //   // href="https://test.rentofurniture.com/user_sign_up"
-            //   target="_blank"
-            //   rel="noopner noreferrer">
             <button className={styles.login_btn} onClick={HandleLogin}>
               Login
               <FaArrowRight />
             </button>
-            // </a>
           )}
 
           <div className={styles.how_it_works_button_wrapper}>
@@ -325,16 +295,11 @@ const MainSection = ({login}) => {
           </div>
         </div>
 
-        <div
-          className={
-            // userId ? styles.section2_wrapper : styles.section2_wrapper1
-            styles.img_wrapper_wl
-          }>
+        <div className={styles.img_wrapper_wl}>
           <img
             src="https://d3juy0zp6vqec8.cloudfront.net/images/refer-a-friend.webp"
             alt="refer-a-friend"
             className="w-full h-full"
-            // className={styles.refer_a_friend_image}
             loading="lazy"
           />
         </div>
@@ -346,7 +311,6 @@ const MainSection = ({login}) => {
           open={isDrawerOpen}
         />
       )}
-      {/* <hr className={styles.underline} /> */}
 
       <div
         className={`${styles.section1_wrapper} ${userId && "4xl:!mt-[-20px]"}`}>

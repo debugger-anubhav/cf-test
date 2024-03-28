@@ -1,6 +1,5 @@
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none max-h-[90%] md:max-h-full;
-  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
   transition-timing-function: ease-in;
   overflow-y: visible !important;
 }
@@ -13,6 +12,3 @@
 .drawer_wrapper {
   @apply py-6 md:py-12 px-4 md:px-0 font-Poppins w-full md:w-[486px] max-h-[90vh] md:max-h-none md:h-full flex relative overflow-scroll;
 }
-/* .city_drawer_wrapper {
-  @apply sm:w-[500px] w-full px-4 sm:px-8 lg:px-0 rounded-t-lg;
-} */

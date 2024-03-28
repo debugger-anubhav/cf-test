@@ -151,7 +151,6 @@ function Repair({prevScreen, data}) {
                 )}
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
-              {/* {toggleStates[index].istoggled && repairOptions?.length > 0 && ( */}
               {toggleStates[index].istoggled && toggleStates[index].options && (
                 <div>
                   <div className={styles.reson_for_repair_wrapper}>
