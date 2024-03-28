@@ -14,7 +14,6 @@ const Success = () => {
       <MenuList />
       <OfflinePayment />
       <Footer />
-      {/* <Notifications /> */}
     </div>
   );
 };

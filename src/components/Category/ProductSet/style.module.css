@@ -1,39 +1,6 @@
-/* .main_wrapper {
-  @apply;
-} */
 .main_container {
-  /* @apply flex flex-wrap  my-4; */
   @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 flex flex-wrap lg:grid lg:grid-cols-3 gap-[10px] justify-center md:justify-normal mobile:flex-row my-4;
 }
 .heading {
   @apply macbook:pl-[122px] xl:pl-[90px] md:pl-[70px] pl-4 text-45454A text-24 font-Poppins font-medium leading-10 tracking-heading;
 }
-
-/* .card_box {
-  @apply flex flex-wrap mr-[10px] mb-4 p-3 bg-white w-fit;
-  -webkit-transition: box-shadow 0.2s ease-out;
-  width: calc(33.33% - 20px);
-  cursor: pointer;
-} */
-/* .card_box:hover {
-  box-shadow: 1px 8px 20px grey;
-:  -webkit-transition: box-shadow 0.2s ease-in;
-  flex-basis: calc(33.33% - 20px);
-} */
-
-/* @media only screen and (max-width: 650px) {
-  .card_box {
-    @apply flex items-center justify-center;
-    width: calc(100% - 20px);
-  }
-}
-@media only screen and (min-width: 651px) and (max-width: 1220px) {
-  .card_box {
-    width: calc(50% - 40px);
-  }
-}
-@media only screen and (min-width: 1221px) and (max-width: 1800px) {
-  .card_box {
-    width: calc(33.33% - 10px);
-  }
-} */

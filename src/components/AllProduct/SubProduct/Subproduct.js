@@ -40,7 +40,6 @@ const Subproduct = () => {
         </div>
       </div>
       <HasselFreeServicesCards />
-      {/* <TextContent params={"home-page"} /> */}
       <Footer />
     </>
   );

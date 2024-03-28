@@ -427,7 +427,6 @@ const SubHeader = ({params}) => {
                   target="_self"
                   rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer `}>
-                    {/* {getLocalStorage("category")?.replace(/"/g, "")} */}
                     {category}
                   </p>
                 </a>
@@ -435,7 +434,6 @@ const SubHeader = ({params}) => {
               </li>
               <li className={styles.list}>
                 <p className={`${styles.route_text} !font-medium`}>
-                  {/* {getLocalStorage("subCategory")?.replace(/"/g, "")} */}
                   {subCategory}
                 </p>
               </li>

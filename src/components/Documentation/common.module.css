@@ -44,7 +44,7 @@
 }
 .termsTxt {
   @apply text-14 md:text-16 font-Poppins font-normal ml-2;
-  line-height: 30px; /* 187.5% */
+  line-height: 30px;
   letter-spacing: -0.32px;
   color: #71717a;
 }

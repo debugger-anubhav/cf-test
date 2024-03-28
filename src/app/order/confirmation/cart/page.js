@@ -6,7 +6,6 @@ import MenuList from "@/components/Common/MenuList";
 
 import Notifications from "@/components/Common/Notifications/Notification";
 import PaymentConfirmation from "@/components/PostCheckout/Confirmation";
-// import PaymentFailure from "@/components/PostCheckout/Failure";
 
 const index = () => {
   return (
@@ -15,7 +14,6 @@ const index = () => {
       <Header />
       <MenuList />
       <PaymentConfirmation />
-      {/* <PaymentFailure /> */}
       <Notifications />
     </div>
   );

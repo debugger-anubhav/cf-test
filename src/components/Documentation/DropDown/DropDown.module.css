@@ -1,28 +1,3 @@
-/* .main {
-  @apply rounded-lg border border-gray-500 bg-white text-gray-900 font-Poppins text-base font-normal leading-normal tracking-tight px-4 py-3;
-  width: 502px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: url("../../../assets//common_icons/downArrowDD.svg") right 16px
-    center no-repeat white;
-  background-size: 25px;
-}
-.main:focus-visible { */
-/* border-style: none !important; */
-/* outline-style: none !important;
-} */
-/* .main:focus-within { */
-/* border-style: none !important; */
-/* background: url("../../../assets//common_icons/upArrowDD.svg") 96% / 15%
-    no-repeat white;
-  background-size: 25px;
-  outline-style: none !important;
-}
-.options {
-  @apply px-4 py-3 block;
-} */
-
 /* CustomSelect.module.css */
 .custom-select {
   @apply bg-white w-full lg:w-[502px] rounded-xl;
@@ -91,7 +66,5 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%];
-  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
-  /* transition-timing-function: ease-in; */
   overflow-y: visible !important;
 }

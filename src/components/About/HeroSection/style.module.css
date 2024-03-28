@@ -24,18 +24,15 @@
 
 .section1_wrapper {
   @apply md:w-[97%] lg:w-[50%] xl:w-[55%] macbook:w-[60%] 3xl:w-[57%];
-  /* @apply inline-block */
 }
 
 .section2_wrapper {
   @apply flex flex-col mobile:flex-row gap-3 lg:w-[50%] xl:w-[45%] macbook:w-[40%] 3xl:w-[43%] 3xl:justify-end;
 }
-/* gap-16px */
 .block {
   @apply px-4 pt-4 pb-6 md:pl-8 md:py-6 md:pr-6 rounded-[8px] border-b-[2px] xl:border-r-[1px] xl:border-b-0
     border-b-EDEDEE bg-[url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/frame-about-us-mobile.webp")]  xl:bg-[url("https://d3juy0zp6vqec8.cloudfront.net/images/icons/frame-about-us.webp")] bg-no-repeat bg-[cover]
-    w-[238px] mobile:w-[50%] ms:w-[238px] 
-    /* xl:w-[269px]; */;
+    w-[238px] mobile:w-[50%] ms:w-[238px];
 }
 
 .block_head {

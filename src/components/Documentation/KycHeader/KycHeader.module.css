@@ -8,7 +8,7 @@
   @apply font-Poppins md:text-2xl text-lg;
   font-style: normal;
   font-weight: 500;
-  line-height: 32px; /* 133.333% */
+  line-height: 32px;
   letter-spacing: -0.48px;
 }
 .mainContainer {
@@ -21,9 +21,8 @@
   height: 4px;
 }
 @media (max-width: 767px) {
-  /* Styles for screens with a maximum width of 767px (typical mobile screens) */
   .progressBarContainer {
-    margin-right: 16px !important; /* Remove margin on mobile screens */
+    margin-right: 16px !important;
   }
 }
 .progressBar {

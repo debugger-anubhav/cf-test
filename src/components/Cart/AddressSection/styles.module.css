@@ -3,7 +3,6 @@
 }
 .left_div {
   @apply pb-6;
-  /* @apply lg:h-[100vh] lg:overflow-y-scroll overflow-x-visible; */
 }
 .head_div {
   @apply flex gap-2 items-center cursor-pointer;

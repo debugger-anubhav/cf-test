@@ -39,7 +39,6 @@
 }
 .line {
   @apply right-32 3xl:right-40 absolute top-0 bottom-0 border-l-2 border-dashed;
-  /* border-left: 2px dashed #7e6dd5; */
 }
 .ellipse {
   @apply w-4 h-4 bg-F7F7F8 rounded-full absolute top-[42px] 3xl:top-[60px];
@@ -61,8 +60,6 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-full;
-  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
-  /* transition-timing-function: ease-in; */
   overflow-y: visible !important;
 }
 .not_applicable_text {

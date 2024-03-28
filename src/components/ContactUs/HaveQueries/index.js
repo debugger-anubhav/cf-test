@@ -51,7 +51,6 @@ function HaveQueries() {
         <a href="/pages/faq">
           <div className={styles.btn}>
             <p className={styles.btn_txt}>See more FAQs</p>
-            {/* <ForwardArrow className={styles.forword_icon} /> */}
             <FaAngleRight className={`${styles.forword_icon} hidden md:flex`} />
             <ForwardArrowWithLineBold className={"flex md:hidden"} />
           </div>

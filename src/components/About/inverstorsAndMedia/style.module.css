@@ -25,7 +25,6 @@
 
 .accolades_cards {
   @apply border-[2px] border-[#71717A] lg:max-w-[308px] lg:w-[308px] lg:min-w-[308px] w-[231px] min-w-[231px] max-w-[231px] relative lg:static;
-  /* @apply border-[2px] border-[#71717A] min-w-[231px] md:max-w-[231px] lg:max-w-[290px] xl:max-w-[308px]; */
 }
 .accolades_box {
   @apply flex gap-1 py-1 md:py-1.5 px-2 border-t-[2px] border-[#71717A] lg:relative lg:!pb-5;

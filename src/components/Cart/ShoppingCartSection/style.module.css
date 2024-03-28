@@ -3,7 +3,6 @@
 }
 .left_div {
   @apply pb-6;
-  /* @apply lg:h-[100vh] xl:h-[800px] lg:overflow-y-scroll lg:overflow-x-hidden; */
 }
 .head {
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;

@@ -477,37 +477,6 @@ function CustomerPayment() {
                       )}
                       {isLogin ? (
                         <div className={styles.toggleRow}>
-                          {/* {useCityfurnishCoins ? (
-                            <div>
-                              <ToggleOn
-                                size={30}
-                                color={"#5774AC"}
-                                onClick={() => {
-                                  setUseCityfurnishCoins(false);
-                                  // setAvailableCoins(backToAvailableCoins);
-                                  fetchAvailCoins();
-
-                                  setFormData({
-                                    ...formData,
-                                    amount: amountParam || "",
-                                  });
-                                }}
-                                className={"cursor-pointer"}
-                              />
-                            </div>
-                          ) : (
-                            <div>
-                              <ToggleOff
-                                color={"#E3E1DC"}
-                                size={30}
-                                onClick={() =>
-                                  handleUseCoins(formik.values.amount)
-                                }
-                                className={"cursor-pointer"}
-                              />
-                            </div>
-                          )} */}
-
                           {useCityfurnishCoins ? (
                             <ToggleOn
                               size={29}
@@ -538,13 +507,6 @@ function CustomerPayment() {
                                           formik.values.amount - topupAmount,
                                         ) + 1,
                                   );
-                                  // setFormData({
-                                  //   ...formData,
-                                  //   amount:
-                                  //     topupAmount > amountParam
-                                  //       ? 1
-                                  //       : Math.abs(topupAmount - amountParam),
-                                  // });
 
                                   formik.setFieldValue(
                                     "amount",
@@ -552,12 +514,6 @@ function CustomerPayment() {
                                       ? formik.values.amount - topupAmount
                                       : 1,
                                   );
-                                  // setAmount(
-                                  //   availbal > amountDue
-                                  //     ? 1
-                                  //     : Math.abs(availbal - amountDue),
-                                  // );
-                                  // isCoinApplied &&
                                 }
                               }}
                             />
@@ -593,15 +549,11 @@ function CustomerPayment() {
                         className={styles.form_input}
                         onChange={e => {
                           formik.setFieldValue("notes", e.target.value);
-                          // setFormData({...formData, notes: e.target.value});
                         }}
                       />
                     </div>
 
-                    <button
-                      // onClick={() => handlePayment()}
-                      className={styles.pay_now_btn}
-                      type="submit">
+                    <button className={styles.pay_now_btn} type="submit">
                       Pay now
                       <ForwardArrowWithLine size={20} color={"#222222"} />
                     </button>

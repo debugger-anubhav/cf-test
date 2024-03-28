@@ -48,8 +48,6 @@
 }
 .customDrawer {
   @apply !rounded-t-[20px] md:!rounded-t-none !max-h-[90%] md:!max-h-full;
-  /* animation: bounceUD 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; */
-  /* transition-timing-function: ease-in; */
   overflow-y: visible !important;
 }
 .risk_text {
@@ -76,32 +74,3 @@
 .arr_item {
   @apply w-[80px] flex flex-col items-center;
 }
-
-/* @media only screen and (min-width: 768px) {
-  .customDrawer {
-    animation: bounceLR 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important; /* Apply the animation */
-
-/* @keyframes bounceLR {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateX(0);
-  }
-  40% {
-    transform: translateX(-10px);
-  }
-  60% {
-    transform: translateX(-5px);
-  }
-}
-
-@keyframes bounceUD {
-  100% {
-    transform: translateY(0);
-  }
-  70% {
-    transform: translateY(-5px);
-  }
-} */

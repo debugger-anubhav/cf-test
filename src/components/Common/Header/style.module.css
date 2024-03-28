@@ -38,9 +38,6 @@
   margin-right: -14.28%;
 }
 
-/* .header_search_icon {
-  @apply ml-2;
-} */
 .header_favorite {
   @apply flex lg:mr-8 mr-4 mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
 }

@@ -367,7 +367,6 @@ export default function CommonDrawer({
                   width={300}
                   height={300}
                 />
-                {/* <Image src={Images.DownloadQR} alt="download-QR" /> */}
                 <div className={styles.qr_text}>
                   <p className={styles.qr_text_span}>100+</p>
                   <div>
@@ -424,7 +423,6 @@ export default function CommonDrawer({
           </div>
         ) : (
           <span className={styles.header_city_name}>
-            {/* {homePageReduxData?.cityName} */}
             {params.city || homePageReduxData?.cityName}
             {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
           </span>

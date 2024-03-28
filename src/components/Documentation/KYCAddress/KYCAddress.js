@@ -381,12 +381,6 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             necessary standards. Please re-upload them to proceed with KYC
             process.
           </p>
-          {/* <div
-            onClick={() => {
-              setShowReuploadNote(false);
-            }}>
-            <Close className={`cursor-pointer ${commonStyles.reupload_icon}`} />
-          </div> */}
         </div>
       )}
 

@@ -205,8 +205,6 @@ const EnquirySection = () => {
                     </p>
                     <div className={`${styles.row}`}>
                       <div className="flex gap-2 items-center">
-                        {/* <Field as="select" name="color"> */}
-
                         <div className={`${styles.formInputFirst}`}>
                           <DropDown
                             options={quantityOptions}

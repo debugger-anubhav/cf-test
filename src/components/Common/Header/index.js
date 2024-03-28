@@ -405,7 +405,6 @@ const Header = ({page}) => {
                   )}
                 </a>
               </div>
-              {/* </Link> */}
               <div
                 className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8
                   
@@ -447,17 +446,11 @@ const Header = ({page}) => {
                       className={`${styles.header_profile_icon} relative z-10 pointer-events-none`}
                       onClick={e => e.preventDefault()}
                       aria-disabled={true}
-
-                      // ref={iconRef}
                     />
                   </div>
                 </a>
-
-                {/* </Link> */}
               </div>
 
-              {/* </div> */}
-              {/* {getLocalStorage("user_id") !== null && showProfileDropdown && ( */}
               {decrypt(getLocalStorage("_ga")) !== null &&
                 showProfileDropdown && (
                   <div
@@ -470,7 +463,6 @@ const Header = ({page}) => {
                     />
                   </div>
                 )}
-              {/* </div> */}
             </div>
           </div>
         </div>

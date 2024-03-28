@@ -5,8 +5,6 @@ import {Skeleton} from "@mui/material";
 export default function FormSkeleton() {
   return (
     <div className={styles.skeleton_wrapper}>
-      {/* form  */}
-
       <div className="mt-8">
         {[1, 2, 3, 4]?.map(item => {
           return (

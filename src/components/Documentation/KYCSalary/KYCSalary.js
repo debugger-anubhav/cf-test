@@ -8,12 +8,10 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   CheckFillIcon,
-  // Close,
   DeleteIcon,
   DeleteIconFilled,
   InformationIcon,
   OutlineArrowRight,
-  // ReloadIcon,
 } from "@/assets/icon";
 import SelectionCircle from "../SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -59,16 +57,13 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [docData, setDocsData] = useState();
-  // const [isUploading, setIsUploading] = useState(false);
   const [isSelected, setIsSelected] = useState();
   const [openModal, setOpenModal] = useState(false);
-  // const [showReuploadNote, setShowReuploadNote] = useState(true);
   const [disableButton, setDisableButton] = useState(false);
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
   });
   const [formErrors, setFormErrors] = useState({
-    // addressProof: "",
     financialDocumentProof: "",
   });
   const getAddProofList = () => {
@@ -105,8 +100,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
           financialDocumentProof: "",
         }));
       }
-
-      // setIsUploading(true);
     }
   };
   const submitHandler = () => {
@@ -119,14 +112,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     setFormErrors({...error});
     if (error.financialDocumentProof !== "") return;
 
-    // for (const key in formErrors) {
-    //   if (Object.hasOwnProperty.call(formErrors, key)) {
-    //     const element = formErrors[key];
-    //     if (element) {
-    //       return;
-    //     }
-    //   }
-    // }
     setDisableButton(true);
     const allData = new FormData();
     allData.append(
@@ -134,14 +119,12 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
       JSON.stringify({
         doc_id: "cf_financial_statement",
         subDocType: isSelected,
-        // docImageName: formData?.financialDocumentProof?.name,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
     for (let i = 0; i < formData.financialDocumentProof.length; i++) {
       allData.append("doc", formData.financialDocumentProof[i]);
     }
-    // allData.append("doc", formData.financialDocumentProof);
     allData.append("orderId", selectedOrderId);
     baseInstance
       .post(endPoints.uploadFinancialDoc, allData)
@@ -159,15 +142,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   }, []);
 
   useEffect(() => {
-    // if (isReupload) {
-    //   setFormErrors({
-    //     ...formErrors,
-    //     financialDocumentProof:
-    //       "Please re-upload these documents as these got rejected by our team.",
-    //   });
-    // } else {
     setFormData({financialDocumentProof: ""});
-    // }
   }, [selectedOrderId]);
 
   const handleDeleteFile = (e, index) => {
@@ -175,7 +150,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
     const temp = [...formData.financialDocumentProof];
     temp.splice(index, 1);
     setFormData({...formData, financialDocumentProof: temp});
-    // setFormData(prev => ({...prev, financialDocumentProof: ""}));
     setFormErrors(prev => ({...prev, financialDocumentProof: ""}));
   };
 
@@ -200,12 +174,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             necessary standards. Please re-upload them to proceed with KYC
             process.
           </p>
-          {/* <div
-            onClick={() => {
-              setShowReuploadNote(false);
-            }}>
-            <Close className={`cursor-pointer ${commonStyles.reupload_icon}`} />
-          </div> */}
         </div>
       )}
 
@@ -293,7 +261,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                     <></>
                   )}
                 </label>
-                {/* {cibilDocsData?.cf_financial_statement?.length === 0 && ( */}
                 <span
                   onClick={e => {
                     handleDeleteFile(e, index);
@@ -306,16 +273,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                 {/* )} */}
               </div>
             </div>
-            {/* {
-            isReupload &&
-            cibilDocsData?.cf_permanent_address_proof?.length > 0 ? (
-              <div className="hidden md:flex ml-2">
-                <CheckFillIcon
-                  color={"#2D9469"}
-                  className="w-[18px] h-[18px]"
-                />
-              </div>
-            ) : ( */}
+
             <div
               className={`hidden md:flex ${addressFormStyles.check_wrapper}`}>
               <div
@@ -333,7 +291,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                 />
               </div>
             </div>
-            {/* )} */}
           </div>
         ))}
 
@@ -351,23 +308,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
               htmlFor="financialDoc"
               className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle} text-[#71717a]`}>
               <div className={`${commonStyles.flexICenter}`}>
-                {/* {formData?.financialDocumentProof?.length > 0 ? ( */}
-                <>
-                  {/* {formErrors?.financialDocumentProof ? (
-                      <ExclamationCircleFill
-                        color={"#D96060"}
-                        className={`${commonStyles.mdHiddemIcons}`}
-                      />
-                    ) : (
-                      <div className={commonStyles.animate_check_icon}>
-                        <CheckFillIcon
-                          color={"#2D9469"}
-                          className={`${commonStyles.mdHiddemIcons}`}
-                        />
-                      </div>
-                    )} */}
-                </>
-                {/* ) : ( */}
                 <Image
                   src={uploading}
                   alt="Uploading Icon"
@@ -386,7 +326,6 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             </label>
             {formData.financialDocumentProof.name && (
               <div className="flex cursor-pointer">
-                {/* <ReloadIcon className={`${commonStyles.mdHiddemIconsML}`} /> */}
                 <span
                   onClick={e => {
                     handleDeleteFile(e);
@@ -405,29 +344,8 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
             onChange={e => {
               handleFileInputChange(e);
             }}
-            //   className={`${commonStyles.basicInputStyles} ${commonStyles.basicFileInput}`}
           />
         </div>
-
-        {/* {formErrors.financialDocumentProof && (
-          <div className={`${commonStyles.basicErrorStyles} `}>
-            {formErrors.financialDocumentProof}
-          </div>
-
-        )} */}
-
-        {/* {formData?.financialDocumentProof?.name && (
-          <div className={`!hidden md:!flex ${styles.check_wrapper}`}>
-            <div className={styles.showCheckCircle}>
-              <CheckFillIcon color={"#2D9469"} className="w-full h-full" />
-            </div>
-            <div
-              className={styles.showDeleteIcon}
-              onClick={e => handleDeleteFile(encodeURI)}>
-              <DeleteIconFilled color={"#ffffff"} className="w-full h-full" />
-            </div>
-          </div>
-        )} */}
       </div>
 
       {formErrors.financialDocumentProof && (

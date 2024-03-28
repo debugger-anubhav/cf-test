@@ -3,11 +3,9 @@
 }
 
 .product_wrapper {
-  /* @apply flex flex-wrap lg:grid lg:grid-cols-3 justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
   @apply flex mt-0 md:mt-4 mb-8 ms:mb-[88px];
 }
 .container {
-  /* @apply hidden w-full xs:block  justify-center md:justify-normal macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 my-4; */
   @apply hidden w-full xs:block;
 }
 .listings {

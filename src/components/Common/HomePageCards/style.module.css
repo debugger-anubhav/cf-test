@@ -1,6 +1,5 @@
 .wrapper {
   @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
-  /* @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] h-[17.8rem] lg:h-[24rem] 3xl:h-[26.8rem] cursor-pointer; */
 }
 .hover_wrapper img {
   @apply animate-fade;
@@ -13,12 +12,9 @@
 }
 .thumbnail {
   @apply min-w-full w-full rounded-lg max-h-[268px] min-h-[200px];
-  /* pointer-events: none; */
   -webkit-user-drag: none;
-  /* user-select: none; */
 }
 .desc_div {
-  /* @apply flex gap-2 3xl:justify-between mt-[14px]; */
   @apply flex gap-2 justify-between mt-[4px];
 }
 .desc {
@@ -57,5 +53,4 @@
 
 .anchor_card {
   -webkit-user-drag: none;
-  /* pointer-events: none; */
 }

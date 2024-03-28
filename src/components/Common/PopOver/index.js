@@ -169,25 +169,18 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
-        // onMouseLeave={handleClose}
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "left",
         }}
         sx={{
           zIndex: 2,
-          // mb: "0.9rem",
         }}>
-        {/* <div className={styles.shadow_box}> */}
         <Box
           className={styles.sub_item_wrapper}
           sx={{
             mt: 2.4,
-
-            // boxShadow:3
-          }}
-          // onMouseLeave={handleClose}
-        >
+          }}>
           <a
             href={`/${homePageReduxData?.cityName
               .replace(/\//g, "-")
@@ -196,26 +189,22 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
               All
             </p>
           </a>
-          {list?.map(
-            (item, index) => {
-              return (
-                <a
-                  key={index.toString()}
-                  href={`/${homePageReduxData?.cityName
-                    .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`}>
-                  <p
-                    className={styles.sub_item}
-                    onClick={e => handleSelectedProduct(e, item)}>
-                    {item?.cat_name}
-                  </p>
-                </a>
-              );
-            },
-            // </Link>
-          )}
+          {list?.map((item, index) => {
+            return (
+              <a
+                key={index.toString()}
+                href={`/${homePageReduxData?.cityName
+                  .replace(/\//g, "-")
+                  .toLowerCase()}/${item?.seourl}`}>
+                <p
+                  className={styles.sub_item}
+                  onClick={e => handleSelectedProduct(e, item)}>
+                  {item?.cat_name}
+                </p>
+              </a>
+            );
+          })}
         </Box>
-        {/* </div> */}
       </Popper>
     </div>
   );
