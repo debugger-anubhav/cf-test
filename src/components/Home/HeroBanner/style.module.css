@@ -8,5 +8,5 @@
   @apply w-full rounded-md;
 }
 .hero_banner_cursor_pointer {
-  @apply cursor-pointer mx-4;
+  @apply cursor-pointer mx-4 md:mx-[70px];
 }

@@ -25,8 +25,11 @@ const HeroBanner = () => {
             onClick={() => {
               handleRedirection();
             }}>
-            <img
+            <Image
               src={HeroBannerImages.HeroBannerImageOne}
+              width={656}
+              height={298}
+              loading="eager"
               className={styles.carousel_images}
               alt="hero-banner-1"
             />
@@ -36,16 +39,22 @@ const HeroBanner = () => {
             onClick={() => {
               handleRedirection();
             }}>
-            <img
+            <Image
               src={HeroBannerImages.HeroBannerImageTwo}
+              width={656}
+              height={298}
+              loading="eager"
               className={styles.carousel_images}
               alt="hero-banner-2"
             />
           </div>
           <div className={styles.hero_banner_cursor_pointer}>
-            <img
+            <Image
               src={HeroBannerImages.HeroBannerImageThree}
               className={styles.carousel_images}
+              width={656}
+              height={298}
+              loading="eager"
               alt="hero-banner-3"
             />
           </div>
@@ -64,6 +73,7 @@ const HeroBanner = () => {
             alt="hero-banner"
             width={1788}
             height={746}
+            loading="eager"
           />
         </a>
       </div>
