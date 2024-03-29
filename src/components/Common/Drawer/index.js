@@ -156,7 +156,7 @@ export default function CommonDrawer({
             <a href="/">cityfurnish</a>
           </p>
           <div className={styles.menu_list}>
-            <a
+            <div
               className="lg:hidden"
               onClick={() => {
                 if (isLogin) router.push("/usersettings");
@@ -166,7 +166,8 @@ export default function CommonDrawer({
                   toggleLoginModal(true);
                 }
               }}
-              href={isLogin && "/usersettings"}>
+              // href={isLogin && "/usersettings"}
+            >
               <div className={`flex gap-1 items-center ${styles.menu_item}`}>
                 <Image
                   src={Icons.Profile}
@@ -177,7 +178,7 @@ export default function CommonDrawer({
                 />
                 <p>Profile</p>
               </div>
-            </a>
+            </div>
             <div className={`lg:!hidden ${styles.divider}`}></div>
             <p
               className={styles.menu_item}
