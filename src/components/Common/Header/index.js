@@ -423,17 +423,12 @@ const Header = ({page}) => {
                     setShowProfileDropdown(true);
                   }
                 }}>
-                <a
+                <div
                   className="cursor-pointer"
                   onClick={() => {
-                    // setClick("profile");
                     if (isLogin) router.push("/usersettings");
                     else toggleLoginModal(true);
-                  }}
-                  href={isLogin && "/usersettings"}
-                  rel="noopner noreferrer"
-                  target="_self"
-                  aria-label="profile">
+                  }}>
                   <div
                     className="relative z-20"
                     onMouseEnter={e => {
@@ -452,7 +447,7 @@ const Header = ({page}) => {
                       aria-disabled={true}
                     />
                   </div>
-                </a>
+                </div>
               </div>
 
               {decrypt(getLocalStorage("_ga")) !== null &&
