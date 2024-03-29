@@ -62,16 +62,6 @@ const SearchList = () => {
   const cityId = parseFloat(cityIdStr);
   const productCardWidth = "xl:!w-full lg:!w-[20rem] sm:!w-[18rem]  !w-full ";
 
-  // const {refetch: getSavedItems} = useQuery(
-  //   "saved-items",
-  //   endPoints.savedItems,
-  //   `?cityId=${cityId}&userId=${
-  //     isLogin
-  //       ? decrypt(getLocalStorage("_ga"))
-  //       : decryptBase64(getLocalStorage("tempUserID"))
-  //   }`,
-  // );
-
   const getSavedItems = isValid => {
     baseInstance
       .get(
@@ -95,11 +85,13 @@ const SearchList = () => {
   const validateAuth = async () => {
     const isValid = await checkAuthentication();
     setIsLogin(isValid);
-    getSavedItems(isValid);
+
+    isValid && getSavedItems(isValid);
   };
 
   useEffect(() => {
-    getSavedItems();
+    const isValid = checkAuthentication();
+    isValid && getSavedItems();
   }, [refreshState]);
 
   useEffect(() => {

@@ -64,7 +64,7 @@ const SavedItem = () => {
   const isAuth = async () => {
     const isAuthenticated = await checkAuthentication();
     setIsLogin(isAuthenticated);
-    getSavedItems(isAuthenticated);
+    isAuthenticated && getSavedItems(isAuthenticated);
   };
 
   useEffect(() => {

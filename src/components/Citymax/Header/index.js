@@ -89,12 +89,6 @@ const CitymaxHeader = ({zIndex}) => {
     setLocalStorage("cityId", 46);
   }
 
-  // const {refetch: getSavedItems} = useQuery(
-  //   "saved-items",
-  //   endPoints.savedItems,
-  //   `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
-  // );
-
   useEffect(() => {
     const cityId = getLocalStorage("cityId") || 46;
 
@@ -156,7 +150,7 @@ const CitymaxHeader = ({zIndex}) => {
     } else setIsLogin(false);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
     fetchCartItems(userIdToUse);
-    getSavedItems(userIdToUse);
+    isAuthenticated && getSavedItems(userIdToUse);
   };
 
   const fetchCartItems = userIdToUse => {

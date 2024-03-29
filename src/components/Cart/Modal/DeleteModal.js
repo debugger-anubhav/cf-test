@@ -112,17 +112,18 @@ const DeleteModal = ({
     !inWishList &&
       addwhislistProduct()
         .then(res => {
-          getSavedItems()
-            .then(res => {
-              dispatch(addSaveditems(res?.data?.data));
-              const ids = res?.data?.data.map(item => {
-                return item?.id;
-              });
-              dispatch(addSaveditemID(ids));
-              showToastNotification("Item added to the wishlist", 1);
-              window?.fbq("track", "AddToWishlist");
-            })
-            .catch(err => console.log(err?.message || "some error"));
+          isAuthenticated &&
+            getSavedItems()
+              .then(res => {
+                dispatch(addSaveditems(res?.data?.data));
+                const ids = res?.data?.data.map(item => {
+                  return item?.id;
+                });
+                dispatch(addSaveditemID(ids));
+                showToastNotification("Item added to the wishlist", 1);
+                window?.fbq("track", "AddToWishlist");
+              })
+              .catch(err => console.log(err?.message || "some error"));
           setInWishList(prev => !prev);
         })
         .catch(err => console.log(err?.message || "some error"));

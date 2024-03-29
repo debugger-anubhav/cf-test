@@ -159,12 +159,12 @@ const Header = ({page}) => {
           return item?.id;
         });
         dispatch(addSaveditemID(ids));
+      })
+      .catch(err => {
+        if (err?.message === "Request failed with status code 401") {
+          console.log("Api is giving 401 because user is not logging");
+        }
       });
-    // .catch(err => {
-    //   if (err?.message === "Request failed with status code 401") {
-    //     console.log("Api is giving 401 because user is not logging");
-    //   }
-    // });
   };
 
   const validateAuth = async () => {
@@ -173,7 +173,7 @@ const Header = ({page}) => {
     const userIdToUse = isAuthenticated ? userId : tempUserId;
     // setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
-    getSavedItems(userIdToUse);
+    isAuthenticated && getSavedItems(userIdToUse);
   };
 
   // added for cart icons
