@@ -160,7 +160,11 @@ const Header = ({page}) => {
         });
         dispatch(addSaveditemID(ids));
       })
-      .catch(err => console.log(err?.message || "some error"));
+      .catch(err => {
+        if (err?.message === "Request failed with status code 401") {
+          console.log("Api is giving 401 because user is not logging");
+        }
+      });
   };
 
   const validateAuth = async () => {
