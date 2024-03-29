@@ -242,8 +242,6 @@ const Header = ({page}) => {
       .catch(err => console.log(err?.message || "some error"));
   }, []);
 
-  useEffect(() => {}, [isLogin]);
-
   // useEffect(() => {
   //   if (userId) {
   //     setProfileIconLink("/usersettings");
@@ -264,10 +262,10 @@ const Header = ({page}) => {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window?.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window?.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -368,9 +366,9 @@ const Header = ({page}) => {
               </div>
             )}
             <div className={styles.wishlist_link_wrapper}>
-              <a
+              <div
                 className="cursor-pointer"
-                href={isLogin && `/wishlist`}
+                // href={isLogin && `/wishlist`}
                 onClick={() => {
                   setClick("wishlist");
                   if (isLogin) {
@@ -392,7 +390,7 @@ const Header = ({page}) => {
                     <div className={styles.cart_badge}>{wishListCount}</div>
                   )}
                 </div>
-              </a>
+              </div>
               <div className={styles.cart_link_wrapper}>
                 <a href={"/cart"}>
                   <div
