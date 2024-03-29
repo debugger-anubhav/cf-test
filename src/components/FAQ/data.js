@@ -23,7 +23,7 @@ export const HowItWorks = [
       "Get the delivery and assembly done on the promised date.",
     ],
     afterChild:
-      'To know more please <b><a href="/pages/how-it-works" style="color:#5774AC;font-size:16px;font-weight:normal;text-decoration:underline;letter-spacing: -0.32px;font-family: Poppins;">click here</a></b>',
+      '<p>To know more please <b><a href="/pages/how-it-works" style="color:#5774AC;font-size:16px;font-weight:normal;text-decoration:underline;letter-spacing: -0.32px;font-family: Poppins;">click here</a></b></p>',
   },
   {
     que: "Can I get the actual product picture?",

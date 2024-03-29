@@ -77,9 +77,11 @@ const InvoicePage = () => {
 
         <div className={styles.past_payment_wrapper}>
           <p className={styles.desc}>
-            <a href="/payments" target="_blank">
-              <span className={styles.click_here}>Click here</span>
-            </a>
+            <span className={styles.click_here}>
+              <a href="/payments" target="_blank">
+                Click here
+              </a>
+            </span>
             to check your past payments
           </p>
           <div className={styles.amount_wrapper}>

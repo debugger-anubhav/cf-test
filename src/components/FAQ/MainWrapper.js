@@ -195,7 +195,7 @@ const MainWrapper = () => {
       <div>
         <h1 className={`${style.heading} !pt-0 md:!pt-4`}>
           {searchKeyword ? (
-            <p
+            <div
               className={style.searchHeading}
               onClick={() => {
                 setSearchKeyword("");
@@ -209,7 +209,7 @@ const MainWrapper = () => {
                 className="pointer-events-none pr-2"
               />
               FAQs
-            </p>
+            </div>
           ) : (
             "FAQs"
           )}

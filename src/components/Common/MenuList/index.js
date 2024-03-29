@@ -7,11 +7,9 @@ import {addAllAndSubCategory} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 
 const MenuList = ({hasMb = true}) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
@@ -65,18 +63,12 @@ const MenuList = ({hasMb = true}) => {
         </div>
       )}
       <div className={styles.menu_list_right}>
-        <a
-          onClick={() => {
-            router.push("/pages/offers");
-          }}
-          href={"/pages/offers"}>
-          <p className={styles.item_wrap}>Offers</p>
-        </a>
-        <a href="/pages/bulkorder">
-          <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
-            CF for business
-          </p>
-        </a>
+        <p className={styles.item_wrap}>
+          <a href={"/pages/offers"}>Offers</a>
+        </p>
+        <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
+          <a href="/pages/bulkorder">CF for business</a>
+        </p>
       </div>
     </div>
   );
