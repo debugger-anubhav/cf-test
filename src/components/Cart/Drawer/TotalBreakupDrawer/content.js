@@ -127,7 +127,7 @@ const BillContent = ({
 
         <div className={styles.row}>
           <div>
-            <p className={styles.price_label}>GST (18%)</p>
+            <p className={styles.price_label}>GST </p>
           </div>
           <p className={styles.total_amount}>
             <span className={styles.rupeeIcon}>₹</span>

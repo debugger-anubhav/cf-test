@@ -184,7 +184,7 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
 
                 <div className={commonStyles.row}>
                   <div>
-                    <p className={commonStyles.price_label}>GST (18%)</p>
+                    <p className={commonStyles.price_label}>GST </p>
                   </div>
                   <p className={commonStyles.total_amount}>
                     {billBreakup?.gst && (
