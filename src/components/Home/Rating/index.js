@@ -2,7 +2,7 @@
 
 import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
-import {GoogleIcon, RatingStar, EditIcon} from "@/assets/icon";
+import {GoogleIcon, EditIcon} from "@/assets/icon";
 import Image from "next/image";
 import {HomePageImages} from "@/assets/images";
 import {endPoints} from "@/network/endPoints";
@@ -103,7 +103,10 @@ const CustomerRating = () => {
           <h3 className={styles.rating_div}>
             {reviews?.[0]?.fc_google_location_data[0]?.average_review}
             <span className={styles.star}>
-              <RatingStar color={"#FFCB45"} size={24} />
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
+                width={25}
+              />
             </span>
             rating
           </h3>
@@ -152,25 +155,28 @@ const CustomerRating = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="ml-3 mr-7">
+                <div className="ml-3 mr-7 w-full">
                   <h3 className={styles.name}>{item?.user_name}</h3>
-                  <div className="flex gap-2">
+                  <div className={styles.rating_wrapper}>
                     <Rating
                       stop={5}
                       emptySymbol={
-                        <div>
-                          <FaStar size={16} color={"#fff"} className="mr-1" />
-                        </div>
+                        <FaStar
+                          size={16}
+                          color={"#fff"}
+                          className="mr-1 w-full"
+                        />
                       }
                       fullSymbol={
-                        // <img src='https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg' width={'16px'}/>
-                        <div>
-                          <FaStar
-                            size={16}
-                            color={"#FFCB45"}
-                            className="mr-1"
-                          />
-                        </div>
+                        <img
+                          src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
+                          width={"16px"}
+                        />
+                        // <FaStar
+                        //   size={16}
+                        //   color={"#FFCB45"}
+                        //   className="mr-1 w-full"
+                        // />
                       }
                       initialRating={
                         item?.fc_google_location_data[0]?.average_review

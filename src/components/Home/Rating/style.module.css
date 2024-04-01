@@ -55,3 +55,9 @@
 .editlink {
   @apply hidden xl:flex;
 }
+.rating_wrapper {
+  @apply flex gap-2 w-full;
+}
+.rating_wrapper span {
+  @apply !w-fit;
+}
