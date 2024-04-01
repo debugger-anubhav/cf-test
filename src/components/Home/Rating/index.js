@@ -106,6 +106,7 @@ const CustomerRating = () => {
               <img
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                 width={25}
+                alt="ratting-star"
               />
             </span>
             rating
@@ -171,6 +172,7 @@ const CustomerRating = () => {
                         <img
                           src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                           width={"16px"}
+                          alt="ratting-star"
                         />
                         // <FaStar
                         //   size={16}
