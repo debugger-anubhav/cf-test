@@ -76,7 +76,10 @@ function ServiceRequestType({
   return (
     <>
       {currentScreen ? (
-        <div className={`${styles.content_wrapper} !pb-4`}>
+        <div
+          className={`${styles.content_wrapper} !pb-4 ${
+            title === "Need help with..." && "!p-0"
+          }`}>
           <div className={styles.main_heading}>
             {!isHelpDrawer && (
               <BackIcon
