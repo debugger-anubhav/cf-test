@@ -9,8 +9,8 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
-import {FaStar} from "react-icons/fa";
-import Rating from "react-rating";
+// import {FaStar} from "react-icons/fa";
+// import Rating from "react-rating";
 import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 
@@ -103,9 +103,10 @@ const CustomerRating = () => {
           <h3 className={styles.rating_div}>
             {reviews?.[0]?.fc_google_location_data[0]?.average_review}
             <span className={styles.star}>
-              <img
+              <Image
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                 width={25}
+                height={25}
                 alt="ratting-star"
               />
             </span>
@@ -159,7 +160,7 @@ const CustomerRating = () => {
                 <div className="ml-3 mr-7 w-full">
                   <h3 className={styles.name}>{item?.user_name}</h3>
                   <div className={styles.rating_wrapper}>
-                    <Rating
+                    {/* <Rating
                       stop={item?.rate}
                       emptySymbol={
                         <FaStar
@@ -185,7 +186,17 @@ const CustomerRating = () => {
                         item?.rate
                       }
                       readonly
-                    />
+                    /> */}
+                    {[...Array(item?.rate)].map((_, index) => (
+                      <Image
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
+                        width={16}
+                        height={16}
+                        alt={"ratting-icon" + index}
+                        className="mt-1"
+                        key={index.toString()}
+                      />
+                    ))}
                     {console.log(item?.rate, "itemitem")}
                   </div>
                 </div>
