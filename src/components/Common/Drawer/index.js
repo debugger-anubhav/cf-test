@@ -247,12 +247,11 @@ export default function CommonDrawer({
                           toggleLoginModal(true);
                         }
                       }}>
-                      <a
-                        href={
-                          index === 3 ? isLogin && "/usersettings" : item.link
-                        }>
-                        {item?.item}
-                      </a>
+                      {isLogin ? (
+                        <a href="/usersettings">{item?.item}</a>
+                      ) : (
+                        <>{item?.item}</>
+                      )}
                     </p>
                   )}
                   {index === 2 && (
