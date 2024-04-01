@@ -124,6 +124,7 @@ const ReviewDrawer = ({
               className={styles.input_area}
               placeholder="Let us know what did you think of the product"
               onChange={e => setReviewDesc(e.target.value)}
+              value={reviewDesc}
             />
           </div>
           <div className={styles.btn_wrapper}>
