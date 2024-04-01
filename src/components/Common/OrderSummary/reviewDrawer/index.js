@@ -4,14 +4,25 @@ import commonStyles from "../styles.module.css";
 import {Close, ForwardArrow, RatingStar} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 import Rating from "react-rating";
-import {productPageImagesBaseUrl} from "@/constants/constant";
+import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {showToastNotification} from "../../Notifications/toastUtils";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {baseInstance} from "@/network/axios";
 
-const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
+const ReviewDrawer = ({
+  toggleDrawer,
+  open,
+  productImage,
+  productName,
+  item,
+}) => {
+  const userId = decrypt(getLocalStorage("_ga"));
+
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [rating, setRating] = useState(0);
   const [showError, setshowError] = useState(false);
+  const [reviewDesc, setReviewDesc] = useState("");
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -19,6 +30,23 @@ const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
     } else {
       setIsBottomDrawer(false);
     }
+  };
+  const writeReview = () => {
+    const headers = {
+      user_id: userId,
+      product_id: item?.product_id,
+      city_id: 46,
+      rating,
+      review_description: reviewDesc,
+    };
+    baseInstance
+      .post("fc-payments/saveProductReview", headers)
+      .then(res => {
+        if (res?.data?.status_code === 200) {
+          showToastNotification("Your review has been saved successfully", 1);
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   React.useEffect(() => {
@@ -82,13 +110,6 @@ const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
                   initialRating={rating}
                   name="ratingnumber"
                 />
-                {/* <ErrorMessage name="ratingnumber">
-                  {msg =>
-                    formik.touched.ratingnumber && (
-                      <p className={formStyles.error}>{msg} </p>
-                    )
-                  }
-                </ErrorMessage> */}
               </div>
               {showError && (
                 <p className={styles.err}>
@@ -102,6 +123,7 @@ const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
             <textarea
               className={styles.input_area}
               placeholder="Let us know what did you think of the product"
+              onChange={e => setReviewDesc(e.target.value)}
             />
           </div>
           <div className={styles.btn_wrapper}>
@@ -111,10 +133,7 @@ const ReviewDrawer = ({toggleDrawer, open, productImage, productName}) => {
                 if (rating > 0) {
                   setshowError(false);
                   toggleDrawer();
-                  showToastNotification(
-                    "Your review has been saved successfully",
-                    1,
-                  );
+                  writeReview();
                 } else setshowError(true);
               }}>
               Submit

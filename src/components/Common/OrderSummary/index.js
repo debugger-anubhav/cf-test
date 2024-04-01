@@ -194,6 +194,7 @@ const OrderSummary = ({
                 open={reviewDrawer}
                 productImage={item?.product_image?.split(",")[0]}
                 productName={item?.product_name}
+                item={item}
               />
             </div>
           ))}

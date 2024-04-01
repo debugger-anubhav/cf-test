@@ -158,6 +158,7 @@ export const endPoints = {
     getDeliverySlots: `fc-payments/getSlots`,
     updateSlot: `fc-payments/updateSlot`,
     getSubscriptionData: `fc-zb-recurring-invoices/getSubscriptionData`,
+    // orderPageWriteReview:``
   },
 
   cityMaxPage: {
