@@ -47,6 +47,7 @@ export const customStylesForSelect = {
       border: "1px solid #71717A",
     },
     fontFaimly: "poppins",
+    fontSize: "14px",
   }),
 };
 
