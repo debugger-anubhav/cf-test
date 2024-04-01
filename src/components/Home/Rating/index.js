@@ -197,7 +197,6 @@ const CustomerRating = () => {
                         key={index.toString()}
                       />
                     ))}
-                    {console.log(item?.rate, "itemitem")}
                   </div>
                 </div>
               </div>

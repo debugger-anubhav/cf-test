@@ -3,7 +3,7 @@ import styles from "./style.module.css";
 import PopOver from "../PopOver";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {addAllAndSubCategory} from "@/store/Slices";
+import {addAllAndSubCategory, setShowAllRentLink} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
@@ -24,6 +24,7 @@ const MenuList = ({hasMb = true}) => {
     getAllAndSubCategory()
       .then(res => {
         dispatch(addAllAndSubCategory(res?.data?.data));
+        dispatch(setShowAllRentLink(true));
         setLoading(false);
       })
       .catch(err => {

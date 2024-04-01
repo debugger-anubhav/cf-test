@@ -1,6 +1,6 @@
 "use client";
 import {HeroBannerImages} from "@/assets/images";
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
@@ -11,11 +11,23 @@ import Image from "next/image";
 const HeroBanner = () => {
   const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
+  const [setshowLinkForRentPage, setSetshowLinkForRentPage] = useState(
+    homePageReduxData.showAllRentLink,
+  );
   const handleRedirection = () => {
-    router.push(
-      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/rent`,
-    );
+    if (setshowLinkForRentPage) {
+      router.push(
+        `/${homePageReduxData?.cityName
+          .replace(/\//g, "-")
+          .toLowerCase()}/rent`,
+      );
+    }
   };
+
+  useEffect(() => {
+    setSetshowLinkForRentPage(homePageReduxData.showAllRentLink);
+  }, [homePageReduxData.showAllRentLink]);
+
   return (
     <div>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
@@ -63,9 +75,13 @@ const HeroBanner = () => {
 
       <div className={styles.hero_banner_wrapper}>
         <a
-          href={`/${homePageReduxData?.cityName
-            .toLowerCase()
-            .replace(/\//g, "-")}/rent`}>
+          href={
+            setshowLinkForRentPage
+              ? `/${homePageReduxData?.cityName
+                  .toLowerCase()
+                  .replace(/\//g, "-")}/rent`
+              : "/"
+          }>
           <Image
             src={
               "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/hero-banner-main.webp"

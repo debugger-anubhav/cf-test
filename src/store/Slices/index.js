@@ -30,6 +30,7 @@ export const HomepageSlice = createSlice({
     loginPopupState: false,
     isLogin: false,
     docSidebarActiveItem: "",
+    showAllRentLink: false,
   },
   reducers: {
     addWhishListProduc(state, action) {
@@ -109,6 +110,9 @@ export const HomepageSlice = createSlice({
     },
     setDocSidebarActiveItem(state, action) {
       state.docSidebarActiveItem = action.payload;
+    },
+    setShowAllRentLink(state, action) {
+      state.showAllRentLink = action.payload;
     },
   },
 });
@@ -371,6 +375,7 @@ export const {
   setLoginPopupState,
   setLoginState,
   setDocSidebarActiveItem,
+  setShowAllRentLink,
 } = HomepageSlice.actions;
 
 export const {
