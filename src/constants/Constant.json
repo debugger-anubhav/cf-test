@@ -38,7 +38,7 @@
         },
         {
           "item": "Profile",
-          "link": "https://test.rentofurniture.com/user_sign_up"
+          "link": "/usersettings"
         }
       ]
     },
