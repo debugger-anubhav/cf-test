@@ -159,7 +159,7 @@ const CustomerRating = () => {
                   <h3 className={styles.name}>{item?.user_name}</h3>
                   <div className={styles.rating_wrapper}>
                     <Rating
-                      stop={5}
+                      stop={item?.rate}
                       emptySymbol={
                         <FaStar
                           size={16}
@@ -179,10 +179,12 @@ const CustomerRating = () => {
                         // />
                       }
                       initialRating={
-                        item?.fc_google_location_data[0]?.average_review
+                        // item?.fc_google_location_data[0]?.average_review
+                        item?.rate
                       }
                       readonly
                     />
+                    {console.log(item?.rate, "itemitem")}
                   </div>
                 </div>
               </div>
