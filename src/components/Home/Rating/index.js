@@ -108,7 +108,11 @@ const CustomerRating = () => {
             rating
           </h3>
 
-          <a href={reviewLink} target="_blank" rel="noreferrer">
+          <a
+            href={reviewLink}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="write-a-review">
             <Image
               src={HomePageImages.editIcon}
               alt="editIcon"
@@ -120,6 +124,7 @@ const CustomerRating = () => {
             href={reviewLink}
             target="_blank"
             rel="noreferrer"
+            aria-label="write-a-review-link"
             className={styles.editlink}>
             <div className={styles.editBtn}>
               <EditIcon size={25} />

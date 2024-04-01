@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {FourStepsCardData} from "@/constants/constant";
+import Image from "next/image";
 
 // h2 p h3 p
 
@@ -15,7 +16,7 @@ const FourSteps = () => {
           <div key={index.toString()} className={styles.card}>
             <div>
               <div className={`w-100 h-100 absolute z-10`} />
-              <img
+              <Image
                 src={itemm?.img1}
                 alt={`step-${index + 1}`}
                 loading="lazy"
@@ -28,12 +29,15 @@ const FourSteps = () => {
                     ? "w-[137px] h-[73.5px]"
                     : "w-[161px] h-[70px]"
                 } md:flex hidden relative z-[-1]`}
+                width={81}
+                height={81}
               />
-              <img
+              <Image
                 src={itemm?.img2}
                 className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
-                // className={`w-full md:hidden`}
                 loading="lazy"
+                height={172}
+                width={172}
                 alt={`step-${index + 1}`}
               />
             </div>
