@@ -30,7 +30,6 @@ import {
 } from "@/hooks/cryptoUtils";
 // import {RxHamburgerMenu} from "react-icons/rx";
 import MenuDrawer from "./menuDrawer/MenuDrawer";
-import {IconLink} from "../../../assets/icon";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import "react-responsive-modal/styles.css";
 import LoginModal from "@/components/LoginPopups";
@@ -301,7 +300,8 @@ const CitymaxHeader = ({zIndex}) => {
                 // onClick={() => router.push("/")}
               >
                 <img
-                  src={`${IconLink + "home-cityfurnish.svg"}`}
+                  src={`https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png`}
+                  // src={`${IconLink + "home-cityfurnish.svg"}`}
                   className={styles.home_icon}
                   alt="cityfurnish"
                 />
