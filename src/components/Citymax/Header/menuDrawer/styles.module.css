@@ -9,7 +9,7 @@
   @apply py-10 md:py-[72px] pl-[68px] pr-4 md:pr-12 md:pl-[84px] font-Poppins w-[280px] md:w-[400px] h-full relative;
 }
 .logo {
-  @apply w-[101px] h-6;
+  @apply w-[101px];
 }
 .content_wrapper {
   @apply mt-8 flex flex-col gap-4 md:gap-8 h-full overflow-scroll;

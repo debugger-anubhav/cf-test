@@ -253,12 +253,7 @@ const ProductDetails = ({params}) => {
     const isAuthenticated = await checkAuthentication();
     if (isAuthenticated === false) {
       toggleLoginModal(true);
-    }
-    // if (!userId) {
-    //   router.push("https://test.rentofurniture.com/user_sign_up");
-    //   return;
-    // }
-    else addToWishlist();
+    } else addToWishlist();
   };
 
   const data = {
@@ -407,8 +402,13 @@ const ProductDetails = ({params}) => {
     notifyData,
   );
   const handleNotifyMe = async () => {
-    showToastNotification("You will be notified once item is in stock", 2);
-    await notifyAvailibility();
+    const isAuthenticated = await checkAuthentication();
+    if (isAuthenticated === false) {
+      toggleLoginModal(true);
+    } else {
+      showToastNotification("You will be notified once item is in stock", 2);
+      await notifyAvailibility();
+    }
   };
 
   const toggleDrawer = () => {
