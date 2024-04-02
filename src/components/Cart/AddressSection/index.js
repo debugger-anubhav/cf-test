@@ -51,6 +51,7 @@ import OrderTypeDrawer from "./OrderTypeDrawer";
 
 const AddressSection = () => {
   const dispatch = useDispatch();
+  const data = useSelector(state => state.cartPageData);
   const router = useRouter();
   const [whatsappNotification, setWhatsappNotification] = useState(true);
   const [haveGstNumber, sethaveGstNumber] = useState(false);
@@ -61,16 +62,14 @@ const AddressSection = () => {
   const [openOrderTypeDropdown, setOpenOrderTypeDropdown] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [billBreakup, setBillBreakup] = useState(data.billBreakout);
 
   const formikRef = useRef(null);
-
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
   const cityId = getLocalStorage("cityId");
 
-  const data = useSelector(state => state.cartPageData);
-  const billBreakup = data.billBreakout;
   const cityName = useSelector(state => state.homePagedata.cityName);
   const isOfflineCustomer = useSelector(
     state => state.cartPageData.isOfflineCustomer,
@@ -435,6 +434,10 @@ const AddressSection = () => {
   useEffect(() => {
     getAllSavedAddresses();
   }, []);
+
+  useEffect(() => {
+    setBillBreakup(data.billBreakout);
+  }, [data.billBreakout]);
 
   return (
     <>
