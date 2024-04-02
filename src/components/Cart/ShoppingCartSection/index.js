@@ -88,8 +88,8 @@ const ShoppingCartSection = () => {
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  const userIdToUse = isLogin ? userId : tempUserId;
-
+  const userIdToUse = userId || tempUserId;
+  console.log(userIdToUse, "useridtouse");
   useEffect(() => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
@@ -280,12 +280,13 @@ const ShoppingCartSection = () => {
   const fetchBill = async showMsg => {
     try {
       const headers = {
-        userId: parseInt(userIdToUse),
+        // userId: parseInt(userIdToUse),
+        userId: userId || parseInt(tempUserId),
         cityshield: isChecked,
         cityId,
         coins: isCoinApplied ? availCoin : 0,
         couponsCode: code,
-        paymentMode: getLocalStorage("isMonthly") ? 0 : 1,
+        paymentMode: isMonthly ? 0 : 1,
       };
 
       const res = await baseInstance.post(
@@ -371,7 +372,7 @@ const ShoppingCartSection = () => {
   const CheckProductQuantity = () => {
     baseInstance
       .post(endPoints.addToCart.checkProductQuantity, {
-        userId: userId && userId,
+        userId: userId || tempUserId,
         cityId,
       })
       .then(res => {
