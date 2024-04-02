@@ -912,12 +912,11 @@ const AddressSection = () => {
               </div>
             </div>
           )}
-
           <div>
             <div
-              className={`!mt-0 ${otherStyles.cart_breakup}`}
+              className={`!mt-0 ${otherStyles.cart_breakup} !flex-row`}
               onClick={() => setBreakupDrawer(true)}>
-              <div>
+              <div className="flex flex-col w-fit">
                 <p className={otherStyles.total_text}>Total:</p>
                 <div className={otherStyles.breakup_wrapper}>
                   <p className={otherStyles.view_cart_text}>
@@ -929,12 +928,15 @@ const AddressSection = () => {
                   />
                 </div>
               </div>
-              <p className={otherStyles.total_amount}>
-                <span className={otherStyles.rupeeIcon}>₹</span>
-                {billBreakup?.finalTotalPrice?.toFixed(2)}
-                {billBreakup?.isMonthly && "/mo"}
-              </p>
+              <div className="flex w-fit">
+                <p className={otherStyles.total_amount}>
+                  <span className={otherStyles.rupeeIcon}>₹</span>
+                  {billBreakup?.finalTotalPrice?.toFixed(2)}
+                  {billBreakup?.isMonthly && "/mo"}
+                </p>
+              </div>
             </div>
+
             <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
               <button
                 disabled={

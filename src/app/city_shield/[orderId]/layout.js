@@ -9,7 +9,7 @@ export const metadata = {
   description:
     "Furniture rental made easy with CityFurnish. Rent home furniture online, including living room furniture, for as long as you need it. Available in major Indian cities like Noida, Delhi, Hyderabad, Mumbai, Gurgaon, Pune and Bangalore. Download our furniture rental app for convenience and flexibility.",
   icons: {
-    icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.ico",
+    icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png",
   },
 };
 

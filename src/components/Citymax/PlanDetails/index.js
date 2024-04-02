@@ -663,7 +663,6 @@ const CitymaxPlanDetail = () => {
                 <p className={styles.bold_text}>
                   <span className={styles.rupee}>₹</span>
                   {totalAdditionalAmount}/mo
-                  {/* {data?.tenure_additional_price} /mo */}
                 </p>
               </div>
             </div>

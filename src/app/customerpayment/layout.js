@@ -8,7 +8,7 @@ export const metadata = {
   title: "Cityfurnish Online Payment - Pay Your Rental",
   description: "Now Pay Your Due Rental Online.",
   icons: {
-    icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.ico",
+    icon: "https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png",
   },
 };
 
