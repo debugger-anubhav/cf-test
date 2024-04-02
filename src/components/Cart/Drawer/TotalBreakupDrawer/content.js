@@ -1,5 +1,5 @@
 /* eslint-disable no-prototype-builtins */
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
@@ -14,8 +14,11 @@ const BillContent = ({
 }) => {
   const pagedata = useSelector(state => state.cartPageData);
   const code = pagedata.couponCodeUsed;
-  const billBreakup = pagedata.billBreakout;
 
+  const [billBreakup, setBillBreakup] = useState(pagedata.billBreakout);
+  useEffect(() => {
+    setBillBreakup(pagedata.billBreakout);
+  }, [pagedata.billBreakout]);
   return (
     <>
       <div className={styles.breakup_wrapper}>
