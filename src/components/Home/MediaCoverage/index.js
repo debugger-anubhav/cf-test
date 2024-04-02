@@ -16,20 +16,18 @@ const MediaCoverage = () => {
       <div className={`${styles.ticker_container} gap-12`}>
         {MediaCoverageImagesRepeated?.map((imageUrl, index) => {
           return (
-            <div key={index.toString()}>
-              <div className={`w-100 h-100 absolute z-10`} />
-              <div
-                className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative"
-                aria-hidden="true">
-                <img
-                  src={imageUrl.img}
-                  alt={imageUrl.alt + index}
-                  className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
-                  loading="lazy"
-                  width={124}
-                  height="100%"
-                />
-              </div>
+            <div
+              key={index.toString()}
+              className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative"
+              aria-hidden="true">
+              <img
+                src={imageUrl.img}
+                alt={imageUrl.alt + index}
+                className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
+                loading="lazy"
+                width={124}
+                height={"100%"}
+              />
             </div>
           );
         })}
