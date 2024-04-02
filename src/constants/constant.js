@@ -70,7 +70,7 @@ export const RentFurniture = [
   },
 ];
 export const MediaCoverageImages = [
-  {img: HomePageMediaCoverage.icon1, alt: "business-line-"},
+  // {img: HomePageMediaCoverage.icon1, alt: "business-line-"},
   {img: HomePageMediaCoverage.icon2, alt: "ani-"},
   {img: HomePageMediaCoverage.icon3, alt: "business-standard-"},
   {img: HomePageMediaCoverage.icon4, alt: "entrackr-"},
