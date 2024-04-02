@@ -192,11 +192,7 @@ const CategoryCard = ({
           // addToWishlist();
         }}
       />
-      <a
-        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
-        onClick={e => {
-          e.preventDefault();
-        }}>
+      <a href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}>
         <div
           className={`${styles.card_wrapper} `}
           onMouseOver={() => {
@@ -264,6 +260,7 @@ const CategoryCard = ({
               <div className={styles.discount}>{`-${discount} OFF`}</div>
             )}
           </div>
+
           {categoryPageReduxData?.isCombos && (
             <>
               <div className={styles.combos_wrapper}>

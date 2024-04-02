@@ -58,10 +58,10 @@ const ShoppingCartSection = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const cartItems = data.cartItems;
-  const billBreakup = data.billBreakout;
   const showData = data.showCartItems;
   const modeOfPayment = getLocalStorage("isMonthly");
 
+  const [billBreakup, setBillBreakup] = useState(data.billBreakout);
   const [arr, setArr] = useState(cartItems);
   const [userDetails, setUserDetails] = useState();
   const [isChecked, setIsChecked] = useState(data.isCityShield);
@@ -391,6 +391,11 @@ const ShoppingCartSection = () => {
       );
     }
   }, [isDeletedProduct]);
+
+  useEffect(() => {
+    setBillBreakup(data.billBreakout);
+  }, [data.billBreakout]);
+
   return (
     showData &&
     (count > 0 ? (
