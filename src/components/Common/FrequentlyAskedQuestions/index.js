@@ -40,7 +40,10 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   const getFaqsCitymax = () => {
     baseInstance
       .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
-      .then(res => setFaqs(res?.data?.data?.content))
+      .then(res => {
+        setFaqs(res?.data?.data?.content);
+        console.log(res?.data?.data?.content, ";;;;;;;;;;");
+      })
       .catch(err => console.log(err?.message || "some error"));
   };
 
@@ -79,6 +82,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
       getFaqsLandingPage()
         .then(res => {
           setFaqs(res?.data?.data);
+          // console.log(res?.data?.data,"[[[[[[")
           // console.log("home")
         })
         .catch(err => console.log(err?.message || "some error"));

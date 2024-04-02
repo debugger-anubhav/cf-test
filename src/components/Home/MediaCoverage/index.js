@@ -5,13 +5,16 @@ import string from "@/constants/Constant.json";
 
 const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
+  const MediaCoverageImagesRepeated = Array(10)
+    .fill(MediaCoverageImages)
+    .flat();
   return (
     <div className={styles.media_coverage_wrapper}>
       <p className={styles.label}>{str.label}</p>
       <h2 className={`${styles.heading} mb-8`}>{str.desc}</h2>
 
       <div className={`${styles.ticker_container} gap-12`}>
-        {MediaCoverageImages?.map((imageUrl, index) => (
+        {MediaCoverageImagesRepeated?.map((imageUrl, index) => (
           <>
             <div className={`w-100 h-100 absolute z-10`} />
             <div
@@ -20,10 +23,10 @@ const MediaCoverage = () => {
               aria-hidden="true">
               <img
                 src={imageUrl.img}
-                alt={imageUrl.alt}
+                alt={imageUrl.alt + index}
                 className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
                 loading="lazy"
-                width="100%"
+                width={124}
                 height="100%"
               />
             </div>
