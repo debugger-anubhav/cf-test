@@ -11,7 +11,7 @@
   @apply cursor-pointer mt-[0.5rem];
 }
 .logo_text {
-  @apply !font-semibold md:text-[25px] text-[28px];
+  @apply md:font-bold font-medium md:text-[25px] text-[28px];
 }
 
 .menu_list {
