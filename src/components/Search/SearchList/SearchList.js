@@ -154,7 +154,7 @@ const SearchList = () => {
       </div>
 
       {/* sort by */}
-      <div className={StyleSheet.sort_div_wrapper}>
+      <div className={style.sort_div_wrapper}>
         <p className={style.sort_by_text}>Sort By</p>
         <div className={`${style.filter} relative `}>
           <div
