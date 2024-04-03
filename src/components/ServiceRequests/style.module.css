@@ -128,7 +128,8 @@
   @apply w-full;
 }
 .transferownership_wrapper {
-  @apply flex flex-col my-8 w-full md:h-[420px] overflow-y-scroll;
+  @apply flex flex-col my-8 w-full md:h-full overflow-y-scroll;
+  /* @apply flex flex-col my-8 w-full md:h-[420px] overflow-y-scroll; */
 }
 .main_sub_heading {
   @apply mt-6 lg:mt-8 font-medium text-16 tracking-0.3 lg:text-20 font-Poppins lg:tracking-0.4;
