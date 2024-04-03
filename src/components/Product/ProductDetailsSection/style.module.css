@@ -48,7 +48,7 @@
   @apply flex gap-2;
 }
 .item_name {
-  @apply text-16 mobile:text-20 xl:text-24 mobile:leading-8 xl:leading-10 font-medium text-45454A tracking-0.4 xl:tracking-[-0.48px] mobile:w-[256px] sm:w-full xl:w-[341px];
+  @apply text-16 mobile:text-20 xl:text-24 mobile:leading-8 xl:leading-10 font-medium text-45454A tracking-0.4 xl:tracking-[-0.48px] mobile:w-[256px] sm:w-full xl:w-full;
 }
 .rupeeIcon {
   @apply font-Inter;
