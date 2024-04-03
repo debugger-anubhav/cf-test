@@ -152,7 +152,8 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
             <div className={styles.button}>
               <p className={styles.back_txt}>Back to Cityfurnish</p>
               <img
-                src={`${IconLink + "home-cityfurnish.svg"}`}
+                // src={`${IconLink + "home-cityfurnish.svg"}`}
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"
                 className={styles.home_icon}
                 alt="home-icon"
                 loading="lazy"

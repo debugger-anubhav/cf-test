@@ -27,5 +27,5 @@
   @apply rounded-lg text-14 xl:text-16 font-medium text-71717A tracking-desc xl:tracking-0.3 border-2 border-71717A px-5 xl:px-8 w-full h-12 xl:h-14 py-2 flex justify-center items-center gap-1 md:gap-[10px];
 }
 .home_icon {
-  @apply w-4 h-4 md:w-6 md:h-5 text-222;
+  @apply w-4 h-4 md:w-6 md:h-6 text-222;
 }

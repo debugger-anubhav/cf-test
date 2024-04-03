@@ -305,7 +305,7 @@ const CitymaxHeader = ({zIndex}) => {
                   className={styles.home_icon}
                   alt="cityfurnish"
                 />
-                <p className={styles.cityfurnish_txt}>cityfurnish</p>
+                {/* <p className={styles.cityfurnish_txt}>cityfurnish</p> */}
               </div>
             </a>
           </div>
