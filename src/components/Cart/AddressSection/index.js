@@ -917,7 +917,7 @@ const AddressSection = () => {
               className={`!mt-0 ${otherStyles.cart_breakup} !flex-row`}
               onClick={() => setBreakupDrawer(true)}>
               <div className="flex flex-col w-fit">
-                <p className={otherStyles.total_text}>Total:</p>
+                <p className={otherStyles.total_text}>Now payable</p>
                 <div className={otherStyles.breakup_wrapper}>
                   <p className={otherStyles.view_cart_text}>
                     View cart breakup
@@ -932,7 +932,7 @@ const AddressSection = () => {
                 <p className={otherStyles.total_amount}>
                   <span className={otherStyles.rupeeIcon}>₹</span>
                   {billBreakup?.finalTotalPrice?.toFixed(2)}
-                  {billBreakup?.isMonthly && "/mo"}
+                  {/* {billBreakup?.isMonthly && "/mo"} */}
                 </p>
               </div>
             </div>

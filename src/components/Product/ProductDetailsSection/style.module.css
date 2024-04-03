@@ -11,7 +11,7 @@
   @apply text-14 leading-6 text-71717A font-Poppins;
 }
 .carousel_wrapper {
-  @apply w-full lg:w-[60%] macbook:w-[727px] 4xl:w-[55%] relative;
+  @apply w-full lg:w-[60%] macbook:w-[727px] 4xl:w-[55%] relative z-[-1];
 }
 .main_section {
   @apply flex flex-col lg:flex-row gap-6 -mt-4 md:mt-1 lg:mt-4;
