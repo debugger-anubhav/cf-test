@@ -550,14 +550,16 @@ const ProductDetails = ({params}) => {
       </div>
       <div className={styles.main_section}>
         <div className={`${styles.carousel_wrapper} ${loginModal && "z-[-1]"}`}>
-          <div className={styles.info}>
-            <InformationIcon color={"ffffff"} />
-            <p>
-              {soldOut
-                ? "SOLD OUT"
-                : "39 people ordered this in the last 24 hrs"}
-            </p>
-          </div>
+          {prodDetails?.[0]?.purchased_in_one_day > 0 && (
+            <div className={styles.info}>
+              <InformationIcon color={"ffffff"} />
+              <p>
+                {soldOut
+                  ? "SOLD OUT"
+                  : ` ${prodDetails?.[0]?.purchased_in_one_day} people ordered this in the last 24 hrs`}
+              </p>
+            </div>
+          )}
           <Carousel
             selectedItem={selectedIndex}
             showThumbs={false}
