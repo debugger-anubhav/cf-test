@@ -51,7 +51,7 @@ export const customStylesForSelect = {
   }),
 };
 
-function CencelOrder({prevScreen, data}) {
+function CencelOrder({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -82,7 +82,10 @@ function CencelOrder({prevScreen, data}) {
   };
 
   return (
-    <div className={`${styles.content_wrapper} !pb-0 !overflow-auto`}>
+    <div
+      className={`${styles.content_wrapper} !pb-0 !overflow-auto ${
+        isHelpDrawer && "!p-0"
+      }`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}

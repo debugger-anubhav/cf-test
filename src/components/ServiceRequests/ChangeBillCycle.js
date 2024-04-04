@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 import {CreateRequestPayload} from "@/constants/constant";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
-function ChangeBillCycle({prevScreen, data}) {
+function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -44,7 +44,10 @@ function ChangeBillCycle({prevScreen, data}) {
   };
 
   return (
-    <div className={`${styles.content_wrapper} !overflow-visible !pb-0`}>
+    <div
+      className={`${styles.content_wrapper} !overflow-visible !pb-0 ${
+        isHelpDrawer && "!p-0"
+      }`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}

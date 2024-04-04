@@ -10,7 +10,7 @@ import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 
-function Repair({prevScreen, data}) {
+function Repair({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -108,7 +108,7 @@ function Repair({prevScreen, data}) {
 
   return (
     <>
-      <div className={styles.content_wrapper}>
+      <div className={`${styles.content_wrapper} ${isHelpDrawer && "!p-0"}`}>
         <div className={styles.main_heading}>
           <BackIcon
             onClick={() => prevScreen(true)}

@@ -18,7 +18,7 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {baseInstance} from "@/network/axios";
 
-function SwapProduct({prevScreen, data}) {
+function SwapProduct({prevScreen, data, isHelpDrawer}) {
   const [showSwapScreen, setShowSwapScreen] = useState(1);
   const [ProductInfo, setProductInfo] = useState(data);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -44,7 +44,7 @@ function SwapProduct({prevScreen, data}) {
   }, [data]);
   return (
     <>
-      <div className={styles.content_wrapper}>
+      <div className={`${styles.content_wrapper} ${isHelpDrawer && "!p-0"}`}>
         <div className={styles.main_heading}>
           <BackIcon
             onClick={() => {

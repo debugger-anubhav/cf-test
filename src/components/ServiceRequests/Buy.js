@@ -10,7 +10,7 @@ import PickupReasonOptions from "./PickupReasonOptions";
 import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
-function Buy({heading, prevScreen, data}) {
+function Buy({heading, prevScreen, data, isHelpDrawer}) {
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
@@ -74,7 +74,8 @@ function Buy({heading, prevScreen, data}) {
         />
       ) : (
         <>
-          <div className={styles.content_wrapper}>
+          <div
+            className={`${styles.content_wrapper} ${isHelpDrawer && "!p-0"}`}>
             <div className={styles.main_heading}>
               <BackIcon
                 onClick={() => {

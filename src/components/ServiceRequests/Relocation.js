@@ -27,7 +27,7 @@ import {useAppSelector} from "@/store";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import commonStyles from "@/components/Documentation/common.module.css";
 
-function Relocation({prevScreen, data}) {
+function Relocation({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -149,7 +149,10 @@ function Relocation({prevScreen, data}) {
   // const handleDeleteFile = (val, index) => {};
   return (
     <>
-      <div className={`${styles.content_wrapper} !pb-[25px] `}>
+      <div
+        className={`${styles.content_wrapper} !pb-[25px] ${
+          isHelpDrawer && "!p-0"
+        } `}>
         <div className={styles.main_heading}>
           <BackIcon
             onClick={() => prevScreen(true)}

@@ -78,7 +78,7 @@ function ServiceRequestType({
       {currentScreen ? (
         <div
           className={`${styles.content_wrapper} !pb-4 ${
-            title === "Need help with..." && "!p-0"
+            isHelpDrawer && "!p-0"
           }`}>
           <div className={styles.main_heading}>
             {!isHelpDrawer && (
@@ -151,15 +151,24 @@ function ServiceRequestType({
       ) : (
         <>
           {selectedType === "cancellation" && (
-            <CancelOrder prevScreen={setCurrentScreen} data={productDetail} />
+            <CancelOrder
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              isHelpDrawer={isHelpDrawer}
+            />
           )}
           {selectedType === "upgrade" && (
-            <SwapProduct prevScreen={setCurrentScreen} data={productDetail} />
+            <SwapProduct
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              isHelpDrawer={isHelpDrawer}
+            />
           )}
           {selectedType === "ownership" && (
             <TransferOwnership
               prevScreen={setCurrentScreen}
               data={productDetail}
+              isHelpDrawer={isHelpDrawer}
             />
           )}
           {selectedType === "buy" && (
@@ -167,6 +176,7 @@ function ServiceRequestType({
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Buy"
+              isHelpDrawer={isHelpDrawer}
             />
           )}
           {selectedType === "installation" && (
@@ -174,28 +184,43 @@ function ServiceRequestType({
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Installation"
+              isHelpDrawer={isHelpDrawer}
             />
           )}
           {selectedType === "repair" && (
-            <Repair prevScreen={setCurrentScreen} data={productDetail} />
+            <Repair
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              isHelpDrawer={isHelpDrawer}
+            />
           )}
           {selectedType === "full_extension" && (
-            <ExtendTenure prevScreen={setCurrentScreen} orderId={orderId} />
+            <ExtendTenure
+              prevScreen={setCurrentScreen}
+              orderId={orderId}
+              isHelpDrawer={isHelpDrawer}
+            />
           )}
           {selectedType === "change_bill_cycle" && (
             <ChangeBillCycle
               prevScreen={setCurrentScreen}
               data={productDetail}
+              isHelpDrawer={isHelpDrawer}
             />
           )}
           {selectedType === "relocation" && (
-            <Relocation prevScreen={setCurrentScreen} data={productDetail} />
+            <Relocation
+              prevScreen={setCurrentScreen}
+              data={productDetail}
+              isHelpDrawer={isHelpDrawer}
+            />
           )}
           {selectedType === "request_pickup" && (
             <Buy
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Request order pickup"
+              isHelpDrawer={isHelpDrawer}
             />
           )}
           {selectedType === "cancel_mandate" && (
@@ -203,6 +228,7 @@ function ServiceRequestType({
               prevScreen={setCurrentScreen}
               data={productDetail}
               heading="Cancel mandate"
+              isHelpDrawer={isHelpDrawer}
             />
           )}
         </>

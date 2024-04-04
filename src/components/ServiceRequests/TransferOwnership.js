@@ -21,7 +21,7 @@ import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 
-function TransferOwnership({prevScreen, data}) {
+function TransferOwnership({prevScreen, data, isHelpDrawer}) {
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -131,7 +131,10 @@ function TransferOwnership({prevScreen, data}) {
 
   return (
     <>
-      <div className={`${styles.content_wrapper} flex-row`}>
+      <div
+        className={`${styles.content_wrapper} flex-row ${
+          isHelpDrawer && "!p-0"
+        }`}>
         {addressDrawer ? (
           <div className="">
             <div className={styles.main_heading}>

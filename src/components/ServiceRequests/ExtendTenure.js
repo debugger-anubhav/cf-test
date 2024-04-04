@@ -7,7 +7,7 @@ import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
 import {useRouter} from "next/navigation";
 
-function ExtendTenure({prevScreen, orderId}) {
+function ExtendTenure({prevScreen, orderId, isHelpDrawer}) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [count, setCount] = useState(5);
@@ -69,7 +69,8 @@ function ExtendTenure({prevScreen, orderId}) {
   }, [count]);
 
   return (
-    <div className={`${styles.content_wrapper} !pb-0`}>
+    <div
+      className={`${styles.content_wrapper} !pb-0 ${isHelpDrawer && "!p-0"}`}>
       <div className={styles.main_heading}>
         <BackIcon
           onClick={() => prevScreen(true)}

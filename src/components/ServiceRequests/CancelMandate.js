@@ -14,7 +14,7 @@ import {
 } from "@/constants/constant";
 import {cityUrl} from "../../../appConfig";
 
-function CancelMandate({prevScreen, data, heading}) {
+function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -55,7 +55,10 @@ function CancelMandate({prevScreen, data, heading}) {
 
   return (
     <>
-      <div className={`${styles.content_wrapper} md:!pb-0 md:!h-auto`}>
+      <div
+        className={`${styles.content_wrapper} md:!pb-0 md:!h-auto ${
+          isHelpDrawer && "!p-0"
+        }`}>
         <div className={styles.main_heading}>
           <BackIcon
             onClick={() => prevScreen(true)}
