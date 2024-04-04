@@ -137,7 +137,7 @@ input[type="number"]::-webkit-outer-spin-button {
   @apply !mt-0 !mb-3;
 }
 .buy_checkbox_info {
-  @apply flex gap-1 mt-[15px] items-center;
+  @apply flex gap-1 mt-[16px] items-center;
 }
 .buy_checkbox_info .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
   color: #5774ac !important;
