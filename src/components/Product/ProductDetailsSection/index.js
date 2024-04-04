@@ -555,7 +555,7 @@ const ProductDetails = ({params}) => {
             <p>
               {soldOut
                 ? "SOLD OUT"
-                : "39 people ordered this in the last 24hrs"}
+                : "39 people ordered this in the last 24 hrs"}
             </p>
           </div>
           <Carousel
