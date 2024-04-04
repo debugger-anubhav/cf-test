@@ -549,7 +549,7 @@ const ProductDetails = ({params}) => {
         ))}
       </div>
       <div className={styles.main_section}>
-        <div className={styles.carousel_wrapper}>
+        <div className={`${styles.carousel_wrapper} ${loginModal && "z-[-1]"}`}>
           <div className={styles.info}>
             <InformationIcon color={"ffffff"} />
             <p>
