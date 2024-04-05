@@ -917,7 +917,12 @@ const AddressSection = () => {
               className={`!mt-0 ${otherStyles.cart_breakup} !flex-row`}
               onClick={() => setBreakupDrawer(true)}>
               <div className="flex flex-col w-fit">
-                <p className={otherStyles.total_text}>Now payable</p>
+                <p className={otherStyles.total_text}>
+                  {getLocalStorage("isMonthly")
+                    ? "Now payable:"
+                    : "Total rent:"}
+                </p>
+
                 <div className={otherStyles.breakup_wrapper}>
                   <p className={otherStyles.view_cart_text}>
                     View cart breakup

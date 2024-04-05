@@ -888,7 +888,9 @@ const ShoppingCartSection = () => {
                   setBreakupDrawer(true);
                 }}>
                 <div className="flex justify-between">
-                  <p className={styles.total_text}>Total rent:</p>
+                  <p className={styles.total_text}>
+                    {isMonthly ? "Now payable:" : "Total rent:"}
+                  </p>
 
                   <p className={styles.total_amount}>
                     <span className={styles.rupeeIcon}>₹</span>
@@ -897,7 +899,6 @@ const ShoppingCartSection = () => {
                     ) : (
                       <>{parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}</>
                     )}
-                    {isMonthly ? "/mo" : ""}
                   </p>
                 </div>
                 {isMonthly && (
@@ -916,6 +917,16 @@ const ShoppingCartSection = () => {
                   <ArrowForw color={"#5774AC"} className={styles.for_arrow} />
                 </div>
               </div>
+
+              <div>
+                {!isMonthly && (
+                  <p className={styles.no_emi_cost_text}>
+                    No cost EMI of <span className="font-Inter">₹</span>3000.56
+                    / mo for 12 months also available at the checkout
+                  </p>
+                )}
+              </div>
+
               <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
                 <button
                   className={styles.proceed_button}
