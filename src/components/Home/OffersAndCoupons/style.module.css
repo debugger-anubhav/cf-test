@@ -20,7 +20,7 @@
   @apply mt-2 text-16 -tracking-[0.32px] w-max font-Poppins font-light xl:font-normal leading-normal text-white;
 }
 .copy_div {
-  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px] xl:mr-0;
+  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px] md:mr-0;
 }
 .line {
   @apply right-28 xl:right-32 3xl:right-40 absolute top-0 bottom-0;

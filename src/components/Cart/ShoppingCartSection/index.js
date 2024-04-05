@@ -89,11 +89,9 @@ const ShoppingCartSection = () => {
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
-  console.log(userIdToUse, "useridtouse");
   useEffect(() => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
-
   useEffect(() => {
     setArr(cartItems);
     if (cartItems[0]?.is_frp === 1) {
@@ -919,10 +917,13 @@ const ShoppingCartSection = () => {
               </div>
 
               <div>
-                {!isMonthly && (
+                {!isMonthly && billBreakup?.tenure === "12" && (
                   <p className={styles.no_emi_cost_text}>
-                    No cost EMI of <span className="font-Inter">₹</span>3000.56
-                    / mo for 12 months also available at the checkout
+                    No cost EMI of <span className="font-Inter">₹</span>
+                    <span>
+                      {(billBreakup?.finalTotalPrice / 12).toFixed(2)}
+                    </span>{" "}
+                    /mo for 12 months also available at the checkout
                   </p>
                 )}
               </div>
