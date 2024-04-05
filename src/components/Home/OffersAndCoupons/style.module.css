@@ -8,7 +8,7 @@
   @apply w-full overflow-scroll flex gap-3 3xl:gap-4 mt-4 xl:mt-8;
 }
 .card {
-  @apply cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px];
+  @apply cursor-pointer 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 pl-5 pr-[17px] xl:w-[395px]  w-[405px] 3xl:w-[423px];
   background: url("https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/coupon1.webp")
     no-repeat;
   background-size: cover;
@@ -20,7 +20,7 @@
   @apply mt-2 text-16 -tracking-[0.32px] w-max font-Poppins font-light xl:font-normal leading-normal text-white;
 }
 .copy_div {
-  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px];
+  @apply text-14 tracking-desc flex min-w-[6rem] xl:min-w-[5.7rem] h-9 bg-white rounded-[20px] justify-center gap-1 items-center mr-[-7px] xl:mr-0;
 }
 .line {
   @apply right-28 xl:right-32 3xl:right-40 absolute top-0 bottom-0;

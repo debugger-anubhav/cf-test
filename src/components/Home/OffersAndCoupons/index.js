@@ -108,19 +108,27 @@ const OffersAndCoupons = ({page}) => {
             <div className={`${styles.ellipse} ${styles.left}`}></div>
             <div className={`${styles.ellipse} ${styles.right}`}></div>
             <div className="xl:w-full">
-              <p className={styles.desc}>{`${item?.price_text} ${
-                item?.max_discount !== "0"
-                  ? `(up to Rs ${item?.max_discount})*`
-                  : ""
-              } `}</p>
-              {item?.price_below_text && (
+              <p
+                className={`${styles.desc} !whitespace-normal lg:pr-6 3xl:pr-10 !w-full`}>
+                {`${item?.price_text}
+                 ${
+                   item?.max_discount !== "0"
+                     ? `(up to Rs ${item?.max_discount})*`
+                     : ""
+                 }
+                 `}
+                {item?.price_below_text && (
+                  <>{item?.price_below_text.split(" ").slice(0, 7).join(" ")}</>
+                )}
+              </p>
+              {/* {item?.price_below_text && (
                 <p className={styles.desc}>
                   {item?.price_below_text.split(" ").slice(0, 7).join(" ")}
                 </p>
-              )}
+              )} */}
               <p className={styles.code}>Use Code {item?.coupon_code}</p>
             </div>
-            <div className={styles.line}></div>
+            <div className={`${styles.line} `}></div>
             <div className={styles.copy_div}>
               {item?.coupon_code && (
                 <button id={index} className="text-[#222] flex ">
