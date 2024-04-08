@@ -688,7 +688,7 @@ const ShoppingCartSection = () => {
                 <div className={styles.city_shield_head_div}>
                   <div className={styles.verify_icon_div}>
                     <VerifyIcon size={24} color={"#2D9469"} />
-                    <p className={styles.city_shield_head}>Cityshield </p>
+                    <p className={styles.city_shield_head}>City Shield </p>
                   </div>
                   <div>
                     {isChecked ? (

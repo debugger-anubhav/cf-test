@@ -56,7 +56,7 @@ const CityshieldDrawer = ({
           <p className={styles.value_added_txt}>Value added service</p>
           <div className={styles.flexx}>
             <VerifyIcon size={30} color={"#2D9469"} />
-            <p className={`${styles.city_shield_head} pl-1`}>City shield </p>
+            <p className={`${styles.city_shield_head} pl-1`}>City Shield </p>
           </div>
 
           <p className={styles.opt_for}>

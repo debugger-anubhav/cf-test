@@ -873,7 +873,7 @@ const ProductDetails = ({params}) => {
             <div className={`${styles.flexx} justify-between`}>
               <div className={styles.flexx}>
                 <VerifyIcon size={30} color={"#2D9469"} />
-                <p className={styles.city_shield_head}>City shield </p>
+                <p className={styles.city_shield_head}>City Shield </p>
               </div>
               <button className={styles.read_more}>Read More</button>
             </div>

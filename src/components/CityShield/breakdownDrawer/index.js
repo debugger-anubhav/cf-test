@@ -166,7 +166,7 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
                   <div>
                     <p className={commonStyles.price_label}>
                       {/* Remaining Cityshield amount (1.56 x 182) */}
-                      Remaining Cityshield amount{" "}
+                      Remaining City shield amount{" "}
                       {billBreakup?.perDayPrice && billBreakup?.remainingTenure
                         ? `${billBreakup?.perDayPrice} x  ${billBreakup?.remainingTenure}`
                         : ""}

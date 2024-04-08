@@ -226,7 +226,7 @@ export const MonthlyCard = ({
           <div className={`${styles.cityshield_row} `}>
             <div className={styles.flexx}>
               <VerifyIcon size={30} color={"#2D9469"} />
-              <p className={styles.city_shield_head}>City shield </p>
+              <p className={styles.city_shield_head}>City Shield </p>
             </div>
 
             <div>
