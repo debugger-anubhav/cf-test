@@ -315,7 +315,7 @@ const Header = ({page}) => {
               src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
               alt="cityfurnish-logo"
               onClick={e => {
-                e.preventDefault();
+                router.push("/");
               }}
               className={styles.main_logo}
             />

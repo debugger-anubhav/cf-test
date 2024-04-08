@@ -249,5 +249,5 @@
   @apply font-Poppins font-medium text-14 text-45454A leading-[16.94px];
 }
 .no_emi_cost_text {
-  @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%] my-6 md:w-[440px];
+  @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%] my-6 md:w-[440px] font-medium;
 }
