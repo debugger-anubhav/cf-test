@@ -301,25 +301,16 @@ const Header = ({page}) => {
               setClick={val => setClick(val)}
               click={click}
             />
-            {/* <a
-              href={"/"}
-              onClick={e => {
-                e.preventDefault();
-              }}> */}
-            {/* <p
-                className={styles.logo_text_main_header}
-                onClick={() => router.push("/")}>
-                cityfurnish
-              </p> */}
-            <img
-              src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
-              alt="cityfurnish-logo"
-              onClick={e => {
-                router.push("/");
-              }}
-              className={styles.main_logo}
-            />
-            {/* </a> */}
+            <a href={"/"}>
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
+                alt="cityfurnish-logo"
+                className={styles.main_logo}
+                width={"100%"}
+                height={"100%"}
+                loading="lazy"
+              />
+            </a>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer

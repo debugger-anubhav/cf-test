@@ -16,6 +16,7 @@ import {
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {Skeleton} from "@mui/material";
 
 export default function CommonDrawer({
   DrawerName,
@@ -43,6 +44,7 @@ export default function CommonDrawer({
   });
   const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState();
+  const [cityNameShow, setCityNameShow] = React.useState(null);
 
   React.useEffect(() => {
     setIsLogin(reduxLoginState);
@@ -88,6 +90,10 @@ export default function CommonDrawer({
   React.useEffect(() => {
     handleAuthentication();
   }, [isLogin]);
+
+  React.useEffect(() => {
+    setCityNameShow(homePageReduxData?.cityName);
+  }, [homePageReduxData?.cityName]);
 
   const handleMenu = (e, item) => {
     // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
@@ -144,26 +150,19 @@ export default function CommonDrawer({
         <div
           className={styles.drawer_close}
           onClick={toggleDrawer(anchor, false)}>
-          <Close
-            color={"#000"}
-            size={25}
-            className={styles.close_icon}
-            // onClick={() => toggleDrawer("left", false)}
-          />
+          <Close color={"#000"} size={25} className={styles.close_icon} />
         </div>
         <div className={styles.drawer_content}>
-          {/* <p className={styles.logo_text}>
-            <a href="/">cityfurnish</a>
-          </p> */}
-          <img
-            src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
-            alt="cityfurnish-logo"
-            onClick={e => {
-              e.preventDefault();
-              router.push("/");
-            }}
-            className={styles.drawer_logo}
-          />
+          <a href="/">
+            <img
+              src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
+              alt="cityfurnish-logo"
+              className={styles.drawer_logo}
+              width={"100%"}
+              height={"100%"}
+              loading="lazy"
+            />
+          </a>
           <div className={styles.menu_list}>
             <div
               className="lg:hidden"
@@ -434,7 +433,11 @@ export default function CommonDrawer({
           </div>
         ) : (
           <span className={styles.header_city_name}>
-            {params.city || homePageReduxData?.cityName}
+            {cityNameShow ? (
+              <>{params?.city || homePageReduxData?.cityName}</>
+            ) : (
+              <Skeleton variant="text" width={80} height={20} />
+            )}
             {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
           </span>
         )}

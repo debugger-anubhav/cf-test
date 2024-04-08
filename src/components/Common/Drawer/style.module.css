@@ -98,5 +98,5 @@
   @apply w-5 h-5;
 }
 .drawer_logo {
-  @apply sm:w-[135px] w-[125px] cursor-pointer m-[10px];
+  @apply sm:w-[135px] w-[125px] cursor-pointer mt-[10px];
 }

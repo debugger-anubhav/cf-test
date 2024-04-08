@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./style.module.css";
 import {DownloadForMobileImg, DownloadForWeb} from "@/assets/images";
 import Image from "next/image";
+import {useRouter} from "next/navigation";
 
 const DownloadForMobile = () => {
+  const router = useRouter();
   return (
     <div className={styles.main_container}>
       <div className={styles.web_container}>
@@ -22,6 +24,11 @@ const DownloadForMobile = () => {
           className={styles.download_image}
           width={720}
           height={1227}
+          onClick={() => {
+            router.push(
+              "https://test.rentofurniture.com/v1/get-app-on-devices/getAppOnDevice",
+            );
+          }}
         />
       </div>
     </div>
