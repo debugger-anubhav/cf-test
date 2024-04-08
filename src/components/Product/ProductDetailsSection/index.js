@@ -556,7 +556,7 @@ const ProductDetails = ({params}) => {
               <p>
                 {soldOut
                   ? "SOLD OUT"
-                  : ` ${prodDetails?.[0]?.purchased_in_one_day} people ordered this in the last 24 hrs`}
+                  : ` ${prodDetails?.[0]?.purchased_in_one_day} Rented in last 24 hrs`}
               </p>
             </div>
           )}

@@ -72,7 +72,7 @@ const NewlyLaunched = () => {
               className="w-full h-auto cursor-pointer "
               onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
               <a
-                onClick={e => e.preventDefault()}
+                // onClick={e => e.preventDefault()}
                 href={`/things/${ele.id}/${ele.seourl}`}
                 aria-label={ele?.product_name}
                 target="_self"

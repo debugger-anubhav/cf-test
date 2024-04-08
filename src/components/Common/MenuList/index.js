@@ -56,7 +56,7 @@ const MenuList = ({hasMb = true}) => {
           })}
           <a
             rel="noopner noreferrer"
-            target="_self"
+            target="_blank"
             aria-label="citymax"
             href="/citymax">
             <div className={styles.item_wrap}>CityMax</div>

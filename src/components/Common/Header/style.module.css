@@ -128,3 +128,6 @@
 .cart_link_wrapper {
   @apply relative;
 }
+.main_logo {
+  @apply lg:w-[175px] w-[95px] xs:w-[125px] cursor-pointer;
+}

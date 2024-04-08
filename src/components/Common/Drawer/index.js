@@ -152,9 +152,18 @@ export default function CommonDrawer({
           />
         </div>
         <div className={styles.drawer_content}>
-          <p className={styles.logo_text}>
+          {/* <p className={styles.logo_text}>
             <a href="/">cityfurnish</a>
-          </p>
+          </p> */}
+          <img
+            src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
+            alt="cityfurnish-logo"
+            onClick={e => {
+              e.preventDefault();
+              router.push("/");
+            }}
+            className={styles.drawer_logo}
+          />
           <div className={styles.menu_list}>
             <div
               className="lg:hidden"
@@ -210,7 +219,9 @@ export default function CommonDrawer({
               </p>
             ))}
             <p className={styles.menu_item}>
-              <a href={"/citymax"}>CityMax</a>
+              <a href={"/citymax"} target="_blank" rel="noreferrer">
+                CityMax
+              </a>
             </p>
 
             <div className={styles.divider}></div>
