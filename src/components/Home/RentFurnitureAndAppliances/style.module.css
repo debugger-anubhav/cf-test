@@ -5,7 +5,7 @@
   @apply text-20 xl:text-32 xl:leading-10 xl:tracking-0.6 font-medium leading-8 text-45454A tracking-heading;
 }
 .subhead {
-  @apply hidden xl:flex font-medium text-9A9AA2 leading-5 tracking-0.3 mt-1;
+  @apply hidden xl:flex font-medium text-71717A leading-5 tracking-0.3 mt-1;
 }
 .card_div {
   @apply mt-4 xl:mt-6 flex flex-wrap gap-4 xl:gap-6;
@@ -28,7 +28,7 @@
   @apply mt-1 xl:mt-3 text-45454A text-14 xl:text-20 xl:leading-normal font-medium tracking-desc xl:tracking-heading;
 }
 .desc {
-  @apply text-14 text-9A9AA2 leading-5 xl:w-[330px] macbook:w-[371px] hidden xl:flex;
+  @apply text-14 text-71717A leading-5 xl:w-[330px] macbook:w-[371px] hidden xl:flex;
 }
 .pricetag {
   @apply absolute bottom-6 left-11 hidden xl:block;

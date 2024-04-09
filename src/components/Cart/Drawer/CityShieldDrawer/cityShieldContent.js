@@ -103,7 +103,7 @@ const CityShieldContent = ({
               toggleDrawer();
               toggleCheckbox(true);
             }}>
-            Continue with Cityshield
+            Continue with City Shield
           </button>
           <p
             className={styles.risk_text}

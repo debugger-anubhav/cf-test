@@ -18,7 +18,9 @@ export default function ChatWithUs() {
           <p className={styles.sub_paragraph_details}>
             Write to us at
             <span className={styles.mail_address}>
-              <a href="mailto:hello@cityfurnish.com" className="text-[#48678B]">
+              <a
+                href="mailto:hello@cityfurnish.com"
+                className="text-[#48678B] underline">
                 hello@cityfurnish.com{" "}
               </a>
             </span>
@@ -28,7 +30,7 @@ export default function ChatWithUs() {
               <a
                 href={`tel:080-66084700 `}
                 target="_self"
-                className="text-[#48678B]">
+                className="text-[#48678B] underline">
                 080-66084700
               </a>
             </span>{" "}
