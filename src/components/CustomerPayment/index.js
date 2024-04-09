@@ -219,7 +219,8 @@ function CustomerPayment() {
         amount: values?.amount,
         name: "Cityfurnish",
         description: "Test Transaction",
-        image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+        image:
+          "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
         order_id: data?.raz_order_id,
         customer_id: data?.customer_id,
         handler: async function (response) {

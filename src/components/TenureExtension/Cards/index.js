@@ -144,7 +144,8 @@ export const MonthlyCard = ({
       recurring: "1",
       name: "Cityfurnish",
       description: "Easy payment registration",
-      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      image:
+        "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
       handler: function (res) {
         successHandlerCardTwo(
           res.razorpay_payment_id,

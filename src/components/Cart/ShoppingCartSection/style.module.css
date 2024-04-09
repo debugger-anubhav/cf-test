@@ -252,7 +252,7 @@
   @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%] my-6 md:w-[440px] font-medium;
 }
 .show_tenure_chip {
-  @apply flex font-medium lg:text-base text-12 lg:tracking-0.3 tracking-0.24 font-Poppins items-center lg:py-2 lg:px-3 py-1 px-2 rounded-lg text-45454A;
+  @apply flex font-medium lg:text-base text-12 lg:tracking-0.3 tracking-0.24 font-Poppins items-center lg:py-2 lg:px-3 py-1 px-2 rounded-lg text-45454A whitespace-nowrap;
   background: linear-gradient(90deg, #e8f0f6 0%, #ffffff 150%);
 }
 .card_top_row {

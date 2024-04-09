@@ -311,7 +311,8 @@ const AddressSection = () => {
       currency,
       name: "Cityfurnish",
       description: "Test Transaction",
-      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      image:
+        "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
       order_id: orderId,
       handler: async function (response) {
         setLoading(true);

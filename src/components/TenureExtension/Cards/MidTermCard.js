@@ -118,7 +118,8 @@ function MidTermCard({
       customer_id: customerId,
       name: "Cityfurnish",
       description: "Easy payment registration",
-      image: "https://rentofurniture.com/images/logo/FaviconNew.png",
+      image:
+        "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
       handler: function (res) {
         console.log(res, "res in handler");
         cartTypeOneHandler(res, customerId, apiData?.totalPrice, recId);

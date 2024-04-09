@@ -455,7 +455,7 @@ const ShoppingCartSection = () => {
         <div className={styles.main_container}>
           <div className={styles.left_div} id="leftDiv">
             <div className={styles.card_top_row}>
-              <h1 className={styles.head}>Shopping cart ({count})</h1>
+              <h1 className={styles.head}>Cart ({count})</h1>
               <div className={styles.show_tenure_chip}>
                 <span className="mr-1">
                   <img
