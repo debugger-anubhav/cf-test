@@ -389,6 +389,7 @@ const ProductDetails = ({params}) => {
 
   const handleGoToCart = () => {
     router.push("/cart");
+    window?.scrollTo(0, 0);
   };
   const notifyData = {
     userId: Number(decrypt(getLocalStorage("_ga"))),
