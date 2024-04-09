@@ -5,7 +5,7 @@
   @apply flex-col w-[288px] h-[52px];
 }
 .sub_paragraph {
-  @apply font-Poppins font-medium text-14 xs:text-base leading-5 tracking-tighter text-[#9A9AA2];
+  @apply font-Poppins font-medium text-14 xs:text-base leading-5 tracking-tighter text-71717A;
 }
 .sub_heading {
   @apply self-stretch text-[#45454A] font-Poppins text-20 xs:text-32 mt-3 not-italic font-medium leading-8 tracking-tighter;

@@ -5,7 +5,7 @@
   @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading xl:text-32 xl:leading-10 xl:tracking-0.6;
 }
 .subHeading {
-  @apply text-9A9AA2 font-Poppins font-medium leading-5 tracking-desc xl:tracking-0.3 pb-4;
+  @apply text-71717A font-Poppins font-medium leading-5 tracking-desc xl:tracking-0.3 pb-4;
 }
 .card_box {
   @apply flex w-full gap-4 xl:gap-6 3xl:gap-8 overflow-y-hidden overflow-x-scroll;
