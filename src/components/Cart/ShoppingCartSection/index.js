@@ -454,7 +454,21 @@ const ShoppingCartSection = () => {
 
         <div className={styles.main_container}>
           <div className={styles.left_div} id="leftDiv">
-            <h1 className={styles.head}>Shopping cart ({count})</h1>
+            <div className={styles.card_top_row}>
+              <h1 className={styles.head}>Shopping cart ({count})</h1>
+              <div className={styles.show_tenure_chip}>
+                <span className="mr-1">
+                  <img
+                    src="https://d3juy0zp6vqec8.cloudfront.net/images/timer.svg"
+                    alt="timer-icon"
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                Selected Tenure : {data?.cartItems?.[0]?.subproduct?.attr_name}
+              </div>
+            </div>
+
             <div className={styles.card_wrapper}>
               {arr?.map((item, index) => {
                 return (

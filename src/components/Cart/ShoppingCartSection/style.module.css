@@ -8,7 +8,7 @@
   @apply text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 text-45454A;
 }
 .card_wrapper {
-  @apply mt-8 flex flex-col gap-6 xl:gap-8;
+  @apply lg:mt-10 mt-8 flex flex-col gap-6 xl:gap-8;
 }
 .single_product_wrapper {
   @apply w-fit lg:w-[450px] xl:w-[537px]  flex gap-2 md:gap-4 xl:gap-6;
@@ -250,4 +250,11 @@
 }
 .no_emi_cost_text {
   @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%] my-6 md:w-[440px] font-medium;
+}
+.show_tenure_chip {
+  @apply flex font-medium lg:text-base text-12 lg:tracking-0.3 tracking-0.24 font-Poppins items-center lg:py-2 lg:px-3 py-1 px-2 rounded-lg text-45454A;
+  background: linear-gradient(90deg, #e8f0f6 0%, #ffffff 150%);
+}
+.card_top_row {
+  @apply flex justify-between items-center w-full;
 }
