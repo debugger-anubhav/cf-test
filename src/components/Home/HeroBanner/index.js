@@ -110,16 +110,19 @@ const HeroBanner = () => {
           infiniteLoop>
           {carouselImg?.map((item, index) => {
             return (
-              <img
-                src={item}
+              <div
+                className="flex"
                 key={index.toString()}
-                alt={"CarouselImg-" + index + 1}
-                width={1788}
-                height={746}
                 onClick={() => {
                   handleRedirection();
-                }}
-              />
+                }}>
+                <img
+                  src={item}
+                  alt={"CarouselImg-" + index + 1}
+                  width={1788}
+                  height={746}
+                />
+              </div>
             );
           })}
         </Carousel>
