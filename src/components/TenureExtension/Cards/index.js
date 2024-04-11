@@ -198,7 +198,9 @@ export const MonthlyCard = ({
         <div className="mt-4">
           {DiscountPoints?.map((item, index) => {
             return (
-              <p className={styles.discount_point} key={index.toString()}>
+              <p
+                className={`${styles.discount_point} flex`}
+                key={index.toString()}>
                 {index > 1 ? (
                   <RightIcon color={"#2D9469"} size={20} />
                 ) : (

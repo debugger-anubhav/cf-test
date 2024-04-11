@@ -153,12 +153,12 @@ const ShoppingCartSection = () => {
       : 0;
 
   const monthlyModeFeatures = [
-    "Get additional coupon upto 8%",
+    "Get additional discount upto 8%",
     "Pay as you use",
     "Mandatory Security Deposit",
   ];
   const upfrontModeFeatures = [
-    "Get additional coupons upto 20%",
+    "Get additional discount upto 20%",
     "Faster KYC",
     "No Security Deposit",
   ];

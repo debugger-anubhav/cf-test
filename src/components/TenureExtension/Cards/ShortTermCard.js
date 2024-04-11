@@ -198,8 +198,9 @@ function ShortTermCard({
 
       <div className={styles.discount_detail}>
         <p className={styles.discount_point}>
-          Get {items?.percent_off}% discount on extension of your tenure by
-          paying upfront.
+          {`Get ${items?.percent_off}% discount on extension of your tenure by paying upfront. (max`}
+          <span className="font-Inter"> ₹</span>
+          <span>{`1500)`}</span>
         </p>
         <div className="mt-4">
           {DiscountPoints?.map((item, index) => {

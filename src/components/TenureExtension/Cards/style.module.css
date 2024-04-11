@@ -29,7 +29,7 @@
   @apply bg-[#207B3A] flex justify-center xl:font-semibold items-center rounded-3xl w-[50px] mobile:w-[72px] xl:w-[93px] h-5 xl:h-7 text-[10px] mobile:text-12 tracking-0.24 xl:text-16 xl:tracking-0.3 leading-5 xl:leading-normal text-fff;
 }
 .discount_point {
-  @apply text-71717A lg:text-16 lg:tracking-0.3 text-14 tracking-desc font-Poppins flex items-center gap-2;
+  @apply text-71717A lg:text-16 lg:tracking-0.3 text-14 tracking-desc font-Poppins items-center gap-2;
 }
 .divider {
   @apply h-2 w-full border-b-[1px] border-dashed border-DDDDDF;

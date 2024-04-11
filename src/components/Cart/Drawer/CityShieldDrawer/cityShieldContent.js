@@ -111,7 +111,7 @@ const CityShieldContent = ({
               toggleCheckbox(false);
               toggleDrawer();
             }}>
-            No, I wanna risk damaging the furniture & Applicances
+            No, I'll assume responsibility for damages
           </p>
         </>
       )}
