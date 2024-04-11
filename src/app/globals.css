@@ -40,24 +40,25 @@ body h1 h2 h3 h4 h5 h6 p {
 .mapped_filter::-webkit-scrollbar-thumb {
   width: 5px !important;
 }
-.slide .cursor-pointer {
+
+.landing_page_carousel .slide .cursor-pointer {
   width: 95% !important;
   margin: auto !important;
 }
-.landing_page_carousel .carousel .control-dots {
+/* .landing_page_carousel .carousel .control-dots {
   width: fit-content !important;
   border-radius: 12px;
   border: 2px solid var(--grey-grey-100, #f7f7f8);
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(38.787879943847656px);
   margin: 10px 0 0 !important;
-}
+} */
 .carousel.carousel-slider {
   display: flex;
   justify-content: center;
   overflow: visible !important;
 }
-.landing_page_carousel .carousel .control-dots .dot {
+/* .landing_page_carousel .carousel .control-dots .dot {
   background: white !important;
   opacity: 1 !important;
   margin-bottom: 0.2rem !important;
@@ -67,7 +68,7 @@ body h1 h2 h3 h4 h5 h6 p {
 }
 .landing_page_carousel .control-dots {
   bottom: -14px !important;
-}
+} */
 
 .react-responsive-modal-modal {
   @apply absolute xl:w-[345px] md:w-[300px] w-full bg-white border top-[6.5rem] xl:right-[19.5%] rounded-lg z-[111] h-[416px] overflow-y-scroll;

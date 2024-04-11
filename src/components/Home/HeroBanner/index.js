@@ -6,7 +6,7 @@ import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-import Image from "next/image";
+// import Image from "next/image";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -23,7 +23,11 @@ const HeroBanner = () => {
     "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_5.webp",
     "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_6.webp",
   ];
-
+  const mobileCarouseImg = [
+    HeroBannerImages.HeroBannerImageOne,
+    HeroBannerImages.HeroBannerImageTwo,
+    HeroBannerImages.HeroBannerImageTwo,
+  ];
   const handleRedirection = () => {
     if (setshowLinkForRentPage) {
       router.push(
@@ -41,7 +45,7 @@ const HeroBanner = () => {
   return (
     <div>
       <div className={`${styles.hero_banner_main} landing_page_carousel`}>
-        <Carousel showStatus={false} showArrows={false} showThumbs={false}>
+        {/* <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className={styles.hero_banner_cursor_pointer}
             onClick={() => {
@@ -55,6 +59,12 @@ const HeroBanner = () => {
               className={styles.carousel_images}
               alt="hero-banner-1"
             />
+          </div>
+          <div className={styles.hero_banner_cursor_pointer}
+            onClick={() => {
+              handleRedirection();
+            }}>
+
           </div>
           <div
             className={styles.hero_banner_cursor_pointer}
@@ -80,6 +90,31 @@ const HeroBanner = () => {
               alt="hero-banner-3"
             />
           </div>
+        </Carousel> */}
+        <Carousel
+          showStatus={false}
+          showArrows={true}
+          showThumbs={false}
+          autoPlay
+          infiniteLoop>
+          {mobileCarouseImg?.map((item, index) => {
+            return (
+              <div
+                className="flex"
+                key={index.toString()}
+                onClick={() => {
+                  handleRedirection();
+                }}>
+                <img
+                  src={item}
+                  alt={"CarouselImg-" + index + 1}
+                  width={656}
+                  height={298}
+                  className="cursor-pointer"
+                />
+              </div>
+            );
+          })}
         </Carousel>
       </div>
 
@@ -107,7 +142,8 @@ const HeroBanner = () => {
           showArrows={true}
           showThumbs={false}
           autoPlay
-          infiniteLoop>
+          infiniteLoop
+          width={"100%"}>
           {carouselImg?.map((item, index) => {
             return (
               <div
@@ -119,9 +155,9 @@ const HeroBanner = () => {
                 <img
                   src={item}
                   alt={"CarouselImg-" + index + 1}
-                  width={1788}
-                  height={746}
-                  className="cursor-pointer"
+                  width={926}
+                  height={386}
+                  className="cursor-pointer rounded-lg"
                 />
               </div>
             );
