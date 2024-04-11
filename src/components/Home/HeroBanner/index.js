@@ -14,6 +14,16 @@ const HeroBanner = () => {
   const [setshowLinkForRentPage, setSetshowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
+
+  const carouselImg = [
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_1.webp",
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_3.webp",
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_4.webp",
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_5.webp",
+    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_6.webp",
+  ];
+
   const handleRedirection = () => {
     if (setshowLinkForRentPage) {
       router.push(
@@ -73,8 +83,8 @@ const HeroBanner = () => {
         </Carousel>
       </div>
 
-      <div className={styles.hero_banner_wrapper}>
-        <a
+      <div className={`${styles.hero_banner_wrapper} flex-col`}>
+        {/* <a
           href={
             setshowLinkForRentPage
               ? `/${homePageReduxData?.cityName
@@ -91,7 +101,31 @@ const HeroBanner = () => {
             height={746}
             loading="eager"
           />
-        </a>
+        </a> */}
+        <Carousel
+          showStatus={false}
+          showArrows={false}
+          showThumbs={false}
+          autoPlay
+          infiniteLoop>
+          {carouselImg?.map((item, index) => {
+            return (
+              // <a
+              //   href={`/${homePageReduxData?.cityName
+              //     .replace(/\//g, "-")
+              //     .toLowerCase()}/rent`}>
+              <img
+                src={item}
+                key={index.toString()}
+                alt={"CarouselImg-" + index + 1}
+                onClick={() => {
+                  handleRedirection();
+                }}
+              />
+              // </a>
+            );
+          })}
+        </Carousel>
       </div>
     </div>
   );
