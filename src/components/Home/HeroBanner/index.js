@@ -110,19 +110,16 @@ const HeroBanner = () => {
           infiniteLoop>
           {carouselImg?.map((item, index) => {
             return (
-              // <a
-              //   href={`/${homePageReduxData?.cityName
-              //     .replace(/\//g, "-")
-              //     .toLowerCase()}/rent`}>
               <img
                 src={item}
                 key={index.toString()}
                 alt={"CarouselImg-" + index + 1}
+                width={1788}
+                height={746}
                 onClick={() => {
                   handleRedirection();
                 }}
               />
-              // </a>
             );
           })}
         </Carousel>
