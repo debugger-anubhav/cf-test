@@ -48,6 +48,7 @@ import LoginModal from "@/components/LoginPopups/index";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import Image from "next/image";
+import {RiSparklingFill} from "react-icons/ri";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -930,15 +931,26 @@ const ShoppingCartSection = () => {
                 </div>
               </div>
 
-              <div>
+              <div className={styles.no_emi_wrapper}>
                 {!isMonthly && billBreakup?.tenure === "12" && (
-                  <p className={styles.no_emi_cost_text}>
-                    No cost EMI of <span className="font-Inter">₹</span>
-                    <span>
-                      {(billBreakup?.finalTotalPrice / 12).toFixed(2)}
-                    </span>{" "}
-                    /mo for 12 months available at the checkout
-                  </p>
+                  <div className="flex">
+                    <RiSparklingFill
+                      size={26}
+                      color={"#E3E1DC"}
+                      className="mr-1 hidden lg:flex"
+                    />
+                    <p className={styles.no_emi_cost_text}>
+                      No cost EMI of{" "}
+                      <span
+                        className={`${styles.no_emi_special_text} font-Inter`}>
+                        ₹
+                      </span>
+                      <span className={styles.no_emi_special_text}>
+                        {(billBreakup?.finalTotalPrice / 12).toFixed(1)} /mo
+                      </span>{" "}
+                      for 12 months available at the checkout
+                    </p>
+                  </div>
                 )}
               </div>
 

@@ -104,7 +104,7 @@
   @apply text-9A9AA2 font-medium text-12 xl:text-14  leading-5 tracking-0.24 xl:tracking-desc;
 }
 .cart_breakup {
-  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[2px] hover:p-[15px] hover:border-[#5774AC] flex justify-between mt-4 flex-col;
+  @apply cursor-pointer md:w-[440px] lg:w-full xl:w-[440px] p-4 rounded-lg border border-DDDDDF hover:border-[2px] hover:p-[15px] hover:border-[#5774AC] flex justify-between mt-4 flex-col bg-fff;
 }
 .breakup_wrapper {
   @apply flex gap-1 items-center mt-1 xl:mt-[11px] 4xl:mt-0;
@@ -249,7 +249,7 @@
   @apply font-Poppins font-medium text-14 text-45454A leading-[16.94px];
 }
 .no_emi_cost_text {
-  @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%] my-6 md:w-[440px] font-medium;
+  @apply text-71717A font-Poppins text-14 leading-5 tracking-[-2%]  font-medium;
 }
 .show_tenure_chip {
   @apply flex font-medium lg:text-base text-12 lg:tracking-0.3 tracking-0.24 font-Poppins items-center lg:py-2 lg:px-3 py-1 px-2 rounded-lg text-45454A whitespace-nowrap;
@@ -257,4 +257,13 @@
 }
 .card_top_row {
   @apply flex justify-between items-center w-full;
+}
+.no_emi_special_text {
+  background: -webkit-linear-gradient(90deg, #f6b704 0%, #906b02 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.no_emi_wrapper {
+  @apply items-center w-full flex justify-center md:w-[440px] text-center py-6 rounded-lg  relative z-[-1];
+  /* background: linear-gradient(0deg, #F8D584 0%, #DDDDDF 78.57%); */
 }
