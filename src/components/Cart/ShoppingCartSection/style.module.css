@@ -269,10 +269,5 @@
   background: url("https://d3juy0zp6vqec8.cloudfront.net/images/no-cost-emi-bg.webp")
     no-repeat;
   background-position: center;
-  background-size: 100% 56px;
-}
-@media screen and (min-width: 768) {
-  .no_emi_wrapper {
-    background-size: 440px 72px;
-  }
+  background-size: 100% 72px;
 }
