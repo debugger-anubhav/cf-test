@@ -30,7 +30,7 @@
   @apply text-14 text-45454A leading-5 font-medium;
 }
 .time {
-  @apply text-12 text-71717A leading-5;
+  @apply text-12 text-[#6a6a6a] leading-5;
 }
 .social_media_icons_div {
   @apply flex w-full flex-wrap justify-center mobile:justify-start items-center gap-5 xl:gap-4 mt-8 xl:mt-4;

@@ -121,6 +121,7 @@ const HeroBanner = () => {
                   alt={"CarouselImg-" + index + 1}
                   width={1788}
                   height={746}
+                  className="cursor-pointer"
                 />
               </div>
             );

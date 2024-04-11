@@ -1,5 +1,5 @@
 .main_container {
-  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between pb-[100px] lg:pb-0;
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between pb-[120px] lg:pb-0;
 }
 .left_div {
   @apply pb-6;
@@ -264,6 +264,15 @@
   -webkit-text-fill-color: transparent;
 }
 .no_emi_wrapper {
-  @apply items-center w-full flex justify-center md:w-[440px] text-center py-6 rounded-lg  relative z-[-1];
+  @apply items-center w-full flex justify-center md:w-[440px] text-center pt-6 p-3 lg:px-6 rounded-lg  relative z-[-1] mt-[-12px];
   /* background: linear-gradient(0deg, #F8D584 0%, #DDDDDF 78.57%); */
+  background: url("https://d3juy0zp6vqec8.cloudfront.net/images/no-cost-emi-bg.webp")
+    no-repeat;
+  background-position: center;
+  background-size: 100% 56px;
+}
+@media screen and (min-width: 768) {
+  .no_emi_wrapper {
+    background-size: 440px 72px;
+  }
 }

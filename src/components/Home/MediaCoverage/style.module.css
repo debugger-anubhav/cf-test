@@ -2,7 +2,7 @@
   @apply pb-8 pt-2 mt-6 xl:mt-[88px] pl-0 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px];
 }
 .label {
-  @apply text-14 xl:text-16 pl-4 md:pl-0 font-medium leading-5 tracking-desc xl:tracking-0.3 font-Poppins text-71717A;
+  @apply text-14 xl:text-16 pl-4 md:pl-0 font-medium leading-5 tracking-desc xl:tracking-0.3 font-Poppins text-[#6a6a6a];
 }
 .heading {
   @apply text-20 xl:text-32 pl-4 md:pl-0 font-medium leading-8 xl:leading-10 tracking-heading xl:tracking-0.6 font-Poppins text-45454A;
