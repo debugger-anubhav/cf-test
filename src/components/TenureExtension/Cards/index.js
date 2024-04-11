@@ -39,7 +39,7 @@ export const MonthlyCard = ({
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const PaymentModeOpt = ["Credit/Debit card", "Netbanking", "UPI"];
+  const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
   const [selectedOption, setSelectedOption] = useState(0);
   const [cityShieldDrawerOpenForMonthly, setcityShieldDrawerOpenForMonthly] =
     useState(false);

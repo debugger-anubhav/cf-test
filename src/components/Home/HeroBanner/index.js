@@ -104,7 +104,7 @@ const HeroBanner = () => {
         </a> */}
         <Carousel
           showStatus={false}
-          showArrows={false}
+          showArrows={true}
           showThumbs={false}
           autoPlay
           infiniteLoop>
