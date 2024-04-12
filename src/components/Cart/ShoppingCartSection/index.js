@@ -940,13 +940,18 @@ const ShoppingCartSection = () => {
                       className="mr-1 hidden lg:flex"
                     />
                     <p className={styles.no_emi_cost_text}>
-                      No cost EMI of{" "}
+                      No Cost EMI of{" "}
                       <span
                         className={`${styles.no_emi_special_text} font-Inter`}>
                         ₹
                       </span>
                       <span className={styles.no_emi_special_text}>
-                        {(billBreakup?.finalTotalPrice / 12).toFixed(1)} /mo
+                        {/* {(billBreakup?.finalTotalPrice / 12).toFixed(1)}/mo */}
+                        {billBreakup?.finalTotalPrice &&
+                          ((billBreakup.finalTotalPrice / 12) % 1 === 0
+                            ? (billBreakup.finalTotalPrice / 12).toFixed(0)
+                            : (billBreakup.finalTotalPrice / 12).toFixed(1)) +
+                            "/mo"}
                       </span>{" "}
                       for 12 months available at the checkout
                     </p>
