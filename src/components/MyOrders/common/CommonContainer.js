@@ -67,7 +67,7 @@ const CommonContainer = ({
           <div className={styles.left_part}>
             <img
               className="w-10 h-10"
-              alt={statusLabels[item.zoho_sub_status.toLowerCase()]}
+              alt={statusLabels[item.zoho_sub_status?.toLowerCase()]}
               src={
                 tab === 0
                   ? IconLink +
