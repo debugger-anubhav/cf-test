@@ -953,7 +953,7 @@ const ShoppingCartSection = () => {
                             : (billBreakup.finalTotalPrice / 12).toFixed(1)) +
                             "/mo"}
                       </span>{" "}
-                      for 12 months available at the checkout
+                      for 12 months available.
                     </p>
                   </div>
                 )}
