@@ -1,5 +1,5 @@
 "use client";
-import {HeroBannerImages} from "@/assets/images";
+// import {HeroBannerImages} from "@/assets/images";
 import React, {useEffect, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
@@ -23,11 +23,11 @@ const HeroBanner = () => {
     "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_5.webp",
     "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_6.webp",
   ];
-  const mobileCarouseImg = [
-    HeroBannerImages.HeroBannerImageOne,
-    HeroBannerImages.HeroBannerImageTwo,
-    HeroBannerImages.HeroBannerImageTwo,
-  ];
+  // const mobileCarouseImg = [
+  //   HeroBannerImages.HeroBannerImageOne,
+  //   HeroBannerImages.HeroBannerImageTwo,
+  //   HeroBannerImages.HeroBannerImageTwo,
+  // ];
   const handleRedirection = () => {
     if (setshowLinkForRentPage) {
       router.push(
@@ -44,8 +44,8 @@ const HeroBanner = () => {
 
   return (
     <div>
-      <div className={`${styles.hero_banner_main} landing_page_carousel`}>
-        {/* <Carousel showStatus={false} showArrows={false} showThumbs={false}>
+      {/* <div className={`${styles.hero_banner_main} landing_page_carousel`}> */}
+      {/* <Carousel showStatus={false} showArrows={false} showThumbs={false}>
           <div
             className={styles.hero_banner_cursor_pointer}
             onClick={() => {
@@ -91,7 +91,7 @@ const HeroBanner = () => {
             />
           </div>
         </Carousel> */}
-        <Carousel
+      {/* <Carousel
           showStatus={false}
           showArrows={true}
           showThumbs={false}
@@ -115,8 +115,8 @@ const HeroBanner = () => {
               </div>
             );
           })}
-        </Carousel>
-      </div>
+        </Carousel> */}
+      {/* </div> */}
 
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
         {/* <a
