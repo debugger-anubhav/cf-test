@@ -39,7 +39,8 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   );
   const getFaqsCitymax = () => {
     baseInstance
-      .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
+      .get("http://43.205.53.146/ajxapi/frp_faq_details")
+      // .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
       .then(res => {
         setFaqs(res?.data?.data?.content);
         console.log(res?.data?.data?.content, ";;;;;;;;;;");

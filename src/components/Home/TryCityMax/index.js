@@ -73,7 +73,7 @@ const TryCityMax = () => {
             <span className={styles.rupeeIcon}>₹</span>2,999/month.
           </p>
           <a
-            href="https://test.rentofurniture.com/citymax"
+            href="/citymax"
             aria-label="Check our plans"
             target="_blank"
             rel="noreferrer">

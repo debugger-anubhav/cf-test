@@ -143,7 +143,8 @@ const HeroBanner = () => {
           showThumbs={false}
           autoPlay
           infiniteLoop
-          width={"100%"}>
+          width={"100%"}
+          swipeable>
           {carouselImg?.map((item, index) => {
             return (
               <div

@@ -26,7 +26,7 @@ const DownloadForMobile = () => {
           height={1227}
           onClick={() => {
             router.push(
-              "https://test.rentofurniture.com/v1/get-app-on-devices/getAppOnDevice",
+              "http://43.205.53.146/v1/get-app-on-devices/getAppOnDevice",
             );
           }}
         />

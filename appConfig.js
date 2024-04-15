@@ -6,12 +6,14 @@ export const AppEnv = {
 const appEnv = AppEnv.STG;
 
 const ConfigurationProd = {
-  BASE_URL: "https://test.rentofurniture.com/api/",
+  BASE_URL: "http://43.205.53.146/api/",
+  // BASE_URL: "https://test.rentofurniture.com/api/",
   // BASE_URL: "http://3.6.205.109:4000/api/",
 };
 
 const ConfigurationStaging = {
-  BASE_URL: "https://test.rentofurniture.com/api/",
+  BASE_URL: "http://43.205.53.146/api/",
+  // BASE_URL: "https://test.rentofurniture.com/api/",
   // BASE_URL: "http://3.6.205.109:4000/api/",
 };
 
@@ -36,3 +38,4 @@ export const RazorpayThemeColor = "#3E688E";
 
 // export const categoryImageBaseUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
+export const BASEURL = "http://43.205.53.146/api/";

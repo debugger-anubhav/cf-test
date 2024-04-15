@@ -24,7 +24,7 @@ export default function MainSection() {
   const handleSubmit = values => {
     baseInstance
       .post(endPoints.feedback, {
-        feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
+        feedback_url: `http://43.205.53.146/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
         rating: values.ratingnumber,
         comment: values.textarea,
@@ -44,7 +44,7 @@ export default function MainSection() {
   const getFeedbackData = () => {
     baseInstance
       .post(endPoints.getFeedbackData, {
-        feedback_url: `https://test.rentofurniture.com/fb/${params?.code}`,
+        feedback_url: `http://43.205.53.146/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
       })
       .then(res => {

@@ -467,7 +467,7 @@ export const FooterItems = [
             },
             {
               text: "Refer a Friend",
-              link: "https://test.rentofurniture.com/referral",
+              link: "/referral",
             },
             {
               text: "Career",

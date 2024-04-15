@@ -26,6 +26,7 @@ import TextContent from "@/components/SSRPageSeo/SsrTextContent";
 import Footer from "@/components/SSRPageSeo/SsrFooter";
 import Subproduct from "./RentAllProducts";
 import {redirect} from "next/navigation";
+import {BASEURL} from "../../../../appConfig";
 
 const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
 const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
@@ -64,8 +65,8 @@ async function create(params) {
   ) {
     const catId = params.category === "appliances-rental" ? 26 : 27;
     const data = await fetch(
-      "https://test.rentofurniture.com/api/" +
-        endPoints.seoMetaData(params.city?.toLowerCase(), catId),
+      // "https://test.rentofurniture.com/api/" +
+      BASEURL + endPoints.seoMetaData(params.city?.toLowerCase(), catId),
       {
         method: "GET",
         headers: {
@@ -76,20 +77,17 @@ async function create(params) {
     );
     return data.json();
   } else {
-    const data = await fetch(
-      "https://test.rentofurniture.com/api/" + endPoints.categoryMetaData,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Apikey: apiKey,
-        },
-        body: JSON.stringify({
-          cityName: params.city?.toLowerCase(),
-          seourl: params.category,
-        }),
+    const data = await fetch(BASEURL + endPoints.categoryMetaData, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Apikey: apiKey,
       },
-    );
+      body: JSON.stringify({
+        cityName: params.city?.toLowerCase(),
+        seourl: params.category,
+      }),
+    });
     return data.json();
   }
 }
@@ -97,16 +95,13 @@ async function create(params) {
 async function getAllCitiesList() {
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
   try {
-    const data = await fetch(
-      "https://test.rentofurniture.com/api/" + endPoints.cityList,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Apikey: apiKey,
-        },
+    const data = await fetch(BASEURL + endPoints.cityList, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Apikey: apiKey,
       },
-    );
+    });
 
     return data.json();
   } catch (error) {
