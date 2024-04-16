@@ -28,8 +28,11 @@ export const AppConfig = {
 export const cityUrl = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 // export const razorpayKeyOwn = "rzp_test_8xqfCdTnoga4Yi";
-export const razorpayKeyOwn = "rzp_test_kWnrtCXOsb1s57";
-export const razorpayKey = "rzp_test_kWnrtCXOsb1s57";
+
+// export const razorpayKeyOwn = "rzp_test_kWnrtCXOsb1s57";
+// export const razorpayKey = "rzp_test_kWnrtCXOsb1s57";
+export const razorpayKeyOwn = "rzp_live_qHdkNZaUW7tkuR";
+export const razorpayKey = "rzp_live_qHdkNZaUW7tkuR";
 
 export const RazorpayThemeColor = "#3E688E";
 
