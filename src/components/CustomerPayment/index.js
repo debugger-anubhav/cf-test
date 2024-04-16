@@ -530,7 +530,6 @@ function CustomerPayment() {
                             onClick={() => {
                               toggleLoginModal(true);
                             }}
-                            // href="https://test.rentofurniture.com/user_sign_up"
                             className="text-5774AC cursor-pointer !tracking-desc xl:!tracking-0.3">
                             Login{" "}
                           </a>

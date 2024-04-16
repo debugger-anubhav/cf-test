@@ -320,9 +320,6 @@ const CitymaxHeader = ({zIndex}) => {
                     router.push("/wishlist");
                   } else {
                     toggleLoginModal(true);
-                    // router.push(
-                    //   "https://test.rentofurniture.com/user_sign_up",
-                    // );
                   }
                 }}>
                 <div className={`w-100 h-100 absolute z-10`}></div>

@@ -10,6 +10,7 @@ import {endPoints} from "@/network/endPoints";
 import {useParams, useRouter} from "next/navigation";
 import {showToastNotification} from "../../Common/Notifications/toastUtils";
 import {baseInstance} from "@/network/axios";
+import domain from "../../../../appConfig";
 
 export default function MainSection() {
   const params = useParams();
@@ -24,7 +25,7 @@ export default function MainSection() {
   const handleSubmit = values => {
     baseInstance
       .post(endPoints.feedback, {
-        feedback_url: `http://43.205.53.146/fb/${params?.code}`,
+        feedback_url: `${domain}/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
         rating: values.ratingnumber,
         comment: values.textarea,
@@ -44,7 +45,7 @@ export default function MainSection() {
   const getFeedbackData = () => {
     baseInstance
       .post(endPoints.getFeedbackData, {
-        feedback_url: `http://43.205.53.146/fb/${params?.code}`,
+        feedback_url: `${domain}}/fb/${params?.code}`,
         customer_contact_no: params.mobilenumber,
       })
       .then(res => {

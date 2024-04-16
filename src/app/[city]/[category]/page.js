@@ -65,7 +65,6 @@ async function create(params) {
   ) {
     const catId = params.category === "appliances-rental" ? 26 : 27;
     const data = await fetch(
-      // "https://test.rentofurniture.com/api/" +
       BASEURL + endPoints.seoMetaData(params.city?.toLowerCase(), catId),
       {
         method: "GET",

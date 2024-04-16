@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import {DownloadForMobileImg, DownloadForWeb} from "@/assets/images";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
+import {domain} from "../../../../appConfig";
 
 const DownloadForMobile = () => {
   const router = useRouter();
@@ -25,9 +26,7 @@ const DownloadForMobile = () => {
           width={720}
           height={1227}
           onClick={() => {
-            router.push(
-              "http://43.205.53.146/v1/get-app-on-devices/getAppOnDevice",
-            );
+            router.push(`${domain}/v1/get-app-on-devices/getAppOnDevice`);
           }}
         />
       </div>
