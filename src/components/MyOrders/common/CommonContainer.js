@@ -23,6 +23,7 @@ export const statusToImageMap = {
   "kyc appproved": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
+  // stopped: "inactive-subscription.svg",
 };
 
 export const statusLabels = {
@@ -73,7 +74,9 @@ const CommonContainer = ({
                   ? IconLink +
                     (statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
                       "payment-failed.svg")
-                  : IconLink + statusToImageMap[item?.status?.toLowerCase()]
+                  : IconLink +
+                    (statusToImageMap[item?.status?.toLowerCase()] ||
+                      "inactive-subscription.svg")
               }
               loading="lazy"
             />

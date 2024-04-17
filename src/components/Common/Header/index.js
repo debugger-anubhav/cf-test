@@ -308,7 +308,6 @@ const Header = ({page}) => {
                 className={styles.main_logo}
                 width={"100%"}
                 height={"100%"}
-                loading="lazy"
               />
             </a>
             <div className={styles.header_city_wrapper}>
