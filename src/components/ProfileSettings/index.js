@@ -146,11 +146,13 @@ const ProfileSettings = () => {
         );
       });
   };
+  const userIdFromStorage = decrypt(getLocalStorage("_ga"));
 
   const handleUpdateUserDetails = async values => {
     try {
       const body = {
-        id: parseInt(useridFromStorage),
+        // id: parseInt(useridFromStorage),
+        id: userIdFromStorage,
         full_name: values.fullName,
         phone_no: values.contactNumber,
         email: values.email,
