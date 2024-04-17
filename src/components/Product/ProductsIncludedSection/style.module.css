@@ -29,7 +29,7 @@
   @apply capitalize text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal text-71717A;
 }
 .label {
-  @apply capitalize font-medium min-w-[80px] lg:min-w-[60px] xl:min-w-[85px]  text-45454A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
+  @apply capitalize font-medium min-w-[90px] xl:min-w-[85px]  text-45454A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
 }
 .info_list {
   @apply flex flex-col gap-y-3 xl:gap-y-4 mt-[14px];
