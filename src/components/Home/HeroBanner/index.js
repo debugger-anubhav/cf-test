@@ -16,25 +16,27 @@ const HeroBanner = () => {
   );
 
   const carouselImg = [
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_1.webp",
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_3.webp",
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_4.webp",
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_5.webp",
-    "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_6.webp",
+    {
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
+      link: `/${homePageReduxData?.cityName
+        .replace(/\//g, "-")
+        .toLowerCase()}/home-furniture-rental`,
+    },
+    {
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
+      link: `/${homePageReduxData?.cityName
+        .replace(/\//g, "-")
+        .toLowerCase()}/home-appliances-rental`,
+    },
+    {
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+      link: "/citymax",
+    },
   ];
-  // const mobileCarouseImg = [
-  //   HeroBannerImages.HeroBannerImageOne,
-  //   HeroBannerImages.HeroBannerImageTwo,
-  //   HeroBannerImages.HeroBannerImageTwo,
-  // ];
-  const handleRedirection = () => {
+
+  const handleRedirection = link => {
     if (setshowLinkForRentPage) {
-      router.push(
-        `/${homePageReduxData?.cityName
-          .replace(/\//g, "-")
-          .toLowerCase()}/rent`,
-      );
+      router.push(link);
     }
   };
 
@@ -148,13 +150,13 @@ const HeroBanner = () => {
           {carouselImg?.map((item, index) => {
             return (
               <div
-                className="flex"
+                className="flex cursor-pointer"
                 key={index.toString()}
                 onClick={() => {
-                  handleRedirection();
+                  handleRedirection(item?.link);
                 }}>
                 <img
-                  src={item}
+                  src={item?.img}
                   alt={"CarouselImg-" + index + 1}
                   width={926}
                   height={386}
