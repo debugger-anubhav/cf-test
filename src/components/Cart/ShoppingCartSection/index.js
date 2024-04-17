@@ -87,6 +87,8 @@ const ShoppingCartSection = () => {
   const [isSetupProfile, setIsSetupProfile] = useState(false);
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
+  const [quantityButton, setQuantityButton] = useState("enable");
+
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
@@ -232,6 +234,7 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
+    setQuantityButton("disable");
     let updatedItems;
     if (newQuantity < 1) {
       setProductId(productid);
@@ -260,7 +263,6 @@ const ShoppingCartSection = () => {
         productId: productid,
         cityId,
       };
-
       await baseInstance
         .post(endPoints.addToCart.updateQuantity, headers)
         .then(res => {
@@ -268,7 +270,7 @@ const ShoppingCartSection = () => {
         })
         .catch(err => console.log(err?.message));
     }
-    fetchBill();
+    await fetchBill();
   };
 
   const deleteItem = id => {
@@ -302,6 +304,7 @@ const ShoppingCartSection = () => {
           showToastNotification(res?.data?.data?.msg, 2);
         }
       }
+      setQuantityButton("enable");
     } catch (err) {
       console.log(err?.message || "some error");
     }
@@ -546,32 +549,44 @@ const ShoppingCartSection = () => {
                           {item?.is_frp !== 1 && (
                             <div className={styles.incre_decre_div}>
                               <span
-                                className={styles.span_item}
-                                onClick={() =>
-                                  handleUpdateQuantity(
-                                    item.id,
-                                    item?.fc_product?.id,
-                                    item.quantity - 1,
-                                    index,
-                                    item?.fc_product?.fc_city_product_quantity
-                                      ?.quantity,
-                                  )
-                                }>
+                                className={`${styles.span_item} ${
+                                  quantityButton === "enable"
+                                    ? "cursor-pointer"
+                                    : "cursor-not-allowed"
+                                }`}
+                                onClick={() => {
+                                  if (quantityButton === "enable") {
+                                    handleUpdateQuantity(
+                                      item.id,
+                                      item?.fc_product?.id,
+                                      item.quantity - 1,
+                                      index,
+                                      item?.fc_product?.fc_city_product_quantity
+                                        ?.quantity,
+                                    );
+                                  }
+                                }}>
                                 -
                               </span>
                               {item?.quantity}
                               <span
-                                className={styles.span_item}
-                                onClick={() =>
-                                  handleUpdateQuantity(
-                                    item.id,
-                                    item?.fc_product?.id,
-                                    item.quantity + 1,
-                                    index,
-                                    item?.fc_product?.fc_city_product_quantity
-                                      ?.quantity,
-                                  )
-                                }>
+                                className={`${styles.span_item} ${
+                                  quantityButton === "enable"
+                                    ? "cursor-pointer"
+                                    : "cursor-not-allowed"
+                                }`}
+                                onClick={() => {
+                                  if (quantityButton === "enable") {
+                                    handleUpdateQuantity(
+                                      item.id,
+                                      item?.fc_product?.id,
+                                      item.quantity + 1,
+                                      index,
+                                      item?.fc_product?.fc_city_product_quantity
+                                        ?.quantity,
+                                    );
+                                  }
+                                }}>
                                 +
                               </span>
                             </div>
