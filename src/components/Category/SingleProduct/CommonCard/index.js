@@ -36,6 +36,25 @@ const CategoryCard = ({
   );
   const [isDumy, setIsDumy] = React.useState(false);
   const [loginModal, setLoginModal] = useState(false);
+
+  const words = desc.replace(/-/g, " ").split(" ");
+  const trimmedString =
+    words.length > 18
+      ? words.slice(0, 18).join(" ") + "..."
+      : desc.replace(/-/g, " ");
+  const xlTrimmedString =
+    words.length > 16
+      ? words.slice(0, 16).join(" ") + "..."
+      : desc.replace(/-/g, " ");
+  const lgTrimmedString =
+    words.length > 12
+      ? words.slice(0, 12).join(" ") + "..."
+      : desc.replace(/-/g, " ");
+  const mdTrimmedString =
+    words.length > 10
+      ? words.slice(0, 10).join(" ") + "..."
+      : desc.replace(/-/g, " ");
+
   const dispatch = useDispatch();
   const router = useRouter();
   const cityIdStr = localStorage
@@ -228,7 +247,29 @@ const CategoryCard = ({
           </div>
 
           <div className={styles.desc_div}>
-            <h3 className={styles.desc} style={{lineHeight: "normal"}}>
+            <h3
+              className={`${styles.desc} 4xl:flex hidden`}
+              style={{lineHeight: "normal"}}>
+              {trimmedString}
+            </h3>
+            <h3
+              className={`${styles.desc} 2xl:flex hidden 4xl:hidden`}
+              style={{lineHeight: "normal"}}>
+              {xlTrimmedString}
+            </h3>
+            <h3
+              className={`${styles.desc} lg:flex hidden 2xl:hidden`}
+              style={{lineHeight: "normal"}}>
+              {lgTrimmedString}
+            </h3>
+            <h3
+              className={`${styles.desc} md:flex lg:hidden hidden`}
+              style={{lineHeight: "normal"}}>
+              {mdTrimmedString}
+            </h3>
+            <h3
+              className={`${styles.desc} md:hidden flex`}
+              style={{lineHeight: "normal"}}>
               {desc.replace(/-/g, " ")}
             </h3>
             <Heart
