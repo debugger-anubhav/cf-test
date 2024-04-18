@@ -63,13 +63,15 @@ const ItemsIncluded = () => {
                     <p className={styles.colon}>:</p>
                     <p className={styles.info_details}>{item.dimension}</p>
                   </div>
-                  <div className={styles.info_row}>
-                    <p className={styles.label}>Size (in cm) </p>
-                    <p className={styles.colon}> :</p>
-                    <p className={styles.info_details}>
-                      {item.dimension_in_cm}
-                    </p>
-                  </div>
+                  {item?.dimension_in_cm && (
+                    <div className={styles.info_row}>
+                      <p className={styles.label}>Size (in cm) </p>
+                      <p className={styles.colon}> :</p>
+                      <p className={styles.info_details}>
+                        {item.dimension_in_cm}
+                      </p>
+                    </div>
+                  )}
 
                   <div className={styles.info_row}>
                     <p className={styles.label}>Material</p>
