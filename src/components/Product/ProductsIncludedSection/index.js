@@ -145,7 +145,15 @@ const ItemsIncluded = () => {
                   </p>
                 </div>
               )}
-
+              {pageDetails?.dimension_in_cm && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Size (in cm) </p>
+                  <p className={styles.colon}> :</p>
+                  <p className={styles.info_details}>
+                    {pageDetails?.dimension_in_cm}
+                  </p>
+                </div>
+              )}
               {pageDetails?.material && (
                 <div className={styles.info_row}>
                   <p className={styles.label}>Material</p>
