@@ -263,12 +263,7 @@ const ShoppingCartSection = () => {
         productId: productid,
         cityId,
       };
-      await baseInstance
-        .post(endPoints.addToCart.updateQuantity, headers)
-        .then(res => {
-          console.log(res, "res in updated qunatity");
-        })
-        .catch(err => console.log(err?.message));
+      await baseInstance.post(endPoints.addToCart.updateQuantity, headers);
     }
     await fetchBill();
   };

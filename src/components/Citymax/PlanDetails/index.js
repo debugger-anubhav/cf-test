@@ -295,7 +295,6 @@ const CitymaxPlanDetail = () => {
     baseInstance
       .post(endPoints.cityMaxPage.sentProductsToCart, body)
       .then(res => {
-        console.log(res?.data?.data);
         openModal && toggleModal();
       })
       .catch(err => console.log(err?.message || "some error"));
