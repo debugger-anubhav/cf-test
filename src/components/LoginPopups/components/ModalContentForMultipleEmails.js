@@ -34,10 +34,14 @@ const ModalContentForMultipleEmails = ({
         </p>
         <div className={styles.radio_emails}>
           {data?.map((item, index) => (
-            <div key={index} className={styles.email_row}>
+            <div
+              key={index}
+              className={`${styles.email_row} !w-fit `}
+              onClick={() => setSelectedEmail(item)}>
               <div
-                className={styles.radio_outer_circle}
-                onClick={() => setSelectedEmail(item)}>
+                className={`${styles.radio_outer_circle}`}
+                // onClick={() => setSelectedEmail(item)}
+              >
                 <div
                   className={`${
                     selectedEmail === item ? styles.radio_inner_circle : ""
