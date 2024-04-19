@@ -43,7 +43,7 @@ export const MonthlyCard = ({
   const [selectedOption, setSelectedOption] = useState(0);
   const [cityShieldDrawerOpenForMonthly, setcityShieldDrawerOpenForMonthly] =
     useState(false);
-  const [modeOfPayment, setModeOfPayment] = useState("card");
+  const [modeOfPayment, setModeOfPayment] = useState("upi");
   const [apiData, setApiData] = useState(null);
   const getApiData = () => {
     baseInstance
