@@ -941,8 +941,8 @@ const ShoppingCartSection = () => {
                 </div>
               </div>
 
-              <div className={styles.no_emi_wrapper}>
-                {!isMonthly && billBreakup?.tenure === "12" && (
+              {!isMonthly && billBreakup?.tenure === "12" && (
+                <div className={styles.no_emi_wrapper}>
                   <div className="flex">
                     <RiSparklingFill
                       size={26}
@@ -966,8 +966,8 @@ const ShoppingCartSection = () => {
                       for 12 months available.
                     </p>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
 
               <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
                 <button
