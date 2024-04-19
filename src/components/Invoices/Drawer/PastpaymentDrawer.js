@@ -159,7 +159,7 @@ const PastpaymentDrawer = ({
                 //     : Math.abs(amountDue - availbal) + 1;
                 const remaingCoins =
                   amountDue - availbal > 0
-                    ? availbal
+                    ? 0
                     : Math.abs(availbal - amountDue) + 1;
                 // availbal > amountDue ? availbal - temp : availbal;
                 dispatch(setUsedCoins(Math.abs(availbal - remaingCoins)));

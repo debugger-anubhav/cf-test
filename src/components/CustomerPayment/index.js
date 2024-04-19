@@ -435,7 +435,7 @@ function CustomerPayment() {
                       <div className={`${styles.form_input} gap-2  `}>
                         <p className="text-14 xl:text-16 tracking-desc text-71717A xl:tracking-0.3 line-through font-Poppins">
                           {useCityfurnishCoins
-                            ? formik.values.amount - topupAmount > 0
+                            ? primaryAmount - topupAmount > 0
                               ? primaryAmount
                               : primaryAmount - 1
                             : ""}
