@@ -26,13 +26,13 @@ const FormAddress = ({setTab, tab, id}) => {
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
-      .test(
-        "no-spaces-special-characters",
-        "Please enter a valid 10 digit phone number without spaces or special characters",
-        value => {
-          return /^[0-9]*$/.test(value);
-        },
-      )
+      // .test(
+      //   "no-spaces-special-characters",
+      //   "Please enter a valid 10 digit phone number without spaces or special characters",
+      //   value => {
+      //     return /^[0-9]*$/.test(value);
+      //   },
+      // )
       .min(
         10,
         "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",
