@@ -31,8 +31,10 @@ const OrderSummary = ({
   const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
   const [isCitymaxBill, setIsCitymaxBill] = useState(false);
+  const [indexForProp, setIndexForProp] = useState(0);
   const userId = decrypt(getLocalStorage("_ga"));
-
+  const cityId = parseInt(getLocalStorage("cityId"));
+  const [alreadyFilledReview, setAlreadyFilledReview] = useState(null);
   const dispatch = useDispatch();
   const getOrderSummary = () => {
     if (isSubscriptionPage) {
@@ -103,6 +105,7 @@ const OrderSummary = ({
           {data?.productsList?.map((item, index) => (
             <div key={index}>
               <div
+                key={index + index}
                 className={`${isOfflineInvoice && "!items-start"} ${
                   styles.single_order_wrapper
                 }`}>
@@ -155,7 +158,20 @@ const OrderSummary = ({
                       </p>
                       {isDelivered && (
                         <p
-                          onClick={toggleReviewDrawer}
+                          onClick={() => {
+                            setIndexForProp(index);
+                            const headers = {
+                              user_id: userId,
+                              product_id: item?.product_id,
+                              city_id: cityId,
+                            };
+                            baseInstance
+                              .post("fc-payments/getProductReview", headers)
+                              .then(res => {
+                                setAlreadyFilledReview(res?.data?.data);
+                              });
+                            toggleReviewDrawer();
+                          }}
                           className={`${styles.review} ${styles.view_breakup_txt}`}>
                           Write Review
                         </p>
@@ -188,13 +204,14 @@ const OrderSummary = ({
                   ))}
                 </>
               )}
-
               <ReviewDrawer
                 toggleDrawer={toggleReviewDrawer}
                 open={reviewDrawer}
                 productImage={item?.product_image?.split(",")[0]}
                 productName={item?.product_name}
                 item={item}
+                productId={data?.productsList[indexForProp]?.product_id}
+                alreadyFilledReview={alreadyFilledReview}
               />
             </div>
           ))}

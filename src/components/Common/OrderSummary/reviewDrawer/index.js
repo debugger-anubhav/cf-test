@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import commonStyles from "../styles.module.css";
 import {Close, ForwardArrow, RatingStar} from "@/assets/icon";
@@ -15,14 +15,27 @@ const ReviewDrawer = ({
   productImage,
   productName,
   item,
+  productId,
+  alreadyFilledReview,
 }) => {
   const userId = decrypt(getLocalStorage("_ga"));
-
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(
+    alreadyFilledReview ? alreadyFilledReview.rating : 0,
+  );
   const [showError, setshowError] = useState(false);
-  const [reviewDesc, setReviewDesc] = useState("");
+  const [reviewDesc, setReviewDesc] = useState(
+    alreadyFilledReview ? alreadyFilledReview.review_description : "",
+  );
+  const cityId = parseInt(getLocalStorage("cityId"));
+
+  useEffect(() => {
+    setRating(alreadyFilledReview ? alreadyFilledReview.rating : 0);
+    setReviewDesc(
+      alreadyFilledReview ? alreadyFilledReview.review_description : "",
+    );
+  }, [alreadyFilledReview]);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -34,8 +47,8 @@ const ReviewDrawer = ({
   const writeReview = () => {
     const headers = {
       user_id: userId,
-      product_id: item?.product_id,
-      city_id: 46,
+      product_id: productId,
+      city_id: cityId,
       rating,
       review_description: reviewDesc,
     };
