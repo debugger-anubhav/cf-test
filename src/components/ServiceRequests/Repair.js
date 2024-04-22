@@ -27,6 +27,8 @@ function Repair({prevScreen, data, isHelpDrawer}) {
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const [repairOptions, setRepairOptions] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [description, setDescription] = useState("");
+
   const getRepairOption = (productName, index) => {
     baseInstance
       .get(endPoints.serviceRequestPage.getRepairOptions(productName))
@@ -52,13 +54,13 @@ function Repair({prevScreen, data, isHelpDrawer}) {
     );
   };
 
-  const handleDetailChange = (e, index) => {
-    setToggleStates(prevStates =>
-      prevStates.map((state, i) =>
-        i === index ? {...state, detail: e.target.value} : state,
-      ),
-    );
-  };
+  // const handleDetailChange = (e, index) => {
+  //   setToggleStates(prevStates =>
+  //     prevStates.map((state, i) =>
+  //       i === index ? {...state, detail: e.target.value} : state,
+  //     ),
+  //   );
+  // };
 
   const handleCreateRequest = () => {
     const selectedData = toggleStates
@@ -95,6 +97,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
         : singleSelectedProduct.join(", "),
       repair_reason: tempRepairReason.join(", "),
       repair_details: tempRepairDetails.join(", "),
+      description,
     };
     // console.log( payload,"payyyyyyyy")
     CreateSRApiCall(payload);
@@ -190,7 +193,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
                     <textarea
                       placeholder="Enter repair details"
                       className={styles.form_input_textarea}
-                      onChange={e => handleDetailChange(e, index)}
+                      onChange={e => setDescription(e.target.value)}
                       rows={2}
                     />
                   </div>

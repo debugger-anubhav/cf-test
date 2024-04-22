@@ -18,7 +18,6 @@ const ReviewDrawer = ({
   productId,
   alreadyFilledReview,
 }) => {
-  console.log(productName, productId, "[[[[[[[[[[[[[[[[[");
   const userId = decrypt(getLocalStorage("_ga"));
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
