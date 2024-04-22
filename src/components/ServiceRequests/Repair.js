@@ -151,23 +151,25 @@ function Repair({prevScreen, data, isHelpDrawer}) {
                 )}
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
-              {toggleStates[index].istoggled && toggleStates[index].options && (
+              {toggleStates[index].istoggled && (
                 <div>
-                  <div className={styles.reson_for_repair_wrapper}>
-                    <p className={styles.desc}>Reason for repair</p>
-                    <Select
-                      options={repairOptions}
-                      styles={customStylesForSelect}
-                      onChange={selectedOption =>
-                        handleChange(selectedOption, index)
-                      }
-                      placeholder="Select a reason for repair"
-                      isSearchable={false}
-                      onMenuOpen={() => setIsDropdownOpen(true)}
-                      onMenuClose={() => setIsDropdownOpen(false)}
-                      className="font-Poppins placeholder:!text-71717A text-71717A"
-                    />
-                  </div>
+                  {toggleStates[index].options && (
+                    <div className={styles.reson_for_repair_wrapper}>
+                      <p className={styles.desc}>Reason for repair</p>
+                      <Select
+                        options={repairOptions}
+                        styles={customStylesForSelect}
+                        onChange={selectedOption =>
+                          handleChange(selectedOption, index)
+                        }
+                        placeholder="Select a reason for repair"
+                        isSearchable={false}
+                        onMenuOpen={() => setIsDropdownOpen(true)}
+                        onMenuClose={() => setIsDropdownOpen(false)}
+                        className="font-Poppins placeholder:!text-71717A text-71717A"
+                      />
+                    </div>
+                  )}
                   <div className="mt-4">
                     <p className={styles.desc}>Repair details</p>
 
@@ -187,7 +189,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       <div className={styles.bottom_row}>
         <button
           className={`${styles.proceed_btn}  ${
-            toggleStates.some(state => state.istoggled && state.selected)
+            toggleStates.some(state => state.istoggled)
               ? ""
               : "!bg-[#FFDF85] !cursor-not-allowed"
           }`}

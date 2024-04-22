@@ -9,10 +9,12 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {
   CreateRequestPayload,
+  getLocalStorage,
   handleWheel,
   keyPressForContactField,
 } from "@/constants/constant";
 import {cityUrl} from "../../../appConfig";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const selectedType = useSelector(
@@ -22,10 +24,12 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const [description, setDescription] = useState("");
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const formikRef = useRef(null);
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleSubmit = values => {
     const payload = {
       ...CreateRequestPayload,
+      user_id: userId,
       deal_id: data[0]?.dealCodeNumber,
       type: selectedType,
       mobile_number: values.contactNumber,

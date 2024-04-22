@@ -43,7 +43,6 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
       .get(`${domain}/ajxapi/frp_faq_details`)
       .then(res => {
         setFaqs(res?.data?.data?.content);
-        console.log(res?.data?.data?.content, ";;;;;;;;;;");
       })
       .catch(err => console.log(err?.message || "some error"));
   };
