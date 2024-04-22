@@ -113,7 +113,7 @@ const CityShieldPage = () => {
     details &&
     (details.is_cf_care === 0 ? (
       <div className={styles.main_container}>
-        <BreadCrumbsCommon currentPage={"Citysheild"} />
+        <BreadCrumbsCommon currentPage={"City Sheild"} />
 
         <h1 className={styles.head}>Secure Your Coverage with City Shield</h1>
 
