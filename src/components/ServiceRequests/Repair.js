@@ -21,6 +21,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       selected: null,
       detail: null,
       options: false,
+      name: "",
     })),
   );
   const {CreateSRApiCall} = CommonCreateRequestApi();
@@ -73,6 +74,9 @@ function Repair({prevScreen, data, isHelpDrawer}) {
     const tempSelectedProductName = selectedData?.map(item => {
       return item.product_name;
     });
+    const singleSelectedProduct = toggleStates?.map(item => {
+      return item.name;
+    });
 
     const tempRepairReason = selectedData?.map(item => {
       return item.repair_reason;
@@ -86,17 +90,20 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       ...CreateRequestPayload,
       deal_id: data[0]?.dealCodeNumber,
       type: selectedType,
-      selected_product_name: tempSelectedProductName.join(", "),
+      selected_product_name: tempSelectedProductName.length
+        ? tempSelectedProductName.join(", ")
+        : singleSelectedProduct.join(", "),
       repair_reason: tempRepairReason.join(", "),
       repair_details: tempRepairDetails.join(", "),
     };
+    // console.log( payload,"payyyyyyyy")
     CreateSRApiCall(payload);
     setToggleStates(data.map(() => ({istoggled: false, selected: null})));
   };
 
   const handleToggle = index => {
     setToggleStates(prevStates =>
-      prevStates.map((state, i) =>
+      prevStates?.map((state, i) =>
         i === index ? {...state, istoggled: !state.istoggled} : state,
       ),
     );
@@ -131,6 +138,13 @@ function Repair({prevScreen, data, isHelpDrawer}) {
               <div
                 className={styles.repair_toggle_wrapper}
                 onClick={() => {
+                  setToggleStates(prevStates =>
+                    prevStates.map((state, i) =>
+                      i === index
+                        ? {...state, name: item?.product_name}
+                        : state,
+                    ),
+                  );
                   handleToggle(index);
                   if (!toggleStates[index].istoggled) {
                     getRepairOption(item?.product_name, index);

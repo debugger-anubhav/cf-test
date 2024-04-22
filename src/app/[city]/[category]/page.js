@@ -141,12 +141,14 @@ export default async function Page(params) {
               <RecentlyViewedProduct />
               <TrendingProducts params={propParams} />
               <OffersAndCoupons />
-              <NewlyLaunched />
+              <RentNowBanner params={propParams} />
+
               <DownloadForMobile />
               <PreDesignCombos />
               <HasselFreeServicesCards />
               <LimetedPreiodDiscount />
-              <RentNowBanner params={propParams} />
+              <NewlyLaunched />
+
               <TryCityMax />
               <CustomerRating />
               <MediaCoverage />

@@ -145,12 +145,14 @@ export default function Home() {
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
         <OffersAndCoupons />
-        <NewlyLaunched />
+        {/* <NewlyLaunched /> */}
+        <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
         <HasselFreeServicesCards />
         <LimetedPreiodDiscount />
-        <RentNowBanner params={"home-page"} />
+        <NewlyLaunched />
+
         <TryCityMax />
         <div className="xl:hidden block">
           <MediaCoverage />
