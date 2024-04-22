@@ -204,15 +204,17 @@ const OrderSummary = ({
                   ))}
                 </>
               )}
-              <ReviewDrawer
-                toggleDrawer={toggleReviewDrawer}
-                open={reviewDrawer}
-                productImage={item?.product_image?.split(",")[0]}
-                productName={item?.product_name}
-                item={item}
-                productId={data?.productsList[indexForProp]?.product_id}
-                alreadyFilledReview={alreadyFilledReview}
-              />
+              {indexForProp === index && (
+                <ReviewDrawer
+                  toggleDrawer={toggleReviewDrawer}
+                  open={reviewDrawer}
+                  productImage={item?.product_image?.split(",")[0]}
+                  productName={item?.product_name}
+                  item={item}
+                  productId={data?.productsList[indexForProp]?.product_id}
+                  alreadyFilledReview={alreadyFilledReview}
+                />
+              )}
             </div>
           ))}
         </div>
