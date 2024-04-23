@@ -63,8 +63,8 @@ const RentFurnitureAndAppliances = ({params}) => {
     params.category === "appliances-rental"
       ? seoAppliancePageReduxData.seoApplianceSubCategory
       : params.category === "furniture-rental"
-      ? homePageReduxData.seoFurnitureSubCategory
-      : homePageReduxData.category;
+        ? homePageReduxData.seoFurnitureSubCategory
+        : homePageReduxData.category;
 
   return (
     <div className={styles.rent_furniture_wrapper}>

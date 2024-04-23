@@ -802,10 +802,10 @@ const ProductDetails = ({params}) => {
               soldOut
                 ? handleNotifyMe
                 : cartItems?.length === 0
-                ? handleAddToCart
-                : isItemInCart
-                ? handleGoToCart
-                : handleAddToCart
+                  ? handleAddToCart
+                  : isItemInCart
+                    ? handleGoToCart
+                    : handleAddToCart
             }
             disabled={isLoading}
             className={styles.btn}

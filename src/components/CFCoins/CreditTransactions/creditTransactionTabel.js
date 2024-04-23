@@ -54,8 +54,8 @@ const CreditTransactionTabel = ({rows, loadingSkeleton}) => {
                     {row.payment_mode === "CC"
                       ? "Credit Card"
                       : row.payment_mode === "DC"
-                      ? "Debit Card"
-                      : row.payment_mode}
+                        ? "Debit Card"
+                        : row.payment_mode}
                   </TableCell>
                   <TableCell className={styles.tableCell}>
                     +<span className="font-Inter">₹</span>

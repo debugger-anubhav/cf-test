@@ -23,7 +23,7 @@ export const statusToImageMap = {
   "kyc appproved": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
-  // stopped: "inactive-subscription.svg",
+  stopped: "inactive-subscription.svg",
 };
 
 export const statusLabels = {
@@ -197,8 +197,8 @@ const CommonContainer = ({
                   {item.status === "Pending"
                     ? "Retry Payment"
                     : item.zoho_sub_status === "KYC In Progress"
-                    ? "Complete KYC now"
-                    : "Re-upload document(s)"}
+                      ? "Complete KYC now"
+                      : "Re-upload document(s)"}
                 </span>{" "}
                 to proceed with your order
               </p>
