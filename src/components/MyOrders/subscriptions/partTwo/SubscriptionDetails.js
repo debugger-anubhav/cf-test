@@ -74,7 +74,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
             onClick={() => {
               if (singleSubscriptionData?.status.toLowerCase() === "active")
                 router.push(
-                  `/upfront_tenure_extension/${singleSubscriptionData?.dealCodeNumber}`,
+                  `/upfront_tenure_extension/${singleSubscriptionData?.recurringId}`,
                 );
               else router.push(`/cart`);
             }}>
