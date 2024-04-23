@@ -20,7 +20,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
 
   const getSingleOrderDetails = () => {
     const filteredData = subscriptionData.filter(
-      t => parseInt(t.dealCodeNumber) === parseInt(subsciptionNumber),
+      t => parseInt(t.recurringId) === parseInt(subsciptionNumber),
     );
     setSingleSubscriptionData(filteredData[0]);
   };

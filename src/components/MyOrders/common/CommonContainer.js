@@ -141,7 +141,7 @@ const CommonContainer = ({
               router.push(
                 `view-purchase-offline/${offlineUserId}/${item.dealCodeNumber}`,
               );
-            } else getSingleOrderDetails(item.dealCodeNumber);
+            } else getSingleOrderDetails(item.recurringId);
           }}
           ref={containerRef}>
           <div className="flex items-center gap-3 xl:gap-4">
