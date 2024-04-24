@@ -123,6 +123,11 @@ input[type="radio"]:checked {
     left: 16px !important;
   }
 }
+@media screen and (max-width: 480px) {
+  #fbots-wdgt {
+    width: 280px !important;
+  }
+}
 
 /* to hide bydefault arrrows in the input field for number */
 input[type="number"]::-webkit-inner-spin-button,
