@@ -197,8 +197,8 @@ const CommonContainer = ({
                   {item.status === "Pending"
                     ? "Retry Payment"
                     : item.zoho_sub_status === "KYC In Progress"
-                      ? "Complete KYC now"
-                      : "Re-upload document(s)"}
+                    ? "Complete KYC now"
+                    : "Re-upload document(s)"}
                 </span>{" "}
                 to proceed with your order
               </p>

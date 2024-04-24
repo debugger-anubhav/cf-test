@@ -103,8 +103,8 @@ const Footer = loadable(
     fallback: <FooterSkeleton />,
   },
 );
-const CombineSection = loadable(
-  () => import("@/components/Home/CombineSection"),
+const CombineSection = loadable(() =>
+  import("@/components/Home/CombineSection"),
 );
 
 export default function Home() {

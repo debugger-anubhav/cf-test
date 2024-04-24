@@ -82,10 +82,10 @@ function MainSection() {
                             {i === 4
                               ? "Governing Law and Jurisdiction"
                               : i === 6
-                                ? "Entire Agreement:"
-                                : i !== 7
-                                  ? words[0]
-                                  : ""}
+                              ? "Entire Agreement:"
+                              : i !== 7
+                              ? words[0]
+                              : ""}
                           </span>{" "}
                           {words.slice(1).join(" ")}
                         </p>
