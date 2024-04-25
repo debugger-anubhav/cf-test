@@ -144,7 +144,7 @@ const SubCategoryCard = ({productID}) => {
                         src={item?.img}
                         className="w-[40px] h-[40px]"
                         loading="lazy"
-                        alt="Athena-3-Seater-sofa"
+                        alt="product-image"
                       />
                     </div>
                   );

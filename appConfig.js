@@ -47,4 +47,3 @@ export const RazorpayThemeColor = "#3E688E";
 // export const categoryImageBaseUrl =
 //   "https://d3juy0zp6vqec8.cloudfront.net/images/category/";
 export const BASEURL = `${domain}/api/`;
-// console.log(process.env.NEXT_PUBLIC_BASE_URL_DOMAIN,"pppppppppp")

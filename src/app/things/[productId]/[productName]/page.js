@@ -4,7 +4,6 @@ import ProductDetailComponents from "./SsrProductComponents";
 
 export async function getServerSideProps(context) {
   const {productId} = context.params;
-  // console.log(context.params, "ooooooooooooooo");
   try {
     const data = await create(productId);
     return {
@@ -47,7 +46,6 @@ async function create(params) {
 
 export default async function Page(params) {
   const metaData = await create(params.params);
-  // console.log(params,"pppppppp")
   return (
     <>
       <meta name="Title" content={metaData?.data?.meta_title} />

@@ -181,8 +181,6 @@ const Header = ({page}) => {
     baseInstance
       .get(endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        // console.log(res, "res in fetch itemms");
-        // setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
       })

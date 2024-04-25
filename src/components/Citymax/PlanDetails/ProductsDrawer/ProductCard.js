@@ -176,7 +176,7 @@ const ProductCard = ({
                     onClick={() => handleThumbnailClick(mainIndex, index)}>
                     <img
                       src={`${productImageBaseUrl + "thumb/" + image}`}
-                      alt={""}
+                      alt={"product-image"}
                       className="w-full h-full"
                       loading="lazy"
                     />
