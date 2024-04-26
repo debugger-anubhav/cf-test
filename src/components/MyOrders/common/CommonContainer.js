@@ -21,6 +21,7 @@ export const statusToImageMap = {
   "kyc docs under review": "kyc-under-review.svg",
   "kyc rejected": "kyc-rejected.svg",
   "kyc appproved": "kyc-approved.svg",
+  "kyc completed": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
   stopped: "inactive-subscription.svg",
@@ -68,7 +69,7 @@ const CommonContainer = ({
           <div className={styles.left_part}>
             <img
               className="w-10 h-10"
-              alt={statusLabels[item.zoho_sub_status?.toLowerCase()]}
+              alt={statusLabels[item?.zoho_sub_status.toLowerCase()]}
               src={
                 tab === 0
                   ? IconLink +
