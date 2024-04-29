@@ -115,9 +115,9 @@ export default async function Page(params) {
   const cityList = await getAllCitiesList();
   const cityFromURL = propParams?.city?.toLowerCase();
   const isCityValid = cityList?.data?.some(
-    city => city.list_value.toLowerCase() === cityFromURL,
+    city => city?.list_value?.toLowerCase() === cityFromURL,
   );
-  const isSpecialCityValid = cityFromURL.toLowerCase() === "ghaziabad-noida";
+  const isSpecialCityValid = cityFromURL?.toLowerCase() === "ghaziabad-noida";
   if (isCityValid || isSpecialCityValid) {
     return (
       <>

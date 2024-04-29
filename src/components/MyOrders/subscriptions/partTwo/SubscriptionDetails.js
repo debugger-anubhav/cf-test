@@ -51,7 +51,7 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
           <img
             src={
               IconLink +
-              statusToImageMap[singleSubscriptionData?.status.toLowerCase()]
+              statusToImageMap[singleSubscriptionData?.status?.toLowerCase()]
             }
             loading="lazy"
             className={styles.status_icon}
@@ -72,20 +72,20 @@ const SubscriptionDetails = ({setPart, subscriptionData}) => {
           <div
             className={styles.drawer_button}
             onClick={() => {
-              if (singleSubscriptionData?.status.toLowerCase() === "active")
+              if (singleSubscriptionData?.status?.toLowerCase() === "active")
                 router.push(
                   `/upfront_tenure_extension/${singleSubscriptionData?.recurringId}`,
                 );
               else router.push(`/cart`);
             }}>
-            {singleSubscriptionData?.status.toLowerCase() === "active"
+            {singleSubscriptionData?.status?.toLowerCase() === "active"
               ? "Extend"
               : "Renew"}{" "}
             Subscription
           </div>
 
           {
-            singleSubscriptionData?.status.toLowerCase() === "active" && (
+            singleSubscriptionData?.status?.toLowerCase() === "active" && (
               <p onClick={toggleServiceDrawer} className={styles.need_help_txt}>
                 Need Help with your Subscription?
               </p>

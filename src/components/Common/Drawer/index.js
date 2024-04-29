@@ -135,7 +135,7 @@ export default function CommonDrawer({
       setLocalStorage("cityId", city?.id);
     }
     const newUrl = window?.location.pathname.split("/");
-    newUrl[1] = city.list_value.replace(/\//g, "-").toLowerCase();
+    newUrl[1] = city.list_value.replace(/\//g, "-")?.toLowerCase();
     const p = newUrl.join("/");
     params.city ? router.push(p) : window?.location.reload();
   };
@@ -196,7 +196,7 @@ export default function CommonDrawer({
               <a
                 href={`/${homePageReduxData?.cityName
                   .replace(/\//g, "-")
-                  .toLowerCase()}/rent`}>
+                  ?.toLowerCase()}/rent`}>
                 All products
               </a>
             </p>
@@ -212,7 +212,7 @@ export default function CommonDrawer({
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`}>
+                    ?.toLowerCase()}/${item?.seourl}`}>
                   {item?.cat_name}
                 </a>
               </p>

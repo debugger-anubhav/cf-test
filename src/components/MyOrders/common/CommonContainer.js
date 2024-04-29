@@ -69,7 +69,7 @@ const CommonContainer = ({
           <div className={styles.left_part}>
             <img
               className="w-10 h-10"
-              alt={statusLabels[item?.zoho_sub_status.toLowerCase()]}
+              alt={statusLabels[item?.zoho_sub_status?.toLowerCase()]}
               src={
                 tab === 0
                   ? IconLink +
@@ -88,9 +88,9 @@ const CommonContainer = ({
                     ? item.is_offline_user === "1"
                       ? "Amount Pending"
                       : "Order Failed"
-                    : statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                    : statusLabels[item.zoho_sub_status?.toLowerCase()] ||
                       item.zoho_sub_status
-                  : item.status.toLowerCase()}
+                  : item.status?.toLowerCase()}
               </p>
               <p className={styles.date}>
                 {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
@@ -108,7 +108,7 @@ const CommonContainer = ({
                 ? `Order no: #${item.dealCodeNumber}`
                 : `Subscription no: #${item.dealCodeNumber}`}
             </p>
-            {item.status.toLowerCase() === "pending" ? (
+            {item?.status?.toLowerCase() === "pending" ? (
               <a
                 href={"https://wa.me/919205006188"}
                 target="_blank"
@@ -117,7 +117,7 @@ const CommonContainer = ({
                 <p className={styles.help_txt}>Chat with us</p>
               </a>
             ) : (
-              item.status.toLowerCase() !== "inactive" && (
+              item?.status?.toLowerCase() !== "inactive" && (
                 <p onClick={toggleServiceDrawer} className={styles.help_txt}>
                   Need Help?
                 </p>

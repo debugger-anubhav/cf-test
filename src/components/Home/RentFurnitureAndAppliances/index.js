@@ -80,7 +80,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                 router.push(
                   `/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`,
+                    ?.toLowerCase()}/${item?.seourl}`,
                 );
                 if (typeof window !== "undefined") {
                   setLocalStorage("categoryId", item?.rootID);
@@ -90,7 +90,7 @@ const RentFurnitureAndAppliances = ({params}) => {
               <a
                 href={`/${homePageReduxData?.cityName
                   .replace(/\//g, "-")
-                  .toLowerCase()}/${item?.seourl}`}
+                  ?.toLowerCase()}/${item?.seourl}`}
                 onClick={e => e.preventDefault()}
                 target="_self"
                 rel="noopener">

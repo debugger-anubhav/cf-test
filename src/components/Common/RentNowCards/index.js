@@ -14,7 +14,7 @@ const RentNowCard = ({cardImage, url, alt}) => {
   useEffect(() => {
     if (url.includes("[city]")) {
       setURL(
-        url.replace(/\[city\]/g, cityName.replace(/\//g, "-").toLowerCase()),
+        url.replace(/\[city\]/g, cityName.replace(/\//g, "-")?.toLowerCase()),
       );
     } else {
       setURL(url); // Navigate to the URL

@@ -20,13 +20,13 @@ const HeroBanner = () => {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
       link: `/${homePageReduxData?.cityName
         .replace(/\//g, "-")
-        .toLowerCase()}/home-furniture-rental`,
+        ?.toLowerCase()}/home-furniture-rental`,
     },
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
       link: `/${homePageReduxData?.cityName
         .replace(/\//g, "-")
-        .toLowerCase()}/home-appliances-rental`,
+        ?.toLowerCase()}/home-appliances-rental`,
     },
     {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",

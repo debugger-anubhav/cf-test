@@ -175,7 +175,7 @@ const SubHeader = ({params}) => {
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+      `/${homePageReduxData?.cityName.replace(/\//g, "-")?.toLowerCase()}/${
         item?.seourl
       }`,
     );
@@ -423,7 +423,7 @@ const SubHeader = ({params}) => {
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${seoUrl?.seourl}`}
+                    ?.toLowerCase()}/${seoUrl?.seourl}`}
                   target="_self"
                   rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer `}>
@@ -459,7 +459,7 @@ const SubHeader = ({params}) => {
                     <a
                       href={`/${homePageReduxData?.cityName
                         .replace(/\//g, "-")
-                        .toLowerCase()}/${subItem?.seourl}`}
+                        ?.toLowerCase()}/${subItem?.seourl}`}
                       onClick={e => {
                         e.preventDefault();
                         setLocalStorage("subCategory", subItem?.cat_name);

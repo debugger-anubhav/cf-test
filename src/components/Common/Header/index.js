@@ -764,7 +764,7 @@ const SearchModal = ({
                         window?.location.origin
                       }/${homePageReduxData?.cityName
                         .replace(/\//g, "-")
-                        .toLowerCase()}/${item?.seourl}`}>
+                        ?.toLowerCase()}/${item?.seourl}`}>
                       <div
                         className={styles.category_card_in_searchbox}
                         onClick={() => {

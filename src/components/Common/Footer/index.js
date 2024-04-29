@@ -45,29 +45,29 @@ const Footer = ({params}) => {
       points: [
         {
           text: "All",
-          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/rent`,
+          link: `/${cityName.replace(/\//g, "-")?.toLowerCase()}/rent`,
         },
         {
           text: "Home Furniture",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/home-furniture-rental`,
+            ?.toLowerCase()}/home-furniture-rental`,
         },
         {
           text: "Appliances",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/home-appliances-rental`,
+            ?.toLowerCase()}/home-appliances-rental`,
         },
         {
           text: "Workstations",
-          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/workstations`,
+          link: `/${cityName.replace(/\//g, "-")?.toLowerCase()}/workstations`,
         },
         {
           text: "Combos",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/rental-packages`,
+            ?.toLowerCase()}/rental-packages`,
         },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],

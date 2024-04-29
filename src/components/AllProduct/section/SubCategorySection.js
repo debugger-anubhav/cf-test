@@ -40,7 +40,7 @@ const SubCategorySection = () => {
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`}
+                    ?.toLowerCase()}/${item?.seourl}`}
                   onClick={() => {
                     setLocalStorage("categoryId", item?.id);
                     setLocalStorage("category", item?.cat_name);
@@ -134,7 +134,7 @@ const Cards = ({subCategory}) => {
             <a
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
-                .toLowerCase()}/${subItem?.seourl}`}>
+                ?.toLowerCase()}/${subItem?.seourl}`}>
               <div
                 className={`${styles.card_div}  w-[79.2px] ms:w-[245px]`}
                 key={index.toString()}>
