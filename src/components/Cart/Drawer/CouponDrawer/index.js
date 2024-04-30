@@ -117,7 +117,7 @@ const CouponDrawer = ({
         </div>
 
         <div className="overflow-scroll max-h-[100vh]">
-          <h2 className={styles.header}>Offers & coupons</h2>
+          <h2 className={styles.header}> Apply Coupon</h2>
           <div className={styles.input_div}>
             <input
               className={styles.input}

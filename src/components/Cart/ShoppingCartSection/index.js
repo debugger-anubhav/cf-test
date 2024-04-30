@@ -159,12 +159,12 @@ const ShoppingCartSection = () => {
       : 0;
 
   const monthlyModeFeatures = [
-    "Get additional discount upto 8%",
-    "Pay as you use",
+    "Get additional discount upto 10%",
+    "Pay as you go",
     "Mandatory Security Deposit",
   ];
   const upfrontModeFeatures = [
-    "Get additional discount upto 20%",
+    "Get additional discount upto 15%",
     "Faster KYC",
     "No Security Deposit",
   ];
@@ -817,9 +817,7 @@ const ShoppingCartSection = () => {
                     }
                   }}>
                   <p className={styles.offer_text}>
-                    {isCouponApplied
-                      ? `${code} applied`
-                      : "   Apply Offers & Coupon"}
+                    {isCouponApplied ? `${code} applied` : "Apply Coupon"}
                     <span>
                       <Image
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
