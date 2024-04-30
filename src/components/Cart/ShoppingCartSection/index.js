@@ -102,6 +102,10 @@ const ShoppingCartSection = () => {
     }
   }, [cartItems]);
 
+  useEffect(() => {
+    setIsMonthly(modeOfPayment === null ? true : modeOfPayment);
+  }, [modeOfPayment]);
+
   const fetchCartItems = isValid => {
     const id = isValid ? userId : tempUserId;
     baseInstance
