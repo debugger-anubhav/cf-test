@@ -13,6 +13,7 @@ import {baseInstance} from "@/network/axios";
 function TenureExtension() {
   const params = useParams();
   const router = useRouter();
+  const currentUrl = window?.location.href;
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -141,14 +142,16 @@ function TenureExtension() {
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
-          <MonthlyCard
-            dealCodeNumber={dealCodeNumber}
-            monthlyCardIsChecked={monthlyCardIsChecked}
-            setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
-            isCityShieldApplied={isCityShieldApplied}
-            recurringId={params?.recurringId}
-            setLoading={setLoading}
-          />
+          {!currentUrl.includes("?data=1") && (
+            <MonthlyCard
+              dealCodeNumber={dealCodeNumber}
+              monthlyCardIsChecked={monthlyCardIsChecked}
+              setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
+              isCityShieldApplied={isCityShieldApplied}
+              recurringId={params?.recurringId}
+              setLoading={setLoading}
+            />
+          )}
         </div>
       ) : (
         <div className="flex gap-8 mt-4 flex-wrap">

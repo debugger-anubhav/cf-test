@@ -914,7 +914,22 @@ const ShoppingCartSection = () => {
                 }}>
                 <div className="flex justify-between">
                   <p className={styles.total_text}>
-                    {isMonthly ? "Now payable:" : "Total rent:"}
+                    {isMonthly ? (
+                      <p>
+                        Now payable
+                        <span className="!text-14 !font-normal">
+                          (Excluding GST):
+                        </span>{" "}
+                      </p>
+                    ) : (
+                      <p>
+                        {" "}
+                        Total rent{" "}
+                        <span className="!text-14 !font-normal">
+                          (Excluding GST):{" "}
+                        </span>{" "}
+                      </p>
+                    )}
                   </p>
 
                   <p className={styles.total_amount}>
