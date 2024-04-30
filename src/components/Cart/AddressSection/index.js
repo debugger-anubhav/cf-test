@@ -938,6 +938,7 @@ const AddressSection = () => {
                 <p className={otherStyles.total_amount}>
                   <span className={otherStyles.rupeeIcon}>₹</span>
                   {billBreakup?.finalTotalPrice?.toFixed(2)}
+
                   {/* {billBreakup?.isMonthly && "/mo"} */}
                 </p>
               </div>

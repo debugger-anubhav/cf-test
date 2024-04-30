@@ -922,7 +922,7 @@ const ShoppingCartSection = () => {
                   <p className={styles.total_amount}>
                     <span className={styles.rupeeIcon}>₹</span>
                     {isMonthly ? (
-                      <>{billBreakup?.cartSubTotal}</>
+                      <>{billBreakup?.totalPayableAmount?.toFixed(2)}</>
                     ) : (
                       <>{parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}</>
                     )}
