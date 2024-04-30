@@ -30,7 +30,7 @@ export const metadata = {
 };
 export default function RootLayout({children}) {
   const login = "";
-  const AMPLITUDE_ID = "";
+  // const AMPLITUDE_ID = "";
 
   return (
     <html lang="en">
@@ -282,7 +282,7 @@ export default function RootLayout({children}) {
           </noscript>
         )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -293,7 +293,7 @@ export default function RootLayout({children}) {
   amplitude.init("${AMPLITUDE_ID}");`,
             }}
           />
-        )}
+        )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
