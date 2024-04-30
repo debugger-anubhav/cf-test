@@ -38,7 +38,7 @@ export const useChatScript = (url, widgetCode) => {
         }
     })(document, window, function () {
         Freshbots.initiateWidget({autoInitChat: false, getClientParams: function () {
-                return {"cstmr::xtrInfrmtn:${userId}": ""};
+                return {"cstmr::xtrInfrmtn:userID": "${userId}"};
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
