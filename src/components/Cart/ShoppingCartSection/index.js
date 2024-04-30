@@ -918,7 +918,7 @@ const ShoppingCartSection = () => {
                       <p>
                         Now payable
                         <span className="!text-14 !font-normal">
-                          (Excluding GST):
+                          (Excluding GST) :
                         </span>{" "}
                       </p>
                     ) : (
@@ -926,7 +926,7 @@ const ShoppingCartSection = () => {
                         {" "}
                         Total rent{" "}
                         <span className="!text-14 !font-normal">
-                          (Excluding GST):{" "}
+                          (Excluding GST) :{" "}
                         </span>{" "}
                       </p>
                     )}
