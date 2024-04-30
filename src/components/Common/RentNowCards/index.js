@@ -27,12 +27,7 @@ const RentNowCard = ({cardImage, url, alt}) => {
       onClick={() => {
         router.push(URL);
       }}>
-      <a
-        href={URL}
-        onClick={e => e.preventDefault()}
-        aria-label={imageAlt}
-        target="_self"
-        rel="noopener">
+      <a href={URL} aria-label={imageAlt} target="_self" rel="noopener">
         <Image
           width={272}
           height={388}
