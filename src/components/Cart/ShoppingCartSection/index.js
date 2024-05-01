@@ -102,9 +102,9 @@ const ShoppingCartSection = () => {
     }
   }, [cartItems]);
 
-  // useEffect(() => {
-  //   setIsMonthly(false);
-  // }, []);
+  useEffect(() => {
+    setIsMonthly(false);
+  }, []);
 
   const fetchCartItems = isValid => {
     const id = isValid ? userId : tempUserId;
