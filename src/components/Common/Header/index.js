@@ -775,8 +775,8 @@ const SearchModal = ({
                         }}>
                         <Image
                           src={
-                            "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                            item.category_image
+                            "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                            item.category_web_image
                           }
                           alt="RentFurnitureImages"
                           className={styles.categories_img}

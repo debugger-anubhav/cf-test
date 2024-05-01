@@ -561,7 +561,10 @@ const ShoppingCartSection = () => {
                                       setCode("");
                                       dispatch(getCouponCodeUsed(""));
                                       showToastNotification(
-                                        "Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ",
+                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
+                                          item &&
+                                          item?.fc_coupon_card?.minamountf
+                                        }`,
                                         3,
                                       );
                                     }
@@ -927,15 +930,15 @@ const ShoppingCartSection = () => {
                     {isMonthly ? (
                       <p>
                         Now payable
-                        <span className="!text-14 !font-normal">
+                        <span className="!text-14 !font-normal ml-1">
                           (Excl GST) :
                         </span>{" "}
                       </p>
                     ) : (
                       <p>
                         {" "}
-                        Total rent{" "}
-                        <span className="!text-14 !font-normal">
+                        Total rent
+                        <span className="!text-14 !font-normal ml-1">
                           (Excl GST) :{" "}
                         </span>{" "}
                       </p>
