@@ -1,6 +1,7 @@
 import React from "react";
 import CryptoJS from "crypto-js";
 import ProductDetailComponents from "./SsrProductComponents";
+import jwt from "jsonwebtoken";
 
 export async function getServerSideProps(context) {
   const {productId} = context.params;
@@ -29,6 +30,9 @@ async function create(params) {
     return encrypted;
   };
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "1m",
+  });
 
   const data = await fetch(
     // `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=3847`,
@@ -37,7 +41,7 @@ async function create(params) {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
     },
   );

@@ -27,6 +27,7 @@ import Footer from "@/components/SSRPageSeo/SsrFooter";
 import Subproduct from "./RentAllProducts";
 import {redirect} from "next/navigation";
 import {BASEURL} from "../../../../appConfig";
+import jwt from "jsonwebtoken";
 
 const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
 const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
@@ -93,12 +94,16 @@ async function create(params) {
 
 async function getAllCitiesList() {
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "1m",
+  });
+
   try {
     const data = await fetch(BASEURL + endPoints.cityList, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
     });
 

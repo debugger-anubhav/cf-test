@@ -541,7 +541,6 @@ const ShoppingCartSection = () => {
                             <DeleteIcon className={styles.delete_icon} />
                           </div>
                         </div>
-
                         <div
                           className={`${
                             item?.is_frp === 1 ? "gap-2" : "gap-6"
