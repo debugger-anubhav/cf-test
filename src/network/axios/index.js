@@ -38,6 +38,7 @@ baseInstance.interceptors.request.use(config => {
 
   const jwtToken = jwt.sign({payload: apiKey}, mySecretKey, {expiresIn: "1m"});
   config.headers.Apikey = jwtToken;
+  config.headers.Apikey = apiKey;
   return config;
 });
 
