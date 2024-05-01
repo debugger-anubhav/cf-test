@@ -15,7 +15,7 @@ function TenureExtension() {
   const router = useRouter();
   let currentUrl;
   if (typeof window !== "undefined") {
-    currentUrl = window.location.href;
+    currentUrl = window?.location?.href;
   }
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);

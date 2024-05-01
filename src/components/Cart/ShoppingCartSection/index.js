@@ -104,6 +104,7 @@ const ShoppingCartSection = () => {
 
   useEffect(() => {
     setIsMonthly(false);
+    setLocalStorage("isMonthly", false);
   }, []);
 
   const fetchCartItems = isValid => {
