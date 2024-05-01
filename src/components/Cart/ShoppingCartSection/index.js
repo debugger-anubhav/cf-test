@@ -560,10 +560,7 @@ const ShoppingCartSection = () => {
                                       setCode("");
                                       dispatch(getCouponCodeUsed(""));
                                       showToastNotification(
-                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
-                                          item &&
-                                          item?.fc_coupon_card?.minamountf
-                                        }`,
+                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR `,
                                         3,
                                       );
                                     }
