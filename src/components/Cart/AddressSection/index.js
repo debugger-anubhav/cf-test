@@ -919,9 +919,23 @@ const AddressSection = () => {
               onClick={() => setBreakupDrawer(true)}>
               <div className="flex flex-col w-fit">
                 <p className={otherStyles.total_text}>
-                  {getLocalStorage("isMonthly")
-                    ? "Now payable:"
-                    : "Total rent:"}
+                  {getLocalStorage("isMonthly") ? (
+                    <p>
+                      {" "}
+                      Now payable
+                      <span className="!text-14 !font-normal ml-1">
+                        (Excl GST) :{" "}
+                      </span>{" "}
+                    </p>
+                  ) : (
+                    <p>
+                      {" "}
+                      Total rent
+                      <span className="!text-14 !font-normal ml-1">
+                        (Excl GST) :{" "}
+                      </span>{" "}
+                    </p>
+                  )}
                 </p>
 
                 <div className={otherStyles.breakup_wrapper}>
