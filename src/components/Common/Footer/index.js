@@ -174,7 +174,11 @@ const Footer = ({params}) => {
                       : t.link
                   }
                   aria-label={t.text}
-                  target={t.text === "Furniture Sale" ? "_blank" : "_self"}
+                  target={
+                    t.text === "Furniture Sale" || t.text === "Blog"
+                      ? "_blank"
+                      : "_self"
+                  }
                   rel="noopener  noreferrer">
                   <p
                     className={styles.points}
