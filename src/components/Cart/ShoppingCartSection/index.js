@@ -557,16 +557,18 @@ const ShoppingCartSection = () => {
                                 }`}
                                 onClick={() => {
                                   if (quantityButton === "enable") {
-                                    if (isCouponApplied) {
-                                      setIsCouponApplied(false);
-                                      setCode("");
-                                      dispatch(getCouponCodeUsed(""));
-                                      showToastNotification(
-                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
-                                          minamountf && minamountf
-                                        }`,
-                                        3,
-                                      );
+                                    if (minamountf > 0) {
+                                      if (isCouponApplied) {
+                                        setIsCouponApplied(false);
+                                        setCode("");
+                                        dispatch(getCouponCodeUsed(""));
+                                        showToastNotification(
+                                          `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
+                                            minamountf && minamountf
+                                          }`,
+                                          3,
+                                        );
+                                      }
                                     }
                                     handleUpdateQuantity(
                                       item.id,
