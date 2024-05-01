@@ -179,11 +179,14 @@ const CouponDrawer = ({
                       style={{
                         color: getTextColor(item, isMonthly),
                       }}
-                      className={`${styles.desc}`}>{`${item?.price_text} ${
-                      item?.max_discount !== "0"
-                        ? `(up to Rs ${item?.max_discount})*`
-                        : ""
-                    } `}</p>
+                      className={`${styles.desc}`}>
+                      {`${item?.price_text}
+                         ${
+                           item?.max_discount !== "0"
+                             ? `(up to Rs ${item?.max_discount})*`
+                             : ""
+                         } `}
+                    </p>
                     {item?.price_below_text && (
                       <p
                         style={{

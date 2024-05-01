@@ -117,9 +117,7 @@ const OffersAndCoupons = ({page}) => {
                      : ""
                  }
                  `}
-                {item?.price_below_text && (
-                  <>{item?.price_below_text.split(" ").slice(0, 7).join(" ")}</>
-                )}
+                {item?.price_below_text && <>{item?.price_below_text}</>}
               </p>
               {/* {item?.price_below_text && (
                 <p className={styles.desc}>
