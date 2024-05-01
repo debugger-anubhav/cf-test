@@ -57,7 +57,6 @@ function TenureExtension() {
   const [isCheckedArray, setIsCheckedArray] = useState(
     Array(CardData.length).fill(true),
   );
-  console.log(isChecked, "checking");
   const parentApi = async orderId => {
     baseInstance
       .get(endPoints.tenureExtension, {
@@ -94,6 +93,7 @@ function TenureExtension() {
 
   useEffect(() => {
     getDealCodeNumber();
+    console.log(isChecked);
     // parentApi();
   }, []);
 
