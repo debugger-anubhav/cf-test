@@ -239,6 +239,11 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
+    if (isCouponApplied) {
+      setIsCouponApplied(false);
+      setCode("");
+      dispatch(getCouponCodeUsed(""));
+    }
     setQuantityButton("disable");
     let updatedItems;
     if (newQuantity < 1) {
