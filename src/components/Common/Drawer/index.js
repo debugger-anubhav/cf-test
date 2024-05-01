@@ -260,7 +260,7 @@ export default function CommonDrawer({
                       {isLogin ? (
                         <a href="/usersettings">{item?.item}</a>
                       ) : (
-                        <>{item?.item}</>
+                        <span className="lg:flex hidden">{item?.item}</span>
                       )}
                     </p>
                   )}
