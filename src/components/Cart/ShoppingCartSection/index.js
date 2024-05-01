@@ -88,6 +88,7 @@ const ShoppingCartSection = () => {
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
   const [quantityButton, setQuantityButton] = useState("enable");
+  const [minamountf, setMinamountf] = useState(0);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -294,6 +295,7 @@ const ShoppingCartSection = () => {
         endPoints.addToCart.fetchBill,
         headers,
       );
+      setMinamountf(res?.data?.data?.coupon_minamountf);
       dispatch(getBillDetails(res?.data?.data));
       // setCode(res?.data?.data?.couponsCode);
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
@@ -560,7 +562,9 @@ const ShoppingCartSection = () => {
                                       setCode("");
                                       dispatch(getCouponCodeUsed(""));
                                       showToastNotification(
-                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR `,
+                                        `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
+                                          minamountf && minamountf
+                                        }`,
                                         3,
                                       );
                                     }
