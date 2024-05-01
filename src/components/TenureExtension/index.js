@@ -13,7 +13,10 @@ import {baseInstance} from "@/network/axios";
 function TenureExtension() {
   const params = useParams();
   const router = useRouter();
-  const currentUrl = window?.location?.href;
+  let currentUrl;
+  if (typeof window !== "undefined") {
+    currentUrl = window.location.href;
+  }
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
