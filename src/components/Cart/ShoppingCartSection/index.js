@@ -239,11 +239,6 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
-    // if (isCouponApplied) {
-    //   setIsCouponApplied(false);
-    //   setCode("");
-    //   dispatch(getCouponCodeUsed(""));
-    // }
     setQuantityButton("disable");
     let updatedItems;
     if (newQuantity < 1) {
@@ -561,6 +556,15 @@ const ShoppingCartSection = () => {
                                 }`}
                                 onClick={() => {
                                   if (quantityButton === "enable") {
+                                    // if (isCouponApplied) {
+                                    //   setIsCouponApplied(false);
+                                    //   setCode("");
+                                    //   dispatch(getCouponCodeUsed(""));
+                                    //   showToastNotification(
+                                    //     "Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ",
+                                    //     3,
+                                    //   );
+                                    // }
                                     handleUpdateQuantity(
                                       item.id,
                                       item?.fc_product?.id,

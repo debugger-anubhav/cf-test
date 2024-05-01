@@ -49,7 +49,7 @@ const ModalContentForNumber = ({
         {formik => (
           <Form>
             <div className={styles.form_input}>
-              <div className="flex justify-center gap-2">
+              <div className="flex justify-center gap-2 w-full">
                 <img
                   src={`${cityUrl + "india-icon.svg"}`}
                   className={styles.flag}
@@ -62,7 +62,7 @@ const ModalContentForNumber = ({
                   onWheel={handleWheel}
                   // autofocus={true}
                   name="contactNumber"
-                  placeholder="Enter 10 digit number "
+                  placeholder="Enter your 10 digit phone number "
                   className={styles.contact_input}
                   value={formik.values.contactNumber}
                   onChange={e => {
