@@ -13,7 +13,7 @@ import {baseInstance} from "@/network/axios";
 function TenureExtension() {
   const params = useParams();
   const router = useRouter();
-  const currentUrl = window?.location.href;
+  const currentUrl = window?.location?.href;
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -142,7 +142,7 @@ function TenureExtension() {
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
-          {!currentUrl.includes("?data=1") && (
+          {!currentUrl?.includes("?data=1") && (
             <MonthlyCard
               dealCodeNumber={dealCodeNumber}
               monthlyCardIsChecked={monthlyCardIsChecked}
