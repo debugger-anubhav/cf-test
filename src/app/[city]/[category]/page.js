@@ -59,6 +59,9 @@ export async function getServerSideProps(context) {
 async function create(params) {
   // const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "1m",
+  });
 
   if (
     params.category === "appliances-rental" ||
@@ -71,7 +74,7 @@ async function create(params) {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Apikey: apiKey,
+          Apikey: jwtToken,
         },
       },
     );
@@ -81,7 +84,7 @@ async function create(params) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
       body: JSON.stringify({
         cityName: params.city?.toLowerCase(),
