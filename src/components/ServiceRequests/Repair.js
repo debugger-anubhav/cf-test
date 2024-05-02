@@ -14,7 +14,9 @@ function Repair({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const [toggleStates, setToggleStates] = useState(
     data.map(() => ({
       istoggled: false,
@@ -100,7 +102,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       description,
     };
     // console.log( payload,"payyyyyyyy")
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
     setToggleStates(data.map(() => ({istoggled: false, selected: null})));
   };
 
@@ -209,7 +211,8 @@ function Repair({prevScreen, data, isHelpDrawer}) {
             toggleStates.some(state => state.istoggled)
               ? ""
               : "!bg-[#FFDF85] !cursor-not-allowed"
-          }`}
+          }
+          ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
           disabled={!toggleStates.some(state => state.istoggled)}
           onClick={handleCreateRequest}>
           Create request <ForwardArrowWithLine />
