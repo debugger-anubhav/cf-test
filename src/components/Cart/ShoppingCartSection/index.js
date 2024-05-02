@@ -327,9 +327,10 @@ const ShoppingCartSection = () => {
 
   const handleCheckLogin = () => {
     if (isLogin) {
-      if (userDetails?.full_name && userDetails?.email)
+      if (userDetails?.full_name && userDetails?.email) {
         dispatch(setShoppingCartTab(1));
-      else {
+        window?.scrollTo(0, 0);
+      } else {
         setIsSetupProfile(true);
         toggleLoginModal();
       }
