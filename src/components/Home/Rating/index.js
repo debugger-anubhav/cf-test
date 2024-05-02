@@ -4,7 +4,6 @@ import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, EditIcon} from "@/assets/icon";
 import Image from "next/image";
-import {HomePageImages} from "@/assets/images";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
@@ -119,10 +118,14 @@ const CustomerRating = () => {
             rel="noreferrer"
             aria-label="write-a-review">
             <Image
-              src={HomePageImages.editIcon}
+              src={
+                "https://d3juy0zp6vqec8.cloudfront.net/images/icons/edit-icon.svg"
+              }
               alt="editIcon"
               className={styles.editIcon}
               loading="lazy"
+              width={40}
+              height={40}
             />
           </a>
           <a

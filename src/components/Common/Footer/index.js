@@ -288,10 +288,14 @@ const Footer = ({params}) => {
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           }}>
           <Image
-            src={FooterIcons.GoToTopIcon}
+            src={
+              "https://d3juy0zp6vqec8.cloudfront.net/images/icons/go-to-top.svg"
+            }
             alt="go-to-top-icon"
             className={`${styles.goToTopIcon} pointer-events-none`}
             loading="lazy"
+            width={20}
+            height={20}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

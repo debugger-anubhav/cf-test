@@ -1,5 +1,3 @@
-import editIcon from "./home_page_assets/rating/editIcon.svg";
-
 // demo produt page  images
 import CtaImage from "./product_cta.svg";
 
@@ -30,7 +28,6 @@ export const HomePageImages = {
   diningroom: Desktop + "dining-room.webp",
   office: Desktop + "office.webp",
   studyroom: Desktop + "study-room.webp",
-  editIcon,
 };
 
 export const CareerGallery = {
