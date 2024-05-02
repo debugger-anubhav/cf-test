@@ -14,7 +14,7 @@
   @apply border-none outline-none text-14 md:text-16 w-full placeholder:text-71717A placeholder:tracking-0.3 placeholder:text-14 placeholder:md:text-16;
 }
 .error {
-  @apply text-12 mt-1 ml-1;
+  @apply text-12 mt-1 ml-1 max-w-[365px];
   color: red;
 }
 .apply_text {
