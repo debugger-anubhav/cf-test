@@ -1,10 +1,7 @@
-import partner from "./partnership.svg";
 import editIcon from "./home_page_assets/rating/editIcon.svg";
 
 // demo produt page  images
 import CtaImage from "./product_cta.svg";
-
-import DownloadQR from "@/assets/header/download-QR.svg";
 
 const Desktop = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
 const Mobile = "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/";
@@ -25,11 +22,6 @@ export const DownloadForMobileImg =
 
 export const AboutUs = "https://d3juy0zp6vqec8.cloudfront.net/images";
 export const Career = "https://d3juy0zp6vqec8.cloudfront.net/images";
-
-export const Images = {
-  partner,
-  DownloadQR,
-};
 
 export const HomePageImages = {
   bedroom: Desktop + "bed-room.webp",
