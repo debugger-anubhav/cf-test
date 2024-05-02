@@ -10,6 +10,10 @@ function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
+
   const [istoggled, setIstoggled] = useState(true);
   const [description, setDescription] = useState("");
   const [billCycleDay, setBillCycleDay] = useState(null);
@@ -23,7 +27,7 @@ function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
       description,
       billCycleDay: parseInt(billCycleDay),
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
 
   const handleBillCycleDayChange = e => {
@@ -100,7 +104,10 @@ function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
           />
         </div>
         <button
-          className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] !ml-0 `}
+          className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] !ml-0 ${
+            callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
+          }`}
+          disabled={!callFunctionFlag}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
           onClick={() => handleCreateRequest()}>
           Create request <ForwardArrowWithLine />

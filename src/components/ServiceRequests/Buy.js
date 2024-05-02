@@ -15,6 +15,9 @@ function Buy({heading, prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const label = {inputProps: {"aria-label": "Checkbox demo"}};
   const [showPickupReason, setShowPickupReason] = useState(false);
   const [Screen, setScreen] = useState(1);
@@ -60,7 +63,7 @@ function Buy({heading, prevScreen, data, isHelpDrawer}) {
       selected_product_name: selectedProducts.join(", "),
       description,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
 
   return (
@@ -158,7 +161,10 @@ function Buy({heading, prevScreen, data, isHelpDrawer}) {
                   selectedProducts.length === 0
                     ? "!bg-[#FFDF85] !cursor-not-allowed"
                     : ``
+                } ${
+                  callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
                 }`}
+                disabled={!callFunctionFlag}
                 onClick={() => handleCreateRequest()}>
                 Create request <ForwardArrowWithLine />
               </button>

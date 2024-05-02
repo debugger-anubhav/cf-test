@@ -20,7 +20,9 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const [description, setDescription] = useState("");
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const formikRef = useRef(null);
@@ -35,7 +37,7 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
       mobile_number: values.contactNumber,
       description,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
   const validationSchema = Yup.object({
     contactNumber: Yup.string()
@@ -128,7 +130,9 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
                   !formikRef?.current?.isValid
                     ? "!bg-[#FFDF85] !cursor-not-allowed "
                     : ``
-                } !hidden md:!flex`}>
+                } !hidden md:!flex ${
+                  callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
+                }`}>
                 Create request <ForwardArrowWithLine />
               </button>
               <div className={`${styles.bottom_row_formik} !flex md:!hidden`}>

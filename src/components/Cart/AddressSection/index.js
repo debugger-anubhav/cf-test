@@ -962,16 +962,20 @@ const AddressSection = () => {
               <button
                 disabled={
                   (isOfflineCustomer !== 1 && !primaryAddress) ||
-                  (haveGstNumber && gstNumber === "")
+                  (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
                 }
                 onClick={() => {
+                  console.log("coming");
                   if (isOfflineCustomer === 1) {
                     checkPostalCode("offlineCustomer");
                     // checkCartQunatity("offlineCustomer");
                   } else checkPostalCode(0);
                 }}
                 className={`${
-                  haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
+                  isOfflineCustomer !== 1 &&
+                  haveGstNumber &&
+                  gstNumber === "" &&
+                  "!cursor-not-allowed"
                 } ${!primaryAddress && "!cursor-not-allowed"} ${
                   otherStyles.proceed_button
                 }`}>
