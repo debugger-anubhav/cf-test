@@ -17,12 +17,12 @@ const MediaCoverage = () => {
         {MediaCoverageImagesRepeated?.map((imageUrl, index) => {
           return (
             <div
-              key={index.toString()}
+              key={(index + 1).toString()}
               className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative"
               aria-hidden="true">
               <img
                 src={imageUrl.img}
-                alt={imageUrl.alt + index}
+                alt={imageUrl.alt + (index + 1)}
                 className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
                 loading="lazy"
                 width={124}
