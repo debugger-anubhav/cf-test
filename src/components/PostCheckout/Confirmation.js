@@ -39,12 +39,9 @@ const PaymentConfirmation = () => {
     baseInstance
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
-        console.log(res, "ressssss");
-
         const scriptData = res?.data?.data;
-
         const eventItems = [];
-        res?.data?.data?.forEach((product, index) => {
+        scriptData?.items?.forEach((product, index) => {
           const item = {
             productId: product.id,
             productName: product?.name,
@@ -78,7 +75,6 @@ const PaymentConfirmation = () => {
           currency: scriptData?.currency,
           value: scriptData?.value,
         });
-        console.log(scriptData, "scriptdata");
         window?.lintrk("track", {conversion_id: 11504433});
       })
       .catch(err => console.log(err));
@@ -98,6 +94,8 @@ const PaymentConfirmation = () => {
   };
   useEffect(() => {
     getTransactionId(oid);
+  }, []);
+  useEffect(() => {
     getPaymentScript();
   }, []);
 
