@@ -1,7 +1,7 @@
 import * as React from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import {Close, DownArrow, Icons} from "@/assets/icon";
+import {Close, Icons} from "@/assets/icon";
 import string from "@/constants/Constant.json";
 import {cityUrl} from "../../../../appConfig";
 import {useDispatch, useSelector} from "react-redux";
@@ -442,7 +442,13 @@ export default function CommonDrawer({
             ) : (
               <Skeleton variant="text" width={80} height={20} />
             )}
-            {DrawerName !== "menu" && <DownArrow size={20} color={"#45454A"} />}
+            {DrawerName !== "menu" && (
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/arrow-drop-down.svg"
+                alt="down-arrow"
+                className="w-6 h-6 flex justify-center items-center"
+              />
+            )}
           </span>
         )}
       </div>
