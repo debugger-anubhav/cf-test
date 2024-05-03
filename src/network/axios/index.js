@@ -36,7 +36,7 @@ baseInstance.interceptors.request.use(config => {
   const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
   const apiKey = createEncryptedHash(plaintext, mySecretKey);
 
-  const jwtToken = jwt.sign({payload: apiKey}, mySecretKey, {expiresIn: "1m"});
+  const jwtToken = jwt.sign({payload: apiKey}, mySecretKey, {expiresIn: "2m"});
   config.headers.Apikey = jwtToken;
   // config.headers.Apikey = apiKey;
   return config;

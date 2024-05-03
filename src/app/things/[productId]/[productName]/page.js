@@ -31,7 +31,7 @@ async function create(params) {
   };
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
   const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
-    expiresIn: "1m",
+    expiresIn: "2m",
   });
 
   const data = await fetch(

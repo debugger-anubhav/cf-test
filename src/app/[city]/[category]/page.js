@@ -60,7 +60,7 @@ async function create(params) {
   // const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
   const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
-    expiresIn: "1m",
+    expiresIn: "2m",
   });
 
   if (
@@ -98,7 +98,7 @@ async function create(params) {
 async function getAllCitiesList() {
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
   const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
-    expiresIn: "1m",
+    expiresIn: "2m",
   });
 
   try {
