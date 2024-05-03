@@ -42,6 +42,14 @@ const Card = ({
 
   const dispatch = useDispatch();
 
+  const words =
+    "Jade Solid Wood King Size Double Bed with 6 Inches Memory Foam Mattress".split(
+      " ",
+    );
+  const xlTrimmedString =
+    words.length > 8
+      ? words.slice(0, 8).join(" ") + "..."
+      : desc.replace(/-/g, " ");
   useEffect(() => {
     dispatch(reduxSetModalState(loginModal));
     dispatch(setLoginPopupState(loginModal));
@@ -210,7 +218,8 @@ const Card = ({
           </div>
           <div className={styles.desc_div}>
             <h3 className={styles.desc} style={{lineHeight: "normal"}}>
-              {desc.replace(/-/g, " ")}
+              {/* {desc.replace(/-/g, " ")} */}
+              {xlTrimmedString}
             </h3>
             <div
               id={productID}

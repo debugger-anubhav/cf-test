@@ -119,12 +119,7 @@ export const PaymentAndBilling = [
   },
   {
     que: "What is the cancellation policy?",
-    ans: "You can cancel your subscription anytime before delivery or up to 48 hours after delivery and get a complete refund for the items. However, a cancellation after 48 hours of delivery means you'll have to pay early termination charges",
-    isChildren: [
-      "If tenure opted is 3 months and termination requested before completion of 3 months, there will be no refund",
-      "If tenure opted is other than 3 months and difference between opted tenure and completed tenure is equal to or lesser than 3 months, only 1 month rent will be refunded",
-      "If tenure opted is other than 3 months and difference between opted tenure and completed tenure is greater than 3 months, 2 months rent will be refunded",
-    ],
+    ans: "You can cancel your subscription at any time before or within 48 hours after delivery and receive a full refund for the items. Please note that if you cancel after 48 hours, there will be a small early termination fee.<br/> If you choose a 3-month subscription and wish to cancel before the full term is completed, unfortunately, there won't be a refund. However, if you select a subscription for more than 3 months and cancel before the agreed term, you will receive a refund equivalent to one month's subscription fee.",
   },
   {
     que: "Money got debited but my order was not placed. What should I do?",
