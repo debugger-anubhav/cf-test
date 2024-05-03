@@ -51,8 +51,8 @@ const CategoryCard = ({
       ? words.slice(0, 12).join(" ") + "..."
       : desc.replace(/-/g, " ");
   const mdTrimmedString =
-    words.length > 10
-      ? words.slice(0, 10).join(" ") + "..."
+    words.length > 5
+      ? words.slice(0, 5).join(" ") + "..."
       : desc.replace(/-/g, " ");
 
   const dispatch = useDispatch();
