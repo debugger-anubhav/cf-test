@@ -820,15 +820,16 @@ const ProductDetails = ({params}) => {
               "Add to Cart"
             )}
           </button>
-
-          <div className={styles.emi_wrapper}>
-            <RiSparklingFill size={16} color={"#597492"} />
-            <p className={styles.emi_text}>
-              Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
-              using No-Cost EMI (excluding GST)
-            </p>
-            <RiSparklingFill size={16} color={"#597492"} />
-          </div>
+          {durationArray.length > 0 && (
+            <div className={styles.emi_wrapper}>
+              <RiSparklingFill size={16} color={"#597492"} />
+              <p className={styles.emi_text}>
+                Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
+                using No-Cost EMI (excluding GST)
+              </p>
+              <RiSparklingFill size={16} color={"#597492"} />
+            </div>
+          )}
 
           <div className={styles.kyc_wrapper}>
             <div className={`w-100 h-100 absolute z-10`} />
@@ -866,47 +867,49 @@ const ProductDetails = ({params}) => {
             ))}
           </div>
 
-          <div onClick={toggleDrawer} className={styles.city_shield_wrapper}>
-            <div className={styles.getPeace_div}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.getPeace_text}>{str.get_peace}</p>
-            </div>
-            <div className={`${styles.flexx} justify-between`}>
-              <div className={styles.flexx}>
-                <VerifyIcon size={30} color={"#2D9469"} />
-                <p className={styles.city_shield_head}>City Shield </p>
+          {durationArray?.length > 0 && (
+            <div onClick={toggleDrawer} className={styles.city_shield_wrapper}>
+              <div className={styles.getPeace_div}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.getPeace_text}>{str.get_peace}</p>
               </div>
-              <button className={styles.read_more}>Read More</button>
-            </div>
-            <p className={styles.opt_for}>
-              Opt for City Shield today and get covered for accidental damages
-              at ONLY <span className={styles.rupeeIcon}>₹</span>
-              {cityShieldCurrentPrice}
-              /month!
-            </p>
-            <p className={styles.protect}>
-              Protect your appliances and furniture worth{" "}
-              <span className={styles.rupeeIcon}>₹</span>70,000{" "}
-            </p>
+              <div className={`${styles.flexx} justify-between`}>
+                <div className={styles.flexx}>
+                  <VerifyIcon size={30} color={"#2D9469"} />
+                  <p className={styles.city_shield_head}>City Shield </p>
+                </div>
+                <button className={styles.read_more}>Read More</button>
+              </div>
+              <p className={styles.opt_for}>
+                Opt for City Shield today and get covered for accidental damages
+                at ONLY <span className={styles.rupeeIcon}>₹</span>
+                {cityShieldCurrentPrice}
+                /month!
+              </p>
+              <p className={styles.protect}>
+                Protect your appliances and furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+              </p>
 
-            {durationArray.length > 0 && (
-              <div className={styles.cityshield_prices}>
-                <p className={styles.currentPrice}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {cityShieldCurrentPrice}/mo
-                </p>
-                <p className={styles.originalPrice}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {cityShieldOriginalPrice} / mo
-                </p>
-                {cityShieldDiscount > 0 && (
-                  <div className={styles.discount}>
-                    -{cityShieldDiscount}% OFF
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+              {durationArray.length > 0 && (
+                <div className={styles.cityshield_prices}>
+                  <p className={styles.currentPrice}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {cityShieldCurrentPrice}/mo
+                  </p>
+                  <p className={styles.originalPrice}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {cityShieldOriginalPrice} / mo
+                  </p>
+                  {cityShieldDiscount > 0 && (
+                    <div className={styles.discount}>
+                      -{cityShieldDiscount}% OFF
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           <CityshieldDrawer
             toggleDrawer={toggleDrawer}
