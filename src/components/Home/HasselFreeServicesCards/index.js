@@ -12,9 +12,8 @@ const HasselFreeServicesCards = () => {
         <div className={style.card_container}>
           {HasselFreeData?.map((data, index) => {
             return (
-              <>
+              <div key={index.toString()}>
                 <div
-                  key={index.toString()}
                   className={`${style.card_wrapper}  ${
                     index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
                   }`}
@@ -63,7 +62,7 @@ const HasselFreeServicesCards = () => {
                     <p className={style.content}>{data?.text}</p>
                   </div>
                 </div> */}
-              </>
+              </div>
             );
           })}
         </div>

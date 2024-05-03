@@ -240,7 +240,9 @@ export default function CommonDrawer({
 
             {string.landing_page.header.menuList3?.map((item, index) => {
               return (
-                <>
+                <div
+                  key={index.toString()}
+                  className={styles.offer_card_skeleton}>
                   {index !== 3 ? (
                     <p className={styles.menu_item} key={index.toString()}>
                       <a href={item.link}>{item?.item}</a>
@@ -269,7 +271,7 @@ export default function CommonDrawer({
                   {index === 2 && (
                     <div className={`!hidden lg:!flex ${styles.divider}`}></div>
                   )}
-                </>
+                </div>
               );
             })}
           </div>

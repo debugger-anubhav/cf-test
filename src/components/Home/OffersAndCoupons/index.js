@@ -160,7 +160,7 @@ export const OffersSkeleton = () => {
       />
       <div className={styles.offer_card_skeleton}>
         {[1, 2, 3, 4]?.map((item, index) => (
-          <>
+          <div key={index.toString()}>
             <Skeleton
               variant="rectangular"
               className={styles.offer_coupon_skeleton}
@@ -168,7 +168,7 @@ export const OffersSkeleton = () => {
               width={"100%"}
               height={"100%"}
             />
-          </>
+          </div>
         ))}
       </div>
     </div>
