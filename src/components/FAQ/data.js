@@ -119,7 +119,7 @@ export const PaymentAndBilling = [
   },
   {
     que: "What is the cancellation policy?",
-    ans: "You can cancel your subscription at any time before or within 48 hours after delivery and receive a full refund for the items. Please note that if you cancel after 48 hours, there will be a small early termination fee.<br/> If you choose a 3-month subscription and wish to cancel before the full term is completed, unfortunately, there won't be a refund. However, if you select a subscription for more than 3 months and cancel before the agreed term, you will receive a refund equivalent to one month's subscription fee.",
+    ans: "You can cancel your subscription at any time before or within 48 hours after delivery and receive a full refund for the items. Please note that if you cancel after 48 hours, there will be a small early termination fee.<br/> <br/> If you choose a 3-month subscription and wish to cancel before the full term is completed, unfortunately, there won't be a refund. However, if you select a subscription for more than 3 months and cancel before the agreed term, you will receive a refund equivalent to one month's subscription fee.",
   },
   {
     que: "Money got debited but my order was not placed. What should I do?",
