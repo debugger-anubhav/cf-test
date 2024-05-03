@@ -60,9 +60,9 @@ const PaymentConfirmation = () => {
           totalPrice: scriptData?.value,
           shippingPrice: scriptData?.shipping,
           taxPrice: scriptData?.tax,
-          coupons: "WELCOME10",
+          coupons: scriptData?.couponCode,
           currency: scriptData?.currency,
-          customerId: "CF-11011",
+          customerId: scriptData?.customerId,
           lineItems: eventItems,
         });
 
