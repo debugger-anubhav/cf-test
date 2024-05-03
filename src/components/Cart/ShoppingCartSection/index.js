@@ -371,6 +371,7 @@ const ShoppingCartSection = () => {
 
   const handleChangeRoute = () => {
     dispatch(setShoppingCartTab(1));
+    window?.scrollTo(0, 0);
   };
 
   const isOfflineCustomer = useSelector(
