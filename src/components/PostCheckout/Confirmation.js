@@ -78,6 +78,7 @@ const PaymentConfirmation = () => {
           currency: scriptData?.currency,
           value: scriptData?.value,
         });
+        console.log(scriptData, "scriptdata");
         window?.lintrk("track", {conversion_id: 11504433});
       })
       .catch(err => console.log(err));
