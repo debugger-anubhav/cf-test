@@ -7,19 +7,9 @@ const WhyCitymax = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const cardData = [
     {
-      icon: "free-swap-icon.svg",
-      head: "Free Swap",
-      desc: "Swap any product or design anytime during the subscription period",
-    },
-    {
-      icon: "cancel-anytime-icon.svg",
-      head: "Cancel anytime",
-      desc: "You can cancel your subscription anytime. We will deduct one month's extra rent as a penalty & refund rest of the amount",
-    },
-    {
-      icon: "easy-on-wallet-icon.svg",
-      head: "Easy on Wallet",
-      desc: "You can pay subscription fee in one go or opt for our no cost EMI plan",
+      icon: "comprehensive-furnishing-icon.svg",
+      head: "Comprehensive Furnishing",
+      desc: "A single plan for your furniture & appliances requirements",
     },
     {
       icon: "quality-products-icon.svg",
@@ -27,14 +17,24 @@ const WhyCitymax = () => {
       desc: "Branded appliances and solid Sheesham Wood products in mint new condition",
     },
     {
-      icon: "comprehensive-furnishing-icon.svg",
-      head: "Comprehensive Furnishing",
-      desc: "A single plan for your furniture & appliances requirements",
+      icon: "easy-on-wallet-icon.svg",
+      head: "Easy on Wallet",
+      desc: "You can pay subscription fee in one go or opt for our no cost EMI plan",
     },
     {
       icon: "free-delivery-installation-and-maintenance-icon.svg",
       head: "Free Delivery, Installation & Maintenance",
       desc: "There is no delivery fee & our experts will install the products in a jiffy for you",
+    },
+    {
+      icon: "cancel-anytime-icon.svg",
+      head: "Free relocation",
+      desc: "Planning to relocate? We’ll help you relocate your furniture for free",
+    },
+    {
+      icon: "free-swap-icon.svg",
+      head: "Free Swap",
+      desc: "Swap any product or design anytime during the subscription period",
     },
   ];
 
