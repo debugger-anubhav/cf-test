@@ -3,7 +3,6 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
-import {getLocalStorage} from "@/constants/constant";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -30,10 +29,6 @@ export const metadata = {
   },
 };
 export default function RootLayout({children}) {
-  let login;
-  if (typeof window !== "undefined") {
-    login = getLocalStorage("_ga");
-  }
   // const AMPLITUDE_ID = "";
 
   return (
@@ -187,7 +182,7 @@ export default function RootLayout({children}) {
           />
         )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -208,7 +203,7 @@ export default function RootLayout({children}) {
             `,
             }}
           />
-        )}
+        )} */}
 
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script

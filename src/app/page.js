@@ -20,6 +20,7 @@ import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import pMinDelay from "p-min-delay";
+import {getLocalStorage} from "@/constants/constant";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -109,7 +110,7 @@ const CombineSection = loadable(() =>
 
 export default function Home() {
   const myElementRef = useRef();
-
+  const userId = getLocalStorage("_ga");
   // added
   useEffect(() => {
     const handleTouchStart = event => {
@@ -126,9 +127,37 @@ export default function Home() {
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
+  useEffect(() => {
+    console.log(window?.gtag, "homeeee");
+    window?.gtag("js", new Date());
+    window?.gtag("config", "G-05PLBRM6KD", {
+      user_id: userId,
+    });
+    // if (userId !== "") {
+
+    // } else {
+    //   window?.gtag("config", "G-05PLBRM6KD");
+    // }
+  }, [userId]);
 
   return (
     <>
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <script
+          defer
+          async
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              
+            `,
+          }}
+        />
+      )}
+
       <meta
         name="Title"
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
