@@ -52,17 +52,6 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        window?.Northbeam.firePurchaseEvent({
-          id: scriptData?.transaction_id,
-          totalPrice: scriptData?.value,
-          shippingPrice: scriptData?.shipping,
-          taxPrice: scriptData?.tax,
-          coupons: scriptData?.couponCode,
-          currency: scriptData?.currency,
-          customerId: scriptData?.customerId,
-          lineItems: eventItems,
-        });
-
         window?.gtag("event", "purchase", {
           transaction_id: scriptData?.transaction_id,
           value: scriptData?.value,
@@ -76,6 +65,16 @@ const PaymentConfirmation = () => {
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
+        window?.Northbeam.firePurchaseEvent({
+          id: scriptData?.transaction_id,
+          totalPrice: scriptData?.value,
+          shippingPrice: scriptData?.shipping,
+          taxPrice: scriptData?.tax,
+          coupons: scriptData?.couponCode,
+          currency: scriptData?.currency,
+          customerId: scriptData?.customerId,
+          lineItems: eventItems,
+        });
       })
       .catch(err => console.log(err));
   };
