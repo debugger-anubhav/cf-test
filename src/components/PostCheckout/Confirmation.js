@@ -65,16 +65,16 @@ const PaymentConfirmation = () => {
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
-        window?.Northbeam.firePurchaseEvent({
-          id: scriptData?.transaction_id,
-          totalPrice: scriptData?.value,
-          shippingPrice: scriptData?.shipping,
-          taxPrice: scriptData?.tax,
-          coupons: scriptData?.couponCode,
-          currency: scriptData?.currency,
-          customerId: scriptData?.customerId,
-          lineItems: eventItems,
-        });
+        // window?.Northbeam.firePurchaseEvent({
+        //   id: scriptData?.transaction_id,
+        //   totalPrice: scriptData?.value,
+        //   shippingPrice: scriptData?.shipping,
+        //   taxPrice: scriptData?.tax,
+        //   coupons: scriptData?.couponCode,
+        //   currency: scriptData?.currency,
+        //   customerId: scriptData?.customerId,
+        //   lineItems: eventItems,
+        // });
       })
       .catch(err => console.log(err));
   };
