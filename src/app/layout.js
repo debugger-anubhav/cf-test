@@ -3,6 +3,7 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
+import {getLocalStorage} from "@/constants/constant";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -29,7 +30,10 @@ export const metadata = {
   },
 };
 export default function RootLayout({children}) {
-  const login = "";
+  let login;
+  if (typeof window !== "undefined") {
+    login = getLocalStorage("_ga");
+  }
   // const AMPLITUDE_ID = "";
 
   return (
@@ -189,6 +193,29 @@ export default function RootLayout({children}) {
             async
             dangerouslySetInnerHTML={{
               __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+              if (${login} !== '') {
+                gtag('config', 'G-05PLBRM6KD', {
+                  'user_id': ${login}
+                });
+              } else {
+                gtag('config', 'G-05PLBRM6KD');
+              }
+            `,
+            }}
+          />
+        )}
+
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
         window.dataLayer = window.dataLayer || [];
         function gtag() {
           dataLayer.push(arguments);
@@ -201,7 +228,7 @@ export default function RootLayout({children}) {
       `,
             }}
           />
-        )}
+        )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
