@@ -129,9 +129,9 @@ export default function Home() {
   }, []);
   useEffect(() => {
     console.log(window?.gtag, "homeeee");
-    window?.gtag("js", new Date());
 
     if (userId !== "") {
+      window?.gtag("js", new Date());
       window?.gtag("config", "G-05PLBRM6KD", {
         user_id: userId,
       });
