@@ -20,7 +20,7 @@
   @apply text-[#48678B] ml-1;
 }
 .write_to_us_wrapper {
-  @apply flex md:w-fit w-full px-8 lg:h-[56px] h-[48px] gap-[10px] rounded-lg border-2 items-center justify-center border-[#71717A] bg-[#FFF];
+  @apply flex w-fit px-8 lg:h-[56px] h-[48px] gap-[10px] rounded-lg border-2 items-center justify-center border-[#71717A] bg-[#FFF];
 }
 .tbMail_icon {
   @apply w-[20px] h-[21px] text-[#71717A];

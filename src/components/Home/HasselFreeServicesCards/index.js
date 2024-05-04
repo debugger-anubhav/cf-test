@@ -28,7 +28,7 @@ const HasselFreeServicesCards = () => {
                     alt={data?.Heading}
                     layout="fill"
                     className={`${style.card_wrapper} hidden xl:flex`}
-                    objectFit="cover"
+                    // objectFit="cover"
                     objectPosition="center"
                   />
                   <Image
@@ -36,7 +36,7 @@ const HasselFreeServicesCards = () => {
                     alt={data?.Heading}
                     layout="fill"
                     className={`${style.card_wrapper} flex xl:hidden`}
-                    objectFit="cover"
+                    // objectFit="cover"
                     objectPosition="center"
                   />
                   <div className={style.hassel_heading_wrapper}>
