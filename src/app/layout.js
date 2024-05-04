@@ -224,6 +224,21 @@ export default function RootLayout({children}) {
             }}
           />
         )} */}
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              
+            `,
+            }}
+          />
+        )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script

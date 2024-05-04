@@ -130,34 +130,18 @@ export default function Home() {
   useEffect(() => {
     console.log(window?.gtag, "homeeee");
     window?.gtag("js", new Date());
-    window?.gtag("config", "G-05PLBRM6KD", {
-      user_id: userId,
-    });
-    // if (userId !== "") {
 
-    // } else {
-    //   window?.gtag("config", "G-05PLBRM6KD");
-    // }
+    if (userId !== "") {
+      window?.gtag("config", "G-05PLBRM6KD", {
+        user_id: userId,
+      });
+    } else {
+      window?.gtag("config", "G-05PLBRM6KD");
+    }
   }, [userId]);
 
   return (
     <>
-      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-        <script
-          defer
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              
-            `,
-          }}
-        />
-      )}
-
       <meta
         name="Title"
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"

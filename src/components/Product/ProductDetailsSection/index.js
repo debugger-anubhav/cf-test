@@ -729,9 +729,11 @@ const ProductDetails = ({params}) => {
           </div>
 
           <div className={styles.duration}>
-            <p className={styles.duration_text}>
-              For how many months would you like to rent this?
-            </p>
+            {durationArray.length > 0 && (
+              <p className={styles.duration_text}>
+                For how many months would you like to rent this?
+              </p>
+            )}
 
             <div className={styles.circle_div}>
               {durationArray.map((item, index) => (
