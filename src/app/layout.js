@@ -99,8 +99,8 @@ export default function RootLayout({children}) {
             `,
           }}
         />
-
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* Northbeam script  */}
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             async
             defer
@@ -118,7 +118,7 @@ export default function RootLayout({children}) {
                  for(var n=[],r=1;r<arguments.length;r++)n[r-1]=arguments[r];
                  a.push({fnName:e,args:n})
                }
-               var a=[],n=((n={_q:a})[r.A]=function(e,n){return t(r.A,e,n)},n[r.B]=function(){return t(r.B)},n[r.C]=function(e,n){return t(r.C,e,n)},n[r.D]=function(e,n){return t(r.D,e,n)},n[r.E]=function(e){return t(r.E,e)},window?.Northbeam=n,document?.createElement("script"));
+               var a=[],n=((n={_q:a})[r.A]=function(e,n){return t(r.A,e,n)},n[r.B]=function(){return t(r.B)},n[r.C]=function(e,n){return t(r.C,e,n)},n[r.D]=function(e,n){return t(r.D,e,n)},n[r.E]=function(e){return t(r.E,e)},window?.Northbeam,document?.createElement("script"));
                n.async=!0;
                n.src=e;
                document?.head.appendChild(n);
@@ -126,7 +126,7 @@ export default function RootLayout({children}) {
            `,
             }}
           />
-        )}
+        )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
