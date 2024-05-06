@@ -14,7 +14,6 @@ import ModalContentForSettingProfile from "./components/ModalContentForSettingPr
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-// import {useCookies} from "react-cookie";
 import Cookies from "universal-cookie";
 import {setLoginState} from "@/store/Slices";
 import {useDispatch} from "react-redux";

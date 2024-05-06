@@ -1,4 +1,3 @@
-// import {useCookies} from "react-cookie";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import Cookies from "universal-cookie";
