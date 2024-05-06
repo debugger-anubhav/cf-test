@@ -74,7 +74,7 @@ export default function RootLayout({children}) {
         <link
           rel="shortcut icon"
           type="image/x-icon"
-          href="https://cityfurnish.com/addon/assets/logo/favicon.png"></link>
+          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
 
         <script
           type="application/ld+json"
