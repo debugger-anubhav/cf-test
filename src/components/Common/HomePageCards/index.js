@@ -42,10 +42,8 @@ const Card = ({
 
   const dispatch = useDispatch();
 
-  const words =
-    "Jade Solid Wood King Size Double Bed with 6 Inches Memory Foam Mattress".split(
-      " ",
-    );
+  const words = desc.replace(/-/g, " ").split(" ");
+
   const xlTrimmedString =
     words.length > 8
       ? words.slice(0, 8).join(" ") + "..."
