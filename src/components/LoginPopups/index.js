@@ -40,7 +40,7 @@ const LoginModal = ({
   const [emailArr, setEmailArr] = useState();
   const [disableVerify, setDisableVerify] = useState(false);
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-
+  const [proceedDisable, setProceedDisable] = useState(false);
   React.useEffect(() => {
     if (isSetupProfile) setModalCategory("setUpAccount");
     else setModalCategory("changeNumber");
@@ -182,6 +182,7 @@ const LoginModal = ({
 
   const handleMultipleEmails = email => {
     handleVerification(otp, email);
+    setProceedDisable(true);
     // isCheckoutPage && setModalCategory("setUpAccount");
   };
 
@@ -229,6 +230,7 @@ const LoginModal = ({
             handleModalCategory={handleModalCategory}
             setContact={setContact}
             disableVerify={disableVerify}
+            proceedDisable={proceedDisable}
           />
         </Drawer>
       ) : (
@@ -268,6 +270,7 @@ const LoginModal = ({
             handleModalCategory={handleModalCategory}
             setContact={setContact}
             disableVerify={disableVerify}
+            proceedDisable={proceedDisable}
           />
         </Modal>
       )}
@@ -300,6 +303,7 @@ const ModalContent = ({
   setCountdown,
   setContact,
   disableVerify,
+  proceedDisable,
 }) => (
   <>
     {modalCategory === "changeNumber" ? (
@@ -348,7 +352,7 @@ const ModalContent = ({
         setModalCategory={val => setModalCategory(val)}
         handleMultipleEmails={handleMultipleEmails}
         data={emailArr}
-        disableVerify={disableVerify}
+        proceedDisable={proceedDisable}
       />
     ) : modalCategory === "setUpAccount" ? (
       <ModalContentForSettingProfile
