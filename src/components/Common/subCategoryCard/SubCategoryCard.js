@@ -69,7 +69,7 @@ const SubCategoryCard = ({productID}) => {
   const handleWhislistCard = e => {
     e.stopPropagation();
     if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
+      router.push("https://cityfurnish.com/login");
       return;
     }
     // dispatch(addRemoveWhishListitems(!inWishList));
