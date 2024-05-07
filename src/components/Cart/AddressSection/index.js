@@ -297,7 +297,10 @@ const AddressSection = () => {
       alert("Server error. Are you online?");
       return;
     }
-
+    if (result?.data?.data?.status === false) {
+      showToastNotification(result?.data?.data?.message, 3);
+      return null;
+    }
     const {
       id: orderId,
       currency,
