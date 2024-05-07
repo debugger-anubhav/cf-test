@@ -89,7 +89,7 @@
 }
 
 .need_image {
-  @appply h-full w-full object-cover pointer-events-none;
+  @apply h-full w-full object-cover pointer-events-none;
 }
 .need_img_title {
   @apply font-Poppins text-14 md:text-16 font-medium text-45454A pb-1 mt-[8px];

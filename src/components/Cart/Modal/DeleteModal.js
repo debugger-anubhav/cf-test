@@ -14,7 +14,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
-import {reduxSetModalState} from "@/store/Slices";
+import {reduxSetModalState, setMonthlyUpfrontLoader} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 
@@ -27,6 +27,7 @@ const DeleteModal = ({
   id,
   setIsLogin,
   isLogin,
+  fetchBill,
 }) => {
   const {checkAuthentication} = useAuthentication();
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
@@ -68,11 +69,13 @@ const DeleteModal = ({
   }, []);
 
   const handleDeleteItem = async (showToast = true) => {
+    dispatch(setMonthlyUpfrontLoader(true));
     updateArr(productId);
     try {
       await baseInstance.get(endPoints.addToCart.deleteItem(id, userId));
       closeModal();
       showToast && showToastNotification("Item deleted from the cart", 3);
+      fetchBill();
     } catch (error) {
       console.log(error?.message || "some error");
     }

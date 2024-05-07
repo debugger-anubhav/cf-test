@@ -245,6 +245,7 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
+    dispatch(setMonthlyUpfrontLoader(true));
     setQuantityButton("disable");
     let updatedItems;
     if (newQuantity < 1) {
@@ -285,6 +286,7 @@ const ShoppingCartSection = () => {
   };
 
   const fetchBill = async showMsg => {
+    dispatch(setMonthlyUpfrontLoader(false));
     try {
       const headers = {
         // userId: parseInt(userIdToUse),
@@ -424,6 +426,7 @@ const ShoppingCartSection = () => {
             setIsLogin(bool);
           }}
           isLogin={isLogin}
+          fetchBill={() => fetchBill()}
         />
 
         <LoginModal
@@ -752,7 +755,11 @@ const ShoppingCartSection = () => {
                         />
                       </div>
                     ) : (
-                      <div onClick={() => setIsChecked(true)}>
+                      <div
+                        onClick={() => {
+                          dispatch(setMonthlyUpfrontLoader(true));
+                          setIsChecked(true);
+                        }}>
                         <UncheckedBox
                           size={20}
                           color={"#5774AC"}

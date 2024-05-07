@@ -20,7 +20,7 @@ export const statusToImageMap = {
   "order failed": "payment-failed.svg",
   "kyc docs under review": "kyc-under-review.svg",
   "kyc rejected": "kyc-rejected.svg",
-  "kyc appproved": "kyc-approved.svg",
+  "kyc approved": "kyc-approved.svg",
   "kyc completed": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
