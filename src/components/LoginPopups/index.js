@@ -348,6 +348,7 @@ const ModalContent = ({
         setModalCategory={val => setModalCategory(val)}
         handleMultipleEmails={handleMultipleEmails}
         data={emailArr}
+        disableVerify={disableVerify}
       />
     ) : modalCategory === "setUpAccount" ? (
       <ModalContentForSettingProfile

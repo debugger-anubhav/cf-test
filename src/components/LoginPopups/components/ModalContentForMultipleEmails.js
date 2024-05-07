@@ -7,6 +7,7 @@ const ModalContentForMultipleEmails = ({
   setStartCountdown,
   handleMultipleEmails,
   data,
+  disableVerify,
 }) => {
   const [selectedEmail, setSelectedEmail] = useState(data[0]);
 
@@ -53,7 +54,9 @@ const ModalContentForMultipleEmails = ({
         </div>
         <button
           onClick={() => handleMultipleEmails(selectedEmail)}
-          className={styles.proceed_btn}>
+          className={`${styles.proceed_btn}   disableVerify ? "cursor-not-allowed" : "cursor-pointer"
+        }`}
+          disabled={disableVerify}>
           Proceed
         </button>
       </div>
