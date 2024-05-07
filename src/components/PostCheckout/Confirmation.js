@@ -106,88 +106,55 @@ const PaymentConfirmation = () => {
   }, []);
 
   return (
-    <>
-      <head>
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            defer
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
-          />
-        )}
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            defer
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              gtag('js', new Date());
-              if (${userId} !== '') {
-                gtag('config', 'G-05PLBRM6KD', {
-                  'user_id': ${userId}
-                });
-              } else {
-                gtag('config', 'G-05PLBRM6KD');
-              }
-            `,
-            }}
-          />
-        )}
-      </head>
-      <div className={styles.main_container}>
-        <div className={styles.success_icon_div}>
-          <FaCheck color={"white"} className={styles.checkIcon} />
+    <div className={styles.main_container}>
+      <div className={styles.success_icon_div}>
+        <FaCheck color={"white"} className={styles.checkIcon} />
+      </div>
+
+      <h1 className={styles.head}>
+        Congratulations! We have received your order.
+      </h1>
+      <div className={styles.details_wrapper}>
+        <div className={styles.row}>
+          <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
+          <p className={styles.desc}>:</p>
+          <p className={`font-medium ${styles.desc}`}>#{oid}</p>
         </div>
-
-        <h1 className={styles.head}>
-          Congratulations! We have received your order.
-        </h1>
-        <div className={styles.details_wrapper}>
-          <div className={styles.row}>
-            <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
-            <p className={styles.desc}>:</p>
-            <p className={`font-medium ${styles.desc}`}>#{oid}</p>
-          </div>
-          <div className={styles.row}>
-            <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
-            <p className={styles.desc}>:</p>
-            {skeletonLoder ? (
-              <Skeleton variant="text" width={100} />
-            ) : (
-              <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
-            )}
-          </div>
-        </div>
-
-        <div className={styles.next_step_wrapper}>
-          <p className={styles.next_steps_header}>
-            For the next steps, you will be redirected to KYC & Documentation
-            page in
-            {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
-          </p>
-          <ul className={styles.steps}>
-            <div className={styles.row}>
-              <div className={styles.dot}></div>
-              <li className={styles.desc}>
-                Please verify your KYC within next 48 hours.
-              </li>
-            </div>
-
-            <div className={styles.row}>
-              <div className={styles.dot}></div>
-              <li className={styles.desc}>
-                Once your KYC is verified, we will be delivering your order
-                within 72 hours.
-              </li>
-            </div>
-          </ul>
+        <div className={styles.row}>
+          <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
+          <p className={styles.desc}>:</p>
+          {skeletonLoder ? (
+            <Skeleton variant="text" width={100} />
+          ) : (
+            <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
+          )}
         </div>
       </div>
-    </>
+
+      <div className={styles.next_step_wrapper}>
+        <p className={styles.next_steps_header}>
+          For the next steps, you will be redirected to KYC & Documentation page
+          in
+          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
+        </p>
+        <ul className={styles.steps}>
+          <div className={styles.row}>
+            <div className={styles.dot}></div>
+            <li className={styles.desc}>
+              Please verify your KYC within next 48 hours.
+            </li>
+          </div>
+
+          <div className={styles.row}>
+            <div className={styles.dot}></div>
+            <li className={styles.desc}>
+              Once your KYC is verified, we will be delivering your order within
+              72 hours.
+            </li>
+          </div>
+        </ul>
+      </div>
+    </div>
   );
 };
 
