@@ -36,7 +36,7 @@ async function create(params) {
 
   const data = await fetch(
     // `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=3847`,
-    `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=${params?.productId}`,
+    `https://cityfurnish.com/v1/fc-products/getProductSeoData?productId=${params?.productId}`,
     {
       method: "GET",
       headers: {
