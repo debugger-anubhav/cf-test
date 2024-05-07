@@ -40,6 +40,7 @@ const PaymentConfirmation = () => {
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
         const scriptData = res?.data?.data;
+        console.log(scriptData, "script_data_purchase");
         const eventItems = [];
         scriptData?.items?.forEach((product, index) => {
           const item = {
@@ -52,6 +53,7 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
+        console.log("first_call_11111111111");
         window?.gtag("event", "purchase", {
           transaction_id: scriptData?.transaction_id,
           value: scriptData?.value,
@@ -60,11 +62,15 @@ const PaymentConfirmation = () => {
           shipping: scriptData?.shipping,
           items: eventItems,
         });
+        console.log("second_call_2222222");
+
         window?.fbq("track", "Purchase", {
           currency: scriptData?.currency,
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
+        console.log("third_call_3333333333");
+
         // window?.Northbeam.firePurchaseEvent({
         //   id: scriptData?.transaction_id,
         //   totalPrice: scriptData?.value,
@@ -76,7 +82,7 @@ const PaymentConfirmation = () => {
         //   lineItems: eventItems,
         // });
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err, "purchase_event_error"));
   };
 
   const getTransactionId = id => {
