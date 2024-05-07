@@ -234,7 +234,6 @@ export default function RootLayout({children}) {
               function gtag() {
                 dataLayer.push(arguments);
               }
-              
             `,
             }}
           />
