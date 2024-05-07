@@ -38,7 +38,7 @@ const LoginModal = ({
   const [otp, setOtp] = useState("");
   const [userId, setUserId] = useState();
   const [emailArr, setEmailArr] = useState();
-
+  const [disableVerify, setDisableVerify] = useState(false);
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
 
   React.useEffect(() => {
@@ -110,7 +110,7 @@ const LoginModal = ({
     //   setOtpError(
     //     "Sorry, your OTP has timed out. Please request a new OTP to continue.",
     //   );
-
+    setDisableVerify(true);
     const body = {
       mobile_number: contact,
       otp,
@@ -126,6 +126,7 @@ const LoginModal = ({
           if (response?.data?.message === "Login Successfully.!") {
             const event = new Event("login");
             window?.dispatchEvent(event);
+            setDisableVerify(false);
             if (response?.data?.data?.access_token) {
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
@@ -227,6 +228,7 @@ const LoginModal = ({
             setCountdown={setCountdown}
             handleModalCategory={handleModalCategory}
             setContact={setContact}
+            disableVerify={disableVerify}
           />
         </Drawer>
       ) : (
@@ -265,6 +267,7 @@ const LoginModal = ({
             setCountdown={setCountdown}
             handleModalCategory={handleModalCategory}
             setContact={setContact}
+            disableVerify={disableVerify}
           />
         </Modal>
       )}
@@ -296,6 +299,7 @@ const ModalContent = ({
   handleMultipleEmails,
   setCountdown,
   setContact,
+  disableVerify,
 }) => (
   <>
     {modalCategory === "changeNumber" ? (
@@ -321,6 +325,7 @@ const ModalContent = ({
         otp={otp}
         setOtp={e => setOtp(e)}
         setCountdown={val => setCountdown(val)}
+        disableVerify={disableVerify}
       />
     ) : modalCategory === "resendOtp" ? (
       <ModalContentForResendOtp
