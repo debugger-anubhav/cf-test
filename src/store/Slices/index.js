@@ -195,6 +195,7 @@ export const CartPageSlice = createSlice({
     shoppingCartTab: 0,
     isOfflineCustomer: 0,
     isCitymaxOrder: false,
+    monthlyUpfrontLoader: true,
   },
   reducers: {
     getCartItems(state, action) {
@@ -216,6 +217,9 @@ export const CartPageSlice = createSlice({
     },
     getBillDetails(state, action) {
       state.billBreakout = action.payload;
+    },
+    setMonthlyUpfrontLoader(state, action) {
+      state.monthlyUpfrontLoader = action.payload;
     },
     getCouponCodeUsed(state, action) {
       state.couponCodeUsed = action.payload;
@@ -409,6 +413,7 @@ export const {
   emptyCart,
   setIsOfflineCustomer,
   setCitymaxOrder,
+  setMonthlyUpfrontLoader,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

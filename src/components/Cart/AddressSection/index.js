@@ -39,6 +39,7 @@ import {
   getSavedAddress,
   setCityShield,
   setCoinsApplied,
+  setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
 } from "@/store/Slices";
@@ -216,6 +217,7 @@ const AddressSection = () => {
         headers,
       );
       dispatch(getBillDetails(res?.data?.data));
+      dispatch(setMonthlyUpfrontLoader(false));
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
       dispatch(setCityShield(res?.data?.data?.cityshield));

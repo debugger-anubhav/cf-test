@@ -37,6 +37,7 @@ import {
   setCityShield,
   setCoinsApplied,
   setIsOfflineCustomer,
+  setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
 } from "@/store/Slices";
@@ -49,6 +50,7 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import Image from "next/image";
 import {RiSparklingFill} from "react-icons/ri";
+import {Skeleton} from "@mui/material";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -300,6 +302,7 @@ const ShoppingCartSection = () => {
       );
       setMinamountf(res?.data?.data?.coupon_minamountf);
       dispatch(getBillDetails(res?.data?.data));
+      dispatch(setMonthlyUpfrontLoader(false));
       // setCode(res?.data?.data?.couponsCode);
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
@@ -867,6 +870,7 @@ const ShoppingCartSection = () => {
                   <div className={styles.monthly_toggler}>
                     <p
                       onClick={() => {
+                        dispatch(setMonthlyUpfrontLoader(true));
                         const prevVal = isMonthly;
                         const isMonthlyVal = true;
                         setIsMonthly(true);
@@ -885,6 +889,7 @@ const ShoppingCartSection = () => {
                     </p>
                     <p
                       onClick={() => {
+                        dispatch(setMonthlyUpfrontLoader(true));
                         const prevVal = isMonthly;
                         const isMonthlyVal = false;
                         setIsMonthly(false);
@@ -951,17 +956,20 @@ const ShoppingCartSection = () => {
                       </p>
                     )}
                   </p>
+                  {data?.monthlyUpfrontLoader ? (
+                    <Skeleton variant="text" height={20} width={80} />
+                  ) : (
+                    <p className={styles.total_amount}>
+                      <span className={styles.rupeeIcon}>₹</span>
 
-                  <p className={styles.total_amount}>
-                    <span className={styles.rupeeIcon}>₹</span>
-
-                    {billBreakup?.totalPayableAmount?.toFixed(2)}
-                    {/* {isMonthly ? (
+                      {billBreakup?.totalPayableAmount?.toFixed(2)}
+                      {/* {isMonthly ? (
                       <>{billBreakup?.totalPayableAmount?.toFixed(2)}</>
                     ) : (
                       <>{parseInt(billBreakup?.totalPayableAmount)?.toFixed(2)}</>
                     )} */}
-                  </p>
+                    </p>
+                  )}
                 </div>
                 {isMonthly && (
                   <div>

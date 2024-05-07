@@ -10,7 +10,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {ForwardArrowWithLine, PersonIcon} from "@/assets/icon";
 import TotalBreakup from "@/components/Cart/Drawer/TotalBreakupDrawer";
 import {useDispatch} from "react-redux";
-import {getBillDetails} from "@/store/Slices";
+import {getBillDetails, setMonthlyUpfrontLoader} from "@/store/Slices";
 import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
@@ -40,6 +40,7 @@ const OrderSummary = ({
     if (isSubscriptionPage) {
       setData(subscriptionData);
       dispatch(getBillDetails(subscriptionData?.bill));
+      dispatch(setMonthlyUpfrontLoader(false));
       setIsCitymaxBill(false);
     } else {
       baseInstance
@@ -54,6 +55,7 @@ const OrderSummary = ({
           if (res?.data?.data?.productsList?.length === 0) router.push("/");
           else {
             dispatch(getBillDetails(res?.data?.data?.bill));
+            dispatch(setMonthlyUpfrontLoader(false));
             setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
           }
         })
