@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import styles from "./style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -19,6 +19,7 @@ const quantityOptions = [
 ];
 
 const EnquirySection = () => {
+  const recaptchaRef = useRef();
   const [perAddModal, setPerAddModal] = useState(false);
   // const [isVerified, setIsVerified] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
@@ -58,8 +59,9 @@ const EnquirySection = () => {
   });
 
   const handleRecaptchaVerify = value => {
+    recaptchaRef.current.reset();
     // if (value) setIsVerified(true);
-    // console.log(value);
+    console.log(value);
   };
 
   const handleSubmit = async values => {
@@ -244,8 +246,8 @@ const EnquirySection = () => {
 
                   <div className={styles.recaptcha}>
                     <ReCAPTCHA
-                      sitekey="'6LfkkNoUAAAAAFU8Z7C4zFRH0HhozEWJq-mELpfG"
-                      // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                       onChange={handleRecaptchaVerify}
                     />
                   </div>
