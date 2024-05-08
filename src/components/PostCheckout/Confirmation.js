@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
-import {useSearchParams} from "next/navigation";
+// import {useSearchParams} from "next/navigation";
 // import {setOrderIdFromOrderPage} from "@/store/Slices";
 // import {useDispatch} from "react-redux";
-import {endPoints} from "@/network/endPoints";
+// import {endPoints} from "@/network/endPoints";
 // import {Skeleton} from "@mui/material";
-import {baseInstance} from "@/network/axios";
+// import {baseInstance} from "@/network/axios";
 
 const PaymentConfirmation = () => {
   // const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   // const dispatch = useDispatch();
 
-  const oid = searchParams.get("oid");
+  // const oid = searchParams.get("oid");
 
   // const [timer, setTimer] = useState(5);
-  const [transactionId, setTransactionId] = useState(null);
+  // const [transactionId, setTransactionId] = useState(null);
   // const [skeletonLoder, setSkeletonLoder] = useState(true);
 
   // useEffect(() => {
@@ -79,21 +79,21 @@ const PaymentConfirmation = () => {
   //     .catch(err => console.log(err, "purchase_event_error"));
   // };
 
-  const getTransactionId = id => {
-    baseInstance
-      .get(endPoints.addToCart.getTransactionId(id))
-      .then(res => {
-        setTransactionId(res?.data?.data?.paypal_transaction_id);
-        // setSkeletonLoder(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        // setSkeletonLoder(false);
-      });
-  };
-  useEffect(() => {
-    getTransactionId(oid);
-  }, []);
+  // const getTransactionId = id => {
+  //   baseInstance
+  //     .get(endPoints.addToCart.getTransactionId(id))
+  //     .then(res => {
+  //       setTransactionId(res?.data?.data?.paypal_transaction_id);
+  //       // setSkeletonLoder(false);
+  //     })
+  //     .catch(err => {
+  //       console.log(err?.message || "some error");
+  //       // setSkeletonLoder(false);
+  //     });
+  // };
+  // useEffect(() => {
+  //   getTransactionId(oid);
+  // }, []);
   // useEffect(() => {
   //   getPaymentScript();
   // }, []);
@@ -122,7 +122,6 @@ const PaymentConfirmation = () => {
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
           )} */}
-          {transactionId}
         </div>
       </div>
       <div className={styles.next_step_wrapper}>
