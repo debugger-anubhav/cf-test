@@ -5,7 +5,7 @@ import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
 
 import Notifications from "@/components/Common/Notifications/Notification";
-// import PaymentConfirmation from "@/components/PostCheckout/Confirmation";
+import PaymentConfirmation from "@/components/PostCheckout/Confirmation";
 
 const index = () => {
   return (
@@ -13,7 +13,7 @@ const index = () => {
       <AnnouncementBar />
       <Header />
       <MenuList />
-      {/* <PaymentConfirmation /> */}
+      <PaymentConfirmation />
       <Notifications />
     </div>
   );
