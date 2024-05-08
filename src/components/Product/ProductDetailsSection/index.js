@@ -151,7 +151,8 @@ const ProductDetails = ({params}) => {
               category: scriptData?.category_name,
               list_position: 1,
               quantity: 1,
-              price: scriptData?.price.toString(),
+              // price: scriptData?.price.toString(),
+              price: 1,
             },
           ],
         });
