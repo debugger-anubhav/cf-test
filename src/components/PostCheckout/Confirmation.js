@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, loadScript} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 
 const PaymentConfirmation = () => {
@@ -36,6 +36,8 @@ const PaymentConfirmation = () => {
   }, [router, timer]);
 
   const getPaymentScript = () => {
+    console.log("2222222222222222");
+
     baseInstance
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
@@ -55,6 +57,8 @@ const PaymentConfirmation = () => {
         });
         // console.log("first_call_11111111111");
         // console.log(window?.gtag, "fdsf");
+        console.log("3333333333333333333333");
+
         window?.gtag("event", "purchase", {
           transaction_id: scriptData?.transaction_id,
           value: scriptData?.value,
@@ -64,12 +68,15 @@ const PaymentConfirmation = () => {
           items: eventItems,
         });
         // console.log("second_call_2222222");
+        console.log("444444444444444444");
 
         window?.fbq("track", "Purchase", {
           currency: scriptData?.currency,
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
+        console.log("555555555555555555");
+
         // console.log("third_call_3333333333");
       })
       .catch(err => console.log(err, "purchase_event_error"));
@@ -90,7 +97,15 @@ const PaymentConfirmation = () => {
   useEffect(() => {
     getTransactionId(oid);
   }, []);
-  useEffect(() => {
+  useEffect(async () => {
+    const ress = await loadScript(
+      "https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD",
+    );
+    console.log("useeffffffect1111111111");
+    if (!ress) {
+      alert("not loaded");
+      return;
+    }
     getPaymentScript();
   }, []);
 
