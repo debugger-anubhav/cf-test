@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
-// import {useSearchParams} from "next/navigation";
-// import {setOrderIdFromOrderPage} from "@/store/Slices";
-// import {useDispatch} from "react-redux";
+import {useRouter} from "next/navigation";
+import {setOrderIdFromOrderPage} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
@@ -11,29 +11,29 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
 const PaymentConfirmation = () => {
-  // const router = useRouter();
+  const router = useRouter();
   // const searchParams = useSearchParams();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const oid = 616143836;
 
-  // const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(5);
   const [transactionId, setTransactionId] = useState(null);
   const [skeletonLoder, setSkeletonLoder] = useState(true);
   const userId = decrypt(getLocalStorage("_ga"));
 
-  // useEffect(() => {
-  //   const countdown = setInterval(() => {
-  //     setTimer(prevTimer => prevTimer - 1);
-  //   }, 1000);
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setTimer(prevTimer => prevTimer - 1);
+    }, 1000);
 
-  //   if (timer <= 1) {
-  //     clearInterval(countdown); // Stop the countdown
-  //     dispatch(setOrderIdFromOrderPage(oid));
-  //     router.replace("/documentation");
-  //   }
-  //   return () => clearInterval(countdown);
-  // }, [router, timer]);
+    if (timer <= 1) {
+      clearInterval(countdown); // Stop the countdown
+      dispatch(setOrderIdFromOrderPage(oid));
+      // router.replace("/documentation");
+    }
+    return () => clearInterval(countdown);
+  }, [router, timer]);
 
   const getPaymentScript = () => {
     console.log("2222222222222222");
@@ -69,14 +69,14 @@ const PaymentConfirmation = () => {
         });
         console.log("444444444444444444");
 
-        // window?.fbq("track", "Purchase", {
-        //   currency: scriptData?.currency,
-        //   value: scriptData?.value,
-        // });
-        // window?.lintrk("track", {conversion_id: 11504433});
-        // console.log("555555555555555555");
+        window?.fbq("track", "Purchase", {
+          currency: scriptData?.currency,
+          value: scriptData?.value,
+        });
+        window?.lintrk("track", {conversion_id: 11504433});
+        console.log("555555555555555555");
 
-        // console.log("third_call_3333333333");
+        console.log("third_call_3333333333");
       })
       .catch(err => console.log(err, "purchase_event_error"));
   };
