@@ -57,7 +57,7 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        // console.log("3333333333333333333333");
+        console.log("3333333333333333333333", scriptData);
         window?.gtag("event", "purchase", {
           transaction_id: scriptData?.transaction_id,
           value: scriptData?.value,

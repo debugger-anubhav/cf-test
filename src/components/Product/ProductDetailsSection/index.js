@@ -372,11 +372,10 @@ const ProductDetails = ({params}) => {
                   category: prodDetails?.[0]?.category_name,
                   list_position: 1,
                   quantity: body?.quantity,
-                  price: body?.price,
+                  price: body?.price.toString(),
                 },
               ],
             });
-            // console.log("Analytics----Add to cart");
           }
         }
         setIsLoading(false);
