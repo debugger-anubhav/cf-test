@@ -5,8 +5,10 @@ import {FaCheck} from "react-icons/fa";
 // import {setOrderIdFromOrderPage} from "@/store/Slices";
 // import {useDispatch} from "react-redux";
 import {endPoints} from "@/network/endPoints";
-// import {Skeleton} from "@mui/material";
+import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 const PaymentConfirmation = () => {
   // const router = useRouter();
@@ -17,7 +19,8 @@ const PaymentConfirmation = () => {
 
   // const [timer, setTimer] = useState(5);
   const [transactionId, setTransactionId] = useState(null);
-  // const [skeletonLoder, setSkeletonLoder] = useState(true);
+  const [skeletonLoder, setSkeletonLoder] = useState(true);
+  const userId = decrypt(getLocalStorage("_ga"));
 
   // useEffect(() => {
   //   const countdown = setInterval(() => {
@@ -32,75 +35,74 @@ const PaymentConfirmation = () => {
   //   return () => clearInterval(countdown);
   // }, [router, timer]);
 
-  // const getPaymentScript = () => {
-  //   console.log("2222222222222222");
+  const getPaymentScript = () => {
+    console.log("2222222222222222");
 
-  //   baseInstance
-  //     .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
-  //     .then(res => {
-  //       const scriptData = res?.data?.data;
-  //       console.log(scriptData, "script_data_purchase");
-  //       const eventItems = [];
-  //       scriptData?.items?.forEach((product, index) => {
-  //         const item = {
-  //           productId: product.id,
-  //           productName: product?.name,
-  //           quantity: product?.quantity,
-  //           price: product?.price,
-  //           brand: product?.brand,
-  //           list_position: index + 1,
-  //         };
-  //         eventItems.push(item);
-  //       });
-  //       // console.log("first_call_11111111111");
-  //       // console.log(window?.gtag, "fdsf");
-  //       console.log("3333333333333333333333");
+    baseInstance
+      .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
+      .then(res => {
+        const scriptData = res?.data?.data;
+        console.log(scriptData, "script_data_purchase");
+        const eventItems = [];
+        scriptData?.items?.forEach((product, index) => {
+          const item = {
+            productId: product.id,
+            productName: product?.name,
+            quantity: product?.quantity,
+            price: product?.price,
+            brand: product?.brand,
+            list_position: index + 1,
+          };
+          eventItems.push(item);
+        });
+        // console.log("first_call_11111111111");
+        // console.log(window?.gtag, "fdsf");
+        console.log("3333333333333333333333");
 
-  //       window?.gtag("event", "purchase", {
-  //         transaction_id: scriptData?.transaction_id,
-  //         value: scriptData?.value,
-  //         currency: scriptData?.currency,
-  //         tax: scriptData?.tax,
-  //         shipping: scriptData?.shipping,
-  //         items: eventItems,
-  //       });
-  //       // console.log("second_call_2222222");
-  //       console.log("444444444444444444");
+        // window?.gtag("event", "purchase", {
+        //   transaction_id: scriptData?.transaction_id,
+        //   value: scriptData?.value,
+        //   currency: scriptData?.currency,
+        //   tax: scriptData?.tax,
+        //   shipping: scriptData?.shipping,
+        //   items: eventItems,
+        // });
+        // console.log("second_call_2222222");
+        console.log("444444444444444444");
 
-  //       window?.fbq("track", "Purchase", {
-  //         currency: scriptData?.currency,
-  //         value: scriptData?.value,
-  //       });
-  //       window?.lintrk("track", {conversion_id: 11504433});
-  //       console.log("555555555555555555");
+        // window?.fbq("track", "Purchase", {
+        //   currency: scriptData?.currency,
+        //   value: scriptData?.value,
+        // });
+        // window?.lintrk("track", {conversion_id: 11504433});
+        // console.log("555555555555555555");
 
-  //       // console.log("third_call_3333333333");
-  //     })
-  //     .catch(err => console.log(err, "purchase_event_error"));
-  // };
+        // console.log("third_call_3333333333");
+      })
+      .catch(err => console.log(err, "purchase_event_error"));
+  };
 
   const getTransactionId = id => {
     baseInstance
       .get(endPoints.addToCart.getTransactionId(id))
       .then(res => {
         setTransactionId(res?.data?.data?.paypal_transaction_id);
-        // setSkeletonLoder(false);
+        setSkeletonLoder(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
-        // setSkeletonLoder(false);
+        setSkeletonLoder(false);
       });
   };
   useEffect(() => {
     getTransactionId(oid);
   }, []);
-  // useEffect(() => {
-  //   getPaymentScript();
-  // }, []);
+  useEffect(() => {
+    getPaymentScript();
+  }, []);
 
   return (
     <div className={styles.main_container}>
-      asfhsyhfsudhs
       <div className={styles.success_icon_div}>
         <FaCheck color={"white"} className={styles.checkIcon} />
       </div>
@@ -112,17 +114,16 @@ const PaymentConfirmation = () => {
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
           <p className={styles.desc}>:</p>
           <p className={`font-medium ${styles.desc}`}>#kakdsajkdj</p>
-          {/* <p className={`font-medium ${styles.desc}`}>#{oid}</p> */}
+          <p className={`font-medium ${styles.desc}`}>#{oid}</p>
         </div>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
           <p className={styles.desc}>:</p>
-          {/* {skeletonLoder ? (
+          {skeletonLoder ? (
             <Skeleton variant="text" width={100} />
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
-          )} */}
-          {transactionId}
+          )}
         </div>
       </div>
       <div className={styles.next_step_wrapper}>
