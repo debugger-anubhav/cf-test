@@ -4,9 +4,9 @@ import {FaCheck} from "react-icons/fa";
 import {useSearchParams, useRouter} from "next/navigation";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch} from "react-redux";
-import {endPoints} from "@/network/endPoints";
-import {Skeleton} from "@mui/material";
-import {baseInstance} from "@/network/axios";
+// import {endPoints} from "@/network/endPoints";
+// import {Skeleton} from "@mui/material";
+// import {baseInstance} from "@/network/axios";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
@@ -16,8 +16,8 @@ const PaymentConfirmation = () => {
   const oid = searchParams.get("oid");
 
   const [timer, setTimer] = useState(5);
-  const [transactionId, setTransactionId] = useState(null);
-  const [skeletonLoder, setSkeletonLoder] = useState(true);
+  // const [transactionId, setTransactionId] = useState(null);
+  // const [skeletonLoder, setSkeletonLoder] = useState(true);
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -79,21 +79,21 @@ const PaymentConfirmation = () => {
   //     .catch(err => console.log(err, "purchase_event_error"));
   // };
 
-  const getTransactionId = id => {
-    baseInstance
-      .get(endPoints.addToCart.getTransactionId(id))
-      .then(res => {
-        setTransactionId(res?.data?.data?.paypal_transaction_id);
-        setSkeletonLoder(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        setSkeletonLoder(false);
-      });
-  };
-  useEffect(() => {
-    getTransactionId(oid);
-  }, []);
+  // const getTransactionId = id => {
+  //   baseInstance
+  //     .get(endPoints.addToCart.getTransactionId(id))
+  //     .then(res => {
+  //       setTransactionId(res?.data?.data?.paypal_transaction_id);
+  //       setSkeletonLoder(false);
+  //     })
+  //     .catch(err => {
+  //       console.log(err?.message || "some error");
+  //       setSkeletonLoder(false);
+  //     });
+  // };
+  // useEffect(() => {
+  //   getTransactionId(oid);
+  // }, []);
   // useEffect(() => {
   //   getPaymentScript();
   // }, []);
@@ -116,18 +116,18 @@ const PaymentConfirmation = () => {
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
           <p className={styles.desc}>:</p>
-          {skeletonLoder ? (
+          {/* {skeletonLoder ? (
             <Skeleton variant="text" width={100} />
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
-          )}
+          )} */}
         </div>
       </div>
 
       <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          in {timer} {timer === 1 ? "second." : "seconds."}
+          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
