@@ -150,11 +150,12 @@ const ProductDetails = ({params}) => {
               brand: scriptData?.brand,
               category: scriptData?.category_name,
               list_position: 1,
-              quantity: scriptData?.quantity,
-              price: scriptData?.price,
+              quantity: 1,
+              price: scriptData?.price.toString(),
             },
           ],
         });
+        console.log(scriptData, "scriptData?.quantity");
       })
       .catch(err => {
         console.log(err?.message || "some message");
