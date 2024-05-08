@@ -30,7 +30,7 @@ const PaymentConfirmation = () => {
     if (timer <= 1) {
       clearInterval(countdown); // Stop the countdown
       dispatch(setOrderIdFromOrderPage(oid));
-      router.replace("/documentation");
+      // router.replace("/documentation");
     }
     return () => clearInterval(countdown);
   }, [router, timer]);
