@@ -1,36 +1,37 @@
-import React, {useEffect, useState} from "react";
+// import React, {useEffect, useState} from "react";
+import React from "react";
 import styles from "./styles.module.css";
-import {FaCheck} from "react-icons/fa";
-import {useSearchParams, useRouter} from "next/navigation";
-import {setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+// import {FaCheck} from "react-icons/fa";
+// import {useSearchParams, useRouter} from "next/navigation";
+// import {setOrderIdFromOrderPage} from "@/store/Slices";
+// import {useDispatch} from "react-redux";
 // import {endPoints} from "@/network/endPoints";
 // import {Skeleton} from "@mui/material";
 // import {baseInstance} from "@/network/axios";
 
 const PaymentConfirmation = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const dispatch = useDispatch();
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
+  // const dispatch = useDispatch();
 
-  const oid = searchParams.get("oid");
+  // const oid = searchParams.get("oid");
 
-  const [timer, setTimer] = useState(5);
+  // const [timer, setTimer] = useState(5);
   // const [transactionId, setTransactionId] = useState(null);
   // const [skeletonLoder, setSkeletonLoder] = useState(true);
 
-  useEffect(() => {
-    const countdown = setInterval(() => {
-      setTimer(prevTimer => prevTimer - 1);
-    }, 1000);
+  // useEffect(() => {
+  //   const countdown = setInterval(() => {
+  //     setTimer(prevTimer => prevTimer - 1);
+  //   }, 1000);
 
-    if (timer <= 1) {
-      clearInterval(countdown); // Stop the countdown
-      dispatch(setOrderIdFromOrderPage(oid));
-      // router.replace("/documentation");
-    }
-    return () => clearInterval(countdown);
-  }, [router, timer]);
+  //   if (timer <= 1) {
+  //     clearInterval(countdown); // Stop the countdown
+  //     dispatch(setOrderIdFromOrderPage(oid));
+  //     // router.replace("/documentation");
+  //   }
+  //   return () => clearInterval(countdown);
+  // }, [router, timer]);
 
   // const getPaymentScript = () => {
   //   console.log("2222222222222222");
@@ -100,14 +101,14 @@ const PaymentConfirmation = () => {
 
   return (
     <div className={styles.main_container}>
-      <div className={styles.success_icon_div}>
+      asfhsyhfsudhs
+      {/* <div className={styles.success_icon_div}>
         <FaCheck color={"white"} className={styles.checkIcon} />
-      </div>
-
-      <h1 className={styles.head}>
+      </div> */}
+      {/* <h1 className={styles.head}>
         Congratulations! We have received your order.
-      </h1>
-      <div className={styles.details_wrapper}>
+      </h1> */}
+      {/* <div className={styles.details_wrapper}>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
           <p className={styles.desc}>:</p>
@@ -115,19 +116,18 @@ const PaymentConfirmation = () => {
         </div>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
-          <p className={styles.desc}>:</p>
-          {/* {skeletonLoder ? (
+          <p className={styles.desc}>:</p> */}
+      {/* {skeletonLoder ? (
             <Skeleton variant="text" width={100} />
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
           )} */}
-        </div>
-      </div>
-
-      <div className={styles.next_step_wrapper}>
+      {/* </div>
+      </div> */}
+      {/* <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
+          in {timer} {timer === 1 ? "second." : "seconds."}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
@@ -145,7 +145,7 @@ const PaymentConfirmation = () => {
             </li>
           </div>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };
