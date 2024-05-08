@@ -1,7 +1,7 @@
 // import React, {useEffect, useState} from "react";
 import React from "react";
 import styles from "./styles.module.css";
-// import {FaCheck} from "react-icons/fa";
+import {FaCheck} from "react-icons/fa";
 // import {useSearchParams, useRouter} from "next/navigation";
 // import {setOrderIdFromOrderPage} from "@/store/Slices";
 // import {useDispatch} from "react-redux";
@@ -102,32 +102,33 @@ const PaymentConfirmation = () => {
   return (
     <div className={styles.main_container}>
       asfhsyhfsudhs
-      {/* <div className={styles.success_icon_div}>
+      <div className={styles.success_icon_div}>
         <FaCheck color={"white"} className={styles.checkIcon} />
-      </div> */}
-      {/* <h1 className={styles.head}>
+      </div>
+      <h1 className={styles.head}>
         Congratulations! We have received your order.
-      </h1> */}
-      {/* <div className={styles.details_wrapper}>
+      </h1>
+      <div className={styles.details_wrapper}>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Order ID</p>
           <p className={styles.desc}>:</p>
-          <p className={`font-medium ${styles.desc}`}>#{oid}</p>
+          <p className={`font-medium ${styles.desc}`}>#kakdsajkdj</p>
+          {/* <p className={`font-medium ${styles.desc}`}>#{oid}</p> */}
         </div>
         <div className={styles.row}>
           <p className={`w-[149px] ${styles.desc}`}>Your Transaction ID</p>
-          <p className={styles.desc}>:</p> */}
-      {/* {skeletonLoder ? (
+          <p className={styles.desc}>:</p>
+          {/* {skeletonLoder ? (
             <Skeleton variant="text" width={100} />
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
           )} */}
-      {/* </div>
-      </div> */}
-      {/* <div className={styles.next_step_wrapper}>
+        </div>
+      </div>
+      <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          in {timer} {timer === 1 ? "second." : "seconds."}
+          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
@@ -145,7 +146,7 @@ const PaymentConfirmation = () => {
             </li>
           </div>
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 };
