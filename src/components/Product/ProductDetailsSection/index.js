@@ -151,12 +151,10 @@ const ProductDetails = ({params}) => {
               category: scriptData?.category_name,
               list_position: 1,
               quantity: 1,
-              // price: scriptData?.price.toString(),
-              price: 1,
+              price: scriptData?.price.toString(),
             },
           ],
         });
-        console.log(scriptData, "scriptData?.quantity");
       })
       .catch(err => {
         console.log(err?.message || "some message");
