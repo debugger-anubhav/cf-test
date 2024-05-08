@@ -13,12 +13,11 @@ import {getLocalStorage} from "@/constants/constant";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
-  // const searchParams = useSearchParams();
   const dispatch = useDispatch();
   const url = window && window?.location?.href;
 
   const oid = url.split("oid=")[1];
-  console.log(oid, "oidiididididi");
+  // console.log(oid, "oidiididididi");
 
   const [timer, setTimer] = useState(5);
   const [transactionId, setTransactionId] = useState(null);
@@ -33,19 +32,19 @@ const PaymentConfirmation = () => {
     if (timer <= 1) {
       clearInterval(countdown); // Stop the countdown
       dispatch(setOrderIdFromOrderPage(oid));
-      // router.replace("/documentation");
+      router.replace("/documentation");
     }
     return () => clearInterval(countdown);
   }, [router, timer]);
 
   const getPaymentScript = () => {
-    console.log("2222222222222222");
+    // console.log("2222222222222222");
 
     baseInstance
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
         const scriptData = res?.data?.data;
-        console.log(scriptData, "script_data_purchase");
+        // console.log(scriptData, "script_data_purchase");
         const eventItems = [];
         scriptData?.items?.forEach((product, index) => {
           const item = {
@@ -58,10 +57,7 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        // console.log("first_call_11111111111");
-        // console.log(window?.gtag, "fdsf");
-        console.log("3333333333333333333333");
-
+        // console.log("3333333333333333333333");
         window?.gtag("event", "purchase", {
           transaction_id: scriptData?.transaction_id,
           value: scriptData?.value,
@@ -70,16 +66,16 @@ const PaymentConfirmation = () => {
           shipping: scriptData?.shipping,
           items: eventItems,
         });
-        console.log("444444444444444444");
+        // console.log("444444444444444444");
 
         window?.fbq("track", "Purchase", {
           currency: scriptData?.currency,
           value: scriptData?.value,
         });
         window?.lintrk("track", {conversion_id: 11504433});
-        console.log("555555555555555555");
+        // console.log("555555555555555555");
 
-        console.log("third_call_3333333333");
+        // console.log("third_call_3333333333");
       })
       .catch(err => console.log(err, "purchase_event_error"));
   };
@@ -131,7 +127,7 @@ const PaymentConfirmation = () => {
       <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
+          in {timer} {timer === 1 ? "second." : "seconds."}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
