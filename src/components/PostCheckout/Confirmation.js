@@ -59,15 +59,14 @@ const PaymentConfirmation = () => {
         // console.log(window?.gtag, "fdsf");
         console.log("3333333333333333333333");
 
-        // window?.gtag("event", "purchase", {
-        //   transaction_id: scriptData?.transaction_id,
-        //   value: scriptData?.value,
-        //   currency: scriptData?.currency,
-        //   tax: scriptData?.tax,
-        //   shipping: scriptData?.shipping,
-        //   items: eventItems,
-        // });
-        // console.log("second_call_2222222");
+        window?.gtag("event", "purchase", {
+          transaction_id: scriptData?.transaction_id,
+          value: scriptData?.value,
+          currency: scriptData?.currency,
+          tax: scriptData?.tax,
+          shipping: scriptData?.shipping,
+          items: eventItems,
+        });
         console.log("444444444444444444");
 
         // window?.fbq("track", "Purchase", {
