@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 
-export default function RootLayout({children}) {
+export default function RootLayoutSuccess({children, userId}) {
   return (
     <html lang="en">
       <head>
@@ -25,7 +25,13 @@ export default function RootLayout({children}) {
                 dataLayer.push(arguments);
               }
               gtag('js', new Date());
-             
+              if (${userId} !== '') {
+                gtag('config', 'G-05PLBRM6KD', {
+                  'user_id': ${userId}
+                });
+              } else {
+                gtag('config', 'G-05PLBRM6KD');
+              }
             `,
             }}
           />
@@ -39,6 +45,7 @@ export default function RootLayout({children}) {
     </html>
   );
 }
-RootLayout.propTypes = {
+RootLayoutSuccess.propTypes = {
   children: PropTypes.element,
+  userId: PropTypes.element,
 };

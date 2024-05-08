@@ -234,6 +234,8 @@ export default function RootLayout({children}) {
               function gtag() {
                 dataLayer.push(arguments);
               }
+              gtag('js', new Date());
+        gtag('config', 'G-05PLBRM6KD');
             `,
             }}
           />
