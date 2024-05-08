@@ -1,36 +1,36 @@
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
-import {useSearchParams, useRouter} from "next/navigation";
-import {setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch} from "react-redux";
-// import {endPoints} from "@/network/endPoints";
+import {useSearchParams} from "next/navigation";
+// import {setOrderIdFromOrderPage} from "@/store/Slices";
+// import {useDispatch} from "react-redux";
+import {endPoints} from "@/network/endPoints";
 // import {Skeleton} from "@mui/material";
-// import {baseInstance} from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
 const PaymentConfirmation = () => {
-  const router = useRouter();
+  // const router = useRouter();
   const searchParams = useSearchParams();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const oid = searchParams.get("oid");
 
-  const [timer, setTimer] = useState(5);
-  // const [transactionId, setTransactionId] = useState(null);
+  // const [timer, setTimer] = useState(5);
+  const [transactionId, setTransactionId] = useState(null);
   // const [skeletonLoder, setSkeletonLoder] = useState(true);
 
-  useEffect(() => {
-    const countdown = setInterval(() => {
-      setTimer(prevTimer => prevTimer - 1);
-    }, 1000);
+  // useEffect(() => {
+  //   const countdown = setInterval(() => {
+  //     setTimer(prevTimer => prevTimer - 1);
+  //   }, 1000);
 
-    if (timer <= 1) {
-      clearInterval(countdown); // Stop the countdown
-      dispatch(setOrderIdFromOrderPage(oid));
-      router.replace("/documentation");
-    }
-    return () => clearInterval(countdown);
-  }, [router, timer]);
+  //   if (timer <= 1) {
+  //     clearInterval(countdown); // Stop the countdown
+  //     dispatch(setOrderIdFromOrderPage(oid));
+  //     router.replace("/documentation");
+  //   }
+  //   return () => clearInterval(countdown);
+  // }, [router, timer]);
 
   // const getPaymentScript = () => {
   //   console.log("2222222222222222");
@@ -79,21 +79,21 @@ const PaymentConfirmation = () => {
   //     .catch(err => console.log(err, "purchase_event_error"));
   // };
 
-  // const getTransactionId = id => {
-  //   baseInstance
-  //     .get(endPoints.addToCart.getTransactionId(id))
-  //     .then(res => {
-  //       setTransactionId(res?.data?.data?.paypal_transaction_id);
-  //       setSkeletonLoder(false);
-  //     })
-  //     .catch(err => {
-  //       console.log(err?.message || "some error");
-  //       setSkeletonLoder(false);
-  //     });
-  // };
-  // useEffect(() => {
-  //   getTransactionId(oid);
-  // }, []);
+  const getTransactionId = id => {
+    baseInstance
+      .get(endPoints.addToCart.getTransactionId(id))
+      .then(res => {
+        setTransactionId(res?.data?.data?.paypal_transaction_id);
+        // setSkeletonLoder(false);
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+        // setSkeletonLoder(false);
+      });
+  };
+  useEffect(() => {
+    getTransactionId(oid);
+  }, []);
   // useEffect(() => {
   //   getPaymentScript();
   // }, []);
@@ -122,12 +122,13 @@ const PaymentConfirmation = () => {
           ) : (
             <p className={`font-medium ${styles.desc}`}>{transactionId}</p>
           )} */}
+          {transactionId}
         </div>
       </div>
       <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page
-          in {timer} {timer === 1 ? "second." : "seconds."}
+          {/* in {timer} {timer === 1 ? "second." : "seconds."} */}
         </p>
         <ul className={styles.steps}>
           <div className={styles.row}>
