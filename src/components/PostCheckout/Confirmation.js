@@ -1,3 +1,4 @@
+"use client";
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
@@ -14,7 +15,7 @@ const PaymentConfirmation = () => {
   const router = useRouter();
   // const searchParams = useSearchParams();
   const dispatch = useDispatch();
-  const url = window?.location?.href;
+  const url = window && window?.location?.href;
 
   const oid = url.split("oid=")[1];
   console.log(oid, "oidiididididi");
