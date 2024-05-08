@@ -14,8 +14,10 @@ const PaymentConfirmation = () => {
   const router = useRouter();
   // const searchParams = useSearchParams();
   const dispatch = useDispatch();
+  const url = window?.location?.href;
 
-  const oid = 616143836;
+  const oid = url.split("oid=")[1];
+  console.log(oid, "oidiididididi");
 
   const [timer, setTimer] = useState(5);
   const [transactionId, setTransactionId] = useState(null);
