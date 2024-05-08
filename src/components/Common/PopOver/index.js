@@ -32,7 +32,9 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
   const dispatch = useDispatch();
 
   const handleCategory = event => {
-    setAnchorEl(event.currentTarget);
+    if (item !== "Discount Deals") {
+      setAnchorEl(event.currentTarget);
+    }
     dispatch(addAllProduct(true));
 
     dispatch(addFilteredItem([]));
@@ -149,8 +151,10 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
           onClick={e => handleCategory(e)}
           className="flex items-center whitespace-nowrap cursor-pointer"
           onMouseEnter={e => {
-            setAnchorEl(e.currentTarget);
-            hoverRef.current = item;
+            if (item !== "Discount Deals") {
+              setAnchorEl(e.currentTarget);
+              hoverRef.current = item;
+            }
           }}>
           {item}
           <DownArrow
