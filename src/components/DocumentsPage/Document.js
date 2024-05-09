@@ -54,7 +54,7 @@ const Document = () => {
           </div>
         )}
       </div>
-      <div className={style.sub_heading}>
+      <div className={`${style.sub_heading} mt-2`}>
         Credit Score - {apiData?.cibilScore}
       </div>
       <div className={style.table}>
