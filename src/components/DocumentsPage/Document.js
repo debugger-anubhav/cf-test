@@ -54,6 +54,9 @@ const Document = () => {
           </div>
         )}
       </div>
+      <div className={style.sub_heading}>
+        Credit Score - {apiData?.cibilScore}
+      </div>
       <div className={style.table}>
         <div className={style.table_headers}>
           <p className="col-span-5">Document Name</p>
