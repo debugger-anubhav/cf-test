@@ -157,15 +157,17 @@ const PopOver = ({list, item, parentCategoryId, data}) => {
             }
           }}>
           {item}
-          <DownArrow
-            size={20}
-            color={"#45454A"}
-            // onMouseLeave={() => {
-            //   setAnchorEl(null);
-            //   hoverRef.current = "";
-            // }}
-            className={open ? styles.arrow_up : styles.arrow_down}
-          />
+          {item !== "Discount Deals" && (
+            <DownArrow
+              size={20}
+              color={"#45454A"}
+              // onMouseLeave={() => {
+              //   setAnchorEl(null);
+              //   hoverRef.current = "";
+              // }}
+              className={open ? styles.arrow_up : styles.arrow_down}
+            />
+          )}
         </button>
       </a>
       <Popper

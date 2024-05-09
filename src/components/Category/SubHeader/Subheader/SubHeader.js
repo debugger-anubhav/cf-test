@@ -442,7 +442,7 @@ const SubHeader = ({params}) => {
           <h1 className={styles.heading}>{title}</h1>
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
-              if (item?.cat_name === category) {
+              if (item?.cat_name === category && item.sub_categories.length) {
                 const subCategoriesWithNewObject = [
                   {
                     ...item,

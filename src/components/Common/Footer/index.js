@@ -69,6 +69,12 @@ const Footer = ({params}) => {
             .replace(/\//g, "-")
             ?.toLowerCase()}/rental-packages`,
         },
+        {
+          text: "Discount Deals",
+          link: `/${cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/discount-deals`,
+        },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],
     },
