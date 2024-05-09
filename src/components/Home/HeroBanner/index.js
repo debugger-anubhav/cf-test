@@ -32,6 +32,12 @@ const HeroBanner = () => {
       img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
       link: "/citymax",
     },
+    {
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
+      link: `/${homePageReduxData?.cityName
+        .replace(/\//g, "-")
+        ?.toLowerCase()}/discount-deals`,
+    },
   ];
 
   const handleRedirection = link => {
