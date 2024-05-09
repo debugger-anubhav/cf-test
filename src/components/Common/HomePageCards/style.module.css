@@ -1,5 +1,5 @@
 .wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] cursor-pointer;
+  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[23.8rem] cursor-pointer;
 }
 .hover_wrapper img {
   @apply animate-fade;
