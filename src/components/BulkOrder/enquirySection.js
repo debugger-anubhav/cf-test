@@ -66,7 +66,7 @@ const EnquirySection = () => {
     // if (value) setIsVerified(true);
     const token = recaptchaRef.current.executeAsync();
     console.log(token, value, "pppppppppppppppp");
-    setCaptchaKey(token);
+    setCaptchaKey(value);
   };
 
   const handleSubmit = async values => {
