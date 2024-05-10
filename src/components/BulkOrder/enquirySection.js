@@ -11,7 +11,6 @@ import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
-import axios from "axios";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -22,7 +21,6 @@ const quantityOptions = [
 const EnquirySection = () => {
   const recaptchaRef = useRef();
   const [perAddModal, setPerAddModal] = useState(false);
-  // const [isVerified, setIsVerified] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
     quantityOptions[0],
   );
@@ -63,9 +61,7 @@ const EnquirySection = () => {
     console.log(captchaKey, "captcha key");
   }, [captchaKey]);
   const handleRecaptchaVerify = value => {
-    // if (value) setIsVerified(true);
-    const token = recaptchaRef.current.executeAsync();
-    console.log(token, value, "pppppppppppppppp");
+    // const token = recaptchaRef.current.executeAsync();
     setCaptchaKey(value);
   };
 
@@ -78,28 +74,24 @@ const EnquirySection = () => {
       message: values.message,
       quantity: selectedOptionPer.value,
     };
-    axios
-      .post("https://www.google.com/recaptcha/api/siteverify", {
-        secret: "6Ldyp9cpAAAAANYS7nWvmyx2YhuEs9SylP9-yp3e",
-        response: captchaKey,
-      })
-      .then(res => console.log(res, "result"))
-      .catch(err => console.log(err, "err"));
-
-    baseInstance
-      .post(endPoints.enquiry, payload)
-      .then(response => {
-        showToastNotification(
-          "Your Enquiry is sent to our team. They will get back to you shortly",
-          1,
-        );
-        // setTimeout(() => {
-        //   typeof window !== "undefined" && window?.location.reload();
-        // }, 2000);
-      })
-      .catch(error => {
-        console.error("API error:", error);
-      });
+    if (captchaKey) {
+      baseInstance
+        .post(endPoints.enquiry, payload)
+        .then(response => {
+          showToastNotification(
+            "Your Enquiry is sent to our team. They will get back to you shortly",
+            1,
+          );
+          // setTimeout(() => {
+          //   typeof window !== "undefined" && window?.location.reload();
+          // }, 2000);
+        })
+        .catch(error => {
+          console.error("API error:", error);
+        });
+    } else {
+      showToastNotification("please varify that you are not a robot", 3);
+    }
   };
 
   return (
