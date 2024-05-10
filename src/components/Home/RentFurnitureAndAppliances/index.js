@@ -108,7 +108,7 @@ const RentFurnitureAndAppliances = ({params}) => {
               </a>
 
               <div className={styles.label_wrapper}>
-                <h3 className={styles.label}>{item.cat_name}</h3>
+                <h2 className={styles.label}>{item.cat_name}</h2>
                 {params === "home-page" && (
                   <p className={styles.desc}>{item.category_description}</p>
                 )}
