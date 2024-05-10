@@ -90,7 +90,10 @@ const EnquirySection = () => {
           console.error("API error:", error);
         });
     } else {
-      showToastNotification("please varify that you are not a robot", 3);
+      showToastNotification(
+        "Please complete the CAPTCHA to verify you are not a robot",
+        3,
+      );
     }
   };
 
