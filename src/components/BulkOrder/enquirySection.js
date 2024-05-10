@@ -59,12 +59,13 @@ const EnquirySection = () => {
   });
 
   const handleRecaptchaVerify = value => {
-    recaptchaRef.current.reset();
     // if (value) setIsVerified(true);
-    console.log(value);
+    console.log(value, "ppppppppppp");
+    console.log(recaptchaRef.current.executeAsync(), "onchange");
   };
 
   const handleSubmit = async values => {
+    const token = await recaptchaRef.current.executeAsync();
     return new Promise((resolve, reject) => {
       const payload = {
         name: values.fullName,
@@ -74,6 +75,7 @@ const EnquirySection = () => {
         message: values.message,
         quantity: selectedOptionPer.value,
       };
+      console.log(token, "captcha");
 
       baseInstance
         .post(endPoints.enquiry, payload)
