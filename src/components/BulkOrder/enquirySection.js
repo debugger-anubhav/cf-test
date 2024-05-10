@@ -82,9 +82,9 @@ const EnquirySection = () => {
             "Your Enquiry is sent to our team. They will get back to you shortly",
             1,
           );
-          // setTimeout(() => {
-          //   typeof window !== "undefined" && window?.location.reload();
-          // }, 2000);
+          setTimeout(() => {
+            typeof window !== "undefined" && window?.location.reload();
+          }, 2000);
         })
         .catch(error => {
           console.error("API error:", error);
