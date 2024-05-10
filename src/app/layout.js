@@ -181,7 +181,7 @@ export default function RootLayout({children}) {
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
           />
         )}
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -189,6 +189,23 @@ export default function RootLayout({children}) {
           />
         )}
 
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+var CaptchaCallback = function(){        
+    $('#g-recaptcha').each(function(){
+      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
+    })
+    $('#g-recaptcha-footer').each(function(){
+      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
+    })
+};`,
+            }}
+          />
+        )} */}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
@@ -244,24 +261,6 @@ export default function RootLayout({children}) {
               gtag('js', new Date());
         gtag('config', 'G-05PLBRM6KD');
             `,
-            }}
-          />
-        )}
-
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            defer
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
-var CaptchaCallback = function(){        
-    $('#g-recaptcha').each(function(){
-      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
-    })
-    $('#g-recaptcha-footer').each(function(){
-      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
-    })
-};`,
             }}
           />
         )}
