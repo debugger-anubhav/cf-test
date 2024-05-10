@@ -61,13 +61,12 @@ const EnquirySection = () => {
   const [captchaKey, setCaptchaKey] = useState(null);
   const handleRecaptchaVerify = value => {
     // if (value) setIsVerified(true);
-    console.log(recaptchaRef.current.get, "onchange");
     const token = recaptchaRef.current.executeAsync();
     setCaptchaKey(token);
   };
 
   const handleSubmit = async values => {
-    console.log(values, "pp valuesssssss");
+    console.log(values, "valuesssssss");
     const payload = {
       name: values.fullName,
       email: values.email,
@@ -91,9 +90,9 @@ const EnquirySection = () => {
           "Your Enquiry is sent to our team. They will get back to you shortly",
           1,
         );
-        setTimeout(() => {
-          typeof window !== "undefined" && window?.location.reload();
-        }, 2000);
+        // setTimeout(() => {
+        //   typeof window !== "undefined" && window?.location.reload();
+        // }, 2000);
       })
       .catch(error => {
         console.error("API error:", error);
