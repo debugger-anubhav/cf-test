@@ -11,6 +11,7 @@ import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
+import axios from "axios";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -57,41 +58,46 @@ const EnquirySection = () => {
       )
       .min(5, "Message should be of atleast 5 characters long."),
   });
-
+  const [captchaKey, setCaptchaKey] = useState(null);
   const handleRecaptchaVerify = value => {
     // if (value) setIsVerified(true);
-    console.log(value, "ppppppppppp");
-    console.log(recaptchaRef.current.executeAsync(), "onchange");
+    console.log(recaptchaRef.current.get, "onchange");
+    const token = recaptchaRef.current.executeAsync();
+    setCaptchaKey(token);
   };
 
   const handleSubmit = async values => {
-    const token = await recaptchaRef.current.executeAsync();
-    return new Promise((resolve, reject) => {
-      const payload = {
-        name: values.fullName,
-        email: values.email,
-        phone: values.contactNumber,
-        city: values.city,
-        message: values.message,
-        quantity: selectedOptionPer.value,
-      };
-      console.log(token, "captcha");
+    console.log(values, "pp valuesssssss");
+    const payload = {
+      name: values.fullName,
+      email: values.email,
+      phone: values.contactNumber,
+      city: values.city,
+      message: values.message,
+      quantity: selectedOptionPer.value,
+    };
+    axios
+      .post("https://www.google.com/recaptcha/api/siteverify", {
+        secret: "6Ldyp9cpAAAAANYS7nWvmyx2YhuEs9SylP9-yp3e",
+        response: captchaKey,
+      })
+      .then(res => console.log(res, "result"))
+      .catch(err => console.log(err, "err"));
 
-      baseInstance
-        .post(endPoints.enquiry, payload)
-        .then(response => {
-          showToastNotification(
-            "Your Enquiry is sent to our team. They will get back to you shortly",
-            1,
-          );
-          setTimeout(() => {
-            typeof window !== "undefined" && window?.location.reload();
-          }, 2000);
-        })
-        .catch(error => {
-          console.error("API error:", error);
-        });
-    });
+    baseInstance
+      .post(endPoints.enquiry, payload)
+      .then(response => {
+        showToastNotification(
+          "Your Enquiry is sent to our team. They will get back to you shortly",
+          1,
+        );
+        setTimeout(() => {
+          typeof window !== "undefined" && window?.location.reload();
+        }, 2000);
+      })
+      .catch(error => {
+        console.error("API error:", error);
+      });
   };
 
   return (
