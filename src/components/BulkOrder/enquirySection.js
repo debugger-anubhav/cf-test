@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import styles from "./style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -57,9 +57,7 @@ const EnquirySection = () => {
       .min(5, "Message should be of atleast 5 characters long."),
   });
   const [captchaKey, setCaptchaKey] = useState(null);
-  useEffect(() => {
-    console.log(captchaKey, "captcha key");
-  }, [captchaKey]);
+
   const handleRecaptchaVerify = value => {
     // const token = recaptchaRef.current.executeAsync();
     setCaptchaKey(value);
