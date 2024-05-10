@@ -69,7 +69,7 @@ const RentFurnitureAndAppliances = ({params}) => {
   return (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
-      <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
+      <p className={styles.subhead}>{string.landing_page.Explore_by}</p>
       <div className={styles.card_div}>
         {RentFurniture?.map((item, index) => {
           return (
