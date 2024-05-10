@@ -46,10 +46,7 @@ export default function RootLayout({children}) {
           name="google-site-verification"
           content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
         />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, minimum-scale=1"
-        />
+
         <meta
           property="article:publisher"
           content="https://www.facebook.com/cityFurnishRental/"
