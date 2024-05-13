@@ -293,6 +293,7 @@ const AddressSection = () => {
       isOptWhatsapp: whatsappNotification,
       gstNumber,
     });
+    setLoading(false);
     if (!result) {
       alert("Server error. Are you online?");
       return;
@@ -970,7 +971,7 @@ const AddressSection = () => {
                   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
                 }
                 onClick={() => {
-                  console.log("coming");
+                  setLoading(true);
                   if (isOfflineCustomer === 1) {
                     checkPostalCode("offlineCustomer");
                     // checkCartQunatity("offlineCustomer");
