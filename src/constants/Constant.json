@@ -21,6 +21,10 @@
         {
           "item": "Pay your dues",
           "link": "/customerpayment"
+        },
+        {
+          "item": "Offers",
+          "link": "/pages/offers"
         }
       ],
       "menuList3": [
