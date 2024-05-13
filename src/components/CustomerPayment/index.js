@@ -204,6 +204,7 @@ function CustomerPayment() {
           notes: values?.notes || "",
         },
       );
+      setLoading(false);
       if (!result) {
         alert("Server error. Are you online?");
         return;
@@ -553,7 +554,10 @@ function CustomerPayment() {
                       />
                     </div>
 
-                    <button className={styles.pay_now_btn} type="submit">
+                    <button
+                      className={styles.pay_now_btn}
+                      type="submit"
+                      onClick={() => setLoading(true)}>
                       Pay now
                       <ForwardArrowWithLine size={20} color={"#222222"} />
                     </button>
