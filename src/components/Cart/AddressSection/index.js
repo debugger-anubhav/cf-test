@@ -300,6 +300,7 @@ const AddressSection = () => {
     }
     if (result?.data?.data?.status === false) {
       showToastNotification(result?.data?.data?.message, 3);
+      setLoading(false);
       return null;
     }
     const {

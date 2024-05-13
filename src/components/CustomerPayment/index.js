@@ -191,6 +191,7 @@ function CustomerPayment() {
       alert("Razorpay SDK failed to load. Are you online?");
       return;
     }
+    setLoading(false);
 
     try {
       const result = await baseInstance.post(
@@ -204,7 +205,6 @@ function CustomerPayment() {
           notes: values?.notes || "",
         },
       );
-      setLoading(false);
       if (!result) {
         alert("Server error. Are you online?");
         return;
@@ -274,6 +274,7 @@ function CustomerPayment() {
         console.log(e, "eeeee");
       });
     } catch (error) {
+      setLoading(false);
       showToastNotification(error?.response?.data?.message, 2);
     }
   };
@@ -289,6 +290,7 @@ function CustomerPayment() {
     // });
     if (values.amount === "") {
       setshowValidationForAmount(true);
+      setLoading(false);
     }
     handlePayment(values, isAutoRazor);
   };
