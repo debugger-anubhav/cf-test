@@ -13,14 +13,14 @@ const AnnouncementBar = () => {
     <>
       {!closeBar && (
         <div className={styles.announcement_bar_wrapper}>
-          <p className={styles.announcement_bar_text}>
+          <div className={styles.announcement_bar_text}>
             {string.landing_page.announcement_bar}
-          </p>
-          <p
+          </div>
+          <div
             className={styles.announcement_close_icon}
             onClick={() => dispatch(setAnnouncementBar(true))}>
             <Close size={20} color={"#fff"} className="cursor-pointer" />
-          </p>
+          </div>
         </div>
       )}
     </>
