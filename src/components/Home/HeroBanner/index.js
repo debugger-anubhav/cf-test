@@ -5,31 +5,83 @@ import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {BASEURL} from "../../../../appConfig";
-import {getLocalStorage} from "@/constants/constant";
+// import {baseInstance} from "@/network/axios";
+// import {endPoints} from "@/network/endPoints";
+// import {BASEURL} from "../../../../appConfig";
+// import {getLocalStorage} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
 
 const HeroBanner = () => {
   const router = useRouter();
-  const cityId = getLocalStorage("cityId");
+  // const cityId = getLocalStorage("cityId");
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [setshowLinkForRentPage, setSetshowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
-  const [bannersData, setBannersData] = useState(null);
+  // const [bannersData, setBannersData] = useState(null);
   // const [loader, setLoader] = useState(true);
+  const bannersData = [
+    {
+      webImage: [
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
+          alt: "bed-room",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-furniture-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
+          alt: "appliances",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-appliances-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+          alt: "citymax",
+          redirectionLink: "https://cityfurnish.com/citymax",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
+          alt: "discount-deals",
+          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+        },
+      ],
+      mobileImage: [
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
+          alt: "bed-room",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-furniture-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp",
+          alt: "appliances",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-appliances-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
+          alt: "citymax",
+          redirectionLink: "https://cityfurnish.com/citymax",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
+          alt: "discount-deals",
+          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+        },
+      ],
+    },
+  ];
 
-  const getBanners = () => {
-    baseInstance.get(BASEURL + endPoints.getHomeBanners(cityId)).then(res => {
-      setBannersData(res?.data?.data[0]);
-      // setLoader(false);
-    });
-    // .catch(() => {
-    //   setLoader(false);
-    // });
-  };
+  // const getBanners = () => {
+  //   baseInstance.get(BASEURL + endPoints.getHomeBanners(cityId)).then(res => {
+  //     setBannersData(res?.data?.data[0]);
+  //     // setLoader(false);
+  //   });
+  //   // .catch(() => {
+  //   //   setLoader(false);
+  //   // });
+  // };
   const handleRedirection = link => {
     if (setshowLinkForRentPage) {
       router.push(link);
@@ -40,9 +92,9 @@ const HeroBanner = () => {
     setSetshowLinkForRentPage(homePageReduxData.showAllRentLink);
   }, [homePageReduxData.showAllRentLink]);
 
-  useEffect(() => {
-    getBanners();
-  }, []);
+  // useEffect(() => {
+  //   getBanners();
+  // }, []);
 
   return (
     <div>
@@ -92,7 +144,7 @@ const HeroBanner = () => {
             width={"100%"}
             swipeable>
             {bannersData &&
-              bannersData?.webImage?.map((item, index) => {
+              bannersData[0]?.webImage?.map((item, index) => {
                 return (
                   <div
                     className="flex cursor-pointer"
