@@ -1,12 +1,10 @@
 "use client";
-// import {HeroBannerImages} from "@/assets/images";
 import React, {useEffect, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-// import Image from "next/image";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {BASEURL} from "../../../../appConfig";
@@ -22,31 +20,6 @@ const HeroBanner = () => {
   );
   const [bannersData, setBannersData] = useState(null);
   const [loader, setLoader] = useState(true);
-
-  // const carouselImg = [
-  //   {
-  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
-  //     link: `/${homePageReduxData?.cityName
-  //       .replace(/\//g, "-")
-  //       ?.toLowerCase()}/home-furniture-rental`,
-  //   },
-  //   {
-  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
-  //     link: `/${homePageReduxData?.cityName
-  //       .replace(/\//g, "-")
-  //       ?.toLowerCase()}/home-appliances-rental`,
-  //   },
-  //   {
-  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
-  //     link: "/citymax",
-  //   },
-  //   {
-  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
-  //     link: `/${homePageReduxData?.cityName
-  //       .replace(/\//g, "-")
-  //       ?.toLowerCase()}/discount-deals`,
-  //   },
-  // ];
 
   const getBanners = () => {
     baseInstance
@@ -73,9 +46,6 @@ const HeroBanner = () => {
     getBanners();
   }, []);
 
-  useEffect(() => {
-    console.log(bannersData, "bannersdata");
-  }, [bannersData]);
   return (
     <div>
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
@@ -84,34 +54,69 @@ const HeroBanner = () => {
             <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
           </div>
         ) : (
-          <Carousel
-            showStatus={false}
-            showArrows={true}
-            showThumbs={false}
-            autoPlay
-            infiniteLoop
-            width={"100%"}
-            swipeable>
-            {bannersData &&
-              bannersData?.webImage?.map((item, index) => {
-                return (
-                  <div
-                    className="flex cursor-pointer"
-                    key={index.toString()}
-                    onClick={() => {
-                      handleRedirection(item?.redirectionLink);
-                    }}>
-                    <img
-                      src={item?.src}
-                      alt={item?.alt}
-                      width={926}
-                      height={386}
-                      className="cursor-pointer rounded-lg"
-                    />
-                  </div>
-                );
-              })}
-          </Carousel>
+          <>
+            <div className="md:flex hidden w-full">
+              <Carousel
+                showStatus={false}
+                showArrows={true}
+                showThumbs={false}
+                autoPlay
+                infiniteLoop
+                width={"100%"}
+                swipeable>
+                {bannersData &&
+                  bannersData?.webImage?.map((item, index) => {
+                    return (
+                      <div
+                        className="flex cursor-pointer"
+                        key={index.toString()}
+                        onClick={() => {
+                          handleRedirection(item?.redirectionLink);
+                        }}>
+                        <img
+                          src={item?.src}
+                          alt={item?.alt}
+                          width={926}
+                          height={386}
+                          className="cursor-pointer rounded-lg"
+                        />
+                      </div>
+                    );
+                  })}
+              </Carousel>
+            </div>
+
+            <div className="md:hidden flex w-full">
+              <Carousel
+                showStatus={false}
+                showArrows={true}
+                showThumbs={false}
+                autoPlay
+                infiniteLoop
+                width={"100%"}
+                swipeable>
+                {bannersData &&
+                  bannersData?.mobileImage?.map((item, index) => {
+                    return (
+                      <div
+                        className="flex cursor-pointer"
+                        key={index.toString()}
+                        onClick={() => {
+                          handleRedirection(item?.redirectionLink);
+                        }}>
+                        <img
+                          src={item?.src}
+                          alt={item?.alt}
+                          width={"100%"}
+                          height={"100%"}
+                          className="cursor-pointer rounded-lg"
+                        />
+                      </div>
+                    );
+                  })}
+              </Carousel>
+            </div>
+          </>
         )}
       </div>
     </div>
