@@ -22,6 +22,7 @@ import {FooterSkeleton} from "@/components/Common/Footer";
 import pMinDelay from "p-min-delay";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
+import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -91,8 +92,9 @@ const CustomerRating = loadable(
     fallback: <ProductRowSkeleton />,
   },
 );
-const MediaCoverage = loadable(() =>
-  pMinDelay(import("@/components/Home/MediaCoverage"), 260),
+const MediaCoverage = loadable(
+  () => pMinDelay(import("@/components/Home/MediaCoverage"), 260),
+  {fallback: <MediaCoverageSkeleton />},
 );
 const HappySubscribers = loadable(() =>
   pMinDelay(import("@/components/Home/HappySubscribers"), 280),
@@ -170,6 +172,7 @@ export default function Home() {
         <NewlyLaunched />
 
         <TryCityMax />
+
         <div className="xl:hidden block">
           <MediaCoverage />
         </div>

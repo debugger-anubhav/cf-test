@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import styles from "./style.module.css";
 import {MediaCoverageImages} from "@/constants/constant";
 import string from "@/constants/Constant.json";
+import {Skeleton} from "@mui/material";
 
 const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
@@ -37,3 +39,22 @@ const MediaCoverage = () => {
 };
 
 export default MediaCoverage;
+
+export const MediaCoverageSkeleton = () => {
+  return (
+    <div className="flex w-full flex-col ">
+      <Skeleton variant="text" width={120} height={20} />
+      <div className="flex w-full overflow-x-scroll gap-4 mt-4">
+        {[1, 2, 3, 4, 4, 5, 5, 3]?.map((item, index) => {
+          return (
+            <div
+              key={index.toString()}
+              className="flex min-w-[100px] md:min-w-[150px] h-[100px] gap-4 mt-4">
+              <Skeleton variant="rectangular" width={"100%"} height={"60%"} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

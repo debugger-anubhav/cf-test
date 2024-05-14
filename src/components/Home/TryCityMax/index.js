@@ -142,6 +142,9 @@ export default TryCityMax;
 export const TryCityMaxSkeleton = () => {
   return (
     <div className={styles.main_wrapper}>
+      <div className="flex lg:hidden">
+        <Skeleton variant="rectangular" width={"100%"} height={"300px"} />
+      </div>
       <div className={styles.left_image_section}>
         <Skeleton
           variant="rectangular"
@@ -165,15 +168,20 @@ export const TryCityMaxSkeleton = () => {
         <Skeleton variant="text" className={styles.Skeleton_button} />
         <Skeleton
           variant="text"
-          className={`${styles.Skeleton_text} mt-10 mb-4`}
+          className={`${styles.Skeleton_text} mt-10 mb-4 hidden lg:block`}
           width={"140px"}
           height={"100%"}
         />
-        <Skeleton variant="text" height={"0.5rem"} width={"100%"} />
-        <div className=" flex flex-wrap">
-          {[1, 2].map((i, index) => (
-            <div className=" w-[40%] mr-10" key={index.toString()}>
-              <Skeleton variant="text" height={"400px"} width={"100%"} />
+        <Skeleton
+          variant="text"
+          height={"0.5rem"}
+          width={"100%"}
+          className="hidden lg:block"
+        />
+        <div className=" lg:grid lg:grid-cols-2 flex w-full gap-4 mt-4 overflow-x-scroll">
+          {[1, 2, 2, 2].map((i, index) => (
+            <div className="h-[200px] min-w-[200px]" key={index.toString()}>
+              <Skeleton variant="rectangular" height={"100%"} width={"100%"} />
             </div>
           ))}
         </div>
