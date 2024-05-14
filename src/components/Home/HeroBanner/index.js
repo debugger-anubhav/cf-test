@@ -7,14 +7,14 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 // import Image from "next/image";
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {BASEURL} from "../../../../appConfig";
-import {getLocalStorage} from "@/constants/constant";
+// import {baseInstance} from "@/network/axios";
+// import {endPoints} from "@/network/endPoints";
+// import {BASEURL} from "../../../../appConfig";
+// import {getLocalStorage} from "@/constants/constant";
 
 const HeroBanner = () => {
   const router = useRouter();
-  const cityId = getLocalStorage("cityId");
+  // const cityId = getLocalStorage("cityId");
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [setshowLinkForRentPage, setSetshowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
@@ -44,12 +44,12 @@ const HeroBanner = () => {
         ?.toLowerCase()}/discount-deals`,
     },
   ];
-  const getBanners = () => {
-    baseInstance
-      .get(BASEURL + endPoints.getHomeBanners(cityId))
-      .then(res => console.log(res, "pp"))
-      .catch(err => console.log(err));
-  };
+  // const getBanners = () => {
+  //   baseInstance
+  //     .get(BASEURL + endPoints.getHomeBanners(cityId))
+  //     .then(res => console.log(res, "pp"))
+  //     .catch(err => console.log(err));
+  // };
   const handleRedirection = link => {
     if (setshowLinkForRentPage) {
       router.push(link);
@@ -59,9 +59,9 @@ const HeroBanner = () => {
   useEffect(() => {
     setSetshowLinkForRentPage(homePageReduxData.showAllRentLink);
   }, [homePageReduxData.showAllRentLink]);
-  useEffect(() => {
-    getBanners();
-  }, []);
+  // useEffect(() => {
+  //   getBanners();
+  // }, []);
   return (
     <div>
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
