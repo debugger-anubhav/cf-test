@@ -19,18 +19,16 @@ const HeroBanner = () => {
     homePageReduxData.showAllRentLink,
   );
   const [bannersData, setBannersData] = useState(null);
-  const [loader, setLoader] = useState(true);
+  // const [loader, setLoader] = useState(true);
 
   const getBanners = () => {
-    baseInstance
-      .get(BASEURL + endPoints.getHomeBanners(cityId))
-      .then(res => {
-        setBannersData(res?.data?.data[0]);
-        setLoader(false);
-      })
-      .catch(() => {
-        setLoader(false);
-      });
+    baseInstance.get(BASEURL + endPoints.getHomeBanners(cityId)).then(res => {
+      setBannersData(res?.data?.data[0]);
+      // setLoader(false);
+    });
+    // .catch(() => {
+    //   setLoader(false);
+    // });
   };
   const handleRedirection = link => {
     if (setshowLinkForRentPage) {
@@ -49,13 +47,11 @@ const HeroBanner = () => {
   return (
     <div>
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
-        {loader ? (
-          <div className="lg:h-[600px] md:h-[350px] ms:h-[250px] h-[150px] w-full">
-            <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
-          </div>
-        ) : (
-          <>
-            {/* <div className="md:flex hidden w-full">
+        {/* {loader ? (
+          <HeroBannerSkeleton/>
+        ) : ( */}
+        <>
+          {/* <div className="md:flex hidden w-full">
               <Carousel
                 showStatus={false}
                 showArrows={true}
@@ -86,40 +82,48 @@ const HeroBanner = () => {
               </Carousel>
             </div> */}
 
-            {/* <div className="md:hidden flex w-full"> */}
-            <Carousel
-              showStatus={false}
-              showArrows={true}
-              showThumbs={false}
-              autoPlay
-              infiniteLoop
-              width={"100%"}
-              swipeable>
-              {bannersData &&
-                bannersData?.webImage?.map((item, index) => {
-                  return (
-                    <div
-                      className="flex cursor-pointer"
-                      key={index.toString()}
-                      onClick={() => {
-                        handleRedirection(item?.redirectionLink);
-                      }}>
-                      <img
-                        src={item?.src}
-                        alt={item?.alt}
-                        width={"100%"}
-                        height={"100%"}
-                        className="cursor-pointer rounded-lg"
-                      />
-                    </div>
-                  );
-                })}
-            </Carousel>
-            {/* </div> */}
-          </>
-        )}
+          {/* <div className="md:hidden flex w-full"> */}
+          <Carousel
+            showStatus={false}
+            showArrows={true}
+            showThumbs={false}
+            autoPlay
+            infiniteLoop
+            width={"100%"}
+            swipeable>
+            {bannersData &&
+              bannersData?.webImage?.map((item, index) => {
+                return (
+                  <div
+                    className="flex cursor-pointer"
+                    key={index.toString()}
+                    onClick={() => {
+                      handleRedirection(item?.redirectionLink);
+                    }}>
+                    <img
+                      src={item?.src}
+                      alt={item?.alt}
+                      width={"100%"}
+                      height={"100%"}
+                      className="cursor-pointer rounded-lg"
+                    />
+                  </div>
+                );
+              })}
+          </Carousel>
+          {/* </div> */}
+        </>
+        {/* )} */}
       </div>
     </div>
   );
 };
 export default HeroBanner;
+
+export const HeroBannerSkeleton = () => {
+  return (
+    <div className="lg:h-[600px] md:h-[350px] ms:h-[250px] h-[150px] w-full">
+      <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+    </div>
+  );
+};

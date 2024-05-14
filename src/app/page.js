@@ -4,7 +4,7 @@ import React, {useEffect, useRef} from "react";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
-import HeroBanner from "@/components/Home/HeroBanner";
+import {HeroBannerSkeleton} from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
@@ -25,6 +25,9 @@ import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 
+const HeroBanner = loadable(() => import("@/components/Home/HeroBanner"), {
+  fallback: <HeroBannerSkeleton />,
+});
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
