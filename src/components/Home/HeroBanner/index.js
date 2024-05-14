@@ -7,49 +7,58 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 // import Image from "next/image";
-// import {baseInstance} from "@/network/axios";
-// import {endPoints} from "@/network/endPoints";
-// import {BASEURL} from "../../../../appConfig";
-// import {getLocalStorage} from "@/constants/constant";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {BASEURL} from "../../../../appConfig";
+import {getLocalStorage} from "@/constants/constant";
+import {Skeleton} from "@mui/material";
 
 const HeroBanner = () => {
   const router = useRouter();
-  // const cityId = getLocalStorage("cityId");
+  const cityId = getLocalStorage("cityId");
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [setshowLinkForRentPage, setSetshowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
+  const [bannersData, setBannersData] = useState(null);
+  const [loader, setLoader] = useState(true);
 
-  const carouselImg = [
-    {
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
-      link: `/${homePageReduxData?.cityName
-        .replace(/\//g, "-")
-        ?.toLowerCase()}/home-furniture-rental`,
-    },
-    {
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
-      link: `/${homePageReduxData?.cityName
-        .replace(/\//g, "-")
-        ?.toLowerCase()}/home-appliances-rental`,
-    },
-    {
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
-      link: "/citymax",
-    },
-    {
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
-      link: `/${homePageReduxData?.cityName
-        .replace(/\//g, "-")
-        ?.toLowerCase()}/discount-deals`,
-    },
-  ];
-  // const getBanners = () => {
-  //   baseInstance
-  //     .get(BASEURL + endPoints.getHomeBanners(cityId))
-  //     .then(res => console.log(res, "pp"))
-  //     .catch(err => console.log(err));
-  // };
+  // const carouselImg = [
+  //   {
+  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
+  //     link: `/${homePageReduxData?.cityName
+  //       .replace(/\//g, "-")
+  //       ?.toLowerCase()}/home-furniture-rental`,
+  //   },
+  //   {
+  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
+  //     link: `/${homePageReduxData?.cityName
+  //       .replace(/\//g, "-")
+  //       ?.toLowerCase()}/home-appliances-rental`,
+  //   },
+  //   {
+  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+  //     link: "/citymax",
+  //   },
+  //   {
+  //     img: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
+  //     link: `/${homePageReduxData?.cityName
+  //       .replace(/\//g, "-")
+  //       ?.toLowerCase()}/discount-deals`,
+  //   },
+  // ];
+
+  const getBanners = () => {
+    baseInstance
+      .get(BASEURL + endPoints.getHomeBanners(cityId))
+      .then(res => {
+        setBannersData(res?.data?.data[0]);
+        setLoader(false);
+      })
+      .catch(() => {
+        setLoader(false);
+      });
+  };
   const handleRedirection = link => {
     if (setshowLinkForRentPage) {
       router.push(link);
@@ -59,39 +68,51 @@ const HeroBanner = () => {
   useEffect(() => {
     setSetshowLinkForRentPage(homePageReduxData.showAllRentLink);
   }, [homePageReduxData.showAllRentLink]);
-  // useEffect(() => {
-  //   getBanners();
-  // }, []);
+
+  useEffect(() => {
+    getBanners();
+  }, []);
+
+  useEffect(() => {
+    console.log(bannersData, "bannersdata");
+  }, [bannersData]);
   return (
     <div>
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {carouselImg?.map((item, index) => {
-            return (
-              <div
-                className="flex cursor-pointer"
-                key={index.toString()}
-                onClick={() => {
-                  handleRedirection(item?.link);
-                }}>
-                <img
-                  src={item?.img}
-                  alt={"CarouselImg-" + index + 1}
-                  width={926}
-                  height={386}
-                  className="cursor-pointer rounded-lg"
-                />
-              </div>
-            );
-          })}
-        </Carousel>
+        {loader ? (
+          <div className="lg:h-[600px] h-[350px] w-full">
+            <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+          </div>
+        ) : (
+          <Carousel
+            showStatus={false}
+            showArrows={true}
+            showThumbs={false}
+            autoPlay
+            infiniteLoop
+            width={"100%"}
+            swipeable>
+            {bannersData &&
+              bannersData?.webImage?.map((item, index) => {
+                return (
+                  <div
+                    className="flex cursor-pointer"
+                    key={index.toString()}
+                    onClick={() => {
+                      handleRedirection(item?.redirectionLink);
+                    }}>
+                    <img
+                      src={item?.src}
+                      alt={item?.alt}
+                      width={926}
+                      height={386}
+                      className="cursor-pointer rounded-lg"
+                    />
+                  </div>
+                );
+              })}
+          </Carousel>
+        )}
       </div>
     </div>
   );
