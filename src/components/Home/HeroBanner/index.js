@@ -55,7 +55,7 @@ const HeroBanner = () => {
           </div>
         ) : (
           <>
-            <div className="md:flex hidden w-full">
+            {/* <div className="md:flex hidden w-full">
               <Carousel
                 showStatus={false}
                 showArrows={true}
@@ -84,38 +84,38 @@ const HeroBanner = () => {
                     );
                   })}
               </Carousel>
-            </div>
+            </div> */}
 
-            <div className="md:hidden flex w-full">
-              <Carousel
-                showStatus={false}
-                showArrows={true}
-                showThumbs={false}
-                autoPlay
-                infiniteLoop
-                width={"100%"}
-                swipeable>
-                {bannersData &&
-                  bannersData?.mobileImage?.map((item, index) => {
-                    return (
-                      <div
-                        className="flex cursor-pointer"
-                        key={index.toString()}
-                        onClick={() => {
-                          handleRedirection(item?.redirectionLink);
-                        }}>
-                        <img
-                          src={item?.src}
-                          alt={item?.alt}
-                          width={"100%"}
-                          height={"100%"}
-                          className="cursor-pointer rounded-lg"
-                        />
-                      </div>
-                    );
-                  })}
-              </Carousel>
-            </div>
+            {/* <div className="md:hidden flex w-full"> */}
+            <Carousel
+              showStatus={false}
+              showArrows={true}
+              showThumbs={false}
+              autoPlay
+              infiniteLoop
+              width={"100%"}
+              swipeable>
+              {bannersData &&
+                bannersData?.webImage?.map((item, index) => {
+                  return (
+                    <div
+                      className="flex cursor-pointer"
+                      key={index.toString()}
+                      onClick={() => {
+                        handleRedirection(item?.redirectionLink);
+                      }}>
+                      <img
+                        src={item?.src}
+                        alt={item?.alt}
+                        width={"100%"}
+                        height={"100%"}
+                        className="cursor-pointer rounded-lg"
+                      />
+                    </div>
+                  );
+                })}
+            </Carousel>
+            {/* </div> */}
           </>
         )}
       </div>
