@@ -45,8 +45,8 @@
   @apply flex mr-4 w-full h-full my-6;
 }
 .skeleton_wrapper {
-  @apply flex flex-col my-8;
+  @apply flex flex-col my-8 pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-20 overflow-x-scroll;
 }
 .div_wrap {
-  /* @apply 3xl:h-[135px] h-[100px] xl:min-w-[395px]  2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 xl:pl-5 pl-3 pr-[17px] xl:w-[395px] 3xl:w-[423px]; */
+  @apply min-h-[135px] h-[155px] xl:min-w-[395px] 2xl:min-w-[405px] 3xl:min-w-[423px] relative items-center rounded-xl flex py-4 gap-4 min-w-[250px];
 }

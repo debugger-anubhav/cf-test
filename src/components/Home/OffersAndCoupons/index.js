@@ -151,7 +151,7 @@ export default OffersAndCoupons;
 
 export const OffersSkeleton = () => {
   return (
-    <div className={`${styles.skeleton_wrapper} ${styles.wrapper}`}>
+    <div className={`${styles.skeleton_wrapper}`}>
       <div className="w-[180px]">
         <Skeleton
           variant="text"

@@ -156,7 +156,6 @@ export default function Home() {
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
         <OffersAndCoupons />
-        {/* <OffersSkeleton /> */}
         {/* <NewlyLaunched /> */}
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
