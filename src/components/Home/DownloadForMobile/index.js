@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import {DownloadForMobileImg, DownloadForWeb} from "@/assets/images";
 import Image from "next/image";
 import {useRouter} from "next/navigation";
+import {Skeleton} from "@mui/material";
 // import {domain} from "../../../../appConfig";
 
 const DownloadForMobile = () => {
@@ -38,3 +39,11 @@ const DownloadForMobile = () => {
 };
 
 export default DownloadForMobile;
+
+export const DownloadForMobileSkeleton = () => {
+  return (
+    <div>
+      <Skeleton variant="rectangular" width={"100%"} height={380} />
+    </div>
+  );
+};

@@ -21,6 +21,7 @@ import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import pMinDelay from "p-min-delay";
 import {getLocalStorage} from "@/constants/constant";
+import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -52,8 +53,9 @@ const NewlyLaunched = loadable(
   {fallback: <NewlyLauncedSkeleton />},
 );
 
-const DownloadForMobile = loadable(() =>
-  pMinDelay(import("@/components/Home/DownloadForMobile"), 120),
+const DownloadForMobile = loadable(
+  () => pMinDelay(import("@/components/Home/DownloadForMobile"), 120),
+  {fallback: <DownloadForMobileSkeleton />},
 );
 const PreDesignCombos = loadable(
   () => pMinDelay(import("@/components/Home/PredesignCombos"), 140),
@@ -61,8 +63,11 @@ const PreDesignCombos = loadable(
     fallback: <ProductRowSkeleton />,
   },
 );
-const HasselFreeServicesCards = loadable(() =>
-  pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 160),
+const HasselFreeServicesCards = loadable(
+  () => pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 160),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
 const LimetedPreiodDiscount = loadable(
   () => pMinDelay(import("@/components/Home/LimetedPreiodDiscount"), 180),
