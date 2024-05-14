@@ -134,11 +134,17 @@ const RecentlyViewedProduct = ({page}) => {
                         cardImage={
                           item?.image?.split(",").filter(item => item).length >
                           1
-                            ? productImageBaseUrl + item?.image?.split(",")[1]
-                            : productImageBaseUrl + item?.image?.split(",")[0]
+                            ? productImageBaseUrl +
+                              "thumb/" +
+                              item?.image?.split(",")[1]
+                            : productImageBaseUrl +
+                              "thumb/" +
+                              item?.image?.split(",")[0]
                         }
                         hoverCardImage={
-                          productImageBaseUrl + item?.image?.split(",")[0]
+                          productImageBaseUrl +
+                          "thumb/" +
+                          item?.image?.split(",")[0]
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.product_sale_price) * 100) /

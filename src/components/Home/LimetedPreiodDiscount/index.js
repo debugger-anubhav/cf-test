@@ -102,10 +102,12 @@ const LimetedPreiodDiscount = () => {
               desc={item.product_name}
               cardImage={
                 item?.image?.split(",").filter(item => item).length > 1
-                  ? productImageBaseUrl + item?.image?.split(",")[1]
-                  : productImageBaseUrl + item?.image?.split(",")[0]
+                  ? productImageBaseUrl + "thumb/" + item?.image?.split(",")[1]
+                  : productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
               }
-              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[0]}
+              hoverCardImage={
+                productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
+              }
               originalPrice={item?.price}
               currentPrice={item?.sale_price}
               discount={`${Math.round(

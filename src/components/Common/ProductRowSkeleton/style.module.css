@@ -1,5 +1,5 @@
 .Skeleton_wrapper {
-  @apply w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] lg:h-[15.8rem] 2xl:h-[17.8rem] md:h-[10rem] sm:h-[8rem] mobile:h-[6rem] h-[5rem] mr-6;
+  @apply min-w-[17.3rem] lg:w-[22.3rem] 3xl:w-[26.8rem] lg:h-[15.8rem] 2xl:h-[17.8rem] md:h-[10rem] sm:h-[8rem] mobile:h-[6rem] min-h-[268px] mr-2;
 }
 .skeleton_main {
   @apply w-full h-full;
@@ -8,7 +8,7 @@
   @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-10;
 }
 .Skeleton_row {
-  @apply flex mt-6;
+  @apply flex mt-6 w-full overflow-x-scroll;
 }
 .Skeleton_text {
   @apply text-32 w-1/2;

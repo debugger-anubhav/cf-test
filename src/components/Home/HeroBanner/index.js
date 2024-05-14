@@ -80,7 +80,7 @@ const HeroBanner = () => {
     <div>
       <div className={`${styles.hero_banner_wrapper} flex-col`}>
         {loader ? (
-          <div className="lg:h-[600px] h-[350px] w-full">
+          <div className="lg:h-[600px] md:h-[350px] ms:h-[250px] h-[150px] w-full">
             <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
           </div>
         ) : (

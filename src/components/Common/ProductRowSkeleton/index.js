@@ -14,6 +14,7 @@ export const ProductRowSkeleton = () => {
               variant="rectangular"
               className={styles.skeleton_main}
               height={"100%"}
+              width={"100%"}
             />
           </div>
         ))}
