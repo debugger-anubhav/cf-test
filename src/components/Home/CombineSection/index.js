@@ -2,6 +2,8 @@ import React from "react";
 import PartnershipBanner from "../PartnershipBanner";
 import FourSteps from "../FourSteps";
 import ChatWithUs from "../ChatWithUs";
+import {Skeleton} from "@mui/material";
+import styles from "./styles.module.css";
 
 const CombineSection = () => {
   return (
@@ -26,3 +28,21 @@ const CombineSection = () => {
 };
 
 export default CombineSection;
+
+export const CombineSectionSkeleton = () => {
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.left}>
+        <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+      </div>
+      <div className={styles.right}>
+        <div className={styles.right_first_skeleton}>
+          <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+        </div>
+        <div className={styles.left_first_skeleton}>
+          <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
+        </div>
+      </div>
+    </div>
+  );
+};

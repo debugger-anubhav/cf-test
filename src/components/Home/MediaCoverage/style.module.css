@@ -55,3 +55,18 @@
 .img {
   mix-blend-mode: darken;
 }
+.skeleton_wrapper {
+  @apply flex w-full flex-col 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4;
+}
+.skeleton_map_wrapper {
+  @apply flex w-full overflow-x-scroll gap-4 mt-4;
+}
+.main_skele {
+  @apply flex min-w-[100px] md:min-w-[150px] h-[100px] gap-4 mt-4;
+}
+.media_img {
+  @apply flex items-center w-full mix-blend-darken md:mix-blend-normal;
+}
+.main_img_wrap {
+  @apply flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative;
+}
