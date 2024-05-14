@@ -189,9 +189,9 @@ function CustomerPayment() {
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
+      setLoading(false);
       return;
     }
-    setLoading(false);
 
     try {
       const result = await baseInstance.post(
@@ -205,6 +205,7 @@ function CustomerPayment() {
           notes: values?.notes || "",
         },
       );
+      setLoading(false);
       if (!result) {
         alert("Server error. Are you online?");
         return;
@@ -280,6 +281,8 @@ function CustomerPayment() {
   };
 
   const handleSubmit = (values, isAutoRazor) => {
+    setLoading(true);
+
     // setFormData({
     //   ...formData,
     //   fullName: values.fullName,
@@ -556,10 +559,7 @@ function CustomerPayment() {
                       />
                     </div>
 
-                    <button
-                      className={styles.pay_now_btn}
-                      type="submit"
-                      onClick={() => setLoading(true)}>
+                    <button className={styles.pay_now_btn} type="submit">
                       Pay now
                       <ForwardArrowWithLine size={20} color={"#222222"} />
                     </button>
