@@ -24,6 +24,7 @@ const HasselFreeServicesCards = () => {
                   // }}
                 >
                   <Image
+                    loader={({src}) => src}
                     src={data.backgroungImage}
                     alt={data?.Heading}
                     layout="fill"
@@ -32,6 +33,7 @@ const HasselFreeServicesCards = () => {
                     objectPosition="center"
                   />
                   <Image
+                    loader={({src}) => src}
                     src={data.bgImgMobile}
                     alt={data?.Heading}
                     layout="fill"

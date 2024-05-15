@@ -850,6 +850,7 @@ const ShoppingCartSection = () => {
                     {isCouponApplied ? `${code} applied` : "Apply Coupon"}
                     <span>
                       <Image
+                        loader={({src}) => src}
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] inline-block ml-2"

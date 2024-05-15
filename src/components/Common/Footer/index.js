@@ -206,6 +206,7 @@ const Footer = ({params}) => {
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
             <Image
+              loader={({src}) => src}
               className={`${styles.phoneImg} pointer-events-none`}
               alt="phone-icon"
               src={FooterIcons.Phone}
@@ -248,6 +249,7 @@ const Footer = ({params}) => {
       <div className="xl:hidden">
         <div className={styles.contact_div}>
           <Image
+            loader={({src}) => src}
             className={`${styles.phoneImg} pointer-events-none`}
             alt="phone-icon"
             src={FooterIcons.Phone}
@@ -294,6 +296,7 @@ const Footer = ({params}) => {
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           }}>
           <Image
+            loader={({src}) => src}
             src={
               "https://d3juy0zp6vqec8.cloudfront.net/images/icons/go-to-top.svg"
             }

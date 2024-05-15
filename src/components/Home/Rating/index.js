@@ -103,6 +103,7 @@ const CustomerRating = () => {
             {reviews?.[0]?.fc_google_location_data[0]?.average_review}
             <span className={styles.star}>
               <Image
+                loader={({src}) => src}
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                 width={25}
                 height={25}
@@ -118,6 +119,7 @@ const CustomerRating = () => {
             rel="noreferrer"
             aria-label="write-a-review">
             <Image
+              loader={({src}) => src}
               src={
                 "https://d3juy0zp6vqec8.cloudfront.net/images/icons/edit-icon.svg"
               }
@@ -192,6 +194,7 @@ const CustomerRating = () => {
                     /> */}
                     {[...Array(item?.rate)].map((_, index) => (
                       <Image
+                        loader={({src}) => src}
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                         width={16}
                         height={16}

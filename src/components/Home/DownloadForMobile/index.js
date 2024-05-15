@@ -12,6 +12,7 @@ const DownloadForMobile = () => {
     <div className={styles.main_container}>
       <div className={styles.web_container}>
         <Image
+          loader={({src}) => src}
           src={DownloadForWeb}
           alt="download-image-for-web"
           className={styles.download_image}
@@ -21,6 +22,7 @@ const DownloadForMobile = () => {
       </div>
       <div className={styles.mobile_container}>
         <Image
+          loader={({src}) => src}
           src={DownloadForMobileImg}
           alt="download-image-for-mobile"
           className={styles.download_image}

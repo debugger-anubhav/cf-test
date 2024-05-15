@@ -17,6 +17,7 @@ const FourSteps = () => {
             <div>
               <div className={`w-100 h-100 absolute z-10`} />
               <Image
+                loader={({src}) => src}
                 src={itemm?.img1}
                 alt={`step-${index + 1}`}
                 loading="lazy"
@@ -33,6 +34,7 @@ const FourSteps = () => {
                 height={81}
               />
               <Image
+                loader={({src}) => src}
                 src={itemm?.img2}
                 className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
                 loading="lazy"

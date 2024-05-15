@@ -49,6 +49,7 @@ const TryCityMax = () => {
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
           <Image
+            loader={({src}) => src}
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image} `}
@@ -56,6 +57,7 @@ const TryCityMax = () => {
             height={720}
           />
           <Image
+            loader={({src}) => src}
             src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
@@ -95,6 +97,7 @@ const TryCityMax = () => {
                   <div className={styles.card_wrapper} key={index.toString()}>
                     <div className={`w-100 h-100 absolute z-10`} />
                     <Image
+                      loader={({src}) => src}
                       src={item?.img}
                       className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"

@@ -100,6 +100,7 @@ const HeroBanner = () => {
                   handleRedirection(item.redirectionLink);
                 }}>
                 <Image
+                  loader={({src}) => src}
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
@@ -128,6 +129,7 @@ const HeroBanner = () => {
                   handleRedirection(item.redirectionLink);
                 }}>
                 <Image
+                  loader={({src}) => src}
                   src={item.src}
                   alt={item.alt}
                   width={450}

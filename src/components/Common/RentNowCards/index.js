@@ -29,6 +29,7 @@ const RentNowCard = ({cardImage, url, alt}) => {
       }}>
       <a href={URL} aria-label={imageAlt} target="_self" rel="noopener">
         <Image
+          loader={({src}) => src}
           width={272}
           height={388}
           src={cardImage}

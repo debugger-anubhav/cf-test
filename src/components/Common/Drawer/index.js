@@ -178,6 +178,7 @@ export default function CommonDrawer({
             >
               <div className={`flex gap-1 items-center ${styles.menu_item}`}>
                 <Image
+                  loader={({src}) => src}
                   src={Icons.Profile}
                   alt="profile-icon"
                   loading="lazy"
@@ -334,6 +335,7 @@ export default function CommonDrawer({
                       }
                     }}>
                     <Image
+                      loader={({src}) => src}
                       src={cityUrl + city?.list_value_seourl + ".webp"}
                       className={`${styles.city_thambnil} ${
                         cityId === city?.id &&
@@ -373,6 +375,7 @@ export default function CommonDrawer({
               </button>
               <div className={styles.download_qr_wrapper}>
                 <Image
+                  loader={({src}) => src}
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
                   }
@@ -386,6 +389,7 @@ export default function CommonDrawer({
                   <div>
                     <span>People have already downloaded our app</span>
                     <Image
+                      loader={({src}) => src}
                       src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                       alt="paty_icon"
                       className="!w-[24px] h-[24px] inline-block ml-2"
@@ -401,6 +405,7 @@ export default function CommonDrawer({
                 <div>
                   <span>People have already downloaded our app</span>
                   <Image
+                    loader={({src}) => src}
                     src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                     alt="paty_icon"
                     className="!w-[16px] h-[16px] inline-block ml-2"
@@ -428,6 +433,7 @@ export default function CommonDrawer({
           <div className="cursor-pointer">
             <div className={`w-100 h-100 absolute z-10 cursor-pointer`}></div>
             <Image
+              loader={({src}) => src}
               src={Icons.Menu}
               alt="menu-icon"
               // className={styles.menu_icon_drawer}

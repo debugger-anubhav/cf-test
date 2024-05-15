@@ -488,6 +488,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                   <div
                     className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                     <Image
+                      loader={({src}) => src}
                       src={uploading}
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
@@ -576,6 +577,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             } md:w-[232px] block  text-[#71717a]`}>
             <div className={`${commonStyles.flexICenter}`}>
               <Image
+                loader={({src}) => src}
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdHiddenIB}`}
@@ -583,6 +585,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
               />
 
               <Image
+                loader={({src}) => src}
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
@@ -677,6 +680,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
                   <div
                     className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                     <Image
+                      loader={({src}) => src}
                       src={uploading}
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
@@ -768,6 +772,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
             }`}>
             <div className={`${commonStyles.flexICenter} `}>
               <Image
+                loader={({src}) => src}
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdHiddenIB}`}
@@ -775,6 +780,7 @@ const KYCAddress = ({handleKycState, step, cibilDocsData}) => {
               />
 
               <Image
+                loader={({src}) => src}
                 src={uploading}
                 alt="Uploading Icon"
                 className={`${commonStyles.mdIBHidden}`}
