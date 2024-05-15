@@ -168,9 +168,7 @@ export default function Home() {
         <AnnouncementBar />
         <Header />
         <MenuList />
-        <div className="lg:min-h-[385px] min-h-[125px]">
-          <HeroBanner />
-        </div>
+        <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />

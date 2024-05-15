@@ -6,6 +6,7 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
+import Image from "next/image";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -80,7 +81,8 @@ const HeroBanner = () => {
   }, [homePageReduxData.showAllRentLink]);
 
   return (
-    <div className={`${styles.hero_banner_wrapper} flex-col`}>
+    <div
+      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
       <div className="w-full hidden md:flex">
         <Carousel
           showStatus={false}
@@ -97,7 +99,7 @@ const HeroBanner = () => {
                 onClick={() => {
                   handleRedirection(item.redirectionLink);
                 }}>
-                <img
+                <Image
                   src={item.src}
                   alt={item.alt}
                   width={"100%"}
