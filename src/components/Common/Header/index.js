@@ -341,6 +341,7 @@ const Header = ({page}) => {
                     className={styles.search_input}
                   />
                   <Image
+                    loader={({src}) => src}
                     src={Icons.Search}
                     alt="search-icon"
                     className={`${styles.header_search_icon} pointer-events-none`}
@@ -377,6 +378,7 @@ const Header = ({page}) => {
                 <div
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
@@ -393,6 +395,7 @@ const Header = ({page}) => {
                     className={`w-100 h-100 absolute z-10`}
                     onClick={() => router.push("/cart")}></div>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
                     loading="lazy"
@@ -433,6 +436,7 @@ const Header = ({page}) => {
                       }
                     }}>
                     <Image
+                      loader={({src}) => src}
                       src={Icons.Profile}
                       alt="profile-icon"
                       loading="lazy"
@@ -478,6 +482,7 @@ const Header = ({page}) => {
               }}
             />
             <Image
+              loader={({src}) => src}
               src={Icons.Search}
               alt="search-icon"
               className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
@@ -640,6 +645,7 @@ const SearchModal = ({
             autoFocus
           />
           <Image
+            loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
             className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
@@ -650,6 +656,7 @@ const SearchModal = ({
           className={`${styles.search_wrapper}`}
           onClick={e => e.stopPropagation()}>
           <Image
+            loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
             className={`${styles.header_search_icon} pointer-events-none`}
@@ -774,6 +781,7 @@ const SearchModal = ({
                           }
                         }}>
                         <Image
+                          loader={({src}) => src}
                           src={
                             "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                             item.category_web_image

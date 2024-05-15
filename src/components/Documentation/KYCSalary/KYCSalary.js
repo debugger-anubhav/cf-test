@@ -238,6 +238,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
                   <div
                     className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                     <Image
+                      loader={({src}) => src}
                       src={uploading}
                       alt="Uploading Icon"
                       className={`${commonStyles.mdIBHidden}`}
@@ -308,12 +309,14 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
               className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle} text-[#71717a]`}>
               <div className={`${commonStyles.flexICenter}`}>
                 <Image
+                  loader={({src}) => src}
                   src={uploading}
                   alt="Uploading Icon"
                   className={`${commonStyles.mdHiddenIB}`}
                   loading="lazy"
                 />
                 <Image
+                  loader={({src}) => src}
                   src={uploading}
                   alt="Uploading Icon"
                   className={`${commonStyles.mdIBHidden}`}

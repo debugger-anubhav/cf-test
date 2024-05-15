@@ -95,6 +95,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                 target="_self"
                 rel="noopener">
                 <Image
+                  loader={({src}) => src}
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                     item.category_web_image

@@ -374,6 +374,7 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
                             <div
                               className={styles.relocation_upload_icon_wrapper}>
                               <Image
+                                loader={({src}) => src}
                                 src={uploading}
                                 alt="Uploading Icon"
                                 className={`h-full  ${

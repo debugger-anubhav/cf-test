@@ -62,6 +62,7 @@ const OfferPage = () => {
           Offers
           <span>
             <Image
+              loader={({src}) => src}
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
               alt="paty_icon"
               className="w-[24px] h-[24px] ml-2 inline-block"
