@@ -20,7 +20,7 @@ import TryCityMax from "@/components/SSRPageSeo/SsrTryCityMax";
 import CustomerRating from "@/components/SSRPageSeo/SsrCustomerRating";
 import MediaCoverage from "@/components/SSRPageSeo/SsrMediaCoverage";
 import CombineSection from "@/components/SSRPageSeo/SsrCombineSection";
-// import HappySubscribers from "@/components/SSRPageSeo/SsrHappySubscribers";
+import HappySubscribers from "@/components/SSRPageSeo/SsrHappySubscribers";
 import FrequentlyAskedQuestions from "@/components/SSRPageSeo/SsrFrequentlyAskedQuestions";
 import TextContent from "@/components/SSRPageSeo/SsrTextContent";
 import Footer from "@/components/SSRPageSeo/SsrFooter";
@@ -161,7 +161,7 @@ export default async function Page(params) {
               <CustomerRating />
               <MediaCoverage />
               <CombineSection />
-              {/* <HappySubscribers params={propParams} page={pageName} /> */}
+              <HappySubscribers params={propParams} page={pageName} />
               <FrequentlyAskedQuestions params={propParams} />
               <TextContent params={propParams} />
               <Footer />

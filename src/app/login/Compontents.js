@@ -84,9 +84,9 @@ const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });
-// const HappySubscribers = loadable(() =>
-//   import("@/components/Home/HappySubscribers"),
-// );
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
+);
 const FrequentlyAskedQuestions = loadable(
   () => import("@/components/Common/FrequentlyAskedQuestions"),
   {
@@ -179,7 +179,7 @@ export default function LoginComponents() {
           <MediaCoverage />
         </div>
         <CombineSection />
-        {/* <HappySubscribers params={"home-page"} /> */}
+        <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
         <Footer />

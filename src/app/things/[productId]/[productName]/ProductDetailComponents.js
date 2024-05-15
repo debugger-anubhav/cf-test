@@ -7,7 +7,7 @@ import BenefitsCta from "@/components/Product/BenefitsCta";
 import CompleteTheLook from "@/components/Product/CompleteTheLook";
 import CareInstruction from "@/components/Product/CareInstruction";
 import CustomerRating from "@/components/Product/CustomerRatings";
-// import HappySubscribers from "@/components/Home/HappySubscribers";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import BannerSection from "@/components/Product/BannerSection";
 import loadable from "@loadable/component";
@@ -69,7 +69,7 @@ export default function ProductDetailComponents() {
       <RecentlyViewedProduct page={"product"} />
       <YouMightLike params={params} />
       <CustomerRating params={params} />
-      {/* <HappySubscribers page={"product"} params={params} /> */}
+      <HappySubscribers page={"product"} params={params} />
       <QuesAndAns params={params} />
       <Footer />
       <Notifications />

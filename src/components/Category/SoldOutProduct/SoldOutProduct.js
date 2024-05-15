@@ -18,7 +18,7 @@ import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
 import {useParams, useRouter} from "next/navigation";
-// import HappySubscribers from "@/components/Home/HappySubscribers";
+import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
@@ -248,7 +248,7 @@ export const SoldOutProduct = () => {
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          {/* <HappySubscribers page={"category"} params={categoryId} /> */}
+          <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />
