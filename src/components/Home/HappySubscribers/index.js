@@ -159,7 +159,6 @@ const HappySubscribers = ({page, params}) => {
                   loading="lazy"
                   width="256"
                   height="152"
-                  // src="https://www.youtube.com/embed/KAc3AEpQNSs?list=PLRheCL1cXHrtUJKNwE4Ksn6JEpOx5W_ye"
                   src={item.file_name}
                   title="YouTube video player"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
