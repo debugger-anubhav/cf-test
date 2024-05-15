@@ -2,7 +2,7 @@
 
 import React, {useEffect, useRef} from "react";
 
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
+// import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 // import {HeroBannerSkeleton} from "@/components/Home/HeroBanner";
@@ -25,6 +25,9 @@ import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 // import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 
+const AnnouncementBar = loadable(() =>
+  import("@/components/Common/AnnouncementBar"),
+);
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
