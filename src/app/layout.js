@@ -55,19 +55,18 @@ export default function RootLayout({children}) {
         {/* <!-- clear cache --> */}
         <meta httpEquiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
         <meta httpEquiv="Pragma" content="no-cache" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
+        <link rel="preload" href="https://fonts.gstatic.com" crossOrigin />
         <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"
         />
-        <link
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
-        />
+        /> */}
         <link
           rel="shortcut icon"
           type="image/x-icon"
