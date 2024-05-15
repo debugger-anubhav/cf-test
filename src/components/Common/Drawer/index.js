@@ -438,16 +438,18 @@ export default function CommonDrawer({
         ) : (
           <span className={styles.header_city_name}>
             {cityNameShow ? (
-              <>{params?.city || homePageReduxData?.cityName}</>
+              <>
+                {params?.city || homePageReduxData?.cityName}
+                {DrawerName !== "menu" && (
+                  <img
+                    src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/arrow-drop-down.svg"
+                    alt="down-arrow"
+                    className="w-6 h-6 flex justify-center items-center"
+                  />
+                )}
+              </>
             ) : (
               <Skeleton variant="text" width={80} height={20} />
-            )}
-            {DrawerName !== "menu" && (
-              <img
-                src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/arrow-drop-down.svg"
-                alt="down-arrow"
-                className="w-6 h-6 flex justify-center items-center"
-              />
             )}
           </span>
         )}

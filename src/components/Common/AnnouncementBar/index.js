@@ -11,7 +11,7 @@ const AnnouncementBar = () => {
 
   return (
     <>
-      {!closeBar && (
+      {!closeBar ? (
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
             {string.landing_page.announcement_bar}
@@ -22,7 +22,7 @@ const AnnouncementBar = () => {
             <Close size={20} color={"#fff"} className="cursor-pointer" />
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };
