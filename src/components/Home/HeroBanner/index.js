@@ -1,81 +1,80 @@
 "use client";
 import React, {useEffect, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import {Carousel} from "react-responsive-carousel";
+import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
-// import {useRouter} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
-// import Image from "next/image";
+import Image from "next/image";
 
 const HeroBanner = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
-  console.log(showLinkForRentPage);
 
-  // const bannersData = [
-  //   {
-  //     images: [
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
-  //         alt: "bed-room",
-  //         redirectionLink:
-  //           "https://cityfurnish.com/bangalore/home-furniture-rental",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
-  //         alt: "appliances",
-  //         redirectionLink:
-  //           "https://cityfurnish.com/bangalore/home-appliances-rental",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
-  //         alt: "citymax",
-  //         redirectionLink: "https://cityfurnish.com/citymax",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
-  //         alt: "discount-deals",
-  //         redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     images: [
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
-  //         alt: "bed-room",
-  //         redirectionLink:
-  //           "https://cityfurnish.com/bangalore/home-furniture-rental",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp",
-  //         alt: "appliances",
-  //         redirectionLink:
-  //           "https://cityfurnish.com/bangalore/home-appliances-rental",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
-  //         alt: "citymax",
-  //         redirectionLink: "https://cityfurnish.com/citymax",
-  //       },
-  //       {
-  //         src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
-  //         alt: "discount-deals",
-  //         redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
-  //       },
-  //     ],
-  //   },
-  // ];
+  const bannersData = [
+    {
+      images: [
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
+          alt: "bed-room",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-furniture-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
+          alt: "appliances",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-appliances-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+          alt: "citymax",
+          redirectionLink: "https://cityfurnish.com/citymax",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
+          alt: "discount-deals",
+          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+        },
+      ],
+    },
+    {
+      images: [
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
+          alt: "bed-room",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-furniture-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp",
+          alt: "appliances",
+          redirectionLink:
+            "https://cityfurnish.com/bangalore/home-appliances-rental",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
+          alt: "citymax",
+          redirectionLink: "https://cityfurnish.com/citymax",
+        },
+        {
+          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
+          alt: "discount-deals",
+          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+        },
+      ],
+    },
+  ];
 
-  // const handleRedirection = link => {
-  //   if (showLinkForRentPage) {
-  //     router.push(link);
-  //   }
-  // };
+  const handleRedirection = link => {
+    if (showLinkForRentPage) {
+      router.push(link);
+    }
+  };
 
   useEffect(() => {
     setShowLinkForRentPage(homePageReduxData.showAllRentLink);
@@ -84,7 +83,7 @@ const HeroBanner = () => {
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      {/* <div className="w-full hidden md:flex">
+      <div className="w-full hidden md:flex">
         <Carousel
           showStatus={false}
           showArrows={true}
@@ -101,7 +100,6 @@ const HeroBanner = () => {
                   handleRedirection(item.redirectionLink);
                 }}>
                 <Image
-                  loader={({src}) => src}
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
@@ -130,7 +128,6 @@ const HeroBanner = () => {
                   handleRedirection(item.redirectionLink);
                 }}>
                 <Image
-                  loader={({src}) => src}
                   src={item.src}
                   alt={item.alt}
                   width={450}
@@ -141,7 +138,7 @@ const HeroBanner = () => {
             </div>
           ))}
         </Carousel>
-      </div> */}
+      </div>
     </div>
   );
 };
