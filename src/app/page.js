@@ -23,7 +23,7 @@ import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
-import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+// import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -121,7 +121,7 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 
 const CombineSection = loadable(
   () => import("@/components/Home/CombineSection"),
-  {fallback: <CombineSectionSkeleton />},
+  // {fallback: <CombineSectionSkeleton />},
 );
 
 export default function Home() {
