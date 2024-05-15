@@ -101,9 +101,9 @@ const MediaCoverage = loadable(
   () => pMinDelay(import("@/components/Home/MediaCoverage"), 260),
   {fallback: <MediaCoverageSkeleton />},
 );
-const HappySubscribers = loadable(() =>
-  pMinDelay(import("@/components/Home/HappySubscribers"), 280),
-);
+// const HappySubscribers = loadable(() =>
+//   pMinDelay(import("@/components/Home/HappySubscribers"), 280),
+// );
 const FrequentlyAskedQuestions = loadable(
   () => pMinDelay(import("@/components/Common/FrequentlyAskedQuestions"), 300),
   {
@@ -187,7 +187,7 @@ export default function Home() {
           <MediaCoverage />
         </div>
         <CombineSection />
-        <HappySubscribers params={"home-page"} />
+        {/* <HappySubscribers params={"home-page"} /> */}
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
         <Footer />

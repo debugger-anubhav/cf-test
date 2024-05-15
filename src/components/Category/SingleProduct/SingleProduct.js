@@ -21,7 +21,7 @@ import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
-import HappySubscribers from "@/components/Home/HappySubscribers";
+// import HappySubscribers from "@/components/Home/HappySubscribers";
 import CustomerRating from "@/components/Home/Rating";
 import CategoryContent from "../categoryContent/categoryContent";
 import {FooterSkeleton} from "@/components/Common/Footer";
@@ -219,7 +219,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
           <RecentlyViewedProduct />
           <SavedItem />
           <TrendingItem />
-          <HappySubscribers page={"category"} params={categoryId} />
+          {/* <HappySubscribers page={"category"} params={categoryId} /> */}
           <CustomerRating />
           <HasselFreeServicesCards />
           <FrequentlyAskedQuestions />
