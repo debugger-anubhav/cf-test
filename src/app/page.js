@@ -4,7 +4,7 @@ import React, {useEffect, useRef} from "react";
 
 // import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
-// import HeroBanner from "@/components/Home/HeroBanner";
+import HeroBanner from "@/components/Home/HeroBanner";
 // import {HeroBannerSkeleton} from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
@@ -168,7 +168,7 @@ export default function Home() {
         <AnnouncementBar />
         <Header />
         <MenuList />
-        {/* <HeroBanner /> */}
+        <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
