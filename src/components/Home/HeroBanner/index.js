@@ -102,9 +102,9 @@ const HeroBanner = () => {
                 <Image
                   src={item.src}
                   alt={item.alt}
-                  width={"100%"}
-                  height={"100%"}
                   className="cursor-pointer rounded-lg"
+                  width={768}
+                  height={385}
                 />
               </div>
             </div>
@@ -127,11 +127,11 @@ const HeroBanner = () => {
                 onClick={() => {
                   handleRedirection(item.redirectionLink);
                 }}>
-                <img
+                <Image
                   src={item.src}
                   alt={item.alt}
-                  width={"100%"}
-                  height={"100%"}
+                  width={450}
+                  height={125}
                   className="cursor-pointer rounded-lg"
                 />
               </div>
