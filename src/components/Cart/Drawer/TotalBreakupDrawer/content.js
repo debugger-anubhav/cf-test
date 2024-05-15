@@ -97,7 +97,7 @@ const BillContent = ({
                   {billBreakup?.couponCode && (
                     <span className="ml-1">("{billBreakup?.couponCode}")</span>
                   )}
-                  {isCouponApplied && code}
+                  <span className="ml-1">{isCouponApplied && code}</span>
                 </p>
               </div>
               <p className={styles.total_amount} style={{color: "#2D9469"}}>
