@@ -6,7 +6,6 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
-import Image from "next/image";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -99,13 +98,10 @@ const HeroBanner = () => {
                 onClick={() => {
                   handleRedirection(item.redirectionLink);
                 }}>
-                <Image
-                  loader={({src}) => src}
+                <img
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
-                  width={768}
-                  height={385}
                 />
               </div>
             </div>
@@ -128,12 +124,9 @@ const HeroBanner = () => {
                 onClick={() => {
                   handleRedirection(item.redirectionLink);
                 }}>
-                <Image
-                  loader={({src}) => src}
+                <img
                   src={item.src}
                   alt={item.alt}
-                  width={450}
-                  height={125}
                   className="cursor-pointer rounded-lg"
                 />
               </div>
