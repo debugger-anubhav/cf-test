@@ -149,6 +149,10 @@ const OrderSummary = ({
                         <span className={styles.rupeeIcon}>₹</span>
                         {item?.price}
                       </p>
+                      <p className={styles.tenure}>
+                        Total Rent: <span className={styles.rupeeIcon}>₹</span>
+                        {item?.price * item?.quantity}
+                      </p>
                     </div>
                   ) : (
                     <div className={styles.tenure_div}>
