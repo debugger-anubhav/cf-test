@@ -340,8 +340,8 @@ const AddressSection = () => {
             endPoints.addToCart.successPayment,
             data,
           );
-          setLoading(false);
           console.log(result, "result");
+          setLoading(false);
           goToPostCheckout(1, dealCodeNumber);
         }
       },
@@ -967,16 +967,29 @@ const AddressSection = () => {
 
             <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
               <button
-                disabled={
-                  (isOfflineCustomer !== 1 && !primaryAddress) ||
-                  (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
-                }
+                // disabled={
+                //   (isOfflineCustomer !== 1 && !primaryAddress) ||
+                //   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
+                // }
                 onClick={() => {
-                  setLoading(true);
-                  if (isOfflineCustomer === 1) {
+                  if (
+                    (isOfflineCustomer !== 1 && !primaryAddress) ||
+                    (isOfflineCustomer !== 1 &&
+                      haveGstNumber &&
+                      gstNumber === "")
+                  ) {
+                    showToastNotification(
+                      "Please save your address before proceeding.",
+                      3,
+                    );
+                  } else if (isOfflineCustomer === 1) {
+                    setLoading(true);
                     checkPostalCode("offlineCustomer");
                     // checkCartQunatity("offlineCustomer");
-                  } else checkPostalCode(0);
+                  } else {
+                    setLoading(true);
+                    checkPostalCode(0);
+                  }
                 }}
                 className={`${
                   isOfflineCustomer !== 1 &&
