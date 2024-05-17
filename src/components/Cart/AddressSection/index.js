@@ -183,6 +183,7 @@ const AddressSection = () => {
         .post(endPoints.addToCart.addAddress, headers)
         .then(response => {
           resolve("hii");
+          getAllSavedAddresses();
         })
         .catch(error => {
           console.error("API error:", error);
@@ -265,7 +266,7 @@ const AddressSection = () => {
       if (res?.data?.status === false) {
         showToastNotification("Your postal code is not serviceable.", 3);
       } else {
-        if (type === "onlineCustomer") saveUserAddress(values);
+        if (type === "onlineCustomer") await saveUserAddress(values);
         else checkCartQunatity(type);
       }
     } catch (err) {
@@ -534,7 +535,7 @@ const AddressSection = () => {
                 } else {
                   await checkPostalCode("onlineCustomer", values);
                   // saveUserAddress(values);
-                  getAllSavedAddresses();
+                  // getAllSavedAddresses();
                   resetForm();
                 }
                 window.scrollTo({top: 0, left: 0, behavior: "smooth"});
