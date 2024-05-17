@@ -12,7 +12,7 @@ import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliance
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
@@ -91,7 +91,7 @@ const RentNowBanner = loadable(
 );
 
 const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-  fallback: <TryCityMaxSkeleton />,
+  // fallback: <TryCityMaxSkeleton />,
 });
 
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
