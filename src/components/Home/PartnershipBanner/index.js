@@ -1,16 +1,17 @@
 import React from "react";
-// import partner from "../../../assets/partnership.svg";
-// import Image from "next/image";
+import partner from "../../../assets/our-reputation.webp";
+import Image from "next/image";
 import styles from "./style.module.css";
 
 const PartnershipBanner = () => {
   return (
     <div className={styles.partnership_banner}>
-      <img
+      <Image
         alt="our-reputation"
-        src={
-          "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
-        }
+        src={partner}
+        // src={
+        //   "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
+        // }
         className="w-full h-full pointer-events-none"
       />
     </div>
