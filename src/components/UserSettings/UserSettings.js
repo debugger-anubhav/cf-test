@@ -129,7 +129,8 @@ export default function UserSettings() {
                 localStorage.removeItem("ci_session");
                 dispatch(setShoppingCartTab(0));
               }
-              router.push("/");
+              // router.push("/");
+              window.open("/", "_self");
             }}>
             Logout
           </p>

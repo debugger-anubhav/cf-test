@@ -183,6 +183,7 @@ const AddressSection = () => {
         .post(endPoints.addToCart.addAddress, headers)
         .then(response => {
           resolve("hii");
+          getAllSavedAddresses();
         })
         .catch(error => {
           console.error("API error:", error);
@@ -265,7 +266,7 @@ const AddressSection = () => {
       if (res?.data?.status === false) {
         showToastNotification("Your postal code is not serviceable.", 3);
       } else {
-        if (type === "onlineCustomer") saveUserAddress(values);
+        if (type === "onlineCustomer") await saveUserAddress(values);
         else checkCartQunatity(type);
       }
     } catch (err) {
@@ -340,8 +341,8 @@ const AddressSection = () => {
             endPoints.addToCart.successPayment,
             data,
           );
-          setLoading(false);
           console.log(result, "result");
+          setLoading(false);
           goToPostCheckout(1, dealCodeNumber);
         }
       },
@@ -534,7 +535,7 @@ const AddressSection = () => {
                 } else {
                   await checkPostalCode("onlineCustomer", values);
                   // saveUserAddress(values);
-                  getAllSavedAddresses();
+                  // getAllSavedAddresses();
                   resetForm();
                 }
                 window.scrollTo({top: 0, left: 0, behavior: "smooth"});
@@ -967,16 +968,29 @@ const AddressSection = () => {
 
             <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
               <button
-                disabled={
-                  (isOfflineCustomer !== 1 && !primaryAddress) ||
-                  (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
-                }
+                // disabled={
+                //   (isOfflineCustomer !== 1 && !primaryAddress) ||
+                //   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
+                // }
                 onClick={() => {
-                  setLoading(true);
-                  if (isOfflineCustomer === 1) {
+                  if (
+                    (isOfflineCustomer !== 1 && !primaryAddress) ||
+                    (isOfflineCustomer !== 1 &&
+                      haveGstNumber &&
+                      gstNumber === "")
+                  ) {
+                    showToastNotification(
+                      "Please save your address before proceeding.",
+                      3,
+                    );
+                  } else if (isOfflineCustomer === 1) {
+                    setLoading(true);
                     checkPostalCode("offlineCustomer");
                     // checkCartQunatity("offlineCustomer");
-                  } else checkPostalCode(0);
+                  } else {
+                    setLoading(true);
+                    checkPostalCode(0);
+                  }
                 }}
                 className={`${
                   isOfflineCustomer !== 1 &&
