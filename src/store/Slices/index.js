@@ -225,7 +225,6 @@ export const CartPageSlice = createSlice({
       state.couponCodeUsed = action.payload;
     },
     getSavedAddress(state, action) {
-      console.log(action.payload, "oooooooooooooo");
       state.savedAddresses = action.payload;
     },
     setShowCartItem(state, action) {
