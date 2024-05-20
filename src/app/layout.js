@@ -3,6 +3,7 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
+import localFont from "@next/font/local";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -28,11 +29,44 @@ export const metadata = {
     },
   },
 };
+
+const poppins = localFont({
+  src: [
+    {
+      path: "./font/Poppins-Bold.ttf",
+      weight: "700",
+    },
+    {
+      path: "./font/Poppins-Medium.ttf",
+      weight: "500",
+    },
+    {
+      path: "./font/Poppins-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "./font/Poppins-SemiBold.ttf",
+      weight: "600",
+    },
+  ],
+  variable: "--font-poppins",
+});
+const inter = localFont({
+  src: [
+    {
+      path: "./font/Inter-VariableFont_slnt,wght.ttf",
+    },
+  ],
+  variable: "--font-inter",
+});
+
 export default function RootLayout({children}) {
   // const AMPLITUDE_ID = "";
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${poppins.variable} ${inter.variable} font-sans`}>
       <head>
         <meta
           property="article:publisher"
@@ -58,15 +92,15 @@ export default function RootLayout({children}) {
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
-        <link rel="preload" href="https://fonts.gstatic.com" crossOrigin />
-        <link
+        {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"
-        />
+        /> */}
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
-        /> */}
+        />
         <link
           rel="shortcut icon"
           type="image/x-icon"

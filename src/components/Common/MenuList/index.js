@@ -68,7 +68,7 @@ const MenuList = ({hasMb = true}) => {
           <a href={"/pages/offers"}>Offers</a>
         </p>
         <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
-          <a href="/pages/bulkorder">CF for business</a>
+          <a href="/pages/bulkorder">CF For Business</a>
         </p>
       </div>
     </div>

@@ -112,7 +112,7 @@ const RecentlyViewedProduct = ({page}) => {
               className={`${
                 page === "product" && "xl:!text-24 xl:!tracking-0.48"
               } ${styles.heading}`}>
-              Recently Viewed products
+              Recently Viewed Products
             </h2>
           ) : null}
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
