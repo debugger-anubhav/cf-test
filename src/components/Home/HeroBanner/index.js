@@ -20,24 +20,28 @@ const HeroBanner = () => {
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
           alt: "bed-room",
-          redirectionLink:
-            "https://cityfurnish.com/bangalore/home-furniture-rental",
+          redirectionLink: `/${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/home-furniture-rental`,
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
           alt: "appliances",
-          redirectionLink:
-            "https://cityfurnish.com/bangalore/home-appliances-rental",
+          redirectionLink: `/${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/home-appliances-rental`,
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
           alt: "citymax",
-          redirectionLink: "https://cityfurnish.com/citymax",
+          redirectionLink: "/citymax",
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
           alt: "discount-deals",
-          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+          redirectionLink: `/${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/discount-deals`,
         },
       ],
     },
@@ -46,24 +50,28 @@ const HeroBanner = () => {
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
           alt: "bed-room",
-          redirectionLink:
-            "https://cityfurnish.com/bangalore/home-furniture-rental",
+          redirectionLink: `${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/home-furniture-rental`,
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp",
           alt: "appliances",
-          redirectionLink:
-            "https://cityfurnish.com/bangalore/home-appliances-rental",
+          redirectionLink: `${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/home-appliances-rental`,
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
           alt: "citymax",
-          redirectionLink: "https://cityfurnish.com/citymax",
+          redirectionLink: "/citymax",
         },
         {
           src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
           alt: "discount-deals",
-          redirectionLink: "https://cityfurnish.com/bangalore/discount-deals",
+          redirectionLink: `${homePageReduxData?.cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/discount-deals`,
         },
       ],
     },
