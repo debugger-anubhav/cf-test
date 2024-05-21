@@ -45,5 +45,6 @@
 }
 
 .banner_img {
-  @apply cursor-pointer lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px];
+  /* @apply cursor-pointer lg:min-w-[272px] lg:h-[388px] h-[316px] min-w-[221px]; */
+  @apply cursor-pointer min-w-[270px] w-full;
 }

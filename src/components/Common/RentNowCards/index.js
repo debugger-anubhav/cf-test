@@ -30,8 +30,8 @@ const RentNowCard = ({cardImage, url, alt}) => {
       <a href={URL} aria-label={imageAlt} target="_self" rel="noopener">
         <Image
           loader={({src}) => src}
-          width={272}
-          height={388}
+          width={270}
+          height={380}
           src={cardImage}
           className={styles?.banner_img}
           alt={imageAlt}

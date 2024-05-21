@@ -1,12 +1,13 @@
-import Cookies from "universal-cookie";
-
 import {useEffect} from "react";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 export const useChatScript = (url, widgetCode) => {
-  const cookies = new Cookies();
-
-  const userId = decrypt(cookies.get("userId"));
+  const userId = decrypt(getLocalStorage("_ga"));
+  const userIdForUse = userId || "";
+  useEffect(() => {
+    console.log(userIdForUse, "userid");
+  }, [userId]);
   useEffect(() => {
     let script;
     const timerID = setTimeout(() => {
@@ -38,7 +39,7 @@ export const useChatScript = (url, widgetCode) => {
         }
     })(document, window, function () {
         Freshbots.initiateWidget({autoInitChat: false, getClientParams: function () {
-                return {"cstmr::xtrInfrmtn:userID": "${userId}"};
+                return {"cstmr::xtrInfrmtn:userID": "${userIdForUse}"};
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
