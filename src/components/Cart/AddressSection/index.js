@@ -946,7 +946,7 @@ const AddressSection = () => {
                   )}
                 </p>
 
-                <div className={otherStyles.breakup_wrapper}>
+                <div className={`${otherStyles.breakup_wrapper} !mt-3`}>
                   <p className={otherStyles.view_cart_text}>
                     View cart breakup
                   </p>
