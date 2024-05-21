@@ -4,8 +4,9 @@ import {getLocalStorage} from "@/constants/constant";
 
 export const useChatScript = (url, widgetCode) => {
   const userId = decrypt(getLocalStorage("_ga"));
+  const userIdForUse = userId || "";
   useEffect(() => {
-    console.log(userId, "userid");
+    console.log(userIdForUse, "userid");
   }, [userId]);
   useEffect(() => {
     let script;
@@ -38,7 +39,7 @@ export const useChatScript = (url, widgetCode) => {
         }
     })(document, window, function () {
         Freshbots.initiateWidget({autoInitChat: false, getClientParams: function () {
-                return {"cstmr::xtrInfrmtn:userID": "${userId}"};
+                return {"cstmr::xtrInfrmtn:userID": "${userIdForUse}"};
             }}, function (successResponse) { }, function (errorResponse) { });
     });`;
 
