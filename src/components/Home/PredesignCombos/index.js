@@ -24,7 +24,7 @@ const PreDesignCombos = () => {
   const {refetch: getPreDesignCombos} = useQuery(
     "design-combos",
     endPoints.productCombos,
-    `?cityId=${cityId}&userId=${85757}`,
+    `?cityId=${cityId}`,
   );
   useEffect(() => {
     getPreDesignCombos()
