@@ -71,11 +71,7 @@ function ShortTermCard({
       recurringId,
     };
     try {
-      const result = await baseInstance.post(
-        endPoints.addToCart.successPayment,
-        body,
-      );
-      console.log(result, "result");
+      await baseInstance.post(endPoints.addToCart.successPayment, body);
       dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
       dispatch(setPGTransactionID(res.razorpay_payment_id));
       dispatch(setAmountPaid(amount));

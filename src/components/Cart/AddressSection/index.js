@@ -337,11 +337,7 @@ const AddressSection = () => {
             cfCoins: billBreakup?.coinsUsed,
           };
 
-          const result = await baseInstance.post(
-            endPoints.addToCart.successPayment,
-            data,
-          );
-          console.log(result, "result");
+          await baseInstance.post(endPoints.addToCart.successPayment, data);
           setLoading(false);
           goToPostCheckout(1, dealCodeNumber);
         }

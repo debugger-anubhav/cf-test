@@ -78,11 +78,7 @@ function UpfrontPayment() {
             mode: "upfront_payment",
           };
           try {
-            const result = await baseInstance.post(
-              endPoints.addToCart.successPayment,
-              data,
-            );
-            console.log(result, "result");
+            await baseInstance.post(endPoints.addToCart.successPayment, data);
             dispatch(setTransactionReferenceNumber(res.razorpay_order_id));
             dispatch(setPGTransactionID(res.razorpay_payment_id));
             dispatch(setAmountPaid(apiData?.amount));
