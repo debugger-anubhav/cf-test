@@ -26,7 +26,7 @@ const TrendingItem = () => {
   const {refetch: getTrendyProducts} = useQuery(
     "trendy-product",
     endPoints.trendingProduct,
-    `?cityId=${cityId}&userId=${85757}`,
+    `?cityId=${cityId}`,
   );
 
   useEffect(() => {

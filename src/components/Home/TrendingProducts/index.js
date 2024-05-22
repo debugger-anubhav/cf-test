@@ -38,7 +38,7 @@ const TrendingProducts = ({params}) => {
 
   const getTrendyProducts = () => {
     baseInstance
-      .get(endPoints.trendingProduct + `?cityId=${cityId}&userId=${85757}`)
+      .get(endPoints.trendingProduct + `?cityId=${cityId}`)
       .then(res => {
         setData(res?.data?.data);
         dispatch(addtrendingproduct(res?.data?.data));
