@@ -11,6 +11,7 @@ import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
+import LoaderComponent from "../Common/Loader/LoaderComponent";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -58,6 +59,7 @@ const EnquirySection = () => {
   });
   const [captchaKey, setCaptchaKey] = useState(null);
   const [disableSubmit, setDisableSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleRecaptchaVerify = value => {
     // const token = recaptchaRef.current.executeAsync();
     setCaptchaKey(value);
@@ -65,6 +67,7 @@ const EnquirySection = () => {
 
   const handleSubmit = async values => {
     setDisableSubmit(true);
+    setLoading(true);
     const payload = {
       name: values.fullName,
       email: values.email,
@@ -77,6 +80,7 @@ const EnquirySection = () => {
       baseInstance
         .post(endPoints.enquiry, payload)
         .then(response => {
+          setLoading(false);
           showToastNotification(
             "Your Enquiry is sent to our team. They will get back to you shortly",
             1,
@@ -88,9 +92,11 @@ const EnquirySection = () => {
         })
         .catch(error => {
           console.error("API error:", error);
+          setLoading(false);
           setDisableSubmit(false);
         });
     } else {
+      setLoading(false);
       showToastNotification(
         "Please complete the CAPTCHA to verify you are not a robot",
         3,
@@ -102,6 +108,7 @@ const EnquirySection = () => {
   return (
     <>
       <div className={styles.right_div}>
+        {loading && <LoaderComponent loading={loading} />}
         <div>
           <h2 className={styles.enquiry_heading}>Enquiry</h2>
           <div className={styles.enquiry_description}>
