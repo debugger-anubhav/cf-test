@@ -20,8 +20,9 @@ const RecentlyViewedProduct = ({page}) => {
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
+  const userId = decrypt(getLocalStorage("_ga"));
   const [isDumy, setIsDumy] = React.useState(false);
-  const [isLogin, setIsLogin] = React.useState(null);
+  const [isLogin, setIsLogin] = React.useState(!!userId);
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -29,6 +30,9 @@ const RecentlyViewedProduct = ({page}) => {
   }
 
   const cityId = parseFloat(cityIdStr);
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
@@ -46,7 +50,6 @@ const RecentlyViewedProduct = ({page}) => {
   };
 
   useEffect(() => {
-    isAuth();
     recentlyViewed()
       .then(res => {
         dispatch(addRecentlyViewedProduct(res?.data?.data));
