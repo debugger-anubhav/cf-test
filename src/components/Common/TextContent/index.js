@@ -6,7 +6,6 @@ import {baseInstance} from "@/network/axios";
 export default function TextContent({params}) {
   const [data, setData] = React.useState();
   const [paramsCityId, setParamsCityId] = React.useState(46);
-  console.log(params, "params");
   const HomePageText = () => {
     baseInstance
       .get(endPoints.homePageTextContent)
