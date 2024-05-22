@@ -5,9 +5,7 @@ import {getLocalStorage} from "@/constants/constant";
 export const useChatScript = (url, widgetCode) => {
   const userId = decrypt(getLocalStorage("_ga"));
   const userIdForUse = userId || "";
-  useEffect(() => {
-    console.log(userIdForUse, "userid");
-  }, [userId]);
+
   useEffect(() => {
     let script;
     const timerID = setTimeout(() => {
