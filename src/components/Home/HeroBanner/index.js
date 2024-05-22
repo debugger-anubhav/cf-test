@@ -123,6 +123,7 @@ const HeroBanner = () => {
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
+      {/* web  */}
       <div className="w-full hidden lg:flex">
         <Carousel
           showStatus={false}
@@ -143,12 +144,16 @@ const HeroBanner = () => {
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
+                  width={1920}
+                  height={801}
                 />
               </div>
             </div>
           ))}
         </Carousel>
       </div>
+
+      {/* mobile  */}
       <div className="w-full md:hidden">
         <Carousel
           showStatus={false}
@@ -169,12 +174,16 @@ const HeroBanner = () => {
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
+                  width={430}
+                  height={179}
                 />
               </div>
             </div>
           ))}
         </Carousel>
       </div>
+
+      {/* tablet  */}
       <div className="w-full hidden md:flex lg:hidden">
         <Carousel
           showStatus={false}
@@ -195,6 +204,8 @@ const HeroBanner = () => {
                   src={item.src}
                   alt={item.alt}
                   className="cursor-pointer rounded-lg"
+                  width={1024}
+                  height={427}
                 />
               </div>
             </div>
