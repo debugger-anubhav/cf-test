@@ -124,7 +124,7 @@ const HeroBanner = () => {
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
       {/* web  */}
-      <div className="w-full hidden lg:flex">
+      <div className="hidden lg:flex landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows={true}
@@ -154,7 +154,7 @@ const HeroBanner = () => {
       </div>
 
       {/* mobile  */}
-      <div className="w-full md:hidden">
+      <div className="w-full md:hidden landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows={true}
@@ -184,7 +184,7 @@ const HeroBanner = () => {
       </div>
 
       {/* tablet  */}
-      <div className="w-full hidden md:flex lg:hidden">
+      <div className="w-full hidden md:flex lg:hidden landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows={true}
