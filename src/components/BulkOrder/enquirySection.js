@@ -57,13 +57,14 @@ const EnquirySection = () => {
       .min(5, "Message should be of atleast 5 characters long."),
   });
   const [captchaKey, setCaptchaKey] = useState(null);
-
+  const [disableSubmit, setDisableSubmit] = useState(false);
   const handleRecaptchaVerify = value => {
     // const token = recaptchaRef.current.executeAsync();
     setCaptchaKey(value);
   };
 
   const handleSubmit = async values => {
+    setDisableSubmit(true);
     const payload = {
       name: values.fullName,
       email: values.email,
@@ -82,16 +83,19 @@ const EnquirySection = () => {
           );
           setTimeout(() => {
             typeof window !== "undefined" && window?.location.reload();
+            setDisableSubmit(false);
           }, 2000);
         })
         .catch(error => {
           console.error("API error:", error);
+          setDisableSubmit(false);
         });
     } else {
       showToastNotification(
         "Please complete the CAPTCHA to verify you are not a robot",
         3,
       );
+      setDisableSubmit(false);
     }
   };
 
@@ -256,10 +260,20 @@ const EnquirySection = () => {
                   </div>
 
                   <div className={styles.btn_wrapper}>
-                    <button type="submit" className={styles.submit_btn_web}>
+                    <button
+                      type="submit"
+                      className={`${styles.submit_btn_web} ${
+                        disableSubmit ? "cursor-not-allowed" : "cursor-pointer"
+                      }`}
+                      disabled={disableSubmit}>
                       Submit
                     </button>
-                    <button type="submit" className={styles.submit_btn_mobile}>
+                    <button
+                      type="submit"
+                      className={`${styles.submit_btn_mobile} ${
+                        disableSubmit ? "cursor-not-allowed" : "cursor-pointer"
+                      }`}
+                      disabled={disableSubmit}>
                       Save & Proceed
                       <ForwardArrowWithLine
                         className={styles.submit_btn_icon}
