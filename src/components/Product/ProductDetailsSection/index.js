@@ -142,19 +142,21 @@ const ProductDetails = ({params}) => {
         dispatch(getProductDetails(res?.data?.data));
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
         const scriptData = res?.data?.data?.[0];
-        window?.gtag("event", "view_item", {
-          items: [
-            {
-              id: scriptData?.id,
-              name: scriptData?.product_name,
-              brand: scriptData?.brand,
-              category: scriptData?.category_name,
-              list_position: 1,
-              quantity: 1,
-              price: scriptData?.sale_price.toString(),
-            },
-          ],
-        });
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "view_item", {
+            items: [
+              {
+                id: scriptData?.id,
+                name: scriptData?.product_name,
+                brand: scriptData?.brand,
+                category: scriptData?.category_name,
+                list_position: 1,
+                quantity: 1,
+                price: scriptData?.sale_price.toString(),
+              },
+            ],
+          });
+        }
       })
       .catch(err => {
         console.log(err?.message || "some message");
@@ -362,20 +364,22 @@ const ProductDetails = ({params}) => {
           if (!isItemInCart) {
             dispatch(addItemsToCart(apiData));
             showToastNotification("Item added to cart", 1, isSmallScreen);
-            window?.gtag("event", "add_to_cart", {
-              items: [
-                {
-                  id: body?.productId,
-                  name: prodDetails?.[0]?.product_name,
-                  list_name: "Search Results",
-                  brand: "Cityfurnish",
-                  category: prodDetails?.[0]?.category_name,
-                  list_position: 1,
-                  quantity: body?.quantity,
-                  price: body?.price.toString(),
-                },
-              ],
-            });
+            if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+              window?.gtag("event", "add_to_cart", {
+                items: [
+                  {
+                    id: body?.productId,
+                    name: prodDetails?.[0]?.product_name,
+                    list_name: "Search Results",
+                    brand: "Cityfurnish",
+                    category: prodDetails?.[0]?.category_name,
+                    list_position: 1,
+                    quantity: body?.quantity,
+                    price: body?.price.toString(),
+                  },
+                ],
+              });
+            }
           }
         }
         setIsLoading(false);

@@ -144,12 +144,15 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (userId !== "") {
-      window?.gtag("js", new Date());
-      window?.gtag("config", "G-05PLBRM6KD", {
-        user_id: userId,
-      });
+      if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+        window?.gtag("js", new Date());
+        window?.gtag("config", "G-05PLBRM6KD", {
+          user_id: userId,
+        });
+      }
     } else {
-      window?.gtag("config", "G-05PLBRM6KD");
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
+        window?.gtag("config", "G-05PLBRM6KD");
     }
   }, [userId]);
 
