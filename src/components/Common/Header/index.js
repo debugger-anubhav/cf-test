@@ -407,7 +407,7 @@ const Header = ({page}) => {
                 </a>
               </div>
               <div
-                className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8 ${styles.test}`}
+                className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
                 }}
