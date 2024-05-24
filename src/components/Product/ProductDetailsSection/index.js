@@ -179,14 +179,7 @@ const ProductDetails = ({params}) => {
 
       productId: params?.productId,
     };
-    baseInstance
-      .post(endPoints.addRecentViewProduct, data)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
+    baseInstance.post(endPoints.addRecentViewProduct, data);
   }, []);
 
   useEffect(() => {
