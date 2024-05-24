@@ -386,7 +386,7 @@ const Header = ({page}) => {
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 && (
                     <div
-                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.5rem] lg:left-6`}>
+                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.3rem] lg:left-6`}>
                       {wishListCount}
                     </div>
                   )}
@@ -413,7 +413,7 @@ const Header = ({page}) => {
                 </a>
               </div>
               <div
-                className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer px-2`}
+                className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer lg:px-2`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
                 }}
