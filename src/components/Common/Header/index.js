@@ -385,7 +385,10 @@ const Header = ({page}) => {
                     loading="lazy"
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 && (
-                    <div className={styles.cart_badge}>{wishListCount}</div>
+                    <div
+                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.5rem] lg:left-6`}>
+                      {wishListCount}
+                    </div>
                   )}
                 </div>
               </div>
@@ -402,7 +405,10 @@ const Header = ({page}) => {
                     className={`${styles.header_shopping_card} relative z-[-1]  mx-4 cursor-pointer`}
                   />
                   {cartItemsLength > 0 && (
-                    <div className={styles.cart_badge}>{cartItemsLength}</div>
+                    <div
+                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.8rem] lg:left-8`}>
+                      {cartItemsLength}
+                    </div>
                   )}
                 </a>
               </div>
