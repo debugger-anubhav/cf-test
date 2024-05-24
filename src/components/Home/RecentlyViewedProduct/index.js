@@ -30,6 +30,9 @@ const RecentlyViewedProduct = ({page}) => {
   }
 
   const cityId = parseFloat(cityIdStr);
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   useEffect(() => {
     isAuth();

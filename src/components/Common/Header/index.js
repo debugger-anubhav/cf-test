@@ -399,7 +399,7 @@ const Header = ({page}) => {
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
                     loading="lazy"
-                    className={`${styles.header_shopping_card} relative z-[-1]`}
+                    className={`${styles.header_shopping_card} relative z-[-1]  mx-4 cursor-pointer`}
                   />
                   {cartItemsLength > 0 && (
                     <div className={styles.cart_badge}>{cartItemsLength}</div>
@@ -407,9 +407,7 @@ const Header = ({page}) => {
                 </a>
               </div>
               <div
-                className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8
-                  
-                  ${styles.test}`}
+                className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer px-2`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
                 }}
@@ -419,13 +417,12 @@ const Header = ({page}) => {
                   if (isLogin) {
                     setShowProfileDropdown(true);
                   }
+                }}
+                onClick={() => {
+                  if (isLogin) router.push("/usersettings");
+                  else toggleLoginModal(true);
                 }}>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => {
-                    if (isLogin) router.push("/usersettings");
-                    else toggleLoginModal(true);
-                  }}>
+                <div className="cursor-pointer">
                   <div
                     className="relative z-20"
                     onMouseEnter={e => {

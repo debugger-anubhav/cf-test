@@ -11,7 +11,7 @@
   @apply font-medium md:font-semibold md:text-[35px] xs:text-[28px] mobile:text-[20px] text-[18px] tracking-0.24 cursor-pointer;
 }
 .open_searchbar_main {
-  @apply absolute md:right-[19%] lg:right-[21%] xl:right-[19%];
+  @apply absolute md:right-[25%] lg:right-[21%] xl:right-[19%];
 }
 .header_left_wrapper {
   @apply flex items-center gap-2 xl:gap-6;
@@ -39,7 +39,7 @@
 }
 
 .header_favorite {
-  @apply flex lg:mr-8 mr-4 mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
+  @apply flex mx-2 mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
 }
 .header_shopping_card {
   @apply flex mobile:w-6 mobile:h-6 h-4 w-4 min-h-[16px] min-w-[16px] cursor-pointer;
