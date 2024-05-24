@@ -170,8 +170,11 @@ const SubHeader = ({params}) => {
     setPageNo(1);
     dispatch(addFilteredItem([]));
     let previousSubCategory;
+    // if (typeof window !== "undefined") {
+    //   setLocalStorage("subCategory", item?.cat_name);
+    // }
     if (typeof window !== "undefined") {
-      setLocalStorage("subCategory", item?.cat_name);
+      previousSubCategory = getLocalStorage("subCategory");
     }
 
     router.push(
