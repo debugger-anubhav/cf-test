@@ -192,8 +192,10 @@ const AddressSection = () => {
   };
 
   const makeDefaultAddress = id => {
-    const newPrimaryAddress = addressArray.find(item => item.id === id);
-    setPrimaryAddress(newPrimaryAddress);
+    if (id) {
+      const newPrimaryAddress = addressArray.find(item => item.id === id);
+      setPrimaryAddress(newPrimaryAddress);
+    }
   };
 
   const goToPostCheckout = (e, id) => {
