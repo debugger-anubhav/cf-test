@@ -6,7 +6,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
@@ -63,7 +63,7 @@ const Card = ({
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
-  const router = useRouter();
+  // const router = useRouter();
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -147,12 +147,12 @@ const Card = ({
     updateCount.current += 1;
   }, []);
 
-  const handleProductClick = (e, productID, seourl) => {
-    e.stopPropagation();
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${productID}/${seourl}`);
-    }
-  };
+  // const handleProductClick = (e, productID, seourl) => {
+  //   e.stopPropagation();
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     router.push(`/things/${productID}/${seourl}`);
+  //   }
+  // };
 
   return (
     <>
@@ -173,9 +173,9 @@ const Card = ({
         target="_self"
         rel="noopener">
         <div
-          onClick={e => {
-            !reduxStateOfLoginPopup && handleProductClick(e, productID, seourl);
-          }}
+          // onClick={e => {
+          //   !reduxStateOfLoginPopup && handleProductClick(e, productID, seourl);
+          // }}
           className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
             productWidth ?? ""
           } 
