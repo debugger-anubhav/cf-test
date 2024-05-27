@@ -93,6 +93,15 @@ export default function RootLayout({children}) {
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `window.fcWidgetMessengerConfig = {
+            meta: {
+              cf_userid: "85760",
+            },
+          };`,
+          }}></script>
         <script src="//in.fw-cdn.com/30445413/247408.js" chat="true"></script>
 
         {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}

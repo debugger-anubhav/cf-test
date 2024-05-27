@@ -61,8 +61,9 @@ export const useChatScript = (url, widgetCode) => {
       }
     }
    `;
-      script.appendChild(document?.createTextNode(code));
-      document?.body?.appendChild(script);
+      console.log(code);
+      // script.appendChild(document?.createTextNode(code));
+      // document?.body?.appendChild(script);
       clearInterval(timerID);
     }, 3000);
 
