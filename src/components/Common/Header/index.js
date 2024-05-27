@@ -525,6 +525,9 @@ const SearchModal = ({
 
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
+    if (newSearchTerm.length < 4) {
+      return;
+    }
     setSearchTerm(newSearchTerm);
     const city = getLocalStorage("cityId");
 
