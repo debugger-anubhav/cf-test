@@ -6,6 +6,7 @@ import {
   getLocalStorage,
   productImageBaseUrl,
   setLocalStorage,
+  MONTHLY_NOT_ALLOWED_PRODUCT,
 } from "@/constants/constant";
 import {
   ArrowForw,
@@ -102,6 +103,18 @@ const ShoppingCartSection = () => {
     setArr(cartItems);
     if (cartItems[0]?.is_frp === 1) {
       setLocalStorage("isMonthly", false);
+    }
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (showMonthlyToggle) {
+      cartItems?.forEach(cart => {
+        if (MONTHLY_NOT_ALLOWED_PRODUCT.includes(cart.fc_product?.sku)) {
+          // setIsShowMonthly(true); // Uncomment if you need this line
+          setShowMonthlyToggle(false);
+          setLocalStorage("isMonthly", false);
+        }
+      });
     }
   }, [cartItems]);
 
