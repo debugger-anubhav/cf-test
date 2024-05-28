@@ -109,7 +109,6 @@ export default function RootLayout({children}) {
             })
             .then(res => res.json())
             .then(res => {
-              console.log("res", res.data.userId)
               window.fcWidgetMessengerConfig = {
                 meta: {
                   cf_userid: res.data.userId,
