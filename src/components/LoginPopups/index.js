@@ -169,6 +169,7 @@ const LoginModal = ({
             setEmailArr(response?.data?.data?.data);
             setModalCategory("multipleEmails");
           }
+          window.open("/", "_self");
         }
       })
       .catch(err => {
