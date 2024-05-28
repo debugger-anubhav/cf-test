@@ -128,7 +128,7 @@ export default function UserSettings() {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 dispatch(setShoppingCartTab(0));
-                window?.fcWidget.user.clear();
+                // window?.fcWidget.user.clear();
               }
               // router.push("/");
               window.open("/", "_self");
