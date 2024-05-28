@@ -119,6 +119,7 @@ export default function UserSettings() {
             className={styles.lgout}
             onClick={() => {
               if (typeof window !== "undefined") {
+                window?.fcWidget.user.clear();
                 cookie.remove("ci_sessions");
                 authCookies.remove("authToken", {path: "/"});
                 authCookies.remove("userId", {path: "/"});
@@ -128,7 +129,6 @@ export default function UserSettings() {
                 localStorage.removeItem("user_name");
                 localStorage.removeItem("ci_session");
                 dispatch(setShoppingCartTab(0));
-                // window?.fcWidget.user.clear();
               }
               // router.push("/");
               window.open("/", "_self");
