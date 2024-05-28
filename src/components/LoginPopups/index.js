@@ -171,7 +171,7 @@ const LoginModal = ({
           }
           setTimeout(() => {
             window.open("/", "_self");
-          }, 3000);
+          }, 2000);
         }
       })
       .catch(err => {
