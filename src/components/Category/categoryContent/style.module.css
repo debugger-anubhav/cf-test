@@ -71,6 +71,7 @@
 .dynamic_keyword p a {
   font-weight: 600;
   color: #71717a !important;
+  text-decoration: underline !important;
 }
 
 .style_dynamic_keyword_SV8RQ ol li,
