@@ -11,7 +11,7 @@
   @apply font-Poppins text-16 xl:text-20 text-45454A leading-6 xl:leading-10 font-medium tracking-0.3 xl:tracking-0.4;
 }
 .saved_address_div {
-  @apply overflow-y-scroll mt-4 lg:mt-6 xl:mt-8 p-4 border border-DDDDDF rounded-xl md:w-[537px] lg:w-full xl:w-[516px] macbook:w-[537px] min-h-[127px] hover:border-2 hover:border-5774AC hover:p-[15px] cursor-pointer;
+  @apply overflow-y-scroll mt-4 lg:mt-6 xl:mt-8  border-5774AC rounded-xl md:w-[537px] lg:w-full xl:w-[516px] macbook:w-[537px] min-h-[127px] border-2 hover:border-5774AC p-[15px] cursor-pointer;
 }
 .saved_address_div:hover .change_btn {
   @apply border-5774AC;

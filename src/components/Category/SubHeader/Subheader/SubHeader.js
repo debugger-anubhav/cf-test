@@ -163,7 +163,7 @@ const SubHeader = ({params}) => {
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     if (item?.cat_name === "All") {
-      dispatch(addAllProduct(true));
+      dispatch(addAllProduct(false));
     } else {
       dispatch(addAllProduct(false));
     }
@@ -691,6 +691,7 @@ const SubHeader = ({params}) => {
                     dispatch(addSetProduct([]));
                     dispatch(addOutStockProduct([]));
                     dispatch(isFilterApplied(false));
+                    setPageNo(1);
                   }}>
                   <p className={styles.clear_All}>Clear all</p>
                 </div>
@@ -734,6 +735,7 @@ const SubHeader = ({params}) => {
                     dispatch(addSingleProduct([]));
                     dispatch(addSetProduct([]));
                     dispatch(addOutStockProduct([]));
+                    setPageNo(1);
                   }}>
                   <p className={styles.clear_All}>Clear all</p>
                 </div>
