@@ -13,98 +13,54 @@ const HeroBanner = () => {
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
-
   const bannersData = [
     {
-      // web
       images: [
         {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
+          srcWeb:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
           alt: "bed-room",
           redirectionLink: `/${homePageReduxData?.cityName
             .replace(/\//g, "-")
             ?.toLowerCase()}/home-furniture-rental`,
+          srcMob:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
+          srcTab:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_1.webp ",
         },
         {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
+          srcWeb:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
           alt: "appliances",
           redirectionLink: `/${homePageReduxData?.cityName
             .replace(/\//g, "-")
             ?.toLowerCase()}/home-appliances-rental`,
+          srcMob:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp ",
+          srcTab:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_2.webp ",
         },
         {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
+          srcWeb:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
           alt: "citymax",
           redirectionLink: "/citymax",
+          srcMob:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
+          srcTab:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_3.webp",
         },
         {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
+          srcWeb:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
           alt: "discount-deals",
           redirectionLink: `/${homePageReduxData?.cityName
             .replace(/\//g, "-")
             ?.toLowerCase()}/discount-deals`,
-        },
-      ],
-    },
-    // mobile
-    {
-      images: [
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
-          alt: "bed-room",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-furniture-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp ",
-          alt: "appliances",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-appliances-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
-          alt: "citymax",
-          redirectionLink: "/citymax",
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
-          alt: "discount-deals",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/discount-deals`,
-        },
-      ],
-    },
-    // tablet
-    {
-      images: [
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_1.webp ",
-          alt: "bed-room",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-furniture-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_2.webp ",
-          alt: "appliances",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-appliances-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_3.webp",
-          alt: "citymax",
-          redirectionLink: "/citymax",
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_4.webp",
-          alt: "discount-deals",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/discount-deals`,
+          srcMob:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
+          srcTab:
+            "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_4.webp",
         },
       ],
     },
@@ -124,7 +80,7 @@ const HeroBanner = () => {
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
       {/* web  */}
-      <div className="hidden lg:flex landing_page_carousel">
+      <div className="landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows={true}
@@ -140,73 +96,16 @@ const HeroBanner = () => {
                 onClick={() => {
                   handleRedirection(item.redirectionLink);
                 }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={1920}
-                  height={801}
-                />
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      </div>
-
-      {/* mobile  */}
-      <div className="w-full md:hidden landing_page_carousel">
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {bannersData[1].images.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex cursor-pointer"
-                onClick={() => {
-                  handleRedirection(item.redirectionLink);
-                }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={430}
-                  height={179}
-                />
-              </div>
-            </div>
-          ))}
-        </Carousel>
-      </div>
-
-      {/* tablet  */}
-      <div className="w-full hidden md:flex lg:hidden landing_page_carousel">
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {bannersData[2].images.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex cursor-pointer"
-                onClick={() => {
-                  handleRedirection(item.redirectionLink);
-                }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={1024}
-                  height={427}
-                />
+                <picture>
+                  <source media="(min-width:1024px)" srcSet={item.srcWeb} />
+                  <source media="(min-width:460px)" srcSet={item.srcTab} />
+                  <source media="(min-width:260px)" srcSet={item.srcMob} />
+                  <img
+                    src={item.srcMob}
+                    alt={item.alt}
+                    className="w-full rounded-lg cursor-pointer"
+                  />
+                </picture>
               </div>
             </div>
           ))}
