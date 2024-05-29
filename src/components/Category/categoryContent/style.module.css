@@ -149,3 +149,17 @@
     list-style-type: disc !important;
   }
 }
+
+.dynamic_keyword li a {
+  font-weight: 600;
+  color: #71717a !important;
+  text-decoration: underline !important;
+}
+.dynamic_keyword b a {
+  text-decoration: underline !important;
+}
+.dynamic_keyword div a {
+  font-weight: 600;
+  color: #71717a !important;
+  text-decoration: underline !important;
+}
