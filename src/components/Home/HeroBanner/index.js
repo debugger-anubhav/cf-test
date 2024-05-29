@@ -6,9 +6,13 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
+// import {
+//   CityWiseBannerWebsite,CityNameToId
+// } from "@/constants/constant";
 
 const HeroBanner = () => {
   const router = useRouter();
+  // const cityName = useSelector(state => state.homePagedata.cityName);
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
@@ -89,6 +93,7 @@ const HeroBanner = () => {
           infiniteLoop
           width={"100%"}
           swipeable>
+          {/* {CityWiseBannerWebsite[CityNameToId[cityName] | 0].map((item, index) => ( */}
           {bannersData[0].images.map((item, index) => (
             <div key={index}>
               <div
