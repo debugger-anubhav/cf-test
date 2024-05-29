@@ -795,3 +795,9 @@ export const CityNameToId = {
 "Bangalore": 48,
 "Delhi": 52
 }
+export const MONTHLY_NOT_ALLOWED_PRODUCT = [
+  "SPLITAC1.5TONMP001",
+  "SPLITAC1TONMP001",
+  "ACPWA1TONMPC03",
+  "ACPWAMPC03",
+];

@@ -119,6 +119,7 @@ export default function UserSettings() {
             className={styles.lgout}
             onClick={() => {
               if (typeof window !== "undefined") {
+                window?.fcWidget.user.clear();
                 cookie.remove("ci_sessions");
                 authCookies.remove("authToken", {path: "/"});
                 authCookies.remove("userId", {path: "/"});

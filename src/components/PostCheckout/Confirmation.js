@@ -57,21 +57,23 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        window?.gtag("event", "purchase", {
-          transaction_id: scriptData?.transaction_id,
-          value: scriptData?.value,
-          currency: scriptData?.currency,
-          tax: scriptData?.tax,
-          shipping: scriptData?.shipping,
-          items: eventItems,
-        });
-        // console.log("444444444444444444");
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "purchase", {
+            transaction_id: scriptData?.transaction_id,
+            value: scriptData?.value,
+            currency: scriptData?.currency,
+            tax: scriptData?.tax,
+            shipping: scriptData?.shipping,
+            items: eventItems,
+          });
+          // console.log("444444444444444444");
 
-        window?.fbq("track", "Purchase", {
-          currency: scriptData?.currency,
-          value: scriptData?.value,
-        });
-        window?.lintrk("track", {conversion_id: 11504433});
+          window?.fbq("track", "Purchase", {
+            currency: scriptData?.currency,
+            value: scriptData?.value,
+          });
+          window?.lintrk("track", {conversion_id: 11504433});
+        }
         // console.log("555555555555555555");
 
         // console.log("third_call_3333333333");

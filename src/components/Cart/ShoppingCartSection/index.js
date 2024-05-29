@@ -6,6 +6,7 @@ import {
   getLocalStorage,
   productImageBaseUrl,
   setLocalStorage,
+  MONTHLY_NOT_ALLOWED_PRODUCT,
 } from "@/constants/constant";
 import {
   ArrowForw,
@@ -106,6 +107,18 @@ const ShoppingCartSection = () => {
   }, [cartItems]);
 
   useEffect(() => {
+    if (showMonthlyToggle) {
+      cartItems?.forEach(cart => {
+        if (MONTHLY_NOT_ALLOWED_PRODUCT.includes(cart.fc_product?.sku)) {
+          // setIsShowMonthly(true); // Uncomment if you need this line
+          setShowMonthlyToggle(false);
+          setLocalStorage("isMonthly", false);
+        }
+      });
+    }
+  }, [cartItems]);
+
+  useEffect(() => {
     if (modeOfPayment) {
       setIsMonthly(true);
     } else {
@@ -132,10 +145,12 @@ const ShoppingCartSection = () => {
           };
           eventItems.push(item);
         });
-        window?.gtag("event", "begin_checkout", {
-          items: eventItems,
-        });
-        window?.fbq("track", "InitiateCheckout");
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "begin_checkout", {
+            items: eventItems,
+          });
+          window?.fbq("track", "InitiateCheckout");
+        }
       })
       .catch(err => {
         console.log(err?.message || "some error");

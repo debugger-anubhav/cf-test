@@ -14,7 +14,6 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
@@ -144,12 +143,15 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (userId !== "") {
-      window?.gtag("js", new Date());
-      window?.gtag("config", "G-05PLBRM6KD", {
-        user_id: userId,
-      });
+      if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+        window?.gtag("js", new Date());
+        window?.gtag("config", "G-05PLBRM6KD", {
+          user_id: userId,
+        });
+      }
     } else {
-      window?.gtag("config", "G-05PLBRM6KD");
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
+        window?.gtag("config", "G-05PLBRM6KD");
     }
   }, [userId]);
 
@@ -160,7 +162,7 @@ export default function Home() {
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
       />
       <div ref={myElementRef} className="large_layout">
-        {useChatScript()}
+        {/* {useChatScript()} */}
         <AnnouncementBar />
         <Header />
         <MenuList />

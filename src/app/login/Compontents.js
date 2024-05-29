@@ -14,7 +14,7 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import {useChatScript} from "../../../useChatScript";
+// import {useChatScript} from "../../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
@@ -154,7 +154,7 @@ export default function LoginComponents() {
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
       />
       <div ref={myElementRef} className="large_layout">
-        {useChatScript()}
+        {/* {useChatScript()} */}
         <AnnouncementBar />
         <Header page="login" />
         <MenuList />

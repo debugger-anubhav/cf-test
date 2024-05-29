@@ -92,6 +92,34 @@ export default function RootLayout({children}) {
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
+
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+            const userId = localStorage.getItem("_ga");
+            fetch("https://test.rentofurniture.com/ajxapi/getDecryptedUserId", {
+              method: "POST",
+              body: JSON.stringify({
+                userId: JSON.parse(userId)
+              }),
+              headers: {
+
+              }
+            })
+            .then(res => res.json())
+            .then(res => {
+              window.fcWidgetMessengerConfig = {
+                meta: {
+                  cf_userid: res.data.userId,
+                },
+              }
+            })
+            .catch(e => console.log('e',e))
+            `,
+          }}></script>
+        <script src="//in.fw-cdn.com/30445413/247408.js" chat="true"></script>
+
         {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"

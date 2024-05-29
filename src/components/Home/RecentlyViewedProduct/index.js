@@ -34,6 +34,10 @@ const RecentlyViewedProduct = ({page}) => {
     isAuth();
   }, []);
 
+  useEffect(() => {
+    isAuth();
+  }, []);
+
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
     endPoints.recentlyViewedProduct,
