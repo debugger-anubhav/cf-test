@@ -77,13 +77,17 @@ const HeroBanner = () => {
             <div
               key={index.toString()}
               className="cursor-pointer"
-              onClick={() =>
-                router.push(
-                  homePageReduxData?.cityName
-                    .replace(/\//g, "-")
-                    ?.toLowerCase() + homepageDesktopBanners[index].link,
-                )
-              }>
+              onClick={() => {
+                if (homepageDesktopBanners[index].altText === "citymax") {
+                  router.push(homepageDesktopBanners[index].link);
+                } else {
+                  router.push(
+                    homePageReduxData?.cityName
+                      .replace(/\//g, "-")
+                      ?.toLowerCase() + homepageDesktopBanners[index].link,
+                  );
+                }
+              }}>
               <picture>
                 <source
                   media="(min-width:1850px)"
