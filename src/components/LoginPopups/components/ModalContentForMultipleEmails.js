@@ -7,6 +7,7 @@ const ModalContentForMultipleEmails = ({
   setStartCountdown,
   handleMultipleEmails,
   data,
+  proceedDisable,
 }) => {
   const [selectedEmail, setSelectedEmail] = useState(data[0]);
 
@@ -34,10 +35,14 @@ const ModalContentForMultipleEmails = ({
         </p>
         <div className={styles.radio_emails}>
           {data?.map((item, index) => (
-            <div key={index} className={styles.email_row}>
+            <div
+              key={index}
+              className={`${styles.email_row} !w-fit `}
+              onClick={() => setSelectedEmail(item)}>
               <div
-                className={styles.radio_outer_circle}
-                onClick={() => setSelectedEmail(item)}>
+                className={`${styles.radio_outer_circle}`}
+                // onClick={() => setSelectedEmail(item)}
+              >
                 <div
                   className={`${
                     selectedEmail === item ? styles.radio_inner_circle : ""
@@ -49,7 +54,11 @@ const ModalContentForMultipleEmails = ({
         </div>
         <button
           onClick={() => handleMultipleEmails(selectedEmail)}
-          className={styles.proceed_btn}>
+          className={`${styles.proceed_btn} ${
+            proceedDisable ? "cursor-not-allowed" : "cursor-pointer"
+          }
+        }`}
+          disabled={proceedDisable}>
           Proceed
         </button>
       </div>

@@ -59,7 +59,7 @@ const ProductDetails = ({params}) => {
     {name: "Home", link: "/"},
     {
       name: prodDetails?.[0]?.category_name,
-      link: `/${cityName.replace(/\//g, "-").toLowerCase()}/${
+      link: `/${cityName?.replace(/\//g, "-")?.toLowerCase()}/${
         prodDetails?.[0]?.category_seourl
       }`,
     },
@@ -142,19 +142,21 @@ const ProductDetails = ({params}) => {
         dispatch(getProductDetails(res?.data?.data));
         if (res?.data?.data?.[0]?.pq_quantity <= 0) setSoldOut(true);
         const scriptData = res?.data?.data?.[0];
-        window?.gtag("event", "view_item", {
-          items: [
-            {
-              id: scriptData?.id,
-              name: scriptData?.product_name,
-              brand: scriptData?.brand,
-              category: scriptData?.category_name,
-              list_position: 1,
-              quantity: scriptData?.quantity,
-              price: scriptData?.price,
-            },
-          ],
-        });
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "view_item", {
+            items: [
+              {
+                id: scriptData?.id,
+                name: scriptData?.product_name,
+                brand: scriptData?.brand,
+                category: scriptData?.category_name,
+                list_position: 1,
+                quantity: 1,
+                price: scriptData?.sale_price.toString(),
+              },
+            ],
+          });
+        }
       })
       .catch(err => {
         console.log(err?.message || "some message");
@@ -179,14 +181,7 @@ const ProductDetails = ({params}) => {
 
       productId: params?.productId,
     };
-    baseInstance
-      .post(endPoints.addRecentViewProduct, data)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
+    baseInstance.post(endPoints.addRecentViewProduct, data);
   }, []);
 
   useEffect(() => {
@@ -362,21 +357,22 @@ const ProductDetails = ({params}) => {
           if (!isItemInCart) {
             dispatch(addItemsToCart(apiData));
             showToastNotification("Item added to cart", 1, isSmallScreen);
-            window?.gtag("event", "add_to_cart", {
-              items: [
-                {
-                  id: body?.productId,
-                  name: prodDetails?.[0]?.product_name,
-                  list_name: "Search Results",
-                  brand: "Cityfurnish",
-                  category: prodDetails?.[0]?.category_name,
-                  list_position: 1,
-                  quantity: body?.quantity,
-                  price: body?.price,
-                },
-              ],
-            });
-            // console.log("Analytics----Add to cart");
+            if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+              window?.gtag("event", "add_to_cart", {
+                items: [
+                  {
+                    id: body?.productId,
+                    name: prodDetails?.[0]?.product_name,
+                    list_name: "Search Results",
+                    brand: "Cityfurnish",
+                    category: prodDetails?.[0]?.category_name,
+                    list_position: 1,
+                    quantity: body?.quantity,
+                    price: body?.price.toString(),
+                  },
+                ],
+              });
+            }
           }
         }
         setIsLoading(false);
@@ -729,9 +725,11 @@ const ProductDetails = ({params}) => {
           </div>
 
           <div className={styles.duration}>
-            <p className={styles.duration_text}>
-              For how many months would you like to rent this?
-            </p>
+            {durationArray.length > 0 && (
+              <p className={styles.duration_text}>
+                For how many months would you like to rent this?
+              </p>
+            )}
 
             <div className={styles.circle_div}>
               {durationArray.map((item, index) => (
@@ -820,15 +818,16 @@ const ProductDetails = ({params}) => {
               "Add to Cart"
             )}
           </button>
-
-          <div className={styles.emi_wrapper}>
-            <RiSparklingFill size={16} color={"#597492"} />
-            <p className={styles.emi_text}>
-              Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
-              using No-Cost EMI (excluding GST)
-            </p>
-            <RiSparklingFill size={16} color={"#597492"} />
-          </div>
+          {durationArray.length > 0 && (
+            <div className={styles.emi_wrapper}>
+              <RiSparklingFill size={16} color={"#597492"} />
+              <p className={styles.emi_text}>
+                Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
+                using No-Cost EMI (excluding GST)
+              </p>
+              <RiSparklingFill size={16} color={"#597492"} />
+            </div>
+          )}
 
           <div className={styles.kyc_wrapper}>
             <div className={`w-100 h-100 absolute z-10`} />
@@ -866,47 +865,49 @@ const ProductDetails = ({params}) => {
             ))}
           </div>
 
-          <div onClick={toggleDrawer} className={styles.city_shield_wrapper}>
-            <div className={styles.getPeace_div}>
-              <RiSparklingFill size={16} color={"#ffffff"} />
-              <p className={styles.getPeace_text}>{str.get_peace}</p>
-            </div>
-            <div className={`${styles.flexx} justify-between`}>
-              <div className={styles.flexx}>
-                <VerifyIcon size={30} color={"#2D9469"} />
-                <p className={styles.city_shield_head}>City Shield </p>
+          {durationArray?.length > 0 && (
+            <div onClick={toggleDrawer} className={styles.city_shield_wrapper}>
+              <div className={styles.getPeace_div}>
+                <RiSparklingFill size={16} color={"#ffffff"} />
+                <p className={styles.getPeace_text}>{str.get_peace}</p>
               </div>
-              <button className={styles.read_more}>Read More</button>
-            </div>
-            <p className={styles.opt_for}>
-              Opt for City Shield today and get covered for accidental damages
-              at ONLY <span className={styles.rupeeIcon}>₹</span>
-              {cityShieldCurrentPrice}
-              /month!
-            </p>
-            <p className={styles.protect}>
-              Protect your appliances and furniture worth{" "}
-              <span className={styles.rupeeIcon}>₹</span>70,000{" "}
-            </p>
+              <div className={`${styles.flexx} justify-between`}>
+                <div className={styles.flexx}>
+                  <VerifyIcon size={30} color={"#2D9469"} />
+                  <p className={styles.city_shield_head}>City Shield </p>
+                </div>
+                <button className={styles.read_more}>Read More</button>
+              </div>
+              <p className={styles.opt_for}>
+                Opt for City Shield today and get covered for accidental damages
+                at ONLY <span className={styles.rupeeIcon}>₹</span>
+                {cityShieldCurrentPrice}
+                /month!
+              </p>
+              <p className={styles.protect}>
+                Protect your appliances and furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+              </p>
 
-            {durationArray.length > 0 && (
-              <div className={styles.cityshield_prices}>
-                <p className={styles.currentPrice}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {cityShieldCurrentPrice}/mo
-                </p>
-                <p className={styles.originalPrice}>
-                  <span className={styles.rupeeIcon}>₹</span>
-                  {cityShieldOriginalPrice} / mo
-                </p>
-                {cityShieldDiscount > 0 && (
-                  <div className={styles.discount}>
-                    -{cityShieldDiscount}% OFF
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+              {durationArray.length > 0 && (
+                <div className={styles.cityshield_prices}>
+                  <p className={styles.currentPrice}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {cityShieldCurrentPrice}/mo
+                  </p>
+                  <p className={styles.originalPrice}>
+                    <span className={styles.rupeeIcon}>₹</span>
+                    {cityShieldOriginalPrice} / mo
+                  </p>
+                  {cityShieldDiscount > 0 && (
+                    <div className={styles.discount}>
+                      -{cityShieldDiscount}% OFF
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
 
           <CityshieldDrawer
             toggleDrawer={toggleDrawer}

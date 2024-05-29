@@ -6,12 +6,20 @@ import formStyles from "@/components/Cart/AddressSection/styles.module.css";
 import BreakdownDrawer from "./breakdownDrawer";
 import BreadCrumbsCommon from "@/components/Common/BreadCrumbs";
 import {endPoints} from "@/network/endPoints";
+import {useRouter} from "next/navigation";
 
 import {RazorpayThemeColor, razorpayKeyOwn} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
 import PostCityshield from "./postCityshieldPayment";
 import {format, parseISO} from "date-fns";
 import {baseInstance} from "@/network/axios";
+import {useDispatch} from "react-redux";
+
+import {
+  setAmountPaid,
+  setPGTransactionID,
+  setTransactionReferenceNumber,
+} from "@/store/Slices";
 
 const CityShieldPage = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -20,6 +28,9 @@ const CityShieldPage = () => {
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
   const parts = currentURL.split("/");
   const orderId = parts[parts.length - 1];
+
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const toggleDrawer = () => {
     setDrawerOpen(!drawerOpen);
@@ -88,7 +99,12 @@ const CityShieldPage = () => {
           };
           await baseInstance.post(endPoints.addToCart.successPayment, body);
           // router.push(`/city_shield/${orderId}`);
-          window?.open(`/city_shield/${orderId}`, "_self");
+          // window?.open(`/city_shield/${orderId}`, "_self");
+
+          dispatch(setTransactionReferenceNumber(orderId));
+          dispatch(setPGTransactionID(response.razorpay_payment_id));
+          dispatch(setAmountPaid(data.dataObj.total));
+          router.push("/success/payment");
         }
       },
       prefill: {
@@ -113,7 +129,7 @@ const CityShieldPage = () => {
     details &&
     (details.is_cf_care === 0 ? (
       <div className={styles.main_container}>
-        <BreadCrumbsCommon currentPage={"Citysheild"} />
+        <BreadCrumbsCommon currentPage={"City Sheild"} />
 
         <h1 className={styles.head}>Secure Your Coverage with City Shield</h1>
 

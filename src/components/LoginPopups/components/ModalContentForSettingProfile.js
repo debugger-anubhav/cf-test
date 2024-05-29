@@ -21,11 +21,11 @@ const ModalContentForSettingProfile = ({
       .required("email is required"),
   });
 
-  const userIdFromStorage = getLocalStorage(decrypt("_ga"));
+  const userIdFromStorage = decrypt(getLocalStorage("_ga"));
   const handleUpdateUserDetails = async values => {
     try {
       const body = {
-        id: userId || userIdFromStorage,
+        id: userIdFromStorage,
         full_name: values.fullName,
         email: values.email,
       };

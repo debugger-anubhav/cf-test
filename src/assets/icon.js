@@ -65,13 +65,6 @@ import Search from "@/assets/header/search.svg";
 
 // footer icons
 import Phone from "@/assets/footer_icons/phoneIcon.svg";
-import GoToTopIcon from "@/assets/footer_icons/goToTopIcon.svg";
-
-// homepage citymax component card icons
-import Icon1 from "@/assets/home_page_assets/tryCityMax/v6-icon1.svg";
-import Icon2 from "@/assets/home_page_assets/tryCityMax/v6-icon2.svg";
-import Icon3 from "@/assets/home_page_assets/tryCityMax/v6-icon3.svg";
-import Icon4 from "@/assets/home_page_assets/tryCityMax/v6-icon4.svg";
 
 // menubar search modal icons
 import {LuRefreshCcw, LuVerified} from "react-icons/lu";
@@ -83,7 +76,6 @@ export const IconLink = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 export const FooterIcons = {
   Phone,
-  GoToTopIcon,
   social_media_icons: [
     {
       icon: `${IconLink}facebook.svg`,
@@ -138,13 +130,6 @@ export const ShareIconsForProductPage = {
     },
     {icon: `${IconLink}clipboard.svg`, link: "link", shareLink: ""},
   ],
-};
-
-export const CityMaxIcons = {
-  Icon1,
-  Icon2,
-  Icon3,
-  Icon4,
 };
 
 export const Icons = {

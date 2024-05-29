@@ -39,6 +39,7 @@ import {
   getSavedAddress,
   setCityShield,
   setCoinsApplied,
+  setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
 } from "@/store/Slices";
@@ -182,6 +183,7 @@ const AddressSection = () => {
         .post(endPoints.addToCart.addAddress, headers)
         .then(response => {
           resolve("hii");
+          getAllSavedAddresses();
         })
         .catch(error => {
           console.error("API error:", error);
@@ -190,8 +192,10 @@ const AddressSection = () => {
   };
 
   const makeDefaultAddress = id => {
-    const newPrimaryAddress = addressArray.find(item => item.id === id);
-    setPrimaryAddress(newPrimaryAddress);
+    if (id) {
+      const newPrimaryAddress = addressArray.find(item => item.id === id);
+      setPrimaryAddress(newPrimaryAddress);
+    }
   };
 
   const goToPostCheckout = (e, id) => {
@@ -216,6 +220,7 @@ const AddressSection = () => {
         headers,
       );
       dispatch(getBillDetails(res?.data?.data));
+      dispatch(setMonthlyUpfrontLoader(false));
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
       dispatch(setCityShield(res?.data?.data?.cityshield));
@@ -263,7 +268,7 @@ const AddressSection = () => {
       if (res?.data?.status === false) {
         showToastNotification("Your postal code is not serviceable.", 3);
       } else {
-        if (type === "onlineCustomer") saveUserAddress(values);
+        if (type === "onlineCustomer") await saveUserAddress(values);
         else checkCartQunatity(type);
       }
     } catch (err) {
@@ -291,11 +296,16 @@ const AddressSection = () => {
       isOptWhatsapp: whatsappNotification,
       gstNumber,
     });
+    setLoading(false);
     if (!result) {
       alert("Server error. Are you online?");
       return;
     }
-
+    if (result?.data?.data?.status === false) {
+      showToastNotification(result?.data?.data?.message, 3);
+      setLoading(false);
+      return null;
+    }
     const {
       id: orderId,
       currency,
@@ -329,12 +339,8 @@ const AddressSection = () => {
             cfCoins: billBreakup?.coinsUsed,
           };
 
-          const result = await baseInstance.post(
-            endPoints.addToCart.successPayment,
-            data,
-          );
+          await baseInstance.post(endPoints.addToCart.successPayment, data);
           setLoading(false);
-          console.log(result, "result");
           goToPostCheckout(1, dealCodeNumber);
         }
       },
@@ -527,7 +533,7 @@ const AddressSection = () => {
                 } else {
                   await checkPostalCode("onlineCustomer", values);
                   // saveUserAddress(values);
-                  getAllSavedAddresses();
+                  // getAllSavedAddresses();
                   resetForm();
                 }
                 window.scrollTo({top: 0, left: 0, behavior: "smooth"});
@@ -919,12 +925,26 @@ const AddressSection = () => {
               onClick={() => setBreakupDrawer(true)}>
               <div className="flex flex-col w-fit">
                 <p className={otherStyles.total_text}>
-                  {getLocalStorage("isMonthly")
-                    ? "Now payable:"
-                    : "Total rent:"}
+                  {getLocalStorage("isMonthly") ? (
+                    <p>
+                      {" "}
+                      Now payable
+                      <span className="!text-14 !font-normal ml-1">
+                        (Excl GST) :{" "}
+                      </span>{" "}
+                    </p>
+                  ) : (
+                    <p>
+                      {" "}
+                      Total rent
+                      <span className="!text-14 !font-normal ml-1">
+                        (Excl GST) :{" "}
+                      </span>{" "}
+                    </p>
+                  )}
                 </p>
 
-                <div className={otherStyles.breakup_wrapper}>
+                <div className={`${otherStyles.breakup_wrapper} !mt-3`}>
                   <p className={otherStyles.view_cart_text}>
                     View cart breakup
                   </p>
@@ -938,6 +958,7 @@ const AddressSection = () => {
                 <p className={otherStyles.total_amount}>
                   <span className={otherStyles.rupeeIcon}>₹</span>
                   {billBreakup?.finalTotalPrice?.toFixed(2)}
+
                   {/* {billBreakup?.isMonthly && "/mo"} */}
                 </p>
               </div>
@@ -945,18 +966,35 @@ const AddressSection = () => {
 
             <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
               <button
-                disabled={
-                  (isOfflineCustomer !== 1 && !primaryAddress) ||
-                  (haveGstNumber && gstNumber === "")
-                }
+                // disabled={
+                //   (isOfflineCustomer !== 1 && !primaryAddress) ||
+                //   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
+                // }
                 onClick={() => {
-                  if (isOfflineCustomer === 1) {
+                  if (
+                    (isOfflineCustomer !== 1 && !primaryAddress) ||
+                    (isOfflineCustomer !== 1 &&
+                      haveGstNumber &&
+                      gstNumber === "")
+                  ) {
+                    showToastNotification(
+                      "Please save your address before proceeding.",
+                      3,
+                    );
+                  } else if (isOfflineCustomer === 1) {
+                    setLoading(true);
                     checkPostalCode("offlineCustomer");
                     // checkCartQunatity("offlineCustomer");
-                  } else checkPostalCode(0);
+                  } else {
+                    setLoading(true);
+                    checkPostalCode(0);
+                  }
                 }}
                 className={`${
-                  haveGstNumber && gstNumber === "" && "!cursor-not-allowed"
+                  isOfflineCustomer !== 1 &&
+                  haveGstNumber &&
+                  gstNumber === "" &&
+                  "!cursor-not-allowed"
                 } ${!primaryAddress && "!cursor-not-allowed"} ${
                   otherStyles.proceed_button
                 }`}>

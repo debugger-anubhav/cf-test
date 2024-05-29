@@ -44,7 +44,7 @@ const CreditAccordian = ({rows, handleShowMore, visibleRows}) => {
                 <div className={styles.tableCell}>
                   <span className="font-medium">Amount:</span>{" "}
                   <span className="font-Inter">₹</span>
-                  {row.balance}
+                  {row.total}
                 </div>
                 <div className={styles.tableCell}>
                   <span className="font-medium">Credit Note Date:</span>{" "}

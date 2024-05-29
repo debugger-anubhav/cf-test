@@ -21,7 +21,9 @@ function PickupReasonCommonScreen({
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const [description, setDescription] = useState("");
   const [showScreenName, setShowScreenName] = useState(null);
   const {CreateSRApiCall} = CommonCreateRequestApi();
@@ -36,7 +38,7 @@ function PickupReasonCommonScreen({
       pickup_reason: reason.title,
       description,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
   return (
     <div>

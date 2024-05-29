@@ -14,7 +14,6 @@ import ModalContentForSettingProfile from "./components/ModalContentForSettingPr
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
-// import {useCookies} from "react-cookie";
 import Cookies from "universal-cookie";
 import {setLoginState} from "@/store/Slices";
 import {useDispatch} from "react-redux";
@@ -39,9 +38,9 @@ const LoginModal = ({
   const [otp, setOtp] = useState("");
   const [userId, setUserId] = useState();
   const [emailArr, setEmailArr] = useState();
-
+  const [disableVerify, setDisableVerify] = useState(false);
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-
+  const [proceedDisable, setProceedDisable] = useState(false);
   React.useEffect(() => {
     if (isSetupProfile) setModalCategory("setUpAccount");
     else setModalCategory("changeNumber");
@@ -111,7 +110,7 @@ const LoginModal = ({
     //   setOtpError(
     //     "Sorry, your OTP has timed out. Please request a new OTP to continue.",
     //   );
-
+    setDisableVerify(true);
     const body = {
       mobile_number: contact,
       otp,
@@ -127,6 +126,7 @@ const LoginModal = ({
           if (response?.data?.message === "Login Successfully.!") {
             const event = new Event("login");
             window?.dispatchEvent(event);
+            setDisableVerify(false);
             if (response?.data?.data?.access_token) {
               cookies.set("authToken", response?.data?.data?.access_token, {
                 path: "/",
@@ -169,6 +169,9 @@ const LoginModal = ({
             setEmailArr(response?.data?.data?.data);
             setModalCategory("multipleEmails");
           }
+          setTimeout(() => {
+            window.open("/", "_self");
+          }, 2000);
         }
       })
       .catch(err => {
@@ -182,6 +185,7 @@ const LoginModal = ({
 
   const handleMultipleEmails = email => {
     handleVerification(otp, email);
+    setProceedDisable(true);
     // isCheckoutPage && setModalCategory("setUpAccount");
   };
 
@@ -228,6 +232,8 @@ const LoginModal = ({
             setCountdown={setCountdown}
             handleModalCategory={handleModalCategory}
             setContact={setContact}
+            disableVerify={disableVerify}
+            proceedDisable={proceedDisable}
           />
         </Drawer>
       ) : (
@@ -266,6 +272,8 @@ const LoginModal = ({
             setCountdown={setCountdown}
             handleModalCategory={handleModalCategory}
             setContact={setContact}
+            disableVerify={disableVerify}
+            proceedDisable={proceedDisable}
           />
         </Modal>
       )}
@@ -297,6 +305,8 @@ const ModalContent = ({
   handleMultipleEmails,
   setCountdown,
   setContact,
+  disableVerify,
+  proceedDisable,
 }) => (
   <>
     {modalCategory === "changeNumber" ? (
@@ -322,6 +332,7 @@ const ModalContent = ({
         otp={otp}
         setOtp={e => setOtp(e)}
         setCountdown={val => setCountdown(val)}
+        disableVerify={disableVerify}
       />
     ) : modalCategory === "resendOtp" ? (
       <ModalContentForResendOtp
@@ -344,6 +355,7 @@ const ModalContent = ({
         setModalCategory={val => setModalCategory(val)}
         handleMultipleEmails={handleMultipleEmails}
         data={emailArr}
+        proceedDisable={proceedDisable}
       />
     ) : modalCategory === "setUpAccount" ? (
       <ModalContentForSettingProfile

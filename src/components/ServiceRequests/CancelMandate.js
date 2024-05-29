@@ -9,29 +9,35 @@ import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {
   CreateRequestPayload,
+  getLocalStorage,
   handleWheel,
   keyPressForContactField,
 } from "@/constants/constant";
 import {cityUrl} from "../../../appConfig";
+import {decrypt} from "@/hooks/cryptoUtils";
 
 function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const [description, setDescription] = useState("");
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const formikRef = useRef(null);
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const handleSubmit = values => {
     const payload = {
       ...CreateRequestPayload,
+      user_id: userId,
       deal_id: data[0]?.dealCodeNumber,
       type: selectedType,
       mobile_number: values.contactNumber,
       description,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
   const validationSchema = Yup.object({
     contactNumber: Yup.string()
@@ -124,7 +130,9 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
                   !formikRef?.current?.isValid
                     ? "!bg-[#FFDF85] !cursor-not-allowed "
                     : ``
-                } !hidden md:!flex`}>
+                } !hidden md:!flex ${
+                  callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
+                }`}>
                 Create request <ForwardArrowWithLine />
               </button>
               <div className={`${styles.bottom_row_formik} !flex md:!hidden`}>

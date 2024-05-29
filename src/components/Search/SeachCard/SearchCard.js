@@ -24,6 +24,7 @@ const SearchCard = ({
   productID,
   soldOut,
   isLogin,
+  showincludedItem,
 }) => {
   const {checkAuthentication} = useAuthentication();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -146,11 +147,29 @@ const SearchCard = ({
           className={styles.img}
           loading="lazy"
         />
-        {soldOut && (
+        {/* {soldOut && (
           <div className={styles.soldout_tag}>
             <RiSparklingFill size={16} color={"#ffffff"} />
             <p className={styles.tag_text}>SOLD OUT</p>
           </div>
+        )} */}
+        {!soldOut ? (
+          <div className={`${styles.soldout_div} ${styles.label_tag}`}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>SOLD OUT</p>
+          </div>
+        ) : showincludedItem === "Trending" ? (
+          <div className={`${styles.trending_div} ${styles.label_tag}`}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>POPULAR</p>
+          </div>
+        ) : showincludedItem === "New Launch" ? (
+          <div className={`${styles.newlylaunch_div} ${styles.label_tag}`}>
+            <RiSparklingFill size={16} color={"#ffffff"} />
+            <p className={styles.tag_text}>NEW LAUNCH</p>
+          </div>
+        ) : (
+          <div className="hidden"></div>
         )}
       </div>
 

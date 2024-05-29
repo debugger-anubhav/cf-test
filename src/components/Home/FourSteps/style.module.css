@@ -1,5 +1,5 @@
 .four_steps_wrapper {
-  @apply px-4 md:px-6 py-6 xl:p-7 macbook:p-12 mt-4 lg:mt-0 mx-4 md:mx-[70px] lg:mx-0 border border-solid border-[#DDDDDF] rounded-[4px];
+  @apply px-4 md:px-6 py-6 xl:p-7 macbook:p-12 mt-4 lg:mt-0  lg:mx-0 border border-solid border-[#DDDDDF] rounded-[4px];
 }
 .head {
   @apply text-14 xl:text-16 font-Poppins text-71717A font-medium leading-5 tracking-desc;

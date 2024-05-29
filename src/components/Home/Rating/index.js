@@ -4,7 +4,6 @@ import React, {useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, EditIcon} from "@/assets/icon";
 import Image from "next/image";
-import {HomePageImages} from "@/assets/images";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addGoogleReviews} from "@/store/Slices";
@@ -104,6 +103,7 @@ const CustomerRating = () => {
             {reviews?.[0]?.fc_google_location_data[0]?.average_review}
             <span className={styles.star}>
               <Image
+                loader={({src}) => src}
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                 width={25}
                 height={25}
@@ -119,10 +119,15 @@ const CustomerRating = () => {
             rel="noreferrer"
             aria-label="write-a-review">
             <Image
-              src={HomePageImages.editIcon}
+              loader={({src}) => src}
+              src={
+                "https://d3juy0zp6vqec8.cloudfront.net/images/icons/edit-icon.svg"
+              }
               alt="editIcon"
               className={styles.editIcon}
               loading="lazy"
+              width={40}
+              height={40}
             />
           </a>
           <a
@@ -189,6 +194,7 @@ const CustomerRating = () => {
                     /> */}
                     {[...Array(item?.rate)].map((_, index) => (
                       <Image
+                        loader={({src}) => src}
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/star-icon.svg"
                         width={16}
                         height={16}

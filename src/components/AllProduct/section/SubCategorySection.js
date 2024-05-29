@@ -28,39 +28,43 @@ const SubCategorySection = () => {
     <div className={styles.container}>
       {data?.map((item, index) => {
         return (
-          <div key={index.toString()}>
-            <div
-              className={
-                item?.cat_name === "Home Furniture"
-                  ? styles.heading_container_home_furniture
-                  : styles.heading_container
-              }>
-              <h1 className={styles.heading}>{item?.cat_name}</h1>
-              <div className={styles.viewButton}>
-                <a
-                  href={`/${homePageReduxData?.cityName
-                    .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`}
-                  onClick={() => {
-                    setLocalStorage("categoryId", item?.id);
-                    setLocalStorage("category", item?.cat_name);
-                    setLocalStorage("subCategory", "All");
-                    setLocalStorage("subCategoryId", item?.id);
-                  }}
-                  className={styles.viewAllText}>
-                  {windowSize[0] > 450
-                    ? `View all ${item?.cat_name}`
-                    : "View all"}
-                </a>
-                <ForwardArrow
-                  size={windowSize[0] > 768 ? 20 : 16}
-                  color={"#597492"}
-                />
-              </div>
-            </div>
+          <>
+            {item?.sub_categories.length > 0 && (
+              <div key={index.toString()}>
+                <div
+                  className={
+                    item?.cat_name === "Home Furniture"
+                      ? styles.heading_container_home_furniture
+                      : styles.heading_container
+                  }>
+                  <h1 className={styles.heading}>{item?.cat_name}</h1>
+                  <div className={styles.viewButton}>
+                    <a
+                      href={`/${homePageReduxData?.cityName
+                        .replace(/\//g, "-")
+                        ?.toLowerCase()}/${item?.seourl}`}
+                      onClick={() => {
+                        setLocalStorage("categoryId", item?.id);
+                        setLocalStorage("category", item?.cat_name);
+                        setLocalStorage("subCategory", "All");
+                        setLocalStorage("subCategoryId", item?.id);
+                      }}
+                      className={styles.viewAllText}>
+                      {windowSize[0] > 450
+                        ? `View all ${item?.cat_name}`
+                        : "View all"}
+                    </a>
+                    <ForwardArrow
+                      size={windowSize[0] > 768 ? 20 : 16}
+                      color={"#597492"}
+                    />
+                  </div>
+                </div>
 
-            <Cards subCategory={item?.sub_categories} />
-          </div>
+                <Cards subCategory={item?.sub_categories} />
+              </div>
+            )}{" "}
+          </>
         );
       })}
     </div>
@@ -134,7 +138,7 @@ const Cards = ({subCategory}) => {
             <a
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
-                .toLowerCase()}/${subItem?.seourl}`}>
+                ?.toLowerCase()}/${subItem?.seourl}`}>
               <div
                 className={`${styles.card_div}  w-[79.2px] ms:w-[245px]`}
                 key={index.toString()}>

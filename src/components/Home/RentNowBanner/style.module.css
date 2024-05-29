@@ -82,3 +82,9 @@
 .skeleton_box {
   @apply w-full h-full;
 }
+.banner_wrapper_skeleton {
+  @apply min-w-[270px] min-h-[320px];
+}
+.banner_card_skeleton {
+  @apply flex w-full lg:gap-8 gap-4 overflow-x-scroll;
+}

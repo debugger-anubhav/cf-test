@@ -27,6 +27,7 @@ import Footer from "@/components/SSRPageSeo/SsrFooter";
 import Subproduct from "./RentAllProducts";
 import {redirect} from "next/navigation";
 import {BASEURL} from "../../../../appConfig";
+import jwt from "jsonwebtoken";
 
 const tempSecretKey = process.env.NEXT_PUBLIC_SECRET_KEY;
 const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
@@ -58,6 +59,9 @@ export async function getServerSideProps(context) {
 async function create(params) {
   // const tempSecretKey = "b3ad5950f7c555c664f19c9ec77bbfb943";
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "2m",
+  });
 
   if (
     params.category === "appliances-rental" ||
@@ -65,13 +69,12 @@ async function create(params) {
   ) {
     const catId = params.category === "appliances-rental" ? 26 : 27;
     const data = await fetch(
-      // "https://test.rentofurniture.com/api/" +
       BASEURL + endPoints.seoMetaData(params.city?.toLowerCase(), catId),
       {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Apikey: apiKey,
+          Apikey: jwtToken,
         },
       },
     );
@@ -81,7 +84,7 @@ async function create(params) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
       body: JSON.stringify({
         cityName: params.city?.toLowerCase(),
@@ -94,12 +97,16 @@ async function create(params) {
 
 async function getAllCitiesList() {
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "2m",
+  });
+
   try {
     const data = await fetch(BASEURL + endPoints.cityList, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
     });
 
@@ -116,9 +123,9 @@ export default async function Page(params) {
   const cityList = await getAllCitiesList();
   const cityFromURL = propParams?.city?.toLowerCase();
   const isCityValid = cityList?.data?.some(
-    city => city.list_value.toLowerCase() === cityFromURL,
+    city => city?.list_value?.toLowerCase() === cityFromURL,
   );
-  const isSpecialCityValid = cityFromURL.toLowerCase() === "ghaziabad-noida";
+  const isSpecialCityValid = cityFromURL?.toLowerCase() === "ghaziabad-noida";
   if (isCityValid || isSpecialCityValid) {
     return (
       <>
@@ -142,12 +149,14 @@ export default async function Page(params) {
               <RecentlyViewedProduct />
               <TrendingProducts params={propParams} />
               <OffersAndCoupons />
-              <NewlyLaunched />
+              <RentNowBanner params={propParams} />
+
               <DownloadForMobile />
               <PreDesignCombos />
               <HasselFreeServicesCards />
               <LimetedPreiodDiscount />
-              <RentNowBanner params={propParams} />
+              <NewlyLaunched />
+
               <TryCityMax />
               <CustomerRating />
               <MediaCoverage />

@@ -189,6 +189,7 @@ function CustomerPayment() {
 
     if (!res) {
       alert("Razorpay SDK failed to load. Are you online?");
+      setLoading(false);
       return;
     }
 
@@ -204,6 +205,7 @@ function CustomerPayment() {
           notes: values?.notes || "",
         },
       );
+      setLoading(false);
       if (!result) {
         alert("Server error. Are you online?");
         return;
@@ -273,11 +275,14 @@ function CustomerPayment() {
         console.log(e, "eeeee");
       });
     } catch (error) {
+      setLoading(false);
       showToastNotification(error?.response?.data?.message, 2);
     }
   };
 
   const handleSubmit = (values, isAutoRazor) => {
+    setLoading(true);
+
     // setFormData({
     //   ...formData,
     //   fullName: values.fullName,
@@ -288,6 +293,7 @@ function CustomerPayment() {
     // });
     if (values.amount === "") {
       setshowValidationForAmount(true);
+      setLoading(false);
     }
     handlePayment(values, isAutoRazor);
   };
@@ -435,7 +441,7 @@ function CustomerPayment() {
                       <div className={`${styles.form_input} gap-2  `}>
                         <p className="text-14 xl:text-16 tracking-desc text-71717A xl:tracking-0.3 line-through font-Poppins">
                           {useCityfurnishCoins
-                            ? formik.values.amount - topupAmount > 0
+                            ? primaryAmount - topupAmount > 0
                               ? primaryAmount
                               : primaryAmount - 1
                             : ""}
@@ -530,7 +536,6 @@ function CustomerPayment() {
                             onClick={() => {
                               toggleLoginModal(true);
                             }}
-                            // href="https://test.rentofurniture.com/user_sign_up"
                             className="text-5774AC cursor-pointer !tracking-desc xl:!tracking-0.3">
                             Login{" "}
                           </a>

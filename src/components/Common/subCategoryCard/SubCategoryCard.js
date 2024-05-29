@@ -69,7 +69,7 @@ const SubCategoryCard = ({productID}) => {
   const handleWhislistCard = e => {
     e.stopPropagation();
     if (!userId) {
-      router.push("https://test.rentofurniture.com/user_sign_up");
+      router.push("https://cityfurnish.com/login");
       return;
     }
     // dispatch(addRemoveWhishListitems(!inWishList));
@@ -144,7 +144,7 @@ const SubCategoryCard = ({productID}) => {
                         src={item?.img}
                         className="w-[40px] h-[40px]"
                         loading="lazy"
-                        alt="Athena-3-Seater-sofa"
+                        alt="product-image"
                       />
                     </div>
                   );

@@ -1,5 +1,5 @@
 .menu_list_wrapper {
-  @apply md:flex hidden justify-between 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pb-4;
+  @apply md1:flex hidden justify-between 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 pb-4;
   background: rgba(255, 255, 255, 0.7);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.06);
 }
@@ -13,7 +13,7 @@
 }
 
 .item_wrap {
-  @apply flex items-center lg:mr-6 mr-4 lg:text-16 md:text-14 font-medium font-Poppins text-45454A whitespace-nowrap cursor-pointer;
+  @apply flex items-center lg:mr-6 mr-4 custom:text-16 md:text-14 font-medium font-Poppins text-45454A whitespace-nowrap cursor-pointer;
 }
 
 .menu_list_wrapper span {

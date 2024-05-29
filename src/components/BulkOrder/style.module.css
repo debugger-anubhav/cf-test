@@ -85,11 +85,11 @@
 }
 
 .need_img_wrapper {
-  @apply grid grid-cols-3 md:grid-cols-2 gap-4 md:gap-6 pb-6 md:pb-12;
+  /* @apply grid grid-cols-3 md:grid-cols-2 gap-4; */
 }
 
 .need_image {
-  @appply h-full w-full object-cover pointer-events-none;
+  @apply h-full w-full object-cover pointer-events-none;
 }
 .need_img_title {
   @apply font-Poppins text-14 md:text-16 font-medium text-45454A pb-1 mt-[8px];

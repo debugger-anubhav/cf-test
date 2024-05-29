@@ -14,18 +14,23 @@ function Repair({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
-
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const [toggleStates, setToggleStates] = useState(
     data.map(() => ({
       istoggled: false,
       selected: null,
       detail: null,
       options: false,
+      name: "",
     })),
   );
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const [repairOptions, setRepairOptions] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [description, setDescription] = useState("");
+
   const getRepairOption = (productName, index) => {
     baseInstance
       .get(endPoints.serviceRequestPage.getRepairOptions(productName))
@@ -51,13 +56,13 @@ function Repair({prevScreen, data, isHelpDrawer}) {
     );
   };
 
-  const handleDetailChange = (e, index) => {
-    setToggleStates(prevStates =>
-      prevStates.map((state, i) =>
-        i === index ? {...state, detail: e.target.value} : state,
-      ),
-    );
-  };
+  // const handleDetailChange = (e, index) => {
+  //   setToggleStates(prevStates =>
+  //     prevStates.map((state, i) =>
+  //       i === index ? {...state, detail: e.target.value} : state,
+  //     ),
+  //   );
+  // };
 
   const handleCreateRequest = () => {
     const selectedData = toggleStates
@@ -73,6 +78,9 @@ function Repair({prevScreen, data, isHelpDrawer}) {
     const tempSelectedProductName = selectedData?.map(item => {
       return item.product_name;
     });
+    const singleSelectedProduct = toggleStates?.map(item => {
+      return item.name;
+    });
 
     const tempRepairReason = selectedData?.map(item => {
       return item.repair_reason;
@@ -86,17 +94,21 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       ...CreateRequestPayload,
       deal_id: data[0]?.dealCodeNumber,
       type: selectedType,
-      selected_product_name: tempSelectedProductName.join(", "),
+      selected_product_name: tempSelectedProductName.length
+        ? tempSelectedProductName.join(", ")
+        : singleSelectedProduct.join(", "),
       repair_reason: tempRepairReason.join(", "),
       repair_details: tempRepairDetails.join(", "),
+      description,
     };
-    CreateSRApiCall(payload);
+    // console.log( payload,"payyyyyyyy")
+    callFunctionFlag && CreateSRApiCall(payload);
     setToggleStates(data.map(() => ({istoggled: false, selected: null})));
   };
 
   const handleToggle = index => {
     setToggleStates(prevStates =>
-      prevStates.map((state, i) =>
+      prevStates?.map((state, i) =>
         i === index ? {...state, istoggled: !state.istoggled} : state,
       ),
     );
@@ -131,6 +143,13 @@ function Repair({prevScreen, data, isHelpDrawer}) {
               <div
                 className={styles.repair_toggle_wrapper}
                 onClick={() => {
+                  setToggleStates(prevStates =>
+                    prevStates.map((state, i) =>
+                      i === index
+                        ? {...state, name: item?.product_name}
+                        : state,
+                    ),
+                  );
                   handleToggle(index);
                   if (!toggleStates[index].istoggled) {
                     getRepairOption(item?.product_name, index);
@@ -151,30 +170,32 @@ function Repair({prevScreen, data, isHelpDrawer}) {
                 )}
                 <p className={styles.desc}>{item?.product_name}</p>
               </div>
-              {toggleStates[index].istoggled && toggleStates[index].options && (
+              {toggleStates[index].istoggled && (
                 <div>
-                  <div className={styles.reson_for_repair_wrapper}>
-                    <p className={styles.desc}>Reason for repair</p>
-                    <Select
-                      options={repairOptions}
-                      styles={customStylesForSelect}
-                      onChange={selectedOption =>
-                        handleChange(selectedOption, index)
-                      }
-                      placeholder="Select a reason for repair"
-                      isSearchable={false}
-                      onMenuOpen={() => setIsDropdownOpen(true)}
-                      onMenuClose={() => setIsDropdownOpen(false)}
-                      className="font-Poppins placeholder:!text-71717A text-71717A"
-                    />
-                  </div>
+                  {toggleStates[index].options && (
+                    <div className={styles.reson_for_repair_wrapper}>
+                      <p className={styles.desc}>Reason for repair</p>
+                      <Select
+                        options={repairOptions}
+                        styles={customStylesForSelect}
+                        onChange={selectedOption =>
+                          handleChange(selectedOption, index)
+                        }
+                        placeholder="Select a reason for repair"
+                        isSearchable={false}
+                        onMenuOpen={() => setIsDropdownOpen(true)}
+                        onMenuClose={() => setIsDropdownOpen(false)}
+                        className="font-Poppins placeholder:!text-71717A text-71717A"
+                      />
+                    </div>
+                  )}
                   <div className="mt-4">
                     <p className={styles.desc}>Repair details</p>
 
                     <textarea
                       placeholder="Enter repair details"
                       className={styles.form_input_textarea}
-                      onChange={e => handleDetailChange(e, index)}
+                      onChange={e => setDescription(e.target.value)}
                       rows={2}
                     />
                   </div>
@@ -187,10 +208,11 @@ function Repair({prevScreen, data, isHelpDrawer}) {
       <div className={styles.bottom_row}>
         <button
           className={`${styles.proceed_btn}  ${
-            toggleStates.some(state => state.istoggled && state.selected)
+            toggleStates.some(state => state.istoggled)
               ? ""
               : "!bg-[#FFDF85] !cursor-not-allowed"
-          }`}
+          }
+          ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
           disabled={!toggleStates.some(state => state.istoggled)}
           onClick={handleCreateRequest}>
           Create request <ForwardArrowWithLine />

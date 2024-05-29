@@ -31,6 +31,9 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
 
   const [cityDrawerOpen, setCityDrawerOpen] = useState(false);
@@ -105,7 +108,7 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
     allData.set("address1", values.address);
     allData.set("address2", values.landmark);
     allData.set("postal_code", values.postalCode);
-    CreateSRApiCall(allData);
+    callFunctionFlag && CreateSRApiCall(allData);
   };
 
   const customStylesForSelect = {
@@ -371,6 +374,7 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
                             <div
                               className={styles.relocation_upload_icon_wrapper}>
                               <Image
+                                loader={({src}) => src}
                                 src={uploading}
                                 alt="Uploading Icon"
                                 className={`h-full  ${
@@ -457,6 +461,9 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
                     !formik?.isValid
                       ? "!bg-[#FFDF85] !cursor-not-allowed"
                       : `!bg-F6B704`
+                  }
+                  ${
+                    callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
                   }`}
                   onClick={() => {
                     if (!formik.isValid) {

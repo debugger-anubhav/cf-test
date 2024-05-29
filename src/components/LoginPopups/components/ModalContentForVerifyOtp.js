@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import styles from "../style.module.css";
-import {handleWheel, keyPressForContactField} from "@/constants/constant";
+import {handleWheel} from "@/constants/constant";
 
 const ModalContentForVerifyOtp = ({
   contact,
@@ -14,6 +14,7 @@ const ModalContentForVerifyOtp = ({
   setStartCountdown,
   otp,
   setOtp,
+  disableVerify,
 }) => {
   useEffect(() => {
     handleStartCountdown();
@@ -39,20 +40,27 @@ const ModalContentForVerifyOtp = ({
           <input
             placeholder="Enter the OTP you just received"
             type="number"
-            onKeyPress={keyPressForContactField}
             onWheel={handleWheel}
             value={otp}
             className={styles.contact_input}
             autoFocus
             onChange={e => setOtp(e.target.value)}
+            onKeyPress={e => {
+              if (e.key === "Enter") {
+                otp !== "" && handleVerification();
+              }
+            }}
           />
-          <p
+          <button
             onClick={() => {
               otp !== "" && handleVerification();
             }}
-            className={`${otp === "" ? styles.desc : styles.blue_txt}`}>
+            className={`${otp === "" ? styles.desc : styles.blue_txt} ${
+              disableVerify ? "cursor-not-allowed" : "cursor-pointer"
+            }`}
+            disabled={disableVerify}>
             Verify
-          </p>
+          </button>
         </div>
         {otpError !== "" && <p className={styles.error}>{otpError}</p>}
         <p

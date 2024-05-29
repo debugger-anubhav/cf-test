@@ -75,8 +75,9 @@ const ProceedModal = ({
         <div>
           <p className={styles.head}>Remove existing order?</p>
           <p className={styles.desc}>
-            Only one Citymax plan can be ordered at a time. Please remove rest
-            of the products from the cart and place their order separately.
+            Are you sure you want to remove your current order? Our Citymax plan
+            allows for only one active order at a time. Please clear other items
+            from your cart to proceed with your Citymax order separately.
           </p>
           <div className={styles.btn_wrapper_vertical}>
             <button

@@ -117,9 +117,7 @@ const OffersAndCoupons = ({page}) => {
                      : ""
                  }
                  `}
-                {item?.price_below_text && (
-                  <>{item?.price_below_text.split(" ").slice(0, 7).join(" ")}</>
-                )}
+                {item?.price_below_text && <>{item?.price_below_text}</>}
               </p>
               {/* {item?.price_below_text && (
                 <p className={styles.desc}>
@@ -153,25 +151,29 @@ export default OffersAndCoupons;
 
 export const OffersSkeleton = () => {
   return (
-    <div className={`${styles.skeleton_wrapper} ${styles.wrapper}`}>
-      <Skeleton
-        variant="text"
-        className={styles.Skeleton_text}
-        width={"100%"}
-        height={"100%"}
-      />
+    <div className={`${styles.skeleton_wrapper}`}>
+      <div className="w-[180px]">
+        <Skeleton
+          variant="text"
+          className={styles.Skeleton_text}
+          width={"100%"}
+          height={"100%"}
+        />
+      </div>
       <div className={styles.offer_card_skeleton}>
-        {[1, 2, 3, 4]?.map((item, index) => (
-          <>
-            <Skeleton
-              variant="rectangular"
-              className={styles.offer_coupon_skeleton}
-              key={index.toString()}
-              width={"100%"}
-              height={"100%"}
-            />
-          </>
-        ))}
+        {[1, 2, 3, 4]?.map((item, index) => {
+          return (
+            <div key={index.toString()} className={styles.div_wrap}>
+              <Skeleton
+                variant="rectangular"
+                className={styles.offer_coupon_skeleton}
+                key={index.toString()}
+                width={"100%"}
+                height={"100%"}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 {
   "landing_page": {
-    "announcement_bar": " Exclusive Offer - Additional 20% OFF. Use Code 'RENT20'",
+    "announcement_bar": "No Cap, All Savings: 20% Off with 'RENT20'.",
     "header": {
       "menuList1": [
         {"item": "All", "link": "link"},
@@ -21,6 +21,10 @@
         {
           "item": "Pay your dues",
           "link": "/customerpayment"
+        },
+        {
+          "item": "Offers",
+          "link": "/pages/offers"
         }
       ],
       "menuList3": [
@@ -58,7 +62,7 @@
       "desc": "Brand that is build on the trust"
     },
     "OffersAndDiscount": {
-      "heading": "Offers & coupons",
+      "heading": "Offers & Coupons",
       "card_data": [
         {
           "desc": "Flat 20% Off on Rent (up to Rs 3000)*",

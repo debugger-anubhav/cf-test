@@ -135,12 +135,7 @@ const MenuDrawer = ({toggleDrawer, open, toggleLoginModal, setClick}) => {
                       toggleLoginModal(true);
                     }
                   }}
-                  href={
-                    index === 3
-                      ? isLogin && "/usersettings"
-                      : // : "https://test.rentofurniture.com/user_sign_up"
-                        item.link
-                  }>
+                  href={index === 3 ? isLogin && "/usersettings" : item.link}>
                   {item?.item}
                 </a>
                 {index === 2 && <div className={`${styles.line} mt-4`}></div>}

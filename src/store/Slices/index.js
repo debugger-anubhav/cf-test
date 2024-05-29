@@ -31,6 +31,7 @@ export const HomepageSlice = createSlice({
     isLogin: false,
     docSidebarActiveItem: "",
     showAllRentLink: false,
+    createRequestApiCalled: true,
   },
   reducers: {
     addWhishListProduc(state, action) {
@@ -114,6 +115,9 @@ export const HomepageSlice = createSlice({
     setShowAllRentLink(state, action) {
       state.showAllRentLink = action.payload;
     },
+    setCreateRequestApiCalled(state, action) {
+      state.createRequestApiCalled = action.payload;
+    },
   },
 });
 
@@ -191,6 +195,7 @@ export const CartPageSlice = createSlice({
     shoppingCartTab: 0,
     isOfflineCustomer: 0,
     isCitymaxOrder: false,
+    monthlyUpfrontLoader: true,
   },
   reducers: {
     getCartItems(state, action) {
@@ -212,6 +217,9 @@ export const CartPageSlice = createSlice({
     },
     getBillDetails(state, action) {
       state.billBreakout = action.payload;
+    },
+    setMonthlyUpfrontLoader(state, action) {
+      state.monthlyUpfrontLoader = action.payload;
     },
     getCouponCodeUsed(state, action) {
       state.couponCodeUsed = action.payload;
@@ -376,6 +384,7 @@ export const {
   setLoginState,
   setDocSidebarActiveItem,
   setShowAllRentLink,
+  setCreateRequestApiCalled,
 } = HomepageSlice.actions;
 
 export const {
@@ -404,6 +413,7 @@ export const {
   emptyCart,
   setIsOfflineCustomer,
   setCitymaxOrder,
+  setMonthlyUpfrontLoader,
 } = CartPageSlice.actions;
 
 export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =

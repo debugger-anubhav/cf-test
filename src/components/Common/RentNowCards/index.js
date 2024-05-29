@@ -14,7 +14,7 @@ const RentNowCard = ({cardImage, url, alt}) => {
   useEffect(() => {
     if (url.includes("[city]")) {
       setURL(
-        url.replace(/\[city\]/g, cityName.replace(/\//g, "-").toLowerCase()),
+        url.replace(/\[city\]/g, cityName.replace(/\//g, "-")?.toLowerCase()),
       );
     } else {
       setURL(url); // Navigate to the URL
@@ -27,15 +27,11 @@ const RentNowCard = ({cardImage, url, alt}) => {
       onClick={() => {
         router.push(URL);
       }}>
-      <a
-        href={URL}
-        onClick={e => e.preventDefault()}
-        aria-label={imageAlt}
-        target="_self"
-        rel="noopener">
+      <a href={URL} aria-label={imageAlt} target="_self" rel="noopener">
         <Image
-          width={272}
-          height={388}
+          loader={({src}) => src}
+          width={270}
+          height={380}
           src={cardImage}
           className={styles?.banner_img}
           alt={imageAlt}

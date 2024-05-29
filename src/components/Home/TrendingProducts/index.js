@@ -38,7 +38,7 @@ const TrendingProducts = ({params}) => {
 
   const getTrendyProducts = () => {
     baseInstance
-      .get(endPoints.trendingProduct + `?cityId=${cityId}&userId=${85757}`)
+      .get(endPoints.trendingProduct + `?cityId=${cityId}`)
       .then(res => {
         setData(res?.data?.data);
         dispatch(addtrendingproduct(res?.data?.data));
@@ -127,46 +127,50 @@ const TrendingProducts = ({params}) => {
       router.push(`/things/${item.id}/${item.seourl}`);
     }
   };
-  return homePageReduxData?.trendindProduct ? (
-    <div className={styles.main_container}>
-      <h2 className={styles.heading}>Crowd Favourite</h2>
-      <h3 className={styles.subHeading}>Best Selling Products</h3>
-      <div className={`${styles.card_box} `} ref={sliderRef}>
-        {data?.map((item, index) => (
-          <div
-            key={index.toString()}
-            className={`${styles.child ?? ""} ${
-              index === data?.length - 1 && "mr-[16px]"
-            } ${isDumy && "pointer-events-none"}`}
-            onClick={e => {
-              !reduxStateOfLoginPopup && handleCardClick(e, item);
-            }}>
-            <Card
-              // cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              // hoverCardImage={
-              //   item?.image?.split(",").filter(item => item).length > 1
-              //     ? productImageBaseUrl + item?.image?.split(",")[1]
-              //     : productImageBaseUrl + item?.image?.split(",")[0]
-              // }
-              hoverCardImage={productImageBaseUrl + item?.image?.split(",")[0]}
-              cardImage={
-                item?.image?.split(",").filter(item => item).length > 1
-                  ? productImageBaseUrl + item?.image?.split(",")[1]
-                  : productImageBaseUrl + item?.image?.split(",")[0]
-              }
-              desc={item?.product_name}
-              originalPrice={item?.price}
-              currentPrice={item?.sale_price}
-              discount={`${Math.round(
-                ((item?.price - item?.sale_price) * 100) / item?.price,
-              ).toFixed(0)}%`}
-              productID={item?.id}
-              seourl={item?.seourl}
-            />
+  return (
+    <>
+      {homePageReduxData?.trendindProduct ? (
+        <div className={styles.main_container}>
+          <h2 className={styles.heading}>Crowd Favourite</h2>
+          <h3 className={styles.subHeading}>Best Selling Products</h3>
+          <div className={`${styles.card_box} `} ref={sliderRef}>
+            {data?.map((item, index) => (
+              <div
+                key={index.toString()}
+                className={`${styles.child ?? ""} ${
+                  index === data?.length - 1 && "mr-[16px]"
+                } ${isDumy && "pointer-events-none"}`}
+                onClick={e => {
+                  !reduxStateOfLoginPopup && handleCardClick(e, item);
+                }}>
+                <Card
+                  hoverCardImage={
+                    productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
+                  }
+                  cardImage={
+                    item?.image?.split(",").filter(item => item).length > 1
+                      ? productImageBaseUrl +
+                        "thumb/" +
+                        item?.image?.split(",")[1]
+                      : productImageBaseUrl +
+                        "thumb/" +
+                        item?.image?.split(",")[0]
+                  }
+                  desc={item?.product_name}
+                  originalPrice={item?.price}
+                  currentPrice={item?.sale_price}
+                  discount={`${Math.round(
+                    ((item?.price - item?.sale_price) * 100) / item?.price,
+                  ).toFixed(0)}%`}
+                  productID={item?.id}
+                  seourl={item?.seourl}
+                />
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  ) : null;
+        </div>
+      ) : null}
+    </>
+  );
 };
 export default TrendingProducts;

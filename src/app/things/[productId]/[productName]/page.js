@@ -1,10 +1,10 @@
 import React from "react";
 import CryptoJS from "crypto-js";
 import ProductDetailComponents from "./SsrProductComponents";
+import jwt from "jsonwebtoken";
 
 export async function getServerSideProps(context) {
   const {productId} = context.params;
-  // console.log(context.params, "ooooooooooooooo");
   try {
     const data = await create(productId);
     return {
@@ -30,15 +30,18 @@ async function create(params) {
     return encrypted;
   };
   const apiKey = createEncryptedHash(plaintext, tempSecretKey);
+  const jwtToken = jwt.sign({payload: apiKey}, tempSecretKey, {
+    expiresIn: "2m",
+  });
 
   const data = await fetch(
     // `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=3847`,
-    `http://3.109.156.217/v1/fc-products/getProductSeoData?productId=${params?.productId}`,
+    `https://cityfurnish.com/v1/fc-products/getProductSeoData?productId=${params?.productId}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Apikey: apiKey,
+        Apikey: jwtToken,
       },
     },
   );
@@ -47,7 +50,6 @@ async function create(params) {
 
 export default async function Page(params) {
   const metaData = await create(params.params);
-  // console.log(params,"pppppppp")
   return (
     <>
       <meta name="Title" content={metaData?.data?.meta_title} />

@@ -62,7 +62,7 @@ const ModalContentForNumber = ({
                   onWheel={handleWheel}
                   // autofocus={true}
                   name="contactNumber"
-                  placeholder="Enter 10 digit number "
+                  placeholder="Enter your 10 digit phone number"
                   className={styles.contact_input}
                   value={formik.values.contactNumber}
                   onChange={e => {

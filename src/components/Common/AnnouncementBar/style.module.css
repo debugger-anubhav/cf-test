@@ -2,8 +2,8 @@
   @apply flex justify-center items-center bg-[#5774ac] relative h-12;
 }
 .announcement_bar_text {
-  @apply flex font-Poppins text-white md:text-base text-xs font-medium py-3 text-center pl-4 pr-6;
+  @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center pl-4 pr-6;
 }
 .announcement_close_icon {
-  @apply absolute sm:right-4 right-2 text-white;
+  @apply absolute sm:right-4 right-2 text-fff;
 }

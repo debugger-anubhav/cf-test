@@ -14,7 +14,7 @@
   @apply border-none outline-none text-14 md:text-16 w-full placeholder:text-71717A placeholder:tracking-0.3 placeholder:text-14 placeholder:md:text-16;
 }
 .error {
-  @apply text-12 mt-1 ml-1;
+  @apply text-12 mt-1 ml-1 md:max-w-[365px];
   color: red;
 }
 .apply_text {
@@ -29,7 +29,7 @@
   background-size: cover !important;
 }
 .desc {
-  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal w-[116px] xl:w-full truncate;
+  @apply text-12 tracking-desc text-[#CCC5F4] leading-normal xl:w-full;
 }
 .code {
   @apply mt-2 text-14 md:text-16 tracking-desc md:tracking-0.3 w-max font-Poppins leading-normal text-white;

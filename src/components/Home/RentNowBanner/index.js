@@ -116,10 +116,17 @@ export default RentNowBanner;
 export const RentNowBannersSkeleton = () => {
   return (
     <div className={styles.rentNow_Banner_wrapper}>
-      <div className={styles.banner_card}>
+      <div className={`${styles.banner_card_skeleton} `}>
         {[1, 2, 3, 4, 5, 6].map((item, index) => (
-          <div className={styles.banner_wrapper} key={index.toString()}>
-            <Skeleton variant="rectangular" className={styles.skeleton_box} />
+          <div
+            className={styles.banner_wrapper_skeleton}
+            key={index.toString()}>
+            <Skeleton
+              variant="rectangular"
+              className={styles.skeleton_box}
+              width={"100%"}
+              height={"100%"}
+            />
           </div>
         ))}
       </div>

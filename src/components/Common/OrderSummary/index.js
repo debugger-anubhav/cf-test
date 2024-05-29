@@ -10,7 +10,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {ForwardArrowWithLine, PersonIcon} from "@/assets/icon";
 import TotalBreakup from "@/components/Cart/Drawer/TotalBreakupDrawer";
 import {useDispatch} from "react-redux";
-import {getBillDetails} from "@/store/Slices";
+import {getBillDetails, setMonthlyUpfrontLoader} from "@/store/Slices";
 import {format} from "date-fns";
 import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
@@ -31,13 +31,16 @@ const OrderSummary = ({
   const [reviewDrawer, setReviewDrawer] = useState(false);
   const [data, setData] = useState();
   const [isCitymaxBill, setIsCitymaxBill] = useState(false);
+  const [indexForProp, setIndexForProp] = useState(0);
   const userId = decrypt(getLocalStorage("_ga"));
-
+  const cityId = parseInt(getLocalStorage("cityId"));
+  const [alreadyFilledReview, setAlreadyFilledReview] = useState(null);
   const dispatch = useDispatch();
   const getOrderSummary = () => {
     if (isSubscriptionPage) {
       setData(subscriptionData);
       dispatch(getBillDetails(subscriptionData?.bill));
+      dispatch(setMonthlyUpfrontLoader(false));
       setIsCitymaxBill(false);
     } else {
       baseInstance
@@ -52,6 +55,7 @@ const OrderSummary = ({
           if (res?.data?.data?.productsList?.length === 0) router.push("/");
           else {
             dispatch(getBillDetails(res?.data?.data?.bill));
+            dispatch(setMonthlyUpfrontLoader(false));
             setIsCitymaxBill(res?.data?.data?.productsList[0]?.is_frp === "1");
           }
         })
@@ -103,6 +107,7 @@ const OrderSummary = ({
           {data?.productsList?.map((item, index) => (
             <div key={index}>
               <div
+                key={index + index}
                 className={`${isOfflineInvoice && "!items-start"} ${
                   styles.single_order_wrapper
                 }`}>
@@ -144,6 +149,10 @@ const OrderSummary = ({
                         <span className={styles.rupeeIcon}>₹</span>
                         {item?.price}
                       </p>
+                      <p className={styles.tenure}>
+                        Total Rent: <span className={styles.rupeeIcon}>₹</span>
+                        {item?.price * item?.quantity}
+                      </p>
                     </div>
                   ) : (
                     <div className={styles.tenure_div}>
@@ -155,7 +164,20 @@ const OrderSummary = ({
                       </p>
                       {isDelivered && (
                         <p
-                          onClick={toggleReviewDrawer}
+                          onClick={() => {
+                            setIndexForProp(index);
+                            const headers = {
+                              user_id: userId,
+                              product_id: item?.product_id,
+                              city_id: cityId,
+                            };
+                            baseInstance
+                              .post("fc-payments/getProductReview", headers)
+                              .then(res => {
+                                setAlreadyFilledReview(res?.data?.data);
+                              });
+                            toggleReviewDrawer();
+                          }}
                           className={`${styles.review} ${styles.view_breakup_txt}`}>
                           Write Review
                         </p>
@@ -188,14 +210,17 @@ const OrderSummary = ({
                   ))}
                 </>
               )}
-
-              <ReviewDrawer
-                toggleDrawer={toggleReviewDrawer}
-                open={reviewDrawer}
-                productImage={item?.product_image?.split(",")[0]}
-                productName={item?.product_name}
-                item={item}
-              />
+              {indexForProp === index && (
+                <ReviewDrawer
+                  toggleDrawer={toggleReviewDrawer}
+                  open={reviewDrawer}
+                  productImage={item?.product_image?.split(",")[0]}
+                  productName={item?.product_name}
+                  item={item}
+                  productId={data?.productsList[indexForProp]?.product_id}
+                  alreadyFilledReview={alreadyFilledReview}
+                />
+              )}
             </div>
           ))}
         </div>

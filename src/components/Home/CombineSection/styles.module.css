@@ -1,0 +1,15 @@
+.wrapper {
+  @apply flex gap-8 lg:flex-row flex-col w-full 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mb-4;
+}
+.left {
+  @apply flex lg:w-[40%] w-full lg:h-[700px] h-[500px];
+}
+.right {
+  @apply flex lg:w-[60%] w-full gap-6 flex-col;
+}
+.right_first_skeleton {
+  @apply lg:h-[400px] h-[300px];
+}
+.left_first_skeleton {
+  @apply h-[300px] lg:h-[250px];
+}

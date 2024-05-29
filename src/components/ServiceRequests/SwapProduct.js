@@ -26,6 +26,9 @@ function SwapProduct({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const {CreateSRApiCall} = CommonCreateRequestApi();
 
   const handleCreateRequest = () => {
@@ -36,7 +39,7 @@ function SwapProduct({prevScreen, data, isHelpDrawer}) {
       upgrade_product: selectedProductForSwap?.product_name,
       selected_product_name: selectedProduct?.product_name,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
 
   useEffect(() => {
@@ -109,7 +112,8 @@ function SwapProduct({prevScreen, data, isHelpDrawer}) {
             showSwapScreen === 1 || selectedProductForSwap === null
               ? "!bg-[#FFDF85] !cursor-not-allowed"
               : ""
-          }`}
+          }
+          ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
           onClick={() => handleCreateRequest()}
           disabled={showSwapScreen === 1 || selectedProductForSwap === null}>
           Create request <ForwardArrowWithLine />

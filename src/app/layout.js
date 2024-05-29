@@ -3,6 +3,7 @@ import "./globals.css";
 import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
+import localFont from "@next/font/local";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -28,12 +29,44 @@ export const metadata = {
     },
   },
 };
+
+const poppins = localFont({
+  src: [
+    {
+      path: "./font/Poppins-Bold.ttf",
+      weight: "700",
+    },
+    {
+      path: "./font/Poppins-Medium.ttf",
+      weight: "500",
+    },
+    {
+      path: "./font/Poppins-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "./font/Poppins-SemiBold.ttf",
+      weight: "600",
+    },
+  ],
+  variable: "--font-poppins",
+});
+const inter = localFont({
+  src: [
+    {
+      path: "./font/Inter-VariableFont_slnt,wght.ttf",
+    },
+  ],
+  variable: "--font-inter",
+});
+
 export default function RootLayout({children}) {
-  const login = "";
-  const AMPLITUDE_ID = "";
+  // const AMPLITUDE_ID = "";
 
   return (
-    <html lang="en">
+    <html
+      lang="en"
+      className={`${poppins.variable} ${inter.variable} font-sans`}>
       <head>
         <meta
           property="article:publisher"
@@ -47,10 +80,7 @@ export default function RootLayout({children}) {
           name="google-site-verification"
           content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
         />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        />
+
         <meta
           property="article:publisher"
           content="https://www.facebook.com/cityFurnishRental/"
@@ -59,23 +89,50 @@ export default function RootLayout({children}) {
         {/* <!-- clear cache --> */}
         <meta httpEquiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
         <meta httpEquiv="Pragma" content="no-cache" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link
+
+        <script
+          type="text/javascript"
+          dangerouslySetInnerHTML={{
+            __html: `
+            const userId = localStorage.getItem("_ga");
+            fetch("https://test.rentofurniture.com/ajxapi/getDecryptedUserId", {
+              method: "POST",
+              body: JSON.stringify({
+                userId: JSON.parse(userId)
+              }),
+              headers: {
+
+              }
+            })
+            .then(res => res.json())
+            .then(res => {
+              window.fcWidgetMessengerConfig = {
+                meta: {
+                  cf_userid: res.data.userId,
+                },
+              }
+            })
+            .catch(e => console.log('e',e))
+            `,
+          }}></script>
+        <script src="//in.fw-cdn.com/30445413/247408.js" chat="true"></script>
+
+        {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
           rel="stylesheet"
-        />
-        <link
+        /> */}
+        {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
         <link
           rel="shortcut icon"
           type="image/x-icon"
-          href="https://cityfurnish.com/addon/assets/logo/favicon.png"></link>
+          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
 
         <script
           type="application/ld+json"
@@ -86,7 +143,7 @@ export default function RootLayout({children}) {
               {
                 "@context": "https://schema.org/",
                 "@type": "Product",
-                "name": "Cityfunrish",
+                "name": "Cityfurnish",
                 "image": "https://d3juy0zp6vqec8.cloudfront.net/images/icons/final-logo.png",
                 "description": "Discover comfort and style with Cityfurnish, India's premier furniture rental brand. We've curated a diverse selection of furniture and furnishings to enhance the style and convenience of your home. Our pieces draw inspiration from the way people live in Indian cities, blending elements from different eras for a unique living experience. Experience the simplicity of renting furniture with Cityfurnish – we provide affordable packages and convenient payment options, ensuring your home is both stylish and hassle-free.",
                 "aggregateRating": {
@@ -100,8 +157,8 @@ export default function RootLayout({children}) {
             `,
           }}
         />
-
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* Northbeam script  */}
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             async
             defer
@@ -119,7 +176,7 @@ export default function RootLayout({children}) {
                  for(var n=[],r=1;r<arguments.length;r++)n[r-1]=arguments[r];
                  a.push({fnName:e,args:n})
                }
-               var a=[],n=((n={_q:a})[r.A]=function(e,n){return t(r.A,e,n)},n[r.B]=function(){return t(r.B)},n[r.C]=function(e,n){return t(r.C,e,n)},n[r.D]=function(e,n){return t(r.D,e,n)},n[r.E]=function(e){return t(r.E,e)},window?.Northbeam=n,document?.createElement("script"));
+               var a=[],n=((n={_q:a})[r.A]=function(e,n){return t(r.A,e,n)},n[r.B]=function(){return t(r.B)},n[r.C]=function(e,n){return t(r.C,e,n)},n[r.D]=function(e,n){return t(r.D,e,n)},n[r.E]=function(e){return t(r.E,e)},window?.Northbeam,document?.createElement("script"));
                n.async=!0;
                n.src=e;
                document?.head.appendChild(n);
@@ -127,7 +184,7 @@ export default function RootLayout({children}) {
            `,
             }}
           />
-        )}
+        )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
@@ -182,8 +239,55 @@ export default function RootLayout({children}) {
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
           />
         )}
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            src="https://www.google.com/recaptcha/api.js?onload=CaptchaCallback&render=explicit&hl=en"
+          />
+        )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+var CaptchaCallback = function(){        
+    $('#g-recaptcha').each(function(){
+      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
+    })
+    $('#g-recaptcha-footer').each(function(){
+      grecaptcha.render(this,{'sitekey' : ${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}});
+    })
+};`,
+            }}
+          />
+        )} */}
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+              if (${login} !== '') {
+                gtag('config', 'G-05PLBRM6KD', {
+                  'user_id': ${login}
+                });
+              } else {
+                gtag('config', 'G-05PLBRM6KD');
+              }
+            `,
+            }}
+          />
+        )} */}
+
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -199,6 +303,22 @@ export default function RootLayout({children}) {
           gtag('set', 'user_id', '${login}');
         }
       `,
+            }}
+          />
+        )} */}
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <script
+            defer
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag() {
+                dataLayer.push(arguments);
+              }
+              gtag('js', new Date());
+        gtag('config', 'G-05PLBRM6KD');
+            `,
             }}
           />
         )}
@@ -282,7 +402,7 @@ export default function RootLayout({children}) {
           </noscript>
         )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -293,7 +413,7 @@ export default function RootLayout({children}) {
   amplitude.init("${AMPLITUDE_ID}");`,
             }}
           />
-        )}
+        )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script

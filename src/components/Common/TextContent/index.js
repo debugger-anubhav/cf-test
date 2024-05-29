@@ -6,7 +6,6 @@ import {baseInstance} from "@/network/axios";
 export default function TextContent({params}) {
   const [data, setData] = React.useState();
   const [paramsCityId, setParamsCityId] = React.useState(46);
-
   const HomePageText = () => {
     baseInstance
       .get(endPoints.homePageTextContent)
@@ -44,16 +43,18 @@ export default function TextContent({params}) {
     ) {
       baseInstance
         .get(endPoints.cityIdByCityName + params?.city)
-        .then(res => setParamsCityId(res?.data?.data?.id))
+        .then(res => {
+          setParamsCityId(res?.data?.data?.id);
+        })
         .catch(err => console.log(err?.message || "some error"));
     }
-  }, []);
+  }, [params?.city]);
 
   useEffect(() => {
     if (params.category === "appliances-rental") SeoAppliancesPageText();
     else if (params.category === "furniture-rental") SeoFurniturePageText();
     else HomePageText();
-  }, []);
+  }, [paramsCityId]);
   return (
     <div className={styles.wrapper}>
       {params === "home-page" && (

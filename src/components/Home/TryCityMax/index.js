@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
-import {ForwardArrow, CityMaxIcons} from "@/assets/icon";
+import {ForwardArrow} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
 import CityMaxDrawer from "./cityMaxDrawer";
@@ -13,14 +13,14 @@ const TryCityMax = () => {
   const benefitsOfCity = [
     {
       id: 1,
-      img: CityMaxIcons.Icon1,
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/quality-products.svg",
       title: "Quality products",
       paragraph:
         "Branded appliances and solid Sheesham Wood products in mint new condition",
     },
     {
       id: 2,
-      img: CityMaxIcons.Icon2,
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-swap.svg",
       title: "Free Swap",
       paragraph:
         "Swap any product or design anytime during the subscription period",
@@ -28,13 +28,13 @@ const TryCityMax = () => {
     {
       id: 3,
       title: "Cancel anytime",
-      img: CityMaxIcons.Icon3,
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/cancel-anytime.svg",
       paragraph:
         "We will deduct 1 month's extra rent as a penalty and refund rest of the amount instantly",
     },
     {
       id: 4,
-      img: CityMaxIcons.Icon4,
+      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/easy-on-wallet.svg",
       title: "Easy on Wallet",
       paragraph:
         "You can pay subscription fee in one go or opt for our no cost EMI plan",
@@ -49,6 +49,7 @@ const TryCityMax = () => {
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
           <Image
+            loader={({src}) => src}
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image} `}
@@ -56,6 +57,7 @@ const TryCityMax = () => {
             height={720}
           />
           <Image
+            loader={({src}) => src}
             src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
@@ -95,10 +97,13 @@ const TryCityMax = () => {
                   <div className={styles.card_wrapper} key={index.toString()}>
                     <div className={`w-100 h-100 absolute z-10`} />
                     <Image
+                      loader={({src}) => src}
                       src={item?.img}
                       className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"
                       loading="lazy"
+                      width={40}
+                      height={40}
                     />
                     <h3 className={styles.benefit_title}>{item?.title}</h3>
                     <p className={styles.benefit_paragraph}>
@@ -140,6 +145,9 @@ export default TryCityMax;
 export const TryCityMaxSkeleton = () => {
   return (
     <div className={styles.main_wrapper}>
+      <div className="flex lg:hidden">
+        <Skeleton variant="rectangular" width={"100%"} height={"300px"} />
+      </div>
       <div className={styles.left_image_section}>
         <Skeleton
           variant="rectangular"
@@ -163,15 +171,20 @@ export const TryCityMaxSkeleton = () => {
         <Skeleton variant="text" className={styles.Skeleton_button} />
         <Skeleton
           variant="text"
-          className={`${styles.Skeleton_text} mt-10 mb-4`}
+          className={`${styles.Skeleton_text} mt-10 mb-4 hidden lg:block`}
           width={"140px"}
           height={"100%"}
         />
-        <Skeleton variant="text" height={"0.5rem"} width={"100%"} />
-        <div className=" flex flex-wrap">
-          {[1, 2].map((i, index) => (
-            <div className=" w-[40%] mr-10" key={index.toString()}>
-              <Skeleton variant="text" height={"400px"} width={"100%"} />
+        <Skeleton
+          variant="text"
+          height={"0.5rem"}
+          width={"100%"}
+          className="hidden lg:block"
+        />
+        <div className=" lg:grid lg:grid-cols-2 flex w-full gap-4 mt-4 overflow-x-scroll">
+          {[1, 2, 2, 2].map((i, index) => (
+            <div className="h-[200px] min-w-[200px]" key={index.toString()}>
+              <Skeleton variant="rectangular" height={"100%"} width={"100%"} />
             </div>
           ))}
         </div>

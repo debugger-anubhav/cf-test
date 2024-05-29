@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
-import {Mail, Message} from "@/assets/icon";
+import {Mail} from "@/assets/icon";
 // import { useChatScript } from "../../../../useChatScript";
 
 export default function ChatWithUs() {
@@ -51,14 +51,14 @@ export default function ChatWithUs() {
                 <p className={styles.write_to_us_text}>Write to us</p>
               </button>
             </a>
-            <div className={styles.chat_now_wrapper}>
+            {/* <div className={styles.chat_now_wrapper}>
               <Message
                 size={20}
                 color={"#222"}
                 className={styles.message_icon}
               />
               <p className={styles.chat_now_text}>Chat now</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -20,8 +20,9 @@ const RecentlyViewedProduct = ({page}) => {
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
+  const userId = decrypt(getLocalStorage("_ga"));
   const [isDumy, setIsDumy] = React.useState(false);
-  const [isLogin, setIsLogin] = React.useState(null);
+  const [isLogin, setIsLogin] = React.useState(!!userId);
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -29,6 +30,13 @@ const RecentlyViewedProduct = ({page}) => {
   }
 
   const cityId = parseFloat(cityIdStr);
+  useEffect(() => {
+    isAuth();
+  }, []);
+
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   const {refetch: recentlyViewed} = useQuery(
     "recently-view",
@@ -46,7 +54,6 @@ const RecentlyViewedProduct = ({page}) => {
   };
 
   useEffect(() => {
-    isAuth();
     recentlyViewed()
       .then(res => {
         dispatch(addRecentlyViewedProduct(res?.data?.data));
@@ -112,7 +119,7 @@ const RecentlyViewedProduct = ({page}) => {
               className={`${
                 page === "product" && "xl:!text-24 xl:!tracking-0.48"
               } ${styles.heading}`}>
-              Recently Viewed products
+              Recently Viewed Products
             </h2>
           ) : null}
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
@@ -134,11 +141,17 @@ const RecentlyViewedProduct = ({page}) => {
                         cardImage={
                           item?.image?.split(",").filter(item => item).length >
                           1
-                            ? productImageBaseUrl + item?.image?.split(",")[1]
-                            : productImageBaseUrl + item?.image?.split(",")[0]
+                            ? productImageBaseUrl +
+                              "thumb/" +
+                              item?.image?.split(",")[1]
+                            : productImageBaseUrl +
+                              "thumb/" +
+                              item?.image?.split(",")[0]
                         }
                         hoverCardImage={
-                          productImageBaseUrl + item?.image?.split(",")[0]
+                          productImageBaseUrl +
+                          "thumb/" +
+                          item?.image?.split(",")[0]
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.product_sale_price) * 100) /

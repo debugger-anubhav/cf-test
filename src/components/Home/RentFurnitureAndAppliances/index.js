@@ -69,7 +69,7 @@ const RentFurnitureAndAppliances = ({params}) => {
   return (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
-      <h2 className={styles.subhead}>{string.landing_page.Explore_by}</h2>
+      <p className={styles.subhead}>{string.landing_page.Explore_by}</p>
       <div className={styles.card_div}>
         {RentFurniture?.map((item, index) => {
           return (
@@ -80,7 +80,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                 router.push(
                   `/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${item?.seourl}`,
+                    ?.toLowerCase()}/${item?.seourl}`,
                 );
                 if (typeof window !== "undefined") {
                   setLocalStorage("categoryId", item?.rootID);
@@ -90,11 +90,12 @@ const RentFurnitureAndAppliances = ({params}) => {
               <a
                 href={`/${homePageReduxData?.cityName
                   .replace(/\//g, "-")
-                  .toLowerCase()}/${item?.seourl}`}
+                  ?.toLowerCase()}/${item?.seourl}`}
                 onClick={e => e.preventDefault()}
                 target="_self"
                 rel="noopener">
                 <Image
+                  loader={({src}) => src}
                   src={
                     "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
                     item.category_web_image
@@ -108,7 +109,7 @@ const RentFurnitureAndAppliances = ({params}) => {
               </a>
 
               <div className={styles.label_wrapper}>
-                <h3 className={styles.label}>{item.cat_name}</h3>
+                <h2 className={styles.label}>{item.cat_name}</h2>
                 {params === "home-page" && (
                   <p className={styles.desc}>{item.category_description}</p>
                 )}

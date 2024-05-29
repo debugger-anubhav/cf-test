@@ -676,3 +676,10 @@ export const CreateRequest = CreateRequestPayload => {
     })
     .catch(err => console.log(err?.message || "some error"));
 };
+
+export const MONTHLY_NOT_ALLOWED_PRODUCT = [
+  "SPLITAC1.5TONMP001",
+  "SPLITAC1TONMP001",
+  "ACPWA1TONMPC03",
+  "ACPWAMPC03",
+];

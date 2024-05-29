@@ -55,6 +55,10 @@ function CencelOrder({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
+
   const cencellationOptions = [
     {value: "1", label: "Wrong items selected"},
     {value: "2", label: "Late delivery"},
@@ -78,7 +82,7 @@ function CencelOrder({prevScreen, data, isHelpDrawer}) {
       type: selectedType,
       description,
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
 
   return (
@@ -112,8 +116,9 @@ function CencelOrder({prevScreen, data, isHelpDrawer}) {
         <button
           className={`${styles.proceed_btn}  !w-fit !ml-0 ${
             selected === null ? "!bg-[#FFDF85] !cursor-not-allowed" : ``
-          }`}
-          onClick={() => handleRequest()}>
+          } ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
+          onClick={() => handleRequest()}
+          disabled={!callFunctionFlag}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

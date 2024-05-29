@@ -12,104 +12,119 @@ import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliance
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-import {useChatScript} from "../../useChatScript";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
-import pMinDelay from "p-min-delay";
+import {getLocalStorage} from "@/constants/constant";
+import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
+import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
+// import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
 });
+
 const RentFurnitureAndAppliances = loadable(
-  () => pMinDelay(import("@/components/Home/RentFurnitureAndAppliances"), 20),
+  () => import("@/components/Home/RentFurnitureAndAppliances"),
   {
     fallback: <RentFurnitureSkeleton />,
   },
 );
+
 const RecentlyViewedProduct = loadable(
-  () => pMinDelay(import("@/components/Home/RecentlyViewedProduct"), 30),
+  () => import("@/components/Home/RecentlyViewedProduct"),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
+
 const TrendingProducts = loadable(
-  () => pMinDelay(import("@/components/Home/TrendingProducts"), 60),
+  () => import("@/components/Home/TrendingProducts"),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
+
 const OffersAndCoupons = loadable(
-  () => pMinDelay(import("@/components/Home/OffersAndCoupons"), 80),
+  () => import("@/components/Home/OffersAndCoupons"),
   {fallback: <OffersSkeleton />},
 );
+
 const NewlyLaunched = loadable(
-  () => pMinDelay(import("@/components/Home/NewlyLaunched"), 100),
+  () => import("@/components/Home/NewlyLaunched"),
   {fallback: <NewlyLauncedSkeleton />},
 );
 
-const DownloadForMobile = loadable(() =>
-  pMinDelay(import("@/components/Home/DownloadForMobile"), 120),
+const DownloadForMobile = loadable(
+  () => import("@/components/Home/DownloadForMobile"),
+  {fallback: <DownloadForMobileSkeleton />},
 );
+
 const PreDesignCombos = loadable(
-  () => pMinDelay(import("@/components/Home/PredesignCombos"), 140),
+  () => import("@/components/Home/PredesignCombos"),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
-const HasselFreeServicesCards = loadable(() =>
-  pMinDelay(import("@/components/Home/HasselFreeServicesCards"), 160),
+
+const HasselFreeServicesCards = loadable(
+  () => import("@/components/Home/HasselFreeServicesCards"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
 );
+
 const LimetedPreiodDiscount = loadable(
-  () => pMinDelay(import("@/components/Home/LimetedPreiodDiscount"), 180),
+  () => import("@/components/Home/LimetedPreiodDiscount"),
   {
     fallback: <ProductRowSkeleton />,
   },
 );
+
 const RentNowBanner = loadable(
-  () => pMinDelay(import("@/components/Home/RentNowBanner"), 200),
+  () => import("@/components/Home/RentNowBanner"),
   {fallback: <RentNowBannersSkeleton />},
 );
-const TryCityMax = loadable(
-  () => pMinDelay(import("@/components/Home/TryCityMax"), 220),
-  {
-    fallback: <TryCityMaxSkeleton />,
-  },
+
+const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+  // fallback: <TryCityMaxSkeleton />,
+});
+
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
+
+const MediaCoverage = loadable(
+  () => import("@/components/Home/MediaCoverage"),
+  {fallback: <MediaCoverageSkeleton />},
 );
-const CustomerRating = loadable(
-  () => pMinDelay(import("@/components/Home/Rating"), 240),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
-const MediaCoverage = loadable(() =>
-  pMinDelay(import("@/components/Home/MediaCoverage"), 260),
-);
+
 const HappySubscribers = loadable(() =>
-  pMinDelay(import("@/components/Home/HappySubscribers"), 280),
+  import("@/components/Home/HappySubscribers"),
 );
+
 const FrequentlyAskedQuestions = loadable(
-  () => pMinDelay(import("@/components/Common/FrequentlyAskedQuestions"), 300),
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
   {
     fallback: <FaqsSkeleton />,
   },
 );
-const Footer = loadable(
-  () => pMinDelay(import("@/components/Common/Footer"), 320),
-  {
-    fallback: <FooterSkeleton />,
-  },
-);
-const CombineSection = loadable(() =>
-  import("@/components/Home/CombineSection"),
+
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
+
+const CombineSection = loadable(
+  () => import("@/components/Home/CombineSection"),
+  // {fallback: <CombineSectionSkeleton />},
 );
 
 export default function Home() {
   const myElementRef = useRef();
-
+  const userId = getLocalStorage("_ga");
   // added
   useEffect(() => {
     const handleTouchStart = event => {
@@ -126,6 +141,19 @@ export default function Home() {
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
+  useEffect(() => {
+    if (userId !== "") {
+      if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+        window?.gtag("js", new Date());
+        window?.gtag("config", "G-05PLBRM6KD", {
+          user_id: userId,
+        });
+      }
+    } else {
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
+        window?.gtag("config", "G-05PLBRM6KD");
+    }
+  }, [userId]);
 
   return (
     <>
@@ -134,24 +162,25 @@ export default function Home() {
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
       />
       <div ref={myElementRef} className="large_layout">
-        {useChatScript()}
+        {/* {useChatScript()} */}
         <AnnouncementBar />
         <Header />
         <MenuList />
-        <div className="lg:min-h-[385px] min-h-[125px]">
-          <HeroBanner />
-        </div>
+        <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
         <OffersAndCoupons />
-        <NewlyLaunched />
+        {/* <NewlyLaunched /> */}
+        <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
         <HasselFreeServicesCards />
         <LimetedPreiodDiscount />
-        <RentNowBanner params={"home-page"} />
+        <NewlyLaunched />
+
         <TryCityMax />
+
         <div className="xl:hidden block">
           <MediaCoverage />
         </div>

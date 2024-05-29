@@ -97,7 +97,7 @@
   @apply w-[6px] h-[6px] rounded-full bg-[#5774AC];
 }
 .email_row {
-  @apply flex gap-2 mt-4 items-center max-w-[365px];
+  @apply flex gap-2 mt-4 items-center max-w-[365px] cursor-pointer;
 }
 .proceed_btn {
   @apply mt-6 text-71717A font-medium text-16 rounded-lg border-2 border-71717A flex justify-center items-center h-14 px-8 w-full;

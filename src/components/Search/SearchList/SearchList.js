@@ -231,6 +231,7 @@ const SearchList = () => {
                             ? productImageBaseUrl + item?.image?.split(",")[1]
                             : productImageBaseUrl + item?.image?.split(",")[0]
                         }
+                        showincludedItem={item?.product_label}
                         discount={`${Math.round(
                           ((item?.price - item?.sale_price) * 100) /
                             item?.price,

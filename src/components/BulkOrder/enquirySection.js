@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import styles from "./style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -11,6 +11,7 @@ import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
+import LoaderComponent from "../Common/Loader/LoaderComponent";
 
 const quantityOptions = [
   {label: "10-50", value: "10-50"},
@@ -19,8 +20,8 @@ const quantityOptions = [
 ];
 
 const EnquirySection = () => {
+  const recaptchaRef = useRef();
   const [perAddModal, setPerAddModal] = useState(false);
-  // const [isVerified, setIsVerified] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
     quantityOptions[0],
   );
@@ -56,43 +57,58 @@ const EnquirySection = () => {
       )
       .min(5, "Message should be of atleast 5 characters long."),
   });
-
+  const [captchaKey, setCaptchaKey] = useState(null);
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleRecaptchaVerify = value => {
-    // if (value) setIsVerified(true);
-    // console.log(value);
+    // const token = recaptchaRef.current.executeAsync();
+    setCaptchaKey(value);
   };
 
   const handleSubmit = async values => {
-    return new Promise((resolve, reject) => {
-      const payload = {
-        name: values.fullName,
-        email: values.email,
-        phone: values.contactNumber,
-        city: values.city,
-        message: values.message,
-        quantity: selectedOptionPer.value,
-      };
-
+    setDisableSubmit(true);
+    setLoading(true);
+    const payload = {
+      name: values.fullName,
+      email: values.email,
+      phone: values.contactNumber,
+      city: values.city,
+      message: values.message,
+      quantity: selectedOptionPer.value,
+    };
+    if (captchaKey) {
       baseInstance
         .post(endPoints.enquiry, payload)
         .then(response => {
+          setLoading(false);
           showToastNotification(
             "Your Enquiry is sent to our team. They will get back to you shortly",
             1,
           );
           setTimeout(() => {
             typeof window !== "undefined" && window?.location.reload();
+            setDisableSubmit(false);
           }, 2000);
         })
         .catch(error => {
           console.error("API error:", error);
+          setLoading(false);
+          setDisableSubmit(false);
         });
-    });
+    } else {
+      setLoading(false);
+      showToastNotification(
+        "Please complete the CAPTCHA to verify you are not a robot",
+        3,
+      );
+      setDisableSubmit(false);
+    }
   };
 
   return (
     <>
       <div className={styles.right_div}>
+        {loading && <LoaderComponent loading={loading} />}
         <div>
           <h2 className={styles.enquiry_heading}>Enquiry</h2>
           <div className={styles.enquiry_description}>
@@ -244,17 +260,27 @@ const EnquirySection = () => {
 
                   <div className={styles.recaptcha}>
                     <ReCAPTCHA
-                      sitekey="'6LfkkNoUAAAAAFU8Z7C4zFRH0HhozEWJq-mELpfG"
-                      // sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                      ref={recaptchaRef}
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
                       onChange={handleRecaptchaVerify}
                     />
                   </div>
 
                   <div className={styles.btn_wrapper}>
-                    <button type="submit" className={styles.submit_btn_web}>
+                    <button
+                      type="submit"
+                      className={`${styles.submit_btn_web} ${
+                        disableSubmit ? "cursor-not-allowed" : "cursor-pointer"
+                      }`}
+                      disabled={disableSubmit}>
                       Submit
                     </button>
-                    <button type="submit" className={styles.submit_btn_mobile}>
+                    <button
+                      type="submit"
+                      className={`${styles.submit_btn_mobile} ${
+                        disableSubmit ? "cursor-not-allowed" : "cursor-pointer"
+                      }`}
+                      disabled={disableSubmit}>
                       Save & Proceed
                       <ForwardArrowWithLine
                         className={styles.submit_btn_icon}

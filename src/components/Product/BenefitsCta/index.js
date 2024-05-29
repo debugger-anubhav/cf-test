@@ -21,6 +21,7 @@ const BenefitsCta = () => {
       <p className={styles.desc}>{str.cta_desc}</p>
       <div className={styles.bg_img}>
         <Image
+          loader={({src}) => src}
           className="w-ful h-full pointer-events-none"
           src={ProductPageImages.CtaImage}
           alt="benefits"

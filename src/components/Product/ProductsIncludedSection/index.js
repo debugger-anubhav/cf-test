@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {productPageImagesBaseUrl} from "@/constants/constant";
@@ -6,9 +6,17 @@ import {Skeleton} from "@mui/material";
 
 const ItemsIncluded = () => {
   const [selectedItem, setSelectedItem] = useState(0);
+  const [loader, setLoader] = useState(true);
   const pageDetails = useSelector(
     state => state.productPageData.singleProductDetails[0],
   );
+  useEffect(() => {
+    setTimeout(() => {
+      if (pageDetails?.subProduct) {
+        setLoader(false);
+      }
+    }, 1000);
+  }, [pageDetails?.subProduct]);
 
   if (pageDetails?.subProduct?.length > 0) {
     return (
@@ -24,12 +32,16 @@ const ItemsIncluded = () => {
                 selectedItem === index ? "border-[#5F789D]" : "border-fff"
               }`}
               key={index}>
-              <img
-                src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
-                className={styles.img}
-                loading="lazy"
-                alt={item.product_name}
-              />
+              {loader ? (
+                <Skeleton variant="rectangular" height={100} width={100} />
+              ) : (
+                <img
+                  src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
+                  className={styles.img}
+                  loading="lazy"
+                  alt={item.product_name}
+                />
+              )}
               <div className={styles.quantity_label}>1x</div>
             </div>
           ))}
@@ -63,6 +75,15 @@ const ItemsIncluded = () => {
                     <p className={styles.colon}>:</p>
                     <p className={styles.info_details}>{item.dimension}</p>
                   </div>
+                  {item?.dimension_in_cm && (
+                    <div className={styles.info_row}>
+                      <p className={styles.label}>Size (in cm) </p>
+                      <p className={styles.colon}> :</p>
+                      <p className={styles.info_details}>
+                        {item.dimension_in_cm}
+                      </p>
+                    </div>
+                  )}
 
                   <div className={styles.info_row}>
                     <p className={styles.label}>Material</p>
@@ -138,7 +159,15 @@ const ItemsIncluded = () => {
                   </p>
                 </div>
               )}
-
+              {pageDetails?.dimension_in_cm && (
+                <div className={styles.info_row}>
+                  <p className={styles.label}>Size (in cm) </p>
+                  <p className={styles.colon}> :</p>
+                  <p className={styles.info_details}>
+                    {pageDetails?.dimension_in_cm}
+                  </p>
+                </div>
+              )}
               {pageDetails?.material && (
                 <div className={styles.info_row}>
                   <p className={styles.label}>Material</p>

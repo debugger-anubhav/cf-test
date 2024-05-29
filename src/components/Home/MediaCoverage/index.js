@@ -1,7 +1,9 @@
+"use client";
 import React from "react";
 import styles from "./style.module.css";
 import {MediaCoverageImages} from "@/constants/constant";
 import string from "@/constants/Constant.json";
+import {Skeleton} from "@mui/material";
 
 const MediaCoverage = () => {
   const str = string.landing_page.Media_coverage;
@@ -17,13 +19,13 @@ const MediaCoverage = () => {
         {MediaCoverageImagesRepeated?.map((imageUrl, index) => {
           return (
             <div
-              key={index.toString()}
-              className="flex items-center py-[16px] !min-w-[124px] md:!min-w-[147px] lg:!min-w-max  relative"
+              key={(index + 1).toString()}
+              className={styles.main_img_wrap}
               aria-hidden="true">
               <img
                 src={imageUrl.img}
-                alt={imageUrl.alt + index}
-                className="flex items-center w-full mix-blend-darken md:mix-blend-normal"
+                alt={imageUrl.alt + (index + 1)}
+                className={styles.media_img}
                 loading="lazy"
                 width={124}
                 height={"100%"}
@@ -37,3 +39,20 @@ const MediaCoverage = () => {
 };
 
 export default MediaCoverage;
+
+export const MediaCoverageSkeleton = () => {
+  return (
+    <div className={styles.skeleton_wrapper}>
+      <Skeleton variant="text" width={120} height={20} />
+      <div className={styles.skeleton_map_wrapper}>
+        {[1, 2, 3, 4, 4, 5, 5, 3]?.map((item, index) => {
+          return (
+            <div key={index.toString()} className={styles.main_skele}>
+              <Skeleton variant="rectangular" width={"100%"} height={"60%"} />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};

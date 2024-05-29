@@ -42,7 +42,7 @@ const OrderDetails = ({setPart, data}) => {
   );
 
   const checkStatus = isUnhappyCustomeFlow
-    ? data?.stagesData[stepsCompleted - 3]?.zoho_sub_status.toLowerCase()
+    ? data?.stagesData[stepsCompleted - 3]?.zoho_sub_status?.toLowerCase()
     : orderStatus?.toLowerCase();
 
   return (
@@ -111,7 +111,7 @@ const OrderDetails = ({setPart, data}) => {
                 <div>
                   <p className={styles.progress_status}>
                     {" "}
-                    {statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                    {statusLabels[item.zoho_sub_status?.toLowerCase()] ||
                       item.zoho_sub_status}
                   </p>
                   {(isUnhappyCustomeFlow

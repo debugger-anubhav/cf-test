@@ -1,26 +1,28 @@
+"use client";
 import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
-import {useRouter, useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
-import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
 const PaymentConfirmation = () => {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const dispatch = useDispatch();
-  const userId = decrypt(getLocalStorage("_ga"));
+  const url = window && window?.location?.href;
 
-  const oid = searchParams.get("oid");
+  const oid = url.split("oid=")[1];
+  // console.log(oid, "oidiididididi");
 
   const [timer, setTimer] = useState(5);
   const [transactionId, setTransactionId] = useState(null);
   const [skeletonLoder, setSkeletonLoder] = useState(true);
+  const userId = decrypt(getLocalStorage("_ga"));
 
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -36,15 +38,15 @@ const PaymentConfirmation = () => {
   }, [router, timer]);
 
   const getPaymentScript = () => {
+    // console.log("2222222222222222");
+
     baseInstance
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
-        console.log(res, "ressssss");
-
         const scriptData = res?.data?.data;
-
+        // console.log(scriptData, "script_data_purchase");
         const eventItems = [];
-        res?.data?.data?.forEach((product, index) => {
+        scriptData?.items?.forEach((product, index) => {
           const item = {
             productId: product.id,
             productName: product?.name,
@@ -55,32 +57,28 @@ const PaymentConfirmation = () => {
           };
           eventItems.push(item);
         });
-        window?.Northbeam.firePurchaseEvent({
-          id: scriptData?.transaction_id,
-          totalPrice: scriptData?.value,
-          shippingPrice: scriptData?.shipping,
-          taxPrice: scriptData?.tax,
-          coupons: "WELCOME10",
-          currency: scriptData?.currency,
-          customerId: "CF-11011",
-          lineItems: eventItems,
-        });
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "purchase", {
+            transaction_id: scriptData?.transaction_id,
+            value: scriptData?.value,
+            currency: scriptData?.currency,
+            tax: scriptData?.tax,
+            shipping: scriptData?.shipping,
+            items: eventItems,
+          });
+          // console.log("444444444444444444");
 
-        window?.gtag("event", "purchase", {
-          transaction_id: scriptData?.transaction_id,
-          value: scriptData?.value,
-          currency: scriptData?.currency,
-          tax: scriptData?.tax,
-          shipping: scriptData?.shipping,
-          items: eventItems,
-        });
-        window?.fbq("track", "Purchase", {
-          currency: scriptData?.currency,
-          value: scriptData?.value,
-        });
-        window?.lintrk("track", {conversion_id: 11504433});
+          window?.fbq("track", "Purchase", {
+            currency: scriptData?.currency,
+            value: scriptData?.value,
+          });
+          window?.lintrk("track", {conversion_id: 11504433});
+        }
+        // console.log("555555555555555555");
+
+        // console.log("third_call_3333333333");
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err, "purchase_event_error"));
   };
 
   const getTransactionId = id => {
@@ -97,6 +95,8 @@ const PaymentConfirmation = () => {
   };
   useEffect(() => {
     getTransactionId(oid);
+  }, []);
+  useEffect(() => {
     getPaymentScript();
   }, []);
 
@@ -105,7 +105,6 @@ const PaymentConfirmation = () => {
       <div className={styles.success_icon_div}>
         <FaCheck color={"white"} className={styles.checkIcon} />
       </div>
-
       <h1 className={styles.head}>
         Congratulations! We have received your order.
       </h1>
@@ -125,7 +124,6 @@ const PaymentConfirmation = () => {
           )}
         </div>
       </div>
-
       <div className={styles.next_step_wrapper}>
         <p className={styles.next_steps_header}>
           For the next steps, you will be redirected to KYC & Documentation page

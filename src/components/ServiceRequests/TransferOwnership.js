@@ -29,6 +29,9 @@ function TransferOwnership({prevScreen, data, isHelpDrawer}) {
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
+  const callFunctionFlag = useSelector(
+    state => state.homePagedata.createRequestApiCalled,
+  );
   const cartPageData = useSelector(state => state.cartPageData);
   const addressArray = cartPageData.savedAddresses;
   const cityName = useSelector(state => state.homePagedata.cityName);
@@ -126,7 +129,7 @@ function TransferOwnership({prevScreen, data, isHelpDrawer}) {
       address2: values.landmark,
       state: primaryAddress ? primaryAddress.state : "",
     };
-    CreateSRApiCall(payload);
+    callFunctionFlag && CreateSRApiCall(payload);
   };
 
   return (

@@ -181,8 +181,6 @@ const Header = ({page}) => {
     baseInstance
       .get(endPoints.addToCart.fetchCartItems(cityId, userIdToUse))
       .then(res => {
-        // console.log(res, "res in fetch itemms");
-        // setArr(res?.data?.data);
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
       })
@@ -308,7 +306,6 @@ const Header = ({page}) => {
                 className={styles.main_logo}
                 width={"100%"}
                 height={"100%"}
-                loading="lazy"
               />
             </a>
             <div className={styles.header_city_wrapper}>
@@ -344,6 +341,7 @@ const Header = ({page}) => {
                     className={styles.search_input}
                   />
                   <Image
+                    loader={({src}) => src}
                     src={Icons.Search}
                     alt="search-icon"
                     className={`${styles.header_search_icon} pointer-events-none`}
@@ -380,13 +378,17 @@ const Header = ({page}) => {
                 <div
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
                     loading="lazy"
                   />
                   {categoryPageReduxData?.savedProducts?.length > 0 && (
-                    <div className={styles.cart_badge}>{wishListCount}</div>
+                    <div
+                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.3rem] lg:left-6`}>
+                      {wishListCount}
+                    </div>
                   )}
                 </div>
               </div>
@@ -396,20 +398,22 @@ const Header = ({page}) => {
                     className={`w-100 h-100 absolute z-10`}
                     onClick={() => router.push("/cart")}></div>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
                     loading="lazy"
-                    className={`${styles.header_shopping_card} relative z-[-1]`}
+                    className={`${styles.header_shopping_card} relative z-[-1]  mx-4 cursor-pointer`}
                   />
                   {cartItemsLength > 0 && (
-                    <div className={styles.cart_badge}>{cartItemsLength}</div>
+                    <div
+                      className={`${styles.cart_badge} top-[-7px] lg:top-[-10px] left-[1.8rem] lg:left-8`}>
+                      {cartItemsLength}
+                    </div>
                   )}
                 </a>
               </div>
               <div
-                className={`lg:pt-[14px] lg:pb-[16px] lg:pl-8
-                  
-                  ${styles.test}`}
+                className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer lg:px-2`}
                 onMouseLeave={() => {
                   setShowProfileDropdown(false);
                 }}
@@ -419,13 +423,12 @@ const Header = ({page}) => {
                   if (isLogin) {
                     setShowProfileDropdown(true);
                   }
+                }}
+                onClick={() => {
+                  if (isLogin) router.push("/usersettings");
+                  else toggleLoginModal(true);
                 }}>
-                <div
-                  className="cursor-pointer"
-                  onClick={() => {
-                    if (isLogin) router.push("/usersettings");
-                    else toggleLoginModal(true);
-                  }}>
+                <div className="cursor-pointer">
                   <div
                     className="relative z-20"
                     onMouseEnter={e => {
@@ -436,6 +439,7 @@ const Header = ({page}) => {
                       }
                     }}>
                     <Image
+                      loader={({src}) => src}
                       src={Icons.Profile}
                       alt="profile-icon"
                       loading="lazy"
@@ -481,6 +485,7 @@ const Header = ({page}) => {
               }}
             />
             <Image
+              loader={({src}) => src}
               src={Icons.Search}
               alt="search-icon"
               className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
@@ -525,6 +530,9 @@ const SearchModal = ({
 
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
+    if (newSearchTerm.length < 3) {
+      return;
+    }
     setSearchTerm(newSearchTerm);
     const city = getLocalStorage("cityId");
 
@@ -643,6 +651,7 @@ const SearchModal = ({
             autoFocus
           />
           <Image
+            loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
             className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
@@ -653,6 +662,7 @@ const SearchModal = ({
           className={`${styles.search_wrapper}`}
           onClick={e => e.stopPropagation()}>
           <Image
+            loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
             className={`${styles.header_search_icon} pointer-events-none`}
@@ -767,7 +777,7 @@ const SearchModal = ({
                         window?.location.origin
                       }/${homePageReduxData?.cityName
                         .replace(/\//g, "-")
-                        .toLowerCase()}/${item?.seourl}`}>
+                        ?.toLowerCase()}/${item?.seourl}`}>
                       <div
                         className={styles.category_card_in_searchbox}
                         onClick={() => {
@@ -777,9 +787,10 @@ const SearchModal = ({
                           }
                         }}>
                         <Image
+                          loader={({src}) => src}
                           src={
-                            "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/" +
-                            item.category_image
+                            "https://d3juy0zp6vqec8.cloudfront.net/images/category/" +
+                            item.category_web_image
                           }
                           alt="RentFurnitureImages"
                           className={styles.categories_img}

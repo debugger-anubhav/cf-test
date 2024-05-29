@@ -59,7 +59,7 @@ const CreditTable = ({rows, handleShowMore, visibleRows}) => {
                 </TableCell>
                 <TableCell className={styles.tableCell}>
                   <span className="font-Inter">₹</span>
-                  {row.balance}
+                  {row.total}
                 </TableCell>
                 <TableCell className={styles.tableCell}>
                   {`${format(

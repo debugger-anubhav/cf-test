@@ -25,37 +25,41 @@ const StickyBottomBar = ({
       <div
         className={styles.deposit_div}
         style={{marginTop: "0px", gap: "16px"}}>
-        <div>
-          <p className={`!min-w-[92px] ${styles.deposit_txt}`}>Monthly Rent</p>
-          <div className={styles.flexx}>
-            <p className={styles.currentPrice}>
-              <span className={styles.rupeeIcon}>₹</span>
-              {durationArray?.[duration.currentIndex]?.attr_price}
+        {durationArray?.length > 0 && (
+          <div>
+            <p className={`!min-w-[92px] ${styles.deposit_txt}`}>
+              Monthly Rent
             </p>
-            <p
-              className={styles.originalPrice}
-              style={{
-                display: duration.value === "3" ? "none" : "flex",
-              }}>
-              {durationArray?.[0]?.attr_price}
-            </p>
-            {discount > 0 && (
-              <div
-                className={styles.discount}
+            <div className={styles.flexx}>
+              <p className={styles.currentPrice}>
+                <span className={styles.rupeeIcon}>₹</span>
+                {durationArray?.[duration.currentIndex]?.attr_price}
+              </p>
+              <p
+                className={styles.originalPrice}
                 style={{
                   display: duration.value === "3" ? "none" : "flex",
                 }}>
-                {/* {`-${Math.round(
+                {durationArray?.[0]?.attr_price}
+              </p>
+              {discount > 0 && (
+                <div
+                  className={styles.discount}
+                  style={{
+                    display: duration.value === "3" ? "none" : "flex",
+                  }}>
+                  {/* {`-${Math.round(
                 ((durationArray?.[0]?.attr_price -
                   durationArray?.[duration.currentIndex]?.attr_price) *
                   100) /
                   durationArray?.[0]?.attr_price,
               ).toFixed(0)}% OFF`} */}
-                {`-${discount}% OFF`}
-              </div>
-            )}
+                  {`-${discount}% OFF`}
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       <a href={isItemInCart && `/cart`}>

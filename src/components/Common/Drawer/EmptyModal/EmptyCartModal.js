@@ -40,7 +40,7 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
       setLocalStorage("cityId", city?.id);
     }
     const newUrl = window?.location.pathname.split("/");
-    newUrl[1] = city.list_value.replace(/\//g, "-").toLowerCase();
+    newUrl[1] = city.list_value.replace(/\//g, "-")?.toLowerCase();
     const p = newUrl.join("/");
     params.city ? router.push(p) : window?.location.reload();
   };

@@ -18,7 +18,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
   const [skeletonLoading, setSkeletonLoading] = useState(true);
 
   const MenuList0 = [
-    {label: "All orders"},
+    {label: "All Orders"},
     {
       label: "KYC Pending",
       value: "kyc_pending",
@@ -184,7 +184,7 @@ const AllOrders = ({setPart, getSingleOrderDetails, tab, setTab}) => {
                           fetchOrdersDetails();
                         }}
                         className="text-5774AC cursor-pointer">
-                        All orders.
+                        All Orders.
                       </span>
                     )}
                   </p>

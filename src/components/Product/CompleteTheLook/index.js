@@ -103,16 +103,21 @@ const CompleteTheLook = ({params}) => {
                 isDumy && "pointer-events-none"
               }`}>
               <Card
-                cardImage={`${
+                cardImage={
+                  item?.image?.split(",").filter(item => item).length > 1
+                    ? productPageImagesBaseUrl + item?.image?.split(",")[1]
+                    : productPageImagesBaseUrl + item?.image?.split(",")[0]
+                }
+                hoverCardImage={
                   productPageImagesBaseUrl + item?.image?.split(",")[0]
-                }`}
+                }
                 discount={`${Math.round(
                   ((item?.price - item?.sale_price) * 100) / item?.price,
                 ).toFixed(0)}%`}
                 originalPrice={item?.price}
                 currentPrice={item?.sale_price}
                 desc={item?.product_name}
-                isHover={false}
+                isHover={true}
                 productID={item?.id}
                 seourl={item?.seourl}
               />

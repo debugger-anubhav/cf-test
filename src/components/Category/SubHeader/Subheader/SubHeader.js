@@ -163,19 +163,22 @@ const SubHeader = ({params}) => {
 
   const handleSelectedProduct = (e, item, mainCategory) => {
     if (item?.cat_name === "All") {
-      dispatch(addAllProduct(true));
+      dispatch(addAllProduct(false));
     } else {
       dispatch(addAllProduct(false));
     }
     setPageNo(1);
     dispatch(addFilteredItem([]));
     let previousSubCategory;
+    // if (typeof window !== "undefined") {
+    //   setLocalStorage("subCategory", item?.cat_name);
+    // }
     if (typeof window !== "undefined") {
-      setLocalStorage("subCategory", item?.cat_name);
+      previousSubCategory = getLocalStorage("subCategory");
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.replace(/\//g, "-").toLowerCase()}/${
+      `/${homePageReduxData?.cityName.replace(/\//g, "-")?.toLowerCase()}/${
         item?.seourl
       }`,
     );
@@ -423,7 +426,7 @@ const SubHeader = ({params}) => {
                 <a
                   href={`/${homePageReduxData?.cityName
                     .replace(/\//g, "-")
-                    .toLowerCase()}/${seoUrl?.seourl}`}
+                    ?.toLowerCase()}/${seoUrl?.seourl}`}
                   target="_self"
                   rel="noopener">
                   <p className={`${styles.route_text} cursor-pointer `}>
@@ -442,7 +445,7 @@ const SubHeader = ({params}) => {
           <h1 className={styles.heading}>{title}</h1>
           <div className={styles.category_wrapper}>
             {getAllAndSubCategoryData?.map((item, index) => {
-              if (item?.cat_name === category) {
+              if (item?.cat_name === category && item.sub_categories.length) {
                 const subCategoriesWithNewObject = [
                   {
                     ...item,
@@ -459,7 +462,7 @@ const SubHeader = ({params}) => {
                     <a
                       href={`/${homePageReduxData?.cityName
                         .replace(/\//g, "-")
-                        .toLowerCase()}/${subItem?.seourl}`}
+                        ?.toLowerCase()}/${subItem?.seourl}`}
                       onClick={e => {
                         e.preventDefault();
                         setLocalStorage("subCategory", subItem?.cat_name);
@@ -688,6 +691,7 @@ const SubHeader = ({params}) => {
                     dispatch(addSetProduct([]));
                     dispatch(addOutStockProduct([]));
                     dispatch(isFilterApplied(false));
+                    setPageNo(1);
                   }}>
                   <p className={styles.clear_All}>Clear all</p>
                 </div>
@@ -731,6 +735,7 @@ const SubHeader = ({params}) => {
                     dispatch(addSingleProduct([]));
                     dispatch(addSetProduct([]));
                     dispatch(addOutStockProduct([]));
+                    setPageNo(1);
                   }}>
                   <p className={styles.clear_All}>Clear all</p>
                 </div>

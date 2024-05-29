@@ -45,29 +45,35 @@ const Footer = ({params}) => {
       points: [
         {
           text: "All",
-          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/rent`,
+          link: `/${cityName.replace(/\//g, "-")?.toLowerCase()}/rent`,
         },
         {
           text: "Home Furniture",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/home-furniture-rental`,
+            ?.toLowerCase()}/home-furniture-rental`,
         },
         {
           text: "Appliances",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/home-appliances-rental`,
+            ?.toLowerCase()}/home-appliances-rental`,
         },
         {
           text: "Workstations",
-          link: `/${cityName.replace(/\//g, "-").toLowerCase()}/workstations`,
+          link: `/${cityName.replace(/\//g, "-")?.toLowerCase()}/workstations`,
         },
         {
           text: "Combos",
           link: `/${cityName
             .replace(/\//g, "-")
-            .toLowerCase()}/rental-packages`,
+            ?.toLowerCase()}/rental-packages`,
+        },
+        {
+          text: "Discount Deals",
+          link: `/${cityName
+            .replace(/\//g, "-")
+            ?.toLowerCase()}/discount-deals`,
         },
         {text: "Furniture Sale", link: "https://zior.in/"},
       ],
@@ -174,7 +180,11 @@ const Footer = ({params}) => {
                       : t.link
                   }
                   aria-label={t.text}
-                  target={t.text === "Furniture Sale" ? "_blank" : "_self"}
+                  target={
+                    t.text === "Furniture Sale" || t.text === "Blog"
+                      ? "_blank"
+                      : "_self"
+                  }
                   rel="noopener  noreferrer">
                   <p
                     className={styles.points}
@@ -196,6 +206,7 @@ const Footer = ({params}) => {
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
             <Image
+              loader={({src}) => src}
               className={`${styles.phoneImg} pointer-events-none`}
               alt="phone-icon"
               src={FooterIcons.Phone}
@@ -238,6 +249,7 @@ const Footer = ({params}) => {
       <div className="xl:hidden">
         <div className={styles.contact_div}>
           <Image
+            loader={({src}) => src}
             className={`${styles.phoneImg} pointer-events-none`}
             alt="phone-icon"
             src={FooterIcons.Phone}
@@ -284,10 +296,15 @@ const Footer = ({params}) => {
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           }}>
           <Image
-            src={FooterIcons.GoToTopIcon}
+            loader={({src}) => src}
+            src={
+              "https://d3juy0zp6vqec8.cloudfront.net/images/icons/go-to-top.svg"
+            }
             alt="go-to-top-icon"
             className={`${styles.goToTopIcon} pointer-events-none`}
             loading="lazy"
+            width={20}
+            height={20}
           />
           <p className={styles.goToTopTxt}>{str.go_to_top}</p>
         </div>

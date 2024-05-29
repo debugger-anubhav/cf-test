@@ -3,6 +3,7 @@ import {AppConfig} from "../../../appConfig";
 import Cookies from "universal-cookie";
 import CryptoJS from "crypto-js";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
 
 export const baseURL = AppConfig.Config.BASE_URL;
 const cookies = new Cookies();
@@ -34,7 +35,10 @@ baseInstance.interceptors.request.use(config => {
   }
   const plaintext = `${Date.now()}/Cityfurnish@India@123!/${Date.now()}`;
   const apiKey = createEncryptedHash(plaintext, mySecretKey);
-  config.headers.Apikey = apiKey;
+
+  const jwtToken = jwt.sign({payload: apiKey}, mySecretKey, {expiresIn: "2m"});
+  config.headers.Apikey = jwtToken;
+  // config.headers.Apikey = apiKey;
   return config;
 });
 

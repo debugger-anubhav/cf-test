@@ -6,6 +6,7 @@ import {
   getLocalStorage,
   productImageBaseUrl,
   setLocalStorage,
+  MONTHLY_NOT_ALLOWED_PRODUCT,
 } from "@/constants/constant";
 import {
   ArrowForw,
@@ -37,6 +38,7 @@ import {
   setCityShield,
   setCoinsApplied,
   setIsOfflineCustomer,
+  setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
 } from "@/store/Slices";
@@ -49,6 +51,7 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import Image from "next/image";
 import {RiSparklingFill} from "react-icons/ri";
+import {Skeleton} from "@mui/material";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -87,6 +90,9 @@ const ShoppingCartSection = () => {
   const [isSetupProfile, setIsSetupProfile] = useState(false);
   const [showMonthlyToggle, setShowMonthlyToggle] = useState(false);
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
+  const [quantityButton, setQuantityButton] = useState("enable");
+  const [minamountf, setMinamountf] = useState(0);
+
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
@@ -99,6 +105,26 @@ const ShoppingCartSection = () => {
       setLocalStorage("isMonthly", false);
     }
   }, [cartItems]);
+
+  useEffect(() => {
+    if (showMonthlyToggle) {
+      cartItems?.forEach(cart => {
+        if (MONTHLY_NOT_ALLOWED_PRODUCT.includes(cart.fc_product?.sku)) {
+          // setIsShowMonthly(true); // Uncomment if you need this line
+          setShowMonthlyToggle(false);
+          setLocalStorage("isMonthly", false);
+        }
+      });
+    }
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (modeOfPayment) {
+      setIsMonthly(true);
+    } else {
+      setIsMonthly(false);
+    }
+  }, [modeOfPayment]);
 
   const fetchCartItems = isValid => {
     const id = isValid ? userId : tempUserId;
@@ -119,10 +145,12 @@ const ShoppingCartSection = () => {
           };
           eventItems.push(item);
         });
-        window?.gtag("event", "begin_checkout", {
-          items: eventItems,
-        });
-        window?.fbq("track", "InitiateCheckout");
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "begin_checkout", {
+            items: eventItems,
+          });
+          window?.fbq("track", "InitiateCheckout");
+        }
       })
       .catch(err => {
         console.log(err?.message || "some error");
@@ -153,12 +181,12 @@ const ShoppingCartSection = () => {
       : 0;
 
   const monthlyModeFeatures = [
-    "Get additional discount upto 8%",
-    "Pay as you use",
+    "Get additional discount upto 10%",
+    "Pay as you go",
     "Mandatory Security Deposit",
   ];
   const upfrontModeFeatures = [
-    "Get additional discount upto 20%",
+    "Get additional discount upto 15%",
     "Faster KYC",
     "No Security Deposit",
   ];
@@ -232,6 +260,8 @@ const ShoppingCartSection = () => {
     itemIndex,
     maxQuantity,
   ) => {
+    dispatch(setMonthlyUpfrontLoader(true));
+    setQuantityButton("disable");
     let updatedItems;
     if (newQuantity < 1) {
       setProductId(productid);
@@ -260,15 +290,9 @@ const ShoppingCartSection = () => {
         productId: productid,
         cityId,
       };
-
-      await baseInstance
-        .post(endPoints.addToCart.updateQuantity, headers)
-        .then(res => {
-          console.log(res, "res in updated qunatity");
-        })
-        .catch(err => console.log(err?.message));
+      await baseInstance.post(endPoints.addToCart.updateQuantity, headers);
     }
-    fetchBill();
+    await fetchBill();
   };
 
   const deleteItem = id => {
@@ -277,6 +301,7 @@ const ShoppingCartSection = () => {
   };
 
   const fetchBill = async showMsg => {
+    dispatch(setMonthlyUpfrontLoader(false));
     try {
       const headers = {
         // userId: parseInt(userIdToUse),
@@ -292,7 +317,9 @@ const ShoppingCartSection = () => {
         endPoints.addToCart.fetchBill,
         headers,
       );
+      setMinamountf(res?.data?.data?.coupon_minamountf);
       dispatch(getBillDetails(res?.data?.data));
+      dispatch(setMonthlyUpfrontLoader(false));
       // setCode(res?.data?.data?.couponsCode);
       dispatch(getCouponCodeUsed(res?.data?.data?.couponsCode));
       dispatch(setCoinsApplied(res?.data?.data?.coinApplied));
@@ -302,6 +329,7 @@ const ShoppingCartSection = () => {
           showToastNotification(res?.data?.data?.msg, 2);
         }
       }
+      setQuantityButton("enable");
     } catch (err) {
       console.log(err?.message || "some error");
     }
@@ -322,9 +350,10 @@ const ShoppingCartSection = () => {
 
   const handleCheckLogin = () => {
     if (isLogin) {
-      if (userDetails?.full_name && userDetails?.email)
+      if (userDetails?.full_name && userDetails?.email) {
         dispatch(setShoppingCartTab(1));
-      else {
+        window?.scrollTo(0, 0);
+      } else {
         setIsSetupProfile(true);
         toggleLoginModal();
       }
@@ -362,6 +391,7 @@ const ShoppingCartSection = () => {
 
   const handleChangeRoute = () => {
     dispatch(setShoppingCartTab(1));
+    window?.scrollTo(0, 0);
   };
 
   const isOfflineCustomer = useSelector(
@@ -411,6 +441,7 @@ const ShoppingCartSection = () => {
             setIsLogin(bool);
           }}
           isLogin={isLogin}
+          fetchBill={() => fetchBill()}
         />
 
         <LoginModal
@@ -538,7 +569,6 @@ const ShoppingCartSection = () => {
                             <DeleteIcon className={styles.delete_icon} />
                           </div>
                         </div>
-
                         <div
                           className={`${
                             item?.is_frp === 1 ? "gap-2" : "gap-6"
@@ -546,32 +576,57 @@ const ShoppingCartSection = () => {
                           {item?.is_frp !== 1 && (
                             <div className={styles.incre_decre_div}>
                               <span
-                                className={styles.span_item}
-                                onClick={() =>
-                                  handleUpdateQuantity(
-                                    item.id,
-                                    item?.fc_product?.id,
-                                    item.quantity - 1,
-                                    index,
-                                    item?.fc_product?.fc_city_product_quantity
-                                      ?.quantity,
-                                  )
-                                }>
+                                className={`${styles.span_item} ${
+                                  quantityButton === "enable"
+                                    ? "cursor-pointer"
+                                    : "cursor-not-allowed"
+                                }`}
+                                onClick={() => {
+                                  if (quantityButton === "enable") {
+                                    if (minamountf > 0) {
+                                      if (isCouponApplied) {
+                                        setIsCouponApplied(false);
+                                        setCode("");
+                                        dispatch(getCouponCodeUsed(""));
+                                        showToastNotification(
+                                          `Oops! Coupon Removed. Ensure your cart meets the minimum rental value of INR ${
+                                            minamountf && minamountf
+                                          }`,
+                                          3,
+                                        );
+                                      }
+                                    }
+                                    handleUpdateQuantity(
+                                      item.id,
+                                      item?.fc_product?.id,
+                                      item.quantity - 1,
+                                      index,
+                                      item?.fc_product?.fc_city_product_quantity
+                                        ?.quantity,
+                                    );
+                                  }
+                                }}>
                                 -
                               </span>
                               {item?.quantity}
                               <span
-                                className={styles.span_item}
-                                onClick={() =>
-                                  handleUpdateQuantity(
-                                    item.id,
-                                    item?.fc_product?.id,
-                                    item.quantity + 1,
-                                    index,
-                                    item?.fc_product?.fc_city_product_quantity
-                                      ?.quantity,
-                                  )
-                                }>
+                                className={`${styles.span_item} ${
+                                  quantityButton === "enable"
+                                    ? "cursor-pointer"
+                                    : "cursor-not-allowed"
+                                }`}
+                                onClick={() => {
+                                  if (quantityButton === "enable") {
+                                    handleUpdateQuantity(
+                                      item.id,
+                                      item?.fc_product?.id,
+                                      item.quantity + 1,
+                                      index,
+                                      item?.fc_product?.fc_city_product_quantity
+                                        ?.quantity,
+                                    );
+                                  }
+                                }}>
                                 +
                               </span>
                             </div>
@@ -715,7 +770,11 @@ const ShoppingCartSection = () => {
                         />
                       </div>
                     ) : (
-                      <div onClick={() => setIsChecked(true)}>
+                      <div
+                        onClick={() => {
+                          dispatch(setMonthlyUpfrontLoader(true));
+                          setIsChecked(true);
+                        }}>
                         <UncheckedBox
                           size={20}
                           color={"#5774AC"}
@@ -803,11 +862,10 @@ const ShoppingCartSection = () => {
                     }
                   }}>
                   <p className={styles.offer_text}>
-                    {isCouponApplied
-                      ? `${code} applied`
-                      : "   Apply Offers & Coupon"}
+                    {isCouponApplied ? `${code} applied` : "Apply Coupon"}
                     <span>
                       <Image
+                        loader={({src}) => src}
                         src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                         alt="paty_icon"
                         className="w-[24px] h-[24px] inline-block ml-2"
@@ -835,6 +893,7 @@ const ShoppingCartSection = () => {
                   <div className={styles.monthly_toggler}>
                     <p
                       onClick={() => {
+                        dispatch(setMonthlyUpfrontLoader(true));
                         const prevVal = isMonthly;
                         const isMonthlyVal = true;
                         setIsMonthly(true);
@@ -853,6 +912,7 @@ const ShoppingCartSection = () => {
                     </p>
                     <p
                       onClick={() => {
+                        dispatch(setMonthlyUpfrontLoader(true));
                         const prevVal = isMonthly;
                         const isMonthlyVal = false;
                         setIsMonthly(false);
@@ -902,17 +962,37 @@ const ShoppingCartSection = () => {
                 }}>
                 <div className="flex justify-between">
                   <p className={styles.total_text}>
-                    {isMonthly ? "Now payable:" : "Total rent:"}
-                  </p>
-
-                  <p className={styles.total_amount}>
-                    <span className={styles.rupeeIcon}>₹</span>
                     {isMonthly ? (
-                      <>{billBreakup?.cartSubTotal}</>
+                      <p>
+                        Now payable
+                        <span className="!text-14 !font-normal ml-1">
+                          (Excl GST) :
+                        </span>{" "}
+                      </p>
                     ) : (
-                      <>{parseInt(billBreakup?.finalTotalPrice)?.toFixed(2)}</>
+                      <p>
+                        {" "}
+                        Total rent
+                        <span className="!text-14 !font-normal ml-1">
+                          (Excl GST) :{" "}
+                        </span>{" "}
+                      </p>
                     )}
                   </p>
+                  {data?.monthlyUpfrontLoader ? (
+                    <Skeleton variant="text" height={20} width={80} />
+                  ) : (
+                    <p className={styles.total_amount}>
+                      <span className={styles.rupeeIcon}>₹</span>
+
+                      {billBreakup?.totalPayableAmount?.toFixed(2)}
+                      {/* {isMonthly ? (
+                      <>{billBreakup?.totalPayableAmount?.toFixed(2)}</>
+                    ) : (
+                      <>{parseInt(billBreakup?.totalPayableAmount)?.toFixed(2)}</>
+                    )} */}
+                    </p>
+                  )}
                 </div>
                 {isMonthly && (
                   <div>
@@ -931,8 +1011,8 @@ const ShoppingCartSection = () => {
                 </div>
               </div>
 
-              <div className={styles.no_emi_wrapper}>
-                {!isMonthly && billBreakup?.tenure === "12" && (
+              {!isMonthly && billBreakup?.tenure === "12" && (
+                <div className={styles.no_emi_wrapper}>
                   <div className="flex">
                     <RiSparklingFill
                       size={26}
@@ -956,8 +1036,8 @@ const ShoppingCartSection = () => {
                       for 12 months available.
                     </p>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
 
               <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
                 <button

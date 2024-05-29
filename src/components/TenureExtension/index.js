@@ -13,6 +13,10 @@ import {baseInstance} from "@/network/axios";
 function TenureExtension() {
   const params = useParams();
   const router = useRouter();
+  let currentUrl;
+  if (typeof window !== "undefined") {
+    currentUrl = window?.location?.href;
+  }
   const [isChecked, setIsChecked] = useState(true);
   const [monthlyCardIsChecked, setmonthlyCardIsChecked] = useState(true);
   const [loading, setLoading] = useState(false);
@@ -56,7 +60,6 @@ function TenureExtension() {
   const [isCheckedArray, setIsCheckedArray] = useState(
     Array(CardData.length).fill(true),
   );
-  console.log(isChecked, "checking");
   const parentApi = async orderId => {
     baseInstance
       .get(endPoints.tenureExtension, {
@@ -93,6 +96,7 @@ function TenureExtension() {
 
   useEffect(() => {
     getDealCodeNumber();
+    console.log(isChecked);
     // parentApi();
   }, []);
 
@@ -141,14 +145,16 @@ function TenureExtension() {
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
           />
-          <MonthlyCard
-            dealCodeNumber={dealCodeNumber}
-            monthlyCardIsChecked={monthlyCardIsChecked}
-            setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
-            isCityShieldApplied={isCityShieldApplied}
-            recurringId={params?.recurringId}
-            setLoading={setLoading}
-          />
+          {!currentUrl?.includes("?data=1") && (
+            <MonthlyCard
+              dealCodeNumber={dealCodeNumber}
+              monthlyCardIsChecked={monthlyCardIsChecked}
+              setmonthlyCardIsChecked={value => setmonthlyCardIsChecked(value)}
+              isCityShieldApplied={isCityShieldApplied}
+              recurringId={params?.recurringId}
+              setLoading={setLoading}
+            />
+          )}
         </div>
       ) : (
         <div className="flex gap-8 mt-4 flex-wrap">

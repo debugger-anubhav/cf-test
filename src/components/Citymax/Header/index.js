@@ -259,6 +259,7 @@ const CitymaxHeader = ({zIndex}) => {
           <div className={styles.header_left_wrapper}>
             <div onClick={toggleDrawer} className="cursor-pointer">
               <Image
+                loader={({src}) => src}
                 src={Icons.Menu}
                 alt="menu-icon"
                 // className={styles.menu_icon_drawer}
@@ -320,15 +321,13 @@ const CitymaxHeader = ({zIndex}) => {
                     router.push("/wishlist");
                   } else {
                     toggleLoginModal(true);
-                    // router.push(
-                    //   "https://test.rentofurniture.com/user_sign_up",
-                    // );
                   }
                 }}>
                 <div className={`w-100 h-100 absolute z-10`}></div>
                 <div
                   className={`${styles.header_favorite_container} relative z-[-1]`}>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.Favorite}
                     alt="favorite"
                     className={styles.header_favorite}
@@ -346,6 +345,7 @@ const CitymaxHeader = ({zIndex}) => {
                     className={`w-100 h-100 absolute z-10 cursor-pointer`}
                     onClick={() => router.push("/cart")}></div>
                   <Image
+                    loader={({src}) => src}
                     src={Icons.shoppingCard}
                     alt="shopping-card-icon"
                     loading="lazy"
@@ -383,6 +383,7 @@ const CitymaxHeader = ({zIndex}) => {
                       }
                     }}>
                     <Image
+                      loader={({src}) => src}
                       src={Icons.Profile}
                       alt="profile-icon"
                       loading="lazy"

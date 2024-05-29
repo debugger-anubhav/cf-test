@@ -8,6 +8,7 @@ import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import Link from "next/link";
 import {baseInstance} from "@/network/axios";
+import {domain} from "../../../../appConfig";
 
 // h2 h3 p
 
@@ -39,11 +40,9 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   );
   const getFaqsCitymax = () => {
     baseInstance
-      .get("http://43.205.53.146/ajxapi/frp_faq_details")
-      // .get("https://test.rentofurniture.com/ajxapi/frp_faq_details")
+      .get(`${domain}/ajxapi/frp_faq_details`)
       .then(res => {
         setFaqs(res?.data?.data?.content);
-        console.log(res?.data?.data?.content, ";;;;;;;;;;");
       })
       .catch(err => console.log(err?.message || "some error"));
   };

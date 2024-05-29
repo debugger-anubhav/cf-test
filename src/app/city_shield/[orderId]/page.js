@@ -5,7 +5,7 @@ import MenuList from "@/components/Common/MenuList";
 import CityShieldPage from "@/components/CityShield";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import loadable from "@loadable/component";
-import {AuthProvider} from "@/components/HOC/index";
+// import {AuthProvider} from "@/components/HOC/index";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
@@ -23,4 +23,4 @@ const Cityshield = () => {
     </div>
   );
 };
-export default AuthProvider(Cityshield);
+export default Cityshield;

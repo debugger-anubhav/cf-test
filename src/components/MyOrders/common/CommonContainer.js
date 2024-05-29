@@ -20,9 +20,11 @@ export const statusToImageMap = {
   "order failed": "payment-failed.svg",
   "kyc docs under review": "kyc-under-review.svg",
   "kyc rejected": "kyc-rejected.svg",
-  "kyc appproved": "kyc-approved.svg",
+  "kyc approved": "kyc-approved.svg",
+  "kyc completed": "kyc-approved.svg",
   active: "active-subscription.svg",
   inactive: "inactive-subscription.svg",
+  stopped: "inactive-subscription.svg",
 };
 
 export const statusLabels = {
@@ -67,13 +69,15 @@ const CommonContainer = ({
           <div className={styles.left_part}>
             <img
               className="w-10 h-10"
-              alt={statusLabels[item.zoho_sub_status?.toLowerCase()]}
+              alt={statusLabels[item?.zoho_sub_status?.toLowerCase()]}
               src={
                 tab === 0
                   ? IconLink +
                     (statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
                       "payment-failed.svg")
-                  : IconLink + statusToImageMap[item?.status?.toLowerCase()]
+                  : IconLink +
+                    (statusToImageMap[item?.status?.toLowerCase()] ||
+                      "inactive-subscription.svg")
               }
               loading="lazy"
             />
@@ -84,9 +88,9 @@ const CommonContainer = ({
                     ? item.is_offline_user === "1"
                       ? "Amount Pending"
                       : "Order Failed"
-                    : statusLabels[item.zoho_sub_status.toLowerCase()] ||
+                    : statusLabels[item.zoho_sub_status?.toLowerCase()] ||
                       item.zoho_sub_status
-                  : item.status.toLowerCase()}
+                  : item.status?.toLowerCase()}
               </p>
               <p className={styles.date}>
                 {tab === 0 ? "Ordered placed" : "Subscription confirmed"} on{" "}
@@ -104,7 +108,7 @@ const CommonContainer = ({
                 ? `Order no: #${item.dealCodeNumber}`
                 : `Subscription no: #${item.dealCodeNumber}`}
             </p>
-            {item.status.toLowerCase() === "pending" ? (
+            {item?.status?.toLowerCase() === "pending" ? (
               <a
                 href={"https://wa.me/919205006188"}
                 target="_blank"
@@ -113,7 +117,7 @@ const CommonContainer = ({
                 <p className={styles.help_txt}>Chat with us</p>
               </a>
             ) : (
-              item.status.toLowerCase() !== "inactive" && (
+              item?.status?.toLowerCase() !== "inactive" && (
                 <p onClick={toggleServiceDrawer} className={styles.help_txt}>
                   Need Help?
                 </p>
@@ -138,7 +142,11 @@ const CommonContainer = ({
               router.push(
                 `view-purchase-offline/${offlineUserId}/${item.dealCodeNumber}`,
               );
-            } else getSingleOrderDetails(item.dealCodeNumber);
+            } else {
+              tab === 0
+                ? getSingleOrderDetails(item?.dealCodeNumber)
+                : getSingleOrderDetails(item?.recurringId);
+            }
           }}
           ref={containerRef}>
           <div className="flex items-center gap-3 xl:gap-4">
