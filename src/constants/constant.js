@@ -677,6 +677,124 @@ export const CreateRequest = CreateRequestPayload => {
     .catch(err => console.log(err?.message || "some error"));
 };
 
+export const CityWiseBannerWebsite = {
+  0: [],
+  45: [],
+  46: [],
+  47: [],
+  48: [
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp`,
+      alternate: "Appliance",
+    },
+  ],
+  49: [],
+  50: [],
+  51: [],
+  52: [
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp`,
+      alternate: "Appliance",
+    },
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp`,
+      alternate: "Citymax",
+    },
+    {
+      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+    },
+  ],
+};
+
+export const CityWiseBannerMobile = {
+  0: [],
+  45: [],
+  46: [],
+  47: [],
+  48: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
+      alternate: "Appliance",
+    },
+  ],
+  49: [],
+  50: [],
+  51: [],
+  52: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
+      alternate: "Appliance",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_2.webp`,
+      alternate: "Citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+    },
+  ],
+};
+
+export const CityWiseBannerTablet = {
+  0: [],
+  45: [],
+  46: [],
+  47: [],
+  48: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
+      alternate: "Appliance",
+    },
+  ],
+  49: [],
+  50: [],
+  51: [],
+  52: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
+      alternate: "Home Furniture",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
+      alternate: "Appliance",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_2.webp`,
+      alternate: "Citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+    },
+  ],
+};
+
+export const CityNameToId = {
+"Bangalore": 48,
+"Delhi": 52
+}
 export const MONTHLY_NOT_ALLOWED_PRODUCT = [
   "SPLITAC1.5TONMP001",
   "SPLITAC1TONMP001",
