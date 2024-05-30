@@ -155,11 +155,11 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
   );
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(style.child)) {
+  //     router.push(`/things/${item.id}/${item.seourl}`);
+  //   }
+  // };
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
@@ -182,8 +182,14 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                 return (
                   <div
                     key={index}
-                    onClick={e => {
-                      !reduxStateOfLoginPopup && handleCardClick(e, item);
+                    // onClick={e => {
+                    //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+                    // }}
+                    onClick={() => {
+                      if (!reduxStateOfLoginPopup) {
+                        router.push(`/things/${item.id}/${item.seourl}`);
+                        window.scrollTo({top: 0});
+                      }
                     }}>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${

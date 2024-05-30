@@ -8,7 +8,7 @@ import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
@@ -56,7 +56,7 @@ const CategoryCard = ({
       : desc.replace(/-/g, " ");
 
   const dispatch = useDispatch();
-  const router = useRouter();
+  // const router = useRouter();
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -154,11 +154,11 @@ const CategoryCard = ({
         .includes(productID),
     );
   }, []);
-  const handleProductClick = (e, productID, seourl) => {
-    if (!e.target.classList.contains(styles.child)) {
-      !reduxStateOfLoginPopup && router.push(`/things/${productID}/${seourl}`);
-    }
-  };
+  // const handleProductClick = (e, productID, seourl) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     !reduxStateOfLoginPopup && router.push(`/things/${productID}/${seourl}`);
+  //   }
+  // };
   const sliderRef = useRef(null);
   useEffect(() => {
     const slider = sliderRef.current;
@@ -218,7 +218,8 @@ const CategoryCard = ({
             setHoverCard(true);
           }}
           onMouseOut={() => setHoverCard(false)}
-          onClick={e => handleProductClick(e, productID, seourl)}>
+          // onClick={e => handleProductClick(e, productID, seourl)}
+        >
           <div className="relative">
             <img
               src={hoverCard ? hoverCardImage : cardImage}
