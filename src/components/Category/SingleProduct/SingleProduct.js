@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 import style from "./style.module.css";
 
 // import Card from "@/components/Common/HomePageCards";
@@ -37,7 +37,7 @@ const FrequentlyAskedQuestions = loadable(
 );
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
-  const router = useRouter();
+  // const router = useRouter();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const reduxStateOfLoginPopup = useSelector(
@@ -187,7 +187,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                     // }}
                     onClick={() => {
                       if (!reduxStateOfLoginPopup) {
-                        router.push(`/things/${item.id}/${item.seourl}`);
+                        // router.push(`/things/${item.id}/${item.seourl}`);
                         window.scrollTo({top: 0});
                       }
                     }}>
