@@ -30,7 +30,7 @@ const HeroBanner = () => {
         content_type: "homepageBanners",
       })
       .then(({items}) => {
-        console.log(items);
+        // console.log(items);
         const mobileBanners = items
           .filter(({metadata: {tags}}) => tags[0].sys.id === "mobile")
           .map(image => ({
@@ -58,7 +58,7 @@ const HeroBanner = () => {
         setHomepageDesktopBanners(desktopBanners);
       });
   }, []);
-  console.log(homepageDesktopBanners, "homepageDesktopBanners");
+  // console.log(homepageDesktopBanners, "homepageDesktopBanners");
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
