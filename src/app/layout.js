@@ -98,24 +98,33 @@ export default function RootLayout({children}) {
           dangerouslySetInnerHTML={{
             __html: `
             const userId = localStorage.getItem("_ga");
-            fetch("https://test.rentofurniture.com/ajxapi/getDecryptedUserId", {
-              method: "POST",
-              body: JSON.stringify({
-                userId: JSON.parse(userId)
-              }),
-              headers: {
+            if(!userId){
 
-              }
-            })
-            .then(res => res.json())
-            .then(res => {
+              fetch("https://test.rentofurniture.com/ajxapi/getDecryptedUserId", {
+                method: "POST",
+                body: JSON.stringify({
+                  userId: JSON.parse(userId)
+                }),
+                headers: {
+                  
+                }
+              })
+              .then(res => res.json())
+              .then(res => {
+                window.fcWidgetMessengerConfig = {
+                  meta: {
+                    cf_userid: res.data.userId,
+                  },
+                }
+              })
+              .catch(e => console.log('e',e))
+            }else{
               window.fcWidgetMessengerConfig = {
                 meta: {
-                  cf_userid: res.data.userId,
+                  cf_userid: "",
                 },
               }
-            })
-            .catch(e => console.log('e',e))
+            }
             `,
           }}></script>
         <script src="//in.fw-cdn.com/30445413/247408.js" chat="true"></script>
