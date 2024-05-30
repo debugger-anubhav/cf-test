@@ -13,6 +13,7 @@ import {showToastNotification} from "../Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 
 const Card = ({
   desc,
@@ -166,7 +167,7 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <a
+      <Link
         href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         className={styles.anchor_card}
         // onClick={() => {
@@ -265,7 +266,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };

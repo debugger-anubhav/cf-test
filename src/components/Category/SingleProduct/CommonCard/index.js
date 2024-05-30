@@ -14,6 +14,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -211,15 +212,19 @@ const CategoryCard = ({
           // addToWishlist();
         }}
       />
-      <a href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}>
+      <Link href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}>
         <div
           className={`${styles.card_wrapper} `}
           onMouseOver={() => {
             setHoverCard(true);
           }}
           onMouseOut={() => setHoverCard(false)}
-          // onClick={e => handleProductClick(e, productID, seourl)}
-        >
+          onClick={() => {
+            if (!reduxStateOfLoginPopup) {
+              // router.push(`/things/${item.id}/${item.seourl}`);
+              window.scrollTo({top: 0});
+            }
+          }}>
           <div className="relative">
             <img
               src={hoverCard ? hoverCardImage : cardImage}
@@ -336,7 +341,7 @@ const CategoryCard = ({
             </>
           )}
         </div>
-      </a>
+      </Link>
     </>
   );
 };

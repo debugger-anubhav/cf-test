@@ -40,9 +40,9 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   // const router = useRouter();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
 
   let categoryId;
   let subCategoryId;
@@ -182,15 +182,14 @@ const SingleProduct = ({pageNo, setPageNo}) => {
                 return (
                   <div
                     key={index}
-                    // onClick={e => {
-                    //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+
+                    // onClick={() => {
+                    //   if (!reduxStateOfLoginPopup) {
+                    //     // router.push(`/things/${item.id}/${item.seourl}`);
+                    //     window.scrollTo({top: 0});
+                    //   }
                     // }}
-                    onClick={() => {
-                      if (!reduxStateOfLoginPopup) {
-                        // router.push(`/things/${item.id}/${item.seourl}`);
-                        window.scrollTo({top: 0});
-                      }
-                    }}>
+                  >
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
