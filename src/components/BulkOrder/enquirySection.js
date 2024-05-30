@@ -219,7 +219,7 @@ const EnquirySection = () => {
                     <p className={formStyles.form_label}>
                       Total Quantity (Units)
                     </p>
-                    <div className={`${styles.row}`}>
+                    <div>
                       <div className="flex gap-2 items-center">
                         <div className={`${styles.formInputFirst}`}>
                           <DropDown
