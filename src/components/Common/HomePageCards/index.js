@@ -170,19 +170,12 @@ const Card = ({
       <Link
         href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         className={styles.anchor_card}
-        // onClick={() => {
-        //   if (!reduxStateOfLoginPopup) {
-        //     router.push(`/things/${productID}/${seourl}`);
-        //     window.scrollTo({top: 0});
-        //   }
-        // }}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"
         rel="noopener">
         <div
           onClick={() => {
             if (!reduxStateOfLoginPopup) {
-              // router.push(`/things/${productID}/${seourl}`);
               window.scrollTo({top: 0});
             }
           }}

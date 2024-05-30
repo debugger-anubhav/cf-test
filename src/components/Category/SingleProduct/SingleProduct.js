@@ -1,10 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import InfiniteScroll from "react-infinite-scroll-component";
-// import {useRouter} from "next/navigation";
 import style from "./style.module.css";
-
-// import Card from "@/components/Common/HomePageCards";
 
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
@@ -37,13 +34,8 @@ const FrequentlyAskedQuestions = loadable(
 );
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
-  // const router = useRouter();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  // const reduxStateOfLoginPopup = useSelector(
-  //   state => state.homePagedata.loginPopupState,
-  // );
-
   let categoryId;
   let subCategoryId;
   let cityIdStr;
@@ -155,11 +147,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
   );
 
-  // const handleCardClick = (e, item) => {
-  //   if (!e.target.classList.contains(style.child)) {
-  //     router.push(`/things/${item.id}/${item.seourl}`);
-  //   }
-  // };
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
@@ -180,16 +167,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-
-                    // onClick={() => {
-                    //   if (!reduxStateOfLoginPopup) {
-                    //     // router.push(`/things/${item.id}/${item.seourl}`);
-                    //     window.scrollTo({top: 0});
-                    //   }
-                    // }}
-                  >
+                  <div key={index}>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
