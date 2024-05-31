@@ -137,7 +137,7 @@ export default async function Page(params) {
         ) : (
           <meta name="Title" content={metaData?.data?.cat_meta_title} />
         )}
-        <div>
+        <div class="large_layout">
           <CatAnnouncement />
           <CatHeader />
           <CatMenu />
