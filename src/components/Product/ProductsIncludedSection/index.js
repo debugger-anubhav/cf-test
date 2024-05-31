@@ -42,7 +42,13 @@ const ItemsIncluded = () => {
                   alt={item.product_name}
                 />
               )}
-              <div className={styles.quantity_label}>1x</div>
+              {pageDetails?.subproduct_quantity !== "" ? (
+                <div className={styles.quantity_label}>
+                  {pageDetails.subproductquantity[item.id]}x
+                </div>
+              ) : (
+                <div className={styles.quantity_label}>1x</div>
+              )}
             </div>
           ))}
         </div>
