@@ -344,7 +344,7 @@ const Header = ({page}) => {
                     loader={({src}) => src}
                     src={Icons.Search}
                     alt="search-icon"
-                    className={`${styles.header_search_icon} pointer-events-none`}
+                    className={`pointer-events-none`}
                     loading="lazy"
                   />
                 </div>
