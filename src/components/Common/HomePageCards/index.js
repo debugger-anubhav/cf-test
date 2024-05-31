@@ -6,7 +6,6 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-// import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
@@ -152,13 +151,6 @@ const Card = ({
     );
     updateCount.current += 1;
   }, []);
-
-  // const handleProductClick = (e, productID, seourl) => {
-  //   e.stopPropagation();
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     router.push(`/things/${productID}/${seourl}`);
-  //   }
-  // };
 
   return (
     <>
