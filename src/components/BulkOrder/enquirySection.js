@@ -1,4 +1,4 @@
-import React, {useRef, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import styles from "./style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
@@ -104,6 +104,18 @@ const EnquirySection = () => {
       setDisableSubmit(false);
     }
   };
+  const divRef = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (divRef.current && !divRef.current.contains(event.target)) {
+        setPerAddModal(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [divRef, perAddModal]);
 
   return (
     <>
@@ -221,7 +233,9 @@ const EnquirySection = () => {
                     </p>
                     <div>
                       <div className="flex gap-2 items-center">
-                        <div className={`${styles.formInputFirst}`}>
+                        <div
+                          className={`${styles.formInputFirst} cursor-pointer`}
+                          ref={divRef}>
                           <DropDown
                             options={quantityOptions}
                             setIsDDOpen={setPerAddModal}
