@@ -12,7 +12,11 @@ import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import {
+  getProductDetails,
+  reduxSetModalState,
+  setLoginPopupState,
+} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import Link from "next/link";
 const CategoryCard = ({
@@ -221,6 +225,7 @@ const CategoryCard = ({
           onMouseOut={() => setHoverCard(false)}
           onClick={() => {
             if (!reduxStateOfLoginPopup) {
+              dispatch(getProductDetails([]));
               window.scrollTo({top: 0});
             }
           }}>
