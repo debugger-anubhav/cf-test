@@ -13,9 +13,9 @@ import {baseInstance} from "@/network/axios";
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
 
   const [paramsCityId, setParamsCityId] = React.useState(46);
   const [data, setData] = React.useState(null);
@@ -120,12 +120,12 @@ const TrendingProducts = ({params}) => {
     };
   }, []);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     const url = `/things/${item.id}/${item.seourl}`;
+  //     window.open(url, "_blank");
+  //   }
+  // };
   return (
     <>
       {homePageReduxData?.trendindProduct ? (
@@ -139,9 +139,10 @@ const TrendingProducts = ({params}) => {
                 className={`${styles.child ?? ""} ${
                   index === data?.length - 1 && "mr-[16px]"
                 } ${isDumy && "pointer-events-none"}`}
-                onClick={e => {
-                  !reduxStateOfLoginPopup && handleCardClick(e, item);
-                }}>
+                // onClick={e => {
+                //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+                // }}
+              >
                 <Card
                   hoverCardImage={
                     productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]

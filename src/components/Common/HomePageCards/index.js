@@ -16,6 +16,7 @@ import {
   setLoginPopupState,
 } from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 
 const Card = ({
   desc,
@@ -162,14 +163,11 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <a
-        href={
-          !reduxStateOfLoginPopup &&
-          window.open(`/things/${productID}/${seourl}`, "_blank")
-        }
+      <Link
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
-        target="_self"
+        target="_blank"
         rel="noopener">
         <div
           onClick={() => {
@@ -258,7 +256,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };

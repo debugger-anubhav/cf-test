@@ -41,9 +41,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   let categoryId;
   let subCategoryId;
   let cityIdStr;
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
 
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
@@ -152,13 +149,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
   );
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
-
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
@@ -179,11 +169,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
                 return (
-                  <div
-                    key={index}
-                    onClick={e => {
-                      !reduxStateOfLoginPopup && handleCardClick(e, item);
-                    }}>
+                  <div key={index}>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]
