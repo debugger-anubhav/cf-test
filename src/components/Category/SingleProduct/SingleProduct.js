@@ -10,8 +10,6 @@ import {
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
-import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
 
 import CategoryCard from "./CommonCard";
 import CategoryContent from "../categoryContent/categoryContent";
@@ -20,14 +18,10 @@ import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
-import InfiniteScroll from "react-infinite-scroll-component";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
-import {endPoints} from "@/network/endPoints";
 import loadable from "@loadable/component";
-import style from "./style.module.css";
-import {useMutation} from "@/hooks/useMutation";
 
 // import Card from "@/components/Common/HomePageCards";
 
@@ -47,6 +41,9 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   let categoryId;
   let subCategoryId;
   let cityIdStr;
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
 
   if (typeof window !== "undefined") {
     categoryId = getLocalStorage("categoryId");
@@ -155,7 +152,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
   );
 
-
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
       const url = `/things/${item.id}/${item.seourl}`;
@@ -183,10 +179,11 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
                 return (
-                  <div key={index}
+                  <div
+                    key={index}
                     onClick={e => {
                       !reduxStateOfLoginPopup && handleCardClick(e, item);
-                    }>
+                    }}>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]

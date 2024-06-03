@@ -16,7 +16,6 @@ import {
   setLoginPopupState,
 } from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
-import Link from "next/link";
 
 const Card = ({
   desc,
@@ -41,6 +40,9 @@ const Card = ({
   const [loginModal, setLoginModal] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const updateCount = useRef(0);
+  const reduxStateOfLoginPopup = useSelector(
+    state => state.homePagedata.loginPopupState,
+  );
 
   const dispatch = useDispatch();
 
@@ -161,7 +163,10 @@ const Card = ({
         }}
       />
       <a
-        href={!reduxStateOfLoginPopup && window.open(url, "_blank")}>
+        href={
+          !reduxStateOfLoginPopup &&
+          window.open(`/things/${productID}/${seourl}`, "_blank")
+        }
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"

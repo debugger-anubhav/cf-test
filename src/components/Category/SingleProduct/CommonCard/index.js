@@ -11,13 +11,8 @@ import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {
-  getProductDetails,
-  reduxSetModalState,
-  setLoginPopupState,
-} from "@/store/Slices";
+import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
-import Link from "next/link";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
