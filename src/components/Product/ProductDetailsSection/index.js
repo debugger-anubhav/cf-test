@@ -492,7 +492,7 @@ const ProductDetails = ({params}) => {
   useEffect(() => {
     setTimeout(() => {
       setLoader(false);
-    }, 1500);
+    }, 1000);
   }, []);
   return (
     <div className={styles.main_container}>
