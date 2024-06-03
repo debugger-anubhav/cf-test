@@ -14,6 +14,7 @@ const EmptyCartPage = () => {
           src={`${categoryIconsUrl + "empty-cart.svg"}`}
           loading="lazy"
           alt="empty-cart"
+          onClick={() => router.push("/")}
         />
       </div>
       <p className={styles.head}>Your cart is empty!</p>

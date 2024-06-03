@@ -197,6 +197,8 @@ const ProductDetails = ({params}) => {
 
   useEffect(() => {
     getDurationRent();
+  }, []);
+  useEffect(() => {
     GetProductDetails();
   }, []);
 
@@ -440,6 +442,7 @@ const ProductDetails = ({params}) => {
     };
   }, []);
 
+  const [loader, setLoader] = useState(true);
   const [isScrolling, setIsScrolling] = useState(false);
   const [isScrollingForThumnail, setIsScrollingForThumnail] = useState(false);
   const [startX, setStartX] = useState(null);
@@ -486,6 +489,11 @@ const ProductDetails = ({params}) => {
   const handleMouseUpForThumbnail = () => {
     setIsScrollingForThumnail(false);
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 500);
+  }, []);
   return (
     <div className={styles.main_container}>
       <ShareModal
@@ -598,38 +606,54 @@ const ProductDetails = ({params}) => {
             ))}
           </Carousel>
 
-          <div
-            className={styles.thumbnail_container}
-            ref={scrollContainerRefForThumbnail}
-            // onMouseOver={()=>{
-            //   handleScrolling()
-            // }}
-            onMouseDown={handleMouseDownForThumnail}
-            onMouseMove={handleMouseMoveThumbnail}
-            onMouseUp={handleMouseUpForThumbnail}
-            onMouseLeave={handleMouseUpForThumbnail}>
-            {prodDetails?.[0]?.image?.split(",")?.map((image, index) => (
-              <>
-                {image && (
-                  <div
-                    className={`${styles.thumbnail_img} ${
-                      index === selectedIndex
-                        ? "border-[#5F789D]"
-                        : "border-fff"
-                    }`}
-                    key={index}
-                    onClick={() => handleThumbnailClick(index)}>
-                    <img
-                      src={`${productPageImagesBaseUrl + "thumb/" + image}`}
-                      alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
-                      className="w-full h-full"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </>
-            ))}
-          </div>
+          {loader ? (
+            <div className={styles.thumbnail_container}>
+              {[1, 2, 3, 4]?.map(i => {
+                return (
+                  <Skeleton
+                    key={i.toString()}
+                    variant="rectangular"
+                    width={48}
+                    height={100}
+                    className={styles.thumbnail_img}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div
+              className={styles.thumbnail_container}
+              ref={scrollContainerRefForThumbnail}
+              // onMouseOver={()=>{
+              //   handleScrolling()
+              // }}
+              onMouseDown={handleMouseDownForThumnail}
+              onMouseMove={handleMouseMoveThumbnail}
+              onMouseUp={handleMouseUpForThumbnail}
+              onMouseLeave={handleMouseUpForThumbnail}>
+              {prodDetails?.[0]?.image?.split(",")?.map((image, index) => (
+                <>
+                  {image && (
+                    <div
+                      className={`${styles.thumbnail_img} ${
+                        index === selectedIndex
+                          ? "border-[#5F789D]"
+                          : "border-fff"
+                      }`}
+                      key={index}
+                      onClick={() => handleThumbnailClick(index)}>
+                      <img
+                        src={`${productPageImagesBaseUrl + "thumb/" + image}`}
+                        alt={prodDetails?.[0]?.product_name.replace(/-/g, " ")}
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
+          )}
           <div
             className={`${styles.services_cards_container} ${styles.web}`}
             ref={scrollContainerRef}

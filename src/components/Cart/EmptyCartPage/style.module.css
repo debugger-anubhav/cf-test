@@ -2,7 +2,7 @@
   @apply flex flex-col items-center mx-4 pb-4 xl:py-14;
 }
 .img {
-  @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px];
+  @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px] cursor-pointer;
 }
 .head {
   @apply mt-2 xl:mt-8 text-45454A text-20 xl:text-32 font-Poppins font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;

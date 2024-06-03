@@ -344,7 +344,7 @@ const Header = ({page}) => {
                     loader={({src}) => src}
                     src={Icons.Search}
                     alt="search-icon"
-                    className={`${styles.header_search_icon} pointer-events-none`}
+                    className={`pointer-events-none`}
                     loading="lazy"
                   />
                 </div>
@@ -488,7 +488,7 @@ const Header = ({page}) => {
               loader={({src}) => src}
               src={Icons.Search}
               alt="search-icon"
-              className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
+              className={`ml-2 pointer-events-none`}
               loading="lazy"
             />
           </div>
@@ -654,7 +654,7 @@ const SearchModal = ({
             loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
-            className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
+            className={`ml-2 pointer-events-none`}
             loading="lazy"
           />
         </div>
@@ -665,7 +665,7 @@ const SearchModal = ({
             loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
-            className={`${styles.header_search_icon} pointer-events-none`}
+            className={`pointer-events-none`}
             loading="lazy"
           />
           <input
