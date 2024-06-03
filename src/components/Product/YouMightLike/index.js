@@ -7,11 +7,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {addYouMightLike} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {baseInstance} from "@/network/axios";
 
 const YouMightLike = ({heading, isbg, params}) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
   const reduxStateOfLoginPopup = useSelector(
@@ -77,7 +75,8 @@ const YouMightLike = ({heading, isbg, params}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
   if (pageData?.youMightLike?.length > 0) {

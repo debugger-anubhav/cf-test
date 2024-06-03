@@ -6,7 +6,6 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-// import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
@@ -35,9 +34,6 @@ const Card = ({
   const [hoverCard, setHoverCard] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
@@ -166,7 +162,7 @@ const Card = ({
         }}
       />
       <a
-        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+        // href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         // onClick={e => e.preventDefault()}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}

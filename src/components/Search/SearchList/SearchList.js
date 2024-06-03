@@ -14,7 +14,6 @@ import {endPoints} from "@/network/endPoints";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {baseInstance} from "@/network/axios";
 import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
-import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
@@ -30,7 +29,6 @@ const SearchList = () => {
   const {checkAuthentication} = useAuthentication();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage] = useState(1);
-  const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
   const reduxStateOfLoginPopup = useSelector(
@@ -132,7 +130,10 @@ const SearchList = () => {
   };
 
   const handleCardClick = (e, item) => {
-    !reduxStateOfLoginPopup && router.push(`/things/${item.id}/${item.seourl}`);
+    if (!reduxStateOfLoginPopup) {
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
+    }
   };
 
   return (

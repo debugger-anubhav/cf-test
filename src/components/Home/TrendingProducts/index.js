@@ -8,12 +8,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {baseInstance} from "@/network/axios";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
@@ -124,7 +122,8 @@ const TrendingProducts = ({params}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
   return (

@@ -6,10 +6,8 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCategoryTrendingProduct} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 
 const TrendingItem = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isDumy, setIsDumy] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
@@ -38,7 +36,8 @@ const TrendingItem = () => {
   }, []);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
 

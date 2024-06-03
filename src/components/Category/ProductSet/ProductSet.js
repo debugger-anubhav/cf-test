@@ -10,12 +10,11 @@ import {
   addSetProductAll,
   addSubCategoryMetaSubProduct,
 } from "@/store/Slices/categorySlice";
-import {useParams, useRouter} from "next/navigation";
+import {useParams} from "next/navigation";
 import {SoldOutProduct} from "../SoldOutProduct/SoldOutProduct";
 import CategoryCard from "../SingleProduct/CommonCard";
 
 export const ProductSet = () => {
-  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
@@ -120,7 +119,8 @@ export const ProductSet = () => {
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
   const data = categoryPageReduxData?.isAllProduct

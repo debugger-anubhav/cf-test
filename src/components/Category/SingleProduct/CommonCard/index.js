@@ -8,7 +8,6 @@ import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {RiSparklingFill} from "react-icons/ri";
 import {useQuery} from "@/hooks/useQuery";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
@@ -56,7 +55,6 @@ const CategoryCard = ({
       : desc.replace(/-/g, " ");
 
   const dispatch = useDispatch();
-  const router = useRouter();
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
@@ -156,7 +154,10 @@ const CategoryCard = ({
   }, []);
   const handleProductClick = (e, productID, seourl) => {
     if (!e.target.classList.contains(styles.child)) {
-      !reduxStateOfLoginPopup && router.push(`/things/${productID}/${seourl}`);
+      if (!reduxStateOfLoginPopup) {
+        const url = `/things/${productID}/${seourl}`;
+        window.open(url, "_blank");
+      }
     }
   };
   const sliderRef = useRef(null);
@@ -211,7 +212,7 @@ const CategoryCard = ({
           // addToWishlist();
         }}
       />
-      <a href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}>
+      <a>
         <div
           className={`${styles.card_wrapper} `}
           onMouseOver={() => {

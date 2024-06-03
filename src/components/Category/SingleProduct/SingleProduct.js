@@ -1,30 +1,29 @@
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import InfiniteScroll from "react-infinite-scroll-component";
-import {useRouter} from "next/navigation";
-import style from "./style.module.css";
-
-// import Card from "@/components/Common/HomePageCards";
-
-import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {endPoints} from "@/network/endPoints";
-import {useMutation} from "@/hooks/useMutation";
 import {
   addSingleAllProduct,
   addSingleProduct,
   addSubCategoryMetaData,
 } from "@/store/Slices/categorySlice";
-import loadable from "@loadable/component";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+
 import CategoryCard from "./CommonCard";
+import CategoryContent from "../categoryContent/categoryContent";
+import CustomerRating from "@/components/Home/Rating";
+import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
+import {FooterSkeleton} from "@/components/Common/Footer";
+import HappySubscribers from "@/components/Home/HappySubscribers";
+import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import InfiniteScroll from "react-infinite-scroll-component";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
-import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
-import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
-import HappySubscribers from "@/components/Home/HappySubscribers";
-import CustomerRating from "@/components/Home/Rating";
-import CategoryContent from "../categoryContent/categoryContent";
-import {FooterSkeleton} from "@/components/Common/Footer";
+import {endPoints} from "@/network/endPoints";
+import loadable from "@loadable/component";
+import style from "./style.module.css";
+import {useMutation} from "@/hooks/useMutation";
+
+// import Card from "@/components/Common/HomePageCards";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -37,7 +36,6 @@ const FrequentlyAskedQuestions = loadable(
 );
 const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
-  const router = useRouter();
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const reduxStateOfLoginPopup = useSelector(
@@ -157,7 +155,8 @@ const SingleProduct = ({pageNo, setPageNo}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
   const singleItemData = categoryPageReduxData?.isAllProduct

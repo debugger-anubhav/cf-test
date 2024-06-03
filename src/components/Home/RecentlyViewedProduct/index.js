@@ -8,13 +8,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const RecentlyViewedProduct = ({page}) => {
   const {checkAuthentication} = useAuthentication();
-  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const reduxStateOfLoginPopup = useSelector(
@@ -106,7 +104,8 @@ const RecentlyViewedProduct = ({page}) => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.product_id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
 
