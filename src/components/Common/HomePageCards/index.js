@@ -40,9 +40,6 @@ const Card = ({
   const [hoverCard, setHoverCard] = useState(false);
   const [loginModal, setLoginModal] = useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
@@ -163,8 +160,8 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <Link
-        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+      <a
+        href={!reduxStateOfLoginPopup && window.open(url, "_blank")}>
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"
@@ -256,7 +253,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </Link>
+      </a>
     </>
   );
 };

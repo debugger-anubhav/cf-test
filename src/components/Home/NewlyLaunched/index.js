@@ -6,10 +6,8 @@ import {addNewlaunchedProducts} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {Skeleton} from "@mui/material";
-import {useRouter} from "next/navigation";
 import {productImageBaseUrl} from "@/constants/constant";
 const NewlyLaunched = () => {
-  const router = useRouter();
   const heading = strings.landing_page.Newlylaunced.heading;
   const subHeading = strings.landing_page.Newlylaunced.productRent;
 
@@ -70,13 +68,16 @@ const NewlyLaunched = () => {
             key={index.toString()}>
             <div
               className="w-full h-auto cursor-pointer "
-              onClick={() => router.push(`/things/${ele.id}/${ele.seourl}`)}>
+              onClick={() => {
+                const url = `/things/${ele.id}/${ele.seourl}`;
+                window.open(url, "_blank");
+              }}>
               <a
                 // onClick={e => e.preventDefault()}
-                href={`/things/${ele.id}/${ele.seourl}`}
+                // href={`/things/${ele.id}/${ele.seourl}`}
                 aria-label={ele?.product_name}
-                target="_self"
-                rel="noopener">
+                target="_blank"
+                rel="noopener noreferrer">
                 <img
                   src={
                     // "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +

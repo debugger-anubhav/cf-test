@@ -1,20 +1,19 @@
 import React, {useEffect, useRef} from "react";
-import styles from "./style.module.css";
-import {useDispatch, useSelector} from "react-redux";
-import Card from "@/components/Common/HomePageCards";
-import {endPoints} from "@/network/endPoints";
 // import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-import {useAuthentication} from "@/hooks/checkAuthentication";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {useDispatch, useSelector} from "react-redux";
+
+import Card from "@/components/Common/HomePageCards";
 import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import styles from "./style.module.css";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const SavedItem = () => {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
-  const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const loginStateFromRedux = useSelector(state => state.homePagedata.isLogin);
   const reduxStateOfLoginPopup = useSelector(
@@ -24,11 +23,11 @@ const SavedItem = () => {
   const [isLogin, setIsLogin] = React.useState(loginStateFromRedux);
   const sliderRef = useRef(null);
 
-  const cityIdStr = localStorage
-    .getItem("cityId")
-    ?.toString()
-    ?.replace(/"/g, "");
-  const cityId = parseFloat(cityIdStr);
+  // const cityIdStr = localStorage
+  //   .getItem("cityId")
+  //   ?.toString()
+  //   ?.replace(/"/g, "");
+  // const cityId = parseFloat(cityIdStr);
 
   // const {refetch: getSavedItems} = useQuery(
   //   "saved-items",
@@ -45,7 +44,7 @@ const SavedItem = () => {
     baseInstance
       .get(
         endPoints.savedItems +
-          `?cityId=${cityId}&userId=${
+          `?cityId={cityId}&userId=${
             isAuthenticated
               ? decrypt(getLocalStorage("_ga"))
               : decryptBase64(getLocalStorage("tempUserID"))
@@ -74,7 +73,8 @@ const SavedItem = () => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
 

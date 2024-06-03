@@ -9,10 +9,8 @@ import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 
 const PreDesignCombos = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const reduxStateOfLoginPopup = useSelector(
@@ -38,7 +36,8 @@ const PreDesignCombos = () => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
 

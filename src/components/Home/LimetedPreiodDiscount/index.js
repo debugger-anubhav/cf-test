@@ -7,12 +7,10 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
-import {useRouter} from "next/navigation";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
-  const router = useRouter();
   const cityId = getLocalStorage("cityId");
 
   const dispatch = useDispatch();
@@ -81,7 +79,8 @@ const LimetedPreiodDiscount = () => {
 
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
+      const url = `/things/${item.id}/${item.seourl}`;
+      window.open(url, "_blank");
     }
   };
   return getLimitedPreiodData ? (
