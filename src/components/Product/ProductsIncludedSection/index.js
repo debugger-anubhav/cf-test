@@ -25,26 +25,36 @@ const ItemsIncluded = () => {
           {pageDetails?.subProduct?.length} product included
         </h2>
         <div className={styles.images_wrappper}>
-          {pageDetails?.subProduct?.map((item, index) => (
-            <div
-              onClick={() => setSelectedItem(index)}
-              className={`border-[4px] p-1 relative ${
-                selectedItem === index ? "border-[#5F789D]" : "border-fff"
-              }`}
-              key={index}>
-              {loader ? (
-                <Skeleton variant="rectangular" height={100} width={100} />
-              ) : (
-                <img
-                  src={`${productPageImagesBaseUrl + item.image.split(",")[0]}`}
-                  className={styles.img}
-                  loading="lazy"
-                  alt={item.product_name}
-                />
-              )}
-              <div className={styles.quantity_label}>1x</div>
-            </div>
-          ))}
+          {loader ? (
+            <Skeleton variant="rectangular" height={100} width={100} />
+          ) : (
+            <>
+              {pageDetails?.subProduct?.map((item, index) => (
+                <div
+                  onClick={() => setSelectedItem(index)}
+                  className={`border-[4px] p-1 relative ${
+                    selectedItem === index ? "border-[#5F789D]" : "border-fff"
+                  }`}
+                  key={index}>
+                  <img
+                    src={`${
+                      productPageImagesBaseUrl + item.image.split(",")[0]
+                    }`}
+                    className={styles.img}
+                    loading="lazy"
+                    alt={item.product_name}
+                  />
+                  {pageDetails?.subproduct_quantity !== "" ? (
+                    <div className={styles.quantity_label}>
+                      {pageDetails.subproductquantity[item.id]}x
+                    </div>
+                  ) : (
+                    <div className={styles.quantity_label}>1x</div>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
         </div>
         <div>
           {pageDetails?.subProduct?.map((item, index) => (

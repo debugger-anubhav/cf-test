@@ -1,4 +1,10 @@
 import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import InfiniteScroll from "react-infinite-scroll-component";
+import style from "./style.module.css";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {endPoints} from "@/network/endPoints";
+import {useMutation} from "@/hooks/useMutation";
 import {
   addSingleAllProduct,
   addSingleProduct,
@@ -38,10 +44,6 @@ const SingleProduct = ({pageNo, setPageNo}) => {
   const [totalPage, setTotalPage] = useState(1);
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
-
   let categoryId;
   let subCategoryId;
   let cityIdStr;
@@ -153,12 +155,14 @@ const SingleProduct = ({pageNo, setPageNo}) => {
     subCategoryId,
   );
 
+
   const handleCardClick = (e, item) => {
     if (!e.target.classList.contains(style.child)) {
       const url = `/things/${item.id}/${item.seourl}`;
       window.open(url, "_blank");
     }
   };
+
   const singleItemData = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.singleProductAll
     : categoryPageReduxData?.singleProduct;
@@ -179,11 +183,10 @@ const SingleProduct = ({pageNo, setPageNo}) => {
             <div className={style.main_container}>
               {singleItemData?.map((item, index) => {
                 return (
-                  <div
-                    key={index}
+                  <div key={index}
                     onClick={e => {
                       !reduxStateOfLoginPopup && handleCardClick(e, item);
-                    }}>
+                    }>
                     <CategoryCard
                       cardImage={`${productImageBaseUrl}${
                         item?.image?.split(",")[0]

@@ -10,8 +10,13 @@ import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import {
+  getProductDetails,
+  reduxSetModalState,
+  setLoginPopupState,
+} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 
 const Card = ({
   desc,
@@ -29,6 +34,7 @@ const Card = ({
   seourl,
   isSavedComp = false,
 }) => {
+  // const router = useRouter();
   const {checkAuthentication} = useAuthentication();
   const [inWishList, setInWishList] = useState(isSavedComp || false);
   const [hoverCard, setHoverCard] = useState(false);
@@ -143,13 +149,6 @@ const Card = ({
     updateCount.current += 1;
   }, []);
 
-  // const handleProductClick = (e, productID, seourl) => {
-  //   e.stopPropagation();
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     router.push(`/things/${productID}/${seourl}`);
-  //   }
-  // };
-
   return (
     <>
       <LoginModal
@@ -162,16 +161,18 @@ const Card = ({
         }}
       />
       <a
-        // href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
-        // onClick={e => e.preventDefault()}
+        href={!reduxStateOfLoginPopup && window.open(url, "_blank")}>
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"
         rel="noopener">
         <div
-          // onClick={e => {
-          //   !reduxStateOfLoginPopup && handleProductClick(e, productID, seourl);
-          // }}
+          onClick={() => {
+            if (!reduxStateOfLoginPopup) {
+              dispatch(getProductDetails([]));
+              window.scrollTo({top: 0});
+            }
+          }}
           className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
             productWidth ?? ""
           } 
