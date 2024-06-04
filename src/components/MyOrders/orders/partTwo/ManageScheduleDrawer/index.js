@@ -88,7 +88,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred date:</p>
         <div className={styles.map_wrapper}>
-          {slotData?.data?.data?.map((item, index) => (
+          {slotData?.data?.data?.response?.map((item, index) => (
             <div
               key={index}
               className={styles.map_item_wrapper}
