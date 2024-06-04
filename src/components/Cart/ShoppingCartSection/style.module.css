@@ -38,7 +38,7 @@
   @apply flex py-1 px-2 items-center gap-2 xl:gap-4 rounded-lg border border-DDDDDF text-71717A font-medium text-14;
 }
 .span_item {
-  @apply text-18 font-normal hover:bg-[#F2FAFF] hover:text-[#5774AC] rounded-lg w-[13px] h-6 flex justify-center items-center;
+  @apply text-18 font-normal hover:bg-[#F2FAFF] hover:text-[#5774AC] rounded-lg w-6 h-6 flex justify-center items-center;
 }
 .currentPrice {
   @apply text-222 font-medium text-16 xl:text-20 tracking-0.3 xl:tracking-0.4;
