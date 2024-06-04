@@ -169,9 +169,9 @@ const LoginModal = ({
             setEmailArr(response?.data?.data?.data);
             setModalCategory("multipleEmails");
           }
-          setTimeout(() => {
-            window.open("/", "_self");
-          }, 2000);
+          // setTimeout(() => {
+          //   window.open("/", "_self");
+          // }, 2000);
         }
       })
       .catch(err => {
