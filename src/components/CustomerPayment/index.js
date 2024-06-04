@@ -52,14 +52,14 @@ function CustomerPayment() {
   const emailParam = urlParams.get("email");
   const nameParam = urlParams.get("name");
   const tempAmountParam = urlParams.get("amount");
-  const amountParam = parseInt(tempAmountParam);
+  let amountParam = 0;
   const queryParam = urlParams.get("q");
   // console.log(urlParams, queryParam, "urllparam");
-  // if (tempAmountParam?.includes("Rs.")) {
-  //   amountParam = parseInt(tempAmountParam?.split(".")[1].split(",").join(""));
-  // } else {
-  //   amountParam = parseInt(tempAmountParam);
-  // }
+  if (tempAmountParam?.includes("Rs.")) {
+    amountParam = parseInt(tempAmountParam?.split(".")[1].split(",").join(""));
+  } else {
+    amountParam = parseInt(tempAmountParam);
+  }
 
   const invoiceNumberParam = urlParams.get("invoice_number");
   const [useCityfurnishCoins, setUseCityfurnishCoins] = useState(
