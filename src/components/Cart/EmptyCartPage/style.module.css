@@ -13,3 +13,9 @@
 .btn {
   @apply font-Poppins mt-10 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
+.cart_img_wrapper {
+  @apply md:w-[440px] w-full flex items-center justify-center cursor-pointer;
+}
+.empty_text_wrapper {
+  @apply flex justify-center items-center flex-col cursor-pointer;
+}
