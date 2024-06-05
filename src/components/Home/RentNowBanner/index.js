@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {useQuery} from "@/hooks/useQuery";
 import {endPoints} from "@/network/endPoints";
@@ -96,9 +96,9 @@ const RentNowBanner = ({params}) => {
       <div className={styles.banner_card} ref={sliderRef}>
         {rentNowBanner?.map((item, index) => (
           <div
-            className={`${styles.banner_wrapper} ${
-              index === rentNowBanner?.length - 1 && "mr-[16px]"
-            } ${isDumy && "pointer-events-none"}`}
+            className={`${
+              index === rentNowBanner?.length - 1 ? "mr-[16px]" : ""
+            } ${isDumy ? "pointer-events-none" : ""}`.trim()}
             key={index.toString()}>
             <RentNowCard
               cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
@@ -111,9 +111,9 @@ const RentNowBanner = ({params}) => {
     </div>
   );
 };
-export default RentNowBanner;
+export default memo(RentNowBanner);
 
-export const RentNowBannersSkeleton = () => {
+export const RentNowBannersSkeleton = memo(() => {
   return (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={`${styles.banner_card_skeleton} `}>
@@ -132,4 +132,4 @@ export const RentNowBannersSkeleton = () => {
       </div>
     </div>
   );
-};
+});

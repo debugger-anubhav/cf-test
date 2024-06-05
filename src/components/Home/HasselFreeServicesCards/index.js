@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import style from "./style.module.css";
 import {HasselFreeData} from "@/constants/constant";
 import Image from "next/image";
@@ -15,8 +15,10 @@ const HasselFreeServicesCards = () => {
               <div key={index.toString()}>
                 <div
                   className={`${style.card_wrapper}  ${
-                    index === HasselFreeData?.length - 1 && "mr-[16px] lg:mr-0"
-                  }`}
+                    index === HasselFreeData?.length - 1
+                      ? "mr-[16px] lg:mr-0"
+                      : ""
+                  }`.trim()}
                   // style={{
                   //   backgroundImage: `url("${data.backgroungImage}")`,
                   //   backgroundRepeat: "no-repeat",
@@ -73,4 +75,4 @@ const HasselFreeServicesCards = () => {
   );
 };
 
-export default HasselFreeServicesCards;
+export default memo(HasselFreeServicesCards);

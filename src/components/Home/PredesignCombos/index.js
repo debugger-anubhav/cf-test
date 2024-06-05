@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 // import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
@@ -92,9 +92,10 @@ const PreDesignCombos = () => {
               <div
                 key={index.toString()}
                 className={`${styles.child ?? ""}  ${
-                  index === homePageReduxData?.designComboProduct?.length - 1 &&
-                  "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}
+                  index === homePageReduxData?.designComboProduct?.length - 1
+                    ? "mr-[16px]"
+                    : ""
+                } ${isDumy ? "pointer-events-none" : ""}`.trim()}
                 onClick={e => {
                   !reduxStateOfLoginPopup && handleCardClick(e, item);
                 }}>
@@ -131,4 +132,4 @@ const PreDesignCombos = () => {
   );
 };
 
-export default PreDesignCombos;
+export default memo(PreDesignCombos);

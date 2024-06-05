@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {CopyIcon} from "@/assets/icon";
@@ -91,9 +91,9 @@ const OffersAndCoupons = ({page}) => {
   return homePageData?.offerCoupons ? (
     <div className={styles.wrapper}>
       <h2
-        className={`${page === "product" && "xl:!text-24 xl:!tracking-0.48"} ${
-          styles.heading
-        }`}>
+        className={`${
+          page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
+        } ${styles.heading}`.trim()}>
         {str.heading}
       </h2>
       <div className={styles.cards_wrapper} ref={sliderRef}>
@@ -147,9 +147,9 @@ const OffersAndCoupons = ({page}) => {
     </div>
   ) : null;
 };
-export default OffersAndCoupons;
+export default memo(OffersAndCoupons);
 
-export const OffersSkeleton = () => {
+export const OffersSkeleton = memo(() => {
   return (
     <div className={`${styles.skeleton_wrapper}`}>
       <div className="w-[180px]">
@@ -177,4 +177,4 @@ export const OffersSkeleton = () => {
       </div>
     </div>
   );
-};
+});

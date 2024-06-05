@@ -2,7 +2,7 @@
 
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
@@ -95,8 +95,8 @@ const LimetedPreiodDiscount = () => {
               !reduxStateOfLoginPopup && handleCardClick(e, item);
             }}
             className={`${styles.child ?? ""}  ${
-              index === getLimitedPreiodData?.length - 1 && "mr-[16px]"
-            } ${isDumy && "pointer-events-none"}`}>
+              index === getLimitedPreiodData?.length - 1 ? "mr-[16px]" : ""
+            } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
             <Card
               desc={item.product_name}
               cardImage={
@@ -122,4 +122,4 @@ const LimetedPreiodDiscount = () => {
   ) : null;
 };
 
-export default LimetedPreiodDiscount;
+export default memo(LimetedPreiodDiscount);

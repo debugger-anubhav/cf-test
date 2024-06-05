@@ -1,64 +1,23 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {memo} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
-import {useSelector} from "react-redux";
-import {useRouter} from "next/navigation";
+// import {useSelector} from "react-redux";
+// import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
-import {createClient} from "contentful";
 // import {
 //   CityWiseBannerWebsite,CityNameToId
 // } from "@/constants/constant";
 
 const HeroBanner = () => {
-  const router = useRouter();
-  const homePageReduxData = useSelector(state => state.homePagedata);
+  // const router = useRouter();
+  // const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const client = createClient({
-    space: process.env.NEXT_PUBLIC_SPACE_ID,
-    accessToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
-  });
+  // const [homepageMobileBanners, setHomepageMobileBanners] = useState([]);
+  // const [homepageTabBanners, setHomepageTabBanners] = useState([]);
+  // const [homepageDesktopBanners, setHomepageDesktopBanners] = useState([]);
 
-  const [homepageMobileBanners, setHomepageMobileBanners] = useState([]);
-  const [homepageTabBanners, setHomepageTabBanners] = useState([]);
-  const [homepageDesktopBanners, setHomepageDesktopBanners] = useState([]);
-
-  useEffect(() => {
-    client
-      .getEntries({
-        content_type: "homepageBanners",
-      })
-      .then(({items}) => {
-        // console.log(items);
-        const mobileBanners = items
-          .filter(({metadata: {tags}}) => tags[0].sys.id === "mobile")
-          .map(image => ({
-            ...image.fields.image.fields.file,
-            altText: image.fields.altText,
-            link: image.fields.link,
-          }));
-        const tabBanners = items
-          .filter(({metadata: {tags}}) => tags[0].sys.id === "tab")
-          .map(image => ({
-            ...image.fields.image.fields.file,
-            altText: image.fields.altText,
-            link: image.fields.link,
-          }));
-        const desktopBanners = items
-          .filter(({metadata: {tags}}) => tags[0].sys.id === "desktop")
-          .map(image => ({
-            ...image.fields.image.fields.file,
-            altText: image.fields.altText,
-            link: image.fields.link,
-          }));
-
-        setHomepageMobileBanners(mobileBanners);
-        setHomepageTabBanners(tabBanners);
-        setHomepageDesktopBanners(desktopBanners);
-      });
-  }, []);
-  // console.log(homepageDesktopBanners, "homepageDesktopBanners");
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
@@ -73,7 +32,7 @@ const HeroBanner = () => {
           swipeable>
           {/* {CityWiseBannerWebsite[CityNameToId[cityName] | 0].map((item, index) => ( */}
 
-          {new Array(homepageDesktopBanners.length).fill(0).map((e, index) => (
+          {/* {new Array(homepageDesktopBanners.length).fill(0).map((e, index) => (
             <div
               key={index.toString()}
               className="cursor-pointer"
@@ -128,22 +87,22 @@ const HeroBanner = () => {
                 />
               </picture>
             </div>
-          ))}
+          ))} */}
         </Carousel>
       </div>
     </div>
   );
 };
 
-export default HeroBanner;
+export default memo(HeroBanner);
 
-export const HeroBannerSkeleton = () => {
+export const HeroBannerSkeleton = memo(() => {
   return (
     <div className="lg:h-[600px] md:h-[350px] ms:h-[250px] h-[150px] w-full">
       <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
     </div>
   );
-};
+});
 
 // Website
 // https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp => Home Furniture

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
 import strings from "@/constants/Constant.json";
 import {useDispatch, useSelector} from "react-redux";
@@ -62,8 +62,8 @@ const NewlyLaunched = () => {
         {newProductFetched?.map((ele, index) => (
           <div
             className={`${styles.width_container} ${
-              index === newProductFetched?.length - 1 && "mr-[16px]"
-            } relative`}
+              index === newProductFetched?.length - 1 ? "mr-[16px]" : ""
+            } relative`.trim()}
             // className={`${styles.width_container} relative bg-red-400`}
             key={index.toString()}>
             <div
@@ -102,9 +102,9 @@ const NewlyLaunched = () => {
   );
 };
 
-export default NewlyLaunched;
+export default memo(NewlyLaunched);
 
-export const NewlyLauncedSkeleton = () => {
+export const NewlyLauncedSkeleton = memo(() => {
   return (
     <div className={styles.main_container}>
       <div className={`${styles.skeleton_brown_box}`}>
@@ -131,4 +131,4 @@ export const NewlyLauncedSkeleton = () => {
       </div>
     </div>
   );
-};
+});

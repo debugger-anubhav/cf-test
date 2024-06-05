@@ -21,7 +21,7 @@ import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
-// import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+// import {getAllBanners} from "@/constants/gql";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -125,7 +125,7 @@ const CombineSection = loadable(
 export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
-  // added
+
   useEffect(() => {
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
@@ -141,6 +141,7 @@ export default function Home() {
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
+
   useEffect(() => {
     if (userId !== "") {
       if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
@@ -154,6 +155,10 @@ export default function Home() {
         window?.gtag("config", "G-05PLBRM6KD");
     }
   }, [userId]);
+
+  useEffect(() => {
+    // getAllBanners().then(res => {});
+  }, []);
 
   return (
     <>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useQuery} from "@/hooks/useQuery";
@@ -137,8 +137,8 @@ const TrendingProducts = ({params}) => {
               <div
                 key={index.toString()}
                 className={`${styles.child ?? ""} ${
-                  index === data?.length - 1 && "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}
+                  index === data?.length - 1 ? "mr-[16px]" : ""
+                } ${isDumy ? "pointer-events-none" : ""}`.trim()}
                 onClick={e => {
                   !reduxStateOfLoginPopup && handleCardClick(e, item);
                 }}>
@@ -172,4 +172,4 @@ const TrendingProducts = ({params}) => {
     </>
   );
 };
-export default TrendingProducts;
+export default memo(TrendingProducts);

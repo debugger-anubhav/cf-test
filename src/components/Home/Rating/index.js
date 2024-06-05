@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef} from "react";
 import styles from "./style.module.css";
 import {GoogleIcon, EditIcon} from "@/assets/icon";
 import Image from "next/image";
@@ -150,8 +150,8 @@ const CustomerRating = () => {
           <div
             key={index.toString()}
             className={`${styles.card} ${
-              index === reviews?.length - 1 && "mr-[16px]"
-            }`}>
+              index === reviews?.length - 1 ? "mr-[16px]" : ""
+            }`.trim()}>
             <div className={styles.row}>
               <div className="flex">
                 <div>
@@ -219,4 +219,4 @@ const CustomerRating = () => {
   );
 };
 
-export default CustomerRating;
+export default memo(CustomerRating);

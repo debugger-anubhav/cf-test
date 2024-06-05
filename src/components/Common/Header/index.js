@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
@@ -284,9 +284,9 @@ const Header = ({page}) => {
         city={cityForModal}
       />
       <div
-        className={` ${styles.main} ${modalStateFromRedux && "!z-0"}  ${
-          page === "login" && "!z-0"
-        }`}
+        className={` ${styles.main} ${modalStateFromRedux ? "!z-0" : ""}  ${
+          page === "login" ? "!z-0" : ""
+        }`.trim()}
         style={{
           boxShadow: hasScrolled ? "0 4px 4px 0 rgba(0,0,0,.06)" : "none",
         }}>
@@ -510,7 +510,8 @@ const Header = ({page}) => {
     </>
   );
 };
-export default Header;
+
+export default memo(Header);
 
 // search modal component
 const SearchModal = ({

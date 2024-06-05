@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
 import {useMutation} from "@/hooks/useMutation";
@@ -178,10 +178,10 @@ const Card = ({
               window.scrollTo({top: 0});
             }
           }}
-          className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
-            productWidth ?? ""
-          } 
-      `}
+          className={`${styles.wrapper} ${
+            hoverCard ? styles.hover_wrapper : ""
+          } ${productWidth ?? ""} 
+      `.trim()}
           onMouseOver={() => {
             isHover && setHoverCard(true);
           }}
@@ -196,9 +196,9 @@ const Card = ({
               width={"100%"}
               height={"100%"}
               className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover} 
+          ${hoverCard ? styles.card_image_hover : ""}
           }
-          `}
+          `.trim()}
             />
 
             {/* ----------- */}
@@ -263,4 +263,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default memo(Card);

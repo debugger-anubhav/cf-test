@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
@@ -18,11 +18,11 @@ const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
       <div>
         <div
           dangerouslySetInnerHTML={{__html: ans}}
-          className={`${styles.ans} ${isOpen && styles.ans_open}`}
+          className={`${styles.ans} ${isOpen ? styles.ans_open : ""}`.trim()}
         />
       </div>
     </div>
   );
 };
 
-export default SingleQuestion;
+export default memo(SingleQuestion);
