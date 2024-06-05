@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine} from "@/assets/icon";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CreateRequestPayload} from "@/constants/constant";
 import Repair from "./Repair";
 import Relocation from "./Relocation";
@@ -9,6 +9,8 @@ import SwapProduct from "./SwapProduct";
 import Buy from "./Buy";
 import TransferOwnership from "./TransferOwnership";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function PickupReasonCommonScreen({
   reason,
@@ -18,12 +20,14 @@ function PickupReasonCommonScreen({
   data,
   pickupRequestType,
 }) {
+  const dispatch = useDispatch();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
   const callFunctionFlag = useSelector(
     state => state.homePagedata.createRequestApiCalled,
   );
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const [description, setDescription] = useState("");
   const [showScreenName, setShowScreenName] = useState(null);
   const {CreateSRApiCall} = CommonCreateRequestApi();
@@ -85,6 +89,7 @@ function PickupReasonCommonScreen({
               />
             </div>
           )}
+          {loader && <LoaderComponent loading={loader} />}
 
           <button
             className={`${styles.proceed_btn} ${
@@ -95,6 +100,7 @@ function PickupReasonCommonScreen({
             } !mx-auto !w-full lg:w-full`}
             onClick={() => {
               if (reason.btnName === "Create request") {
+                dispatch(setRequestLoader(true));
                 handleCreateRequest();
               } else {
                 setShowScreenName(reason.btnName);
@@ -103,13 +109,15 @@ function PickupReasonCommonScreen({
             {reason.btnName}
             <ForwardArrowWithLine />
           </button>
-
           {reason.title !== "Other" &&
           reason.title !== "Requirement Fulfilled" ? (
             <div className={styles.pickup_reason_btn_wrapper}>
               <button
                 className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}
-                onClick={handleCreateRequest}>
+                onClick={() => {
+                  dispatch(setRequestLoader(true));
+                  handleCreateRequest();
+                }}>
                 No, let me proceed with pickup
               </button>
             </div>

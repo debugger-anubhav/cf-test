@@ -2,11 +2,15 @@ import React, {useState} from "react";
 import styles from "./style.module.css";
 import {BackIcon, ForwardArrowWithLine, ToggleOff} from "@/assets/icon";
 import {BsToggleOn} from "react-icons/bs";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CreateRequestPayload} from "@/constants/constant";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -103,13 +107,18 @@ function ChangeBillCycle({prevScreen, data, isHelpDrawer}) {
             rows={2}
           />
         </div>
+        {loader && <LoaderComponent loading={loader} />}
+
         <button
           className={`${styles.proceed_btn} !w-fit min-h-[3.5rem] !ml-0 ${
             callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
           }`}
           disabled={!callFunctionFlag}
           // ${!istoggled ? "!bg-[#FFDF85] !cursor-not-allowed" : ``} `
-          onClick={() => handleCreateRequest()}>
+          onClick={() => {
+            dispatch(setRequestLoader(true));
+            handleCreateRequest();
+          }}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

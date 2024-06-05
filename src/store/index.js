@@ -11,6 +11,7 @@ import {
   orderSlice,
   paymentSuccessSlice,
   citymaxSlice,
+  ServiceRequestSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -27,6 +28,7 @@ export const store = configureStore({
     order: orderSlice.reducer,
     successPayment: paymentSuccessSlice.reducer,
     citymax: citymaxSlice.reducer,
+    serviceRequestData: ServiceRequestSlice.reducer,
   },
 });
 

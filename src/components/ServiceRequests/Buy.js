@@ -7,10 +7,14 @@ import {
   CreateRequestPayload,
 } from "@/constants/constant";
 import PickupReasonOptions from "./PickupReasonOptions";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function Buy({heading, prevScreen, data, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const {CreateSRApiCall} = CommonCreateRequestApi();
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
@@ -153,6 +157,8 @@ function Buy({heading, prevScreen, data, isHelpDrawer}) {
               )}
             </div>
           </div>
+          {loader && <LoaderComponent loading={loader} />}
+
           {heading !== "Request order pickup" ? (
             <div className={styles.bottom_row}>
               <div className={styles.bottom_line}></div>
@@ -165,7 +171,10 @@ function Buy({heading, prevScreen, data, isHelpDrawer}) {
                   callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
                 }`}
                 disabled={!callFunctionFlag}
-                onClick={() => handleCreateRequest()}>
+                onClick={() => {
+                  dispatch(setRequestLoader(true));
+                  handleCreateRequest();
+                }}>
                 Create request <ForwardArrowWithLine />
               </button>
             </div>

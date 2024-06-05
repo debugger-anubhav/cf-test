@@ -4,6 +4,7 @@ import {showToastNotification} from "../Common/Notifications/toastUtils";
 import {useDispatch} from "react-redux";
 import {
   setCreateRequestApiCalled,
+  setRequestLoader,
   setServiceRequestDrawer,
 } from "@/store/Slices";
 export const CommonCreateRequestApi = () => {
@@ -19,6 +20,7 @@ export const CommonCreateRequestApi = () => {
       );
 
       if (response?.data?.data?.msg) {
+        dispatch(setRequestLoader(false));
         dispatch(setServiceRequestDrawer(false));
         showToastNotification(
           response?.data?.data?.msg,
@@ -27,7 +29,7 @@ export const CommonCreateRequestApi = () => {
         dispatch(setCreateRequestApiCalled(true));
       }
     } catch (error) {
-      console.log(error?.message || "some error");
+      dispatch(setRequestLoader(false));
     }
   };
 
