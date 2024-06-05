@@ -5,12 +5,16 @@ import {BsToggleOn} from "react-icons/bs";
 import {customStylesForSelect} from "./CancelOrder";
 import Select from "react-select";
 import {CreateRequestPayload} from "@/constants/constant";
-import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {useDispatch, useSelector} from "react-redux";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function Repair({prevScreen, data, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -205,6 +209,7 @@ function Repair({prevScreen, data, isHelpDrawer}) {
           ))}
         </div>
       </div>
+      {loader && <LoaderComponent loading={loader} />}
       <div className={styles.bottom_row}>
         <button
           className={`${styles.proceed_btn}  ${
@@ -214,7 +219,10 @@ function Repair({prevScreen, data, isHelpDrawer}) {
           }
           ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
           disabled={!toggleStates.some(state => state.istoggled)}
-          onClick={handleCreateRequest}>
+          onClick={() => {
+            dispatch(setRequestLoader(true));
+            handleCreateRequest();
+          }}>
           Create request <ForwardArrowWithLine />
         </button>
       </div>

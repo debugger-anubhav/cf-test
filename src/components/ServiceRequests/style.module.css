@@ -55,7 +55,7 @@
   box-shadow: 0px -1px 4px 0px #00000040;
 }
 .bottom_row_formik {
-  @apply absolute flex flex-col justify-center px-4 md:pl-12 md:pr-[89px] items-center -mx-4 md:-mx-12 bottom-0 z-[9999] w-full bg-white py-4 md:pt-8 md:pb-6;
+  @apply absolute flex flex-col justify-center px-4 md:pl-12 md:pr-[89px] items-center -mx-4 md:-mx-12 bottom-0 z-[11] w-full bg-white py-4 md:pt-8 md:pb-6;
   box-shadow: 0px -1px 4px 0px #00000040;
 }
 .bottom_line {

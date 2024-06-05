@@ -21,13 +21,17 @@ import {
   handleWheel,
   keyPressForContactField,
 } from "@/constants/constant";
-import {useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import commonStyles from "@/components/Documentation/common.module.css";
+import {useDispatch, useSelector} from "react-redux";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function Relocation({prevScreen, data, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -92,6 +96,7 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
   });
 
   const handleSubmit = values => {
+    dispatch(setRequestLoader(true));
     const allData = new FormData();
     for (const key in CreateRequestPayload) {
       if (Object.hasOwnProperty.call(CreateRequestPayload, key)) {
@@ -454,6 +459,7 @@ function Relocation({prevScreen, data, isHelpDrawer}) {
                   </div>
                 </div>
               </div>
+              {loader && <LoaderComponent loading={loader} />}
               <div className={`${styles.bottom_row_formik}`}>
                 <button
                   type="submit"
