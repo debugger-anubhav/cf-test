@@ -216,7 +216,9 @@ const CategoryCard = ({
           // addToWishlist();
         }}
       />
-      <Link href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}>
+      <Link
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+        target="_blank">
         <div
           className={`${styles.card_wrapper} `}
           onMouseOver={() => {
