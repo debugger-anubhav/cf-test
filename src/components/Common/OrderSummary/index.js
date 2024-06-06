@@ -74,6 +74,7 @@ const OrderSummary = ({
   const toggleReviewDrawer = () => {
     setReviewDrawer(!reviewDrawer);
   };
+
   return (
     <div className={`${styles.main_container}`}>
       <div className={styles.products_wrapper}>
@@ -131,21 +132,8 @@ const OrderSummary = ({
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
                 </div>
                 <div className="w-full">
-                  {item.is_frp === 0 ? (
-                    <a
-                      href={`/things/${item.product_id}/${item.product_seourl}`}
-                      target="_blank"
-                      rel="noreferrer">
-                      <p className={styles.prod_name}>{item.product_name}</p>
-                    </a>
-                  ) : (
-                    <a
-                      href={`/choose-products/${item.product_id}/12`}
-                      target="_blank"
-                      rel="noreferrer">
-                      <p className={styles.prod_name}>{item.product_name}</p>
-                    </a>
-                  )}
+                  <p className={styles.prod_name}>{item.product_name}</p>
+
                   {isOfflineInvoice ? (
                     <div className="mt-2">
                       <p className={styles.tenure}>
@@ -215,14 +203,9 @@ const OrderSummary = ({
                         loading="lazy"
                         alt={p?.fc_product?.product_name}
                       />
-                      <a
-                        href={`/things/${p.fc_product.id}/${p.fc_product.seourl}`}
-                        target="_blank"
-                        rel="noreferrer">
-                        <p className={styles.prod_name}>
-                          {p?.fc_product?.product_name}
-                        </p>
-                      </a>
+                      <p className={styles.prod_name}>
+                        {p?.fc_product?.product_name}
+                      </p>
                     </div>
                   ))}
                 </>
