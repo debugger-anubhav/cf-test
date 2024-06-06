@@ -34,69 +34,9 @@ const HeroBanner = () => {
           swipeable>
           {banners?.map(
             ({altText, identifier, mediaData: {url}, order, redirectUrl}) => (
-              <div>
-                <Image src={url} alt={altText} />
-              </div>
+              <Image src={url} alt={altText} key={altText} />
             ),
           )}
-          {/* {CityWiseBannerWebsite[CityNameToId[cityName] | 0].map((item, index) => ( */}
-
-          {/* {new Array(homepageDesktopBanners.length).fill(0).map((e, index) => (
-            <div
-              key={index.toString()}
-              className="cursor-pointer"
-              onClick={() => {
-                if (homepageDesktopBanners[index].altText === "citymax") {
-                  router.push(homepageDesktopBanners[index].link);
-                } else {
-                  router.push(
-                    homePageReduxData?.cityName
-                      .replace(/\//g, "-")
-                      ?.toLowerCase() + homepageDesktopBanners[index].link,
-                  );
-                }
-              }}>
-              <picture>
-                <source
-                  media="(min-width:1850px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}`}
-                />
-                <source
-                  media="(min-width:1660px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}?w=1850&q=60`}
-                />
-                <source
-                  media="(min-width:1530px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}?w=1660&q=60`}
-                />
-                <source
-                  media="(min-width:1440px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}?w=1530&q=60`}
-                />
-                <source
-                  media="(min-width:1280px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}?w=1440&q=60`}
-                />
-                <source
-                  media="(min-width:1023px)"
-                  srcSet={`https:${homepageDesktopBanners[index].url}?w=1280&q=60`}
-                />
-                <source
-                  media="(min-width:767px)"
-                  srcSet={`https:${homepageTabBanners[index].url}?q=60`}
-                />
-                <source
-                  media="(min-width:360px)"
-                  srcSet={`https:${homepageMobileBanners[index].url}?q=60`}
-                />
-                <img
-                  src={`https:${homepageDesktopBanners[index].url}`}
-                  alt={homepageDesktopBanners[index].altText}
-                  className="rounded-lg"
-                />
-              </picture>
-            </div>
-          ))} */}
         </Carousel>
       </div>
     </div>
@@ -112,22 +52,3 @@ export const HeroBannerSkeleton = memo(() => {
     </div>
   );
 });
-
-// Website
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp => Discount Deals
-
-// Mobile
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp => Discount Deals
-
-// Tablet
-
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_1.webp  => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_2.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_3.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_4.webp => Discount Deals

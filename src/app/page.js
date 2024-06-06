@@ -165,8 +165,8 @@ export default function Home() {
   const getAllEntries = async () => {
     let entries = [];
     const limit = 50;
-    let skip = 0,
-      totalEntries = 0;
+    let skip = 0;
+    let totalEntries = 0;
 
     while (1) {
       if (totalEntries !== 0 && skip >= totalEntries) {
