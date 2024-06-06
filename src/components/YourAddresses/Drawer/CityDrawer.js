@@ -70,9 +70,10 @@ const CityDrawer = ({
                 <img
                   src={cityUrl + city?.list_value_seourl + ".webp"}
                   className={`${styles.city_thambnil} ${
-                    cityName === city?.list_value &&
-                    "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
-                  }`}
+                    cityName === city?.list_value
+                      ? "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
+                      : ""
+                  }`.trim()}
                   alt={city?.list_value}
                   loading="lazy"
                 />
@@ -88,7 +89,7 @@ const CityDrawer = ({
                       cityName === city?.list_value
                         ? "text-[#222] font-medium "
                         : "text-45454A"
-                    } ${styles.city_name}`}>
+                    } ${styles.city_name}`.trim()}>
                     {city?.list_value}
                   </p>
                 )}

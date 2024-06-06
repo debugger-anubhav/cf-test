@@ -100,8 +100,8 @@ const CompleteTheLook = ({params}) => {
                 !reduxStateOfLoginPopup && handleCardClick(e, item);
               }}
               className={`${styles.child ?? ""} ${
-                isDumy && "pointer-events-none"
-              }`}>
+                isDumy ? "pointer-events-none" : ""
+              }`.trim()}>
               <Card
                 cardImage={
                   item?.image?.split(",").filter(item => item).length > 1

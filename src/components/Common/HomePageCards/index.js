@@ -175,10 +175,10 @@ const Card = ({
               window.scrollTo({top: 0});
             }
           }}
-          className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
-            productWidth ?? ""
-          } 
-      `}
+          className={`${styles.wrapper} ${
+            hoverCard ? styles.hover_wrapper : ""
+          } ${productWidth ?? ""} 
+      `.trim()}
           onMouseOver={() => {
             isHover && setHoverCard(true);
           }}
@@ -192,10 +192,9 @@ const Card = ({
               loading="lazy"
               width={"100%"}
               height={"100%"}
-              className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover} 
-          }
-          `}
+              className={`${styles.thumbnail} ${
+                hoverCard ? styles.card_image_hover : ""
+              }`.trim()}
             />
 
             {/* ----------- */}
