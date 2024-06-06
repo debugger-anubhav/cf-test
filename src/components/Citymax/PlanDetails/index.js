@@ -517,8 +517,9 @@ const CitymaxPlanDetail = () => {
                               {t.selectedProduct ? (
                                 <div
                                   className={`w-full h-full ${
-                                    !isCheckedMap[item.room_id] &&
-                                    "cursor-pointer"
+                                    !isCheckedMap[item.room_id]
+                                      ? "cursor-pointer"
+                                      : ""
                                   }`}
                                   onClick={e => {
                                     !isCheckedMap[item.room_id] &&
@@ -526,8 +527,10 @@ const CitymaxPlanDetail = () => {
                                   }}>
                                   <div
                                     className={`relative ${
-                                      isCheckedMap[item.room_id] && "opacity-80"
-                                    }`}>
+                                      isCheckedMap[item.room_id]
+                                        ? "opacity-80"
+                                        : ""
+                                    }`.trim()}>
                                     <img
                                       src={
                                         productImageBaseUrl + t.selectedProduct
@@ -546,14 +549,16 @@ const CitymaxPlanDetail = () => {
                                   </div>
                                   <div
                                     className={`${
-                                      !isCheckedMap[item.room_id] &&
-                                      "bg-[#E3E1DC]"
-                                    } ${styles.selected_box_lowerdiv}`}>
+                                      !isCheckedMap[item.room_id]
+                                        ? "bg-[#E3E1DC]"
+                                        : ""
+                                    } ${styles.selected_box_lowerdiv}`.trim()}>
                                     <p
                                       className={`${
-                                        isCheckedMap[item.room_id] &&
-                                        "!text-71717A"
-                                      } ${styles.selected_slot_name}`}>
+                                        isCheckedMap[item.room_id]
+                                          ? "!text-71717A"
+                                          : ""
+                                      } ${styles.selected_slot_name}`.trim()}>
                                       {t.selectedProdName}
                                     </p>
                                   </div>
@@ -570,10 +575,11 @@ const CitymaxPlanDetail = () => {
                                   }}
                                   className={`
                                   ${
-                                    !isCheckedMap[item.room_id] &&
-                                    "hover:border-5774AC hover:bg-[#E0F0FF] cursor-pointer"
+                                    !isCheckedMap[item.room_id]
+                                      ? "hover:border-5774AC hover:bg-[#E0F0FF] cursor-pointer"
+                                      : ""
                                   } 
-                                  ${styles.amenity_box}`}
+                                  ${styles.amenity_box}`.trim()}
                                   onClick={() => {
                                     !isCheckedMap[item.room_id] &&
                                       handleSelectItem(item, t, 1);

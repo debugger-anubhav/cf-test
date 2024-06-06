@@ -37,8 +37,8 @@ function ContactSection() {
             <div
               key={index.toString()}
               className={`${
-                index !== data.length - 1 && styles.box_wrapper
-              } flex flex-col ${styles.main_div_wrapper}`}>
+                index !== data.length - 1 ? styles.box_wrapper : ""
+              } flex flex-col ${styles.main_div_wrapper}`.trim()}>
               <a href={item?.link} className={styles.link_tag}>
                 <div className={styles.box_img}>{item.icon}</div>
                 <div className={styles.detail_wrapper}>

@@ -338,9 +338,10 @@ export default function CommonDrawer({
                       loader={({src}) => src}
                       src={cityUrl + city?.list_value_seourl + ".webp"}
                       className={`${styles.city_thambnil} ${
-                        cityId === city?.id &&
-                        "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
-                      }`}
+                        cityId === city?.id
+                          ? "border-[2px] rounded-[6px] hover:rounded-[6px] border-primary"
+                          : ""
+                      }`.trim()}
                       alt={city?.list_value}
                       loading="lazy"
                       width={100}

@@ -284,9 +284,9 @@ const Header = ({page}) => {
         city={cityForModal}
       />
       <div
-        className={` ${styles.main} ${modalStateFromRedux && "!z-0"}  ${
-          page === "login" && "!z-0"
-        }`}
+        className={` ${styles.main} ${modalStateFromRedux ? "!z-0" : ""}  ${
+          page === "login" ? "!z-0" : ""
+        }`.trim()}
         style={{
           boxShadow: hasScrolled ? "0 4px 4px 0 rgba(0,0,0,.06)" : "none",
         }}>
