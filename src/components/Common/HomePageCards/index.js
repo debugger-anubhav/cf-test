@@ -166,7 +166,7 @@ const Card = ({
         href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
-        target="_self"
+        target="_blank"
         rel="noopener">
         <div
           onClick={() => {
