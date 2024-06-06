@@ -115,14 +115,31 @@ const ProductDetails = ({params}) => {
         setShowBottomBar(false);
       }
     };
-
+    if (window.innerWidth < 768) {
+      setShowBottomBar(true);
+    }
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setShowBottomBar(true);
+      } else {
+        handleScroll(); // Re-evaluate scroll conditions on resize
+      }
+    };
     const buttonPosition =
       addToCartButtonRef.current.getBoundingClientRect().bottom +
       window.scrollY;
     setYourScrollThreshold(buttonPosition);
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("resize", handleResize);
+    if (window.innerWidth < 768) {
+      setShowBottomBar(true);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [showBottomBar]);
 
   const openModal = () => {
