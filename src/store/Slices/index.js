@@ -356,6 +356,21 @@ export const paymentSuccessSlice = createSlice({
   },
 });
 
+export const ContentfulSlice = createSlice({
+  name: "contentfulData",
+  initialState: {
+    banners: [],
+  },
+
+  reducers: {
+    setBanners: (state, action) => {
+      state.banners = action.payload;
+    },
+  },
+});
+
+export const {setBanners} = ContentfulSlice.actions;
+
 export const {
   addCityList,
   offersAndCuponsList,

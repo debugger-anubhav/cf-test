@@ -1,16 +1,30 @@
 import {gql} from "@apollo/client";
 import {apolloClient} from "./apollo";
 
-export async function getAllBanners() {
+export async function fetchAllData(variables) {
   const {data} = await apolloClient.query({
+    variables,
     query: gql`
-      query {
-        homepageBannersCollection(limit: 100) {
+      query ($limit: Int!, $skip: Int!) {
+        entryCollection(limit: $limit, skip: $skip) {
+          total
           items {
-            bannerNumber
-            altText
-            image {
-              url
+            ... on HomepageMedia {
+              order
+              altText
+              redirectUrl
+              identifier
+              mediaCollection {
+                items {
+                  url
+                  title
+                  contentfulMetadata {
+                    tags {
+                      name
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -18,5 +32,5 @@ export async function getAllBanners() {
     `,
     fetchPolicy: "cache-first",
   });
-  return data.homepageBannersCollection.items;
+  return data;
 }

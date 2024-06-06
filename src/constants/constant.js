@@ -801,3 +801,28 @@ export const MONTHLY_NOT_ALLOWED_PRODUCT = [
   "ACPWA1TONMPC03",
   "ACPWAMPC03",
 ];
+
+export const contentfulHomepageDataResolver = (
+  {altText, identifier, order, redirectUrl, mediaCollection: {items}},
+  isBanner = false,
+) => {
+  const bannerData = items[0];
+  const mediaData = isBanner
+    ? {
+        url: bannerData.url,
+        title: bannerData.title,
+      }
+    : items.map(({url, title, contentfulMetadata: {tags}}) => ({
+        url,
+        title,
+        tags: tags.map(e => e.name),
+      }));
+
+  return {
+    altText,
+    identifier,
+    order,
+    redirectUrl,
+    mediaData,
+  };
+};

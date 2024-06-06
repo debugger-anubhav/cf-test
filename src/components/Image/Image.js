@@ -57,13 +57,11 @@ const Image = ({src, alt, priority = true, ...props}) => {
           ref={ref}
           sizes={sizes}
           loading="eager"
-          loader={({src, width}) => {
-            return `${src}?w=${width}&q=50`;
-          }}
+          loader={({src, width}) => `${src}?w=${width}&q=50`}
           onLoadingComplete={({naturalHeight}) => {
             setHeight(naturalHeight);
           }}
-          onLoad={e => {
+          onLoad={() => {
             setIsLoaded(true);
           }}
           priority={priority}

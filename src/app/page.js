@@ -18,10 +18,15 @@ import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 import {FooterSkeleton} from "@/components/Common/Footer";
-import {getLocalStorage} from "@/constants/constant";
+import {
+  contentfulHomepageDataResolver,
+  getLocalStorage,
+} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
-// import {getAllBanners} from "@/constants/gql";
+import {fetchAllData} from "@/constants/gql";
+import {useDispatch} from "react-redux";
+import {setBanners} from "@/store/Slices";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -125,6 +130,7 @@ const CombineSection = loadable(
 export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleTouchStart = event => {
@@ -156,8 +162,37 @@ export default function Home() {
     }
   }, [userId]);
 
+  const getAllEntries = async () => {
+    let entries = [];
+    const limit = 50;
+    let skip = 0,
+      totalEntries = 0;
+
+    while (1) {
+      if (totalEntries !== 0 && skip >= totalEntries) {
+        break;
+      }
+
+      const {
+        entryCollection: {items, total},
+      } = await fetchAllData({limit, skip});
+
+      totalEntries = total;
+
+      entries = entries.concat(items);
+      skip += limit;
+    }
+
+    const banners = entries
+      .filter(e => e.identifier === "banner")
+      .sort((a, b) => a.order - b.order)
+      .map(banner => contentfulHomepageDataResolver(banner, true));
+
+    dispatch(setBanners(banners));
+  };
+
   useEffect(() => {
-    // getAllBanners().then(res => {});
+    getAllEntries();
   }, []);
 
   return (

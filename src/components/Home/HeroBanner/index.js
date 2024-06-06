@@ -6,17 +6,19 @@ import styles from "./style.module.css";
 // import {useSelector} from "react-redux";
 // import {useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
+import {useSelector} from "react-redux";
+import Image from "@/components/Image/Image";
 // import {
 //   CityWiseBannerWebsite,CityNameToId
 // } from "@/constants/constant";
 
 const HeroBanner = () => {
-  // const router = useRouter();
-  // const homePageReduxData = useSelector(state => state.homePagedata);
+  const {
+    contentful: {banners},
+  } = useSelector(state => state);
 
-  // const [homepageMobileBanners, setHomepageMobileBanners] = useState([]);
-  // const [homepageTabBanners, setHomepageTabBanners] = useState([]);
-  // const [homepageDesktopBanners, setHomepageDesktopBanners] = useState([]);
+  console.log("nbanners", banners);
+  // const router = useRouter();
 
   return (
     <div
@@ -24,12 +26,19 @@ const HeroBanner = () => {
       <div className="landing_page_carousel">
         <Carousel
           showStatus={false}
-          showArrows={true}
+          showArrows
           showThumbs={false}
           autoPlay
           infiniteLoop
           width={"100%"}
           swipeable>
+          {banners?.map(
+            ({altText, identifier, mediaData: {url}, order, redirectUrl}) => (
+              <div>
+                <Image src={url} alt={altText} />
+              </div>
+            ),
+          )}
           {/* {CityWiseBannerWebsite[CityNameToId[cityName] | 0].map((item, index) => ( */}
 
           {/* {new Array(homepageDesktopBanners.length).fill(0).map((e, index) => (
@@ -94,7 +103,7 @@ const HeroBanner = () => {
   );
 };
 
-export default memo(HeroBanner);
+export default HeroBanner;
 
 export const HeroBannerSkeleton = memo(() => {
   return (
