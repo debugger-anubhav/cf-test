@@ -1,13 +1,20 @@
 import React, {useState} from "react";
 import styles from "./styles.module.css";
-import Image from "next/image";
+// import Image from "next/image";
 import {ForwardArrow} from "@/assets/icon";
-import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
+// import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
 import CityMaxDrawer from "./cityMaxDrawer";
+import {useSelector} from "react-redux";
 // import SideDrawer from "./sideDrawer";
+import Image from "@/components/Image/Image";
 
 const TryCityMax = () => {
+  const data = useSelector(state => state.contentful.tryCityData);
+  const webImgUrl = data?.mediaData?.filter(e => e.tags.includes("web"))[0];
+  const mobileImgUrl = data?.mediaData?.filter(e =>
+    e.tags.includes("mobile"),
+  )[0];
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const benefitsOfCity = [
@@ -48,22 +55,37 @@ const TryCityMax = () => {
     <>
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
-          <Image
+          {/* <Image
             loader={({src}) => src}
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image} `}
             width={589}
             height={720}
-          />
-          <Image
+          /> */}
+          <div className={`hidden xl:flex`}>
+            <Image
+              src={webImgUrl?.url}
+              alt={data.altText}
+              className="w-full object-contain"
+            />
+          </div>
+          <div className="xl:hidden ">
+            <Image
+              src={mobileImgUrl?.url}
+              alt={data.altText}
+              className="w-full object-contain"
+            />
+          </div>
+
+          {/* <Image
             loader={({src}) => src}
             src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
             width={589}
             height={720}
-          />
+          /> */}
         </div>
         <div className={styles.right_text_section}>
           <h2 className={styles.tryCity_heading}>
@@ -97,13 +119,13 @@ const TryCityMax = () => {
                   <div className={styles.card_wrapper} key={index.toString()}>
                     <div className={`w-100 h-100 absolute z-10`} />
                     <Image
-                      loader={({src}) => src}
+                      // loader={({src}) => src}
                       src={item?.img}
                       className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"
-                      loading="lazy"
-                      width={40}
-                      height={40}
+                      // loading="lazy"
+                      // width={40}
+                      // height={40}
                     />
                     <h3 className={styles.benefit_title}>{item?.title}</h3>
                     <p className={styles.benefit_paragraph}>

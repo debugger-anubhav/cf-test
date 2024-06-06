@@ -17,7 +17,6 @@ const HeroBanner = () => {
     contentful: {banners},
   } = useSelector(state => state);
 
-  console.log("nbanners", banners);
   // const router = useRouter();
 
   return (

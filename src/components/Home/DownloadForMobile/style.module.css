@@ -3,10 +3,10 @@
 }
 
 .web_container {
-  @apply hidden sm:flex w-full;
+  @apply hidden xs:flex w-full;
 }
 .mobile_container {
-  @apply flex sm:hidden w-full;
+  @apply flex xs:hidden w-full;
 }
 
 .download_image {

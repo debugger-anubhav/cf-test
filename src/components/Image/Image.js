@@ -19,7 +19,7 @@ const getSizes = () =>
 const Image = ({src, alt, priority = true, ...props}) => {
   const sizes = getSizes();
 
-  const formattedUrl = src.startsWith("https:") ? src : `https:${src}`;
+  const formattedUrl = src?.startsWith("https:") ? src : `https:${src}`;
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [height, setHeight] = useState(undefined);
@@ -51,6 +51,7 @@ const Image = ({src, alt, priority = true, ...props}) => {
 
       <div style={{position: "relative", width: "100%", height: "100%"}}>
         <NextImage
+          {...props}
           src={formattedUrl}
           alt={alt}
           fill

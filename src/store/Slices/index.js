@@ -360,16 +360,24 @@ export const ContentfulSlice = createSlice({
   name: "contentfulData",
   initialState: {
     banners: [],
+    qrData: [],
+    tryCityData: [],
   },
 
   reducers: {
     setBanners: (state, action) => {
       state.banners = action.payload;
     },
+    setQRData: (state, action) => {
+      state.qrData = action.payload;
+    },
+    setTryCityData: (state, action) => {
+      state.tryCityData = action.payload;
+    },
   },
 });
 
-export const {setBanners} = ContentfulSlice.actions;
+export const {setBanners, setQRData, setTryCityData} = ContentfulSlice.actions;
 
 export const {
   addCityList,

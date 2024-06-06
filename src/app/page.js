@@ -26,7 +26,7 @@ import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 import {fetchAllData} from "@/constants/gql";
 import {useDispatch} from "react-redux";
-import {setBanners} from "@/store/Slices";
+import {setBanners, setQRData, setTryCityData} from "@/store/Slices";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -188,7 +188,17 @@ export default function Home() {
       .sort((a, b) => a.order - b.order)
       .map(banner => contentfulHomepageDataResolver(banner, true));
 
+    const QR = entries
+      .filter(e => e.identifier === "qr-banners")
+      .map(QR => contentfulHomepageDataResolver(QR));
+
+    const tryCityMax = entries
+      .filter(e => e.identifier === "trycitymax")
+      .map(data => contentfulHomepageDataResolver(data));
+
     dispatch(setBanners(banners));
+    dispatch(setQRData(QR[0]));
+    dispatch(setTryCityData(tryCityMax[0]));
   };
 
   useEffect(() => {
