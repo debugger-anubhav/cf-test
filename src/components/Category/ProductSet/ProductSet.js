@@ -10,21 +10,16 @@ import {
   addSetProductAll,
   addSubCategoryMetaSubProduct,
 } from "@/store/Slices/categorySlice";
-import {useParams, useRouter} from "next/navigation";
+import {useParams} from "next/navigation";
 import {SoldOutProduct} from "../SoldOutProduct/SoldOutProduct";
 import CategoryCard from "../SingleProduct/CommonCard";
 
 export const ProductSet = () => {
-  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
 
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
-
   const comboItemLength =
     categoryPageReduxData?.categoryMetaSubProduct?.totalProduct;
 
@@ -118,11 +113,7 @@ export const ProductSet = () => {
       })
       .catch(err => console.log(err?.message || "some error"));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
+
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.setProductAll
     : categoryPageReduxData?.setProduct;
@@ -146,11 +137,7 @@ export const ProductSet = () => {
                 <div className={style.main_container}>
                   {data?.map((item, index) => {
                     return (
-                      <div
-                        key={index}
-                        onClick={e => {
-                          !reduxStateOfLoginPopup && handleCardClick(e, item);
-                        }}>
+                      <div key={index}>
                         <CategoryCard
                           cardImage={`${productImageBaseUrl}${
                             item?.image?.split(",")[0]

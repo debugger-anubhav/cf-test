@@ -132,8 +132,21 @@ const OrderSummary = ({
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
                 </div>
                 <div className="w-full">
-                  <p className={styles.prod_name}>{item.product_name}</p>
-
+                  {item.is_frp === "0" ? (
+                    <a
+                      href={`/things/${item.product_id}/${item.product_seourl}`}
+                      target="_blank"
+                      rel="noreferrer">
+                      <p className={styles.prod_name}>{item.product_name}</p>
+                    </a>
+                  ) : (
+                    <a
+                      href={`/choose-products/${item.product_id}/12`}
+                      target="_blank"
+                      rel="noreferrer">
+                      <p className={styles.prod_name}>{item.product_name}</p>
+                    </a>
+                  )}
                   {isOfflineInvoice ? (
                     <div className="mt-2">
                       <p className={styles.tenure}>

@@ -6,7 +6,6 @@ import {endPoints} from "@/network/endPoints";
 // import {useQuery} from "@/hooks/useQuery";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {baseInstance} from "@/network/axios";
@@ -14,12 +13,8 @@ import {baseInstance} from "@/network/axios";
 const SavedItem = () => {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
-  const router = useRouter();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const loginStateFromRedux = useSelector(state => state.homePagedata.isLogin);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const [isDumy, setIsDumy] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(loginStateFromRedux);
   const sliderRef = useRef(null);
@@ -72,11 +67,11 @@ const SavedItem = () => {
   }, [isLogin]);
   // useEffect(() => {}, [categoryPageReduxData?.savedItems?.length]);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     router.push(`/things/${item.id}/${item.seourl}`);
+  //   }
+  // };
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -129,10 +124,7 @@ const SavedItem = () => {
           return (
             <div
               className={`flex flex-wrap mr-4 mb-4 ${styles.child}`}
-              key={index.toString()}
-              onClick={e => {
-                !reduxStateOfLoginPopup && handleCardClick(e, item);
-              }}>
+              key={index.toString()}>
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 desc={item?.product_name}

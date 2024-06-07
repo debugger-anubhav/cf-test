@@ -8,16 +8,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {baseInstance} from "@/network/axios";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
 
   const [paramsCityId, setParamsCityId] = React.useState(46);
   const [data, setData] = React.useState(null);
@@ -121,12 +116,6 @@ const TrendingProducts = ({params}) => {
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
-
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
   return (
     <>
       {homePageReduxData?.trendindProduct ? (
@@ -139,10 +128,7 @@ const TrendingProducts = ({params}) => {
                 key={index.toString()}
                 className={`${styles.child ?? ""} ${
                   index === data?.length - 1 && "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}
-                onClick={e => {
-                  !reduxStateOfLoginPopup && handleCardClick(e, item);
-                }}>
+                } ${isDumy && "pointer-events-none"}`}>
                 <Card
                   hoverCardImage={
                     productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]

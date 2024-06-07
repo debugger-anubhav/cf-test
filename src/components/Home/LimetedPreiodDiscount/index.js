@@ -7,20 +7,15 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
-import {useRouter} from "next/navigation";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 
 const LimetedPreiodDiscount = () => {
   // const str = string.landing_page.Common_card;
-  const router = useRouter();
   const cityId = getLocalStorage("cityId");
 
   const dispatch = useDispatch();
   const {limitedDiscount: getLimitedPreiodData} = useSelector(
     state => state.homePagedata,
-  );
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
   );
   const [isDumy, setIsDumy] = React.useState(false);
   const {refetch: getLimitedPeriodDiscount} = useQuery(
@@ -79,11 +74,6 @@ const LimetedPreiodDiscount = () => {
     };
   }, []);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
@@ -92,9 +82,6 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div
             key={index.toString()}
-            onClick={e => {
-              !reduxStateOfLoginPopup && handleCardClick(e, item);
-            }}
             className={`${styles.child ?? ""}  ${
               index === getLimitedPreiodData?.length - 1 && "mr-[16px]"
             } ${isDumy && "pointer-events-none"}`}>

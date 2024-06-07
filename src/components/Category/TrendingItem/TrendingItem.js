@@ -6,16 +6,12 @@ import {useQuery} from "@/hooks/useQuery";
 import {addCategoryTrendingProduct} from "@/store/Slices/categorySlice";
 import {endPoints} from "@/network/endPoints";
 import {productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 
 const TrendingItem = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const [isDumy, setIsDumy] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+
   const sliderRef = useRef(null);
 
   const cityIdStr = localStorage
@@ -36,11 +32,6 @@ const TrendingItem = () => {
       })
       .catch(err => console.log(err?.message || "some error"));
   }, []);
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -93,10 +84,7 @@ const TrendingItem = () => {
           <div
             key={index.toString()}
             className={`${styles.child}flex flex-wrap mr-4 mb-4
-            `}
-            onClick={e => {
-              !reduxStateOfLoginPopup && handleCardClick(e, item);
-            }}>
+            `}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={

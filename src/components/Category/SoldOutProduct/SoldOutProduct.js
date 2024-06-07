@@ -17,7 +17,7 @@ import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
 import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
-import {useParams, useRouter} from "next/navigation";
+import {useParams} from "next/navigation";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CategoryContent from "../categoryContent/categoryContent";
 import CategoryCard from "../SingleProduct/CommonCard";
@@ -36,7 +36,6 @@ const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });
 export const SoldOutProduct = () => {
-  const router = useRouter();
   const [pageNo, setPageNo] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
   const [skeletonOpen, setSkeletonOpen] = useState(true);
@@ -44,9 +43,6 @@ export const SoldOutProduct = () => {
   const dispatch = useDispatch();
   const {productname} = useParams();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
 
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
@@ -137,11 +133,6 @@ export const SoldOutProduct = () => {
       })
       .catch(err => console.log(err?.message || "some error"));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
@@ -173,12 +164,7 @@ export const SoldOutProduct = () => {
                       {data?.map(
                         (item, index) => {
                           return (
-                            <div
-                              key={index}
-                              onClick={e => {
-                                !reduxStateOfLoginPopup &&
-                                  handleCardClick(e, item);
-                              }}>
+                            <div key={index}>
                               <CategoryCard
                                 cardImage={`${productImageBaseUrl}${
                                   item?.image?.split(",")[0]
