@@ -52,6 +52,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import Image from "next/image";
 import {RiSparklingFill} from "react-icons/ri";
 import {Skeleton} from "@mui/material";
+import Link from "next/link";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -506,7 +507,7 @@ const ShoppingCartSection = () => {
                 return (
                   <>
                     <div key={index} className={styles.single_product_wrapper}>
-                      <a
+                      <Link
                         href={
                           item?.is_frp === 1
                             ? `/choose-products/${
@@ -514,6 +515,7 @@ const ShoppingCartSection = () => {
                               }/${arr[0]?.subproduct?.attr_name?.split(" ")[0]}`
                             : `/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`
                         }
+                        target="_blank"
                         aria-label={
                           item?.is_frp !== 1 &&
                           `${
@@ -534,11 +536,11 @@ const ShoppingCartSection = () => {
                             loading="lazy"
                           />
                         </div>
-                      </a>
+                      </Link>
 
                       <div>
                         <div className={styles.name_div}>
-                          <a
+                          <Link
                             aria-label={
                               item?.is_frp !== 1 &&
                               item?.fc_product?.product_name?.replace(/-/g, " ")
@@ -551,14 +553,15 @@ const ShoppingCartSection = () => {
                                     arr[0]?.subproduct?.attr_name?.split(" ")[0]
                                   }`
                                 : `/things/${item?.fc_product?.id}/${item?.fc_product?.seourl}`
-                            }>
+                            }
+                            target="_blank">
                             <p className={styles.product_name}>
                               {item?.fc_product?.product_name?.replace(
                                 /-/g,
                                 " ",
                               )}
                             </p>
-                          </a>
+                          </Link>
                           <div
                             onClick={() => {
                               setProductId(item?.fc_product?.id);
@@ -737,9 +740,17 @@ const ShoppingCartSection = () => {
                             alt="product-image"
                             loading="lazy"
                           />
-                          <p className={styles.included_prod_name}>
-                            {item?.fc_product?.product_name?.replace(/-/g, " ")}
-                          </p>
+                          <Link
+                            href={`/things/${item.fc_product.id}/${item.fc_product.seourl}`}
+                            target="_blank"
+                            rel="noreferrer">
+                            <p className={styles.included_prod_name}>
+                              {item?.fc_product?.product_name?.replace(
+                                /-/g,
+                                " ",
+                              )}
+                            </p>
+                          </Link>
                         </div>
                         {index !== arr[0]?.includedProducts.length - 1 && (
                           <div className={styles.line_break}></div>
