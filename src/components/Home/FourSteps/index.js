@@ -2,17 +2,52 @@ import React from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {FourStepsCardData} from "@/constants/constant";
-import Image from "next/image";
+import Image from "@/components/Image/Image";
 
 // h2 p h3 p
 
-const FourSteps = () => {
+const FourSteps = ({data}) => {
   return (
     <div className={styles.four_steps_wrapper}>
       <h2 className={styles.head}>{string.landing_page.Four_steps.heading}</h2>
       <p className={styles.subhead}>{string.landing_page.Four_steps.subhead}</p>
       <div className={styles.card_wrapper}>
-        {FourStepsCardData?.map((itemm, index) => (
+        {data?.mediaData?.map((itemm, index) => {
+          return (
+            <div key={index.toString()} className={styles.card}>
+              <div>
+                <div className={`w-100 h-100 absolute z-10`} />
+                <Image
+                  src={itemm?.url}
+                  alt={data?.altText + index}
+                  className={`${
+                    index === 0
+                      ? "max-w-[80px]"
+                      : index === 1
+                      ? "max-w-[85px] "
+                      : index === 2
+                      ? "max-w-[137px] "
+                      : "max-w-[100px] "
+                  } !max-h-[100px] !h-[100px]`}
+                />
+              </div>
+              {FourStepsCardData?.map((ele, i) => {
+                return (
+                  <div key={i.toString}>
+                    {index === i && (
+                      <>
+                        <h3 className={styles.head1}>{ele?.head}</h3>
+                        <p className={styles.content1}>{ele?.content}</p>
+                      </>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
+
+        {/* {FourStepsCardData?.map((itemm, index) => (
           <div key={index.toString()} className={styles.card}>
             <div>
               <div className={`w-100 h-100 absolute z-10`} />
@@ -46,7 +81,7 @@ const FourSteps = () => {
             <h3 className={styles.head1}>{itemm?.head}</h3>
             <p className={styles.content1}>{itemm?.content}</p>
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

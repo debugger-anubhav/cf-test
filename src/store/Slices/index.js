@@ -362,6 +362,9 @@ export const ContentfulSlice = createSlice({
     banners: [],
     qrData: [],
     tryCityData: [],
+    mediaCoverageData: [],
+    fourStepsData: [],
+    fourStepsBanner: [],
   },
 
   reducers: {
@@ -374,10 +377,26 @@ export const ContentfulSlice = createSlice({
     setTryCityData: (state, action) => {
       state.tryCityData = action.payload;
     },
+    setMediaCoverageData: (state, action) => {
+      state.mediaCoverageData = action.payload;
+    },
+    setFourStepsData: (state, action) => {
+      state.fourStepsData = action.payload;
+    },
+    setFourStepsBanner: (state, action) => {
+      state.fourStepsBanner = action.payload;
+    },
   },
 });
 
-export const {setBanners, setQRData, setTryCityData} = ContentfulSlice.actions;
+export const {
+  setBanners,
+  setQRData,
+  setTryCityData,
+  setMediaCoverageData,
+  setFourStepsData,
+  setFourStepsBanner,
+} = ContentfulSlice.actions;
 
 export const {
   addCityList,

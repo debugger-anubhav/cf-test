@@ -26,7 +26,14 @@ import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 import {fetchAllData} from "@/constants/gql";
 import {useDispatch} from "react-redux";
-import {setBanners, setQRData, setTryCityData} from "@/store/Slices";
+import {
+  setBanners,
+  setFourStepsBanner,
+  setFourStepsData,
+  setMediaCoverageData,
+  setQRData,
+  setTryCityData,
+} from "@/store/Slices";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -196,9 +203,22 @@ export default function Home() {
       .filter(e => e.identifier === "trycitymax")
       .map(data => contentfulHomepageDataResolver(data));
 
+    const mediaCoverage = entries
+      .filter(e => e.identifier === "media-coverage")
+      .map(data => contentfulHomepageDataResolver(data));
+    const fourStep = entries
+      .filter(e => e.identifier === "four-steps-images")
+      .map(data => contentfulHomepageDataResolver(data));
+    const fourStepBanner = entries
+      .filter(e => e.identifier === "four-steps-main-banner")
+      .map(data => contentfulHomepageDataResolver(data));
+
     dispatch(setBanners(banners));
     dispatch(setQRData(QR[0]));
     dispatch(setTryCityData(tryCityMax[0]));
+    dispatch(setMediaCoverageData(mediaCoverage));
+    dispatch(setFourStepsData(fourStep[0]));
+    dispatch(setFourStepsBanner(fourStepBanner));
   };
 
   useEffect(() => {

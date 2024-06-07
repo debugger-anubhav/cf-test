@@ -4,8 +4,12 @@ import styles from "./style.module.css";
 import {MediaCoverageImages} from "@/constants/constant";
 import string from "@/constants/Constant.json";
 import {Skeleton} from "@mui/material";
+// import {useSelector} from "react-redux";
+// import Image from "@/components/Image/Image";
 
 const MediaCoverage = () => {
+  // const data = useSelector(state => state.contentful.mediaCoverageData);
+  // console.log(data, "datata");
   const str = string.landing_page.Media_coverage;
   const MediaCoverageImagesRepeated = Array(10)
     .fill(MediaCoverageImages)
