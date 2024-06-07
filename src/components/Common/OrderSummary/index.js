@@ -131,7 +131,7 @@ const OrderSummary = ({
                   <div className={styles.quantity_label}>{item?.quantity}x</div>
                 </div>
                 <div className="w-full">
-                  {item.is_frp === "0" ? (
+                  {Number(item.is_frp) === 0 ? (
                     <a
                       href={`/things/${item.product_id}/${item.product_seourl}`}
                       target="_blank"
