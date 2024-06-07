@@ -9,15 +9,10 @@ import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 
 const PreDesignCombos = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const cityId = getLocalStorage("cityId");
   const [isDumy, setIsDumy] = React.useState(false);
 
@@ -35,12 +30,6 @@ const PreDesignCombos = () => {
   }, []);
 
   const sliderRef = useRef(null);
-
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -95,10 +84,7 @@ const PreDesignCombos = () => {
                 className={`${styles.child ?? ""}  ${
                   index === homePageReduxData?.designComboProduct?.length - 1 &&
                   "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}
-                onClick={e => {
-                  !reduxStateOfLoginPopup && handleCardClick(e, item);
-                }}>
+                } ${isDumy && "pointer-events-none"}`}>
                 <Card
                   cardImage={
                     item?.image?.split(",").filter(item => item).length > 1

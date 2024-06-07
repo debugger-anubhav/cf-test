@@ -7,16 +7,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {addYouMightLike} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {baseInstance} from "@/network/axios";
 
 const YouMightLike = ({heading, isbg, params}) => {
-  const router = useRouter();
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const [isDumy, setIsDumy] = React.useState(false);
   const cityId = getLocalStorage("cityId");
 
@@ -75,11 +70,6 @@ const YouMightLike = ({heading, isbg, params}) => {
     };
   };
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.id}/${item.seourl}`);
-    }
-  };
   if (pageData?.youMightLike?.length > 0) {
     return (
       <div className={styles.main_container}>
@@ -94,9 +84,6 @@ const YouMightLike = ({heading, isbg, params}) => {
           {pageData?.youMightLike?.map((item, index) => (
             <div
               key={index}
-              onClick={e => {
-                !reduxStateOfLoginPopup && handleCardClick(e, item);
-              }}
               className={`${styles.child ?? ""} ${
                 isDumy && "pointer-events-none"
               }`}>
