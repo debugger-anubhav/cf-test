@@ -10,8 +10,7 @@ import {useSelector} from "react-redux";
 const CombineSection = () => {
   const data = useSelector(state => state.contentful.fourStepsData);
   const banner = useSelector(state => state.contentful.fourStepsBanner);
-  const bannerUrl = banner[0].mediaData[0].url;
-  console.log(data.mediaData, "datata");
+  const bannerUrl = banner[0]?.mediaData[0]?.url;
   return (
     <div className=" pb-20 pt-12 w-full flex md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] gap-4  lg:flex-row flex-col px-4">
       <div className="2xl:w-[40%] lg:w-[50%] w-full flex ">
