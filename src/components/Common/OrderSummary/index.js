@@ -16,6 +16,7 @@ import ReviewDrawer from "./reviewDrawer";
 import BillContent from "@/components/Cart/Drawer/TotalBreakupDrawer/content";
 import {useRouter} from "next/navigation";
 import {baseInstance} from "@/network/axios";
+import Link from "next/link";
 
 const OrderSummary = ({
   orderNumber,
@@ -133,19 +134,19 @@ const OrderSummary = ({
                 </div>
                 <div className="w-full">
                   {Number(item.is_frp) === 0 ? (
-                    <a
+                    <Link
                       href={`/things/${item.product_id}/${item.product_seourl}`}
                       target="_blank"
                       rel="noreferrer">
                       <p className={styles.prod_name}>{item.product_name}</p>
-                    </a>
+                    </Link>
                   ) : (
-                    <a
+                    <Link
                       href={`/choose-products/${item.product_id}/12`}
                       target="_blank"
                       rel="noreferrer">
                       <p className={styles.prod_name}>{item.product_name}</p>
-                    </a>
+                    </Link>
                   )}
                   {isOfflineInvoice ? (
                     <div className="mt-2">
@@ -216,9 +217,14 @@ const OrderSummary = ({
                         loading="lazy"
                         alt={p?.fc_product?.product_name}
                       />
-                      <p className={styles.prod_name}>
-                        {p?.fc_product?.product_name}
-                      </p>
+                      <Link
+                        href={`/things/${p.fc_product.id}/${p.fc_product.seourl}`}
+                        target="_blank"
+                        rel="noreferrer">
+                        <p className={styles.prod_name}>
+                          {p?.fc_product?.product_name}
+                        </p>
+                      </Link>
                     </div>
                   ))}
                 </>
