@@ -112,6 +112,7 @@ function CustomerPayment() {
       const res = await baseInstance.get(
         endPoints.addToCart.fetchCoins(userId),
       );
+      console.log(res);
 
       if (res?.data?.data?.length > 0) {
         const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
@@ -124,24 +125,23 @@ function CustomerPayment() {
           );
         } else setAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
         // setBackToAvailableCoins(parseInt(res?.data?.data?.[0]?.topup_amount));
-
-        if (urlParams.size > 0) {
-          setPrimaryAmount(amountParam);
-          let amount = amountParam;
-          if (coinsReduxValue?.isCoinApplied === true) {
-            amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
-          }
-
-          const temp = {};
-          temp.fullName = nameParam;
-          temp.email = emailParam;
-          temp.amount = amount <= 0 ? 1 : amount;
-          temp.invoice = invoiceNumberParam;
-          temp.cfCoins = coinsReduxValue?.usedCoins;
-          temp.notes = "";
-          setFormData(temp);
-          handleSubmit(temp, true);
+      }
+      if (urlParams.size > 0) {
+        setPrimaryAmount(amountParam);
+        let amount = amountParam;
+        if (coinsReduxValue?.isCoinApplied === true) {
+          amount = parseInt(amountParam) - coinsReduxValue?.usedCoins;
         }
+
+        const temp = {};
+        temp.fullName = nameParam;
+        temp.email = emailParam;
+        temp.amount = amount <= 0 ? 1 : amount;
+        temp.invoice = invoiceNumberParam;
+        temp.cfCoins = coinsReduxValue?.usedCoins;
+        temp.notes = "";
+        setFormData(temp);
+        handleSubmit(temp, true);
       }
     } catch (err) {
       console.log(err?.message || "some error");

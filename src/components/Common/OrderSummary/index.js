@@ -74,6 +74,7 @@ const OrderSummary = ({
   const toggleReviewDrawer = () => {
     setReviewDrawer(!reviewDrawer);
   };
+
   return (
     <div className={`${styles.main_container}`}>
       <div className={styles.products_wrapper}>
@@ -215,14 +216,9 @@ const OrderSummary = ({
                         loading="lazy"
                         alt={p?.fc_product?.product_name}
                       />
-                      <a
-                        href={`/things/${p.fc_product.id}/${p.fc_product.seourl}`}
-                        target="_blank"
-                        rel="noreferrer">
-                        <p className={styles.prod_name}>
-                          {p?.fc_product?.product_name}
-                        </p>
-                      </a>
+                      <p className={styles.prod_name}>
+                        {p?.fc_product?.product_name}
+                      </p>
                     </div>
                   ))}
                 </>

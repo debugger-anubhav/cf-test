@@ -15,7 +15,6 @@ const ItemsIncluded = () => {
       setLoader(false);
     }, 500);
   }, []);
-  console.log(pageDetails?.subProduct);
   return (
     <>
       {loader ? (
@@ -69,14 +68,9 @@ const ItemsIncluded = () => {
                         <div className={styles.info_row}>
                           <p className={styles.label}>Name</p>
                           <p className={styles.colon}>:</p>
-                          <a
-                            href={`/things/${item.id}/${item.seourl}`}
-                            target="_blank"
-                            rel="noreferrer">
-                            <p className={styles.info_details}>
-                              {item.product_name.replace(/-/g, " ")}
-                            </p>
-                          </a>
+                          <p className={styles.info_details}>
+                            {item.product_name.replace(/-/g, " ")}
+                          </p>
                         </div>
 
                         <div className={styles.info_row}>
