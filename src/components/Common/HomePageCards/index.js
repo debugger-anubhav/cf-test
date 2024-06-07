@@ -162,11 +162,7 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <a
-        href={
-          !reduxStateOfLoginPopup &&
-          window.open(`/things/${productID}/${seourl}`, "_blank")
-        }
+      <div
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_self"
@@ -258,7 +254,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </a>
+      </div>
     </>
   );
 };
