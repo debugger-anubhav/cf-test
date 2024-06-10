@@ -19,11 +19,13 @@ const HeroBanner = () => {
 
   // const router = useRouter();
 
+  console.log("data", banners);
+
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
       {/* web  */}
-      <div className="hidden lg:flex landing_page_carousel">
+      <div className="landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows
