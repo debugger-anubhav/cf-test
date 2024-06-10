@@ -421,15 +421,19 @@ export default function CommonDrawer({
       </div>
     );
   const searchParams = useSearchParams();
-  const viaShopBy = searchParams.get("viaShopBy");
   React.useEffect(() => {
+    const viaShopBy = searchParams.get("viaShopBy");
     if (viaShopBy) {
-      toggleDrawer("left", true);
+      if (DrawerName !== "menu") {
+        toggleDrawer("left", true)();
+        mobileCityDrawer && toggleDrawer("bottom", true)();
+      }
+      if (DrawerName === "menu") {
+        toggleDrawer("left", false)();
+        mobileCityDrawer && toggleDrawer("bottom", false)();
+      }
     }
-  }, [viaShopBy]);
-  // if(viaShopBy) {
-  //   console.log(viaShopBy, DrawerName)
-  // }
+  }, [searchParams]);
   return (
     <div className={"flex"}>
       <div
