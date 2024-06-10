@@ -26,7 +26,7 @@ const FAQQuestion = ({
         <div>
           <div
             dangerouslySetInnerHTML={{__html: ans}}
-            className={`${styles.ans} ${isOpen && styles.ans_open}`}
+            className={`${styles.ans} ${isOpen ? styles.ans_open : ""}`.trim()}
           />
           {applyBtn && isOpen && (
             <div>

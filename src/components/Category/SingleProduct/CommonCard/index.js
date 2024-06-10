@@ -13,6 +13,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 const CategoryCard = ({
   hoverCardImage,
   cardImage,
@@ -212,7 +213,9 @@ const CategoryCard = ({
           // addToWishlist();
         }}
       />
-      <a>
+      <Link
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+        target="_blank">
         <div
           className={`${styles.card_wrapper} `}
           onMouseOver={() => {
@@ -336,7 +339,7 @@ const CategoryCard = ({
             </>
           )}
         </div>
-      </a>
+      </Link>
     </>
   );
 };

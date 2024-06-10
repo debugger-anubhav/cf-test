@@ -268,6 +268,18 @@ export const ProfileSettingSlice = createSlice({
   },
 });
 
+export const ServiceRequestSlice = createSlice({
+  name: "SRData",
+  initialState: {
+    requestLoader: false,
+  },
+  reducers: {
+    setRequestLoader(state, action) {
+      state.requestLoader = action.payload;
+    },
+  },
+});
+
 export const KycPageSlice = createSlice({
   name: "KycPage",
   initialState: {
@@ -463,6 +475,8 @@ export const {setSeoApplianceRentalSubCategory, setSeoApplianceCrowd} =
 
 export const {getUserName, getUserContact, getUserEmail} =
   ProfileSettingSlice.actions;
+
+export const {setRequestLoader} = ServiceRequestSlice.actions;
 
 export const {getOrderId, setCibilDocsData} = KycPageSlice.actions;
 

@@ -12,9 +12,9 @@ import {baseInstance} from "@/network/axios";
 const CompleteTheLook = ({params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
   const [isDumy, setIsDumy] = React.useState(false);
 
   const cityId = getLocalStorage("cityId");
@@ -74,12 +74,12 @@ const CompleteTheLook = ({params}) => {
     };
   };
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     const url = `/things/${item.id}/${item.seourl}`;
+  //     window.open(url, "_blank");
+  //   }
+  // };
 
   if (pageData?.completeTheLook.length > 0) {
     return (
@@ -95,12 +95,12 @@ const CompleteTheLook = ({params}) => {
           {pageData?.completeTheLook?.map((item, index) => (
             <div
               key={index}
-              onClick={e => {
-                !reduxStateOfLoginPopup && handleCardClick(e, item);
-              }}
+              // onClick={e => {
+              //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+              // }}
               className={`${styles.child ?? ""} ${
-                isDumy && "pointer-events-none"
-              }`}>
+                isDumy ? "pointer-events-none" : ""
+              }`.trim()}>
               <Card
                 cardImage={
                   item?.image?.split(",").filter(item => item).length > 1

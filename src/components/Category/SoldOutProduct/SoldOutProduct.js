@@ -43,9 +43,6 @@ export const SoldOutProduct = () => {
   const dispatch = useDispatch();
   const {productname} = useParams();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
 
   const outStockItemLength =
     categoryPageReduxData?.categoryMetaOutStock?.totalProduct;
@@ -136,12 +133,7 @@ export const SoldOutProduct = () => {
       })
       .catch(err => console.log(err?.message || "some error"));
   }, [pageNo, categoryPageReduxData?.isfilter, categoryPageReduxData?.sortKey]);
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(style.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
@@ -173,12 +165,7 @@ export const SoldOutProduct = () => {
                       {data?.map(
                         (item, index) => {
                           return (
-                            <div
-                              key={index}
-                              onClick={e => {
-                                !reduxStateOfLoginPopup &&
-                                  handleCardClick(e, item);
-                              }}>
+                            <div key={index}>
                               <CategoryCard
                                 cardImage={`${productImageBaseUrl}${
                                   item?.image?.split(",")[0]

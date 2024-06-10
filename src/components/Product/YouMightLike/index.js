@@ -12,9 +12,9 @@ import {baseInstance} from "@/network/axios";
 const YouMightLike = ({heading, isbg, params}) => {
   const dispatch = useDispatch();
   const pageData = useSelector(state => state.productPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
   const [isDumy, setIsDumy] = React.useState(false);
   const cityId = getLocalStorage("cityId");
 
@@ -73,12 +73,12 @@ const YouMightLike = ({heading, isbg, params}) => {
     };
   };
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     const url = `/things/${item.id}/${item.seourl}`;
+  //     window.open(url, "_blank");
+  //   }
+  // };
   if (pageData?.youMightLike?.length > 0) {
     return (
       <div className={styles.main_container}>
@@ -93,9 +93,9 @@ const YouMightLike = ({heading, isbg, params}) => {
           {pageData?.youMightLike?.map((item, index) => (
             <div
               key={index}
-              onClick={e => {
-                !reduxStateOfLoginPopup && handleCardClick(e, item);
-              }}
+              // onClick={e => {
+              //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+              // }}
               className={`${styles.child ?? ""} ${
                 isDumy && "pointer-events-none"
               }`}>

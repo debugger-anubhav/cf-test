@@ -11,6 +11,7 @@ import {useMutation} from "@/hooks/useMutation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import {Skeleton} from "@mui/material";
 
 const ProductCard = ({
   handleThumbnailClick,
@@ -26,9 +27,16 @@ const ProductCard = ({
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const [inWishList, setInWishList] = useState(isSavedComp || false);
+  const [loader, setLoader] = useState(true);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const updateCount = useRef(0);
   const userId = decrypt(getLocalStorage("_ga"));
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoader(false);
+    }, 2000);
+  }, []);
 
   const cityIdStr = localStorage
     .getItem("cityId")
@@ -162,29 +170,45 @@ const ProductCard = ({
             </Carousel>
           </div>
 
-          <div className={styles.thumbnail_container}>
-            {item?.image?.split(",")?.map((image, index) => (
-              <>
-                {image && (
-                  <div
-                    className={`${styles.thumbnail_img} ${
-                      index === selectedIndexes[mainIndex]
-                        ? "border-5774AC"
-                        : "border-fff"
-                    }`}
-                    key={index}
-                    onClick={() => handleThumbnailClick(mainIndex, index)}>
-                    <img
-                      src={`${productImageBaseUrl + "thumb/" + image}`}
-                      alt={"product-image"}
-                      className="w-full h-full"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-              </>
-            ))}
-          </div>
+          {loader ? (
+            <div className={styles.thumbnail_container}>
+              {[1, 2, 3, 4]?.map(i => {
+                return (
+                  <Skeleton
+                    key={i.toString()}
+                    variant="rectangular"
+                    width={48}
+                    height={100}
+                    className={styles.thumbnail_img}
+                  />
+                );
+              })}
+            </div>
+          ) : (
+            <div className={styles.thumbnail_container}>
+              {item?.image?.split(",")?.map((image, index) => (
+                <>
+                  {image && (
+                    <div
+                      className={`${styles.thumbnail_img} ${
+                        index === selectedIndexes[mainIndex]
+                          ? "border-5774AC"
+                          : "border-fff"
+                      }`}
+                      key={index}
+                      onClick={() => handleThumbnailClick(mainIndex, index)}>
+                      <img
+                        src={`${productImageBaseUrl + "thumb/" + image}`}
+                        alt={"product-image"}
+                        className="w-full h-full"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                </>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className={styles.right_div}>

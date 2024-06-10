@@ -17,9 +17,9 @@ const LimetedPreiodDiscount = () => {
   const {limitedDiscount: getLimitedPreiodData} = useSelector(
     state => state.homePagedata,
   );
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
   const [isDumy, setIsDumy] = React.useState(false);
   const {refetch: getLimitedPeriodDiscount} = useQuery(
     "limited-discount",
@@ -77,12 +77,12 @@ const LimetedPreiodDiscount = () => {
     };
   }, []);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     const url = `/things/${item.id}/${item.seourl}`;
+  //     window.open(url, "_blank");
+  //   }
+  // };
   return getLimitedPreiodData ? (
     <div className={styles.main_container}>
       <h2 className={styles.heading}>Limited period discounts</h2>
@@ -91,9 +91,9 @@ const LimetedPreiodDiscount = () => {
         {getLimitedPreiodData?.map((item, index) => (
           <div
             key={index.toString()}
-            onClick={e => {
-              !reduxStateOfLoginPopup && handleCardClick(e, item);
-            }}
+            // onClick={e => {
+            //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+            // }}
             className={`${styles.child ?? ""}  ${
               index === getLimitedPreiodData?.length - 1 ? "mr-[16px]" : ""
             } ${isDumy ? "pointer-events-none" : ""}`.trim()}>

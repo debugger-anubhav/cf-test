@@ -16,6 +16,7 @@ import {
   setLoginPopupState,
 } from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 
 const Card = ({
   desc,
@@ -162,10 +163,11 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <div
+      <Link
+        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
-        target="_self"
+        target="_blank"
         rel="noopener">
         <div
           onClick={() => {
@@ -191,10 +193,9 @@ const Card = ({
               loading="lazy"
               width={"100%"}
               height={"100%"}
-              className={`${styles.thumbnail}
-          ${hoverCard ? styles.card_image_hover : ""}
-          }
-          `.trim()}
+              className={`${styles.thumbnail} ${
+                hoverCard ? styles.card_image_hover : ""
+              }`.trim()}
             />
 
             {/* ----------- */}
@@ -254,7 +255,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

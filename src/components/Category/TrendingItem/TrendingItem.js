@@ -11,9 +11,7 @@ const TrendingItem = () => {
   const dispatch = useDispatch();
   const [isDumy, setIsDumy] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+
   const sliderRef = useRef(null);
 
   const cityIdStr = localStorage
@@ -34,12 +32,6 @@ const TrendingItem = () => {
       })
       .catch(err => console.log(err?.message || "some error"));
   }, []);
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -92,10 +84,7 @@ const TrendingItem = () => {
           <div
             key={index.toString()}
             className={`${styles.child}flex flex-wrap mr-4 mb-4
-            `}
-            onClick={e => {
-              !reduxStateOfLoginPopup && handleCardClick(e, item);
-            }}>
+            `}>
             <Card
               cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
               hoverCardImage={

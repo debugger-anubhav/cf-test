@@ -162,6 +162,9 @@ const LoginModal = ({
               // dispatch(setShoppingCartTab(1));
             }
             showToastNotification("Login successfully", 1);
+            setTimeout(() => {
+              window?.location?.reload();
+            }, 1500);
           } else if (
             response?.data?.message ===
             "Multiple registered user found. Please enter registered email."
@@ -169,9 +172,6 @@ const LoginModal = ({
             setEmailArr(response?.data?.data?.data);
             setModalCategory("multipleEmails");
           }
-          setTimeout(() => {
-            window.open("/", "_self");
-          }, 2000);
         }
       })
       .catch(err => {

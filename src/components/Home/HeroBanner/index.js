@@ -22,7 +22,8 @@ const HeroBanner = () => {
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      <div className="landing_page_carousel">
+      {/* web  */}
+      <div className="hidden lg:flex landing_page_carousel">
         <Carousel
           showStatus={false}
           showArrows

@@ -15,9 +15,9 @@ const RecentlyViewedProduct = ({page}) => {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
+  // const reduxStateOfLoginPopup = useSelector(
+  //   state => state.homePagedata.loginPopupState,
+  // );
   const userId = decrypt(getLocalStorage("_ga"));
   const [isDumy, setIsDumy] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(!!userId);
@@ -102,12 +102,12 @@ const RecentlyViewedProduct = ({page}) => {
     };
   }, []);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      const url = `/things/${item.id}/${item.seourl}`;
-      window.open(url, "_blank");
-    }
-  };
+  // const handleCardClick = (e, item) => {
+  //   if (!e.target.classList.contains(styles.child)) {
+  //     const url = `/things/${item.id}/${item.seourl}`;
+  //     window.open(url, "_blank");
+  //   }
+  // };
 
   return (
     <>
@@ -116,8 +116,8 @@ const RecentlyViewedProduct = ({page}) => {
           {homePageReduxData?.recentProduct?.length ? (
             <h2
               className={`${
-                page === "product" && "xl:!text-24 xl:!tracking-0.48"
-              } ${styles.heading}`}>
+                page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
+              } ${styles.heading}`.trim()}>
               Recently Viewed Products
             </h2>
           ) : null}
@@ -128,14 +128,14 @@ const RecentlyViewedProduct = ({page}) => {
                   {(item?.image || item?.price) && (
                     <div
                       key={index.toString()}
-                      onClick={e => {
-                        !reduxStateOfLoginPopup && handleCardClick(e, item);
-                      }}
+                      // onClick={e => {
+                      //   !reduxStateOfLoginPopup && handleCardClick(e, item);
+                      // }}
                       className={`${styles.child ?? ""}  ${
-                        index ===
-                          homePageReduxData?.recentProduct?.length - 1 &&
-                        "mr-[16px]"
-                      } ${isDumy && "pointer-events-none"}`}>
+                        index === homePageReduxData?.recentProduct?.length - 1
+                          ? "mr-[16px]"
+                          : ""
+                      } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                       <Card
                         cardImage={
                           item?.image?.split(",").filter(item => item).length >

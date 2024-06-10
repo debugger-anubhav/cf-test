@@ -12,6 +12,7 @@ import {
   paymentSuccessSlice,
   citymaxSlice,
   ContentfulSlice,
+  ServiceRequestSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -29,6 +30,7 @@ export const store = configureStore({
     successPayment: paymentSuccessSlice.reducer,
     citymax: citymaxSlice.reducer,
     contentful: ContentfulSlice.reducer,
+    serviceRequestData: ServiceRequestSlice.reducer,
   },
 });
 
