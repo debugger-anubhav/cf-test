@@ -16,7 +16,7 @@ const getSizes = () =>
     (max-width: 1999px) 1999px,
   `;
 
-const Image = ({src, alt, priority = true, ...props}) => {
+const Image = ({src, alt, priority = true, loading = "eager", ...props}) => {
   const sizes = getSizes();
 
   const formattedUrl = src?.startsWith("https:") ? src : `https:${src}`;
@@ -57,7 +57,7 @@ const Image = ({src, alt, priority = true, ...props}) => {
           fill
           ref={ref}
           sizes={sizes}
-          loading="eager"
+          loading={loading}
           loader={({src, width}) => `${src}?w=${width}&q=50`}
           onLoadingComplete={({naturalHeight}) => {
             setHeight(naturalHeight);
@@ -65,7 +65,7 @@ const Image = ({src, alt, priority = true, ...props}) => {
           onLoad={() => {
             setIsLoaded(true);
           }}
-          priority={priority}
+          priority={loading === "eager" ? priority : false}
           style={{
             width: undefined,
             height: undefined,

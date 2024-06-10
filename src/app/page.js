@@ -25,7 +25,7 @@ import {
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 import {fetchAllData} from "@/constants/gql";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
   setBanners,
   setFourStepsBanner,
@@ -138,6 +138,7 @@ export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
   const dispatch = useDispatch();
+  const contentfulData = useSelector(state => state.contentful);
 
   useEffect(() => {
     const handleTouchStart = event => {
@@ -170,6 +171,7 @@ export default function Home() {
   }, [userId]);
 
   const getAllEntries = async () => {
+    if (contentfulData.length > 0) return;
     let entries = [];
     const limit = 50;
     let skip = 0;

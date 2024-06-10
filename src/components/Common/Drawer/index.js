@@ -17,6 +17,7 @@ import {
 import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {Skeleton} from "@mui/material";
+import NextImage from "@/components/Image/Image";
 
 export default function CommonDrawer({
   DrawerName,
@@ -154,14 +155,19 @@ export default function CommonDrawer({
         </div>
         <div className={styles.drawer_content}>
           <a href="/">
-            <img
+            <NextImage
+              src={"https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"}
+              alt="cityfurnish-logo"
+              loading="lazy"
+            />
+            {/* <img
               src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
               alt="cityfurnish-logo"
               className={styles.drawer_logo}
               width={"100%"}
               height={"100%"}
               loading="lazy"
-            />
+            /> */}
           </a>
           <div className={styles.menu_list}>
             <div
