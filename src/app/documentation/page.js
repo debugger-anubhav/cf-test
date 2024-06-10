@@ -8,11 +8,16 @@ import {AuthProvider} from "@/components/HOC/index";
 import {useDispatch} from "react-redux";
 import {setDocSidebarActiveItem} from "@/store/Slices";
 
-const Documentaion = () => {
+const Documentation = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(setDocSidebarActiveItem("KYC & Documentation"));
+    if (typeof document !== "undefined") {
+      // Only run this code in the browser environment
+      dispatch(setDocSidebarActiveItem("KYC & Documentation"));
+    }
   }, []);
+
   return (
     <div>
       <AnnouncementBar />
@@ -23,4 +28,4 @@ const Documentaion = () => {
   );
 };
 
-export default AuthProvider(Documentaion);
+export default AuthProvider(Documentation);

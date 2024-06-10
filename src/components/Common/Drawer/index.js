@@ -14,7 +14,7 @@ import {
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
-import {useParams, useRouter} from "next/navigation";
+import {useParams, useRouter, useSearchParams} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {Skeleton} from "@mui/material";
 
@@ -420,7 +420,16 @@ export default function CommonDrawer({
         </div>
       </div>
     );
-
+  const searchParams = useSearchParams();
+  const viaShopBy = searchParams.get("viaShopBy");
+  React.useEffect(() => {
+    if (viaShopBy) {
+      toggleDrawer("left", true);
+    }
+  }, [viaShopBy]);
+  // if(viaShopBy) {
+  //   console.log(viaShopBy, DrawerName)
+  // }
   return (
     <div className={"flex"}>
       <div
