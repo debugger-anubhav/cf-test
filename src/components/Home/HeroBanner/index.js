@@ -5,114 +5,29 @@ import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {useRouter} from "next/navigation";
-import {Skeleton} from "@mui/material";
+import {
+  CityWiseBannerWebsite,
+  CityNameToId,
+  CityWiseBannerMobile,
+  CityWiseBannerTablet,
+} from "@/constants/constant";
 
 const HeroBanner = () => {
   const router = useRouter();
+  // const cityName = useSelector(state => state.homePagedata.cityName);
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
-
-  const bannersData = [
-    {
-      // web
-      images: [
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp",
-          alt: "bed-room",
-          redirectionLink: `/${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-furniture-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp",
-          alt: "appliances",
-          redirectionLink: `/${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-appliances-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp",
-          alt: "citymax",
-          redirectionLink: "/citymax",
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp",
-          alt: "discount-deals",
-          redirectionLink: `/${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/discount-deals`,
-        },
-      ],
-    },
-    // mobile
-    {
-      images: [
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp",
-          alt: "bed-room",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-furniture-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp ",
-          alt: "appliances",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-appliances-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp",
-          alt: "citymax",
-          redirectionLink: "/citymax",
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp",
-          alt: "discount-deals",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/discount-deals`,
-        },
-      ],
-    },
-    // tablet
-    {
-      images: [
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_1.webp ",
-          alt: "bed-room",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-furniture-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_2.webp ",
-          alt: "appliances",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/home-appliances-rental`,
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_3.webp",
-          alt: "citymax",
-          redirectionLink: "/citymax",
-        },
-        {
-          src: "https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_4.webp",
-          alt: "discount-deals",
-          redirectionLink: `${homePageReduxData?.cityName
-            .replace(/\//g, "-")
-            ?.toLowerCase()}/discount-deals`,
-        },
-      ],
-    },
-  ];
-
   const handleRedirection = link => {
-    if (showLinkForRentPage) {
-      router.push(link);
+    if (showLinkForRentPage && !link.includes("citymax")) {
+      router.push(
+        `/${homePageReduxData?.cityName
+          .replace(/\//g, "-")
+          ?.toLowerCase()}${link}`,
+      );
+    } else {
+      router.push(`${link}`);
     }
   };
 
@@ -133,23 +48,27 @@ const HeroBanner = () => {
           infiniteLoop
           width={"100%"}
           swipeable>
-          {bannersData[0].images.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex cursor-pointer"
-                onClick={() => {
-                  handleRedirection(item.redirectionLink);
-                }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={1920}
-                  height={801}
-                />
+          {CityWiseBannerWebsite[
+            CityNameToId[homePageReduxData?.cityName]
+          ]?.map((item, index) => {
+            return (
+              <div key={index.toString()}>
+                <div
+                  className="flex cursor-pointer"
+                  onClick={() => {
+                    handleRedirection(item.redirectionLink);
+                  }}>
+                  <img
+                    src={item.link}
+                    alt={item.alternate}
+                    className="cursor-pointer rounded-lg"
+                    width={1920}
+                    height={801}
+                  />
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </Carousel>
       </div>
 
@@ -163,23 +82,27 @@ const HeroBanner = () => {
           infiniteLoop
           width={"100%"}
           swipeable>
-          {bannersData[1].images.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex cursor-pointer"
-                onClick={() => {
-                  handleRedirection(item.redirectionLink);
-                }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={430}
-                  height={179}
-                />
-              </div>
-            </div>
-          ))}
+          {CityWiseBannerMobile[CityNameToId[homePageReduxData?.cityName]]?.map(
+            (item, index) => {
+              return (
+                <div key={index.toString()}>
+                  <div
+                    className="flex cursor-pointer"
+                    onClick={() => {
+                      handleRedirection(item.redirectionLink);
+                    }}>
+                    <img
+                      src={item.link}
+                      alt={item.alternate}
+                      className="cursor-pointer rounded-lg"
+                      width={430}
+                      height={179}
+                    />
+                  </div>
+                </div>
+              );
+            },
+          )}
         </Carousel>
       </div>
 
@@ -193,23 +116,27 @@ const HeroBanner = () => {
           infiniteLoop
           width={"100%"}
           swipeable>
-          {bannersData[2].images.map((item, index) => (
-            <div key={index}>
-              <div
-                className="flex cursor-pointer"
-                onClick={() => {
-                  handleRedirection(item.redirectionLink);
-                }}>
-                <img
-                  src={item.src}
-                  alt={item.alt}
-                  className="cursor-pointer rounded-lg"
-                  width={1024}
-                  height={427}
-                />
-              </div>
-            </div>
-          ))}
+          {CityWiseBannerTablet[CityNameToId[homePageReduxData?.cityName]]?.map(
+            (item, index) => {
+              return (
+                <div key={index.toString()}>
+                  <div
+                    className="flex cursor-pointer"
+                    onClick={() => {
+                      handleRedirection(item.redirectionLink);
+                    }}>
+                    <img
+                      src={item.link}
+                      alt={item.alternate}
+                      className="cursor-pointer rounded-lg"
+                      width={1024}
+                      height={427}
+                    />
+                  </div>
+                </div>
+              );
+            },
+          )}
         </Carousel>
       </div>
     </div>
@@ -217,30 +144,3 @@ const HeroBanner = () => {
 };
 
 export default HeroBanner;
-
-export const HeroBannerSkeleton = () => {
-  return (
-    <div className="lg:h-[600px] md:h-[350px] ms:h-[250px] h-[150px] w-full">
-      <Skeleton variant="rectangular" width={"100%"} height={"100%"} />
-    </div>
-  );
-};
-
-// Website
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp => Discount Deals
-
-// Mobile
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_1.webp => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_2.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_3.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_mob_banner_4.webp => Discount Deals
-
-// Tablet
-
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_1.webp  => Home Furniture
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_2.webp => Appliance
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_3.webp => Citymax
-// https://d3juy0zp6vqec8.cloudfront.net/images/new_tab_banner_4.webp => Discount Deals

@@ -15,6 +15,9 @@ const AnnouncementBar = () => {
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
             {string.landing_page.announcement_bar}
+            <span className="font-bold pl-1" style={{color: "#2581F7"}}>
+              &apos;{string.landing_page.coupon_code}&apos;
+            </span>
           </div>
           <div
             className={styles.announcement_close_icon}
