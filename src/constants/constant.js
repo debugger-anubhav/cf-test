@@ -888,7 +888,7 @@ export const CityWiseBannerMobile = {
   ],
   46: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_bangalore.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_bangalore.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -932,7 +932,7 @@ export const CityWiseBannerMobile = {
   ],
   48: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_mumbai.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_mumbai.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
