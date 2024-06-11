@@ -14,7 +14,7 @@ import {
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {Skeleton} from "@mui/material";
 
@@ -421,20 +421,20 @@ export default function CommonDrawer({
         </div>
       </div>
     );
-  const searchParams = useSearchParams();
-  React.useEffect(() => {
-    const viaShopBy = searchParams.get("viaShopBy");
-    if (viaShopBy) {
-      if (DrawerName !== "menu") {
-        toggleDrawer("left", true)();
-        mobileCityDrawer && toggleDrawer("bottom", true)();
-      }
-      if (DrawerName === "menu") {
-        toggleDrawer("left", false)();
-        mobileCityDrawer && toggleDrawer("bottom", false)();
-      }
-    }
-  }, [searchParams]);
+  // const searchParams = useSearchParams();
+  // React.useEffect(() => {
+  //   const viaShopBy = searchParams.get("viaShopBy");
+  //   if (viaShopBy) {
+  //     if (DrawerName !== "menu") {
+  //       toggleDrawer("left", true)();
+  //       mobileCityDrawer && toggleDrawer("bottom", true)();
+  //     }
+  //     if (DrawerName === "menu") {
+  //       toggleDrawer("left", false)();
+  //       mobileCityDrawer && toggleDrawer("bottom", false)();
+  //     }
+  //   }
+  // }, [searchParams]);
   return (
     <div className={"flex"}>
       <div
