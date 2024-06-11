@@ -910,7 +910,7 @@ export const CityWiseBannerMobile = {
   ],
   47: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_delhi.webp`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -998,7 +998,7 @@ export const CityWiseBannerMobile = {
   ],
   51: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_hyderabad.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_hyderabad.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -1067,7 +1067,7 @@ export const CityWiseBannerTablet = {
   ],
   46: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_bangalore.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_bangalore.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -1089,7 +1089,7 @@ export const CityWiseBannerTablet = {
   ],
   47: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_pune.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_pune.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -1111,7 +1111,7 @@ export const CityWiseBannerTablet = {
   ],
   48: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_mumbai.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_mumbai.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
@@ -1177,7 +1177,7 @@ export const CityWiseBannerTablet = {
   ],
   51: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_hyderabad.wepb`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_hyderabad.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },
