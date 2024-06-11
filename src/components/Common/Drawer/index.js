@@ -439,7 +439,7 @@ export default function CommonDrawer({
         mobileCityDrawer && toggleDrawer("bottom", false)();
       }
     }
-  }, [currentURL]);
+  }, []);
   return (
     <div className={"flex"}>
       <div
