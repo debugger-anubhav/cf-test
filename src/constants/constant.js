@@ -910,7 +910,7 @@ export const CityWiseBannerMobile = {
   ],
   47: [
     {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_pune.webp`,
       alternate: "Home Furniture",
       redirectionLink: `/home-furniture-rental`,
     },

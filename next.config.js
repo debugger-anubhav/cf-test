@@ -45,6 +45,21 @@ module.exports = {
         permanent: true,
       },
       {
+        source: "/:city/furniture-rental-packages/:path*",
+        destination: "/:city/rental-packages/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:city/office-furniture-rent/:path*",
+        destination: "/:city/office-furniture-rental/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:city/other-appliances/:path*",
+        destination: "/:city/other-appliances/:path*",
+        permanent: true,
+      },
+      {
         source: "/shopby/:category/:path*",
         destination: `/bangalore/:category/:path*?viaShopBy=true`,
         permanent: true,
