@@ -14,7 +14,7 @@ import {
   addSetProduct,
   addSingleProduct,
 } from "@/store/Slices/categorySlice";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {Skeleton} from "@mui/material";
 import NextImage from "@/components/Image/Image";

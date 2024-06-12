@@ -24,10 +24,10 @@ const FourSteps = ({data}) => {
                     index === 0
                       ? "max-w-[80px]"
                       : index === 1
-                      ? "max-w-[85px] "
-                      : index === 2
-                      ? "max-w-[137px] "
-                      : "max-w-[100px] "
+                        ? "max-w-[85px] "
+                        : index === 2
+                          ? "max-w-[137px] "
+                          : "max-w-[100px] "
                   } !max-h-[100px] !h-[100px]`}
                 />
               </div>
