@@ -6,9 +6,9 @@ import {Box, Modal, Typography} from "@mui/material";
 import {getLocalStorage} from "@/constants/constant";
 import {useMutation} from "@/hooks/useMutation";
 import {endPoints} from "@/network/endPoints";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import Link from "next/link";
 
 const ProductCard = ({
   desc,
@@ -34,7 +34,6 @@ const ProductCard = ({
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
-  const router = useRouter();
   const cityIdStr = parseInt(getLocalStorage("cityId"));
 
   const notifyData = {
@@ -64,11 +63,6 @@ const ProductCard = ({
       })
       .catch(err => console.log(err?.message || "some error"));
   };
-  const handleProductClick = (e, productID, seourl) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${productID}/${seourl}`);
-    }
-  };
   return (
     <>
       <div
@@ -76,17 +70,8 @@ const ProductCard = ({
         onMouseOver={() => {
           setHoverCard(true);
         }}
-        onMouseOut={() => setHoverCard(false)}
-        onClick={e => {
-          e.preventDefault();
-          e.stopPropagation();
-          handleProductClick(e, productID, seourl);
-        }}>
-        <a
-          href={`/things/${productID}/${seourl}`}
-          onClick={e => {
-            e.preventDefault();
-          }}>
+        onMouseOut={() => setHoverCard(false)}>
+        <Link href={`/things/${productID}/${seourl}`} target="_blank">
           <div className="relative">
             <img
               src={hoverCard ? hoverCardImage : cardImage}
@@ -198,7 +183,7 @@ const ProductCard = ({
               {!soldOut ? "Notify Me" : "  Move to product page"}
             </button>
           </div>
-        </a>
+        </Link>
       </div>
       <Modal
         open={deleteIconClick}

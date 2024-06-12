@@ -2,7 +2,7 @@
   @apply flex flex-col items-center mx-4 pb-4 xl:py-14;
 }
 .img {
-  @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px];
+  @apply w-[245px] h-[245px] xl:w-[300px] xl:h-[300px] cursor-pointer;
 }
 .head {
   @apply mt-2 xl:mt-8 text-45454A text-20 xl:text-32 font-Poppins font-medium leading-8 xl:leading-10 tracking-0.4 xl:tracking-0.6;
@@ -12,4 +12,10 @@
 }
 .btn {
   @apply font-Poppins mt-10 rounded-lg bg-F6B704 font-medium text-222 md:w-[440px] w-full xl:w-[440px] px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+}
+.cart_img_wrapper {
+  @apply md:w-[440px] w-full flex items-center justify-center cursor-pointer;
+}
+.empty_text_wrapper {
+  @apply flex justify-center items-center flex-col cursor-pointer;
 }

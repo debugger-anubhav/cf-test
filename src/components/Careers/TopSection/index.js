@@ -56,11 +56,11 @@ export default function TopSection() {
           enthusiastic as you? Join our team.
         </p>
       </div>
-      <div className={styles.sticky_btn_wrapper}>
+      {/* <div className={styles.sticky_btn_wrapper}>
         <a href="#vacancies-section" className="w-full">
           <button className={styles.join_us_sticky}>Join us</button>
         </a>
-      </div>
+      </div> */}
     </div>
   );
 }

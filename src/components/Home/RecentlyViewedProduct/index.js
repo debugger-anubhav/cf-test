@@ -8,18 +8,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {useRouter} from "next/navigation";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 
 const RecentlyViewedProduct = ({page}) => {
   const {checkAuthentication} = useAuthentication();
-  const router = useRouter();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const reduxStateOfLoginPopup = useSelector(
-    state => state.homePagedata.loginPopupState,
-  );
   const userId = decrypt(getLocalStorage("_ga"));
   const [isDumy, setIsDumy] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(!!userId);
@@ -104,12 +99,6 @@ const RecentlyViewedProduct = ({page}) => {
     };
   }, []);
 
-  const handleCardClick = (e, item) => {
-    if (!e.target.classList.contains(styles.child)) {
-      router.push(`/things/${item.product_id}/${item.seourl}`);
-    }
-  };
-
   return (
     <>
       {homePageReduxData?.recentProduct ? (
@@ -117,8 +106,8 @@ const RecentlyViewedProduct = ({page}) => {
           {homePageReduxData?.recentProduct?.length ? (
             <h2
               className={`${
-                page === "product" && "xl:!text-24 xl:!tracking-0.48"
-              } ${styles.heading}`}>
+                page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
+              } ${styles.heading}`.trim()}>
               Recently Viewed Products
             </h2>
           ) : null}
@@ -129,14 +118,11 @@ const RecentlyViewedProduct = ({page}) => {
                   {(item?.image || item?.price) && (
                     <div
                       key={index.toString()}
-                      onClick={e => {
-                        !reduxStateOfLoginPopup && handleCardClick(e, item);
-                      }}
                       className={`${styles.child ?? ""}  ${
-                        index ===
-                          homePageReduxData?.recentProduct?.length - 1 &&
-                        "mr-[16px]"
-                      } ${isDumy && "pointer-events-none"}`}>
+                        index === homePageReduxData?.recentProduct?.length - 1
+                          ? "mr-[16px]"
+                          : ""
+                      } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                       <Card
                         cardImage={
                           item?.image?.split(",").filter(item => item).length >

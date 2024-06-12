@@ -37,7 +37,7 @@ const ModalContentForVerifyOtp = ({
         <p className={styles.desc}>Provide your OTP</p>
         <div className={`!mt-1 ${styles.form_input}`}>
           <input
-            placeholder="Enter the OTP you just received"
+            placeholder="ENTER OTP"
             type="number"
             onWheel={handleWheel}
             value={otp}

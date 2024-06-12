@@ -6,13 +6,17 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-// import {useRouter} from "next/navigation";
 import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
+import {
+  getProductDetails,
+  reduxSetModalState,
+  setLoginPopupState,
+} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
+import Link from "next/link";
 
 const Card = ({
   desc,
@@ -147,13 +151,6 @@ const Card = ({
     updateCount.current += 1;
   }, []);
 
-  // const handleProductClick = (e, productID, seourl) => {
-  //   e.stopPropagation();
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     router.push(`/things/${productID}/${seourl}`);
-  //   }
-  // };
-
   return (
     <>
       <LoginModal
@@ -165,21 +162,23 @@ const Card = ({
           // addToWishlist();
         }}
       />
-      <a
+      <Link
         href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
-        // onClick={e => e.preventDefault()}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
-        target="_self"
+        target="_blank"
         rel="noopener">
         <div
-          // onClick={e => {
-          //   !reduxStateOfLoginPopup && handleProductClick(e, productID, seourl);
-          // }}
-          className={`${styles.wrapper} ${hoverCard && styles.hover_wrapper} ${
-            productWidth ?? ""
-          } 
-      `}
+          onClick={() => {
+            if (!reduxStateOfLoginPopup) {
+              dispatch(getProductDetails([]));
+              window.scrollTo({top: 0});
+            }
+          }}
+          className={`${styles.wrapper} ${
+            hoverCard ? styles.hover_wrapper : ""
+          } ${productWidth ?? ""} 
+      `.trim()}
           onMouseOver={() => {
             isHover && setHoverCard(true);
           }}
@@ -193,10 +192,9 @@ const Card = ({
               loading="lazy"
               width={"100%"}
               height={"100%"}
-              className={`${styles.thumbnail}
-          ${hoverCard && styles.card_image_hover} 
-          }
-          `}
+              className={`${styles.thumbnail} ${
+                hoverCard ? styles.card_image_hover : ""
+              }`.trim()}
             />
 
             {/* ----------- */}
@@ -256,7 +254,7 @@ const Card = ({
             )}
           </div>
         </div>
-      </a>
+      </Link>
     </>
   );
 };

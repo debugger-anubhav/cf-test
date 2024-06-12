@@ -5,7 +5,6 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 
 import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
-import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {
   CreateRequestPayload,
@@ -15,8 +14,13 @@ import {
 } from "@/constants/constant";
 import {cityUrl} from "../../../appConfig";
 import {decrypt} from "@/hooks/cryptoUtils";
+import {useDispatch, useSelector} from "react-redux";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const selectedType = useSelector(
     state => state.homePagedata.serviceRequestType,
   );
@@ -29,6 +33,7 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
   const userId = decrypt(getLocalStorage("_ga"));
 
   const handleSubmit = values => {
+    dispatch(setRequestLoader(true));
     const payload = {
       ...CreateRequestPayload,
       user_id: userId,
@@ -124,28 +129,26 @@ function CancelMandate({prevScreen, data, heading, isHelpDrawer}) {
                   rows={2}
                 />
               </div>
+              {loader && <LoaderComponent loading={loader} />}
+
               <button
                 type="submit"
-                className={`${styles.proceed_btn}  !w-fit ${
-                  !formikRef?.current?.isValid
-                    ? "!bg-[#FFDF85] !cursor-not-allowed "
-                    : ``
-                } !hidden md:!flex ${
+                className={`${styles.proceed_btn}  !w-fit !hidden md:!flex ${
                   callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
-                }`}>
+                }`}
+                disabled={!callFunctionFlag}>
                 Create request <ForwardArrowWithLine />
               </button>
               <div className={`${styles.bottom_row_formik} !flex md:!hidden`}>
                 <div className="flex w-full">
                   <button
                     type="submit"
-                    className={`${styles.form_submit_btn}  !w-full ${
-                      !formikRef?.current?.isValid
-                        ? "!bg-[#FFDF85] !cursor-not-allowed"
-                        : ``
-                    }`}
-                    // onClick={() => formikRef?.current?.submitForm()}
-                  >
+                    className={`${styles.form_submit_btn}  !w-full 
+                    ${
+                      callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"
+                    }
+                    `}
+                    disabled={!callFunctionFlag}>
                     Create request <ForwardArrowWithLine />
                   </button>
                 </div>

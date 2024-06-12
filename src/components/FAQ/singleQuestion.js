@@ -16,14 +16,17 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
             )}
           </div>
         </div>
-        <div className={`${!isOpen && "hidden"} ${styles.ans_wrapper}`}>
+        <div
+          className={`${!isOpen ? "hidden" : ""} ${styles.ans_wrapper}`.trim()}>
           <div
             dangerouslySetInnerHTML={{__html: item?.ans}}
-            className={`${styles.ans} ${isOpen && styles.ans_open}`}
+            className={`${styles.ans} ${isOpen ? styles.ans_open : ""}`.trim()}
           />
           {item?.isChildren?.length && (
             <ul
-              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+              className={`${styles.ans} ${
+                isOpen ? styles.ans_open : ""
+              }`.trim()}
               style={{listStyle: "inside"}}>
               {item?.isChildren?.map((ele, idx) => (
                 <li key={idx}>{ele}</li>
@@ -33,12 +36,16 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
           {item?.afterChild && (
             <div
               dangerouslySetInnerHTML={{__html: item?.afterChild}}
-              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+              className={`${styles.ans} ${
+                isOpen ? styles.ans_open : ""
+              }`.trim()}
             />
           )}
           {item?.secondChild?.length && (
             <ul
-              className={`${styles.ans} ${isOpen && styles.ans_open}`}
+              className={`${styles.ans} ${
+                isOpen ? styles.ans_open : ""
+              }`.trim()}
               style={{listStyle: "inside"}}>
               {item?.secondChild?.map((ele, idx) => (
                 <li key={idx}>{ele}</li>
@@ -46,7 +53,10 @@ const SingleQuestion = ({item, isOpen, toggleQuestion}) => {
             </ul>
           )}
           {item?.afterSecondChild && (
-            <p className={`${styles.ans} ${isOpen && styles.ans_open}`}>
+            <p
+              className={`${styles.ans} ${
+                isOpen ? styles.ans_open : ""
+              }`.trim()}>
               {item?.afterSecondChild}
             </p>
           )}

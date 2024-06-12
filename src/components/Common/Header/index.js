@@ -284,9 +284,9 @@ const Header = ({page}) => {
         city={cityForModal}
       />
       <div
-        className={` ${styles.main} ${modalStateFromRedux && "!z-0"}  ${
-          page === "login" && "!z-0"
-        }`}
+        className={` ${styles.main} ${modalStateFromRedux ? "!z-0" : ""}  ${
+          page === "login" ? "!z-0" : ""
+        }`.trim()}
         style={{
           boxShadow: hasScrolled ? "0 4px 4px 0 rgba(0,0,0,.06)" : "none",
         }}>
@@ -344,7 +344,7 @@ const Header = ({page}) => {
                     loader={({src}) => src}
                     src={Icons.Search}
                     alt="search-icon"
-                    className={`${styles.header_search_icon} pointer-events-none`}
+                    className={`pointer-events-none`}
                     loading="lazy"
                   />
                 </div>
@@ -488,7 +488,7 @@ const Header = ({page}) => {
               loader={({src}) => src}
               src={Icons.Search}
               alt="search-icon"
-              className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
+              className={`ml-2 pointer-events-none`}
               loading="lazy"
             />
           </div>
@@ -525,14 +525,11 @@ const SearchModal = ({
 
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [searchTerm, setSearchTerm] = React.useState("");
-  const [searchedData, setSearchedData] = React.useState();
+  const [searchedData, setSearchedData] = React.useState(null);
   const [searchApiData, setSearchApiData] = React.useState(null);
 
   const handleSearch = e => {
     const newSearchTerm = e.target.value;
-    if (newSearchTerm.length < 3) {
-      return;
-    }
     setSearchTerm(newSearchTerm);
     const city = getLocalStorage("cityId");
 
@@ -602,7 +599,8 @@ const SearchModal = ({
   };
 
   useEffect(() => {
-    setSearchedData(getLocalStorage("searches") || ["No search history"]);
+    setSearchedData(getLocalStorage("searches") || "");
+    // setSearchedData(getLocalStorage("searches") || ["No search history"]);
   }, []);
 
   const onSearchClick = item => {
@@ -654,7 +652,7 @@ const SearchModal = ({
             loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
-            className={`ml-2 ${styles.header_search_icon} pointer-events-none`}
+            className={`ml-2 pointer-events-none`}
             loading="lazy"
           />
         </div>
@@ -665,7 +663,7 @@ const SearchModal = ({
             loader={({src}) => src}
             src={Icons.Search}
             alt="search-icon"
-            className={`${styles.header_search_icon} pointer-events-none`}
+            className={`pointer-events-none`}
             loading="lazy"
           />
           <input
@@ -726,30 +724,34 @@ const SearchModal = ({
               ))}
           </div>
           <div>
-            <p className={styles.search_head}>Recent</p>
-            <div className={styles.pills_wrapper}>
-              {searchedData?.map((item, index) => {
-                return (
-                  <>
-                    {index < 5 && (
-                      <div
-                        key={index.toString()}
-                        className={styles.pill}
-                        onClick={() => {
-                          onSearchClick(item);
-                        }}>
-                        <RecentIcon
-                          className={styles.modal_icon}
-                          color={"#E0806A"}
-                        />
-                        <p className={styles.pill_text}>{item}</p>
-                      </div>
-                    )}
-                  </>
-                );
-              })}
-            </div>
-            <div className="mt-6"></div>
+            {searchedData?.length > 0 && (
+              <div>
+                <p className={styles.search_head}>Recent</p>
+                <div className={styles.pills_wrapper}>
+                  {searchedData?.map((item, index) => {
+                    return (
+                      <>
+                        {index < 5 && (
+                          <div
+                            key={index.toString()}
+                            className={styles.pill}
+                            onClick={() => {
+                              onSearchClick(item);
+                            }}>
+                            <RecentIcon
+                              className={styles.modal_icon}
+                              color={"#E0806A"}
+                            />
+                            <p className={styles.pill_text}>{item}</p>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })}
+                </div>
+                <div className="mt-6"></div>
+              </div>
+            )}
             <p className={styles.search_head}>Trending searches</p>
             <div className={styles.pills_wrapper}>
               {arr?.map((item, index) => (

@@ -26,7 +26,7 @@
   @apply flex items-center;
 }
 .header_city_name {
-  @apply flex lg:text-base text-12 font-medium font-Poppins leading-[24px] items-center text-45454A cursor-pointer;
+  @apply flex lg:text-base text-12 font-medium font-Poppins whitespace-nowrap leading-[24px] items-center text-45454A cursor-pointer;
 }
 .search_wrapper {
   @apply hidden gap-2 cursor-pointer md:flex border border-ECECEC rounded-lg bg-white xl:w-[345px] w-[300px] px-4 py-2 items-center;

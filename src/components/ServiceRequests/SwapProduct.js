@@ -14,11 +14,15 @@ import {
   CreateRequestPayload,
 } from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
-import {useSelector} from "react-redux";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
 import {baseInstance} from "@/network/axios";
+import {useDispatch, useSelector} from "react-redux";
+import {setRequestLoader} from "@/store/Slices";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function SwapProduct({prevScreen, data, isHelpDrawer}) {
+  const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const [showSwapScreen, setShowSwapScreen] = useState(1);
   const [ProductInfo, setProductInfo] = useState(data);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -106,6 +110,8 @@ function SwapProduct({prevScreen, data, isHelpDrawer}) {
           />
         )}
       </div>
+      {loader && <LoaderComponent loading={loader} />}
+
       <div className={styles.bottom_row}>
         <button
           className={`${styles.proceed_btn} ${
@@ -114,7 +120,10 @@ function SwapProduct({prevScreen, data, isHelpDrawer}) {
               : ""
           }
           ${callFunctionFlag ? "cursor-pointer" : "cursor-not-allowed"}`}
-          onClick={() => handleCreateRequest()}
+          onClick={() => {
+            dispatch(setRequestLoader(true));
+            handleCreateRequest();
+          }}
           disabled={showSwapScreen === 1 || selectedProductForSwap === null}>
           Create request <ForwardArrowWithLine />
         </button>

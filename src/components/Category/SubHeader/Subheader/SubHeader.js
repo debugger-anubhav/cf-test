@@ -107,16 +107,22 @@ const SubHeader = ({params}) => {
   const handleFilterRemove = index => {
     if (index > -1 && categoryPageReduxData?.filteredItems) {
       if (index > -1 && updatedFilter) {
+        dispatch(addSingleProduct([]));
+        dispatch(addSetProduct([]));
+        dispatch(addOutStockProduct([]));
+        setPageNo(1);
         const newFilters = [
           ...updatedFilter.slice(0, index),
           ...updatedFilter.slice(index + 1),
         ];
         setUpdatedFilter(newFilters);
       }
+
       const newFilteredItems = [
         ...categoryPageReduxData?.filteredItems.slice(0, index),
         ...categoryPageReduxData?.filteredItems.slice(index + 1),
       ];
+
       dispatch(addFilteredItem(newFilteredItems));
 
       const filtersQueryParam = newFilteredItems
@@ -676,7 +682,7 @@ const SubHeader = ({params}) => {
           {categoryPageReduxData?.filteredItems.length !== 0 &&
             filterListed && (
               <div className="mb-7 lg:mb-8 flex flex-wrap gap-x-3 lg:gap-x-4 gap-y-2 lg:gap-y-3">
-                <div
+                {/* <div
                   className={styles.single_filter_mobile}
                   // className={styles.single_filter}
                   onClick={() => {
@@ -693,8 +699,8 @@ const SubHeader = ({params}) => {
                     dispatch(isFilterApplied(false));
                     setPageNo(1);
                   }}>
-                  <p className={styles.clear_All}>Clear all</p>
-                </div>
+                  <p className={styles.clear_All}>Clear all111111111111</p>
+                </div> */}
                 {filterListed &&
                 categoryPageReduxData?.filteredItems.length !== 0
                   ? categoryPageReduxData?.filteredItems?.map((item, index) => {

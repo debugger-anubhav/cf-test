@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import formStyles from "../Cart/AddressSection/styles.module.css";
 import {cityUrl} from "../../../appConfig";
 import {AddressDrawerContent} from "../Cart/Drawer/SaveAddressesDrawer";
-import {getSavedAddress} from "@/store/Slices";
+import {getSavedAddress, setRequestLoader} from "@/store/Slices";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
@@ -20,9 +20,11 @@ import {useDispatch, useSelector} from "react-redux";
 import CityDrawer from "../YourAddresses/Drawer/CityDrawer";
 import {useAppSelector} from "@/store";
 import {CommonCreateRequestApi} from "./CommonCreateRequestApi";
+import LoaderComponent from "../../components/Common/Loader/LoaderComponent";
 
 function TransferOwnership({prevScreen, data, isHelpDrawer}) {
   const dispatch = useDispatch();
+  const loader = useSelector(state => state.serviceRequestData.requestLoader);
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const userIdToUse = userId || tempUserId;
@@ -115,6 +117,7 @@ function TransferOwnership({prevScreen, data, isHelpDrawer}) {
   };
 
   const handleSubmit = values => {
+    dispatch(setRequestLoader(true));
     const payload = {
       ...CreateRequestPayload,
       deal_id: data[0]?.dealCodeNumber,
@@ -392,6 +395,7 @@ function TransferOwnership({prevScreen, data, isHelpDrawer}) {
                         </div>
                       )}
                     </div>
+                    {loader && <LoaderComponent loading={loader} />}
                     <div>
                       {addressDrawer ? (
                         <div className={styles.bottom_row_formik}>

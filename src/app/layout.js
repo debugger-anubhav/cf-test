@@ -98,7 +98,7 @@ export default function RootLayout({children}) {
           dangerouslySetInnerHTML={{
             __html: `
             const userId = localStorage.getItem("_ga");
-            fetch("https://test.rentofurniture.com/ajxapi/getDecryptedUserId", {
+            fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
               method: "POST",
               body: JSON.stringify({
                 userId: JSON.parse(userId)
