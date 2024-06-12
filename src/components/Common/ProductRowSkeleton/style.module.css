@@ -5,11 +5,21 @@
   @apply w-full h-full;
 }
 .main_containor {
-  @apply flex flex-col pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-10;
+  @apply flex flex-col;
 }
+
+.container_shifted {
+  @apply pl-4 md:pl-[70px] xl:pl-[90px] macbook:pl-[122px] 3xl:pl-[160px] mt-8 xl:mt-10;
+}
+
 .Skeleton_row {
-  @apply flex mt-6 w-full overflow-x-scroll;
+  @apply flex w-full overflow-x-scroll;
 }
+
+.skeleton_row_shifted {
+  @apply mt-6;
+}
+
 .Skeleton_text {
   @apply text-32 w-1/2;
 }

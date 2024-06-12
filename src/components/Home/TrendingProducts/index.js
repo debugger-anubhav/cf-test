@@ -1,6 +1,6 @@
 "use client";
 
-import React, {memo, useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useQuery} from "@/hooks/useQuery";
@@ -9,14 +9,15 @@ import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const [paramsCityId, setParamsCityId] = React.useState(46);
-  const [data, setData] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
+  const [paramsCityId, setParamsCityId] = useState(46);
+  const [data, setData] = useState([]);
+  const [isDumy, setIsDumy] = useState(false);
 
   const cityId = getLocalStorage("cityId");
 
@@ -123,36 +124,42 @@ const TrendingProducts = ({params}) => {
           <h2 className={styles.heading}>Crowd Favourite</h2>
           <h3 className={styles.subHeading}>Best Selling Products</h3>
           <div className={`${styles.card_box} `} ref={sliderRef}>
-            {data?.map((item, index) => (
-              <div
-                key={index.toString()}
-                className={`${styles.child ?? ""} ${
-                  index === data?.length - 1 && "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}>
-                <Card
-                  hoverCardImage={
-                    productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
-                  }
-                  cardImage={
-                    item?.image?.split(",").filter(item => item).length > 1
-                      ? productImageBaseUrl +
-                        "thumb/" +
-                        item?.image?.split(",")[1]
-                      : productImageBaseUrl +
-                        "thumb/" +
-                        item?.image?.split(",")[0]
-                  }
-                  desc={item?.product_name}
-                  originalPrice={item?.price}
-                  currentPrice={item?.sale_price}
-                  discount={`${Math.round(
-                    ((item?.price - item?.sale_price) * 100) / item?.price,
-                  ).toFixed(0)}%`}
-                  productID={item?.id}
-                  seourl={item?.seourl}
-                />
-              </div>
-            ))}
+            {data.length === 0 ? (
+              <ProductRowSkeleton isUnshifted />
+            ) : (
+              data?.map((item, index) => (
+                <div
+                  key={index.toString()}
+                  className={`${styles.child ?? ""} ${
+                    index === data?.length - 1 && "mr-[16px]"
+                  } ${isDumy && "pointer-events-none"}`}>
+                  <Card
+                    hoverCardImage={
+                      productImageBaseUrl +
+                      "thumb/" +
+                      item?.image?.split(",")[0]
+                    }
+                    cardImage={
+                      item?.image?.split(",").filter(item => item).length > 1
+                        ? productImageBaseUrl +
+                          "thumb/" +
+                          item?.image?.split(",")[1]
+                        : productImageBaseUrl +
+                          "thumb/" +
+                          item?.image?.split(",")[0]
+                    }
+                    desc={item?.product_name}
+                    originalPrice={item?.price}
+                    currentPrice={item?.sale_price}
+                    discount={`${Math.round(
+                      ((item?.price - item?.sale_price) * 100) / item?.price,
+                    ).toFixed(0)}%`}
+                    productID={item?.id}
+                    seourl={item?.seourl}
+                  />
+                </div>
+              ))
+            )}
           </div>
         </div>
       ) : null}

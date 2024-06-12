@@ -34,6 +34,7 @@ import {
   setQRData,
   setTryCityData,
 } from "@/store/Slices";
+import TrendingProducts from "@/components/Home/TrendingProducts";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -53,12 +54,12 @@ const RecentlyViewedProduct = loadable(
   },
 );
 
-const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
+// const TrendingProducts = loadable(
+//   () => import("@/components/Home/TrendingProducts"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
+// );
 
 const OffersAndCoupons = loadable(
   () => import("@/components/Home/OffersAndCoupons"),
