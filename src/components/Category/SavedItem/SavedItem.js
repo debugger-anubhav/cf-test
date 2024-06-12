@@ -16,9 +16,6 @@ const SavedItem = () => {
   const dispatch = useDispatch();
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
   const loginStateFromRedux = useSelector(state => state.homePagedata.isLogin);
-  // const reduxStateOfLoginPopup = useSelector(
-  //   state => state.homePagedata.loginPopupState,
-  // );
   const [isDumy, setIsDumy] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(loginStateFromRedux);
   const sliderRef = useRef(null);
@@ -69,14 +66,6 @@ const SavedItem = () => {
   useEffect(() => {
     isAuth();
   }, [isLogin]);
-  // useEffect(() => {}, [categoryPageReduxData?.savedItems?.length]);
-
-  // const handleCardClick = (e, item) => {
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     const url = `/things/${item.id}/${item.seourl}`;
-  //     window.open(url, "_blank");
-  //   }
-  // };
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -129,11 +118,7 @@ const SavedItem = () => {
           return (
             <div
               className={`flex flex-wrap mr-4 mb-4 ${styles.child}`}
-              key={index.toString()}
-              // onClick={e => {
-              //   !reduxStateOfLoginPopup && handleCardClick(e, item);
-              // }}
-            >
+              key={index.toString()}>
               <Card
                 cardImage={productImageBaseUrl + item?.image?.split(",")[0]}
                 desc={item?.product_name}

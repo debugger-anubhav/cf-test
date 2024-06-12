@@ -15,9 +15,6 @@ const RecentlyViewedProduct = ({page}) => {
   const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  // const reduxStateOfLoginPopup = useSelector(
-  //   state => state.homePagedata.loginPopupState,
-  // );
   const userId = decrypt(getLocalStorage("_ga"));
   const [isDumy, setIsDumy] = React.useState(false);
   const [isLogin, setIsLogin] = React.useState(!!userId);
@@ -102,13 +99,6 @@ const RecentlyViewedProduct = ({page}) => {
     };
   }, []);
 
-  // const handleCardClick = (e, item) => {
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     const url = `/things/${item.id}/${item.seourl}`;
-  //     window.open(url, "_blank");
-  //   }
-  // };
-
   return (
     <>
       {homePageReduxData?.recentProduct ? (
@@ -128,9 +118,6 @@ const RecentlyViewedProduct = ({page}) => {
                   {(item?.image || item?.price) && (
                     <div
                       key={index.toString()}
-                      // onClick={e => {
-                      //   !reduxStateOfLoginPopup && handleCardClick(e, item);
-                      // }}
                       className={`${styles.child ?? ""}  ${
                         index === homePageReduxData?.recentProduct?.length - 1
                           ? "mr-[16px]"

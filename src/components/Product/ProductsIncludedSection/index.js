@@ -3,6 +3,7 @@ import styles from "./style.module.css";
 import {useSelector} from "react-redux";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
+import Link from "next/link";
 
 const ItemsIncluded = () => {
   const [selectedItem, setSelectedItem] = useState(0);
@@ -68,9 +69,14 @@ const ItemsIncluded = () => {
                         <div className={styles.info_row}>
                           <p className={styles.label}>Name</p>
                           <p className={styles.colon}>:</p>
-                          <p className={styles.info_details}>
-                            {item.product_name.replace(/-/g, " ")}
-                          </p>
+                          <Link
+                            href={`/things/${item.id}/${item.seourl}`}
+                            target="_blank"
+                            rel="noreferrer">
+                            <p className={styles.info_details}>
+                              {item.product_name.replace(/-/g, " ")}
+                            </p>
+                          </Link>
                         </div>
 
                         <div className={styles.info_row}>

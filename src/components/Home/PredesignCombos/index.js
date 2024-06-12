@@ -13,9 +13,6 @@ import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
-  // const reduxStateOfLoginPopup = useSelector(
-  //   state => state.homePagedata.loginPopupState,
-  // );
   const cityId = getLocalStorage("cityId");
   const [isDumy, setIsDumy] = React.useState(false);
 
@@ -33,13 +30,6 @@ const PreDesignCombos = () => {
   }, []);
 
   const sliderRef = useRef(null);
-
-  // const handleCardClick = (e, item) => {
-  //   if (!e.target.classList.contains(styles.child)) {
-  //     const url = `/things/${item.id}/${item.seourl}`;
-  //     window.open(url, "_blank");
-  //   }
-  // };
 
   useEffect(() => {
     const slider = sliderRef.current;

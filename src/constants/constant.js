@@ -677,124 +677,6 @@ export const CreateRequest = CreateRequestPayload => {
     .catch(err => console.log(err?.message || "some error"));
 };
 
-export const CityWiseBannerWebsite = {
-  0: [],
-  45: [],
-  46: [],
-  47: [],
-  48: [
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp`,
-      alternate: "Appliance",
-    },
-  ],
-  49: [],
-  50: [],
-  51: [],
-  52: [
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_11.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_12.webp`,
-      alternate: "Appliance",
-    },
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_2.webp`,
-      alternate: "Citymax",
-    },
-    {
-      link: `https://d3juy0zp6vqec8.cloudfront.net/images/new_rt_banner_13.webp`,
-      alternate: "Discount Deals",
-    },
-  ],
-};
-
-export const CityWiseBannerMobile = {
-  0: [],
-  45: [],
-  46: [],
-  47: [],
-  48: [
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
-      alternate: "Appliance",
-    },
-  ],
-  49: [],
-  50: [],
-  51: [],
-  52: [
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
-      alternate: "Appliance",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_2.webp`,
-      alternate: "Citymax",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_13.webp`,
-      alternate: "Discount Deals",
-    },
-  ],
-};
-
-export const CityWiseBannerTablet = {
-  0: [],
-  45: [],
-  46: [],
-  47: [],
-  48: [
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
-      alternate: "Appliance",
-    },
-  ],
-  49: [],
-  50: [],
-  51: [],
-  52: [
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_11.webp`,
-      alternate: "Home Furniture",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_12.webp`,
-      alternate: "Appliance",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_2.webp`,
-      alternate: "Citymax",
-    },
-    {
-      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}/new_rt_banner_13.webp`,
-      alternate: "Discount Deals",
-    },
-  ],
-};
-
-export const CityNameToId = {
-  Bangalore: 48,
-  Delhi: 52,
-};
 export const MONTHLY_NOT_ALLOWED_PRODUCT = [
   "SPLITAC1.5TONMP001",
   "SPLITAC1TONMP001",
@@ -825,4 +707,551 @@ export const contentfulHomepageDataResolver = (
     redirectUrl,
     mediaData,
   };
+};
+export const CityWiseBannerWebsite = {
+  45: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  46: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_bangalore.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  47: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_pune.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  48: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_mumbai.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  49: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  50: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  51: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_hyderabad.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+  52: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_wb_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_12.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_2.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_rt_banner_13.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: "/discount-deals",
+    },
+  ],
+};
+
+export const CityWiseBannerMobile = {
+  45: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  46: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_bangalore.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  47: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_pune.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  48: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_mumbai.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  49: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  50: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  51: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_hyderabad.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  52: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_mob_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+};
+
+export const CityWiseBannerTablet = {
+  45: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  46: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_bangalore.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  47: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_pune.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  48: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_mumbai.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  49: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  50: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  51: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_hyderabad.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+  52: [
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_delhi.webp`,
+      alternate: "Home Furniture",
+      redirectionLink: `/home-furniture-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_2.webp`,
+      alternate: "Appliance",
+      redirectionLink: `/home-appliances-rental`,
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_3.webp`,
+      alternate: "Citymax",
+      redirectionLink: "/citymax",
+    },
+    {
+      link: `${process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL}new_tab_banner_4.webp`,
+      alternate: "Discount Deals",
+      redirectionLink: `/discount-deals`,
+    },
+  ],
+};
+
+export const CityNameToId = {
+  Delhi: 45,
+  Bangalore: 46,
+  Pune: 47,
+  Mumbai: 48,
+  Gurgaon: 49,
+  "Ghaziabad/Noida": 50,
+  Hyderabad: 51,
+  Faridabad: 52,
 };

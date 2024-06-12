@@ -1,6 +1,8 @@
 {
   "landing_page": {
-    "announcement_bar": "No Cap, All Savings: 20% Off with 'RENT20'.",
+    "announcement_bar": "Hot Deals, Cool Discounts: 20% OFF! ",
+    "coupon_code": "HELLOSUMMER",
+
     "header": {
       "menuList1": [
         {"item": "All", "link": "link"},

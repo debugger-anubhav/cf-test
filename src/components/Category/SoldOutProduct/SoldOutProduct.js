@@ -137,6 +137,7 @@ export const SoldOutProduct = () => {
   const data = categoryPageReduxData?.isAllProduct
     ? categoryPageReduxData?.outStockProductAll
     : categoryPageReduxData?.outStockProduct;
+
   useEffect(() => {
     setSkeletonOpen(false);
   }, [data]);

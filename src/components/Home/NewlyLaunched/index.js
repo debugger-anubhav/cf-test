@@ -7,6 +7,7 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {Skeleton} from "@mui/material";
 import {productImageBaseUrl} from "@/constants/constant";
+import Link from "next/link";
 const NewlyLaunched = () => {
   const heading = strings.landing_page.Newlylaunced.heading;
   const subHeading = strings.landing_page.Newlylaunced.productRent;
@@ -60,24 +61,19 @@ const NewlyLaunched = () => {
         </div>
 
         {newProductFetched?.map((ele, index) => (
-          <div
-            className={`${styles.width_container} ${
-              index === newProductFetched?.length - 1 ? "mr-[16px]" : ""
-            } relative`.trim()}
-            // className={`${styles.width_container} relative bg-red-400`}
+          <Link
+            href={`/things/${ele.id}/${ele.seourl}`}
+            aria-label={ele?.product_name}
+            target="_blank"
+            rel="noopener"
             key={index.toString()}>
             <div
-              className="w-full h-auto cursor-pointer "
-              onClick={() => {
-                const url = `/things/${ele.id}/${ele.seourl}`;
-                window.open(url, "_blank");
-              }}>
-              <a
-                // onClick={e => e.preventDefault()}
-                // href={`/things/${ele.id}/${ele.seourl}`}
-                aria-label={ele?.product_name}
-                target="_blank"
-                rel="noopener noreferrer">
+              className={`${styles.width_container} ${
+                index === newProductFetched?.length - 1 && "mr-[16px]"
+              } relative`}
+              // className={`${styles.width_container} relative bg-red-400`}
+              key={index.toString()}>
+              <div className="w-full h-auto cursor-pointer ">
                 <img
                   src={
                     // "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
@@ -90,12 +86,12 @@ const NewlyLaunched = () => {
                   alt={ele?.product_name}
                   loading="lazy"
                 />
-              </a>
+              </div>
+              <div className={styles.price_tag}>
+                <p>{`₹${ele?.sale_price} / month`}</p>
+              </div>
             </div>
-            <div className={styles.price_tag}>
-              <p>{`₹${ele?.sale_price} / month`}</p>
-            </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
