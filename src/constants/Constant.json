@@ -1,7 +1,7 @@
 {
   "landing_page": {
     "announcement_bar": "Hot Deals, Cool Discounts: 20% OFF! ",
-    "coupon_code": "HELLOSUMMER",
+    "coupon_code": "`HELLOSUMMER`",
 
     "header": {
       "menuList1": [

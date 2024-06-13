@@ -1,9 +1,12 @@
 .announcement_bar_wrapper {
-  @apply flex justify-center items-center bg-[#fbc01d] relative h-12;
+  @apply flex justify-center items-center bg-[#FFEAB1] relative h-12;
 }
 .announcement_bar_text {
-  @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center pl-4 pr-6;
+  @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center pl-4 pr-6 items-center justify-center gap-[6px];
 }
 .announcement_close_icon {
   @apply absolute sm:right-4 right-2 text-fff;
+}
+.icons_style {
+  @apply w-[18px] h-[18px];
 }
