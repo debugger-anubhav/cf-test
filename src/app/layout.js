@@ -5,6 +5,7 @@ import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import localFont from "@next/font/local";
 import Script from "next/script";
+import {Partytown} from "@builder.io/partytown/react";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -94,8 +95,11 @@ export default function RootLayout({children}) {
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
+        <Partytown debug={true} forward={["dataLayer.push"]} />
+
         <Script
-          type="text/javascript"
+          // type="text/javascript"
+          type="text/partytown"
           id="fcWidgetMessengerConfig"
           dangerouslySetInnerHTML={{
             __html: `
@@ -120,7 +124,9 @@ export default function RootLayout({children}) {
             .catch(e => console.log('e',e))
             `,
           }}></Script>
+
         <Script
+          type="text/partytown"
           src="//in.fw-cdn.com/30445413/247408.js"
           chat="true"
           strategy="worker"></Script>
@@ -193,6 +199,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             id="facebook-event"
@@ -240,6 +247,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
@@ -315,6 +323,7 @@ var CaptchaCallback = function(){
         )} */}
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             id="datalayer-gtag"
@@ -333,6 +342,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             id="linkedin"
@@ -349,6 +359,7 @@ var CaptchaCallback = function(){
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
             defer
+            type="text/partytown"
             async
             id="lms-analytics"
             dangerouslySetInnerHTML={{
@@ -386,6 +397,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             id="googletagmanager"
@@ -428,6 +440,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
+            type="text/partytown"
             defer
             async
             id="ads-twitter"
