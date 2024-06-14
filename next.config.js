@@ -58,11 +58,6 @@ module.exports = {
         permanent: true,
       },
       {
-        source: "/:city/other-appliances/:path*",
-        destination: "/:city/other-appliances/:path*",
-        permanent: true,
-      },
-      {
         source: "/shopby/:category/:path*",
         destination: `/bangalore/:category/:path*?viaShopBy=true`,
         permanent: true,
