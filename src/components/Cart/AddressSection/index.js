@@ -886,7 +886,7 @@ const AddressSection = () => {
                         <input
                           onWheel={handleWheel}
                           className={styles.form_input}
-                          type="number"
+                          type="text"
                           placeholder="GST number"
                           onChange={e => setGstNumber(e.target.value)}
                         />
