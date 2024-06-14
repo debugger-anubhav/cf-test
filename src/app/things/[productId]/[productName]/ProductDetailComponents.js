@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, {useEffect} from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
@@ -17,7 +17,12 @@ import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
 import Notifications from "@/components/Common/Notifications/Notification";
 import {FooterSkeleton} from "@/components/Common/Footer";
-import {useParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
+import {useDispatch, useSelector} from "react-redux";
+import {getProductDetails} from "@/store/Slices";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {getLocalStorageString} from "@/constants/constant";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -53,7 +58,38 @@ const OffersAndCoupons = loadable(
   },
 );
 export default function ProductDetailComponents() {
+  const router = useRouter();
   const params = useParams();
+  const dispatch = useDispatch();
+  const prodDetails = useSelector(
+    state => state.productPageData.singleProductDetails,
+  );
+  const cityIdStr = getLocalStorageString("cityId")
+    ?.toString()
+    ?.replace(/"/g, "");
+  const cityId = parseFloat(cityIdStr);
+
+  useEffect(() => {
+    GetProductDetails();
+  }, []);
+  if (
+    params?.productName !== undefined &&
+    prodDetails?.[0]?.seourl !== undefined &&
+    params?.productName !== prodDetails?.[0]?.seourl
+  ) {
+    router.push(`${prodDetails?.[0]?.seourl}`);
+  }
+
+  const GetProductDetails = () => {
+    baseInstance
+      .get(endPoints.productPage.singleProductDetails(params.productId, cityId))
+      .then(res => {
+        dispatch(getProductDetails(res?.data?.data));
+      })
+      .catch(err => {
+        console.log(err?.message || "some message");
+      });
+  };
   return (
     <div className="large_layout">
       <AnnouncementBar />
