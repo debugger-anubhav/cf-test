@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import localFont from "@next/font/local";
+import Script from "next/script";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -93,8 +94,9 @@ export default function RootLayout({children}) {
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
-        <script
+        <Script
           type="text/javascript"
+          id="fcWidgetMessengerConfig"
           dangerouslySetInnerHTML={{
             __html: `
             const userId = localStorage.getItem("_ga");
@@ -117,8 +119,11 @@ export default function RootLayout({children}) {
             })
             .catch(e => console.log('e',e))
             `,
-          }}></script>
-        <script src="//in.fw-cdn.com/30445413/247408.js" chat="true"></script>
+          }}></Script>
+        <Script
+          src="//in.fw-cdn.com/30445413/247408.js"
+          chat="true"
+          strategy="worker"></Script>
 
         {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
         {/* <link
@@ -187,9 +192,10 @@ export default function RootLayout({children}) {
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="facebook-event"
             dangerouslySetInnerHTML={{
               __html: `
                    !function (f, b, e, v, n, t, s)
@@ -233,10 +239,11 @@ export default function RootLayout({children}) {
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
+            strategy="worker"
           />
         )}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
@@ -307,9 +314,10 @@ var CaptchaCallback = function(){
           />
         )} */}
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="datalayer-gtag"
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -324,9 +332,10 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="linkedin"
             dangerouslySetInnerHTML={{
               __html: `
                 _linkedin_partner_id = "4895321";
@@ -338,9 +347,10 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="lms-analytics"
             dangerouslySetInnerHTML={{
               __html: `
     (function (l) {
@@ -375,9 +385,10 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="googletagmanager"
             dangerouslySetInnerHTML={{
               __html: `(function (w, d, s, l, i) {
       w[l] = w[l] || [];
@@ -416,9 +427,10 @@ var CaptchaCallback = function(){
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
+          <Script
             defer
             async
+            id="ads-twitter"
             dangerouslySetInnerHTML={{
               __html: ` !function(e,t,n,s,u,a)
             {e.twq ||
@@ -434,7 +446,7 @@ var CaptchaCallback = function(){
               (a = t.getElementsByTagName(n)[0]),
               a.parentNode.insertBefore(u, a))}
             (window,document,'script'); twq('config','ofz28');`,
-            }}></script>
+            }}></Script>
         )}
       </head>
       <body>
