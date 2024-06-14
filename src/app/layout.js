@@ -247,7 +247,6 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            type="text/partytown"
             defer
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
@@ -323,7 +322,7 @@ var CaptchaCallback = function(){
         )} */}
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            type="text/partytown"
+            // type="text/partytown"
             defer
             async
             id="datalayer-gtag"
