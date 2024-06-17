@@ -69,17 +69,6 @@ export default function ProductDetailComponents() {
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
-  useEffect(() => {
-    GetProductDetails();
-  }, []);
-  if (
-    params?.productName !== undefined &&
-    prodDetails?.[0]?.seourl !== undefined &&
-    params?.productName !== prodDetails?.[0]?.seourl
-  ) {
-    router.push(`${prodDetails?.[0]?.seourl}`);
-  }
-
   const GetProductDetails = () => {
     baseInstance
       .get(endPoints.productPage.singleProductDetails(params.productId, cityId))
@@ -90,6 +79,18 @@ export default function ProductDetailComponents() {
         console.log(err?.message || "some message");
       });
   };
+
+  useEffect(() => {
+    if (
+      params?.productName !== undefined &&
+      prodDetails?.[0]?.seourl !== undefined &&
+      params?.productName !== prodDetails?.[0]?.seourl
+    ) {
+      GetProductDetails();
+      router.push(`${prodDetails?.[0]?.seourl}`);
+    }
+  }, [params]);
+
   return (
     <div className="large_layout">
       <AnnouncementBar />
