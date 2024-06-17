@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import localFont from "@next/font/local";
-import Script from "next/script";
+// import Script from "next/script";
+// import {Partytown} from "@builder.io/partytown/react";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -94,8 +95,11 @@ export default function RootLayout({children}) {
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
-        <Script
+        {/* <Partytown debug={true} forward={["dataLayer.push"]} /> */}
+
+        <script
           type="text/javascript"
+          // type="text/partytown"
           id="fcWidgetMessengerConfig"
           dangerouslySetInnerHTML={{
             __html: `
@@ -119,11 +123,13 @@ export default function RootLayout({children}) {
             })
             .catch(e => console.log('e',e))
             `,
-          }}></Script>
-        <Script
+          }}></script>
+
+        <script
+          // type="text/partytown"
           src="//in.fw-cdn.com/30445413/247408.js"
           chat="true"
-          strategy="worker"></Script>
+          strategy="worker"></script>
 
         {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
         {/* <link
@@ -192,7 +198,8 @@ export default function RootLayout({children}) {
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
+            // type="text/partytown"
             defer
             async
             id="facebook-event"
@@ -239,11 +246,11 @@ export default function RootLayout({children}) {
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
             defer
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
-            strategy="worker"
+            // strategy="worker"
           />
         )}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
@@ -314,10 +321,11 @@ var CaptchaCallback = function(){
           />
         )} */}
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
+            // type="text/partytown"
             defer
             async
-            id="datalayer-gtag"
+            // id="datalayer-gtag"
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -332,7 +340,8 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
+            // type="text/partytown"
             defer
             async
             id="linkedin"
@@ -347,10 +356,11 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
             defer
+            type="text/partytown"
             async
-            id="lms-analytics"
+            // id="lms-analytics"
             dangerouslySetInnerHTML={{
               __html: `
     (function (l) {
@@ -385,10 +395,11 @@ var CaptchaCallback = function(){
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
+            type="text/partytown"
             defer
             async
-            id="googletagmanager"
+            // id="googletagmanager"
             dangerouslySetInnerHTML={{
               __html: `(function (w, d, s, l, i) {
       w[l] = w[l] || [];
@@ -427,10 +438,11 @@ var CaptchaCallback = function(){
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
+          <script
+            type="text/partytown"
             defer
             async
-            id="ads-twitter"
+            // id="ads-twitter"
             dangerouslySetInnerHTML={{
               __html: ` !function(e,t,n,s,u,a)
             {e.twq ||
@@ -446,7 +458,7 @@ var CaptchaCallback = function(){
               (a = t.getElementsByTagName(n)[0]),
               a.parentNode.insertBefore(u, a))}
             (window,document,'script'); twq('config','ofz28');`,
-            }}></Script>
+            }}></script>
         )}
       </head>
       <body>
