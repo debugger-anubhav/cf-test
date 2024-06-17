@@ -69,18 +69,17 @@ export default function ProductDetailComponents() {
     ?.replace(/"/g, "");
   const cityId = parseFloat(cityIdStr);
 
-  const GetProductDetails = () => {
-    baseInstance
-      .get(endPoints.productPage.singleProductDetails(params.productId, cityId))
-      .then(res => {
-        dispatch(getProductDetails(res?.data?.data));
-        router.push(`${prodDetails?.[0]?.seourl}`);
-      })
-      .catch(err => {
-        console.log(err?.message || "some message");
-      });
+  const GetProductDetails = async () => {
+    try {
+      const response = await baseInstance.get(
+        endPoints.productPage.singleProductDetails(params.productId, cityId),
+      );
+      dispatch(getProductDetails(response?.data?.data));
+      router.push(`${prodDetails?.[0]?.seourl}`);
+    } catch (err) {
+      console.error(err?.message || "some message");
+    }
   };
-
   useEffect(() => {
     if (
       params?.productName !== undefined &&
