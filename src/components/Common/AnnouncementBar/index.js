@@ -19,10 +19,10 @@ const AnnouncementBar = () => {
               alt="beach"
               className={styles.icons_style}
             />
-            <span className=" pl-1 text-222">
+            <span className=" px-1 text-222">
               {string.landing_page.announcement_bar}
             </span>
-            <span className="pl-1 text-[#2581F7]">
+            <span className="px-1 text-[#2581F7]">
               {string.landing_page.coupon_code}
             </span>
             <img
