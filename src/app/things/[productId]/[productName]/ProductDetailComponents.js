@@ -74,6 +74,7 @@ export default function ProductDetailComponents() {
       .get(endPoints.productPage.singleProductDetails(params.productId, cityId))
       .then(res => {
         dispatch(getProductDetails(res?.data?.data));
+        router.push(`${prodDetails?.[0]?.seourl}`);
       })
       .catch(err => {
         console.log(err?.message || "some message");
@@ -87,7 +88,6 @@ export default function ProductDetailComponents() {
       params?.productName !== prodDetails?.[0]?.seourl
     ) {
       GetProductDetails();
-      router.push(`${prodDetails?.[0]?.seourl}`);
     }
   }, [params]);
 
