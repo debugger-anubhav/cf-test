@@ -18,6 +18,7 @@ const HeroBanner = () => {
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleRedirection = link => {
     if (showLinkForRentPage && !link.includes("citymax")) {
@@ -43,7 +44,6 @@ const HeroBanner = () => {
       imgHeight: 801,
       className: "lg:flex hidden",
     },
-
     {
       data: CityWiseBannerTablet[CityNameToId[homePageReduxData?.cityName]],
       width: "100%",
@@ -60,12 +60,20 @@ const HeroBanner = () => {
     },
   ];
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0].data.length);
+    }, 3000); // Change the interval time as needed
+
+    return () => clearInterval(interval);
+  }, [banners]);
+
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      {banners?.map((banner, index) => (
+      {banners?.map((banner, bannerIndex) => (
         <div
-          key={index}
+          key={bannerIndex.toString()}
           className={`landing_page_carousel 
           ${banner.className}
         `}>
@@ -73,10 +81,10 @@ const HeroBanner = () => {
             showStatus={false}
             showArrows={true}
             showThumbs={false}
-            autoPlay
-            infiniteLoop
-            width={banner.width}
-            swipeable>
+            selectedItem={currentIndex}
+            onChange={index => setCurrentIndex(index)}
+            swipeable
+            width={banner.width}>
             {banner?.data?.map((item, i) => (
               <div key={i.toString()}>
                 <div
