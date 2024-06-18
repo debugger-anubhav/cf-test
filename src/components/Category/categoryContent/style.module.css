@@ -163,3 +163,10 @@
   color: #71717a !important;
   text-decoration: underline !important;
 }
+.dynamic_keyword th,
+.dynamic_keyword td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  padding: 5px;
+}

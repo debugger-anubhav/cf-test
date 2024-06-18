@@ -421,20 +421,26 @@ export default function CommonDrawer({
         </div>
       </div>
     );
-  // const searchParams = useSearchParams();
-  // React.useEffect(() => {
-  //   const viaShopBy = searchParams.get("viaShopBy");
-  //   if (viaShopBy) {
-  //     if (DrawerName !== "menu") {
-  //       toggleDrawer("left", true)();
-  //       mobileCityDrawer && toggleDrawer("bottom", true)();
-  //     }
-  //     if (DrawerName === "menu") {
-  //       toggleDrawer("left", false)();
-  //       mobileCityDrawer && toggleDrawer("bottom", false)();
-  //     }
-  //   }
-  // }, [searchParams]);
+
+  React.useEffect(() => {
+    const currentURL =
+      typeof window !== "undefined" ? window?.location?.href : "";
+    const urlParams = new URLSearchParams(currentURL.split("?")[1]);
+    const viaShopBy = urlParams.get("viaShopBy");
+    if (viaShopBy) {
+      if (DrawerName !== "menu") {
+        mobileCityDrawer
+          ? toggleDrawer("bottom", true)()
+          : toggleDrawer("left", true)();
+      }
+      if (DrawerName === "menu") {
+        mobileCityDrawer
+          ? toggleDrawer("bottom", false)()
+          : toggleDrawer("left", false)();
+      }
+    }
+  }, []);
+
   return (
     <div className={"flex"}>
       <div

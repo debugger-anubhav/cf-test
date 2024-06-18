@@ -27,7 +27,7 @@ import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
-import {format} from "date-fns";
+import {format, addDays, getMonth} from "date-fns";
 import {useSelector, useDispatch} from "react-redux";
 import {
   addItemsToCart,
@@ -431,9 +431,9 @@ const ProductDetails = ({params}) => {
     setDrawerOpen(!drawerOpen);
   };
 
-  const currentDate = new Date();
-  // Add three days to the current date
-  currentDate.setDate(currentDate.getDate() + 3);
+  // const currentDate = new Date();
+  // // Add three days to the current date
+  // currentDate.setDate(currentDate.getDate() + 3);
 
   const pageData = useSelector(state => state.productPageData.customerReviews);
   const totalReviews = pageData?.length;
@@ -760,7 +760,18 @@ const ProductDetails = ({params}) => {
               </div>
             ) : (
               <p className={styles.rating_txt} style={{color: "#63798D"}}>
-                Get it by {`${format(new Date(currentDate), "d MMMM,")}`}
+                Get it by
+                {getMonth(addDays(new Date(), 3)) ===
+                getMonth(addDays(new Date(), 4)) ? (
+                  <span className="pl-1">
+                    {format(addDays(new Date(), 3), "d")}-
+                  </span>
+                ) : (
+                  <span className="pl-1">
+                    {format(addDays(new Date(), 3), "d MMMM")}-
+                  </span>
+                )}
+                {format(addDays(new Date(), 4), "d MMMM,")}
                 <span>
                   <DeliveryTruck color={"#63798D"} className={"ml-1 w-6 h-6"} />
                 </span>

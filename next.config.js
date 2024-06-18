@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 
 module.exports = {
+  experimental: {
+    nextScriptWorkers: true,
+  },
   images: {
     domains: ["d3juy0zp6vqec8.cloudfront.net"],
   },
@@ -52,11 +55,6 @@ module.exports = {
       {
         source: "/:city/office-furniture-rent/:path*",
         destination: "/:city/office-furniture-rental/:path*",
-        permanent: true,
-      },
-      {
-        source: "/:city/other-appliances/:path*",
-        destination: "/:city/other-appliances/:path*",
         permanent: true,
       },
       {

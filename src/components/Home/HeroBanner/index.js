@@ -14,11 +14,12 @@ import {
 
 const HeroBanner = () => {
   const router = useRouter();
-  // const cityName = useSelector(state => state.homePagedata.cityName);
   const homePageReduxData = useSelector(state => state.homePagedata);
   const [showLinkForRentPage, setShowLinkForRentPage] = useState(
     homePageReduxData.showAllRentLink,
   );
+  const [currentIndex, setCurrentIndex] = useState(0);
+
   const handleRedirection = link => {
     if (showLinkForRentPage && !link.includes("citymax")) {
       router.push(
@@ -35,24 +36,57 @@ const HeroBanner = () => {
     setShowLinkForRentPage(homePageReduxData.showAllRentLink);
   }, [homePageReduxData.showAllRentLink]);
 
+  const banners = [
+    {
+      data: CityWiseBannerWebsite[CityNameToId[homePageReduxData?.cityName]],
+      width: "100%",
+      imgWidth: 1920,
+      imgHeight: 801,
+      className: "lg:flex hidden",
+    },
+    {
+      data: CityWiseBannerTablet[CityNameToId[homePageReduxData?.cityName]],
+      width: "100%",
+      imgWidth: 1024,
+      imgHeight: 427,
+      className: "hidden md:flex lg:hidden",
+    },
+    {
+      data: CityWiseBannerMobile[CityNameToId[homePageReduxData?.cityName]],
+      width: "100%",
+      imgWidth: 430,
+      imgHeight: 179,
+      className: "flex md:hidden",
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0].data.length);
+    }, 3000); // Change the interval time as needed
+
+    return () => clearInterval(interval);
+  }, [banners]);
+
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      {/* web  */}
-      <div className="hidden lg:flex landing_page_carousel">
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {CityWiseBannerWebsite[
-            CityNameToId[homePageReduxData?.cityName]
-          ]?.map((item, index) => {
-            return (
-              <div key={index.toString()}>
+      {banners?.map((banner, bannerIndex) => (
+        <div
+          key={bannerIndex.toString()}
+          className={`landing_page_carousel 
+          ${banner.className}
+        `}>
+          <Carousel
+            showStatus={false}
+            showArrows={true}
+            showThumbs={false}
+            selectedItem={currentIndex}
+            onChange={index => setCurrentIndex(index)}
+            swipeable
+            width={banner.width}>
+            {banner?.data?.map((item, i) => (
+              <div key={i.toString()}>
                 <div
                   className="flex cursor-pointer"
                   onClick={() => {
@@ -62,83 +96,15 @@ const HeroBanner = () => {
                     src={item.link}
                     alt={item.alternate}
                     className="cursor-pointer rounded-lg"
-                    width={1920}
-                    height={801}
+                    width={banner.imgWidth}
+                    height={banner.imgHeight}
                   />
                 </div>
               </div>
-            );
-          })}
-        </Carousel>
-      </div>
-
-      {/* mobile  */}
-      <div className="w-full md:hidden landing_page_carousel">
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {CityWiseBannerMobile[CityNameToId[homePageReduxData?.cityName]]?.map(
-            (item, index) => {
-              return (
-                <div key={index.toString()}>
-                  <div
-                    className="flex cursor-pointer"
-                    onClick={() => {
-                      handleRedirection(item.redirectionLink);
-                    }}>
-                    <img
-                      src={item.link}
-                      alt={item.alternate}
-                      className="cursor-pointer rounded-lg"
-                      width={430}
-                      height={179}
-                    />
-                  </div>
-                </div>
-              );
-            },
-          )}
-        </Carousel>
-      </div>
-
-      {/* tablet  */}
-      <div className="w-full hidden md:flex lg:hidden landing_page_carousel">
-        <Carousel
-          showStatus={false}
-          showArrows={true}
-          showThumbs={false}
-          autoPlay
-          infiniteLoop
-          width={"100%"}
-          swipeable>
-          {CityWiseBannerTablet[CityNameToId[homePageReduxData?.cityName]]?.map(
-            (item, index) => {
-              return (
-                <div key={index.toString()}>
-                  <div
-                    className="flex cursor-pointer"
-                    onClick={() => {
-                      handleRedirection(item.redirectionLink);
-                    }}>
-                    <img
-                      src={item.link}
-                      alt={item.alternate}
-                      className="cursor-pointer rounded-lg"
-                      width={1024}
-                      height={427}
-                    />
-                  </div>
-                </div>
-              );
-            },
-          )}
-        </Carousel>
-      </div>
+            ))}
+          </Carousel>
+        </div>
+      ))}
     </div>
   );
 };
