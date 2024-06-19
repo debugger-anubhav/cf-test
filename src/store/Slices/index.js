@@ -32,6 +32,7 @@ export const HomepageSlice = createSlice({
     docSidebarActiveItem: "",
     showAllRentLink: false,
     createRequestApiCalled: true,
+    isFirstUser: false,
   },
   reducers: {
     addWhishListProduc(state, action) {
@@ -117,6 +118,9 @@ export const HomepageSlice = createSlice({
     },
     setCreateRequestApiCalled(state, action) {
       state.createRequestApiCalled = action.payload;
+    },
+    setISFirstUser(state, action) {
+      state.isFirstUser = action.payload;
     },
   },
 });
@@ -397,6 +401,7 @@ export const {
   setDocSidebarActiveItem,
   setShowAllRentLink,
   setCreateRequestApiCalled,
+  setISFirstUser,
 } = HomepageSlice.actions;
 
 export const {

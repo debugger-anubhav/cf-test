@@ -414,6 +414,25 @@ const AddressSection = () => {
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
+
+        const eventItems = [];
+        res?.data?.data?.forEach((product, index) => {
+          const item = {
+            id: product.id,
+            name: product.fc_product?.product_name,
+            brand: "Cityfurnish",
+            list_position: index + 1,
+            quantity: product.quantity,
+            price: product.price,
+          };
+          eventItems.push(item);
+        });
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "begin_payment", {
+            items: eventItems,
+          });
+        }
+
         if (res?.data?.data?.length === 0) {
           dispatch(setShoppingCartTab(0));
         } else {

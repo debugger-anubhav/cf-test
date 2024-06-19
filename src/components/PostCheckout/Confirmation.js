@@ -4,7 +4,7 @@ import styles from "./styles.module.css";
 import {FaCheck} from "react-icons/fa";
 import {useRouter} from "next/navigation";
 import {setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
@@ -23,7 +23,7 @@ const PaymentConfirmation = () => {
   const [transactionId, setTransactionId] = useState(null);
   const [skeletonLoder, setSkeletonLoder] = useState(true);
   const userId = decrypt(getLocalStorage("_ga"));
-
+  const IsFirstUser = useSelector(state => state.homePagedata.isFirstUser);
   useEffect(() => {
     const countdown = setInterval(() => {
       setTimer(prevTimer => prevTimer - 1);
@@ -44,7 +44,6 @@ const PaymentConfirmation = () => {
       .get(endPoints.addToCart.paymentSuccessScript(oid, userId))
       .then(res => {
         const scriptData = res?.data?.data;
-        // console.log(scriptData, "script_data_purchase");
         const eventItems = [];
         scriptData?.items?.forEach((product, index) => {
           const item = {
@@ -66,17 +65,22 @@ const PaymentConfirmation = () => {
             shipping: scriptData?.shipping,
             items: eventItems,
           });
-          // console.log("444444444444444444");
-
+          if (IsFirstUser) {
+            window?.gtag("event", "first_purchase", {
+              transaction_id: scriptData?.transaction_id,
+              value: scriptData?.value,
+              currency: scriptData?.currency,
+              tax: scriptData?.tax,
+              shipping: scriptData?.shipping,
+              items: eventItems,
+            });
+          }
           window?.fbq("track", "Purchase", {
             currency: scriptData?.currency,
             value: scriptData?.value,
           });
           window?.lintrk("track", {conversion_id: 11504433});
         }
-        // console.log("555555555555555555");
-
-        // console.log("third_call_3333333333");
       })
       .catch(err => console.log(err, "purchase_event_error"));
   };
