@@ -51,6 +51,9 @@
 .form_field {
   @apply mt-4 w-full xl:w-[516px] macbook1:w-[537px];
 }
+.form_field_drawer {
+  @apply mt-4 w-full xl:w-[466px];
+}
 .form_label {
   @apply font-Poppins text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
 }

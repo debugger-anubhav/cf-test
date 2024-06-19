@@ -8,7 +8,7 @@
   @apply fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[68px] md:-mt-0;
 }
 .card_wrapper {
-  @apply p-4 rounded-xl border border-DDDDDF bg-fff mt-4 md:mt-8;
+  @apply p-4 rounded-xl border border-DDDDDF bg-fff;
 }
 .circle {
   @apply border-2  flex justify-center items-center rounded-full w-[14px] h-[14px];
@@ -54,4 +54,10 @@
   @apply pb-[147px];
   flex: 1;
   overflow-y: auto;
+}
+.add_new_add_row {
+  @apply p-4 flex w-full items-center justify-between border border-dashed rounded-xl my-8 cursor-pointer;
+}
+.add_text {
+  @apply text-45454A font-Poppins text-20 leading-[30px] font-medium;
 }

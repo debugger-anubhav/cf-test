@@ -1,17 +1,20 @@
 import React, {useState} from "react";
 import Drawer from "@mui/material/Drawer";
 import styles from "./style.module.css";
-import {Close, ForwardArrow} from "@/assets/icon";
+import {AddIcon, Close, ForwardArrow} from "@/assets/icon";
 import {useSelector} from "react-redux";
+import NewAddressForm from "../../AddressSection/NewAddressForm";
 
 const AddressDrawer = ({
   toggleDrawer,
   open,
   makeDefaultAddress,
   primaryAddress,
+  cartPage,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [id, setId] = useState(primaryAddress?.id);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
@@ -33,7 +36,10 @@ const AddressDrawer = ({
     <Drawer
       anchor={isBottomDrawer ? "bottom" : "right"}
       open={open}
-      onClose={toggleDrawer}
+      onClose={() => {
+        toggleDrawer();
+        setShowAddForm(false);
+      }}
       classes={{paper: styles.customDrawer}}
       transitionDuration={{enter: 400, exit: 200}}>
       <div className={styles.main_container}>
@@ -44,12 +50,18 @@ const AddressDrawer = ({
           }}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
         </div>
-
-        <p className={styles.head}>Saved addresses</p>
+        {showAddForm ? (
+          <p className={styles.head}>Add new address</p>
+        ) : (
+          <p className={styles.head}>Saved addresses</p>
+        )}
         <AddressDrawerContent
           makeDefaultAddress={makeDefaultAddress}
           primaryAddress={primaryAddress}
           setId={setId}
+          cartPage={cartPage}
+          setShowAddForm={setShowAddForm}
+          showAddForm={showAddForm}
         />
         <div className={styles.btn_wrapper}>
           <button
@@ -75,7 +87,13 @@ const AddressDrawer = ({
 
 export default AddressDrawer;
 
-export const AddressDrawerContent = ({primaryAddress, setId}) => {
+export const AddressDrawerContent = ({
+  primaryAddress,
+  setId,
+  cartPage,
+  setShowAddForm,
+  showAddForm,
+}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const primaryIndex = addressArray.findIndex(
     item => item?.id === primaryAddress?.id,
@@ -85,49 +103,72 @@ export const AddressDrawerContent = ({primaryAddress, setId}) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.item_wrapper}>
-        {addressArray?.map((item, index) => (
-          <div
-            key={index}
-            className={`${
-              cityName !== item.city ? "cursor-not-allowed" : "cursor-pointer"
-            } ${styles.card_wrapper}`}
-            onClick={() => {
-              if (cityName === item.city) {
-                setSelectedIndex(index);
-                setId(item.id);
-              }
-            }}>
-            {cityName !== item.city && (
-              <div className={styles.not_belong_wrapper}>
-                <p className={styles.not_belong_text}>
-                  Address does not belong to selected city
-                </p>
-              </div>
-            )}
-            <div className={styles.first_row}>
-              <div
-                className={`${
-                  cityName === item.city
-                    ? "border-[#5774AC]"
-                    : "border-[#9A9AA2]"
-                } ${styles.circle}`}>
-                <div
-                  className={` ${
-                    selectedIndex === index ? styles.selected_circle : ""
-                  }`}></div>
-              </div>
-              <h2 className={styles.name}>
-                {item.full_name}, {item.phone}
-              </h2>
-            </div>
-            <p className={`truncate ${styles.address}`}>{item.address1}</p>
-            <p className={styles.address}>
-              {item.city}, {item.state}
-            </p>
+      {cartPage && !showAddForm && (
+        <div
+          className={styles.add_new_add_row}
+          onClick={() => {
+            setShowAddForm(true);
+          }}>
+          <div className="flex gap-2 items-center">
+            <AddIcon size={20} color={"#5774AC"} />
+            <p className={styles.add_text}>Add new address</p>
           </div>
-        ))}
-      </div>
+          <div>
+            <ForwardArrow color={"#71717A"} className={"text-20"} size={20} />
+          </div>
+        </div>
+      )}
+      {showAddForm ? (
+        <div className={`${styles.item_wrapper} w-full`}>
+          <NewAddressForm saveAddDrawer={true} />
+        </div>
+      ) : (
+        <div className={styles.item_wrapper}>
+          {addressArray?.map((item, index) => (
+            <div
+              key={index}
+              className={`${
+                cityName !== item.city ? "cursor-not-allowed" : "cursor-pointer"
+              } ${styles.card_wrapper} ${
+                index === 0 ? "mt-0" : "mt-4 md:mt-8"
+              }`}
+              onClick={() => {
+                if (cityName === item.city) {
+                  setSelectedIndex(index);
+                  setId(item.id);
+                }
+              }}>
+              {cityName !== item.city && (
+                <div className={styles.not_belong_wrapper}>
+                  <p className={styles.not_belong_text}>
+                    Address does not belong to selected city
+                  </p>
+                </div>
+              )}
+              <div className={styles.first_row}>
+                <div
+                  className={`${
+                    cityName === item.city
+                      ? "border-[#5774AC]"
+                      : "border-[#9A9AA2]"
+                  } ${styles.circle}`}>
+                  <div
+                    className={` ${
+                      selectedIndex === index ? styles.selected_circle : ""
+                    }`}></div>
+                </div>
+                <h2 className={styles.name}>
+                  {item.full_name}, {item.phone}
+                </h2>
+              </div>
+              <p className={`truncate ${styles.address}`}>{item.address1}</p>
+              <p className={styles.address}>
+                {item.city}, {item.state}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
