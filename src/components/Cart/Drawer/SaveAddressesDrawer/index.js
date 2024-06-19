@@ -11,6 +11,7 @@ const AddressDrawer = ({
   makeDefaultAddress,
   primaryAddress,
   cartPage,
+  checkPostalCode,
 }) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [id, setId] = useState(primaryAddress?.id);
@@ -47,6 +48,7 @@ const AddressDrawer = ({
           className={styles.close_icon}
           onClick={() => {
             toggleDrawer();
+            setShowAddForm(false);
           }}>
           <Close color={"#45454A"} size={24} className="cursor-pointer" />
         </div>
@@ -62,24 +64,28 @@ const AddressDrawer = ({
           cartPage={cartPage}
           setShowAddForm={setShowAddForm}
           showAddForm={showAddForm}
+          checkPostalCode={checkPostalCode}
+          toggleDrawer={toggleDrawer}
         />
-        <div className={styles.btn_wrapper}>
-          <button
-            className={styles.btn}
-            onClick={async () => {
-              try {
-                await makeDefaultAddress(id);
-                // await makeAddressPrimary(id);
-                // getAllSavedAddresses();
-                toggleDrawer();
-              } catch (error) {
-                console.error(error);
-              }
-            }}>
-            Proceed
-            <ForwardArrow color={"#71717A"} />
-          </button>
-        </div>
+        {!showAddForm && (
+          <div className={styles.btn_wrapper}>
+            <button
+              className={styles.btn}
+              onClick={async () => {
+                try {
+                  await makeDefaultAddress(id);
+                  // await makeAddressPrimary(id);
+                  // getAllSavedAddresses();
+                  toggleDrawer();
+                } catch (error) {
+                  console.error(error);
+                }
+              }}>
+              Proceed
+              <ForwardArrow color={"#71717A"} />
+            </button>
+          </div>
+        )}
       </div>
     </Drawer>
   );
@@ -93,6 +99,8 @@ export const AddressDrawerContent = ({
   cartPage,
   setShowAddForm,
   showAddForm,
+  checkPostalCode,
+  toggleDrawer,
 }) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const primaryIndex = addressArray.findIndex(
@@ -100,7 +108,10 @@ export const AddressDrawerContent = ({
   );
   const [selectedIndex, setSelectedIndex] = useState(primaryIndex);
   const cityName = useSelector(state => state.homePagedata.cityName);
-
+  const drawerSaveAdd = () => {
+    toggleDrawer();
+    setShowAddForm(false);
+  };
   return (
     <div className={styles.container}>
       {cartPage && !showAddForm && (
@@ -120,7 +131,11 @@ export const AddressDrawerContent = ({
       )}
       {showAddForm ? (
         <div className={`${styles.item_wrapper} w-full`}>
-          <NewAddressForm saveAddDrawer={true} />
+          <NewAddressForm
+            saveAddDrawer={true}
+            checkPostalCode={checkPostalCode}
+            toggleDrawer={drawerSaveAdd}
+          />
         </div>
       ) : (
         <div className={styles.item_wrapper}>

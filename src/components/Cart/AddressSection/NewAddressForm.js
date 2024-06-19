@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import styles from "./styles.module.css";
 import {Formik, Form, Field, ErrorMessage} from "formik";
-import {PopUpArrow, DownPopUpArrow} from "@/assets/icon";
+import {PopUpArrow, DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {cityUrl} from "../../../../appConfig";
 import {handleWheel, keyPressForContactField} from "@/constants/constant";
 import OrderTypeDrawer from "./OrderTypeDrawer";
@@ -12,6 +12,7 @@ export default function NewAddressForm({
   handleOfflineOrder,
   saveAddDrawer,
   checkPostalCode,
+  toggleDrawer,
 }) {
   const formikRef = useRef(null);
 
@@ -113,10 +114,13 @@ export default function NewAddressForm({
           if (isOfflineCustomer === 1) {
             handleOfflineOrder(values);
           } else {
-            await checkPostalCode("onlineCustomer", values);
-            // saveUserAddress(values);
-            // getAllSavedAddresses();
-            resetForm();
+            try {
+              await checkPostalCode("onlineCustomer", values);
+              toggleDrawer();
+              resetForm();
+            } catch (error) {
+              console.error("Error submitting form:", error);
+            }
           }
           window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         }}>
@@ -414,10 +418,17 @@ export default function NewAddressForm({
                 </div>
               )}
 
-              {isOfflineCustomer !== 1 && !saveAddDrawer && (
+              {isOfflineCustomer !== 1 && !saveAddDrawer ? (
                 <button type="submit" className={styles.save_btn}>
                   Save & Proceed
                 </button>
+              ) : (
+                <div className={styles.btn_wrapper}>
+                  <button type="submit" className={`${styles.btn}`}>
+                    Proceed
+                    <ForwardArrow color={"#71717A"} />
+                  </button>
+                </div>
               )}
             </div>
           </Form>

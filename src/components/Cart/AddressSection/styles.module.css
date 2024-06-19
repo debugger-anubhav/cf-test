@@ -167,3 +167,11 @@
     margin-right: -14.28%;
   }
 } */
+
+.btn {
+  @apply bg-fff  text-16 font-medium text-71717A flex gap-[10px] px-8 rounded-lg justify-center items-center h-14  w-full;
+  border: 2px solid var(--grey-grey-600, #71717a);
+}
+.btn_wrapper {
+  @apply bottom-4 py-4 xl:pt-8 xl:pb-6 w-full xl:w-[466px] bg-fff absolute;
+}

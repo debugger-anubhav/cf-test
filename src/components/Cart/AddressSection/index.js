@@ -196,6 +196,7 @@ const AddressSection = () => {
       }
     } catch (err) {
       console.log(err?.message || "some error");
+      setLoading(false);
     }
   };
 
@@ -379,6 +380,7 @@ const AddressSection = () => {
         makeDefaultAddress={id => makeDefaultAddress(id)}
         primaryAddress={primaryAddress}
         cartPage={true}
+        checkPostalCode={checkPostalCode}
       />
       <div className={styles.main_container}>
         {loading && <LoaderComponent loading={loading} />}
@@ -393,50 +395,48 @@ const AddressSection = () => {
           </div>
 
           {addressArray.length > 0 &&
-            primaryAddress !== undefined &&
-            isOfflineCustomer !== 1 && (
-              <div
-                className={styles.saved_address_div}
-                onClick={toggleAddressDrawer}>
-                {!cityName.includes(primaryAddress?.city) && (
-                  <div className={styles.not_belong_wrapper}>
-                    <p className={styles.not_belong_text}>
-                      Address does not belong to selected city
-                    </p>
-                  </div>
-                )}
-                <div className={styles.saved_add_upper_div}>
-                  <h1 className={styles.saved_add_head}>Delivering to</h1>
-                  <button className={styles.change_btn}>Change</button>
-                </div>
-                <div className={styles.name_div}>
-                  <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
-                  <p className={styles.saved_name}>
-                    {primaryAddress?.full_name}, {primaryAddress?.phone}
+          primaryAddress !== undefined &&
+          isOfflineCustomer !== 1 ? (
+            <div
+              className={styles.saved_address_div}
+              onClick={toggleAddressDrawer}>
+              {!cityName.includes(primaryAddress?.city) && (
+                <div className={styles.not_belong_wrapper}>
+                  <p className={styles.not_belong_text}>
+                    Address does not belong to selected city
                   </p>
                 </div>
-
-                <p className={styles.saved_address}>
-                  {primaryAddress?.address1}
-                </p>
-                <p className={styles.saved_address}>
-                  {primaryAddress?.city}, {primaryAddress?.state}
-                </p>
-
-                {!cityName.includes(primaryAddress?.city) && (
-                  <div className={styles.add_new_info}>
-                    <InformationIcon size={20} color={"#71717A"} />
-                    <p className={styles.add_new_info_text}>Add new address </p>
-                  </div>
-                )}
+              )}
+              <div className={styles.saved_add_upper_div}>
+                <h1 className={styles.saved_add_head}>Delivering to</h1>
+                <button className={styles.change_btn}>Change</button>
               </div>
-            )}
+              <div className={styles.name_div}>
+                <PersonIcon color={"#2D9469"} className={"w-4 xl:w-5"} />
+                <p className={styles.saved_name}>
+                  {primaryAddress?.full_name}, {primaryAddress?.phone}
+                </p>
+              </div>
 
-          <NewAddressForm
-            handleOfflineOrder={values => handleOfflineOrder(values)}
-            saveAddDrawer={false}
-            checkPostalCode={val => checkPostalCode(val)}
-          />
+              <p className={styles.saved_address}>{primaryAddress?.address1}</p>
+              <p className={styles.saved_address}>
+                {primaryAddress?.city}, {primaryAddress?.state}
+              </p>
+
+              {!cityName.includes(primaryAddress?.city) && (
+                <div className={styles.add_new_info}>
+                  <InformationIcon size={20} color={"#71717A"} />
+                  <p className={styles.add_new_info_text}>Add new address </p>
+                </div>
+              )}
+            </div>
+          ) : (
+            <NewAddressForm
+              handleOfflineOrder={values => handleOfflineOrder(values)}
+              saveAddDrawer={false}
+              checkPostalCode={checkPostalCode}
+            />
+          )}
         </div>
 
         <div className={styles.right_div}>

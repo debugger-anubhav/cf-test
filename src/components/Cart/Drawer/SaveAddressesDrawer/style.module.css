@@ -48,7 +48,7 @@
 }
 
 .container {
-  @apply flex flex-col h-[90vh];
+  @apply flex flex-col h-[90vh] relative;
 }
 .item_wrapper {
   @apply pb-[147px];
