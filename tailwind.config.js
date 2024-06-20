@@ -42,6 +42,7 @@ module.exports = {
         E5EFF4: "#E5EFF4",
         F9F9F9: "#F9F9F9",
         FFDF85: "#FFDF85",
+        F1EDE480: "#F1EDE480",
       },
       fontSize: {
         "main-head": "40px",

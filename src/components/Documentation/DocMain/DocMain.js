@@ -12,13 +12,12 @@ import KYCCard from "../KYCCard/KYCCard";
 import KYC100 from "../KYC100/KYC100";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import InitialSelectOrder from "@/components/KycScreens/InitialSelectOrder/index";
-
 import {useDispatch, useSelector} from "react-redux";
 import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {ForwardArrow} from "@/assets/icon";
+import {ArrowForw} from "../../../assets/icon";
+import Image from "next/image";
 
 const DocMain = () => {
   const [kycState, setKycState] = useState();
@@ -138,11 +137,39 @@ const DocMain = () => {
           </div>
 
           <button className={styles.start_kyc_btn}>
-            Start my KYC now <ForwardArrow />
+            Start my KYC now{" "}
+            <ArrowForw
+              color={"#222222"}
+              size={20}
+              className={"hidden md:flex"}
+            />
           </button>
+
+          <div className={styles.track_box}>
+            <div className={styles.qr_img}>QR image</div>
+            <div className={styles.track_info}>
+              <p className={styles.track_heading}>📲 Fast-Track Your Orders!</p>
+              <p className={styles.track_detail}>
+                Download our app to quickly complete KYC. Enjoy a smoother,
+                faster service experience!{" "}
+                <Image
+                  loader={({src}) => src}
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                  alt="paty_icon"
+                  className=" inline-block"
+                  loading="lazy"
+                  width={16}
+                  height={16}
+                />
+              </p>
+            </div>
+            <div className={styles.track_btn_wrapper}>
+              <button className={styles.app_btn}>ios</button>
+              <button className={styles.app_btn}>Android</button>
+            </div>
+          </div>
         </div>
       </div>
-      <InitialSelectOrder />
     </div>
   );
 };
