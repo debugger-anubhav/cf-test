@@ -122,11 +122,10 @@ const LoginModal = ({
       .post(endPoints.login.verifyOtp, body)
       .then(response => {
         setProblemType("");
-
+        window?.gtag("event", "otp_verified");
+        window?.fbq("track", "otp_verified");
         if (response?.data?.status_code === 200) {
           dispatch(setISFirstUser(response?.data?.data?.is_first_user));
-          window?.fbq("track", "otp_verified");
-          window?.gtag("event", "otp_verified");
           if (response?.data?.message === "Login Successfully.!") {
             const event = new Event("login");
             window?.dispatchEvent(event);
