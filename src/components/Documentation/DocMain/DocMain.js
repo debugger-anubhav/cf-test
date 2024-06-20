@@ -12,11 +12,13 @@ import KYCCard from "../KYCCard/KYCCard";
 import KYC100 from "../KYC100/KYC100";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import InitialSelectOrder from "@/components/KycScreens/InitialSelectOrder/index";
 
 import {useDispatch, useSelector} from "react-redux";
 import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import {ForwardArrow} from "@/assets/icon";
 
 const DocMain = () => {
   const [kycState, setKycState] = useState();
@@ -92,6 +94,12 @@ const DocMain = () => {
             showBackIcon={showBackIcon[kycState]}
             setKycState={() => setKycState(prevState[kycState])}
           />
+          <div className={styles.info_box}>
+            <p className={styles.info}>
+              Complete your KYC quickly for faster product delivery.
+            </p>
+          </div>
+
           <div>
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
@@ -128,8 +136,13 @@ const DocMain = () => {
               />
             )}
           </div>
+
+          <button className={styles.start_kyc_btn}>
+            Start my KYC now <ForwardArrow />
+          </button>
         </div>
       </div>
+      <InitialSelectOrder />
     </div>
   );
 };

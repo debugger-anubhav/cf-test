@@ -4,3 +4,12 @@
 .kycFormArea {
   @apply grow pb-6 w-full;
 }
+.info_box {
+  @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8;
+}
+.info {
+  @apply text-71717A font-Poppins font-medium text-base leading-6 tracking-0.3;
+}
+.start_kyc_btn {
+  @apply flex flex-col py-4 px-7 gap-2 bg-FFDF85 text-222;
+}

@@ -41,6 +41,7 @@ module.exports = {
         "5774AC": "#5774AC",
         E5EFF4: "#E5EFF4",
         F9F9F9: "#F9F9F9",
+        FFDF85: "#FFDF85",
       },
       fontSize: {
         "main-head": "40px",
@@ -77,15 +78,15 @@ module.exports = {
       letterSpacing: {
         heading: "-0.4px",
         headingOne: "-0.48px",
-        desc: "-0.28px",
+        desc: "-0.28px", // -1.75%
         subHeading: "-0.32px",
         desktop_sub_heading: "-0.64px",
-        0.36: "-0.36px",
-        0.3: "-0.32px",
-        0.6: " -0.64px",
-        0.24: "-0.24px",
-        0.4: " -0.4px",
-        0.48: "-0.48px",
+        0.36: "-0.36px", // -2.25%
+        0.3: "-0.32px", // -2%
+        0.6: " -0.64px", // -4%
+        0.24: "-0.24px", // -1.5%
+        0.4: " -0.4px", // -2.5%
+        0.48: "-0.48px", // -3%
       },
       animation: {
         fade: "fadeOut 0.5s ease-in-out",
