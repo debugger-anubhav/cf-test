@@ -134,24 +134,24 @@ const ShoppingCartSection = () => {
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
-        const eventItems = [];
-        res?.data?.data?.forEach((product, index) => {
-          const item = {
-            id: product.id,
-            name: product.fc_product?.product_name,
-            brand: "Cityfurnish",
-            list_position: index + 1,
-            quantity: product.quantity,
-            price: product.price,
-          };
-          eventItems.push(item);
-        });
-        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
-          window?.gtag("event", "begin_checkout", {
-            items: eventItems,
-          });
-          window?.fbq("track", "InitiateCheckout");
-        }
+        // const eventItems = [];
+        // res?.data?.data?.forEach((product, index) => {
+        //   const item = {
+        //     id: product.id,
+        //     name: product.fc_product?.product_name,
+        //     brand: "Cityfurnish",
+        //     list_position: index + 1,
+        //     quantity: product.quantity,
+        //     price: product.price,
+        //   };
+        //   eventItems.push(item);
+        // });
+        // if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+        //   window?.gtag("event", "begin_checkout", {
+        //     items: eventItems,
+        //   });
+        //   window?.fbq("track", "InitiateCheckout");
+        // }
       })
       .catch(err => {
         console.log(err?.message || "some error");
@@ -353,7 +353,25 @@ const ShoppingCartSection = () => {
     if (isLogin) {
       if (userDetails?.full_name && userDetails?.email) {
         dispatch(setShoppingCartTab(1));
-        window?.scrollTo(0, 0);
+        const eventItems = [];
+        cartItems?.forEach((product, index) => {
+          const item = {
+            id: product.id,
+            name: product.fc_product?.product_name,
+            brand: "Cityfurnish",
+            list_position: index + 1,
+            quantity: product.quantity,
+            price: product.price,
+          };
+          eventItems.push(item);
+        });
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "begin_checkout", {
+            items: eventItems,
+          });
+          window?.fbq("track", "InitiateCheckout");
+          window?.scrollTo(0, 0);
+        }
       } else {
         setIsSetupProfile(true);
         toggleLoginModal();
