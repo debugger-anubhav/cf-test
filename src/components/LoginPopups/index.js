@@ -122,8 +122,10 @@ const LoginModal = ({
       .post(endPoints.login.verifyOtp, body)
       .then(response => {
         setProblemType("");
-        window?.gtag("event", "otp_verified");
-        window?.fbq("track", "otp_verified");
+        if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+          window?.gtag("event", "otp_verified");
+          window?.fbq("track", "otp_verified");
+        }
         if (response?.data?.status_code === 200) {
           dispatch(setISFirstUser(response?.data?.data?.is_first_user));
           if (response?.data?.message === "Login Successfully.!") {
