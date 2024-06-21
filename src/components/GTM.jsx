@@ -27,6 +27,7 @@ export default function GoogleTagManager(props) {
             <Script
               key={`gtm-script-${index}`}
               type="text/partytown"
+              strategy="afterInteractive"
               src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
             />
           </>
@@ -35,7 +36,7 @@ export default function GoogleTagManager(props) {
         <Script
           id="_next-gtm-init"
           // type="text/partytown"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
             (function(w,l){
@@ -48,7 +49,7 @@ export default function GoogleTagManager(props) {
 
         <Script
           id="plugin-google-tagmanager"
-          strategy="lazyOnload"
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];

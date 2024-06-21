@@ -145,6 +145,7 @@ export default function RootLayout({children}) {
           src="//in.fw-cdn.com/30445413/247408.js"
           chat="true"
           type="text/partytown"
+          strategy="afterInteractive"
           // strategy="worker"
         />
         {/* <link
@@ -210,7 +211,7 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             // defer
             // async
             id="facebook-event"
@@ -326,7 +327,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             // defer
             // async
             id="linkedin"
@@ -342,7 +343,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             // defer
             // async
             id="lms-analytics"
@@ -404,7 +405,7 @@ var CaptchaCallback = function(){
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
-            strategy="lazyOnload"
+            strategy="afterInteractive"
             // defer
             // async
             id="ads-twitter"
