@@ -3,11 +3,10 @@
 import React from "react";
 import Script from "next/script";
 
-let currentDataLayerName = undefined;
+let currentDataLayerName;
 
 export default function GoogleTagManager(props) {
   const {gtmIds, dataLayerName = "dataLayer", auth, preview, dataLayer} = props;
-
   if (currentDataLayerName === undefined) {
     currentDataLayerName = dataLayerName;
   }
