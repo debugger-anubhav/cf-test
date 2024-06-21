@@ -2,21 +2,21 @@ import React, {useState, useEffect} from "react";
 import styles from "./DocMain.module.css";
 import MenuList from "@/components/Common/MenuList";
 
-import DocumentaionInitialScreen from "../InitialScreen/Initialscreen";
+// import DocumentaionInitialScreen from "../InitialScreen/Initialscreen";
 import DocSidebar from "../Sidebar/DocSidebar";
 import KycHeader from "../KycHeader/KycHeader";
-import KYCGetCivilScore from "../KYCGetCivilScore/KYCGetCivilScore";
-import KYCSalary from "../KYCSalary/KYCSalary";
-import KYCAddress from "../KYCAddress/KYCAddress";
-import KYCCard from "../KYCCard/KYCCard";
-import KYC100 from "../KYC100/KYC100";
+// import KYCGetCivilScore from "../KYCGetCivilScore/KYCGetCivilScore";
+// import KYCSalary from "../KYCSalary/KYCSalary";
+// import KYCAddress from "../KYCAddress/KYCAddress";
+// import KYCCard from "../KYCCard/KYCCard";
+// import KYC100 from "../KYC100/KYC100";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {ArrowForw} from "../../../assets/icon";
+import {ArrowForw, DropDownArrow} from "../../../assets/icon";
 import Image from "next/image";
 import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
@@ -26,7 +26,7 @@ const DocMain = () => {
   const [isUpfrontPayment, setIsUpfrontPayment] = useState(false);
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
-  const [cibilDocsData, setCibilDocsData] = useState();
+  // const [cibilDocsData, setCibilDocsData] = useState();
   // const [isReupload, setIsReupload] = useState(false);
 
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ const DocMain = () => {
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);
       setTenure(parseInt(response?.data?.data?.tenure));
       setCreditScore(parseInt(response?.data?.data?.credit_score));
-      setCibilDocsData(response?.data?.data?.cibilDocsData);
+      // setCibilDocsData(response?.data?.data?.cibilDocsData);
     } catch (err) {
       console.log(err?.message || "some error");
     }
@@ -87,6 +87,7 @@ const DocMain = () => {
   const [ordersData, setOrdersData] = useState(null);
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
+  const [selectedOption, setSelectedOption] = useState(null);
 
   // const openModal = () => {
   //   setOpenDrawer(true);
@@ -150,7 +151,7 @@ const DocMain = () => {
           </div>
 
           {/* select box  */}
-          <div onClick={() => setOpenDrawer(true)}>
+          {/* <div onClick={() => setOpenDrawer(true)}>
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
             ) : kycState === 1 ? (
@@ -185,9 +186,26 @@ const DocMain = () => {
                 }
               />
             )}
+          </div> */}
+
+          <div onClick={() => setOpenDrawer(true)}>
+            <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
+              {selectedOption ? (
+                <>#{ordersData[selectedOption]?.dealCodeNumber}</>
+              ) : (
+                " Select order"
+              )}
+              <DropDownArrow color={"#71717A"} size={20} />
+            </div>
           </div>
 
-          <button className={styles.start_kyc_btn}>
+          <button
+            className={`${styles.start_kyc_btn} ${
+              selectedOption
+                ? "bg-btn-primary cursor-pointer"
+                : "bg-FFDF85 cursor-not-allowed"
+            }`}
+            disabled={selectedOption}>
             Start my KYC now{" "}
             <ArrowForw
               color={"#222222"}
@@ -238,6 +256,8 @@ const DocMain = () => {
                 loadingSkeleton={loadingSkeleton}
                 optionsData={ordersData}
                 setOpenDrawer={setOpenDrawer}
+                setSelectedOption={setSelectedOption}
+                selectedOption={selectedOption}
               />
             </Drawer>
           )}

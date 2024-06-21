@@ -5,9 +5,14 @@ import {productPageImagesBaseUrl} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
 import {Close} from "../../../assets/icon";
 
-function SelectOptDrawer({optionsData, setOpenDrawer, loadingSkeleton}) {
+function SelectOptDrawer({
+  optionsData,
+  setOpenDrawer,
+  loadingSkeleton,
+  setSelectedOption,
+  selectedOption,
+}) {
   const [data, setData] = useState(optionsData);
-  const [selectedOption, setSelectedOption] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -17,7 +22,7 @@ function SelectOptDrawer({optionsData, setOpenDrawer, loadingSkeleton}) {
   useEffect(() => {
     setData(optionsData);
   }, [optionsData]);
-  console.log(data, "datattatat");
+
   return (
     <div className={`${styles.content_wrapper} overflow-auto`}>
       <div className="flex w-full justify-between ">
@@ -49,7 +54,10 @@ function SelectOptDrawer({optionsData, setOpenDrawer, loadingSkeleton}) {
               <div
                 key={index.toString()}
                 className={styles.order_row}
-                onClick={() => setSelectedOption(index)}>
+                onClick={() => {
+                  setSelectedOption(index);
+                  setOpenDrawer(false);
+                }}>
                 <input
                   type="radio"
                   className={styles.radio_button}
