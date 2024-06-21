@@ -4,8 +4,11 @@ import PropTypes from "prop-types";
 import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import localFont from "@next/font/local";
-// import Script from "next/script";
-// import {Partytown} from "@builder.io/partytown/react";
+import Script from "next/script";
+// import Head from "next/head";
+import GTM from "@/components/GTM";
+// import workerScript from "worker-loader!./worker";
+// import LoadWorker from "./load-worker";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -53,6 +56,7 @@ const poppins = localFont({
   ],
   variable: "--font-poppins",
 });
+
 const inter = localFont({
   src: [
     {
@@ -63,7 +67,7 @@ const inter = localFont({
 });
 
 export default function RootLayout({children}) {
-  // const AMPLITUDE_ID = "";
+  const gtmIds = [process.env.NEXT_PUBLIC_GOOGLE_TAGMANAGER_ID];
 
   return (
     <html
@@ -95,11 +99,23 @@ export default function RootLayout({children}) {
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
-        {/* <Partytown debug={true} forward={["dataLayer.push"]} /> */}
+        <Script
+          data-partytown-config
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.partytown = {
+              forward: ['dataLayer.push', 'fbq'],
+              lib: '/_next/static/~partytown/',
+              debug: true,
+            };
+          `,
+          }}
+        />
 
-        <script
+        <GTM gtmIds={gtmIds} />
+
+        <Script
           type="text/javascript"
-          // type="text/partytown"
           id="fcWidgetMessengerConfig"
           dangerouslySetInnerHTML={{
             __html: `
@@ -121,21 +137,17 @@ export default function RootLayout({children}) {
                 },
               }
             })
-            .catch(e => console.log('e',e))
             `,
-          }}></script>
+          }}
+        />
 
-        <script
-          // type="text/partytown"
+        <Script
           src="//in.fw-cdn.com/30445413/247408.js"
           chat="true"
-          strategy="worker"></script>
-
-        {/* <link rel="preload" href="https://fonts.gstatic.com" crossOrigin /> */}
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap"
-          rel="stylesheet"
-        /> */}
+          type="text/partytown"
+          strategy="afterInteractive"
+          // strategy="worker"
+        />
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
@@ -198,10 +210,10 @@ export default function RootLayout({children}) {
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            // type="text/partytown"
-            defer
-            async
+          <Script
+            strategy="afterInteractive"
+            // defer
+            // async
             id="facebook-event"
             dangerouslySetInnerHTML={{
               __html: `
@@ -245,14 +257,6 @@ export default function RootLayout({children}) {
           </noscript>
         )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            defer
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=G-05PLBRM6KD"
-            // strategy="worker"
-          />
-        )}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
@@ -320,64 +324,46 @@ var CaptchaCallback = function(){
             }}
           />
         )} */}
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            // type="text/partytown"
-            defer
-            async
-            // id="datalayer-gtag"
-            dangerouslySetInnerHTML={{
-              __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag() {
-                dataLayer.push(arguments);
-              }
-              gtag('js', new Date());
-        gtag('config', 'G-05PLBRM6KD');
-            `,
-            }}
-          />
-        )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            // type="text/partytown"
-            defer
-            async
+          <Script
+            strategy="afterInteractive"
+            // defer
+            // async
             id="linkedin"
             dangerouslySetInnerHTML={{
               __html: `
                 _linkedin_partner_id = "4895321";
-    window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
-    window._linkedin_data_partner_ids.push(_linkedin_partner_id);
-  `,
+                window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+                window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+              `,
             }}
           />
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            defer
-            type="text/partytown"
-            async
-            // id="lms-analytics"
+          <Script
+            strategy="afterInteractive"
+            // defer
+            // async
+            id="lms-analytics"
             dangerouslySetInnerHTML={{
               __html: `
-    (function (l) {
-      if (!l) {
-        window.lintrk = function (a, b) {
-          window.lintrk.q.push([a, b])
-        };
-        window.lintrk.q = []
-      }
-      var s = document.getElementsByTagName("script")[0];
-      var b = document.createElement("script");
-      b.type = "text/javascript";
-      b.async = true;
-      b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
-      s.parentNode.insertBefore(b, s);
-    })(window.lintrk);
-  `,
+                (function (l) {
+                  if (!l) {
+                    window.lintrk = function (a, b) {
+                      window.lintrk.q.push([a, b])
+                    };
+                    window.lintrk.q = []
+                  }
+                  var s = document.getElementsByTagName("script")[0];
+                  var b = document.createElement("script");
+                  b.type = "text/javascript";
+                  b.async = true;
+                  b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+                  s.parentNode.insertBefore(b, s);
+                })(window.lintrk);
+              `,
             }}
           />
         )}
@@ -392,26 +378,6 @@ var CaptchaCallback = function(){
               src="https://px.ads.linkedin.com/collect/?pid=4895321&fmt=gif"
             />
           </noscript>
-        )}
-
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            type="text/partytown"
-            defer
-            async
-            // id="googletagmanager"
-            dangerouslySetInnerHTML={{
-              __html: `(function (w, d, s, l, i) {
-      w[l] = w[l] || [];
-      w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-      var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-      j.async = true;
-      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-      f.parentNode.insertBefore(j, f);
-  })(window, document, 'script', 'dataLayer', 'GTM-PF4G2HJ')`,
-            }}
-          />
         )}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
@@ -438,13 +404,13 @@ var CaptchaCallback = function(){
         )} */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <script
-            type="text/partytown"
-            defer
-            async
-            // id="ads-twitter"
+          <Script
+            strategy="afterInteractive"
+            // defer
+            // async
+            id="ads-twitter"
             dangerouslySetInnerHTML={{
-              __html: ` !function(e,t,n,s,u,a)
+              __html: `!function(e,t,n,s,u,a)
             {e.twq ||
               ((s = e.twq =
                 function () {
@@ -458,7 +424,8 @@ var CaptchaCallback = function(){
               (a = t.getElementsByTagName(n)[0]),
               a.parentNode.insertBefore(u, a))}
             (window,document,'script'); twq('config','ofz28');`,
-            }}></script>
+            }}
+          />
         )}
       </head>
       <body>
