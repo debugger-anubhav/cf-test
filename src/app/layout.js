@@ -5,7 +5,7 @@ import ReduxProvider from "@/store/provider";
 import QueryProvider from "@/components/QueryProvider/QueryProvider";
 import localFont from "@next/font/local";
 import Script from "next/script";
-import Head from "next/head";
+// import Head from "next/head";
 import GTM from "@/components/GTM";
 // import workerScript from "worker-loader!./worker";
 // import LoadWorker from "./load-worker";

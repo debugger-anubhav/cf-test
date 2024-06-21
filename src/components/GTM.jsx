@@ -24,11 +24,11 @@ export default function GoogleTagManager(props) {
       <>
         {gtmIds.map((gtmId, index) => (
           <>
-          <Script
-            key={`gtm-script-${index}`}
-            type="text/partytown"
-            src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
-          />
+            <Script
+              key={`gtm-script-${index}`}
+              type="text/partytown"
+              src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
+            />
           </>
         ))}
 

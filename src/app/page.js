@@ -142,17 +142,17 @@ export default function Home() {
     };
   }, []);
   useEffect(() => {
-    // if (userId !== "") {
-    //   if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
-    //     window?.gtag("js", new Date());
-    //     window?.gtag("config", "G-05PLBRM6KD", {
-    //       user_id: userId,
-    //     });
-    //   }
-    // } else {
-    //   process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
-    //     window?.gtag("config", "G-05PLBRM6KD");
-    // }
+    if (userId !== "") {
+      if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+        window?.gtag("js", new Date());
+        window?.gtag("config", "G-05PLBRM6KD", {
+          user_id: userId,
+        });
+      }
+    } else {
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
+        window?.gtag("config", "G-05PLBRM6KD");
+    }
   }, [userId]);
 
   return (
@@ -161,7 +161,40 @@ export default function Home() {
         name="Title"
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
       />
-      <p>hello</p>
+      <div ref={myElementRef} className="large_layout">
+        {/* {useChatScript()} */}
+        <AnnouncementBar />
+        <Header />
+        <MenuList />
+        <HeroBanner />
+        <RentFurnitureAndAppliances params={"home-page"} />
+        <RecentlyViewedProduct />
+        <TrendingProducts params={"home-page"} />
+        <OffersAndCoupons />
+        {/* <NewlyLaunched /> */}
+        <RentNowBanner params={"home-page"} />
+        <DownloadForMobile />
+        <PreDesignCombos />
+        <HasselFreeServicesCards />
+        <LimetedPreiodDiscount />
+        <NewlyLaunched />
+
+        <TryCityMax />
+
+        <div className="xl:hidden block">
+          <MediaCoverage />
+        </div>
+        <CustomerRating />
+        <div className="hidden xl:block">
+          <MediaCoverage />
+        </div>
+        <CombineSection />
+        <HappySubscribers params={"home-page"} />
+        <FrequentlyAskedQuestions params={"home-page"} />
+        <TextContent params={"home-page"} />
+        <Footer />
+        <Notifications />
+      </div>
     </>
   );
 }
