@@ -18,6 +18,8 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {ArrowForw} from "../../../assets/icon";
 import Image from "next/image";
+import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
+import {Drawer} from "@mui/material";
 
 const DocMain = () => {
   const [kycState, setKycState] = useState();
@@ -81,25 +83,74 @@ const DocMain = () => {
     2: creditScore >= 650 ? 0 : 1,
     3: 2,
   };
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [ordersData, setOrdersData] = useState(null);
+  const [isBottomDrawer, setIsBottomDrawer] = useState(false);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
+  // const openModal = () => {
+  //   setOpenDrawer(true);
+  // };
+  const userId = decrypt(getLocalStorage("_ga"));
+
+  const fetchOrdersDetails = filter => {
+    const body = {
+      userId,
+      filter,
+    };
+    baseInstance
+      .post(endPoints.myOrdersPage.getAllOrders, body)
+      .then(res => {
+        setOrdersData(res?.data?.data);
+        setLoadingSkeleton(false);
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+        setLoadingSkeleton(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchOrdersDetails();
+  }, []);
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsBottomDrawer(true);
+    } else {
+      setIsBottomDrawer(false);
+    }
+  };
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
+  const closeModal = () => {
+    setOpenDrawer(false);
+  };
   return (
     <div>
       <MenuList hasMb={false} />
       <div className={styles.mainContainer}>
         <DocSidebar />
+
         <div className={styles.kycFormArea}>
           <KycHeader
             progress={progress[kycState] || 0}
             showBackIcon={showBackIcon[kycState]}
             setKycState={() => setKycState(prevState[kycState])}
           />
+          {/* //Info box  */}
           <div className={styles.info_box}>
             <p className={styles.info}>
               Complete your KYC quickly for faster product delivery.
             </p>
           </div>
 
-          <div>
+          {/* select box  */}
+          <div onClick={() => setOpenDrawer(true)}>
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
             ) : kycState === 1 ? (
@@ -168,6 +219,28 @@ const DocMain = () => {
               <button className={styles.app_btn}>Android</button>
             </div>
           </div>
+        </div>
+
+        <div>
+          {openDrawer && (
+            <Drawer
+              anchor={isBottomDrawer ? "bottom" : "right"}
+              open={openDrawer}
+              onClose={() => {
+                closeModal();
+                setOpenDrawer(false);
+              }}
+              classes={{
+                paper: `${styles.common_drawer_wrapper} pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none max-h-[90%] md:max-h-full overflow-visible`,
+              }}
+              transitionDuration={{enter: 400, exit: 200}}>
+              <SelectOptDrawer
+                loadingSkeleton={loadingSkeleton}
+                optionsData={ordersData}
+                setOpenDrawer={setOpenDrawer}
+              />
+            </Drawer>
+          )}
         </div>
       </div>
     </div>
