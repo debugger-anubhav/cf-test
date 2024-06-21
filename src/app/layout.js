@@ -115,6 +115,7 @@ export default function RootLayout({children}) {
             })
             .then(res => res.json())
             .then(res => {
+             window.dataLayer.push({"event":"logged_in_user","userid":res.data.userId})
               window.fcWidgetMessengerConfig = {
                 meta: {
                   cf_userid: res.data.userId,
