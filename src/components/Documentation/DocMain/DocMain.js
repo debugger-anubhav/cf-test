@@ -20,6 +20,7 @@ import {ArrowForw, DropDownArrow} from "../../../assets/icon";
 import Image from "next/image";
 import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
+import WorkProfession from "../../KycScreens/WorkProfession";
 
 const DocMain = () => {
   const [kycState, setKycState] = useState();
@@ -88,7 +89,7 @@ const DocMain = () => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
-
+  const [showWorkProfession, setShowWorkProfession] = useState(false);
   // const openModal = () => {
   //   setOpenDrawer(true);
   // };
@@ -138,20 +139,24 @@ const DocMain = () => {
         <DocSidebar />
 
         <div className={styles.kycFormArea}>
-          <KycHeader
-            progress={progress[kycState] || 0}
-            showBackIcon={showBackIcon[kycState]}
-            setKycState={() => setKycState(prevState[kycState])}
-          />
-          {/* //Info box  */}
-          <div className={styles.info_box}>
-            <p className={styles.info}>
-              Complete your KYC quickly for faster product delivery.
-            </p>
-          </div>
+          {showWorkProfession ? (
+            <WorkProfession backState={setShowWorkProfession} />
+          ) : (
+            <>
+              <KycHeader
+                progress={progress[kycState] || 0}
+                showBackIcon={showBackIcon[kycState]}
+                setKycState={() => setKycState(prevState[kycState])}
+              />
+              {/* //Info box  */}
+              <div className={styles.info_box}>
+                <p className={styles.info}>
+                  Complete your KYC quickly for faster product delivery.
+                </p>
+              </div>
 
-          {/* select box  */}
-          {/* <div onClick={() => setOpenDrawer(true)}>
+              {/* select box  */}
+              {/* <div onClick={() => setOpenDrawer(true)}>
             {kycState === 0 ? (
               <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
             ) : kycState === 1 ? (
@@ -188,55 +193,61 @@ const DocMain = () => {
             )}
           </div> */}
 
-          <div onClick={() => setOpenDrawer(true)}>
-            <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
-              {selectedOption ? (
-                <>#{ordersData[selectedOption]?.dealCodeNumber}</>
-              ) : (
-                " Select order"
-              )}
-              <DropDownArrow color={"#71717A"} size={20} />
-            </div>
-          </div>
+              <div onClick={() => setOpenDrawer(true)}>
+                <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
+                  {selectedOption ? (
+                    <>#{ordersData[selectedOption]?.dealCodeNumber}</>
+                  ) : (
+                    " Select order"
+                  )}
+                  <DropDownArrow color={"#71717A"} size={20} />
+                </div>
+              </div>
 
-          <button
-            className={`${styles.start_kyc_btn} ${
-              selectedOption
-                ? "bg-btn-primary cursor-pointer"
-                : "bg-FFDF85 cursor-not-allowed"
-            }`}
-            disabled={selectedOption}>
-            Start my KYC now{" "}
-            <ArrowForw
-              color={"#222222"}
-              size={20}
-              className={"hidden md:flex"}
-            />
-          </button>
-
-          <div className={styles.track_box}>
-            <div className={styles.qr_img}>QR image</div>
-            <div className={styles.track_info}>
-              <p className={styles.track_heading}>📲 Fast-Track Your Orders!</p>
-              <p className={styles.track_detail}>
-                Download our app to quickly complete KYC. Enjoy a smoother,
-                faster service experience!{" "}
-                <Image
-                  loader={({src}) => src}
-                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
-                  alt="paty_icon"
-                  className=" inline-block"
-                  loading="lazy"
-                  width={16}
-                  height={16}
+              {/* start kyc button  */}
+              <button
+                className={`${styles.start_kyc_btn} ${
+                  selectedOption
+                    ? "bg-btn-primary cursor-pointer"
+                    : "bg-FFDF85 cursor-not-allowed"
+                }`}
+                disabled={selectedOption === null}
+                onClick={() => setShowWorkProfession(true)}>
+                Start my KYC now{" "}
+                <ArrowForw
+                  color={"#222222"}
+                  size={20}
+                  className={"hidden md:flex"}
                 />
-              </p>
-            </div>
-            <div className={styles.track_btn_wrapper}>
-              <button className={styles.app_btn}>ios</button>
-              <button className={styles.app_btn}>Android</button>
-            </div>
-          </div>
+              </button>
+
+              <div className={styles.track_box}>
+                <div className={styles.qr_img}>QR image</div>
+                <div className={styles.track_info}>
+                  <p className={styles.track_heading}>
+                    📲 Fast-Track Your Orders!
+                  </p>
+                  <p className={styles.track_detail}>
+                    Download our app to quickly complete KYC. Enjoy a smoother,
+                    faster service experience!{" "}
+                    <Image
+                      loader={({src}) => src}
+                      src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                      alt="paty_icon"
+                      className=" inline-block"
+                      loading="lazy"
+                      width={16}
+                      height={16}
+                    />
+                  </p>
+                </div>
+                <div className={styles.track_btn_wrapper}>
+                  <button className={styles.app_btn}>ios</button>
+                  <button className={styles.app_btn}>Android</button>
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div>

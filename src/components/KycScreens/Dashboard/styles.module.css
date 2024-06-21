@@ -1,0 +1,21 @@
+.heading {
+  @apply font-Poppins md:text-24 text-18 text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}
+.kyc_status_box {
+  @apply flex w-full border border-DDDDDF rounded-lg gap-4 p-6 flex-col my-8;
+}
+.schedule_delivery_btn {
+  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center bg-btn-primary sm:whitespace-nowrap w-fit;
+}
+.sub_heading {
+  @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;
+}
+.details_wrapper {
+  @apply flex w-full gap-4 flex-wrap;
+}
+.details_box {
+  @apply border border-EDEDEE w-[297px] h-[111px] flex justify-center flex-col rounded-lg p-6;
+}
+.detail_heading {
+  @apply font-Poppins md:text-20 text-18 text-5774AC leading-[30px] tracking-0.3 font-medium;
+}
