@@ -43,6 +43,23 @@ export default function Dashboard({setOpenDashboard}) {
           );
         })}
       </div>
+
+      <div className={styles.mobile_details_wrapper}>
+        {[1, 2, 3, 4, 5]?.map((item, index) => {
+          return (
+            <div
+              key={index.toString()}
+              className={`${styles.mobile_detail_box} ${
+                index === 4 ? "border-none" : "border-b"
+              }`}>
+              <div className={styles.detail_heading}>PAN details</div>
+              <div className={styles.sub_heading}>
+                pending <ForwardArrow color={"#222222"} size={16} />
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
