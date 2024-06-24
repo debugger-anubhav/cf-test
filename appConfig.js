@@ -38,6 +38,8 @@ export const cityUrl = "https://d3juy0zp6vqec8.cloudfront.net/images/icons/";
 
 export const razorpayKeyOwn = process.env.NEXT_PUBLIC_RAZOR_PAY_KEY;
 export const razorpayKey = process.env.NEXT_PUBLIC_RAZOR_PAY_KEY;
+export const razorpayExtensionKey =
+  process.env.NEXT_PUBLIC_RAZOR_PAY_EXTENSION_KEY;
 
 export const RazorpayThemeColor = "#3E688E";
 
