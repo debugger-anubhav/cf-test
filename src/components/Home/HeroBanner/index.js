@@ -12,7 +12,7 @@ import {
   CityWiseBannerTablet,
 } from "@/constants/constant";
 import {CldImage} from "next-cloudinary";
-import Image from "@/components/Image";
+// import Image from "@/components/Image";
 
 const HeroBanner = () => {
   const router = useRouter();
