@@ -106,6 +106,7 @@ const HeroBanner = () => {
                     width={banner.imgWidth} // Transform the image: auto-crop to square aspect_ratio
                     height={banner.imgHeight}
                     fetchPriority="high"
+                    loading="eager"
                     className="cursor-pointer rounded-lg"
                     // fill
                     crop={{
