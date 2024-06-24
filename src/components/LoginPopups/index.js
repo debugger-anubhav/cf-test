@@ -15,7 +15,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import {decryptBase64, encrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, setLocalStorage} from "@/constants/constant";
 import Cookies from "universal-cookie";
-import {setISFirstUser, setLoginState} from "@/store/Slices";
+import {setLoginState} from "@/store/Slices";
 import {useDispatch} from "react-redux";
 
 const LoginModal = ({
@@ -124,7 +124,7 @@ const LoginModal = ({
         setProblemType("");
 
         if (response?.data?.status_code === 200) {
-          dispatch(setISFirstUser(response?.data?.data?.is_first_user));
+          // dispatch(setISFirstUser(response?.data?.data?.is_first_user));
           if (response?.data?.message === "Login Successfully.!") {
             const event = new Event("login");
             window?.dispatchEvent(event);
