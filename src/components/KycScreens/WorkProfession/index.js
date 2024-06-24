@@ -1,10 +1,35 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {BackIcon} from "../../../assets/icon";
 import Dashboard from "../Dashboard";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 
 export default function WorkProfession({backState}) {
   const [openDashboard, setOpenDashboard] = useState(false);
+  const [professionList, setProfessionList] = useState([]);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
+
+  const getProfessionList = () => {
+    baseInstance
+      .get(endPoints.kycPage.getKycProfessionList)
+      .then(res => {
+        setProfessionList(res?.data?.data);
+        setLoadingSkeleton(false);
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+        setLoadingSkeleton(false);
+      });
+  };
+
+  useEffect(() => {
+    getProfessionList();
+  }, []);
+
+  useEffect(() => {
+    console.log(professionList, loadingSkeleton);
+  }, []);
   return (
     <div className={styles.wrapper}>
       {openDashboard ? (
@@ -24,7 +49,7 @@ export default function WorkProfession({backState}) {
             Let’s start with getting to know your profession
           </div>
           <div className={styles.profession_wrapper}>
-            {[1, 2, 3, 4]?.map((item, index) => {
+            {professionList?.map((item, index) => {
               return (
                 <div
                   className={styles.box}
@@ -33,7 +58,7 @@ export default function WorkProfession({backState}) {
                     setOpenDashboard(true);
                   }}>
                   <img scr={""} alt="icon" />
-                  <p className={styles.profession_type}>Salaried</p>
+                  <p className={styles.profession_type}>{item?.professions}</p>
                 </div>
               );
             })}

@@ -125,6 +125,7 @@ export const endPoints = {
       `fc-crif-scores/getKYCStage?userId=${userId}&orderId=${orderId}`,
     registerMandate: `fc-payments/registerMandate`,
     updatePaymentStatus: `fc-payments/saveMandate`,
+    getKycProfessionList: `fc-kycs/getKycProfessionList`,
   },
 
   cityshieldPage: {

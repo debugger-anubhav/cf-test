@@ -96,12 +96,8 @@ const DocMain = () => {
   const userId = decrypt(getLocalStorage("_ga"));
 
   const fetchOrdersDetails = filter => {
-    const body = {
-      userId,
-      filter,
-    };
     baseInstance
-      .post(endPoints.myOrdersPage.getAllOrders, body)
+      .get(endPoints.kycPage.getOrderIds(userId))
       .then(res => {
         setOrdersData(res?.data?.data);
         setLoadingSkeleton(false);
@@ -115,6 +111,7 @@ const DocMain = () => {
   useEffect(() => {
     fetchOrdersDetails();
   }, []);
+
   const handleresize = e => {
     if (window.innerWidth < 768) {
       setIsBottomDrawer(true);
