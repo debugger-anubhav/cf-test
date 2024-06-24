@@ -98,10 +98,7 @@ const Header = ({page}) => {
     setLocalStorage("cityId", 46);
   }
 
-  // Example of using decryption
-
   useEffect(() => {
-    // Disable scrolling when the search bar is open
     if (openSearchbar) {
       document.body.style.overflow = "hidden";
     } else {
@@ -214,12 +211,6 @@ const Header = ({page}) => {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
 
-  // const {refetch: getSavedItems} = useQuery(
-  //   "saved-items",
-  //   endPoints.savedItems,
-  //   `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
-  // );
-
   useEffect(() => {
     baseInstance
       .post(endPoints.sessionUserUrl, data)
@@ -240,16 +231,8 @@ const Header = ({page}) => {
       .catch(err => console.log(err?.message || "some error"));
   }, []);
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     setProfileIconLink("/usersettings");
-  //     setHeartIconLink("/wishlist");
-  //   } else {
-  //     setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
-  //     setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
-  //   }
-  // }, [userId]);
   const [hasScrolled, setHasScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
