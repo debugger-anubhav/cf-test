@@ -122,7 +122,9 @@ const LoginModal = ({
       .post(endPoints.login.verifyOtp, body)
       .then(response => {
         setProblemType("");
+
         if (response?.data?.status_code === 200) {
+          // dispatch(setISFirstUser(response?.data?.data?.is_first_user));
           if (response?.data?.message === "Login Successfully.!") {
             const event = new Event("login");
             window?.dispatchEvent(event);
@@ -161,7 +163,12 @@ const LoginModal = ({
               handleChangeRoute && handleChangeRoute();
               // dispatch(setShoppingCartTab(1));
             }
+            if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+              window?.gtag("event", "otp_verified");
+              window?.fbq("track", "otp_verified");
+            }
             showToastNotification("Login successfully", 1);
+
             setTimeout(() => {
               window?.location?.reload();
             }, 1500);

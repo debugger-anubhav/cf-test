@@ -33,6 +33,7 @@ import {
   setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
+  setISFirstUser,
 } from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
@@ -175,6 +176,24 @@ const AddressSection = () => {
   }
 
   const checkPostalCode = async (type, values) => {
+    const eventItems = [];
+    data?.cartItems?.forEach((product, index) => {
+      const item = {
+        id: product.id,
+        name: product.fc_product?.product_name,
+        brand: "Cityfurnish",
+        list_position: index + 1,
+        quantity: product.quantity,
+        price: product.price,
+      };
+      eventItems.push(item);
+    });
+    if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
+      window?.gtag("event", "begin_payment", {
+        items: eventItems,
+      });
+    }
+
     const postalCode =
       type === "offlineCustomer"
         ? formikRef?.current?.values?.postalCode
@@ -225,6 +244,7 @@ const AddressSection = () => {
       alert("Server error. Are you online?");
       return;
     }
+    dispatch(setISFirstUser(result?.data?.data?.is_first_user));
     if (result?.data?.data?.status === false) {
       showToastNotification(result?.data?.data?.message, 3);
       setLoading(false);
@@ -339,6 +359,7 @@ const AddressSection = () => {
       .then(res => {
         dispatch(getCartItems(res?.data?.data));
         dispatch(setShowCartItem(true));
+
         if (res?.data?.data?.length === 0) {
           dispatch(setShoppingCartTab(0));
         } else {

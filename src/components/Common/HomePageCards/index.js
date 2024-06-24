@@ -11,7 +11,7 @@ import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {
-  getProductDetails,
+  // getProductDetails,
   reduxSetModalState,
   setLoginPopupState,
 } from "@/store/Slices";
@@ -171,7 +171,7 @@ const Card = ({
         <div
           onClick={() => {
             if (!reduxStateOfLoginPopup) {
-              dispatch(getProductDetails([]));
+              // dispatch(getProductDetails([]));
               window.scrollTo({top: 0});
             }
           }}
