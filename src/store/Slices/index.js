@@ -120,7 +120,6 @@ export const HomepageSlice = createSlice({
       state.createRequestApiCalled = action.payload;
     },
     setISFirstUser(state, action) {
-      console.log(action.payload, "ppppppppppp");
       state.isFirstUser = action.payload;
     },
   },
