@@ -101,6 +101,7 @@ const HeroBanner = () => {
                     width={banner.imgWidth}
                     height={banner.imgHeight}
                   /> */}
+                  <link rel="preload" as="image" href={item.link} />
                   <CldImage
                     src={item.link} // Use this sample image or upload your own via the Media Explorer
                     width={banner.imgWidth} // Transform the image: auto-crop to square aspect_ratio
