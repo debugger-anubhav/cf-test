@@ -364,7 +364,7 @@ var CaptchaCallback = function(){
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
-            type="text/partytown"
+            // type="text/partytown"
             async
             // id="lms-analytics"
             dangerouslySetInnerHTML={{
