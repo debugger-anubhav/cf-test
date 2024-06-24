@@ -11,7 +11,7 @@ import {
   CityWiseBannerMobile,
   CityWiseBannerTablet,
 } from "@/constants/constant";
-import {CldImage} from "next-cloudinary";
+// import {CldImage} from "next-cloudinary";
 // import Image from "@/components/Image";
 
 const HeroBanner = () => {
@@ -102,27 +102,27 @@ const HeroBanner = () => {
                     width={banner.imgWidth}
                     height={banner.imgHeight}
                   /> */}
-                  <link rel="preload" as="image" href={item.link} />
-                  <CldImage
+                  {/* <link rel="preload" as="image" href={item.link} /> */}
+                  {/* <CldImage
                     src={item.link} // Use this sample image or upload your own via the Media Explorer
                     width={banner.imgWidth} // Transform the image: auto-crop to square aspect_ratio
                     height={banner.imgHeight}
                     fetchPriority="high"
                     loading="eager"
                     className="cursor-pointer rounded-lg"
-                    // fill
+                    fill
                     crop={{
                       type: "auto",
                       source: true,
                     }}
-                  />
-                  {/* <img
+                  /> */}
+                  <img
                     src={item.link}
                     alt={item.alternate}
                     className="cursor-pointer rounded-lg"
                     width={banner.imgWidth}
                     height={banner.imgHeight}
-                  /> */}
+                  />
                 </div>
               </div>
             ))}

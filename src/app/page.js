@@ -2,7 +2,7 @@
 
 import React, {useEffect, useRef} from "react";
 
-// import AnnouncementBar from "@/components/Common/AnnouncementBar";
+import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 
@@ -159,7 +159,7 @@ export default function Home() {
       />
       <div ref={myElementRef} className="large_layout">
         {/* {useChatScript()} */}
-        {/* <AnnouncementBar /> */}
+        <AnnouncementBar />
         <Header />
         {/* <MenuList /> */}
         <HeroBanner />
