@@ -2,11 +2,11 @@
   @apply flex justify-center items-center bg-[#FFEAB1] relative h-12;
 }
 .announcement_bar_text {
-  @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center pl-4 pr-6 items-center justify-center gap-[6px] flex-wrap whitespace-nowrap;
+  @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center sm:pl-4 xs:pl-1 pl-0 pr-6 items-center justify-center flex-wrap whitespace-nowrap;
 }
 .announcement_close_icon {
   @apply absolute sm:right-4 right-2 text-fff;
 }
 .icons_style {
-  @apply w-[18px] h-[18px];
+  @apply xs:w-[18px] xs:h-[18px] w-[14px] h-[14px];
 }

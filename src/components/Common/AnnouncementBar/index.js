@@ -23,7 +23,7 @@ const AnnouncementBar = () => {
             <span className=" px-1 text-222">
               {string.landing_page.announcement_bar}
             </span>
-            <span className="px-1 text-[#2581F7]">
+            <span className="px-[2px] text-[#2581F7]">
               {string.landing_page.coupon_code}
             </span>
             <img
