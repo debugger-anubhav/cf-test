@@ -11,6 +11,8 @@ import {
   CityWiseBannerMobile,
   CityWiseBannerTablet,
 } from "@/constants/constant";
+import {CldImage} from "next-cloudinary";
+import Image from "@/components/Image";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -92,13 +94,32 @@ const HeroBanner = () => {
                   onClick={() => {
                     handleRedirection(item.redirectionLink);
                   }}>
-                  <img
+                  {/* <Image
+                    src={item.link}
+                    alt={item.alternate}
+                    className={"cursor-pointer rounded-lg"}
+                    width={banner.imgWidth}
+                    height={banner.imgHeight}
+                  /> */}
+                  <CldImage
+                    src={item.link} // Use this sample image or upload your own via the Media Explorer
+                    width={banner.imgWidth} // Transform the image: auto-crop to square aspect_ratio
+                    height={banner.imgHeight}
+                    fetchPriority="high"
+                    className="cursor-pointer rounded-lg"
+                    // fill
+                    crop={{
+                      type: "auto",
+                      source: true,
+                    }}
+                  />
+                  {/* <img
                     src={item.link}
                     alt={item.alternate}
                     className="cursor-pointer rounded-lg"
                     width={banner.imgWidth}
                     height={banner.imgHeight}
-                  />
+                  /> */}
                 </div>
               </div>
             ))}
