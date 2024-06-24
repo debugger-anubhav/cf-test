@@ -42,6 +42,7 @@ import {
   setMonthlyUpfrontLoader,
   setShoppingCartTab,
   setShowCartItem,
+  setISFirstUser,
 } from "@/store/Slices";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useRouter} from "next/navigation";
@@ -319,6 +320,7 @@ const AddressSection = () => {
       alert("Server error. Are you online?");
       return;
     }
+    dispatch(setISFirstUser(result?.data?.data?.is_first_user));
     if (result?.data?.data?.status === false) {
       showToastNotification(result?.data?.data?.message, 3);
       setLoading(false);

@@ -14,13 +14,13 @@ const AnnouncementBar = () => {
       {!closeBar ? (
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
-            <img
+            {/* <img
               src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
               alt="beach"
               className={styles.icons_style}
-            />
+            /> */}
             <span className=" px-1 text-222">
-              {string.landing_page.announcement_bar}
+              🔥 {string.landing_page.announcement_bar}
             </span>
             <span className="px-1 text-[#2581F7]">
               {string.landing_page.coupon_code}
