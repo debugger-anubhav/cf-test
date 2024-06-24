@@ -67,6 +67,21 @@ export default function TermsOfUseData() {
             );
           })}
         </div>
+        <div className={styles.terms_of_use_general}>
+          <h2 className={styles.general_heading}>Grievances :</h2>
+          <p className={styles.general_point}>
+            If you have any complaints, concerns, or feedback regarding our
+            services, please reach out to us at{" "}
+            <a
+              href="mailto:grievance@cityfurnish.com"
+              target="_self"
+              className={`${styles.terms_of_use_links}`}>
+              grievance@cityfurnish.com.
+            </a>{" "}
+            Our dedicated team is here to address and resolve your issues
+            promptly and effectively. Your satisfaction is our priority.
+          </p>
+        </div>
       </div>
     </div>
   );
