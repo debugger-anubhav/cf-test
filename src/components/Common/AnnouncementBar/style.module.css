@@ -8,5 +8,5 @@
   @apply absolute sm:right-4 right-2 text-fff;
 }
 .icons_style {
-  @apply w-[20px] h-[20px];
+  @apply w-[18px] h-[18px];
 }
