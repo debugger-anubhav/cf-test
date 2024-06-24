@@ -4,12 +4,13 @@ import {BackIcon} from "../../../assets/icon";
 import Dashboard from "../Dashboard";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import Image from "next/image";
 
 export default function WorkProfession({backState}) {
   const [openDashboard, setOpenDashboard] = useState(false);
   const [professionList, setProfessionList] = useState([]);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-
+  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
   const getProfessionList = () => {
     baseInstance
       .get(endPoints.kycPage.getKycProfessionList)
@@ -57,7 +58,12 @@ export default function WorkProfession({backState}) {
                   onClick={() => {
                     setOpenDashboard(true);
                   }}>
-                  <img scr={""} alt="icon" />
+                  <Image
+                    src={imageUrl + item?.icon}
+                    alt="icon"
+                    width={40}
+                    height={40}
+                  />
                   <p className={styles.profession_type}>{item?.professions}</p>
                 </div>
               );
