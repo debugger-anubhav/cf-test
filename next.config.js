@@ -5,7 +5,7 @@ module.exports = {
     nextScriptWorkers: true,
   },
   images: {
-    domains: ["d3juy0zp6vqec8.cloudfront.net"],
+    domains: ["d3juy0zp6vqec8.cloudfront.net", "res.cloudinary.com"],
   },
   distDir: "build",
 
