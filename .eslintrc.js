@@ -30,5 +30,6 @@ module.exports = {
     "react/display-name": "off",
     "react/no-unescaped-entities": 0,
     "react/no-unknown-property": "off",
+    "import/no-webpack-loader-syntax": "off",
   },
 };

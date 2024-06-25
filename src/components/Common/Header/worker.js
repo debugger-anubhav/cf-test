@@ -2,7 +2,6 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 
 self.addEventListener("message", async event => {
-  console.log("event", event.data);
   const {
     data: {cityId, sessionData, fetchCategories},
   } = event;
