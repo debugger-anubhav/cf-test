@@ -13,7 +13,11 @@ import KycHeader from "../KycHeader/KycHeader";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
-import {getOrderId, setOrderIdFromOrderPage} from "@/store/Slices";
+import {
+  getOrderId,
+  setOrderIdFromOrderPage,
+  setSelectedDataForKyc,
+} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {ArrowForw, DropDownArrow} from "../../../assets/icon";
@@ -111,6 +115,10 @@ const DocMain = () => {
   useEffect(() => {
     fetchOrdersDetails();
   }, []);
+
+  useEffect(() => {
+    if (ordersData) dispatch(setSelectedDataForKyc(ordersData[selectedOption]));
+  }, [ordersData, selectedOption]);
 
   const handleresize = e => {
     if (window.innerWidth < 768) {

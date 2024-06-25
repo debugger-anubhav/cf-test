@@ -126,6 +126,8 @@ export const endPoints = {
     registerMandate: `fc-payments/registerMandate`,
     updatePaymentStatus: `fc-payments/saveMandate`,
     getKycProfessionList: `fc-kycs/getKycProfessionList`,
+    getDashboardDetails: (userId, orderId) =>
+      `fc-kycs/getDashboardDetails?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {

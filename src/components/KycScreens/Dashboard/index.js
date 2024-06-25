@@ -1,12 +1,52 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 import {
   BackIcon,
   ForwardArrow,
   ForwardArrowWithLine,
 } from "../../../assets/icon";
+import {useSelector} from "react-redux";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
+import {format, parse} from "date-fns";
 
 export default function Dashboard({setOpenDashboard}) {
+  const data = useSelector(state => state.kycPage.selectedDataForKyc);
+  const userId = decrypt(getLocalStorage("_ga"));
+  const [dashboardDetails, setDashboardDetails] = useState([]);
+  const [orderData, setOrderData] = useState(null);
+
+  const getDashboardDetails = () => {
+    baseInstance
+      .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
+      .then(res => {
+        setDashboardDetails(res?.data?.data);
+        setOrderData(res?.data?.data?.orderDate);
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+      });
+  };
+
+  const formatDate = dateString => {
+    const parsedDate = parse(
+      dateString || "2024-05-03 21:09:17",
+      "yyyy-MM-dd HH:mm:ss",
+      new Date(),
+    );
+    return format(parsedDate, "d MMM yyyy");
+  };
+
+  useEffect(() => {
+    getDashboardDetails();
+  }, []);
+
+  useEffect(() => {
+    setOrderData(dashboardDetails?.orderDate);
+  }, [dashboardDetails]);
+
   return (
     <div>
       <div className={styles.heading}>
@@ -16,7 +56,15 @@ export default function Dashboard({setOpenDashboard}) {
           onClick={() => setOpenDashboard(false)}
           className={"cursor-pointer"}
         />
-        Order Id:
+        Order Id: {data?.dealCodeNumber}
+      </div>
+
+      <div className={styles.order_placed_wrapper}>
+        <div className={styles.order_place_info}>
+          <p className={styles.order_place_heading}>Order placed on</p>
+          <p className={styles.order_place_date}>{formatDate(orderData)}</p>
+        </div>
+        <div>images</div>
       </div>
 
       <div className={styles.kyc_status_box}>

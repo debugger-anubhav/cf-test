@@ -25,3 +25,15 @@
 .mobile_detail_box {
   @apply flex w-full justify-between items-center border-EDEDEE py-4;
 }
+.order_placed_wrapper {
+  @apply flex w-full justify-between items-center mt-5;
+}
+.order_place_info {
+  @apply flex flex-col;
+}
+.order_place_heading {
+  @apply font-Poppins text-14 text-9A9AA2 tracking-0.3 leading-5;
+}
+.order_place_date {
+  @apply font-Poppins text-16 text-71717A font-medium tracking-0.3 leading-6 pt-1;
+}
