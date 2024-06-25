@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {memo, useState} from "react";
 import styles from "../style.module.css";
 
 const ModalContentForMultipleEmails = ({
@@ -66,4 +66,4 @@ const ModalContentForMultipleEmails = ({
   );
 };
 
-export default ModalContentForMultipleEmails;
+export default memo(ModalContentForMultipleEmails);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "../style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
@@ -105,4 +105,4 @@ const ModalContentForNumber = ({
   );
 };
 
-export default ModalContentForNumber;
+export default memo(ModalContentForNumber);

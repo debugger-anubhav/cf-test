@@ -16,7 +16,7 @@ import HeroBanner from "@/components/Home/HeroBanner";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 // import Notifications from "@/components/Common/Notifications/Notification";
-// import MenuList from "@/components/Common/MenuList";
+import MenuList from "@/components/Common/MenuList";
 // import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 // import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
@@ -161,7 +161,7 @@ export default function Home() {
         {/* {useChatScript()} */}
         <AnnouncementBar />
         <Header />
-        {/* <MenuList /> */}
+        <MenuList />
         <HeroBanner />
         {/* <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />

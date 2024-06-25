@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import styles from "../style.module.css";
 import {handleWheel} from "@/constants/constant";
 
@@ -78,42 +78,9 @@ const ModalContentForVerifyOtp = ({
             <span className="font-normal ml-2">{countdown} secs</span>
           )}
         </p>
-
-        {/* {problemType === 1 ? (
-          <p
-            onClick={() => setModalCategory("resendOtp")}
-            className={`${styles.unable_txt} ${styles.desc}`}>
-            Unable to receive OTP?
-          </p>
-        ) : problemType === 2 ? (
-          <p
-            onClick={() => {
-              setModalCategory("resendOtp");
-              setOtp("");
-            }}
-            className={`${styles.unable_txt} ${styles.desc}`}>
-            Having trouble with OTP verification?
-          </p>
-        ) : (
-          <p
-            onClick={async () => {
-              if (countdown === 0) {
-                await handleSentOtp(contact);
-                handleStartCountdown();
-              }
-            }}
-            className={`mt-4 ${
-              countdown > 0 ? styles.resend_txt : styles.blue_txt
-            }`}>
-            Resend OTP
-            {countdown > 0 && (
-              <span className="font-normal ml-2">{countdown} secs</span>
-            )}
-          </p>
-        )} */}
       </div>
     </div>
   );
 };
 
-export default ModalContentForVerifyOtp;
+export default memo(ModalContentForVerifyOtp);

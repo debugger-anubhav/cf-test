@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
@@ -19,7 +19,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
-// import Link from "next/link";
+import Link from "next/link";
 import {
   getLocalStorage,
   productImageBaseUrl,
@@ -43,16 +43,9 @@ import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
 const HEADER_HEIGHT = 32;
 
 const Header = ({page}) => {
-  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
-  const {checkAuthentication} = useAuthentication();
-
-  const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
-  const isOnMobile = useIsOnMobile();
-  const [openSearchbar, setOpenSearchBar] = React.useState(false);
-  const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
-    useAppSelector(state => state.homePagedata);
+
   const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
   const {refetch: getTrendingSearch} = useQuery(
     "trending-search",
@@ -62,26 +55,35 @@ const Header = ({page}) => {
     "sideBarMenuLists",
     endPoints.sidebarMenuLists,
   );
+
+  const isOnMobile = useIsOnMobile();
+  const {checkAuthentication} = useAuthentication();
+
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const homePageReduxData = useSelector(state => state.homePagedata);
-  const [topOffset, settopOffset] = useState(78);
-  const [arr, setArr] = React.useState(null);
-  const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
   const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
+  const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
+    useAppSelector(state => state.homePagedata);
+
+  const [openSearchbar, setOpenSearchBar] = useState(false);
+  const [topOffset, settopOffset] = useState(78);
+  const [arr, setArr] = useState(null);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
-  // const [profileIconLink, setProfileIconLink] = useState();
-  // const [heartIconLink, setHeartIconLink] = useState();
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
   const [emptyModal, setEmptyModal] = useState(false);
-  // const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
   const [cityForModal, setCityForModal] = useState();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const iconRef = useRef(null);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  useEffect(() => {
-    setIsLogin(homePageReduxData.isLogin);
-  }, [homePageReduxData.isLogin]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -107,8 +109,10 @@ const Header = ({page}) => {
   }, [openSearchbar]);
 
   useEffect(() => {
-    const cityId = getLocalStorage("cityId") || 46;
+    setIsLogin(homePageReduxData.isLogin);
+  }, [homePageReduxData.isLogin]);
 
+  const fetchCitiesList = cityId => {
     getCityList()
       .then(res => {
         if (cityId) {
@@ -121,31 +125,92 @@ const Header = ({page}) => {
         dispatch(selectedCityId(res?.data?.data[0]?.id));
       })
       .catch(err => console.log(err?.message || "some error"));
+  };
+
+  const fetchTrendingSearches = () => {
     getTrendingSearch()
       .then(res => {
         setArr(res?.data?.data);
       })
       .catch(err => console.log(err?.message || "some error"));
+  };
 
+  const fetchSideBarData = () => {
     getSidebarMenuList().then(res => {
       dispatch(addSidebarMenuLists(res?.data?.data));
     });
-    if (!homePageReduxData?.category.length) {
-      baseInstance
-        .get(endPoints.category)
-        .then(res => {
-          dispatch(addCategory(res?.data?.data));
-        })
-        .catch(err => {
-          console.log(err?.message || "some error");
-          dispatch(addCategory([]));
-        });
+  };
+
+  const fetchAllCategories = () => {
+    baseInstance
+      .get(endPoints.category)
+      .then(res => {
+        dispatch(addCategory(res?.data?.data));
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+        dispatch(addCategory([]));
+      });
+  };
+
+  const createSession = () => {
+    baseInstance
+      .post(endPoints.sessionUserUrl, data)
+      .then(res => {
+        if (userId) {
+          localStorage.removeItem("user_id");
+          const encryptedData = encrypt(res?.data?.data?.userId);
+          setLocalStorage("_ga", encryptedData);
+          setLocalStorage("user_name", res?.data?.data?.userName);
+          setLocalStorage("user_email", res?.data?.data?.email);
+        } else {
+          setLocalStorage(
+            "tempUserID",
+            encryptBase64(res?.data?.data?.tempUserId),
+          );
+        }
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
+
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    if (window.scrollY > 90 && windowHeight > 90) {
+      setHasScrolled(true);
+    } else {
+      setHasScrolled(false);
     }
+  };
+
+  useEffect(() => {
+    const cityId = getLocalStorage("cityId") || 46;
+    fetchCitiesList(cityId);
+    fetchTrendingSearches();
+    fetchSideBarData();
+    createSession();
+
+    if (!homePageReduxData?.category.length) {
+      fetchAllCategories();
+    }
+
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
+      }
+    }
+
+    window?.addEventListener("scroll", handleScroll);
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window?.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
-  const cartItemsLength = useSelector(
-    state => state.cartPageData.cartItems.length,
-  );
+  useEffect(() => {
+    validateAuth();
+  }, [isLogin]);
 
   const getSavedItems = userIdToUse => {
     baseInstance
@@ -187,68 +252,10 @@ const Header = ({page}) => {
       });
   };
 
-  useEffect(() => {
-    validateAuth();
-  }, [isLogin]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (iconRef.current && !iconRef.current.contains(event.target)) {
-        setShowProfileDropdown(false);
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   const data = {
     userId: userId ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
-
-  useEffect(() => {
-    baseInstance
-      .post(endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (userId) {
-          localStorage.removeItem("user_id");
-          const encryptedData = encrypt(res?.data?.data?.userId);
-          setLocalStorage("_ga", encryptedData);
-          setLocalStorage("user_name", res?.data?.data?.userName);
-          setLocalStorage("user_email", res?.data?.data?.email);
-        } else {
-          setLocalStorage(
-            "tempUserID",
-            encryptBase64(res?.data?.data?.tempUserId),
-          );
-        }
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  }, []);
-
-  const [hasScrolled, setHasScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      if (window.scrollY > 90 && windowHeight > 90) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
-    };
-
-    window?.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window?.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
@@ -257,7 +264,6 @@ const Header = ({page}) => {
         isModalOpen={loginModal}
         setIsLogin={bool => {
           setIsLogin(bool);
-          // dispatch(setLoginState(bool));
         }}
       />
       <EmptyCartModal
@@ -282,15 +288,16 @@ const Header = ({page}) => {
               setClick={val => setClick(val)}
               click={click}
             />
-            <a href={"/"}>
+            <Link href={"/"}>
               <img
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
                 alt="cityfurnish-logo"
                 className={styles.main_logo}
                 width={"100%"}
                 height={"100%"}
+                loading="lazy"
               />
-            </a>
+            </Link>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer
@@ -376,7 +383,7 @@ const Header = ({page}) => {
                 </div>
               </div>
               <div className={styles.cart_link_wrapper}>
-                <a href={"/cart"}>
+                <Link href={"/cart"}>
                   <div
                     className={`w-100 h-100 absolute z-10`}
                     onClick={() => router.push("/cart")}></div>
@@ -393,7 +400,7 @@ const Header = ({page}) => {
                       {cartItemsLength}
                     </div>
                   )}
-                </a>
+                </Link>
               </div>
               <div
                 className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer lg:px-2`}
@@ -493,7 +500,7 @@ const Header = ({page}) => {
     </>
   );
 };
-export default Header;
+export default memo(Header);
 
 // search modal component
 const SearchModal = ({
