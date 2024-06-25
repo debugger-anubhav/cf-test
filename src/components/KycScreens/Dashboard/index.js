@@ -9,12 +9,18 @@ import {
 } from "../../../assets/icon";
 import {useSelector} from "react-redux";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {format, parse} from "date-fns";
 
 export default function Dashboard({setOpenDashboard}) {
-  const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
+  const data = useSelector(state => state.kycPage.selectedDataForKyc);
+
+  const fcPaymentData = JSON.parse(data?.fc_paymentData);
+  const productImages = (fcPaymentData[0]?.product_image).split(",");
+  const productImagesArr =
+    productImages.length > 4 ? productImages.slice(0, 3) : productImages;
+
   const [dashboardDetails, setDashboardDetails] = useState([]);
   const [orderDate, setOrderDate] = useState(null);
 
@@ -64,7 +70,17 @@ export default function Dashboard({setOpenDashboard}) {
           <p className={styles.order_place_heading}>Order placed on</p>
           <p className={styles.order_place_date}>{formatDate(orderDate)}</p>
         </div>
-        <div>images</div>
+
+        <div className="flex gap-2">
+          {Images(productImagesArr)}
+          <span>
+            {productImages.length > 4 && (
+              <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
+                +{productImages?.length - 3}
+              </div>
+            )}
+          </span>
+        </div>
       </div>
 
       <div className={styles.kyc_status_box}>
@@ -111,3 +127,23 @@ export default function Dashboard({setOpenDashboard}) {
     </div>
   );
 }
+
+const Images = arr => {
+  return (
+    <div className="flex w-full gap-2">
+      {arr?.map((ele, i) => {
+        return (
+          <div key={i.toString()} className="flex w-full flex-col">
+            {" "}
+            <img
+              src={`${productPageImagesBaseUrl + "thumb/" + ele}`}
+              alt={ele}
+              className="w-[40px] h-[40px] rounded-lg"
+              loading="lazy"
+            />
+          </div>
+        );
+      })}
+    </div>
+  );
+};

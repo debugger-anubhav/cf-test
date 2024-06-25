@@ -37,3 +37,9 @@
 .order_place_date {
   @apply font-Poppins text-16 text-71717A font-medium tracking-0.3 leading-6 pt-1;
 }
+.counter_box {
+  @apply border border-71717A text-71717A text-12 flex justify-center items-center w-[37px] h-[37px] rounded-lg;
+}
+.images_wraper {
+  @apply flex gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
+}
