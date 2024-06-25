@@ -16,14 +16,14 @@ export default function Dashboard({setOpenDashboard}) {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [dashboardDetails, setDashboardDetails] = useState([]);
-  const [orderData, setOrderData] = useState(null);
+  const [orderDate, setOrderDate] = useState(null);
 
   const getDashboardDetails = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
       .then(res => {
         setDashboardDetails(res?.data?.data);
-        setOrderData(res?.data?.data?.orderDate);
+        setOrderDate(res?.data?.data?.orderDate);
       })
       .catch(err => {
         console.log(err?.message || "some error");
@@ -44,7 +44,7 @@ export default function Dashboard({setOpenDashboard}) {
   }, []);
 
   useEffect(() => {
-    setOrderData(dashboardDetails?.orderDate);
+    setOrderDate(dashboardDetails?.orderDate);
   }, [dashboardDetails]);
 
   return (
@@ -62,7 +62,7 @@ export default function Dashboard({setOpenDashboard}) {
       <div className={styles.order_placed_wrapper}>
         <div className={styles.order_place_info}>
           <p className={styles.order_place_heading}>Order placed on</p>
-          <p className={styles.order_place_date}>{formatDate(orderData)}</p>
+          <p className={styles.order_place_date}>{formatDate(orderDate)}</p>
         </div>
         <div>images</div>
       </div>

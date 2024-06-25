@@ -4,6 +4,7 @@ import styles from "../../ServiceRequests/style.module.css";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
 import {Close} from "../../../assets/icon";
+import {format, parse} from "date-fns";
 
 function SelectOptDrawer({
   optionsData,
@@ -15,6 +16,15 @@ function SelectOptDrawer({
   const [data, setData] = useState(optionsData);
   const [loading, setLoading] = useState(false);
 
+  const formatDate = dateString => {
+    const parsedDate = parse(
+      dateString,
+      "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+      new Date(),
+    );
+    return format(parsedDate, "d MMM yyyy");
+  };
+
   useEffect(() => {
     setLoading(loadingSkeleton);
   }, [loadingSkeleton]);
@@ -24,7 +34,8 @@ function SelectOptDrawer({
   }, [optionsData]);
 
   return (
-    <div className={`${styles.content_wrapper} overflow-auto`}>
+    <div
+      className={`${styles.content_wrapper} overflow-auto !mb-0 !pb-0 !pr-4`}>
       <div className="flex w-full justify-between ">
         <div className={styles.main_heading}>
           <BackIcon
@@ -97,9 +108,14 @@ function SelectOptDrawer({
                     </div>
                   )}
                 </div>
-                <label className="cursor-pointer text-71717A">
-                  Order no: #
-                  <span className="text-71717A">{item?.dealCodeNumber}</span>
+                <label className="pl-4">
+                  <p className="cursor-pointer text-71717A font-Poppins tex-16 tracking-0.3">
+                    Order no: #
+                    <span className="text-71717A">{item?.dealCodeNumber}</span>
+                  </p>
+                  <p className="cursor-pointer text-9A9AA2 font-Poppins tex-14 tracking-0.3">
+                    Order placed on {formatDate(item?.created)}
+                  </p>
                 </label>
               </div>
             );
