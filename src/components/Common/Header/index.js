@@ -5,7 +5,6 @@ import Image from "next/image";
 import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
-import {useQuery} from "@/hooks/useQuery";
 import {
   addCityList,
   selectedCityId,
@@ -39,22 +38,14 @@ import "react-responsive-modal/styles.css";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import Worker from "worker-loader!./worker.js";
 
 const HEADER_HEIGHT = 32;
 
 const Header = ({page}) => {
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
-  const {refetch: getTrendingSearch} = useQuery(
-    "trending-search",
-    endPoints.trendingSearchConstants,
-  );
-  const {refetch: getSidebarMenuList} = useQuery(
-    "sideBarMenuLists",
-    endPoints.sidebarMenuLists,
-  );
 
   const isOnMobile = useIsOnMobile();
   const {checkAuthentication} = useAuthentication();
@@ -112,67 +103,6 @@ const Header = ({page}) => {
     setIsLogin(homePageReduxData.isLogin);
   }, [homePageReduxData.isLogin]);
 
-  const fetchCitiesList = cityId => {
-    getCityList()
-      .then(res => {
-        if (cityId) {
-          const cityName = res.data.data.find(
-            item => item?.id === cityId,
-          ).list_value;
-          dispatch(selectedCityName(cityName));
-        }
-        dispatch(addCityList(res?.data?.data));
-        dispatch(selectedCityId(res?.data?.data[0]?.id));
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  };
-
-  const fetchTrendingSearches = () => {
-    getTrendingSearch()
-      .then(res => {
-        setArr(res?.data?.data);
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  };
-
-  const fetchSideBarData = () => {
-    getSidebarMenuList().then(res => {
-      dispatch(addSidebarMenuLists(res?.data?.data));
-    });
-  };
-
-  const fetchAllCategories = () => {
-    baseInstance
-      .get(endPoints.category)
-      .then(res => {
-        dispatch(addCategory(res?.data?.data));
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        dispatch(addCategory([]));
-      });
-  };
-
-  const createSession = () => {
-    baseInstance
-      .post(endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (userId) {
-          localStorage.removeItem("user_id");
-          const encryptedData = encrypt(res?.data?.data?.userId);
-          setLocalStorage("_ga", encryptedData);
-          setLocalStorage("user_name", res?.data?.data?.userName);
-          setLocalStorage("user_email", res?.data?.data?.email);
-        } else {
-          setLocalStorage(
-            "tempUserID",
-            encryptBase64(res?.data?.data?.tempUserId),
-          );
-        }
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  };
-
   const handleScroll = () => {
     const windowHeight = window.innerHeight;
     if (window.scrollY > 90 && windowHeight > 90) {
@@ -184,14 +114,65 @@ const Header = ({page}) => {
 
   useEffect(() => {
     const cityId = getLocalStorage("cityId") || 46;
-    fetchCitiesList(cityId);
-    fetchTrendingSearches();
-    fetchSideBarData();
-    createSession();
+    const worker = new Worker();
 
-    if (!homePageReduxData?.category.length) {
-      fetchAllCategories();
-    }
+    worker.onmessage = function ({data}) {
+      switch (data.type) {
+        case "cities": {
+          const {
+            citiesData: {matchedCity, cityList},
+          } = data;
+
+          if (data.citiesData.matchedCity) {
+            dispatch(selectedCityName(matchedCity));
+          }
+          dispatch(addCityList(cityList));
+          dispatch(selectedCityId(cityList?.[0]?.id));
+
+          break;
+        }
+
+        case "trendingSearches": {
+          const {trendingSearchData} = data;
+          setArr(trendingSearchData);
+          break;
+        }
+
+        case "sidebarData": {
+          const {sidebarData} = data;
+          dispatch(addSidebarMenuLists(sidebarData));
+          break;
+        }
+
+        case "session": {
+          const {userSessionData} = data;
+          if (userId) {
+            localStorage.removeItem("user_id");
+            const encryptedData = encrypt(userSessionData?.userId);
+            setLocalStorage("_ga", encryptedData);
+            setLocalStorage("user_name", userSessionData?.userName);
+            setLocalStorage("user_email", userSessionData?.email);
+          } else {
+            setLocalStorage(
+              "tempUserID",
+              encryptBase64(userSessionData?.tempUserId),
+            );
+          }
+          break;
+        }
+
+        case "categories": {
+          const {categoryData} = data;
+          dispatch(addCategory(categoryData));
+          break;
+        }
+      }
+    };
+    worker.postMessage({
+      cityId,
+      sessionData: data,
+      fetchCategories: !homePageReduxData?.category.length,
+    });
 
     function handleClickOutside(event) {
       if (iconRef.current && !iconRef.current.contains(event.target)) {
@@ -203,6 +184,7 @@ const Header = ({page}) => {
     document.addEventListener("click", handleClickOutside);
 
     return () => {
+      worker.terminate();
       window?.removeEventListener("scroll", handleScroll);
       document.removeEventListener("click", handleClickOutside);
     };
@@ -233,7 +215,6 @@ const Header = ({page}) => {
     const isAuthenticated = await checkAuthentication();
     setIsLogin(isAuthenticated);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
-    // setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
     isAuthenticated && getSavedItems(userIdToUse);
   };
