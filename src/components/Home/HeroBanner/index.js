@@ -72,7 +72,7 @@ const HeroBanner = () => {
 
   return (
     <div
-      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[800px] md:min-h-[427px] min-h-[180px]`}>
+      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
       {banners?.map((banner, bannerIndex) => (
         <div
           key={bannerIndex.toString()}
@@ -89,7 +89,6 @@ const HeroBanner = () => {
             width={banner.width}>
             {banner?.data?.map((item, i) => (
               <div key={i.toString()}>
-                {console.log("height", banner.imgHeight)}
                 <div
                   className="flex cursor-pointer"
                   onClick={() => {

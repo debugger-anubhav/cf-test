@@ -1,23 +1,28 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import Worker from "worker-loader!./recentlyViewedWorker.js";
+
+const worker = new Worker();
 
 const RecentlyViewedProduct = ({page}) => {
-  const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const {checkAuthentication} = useAuthentication();
+
   const userId = decrypt(getLocalStorage("_ga"));
-  const [isDumy, setIsDumy] = React.useState(false);
-  const [isLogin, setIsLogin] = React.useState(!!userId);
+
+  const [isDumy, setIsDumy] = useState(false);
+  const [isLogin, setIsLogin] = useState(!!userId);
+
   let cityIdStr;
 
   if (typeof window !== "undefined") {
@@ -25,23 +30,10 @@ const RecentlyViewedProduct = ({page}) => {
   }
 
   const cityId = parseFloat(cityIdStr);
-  useEffect(() => {
-    isAuth();
-  }, []);
 
   useEffect(() => {
     isAuth();
   }, []);
-
-  const {refetch: recentlyViewed} = useQuery(
-    "recently-view",
-    endPoints.recentlyViewedProduct,
-    `?cityId=${cityId}&userId=${
-      isLogin
-        ? decrypt(getLocalStorage("_ga"))
-        : decryptBase64(getLocalStorage("tempUserID"))
-    }`,
-  );
 
   const isAuth = async () => {
     const isAuthenticated = await checkAuthentication();
@@ -49,11 +41,19 @@ const RecentlyViewedProduct = ({page}) => {
   };
 
   useEffect(() => {
-    recentlyViewed()
-      .then(res => {
-        dispatch(addRecentlyViewedProduct(res?.data?.data));
-      })
-      .catch(err => console.log(err?.message || "some error"));
+    worker.postMessage({
+      cityId,
+      userId: isLogin
+        ? decrypt(getLocalStorage("_ga"))
+        : decryptBase64(getLocalStorage("tempUserID")),
+    });
+    worker.onmessage = function (e) {
+      dispatch(addRecentlyViewedProduct(e.data.recentlyViewedProducts));
+    };
+
+    return () => {
+      worker.terminate();
+    };
   }, [isLogin]);
 
   const sliderRef = useRef(null);
@@ -161,4 +161,4 @@ const RecentlyViewedProduct = ({page}) => {
   );
 };
 
-export default RecentlyViewedProduct;
+export default memo(RecentlyViewedProduct);

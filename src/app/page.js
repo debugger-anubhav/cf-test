@@ -7,7 +7,7 @@ import Header from "@/components/Common/Header";
 import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
-// import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 // import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 // import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
@@ -34,12 +34,12 @@ const RentFurnitureAndAppliances = loadable(
   },
 );
 
-// const RecentlyViewedProduct = loadable(
-//   () => import("@/components/Home/RecentlyViewedProduct"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 // const TrendingProducts = loadable(
 //   () => import("@/components/Home/TrendingProducts"),
@@ -164,8 +164,8 @@ export default function Home() {
         <MenuList />
         <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
-        {/* <RecentlyViewedProduct />
-        <TrendingProducts params={"home-page"} />
+        <RecentlyViewedProduct />
+        {/* <TrendingProducts params={"home-page"} />
         <OffersAndCoupons />
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
