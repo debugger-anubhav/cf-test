@@ -6,7 +6,6 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import Image from "next/image";
 import {Skeleton} from "@mui/material";
-// import ProgressSection from '../ProgressBar/index'
 
 export default function WorkProfession({backState}) {
   const [openDashboard, setOpenDashboard] = useState(false);
@@ -94,7 +93,6 @@ export default function WorkProfession({backState}) {
           </div>
         </div>
       )}
-      {/* <ProgressSection/> */}
     </div>
   );
 }
