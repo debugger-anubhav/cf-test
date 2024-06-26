@@ -7,6 +7,7 @@ import localFont from "@next/font/local";
 import Script from "next/script";
 // import Head from "next/head";
 import GTM from "@/components/GTM";
+import Head from "next/head";
 // import workerScript from "worker-loader!./worker";
 // import LoadWorker from "./load-worker";
 
@@ -55,6 +56,7 @@ const poppins = localFont({
     },
   ],
   variable: "--font-poppins",
+  display: "swap",
 });
 
 const inter = localFont({
@@ -64,6 +66,7 @@ const inter = localFont({
     },
   ],
   variable: "--font-inter",
+  display: "swap",
 });
 
 export default function RootLayout({children}) {
@@ -73,7 +76,42 @@ export default function RootLayout({children}) {
     <html
       lang="en"
       className={`${poppins.variable} ${inter.variable} font-sans`}>
-      <head>
+      <Head>
+        <link
+          rel="preload"
+          href="/font/Poppins-Bold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/font/Poppins-Medium.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/font/Poppins-Regular.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/font/Poppins-SemiBold.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/font/Inter-VariableFont_slnt,wght.ttf"
+          as="font"
+          type="font/ttf"
+          crossOrigin="anonymous"
+        />
         <meta
           property="article:publisher"
           content="https://www.facebook.com/cityFurnishRental"
@@ -427,7 +465,7 @@ var CaptchaCallback = function(){
             }}
           />
         )}
-      </head>
+      </Head>
       <body>
         <ReduxProvider>
           <QueryProvider>{children}</QueryProvider>
