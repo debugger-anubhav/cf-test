@@ -5,6 +5,7 @@ import Dashboard from "../Dashboard";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import Image from "next/image";
+import {Skeleton} from "@mui/material";
 
 export default function WorkProfession({backState}) {
   const [openDashboard, setOpenDashboard] = useState(false);
@@ -31,6 +32,7 @@ export default function WorkProfession({backState}) {
   useEffect(() => {
     console.log(professionList, loadingSkeleton);
   }, []);
+
   return (
     <div className={styles.wrapper}>
       {openDashboard ? (
@@ -50,24 +52,44 @@ export default function WorkProfession({backState}) {
             Let’s start with getting to know your profession
           </div>
           <div className={styles.profession_wrapper}>
-            {professionList?.map((item, index) => {
-              return (
-                <div
-                  className={styles.box}
-                  key={index.toString()}
-                  onClick={() => {
-                    setOpenDashboard(true);
-                  }}>
-                  <Image
-                    src={imageUrl + item?.icon}
-                    alt="icon"
-                    width={40}
-                    height={40}
-                  />
-                  <p className={styles.profession_type}>{item?.professions}</p>
-                </div>
-              );
-            })}
+            {loadingSkeleton ? (
+              <>
+                {[1, 2, 3, 4]?.map(item => {
+                  return (
+                    <div key={item.toString()}>
+                      <Skeleton
+                        variant="rectangular"
+                        width={156}
+                        height={117}
+                      />
+                    </div>
+                  );
+                })}
+              </>
+            ) : (
+              <>
+                {professionList?.map((item, index) => {
+                  return (
+                    <div
+                      className={styles.box}
+                      key={index.toString()}
+                      onClick={() => {
+                        setOpenDashboard(true);
+                      }}>
+                      <Image
+                        src={imageUrl + item?.icon}
+                        alt="icon"
+                        width={40}
+                        height={40}
+                      />
+                      <p className={styles.profession_type}>
+                        {item?.professions}
+                      </p>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
         </div>
       )}

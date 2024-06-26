@@ -11,6 +11,7 @@ import {useSelector} from "react-redux";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {format, parse} from "date-fns";
+import {Skeleton} from "@mui/material";
 
 export default function Dashboard({setOpenDashboard}) {
   const userId = decrypt(getLocalStorage("_ga"));
@@ -23,6 +24,7 @@ export default function Dashboard({setOpenDashboard}) {
 
   const [dashboardDetails, setDashboardDetails] = useState([]);
   const [orderDate, setOrderDate] = useState(null);
+  const [loadingSkeleton, setLoadingSkeleton] = useState(true);
 
   const getDashboardDetails = () => {
     baseInstance
@@ -30,9 +32,11 @@ export default function Dashboard({setOpenDashboard}) {
       .then(res => {
         setDashboardDetails(res?.data?.data);
         setOrderDate(res?.data?.data?.orderDate);
+        setLoadingSkeleton(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
+        setLoadingSkeleton(false);
       });
   };
 
@@ -92,21 +96,26 @@ export default function Dashboard({setOpenDashboard}) {
       </div>
 
       <div className={styles.order_placed_wrapper}>
-        <div className={styles.order_place_info}>
-          <p className={styles.order_place_heading}>Order placed on</p>
-          <p className={styles.order_place_date}>{formatDate(orderDate)}</p>
-        </div>
-
-        <div className="flex gap-2">
-          {Images(productImagesArr)}
-          <span>
-            {productImages.length > 4 && (
-              <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
-                +{productImages?.length - 3}
-              </div>
-            )}
-          </span>
-        </div>
+        {loadingSkeleton ? (
+          <Skeleton variant="rectangular" width={"100%"} height={30} />
+        ) : (
+          <>
+            <div className={styles.order_place_info}>
+              <p className={styles.order_place_heading}>Order placed on</p>
+              <p className={styles.order_place_date}>{formatDate(orderDate)}</p>
+            </div>
+            <div className="flex gap-2">
+              {Images(productImagesArr)}
+              <span>
+                {productImages.length > 4 && (
+                  <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
+                    +{productImages?.length - 3}
+                  </div>
+                )}
+              </span>
+            </div>
+          </>
+        )}
       </div>
 
       <div className={styles.kyc_status_box}>
@@ -122,33 +131,49 @@ export default function Dashboard({setOpenDashboard}) {
       </div>
 
       <div className={styles.details_wrapper}>
-        {dashboardDetails?.allKycStages?.map((item, index) => {
-          return (
-            <div className={styles.details_box} key={index.toString()}>
-              <div className={styles.detail_heading}>{item?.stage_name}</div>
-              <div className={styles.sub_heading}>
-                {convertStatus(item?.stage_status)}
-              </div>
-            </div>
-          );
-        })}
+        {loadingSkeleton ? (
+          <SkeletonData />
+        ) : (
+          <>
+            {dashboardDetails?.allKycStages?.map((item, index) => {
+              return (
+                <div className={styles.details_box} key={index.toString()}>
+                  <div className={styles.detail_heading}>
+                    {item?.stage_name}
+                  </div>
+                  <div className={styles.sub_heading}>
+                    {convertStatus(item?.stage_status)}
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
 
       <div className={styles.mobile_details_wrapper}>
-        {dashboardDetails?.allKycStages?.map((item, index) => {
-          return (
-            <div
-              key={index.toString()}
-              className={`${styles.mobile_detail_box} ${
-                index === 4 ? "border-none" : "border-b"
-              }`}>
-              <div className={styles.detail_heading}>{item?.stage_name}</div>
-              <div className={styles.sub_heading}>
-                pending <ForwardArrow color={"#222222"} size={16} />
-              </div>
-            </div>
-          );
-        })}
+        {loadingSkeleton ? (
+          <SkeletonData />
+        ) : (
+          <>
+            {dashboardDetails?.allKycStages?.map((item, index) => {
+              return (
+                <div
+                  key={index.toString()}
+                  className={`${styles.mobile_detail_box} ${
+                    index === 4 ? "border-none" : "border-b"
+                  }`}>
+                  <div className={styles.detail_heading}>
+                    {item?.stage_name}
+                  </div>
+                  <div className={styles.sub_heading}>
+                    pending <ForwardArrow color={"#222222"} size={16} />
+                  </div>
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
     </div>
   );
@@ -171,5 +196,27 @@ const Images = arr => {
         );
       })}
     </div>
+  );
+};
+
+const SkeletonData = () => {
+  return (
+    <>
+      {[1, 2, 3, 4, 5].map(item => {
+        return (
+          <div key={item.toString()}>
+            <Skeleton
+              variant="rectangular"
+              className={`${styles.details_box} !hidden md:!flex `}
+              height={111}
+            />
+            <Skeleton
+              variant="rectangular"
+              className={`${styles.mobile_detail_box} flex md:!hidden my-4`}
+            />
+          </div>
+        );
+      })}
+    </>
   );
 };
