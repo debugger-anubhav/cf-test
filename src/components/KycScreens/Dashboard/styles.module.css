@@ -43,3 +43,6 @@
 .images_wraper {
   @apply flex gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
 }
+.status_style {
+  @apply flex items-center;
+}

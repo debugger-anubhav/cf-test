@@ -45,6 +45,32 @@ export default function Dashboard({setOpenDashboard}) {
     return format(parsedDate, "d MMM yyyy");
   };
 
+  const convertStatus = number => {
+    if (number === 1)
+      return <p className={styles.status_style}>Under review</p>;
+    else if (number === 2)
+      return (
+        <p className={styles.status_style}>
+          Verified
+          <ForwardArrow color={"#222222"} size={16} />
+        </p>
+      );
+    else if (number === 3)
+      return (
+        <p className={`${styles.status_style} text-D96060`}>
+          Rejected
+          <ForwardArrow color={"#D96060"} size={16} />
+        </p>
+      );
+    else
+      return (
+        <p className={styles.status_style}>
+          pending
+          <ForwardArrow color={"#222222"} size={16} />
+        </p>
+      );
+  };
+
   useEffect(() => {
     getDashboardDetails();
   }, []);
@@ -96,12 +122,12 @@ export default function Dashboard({setOpenDashboard}) {
       </div>
 
       <div className={styles.details_wrapper}>
-        {[1, 2, 3, 4, 5]?.map((item, index) => {
+        {dashboardDetails?.allKycStages?.map((item, index) => {
           return (
             <div className={styles.details_box} key={index.toString()}>
-              <div className={styles.detail_heading}>PAN Details</div>
+              <div className={styles.detail_heading}>{item?.stage_name}</div>
               <div className={styles.sub_heading}>
-                pending <ForwardArrow color={"#222222"} size={16} />
+                {convertStatus(item?.stage_status)}
               </div>
             </div>
           );
@@ -109,14 +135,14 @@ export default function Dashboard({setOpenDashboard}) {
       </div>
 
       <div className={styles.mobile_details_wrapper}>
-        {[1, 2, 3, 4, 5]?.map((item, index) => {
+        {dashboardDetails?.allKycStages?.map((item, index) => {
           return (
             <div
               key={index.toString()}
               className={`${styles.mobile_detail_box} ${
                 index === 4 ? "border-none" : "border-b"
               }`}>
-              <div className={styles.detail_heading}>PAN details</div>
+              <div className={styles.detail_heading}>{item?.stage_name}</div>
               <div className={styles.sub_heading}>
                 pending <ForwardArrow color={"#222222"} size={16} />
               </div>
