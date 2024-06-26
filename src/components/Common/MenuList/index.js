@@ -1,13 +1,12 @@
 import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
 import PopOver from "../PopOver";
-import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addAllAndSubCategory, setShowAllRentLink} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
 import Link from "next/link";
+import Worker from "worker-loader!./menulistWorker.js";
 
 const MenuList = ({hasMb = true}) => {
   const dispatch = useDispatch();
@@ -15,22 +14,16 @@ const MenuList = ({hasMb = true}) => {
     state => state.homePagedata,
   );
   const [loading, setLoading] = useState(true);
-  const {refetch: getAllAndSubCategory} = useQuery(
-    "category",
-    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
-  );
 
   useEffect(() => {
-    getAllAndSubCategory()
-      .then(res => {
-        dispatch(addAllAndSubCategory(res?.data?.data));
-        dispatch(setShowAllRentLink(true));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        setLoading(false);
-      });
+    const worker = new Worker();
+    worker.postMessage({cityId: getLocalStorage("cityId")});
+
+    worker.onmessage = function ({data: {allCategoryAndSubCategoryData}}) {
+      dispatch(addAllAndSubCategory(allCategoryAndSubCategoryData));
+      dispatch(setShowAllRentLink(true));
+      setLoading(false);
+    };
   }, []);
 
   return (
