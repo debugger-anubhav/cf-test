@@ -878,7 +878,7 @@ const ProductDetails = ({params}) => {
               <RiSparklingFill size={16} color={"#597492"} />
               <p className={styles.emi_text}>
                 Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
-                using No-Cost EMI (excluding GST)
+                using No-Cost EMI (excl GST)
               </p>
               <RiSparklingFill size={16} color={"#597492"} />
             </div>
