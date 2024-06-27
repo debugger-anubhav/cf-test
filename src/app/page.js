@@ -41,12 +41,12 @@ const RecentlyViewedProduct = loadable(
   },
 );
 
-const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
+// const TrendingProducts = loadable(
+//   () => import("@/components/Home/TrendingProducts"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
+// );
 
 const OffersAndCoupons = loadable(
   () => import("@/components/Home/OffersAndCoupons"),
