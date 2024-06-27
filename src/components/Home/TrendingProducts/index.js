@@ -1,13 +1,12 @@
 "use client";
 
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useRef, useState, memo} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import Worker from "worker-loader!./trendingproductsWorker.js";
-import {memo} from "react";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
