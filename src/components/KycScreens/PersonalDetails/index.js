@@ -23,7 +23,7 @@ import DoItLater from "@/components/Documentation/DoItLaterModal/DoItLater";
 import {reduxSetModalState} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
-const PersonalDetails = ({handleKycState, step, cibilDocsData}) => {
+const PersonalDetails = ({handleKycState, cibilDocsData}) => {
   const dispatch = useDispatch();
 
   const selectedOrderId = useSelector(state => state.kycPage.orderId);

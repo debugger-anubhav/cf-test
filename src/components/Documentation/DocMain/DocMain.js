@@ -25,6 +25,7 @@ import Image from "next/image";
 import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
 import WorkProfession from "../../KycScreens/WorkProfession";
+// import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 // import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 
 const DocMain = () => {
@@ -283,18 +284,12 @@ const DocMain = () => {
       {/* <PersonalDetails
         handleKycState={id => handleKycState(id)}
         cibilDocsData={cibilDocsData}
-        step={
-          isUpfrontPayment
-            ? tenure >= 9
-              ? 1
-              : creditScore < 650
-              ? 3
-              : 2
-            : creditScore < 650
-            ? 2
-            : 3
-        }
       /> */}
+
+      {/* <FinancialInfo
+                handleKycState={id => handleKycState(id)}
+                cibilDocsData={cibilDocsData}
+              /> */}
     </div>
   );
 };
