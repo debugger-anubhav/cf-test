@@ -12,6 +12,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {format, parse} from "date-fns";
 import {Skeleton} from "@mui/material";
+import KycCommonDrawer from "../KycCommonDrawer";
 
 export default function Dashboard({setOpenDashboard}) {
   const userId = decrypt(getLocalStorage("_ga"));
@@ -25,7 +26,7 @@ export default function Dashboard({setOpenDashboard}) {
   const [dashboardDetails, setDashboardDetails] = useState([]);
   const [orderDate, setOrderDate] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
-
+  const [changeProfession, setChangeProfession] = useState(false);
   const getDashboardDetails = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
@@ -94,6 +95,22 @@ export default function Dashboard({setOpenDashboard}) {
         />
         Order Id: {data?.dealCodeNumber}
       </div>
+
+      <div className={styles.profession_row}>
+        <div className={styles.profession_left}>Profession: Salaried </div>
+        <div
+          className={styles.profession_right}
+          onClick={() => setChangeProfession(true)}>
+          Change
+        </div>
+      </div>
+      {changeProfession && (
+        <KycCommonDrawer
+          content={drawerContent()}
+          setChangeProfession={setChangeProfession}
+          changeProfession={changeProfession}
+        />
+      )}
 
       <div className={styles.order_placed_wrapper}>
         {loadingSkeleton ? (
@@ -218,5 +235,23 @@ const SkeletonData = () => {
         );
       })}
     </>
+  );
+};
+
+const drawerContent = () => {
+  return (
+    <div>
+      <p className={styles.content_text}>
+        You’ll need to submit new professional details specific to the chosen
+        profession. Are you sure you want to proceed?
+      </p>
+      <div className={styles.btn_wrapper}>
+        <button
+          className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}>
+          Yes, I want to change my profession
+        </button>
+        <button className={`${styles.cancle_btn} `}>cancel</button>
+      </div>
+    </div>
   );
 };
