@@ -5,14 +5,17 @@ import {Close} from "../../../assets/icon";
 
 export default function KycCommonDrawer({content, setChangeProfession}) {
   const [isOpen, setIsOpen] = React.useState(true);
+  const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
+
+  const handleresize = e => {
+    if (window.innerWidth < 768) {
+      setIsBottomShareDrawer(true);
+    } else {
+      setIsBottomShareDrawer(false);
+    }
+  };
 
   const toggleDrawer = open => event => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
     setIsOpen(open);
   };
 
@@ -20,21 +23,31 @@ export default function KycCommonDrawer({content, setChangeProfession}) {
     setChangeProfession(isOpen);
   }, [isOpen]);
 
+  React.useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize); // Add resize event listener
+    return () => {
+      window.removeEventListener("resize", handleresize); // Clean up when component unmounts
+    };
+  }, []);
+
   return (
     <div>
       <button onClick={toggleDrawer(true)}>Open Drawer</button>
-      <Drawer anchor="right" open={isOpen} onClose={toggleDrawer(false)}>
+      <Drawer
+        anchor={isBottomShareDrawer ? "bottom" : "right"}
+        open={isOpen}
+        onClose={toggleDrawer(false)}>
         <div className={styles.drawer_content_wrapper}>
           <div className={`${styles.heading}`}>
             Change Profession?
-            <Close
-              size={25}
-              className={"cursor-pointer"}
-              onClick={e => {
-                e.stopPropagation();
+            <span
+              onClick={event => {
+                event.stopPropagation();
                 toggleDrawer(false)();
-              }}
-            />
+              }}>
+              <Close size={25} className={"cursor-pointer relative z-20"} />
+            </span>
           </div>
           {content}
         </div>

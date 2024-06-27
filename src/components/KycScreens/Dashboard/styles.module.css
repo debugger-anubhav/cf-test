@@ -50,10 +50,10 @@
   @apply flex justify-between items-center bg-[#F0EEFC] px-2 py-1 rounded-lg my-6;
 }
 .profession_left {
-  @apply flex text-71717A font-Poppins text-18 font-medium;
+  @apply flex text-71717A font-Poppins md:text-18 text-12 font-medium;
 }
 .profession_right {
-  @apply font-Poppins font-medium text-5774AC text-18 leading-[18px] tracking-0.3 cursor-pointer;
+  @apply font-Poppins font-medium text-5774AC md:text-18 text-12 leading-[18px] tracking-0.3 cursor-pointer;
 }
 
 .drawer_content_wrapper {
