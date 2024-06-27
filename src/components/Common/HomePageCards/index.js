@@ -1,22 +1,17 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import {Heart} from "@/assets/icon";
-import {useMutation} from "@/hooks/useMutation";
-import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {getLocalStorage} from "@/constants/constant";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
-import {useQuery} from "@/hooks/useQuery";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "../Notifications/toastUtils";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {
-  // getProductDetails,
-  reduxSetModalState,
-  setLoginPopupState,
-} from "@/store/Slices";
+import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import Link from "next/link";
+import Worker from "worker-loader!./homepageCardWorker.js";
+import {authToken} from "@/network/axios";
 
 const Card = ({
   desc,
@@ -46,16 +41,25 @@ const Card = ({
 
   const dispatch = useDispatch();
 
+  const worker = new Worker();
+
   const words = desc.replace(/-/g, " ").split(" ");
 
   const xlTrimmedString =
     words.length > 8
       ? words.slice(0, 8).join(" ") + "..."
       : desc.replace(/-/g, " ");
+
   useEffect(() => {
     dispatch(reduxSetModalState(loginModal));
     dispatch(setLoginPopupState(loginModal));
   }, [loginModal]);
+
+  useEffect(() => {
+    return () => {
+      worker.terminate();
+    };
+  }, []);
 
   const toggleLoginModal = bool => {
     setLoginModal(bool);
@@ -63,77 +67,47 @@ const Card = ({
 
   const data = {
     tempUserId: decryptBase64(getLocalStorage("tempUserID")) ?? "",
-    // userId: getLocalStorage("user_id") ?? "",
     userId: decrypt(getLocalStorage("_ga")) ?? "",
     productId: productID,
   };
-  // const router = useRouter();
+
   const cityIdStr = localStorage
     .getItem("cityId")
     ?.toString()
     ?.replace(/"/g, "");
+
   const cityId = parseFloat(cityIdStr);
 
-  const {mutateAsync: addwhislistProduct} = useMutation(
-    "add-wishlist",
-    "POST",
-    endPoints.addWishListProduct,
-    data,
-  );
-
-  const {mutateAsync: removewhislistProduct} = useMutation(
-    "remove-wishlist",
-    "DELETE",
-    endPoints.deleteWishListProduct,
-    data,
-  );
-
-  const {refetch: getSavedItems} = useQuery(
-    "saved-items",
-    endPoints.savedItems,
-    `?cityId=${cityId}&userId=${decrypt(getLocalStorage("_ga"))}`,
-  );
-
   const addToWishlist = () => {
-    !inWishList
-      ? addwhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                showToastNotification("Item added to the wishlist", 1);
-                window?.fbq("track", "AddToWishlist");
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-              })
-              .catch(err => console.log(err?.message || "some error"));
+    worker.postMessage({
+      inWishList,
+      productData: data,
+      authToken,
+      cityId,
+      userId: decrypt(getLocalStorage("_ga")),
+    });
 
-            if (!isSavedComp) {
-              setInWishList(prev => !prev);
-            }
-          })
-          .catch(err => console.log(err?.message || "some error"))
-      : removewhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                showToastNotification("Item removed from the wishlist", 2);
-                // addSaveditemID
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-              })
-              .catch(err => console.log(err?.message || "some error"));
-            if (!isSavedComp) {
-              setInWishList(prev => !prev);
-            }
-          })
-          .catch(err => console.log(err?.message || "some error"));
+    worker.onmessage = function ({data}) {
+      const {type, wishlistedItems, savedItemIds} = data;
+      dispatch(addSaveditems(wishlistedItems));
+      dispatch(addSaveditemID(savedItemIds));
+
+      if (!isSavedComp) {
+        setInWishList(prev => !prev);
+      }
+      switch (type) {
+        case "addedToWishlist":
+          showToastNotification("Item added to the wishlist", 1);
+          window?.fbq("track", "AddToWishlist");
+
+          break;
+
+        case "removedFromWishlist":
+          showToastNotification("Item removed from the wishlist", 2);
+      }
+    };
   };
+
   const handleWhislistCard = async e => {
     e.stopPropagation();
     const isAuthenticated = await checkAuthentication();
@@ -163,7 +137,7 @@ const Card = ({
         }}
       />
       <Link
-        href={!reduxStateOfLoginPopup && `/things/${productID}/${seourl}`}
+        href={!reduxStateOfLoginPopup ? `/things/${productID}/${seourl}` : ""}
         className={styles.anchor_card}
         aria-label={desc.replace(/-/g, " ")}
         target="_blank"
@@ -259,4 +233,4 @@ const Card = ({
   );
 };
 
-export default Card;
+export default memo(Card);

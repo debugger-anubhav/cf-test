@@ -1,80 +1,64 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import {useQuery} from "@/hooks/useQuery";
 import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
-import {endPoints} from "@/network/endPoints";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
-import {baseInstance} from "@/network/axios";
+import Worker from "worker-loader!./trendingproductsWorker.js";
+import {memo} from "react";
 
 const TrendingProducts = ({params}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const [paramsCityId, setParamsCityId] = React.useState(46);
-  const [data, setData] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
+  const [paramsCityId, setParamsCityId] = useState(46);
+  const [data, setData] = useState(null);
+  const [isDumy, setIsDumy] = useState(false);
+
+  const sliderRef = useRef(null);
 
   const cityId = getLocalStorage("cityId");
 
-  const {refetch: getSeoApplianceTrendProduct} = useQuery(
-    "seo-appliance-trend-product",
-    endPoints.seoApplianceTtrendingProduct,
-    paramsCityId,
-  );
-  const {refetch: getSeoFurnitureTrendProduct} = useQuery(
-    "seo-furniture-trend-product",
-    endPoints.seoFurnitureTtrendingProduct,
-    paramsCityId,
-  );
-
-  const getTrendyProducts = () => {
-    baseInstance
-      .get(endPoints.trendingProduct + `?cityId=${cityId}`)
-      .then(res => {
-        setData(res?.data?.data);
-        dispatch(addtrendingproduct(res?.data?.data));
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  };
-
   useEffect(() => {
-    if (
-      params?.category === "appliances-rental" ||
-      params?.category === "furniture-rental"
-    ) {
-      baseInstance
-        .get(endPoints.cityIdByCityName + params?.city)
-        .then(res => setParamsCityId(res?.data?.data?.id))
-        .catch(err => console.log(err?.message || "some error"));
-    }
-  }, []);
+    const worker = new Worker();
+    worker.postMessage({params, paramsCityId, cityId});
 
-  useEffect(() => {
-    if (params?.category === "appliances-rental") {
-      getSeoApplianceTrendProduct()
-        .then(res => {
-          // console.log("seoApplianceeeeeeeeeeeeeeeeee")
-          dispatch(setSeoApplianceCrowd(res?.data?.data));
-          setData(res?.data?.data);
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params?.category === "furniture-rental") {
-      getSeoFurnitureTrendProduct()
-        .then(res => {
-          setData(res?.data?.data);
-          // console.log("seooFurniture-rentaleeeeeeeeeee")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else {
-      getTrendyProducts();
-    }
-  }, []);
+    worker.onmessage = function ({data}) {
+      const {type} = data;
+      switch (type) {
+        case "cityId": {
+          const {id} = data;
+          setParamsCityId(id);
+          break;
+        }
 
-  const sliderRef = useRef(null);
+        case "applianceTrendingProducts": {
+          const {applianceTrendingProducts} = data;
+          dispatch(setSeoApplianceCrowd(applianceTrendingProducts));
+          setData(applianceTrendingProducts);
+          break;
+        }
+
+        case "furnitureTrendingProducts": {
+          const {furnitureTrendingProducts} = data;
+          setData(furnitureTrendingProducts);
+          break;
+        }
+
+        case "trendingProducts": {
+          const {trendingProducts} = data;
+          setData(trendingProducts);
+          dispatch(addtrendingproduct(trendingProducts));
+        }
+      }
+    };
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -116,6 +100,7 @@ const TrendingProducts = ({params}) => {
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
   }, []);
+
   return (
     <>
       {homePageReduxData?.trendindProduct ? (
@@ -127,8 +112,8 @@ const TrendingProducts = ({params}) => {
               <div
                 key={index.toString()}
                 className={`${styles.child ?? ""} ${
-                  index === data?.length - 1 && "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}>
+                  index === data?.length - 1 ? "mr-[16px]" : ""
+                } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                 <Card
                   hoverCardImage={
                     productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
@@ -159,4 +144,5 @@ const TrendingProducts = ({params}) => {
     </>
   );
 };
-export default TrendingProducts;
+
+export default memo(TrendingProducts);

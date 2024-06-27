@@ -41,12 +41,12 @@ const RecentlyViewedProduct = loadable(
   },
 );
 
-// const TrendingProducts = loadable(
-//   () => import("@/components/Home/TrendingProducts"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const TrendingProducts = loadable(
+  () => import("@/components/Home/TrendingProducts"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 // const OffersAndCoupons = loadable(
 //   () => import("@/components/Home/OffersAndCoupons"),
@@ -165,8 +165,8 @@ export default function Home() {
         <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
-        {/* <TrendingProducts params={"home-page"} />
-        <OffersAndCoupons />
+        <TrendingProducts params={"home-page"} />
+        {/* <OffersAndCoupons />
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
