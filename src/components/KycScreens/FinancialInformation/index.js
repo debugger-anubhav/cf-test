@@ -10,6 +10,7 @@ import {
   CheckFillIcon,
   DeleteIcon,
   DeleteIconFilled,
+  InformationIcon,
   OutlineArrowRight,
 } from "@/assets/icon";
 import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
@@ -151,7 +152,17 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   };
 
   return (
-    <div>
+    <div className="mt-8 w-full md:w-auto">
+      {isReupload && (
+        <div className={commonStyles.reupload_note_wrapper}>
+          <InformationIcon className={`mt-0.5 ${commonStyles.reupload_icon}`} />
+          <p className={commonStyles.reupload_note_txt}>
+            Your document(s) have been rejected by our team for not meeting the
+            necessary standards. Please re-upload them to proceed with KYC
+            process.
+          </p>
+        </div>
+      )}
       <div className={styles.heading}>
         <BackIcon
           color={"#222222"}
@@ -275,13 +286,13 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         />
       )}
 
-      <div className={styles.input_wrapper}>
-        <div className={`${styles.formInputFirst}`}>
+      <div className={`${styles.input_wrapper} `}>
+        <div className={`${styles.formInputFirst} lg:min-w-[530px]`}>
           <div className={`${commonStyles.flexICenter}`}>
             <label
               htmlFor="financialDoc"
               className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle} text-[#71717a]`}>
-              <div className={`${commonStyles.flexICenter}`}>
+              <div className={`${commonStyles.flexICenter} `}>
                 <Image
                   loader={({src}) => src}
                   src={uploading}
@@ -331,20 +342,18 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
           {formErrors.financialDocumentProof}
         </div>
       )}
-      <div className={`${styles.btnGroupContainer} `}>
-        <div className={`${styles.btnGroup} `}>
-          <button
-            disabled={disableButton}
-            onClick={() => {
-              submitHandler();
-            }}
-            className={`${commonStyles.saveBtn} ${
-              styles.saveBtn
-            } md:w-[232px] ${disableButton && "!bg-[#FFDF85]"} !m-0`}>
-            <span> Proceed</span>
-            <OutlineArrowRight />
-          </button>
-        </div>
+      <div className={`${styles.btnGroup} w-[90%] md:w-fit mx-auto md:mx-0`}>
+        <button
+          disabled={disableButton}
+          onClick={() => {
+            submitHandler();
+          }}
+          className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px]  ${
+            disableButton && "!bg-[#FFDF85]"
+          } !m-0`}>
+          <span> Proceed</span>
+          <OutlineArrowRight />
+        </button>
       </div>
     </div>
   );

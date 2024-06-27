@@ -38,22 +38,12 @@
   @apply mt-2 w-full;
 }
 
-.btnGroupContainer {
-  @apply -mx-4 md:-mx-0;
-  box-shadow: none;
-}
-@media (max-width: 767px) {
-  .btnGroupContainer {
-    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
-  }
-}
-
 .btnGroup {
-  @apply flex flex-col px-4 md:px-0 md:flex-row md:mt-8 bg-fff -mb-6 md:-mb-0 bottom-0 mt-4 md:static;
+  @apply flex flex-col px-4 md:px-0 md:flex-row md:mt-8 bg-fff mb-0 mt-4 fixed w-full bottom-0 md:static;
 }
 
 .saveBtn {
-  @apply mt-3 md:mt-0 mb-4 md:mb-0;
+  @apply mt-3 md:mt-0 mb-4 md:mb-0 w-full;
 }
 
 .lableStyle {
