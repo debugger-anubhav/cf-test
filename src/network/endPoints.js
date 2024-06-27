@@ -230,4 +230,9 @@ export const endPoints = {
   },
 
   downloadPDF: "user/exportpaymentweb",
+
+  // hyperverge endpoints
+  hyperverge: {
+    getHypervergeToken: userid => `fc-kycs/getHypervergeToken?userId=${userid}`,
+  },
 };
