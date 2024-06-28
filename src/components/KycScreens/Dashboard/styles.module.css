@@ -1,5 +1,5 @@
 .heading {
-  @apply font-Poppins md:text-24 text-18 text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
 }
 .kyc_status_box {
   @apply flex w-full border border-DDDDDF rounded-lg gap-4 p-6 flex-col my-8;
@@ -46,14 +46,15 @@
 .status_style {
   @apply flex items-center;
 }
+
 .profession_row {
-  @apply flex justify-between items-center bg-[#F0EEFC] px-2 py-1 rounded-lg my-6;
+  @apply justify-between items-center bg-[#F0EEFC] px-2 py-1 rounded-lg my-6 gap-4;
 }
 .profession_left {
-  @apply flex text-71717A font-Poppins md:text-18 text-12 font-medium;
+  @apply flex text-71717A font-Poppins md:text-14 text-12 font-medium whitespace-nowrap;
 }
 .profession_right {
-  @apply font-Poppins font-medium text-5774AC md:text-18 text-12 leading-[18px] tracking-0.3 cursor-pointer;
+  @apply font-Poppins font-medium text-5774AC md:text-14 text-12 leading-[18px] tracking-0.3 cursor-pointer;
 }
 
 .drawer_content_wrapper {

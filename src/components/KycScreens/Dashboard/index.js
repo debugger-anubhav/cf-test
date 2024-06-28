@@ -87,17 +87,29 @@ export default function Dashboard({setOpenDashboard}) {
 
   return (
     <div>
-      <div className={styles.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => setOpenDashboard(false)}
-          className={"cursor-pointer"}
-        />
-        Order Id: {data?.dealCodeNumber}
+      <div className={`${styles.heading} justify-between`}>
+        <div className="flex items-center gap-2">
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => setOpenDashboard(false)}
+            className={"cursor-pointer"}
+          />
+          Order Id: {data?.dealCodeNumber}
+        </div>
+        <div className="flex w-fit">
+          <div className={`${styles.profession_row} md:flex hidden`}>
+            <div className={styles.profession_left}>Profession: Salaried </div>
+            <div
+              className={styles.profession_right}
+              onClick={() => setChangeProfession(true)}>
+              Change
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className={styles.profession_row}>
+      <div className={`${styles.profession_row} flex md:hidden`}>
         <div className={styles.profession_left}>Profession: Salaried </div>
         <div
           className={styles.profession_right}
@@ -105,6 +117,7 @@ export default function Dashboard({setOpenDashboard}) {
           Change
         </div>
       </div>
+
       {changeProfession && (
         <KycCommonDrawer
           content={drawerContent()}
