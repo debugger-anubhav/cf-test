@@ -8,24 +8,13 @@ import {useSelector} from "react-redux";
 export default function SdkIntegration() {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
-  const [hypervergeToken, setHypervergeToken] = useState("");
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
 
-  const HypervergeTokenApi = () => {
-    baseInstance
-      .get(endPoints.hyperverge.getHypervergeToken(userId))
-      .then(res => {
-        const token = (res?.data?.data.token).split(" ");
-        setHypervergeToken(token[1]);
-      })
-      .catch(err => console.log(err));
-  };
-
-  const hyperKycConfig = new window.HyperKycConfig(
-    hypervergeToken,
-    "workflow_uZRJMIc",
-    selectedId,
-  );
+  // const hyperKycConfig = new window.HyperKycConfig(
+  //    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6InNtbGNpNiIsImhhc2giOiIwYTk3OGM3ZjE5OWRhYzJiYzgzMDk5NzY3OTY0Y2Y1MzA1OTc5NmFlYTRiYjI3NjI3Yzg2M2U4ZjQyNzhkYzM0IiwiaWF0IjoxNzE5NTU3MzUzLCJleHAiOjE3MTk2MDA1NTMsImp0aSI6IjRiNDhkNmViLTY2YjQtNDdhMy1iYmZhLWNiZTlmNTdkNWFhNiJ9.ZKTgMXjM1ayb3Rqea6MvotH0zf6nV-U6Ju8ItYR0OT1Bq61cg433GYefinxceg_YzTFXCa7rNpegJ0Tp5gyklAM78L3-SMkxxiuCtjEdfdun0vaTwexsKQBTUcOGxLMCld6Sua-WYVtkUgY00Wm2G0EYlaS0OkxrpBTpF6WucaU ",
+  //   "workflow_uZRJMIc",
+  //   90035_902767639,
+  // );
 
   const handler = HyperKycResult => {
     console.log(HyperKycResult, "ppppppppppppppppppp");
@@ -58,24 +47,23 @@ export default function SdkIntegration() {
   };
 
   const handleClick = () => {
-    window.HyperKYCModule.launch(hyperKycConfig, handler);
+    baseInstance
+      .get(endPoints.hyperverge.getHypervergeToken(userId))
+      .then(res => {
+        const token = (res?.data?.data.token).split(" ");
+        const config = new window.HyperKycConfig(
+          token[1],
+          "workflow_uZRJMIc",
+          selectedId,
+        );
+        window.HyperKYCModule.launch(config, handler);
+        // console.log(dddd)
+      })
+      .catch(err => console.log(err));
   };
 
   useEffect(() => {
-    HypervergeTokenApi();
-  }, []);
-
-  useEffect(() => {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);
-  }, [data]);
-
-  useEffect(() => {
-    console.log(
-      hypervergeToken,
-      "workflow_uZRJMIc",
-      `${userId}_${data?.dealCodeNumber}`,
-      "llll",
-    );
   }, [data]);
 
   return (
