@@ -62,7 +62,7 @@ const HeroBanner = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0].data.length);
+      setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0]?.data?.length);
     }, 3000); // Change the interval time as needed
 
     return () => clearInterval(interval);
