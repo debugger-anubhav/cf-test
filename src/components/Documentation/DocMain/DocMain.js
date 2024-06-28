@@ -25,7 +25,6 @@ import Image from "next/image";
 import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
 import WorkProfession from "../../KycScreens/WorkProfession";
-import SdkIntegration from "../../KycScreens/SdkIntegration";
 // import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 // import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 
@@ -281,8 +280,6 @@ const DocMain = () => {
             </Drawer>
           )}
         </div>
-
-        <SdkIntegration />
       </div>
       {/* <PersonalDetails
         handleKycState={id => handleKycState(id)}

@@ -13,6 +13,7 @@ import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {format, parse} from "date-fns";
 import {Skeleton} from "@mui/material";
 import KycCommonDrawer from "../KycCommonDrawer";
+import SdkIntegration from "../SdkIntegration";
 
 export default function Dashboard({setOpenDashboard}) {
   const userId = decrypt(getLocalStorage("_ga"));
@@ -153,16 +154,27 @@ export default function Dashboard({setOpenDashboard}) {
         ) : (
           <>
             {dashboardDetails?.allKycStages?.map((item, index) => {
-              return (
-                <div className={styles.details_box} key={index.toString()}>
-                  <div className={styles.detail_heading}>
-                    {item?.stage_name}
+              if (index === 0) {
+                return (
+                  <div key={index.toString()}>
+                    <SdkIntegration
+                      item={item}
+                      status={convertStatus(item?.stage_status)}
+                    />
                   </div>
-                  <div className={styles.sub_heading}>
-                    {convertStatus(item?.stage_status)}
+                );
+              } else {
+                return (
+                  <div className={styles.details_box} key={index.toString()}>
+                    <div className={styles.detail_heading}>
+                      {item?.stage_name}
+                    </div>
+                    <div className={styles.sub_heading}>
+                      {convertStatus(item?.stage_status)}
+                    </div>
                   </div>
-                </div>
-              );
+                );
+              }
             })}
           </>
         )}

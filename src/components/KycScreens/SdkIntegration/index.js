@@ -4,8 +4,9 @@ import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useSelector} from "react-redux";
+import styles from "../Dashboard/styles.module.css";
 
-export default function SdkIntegration() {
+export default function SdkIntegration({item, status}) {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
@@ -50,9 +51,9 @@ export default function SdkIntegration() {
     baseInstance
       .get(endPoints.hyperverge.getHypervergeToken(userId))
       .then(res => {
-        const token = (res?.data?.data.token).split(" ");
+        const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(
-          token[1],
+          token,
           "workflow_uZRJMIc",
           selectedId,
         );
@@ -67,8 +68,9 @@ export default function SdkIntegration() {
   }, [data]);
 
   return (
-    <div>
-      <button onClick={handleClick}>clickkkkkkkkkkkk</button>
+    <div className={styles.details_box} onClick={handleClick}>
+      <div className={styles.detail_heading}>{item?.stage_name}</div>
+      <div className={styles.sub_heading}>{status}</div>
     </div>
   );
 }
