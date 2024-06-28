@@ -6,7 +6,7 @@ export default async function ServiceReuestsPage() {
     <>
       <meta
         name="Title"
-        content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
+        content="Let us know what you are expecting, we will be happy to help."
       />
       <ServiceRequestComponents />
     </>
@@ -14,9 +14,9 @@ export default async function ServiceReuestsPage() {
 }
 
 export async function generateMetadata() {
-  const title = "Service Request";
+  const title = "Raise a service request - Cityfurnish";
   const description =
-    "Rent furniture and home appliances online from India's leading furniture rental company Cityfurnish. We offer furniture rental in Bangalore Mumbai, Pune, Delhi, Gurgaon, Noida and Hyderabad.";
+    "Let us know what you are expecting, we will be happy to help.";
   return {
     title,
     description,
