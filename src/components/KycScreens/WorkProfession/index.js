@@ -6,12 +6,16 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import Image from "next/image";
 import {Skeleton} from "@mui/material";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
-export default function WorkProfession({backState}) {
+export default function WorkProfession({backState, orderId}) {
+  const userId = decrypt(getLocalStorage("_ga"));
   const [openDashboard, setOpenDashboard] = useState(false);
   const [professionList, setProfessionList] = useState([]);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const imageUrl = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
+
   const getProfessionList = () => {
     baseInstance
       .get(endPoints.kycPage.getKycProfessionList)
@@ -23,6 +27,14 @@ export default function WorkProfession({backState}) {
         console.log(err?.message || "some error");
         setLoadingSkeleton(false);
       });
+  };
+  const handleClickProfession = professionId => {
+    setOpenDashboard(true);
+    baseInstance.post(endPoints.kycPage.saveKycProfessions, {
+      userId,
+      orderId: orderId?.dealCodeNumber,
+      professionId,
+    });
   };
 
   useEffect(() => {
@@ -74,7 +86,7 @@ export default function WorkProfession({backState}) {
                       className={styles.box}
                       key={index.toString()}
                       onClick={() => {
-                        setOpenDashboard(true);
+                        handleClickProfession(item?.id);
                       }}>
                       <Image
                         src={imageUrl + item?.icon}

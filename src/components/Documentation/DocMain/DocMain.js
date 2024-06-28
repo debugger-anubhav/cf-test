@@ -147,7 +147,10 @@ const DocMain = () => {
 
         <div className={styles.kycFormArea}>
           {showWorkProfession ? (
-            <WorkProfession backState={setShowWorkProfession} />
+            <WorkProfession
+              backState={setShowWorkProfession}
+              orderId={ordersData[selectedOption]}
+            />
           ) : (
             <>
               <KycHeader
