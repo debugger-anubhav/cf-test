@@ -2,20 +2,21 @@ import React, {useEffect, useState} from "react";
 import {getLocalStorage} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
-import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {decrypt} from "@/hooks/cryptoUtils";
 import {useSelector} from "react-redux";
 
 export default function SdkIntegration() {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [hypervergeToken, setHypervergeToken] = useState("");
+  const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
 
-  const HypervergeToken = () => {
+  const HypervergeTokenApi = () => {
     baseInstance
       .get(endPoints.hyperverge.getHypervergeToken(userId))
       .then(res => {
-        const token = decryptBase64(res?.data?.data.token);
-        setHypervergeToken(token);
+        const token = (res?.data?.data.token).split(" ");
+        setHypervergeToken(token[1]);
       })
       .catch(err => console.log(err));
   };
@@ -23,7 +24,7 @@ export default function SdkIntegration() {
   const hyperKycConfig = new window.HyperKycConfig(
     hypervergeToken,
     "workflow_uZRJMIc",
-    `${userId}_${data?.dealCodeNumber}`,
+    selectedId,
   );
 
   const handler = HyperKycResult => {
@@ -57,17 +58,25 @@ export default function SdkIntegration() {
   };
 
   const handleClick = () => {
-    console.log("come");
-    window?.HyperKYCModule.launch(hyperKycConfig, handler);
+    window.HyperKYCModule.launch(hyperKycConfig, handler);
   };
 
   useEffect(() => {
-    HypervergeToken();
+    HypervergeTokenApi();
   }, []);
 
   useEffect(() => {
-    console.log(hypervergeToken, "hypervergeToken");
-  }, [hypervergeToken]);
+    setSelectedId(`${userId}_${data?.dealCodeNumber}`);
+  }, [data]);
+
+  useEffect(() => {
+    console.log(
+      hypervergeToken,
+      "workflow_uZRJMIc",
+      `${userId}_${data?.dealCodeNumber}`,
+      "llll",
+    );
+  }, [data]);
 
   return (
     <div>
