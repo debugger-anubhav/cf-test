@@ -28,6 +28,7 @@ export default function Dashboard({setOpenDashboard}) {
   const [orderDate, setOrderDate] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [changeProfession, setChangeProfession] = useState(false);
+
   const getDashboardDetails = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
@@ -75,6 +76,13 @@ export default function Dashboard({setOpenDashboard}) {
           <ForwardArrow color={"#222222"} size={16} />
         </p>
       );
+  };
+
+  const matchKycStatus = {
+    "KYC Docs Under Review": "Under review",
+    "KYC In Progress": "Pending",
+    "KYC Rejected": "Rejected",
+    "KYC Completed": "Verified",
   };
 
   useEffect(() => {
@@ -151,7 +159,9 @@ export default function Dashboard({setOpenDashboard}) {
 
       <div className={styles.kyc_status_box}>
         <p className={styles.sub_heading}>KYC status:</p>
-        <p className={`${styles.heading}  md:!text-20 `}>Pending</p>
+        <p className={`${styles.heading}  md:!text-20 `}>
+          {matchKycStatus[dashboardDetails?.zoho_sub_status]}
+        </p>
         <p className={styles.sub_heading}>
           We require all your documents to be verified in order to schedule
           delivery.
