@@ -1079,7 +1079,7 @@ const ShoppingCartSection = () => {
                   {isLogin
                     ? userDetails?.full_name && userDetails?.email
                       ? "Proceed"
-                      : "Set up your account to proceed"
+                      : "Set up your account"
                     : "Login to proceed"}
                   <ArrowForw size={19} color={"#222"} />
                 </button>
