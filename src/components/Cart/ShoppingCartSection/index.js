@@ -829,8 +829,8 @@ const ShoppingCartSection = () => {
                   </div>
                 </div>
                 <p className={styles.protect_text}>
-                  Protect your appliances and furniture worth{" "}
-                  <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
+                  Protect your appliances & furniture worth{" "}
+                  <span className={styles.rupeeIcon}>₹</span>70K.{" "}
                   <span className={styles.learn_more} onClick={openDrawer}>
                     Learn more
                   </span>

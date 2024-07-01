@@ -50,8 +50,8 @@ const CityShieldContent = ({
       )}
 
       <p className={styles.protect}>
-        Protect your appliances and furniture worth upto{" "}
-        <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+        Protect your appliances & furniture worth upto{" "}
+        <span className={styles.rupeeIcon}>₹</span>70K{" "}
       </p>
 
       {cityShieldOriginalPrice && (
