@@ -21,7 +21,7 @@
   @apply flex flex-col;
 }
 .track_heading {
-  @apply text-45454A font-medium md:text-20 text-18 tracking-0.3 font-Poppins md:leading-[30px] leading-[27px];
+  @apply text-45454A font-medium md:text-20 flex gap-1 text-18 tracking-0.3 font-Poppins md:leading-[30px] leading-[27px];
 }
 .track_detail {
   @apply text-71717A md:leading-6 leading-[21px] md:text-16 text-14 font-Poppins tracking-0.3 pt-3;

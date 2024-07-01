@@ -235,7 +235,7 @@ const DocMain = () => {
                 <div className={styles.qr_img}>
                   <Image
                     src={
-                      "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
+                      "https://d3juy0zp6vqec8.cloudfront.net/images/qr-code.webp"
                     }
                     alt="scan-and-download"
                     width={120}
@@ -243,9 +243,17 @@ const DocMain = () => {
                   />
                 </div>
                 <div className={styles.track_info}>
-                  <p className={styles.track_heading}>
-                    📲 Fast-Track Your Orders!
-                  </p>
+                  <div className={styles.track_heading}>
+                    <Image
+                      src={
+                        "https://d3juy0zp6vqec8.cloudfront.net/images/mobile-icon.webp"
+                      }
+                      width={40}
+                      height={20}
+                      alt="mobile-icon"
+                    />{" "}
+                    Fast-Track Your Orders!
+                  </div>
                   <p className={styles.track_detail}>
                     Download our app to quickly complete KYC. Enjoy a smoother,
                     faster service experience!{" "}
@@ -261,8 +269,24 @@ const DocMain = () => {
                   </p>
                 </div>
                 <div className={styles.track_btn_wrapper}>
-                  <button className={styles.app_btn}>ios</button>
-                  <button className={styles.app_btn}>Android</button>
+                  <button className={styles.app_btn}>
+                    <img
+                      src={
+                        "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/ios-icn.svg"
+                      }
+                      alt="apple-icon"
+                    />
+                    ios
+                  </button>
+                  <button className={styles.app_btn}>
+                    <img
+                      src={
+                        "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/android-icn.svg"
+                      }
+                      alt="android-icon"
+                    />
+                    Android
+                  </button>
                 </div>
               </div>
             </>

@@ -78,6 +78,28 @@ export default function Dashboard({setOpenDashboard}) {
       );
   };
 
+  const drawerContent = () => {
+    return (
+      <div>
+        <p className={styles.content_text}>
+          You’ll need to submit new professional details specific to the chosen
+          profession. Are you sure you want to proceed?
+        </p>
+        <div className={styles.btn_wrapper}>
+          <button
+            className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}>
+            Yes, I want to change my profession
+          </button>
+          <button
+            className={`${styles.cancle_btn} `}
+            onClick={() => setChangeProfession(false)}>
+            cancel
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   const matchKycStatus = {
     "KYC Docs Under Review": "Under review",
     "KYC In Progress": "Pending",
@@ -280,23 +302,5 @@ const SkeletonData = () => {
         );
       })}
     </>
-  );
-};
-
-const drawerContent = () => {
-  return (
-    <div>
-      <p className={styles.content_text}>
-        You’ll need to submit new professional details specific to the chosen
-        profession. Are you sure you want to proceed?
-      </p>
-      <div className={styles.btn_wrapper}>
-        <button
-          className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}>
-          Yes, I want to change my profession
-        </button>
-        <button className={`${styles.cancle_btn} `}>cancel</button>
-      </div>
-    </div>
   );
 };
