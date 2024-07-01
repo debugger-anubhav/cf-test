@@ -165,7 +165,7 @@ export default function Home() {
         <HeroBanner />
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
-        {/* <TrendingProducts params={"home-page"} /> */}
+        <TrendingProducts params={"home-page"} />
         {/* <OffersAndCoupons /> */}
         {/* <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
