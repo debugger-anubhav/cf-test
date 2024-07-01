@@ -54,7 +54,8 @@ export default function SdkIntegration({item, status}) {
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(
           token,
-          "workflow_uZRJMIc",
+          // "pan_db",
+          "poa_selfie",
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);

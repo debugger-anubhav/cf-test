@@ -27,7 +27,7 @@
   @apply text-71717A md:leading-6 leading-[21px] md:text-16 text-14 font-Poppins tracking-0.3 pt-3;
 }
 .qr_img {
-  @apply w-[138px] md:flex hidden;
+  @apply w-[180px] md:flex hidden;
 }
 .track_btn_wrapper {
   @apply flex md:hidden w-full gap-4;

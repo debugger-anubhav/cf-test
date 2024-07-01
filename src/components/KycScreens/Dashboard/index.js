@@ -83,6 +83,7 @@ export default function Dashboard({setOpenDashboard}) {
     "KYC In Progress": "Pending",
     "KYC Rejected": "Rejected",
     "KYC Completed": "Verified",
+    "Delivery Scheduled": "Verified",
   };
 
   useEffect(() => {
@@ -167,7 +168,16 @@ export default function Dashboard({setOpenDashboard}) {
           delivery.
         </p>
         <button className={styles.schedule_delivery_btn}>
-          Complete KYC to Schedule Delivery <ForwardArrowWithLine />
+          {matchKycStatus[dashboardDetails?.zoho_sub_status] ===
+            "Under review" && "Manage your delivery now"}
+          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending" &&
+            "Complete KYC to Schedule Delivery"}
+          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Rejected" &&
+            "Re-upload your documents now"}
+          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Verified" &&
+            "Manage your delivery now"}
+          {/* {all  stage status will fill or done then show under review case } */}
+          <ForwardArrowWithLine />
         </button>
       </div>
 

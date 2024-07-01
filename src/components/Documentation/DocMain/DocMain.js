@@ -232,7 +232,16 @@ const DocMain = () => {
               </button>
 
               <div className={styles.track_box}>
-                <div className={styles.qr_img}>QR image</div>
+                <div className={styles.qr_img}>
+                  <Image
+                    src={
+                      "https://d3juy0zp6vqec8.cloudfront.net/images/scan-and-download.webp"
+                    }
+                    alt="scan-and-download"
+                    width={120}
+                    height={120}
+                  />
+                </div>
                 <div className={styles.track_info}>
                   <p className={styles.track_heading}>
                     📲 Fast-Track Your Orders!
