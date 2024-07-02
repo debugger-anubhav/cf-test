@@ -106,6 +106,7 @@ const HeroBanner = () => {
                     rel="preload"
                     as="image"
                     href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${link}`}
+                    fetchpriority="high"
                   />
                   <CldImage
                     src={link} // Use this sample image or upload your own via the Media Explorer
