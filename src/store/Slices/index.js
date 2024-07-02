@@ -303,7 +303,6 @@ export const KycPageSlice = createSlice({
       state.selectedDataForKyc = action.payload;
     },
     setKycScreenName(state, action) {
-      console.log(action.payload, "pppppppppppp");
       state.kycScreenName = action.payload;
     },
   },

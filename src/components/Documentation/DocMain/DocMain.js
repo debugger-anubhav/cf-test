@@ -31,6 +31,10 @@ import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 
 const DocMain = () => {
+  const dispatch = useDispatch();
+  const orderIdFromOrderpage = useSelector(state => state.order.orderId);
+  const kycScreen = useSelector(state => state.kycPage);
+
   const [kycState, setKycState] = useState();
   const [isUpfrontPayment, setIsUpfrontPayment] = useState(false);
   const [tenure, setTenure] = useState();
@@ -38,9 +42,9 @@ const DocMain = () => {
   const [cibilDocsData, setCibilDocsData] = useState();
   // const [isReupload, setIsReupload] = useState(false);
 
-  const dispatch = useDispatch();
-  const orderIdFromOrderpage = useSelector(state => state.order.orderId);
-  const kycScreen = useSelector(state => state.kycPage);
+  const [selectedOrderId, setSelectedOrderId] = useState(
+    kycScreen.selectedDataForKyc,
+  );
   const [currentScreen, setCurrentScreen] = useState(kycScreen.kycScreenName);
 
   // const handleGetOrderId = option => {
@@ -123,7 +127,7 @@ const DocMain = () => {
       .get(
         endPoints.kycPage.checkProfessionSelected(
           userId,
-          ordersData[selectedOption],
+          selectedOrderId.dealCodeNumber,
         ),
       )
       .then(res => {
@@ -155,6 +159,7 @@ const DocMain = () => {
       setIsBottomDrawer(false);
     }
   };
+
   React.useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
@@ -169,6 +174,7 @@ const DocMain = () => {
 
   useEffect(() => {
     setCurrentScreen(kycScreen.kycScreenName);
+    setSelectedOrderId(kycScreen.selectedDataForKyc);
   }, [kycScreen]);
 
   return (
