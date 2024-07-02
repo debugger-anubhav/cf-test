@@ -90,25 +90,32 @@ const BillContent = ({
 
         {!isCitymaxBill && billBreakup.hasOwnProperty("couponDiscount") && (
           <>
-            <div className={styles.row}>
-              <div>
-                <p className={styles.price_label}>
-                  Coupon discount
-                  {billBreakup?.couponCode && (
-                    <span className="ml-1">("{billBreakup?.couponCode}")</span>
-                  )}
-                  <span className="ml-1">{isCouponApplied && code}</span>
-                </p>
-              </div>
-              <p className={styles.total_amount} style={{color: "#2D9469"}}>
-                <span className={styles.rupeeIcon}>-₹</span>
-                {billBreakup?.couponDiscount}
-              </p>
-            </div>
+            {billBreakup?.couponDiscount <= 0 ? (
+              ""
+            ) : (
+              <>
+                <div className={styles.row}>
+                  <div>
+                    <p className={styles.price_label}>
+                      Coupon discount
+                      {billBreakup?.couponCode && (
+                        <span className="ml-1">
+                          ("{billBreakup?.couponCode}")
+                        </span>
+                      )}
+                      <span className="ml-1">{isCouponApplied && code}</span>
+                    </p>
+                  </div>
+                  <p className={styles.total_amount} style={{color: "#2D9469"}}>
+                    <span className={styles.rupeeIcon}>-₹</span>
+                    {billBreakup?.couponDiscount}
+                  </p>
+                </div>
+                <div className={styles.line}></div>
+              </>
+            )}
           </>
         )}
-
-        <div className={styles.line}></div>
 
         <div className={styles.row}>
           <div>
@@ -145,20 +152,24 @@ const BillContent = ({
         {!isCitymaxBill && billBreakup.hasOwnProperty("coinsUsed") && (
           <>
             <div className={styles.line}></div>
-
-            <div className={styles.row}>
-              <div>
-                <p className={styles.price_label}>Cityfurnish coins used</p>
-              </div>
-              <p className={styles.total_amount} style={{color: "#2D9469"}}>
-                <span className={styles.rupeeIcon}>-₹</span>
-                {billBreakup?.coinsUsed}
-              </p>
-            </div>
+            {billBreakup?.coinsUsed === 0 ? (
+              ""
+            ) : (
+              <>
+                <div className={styles.row}>
+                  <div>
+                    <p className={styles.price_label}>Cityfurnish coins used</p>
+                  </div>
+                  <p className={styles.total_amount} style={{color: "#2D9469"}}>
+                    <span className={styles.rupeeIcon}>-₹</span>
+                    {billBreakup?.coinsUsed}
+                  </p>
+                </div>
+                <div className={styles.line}></div>
+              </>
+            )}
           </>
         )}
-
-        <div className={styles.line}></div>
 
         <div className={styles.row}>
           <p className={styles.total_txt}>Total</p>

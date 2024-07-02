@@ -940,8 +940,8 @@ const ProductDetails = ({params}) => {
                 /month!
               </p>
               <p className={styles.protect}>
-                Protect your appliances and furniture worth{" "}
-                <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+                Protect your appliances & furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70K{" "}
               </p>
 
               {durationArray.length > 0 && (
