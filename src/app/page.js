@@ -141,6 +141,7 @@ export default function Home() {
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
+
   useEffect(() => {
     if (userId !== "") {
       if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
