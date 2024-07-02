@@ -114,6 +114,7 @@ const HeroBanner = () => {
                     fetchPriority="high"
                     alt={alternate}
                     loading="eager"
+                    decoding="sync"
                     className="cursor-pointer rounded-lg"
                     // fill
                     // crop={{
