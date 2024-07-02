@@ -4,7 +4,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 // import {
 //   CityWiseBannerWebsite,
 //   CityNameToId,
@@ -38,11 +38,10 @@ const getCityPrimaryBanner = city => {
 };
 
 const HeroBanner = () => {
-  const router = useRouter();
-  const {showAllRentLink, cityName, ...allData} =
-    useSelector(state => state.homePagedata) || {};
-  const [showLinkForRentPage, setShowLinkForRentPage] =
-    useState(showAllRentLink);
+  // const router = useRouter();
+  const {cityName} = useSelector(state => state.homePagedata) || {};
+  // const [showLinkForRentPage, setShowLinkForRentPage] =
+  //   useState(showAllRentLink);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // const handleRedirection = link => {
@@ -53,9 +52,9 @@ const HeroBanner = () => {
   //   }
   // };
 
-  useEffect(() => {
-    setShowLinkForRentPage(showAllRentLink);
-  }, [showAllRentLink]);
+  // useEffect(() => {
+  //   setShowLinkForRentPage(showAllRentLink);
+  // }, [showAllRentLink]);
 
   // const banners = [
   //   {
