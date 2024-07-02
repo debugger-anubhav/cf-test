@@ -62,12 +62,11 @@ body h1 h2 h3 h4 h5 h6 p {
 .carousel.carousel-slider .control-arrow {
   margin: 0 15px;
 }
-/* .landing_page_carousel .carousel .control-dots .dot {
-  background: white !important;
-  opacity: 1 !important;
-  margin-bottom: 0.2rem !important;
+.landing_page_carousel .carousel .control-dots .dot {
+  width: 10px !important;
+  height: 10px !important;
 }
-.landing_page_carousel .carousel .control-dots .selected {
+/* .landing_page_carousel .carousel .control-dots .selected {
   background: #597492 !important;
 }
 .landing_page_carousel .control-dots {
@@ -125,6 +124,13 @@ input[type="radio"]:checked {
   #mobile-chat-container,
   #fbots-wdgt {
     left: 16px !important;
+  }
+  .landing_page_carousel .carousel .control-dots .dot {
+    width: 9px !important;
+    height: 9px !important;
+  }
+  .landing_page_carousel .carousel .control-dots {
+    margin: 4px !important;
   }
 }
 @media screen and (max-width: 480px) {
