@@ -5,6 +5,7 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import {setKycScreenName} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
@@ -16,7 +17,7 @@ import {
 import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 import commonStyles from "@/components/Documentation/common.module.css";
 
@@ -53,6 +54,7 @@ const SelectionComp = ({
 };
 
 const FinancialInfo = ({handleKycState, cibilDocsData}) => {
+  const dispatch = useDispatch();
   const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [docData, setDocsData] = useState();
@@ -167,7 +169,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         <BackIcon
           color={"#222222"}
           size={20}
-          //   onClick={() => backState(false)}
+          onClick={() => dispatch(setKycScreenName("selectOrderId"))}
           className={"cursor-pointer"}
         />
         Financial Information

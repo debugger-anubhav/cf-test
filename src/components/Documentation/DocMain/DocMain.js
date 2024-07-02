@@ -29,6 +29,7 @@ import WorkProfession from "../../KycScreens/WorkProfession";
 import DashboardComponent from "@/components/KycScreens/Dashboard/index";
 import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
+import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
 
 const DocMain = () => {
   const dispatch = useDispatch();
@@ -330,20 +331,26 @@ const DocMain = () => {
               </div>
             </>
           )}
+
           {currentScreen === "dashboard" && <DashboardComponent />}
+          {currentScreen === "professionalDetails" && <ProfessionalDetails />}
 
           {currentScreen === "personalDetails" && (
-            <PersonalDetails
-              handleKycState={id => handleKycState(id)}
-              cibilDocsData={cibilDocsData}
-            />
+            <div className="mt-8">
+              <PersonalDetails
+                handleKycState={id => handleKycState(id)}
+                cibilDocsData={cibilDocsData}
+              />
+            </div>
           )}
 
           {currentScreen === "financialInfo" && (
-            <FinancialInfo
-              handleKycState={id => handleKycState(id)}
-              cibilDocsData={cibilDocsData}
-            />
+            <div className="mt-8">
+              <FinancialInfo
+                handleKycState={id => handleKycState(id)}
+                cibilDocsData={cibilDocsData}
+              />
+            </div>
           )}
         </div>
 

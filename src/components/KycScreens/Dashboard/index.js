@@ -118,6 +118,9 @@ export default function DashboardComponent() {
     if (item.id === 3) {
       dispatch(setKycScreenName("financialInfo"));
     }
+    if (item.id === 5) {
+      dispatch(setKycScreenName("professionalDetails"));
+    }
   };
 
   useEffect(() => {

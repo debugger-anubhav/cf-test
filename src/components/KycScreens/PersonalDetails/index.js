@@ -20,7 +20,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import DoItLater from "@/components/Documentation/DoItLaterModal/DoItLater";
-import {reduxSetModalState} from "@/store/Slices";
+import {reduxSetModalState, setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
 const PersonalDetails = ({handleKycState, cibilDocsData}) => {
@@ -350,7 +350,7 @@ const PersonalDetails = ({handleKycState, cibilDocsData}) => {
         <BackIcon
           color={"#222222"}
           size={20}
-          //   onClick={() => backState(false)}
+          onClick={() => dispatch(setKycScreenName("selectOrderId"))}
           className={"cursor-pointer"}
         />
         Personal details
