@@ -129,6 +129,8 @@ export const endPoints = {
     getDashboardDetails: (userId, orderId) =>
       `fc-kycs/getDashboardDetails?userId=${userId}&orderId=${orderId}`,
     saveKycProfessions: "fc-kycs/saveKycProfessions",
+    checkProfessionSelected: (userId, orderId) =>
+      `fc-kycs/checkProfessionSelected?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {

@@ -7,15 +7,17 @@ import {
   ForwardArrow,
   ForwardArrowWithLine,
 } from "../../../assets/icon";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage, productPageImagesBaseUrl} from "@/constants/constant";
 import {format, parse} from "date-fns";
 import {Skeleton} from "@mui/material";
 import KycCommonDrawer from "../KycCommonDrawer";
 import SdkIntegration from "../SdkIntegration";
+import {setKycScreenName} from "@/store/Slices";
 
-export default function Dashboard({setOpenDashboard}) {
+export default function DashboardComponent() {
+  const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
 
@@ -87,7 +89,8 @@ export default function Dashboard({setOpenDashboard}) {
         </p>
         <div className={styles.btn_wrapper}>
           <button
-            className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}>
+            className={`${styles.plain_btn} !mt-0 justify-center !w-full lg:w-full`}
+            onClick={() => dispatch(setKycScreenName("workProfession"))}>
             Yes, I want to change my profession
           </button>
           <button
@@ -108,6 +111,15 @@ export default function Dashboard({setOpenDashboard}) {
     "Delivery Scheduled": "Verified",
   };
 
+  const handleKycStagesClick = item => {
+    if (item.id === 4) {
+      dispatch(setKycScreenName("personalDetails"));
+    }
+    if (item.id === 3) {
+      dispatch(setKycScreenName("financialInfo"));
+    }
+  };
+
   useEffect(() => {
     getDashboardDetails();
   }, []);
@@ -123,7 +135,7 @@ export default function Dashboard({setOpenDashboard}) {
           <BackIcon
             color={"#222222"}
             size={20}
-            onClick={() => setOpenDashboard(false)}
+            onClick={() => dispatch(setKycScreenName("selectOrderId"))}
             className={"cursor-pointer"}
           />
           Order Id: {data?.dealCodeNumber}
@@ -209,7 +221,7 @@ export default function Dashboard({setOpenDashboard}) {
         ) : (
           <>
             {dashboardDetails?.allKycStages?.map((item, index) => {
-              if (index === 0) {
+              if (item.id === 1) {
                 return (
                   <div key={index.toString()}>
                     <SdkIntegration
@@ -220,7 +232,10 @@ export default function Dashboard({setOpenDashboard}) {
                 );
               } else {
                 return (
-                  <div className={styles.details_box} key={index.toString()}>
+                  <div
+                    className={styles.details_box}
+                    key={index.toString()}
+                    onClick={() => handleKycStagesClick(item)}>
                     <div className={styles.detail_heading}>
                       {item?.stage_name}
                     </div>

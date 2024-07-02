@@ -15,6 +15,7 @@ import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {
   getOrderId,
+  setKycScreenName,
   setOrderIdFromOrderPage,
   setSelectedDataForKyc,
 } from "@/store/Slices";
@@ -25,19 +26,22 @@ import Image from "next/image";
 import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
 import WorkProfession from "../../KycScreens/WorkProfession";
-// import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
-// import PersonalDetails from "../../KycScreens/PersonalDetails/index";
+import DashboardComponent from "@/components/KycScreens/Dashboard/index";
+import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
+import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 
 const DocMain = () => {
   const [kycState, setKycState] = useState();
   const [isUpfrontPayment, setIsUpfrontPayment] = useState(false);
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
-  // const [cibilDocsData, setCibilDocsData] = useState();
+  const [cibilDocsData, setCibilDocsData] = useState();
   // const [isReupload, setIsReupload] = useState(false);
 
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
+  const kycScreen = useSelector(state => state.kycPage);
+  const [currentScreen, setCurrentScreen] = useState(kycScreen.kycScreenName);
 
   // const handleGetOrderId = option => {
   //   dispatch(getOrderId(option?.dealCodeNumber));
@@ -56,7 +60,7 @@ const DocMain = () => {
       setIsUpfrontPayment(response?.data?.data?.isUpfrontPayment);
       setTenure(parseInt(response?.data?.data?.tenure));
       setCreditScore(parseInt(response?.data?.data?.credit_score));
-      // setCibilDocsData(response?.data?.data?.cibilDocsData);
+      setCibilDocsData(response?.data?.data?.cibilDocsData);
     } catch (err) {
       console.log(err?.message || "some error");
     }
@@ -90,12 +94,12 @@ const DocMain = () => {
     2: creditScore >= 650 ? 0 : 1,
     3: 2,
   };
+
   const [openDrawer, setOpenDrawer] = useState(false);
   const [ordersData, setOrdersData] = useState(null);
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [showWorkProfession, setShowWorkProfession] = useState(false);
   // const openModal = () => {
   //   setOpenDrawer(true);
   // };
@@ -112,6 +116,28 @@ const DocMain = () => {
         console.log(err?.message || "some error");
         setLoadingSkeleton(false);
       });
+  };
+
+  const checkSelectedProfession = () => {
+    baseInstance
+      .get(
+        endPoints.kycPage.checkProfessionSelected(
+          userId,
+          ordersData[selectedOption],
+        ),
+      )
+      .then(res => {
+        if (res?.data?.data?.status) {
+          dispatch(setKycScreenName("dashboard"));
+        } else {
+          dispatch(setKycScreenName("workProfession"));
+        }
+      })
+      .catch(err => console.log(err));
+  };
+
+  const handleStartKyc = () => {
+    checkSelectedProfession();
   };
 
   useEffect(() => {
@@ -136,9 +162,15 @@ const DocMain = () => {
       window.removeEventListener("resize", handleresize);
     };
   }, []);
+
   const closeModal = () => {
     setOpenDrawer(false);
   };
+
+  useEffect(() => {
+    setCurrentScreen(kycScreen.kycScreenName);
+  }, [kycScreen]);
+
   return (
     <div>
       <MenuList hasMb={false} />
@@ -146,12 +178,11 @@ const DocMain = () => {
         <DocSidebar />
 
         <div className={styles.kycFormArea}>
-          {showWorkProfession ? (
-            <WorkProfession
-              backState={setShowWorkProfession}
-              orderId={ordersData[selectedOption]}
-            />
-          ) : (
+          {currentScreen === "workProfession" && (
+            <WorkProfession orderId={ordersData[selectedOption]} />
+          )}
+
+          {currentScreen === "selectOrderId" && (
             <>
               <KycHeader
                 progress={progress[kycState] || 0}
@@ -222,7 +253,9 @@ const DocMain = () => {
                     : "bg-FFDF85 cursor-not-allowed"
                 }`}
                 disabled={selectedOption === null}
-                onClick={() => setShowWorkProfession(true)}>
+                onClick={() => {
+                  handleStartKyc();
+                }}>
                 Start my KYC now{" "}
                 <ArrowForw
                   color={"#222222"}
@@ -291,6 +324,21 @@ const DocMain = () => {
               </div>
             </>
           )}
+          {currentScreen === "dashboard" && <DashboardComponent />}
+
+          {currentScreen === "personalDetails" && (
+            <PersonalDetails
+              handleKycState={id => handleKycState(id)}
+              cibilDocsData={cibilDocsData}
+            />
+          )}
+
+          {currentScreen === "financialInfo" && (
+            <FinancialInfo
+              handleKycState={id => handleKycState(id)}
+              cibilDocsData={cibilDocsData}
+            />
+          )}
         </div>
 
         <div>
@@ -317,15 +365,6 @@ const DocMain = () => {
           )}
         </div>
       </div>
-      {/* <PersonalDetails
-        handleKycState={id => handleKycState(id)}
-        cibilDocsData={cibilDocsData}
-      /> */}
-
-      {/* <FinancialInfo
-                handleKycState={id => handleKycState(id)}
-                cibilDocsData={cibilDocsData}
-              /> */}
     </div>
   );
 };
