@@ -16,7 +16,7 @@ const getSizes = () =>
     (max-width: 1999px) 1999px,
   `;
 
-const Image = ({src, alt, priority = true, loading = "eager", ...props}) => {
+const Image = ({src, alt, priority = false, loading = "lazy", ...props}) => {
   const sizes = getSizes();
 
   const formattedUrl = src?.startsWith("https:") ? src : `https:${src}`;
@@ -26,55 +26,68 @@ const Image = ({src, alt, priority = true, loading = "eager", ...props}) => {
 
   const ref = useRef(null);
 
-  const handleResize = () => {
-    setHeight(ref.current.getBoundingClientRect().height);
-  };
+  // const handleResize = () => {
+  //   setHeight(ref.current.getBoundingClientRect().height);
+  // };
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", () => handleResize);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", () => handleResize);
+  // }, []);
 
-  useEffect(() => {
-    if (ref.current && ref.current.getBoundingClientRect().height > 0) {
-      setHeight(ref.current.getBoundingClientRect().height);
-    }
-  }, [ref.current]);
+  // useEffect(() => {
+  //   if (ref.current && ref.current.getBoundingClientRect().height > 0) {
+  //     setHeight(ref.current.getBoundingClientRect().height);
+  //   }
+  // }, [ref.current]);
 
   return (
-    <div
-      style={{
-        width: "100%",
-        height,
-      }}
-      className="test-classname">
-      <link rel="preload" as="image" href={src} />
-
-      <div style={{position: "relative", width: "100%"}}>
-        <NextImage
-          {...props}
-          src={formattedUrl}
-          alt={alt}
-          fill
-          ref={ref}
-          sizes={sizes}
-          loading={loading}
-          loader={({src, width}) => `${src}?w=${width}&q=50`}
-          onLoadingComplete={({naturalHeight}) => {
-            setHeight(naturalHeight);
-          }}
-          onLoad={() => {
-            setIsLoaded(true);
-          }}
-          priority={loading === "eager" ? priority : false}
-          style={{
-            width: undefined,
-            height: undefined,
-            display: isLoaded ? "block" : "none",
-          }}
-        />
-      </div>
+    <div>
+      {priority ? <link rel="preload" as="image" href={formattedUrl} /> : null}
+      <NextImage
+        src={formattedUrl}
+        alt={alt}
+        // width={800}
+        // height={500}
+        // sizes={sizes}
+        priority={priority}
+        {...props}
+      />
     </div>
+    // <div
+    //   style={{
+    //     width: "100%",
+    //     height,
+    //   }}>
+    //   <link rel="preload" as="image" href={src} />
+
+    //   <div style={{position: "relative", width: "100%"}}>
+    //     <NextImage
+    //       {...props}
+    //       src={formattedUrl}
+    //       alt={alt}
+    //       fill
+    //       ref={ref}
+    //       // sizes={sizes}
+    //       loading={loading}
+    //       loader={({src, width}) => `${src}?w=${width}&q=50`}
+    //       onLoadingComplete={({naturalHeight}) => {
+    //         console.log("natural height", naturalHeight);
+    //         setHeight(naturalHeight);
+    //       }}
+    //       onLoad={() => {
+    //         console.log("loaded how");
+    //         setIsLoaded(true);
+    //       }}
+    //       priority={loading === "eager" ? priority : false}
+    //       style={{
+    //         width: undefined,
+    //         height: undefined,
+    //         display: isLoaded ? "block" : "none",
+    //       }}
+    //     />
+    //   </div>
+    // </div>
   );
 };
 

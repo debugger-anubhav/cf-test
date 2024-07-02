@@ -11,8 +11,8 @@ import {
   CityWiseBannerMobile,
   CityWiseBannerTablet,
 } from "@/constants/constant";
-// import {CldImage} from "next-cloudinary";
 // import Image from "@/components/Image";
+import {CldImage} from "next-cloudinary";
 
 const HeroBanner = () => {
   const router = useRouter();
@@ -87,12 +87,12 @@ const HeroBanner = () => {
             onChange={index => setCurrentIndex(index)}
             swipeable
             width={banner.width}>
-            {banner?.data?.map((item, i) => (
+            {banner?.data?.map(({link, redirectionLink, alternate}, i) => (
               <div key={i.toString()}>
                 <div
                   className="flex cursor-pointer"
                   onClick={() => {
-                    handleRedirection(item.redirectionLink);
+                    handleRedirection(redirectionLink);
                   }}>
                   {/* <Image
                     src={item.link}
@@ -101,28 +101,42 @@ const HeroBanner = () => {
                     width={banner.imgWidth}
                     height={banner.imgHeight}
                   /> */}
-                  {/* <link rel="preload" as="image" href={item.link} /> */}
-                  {/* <CldImage
-                    src={item.link} // Use this sample image or upload your own via the Media Explorer
+                  {/* https://res.cloudinary.com/dc9mscs6y/image/upload/c_limit,w_2048/f_auto/q_auto/new_tab_banner_2_wb8w24?_a=BAVFB+Gd0 */}
+                  <link
+                    rel="preload"
+                    as="image"
+                    href={`https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/${link}`}
+                  />
+                  <CldImage
+                    src={link} // Use this sample image or upload your own via the Media Explorer
                     width={banner.imgWidth} // Transform the image: auto-crop to square aspect_ratio
                     height={banner.imgHeight}
                     fetchPriority="high"
+                    alt={alternate}
                     loading="eager"
                     className="cursor-pointer rounded-lg"
-                    fill
-                    crop={{
-                      type: "auto",
-                      source: true,
-                    }}
-                  /> */}
-                  <img
+                    // fill
+                    // crop={{
+                    //   type: "auto",
+                    //   source: true,
+                    // }}
+                  />
+                  {/* <img
                     src={item.link}
                     alt={item.alternate}
                     loading="eager"
                     className="cursor-pointer rounded-lg"
                     width={banner.imgWidth}
                     height={banner.imgHeight}
-                  />
+                  /> */}
+                  {/* <Image
+                    src={link}
+                    alt={alternate}
+                    priority
+                    className="cursor-pointer rounded-lg"
+                    width={banner.imgWidth}
+                    height={banner.imgHeight}
+                  /> */}
                 </div>
               </div>
             ))}

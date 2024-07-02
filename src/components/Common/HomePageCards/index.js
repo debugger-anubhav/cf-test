@@ -12,6 +12,7 @@ import LoginModal from "@/components/LoginPopups";
 import Link from "next/link";
 import Worker from "worker-loader!./homepageCardWorker.js";
 import {authToken} from "@/network/axios";
+import Image from "@/components/Image";
 
 const Card = ({
   desc,
@@ -28,6 +29,8 @@ const Card = ({
   productID,
   seourl,
   isSavedComp = false,
+  width = 800,
+  height = 500,
 }) => {
   const {checkAuthentication} = useAuthentication();
   const [inWishList, setInWishList] = useState(isSavedComp || false);
@@ -160,7 +163,18 @@ const Card = ({
             setHoverCard(false);
           }}>
           <div className="relative">
-            <img
+            <Image
+              src={hoverCard ? hoverCardImage : cardImage}
+              className={`${styles.thumbnail} ${
+                hoverCard ? styles.card_image_hover : ""
+              }`}
+              priority={false}
+              loading="lazy"
+              alt={desc}
+              width={width}
+              height={height}
+            />
+            {/* <img
               src={hoverCard ? hoverCardImage : cardImage}
               alt={desc}
               loading="lazy"
@@ -169,7 +183,7 @@ const Card = ({
               className={`${styles.thumbnail} ${
                 hoverCard ? styles.card_image_hover : ""
               }`.trim()}
-            />
+            /> */}
 
             {/* ----------- */}
             {showincludedItem && (
