@@ -55,11 +55,15 @@ const SelectionComp = ({
 
 const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const dispatch = useDispatch();
-  const selectedOrderId = useSelector(state => state.kycPage.orderId);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
+
+  const orderId = useSelector(
+    state => state.kycPage.selectedDataForKyc.dealCodeNumber,
+  );
+
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
   });
@@ -105,7 +109,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const submitHandler = () => {
     const error = formErrors;
     if (!formData?.financialDocumentProof?.length > 0) {
-      error.financialDocumentProof = "Please upload the salary slip proof";
+      error.financialDocumentProof = "Please upload the bank statement";
     } else {
       error.financialDocumentProof = "";
     }
@@ -125,11 +129,13 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
     for (let i = 0; i < formData.financialDocumentProof.length; i++) {
       allData.append("doc", formData.financialDocumentProof[i]);
     }
-    allData.append("orderId", selectedOrderId);
+    allData.append("orderId", orderId);
+    allData.append("stageId", 3);
     baseInstance
-      .post(endPoints.uploadFinancialDoc, allData)
+      .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
-        handleKycState(selectedOrderId);
+        handleKycState(orderId);
+        dispatch(setKycScreenName("professionalDetails"));
         setDisableButton(false);
       })
       .catch(err => {
@@ -143,7 +149,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
 
   useEffect(() => {
     setFormData({financialDocumentProof: ""});
-  }, [selectedOrderId]);
+  }, [orderId]);
 
   const handleDeleteFile = (e, index) => {
     e.stopPropagation();
@@ -344,19 +350,15 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
           {formErrors.financialDocumentProof}
         </div>
       )}
-      <div className={`${styles.btnGroup} w-[90%] md:w-fit mx-auto md:mx-0`}>
-        <button
-          disabled={disableButton}
-          onClick={() => {
-            submitHandler();
-          }}
-          className={`${commonStyles.saveBtn} ${styles.saveBtn} md:w-[232px]  ${
-            disableButton && "!bg-[#FFDF85]"
-          } !m-0`}>
-          <span> Proceed</span>
-          <OutlineArrowRight />
-        </button>
-      </div>
+
+      <button
+        onClick={() => {
+          submitHandler();
+        }}
+        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
+        proceed
+        <OutlineArrowRight color={"#222222"} />
+      </button>
     </div>
   );
 };

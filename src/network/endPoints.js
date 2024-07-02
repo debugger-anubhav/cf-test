@@ -131,6 +131,7 @@ export const endPoints = {
     saveKycProfessions: "fc-kycs/saveKycProfessions",
     checkProfessionSelected: (userId, orderId) =>
       `fc-kycs/checkProfessionSelected?userId=${userId}&orderId=${orderId}`,
+    uploadFinancialDocs: "fc-kycs/uploadFinancialDocs",
   },
 
   cityshieldPage: {
