@@ -1,4 +1,4 @@
-// "use client"
+// "use client";
 import React from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";

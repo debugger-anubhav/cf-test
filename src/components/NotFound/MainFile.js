@@ -1,15 +1,16 @@
 "use client";
 import React from "react";
-import AnnouncementBar from "../Common/AnnouncementBar/index";
+// import AnnouncementBar from "../Common/AnnouncementBar/index";
 import NotFoundComponent from "./NotFoundComponent/index";
-import Header from "../Common/Header/index";
+// import Header from "../Common/Header/index";
 
 export default function MainFile() {
   return (
     <div>
-      <AnnouncementBar />
-      <Header />
+      {/* <AnnouncementBar /> */}
+      {/* <Header /> */}
       <NotFoundComponent />
+      <p>Not found</p>
     </div>
   );
 }
