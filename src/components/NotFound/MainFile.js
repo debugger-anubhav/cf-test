@@ -10,7 +10,6 @@ export default function MainFile() {
       {/* <AnnouncementBar /> */}
       {/* <Header /> */}
       <NotFoundComponent />
-      <p>Not found</p>
     </div>
   );
 }
