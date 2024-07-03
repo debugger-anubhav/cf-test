@@ -9,8 +9,8 @@ import {DocSidebarSkeleton} from "../Documentation/Sidebar/DocSidebar";
 import {FooterSkeleton} from "@/components/Common/Footer";
 import styles from "./style.module.css";
 
-const DocSidebar = loadable(() =>
-  import("../Documentation/Sidebar/DocSidebar"),
+const DocSidebar = loadable(
+  () => import("../Documentation/Sidebar/DocSidebar"),
 );
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
