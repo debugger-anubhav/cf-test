@@ -18,7 +18,6 @@ import {
 } from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
-import {useRouter} from "next/navigation";
 // import Link from "next/link";
 import {
   getLocalStorage,
@@ -39,16 +38,16 @@ import "react-responsive-modal/styles.css";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import {useRouter} from "next/navigation";
 
 const HEADER_HEIGHT = 32;
 
 const Header = ({page}) => {
+  const router = useRouter();
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   const {checkAuthentication} = useAuthentication();
-
   const iconRef = useRef(null);
   const dispatch = useDispatch();
-  const router = useRouter();
   const isOnMobile = useIsOnMobile();
   const [openSearchbar, setOpenSearchBar] = React.useState(false);
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =

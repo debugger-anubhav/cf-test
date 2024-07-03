@@ -68,10 +68,10 @@ const StickyBottomBar = ({
             soldOut
               ? handleNotifyMe
               : cartItems?.length === 0
-                ? handleAddToCart
-                : isItemInCart
-                  ? handleGoToCart
-                  : handleAddToCart
+              ? handleAddToCart
+              : isItemInCart
+              ? handleGoToCart
+              : handleAddToCart
           }
           style={{marginTop: "0px"}}
           disabled={isLoading}

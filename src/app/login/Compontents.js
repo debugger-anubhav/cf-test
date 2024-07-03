@@ -56,8 +56,8 @@ const NewlyLaunched = loadable(
   {fallback: <NewlyLauncedSkeleton />},
 );
 
-const DownloadForMobile = loadable(
-  () => import("@/components/Home/DownloadForMobile"),
+const DownloadForMobile = loadable(() =>
+  import("@/components/Home/DownloadForMobile"),
 );
 const PreDesignCombos = loadable(
   () => import("@/components/Home/PredesignCombos"),
@@ -65,8 +65,8 @@ const PreDesignCombos = loadable(
     fallback: <ProductRowSkeleton />,
   },
 );
-const HasselFreeServicesCards = loadable(
-  () => import("@/components/Home/HasselFreeServicesCards"),
+const HasselFreeServicesCards = loadable(() =>
+  import("@/components/Home/HasselFreeServicesCards"),
 );
 const LimetedPreiodDiscount = loadable(
   () => import("@/components/Home/LimetedPreiodDiscount"),
@@ -85,8 +85,8 @@ const MediaCoverage = loadable(() => import("@/components/Home/MediaCoverage"));
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
   fallback: <ProductRowSkeleton />,
 });
-const HappySubscribers = loadable(
-  () => import("@/components/Home/HappySubscribers"),
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
 );
 const FrequentlyAskedQuestions = loadable(
   () => import("@/components/Common/FrequentlyAskedQuestions"),
@@ -97,8 +97,8 @@ const FrequentlyAskedQuestions = loadable(
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
 });
-const CombineSection = loadable(
-  () => import("@/components/Home/CombineSection"),
+const CombineSection = loadable(() =>
+  import("@/components/Home/CombineSection"),
 );
 
 export default function LoginComponents() {
