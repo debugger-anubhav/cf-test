@@ -1,11 +1,10 @@
 import React from "react";
-import MainFile from "../components/NotFound/SSRNotFound";
-import RootLayout from "./layout";
+import MainFile from "../components/NotFound/MainFile";
 
-export default async function NotFound() {
+export default function NotFound() {
   return (
-    <RootLayout>
+    <>
       <MainFile />
-    </RootLayout>
+    </>
   );
 }

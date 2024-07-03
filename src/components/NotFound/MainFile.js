@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import AnnouncementBar from "../Common/AnnouncementBar/index";
-import Header from "../Common/Header/index";
 import NotFoundComponent from "./NotFoundComponent/index";
+import Header from "../Common/Header/index";
 
 export default function MainFile() {
   return (
