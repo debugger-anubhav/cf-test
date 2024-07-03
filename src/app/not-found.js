@@ -1,17 +1,11 @@
-"use client";
-
 import React from "react";
-import Header from "@/components/Common/Header";
-import AnnouncementBar from "@/components/Common/AnnouncementBar";
-import NotFoundComponent from "@/components/NotFoundComponent";
+import MainFile from "../components/NotFound/SSRNotFound";
+import RootLayout from "./layout";
 
-export default function NotFound() {
-  // notFound();
+export default async function NotFound() {
   return (
-    <>
-      <AnnouncementBar />
-      <Header />
-      <NotFoundComponent />
-    </>
+    <RootLayout>
+      <MainFile />
+    </RootLayout>
   );
 }
