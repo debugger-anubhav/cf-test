@@ -412,7 +412,6 @@ const SubHeader = ({params}) => {
 
   useEffect(() => {
     if (!getAllAndSubCategoryData || getAllAndSubCategoryData.length === 0) {
-      console.log("getAllAndSubCategoryData is undefined or empty");
       return;
     }
     const isCategoryValid = getAllAndSubCategoryData?.some(
