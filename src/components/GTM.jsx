@@ -7,17 +7,17 @@ let currentDataLayerName;
 
 export default function GoogleTagManager(props) {
   const {
-    gtmIds,
-    dataLayerName = "dataLayer",
     auth,
-    preview,
     dataLayer,
+    dataLayerName = "dataLayer",
+    gtmIds,
     includeInDevelopment = false,
+    nsIncludedGTMId,
+    preview,
   } = props;
   if (currentDataLayerName === undefined) {
     currentDataLayerName = dataLayerName;
   }
-
   const gtmLayer = dataLayerName !== "dataLayer" ? `&l=${dataLayerName}` : "";
   const gtmAuth = auth ? `&gtm_auth=${auth}` : "";
   const gtmPreview = preview ? `&gtm_preview=${preview}&gtm_cookies_win=x` : "";
@@ -37,6 +37,19 @@ export default function GoogleTagManager(props) {
             src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
           />
         ))}
+
+        {
+          nsIncludedGTMId && (
+            <noscript>
+              <iframe
+                src={`https://www.googletagmanager.com/ns.html?id=${nsIncludedGTMId}`}
+                height="0"
+                width="0"
+                style={{display: "none", visibility: "hidden"}}
+              />
+          </noscript>
+          )
+        }
 
         <Script
           id="_next-gtm-init"
@@ -59,6 +72,32 @@ export default function GoogleTagManager(props) {
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];
                 function gtag(){dataLayer.push(arguments);}
+
+                const userId = localStorage.getItem("_ga");
+                fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
+                  method: "POST",
+                  body: JSON.stringify({
+                    userId: JSON.parse(userId)
+                  }),
+                })
+                .then(res => res.json())
+                .then(res => {
+                  window.fcWidgetMessengerConfig = {
+                    meta: {
+                      cf_userid: res.data.userId,
+                    },
+                  }
+
+                  console.log("res", res)
+
+                  gtag(
+                    'config',
+                    "G-XWKD9DJ015", {
+                      "transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux",
+                      "eiuid" : res.data.userId
+                    }
+                  );
+                })
 
                 gtag('js', new Date());
                 [${gtmIds.map(

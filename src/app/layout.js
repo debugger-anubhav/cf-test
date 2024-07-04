@@ -67,9 +67,12 @@ const inter = localFont({
 });
 
 export default function RootLayout({children}) {
-  const gtmIds = [process.env.NEXT_PUBLIC_GOOGLE_TAGMANAGER_ID];
+  const gtmIds = [
+    process.env.NEXT_PUBLIC_GOOGLE_TAGMANAGER_ID,
+    process.env.NEXT_PUBLIC_NS_GTM_ID,
+  ].filter(Boolean);
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
-  console.log("clarity id", clarityId);
+  const nsIncludedGTMId = process.env.NEXT_PUBLIC_NS_GTM_ID;
 
   return (
     <html
@@ -144,32 +147,12 @@ export default function RootLayout({children}) {
           }}
         />
 
-        <GTM gtmIds={gtmIds} includeInDevelopment />
-        <Clarity includeInDevelopment clarityId={clarityId} />
-
-        <Script
-          type="text/javascript"
-          id="fcWidgetMessengerConfig"
-          dangerouslySetInnerHTML={{
-            __html: `
-            const userId = localStorage.getItem("_ga");
-            fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
-              method: "POST",
-              body: JSON.stringify({
-                userId: JSON.parse(userId)
-              }),
-            })
-            .then(res => res.json())
-            .then(res => {
-              window.fcWidgetMessengerConfig = {
-                meta: {
-                  cf_userid: res.data.userId,
-                },
-              }
-            })
-            `,
-          }}
+        <GTM
+          gtmIds={gtmIds}
+          nsIncludedGTMId={nsIncludedGTMId}
+          includeInDevelopment
         />
+        <Clarity includeInDevelopment clarityId={clarityId} />
 
         <Script
           src="//in.fw-cdn.com/30445413/247408.js"
@@ -369,16 +352,6 @@ var CaptchaCallback = function(){
               alt=""
               src="https://px.ads.linkedin.com/collect/?pid=4895321&fmt=gif"
             />
-          </noscript>
-        )}
-
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-PF4G2HJ"
-              height="0"
-              width="0"
-              style={{display: "none", visibility: "hidden"}}></iframe>
           </noscript>
         )}
 
