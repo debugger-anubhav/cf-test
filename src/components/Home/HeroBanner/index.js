@@ -14,6 +14,7 @@ import {useSelector} from "react-redux";
 // import Image from "@/components/Image";
 import {CldImage} from "next-cloudinary";
 import Head from "next/head";
+import Link from "next/link";
 
 const getCityPrimaryBanner = city => {
   switch (city) {
@@ -39,10 +40,26 @@ const getCityPrimaryBanner = city => {
 
 const HeroBanner = () => {
   // const router = useRouter();
-  const {cityName} = useSelector(state => state.homePagedata) || {};
-  // const [showLinkForRentPage, setShowLinkForRentPage] =
-  //   useState(showAllRentLink);
+  const {cityName, showAllRentLink} =
+    useSelector(state => state.homePagedata) || {};
+
+  const [showLinkForRentPage, setShowLinkForRentPage] =
+    useState(showAllRentLink);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [banners, setBanners] = useState([
+    {
+      url: "new_rt_banner_12_j4kmxj",
+      link: "/home-appliances-rental",
+    },
+    {
+      url: "new_rt_banner_2_yfcaa6",
+      link: "/citymax",
+    },
+    {
+      url: "new_rt_banner_13_duh0dl",
+      link: "/discount-deals",
+    },
+  ]);
 
   // const handleRedirection = link => {
   //   if (showLinkForRentPage && !link.includes("citymax")) {
@@ -52,58 +69,19 @@ const HeroBanner = () => {
   //   }
   // };
 
-  // useEffect(() => {
-  //   setShowLinkForRentPage(showAllRentLink);
-  // }, [showAllRentLink]);
-
-  // const banners = [
-  //   {
-  //     data: CityWiseBannerWebsite[CityNameToId[cityName]],
-  //     width: "100%",
-  //     imgWidth: 1920,
-  //     imgHeight: 801,
-  //     className: "lg:flex hidden",
-  //   },
-  //   {
-  //     data: CityWiseBannerTablet[CityNameToId[cityName]],
-  //     width: "100%",
-  //     imgWidth: 1024,
-  //     imgHeight: 427,
-  //     className: "hidden md:flex lg:hidden",
-  //   },
-  //   {
-  //     data: CityWiseBannerMobile[CityNameToId[cityName]],
-  //     width: "100%",
-  //     imgWidth: 430,
-  //     imgHeight: 179,
-  //     className: "flex md:hidden",
-  //   },
-  // ];
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0]?.data?.length);
-  //   }, 3000); // Change the interval time as needed
-
-  //   return () => clearInterval(interval);
-  // }, [banners]);
-
-  // const banners = [
-  // getCityPrimaryBanner(cityName),
-  // "new_rt_banner_12_j4kmxj",
-  // "new_rt_banner_2_yfcaa6",
-  // "new_rt_banner_13_duh0dl",
-  // ];
-
-  const [banners, setBanners] = useState([
-    "new_rt_banner_12_j4kmxj",
-    "new_rt_banner_2_yfcaa6",
-    "new_rt_banner_13_duh0dl",
-  ]);
+  useEffect(() => {
+    setShowLinkForRentPage(showAllRentLink);
+  }, [showAllRentLink]);
 
   useEffect(() => {
     if (cityName) {
-      setBanners([getCityPrimaryBanner(cityName), ...banners]);
+      setBanners([
+        {
+          url: getCityPrimaryBanner(cityName),
+          link: "/home-furniture-rental",
+        },
+        ...banners,
+      ]);
     }
   }, [cityName]);
 
@@ -126,8 +104,8 @@ const HeroBanner = () => {
         onChange={index => setCurrentIndex(index)}
         swipeable
         width={"100%"}>
-        {banners.map(link => {
-          const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${link}`;
+        {banners.map(({url, link}) => {
+          const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
           return (
             <Fragment key={link}>
               <Head>
@@ -138,20 +116,29 @@ const HeroBanner = () => {
                   type="image/webp"
                 />
               </Head>
-              <CldImage
-                src={link}
-                alt={""}
-                sizes="(max-width: 640px) 100vw,
+              <Link
+                href={
+                  showLinkForRentPage && !link.includes("citymax")
+                    ? `${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`
+                    : link
+                }>
+                <CldImage
+                  src={url}
+                  alt={""}
+                  sizes="(max-width: 640px) 100vw,
                      (max-width: 768px) 75vw,
                      (max-width: 1024px) 50vw,
                      1920px"
-                width={1920}
-                height={800}
-                crop="scale"
-                quality="auto"
-                priority
-                className="cursor-pointer rounded-lg"
-              />
+                  width={1920}
+                  height={800}
+                  crop="scale"
+                  quality="auto"
+                  priority
+                  className="cursor-pointer rounded-lg"
+                  // onClick={() => handleRedirection(link)}
+                  style={{pointerEvents: "all"}}
+                />
+              </Link>
             </Fragment>
           );
         })}
