@@ -88,68 +88,76 @@ const HeroBanner = () => {
   //   return () => clearInterval(interval);
   // }, [banners]);
 
-  const banners = [
-    getCityPrimaryBanner(cityName),
+  // const banners = [
+  // getCityPrimaryBanner(cityName),
+  // "new_rt_banner_12_j4kmxj",
+  // "new_rt_banner_2_yfcaa6",
+  // "new_rt_banner_13_duh0dl",
+  // ];
+
+  const [banners, setBanners] = useState([
     "new_rt_banner_12_j4kmxj",
     "new_rt_banner_2_yfcaa6",
     "new_rt_banner_13_duh0dl",
-  ];
+  ]);
+
+  useEffect(() => {
+    if (cityName) {
+      setBanners([getCityPrimaryBanner(cityName), ...banners]);
+    }
+  }, [cityName]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % banners?.length);
-    }, 3000); // Change the interval time as needed
+      setCurrentIndex(prevIndex => (prevIndex + 1) % banners.length);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [banners]);
 
-  if (!cityName) {
-    return null;
-  } else {
-    return (
-      <div
-        className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-        <Carousel
-          showStatus={false}
-          showArrows
-          showThumbs={false}
-          selectedItem={currentIndex}
-          onChange={index => setCurrentIndex(index)}
-          swipeable
-          width={"100%"}>
-          {banners.map(link => {
-            const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${link}`;
-            return (
-              <Fragment key={link}>
-                <Head>
-                  <link
-                    rel="preload"
-                    href={cloudinaryUrl}
-                    as="image"
-                    type="image/webp"
-                  />
-                </Head>
-                <CldImage
-                  src={link}
-                  alt={""}
-                  sizes="(max-width: 640px) 100vw,
+  return (
+    <div
+      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
+      <Carousel
+        showStatus={false}
+        showArrows
+        showThumbs={false}
+        selectedItem={currentIndex}
+        onChange={index => setCurrentIndex(index)}
+        swipeable
+        width={"100%"}>
+        {banners.map(link => {
+          const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${link}`;
+          return (
+            <Fragment key={link}>
+              <Head>
+                <link
+                  rel="preload"
+                  href={cloudinaryUrl}
+                  as="image"
+                  type="image/webp"
+                />
+              </Head>
+              <CldImage
+                src={link}
+                alt={""}
+                sizes="(max-width: 640px) 100vw,
                      (max-width: 768px) 75vw,
                      (max-width: 1024px) 50vw,
                      1920px"
-                  width={1920}
-                  height={800}
-                  crop="scale"
-                  quality="auto"
-                  priority
-                  className="cursor-pointer rounded-lg"
-                />
-              </Fragment>
-            );
-          })}
-        </Carousel>
-      </div>
-    );
-  }
+                width={1920}
+                height={800}
+                crop="scale"
+                quality="auto"
+                priority
+                className="cursor-pointer rounded-lg"
+              />
+            </Fragment>
+          );
+        })}
+      </Carousel>
+    </div>
+  );
 };
 
 export default HeroBanner;
