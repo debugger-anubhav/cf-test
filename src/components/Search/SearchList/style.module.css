@@ -157,7 +157,7 @@
   @apply text-9A9AA2 text-16 font-normal font-Poppins leading-[24px] my-4;
 }
 .noContentContainer {
-  @apply mb-[50px] min-h-[30vh];
+  @apply mb-[50px];
 }
 .close_icon {
   @apply fixed right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[64px];
