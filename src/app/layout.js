@@ -76,87 +76,86 @@ export default function RootLayout({children}) {
     <html
       lang="en"
       className={`${poppins.variable} ${inter.variable} font-sans`}>
-      <Head>
-        <link
-          rel="preload"
-          href="/font/Poppins-Bold.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/font/Poppins-Medium.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/font/Poppins-Regular.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/font/Poppins-SemiBold.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href="/font/Inter-VariableFont_slnt,wght.ttf"
-          as="font"
-          type="font/ttf"
-          crossOrigin="anonymous"
-        />
-        <meta
-          property="article:publisher"
-          content="https://www.facebook.com/cityFurnishRental"
-        />
-        <meta
-          name="facebook-domain-verification"
-          content="5qetjkn16z0nh00u71i0iw25oljz0h"
-        />
-        <meta
-          name="google-site-verification"
-          content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
-        />
+      <link
+        rel="preload"
+        href="/font/Poppins-Bold.ttf"
+        as="font"
+        type="font/ttf"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/font/Poppins-Medium.ttf"
+        as="font"
+        type="font/ttf"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/font/Poppins-Regular.ttf"
+        as="font"
+        type="font/ttf"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/font/Poppins-SemiBold.ttf"
+        as="font"
+        type="font/ttf"
+        crossOrigin="anonymous"
+      />
+      <link
+        rel="preload"
+        href="/font/Inter-VariableFont_slnt,wght.ttf"
+        as="font"
+        type="font/ttf"
+        crossOrigin="anonymous"
+      />
+      <meta
+        property="article:publisher"
+        content="https://www.facebook.com/cityFurnishRental"
+      />
+      <meta
+        name="facebook-domain-verification"
+        content="5qetjkn16z0nh00u71i0iw25oljz0h"
+      />
+      <meta
+        name="google-site-verification"
+        content="-7HYCsHFSLsnVIKsDD6-2sAPS280EgG3x8SB6Imvk34"
+      />
 
-        <meta
-          property="article:publisher"
-          content="https://www.facebook.com/cityFurnishRental/"
-        />
-        <meta httpEquiv="Content-Encoding" content="gzip" />
-        {/* <!-- clear cache --> */}
-        <meta httpEquiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
-        <meta httpEquiv="Pragma" content="no-cache" />
-        <meta
-          name="google-signin-client_id"
-          content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
+      <meta
+        property="article:publisher"
+        content="https://www.facebook.com/cityFurnishRental/"
+      />
+      <meta httpEquiv="Content-Encoding" content="gzip" />
+      {/* <!-- clear cache --> */}
+      <meta httpEquiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
+      <meta httpEquiv="Pragma" content="no-cache" />
+      <meta
+        name="google-signin-client_id"
+        content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
 
-        <Script
-          data-partytown-config
-          dangerouslySetInnerHTML={{
-            __html: `
+      <Script
+        data-partytown-config
+        dangerouslySetInnerHTML={{
+          __html: `
             window.partytown = {
               forward: ['dataLayer.push', 'fbq'],
               lib: '/_next/static/~partytown/',
               debug: true,
             };
           `,
-          }}
-        />
+        }}
+      />
 
-        <GTM gtmIds={gtmIds} />
+      <GTM gtmIds={gtmIds} includeInDevelopment />
 
-        <Script
-          type="text/javascript"
-          id="fcWidgetMessengerConfig"
-          dangerouslySetInnerHTML={{
-            __html: `
+      <Script
+        type="text/javascript"
+        id="fcWidgetMessengerConfig"
+        dangerouslySetInnerHTML={{
+          __html: `
             const userId = localStorage.getItem("_ga");
             fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
               method: "POST",
@@ -176,17 +175,17 @@ export default function RootLayout({children}) {
               }
             })
             `,
-          }}
-        />
+        }}
+      />
 
-        <Script
-          src="//in.fw-cdn.com/30445413/247408.js"
-          chat="true"
-          type="text/partytown"
-          strategy="afterInteractive"
-          // strategy="worker"
-        />
-        {/* <link
+      <Script
+        src="//in.fw-cdn.com/30445413/247408.js"
+        chat="true"
+        type="text/partytown"
+        strategy="afterInteractive"
+        // strategy="worker"
+      />
+      {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
@@ -219,7 +218,7 @@ export default function RootLayout({children}) {
           }}
         />
         {/* Northbeam script  */}
-        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+      {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             async
             defer
@@ -247,14 +246,14 @@ export default function RootLayout({children}) {
           />
         )} */}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
-            strategy="afterInteractive"
-            // defer
-            // async
-            id="facebook-event"
-            dangerouslySetInnerHTML={{
-              __html: `
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <Script
+          strategy="afterInteractive"
+          defer
+          // async
+          id="facebook-event"
+          dangerouslySetInnerHTML={{
+            __html: `
                    !function (f, b, e, v, n, t, s)
                       {
                         if (f.fbq)
@@ -279,23 +278,23 @@ export default function RootLayout({children}) {
                        fbq('init', '713012115962029');
                        fbq('track', 'PageView');
                        `,
-            }}
+          }}
+        />
+      )}
+
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{display: "none"}}
+            src="https://www.facebook.com/tr?id=713012115962029&ev=PageView&noscript=1"
+            alt="Facebook Pixel"
           />
-        )}
+        </noscript>
+      )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{display: "none"}}
-              src="https://www.facebook.com/tr?id=713012115962029&ev=PageView&noscript=1"
-              alt="Facebook Pixel"
-            />
-          </noscript>
-        )}
-
-        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+      {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -320,7 +319,7 @@ var CaptchaCallback = function(){
             }}
           />
         )} */}
-        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+      {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -343,7 +342,7 @@ var CaptchaCallback = function(){
           />
         )} */}
 
-        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+      {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -363,30 +362,30 @@ var CaptchaCallback = function(){
           />
         )} */}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
-            strategy="afterInteractive"
-            // defer
-            // async
-            id="linkedin"
-            dangerouslySetInnerHTML={{
-              __html: `
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <Script
+          strategy="afterInteractive"
+          defer
+          // async
+          id="linkedin"
+          dangerouslySetInnerHTML={{
+            __html: `
                 _linkedin_partner_id = "4895321";
                 window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
                 window._linkedin_data_partner_ids.push(_linkedin_partner_id);
               `,
-            }}
-          />
-        )}
+          }}
+        />
+      )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
-            strategy="afterInteractive"
-            // defer
-            // async
-            id="lms-analytics"
-            dangerouslySetInnerHTML={{
-              __html: `
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <Script
+          strategy="afterInteractive"
+          defer
+          // async
+          id="lms-analytics"
+          dangerouslySetInnerHTML={{
+            __html: `
                 (function (l) {
                   if (!l) {
                     window.lintrk = function (a, b) {
@@ -402,33 +401,33 @@ var CaptchaCallback = function(){
                   s.parentNode.insertBefore(b, s);
                 })(window.lintrk);
               `,
-            }}
+          }}
+        />
+      )}
+
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{display: "none"}}
+            alt=""
+            src="https://px.ads.linkedin.com/collect/?pid=4895321&fmt=gif"
           />
-        )}
+        </noscript>
+      )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{display: "none"}}
-              alt=""
-              src="https://px.ads.linkedin.com/collect/?pid=4895321&fmt=gif"
-            />
-          </noscript>
-        )}
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PF4G2HJ"
+            height="0"
+            width="0"
+            style={{display: "none", visibility: "hidden"}}></iframe>
+        </noscript>
+      )}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-PF4G2HJ"
-              height="0"
-              width="0"
-              style={{display: "none", visibility: "hidden"}}></iframe>
-          </noscript>
-        )}
-
-        {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+      {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
             defer
             async
@@ -441,14 +440,14 @@ var CaptchaCallback = function(){
           />
         )} */}
 
-        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
-          <Script
-            strategy="afterInteractive"
-            // defer
-            // async
-            id="ads-twitter"
-            dangerouslySetInnerHTML={{
-              __html: `!function(e,t,n,s,u,a)
+      {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+        <Script
+          strategy="afterInteractive"
+          defer
+          // async
+          id="ads-twitter"
+          dangerouslySetInnerHTML={{
+            __html: `!function(e,t,n,s,u,a)
             {e.twq ||
               ((s = e.twq =
                 function () {
@@ -462,10 +461,9 @@ var CaptchaCallback = function(){
               (a = t.getElementsByTagName(n)[0]),
               a.parentNode.insertBefore(u, a))}
             (window,document,'script'); twq('config','ofz28');`,
-            }}
-          />
-        )}
-      </Head>
+          }}
+        />
+      )}
       <body>
         <ReduxProvider>
           <QueryProvider>{children}</QueryProvider>
