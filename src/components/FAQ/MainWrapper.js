@@ -73,47 +73,28 @@ const MainWrapper = () => {
   useEffect(() => {
     const temp = [];
     if (searchKeyword) {
-      // General.forEach(ele => {
-      //   if (ele?.que?.includes(searchKeyword)) {
-      //     temp.push(ele);
-      //   }
-      // });
-      HowItWorks.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
+      Object.values(dynamicData).forEach(dataArray => {
+        dataArray.forEach(item => {
+          if (
+            item?.que?.toLowerCase().includes(searchKeyword) ||
+            item?.ans?.toLowerCase().includes(searchKeyword)
+          ) {
+            temp.push(item);
+          }
+        });
       });
-      DeliveryAndInstalation.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      PaymentAndBilling.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      OurServices.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      WhyCityFurnish.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      ReferralProgram.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      if (temp?.length) setFaqData(temp);
-      else setFaqData([]);
+
+      // Set the filtered data to state
+      if (temp.length > 0) {
+        setFaqData(temp);
+      } else {
+        setFaqData([]);
+      }
     } else {
+      // If searchKeyword is empty, set faqData to default based on selected tab (value)
       setFaqData(dynamicData[value]);
     }
-  }, [searchKeyword]);
+  }, [searchKeyword, dynamicData, value]);
 
   useEffect(() => {
     setFaqData(dynamicData[value]);
