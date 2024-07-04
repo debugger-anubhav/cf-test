@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import styles from "../style.module.css";
 import {BackIcon, ForwardArrow} from "@/assets/icon";
 import {HiSparkles} from "react-icons/hi2";
@@ -77,4 +77,4 @@ const ModalContentForResendOtp = ({
   );
 };
 
-export default ModalContentForResendOtp;
+export default memo(ModalContentForResendOtp);

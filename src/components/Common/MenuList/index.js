@@ -1,41 +1,34 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
 import PopOver from "../PopOver";
-import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
 import {addAllAndSubCategory, setShowAllRentLink} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
 import Skeleton from "@mui/material/Skeleton";
 import {getLocalStorage} from "@/constants/constant";
+import Link from "next/link";
+import Worker from "worker-loader!./menulistWorker.js";
 
 const MenuList = ({hasMb = true}) => {
   const dispatch = useDispatch();
   const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
-  const [loading, setLoading] = React.useState(true);
-  const {refetch: getAllAndSubCategory} = useQuery(
-    "category",
-    `${endPoints.allAndSubCategory}?cityId=${getLocalStorage("cityId")}`,
-  );
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // if (!getAllAndSubCategoryData?.length) {
-    getAllAndSubCategory()
-      .then(res => {
-        dispatch(addAllAndSubCategory(res?.data?.data));
-        dispatch(setShowAllRentLink(true));
-        setLoading(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        setLoading(false);
-      });
-    // }
+    const worker = new Worker();
+    worker.postMessage({cityId: getLocalStorage("cityId")});
+
+    worker.onmessage = function ({data: {allCategoryAndSubCategoryData}}) {
+      dispatch(addAllAndSubCategory(allCategoryAndSubCategoryData));
+      dispatch(setShowAllRentLink(true));
+      setLoading(false);
+    };
   }, []);
 
   return (
-    <div className={`${styles.menu_list_wrapper} ${hasMb ? "mb-6" : ""}`}>
+    <div
+      className={`${styles.menu_list_wrapper} ${hasMb ? "mb-6" : ""}`.trim()}>
       {loading && !getAllAndSubCategoryData?.length ? (
         <div className="w-[80%]">
           <Skeleton />
@@ -54,13 +47,13 @@ const MenuList = ({hasMb = true}) => {
               </div>
             );
           })}
-          <a
+          <Link
             rel="noopner noreferrer"
             target="_blank"
             aria-label="citymax"
             href="/citymax">
             <div className={styles.item_wrap}>CityMax</div>
-          </a>
+          </Link>
         </div>
       )}
       <div className={styles.menu_list_right}>
@@ -68,10 +61,10 @@ const MenuList = ({hasMb = true}) => {
           <a href={"/pages/offers"}>Offers</a>
         </p>
         <p className={`${styles.item_wrap}`} style={{marginRight: "0"}}>
-          <a href="/pages/bulkorder">CF For Business</a>
+          <Link href="/pages/bulkorder">CF For Business</Link>
         </p>
       </div>
     </div>
   );
 };
-export default MenuList;
+export default memo(MenuList);

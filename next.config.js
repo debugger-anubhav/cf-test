@@ -1,6 +1,25 @@
 /** @type {import('next').NextConfig} */
+const path = require("path");
 
 module.exports = {
+  webpack: (config, {isServer}) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+        path: false,
+      };
+    }
+
+    // Add a rule to handle Web Worker files
+    config.module.rules.push({
+      test: /\.worker\.js$/,
+      use: {loader: "worker-loader"},
+      include: [path.resolve(__dirname)],
+      exclude: /node_modules/,
+    });
+
+    return config;
+  },
   experimental: {
     nextScriptWorkers: true,
   },

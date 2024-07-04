@@ -1,8 +1,8 @@
-import React from "react";
+import React, {memo} from "react";
 import {Skeleton} from "@mui/material";
 import styles from "./style.module.css";
 
-export const ProductRowSkeleton = () => {
+export const ProductRowSkeleton = memo(() => {
   return (
     <div className={styles.main_containor}>
       <Skeleton variant="text" className={styles.Skeleton_text} />
@@ -21,4 +21,4 @@ export const ProductRowSkeleton = () => {
       </div>
     </div>
   );
-};
+});
