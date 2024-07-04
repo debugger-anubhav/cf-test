@@ -878,7 +878,7 @@ const ProductDetails = ({params}) => {
               <RiSparklingFill size={16} color={"#597492"} />
               <p className={styles.emi_text}>
                 Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
-                using No-Cost EMI (excluding GST)
+                using No-Cost EMI (excl GST)
               </p>
               <RiSparklingFill size={16} color={"#597492"} />
             </div>
@@ -940,8 +940,8 @@ const ProductDetails = ({params}) => {
                 /month!
               </p>
               <p className={styles.protect}>
-                Protect your appliances and furniture worth{" "}
-                <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+                Protect your appliances & furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70K{" "}
               </p>
 
               {durationArray.length > 0 && (

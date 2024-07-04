@@ -829,8 +829,8 @@ const ShoppingCartSection = () => {
                   </div>
                 </div>
                 <p className={styles.protect_text}>
-                  Protect your appliances and furniture worth{" "}
-                  <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
+                  Protect your appliances & furniture worth{" "}
+                  <span className={styles.rupeeIcon}>₹</span>70K.{" "}
                   <span className={styles.learn_more} onClick={openDrawer}>
                     Learn more
                   </span>
@@ -1079,7 +1079,7 @@ const ShoppingCartSection = () => {
                   {isLogin
                     ? userDetails?.full_name && userDetails?.email
                       ? "Proceed"
-                      : "Set up your account to proceed"
+                      : "Set up your account"
                     : "Login to proceed"}
                   <ArrowForw size={19} color={"#222"} />
                 </button>

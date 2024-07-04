@@ -4,7 +4,7 @@ import {CheckedBox, RightIcon, UncheckedBox, VerifyIcon} from "@/assets/icon";
 import DropDown from "@/components/Documentation/DropDown/DropDown";
 import CityShieldDrawerForCart from "@/components/Cart/Drawer/CityShieldDrawer";
 import {Skeleton} from "@mui/material";
-import {RazorpayThemeColor, razorpayKeyOwn} from "../../../../appConfig";
+import {RazorpayThemeColor, razorpayExtensionKey} from "../../../../appConfig";
 import {endPoints} from "@/network/endPoints";
 import {loadScript} from "@/constants/constant";
 import {useRouter} from "next/navigation";
@@ -113,7 +113,7 @@ function MidTermCard({
     const recId = result?.data?.data?.data?.recID;
 
     const options = {
-      key: razorpayKeyOwn,
+      key: razorpayExtensionKey,
       order_id: razOrderId,
       customer_id: customerId,
       name: "Cityfurnish",

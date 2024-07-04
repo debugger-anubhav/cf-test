@@ -15,7 +15,8 @@ const AnnouncementBar = () => {
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
             <img
-              src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
+              // src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
+              src="https://d3juy0zp6vqec8.cloudfront.net/images/fire.webp"
               alt="beach"
               className={styles.icons_style}
               loading="lazy"
@@ -23,7 +24,7 @@ const AnnouncementBar = () => {
             <span className=" px-1 text-222">
               {string.landing_page.announcement_bar}
             </span>
-            <span className="px-1 text-[#2581F7]">
+            <span className="px-[2px] text-[#103DB2]">
               {string.landing_page.coupon_code}
             </span>
             <img

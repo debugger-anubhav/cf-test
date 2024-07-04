@@ -4,14 +4,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
-// import {useRouter} from "next/navigation";
-// import {
-//   CityWiseBannerWebsite,
-//   CityNameToId,
-//   CityWiseBannerMobile,
-//   CityWiseBannerTablet,
-// } from "@/constants/constant";
-// import Image from "@/components/Image";
 import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
@@ -39,7 +31,6 @@ const getCityPrimaryBanner = city => {
 };
 
 const HeroBanner = () => {
-  // const router = useRouter();
   const {cityName, showAllRentLink} =
     useSelector(state => state.homePagedata) || {};
 
@@ -60,14 +51,6 @@ const HeroBanner = () => {
       link: "/discount-deals",
     },
   ]);
-
-  // const handleRedirection = link => {
-  //   if (showLinkForRentPage && !link.includes("citymax")) {
-  //     router.push(`/${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`);
-  //   } else {
-  //     router.push(`${link}`);
-  //   }
-  // };
 
   useEffect(() => {
     setShowLinkForRentPage(showAllRentLink);
@@ -135,7 +118,6 @@ const HeroBanner = () => {
                   quality="auto"
                   priority
                   className="cursor-pointer rounded-lg"
-                  // onClick={() => handleRedirection(link)}
                   style={{pointerEvents: "all"}}
                 />
               </Link>

@@ -105,7 +105,7 @@ const KYCSalary = ({handleKycState, cibilDocsData}) => {
   const submitHandler = () => {
     const error = formErrors;
     if (!formData?.financialDocumentProof?.length > 0) {
-      error.financialDocumentProof = "Please upload the salary slip proof";
+      error.financialDocumentProof = "Please upload the bank statement";
     } else {
       error.financialDocumentProof = "";
     }
