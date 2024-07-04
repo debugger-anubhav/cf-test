@@ -55,7 +55,8 @@ export default function SdkIntegration({item, status}) {
         const config = new window.HyperKycConfig(
           token,
           // "pan_db",
-          "poa_selfie",
+          // "poa_selfie",
+          "City-Furnish-Workflow",
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);
