@@ -69,6 +69,7 @@ const inter = localFont({
 export default function RootLayout({children}) {
   const gtmIds = [process.env.NEXT_PUBLIC_GOOGLE_TAGMANAGER_ID];
   const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
+  console.log("clarity id", clarityId);
 
   return (
     <html
