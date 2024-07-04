@@ -38,18 +38,16 @@ export default function GoogleTagManager(props) {
           />
         ))}
 
-        {
-          nsIncludedGTMId && (
-            <noscript>
-              <iframe
-                src={`https://www.googletagmanager.com/ns.html?id=${nsIncludedGTMId}`}
-                height="0"
-                width="0"
-                style={{display: "none", visibility: "hidden"}}
-              />
+        {nsIncludedGTMId && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${nsIncludedGTMId}`}
+              height="0"
+              width="0"
+              style={{display: "none", visibility: "hidden"}}
+            />
           </noscript>
-          )
-        }
+        )}
 
         <Script
           id="_next-gtm-init"

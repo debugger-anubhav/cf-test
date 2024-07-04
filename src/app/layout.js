@@ -298,7 +298,7 @@ var CaptchaCallback = function(){
         {/*
         if (typeof gtag === 'function' && '${login}' !== '') {
           gtag('set', 'user_id', '${login}');
-        }*/}
+        } */}
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <Script
