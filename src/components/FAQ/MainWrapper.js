@@ -76,22 +76,19 @@ const MainWrapper = () => {
       Object.values(dynamicData).forEach(dataArray => {
         dataArray.forEach(item => {
           if (
-            item?.que?.toLowerCase().includes(searchKeyword) ||
-            item?.ans?.toLowerCase().includes(searchKeyword)
+            item?.que?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+            item?.ans?.toLowerCase().includes(searchKeyword.toLowerCase())
           ) {
             temp.push(item);
           }
         });
       });
-
-      // Set the filtered data to state
       if (temp.length > 0) {
         setFaqData(temp);
       } else {
         setFaqData([]);
       }
     } else {
-      // If searchKeyword is empty, set faqData to default based on selected tab (value)
       setFaqData(dynamicData[value]);
     }
   }, [searchKeyword, dynamicData, value]);
