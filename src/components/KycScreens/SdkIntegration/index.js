@@ -18,33 +18,21 @@ export default function SdkIntegration({item, status}) {
   // );
 
   const handler = HyperKycResult => {
-    console.log(HyperKycResult, "ppppppppppppppppppp");
-    switch (HyperKycResult.status) {
-      // ----Incomplete workflow-----
+    const details = HyperKycResult;
+    details.userId = userId;
+    details.orderId = data?.dealCodeNumber;
+    saveHyperVergeDetails(details);
+  };
 
-      case "user_cancelled":
-        // <<Insert code block 1>>
-        <p>fdshfsdh</p>;
-        break;
-      case "error":
-        // <<Insert code block 2>>
-        <p>fdshfsdh</p>;
-        break;
-
-      // ----Complete workflow-----
-
-      case "auto_approved":
-        // <<Insert code block 3>>
-        <p>fdshfsdh</p>;
-        break;
-      case "auto_declined":
-        // <<Insert code block 4>>
-        <p>fdshfsdh</p>;
-        break;
-      case "needs_review":
-        // <<Insert code block 5>>
-        break;
-    }
+  const saveHyperVergeDetails = details => {
+    baseInstance
+      .post(endPoints.kycPage.saveHyperVergeKycDetails, {
+        details,
+      })
+      .then(res => {
+        console.log(res, "response of savehyperverdetails");
+      })
+      .catch(err => console.log(err));
   };
 
   const handleClick = () => {
@@ -54,13 +42,10 @@ export default function SdkIntegration({item, status}) {
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(
           token,
-          // "pan_db",
-          // "poa_selfie",
           "City-Furnish-Workflow",
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);
-        // console.log(dddd)
       })
       .catch(err => console.log(err));
   };
