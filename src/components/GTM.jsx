@@ -6,7 +6,14 @@ import Script from "next/script";
 let currentDataLayerName;
 
 export default function GoogleTagManager(props) {
-  const {gtmIds, dataLayerName = "dataLayer", auth, preview, dataLayer, includeInDevelopment = false} = props;
+  const {
+    gtmIds,
+    dataLayerName = "dataLayer",
+    auth,
+    preview,
+    dataLayer,
+    includeInDevelopment = false,
+  } = props;
   if (currentDataLayerName === undefined) {
     currentDataLayerName = dataLayerName;
   }
@@ -17,17 +24,18 @@ export default function GoogleTagManager(props) {
 
   if (
     (process.env.NODE_ENV === "production" &&
-    process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") || includeInDevelopment
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") ||
+    includeInDevelopment
   ) {
     return (
       <>
         {gtmIds.map((gtmId, index) => (
-            <Script
-              key={`gtm-script-${index}`}
-              // type="text/partytown"
-              strategy="afterInteractive"
-              src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
-            />
+          <Script
+            key={`gtm-script-${index}`}
+            // type="text/partytown"
+            strategy="afterInteractive"
+            src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
+          />
         ))}
 
         <Script
@@ -61,8 +69,7 @@ export default function GoogleTagManager(props) {
         />
       </>
     );
-  } 
-  else {
+  } else {
     return null;
   }
 }

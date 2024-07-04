@@ -7,7 +7,6 @@ import localFont from "@next/font/local";
 import Script from "next/script";
 // import Head from "next/head";
 import GTM from "@/components/GTM";
-import Head from "next/head";
 // import workerScript from "worker-loader!./worker";
 // import LoadWorker from "./load-worker";
 
