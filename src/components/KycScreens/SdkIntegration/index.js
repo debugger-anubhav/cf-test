@@ -5,11 +5,13 @@ import {baseInstance} from "@/network/axios";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
+import KycCommonDrawer from "../KycCommonDrawer";
 
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
+  const [qustionDrawer, setQustionDrawer] = useState(false);
 
   // const hyperKycConfig = new window.HyperKycConfig(
   //    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6InNtbGNpNiIsImhhc2giOiIwYTk3OGM3ZjE5OWRhYzJiYzgzMDk5NzY3OTY0Y2Y1MzA1OTc5NmFlYTRiYjI3NjI3Yzg2M2U4ZjQyNzhkYzM0IiwiaWF0IjoxNzE5NTU3MzUzLCJleHAiOjE3MTk2MDA1NTMsImp0aSI6IjRiNDhkNmViLTY2YjQtNDdhMy1iYmZhLWNiZTlmNTdkNWFhNiJ9.ZKTgMXjM1ayb3Rqea6MvotH0zf6nV-U6Ju8ItYR0OT1Bq61cg433GYefinxceg_YzTFXCa7rNpegJ0Tp5gyklAM78L3-SMkxxiuCtjEdfdun0vaTwexsKQBTUcOGxLMCld6Sua-WYVtkUgY00Wm2G0EYlaS0OkxrpBTpF6WucaU ",
@@ -54,10 +56,39 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);
   }, [data]);
 
+  const drawerContent = () => {
+    return (
+      <div>
+        <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
+          Question: Lorem ipsum dolor sit amet consectetur?
+        </div>
+        <button
+          className={`${styles.cancle_btn} w-fit `}
+          onClick={() => setQustionDrawer(false)}>
+          Proceed
+        </button>
+      </div>
+    );
+  };
   return (
-    <div className={styles.details_box} onClick={handleClick}>
-      <div className={styles.detail_heading}>{item?.stage_name}</div>
-      <div className={styles.sub_heading}>{status}</div>
-    </div>
+    <>
+      {/* <button
+        onClick={() => setQustionDrawer(true)}>
+        qusetion screen
+      </button> */}
+      <div className={styles.details_box} onClick={handleClick}>
+        <div className={styles.detail_heading}>{item?.stage_name}</div>
+        <div className={styles.sub_heading}>{status}</div>
+      </div>
+
+      {qustionDrawer && (
+        <KycCommonDrawer
+          content={drawerContent()}
+          setChangeProfession={setQustionDrawer}
+          changeProfession={qustionDrawer}
+          heading={"Questions"}
+        />
+      )}
+    </>
   );
 }

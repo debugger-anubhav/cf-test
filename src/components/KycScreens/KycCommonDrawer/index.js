@@ -3,7 +3,11 @@ import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
 
-export default function KycCommonDrawer({content, setChangeProfession}) {
+export default function KycCommonDrawer({
+  content,
+  setChangeProfession,
+  heading,
+}) {
   const [isOpen, setIsOpen] = React.useState(true);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
 
@@ -40,7 +44,7 @@ export default function KycCommonDrawer({content, setChangeProfession}) {
         onClose={toggleDrawer(false)}>
         <div className={styles.drawer_content_wrapper}>
           <div className={`${styles.heading}`}>
-            Change Profession?
+            {heading}
             <span
               onClick={event => {
                 event.stopPropagation();

@@ -171,6 +171,7 @@ export default function DashboardComponent() {
           content={drawerContent()}
           setChangeProfession={setChangeProfession}
           changeProfession={changeProfession}
+          heading={"Change Profession?"}
         />
       )}
 
