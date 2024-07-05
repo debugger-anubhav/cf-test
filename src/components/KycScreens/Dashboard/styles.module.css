@@ -72,3 +72,6 @@
 .content_text {
   @apply font-Poppins py-8 md:text-16 text-14 text-71717A;
 }
+.radio_button {
+  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
+}

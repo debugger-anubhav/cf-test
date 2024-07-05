@@ -12,7 +12,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
   const [qustionDrawer, setQustionDrawer] = useState(false);
-
+  const [saveHVData, setSaveHVData] = useState(null);
   // const hyperKycConfig = new window.HyperKycConfig(
   //    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6InNtbGNpNiIsImhhc2giOiIwYTk3OGM3ZjE5OWRhYzJiYzgzMDk5NzY3OTY0Y2Y1MzA1OTc5NmFlYTRiYjI3NjI3Yzg2M2U4ZjQyNzhkYzM0IiwiaWF0IjoxNzE5NTU3MzUzLCJleHAiOjE3MTk2MDA1NTMsImp0aSI6IjRiNDhkNmViLTY2YjQtNDdhMy1iYmZhLWNiZTlmNTdkNWFhNiJ9.ZKTgMXjM1ayb3Rqea6MvotH0zf6nV-U6Ju8ItYR0OT1Bq61cg433GYefinxceg_YzTFXCa7rNpegJ0Tp5gyklAM78L3-SMkxxiuCtjEdfdun0vaTwexsKQBTUcOGxLMCld6Sua-WYVtkUgY00Wm2G0EYlaS0OkxrpBTpF6WucaU ",
   //   "workflow_uZRJMIc",
@@ -31,11 +31,18 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     baseInstance
       .post(endPoints.kycPage.saveHyperVergeKycDetails, details)
       .then(res => {
-        console.log(res, "response of savehyperverdetails");
+        console.log(res?.data?.data, "response of savehyperverdetails");
+        setSaveHVData(res?.data?.data);
         getDashboardDetailsApi();
       })
       .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    if (saveHVData?.type === "questions") {
+      setQustionDrawer(true);
+    }
+  }, [saveHVData]);
 
   const handleClick = () => {
     baseInstance
@@ -59,12 +66,35 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const drawerContent = () => {
     return (
       <div>
+        {console.log(saveHVData?.data?.data, "saveHVData?.data?.question")}
+        {console.log(saveHVData?.type, "fffffffff?.question")}
         <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
-          Question: Lorem ipsum dolor sit amet consectetur?
+          Question: {saveHVData?.data?.data?.question}
         </div>
+        <div className="flex flex-col w-[90%] gap-2">
+          {saveHVData?.data?.data?.optionsList?.map((item, index) => {
+            return (
+              <div
+                className="flex gap-3 items-center cursor-pointer"
+                key={index.toString()}>
+                <input
+                  type="radio"
+                  className={styles.radio_button}
+                  name="radioGroup"
+                />
+                <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6">
+                  {item}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
         <button
-          className={`${styles.cancle_btn} w-fit `}
-          onClick={() => setQustionDrawer(false)}>
+          className={`${styles.cancle_btn} !w-[80%]`}
+          onClick={() => {
+            setQustionDrawer(false);
+          }}>
           Proceed
         </button>
       </div>
@@ -72,10 +102,6 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   };
   return (
     <>
-      {/* <button
-        onClick={() => setQustionDrawer(true)}>
-        qusetion screen
-      </button> */}
       <div className={styles.details_box} onClick={handleClick}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
