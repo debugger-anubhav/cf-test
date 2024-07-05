@@ -44,50 +44,8 @@ const Image = ({src, alt, priority = false, loading = "lazy", ...props}) => {
   return (
     <div>
       {priority ? <link rel="preload" as="image" href={formattedUrl} /> : null}
-      <NextImage
-        src={formattedUrl}
-        alt={alt}
-        // width={800}
-        // height={500}
-        // sizes={sizes}
-        priority={priority}
-        {...props}
-      />
+      <NextImage src={formattedUrl} alt={alt} priority={priority} {...props} />
     </div>
-    // <div
-    //   style={{
-    //     width: "100%",
-    //     height,
-    //   }}>
-    //   <link rel="preload" as="image" href={src} />
-
-    //   <div style={{position: "relative", width: "100%"}}>
-    //     <NextImage
-    //       {...props}
-    //       src={formattedUrl}
-    //       alt={alt}
-    //       fill
-    //       ref={ref}
-    //       // sizes={sizes}
-    //       loading={loading}
-    //       loader={({src, width}) => `${src}?w=${width}&q=50`}
-    //       onLoadingComplete={({naturalHeight}) => {
-    //         console.log("natural height", naturalHeight);
-    //         setHeight(naturalHeight);
-    //       }}
-    //       onLoad={() => {
-    //         console.log("loaded how");
-    //         setIsLoaded(true);
-    //       }}
-    //       priority={loading === "eager" ? priority : false}
-    //       style={{
-    //         width: undefined,
-    //         height: undefined,
-    //         display: isLoaded ? "block" : "none",
-    //       }}
-    //     />
-    //   </div>
-    // </div>
   );
 };
 
