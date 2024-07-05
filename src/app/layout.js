@@ -157,7 +157,6 @@ export default function RootLayout({children}) {
         <Script
           src="//in.fw-cdn.com/30445413/247408.js"
           chat="true"
-          type="text/partytown"
           strategy="afterInteractive"
         />
         {/* <link
