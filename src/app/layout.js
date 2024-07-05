@@ -150,15 +150,21 @@ export default function RootLayout({children}) {
         <GTM
           gtmIds={gtmIds}
           nsIncludedGTMId={nsIncludedGTMId}
-          includeInDevelopment
+          // includeInDevelopment
         />
-        <Clarity includeInDevelopment clarityId={clarityId} />
+        <Clarity
+          // includeInDevelopment
+          clarityId={clarityId}
+        />
 
-        <Script
-          src="//in.fw-cdn.com/30445413/247408.js"
-          chat="true"
-          strategy="afterInteractive"
-        />
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <Script
+            src="//in.fw-cdn.com/30445413/247408.js"
+            chat="true"
+            strategy="afterInteractive"
+          />
+        )}
+
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"
