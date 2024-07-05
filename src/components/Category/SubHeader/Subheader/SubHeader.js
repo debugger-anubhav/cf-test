@@ -425,7 +425,7 @@ const SubHeader = ({params}) => {
       ),
     );
     if (!isCategoryValid && !isSubCategoryValid) {
-      redirect("/");
+      redirect("/404");
     }
   }, [getAllAndSubCategoryData]);
 
