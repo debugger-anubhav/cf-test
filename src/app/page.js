@@ -19,7 +19,7 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import MenuList from "@/components/Common/MenuList";
 // import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
-// import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
+import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 // import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 // import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 
@@ -58,10 +58,10 @@ const OffersAndCoupons = loadable(
 //   {fallback: <NewlyLauncedSkeleton />},
 // );
 
-// const DownloadForMobile = loadable(
-//   () => import("@/components/Home/DownloadForMobile"),
-//   {fallback: <DownloadForMobileSkeleton />},
-// );
+const DownloadForMobile = loadable(
+  () => import("@/components/Home/DownloadForMobile"),
+  {fallback: <DownloadForMobileSkeleton />},
+);
 
 // const PreDesignCombos = loadable(
 //   () => import("@/components/Home/PredesignCombos"),
@@ -170,8 +170,8 @@ export default function Home() {
 
         <OffersAndCoupons />
         <RentNowBanner params={"home-page"} />
-        {/* <DownloadForMobile />
-        <PreDesignCombos />
+        <DownloadForMobile />
+        {/* <PreDesignCombos />
         <HasselFreeServicesCards />
         <LimetedPreiodDiscount />
         <NewlyLaunched />
