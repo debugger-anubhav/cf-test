@@ -175,7 +175,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         <BackIcon
           color={"#222222"}
           size={20}
-          onClick={() => dispatch(setKycScreenName("selectOrderId"))}
+          onClick={() => dispatch(setKycScreenName("dashboard"))}
           className={"cursor-pointer"}
         />
         Financial Information

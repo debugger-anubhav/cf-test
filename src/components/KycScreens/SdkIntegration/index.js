@@ -6,7 +6,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 
-export default function SdkIntegration({item, status}) {
+export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
@@ -18,19 +18,19 @@ export default function SdkIntegration({item, status}) {
   // );
 
   const handler = HyperKycResult => {
-    const details = HyperKycResult;
-    details.userId = userId;
-    details.orderId = data?.dealCodeNumber;
-    saveHyperVergeDetails(details);
+    saveHyperVergeDetails({
+      ...HyperKycResult,
+      userId,
+      orderId: data?.dealCodeNumber,
+    });
   };
 
   const saveHyperVergeDetails = details => {
     baseInstance
-      .post(endPoints.kycPage.saveHyperVergeKycDetails, {
-        details,
-      })
+      .post(endPoints.kycPage.saveHyperVergeKycDetails, details)
       .then(res => {
         console.log(res, "response of savehyperverdetails");
+        getDashboardDetailsApi();
       })
       .catch(err => console.log(err));
   };

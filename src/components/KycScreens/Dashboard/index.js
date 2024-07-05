@@ -31,7 +31,7 @@ export default function DashboardComponent() {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [changeProfession, setChangeProfession] = useState(false);
 
-  const getDashboardDetails = () => {
+  const getDashboardDetailsApi = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
       .then(res => {
@@ -116,7 +116,9 @@ export default function DashboardComponent() {
       dispatch(setKycScreenName("personalDetails"));
     }
     if (item.id === 3) {
-      dispatch(setKycScreenName("financialInfo"));
+      if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
+        dispatch(setKycScreenName("financialInfo"));
+      }
     }
     if (item.id === 5) {
       dispatch(setKycScreenName("professionalDetails"));
@@ -124,7 +126,7 @@ export default function DashboardComponent() {
   };
 
   useEffect(() => {
-    getDashboardDetails();
+    getDashboardDetailsApi();
   }, []);
 
   useEffect(() => {
@@ -230,6 +232,7 @@ export default function DashboardComponent() {
                     <SdkIntegration
                       item={item}
                       status={convertStatus(item?.stage_status)}
+                      getDashboardDetailsApi={getDashboardDetailsApi}
                     />
                   </div>
                 );
