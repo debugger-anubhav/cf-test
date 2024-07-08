@@ -71,7 +71,6 @@ export default function RootLayout({children}) {
     process.env.NEXT_PUBLIC_GOOGLE_TAGMANAGER_ID,
     process.env.NEXT_PUBLIC_NS_GTM_ID,
   ].filter(Boolean);
-  const clarityId = process.env.NEXT_PUBLIC_CLARITY_ID;
   const nsIncludedGTMId = process.env.NEXT_PUBLIC_NS_GTM_ID;
 
   return (
@@ -152,7 +151,7 @@ export default function RootLayout({children}) {
           nsIncludedGTMId={nsIncludedGTMId}
           includeInDevelopment
         />
-        <Clarity includeInDevelopment clarityId={clarityId} />
+        <Clarity includeInDevelopment />
 
         <Script
           src="//in.fw-cdn.com/30445413/247408.js"
