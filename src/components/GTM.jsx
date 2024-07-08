@@ -63,9 +63,8 @@ export default function GoogleTagManager(props) {
           }}
         />
 
-        <Script
+        <script
           id="plugin-google-tagmanager"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];
