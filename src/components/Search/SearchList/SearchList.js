@@ -48,7 +48,7 @@ const SearchList = () => {
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
   const [isLogin, setIsLogin] = useState();
-
+  const userId = decrypt(getLocalStorage("_ga"));
   useEffect(() => {
     const url = window?.location.pathname.split("/");
     const key = url[url.length - 1].replace(/%20/g, " ");
@@ -70,9 +70,7 @@ const SearchList = () => {
       .get(
         endPoints.savedItems +
           `?cityId=${cityId}&userId=${
-            isValid
-              ? decrypt(getLocalStorage("_ga"))
-              : decryptBase64(getLocalStorage("tempUserID"))
+            isValid ? userId : decryptBase64(getLocalStorage("tempUserID"))
           }`,
       )
       .then(res => {
@@ -89,12 +87,11 @@ const SearchList = () => {
     const isValid = await checkAuthentication();
     setIsLogin(isValid);
 
-    isValid && getSavedItems(isValid);
+    userId && getSavedItems(isValid);
   };
 
   useEffect(() => {
-    const isValid = checkAuthentication();
-    isValid && getSavedItems();
+    userId && getSavedItems();
   }, [refreshState]);
 
   useEffect(() => {
