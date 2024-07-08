@@ -70,30 +70,7 @@ export default function GoogleTagManager(props) {
                 window.${dataLayerName} = window.${dataLayerName} || [];
                 function gtag(){dataLayer.push(arguments);}
 
-                const userId = localStorage.getItem("_ga");
-                fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
-                  method: "POST",
-                  body: JSON.stringify({
-                    userId: JSON.parse(userId)
-                  }),
-                })
-                .then(res => res.json())
-                .then(res => {
-                  window.fcWidgetMessengerConfig = {
-                    cf_userid: res.data.userId,
-                    meta: {
-                      cf_userid: res.data.userId,
-                    },
-                  }
-
-                  gtag(
-                    'config',
-                    "G-XWKD9DJ015", {
-                      "transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux",
-                      "eiuid" : res.data.userId
-                    }
-                  );
-                })
+                
 
                 gtag('js', new Date());
                 [${gtmIds.map(
