@@ -1,6 +1,6 @@
 "use client";
 
-import React, {memo, useEffect, useRef, useState} from "react";
+import React, {Fragment, memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
@@ -114,10 +114,9 @@ const RecentlyViewedProduct = ({page}) => {
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
             {homePageReduxData?.recentProduct?.map((item, index) => {
               return (
-                <>
+                <Fragment key={index.toString()}>
                   {(item?.image || item?.price) && (
                     <div
-                      key={index.toString()}
                       className={`${styles.child ?? ""}  ${
                         index === homePageReduxData?.recentProduct?.length - 1
                           ? "mr-[16px]"
@@ -151,7 +150,7 @@ const RecentlyViewedProduct = ({page}) => {
                       />
                     </div>
                   )}
-                </>
+                </Fragment>
               );
             })}
           </div>

@@ -86,8 +86,6 @@ export default function GoogleTagManager(props) {
                     },
                   }
 
-                  console.log("res", res)
-
                   gtag(
                     'config',
                     "G-XWKD9DJ015", {
