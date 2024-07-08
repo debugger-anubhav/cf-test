@@ -115,13 +115,16 @@ export default function DashboardComponent() {
     if (item.id === 4) {
       dispatch(setKycScreenName("personalDetails"));
     }
-    if (item.id === 3) {
+    if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
         dispatch(setKycScreenName("financialInfo"));
       }
     }
-    if (item.id === 5) {
+    if (item.id === 3) {
       dispatch(setKycScreenName("professionalDetails"));
+    }
+    if (item.id === 7) {
+      dispatch(setKycScreenName("educationalDetails"));
     }
   };
 
@@ -147,7 +150,9 @@ export default function DashboardComponent() {
         </div>
         <div className="flex w-fit">
           <div className={`${styles.profession_row} md:flex hidden`}>
-            <div className={styles.profession_left}>Profession: Salaried </div>
+            <div className={styles.profession_left}>
+              Profession: {dashboardDetails?.professionDetail?.profession}{" "}
+            </div>
             <div
               className={styles.profession_right}
               onClick={() => setChangeProfession(true)}>
@@ -158,7 +163,9 @@ export default function DashboardComponent() {
       </div>
 
       <div className={`${styles.profession_row} flex md:hidden`}>
-        <div className={styles.profession_left}>Profession: Salaried </div>
+        <div className={styles.profession_left}>
+          Profession: {dashboardDetails?.professionDetail?.profession}{" "}
+        </div>
         <div
           className={styles.profession_right}
           onClick={() => setChangeProfession(true)}>

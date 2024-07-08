@@ -30,6 +30,7 @@ import DashboardComponent from "@/components/KycScreens/Dashboard/index";
 import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
+import EducationalDetails from "@/components/KycScreens/EducationalDetails";
 
 const DocMain = () => {
   const dispatch = useDispatch();
@@ -334,6 +335,7 @@ const DocMain = () => {
 
           {currentScreen === "dashboard" && <DashboardComponent />}
           {currentScreen === "professionalDetails" && <ProfessionalDetails />}
+          {currentScreen === "educationalDetails" && <EducationalDetails />}
 
           {currentScreen === "personalDetails" && (
             <div className="mt-8">
