@@ -2,7 +2,7 @@ import React from "react";
 import Script from "next/script";
 
 export default function Clarity(props) {
-  const {includeInDevelopment = false, clarityId} = props;
+  const {includeInDevelopment = false} = props;
 
   if (
     (process.env.NODE_ENV === "production" &&
