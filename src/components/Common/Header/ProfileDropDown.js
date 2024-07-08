@@ -66,7 +66,7 @@ export default function ProfileDropDown({setShowProfileDropdown}) {
                 router.push(ele?.link);
               } else {
                 // remove userid
-                // window?.fcWidget.user.clear();
+                window?.fcWidget.user.clear();
                 cookie.remove("ci_sessions");
                 authCookies.remove("authToken", {path: "/"});
                 authCookies.remove("userId", {path: "/"});
