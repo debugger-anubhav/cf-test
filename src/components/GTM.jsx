@@ -80,6 +80,7 @@ export default function GoogleTagManager(props) {
                 .then(res => res.json())
                 .then(res => {
                   window.fcWidgetMessengerConfig = {
+                    cf_userid: res.data.userId,
                     meta: {
                       cf_userid: res.data.userId,
                     },
