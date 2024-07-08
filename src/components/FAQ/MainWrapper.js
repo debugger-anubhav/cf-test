@@ -73,19 +73,30 @@ const MainWrapper = () => {
   useEffect(() => {
     const temp = [];
     if (searchKeyword?.trim()) {
-      // Check if searchKeyword is not empty or null
       Object.values(dynamicData).forEach(dataArray => {
         dataArray.forEach(item => {
+          const queContainsKeyword = item?.que
+            ?.toLowerCase()
+            .includes(searchKeyword.toLowerCase());
+          const ansContainsKeyword = item?.ans
+            ?.toLowerCase()
+            .includes(searchKeyword.toLowerCase());
+          const childresContainsKeyword =
+            item?.isChildren?.filter(ele =>
+              ele?.toLowerCase().includes(searchKeyword.toLowerCase()),
+            )?.length > 0;
+
           if (
-            item?.que?.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-            item?.ans?.toLowerCase().includes(searchKeyword.toLowerCase())
+            queContainsKeyword ||
+            ansContainsKeyword ||
+            childresContainsKeyword
           ) {
             temp.push(item);
           }
         });
       });
-    }
-    setFaqData(temp.length > 0 ? temp : dynamicData[value]); // Show all data if no search result
+      setFaqData([...temp]);
+    } else setFaqData(dynamicData[value]);
   }, [searchKeyword, dynamicData, value]);
 
   useEffect(() => {
