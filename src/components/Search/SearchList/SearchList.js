@@ -35,7 +35,6 @@ const SearchList = () => {
   const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
-  const categoryObj = {category: "home-furniture-rental"};
 
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
@@ -266,8 +265,8 @@ const SearchList = () => {
       {searchData?.length ? (
         ""
       ) : (
-        <div className="mb-12">
-          <RentFurnitureAndAppliances params={categoryObj.category} />
+        <div className="mb-12 lg:mb-20">
+          <RentFurnitureAndAppliances params={"home-page"} />
         </div>
       )}
     </>
@@ -278,7 +277,7 @@ export default SearchList;
 
 export const SearchListSkeleton = () => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 ">
       <RentFurnitureSkeleton />
     </div>
   );
