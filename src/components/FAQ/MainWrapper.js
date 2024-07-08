@@ -37,11 +37,11 @@ const MainWrapper = () => {
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
-  const [faqData, setFaqData] = useState();
   const [openIndex, setOpenIndex] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState();
+  const [faqData, setFaqData] = useState([]);
 
   const dynamicData = {
     0: HowItWorks,
@@ -72,7 +72,8 @@ const MainWrapper = () => {
 
   useEffect(() => {
     const temp = [];
-    if (searchKeyword) {
+    if (searchKeyword?.trim()) {
+      // Check if searchKeyword is not empty or null
       Object.values(dynamicData).forEach(dataArray => {
         dataArray.forEach(item => {
           if (
@@ -83,14 +84,8 @@ const MainWrapper = () => {
           }
         });
       });
-      if (temp.length > 0) {
-        setFaqData(temp);
-      } else {
-        setFaqData([]);
-      }
-    } else {
-      setFaqData(dynamicData[value]);
     }
+    setFaqData(temp.length > 0 ? temp : dynamicData[value]); // Show all data if no search result
   }, [searchKeyword, dynamicData, value]);
 
   useEffect(() => {
