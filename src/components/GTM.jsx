@@ -71,6 +71,7 @@ export default function GoogleTagManager(props) {
                 function gtag(){dataLayer.push(arguments);}
 
                 const userId = localStorage.getItem("_ga");
+                const userName= localStorage.getItem("user_name")
                 fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
                   method: "POST",
                   body: JSON.stringify({
@@ -81,6 +82,9 @@ export default function GoogleTagManager(props) {
                 .then(res => {
                   window.fcWidgetMessengerConfig = {
                     cf_userid: res.data.userId,
+                    firstName:userName,
+                    tags: ["public", "cf_web_dev"], 
+
                     meta: {
                       cf_userid: res.data.userId,
                     },
