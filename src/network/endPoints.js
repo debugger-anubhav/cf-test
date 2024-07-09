@@ -133,6 +133,7 @@ export const endPoints = {
       `fc-kycs/checkProfessionSelected?userId=${userId}&orderId=${orderId}`,
     uploadFinancialDocs: "fc-kycs/uploadFinancialDocs",
     saveHyperVergeKycDetails: "/fc-kycs/saveHyperVergeKycDetails",
+    verifyCrifAnswer: "fc-kycs/verifyCrifAnswer",
   },
 
   cityshieldPage: {

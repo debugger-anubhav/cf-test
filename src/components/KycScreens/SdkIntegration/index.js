@@ -42,7 +42,22 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     if (saveHVData?.type === "questions") {
       setQustionDrawer(true);
     }
+    // console.log(saveHVData,"saveHVData")
   }, [saveHVData]);
+
+  const handleVerfyAns = () => {
+    baseInstance
+      .post(endPoints.kycPage.verifyCrifAnswer, {
+        orderId: saveHVData?.data?.orderId,
+        reportId: saveHVData?.data?.reportId,
+        encode: saveHVData?.encode,
+        answer: "ELECTRONICA FINANCE LIMITED",
+        placedOrderId: data?.dealCodeNumber,
+      })
+      .then(res => console.log(res, "eeeeeeeeeee"))
+      .catch(err => console.log(err));
+    // setQustionDrawer(false);
+  };
 
   const handleClick = () => {
     baseInstance
@@ -66,13 +81,11 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const drawerContent = () => {
     return (
       <div>
-        {console.log(saveHVData?.data?.data, "saveHVData?.data?.question")}
-        {console.log(saveHVData?.type, "fffffffff?.question")}
         <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
-          Question: {saveHVData?.data?.data?.question}
+          Question: {saveHVData?.data?.question}
         </div>
         <div className="flex flex-col w-[90%] gap-2">
-          {saveHVData?.data?.data?.optionsList?.map((item, index) => {
+          {saveHVData?.data?.optionsList?.map((item, index) => {
             return (
               <div
                 className="flex gap-3 items-center cursor-pointer"
@@ -93,7 +106,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
         <button
           className={`${styles.cancle_btn} !w-[80%]`}
           onClick={() => {
-            setQustionDrawer(false);
+            handleVerfyAns();
           }}>
           Proceed
         </button>
