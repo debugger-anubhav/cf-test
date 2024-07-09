@@ -7,26 +7,27 @@ import {useSelector} from "react-redux";
 import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
+import Skeleton from "@mui/material/Skeleton";
 
 const getCityPrimaryBanner = city => {
   switch (city) {
     case "Bangalore":
-      return "new_wb_banner_bangalore_fqfx3d";
+      return "banglore_summer_sale_banner_jenysn";
 
     case "Delhi":
     case "Gurgaon":
     case "Ghaziabad/Noida":
     case "Faridabad":
-      return "new_wb_banner_delhi_mit6xx";
+      return "ncr_summer_sale_banner_tuugq7";
 
     case "Pune":
-      return "new_wb_banner_pune_ihwjzy";
+      return "pune_summer_sale_banner_gq5qtw";
 
     case "Mumbai":
-      return "new_wb_banner_mumbai_gdna1p";
+      return "mumbai_summer_sale_banner_atyspi";
 
     case "Hyderabad":
-      return "new_wb_banner_hyderabad_kvnyyv";
+      return "hyderabad_summer_sale_banner_ecxrzq";
   }
 };
 
@@ -39,15 +40,20 @@ const HeroBanner = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [banners, setBanners] = useState([
     {
-      url: "new_rt_banner_12_j4kmxj",
+      url: "",
+      link: "",
+      isDummy: true,
+    },
+    {
+      url: "appliance_banner_llwnir",
       link: "/home-appliances-rental",
     },
     {
-      url: "new_rt_banner_2_yfcaa6",
+      url: "citymax_banner_os9nbn",
       link: "/citymax",
     },
     {
-      url: "new_rt_banner_13_duh0dl",
+      url: "discount_deals_banner_q7vjac",
       link: "/discount-deals",
     },
   ]);
@@ -58,13 +64,15 @@ const HeroBanner = () => {
 
   useEffect(() => {
     if (cityName) {
-      setBanners([
-        {
-          url: getCityPrimaryBanner(cityName),
-          link: "/home-furniture-rental",
-        },
-        ...banners,
-      ]);
+      setBanners(prev => {
+        return [
+          {
+            url: getCityPrimaryBanner(cityName),
+            link: "/home-furniture-rental",
+          },
+          ...prev.filter(e => !e.isDummy),
+        ];
+      });
     }
   }, [cityName]);
 
@@ -74,7 +82,7 @@ const HeroBanner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [banners]);
+  }, []);
 
   return (
     <div
@@ -87,7 +95,7 @@ const HeroBanner = () => {
         onChange={index => setCurrentIndex(index)}
         swipeable
         width={"100%"}>
-        {banners.map(({url, link}) => {
+        {banners.map(({url, link, isDummy}) => {
           const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
           return (
             <Fragment key={link}>
@@ -105,21 +113,26 @@ const HeroBanner = () => {
                     ? `${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`
                     : link
                 }>
-                <CldImage
-                  src={url}
-                  alt={""}
-                  sizes="(max-width: 640px) 100vw,
+                {isDummy ? (
+                  <Skeleton variant="rectangular" className="w-full h-full" />
+                ) : (
+                  <CldImage
+                    src={url}
+                    alt={""}
+                    sizes="(max-width: 640px) 100vw,
                      (max-width: 768px) 75vw,
                      (max-width: 1024px) 50vw,
                      1920px"
-                  width={1920}
-                  height={800}
-                  crop="scale"
-                  quality="auto"
-                  priority
-                  className="cursor-pointer rounded-lg"
-                  style={{pointerEvents: "all"}}
-                />
+                    width={1920}
+                    improve={"50"}
+                    height={800}
+                    crop="scale"
+                    quality="auto:best"
+                    priority
+                    className="cursor-pointer rounded-lg"
+                    style={{pointerEvents: "all"}}
+                  />
+                )}
               </Link>
             </Fragment>
           );
