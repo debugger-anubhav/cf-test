@@ -8,7 +8,7 @@ import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
 import {CityNameToId, getLocalStorage} from "@/constants/constant";
-import useOnScreen from "@/hooks/useQuery";
+// import useOnScreen from "@/hooks/useQuery";
 
 const getCityPrimaryBanner = city => {
   switch (city) {
@@ -79,14 +79,14 @@ const HeroBanner = () => {
   }, [banners]);
 
   const ref = useRef(null);
-  const isVisible = useOnScreen(ref);
+  // const isVisible = useOnScreen(ref);
   const city = CityNameToId[getLocalStorage("cityId")];
 
-  useEffect(() => {
-    if (!isVisible) {
-      // console.log("can fetch", cityName);
-    }
-  }, [isVisible, cityName]);
+  // useEffect(() => {
+  // if (!isVisible) {
+  // console.log("can fetch", cityName);
+  // }
+  // }, [isVisible, cityName]);
 
   const actualData = useMemo(() => {
     return [
