@@ -1,6 +1,6 @@
 import {baseInstance, staticHeaders} from "@/network/axios";
 import {useQueryClient, useQuery as useReactQuery} from "@tanstack/react-query";
-import {useEffect, useMemo, useState} from "react";
+// import {useEffect, useMemo, useState} from "react";
 
 export const useQuery = (
   queryKey,
