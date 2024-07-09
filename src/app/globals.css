@@ -218,3 +218,11 @@ input[type="number"]::-webkit-outer-spin-button {
 .accordian {
   border-bottom: 1px solid #ededee !important;
 }
+
+.control-next {
+  right: -9px !important;
+}
+
+.control-prev {
+  left: -9px !important;
+}

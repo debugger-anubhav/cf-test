@@ -54,11 +54,11 @@ const HeroBanner = () => {
 
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const ref = useRef(null);
+  const timerId = useRef(undefined);
 
-  const actualData = useMemo(() => {
+  const completeBanners = useMemo(() => {
     if (cityName) {
       return [
         {
@@ -77,65 +77,74 @@ const HeroBanner = () => {
   }, [showAllRentLink]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % actualData.length);
-    }, 3000);
+    if (completeBanners.length !== banners.length) {
+      setCurrentIndex(0);
+      timerId.current = setInterval(() => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % completeBanners.length);
+      }, 3000);
+    } else {
+      console.log("i can start timer");
+      setCurrentIndex(1);
+    }
 
-    return () => clearInterval(interval);
-  }, [actualData]);
+    return () => clearInterval(timerId.current);
+  }, [completeBanners]);
 
   return (
     <div
-      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}
-      ref={ref}>
-      {actualData && (
-        <Carousel
-          showStatus={false}
-          showArrows
-          showThumbs={false}
-          selectedItem={currentIndex}
-          onChange={index => setCurrentIndex(index)}
-          swipeable
-          width={"100%"}>
-          {actualData.map(({url, link}) => {
-            const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
-            return (
-              <Fragment key={link}>
-                <Head>
-                  <link
-                    rel="preload"
-                    href={cloudinaryUrl}
-                    as="image"
-                    type="image/webp"
-                  />
-                </Head>
-                <Link
-                  href={
-                    showLinkForRentPage && !link.includes("citymax")
-                      ? `${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`
-                      : link
-                  }>
-                  <CldImage
-                    src={url}
-                    alt={""}
-                    sizes="(max-width: 640px) 100vw,
+      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
+      {completeBanners && (
+        <div className="landing_page_carousel">
+          <Carousel
+            showStatus={false}
+            showArrows
+            showThumbs={false}
+            selectedItem={currentIndex}
+            onChange={index => setCurrentIndex(index)}
+            swipeable
+            width={"100%"}>
+            {completeBanners.map(({url, link}) => {
+              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+              return (
+                <Fragment key={link}>
+                  <Head>
+                    <link
+                      rel="preload"
+                      href={cloudinaryUrl}
+                      as="image"
+                      type="image/webp"
+                    />
+                  </Head>
+                  <Link
+                    href={
+                      showLinkForRentPage && !link.includes("citymax")
+                        ? `${cityName
+                            .replace(/\//g, "-")
+                            ?.toLowerCase()}${link}`
+                        : link
+                    }>
+                    <CldImage
+                      src={url}
+                      alt={""}
+                      sizes="(max-width: 640px) 100vw,
                      (max-width: 768px) 75vw,
                      (max-width: 1024px) 50vw,
                      1920px"
-                    width={1920}
-                    improve={"50"}
-                    height={800}
-                    crop="scale"
-                    quality="auto:best"
-                    priority
-                    className="cursor-pointer rounded-lg"
-                    style={{pointerEvents: "all"}}
-                  />
-                </Link>
-              </Fragment>
-            );
-          })}
-        </Carousel>
+                      width={1920}
+                      improve={"50"}
+                      height={800}
+                      crop="scale"
+                      quality="auto:best"
+                      priority
+                      className="cursor-pointer rounded-lg"
+                      style={{pointerEvents: "all"}}
+                    />
+                  </Link>
+                </Fragment>
+              );
+            })}
+          </Carousel>
+        </div>
       )}
     </div>
   );
