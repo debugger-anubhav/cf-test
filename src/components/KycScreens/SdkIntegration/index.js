@@ -42,7 +42,10 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     if (saveHVData?.type === "questions") {
       setQustionDrawer(true);
     }
-    // console.log(saveHVData,"saveHVData")
+    if (saveHVData?.data?.cibilScore > 650) {
+      console.log("show automatically aditional information");
+    }
+    console.log(saveHVData?.data?.cibilScore, "saveHVData?.cibilScore");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {
