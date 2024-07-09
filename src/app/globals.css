@@ -63,8 +63,9 @@ body h1 h2 h3 h4 h5 h6 p {
   margin: 0 15px;
 }
 .landing_page_carousel .carousel .control-dots .dot {
-  width: 10px !important;
-  height: 10px !important;
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0 12px !important;
 }
 /* .landing_page_carousel .carousel .control-dots .selected {
   background: #597492 !important;
@@ -128,6 +129,7 @@ input[type="radio"]:checked {
   .landing_page_carousel .carousel .control-dots .dot {
     width: 9px !important;
     height: 9px !important;
+    margin: 0 10px !important;
   }
   .landing_page_carousel .carousel .control-dots {
     margin: 4px !important;
