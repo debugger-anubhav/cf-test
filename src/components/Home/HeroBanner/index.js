@@ -8,7 +8,6 @@ import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
 import {CityNameToId, getLocalStorage} from "@/constants/constant";
-// import useOnScreen from "@/hooks/useQuery";
 
 const getCityPrimaryBanner = city => {
   switch (city) {
@@ -32,71 +31,58 @@ const getCityPrimaryBanner = city => {
   }
 };
 
+const banners = [
+  {
+    url: "appliance_banner_llwnir",
+    link: "/home-appliances-rental",
+  },
+  {
+    url: "citymax_banner_os9nbn",
+    link: "/citymax",
+  },
+  {
+    url: "discount_deals_banner_q7vjac",
+    link: "/discount-deals",
+  },
+];
+
 const HeroBanner = () => {
+  const city = CityNameToId[getLocalStorage("cityId")];
+
   const {cityName, showAllRentLink} =
     useSelector(state => state.homePagedata) || {};
 
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const banners = [
-    {
-      url: "appliance_banner_llwnir",
-      link: "/home-appliances-rental",
-    },
-    {
-      url: "citymax_banner_os9nbn",
-      link: "/citymax",
-    },
-    {
-      url: "discount_deals_banner_q7vjac",
-      link: "/discount-deals",
-    },
-  ];
+  const [currentIndex, setCurrentIndex] = useState(1);
+
+  const ref = useRef(null);
+
+  const actualData = useMemo(() => {
+    if (cityName) {
+      return [
+        {
+          url: getCityPrimaryBanner(city),
+          link: "/home-furniture-rental",
+        },
+        ...banners,
+      ];
+    } else {
+      return [...banners];
+    }
+  }, [cityName]);
 
   useEffect(() => {
     setShowLinkForRentPage(showAllRentLink);
   }, [showAllRentLink]);
 
   useEffect(() => {
-    // if (cityName) {
-    //   setBanners([
-    //     {
-    //       url: getCityPrimaryBanner(cityName),
-    //       link: "/home-furniture-rental",
-    //     },
-    //     ...banners,
-    //   ]);
-    // }
-  }, [cityName]);
-
-  useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % banners.length);
+      setCurrentIndex(prevIndex => (prevIndex + 1) % actualData.length);
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [banners]);
-
-  const ref = useRef(null);
-  // const isVisible = useOnScreen(ref);
-  const city = CityNameToId[getLocalStorage("cityId")];
-
-  // useEffect(() => {
-  // if (!isVisible) {
-  // console.log("can fetch", cityName);
-  // }
-  // }, [isVisible, cityName]);
-
-  const actualData = useMemo(() => {
-    return [
-      {
-        url: getCityPrimaryBanner(city),
-        link: "/home-furniture-rental",
-      },
-      ...banners,
-    ];
-  }, [city]);
+  }, [actualData]);
 
   return (
     <div
