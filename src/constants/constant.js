@@ -683,3 +683,14 @@ export const MONTHLY_NOT_ALLOWED_PRODUCT = [
   "ACPWA1TONMPC03",
   "ACPWAMPC03",
 ];
+
+export const CityNameToId = {
+  45: "Delhi",
+  46: "Bangalore",
+  47: "Pune",
+  48: "Mumbai",
+  49: "Gurgaon",
+  50: "Ghaziabad/Noida",
+  51: "Hyderabad",
+  52: "Faridabad",
+};

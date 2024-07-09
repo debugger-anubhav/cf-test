@@ -1,5 +1,5 @@
 "use client";
-import React, {Fragment, useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useRef, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
@@ -7,7 +7,8 @@ import {useSelector} from "react-redux";
 import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
-import Skeleton from "@mui/material/Skeleton";
+import {CityNameToId, getLocalStorage} from "@/constants/constant";
+import useOnScreen from "@/hooks/useQuery";
 
 const getCityPrimaryBanner = city => {
   switch (city) {
@@ -38,12 +39,7 @@ const HeroBanner = () => {
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [banners, setBanners] = useState([
-    {
-      url: "",
-      link: "",
-      isDummy: true,
-    },
+  const banners = [
     {
       url: "appliance_banner_llwnir",
       link: "/home-appliances-rental",
@@ -56,24 +52,22 @@ const HeroBanner = () => {
       url: "discount_deals_banner_q7vjac",
       link: "/discount-deals",
     },
-  ]);
+  ];
 
   useEffect(() => {
     setShowLinkForRentPage(showAllRentLink);
   }, [showAllRentLink]);
 
   useEffect(() => {
-    if (cityName) {
-      setBanners(prev => {
-        return [
-          {
-            url: getCityPrimaryBanner(cityName),
-            link: "/home-furniture-rental",
-          },
-          ...prev.filter(e => !e.isDummy),
-        ];
-      });
-    }
+    // if (cityName) {
+    //   setBanners([
+    //     {
+    //       url: getCityPrimaryBanner(cityName),
+    //       link: "/home-furniture-rental",
+    //     },
+    //     ...banners,
+    //   ]);
+    // }
   }, [cityName]);
 
   useEffect(() => {
@@ -82,40 +76,59 @@ const HeroBanner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [banners]);
+
+  const ref = useRef(null);
+  const isVisible = useOnScreen(ref);
+  const city = CityNameToId[getLocalStorage("cityId")];
+
+  useEffect(() => {
+    if (!isVisible) {
+      // console.log("can fetch", cityName);
+    }
+  }, [isVisible, cityName]);
+
+  const actualData = useMemo(() => {
+    return [
+      {
+        url: getCityPrimaryBanner(city),
+        link: "/home-furniture-rental",
+      },
+      ...banners,
+    ];
+  }, [city]);
 
   return (
     <div
-      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      <Carousel
-        showStatus={false}
-        showArrows
-        showThumbs={false}
-        selectedItem={currentIndex}
-        onChange={index => setCurrentIndex(index)}
-        swipeable
-        width={"100%"}>
-        {banners.map(({url, link, isDummy}) => {
-          const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
-          return (
-            <Fragment key={link}>
-              <Head>
-                <link
-                  rel="preload"
-                  href={cloudinaryUrl}
-                  as="image"
-                  type="image/webp"
-                />
-              </Head>
-              <Link
-                href={
-                  showLinkForRentPage && !link.includes("citymax")
-                    ? `${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`
-                    : link
-                }>
-                {isDummy ? (
-                  <Skeleton variant="rectangular" className="w-full h-full" />
-                ) : (
+      className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}
+      ref={ref}>
+      {actualData && (
+        <Carousel
+          showStatus={false}
+          showArrows
+          showThumbs={false}
+          selectedItem={currentIndex}
+          onChange={index => setCurrentIndex(index)}
+          swipeable
+          width={"100%"}>
+          {actualData.map(({url, link}) => {
+            const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+            return (
+              <Fragment key={link}>
+                <Head>
+                  <link
+                    rel="preload"
+                    href={cloudinaryUrl}
+                    as="image"
+                    type="image/webp"
+                  />
+                </Head>
+                <Link
+                  href={
+                    showLinkForRentPage && !link.includes("citymax")
+                      ? `${cityName.replace(/\//g, "-")?.toLowerCase()}${link}`
+                      : link
+                  }>
                   <CldImage
                     src={url}
                     alt={""}
@@ -132,12 +145,12 @@ const HeroBanner = () => {
                     className="cursor-pointer rounded-lg"
                     style={{pointerEvents: "all"}}
                   />
-                )}
-              </Link>
-            </Fragment>
-          );
-        })}
-      </Carousel>
+                </Link>
+              </Fragment>
+            );
+          })}
+        </Carousel>
+      )}
     </div>
   );
 };

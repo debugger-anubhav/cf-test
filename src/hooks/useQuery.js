@@ -1,5 +1,6 @@
 import {baseInstance, staticHeaders} from "@/network/axios";
 import {useQueryClient, useQuery as useReactQuery} from "@tanstack/react-query";
+import {useEffect, useMemo, useState} from "react";
 
 export const useQuery = (
   queryKey,
@@ -22,3 +23,24 @@ export const useQuery = (
     onError: e => e,
   });
 };
+
+export default function useOnScreen(ref) {
+  const [isIntersecting, setIntersecting] = useState(false);
+
+  const observer = useMemo(
+    () =>
+      new IntersectionObserver(([entry]) =>
+        setIntersecting(entry.isIntersecting),
+      ),
+    [ref],
+  );
+
+  useEffect(() => {
+    if (ref.current) {
+      observer.observe(ref.current);
+      return () => observer.disconnect();
+    }
+  }, [ref.current]);
+
+  return isIntersecting;
+}

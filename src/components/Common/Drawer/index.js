@@ -144,7 +144,7 @@ function CommonDrawer({
     // );toggleDrawe
   };
 
-  const handleCityChange = (city, index) => {
+  const handleCityChange = city => {
     dispatch(selectedCityId(city?.id));
     dispatch(selectedCityName(city?.list_value));
     toggleDrawer("bottom", false);
@@ -342,7 +342,7 @@ function CommonDrawer({
                   `}
                     key={index.toString()}
                     onClick={() => {
-                      if (cartItemsLength < 1) handleCityChange(city, index);
+                      if (cartItemsLength < 1) handleCityChange(city);
                       else {
                         // toggleDrawer("bottom", false);
                         setState({...state, left: false, bottom: false});
