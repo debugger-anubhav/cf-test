@@ -22,7 +22,7 @@ export default function ProfessionalDetails() {
           ? "Professional details"
           : professionId === 2
           ? "GST certificate"
-          : professionId === 3
+          : professionId === 3 || professionId === 4
           ? "Nominee’s details"
           : "Professional details"}
       </div>
@@ -51,7 +51,7 @@ export default function ProfessionalDetails() {
 
         {professionId === 2 && <>open gst sdk</>}
 
-        {professionId === 3 && (
+        {(professionId === 3 || professionId === 4) && (
           <>
             <div className={styles.company_detail_wapper}>
               <label className={styles.label}>Nominee’s name</label>
@@ -75,7 +75,7 @@ export default function ProfessionalDetails() {
                         className={styles.radio_button}
                         name="radioGroup"
                       />
-                      <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6 text-71717A">
+                      <p className="border w-full border-DDDDDF md:p-4 p-3 rounded-xl md:text-16 text-14 font-Poppins tracking-0.3 leading-6 text-71717A">
                         {item}
                       </p>
                     </div>
