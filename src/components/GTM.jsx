@@ -69,9 +69,6 @@ export default function GoogleTagManager(props) {
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];
                 function gtag(){dataLayer.push(arguments);}
-
-                
-
                 gtag('js', new Date());
                 [${gtmIds.map(
                   id => "'" + id + "'",
