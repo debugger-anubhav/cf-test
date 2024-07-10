@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
 import {setKycScreenName} from "@/store/Slices";
+
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
@@ -123,7 +124,16 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   };
   return (
     <>
-      <div className={styles.details_box} onClick={handleClick}>
+      <div className={styles.details_wrapper}>
+        <div className={styles.details_box} onClick={handleClick}>
+          <div className={styles.detail_heading}>{item?.stage_name}</div>
+          <div className={styles.sub_heading}>{status}</div>
+        </div>
+      </div>
+
+      <div
+        onClick={handleClick}
+        className={`${styles.mobile_detail_box} border-b`}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
       </div>

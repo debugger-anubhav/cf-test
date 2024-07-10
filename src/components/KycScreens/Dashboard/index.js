@@ -65,10 +65,10 @@ export default function DashboardComponent() {
 
   const convertStatus = number => {
     if (number === 1)
-      return <p className={styles.status_style}>Under review</p>;
+      return <p className={`${styles.status_style}`}>Under review</p>;
     else if (number === 2)
       return (
-        <p className={styles.status_style}>
+        <p className={`${styles.status_style} text-[#2D9469]`}>
           Verified
           <ForwardArrow color={"#222222"} size={16} />
         </p>
@@ -280,20 +280,33 @@ export default function DashboardComponent() {
         ) : (
           <>
             {dashboardDetails?.allKycStages?.map((item, index) => {
-              return (
-                <div
-                  key={index.toString()}
-                  className={`${styles.mobile_detail_box} ${
-                    index === 4 ? "border-none" : "border-b"
-                  }`}>
-                  <div className={styles.detail_heading}>
-                    {item?.stage_name}
+              if (item.id === 1) {
+                return (
+                  <div key={index.toString()}>
+                    <SdkIntegration
+                      item={item}
+                      status={convertStatus(item?.stage_status)}
+                      getDashboardDetailsApi={getDashboardDetailsApi}
+                    />
                   </div>
-                  <div className={styles.sub_heading}>
-                    pending <ForwardArrow color={"#222222"} size={16} />
+                );
+              } else {
+                return (
+                  <div
+                    key={index.toString()}
+                    onClick={() => handleKycStagesClick(item)}
+                    className={`${styles.mobile_detail_box} ${
+                      index === 4 ? "border-none" : "border-b"
+                    }`}>
+                    <div className={styles.detail_heading}>
+                      {item?.stage_name}
+                    </div>
+                    <div className={styles.sub_heading}>
+                      {convertStatus(item?.stage_status)}
+                    </div>
                   </div>
-                </div>
-              );
+                );
+              }
             })}
           </>
         )}

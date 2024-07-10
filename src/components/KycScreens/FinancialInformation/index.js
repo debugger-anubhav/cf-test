@@ -61,10 +61,9 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const [disableButton, setDisableButton] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
-  const orderId = useSelector(
-    state => state.kycPage.selectedDataForKyc.dealCodeNumber,
-  );
-  const professionId = useSelector(state => state.kycPage.selectedProfessionId);
+  const kycSliceData = useSelector(state => state.kycPage);
+  const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
+  const professionId = kycSliceData.selectedProfessionId;
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
