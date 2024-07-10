@@ -170,26 +170,19 @@ export default function RootLayout({children}) {
                     body: JSON.stringify({
                       userId: JSON.parse(userId)
                     }),
-                    headers: {
-
-                    }
                   })
                   .then(res => res.json())
-                  .then(res => {
-                    
-                  window.dataLayer.push({"event":"logged_in_user","userid":res.data.userId})
-                  
+                  .then(res => {                    
+                    window.dataLayer.push({"event":"logged_in_user","userid":res.data.userId})
                     window.fcWidgetMessengerConfig = {
-                    cf_userid: res.data.userId,
-                    firstName : userName,
-                    tags: ["cf_web_dev"], 
+                      cf_userid: res.data.userId,
+                      firstName : userName,
+                      tags: ["cf_web_dev"], 
                       meta: {
                         cf_userid: res.data.userId,
                       },
                     }
-
                     window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux", "eiuid" : res.data.userId});
-
                   })
                   .catch(e => console.log('e',e))
                 `,
