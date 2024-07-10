@@ -3,11 +3,12 @@ import {getLocalStorage} from "@/constants/constant";
 import {endPoints} from "@/network/endPoints";
 import {baseInstance} from "@/network/axios";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
-
+import {setKycScreenName} from "@/store/Slices";
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
+  const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
@@ -44,8 +45,8 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     }
     if (saveHVData?.data?.cibilScore > 650) {
       console.log("show automatically aditional information");
+      dispatch(setKycScreenName("professionalDetails"));
     }
-    console.log(saveHVData?.data?.cibilScore, "saveHVData?.cibilScore");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {

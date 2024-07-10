@@ -30,12 +30,13 @@ export default function WorkProfession({orderId}) {
       });
   };
   const handleClickProfession = professionId => {
-    dispatch(setKycScreenName("dashboard"));
-    baseInstance.post(endPoints.kycPage.saveKycProfessions, {
-      userId,
-      orderId: orderId?.dealCodeNumber,
-      professionId,
-    });
+    baseInstance
+      .post(endPoints.kycPage.saveKycProfessions, {
+        userId,
+        orderId: orderId?.dealCodeNumber,
+        professionId,
+      })
+      .then(res => dispatch(setKycScreenName("dashboard")));
   };
 
   useEffect(() => {
