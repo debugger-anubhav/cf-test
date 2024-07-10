@@ -14,7 +14,11 @@ import {format, parse} from "date-fns";
 import {Skeleton} from "@mui/material";
 import KycCommonDrawer from "../KycCommonDrawer";
 import SdkIntegration from "../SdkIntegration";
-import {setKycScreenName, setSelectedProfessionId} from "@/store/Slices";
+import {
+  setKycScreenName,
+  setSelectedProfessionId,
+  setStageId,
+} from "@/store/Slices";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -117,6 +121,7 @@ export default function DashboardComponent() {
   };
 
   const handleKycStagesClick = item => {
+    dispatch(setStageId(item.id));
     if (item.id === 4) {
       dispatch(setKycScreenName("personalDetails"));
     }
