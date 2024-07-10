@@ -19,6 +19,7 @@ import {
   setSelectedProfessionId,
   setStageId,
 } from "@/store/Slices";
+import GstSdk from "../GstSdk";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -248,6 +249,16 @@ export default function DashboardComponent() {
                 return (
                   <div key={index.toString()}>
                     <SdkIntegration
+                      item={item}
+                      status={convertStatus(item?.stage_status)}
+                      getDashboardDetailsApi={getDashboardDetailsApi}
+                    />
+                  </div>
+                );
+              } else if (item.stage_name === "Additional Details") {
+                return (
+                  <div key={index.toString()}>
+                    <GstSdk
                       item={item}
                       status={convertStatus(item?.stage_status)}
                       getDashboardDetailsApi={getDashboardDetailsApi}

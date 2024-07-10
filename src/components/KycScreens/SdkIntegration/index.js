@@ -124,16 +124,16 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   };
   return (
     <>
-      <div className={styles.details_wrapper}>
-        <div className={styles.details_box} onClick={handleClick}>
-          <div className={styles.detail_heading}>{item?.stage_name}</div>
-          <div className={styles.sub_heading}>{status}</div>
-        </div>
+      <div
+        className={`!hidden md:!flex ${styles.details_box}`}
+        onClick={handleClick}>
+        <div className={styles.detail_heading}>{item?.stage_name}</div>
+        <div className={styles.sub_heading}>{status}</div>
       </div>
 
       <div
         onClick={handleClick}
-        className={`${styles.mobile_detail_box} border-b`}>
+        className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
       </div>
