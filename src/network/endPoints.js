@@ -134,6 +134,7 @@ export const endPoints = {
     uploadFinancialDocs: "fc-kycs/uploadFinancialDocs",
     saveHyperVergeKycDetails: "/fc-kycs/saveHyperVergeKycDetails",
     verifyCrifAnswer: "fc-kycs/verifyCrifAnswer",
+    getDocsDetails: "fc-kycs/getDocsDetails",
   },
 
   cityshieldPage: {

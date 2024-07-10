@@ -291,6 +291,7 @@ export const KycPageSlice = createSlice({
     cibilDocsData: "",
     selectedDataForKyc: "",
     kycScreenName: "selectOrderId",
+    selectedProfessionId: null,
   },
   reducers: {
     getOrderId(state, action) {
@@ -304,6 +305,9 @@ export const KycPageSlice = createSlice({
     },
     setKycScreenName(state, action) {
       state.kycScreenName = action.payload;
+    },
+    setSelectedProfessionId(state, action) {
+      state.selectedProfessionId = action.payload;
     },
   },
 });
@@ -454,6 +458,7 @@ export const {
   setCibilDocsData,
   setSelectedDataForKyc,
   setKycScreenName,
+  setSelectedProfessionId,
 } = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState, setUsedCoins} =

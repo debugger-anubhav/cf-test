@@ -60,9 +60,11 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
 
+  const userId = decrypt(getLocalStorage("_ga"));
   const orderId = useSelector(
     state => state.kycPage.selectedDataForKyc.dealCodeNumber,
   );
+  const professionId = useSelector(state => state.kycPage.selectedProfessionId);
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -106,6 +108,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
       }
     }
   };
+
   const submitHandler = () => {
     const error = formErrors;
     if (!formData?.financialDocumentProof?.length > 0) {
@@ -125,12 +128,12 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         subDocType: isSelected,
       }),
     );
-    allData.append("userId", decrypt(getLocalStorage("_ga")));
+    allData.append("userId", userId);
     for (let i = 0; i < formData.financialDocumentProof.length; i++) {
       allData.append("doc", formData.financialDocumentProof[i]);
     }
     allData.append("orderId", orderId);
-    allData.append("stageId", 3);
+    allData.append("stageId", professionId);
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
@@ -143,9 +146,24 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         setDisableButton(false);
       });
   };
+
   useEffect(() => {
     getAddProofList();
   }, []);
+
+  const getDocsDetailsApi = () => {
+    baseInstance
+      .post(endPoints.kycPage.getDocsDetails, {
+        orderId,
+        userId,
+        professionId,
+        stageId: 2,
+      })
+      .then(res => console.log(res))
+      .catch(err => console.log(err));
+  };
+
+  useEffect(getDocsDetailsApi, "getDocsDetailsApi");
 
   useEffect(() => {
     setFormData({financialDocumentProof: ""});

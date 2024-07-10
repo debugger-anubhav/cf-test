@@ -9,6 +9,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
+import {setSelectedProfessionId} from "../../../store/Slices";
 
 export default function WorkProfession({orderId}) {
   const userId = decrypt(getLocalStorage("_ga"));
@@ -30,6 +31,7 @@ export default function WorkProfession({orderId}) {
       });
   };
   const handleClickProfession = professionId => {
+    dispatch(setSelectedProfessionId(professionId));
     baseInstance
       .post(endPoints.kycPage.saveKycProfessions, {
         userId,

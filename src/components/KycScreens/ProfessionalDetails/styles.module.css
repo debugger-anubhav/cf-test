@@ -8,11 +8,14 @@
   @apply flex w-full my-6 flex-col gap-1;
 }
 .label_input_style {
-  @apply bg-white border w-full lg:w-[502px] rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-222 outline-none placeholder:text-16;
+  @apply bg-white border w-full lg:w-[502px] rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-71717A outline-none placeholder:text-16;
 }
 .label {
   @apply text-71717A font-Poppins;
 }
 .proceed {
   @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] w-fit px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+}
+.radio_button {
+  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }

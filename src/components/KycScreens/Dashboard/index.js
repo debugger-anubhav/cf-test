@@ -14,7 +14,7 @@ import {format, parse} from "date-fns";
 import {Skeleton} from "@mui/material";
 import KycCommonDrawer from "../KycCommonDrawer";
 import SdkIntegration from "../SdkIntegration";
-import {setKycScreenName} from "@/store/Slices";
+import {setKycScreenName, setSelectedProfessionId} from "@/store/Slices";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -36,6 +36,11 @@ export default function DashboardComponent() {
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
       .then(res => {
         setDashboardDetails(res?.data?.data);
+        dispatch(
+          setSelectedProfessionId(
+            res?.data?.data?.professionDetail?.profession_id,
+          ),
+        );
         setOrderDate(res?.data?.data?.orderDate);
         setLoadingSkeleton(false);
       })
