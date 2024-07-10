@@ -47,6 +47,10 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
       console.log("show automatically aditional information");
       dispatch(setKycScreenName("professionalDetails"));
     }
+    if (saveHVData?.data?.cibilScore < 650) {
+      dispatch(setKycScreenName("financialInfo"));
+    }
+    console.log(saveHVData?.data, "saveHVData");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {
