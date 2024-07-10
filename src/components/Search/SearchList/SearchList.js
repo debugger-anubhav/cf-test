@@ -35,7 +35,6 @@ const SearchList = () => {
   const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
-  const categoryObj = {category: "home-furniture-rental"};
 
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
@@ -49,7 +48,7 @@ const SearchList = () => {
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
   const [isLogin, setIsLogin] = useState();
-
+  const userId = decrypt(getLocalStorage("_ga"));
   useEffect(() => {
     const url = window?.location.pathname.split("/");
     const key = url[url.length - 1].replace(/%20/g, " ");
@@ -71,9 +70,7 @@ const SearchList = () => {
       .get(
         endPoints.savedItems +
           `?cityId=${cityId}&userId=${
-            isValid
-              ? decrypt(getLocalStorage("_ga"))
-              : decryptBase64(getLocalStorage("tempUserID"))
+            isValid ? userId : decryptBase64(getLocalStorage("tempUserID"))
           }`,
       )
       .then(res => {
@@ -90,12 +87,11 @@ const SearchList = () => {
     const isValid = await checkAuthentication();
     setIsLogin(isValid);
 
-    isValid && getSavedItems(isValid);
+    userId && getSavedItems(isValid);
   };
 
   useEffect(() => {
-    const isValid = checkAuthentication();
-    isValid && getSavedItems();
+    userId && getSavedItems();
   }, [refreshState]);
 
   useEffect(() => {
@@ -266,8 +262,8 @@ const SearchList = () => {
       {searchData?.length ? (
         ""
       ) : (
-        <div className="mb-12">
-          <RentFurnitureAndAppliances params={categoryObj.category} />
+        <div className="mb-12 lg:mb-20">
+          <RentFurnitureAndAppliances params={"home-page"} />
         </div>
       )}
     </>
@@ -278,7 +274,7 @@ export default SearchList;
 
 export const SearchListSkeleton = () => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 ">
       <RentFurnitureSkeleton />
     </div>
   );

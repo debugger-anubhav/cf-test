@@ -153,7 +153,50 @@ export default function RootLayout({children}) {
         />
         <Clarity includeInDevelopment />
 
-        <script src="//in.fw-cdn.com/30445413/247408.js" chat="true" />
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <>
+            <script src="//in.fw-cdn.com/30445413/247408.js" chat="true" />
+
+            <script
+              type="text/javascript"
+              // type="text/partytown"
+              id="fcWidgetMessengerConfig"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  const userId = localStorage.getItem("_ga");
+                  const userName= localStorage.getItem("user_name")
+                  fetch("https://cityfurnish.com/ajxapi/getDecryptedUserId", {
+                    method: "POST",
+                    body: JSON.stringify({
+                      userId: JSON.parse(userId)
+                    }),
+                    headers: {
+
+                    }
+                  })
+                  .then(res => res.json())
+                  .then(res => {
+                    
+                  window.dataLayer.push({"event":"logged_in_user","userid":res.data.userId})
+                  
+                    window.fcWidgetMessengerConfig = {
+                    cf_userid: res.data.userId,
+                    firstName : userName,
+                    tags: ["cf_web_dev"], 
+                      meta: {
+                        cf_userid: res.data.userId,
+                      },
+                    }
+
+                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux", "eiuid" : res.data.userId});
+
+                  })
+                  .catch(e => console.log('e',e))
+                `,
+              }}
+            />
+          </>
+        )}
         {/* <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
           rel="stylesheet"

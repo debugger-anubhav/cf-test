@@ -145,7 +145,7 @@ export default function Home() {
   useEffect(() => {
     if (userId !== "") {
       if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
-        window?.gtag("config", "G-05PLBRM6KD", {
+        window?.gtag?.("config", "G-05PLBRM6KD", {
           user_id: userId,
         });
       }
