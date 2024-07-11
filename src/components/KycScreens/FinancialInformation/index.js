@@ -59,6 +59,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
+  const [isQuesScreen, setIsQuesScreen] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const kycSliceData = useSelector(state => state.kycPage);
@@ -159,11 +160,15 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         professionId,
         stageId,
       })
-      .then(res => console.log(res))
+      .then(res => {
+        setIsQuesScreen(res?.data?.data?.crifQuestionData?.isQuestion);
+      })
       .catch(err => console.log(err));
   };
 
-  useEffect(getDocsDetailsApi, "getDocsDetailsApi");
+  useEffect(() => {
+    getDocsDetailsApi();
+  }, []);
 
   useEffect(() => {
     setFormData({financialDocumentProof: ""});
@@ -377,6 +382,8 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      {isQuesScreen && <p>opennnnnnnnnnnnn</p>}
     </div>
   );
 };
