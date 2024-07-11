@@ -5,7 +5,7 @@
   @apply flex w-full border border-DDDDDF rounded-lg gap-4 p-6 flex-col my-8;
 }
 .schedule_delivery_btn {
-  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center bg-btn-primary sm:whitespace-nowrap w-fit;
+  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap w-fit;
 }
 .sub_heading {
   @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;

@@ -135,11 +135,27 @@ export default function DashboardComponent() {
       }
     }
     if (item.id === 3) {
-      dispatch(setKycScreenName("professionalDetails"));
+      if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
+        dispatch(setKycScreenName("professionalDetails"));
+      }
+    }
+    if (item.id === 6) {
+      dispatch(setKycScreenName("autoPay"));
     }
     if (item.id === 7) {
       dispatch(setKycScreenName("educationalDetails"));
     }
+  };
+
+  const handleDelivery = () => {
+    const pendingStage = dashboardDetails?.allKycStages?.filter(
+      i => i.stage_status === 0 || i.stage_status === 3,
+    );
+
+    if (pendingStage.length) {
+      handleKycStagesClick(pendingStage[0]);
+    }
+    console.log("click", pendingStage);
   };
 
   useEffect(() => {
@@ -222,22 +238,41 @@ export default function DashboardComponent() {
       <div className={styles.kyc_status_box}>
         <p className={styles.sub_heading}>KYC status:</p>
         <p className={`${styles.heading}  md:!text-20 `}>
-          {matchKycStatus[dashboardDetails?.zoho_sub_status]}
+          {dashboardDetails?.kycStatus}
         </p>
         <p className={styles.sub_heading}>
           We require all your documents to be verified in order to schedule
           delivery.
         </p>
-        <button className={styles.schedule_delivery_btn}>
-          {matchKycStatus[dashboardDetails?.zoho_sub_status] ===
+
+        <button
+          className={`${styles.schedule_delivery_btn}
+        ${
+          dashboardDetails?.kycStatus === "Under Review"
+            ? "bg-FFDF85 cursor-not-allowed"
+            : "bg-btn-primary cursor-pointer"
+        }
+        `}
+          disabled={dashboardDetails?.kycStatus === "Under Review"}
+          onClick={() => handleDelivery()}>
+          {dashboardDetails?.kycStatus === "Pending" &&
+            "Complete KYC to Schedule Delivery"}
+          {(dashboardDetails?.kycStatus === "Under Review" ||
+            dashboardDetails?.kycStatus === "Verified") &&
+            "Manage your delivery now"}
+          {dashboardDetails?.kycStatus === "Rejected" &&
+            "Re-upload your documents now"}
+
+          {/* {matchKycStatus[dashboardDetails?.zoho_sub_status] ===
             "Under review" && "Manage your delivery now"}
           {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending" &&
             "Complete KYC to Schedule Delivery"}
           {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Rejected" &&
             "Re-upload your documents now"}
           {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Verified" &&
-            "Manage your delivery now"}
+            "Manage your delivery now"} */}
           {/* {all  stage status will fill or done then show under review case } */}
+
           <ForwardArrowWithLine />
         </button>
       </div>
