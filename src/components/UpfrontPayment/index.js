@@ -5,7 +5,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useParams, useRouter} from "next/navigation";
 import {Skeleton} from "@mui/material";
-import {razorpayKeyOwn, RazorpayThemeColor} from "../../../appConfig";
+import {razorpayExtensionKey, RazorpayThemeColor} from "../../../appConfig";
 import {loadScript} from "@/constants/constant";
 import {
   setAmountPaid,
@@ -56,7 +56,7 @@ function UpfrontPayment() {
     const customerId = razorpayData?.customer_id;
 
     const options = {
-      key: razorpayKeyOwn,
+      key: razorpayExtensionKey,
       order_id: razOrderId,
       // customer_id: customerId,/
       name: "Cityfurnish",
