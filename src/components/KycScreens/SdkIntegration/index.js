@@ -6,7 +6,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
-import {setKycScreenName} from "@/store/Slices";
+import {setKycScreenName, setShowQuestionScreen} from "@/store/Slices";
 
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const dispatch = useDispatch();
@@ -16,6 +16,11 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const [qustionDrawer, setQustionDrawer] = useState(false);
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
+
+  const showQuestionScreen = useSelector(
+    state => state.kycPage.showQuestionScreen,
+  );
+
   // const hyperKycConfig = new window.HyperKycConfig(
   //    "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcHBJZCI6InNtbGNpNiIsImhhc2giOiIwYTk3OGM3ZjE5OWRhYzJiYzgzMDk5NzY3OTY0Y2Y1MzA1OTc5NmFlYTRiYjI3NjI3Yzg2M2U4ZjQyNzhkYzM0IiwiaWF0IjoxNzE5NTU3MzUzLCJleHAiOjE3MTk2MDA1NTMsImp0aSI6IjRiNDhkNmViLTY2YjQtNDdhMy1iYmZhLWNiZTlmNTdkNWFhNiJ9.ZKTgMXjM1ayb3Rqea6MvotH0zf6nV-U6Ju8ItYR0OT1Bq61cg433GYefinxceg_YzTFXCa7rNpegJ0Tp5gyklAM78L3-SMkxxiuCtjEdfdun0vaTwexsKQBTUcOGxLMCld6Sua-WYVtkUgY00Wm2G0EYlaS0OkxrpBTpF6WucaU ",
   //   "workflow_uZRJMIc",
@@ -43,7 +48,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
 
   useEffect(() => {
     if (saveHVData?.type === "questions") {
-      setQustionDrawer(true);
+      dispatch(setShowQuestionScreen(true));
     }
     if (saveHVData?.data?.cibilScore > 650) {
       console.log("show automatically aditional information");
@@ -68,7 +73,8 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
       .then(res => {
         setSaveHVData(res?.data?.data);
         if (res?.data?.data?.status === false) {
-          setQustionDrawer(false);
+          // setQustionDrawer(false);
+          dispatch(setShowQuestionScreen(false));
         }
       })
       .catch(err => console.log(err));
@@ -93,6 +99,10 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   useEffect(() => {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);
   }, [data]);
+
+  useEffect(() => {
+    setQustionDrawer(showQuestionScreen);
+  }, [showQuestionScreen]);
 
   const drawerContent = () => {
     return (
@@ -131,6 +141,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
       </div>
     );
   };
+
   return (
     <>
       <div

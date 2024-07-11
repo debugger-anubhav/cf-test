@@ -5,7 +5,7 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {setKycScreenName} from "@/store/Slices";
+import {setKycScreenName, setShowQuestionScreen} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
@@ -61,11 +61,12 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const [disableButton, setDisableButton] = useState(false);
   const [isQuesScreen, setIsQuesScreen] = useState(false);
 
-  const userId = decrypt(getLocalStorage("_ga"));
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const professionId = kycSliceData.selectedProfessionId;
   const stageId = kycSliceData.stageId;
+  const showQuestionScreen = kycSliceData.showQuestionScreen;
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -73,6 +74,11 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const [formErrors, setFormErrors] = useState({
     financialDocumentProof: "",
   });
+
+  useEffect(() => {
+    setIsQuesScreen(showQuestionScreen);
+  }, [showQuestionScreen]);
+
   const getAddProofList = () => {
     baseInstance
       .get(endPoints.getFinacialDocList)
@@ -161,7 +167,10 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
         stageId,
       })
       .then(res => {
-        setIsQuesScreen(res?.data?.data?.crifQuestionData?.isQuestion);
+        // setIsQuesScreen(res?.data?.data?.crifQuestionData?.isQuestion);
+        dispatch(
+          setShowQuestionScreen(res?.data?.data?.crifQuestionData?.isQuestion),
+        );
       })
       .catch(err => console.log(err));
   };
