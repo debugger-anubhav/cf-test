@@ -6,7 +6,11 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
-import {setKycScreenName, setShowQuestionScreen} from "@/store/Slices";
+import {
+  setKycScreenName,
+  setShowQuestionScreen,
+  setStageId,
+} from "@/store/Slices";
 
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const dispatch = useDispatch();
@@ -18,6 +22,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const [selectedOption, setSelectedOption] = useState("");
 
   const handler = HyperKycResult => {
+    console.log(HyperKycResult, "HyperKycResultHyperKycResultHyperKycResult");
     saveHyperVergeDetails({
       ...HyperKycResult,
       userId,
@@ -44,9 +49,11 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     if (saveHVData?.data?.cibilScore > 650) {
       console.log("show automatically aditional information");
       dispatch(setKycScreenName("professionalDetails"));
+      dispatch(setStageId(3));
     }
     if (saveHVData?.data?.cibilScore < 650) {
       dispatch(setKycScreenName("financialInfo"));
+      dispatch(setStageId(2));
     }
     console.log(saveHVData?.data, "saveHVData");
   }, [saveHVData]);
@@ -69,12 +76,13 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
         }
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
+          dispatch(setStageId(2));
         }
       })
       .catch(err => console.log(err));
   };
 
-  const handleClick = () => {
+  const handleIdentityVerification = () => {
     baseInstance
       .get(endPoints.hyperverge.getHypervergeToken(userId))
       .then(res => {
@@ -112,6 +120,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     //   .catch(err => console.log(err));
     // };
   };
+
   useEffect(() => {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);
   }, [data]);
@@ -159,13 +168,13 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     <>
       <div
         className={`!hidden md:!flex ${styles.details_box}`}
-        onClick={handleClick}>
+        onClick={handleIdentityVerification}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
       </div>
 
       <div
-        onClick={handleClick}
+        onClick={handleIdentityVerification}
         className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>

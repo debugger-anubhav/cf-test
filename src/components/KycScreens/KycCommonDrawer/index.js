@@ -43,7 +43,6 @@ export default function KycCommonDrawer({
 
   return (
     <div>
-      {console.log("ppppppppppppppppppppp")}
       <button onClick={toggleDrawer(true)}>Open Drawer</button>
       <Drawer
         anchor={isBottomShareDrawer ? "bottom" : "right"}

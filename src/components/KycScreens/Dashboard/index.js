@@ -126,6 +126,10 @@ export default function DashboardComponent() {
 
   const handleKycStagesClick = item => {
     dispatch(setStageId(item.id));
+
+    // if (item.id === 1) {
+    // }
+
     if (item.id === 4) {
       dispatch(setKycScreenName("personalDetails"));
     }

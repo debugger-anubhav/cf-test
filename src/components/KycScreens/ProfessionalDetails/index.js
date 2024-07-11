@@ -79,7 +79,7 @@ export default function ProfessionalDetails() {
   };
 
   const handleSubmit = values => {
-    console.log(values); // Handle form submission logic here
+    console.log(values, stageId); // Handle form submission logic here
     const payload = {
       userId,
       orderId,

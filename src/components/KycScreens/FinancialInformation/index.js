@@ -5,7 +5,11 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {setKycScreenName, setShowQuestionScreen} from "@/store/Slices";
+import {
+  setKycScreenName,
+  setShowQuestionScreen,
+  setStageId,
+} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
@@ -146,6 +150,7 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
       .then(() => {
         handleKycState(orderId);
         dispatch(setKycScreenName("professionalDetails"));
+        dispatch(setStageId(3));
         setDisableButton(false);
       })
       .catch(err => {
