@@ -13,11 +13,13 @@ import {getLocalStorage} from "@/constants/constant";
 
 export default function ProfessionalDetails() {
   const dispatch = useDispatch();
-  const userId = decrypt(getLocalStorage("_ga"));
+
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
+
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const stageId = kycSliceData.stageId;
+  const userId = decrypt(getLocalStorage("_ga"));
 
   const nomineeRelation = ["Spouse/Partner", "Parent", "Parent", "Other"];
 

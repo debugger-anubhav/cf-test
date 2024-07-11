@@ -26,6 +26,9 @@ export default function DashboardComponent() {
   const userId = decrypt(getLocalStorage("_ga"));
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
 
+  const kycSliceData = useSelector(state => state.kycPage);
+  const professionId = kycSliceData.selectedProfessionId;
+
   const fcPaymentData = JSON.parse(data?.fc_paymentData);
   const productImages = (fcPaymentData[0]?.product_image).split(",");
   const productImagesArr =
@@ -255,7 +258,7 @@ export default function DashboardComponent() {
                     />
                   </div>
                 );
-              } else if (item.stage_name === "Additional Details") {
+              } else if (item.id === 3 && professionId === 2) {
                 return (
                   <div key={index.toString()}>
                     <GstSdk
