@@ -11,6 +11,7 @@ import {
   setShowQuestionScreen,
   setStageId,
 } from "@/store/Slices";
+import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 
 export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const dispatch = useDispatch();
@@ -20,8 +21,10 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const [qustionDrawer, setQustionDrawer] = useState(false);
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
+  const [openLoader, setOpenLoader] = useState(false);
 
   const handler = HyperKycResult => {
+    setOpenLoader(true);
     console.log(HyperKycResult, "HyperKycResultHyperKycResultHyperKycResult");
     saveHyperVergeDetails({
       ...HyperKycResult,
@@ -37,6 +40,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
         console.log(res?.data?.data, "response of savehyperverdetails");
         setSaveHVData(res?.data?.data);
         getDashboardDetailsApi();
+        setOpenLoader(false);
       })
       .catch(err => console.log(err));
   };
@@ -188,6 +192,8 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
           heading={"Questions"}
         />
       )}
+
+      {openLoader && <DocLoader open={openLoader} setOpen={setOpenLoader} />}
     </>
   );
 }
