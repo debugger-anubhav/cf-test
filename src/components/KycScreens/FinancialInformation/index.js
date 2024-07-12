@@ -5,11 +5,7 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {
-  setKycScreenName,
-  setShowQuestionScreen,
-  setStageId,
-} from "@/store/Slices";
+import {setKycScreenName, setStageId} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
@@ -67,7 +63,6 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const professionId = kycSliceData.selectedProfessionId;
   const stageId = kycSliceData.stageId;
   const showQuestionScreen = kycSliceData.showQuestionScreen;
   const userId = decrypt(getLocalStorage("_ga"));
@@ -161,27 +156,6 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
 
   useEffect(() => {
     getAddProofList();
-  }, []);
-
-  const getDocsDetailsApi = () => {
-    baseInstance
-      .post(endPoints.kycPage.getDocsDetails, {
-        orderId,
-        userId,
-        professionId,
-        stageId,
-      })
-      .then(res => {
-        // setIsQuesScreen(res?.data?.data?.crifQuestionData?.isQuestion);
-        dispatch(
-          setShowQuestionScreen(res?.data?.data?.crifQuestionData?.isQuestion),
-        );
-      })
-      .catch(err => console.log(err));
-  };
-
-  useEffect(() => {
-    getDocsDetailsApi();
   }, []);
 
   useEffect(() => {

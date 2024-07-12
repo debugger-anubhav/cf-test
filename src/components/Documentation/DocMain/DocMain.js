@@ -43,6 +43,7 @@ const DocMain = () => {
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
+
   // const [isReupload, setIsReupload] = useState(false);
 
   const [selectedOrderId, setSelectedOrderId] = useState(

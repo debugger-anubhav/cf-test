@@ -17,9 +17,11 @@ import SdkIntegration from "../SdkIntegration";
 import {
   setKycScreenName,
   setSelectedProfessionId,
+  setShowQuestionScreen,
   setStageId,
 } from "@/store/Slices";
 import GstSdk from "../GstSdk";
+import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -28,6 +30,7 @@ export default function DashboardComponent() {
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
+  const orderId = data?.dealCodeNumber;
 
   const fcPaymentData = JSON.parse(data?.fc_paymentData);
   const productImages = (fcPaymentData[0]?.product_image).split(",");
@@ -38,6 +41,7 @@ export default function DashboardComponent() {
   const [orderDate, setOrderDate] = useState(null);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [changeProfession, setChangeProfession] = useState(false);
+  const [holdOnLoader, setHoldOnLoader] = useState(false);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -124,6 +128,29 @@ export default function DashboardComponent() {
     "Delivery Scheduled": "Verified",
   };
 
+  const getDocsDetailsApi = () => {
+    baseInstance
+      .post(endPoints.kycPage.getDocsDetails, {
+        orderId,
+        userId,
+        professionId,
+        stageId: 2,
+      })
+      .then(res => {
+        if (res?.data?.data?.crifQuestionData?.isQuestion === false) {
+          dispatch(setKycScreenName("financialInfo"));
+        }
+        dispatch(
+          setShowQuestionScreen(res?.data?.data?.crifQuestionData?.isQuestion),
+        );
+        setHoldOnLoader(false);
+      })
+      .catch(err => {
+        console.log(err);
+        setHoldOnLoader(false);
+      });
+  };
+
   const handleKycStagesClick = item => {
     dispatch(setStageId(item.id));
 
@@ -135,7 +162,8 @@ export default function DashboardComponent() {
     }
     if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
-        dispatch(setKycScreenName("financialInfo"));
+        setHoldOnLoader(true);
+        getDocsDetailsApi();
       }
     }
     if (item.id === 3) {
@@ -364,6 +392,10 @@ export default function DashboardComponent() {
           </>
         )}
       </div>
+
+      {holdOnLoader && (
+        <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
+      )}
     </div>
   );
 }

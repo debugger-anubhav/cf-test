@@ -22,6 +22,9 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [openLoader, setOpenLoader] = useState(false);
+  const showQuestionScreen = useSelector(
+    state => state.kycPage.showQuestionScreen,
+  );
 
   const handler = HyperKycResult => {
     setOpenLoader(true);
@@ -183,7 +186,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
       </div>
-
+      {console.log(showQuestionScreen, "showQuestionScreen")}
       {qustionDrawer && (
         <KycCommonDrawer
           content={drawerContent()}
