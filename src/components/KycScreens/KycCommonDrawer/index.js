@@ -2,15 +2,12 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
-import {useDispatch} from "react-redux";
-import {setShowQuestionScreen} from "@/store/Slices";
 
 export default function KycCommonDrawer({
   content,
   setChangeProfession,
   heading,
 }) {
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = React.useState(true);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
 
@@ -28,9 +25,6 @@ export default function KycCommonDrawer({
 
   React.useEffect(() => {
     setChangeProfession(isOpen);
-    if (heading === "Questions") {
-      dispatch(setShowQuestionScreen(isOpen));
-    }
   }, [isOpen]);
 
   React.useEffect(() => {
@@ -43,7 +37,6 @@ export default function KycCommonDrawer({
 
   return (
     <div>
-      <button onClick={toggleDrawer(true)}>Open Drawer</button>
       <Drawer
         anchor={isBottomShareDrawer ? "bottom" : "right"}
         open={isOpen}

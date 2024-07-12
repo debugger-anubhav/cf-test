@@ -6,14 +6,16 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
-import {
-  setKycScreenName,
-  setShowQuestionScreen,
-  setStageId,
-} from "@/store/Slices";
+import {setKycScreenName, setStageId} from "@/store/Slices";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 
-export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
+export default function SdkIntegration({
+  item,
+  status,
+  getDashboardDetailsApi,
+  openPanSdk,
+  setOpenPanSdk,
+}) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
@@ -22,9 +24,6 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [openLoader, setOpenLoader] = useState(false);
-  const showQuestionScreen = useSelector(
-    state => state.kycPage.showQuestionScreen,
-  );
 
   const handler = HyperKycResult => {
     setOpenLoader(true);
@@ -50,7 +49,6 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
 
   useEffect(() => {
     if (saveHVData?.type === "questions") {
-      dispatch(setShowQuestionScreen(true));
       setQustionDrawer(true);
     }
     if (saveHVData?.data?.cibilScore > 650) {
@@ -78,7 +76,6 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
       .then(res => {
         setSaveHVData(res?.data?.data);
         if (res?.data?.data?.status === false) {
-          dispatch(setShowQuestionScreen(false));
           setQustionDrawer(false);
         }
         if (res?.data?.data?.message === "Error while verifying the details") {
@@ -100,6 +97,7 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);
+        setOpenPanSdk(false);
       })
       .catch(err => console.log(err));
 
@@ -132,10 +130,16 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);
   }, [data]);
 
+  useEffect(() => {
+    if (openPanSdk) {
+      handleIdentityVerification();
+    }
+  }, [openPanSdk]);
+
   const drawerContent = () => {
     return (
       <div>
-        {console.log(saveHVData?.data?.question, ";;;;;;;;;;;;;;;;;")}
+        {console.log(saveHVData, ";;;;;;;;;;;;;;;;;")}
         <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
           Question: {saveHVData?.data?.question}
         </div>
@@ -173,20 +177,23 @@ export default function SdkIntegration({item, status, getDashboardDetailsApi}) {
 
   return (
     <>
-      <div
-        className={`!hidden md:!flex ${styles.details_box}`}
-        onClick={handleIdentityVerification}>
-        <div className={styles.detail_heading}>{item?.stage_name}</div>
-        <div className={styles.sub_heading}>{status}</div>
-      </div>
+      {!openPanSdk && (
+        <>
+          <div
+            className={`!hidden md:!flex ${styles.details_box}`}
+            onClick={handleIdentityVerification}>
+            <div className={styles.detail_heading}>{item?.stage_name}</div>
+            <div className={styles.sub_heading}>{status}</div>
+          </div>
 
-      <div
-        onClick={handleIdentityVerification}
-        className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
-        <div className={styles.detail_heading}>{item?.stage_name}</div>
-        <div className={styles.sub_heading}>{status}</div>
-      </div>
-      {console.log(showQuestionScreen, "showQuestionScreen")}
+          <div
+            onClick={handleIdentityVerification}
+            className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
+            <div className={styles.detail_heading}>{item?.stage_name}</div>
+            <div className={styles.sub_heading}>{status}</div>
+          </div>
+        </>
+      )}
       {qustionDrawer && (
         <KycCommonDrawer
           content={drawerContent()}

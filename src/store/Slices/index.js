@@ -293,7 +293,6 @@ export const KycPageSlice = createSlice({
     kycScreenName: "selectOrderId",
     selectedProfessionId: null,
     stageId: null,
-    showQuestionScreen: false,
   },
   reducers: {
     getOrderId(state, action) {
@@ -313,9 +312,6 @@ export const KycPageSlice = createSlice({
     },
     setStageId(state, action) {
       state.stageId = action.payload;
-    },
-    setShowQuestionScreen(state, action) {
-      state.showQuestionScreen = action.payload;
     },
   },
 });
@@ -468,7 +464,6 @@ export const {
   setKycScreenName,
   setSelectedProfessionId,
   setStageId,
-  setShowQuestionScreen,
 } = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState, setUsedCoins} =

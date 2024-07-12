@@ -15,18 +15,20 @@ import {Skeleton} from "@mui/material";
 import KycCommonDrawer from "../KycCommonDrawer";
 import SdkIntegration from "../SdkIntegration";
 import {
+  reduxSetModalState,
   setKycScreenName,
   setSelectedProfessionId,
-  setShowQuestionScreen,
   setStageId,
 } from "@/store/Slices";
 import GstSdk from "../GstSdk";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
+import SlotDrawer from "../SlotDrawer/index";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
@@ -42,6 +44,11 @@ export default function DashboardComponent() {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [changeProfession, setChangeProfession] = useState(false);
   const [holdOnLoader, setHoldOnLoader] = useState(false);
+  const [openPanSdk, setOpenPanSdk] = useState(false);
+  const [openDeliverySlot, setOpenDeliverySlot] = useState(false);
+  const [showQueDrawer, setShowQueDrawer] = useState(false);
+  const [docsDetailsData, setDocsDetailsData] = useState(null);
+  console.log(showQueDrawer, docsDetailsData);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -140,10 +147,9 @@ export default function DashboardComponent() {
         if (res?.data?.data?.crifQuestionData?.isQuestion === false) {
           dispatch(setKycScreenName("financialInfo"));
         }
-        dispatch(
-          setShowQuestionScreen(res?.data?.data?.crifQuestionData?.isQuestion),
-        );
+        setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setHoldOnLoader(false);
+        setDocsDetailsData(res?.data?.data);
       })
       .catch(err => {
         console.log(err);
@@ -153,9 +159,6 @@ export default function DashboardComponent() {
 
   const handleKycStagesClick = item => {
     dispatch(setStageId(item.id));
-
-    // if (item.id === 1) {
-    // }
 
     if (item.id === 4) {
       dispatch(setKycScreenName("personalDetails"));
@@ -183,11 +186,19 @@ export default function DashboardComponent() {
     const pendingStage = dashboardDetails?.allKycStages?.filter(
       i => i.stage_status === 0 || i.stage_status === 3,
     );
-
-    if (pendingStage.length) {
+    if (pendingStage.length > 0) {
       handleKycStagesClick(pendingStage[0]);
+      if (pendingStage[0].id === 1) {
+        setOpenPanSdk(true);
+      }
+    } else {
+      toggleModal();
     }
-    console.log("click", pendingStage);
+  };
+
+  const toggleModal = () => {
+    setOpenDeliverySlot(!openDeliverySlot);
+    dispatch(reduxSetModalState(!modalStateFromRedux));
   };
 
   useEffect(() => {
@@ -307,6 +318,23 @@ export default function DashboardComponent() {
 
           <ForwardArrowWithLine />
         </button>
+
+        {openPanSdk && (
+          <SdkIntegration
+            getDashboardDetailsApi={getDashboardDetailsApi}
+            openPanSdk={openPanSdk}
+            setOpenPanSdk={setOpenPanSdk}
+          />
+        )}
+
+        {openDeliverySlot && (
+          <SlotDrawer
+            isModalOpen={openDeliverySlot}
+            closeModal={toggleModal}
+            orderId={orderId}
+            width={230}
+          />
+        )}
       </div>
 
       <div className={styles.details_wrapper}>
@@ -319,6 +347,7 @@ export default function DashboardComponent() {
                 return (
                   <div key={index.toString()}>
                     <SdkIntegration
+                      openPanSdk={openPanSdk}
                       item={item}
                       status={convertStatus(item?.stage_status)}
                       getDashboardDetailsApi={getDashboardDetailsApi}
@@ -365,6 +394,7 @@ export default function DashboardComponent() {
                 return (
                   <div key={index.toString()}>
                     <SdkIntegration
+                      openPanSdk={openPanSdk}
                       item={item}
                       status={convertStatus(item?.stage_status)}
                       getDashboardDetailsApi={getDashboardDetailsApi}
