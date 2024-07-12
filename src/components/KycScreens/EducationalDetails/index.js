@@ -11,9 +11,10 @@ import {getLocalStorage} from "@/constants/constant";
 
 export default function EducationalDetails() {
   const dispatch = useDispatch();
-  const orderId = useSelector(
-    state => state.kycPage.selectedDataForKyc.dealCodeNumber,
-  );
+  const kycSliceData = useSelector(state => state.kycPage);
+
+  const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
+
   const allowedFileTypes = [
     "image/jpeg",
     "image/jpg",

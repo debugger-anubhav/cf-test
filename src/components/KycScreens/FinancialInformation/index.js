@@ -11,14 +11,12 @@ import {
   CheckFillIcon,
   DeleteIcon,
   DeleteIconFilled,
-  InformationIcon,
   OutlineArrowRight,
 } from "@/assets/icon";
 import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
-import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 import commonStyles from "@/components/Documentation/common.module.css";
 
 const allowedFileTypes = [
@@ -56,6 +54,7 @@ const SelectionComp = ({
 const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const dispatch = useDispatch();
   const isReupload = cibilDocsData?.userDocs?.length > 0;
+  console.log(isReupload);
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
@@ -166,16 +165,6 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
 
   return (
     <div className="mt-8 w-full md:w-auto">
-      {isReupload && (
-        <div className={commonStyles.reupload_note_wrapper}>
-          <InformationIcon className={`mt-0.5 ${commonStyles.reupload_icon}`} />
-          <p className={commonStyles.reupload_note_txt}>
-            Your document(s) have been rejected by our team for not meeting the
-            necessary standards. Please re-upload them to proceed with KYC
-            process.
-          </p>
-        </div>
-      )}
       <div className={styles.heading}>
         <BackIcon
           color={"#222222"}
@@ -291,13 +280,6 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
             </div>
           </div>
         ))}
-
-      {isReupload && (
-        <RejectedDocsComponent
-          array={cibilDocsData?.userDocs}
-          docType={"cf_financial_statement"}
-        />
-      )}
 
       <div className={`${styles.input_wrapper} `}>
         <div className={`${styles.formInputFirst} lg:min-w-[530px]`}>

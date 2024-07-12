@@ -74,7 +74,13 @@ export default function ProfessionalDetails() {
   const saveProfessionalDetails = payload => {
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
-      .then(res => dispatch(setKycScreenName("dashboard")))
+      .then(res => {
+        if (professionId === 4) {
+          dispatch(setKycScreenName("educationalDetails"));
+        } else {
+          dispatch(setKycScreenName("dashboard"));
+        }
+      })
       .catch(err => console.log(err));
   };
 

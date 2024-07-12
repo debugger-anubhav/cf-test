@@ -102,27 +102,27 @@ export default function SdkIntegration({
       .catch(err => console.log(err));
 
     // for testing purpose
-    //   baseInstance
-    //   .post(endPoints.kycPage.saveHyperVergeKycDetails,  {
-    //     transactionId: `${userId}_${data?.dealCodeNumber}`,
-    //     status: 'auto_approved',
-    //     details: {
-    //       Face_Match_v_Action: 'pass',
-    //       Face_Match_v_Face_Match_Result: 'yes',
-    //       'PAN_OCR_ID_Number_-_Front': 'CNIPC4030M',
-    //       'PAN_OCR_D.O.B_-_Front': '24-09-2000',
-    //       'PoA_OCR_ID_Number_-_Front': 'MP09 20230058553',
-    //       'PoA_OCR_Full_Name_-_Front': 'CHETAN',
-    //     },
-    //     userId,
-    //       orderId: data?.dealCodeNumber,
-    //   })
-    //   .then(res => {
-    //     console.log(res?.data?.data, "response of savehyperverdetails");
-    //     setSaveHVData(res?.data?.data);
-    //     getDashboardDetailsApi();
-    //   })
-    //   .catch(err => console.log(err));
+    // baseInstance
+    // .post(endPoints.kycPage.saveHyperVergeKycDetails,  {
+    //   transactionId: `${userId}_${data?.dealCodeNumber}`,
+    //   status: 'auto_approved',
+    //   details: {
+    //     Face_Match_v_Action: 'pass',
+    //     Face_Match_v_Face_Match_Result: 'yes',
+    //     'PAN_OCR_ID_Number_-_Front': 'CNIPC4030M',
+    //     'PAN_OCR_D.O.B_-_Front': '24-09-2000',
+    //     'PoA_OCR_ID_Number_-_Front': 'MP09 20230058553',
+    //     'PoA_OCR_Full_Name_-_Front': 'CHETAN',
+    //   },
+    //   userId,
+    //     orderId: data?.dealCodeNumber,
+    // })
+    // .then(res => {
+    //   console.log(res?.data?.data, "response of savehyperverdetails");
+    //   setSaveHVData(res?.data?.data);
+    //   getDashboardDetailsApi();
+    // })
+    // .catch(err => console.log(err));
     // };
   };
 

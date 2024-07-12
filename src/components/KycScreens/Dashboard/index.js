@@ -23,6 +23,7 @@ import {
 import GstSdk from "../GstSdk";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import SlotDrawer from "../SlotDrawer/index";
+import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -48,7 +49,7 @@ export default function DashboardComponent() {
   const [openDeliverySlot, setOpenDeliverySlot] = useState(false);
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
-  console.log(showQueDrawer, docsDetailsData);
+  console.log(showQueDrawer);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -149,7 +150,7 @@ export default function DashboardComponent() {
         }
         setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setHoldOnLoader(false);
-        setDocsDetailsData(res?.data?.data);
+        setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
       })
       .catch(err => {
         console.log(err);
@@ -413,6 +414,13 @@ export default function DashboardComponent() {
           content={drawerContent()}
           changeState={setChangeProfession}
           heading={"Change Profession?"}
+        />
+      )}
+
+      {showQueDrawer && (
+        <FinancialQueDrawer
+          changeState={setShowQueDrawer}
+          docsDetailsData={docsDetailsData}
         />
       )}
     </div>
