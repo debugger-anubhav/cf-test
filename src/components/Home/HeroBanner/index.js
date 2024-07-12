@@ -12,22 +12,22 @@ import {CityNameToId, getLocalStorage} from "@/constants/constant";
 const getCityPrimaryBanner = city => {
   switch (city) {
     case "Bangalore":
-      return "banglore_summer_sale_banner_jenysn";
+      return "bangalore_summer_sale_banner_lzwcwn";
 
     case "Delhi":
     case "Gurgaon":
     case "Ghaziabad/Noida":
     case "Faridabad":
-      return "ncr_summer_sale_banner_tuugq7";
+      return "delhi_summer_sale_banner_gsg9kc";
 
     case "Pune":
-      return "pune_summer_sale_banner_gq5qtw";
+      return "pune_summer_sale_banner_xao8d9";
 
     case "Mumbai":
-      return "mumbai_summer_sale_banner_atyspi";
+      return "mumbai_summer_sale_banner_waoik6";
 
     case "Hyderabad":
-      return "hyderabad_summer_sale_banner_ecxrzq";
+      return "hyderabad_summer_sale_banner_chv8bp";
   }
 };
 
