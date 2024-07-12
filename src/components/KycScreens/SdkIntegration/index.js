@@ -197,8 +197,7 @@ export default function SdkIntegration({
       {qustionDrawer && (
         <KycCommonDrawer
           content={drawerContent()}
-          setChangeProfession={setQustionDrawer}
-          changeProfession={qustionDrawer}
+          changeState={setQustionDrawer}
           heading={"Questions"}
         />
       )}

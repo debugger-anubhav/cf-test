@@ -246,15 +246,6 @@ export default function DashboardComponent() {
         </div>
       </div>
 
-      {changeProfession && (
-        <KycCommonDrawer
-          content={drawerContent()}
-          setChangeProfession={setChangeProfession}
-          changeProfession={changeProfession}
-          heading={"Change Profession?"}
-        />
-      )}
-
       <div className={styles.order_placed_wrapper}>
         {loadingSkeleton ? (
           <Skeleton variant="rectangular" width={"100%"} height={30} />
@@ -306,35 +297,8 @@ export default function DashboardComponent() {
           {dashboardDetails?.kycStatus === "Rejected" &&
             "Re-upload your documents now"}
 
-          {/* {matchKycStatus[dashboardDetails?.zoho_sub_status] ===
-            "Under review" && "Manage your delivery now"}
-          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending" &&
-            "Complete KYC to Schedule Delivery"}
-          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Rejected" &&
-            "Re-upload your documents now"}
-          {matchKycStatus[dashboardDetails?.zoho_sub_status] === "Verified" &&
-            "Manage your delivery now"} */}
-          {/* {all  stage status will fill or done then show under review case } */}
-
           <ForwardArrowWithLine />
         </button>
-
-        {openPanSdk && (
-          <SdkIntegration
-            getDashboardDetailsApi={getDashboardDetailsApi}
-            openPanSdk={openPanSdk}
-            setOpenPanSdk={setOpenPanSdk}
-          />
-        )}
-
-        {openDeliverySlot && (
-          <SlotDrawer
-            isModalOpen={openDeliverySlot}
-            closeModal={toggleModal}
-            orderId={orderId}
-            width={230}
-          />
-        )}
       </div>
 
       <div className={styles.details_wrapper}>
@@ -425,6 +389,31 @@ export default function DashboardComponent() {
 
       {holdOnLoader && (
         <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
+      )}
+
+      {openPanSdk && (
+        <SdkIntegration
+          getDashboardDetailsApi={getDashboardDetailsApi}
+          openPanSdk={openPanSdk}
+          setOpenPanSdk={setOpenPanSdk}
+        />
+      )}
+
+      {openDeliverySlot && (
+        <SlotDrawer
+          isModalOpen={openDeliverySlot}
+          closeModal={toggleModal}
+          orderId={orderId}
+          width={230}
+        />
+      )}
+
+      {changeProfession && (
+        <KycCommonDrawer
+          content={drawerContent()}
+          changeState={setChangeProfession}
+          heading={"Change Profession?"}
+        />
       )}
     </div>
   );

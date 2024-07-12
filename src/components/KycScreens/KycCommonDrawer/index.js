@@ -3,11 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
 
-export default function KycCommonDrawer({
-  content,
-  setChangeProfession,
-  heading,
-}) {
+export default function KycCommonDrawer({content, changeState, heading}) {
   const [isOpen, setIsOpen] = React.useState(true);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
 
@@ -24,7 +20,7 @@ export default function KycCommonDrawer({
   };
 
   React.useEffect(() => {
-    setChangeProfession(isOpen);
+    changeState(isOpen);
   }, [isOpen]);
 
   React.useEffect(() => {
