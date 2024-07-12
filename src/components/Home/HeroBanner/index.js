@@ -16,10 +16,11 @@ const getCityPrimaryBanner = city => {
 
     case "Delhi":
     case "Gurgaon":
-    case "Ghaziabad/Noida":
     case "Faridabad":
       return "delhi_summer_sale_banner_gsg9kc";
 
+    case "Ghaziabad/Noida":
+      return "ncr_summer_sale_banner_tuugq7";
     case "Pune":
       return "pune_summer_sale_banner_xao8d9";
 
