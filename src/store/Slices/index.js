@@ -1,6 +1,5 @@
 import {getLocalStorage} from "@/constants/constant";
 import {createSlice} from "@reduxjs/toolkit";
-import Worker from "worker-loader!../../constants/commonWorkers/homepageCardsWorker.js";
 
 export const WorkersSlice = createSlice({
   name: "workers",

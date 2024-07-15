@@ -129,10 +129,10 @@ export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
 
-  const worker = new Worker();
   const dispatch = useDispatch();
 
   useEffect(() => {
+    const worker = new Worker();
     dispatch(setHomepageCardWorker(worker));
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
@@ -145,6 +145,7 @@ export default function Home() {
     });
 
     return () => {
+      worker.terminate();
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
