@@ -458,6 +458,7 @@ export default function DashboardComponent() {
           closeModal={toggleModal}
           orderId={orderId}
           width={230}
+          getDashboardDetails={getDashboardDetailsApi}
         />
       )}
 

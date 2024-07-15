@@ -10,7 +10,12 @@ import {format} from "date-fns";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
-const SlotDrawer = ({isModalOpen, closeModal, orderId}) => {
+const SlotDrawer = ({
+  isModalOpen,
+  closeModal,
+  orderId,
+  getDashboardDetails,
+}) => {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -41,6 +46,7 @@ const SlotDrawer = ({isModalOpen, closeModal, orderId}) => {
       .post(endPoints.myOrdersPage.getDeliverySlots, body)
       .then(res => {
         setSlotdata(res?.data?.data);
+        setSelectedDate(res?.data?.data?.tmpDateMatch);
         res?.data?.data?.tmpDateMatch &&
           setCurrentDate(
             format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
@@ -57,6 +63,7 @@ const SlotDrawer = ({isModalOpen, closeModal, orderId}) => {
     try {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
       closeModal();
+      getDashboardDetails();
     } catch (err) {
       console.log(err?.message || "some error");
     }
