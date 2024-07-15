@@ -15,13 +15,16 @@ import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
-// import Notifications from "@/components/Common/Notifications/Notification";
+import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 // import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 // import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 // import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+import {setHomepageCardWorker} from "@/store/Slices";
+import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
+import {useDispatch} from "react-redux";
 
 // const TextContent = loadable(() => import("@/components/Common/TextContent"), {
 //   fallback: <ContentSkeleton />,
@@ -125,8 +128,12 @@ const RentNowBanner = loadable(
 export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
-  // added
+
+  const worker = new Worker();
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    dispatch(setHomepageCardWorker(worker));
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
         event.preventDefault();
@@ -189,8 +196,8 @@ export default function Home() {
         <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
-        <Footer />
-        <Notifications /> */}
+        <Footer /> */}
+        <Notifications />
       </div>
     </>
   );

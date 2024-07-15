@@ -4,6 +4,7 @@ import {endPoints} from "@/network/endPoints";
 self.addEventListener(
   "message",
   async ({data: {inWishList, productData, authToken, cityId, userId}}) => {
+    console.log("triggering worker");
     const getSavedItems = async () => {
       return await baseInstance
         .get(`${endPoints.savedItems}?cityId=${cityId}&userId=${userId}`, {

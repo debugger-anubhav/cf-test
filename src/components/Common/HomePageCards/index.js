@@ -10,7 +10,6 @@ import {useAuthentication} from "@/hooks/checkAuthentication";
 import {reduxSetModalState, setLoginPopupState} from "@/store/Slices";
 import LoginModal from "@/components/LoginPopups";
 import Link from "next/link";
-import Worker from "worker-loader!./homepageCardWorker.js";
 import {authToken} from "@/network/axios";
 import Image from "@/components/Image";
 
@@ -40,11 +39,11 @@ const Card = ({
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
+  const {homepageCardsWorker} = useSelector(state => state.workers);
+
   const updateCount = useRef(0);
 
   const dispatch = useDispatch();
-
-  const worker = new Worker();
 
   const words = desc.replace(/-/g, " ").split(" ");
 
@@ -60,7 +59,7 @@ const Card = ({
 
   useEffect(() => {
     return () => {
-      worker.terminate();
+      homepageCardsWorker.terminate();
     };
   }, []);
 
@@ -82,7 +81,7 @@ const Card = ({
   const cityId = parseFloat(cityIdStr);
 
   const addToWishlist = () => {
-    worker.postMessage({
+    homepageCardsWorker.postMessage({
       inWishList,
       productData: data,
       authToken,
@@ -90,7 +89,7 @@ const Card = ({
       userId: decrypt(getLocalStorage("_ga")),
     });
 
-    worker.onmessage = function ({data}) {
+    homepageCardsWorker.onmessage = function ({data}) {
       const {type, wishlistedItems, savedItemIds} = data;
       dispatch(addSaveditems(wishlistedItems));
       dispatch(addSaveditemID(savedItemIds));
@@ -101,7 +100,7 @@ const Card = ({
       switch (type) {
         case "addedToWishlist":
           showToastNotification("Item added to the wishlist", 1);
-          window?.fbq("track", "AddToWishlist");
+          window?.fbq?.("track", "AddToWishlist");
 
           break;
 
