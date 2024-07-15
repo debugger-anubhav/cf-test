@@ -37,10 +37,10 @@ const DownloadForMobile = () => {
 
 export default memo(DownloadForMobile);
 
-export const DownloadForMobileSkeleton = () => {
+export const DownloadForMobileSkeleton = memo(() => {
   return (
     <div>
       <Skeleton variant="rectangular" width={"100%"} height={380} />
     </div>
   );
-};
+});
