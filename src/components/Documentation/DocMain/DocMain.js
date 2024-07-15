@@ -32,6 +32,7 @@ import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
 import EducationalDetails from "@/components/KycScreens/EducationalDetails";
 import AutoPay from "@/components/KycScreens/AutoPay";
+// import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
   const dispatch = useDispatch();
@@ -188,6 +189,8 @@ const DocMain = () => {
         <DocSidebar />
 
         <div className={styles.kycFormArea}>
+          {/* <ProgressSection progress={80}/> */}
+
           {currentScreen === "workProfession" && (
             <WorkProfession orderId={ordersData[selectedOption]} />
           )}
