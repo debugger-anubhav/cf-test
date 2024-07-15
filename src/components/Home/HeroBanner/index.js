@@ -83,7 +83,6 @@ const HeroBanner = () => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % completeBanners.length);
       }, 3000);
     } else {
-      console.log("i can start timer");
       setCurrentIndex(1);
     }
 
