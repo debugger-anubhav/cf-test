@@ -21,39 +21,17 @@ const Image = ({src, alt, priority = false, loading = "lazy", ...props}) => {
 
   const formattedUrl = src?.startsWith("https:") ? src : `https:${src}`;
 
-  // const [isLoaded, setIsLoaded] = useState(false);
-  // const [height, setHeight] = useState(undefined);
-
-  // const ref = useRef(null);
-
-  // const handleResize = () => {
-  //   setHeight(ref.current.getBoundingClientRect().height);
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-  //   return () => window.removeEventListener("resize", () => handleResize);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (ref.current && ref.current.getBoundingClientRect().height > 0) {
-  //     setHeight(ref.current.getBoundingClientRect().height);
-  //   }
-  // }, [ref.current]);
-
   return (
-    <div>
+    <>
       {priority ? <link rel="preload" as="image" href={formattedUrl} /> : null}
       <NextImage
         src={formattedUrl}
         alt={alt}
-        // width={800}
-        // height={500}
         // sizes={sizes}
         priority={priority}
         {...props}
       />
-    </div>
+    </>
     // <div
     //   style={{
     //     width: "100%",
