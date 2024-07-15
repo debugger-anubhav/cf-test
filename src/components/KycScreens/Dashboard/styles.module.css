@@ -75,3 +75,12 @@
 .radio_button {
   @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }
+.kyc_tab {
+  @apply flex w-fit gap-8 border-b border-EDEDEE  mb-8;
+}
+.tab_item {
+  @apply font-Poppins pb-3 text-45454A md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer;
+}
+.active_tab_item {
+  @apply font-Poppins border-9A9AA2 text-5774AC md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer border-b pb-3;
+}

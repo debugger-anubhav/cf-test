@@ -50,7 +50,7 @@ export default function DashboardComponent() {
   const [openDeliverySlot, setOpenDeliverySlot] = useState(false);
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
-
+  const [activeTab, setactiveTab] = useState("kyc");
   const getDashboardDetailsApi = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
@@ -159,6 +159,7 @@ export default function DashboardComponent() {
   };
 
   const handleKycStagesClick = item => {
+    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
     dispatch(setStageId(item.id));
 
     if (item.id === 4) {
@@ -333,92 +334,117 @@ export default function DashboardComponent() {
         </button>
       </div>
 
-      <div className={styles.details_wrapper}>
-        {loadingSkeleton ? (
-          <SkeletonData />
-        ) : (
-          <>
-            {dashboardDetails?.allKycStages?.map((item, index) => {
-              if (item.id === 1) {
-                return (
-                  <div key={index.toString()}>
-                    <SdkIntegration
-                      openPanSdk={openPanSdk}
-                      item={item}
-                      status={convertStatus(item?.stage_status)}
-                      getDashboardDetailsApi={getDashboardDetailsApi}
-                    />
-                  </div>
-                );
-              } else if (item.id === 3 && professionId === 2) {
-                return (
-                  <div key={index.toString()}>
-                    <GstSdk
-                      item={item}
-                      status={convertStatus(item?.stage_status)}
-                      getDashboardDetailsApi={getDashboardDetailsApi}
-                    />
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    className={`${styles.details_box}
+      <div className={styles.kyc_tab}>
+        <p
+          className={
+            activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
+          }
+          onClick={() => setactiveTab("kyc")}>
+          KYC
+        </p>
+        <p
+          className={
+            activeTab === "optional" ? styles.active_tab_item : styles.tab_item
+          }
+          onClick={() => setactiveTab("optional")}>
+          Optional KYC
+        </p>
+      </div>
+
+      {activeTab === "kyc" && (
+        <>
+          <div className={styles.details_wrapper}>
+            {loadingSkeleton ? (
+              <SkeletonData />
+            ) : (
+              <>
+                {dashboardDetails?.allKycStages?.map((item, index) => {
+                  if (item.id === 1) {
+                    return (
+                      <div key={index.toString()}>
+                        <SdkIntegration
+                          openPanSdk={openPanSdk}
+                          item={item}
+                          status={convertStatus(item?.stage_status)}
+                          getDashboardDetailsApi={getDashboardDetailsApi}
+                        />
+                      </div>
+                    );
+                  } else if (item.id === 3 && professionId === 2) {
+                    return (
+                      <div key={index.toString()}>
+                        <GstSdk
+                          item={item}
+                          status={convertStatus(item?.stage_status)}
+                          getDashboardDetailsApi={getDashboardDetailsApi}
+                        />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        className={`${styles.details_box}
                     ${
                       item.stage_status === 2 || item.stage_status === 1
                         ? "!cursor-default"
                         : "cursor-pointer"
                     }
                     `}
-                    key={index.toString()}
-                    onClick={() => {
-                      if (item.stage_status === 2 || item.stage_status === 1) {
-                        return null;
-                      } else handleKycStagesClick(item);
-                    }}>
-                    <div className={styles.detail_heading}>
-                      {item?.stage_name}
-                    </div>
-                    <div className={styles.sub_heading}>
-                      {convertStatus(item?.stage_status)}
-                    </div>
-                  </div>
-                );
-              }
-            })}
-          </>
-        )}
-      </div>
+                        key={index.toString()}
+                        onClick={() => {
+                          if (
+                            item.stage_status === 2 ||
+                            item.stage_status === 1
+                          ) {
+                            return null;
+                          } else handleKycStagesClick(item);
+                        }}>
+                        <div className={styles.detail_heading}>
+                          {item?.stage_name}
+                        </div>
+                        <div className={styles.sub_heading}>
+                          {convertStatus(item?.stage_status)}
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              </>
+            )}
+          </div>
 
-      <div className={styles.mobile_details_wrapper}>
-        {loadingSkeleton ? (
-          <SkeletonData />
-        ) : (
-          <>
-            {dashboardDetails?.allKycStages?.map((item, index) => {
-              if (item.id === 1) {
-                return (
-                  <div key={index.toString()}>
-                    <SdkIntegration
-                      openPanSdk={openPanSdk}
-                      item={item}
-                      status={convertStatus(item?.stage_status)}
-                      getDashboardDetailsApi={getDashboardDetailsApi}
-                    />
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    key={index.toString()}
-                    onClick={() => {
-                      if (item.stage_status === 2 || item.stage_status === 1) {
-                        return null;
-                      } else handleKycStagesClick(item);
-                    }}
-                    className={`${styles.mobile_detail_box} ${
-                      index === 4 ? "border-none" : "border-b"
-                    }
+          <div className={styles.mobile_details_wrapper}>
+            {loadingSkeleton ? (
+              <SkeletonData />
+            ) : (
+              <>
+                {dashboardDetails?.allKycStages?.map((item, index) => {
+                  if (item.id === 1) {
+                    return (
+                      <div key={index.toString()}>
+                        <SdkIntegration
+                          openPanSdk={openPanSdk}
+                          item={item}
+                          status={convertStatus(item?.stage_status)}
+                          getDashboardDetailsApi={getDashboardDetailsApi}
+                        />
+                      </div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={index.toString()}
+                        onClick={() => {
+                          if (
+                            item.stage_status === 2 ||
+                            item.stage_status === 1
+                          ) {
+                            return null;
+                          } else handleKycStagesClick(item);
+                        }}
+                        className={`${styles.mobile_detail_box} ${
+                          index === 4 ? "border-none" : "border-b"
+                        }
                     ${
                       item.stage_status === 2 || item.stage_status === 1
                         ? "!cursor-default"
@@ -426,19 +452,23 @@ export default function DashboardComponent() {
                     }
                     
                     `}>
-                    <div className={styles.detail_heading}>
-                      {item?.stage_name}
-                    </div>
-                    <div className={styles.sub_heading}>
-                      {convertStatus(item?.stage_status)}
-                    </div>
-                  </div>
-                );
-              }
-            })}
-          </>
-        )}
-      </div>
+                        <div className={styles.detail_heading}>
+                          {item?.stage_name}
+                        </div>
+                        <div className={styles.sub_heading}>
+                          {convertStatus(item?.stage_status)}
+                        </div>
+                      </div>
+                    );
+                  }
+                })}
+              </>
+            )}
+          </div>
+        </>
+      )}
+
+      {activeTab === "optional" && <>optional</>}
 
       {holdOnLoader && (
         <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />

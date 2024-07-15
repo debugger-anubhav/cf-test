@@ -54,10 +54,12 @@ export default function SdkIntegration({
     if (saveHVData?.data?.cibilScore > 650) {
       console.log("show automatically aditional information");
       dispatch(setKycScreenName("professionalDetails"));
+      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
       dispatch(setStageId(3));
     }
     if (saveHVData?.data?.cibilScore < 650) {
       dispatch(setKycScreenName("financialInfo"));
+      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
       dispatch(setStageId(2));
     }
     // console.log(saveHVData?.data, "saveHVData");
@@ -80,6 +82,7 @@ export default function SdkIntegration({
         }
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           dispatch(setStageId(2));
         }
       })
