@@ -60,7 +60,7 @@ export default function SdkIntegration({
       dispatch(setKycScreenName("financialInfo"));
       dispatch(setStageId(2));
     }
-    console.log(saveHVData?.data, "saveHVData");
+    // console.log(saveHVData?.data, "saveHVData");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {
@@ -84,6 +84,7 @@ export default function SdkIntegration({
         }
       })
       .catch(err => console.log(err));
+    setSelectedOption("");
   };
 
   const handleIdentityVerification = () => {
@@ -103,26 +104,26 @@ export default function SdkIntegration({
 
     // for testing purpose
     // baseInstance
-    // .post(endPoints.kycPage.saveHyperVergeKycDetails,  {
-    //   transactionId: `${userId}_${data?.dealCodeNumber}`,
-    //   status: 'auto_approved',
-    //   details: {
-    //     Face_Match_v_Action: 'pass',
-    //     Face_Match_v_Face_Match_Result: 'yes',
-    //     'PAN_OCR_ID_Number_-_Front': 'CNIPC4030M',
-    //     'PAN_OCR_D.O.B_-_Front': '24-09-2000',
-    //     'PoA_OCR_ID_Number_-_Front': 'MP09 20230058553',
-    //     'PoA_OCR_Full_Name_-_Front': 'CHETAN',
-    //   },
-    //   userId,
+    //   .post(endPoints.kycPage.saveHyperVergeKycDetails, {
+    //     transactionId: `${userId}_${data?.dealCodeNumber}`,
+    //     status: "auto_approved",
+    //     details: {
+    //       Face_Match_v_Action: "pass",
+    //       Face_Match_v_Face_Match_Result: "yes",
+    //       "PAN_OCR_ID_Number_-_Front": "CNIPC4030M",
+    //       "PAN_OCR_D.O.B_-_Front": "24-09-2000",
+    //       "PoA_OCR_ID_Number_-_Front": "MP09 20230058553",
+    //       "PoA_OCR_Full_Name_-_Front": "CHETAN",
+    //     },
+    //     userId,
     //     orderId: data?.dealCodeNumber,
-    // })
-    // .then(res => {
-    //   console.log(res?.data?.data, "response of savehyperverdetails");
-    //   setSaveHVData(res?.data?.data);
-    //   getDashboardDetailsApi();
-    // })
-    // .catch(err => console.log(err));
+    //   })
+    //   .then(res => {
+    //     console.log(res?.data?.data, "response of savehyperverdetails");
+    //     setSaveHVData(res?.data?.data);
+    //     getDashboardDetailsApi();
+    //   })
+    //   .catch(err => console.log(err));
     // };
   };
 
@@ -139,27 +140,26 @@ export default function SdkIntegration({
   const drawerContent = () => {
     return (
       <div>
-        {console.log(saveHVData, ";;;;;;;;;;;;;;;;;")}
         <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
           Question: {saveHVData?.data?.question}
         </div>
         <div className="flex flex-col w-[90%] gap-2">
           {saveHVData?.data?.optionsList?.map((item, index) => {
             return (
-              <div
+              <label
                 className="flex gap-3 items-center cursor-pointer"
                 key={index.toString()}>
                 <input
                   type="radio"
                   className={styles.radio_button}
                   name="radioGroup"
-                  onChange={e => setSelectedOption(e.target.value)}
-                  value={item}
+                  onChange={() => setSelectedOption(item)}
+                  checked={selectedOption === item}
                 />
                 <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6">
                   {item}
                 </p>
-              </div>
+              </label>
             );
           })}
         </div>
@@ -180,15 +180,35 @@ export default function SdkIntegration({
       {!openPanSdk && (
         <>
           <div
-            className={`!hidden md:!flex ${styles.details_box}`}
-            onClick={handleIdentityVerification}>
+            className={`!hidden md:!flex ${styles.details_box}
+            ${
+              item.stage_status === 2 || item.stage_status === 1
+                ? "cursor-default"
+                : "cursor-pointer"
+            }
+            `}
+            onClick={() => {
+              if (item.stage_status === 2 || item.stage_status === 1) {
+                return null;
+              } else handleIdentityVerification();
+            }}>
             <div className={styles.detail_heading}>{item?.stage_name}</div>
             <div className={styles.sub_heading}>{status}</div>
           </div>
 
           <div
-            onClick={handleIdentityVerification}
-            className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
+            onClick={() => {
+              if (item.stage_status === 2 || item.stage_status === 1) {
+                return null;
+              } else handleIdentityVerification();
+            }}
+            className={`${
+              styles.mobile_detail_box
+            } border-b !flex md:!hidden  ${
+              item.stage_status === 2 || item.stage_status === 1
+                ? "!cursor-default"
+                : "cursor-pointer"
+            }`}>
             <div className={styles.detail_heading}>{item?.stage_name}</div>
             <div className={styles.sub_heading}>{status}</div>
           </div>

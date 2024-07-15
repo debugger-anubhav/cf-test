@@ -19,3 +19,6 @@
 .radio_button {
   @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }
+.verifyTxt {
+  @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium min-w-fit;
+}

@@ -136,6 +136,7 @@ export const endPoints = {
     verifyCrifAnswer: "fc-kycs/verifyCrifAnswer",
     getDocsDetails: "fc-kycs/getDocsDetails",
     saveKycProfessionalDetails: "fc-kycs/saveKycProfessionalDetails",
+    verifyCompanyEmail: "/fc-kycs/verifyCompanyEmail",
   },
 
   cityshieldPage: {

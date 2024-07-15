@@ -4,6 +4,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {
   BackIcon,
+  CheckCircleIcon,
   ForwardArrow,
   ForwardArrowWithLine,
 } from "../../../assets/icon";
@@ -49,7 +50,6 @@ export default function DashboardComponent() {
   const [openDeliverySlot, setOpenDeliverySlot] = useState(false);
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
-  console.log(showQueDrawer);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -86,7 +86,7 @@ export default function DashboardComponent() {
       return (
         <p className={`${styles.status_style} text-[#2D9469]`}>
           Verified
-          <ForwardArrow color={"#222222"} size={16} />
+          <CheckCircleIcon color={"#2D9469"} size={16} />
         </p>
       );
     else if (number === 3)
@@ -274,11 +274,18 @@ export default function DashboardComponent() {
         <p className={styles.sub_heading}>KYC status:</p>
         <p className={`${styles.heading}  md:!text-20 `}>
           {dashboardDetails?.kycStatus}
+          {dashboardDetails?.kycStatus === "Under Review" && (
+            <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg" />
+          )}
+          {dashboardDetails?.kycStatus === "Verified" && (
+            <CheckCircleIcon color={"#2D9469"} size={18} />
+          )}
+          {dashboardDetails?.kycStatus === "Pending"}
+          {dashboardDetails?.kycStatus === "Rejected" && (
+            <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/red-exclamatory-icn.svg" />
+          )}
         </p>
-        <p className={styles.sub_heading}>
-          We require all your documents to be verified in order to schedule
-          delivery.
-        </p>
+        <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
 
         <button
           className={`${styles.schedule_delivery_btn}
@@ -290,15 +297,39 @@ export default function DashboardComponent() {
         `}
           disabled={dashboardDetails?.kycStatus === "Under Review"}
           onClick={() => handleDelivery()}>
+          {dashboardDetails?.kycStatus === "Under Review" && (
+            <div className="flex items-center gap-1">
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
+                alt="lock"
+                width={20}
+                height={20}
+              />
+              <p>Manage your delivery now</p>
+            </div>
+          )}
+
+          {dashboardDetails?.kycStatus === "Verified" && (
+            <div className="flex items-center gap-1">
+              <img
+                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
+                alt="lock"
+                width={20}
+                height={20}
+              />
+              <p>Manage your delivery now</p>
+            </div>
+          )}
+
           {dashboardDetails?.kycStatus === "Pending" &&
             "Complete KYC to Schedule Delivery"}
-          {(dashboardDetails?.kycStatus === "Under Review" ||
-            dashboardDetails?.kycStatus === "Verified") &&
-            "Manage your delivery now"}
+
           {dashboardDetails?.kycStatus === "Rejected" &&
             "Re-upload your documents now"}
 
-          <ForwardArrowWithLine />
+          {dashboardDetails?.kycStatus !== "Under Review" && (
+            <ForwardArrowWithLine />
+          )}
         </button>
       </div>
 
@@ -332,9 +363,19 @@ export default function DashboardComponent() {
               } else {
                 return (
                   <div
-                    className={styles.details_box}
+                    className={`${styles.details_box}
+                    ${
+                      item.stage_status === 2 || item.stage_status === 1
+                        ? "!cursor-default"
+                        : "cursor-pointer"
+                    }
+                    `}
                     key={index.toString()}
-                    onClick={() => handleKycStagesClick(item)}>
+                    onClick={() => {
+                      if (item.stage_status === 2 || item.stage_status === 1) {
+                        return null;
+                      } else handleKycStagesClick(item);
+                    }}>
                     <div className={styles.detail_heading}>
                       {item?.stage_name}
                     </div>
@@ -370,10 +411,21 @@ export default function DashboardComponent() {
                 return (
                   <div
                     key={index.toString()}
-                    onClick={() => handleKycStagesClick(item)}
+                    onClick={() => {
+                      if (item.stage_status === 2 || item.stage_status === 1) {
+                        return null;
+                      } else handleKycStagesClick(item);
+                    }}
                     className={`${styles.mobile_detail_box} ${
                       index === 4 ? "border-none" : "border-b"
-                    }`}>
+                    }
+                    ${
+                      item.stage_status === 2 || item.stage_status === 1
+                        ? "!cursor-default"
+                        : "cursor-pointer"
+                    }
+                    
+                    `}>
                     <div className={styles.detail_heading}>
                       {item?.stage_name}
                     </div>

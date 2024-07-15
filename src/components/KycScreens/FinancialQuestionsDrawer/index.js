@@ -65,6 +65,7 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
           dispatch(setStageId(2));
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         }
       })
       .catch(err => console.log(err));
@@ -100,27 +101,26 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
             </span>
           </div>
           <div>
-            {console.log(qusScreenData, ";;;;;;;;;;;;;;;;;")}
             <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
               {qusScreenData?.data?.question}
             </div>
             <div className="flex flex-col w-[90%] gap-2">
               {qusScreenData?.data?.optionsList?.map((item, index) => {
                 return (
-                  <div
+                  <label
                     className="flex gap-3 items-center cursor-pointer"
                     key={index.toString()}>
                     <input
                       type="radio"
                       className={styles.radio_button}
                       name="radioGroup"
-                      onChange={e => setSelectedOption(e.target.value)}
-                      value={item}
+                      onChange={() => setSelectedOption(item)}
+                      checked={selectedOption === item}
                     />
                     <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6">
                       {item}
                     </p>
-                  </div>
+                  </label>
                 );
               })}
             </div>
