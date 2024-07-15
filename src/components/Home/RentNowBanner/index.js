@@ -71,12 +71,12 @@ const RentNowBanner = ({params}) => {
   return (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card} ref={sliderRef}>
-        {rentNowBanner
+        {rentNowBanner && rentNowBanner.length > 0
           ? rentNowBanner?.map((item, index) => (
               <div
                 className={`${
-                  index === rentNowBanner?.length - 1 && "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}
+                  index === rentNowBanner?.length - 1 ? "mr-[16px]" : ""
+                } ${isDumy ? "pointer-events-none" : ""}`.trim()}
                 key={index.toString()}>
                 <RentNowCard
                   cardImage={`${imageSourceEndpoint}${item?.image}`}

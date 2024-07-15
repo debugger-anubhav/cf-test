@@ -63,12 +63,12 @@ const DownloadForMobile = loadable(
   {fallback: <DownloadForMobileSkeleton />},
 );
 
-// const PreDesignCombos = loadable(
-//   () => import("@/components/Home/PredesignCombos"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const PreDesignCombos = loadable(
+  () => import("@/components/Home/PredesignCombos"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 // const HasselFreeServicesCards = loadable(
 //   () => import("@/components/Home/HasselFreeServicesCards"),
@@ -171,8 +171,8 @@ export default function Home() {
         <OffersAndCoupons />
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
-        {/* <PreDesignCombos />
-        <HasselFreeServicesCards />
+        <PreDesignCombos />
+        {/* <HasselFreeServicesCards />
         <LimetedPreiodDiscount />
         <NewlyLaunched />
 

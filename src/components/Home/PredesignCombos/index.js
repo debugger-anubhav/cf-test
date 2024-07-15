@@ -1,43 +1,40 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
-// import string from "@/constants/Constant.json";
 import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
-import {endPoints} from "@/network/endPoints";
 import {addComboProducts} from "@/store/Slices";
-import {useQuery} from "@/hooks/useQuery";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker";
 
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = getLocalStorage("cityId");
-  const [isDumy, setIsDumy] = React.useState(false);
 
-  const {refetch: getPreDesignCombos} = useQuery(
-    "design-combos",
-    endPoints.productCombos,
-    `?cityId=${cityId}`,
-  );
-  useEffect(() => {
-    getPreDesignCombos()
-      .then(res => {
-        dispatch(addComboProducts(res?.data?.data));
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  }, []);
+  const [isDumy, setIsDumy] = useState(false);
 
   const sliderRef = useRef(null);
 
   useEffect(() => {
+    const worker = new Worker();
+    worker.onmessage = function ({data: {data}}) {
+      dispatch(addComboProducts(data));
+    };
+
+    worker.postMessage({type: "predesignCombos", cityId});
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
+
+  useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
-
     let mouseDown = false;
     let startX, scrollLeft;
-
     const startDragging = e => {
       mouseDown = true;
       startX = e.pageX - slider.offsetLeft;
@@ -47,11 +44,9 @@ const PreDesignCombos = () => {
       setIsDumy(false);
       mouseDown = false;
     };
-
     const toggleIsdragging = () => {
       if (mouseDown && !isDumy) setIsDumy(true);
     };
-
     slider.addEventListener("mousemove", e => {
       e.preventDefault();
       if (!mouseDown) return;
@@ -63,7 +58,6 @@ const PreDesignCombos = () => {
     slider.addEventListener("mouseup", stopDragging, false);
     slider.addEventListener("mouseleave", stopDragging, false);
     slider.addEventListener("mousemove", toggleIsdragging);
-
     return () => {
       slider.removeEventListener("mousedown", startDragging);
       slider.removeEventListener("mouseup", stopDragging);
@@ -74,17 +68,19 @@ const PreDesignCombos = () => {
 
   return (
     <>
-      {homePageReduxData?.designComboProduct ? (
+      {homePageReduxData?.designComboProduct &&
+      homePageReduxData.designComboProduct.length > 0 ? (
         <div className={styles.main_container}>
           <h2 className={styles.heading}>Predesigned combos for you</h2>
           <div className={styles.card_box} ref={sliderRef}>
-            {homePageReduxData?.designComboProduct?.map((item, index) => (
+            {homePageReduxData.designComboProduct.map((item, index) => (
               <div
                 key={index.toString()}
                 className={`${styles.child ?? ""}  ${
-                  index === homePageReduxData?.designComboProduct?.length - 1 &&
-                  "mr-[16px]"
-                } ${isDumy && "pointer-events-none"}`}>
+                  index === homePageReduxData?.designComboProduct?.length - 1
+                    ? "mr-[16px]"
+                    : ""
+                } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                 <Card
                   cardImage={
                     item?.image?.split(",").filter(item => item).length > 1
@@ -118,4 +114,4 @@ const PreDesignCombos = () => {
   );
 };
 
-export default PreDesignCombos;
+export default memo(PreDesignCombos);
