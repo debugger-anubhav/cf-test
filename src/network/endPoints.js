@@ -137,6 +137,8 @@ export const endPoints = {
     getDocsDetails: "fc-kycs/getDocsDetails",
     saveKycProfessionalDetails: "fc-kycs/saveKycProfessionalDetails",
     verifyCompanyEmail: "/fc-kycs/verifyCompanyEmail",
+    getOptionalStages: (userId, orderId) =>
+      `/fc-kycs/getOptionalStages?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {

@@ -25,6 +25,7 @@ import GstSdk from "../GstSdk";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import SlotDrawer from "../SlotDrawer/index";
 import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
+import OptionalStages from "../OptionalStages/";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -334,22 +335,26 @@ export default function DashboardComponent() {
         </button>
       </div>
 
-      <div className={styles.kyc_tab}>
-        <p
-          className={
-            activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
-          }
-          onClick={() => setactiveTab("kyc")}>
-          KYC
-        </p>
-        <p
-          className={
-            activeTab === "optional" ? styles.active_tab_item : styles.tab_item
-          }
-          onClick={() => setactiveTab("optional")}>
-          Optional KYC
-        </p>
-      </div>
+      {dashboardDetails?.isOptionalStages && (
+        <div className={styles.kyc_tab}>
+          <p
+            className={
+              activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
+            }
+            onClick={() => setactiveTab("kyc")}>
+            KYC
+          </p>
+          <p
+            className={
+              activeTab === "optional"
+                ? styles.active_tab_item
+                : styles.tab_item
+            }
+            onClick={() => setactiveTab("optional")}>
+            Optional
+          </p>
+        </div>
+      )}
 
       {activeTab === "kyc" && (
         <>
@@ -468,7 +473,9 @@ export default function DashboardComponent() {
         </>
       )}
 
-      {activeTab === "optional" && <>optional</>}
+      {activeTab === "optional" && (
+        <OptionalStages convertStatus={convertStatus} />
+      )}
 
       {holdOnLoader && (
         <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
