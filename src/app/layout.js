@@ -193,21 +193,15 @@ export default function RootLayout({children}) {
             />
           </>
         )}
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
 
-        <script
-          type="application/ld+json"
-          async
-          defer
-          dangerouslySetInnerHTML={{
-            __html: `
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <>
+            <script
+              type="application/ld+json"
+              async
+              defer
+              dangerouslySetInnerHTML={{
+                __html: `
               {
                 "@context": "https://schema.org/",
                 "@type": "Product",
@@ -223,8 +217,20 @@ export default function RootLayout({children}) {
                 }
               }
             `,
-          }}
+              }}
+            />
+          </>
+        )}
+        {/* <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
         />
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
+
+        
         {/* Northbeam script  */}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script

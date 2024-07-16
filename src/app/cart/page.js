@@ -13,7 +13,7 @@ export default async function CartPage() {
 export async function generateMetadata() {
   const title = "Conveniently Rent Furniture and Appliances";
   const description =
-    "Make your shopping cart to Discover the convenience of Rented furniture and appliances hassle-free, and enjoy flexible rental plans, doorstep delivery, and seamless transactions. Start building your dream home today!";
+    "Rent furniture and appliances easily! Enjoy flexible plans, doorstep delivery, and smooth transactions. Start creating your dream home today!";
   return {
     title,
     description,
