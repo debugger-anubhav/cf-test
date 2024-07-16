@@ -8,7 +8,11 @@ import styles from "./styles.module.css";
 import {setKycScreenName} from "@/store/Slices";
 // import CurrentAddProof from '../CurrentAddProf/index'
 
-export default function OptionalStages({convertStatus, getDocsDetailsApi}) {
+export default function OptionalStages({
+  convertStatus,
+  getDocsDetailsApi,
+  setHoldOnLoader,
+}) {
   const dispatch = useDispatch();
   const [optionalData, setOptionalData] = useState(null);
   const userId = decrypt(getLocalStorage("_ga"));
@@ -35,7 +39,7 @@ export default function OptionalStages({convertStatus, getDocsDetailsApi}) {
       dispatch(setKycScreenName("socialMedia"));
     }
     if (item.id === 5) {
-      dispatch(setKycScreenName("currentAddress"));
+      setHoldOnLoader(true);
       getDocsDetailsApi(5);
     }
   };

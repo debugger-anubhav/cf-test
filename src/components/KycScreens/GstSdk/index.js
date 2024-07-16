@@ -12,7 +12,12 @@ export default function GstSdk({item, status, getDashboardDetailsApi}) {
   const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
 
   const handler = HyperKycResult => {
-    console.log(HyperKycResult, HyperKycResult);
+    console.log(HyperKycResult, "gst hyperverge");
+    saveGstDetailsApi({
+      ...HyperKycResult,
+      userId,
+      orderId: data?.dealCodeNumber,
+    });
   };
 
   const handleClick = () => {
@@ -22,6 +27,18 @@ export default function GstSdk({item, status, getDashboardDetailsApi}) {
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(token, "gstin", selectedId);
         window.HyperKYCModule.launch(config, handler);
+      })
+      .catch(err => console.log(err));
+  };
+
+  const saveGstDetailsApi = details => {
+    baseInstance
+      .post(endPoints.kycPage.saveGstDetails, details)
+      .then(res => {
+        console.log(res?.data?.data, "response of savehyperverdetails");
+        getDashboardDetailsApi();
+
+        // dispatch(setKycScreenName("autoPay"));
       })
       .catch(err => console.log(err));
   };

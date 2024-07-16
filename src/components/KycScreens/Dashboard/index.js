@@ -156,6 +156,9 @@ export default function DashboardComponent() {
         if (stageId === 7) {
           dispatch(setKycScreenName("educationalDetails"));
         }
+        if (stageId === 5) {
+          dispatch(setKycScreenName("currentAddress"));
+        }
         setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setHoldOnLoader(false);
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
@@ -403,13 +406,12 @@ export default function DashboardComponent() {
                     `}
                         key={index.toString()}
                         onClick={() => {
-                          // if (
-                          //   item.stage_status === 2 ||
-                          //   item.stage_status === 1
-                          // ) {
-                          //   return null;
-                          // } else
-                          handleKycStagesClick(item);
+                          if (
+                            item.stage_status === 2 ||
+                            item.stage_status === 1
+                          ) {
+                            return null;
+                          } else handleKycStagesClick(item);
                         }}>
                         <div className={styles.detail_heading}>
                           {item?.stage_name}
@@ -484,6 +486,7 @@ export default function DashboardComponent() {
         <OptionalStages
           convertStatus={convertStatus}
           getDocsDetailsApi={getDocsDetailsApi}
+          setHoldOnLoader={setHoldOnLoader}
         />
       )}
 
