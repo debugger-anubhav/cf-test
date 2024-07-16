@@ -17,6 +17,7 @@ import KycCommonDrawer from "../KycCommonDrawer";
 import SdkIntegration from "../SdkIntegration";
 import {
   reduxSetModalState,
+  setCurrentAddOpt,
   setKycScreenName,
   setSelectedProfessionId,
   setStageId,
@@ -137,13 +138,13 @@ export default function DashboardComponent() {
     "Delivery Scheduled": "Verified",
   };
 
-  const getDocsDetailsApi = () => {
+  const getDocsDetailsApi = stageId => {
     baseInstance
       .post(endPoints.kycPage.getDocsDetails, {
         orderId,
         userId,
         professionId,
-        stageId: 2,
+        stageId,
       })
       .then(res => {
         if (res?.data?.data?.crifQuestionData?.isQuestion === false) {
@@ -152,6 +153,7 @@ export default function DashboardComponent() {
         setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setHoldOnLoader(false);
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
+        dispatch(setCurrentAddOpt(res?.data?.data?.requiredDocs));
       })
       .catch(err => {
         console.log(err);
@@ -163,13 +165,10 @@ export default function DashboardComponent() {
     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
     dispatch(setStageId(item.id));
 
-    if (item.id === 4) {
-      dispatch(setKycScreenName("personalDetails"));
-    }
     if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
         setHoldOnLoader(true);
-        getDocsDetailsApi();
+        getDocsDetailsApi(2);
       }
     }
     if (item.id === 3) {
@@ -474,7 +473,10 @@ export default function DashboardComponent() {
       )}
 
       {activeTab === "optional" && (
-        <OptionalStages convertStatus={convertStatus} />
+        <OptionalStages
+          convertStatus={convertStatus}
+          getDocsDetailsApi={getDocsDetailsApi}
+        />
       )}
 
       {holdOnLoader && (

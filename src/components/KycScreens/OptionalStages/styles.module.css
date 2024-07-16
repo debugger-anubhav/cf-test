@@ -10,3 +10,7 @@
 .mobile_details_wrapper {
   @apply border border-EDEDEE rounded-lg px-4 w-full flex md:hidden flex-col;
 }
+
+.sub_heading {
+  @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;
+}

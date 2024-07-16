@@ -139,6 +139,7 @@ export const endPoints = {
     verifyCompanyEmail: "/fc-kycs/verifyCompanyEmail",
     getOptionalStages: (userId, orderId) =>
       `/fc-kycs/getOptionalStages?userId=${userId}&orderId=${orderId}`,
+    uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
   },
 
   cityshieldPage: {
