@@ -27,6 +27,7 @@ import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import SlotDrawer from "../SlotDrawer/index";
 import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
+import {setPendingDashboardDetail} from "../../../store/Slices";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ export default function DashboardComponent() {
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
+  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
   const orderId = data?.dealCodeNumber;
 
   const fcPaymentData = JSON.parse(data?.fc_paymentData);
@@ -53,6 +55,7 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
+
   const getDashboardDetailsApi = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
@@ -195,12 +198,9 @@ export default function DashboardComponent() {
   };
 
   const handleDelivery = () => {
-    const pendingStage = dashboardDetails?.allKycStages?.filter(
-      i => i.stage_status === 0 || i.stage_status === 3,
-    );
-    if (pendingStage.length > 0) {
-      handleKycStagesClick(pendingStage[0]);
-      if (pendingStage[0].id === 1) {
+    if (pendingDashboardDetail.length > 0) {
+      handleKycStagesClick(pendingDashboardDetail[0]);
+      if (pendingDashboardDetail[0].id === 1) {
         setOpenPanSdk(true);
       }
     } else {
@@ -219,6 +219,13 @@ export default function DashboardComponent() {
 
   useEffect(() => {
     setOrderDate(dashboardDetails?.orderDate);
+  }, [dashboardDetails]);
+
+  useEffect(() => {
+    const pendingStage = dashboardDetails?.allKycStages?.filter(
+      i => i.stage_status === 0 || i.stage_status === 3,
+    );
+    dispatch(setPendingDashboardDetail(pendingStage));
   }, [dashboardDetails]);
 
   return (

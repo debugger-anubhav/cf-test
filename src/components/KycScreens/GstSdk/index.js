@@ -51,12 +51,20 @@ export default function GstSdk({item, status, getDashboardDetailsApi}) {
     <>
       <div
         className={`!hidden md:!flex ${styles.details_box}`}
-        onClick={handleClick}>
+        onClick={() => {
+          if (item.stage_status === 2 || item.stage_status === 1) {
+            return null;
+          } else handleClick();
+        }}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>
       </div>
       <div
-        onClick={handleClick}
+        onClick={() => {
+          if (item.stage_status === 2 || item.stage_status === 1) {
+            return null;
+          } else handleClick();
+        }}
         className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
         <div className={styles.detail_heading}>{item?.stage_name}</div>
         <div className={styles.sub_heading}>{status}</div>

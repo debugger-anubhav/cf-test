@@ -44,7 +44,7 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
   }, [currentAddOptions]);
 
   const [formData, setFormData] = useState({
-    addressProof: [], // You can add more fields as needed
+    addressProof: [],
     addressProofType: "",
     currentAddressProof: [],
     currentAddressProofType: "",
