@@ -184,7 +184,9 @@ export default function RootLayout({children}) {
                       },
                     }
 
-                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux", "eiuid" : res.data.userId});
+                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux"});
+window.gtag('event', 'page_view', {'send_to': 'G-XWKD9DJ015',"eiuid" : res.data.userId});
+
 
                   })
                   .catch(e => console.log('e',e))
