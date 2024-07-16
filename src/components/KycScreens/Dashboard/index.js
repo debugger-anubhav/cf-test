@@ -147,8 +147,14 @@ export default function DashboardComponent() {
         stageId,
       })
       .then(res => {
-        if (res?.data?.data?.crifQuestionData?.isQuestion === false) {
+        if (
+          res?.data?.data?.crifQuestionData?.isQuestion === false &&
+          stageId === 2
+        ) {
           dispatch(setKycScreenName("financialInfo"));
+        }
+        if (stageId === 7) {
+          dispatch(setKycScreenName("educationalDetails"));
         }
         setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setHoldOnLoader(false);
@@ -180,7 +186,8 @@ export default function DashboardComponent() {
       dispatch(setKycScreenName("autoPay"));
     }
     if (item.id === 7) {
-      dispatch(setKycScreenName("educationalDetails"));
+      setHoldOnLoader(true);
+      getDocsDetailsApi(7);
     }
   };
 

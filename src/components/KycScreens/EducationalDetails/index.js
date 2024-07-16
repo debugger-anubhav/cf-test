@@ -8,13 +8,14 @@ import uploading from "@/assets/common_icons/uploading.jpg";
 import {setKycScreenName} from "@/store/Slices";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 export default function EducationalDetails() {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-
+  const currentAddOptions = kycSliceData.currentAddOpt;
   const allowedFileTypes = [
     "image/jpeg",
     "image/jpg",
@@ -24,16 +25,16 @@ export default function EducationalDetails() {
 
   const [formData, setFormData] = useState({
     collegeName: "",
-    collegeId: [],
+    idProof: [],
   });
   const [formErrors, setFormErrors] = useState({
     collegeName: "",
-    collegeId: "",
+    idProof: "",
   });
 
   const handleFileInputChange = e => {
     const file = e.target.files;
-    const temp = [...formData.collegeId];
+    const temp = [...formData.idProof];
     const fileArray = Object.keys(file).map(key => {
       return file[key];
     });
@@ -41,18 +42,18 @@ export default function EducationalDetails() {
 
     if (file) {
       setFormData(prev => {
-        return {...prev, collegeId: newArr};
+        return {...prev, idProof: newArr};
       });
 
       if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
         setFormErrors(prev => ({
           ...prev,
-          collegeId: "Please select jpg,png, pdf or jpeg file",
+          idProof: "Please select jpg,png, pdf or jpeg file",
         }));
       } else {
         setFormErrors(prev => ({
           ...prev,
-          collegeId: "",
+          idProof: "",
         }));
       }
     }
@@ -60,40 +61,38 @@ export default function EducationalDetails() {
 
   const submitHandler = () => {
     const error = formErrors;
-    if (!formData?.collegeId?.length > 0) {
-      error.collegeId = "Please upload the college Id";
+    if (!formData?.idProof?.length > 0) {
+      error.idProof = "Please upload the college Id";
     } else {
-      error.collegeId = "";
+      error.idProof = "";
     }
     setFormErrors({...error});
-    if (error.collegeId !== "") return;
+    if (error.idProof !== "") return;
 
     // setDisableButton(true);
     const allData = new FormData();
     allData.append(
-      "collegeId",
+      "idProof",
       JSON.stringify({
-        doc_id: "cf_financial_statement",
-        // subDocType: isSelected,
+        doc_id: currentAddOptions?.doc_id,
+        subDocType: currentAddOptions?.supported_docs,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
-    for (let i = 0; i < formData.collegeId.length; i++) {
-      allData.append("doc", formData.collegeId[i]);
+    for (let i = 0; i < formData.idProof.length; i++) {
+      allData.append("doc", formData.idProof[i]);
     }
     allData.append("orderId", orderId);
-    allData.append("stageId", 3);
-    // baseInstance
-    //   .post(endPoints.kycPage.uploadFinancialDocs, allData)
-    //   .then(() => {
-    //     handleKycState(orderId);
-    //     dispatch(setKycScreenName("professionalDetails"));
-    //     setDisableButton(false);
-    //   })
-    //   .catch(err => {
-    //     console.log(err?.message || "some error");
-    //     setDisableButton(false);
-    //   });
+    allData.append("stageId", 7);
+    baseInstance
+      .post(endPoints.kycPage.saveEducationalDetails, allData)
+      .then(() => {
+        // handleKycState(orderId);
+        dispatch(setKycScreenName("dashboard"));
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+      });
   };
 
   return (
@@ -128,7 +127,7 @@ export default function EducationalDetails() {
         <div className={styles.label}>School/college ID proof</div>
         <label
           className={`flex items-center gap-2 ${styles.label_input_style}`}
-          htmlFor={"collegeId"}>
+          htmlFor={"idProof"}>
           <Image
             loader={({src}) => src}
             src={uploading}
@@ -150,8 +149,8 @@ export default function EducationalDetails() {
           type="file"
           multiple
           accept="image/jpeg,image/jpg,image/png,application/pdf"
-          name="collegeId"
-          id="collegeId"
+          name="idProof"
+          id="idProof"
           style={{display: "none"}}
           onChange={e => {
             handleFileInputChange(e);

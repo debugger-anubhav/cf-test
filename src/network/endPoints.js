@@ -140,6 +140,7 @@ export const endPoints = {
     getOptionalStages: (userId, orderId) =>
       `/fc-kycs/getOptionalStages?userId=${userId}&orderId=${orderId}`,
     uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
+    saveEducationalDetails: "fc-kycs/saveEducationalDetails",
   },
 
   cityshieldPage: {

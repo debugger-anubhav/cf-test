@@ -33,6 +33,7 @@ import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
 import EducationalDetails from "@/components/KycScreens/EducationalDetails";
 import AutoPay from "@/components/KycScreens/AutoPay";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
+import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
@@ -341,7 +342,7 @@ const DocMain = () => {
 
           {currentScreen === "dashboard" && <DashboardComponent />}
           {currentScreen === "currentAddress" && <CurrentAddressProof />}
-          {currentScreen === "socialMedia" && <DashboardComponent />}
+          {currentScreen === "socialMedia" && <SocialMediaLogin />}
           {currentScreen === "professionalDetails" && <ProfessionalDetails />}
           {currentScreen === "educationalDetails" && <EducationalDetails />}
           {currentScreen === "autoPay" && <AutoPay />}
