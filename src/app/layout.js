@@ -182,7 +182,11 @@ export default function RootLayout({children}) {
                         cf_userid: res.data.userId,
                       },
                     }
-                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux", "eiuid" : res.data.userId});
+
+                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux"});
+window.gtag('event', 'page_view', {'send_to': 'G-XWKD9DJ015',"eiuid" : res.data.userId});
+
+
                   })
                   .catch(e => console.log('e',e))
                 `,
@@ -190,21 +194,15 @@ export default function RootLayout({children}) {
             />
           </>
         )}
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
 
-        <script
-          type="application/ld+json"
-          async
-          defer
-          dangerouslySetInnerHTML={{
-            __html: `
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <>
+            <script
+              type="application/ld+json"
+              async
+              defer
+              dangerouslySetInnerHTML={{
+                __html: `
               {
                 "@context": "https://schema.org/",
                 "@type": "Product",
@@ -220,8 +218,20 @@ export default function RootLayout({children}) {
                 }
               }
             `,
-          }}
+              }}
+            />
+          </>
+        )}
+        {/* <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
         />
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
+
+        
         {/* Northbeam script  */}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
