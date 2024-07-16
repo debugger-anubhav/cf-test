@@ -135,19 +135,33 @@ export default function EducationalDetails() {
             className={`${commonStyles.mdIBHidden}`}
           />
           <span className={`!pl-0 ${styles.chooseFile}`}>
-            {/* {item?.name || item?.doc_name} */}
-            Upload document(s)
+            {formData?.idProof?.length > 0 ? (
+              <>
+                {formData?.idProof?.map((file, index) => (
+                  <span key={index}>{file?.name}</span>
+                ))}
+              </>
+            ) : (
+              " Upload document(s)"
+            )}
           </span>
         </label>
+        <div>
+          {formData?.idProof?.length !== 0 && (
+            <>
+              <div className={`${commonStyles.correctFile}`}></div>
+              <div className={commonStyles.animate_check_icon}>
+                <CheckFillIcon
+                  color={"#2D9469"}
+                  className={`${commonStyles.mdHiddemIcons}`}
+                />
+              </div>
+            </>
+          )}
+        </div>
 
         <input
-          //   disabled={
-          //     isReupload
-          //       ? cibilDocsData?.cf_permanent_address_proof?.length > 0
-          //       : false
-          //   }
           type="file"
-          multiple
           accept="image/jpeg,image/jpg,image/png,application/pdf"
           name="idProof"
           id="idProof"
@@ -156,14 +170,15 @@ export default function EducationalDetails() {
             handleFileInputChange(e);
           }}
         />
-        <>
+
+        {formErrors.idProof === "" && (
           <div className={commonStyles.animate_check_icon}>
             <CheckFillIcon
               color={"#2D9469"}
               className={`${commonStyles.mdHiddemIcons}`}
             />
           </div>
-        </>
+        )}
       </div>
 
       <button

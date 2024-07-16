@@ -403,12 +403,13 @@ export default function DashboardComponent() {
                     `}
                         key={index.toString()}
                         onClick={() => {
-                          if (
-                            item.stage_status === 2 ||
-                            item.stage_status === 1
-                          ) {
-                            return null;
-                          } else handleKycStagesClick(item);
+                          // if (
+                          //   item.stage_status === 2 ||
+                          //   item.stage_status === 1
+                          // ) {
+                          //   return null;
+                          // } else
+                          handleKycStagesClick(item);
                         }}>
                         <div className={styles.detail_heading}>
                           {item?.stage_name}
