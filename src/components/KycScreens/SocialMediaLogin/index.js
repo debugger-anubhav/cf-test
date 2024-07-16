@@ -3,9 +3,15 @@ import styles from "./styles.module.css";
 import {BackIcon} from "@/assets/icon";
 import {useDispatch} from "react-redux";
 import {setKycScreenName} from "../../../store/Slices";
+import {signIn} from "next-auth/react";
 
 export default function SocialMediaLogin() {
   const dispatch = useDispatch();
+
+  const handleConnect = async () => {
+    await signIn("facebook");
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.heading}>
@@ -22,7 +28,9 @@ export default function SocialMediaLogin() {
           return (
             <div className={styles.content_wrapper} key={index.toString()}>
               <p className={styles.item}>{item}</p>
-              <button className={styles.connect_btn}>Connect</button>
+              <button className={styles.connect_btn} onClick={handleConnect}>
+                Connect
+              </button>
             </div>
           );
         })}

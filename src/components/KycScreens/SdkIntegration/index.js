@@ -97,7 +97,7 @@ export default function SdkIntegration({
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(
           token,
-          "City-Furnish-Workflow",
+          "City_Furnish_Workflow",
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);

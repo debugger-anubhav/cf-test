@@ -97,7 +97,7 @@ export default function RootLayout({children}) {
 
         {/* <Partytown debug={true} forward={["dataLayer.push"]} /> */}
 
-        <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.4.2/src/sdk.min.js"></script>
+        <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js"></script>
 
         <script
           type="text/javascript"
