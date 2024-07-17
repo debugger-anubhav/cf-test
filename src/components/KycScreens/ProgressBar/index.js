@@ -5,11 +5,14 @@ import Image from "next/image";
 export default function ProgressSection({progress}) {
   return (
     <div className={styles.main_wrapper}>
-      <div className={styles.progressBar} style={{width: `${progress}%`}}></div>
-
+      <div className={styles.progressBarContainer}>
+        <div
+          className={styles.progressBar}
+          style={{width: `${progress}%`}}></div>
+      </div>
       <div className={styles.wrapper}>
         <div className={styles.text}>
-          KYC done
+          {progress}% KYC done
           <span>
             <Image
               loader={({src}) => src}

@@ -28,6 +28,7 @@ import SlotDrawer from "../SlotDrawer/index";
 import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
+import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -56,6 +57,7 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
+  const [progressPercentage, setProgressPercentage] = useState(0);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -229,6 +231,19 @@ export default function DashboardComponent() {
       i => i.stage_status === 0 || i.stage_status === 3,
     );
     dispatch(setPendingDashboardDetail(pendingStage));
+  }, [dashboardDetails]);
+
+  useEffect(() => {
+    const totalProgress = dashboardDetails?.allKycStages?.length;
+    const progress = dashboardDetails?.allKycStages?.filter(
+      i => i.stage_status === 2 || i.stage_status === 1,
+    );
+
+    const progressPercentage =
+      totalProgress > 0
+        ? Math.round((progress?.length / totalProgress) * 100)
+        : 0;
+    setProgressPercentage(progressPercentage);
   }, [dashboardDetails]);
 
   return (
@@ -541,6 +556,8 @@ export default function DashboardComponent() {
           docsDetailsData={docsDetailsData}
         />
       )}
+
+      <ProgressSection progress={progressPercentage} />
     </div>
   );
 }

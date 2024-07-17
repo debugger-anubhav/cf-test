@@ -34,7 +34,6 @@ import EducationalDetails from "@/components/KycScreens/EducationalDetails";
 import AutoPay from "@/components/KycScreens/AutoPay";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
-// import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
   const dispatch = useDispatch();
@@ -138,6 +137,7 @@ const DocMain = () => {
         ),
       )
       .then(res => {
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         if (res?.data?.data?.status) {
           dispatch(setKycScreenName("dashboard"));
         } else {
@@ -190,9 +190,7 @@ const DocMain = () => {
       <div className={styles.mainContainer}>
         <DocSidebar />
 
-        <div className={styles.kycFormArea}>
-          {/* <ProgressSection progress={80}/> */}
-
+        <div className={`${styles.kycFormArea} mb-12`}>
           {currentScreen === "workProfession" && (
             <WorkProfession orderId={ordersData[selectedOption]} />
           )}
