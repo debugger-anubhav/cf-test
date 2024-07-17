@@ -143,7 +143,7 @@ const CurrentAddressProof = ({cibilDocsData}) => {
   const submitHandler = () => {
     const isError = validateForm();
     if (isError) {
-      console.log(formErrors, "kkkkkkk");
+      console.log(formErrors, "formErrors");
     }
 
     const allData = new FormData();

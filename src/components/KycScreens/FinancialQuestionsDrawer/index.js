@@ -73,7 +73,6 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
 
   useEffect(() => {
     if (qusScreenData?.data?.cibilScore > 650) {
-      console.log("show automatically aditional information");
       dispatch(setKycScreenName("professionalDetails"));
       dispatch(setStageId(3));
     }

@@ -21,6 +21,7 @@ import {endPoints} from "@/network/endPoints";
 export default function EducationalDetails() {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
+  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const currentAddOptions = kycSliceData.currentAddOpt;
@@ -88,8 +89,12 @@ export default function EducationalDetails() {
     allData.append(
       "idProof",
       JSON.stringify({
-        doc_id: currentAddOptions?.doc_id,
-        subDocType: currentAddOptions?.supported_docs,
+        doc_id: currentAddOptions
+          ? currentAddOptions.doc_id
+          : "college_id_proof",
+        subDocType: currentAddOptions
+          ? currentAddOptions.supported_docs
+          : "Id Card",
       }),
     );
 
@@ -106,8 +111,10 @@ export default function EducationalDetails() {
       baseInstance
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
-          // handleKycState(orderId);
-          dispatch(setKycScreenName("dashboard"));
+          const temp = pendingDashboardDetail?.filter(i => i.id === 6);
+          if (temp.length > 0) {
+            dispatch(setKycScreenName("autoPay"));
+          } else dispatch(setKycScreenName("dashboard"));
         })
         .catch(err => {
           console.log(err?.message || "some error");
@@ -249,7 +256,7 @@ export default function EducationalDetails() {
                   loading="lazy"
                 />
                 <span className={`${styles.chooseFile}`}>
-                  Upload Bank Statement
+                  upload school/college ID proof
                 </span>
               </div>
             </label>

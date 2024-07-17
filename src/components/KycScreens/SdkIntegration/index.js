@@ -40,7 +40,6 @@ export default function SdkIntegration({
     baseInstance
       .post(endPoints.kycPage.saveHyperVergeKycDetails, details)
       .then(res => {
-        console.log(res?.data?.data, "response of savehyperverdetails");
         setSaveHVData(res?.data?.data);
         getDashboardDetailsApi();
         setOpenLoader(false);
@@ -60,7 +59,6 @@ export default function SdkIntegration({
       setQustionDrawer(true);
     }
     if (saveHVData?.data?.cibilScore > 650) {
-      console.log("show automatically aditional information");
       dispatch(setKycScreenName("professionalDetails"));
       window.scrollTo({top: 0, left: 0, behavior: "smooth"});
       dispatch(setStageId(3));

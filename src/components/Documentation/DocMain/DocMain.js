@@ -360,10 +360,7 @@ const DocMain = () => {
 
           {currentScreen === "financialInfo" && (
             <div className="mt-8">
-              <FinancialInfo
-                handleKycState={id => handleKycState(id)}
-                cibilDocsData={cibilDocsData}
-              />
+              <FinancialInfo handleKycState={id => handleKycState(id)} />
             </div>
           )}
         </div>

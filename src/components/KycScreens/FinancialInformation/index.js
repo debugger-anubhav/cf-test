@@ -51,10 +51,8 @@ const SelectionComp = ({
   );
 };
 
-const FinancialInfo = ({handleKycState, cibilDocsData}) => {
+const FinancialInfo = ({handleKycState}) => {
   const dispatch = useDispatch();
-  const isReupload = cibilDocsData?.userDocs?.length > 0;
-  console.log(isReupload);
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
@@ -63,6 +61,8 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const stageId = kycSliceData.stageId;
   const userId = decrypt(getLocalStorage("_ga"));
+  const professionId = kycSliceData.selectedProfessionId;
+  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -136,8 +136,16 @@ const FinancialInfo = ({handleKycState, cibilDocsData}) => {
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
+        const temp = pendingDashboardDetail?.filter(i => i.id === 6);
         handleKycState(orderId);
-        dispatch(setKycScreenName("professionalDetails"));
+        if (professionId !== 5) {
+          dispatch(setKycScreenName("professionalDetails"));
+        } else if (temp.length > 0) {
+          dispatch(setKycScreenName("autoPay"));
+        } else {
+          dispatch(setKycScreenName("dashboard"));
+        }
+
         dispatch(setStageId(3));
         setDisableButton(false);
       })

@@ -19,6 +19,7 @@ export default function ProfessionalDetails() {
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
+  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const stageId = kycSliceData.stageId;
@@ -85,11 +86,14 @@ export default function ProfessionalDetails() {
   };
 
   const saveProfessionalDetails = payload => {
+    const temp = pendingDashboardDetail?.filter(i => i.id === 6);
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
         if (professionId === 4) {
           dispatch(setKycScreenName("educationalDetails"));
+        } else if (temp.length > 0) {
+          dispatch(setKycScreenName("autoPay"));
         } else {
           dispatch(setKycScreenName("dashboard"));
         }

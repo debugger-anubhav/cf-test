@@ -51,6 +51,7 @@ export default function DashboardComponent() {
   const [changeProfession, setChangeProfession] = useState(false);
   const [holdOnLoader, setHoldOnLoader] = useState(false);
   const [openPanSdk, setOpenPanSdk] = useState(false);
+  const [openGstSdk, setOpenGstSdk] = useState(false);
   const [openDeliverySlot, setOpenDeliverySlot] = useState(false);
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
@@ -198,14 +199,16 @@ export default function DashboardComponent() {
   };
 
   const handleDelivery = () => {
+    console.log(professionId, pendingDashboardDetail[0].id);
+
     if (pendingDashboardDetail.length > 0) {
       handleKycStagesClick(pendingDashboardDetail[0]);
-      if (pendingDashboardDetail[0].id === 1) {
+      if (pendingDashboardDetail[0].id === 3 && professionId === 2) {
+        setOpenGstSdk(true);
+      } else if (pendingDashboardDetail[0].id === 1) {
         setOpenPanSdk(true);
       }
-    } else {
-      toggleModal();
-    }
+    } else toggleModal();
   };
 
   const toggleModal = () => {
@@ -508,6 +511,10 @@ export default function DashboardComponent() {
           openPanSdk={openPanSdk}
           setOpenPanSdk={setOpenPanSdk}
         />
+      )}
+
+      {professionId === 2 && openGstSdk && (
+        <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
       )}
 
       {openDeliverySlot && (
