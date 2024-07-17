@@ -494,6 +494,7 @@ export default function DashboardComponent() {
           convertStatus={convertStatus}
           getDocsDetailsApi={getDocsDetailsApi}
           setHoldOnLoader={setHoldOnLoader}
+          setactiveTab={setactiveTab}
         />
       )}
 

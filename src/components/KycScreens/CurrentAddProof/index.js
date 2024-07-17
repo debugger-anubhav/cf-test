@@ -21,7 +21,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
-const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
+const CurrentAddressProof = ({cibilDocsData}) => {
   const dispatch = useDispatch();
 
   const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
@@ -31,7 +31,6 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
   const [docsData, setDocsData] = useState();
   const [selectedOptionCur, setSelectedOptionCur] = useState({});
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
-  const [disableButton, setDisableButton] = useState(false);
   const [dropdownOpt, setDropdownOpt] = useState(
     currentAddOptions?.supported_docs?.split(","),
   );
@@ -100,24 +99,6 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
         }
       }
     }
-    if (e.target.name === "currrentAdd") {
-      if (file) {
-        setFormData(prev => {
-          return {...prev, currentAddressProof: newArr};
-        });
-        if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
-          setFormErrors(prev => ({
-            ...prev,
-            currentAddressProof: "Please select jpg,png, pdf or jpeg file",
-          }));
-        } else {
-          setFormErrors(prev => ({
-            ...prev,
-            currentAddressProof: "",
-          }));
-        }
-      }
-    }
   };
 
   const handleDeleteFile = (val, index) => {
@@ -125,11 +106,6 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
       const temp = [...formData.addressProof];
       temp.splice(index, 1);
       setFormData({...formData, addressProof: temp});
-    }
-    if (val === "currentAddProof") {
-      const temp = [...formData.currentAddressProof];
-      temp.splice(index, 1);
-      setFormData({...formData, currentAddressProof: temp});
     }
   };
 
@@ -151,50 +127,29 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
   const validateForm = () => {
     const error = formErrors;
     if (!formData?.addressProof?.length > 0) {
-      error.addressProof = "Please upload the address proof";
+      error.addressProof = "Please upload the current address proof";
     } else {
       error.addressProof = "";
     }
-    if (!formData?.currentAddressProof?.length > 0) {
-      error.currentAddressProof = "Please upload the address proof";
-    } else {
-      error.currentAddressProof = "";
-    }
-
     if (!formData?.addressProofType) {
-      error.addressProofType = "Please select the address proof type.";
+      error.addressProofType = "Please select the current address proof type.";
     } else {
       error.addressProofType = "";
     }
-    if (!formData?.currentAddressProofType) {
-      error.currentAddressProofType = "Please select the address proof type.";
-    } else {
-      error.currentAddressProofType = "";
-    }
-
     setFormErrors({...error});
     return !!Object.values(error).filter(Boolean).length;
   };
 
   const submitHandler = () => {
-    console.log("click");
     const isError = validateForm();
     if (isError) {
-      return;
+      console.log(formErrors, "kkkkkkk");
     }
-    // for (const key in formErrors) {
-    //   if (Object.hasOwnProperty.call(formErrors, key)) {
-    //     const element = formErrors[key];
-    //     if (element) {
-    //       return;
-    //     }
-    //   }
-    // }
-    setDisableButton(true);
+
     const allData = new FormData();
 
-    for (let i = 0; i < formData.currentAddressProof.length; i++) {
-      allData.append("doc", formData.currentAddressProof[i]);
+    for (let i = 0; i < formData.addressProof.length; i++) {
+      allData.append("doc", formData.addressProof[i]);
     }
     allData.append(
       "currentAddressDocs",
@@ -207,17 +162,15 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
     allData.append("stageId", 5);
     allData.append("orderId", orderId);
 
-    console.log(allData, "pppppppppp");
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
         .post(endPoints.kycPage.uploadCurrentAddressDocs, allData)
         .then(res => {
-          handleKycState(orderId);
-          setDisableButton(false);
+          dispatch(setKycScreenName("dashboard"));
+          console.log(res);
         })
         .catch(err => {
           console.log(err?.message || "some error");
-          setDisableButton(false);
         });
     }
   };
@@ -463,29 +416,13 @@ const CurrentAddressProof = ({handleKycState, cibilDocsData}) => {
         </div>
       )}
 
-      {isReupload && cibilDocsData?.cf_delivery_address_proof?.length === 0 && (
-        <RejectedDocsComponent
-          array={cibilDocsData?.userDocs}
-          docType={"cf_delivery_address_proof"}
-        />
-      )}
-
-      {formErrors.currentAddressProof && (
-        <div className={`${commonStyles.basicErrorStyles} `}>
-          {formErrors.currentAddressProof}
-        </div>
-      )}
-
       <div className={`${styles.btnGroupContainer} `}>
         <div className={`${styles.btnGroup} `}>
           <button
-            disabled={disableButton}
             onClick={() => {
               submitHandler();
             }}
-            className={`${commonStyles.saveBtn} ${styles.saveBtn} ${
-              disableButton && "!bg-[#FFDF85]"
-            } `}>
+            className={`${commonStyles.saveBtn} ${styles.saveBtn}`}>
             <span>Proceed</span>
             <OutlineArrowRight />
           </button>

@@ -341,7 +341,9 @@ const DocMain = () => {
           )}
 
           {currentScreen === "dashboard" && <DashboardComponent />}
-          {currentScreen === "currentAddress" && <CurrentAddressProof />}
+          {currentScreen === "currentAddress" && (
+            <CurrentAddressProof cibilDocsData={cibilDocsData} />
+          )}
           {currentScreen === "socialMedia" && <SocialMediaLogin />}
           {currentScreen === "professionalDetails" && <ProfessionalDetails />}
           {currentScreen === "educationalDetails" && <EducationalDetails />}

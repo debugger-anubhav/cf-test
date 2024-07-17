@@ -12,6 +12,7 @@ export default function OptionalStages({
   convertStatus,
   getDocsDetailsApi,
   setHoldOnLoader,
+  setactiveTab,
 }) {
   const dispatch = useDispatch();
   const [optionalData, setOptionalData] = useState(null);
@@ -61,8 +62,6 @@ export default function OptionalStages({
           );
         })}
       </div>
-
-      {/* <CurrentAddProof/> */}
     </>
   );
 }
