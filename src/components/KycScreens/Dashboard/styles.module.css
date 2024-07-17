@@ -84,3 +84,6 @@
 .active_tab_item {
   @apply font-Poppins border-9A9AA2 text-5774AC md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer border-b pb-3;
 }
+.firstSection {
+  @apply mt-6 md:mt-10 flex justify-center items-center md:justify-start;
+}

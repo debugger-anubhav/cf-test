@@ -29,6 +29,7 @@ import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
 import ProgressSection from "@/components/KycScreens/ProgressBar";
+// import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
   const dispatch = useDispatch();
@@ -556,7 +557,7 @@ export default function DashboardComponent() {
           docsDetailsData={docsDetailsData}
         />
       )}
-
+      {/* <CongratulationKyc dashboardDetails={dashboardDetails} handleDelivery={handleDelivery}/> */}
       <ProgressSection progress={progressPercentage} />
     </div>
   );
