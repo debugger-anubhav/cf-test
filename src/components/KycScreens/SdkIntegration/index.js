@@ -8,6 +8,7 @@ import styles from "../Dashboard/styles.module.css";
 import KycCommonDrawer from "../KycCommonDrawer";
 import {setKycScreenName, setStageId} from "@/store/Slices";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
+import {showToastNotification} from "../../Common/Notifications/toastUtils";
 
 export default function SdkIntegration({
   item,
@@ -43,8 +44,15 @@ export default function SdkIntegration({
         setSaveHVData(res?.data?.data);
         getDashboardDetailsApi();
         setOpenLoader(false);
+        if (res?.data?.data?.data?.rejected) {
+          showToastNotification(saveHVData.message, 3);
+        }
       })
-      .catch(err => console.log(err));
+
+      .catch(err => {
+        setOpenLoader(false);
+        console.log(err);
+      });
   };
 
   useEffect(() => {
@@ -62,7 +70,7 @@ export default function SdkIntegration({
       window.scrollTo({top: 0, left: 0, behavior: "smooth"});
       dispatch(setStageId(2));
     }
-    // console.log(saveHVData?.data, "saveHVData");
+    // console.log(saveHVData?.data, "pppppppppppppppppppp");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {
@@ -127,7 +135,6 @@ export default function SdkIntegration({
     //     getDashboardDetailsApi();
     //   })
     //   .catch(err => console.log(err));
-    // };
   };
 
   useEffect(() => {
