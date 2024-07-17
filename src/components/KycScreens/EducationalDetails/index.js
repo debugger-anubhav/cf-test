@@ -1,5 +1,13 @@
 import React, {useState} from "react";
-import {BackIcon, CheckFillIcon, OutlineArrowRight} from "@/assets/icon";
+import {
+  BackIcon,
+  CheckFillIcon,
+  DeleteIcon,
+  OutlineArrowRight,
+  DeleteIconFilled,
+} from "@/assets/icon";
+import addressFormStyles from "@/components/Documentation/KYCAddress/KYCAddress.module.css";
+
 import styles from "./styles.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
@@ -35,6 +43,7 @@ export default function EducationalDetails() {
   const handleFileInputChange = e => {
     const file = e.target.files;
     const temp = [...formData.idProof];
+
     const fileArray = Object.keys(file).map(key => {
       return file[key];
     });
@@ -66,11 +75,16 @@ export default function EducationalDetails() {
     } else {
       error.idProof = "";
     }
+    if (!formData?.collegeName > 0) {
+      error.collegeName = "Please upload the college name";
+    } else {
+      error.collegeName = "";
+    }
     setFormErrors({...error});
     if (error.idProof !== "") return;
 
-    // setDisableButton(true);
     const allData = new FormData();
+
     allData.append(
       "idProof",
       JSON.stringify({
@@ -78,21 +92,35 @@ export default function EducationalDetails() {
         subDocType: currentAddOptions?.supported_docs,
       }),
     );
-    allData.append("userId", decrypt(getLocalStorage("_ga")));
+
     for (let i = 0; i < formData.idProof.length; i++) {
       allData.append("doc", formData.idProof[i]);
     }
+
+    allData.append("userId", decrypt(getLocalStorage("_ga")));
     allData.append("orderId", orderId);
+    allData.append("instituteName", formData.collegeName);
     allData.append("stageId", 7);
-    baseInstance
-      .post(endPoints.kycPage.saveEducationalDetails, allData)
-      .then(() => {
-        // handleKycState(orderId);
-        dispatch(setKycScreenName("dashboard"));
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
+
+    if (Object.values(formErrors).filter(Boolean).length === 0) {
+      baseInstance
+        .post(endPoints.kycPage.saveEducationalDetails, allData)
+        .then(() => {
+          // handleKycState(orderId);
+          dispatch(setKycScreenName("dashboard"));
+        })
+        .catch(err => {
+          console.log(err?.message || "some error");
+        });
+    }
+  };
+
+  const handleDeleteFile = (val, index) => {
+    if (val === "idProof") {
+      const temp = [...formData.idProof];
+      temp.splice(index, 1);
+      setFormData({...formData, idProof: temp});
+    }
   };
 
   return (
@@ -120,69 +148,144 @@ export default function EducationalDetails() {
           type="text"
           placeholder="Enter your school/college name"
           className={styles.label_input_style}
-        />
-      </div>
-
-      <div className={`${styles.detail_wapper}`}>
-        <div className={styles.label}>School/college ID proof</div>
-        <label
-          className={`flex items-center gap-2 ${styles.label_input_style}`}
-          htmlFor={"idProof"}>
-          <Image
-            loader={({src}) => src}
-            src={uploading}
-            alt="Uploading Icon"
-            className={`${commonStyles.mdIBHidden}`}
-          />
-          <span className={`!pl-0 ${styles.chooseFile}`}>
-            {formData?.idProof?.length > 0 ? (
-              <>
-                {formData?.idProof?.map((file, index) => (
-                  <span key={index}>{file?.name}</span>
-                ))}
-              </>
-            ) : (
-              " Upload document(s)"
-            )}
-          </span>
-        </label>
-        <div>
-          {formData?.idProof?.length !== 0 && (
-            <>
-              <div className={`${commonStyles.correctFile}`}></div>
-              <div className={commonStyles.animate_check_icon}>
-                <CheckFillIcon
-                  color={"#2D9469"}
-                  className={`${commonStyles.mdHiddemIcons}`}
-                />
-              </div>
-            </>
-          )}
-        </div>
-
-        <input
-          type="file"
-          accept="image/jpeg,image/jpg,image/png,application/pdf"
-          name="idProof"
-          id="idProof"
-          style={{display: "none"}}
           onChange={e => {
-            handleFileInputChange(e);
+            setFormData({...formData, collegeName: e.target.value});
           }}
         />
-
-        {formErrors.idProof === "" && (
-          <div className={commonStyles.animate_check_icon}>
-            <CheckFillIcon
-              color={"#2D9469"}
-              className={`${commonStyles.mdHiddemIcons}`}
-            />
+        {formErrors.collegeName && (
+          <div
+            className={` ${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+            {formErrors.collegeName}
           </div>
         )}
       </div>
 
+      <div className={styles.label}>School/college ID proof</div>
+      {formData?.idProof?.map((item, index) => (
+        <div key={index} className={`${addressFormStyles.map_row_wrapper}`}>
+          <div className={`${styles.formInputFirst}`}>
+            <div className="flex items-center">
+              <label
+                className={`${commonStyles.basicInputStyles} md:w-[232px] block  
+                       text-black                
+                  }`}>
+                <div
+                  className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
+                  <Image
+                    loader={({src}) => src}
+                    src={uploading}
+                    alt="Uploading Icon"
+                    className={`${commonStyles.mdIBHidden}`}
+                    loading="lazy"
+                  />
+                  <span className={`!pl-0 ${styles.chooseFile}`}>
+                    {item?.name || item?.doc_name}
+                  </span>
+                  <>
+                    <div className={commonStyles.animate_check_icon}>
+                      <CheckFillIcon
+                        color={"#2D9469"}
+                        className={`${commonStyles.mdHiddemIcons}`}
+                      />
+                    </div>
+                  </>
+                </div>
+                {!formErrors.idProof ? (
+                  <div className={`${commonStyles.correctFile}`}></div>
+                ) : (
+                  <></>
+                )}
+              </label>
+              <span
+                onClick={e => {
+                  handleDeleteFile(e, index);
+                }}>
+                <DeleteIcon
+                  color={"#71717A"}
+                  className={`${commonStyles.mdHiddemIcons} ml-3`}
+                />
+              </span>
+            </div>
+          </div>
+
+          <div className={`hidden md:flex ${addressFormStyles.check_wrapper}`}>
+            <div
+              className={addressFormStyles.showCheckCircle}
+              id="showCheckCircle">
+              <CheckFillIcon color="#2D9469" className="w-full h-full" />
+            </div>
+            <div
+              id="showDeleteIcon"
+              className={addressFormStyles.showDeleteIcon}
+              onClick={e => handleDeleteFile(e, index)}>
+              <DeleteIconFilled
+                color={"#ffffff"}
+                className={addressFormStyles.delete_icon_filled}
+              />
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <div className={`${styles.input_wrapper}`}>
+        <div className={`${styles.formInputFirst} lg:min-w-[530px]`}>
+          <div className={`${commonStyles.flexICenter}`}>
+            <label
+              htmlFor="idProof"
+              className={`cursor-pointer ${commonStyles.basicInputStyles} ${styles.lableStyle} text-[#71717a]`}>
+              <div className={`${commonStyles.flexICenter} `}>
+                <Image
+                  loader={({src}) => src}
+                  src={uploading}
+                  alt="Uploading Icon"
+                  className={`${commonStyles.mdHiddenIB}`}
+                  loading="lazy"
+                />
+                <Image
+                  loader={({src}) => src}
+                  src={uploading}
+                  alt="Uploading Icon"
+                  className={`${commonStyles.mdIBHidden}`}
+                  loading="lazy"
+                />
+                <span className={`${styles.chooseFile}`}>
+                  Upload Bank Statement
+                </span>
+              </div>
+            </label>
+            {formData.idProof && (
+              <div className="flex cursor-pointer">
+                <span
+                  onClick={e => {
+                    handleDeleteFile(e);
+                  }}>
+                  <DeleteIcon className=" md:hidden ml-4 w-5 h-5" />
+                </span>
+              </div>
+            )}
+          </div>
+          <input
+            multiple
+            type="file"
+            id="idProof"
+            accept="image/jpeg,image/jpg,image/png,application/pdf"
+            style={{display: "none", cursor: "pointer"}}
+            onChange={e => {
+              handleFileInputChange(e);
+            }}
+          />
+        </div>
+      </div>
+
+      {formErrors.idProof && (
+        <div
+          className={` ${commonStyles.basicErrorStyles} ${commonStyles.errorTxt}`}>
+          {formErrors.idProof}
+        </div>
+      )}
+
       <button
-        className={styles.proceed}
+        className={`${styles.proceed} !mt-8`}
         onClick={() => {
           submitHandler();
         }}>
