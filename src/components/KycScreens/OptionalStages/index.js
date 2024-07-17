@@ -51,9 +51,46 @@ export default function OptionalStages({
         {optionalData?.allKycStages?.map((item, index) => {
           return (
             <div
-              className={`${styles.details_box}`}
+              className={`${styles.details_box} ${
+                item.stage_status === 2 || item.stage_status === 1
+                  ? "!cursor-default"
+                  : "cursor-pointer"
+              }`}
               key={index.toString()}
-              onClick={() => handleClick(item)}>
+              onClick={() => {
+                if (item.stage_status === 2 || item.stage_status === 1) {
+                  return null;
+                } else handleClick(item);
+              }}>
+              <div className={styles.detail_heading}>{item?.stage_name}</div>
+              <div className={styles.sub_heading}>
+                {convertStatus(item?.stage_status)}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className={styles.mobile_details_wrapper}>
+        {optionalData?.allKycStages?.map((item, index) => {
+          return (
+            <div
+              key={index.toString()}
+              onClick={() => {
+                if (item.stage_status === 2 || item.stage_status === 1) {
+                  return null;
+                } else handleClick(item);
+              }}
+              className={`${styles.mobile_detail_box} ${
+                index === 4 ? "border-none" : "border-b"
+              }
+                    ${
+                      item.stage_status === 2 || item.stage_status === 1
+                        ? "!cursor-default"
+                        : "cursor-pointer"
+                    }
+                    
+                    `}>
               <div className={styles.detail_heading}>{item?.stage_name}</div>
               <div className={styles.sub_heading}>
                 {convertStatus(item?.stage_status)}

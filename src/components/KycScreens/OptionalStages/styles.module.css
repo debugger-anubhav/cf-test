@@ -14,3 +14,6 @@
 .sub_heading {
   @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;
 }
+.mobile_detail_box {
+  @apply flex w-full justify-between items-center border-EDEDEE py-4;
+}
