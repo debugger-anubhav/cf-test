@@ -28,7 +28,7 @@ export default function SdkIntegration({
 
   const handler = HyperKycResult => {
     setOpenLoader(true);
-    console.log(HyperKycResult, "HyperKycResultHyperKycResultHyperKycResult");
+    // console.log(HyperKycResult, "HyperKycResultHyperKycResultHyperKycResult");
     saveHyperVergeDetails({
       ...HyperKycResult,
       userId,

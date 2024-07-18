@@ -113,7 +113,6 @@ export default function AutoPay() {
     const paymentObject = new window.Razorpay(options);
 
     paymentObject.on("payment.failed", function (response) {
-      console.log("Payment failed:", response.error.description);
       alert("Payment failed: " + response.error.description);
     });
 

@@ -26,7 +26,7 @@ export default function GstSdk({
   const professionId = kycSliceData.selectedProfessionId;
 
   const handler = HyperKycResult => {
-    console.log(HyperKycResult, "gst hyperverge");
+    // console.log(HyperKycResult, "gst hyperverge");
     setHoldOnLoader(true);
     saveGstDetailsApi({
       ...HyperKycResult,
@@ -53,16 +53,13 @@ export default function GstSdk({
     baseInstance
       .post(endPoints.kycPage.saveGstDetails, details)
       .then(res => {
-        console.log(res?.data?.data, "response of savehyperverdetails");
+        // console.log(res?.data?.data, "response of savehyperverdetails");
         getDashboardDetailsApi();
         if (professionId === 4) {
-          console.log("333333333");
           dispatch(setKycScreenName("educationalDetails"));
         } else if (temp.length > 0) {
-          console.log("11111111111111");
           dispatch(setKycScreenName("autoPay"));
         } else {
-          console.log("222222222222");
           dispatch(setKycScreenName("dashboard"));
         }
 
