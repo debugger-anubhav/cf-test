@@ -25,7 +25,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       setIsBottomShareDrawer(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {

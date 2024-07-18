@@ -2,6 +2,7 @@ import * as React from "react";
 import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
+import {useEffect} from "react";
 
 export default function KycCommonDrawer({content, changeState, heading}) {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -19,11 +20,11 @@ export default function KycCommonDrawer({content, changeState, heading}) {
     setIsOpen(open);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     changeState(isOpen);
   }, [isOpen]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {

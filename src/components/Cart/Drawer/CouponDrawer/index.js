@@ -71,7 +71,7 @@ const CouponDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

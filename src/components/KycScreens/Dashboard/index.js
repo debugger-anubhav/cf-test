@@ -437,13 +437,11 @@ export default function DashboardComponent() {
                       } else {
                         return (
                           <div
-                            className={`${styles.details_box}
-                    ${
-                      item.stage_status === 2 || item.stage_status === 1
-                        ? "!cursor-default"
-                        : "cursor-pointer"
-                    }
-                    `}
+                            className={`${styles.details_box} ${
+                              item.stage_status === 2 || item.stage_status === 1
+                                ? "!cursor-default"
+                                : "cursor-pointer"
+                            }`}
                             key={index.toString()}
                             onClick={() => {
                               if (
@@ -451,7 +449,12 @@ export default function DashboardComponent() {
                                 item.stage_status === 1
                               ) {
                                 return null;
-                              } else handleKycStagesClick(item);
+                              } else if (
+                                dashboardDetails?.allKycStages[0]
+                                  .stage_status !== 2
+                              )
+                                return null;
+                              else handleKycStagesClick(item);
                             }}>
                             <div className={styles.detail_heading}>
                               {item?.stage_name}
@@ -492,9 +495,14 @@ export default function DashboardComponent() {
                               if (
                                 item.stage_status === 2 ||
                                 item.stage_status === 1
-                              ) {
+                              )
                                 return null;
-                              } else handleKycStagesClick(item);
+                              else if (
+                                dashboardDetails?.allKycStages[0]
+                                  .stage_status !== 2
+                              )
+                                return null;
+                              else handleKycStagesClick(item);
                             }}
                             className={`${styles.mobile_detail_box} ${
                               index === 4 ? "border-none" : "border-b"

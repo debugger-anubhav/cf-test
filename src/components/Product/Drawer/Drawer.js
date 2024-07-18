@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Drawer from "@mui/material/Drawer";
 // import CustomerRating from "../CustomerRatings";
 import RatingBar from "../CustomerRatings/RatingBar";
@@ -35,7 +35,7 @@ const SideDrawer = ({
       setIsBottomDrawer(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

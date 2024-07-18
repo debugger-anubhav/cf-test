@@ -168,7 +168,7 @@ const DocMain = () => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

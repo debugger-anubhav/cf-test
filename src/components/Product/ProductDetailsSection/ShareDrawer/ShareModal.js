@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
@@ -16,7 +16,7 @@ const ShareModal = ({isModalOpen, closeModal, params, title}) => {
       setIsBottomShareDrawer(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {

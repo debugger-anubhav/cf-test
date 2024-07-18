@@ -453,7 +453,7 @@ const ProductDetails = ({params}) => {
       setIsSmallScreen(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

@@ -31,11 +31,11 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
     setIsOpen(open);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     changeState(isOpen);
   }, [isOpen]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import styles from "@/components/Common/Drawer/style.module.css";
 import {Close} from "@/assets/icon";
@@ -24,7 +24,7 @@ const CityDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {
