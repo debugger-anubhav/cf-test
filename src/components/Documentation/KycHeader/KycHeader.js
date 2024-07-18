@@ -15,9 +15,9 @@ const KycHeader = ({progress, setKycState, showBackIcon}) => {
       </div>
 
       <div className={styles.progressBarContainer}>
-        <div
+        {/* <div
           className={styles.progressBar}
-          style={{width: `${progress}%`}}></div>
+          style={{width: `${progress}%`}}></div> */}
       </div>
     </div>
   );
