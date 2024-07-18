@@ -12,7 +12,7 @@ import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliance
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
@@ -92,9 +92,9 @@ const RentNowBanner = loadable(
   {fallback: <RentNowBannersSkeleton />},
 );
 
-// const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-//   fallback: <TryCityMaxSkeleton />,
-// });
+const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
+  fallback: <TryCityMaxSkeleton />,
+});
 
 // const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
 //   fallback: <ProductRowSkeleton />,
@@ -184,9 +184,9 @@ export default function Home() {
         <LimetedPreiodDiscount />
         <NewlyLaunched />
 
-        {/* <TryCityMax />
+        <TryCityMax />
 
-        <div className="xl:hidden block">
+        {/* <div className="xl:hidden block">
           <MediaCoverage />
         </div>
         <CustomerRating />
