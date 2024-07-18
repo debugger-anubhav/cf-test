@@ -1,11 +1,10 @@
 "use client";
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import Image from "next/image";
 import {Icons, RecentIcon, TrendingIcon} from "@/assets/icon";
 import CommonDrawer from "../Drawer";
 import {endPoints} from "@/network/endPoints";
-import {useQuery} from "@/hooks/useQuery";
 import {
   addCityList,
   selectedCityId,
@@ -19,7 +18,7 @@ import {
 import {useDispatch, useSelector} from "react-redux";
 import {useAppSelector} from "@/store";
 import {useRouter} from "next/navigation";
-// import Link from "next/link";
+import Link from "next/link";
 import {
   getLocalStorage,
   productImageBaseUrl,
@@ -39,49 +38,43 @@ import "react-responsive-modal/styles.css";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import EmptyCartModal from "../Drawer/EmptyModal/EmptyCartModal";
 import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import Worker from "worker-loader!./worker.js";
 
 const HEADER_HEIGHT = 32;
 
 const Header = ({page}) => {
-  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
-  const {checkAuthentication} = useAuthentication();
-
-  const iconRef = useRef(null);
   const dispatch = useDispatch();
   const router = useRouter();
+
   const isOnMobile = useIsOnMobile();
-  const [openSearchbar, setOpenSearchBar] = React.useState(false);
+  const {checkAuthentication} = useAuthentication();
+
+  const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
+  const homePageReduxData = useSelector(state => state.homePagedata);
+  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const cartItemsLength = useSelector(
+    state => state.cartPageData.cartItems.length,
+  );
   const {cityList: storeCityList, sidebarMenuLists: storeSideBarMenuLists} =
     useAppSelector(state => state.homePagedata);
-  const {refetch: getCityList} = useQuery("city-list", endPoints.cityList);
-  const {refetch: getTrendingSearch} = useQuery(
-    "trending-search",
-    endPoints.trendingSearchConstants,
-  );
-  const {refetch: getSidebarMenuList} = useQuery(
-    "sideBarMenuLists",
-    endPoints.sidebarMenuLists,
-  );
-  const homePageReduxData = useSelector(state => state.homePagedata);
+
+  const [openSearchbar, setOpenSearchBar] = useState(false);
   const [topOffset, settopOffset] = useState(78);
-  const [arr, setArr] = React.useState(null);
-  const [showProfileDropdown, setShowProfileDropdown] = React.useState(false);
-  const categoryPageReduxData = useSelector(state => state.categoryPageData);
+  const [arr, setArr] = useState(null);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const wishListCount = categoryPageReduxData?.savedProducts?.length;
-  // const [profileIconLink, setProfileIconLink] = useState();
-  // const [heartIconLink, setHeartIconLink] = useState();
   const [isLogin, setIsLogin] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [click, setClick] = useState();
   const [emptyModal, setEmptyModal] = useState(false);
-  // const [userId, setUserId] = useState(decrypt(getLocalStorage("_ga")));
   const [cityForModal, setCityForModal] = useState();
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const iconRef = useRef(null);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
-  useEffect(() => {
-    setIsLogin(homePageReduxData.isLogin);
-  }, [homePageReduxData.isLogin]);
 
   const toggleLoginModal = bool => {
     dispatch(reduxSetModalState(bool));
@@ -98,10 +91,7 @@ const Header = ({page}) => {
     setLocalStorage("cityId", 46);
   }
 
-  // Example of using decryption
-
   useEffect(() => {
-    // Disable scrolling when the search bar is open
     if (openSearchbar) {
       document.body.style.overflow = "hidden";
     } else {
@@ -110,45 +100,99 @@ const Header = ({page}) => {
   }, [openSearchbar]);
 
   useEffect(() => {
-    const cityId = getLocalStorage("cityId") || 46;
+    setIsLogin(homePageReduxData.isLogin);
+  }, [homePageReduxData.isLogin]);
 
-    getCityList()
-      .then(res => {
-        if (cityId) {
-          const cityName = res.data.data.find(
-            item => item?.id === cityId,
-          ).list_value;
-          dispatch(selectedCityName(cityName));
-        }
-        dispatch(addCityList(res?.data?.data));
-        dispatch(selectedCityId(res?.data?.data[0]?.id));
-      })
-      .catch(err => console.log(err?.message || "some error"));
-    getTrendingSearch()
-      .then(res => {
-        setArr(res?.data?.data);
-      })
-      .catch(err => console.log(err?.message || "some error"));
-
-    getSidebarMenuList().then(res => {
-      dispatch(addSidebarMenuLists(res?.data?.data));
-    });
-    if (!homePageReduxData?.category.length) {
-      baseInstance
-        .get(endPoints.category)
-        .then(res => {
-          dispatch(addCategory(res?.data?.data));
-        })
-        .catch(err => {
-          console.log(err?.message || "some error");
-          dispatch(addCategory([]));
-        });
+  const handleScroll = () => {
+    const windowHeight = window.innerHeight;
+    if (window.scrollY > 90 && windowHeight > 90) {
+      setHasScrolled(true);
+    } else {
+      setHasScrolled(false);
     }
+  };
+
+  useEffect(() => {
+    const cityId = getLocalStorage("cityId") || 46;
+    const worker = new Worker();
+
+    worker.onmessage = function ({data}) {
+      switch (data.type) {
+        case "cities": {
+          const {
+            citiesData: {matchedCity, cityList},
+          } = data;
+
+          if (data.citiesData.matchedCity) {
+            dispatch(selectedCityName(matchedCity));
+          }
+          dispatch(addCityList(cityList));
+          dispatch(selectedCityId(cityList?.[0]?.id));
+
+          break;
+        }
+
+        case "trendingSearches": {
+          const {trendingSearchData} = data;
+          setArr(trendingSearchData);
+          break;
+        }
+
+        case "sidebarData": {
+          const {sidebarData} = data;
+          dispatch(addSidebarMenuLists(sidebarData));
+          break;
+        }
+
+        case "session": {
+          const {userSessionData} = data;
+          if (userId) {
+            localStorage.removeItem("user_id");
+            const encryptedData = encrypt(userSessionData?.userId);
+            setLocalStorage("_ga", encryptedData);
+            setLocalStorage("user_name", userSessionData?.userName);
+            setLocalStorage("user_email", userSessionData?.email);
+          } else {
+            setLocalStorage(
+              "tempUserID",
+              encryptBase64(userSessionData?.tempUserId),
+            );
+          }
+          break;
+        }
+
+        case "categories": {
+          const {categoryData} = data;
+          dispatch(addCategory(categoryData));
+          break;
+        }
+      }
+    };
+    worker.postMessage({
+      cityId,
+      sessionData: data,
+      fetchCategories: !homePageReduxData?.category.length,
+    });
+
+    function handleClickOutside(event) {
+      if (iconRef.current && !iconRef.current.contains(event.target)) {
+        setShowProfileDropdown(false);
+      }
+    }
+
+    window?.addEventListener("scroll", handleScroll);
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      worker.terminate();
+      window?.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
-  const cartItemsLength = useSelector(
-    state => state.cartPageData.cartItems.length,
-  );
+  useEffect(() => {
+    validateAuth();
+  }, [isLogin]);
 
   const getSavedItems = userIdToUse => {
     baseInstance
@@ -171,7 +215,6 @@ const Header = ({page}) => {
     const isAuthenticated = await checkAuthentication();
     setIsLogin(isAuthenticated);
     const userIdToUse = isAuthenticated ? userId : tempUserId;
-    // setUserId(userIdToUse);
     fetchCartItems(userIdToUse);
     isAuthenticated && getSavedItems(userIdToUse);
   };
@@ -190,82 +233,10 @@ const Header = ({page}) => {
       });
   };
 
-  useEffect(() => {
-    validateAuth();
-  }, [isLogin]);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (iconRef.current && !iconRef.current.contains(event.target)) {
-        setShowProfileDropdown(false);
-      }
-    }
-
-    document.addEventListener("click", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   const data = {
     userId: userId ?? "",
-    // tempUserId: JSON.parse(localStorage.getItem("tempUserID")) ?? "",
     tempUserId: decryptBase64(getLocalStorage("tempUserID")),
   };
-
-  // const {refetch: getSavedItems} = useQuery(
-  //   "saved-items",
-  //   endPoints.savedItems,
-  //   `?cityId=${cityId}&userId=${isLogin ? userId : tempUserId}`,
-  // );
-
-  useEffect(() => {
-    baseInstance
-      .post(endPoints.sessionUserUrl, data)
-      .then(res => {
-        if (userId) {
-          localStorage.removeItem("user_id");
-          const encryptedData = encrypt(res?.data?.data?.userId);
-          setLocalStorage("_ga", encryptedData);
-          setLocalStorage("user_name", res?.data?.data?.userName);
-          setLocalStorage("user_email", res?.data?.data?.email);
-        } else {
-          setLocalStorage(
-            "tempUserID",
-            encryptBase64(res?.data?.data?.tempUserId),
-          );
-        }
-      })
-      .catch(err => console.log(err?.message || "some error"));
-  }, []);
-
-  // useEffect(() => {
-  //   if (userId) {
-  //     setProfileIconLink("/usersettings");
-  //     setHeartIconLink("/wishlist");
-  //   } else {
-  //     setProfileIconLink("https://test.rentofurniture.com/user_sign_up");
-  //     setHeartIconLink("https://test.rentofurniture.com/user_sign_up");
-  //   }
-  // }, [userId]);
-  const [hasScrolled, setHasScrolled] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight = window.innerHeight;
-      if (window.scrollY > 90 && windowHeight > 90) {
-        setHasScrolled(true);
-      } else {
-        setHasScrolled(false);
-      }
-    };
-
-    window?.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window?.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
@@ -274,7 +245,6 @@ const Header = ({page}) => {
         isModalOpen={loginModal}
         setIsLogin={bool => {
           setIsLogin(bool);
-          // dispatch(setLoginState(bool));
         }}
       />
       <EmptyCartModal
@@ -299,15 +269,16 @@ const Header = ({page}) => {
               setClick={val => setClick(val)}
               click={click}
             />
-            <a href={"/"}>
+            <Link href={"/"}>
               <img
                 src="https://d3juy0zp6vqec8.cloudfront.net/images/logo.svg"
                 alt="cityfurnish-logo"
                 className={styles.main_logo}
                 width={"100%"}
                 height={"100%"}
+                loading="lazy"
               />
-            </a>
+            </Link>
             <div className={styles.header_city_wrapper}>
               <div className={styles.header_city_name}>
                 <CommonDrawer
@@ -393,7 +364,7 @@ const Header = ({page}) => {
                 </div>
               </div>
               <div className={styles.cart_link_wrapper}>
-                <a href={"/cart"}>
+                <Link href={"/cart"}>
                   <div
                     className={`w-100 h-100 absolute z-10`}
                     onClick={() => router.push("/cart")}></div>
@@ -410,7 +381,7 @@ const Header = ({page}) => {
                       {cartItemsLength}
                     </div>
                   )}
-                </a>
+                </Link>
               </div>
               <div
                 className={`lg:pt-[14px] lg:pb-[16px] cursor-pointer lg:px-2`}
@@ -510,7 +481,7 @@ const Header = ({page}) => {
     </>
   );
 };
-export default Header;
+export default memo(Header);
 
 // search modal component
 const SearchModal = ({

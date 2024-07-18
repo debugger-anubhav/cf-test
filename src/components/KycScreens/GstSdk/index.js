@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styles from "../Dashboard/styles.module.css";
 import {setKycScreenName} from "../../../store/Slices";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 export default function GstSdk({
   item,
@@ -63,6 +64,10 @@ export default function GstSdk({
         } else {
           console.log("222222222222");
           dispatch(setKycScreenName("dashboard"));
+        }
+
+        if (res?.data?.data?.data?.rejected) {
+          showToastNotification(res?.data?.data?.message, 3);
         }
       })
       .catch(err => {

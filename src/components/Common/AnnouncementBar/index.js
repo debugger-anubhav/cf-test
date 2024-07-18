@@ -1,5 +1,5 @@
 // "use client"
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import string from "@/constants/Constant.json";
@@ -19,6 +19,7 @@ const AnnouncementBar = () => {
               src="https://d3juy0zp6vqec8.cloudfront.net/images/fire.webp"
               alt="beach"
               className={styles.icons_style}
+              loading="lazy"
             />
             <span className=" px-1 text-222">
               {string.landing_page.announcement_bar}
@@ -30,6 +31,7 @@ const AnnouncementBar = () => {
               src="https://d3juy0zp6vqec8.cloudfront.net/images/sun.webp"
               alt="sun"
               className={styles.icons_style}
+              loading="lazy"
             />
           </div>
           <div
@@ -43,4 +45,4 @@ const AnnouncementBar = () => {
   );
 };
 
-export default AnnouncementBar;
+export default memo(AnnouncementBar);

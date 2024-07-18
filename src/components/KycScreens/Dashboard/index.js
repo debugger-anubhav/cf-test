@@ -205,13 +205,11 @@ export default function DashboardComponent() {
   };
 
   const handleDelivery = () => {
-    console.log(professionId, pendingDashboardDetail[0].id);
-
-    if (pendingDashboardDetail.length > 0) {
+    if (pendingDashboardDetail?.length > 0) {
       handleKycStagesClick(pendingDashboardDetail[0]);
-      if (pendingDashboardDetail[0].id === 3 && professionId === 2) {
+      if (pendingDashboardDetail[0]?.id === 3 && professionId === 2) {
         setOpenGstSdk(true);
-      } else if (pendingDashboardDetail[0].id === 1) {
+      } else if (pendingDashboardDetail[0]?.id === 1) {
         setOpenPanSdk(true);
       }
     } else toggleModal();

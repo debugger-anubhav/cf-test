@@ -44,7 +44,7 @@ export default function SdkIntegration({
         getDashboardDetailsApi();
         setOpenLoader(false);
         if (res?.data?.data?.data?.rejected) {
-          showToastNotification(saveHVData.message, 3);
+          showToastNotification(res?.data?.data?.message, 3);
         }
       })
 

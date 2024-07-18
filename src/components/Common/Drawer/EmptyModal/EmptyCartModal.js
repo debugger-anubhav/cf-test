@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
@@ -24,7 +24,7 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {
@@ -123,4 +123,4 @@ const EmptyCartModal = ({isModalOpen, closeModal, userId, city}) => {
   );
 };
 
-export default EmptyCartModal;
+export default memo(EmptyCartModal);

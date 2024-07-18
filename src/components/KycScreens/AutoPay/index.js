@@ -146,8 +146,8 @@ export default function AutoPay() {
                   item.includes("banking")
                     ? "emandate"
                     : item.includes("card")
-                    ? "card"
-                    : "upi",
+                      ? "card"
+                      : "upi",
                 );
               }}>
               <input
@@ -160,8 +160,8 @@ export default function AutoPay() {
                     item.includes("banking")
                       ? "emandate"
                       : item.includes("card")
-                      ? "card"
-                      : "upi",
+                        ? "card"
+                        : "upi",
                   );
                 }}
               />

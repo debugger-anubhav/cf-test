@@ -180,7 +180,7 @@ export default async function Page(params) {
     );
   } else {
     // console.log(metaData, data, "pp");
-    redirect("/");
+    redirect("/404");
   }
 }
 

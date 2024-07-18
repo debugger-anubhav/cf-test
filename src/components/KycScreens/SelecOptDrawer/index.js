@@ -92,10 +92,12 @@ function SelectOptDrawer({
                             parsedData.length === 1
                               ? "w-full h-full"
                               : parsedData.length === 2
-                              ? `w-[48px] h-[48px] absolute ${
-                                  i === 0 ? "top-0 left-0" : "bottom-0 right-0"
-                                }`
-                              : "w-[37px] h-[37px]"
+                                ? `w-[48px] h-[48px] absolute ${
+                                    i === 0
+                                      ? "top-0 left-0"
+                                      : "bottom-0 right-0"
+                                  }`
+                                : "w-[37px] h-[37px]"
                           } rounded-lg object-cover`}
                           loading="lazy"
                         />

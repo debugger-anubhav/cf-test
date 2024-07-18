@@ -171,7 +171,7 @@ const Footer = ({params}) => {
             <div className={styles.points_div}>
               {item?.points?.map((t, i) => (
                 <a
-                  key={index.toString()}
+                  key={i.toString()}
                   href={
                     t.text === "Refer a Friend"
                       ? isLogin

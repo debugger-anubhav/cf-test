@@ -29,7 +29,7 @@ import {
   selectedCityId,
   selectedCityName,
 } from "@/store/Slices";
-import {useRouter, useParams, useSearchParams} from "next/navigation";
+import {useRouter, useParams, useSearchParams, redirect} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
 import {baseInstance} from "@/network/axios";
@@ -409,6 +409,25 @@ const SubHeader = ({params}) => {
       }
     });
   }, [getAllAndSubCategoryData, subCategory]);
+
+  useEffect(() => {
+    if (!getAllAndSubCategoryData || getAllAndSubCategoryData.length === 0) {
+      return;
+    }
+    const isCategoryValid = getAllAndSubCategoryData?.some(
+      category => category?.seourl?.toLowerCase() === params.category,
+    );
+
+    const isSubCategoryValid = getAllAndSubCategoryData?.some(category =>
+      category?.sub_categories?.some(
+        subCategory =>
+          subCategory?.seourl?.toLowerCase() === params.category.toLowerCase(),
+      ),
+    );
+    if (!isCategoryValid && !isSubCategoryValid) {
+      redirect("/404");
+    }
+  }, [getAllAndSubCategoryData]);
 
   return (
     <>
