@@ -21,7 +21,7 @@ import MenuList from "@/components/Common/MenuList";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
-// import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
@@ -120,10 +120,10 @@ const MediaCoverage = loadable(
 //   fallback: <FooterSkeleton />,
 // });
 
-// const CombineSection = loadable(
-//   () => import("@/components/Home/CombineSection"),
-//   {fallback: <CombineSectionSkeleton />},
-// );
+const CombineSection = loadable(
+  () => import("@/components/Home/CombineSection"),
+  {fallback: <CombineSectionSkeleton />},
+);
 
 export default function Home() {
   const myElementRef = useRef();
@@ -193,8 +193,8 @@ export default function Home() {
         <div className="hidden xl:block">
           <MediaCoverage />
         </div>
-        {/* <CombineSection />
-        <HappySubscribers params={"home-page"} />
+        <CombineSection />
+        {/* <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
         <Footer /> */}
