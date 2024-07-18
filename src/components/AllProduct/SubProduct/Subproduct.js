@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./style.module.css";
 import SubCategorySection from "../section/SubCategorySection";
 import {ForwardArrow} from "@/assets/icon";
-import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import HassleFreeServicesCards from "@/components/Home/HassleFreeServicesCards";
 import {useRouter} from "next/navigation";
 import loadable from "@loadable/component";
 import {Skeleton} from "@mui/material";
@@ -39,7 +39,7 @@ const Subproduct = () => {
           <SubCategorySection />
         </div>
       </div>
-      <HasselFreeServicesCards />
+      <HassleFreeServicesCards />
       <Footer />
     </>
   );

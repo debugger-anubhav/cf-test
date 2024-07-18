@@ -9,6 +9,12 @@ self.addEventListener("message", ({data: {params, type, cityId}}) => {
         .then(({data: {data}}) => {
           self.postMessage({data});
         });
+    } else if (type === "limitedPeriodDiscount") {
+      baseInstance
+        .get(`${endPoints.limitedPreiod}?cityId=${cityId}`)
+        .then(({data: {data}}) => {
+          self.postMessage({data});
+        });
     }
   } else {
     if (params === "home-page") {

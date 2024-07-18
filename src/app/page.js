@@ -73,19 +73,19 @@ const PreDesignCombos = loadable(
   },
 );
 
-// const HasselFreeServicesCards = loadable(
-//   () => import("@/components/Home/HasselFreeServicesCards"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const HassleFreeServicesCards = loadable(
+  () => import("@/components/Home/HassleFreeServicesCards"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
-// const LimetedPreiodDiscount = loadable(
-//   () => import("@/components/Home/LimetedPreiodDiscount"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const LimetedPreiodDiscount = loadable(
+  () => import("@/components/Home/LimetedPreiodDiscount"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 const RentNowBanner = loadable(
   () => import("@/components/Home/RentNowBanner"),
@@ -180,9 +180,9 @@ export default function Home() {
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
-        {/* <HasselFreeServicesCards />
+        <HassleFreeServicesCards />
         <LimetedPreiodDiscount />
-        <NewlyLaunched />
+        {/* <NewlyLaunched />
 
         <TryCityMax />
 
