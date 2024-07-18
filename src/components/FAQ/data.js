@@ -53,9 +53,10 @@ export const HowItWorks = [
     que: "What are the required documents?",
     ans: "To confirm your order and complete the onboarding process, you need to submit these documents:",
     isChildren: [
-      "LinkedIn profile/bank statement/salary slip",
-      "Proof of current address",
-      "Proof of current address",
+      "Credit Score",
+      " Proof of current address",
+      "Proof of permanent address",
+      "Alternate contact number",
     ],
     afterChild: "Our team can ask you to",
   },
