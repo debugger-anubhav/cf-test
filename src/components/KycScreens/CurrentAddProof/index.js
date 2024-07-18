@@ -116,6 +116,7 @@ const CurrentAddressProof = ({cibilDocsData}) => {
     setPerAddModal(false);
     setCurrAddModal(false);
   };
+
   const handleOptionClickCur = option => {
     setFormErrors({...formErrors, currentAddressProofType: ""});
     setFormData({...formData, currentAddressProofType: option?.value});

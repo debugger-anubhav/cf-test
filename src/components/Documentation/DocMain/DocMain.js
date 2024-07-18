@@ -248,7 +248,7 @@ const DocMain = () => {
             )}
           </div> */}
 
-              <div onClick={() => setOpenDrawer(true)}>
+              <button onClick={() => setOpenDrawer(true)}>
                 <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
                   {selectedOption ? (
                     <>#{ordersData[selectedOption]?.dealCodeNumber}</>
@@ -257,7 +257,7 @@ const DocMain = () => {
                   )}
                   <DropDownArrow color={"#71717A"} size={20} />
                 </div>
-              </div>
+              </button>
 
               {/* start kyc button  */}
               <button
@@ -267,9 +267,7 @@ const DocMain = () => {
                     : "bg-FFDF85 cursor-not-allowed"
                 }`}
                 disabled={selectedOption === null}
-                onClick={() => {
-                  handleStartKyc();
-                }}>
+                onClick={handleStartKyc}>
                 Start my KYC now{" "}
                 <ArrowForw
                   color={"#222222"}
@@ -305,7 +303,6 @@ const DocMain = () => {
                     Download our app to quickly complete KYC. Enjoy a smoother,
                     faster service experience!{" "}
                     <Image
-                      loader={({src}) => src}
                       src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
                       alt="paty_icon"
                       className=" inline-block"

@@ -7,7 +7,6 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
 const DocumentaionInitialScreen = ({handleKycState}) => {
-  // const [isDDOpen, setIsDDOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
   const [orderIdsModal, setOrderIdsModal] = useState(false);

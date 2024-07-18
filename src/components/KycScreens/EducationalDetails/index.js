@@ -179,7 +179,6 @@ export default function EducationalDetails() {
                 <div
                   className={`${commonStyles.flexICenter} gap-2 justify-between md:justify-normal`}>
                   <Image
-                    loader={({src}) => src}
                     src={uploading}
                     alt="Uploading Icon"
                     className={`${commonStyles.mdIBHidden}`}

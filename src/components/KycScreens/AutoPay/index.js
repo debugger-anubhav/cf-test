@@ -10,9 +10,9 @@ import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
+const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
 export default function AutoPay() {
   const dispatch = useDispatch();
-  const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
 
   const [modeOfPayment, setModeOfPayment] = useState("upi");
   const [selectedOption, setSelectedOption] = useState(0);
