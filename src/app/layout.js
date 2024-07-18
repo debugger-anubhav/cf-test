@@ -433,6 +433,8 @@ var CaptchaCallback = function(){
             }}
           />
         )}
+        {/* <script src="https://cdn.razorpay.com/widgets/trusted-badge.js"></script> */}
+        <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script>
       </head>
       <body>
         <ReduxProvider>
