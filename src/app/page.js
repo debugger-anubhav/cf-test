@@ -105,9 +105,9 @@ const MediaCoverage = loadable(
   {fallback: <MediaCoverageSkeleton />},
 );
 
-// const HappySubscribers = loadable(() =>
-//   import("@/components/Home/HappySubscribers"),
-// );
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
+);
 
 // const FrequentlyAskedQuestions = loadable(
 //   () => import("@/components/Common/FrequentlyAskedQuestions"),
@@ -194,8 +194,8 @@ export default function Home() {
           <MediaCoverage />
         </div>
         <CombineSection />
-        {/* <HappySubscribers params={"home-page"} />
-        <FrequentlyAskedQuestions params={"home-page"} />
+        <HappySubscribers params={"home-page"} />
+        {/* <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
         <Footer /> */}
         <Notifications />
