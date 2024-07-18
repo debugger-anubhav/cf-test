@@ -1,25 +1,20 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
 import strings from "@/constants/Constant.json";
 import {useDispatch, useSelector} from "react-redux";
 import {addNewlaunchedProducts} from "@/store/Slices";
-import {endPoints} from "@/network/endPoints";
-import {useQuery} from "@/hooks/useQuery";
 import {Skeleton} from "@mui/material";
 import {productImageBaseUrl} from "@/constants/constant";
 import Link from "next/link";
-const NewlyLaunched = () => {
-  const heading = strings.landing_page.Newlylaunced.heading;
-  const subHeading = strings.landing_page.Newlylaunced.productRent;
+import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker.js";
+import Image from "@/components/Image";
 
+const heading = strings.landing_page.Newlylaunced.heading;
+const subHeading = strings.landing_page.Newlylaunced.productRent;
+
+const NewlyLaunched = () => {
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cityId = homePageReduxData.cityId;
-
-  const {refetch: getNewlaunchedProduct} = useQuery(
-    "new-product",
-    endPoints.newlylaunchedProduct,
-    `?cityId=${cityId}`,
-  );
 
   const dispatch = useDispatch();
   const {newProduct: newProductFetched} = useSelector(
@@ -29,11 +24,17 @@ const NewlyLaunched = () => {
   const [newProduct, setNewProduct] = useState([]);
 
   useEffect(() => {
-    getNewlaunchedProduct()
-      .then(res => {
-        setNewProduct(res?.data?.data);
-      })
-      .catch(err => console.log(err?.message || "some error"));
+    const worker = new Worker();
+    worker.onmessage = function ({data: {data}}) {
+      console.log("received message", data);
+      setNewProduct(data);
+    };
+
+    worker.postMessage({type: "newlyLaunched", cityId});
+
+    return () => {
+      worker.terminate();
+    };
   }, []);
 
   useEffect(() => {
@@ -60,47 +61,45 @@ const NewlyLaunched = () => {
           </div>
         </div>
 
-        {newProductFetched?.map((ele, index) => (
-          <Link
-            href={`/things/${ele.id}/${ele.seourl}`}
-            aria-label={ele?.product_name}
-            target="_blank"
-            rel="noopener"
-            key={index.toString()}>
-            <div
-              className={`${styles.width_container} ${
-                index === newProductFetched?.length - 1 && "mr-[16px]"
-              } relative`}
-              // className={`${styles.width_container} relative bg-red-400`}
+        {newProductFetched &&
+          newProductFetched.length > 0 &&
+          newProductFetched.map((ele, index) => (
+            <Link
+              href={`/things/${ele.id}/${ele.seourl}`}
+              aria-label={ele?.product_name}
+              target="_blank"
+              rel="noopener"
               key={index.toString()}>
-              <div className="w-full h-auto cursor-pointer ">
-                <img
-                  src={
-                    // "https://d3juy0zp6vqec8.cloudfront.net/images/product/thumb/" +
-                    // ele?.image?.split(",")[0]
-                    ele?.image?.split(",").filter(item => item).length > 1
-                      ? productImageBaseUrl + ele?.image?.split(",")[1]
-                      : productImageBaseUrl + ele?.image?.split(",")[0]
-                  }
-                  className={styles.img}
-                  alt={ele?.product_name}
-                  loading="lazy"
-                />
+              <div
+                className={`${styles.width_container} ${
+                  index === newProductFetched?.length - 1 ? "mr-[16px]" : ""
+                } relative`}
+                key={index.toString()}>
+                <div className="w-full h-auto cursor-pointer ">
+                  <Image
+                    src={
+                      ele?.image?.split(",").filter(item => item).length > 1
+                        ? productImageBaseUrl + ele?.image?.split(",")[1]
+                        : productImageBaseUrl + ele?.image?.split(",")[0]
+                    }
+                    className={styles.img}
+                    alt={ele?.product_name}
+                  />
+                </div>
+                <div className={styles.price_tag}>
+                  <p>{`₹${ele?.sale_price} / month`}</p>
+                </div>
               </div>
-              <div className={styles.price_tag}>
-                <p>{`₹${ele?.sale_price} / month`}</p>
-              </div>
-            </div>
-          </Link>
-        ))}
+            </Link>
+          ))}
       </div>
     </div>
   );
 };
 
-export default NewlyLaunched;
+export default memo(NewlyLaunched);
 
-export const NewlyLauncedSkeleton = () => {
+export const NewlyLauncedSkeleton = memo(() => {
   return (
     <div className={styles.main_container}>
       <div className={`${styles.skeleton_brown_box}`}>
@@ -127,4 +126,4 @@ export const NewlyLauncedSkeleton = () => {
       </div>
     </div>
   );
-};
+});

@@ -27,6 +27,7 @@ const Image = ({src, alt, priority = false, loading = "lazy", ...props}) => {
       <NextImage
         src={formattedUrl}
         alt={alt}
+        loading={priority ? "eager" : "lazy"}
         // sizes={sizes}
         priority={priority}
         {...props}

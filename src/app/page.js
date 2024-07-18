@@ -10,7 +10,7 @@ import loadable from "@loadable/component";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-// import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
+import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 // import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 // import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
@@ -56,10 +56,10 @@ const OffersAndCoupons = loadable(
   {fallback: <OffersSkeleton />},
 );
 
-// const NewlyLaunched = loadable(
-//   () => import("@/components/Home/NewlyLaunched"),
-//   {fallback: <NewlyLauncedSkeleton />},
-// );
+const NewlyLaunched = loadable(
+  () => import("@/components/Home/NewlyLaunched"),
+  {fallback: <NewlyLauncedSkeleton />},
+);
 
 const DownloadForMobile = loadable(
   () => import("@/components/Home/DownloadForMobile"),
@@ -182,9 +182,9 @@ export default function Home() {
         <PreDesignCombos />
         <HassleFreeServicesCards />
         <LimetedPreiodDiscount />
-        {/* <NewlyLaunched />
+        <NewlyLaunched />
 
-        <TryCityMax />
+        {/* <TryCityMax />
 
         <div className="xl:hidden block">
           <MediaCoverage />
