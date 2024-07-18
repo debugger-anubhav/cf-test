@@ -1,50 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import SingleQuestion from "./singleQuestion";
 import {ForwardArrow, DownArrowUnfilled} from "@/assets/icon";
-import {useQuery} from "@/hooks/useQuery";
-import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import Link from "next/link";
-import {baseInstance} from "@/network/axios";
 import {domain} from "../../../../appConfig";
+import Worker from "worker-loader!./faqWorker.js";
 
-// h2 h3 p
+const str = string.common_components.FAQ;
 
 const FrequentlyAskedQuestions = ({params, isCitymax}) => {
-  const str = string.common_components.FAQ;
-  const [faqs, setFaqs] = React.useState(null);
+  const [faqs, setFaqs] = useState(null);
   const [visibleQues, setVisibleQues] = useState(7);
+  const [openIndex, setOpenIndex] = useState(null);
 
   const handleShowMore = () => {
     setVisibleQues(prevVisibleRows => prevVisibleRows + 5);
-  };
-  const [openIndex, setOpenIndex] = React.useState(null);
-  const {refetch: getFaqsLandingPage} = useQuery(
-    "faqsLandingPage",
-    endPoints.faqsLandingPage,
-  );
-  const {refetch: getFaqsSeoAppliancePage} = useQuery(
-    "faqsSeoAppliancePage",
-    endPoints.seoApplianceFaqs,
-  );
-  const {refetch: getFaqsSeoFurniturePage} = useQuery(
-    "faqsSeoFurniturePage",
-    endPoints.seoFurnitureFaqs,
-  );
-  const {refetch: getFaqsCategory} = useQuery(
-    "faqsCategoryPage",
-    endPoints.categortFaq,
-    `?parentCategoryId=27`,
-  );
-  const getFaqsCitymax = () => {
-    baseInstance
-      .get(`${domain}/ajxapi/frp_faq_details`)
-      .then(res => {
-        setFaqs(res?.data?.data?.content);
-      })
-      .catch(err => console.log(err?.message || "some error"));
   };
 
   const toggleQuestion = index => {
@@ -56,37 +28,18 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
   };
 
   useEffect(() => {
-    if (params?.category === "appliances-rental") {
-      getFaqsSeoAppliancePage()
-        .then(res => {
-          setFaqs(res?.data?.data);
-          // console.log("appliances-rental")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params?.category === "furniture-rental") {
-      getFaqsSeoFurniturePage()
-        .then(res => {
-          setFaqs(res?.data?.data);
-          // console.log("furniture-rental")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params === "category") {
-      getFaqsCategory()
-        .then(res => {
-          setFaqs(res?.data?.data);
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params === "citymax") {
-      getFaqsCitymax();
-    } else {
-      getFaqsLandingPage()
-        .then(res => {
-          setFaqs(res?.data?.data);
-          // console.log(res?.data?.data,"[[[[[[")
-          // console.log("home")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    }
+    const worker = new Worker();
+
+    worker.onmessage = function ({data: {data}}) {
+      console.log("received", data);
+      setFaqs(data);
+    };
+
+    worker.postMessage({params, domain});
+
+    return () => {
+      worker.terminate();
+    };
   }, []);
 
   return (
@@ -96,7 +49,6 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
         <div className={styles.QuesAnsArray_div}>
           {faqs?.slice(0, visibleQues).map((item, index) => {
             return (
-              // index < 7 && (
               <div key={index.toString()}>
                 <SingleQuestion
                   ques={item?.question}
@@ -109,7 +61,6 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
                 )}
               </div>
             );
-            // );
           })}
         </div>
 
@@ -132,9 +83,9 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     </div>
   );
 };
-export default FrequentlyAskedQuestions;
+export default memo(FrequentlyAskedQuestions);
 
-export const FaqsSkeleton = () => {
+export const FaqsSkeleton = memo(() => {
   return (
     <div className={styles.faq_skeleton_wrapper}>
       <div className="w-[30%] h-8">
@@ -154,4 +105,4 @@ export const FaqsSkeleton = () => {
       </div>
     </div>
   );
-};
+});

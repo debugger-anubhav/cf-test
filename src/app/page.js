@@ -13,7 +13,7 @@ import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
-// import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
+import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 // import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
@@ -109,12 +109,12 @@ const HappySubscribers = loadable(() =>
   import("@/components/Home/HappySubscribers"),
 );
 
-// const FrequentlyAskedQuestions = loadable(
-//   () => import("@/components/Common/FrequentlyAskedQuestions"),
-//   {
-//     fallback: <FaqsSkeleton />,
-//   },
-// );
+const FrequentlyAskedQuestions = loadable(
+  () => import("@/components/Common/FrequentlyAskedQuestions"),
+  {
+    fallback: <FaqsSkeleton />,
+  },
+);
 
 // const Footer = loadable(() => import("@/components/Common/Footer"), {
 //   fallback: <FooterSkeleton />,
@@ -195,8 +195,8 @@ export default function Home() {
         </div>
         <CombineSection />
         <HappySubscribers params={"home-page"} />
-        {/* <FrequentlyAskedQuestions params={"home-page"} />
-        <TextContent params={"home-page"} />
+        <FrequentlyAskedQuestions params={"home-page"} />
+        {/* <TextContent params={"home-page"} />
         <Footer /> */}
         <Notifications />
       </div>
