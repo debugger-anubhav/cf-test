@@ -66,7 +66,7 @@ const PreDesignCombos = loadable(
   },
 );
 const HasselFreeServicesCards = loadable(() =>
-  import("@/components/Home/HasselFreeServicesCards"),
+  import("@/components/Home/HassleFreeServicesCards"),
 );
 const LimetedPreiodDiscount = loadable(
   () => import("@/components/Home/LimetedPreiodDiscount"),
