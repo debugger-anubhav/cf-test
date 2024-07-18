@@ -248,7 +248,7 @@ const DocMain = () => {
             )}
           </div> */}
 
-              <button onClick={() => setOpenDrawer(true)}>
+              <div onClick={() => setOpenDrawer(true)}>
                 <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
                   {selectedOption ? (
                     <>#{ordersData[selectedOption]?.dealCodeNumber}</>
@@ -257,7 +257,7 @@ const DocMain = () => {
                   )}
                   <DropDownArrow color={"#71717A"} size={20} />
                 </div>
-              </button>
+              </div>
 
               {/* start kyc button  */}
               <button
