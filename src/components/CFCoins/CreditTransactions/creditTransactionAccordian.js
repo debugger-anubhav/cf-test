@@ -47,8 +47,8 @@ const CreditTransactionAccordian = ({rows}) => {
                   {row.payment_mode === "CC"
                     ? "Credit Card"
                     : row.payment_mode === "DC"
-                    ? "Debit Card"
-                    : row.payment_mode}
+                      ? "Debit Card"
+                      : row.payment_mode}
                 </div>
                 <div className={styles.tableCell}>
                   <span className="font-medium">Coins Gained:</span> +
