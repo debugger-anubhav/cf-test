@@ -228,11 +228,11 @@ const DocMain = () => {
                     ? tenure >= 9
                       ? 1
                       : creditScore < 650
-                      ? 3
-                      : 2
+                        ? 3
+                        : 2
                     : creditScore < 650
-                    ? 2
-                    : 3
+                      ? 2
+                      : 3
                 }
               />
             ) : kycState === 3 ? (
