@@ -1,0 +1,15 @@
+.heading {
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}
+.wrapper {
+  @apply mt-8 w-full;
+}
+.content_wrapper {
+  @apply flex w-full justify-between;
+}
+.item {
+  @apply font-Poppins text-71717A text-14 font-medium leading-6 tracking-0.3;
+}
+.connect_btn {
+  @apply font-Poppins border border-71717A px-4 py-2 rounded-2xl text-71717A text-14 font-medium leading-6 tracking-0.3;
+}

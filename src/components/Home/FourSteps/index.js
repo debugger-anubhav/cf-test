@@ -25,10 +25,10 @@ const FourSteps = () => {
                   index === 0
                     ? "w-[80px] h-[80px]"
                     : index === 1
-                    ? "w-[85px] h-[80px]"
-                    : index === 2
-                    ? "w-[137px] h-[73.5px]"
-                    : "w-[161px] h-[70px]"
+                      ? "w-[85px] h-[80px]"
+                      : index === 2
+                        ? "w-[137px] h-[73.5px]"
+                        : "w-[161px] h-[70px]"
                 } md:flex hidden relative z-[-1]`}
                 width={81}
                 height={81}

@@ -1,0 +1,23 @@
+.main_wrapper {
+  @apply flex md:w-[60%]  xl:w-[67%]  w-full  fixed bottom-0 right-0  md:right-[70px] xl:right-[90px] macbook:right-[120px]  flex-col;
+}
+.wrapper {
+  background: linear-gradient(180deg, #5773ac 0%, #8653e9 100%);
+  @apply w-full justify-center items-center rounded-ss-[16px] rounded-se-[16px] flex;
+}
+.text {
+  @apply font-Poppins font-medium text-16 leading-6 tracking-0.3 text-white py-2;
+}
+.progressBar {
+  @apply h-[6px] bg-[#67AF7B];
+}
+.progressBarContainer {
+  @apply mt-2 mx-4 w-[95%] h-[6px];
+  background-color: #d9d9d9;
+  margin-right: 149px !important;
+}
+@media (max-width: 767px) {
+  .progressBarContainer {
+    margin-right: 16px !important;
+  }
+}

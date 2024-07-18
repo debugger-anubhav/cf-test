@@ -7,7 +7,6 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 
 const DocumentaionInitialScreen = ({handleKycState}) => {
-  const [isDDOpen, setIsDDOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [options, setOptions] = useState([]);
   const [orderIdsModal, setOrderIdsModal] = useState(false);
@@ -34,10 +33,10 @@ const DocumentaionInitialScreen = ({handleKycState}) => {
       </p>
       <div className="mt-1 xl:w-[537px]">
         <DropDown
-          isOpen={isDDOpen}
+          isOpen={false}
           orderIdsModal={orderIdsModal}
           setOrderIdsModal={val => setOrderIdsModal(val)}
-          setIsDDOpen={setIsDDOpen}
+          // setIsDDOpen={setIsDDOpen}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           options={options}

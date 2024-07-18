@@ -27,7 +27,7 @@ const ChangeNumber = ({
   const [startCountdown, setStartCountdown] = useState(false);
   const [otp, setOtp] = useState("");
 
-  React.useEffect(() => {
+  useEffect(() => {
     setModalCategory("changeNumber");
   }, [isModalOpen]);
 
@@ -46,7 +46,7 @@ const ChangeNumber = ({
     };
   }, [startCountdown, countdown]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setContact(contactNumber);
     setProblemType(1);
     setCountdown(30);
@@ -59,7 +59,7 @@ const ChangeNumber = ({
       setIsBottomShareDrawer(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     // setStartCountdown(false);

@@ -44,7 +44,7 @@ import {
   BsWhatsapp,
   BsExclamationCircleFill,
 } from "react-icons/bs";
-import {GoPlus} from "react-icons/go";
+import {GoPlus, GoInfo} from "react-icons/go";
 import {
   MdModeEdit,
   MdVerifiedUser,
@@ -264,6 +264,9 @@ export const VerifyIcon = ({size, color, className}) => (
 
 export const InformationIcon = ({size, color, className}) => (
   <RiInformationLine size={size} color={color} className={className} />
+);
+export const InfoCircleIcon = ({size, color, className}) => (
+  <GoInfo size={size} color={color} className={className} />
 );
 
 export const DeleteIcon = ({size, color, className}) => (

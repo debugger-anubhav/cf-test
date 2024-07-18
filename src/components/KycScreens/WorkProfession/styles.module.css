@@ -1,0 +1,18 @@
+.wrapper {
+  @apply w-full md:mt-9 mt-8;
+}
+.heading {
+  @apply font-Poppins md:text-24 text-18 text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}
+.sub_heading {
+  @apply font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3 mt-8;
+}
+.profession_wrapper {
+  @apply flex w-full gap-4 mt-6 flex-wrap;
+}
+.box {
+  @apply bg-F6F5F8 hover:bg-[#E0F0FF] w-[156px] lg:h-[117px] h-[62px] flex justify-center items-center lg:flex-col gap-2 hover:border-[2px] hover:border-5774AC cursor-pointer;
+}
+.profession_type {
+  @apply font-Poppins text-14 text-71717A leading-5 tracking-0.3 mt-2 capitalize;
+}

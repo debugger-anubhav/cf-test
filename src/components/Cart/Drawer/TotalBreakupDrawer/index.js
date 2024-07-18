@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
 import {BackIcon, Close} from "@/assets/icon";
@@ -19,7 +19,7 @@ const TotalBreakup = ({toggleDrawer, open, isCouponApplied}) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

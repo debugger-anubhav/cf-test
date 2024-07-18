@@ -125,6 +125,23 @@ export const endPoints = {
       `fc-crif-scores/getKYCStage?userId=${userId}&orderId=${orderId}`,
     registerMandate: `fc-payments/registerMandate`,
     updatePaymentStatus: `fc-payments/saveMandate`,
+    getKycProfessionList: `fc-kycs/getKycProfessionList`,
+    getDashboardDetails: (userId, orderId) =>
+      `fc-kycs/getDashboardDetails?userId=${userId}&orderId=${orderId}`,
+    saveKycProfessions: "fc-kycs/saveKycProfessions",
+    checkProfessionSelected: (userId, orderId) =>
+      `fc-kycs/checkProfessionSelected?userId=${userId}&orderId=${orderId}`,
+    uploadFinancialDocs: "fc-kycs/uploadFinancialDocs",
+    saveHyperVergeKycDetails: "/fc-kycs/saveHyperVergeKycDetails",
+    verifyCrifAnswer: "fc-kycs/verifyCrifAnswer",
+    getDocsDetails: "fc-kycs/getDocsDetails",
+    saveKycProfessionalDetails: "fc-kycs/saveKycProfessionalDetails",
+    verifyCompanyEmail: "/fc-kycs/verifyCompanyEmail",
+    getOptionalStages: (userId, orderId) =>
+      `/fc-kycs/getOptionalStages?userId=${userId}&orderId=${orderId}`,
+    uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
+    saveEducationalDetails: "fc-kycs/saveEducationalDetails",
+    saveGstDetails: "fc-kycs/saveGstDetails",
   },
 
   cityshieldPage: {
@@ -227,4 +244,9 @@ export const endPoints = {
   },
 
   downloadPDF: "user/exportpaymentweb",
+
+  // hyperverge endpoints
+  hyperverge: {
+    getHypervergeToken: userid => `fc-kycs/getHypervergeToken?userId=${userid}`,
+  },
 };

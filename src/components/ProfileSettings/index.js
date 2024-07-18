@@ -316,8 +316,8 @@ const ProfileSettings = () => {
                                   {sentOtp
                                     ? "Resend OTP"
                                     : countdown === 30
-                                    ? "Verify"
-                                    : "Resend OTP"}
+                                      ? "Verify"
+                                      : "Resend OTP"}
                                   {/* Resend OTP */}
                                 </p>
                               ))}
