@@ -366,6 +366,8 @@ const DocMain = () => {
           {currentScreen !== "selectOrderId" && (
             <ProgressSection progress={progressPercentage} />
           )}
+
+          {currentScreen === "congratulation" && <DashboardComponent />}
         </div>
 
         <div>

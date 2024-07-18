@@ -49,8 +49,6 @@ export default function GstSdk({
 
   const saveGstDetailsApi = details => {
     const temp = pendingDashboardDetail?.filter(i => i.id === 6);
-    console.log(professionId, temp.length, "ksahdksahd");
-
     baseInstance
       .post(endPoints.kycPage.saveGstDetails, details)
       .then(res => {

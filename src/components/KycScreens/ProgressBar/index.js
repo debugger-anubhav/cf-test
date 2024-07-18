@@ -1,8 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "./styles.module.css";
 import Image from "next/image";
+import {useDispatch} from "react-redux";
+import {setKycScreenName} from "@/store/Slices";
 
 export default function ProgressSection({progress}) {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (progress === 100) {
+      dispatch(setKycScreenName("congratulation"));
+    }
+  }, []);
   return (
     <div className={styles.main_wrapper}>
       <div className={styles.progressBarContainer}>

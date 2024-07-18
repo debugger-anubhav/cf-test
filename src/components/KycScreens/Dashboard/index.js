@@ -29,6 +29,7 @@ import SlotDrawer from "../SlotDrawer/index";
 import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
+import CongratulationKyc from "../Congratulation";
 // import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
@@ -58,6 +59,9 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
+  const [currentScreen, setCurrentScreen] = useState(
+    kycSliceData.kycScreenName,
+  );
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -246,20 +250,44 @@ export default function DashboardComponent() {
     dispatch(setProgressPercent(progressPercentage));
   }, [dashboardDetails]);
 
+  useEffect(() => {
+    setCurrentScreen(kycSliceData.kycScreenName);
+  }, [kycSliceData.kycScreenName]);
+
   return (
     <div>
-      <div className={`${styles.heading} justify-between`}>
-        <div className="flex items-center gap-2">
-          <BackIcon
-            color={"#222222"}
-            size={20}
-            onClick={() => dispatch(setKycScreenName("selectOrderId"))}
-            className={"cursor-pointer"}
-          />
-          Order Id: {data?.dealCodeNumber}
-        </div>
-        <div className="flex w-fit">
-          <div className={`${styles.profession_row} md:flex hidden`}>
+      {currentScreen === "congratulation" ? (
+        <CongratulationKyc
+          dashboardDetails={dashboardDetails}
+          handleDelivery={handleDelivery}
+        />
+      ) : (
+        <div>
+          <div className={`${styles.heading} justify-between`}>
+            <div className="flex items-center gap-2">
+              <BackIcon
+                color={"#222222"}
+                size={20}
+                onClick={() => dispatch(setKycScreenName("selectOrderId"))}
+                className={"cursor-pointer"}
+              />
+              Order Id: {data?.dealCodeNumber}
+            </div>
+            <div className="flex w-fit">
+              <div className={`${styles.profession_row} md:flex hidden`}>
+                <div className={styles.profession_left}>
+                  Profession: {dashboardDetails?.professionDetail?.profession}{" "}
+                </div>
+                <div
+                  className={styles.profession_right}
+                  onClick={() => setChangeProfession(true)}>
+                  Change
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className={`${styles.profession_row} flex md:hidden`}>
             <div className={styles.profession_left}>
               Profession: {dashboardDetails?.professionDetail?.profession}{" "}
             </div>
@@ -269,221 +297,210 @@ export default function DashboardComponent() {
               Change
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className={`${styles.profession_row} flex md:hidden`}>
-        <div className={styles.profession_left}>
-          Profession: {dashboardDetails?.professionDetail?.profession}{" "}
-        </div>
-        <div
-          className={styles.profession_right}
-          onClick={() => setChangeProfession(true)}>
-          Change
-        </div>
-      </div>
+          <div className={styles.order_placed_wrapper}>
+            {loadingSkeleton ? (
+              <Skeleton variant="rectangular" width={"100%"} height={30} />
+            ) : (
+              <>
+                <div className={styles.order_place_info}>
+                  <p className={styles.order_place_heading}>Order placed on</p>
+                  <p className={styles.order_place_date}>
+                    {formatDate(orderDate)}
+                  </p>
+                </div>
+                <div className="flex gap-2">
+                  {Images(productImagesArr)}
+                  <span>
+                    {productImages.length > 4 && (
+                      <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
+                        +{productImages?.length - 3}
+                      </div>
+                    )}
+                  </span>
+                </div>
+              </>
+            )}
+          </div>
 
-      <div className={styles.order_placed_wrapper}>
-        {loadingSkeleton ? (
-          <Skeleton variant="rectangular" width={"100%"} height={30} />
-        ) : (
-          <>
-            <div className={styles.order_place_info}>
-              <p className={styles.order_place_heading}>Order placed on</p>
-              <p className={styles.order_place_date}>{formatDate(orderDate)}</p>
-            </div>
-            <div className="flex gap-2">
-              {Images(productImagesArr)}
-              <span>
-                {productImages.length > 4 && (
-                  <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
-                    +{productImages?.length - 3}
-                  </div>
-                )}
-              </span>
-            </div>
-          </>
-        )}
-      </div>
+          <div className={styles.kyc_status_box}>
+            <p className={styles.sub_heading}>KYC status:</p>
+            <p className={`${styles.heading}  md:!text-20 `}>
+              {dashboardDetails?.kycStatus}
+              {dashboardDetails?.kycStatus === "Under Review" && (
+                <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg" />
+              )}
+              {dashboardDetails?.kycStatus === "Verified" && (
+                <CheckCircleIcon color={"#2D9469"} size={18} />
+              )}
+              {dashboardDetails?.kycStatus === "Pending"}
+              {dashboardDetails?.kycStatus === "Rejected" && (
+                <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/red-exclamatory-icn.svg" />
+              )}
+            </p>
+            <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
 
-      <div className={styles.kyc_status_box}>
-        <p className={styles.sub_heading}>KYC status:</p>
-        <p className={`${styles.heading}  md:!text-20 `}>
-          {dashboardDetails?.kycStatus}
-          {dashboardDetails?.kycStatus === "Under Review" && (
-            <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg" />
-          )}
-          {dashboardDetails?.kycStatus === "Verified" && (
-            <CheckCircleIcon color={"#2D9469"} size={18} />
-          )}
-          {dashboardDetails?.kycStatus === "Pending"}
-          {dashboardDetails?.kycStatus === "Rejected" && (
-            <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/red-exclamatory-icn.svg" />
-          )}
-        </p>
-        <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
-
-        <button
-          className={`${styles.schedule_delivery_btn}
+            <button
+              className={`${styles.schedule_delivery_btn}
         ${
           dashboardDetails?.kycStatus === "Under Review"
             ? "bg-FFDF85 cursor-not-allowed"
             : "bg-btn-primary cursor-pointer"
         }
         `}
-          disabled={dashboardDetails?.kycStatus === "Under Review"}
-          onClick={() => handleDelivery()}>
-          {dashboardDetails?.kycStatus === "Under Review" && (
-            <div className="flex items-center gap-1">
-              <img
-                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
-              <p>Manage your delivery now</p>
+              disabled={dashboardDetails?.kycStatus === "Under Review"}
+              onClick={() => handleDelivery()}>
+              {dashboardDetails?.kycStatus === "Under Review" && (
+                <div className="flex items-center gap-1">
+                  <img
+                    src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
+                    alt="lock"
+                    width={20}
+                    height={20}
+                  />
+                  <p>Manage your delivery now</p>
+                </div>
+              )}
+
+              {dashboardDetails?.kycStatus === "Verified" && (
+                <div className="flex items-center gap-1">
+                  <img
+                    src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
+                    alt="lock"
+                    width={20}
+                    height={20}
+                  />
+                  <p>Manage your delivery now</p>
+                </div>
+              )}
+
+              {dashboardDetails?.kycStatus === "Pending" &&
+                "Complete KYC to Schedule Delivery"}
+
+              {dashboardDetails?.kycStatus === "Rejected" &&
+                "Re-upload your documents now"}
+
+              {dashboardDetails?.kycStatus !== "Under Review" && (
+                <ForwardArrowWithLine />
+              )}
+            </button>
+          </div>
+
+          {dashboardDetails?.isOptionalStages && (
+            <div className={styles.kyc_tab}>
+              <p
+                className={
+                  activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
+                }
+                onClick={() => setactiveTab("kyc")}>
+                KYC
+              </p>
+              <p
+                className={
+                  activeTab === "optional"
+                    ? styles.active_tab_item
+                    : styles.tab_item
+                }
+                onClick={() => setactiveTab("optional")}>
+                Optional
+              </p>
             </div>
           )}
 
-          {dashboardDetails?.kycStatus === "Verified" && (
-            <div className="flex items-center gap-1">
-              <img
-                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
-              <p>Manage your delivery now</p>
-            </div>
-          )}
-
-          {dashboardDetails?.kycStatus === "Pending" &&
-            "Complete KYC to Schedule Delivery"}
-
-          {dashboardDetails?.kycStatus === "Rejected" &&
-            "Re-upload your documents now"}
-
-          {dashboardDetails?.kycStatus !== "Under Review" && (
-            <ForwardArrowWithLine />
-          )}
-        </button>
-      </div>
-
-      {dashboardDetails?.isOptionalStages && (
-        <div className={styles.kyc_tab}>
-          <p
-            className={
-              activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
-            }
-            onClick={() => setactiveTab("kyc")}>
-            KYC
-          </p>
-          <p
-            className={
-              activeTab === "optional"
-                ? styles.active_tab_item
-                : styles.tab_item
-            }
-            onClick={() => setactiveTab("optional")}>
-            Optional
-          </p>
-        </div>
-      )}
-
-      {activeTab === "kyc" && (
-        <>
-          <div className={styles.details_wrapper}>
-            {loadingSkeleton ? (
-              <SkeletonData />
-            ) : (
-              <>
-                {dashboardDetails?.allKycStages?.map((item, index) => {
-                  if (item.id === 1) {
-                    return (
-                      <div key={index.toString()}>
-                        <SdkIntegration
-                          openPanSdk={openPanSdk}
-                          item={item}
-                          status={convertStatus(item?.stage_status)}
-                          getDashboardDetailsApi={getDashboardDetailsApi}
-                        />
-                      </div>
-                    );
-                  } else if (item.id === 3 && professionId === 2) {
-                    return (
-                      <div key={index.toString()}>
-                        <GstSdk
-                          item={item}
-                          status={convertStatus(item?.stage_status)}
-                          getDashboardDetailsApi={getDashboardDetailsApi}
-                        />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        className={`${styles.details_box}
+          {activeTab === "kyc" && (
+            <>
+              <div className={styles.details_wrapper}>
+                {loadingSkeleton ? (
+                  <SkeletonData />
+                ) : (
+                  <>
+                    {dashboardDetails?.allKycStages?.map((item, index) => {
+                      if (item.id === 1) {
+                        return (
+                          <div key={index.toString()}>
+                            <SdkIntegration
+                              openPanSdk={openPanSdk}
+                              item={item}
+                              status={convertStatus(item?.stage_status)}
+                              getDashboardDetailsApi={getDashboardDetailsApi}
+                            />
+                          </div>
+                        );
+                      } else if (item.id === 3 && professionId === 2) {
+                        return (
+                          <div key={index.toString()}>
+                            <GstSdk
+                              item={item}
+                              status={convertStatus(item?.stage_status)}
+                              getDashboardDetailsApi={getDashboardDetailsApi}
+                            />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            className={`${styles.details_box}
                     ${
                       item.stage_status === 2 || item.stage_status === 1
                         ? "!cursor-default"
                         : "cursor-pointer"
                     }
                     `}
-                        key={index.toString()}
-                        onClick={() => {
-                          if (
-                            item.stage_status === 2 ||
-                            item.stage_status === 1
-                          ) {
-                            return null;
-                          } else handleKycStagesClick(item);
-                        }}>
-                        <div className={styles.detail_heading}>
-                          {item?.stage_name}
-                        </div>
-                        <div className={styles.sub_heading}>
-                          {convertStatus(item?.stage_status)}
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
-              </>
-            )}
-          </div>
+                            key={index.toString()}
+                            onClick={() => {
+                              if (
+                                item.stage_status === 2 ||
+                                item.stage_status === 1
+                              ) {
+                                return null;
+                              } else handleKycStagesClick(item);
+                            }}>
+                            <div className={styles.detail_heading}>
+                              {item?.stage_name}
+                            </div>
+                            <div className={styles.sub_heading}>
+                              {convertStatus(item?.stage_status)}
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  </>
+                )}
+              </div>
 
-          <div className={styles.mobile_details_wrapper}>
-            {loadingSkeleton ? (
-              <SkeletonData />
-            ) : (
-              <>
-                {dashboardDetails?.allKycStages?.map((item, index) => {
-                  if (item.id === 1) {
-                    return (
-                      <div key={index.toString()}>
-                        <SdkIntegration
-                          openPanSdk={openPanSdk}
-                          item={item}
-                          status={convertStatus(item?.stage_status)}
-                          getDashboardDetailsApi={getDashboardDetailsApi}
-                        />
-                      </div>
-                    );
-                  } else {
-                    return (
-                      <div
-                        key={index.toString()}
-                        onClick={() => {
-                          if (
-                            item.stage_status === 2 ||
-                            item.stage_status === 1
-                          ) {
-                            return null;
-                          } else handleKycStagesClick(item);
-                        }}
-                        className={`${styles.mobile_detail_box} ${
-                          index === 4 ? "border-none" : "border-b"
-                        }
+              <div className={styles.mobile_details_wrapper}>
+                {loadingSkeleton ? (
+                  <SkeletonData />
+                ) : (
+                  <>
+                    {dashboardDetails?.allKycStages?.map((item, index) => {
+                      if (item.id === 1) {
+                        return (
+                          <div key={index.toString()}>
+                            <SdkIntegration
+                              openPanSdk={openPanSdk}
+                              item={item}
+                              status={convertStatus(item?.stage_status)}
+                              getDashboardDetailsApi={getDashboardDetailsApi}
+                            />
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            key={index.toString()}
+                            onClick={() => {
+                              if (
+                                item.stage_status === 2 ||
+                                item.stage_status === 1
+                              ) {
+                                return null;
+                              } else handleKycStagesClick(item);
+                            }}
+                            className={`${styles.mobile_detail_box} ${
+                              index === 4 ? "border-none" : "border-b"
+                            }
                     ${
                       item.stage_status === 2 || item.stage_status === 1
                         ? "!cursor-default"
@@ -491,72 +508,73 @@ export default function DashboardComponent() {
                     }
                     
                     `}>
-                        <div className={styles.detail_heading}>
-                          {item?.stage_name}
-                        </div>
-                        <div className={styles.sub_heading}>
-                          {convertStatus(item?.stage_status)}
-                        </div>
-                      </div>
-                    );
-                  }
-                })}
-              </>
-            )}
-          </div>
-        </>
-      )}
+                            <div className={styles.detail_heading}>
+                              {item?.stage_name}
+                            </div>
+                            <div className={styles.sub_heading}>
+                              {convertStatus(item?.stage_status)}
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  </>
+                )}
+              </div>
+            </>
+          )}
 
-      {activeTab === "optional" && (
-        <OptionalStages
-          convertStatus={convertStatus}
-          getDocsDetailsApi={getDocsDetailsApi}
-          setHoldOnLoader={setHoldOnLoader}
-          setactiveTab={setactiveTab}
-        />
-      )}
+          {activeTab === "optional" && (
+            <OptionalStages
+              convertStatus={convertStatus}
+              getDocsDetailsApi={getDocsDetailsApi}
+              setHoldOnLoader={setHoldOnLoader}
+              setactiveTab={setactiveTab}
+            />
+          )}
 
-      {holdOnLoader && (
-        <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
-      )}
+          {holdOnLoader && (
+            <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
+          )}
 
-      {openPanSdk && (
-        <SdkIntegration
-          getDashboardDetailsApi={getDashboardDetailsApi}
-          openPanSdk={openPanSdk}
-          setOpenPanSdk={setOpenPanSdk}
-        />
-      )}
+          {openPanSdk && (
+            <SdkIntegration
+              getDashboardDetailsApi={getDashboardDetailsApi}
+              openPanSdk={openPanSdk}
+              setOpenPanSdk={setOpenPanSdk}
+            />
+          )}
 
-      {professionId === 2 && openGstSdk && (
-        <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
-      )}
+          {professionId === 2 && openGstSdk && (
+            <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
+          )}
 
-      {openDeliverySlot && (
-        <SlotDrawer
-          isModalOpen={openDeliverySlot}
-          closeModal={toggleModal}
-          orderId={orderId}
-          width={230}
-          getDashboardDetails={getDashboardDetailsApi}
-        />
-      )}
+          {openDeliverySlot && (
+            <SlotDrawer
+              isModalOpen={openDeliverySlot}
+              closeModal={toggleModal}
+              orderId={orderId}
+              width={230}
+              getDashboardDetails={getDashboardDetailsApi}
+            />
+          )}
 
-      {changeProfession && (
-        <KycCommonDrawer
-          content={drawerContent()}
-          changeState={setChangeProfession}
-          heading={"Change Profession?"}
-        />
-      )}
+          {changeProfession && (
+            <KycCommonDrawer
+              content={drawerContent()}
+              changeState={setChangeProfession}
+              heading={"Change Profession?"}
+            />
+          )}
 
-      {showQueDrawer && (
-        <FinancialQueDrawer
-          changeState={setShowQueDrawer}
-          docsDetailsData={docsDetailsData}
-        />
+          {showQueDrawer && (
+            <FinancialQueDrawer
+              changeState={setShowQueDrawer}
+              docsDetailsData={docsDetailsData}
+            />
+          )}
+        </div>
       )}
-      {/* <CongratulationKyc dashboardDetails={dashboardDetails} handleDelivery={handleDelivery}/> */}
     </div>
   );
 }

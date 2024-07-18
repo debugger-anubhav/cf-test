@@ -132,7 +132,7 @@ export default function SdkIntegration({
     //     setSaveHVData(res?.data?.data);
     //     getDashboardDetailsApi();
     //   })
-    //   .catch(err => console.log(err));
+    // .catch(err => console.log(err));
   };
 
   useEffect(() => {

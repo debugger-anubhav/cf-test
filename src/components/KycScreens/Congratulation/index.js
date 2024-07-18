@@ -2,8 +2,16 @@ import React from "react";
 import styles from "../Dashboard/styles.module.css";
 import {CheckCircleIcon, ForwardArrowWithLine} from "../../../assets/icon";
 import CongoPopup from "@/components/Documentation/CongoPopup/CongoPopup";
+import {useDispatch} from "react-redux";
+import {setKycScreenName} from "@/store/Slices";
 
 export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
+  const dispatch = useDispatch();
+
+  const handleButtonClick = () => {
+    dispatch(setKycScreenName("dashboard"));
+  };
+
   return (
     <div>
       <div className={`${styles.firstSection}`}>
@@ -72,7 +80,8 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
             )}
           </button>
           <button
-            className={`${styles.schedule_delivery_btn} bg-btn-primary cursor-pointer`}>
+            className={`${styles.schedule_delivery_btn} bg-btn-primary cursor-pointer`}
+            onClick={handleButtonClick}>
             Review your KYC details <ForwardArrowWithLine />
           </button>
         </div>
