@@ -19,6 +19,7 @@ import {
   reduxSetModalState,
   setCurrentAddOpt,
   setKycScreenName,
+  setProgressPercent,
   setSelectedProfessionId,
   setStageId,
 } from "@/store/Slices";
@@ -28,7 +29,6 @@ import SlotDrawer from "../SlotDrawer/index";
 import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
-import ProgressSection from "@/components/KycScreens/ProgressBar";
 // import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
@@ -58,7 +58,6 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
-  const [progressPercentage, setProgressPercentage] = useState(0);
 
   const getDashboardDetailsApi = () => {
     baseInstance
@@ -244,7 +243,7 @@ export default function DashboardComponent() {
       totalProgress > 0
         ? Math.round((progress?.length / totalProgress) * 100)
         : 0;
-    setProgressPercentage(progressPercentage);
+    dispatch(setProgressPercent(progressPercentage));
   }, [dashboardDetails]);
 
   return (
@@ -558,7 +557,6 @@ export default function DashboardComponent() {
         />
       )}
       {/* <CongratulationKyc dashboardDetails={dashboardDetails} handleDelivery={handleDelivery}/> */}
-      <ProgressSection progress={progressPercentage} />
     </div>
   );
 }

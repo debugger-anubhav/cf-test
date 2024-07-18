@@ -26,51 +26,56 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
           )}
         </p>
         <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
-
-        <button
-          className={`${styles.schedule_delivery_btn}
+        <div className="flex gap-8">
+          <button
+            className={`${styles.schedule_delivery_btn}
     ${
       dashboardDetails?.kycStatus === "Under Review"
         ? "bg-FFDF85 cursor-not-allowed"
         : "bg-btn-primary cursor-pointer"
     }
     `}
-          disabled={dashboardDetails?.kycStatus === "Under Review"}
-          onClick={() => handleDelivery()}>
-          {dashboardDetails?.kycStatus === "Under Review" && (
-            <div className="flex items-center gap-1">
-              <img
-                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
-              <p>Manage your delivery now</p>
-            </div>
-          )}
+            disabled={dashboardDetails?.kycStatus === "Under Review"}
+            onClick={() => handleDelivery()}>
+            {dashboardDetails?.kycStatus === "Under Review" && (
+              <div className="flex items-center gap-1">
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
+                  alt="lock"
+                  width={20}
+                  height={20}
+                />
+                <p>Manage your delivery now</p>
+              </div>
+            )}
 
-          {dashboardDetails?.kycStatus === "Verified" && (
-            <div className="flex items-center gap-1">
-              <img
-                src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
-              <p>Manage your delivery now</p>
-            </div>
-          )}
+            {dashboardDetails?.kycStatus === "Verified" && (
+              <div className="flex items-center gap-1">
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
+                  alt="lock"
+                  width={20}
+                  height={20}
+                />
+                <p>Manage your delivery now</p>
+              </div>
+            )}
 
-          {dashboardDetails?.kycStatus === "Pending" &&
-            "Complete KYC to Schedule Delivery"}
+            {dashboardDetails?.kycStatus === "Pending" &&
+              "Complete KYC to Schedule Delivery"}
 
-          {dashboardDetails?.kycStatus === "Rejected" &&
-            "Re-upload your documents now"}
+            {dashboardDetails?.kycStatus === "Rejected" &&
+              "Re-upload your documents now"}
 
-          {dashboardDetails?.kycStatus !== "Under Review" && (
-            <ForwardArrowWithLine />
-          )}
-        </button>
+            {dashboardDetails?.kycStatus !== "Under Review" && (
+              <ForwardArrowWithLine />
+            )}
+          </button>
+          <button
+            className={`${styles.schedule_delivery_btn} bg-btn-primary cursor-pointer`}>
+            Review your KYC details <ForwardArrowWithLine />
+          </button>
+        </div>
       </div>
     </div>
   );

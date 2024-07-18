@@ -34,12 +34,13 @@ import EducationalDetails from "@/components/KycScreens/EducationalDetails";
 import AutoPay from "@/components/KycScreens/AutoPay";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
+import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
   const kycScreen = useSelector(state => state.kycPage);
-
+  const progressPercentage = kycScreen?.progressPercent;
   const [kycState, setKycState] = useState();
   const [isUpfrontPayment, setIsUpfrontPayment] = useState(false);
   const [tenure, setTenure] = useState();
@@ -360,6 +361,10 @@ const DocMain = () => {
             <div className="mt-8">
               <FinancialInfo handleKycState={id => handleKycState(id)} />
             </div>
+          )}
+
+          {currentScreen !== "selectOrderId" && (
+            <ProgressSection progress={progressPercentage} />
           )}
         </div>
 

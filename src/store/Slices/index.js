@@ -295,6 +295,7 @@ export const KycPageSlice = createSlice({
     stageId: null,
     currentAddOpt: [],
     pendingDashboardDetail: [],
+    progressPercent: 0,
   },
   reducers: {
     getOrderId(state, action) {
@@ -320,6 +321,9 @@ export const KycPageSlice = createSlice({
     },
     setPendingDashboardDetail(state, action) {
       state.pendingDashboardDetail = action.payload;
+    },
+    setProgressPercent(state, action) {
+      state.progressPercent = action.payload;
     },
   },
 });
@@ -474,6 +478,7 @@ export const {
   setStageId,
   setCurrentAddOpt,
   setPendingDashboardDetail,
+  setProgressPercent,
 } = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState, setUsedCoins} =
