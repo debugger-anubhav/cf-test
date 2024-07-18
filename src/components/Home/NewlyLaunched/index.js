@@ -26,7 +26,6 @@ const NewlyLaunched = () => {
   useEffect(() => {
     const worker = new Worker();
     worker.onmessage = function ({data: {data}}) {
-      console.log("received message", data);
       setNewProduct(data);
     };
 
@@ -84,6 +83,8 @@ const NewlyLaunched = () => {
                     }
                     className={styles.img}
                     alt={ele?.product_name}
+                    width={180}
+                    height={130}
                   />
                 </div>
                 <div className={styles.price_tag}>
