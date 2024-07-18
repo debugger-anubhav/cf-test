@@ -20,7 +20,7 @@ import MenuList from "@/components/Common/MenuList";
 // import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
-// import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
+import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 // import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
@@ -96,14 +96,14 @@ const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
   fallback: <TryCityMaxSkeleton />,
 });
 
-// const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
-//   fallback: <ProductRowSkeleton />,
-// });
+const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
+  fallback: <ProductRowSkeleton />,
+});
 
-// const MediaCoverage = loadable(
-//   () => import("@/components/Home/MediaCoverage"),
-//   {fallback: <MediaCoverageSkeleton />},
-// );
+const MediaCoverage = loadable(
+  () => import("@/components/Home/MediaCoverage"),
+  {fallback: <MediaCoverageSkeleton />},
+);
 
 // const HappySubscribers = loadable(() =>
 //   import("@/components/Home/HappySubscribers"),
@@ -186,14 +186,14 @@ export default function Home() {
 
         <TryCityMax />
 
-        {/* <div className="xl:hidden block">
+        <div className="xl:hidden block">
           <MediaCoverage />
         </div>
         <CustomerRating />
         <div className="hidden xl:block">
           <MediaCoverage />
         </div>
-        <CombineSection />
+        {/* <CombineSection />
         <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
