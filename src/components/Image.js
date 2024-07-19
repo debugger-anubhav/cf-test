@@ -19,7 +19,12 @@ import NextImage from "next/image";
 const Image = ({src, alt, priority = false, loading = "lazy", ...props}) => {
   // const sizes = getSizes();
 
-  const formattedUrl = src?.startsWith("https:") ? src : `https:${src}`;
+  const formattedUrl =
+    typeof src === "string"
+      ? src?.startsWith("https:")
+        ? src
+        : `https:${src}`
+      : src;
 
   return (
     <>

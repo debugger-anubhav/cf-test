@@ -17,7 +17,7 @@ import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
-// import {FooterSkeleton} from "@/components/Common/Footer";
+import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
@@ -116,9 +116,9 @@ const FrequentlyAskedQuestions = loadable(
   },
 );
 
-// const Footer = loadable(() => import("@/components/Common/Footer"), {
-//   fallback: <FooterSkeleton />,
-// });
+const Footer = loadable(() => import("@/components/Common/Footer"), {
+  fallback: <FooterSkeleton />,
+});
 
 const CombineSection = loadable(
   () => import("@/components/Home/CombineSection"),
@@ -197,7 +197,7 @@ export default function Home() {
         <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
-        {/* <Footer /> */}
+        <Footer />
         <Notifications />
       </div>
     </>

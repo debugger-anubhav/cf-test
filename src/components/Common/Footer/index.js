@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
-import Image from "next/image";
+import Image from "@/components/Image";
 import {FooterIcons} from "@/assets/icon";
 import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
@@ -9,21 +9,24 @@ import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
 
 import {Skeleton} from "@mui/material";
 import {useAuthentication} from "@/hooks/checkAuthentication";
+import Link from "next/link";
+
+const str = {
+  why_furni: "Furniture Rental: An Affordable and Flexible Option",
+  why_furni_desc:
+    "Are you looking for a cost-effective and flexible way to furnish your home or office? Furniture rental may be the solution you've been searching for. CityFurnish, a leading furniture rental company, offers a wide range of home and office furniture for rent online, through their user-friendly furniture rental app.",
+  contact: "080-66084700",
+  time: "(09AM to 09PM)",
+  go_to_top: "Go to top",
+};
+
+const currentYear = new Date().getFullYear();
+const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
 
 const Footer = ({params}) => {
   const {checkAuthentication} = useAuthentication();
   const cityName = useSelector(state => state.homePagedata.cityName);
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
-  const currentYear = new Date().getFullYear();
-  const text = `© Copyright ${currentYear} Cityfurnish. All Rights Reserved.`;
-  const str = {
-    why_furni: "Furniture Rental: An Affordable and Flexible Option",
-    why_furni_desc:
-      "Are you looking for a cost-effective and flexible way to furnish your home or office? Furniture rental may be the solution you've been searching for. CityFurnish, a leading furniture rental company, offers a wide range of home and office furniture for rent online, through their user-friendly furniture rental app.",
-    contact: "080-66084700",
-    time: "(09AM to 09PM)",
-    go_to_top: "Go to top",
-  };
 
   const [isLogin, setIsLogin] = useState();
   useEffect(() => {
@@ -123,8 +126,8 @@ const Footer = ({params}) => {
     },
   ];
   const [points, setPoints] = useState(array);
-
   const [content, setContent] = useState([]);
+
   const cityIdStr = getLocalStorageString("cityId")
     ?.toString()
     ?.replace(/"/g, "");
@@ -206,11 +209,9 @@ const Footer = ({params}) => {
           <h2 className={`!text-[#222] ${styles.head}`}>Need Help</h2>
           <div className={styles.contact_div}>
             <Image
-              loader={({src}) => src}
               className={`${styles.phoneImg} pointer-events-none`}
               alt="phone-icon"
               src={FooterIcons.Phone}
-              loading="lazy"
             />
             <div>
               <p className={styles.contact}>
@@ -227,7 +228,7 @@ const Footer = ({params}) => {
           </div>
           <div className={styles.social_media_icons_div}>
             {FooterIcons?.social_media_icons?.map((item, index) => (
-              <a
+              <Link
                 key={index.toString()}
                 href={item.link}
                 target="_blank"
@@ -237,9 +238,8 @@ const Footer = ({params}) => {
                   alt={item?.icon}
                   src={item?.icon}
                   className="pointer-events-none"
-                  loading="lazy"
                 />
-              </a>
+              </Link>
             ))}
           </div>
         </div>
@@ -249,7 +249,6 @@ const Footer = ({params}) => {
       <div className="xl:hidden">
         <div className={styles.contact_div}>
           <Image
-            loader={({src}) => src}
             className={`${styles.phoneImg} pointer-events-none`}
             alt="phone-icon"
             src={FooterIcons.Phone}
@@ -257,12 +256,12 @@ const Footer = ({params}) => {
           />
           <div>
             <p className={styles.contact}>
-              <a
+              <Link
                 href={`tel:${str.contact}`}
                 target="_self"
                 rel="noopener  noreferrer">
                 {str.contact}
-              </a>
+              </Link>
             </p>
             <p className={styles.time}>{str.time}</p>
           </div>
@@ -270,7 +269,7 @@ const Footer = ({params}) => {
 
         <div className={styles.social_media_icons_div}>
           {FooterIcons?.social_media_icons?.map((item, index) => (
-            <a
+            <Link
               key={index.toString()}
               href={item.link}
               target="_blank"
@@ -282,7 +281,7 @@ const Footer = ({params}) => {
                 loading="lazy"
                 className="pointer-events-none"
               />
-            </a>
+            </Link>
           ))}
         </div>
       </div>
@@ -296,13 +295,11 @@ const Footer = ({params}) => {
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           }}>
           <Image
-            loader={({src}) => src}
             src={
               "https://d3juy0zp6vqec8.cloudfront.net/images/icons/go-to-top.svg"
             }
             alt="go-to-top-icon"
             className={`${styles.goToTopIcon} pointer-events-none`}
-            loading="lazy"
             width={20}
             height={20}
           />
@@ -312,9 +309,9 @@ const Footer = ({params}) => {
     </div>
   );
 };
-export default Footer;
+export default memo(Footer);
 
-export const FooterSkeleton = () => {
+export const FooterSkeleton = memo(() => {
   return (
     <div className={styles.footer_wrapper_skeleton}>
       <div className={styles.skeleton_div_wrapper}>
@@ -352,4 +349,4 @@ export const FooterSkeleton = () => {
       </div>
     </div>
   );
-};
+});
