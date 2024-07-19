@@ -41,7 +41,7 @@ const RentFurnitureAndAppliances = ({params}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

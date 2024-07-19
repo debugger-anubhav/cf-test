@@ -23,7 +23,7 @@ export default function TextContent({params}) {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, [paramsCityId]);
 

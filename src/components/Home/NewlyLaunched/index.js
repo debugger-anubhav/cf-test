@@ -32,7 +32,7 @@ const NewlyLaunched = () => {
     worker.postMessage({type: "newlyLaunched", cityId});
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

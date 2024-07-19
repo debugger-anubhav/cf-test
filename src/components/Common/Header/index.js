@@ -184,7 +184,7 @@ const Header = ({page}) => {
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
       window?.removeEventListener("scroll", handleScroll);
       document.removeEventListener("click", handleClickOutside);
     };

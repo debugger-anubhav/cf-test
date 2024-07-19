@@ -55,7 +55,7 @@ const TrendingProducts = ({params}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

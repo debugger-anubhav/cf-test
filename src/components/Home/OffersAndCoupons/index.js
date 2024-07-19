@@ -28,7 +28,7 @@ const OffersAndCoupons = ({page}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 
