@@ -80,7 +80,8 @@ const OffersAndCoupons = ({page}) => {
     };
   }, []);
 
-  return homePageData?.offerCoupons ? (
+  return homePageData?.offerCoupons &&
+    homePageData?.offerCoupons?.length > 0 ? (
     <div className={styles.wrapper}>
       <h2
         className={`${page === "product" && "xl:!text-24 xl:!tracking-0.48"} ${
@@ -136,7 +137,11 @@ const OffersAndCoupons = ({page}) => {
         })}
       </div>
     </div>
-  ) : null;
+  ) : (
+    <div className="mt-8">
+      <OffersSkeleton />
+    </div>
+  );
 };
 export default memo(OffersAndCoupons);
 
