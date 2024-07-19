@@ -59,7 +59,7 @@ const Card = ({
 
   useEffect(() => {
     return () => {
-      homepageCardsWorker.terminate();
+      homepageCardsWorker?.terminate();
     };
   }, []);
 

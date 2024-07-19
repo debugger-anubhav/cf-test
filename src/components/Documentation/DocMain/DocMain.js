@@ -149,7 +149,11 @@ const DocMain = () => {
   };
 
   const handleStartKyc = () => {
-    checkSelectedProfession();
+    if (selectedOption === null) {
+      setOpenDrawer(true);
+    } else {
+      checkSelectedProfession();
+    }
   };
 
   useEffect(() => {
@@ -263,12 +267,9 @@ const DocMain = () => {
 
               {/* start kyc button  */}
               <button
-                className={`${styles.start_kyc_btn} ${
-                  selectedOption === null
-                    ? "bg-FFDF85 cursor-not-allowed"
-                    : "bg-btn-primary cursor-pointer"
+                className={`${styles.start_kyc_btn} cursor-pointer ${
+                  selectedOption === null ? "bg-FFDF85 " : "bg-btn-primary "
                 }`}
-                disabled={selectedOption === null}
                 onClick={handleStartKyc}>
                 Start my KYC now{" "}
                 <ArrowForw

@@ -26,7 +26,7 @@ const PreDesignCombos = () => {
     worker.postMessage({type: "predesignCombos", cityId});
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

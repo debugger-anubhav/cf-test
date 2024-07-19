@@ -28,7 +28,7 @@ const HappySubscribers = ({page, params}) => {
     worker.postMessage({page, params});
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

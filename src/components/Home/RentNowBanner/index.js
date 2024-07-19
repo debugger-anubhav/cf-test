@@ -22,7 +22,7 @@ const RentNowBanner = ({params}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

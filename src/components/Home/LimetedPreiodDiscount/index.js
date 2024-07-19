@@ -28,7 +28,7 @@ const LimitedPreiodDiscount = () => {
     worker.postMessage({type: "limitedPeriodDiscount", cityId});
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

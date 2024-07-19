@@ -37,7 +37,7 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     worker.postMessage({params, domain});
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 

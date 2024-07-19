@@ -145,7 +145,7 @@ export default function Home() {
     });
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);

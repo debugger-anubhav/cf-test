@@ -316,7 +316,7 @@ export default function DashboardComponent() {
                   {Images(productImagesArr)}
                   <span>
                     {productImages.length > 4 && (
-                      <div className="w-[40px] h-[40px] flex justify-center items-center rounded-lg bg-transparent border border-71717A">
+                      <div className="w-[40px] h-[40px] flex justify-center items-center rounded-[4px] bg-transparent border border-71717A text-71717A font-medium text-14">
                         +{productImages?.length - 3}
                       </div>
                     )}

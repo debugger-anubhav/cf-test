@@ -52,7 +52,7 @@ const RecentlyViewedProduct = ({page}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, [isLogin]);
 
