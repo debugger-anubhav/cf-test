@@ -1,6 +1,18 @@
 import {getLocalStorage} from "@/constants/constant";
 import {createSlice} from "@reduxjs/toolkit";
 
+export const WorkersSlice = createSlice({
+  name: "workers",
+  initialState: {
+    homepageCardsWorker: null,
+  },
+  reducers: {
+    setHomepageCardWorker(state, action) {
+      state.homepageCardsWorker = action.payload;
+    },
+  },
+});
+
 export const HomepageSlice = createSlice({
   name: "HomePageData",
   initialState: {
@@ -497,3 +509,5 @@ export const {
 } = paymentSuccessSlice.actions;
 
 export const {setIsHalfYearlyState} = citymaxSlice.actions;
+
+export const {setHomepageCardWorker} = WorkersSlice.actions;

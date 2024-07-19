@@ -1,12 +1,44 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
 import {Close} from "@/assets/icon";
 
+const sidebarDetail = [
+  {
+    heading: "Select Tenure of Subscription",
+    subheading:
+      "Select your preferred duration of subscription. Don't worry, you can extend it later if need be.",
+  },
+  {
+    heading: "Select a Plan",
+    subheading: "Choose a plan which best suits your need.",
+  },
+  {
+    heading: "Choose The Products",
+    subheading:
+      "Click on each placeholder box and choose the furniture and appliances you like.",
+  },
+  {
+    heading: "Complete the Order & On Boarding Process",
+    subheading:
+      "Pay the subscription fee and upload documents required for KYC.",
+  },
+  {
+    heading: "Take The Delivery",
+    subheading:
+      "We will deliver your products within 4 days after KYC completion.",
+  },
+  {
+    heading: "Return or Extend",
+    subheading:
+      "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
+  },
+];
+
 const CityMaxDrawer = ({toggleDrawer, open}) => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
 
-  const handleresize = e => {
+  const handleresize = () => {
     if (window.innerWidth < 768) {
       setIsBottomDrawer(true);
     } else {
@@ -21,38 +53,6 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
       window.removeEventListener("resize", handleresize);
     };
   }, []);
-
-  const sidebarDetail = [
-    {
-      heading: "Select Tenure of Subscription",
-      subheading:
-        "Select your preferred duration of subscription. Don't worry, you can extend it later if need be.",
-    },
-    {
-      heading: "Select a Plan",
-      subheading: "Choose a plan which best suits your need.",
-    },
-    {
-      heading: "Choose The Products",
-      subheading:
-        "Click on each placeholder box and choose the furniture and appliances you like.",
-    },
-    {
-      heading: "Complete the Order & On Boarding Process",
-      subheading:
-        "Pay the subscription fee and upload documents required for KYC.",
-    },
-    {
-      heading: "Take The Delivery",
-      subheading:
-        "We will deliver your products within 4 days after KYC completion.",
-    },
-    {
-      heading: "Return or Extend",
-      subheading:
-        "Ask for products return once your subscription period is over. Subscription keeps auto extending until you ask for products pickup.",
-    },
-  ];
 
   return (
     <Drawer
@@ -75,7 +75,7 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
             </div>
 
             <div className="h-[90vh] overflow-scroll pb-[130px] md:pb-0 ">
-              {sidebarDetail?.map((item, index) => (
+              {sidebarDetail.map(({heading, subheading}, index) => (
                 <div
                   className={styles.drawer_map_wrapper}
                   key={index.toString()}>
@@ -84,11 +84,9 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
                       <p>{index + 1}</p>
                     </div>
                     <div className={styles.sidebar_detailing}>
-                      <p className={styles.sidebar_detail_heading}>
-                        {item.heading}
-                      </p>
+                      <p className={styles.sidebar_detail_heading}>{heading}</p>
                       <p className={styles.sidebar_detail_subheading}>
-                        {item.subheading}
+                        {subheading}
                       </p>
                     </div>
                   </div>
@@ -105,4 +103,4 @@ const CityMaxDrawer = ({toggleDrawer, open}) => {
   );
 };
 
-export default CityMaxDrawer;
+export default memo(CityMaxDrawer);

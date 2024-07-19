@@ -1,12 +1,14 @@
 "use client";
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {MediaCoverageImages} from "@/constants/constant";
 import string from "@/constants/Constant.json";
 import {Skeleton} from "@mui/material";
+import Image from "@/components/Image";
+
+const str = string.landing_page.Media_coverage;
 
 const MediaCoverage = () => {
-  const str = string.landing_page.Media_coverage;
   const MediaCoverageImagesRepeated = Array(10)
     .fill(MediaCoverageImages)
     .flat();
@@ -16,19 +18,18 @@ const MediaCoverage = () => {
       <h2 className={`${styles.heading} mb-8`}>{str.desc}</h2>
 
       <div className={`${styles.ticker_container} gap-12`}>
-        {MediaCoverageImagesRepeated?.map((imageUrl, index) => {
+        {MediaCoverageImagesRepeated.map((imageUrl, index) => {
           return (
             <div
               key={(index + 1).toString()}
               className={styles.main_img_wrap}
               aria-hidden="true">
-              <img
+              <Image
                 src={imageUrl.img}
                 alt={imageUrl.alt + (index + 1)}
                 className={styles.media_img}
-                loading="lazy"
                 width={124}
-                height={"100%"}
+                height={30}
               />
             </div>
           );
@@ -38,9 +39,9 @@ const MediaCoverage = () => {
   );
 };
 
-export default MediaCoverage;
+export default memo(MediaCoverage);
 
-export const MediaCoverageSkeleton = () => {
+export const MediaCoverageSkeleton = memo(() => {
   return (
     <div className={styles.skeleton_wrapper}>
       <Skeleton variant="text" width={120} height={20} />
@@ -55,4 +56,4 @@ export const MediaCoverageSkeleton = () => {
       </div>
     </div>
   );
-};
+});
