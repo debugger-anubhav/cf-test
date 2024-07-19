@@ -136,7 +136,7 @@ export default function RootLayout({children}) {
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
-        <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js"></script>
+        {/* <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js"></script> */}
         <Script
           data-partytown-config
           dangerouslySetInnerHTML={{

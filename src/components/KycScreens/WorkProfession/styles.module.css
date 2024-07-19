@@ -14,5 +14,5 @@
   @apply bg-F6F5F8 hover:bg-[#E0F0FF] w-[156px] lg:h-[117px] h-[62px] flex justify-center items-center lg:flex-col gap-2 hover:border-[2px] hover:border-5774AC cursor-pointer;
 }
 .profession_type {
-  @apply font-Poppins text-14 text-71717A leading-5 tracking-0.3 mt-2 capitalize;
+  @apply font-Poppins text-14 text-71717A leading-5 tracking-0.3 mt-2 capitalize font-medium;
 }
