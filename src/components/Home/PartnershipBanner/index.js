@@ -1,6 +1,5 @@
-import React from "react";
-// import partner from "../../../assets/our-reputation.webp";
-import Image from "next/image";
+import React, {memo} from "react";
+import Image from "@/components/Image";
 import styles from "./style.module.css";
 
 const PartnershipBanner = () => {
@@ -8,7 +7,6 @@ const PartnershipBanner = () => {
     <div className={styles.partnership_banner}>
       <Image
         alt="our-reputation-static"
-        loader={({src}) => src}
         src={
           "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimagesmob/our-reputation.webp"
         }
@@ -20,4 +18,4 @@ const PartnershipBanner = () => {
   );
 };
 
-export default PartnershipBanner;
+export default memo(PartnershipBanner);

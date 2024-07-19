@@ -15,7 +15,7 @@ import CategoryCard from "./CommonCard";
 import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import SavedItem from "../SavedItem/SavedItem";
 import TrendingItem from "../TrendingItem/TrendingItem";
-import HasselFreeServicesCards from "@/components/Home/HasselFreeServicesCards";
+import HassleFreeServicesCards from "@/components/Home/HassleFreeServicesCards";
 import FaqsSkeleton from "@/components/Common/FrequentlyAskedQuestions";
 import HappySubscribers from "@/components/Home/HappySubscribers";
 import CustomerRating from "@/components/Home/Rating";
@@ -204,7 +204,7 @@ const SingleProduct = ({pageNo, setPageNo}) => {
           <TrendingItem />
           <HappySubscribers page={"category"} params={categoryId} />
           <CustomerRating />
-          <HasselFreeServicesCards />
+          <HassleFreeServicesCards />
           <FrequentlyAskedQuestions />
           <CategoryContent subCategoryId={subCategoryId} />
           <Footer />

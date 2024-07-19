@@ -12,6 +12,7 @@ import {
   paymentSuccessSlice,
   citymaxSlice,
   ServiceRequestSlice,
+  WorkersSlice,
 } from "./Slices";
 import {CategoryPageSlice} from "./Slices/categorySlice";
 
@@ -29,7 +30,12 @@ export const store = configureStore({
     successPayment: paymentSuccessSlice.reducer,
     citymax: citymaxSlice.reducer,
     serviceRequestData: ServiceRequestSlice.reducer,
+    workers: WorkersSlice.reducer,
   },
+  middleware: defaultMiddleWare =>
+    defaultMiddleWare({
+      serializableCheck: false,
+    }),
 });
 
 export const useAppSelector = useSelector;
