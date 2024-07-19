@@ -31,7 +31,6 @@ const FrequentlyAskedQuestions = ({params, isCitymax}) => {
     const worker = new Worker();
 
     worker.onmessage = function ({data: {data}}) {
-      console.log("received", data);
       setFaqs(data);
     };
 

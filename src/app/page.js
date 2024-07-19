@@ -14,7 +14,7 @@ import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
 import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
-// import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
+import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
 import MenuList from "@/components/Common/MenuList";
 // import {FooterSkeleton} from "@/components/Common/Footer";
@@ -26,9 +26,9 @@ import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
 
-// const TextContent = loadable(() => import("@/components/Common/TextContent"), {
-//   fallback: <ContentSkeleton />,
-// });
+const TextContent = loadable(() => import("@/components/Common/TextContent"), {
+  fallback: <ContentSkeleton />,
+});
 
 const RentFurnitureAndAppliances = loadable(
   () => import("@/components/Home/RentFurnitureAndAppliances"),
@@ -196,8 +196,8 @@ export default function Home() {
         <CombineSection />
         <HappySubscribers params={"home-page"} />
         <FrequentlyAskedQuestions params={"home-page"} />
-        {/* <TextContent params={"home-page"} />
-        <Footer /> */}
+        <TextContent params={"home-page"} />
+        {/* <Footer /> */}
         <Notifications />
       </div>
     </>
