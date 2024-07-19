@@ -157,7 +157,8 @@ const DocMain = () => {
   }, []);
 
   useEffect(() => {
-    if (ordersData) dispatch(setSelectedDataForKyc(ordersData[selectedOption]));
+    if (ordersData)
+      dispatch(setSelectedDataForKyc(ordersData?.[selectedOption]));
   }, [ordersData, selectedOption]);
 
   const handleresize = e => {
@@ -250,11 +251,10 @@ const DocMain = () => {
 
               <div onClick={() => setOpenDrawer(true)}>
                 <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
-                  {selectedOption ? (
-                    <>#{ordersData[selectedOption]?.dealCodeNumber}</>
-                  ) : (
-                    " Select order"
-                  )}
+                  {selectedOption !== null && "#"}
+                  {selectedOption !== null
+                    ? ordersData?.[selectedOption]?.dealCodeNumber
+                    : "Select Order"}
                   <DropDownArrow color={"#71717A"} size={20} />
                 </div>
               </div>
@@ -262,9 +262,9 @@ const DocMain = () => {
               {/* start kyc button  */}
               <button
                 className={`${styles.start_kyc_btn} ${
-                  selectedOption
-                    ? "bg-btn-primary cursor-pointer"
-                    : "bg-FFDF85 cursor-not-allowed"
+                  selectedOption === null
+                    ? "bg-FFDF85 cursor-not-allowed"
+                    : "bg-btn-primary cursor-pointer"
                 }`}
                 disabled={selectedOption === null}
                 onClick={handleStartKyc}>
