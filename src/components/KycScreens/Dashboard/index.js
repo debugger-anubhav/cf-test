@@ -44,7 +44,9 @@ export default function DashboardComponent() {
   const orderId = data?.dealCodeNumber;
 
   const fcPaymentData = JSON.parse(data?.fc_paymentData);
-  const productImages = (fcPaymentData[0]?.product_image).split(",");
+  const productImages = fcPaymentData?.map(
+    obj => obj?.product_image?.split(",")?.[0],
+  );
   const productImagesArr =
     productImages.length > 4 ? productImages.slice(0, 3) : productImages;
 
@@ -184,6 +186,9 @@ export default function DashboardComponent() {
     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
     dispatch(setStageId(item.id));
 
+    if (item.id === 1) {
+      setOpenPanSdk(true);
+    }
     if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
         setHoldOnLoader(true);
@@ -413,18 +418,7 @@ export default function DashboardComponent() {
                 ) : (
                   <>
                     {dashboardDetails?.allKycStages?.map((item, index) => {
-                      if (item.id === 1) {
-                        return (
-                          <div key={index.toString()}>
-                            <SdkIntegration
-                              openPanSdk={openPanSdk}
-                              item={item}
-                              status={convertStatus(item?.stage_status)}
-                              getDashboardDetailsApi={getDashboardDetailsApi}
-                            />
-                          </div>
-                        );
-                      } else if (item.id === 3 && professionId === 2) {
+                      if (item.id === 3 && professionId === 2) {
                         return (
                           <div key={index.toString()}>
                             <GstSdk
@@ -445,16 +439,13 @@ export default function DashboardComponent() {
                             key={index.toString()}
                             onClick={() => {
                               if (
-                                item.stage_status === 2 ||
-                                item.stage_status === 1
+                                dashboardDetails?.allKycStages?.[0]
+                                  ?.stage_status !== 2
                               ) {
-                                return null;
-                              } else if (
-                                dashboardDetails?.allKycStages[0]
-                                  .stage_status !== 2
-                              )
-                                return null;
-                              else handleKycStagesClick(item);
+                                setOpenPanSdk(true);
+                              } else if (item.stage_status !== 2) {
+                                handleKycStagesClick(item);
+                              }
                             }}>
                             <div className={styles.detail_heading}>
                               {item?.stage_name}
@@ -476,37 +467,22 @@ export default function DashboardComponent() {
                 ) : (
                   <>
                     {dashboardDetails?.allKycStages?.map((item, index) => {
-                      if (item.id === 1) {
-                        return (
-                          <div key={index.toString()}>
-                            <SdkIntegration
-                              openPanSdk={openPanSdk}
-                              item={item}
-                              status={convertStatus(item?.stage_status)}
-                              getDashboardDetailsApi={getDashboardDetailsApi}
-                            />
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div
-                            key={index.toString()}
-                            onClick={() => {
-                              if (
-                                item.stage_status === 2 ||
-                                item.stage_status === 1
-                              )
-                                return null;
-                              else if (
-                                dashboardDetails?.allKycStages[0]
-                                  .stage_status !== 2
-                              )
-                                return null;
-                              else handleKycStagesClick(item);
-                            }}
-                            className={`${styles.mobile_detail_box} ${
-                              index === 4 ? "border-none" : "border-b"
+                      return (
+                        <div
+                          key={index.toString()}
+                          onClick={() => {
+                            if (
+                              dashboardDetails?.allKycStages?.[0]
+                                ?.stage_status !== 2
+                            ) {
+                              setOpenPanSdk(true);
+                            } else if (item.stage_status !== 2) {
+                              handleKycStagesClick(item);
                             }
+                          }}
+                          className={`${styles.mobile_detail_box} ${
+                            index === 4 ? "border-none" : "border-b"
+                          }
                     ${
                       item.stage_status === 2 || item.stage_status === 1
                         ? "!cursor-default"
@@ -514,15 +490,14 @@ export default function DashboardComponent() {
                     }
                     
                     `}>
-                            <div className={styles.detail_heading}>
-                              {item?.stage_name}
-                            </div>
-                            <div className={styles.sub_heading}>
-                              {convertStatus(item?.stage_status)}
-                            </div>
+                          <div className={styles.detail_heading}>
+                            {item?.stage_name}
                           </div>
-                        );
-                      }
+                          <div className={styles.sub_heading}>
+                            {convertStatus(item?.stage_status)}
+                          </div>
+                        </div>
+                      );
                     })}
                   </>
                 )}
@@ -548,8 +523,6 @@ export default function DashboardComponent() {
               openPanSdk={openPanSdk}
               setOpenPanSdk={setOpenPanSdk}
               getDashboardDetailsApi={getDashboardDetailsApi}
-              item={dashboardDetails?.allKycStages?.[0]}
-              status={convertStatus(3)}
             />
           )}
 

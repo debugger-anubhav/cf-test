@@ -11,8 +11,6 @@ import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import {showToastNotification} from "../../Common/Notifications/toastUtils";
 
 export default function SdkIntegration({
-  item,
-  status,
   getDashboardDetailsApi,
   openPanSdk,
   setOpenPanSdk,
@@ -20,7 +18,9 @@ export default function SdkIntegration({
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const userId = decrypt(getLocalStorage("_ga"));
-  const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
+  const [selectedId, setSelectedId] = useState(
+    `${userId}_${data?.dealCodeNumber}`,
+  );
   const [qustionDrawer, setQustionDrawer] = useState(false);
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
@@ -68,7 +68,6 @@ export default function SdkIntegration({
       window.scrollTo({top: 0, left: 0, behavior: "smooth"});
       dispatch(setStageId(2));
     }
-    // console.log(saveHVData?.data, "pppppppppppppppppppp");
   }, [saveHVData]);
 
   const handleVerfyAns = () => {
@@ -143,7 +142,7 @@ export default function SdkIntegration({
     if (openPanSdk) {
       handleIdentityVerification();
     }
-  }, [openPanSdk]);
+  }, []);
 
   const drawerContent = () => {
     return (
@@ -185,43 +184,6 @@ export default function SdkIntegration({
 
   return (
     <>
-      {!openPanSdk && (
-        <>
-          <div
-            className={`!hidden md:!flex ${styles.details_box}
-            ${
-              item.stage_status === 2 || item.stage_status === 1
-                ? "cursor-default"
-                : "cursor-pointer"
-            }
-            `}
-            onClick={() => {
-              if (item.stage_status === 2 || item.stage_status === 1) {
-                return null;
-              } else handleIdentityVerification();
-            }}>
-            <div className={styles.detail_heading}>{item?.stage_name}</div>
-            <div className={styles.sub_heading}>{status}</div>
-          </div>
-
-          <div
-            onClick={() => {
-              if (item.stage_status === 2 || item.stage_status === 1) {
-                return null;
-              } else handleIdentityVerification();
-            }}
-            className={`${
-              styles.mobile_detail_box
-            } border-b !flex md:!hidden  ${
-              item.stage_status === 2 || item.stage_status === 1
-                ? "!cursor-default"
-                : "cursor-pointer"
-            }`}>
-            <div className={styles.detail_heading}>{item?.stage_name}</div>
-            <div className={styles.sub_heading}>{status}</div>
-          </div>
-        </>
-      )}
       {qustionDrawer && (
         <KycCommonDrawer
           content={drawerContent()}
