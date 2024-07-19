@@ -1,0 +1,21 @@
+.drawer_content_wrapper {
+  @apply flex w-full flex-col p-4 md:w-[530px] md:p-12;
+}
+.btn_wrapper {
+  @apply flex w-full flex-col;
+}
+.plain_btn {
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 border-2 px-8 lg:h-[56px] h-[48px] items-center w-full border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center mt-8;
+}
+.cancle_btn {
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 w-full px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px]  mb-4 outline-none font-Poppins mx-0;
+}
+.content_text {
+  @apply font-Poppins py-8 md:text-16 text-14 text-71717A;
+}
+.radio_button {
+  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
+}
+.heading {
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center justify-between;
+}

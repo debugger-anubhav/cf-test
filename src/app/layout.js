@@ -136,7 +136,7 @@ export default function RootLayout({children}) {
         <meta
           name="google-signin-client_id"
           content="1065795218106-s2m2k3s28ch432hn8gp669pjjn7esr7d.apps.googleusercontent.com"></meta>
-
+        <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js"></script>
         <Script
           data-partytown-config
           dangerouslySetInnerHTML={{
@@ -186,7 +186,11 @@ export default function RootLayout({children}) {
                         cf_userid: res.data.userId,
                       },
                     }
-                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux", "eiuid" : res.data.userId});
+
+                    window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux"});
+window.gtag('event', 'page_view', {'send_to': 'G-XWKD9DJ015',"eiuid" : res.data.userId});
+
+
                   })
                   .catch(e => console.log('e',e))
                 `,
@@ -194,21 +198,15 @@ export default function RootLayout({children}) {
             />
           </>
         )}
-        {/* <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          rel="shortcut icon"
-          type="image/x-icon"
-          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
 
-        <script
-          type="application/ld+json"
-          async
-          defer
-          dangerouslySetInnerHTML={{
-            __html: `
+        {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
+          <>
+            <script
+              type="application/ld+json"
+              async
+              defer
+              dangerouslySetInnerHTML={{
+                __html: `
               {
                 "@context": "https://schema.org/",
                 "@type": "Product",
@@ -224,8 +222,20 @@ export default function RootLayout({children}) {
                 }
               }
             `,
-          }}
+              }}
+            />
+          </>
+        )}
+        {/* <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
         />
+        <link
+          rel="shortcut icon"
+          type="image/x-icon"
+          href="https://d3juy0zp6vqec8.cloudfront.net/images/favicon.png"></link>
+
+        
         {/* Northbeam script  */}
         {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <script
@@ -426,6 +436,8 @@ var CaptchaCallback = function(){
             }}
           />
         )}
+        {/* <script src="https://cdn.razorpay.com/widgets/trusted-badge.js"></script> */}
+        <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script>
       </head>
       <body>
         <ReduxProvider>

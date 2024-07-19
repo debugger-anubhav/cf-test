@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Drawer} from "@mui/material";
 import {BackIcon, Close, DownPopUpArrow, PopUpArrow} from "@/assets/icon";
 import styles from "./styles.module.css";
@@ -16,7 +16,7 @@ const BreakdownDrawer = ({toggleDrawer, open, billBreakup}) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

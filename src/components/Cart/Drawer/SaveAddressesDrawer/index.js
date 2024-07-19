@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Drawer from "@mui/material/Drawer";
 import styles from "./style.module.css";
 import {Close, ForwardArrow} from "@/assets/icon";
@@ -21,7 +21,7 @@ const AddressDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

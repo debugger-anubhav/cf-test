@@ -1,5 +1,5 @@
 import {Drawer} from "@mui/material";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
@@ -29,7 +29,7 @@ const ProceedModal = ({
       setIsBottomShareDrawer(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     // setStartCountdown(false);

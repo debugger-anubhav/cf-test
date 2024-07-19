@@ -71,7 +71,7 @@ const CouponDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {
@@ -152,15 +152,15 @@ const CouponDrawer = ({
                         ? `url(${backgroundImageType1})`
                         : `url(${backgroundImageType2})`
                       : item.coupon_type === 0
-                      ? `url(${backgroundImageType2})`
-                      : `url(${backgroundImageType1})`,
+                        ? `url(${backgroundImageType2})`
+                        : `url(${backgroundImageType1})`,
                     cursor: isMonthly
                       ? item.coupon_type === 0 || item.coupon_type === 2
                         ? "pointer"
                         : "not-allowed"
                       : item.coupon_type === 0
-                      ? "not-allowed"
-                      : "pointer",
+                        ? "not-allowed"
+                        : "pointer",
                   }}
                   className={`${styles.card}`}
                   onClick={() => {
@@ -207,8 +207,8 @@ const CouponDrawer = ({
                           ? "#7e6dd5"
                           : "#B4B4B4"
                         : item.coupon_type === 0
-                        ? "#B4B4B4"
-                        : "#7e6dd5",
+                          ? "#B4B4B4"
+                          : "#7e6dd5",
                     }}
                     className={styles.line}></div>
                   <div className={styles.copy_div}>
@@ -221,8 +221,8 @@ const CouponDrawer = ({
                             ? "pointer"
                             : "not-allowed"
                           : item.coupon_type === 0
-                          ? "not-allowed"
-                          : "pointer",
+                            ? "not-allowed"
+                            : "pointer",
                       }}>
                       {isApplied && isCouponApplied && appliedIndex === index
                         ? "Applied!"
