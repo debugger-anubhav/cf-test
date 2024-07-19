@@ -106,7 +106,7 @@ export default function DashboardComponent() {
     else if (number === 3)
       return (
         <p className={`${styles.status_style} text-D96060`}>
-          Rejected
+          Attention needed
           <ForwardArrow color={"#D96060"} size={16} />
         </p>
       );
@@ -145,7 +145,7 @@ export default function DashboardComponent() {
   const matchKycStatus = {
     "KYC Docs Under Review": "Under review",
     "KYC In Progress": "Pending",
-    "KYC Rejected": "Rejected",
+    "KYC Rejected": "Attention needed",
     "KYC Completed": "Verified",
     "Delivery Scheduled": "Verified",
   };
