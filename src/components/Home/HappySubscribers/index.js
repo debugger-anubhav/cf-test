@@ -1,95 +1,36 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {useDispatch} from "react-redux";
 import {getSubscribersVideos} from "@/store/Slices";
-import {endPoints} from "@/network/endPoints";
-import {baseInstance} from "@/network/axios";
+import Worker from "worker-loader!./happySubscribersWorker.js";
+
+const str = string.landing_page.HappySubscriber;
 
 const HappySubscribers = ({page, params}) => {
   const dispatch = useDispatch();
-  const [data, setData] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
 
-  const getVideosForProductPage = () => {
-    baseInstance
-      .get(endPoints.productPage.happySubscribers(params.productId))
-      .then(res => {
-        dispatch(getSubscribersVideos(res?.data?.data));
-        setData(res?.data?.data);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        dispatch(getSubscribersVideos([]));
-      });
-  };
-  const getVideosForHomePage = () => {
-    baseInstance
-      .get(endPoints.homePageHappySubscriber)
-      .then(res => {
-        const timeOutId = setTimeout(() => {
-          setData(res?.data?.data);
-          clearTimeout(timeOutId);
-        }, 1000);
-        // console.log("home")
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        dispatch(getSubscribersVideos([]));
-      });
-  };
-  const getVideosForSeoAppliancesPage = () => {
-    baseInstance
-      .get(endPoints.seoApplianceHappyCustomer)
-      .then(res => {
-        setData(res?.data?.data);
-        // console.log("appliances-rental")
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
-  };
-  const getVideosForSeoFurniturePage = () => {
-    baseInstance
-      .get(endPoints.seoFurnitureHappyCustomer)
-      .then(res => {
-        setData(res?.data?.data);
-        // console.log("furniture-rental")
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
-  };
-  const getVideosForCategoryPage = () => {
-    baseInstance
-      .get(endPoints.categoryHappySubscriber(params))
-      .then(res => {
-        setData(res?.data?.data);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-      });
-  };
+  const [data, setData] = useState(null);
+  const [isDumy, setIsDumy] = useState(false);
 
   useEffect(() => {
-    if (page === "home-page") {
-      getVideosForHomePage();
-    } else if (page === "product") {
-      getVideosForProductPage();
-    } else if (page === "appliances-rental") {
-      getVideosForSeoAppliancesPage();
-    } else if (page === "category") {
-      getVideosForCategoryPage();
-    } else if (page === "furniture-rental") {
-      getVideosForSeoFurniturePage();
-    } else {
-      getVideosForHomePage();
-    }
-  }, []);
+    const worker = new Worker();
 
-  const str = string.landing_page.HappySubscriber;
+    worker.onmessage = function ({data: {data, type}}) {
+      setData(data);
+      if (type && type === "product") {
+        dispatch(getSubscribersVideos(data));
+      }
+    };
+
+    worker.postMessage({page, params});
+
+    return () => {
+      worker.terminate();
+    };
+  }, []);
 
   const containerRef = useRef(null);
 
@@ -134,7 +75,7 @@ const HappySubscribers = ({page, params}) => {
     };
   };
 
-  if (data?.length > 0) {
+  if (data && data.length > 0) {
     return (
       <div
         className={`${page === "product" ? "mt-8 xl:mt-[88px]" : ""} ${
@@ -148,11 +89,11 @@ const HappySubscribers = ({page, params}) => {
           className={styles.cards_wrapper}
           ref={containerRef}
           onMouseOver={handleScrolling}>
-          {data?.map((item, index) => (
+          {data.map((item, index) => (
             <div
               className={`${styles.card_div}  ${
                 index === data?.length - 1 && "mr-[16px]"
-              } ${isDumy && "pointer-events-none"}`}
+              } ${isDumy ? "pointer-events-none" : ""}`.trim()}
               key={index.toString()}>
               <div className={styles.video}>
                 <iframe
@@ -173,6 +114,8 @@ const HappySubscribers = ({page, params}) => {
         </div>
       </div>
     );
+  } else {
+    return null;
   }
 };
-export default HappySubscribers;
+export default memo(HappySubscribers);

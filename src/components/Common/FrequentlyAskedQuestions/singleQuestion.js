@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {Plus, Minus} from "@/assets/icon";
 
@@ -25,4 +25,4 @@ const SingleQuestion = ({ques, ans, isOpen, toggleQuestion}) => {
   );
 };
 
-export default SingleQuestion;
+export default memo(SingleQuestion);

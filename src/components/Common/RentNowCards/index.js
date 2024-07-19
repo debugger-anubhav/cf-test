@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {memo, useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {useRouter} from "next/navigation";
 import {useSelector} from "react-redux";
-import Image from "next/image";
+import Image from "@/components/Image";
+import Link from "next/link";
 
 const RentNowCard = ({cardImage, url, alt}) => {
-  const router = useRouter();
   const [URL, setURL] = useState();
 
   const cityName = useSelector(state => state.homePagedata.cityName);
@@ -21,24 +20,19 @@ const RentNowCard = ({cardImage, url, alt}) => {
     }
   }, []);
 
-  return (
-    <div
-      className={styles.wrapper}
-      onClick={() => {
-        router.push(URL);
-      }}>
-      <a href={URL} aria-label={imageAlt} target="_self" rel="noopener">
+  return URL ? (
+    <div className={styles.wrapper}>
+      <Link href={URL} aria-label={imageAlt} target="_self" rel="noopener">
         <Image
-          loader={({src}) => src}
           width={270}
           height={380}
           src={cardImage}
           className={styles?.banner_img}
           alt={imageAlt}
         />
-      </a>
+      </Link>
     </div>
-  );
+  ) : null;
 };
 
-export default RentNowCard;
+export default memo(RentNowCard);

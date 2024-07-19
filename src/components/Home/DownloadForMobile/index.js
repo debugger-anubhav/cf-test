@@ -1,13 +1,11 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {DownloadForMobileImg, DownloadForWeb} from "@/assets/images";
-import Image from "next/image";
-import {useRouter} from "next/navigation";
+import Image from "@/components/Image";
 import {Skeleton} from "@mui/material";
-// import {domain} from "../../../../appConfig";
+import Link from "next/link";
 
 const DownloadForMobile = () => {
-  const router = useRouter();
   return (
     <div className={styles.main_container}>
       <div className={styles.web_container}>
@@ -21,31 +19,28 @@ const DownloadForMobile = () => {
         />
       </div>
       <div className={styles.mobile_container}>
-        <Image
-          loader={({src}) => src}
-          src={DownloadForMobileImg}
-          alt="download-image-for-mobile"
-          className={styles.download_image}
-          width={720}
-          height={1227}
-          onClick={() => {
-            router.push(
-              `https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice`,
-            );
-            // router.push(`${domain}/v1/get-app-on-devices/getAppOnDevice`);
-          }}
-        />
+        <Link
+          href={"https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice"}
+          className="w-full">
+          <Image
+            src={DownloadForMobileImg}
+            alt="download-image-for-mobile"
+            className={styles.download_image}
+            width={720}
+            height={1227}
+          />
+        </Link>
       </div>
     </div>
   );
 };
 
-export default DownloadForMobile;
+export default memo(DownloadForMobile);
 
-export const DownloadForMobileSkeleton = () => {
+export const DownloadForMobileSkeleton = memo(() => {
   return (
     <div>
       <Skeleton variant="rectangular" width={"100%"} height={380} />
     </div>
   );
-};
+});

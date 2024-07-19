@@ -25,7 +25,12 @@ export default function ProfessionalDetails() {
   const stageId = kycSliceData.stageId;
   const userId = decrypt(getLocalStorage("_ga"));
 
-  const nomineeRelation = ["Spouse/Partner", "Parent", "Parent", "Other"];
+  const nomineeRelation = [
+    "Spouse/Partner",
+    "Parent",
+    "Legal Guardian",
+    "Other",
+  ];
   const [email, setEmail] = useState("");
   const [recievedOtp, setRecievedOtp] = useState(null);
   const [verifiedEmail, setVerifiedEmail] = useState(false);

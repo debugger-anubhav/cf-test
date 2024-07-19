@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   BackIcon,
   CheckFillIcon,
@@ -18,13 +18,14 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+
 export default function EducationalDetails() {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const currentAddOptions = kycSliceData.currentAddOpt;
+
   const allowedFileTypes = [
     "image/jpeg",
     "image/jpg",
@@ -40,6 +41,9 @@ export default function EducationalDetails() {
     collegeName: "",
     idProof: "",
   });
+  const [currentAddOptions, setCurrentAddOptions] = useState(
+    kycSliceData.currentAddOpt,
+  );
 
   const handleFileInputChange = e => {
     const file = e.target.files;
@@ -129,6 +133,10 @@ export default function EducationalDetails() {
       setFormData({...formData, idProof: temp});
     }
   };
+
+  useEffect(() => {
+    setCurrentAddOptions(kycSliceData.currentAddOpt);
+  }, [kycSliceData.currentAddOpt]);
 
   return (
     <div className={styles.wrapper}>

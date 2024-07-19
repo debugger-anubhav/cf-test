@@ -1,10 +1,8 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import {FourStepsCardData} from "@/constants/constant";
-import Image from "next/image";
-
-// h2 p h3 p
+import Image from "@/components/Image";
 
 const FourSteps = () => {
   return (
@@ -12,15 +10,13 @@ const FourSteps = () => {
       <h2 className={styles.head}>{string.landing_page.Four_steps.heading}</h2>
       <p className={styles.subhead}>{string.landing_page.Four_steps.subhead}</p>
       <div className={styles.card_wrapper}>
-        {FourStepsCardData?.map((itemm, index) => (
+        {FourStepsCardData.map(({img1, img2, head, content}, index) => (
           <div key={index.toString()} className={styles.card}>
             <div>
               <div className={`w-100 h-100 absolute z-10`} />
               <Image
-                loader={({src}) => src}
-                src={itemm?.img1}
+                src={img1}
                 alt={`step-${index + 1}`}
-                loading="lazy"
                 className={`${
                   index === 0
                     ? "w-[80px] h-[80px]"
@@ -34,21 +30,19 @@ const FourSteps = () => {
                 height={81}
               />
               <Image
-                loader={({src}) => src}
-                src={itemm?.img2}
+                src={img2}
                 className={`min-w-[160px] h-[160px] flex md:hidden relative z-[-1]`}
-                loading="lazy"
                 height={172}
                 width={172}
                 alt={`step-${index + 1}`}
               />
             </div>
-            <h3 className={styles.head1}>{itemm?.head}</h3>
-            <p className={styles.content1}>{itemm?.content}</p>
+            <h3 className={styles.head1}>{head}</h3>
+            <p className={styles.content1}>{content}</p>
           </div>
         ))}
       </div>
     </div>
   );
 };
-export default FourSteps;
+export default memo(FourSteps);

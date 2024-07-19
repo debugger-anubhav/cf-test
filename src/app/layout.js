@@ -7,6 +7,7 @@ import localFont from "@next/font/local";
 import Script from "next/script";
 import GTM from "@/components/GTM";
 import Clarity from "@/components/Clarity";
+import {strToBoolean} from "@/constants/utils";
 
 export const metadata = {
   title: "Rent Premium Furniture & Home Appliances Online - Cityfurnish",
@@ -72,6 +73,9 @@ export default function RootLayout({children}) {
     process.env.NEXT_PUBLIC_NS_GTM_ID,
   ].filter(Boolean);
   const nsIncludedGTMId = process.env.NEXT_PUBLIC_NS_GTM_ID;
+  const includeInDevelopment = strToBoolean(
+    process.env.NEXT_PUBLIC_INCLUDE_SCRIPTS_IN_DEV,
+  );
 
   return (
     <html
@@ -149,9 +153,9 @@ export default function RootLayout({children}) {
         <GTM
           gtmIds={gtmIds}
           nsIncludedGTMId={nsIncludedGTMId}
-          includeInDevelopment
+          includeInDevelopment={includeInDevelopment}
         />
-        <Clarity includeInDevelopment />
+        <Clarity includeInDevelopment={includeInDevelopment} />
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <>
