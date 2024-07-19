@@ -88,7 +88,7 @@ export default function DashboardComponent() {
       "yyyy-MM-dd HH:mm:ss",
       new Date(),
     );
-    return format(parsedDate, "d MMM yyyy");
+    return format(parsedDate, "d MMM, yyyy");
   };
 
   const convertStatus = number => {
@@ -133,7 +133,7 @@ export default function DashboardComponent() {
           <button
             className={`${styles.cancle_btn} `}
             onClick={() => setChangeProfession(false)}>
-            cancel
+            Cancel
           </button>
         </div>
       </div>
@@ -269,7 +269,7 @@ export default function DashboardComponent() {
                 onClick={() => dispatch(setKycScreenName("selectOrderId"))}
                 className={"cursor-pointer"}
               />
-              Order Id: {data?.dealCodeNumber}
+              Order ID: #{data?.dealCodeNumber}
             </div>
             <div className="flex w-fit">
               <div className={`${styles.profession_row} md:flex hidden`}>
@@ -400,7 +400,7 @@ export default function DashboardComponent() {
                     : styles.tab_item
                 }
                 onClick={() => setactiveTab("optional")}>
-                Optional
+                Optional KYC
               </p>
             </div>
           )}
@@ -545,9 +545,11 @@ export default function DashboardComponent() {
 
           {openPanSdk && (
             <SdkIntegration
-              getDashboardDetailsApi={getDashboardDetailsApi}
               openPanSdk={openPanSdk}
               setOpenPanSdk={setOpenPanSdk}
+              getDashboardDetailsApi={getDashboardDetailsApi}
+              item={dashboardDetails?.allKycStages?.[0]}
+              status={convertStatus(3)}
             />
           )}
 

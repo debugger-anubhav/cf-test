@@ -22,7 +22,7 @@ function SelectOptDrawer({
       "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
       new Date(),
     );
-    return format(parsedDate, "d MMM yyyy");
+    return format(parsedDate, "d MMM, yyyy");
   };
 
   useEffect(() => {
