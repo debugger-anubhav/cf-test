@@ -1,12 +1,13 @@
 "use client";
 
-import React, {memo, useEffect, useRef, useState} from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import {useDispatch, useSelector} from "react-redux";
-import {addComboProducts} from "@/store/Slices";
-import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import { useDispatch, useSelector } from "react-redux";
+import { addComboProducts } from "@/store/Slices";
+import { getLocalStorage, productImageBaseUrl } from "@/constants/constant";
 import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker";
+import { ProductRowSkeleton } from "@/components/Common/ProductRowSkeleton";
 
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
@@ -19,11 +20,11 @@ const PreDesignCombos = () => {
 
   useEffect(() => {
     const worker = new Worker();
-    worker.onmessage = function ({data: {data}}) {
+    worker.onmessage = function ({ data: { data } }) {
       dispatch(addComboProducts(data));
     };
 
-    worker.postMessage({type: "predesignCombos", cityId});
+    worker.postMessage({ type: "predesignCombos", cityId });
 
     return () => {
       worker.terminate();
@@ -69,27 +70,26 @@ const PreDesignCombos = () => {
   return (
     <>
       {homePageReduxData?.designComboProduct &&
-      homePageReduxData.designComboProduct.length > 0 ? (
+        homePageReduxData.designComboProduct.length > 0 ? (
         <div className={styles.main_container}>
           <h2 className={styles.heading}>Predesigned combos for you</h2>
           <div className={styles.card_box} ref={sliderRef}>
             {homePageReduxData.designComboProduct.map((item, index) => (
               <div
                 key={index.toString()}
-                className={`${styles.child ?? ""}  ${
-                  index === homePageReduxData?.designComboProduct?.length - 1
+                className={`${styles.child ?? ""}  ${index === homePageReduxData?.designComboProduct?.length - 1
                     ? "mr-[16px]"
                     : ""
-                } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
+                  } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                 <Card
                   cardImage={
                     item?.image?.split(",").filter(item => item).length > 1
                       ? productImageBaseUrl +
-                        "thumb/" +
-                        item?.image?.split(",")[1]
+                      "thumb/" +
+                      item?.image?.split(",")[1]
                       : productImageBaseUrl +
-                        "thumb/" +
-                        item?.image?.split(",")[0]
+                      "thumb/" +
+                      item?.image?.split(",")[0]
                   }
                   hoverCardImage={
                     productImageBaseUrl + "thumb/" + item?.image?.split(",")[0]
@@ -109,7 +109,7 @@ const PreDesignCombos = () => {
             ))}
           </div>
         </div>
-      ) : null}
+      ) : <ProductRowSkeleton />}
     </>
   );
 };
