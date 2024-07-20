@@ -2,18 +2,18 @@
 
 import Card from "@/components/Common/HomePageCards";
 import styles from "./style.module.css";
-import React, { memo, useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addLimitedPreiodDiscount } from "@/store/Slices";
-import { getLocalStorage, productImageBaseUrl } from "@/constants/constant";
+import React, {memo, useEffect, useRef} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {addLimitedPreiodDiscount} from "@/store/Slices";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker.js";
-import { ProductRowSkeleton } from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 const LimitedPreiodDiscount = () => {
   const cityId = getLocalStorage("cityId");
 
   const dispatch = useDispatch();
-  const { limitedDiscount: getLimitedPeriodData } = useSelector(
+  const {limitedDiscount: getLimitedPeriodData} = useSelector(
     state => state.homePagedata,
   );
   const [isDumy, setIsDumy] = React.useState(false);
@@ -22,11 +22,11 @@ const LimitedPreiodDiscount = () => {
 
   useEffect(() => {
     const worker = new Worker();
-    worker.onmessage = function ({ data: { data } }) {
+    worker.onmessage = function ({data: {data}}) {
       dispatch(addLimitedPreiodDiscount(data));
     };
 
-    worker.postMessage({ type: "limitedPeriodDiscount", cityId });
+    worker.postMessage({type: "limitedPeriodDiscount", cityId});
 
     return () => {
       worker.terminate();
@@ -82,8 +82,9 @@ const LimitedPreiodDiscount = () => {
         {getLimitedPeriodData.map((item, index) => (
           <div
             key={index.toString()}
-            className={`${styles.child ?? ""}  ${index === getLimitedPeriodData?.length - 1 ? "mr-[16px]" : ""
-              } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
+            className={`${styles.child ?? ""}  ${
+              index === getLimitedPeriodData?.length - 1 ? "mr-[16px]" : ""
+            } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
             <Card
               desc={item.product_name}
               cardImage={
@@ -106,7 +107,9 @@ const LimitedPreiodDiscount = () => {
         ))}
       </div>
     </div>
-  ) : <ProductRowSkeleton />;
+  ) : (
+    <ProductRowSkeleton />
+  );
 };
 
 export default memo(LimitedPreiodDiscount);

@@ -159,9 +159,16 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <>
-            <script src="//in.fw-cdn.com/30445413/247408.js" chat="true" />
+            <script
+              defer
+              async
+              src="//in.fw-cdn.com/30445413/247408.js"
+              chat="true"
+            />
 
             <script
+              defer
+              async
               type="text/javascript"
               // type="text/partytown"
               id="fcWidgetMessengerConfig"
@@ -304,6 +311,7 @@ window.gtag('event', 'page_view', {'send_to': 'G-XWKD9DJ015',"eiuid" : res.data.
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <noscript>
             <img
+              loading="lazy"
               height="1"
               width="1"
               style={{display: "none"}}
@@ -390,6 +398,7 @@ var CaptchaCallback = function(){
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <noscript>
             <img
+              loading="lazy"
               height="1"
               width="1"
               style={{display: "none"}}

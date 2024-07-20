@@ -136,7 +136,7 @@ const HeroBanner = () => {
                       height={800}
                       crop="scale"
                       quality="auto:best"
-                      priority
+                      loading="lazy"
                       className="cursor-pointer rounded-lg"
                       style={{pointerEvents: "all"}}
                     />

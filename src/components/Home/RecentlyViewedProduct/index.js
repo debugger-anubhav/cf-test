@@ -1,23 +1,23 @@
 "use client";
 
-import React, { Fragment, memo, useEffect, useRef, useState } from "react";
+import React, {Fragment, memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
-import { ProductRowSkeleton } from "@/components/Common/ProductRowSkeleton";
-import { useDispatch, useSelector } from "react-redux";
-import { addRecentlyViewedProduct } from "@/store/Slices";
-import { getLocalStorage, productImageBaseUrl } from "@/constants/constant";
-import { decrypt, decryptBase64 } from "@/hooks/cryptoUtils";
-import { useAuthentication } from "@/hooks/checkAuthentication";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
+import {useDispatch, useSelector} from "react-redux";
+import {addRecentlyViewedProduct} from "@/store/Slices";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
+import {useAuthentication} from "@/hooks/checkAuthentication";
 import Worker from "worker-loader!./recentlyViewedWorker.js";
 
 const worker = new Worker();
 
-const RecentlyViewedProduct = ({ page }) => {
+const RecentlyViewedProduct = ({page}) => {
   const dispatch = useDispatch();
   const homePageReduxData = useSelector(state => state.homePagedata);
 
-  const { checkAuthentication } = useAuthentication();
+  const {checkAuthentication} = useAuthentication();
 
   const userId = decrypt(getLocalStorage("_ga"));
 
@@ -101,18 +101,21 @@ const RecentlyViewedProduct = ({ page }) => {
   }, []);
 
   useEffect(() => {
-    console.log(homePageReduxData?.recentProduct, 'homePageReduxData?.recentProduct')
-  }, [homePageReduxData])
-
+    console.log(
+      homePageReduxData?.recentProduct,
+      "homePageReduxData?.recentProduct",
+    );
+  }, [homePageReduxData]);
 
   return (
     <>
       {homePageReduxData?.recentProduct &&
-        homePageReduxData?.recentProduct.length > 0 ? (
+      homePageReduxData?.recentProduct.length > 0 ? (
         <div className={styles.main_container}>
           <h2
-            className={`${page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
-              } ${styles.heading}`.trim()}>
+            className={`${
+              page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
+            } ${styles.heading}`.trim()}>
             Recently Viewed Products
           </h2>
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
@@ -121,20 +124,21 @@ const RecentlyViewedProduct = ({ page }) => {
                 <Fragment key={index.toString()}>
                   {(item?.image || item?.price) && (
                     <div
-                      className={`${styles.child ?? ""}  ${index === homePageReduxData?.recentProduct?.length - 1
+                      className={`${styles.child ?? ""}  ${
+                        index === homePageReduxData?.recentProduct?.length - 1
                           ? "mr-[16px]"
                           : ""
-                        } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
+                      } ${isDumy ? "pointer-events-none" : ""}`.trim()}>
                       <Card
                         cardImage={
                           item?.image?.split(",").filter(item => item).length >
-                            1
+                          1
                             ? productImageBaseUrl +
-                            "thumb/" +
-                            item?.image?.split(",")[1]
+                              "thumb/" +
+                              item?.image?.split(",")[1]
                             : productImageBaseUrl +
-                            "thumb/" +
-                            item?.image?.split(",")[0]
+                              "thumb/" +
+                              item?.image?.split(",")[0]
                         }
                         hoverCardImage={
                           productImageBaseUrl +
@@ -143,7 +147,7 @@ const RecentlyViewedProduct = ({ page }) => {
                         }
                         discount={`${Math.round(
                           ((item?.price - item?.product_sale_price) * 100) /
-                          item?.price,
+                            item?.price,
                         ).toFixed(0)}%`}
                         originalPrice={item?.price}
                         currentPrice={item?.product_sale_price}

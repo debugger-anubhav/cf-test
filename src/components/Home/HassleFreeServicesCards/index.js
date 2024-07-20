@@ -1,13 +1,13 @@
-import React, { memo } from "react";
+import React, {memo} from "react";
 import style from "./style.module.css";
-import { HasselFreeData } from "@/constants/constant";
+import {HasselFreeData} from "@/constants/constant";
 import Image from "@/components/Image";
-import { ProductRowSkeleton } from "@/components/Common/ProductRowSkeleton";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 const Title = "Truly hassle free service";
 
 const HasselFreeServicesCards = () => {
-  return HasselFreeData && HasselFreeData?.length > 0 ?
+  return HasselFreeData && HasselFreeData?.length > 0 ? (
     <div className={style.main_container}>
       <p className={style.heading}>{Title}</p>
       <div className="flex">
@@ -16,10 +16,11 @@ const HasselFreeServicesCards = () => {
             return (
               <div key={index.toString()}>
                 <div
-                  className={`${style.card_wrapper}  ${index === HasselFreeData?.length - 1
-                    ? "mr-[16px] lg:mr-0"
-                    : ""
-                    }`.trim()}>
+                  className={`${style.card_wrapper}  ${
+                    index === HasselFreeData?.length - 1
+                      ? "mr-[16px] lg:mr-0"
+                      : ""
+                  }`.trim()}>
                   <Image
                     src={data.backgroungImage}
                     alt={data?.Heading}
@@ -45,7 +46,9 @@ const HasselFreeServicesCards = () => {
         </div>
       </div>
     </div>
-    : <ProductRowSkeleton />
+  ) : (
+    <ProductRowSkeleton />
+  );
 };
 
 export default memo(HasselFreeServicesCards);
