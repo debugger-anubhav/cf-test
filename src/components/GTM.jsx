@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Script from "next/script";
 
 let currentDataLayerName;
@@ -22,10 +22,18 @@ export default function GoogleTagManager(props) {
   const gtmAuth = auth ? `&gtm_auth=${auth}` : "";
   const gtmPreview = preview ? `&gtm_preview=${preview}&gtm_cookies_win=x` : "";
 
+  const [loadScript, setloadScript] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      setloadScript(true)
+    }, 2000);
+
+  }, [])
+
+
   if (
-    (process.env.NODE_ENV === "production" &&
-      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") ||
-    includeInDevelopment
+    loadScript && ((process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") || includeInDevelopment)
   ) {
     return (
       <>
