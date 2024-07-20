@@ -2,7 +2,7 @@ import React from "react";
 import Script from "next/script";
 
 export default function Clarity(props) {
-  const {includeInDevelopment = false} = props;
+  const { includeInDevelopment = false } = props;
 
   if (
     (process.env.NODE_ENV === "production" &&
@@ -13,6 +13,8 @@ export default function Clarity(props) {
       <Script
         type="text/javascript"
         defer
+        async
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `(function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};

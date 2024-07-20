@@ -159,12 +159,12 @@ export default function RootLayout({children}) {
 
         {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
           <>
-            <script
+            {/* <script
               defer
               async
               src="//in.fw-cdn.com/30445413/247408.js"
               chat="true"
-            />
+            /> */}
 
             <script
               defer
@@ -193,11 +193,8 @@ export default function RootLayout({children}) {
                         cf_userid: res.data.userId,
                       },
                     }
-
                     window.gtag('config', 'G-XWKD9DJ015',{"transport_url" : "https://p.easyinsights.in/ga4/MELZbvDkdcy7s0yP1zhp9YoLBnaAIMux"});
 window.gtag('event', 'page_view', {'send_to': 'G-XWKD9DJ015',"eiuid" : res.data.userId});
-
-
                   })
                   .catch(e => console.log('e',e))
                 `,
@@ -445,8 +442,7 @@ var CaptchaCallback = function(){
             }}
           />
         )}
-        {/* <script src="https://cdn.razorpay.com/widgets/trusted-badge.js"></script> */}
-        <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script>
+        {/* <script src="https://cdn.razorpay.com/widgets/affordability/affordability.js"></script> */}
       </head>
       <body>
         <ReduxProvider>

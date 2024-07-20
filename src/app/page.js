@@ -160,6 +160,19 @@ export default function Home() {
     }
   }, [userId]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      const script = document.createElement("script");
+      script.src = "//in.fw-cdn.com/30445413/247408.js";
+      script.chat = "true";
+      script.async = true;
+      document.body.appendChild(script);
+      return () => {
+        document.body.removeChild(script);
+      };
+    }, 2000);
+  }, []);
+
   return (
     <>
       <meta

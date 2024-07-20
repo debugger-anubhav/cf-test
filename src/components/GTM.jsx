@@ -33,6 +33,8 @@ export default function GoogleTagManager(props) {
           <Script
             key={`gtm-script-${index}`}
             // type="text/partytown"
+            defer
+            async
             strategy="afterInteractive"
             src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
           />
@@ -44,7 +46,8 @@ export default function GoogleTagManager(props) {
               src={`https://www.googletagmanager.com/ns.html?id=${nsIncludedGTMId}`}
               height="0"
               width="0"
-              style={{display: "none", visibility: "hidden"}}
+              loading="lazy"
+              style={{ display: "none", visibility: "hidden" }}
             />
           </noscript>
         )}
@@ -52,6 +55,8 @@ export default function GoogleTagManager(props) {
         <Script
           id="_next-gtm-init"
           // type="text/partytown"
+          defer
+          async
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
@@ -65,14 +70,17 @@ export default function GoogleTagManager(props) {
 
         <script
           id="plugin-google-tagmanager"
+          defer
+          async
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 [${gtmIds.map(
-                  id => "'" + id + "'",
-                )}].forEach((id) => gtag("config", id))
+              id => "'" + id + "'",
+            )}].forEach((id) => gtag("config", id))
             `,
           }}
         />
