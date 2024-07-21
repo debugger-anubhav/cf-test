@@ -100,13 +100,6 @@ const RecentlyViewedProduct = ({page}) => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(
-      homePageReduxData?.recentProduct,
-      "homePageReduxData?.recentProduct",
-    );
-  }, [homePageReduxData]);
-
   return (
     <>
       {homePageReduxData?.recentProduct &&

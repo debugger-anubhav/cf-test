@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import Script from "next/script";
 
 let currentDataLayerName;
@@ -22,18 +22,19 @@ export default function GoogleTagManager(props) {
   const gtmAuth = auth ? `&gtm_auth=${auth}` : "";
   const gtmPreview = preview ? `&gtm_preview=${preview}&gtm_cookies_win=x` : "";
 
-  const [loadScript, setloadScript] = useState(false)
+  const [loadScript, setloadScript] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setloadScript(true)
+      setloadScript(true);
     }, 2000);
-
-  }, [])
-
+  }, []);
 
   if (
-    loadScript && ((process.env.NODE_ENV === "production" && process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") || includeInDevelopment)
+    loadScript &&
+    ((process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") ||
+      includeInDevelopment)
   ) {
     return (
       <>
@@ -55,7 +56,7 @@ export default function GoogleTagManager(props) {
               height="0"
               width="0"
               loading="lazy"
-              style={{ display: "none", visibility: "hidden" }}
+              style={{display: "none", visibility: "hidden"}}
             />
           </noscript>
         )}
@@ -76,7 +77,7 @@ export default function GoogleTagManager(props) {
           }}
         />
 
-        <script
+        <Script
           id="plugin-google-tagmanager"
           defer
           async
@@ -87,8 +88,8 @@ export default function GoogleTagManager(props) {
                 function gtag(){dataLayer.push(arguments);}
                 gtag('js', new Date());
                 [${gtmIds.map(
-              id => "'" + id + "'",
-            )}].forEach((id) => gtag("config", id))
+                  id => "'" + id + "'",
+                )}].forEach((id) => gtag("config", id))
             `,
           }}
         />
