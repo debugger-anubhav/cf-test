@@ -47,7 +47,6 @@ const Head = () => {
         </>
       )}
 
-      {/*Northbeam script  */}
       {/* {process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" && (
     <script
       async
