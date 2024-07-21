@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Script from "next/script";
 
 let currentDataLayerName;
@@ -22,10 +22,19 @@ export default function GoogleTagManager(props) {
   const gtmAuth = auth ? `&gtm_auth=${auth}` : "";
   const gtmPreview = preview ? `&gtm_preview=${preview}&gtm_cookies_win=x` : "";
 
+  const [loadScript, setloadScript] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setloadScript(true);
+    }, 2000);
+  }, []);
+
   if (
-    (process.env.NODE_ENV === "production" &&
+    loadScript &&
+    ((process.env.NODE_ENV === "production" &&
       process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") ||
-    includeInDevelopment
+      includeInDevelopment)
   ) {
     return (
       <>
@@ -33,6 +42,8 @@ export default function GoogleTagManager(props) {
           <Script
             key={`gtm-script-${index}`}
             // type="text/partytown"
+            defer
+            async
             strategy="afterInteractive"
             src={`https://www.googletagmanager.com/gtm.js?id=${gtmId}${gtmLayer}${gtmAuth}${gtmPreview}`}
           />
@@ -44,6 +55,7 @@ export default function GoogleTagManager(props) {
               src={`https://www.googletagmanager.com/ns.html?id=${nsIncludedGTMId}`}
               height="0"
               width="0"
+              loading="lazy"
               style={{display: "none", visibility: "hidden"}}
             />
           </noscript>
@@ -52,6 +64,8 @@ export default function GoogleTagManager(props) {
         <Script
           id="_next-gtm-init"
           // type="text/partytown"
+          defer
+          async
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
@@ -63,8 +77,11 @@ export default function GoogleTagManager(props) {
           }}
         />
 
-        <script
+        <Script
           id="plugin-google-tagmanager"
+          defer
+          async
+          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: `
                 window.${dataLayerName} = window.${dataLayerName} || [];
