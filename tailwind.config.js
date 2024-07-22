@@ -8,6 +8,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
+        "custom-gradient-kyc":
+          "linear-gradient(90deg, rgba(249,239,239,1) 47%, rgba(249,249,249,1) 94%)",
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",

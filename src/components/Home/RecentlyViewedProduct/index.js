@@ -23,6 +23,7 @@ const RecentlyViewedProduct = ({page}) => {
 
   const [isDumy, setIsDumy] = useState(false);
   const [isLogin, setIsLogin] = useState(!!userId);
+  const [noProductsFound, setNoProductsFound] = useState(false);
 
   let cityIdStr;
 
@@ -50,6 +51,9 @@ const RecentlyViewedProduct = ({page}) => {
     });
     worker.onmessage = function (e) {
       dispatch(addRecentlyViewedProduct(e.data.recentlyViewedProducts));
+      if (e.data.recentlyViewedProducts.length === 0) {
+        setNoProductsFound(true);
+      }
     };
 
     return () => {
@@ -155,7 +159,7 @@ const RecentlyViewedProduct = ({page}) => {
             })}
           </div>
         </div>
-      ) : (
+      ) : noProductsFound ? null : (
         <div className="mt-8">
           <ProductRowSkeleton />
         </div>
