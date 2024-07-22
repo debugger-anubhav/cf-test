@@ -92,7 +92,7 @@ const CustomerRating = () => {
       slider.removeEventListener("mouseup", stopDragging);
       slider.removeEventListener("mouseleave", stopDragging);
     };
-  }, []);
+  }, [reviews]);
 
   return (
     <div className={styles.wrapper}>
