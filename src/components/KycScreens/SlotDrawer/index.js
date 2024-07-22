@@ -9,6 +9,7 @@ import {endPoints} from "@/network/endPoints";
 import {format} from "date-fns";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
+import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
 const SlotDrawer = ({
   isModalOpen,
@@ -20,6 +21,8 @@ const SlotDrawer = ({
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
   const [currentDate, setCurrentDate] = useState();
+  const [loader, setLoader] = useState(false);
+  const [formatedSelectedDate, setFormatedSelectedDate] = useState(null);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const handleresize = e => {
@@ -55,19 +58,30 @@ const SlotDrawer = ({
   };
 
   const updateSlot = async () => {
-    const body = {
-      slot: `${selectedDate} 09:00:00`,
-      orderId,
-      zohoCaseId: slotData?.zohoCaseId,
-    };
-    try {
-      await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
-      closeModal();
-      getDashboardDetails();
-    } catch (err) {
-      console.log(err?.message || "some error");
+    if (currentDate !== formatedSelectedDate) {
+      setLoader(true);
+      const body = {
+        slot: `${selectedDate} 09:00:00`,
+        orderId,
+        zohoCaseId: slotData?.zohoCaseId,
+      };
+      try {
+        await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
+        closeModal();
+        getDashboardDetails();
+      } catch (err) {
+        console.log(err?.message || "some error");
+      }
+      setLoader(false);
     }
   };
+
+  useEffect(() => {
+    if (selectedDate) {
+      const temp = format(new Date(selectedDate), "do MMM, yyyy");
+      setFormatedSelectedDate(temp);
+    }
+  }, [selectedDate]);
 
   useEffect(() => {
     getDeliverySlots();
@@ -125,11 +139,10 @@ const SlotDrawer = ({
           Cancel
         </button>
         <button
-          disabled={!selectedDate}
+          disabled={!selectedDate || currentDate === formatedSelectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
-            styles.modify_btn
-          }`}>
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn}
+          ${currentDate === formatedSelectedDate && "!bg-[#FFDF85] !cursor-not-allowed"}`}>
           Modify
         </button>
       </div>
@@ -162,6 +175,7 @@ const SlotDrawer = ({
             closeButton: styles.customCloseButton,
           }}>
           <ModalContent />
+          {loader && <LoaderComponent loading={loader} />}
         </Modal>
       )}
     </div>

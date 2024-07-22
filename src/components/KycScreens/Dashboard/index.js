@@ -281,11 +281,15 @@ export default function DashboardComponent() {
                 <div className={styles.profession_left}>
                   Profession: {dashboardDetails?.professionDetail?.profession}{" "}
                 </div>
-                <div
-                  className={styles.profession_right}
-                  onClick={() => setChangeProfession(true)}>
-                  Change
-                </div>
+                {dashboardDetails?.allKycStages?.[0].stage_status !== 2 && (
+                  <div
+                    className={styles.profession_right}
+                    onClick={() => {
+                      setChangeProfession(true);
+                    }}>
+                    Change
+                  </div>
+                )}
               </div>
             </div>
           </div>

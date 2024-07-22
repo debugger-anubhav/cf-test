@@ -51,7 +51,6 @@ const DocMain = () => {
 
   const urlParams = new URLSearchParams(currentURL.split("?")[1]);
   const orderIdFromUrl = urlParams.get("order_id");
-  console.log(orderIdFromUrl, "orderrrr");
 
   // const [isReupload, setIsReupload] = useState(false);
 
