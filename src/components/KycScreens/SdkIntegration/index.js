@@ -18,6 +18,8 @@ export default function SdkIntegration({
 }) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
+  const professionId = useSelector(state => state.kycPage.selectedProfessionId);
+
   const userId = decrypt(getLocalStorage("_ga"));
   const [selectedId, setSelectedId] = useState(
     `${userId}_${data?.dealCodeNumber}`,
@@ -70,7 +72,6 @@ export default function SdkIntegration({
         userId,
       })
       .then(res => {
-        setSaveHVData(res?.data?.data);
         if (res?.data?.data?.status === false) {
           setQustionDrawer(false);
         }
@@ -79,6 +80,7 @@ export default function SdkIntegration({
           window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           dispatch(setStageId(2));
         }
+        setSaveHVData(res?.data?.data);
       })
       .catch(err => console.log(err));
     setSelectedOption("");
@@ -126,18 +128,27 @@ export default function SdkIntegration({
     if (saveHVData?.type === "questions") {
       setQustionDrawer(true);
     }
-    if (saveHVData?.data?.cibilScore > 650) {
-      dispatch(setKycScreenName("professionalDetails"));
-      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-      dispatch(setStageId(3));
-      setOpenPanSdk(false);
+
+    if (saveHVData?.data?.cibilScore) {
+      if (
+        professionId === 4 ||
+        professionId === 5 ||
+        saveHVData?.data?.cibilScore < 650
+      ) {
+        dispatch(setKycScreenName("financialInfo"));
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        dispatch(setStageId(2));
+        setOpenPanSdk(false);
+      } else {
+        if (saveHVData?.data?.cibilScore > 650) {
+          dispatch(setKycScreenName("professionalDetails"));
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          dispatch(setStageId(3));
+          setOpenPanSdk(false);
+        }
+      }
     }
-    if (saveHVData?.data?.cibilScore < 650) {
-      dispatch(setKycScreenName("financialInfo"));
-      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-      dispatch(setStageId(2));
-      setOpenPanSdk(false);
-    }
+
     // console.log(saveHVData?.type, "llllllllllll");
   }, [saveHVData]);
 

@@ -13,11 +13,12 @@ import {
   DeleteIconFilled,
   OutlineArrowRight,
 } from "@/assets/icon";
-import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
+// import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
+import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
 const allowedFileTypes = [
   "image/jpeg",
@@ -25,37 +26,38 @@ const allowedFileTypes = [
   "image/png",
   "application/pdf",
 ];
-const SelectionComp = ({
-  headertext,
-  duration,
-  setIsSelected,
-  type,
-  showInner,
-}) => {
-  return (
-    <div
-      onClick={() => {
-        setIsSelected(type);
-      }}>
-      <div className={`${styles.selHeading}`}>
-        <SelectionCircle showInner={showInner} />
-        <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
-      </div>
-      <div className={`${styles.selDivider}`}>
-        <hr />
-      </div>
-      <div className={`${styles.selFooter} w-max-[173px]`}>
-        Required for <span className="font-medium">{duration}</span>
-      </div>
-    </div>
-  );
-};
+// const SelectionComp = ({
+//   headertext,
+//   duration,
+//   setIsSelected,
+//   type,
+//   showInner,
+// }) => {
+//   return (
+//     <div
+//       onClick={() => {
+//         setIsSelected(type);
+//       }}>
+//       <div className={`${styles.selHeading}`}>
+//         <SelectionCircle showInner={showInner} />
+//         <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
+//       </div>
+//       <div className={`${styles.selDivider}`}>
+//         <hr />
+//       </div>
+//       <div className={`${styles.selFooter} w-max-[173px]`}>
+//         Required for <span className="font-medium">{duration}</span>
+//       </div>
+//     </div>
+//   );
+// };
 
 const FinancialInfo = ({handleKycState}) => {
   const dispatch = useDispatch();
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
@@ -119,6 +121,7 @@ const FinancialInfo = ({handleKycState}) => {
     if (error.financialDocumentProof !== "") return;
 
     setDisableButton(true);
+    setLoader(true);
     const allData = new FormData();
     allData.append(
       "financialStatementProof",
@@ -148,10 +151,12 @@ const FinancialInfo = ({handleKycState}) => {
 
         dispatch(setStageId(3));
         setDisableButton(false);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
         setDisableButton(false);
+        setLoader(false);
       });
   };
 
@@ -192,7 +197,7 @@ const FinancialInfo = ({handleKycState}) => {
         {docData?.supported_docs_array?.map((item, index) => {
           return (
             <>
-              <div
+              {/* <div
                 key={index}
                 className={`${styles.selContainer} ${
                   isSelected === docData?.supported_docs?.split(",")?.[index]
@@ -208,6 +213,9 @@ const FinancialInfo = ({handleKycState}) => {
                     isSelected === docData?.supported_docs?.split(",")?.[index]
                   }
                 />
+              </div> */}
+              <div className={styles.heading_box}>
+                Bank Statement (Required for last 3 months)
               </div>
               {index < docData?.supported_docs_array?.length - 1 ? (
                 <div className={`${styles.orBox}`}>
@@ -354,6 +362,7 @@ const FinancialInfo = ({handleKycState}) => {
         proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+      {loader && <LoaderComponent loading={loader} />}
     </div>
   );
 };
