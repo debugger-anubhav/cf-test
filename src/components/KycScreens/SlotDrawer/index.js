@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import styles from "../../MyOrders/orders/partTwo/ManageScheduleDrawer/styles.module.css";
-import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 
@@ -89,12 +88,11 @@ const SlotDrawer = ({
 
   const ModalContent = () => (
     <>
-      <h1 className={styles.modal_head}>Manage delivery slot</h1>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>Current scheduled date 🚚: {currentDate}</p>
       </div>
 
-      <div className={styles.prefferd_wrapper}>
+      <div className={`${styles.prefferd_wrapper} mb-[120px] md:mb-0`}>
         <p className={styles.desc}>Change to:</p>
         <div className={styles.map_wrapper}>
           {slotData?.data?.data?.response?.map((item, index) => (
@@ -150,34 +148,55 @@ const SlotDrawer = ({
   );
 
   return (
+    // <div>
+    //   {isBottomShareDrawer ? (
+    //     <Drawer
+    //       anchor={"bottom"}
+    //       open={isModalOpen}
+    //       onClose={closeModal}
+    //       classes={{paper: styles.bottomDrawer}}
+    //       transitionDuration={{enter: 200, exit: 200}}>
+    //       <div className={styles.close_icon} onClick={closeModal}>
+    //         <Close color={"#45454A"} size={24} className="cursor-pointer" />
+    //       </div>
+    //       <ModalContent />
+    //     </Drawer>
+    //   ) : (
+    //     <Modal
+    //       styles={{}}
+    //       open={isModalOpen}
+    //       onClose={closeModal}
+    //       // center={true}
+    //       classNames={{
+    //         modal: styles.customModal,
+    //         overlay: styles.customOverlay,
+    //         closeButton: styles.customCloseButton,
+    //       }}>
+    //       <ModalContent />
+    //       {loader && <LoaderComponent loading={loader} />}
+    //     </Modal>
+    //   )}
+    // </div>
     <div>
-      {isBottomShareDrawer ? (
-        <Drawer
-          anchor={"bottom"}
-          open={isModalOpen}
-          onClose={closeModal}
-          classes={{paper: styles.bottomDrawer}}
-          transitionDuration={{enter: 200, exit: 200}}>
-          <div className={styles.close_icon} onClick={closeModal}>
-            <Close color={"#45454A"} size={24} className="cursor-pointer" />
+      <Drawer
+        anchor={isBottomShareDrawer ? "bottom" : "right"}
+        open={isModalOpen}
+        onClose={closeModal}>
+        <div className={styles.drawer_content_wrapper}>
+          <div className={`${styles.heading}`}>
+            Manage delivery slot
+            <span
+              onClick={event => {
+                event.stopPropagation();
+                closeModal();
+              }}>
+              <Close size={25} className={"cursor-pointer relative z-20"} />
+            </span>
           </div>
           <ModalContent />
-        </Drawer>
-      ) : (
-        <Modal
-          styles={{}}
-          open={isModalOpen}
-          onClose={closeModal}
-          // center={true}
-          classNames={{
-            modal: styles.customModal,
-            overlay: styles.customOverlay,
-            closeButton: styles.customCloseButton,
-          }}>
-          <ModalContent />
           {loader && <LoaderComponent loading={loader} />}
-        </Modal>
-      )}
+        </div>
+      </Drawer>
     </div>
   );
 };
