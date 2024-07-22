@@ -890,7 +890,7 @@ const ProductDetails = ({params}) => {
           {console.log(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])}
           {console.log(durationArray[duration.currentIndex]?.attr_price * durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])} */}
 
-          {durationArray.length > 0 && (
+          {/* {durationArray.length > 0 && (
             <AffordabilityWidget
               razorpayKey={razorpayKey}
               billBreakup={
@@ -898,7 +898,7 @@ const ProductDetails = ({params}) => {
                 durationArray[duration.currentIndex]?.attr_name?.split(" ")[0]
               }
             />
-          )}
+          )} */}
 
           <div className={styles.kyc_wrapper}>
             <div className={`w-100 h-100 absolute z-10`} />

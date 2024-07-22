@@ -102,7 +102,7 @@ const RecentlyViewedProduct = ({page}) => {
       slider.removeEventListener("mouseleave", stopDragging);
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
-  }, []);
+  }, [homePageReduxData?.recentProduct]);
 
   return (
     <>

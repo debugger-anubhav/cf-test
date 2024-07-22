@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./styles.module.css";
 import "react-responsive-modal/styles.css";
 import Modal from "react-responsive-modal";
@@ -18,7 +18,7 @@ const DoItLater = ({isModalOpen, closeModal}) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {
