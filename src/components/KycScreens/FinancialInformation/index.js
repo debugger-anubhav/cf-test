@@ -18,6 +18,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
+import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
 const allowedFileTypes = [
   "image/jpeg",
@@ -56,6 +57,7 @@ const FinancialInfo = ({handleKycState}) => {
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
@@ -119,6 +121,7 @@ const FinancialInfo = ({handleKycState}) => {
     if (error.financialDocumentProof !== "") return;
 
     setDisableButton(true);
+    setLoader(true);
     const allData = new FormData();
     allData.append(
       "financialStatementProof",
@@ -148,10 +151,12 @@ const FinancialInfo = ({handleKycState}) => {
 
         dispatch(setStageId(3));
         setDisableButton(false);
+        setLoader(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
         setDisableButton(false);
+        setLoader(false);
       });
   };
 
@@ -354,6 +359,7 @@ const FinancialInfo = ({handleKycState}) => {
         proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+      {loader && <LoaderComponent loading={loader} />}
     </div>
   );
 };
