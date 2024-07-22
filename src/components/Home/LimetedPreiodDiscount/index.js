@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addLimitedPreiodDiscount} from "@/store/Slices";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker.js";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 const LimitedPreiodDiscount = () => {
   const cityId = getLocalStorage("cityId");
@@ -106,7 +107,9 @@ const LimitedPreiodDiscount = () => {
         ))}
       </div>
     </div>
-  ) : null;
+  ) : (
+    <ProductRowSkeleton />
+  );
 };
 
 export default memo(LimitedPreiodDiscount);

@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addComboProducts} from "@/store/Slices";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
 import Worker from "worker-loader!../RentNowBanner/rentNowBannerWorker";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 
 const PreDesignCombos = () => {
   const dispatch = useDispatch();
@@ -109,7 +110,9 @@ const PreDesignCombos = () => {
             ))}
           </div>
         </div>
-      ) : null}
+      ) : (
+        <ProductRowSkeleton />
+      )}
     </>
   );
 };

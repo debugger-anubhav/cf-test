@@ -12,38 +12,38 @@ import {CityNameToId, getLocalStorage} from "@/constants/constant";
 const getCityPrimaryBanner = city => {
   switch (city) {
     case "Bangalore":
-      return "bangalore_summer_sale_banner_fn2uvm";
+      return "bangalore_summer_sale_banner_fn2uvm.webp";
 
     case "Delhi":
     case "Gurgaon":
     case "Faridabad":
-      return "delhi_summer_sale_banner_lxar3m";
+      return "delhi_summer_sale_banner_lxar3m.webp";
 
     case "Ghaziabad/Noida":
-      return "ghaziabad_nodia_summer_sale_banner_uiwioc";
+      return "ghaziabad_nodia_summer_sale_banner_uiwioc.webp";
 
     case "Pune":
-      return "pune_summer_sale_banner_fal9gq";
+      return "pune_summer_sale_banner_fal9gq.webp";
 
     case "Mumbai":
-      return "mumbai_summer_sale_banner_rfmyuo";
+      return "mumbai_summer_sale_banner_rfmyuo.webp";
 
     case "Hyderabad":
-      return "hyderabad_summer_sale_banner_xfyubv";
+      return "hyderabad_summer_sale_banner_xfyubv.webp";
   }
 };
 
 const banners = [
   {
-    url: "appliance_banner_llwnir",
+    url: "appliance_banner_llwnir.webp",
     link: "/home-appliances-rental",
   },
   {
-    url: "citymax_banner_os9nbn",
+    url: "citymax_banner_os9nbn.webp",
     link: "/citymax",
   },
   {
-    url: "discount_deals_banner_q7vjac",
+    url: "discount_deals_banner_q7vjac.webp",
     link: "/discount-deals",
   },
 ];
