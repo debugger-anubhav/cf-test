@@ -22,6 +22,10 @@ import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
 import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+import {setHomepageCardWorker} from "@/store/Slices";
+import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
+import {useDispatch} from "react-redux";
+// import KycPending from "@/components/Home/KycPending";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -70,8 +74,8 @@ const PreDesignCombos = loadable(
   },
 );
 
-const HasselFreeServicesCards = loadable(
-  () => import("@/components/Home/HasselFreeServicesCards"),
+const HassleFreeServicesCards = loadable(
+  () => import("@/components/Home/HassleFreeServicesCards"),
   {
     fallback: <ProductRowSkeleton />,
   },
@@ -125,8 +129,12 @@ const CombineSection = loadable(
 export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
-  // added
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    const worker = new Worker();
+    dispatch(setHomepageCardWorker(worker));
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
         event.preventDefault();
@@ -138,6 +146,7 @@ export default function Home() {
     });
 
     return () => {
+      worker?.terminate();
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
@@ -164,6 +173,9 @@ export default function Home() {
         <Header />
         <MenuList />
         <HeroBanner />
+
+        {/* {userId && <KycPending />} */}
+
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
@@ -172,7 +184,7 @@ export default function Home() {
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
-        <HasselFreeServicesCards />
+        <HassleFreeServicesCards />
         <LimetedPreiodDiscount />
         <NewlyLaunched />
 

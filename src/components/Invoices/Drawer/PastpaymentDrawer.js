@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {Close, ForwardArrowWithLine, ToggleOff, ToggleOn} from "@/assets/icon";
 import {Drawer} from "@mui/material";
@@ -62,7 +62,7 @@ const PastpaymentDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {
@@ -70,7 +70,7 @@ const PastpaymentDrawer = ({
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAmount(amountDue);
   }, [amountDue]);
   return (

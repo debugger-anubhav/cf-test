@@ -1,52 +1,29 @@
 "use client";
 
-import React, {useEffect, useRef} from "react";
+import React, {memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
-import {useQuery} from "@/hooks/useQuery";
-import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import RentNowCard from "@/components/Common/RentNowCards";
+import Worker from "worker-loader!./rentNowBannerWorker.js";
+
+const imageSourceEndpoint =
+  "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/";
 
 const RentNowBanner = ({params}) => {
-  const [rentNowBanner, setRentNowBanner] = React.useState(null);
-  const [isDumy, setIsDumy] = React.useState(false);
-
-  const {refetch: getRentNowBanners} = useQuery(
-    "rentNowBanners",
-    endPoints.rentNowBanners,
-  );
-  const {refetch: getSeoApplianceBanners} = useQuery(
-    "seoApplianceBanners",
-    endPoints.seoApplianceBanners,
-  );
-  const {refetch: getSeoFurnitureBanners} = useQuery(
-    "seoFurnitureBanners",
-    endPoints.seoFurnitureBanners,
-  );
+  const [rentNowBanner, setRentNowBanner] = useState(null);
+  const [isDumy, setIsDumy] = useState(false);
 
   useEffect(() => {
-    if (params === "home-page") {
-      getRentNowBanners()
-        .then(res => {
-          setRentNowBanner(res?.data?.data);
-          // console.log("homepage")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params?.category === "appliances-rental") {
-      getSeoApplianceBanners()
-        .then(res => {
-          setRentNowBanner(res?.data?.data);
-          // console.log("appliances-rental")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    } else if (params?.category === "furniture-rental") {
-      getSeoFurnitureBanners()
-        .then(res => {
-          setRentNowBanner(res?.data?.data);
-          // console.log("furniture-rental")
-        })
-        .catch(err => console.log(err?.message || "some error"));
-    }
+    const worker = new Worker();
+    worker.postMessage({params});
+
+    worker.onmessage = function ({data: {data}}) {
+      setRentNowBanner(data);
+    };
+
+    return () => {
+      worker?.terminate();
+    };
   }, []);
 
   const sliderRef = useRef(null);
@@ -91,17 +68,17 @@ const RentNowBanner = ({params}) => {
     };
   }, []);
 
-  return (
+  return rentNowBanner && rentNowBanner.length > 0 ? (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card} ref={sliderRef}>
-        {rentNowBanner?.map((item, index) => (
+        {rentNowBanner.map((item, index) => (
           <div
-            className={`${index === rentNowBanner?.length - 1 && "mr-[16px]"} ${
-              isDumy && "pointer-events-none"
-            }`}
+            className={`${
+              index === rentNowBanner?.length - 1 ? "mr-[16px]" : ""
+            } ${isDumy ? "pointer-events-none" : ""}`.trim()}
             key={index.toString()}>
             <RentNowCard
-              cardImage={`https://d3juy0zp6vqec8.cloudfront.net/images/cfnewimages/${item?.image}`}
+              cardImage={`${imageSourceEndpoint}${item?.image}`}
               url={item?.url}
               alt={item?.image}
             />
@@ -109,11 +86,16 @@ const RentNowBanner = ({params}) => {
         ))}
       </div>
     </div>
+  ) : (
+    <div className="my-8">
+      <RentNowBannersSkeleton />
+    </div>
   );
 };
+
 export default RentNowBanner;
 
-export const RentNowBannersSkeleton = () => {
+export const RentNowBannersSkeleton = memo(() => {
   return (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={`${styles.banner_card_skeleton} `}>
@@ -132,4 +114,4 @@ export const RentNowBannersSkeleton = () => {
       </div>
     </div>
   );
-};
+});

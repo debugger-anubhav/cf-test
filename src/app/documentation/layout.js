@@ -27,6 +27,7 @@ export default function RootLayout({children}) {
           name="Title"
           content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
         />
+        <script src="https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js"></script>
       </head>
       <body>
         <ReduxProvider>

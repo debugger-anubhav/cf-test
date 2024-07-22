@@ -3,6 +3,7 @@
 import React, {Fragment, memo, useEffect, useRef, useState} from "react";
 import styles from "./style.module.css";
 import Card from "@/components/Common/HomePageCards";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {useDispatch, useSelector} from "react-redux";
 import {addRecentlyViewedProduct} from "@/store/Slices";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
@@ -22,6 +23,7 @@ const RecentlyViewedProduct = ({page}) => {
 
   const [isDumy, setIsDumy] = useState(false);
   const [isLogin, setIsLogin] = useState(!!userId);
+  const [noProductsFound, setNoProductsFound] = useState(false);
 
   let cityIdStr;
 
@@ -49,10 +51,13 @@ const RecentlyViewedProduct = ({page}) => {
     });
     worker.onmessage = function (e) {
       dispatch(addRecentlyViewedProduct(e.data.recentlyViewedProducts));
+      if (e.data.recentlyViewedProducts.length === 0) {
+        setNoProductsFound(true);
+      }
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, [isLogin]);
 
@@ -101,18 +106,17 @@ const RecentlyViewedProduct = ({page}) => {
 
   return (
     <>
-      {homePageReduxData?.recentProduct ? (
+      {homePageReduxData?.recentProduct &&
+      homePageReduxData?.recentProduct.length > 0 ? (
         <div className={styles.main_container}>
-          {homePageReduxData?.recentProduct?.length ? (
-            <h2
-              className={`${
-                page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
-              } ${styles.heading}`.trim()}>
-              Recently Viewed Products
-            </h2>
-          ) : null}
+          <h2
+            className={`${
+              page === "product" ? "xl:!text-24 xl:!tracking-0.48" : ""
+            } ${styles.heading}`.trim()}>
+            Recently Viewed Products
+          </h2>
           <div className={`${styles.recentlyViewed_main}`} ref={sliderRef}>
-            {homePageReduxData?.recentProduct?.map((item, index) => {
+            {homePageReduxData.recentProduct.map((item, index) => {
               return (
                 <Fragment key={index.toString()}>
                   {(item?.image || item?.price) && (
@@ -155,7 +159,11 @@ const RecentlyViewedProduct = ({page}) => {
             })}
           </div>
         </div>
-      ) : null}
+      ) : noProductsFound ? null : (
+        <div className="mt-8">
+          <ProductRowSkeleton />
+        </div>
+      )}
     </>
   );
 };

@@ -12,7 +12,7 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 export default function CategoryPopover({
   filterName,
@@ -43,7 +43,7 @@ export default function CategoryPopover({
     setAnchorEl(null);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAnchorEl(null);
   }, [isApplyFilter]);
 

@@ -1,5 +1,5 @@
 import Drawer from "@mui/material/Drawer";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
 import {Close, VerifyIcon} from "@/assets/icon";
 import {ProductPageImages} from "@/assets/images";
@@ -21,7 +21,7 @@ const CityshieldDrawer = ({
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

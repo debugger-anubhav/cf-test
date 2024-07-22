@@ -62,7 +62,7 @@ const ReviewDrawer = ({
       .catch(err => console.log(err));
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

@@ -41,7 +41,7 @@ const RentFurnitureAndAppliances = ({params}) => {
     };
 
     return () => {
-      worker.terminate();
+      worker?.terminate();
     };
   }, []);
 
@@ -52,7 +52,7 @@ const RentFurnitureAndAppliances = ({params}) => {
         ? homePageReduxData.seoFurnitureSubCategory
         : homePageReduxData.category;
 
-  return (
+  return RentFurniture && RentFurniture.length > 0 ? (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <p className={styles.subhead}>{string.landing_page.Explore_by}</p>
@@ -99,6 +99,8 @@ const RentFurnitureAndAppliances = ({params}) => {
         })}
       </div>
     </div>
+  ) : (
+    <RentFurnitureSkeleton />
   );
 };
 export default memo(RentFurnitureAndAppliances);

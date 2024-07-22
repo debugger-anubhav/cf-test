@@ -1,8 +1,8 @@
-import React from "react";
+import React, {memo} from "react";
 import {Skeleton} from "@mui/material";
 import styles from "./styles.module.css";
 
-export const ContentSkeleton = () => {
+export const ContentSkeleton = memo(() => {
   return (
     <div className={styles.main_containor}>
       {[1, 2, 3, 4, 5]?.map((item, index) => (
@@ -23,4 +23,4 @@ export const ContentSkeleton = () => {
       ))}
     </div>
   );
-};
+});

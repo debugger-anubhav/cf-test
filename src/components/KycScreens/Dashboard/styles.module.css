@@ -1,0 +1,89 @@
+.heading {
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}
+.kyc_status_box {
+  @apply flex w-full border border-DDDDDF rounded-lg gap-4 p-6 flex-col my-8;
+}
+.schedule_delivery_btn {
+  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap w-fit;
+}
+.sub_heading {
+  @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;
+}
+.details_wrapper {
+  @apply hidden md:grid lg:grid-cols-3 grid-cols-2 w-full gap-4 2xl:gap-6;
+}
+.details_box {
+  @apply border border-EDEDEE max-w-[297px] 2xl:max-w-full h-[111px] flex justify-center flex-col rounded-lg p-6;
+}
+.detail_heading {
+  @apply font-Poppins md:text-20 text-16 text-5774AC leading-[30px] tracking-0.3 font-medium;
+}
+.mobile_details_wrapper {
+  @apply border border-EDEDEE rounded-lg px-4 w-full flex md:hidden flex-col;
+}
+.mobile_detail_box {
+  @apply flex w-full justify-between items-center border-EDEDEE py-4;
+}
+.order_placed_wrapper {
+  @apply flex w-full justify-between items-center mt-5;
+}
+.order_place_info {
+  @apply flex flex-col;
+}
+.order_place_heading {
+  @apply font-Poppins text-14 text-9A9AA2 tracking-0.3 leading-5;
+}
+.order_place_date {
+  @apply font-Poppins text-16 text-71717A font-medium tracking-0.3 leading-6 pt-1;
+}
+.counter_box {
+  @apply border border-71717A text-71717A text-12 flex justify-center items-center w-[37px] h-[37px] rounded-lg;
+}
+.images_wraper {
+  @apply flex gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
+}
+.status_style {
+  @apply flex items-center gap-1 font-Poppins font-medium text-14;
+}
+
+.profession_row {
+  @apply justify-between items-center bg-[#F0EEFC] px-2 py-1 rounded-lg my-6 gap-4;
+}
+.profession_left {
+  @apply flex text-71717A font-Poppins md:text-14 text-12 font-medium whitespace-nowrap;
+}
+.profession_right {
+  @apply font-Poppins font-medium text-5774AC md:text-14 text-12 leading-[18px] tracking-0.3 cursor-pointer;
+}
+
+.drawer_content_wrapper {
+  @apply flex w-full flex-col p-4 md:w-[530px] md:p-12;
+}
+.btn_wrapper {
+  @apply flex w-full flex-col;
+}
+.plain_btn {
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 border-2 px-8 lg:h-[56px] h-[48px] items-center w-full border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center mt-8;
+}
+.cancle_btn {
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 w-full px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px]  mb-4 outline-none font-Poppins mx-0;
+}
+.content_text {
+  @apply font-Poppins py-8 md:text-16 text-14 text-71717A;
+}
+.radio_button {
+  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
+}
+.kyc_tab {
+  @apply flex w-fit gap-8 border-b border-EDEDEE  mb-8;
+}
+.tab_item {
+  @apply font-Poppins pb-3 text-45454A md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer;
+}
+.active_tab_item {
+  @apply font-Poppins border-9A9AA2 text-5774AC md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer border-b pb-3;
+}
+.firstSection {
+  @apply mt-6 md:mt-10 flex justify-center items-center md:justify-start;
+}
