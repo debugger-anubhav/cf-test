@@ -3,7 +3,7 @@ import React from "react";
 const Links = () => {
   return (
     <>
-      <link
+      {/* <link
         rel="preload"
         href="/font/Poppins-Bold.ttf"
         as="font"
@@ -37,7 +37,7 @@ const Links = () => {
         as="font"
         type="font/ttf"
         crossOrigin="anonymous"
-      />
+      /> */}
     </>
   );
 };
