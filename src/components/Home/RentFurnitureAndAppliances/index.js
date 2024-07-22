@@ -73,7 +73,7 @@ const RentFurnitureAndAppliances = ({params}) => {
               href={`/${homePageReduxData?.cityName
                 .replace(/\//g, "-")
                 ?.toLowerCase()}/${item?.seourl}`}>
-              <div>
+              <div style={{borderRadius: "4px"}}>
                 <Image
                   loader={({src}) => src}
                   src={
