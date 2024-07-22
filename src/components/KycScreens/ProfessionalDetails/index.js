@@ -153,8 +153,8 @@ export default function ProfessionalDetails() {
             {professionId === 1
               ? "Professional details"
               : professionId === 3 || professionId === 4
-                ? "Nominee’s details"
-                : "Additional information"}
+              ? "Nominee’s details"
+              : "Additional information"}
           </div>
 
           <Formik

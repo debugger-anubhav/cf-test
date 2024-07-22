@@ -1,0 +1,169 @@
+.MainContainer {
+  @apply w-full p-[112px] py-[60px] 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-[112px] cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-[16px] ms:px-[16px];
+}
+
+.SubMainContainer {
+  @apply w-full px-[20px] py-[20px] md1:px-[48px] md1:py-[48px] border-[1px] border-[#DDDDDF] rounded-[4px];
+}
+
+.Heading {
+  @apply font-Poppins font-medium text-[20px] leading-[30px] text-[#45454A];
+}
+
+.BoxSection {
+  @apply md1:flex md1:flex-row md1:gap-[16px] pt-[32px] ms:flex-col ms:gap-[16px] gap-[16px];
+}
+
+.KycSection {
+  @apply w-[50%] border-[1px] rounded-[8px] mobile:w-[100%] ms:mb-[16px] md1:mb-[0];
+}
+
+.KycDetails {
+  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b-[1px] border-[#DDDDDF] py-[12px] px-[8px];
+}
+
+.KHeading {
+  @apply text-[16px] flex gap-[5px] items-center;
+}
+
+.KNumber {
+}
+
+.orderDetails {
+  @apply flex items-start gap-[16px] text-[14px] leading-[21px] font-normal text-[#5774AC] py-[16px] px-[12px];
+}
+
+.OrderLink {
+  @apply cursor-pointer flex flex-col items-start gap-[4px];
+}
+
+.LinkText {
+  @apply underline whitespace-nowrap;
+}
+
+.RaiseServicerequestSection {
+  @apply w-[50%] border-[1px] rounded-[8px] mobile:w-[100%];
+}
+
+.RHeadingSection {
+  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b-[1px] border-[#DDDDDF] py-[12px] px-[8px];
+}
+
+.RHeading {
+  @apply mobile:text-[12px] md1:text-[16px] font-Poppins;
+}
+
+.RLinkSection {
+  @apply cursor-pointer text-[#5774AC] font-Poppins mobile:text-[12px] md1:text-[16px] flex items-center;
+}
+
+.RIconsSection {
+  @apply flex justify-around items-start pt-[24px];
+}
+
+.IconBox {
+  @apply cursor-pointer flex flex-col gap-[8px] items-center justify-center pb-5;
+}
+
+.IconBoxIcon {
+}
+
+.Icon {
+  @apply ml-0.5 h-4 w-4 text-[#597492];
+}
+
+.IconBoxText {
+  @apply w-[54px] text-center text-[14px] leading-[21px] font-Poppins text-[#5774AC] mobile:text-[12px] md1:text-[14px];
+}
+
+.images_wraper {
+  @apply flex flex-row gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
+}
+
+.counter_box {
+  @apply border border-71717A text-71717A text-12 flex justify-center items-center mobile:w-[25px] mobile:h-[25px] md1:w-[37px] md1:h-[37px] rounded-lg;
+}
+
+.sorted_text {
+  @apply flex h-[39px] items-center justify-between cursor-pointer px-4;
+}
+
+.option_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3;
+}
+
+.arrow_down {
+  @apply w-[12.8px] h-[13px] lg:w-4 lg:h-4;
+  transition: transform 330ms ease;
+}
+
+.arrow_up {
+  @apply w-[12.8px] h-[13px] lg:w-4 lg:h-4;
+  transition: transform 330ms ease;
+  transform: rotate(180deg);
+}
+
+.filter_text {
+  @apply font-Poppins text-12 md:text-14 font-medium leading-6 text-71717A;
+}
+
+.filterbox {
+  @apply flex justify-between items-center gap-2 w-full;
+}
+
+/* .CarouselClass>.control-dots {
+    margin-top: 29px !important;
+    bottom: -8px !important;
+    background-color: #E2E4E8 !important;
+    width: fit-content !important;
+    border-radius: 10px !important;
+}
+
+.CarouselClass>.selected {
+    background-color: #5774AC !important;
+    margin: 1px 6px !important;
+} */
+
+.KycPendingICons {
+  @apply h-[19px] w-[19px];
+}
+
+.RestText {
+  @apply text-[#71717A];
+}
+
+.CardTextStyle {
+  @apply mobile:text-[12px] md1:text-[16px];
+}
+
+.HeadingOfCard {
+  @apply mobile:text-[12px] md1:text-[16px];
+}
+
+.headin_text {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-[15px];
+}
+
+.mapped_filter_mobile {
+  @apply flex flex-col max-h-[335px] pt-[15px];
+}
+
+.single_filter_text {
+  @apply flex items-center justify-between min-h-[37px] cursor-pointer px-[16px];
+}
+
+.option_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3;
+}
+
+.see_more_text {
+  @apply text-[#597492] font-Poppins text-12 font-medium leading-6 underline px-4 cursor-pointer;
+}
+
+.btn_container {
+  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[100%] sm:w-[196px] h-[48px] cursor-pointer;
+}
+
+.apply_btn {
+  @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
+}
