@@ -47,6 +47,12 @@ const DocMain = () => {
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
 
+  const currentURL = typeof window !== "undefined" ? window.location.href : "";
+
+  const urlParams = new URLSearchParams(currentURL.split("?")[1]);
+  const orderIdFromUrl = urlParams.get("order_id");
+  console.log(orderIdFromUrl, "orderrrr");
+
   // const [isReupload, setIsReupload] = useState(false);
 
   const [selectedOrderId, setSelectedOrderId] = useState(
@@ -111,6 +117,7 @@ const DocMain = () => {
   const [isBottomDrawer, setIsBottomDrawer] = useState(false);
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
+
   // const openModal = () => {
   //   setOpenDrawer(true);
   // };
@@ -129,14 +136,23 @@ const DocMain = () => {
       });
   };
 
+  const handleStartKyc = () => {
+    if (orderIdFromUrl) {
+      checkSelectedProfession();
+    } else if (selectedOption === null) {
+      setOpenDrawer(true);
+    } else {
+      checkSelectedProfession();
+    }
+  };
+
   const checkSelectedProfession = () => {
+    let order_id = selectedOrderId?.dealCodeNumber;
+    if (orderIdFromUrl && !selectedOrderId) {
+      order_id = orderIdFromUrl;
+    }
     baseInstance
-      .get(
-        endPoints.kycPage.checkProfessionSelected(
-          userId,
-          selectedOrderId.dealCodeNumber,
-        ),
-      )
+      .get(endPoints.kycPage.checkProfessionSelected(userId, order_id))
       .then(res => {
         window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         if (res?.data?.data?.status) {
@@ -146,14 +162,6 @@ const DocMain = () => {
         }
       })
       .catch(err => console.log(err));
-  };
-
-  const handleStartKyc = () => {
-    if (selectedOption === null) {
-      setOpenDrawer(true);
-    } else {
-      checkSelectedProfession();
-    }
   };
 
   useEffect(() => {
@@ -257,10 +265,17 @@ const DocMain = () => {
               </div>
               <div onClick={() => setOpenDrawer(true)}>
                 <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
-                  {selectedOption !== null && "#"}
-                  {selectedOption !== null
-                    ? ordersData?.[selectedOption]?.dealCodeNumber
-                    : "Select Order"}
+                  {orderIdFromUrl ? (
+                    <span>#{orderIdFromUrl}</span>
+                  ) : (
+                    <span>
+                      {selectedOption !== null && "#"}
+                      {selectedOption !== null
+                        ? ordersData?.[selectedOption]?.dealCodeNumber
+                        : "Select Order"}
+                    </span>
+                  )}
+
                   <DropDownArrow color={"#71717A"} size={20} />
                 </div>
               </div>
@@ -269,7 +284,7 @@ const DocMain = () => {
               <button
                 className={`${styles.start_kyc_btn} cursor-pointer ${
                   selectedOption === null ? "bg-FFDF85 " : "bg-btn-primary "
-                }`}
+                } ${orderIdFromUrl && "bg-btn-primary"}`}
                 onClick={handleStartKyc}>
                 Start my KYC now{" "}
                 <ArrowForw
