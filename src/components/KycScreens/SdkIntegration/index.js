@@ -14,6 +14,7 @@ export default function SdkIntegration({
   getDashboardDetailsApi,
   openPanSdk,
   setOpenPanSdk,
+  setHoldOnLoader,
 }) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
@@ -27,8 +28,9 @@ export default function SdkIntegration({
   const [openLoader, setOpenLoader] = useState(false);
 
   const handler = HyperKycResult => {
-    setOpenLoader(true);
-    // console.log(HyperKycResult, "HyperKycResultHyperKycResultHyperKycResult");
+    if (HyperKycResult?.status === "user_cancelled") {
+      setOpenPanSdk(false);
+    }
     saveHyperVergeDetails({
       ...HyperKycResult,
       userId,
@@ -37,12 +39,14 @@ export default function SdkIntegration({
   };
 
   const saveHyperVergeDetails = details => {
+    setHoldOnLoader(true);
     baseInstance
       .post(endPoints.kycPage.saveHyperVergeKycDetails, details)
       .then(res => {
         setSaveHVData(res?.data?.data);
         getDashboardDetailsApi();
         setOpenLoader(false);
+        setHoldOnLoader(false);
         if (res?.data?.data?.data?.rejected) {
           showToastNotification(res?.data?.data?.message, 3);
         }
@@ -50,25 +54,10 @@ export default function SdkIntegration({
 
       .catch(err => {
         setOpenLoader(false);
+        setHoldOnLoader(false);
         console.log(err);
       });
   };
-
-  useEffect(() => {
-    if (saveHVData?.type === "questions") {
-      setQustionDrawer(true);
-    }
-    if (saveHVData?.data?.cibilScore > 650) {
-      dispatch(setKycScreenName("professionalDetails"));
-      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-      dispatch(setStageId(3));
-    }
-    if (saveHVData?.data?.cibilScore < 650) {
-      dispatch(setKycScreenName("financialInfo"));
-      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-      dispatch(setStageId(2));
-    }
-  }, [saveHVData]);
 
   const handleVerfyAns = () => {
     baseInstance
@@ -106,7 +95,6 @@ export default function SdkIntegration({
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);
-        setOpenPanSdk(false);
       })
       .catch(err => console.log(err));
 
@@ -131,8 +119,27 @@ export default function SdkIntegration({
     //     setSaveHVData(res?.data?.data);
     //     getDashboardDetailsApi();
     //   })
-    // .catch(err => console.log(err));
+    //   .catch(err => console.log(err));
   };
+
+  useEffect(() => {
+    if (saveHVData?.type === "questions") {
+      setQustionDrawer(true);
+    }
+    if (saveHVData?.data?.cibilScore > 650) {
+      dispatch(setKycScreenName("professionalDetails"));
+      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+      dispatch(setStageId(3));
+      setOpenPanSdk(false);
+    }
+    if (saveHVData?.data?.cibilScore < 650) {
+      dispatch(setKycScreenName("financialInfo"));
+      window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+      dispatch(setStageId(2));
+      setOpenPanSdk(false);
+    }
+    // console.log(saveHVData?.type, "llllllllllll");
+  }, [saveHVData]);
 
   useEffect(() => {
     setSelectedId(`${userId}_${data?.dealCodeNumber}`);

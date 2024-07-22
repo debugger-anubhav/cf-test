@@ -443,7 +443,10 @@ export default function DashboardComponent() {
                                   ?.stage_status !== 2
                               ) {
                                 setOpenPanSdk(true);
-                              } else if (item.stage_status !== 2) {
+                              } else if (
+                                item.stage_status !== 2 &&
+                                item.stage_status !== 1
+                              ) {
                                 handleKycStagesClick(item);
                               }
                             }}>
@@ -523,6 +526,7 @@ export default function DashboardComponent() {
               openPanSdk={openPanSdk}
               setOpenPanSdk={setOpenPanSdk}
               getDashboardDetailsApi={getDashboardDetailsApi}
+              setHoldOnLoader={setHoldOnLoader}
             />
           )}
 
