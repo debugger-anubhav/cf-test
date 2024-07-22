@@ -68,28 +68,31 @@ const RentNowBanner = ({params}) => {
     };
   }, []);
 
-  return (
+  return rentNowBanner && rentNowBanner.length > 0 ? (
     <div className={styles.rentNow_Banner_wrapper}>
       <div className={styles.banner_card} ref={sliderRef}>
-        {rentNowBanner && rentNowBanner.length > 0
-          ? rentNowBanner?.map((item, index) => (
-              <div
-                className={`${
-                  index === rentNowBanner?.length - 1 ? "mr-[16px]" : ""
-                } ${isDumy ? "pointer-events-none" : ""}`.trim()}
-                key={index.toString()}>
-                <RentNowCard
-                  cardImage={`${imageSourceEndpoint}${item?.image}`}
-                  url={item?.url}
-                  alt={item?.image}
-                />
-              </div>
-            ))
-          : null}
+        {rentNowBanner.map((item, index) => (
+          <div
+            className={`${
+              index === rentNowBanner?.length - 1 ? "mr-[16px]" : ""
+            } ${isDumy ? "pointer-events-none" : ""}`.trim()}
+            key={index.toString()}>
+            <RentNowCard
+              cardImage={`${imageSourceEndpoint}${item?.image}`}
+              url={item?.url}
+              alt={item?.image}
+            />
+          </div>
+        ))}
       </div>
+    </div>
+  ) : (
+    <div className="my-8">
+      <RentNowBannersSkeleton />
     </div>
   );
 };
+
 export default RentNowBanner;
 
 export const RentNowBannersSkeleton = memo(() => {

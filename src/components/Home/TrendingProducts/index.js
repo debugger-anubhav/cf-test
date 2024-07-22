@@ -6,6 +6,7 @@ import Card from "@/components/Common/HomePageCards";
 import {useDispatch, useSelector} from "react-redux";
 import {addtrendingproduct, setSeoApplianceCrowd} from "@/store/Slices";
 import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import Worker from "worker-loader!./trendingproductsWorker.js";
 
 const TrendingProducts = ({params}) => {
@@ -139,7 +140,11 @@ const TrendingProducts = ({params}) => {
             ))}
           </div>
         </div>
-      ) : null}
+      ) : (
+        <div className="mt-8">
+          <ProductRowSkeleton />
+        </div>
+      )}
     </>
   );
 };
