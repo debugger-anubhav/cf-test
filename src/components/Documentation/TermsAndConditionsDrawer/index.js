@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import styles from "./styles.module.css";
 import {Drawer} from "@mui/material";
 import {Close} from "@/assets/icon";
@@ -14,7 +14,7 @@ const TermsAndConditionsDrawer = ({toggleDrawer, open, isCivilScorePage}) => {
     }
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

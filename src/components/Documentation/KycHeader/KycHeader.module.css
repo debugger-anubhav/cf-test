@@ -1,11 +1,14 @@
 .header_wrapper {
-  @apply flex gap-3 items-center;
+  @apply flex gap-1 items-center;
 }
 .backIcon {
   @apply min-w-[24px] min-h-[24px] text-222 cursor-pointer;
 }
 .header {
-  @apply font-Poppins md:text-2xl text-lg text-45454A font-medium leading-[32px];
+  @apply font-Poppins md:text-2xl text-lg;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 32px;
   letter-spacing: -0.48px;
 }
 .mainContainer {
