@@ -65,7 +65,7 @@ const PreDesignCombos = () => {
       slider.removeEventListener("mouseleave", stopDragging);
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
-  }, []);
+  }, [homePageReduxData?.designComboProduct]);
 
   return (
     <>
