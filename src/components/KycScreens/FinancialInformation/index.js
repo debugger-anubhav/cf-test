@@ -13,7 +13,7 @@ import {
   DeleteIconFilled,
   OutlineArrowRight,
 } from "@/assets/icon";
-import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
+// import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
@@ -26,31 +26,31 @@ const allowedFileTypes = [
   "image/png",
   "application/pdf",
 ];
-const SelectionComp = ({
-  headertext,
-  duration,
-  setIsSelected,
-  type,
-  showInner,
-}) => {
-  return (
-    <div
-      onClick={() => {
-        setIsSelected(type);
-      }}>
-      <div className={`${styles.selHeading}`}>
-        <SelectionCircle showInner={showInner} />
-        <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
-      </div>
-      <div className={`${styles.selDivider}`}>
-        <hr />
-      </div>
-      <div className={`${styles.selFooter} w-max-[173px]`}>
-        Required for <span className="font-medium">{duration}</span>
-      </div>
-    </div>
-  );
-};
+// const SelectionComp = ({
+//   headertext,
+//   duration,
+//   setIsSelected,
+//   type,
+//   showInner,
+// }) => {
+//   return (
+//     <div
+//       onClick={() => {
+//         setIsSelected(type);
+//       }}>
+//       <div className={`${styles.selHeading}`}>
+//         <SelectionCircle showInner={showInner} />
+//         <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
+//       </div>
+//       <div className={`${styles.selDivider}`}>
+//         <hr />
+//       </div>
+//       <div className={`${styles.selFooter} w-max-[173px]`}>
+//         Required for <span className="font-medium">{duration}</span>
+//       </div>
+//     </div>
+//   );
+// };
 
 const FinancialInfo = ({handleKycState}) => {
   const dispatch = useDispatch();
@@ -197,7 +197,7 @@ const FinancialInfo = ({handleKycState}) => {
         {docData?.supported_docs_array?.map((item, index) => {
           return (
             <>
-              <div
+              {/* <div
                 key={index}
                 className={`${styles.selContainer} ${
                   isSelected === docData?.supported_docs?.split(",")?.[index]
@@ -213,6 +213,9 @@ const FinancialInfo = ({handleKycState}) => {
                     isSelected === docData?.supported_docs?.split(",")?.[index]
                   }
                 />
+              </div> */}
+              <div className={styles.heading_box}>
+                Bank Statement (Required for last 3 months)
               </div>
               {index < docData?.supported_docs_array?.length - 1 ? (
                 <div className={`${styles.orBox}`}>
