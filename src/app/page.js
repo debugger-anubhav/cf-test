@@ -25,6 +25,7 @@ import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
+import KycPending from "@/components/Home/KycPending";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -105,8 +106,8 @@ const MediaCoverage = loadable(
   {fallback: <MediaCoverageSkeleton />},
 );
 
-const HappySubscribers = loadable(
-  () => import("@/components/Home/HappySubscribers"),
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
 );
 
 const FrequentlyAskedQuestions = loadable(
@@ -172,6 +173,9 @@ export default function Home() {
         <Header />
         <MenuList />
         <HeroBanner />
+
+        {userId && <KycPending />}
+
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
