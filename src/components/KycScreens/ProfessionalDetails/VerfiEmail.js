@@ -6,8 +6,9 @@ import {handleWheel, getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {reduxSetModalState} from "@/store/Slices";
 
 export default function VerfiEmail({
   openModal,
@@ -18,7 +19,7 @@ export default function VerfiEmail({
   const userId = decrypt(getLocalStorage("_ga"));
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [countdown, setCountdown] = useState(30);
@@ -42,11 +43,16 @@ export default function VerfiEmail({
 
   const handleStartCountdown = () => {
     setStartCountdown(true);
-    setCountdown(30);
+    setCountdown(45);
   };
 
-  const onCloseModal = () => setOpenModal(false);
-  useEffect(() => handleStartCountdown(), []);
+  const onCloseModal = () => {
+    setOpenModal(false);
+    dispatch(reduxSetModalState(false));
+  };
+  useEffect(() => {
+    if (openModal) handleStartCountdown();
+  }, [openModal]);
   const handleVerification = () => {
     setDisableVerify(true);
 

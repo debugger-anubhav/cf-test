@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import {BackIcon, OutlineArrowRight} from "../../../assets/icon";
 import {useDispatch, useSelector} from "react-redux";
-import {setKycScreenName} from "@/store/Slices";
+import {reduxSetModalState, setKycScreenName} from "@/store/Slices";
 import {cityUrl} from "../../../../appConfig";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from "yup";
@@ -129,6 +129,7 @@ export default function ProfessionalDetails() {
 
   const handleEmailVerify = () => {
     setOpenModal(true);
+    dispatch(reduxSetModalState(true));
     baseInstance
       .post(endPoints.kycPage.verifyCompanyEmail, {
         email,
