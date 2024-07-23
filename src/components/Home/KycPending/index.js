@@ -402,10 +402,7 @@ const KycPending = () => {
                                                   className={style.option_text}>
                                                   {ele?.dealCodeNumber}
                                                 </p>
-                                                {console.log(
-                                                  mobileSelecteData,
-                                                  "Hello",
-                                                )}
+
                                                 <input
                                                   type="checkbox"
                                                   id={index}
