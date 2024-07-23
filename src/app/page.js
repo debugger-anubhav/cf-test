@@ -106,8 +106,8 @@ const MediaCoverage = loadable(
   {fallback: <MediaCoverageSkeleton />},
 );
 
-const HappySubscribers = loadable(
-  () => import("@/components/Home/HappySubscribers"),
+const HappySubscribers = loadable(() =>
+  import("@/components/Home/HappySubscribers"),
 );
 
 const FrequentlyAskedQuestions = loadable(

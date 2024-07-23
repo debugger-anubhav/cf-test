@@ -28,6 +28,7 @@ const KycPending = () => {
   const [mobileSelecteData, setMobileSelecteData] = useState();
   const [isHeightGreaterThan600, setIsHeightGreaterThan600] = useState(false);
   const [extendedStatus, setExtendedStatus] = useState(false);
+  const dropDownRefFilter = useRef(null);
 
   const StyledCarousel = styled(Carousel)`
     .control-dots {
@@ -46,6 +47,33 @@ const KycPending = () => {
       &.selected {
         background-color: #5774ac !important;
         margin: 3px 5px !important;
+      }
+    }
+
+    @media (min-width: 360px) {
+      .control-dots {
+        margin-top: 29px !important;
+        bottom: -19px !important;
+        background-color: #e2e4e8 !important;
+        width: fit-content !important;
+        border-radius: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 4px !important;
+      }
+    }
+    @media (min-width: 520px) {
+      .control-dots {
+        margin-top: 29px !important;
+        bottom: -4px !important;
+        background-color: #e2e4e8 !important;
+        width: fit-content !important;
+        border-radius: 10px !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        padding: 4px !important;
       }
     }
   `;
@@ -175,6 +203,7 @@ const KycPending = () => {
       );
       setData(res?.data?.data);
       handleSort(res?.data?.data[0]);
+      handleSortMobile(res?.data?.data[0]);
     } catch (error) {
       console.log(error);
     }
@@ -184,10 +213,10 @@ const KycPending = () => {
     handleKycData();
   }, []);
 
-  const imagesArray = selectedImage?.product_image
-    ?.split(",")
-    ?.slice(0, 3)
-    .filter(item => item !== "");
+  // const imagesArray = selectedImage?.product_image
+  //     ?.split(",")
+  //     ?.slice(0, 3)
+  //     .filter(item => item !== "");
 
   const toggleDropdownSort = () => {
     setSortOpen(!sortOpen);
@@ -195,16 +224,26 @@ const KycPending = () => {
 
   const handleSort = (value, index) => {
     setSelectedOption(value?.dealCodeNumber);
-    console.log("selected", value);
     setSelectedOrder(value);
-    setSelectedImage(JSON.parse(value?.fc_paymentData)[0]);
+    setMobileSelecteData(value);
+    const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
+      return item?.product_image?.split(",")?.slice(0, 1)[0];
+    });
+
+    setSelectedImage(NewImagearray);
     ExtendedKyc(value?.dealCodeNumber);
   };
 
   const handleSortMobile = value => {
+    setMobileSelecteData(value);
     setSelectedOption(value?.dealCodeNumber);
     setSelectedOrder(value);
-    setSelectedImage(JSON.parse(value?.fc_paymentData)[0]);
+
+    const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
+      return item?.product_image?.split(",")?.slice(0, 1)[0];
+    });
+
+    setSelectedImage(NewImagearray);
     ExtendedKyc(value?.dealCodeNumber);
     setSortOpen(false);
   };
@@ -221,6 +260,23 @@ const KycPending = () => {
     window.addEventListener("resize", checkHeight);
     return () => {
       window.removeEventListener("resize", checkHeight);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
+        setSortOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
@@ -246,7 +302,8 @@ const KycPending = () => {
                   <div className={style.KycDetails}>
                     <div className={style.KHeading}>
                       <span>
-                        <Image
+                        <img
+                          className={style.HeaderIconImage}
                           width={30}
                           height={30}
                           src={
@@ -272,11 +329,10 @@ const KycPending = () => {
                               onClick={() => {
                                 // setSortOpen(!filterOpen);
                                 toggleDropdownSort();
-                              }}
-                              ref={dropDownRefSort}>
+                              }}>
                               <div className={style.filter_text_container}>
                                 <p
-                                  className={`${style.filter_text} !text-[#597492]`}>
+                                  className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
                                   #{selectedOption}
                                 </p>
                               </div>
@@ -346,6 +402,10 @@ const KycPending = () => {
                                                   className={style.option_text}>
                                                   {ele?.dealCodeNumber}
                                                 </p>
+                                                {console.log(
+                                                  mobileSelecteData,
+                                                  "Hello",
+                                                )}
                                                 <input
                                                   type="checkbox"
                                                   id={index}
@@ -354,8 +414,8 @@ const KycPending = () => {
                                                   //   ele?.filter_tag,
                                                   // )}
                                                   checked={
-                                                    ele?.dealCodeNumber ===
-                                                    mobileSelecteData?.dealCodeNumber
+                                                    mobileSelecteData?.dealCodeNumber ===
+                                                    ele?.dealCodeNumber
                                                   }
                                                   className="pr-1 cursor-pointer"
                                                   // onChange={e => handleFilteredItems(e)}
@@ -398,35 +458,43 @@ const KycPending = () => {
                   <div className={style.orderDetails}>
                     <div className={style.ImageSection}>
                       <div className={style.images_wraper}>
-                        {imagesArray?.map((ele, i) => {
-                          return (
-                            <div key={i.toString()}>
-                              {ele && (
-                                <img
-                                  src={
-                                    ele && productImageBaseUrl + "thumb/" + ele
-                                  }
-                                  alt={ele?.product_name}
-                                  className={`${
-                                    imagesArray?.length === 1
-                                      ? "w-full h-full"
-                                      : imagesArray?.length === 2
+                        {selectedImage
+                          ?.slice(
+                            0,
+                            selectedImage?.length > 4
+                              ? 3
+                              : selectedImage?.length,
+                          )
+                          ?.map((ele, i) => {
+                            return (
+                              <div key={i.toString()}>
+                                {ele && (
+                                  <img
+                                    src={
+                                      ele &&
+                                      productImageBaseUrl + "thumb/" + ele
+                                    }
+                                    alt={ele?.product_name}
+                                    className={`${
+                                      selectedImage?.length === 1
+                                        ? "w-full h-full"
+                                        : selectedImage?.length === 2
                                         ? `mobile:!w-[25px] mobile:!h-[25px] md1:w-[48px] md1:h-[48px] absolute ${
                                             i === 0
                                               ? "top-0 left-0"
                                               : "bottom-0 right-0"
                                           }`
                                         : " mobile:!w-[25px] mobile:!h-[25px]  md1:!w-[37px] md1:!h-[37px]"
-                                  } rounded-lg object-cover`}
-                                  loading="lazy"
-                                />
-                              )}
-                            </div>
-                          );
-                        })}
-                        {imagesArray?.length > 2 && (
+                                    } rounded-lg object-cover`}
+                                    loading="lazy"
+                                  />
+                                )}
+                              </div>
+                            );
+                          })}
+                        {selectedImage?.length > 4 && (
                           <div className={style.counter_box}>
-                            +{imagesArray?.length - 2}
+                            +{selectedImage?.length - 3}
                           </div>
                         )}
                       </div>
@@ -441,12 +509,12 @@ const KycPending = () => {
                             )
                           }
                           className={
-                            "flex items-center justify-center whitespace-nowrap"
+                            "flex items-center justify-center whitespace-nowrap !text-start"
                           }>
                           <span>
                             <span className={style.LinkText}>Complete KYC</span>{" "}
                             <span className={style.RestText}>
-                              now to schedule your <br /> delivery{" "}
+                              now to schedule your delivery{" "}
                             </span>
                           </span>
                         </div>
@@ -455,11 +523,11 @@ const KycPending = () => {
                         <div
                           onClick={() => router.push(`/cart`)}
                           className={
-                            "flex items-center justify-center whitespace-nowrap"
+                            "flex items-center justify-center whitespace-nowrap !text-start"
                           }>
                           <span>
                             <span className={style.LinkText}>
-                              Retry Payment
+                              Retry Payment{" "}
                             </span>
                             <span className={style.RestText}>
                               to proceed with your order{" "}
@@ -476,7 +544,7 @@ const KycPending = () => {
                               )
                             }
                             className={
-                              "flex items-center justify-center whitespace-nowrap"
+                              "flex items-center justify-center whitespace-nowrap !text-start"
                             }>
                             <span>
                               <span className={style.RestText}>
@@ -487,7 +555,6 @@ const KycPending = () => {
                                 )}`}{" "}
                               </span>{" "}
                               <span className={style.LinkText}>
-                                <br />
                                 Extend Subscription{" "}
                               </span>
                             </span>
@@ -500,7 +567,7 @@ const KycPending = () => {
                             : router.push("/purchases")
                         }
                         className={
-                          "flex items-center justify-center whitespace-nowrap"
+                          "flex items-center justify-center whitespace-nowrap gap-1"
                         }>
                         <span className={style.LinkText}>
                           {extendedStatus?.extendDisplay
@@ -530,7 +597,9 @@ const KycPending = () => {
                       return (
                         <div
                           key={item.id}
-                          onClick={() => router.push("/purchases")}
+                          onClick={() =>
+                            item?.clickable && router.push("/service-requests")
+                          }
                           className={style.IconBox}>
                           <div className={style.IconBoxIcon}>
                             <Image width={40} height={40} src={item.icon} />
@@ -567,8 +636,8 @@ const KycPending = () => {
                     </div>
                     <div className={style.KNumber}>
                       <span>
-                        <div className="relative flex">
-                          <div className={`${style.filter} relative `}>
+                        <div className="relative z-[1] flex">
+                          <div className={`${style.filter} relative z-[2]`}>
                             <div
                               className={style.filterbox}
                               onClick={() => {
@@ -578,7 +647,7 @@ const KycPending = () => {
                               ref={dropDownRefSort}>
                               <div className={style.filter_text_container}>
                                 <p
-                                  className={`${style.filter_text} !text-[#597492]`}>
+                                  className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
                                   #{selectedOption}
                                 </p>
                               </div>
@@ -594,7 +663,9 @@ const KycPending = () => {
                             </div>
                           </div>
                           {sortOpen && (
-                            <div className=" h-[220px] overflow-scroll gap-6 absolute z-[111] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+                            <div
+                              ref={dropDownRefFilter}
+                              className=" h-[180px] overflow-scroll gap-6 absolute z-[11332] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
                               {data?.map((ele, index) => {
                                 return (
                                   <div
@@ -629,35 +700,41 @@ const KycPending = () => {
                   <div className={style.orderDetails}>
                     <div className={style.ImageSection}>
                       <div className={style.images_wraper}>
-                        {imagesArray?.map((ele, i) => {
-                          return (
-                            <div key={i.toString()}>
-                              {ele && (
-                                <img
-                                  src={
-                                    ele && productImageBaseUrl + "thumb/" + ele
-                                  }
-                                  alt={ele?.product_name}
-                                  className={`${
-                                    imagesArray?.length === 1
-                                      ? "w-full h-full"
-                                      : imagesArray?.length === 2
+                        {selectedImage
+                          ?.slice(
+                            0,
+                            selectedImage.length > 4 ? 3 : selectedImage.length,
+                          )
+                          .map((ele, i) => {
+                            return (
+                              <div key={i.toString()}>
+                                {ele && (
+                                  <img
+                                    src={
+                                      ele &&
+                                      productImageBaseUrl + "thumb/" + ele
+                                    }
+                                    alt={ele?.product_name}
+                                    className={`${
+                                      selectedImage?.length === 1
+                                        ? "w-full h-full"
+                                        : selectedImage?.length === 2
                                         ? `w-[48px] h-[48px] absolute ${
                                             i === 0
                                               ? "top-0 left-0"
                                               : "bottom-0 right-0"
                                           }`
                                         : "w-[37px] h-[37px]"
-                                  } rounded-lg object-cover`}
-                                  loading="lazy"
-                                />
-                              )}
-                            </div>
-                          );
-                        })}
-                        {imagesArray?.length > 2 && (
+                                    } rounded-lg object-cover`}
+                                    loading="lazy"
+                                  />
+                                )}
+                              </div>
+                            );
+                          })}
+                        {selectedImage?.length > 4 && (
                           <div className={style.counter_box}>
-                            +{imagesArray?.length - 2}
+                            +{selectedImage?.length - 3}
                           </div>
                         )}
                       </div>
@@ -672,12 +749,12 @@ const KycPending = () => {
                             )
                           }
                           className={
-                            "flex items-center justify-center whitespace-nowrap"
+                            "flex items-center justify-center whitespace-nowrap !text-start"
                           }>
                           <span>
                             <span className={style.LinkText}>Complete KYC</span>{" "}
                             <span className={style.RestText}>
-                              now to schedule your <br /> delivery{" "}
+                              now to schedule your delivery{" "}
                             </span>
                           </span>
                         </div>
@@ -686,7 +763,7 @@ const KycPending = () => {
                         <div
                           onClick={() => router.push(`/cart`)}
                           className={
-                            "flex items-center justify-center whitespace-nowrap"
+                            "flex items-center justify-center whitespace-nowrap !text-start"
                           }>
                           <span>
                             <span className={style.LinkText}>
@@ -707,7 +784,7 @@ const KycPending = () => {
                               )
                             }
                             className={
-                              "flex items-center justify-center whitespace-nowrap"
+                              "flex items-center justify-center whitespace-nowrap !text-start "
                             }>
                             <span>
                               <span className={style.RestText}>
@@ -731,13 +808,13 @@ const KycPending = () => {
                             : router.push("/purchases")
                         }
                         className={
-                          "flex items-center justify-center whitespace-nowrap"
+                          "flex items-center justify-center whitespace-nowrap !text-start gap-1"
                         }>
                         <span className={style.LinkText}>
                           {extendedStatus?.extendDisplay &&
                           selectedOrder.zoho_sub_status === "Delivered"
-                            ? "My subscriptions"
-                            : "My orders"}
+                            ? "My subscriptions " + " "
+                            : "My orders " + " "}
                         </span>
                         <Image width={15} height={15} src={link} />
                       </div>
@@ -762,7 +839,9 @@ const KycPending = () => {
                       return (
                         <div
                           key={item.id}
-                          onClick={() => router.push("/service-requests")}
+                          onClick={() =>
+                            item?.clickable && router.push("/service-requests")
+                          }
                           className={`${
                             item?.clickable
                               ? "!cursor-pointer"
