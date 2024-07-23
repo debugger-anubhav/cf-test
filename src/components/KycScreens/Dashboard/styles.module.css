@@ -90,3 +90,13 @@
 .firstSection {
   @apply mt-6 md:mt-10 flex justify-center items-center md:justify-start;
 }
+
+.progressBarContainer {
+  @apply mt-2 mx-4 w-full h-[30px] rounded-xl bg-[#d9d9d9] mb-8;
+}
+.progressBar {
+  @apply h-[30px] bg-[#67AF7B] items-center;
+}
+.new_progress_bar_text {
+  @apply font-Poppins flex text-14 leading-6 tracking-0.3 text-white whitespace-nowrap py-2 w-[240px] justify-center items-center h-[30px];
+}

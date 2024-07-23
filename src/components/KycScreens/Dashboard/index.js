@@ -30,6 +30,7 @@ import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
 import CongratulationKyc from "../Congratulation";
+import Image from "next/image";
 // import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
@@ -64,7 +65,9 @@ export default function DashboardComponent() {
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
-
+  const [progressNumber, setProgressNumber] = useState(
+    kycSliceData?.progressPercent,
+  );
   const getDashboardDetailsApi = () => {
     baseInstance
       .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
@@ -251,6 +254,7 @@ export default function DashboardComponent() {
         ? Math.round((progress?.length / totalProgress) * 100)
         : 0;
     dispatch(setProgressPercent(progressPercentage));
+    setProgressNumber(progressPercentage);
   }, [dashboardDetails]);
 
   useEffect(() => {
@@ -393,26 +397,55 @@ export default function DashboardComponent() {
             </button>
           </div>
 
-          {dashboardDetails?.isOptionalStages && (
-            <div className={styles.kyc_tab}>
-              <p
-                className={
-                  activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
-                }
-                onClick={() => setactiveTab("kyc")}>
-                KYC
-              </p>
-              <p
-                className={
-                  activeTab === "optional"
-                    ? styles.active_tab_item
-                    : styles.tab_item
-                }
-                onClick={() => setactiveTab("optional")}>
-                Optional KYC
-              </p>
+          <div className="flex w-full justify-between">
+            <div>
+              {dashboardDetails?.isOptionalStages && (
+                <div className={styles.kyc_tab}>
+                  <p
+                    className={
+                      activeTab === "kyc"
+                        ? styles.active_tab_item
+                        : styles.tab_item
+                    }
+                    onClick={() => setactiveTab("kyc")}>
+                    KYC
+                  </p>
+                  <p
+                    className={
+                      activeTab === "optional"
+                        ? styles.active_tab_item
+                        : styles.tab_item
+                    }
+                    onClick={() => setactiveTab("optional")}>
+                    Optional KYC
+                  </p>
+                </div>
+              )}
             </div>
-          )}
+
+            <div className="w-[240px]">
+              <div className={styles.progressBarContainer}>
+                <div
+                  className={`${styles.progressBar} ${progressNumber === 100 ? "rounded-xl" : "rounded-l-xl"}`}
+                  style={{width: `${progressNumber}%`}}>
+                  <div className={styles.new_progress_bar_text}>
+                    {progressNumber}% KYC done
+                    <span>
+                      <Image
+                        loader={({src}) => src}
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                        alt="paty_icon"
+                        className="ml-2 inline-block"
+                        loading="lazy"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {activeTab === "kyc" && (
             <>
