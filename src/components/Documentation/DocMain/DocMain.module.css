@@ -1,8 +1,9 @@
 .mainContainer {
-  @apply flex gap-4 md:gap-6 xl:gap-16 px-4 md:pl-0 md:pr-[70px] xl:pr-[90px] macbook:pr-[120px];
+  @apply flex  px-4 md:pl-0 md:pr-[70px] xl:pr-[90px] macbook:pr-[120px];
+  /* @apply flex gap-4 md:gap-6 xl:gap-16 px-4 md:pl-0 md:pr-[70px] xl:pr-[90px] macbook:pr-[120px]; */
 }
 .kycFormArea {
-  @apply grow pb-6 w-full relative;
+  @apply grow pb-6 w-full relative md:ml-16;
 }
 .info_box {
   @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8;
