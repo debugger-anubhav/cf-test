@@ -206,6 +206,7 @@ const KycPending = () => {
             );
             setData(res?.data?.data);
             handleSort(res?.data?.data[0]);
+            handleSortMobile(res?.data?.data[0])
         } catch (error) {
             console.log(error);
         }
@@ -227,22 +228,26 @@ const KycPending = () => {
     const handleSort = (value, index) => {
         setSelectedOption(value?.dealCodeNumber);
         setSelectedOrder(value);
-        console.log(value, "Selected Order")
-        console.log(JSON.parse(value?.fc_paymentData), "Selected Order In JSON")
-        let NewImagearray = JSON.parse(value?.fc_paymentData).map((item) => {
-            return item.product_image?.split(",")?.slice(0, 1)[0]
+        setMobileSelecteData(value);
+        let NewImagearray = JSON.parse(value?.fc_paymentData)?.map((item) => {
+            return item?.product_image?.split(",")?.slice(0, 1)[0]
         })
-        console.log(NewImagearray, "new Image")
-        console.log(JSON.parse(value?.fc_paymentData)[0], "Older");
-        // setSelectedImage(JSON.parse(value?.fc_paymentData)[0]);
+
+
         setSelectedImage(NewImagearray)
         ExtendedKyc(value?.dealCodeNumber);
     };
 
     const handleSortMobile = value => {
+        setMobileSelecteData(value);
         setSelectedOption(value?.dealCodeNumber);
         setSelectedOrder(value);
-        setSelectedImage(JSON.parse(value?.fc_paymentData)[0]);
+
+        let NewImagearray = JSON.parse(value?.fc_paymentData)?.map((item) => {
+            return item?.product_image?.split(",")?.slice(0, 1)[0]
+        })
+
+        setSelectedImage(NewImagearray)
         ExtendedKyc(value?.dealCodeNumber);
         setSortOpen(false);
     };
@@ -301,7 +306,8 @@ const KycPending = () => {
                                     <div className={style.KycDetails}>
                                         <div className={style.KHeading}>
                                             <span>
-                                                <Image
+                                                <img
+                                                    className={style.HeaderIconImage}
                                                     width={30}
                                                     height={30}
                                                     src={
@@ -400,6 +406,7 @@ const KycPending = () => {
                                                                                                     className={style.option_text}>
                                                                                                     {ele?.dealCodeNumber}
                                                                                                 </p>
+                                                                                                {console.log(mobileSelecteData, "Hello")}
                                                                                                 <input
                                                                                                     type="checkbox"
                                                                                                     id={index}
@@ -408,8 +415,8 @@ const KycPending = () => {
                                                                                                     //   ele?.filter_tag,
                                                                                                     // )}
                                                                                                     checked={
-                                                                                                        ele?.dealCodeNumber ===
-                                                                                                        mobileSelecteData?.dealCodeNumber
+
+                                                                                                        mobileSelecteData?.dealCodeNumber === ele?.dealCodeNumber
                                                                                                     }
                                                                                                     className="pr-1 cursor-pointer"
                                                                                                 // onChange={e => handleFilteredItems(e)}
@@ -453,7 +460,7 @@ const KycPending = () => {
                                         <div className={style.ImageSection}>
                                             <div className={style.images_wraper}>
 
-                                                {selectedImage?.slice(0, selectedImage.length > 4 ? 3 : selectedImage.length)?.map((ele, i) => {
+                                                {selectedImage?.slice(0, selectedImage?.length > 4 ? 3 : selectedImage?.length)?.map((ele, i) => {
                                                     return (
                                                         <div key={i.toString()}>
                                                             {ele && (
@@ -583,7 +590,7 @@ const KycPending = () => {
                                             return (
                                                 <div
                                                     key={item.id}
-                                                    onClick={() => router.push("/purchases")}
+                                                    onClick={() => item?.clickable && router.push("/service-requests")}
                                                     className={style.IconBox}>
                                                     <div className={style.IconBoxIcon}>
                                                         <Image width={40} height={40} src={item.icon} />
@@ -757,7 +764,7 @@ const KycPending = () => {
                                                             )
                                                         }
                                                         className={
-                                                            "flex items-center justify-center whitespace-nowrap !text-start"
+                                                            "flex items-center justify-center whitespace-nowrap !text-start "
                                                         }>
                                                         <span>
                                                             <span className={style.RestText}>
@@ -781,13 +788,13 @@ const KycPending = () => {
                                                         : router.push("/purchases")
                                                 }
                                                 className={
-                                                    "flex items-center justify-center whitespace-nowrap !text-start"
+                                                    "flex items-center justify-center whitespace-nowrap !text-start gap-1"
                                                 }>
                                                 <span className={style.LinkText}>
                                                     {extendedStatus?.extendDisplay &&
                                                         selectedOrder.zoho_sub_status === "Delivered"
-                                                        ? "My subscriptions"
-                                                        : "My orders"}
+                                                        ? "My subscriptions " + " "
+                                                        : "My orders " + " "}
                                                 </span>
                                                 <Image width={15} height={15} src={link} />
                                             </div>
@@ -812,7 +819,7 @@ const KycPending = () => {
                                             return (
                                                 <div
                                                     key={item.id}
-                                                    onClick={() => router.push("/service-requests")}
+                                                    onClick={() => item?.clickable && router.push("/service-requests")}
                                                     className={`${item?.clickable
                                                         ? "!cursor-pointer"
                                                         : "!cursor-not-allowed"

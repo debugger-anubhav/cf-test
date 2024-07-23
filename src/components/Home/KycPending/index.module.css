@@ -54,7 +54,7 @@
 }
 
 .RLinkSection {
-  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-[12px] md1:text-[16px] flex items-center;
+  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-[12px] md1:text-[14px] flex items-center;
 }
 
 .RIconsSection {
@@ -165,4 +165,8 @@
 
 .apply_btn {
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
+}
+
+.HeaderIconImage {
+  @apply h-[25px] w-[25px] md1:h-[45px] md1:w-[45px]
 }
