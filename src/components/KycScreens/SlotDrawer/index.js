@@ -140,7 +140,10 @@ const SlotDrawer = ({
           disabled={!selectedDate || currentDate === formatedSelectedDate}
           onClick={() => updateSlot()}
           className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn}
-          ${currentDate === formatedSelectedDate && "!bg-[#FFDF85] !cursor-not-allowed"}`}>
+          ${
+            currentDate === formatedSelectedDate &&
+            "!bg-[#FFDF85] !cursor-not-allowed"
+          }`}>
           Modify
         </button>
       </div>
