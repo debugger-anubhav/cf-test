@@ -39,7 +39,7 @@ export default function KycCommonDrawer({content, changeState, heading}) {
         open={isOpen}
         onClose={toggleDrawer(false)}>
         <div className={styles.drawer_content_wrapper}>
-          <div className={`${styles.heading}`}>
+          <div className={`${styles.heading} items-baseline`}>
             {heading}
             <span
               onClick={event => {

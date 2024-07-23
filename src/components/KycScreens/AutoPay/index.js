@@ -45,8 +45,7 @@ export default function AutoPay() {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          showToastNotification(response.data.message, 1);
-          // handleKycState(selectedOrderId);
+          dispatch(setKycScreenName("congratulation"));
           // redirection
           setLoading(false);
         } else {
