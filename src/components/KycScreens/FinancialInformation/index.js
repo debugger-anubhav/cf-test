@@ -62,6 +62,7 @@ const FinancialInfo = ({handleKycState}) => {
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const stageId = kycSliceData.stageId;
+
   const userId = decrypt(getLocalStorage("_ga"));
   const professionId = kycSliceData.selectedProfessionId;
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
@@ -139,8 +140,13 @@ const FinancialInfo = ({handleKycState}) => {
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
+        // if(pendingDashboardDetail.length>0){
+        //   pendingDashboardDetail?.[0]?.id===3
+        // }
+
         const temp = pendingDashboardDetail?.filter(i => i.id === 6);
         handleKycState(orderId);
+
         if (professionId !== 5) {
           dispatch(setKycScreenName("professionalDetails"));
         } else if (temp.length > 0) {

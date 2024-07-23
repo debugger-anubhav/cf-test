@@ -109,7 +109,7 @@ export default function DashboardComponent() {
     else if (number === 3)
       return (
         <p className={`${styles.status_style} text-D96060`}>
-          Attention needed
+          Retry
           <ForwardArrow color={"#D96060"} size={16} />
         </p>
       );
@@ -337,7 +337,12 @@ export default function DashboardComponent() {
           <div className={styles.kyc_status_box}>
             <p className={styles.sub_heading}>KYC status:</p>
             <p className={`${styles.heading}  md:!text-20 `}>
-              {dashboardDetails?.kycStatus}
+              {dashboardDetails?.kycStatus === "Rejected" ? (
+                "Attention needed"
+              ) : (
+                <>{dashboardDetails?.kycStatus}</>
+              )}
+
               {dashboardDetails?.kycStatus === "Under Review" && (
                 <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg" />
               )}
@@ -399,17 +404,17 @@ export default function DashboardComponent() {
 
           <div className="flex w-full justify-between">
             <div>
-              {dashboardDetails?.isOptionalStages && (
-                <div className={styles.kyc_tab}>
-                  <p
-                    className={
-                      activeTab === "kyc"
-                        ? styles.active_tab_item
-                        : styles.tab_item
-                    }
-                    onClick={() => setactiveTab("kyc")}>
-                    KYC
-                  </p>
+              <div className={styles.kyc_tab}>
+                <p
+                  className={
+                    activeTab === "kyc"
+                      ? styles.active_tab_item
+                      : styles.tab_item
+                  }
+                  onClick={() => setactiveTab("kyc")}>
+                  KYC
+                </p>
+                {dashboardDetails?.isOptionalStages && (
                   <p
                     className={
                       activeTab === "optional"
@@ -419,11 +424,11 @@ export default function DashboardComponent() {
                     onClick={() => setactiveTab("optional")}>
                     Optional KYC
                   </p>
-                </div>
-              )}
+                )}
+              </div>
             </div>
 
-            <div className="w-[240px]">
+            <div className="sm:w-[240px] w-[200px]">
               <div className={styles.progressBarContainer}>
                 <div
                   className={`${styles.progressBar} ${progressNumber === 100 ? "rounded-xl" : "rounded-l-xl"}`}
