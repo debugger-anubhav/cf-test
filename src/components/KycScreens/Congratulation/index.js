@@ -153,9 +153,17 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
             showFirstContent ? firstDrawerContant() : secondDrawerContent()
           }
           heading={
-            showFirstContent
-              ? "Earn 500 CF coins with optional KYC steps"
-              : "We understand!"
+            showFirstContent ? (
+              <div className="flex items-baseline w-full mr-2">
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/cf_coin.svg"
+                  alt="cf-coins"
+                />
+                "Earn 500 CF coins with optional KYC steps"
+              </div>
+            ) : (
+              "We understand!"
+            )
           }
         />
       )}
