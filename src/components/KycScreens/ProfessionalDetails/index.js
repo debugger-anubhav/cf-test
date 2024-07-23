@@ -128,7 +128,6 @@ export default function ProfessionalDetails() {
   const [openModal, setOpenModal] = useState(false);
 
   const handleEmailVerify = () => {
-    setOpenModal(true);
     dispatch(reduxSetModalState(true));
     baseInstance
       .post(endPoints.kycPage.verifyCompanyEmail, {
@@ -137,7 +136,15 @@ export default function ProfessionalDetails() {
         userId,
         orderId,
       })
-      .then(res => setRecievedOtp(res?.data?.data));
+      .then(res => {
+        setRecievedOtp(res?.data?.data);
+        if (res?.data?.data?.status) {
+          setOpenModal(true);
+        } else {
+          showToastNotification(res?.data?.data?.message, 3);
+        }
+        console.log(res?.data?.data?.status, "pppppppppp");
+      });
   };
 
   return (
