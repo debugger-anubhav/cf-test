@@ -150,11 +150,7 @@ export default function ProfessionalDetails() {
               onClick={() => dispatch(setKycScreenName("dashboard"))}
               className={"cursor-pointer"}
             />
-            {professionId === 1
-              ? "Professional details"
-              : professionId === 3 || professionId === 4
-                ? "Nominee’s details"
-                : "Additional information"}
+            Additional information
           </div>
 
           <Formik
@@ -215,7 +211,7 @@ export default function ProfessionalDetails() {
                   {(professionId === 3 || professionId === 4) && (
                     <>
                       <div className={styles.company_detail_wapper}>
-                        <label className={styles.label}>Nominee’s name</label>
+                        <label className={styles.label}>Guardian’s name</label>
                         <Field
                           type="text"
                           id="nomineeName"
@@ -232,7 +228,7 @@ export default function ProfessionalDetails() {
 
                       <div className={styles.company_detail_wapper}>
                         <label className={styles.label}>
-                          Nominee’s relation
+                          Guardian’s relation
                         </label>
                         <div className="flex gap-4 flex-col">
                           {nomineeRelation?.map((item, index) => {
