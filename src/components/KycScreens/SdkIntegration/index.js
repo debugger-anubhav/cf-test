@@ -190,7 +190,7 @@ export default function SdkIntegration({
         </div>
 
         <button
-          className={`${styles.cancle_btn} !w-[80%]`}
+          className={`${styles.cancle_btn} !w-[90%]`}
           onClick={() => {
             handleVerfyAns();
           }}>
