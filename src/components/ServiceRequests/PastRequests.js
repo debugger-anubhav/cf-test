@@ -31,18 +31,21 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
   };
 
   const handleClick = (value) => {
+
     setOrderID(value)
     toggleModal()
   }
 
+
+
   return (
     <div>
       <div className={styles.web}>
-        <ManageSchedule
+        {orderID && <ManageSchedule
           isModalOpen={isModalopen}
           closeModal={toggleModal}
-          orderId={orderID ? orderID : "-"}
-        />
+          orderId={orderID}
+        />}
         <TableContainer component={Paper} className={styles.tableContainer}>
           <p className={styles.past_request_heading}>Your past requests</p>
           <Table className={styles.table}>
@@ -66,6 +69,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                   Created Date
                 </TableCell>
                 <TableCell className={styles.tableHeaderCell}>Status</TableCell>
+                <TableCell className={styles.tableHeaderCell}>Action</TableCell>
               </TableRow>
             </TableHead>
             {loadingSkeleton ? (
@@ -81,7 +85,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                     <TableCell className={styles.tableCell}>
                       {row?.zoho_case_id}
                     </TableCell>
-                    <TableCell onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} className={`${styles.tableCell} capitalize`}>
+                    <TableCell className={`${styles.tableCell} capitalize`}>
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
@@ -101,6 +105,13 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                     <TableCell className="!text-71717A lg:!text-16 !tracking-desc !lg:tracking-0.3 !font-Poppins">
                       {row?.sub_status}
                     </TableCell>
+                    <TableCell className="!text-71717A lg:!text-16 !tracking-desc !lg:tracking-0.3 !font-Poppins">
+                      {row?.request_type === "request_pickup" && <button
+                        className={styles.drawer_button}
+                        onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} >
+                        Change delivery slot
+                      </button>}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -108,7 +119,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
           </Table>
         </TableContainer>
       </div>
-    </div>
+    </div >
   );
 }
 
