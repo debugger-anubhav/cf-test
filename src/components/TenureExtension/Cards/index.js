@@ -285,8 +285,8 @@ export const MonthlyCard = ({
                     item.includes("banking")
                       ? "emandate"
                       : item.includes("card")
-                      ? "card"
-                      : "upi",
+                        ? "card"
+                        : "upi",
                   );
                 }}>
                 <input
@@ -299,8 +299,8 @@ export const MonthlyCard = ({
                       item.includes("banking")
                         ? "emandate"
                         : item.includes("card")
-                        ? "card"
-                        : "upi",
+                          ? "card"
+                          : "upi",
                     );
                   }}
                 />

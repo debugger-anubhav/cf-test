@@ -107,8 +107,8 @@ const Document = () => {
                         {item?.status === 0
                           ? "Pending"
                           : item?.status === 1
-                          ? "Approved"
-                          : "Rejected"}
+                            ? "Approved"
+                            : "Rejected"}
                       </p>
                     </div>
                   </div>
