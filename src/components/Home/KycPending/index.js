@@ -567,7 +567,7 @@ const KycPending = () => {
                             : router.push("/purchases")
                         }
                         className={
-                          "flex items-center justify-center whitespace-nowrap"
+                          "flex items-center justify-center whitespace-nowrap gap-1"
                         }>
                         <span className={style.LinkText}>
                           {extendedStatus?.extendDisplay
