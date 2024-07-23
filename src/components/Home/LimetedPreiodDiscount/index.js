@@ -72,7 +72,7 @@ const LimitedPreiodDiscount = () => {
       slider.removeEventListener("mouseleave", stopDragging);
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
-  }, []);
+  }, [getLimitedPeriodData]);
 
   return getLimitedPeriodData && getLimitedPeriodData.length > 0 ? (
     <div className={styles.main_container}>

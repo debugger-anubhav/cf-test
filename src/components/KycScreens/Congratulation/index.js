@@ -1,15 +1,72 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "../Dashboard/styles.module.css";
 import {CheckCircleIcon, ForwardArrowWithLine} from "../../../assets/icon";
 import CongoPopup from "@/components/Documentation/CongoPopup/CongoPopup";
 import {useDispatch} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
+import KycCommonDrawer from "../KycCommonDrawer";
+import Image from "next/image";
 
 export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
   const dispatch = useDispatch();
 
+  const [openDrawer, setOpenDrawer] = useState(true);
+  const [showFirstContent, setShowFirstContent] = useState(true);
+
   const handleButtonClick = () => {
     dispatch(setKycScreenName("dashboard"));
+  };
+
+  const firstDrawerContant = () => {
+    return (
+      <div>
+        <div className="font-Poppins my-8 md:text-16 text-14 leading-6 tracking-0.3">
+          Only 3 steps to claim your bonus now.
+          <Image
+            src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+            alt="paty_icon"
+            className=" inline-block"
+            loading="lazy"
+            width={16}
+            height={16}
+          />
+        </div>
+        <div className="flex gap-6 md:w-[85%] w-full flex-col">
+          <button
+            className={styles.blank_btn}
+            onClick={() => setOpenDrawer(false)}>
+            Not now
+          </button>
+          <button
+            className={`${styles.schedule_delivery_btn} bg-btn-primary cursor-pointer !w-full`}
+            onClick={() => setShowFirstContent(false)}>
+            Get my 500 Coins
+          </button>
+        </div>
+      </div>
+    );
+  };
+
+  const secondDrawerContent = () => {
+    return (
+      <div>
+        <div className=" md:w-[85%] w-full flex flex-col">
+          <div className="font-Poppins my-8 md:text-16 text-14 leading-6 tracking-0.3">
+            Only 3 steps to claim your bonus now.
+            <span
+              className="text-5774AC underline pl-1 cursor-pointer"
+              onClick={() => dispatch(setKycScreenName("dashboard"))}>
+              your KYC review page
+            </span>
+          </div>
+          <button
+            className={`${styles.schedule_delivery_btn} bg-btn-primary cursor-pointer !w-full`}
+            onClick={() => setOpenDrawer(false)}>
+            Okay, understood
+          </button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -17,7 +74,9 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
       <div className={`${styles.firstSection}`}>
         <CongoPopup width={"200px"} height={"200px"} />
       </div>
-      <div>Congratulations! You have submitted your KYC documents.</div>
+      <div className="font-Poppins font-medium text-45454A md:text-24 text-20 md:leading-9 leading-6 md:my-12 my-8">
+        Congratulations! You have submitted your KYC documents.
+      </div>
       <div className={styles.kyc_status_box}>
         <p className={styles.sub_heading}>KYC status:</p>
         <p className={`${styles.heading}  md:!text-20 `}>
@@ -86,6 +145,28 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
           </button>
         </div>
       </div>
+
+      {openDrawer && (
+        <KycCommonDrawer
+          changeState={setOpenDrawer}
+          content={
+            showFirstContent ? firstDrawerContant() : secondDrawerContent()
+          }
+          heading={
+            showFirstContent ? (
+              <div className="flex items-baseline w-full mr-2">
+                <img
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/cf_coin.svg"
+                  alt="cf-coins"
+                />
+                "Earn 500 CF coins with optional KYC steps"
+              </div>
+            ) : (
+              "We understand!"
+            )
+          }
+        />
+      )}
     </div>
   );
 }

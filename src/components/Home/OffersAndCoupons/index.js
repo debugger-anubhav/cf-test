@@ -78,7 +78,7 @@ const OffersAndCoupons = ({page}) => {
       slider.removeEventListener("mouseleave", stopDragging);
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
-  }, []);
+  }, [homePageData?.offerCoupons]);
 
   return homePageData?.offerCoupons &&
     homePageData?.offerCoupons?.length > 0 ? (

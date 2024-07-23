@@ -1,5 +1,5 @@
 import styles from "./style.module.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef} from "react";
 import {
   categoryIconsUrl,
   getLocalStorage,
@@ -7,8 +7,8 @@ import {
   sortByText,
 } from "@/constants/constant";
 import FilterCard from "@/components/Common/FilterCard/FilterCard";
-import { useDispatch, useSelector } from "react-redux";
-import { DownPopUpArrow, ForwardArrow } from "@/assets/icon";
+import {useDispatch, useSelector} from "react-redux";
+import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import FilterSortDrawer from "@/components/Common/categoryPopover/categorySideBar";
 import {
   addAllProduct,
@@ -20,8 +20,8 @@ import {
   addSortKey,
   isFilterApplied,
 } from "@/store/Slices/categorySlice";
-import { endPoints } from "@/network/endPoints";
-import { useQuery } from "@/hooks/useQuery";
+import {endPoints} from "@/network/endPoints";
+import {useQuery} from "@/hooks/useQuery";
 import {
   addCategoryId,
   addProductName,
@@ -29,12 +29,12 @@ import {
   selectedCityId,
   selectedCityName,
 } from "@/store/Slices";
-import { useRouter, useParams, useSearchParams, redirect } from "next/navigation";
+import {useRouter, useParams, useSearchParams, redirect} from "next/navigation";
 import SubHeaderSkeleton from "./SubHeaderSkeleton";
 import SingleProduct from "../../SingleProduct/SingleProduct";
-import { baseInstance } from "@/network/axios";
+import {baseInstance} from "@/network/axios";
 
-const SubHeader = ({ params }) => {
+const SubHeader = ({params}) => {
   const dropDownRefFilter = useRef(null);
   const dropDownRefSort = useRef(null);
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const SubHeader = ({ params }) => {
   const filterFromUrl = searchParams.getAll("filter");
   const [pageNo, setPageNo] = useState(1);
   const [filterListed, setFilterListed] = useState(false);
-  const { allAndSubCategory: getAllAndSubCategoryData } = useSelector(
+  const {allAndSubCategory: getAllAndSubCategoryData} = useSelector(
     state => state.homePagedata,
   );
   const homePageReduxData = useSelector(state => state.homePagedata);
@@ -184,7 +184,8 @@ const SubHeader = ({ params }) => {
     }
 
     router.push(
-      `/${homePageReduxData?.cityName.replace(/\//g, "-")?.toLowerCase()}/${item?.seourl
+      `/${homePageReduxData?.cityName.replace(/\//g, "-")?.toLowerCase()}/${
+        item?.seourl
       }`,
     );
     dispatch(addSubCategoryId(item?.id));
@@ -245,12 +246,13 @@ const SubHeader = ({ params }) => {
       });
   }, []);
 
-  const { refetch: getFilterList } = useQuery(
+  const {refetch: getFilterList} = useQuery(
     "filter-list",
     endPoints.categoryFilterOption,
-    `?parentCategoryId=${categoryId}${getLocalStorage("subCategory") === "All"
-      ? ""
-      : `&subCategoryId=${subCategoryId}`
+    `?parentCategoryId=${categoryId}${
+      getLocalStorage("subCategory") === "All"
+        ? ""
+        : `&subCategoryId=${subCategoryId}`
     }`,
   );
 
@@ -539,7 +541,7 @@ const SubHeader = ({ params }) => {
                 <div
                   className={`${styles.filter} relative`}
 
-                // onClick={() => setFilterOpen(!fi)}
+                  // onClick={() => setFilterOpen(!fi)}
                 >
                   <div
                     className={styles.filterbox}
@@ -622,7 +624,7 @@ const SubHeader = ({ params }) => {
               </p>
               <div
                 className={`${styles.filter} relative `}
-              // onClick={() => setFilterOpen(!fi)}
+                // onClick={() => setFilterOpen(!fi)}
               >
                 <div
                   className={styles.filterbox}
@@ -640,8 +642,9 @@ const SubHeader = ({ params }) => {
                     <DownPopUpArrow
                       size={20}
                       color={"#597492"}
-                      className={`!text-[#597492] ${sortOpen ? styles.arrow_up : styles.arrow_down
-                        }`}
+                      className={`!text-[#597492] ${
+                        sortOpen ? styles.arrow_up : styles.arrow_down
+                      }`}
                     />
                   </div>
                 </div>
@@ -718,30 +721,30 @@ const SubHeader = ({ params }) => {
                   <p className={styles.clear_All}>Clear all111111111111</p>
                 </div> */}
                 {filterListed &&
-                  categoryPageReduxData?.filteredItems.length !== 0
+                categoryPageReduxData?.filteredItems.length !== 0
                   ? categoryPageReduxData?.filteredItems?.map((item, index) => {
-                    const words = item.split("_");
+                      const words = item.split("_");
 
-                    const capitalizedWords = words.map(word => {
-                      if (word.length === 0) return word; // Handle empty words
-                      return word.charAt(0).toUpperCase() + word.slice(1);
-                    });
+                      const capitalizedWords = words.map(word => {
+                        if (word.length === 0) return word; // Handle empty words
+                        return word.charAt(0).toUpperCase() + word.slice(1);
+                      });
 
-                    item = capitalizedWords.join(" ");
+                      item = capitalizedWords.join(" ");
 
-                    return (
-                      <>
-                        <div
-                          className={styles.filter_card}
-                          key={index.toString()}>
-                          <FilterCard
-                            text={item}
-                            onRemove={() => handleFilterRemove(index)}
-                          />
-                        </div>
-                      </>
-                    );
-                  })
+                      return (
+                        <>
+                          <div
+                            className={styles.filter_card}
+                            key={index.toString()}>
+                            <FilterCard
+                              text={item}
+                              onRemove={() => handleFilterRemove(index)}
+                            />
+                          </div>
+                        </>
+                      );
+                    })
                   : null}
                 <div
                   className={styles.single_filter}

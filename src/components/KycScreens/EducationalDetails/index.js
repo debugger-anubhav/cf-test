@@ -18,6 +18,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
+import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
 export default function EducationalDetails() {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function EducationalDetails() {
     "image/png",
     "application/pdf",
   ];
+  const [loader, setLoader] = useState(false);
 
   const [formData, setFormData] = useState({
     collegeName: "",
@@ -89,7 +91,7 @@ export default function EducationalDetails() {
     if (error.idProof !== "") return;
 
     const allData = new FormData();
-
+    setLoader(true);
     allData.append(
       "idProof",
       JSON.stringify({
@@ -119,9 +121,11 @@ export default function EducationalDetails() {
           if (temp.length > 0) {
             dispatch(setKycScreenName("autoPay"));
           } else dispatch(setKycScreenName("dashboard"));
+          setLoader(false);
         })
         .catch(err => {
           console.log(err?.message || "some error");
+          setLoader(false);
         });
     }
   };
@@ -306,6 +310,7 @@ export default function EducationalDetails() {
         proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+      {loader && <LoaderComponent loading={loader} />}
     </div>
   );
 }

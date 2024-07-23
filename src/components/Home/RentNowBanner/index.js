@@ -66,7 +66,7 @@ const RentNowBanner = ({params}) => {
       slider.removeEventListener("mouseleave", stopDragging);
       slider.removeEventListener("mousemove", toggleIsdragging);
     };
-  }, []);
+  }, [rentNowBanner]);
 
   return rentNowBanner && rentNowBanner.length > 0 ? (
     <div className={styles.rentNow_Banner_wrapper}>
