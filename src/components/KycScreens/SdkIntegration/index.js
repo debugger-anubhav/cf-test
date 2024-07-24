@@ -74,11 +74,13 @@ export default function SdkIntegration({
       .then(res => {
         if (res?.data?.data?.status === false) {
           setQustionDrawer(false);
+          setOpenPanSdk(false);
         }
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
           window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           dispatch(setStageId(2));
+          setOpenPanSdk(false);
         }
         setSaveHVData(res?.data?.data);
       })
@@ -127,6 +129,9 @@ export default function SdkIntegration({
   useEffect(() => {
     if (saveHVData?.type === "questions") {
       setQustionDrawer(true);
+    }
+    if (saveHVData?.data?.userCancelled) {
+      setOpenPanSdk(false);
     }
 
     if (saveHVData?.data?.cibilScore) {
