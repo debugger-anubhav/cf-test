@@ -14,7 +14,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import VerfiEmail from "./VerfiEmail";
 import GstSdk from "../GstSdk";
 
-export default function ProfessionalDetails() {
+export default function ProfessionalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
 
   const kycSliceData = useSelector(state => state.kycPage);
@@ -91,18 +91,30 @@ export default function ProfessionalDetails() {
   };
 
   const saveProfessionalDetails = payload => {
-    const temp = pendingDashboardDetail?.filter(i => i.id === 6);
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
-        if (professionId === 4) {
-          dispatch(setKycScreenName("educationalDetails"));
-        } else if (temp.length > 0) {
-          dispatch(setKycScreenName("autoPay"));
-        } else {
-          dispatch(setKycScreenName("dashboard"));
-        }
-        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        getDashboardDetailsApi();
+        setTimeout(() => {
+          const pendingStage = pendingDashboardDetail?.filter(
+            i => i.stage_status === 0 || i.stage_status === 1,
+          );
+          if (pendingStage.length > 0) {
+            const ID = pendingStage?.[0]?.id;
+            if (ID === 2) {
+              dispatch(setKycScreenName("financialInfo"));
+            }
+            if (ID === 6) {
+              dispatch(setKycScreenName("autoPay"));
+            }
+            if (ID === 7) {
+              dispatch(setKycScreenName("educationalDetails"));
+            }
+          } else {
+            dispatch(setKycScreenName("congratulation"));
+          }
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        }, 1500);
       })
       .catch(err => console.log(err));
   };

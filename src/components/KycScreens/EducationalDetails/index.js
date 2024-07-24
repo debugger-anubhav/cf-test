@@ -20,7 +20,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
-export default function EducationalDetails() {
+export default function EducationalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
@@ -91,7 +91,6 @@ export default function EducationalDetails() {
     if (error.idProof !== "") return;
 
     const allData = new FormData();
-    setLoader(true);
     allData.append(
       "idProof",
       JSON.stringify({
@@ -114,13 +113,32 @@ export default function EducationalDetails() {
     allData.append("stageId", 7);
 
     if (Object.values(formErrors).filter(Boolean).length === 0) {
+      setLoader(true);
+
       baseInstance
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
-          const temp = pendingDashboardDetail?.filter(i => i.id === 6);
-          if (temp.length > 0) {
-            dispatch(setKycScreenName("autoPay"));
-          } else dispatch(setKycScreenName("dashboard"));
+          getDashboardDetailsApi();
+
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          }, 100);
           setLoader(false);
         })
         .catch(err => {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "../Dashboard/styles.module.css";
 import {CheckCircleIcon, ForwardArrowWithLine} from "../../../assets/icon";
 import CongoPopup from "@/components/Documentation/CongoPopup/CongoPopup";
@@ -11,11 +11,17 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
   const dispatch = useDispatch();
 
   const [openDrawer, setOpenDrawer] = useState(true);
-  const [showFirstContent, setShowFirstContent] = useState(true);
+  const [showFirstContent, setShowFirstContent] = useState(false);
 
   const handleButtonClick = () => {
     dispatch(setKycScreenName("dashboard"));
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowFirstContent(true);
+    }, 2000);
+  }, []);
 
   const firstDrawerContant = () => {
     return (

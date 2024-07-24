@@ -11,7 +11,7 @@ import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
-export default function AutoPay() {
+export default function AutoPay({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
 
   const [modeOfPayment, setModeOfPayment] = useState("upi");
@@ -19,6 +19,7 @@ export default function AutoPay() {
   const [loading, setLoading] = useState(false);
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
+  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handleOptionChange = index => {
     setSelectedOption(index);
@@ -45,8 +46,28 @@ export default function AutoPay() {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          dispatch(setKycScreenName("congratulation"));
-          // redirection
+          getDashboardDetailsApi();
+
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 7) {
+                dispatch(setKycScreenName("educationalDetails"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          }, 1500);
+
           setLoading(false);
         } else {
           setLoading(false);
@@ -144,8 +165,8 @@ export default function AutoPay() {
                   item.includes("banking")
                     ? "emandate"
                     : item.includes("card")
-                    ? "card"
-                    : "upi",
+                      ? "card"
+                      : "upi",
                 );
               }}>
               <input
@@ -158,8 +179,8 @@ export default function AutoPay() {
                     item.includes("banking")
                       ? "emandate"
                       : item.includes("card")
-                      ? "card"
-                      : "upi",
+                        ? "card"
+                        : "upi",
                   );
                 }}
               />

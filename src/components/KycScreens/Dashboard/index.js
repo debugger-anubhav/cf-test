@@ -30,6 +30,11 @@ import FinancialQueDrawer from "../FinancialQuestionsDrawer/index";
 import OptionalStages from "../OptionalStages/";
 import {setPendingDashboardDetail} from "../../../store/Slices";
 import CongratulationKyc from "../Congratulation";
+import Image from "next/image";
+import FinancialInfo from "../FinancialInformation";
+import EducationalDetails from "../EducationalDetails";
+import ProfessionalDetails from "../ProfessionalDetails";
+import AutoPay from "../AutoPay";
 // import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
@@ -64,24 +69,29 @@ export default function DashboardComponent() {
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
+  const [progressNumber, setProgressNumber] = useState(
+    kycSliceData?.progressPercent,
+  );
 
-  const getDashboardDetailsApi = () => {
-    baseInstance
-      .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
-      .then(res => {
-        setDashboardDetails(res?.data?.data);
-        dispatch(
-          setSelectedProfessionId(
-            res?.data?.data?.professionDetail?.profession_id,
-          ),
-        );
-        setOrderDate(res?.data?.data?.orderDate);
-        setLoadingSkeleton(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        setLoadingSkeleton(false);
-      });
+  const getDashboardDetailsApi = async () => {
+    try {
+      const res = await baseInstance.get(
+        endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
+      );
+
+      setDashboardDetails(res?.data?.data);
+      dispatch(
+        setSelectedProfessionId(
+          res?.data?.data?.professionDetail?.profession_id,
+        ),
+      );
+      setOrderDate(res?.data?.data?.orderDate);
+      setLoadingSkeleton(false);
+    } catch (err) {
+      console.log(err?.message || "some error");
+    } finally {
+      setLoadingSkeleton(false);
+    }
   };
 
   const formatDate = dateString => {
@@ -106,7 +116,7 @@ export default function DashboardComponent() {
     else if (number === 3)
       return (
         <p className={`${styles.status_style} text-D96060`}>
-          Attention needed
+          Retry
           <ForwardArrow color={"#D96060"} size={16} />
         </p>
       );
@@ -172,9 +182,9 @@ export default function DashboardComponent() {
           dispatch(setKycScreenName("currentAddress"));
         }
         setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
-        setHoldOnLoader(false);
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
         dispatch(setCurrentAddOpt(res?.data?.data?.requiredDocs));
+        setHoldOnLoader(false);
       })
       .catch(err => {
         console.log(err);
@@ -185,14 +195,12 @@ export default function DashboardComponent() {
   const handleKycStagesClick = item => {
     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
     dispatch(setStageId(item.id));
-
     if (item.id === 1) {
       setOpenPanSdk(true);
     }
     if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
-        setHoldOnLoader(true);
-        getDocsDetailsApi(2);
+        dispatch(setKycScreenName("financialInfo"));
       }
     }
     if (item.id === 3) {
@@ -204,8 +212,7 @@ export default function DashboardComponent() {
       dispatch(setKycScreenName("autoPay"));
     }
     if (item.id === 7) {
-      setHoldOnLoader(true);
-      getDocsDetailsApi(7);
+      dispatch(setKycScreenName("educationalDetails"));
     }
   };
 
@@ -251,20 +258,51 @@ export default function DashboardComponent() {
         ? Math.round((progress?.length / totalProgress) * 100)
         : 0;
     dispatch(setProgressPercent(progressPercentage));
+    setProgressNumber(progressPercentage);
   }, [dashboardDetails]);
 
   useEffect(() => {
     setCurrentScreen(kycSliceData.kycScreenName);
   }, [kycSliceData.kycScreenName]);
 
+  useEffect(() => {
+    if (currentScreen === "financialInfo") {
+      setHoldOnLoader(true);
+      getDocsDetailsApi(2);
+    }
+    if (currentScreen === "educationalDetails") {
+      setHoldOnLoader(true);
+      getDocsDetailsApi(7);
+    }
+  }, [currentScreen]);
+
   return (
     <div>
-      {currentScreen === "congratulation" ? (
+      {currentScreen === "congratulation" && (
         <CongratulationKyc
           dashboardDetails={dashboardDetails}
           handleDelivery={handleDelivery}
         />
-      ) : (
+      )}
+
+      {currentScreen === "financialInfo" && (
+        <div className="mt-8">
+          <FinancialInfo dashboardDetails={getDashboardDetailsApi} />
+        </div>
+      )}
+
+      {currentScreen === "educationalDetails" && (
+        <EducationalDetails getDashboardDetailsApi={getDashboardDetailsApi} />
+      )}
+      {currentScreen === "autoPay" && (
+        <AutoPay getDashboardDetailsApi={getDashboardDetailsApi} />
+      )}
+
+      {currentScreen === "professionalDetails" && (
+        <ProfessionalDetails getDashboardDetailsApi={getDashboardDetailsApi} />
+      )}
+
+      {currentScreen === "dashboard" && (
         <div>
           <div className={`${styles.heading} justify-between`}>
             <div className="flex items-center gap-2">
@@ -333,7 +371,12 @@ export default function DashboardComponent() {
           <div className={styles.kyc_status_box}>
             <p className={styles.sub_heading}>KYC status:</p>
             <p className={`${styles.heading}  md:!text-20 `}>
-              {dashboardDetails?.kycStatus}
+              {dashboardDetails?.kycStatus === "Rejected" ? (
+                "Attention needed"
+              ) : (
+                <>{dashboardDetails?.kycStatus}</>
+              )}
+
               {dashboardDetails?.kycStatus === "Under Review" && (
                 <img src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg" />
               )}
@@ -349,12 +392,12 @@ export default function DashboardComponent() {
 
             <button
               className={`${styles.schedule_delivery_btn}
-        ${
-          dashboardDetails?.kycStatus === "Under Review"
-            ? "bg-FFDF85 cursor-not-allowed"
-            : "bg-btn-primary cursor-pointer"
-        }
-        `}
+      ${
+        dashboardDetails?.kycStatus === "Under Review"
+          ? "bg-FFDF85 cursor-not-allowed"
+          : "bg-btn-primary cursor-pointer"
+      }
+      `}
               disabled={dashboardDetails?.kycStatus === "Under Review"}
               onClick={() => handleDelivery()}>
               {dashboardDetails?.kycStatus === "Under Review" && (
@@ -393,26 +436,55 @@ export default function DashboardComponent() {
             </button>
           </div>
 
-          {dashboardDetails?.isOptionalStages && (
-            <div className={styles.kyc_tab}>
-              <p
-                className={
-                  activeTab === "kyc" ? styles.active_tab_item : styles.tab_item
-                }
-                onClick={() => setactiveTab("kyc")}>
-                KYC
-              </p>
-              <p
-                className={
-                  activeTab === "optional"
-                    ? styles.active_tab_item
-                    : styles.tab_item
-                }
-                onClick={() => setactiveTab("optional")}>
-                Optional KYC
-              </p>
+          <div className="flex w-full justify-between">
+            <div>
+              <div className={styles.kyc_tab}>
+                <p
+                  className={
+                    activeTab === "kyc"
+                      ? styles.active_tab_item
+                      : styles.tab_item
+                  }
+                  onClick={() => setactiveTab("kyc")}>
+                  KYC
+                </p>
+                {dashboardDetails?.isOptionalStages && (
+                  <p
+                    className={
+                      activeTab === "optional"
+                        ? styles.active_tab_item
+                        : styles.tab_item
+                    }
+                    onClick={() => setactiveTab("optional")}>
+                    Optional KYC
+                  </p>
+                )}
+              </div>
             </div>
-          )}
+
+            <div className="sm:w-[240px] w-[200px]">
+              <div className={styles.progressBarContainer}>
+                <div
+                  className={`${styles.progressBar} ${progressNumber === 100 ? "rounded-xl" : "rounded-l-xl"}`}
+                  style={{width: `${progressNumber}%`}}>
+                  <div className={styles.new_progress_bar_text}>
+                    {progressNumber}% KYC done
+                    <span>
+                      <Image
+                        loader={({src}) => src}
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                        alt="paty_icon"
+                        className="ml-2 inline-block"
+                        loading="lazy"
+                        width={18}
+                        height={18}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           {activeTab === "kyc" && (
             <>
@@ -448,8 +520,8 @@ export default function DashboardComponent() {
                               ) {
                                 setOpenPanSdk(true);
                               } else if (
-                                item.stage_status !== 2 &&
-                                item.stage_status !== 1
+                                item.stage_status === 0 ||
+                                item.stage_status === 3
                               ) {
                                 handleKycStagesClick(item);
                               }
@@ -483,20 +555,23 @@ export default function DashboardComponent() {
                                 ?.stage_status !== 2
                             ) {
                               setOpenPanSdk(true);
-                            } else if (item.stage_status !== 2) {
+                            } else if (
+                              item.stage_status !== 2 ||
+                              item.stage_status === 3
+                            ) {
                               handleKycStagesClick(item);
                             }
                           }}
                           className={`${styles.mobile_detail_box} ${
                             index === 4 ? "border-none" : "border-b"
                           }
-                    ${
-                      item.stage_status === 2 || item.stage_status === 1
-                        ? "!cursor-default"
-                        : "cursor-pointer"
-                    }
-                    
-                    `}>
+                  ${
+                    item.stage_status === 2 || item.stage_status === 1
+                      ? "!cursor-default"
+                      : "cursor-pointer"
+                  }
+                  
+                  `}>
                           <div className={styles.detail_heading}>
                             {item?.stage_name}
                           </div>
