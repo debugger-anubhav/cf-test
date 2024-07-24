@@ -472,13 +472,13 @@ const KycPending = () => {
                                                                         }
                                                                         alt={ele?.product_name}
                                                                         className={`${selectedImage?.length === 1
-                                                                                ? "w-full h-full"
-                                                                                : selectedImage?.length === 2
-                                                                                    ? `mobile:!w-[47px] mobile:!h-[47px] md1:w-[48px] md1:h-[48px] absolute ${i === 0
-                                                                                        ? "top-0 left-0"
-                                                                                        : "bottom-0 right-0"
-                                                                                    }`
-                                                                                    : " mobile:!w-[25px] mobile:!h-[25px]  md1:!w-[37px] md1:!h-[37px]"
+                                                                            ? "w-full h-full"
+                                                                            : selectedImage?.length === 2
+                                                                                ? `mobile:!w-[47px] mobile:!h-[47px] md1:w-[48px] md1:h-[48px] absolute ${i === 0
+                                                                                    ? "top-0 left-0"
+                                                                                    : "bottom-0 right-0"
+                                                                                }`
+                                                                                : " mobile:!w-[25px] mobile:!h-[25px]  md1:!w-[37px] md1:!h-[37px]"
                                                                             } rounded-lg object-cover`}
                                                                         loading="lazy"
                                                                     />
@@ -709,13 +709,13 @@ const KycPending = () => {
                                                                         }
                                                                         alt={ele?.product_name}
                                                                         className={`${selectedImage?.length === 1
-                                                                                ? "w-full h-full"
-                                                                                : selectedImage?.length === 2
-                                                                                    ? `w-[48px] h-[48px] absolute ${i === 0
-                                                                                        ? "top-0 left-0"
-                                                                                        : "bottom-0 right-0"
-                                                                                    }`
-                                                                                    : "w-[37px] h-[37px]"
+                                                                            ? "w-full h-full"
+                                                                            : selectedImage?.length === 2
+                                                                                ? `w-[48px] h-[48px] absolute ${i === 0
+                                                                                    ? "top-0 left-0"
+                                                                                    : "bottom-0 right-0"
+                                                                                }`
+                                                                                : "w-[37px] h-[37px]"
                                                                             } rounded-lg object-cover`}
                                                                         loading="lazy"
                                                                     />
@@ -834,8 +834,8 @@ const KycPending = () => {
                                                         item?.clickable && router.push("/service-requests")
                                                     }
                                                     className={`${item?.clickable
-                                                            ? "!cursor-pointer"
-                                                            : "!cursor-not-allowed"
+                                                        ? "!cursor-pointer"
+                                                        : "!cursor-not-allowed"
                                                         } ${style.IconBox}`}>
                                                     <div className={style.IconBoxIcon}>
                                                         <Image
