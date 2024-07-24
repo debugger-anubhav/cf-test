@@ -10,7 +10,7 @@ import { format, parse } from "date-fns";
 import { decrypt } from "@/hooks/cryptoUtils";
 import { getLocalStorage } from "@/constants/constant";
 
-const ManageSchedule = ({ isModalOpen, closeModal, orderId }) => {
+const ManageSchedule = ({ isModalOpen, closeModal, orderId, page }) => {
 
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
@@ -61,6 +61,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId }) => {
       slot: `${selectedDate} 09:00:00`,
       orderId,
       zohoCaseId: slotData?.zohoCaseId,
+      updateSRSlot: page == "PageSR" ? true : false
     };
     try {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);

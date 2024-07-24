@@ -92,6 +92,7 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                 <div className={styles.tableCell}>
                   {
                     orderID && <ManageSchedule
+                      page="PageSR"
                       isModalOpen={isModalopen}
                       closeModal={toggleModal}
                       orderId={orderID}

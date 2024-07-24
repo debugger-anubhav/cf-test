@@ -42,6 +42,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
     <div>
       <div className={styles.web}>
         {orderID && <ManageSchedule
+          page="PageSR"
           isModalOpen={isModalopen}
           closeModal={toggleModal}
           orderId={orderID}
