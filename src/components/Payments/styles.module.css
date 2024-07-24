@@ -82,5 +82,5 @@
   @apply w-full flex-col px-3 cursor-pointer flex bg-F7F7F8;
 }
 .drawer_button {
-  @apply flex justify-center items-center cursor-pointer w-[188px] xl:w-[212px] h-12 xl:h-10 rounded-lg border-71717A border-2 text-12 xl:text-14 text-71717A font-medium leading-4;
+  @apply flex justify-center items-center cursor-pointer w-[158px] xl:w-[212px] h-8 xl:h-10 rounded-lg border-71717A border-2 text-12 xl:text-14 text-71717A font-medium leading-4;
 }

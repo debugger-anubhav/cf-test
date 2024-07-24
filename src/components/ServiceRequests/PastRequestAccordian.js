@@ -21,6 +21,7 @@ const PastRequestAccordian = ({ pastRequestData }) => {
     setIndexOfActiveAcc(indexOfActiveAcc === index ? null : index);
   };
   const toggleModal = () => {
+
     setIsModalopen(!isModalopen);
     dispatch(reduxSetModalState(!modalStateFromRedux));
   };
@@ -32,15 +33,10 @@ const PastRequestAccordian = ({ pastRequestData }) => {
 
   return (
     <div>
+
       {rows?.map((row, index) => {
         const isActive = index === indexOfActiveAcc;
-        {
-          orderID && <ManageSchedule
-            isModalOpen={isModalopen}
-            closeModal={toggleModal}
-            orderId={orderID}
-          />
-        }
+
         return (
           <div
             key={index.toString()}
@@ -94,6 +90,13 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                   {row?.sub_status}
                 </div>
                 <div className={styles.tableCell}>
+                  {
+                    orderID && <ManageSchedule
+                      isModalOpen={isModalopen}
+                      closeModal={toggleModal}
+                      orderId={orderID}
+                    />
+                  }
                   {row?.request_type === "request_pickup" && <button
                     className={styles.drawer_button}
                     onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} >

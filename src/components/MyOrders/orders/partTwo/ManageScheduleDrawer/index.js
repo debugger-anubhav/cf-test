@@ -71,7 +71,6 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId }) => {
   };
 
   useEffect(() => {
-    console.log(orderId,'API CALL')
     getDeliverySlots();
   }, []);
 
