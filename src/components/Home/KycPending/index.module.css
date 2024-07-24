@@ -4,7 +4,7 @@
 }
 
 .SubMainContainer {
-  @apply w-full px-[20px] py-[20px] md1:px-12 md1:py-12 border border-[#DDDDDF] rounded;
+  @apply w-full px-5 py-5 md1:px-12 md1:py-12 border border-[#DDDDDF] rounded;
 }
 
 .Heading {
@@ -16,19 +16,18 @@
 }
 
 .KycSection {
-  @apply w-full border rounded-[8px] md1:w-full ms:mb-4 md1:mb-[0];
+  @apply w-full border rounded-lg md1:w-full ms:mb-4 md1:mb-[0];
 }
 
 .KycDetails {
-  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b border-[#DDDDDF] py-3 px-[8px];
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b border-[#DDDDDF] py-3 px-[8px];
 }
 
 .KHeading {
   @apply text-16 flex gap-[5px] items-center;
 }
 
-.KNumber {
-}
+.KNumber {}
 
 .orderDetails {
   @apply flex items-start gap-4 text-14 leading-[21px] font-normal text-[#5774AC] py-4 px-3;
@@ -43,11 +42,11 @@
 }
 
 .RaiseServicerequestSection {
-  @apply w-[50%] border rounded-[8px] mobile:w-full;
+  @apply w-[50%] border rounded-lg mobile:w-full;
 }
 
 .RHeadingSection {
-  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b border-[#DDDDDF] py-3 px-[8px];
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b border-[#DDDDDF] py-3 px-[8px];
 }
 
 .RHeading {
@@ -66,8 +65,7 @@
   @apply cursor-pointer flex flex-col gap-2 items-center justify-center pb-5;
 }
 
-.IconBoxIcon {
-}
+.IconBoxIcon {}
 
 .Icon {
   @apply ml-0.5 h-4 w-4 text-[#597492];
