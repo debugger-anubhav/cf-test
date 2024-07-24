@@ -27,11 +27,7 @@ import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
 import WorkProfession from "../../KycScreens/WorkProfession";
 import DashboardComponent from "@/components/KycScreens/Dashboard/index";
-import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
-import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
-import EducationalDetails from "@/components/KycScreens/EducationalDetails";
-import AutoPay from "@/components/KycScreens/AutoPay";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
@@ -354,14 +350,10 @@ const DocMain = () => {
             </>
           )}
 
-          {currentScreen === "dashboard" && <DashboardComponent />}
           {currentScreen === "currentAddress" && (
             <CurrentAddressProof cibilDocsData={cibilDocsData} />
           )}
           {currentScreen === "socialMedia" && <SocialMediaLogin />}
-          {currentScreen === "professionalDetails" && <ProfessionalDetails />}
-          {currentScreen === "educationalDetails" && <EducationalDetails />}
-          {currentScreen === "autoPay" && <AutoPay />}
 
           {currentScreen === "personalDetails" && (
             <div className="mt-8">
@@ -372,17 +364,12 @@ const DocMain = () => {
             </div>
           )}
 
-          {currentScreen === "financialInfo" && (
-            <div className="mt-8">
-              <FinancialInfo handleKycState={id => handleKycState(id)} />
-            </div>
-          )}
-
-          {/* {currentScreen !== "selectOrderId" && (
-            <ProgressSection progress={progressPercentage} />
-          )} */}
-
-          {currentScreen === "congratulation" && <DashboardComponent />}
+          {(currentScreen === "congratulation" ||
+            currentScreen === "financialInfo" ||
+            currentScreen === "educationalDetails" ||
+            currentScreen === "professionalDetails" ||
+            currentScreen === "autoPay" ||
+            currentScreen === "dashboard") && <DashboardComponent />}
         </div>
 
         <div>
