@@ -20,7 +20,9 @@ export default function GstSdk({
   const kycSliceData = useSelector(state => state.kycPage);
   const userId = decrypt(getLocalStorage("_ga"));
   const data = kycSliceData.selectedDataForKyc;
-  const [selectedId, setSelectedId] = useState(data?.dealCodeNumber);
+  const [selectedId, setSelectedId] = useState(
+    `${userId}_${data?.dealCodeNumber}`,
+  );
   const [holdOnLoader, setHoldOnLoader] = useState(false);
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
   const professionId = kycSliceData.selectedProfessionId;
