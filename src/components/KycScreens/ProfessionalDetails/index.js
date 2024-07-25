@@ -96,8 +96,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
-        getDashboardDetailsApi();
-        setTimeout(() => {
+        getDashboardDetailsApi().then(() => {
           const pendingStage = pendingDashboardDetail?.filter(
             i => i.stage_status === 0 || i.stage_status === 1,
           );
@@ -118,7 +117,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
             dispatch(setKycScreenName("congratulation"));
           }
           window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-        }, 1500);
+        });
       })
       .catch(err => console.log(err));
   };

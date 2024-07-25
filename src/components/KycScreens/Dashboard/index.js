@@ -96,22 +96,28 @@ export default function DashboardComponent() {
   // };
 
   const getDashboardDetailsApi = () => {
-    baseInstance
-      .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
-      .then(res => {
-        setDashboardDetails(res?.data?.data);
-        dispatch(
-          setSelectedProfessionId(
-            res?.data?.data?.professionDetail?.profession_id,
-          ),
-        );
-        setOrderDate(res?.data?.data?.orderDate);
-        setLoadingSkeleton(false);
-      })
-      .catch(err => {
-        console.log(err?.message || "some error");
-        setLoadingSkeleton(false);
-      });
+    return new Promise((resolve, reject) => {
+      baseInstance
+        .get(
+          endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
+        )
+        .then(res => {
+          setDashboardDetails(res?.data?.data);
+          dispatch(
+            setSelectedProfessionId(
+              res?.data?.data?.professionDetail?.profession_id,
+            ),
+          );
+          setOrderDate(res?.data?.data?.orderDate);
+          setLoadingSkeleton(false);
+          resolve(true);
+        })
+        .catch(err => {
+          console.log(err?.message || "some error");
+          setLoadingSkeleton(false);
+          reject(err?.message || "some error");
+        });
+    });
   };
 
   const formatDate = dateString => {
@@ -297,9 +303,9 @@ export default function DashboardComponent() {
     }
   }, [currentScreen]);
 
-  useEffect(() => {
-    console.log(openGstSdk, "ppppppppppppppppp");
-  }, [openGstSdk]);
+  // useEffect(() => {
+  //   console.log(openGstSdk, "ppppppppppppppppp");
+  // }, [openGstSdk]);
 
   return (
     <div>
