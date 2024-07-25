@@ -294,7 +294,7 @@ const KycPending = () => {
     return (
         data?.length > 0 && (
             <>
-                <Drawer
+                {!isHeightGreaterThan600 && <Drawer
                     anchor={"bottom"}
                     PaperProps={{
                         sx: {
@@ -389,7 +389,7 @@ const KycPending = () => {
                             </div>
                         </List>
                     </div>
-                </Drawer>
+                </Drawer>}
                 <div className={style.MainContainer}>
                     <div className={style.SubMainContainer}>
                         <div className={style.Heading}>
