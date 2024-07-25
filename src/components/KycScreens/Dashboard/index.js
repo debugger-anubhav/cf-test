@@ -465,7 +465,9 @@ export default function DashboardComponent() {
             <div className="sm:w-[240px] w-[200px]">
               <div className={styles.progressBarContainer}>
                 <div
-                  className={`${styles.progressBar} ${progressNumber === 100 ? "rounded-xl" : "rounded-l-xl"}`}
+                  className={`${styles.progressBar} ${
+                    progressNumber === 100 ? "rounded-xl" : "rounded-l-xl"
+                  }`}
                   style={{width: `${progressNumber}%`}}>
                   <div className={styles.new_progress_bar_text}>
                     {progressNumber}% KYC done

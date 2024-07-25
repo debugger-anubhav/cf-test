@@ -278,591 +278,621 @@ const KycPending = () => {
     };
   }, []);
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
+        setSortOpen(false);
+      }
+    }
 
-    useEffect(() => {
-        function handleClickOutside(event) {
-            if (
-                dropDownRefSort.current &&
-                !dropDownRefSort.current.contains(event.target)
-            ) {
-                setSortOpen(false);
-            }
-        }
+    document.addEventListener("click", handleClickOutside);
 
-        document.addEventListener("click", handleClickOutside);
-
-        return () => {
-            document.removeEventListener("click", handleClickOutside);
-        };
-    }, []);
-
-    const statusLabels = {
-        "kyc in progress": "KYC Pending",
-        "refund processed": "Refunded",
-        "refund requested": "Refunded",
-        cancelled: "Cancellation Requested",
-        "delivered - partial": "Partial Delivered",
-        "kyc docs under review": "KYC Under Review",
-        "kyc completed": "KYC Approved",
-        "out for delivery": "Out for Delivery",
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
     };
+  }, []);
 
-    return (
-        data?.length > 0 && (
-            <>
-                {!isHeightGreaterThan600 && <Drawer
-                    anchor={"bottom"}
-                    PaperProps={{
-                        sx: {
-                            borderTopRightRadius: "20px",
-                            borderTopLeftRadius: "20px",
-                            position: "absolute",
-                        },
-                    }}
-                    open={sortOpen}
-                    onClose={() => setSortOpen(false)}
-                    sx={{
-                        borderTop: "20px",
-                        borderTopLeftRadius: "20px",
-                        borderTopRightRadius: "20px",
-                    }}>
-                    <div
-                        // className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
-                        className="fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12 lg:-mt-0"
-                        onClick={() => setSortOpen(false)}>
-                        <Close size={25} color={"#000"} />
-                    </div>
-                    <div
-                        // sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-                        role="presentation"
-                        // onClick={toggleDrawer(anchor, false)}
-                        onKeyDown={() => setSortOpen(false)}
-                        className="relative">
-                        <List>
-                            <div className="gap-6 shadow-md w-full bg-white px-4 pt-4 pb-8">
-                                <p className={style.headin_text}>
-                                    {"Order Id"}
-                                </p>
-                                <div className="h-[1px] bg-EDEDEE" />
-                                <div
-                                    className={`overflow-scroll ${style.mapped_filter_mobile}`}>
-                                    {data?.map((ele, index) => {
-                                        // {CategoryFilterData.slice(0).map((ele, index) => {
-                                        return (
-                                            <>
-                                                {
-                                                    // index < itemCount &&
-                                                    <div
-                                                        className={
-                                                            style.single_filter_text
-                                                        }
-                                                        key={index.toString()}
-                                                        onClick={() => {
-                                                            setMobileSelecteData(ele);
-                                                        }}
-                                                    >
-                                                        <p
-                                                            className={style.option_text}>
-                                                            {ele?.dealCodeNumber}
-                                                        </p>
-                                                        <input
-                                                            type="radio"
-                                                            id={index.toString()}
-                                                            name={ele?.dealCodeNumber}
-                                                            checked={
-                                                                mobileSelecteData?.dealCodeNumber ===
-                                                                ele?.dealCodeNumber
-                                                            }
-                                                            className="pr-1 cursor-pointer"
-                                                        // onChange={e => handleFilteredItems(e)}
-                                                        />
-                                                    </div>
-                                                }
-                                            </>
-                                        );
-                                    })}
-                                </div>
-                                {/* {filtereData.length > itemCount && (
+  const statusLabels = {
+    "kyc in progress": "KYC Pending",
+    "refund processed": "Refunded",
+    "refund requested": "Refunded",
+    cancelled: "Cancellation Requested",
+    "delivered - partial": "Partial Delivered",
+    "kyc docs under review": "KYC Under Review",
+    "kyc completed": "KYC Approved",
+    "out for delivery": "Out for Delivery",
+  };
+
+  return (
+    data?.length > 0 && (
+      <>
+        {!isHeightGreaterThan600 && (
+          <Drawer
+            anchor={"bottom"}
+            PaperProps={{
+              sx: {
+                borderTopRightRadius: "20px",
+                borderTopLeftRadius: "20px",
+                position: "absolute",
+              },
+            }}
+            open={sortOpen}
+            onClose={() => setSortOpen(false)}
+            sx={{
+              borderTop: "20px",
+              borderTopLeftRadius: "20px",
+              borderTopRightRadius: "20px",
+            }}>
+            <div
+              // className="relative top-4 right-[24px] flex w-full justify-end z-[111] "
+              className="fixed right-4 lg:right-8 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-12 lg:-mt-0"
+              onClick={() => setSortOpen(false)}>
+              <Close size={25} color={"#000"} />
+            </div>
+            <div
+              // sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+              role="presentation"
+              // onClick={toggleDrawer(anchor, false)}
+              onKeyDown={() => setSortOpen(false)}
+              className="relative">
+              <List>
+                <div className="gap-6 shadow-md w-full bg-white px-4 pt-4 pb-8">
+                  <p className={style.headin_text}>{"Order Id"}</p>
+                  <div className="h-[1px] bg-EDEDEE" />
+                  <div
+                    className={`overflow-scroll ${style.mapped_filter_mobile}`}>
+                    {data?.map((ele, index) => {
+                      // {CategoryFilterData.slice(0).map((ele, index) => {
+                      return (
+                        <>
+                          {
+                            // index < itemCount &&
+                            <div
+                              className={style.single_filter_text}
+                              key={index.toString()}
+                              onClick={() => {
+                                setMobileSelecteData(ele);
+                              }}>
+                              <p className={style.option_text}>
+                                {ele?.dealCodeNumber}
+                              </p>
+                              <input
+                                type="radio"
+                                id={index.toString()}
+                                name={ele?.dealCodeNumber}
+                                checked={
+                                  mobileSelecteData?.dealCodeNumber ===
+                                  ele?.dealCodeNumber
+                                }
+                                className="pr-1 cursor-pointer"
+                                // onChange={e => handleFilteredItems(e)}
+                              />
+                            </div>
+                          }
+                        </>
+                      );
+                    })}
+                  </div>
+                  {/* {filtereData.length > itemCount && (
                                                             <p className={style.see_more_text} onClick={loadMoreItems}>
                                                                 See more
                                                             </p>
                                                         )} */}
-                                <div className="mt-4 w-full flex justify-center">
-                                    <div
-                                        className={style.btn_container}
-                                        onClick={() =>
-                                            handleSortMobile(mobileSelecteData)
-                                        }>
-                                        <p
-                                            style={{
-                                                boxShadow: "rgba(0, 0, 0, 0.25)",
-                                            }}
-                                            className={style.apply_btn}>
-                                            Apply
-                                        </p>
-                                    </div>
+                  <div className="mt-4 w-full flex justify-center">
+                    <div
+                      className={style.btn_container}
+                      onClick={() => handleSortMobile(mobileSelecteData)}>
+                      <p
+                        style={{
+                          boxShadow: "rgba(0, 0, 0, 0.25)",
+                        }}
+                        className={style.apply_btn}>
+                        Apply
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </List>
+            </div>
+          </Drawer>
+        )}
+        <div className={style.MainContainer}>
+          <div className={style.SubMainContainer}>
+            <div className={style.Heading}>
+              {"Hi" +
+                ", " +
+                localStorage.getItem("user_name").replace(/"/g, "")}
+            </div>
+            <div className={style.BoxSection}>
+              {!isHeightGreaterThan600 ? (
+                <StyledCarousel
+                  className={"CarouselClass"}
+                  showStatus={false}
+                  showArrows={false}
+                  showThumbs={false}
+                  selectedItem={currentIndex}
+                  onChange={index => setCurrentIndex(index)}
+                  swipeable
+                  width={"100%"}>
+                  <div className={style.KycSection}>
+                    <div className={style.KycDetails}>
+                      <div className={style.KHeading}>
+                        <span>
+                          <img
+                            className={style.HeaderIconImage}
+                            width={30}
+                            height={30}
+                            src={
+                              IconLink +
+                              (statusToImageMap[
+                                selectedOrder?.zoho_sub_status?.toLowerCase()
+                              ] || "payment-failed.svg")
+                            }
+                          />
+                        </span>
+                        <span className={style.HeadingOfCard}>
+                          {selectedOrder?.zoho_sub_status === ""
+                            ? "Failed Payment"
+                            : statusLabels[
+                                selectedOrder.zoho_sub_status?.toLowerCase()
+                              ] || selectedOrder.zoho_sub_status?.toLowerCase()}
+                        </span>
+                      </div>
+                      <div className={style.KNumber}>
+                        <span>
+                          <div className="relative flex">
+                            <div className={`${style.filter} relative `}>
+                              <div
+                                className={style.filterbox}
+                                onClick={() => {
+                                  // setSortOpen(!filterOpen);
+                                  toggleDropdownSort();
+                                }}>
+                                <div className={style.filter_text_container}>
+                                  <p
+                                    className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
+                                    #{selectedOption}
+                                  </p>
                                 </div>
+                                <div>
+                                  <DownPopUpArrow
+                                    size={20}
+                                    color={"#597492"}
+                                    className={`!text-[#597492] ${
+                                      sortOpen
+                                        ? style.arrow_up
+                                        : style.arrow_down
+                                    }`}
+                                  />
+                                </div>
+                              </div>
                             </div>
-                        </List>
+                          </div>
+                        </span>
+                      </div>
                     </div>
-                </Drawer>}
-                <div className={style.MainContainer}>
-                    <div className={style.SubMainContainer}>
-                        <div className={style.Heading}>
-                            {"Hi" + ", " + localStorage.getItem("user_name").replace(/"/g, "")}
+                    <div className={style.orderDetails}>
+                      <div className={style.ImageSection}>
+                        <div className={style.images_wraper}>
+                          {selectedImage
+                            ?.slice(
+                              0,
+                              selectedImage?.length > 4
+                                ? 3
+                                : selectedImage?.length,
+                            )
+                            ?.map((ele, i) => {
+                              return (
+                                <div key={i.toString()}>
+                                  {ele && (
+                                    <img
+                                      src={
+                                        ele &&
+                                        productImageBaseUrl + "thumb/" + ele
+                                      }
+                                      alt={ele?.product_name}
+                                      className={`${
+                                        selectedImage?.length === 1
+                                          ? "w-full h-full"
+                                          : selectedImage?.length === 2
+                                          ? `mobile:!w-[47px] mobile:!h-[47px] md1:w-[48px] md1:h-[48px] absolute ${
+                                              i === 0
+                                                ? "top-0 left-0"
+                                                : "bottom-0 right-0"
+                                            }`
+                                          : " mobile:!w-[25px] mobile:!h-[25px]  md1:!w-[37px] md1:!h-[37px]"
+                                      } rounded-lg object-cover`}
+                                      loading="lazy"
+                                    />
+                                  )}
+                                </div>
+                              );
+                            })}
+                          {selectedImage?.length > 4 && (
+                            <div className={style.counter_box}>
+                              +{selectedImage?.length - 3}
+                            </div>
+                          )}
                         </div>
-                        <div className={style.BoxSection}>
-                            {!isHeightGreaterThan600 ? (
-                                <StyledCarousel
-                                    className={"CarouselClass"}
-                                    showStatus={false}
-                                    showArrows={false}
-                                    showThumbs={false}
-                                    selectedItem={currentIndex}
-                                    onChange={index => setCurrentIndex(index)}
-                                    swipeable
-                                    width={"100%"}>
-                                    <div className={style.KycSection}>
-                                        <div className={style.KycDetails}>
-                                            <div className={style.KHeading}>
-                                                <span>
-                                                    <img
-                                                        className={style.HeaderIconImage}
-                                                        width={30}
-                                                        height={30}
-                                                        src={
-                                                            IconLink +
-                                                            (statusToImageMap[
-                                                                selectedOrder?.zoho_sub_status?.toLowerCase()
-                                                            ] || "payment-failed.svg")
-                                                        }
-                                                    />
-                                                </span>
-                                                <span className={style.HeadingOfCard}>
-                                                    {selectedOrder?.zoho_sub_status === ""
-                                                        ? "Failed Payment"
-                                                        : statusLabels[selectedOrder.zoho_sub_status?.toLowerCase()] || selectedOrder.zoho_sub_status?.toLowerCase()}
-                                                </span>
-                                            </div>
-                                            <div className={style.KNumber}>
-                                                <span>
-                                                    <div className="relative flex">
-                                                        <div className={`${style.filter} relative `}>
-                                                            <div
-                                                                className={style.filterbox}
-                                                                onClick={() => {
-                                                                    // setSortOpen(!filterOpen);
-                                                                    toggleDropdownSort();
-                                                                }}>
-                                                                <div className={style.filter_text_container}>
-                                                                    <p
-                                                                        className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
-                                                                        #{selectedOption}
-                                                                    </p>
-                                                                </div>
-                                                                <div>
-                                                                    <DownPopUpArrow
-                                                                        size={20}
-                                                                        color={"#597492"}
-                                                                        className={`!text-[#597492] ${sortOpen ? style.arrow_up : style.arrow_down
-                                                                            }`}
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className={style.orderDetails}>
-                                            <div className={style.ImageSection}>
-                                                <div className={style.images_wraper}>
-                                                    {selectedImage
-                                                        ?.slice(
-                                                            0,
-                                                            selectedImage?.length > 4
-                                                                ? 3
-                                                                : selectedImage?.length,
-                                                        )
-                                                        ?.map((ele, i) => {
-                                                            return (
-                                                                <div key={i.toString()}>
-                                                                    {ele && (
-                                                                        <img
-                                                                            src={
-                                                                                ele &&
-                                                                                productImageBaseUrl + "thumb/" + ele
-                                                                            }
-                                                                            alt={ele?.product_name}
-                                                                            className={`${selectedImage?.length === 1
-                                                                                ? "w-full h-full"
-                                                                                : selectedImage?.length === 2
-                                                                                    ? `mobile:!w-[47px] mobile:!h-[47px] md1:w-[48px] md1:h-[48px] absolute ${i === 0
-                                                                                        ? "top-0 left-0"
-                                                                                        : "bottom-0 right-0"
-                                                                                    }`
-                                                                                    : " mobile:!w-[25px] mobile:!h-[25px]  md1:!w-[37px] md1:!h-[37px]"
-                                                                                } rounded-lg object-cover`}
-                                                                            loading="lazy"
-                                                                        />
-                                                                    )}
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    {selectedImage?.length > 4 && (
-                                                        <div className={style.counter_box}>
-                                                            +{selectedImage?.length - 3}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className={style.OrderLink}>
-                                                {selectedOrder.zoho_sub_status?.toLowerCase() ===
-                                                    "kyc in progress" && (
-                                                        <a
-                                                            href={`/documentation?order_id=${selectedOption}`}
-                                                            className={
-                                                                "flex items-center justify-center whitespace-nowrap !text-start"
-                                                            }>
-                                                            <span>
-                                                                <span className={style.LinkText}>Complete KYC</span>{" "}
-                                                                <span className={style.RestText}>
-                                                                    now to proceed with your order {" "}
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    )}
-                                                {selectedOrder.zoho_sub_status === "" && (
-                                                    <a
-                                                        href={`/cart`}
-                                                        className={
-                                                            "flex items-center justify-center whitespace-nowrap !text-start"
-                                                        }>
-                                                        <span>
-                                                            <span className={style.LinkText}>
-                                                                Retry Payment{" "}
-                                                            </span>
-                                                            <span className={style.RestText}>
-                                                                to proceed with your order{" "}
-                                                            </span>
-                                                        </span>
-                                                    </a>
-                                                )}
-                                                {extendedStatus?.extendDisplay &&
-                                                    selectedOrder.zoho_sub_status === "Delivered" && (
-                                                        <a
-                                                            href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}
-                                                            className={
-                                                                "flex items-center justify-center whitespace-nowrap !text-start"
-                                                            }>
-                                                            <span>
-                                                                <span className={style.RestText}>
-                                                                    Your Subscription will expire on{" "}
-                                                                    {`${format(
-                                                                        new Date(extendedStatus.next_invoice_date),
-                                                                        "d MMMM, yyyy",
-                                                                    )}`}{" "}
-                                                                </span>{" "}
-                                                                <span className={style.LinkText}>
-                                                                    Extend Subscription{" "}
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    )}
-                                                <a
-                                                    href={extendedStatus?.extendDisplay ? "/purchases" : "/purchases"}
-                                                    className={
-                                                        "flex items-center justify-center whitespace-nowrap gap-1"
-                                                    }>
-                                                    <span className={style.LinkText}>
-                                                        {selectedOrder.zoho_sub_status === "Delivered"
-                                                            ? "My subscriptions"
-                                                            : "My orders"}
-                                                    </span>
-                                                    <Image width={15} height={15} src={link} />
-                                                </a>
-                                            </div>
-                                        </div>
+                      </div>
+                      <div className={style.OrderLink}>
+                        {selectedOrder.zoho_sub_status?.toLowerCase() ===
+                          "kyc in progress" && (
+                          <a
+                            href={`/documentation?order_id=${selectedOption}`}
+                            className={
+                              "flex items-center justify-center whitespace-nowrap !text-start"
+                            }>
+                            <span>
+                              <span className={style.LinkText}>
+                                Complete KYC
+                              </span>{" "}
+                              <span className={style.RestText}>
+                                now to proceed with your order{" "}
+                              </span>
+                            </span>
+                          </a>
+                        )}
+                        {selectedOrder.zoho_sub_status === "" && (
+                          <a
+                            href={`/cart`}
+                            className={
+                              "flex items-center justify-center whitespace-nowrap !text-start"
+                            }>
+                            <span>
+                              <span className={style.LinkText}>
+                                Retry Payment{" "}
+                              </span>
+                              <span className={style.RestText}>
+                                to proceed with your order{" "}
+                              </span>
+                            </span>
+                          </a>
+                        )}
+                        {extendedStatus?.extendDisplay &&
+                          selectedOrder.zoho_sub_status === "Delivered" && (
+                            <a
+                              href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}
+                              className={
+                                "flex items-center justify-center whitespace-nowrap !text-start"
+                              }>
+                              <span>
+                                <span className={style.RestText}>
+                                  Your Subscription will expire on{" "}
+                                  {`${format(
+                                    new Date(extendedStatus.next_invoice_date),
+                                    "d MMMM, yyyy",
+                                  )}`}{" "}
+                                </span>{" "}
+                                <span className={style.LinkText}>
+                                  Extend Subscription{" "}
+                                </span>
+                              </span>
+                            </a>
+                          )}
+                        <a
+                          href={
+                            extendedStatus?.extendDisplay
+                              ? "/purchases"
+                              : "/purchases"
+                          }
+                          className={
+                            "flex items-center justify-center whitespace-nowrap gap-1"
+                          }>
+                          <span className={style.LinkText}>
+                            {selectedOrder.zoho_sub_status === "Delivered"
+                              ? "My subscriptions"
+                              : "My orders"}
+                          </span>
+                          <Image width={15} height={15} src={link} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={style.RaiseServicerequestSection}>
+                    <div className={style.RHeadingSection}>
+                      <div className={style.RHeading}>
+                        Raise Service request
+                      </div>
+                      <a
+                        href="/service-requests"
+                        className={style.RLinkSection}>
+                        All requests
+                        <img
+                          src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/right_icn.svg"
+                          alt="Right Arrow Icon"
+                          className={style.Icon}
+                        />
+                      </a>
+                      {/* <div onClick={() => router.push('/service-requests')} className={style.RLinkSection}><a>All requests</a></div> */}
+                    </div>
+                    <div className={style.RIconsSection}>
+                      {dataArray.map(item => {
+                        return (
+                          <a
+                            key={item.id}
+                            href={item?.clickable && "/service-requests"}
+                            className={`${
+                              item?.clickable
+                                ? "!cursor-pointer"
+                                : "!cursor-not-allowed"
+                            } ${style.IconBox}`}>
+                            <div className={style.IconBoxIcon}>
+                              <Image width={40} height={40} src={item.icon} />
+                            </div>
+                            <div className={style.IconBoxText}>
+                              {item.label}
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </StyledCarousel>
+              ) : (
+                <>
+                  <div className={style.KycSection}>
+                    <div className={style.KycDetails}>
+                      <div className={style.KHeading}>
+                        <span>
+                          <Image
+                            width={30}
+                            height={30}
+                            src={
+                              IconLink +
+                              (statusToImageMap[
+                                selectedOrder?.zoho_sub_status?.toLowerCase()
+                              ] || "payment-failed.svg")
+                            }
+                          />
+                        </span>
+                        <span>
+                          {selectedOrder?.zoho_sub_status === ""
+                            ? "Failed Payment"
+                            : statusLabels[
+                                selectedOrder.zoho_sub_status?.toLowerCase()
+                              ] || selectedOrder.zoho_sub_status?.toLowerCase()}
+                        </span>
+                      </div>
+                      <div className={style.KNumber}>
+                        <span>
+                          <div className="relative z-[1] flex">
+                            <div className={`${style.filter} relative z-[2]`}>
+                              <div
+                                className={style.filterbox}
+                                onClick={() => {
+                                  // setSortOpen(!filterOpen);
+                                  toggleDropdownSort();
+                                }}
+                                ref={dropDownRefSort}>
+                                <div className={style.filter_text_container}>
+                                  <p
+                                    className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
+                                    #{selectedOption}
+                                  </p>
+                                </div>
+                                <div>
+                                  <DownPopUpArrow
+                                    size={20}
+                                    color={"#597492"}
+                                    className={`!text-[#597492] ${
+                                      sortOpen
+                                        ? style.arrow_up
+                                        : style.arrow_down
+                                    }`}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                            {sortOpen && (
+                              <div
+                                ref={dropDownRefFilter}
+                                className=" h-[180px] overflow-scroll gap-6 absolute z-[11332] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
+                                {data?.map((ele, index) => {
+                                  return (
+                                    <div
+                                      className={`${style.sorted_text}`}
+                                      key={index.toString()}
+                                      onClick={() => {
+                                        toggleDropdownSort();
+                                        handleSort(ele, index);
+                                      }}>
+                                      <p className={style.option_text}>
+                                        {ele?.dealCodeNumber}
+                                      </p>
+                                      <input
+                                        type="radio"
+                                        id={index}
+                                        name="sortBy"
+                                        value={ele?.dealCodeNumber}
+                                        className="cursor-pointer"
+                                        checked={
+                                          selectedOption === ele?.dealCodeNumber
+                                        }
+                                      />
                                     </div>
-                                    <div className={style.RaiseServicerequestSection}>
-                                        <div className={style.RHeadingSection}>
-                                            <div className={style.RHeading}>Raise Service request</div>
-                                            <a href="/service-requests" className={style.RLinkSection}>
-                                                All requests
-                                                <img
-                                                    src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/right_icn.svg"
-                                                    alt="Right Arrow Icon"
-                                                    className={style.Icon}
-                                                />
-                                            </a>
-                                            {/* <div onClick={() => router.push('/service-requests')} className={style.RLinkSection}><a>All requests</a></div> */}
-                                        </div>
-                                        <div className={style.RIconsSection}>
-                                            {dataArray.map(item => {
-                                                return (
-                                                    <a
-                                                        key={item.id}
-                                                        href={item?.clickable && "/service-requests"}
-
-                                                        className={`${item?.clickable
-                                                            ? "!cursor-pointer"
-                                                            : "!cursor-not-allowed"
-                                                            } ${style.IconBox}`}
-                                                    >
-                                                        <div className={style.IconBoxIcon}>
-                                                            <Image width={40} height={40} src={item.icon} />
-                                                        </div>
-                                                        <div className={style.IconBoxText}>{item.label}</div>
-                                                    </a>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                </StyledCarousel>
-                            ) : (
-                                <>
-                                    <div className={style.KycSection}>
-                                        <div className={style.KycDetails}>
-                                            <div className={style.KHeading}>
-                                                <span>
-                                                    <Image
-                                                        width={30}
-                                                        height={30}
-                                                        src={
-                                                            IconLink +
-                                                            (statusToImageMap[
-                                                                selectedOrder?.zoho_sub_status?.toLowerCase()
-                                                            ] || "payment-failed.svg")
-                                                        }
-                                                    />
-                                                </span>
-                                                <span>
-                                                    {selectedOrder?.zoho_sub_status === ""
-                                                        ? "Failed Payment"
-                                                        : statusLabels[selectedOrder.zoho_sub_status?.toLowerCase()] || selectedOrder.zoho_sub_status?.toLowerCase()}
-                                                </span>
-                                            </div>
-                                            <div className={style.KNumber}>
-                                                <span>
-                                                    <div className="relative z-[1] flex">
-                                                        <div className={`${style.filter} relative z-[2]`}>
-                                                            <div
-                                                                className={style.filterbox}
-                                                                onClick={() => {
-                                                                    // setSortOpen(!filterOpen);
-                                                                    toggleDropdownSort();
-                                                                }}
-                                                                ref={dropDownRefSort}>
-                                                                <div className={style.filter_text_container}>
-                                                                    <p
-                                                                        className={`${style.filter_text} !text-[#597492] cursor-pointer`}>
-                                                                        #{selectedOption}
-                                                                    </p>
-                                                                </div>
-                                                                <div>
-                                                                    <DownPopUpArrow
-                                                                        size={20}
-                                                                        color={"#597492"}
-                                                                        className={`!text-[#597492] ${sortOpen ? style.arrow_up : style.arrow_down
-                                                                            }`}
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {sortOpen && (
-                                                            <div
-                                                                ref={dropDownRefFilter}
-                                                                className=" h-[180px] overflow-scroll gap-6 absolute z-[11332] top-12 right-0 w-[222px] rounded-[20px] border-[2px] border-71717A bg-white py-4">
-                                                                {data?.map((ele, index) => {
-                                                                    return (
-                                                                        <div
-                                                                            className={`${style.sorted_text}`}
-                                                                            key={index.toString()}
-                                                                            onClick={() => {
-                                                                                toggleDropdownSort();
-                                                                                handleSort(ele, index);
-                                                                            }}>
-                                                                            <p className={style.option_text}>
-                                                                                {ele?.dealCodeNumber}
-                                                                            </p>
-                                                                            <input
-                                                                                type="radio"
-                                                                                id={index}
-                                                                                name="sortBy"
-                                                                                value={ele?.dealCodeNumber}
-                                                                                className="cursor-pointer"
-                                                                                checked={
-                                                                                    selectedOption === ele?.dealCodeNumber
-                                                                                }
-                                                                            />
-                                                                        </div>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                        )}
-                                                    </div>
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div className={style.orderDetails}>
-                                            <div className={style.ImageSection}>
-                                                <div className={style.images_wraper}>
-                                                    {selectedImage
-                                                        ?.slice(
-                                                            0,
-                                                            selectedImage.length > 4 ? 3 : selectedImage.length,
-                                                        )
-                                                        .map((ele, i) => {
-                                                            return (
-                                                                <div key={i.toString()}>
-                                                                    {ele && (
-                                                                        <img
-                                                                            src={
-                                                                                ele &&
-                                                                                productImageBaseUrl + "thumb/" + ele
-                                                                            }
-                                                                            alt={ele?.product_name}
-                                                                            className={`${selectedImage?.length === 1
-                                                                                ? "w-full h-full"
-                                                                                : selectedImage?.length === 2
-                                                                                    ? `w-[48px] h-[48px] absolute ${i === 0
-                                                                                        ? "top-0 left-0"
-                                                                                        : "bottom-0 right-0"
-                                                                                    }`
-                                                                                    : "w-[37px] h-[37px]"
-                                                                                } rounded-lg object-cover`}
-                                                                            loading="lazy"
-                                                                        />
-                                                                    )}
-                                                                </div>
-                                                            );
-                                                        })}
-                                                    {selectedImage?.length > 4 && (
-                                                        <div className={style.counter_box}>
-                                                            +{selectedImage?.length - 3}
-                                                        </div>
-                                                    )}
-                                                </div>
-                                            </div>
-                                            <div className={style.OrderLink}>
-                                                {selectedOrder.zoho_sub_status?.toLowerCase() ===
-                                                    "kyc in progress" && (
-                                                        <a
-                                                            href={`/documentation?order_id=${selectedOption}`}
-                                                            className={
-                                                                "flex items-center justify-center whitespace-nowrap !text-start"
-                                                            }>
-                                                            <span>
-                                                                <span className={style.LinkText}>Complete KYC</span>{" "}
-                                                                <span className={style.RestText}>
-                                                                    now to proceed with your order {" "}
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    )}
-                                                {selectedOrder.zoho_sub_status === "" && (
-                                                    <a
-                                                        href={`/cart`}
-                                                        className={
-                                                            "flex items-center justify-center whitespace-nowrap !text-start"
-                                                        }>
-                                                        <span>
-                                                            <span className={style.LinkText}>
-                                                                Retry Payment
-                                                            </span>{" "}
-                                                            <span className={style.RestText}>
-                                                                to proceed with your order{" "}
-                                                            </span>
-                                                        </span>
-                                                    </a>
-                                                )}
-                                                {extendedStatus?.extendDisplay &&
-                                                    selectedOrder.zoho_sub_status === "Delivered" && (
-                                                        <a
-                                                            href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}
-                                                            className={
-                                                                "flex items-center justify-center whitespace-nowrap !text-start "
-                                                            }>
-                                                            <span>
-                                                                <span className={style.RestText}>
-                                                                    Your Subscription will expire on{" "}
-                                                                    {`${format(
-                                                                        new Date(extendedStatus.next_invoice_date),
-                                                                        "d MMMM, yyyy",
-                                                                    )}`}{" "}
-                                                                </span>{" "}
-                                                                <span className={style.LinkText}>
-                                                                    <br />
-                                                                    Extend Subscription{" "}
-                                                                </span>
-                                                            </span>
-                                                        </a>
-                                                    )}
-                                                <a
-                                                    href={extendedStatus?.extendDisplay ? "/purchases" : "/purchases"}
-                                                    className={
-                                                        "flex items-center justify-center whitespace-nowrap !text-start gap-1"
-                                                    }>
-                                                    <span className={style.LinkText}>
-                                                        {
-                                                            selectedOrder.zoho_sub_status === "Delivered"
-                                                                ? "My subscriptions " + " "
-                                                                : "My orders " + " "}
-                                                    </span>
-                                                    <Image width={15} height={15} src={link} />
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className={style.RaiseServicerequestSection}>
-                                        <div className={style.RHeadingSection}>
-                                            <div className={style.RHeading}>Raise Service request</div>
-                                            <a href="/service-requests" className={style.RLinkSection}>
-                                                All requests
-                                                <img
-                                                    src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/right_icn.svg"
-                                                    alt="Right Arrow Icon"
-                                                    className={style.Icon}
-                                                />
-                                            </a>
-                                            {/* <div onClick={() => router.push('/service-requests')} className={style.RLinkSection}><a>All requests</a></div> */}
-                                        </div>
-                                        <div className={style.RIconsSection}>
-                                            {dataArray.map(item => {
-                                                return (
-                                                    <a
-                                                        key={item.id}
-                                                        href={item?.clickable && "/service-requests"}
-
-                                                        className={`${item?.clickable
-                                                            ? "!cursor-pointer"
-                                                            : "!cursor-not-allowed"
-                                                            } ${style.IconBox}`}>
-                                                        <div className={style.IconBoxIcon}>
-                                                            <Image
-                                                                width={40}
-                                                                height={40}
-                                                                className={style.KycPendingICons}
-                                                                src={item.icon}
-                                                            />
-                                                        </div>
-                                                        <div className={style.IconBoxText}>{item.label}</div>
-                                                    </a>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
-                                </>
+                                  );
+                                })}
+                              </div>
                             )}
-                        </div>
+                          </div>
+                        </span>
+                      </div>
                     </div>
-                </div >
-            </>
-        )
-    );
+                    <div className={style.orderDetails}>
+                      <div className={style.ImageSection}>
+                        <div className={style.images_wraper}>
+                          {selectedImage
+                            ?.slice(
+                              0,
+                              selectedImage.length > 4
+                                ? 3
+                                : selectedImage.length,
+                            )
+                            .map((ele, i) => {
+                              return (
+                                <div key={i.toString()}>
+                                  {ele && (
+                                    <img
+                                      src={
+                                        ele &&
+                                        productImageBaseUrl + "thumb/" + ele
+                                      }
+                                      alt={ele?.product_name}
+                                      className={`${
+                                        selectedImage?.length === 1
+                                          ? "w-full h-full"
+                                          : selectedImage?.length === 2
+                                          ? `w-[48px] h-[48px] absolute ${
+                                              i === 0
+                                                ? "top-0 left-0"
+                                                : "bottom-0 right-0"
+                                            }`
+                                          : "w-[37px] h-[37px]"
+                                      } rounded-lg object-cover`}
+                                      loading="lazy"
+                                    />
+                                  )}
+                                </div>
+                              );
+                            })}
+                          {selectedImage?.length > 4 && (
+                            <div className={style.counter_box}>
+                              +{selectedImage?.length - 3}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      <div className={style.OrderLink}>
+                        {selectedOrder.zoho_sub_status?.toLowerCase() ===
+                          "kyc in progress" && (
+                          <a
+                            href={`/documentation?order_id=${selectedOption}`}
+                            className={
+                              "flex items-center justify-center whitespace-nowrap !text-start"
+                            }>
+                            <span>
+                              <span className={style.LinkText}>
+                                Complete KYC
+                              </span>{" "}
+                              <span className={style.RestText}>
+                                now to proceed with your order{" "}
+                              </span>
+                            </span>
+                          </a>
+                        )}
+                        {selectedOrder.zoho_sub_status === "" && (
+                          <a
+                            href={`/cart`}
+                            className={
+                              "flex items-center justify-center whitespace-nowrap !text-start"
+                            }>
+                            <span>
+                              <span className={style.LinkText}>
+                                Retry Payment
+                              </span>{" "}
+                              <span className={style.RestText}>
+                                to proceed with your order{" "}
+                              </span>
+                            </span>
+                          </a>
+                        )}
+                        {extendedStatus?.extendDisplay &&
+                          selectedOrder.zoho_sub_status === "Delivered" && (
+                            <a
+                              href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}
+                              className={
+                                "flex items-center justify-center whitespace-nowrap !text-start "
+                              }>
+                              <span>
+                                <span className={style.RestText}>
+                                  Your Subscription will expire on{" "}
+                                  {`${format(
+                                    new Date(extendedStatus.next_invoice_date),
+                                    "d MMMM, yyyy",
+                                  )}`}{" "}
+                                </span>{" "}
+                                <span className={style.LinkText}>
+                                  <br />
+                                  Extend Subscription{" "}
+                                </span>
+                              </span>
+                            </a>
+                          )}
+                        <a
+                          href={
+                            extendedStatus?.extendDisplay
+                              ? "/purchases"
+                              : "/purchases"
+                          }
+                          className={
+                            "flex items-center justify-center whitespace-nowrap !text-start gap-1"
+                          }>
+                          <span className={style.LinkText}>
+                            {selectedOrder.zoho_sub_status === "Delivered"
+                              ? "My subscriptions " + " "
+                              : "My orders " + " "}
+                          </span>
+                          <Image width={15} height={15} src={link} />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={style.RaiseServicerequestSection}>
+                    <div className={style.RHeadingSection}>
+                      <div className={style.RHeading}>
+                        Raise Service request
+                      </div>
+                      <a
+                        href="/service-requests"
+                        className={style.RLinkSection}>
+                        All requests
+                        <img
+                          src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/right_icn.svg"
+                          alt="Right Arrow Icon"
+                          className={style.Icon}
+                        />
+                      </a>
+                      {/* <div onClick={() => router.push('/service-requests')} className={style.RLinkSection}><a>All requests</a></div> */}
+                    </div>
+                    <div className={style.RIconsSection}>
+                      {dataArray.map(item => {
+                        return (
+                          <a
+                            key={item.id}
+                            href={item?.clickable && "/service-requests"}
+                            className={`${
+                              item?.clickable
+                                ? "!cursor-pointer"
+                                : "!cursor-not-allowed"
+                            } ${style.IconBox}`}>
+                            <div className={style.IconBoxIcon}>
+                              <Image
+                                width={40}
+                                height={40}
+                                className={style.KycPendingICons}
+                                src={item.icon}
+                              />
+                            </div>
+                            <div className={style.IconBoxText}>
+                              {item.label}
+                            </div>
+                          </a>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </>
+    )
+  );
 };
 
 export default KycPending;
