@@ -131,9 +131,8 @@ const SlotDrawer = ({
           ))}
         </div>
       </div>
-
-      <div className={styles.btn_wrapper}>
-        <button className={styles.cancel_btn} onClick={closeModal}>
+      <div className="flex flex-col w-full gap-6 mt-8">
+        <button className={`${styles.cancel_btn} !w-full`} onClick={closeModal}>
           Cancel
         </button>
         <button
@@ -143,7 +142,7 @@ const SlotDrawer = ({
           ${
             currentDate === formatedSelectedDate &&
             "!bg-[#FFDF85] !cursor-not-allowed"
-          }`}>
+          } !w-full`}>
           Modify
         </button>
       </div>
@@ -156,9 +155,15 @@ const SlotDrawer = ({
         anchor={isBottomShareDrawer ? "bottom" : "right"}
         open={isModalOpen}
         onClose={closeModal}>
-        <div className={styles.drawer_content_wrapper}>
-          <div className={`${styles.heading}`}>
-            Manage delivery slot
+        <div className={`${styles.drawer_content_wrapper} !flex-row`}>
+          <div className="flex flex-col w-full">
+            <div className={`${styles.heading} !flex-row`}>
+              Manage delivery slot
+            </div>
+            <ModalContent />
+            {loader && <LoaderComponent loading={loader} />}
+          </div>
+          <div className="flex w-fit ml-4">
             <span
               onClick={event => {
                 event.stopPropagation();
@@ -167,8 +172,6 @@ const SlotDrawer = ({
               <Close size={25} className={"cursor-pointer relative z-20"} />
             </span>
           </div>
-          <ModalContent />
-          {loader && <LoaderComponent loading={loader} />}
         </div>
       </Drawer>
     </div>

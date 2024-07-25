@@ -218,6 +218,19 @@ const DocMain = () => {
                 </p>
               </div>
 
+              {/* insturction box  */}
+              <div className={styles.instruction_box}>
+                <div className={styles.instruction_heading}>
+                  Keep your documents handy
+                </div>
+                <p className={`${styles.instruction_point} pb-2`}>
+                  1. Pan card
+                </p>
+                <p className={styles.instruction_point}>
+                  2. Adhar card/Passport/Driving license/Voter ID
+                </p>
+              </div>
+
               {/* select box  */}
               {/* <div onClick={() => setOpenDrawer(true)}>
             {kycState === 0 ? (
