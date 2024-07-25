@@ -52,7 +52,7 @@ const allowedFileTypes = [
 //   );
 // };
 
-const FinancialInfo = ({handleKycState}) => {
+const FinancialInfo = ({dashboardDetails}) => {
   const dispatch = useDispatch();
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
@@ -64,7 +64,7 @@ const FinancialInfo = ({handleKycState}) => {
   const stageId = kycSliceData.stageId;
 
   const userId = decrypt(getLocalStorage("_ga"));
-  const professionId = kycSliceData.selectedProfessionId;
+  // const professionId = kycSliceData.selectedProfessionId;
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const [formData, setFormData] = useState({
@@ -140,20 +140,28 @@ const FinancialInfo = ({handleKycState}) => {
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
-        // if(pendingDashboardDetail.length>0){
-        //   pendingDashboardDetail?.[0]?.id===3
-        // }
+        dashboardDetails();
 
-        const temp = pendingDashboardDetail?.filter(i => i.id === 6);
-        handleKycState(orderId);
-
-        if (professionId !== 5) {
-          dispatch(setKycScreenName("professionalDetails"));
-        } else if (temp.length > 0) {
-          dispatch(setKycScreenName("autoPay"));
-        } else {
-          dispatch(setKycScreenName("dashboard"));
-        }
+        setTimeout(() => {
+          const pendingStage = pendingDashboardDetail?.filter(
+            i => i.stage_status === 0 || i.stage_status === 1,
+          );
+          console.log(pendingStage, "pendingStage");
+          if (pendingStage.length > 0) {
+            const ID = pendingStage?.[0]?.id;
+            if (ID === 3) {
+              dispatch(setKycScreenName("professionalDetails"));
+            }
+            if (ID === 6) {
+              dispatch(setKycScreenName("autoPay"));
+            }
+            if (ID === 7) {
+              dispatch(setKycScreenName("educationalDetails"));
+            }
+          } else {
+            dispatch(setKycScreenName("congratulation"));
+          }
+        }, 1500);
 
         dispatch(setStageId(3));
         setDisableButton(false);
