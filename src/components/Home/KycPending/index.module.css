@@ -27,7 +27,8 @@
   @apply text-16 flex gap-[5px] items-center;
 }
 
-.KNumber {}
+.KNumber {
+}
 
 .orderDetails {
   @apply flex items-start gap-4 text-14 leading-[21px] font-normal text-[#5774AC] py-4 px-3;
@@ -65,7 +66,8 @@
   @apply cursor-pointer flex flex-col gap-2 items-center justify-center pb-5;
 }
 
-.IconBoxIcon {}
+.IconBoxIcon {
+}
 
 .Icon {
   @apply ml-0.5 h-4 w-4 text-[#597492];

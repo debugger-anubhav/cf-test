@@ -46,27 +46,27 @@ export default function AutoPay({getDashboardDetailsApi}) {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          getDashboardDetailsApi();
-
-          setTimeout(() => {
-            const pendingStage = pendingDashboardDetail?.filter(
-              i => i.stage_status === 0 || i.stage_status === 1,
-            );
-            if (pendingStage.length > 0) {
-              const ID = pendingStage?.[0]?.id;
-              if (ID === 2) {
-                dispatch(setKycScreenName("financialInfo"));
+          getDashboardDetailsApi().then(() => {
+            setTimeout(() => {
+              const pendingStage = pendingDashboardDetail?.filter(
+                i => i.stage_status === 0 || i.stage_status === 1,
+              );
+              if (pendingStage.length > 0) {
+                const ID = pendingStage?.[0]?.id;
+                if (ID === 2) {
+                  dispatch(setKycScreenName("financialInfo"));
+                }
+                if (ID === 3) {
+                  dispatch(setKycScreenName("professionalDetails"));
+                }
+                if (ID === 7) {
+                  dispatch(setKycScreenName("educationalDetails"));
+                }
+              } else {
+                dispatch(setKycScreenName("congratulation"));
               }
-              if (ID === 3) {
-                dispatch(setKycScreenName("professionalDetails"));
-              }
-              if (ID === 7) {
-                dispatch(setKycScreenName("educationalDetails"));
-              }
-            } else {
-              dispatch(setKycScreenName("congratulation"));
-            }
-          }, 1500);
+            }, 1500);
+          });
 
           setLoading(false);
         } else {

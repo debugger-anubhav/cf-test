@@ -1,36 +1,34 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import style from "./index.module.css";
 import Image from "next/image";
 import link from "./Assets/link.svg";
 import List from "@mui/material/List";
-import { DownPopUpArrow, Close, IconLink } from "@/assets/icon";
+import {DownPopUpArrow, Close, IconLink} from "@/assets/icon";
 import Drawer from "@mui/material/Drawer";
-import { baseInstance } from "@/network/axios";
-import { endPoints } from "@/network/endPoints";
-import { decrypt } from "@/hooks/cryptoUtils";
-import { getLocalStorage, productImageBaseUrl } from "@/constants/constant";
-import { useRouter } from "next/navigation";
-import { Carousel } from "react-responsive-carousel";
-import { statusToImageMap } from "../../MyOrders/common/CommonContainer";
-import { format } from "date-fns";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage, productImageBaseUrl} from "@/constants/constant";
+import {Carousel} from "react-responsive-carousel";
+import {statusToImageMap} from "../../MyOrders/common/CommonContainer";
+import {format} from "date-fns";
 import styled from "@emotion/styled";
 
 const KycPending = () => {
-    const router = useRouter();
-    const [data, setData] = useState([]);
-    const [sortOpen, setSortOpen] = useState(false);
-    const dropDownRefSort = useRef(null);
-    const [selectedOption, setSelectedOption] = useState("");
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [selectedOrder, setSelectedOrder] = useState();
-    const [selectedImage, setSelectedImage] = useState();
-    const [mobileSelecteData, setMobileSelecteData] = useState();
-    const [isHeightGreaterThan600, setIsHeightGreaterThan600] = useState(false);
-    const [extendedStatus, setExtendedStatus] = useState(false);
-    const dropDownRefFilter = useRef(null);
+  const [data, setData] = useState([]);
+  const [sortOpen, setSortOpen] = useState(false);
+  const dropDownRefSort = useRef(null);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [selectedOrder, setSelectedOrder] = useState();
+  const [selectedImage, setSelectedImage] = useState();
+  const [mobileSelecteData, setMobileSelecteData] = useState();
+  const [isHeightGreaterThan600, setIsHeightGreaterThan600] = useState(false);
+  const [extendedStatus, setExtendedStatus] = useState(false);
+  const dropDownRefFilter = useRef(null);
 
-    const StyledCarousel = styled(Carousel)`
+  const StyledCarousel = styled(Carousel)`
     .control-dots {
       margin-top: 29px !important;
       bottom: -2px !important;
@@ -78,190 +76,208 @@ const KycPending = () => {
     }
   `;
 
-    const handleClickAction = value => {
-        if (value === "Swap product") {
-            if (selectedOrder?.zoho_sub_status === "") {
-                return false;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-            ) {
-                return true;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-            ) {
-                return false;
-            } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (value === "Buy") {
-            if (selectedOrder?.zoho_sub_status === "") {
-                return false;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-            ) {
-                return true;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-            ) {
-                return true;
-            } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (value === "Repair") {
-            if (selectedOrder?.zoho_sub_status === "") {
-                return false;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-            ) {
-                return true;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-            ) {
-                return false;
-            } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-                return true;
-            } else {
-                return false;
-            }
-        } else if (value === "Relocation") {
-            if (selectedOrder?.zoho_sub_status === "") {
-                return false;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-            ) {
-                return true;
-            } else if (
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-                selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-            ) {
-                return false;
-            } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-                return true;
-            } else {
-                return false;
-            }
-        }
+  const handleClickAction = value => {
+    if (value === "Swap product") {
+      if (selectedOrder?.zoho_sub_status === "") {
+        return false;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
+      ) {
+        return true;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
+      ) {
+        return false;
+      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (value === "Buy") {
+      if (selectedOrder?.zoho_sub_status === "") {
+        return false;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
+      ) {
+        return true;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
+      ) {
+        return true;
+      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (value === "Repair") {
+      if (selectedOrder?.zoho_sub_status === "") {
+        return false;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
+      ) {
+        return true;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
+      ) {
+        return false;
+      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (value === "Relocation") {
+      if (selectedOrder?.zoho_sub_status === "") {
+        return false;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
+      ) {
+        return true;
+      } else if (
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
+        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
+      ) {
+        return false;
+      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+
+  const ExtendedKyc = async value => {
+    try {
+      const res = await baseInstance.get(
+        `fc-zb-recurring-invoices/getExpirationByDealCodeNumber?dealCodeNumber=${value}`,
+      );
+      setExtendedStatus(res?.data?.data);
+      // next_invoice_date
+      // extendDisplay
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const dataArray = [
+    {
+      id: 1,
+      label: "Swap product",
+      icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/swap-product.svg",
+      clickable: handleClickAction("Swap product"),
+    },
+    {
+      id: 2,
+      label: "Buy",
+      icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/buy.svg",
+      clickable: handleClickAction("Buy"),
+    },
+    {
+      id: 3,
+      label: "Repair",
+      icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/repair.svg",
+      clickable: handleClickAction("Repair"),
+    },
+    {
+      id: 4,
+      label: "Relocation",
+      icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/relocation.svg",
+      clickable: handleClickAction("Relocation"),
+    },
+  ];
+
+  const userId = decrypt(getLocalStorage("_ga"));
+
+  const handleKycData = async () => {
+    const body = {
+      userId,
     };
+    try {
+      const res = await baseInstance.post(
+        endPoints.myOrdersPage.getAllOrders,
+        body,
+      );
+      setData(res?.data?.data);
+      handleSort(res?.data?.data[0]);
+      handleSortMobile(res?.data?.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-    const ExtendedKyc = async value => {
-        try {
-            const res = await baseInstance.get(
-                `fc-zb-recurring-invoices/getExpirationByDealCodeNumber?dealCodeNumber=${value}`,
-            );
-            setExtendedStatus(res?.data?.data);
-            // next_invoice_date
-            // extendDisplay
-        } catch (error) {
-            console.error(error);
-        }
+  useEffect(() => {
+    handleKycData();
+  }, []);
+
+  // const imagesArray = selectedImage?.product_image
+  //     ?.split(",")
+  //     ?.slice(0, 3)
+  //     .filter(item => item !== "");
+
+  const toggleDropdownSort = () => {
+    setSortOpen(!sortOpen);
+  };
+
+  const handleSort = (value, index) => {
+    setSelectedOption(value?.dealCodeNumber);
+    setSelectedOrder(value);
+    setMobileSelecteData(value);
+    const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
+      return item?.product_image?.split(",")?.slice(0, 1)[0];
+    });
+
+    setSelectedImage(NewImagearray);
+    ExtendedKyc(value?.dealCodeNumber);
+  };
+
+  const handleSortMobile = value => {
+    setMobileSelecteData(value);
+    setSelectedOption(value?.dealCodeNumber);
+    setSelectedOrder(value);
+
+    const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
+      return item?.product_image?.split(",")?.slice(0, 1)[0];
+    });
+
+    setSelectedImage(NewImagearray);
+    ExtendedKyc(value?.dealCodeNumber);
+    setSortOpen(false);
+  };
+
+  useEffect(() => {
+    const checkHeight = () => {
+      if (window.innerWidth > 800) {
+        setIsHeightGreaterThan600(true);
+      } else {
+        setIsHeightGreaterThan600(false);
+      }
     };
-
-    const dataArray = [
-        {
-            id: 1,
-            label: "Swap product",
-            icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/swap-product.svg",
-            clickable: handleClickAction("Swap product"),
-        },
-        {
-            id: 2,
-            label: "Buy",
-            icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/buy.svg",
-            clickable: handleClickAction("Buy"),
-        },
-        {
-            id: 3,
-            label: "Repair",
-            icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/repair.svg",
-            clickable: handleClickAction("Repair"),
-        },
-        {
-            id: 4,
-            label: "Relocation",
-            icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/relocation.svg",
-            clickable: handleClickAction("Relocation"),
-        },
-    ];
-
-    const userId = decrypt(getLocalStorage("_ga"));
-
-    const handleKycData = async () => {
-        const body = {
-            userId,
-        };
-        try {
-            const res = await baseInstance.post(
-                endPoints.myOrdersPage.getAllOrders,
-                body,
-            );
-            setData(res?.data?.data);
-            handleSort(res?.data?.data[0]);
-            handleSortMobile(res?.data?.data[0]);
-        } catch (error) {
-            console.log(error);
-        }
+    checkHeight();
+    window.addEventListener("resize", checkHeight);
+    return () => {
+      window.removeEventListener("resize", checkHeight);
     };
+  }, []);
 
-    useEffect(() => {
-        handleKycData();
-    }, []);
-
-    // const imagesArray = selectedImage?.product_image
-    //     ?.split(",")
-    //     ?.slice(0, 3)
-    //     .filter(item => item !== "");
-
-    const toggleDropdownSort = () => {
-        setSortOpen(!sortOpen);
-    };
-
-    const handleSort = (value, index) => {
-        setSelectedOption(value?.dealCodeNumber);
-        setSelectedOrder(value);
-        setMobileSelecteData(value);
-        const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
-            return item?.product_image?.split(",")?.slice(0, 1)[0];
-        });
-
-        setSelectedImage(NewImagearray);
-        ExtendedKyc(value?.dealCodeNumber);
-    };
-
-    const handleSortMobile = value => {
-        setMobileSelecteData(value);
-        setSelectedOption(value?.dealCodeNumber);
-        setSelectedOrder(value);
-
-        const NewImagearray = JSON.parse(value?.fc_paymentData)?.map(item => {
-            return item?.product_image?.split(",")?.slice(0, 1)[0];
-        });
-
-        setSelectedImage(NewImagearray);
-        ExtendedKyc(value?.dealCodeNumber);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        dropDownRefSort.current &&
+        !dropDownRefSort.current.contains(event.target)
+      ) {
         setSortOpen(false);
-    };
+      }
+    }
 
-    useEffect(() => {
-        const checkHeight = () => {
-            if (window.innerWidth > 800) {
-                setIsHeightGreaterThan600(true);
-            } else {
-                setIsHeightGreaterThan600(false);
-            }
-        };
-        checkHeight();
-        window.addEventListener("resize", checkHeight);
-        return () => {
-            window.removeEventListener("resize", checkHeight);
-        };
-    }, []);
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
 
     useEffect(() => {
         function handleClickOutside(event) {
