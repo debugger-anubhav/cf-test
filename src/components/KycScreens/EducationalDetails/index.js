@@ -123,6 +123,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
               const pendingStage = pendingDashboardDetail?.filter(
                 i => i.stage_status === 0 || i.stage_status === 1,
               );
+              console.log(pendingStage, "pendingStage");
               if (pendingStage.length > 0) {
                 const ID = pendingStage?.[0]?.id;
                 if (ID === 2) {
@@ -138,8 +139,8 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
                 dispatch(setKycScreenName("congratulation"));
               }
             }, 1500);
+            setLoader(false);
           });
-          setLoader(false);
         })
         .catch(err => {
           console.log(err?.message || "some error");
