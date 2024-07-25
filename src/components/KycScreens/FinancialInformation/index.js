@@ -140,9 +140,7 @@ const FinancialInfo = ({dashboardDetails}) => {
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
-        dashboardDetails();
-
-        setTimeout(() => {
+        dashboardDetails().then(() => {
           const pendingStage = pendingDashboardDetail?.filter(
             i => i.stage_status === 0 || i.stage_status === 1,
           );
@@ -161,8 +159,7 @@ const FinancialInfo = ({dashboardDetails}) => {
           } else {
             dispatch(setKycScreenName("congratulation"));
           }
-        }, 1500);
-
+        });
         dispatch(setStageId(3));
         setDisableButton(false);
         setLoader(false);

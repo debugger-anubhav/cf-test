@@ -118,9 +118,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
       baseInstance
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
-          getDashboardDetailsApi();
-
-          setTimeout(() => {
+          getDashboardDetailsApi().then(() => {
             const pendingStage = pendingDashboardDetail?.filter(
               i => i.stage_status === 0 || i.stage_status === 1,
             );
@@ -138,7 +136,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
             } else {
               dispatch(setKycScreenName("congratulation"));
             }
-          }, 100);
+          });
           setLoader(false);
         })
         .catch(err => {
