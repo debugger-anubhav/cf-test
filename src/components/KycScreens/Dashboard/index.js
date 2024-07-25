@@ -171,13 +171,13 @@ export default function DashboardComponent() {
     );
   };
 
-  const matchKycStatus = {
-    "KYC Docs Under Review": "Under review",
-    "KYC In Progress": "Pending",
-    "KYC Rejected": "Attention needed",
-    "KYC Completed": "Verified",
-    "Delivery Scheduled": "Verified",
-  };
+  // const matchKycStatus = {
+  //   "KYC Docs Under Review": "Under review",
+  //   "KYC In Progress": "Pending",
+  //   "KYC Rejected": "Attention needed",
+  //   "KYC Completed": "Verified",
+  //   "Delivery Scheduled": "Verified",
+  // };
 
   const getDocsDetailsApi = stageId => {
     baseInstance
@@ -212,22 +212,17 @@ export default function DashboardComponent() {
   };
 
   const handleKycStagesClick = item => {
-    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
     dispatch(setStageId(item.id));
     if (item.id === 1) {
       setOpenPanSdk(true);
     }
     if (item.id === 2) {
-      if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
-        // dispatch(setKycScreenName("financialInfo"));
-        setHoldOnLoader(true);
-        getDocsDetailsApi(2);
-      }
+      // dispatch(setKycScreenName("financialInfo"));
+      setHoldOnLoader(true);
+      getDocsDetailsApi(2);
     }
     if (item.id === 3) {
-      if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
-        dispatch(setKycScreenName("professionalDetails"));
-      }
+      dispatch(setKycScreenName("professionalDetails"));
     }
     if (item.id === 6) {
       dispatch(setKycScreenName("autoPay"));
@@ -236,6 +231,7 @@ export default function DashboardComponent() {
       setHoldOnLoader(true);
       getDocsDetailsApi(7);
     }
+    window.scrollTo({top: 0, left: 0, behavior: "smooth"});
   };
 
   const handleDelivery = () => {
@@ -393,7 +389,7 @@ export default function DashboardComponent() {
           </div>
 
           <div className={styles.kyc_status_box}>
-            <p className={styles.sub_heading}>KYC status:</p>
+            <p className={`font-Poppins text-71717A text-16`}>KYC status:</p>
             <p className={`${styles.heading}  md:!text-20 `}>
               {dashboardDetails?.kycStatus === "Rejected" ? (
                 "Attention needed"

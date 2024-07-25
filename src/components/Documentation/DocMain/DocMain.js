@@ -321,7 +321,7 @@ const DocMain = () => {
                       }
                       width={40}
                       height={20}
-                      className="md:w-10 w-5 h-5 "
+                      className=" w-5 h-5 "
                       alt="mobile-icon"
                     />{" "}
                     Fast-Track Your Orders!
