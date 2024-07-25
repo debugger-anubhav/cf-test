@@ -213,7 +213,6 @@ export default function DashboardComponent() {
   };
 
   const handleKycStagesClick = item => {
-    console.log("llllllllllllllllllll");
     dispatch(setStageId(item.id));
     if (item.id === 1) {
       setOpenPanSdk(true);
@@ -224,7 +223,9 @@ export default function DashboardComponent() {
       getDocsDetailsApi(2);
     }
     if (item.id === 3) {
-      dispatch(setKycScreenName("professionalDetails"));
+      if (professionId === 2) {
+        setOpenGstSdk(true);
+      } else dispatch(setKycScreenName("professionalDetails"));
     }
     if (item.id === 6) {
       dispatch(setKycScreenName("autoPay"));
@@ -295,6 +296,10 @@ export default function DashboardComponent() {
       getDocsDetailsApi(7);
     }
   }, [currentScreen]);
+
+  useEffect(() => {
+    console.log(openGstSdk, "ppppppppppppppppp");
+  }, [openGstSdk]);
 
   return (
     <div>

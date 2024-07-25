@@ -24,9 +24,13 @@ export default function GstSdk({
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handler = HyperKycResult => {
+    console.log("come in handler1");
+
     if (HyperKycResult?.status === "user_cancelled") {
       setOpenGstSdk(false);
     }
+    console.log("ome in handler2");
+
     // console.log(HyperKycResult, "gst hyperverge");
     setHoldOnLoader(true);
     saveGstDetailsApi({
@@ -43,10 +47,11 @@ export default function GstSdk({
       .then(res => {
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(token, "gstin", selectedId);
+        console.log("come in gst");
+
         window.HyperKYCModule.launch(config, handler);
-        setOpenGstSdk(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err, "err"));
   };
 
   const saveGstDetailsApi = details => {
@@ -84,6 +89,7 @@ export default function GstSdk({
         dispatch(setKycScreenName("dashboard"));
         console.log(err);
       });
+    setOpenGstSdk(false);
   };
 
   useEffect(() => {
