@@ -38,7 +38,6 @@ export default function GstSdk({
       userId,
       orderId: data?.dealCodeNumber,
     });
-    setHoldOnLoader(false);
   };
 
   const handleClick = () => {
@@ -60,9 +59,10 @@ export default function GstSdk({
       .then(res => {
         if (res?.data?.data?.data?.rejected) {
           showToastNotification(res?.data?.data?.message, 3);
+          setOpenGstSdk(false);
+          dispatch(setKycScreenName("dashboard"));
         } else {
-          getDashboardDetailsApi();
-          setTimeout(() => {
+          getDashboardDetailsApi().then(() => {
             const pendingStage = pendingDashboardDetail?.filter(
               i => i.stage_status === 0 || i.stage_status === 1,
             );
@@ -81,7 +81,7 @@ export default function GstSdk({
             } else {
               dispatch(setKycScreenName("congratulation"));
             }
-          }, 1500);
+          });
         }
       })
 

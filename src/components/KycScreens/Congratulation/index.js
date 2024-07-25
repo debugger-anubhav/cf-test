@@ -160,7 +160,7 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
           }
           heading={
             showFirstContent ? (
-              <div className="flex items-baseline w-full mr-2">
+              <div className="flex items-start w-full mr-2">
                 <img
                   src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/cf_coin.svg"
                   alt="cf-coins"

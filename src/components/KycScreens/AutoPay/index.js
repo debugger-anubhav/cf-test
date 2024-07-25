@@ -46,8 +46,7 @@ export default function AutoPay({getDashboardDetailsApi}) {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          getDashboardDetailsApi();
-          setTimeout(() => {
+          getDashboardDetailsApi().then(() => {
             const pendingStage = pendingDashboardDetail?.filter(
               i => i.stage_status === 0 || i.stage_status === 1,
             );
@@ -67,7 +66,7 @@ export default function AutoPay({getDashboardDetailsApi}) {
             } else {
               dispatch(setKycScreenName("congratulation"));
             }
-          }, 1500);
+          });
           setLoading(false);
         } else {
           setLoading(false);
