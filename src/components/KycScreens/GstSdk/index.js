@@ -4,14 +4,11 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
-import styles from "../Dashboard/styles.module.css";
 import {setKycScreenName} from "../../../store/Slices";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 export default function GstSdk({
-  item,
-  status,
   getDashboardDetailsApi,
   openGstSdk,
   setOpenGstSdk,
@@ -25,9 +22,11 @@ export default function GstSdk({
   );
   const [holdOnLoader, setHoldOnLoader] = useState(false);
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
-  const professionId = kycSliceData.selectedProfessionId;
 
   const handler = HyperKycResult => {
+    if (HyperKycResult?.status === "user_cancelled") {
+      setOpenGstSdk(false);
+    }
     // console.log(HyperKycResult, "gst hyperverge");
     setHoldOnLoader(true);
     saveGstDetailsApi({
@@ -51,24 +50,36 @@ export default function GstSdk({
   };
 
   const saveGstDetailsApi = details => {
-    const temp = pendingDashboardDetail?.filter(i => i.id === 6);
     baseInstance
       .post(endPoints.kycPage.saveGstDetails, details)
       .then(res => {
-        // console.log(res?.data?.data, "response of savehyperverdetails");
-        getDashboardDetailsApi();
-        if (professionId === 4) {
-          dispatch(setKycScreenName("educationalDetails"));
-        } else if (temp.length > 0) {
-          dispatch(setKycScreenName("autoPay"));
-        } else {
-          dispatch(setKycScreenName("dashboard"));
-        }
-
         if (res?.data?.data?.data?.rejected) {
           showToastNotification(res?.data?.data?.message, 3);
+        } else {
+          getDashboardDetailsApi();
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            console.log(pendingStage, "pendingStage");
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 7) {
+                dispatch(setKycScreenName("educationalDetails"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          }, 1500);
         }
       })
+
       .catch(err => {
         dispatch(setKycScreenName("dashboard"));
         console.log(err);
@@ -87,7 +98,7 @@ export default function GstSdk({
 
   return (
     <>
-      {!openGstSdk && (
+      {/* {!openGstSdk && (
         <>
           <div
             className={`!hidden md:!flex ${styles.details_box}`}
@@ -98,11 +109,21 @@ export default function GstSdk({
             }}>
             <div className={styles.first_row_detail_box}>
               <div className={styles.detail_heading}>{item?.stage_name}</div>
-              <div className={styles.sub_heading}>{status}</div>
+              <div className={styles.sub_heading_box}>{status}</div>
             </div>
             <div className={styles.second_row_detail_box}>
               {item?.stage_description}
             </div>
+            {item?.rejected_reason && (
+              <div className={styles.rejected_reason}>
+                <InfoCircleIcon
+                  color={"#45454A"}
+                  size={15}
+                  className={"pr-2"}
+                />
+                {item?.rejected_reason}
+              </div>
+            )}
           </div>
 
           <div
@@ -114,14 +135,20 @@ export default function GstSdk({
             className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
             <div className={styles.first_row_detail_box}>
               <div className={styles.detail_heading}>{item?.stage_name}</div>
-              <div className={styles.sub_heading}>{status}</div>
+              <div className={styles.sub_heading_box}>{status}</div>
             </div>
             <div className={styles.second_row_detail_box}>
               {item?.stage_description}
             </div>
+            {item?.rejected_reason && (
+              <div className={styles.rejected_reason}>
+                <InfoCircleIcon color={"#45454A"} size={15} />
+                {item?.rejected_reason}
+              </div>
+            )}
           </div>
         </>
-      )}
+      )} */}
       {holdOnLoader && (
         <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
       )}

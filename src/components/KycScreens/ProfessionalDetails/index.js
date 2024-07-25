@@ -52,8 +52,10 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
       });
     } else if (professionId === 3 || professionId === 4) {
       return Yup.object().shape({
-        nomineeName: Yup.string().required("Nominee name is required"),
-        nomineeRelation: Yup.string().required("Nominee relation is required"),
+        nomineeName: Yup.string().required("Guardian’s name is required"),
+        nomineeRelation: Yup.string().required(
+          "Guardian’s relation is required",
+        ),
         nomineeNumber: Yup.string()
           .test(
             "no-spaces-special-characters",
@@ -70,7 +72,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
             10,
             "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
           )
-          .required("Nominee number is required"),
+          .required("Guardian’s number is required"),
       });
     }
   };
@@ -238,7 +240,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                           type="text"
                           id="nomineeName"
                           name="nomineeName"
-                          placeholder="Enter nominee’s name"
+                          placeholder="Enter Guardian’s name"
                           className={styles.label_input_style}
                         />
                         <ErrorMessage
@@ -279,7 +281,9 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                       </div>
 
                       <div className={styles.company_detail_wapper}>
-                        <label className={styles.label}>Nominee’s number</label>
+                        <label className={styles.label}>
+                          Guardian’s number
+                        </label>
 
                         <div
                           className={`flex gap-2 items-center ${styles.label_input_style}`}>
@@ -293,7 +297,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                             type="number"
                             id="nomineeNumber"
                             name="nomineeNumber"
-                            placeholder="Enter nominee’s number"
+                            placeholder="Enter Guardian’s number"
                             className="outline-none"
                           />
                         </div>
@@ -321,7 +325,11 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
       )}
 
       {professionId === 2 && openGstSdk && (
-        <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
+        <GstSdk
+          openGstSdk={openGstSdk}
+          setOpenGstSdk={setOpenGstSdk}
+          getDashboardDetailsApi={getDashboardDetailsApi}
+        />
       )}
       <VerfiEmail
         openModal={openModal}
