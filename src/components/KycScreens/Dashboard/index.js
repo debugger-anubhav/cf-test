@@ -219,7 +219,9 @@ export default function DashboardComponent() {
     }
     if (item.id === 2) {
       if (matchKycStatus[dashboardDetails?.zoho_sub_status] === "Pending") {
-        dispatch(setKycScreenName("financialInfo"));
+        // dispatch(setKycScreenName("financialInfo"));
+        setHoldOnLoader(true);
+        getDocsDetailsApi(2);
       }
     }
     if (item.id === 3) {
@@ -231,7 +233,8 @@ export default function DashboardComponent() {
       dispatch(setKycScreenName("autoPay"));
     }
     if (item.id === 7) {
-      dispatch(setKycScreenName("educationalDetails"));
+      setHoldOnLoader(true);
+      getDocsDetailsApi(7);
     }
   };
 
