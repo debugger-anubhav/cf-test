@@ -172,11 +172,6 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
           />
           Educational details
         </div>
-        <button
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={`${styles.doItLater}`}>
-          I’ll do it later
-        </button>
       </div>
 
       <div className={styles.detail_wapper}>
@@ -325,7 +320,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
         onClick={() => {
           submitHandler();
         }}>
-        proceed
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
       {loader && <LoaderComponent loading={loader} />}

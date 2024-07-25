@@ -201,7 +201,10 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                         />
                       </div>
                       <div className={styles.company_detail_wapper}>
-                        <label className={styles.label}>Company email ID</label>
+                        <label className={styles.label}>
+                          {" "}
+                          Company Email Id
+                        </label>
                         <div
                           className={`${styles.label_input_style} flex justify-between`}>
                           <Field

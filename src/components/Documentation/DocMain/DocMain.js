@@ -271,8 +271,10 @@ const DocMain = () => {
               <div className="flex text-71717A font-Poppins md:text-base text-14 pb-1">
                 Select an order to view its documentation status
               </div>
-              <div onClick={() => setOpenDrawer(true)}>
-                <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
+              <div>
+                <div
+                  className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer"
+                  onClick={() => setOpenDrawer(true)}>
                   {orderIdFromUrl ? (
                     <span>#{orderIdFromUrl}</span>
                   ) : (

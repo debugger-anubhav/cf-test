@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
   const dispatch = useDispatch();
 
-  const [openDrawer, setOpenDrawer] = useState(true);
+  const [openDrawer, setOpenDrawer] = useState(false);
   const [showFirstContent, setShowFirstContent] = useState(false);
 
   const handleButtonClick = () => {
