@@ -118,29 +118,28 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
       baseInstance
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
-          getDashboardDetailsApi().then(() => {
-            setTimeout(() => {
-              const pendingStage = pendingDashboardDetail?.filter(
-                i => i.stage_status === 0 || i.stage_status === 1,
-              );
-              console.log(pendingStage, "pendingStage");
-              if (pendingStage.length > 0) {
-                const ID = pendingStage?.[0]?.id;
-                if (ID === 2) {
-                  dispatch(setKycScreenName("financialInfo"));
-                }
-                if (ID === 3) {
-                  dispatch(setKycScreenName("professionalDetails"));
-                }
-                if (ID === 6) {
-                  dispatch(setKycScreenName("autoPay"));
-                }
-              } else {
-                dispatch(setKycScreenName("congratulation"));
+          getDashboardDetailsApi();
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            console.log(pendingStage, "pendingStage");
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
               }
-            }, 1500);
-            setLoader(false);
-          });
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          }, 1500);
+          setLoader(false);
         })
         .catch(err => {
           console.log(err?.message || "some error");

@@ -73,25 +73,44 @@ export default function DashboardComponent() {
     kycSliceData?.progressPercent,
   );
 
-  const getDashboardDetailsApi = async () => {
-    try {
-      const res = await baseInstance.get(
-        endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
-      );
+  // const getDashboardDetailsApi = async () => {
+  //   try {
+  //     const res = await baseInstance.get(
+  //       endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
+  //     );
 
-      setDashboardDetails(res?.data?.data);
-      dispatch(
-        setSelectedProfessionId(
-          res?.data?.data?.professionDetail?.profession_id,
-        ),
-      );
-      setOrderDate(res?.data?.data?.orderDate);
-      setLoadingSkeleton(false);
-    } catch (err) {
-      console.log(err?.message || "some error");
-    } finally {
-      setLoadingSkeleton(false);
-    }
+  //     setDashboardDetails(res?.data?.data);
+  //     dispatch(
+  //       setSelectedProfessionId(
+  //         res?.data?.data?.professionDetail?.profession_id,
+  //       ),
+  //     );
+  //     setOrderDate(res?.data?.data?.orderDate);
+  //     setLoadingSkeleton(false);
+  //   } catch (err) {
+  //     console.log(err?.message || "some error");
+  //   } finally {
+  //     setLoadingSkeleton(false);
+  //   }
+  // };
+
+  const getDashboardDetailsApi = () => {
+    baseInstance
+      .get(endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber))
+      .then(res => {
+        setDashboardDetails(res?.data?.data);
+        dispatch(
+          setSelectedProfessionId(
+            res?.data?.data?.professionDetail?.profession_id,
+          ),
+        );
+        setOrderDate(res?.data?.data?.orderDate);
+        setLoadingSkeleton(false);
+      })
+      .catch(err => {
+        console.log(err?.message || "some error");
+        setLoadingSkeleton(false);
+      });
   };
 
   const formatDate = dateString => {
@@ -520,8 +539,8 @@ export default function DashboardComponent() {
                               ) {
                                 setOpenPanSdk(true);
                               } else if (
-                                item.stage_status === 0 ||
-                                item.stage_status === 3
+                                item.stage_status !== 2 &&
+                                item.stage_status !== 1
                               ) {
                                 handleKycStagesClick(item);
                               }
@@ -556,8 +575,8 @@ export default function DashboardComponent() {
                             ) {
                               setOpenPanSdk(true);
                             } else if (
-                              item.stage_status !== 2 ||
-                              item.stage_status === 3
+                              item.stage_status !== 2 &&
+                              item.stage_status !== 1
                             ) {
                               handleKycStagesClick(item);
                             }
