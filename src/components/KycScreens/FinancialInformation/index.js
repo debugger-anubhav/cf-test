@@ -141,24 +141,26 @@ const FinancialInfo = ({dashboardDetails}) => {
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
         dashboardDetails().then(() => {
-          const pendingStage = pendingDashboardDetail?.filter(
-            i => i.stage_status === 0 || i.stage_status === 1,
-          );
-          console.log(pendingStage, "pendingStage");
-          if (pendingStage.length > 0) {
-            const ID = pendingStage?.[0]?.id;
-            if (ID === 3) {
-              dispatch(setKycScreenName("professionalDetails"));
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            console.log(pendingStage, "pendingStage");
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+              if (ID === 7) {
+                dispatch(setKycScreenName("educationalDetails"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
             }
-            if (ID === 6) {
-              dispatch(setKycScreenName("autoPay"));
-            }
-            if (ID === 7) {
-              dispatch(setKycScreenName("educationalDetails"));
-            }
-          } else {
-            dispatch(setKycScreenName("congratulation"));
-          }
+          }, 1500);
         });
         dispatch(setStageId(3));
         setDisableButton(false);

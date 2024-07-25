@@ -95,24 +95,26 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
         getDashboardDetailsApi().then(() => {
-          const pendingStage = pendingDashboardDetail?.filter(
-            i => i.stage_status === 0 || i.stage_status === 1,
-          );
-          if (pendingStage.length > 0) {
-            const ID = pendingStage?.[0]?.id;
-            if (ID === 2) {
-              dispatch(setKycScreenName("financialInfo"));
+          setTimeout(() => {
+            const pendingStage = pendingDashboardDetail?.filter(
+              i => i.stage_status === 0 || i.stage_status === 1,
+            );
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+              if (ID === 7) {
+                dispatch(setKycScreenName("educationalDetails"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
             }
-            if (ID === 6) {
-              dispatch(setKycScreenName("autoPay"));
-            }
-            if (ID === 7) {
-              dispatch(setKycScreenName("educationalDetails"));
-            }
-          } else {
-            dispatch(setKycScreenName("congratulation"));
-          }
-          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          }, 1500);
         });
       })
       .catch(err => console.log(err));
