@@ -7,6 +7,7 @@ import {
   CheckCircleIcon,
   ForwardArrow,
   ForwardArrowWithLine,
+  InfoCircleIcon,
 } from "../../../assets/icon";
 import {useDispatch, useSelector} from "react-redux";
 import {decrypt} from "@/hooks/cryptoUtils";
@@ -212,6 +213,7 @@ export default function DashboardComponent() {
   };
 
   const handleKycStagesClick = item => {
+    console.log("llllllllllllllllllll");
     dispatch(setStageId(item.id));
     if (item.id === 1) {
       setOpenPanSdk(true);
@@ -516,52 +518,64 @@ export default function DashboardComponent() {
                 ) : (
                   <>
                     {dashboardDetails?.allKycStages?.map((item, index) => {
-                      if (item.id === 3 && professionId === 2) {
-                        return (
-                          <div key={index.toString()}>
-                            <GstSdk
-                              item={item}
-                              status={convertStatus(item?.stage_status)}
-                              getDashboardDetailsApi={getDashboardDetailsApi}
-                            />
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div
-                            className={`${styles.details_box} ${
-                              item.stage_status === 2 || item.stage_status === 1
-                                ? "!cursor-default"
-                                : "cursor-pointer"
-                            }`}
-                            key={index.toString()}
-                            onClick={() => {
-                              if (
-                                dashboardDetails?.allKycStages?.[0]
-                                  ?.stage_status !== 2
-                              ) {
-                                setOpenPanSdk(true);
-                              } else if (
-                                item.stage_status !== 2 &&
-                                item.stage_status !== 1
-                              ) {
-                                handleKycStagesClick(item);
-                              }
-                            }}>
-                            <div className={styles.first_row_detail_box}>
-                              <div className={styles.detail_heading}>
-                                {item?.stage_name}
-                              </div>
-                              <div className={styles.sub_heading}>
-                                {convertStatus(item?.stage_status)}
-                              </div>
+                      return (
+                        <div
+                          className={`${styles.details_box} ${
+                            item.stage_status === 2 || item.stage_status === 1
+                              ? "!cursor-default"
+                              : "cursor-pointer"
+                          }`}
+                          key={index.toString()}
+                          onClick={() => {
+                            if (
+                              dashboardDetails?.allKycStages?.[0]
+                                ?.stage_status !== 2
+                            ) {
+                              setOpenPanSdk(true);
+                            } else if (
+                              item.stage_status !== 2 &&
+                              item.stage_status !== 1
+                            ) {
+                              handleKycStagesClick(item);
+                            }
+                          }}>
+                          <div className={styles.first_row_detail_box}>
+                            <div className={styles.detail_heading}>
+                              {item?.stage_name}
                             </div>
-                            <div className={styles.second_row_detail_box}>
-                              {item?.stage_description}
+                            <div className={styles.sub_heading_box}>
+                              {convertStatus(item?.stage_status)}
                             </div>
                           </div>
-                        );
-                      }
+                          <div className={styles.second_row_detail_box}>
+                            {item?.stage_description}
+                          </div>
+                          {item?.rejected_reason && (
+                            <div className={styles.rejected_reason}>
+                              <InfoCircleIcon
+                                color={"#45454A"}
+                                size={15}
+                                className={"mr-2"}
+                              />
+                              {item?.rejected_reason}
+                            </div>
+                          )}
+                        </div>
+                      );
+
+                      // if (item.id === 3 && professionId === 2) {
+                      //   return (
+                      //     <div key={index.toString()}>
+                      //       <GstSdk
+                      //         item={item}
+                      //         status={convertStatus(item?.stage_status)}
+                      //         getDashboardDetailsApi={getDashboardDetailsApi}
+                      //       />
+                      //     </div>
+                      //   );
+                      // } else {
+
+                      // }
                     })}
                   </>
                 )}
@@ -603,13 +617,23 @@ export default function DashboardComponent() {
                             <div className={styles.detail_heading}>
                               {item?.stage_name}
                             </div>
-                            <div className={styles.sub_heading}>
+                            <div className={styles.sub_heading_box}>
                               {convertStatus(item?.stage_status)}
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
                             {item?.stage_description}
                           </div>
+                          {item?.rejected_reason && (
+                            <div className={styles.rejected_reason}>
+                              <InfoCircleIcon
+                                color={"#45454A"}
+                                size={15}
+                                className={"mr-2"}
+                              />
+                              {item?.rejected_reason}
+                            </div>
+                          )}
                         </div>
                       );
                     })}
@@ -642,7 +666,11 @@ export default function DashboardComponent() {
           )}
 
           {professionId === 2 && openGstSdk && (
-            <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
+            <GstSdk
+              openGstSdk={openGstSdk}
+              setOpenGstSdk={setOpenGstSdk}
+              getDashboardDetailsApi={getDashboardDetailsApi}
+            />
           )}
 
           {openDeliverySlot && (
