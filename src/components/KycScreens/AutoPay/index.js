@@ -51,6 +51,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
               const pendingStage = pendingDashboardDetail?.filter(
                 i => i.stage_status === 0 || i.stage_status === 1,
               );
+              console.log(pendingStage, "pendingStage");
+
               if (pendingStage.length > 0) {
                 const ID = pendingStage?.[0]?.id;
                 if (ID === 2) {
@@ -66,9 +68,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
                 dispatch(setKycScreenName("congratulation"));
               }
             }, 1500);
+            setLoading(false);
           });
-
-          setLoading(false);
         } else {
           setLoading(false);
           showToastNotification(response.data.message, 3);

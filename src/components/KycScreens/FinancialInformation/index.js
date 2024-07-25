@@ -161,10 +161,10 @@ const FinancialInfo = ({dashboardDetails}) => {
               dispatch(setKycScreenName("congratulation"));
             }
           }, 1500);
+          setLoader(false);
         });
         dispatch(setStageId(3));
         setDisableButton(false);
-        setLoader(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
