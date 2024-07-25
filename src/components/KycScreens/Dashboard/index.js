@@ -358,11 +358,13 @@ export default function DashboardComponent() {
             <div className={styles.profession_left}>
               Profession: {dashboardDetails?.professionDetail?.profession}{" "}
             </div>
-            <div
-              className={styles.profession_right}
-              onClick={() => setChangeProfession(true)}>
-              Change
-            </div>
+            {dashboardDetails?.allKycStages?.[0].stage_status !== 2 && (
+              <div
+                className={styles.profession_right}
+                onClick={() => setChangeProfession(true)}>
+                Change
+              </div>
+            )}
           </div>
 
           <div className={styles.order_placed_wrapper}>
@@ -550,11 +552,16 @@ export default function DashboardComponent() {
                                 handleKycStagesClick(item);
                               }
                             }}>
-                            <div className={styles.detail_heading}>
-                              {item?.stage_name}
+                            <div className={styles.first_row_detail_box}>
+                              <div className={styles.detail_heading}>
+                                {item?.stage_name}
+                              </div>
+                              <div className={styles.sub_heading}>
+                                {convertStatus(item?.stage_status)}
+                              </div>
                             </div>
-                            <div className={styles.sub_heading}>
-                              {convertStatus(item?.stage_status)}
+                            <div className={styles.second_row_detail_box}>
+                              {item?.stage_description}
                             </div>
                           </div>
                         );
@@ -596,11 +603,16 @@ export default function DashboardComponent() {
                   }
                   
                   `}>
-                          <div className={styles.detail_heading}>
-                            {item?.stage_name}
+                          <div className={styles.first_row_detail_box}>
+                            <div className={styles.detail_heading}>
+                              {item?.stage_name}
+                            </div>
+                            <div className={styles.sub_heading}>
+                              {convertStatus(item?.stage_status)}
+                            </div>
                           </div>
-                          <div className={styles.sub_heading}>
-                            {convertStatus(item?.stage_status)}
+                          <div className={styles.second_row_detail_box}>
+                            {item?.stage_description}
                           </div>
                         </div>
                       );

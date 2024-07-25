@@ -92,3 +92,6 @@
 .heading_box {
   @apply py-3 px-4 font-Poppins border w-full lg:w-[502px] border-DDDDDF rounded-xl md:text-16 text-14 leading-6 tracking-0.3;
 }
+.note {
+  @apply font-Poppins text-71717A text-14 leading-5 tracking-0.3 pt-4;
+}

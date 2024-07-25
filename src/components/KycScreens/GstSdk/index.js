@@ -94,9 +94,15 @@ export default function GstSdk({
                 return null;
               } else handleClick();
             }}>
-            <div className={styles.detail_heading}>{item?.stage_name}</div>
-            <div className={styles.sub_heading}>{status}</div>
+            <div className={styles.first_row_detail_box}>
+              <div className={styles.detail_heading}>{item?.stage_name}</div>
+              <div className={styles.sub_heading}>{status}</div>
+            </div>
+            <div className={styles.second_row_detail_box}>
+              {item?.stage_description}
+            </div>
           </div>
+
           <div
             onClick={() => {
               if (item.stage_status === 2 || item.stage_status === 1) {
@@ -104,8 +110,13 @@ export default function GstSdk({
               } else handleClick();
             }}
             className={`${styles.mobile_detail_box} border-b !flex md:!hidden `}>
-            <div className={styles.detail_heading}>{item?.stage_name}</div>
-            <div className={styles.sub_heading}>{status}</div>
+            <div className={styles.first_row_detail_box}>
+              <div className={styles.detail_heading}>{item?.stage_name}</div>
+              <div className={styles.sub_heading}>{status}</div>
+            </div>
+            <div className={styles.second_row_detail_box}>
+              {item?.stage_description}
+            </div>
           </div>
         </>
       )}

@@ -335,6 +335,7 @@ const FinancialInfo = ({dashboardDetails}) => {
                 </span>
               </div>
             </label>
+
             {formData.financialDocumentProof.name && (
               <div className="flex cursor-pointer">
                 <span
@@ -365,7 +366,10 @@ const FinancialInfo = ({dashboardDetails}) => {
           {formErrors.financialDocumentProof}
         </div>
       )}
-
+      <div className={styles.note}>
+        <span className="font-medium"> Note:</span> Please upload the document
+        in PNG or JPG or PDF format only.
+      </div>
       <button
         onClick={() => {
           submitHandler();
