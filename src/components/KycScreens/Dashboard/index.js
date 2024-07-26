@@ -330,7 +330,10 @@ export default function DashboardComponent() {
       )}
 
       {currentScreen === "professionalDetails" && (
-        <ProfessionalDetails getDashboardDetailsApi={getDashboardDetailsApi} />
+        <ProfessionalDetails
+          getDashboardDetailsApi={getDashboardDetailsApi}
+          phoneNumber={dashboardDetails?.userPhoneNumber}
+        />
       )}
 
       {currentScreen === "dashboard" && (
