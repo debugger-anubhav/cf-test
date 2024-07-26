@@ -6,6 +6,8 @@ import {endPoints} from "@/network/endPoints";
 import {Skeleton} from "@mui/material";
 import {baseInstance} from "@/network/axios";
 import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
+// import UploadNewDocs from "./UploadNewDocs";
+import CurrentAddressProof from "../KycScreens/CurrentAddProof";
 
 const Document = () => {
   const params = useParams();
@@ -15,6 +17,7 @@ const Document = () => {
   const [openRejectDrawer, setOpenRejectDrawer] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectRejectedReason, setSelectRejectedReason] = useState(null);
+  const [additionalData, setAdditionalData] = useState(null);
   const handleViewButtonClick = imageUrl => {
     window?.open(imageUrl, "_blank");
   };
@@ -24,15 +27,7 @@ const Document = () => {
     "Additional Information",
     "Upload New Documents",
   ];
-
-  const addtionalInformation = [
-    {label: "Company email id", value: "pragati@cityfurnsh.com"},
-    {label: "Company name", value: "Shethink India Pvt Ltd."},
-    {label: "Guardian’s name", value: "peehu patel"},
-    {label: "Guardian’s relation", value: "Mother"},
-    {label: "Guardian’s phone number", value: "9826926758"},
-    {label: "School/College Name", value: "Davv indore"},
-  ];
+  const [addtionalInformation, setAddtionalInformation] = useState([]);
 
   const documentApproveApiCall = () => {
     baseInstance
@@ -48,22 +43,31 @@ const Document = () => {
       .patch(endPoints.documentationApproveStatusUpdate, {
         status: updatedStatus,
         id: item?.id,
+        reason: selectRejectedReason,
       })
       .then(res => {
         documentApproveApiCall();
       })
       .catch(err => console.log(err?.message || "some error"));
+    setOpenRejectDrawer(false);
   };
-
-  useEffect(() => {
-    documentApproveApiCall();
-  }, []);
 
   const drawerContent = () => {
     return (
       <div>
         <div className=" mt-6">
-          {["sdsds", "fdsdfds", "dsfsd"]?.map((item, index) => {
+          {[
+            "Document Blurred",
+            "Incomplete Document",
+            "Mismatched Name",
+            "Incorrect Document",
+            "Invalid Date",
+            "Account Details Hidden",
+            "Altered Documents",
+            "Low Balance",
+            "Unverified Bank",
+            "Other",
+          ]?.map((item, index) => {
             return (
               <div className={`${style.value_box} mb-2`} key={index.toString()}>
                 <label className={style.radio_container}>
@@ -100,9 +104,42 @@ const Document = () => {
       </div>
     );
   };
+  const additionalDetailsApi = () => {
+    baseInstance
+      .get(endPoints.getUserAdditionalDetails(orderId))
+      .then(res => {
+        setAdditionalData(res?.data?.data?.kycData);
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
+
   useEffect(() => {
-    console.log(apiData, "pppppppppp");
-  }, [apiData]);
+    documentApproveApiCall();
+    additionalDetailsApi();
+  }, []);
+
+  useEffect(() => {
+    setAddtionalInformation([
+      {
+        label: "Company email id",
+        value: additionalData?.company_email_id || "--",
+      },
+      {label: "Company name", value: additionalData?.company_name || "--"},
+      {label: "Guardian’s name", value: additionalData?.nominee_name || "--"},
+      {
+        label: "Guardian’s relation",
+        value: additionalData?.nominee_relation || "--",
+      },
+      {
+        label: "Guardian’s phone number",
+        value: additionalData?.nominee_contact_no || "--",
+      },
+      {
+        label: "School/College Name",
+        value: additionalData?.education_details || "--",
+      },
+    ]);
+  }, [additionalData]);
 
   return (
     <div className={style.conatiner_wrapper}>
@@ -121,7 +158,9 @@ const Document = () => {
           </p>
         </div>
         <div className={style.profession_row}>
-          <div className={style.profession_left}>Profession: Student</div>
+          <div className={style.profession_left}>
+            Profession: {additionalData?.profession_name}
+          </div>
         </div>
       </div>
 
@@ -260,7 +299,11 @@ const Document = () => {
             })}
           </div>
         )}
-
+        {activeTab === 2 && (
+          <div className="px-6 pb-6">
+            <CurrentAddressProof showHeading={false} />
+          </div>
+        )}
         {openRejectDrawer && (
           <KycCommonDrawer
             content={drawerContent()}
