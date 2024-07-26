@@ -17,7 +17,7 @@
   @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] w-fit px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 .radio_button {
-  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
+  @apply lg:w-5 lg:h-5 w-4 h-4 flex cursor-pointer;
 }
 .verifyTxt {
   @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium min-w-fit;

@@ -260,7 +260,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                           {nomineeRelation?.map((item, index) => {
                             return (
                               <div
-                                className={`flex gap-3 items-center cursor-pointer w-full lg:w-[502px] `}
+                                className={`flex gap-3 items-center md:p-4 p-3 cursor-pointer w-full lg:w-[502px] border  rounded-xl border-DDDDDF`}
                                 key={index.toString()}>
                                 <Field
                                   type="radio"
@@ -268,7 +268,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                                   value={item}
                                   className={styles.radio_button}
                                 />
-                                <p className="border w-full border-DDDDDF md:p-4 p-3 rounded-xl md:text-16 text-14 font-Poppins tracking-0.3 leading-6 text-71717A">
+                                <p className=" w-full md:text-16 text-14 font-Poppins tracking-0.3 leading-6 text-71717A">
                                   {item}
                                 </p>
                               </div>
