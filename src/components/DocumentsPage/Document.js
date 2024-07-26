@@ -100,28 +100,68 @@ const Document = () => {
       </div>
     );
   };
+  useEffect(() => {
+    console.log(apiData, "pppppppppp");
+  }, [apiData]);
 
   return (
     <div className={style.conatiner_wrapper}>
-      <div className={style.heading_row}>
-        <h1 className={style.heading}>Order:#{orderId}</h1>
-        <p className={style.sub_text}>Tenure: 6 months . Paid: Upfront</p>
+      <div className={`mt-[44px] ${style.top_div_wrapper}`}>
+        <div className={style.heading_row}>
+          <h1 className={style.heading}>Order: #{orderId}</h1>
+          <p className={style.sub_text}>
+            Tenure:{" "}
+            <span className="text-222 pl-1">
+              {apiData?.userData?.fc_subproducts?.attr_name}
+            </span>
+            . Paid:
+            <span className="text-222 pl-1">
+              {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
+            </span>
+          </p>
+        </div>
+        <div className={style.profession_row}>
+          <div className={style.profession_left}>Profession: Student</div>
+        </div>
       </div>
-      <div className={style.sub_heading}>
-        Documentation stage:
-        {apiData?.autoPay === "true" ? (
-          <span className="pl-1"> Autopay done</span>
-        ) : (
-          <span className="pl-1 text-[#D96060]">Documents still pending</span>
-        )}
-        {apiData?.autoPay === "true" && (
-          <div className={style.success_icon_div}>
-            <FaCheck color={"white"} size="16" />
+
+      <div className={`${style.top_div_wrapper} !items-center`}>
+        <div>
+          <div className={style.sub_heading}>
+            Documentation stage:
+            {apiData?.autoPay === "true" ? (
+              <span className="pl-1"> Autopay done</span>
+            ) : (
+              <span className="pl-1 text-[#D96060]">
+                Documents still pending
+              </span>
+            )}
+            {apiData?.autoPay === "true" && (
+              <div className={style.success_icon_div}>
+                <FaCheck color={"white"} size="16" />
+              </div>
+            )}
           </div>
-        )}
-      </div>
-      <div className={`${style.sub_heading} mt-2`}>
-        Credit Score - {apiData?.cibilScore}
+          <div className={`${style.sub_heading} mt-2`}>
+            Credit Score - {apiData?.cibilScore}
+          </div>
+        </div>
+
+        <div className={style.user_detail_box}>
+          <p className={style.sub_text}>
+            Name:{" "}
+            <span className="text-222 pl-1">
+              {apiData?.userData?.fc_user?.full_name}
+            </span>
+          </p>
+          <p className={style.sub_text}>
+            Email Id:{" "}
+            <span className="text-222 pl-1">
+              {" "}
+              {apiData?.userData?.fc_user?.email}
+            </span>
+          </p>
+        </div>
       </div>
 
       <div className={style.table}>

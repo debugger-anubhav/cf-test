@@ -128,3 +128,17 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.profession_left {
+  @apply flex text-71717A font-Poppins md:text-14 text-12 font-medium whitespace-nowrap;
+}
+.profession_row {
+  @apply w-fit bg-[#F0EEFC] px-2 py-1 rounded-lg gap-4;
+}
+
+.top_div_wrapper {
+  @apply flex w-full justify-between items-start;
+}
+.user_detail_box {
+  @apply flex w-fit border border-DDDDDF rounded-lg  p-4 flex-col;
+}
