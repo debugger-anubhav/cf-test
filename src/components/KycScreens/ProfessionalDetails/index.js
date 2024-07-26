@@ -147,7 +147,6 @@ export default function ProfessionalDetails({
       showToastNotification("verify email first", 3);
     } else {
       saveProfessionalDetails(payload);
-      console.log("call api");
     }
   };
 
