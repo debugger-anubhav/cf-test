@@ -14,7 +14,10 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import VerfiEmail from "./VerfiEmail";
 import GstSdk from "../GstSdk";
 
-export default function ProfessionalDetails({getDashboardDetailsApi}) {
+export default function ProfessionalDetails({
+  getDashboardDetailsApi,
+  phoneNumber,
+}) {
   const dispatch = useDispatch();
 
   const kycSliceData = useSelector(state => state.kycPage);
@@ -57,6 +60,13 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
           "Guardian’s relation is required",
         ),
         nomineeNumber: Yup.string()
+          .test(
+            "not-same-as-phoneNumber",
+            "Guardian’s number should not be the same as the registered number",
+            function (value) {
+              return value !== phoneNumber;
+            },
+          )
           .test(
             "no-spaces-special-characters",
             "Please enter a valid 10 digit phone number without spaces or special characters",
@@ -137,6 +147,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
       showToastNotification("verify email first", 3);
     } else {
       saveProfessionalDetails(payload);
+      console.log("call api");
     }
   };
 
@@ -314,7 +325,7 @@ export default function ProfessionalDetails({getDashboardDetailsApi}) {
                   type="submit"
                   className={`${styles.proceed} 
             `}>
-                  proceed
+                  Proceed
                   <OutlineArrowRight color={"#222222"} />
                 </button>
               </Form>

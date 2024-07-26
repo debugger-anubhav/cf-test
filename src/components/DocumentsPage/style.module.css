@@ -2,16 +2,22 @@
   @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 mt-5 mb-[88px] min-h-[40vh];
 }
 .heading {
-  @apply font-Poppins text-24 font-medium text-45454A pb-10 leading-8 tracking-[-2%];
+  @apply font-Poppins text-24 font-medium text-45454A  leading-8 tracking-[-2%];
+}
+.heading_row {
+  @apply flex flex-col pb-10;
 }
 .sub_heading {
   @apply flex items-center font-Poppins text-20 font-medium text-45454A leading-8 tracking-[-2%];
 }
+.sub_text {
+  @apply flex items-center font-Poppins md:text-16 text-14 text-71717A leading-8 tracking-[-2%];
+}
 .table {
-  @apply mt-8;
+  @apply mt-8 border rounded-[4px]  border-DDDDDF;
 }
 .table_headers {
-  @apply grid grid-cols-12 font-Poppins text-16 font-medium leading-6 text-left text-45454A border-b-[1px] border-EDEDEE pb-2;
+  @apply grid grid-cols-12 font-Poppins px-6 text-16 font-medium leading-6 text-left text-45454A border-b-[1px] border-EDEDEE pb-2;
 }
 .table_data {
   @apply grid grid-cols-12 font-Poppins text-16 font-normal leading-6 text-left text-45454A pb-10 pt-6;
@@ -50,4 +56,14 @@
 
 .table_body {
   @apply min-h-[10vh];
+}
+
+.tab_row {
+  @apply flex w-full border-b border-DDDDDF mb-8 bg-F7F7F8;
+}
+.tab_item {
+  @apply flex text-24 px-6 py-4 text-45454A font-Poppins font-medium leading-10 tracking-0.3 border-r border-DDDDDF;
+}
+.active_tab_item {
+  @apply flex text-24 px-6 py-4 text-5774AC font-Poppins font-medium leading-10 tracking-0.3 border-r border-DDDDDF;
 }

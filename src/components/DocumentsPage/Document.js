@@ -40,7 +40,10 @@ const Document = () => {
 
   return (
     <div className={style.conatiner_wrapper}>
-      <h1 className={style.heading}>Order:#{orderId}</h1>
+      <div className={style.heading_row}>
+        <h1 className={style.heading}>Order:#{orderId}</h1>
+        <p className={style.sub_text}>Tenure: 6 months . Paid: Upfront</p>
+      </div>
       <div className={style.sub_heading}>
         Documentation stage:
         {apiData?.autoPay === "true" ? (
@@ -58,6 +61,12 @@ const Document = () => {
         Credit Score - {apiData?.cibilScore}
       </div>
       <div className={style.table}>
+        <div className={style.tab_row}>
+          <div className={style.tab_item}>Documents</div>
+          <div className={style.tab_item}>Additional Information</div>
+          <div className={style.tab_item}>Upload New Documents</div>
+        </div>
+
         <div className={style.table_headers}>
           <p className="col-span-5">Document Name</p>
           <p className="col-span-4">Document Type</p>
