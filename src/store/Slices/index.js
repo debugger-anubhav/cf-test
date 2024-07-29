@@ -317,7 +317,7 @@ export const KycPageSlice = createSlice({
       state.cibilDocsData = action.payload;
     },
     setSelectedDataForKyc(state, action) {
-      console.log(action.payload, ",,,,,,,,,,,");
+      // console.log(action.payload, ",,,,,,,,,,,");
       state.selectedDataForKyc = action.payload;
     },
     setKycScreenName(state, action) {

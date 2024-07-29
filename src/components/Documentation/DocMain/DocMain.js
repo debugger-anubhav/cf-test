@@ -118,10 +118,6 @@ const DocMain = () => {
   //   setOpenDrawer(true);
   // };
   const userId = decrypt(getLocalStorage("_ga"));
-  useEffect(() => {
-    console.log(selectedOption, "setetetetetetet");
-  }, [selectedOption]);
-
   const fetchOrdersDetails = filter => {
     baseInstance
       .get(endPoints.kycPage.getOrderIds(userId))
@@ -294,7 +290,7 @@ const DocMain = () => {
                 <div
                   className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer"
                   onClick={() => setOpenDrawer(true)}>
-                  {orderIdFromUrl ? (
+                  {orderIdFromUrl && selectedOption === null ? (
                     <span>#{orderIdFromUrl}</span>
                   ) : (
                     <span>
