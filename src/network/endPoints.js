@@ -59,6 +59,9 @@ export const endPoints = {
   getCategoryIdBySeoUrl: (key = "") =>
     `fc-categories/getCategoryIdBySeoUrl?seoUrl=${key}`,
 
+  getUserAdditionalDetails: orderId =>
+    `fc-kycs/getUserAdditionalDetails?orderId=${orderId}`,
+
   productPage: {
     completeTheLook: (id, cityId) =>
       `fc-products/getRecommendedProducts?productId=${id}&cityId=${cityId}`,

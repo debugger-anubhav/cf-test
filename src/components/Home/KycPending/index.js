@@ -76,78 +76,6 @@ const KycPending = () => {
     }
   `;
 
-  const handleClickAction = value => {
-    if (value === "Swap product") {
-      if (selectedOrder?.zoho_sub_status === "") {
-        return false;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-      ) {
-        return true;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-      ) {
-        return false;
-      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (value === "Buy") {
-      if (selectedOrder?.zoho_sub_status === "") {
-        return false;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-      ) {
-        return true;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-      ) {
-        return true;
-      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (value === "Repair") {
-      if (selectedOrder?.zoho_sub_status === "") {
-        return false;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-      ) {
-        return true;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-      ) {
-        return false;
-      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-        return true;
-      } else {
-        return false;
-      }
-    } else if (value === "Relocation") {
-      if (selectedOrder?.zoho_sub_status === "") {
-        return false;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "kyc in progress"
-      ) {
-        return true;
-      } else if (
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund processed" ||
-        selectedOrder?.zoho_sub_status.toLowerCase() === "refund requested"
-      ) {
-        return false;
-      } else if (selectedOrder?.zoho_sub_status.toLowerCase() === "delivered") {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-
   const ExtendedKyc = async value => {
     try {
       const res = await baseInstance.get(
@@ -166,25 +94,21 @@ const KycPending = () => {
       id: 1,
       label: "Swap product",
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/swap-product.svg",
-      clickable: handleClickAction("Swap product"),
     },
     {
       id: 2,
       label: "Buy",
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/buy.svg",
-      clickable: handleClickAction("Buy"),
     },
     {
       id: 3,
       label: "Repair",
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/repair.svg",
-      clickable: handleClickAction("Repair"),
     },
     {
       id: 4,
       label: "Relocation",
       icon: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/relocation.svg",
-      clickable: handleClickAction("Relocation"),
     },
   ];
 
@@ -614,12 +538,8 @@ const KycPending = () => {
                         return (
                           <a
                             key={item.id}
-                            href={item?.clickable && "/service-requests"}
-                            className={`${
-                              item?.clickable
-                                ? "!cursor-pointer"
-                                : "!cursor-not-allowed"
-                            } ${style.IconBox}`}>
+                            href={"/service-requests"}
+                            className={`!cursor-pointer  ${style.IconBox}`}>
                             <div className={style.IconBoxIcon}>
                               <Image width={40} height={40} src={item.icon} />
                             </div>
@@ -863,12 +783,8 @@ const KycPending = () => {
                         return (
                           <a
                             key={item.id}
-                            href={item?.clickable && "/service-requests"}
-                            className={`${
-                              item?.clickable
-                                ? "!cursor-pointer"
-                                : "!cursor-not-allowed"
-                            } ${style.IconBox}`}>
+                            href={"/service-requests"}
+                            className={`!cursor-pointer  ${style.IconBox}`}>
                             <div className={style.IconBoxIcon}>
                               <Image
                                 width={40}

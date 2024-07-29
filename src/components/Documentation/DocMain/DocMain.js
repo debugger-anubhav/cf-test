@@ -13,6 +13,7 @@ import KycHeader from "../KycHeader/KycHeader";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
+import SearchLoader from "../../KycScreens/Dashboard/SearchLoader";
 import {
   getOrderId,
   setKycScreenName,
@@ -117,12 +118,25 @@ const DocMain = () => {
   //   setOpenDrawer(true);
   // };
   const userId = decrypt(getLocalStorage("_ga"));
-
   const fetchOrdersDetails = filter => {
     baseInstance
       .get(endPoints.kycPage.getOrderIds(userId))
       .then(res => {
         setOrdersData(res?.data?.data);
+
+        if (orderIdFromUrl) {
+          const filteredData = res?.data?.data?.filter(
+            i => i.dealCodeNumber === orderIdFromUrl,
+          );
+          if (filteredData) {
+            dispatch(setSelectedDataForKyc(filteredData?.[0]));
+            const index = res?.data?.data?.findIndex(
+              deal => deal.dealCodeNumber === filteredData?.[0]?.dealCodeNumber,
+            );
+            setSelectedOption(index);
+          }
+        }
+
         setLoadingSkeleton(false);
       })
       .catch(err => {
@@ -213,6 +227,7 @@ const DocMain = () => {
               />
               {/* //Info box  */}
               <div className={styles.info_box}>
+                <SearchLoader width={"40px"} height={"40px"} />
                 <p className={styles.info}>
                   Complete your KYC quickly for faster product delivery.
                 </p>
@@ -275,7 +290,7 @@ const DocMain = () => {
                 <div
                   className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer"
                   onClick={() => setOpenDrawer(true)}>
-                  {orderIdFromUrl ? (
+                  {orderIdFromUrl && selectedOption === null ? (
                     <span>#{orderIdFromUrl}</span>
                   ) : (
                     <span>

@@ -39,8 +39,11 @@ export default function KycCommonDrawer({content, changeState, heading}) {
         open={isOpen}
         onClose={toggleDrawer(false)}>
         <div className={styles.drawer_content_wrapper}>
-          <div className={`${styles.heading} items-baseline`}>
-            {heading}
+          <div className="flex flex-col w-full">
+            <div className={`${styles.heading} items-baseline`}>{heading}</div>
+            {content}
+          </div>
+          <div className="flex">
             <span
               onClick={event => {
                 event.stopPropagation();
@@ -49,7 +52,6 @@ export default function KycCommonDrawer({content, changeState, heading}) {
               <Close size={25} className={"cursor-pointer relative z-20"} />
             </span>
           </div>
-          {content}
         </div>
       </Drawer>
     </div>

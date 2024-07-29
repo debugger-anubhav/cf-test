@@ -21,7 +21,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
-const CurrentAddressProof = ({cibilDocsData}) => {
+const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
   const dispatch = useDispatch();
 
   const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
@@ -221,16 +221,17 @@ const CurrentAddressProof = ({cibilDocsData}) => {
         </div>
       )}
 
-      <div className={design.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={"cursor-pointer"}
-        />
-        Current address proof
-      </div>
-
+      {showHeading && (
+        <div className={design.heading}>
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => dispatch(setKycScreenName("dashboard"))}
+            className={"cursor-pointer"}
+          />
+          Current address proof
+        </div>
+      )}
       <div className={`${styles.formHeadingThird}`}>
         <span className={`${commonStyles.formHeadings}`}>
           Current address proof
