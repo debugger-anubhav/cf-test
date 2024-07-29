@@ -49,12 +49,12 @@ export default function DashboardComponent() {
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
   const orderId = data?.dealCodeNumber;
 
-  const fcPaymentData = JSON.parse(data?.fc_paymentData);
+  const fcPaymentData = data && JSON.parse(data?.fc_paymentData);
   const productImages = fcPaymentData?.map(
     obj => obj?.product_image?.split(",")?.[0],
   );
   const productImagesArr =
-    productImages.length > 4 ? productImages.slice(0, 3) : productImages;
+    productImages?.length > 4 ? productImages?.slice(0, 3) : productImages;
 
   const [dashboardDetails, setDashboardDetails] = useState([]);
   const [orderDate, setOrderDate] = useState(null);
@@ -393,7 +393,7 @@ export default function DashboardComponent() {
                 <div className="flex gap-2">
                   {Images(productImagesArr)}
                   <span>
-                    {productImages.length > 4 && (
+                    {productImages?.length > 4 && (
                       <div className="w-[40px] h-[40px] flex justify-center items-center rounded-[4px] bg-transparent border border-71717A text-71717A font-medium text-14">
                         +{productImages?.length - 3}
                       </div>

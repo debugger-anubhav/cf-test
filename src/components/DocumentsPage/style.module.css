@@ -5,7 +5,7 @@
   @apply font-Poppins text-24 font-medium text-45454A  leading-8 tracking-[-2%];
 }
 .heading_row {
-  @apply flex flex-col pb-10;
+  @apply flex flex-col;
 }
 .sub_heading {
   @apply flex items-center font-Poppins text-20 font-medium text-45454A leading-8 tracking-[-2%];
@@ -141,4 +141,7 @@
 }
 .user_detail_box {
   @apply flex w-fit border border-DDDDDF rounded-lg  p-4 flex-col;
+}
+.credit_link {
+  @apply mt-2 text-5774AC cursor-pointer font-Poppins text-16 tracking-0.3 leading-6 underline;
 }

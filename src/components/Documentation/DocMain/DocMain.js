@@ -13,6 +13,7 @@ import KycHeader from "../KycHeader/KycHeader";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
+import SearchLoader from "../../KycScreens/Dashboard/SearchLoader";
 import {
   getOrderId,
   setKycScreenName,
@@ -213,6 +214,7 @@ const DocMain = () => {
               />
               {/* //Info box  */}
               <div className={styles.info_box}>
+                <SearchLoader width={"40px"} height={"40px"} />
                 <p className={styles.info}>
                   Complete your KYC quickly for faster product delivery.
                 </p>
