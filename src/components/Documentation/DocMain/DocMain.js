@@ -411,9 +411,7 @@ const DocMain = () => {
                 closeModal();
                 setOpenDrawer(false);
               }}
-              classes={{
-                paper: `${styles.common_drawer_wrapper} pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none max-h-[90%] md:max-h-full overflow-visible`,
-              }}
+              classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
               <SelectOptDrawer
                 loadingSkeleton={loadingSkeleton}

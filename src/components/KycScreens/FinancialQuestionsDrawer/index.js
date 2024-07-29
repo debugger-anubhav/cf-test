@@ -8,6 +8,7 @@ import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
 import {setKycScreenName, setStageId} from "@/store/Slices";
+import docStyle from "../../DocumentsPage/style.module.css";
 
 export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   const dispatch = useDispatch();
@@ -113,31 +114,43 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
                 <div className="flex flex-col w-[90%] gap-2">
                   {qusScreenData?.data?.optionsList?.map((item, index) => {
                     return (
-                      <label
-                        className="flex gap-3 items-center cursor-pointer"
+                      <div
+                        className={`${docStyle.value_box} mb-2`}
                         key={index.toString()}>
-                        <input
-                          type="radio"
-                          className={styles.radio_button}
-                          name="radioGroup"
-                          onChange={() => setSelectedOption(item)}
-                          checked={selectedOption === item}
-                        />
-                        <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6">
+                        <label className={docStyle.radio_container}>
+                          <input
+                            type="radio"
+                            name="value"
+                            value={item}
+                            checked={selectedOption === item}
+                            onChange={() => setSelectedOption(item)}
+                            className={docStyle.radio_input}
+                          />
+                          <span className={docStyle.radio_checkmark}></span>
                           {item}
-                        </p>
-                      </label>
+                        </label>
+                      </div>
                     );
                   })}
                 </div>
 
                 <button
-                  className={`${styles.cancle_btn} !w-[80%]`}
+                  className={`${styles.cancle_btn} !w-[90%] !hidden md:!flex`}
                   onClick={() => {
                     handleVerfyAns();
                   }}>
                   Proceed
                 </button>
+
+                <div className={styles.sticky_btn_wrapper}>
+                  <button
+                    onClick={() => {
+                      handleVerfyAns();
+                    }}
+                    className={`${styles.proceed}`}>
+                    proceed
+                  </button>
+                </div>
               </div>
               {/* </div> */}
             </div>
