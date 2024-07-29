@@ -155,6 +155,8 @@ const Document = () => {
             <span className="text-222 pl-1">
               {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
             </span>
+            . Credit Score:
+            <span className="text-222 pl-1">{apiData?.cibilScore}</span>
           </p>
         </div>
         <div className={style.profession_row}>
@@ -164,7 +166,7 @@ const Document = () => {
         </div>
       </div>
 
-      <div className={`${style.top_div_wrapper} !items-center`}>
+      <div className={`${style.top_div_wrapper} !items-end`}>
         <div>
           <div className={style.sub_heading}>
             Documentation stage:
@@ -181,9 +183,7 @@ const Document = () => {
               </div>
             )}
           </div>
-          <div className={`${style.sub_heading} mt-2`}>
-            Credit Score - {apiData?.cibilScore}
-          </div>
+          <div className={`${style.credit_link}`}>Credit score report link</div>
         </div>
 
         <div className={style.user_detail_box}>
@@ -194,11 +194,26 @@ const Document = () => {
             </span>
           </p>
           <p className={style.sub_text}>
+            Contact no:{" "}
+            <span className="text-222 pl-1">
+              {/* {apiData?.userData?.fc_user?.full_name} */}
+              9845621232
+            </span>
+          </p>
+          <p className={style.sub_text}>
             Email Id:{" "}
             <span className="text-222 pl-1">
               {" "}
               {apiData?.userData?.fc_user?.email}
             </span>
+          </p>
+          <p className={style.sub_text}>
+            Token Id:
+            <span className="text-222 pl-1"> token_OeLvO4LmzfKAM6</span>
+          </p>
+          <p className={style.sub_text}>
+            ENACH status:
+            <span className="text-222 pl-1"> Done/Pending</span>
           </p>
         </div>
       </div>
