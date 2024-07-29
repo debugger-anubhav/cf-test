@@ -254,7 +254,7 @@ const Header = ({page}) => {
         city={cityForModal}
       />
       <div
-        className={` ${styles.main} ${modalStateFromRedux ? "!z-0" : ""}  ${
+        className={` ${styles.main} ${modalStateFromRedux ? "!z-10" : ""}  ${
           page === "login" ? "!z-0" : ""
         }`.trim()}
         style={{

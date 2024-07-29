@@ -242,7 +242,7 @@ const DocMain = () => {
                   1. Pan card
                 </p>
                 <p className={styles.instruction_point}>
-                  2. Adhar card/Passport/Driving license/Voter ID
+                  2. Adhar card/ Passport/ Driving license/ Voter ID
                 </p>
               </div>
 

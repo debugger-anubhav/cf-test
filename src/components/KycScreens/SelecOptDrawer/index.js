@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BackIcon} from "@/assets/icon";
+// import {BackIcon} from "@/assets/icon";
 import styles from "../../ServiceRequests/style.module.css";
 import {productPageImagesBaseUrl} from "@/constants/constant";
 import {Skeleton} from "@mui/material";
@@ -38,10 +38,10 @@ function SelectOptDrawer({
       className={`${styles.content_wrapper} overflow-auto !mb-0 !pb-0 !pr-4`}>
       <div className="flex w-full justify-between ">
         <div className={styles.main_heading}>
-          <BackIcon
+          {/* <BackIcon
             onClick={() => setOpenDrawer(false)}
             className={"cursor-pointer"}
-          />
+          /> */}
           Select order
         </div>
         <div onClick={() => setOpenDrawer(false)} className="h-[24px]">

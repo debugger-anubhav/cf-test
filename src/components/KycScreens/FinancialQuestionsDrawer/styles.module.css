@@ -19,3 +19,18 @@
 .heading {
   @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center justify-between;
 }
+.common_drawer_wrapper {
+  @apply flex w-full md:gap-8 overflow-auto;
+}
+.web_close_icon_wrapper {
+  @apply h-[24px] mt-12 mr-8;
+}
+.mobile_close_icon {
+  @apply fixed md:hidden right-4 w-8 h-8 bg-fff rounded-2xl cursor-pointer items-center flex justify-center -mt-[64px];
+}
+.rightDrawer {
+  @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
+}
+.content_wrapper {
+  @apply flex w-full flex-col sm:pb-[50px] pb-[55px] mb-6 overflow-scroll h-full px-4 md:py-12 md:pl-12 md:pr-0;
+}
