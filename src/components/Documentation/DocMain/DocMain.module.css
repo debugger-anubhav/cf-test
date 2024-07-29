@@ -6,10 +6,10 @@
   @apply grow pb-6 w-full relative md:ml-16;
 }
 .info_box {
-  @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8;
+  @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8 items-center;
 }
 .info {
-  @apply text-71717A font-Poppins font-medium md:text-base text-14 md:leading-6 leading-5 tracking-0.3;
+  @apply pl-2 text-71717A font-Poppins font-medium md:text-base text-14 md:leading-6 leading-5 tracking-0.3;
 }
 .start_kyc_btn {
   @apply flex py-4 px-7 items-center gap-2  text-222 mt-6 font-Poppins font-medium text-14 md:text-base md:leading-6 leading-5 tracking-0.3 rounded-lg w-full md:w-fit justify-center;

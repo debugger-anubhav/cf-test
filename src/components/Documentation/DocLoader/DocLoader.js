@@ -1,5 +1,6 @@
 import React from "react";
-import loader from "@/assets/lottie-files/pageScanning.json";
+import loader from "@/assets/lottie-files/hypervergeLoader.json";
+// import loader from "@/assets/lottie-files/pageScanning.json";
 import {Modal} from "@mui/material";
 import styles from "./DocLoader.module.css";
 import {Player} from "@lottiefiles/react-lottie-player";
