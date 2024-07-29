@@ -116,7 +116,8 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
                     return (
                       <div
                         className={`${docStyle.value_box} mb-2`}
-                        key={index.toString()}>
+                        key={index.toString()}
+                        onClick={() => setSelectedOption(item)}>
                         <label className={docStyle.radio_container}>
                           <input
                             type="radio"
