@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
 import ManageSchedule from '../MyOrders/orders/partTwo/ManageScheduleDrawer'
-import { GoogleIcon, EditIcon } from "@/assets/icon";
+import { EditIcon } from "@/assets/icon";
 
 function PastRequests({ pastRequestData, loadingSkeleton }) {
 
@@ -33,12 +33,9 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
   };
 
   const handleClick = (value) => {
-
     setOrderID(value)
     toggleModal()
   }
-
-
 
   return (
     <div>
@@ -80,7 +77,6 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
             ) : (
               <TableBody>
                 {rows?.map((row, index) => (
-
                   <TableRow key={index} className={styles.tableRow}>
                     <TableCell className={styles.tableCell}>
                       {row?.order_id}
@@ -92,13 +88,13 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      <span className="flex gap-2">{row?.scheduled_datetime
+                      <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
                         ? `${format(
                           new Date(row?.scheduled_datetime),
                           "yyyy-MM-dd",
                         )}`
                         : "NA"}
-                        {row?.request_type === "request_pickup" && <EditIcon className={"cursor-pointer"} onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} size={18} />}
+                        {row?.allowScheduleDate && <span onClick={() => handleClick(row?.order_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>

@@ -5,6 +5,7 @@ import { format } from "date-fns";
 import ManageSchedule from '../MyOrders/orders/partTwo/ManageScheduleDrawer';
 import { reduxSetModalState } from "@/store/Slices";
 import { useDispatch, useSelector } from "react-redux";
+import { EditIcon } from "@/assets/icon";
 
 const PastRequestAccordian = ({ pastRequestData }) => {
   const [rows, setRows] = useState(pastRequestData);
@@ -69,14 +70,16 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                     {row?.request_type.replace(/_/g, " ")}
                   </span>
                 </div>
-                <div className={styles.tableCell}>
+                <div className={`${styles.tableCell} flex items-center gap-1 whitespace-nowrap`}>
                   <span className="font-medium">Scheduled Date:</span>{" "}
-                  {row?.scheduled_datetime
+                  <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
                     ? `${format(
                       new Date(row?.scheduled_datetime),
                       "yyyy-MM-dd",
                     )}`
                     : "NA"}
+                    {row?.allowScheduleDate && <span onClick={() => handleClick(row?.order_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                  </span>
                 </div>
                 <div className={styles.tableCell}>
                   <span className="font-medium">Created Date:</span>{" "}
@@ -98,24 +101,24 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                       orderId={orderID}
                     />
                   }
-                  {row?.request_type === "request_pickup" && <button
+                  {/* {row?.request_type === "request_pickup" && <button
                     className={styles.drawer_button}
                     onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} >
                     Change delivery slot
-                  </button>}
+                  </button>} */}
                 </div>
               </div>
-            )}
-
-            {index !== rows.length - 1 && (
-              <div
-                className={`bg-EDEDEE h-[1px] w-full ${isActive && "mt-4"
-                  }`}></div>
-            )}
-          </div>
-        );
-      })}
+        )
+      }
+            { index !== rows.length - 1 && (
+          <div
+            className={`bg-EDEDEE h-[1px] w-full ${isActive && "mt-4"
+              }`}></div>
+        )}
     </div>
+  );
+})}
+    </div >
   );
 };
 
