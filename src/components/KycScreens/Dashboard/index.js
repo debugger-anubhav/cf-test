@@ -43,6 +43,7 @@ export default function DashboardComponent() {
   const userId = decrypt(getLocalStorage("_ga"));
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
+  console.log(data, "pp");
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;

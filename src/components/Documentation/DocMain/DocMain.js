@@ -118,12 +118,29 @@ const DocMain = () => {
   //   setOpenDrawer(true);
   // };
   const userId = decrypt(getLocalStorage("_ga"));
+  useEffect(() => {
+    console.log(selectedOption, "setetetetetetet");
+  }, [selectedOption]);
 
   const fetchOrdersDetails = filter => {
     baseInstance
       .get(endPoints.kycPage.getOrderIds(userId))
       .then(res => {
         setOrdersData(res?.data?.data);
+
+        if (orderIdFromUrl) {
+          const filteredData = res?.data?.data?.filter(
+            i => i.dealCodeNumber === orderIdFromUrl,
+          );
+          if (filteredData) {
+            dispatch(setSelectedDataForKyc(filteredData?.[0]));
+            const index = res?.data?.data?.findIndex(
+              deal => deal.dealCodeNumber === filteredData?.[0]?.dealCodeNumber,
+            );
+            setSelectedOption(index);
+          }
+        }
+
         setLoadingSkeleton(false);
       })
       .catch(err => {
