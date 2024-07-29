@@ -37,7 +37,7 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
             height={16}
           />
         </div>
-        <div className="flex gap-6 md:w-[85%] w-full flex-col">
+        <div className="flex md:gap-6 gap-4 md:w-[85%] w-full flex-col">
           <button
             className={styles.blank_btn}
             onClick={() => setOpenDrawer(false)}>
@@ -80,11 +80,11 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
       <div className={`${styles.firstSection}`}>
         <CongoPopup width={"200px"} height={"200px"} />
       </div>
-      <div className="font-Poppins font-medium text-45454A md:text-24 text-20 md:leading-9 leading-6 md:my-12 my-8">
+      <div className="font-Poppins font-medium text-45454A md:text-24 text-20 md:leading-9 leading-6 md:my-12 my-8 text-center md:text-left">
         Congratulations! You have submitted your KYC documents.
       </div>
       <div className={styles.kyc_status_box}>
-        <p className={styles.sub_heading}>KYC status:</p>
+        <p className={`font-Poppins text-71717A text-16`}>KYC status:</p>
         <p className={`${styles.heading}  md:!text-20 `}>
           {dashboardDetails?.kycStatus}
           {dashboardDetails?.kycStatus === "Under Review" && (
@@ -99,7 +99,7 @@ export default function CongratulationKyc({dashboardDetails, handleDelivery}) {
           )}
         </p>
         <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row md:gap-8 gap-4">
           <button
             className={`${styles.schedule_delivery_btn}
     ${

@@ -48,3 +48,6 @@
 .instruction_point {
   @apply font-Poppins text-71717A text-12 md:text-14 leading-4 tracking-0.3;
 }
+.rightDrawer {
+  @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
+}

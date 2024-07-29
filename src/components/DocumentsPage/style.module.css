@@ -78,7 +78,7 @@
   @apply text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 font-Poppins;
 }
 .value_box {
-  @apply font-Poppins w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl  mt-1;
+  @apply font-Poppins w-full tracking-desc xl:tracking-0.3 text-14 xl:text-16 outline-none h-[45px] xl:h-14 px-4 py-3 border border-DDDDDF rounded-xl  mt-1 flex items-center;
 }
 .white_btn {
   @apply cursor-pointer h-12 xl:h-14 w-full flex justify-center items-center px-4 rounded-lg text-14 xl:text-16 font-medium text-71717A border-2 border-71717A bg-fff;

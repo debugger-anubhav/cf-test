@@ -471,7 +471,7 @@ export default function DashboardComponent() {
             </button>
           </div>
 
-          <div className="flex w-full justify-between">
+          <div className="flex w-full max-w-full overflow-hidden justify-between">
             <div>
               <div className={styles.kyc_tab}>
                 <p
