@@ -14,6 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
 import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
 import ManageSchedule from '../MyOrders/orders/partTwo/ManageScheduleDrawer'
+import { GoogleIcon, EditIcon } from "@/assets/icon";
+
 function PastRequests({ pastRequestData, loadingSkeleton }) {
 
   const [rows, setRows] = useState(pastRequestData);
@@ -70,7 +72,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                   Created Date
                 </TableCell>
                 <TableCell className={styles.tableHeaderCell}>Status</TableCell>
-                <TableCell className={styles.tableHeaderCell}>Action</TableCell>
+                {/* <TableCell className={styles.tableHeaderCell}>Action</TableCell> */}
               </TableRow>
             </TableHead>
             {loadingSkeleton ? (
@@ -90,12 +92,14 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      {row?.scheduled_datetime
+                      <span className="flex gap-2">{row?.scheduled_datetime
                         ? `${format(
                           new Date(row?.scheduled_datetime),
                           "yyyy-MM-dd",
                         )}`
                         : "NA"}
+                        {row?.request_type === "request_pickup" && <EditIcon className={"cursor-pointer"} onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} size={18} />}
+                      </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>
                       {`${format(
@@ -106,13 +110,13 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                     <TableCell className="!text-71717A lg:!text-16 !tracking-desc !lg:tracking-0.3 !font-Poppins">
                       {row?.sub_status}
                     </TableCell>
-                    <TableCell className="!text-71717A lg:!text-16 !tracking-desc !lg:tracking-0.3 !font-Poppins">
+                    {/* <TableCell className="!text-71717A lg:!text-16 !tracking-desc !lg:tracking-0.3 !font-Poppins">
                       {row?.request_type === "request_pickup" && <button
                         className={styles.drawer_button}
                         onClick={() => row?.request_type === "request_pickup" && handleClick(row?.order_id)} >
                         Change delivery slot
                       </button>}
-                    </TableCell>
+                    </TableCell> */}
                   </TableRow>
                 ))}
               </TableBody>
