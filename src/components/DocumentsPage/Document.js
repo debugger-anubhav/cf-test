@@ -8,8 +8,10 @@ import {baseInstance} from "@/network/axios";
 import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
 // import UploadNewDocs from "./UploadNewDocs";
 import CurrentAddressProof from "../KycScreens/CurrentAddProof";
+import Image from "next/image";
 
 const Document = () => {
+  const professionIconLink = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
   const params = useParams();
   const orderId = params?.order_id;
   const [apiData, setApiData] = useState(null);
@@ -155,18 +157,22 @@ const Document = () => {
             <span className="text-222 pl-1">
               {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
             </span>
-            . Credit Score:
-            <span className="text-222 pl-1">{apiData?.cibilScore}</span>
           </p>
         </div>
         <div className={style.profession_row}>
           <div className={style.profession_left}>
+            <Image
+              src={professionIconLink + additionalData?.profession_icon}
+              alt="icon"
+              width={24}
+              height={24}
+            />
             Profession: {additionalData?.profession_name}
           </div>
         </div>
       </div>
 
-      <div className={`${style.top_div_wrapper} !items-end`}>
+      <div className={`${style.top_div_wrapper} !items-end `}>
         <div>
           <div className={style.sub_heading}>
             Documentation stage:
@@ -183,7 +189,24 @@ const Document = () => {
               </div>
             )}
           </div>
-          <div className={`${style.credit_link}`}>Credit score report link</div>
+          {apiData?.autoPay && (
+            <div className={`${style.user_detail_box} mt-2`}>
+              <p className={style.sub_text}>
+                Token Id:
+                <span className="text-222 pl-1"> {apiData?.tokenId}</span>
+              </p>
+              <p className={style.sub_text}>
+                ENACH status:
+                <span className="text-222 pl-1">
+                  {apiData?.autoPay ? (
+                    <span className="text-[#2D9469]">Done</span>
+                  ) : (
+                    "Pending"
+                  )}
+                </span>
+              </p>
+            </div>
+          )}
         </div>
 
         <div className={style.user_detail_box}>
@@ -196,8 +219,7 @@ const Document = () => {
           <p className={style.sub_text}>
             Contact no:{" "}
             <span className="text-222 pl-1">
-              {/* {apiData?.userData?.fc_user?.full_name} */}
-              9845621232
+              {apiData?.userData?.fc_user?.phone_no}
             </span>
           </p>
           <p className={style.sub_text}>
@@ -208,12 +230,11 @@ const Document = () => {
             </span>
           </p>
           <p className={style.sub_text}>
-            Token Id:
-            <span className="text-222 pl-1"> token_OeLvO4LmzfKAM6</span>
-          </p>
-          <p className={style.sub_text}>
-            ENACH status:
-            <span className="text-222 pl-1"> Done/Pending</span>
+            Credit Score:
+            <span className="text-222 pl-1">{apiData?.cibilScore}</span> -
+            <a href={apiData?.siteUrl} className={`${style.credit_link}`}>
+              Report link
+            </a>
           </p>
         </div>
       </div>

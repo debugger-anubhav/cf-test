@@ -36,9 +36,11 @@ import FinancialInfo from "../FinancialInformation";
 import EducationalDetails from "../EducationalDetails";
 import ProfessionalDetails from "../ProfessionalDetails";
 import AutoPay from "../AutoPay";
+
 // import CongratulationKyc from '../Congratulation/index'
 
 export default function DashboardComponent() {
+  const imageUrl = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
   const dispatch = useDispatch();
   const userId = decrypt(getLocalStorage("_ga"));
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
@@ -350,6 +352,12 @@ export default function DashboardComponent() {
             <div className="flex w-fit">
               <div className={`${styles.profession_row} md:flex hidden`}>
                 <div className={styles.profession_left}>
+                  <Image
+                    src={imageUrl + dashboardDetails?.professionDetail?.icon}
+                    alt="icon"
+                    width={24}
+                    height={24}
+                  />
                   Profession: {dashboardDetails?.professionDetail?.profession}{" "}
                 </div>
                 {dashboardDetails?.allKycStages?.[0].stage_status !== 2 && (
@@ -726,7 +734,7 @@ const Images = arr => {
             <img
               src={`${productPageImagesBaseUrl + "thumb/" + ele}`}
               alt={ele}
-              className="w-[40px] h-[40px] rounded-lg"
+              className="w-[40px] h-[40px] rounded-lg border border-DDDDDF"
               loading="lazy"
             />
           </div>

@@ -375,7 +375,7 @@ const FinancialInfo = ({dashboardDetails}) => {
           submitHandler();
         }}
         className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"} !hidden md:!flex `}>
-        proceed
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
 
@@ -385,7 +385,7 @@ const FinancialInfo = ({dashboardDetails}) => {
             submitHandler();
           }}
           className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
-          proceed
+          Proceed
           <OutlineArrowRight color={"#222222"} />
         </button>
       </div>

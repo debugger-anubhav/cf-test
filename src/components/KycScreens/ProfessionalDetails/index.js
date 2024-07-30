@@ -12,6 +12,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import VerfiEmail from "./VerfiEmail";
+import docStyle from "../../DocumentsPage/style.module.css";
 import GstSdk from "../GstSdk";
 
 export default function ProfessionalDetails({
@@ -38,6 +39,7 @@ export default function ProfessionalDetails({
   const [recievedOtp, setRecievedOtp] = useState(null);
   const [verifiedEmail, setVerifiedEmail] = useState(false);
   const [openGstSdk, setOpenGstSdk] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
 
   useEffect(() => {
     if (professionId === 2) {
@@ -270,17 +272,30 @@ export default function ProfessionalDetails({
                           {nomineeRelation?.map((item, index) => {
                             return (
                               <div
-                                className={`flex gap-3 items-center cursor-pointer w-full lg:w-[502px] `}
+                                className={`${styles.label_input_style}`}
                                 key={index.toString()}>
-                                <Field
-                                  type="radio"
-                                  name="nomineeRelation"
-                                  value={item}
-                                  className={styles.radio_button}
-                                />
-                                <p className="border w-full border-DDDDDF md:p-4 p-3 rounded-xl md:text-16 text-14 font-Poppins tracking-0.3 leading-6 text-71717A">
-                                  {item}
-                                </p>
+                                <label className={docStyle.radio_container}>
+                                  <input
+                                    type="radio"
+                                    name="nomineeRelation"
+                                    value={item}
+                                    checked={selectedOption === item}
+                                    onChange={() => {
+                                      setSelectedOption(item);
+                                      setFieldValue(
+                                        "nomineeRelation",
+                                        selectedOption,
+                                      );
+                                    }}
+                                    className={docStyle.radio_input}
+                                  />
+                                  <span
+                                    className={`${docStyle.radio_checkmark} `}></span>
+                                  <span
+                                    className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                                    {item}
+                                  </span>
+                                </label>
                               </div>
                             );
                           })}
@@ -310,7 +325,7 @@ export default function ProfessionalDetails({
                             id="nomineeNumber"
                             name="nomineeNumber"
                             placeholder="Enter Guardian’s number"
-                            className="outline-none"
+                            className="outline-none placeholder:text-71717A"
                           />
                         </div>
                         <ErrorMessage
@@ -325,11 +340,17 @@ export default function ProfessionalDetails({
 
                 <button
                   type="submit"
-                  className={`${styles.proceed} 
-            `}>
+                  className={`${styles.proceed} !hidden md:!flex`}>
                   Proceed
                   <OutlineArrowRight color={"#222222"} />
                 </button>
+
+                <div className={styles.sticky_btn_wrapper}>
+                  <button type="submit" className={`${styles.proceed} `}>
+                    Proceed
+                    <OutlineArrowRight color={"#222222"} />
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>

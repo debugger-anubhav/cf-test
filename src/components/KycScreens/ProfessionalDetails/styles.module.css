@@ -2,7 +2,7 @@
   @apply font-Poppins md:text-24 text-18 text-45454A font-medium tracking-0.3 flex gap-2  items-center;
 }
 .wrapper {
-  @apply mt-8 w-full;
+  @apply mt-8 w-full pb-[120px] md:pb-0;
 }
 .company_detail_wapper {
   @apply flex w-full my-6 flex-col gap-1;
@@ -14,11 +14,14 @@
   @apply text-71717A font-Poppins md:text-16 text-14;
 }
 .proceed {
-  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] w-fit px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 .radio_button {
-  @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
+  @apply lg:w-5 lg:h-5 w-4 h-4 flex cursor-pointer;
 }
 .verifyTxt {
   @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium min-w-fit;
+}
+.sticky_btn_wrapper {
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-0 pb-6 w-full right-0;
 }
