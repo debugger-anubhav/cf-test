@@ -110,5 +110,5 @@
   @apply font-Poppins flex text-14 leading-6 tracking-0.3 text-white whitespace-nowrap py-2 w-[240px] justify-center items-center h-[30px];
 }
 .rejected_reason {
-  @apply flex w-full mt-4 items-baseline bg-[#FCEFEF] rounded-lg p-2 font-Poppins text-14 leading-6 tracking-0.3 text-71717A;
+  @apply flex w-full mt-4 flex-col bg-[#FCEFEF] rounded-lg p-2 font-Poppins text-14 leading-6 tracking-0.3 text-71717A;
 }

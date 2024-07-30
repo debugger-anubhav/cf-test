@@ -68,6 +68,7 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
+  const [disableKycStatusBtn, setDisableKycStatusBtn] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
@@ -75,26 +76,15 @@ export default function DashboardComponent() {
     kycSliceData?.progressPercent,
   );
 
-  // const getDashboardDetailsApi = async () => {
-  //   try {
-  //     const res = await baseInstance.get(
-  //       endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
-  //     );
-
-  //     setDashboardDetails(res?.data?.data);
-  //     dispatch(
-  //       setSelectedProfessionId(
-  //         res?.data?.data?.professionDetail?.profession_id,
-  //       ),
-  //     );
-  //     setOrderDate(res?.data?.data?.orderDate);
-  //     setLoadingSkeleton(false);
-  //   } catch (err) {
-  //     console.log(err?.message || "some error");
-  //   } finally {
-  //     setLoadingSkeleton(false);
-  //   }
-  // };
+  const conditionallyDesc = item => {
+    const additional = item.id === 3 ? item.stage_description.split("|") : "";
+    let description = "";
+    if (professionId === 1) description = additional[0];
+    if (professionId === 2) description = additional[1];
+    if (professionId === 3) description = additional[2];
+    if (professionId === 4) description = additional[2];
+    return description;
+  };
 
   const getDashboardDetailsApi = () => {
     return new Promise((resolve, reject) => {
@@ -109,7 +99,6 @@ export default function DashboardComponent() {
               res?.data?.data?.professionDetail?.profession_id,
             ),
           );
-          setOrderDate(res?.data?.data?.orderDate);
           setLoadingSkeleton(false);
           resolve(true);
         })
@@ -150,7 +139,7 @@ export default function DashboardComponent() {
     else
       return (
         <p className={styles.status_style}>
-          pending
+          Pending
           <ForwardArrow color={"#222222"} size={16} />
         </p>
       );
@@ -196,10 +185,15 @@ export default function DashboardComponent() {
         stageId,
       })
       .then(res => {
+        if (res?.data?.data?.crifQuestionData?.isQuestion && stageId === 2) {
+          setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
+        }
+
         if (
           res?.data?.data?.crifQuestionData?.isQuestion === false &&
           stageId === 2
         ) {
+          setShowQueDrawer(false);
           dispatch(setKycScreenName("financialInfo"));
         }
         if (stageId === 7) {
@@ -208,7 +202,6 @@ export default function DashboardComponent() {
         if (stageId === 5) {
           dispatch(setKycScreenName("currentAddress"));
         }
-        setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
         dispatch(setCurrentAddOpt(res?.data?.data?.requiredDocs));
         setHoldOnLoader(false);
@@ -225,7 +218,6 @@ export default function DashboardComponent() {
       setOpenPanSdk(true);
     }
     if (item.id === 2) {
-      // dispatch(setKycScreenName("financialInfo"));
       setHoldOnLoader(true);
       getDocsDetailsApi(2);
     }
@@ -266,6 +258,14 @@ export default function DashboardComponent() {
 
   useEffect(() => {
     setOrderDate(dashboardDetails?.orderDate);
+    setDisableKycStatusBtn(dashboardDetails?.kycStatus === "Under Review");
+    setDisableKycStatusBtn(
+      dashboardDetails?.kycStatus === "Verified" &&
+        dashboardDetails?.zoho_sub_status !== "Delivery Scheduled",
+    );
+    setDisableKycStatusBtn(
+      dashboardDetails?.zoho_sub_status === "Out for Delivery",
+    );
   }, [dashboardDetails]);
 
   useEffect(() => {
@@ -304,10 +304,6 @@ export default function DashboardComponent() {
     }
   }, [currentScreen]);
 
-  // useEffect(() => {
-  //   console.log(openGstSdk, "ppppppppppppppppp");
-  // }, [openGstSdk]);
-
   return (
     <div>
       {currentScreen === "congratulation" && (
@@ -326,6 +322,7 @@ export default function DashboardComponent() {
       {currentScreen === "educationalDetails" && (
         <EducationalDetails getDashboardDetailsApi={getDashboardDetailsApi} />
       )}
+
       {currentScreen === "autoPay" && (
         <AutoPay getDashboardDetailsApi={getDashboardDetailsApi} />
       )}
@@ -434,14 +431,12 @@ export default function DashboardComponent() {
             <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
 
             <button
-              className={`${styles.schedule_delivery_btn}
-      ${
-        dashboardDetails?.kycStatus === "Under Review"
-          ? "bg-FFDF85 cursor-not-allowed"
-          : "bg-btn-primary cursor-pointer"
-      }
-      `}
-              disabled={dashboardDetails?.kycStatus === "Under Review"}
+              className={`${styles.schedule_delivery_btn} ${
+                disableKycStatusBtn
+                  ? "bg-FFDF85 cursor-not-allowed"
+                  : "bg-btn-primary cursor-pointer"
+              }`}
+              disabled={disableKycStatusBtn}
               onClick={() => handleDelivery()}>
               {dashboardDetails?.kycStatus === "Under Review" && (
                 <div className="flex items-center gap-1">
@@ -463,7 +458,11 @@ export default function DashboardComponent() {
                     width={20}
                     height={20}
                   />
-                  <p>Manage your delivery now</p>
+                  <p>
+                    {dashboardDetails?.zoho_status === "Out for Delivery"
+                      ? "Order is out for delivery"
+                      : "Manage your delivery now"}
+                  </p>
                 </div>
               )}
 
@@ -569,16 +568,26 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {item?.stage_description}
+                            {conditionallyDesc(item)}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
-                              <InfoCircleIcon
-                                color={"#45454A"}
-                                size={15}
-                                className={"mr-2"}
-                              />
-                              {item?.rejected_reason}
+                              <div className="flex items-center">
+                                <InfoCircleIcon
+                                  color={"#222"}
+                                  size={15}
+                                  className={"mr-2"}
+                                />
+                                <p>
+                                  <span className="font-medium pr-1">
+                                    Verification Rejected :
+                                  </span>
+                                  Please re-upload
+                                </p>
+                              </div>
+                              <span className="pt-2 pl-[25px]">
+                                {item?.rejected_reason}
+                              </span>
                             </div>
                           )}
                         </div>
@@ -626,12 +635,11 @@ export default function DashboardComponent() {
                           }}
                           className={`${styles.mobile_detail_box} ${
                             index === 4 ? "border-none" : "border-b"
+                          } ${
+                            item.stage_status === 2 || item.stage_status === 1
+                              ? "!cursor-default"
+                              : "cursor-pointer"
                           }
-                  ${
-                    item.stage_status === 2 || item.stage_status === 1
-                      ? "!cursor-default"
-                      : "cursor-pointer"
-                  }
                   
                   `}>
                           <div className={styles.first_row_detail_box}>
@@ -643,16 +651,26 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {item?.stage_description}
+                            {conditionallyDesc(item)}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
-                              <InfoCircleIcon
-                                color={"#45454A"}
-                                size={15}
-                                className={"mr-2"}
-                              />
-                              {item?.rejected_reason}
+                              <div className="flex items-center">
+                                <InfoCircleIcon
+                                  color={"#222"}
+                                  size={15}
+                                  className={"mr-2"}
+                                />
+                                <p>
+                                  <span className="font-medium pr-1">
+                                    Verification Rejected :
+                                  </span>
+                                  Please re-upload
+                                </p>
+                              </div>
+                              <span className="pt-2 pl-[25px]">
+                                {item?.rejected_reason}
+                              </span>
                             </div>
                           )}
                         </div>
