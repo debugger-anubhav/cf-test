@@ -2,7 +2,6 @@
 import React from 'react';
 import styles from "./index.module.css"
 
-import Image from 'next/image';
 import { productPageImagesBaseUrl } from "@/constants/constant";
 const Banner = ({ image }) => {
     React.useEffect(() => {
