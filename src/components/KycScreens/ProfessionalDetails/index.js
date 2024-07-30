@@ -324,7 +324,7 @@ export default function ProfessionalDetails({
                             type="number"
                             id="nomineeNumber"
                             name="nomineeNumber"
-                            placeholder="Enter Guardian’s number"
+                            placeholder="Enter 10 digit number"
                             className="outline-none placeholder:text-71717A"
                           />
                         </div>
