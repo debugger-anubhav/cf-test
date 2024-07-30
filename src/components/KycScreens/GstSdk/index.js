@@ -83,6 +83,10 @@ export default function GstSdk({
             }
           });
         }
+
+        if (res?.data?.data?.data?.status) {
+          showToastNotification(res?.data?.data?.data?.message, 1);
+        }
       })
 
       .catch(err => {

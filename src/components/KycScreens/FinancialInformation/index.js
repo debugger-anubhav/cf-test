@@ -61,7 +61,7 @@ const FinancialInfo = ({dashboardDetails}) => {
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const stageId = kycSliceData.stageId;
+  // const stageId = kycSliceData.stageId;
 
   const userId = decrypt(getLocalStorage("_ga"));
   // const professionId = kycSliceData.selectedProfessionId;
@@ -136,7 +136,7 @@ const FinancialInfo = ({dashboardDetails}) => {
       allData.append("doc", formData.financialDocumentProof[i]);
     }
     allData.append("orderId", orderId);
-    allData.append("stageId", stageId);
+    allData.append("stageId", 2);
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {

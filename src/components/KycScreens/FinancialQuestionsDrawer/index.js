@@ -9,6 +9,7 @@ import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
 import {setKycScreenName, setStageId} from "@/store/Slices";
 import docStyle from "../../DocumentsPage/style.module.css";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [qusScreenData, setQusScreenData] = useState(docsDetailsData);
+  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
 
@@ -49,6 +51,7 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   }, [docsDetailsData]);
 
   const handleVerfyAns = () => {
+    setShowSimpleLoader(true);
     baseInstance
       .post(endPoints.kycPage.verifyCrifAnswer, {
         orderId: docsDetailsData?.data?.orderId,
@@ -68,16 +71,22 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
           dispatch(setStageId(2));
           window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         }
+        setShowSimpleLoader(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setShowSimpleLoader(false);
+      });
   };
 
   useEffect(() => {
     if (qusScreenData?.data?.cibilScore > 650) {
+      changeState(false);
       dispatch(setKycScreenName("professionalDetails"));
       dispatch(setStageId(3));
     }
     if (qusScreenData?.data?.cibilScore < 650) {
+      changeState(false);
       dispatch(setKycScreenName("financialInfo"));
       dispatch(setStageId(2));
     }
@@ -177,6 +186,7 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
           </div>
         </div>
       </Drawer>
+      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
     </div>
   );
 }

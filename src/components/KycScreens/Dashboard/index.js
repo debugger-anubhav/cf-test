@@ -197,6 +197,7 @@ export default function DashboardComponent() {
           dispatch(setKycScreenName("financialInfo"));
         }
         if (stageId === 7) {
+          setShowQueDrawer(false);
           dispatch(setKycScreenName("educationalDetails"));
         }
         if (stageId === 5) {
