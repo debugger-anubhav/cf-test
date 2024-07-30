@@ -568,7 +568,11 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {conditionallyDesc(item)}
+                            {item?.id === 3 ? (
+                              <>{conditionallyDesc(item)}</>
+                            ) : (
+                              <>{item.stage_description}</>
+                            )}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
@@ -651,7 +655,11 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {conditionallyDesc(item)}
+                            {item?.id === 3 ? (
+                              <>{conditionallyDesc(item)}</>
+                            ) : (
+                              <>{item.stage_description}</>
+                            )}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
