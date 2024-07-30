@@ -111,12 +111,13 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
                 <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
                   {qusScreenData?.data?.question}
                 </div>
-                <div className="flex flex-col w-[90%] gap-2">
+                <div className="flex flex-col md:w-[90%] w-full gap-2">
                   {qusScreenData?.data?.optionsList?.map((item, index) => {
                     return (
                       <div
                         className={`${docStyle.value_box} mb-2`}
-                        key={index.toString()}>
+                        key={index.toString()}
+                        onClick={() => setSelectedOption(item)}>
                         <label className={docStyle.radio_container}>
                           <input
                             type="radio"
