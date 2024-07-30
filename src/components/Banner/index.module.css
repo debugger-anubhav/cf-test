@@ -1,0 +1,7 @@
+.MainContainer {
+    @apply w-[full] h-full mt-2 mb-6
+}
+
+.BannerImage {
+    @apply w-full h-full
+}

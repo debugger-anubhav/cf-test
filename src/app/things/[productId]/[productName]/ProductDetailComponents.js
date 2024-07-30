@@ -1,5 +1,5 @@
 "use client";
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
 import MenuList from "@/components/Common/MenuList";
@@ -11,18 +11,18 @@ import HappySubscribers from "@/components/Home/HappySubscribers";
 import QuesAndAns from "@/components/Product/QnaSection";
 import BannerSection from "@/components/Product/BannerSection";
 import loadable from "@loadable/component";
-import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
-import {SkeletonForProductDetail} from "@/components/Product/ProductDetailsSection";
-import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
-import {ItemsIncludedSkeleton} from "@/components/Product/ProductsIncludedSection";
+import { OffersSkeleton } from "@/components/Home/OffersAndCoupons";
+import { SkeletonForProductDetail } from "@/components/Product/ProductDetailsSection";
+import { ProductRowSkeleton } from "@/components/Common/ProductRowSkeleton";
+import { ItemsIncludedSkeleton } from "@/components/Product/ProductsIncludedSection";
 import Notifications from "@/components/Common/Notifications/Notification";
-import {FooterSkeleton} from "@/components/Common/Footer";
-import {useParams, useRouter} from "next/navigation";
-import {useDispatch, useSelector} from "react-redux";
-import {getProductDetails} from "@/store/Slices";
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {getLocalStorageString} from "@/constants/constant";
+import { FooterSkeleton } from "@/components/Common/Footer";
+import { useParams, useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductDetails } from "@/store/Slices";
+import { baseInstance } from "@/network/axios";
+import { endPoints } from "@/network/endPoints";
+import { getLocalStorageString } from "@/constants/constant";
 
 const Footer = loadable(() => import("@/components/Common/Footer"), {
   fallback: <FooterSkeleton />,
@@ -95,7 +95,9 @@ export default function ProductDetailComponents() {
       <AnnouncementBar />
       <Header />
       <MenuList />
+
       <ProductDetails category={"Home Furniture"} params={params} />
+
       <OffersAndCoupons page={"product"} />
       <ItemsIncluded noOfItems={5} />
       <BenefitsCta />
