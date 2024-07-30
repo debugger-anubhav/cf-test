@@ -9,6 +9,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
+import docStyle from "../../DocumentsPage/style.module.css";
 
 const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
 export default function AutoPay({getDashboardDetailsApi}) {
@@ -151,9 +152,9 @@ export default function AutoPay({getDashboardDetailsApi}) {
         />
         AutoPay
       </div>
-      <div className="flex flex-col w-[50%] gap-2 my-8">
+      <div className="flex flex-col md:w-[50%] w-full gap-2 my-8">
         <p className={styles.label}>Choose your preferred payment mode</p>
-        {PaymentModeOpt?.map((item, index) => {
+        {/* {PaymentModeOpt?.map((item, index) => {
           return (
             <div
               className={"flex gap-3 items-center cursor-pointer"}
@@ -191,12 +192,64 @@ export default function AutoPay({getDashboardDetailsApi}) {
               </label>
             </div>
           );
+        })} */}
+
+        {PaymentModeOpt?.map((item, index) => {
+          return (
+            <div
+              className={`${docStyle.value_box}  cursor-pointer`}
+              key={index.toString()}
+              onClick={() => {
+                handleOptionChange(index);
+                setModeOfPayment(
+                  item.includes("banking")
+                    ? "emandate"
+                    : item.includes("card")
+                      ? "card"
+                      : "upi",
+                );
+              }}>
+              <label className={docStyle.radio_container}>
+                <input
+                  type="radio"
+                  name="nomineeRelation"
+                  value={item}
+                  checked={selectedOption === index}
+                  onChange={() => {
+                    handleOptionChange(index);
+                    setModeOfPayment(
+                      item.includes("banking")
+                        ? "emandate"
+                        : item.includes("card")
+                          ? "card"
+                          : "upi",
+                    );
+                  }}
+                  className={docStyle.radio_input}
+                />
+                <span className={`${docStyle.radio_checkmark} `}></span>
+                <span
+                  className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                  {item}
+                </span>
+              </label>
+            </div>
+          );
         })}
       </div>
-      <button className={styles.proceed} onClick={handleOpenRazorpay}>
-        proceed
+      <button
+        className={`${styles.proceed} !hidden md:!flex`}
+        onClick={handleOpenRazorpay}>
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button onClick={handleOpenRazorpay} className={`${styles.proceed} `}>
+          Proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
     </div>
   );
 }

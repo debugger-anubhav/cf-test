@@ -96,5 +96,5 @@
   @apply font-Poppins text-71717A text-14 leading-5 tracking-0.3 pt-4;
 }
 .sticky_btn_wrapper {
-  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-8 w-full right-0;
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-0 pb-6 w-full right-0;
 }

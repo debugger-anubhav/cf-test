@@ -78,12 +78,12 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
   const submitHandler = () => {
     const error = formErrors;
     if (!formData?.idProof?.length > 0) {
-      error.idProof = "Please upload the college Id";
+      error.idProof = "Please upload the school/college Id";
     } else {
       error.idProof = "";
     }
     if (!formData?.collegeName > 0) {
-      error.collegeName = "Please upload the college name";
+      error.collegeName = "Please upload the school/college name";
     } else {
       error.collegeName = "";
     }
@@ -284,7 +284,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
                 </span>
               </div>
             </label>
-            {formData.idProof && (
+            {/* {formData.idProof && (
               <div className="flex cursor-pointer">
                 <span
                   onClick={e => {
@@ -293,7 +293,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
                   <DeleteIcon className=" md:hidden ml-4 w-5 h-5" />
                 </span>
               </div>
-            )}
+            )} */}
           </div>
           <input
             multiple
@@ -316,13 +316,24 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
       )}
 
       <button
-        className={`${styles.proceed} !mt-8`}
+        className={`${styles.proceed} !mt-8 !hidden md:!flex`}
         onClick={() => {
           submitHandler();
         }}>
         Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button
+          onClick={() => {
+            submitHandler();
+          }}
+          className={`${styles.proceed} `}>
+          Proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
       {loader && <LoaderComponent loading={loader} />}
     </div>
   );
