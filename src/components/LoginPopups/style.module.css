@@ -123,3 +123,10 @@
   outline: none !important;
   border: none !important;
 }
+
+@media screen and (max-width: 768px) {
+  .customCloseButton {
+    top: 14px !important;
+    right: 14px !important;
+  }
+}
