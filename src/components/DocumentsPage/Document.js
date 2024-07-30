@@ -19,7 +19,9 @@ const Document = () => {
   const [openRejectDrawer, setOpenRejectDrawer] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectRejectedReason, setSelectRejectedReason] = useState(null);
+  const [otherReasonForRejection, setOtherReasonForRejection] = useState(false);
   const [additionalData, setAdditionalData] = useState(null);
+  const [otherReasonInput, setOtherReasonInput] = useState("");
   const handleViewButtonClick = imageUrl => {
     window?.open(imageUrl, "_blank");
   };
@@ -45,7 +47,9 @@ const Document = () => {
       .patch(endPoints.documentationApproveStatusUpdate, {
         status: updatedStatus,
         id: item?.id,
-        reason: selectRejectedReason,
+        reason: otherReasonForRejection
+          ? otherReasonInput
+          : selectRejectedReason,
       })
       .then(res => {
         documentApproveApiCall();
@@ -53,6 +57,14 @@ const Document = () => {
       .catch(err => console.log(err?.message || "some error"));
     setOpenRejectDrawer(false);
   };
+
+  useEffect(() => {
+    if (selectRejectedReason === "Other") {
+      setOtherReasonForRejection(true);
+    } else {
+      setOtherReasonForRejection(false);
+    }
+  }, [selectRejectedReason]);
 
   const drawerContent = () => {
     return (
@@ -71,7 +83,10 @@ const Document = () => {
             "Other",
           ]?.map((item, index) => {
             return (
-              <div className={`${style.value_box} mb-2`} key={index.toString()}>
+              <div
+                className={`${style.value_box} mb-2`}
+                key={index.toString()}
+                onClick={() => setSelectRejectedReason(item)}>
                 <label className={style.radio_container}>
                   <input
                     type="radio"
@@ -88,6 +103,16 @@ const Document = () => {
             );
           })}
         </div>
+        {otherReasonForRejection && (
+          <input
+            type="text"
+            className={`${style.value_box} mb-2`}
+            placeholder="other"
+            onChange={e => {
+              setOtherReasonInput(e.target.value);
+            }}
+          />
+        )}
         <div className={style.btn_wrapper}>
           <button
             className={style.white_btn}
