@@ -329,7 +329,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
           onClick={() => {
             submitHandler();
           }}
-          className={`${styles.proceed} `}>
+          className={`${styles.proceed} mb-2`}>
           Proceed
           <OutlineArrowRight color={"#222222"} />
         </button>

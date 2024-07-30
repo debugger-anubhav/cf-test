@@ -8,8 +8,10 @@ import {baseInstance} from "@/network/axios";
 import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
 // import UploadNewDocs from "./UploadNewDocs";
 import CurrentAddressProof from "../KycScreens/CurrentAddProof";
+import Image from "next/image";
 
 const Document = () => {
+  const professionIconLink = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
   const params = useParams();
   const orderId = params?.order_id;
   const [apiData, setApiData] = useState(null);
@@ -159,6 +161,12 @@ const Document = () => {
         </div>
         <div className={style.profession_row}>
           <div className={style.profession_left}>
+            <Image
+              src={professionIconLink + additionalData?.profession_icon}
+              alt="icon"
+              width={24}
+              height={24}
+            />
             Profession: {additionalData?.profession_name}
           </div>
         </div>
@@ -181,16 +189,24 @@ const Document = () => {
               </div>
             )}
           </div>
-          <div className={`${style.user_detail_box} mt-2`}>
-            <p className={style.sub_text}>
-              Token Id:
-              <span className="text-222 pl-1"> token_OeLvO4LmzfKAM6</span>
-            </p>
-            <p className={style.sub_text}>
-              ENACH status:
-              <span className="text-222 pl-1"> Pending</span>
-            </p>
-          </div>
+          {apiData?.autoPay && (
+            <div className={`${style.user_detail_box} mt-2`}>
+              <p className={style.sub_text}>
+                Token Id:
+                <span className="text-222 pl-1"> {apiData?.tokenId}</span>
+              </p>
+              <p className={style.sub_text}>
+                ENACH status:
+                <span className="text-222 pl-1">
+                  {apiData?.autoPay ? (
+                    <span className="text-[#2D9469]">Done</span>
+                  ) : (
+                    "Pending"
+                  )}
+                </span>
+              </p>
+            </div>
+          )}
         </div>
 
         <div className={style.user_detail_box}>
