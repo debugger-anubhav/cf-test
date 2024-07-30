@@ -88,7 +88,7 @@ export default function VerfiEmail({
         open={openModal}
         onClose={onCloseModal}
         classNames={{
-          modal: styles.customModal,
+          modal: styles.verifyEmailCustomModal,
           overlay: styles.customOverlay,
           closeButton: styles.customCloseButton,
         }}>
