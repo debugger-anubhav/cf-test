@@ -8,6 +8,7 @@ import Drawer from "@mui/material/Drawer";
 import styles from "./styles.module.css";
 import {Close} from "../../../assets/icon";
 import {setKycScreenName, setStageId} from "@/store/Slices";
+import docStyle from "../../DocumentsPage/style.module.css";
 
 export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   const dispatch = useDispatch();
@@ -87,50 +88,91 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
       <Drawer
         anchor={isBottomShareDrawer ? "bottom" : "right"}
         open={isOpen}
-        onClose={toggleDrawer(false)}>
-        <div className={styles.drawer_content_wrapper}>
-          <div className={`${styles.heading}`}>
-            Questions :
-            <span
+        onClose={toggleDrawer(false)}
+        classes={{paper: styles.rightDrawer}}
+        transitionDuration={{enter: 400, exit: 200}}>
+        <div className={styles.common_drawer_wrapper}>
+          <div className="w-full">
+            <div className={styles.mobile_close_icon}>
+              <div
+                onClick={event => {
+                  event.stopPropagation();
+                  toggleDrawer(false)();
+                }}
+                className="h-[24px]">
+                <Close color={"#45454A"} size={24} className="cursor-pointer" />
+              </div>
+            </div>
+            <div className={styles.content_wrapper}>
+              <div className={`${styles.heading} items-baseline`}>
+                Questions :
+              </div>
+              <div>
+                <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
+                  {qusScreenData?.data?.question}
+                </div>
+                <div className="flex flex-col w-[90%] gap-2">
+                  {qusScreenData?.data?.optionsList?.map((item, index) => {
+                    return (
+                      <div
+                        className={`${docStyle.value_box} mb-2`}
+                        key={index.toString()}>
+                        <label className={docStyle.radio_container}>
+                          <input
+                            type="radio"
+                            name="value"
+                            value={item}
+                            checked={selectedOption === item}
+                            onChange={() => setSelectedOption(item)}
+                            className={docStyle.radio_input}
+                          />
+                          <span className={docStyle.radio_checkmark}></span>
+                          {item}
+                        </label>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <button
+                  className={`${styles.cancle_btn} !w-[90%] !hidden md:!flex`}
+                  onClick={() => {
+                    handleVerfyAns();
+                  }}>
+                  Proceed
+                </button>
+
+                <div className={styles.sticky_btn_wrapper}>
+                  <button
+                    onClick={() => {
+                      handleVerfyAns();
+                    }}
+                    className={`${styles.proceed}`}>
+                    proceed
+                  </button>
+                </div>
+              </div>
+              {/* </div> */}
+            </div>
+          </div>
+
+          <div className={`md:flex hidden `}>
+            <div
               onClick={event => {
                 event.stopPropagation();
                 toggleDrawer(false)();
-              }}>
-              <Close size={25} className={"cursor-pointer relative z-20"} />
-            </span>
-          </div>
-          <div>
-            <div className="font-Poppins text-71717A text-base font-medium lg:py-8 py-6 ">
-              {qusScreenData?.data?.question}
+              }}
+              className={styles.web_close_icon_wrapper}>
+              <Close
+                color={"#45454A"}
+                size={24}
+                className="cursor-pointer "
+                onClick={event => {
+                  event.stopPropagation();
+                  toggleDrawer(false)();
+                }}
+              />
             </div>
-            <div className="flex flex-col w-[90%] gap-2">
-              {qusScreenData?.data?.optionsList?.map((item, index) => {
-                return (
-                  <label
-                    className="flex gap-3 items-center cursor-pointer"
-                    key={index.toString()}>
-                    <input
-                      type="radio"
-                      className={styles.radio_button}
-                      name="radioGroup"
-                      onChange={() => setSelectedOption(item)}
-                      checked={selectedOption === item}
-                    />
-                    <p className="border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6">
-                      {item}
-                    </p>
-                  </label>
-                );
-              })}
-            </div>
-
-            <button
-              className={`${styles.cancle_btn} !w-[80%]`}
-              onClick={() => {
-                handleVerfyAns();
-              }}>
-              Proceed
-            </button>
           </div>
         </div>
       </Drawer>

@@ -37,8 +37,49 @@ export default function KycCommonDrawer({content, changeState, heading}) {
       <Drawer
         anchor={isBottomShareDrawer ? "bottom" : "right"}
         open={isOpen}
-        onClose={toggleDrawer(false)}>
-        <div className={styles.drawer_content_wrapper}>
+        onClose={toggleDrawer(false)}
+        classes={{paper: styles.rightDrawer}}
+        transitionDuration={{enter: 400, exit: 200}}>
+        <div className={styles.common_drawer_wrapper}>
+          <div className="w-full">
+            <div className={styles.mobile_close_icon}>
+              <div
+                onClick={event => {
+                  event.stopPropagation();
+                  toggleDrawer(false)();
+                }}
+                className="h-[24px]">
+                <Close color={"#45454A"} size={24} className="cursor-pointer" />
+              </div>
+            </div>
+            <div className={styles.content_wrapper}>
+              <div className={`${styles.heading} items-baseline`}>
+                {heading}
+              </div>
+              {content}
+            </div>
+          </div>
+          <div className={`md:flex hidden `}>
+            <div
+              onClick={event => {
+                event.stopPropagation();
+                toggleDrawer(false)();
+              }}
+              className={styles.web_close_icon_wrapper}>
+              <Close
+                color={"#45454A"}
+                size={24}
+                className="cursor-pointer "
+                onClick={event => {
+                  event.stopPropagation();
+                  toggleDrawer(false)();
+                }}
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* <div className={styles.drawer_content_wrapper}>
           <div className="flex flex-col w-full">
             <div className={`${styles.heading} items-baseline`}>{heading}</div>
             {content}
@@ -52,7 +93,7 @@ export default function KycCommonDrawer({content, changeState, heading}) {
               <Close size={25} className={"cursor-pointer relative z-20"} />
             </span>
           </div>
-        </div>
+        </div> */}
       </Drawer>
     </div>
   );

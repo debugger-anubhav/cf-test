@@ -369,14 +369,26 @@ const FinancialInfo = ({dashboardDetails}) => {
         <span className="font-medium"> Note:</span> Please upload the document
         in PNG or JPG or PDF format only.
       </div>
+
       <button
         onClick={() => {
           submitHandler();
         }}
-        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
+        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"} !hidden md:!flex `}>
         proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button
+          onClick={() => {
+            submitHandler();
+          }}
+          className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
+          proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
       {loader && <LoaderComponent loading={loader} />}
     </div>
   );
