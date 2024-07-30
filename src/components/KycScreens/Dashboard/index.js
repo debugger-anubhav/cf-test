@@ -726,7 +726,7 @@ const Images = arr => {
             <img
               src={`${productPageImagesBaseUrl + "thumb/" + ele}`}
               alt={ele}
-              className="w-[40px] h-[40px] rounded-lg"
+              className="w-[40px] h-[40px] rounded-lg border border-DDDDDF"
               loading="lazy"
             />
           </div>

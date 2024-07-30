@@ -175,7 +175,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
       </div>
 
       <div className={styles.detail_wapper}>
-        <label className={styles.label}>School/college name</label>
+        <label className={styles.label}>School/College name</label>
         <input
           type="text"
           placeholder="Enter your school/college name"
@@ -192,7 +192,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
         )}
       </div>
 
-      <div className={styles.label}>School/college ID proof</div>
+      <div className={styles.label}>School/College ID proof</div>
       {formData?.idProof?.map((item, index) => (
         <div key={index} className={`${addressFormStyles.map_row_wrapper}`}>
           <div className={`${styles.formInputFirst}`}>
@@ -280,7 +280,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
                   loading="lazy"
                 />
                 <span className={`${styles.chooseFile}`}>
-                  upload school/college ID proof
+                  Upload school/college ID proof
                 </span>
               </div>
             </label>
