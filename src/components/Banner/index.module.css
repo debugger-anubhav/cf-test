@@ -1,5 +1,5 @@
 .MainContainer {
-  @apply w-[full] h-full mt-2 mb-6;
+  @apply w-full h-full mt-2 mb-6;
 }
 
 .BannerImage {
