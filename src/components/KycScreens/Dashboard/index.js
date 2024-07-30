@@ -68,33 +68,13 @@ export default function DashboardComponent() {
   const [showQueDrawer, setShowQueDrawer] = useState(false);
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
+  const [disableKycStatusBtn, setDisableKycStatusBtn] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
   const [progressNumber, setProgressNumber] = useState(
     kycSliceData?.progressPercent,
   );
-
-  // const getDashboardDetailsApi = async () => {
-  //   try {
-  //     const res = await baseInstance.get(
-  //       endPoints.kycPage.getDashboardDetails(userId, data?.dealCodeNumber),
-  //     );
-
-  //     setDashboardDetails(res?.data?.data);
-  //     dispatch(
-  //       setSelectedProfessionId(
-  //         res?.data?.data?.professionDetail?.profession_id,
-  //       ),
-  //     );
-  //     setOrderDate(res?.data?.data?.orderDate);
-  //     setLoadingSkeleton(false);
-  //   } catch (err) {
-  //     console.log(err?.message || "some error");
-  //   } finally {
-  //     setLoadingSkeleton(false);
-  //   }
-  // };
 
   const conditionallyDesc = item => {
     const additional = item.id === 3 ? item.stage_description.split("|") : "";
@@ -119,7 +99,6 @@ export default function DashboardComponent() {
               res?.data?.data?.professionDetail?.profession_id,
             ),
           );
-          setOrderDate(res?.data?.data?.orderDate);
           setLoadingSkeleton(false);
           resolve(true);
         })
@@ -239,7 +218,6 @@ export default function DashboardComponent() {
       setOpenPanSdk(true);
     }
     if (item.id === 2) {
-      // dispatch(setKycScreenName("financialInfo"));
       setHoldOnLoader(true);
       getDocsDetailsApi(2);
     }
@@ -280,6 +258,14 @@ export default function DashboardComponent() {
 
   useEffect(() => {
     setOrderDate(dashboardDetails?.orderDate);
+    setDisableKycStatusBtn(dashboardDetails?.kycStatus === "Under Review");
+    setDisableKycStatusBtn(
+      dashboardDetails?.kycStatus === "Verified" &&
+        dashboardDetails?.zoho_sub_status !== "Delivery Scheduled",
+    );
+    setDisableKycStatusBtn(
+      dashboardDetails?.zoho_sub_status === "Out for Delivery",
+    );
   }, [dashboardDetails]);
 
   useEffect(() => {
@@ -318,10 +304,6 @@ export default function DashboardComponent() {
     }
   }, [currentScreen]);
 
-  // useEffect(() => {
-  //   console.log(openGstSdk, "ppppppppppppppppp");
-  // }, [openGstSdk]);
-
   return (
     <div>
       {currentScreen === "congratulation" && (
@@ -340,6 +322,7 @@ export default function DashboardComponent() {
       {currentScreen === "educationalDetails" && (
         <EducationalDetails getDashboardDetailsApi={getDashboardDetailsApi} />
       )}
+
       {currentScreen === "autoPay" && (
         <AutoPay getDashboardDetailsApi={getDashboardDetailsApi} />
       )}
@@ -448,14 +431,12 @@ export default function DashboardComponent() {
             <p className={styles.sub_heading}>{dashboardDetails?.kycMessage}</p>
 
             <button
-              className={`${styles.schedule_delivery_btn}
-      ${
-        dashboardDetails?.kycStatus === "Under Review"
-          ? "bg-FFDF85 cursor-not-allowed"
-          : "bg-btn-primary cursor-pointer"
-      }
-      `}
-              disabled={dashboardDetails?.kycStatus === "Under Review"}
+              className={`${styles.schedule_delivery_btn} ${
+                disableKycStatusBtn
+                  ? "bg-FFDF85 cursor-not-allowed"
+                  : "bg-btn-primary cursor-pointer"
+              }`}
+              disabled={disableKycStatusBtn}
               onClick={() => handleDelivery()}>
               {dashboardDetails?.kycStatus === "Under Review" && (
                 <div className="flex items-center gap-1">
@@ -477,7 +458,11 @@ export default function DashboardComponent() {
                     width={20}
                     height={20}
                   />
-                  <p>Manage your delivery now</p>
+                  <p>
+                    {dashboardDetails?.zoho_status === "Out for Delivery"
+                      ? "Order is out for delivery"
+                      : "Manage your delivery now"}
+                  </p>
                 </div>
               )}
 
