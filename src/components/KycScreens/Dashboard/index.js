@@ -96,6 +96,16 @@ export default function DashboardComponent() {
   //   }
   // };
 
+  const conditionallyDesc = item => {
+    const additional = item.id === 3 ? item.stage_description.split("|") : "";
+    let description = "";
+    if (professionId === 1) description = additional[0];
+    if (professionId === 2) description = additional[1];
+    if (professionId === 3) description = additional[2];
+    if (professionId === 4) description = additional[2];
+    return description;
+  };
+
   const getDashboardDetailsApi = () => {
     return new Promise((resolve, reject) => {
       baseInstance
@@ -150,7 +160,7 @@ export default function DashboardComponent() {
     else
       return (
         <p className={styles.status_style}>
-          pending
+          Pending
           <ForwardArrow color={"#222222"} size={16} />
         </p>
       );
@@ -196,10 +206,15 @@ export default function DashboardComponent() {
         stageId,
       })
       .then(res => {
+        if (res?.data?.data?.crifQuestionData?.isQuestion && stageId === 2) {
+          setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
+        }
+
         if (
           res?.data?.data?.crifQuestionData?.isQuestion === false &&
           stageId === 2
         ) {
+          setShowQueDrawer(false);
           dispatch(setKycScreenName("financialInfo"));
         }
         if (stageId === 7) {
@@ -208,7 +223,6 @@ export default function DashboardComponent() {
         if (stageId === 5) {
           dispatch(setKycScreenName("currentAddress"));
         }
-        setShowQueDrawer(res?.data?.data?.crifQuestionData?.isQuestion);
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
         dispatch(setCurrentAddOpt(res?.data?.data?.requiredDocs));
         setHoldOnLoader(false);
@@ -569,16 +583,26 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {item?.stage_description}
+                            {conditionallyDesc(item)}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
-                              <InfoCircleIcon
-                                color={"#45454A"}
-                                size={15}
-                                className={"mr-2"}
-                              />
-                              {item?.rejected_reason}
+                              <div className="flex items-center">
+                                <InfoCircleIcon
+                                  color={"#222"}
+                                  size={15}
+                                  className={"mr-2"}
+                                />
+                                <p>
+                                  <span className="font-medium pr-1">
+                                    Verification Rejected :
+                                  </span>
+                                  Please re-upload
+                                </p>
+                              </div>
+                              <span className="pt-2 pl-[25px]">
+                                {item?.rejected_reason}
+                              </span>
                             </div>
                           )}
                         </div>
@@ -626,12 +650,11 @@ export default function DashboardComponent() {
                           }}
                           className={`${styles.mobile_detail_box} ${
                             index === 4 ? "border-none" : "border-b"
+                          } ${
+                            item.stage_status === 2 || item.stage_status === 1
+                              ? "!cursor-default"
+                              : "cursor-pointer"
                           }
-                  ${
-                    item.stage_status === 2 || item.stage_status === 1
-                      ? "!cursor-default"
-                      : "cursor-pointer"
-                  }
                   
                   `}>
                           <div className={styles.first_row_detail_box}>
@@ -643,16 +666,26 @@ export default function DashboardComponent() {
                             </div>
                           </div>
                           <div className={styles.second_row_detail_box}>
-                            {item?.stage_description}
+                            {conditionallyDesc(item)}
                           </div>
                           {item?.rejected_reason && (
                             <div className={styles.rejected_reason}>
-                              <InfoCircleIcon
-                                color={"#45454A"}
-                                size={15}
-                                className={"mr-2"}
-                              />
-                              {item?.rejected_reason}
+                              <div className="flex items-center">
+                                <InfoCircleIcon
+                                  color={"#222"}
+                                  size={15}
+                                  className={"mr-2"}
+                                />
+                                <p>
+                                  <span className="font-medium pr-1">
+                                    Verification Rejected :
+                                  </span>
+                                  Please re-upload
+                                </p>
+                              </div>
+                              <span className="pt-2 pl-[25px]">
+                                {item?.rejected_reason}
+                              </span>
                             </div>
                           )}
                         </div>
