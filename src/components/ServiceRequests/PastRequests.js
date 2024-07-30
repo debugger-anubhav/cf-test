@@ -22,6 +22,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
   const dispatch = useDispatch();
   const [isModalopen, setIsModalopen] = useState(false);
   const [orderID, setOrderID] = useState()
+  const [ticketID, setTicketID] = useState();
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
   useEffect(() => {
     setRows(pastRequestData);
@@ -32,8 +33,9 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
     dispatch(reduxSetModalState(!modalStateFromRedux));
   };
 
-  const handleClick = (value) => {
+  const handleClick = (value, ticketId) => {
     setOrderID(value)
+    setTicketID(ticketId)
     toggleModal()
   }
 
@@ -45,6 +47,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
           isModalOpen={isModalopen}
           closeModal={toggleModal}
           orderId={orderID}
+          ticketID={ticketID}
         />}
         <TableContainer component={Paper} className={styles.tableContainer}>
           <p className={styles.past_request_heading}>Your past requests</p>
@@ -94,7 +97,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                           "yyyy-MM-dd",
                         )}`
                         : "NA"}
-                        {row?.allowScheduleDate && <span onClick={() => handleClick(row?.order_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                        {row?.allowScheduleDate && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>

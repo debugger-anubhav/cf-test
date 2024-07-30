@@ -10,7 +10,7 @@ import { format, parse } from "date-fns";
 import { decrypt } from "@/hooks/cryptoUtils";
 import { getLocalStorage } from "@/constants/constant";
 
-const ManageSchedule = ({ isModalOpen, closeModal, orderId, page }) => {
+const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
 
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
@@ -39,8 +39,13 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page }) => {
       deal_id: orderId,
       user_id: userId,
     };
+    const bodyA = {
+      deal_id: orderId,
+      user_id: userId,
+      zoho_case_id: ticketID
+    }
     baseInstance
-      .post(endPoints.myOrdersPage.getDeliverySlots, body)
+      .post(endPoints.myOrdersPage.getDeliverySlots, page === "PageSR" ? bodyA : body)
       .then(res => {
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
@@ -73,7 +78,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page }) => {
 
   useEffect(() => {
     getDeliverySlots();
-  }, []);
+  }, [ticketID]);
 
   const ModalContent = () => (
     <>

@@ -11,6 +11,7 @@ const PastRequestAccordian = ({ pastRequestData }) => {
   const [rows, setRows] = useState(pastRequestData);
   const [indexOfActiveAcc, setIndexOfActiveAcc] = useState(null);
   const dispatch = useDispatch();
+  const [ticketID, setTicketID] = useState();
   const [isModalopen, setIsModalopen] = useState(false);
   const [orderID, setOrderID] = useState()
   const modalStateFromRedux = useSelector(state => state.order.isModalOpen);
@@ -27,8 +28,9 @@ const PastRequestAccordian = ({ pastRequestData }) => {
     dispatch(reduxSetModalState(!modalStateFromRedux));
   };
 
-  const handleClick = (value) => {
+  const handleClick = (value, ticketId) => {
     setOrderID(value)
+    setTicketID(ticketId)
     toggleModal()
   }
 
@@ -99,6 +101,7 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                       isModalOpen={isModalopen}
                       closeModal={toggleModal}
                       orderId={orderID}
+                      ticketID={ticketID}
                     />
                   }
                   {/* {row?.request_type === "request_pickup" && <button
@@ -108,16 +111,16 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                   </button>} */}
                 </div>
               </div>
-        )
-      }
-            { index !== rows.length - 1 && (
-          <div
-            className={`bg-EDEDEE h-[1px] w-full ${isActive && "mt-4"
-              }`}></div>
-        )}
-    </div>
-  );
-})}
+            )
+            }
+            {index !== rows.length - 1 && (
+              <div
+                className={`bg-EDEDEE h-[1px] w-full ${isActive && "mt-4"
+                  }`}></div>
+            )}
+          </div>
+        );
+      })}
     </div >
   );
 };
