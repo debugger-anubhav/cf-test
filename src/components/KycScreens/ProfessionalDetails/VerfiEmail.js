@@ -43,7 +43,7 @@ export default function VerfiEmail({
 
   const handleStartCountdown = () => {
     setStartCountdown(true);
-    setCountdown(45);
+    setCountdown(60);
   };
 
   const onCloseModal = () => {
