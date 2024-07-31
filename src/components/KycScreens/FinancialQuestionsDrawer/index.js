@@ -101,6 +101,7 @@ export default function FinancialQueDrawer({
         setQusScreenData(res?.data?.data);
         if (res?.data?.data?.status === false) {
           toggleDrawer(false);
+          changeState(false);
         } else {
           handleGetDashbord();
         }

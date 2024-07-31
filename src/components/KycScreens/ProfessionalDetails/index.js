@@ -237,18 +237,12 @@ export default function ProfessionalDetails({
                             id="companyEmail"
                             name="companyEmail"
                             placeholder="Enter company email id"
-                            className="outline-none"
+                            className="outline-none w-full"
                             onChange={e => {
                               setFieldValue("companyEmail", e.target.value);
                               setEmail(e.target.value);
                             }}
                           />
-                          {/* <p
-                            className={`${styles.verifyTxt}
-                      ${!email ? "cursor-not-allowed" : "cursor-pointer"}`}
-                            onClick={email ? handleEmailVerify : null}>
-                            Verify
-                          </p> */}
                         </div>
                         <ErrorMessage
                           name="companyEmail"

@@ -21,9 +21,9 @@ import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 
 const allowedFileTypes = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
+  // "image/jpeg",
+  // "image/jpg",
+  // "image/png",
   "application/pdf",
 ];
 // const SelectionComp = ({
@@ -100,7 +100,8 @@ const FinancialInfo = ({dashboardDetails}) => {
       if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
         setFormErrors(prev => ({
           ...prev,
-          financialDocumentProof: "Please select jpg,png, pdf or jpeg file",
+          financialDocumentProof:
+            "Please upload the document in PDF format only.",
         }));
       } else {
         setFormErrors(prev => ({
@@ -353,7 +354,7 @@ const FinancialInfo = ({dashboardDetails}) => {
             multiple
             type="file"
             id="financialDoc"
-            accept="image/jpeg,image/jpg,image/png,application/pdf"
+            accept="application/pdf"
             style={{display: "none", cursor: "pointer"}}
             onChange={e => {
               handleFileInputChange(e);
@@ -370,7 +371,7 @@ const FinancialInfo = ({dashboardDetails}) => {
       )}
       <div className={styles.note}>
         <span className="font-medium"> Note:</span> Please upload the document
-        in PNG or JPG or PDF format only.
+        in PDF format only.
       </div>
 
       <button
