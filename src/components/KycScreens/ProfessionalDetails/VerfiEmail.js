@@ -66,18 +66,16 @@ export default function VerfiEmail({
         orderId,
       })
       .then(response => {
-        if (response?.data?.data?.status) {
-          // showToastNotification(response?.data?.data?.message, 1);
-          handleSubmit();
-        } else {
+        if (!response?.data?.data?.status) {
           setOtpError(response?.data?.data?.message, 3);
         }
 
         if (response?.data?.data?.verified) {
           onCloseModal();
           setVerifiedEmail(true);
+          handleSubmit();
         }
-        // handleSubmit();
+        handleSubmit();
       })
       .catch(err => {
         if (err?.response?.data?.message === "Invalid OTP")

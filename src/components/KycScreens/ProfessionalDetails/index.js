@@ -135,17 +135,21 @@ export default function ProfessionalDetails({
   };
 
   const handleSubmit = values => {
-    const payload = {
-      userId,
-      orderId,
-      stageId,
-      nomineeName: values?.nomineeName,
-      nomineeRelation: values?.nomineeRelation,
-      nomineePhoneNo: values?.nomineeNumber,
-      companyName: values?.companyName,
-      companyEmailId: values?.companyEmail,
-    };
-    saveProfessionalDetails(payload);
+    if (professionId === 1 && !verifiedEmail) {
+      handleEmailVerify();
+    } else {
+      const payload = {
+        userId,
+        orderId,
+        stageId,
+        nomineeName: values?.nomineeName,
+        nomineeRelation: values?.nomineeRelation,
+        nomineePhoneNo: values?.nomineeNumber,
+        companyName: values?.companyName,
+        companyEmailId: values?.companyEmail,
+      };
+      saveProfessionalDetails(payload);
+    }
   };
 
   const [openModal, setOpenModal] = useState(false);
@@ -165,6 +169,7 @@ export default function ProfessionalDetails({
           setOpenModal(true);
         } else {
           showToastNotification(res?.data?.data?.message, 3);
+          setOpenModal(false);
         }
         console.log(res?.data?.data?.status, "pppppppppp");
       });
@@ -333,12 +338,6 @@ export default function ProfessionalDetails({
 
                 <button
                   type="submit"
-                  onClick={() => {
-                    if (professionId === 1 && !verifiedEmail) {
-                      // showToastNotification("verify email first", 3);
-                      handleEmailVerify();
-                    }
-                  }}
                   className={`${styles.proceed} !hidden md:!flex`}>
                   Proceed
                   <OutlineArrowRight color={"#222222"} />
@@ -346,7 +345,6 @@ export default function ProfessionalDetails({
 
                 <div className={styles.sticky_btn_wrapper}>
                   <button
-                    type="submit"
                     onClick={() => {
                       if (professionId === 1 && !verifiedEmail) {
                         // showToastNotification("verify email first", 3);
