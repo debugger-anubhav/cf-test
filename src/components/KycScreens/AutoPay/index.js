@@ -20,7 +20,7 @@ export default function AutoPay({getDashboardDetailsApi}) {
   const [loading, setLoading] = useState(false);
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handleOptionChange = index => {
     setSelectedOption(index);
@@ -47,8 +47,11 @@ export default function AutoPay({getDashboardDetailsApi}) {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          getDashboardDetailsApi().then(() => {
-            const pendingStage = pendingDashboardDetail?.filter(
+          getDashboardDetailsApi().then(res => {
+            // const pendingStage = pendingDashboardDetail?.filter(
+            //   i => i.stage_status === 0 || i.stage_status === 3,
+            // );
+            const pendingStage = res.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
             console.log(pendingStage, "pendingStage");
