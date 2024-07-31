@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import style from "./style.module.css";
-import { ForwardArrow } from "@/assets/icon";
-import { AiOutlineSearch } from "react-icons/ai";
+import {ForwardArrow} from "@/assets/icon";
+import {AiOutlineSearch} from "react-icons/ai";
 import {
   // General,
   DeliveryAndInstalation,
@@ -10,16 +10,16 @@ import {
   PaymentAndBilling,
   ReferralProgram,
   WhyCityFurnish,
-  RefundAndCancellation
+  RefundAndCancellation,
 } from "./data";
 import SingleQuestion from "./singleQuestion";
-import { FaHeadset, FaPhoneAlt } from "react-icons/fa";
-import { BiArrowBack } from "react-icons/bi";
+import {FaHeadset, FaPhoneAlt} from "react-icons/fa";
+import {BiArrowBack} from "react-icons/bi";
 import LoginModal from "@/components/LoginPopups";
-import { useAuthentication } from "@/hooks/checkAuthentication";
-import { useDispatch, useSelector } from "react-redux";
-import { reduxSetModalState } from "@/store/Slices";
-import { useRouter } from "next/navigation";
+import {useAuthentication} from "@/hooks/checkAuthentication";
+import {useDispatch, useSelector} from "react-redux";
+import {reduxSetModalState} from "@/store/Slices";
+import {useRouter} from "next/navigation";
 
 const Data = [
   // "General",
@@ -29,13 +29,13 @@ const Data = [
   "Our Services",
   "Why rent from Cityfurnish",
   "Referral Program",
-  "Refund & Cancellation"
+  "Refund & Cancellation",
 ];
 
 const MainWrapper = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { checkAuthentication } = useAuthentication();
+  const {checkAuthentication} = useAuthentication();
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
@@ -52,7 +52,7 @@ const MainWrapper = () => {
     3: OurServices,
     4: WhyCityFurnish,
     5: ReferralProgram,
-    6: RefundAndCancellation
+    6: RefundAndCancellation,
   };
 
   useEffect(() => {
@@ -227,10 +227,11 @@ const MainWrapper = () => {
                   key={index}
                   className={`${style.tab_wrapper} border-b-[1px] border-b-[#EDEDEE]`}>
                   <div
-                    className={`${style.tab_item} ${value === index
-                      ? "text-5774AC border-b-[1px] border-b-[#9A9AA2]"
-                      : "text-45454A"
-                      }
+                    className={`${style.tab_item} ${
+                      value === index
+                        ? "text-5774AC border-b-[1px] border-b-[#9A9AA2]"
+                        : "text-45454A"
+                    }
                     ${index !== Data.length - 1 ? "mr-4 md:mr-6" : "mr-0"}
                     `}
                     onClick={() => {

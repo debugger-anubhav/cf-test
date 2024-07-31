@@ -1,11 +1,11 @@
-import { productPageImagesBaseUrl } from "@/constants/constant";
-import { setOrderIdFromOrderPage } from "@/store/Slices";
-import { format } from "date-fns";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import {productPageImagesBaseUrl} from "@/constants/constant";
+import {setOrderIdFromOrderPage} from "@/store/Slices";
+import {format} from "date-fns";
+import {useRouter} from "next/navigation";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
 import styles from "./styles.module.css";
-import { IconLink } from "@/assets/icon";
+import {IconLink} from "@/assets/icon";
 import ServiceDrawer from "../orders/partTwo/ServiceDrawer/ServiceDrawer";
 
 export const statusToImageMap = {
@@ -63,8 +63,9 @@ const CommonContainer = ({
     <div>
       <div key={index} className={styles.box}>
         <div
-          className={`${item.zoho_sub_status === "KYC In Progress" && styles.grad_bg
-            } ${styles.upperBox}`}>
+          className={`${
+            item.zoho_sub_status === "KYC In Progress" && styles.grad_bg
+          } ${styles.upperBox}`}>
           <div className={styles.left_part}>
             <img
               className="w-10 h-10"
@@ -72,11 +73,11 @@ const CommonContainer = ({
               src={
                 tab === 0
                   ? IconLink +
-                  (statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
-                    "payment-failed.svg")
+                    (statusToImageMap[item?.zoho_sub_status?.toLowerCase()] ||
+                      "payment-failed.svg")
                   : IconLink +
-                  (statusToImageMap[item?.status?.toLowerCase()] ||
-                    "inactive-subscription.svg")
+                    (statusToImageMap[item?.status?.toLowerCase()] ||
+                      "inactive-subscription.svg")
               }
               loading="lazy"
             />
@@ -88,7 +89,7 @@ const CommonContainer = ({
                       ? "Amount Pending"
                       : "Order Failed"
                     : statusLabels[item.zoho_sub_status?.toLowerCase()] ||
-                    item.zoho_sub_status
+                      item.zoho_sub_status
                   : item.status?.toLowerCase()}
               </p>
               <p className={styles.date}>
@@ -153,14 +154,15 @@ const CommonContainer = ({
               return (
                 <div key={index} className={styles.img_wrapper}>
                   <img
-                    src={`${tab === 0
+                    src={`${
+                      tab === 0
                         ? productPageImagesBaseUrl +
-                        "thumb/" +
-                        product?.product_image?.split(",")[0]
+                          "thumb/" +
+                          product?.product_image?.split(",")[0]
                         : productPageImagesBaseUrl +
-                        "thumb/" +
-                        product?.image?.split(",")[0]
-                      }`}
+                          "thumb/" +
+                          product?.image?.split(",")[0]
+                    }`}
                     alt={product?.product_name}
                     className="w-full h-full"
                     loading="lazy"

@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import { BackIcon, ForwardArrow } from "@/assets/icon";
-import { baseInstance } from "@/network/axios";
-import { endPoints } from "@/network/endPoints";
+import {BackIcon, ForwardArrow} from "@/assets/icon";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
 import CancelOrder from "./CancelOrder";
 import CancelMandate from "./CancelMandate";
 import SwapProduct from "./SwapProduct";
-import { decrypt } from "@/hooks/cryptoUtils";
-import { getLocalStorage } from "@/constants/constant";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 import Buy from "./Buy";
 import Repair from "./Repair";
 import ExtendTenure from "./ExtendTenure";
 import ChangeBillCycle from "./ChangeBillCycle";
 import Relocation from "./Relocation";
-import { useDispatch } from "react-redux";
-import { setServiceRequestType } from "@/store/Slices";
+import {useDispatch} from "react-redux";
+import {setServiceRequestType} from "@/store/Slices";
 import TransferOwnership from "./TransferOwnership";
-import { useRouter } from "next/navigation";
+import {useRouter} from "next/navigation";
 
 function ServiceRequestType({
   orderId,
@@ -77,8 +77,9 @@ function ServiceRequestType({
     <>
       {currentScreen ? (
         <div
-          className={`${styles.content_wrapper} !pb-4 ${isHelpDrawer && "!p-0"
-            }`}>
+          className={`${styles.content_wrapper} !pb-4 ${
+            isHelpDrawer && "!p-0"
+          }`}>
           <div className={styles.main_heading}>
             {!isHelpDrawer && (
               <BackIcon
@@ -93,10 +94,11 @@ function ServiceRequestType({
               return (
                 <div
                   key={index.toString()}
-                  className={` ${index !== servicesType.length - 1
+                  className={` ${
+                    index !== servicesType.length - 1
                       ? " border-b border-EDEDEE"
                       : "border-0"
-                    } ${styles.request_info_div}`}
+                  } ${styles.request_info_div}`}
                   onClick={() => {
                     setSelectedType(item.key);
                     setCurrentScreen(false);
