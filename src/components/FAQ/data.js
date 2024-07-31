@@ -246,3 +246,34 @@ export const ReferralProgram = [
     ans: "Both the referrer and referee get 500 CF coins (equivalent to 500 INR) per referral. It can used for your monthly payment. The more you refer, the more you save!",
   },
 ];
+
+export const RefundAndCancellation = [
+  {
+    que: "Why am I getting reminders when I already extended my Tenure?",
+    ans: "After the payment is processed, it typically takes 48 to 72 hours for the details to be updated in the system. Once it is updated, reminders will be halted.",
+  },
+  {
+    que: "Why I am being charged when I have returned all of your items?",
+    ans: "We require up to seven working days to settle your account after the items are picked up. 🕒 In the meantime, if any deductions occur in your account, they will be promptly refunded to you at the time of settlement.",
+  },
+  {
+    que: "What is the last date of my tenure?",
+    ans: `Please log in to your account and navigate to the "My Subscription" section to check the order expiry date.`,
+  },
+  {
+    que: "Can you help me out with my security deposit amount?",
+    ans: "Within seven working days from the date of pickup, We'll process the refund of your security deposit, subject to deductions for damages, unpaid subscription fees, and any other applicable charges. 🔄",
+  },
+  {
+    que: "When will I get refund post returning the product(s)?",
+    ans: "Within seven working days from the date of pickup, We'll process your refund. Subject to deductions for damages, unpaid subscription fees, and any other applicable charges. 🔄",
+  },
+  {
+    que: "How much time does it take to pickup the items?",
+    ans: "After receiving the pickup request, we require 7 to 10 operational days to collect the items. 🚚",
+  },
+  {
+    que: "How will you return my Security Deposit/Refund?",
+    ans: "We will share a link with you through which you can redeem your refund. 🔗",
+  },
+];
