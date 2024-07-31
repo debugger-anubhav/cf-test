@@ -1,32 +1,61 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import styles from "../../Category/categoryContent/style.module.css";
-import Worker from "worker-loader!./textContentWorker";
+import {endPoints} from "@/network/endPoints";
+import {baseInstance} from "@/network/axios";
 
 export default function TextContent({params}) {
-  const [data, setData] = useState();
-  const [paramsCityId, setParamsCityId] = useState(46);
-
-  const worker = new Worker();
-
+  const [data, setData] = React.useState();
+  const [paramsCityId, setParamsCityId] = React.useState(46);
+  const HomePageText = () => {
+    baseInstance
+      .get(endPoints.homePageTextContent)
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
+  const SeoAppliancesPageText = () => {
+    baseInstance
+      .get(
+        endPoints.seoAppliancesTextContent +
+          `?cityId=${paramsCityId}&categoryId=26`,
+      )
+      .then(res => {
+        setData(res?.data?.data);
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
+  const SeoFurniturePageText = () => {
+    baseInstance
+      .get(
+        endPoints.seoFurnitureTextContent +
+          `?cityId=${paramsCityId}&categoryId=27`,
+      )
+      .then(res => {
+        setData(res?.data);
+      })
+      .catch(err => console.log(err?.message || "some error"));
+  };
   useEffect(() => {
-    worker.postMessage({type: "city", params});
+    if (
+      params?.category === "appliances-rental" ||
+      params?.category === "furniture-rental"
+    ) {
+      baseInstance
+        .get(endPoints.cityIdByCityName + params?.city)
+        .then(res => {
+          setParamsCityId(res?.data?.data?.id);
+        })
+        .catch(err => console.log(err?.message || "some error"));
+    }
   }, [params?.city]);
 
   useEffect(() => {
-    worker.postMessage({params, paramsCityId});
-
-    worker.onmessage = function ({data: {data, cityId}}) {
-      if (cityId) {
-        setParamsCityId(cityId);
-      }
-      setData(data);
-    };
-
-    return () => {
-      worker?.terminate();
-    };
+    if (params.category === "appliances-rental") SeoAppliancesPageText();
+    else if (params.category === "furniture-rental") SeoFurniturePageText();
+    else HomePageText();
   }, [paramsCityId]);
-
+  
   return (
     <div className={styles.wrapper}>
       {params === "home-page" && (
