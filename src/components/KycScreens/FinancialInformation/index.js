@@ -65,7 +65,7 @@ const FinancialInfo = ({dashboardDetails}) => {
 
   const userId = decrypt(getLocalStorage("_ga"));
   // const professionId = kycSliceData.selectedProfessionId;
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -140,11 +140,14 @@ const FinancialInfo = ({dashboardDetails}) => {
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
-        dashboardDetails().then(() => {
-          const pendingStage = pendingDashboardDetail?.filter(
-            i => i.stage_status === 0 || i.stage_status === 1,
+        dashboardDetails().then(res => {
+          // const pendingStage = pendingDashboardDetail?.filter(
+          //   i => i.stage_status === 0 || i.stage_status === 3,
+          // );
+          const pendingStage = res.allKycStages?.filter(
+            i => i.stage_status === 0 || i.stage_status === 3,
           );
-          console.log(pendingStage, "pendingStage");
+          // console.log(pendingStage, "pendingStage");
           if (pendingStage.length > 0) {
             const ID = pendingStage?.[0]?.id;
             if (ID === 3) {

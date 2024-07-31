@@ -120,7 +120,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
         .then(() => {
           getDashboardDetailsApi().then(res => {
             const pendingStage = pendingDashboardDetail?.filter(
-              i => i.stage_status === 0 || i.stage_status === 1,
+              i => i.stage_status === 0 || i.stage_status === 3,
             );
             console.log(pendingStage, "pendingStage");
             if (pendingStage.length > 0) {

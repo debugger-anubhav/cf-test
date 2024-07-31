@@ -55,9 +55,10 @@ export default function FinancialQueDrawer({
   }, []);
 
   const handleGetDashbord = () => {
-    getDashboardDetailsApi().then(() => {
+    getDashboardDetailsApi().then(res => {
+      console.log(res, "resssssssss");
       const pendingStage = pendingDashboardDetail?.filter(
-        i => i.stage_status === 0 || i.stage_status === 1,
+        i => i.stage_status === 0 || i.stage_status === 3,
       );
       console.log(pendingStage, "pendingStage");
       if (pendingStage.length > 0) {

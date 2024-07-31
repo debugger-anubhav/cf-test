@@ -49,7 +49,7 @@ export default function AutoPay({getDashboardDetailsApi}) {
         if (response.data.success === true) {
           getDashboardDetailsApi().then(() => {
             const pendingStage = pendingDashboardDetail?.filter(
-              i => i.stage_status === 0 || i.stage_status === 1,
+              i => i.stage_status === 0 || i.stage_status === 3,
             );
             console.log(pendingStage, "pendingStage");
 

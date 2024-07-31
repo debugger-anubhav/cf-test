@@ -100,7 +100,7 @@ export default function DashboardComponent() {
             ),
           );
           setLoadingSkeleton(false);
-          resolve(true);
+          resolve(res?.data?.data);
         })
         .catch(err => {
           console.log(err?.message || "some error");
