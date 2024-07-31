@@ -11,9 +11,17 @@ import {setKycScreenName, setStageId} from "@/store/Slices";
 import docStyle from "../../DocumentsPage/style.module.css";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
-export default function FinancialQueDrawer({changeState, docsDetailsData}) {
+export default function FinancialQueDrawer({
+  changeState,
+  docsDetailsData,
+  getDashboardDetailsApi,
+}) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
+  const pendingDashboardDetail = useSelector(
+    state => state.kycPage.pendingDashboardDetail,
+  );
+
   const [isOpen, setIsOpen] = React.useState(true);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
   const [selectedOption, setSelectedOption] = useState("");
@@ -46,6 +54,33 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
     };
   }, []);
 
+  const handleGetDashbord = () => {
+    getDashboardDetailsApi().then(() => {
+      const pendingStage = pendingDashboardDetail?.filter(
+        i => i.stage_status === 0 || i.stage_status === 1,
+      );
+      console.log(pendingStage, "pendingStage");
+      if (pendingStage.length > 0) {
+        const ID = pendingStage?.[0]?.id;
+        changeState(false);
+
+        if (ID === 2) {
+          dispatch(setKycScreenName("financialInfo"));
+        }
+        if (ID === 3) {
+          dispatch(setKycScreenName("professionalDetails"));
+        }
+        if (ID === 6) {
+          dispatch(setKycScreenName("autoPay"));
+        }
+        if (ID === 7) {
+          dispatch(setKycScreenName("educationalDetails"));
+        }
+      } else {
+        dispatch(setKycScreenName("congratulation"));
+      }
+    });
+  };
   useState(() => {
     setQusScreenData(docsDetailsData);
   }, [docsDetailsData]);
@@ -65,6 +100,8 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
         setQusScreenData(res?.data?.data);
         if (res?.data?.data?.status === false) {
           toggleDrawer(false);
+        } else {
+          handleGetDashbord();
         }
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
@@ -82,7 +119,8 @@ export default function FinancialQueDrawer({changeState, docsDetailsData}) {
   useEffect(() => {
     if (qusScreenData?.data?.cibilScore > 650) {
       changeState(false);
-      dispatch(setKycScreenName("professionalDetails"));
+      handleGetDashbord();
+      // dispatch(setKycScreenName("professionalDetails"));
       dispatch(setStageId(3));
     }
     if (qusScreenData?.data?.cibilScore < 650) {

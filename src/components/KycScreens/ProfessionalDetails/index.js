@@ -18,6 +18,7 @@ import GstSdk from "../GstSdk";
 export default function ProfessionalDetails({
   getDashboardDetailsApi,
   phoneNumber,
+  getDocsDetails,
 }) {
   const dispatch = useDispatch();
 
@@ -119,7 +120,8 @@ export default function ProfessionalDetails({
           if (pendingStage.length > 0) {
             const ID = pendingStage?.[0]?.id;
             if (ID === 2) {
-              dispatch(setKycScreenName("financialInfo"));
+              getDocsDetails(2);
+              dispatch(setKycScreenName("dashboard"));
             }
             if (ID === 6) {
               dispatch(setKycScreenName("autoPay"));

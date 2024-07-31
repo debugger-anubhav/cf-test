@@ -177,6 +177,7 @@ export default function DashboardComponent() {
   // };
 
   const getDocsDetailsApi = stageId => {
+    setHoldOnLoader(true);
     baseInstance
       .post(endPoints.kycPage.getDocsDetails, {
         orderId,
@@ -344,6 +345,7 @@ export default function DashboardComponent() {
         <ProfessionalDetails
           getDashboardDetailsApi={getDashboardDetailsApi}
           phoneNumber={dashboardDetails?.userPhoneNumber}
+          getDocsDetails={getDocsDetailsApi}
         />
       )}
 
@@ -757,6 +759,7 @@ export default function DashboardComponent() {
             <FinancialQueDrawer
               changeState={setShowQueDrawer}
               docsDetailsData={docsDetailsData}
+              getDashboardDetailsApi={getDashboardDetailsApi}
             />
           )}
         </div>
