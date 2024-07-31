@@ -98,7 +98,7 @@ export default function ProfessionalDetails({
     } else if (professionId === 3 || professionId === 4) {
       return {
         nomineeName: "",
-        nomineeRelation: "",
+        nomineeRelation: selectedOption,
         nomineeNumber: "",
       };
     }
@@ -282,10 +282,7 @@ export default function ProfessionalDetails({
                                     checked={selectedOption === item}
                                     onChange={() => {
                                       setSelectedOption(item);
-                                      setFieldValue(
-                                        "nomineeRelation",
-                                        selectedOption,
-                                      );
+                                      setFieldValue("nomineeRelation", item);
                                     }}
                                     className={docStyle.radio_input}
                                   />

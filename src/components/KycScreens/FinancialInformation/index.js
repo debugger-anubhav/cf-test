@@ -5,7 +5,7 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {setKycScreenName, setStageId} from "@/store/Slices";
+import {setKycScreenName} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
@@ -161,7 +161,7 @@ const FinancialInfo = ({dashboardDetails}) => {
           }
         });
         setLoader(false);
-        dispatch(setStageId(3));
+        // dispatc(3));
         setDisableButton(false);
       })
       .catch(err => {
