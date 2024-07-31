@@ -95,7 +95,9 @@ export default function ProductDetailComponents() {
       <AnnouncementBar />
       <Header />
       <MenuList />
+
       <ProductDetails category={"Home Furniture"} params={params} />
+
       <OffersAndCoupons page={"product"} />
       <ItemsIncluded noOfItems={5} />
       <BenefitsCta />
