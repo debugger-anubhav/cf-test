@@ -9,6 +9,7 @@ import {format} from "date-fns";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
+import commonStyle from "../KycCommonDrawer/styles.module.css";
 
 const SlotDrawer = ({
   isModalOpen,
@@ -89,7 +90,10 @@ const SlotDrawer = ({
   const ModalContent = () => (
     <>
       <div className={styles.desc_wrapper}>
-        <p className={styles.desc}>Current scheduled date 🚚: {currentDate}</p>
+        <p className={styles.desc}>
+          Current scheduled date 🚚:{" "}
+          <span className="font-medium text-222">{currentDate}.</span>
+        </p>
       </div>
 
       <div className={`${styles.prefferd_wrapper} mb-[120px] md:mb-0`}>
@@ -98,7 +102,7 @@ const SlotDrawer = ({
           {slotData?.data?.data?.response?.map((item, index) => (
             <div
               key={index}
-              className={`flex flex-col w-[72px] justify-start items-start p-2 border rounded-xl ${
+              className={`flex flex-col w-fit min-w-[72px] justify-start items-start p-4 border rounded-xl ${
                 selectedDate === item.date
                   ? "border-[#597492]"
                   : "border-DDDDDF"
@@ -123,18 +127,16 @@ const SlotDrawer = ({
                     selectedDate === item.date ? styles.inner_circle : ""
                   }`}></div>
               </div>
-              <p className={styles.date}>
-                {format(new Date(item?.date), "do")}
+
+              <p className={`${styles.day} !text-14`}>{item.day}</p>
+              <p className={`${styles.date} !mt-1 whitespace-nowrap`}>
+                {format(new Date(item?.date), "do MMM")}
               </p>
-              <p className={styles.day}>{item.day}</p>
             </div>
           ))}
         </div>
       </div>
       <div className="flex flex-col w-full gap-6 mt-8">
-        <button className={`${styles.cancel_btn} !w-full`} onClick={closeModal}>
-          Cancel
-        </button>
         <button
           disabled={!selectedDate || currentDate === formatedSelectedDate}
           onClick={() => updateSlot()}
@@ -143,7 +145,11 @@ const SlotDrawer = ({
             currentDate === formatedSelectedDate &&
             "!bg-[#FFDF85] !cursor-not-allowed"
           } !w-full`}>
-          Modify
+          Schedule
+        </button>
+
+        <button className={`${styles.cancel_btn} !w-full`} onClick={closeModal}>
+          Cancel
         </button>
       </div>
     </>
@@ -154,9 +160,10 @@ const SlotDrawer = ({
       <Drawer
         anchor={isBottomShareDrawer ? "bottom" : "right"}
         open={isModalOpen}
-        onClose={closeModal}>
-        <div className={`${styles.drawer_content_wrapper} !flex-row`}>
-          <div className="flex flex-col w-full">
+        onClose={closeModal}
+        classes={{paper: commonStyle.rightDrawer}}
+        transitionDuration={{enter: 400, exit: 200}}>
+        {/* <div className="flex flex-col w-full">
             <div className={`${styles.heading} !flex-row`}>
               Manage delivery slot
             </div>
@@ -171,6 +178,36 @@ const SlotDrawer = ({
               }}>
               <Close size={25} className={"cursor-pointer relative z-20"} />
             </span>
+          </div> */}
+        <div className={commonStyle.common_drawer_wrapper}>
+          <div className="w-full">
+            <div className={commonStyle.mobile_close_icon}>
+              <div
+                onClick={event => {
+                  event.stopPropagation();
+                  closeModal();
+                }}
+                className="h-[24px]">
+                <Close color={"#45454A"} size={24} className="cursor-pointer" />
+              </div>
+            </div>
+            <div className={commonStyle.content_wrapper}>
+              <div className={`${commonStyle.heading} items-baseline`}>
+                Manage delivery slot
+              </div>
+              {loader && <LoaderComponent loading={loader} />}
+              <ModalContent />
+            </div>
+          </div>
+          <div className={`md:flex hidden `}>
+            <div
+              onClick={event => {
+                event.stopPropagation();
+                closeModal();
+              }}
+              className={commonStyle.web_close_icon_wrapper}>
+              <Close color={"#45454A"} size={24} className="cursor-pointer " />
+            </div>
           </div>
         </div>
       </Drawer>
