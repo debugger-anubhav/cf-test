@@ -75,7 +75,7 @@ export default function VerfiEmail({
           setVerifiedEmail(true);
           handleSubmit();
         }
-        handleSubmit();
+        // handleSubmit();
       })
       .catch(err => {
         if (err?.response?.data?.message === "Invalid OTP")

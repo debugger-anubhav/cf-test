@@ -345,12 +345,13 @@ export default function ProfessionalDetails({
 
                 <div className={styles.sticky_btn_wrapper}>
                   <button
-                    onClick={() => {
-                      if (professionId === 1 && !verifiedEmail) {
-                        // showToastNotification("verify email first", 3);
-                        handleEmailVerify();
-                      }
-                    }}
+                    type="submit"
+                    // onClick={() => {
+                    //   if (professionId === 1 && !verifiedEmail) {
+                    //     // showToastNotification("verify email first", 3);
+                    //     handleEmailVerify();
+                    //   }
+                    // }}
                     className={`${styles.proceed} `}>
                     Proceed
                     <OutlineArrowRight color={"#222222"} />
