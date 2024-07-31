@@ -575,26 +575,28 @@ export default function DashboardComponent() {
                               <>{item.stage_description}</>
                             )}
                           </div>
-                          {item?.rejected_reason && (
-                            <div className={styles.rejected_reason}>
-                              <div className="flex items-center">
-                                <InfoCircleIcon
-                                  color={"#222"}
-                                  size={15}
-                                  className={"mr-2"}
-                                />
-                                <p>
-                                  <span className="font-medium pr-1">
-                                    Verification Rejected :
-                                  </span>
-                                  Please re-upload
-                                </p>
+
+                          {item?.rejected_reason &&
+                            item?.stage_status === 3 && (
+                              <div className={styles.rejected_reason}>
+                                <div className="flex items-center">
+                                  <InfoCircleIcon
+                                    color={"#222"}
+                                    size={15}
+                                    className={"mr-2"}
+                                  />
+                                  <p>
+                                    <span className="font-medium pr-1">
+                                      Verification Rejected :
+                                    </span>
+                                    Please re-upload
+                                  </p>
+                                </div>
+                                <span className="pt-2 pl-[25px]">
+                                  {item?.rejected_reason}
+                                </span>
                               </div>
-                              <span className="pt-2 pl-[25px]">
-                                {item?.rejected_reason}
-                              </span>
-                            </div>
-                          )}
+                            )}
                         </div>
                       );
 

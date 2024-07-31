@@ -7,7 +7,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
-import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+// import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import {reduxSetModalState} from "@/store/Slices";
 
 export default function VerfiEmail({
@@ -15,6 +15,7 @@ export default function VerfiEmail({
   setOpenModal,
   email,
   setVerifiedEmail,
+  handleSubmit,
 }) {
   const userId = decrypt(getLocalStorage("_ga"));
   const kycSliceData = useSelector(state => state.kycPage);
@@ -53,6 +54,7 @@ export default function VerfiEmail({
   useEffect(() => {
     if (openModal) handleStartCountdown();
   }, [openModal]);
+
   const handleVerification = () => {
     setDisableVerify(true);
 
@@ -65,14 +67,17 @@ export default function VerfiEmail({
       })
       .then(response => {
         if (response?.data?.data?.status) {
-          showToastNotification(response?.data?.data?.message, 1);
+          // showToastNotification(response?.data?.data?.message, 1);
+          handleSubmit();
         } else {
           setOtpError(response?.data?.data?.message, 3);
         }
+
         if (response?.data?.data?.verified) {
           onCloseModal();
           setVerifiedEmail(true);
         }
+        // handleSubmit();
       })
       .catch(err => {
         if (err?.response?.data?.message === "Invalid OTP")

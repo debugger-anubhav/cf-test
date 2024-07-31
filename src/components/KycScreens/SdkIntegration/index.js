@@ -9,6 +9,7 @@ import KycCommonDrawer from "../KycCommonDrawer";
 import {setKycScreenName, setStageId} from "@/store/Slices";
 import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import {showToastNotification} from "../../Common/Notifications/toastUtils";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 export default function SdkIntegration({
   getDashboardDetailsApi,
@@ -28,6 +29,7 @@ export default function SdkIntegration({
   const [saveHVData, setSaveHVData] = useState(null);
   const [selectedOption, setSelectedOption] = useState("");
   const [openLoader, setOpenLoader] = useState(false);
+  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
 
   const handler = HyperKycResult => {
     if (HyperKycResult?.status === "user_cancelled") {
@@ -62,6 +64,8 @@ export default function SdkIntegration({
   };
 
   const handleVerfyAns = () => {
+    setShowSimpleLoader(true);
+
     baseInstance
       .post(endPoints.kycPage.verifyCrifAnswer, {
         orderId: saveHVData?.data?.orderId,
@@ -83,8 +87,13 @@ export default function SdkIntegration({
           setOpenPanSdk(false);
         }
         setSaveHVData(res?.data?.data);
+        setShowSimpleLoader(false);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+
+        setShowSimpleLoader(false);
+      });
     setSelectedOption("");
   };
 
@@ -216,6 +225,7 @@ export default function SdkIntegration({
       )}
 
       {openLoader && <DocLoader open={openLoader} setOpen={setOpenLoader} />}
+      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
     </>
   );
 }

@@ -107,7 +107,7 @@ const Document = () => {
           <input
             type="text"
             className={`${style.value_box} mb-2`}
-            placeholder="other"
+            placeholder="Type here"
             onChange={e => {
               setOtherReasonInput(e.target.value);
             }}
@@ -257,7 +257,11 @@ const Document = () => {
           <p className={style.sub_text}>
             Credit Score:
             <span className="text-222 pl-1">{apiData?.cibilScore}</span> -
-            <a href={apiData?.siteUrl} className={`${style.credit_link}`}>
+            <a
+              href={apiData?.siteUrl}
+              target="_blank"
+              className={`${style.credit_link}`}
+              rel="noreferrer">
               Report link
             </a>
           </p>

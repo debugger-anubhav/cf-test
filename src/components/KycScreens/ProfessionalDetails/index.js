@@ -53,7 +53,7 @@ export default function ProfessionalDetails({
         companyName: Yup.string().required("Company name is required"),
         companyEmail: Yup.string()
           .email("Invalid email address")
-          .required("Email is required"),
+          .required("Company email id is required"),
       });
     } else if (professionId === 3 || professionId === 4) {
       return Yup.object().shape({
@@ -145,11 +145,7 @@ export default function ProfessionalDetails({
       companyName: values?.companyName,
       companyEmailId: values?.companyEmail,
     };
-    if (professionId === 1 && !verifiedEmail) {
-      showToastNotification("verify email first", 3);
-    } else {
-      saveProfessionalDetails(payload);
-    }
+    saveProfessionalDetails(payload);
   };
 
   const [openModal, setOpenModal] = useState(false);
@@ -223,19 +219,19 @@ export default function ProfessionalDetails({
                             type="email"
                             id="companyEmail"
                             name="companyEmail"
-                            placeholder="Enter company email"
+                            placeholder="Enter company email id"
                             className="outline-none"
                             onChange={e => {
                               setFieldValue("companyEmail", e.target.value);
                               setEmail(e.target.value);
                             }}
                           />
-                          <p
+                          {/* <p
                             className={`${styles.verifyTxt}
                       ${!email ? "cursor-not-allowed" : "cursor-pointer"}`}
                             onClick={email ? handleEmailVerify : null}>
                             Verify
-                          </p>
+                          </p> */}
                         </div>
                         <ErrorMessage
                           name="companyEmail"
@@ -337,13 +333,27 @@ export default function ProfessionalDetails({
 
                 <button
                   type="submit"
+                  onClick={() => {
+                    if (professionId === 1 && !verifiedEmail) {
+                      // showToastNotification("verify email first", 3);
+                      handleEmailVerify();
+                    }
+                  }}
                   className={`${styles.proceed} !hidden md:!flex`}>
                   Proceed
                   <OutlineArrowRight color={"#222222"} />
                 </button>
 
                 <div className={styles.sticky_btn_wrapper}>
-                  <button type="submit" className={`${styles.proceed} `}>
+                  <button
+                    type="submit"
+                    onClick={() => {
+                      if (professionId === 1 && !verifiedEmail) {
+                        // showToastNotification("verify email first", 3);
+                        handleEmailVerify();
+                      }
+                    }}
+                    className={`${styles.proceed} `}>
                     Proceed
                     <OutlineArrowRight color={"#222222"} />
                   </button>
@@ -367,6 +377,7 @@ export default function ProfessionalDetails({
         email={email}
         recievedOtp={recievedOtp}
         setVerifiedEmail={setVerifiedEmail}
+        handleSubmit={handleSubmit}
       />
     </div>
   );
