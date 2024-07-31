@@ -48,6 +48,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {baseInstance} from "@/network/axios";
+import Banner from "../../Banner";
 
 const ProductDetails = ({params}) => {
   const {checkAuthentication} = useAuthentication();
@@ -572,6 +573,9 @@ const ProductDetails = ({params}) => {
           </div>
         ))}
       </div>
+
+      {prodDetails[0]?.banner && <Banner image={prodDetails[0]?.banner} />}
+
       <div className={styles.main_section}>
         <div
           className={`${styles.carousel_wrapper} ${

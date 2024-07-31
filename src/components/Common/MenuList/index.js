@@ -28,7 +28,7 @@ const MenuList = ({hasMb = true}) => {
 
   return (
     <div
-      className={`${styles.menu_list_wrapper} ${hasMb ? "mb-6" : ""}`.trim()}>
+      className={`${styles.menu_list_wrapper} ${hasMb ? "mb-4" : ""}`.trim()}>
       {loading && !getAllAndSubCategoryData?.length ? (
         <div className="w-[80%]">
           <Skeleton />
