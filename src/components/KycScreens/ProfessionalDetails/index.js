@@ -37,9 +37,10 @@ export default function ProfessionalDetails({
   ];
   const [email, setEmail] = useState("");
   const [recievedOtp, setRecievedOtp] = useState(null);
-  const [verifiedEmail, setVerifiedEmail] = useState(false);
+  const [verifiedEmail, setVerifiedEmail] = useState("no");
   const [openGstSdk, setOpenGstSdk] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
+  const [storeValues, setStoreValues] = useState(null);
 
   useEffect(() => {
     if (professionId === 2) {
@@ -108,6 +109,7 @@ export default function ProfessionalDetails({
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
+        setOpenModal(false);
         getDashboardDetailsApi().then(() => {
           const pendingStage = pendingDashboardDetail?.filter(
             i => i.stage_status === 0 || i.stage_status === 1,
@@ -134,10 +136,18 @@ export default function ProfessionalDetails({
       .catch(err => console.log(err));
   };
 
+  useEffect(() => {
+    if (verifiedEmail === "yes") {
+      handleSubmit(storeValues);
+    }
+  }, [verifiedEmail]);
+
   const handleSubmit = values => {
-    if (professionId === 1 && !verifiedEmail) {
+    setStoreValues(values);
+    if (professionId === 1 && verifiedEmail === "no") {
       handleEmailVerify();
     } else {
+      setOpenModal(false);
       const payload = {
         userId,
         orderId,
@@ -370,14 +380,16 @@ export default function ProfessionalDetails({
           getDashboardDetailsApi={getDashboardDetailsApi}
         />
       )}
-      <VerfiEmail
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        email={email}
-        recievedOtp={recievedOtp}
-        setVerifiedEmail={setVerifiedEmail}
-        handleSubmit={handleSubmit}
-      />
+      {openModal && (
+        <VerfiEmail
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          email={email}
+          recievedOtp={recievedOtp}
+          setVerifiedEmail={setVerifiedEmail}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 }

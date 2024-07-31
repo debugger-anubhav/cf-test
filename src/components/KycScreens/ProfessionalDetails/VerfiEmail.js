@@ -66,15 +66,17 @@ export default function VerfiEmail({
         orderId,
       })
       .then(response => {
+        setOtp("");
         if (!response?.data?.data?.status) {
           setOtpError(response?.data?.data?.message, 3);
         }
 
         if (response?.data?.data?.verified) {
           onCloseModal();
-          setVerifiedEmail(true);
-          handleSubmit();
+          setVerifiedEmail("yes");
+          // handleSubmit();
         }
+
         // handleSubmit();
       })
       .catch(err => {
@@ -127,12 +129,12 @@ export default function VerfiEmail({
             />
             <button
               onClick={() => {
-                otp !== "" && handleVerification();
+                if (otp !== "") {
+                  handleVerification();
+                }
               }}
               className={`${otp === "" ? styles.desc : styles.blue_txt}
-               ${disableVerify ? "cursor-not-allowed" : "cursor-pointer"}`}
-              //   disabled={disableVerify}
-            >
+               ${disableVerify ? "cursor-not-allowed" : "cursor-pointer"}`}>
               Verify
             </button>
           </div>
