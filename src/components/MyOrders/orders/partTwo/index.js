@@ -1,18 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
-import {BackIcon, IconLink} from "@/assets/icon";
-import {ImCheckmark} from "react-icons/im";
+import { BackIcon, IconLink } from "@/assets/icon";
+import { ImCheckmark } from "react-icons/im";
 import "react-circular-progressbar/dist/styles.css";
-import {useRouter} from "next/navigation";
-import {reduxSetModalState, setOrderIdFromOrderPage} from "@/store/Slices";
-import {useDispatch, useSelector} from "react-redux";
+import { useRouter } from "next/navigation";
+import { reduxSetModalState, setOrderIdFromOrderPage } from "@/store/Slices";
+import { useDispatch, useSelector } from "react-redux";
 import "react-responsive-modal/styles.css";
 import ManageSchedule from "./ManageScheduleDrawer";
 import ServiceDrawer from "./ServiceDrawer/ServiceDrawer";
 import OrderSummary from "@/components/Common/OrderSummary";
-import {statusLabels, statusToImageMap} from "../../common/CommonContainer";
+import { statusLabels, statusToImageMap } from "../../common/CommonContainer";
 
-const OrderDetails = ({setPart, data}) => {
+const OrderDetails = ({ setPart, data }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const stepsCompleted = data?.stagesData?.length;
@@ -73,11 +73,10 @@ const OrderDetails = ({setPart, data}) => {
             return (
               <div key={index} className={styles.progress_map_item}>
                 <div
-                  className={`${
-                    index < stepsCompleted - 1
+                  className={`${index < stepsCompleted - 1
                       ? styles.active_status
                       : styles.inactive_status
-                  } ${styles.progress_circle}`}>
+                    } ${styles.progress_circle}`}>
                   {index < stepsCompleted - 1 ? (
                     <ImCheckmark className={styles.check_icon} />
                   ) : (
@@ -86,15 +85,14 @@ const OrderDetails = ({setPart, data}) => {
                 </div>
                 {index !== data?.stagesData.length - 1 && (
                   <div
-                    className={`${
-                      drawerPerStepsCompleted[checkStatus] &&
+                    className={`${drawerPerStepsCompleted[checkStatus] &&
                       (isUnhappyCustomeFlow
                         ? index === data?.stagesData?.length - 3
                         : index === data?.stagesData?.length - 1) &&
                       (checkStatus === "delivery scheduled"
                         ? "!h-[94px] -mt-[64px] md:-mt-0"
                         : "!h-[144px] -mt-[112px] md:-mt-0")
-                    } ${styles.line} `}></div>
+                      } ${styles.line} `}></div>
                 )}
                 {index === data?.stagesData.length - 1 &&
                   drawerPerStepsCompleted[checkStatus] &&
@@ -102,11 +100,10 @@ const OrderDetails = ({setPart, data}) => {
                     ? index === data?.stagesData?.length - 3
                     : index === data?.stagesData?.length - 1) && (
                     <div
-                      className={`md:!hidden ${
-                        checkStatus === "delivery scheduled"
+                      className={`md:!hidden ${checkStatus === "delivery scheduled"
                           ? "!h-[65px] -mt-[62px]"
                           : "!h-[117px] -mt-[112px]"
-                      } ${styles.line}`}></div>
+                        } ${styles.line}`}></div>
                   )}
                 <div>
                   <p className={styles.progress_status}>
@@ -121,18 +118,17 @@ const OrderDetails = ({setPart, data}) => {
                       <div className="md:!hidden">
                         {(checkStatus === "kyc in progress" ||
                           checkStatus === "order failed") && (
-                          <p className={`mt-[30px] ${styles.progress_status}`}>
-                            {checkStatus === "kyc in progress"
-                              ? "KYC documentation required"
-                              : "Payment required"}
-                          </p>
-                        )}
+                            <p className={`mt-[30px] ${styles.progress_status}`}>
+                              {checkStatus === "kyc in progress"
+                                ? "KYC documentation required"
+                                : "Payment required"}
+                            </p>
+                          )}
                         <button
                           disabled={isUnhappyCustomeFlow}
-                          className={`mt-4 ${
-                            isUnhappyCustomeFlow &&
+                          className={`mt-4 ${isUnhappyCustomeFlow &&
                             styles.drawer_disabled_button
-                          } ${styles.drawer_button}`}
+                            } ${styles.drawer_button}`}
                           onClick={() => {
                             if (checkStatus === "kyc in progress") {
                               dispatch(setOrderIdFromOrderPage(data?.order_id));
@@ -158,9 +154,8 @@ const OrderDetails = ({setPart, data}) => {
             {drawerPerStepsCompleted[checkStatus] && (
               <button
                 disabled={isUnhappyCustomeFlow}
-                className={`${
-                  isUnhappyCustomeFlow && styles.drawer_disabled_button
-                } ${styles.drawer_button}`}
+                className={`${isUnhappyCustomeFlow && styles.drawer_disabled_button
+                  } ${styles.drawer_button}`}
                 onClick={() => {
                   if (checkStatus === "kyc in progress") {
                     dispatch(setOrderIdFromOrderPage(data?.order_id));
@@ -176,9 +171,9 @@ const OrderDetails = ({setPart, data}) => {
             )}
           </div>
           {stepsCompleted > 0 &&
-          orderStatus?.toLowerCase() === "order failed" ? (
+            orderStatus?.toLowerCase() === "order failed" ? (
             <a
-              href={"https://wa.me/919205006188"}
+              href={"https://wa.me/919289322456"}
               target="_blank"
               rel="noopener  noreferrer"
               aria-label="Talk to an agent"

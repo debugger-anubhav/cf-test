@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import {ImCross} from "react-icons/im";
-import {ArrowForw, EmailIcon, WhatsappIcon} from "@/assets/icon";
-import {useRouter} from "next/navigation";
+import { ImCross } from "react-icons/im";
+import { ArrowForw, EmailIcon, WhatsappIcon } from "@/assets/icon";
+import { useRouter } from "next/navigation";
 import {
   showToastNotification,
   updateToastNotification,
@@ -23,8 +23,7 @@ const PaymentFailure = () => {
         );
       if (timer < 3 && timer > 0) {
         updateToastNotification(
-          `Redirecting to Cart page in ${timer} ${
-            timer === 1 ? "second" : "seconds"
+          `Redirecting to Cart page in ${timer} ${timer === 1 ? "second" : "seconds"
           }`,
         );
       }
@@ -86,7 +85,7 @@ const PaymentFailure = () => {
             </button>
           </a>
           <a
-            href={"https://wa.me/919205006188"}
+            href={"https://wa.me/919289322456"}
             target="_blank"
             rel="noopener  noreferrer"
             aria-label="Talk to an agent">
