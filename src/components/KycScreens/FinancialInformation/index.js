@@ -63,15 +63,13 @@ const FinancialInfo = ({dashboardDetails}) => {
         financialDocumentProof:
           "Please upload the document in PDF format only.",
       }));
-      return;
+    } else {
+      setFormData(prev => ({
+        ...prev,
+        financialDocumentProof: fileArray,
+      }));
+      setFormErrors({financialDocumentProof: ""});
     }
-
-    setFormData(prev => ({
-      ...prev,
-      financialDocumentProof: fileArray,
-    }));
-
-    setFormErrors({financialDocumentProof: ""});
   };
 
   const submitHandler = () => {

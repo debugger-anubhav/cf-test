@@ -92,8 +92,11 @@ export default function GstSdk({
 
         if (res?.data?.data?.status) {
           setShowSimpleLoader(false);
-          console.log("jdfhkjdshfkjsd");
           showToastNotification(res?.data?.data?.message, 1);
+        }
+        if (res?.data?.data?.data?.userCancelled) {
+          setOpenGstSdk(false);
+          dispatch(setKycScreenName("dashboard"));
         }
       })
 
