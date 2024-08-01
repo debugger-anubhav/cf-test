@@ -183,6 +183,7 @@ const CurrentAddressProof = ({
           if (res?.data?.data?.status) {
             showToastNotification(res?.data?.data?.message, 1);
             setActiveTab(0);
+            window?.location?.reload();
           }
         })
         .catch(err => {

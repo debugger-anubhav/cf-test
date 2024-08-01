@@ -201,11 +201,15 @@ const Document = () => {
         <div>
           <div className={style.sub_heading}>
             Documentation stage:
-            {apiData?.autoPay === "true" ? (
-              <span className="pl-1"> Autopay done</span>
-            ) : (
+            {apiData?.userData?.zoho_sub_status === "KYC Rejected" ? (
               <span className="pl-1 text-[#D96060]">
-                Documents still pending
+                {" "}
+                {apiData?.userData?.zoho_sub_status}
+              </span>
+            ) : (
+              <span className="pl-1">
+                {" "}
+                {apiData?.userData?.zoho_sub_status}
               </span>
             )}
             {apiData?.autoPay === "true" && (
