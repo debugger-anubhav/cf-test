@@ -40,11 +40,8 @@ export default function FinancialQueDrawer({
 
   const toggleDrawer = open => event => {
     setIsOpen(open);
+    changeState(open);
   };
-
-  useEffect(() => {
-    changeState(isOpen);
-  }, [isOpen]);
 
   useEffect(() => {
     handleresize();
