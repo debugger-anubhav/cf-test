@@ -1,15 +1,9 @@
 import React, {useState, useEffect} from "react";
 import styles from "./DocMain.module.css";
 import MenuList from "@/components/Common/MenuList";
-
-// import DocumentaionInitialScreen from "../InitialScreen/Initialscreen";
 import DocSidebar from "../Sidebar/DocSidebar";
 import KycHeader from "../KycHeader/KycHeader";
-// import KYCGetCivilScore from "../KYCGetCivilScore/KYCGetCivilScore";
-// import KYCSalary from "../KYCSalary/KYCSalary";
-// import KYCAddress from "../KYCAddress/KYCAddress";
-// import KYCCard from "../KYCCard/KYCCard";
-// import KYC100 from "../KYC100/KYC100";
+
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
@@ -31,6 +25,7 @@ import DashboardComponent from "@/components/KycScreens/Dashboard/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
+import HandleOldKyc from "../../KycScreens/HandleOldKyc";
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
@@ -55,11 +50,6 @@ const DocMain = () => {
     kycScreen.selectedDataForKyc,
   );
   const [currentScreen, setCurrentScreen] = useState(kycScreen.kycScreenName);
-
-  // const handleGetOrderId = option => {
-  //   dispatch(getOrderId(option?.dealCodeNumber));
-  //   handleKycState(option?.dealCodeNumber);
-  // };
 
   const userid = decrypt(getLocalStorage("_ga"));
 
@@ -114,9 +104,6 @@ const DocMain = () => {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // const openModal = () => {
-  //   setOpenDrawer(true);
-  // };
   const userId = decrypt(getLocalStorage("_ga"));
   const fetchOrdersDetails = filter => {
     baseInstance
@@ -146,13 +133,25 @@ const DocMain = () => {
   };
 
   const handleStartKyc = () => {
-    if (orderIdFromUrl) {
-      checkSelectedProfession();
-    } else if (selectedOption === null) {
-      setOpenDrawer(true);
-    } else {
-      checkSelectedProfession();
-    }
+    const order_id = selectedOrderId?.dealCodeNumber;
+    baseInstance
+      .get(endPoints.kycPage.checkOldKyc(userId, order_id))
+      .then(res => {
+        if (res?.data?.data?.newKycStatus) {
+          if (orderIdFromUrl) {
+            checkSelectedProfession();
+          } else if (selectedOption === null) {
+            setOpenDrawer(true);
+          } else {
+            checkSelectedProfession();
+          }
+        } else {
+          console.log("show old kyc");
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          dispatch(setKycScreenName("oldKycFlow"));
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   const checkSelectedProfession = () => {
@@ -246,43 +245,6 @@ const DocMain = () => {
                 </p>
               </div>
 
-              {/* select box  */}
-              {/* <div onClick={() => setOpenDrawer(true)}>
-            {kycState === 0 ? (
-              <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
-            ) : kycState === 1 ? (
-              <KYCSalary
-                cibilDocsData={cibilDocsData}
-                handleKycState={id => handleKycState(id)}
-              />
-            ) : kycState === 2 ? (
-              <KYCAddress
-                handleKycState={id => handleKycState(id)}
-                cibilDocsData={cibilDocsData}
-                step={
-                  isUpfrontPayment
-                    ? tenure >= 9
-                      ? 1
-                      : creditScore < 650
-                        ? 3
-                        : 2
-                    : creditScore < 650
-                      ? 2
-                      : 3
-                }
-              />
-            ) : kycState === 3 ? (
-              <KYCCard handleKycState={id => handleKycState(id)} />
-            ) : kycState === 4 ? (
-              <KYC100 handleKycState={id => handleKycState(id)} />
-            ) : (
-              <DocumentaionInitialScreen
-                handleKycState={option =>
-                  handleKycState(option?.dealCodeNumber)
-                }
-              />
-            )}
-          </div> */}
               <div className="flex text-71717A font-Poppins md:text-base text-14 pb-1">
                 Select an order to view its documentation status
               </div>
@@ -400,6 +362,11 @@ const DocMain = () => {
             currentScreen === "professionalDetails" ||
             currentScreen === "autoPay" ||
             currentScreen === "dashboard") && <DashboardComponent />}
+          {currentScreen === "oldKycFlow" && (
+            <HandleOldKyc
+              selectOrderIdForKyc={selectedOrderId?.dealCodeNumber}
+            />
+          )}
         </div>
 
         <div>
