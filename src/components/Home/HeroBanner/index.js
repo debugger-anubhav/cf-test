@@ -105,7 +105,7 @@ const HeroBanner = () => {
             swipeable
             width={"100%"}>
             {completeBanners.map(({url, link}) => {
-              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_3840,h_1600/f_auto/q_auto:best/${url}`;
               return (
                 <Fragment key={link}>
                   <Head>
@@ -124,6 +124,7 @@ const HeroBanner = () => {
                             ?.toLowerCase()}${link}`
                         : link
                     }>
+                    {console.log(cloudinaryUrl, "dfghjk", url)}
                     <CldImage
                       src={url}
                       alt={""}
@@ -136,7 +137,7 @@ const HeroBanner = () => {
                       height={800}
                       crop="scale"
                       quality="auto:best"
-                      priority={currentIndex === 0 || currentIndex === 1}
+                      priority
                       className="cursor-pointer rounded-lg"
                       style={{pointerEvents: "all"}}
                     />
