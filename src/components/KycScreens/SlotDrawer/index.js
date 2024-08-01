@@ -10,6 +10,7 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 import commonStyle from "../KycCommonDrawer/styles.module.css";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const SlotDrawer = ({
   isModalOpen,
@@ -68,6 +69,10 @@ const SlotDrawer = ({
       try {
         await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
         closeModal();
+        showToastNotification(
+          "Your delivery slot has been successfully changed",
+          1,
+        );
         getDashboardDetails();
       } catch (err) {
         console.log(err?.message || "some error");

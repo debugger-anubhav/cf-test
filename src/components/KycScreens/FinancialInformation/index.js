@@ -19,6 +19,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const allowedFileTypes = [
   // "image/jpeg",
@@ -153,6 +154,10 @@ const FinancialInfo = ({dashboardDetails}) => {
             const ID = pendingStage?.[0]?.id;
             if (ID === 3) {
               dispatch(setKycScreenName("professionalDetails"));
+              showToastNotification(
+                "Identity verified successfully. Proceed with filling your Additional information",
+                1,
+              );
             }
             if (ID === 6) {
               dispatch(setKycScreenName("autoPay"));
