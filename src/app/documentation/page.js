@@ -15,19 +15,19 @@ const Documentaion = () => {
     dispatch(setDocSidebarActiveItem("KYC & Documentation"));
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(setDocSidebarActiveItem("KYC & Documentation"));
-  //   const script = document?.createElement("script");
-  //   script.src =
-  //     "https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js";
-  //   script.async = true;
+  useEffect(() => {
+    dispatch(setDocSidebarActiveItem("KYC & Documentation"));
+    const script = document?.createElement("script");
+    script.src =
+      "https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js";
+    script.async = true;
 
-  //   document?.body?.appendChild(script);
+    document?.body?.appendChild(script);
 
-  //   return () => {
-  //     document?.body?.removeChild(script);
-  //   };
-  // }, [dispatch]);
+    return () => {
+      document?.body?.removeChild(script);
+    };
+  }, [dispatch]);
 
   return (
     <div>
