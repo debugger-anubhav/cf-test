@@ -5,8 +5,8 @@ import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {useDispatch, useSelector} from "react-redux";
 import {setKycScreenName} from "../../../store/Slices";
-import DocLoader from "@/components/Documentation/DocLoader/DocLoader";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 export default function GstSdk({
   getDashboardDetailsApi,
@@ -20,7 +20,8 @@ export default function GstSdk({
   const [selectedId, setSelectedId] = useState(
     `${userId}_${data?.dealCodeNumber}`,
   );
-  const [holdOnLoader, setHoldOnLoader] = useState(false);
+  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
+
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handler = HyperKycResult => {
@@ -29,10 +30,6 @@ export default function GstSdk({
     if (HyperKycResult?.status === "user_cancelled") {
       setOpenGstSdk(false);
     }
-    console.log("ome in handler2");
-
-    // console.log(HyperKycResult, "gst hyperverge");
-    setHoldOnLoader(true);
     saveGstDetailsApi({
       ...HyperKycResult,
       userId,
@@ -53,11 +50,17 @@ export default function GstSdk({
       .catch(err => console.log(err, "err"));
   };
 
+  // useEffect(() => {
+  //   console.log(showSimpleLoader, "kkkkkkkkk");
+  // }, [showSimpleLoader]);
+
   const saveGstDetailsApi = details => {
+    setShowSimpleLoader(true);
     baseInstance
       .post(endPoints.kycPage.saveGstDetails, details)
       .then(res => {
         if (res?.data?.data?.data?.rejected) {
+          setShowSimpleLoader(false);
           showToastNotification(res?.data?.data?.message, 3);
           setOpenGstSdk(false);
           dispatch(setKycScreenName("dashboard"));
@@ -84,8 +87,10 @@ export default function GstSdk({
           });
         }
 
-        if (res?.data?.data?.data?.status) {
-          showToastNotification(res?.data?.data?.data?.message, 1);
+        if (res?.data?.data?.status) {
+          setShowSimpleLoader(false);
+          console.log("jdfhkjdshfkjsd");
+          showToastNotification(res?.data?.data?.message, 1);
         }
       })
 
@@ -159,9 +164,7 @@ export default function GstSdk({
           </div>
         </>
       )} */}
-      {holdOnLoader && (
-        <DocLoader open={holdOnLoader} setOpen={setHoldOnLoader} />
-      )}
+      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
     </>
   );
 }
