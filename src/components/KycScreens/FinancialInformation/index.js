@@ -149,15 +149,12 @@ const FinancialInfo = ({dashboardDetails}) => {
           const pendingStage = res.allKycStages?.filter(
             i => i.stage_status === 0 || i.stage_status === 3,
           );
+          showToastNotification("Financial docs uploaded successfully.", 1);
           // console.log(pendingStage, "pendingStage");
           if (pendingStage.length > 0) {
             const ID = pendingStage?.[0]?.id;
             if (ID === 3) {
               dispatch(setKycScreenName("professionalDetails"));
-              showToastNotification(
-                "Identity verified successfully. Proceed with filling your Additional information",
-                1,
-              );
             }
             if (ID === 6) {
               dispatch(setKycScreenName("autoPay"));

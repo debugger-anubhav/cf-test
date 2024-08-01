@@ -118,7 +118,10 @@ export default function ProfessionalDetails({
             i => i.stage_status === 0 || i.stage_status === 3,
           );
           console.log(pendingStage, "pendingStage");
-
+          showToastNotification(
+            "Additional information updated successfully.",
+            1,
+          );
           if (pendingStage.length > 0) {
             const ID = pendingStage?.[0]?.id;
             if (ID === 2) {

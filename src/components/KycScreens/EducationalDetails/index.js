@@ -19,6 +19,7 @@ import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 export default function EducationalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
@@ -123,6 +124,7 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
               i => i.stage_status === 0 || i.stage_status === 3,
             );
             console.log(pendingStage, "pendingStage");
+            showToastNotification("Educational docs uploaded successfully.", 1);
             if (pendingStage.length > 0) {
               const ID = pendingStage?.[0]?.id;
               if (ID === 2) {

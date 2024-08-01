@@ -56,10 +56,7 @@ export default function SdkIntegration({
           setOpenPanSdk(false);
         }
         if (res?.data?.data?.data?.status) {
-          showToastNotification(
-            "Identity verified successfully. Proceed with filling your Financial information",
-            1,
-          );
+          showToastNotification("Identity verified successfully.", 1);
         }
       })
 
