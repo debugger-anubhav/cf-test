@@ -24,7 +24,7 @@ export default function ProfessionalDetails({
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
   const userId = decrypt(getLocalStorage("_ga"));
@@ -110,8 +110,11 @@ export default function ProfessionalDetails({
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
         setOpenModal(false);
-        getDashboardDetailsApi().then(() => {
-          const pendingStage = pendingDashboardDetail?.filter(
+        getDashboardDetailsApi().then(res => {
+          // const pendingStage = pendingDashboardDetail?.filter(
+          //   i => i.stage_status === 0 || i.stage_status === 3,
+          // );
+          const pendingStage = res.allKycStages?.filter(
             i => i.stage_status === 0 || i.stage_status === 3,
           );
           console.log(pendingStage, "pendingStage");
