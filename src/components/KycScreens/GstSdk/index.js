@@ -22,7 +22,7 @@ export default function GstSdk({
   );
   const [showSimpleLoader, setShowSimpleLoader] = useState(false);
 
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handler = HyperKycResult => {
     console.log("come in handler1");
@@ -65,8 +65,11 @@ export default function GstSdk({
           setOpenGstSdk(false);
           dispatch(setKycScreenName("dashboard"));
         } else {
-          getDashboardDetailsApi().then(() => {
-            const pendingStage = pendingDashboardDetail?.filter(
+          getDashboardDetailsApi().then(res => {
+            // const pendingStage = pendingDashboardDetail?.filter(
+            //   i => i.stage_status === 0 || i.stage_status === 3,
+            // );
+            const pendingStage = res?.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
             console.log(pendingStage, "pendingStage");

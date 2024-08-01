@@ -24,7 +24,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 export default function EducationalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
 
@@ -120,9 +120,12 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
           getDashboardDetailsApi().then(res => {
-            const pendingStage = pendingDashboardDetail?.filter(
+            const pendingStage = res?.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
+            // const pendingStage = pendingDashboardDetail?.filter(
+            //   i => i.stage_status === 0 || i.stage_status === 3,
+            // );
             console.log(pendingStage, "pendingStage");
             showToastNotification("Educational docs uploaded successfully.", 1);
             if (pendingStage.length > 0) {

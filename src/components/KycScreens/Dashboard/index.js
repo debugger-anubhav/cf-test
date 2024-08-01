@@ -466,18 +466,28 @@ export default function DashboardComponent() {
               )}
 
               {dashboardDetails?.kycStatus === "Verified" && (
-                <div className="flex items-center gap-1">
-                  <img
-                    src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
-                    alt="lock"
-                    width={20}
-                    height={20}
-                  />
-                  <p>
-                    {dashboardDetails?.zoho_status === "Out for Delivery"
-                      ? "Order is out for delivery"
-                      : "Manage your delivery now"}
-                  </p>
+                <div>
+                  {dashboardDetails?.zoho_status === "Out for Delivery" ? (
+                    <div className="flex items-center gap-1">
+                      <img
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/exclamatory-icn.svg"
+                        alt="lock"
+                        width={20}
+                        height={20}
+                      />
+                      Order is out for delivery
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-1">
+                      <img
+                        src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
+                        alt="lock"
+                        width={20}
+                        height={20}
+                      />
+                      Manage your delivery now
+                    </div>
+                  )}
                 </div>
               )}
 

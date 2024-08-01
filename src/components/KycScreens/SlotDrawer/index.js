@@ -70,7 +70,7 @@ const SlotDrawer = ({
         await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
         closeModal();
         showToastNotification(
-          "Your delivery slot has been successfully changed",
+          "Your delivery slot has been updated successfully.",
           1,
         );
         getDashboardDetails();

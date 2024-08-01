@@ -18,9 +18,9 @@ export default function FinancialQueDrawer({
 }) {
   const dispatch = useDispatch();
   const data = useSelector(state => state.kycPage.selectedDataForKyc);
-  const pendingDashboardDetail = useSelector(
-    state => state.kycPage.pendingDashboardDetail,
-  );
+  // const pendingDashboardDetail = useSelector(
+  //   state => state.kycPage.pendingDashboardDetail,
+  // );
 
   const [isOpen, setIsOpen] = React.useState(true);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = React.useState(false);
@@ -53,10 +53,12 @@ export default function FinancialQueDrawer({
 
   const handleGetDashbord = () => {
     getDashboardDetailsApi().then(res => {
-      console.log(res, "resssssssss");
-      const pendingStage = pendingDashboardDetail?.filter(
+      const pendingStage = res?.allKycStages?.filter(
         i => i.stage_status === 0 || i.stage_status === 3,
       );
+      // const pendingStage = pendingDashboardDetail?.filter(
+      //   i => i.stage_status === 0 || i.stage_status === 3,
+      // );
       console.log(pendingStage, "pendingStage");
       if (pendingStage.length > 0) {
         const ID = pendingStage?.[0]?.id;

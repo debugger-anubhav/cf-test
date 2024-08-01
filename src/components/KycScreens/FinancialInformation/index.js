@@ -21,37 +21,7 @@ import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
-const allowedFileTypes = [
-  // "image/jpeg",
-  // "image/jpg",
-  // "image/png",
-  "application/pdf",
-];
-// const SelectionComp = ({
-//   headertext,
-//   duration,
-//   setIsSelected,
-//   type,
-//   showInner,
-// }) => {
-//   return (
-//     <div
-//       onClick={() => {
-//         setIsSelected(type);
-//       }}>
-//       <div className={`${styles.selHeading}`}>
-//         <SelectionCircle showInner={showInner} />
-//         <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
-//       </div>
-//       <div className={`${styles.selDivider}`}>
-//         <hr />
-//       </div>
-//       <div className={`${styles.selFooter} w-max-[173px]`}>
-//         Required for <span className="font-medium">{duration}</span>
-//       </div>
-//     </div>
-//   );
-// };
+const allowedFileTypes = ["application/pdf"];
 
 const FinancialInfo = ({dashboardDetails}) => {
   const dispatch = useDispatch();
@@ -86,31 +56,22 @@ const FinancialInfo = ({dashboardDetails}) => {
   };
 
   const handleFileInputChange = e => {
-    const file = e.target.files;
-    const temp = [...formData.financialDocumentProof];
-    const fileArray = Object.keys(file).map(key => {
-      return file[key];
-    });
-    const newArr = temp.concat(fileArray);
-
-    if (file) {
-      setFormData(prev => {
-        return {...prev, financialDocumentProof: newArr};
-      });
-
-      if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
-        setFormErrors(prev => ({
-          ...prev,
-          financialDocumentProof:
-            "Please upload the document in PDF format only.",
-        }));
-      } else {
-        setFormErrors(prev => ({
-          ...prev,
-          financialDocumentProof: "",
-        }));
-      }
+    const fileArray = Array.from(e.target.files);
+    if (fileArray.some(file => !allowedFileTypes.includes(file.type))) {
+      setFormErrors(prev => ({
+        ...prev,
+        financialDocumentProof:
+          "Please upload the document in PDF format only.",
+      }));
+      return;
     }
+
+    setFormData(prev => ({
+      ...prev,
+      financialDocumentProof: fileArray,
+    }));
+
+    setFormErrors({financialDocumentProof: ""});
   };
 
   const submitHandler = () => {
