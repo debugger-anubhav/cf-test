@@ -27,7 +27,6 @@ export default function ProfessionalDetails({
   const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const stageId = kycSliceData.stageId;
   const userId = decrypt(getLocalStorage("_ga"));
 
   const nomineeRelation = [
@@ -153,7 +152,7 @@ export default function ProfessionalDetails({
       const payload = {
         userId,
         orderId,
-        stageId,
+        stageId: 3,
         nomineeName: values?.nomineeName,
         nomineeRelation: values?.nomineeRelation,
         nomineePhoneNo: values?.nomineeNumber,

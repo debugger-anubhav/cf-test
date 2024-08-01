@@ -366,7 +366,11 @@ const Document = () => {
         )}
         {activeTab === 2 && (
           <div className="px-6 pb-6">
-            <CurrentAddressProof showHeading={false} />
+            <CurrentAddressProof
+              showHeading={false}
+              apiData={apiData?.uploadingDocs}
+              orderId={orderId}
+            />
           </div>
         )}
         {openRejectDrawer && (

@@ -145,6 +145,7 @@ export const endPoints = {
     uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
     saveEducationalDetails: "fc-kycs/saveEducationalDetails",
     saveGstDetails: "fc-kycs/saveGstDetails",
+    uploadManuallyDoc: "fc-kycs/uploadDocsFromDashboard",
   },
 
   cityshieldPage: {

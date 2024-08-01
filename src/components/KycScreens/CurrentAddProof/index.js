@@ -21,9 +21,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
-const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
+const CurrentAddressProof = ({
+  cibilDocsData,
+  showHeading,
+  apiData,
+  orderId,
+}) => {
   const dispatch = useDispatch();
-
   const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [currAddModal, setCurrAddModal] = useState(false);
@@ -34,9 +38,12 @@ const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
   const [dropdownOpt, setDropdownOpt] = useState(
     currentAddOptions?.supported_docs?.split(","),
   );
-  const orderId = useSelector(
-    state => state.kycPage.selectedDataForKyc?.dealCodeNumber,
-  );
+  console.log(docsData, dropdownOpt);
+  // const dataForSelectDrawer = apiData?.map(item => item.doc_name);
+  const dataForSelectDrawer = apiData.map(item => ({
+    doc_name: item.doc_name,
+    doc_id: item.doc_id,
+  }));
 
   useEffect(() => {
     setDropdownOpt(currentAddOptions?.supported_docs?.split(","));
@@ -60,9 +67,11 @@ const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
       .get(endPoints.addressProofList)
       .then(res => {
         setDocsData(res?.data?.data);
+        console.log(res?.data?.data, "[[[[[[[[[[[[[[[");
       })
       .catch(err => console.log(err?.message || "some error"));
   };
+
   const allowedFileTypes = [
     "image/jpeg",
     "image/jpg",
@@ -152,20 +161,23 @@ const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
     for (let i = 0; i < formData.addressProof.length; i++) {
       allData.append("doc", formData.addressProof[i]);
     }
+    const selectedDocId = dataForSelectDrawer?.find(
+      option => option.doc_name === selectedOptionPer?.value,
+    );
+    console.log(selectedDocId, "pppppppp");
     allData.append(
-      "currentAddressDocs",
+      "docDetail",
       JSON.stringify({
-        doc_id: currentAddOptions?.doc_id,
+        doc_id: selectedDocId?.doc_id,
         subDocType: selectedOptionPer?.value,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
-    allData.append("stageId", 5);
     allData.append("orderId", orderId);
 
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
-        .post(endPoints.kycPage.uploadCurrentAddressDocs, allData)
+        .post(endPoints.kycPage.uploadManuallyDoc, allData)
         .then(res => {
           dispatch(setKycScreenName("dashboard"));
           console.log(res);
@@ -239,7 +251,13 @@ const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
       </div>
       <div className={`${styles.formInputFirst}`}>
         <DropDown
-          options={dropdownOpt?.map(i => ({label: i, value: i}))}
+          options={dataForSelectDrawer?.map(i => ({
+            label: i.doc_name,
+            value: i.doc_name,
+          }))}
+          // options={docsData?.[1]?.supported_docs
+          //   .split(",")
+          //   ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setPerAddModal}
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
@@ -248,7 +266,7 @@ const CurrentAddressProof = ({cibilDocsData, showHeading}) => {
           optionsActive="md:block hidden"
           currAddModal={currAddModal}
           perAddModal={perAddModal}
-          docsData={docsData}
+          docsData={dataForSelectDrawer}
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
           handleOptionClickCur={handleOptionClickCur}
