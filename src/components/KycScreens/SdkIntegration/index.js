@@ -53,6 +53,7 @@ export default function SdkIntegration({
         setHoldOnLoader(false);
         if (res?.data?.data?.data?.rejected) {
           showToastNotification(res?.data?.data?.message, 3);
+          setOpenPanSdk(false);
         }
       })
 

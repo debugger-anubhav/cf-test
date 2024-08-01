@@ -238,6 +238,10 @@ export default function DashboardComponent() {
     window.scrollTo({top: 0, left: 0, behavior: "smooth"});
   };
 
+  useEffect(() => {
+    console.log(openPanSdk, "pppppppppppppppppppppppppppppp");
+  }, [openPanSdk]);
+
   const handleDelivery = () => {
     if (pendingDashboardDetail?.length > 0) {
       handleKycStagesClick(pendingDashboardDetail[0]);
@@ -568,8 +572,8 @@ export default function DashboardComponent() {
                             ) {
                               setOpenPanSdk(true);
                             } else if (
-                              item.stage_status !== 2 &&
-                              item.stage_status !== 1
+                              item.stage_status === 0 &&
+                              item.stage_status === 3
                             ) {
                               handleKycStagesClick(item);
                             }
