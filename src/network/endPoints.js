@@ -146,6 +146,8 @@ export const endPoints = {
     saveEducationalDetails: "fc-kycs/saveEducationalDetails",
     saveGstDetails: "fc-kycs/saveGstDetails",
     uploadManuallyDoc: "fc-kycs/uploadDocsFromDashboard",
+    checkOldKyc: (userId, orderId) =>
+      `fc-kycs/getKycFlowStatus?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {
