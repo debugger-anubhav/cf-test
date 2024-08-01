@@ -370,6 +370,7 @@ const Document = () => {
               showHeading={false}
               apiData={apiData?.uploadingDocs}
               orderId={orderId}
+              setActiveTab={setActiveTab}
             />
           </div>
         )}

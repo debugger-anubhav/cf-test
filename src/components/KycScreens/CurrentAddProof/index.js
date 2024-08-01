@@ -17,37 +17,39 @@ import {
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
 const CurrentAddressProof = ({
   cibilDocsData,
   showHeading,
   apiData,
   orderId,
+  setActiveTab,
 }) => {
   const dispatch = useDispatch();
-  const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
+  // const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
   const [docsData, setDocsData] = useState();
   const [selectedOptionCur, setSelectedOptionCur] = useState({});
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
-  const [dropdownOpt, setDropdownOpt] = useState(
-    currentAddOptions?.supported_docs?.split(","),
-  );
-  console.log(docsData, dropdownOpt);
+  // const [dropdownOpt, setDropdownOpt] = useState(
+  //   currentAddOptions?.supported_docs?.split(","),
+  // );
+  console.log(docsData);
   // const dataForSelectDrawer = apiData?.map(item => item.doc_name);
   const dataForSelectDrawer = apiData.map(item => ({
     doc_name: item.doc_name,
     doc_id: item.doc_id,
   }));
 
-  useEffect(() => {
-    setDropdownOpt(currentAddOptions?.supported_docs?.split(","));
-  }, [currentAddOptions]);
+  // useEffect(() => {
+  //   setDropdownOpt(currentAddOptions?.supported_docs?.split(","));
+  // }, [currentAddOptions]);
 
   const [formData, setFormData] = useState({
     addressProof: [],
@@ -67,7 +69,6 @@ const CurrentAddressProof = ({
       .get(endPoints.addressProofList)
       .then(res => {
         setDocsData(res?.data?.data);
-        console.log(res?.data?.data, "[[[[[[[[[[[[[[[");
       })
       .catch(err => console.log(err?.message || "some error"));
   };
@@ -164,7 +165,6 @@ const CurrentAddressProof = ({
     const selectedDocId = dataForSelectDrawer?.find(
       option => option.doc_name === selectedOptionPer?.value,
     );
-    console.log(selectedDocId, "pppppppp");
     allData.append(
       "docDetail",
       JSON.stringify({
@@ -180,9 +180,13 @@ const CurrentAddressProof = ({
         .post(endPoints.kycPage.uploadManuallyDoc, allData)
         .then(res => {
           dispatch(setKycScreenName("dashboard"));
-          console.log(res);
+          if (res?.data?.data?.status) {
+            showToastNotification(res?.data?.data?.message, 1);
+            setActiveTab(0);
+          }
         })
         .catch(err => {
+          showToastNotification(err?.message, 3);
           console.log(err?.message || "some error");
         });
     }
