@@ -103,13 +103,27 @@ const Document = () => {
             );
           })}
         </div>
-        {otherReasonForRejection && (
+        {/* {otherReasonForRejection && (
           <input
             type="text"
             className={`${style.value_box} mb-2`}
             placeholder="Type here"
             onChange={e => {
               setOtherReasonInput(e.target.value);
+            }}
+          />
+        )} */}
+        {otherReasonForRejection && (
+          <textarea
+            className={`${style.value_box} mb-2 !items-center`}
+            placeholder="Type here"
+            maxLength={40}
+            onChange={e => {
+              setOtherReasonInput(e.target.value);
+            }}
+            style={{
+              resize: "none",
+              overflow: "hidden",
             }}
           />
         )}

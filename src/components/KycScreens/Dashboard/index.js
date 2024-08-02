@@ -75,6 +75,7 @@ export default function DashboardComponent() {
   const [progressNumber, setProgressNumber] = useState(
     kycSliceData?.progressPercent,
   );
+  const [uploadedDocsData, setUploadedDocsData] = useState(null);
 
   const conditionallyDesc = item => {
     const additional = item.id === 3 ? item.stage_description.split("|") : "";
@@ -206,6 +207,7 @@ export default function DashboardComponent() {
         }
         setDocsDetailsData(res?.data?.data?.crifQuestionData?.questionData);
         dispatch(setCurrentAddOpt(res?.data?.data?.requiredDocs));
+        setUploadedDocsData(res?.data?.data?.uploadedDocsData);
         setHoldOnLoader(false);
       })
       .catch(err => {
@@ -329,7 +331,11 @@ export default function DashboardComponent() {
 
       {currentScreen === "financialInfo" && (
         <div className="mt-8">
-          <FinancialInfo dashboardDetails={getDashboardDetailsApi} />
+          <FinancialInfo
+            dashboardDetails={getDashboardDetailsApi}
+            uploadedDocsData={uploadedDocsData}
+            reject={dashboardDetails?.allKycStages?.[1]}
+          />
         </div>
       )}
 

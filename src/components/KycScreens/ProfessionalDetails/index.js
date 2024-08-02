@@ -14,6 +14,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import VerfiEmail from "./VerfiEmail";
 import docStyle from "../../DocumentsPage/style.module.css";
 import GstSdk from "../GstSdk";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 export default function ProfessionalDetails({
   getDashboardDetailsApi,
@@ -41,6 +42,7 @@ export default function ProfessionalDetails({
   const [openGstSdk, setOpenGstSdk] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [storeValues, setStoreValues] = useState(null);
+  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
 
   useEffect(() => {
     if (professionId === 2) {
@@ -54,6 +56,7 @@ export default function ProfessionalDetails({
         companyName: Yup.string().required("Company name is required"),
         companyEmail: Yup.string()
           .email("Invalid email address")
+          .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
           .required("Company email id is required"),
       });
     } else if (professionId === 3 || professionId === 4) {
@@ -150,6 +153,7 @@ export default function ProfessionalDetails({
   }, [verifiedEmail]);
 
   const handleSubmit = values => {
+    setShowSimpleLoader(true);
     setStoreValues(values);
     if (professionId === 1 && verifiedEmail === "no") {
       handleEmailVerify();
@@ -184,16 +188,23 @@ export default function ProfessionalDetails({
         setRecievedOtp(res?.data?.data);
         if (res?.data?.data?.status) {
           setOpenModal(true);
+          setShowSimpleLoader(false);
         } else {
           showToastNotification(res?.data?.data?.message, 3);
           setOpenModal(false);
+          setShowSimpleLoader(false);
         }
-        console.log(res?.data?.data?.status, "pppppppppp");
+      })
+      .catch(err => {
+        console.log(err);
+        setShowSimpleLoader(false);
       });
   };
 
   return (
     <div className={styles.wrapper}>
+      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
+
       {professionId !== 2 && (
         <>
           <div className={styles.heading}>
