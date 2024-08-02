@@ -37,8 +37,8 @@ const Head = () => {
         process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") ||
         includeInDevelopment) && (
         <>
-          <FWCDN />
-          <FWConfig />
+          {/* <FWCDN />
+          <FWConfig /> */}
           <Info />
           <FBQ />
           <LintRk />
