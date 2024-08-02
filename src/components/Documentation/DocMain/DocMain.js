@@ -40,6 +40,7 @@ const DocMain = () => {
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
+  const [buttonName, setButtonName] = useState("Start my KYC now");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -142,17 +143,16 @@ const DocMain = () => {
         .get(endPoints.kycPage.checkOldKyc(userId, order_id))
         .then(res => {
           if (res?.data?.data?.newKycStatus) {
-            if (orderIdFromUrl) {
-              checkSelectedProfession();
-            } else if (selectedOption === null) {
+            if (selectedOption === null) {
               setOpenDrawer(true);
-            } else {
-              checkSelectedProfession();
             }
 
-            const newURL = new URL(window?.location?.href);
-            newURL?.searchParams?.set("order_id", order_id);
-            window?.history?.pushState({}, "", newURL.toString());
+            if (buttonName === "Check KYC status") {
+              dispatch(setKycScreenName("dashboard"));
+            } else {
+              dispatch(setKycScreenName("workProfession"));
+            }
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           } else {
             console.log("show old kyc");
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
@@ -165,19 +165,14 @@ const DocMain = () => {
     }
   };
 
-  const checkSelectedProfession = () => {
-    let order_id = selectedOrderId?.dealCodeNumber;
-    if (orderIdFromUrl && !selectedOrderId) {
-      order_id = orderIdFromUrl;
-    }
+  const checkSelectedProfession = order_id => {
     baseInstance
       .get(endPoints.kycPage.checkProfessionSelected(userId, order_id))
       .then(res => {
-        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         if (res?.data?.data?.status) {
-          dispatch(setKycScreenName("dashboard"));
+          setButtonName("Check KYC status");
         } else {
-          dispatch(setKycScreenName("workProfession"));
+          setButtonName("Start my KYC now");
         }
       })
       .catch(err => console.log(err));
@@ -216,6 +211,22 @@ const DocMain = () => {
     setCurrentScreen(kycScreen.kycScreenName);
     setSelectedOrderId(kycScreen.selectedDataForKyc);
   }, [kycScreen]);
+
+  useEffect(() => {
+    let order_id = selectedOrderId?.dealCodeNumber;
+    if (orderIdFromUrl && !selectedOrderId) {
+      order_id = orderIdFromUrl;
+    }
+    if (selectedOrderId) {
+      const newURL = new URL(window?.location?.href);
+      newURL?.searchParams?.set("order_id", order_id);
+      window?.history?.pushState({}, "", newURL.toString());
+    }
+
+    if (order_id) {
+      checkSelectedProfession(order_id);
+    }
+  }, [selectedOrderId]);
 
   return (
     <div>
@@ -284,7 +295,8 @@ const DocMain = () => {
                   selectedOption === null ? "bg-FFDF85 " : "bg-btn-primary "
                 } ${orderIdFromUrl && "bg-btn-primary"}`}
                 onClick={handleStartKyc}>
-                Start my KYC now{" "}
+                {/* Start my KYC now{" "} */}
+                {buttonName}
                 <ArrowForw
                   color={"#222222"}
                   size={20}
