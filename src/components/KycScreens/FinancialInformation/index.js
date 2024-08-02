@@ -11,6 +11,7 @@ import {
   CheckFillIcon,
   DeleteIcon,
   DeleteIconFilled,
+  InfoCircleIcon,
   OutlineArrowRight,
 } from "@/assets/icon";
 // import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
@@ -20,15 +21,17 @@ import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
 const allowedFileTypes = ["application/pdf"];
 
-const FinancialInfo = ({dashboardDetails}) => {
+const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
   const dispatch = useDispatch();
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
+  const isReupload = uploadedDocsData?.length > 0;
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
@@ -57,6 +60,8 @@ const FinancialInfo = ({dashboardDetails}) => {
 
   const handleFileInputChange = e => {
     const fileArray = Array.from(e.target.files);
+
+    // Check if any of the files are not of the allowed type
     if (fileArray.some(file => !allowedFileTypes.includes(file.type))) {
       setFormErrors(prev => ({
         ...prev,
@@ -64,11 +69,13 @@ const FinancialInfo = ({dashboardDetails}) => {
           "Please upload the document in PDF format only.",
       }));
     } else {
+      setFormErrors({financialDocumentProof: ""});
+
+      // Append new files to the existing files
       setFormData(prev => ({
         ...prev,
-        financialDocumentProof: fileArray,
+        financialDocumentProof: [...prev.financialDocumentProof, ...fileArray],
       }));
-      setFormErrors({financialDocumentProof: ""});
     }
   };
 
@@ -162,6 +169,19 @@ const FinancialInfo = ({dashboardDetails}) => {
           className={"cursor-pointer"}
         />
         Financial Information
+      </div>
+
+      <div>
+        {reject?.rejected_reason && reject?.stage_status === 3 && (
+          <div
+            className={`${commonStyles.rejected_docs_wrapper} flex !items-center`}>
+            <InfoCircleIcon color={"#222"} size={15} className={"mr-2"} />
+            <p className={`${commonStyles.rejected_doc_name} `}>
+              <span className="font-medium pr-1">Verification Rejected :</span>
+              Please re-upload {reject?.rejected_reason}
+            </p>
+          </div>
+        )}
       </div>
 
       <div className={`${styles.formHeadingSecond}`}>
@@ -330,6 +350,14 @@ const FinancialInfo = ({dashboardDetails}) => {
           {formErrors.financialDocumentProof}
         </div>
       )}
+
+      {isReupload && (
+        <RejectedDocsComponent
+          array={uploadedDocsData}
+          docType={"cf_financial_statement"}
+        />
+      )}
+
       <div className={styles.note}>
         <span className="font-medium"> Note:</span> Please upload the document
         in PDF format only.

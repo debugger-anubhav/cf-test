@@ -26,9 +26,11 @@ import PersonalDetails from "../../KycScreens/PersonalDetails/index";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
 import HandleOldKyc from "../../KycScreens/HandleOldKyc";
+import {useRouter} from "next/navigation";
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
   const kycScreen = useSelector(state => state.kycPage);
@@ -134,24 +136,33 @@ const DocMain = () => {
 
   const handleStartKyc = () => {
     const order_id = selectedOrderId?.dealCodeNumber;
-    baseInstance
-      .get(endPoints.kycPage.checkOldKyc(userId, order_id))
-      .then(res => {
-        if (res?.data?.data?.newKycStatus) {
-          if (orderIdFromUrl) {
-            checkSelectedProfession();
-          } else if (selectedOption === null) {
-            setOpenDrawer(true);
+
+    if (order_id) {
+      baseInstance
+        .get(endPoints.kycPage.checkOldKyc(userId, order_id))
+        .then(res => {
+          if (res?.data?.data?.newKycStatus) {
+            if (orderIdFromUrl) {
+              checkSelectedProfession();
+            } else if (selectedOption === null) {
+              setOpenDrawer(true);
+            } else {
+              checkSelectedProfession();
+            }
+
+            const newURL = new URL(window?.location?.href);
+            newURL?.searchParams?.set("order_id", order_id);
+            window?.history?.pushState({}, "", newURL.toString());
           } else {
-            checkSelectedProfession();
+            console.log("show old kyc");
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+            dispatch(setKycScreenName("oldKycFlow"));
           }
-        } else {
-          console.log("show old kyc");
-          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
-          dispatch(setKycScreenName("oldKycFlow"));
-        }
-      })
-      .catch(err => console.log(err));
+        })
+        .catch(err => console.log(err));
+    } else {
+      setOpenDrawer(true);
+    }
   };
 
   const checkSelectedProfession = () => {
@@ -319,7 +330,13 @@ const DocMain = () => {
                   </p>
                 </div>
                 <div className={styles.track_btn_wrapper}>
-                  <button className={styles.app_btn}>
+                  <button
+                    className={styles.app_btn}
+                    onClick={() =>
+                      router.push(
+                        "https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice",
+                      )
+                    }>
                     <img
                       src={
                         "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/ios-icn.svg"
@@ -328,7 +345,13 @@ const DocMain = () => {
                     />
                     ios
                   </button>
-                  <button className={styles.app_btn}>
+                  <button
+                    className={styles.app_btn}
+                    onClick={() =>
+                      router.push(
+                        "https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice",
+                      )
+                    }>
                     <img
                       src={
                         "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/android-icn.svg"
