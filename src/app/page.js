@@ -174,7 +174,7 @@ export default function Home() {
         <MenuList />
         <HeroBanner />
 
-        {userId && <KycPending />}
+        {/* {userId && <KycPending />}
 
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
@@ -202,7 +202,7 @@ export default function Home() {
         <FrequentlyAskedQuestions params={"home-page"} />
         <TextContent params={"home-page"} />
         <Footer />
-        <Notifications />
+        <Notifications /> */}
       </div>
     </>
   );
