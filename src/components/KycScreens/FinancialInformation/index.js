@@ -38,7 +38,7 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
   // const stageId = kycSliceData.stageId;
 
   const userId = decrypt(getLocalStorage("_ga"));
-  // const professionId = kycSliceData.selectedProfessionId;
+  const professionId = kycSliceData.selectedProfessionId;
   // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const [formData, setFormData] = useState({
@@ -95,7 +95,10 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
     allData.append(
       "financialStatementProof",
       JSON.stringify({
-        doc_id: "cf_financial_statement",
+        doc_id:
+          professionId === 3 || professionId === 4
+            ? "nominee_financial_statement"
+            : "cf_financial_statement",
         subDocType: isSelected,
       }),
     );
