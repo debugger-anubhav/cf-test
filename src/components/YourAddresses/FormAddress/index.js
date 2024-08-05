@@ -23,6 +23,8 @@ const FormAddress = ({setTab, tab, id}) => {
   const addressArray = useSelector(state => state.cartPageData.savedAddresses);
   const selectedItem = addressArray.find(item => item.id === id);
   const {cityList: storeCityList} = useAppSelector(state => state.homePagedata);
+  const phoneNumber = getLocalStorage("user_number");
+
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
@@ -33,6 +35,13 @@ const FormAddress = ({setTab, tab, id}) => {
       //     return /^[0-9]*$/.test(value);
       //   },
       // )
+      .test(
+        "not-same-as-phoneNumber",
+        "Contact number should not be the same as the registered number",
+        function (value) {
+          return value !== phoneNumber;
+        },
+      )
       .min(
         10,
         "Oops! Looks like you missed some digits. Please enter complete 10 digit number.",

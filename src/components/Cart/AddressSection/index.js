@@ -78,10 +78,17 @@ const AddressSection = () => {
   );
 
   const addressArray = data.savedAddresses;
-
+  const phoneNumber = getLocalStorage("user_number");
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
+      .test(
+        "not-same-as-phoneNumber",
+        "Contact number should not be the same as the registered number",
+        function (value) {
+          return value !== phoneNumber;
+        },
+      )
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 10 digit phone number without spaces or special characters",
