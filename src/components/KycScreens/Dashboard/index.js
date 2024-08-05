@@ -326,6 +326,7 @@ export default function DashboardComponent() {
         <CongratulationKyc
           dashboardDetails={dashboardDetails}
           handleDelivery={handleDelivery}
+          disableKycStatusBtn={disableKycStatusBtn}
         />
       )}
 
