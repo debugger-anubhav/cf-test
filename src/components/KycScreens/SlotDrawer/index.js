@@ -113,19 +113,21 @@ const SlotDrawer = ({
                   : "border-DDDDDF"
               }
               ${
-                item.is_holiday
+                item.is_holiday && !item?.slots?.[0]?.delivery_available
                   ? "cursor-not-allowed bg-[#FCFBFA]"
                   : "cursor-pointer"
               }
               `}
               onClick={() => {
-                if (!item.is_holiday) {
+                if (!item.is_holiday && item?.slots?.[0]?.delivery_available) {
                   setSelectedDate(item.date);
                 }
               }}>
               <div
                 className={`${styles.outer_circle} ${
-                  item.is_holiday && "!border-DDDDDF !cursor-not-allowed"
+                  item.is_holiday &&
+                  !item?.slots?.[0]?.delivery_available &&
+                  "!border-DDDDDF !cursor-not-allowed"
                 }`}>
                 <div
                   className={`${
