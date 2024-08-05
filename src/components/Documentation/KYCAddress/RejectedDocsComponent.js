@@ -3,6 +3,7 @@ import commonStyles from "../common.module.css";
 import {OpenIcon} from "@/assets/icon";
 
 const RejectedDocsComponent = ({array, docType}) => {
+  console.log(array, "pppppppp");
   const fileBaseUrl = "https://d3juy0zp6vqec8.cloudfront.net/";
   const handleOpenFile = (dirName, fileName) => {
     const imageUrl = fileBaseUrl + dirName + "/" + fileName;

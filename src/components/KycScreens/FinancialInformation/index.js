@@ -357,7 +357,11 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
       {isReupload && (
         <RejectedDocsComponent
           array={uploadedDocsData}
-          docType={"cf_financial_statement"}
+          docType={
+            professionId === 3 || professionId === 4
+              ? "nominee_financial_statement"
+              : "cf_financial_statement"
+          }
         />
       )}
 
