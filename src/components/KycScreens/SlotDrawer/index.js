@@ -113,7 +113,7 @@ const SlotDrawer = ({
                   : "border-DDDDDF"
               }
               ${
-                item.is_holiday && !item?.slots?.[0]?.delivery_available
+                item.is_holiday && item?.slots?.[0]?.delivery_available
                   ? "cursor-not-allowed bg-[#FCFBFA]"
                   : "cursor-pointer"
               }
@@ -126,7 +126,7 @@ const SlotDrawer = ({
               <div
                 className={`${styles.outer_circle} ${
                   item.is_holiday &&
-                  !item?.slots?.[0]?.delivery_available &&
+                  item?.slots?.[0]?.delivery_available &&
                   "!border-DDDDDF !cursor-not-allowed"
                 }`}>
                 <div
