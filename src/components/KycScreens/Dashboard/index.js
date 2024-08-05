@@ -485,12 +485,6 @@ export default function DashboardComponent() {
                     </div>
                   ) : (
                     <div className="flex items-center gap-1">
-                      <img
-                        src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
-                        alt="lock"
-                        width={20}
-                        height={20}
-                      />
                       Manage your delivery now
                     </div>
                   )}
