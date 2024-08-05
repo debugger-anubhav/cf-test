@@ -485,6 +485,15 @@ export default function DashboardComponent() {
                     </div>
                   ) : (
                     <div className="flex items-center gap-1">
+                      {dashboardDetails.zoho_sub_status !==
+                        "Delivery Scheduled" && (
+                        <img
+                          src="https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/lock-icn.svg"
+                          alt="lock"
+                          width={20}
+                          height={20}
+                        />
+                      )}
                       Manage your delivery now
                     </div>
                   )}
