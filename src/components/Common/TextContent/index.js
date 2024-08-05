@@ -1,21 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import styles from "../../Category/categoryContent/style.module.css";
 import Worker from "worker-loader!./textContentWorker";
 
 export default function TextContent({params}) {
-  const [data, setData] = useState();
+  const [data, setData] = useState([]);
   const [paramsCityId, setParamsCityId] = useState(46);
-
-  const worker = new Worker();
-
-  useEffect(() => {
-    worker.postMessage({type: "city", params});
-  }, [params?.city]);
+  const workerRef = useRef(null);
 
   useEffect(() => {
-    worker.postMessage({params, paramsCityId});
+    // Create worker instance and store it in a ref
+    workerRef.current = new Worker();
 
-    worker.onmessage = function ({data: {data, cityId}}) {
+    workerRef.current.onmessage = function ({data: {data, cityId}}) {
       if (cityId) {
         setParamsCityId(cityId);
       }
@@ -23,15 +19,27 @@ export default function TextContent({params}) {
     };
 
     return () => {
-      worker?.terminate();
+      workerRef.current?.terminate();
     };
-  }, [paramsCityId]);
+  }, []);
+
+  useEffect(() => {
+    if (workerRef.current) {
+      workerRef.current.postMessage({type: "city", params});
+    }
+  }, [params?.city]);
+
+  useEffect(() => {
+    if (workerRef.current) {
+      workerRef.current.postMessage({params, paramsCityId});
+    }
+  }, [params, paramsCityId]);
 
   return (
     <div className={styles.wrapper}>
       {params === "home-page" && (
         <>
-          {data?.map((item, index) => (
+          {data.map((item, index) => (
             <div
               className={styles.dynamic_keyword}
               dangerouslySetInnerHTML={{__html: item.meta_keyword}}

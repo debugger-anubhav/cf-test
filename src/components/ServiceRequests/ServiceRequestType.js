@@ -126,7 +126,7 @@ function ServiceRequestType({
           </div>
           <div className={`${styles.request_type} mt-7`}>
             <a
-              href={"https://wa.me/919205006188"}
+              href={"https://wa.me/919289322456"}
               target="_blank"
               rel="noopener  noreferrer"
               aria-label="Talk to an agent">
