@@ -174,10 +174,10 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
       <div>
         {reject?.rejected_reason && reject?.stage_status === 3 && (
           <div
-            className={`${commonStyles.rejected_docs_wrapper} flex !items-center`}>
-            <InfoCircleIcon color={"#222"} size={15} className={"mr-2"} />
-            <p className={`${commonStyles.rejected_doc_name} `}>
-              <span className="font-medium pr-1">Verification Rejected :</span>
+            className={`${commonStyles.rejected_docs_wrapper} flex !items-center !text-71717A`}>
+            <InfoCircleIcon color={"#71717A"} size={15} className={"mr-2"} />
+            <p className={`${commonStyles.rejected_doc_name} !text-71717A`}>
+              <span className="font-medium pr-1 ">Verification Rejected :</span>
               Please re-upload {reject?.rejected_reason}
             </p>
           </div>
