@@ -5,5 +5,5 @@
   @apply mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 .selected_box {
-  @apply flex items-center font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer;
+  @apply flex items-center font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px];
 }

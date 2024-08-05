@@ -10,6 +10,7 @@ import {
   PaymentAndBilling,
   ReferralProgram,
   WhyCityFurnish,
+  RefundAndCancellation,
 } from "./data";
 import SingleQuestion from "./singleQuestion";
 import {FaHeadset, FaPhoneAlt} from "react-icons/fa";
@@ -28,6 +29,7 @@ const Data = [
   "Our Services",
   "Why rent from Cityfurnish",
   "Referral Program",
+  "Refund & Cancellation",
 ];
 
 const MainWrapper = () => {
@@ -50,6 +52,7 @@ const MainWrapper = () => {
     3: OurServices,
     4: WhyCityFurnish,
     5: ReferralProgram,
+    6: RefundAndCancellation,
   };
 
   useEffect(() => {
