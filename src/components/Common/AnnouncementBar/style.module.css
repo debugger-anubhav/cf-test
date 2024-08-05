@@ -1,5 +1,5 @@
 .announcement_bar_wrapper {
-  @apply flex justify-center items-center bg-[#FEE192] relative h-12;
+  @apply flex justify-center items-center bg-[#ffa625] relative h-12;
 }
 .announcement_bar_text {
   @apply flex font-Poppins text-fff md:text-base text-xs font-medium py-3 text-center sm:pl-4 xs:pl-1 pl-0 pr-6 items-center justify-center flex-wrap whitespace-nowrap;

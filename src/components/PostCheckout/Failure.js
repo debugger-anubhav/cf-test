@@ -86,7 +86,7 @@ const PaymentFailure = () => {
             </button>
           </a>
           <a
-            href={"https://wa.me/919205006188"}
+            href={"https://wa.me/919289322456"}
             target="_blank"
             rel="noopener  noreferrer"
             aria-label="Talk to an agent">

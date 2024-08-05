@@ -6,7 +6,6 @@ import {endPoints} from "@/network/endPoints";
 import {useQuery} from "@/hooks/useQuery";
 import {useSelector} from "react-redux";
 import {getLocalStorageString, setLocalStorage} from "@/constants/constant";
-
 import {Skeleton} from "@mui/material";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import Link from "next/link";
