@@ -15,26 +15,29 @@ const AnnouncementBar = () => {
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
             <img
-              // src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
-              src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
-              alt="beach"
-              className={styles.icons_style}
-              loading="lazy"
-            />
-            <span className=" px-1 text-222">
-              {string.landing_page.announcement_bar}
-            </span>
-            <span className="px-[2px] text-222">
-              {/* <span className="px-[2px] text-[#103DB2]"> */}
-              {string.landing_page.coupon_code}
-            </span>
-            <img
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icn-indian-flag.webp"
               // src="https://d3juy0zp6vqec8.cloudfront.net/images/sun.webp"
               alt="sun"
               className={styles.icons_style}
               loading="lazy"
             />
+            <span className=" px-1 text-222 flex">
+              {string.landing_page.announcement_bar}
+              <span>
+                <img
+                  // src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                  alt="beach"
+                  className={`${styles.icons_style} mx-1`}
+                  loading="lazy"
+                />
+              </span>
+              Code:
+            </span>
+            <span className="px-[2px] text-fff">
+              {/* <span className="px-[2px] text-[#103DB2]"> */}
+              {string.landing_page.coupon_code}
+            </span>
           </div>
           <div
             className={styles.announcement_close_icon}
