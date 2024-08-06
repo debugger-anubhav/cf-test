@@ -1,13 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import "react-responsive-modal/styles.css";
 import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
-import {useRouter} from "next/navigation";
+// import {useRouter} from "next/navigation";
 
 const DoItLater = ({isModalOpen, closeModal}) => {
-  const router = useRouter();
+  // const router = useRouter();
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
 
   const handleresize = e => {
@@ -18,7 +18,7 @@ const DoItLater = ({isModalOpen, closeModal}) => {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize); // Add resize event listener
     return () => {
@@ -42,7 +42,10 @@ const DoItLater = ({isModalOpen, closeModal}) => {
         </button>
         <button
           className={`${styles.yellow_btn} ${styles.btn}`}
-          onClick={() => router.push("/")}>
+          onClick={() => {
+            window?.open("/", "_self");
+            // router.push("/");
+          }}>
           Okay, proceed
         </button>
       </div>

@@ -19,11 +19,12 @@ import {getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
-export default function EducationalDetails() {
+export default function EducationalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
 
@@ -78,12 +79,12 @@ export default function EducationalDetails() {
   const submitHandler = () => {
     const error = formErrors;
     if (!formData?.idProof?.length > 0) {
-      error.idProof = "Please upload the college Id";
+      error.idProof = "Please upload the school/college Id";
     } else {
       error.idProof = "";
     }
     if (!formData?.collegeName > 0) {
-      error.collegeName = "Please upload the college name";
+      error.collegeName = "Please upload the school/college name";
     } else {
       error.collegeName = "";
     }
@@ -91,7 +92,6 @@ export default function EducationalDetails() {
     if (error.idProof !== "") return;
 
     const allData = new FormData();
-    setLoader(true);
     allData.append(
       "idProof",
       JSON.stringify({
@@ -114,13 +114,34 @@ export default function EducationalDetails() {
     allData.append("stageId", 7);
 
     if (Object.values(formErrors).filter(Boolean).length === 0) {
+      setLoader(true);
+
       baseInstance
         .post(endPoints.kycPage.saveEducationalDetails, allData)
         .then(() => {
-          const temp = pendingDashboardDetail?.filter(i => i.id === 6);
-          if (temp.length > 0) {
-            dispatch(setKycScreenName("autoPay"));
-          } else dispatch(setKycScreenName("dashboard"));
+          getDashboardDetailsApi().then(res => {
+            const pendingStage = res?.allKycStages?.filter(
+              i => i.stage_status === 0 || i.stage_status === 3,
+            );
+
+            // console.log(pendingStage, "pendingStage");
+            showToastNotification("Educational docs uploaded successfully.", 1);
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 6) {
+                dispatch(setKycScreenName("autoPay"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          });
+
           setLoader(false);
         })
         .catch(err => {
@@ -154,15 +175,10 @@ export default function EducationalDetails() {
           />
           Educational details
         </div>
-        <button
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={`${styles.doItLater}`}>
-          I’ll do it later
-        </button>
       </div>
 
       <div className={styles.detail_wapper}>
-        <label className={styles.label}>School/college name</label>
+        <label className={styles.label}>School/College name</label>
         <input
           type="text"
           placeholder="Enter your school/college name"
@@ -179,7 +195,7 @@ export default function EducationalDetails() {
         )}
       </div>
 
-      <div className={styles.label}>School/college ID proof</div>
+      <div className={styles.label}>School/College ID proof</div>
       {formData?.idProof?.map((item, index) => (
         <div key={index} className={`${addressFormStyles.map_row_wrapper}`}>
           <div className={`${styles.formInputFirst}`}>
@@ -267,11 +283,11 @@ export default function EducationalDetails() {
                   loading="lazy"
                 />
                 <span className={`${styles.chooseFile}`}>
-                  upload school/college ID proof
+                  Upload school/college ID proof
                 </span>
               </div>
             </label>
-            {formData.idProof && (
+            {/* {formData.idProof && (
               <div className="flex cursor-pointer">
                 <span
                   onClick={e => {
@@ -280,7 +296,7 @@ export default function EducationalDetails() {
                   <DeleteIcon className=" md:hidden ml-4 w-5 h-5" />
                 </span>
               </div>
-            )}
+            )} */}
           </div>
           <input
             multiple
@@ -303,13 +319,24 @@ export default function EducationalDetails() {
       )}
 
       <button
-        className={`${styles.proceed} !mt-8`}
+        className={`${styles.proceed} !mt-8 !hidden md:!flex`}
         onClick={() => {
           submitHandler();
         }}>
-        proceed
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button
+          onClick={() => {
+            submitHandler();
+          }}
+          className={`${styles.proceed} mb-2`}>
+          Proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
       {loader && <LoaderComponent loading={loader} />}
     </div>
   );

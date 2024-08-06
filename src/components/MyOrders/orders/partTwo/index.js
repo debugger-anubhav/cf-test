@@ -136,7 +136,9 @@ const OrderDetails = ({setPart, data}) => {
                           onClick={() => {
                             if (checkStatus === "kyc in progress") {
                               dispatch(setOrderIdFromOrderPage(data?.order_id));
-                              router.push("/documentation");
+                              router.push(
+                                `/documentation?order_id=${data?.order_id}`,
+                              );
                             } else if (checkStatus === "delivery scheduled") {
                               toggleModal();
                             } else {
@@ -164,7 +166,7 @@ const OrderDetails = ({setPart, data}) => {
                 onClick={() => {
                   if (checkStatus === "kyc in progress") {
                     dispatch(setOrderIdFromOrderPage(data?.order_id));
-                    router.push("/documentation");
+                    router.push(`/documentation?order_id=${data?.order_id}`);
                   } else if (checkStatus === "delivery scheduled") {
                     toggleModal();
                   } else {

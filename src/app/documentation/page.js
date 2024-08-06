@@ -10,9 +10,25 @@ import {setDocSidebarActiveItem} from "@/store/Slices";
 
 const Documentaion = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setDocSidebarActiveItem("KYC & Documentation"));
   }, []);
+
+  useEffect(() => {
+    dispatch(setDocSidebarActiveItem("KYC & Documentation"));
+    const script = document?.createElement("script");
+    script.src =
+      "https://hv-camera-web-sg.s3-ap-southeast-1.amazonaws.com/hyperverge-web-sdk@8.6.2/src/sdk.min.js";
+    script.async = true;
+
+    document?.body?.appendChild(script);
+
+    return () => {
+      document?.body?.removeChild(script);
+    };
+  }, [dispatch]);
+
   return (
     <div>
       <AnnouncementBar />

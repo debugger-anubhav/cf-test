@@ -2,19 +2,31 @@
   @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
 }
 .kyc_status_box {
-  @apply flex w-full border border-DDDDDF rounded-lg gap-4 p-6 flex-col my-8;
+  @apply flex w-full border border-DDDDDF rounded-lg  p-6 flex-col my-8;
 }
 .schedule_delivery_btn {
-  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap w-fit;
+  @apply flex gap-2 text-14 md:text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap md:w-fit w-full;
+}
+.blank_btn {
+  @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-71717A rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap w-full border border-71717A;
 }
 .sub_heading {
+  @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3 pt-4 pb-6;
+}
+.sub_heading_box {
   @apply flex items-center font-Poppins md:text-16 text-14 text-71717A md:leading-6 leading-5 tracking-0.3;
 }
 .details_wrapper {
-  @apply hidden md:grid lg:grid-cols-3 grid-cols-2 w-full gap-4 2xl:gap-6;
+  @apply hidden md:grid grid-cols-2 w-full gap-4 2xl:gap-6;
 }
 .details_box {
-  @apply border border-EDEDEE max-w-[297px] 2xl:max-w-full h-[111px] flex justify-center flex-col rounded-lg p-6;
+  @apply border border-EDEDEE max-w-[480px] 2xl:max-w-full min-h-[115px] h-full flex flex-col  rounded-lg p-6;
+}
+.first_row_detail_box {
+  @apply flex w-full justify-between items-start;
+}
+.second_row_detail_box {
+  @apply flex w-full font-Poppins text-71717A text-14 mt-4 items-start;
 }
 .detail_heading {
   @apply font-Poppins md:text-20 text-16 text-5774AC leading-[30px] tracking-0.3 font-medium;
@@ -23,7 +35,7 @@
   @apply border border-EDEDEE rounded-lg px-4 w-full flex md:hidden flex-col;
 }
 .mobile_detail_box {
-  @apply flex w-full justify-between items-center border-EDEDEE py-4;
+  @apply flex w-full flex-col items-center border-EDEDEE py-4;
 }
 .order_placed_wrapper {
   @apply flex w-full justify-between items-center mt-5;
@@ -51,7 +63,7 @@
   @apply justify-between items-center bg-[#F0EEFC] px-2 py-1 rounded-lg my-6 gap-4;
 }
 .profession_left {
-  @apply flex text-71717A font-Poppins md:text-14 text-12 font-medium whitespace-nowrap;
+  @apply flex text-71717A font-Poppins md:text-14 text-12 font-medium whitespace-nowrap items-center gap-1;
 }
 .profession_right {
   @apply font-Poppins font-medium text-5774AC md:text-14 text-12 leading-[18px] tracking-0.3 cursor-pointer;
@@ -64,10 +76,10 @@
   @apply flex w-full flex-col;
 }
 .plain_btn {
-  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 border-2 px-8 lg:h-[56px] h-[48px] items-center w-full border-71717A bg-white text-71717A font-medium font-Poppins flex rounded-lg justify-center mt-8;
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 px-8 lg:h-[56px] h-[48px] items-center w-full  bg-F6B704 text-222 font-medium font-Poppins flex rounded-lg justify-center mt-8;
 }
 .cancle_btn {
-  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-F6B704 font-medium text-222 w-full px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px]  mb-4 outline-none font-Poppins mx-0;
+  @apply text-14 lg:text-16 tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-white  font-medium  text-71717A w-full px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] border-71717A  mb-4 outline-none font-Poppins mx-0 border-2;
 }
 .content_text {
   @apply font-Poppins py-8 md:text-16 text-14 text-71717A;
@@ -79,11 +91,24 @@
   @apply flex w-fit gap-8 border-b border-EDEDEE  mb-8;
 }
 .tab_item {
-  @apply font-Poppins pb-3 text-45454A md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer;
+  @apply h-[30px] font-Poppins pb-3 text-45454A md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer;
 }
 .active_tab_item {
-  @apply font-Poppins border-9A9AA2 text-5774AC md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer border-b pb-3;
+  @apply h-[30px] font-Poppins border-9A9AA2 text-5774AC md:text-16 text-14 leading-6 tracking-0.3 font-medium cursor-pointer border-b pb-3;
 }
 .firstSection {
   @apply mt-6 md:mt-10 flex justify-center items-center md:justify-start;
+}
+
+.progressBarContainer {
+  @apply w-full h-[30px] rounded-xl bg-[#d9d9d9];
+}
+.progressBar {
+  @apply h-[30px] bg-[#67AF7B] items-center;
+}
+.new_progress_bar_text {
+  @apply font-Poppins flex text-14 leading-6 tracking-0.3 text-white whitespace-nowrap py-2 w-[240px] justify-center items-center h-[30px];
+}
+.rejected_reason {
+  @apply flex w-full mt-4 flex-col bg-[#FCEFEF] rounded-lg p-2 font-Poppins text-14 leading-6 tracking-0.3 text-71717A;
 }

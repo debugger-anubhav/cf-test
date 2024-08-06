@@ -1,9 +1,10 @@
 .MainContainer {
-  @apply w-full p-[112px] py-[60px] 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-[112px] cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-[16px] ms:px-[16px];
+  /* @apply 3xl:px-[150px] macbook:px-[112px] xl:px-[80px] md:px-[60px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6; */
+  @apply w-full p-4 py-[30px] overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
 }
 
 .SubMainContainer {
-  @apply w-full px-[20px] py-[20px] md1:px-[48px] md1:py-[48px] border-[1px] border-[#DDDDDF] rounded-[4px];
+  @apply w-full px-5 py-5 md1:px-12 md1:py-12 border border-[#DDDDDF] rounded;
 }
 
 .Heading {
@@ -11,58 +12,58 @@
 }
 
 .BoxSection {
-  @apply md1:flex md1:flex-row md1:gap-[16px] pt-[32px] ms:flex-col ms:gap-[16px] gap-[16px];
+  @apply md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
 }
 
 .KycSection {
-  @apply w-[50%] border-[1px] rounded-[8px] mobile:w-[100%] ms:mb-[16px] md1:mb-[0];
+  @apply w-full border rounded-lg md1:w-full ms:mb-4 md1:mb-[0];
 }
 
 .KycDetails {
-  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b-[1px] border-[#DDDDDF] py-[12px] px-[8px];
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b border-[#DDDDDF] py-3 px-[8px];
 }
 
 .KHeading {
-  @apply text-[16px] flex gap-[5px] items-center;
+  @apply text-16 flex gap-[5px] items-center;
 }
 
 .KNumber {
 }
 
 .orderDetails {
-  @apply flex items-start gap-[16px] text-[14px] leading-[21px] font-normal text-[#5774AC] py-[16px] px-[12px];
+  @apply flex items-start gap-4 text-14 leading-[21px] font-normal text-[#5774AC] py-4 px-3;
 }
 
 .OrderLink {
-  @apply cursor-pointer flex flex-col items-start gap-[4px];
+  @apply cursor-pointer flex flex-col items-start gap-1;
 }
 
 .LinkText {
-  @apply underline whitespace-nowrap;
+  @apply underline whitespace-nowrap text-14 leading-[21px];
 }
 
 .RaiseServicerequestSection {
-  @apply w-[50%] border-[1px] rounded-[8px] mobile:w-[100%];
+  @apply w-[50%] border rounded-lg mobile:w-full;
 }
 
 .RHeadingSection {
-  @apply rounded-[8px] rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b-[1px] border-[#DDDDDF] py-[12px] px-[8px];
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b border-[#DDDDDF] py-3 px-[8px];
 }
 
 .RHeading {
-  @apply mobile:text-[12px] md1:text-[16px] font-Poppins;
+  @apply mobile:text-12 md1:text-16 font-Poppins;
 }
 
 .RLinkSection {
-  @apply cursor-pointer text-[#5774AC] font-Poppins mobile:text-[12px] md1:text-[16px] flex items-center;
+  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
 }
 
 .RIconsSection {
-  @apply flex justify-around items-start pt-[24px];
+  @apply flex justify-around items-start pt-6;
 }
 
 .IconBox {
-  @apply cursor-pointer flex flex-col gap-[8px] items-center justify-center pb-5;
+  @apply cursor-pointer flex flex-col gap-2 items-center justify-center pb-5;
 }
 
 .IconBoxIcon {
@@ -73,7 +74,7 @@
 }
 
 .IconBoxText {
-  @apply w-[54px] text-center text-[14px] leading-[21px] font-Poppins text-[#5774AC] mobile:text-[12px] md1:text-[14px];
+  @apply w-[54px] text-center text-14 leading-[21px] font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
 }
 
 .images_wraper {
@@ -104,7 +105,7 @@
 }
 
 .filter_text {
-  @apply font-Poppins text-12 md:text-14 font-medium leading-6 text-71717A;
+  @apply font-Poppins text-12 md:text-14 font-medium leading-6 !text-71717A;
 }
 
 .filterbox {
@@ -129,15 +130,15 @@
 }
 
 .RestText {
-  @apply text-[#71717A];
+  @apply text-71717A whitespace-normal;
 }
 
 .CardTextStyle {
-  @apply mobile:text-[12px] md1:text-[16px];
+  @apply mobile:text-12 md1:text-16;
 }
 
 .HeadingOfCard {
-  @apply mobile:text-[12px] md1:text-[16px];
+  @apply text-14 leading-[18px] md1:text-16 md1:leading-6;
 }
 
 .headin_text {
@@ -149,7 +150,7 @@
 }
 
 .single_filter_text {
-  @apply flex items-center justify-between min-h-[37px] cursor-pointer px-[16px];
+  @apply flex items-center justify-between min-h-[37px] cursor-pointer px-4;
 }
 
 .option_text {
@@ -161,9 +162,13 @@
 }
 
 .btn_container {
-  @apply flex justify-center items-center gap-[10px] pr-6 pl-6 rounded-lg bg-[#F6B704] w-[100%] sm:w-[196px] h-[48px] cursor-pointer;
+  @apply flex justify-center items-center gap-2.5 pr-6 pl-6 rounded-lg bg-F6B704 w-full sm:w-[196px] h-12 cursor-pointer;
 }
 
 .apply_btn {
   @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
+}
+
+.HeaderIconImage {
+  @apply h-[25px] w-[25px] md1:h-[45px] md1:w-[45px];
 }

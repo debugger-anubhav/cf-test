@@ -6,19 +6,21 @@ import {handleWheel, getLocalStorage} from "@/constants/constant";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {decrypt} from "@/hooks/cryptoUtils";
-import {useSelector} from "react-redux";
-import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {useDispatch, useSelector} from "react-redux";
+// import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import {reduxSetModalState} from "@/store/Slices";
 
 export default function VerfiEmail({
   openModal,
   setOpenModal,
   email,
   setVerifiedEmail,
+  handleSubmit,
 }) {
   const userId = decrypt(getLocalStorage("_ga"));
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-
+  const dispatch = useDispatch();
   const [otp, setOtp] = useState("");
   const [otpError, setOtpError] = useState("");
   const [countdown, setCountdown] = useState(30);
@@ -42,11 +44,17 @@ export default function VerfiEmail({
 
   const handleStartCountdown = () => {
     setStartCountdown(true);
-    setCountdown(30);
+    setCountdown(60);
   };
 
-  const onCloseModal = () => setOpenModal(false);
-  useEffect(() => handleStartCountdown(), []);
+  const onCloseModal = () => {
+    setOpenModal(false);
+    dispatch(reduxSetModalState(false));
+  };
+  useEffect(() => {
+    if (openModal) handleStartCountdown();
+  }, [openModal]);
+
   const handleVerification = () => {
     setDisableVerify(true);
 
@@ -58,15 +66,18 @@ export default function VerfiEmail({
         orderId,
       })
       .then(response => {
-        if (response?.data?.data?.status) {
-          showToastNotification(response?.data?.data?.message, 1);
-        } else {
+        setOtp("");
+        if (!response?.data?.data?.status) {
           setOtpError(response?.data?.data?.message, 3);
         }
+
         if (response?.data?.data?.verified) {
           onCloseModal();
-          setVerifiedEmail(true);
+          setVerifiedEmail("yes");
+          // handleSubmit();
         }
+
+        // handleSubmit();
       })
       .catch(err => {
         if (err?.response?.data?.message === "Invalid OTP")
@@ -82,7 +93,7 @@ export default function VerfiEmail({
         open={openModal}
         onClose={onCloseModal}
         classNames={{
-          modal: styles.customModal,
+          modal: styles.verifyEmailCustomModal,
           overlay: styles.customOverlay,
           closeButton: styles.customCloseButton,
         }}>
@@ -118,12 +129,12 @@ export default function VerfiEmail({
             />
             <button
               onClick={() => {
-                otp !== "" && handleVerification();
+                if (otp !== "") {
+                  handleVerification();
+                }
               }}
               className={`${otp === "" ? styles.desc : styles.blue_txt}
-               ${disableVerify ? "cursor-not-allowed" : "cursor-pointer"}`}
-              //   disabled={disableVerify}
-            >
+               ${disableVerify ? "cursor-not-allowed" : "cursor-pointer"}`}>
               Verify
             </button>
           </div>

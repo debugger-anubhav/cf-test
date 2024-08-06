@@ -59,6 +59,9 @@ export const endPoints = {
   getCategoryIdBySeoUrl: (key = "") =>
     `fc-categories/getCategoryIdBySeoUrl?seoUrl=${key}`,
 
+  getUserAdditionalDetails: orderId =>
+    `fc-kycs/getUserAdditionalDetails?orderId=${orderId}`,
+
   productPage: {
     completeTheLook: (id, cityId) =>
       `fc-products/getRecommendedProducts?productId=${id}&cityId=${cityId}`,
@@ -142,6 +145,9 @@ export const endPoints = {
     uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
     saveEducationalDetails: "fc-kycs/saveEducationalDetails",
     saveGstDetails: "fc-kycs/saveGstDetails",
+    uploadManuallyDoc: "fc-kycs/uploadDocsFromDashboard",
+    checkOldKyc: (userId, orderId) =>
+      `fc-kycs/getKycFlowStatus?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {

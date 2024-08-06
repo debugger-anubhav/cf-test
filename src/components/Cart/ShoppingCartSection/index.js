@@ -25,8 +25,8 @@ import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import DeleteModal from "../Modal/DeleteModal";
-// import AffordabilityWidget from "./AffordabilityWidget";
-// import {razorpayKey} from "../../../../appConfig";
+import AffordabilityWidget from "./AffordabilityWidget";
+import {razorpayKey} from "../../../../appConfig";
 import "react-responsive-modal/styles.css";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -1097,12 +1097,12 @@ const ShoppingCartSection = () => {
                 </div>
               )}
               {/* <div id="razorpay-affordability-widget"> </div> */}
-              {/* {billBreakup && (
+              {billBreakup && (
                 <AffordabilityWidget
                   razorpayKey={razorpayKey}
                   billBreakup={billBreakup?.totalPayableAmount?.toFixed(2)}
                 />
-              )} */}
+              )}
 
               <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
                 <button

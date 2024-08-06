@@ -9,9 +9,10 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
+import docStyle from "../../DocumentsPage/style.module.css";
 
 const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
-export default function AutoPay() {
+export default function AutoPay({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
 
   const [modeOfPayment, setModeOfPayment] = useState("upi");
@@ -19,6 +20,7 @@ export default function AutoPay() {
   const [loading, setLoading] = useState(false);
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handleOptionChange = index => {
     setSelectedOption(index);
@@ -45,9 +47,28 @@ export default function AutoPay() {
       .post(endPoints.kycPage.updatePaymentStatus, body)
       .then(response => {
         if (response.data.success === true) {
-          showToastNotification(response.data.message, 1);
-          // handleKycState(selectedOrderId);
-          // redirection
+          getDashboardDetailsApi().then(res => {
+            const pendingStage = res.allKycStages?.filter(
+              i => i.stage_status === 0 || i.stage_status === 3,
+            );
+            showToastNotification("Autopay registered successfully.", 1);
+            // console.log(pendingStage, "pendingStage");
+
+            if (pendingStage.length > 0) {
+              const ID = pendingStage?.[0]?.id;
+              if (ID === 2) {
+                dispatch(setKycScreenName("financialInfo"));
+              }
+              if (ID === 3) {
+                dispatch(setKycScreenName("professionalDetails"));
+              }
+              if (ID === 7) {
+                dispatch(setKycScreenName("educationalDetails"));
+              }
+            } else {
+              dispatch(setKycScreenName("congratulation"));
+            }
+          });
           setLoading(false);
         } else {
           setLoading(false);
@@ -132,9 +153,9 @@ export default function AutoPay() {
         />
         AutoPay
       </div>
-      <div className="flex flex-col w-[50%] gap-2 my-8">
+      <div className="flex flex-col md:w-[50%] w-full gap-2 my-8">
         <p className={styles.label}>Choose your preferred payment mode</p>
-        {PaymentModeOpt?.map((item, index) => {
+        {/* {PaymentModeOpt?.map((item, index) => {
           return (
             <div
               className={"flex gap-3 items-center cursor-pointer"}
@@ -172,12 +193,64 @@ export default function AutoPay() {
               </label>
             </div>
           );
+        })} */}
+
+        {PaymentModeOpt?.map((item, index) => {
+          return (
+            <div
+              className={`${docStyle.value_box}  cursor-pointer`}
+              key={index.toString()}
+              onClick={() => {
+                handleOptionChange(index);
+                setModeOfPayment(
+                  item.includes("banking")
+                    ? "emandate"
+                    : item.includes("card")
+                      ? "card"
+                      : "upi",
+                );
+              }}>
+              <label className={docStyle.radio_container}>
+                <input
+                  type="radio"
+                  name="nomineeRelation"
+                  value={item}
+                  checked={selectedOption === index}
+                  onChange={() => {
+                    handleOptionChange(index);
+                    setModeOfPayment(
+                      item.includes("banking")
+                        ? "emandate"
+                        : item.includes("card")
+                          ? "card"
+                          : "upi",
+                    );
+                  }}
+                  className={docStyle.radio_input}
+                />
+                <span className={`${docStyle.radio_checkmark} `}></span>
+                <span
+                  className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                  {item}
+                </span>
+              </label>
+            </div>
+          );
         })}
       </div>
-      <button className={styles.proceed} onClick={handleOpenRazorpay}>
-        proceed
+      <button
+        className={`${styles.proceed} !hidden md:!flex`}
+        onClick={handleOpenRazorpay}>
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button onClick={handleOpenRazorpay} className={`${styles.proceed} `}>
+          Proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
     </div>
   );
 }

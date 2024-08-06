@@ -17,30 +17,39 @@ import {
 } from "@/assets/icon";
 import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 
-const CurrentAddressProof = ({cibilDocsData}) => {
+const CurrentAddressProof = ({
+  cibilDocsData,
+  showHeading,
+  apiData,
+  orderId,
+  setActiveTab,
+}) => {
   const dispatch = useDispatch();
-
-  const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
+  // const currentAddOptions = useSelector(state => state.kycPage.currentAddOpt);
   const isReupload = cibilDocsData?.userDocs?.length > 0;
   const [currAddModal, setCurrAddModal] = useState(false);
   const [perAddModal, setPerAddModal] = useState(false);
   const [docsData, setDocsData] = useState();
   const [selectedOptionCur, setSelectedOptionCur] = useState({});
   const [selectedOptionPer, setSelectedOptionPer] = useState({});
-  const [dropdownOpt, setDropdownOpt] = useState(
-    currentAddOptions?.supported_docs?.split(","),
-  );
-  const orderId = useSelector(
-    state => state.kycPage.selectedDataForKyc?.dealCodeNumber,
-  );
+  // const [dropdownOpt, setDropdownOpt] = useState(
+  //   currentAddOptions?.supported_docs?.split(","),
+  // );
+  console.log(docsData);
+  // const dataForSelectDrawer = apiData?.map(item => item.doc_name);
+  const dataForSelectDrawer = apiData.map(item => ({
+    doc_name: item.doc_name,
+    doc_id: item.doc_id,
+  }));
 
-  useEffect(() => {
-    setDropdownOpt(currentAddOptions?.supported_docs?.split(","));
-  }, [currentAddOptions]);
+  // useEffect(() => {
+  //   setDropdownOpt(currentAddOptions?.supported_docs?.split(","));
+  // }, [currentAddOptions]);
 
   const [formData, setFormData] = useState({
     addressProof: [],
@@ -63,6 +72,7 @@ const CurrentAddressProof = ({cibilDocsData}) => {
       })
       .catch(err => console.log(err?.message || "some error"));
   };
+
   const allowedFileTypes = [
     "image/jpeg",
     "image/jpg",
@@ -152,25 +162,34 @@ const CurrentAddressProof = ({cibilDocsData}) => {
     for (let i = 0; i < formData.addressProof.length; i++) {
       allData.append("doc", formData.addressProof[i]);
     }
+    const selectedDocId = dataForSelectDrawer?.find(
+      option => option.doc_name === selectedOptionPer?.value,
+    );
     allData.append(
-      "currentAddressDocs",
+      "docDetail",
       JSON.stringify({
-        doc_id: currentAddOptions?.doc_id,
+        doc_id: selectedDocId?.doc_id,
         subDocType: selectedOptionPer?.value,
       }),
     );
     allData.append("userId", decrypt(getLocalStorage("_ga")));
-    allData.append("stageId", 5);
     allData.append("orderId", orderId);
 
     if (Object.values(formErrors).filter(Boolean).length === 0) {
       baseInstance
-        .post(endPoints.kycPage.uploadCurrentAddressDocs, allData)
+        .post(endPoints.kycPage.uploadManuallyDoc, allData)
         .then(res => {
           dispatch(setKycScreenName("dashboard"));
-          console.log(res);
+          if (res?.data?.data?.status) {
+            showToastNotification(res?.data?.data?.message, 1);
+            setActiveTab(0);
+            setTimeout(() => {
+              window?.location?.reload();
+            }, 3000);
+          }
         })
         .catch(err => {
+          showToastNotification(err?.message, 3);
           console.log(err?.message || "some error");
         });
     }
@@ -221,16 +240,17 @@ const CurrentAddressProof = ({cibilDocsData}) => {
         </div>
       )}
 
-      <div className={design.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={"cursor-pointer"}
-        />
-        Current address proof
-      </div>
-
+      {showHeading && (
+        <div className={design.heading}>
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => dispatch(setKycScreenName("dashboard"))}
+            className={"cursor-pointer"}
+          />
+          Current address proof
+        </div>
+      )}
       <div className={`${styles.formHeadingThird}`}>
         <span className={`${commonStyles.formHeadings}`}>
           Current address proof
@@ -238,7 +258,13 @@ const CurrentAddressProof = ({cibilDocsData}) => {
       </div>
       <div className={`${styles.formInputFirst}`}>
         <DropDown
-          options={dropdownOpt?.map(i => ({label: i, value: i}))}
+          options={dataForSelectDrawer?.map(i => ({
+            label: i.doc_name,
+            value: i.doc_name,
+          }))}
+          // options={docsData?.[1]?.supported_docs
+          //   .split(",")
+          //   ?.map(i => ({label: i, value: i}))}
           setIsDDOpen={setPerAddModal}
           selectedOption={selectedOptionPer}
           isOpen={perAddModal}
@@ -247,7 +273,7 @@ const CurrentAddressProof = ({cibilDocsData}) => {
           optionsActive="md:block hidden"
           currAddModal={currAddModal}
           perAddModal={perAddModal}
-          docsData={docsData}
+          docsData={dataForSelectDrawer}
           setCurrAddModal={setCurrAddModal}
           setPerAddModal={setPerAddModal}
           handleOptionClickCur={handleOptionClickCur}

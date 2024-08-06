@@ -194,7 +194,7 @@ const CommonContainer = ({
                 if (item.status === "Pending") router.push(`/cart`);
                 else {
                   dispatch(setOrderIdFromOrderPage(item.dealCodeNumber));
-                  router.push(`/documentation`);
+                  router.push(`/documentation?order_id=${item.dealCodeNumber}`);
                 }
               }}>
               <p className={styles.optional_txt}>
