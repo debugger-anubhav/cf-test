@@ -18,10 +18,10 @@ const AnnouncementBar = () => {
               src="https://d3juy0zp6vqec8.cloudfront.net/images/icn-indian-flag.webp"
               // src="https://d3juy0zp6vqec8.cloudfront.net/images/sun.webp"
               alt="sun"
-              className={styles.icons_style}
+              className={"xs:w-[22px] xs:h-[22px] w-[16px] h-[16px]"}
               loading="lazy"
             />
-            <span className=" px-1 text-222 flex">
+            <span className=" px-1 flex">
               {string.landing_page.announcement_bar}
               <span>
                 <img
@@ -34,7 +34,7 @@ const AnnouncementBar = () => {
               </span>
               Code:
             </span>
-            <span className="px-[2px] text-fff">
+            <span className="px-[2px] text-[#000080] font-Poppins font-medium">
               {/* <span className="px-[2px] text-[#103DB2]"> */}
               {string.landing_page.coupon_code}
             </span>
