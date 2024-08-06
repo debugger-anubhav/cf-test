@@ -123,10 +123,8 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
             const pendingStage = res?.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
-            // const pendingStage = pendingDashboardDetail?.filter(
-            //   i => i.stage_status === 0 || i.stage_status === 3,
-            // );
-            console.log(pendingStage, "pendingStage");
+
+            // console.log(pendingStage, "pendingStage");
             showToastNotification("Educational docs uploaded successfully.", 1);
             if (pendingStage.length > 0) {
               const ID = pendingStage?.[0]?.id;

@@ -48,14 +48,11 @@ export default function AutoPay({getDashboardDetailsApi}) {
       .then(response => {
         if (response.data.success === true) {
           getDashboardDetailsApi().then(res => {
-            // const pendingStage = pendingDashboardDetail?.filter(
-            //   i => i.stage_status === 0 || i.stage_status === 3,
-            // );
             const pendingStage = res.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
             showToastNotification("Autopay registered successfully.", 1);
-            console.log(pendingStage, "pendingStage");
+            // console.log(pendingStage, "pendingStage");
 
             if (pendingStage.length > 0) {
               const ID = pendingStage?.[0]?.id;

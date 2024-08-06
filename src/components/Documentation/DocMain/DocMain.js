@@ -154,7 +154,7 @@ const DocMain = () => {
             }
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
           } else {
-            console.log("show old kyc");
+            // console.log("show old kyc");
             window.scrollTo({top: 0, left: 0, behavior: "smooth"});
             dispatch(setKycScreenName("oldKycFlow"));
           }

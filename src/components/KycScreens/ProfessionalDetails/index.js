@@ -114,13 +114,10 @@ export default function ProfessionalDetails({
       .then(res => {
         setOpenModal(false);
         getDashboardDetailsApi().then(res => {
-          // const pendingStage = pendingDashboardDetail?.filter(
-          //   i => i.stage_status === 0 || i.stage_status === 3,
-          // );
           const pendingStage = res.allKycStages?.filter(
             i => i.stage_status === 0 || i.stage_status === 3,
           );
-          console.log(pendingStage, "pendingStage");
+          // console.log(pendingStage, "pendingStage");
           showToastNotification(
             "Additional information updated successfully.",
             1,

@@ -25,8 +25,6 @@ export default function GstSdk({
   // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handler = HyperKycResult => {
-    console.log("come in handler1");
-
     if (HyperKycResult?.status === "user_cancelled") {
       setOpenGstSdk(false);
     }
@@ -43,16 +41,10 @@ export default function GstSdk({
       .then(res => {
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(token, "gstin", selectedId);
-        console.log("come in gst");
-
         window.HyperKYCModule.launch(config, handler);
       })
       .catch(err => console.log(err, "err"));
   };
-
-  // useEffect(() => {
-  //   console.log(showSimpleLoader, "kkkkkkkkk");
-  // }, [showSimpleLoader]);
 
   const saveGstDetailsApi = details => {
     setShowSimpleLoader(true);
@@ -66,13 +58,10 @@ export default function GstSdk({
           dispatch(setKycScreenName("dashboard"));
         } else {
           getDashboardDetailsApi().then(res => {
-            // const pendingStage = pendingDashboardDetail?.filter(
-            //   i => i.stage_status === 0 || i.stage_status === 3,
-            // );
             const pendingStage = res?.allKycStages?.filter(
               i => i.stage_status === 0 || i.stage_status === 3,
             );
-            console.log(pendingStage, "pendingStage");
+            // console.log(pendingStage, "pendingStage");
             if (pendingStage.length > 0) {
               const ID = pendingStage?.[0]?.id;
               if (ID === 2) {
