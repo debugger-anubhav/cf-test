@@ -96,12 +96,12 @@ export default function FinancialQueDrawer({
       })
       .then(res => {
         setQusScreenData(res?.data?.data);
-        if (res?.data?.data?.status === false) {
-          toggleDrawer(false);
-          changeState(false);
-        } else {
-          handleGetDashbord();
-        }
+        // if (res?.data?.data?.status === false) {
+        //   toggleDrawer(false);
+        //   changeState(false);
+        // } else {
+        //   handleGetDashbord();
+        // }
         if (res?.data?.data?.message === "Error while verifying the details") {
           dispatch(setKycScreenName("financialInfo"));
           dispatch(setStageId(2));
