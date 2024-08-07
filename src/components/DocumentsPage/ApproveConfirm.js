@@ -16,6 +16,8 @@ const style = {
   boxShadow: 24,
   p: 4,
   borderRadius: "8px",
+  border: "none",
+  outline: "none",
 };
 
 export default function ApproveConfirm({
@@ -30,11 +32,15 @@ export default function ApproveConfirm({
     setOpen(ApproveOpen);
   }, [ApproveOpen]);
 
+  const onClose = () => {
+    setApproveOpen(false);
+  };
+
   return (
     <div>
       <Modal
         open={open}
-        onClose={open}
+        onClose={onClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         className={styles.modal_custom}>
