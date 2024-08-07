@@ -9,6 +9,7 @@ import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
 // import UploadNewDocs from "./UploadNewDocs";
 import CurrentAddressProof from "../KycScreens/CurrentAddProof";
 import Image from "next/image";
+import ApproveConfirm from "./ApproveConfirm";
 
 const Document = () => {
   const professionIconLink = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
@@ -22,6 +23,7 @@ const Document = () => {
   const [otherReasonForRejection, setOtherReasonForRejection] = useState(false);
   const [additionalData, setAdditionalData] = useState(null);
   const [otherReasonInput, setOtherReasonInput] = useState("");
+  const [openApproveConfirmModal, setOpenApproveConfirmModal] = useState(false);
   const handleViewButtonClick = imageUrl => {
     window?.open(imageUrl, "_blank");
   };
@@ -347,9 +349,20 @@ const Document = () => {
                             <div className={style.decision_btns}>
                               <p
                                 className={style.approve_btn}
-                                onClick={() => statusUpdateApiCall(item, 1)}>
+                                onClick={() => {
+                                  // statusUpdateApiCall(item, 1)
+                                  setOpenApproveConfirmModal(true);
+                                }}>
                                 Approve
                               </p>
+                              {openApproveConfirmModal && (
+                                <ApproveConfirm
+                                  ApproveOpen={openApproveConfirmModal}
+                                  setApproveOpen={setOpenApproveConfirmModal}
+                                  statusUpdateApiCall={statusUpdateApiCall}
+                                  item={item}
+                                />
+                              )}
                               <p
                                 className={style.reject_btn}
                                 onClick={() => {
