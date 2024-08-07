@@ -32,6 +32,7 @@ const Document = () => {
     "Upload New Documents",
   ];
   const [addtionalInformation, setAddtionalInformation] = useState([]);
+  const [hypervergelink, setHypervergelink] = useState("");
 
   const documentApproveApiCall = () => {
     baseInstance
@@ -150,6 +151,7 @@ const Document = () => {
       .get(endPoints.getUserAdditionalDetails(orderId))
       .then(res => {
         setAdditionalData(res?.data?.data?.kycData);
+        setHypervergelink(res?.data?.data?.hypervergelink);
       })
       .catch(err => console.log(err?.message || "some error"));
   };
@@ -283,6 +285,14 @@ const Document = () => {
               Report link
             </a>
           </p>
+
+          <a
+            href={hypervergelink}
+            target="_blank"
+            className={`${style.credit_link}`}
+            rel="noreferrer">
+            Hyperverge link
+          </a>
         </div>
       </div>
 
