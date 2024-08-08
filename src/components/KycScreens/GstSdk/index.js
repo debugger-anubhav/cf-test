@@ -40,7 +40,11 @@ export default function GstSdk({
       .get(endPoints.hyperverge.getHypervergeToken(userId))
       .then(res => {
         const token = res?.data?.data?.result?.token;
-        const config = new window.HyperKycConfig(token, "gstin", selectedId);
+        const config = new window.HyperKycConfig(
+          token,
+          "gst_backupflow",
+          selectedId,
+        );
         window.HyperKYCModule.launch(config, handler);
       })
       .catch(err => console.log(err, "err"));
