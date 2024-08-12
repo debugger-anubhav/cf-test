@@ -2,10 +2,10 @@
   @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
 }
 .kyc_status_box {
-  @apply flex w-full border border-DDDDDF rounded-lg  p-6 flex-col my-8;
+  @apply flex w-full border border-DDDDDF rounded-lg  sm:p-6 p-4 flex-col my-8;
 }
 .schedule_delivery_btn {
-  @apply flex gap-2 text-14 md:text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap md:w-fit w-full;
+  @apply flex sm:gap-2 gap-1 text-14 md:text-base font-Poppins font-medium leading-6 text-222 rounded-lg p-3 items-center justify-center px-2 sm:px-3 whitespace-nowrap md:w-fit w-full;
 }
 .blank_btn {
   @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-71717A rounded-lg p-3 items-center justify-center  sm:whitespace-nowrap w-full border border-71717A;
