@@ -89,9 +89,9 @@ export default function NewAddressForm({
   const orderTypeOptions = ["New Order", "Swap product"];
   return (
     <div className={styles.new_address_wrapper}>
-      {!saveAddDrawer && (
-        <h2 className={styles.new_add_head}>Add new address0000000000</h2>
-      )}
+      {/* {!saveAddDrawer && (
+        <h2 className={styles.new_add_head}>Add new address</h2>
+      )} */}
 
       <Formik
         innerRef={f => (formikRef.current = f)}

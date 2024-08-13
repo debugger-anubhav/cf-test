@@ -66,8 +66,7 @@ const AddressSection = () => {
   const isOfflineCustomer = useSelector(
     state => state.cartPageData.isOfflineCustomer,
   );
-
-  const addressArray = data.savedAddresses;
+  const [addressArray, setAddressArray] = useState(data?.savedAddresses);
 
   const toggleDrawerBreakup = () => {
     setBreakupDrawer(!breakupDrawer);
@@ -117,7 +116,7 @@ const AddressSection = () => {
 
   const makeDefaultAddress = id => {
     if (id) {
-      const newPrimaryAddress = addressArray.find(item => item.id === id);
+      const newPrimaryAddress = addressArray?.find(item => item.id === id);
       setPrimaryAddress(newPrimaryAddress);
     }
   };
@@ -392,6 +391,10 @@ const AddressSection = () => {
     setBillBreakup(data.billBreakout);
   }, [data.billBreakout]);
 
+  useEffect(() => {
+    setAddressArray(data.savedAddresses);
+  }, [data.savedAddresses]);
+
   return (
     <>
       <TotalBreakup toggleDrawer={toggleDrawerBreakup} open={breakupDrawer} />
@@ -412,10 +415,16 @@ const AddressSection = () => {
               dispatch(setShoppingCartTab(0));
             }}>
             <BackIcon size={19} />
-            <p className={styles.head}>Confirm address</p>
+            {addressArray?.length > 0 &&
+            primaryAddress !== undefined &&
+            isOfflineCustomer !== 1 ? (
+              <p className={styles.head}>Confirm address</p>
+            ) : (
+              <h2 className={styles.new_add_head}>Add new address</h2>
+            )}
           </div>
 
-          {addressArray.length > 0 &&
+          {addressArray?.length > 0 &&
           primaryAddress !== undefined &&
           isOfflineCustomer !== 1 ? (
             <div

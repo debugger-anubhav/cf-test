@@ -38,7 +38,7 @@
   @apply mt-8 xl:mt-10;
 }
 .new_add_head {
-  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mb-4;
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 flex items-center;
 }
 .add_new_info {
   @apply rounded-lg py-1 px-2 mt-3 gap-1 flex items-center w-fit;
