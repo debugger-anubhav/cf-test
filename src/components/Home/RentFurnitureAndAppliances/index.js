@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {memo, useEffect} from "react";
 import styles from "./style.module.css";
 import string from "@/constants/Constant.json";
 import Skeleton from "@mui/material/Skeleton";
@@ -8,92 +8,72 @@ import {
   setSeoApplianceRentalSubCategory,
   setSeoFurnitureRentalSubCategory,
 } from "@/store/Slices";
-import {endPoints} from "@/network/endPoints";
-import {useRouter} from "next/navigation";
 import {setLocalStorage} from "@/constants/constant";
-import {baseInstance} from "@/network/axios";
 import Image from "next/image";
+import Worker from "worker-loader!./rentworker.js";
+import Link from "next/link";
 
 const RentFurnitureAndAppliances = ({params}) => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const homePageReduxData = useSelector(state => state.homePagedata);
   const seoAppliancePageReduxData = useSelector(
     state => state.seoApplianceData,
   );
 
   useEffect(() => {
-    if (params?.category === "appliances-rental") {
-      baseInstance
-        .get(endPoints.seoApplianceRentalSubCategory)
-        .then(res => {
-          dispatch(setSeoApplianceRentalSubCategory(res?.data?.data));
-          // console.log("appliances-rental")
-        })
-        .catch(err => {
-          console.log(err?.message || "some error");
-          dispatch(setSeoApplianceRentalSubCategory([]));
-        });
-    } else if (params?.category === "furniture-rental") {
-      baseInstance
-        .get(endPoints.seoFurnitureRentalSubCategory)
-        .then(res => {
-          dispatch(setSeoFurnitureRentalSubCategory(res?.data?.data));
-          // console.log("furniture-rental")
-        })
-        .catch(err => {
-          console.log(err?.message || "some error");
-          dispatch(setSeoFurnitureRentalSubCategory([]));
-        });
-    } else {
-      baseInstance
-        .get(endPoints.category)
-        .then(res => {
-          dispatch(addCategory(res?.data?.data));
-          // console.log("home")
-        })
-        .catch(err => {
-          console.log(err?.message || "some error");
-          dispatch(addCategory([]));
-        });
-    }
+    const worker = new Worker();
+    worker.postMessage({params});
+
+    worker.onmessage = function (e) {
+      const {type, data} = e.data;
+      switch (type) {
+        case "appliance":
+          dispatch(setSeoApplianceRentalSubCategory(data));
+          break;
+
+        case "furniture":
+          dispatch(setSeoFurnitureRentalSubCategory(data));
+          break;
+
+        case "category":
+          dispatch(addCategory(data));
+      }
+    };
+
+    return () => {
+      worker?.terminate();
+    };
   }, []);
 
   const RentFurniture =
     params.category === "appliances-rental"
       ? seoAppliancePageReduxData.seoApplianceSubCategory
       : params.category === "furniture-rental"
-      ? homePageReduxData.seoFurnitureSubCategory
-      : homePageReduxData.category;
+        ? homePageReduxData.seoFurnitureSubCategory
+        : homePageReduxData.category;
 
-  return (
+  return RentFurniture && RentFurniture.length > 0 ? (
     <div className={styles.rent_furniture_wrapper}>
       <h1 className={styles.head}>{string.landing_page.Rent_furni}</h1>
       <p className={styles.subhead}>{string.landing_page.Explore_by}</p>
       <div className={styles.card_div}>
         {RentFurniture?.map((item, index) => {
           return (
-            <div
+            <Link
               key={index.toString()}
+              target="_self"
+              rel="noopener"
               className={styles.card_wrapper}
               onClick={() => {
-                router.push(
-                  `/${homePageReduxData?.cityName
-                    .replace(/\//g, "-")
-                    ?.toLowerCase()}/${item?.seourl}`,
-                );
                 if (typeof window !== "undefined") {
                   setLocalStorage("categoryId", item?.rootID);
                   setLocalStorage("subCategoryId", item?.id);
                 }
-              }}>
-              <a
-                href={`/${homePageReduxData?.cityName
-                  .replace(/\//g, "-")
-                  ?.toLowerCase()}/${item?.seourl}`}
-                onClick={e => e.preventDefault()}
-                target="_self"
-                rel="noopener">
+              }}
+              href={`/${homePageReduxData?.cityName
+                .replace(/\//g, "-")
+                ?.toLowerCase()}/${item?.seourl}`}>
+              <div>
                 <Image
                   loader={({src}) => src}
                   src={
@@ -106,7 +86,7 @@ const RentFurnitureAndAppliances = ({params}) => {
                   width={742}
                   height={734}
                 />
-              </a>
+              </div>
 
               <div className={styles.label_wrapper}>
                 <h2 className={styles.label}>{item.cat_name}</h2>
@@ -114,16 +94,18 @@ const RentFurnitureAndAppliances = ({params}) => {
                   <p className={styles.desc}>{item.category_description}</p>
                 )}
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
     </div>
+  ) : (
+    <RentFurnitureSkeleton />
   );
 };
-export default RentFurnitureAndAppliances;
+export default memo(RentFurnitureAndAppliances);
 
-export const RentFurnitureSkeleton = () => {
+export const RentFurnitureSkeleton = memo(() => {
   return (
     <div className={styles.rent_furniture_wrapper}>
       <Skeleton variant="text" className={styles.Skeleton_text} />
@@ -139,4 +121,4 @@ export const RentFurnitureSkeleton = () => {
       </div>
     </div>
   );
-};
+});

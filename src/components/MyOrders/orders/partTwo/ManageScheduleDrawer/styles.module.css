@@ -62,3 +62,11 @@
 .modify_btn {
   @apply cursor-pointer rounded-lg border-2 border-transparent bg-F6B704 flex justify-center items-center w-[154px] xl:w-[170px] h-12 xl:h-14 text-14 xl:text-16 font-medium text-222;
 }
+
+.heading {
+  @apply font-Poppins md:text-24 text-18 text-45454A font-medium tracking-0.3 flex gap-2 justify-between  items-center;
+}
+
+.drawer_content_wrapper {
+  @apply flex w-full flex-col p-4 md:w-[530px] md:p-12;
+}

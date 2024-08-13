@@ -150,13 +150,11 @@ export default async function Page(params) {
               <TrendingProducts params={propParams} />
               <OffersAndCoupons />
               <RentNowBanner params={propParams} />
-
               <DownloadForMobile />
               <PreDesignCombos />
               <HasselFreeServicesCards />
               <LimetedPreiodDiscount />
               <NewlyLaunched />
-
               <TryCityMax />
               <CustomerRating />
               <MediaCoverage />
@@ -180,7 +178,7 @@ export default async function Page(params) {
     );
   } else {
     // console.log(metaData, data, "pp");
-    redirect("/");
+    redirect("/404");
   }
 }
 
@@ -188,6 +186,7 @@ export async function generateMetadata({params}) {
   const data = await create(params);
   let metaTitle;
   let metaDescription;
+  let canonicalLink;
 
   if (params?.category === "rent") {
     metaTitle = `Rent Premium Furniture & Home Appliances in ${params?.city} - Cityfurnish`;
@@ -197,14 +196,20 @@ export async function generateMetadata({params}) {
     metaDescription = data?.data?.cat_meta_desc;
   }
 
+  if (params?.category === "home-furniture-rental")
+    canonicalLink = "furniture-rental";
+  else if (params?.category === "home-appliances-rental")
+    canonicalLink = "appliances-rental";
+  else canonicalLink = params?.category;
+
   return {
     title: metaTitle,
     description: metaDescription,
     alternates: {
-      canonical: `https://cityfurnish.com/${params.city}/${params.category}`,
+      canonical: `https://cityfurnish.com/${params.city}/${canonicalLink}`,
     },
     openGraph: {
-      url: `https://cityfurnish.com/${params.city}/${params.category}`,
+      url: `https://cityfurnish.com/${params.city}/${canonicalLink}`,
       title: metaTitle,
       description: metaDescription,
       siteName: "Cityfurnish",

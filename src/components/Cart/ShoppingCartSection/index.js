@@ -25,6 +25,8 @@ import CityShieldDrawerForCart from "../Drawer/CityShieldDrawer";
 import CouponDrawer from "../Drawer/CouponDrawer";
 import TotalBreakup from "../Drawer/TotalBreakupDrawer";
 import DeleteModal from "../Modal/DeleteModal";
+// import AffordabilityWidget from "./AffordabilityWidget";
+// import {razorpayKey} from "../../../../appConfig";
 import "react-responsive-modal/styles.css";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
@@ -118,6 +120,33 @@ const ShoppingCartSection = () => {
       });
     }
   }, [cartItems]);
+
+  // const amount = billBreakup?.totalPayableAmount?.toFixed(2) * 100;
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://checkout.razorpay.com/v1/razorpay.js";
+  //   script.async = true;
+
+  //   const key = razorpayKey; // Replace it with your Test Key ID generated from the Dashboard
+  //   const amount = billBreakup?.totalPayableAmount?.toFixed(2) * 100; // in paise
+
+  //   script.onload = () => {
+  //     if (typeof RazorpayAffordabilitySuite !== "undefined") {
+  //       const widgetConfig = {
+  //         key,
+  //         amount,
+  //       };
+  //       // const rzpAffordabilitySuite = new window.Razorpay.AffordabilitySuite(widgetConfig);
+  //       const rzpAffordabilitySuite = new RazorpayAffordabilitySuite(
+  //         widgetConfig,
+  //       );
+  //       rzpAffordabilitySuite.render();
+  //     } else {
+  //       console.error("RazorpayAffordabilitySuite is not defined.");
+  //     }
+  //   };
+  //   document.body.appendChild(script);
+  // }, [razorpayKey, billBreakup]);
 
   useEffect(() => {
     if (modeOfPayment) {
@@ -829,8 +858,8 @@ const ShoppingCartSection = () => {
                   </div>
                 </div>
                 <p className={styles.protect_text}>
-                  Protect your appliances and furniture worth{" "}
-                  <span className={styles.rupeeIcon}>₹</span>70,000.{" "}
+                  Protect your appliances & furniture worth{" "}
+                  <span className={styles.rupeeIcon}>₹</span>70K.{" "}
                   <span className={styles.learn_more} onClick={openDrawer}>
                     Learn more
                   </span>
@@ -1067,6 +1096,13 @@ const ShoppingCartSection = () => {
                   </div>
                 </div>
               )}
+              {/* <div id="razorpay-affordability-widget"> </div> */}
+              {/* {billBreakup && (
+                <AffordabilityWidget
+                  razorpayKey={razorpayKey}
+                  billBreakup={billBreakup?.totalPayableAmount?.toFixed(2)}
+                />
+              )} */}
 
               <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
                 <button
@@ -1079,7 +1115,7 @@ const ShoppingCartSection = () => {
                   {isLogin
                     ? userDetails?.full_name && userDetails?.email
                       ? "Proceed"
-                      : "Set up your account to proceed"
+                      : "Set up your account"
                     : "Login to proceed"}
                   <ArrowForw size={19} color={"#222"} />
                 </button>

@@ -1,0 +1,3 @@
+.heading {
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}

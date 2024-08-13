@@ -43,9 +43,12 @@ import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+// import AffordabilityWidget from "@/components/Cart/ShoppingCartSection/AffordabilityWidget";
+// import {razorpayKey} from "../../../../appConfig";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {baseInstance} from "@/network/axios";
+import Banner from "../../Banner";
 
 const ProductDetails = ({params}) => {
   const {checkAuthentication} = useAuthentication();
@@ -451,7 +454,7 @@ const ProductDetails = ({params}) => {
       setIsSmallScreen(false);
     }
   };
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {
@@ -570,6 +573,9 @@ const ProductDetails = ({params}) => {
           </div>
         ))}
       </div>
+
+      {prodDetails[0]?.banner && <Banner image={prodDetails[0]?.banner} />}
+
       <div className={styles.main_section}>
         <div
           className={`${styles.carousel_wrapper} ${
@@ -855,10 +861,10 @@ const ProductDetails = ({params}) => {
               soldOut
                 ? handleNotifyMe
                 : cartItems?.length === 0
-                ? handleAddToCart
-                : isItemInCart
-                ? handleGoToCart
-                : handleAddToCart
+                  ? handleAddToCart
+                  : isItemInCart
+                    ? handleGoToCart
+                    : handleAddToCart
             }
             disabled={isLoading}
             className={styles.btn}
@@ -878,11 +884,25 @@ const ProductDetails = ({params}) => {
               <RiSparklingFill size={16} color={"#597492"} />
               <p className={styles.emi_text}>
                 Pay only {durationArray[duration.currentIndex]?.attr_price}/mo
-                using No-Cost EMI (excluding GST)
+                using No-Cost EMI (excl GST)
               </p>
               <RiSparklingFill size={16} color={"#597492"} />
             </div>
           )}
+
+          {/* {console.log(durationArray[duration.currentIndex]?.attr_price)}
+          {console.log(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])}
+          {console.log(durationArray[duration.currentIndex]?.attr_price * durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])} */}
+
+          {/* {durationArray.length > 0 && (
+            <AffordabilityWidget
+              razorpayKey={razorpayKey}
+              billBreakup={
+                durationArray[duration.currentIndex]?.attr_price *
+                durationArray[duration.currentIndex]?.attr_name?.split(" ")[0]
+              }
+            />
+          )} */}
 
           <div className={styles.kyc_wrapper}>
             <div className={`w-100 h-100 absolute z-10`} />
@@ -940,8 +960,8 @@ const ProductDetails = ({params}) => {
                 /month!
               </p>
               <p className={styles.protect}>
-                Protect your appliances and furniture worth{" "}
-                <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+                Protect your appliances & furniture worth{" "}
+                <span className={styles.rupeeIcon}>₹</span>70K{" "}
               </p>
 
               {durationArray.length > 0 && (

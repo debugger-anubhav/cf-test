@@ -39,7 +39,7 @@ function ExtendTenure({prevScreen, orderId, isHelpDrawer}) {
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
     window.addEventListener("resize", handleresize);
     return () => {

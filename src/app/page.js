@@ -12,7 +12,7 @@ import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliance
 import {OffersSkeleton} from "@/components/Home/OffersAndCoupons";
 import {NewlyLauncedSkeleton} from "@/components/Home/NewlyLaunched";
 import {RentNowBannersSkeleton} from "@/components/Home/RentNowBanner";
-// import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
+import {TryCityMaxSkeleton} from "@/components/Home/TryCityMax";
 import {FaqsSkeleton} from "@/components/Common/FrequentlyAskedQuestions";
 import {ContentSkeleton} from "@/components/Common/ContentSkeleton";
 import Notifications from "@/components/Common/Notifications/Notification";
@@ -21,7 +21,11 @@ import {FooterSkeleton} from "@/components/Common/Footer";
 import {getLocalStorage} from "@/constants/constant";
 import {DownloadForMobileSkeleton} from "@/components/Home/DownloadForMobile";
 import {MediaCoverageSkeleton} from "@/components/Home/MediaCoverage";
-// import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
+import {setHomepageCardWorker} from "@/store/Slices";
+import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
+import {useDispatch} from "react-redux";
+// import KycPending from "@/components/Home/KycPending";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -70,8 +74,8 @@ const PreDesignCombos = loadable(
   },
 );
 
-const HasselFreeServicesCards = loadable(
-  () => import("@/components/Home/HasselFreeServicesCards"),
+const HassleFreeServicesCards = loadable(
+  () => import("@/components/Home/HassleFreeServicesCards"),
   {
     fallback: <ProductRowSkeleton />,
   },
@@ -90,7 +94,7 @@ const RentNowBanner = loadable(
 );
 
 const TryCityMax = loadable(() => import("@/components/Home/TryCityMax"), {
-  // fallback: <TryCityMaxSkeleton />,
+  fallback: <TryCityMaxSkeleton />,
 });
 
 const CustomerRating = loadable(() => import("@/components/Home/Rating"), {
@@ -102,8 +106,8 @@ const MediaCoverage = loadable(
   {fallback: <MediaCoverageSkeleton />},
 );
 
-const HappySubscribers = loadable(() =>
-  import("@/components/Home/HappySubscribers"),
+const HappySubscribers = loadable(
+  () => import("@/components/Home/HappySubscribers"),
 );
 
 const FrequentlyAskedQuestions = loadable(
@@ -119,14 +123,18 @@ const Footer = loadable(() => import("@/components/Common/Footer"), {
 
 const CombineSection = loadable(
   () => import("@/components/Home/CombineSection"),
-  // {fallback: <CombineSectionSkeleton />},
+  {fallback: <CombineSectionSkeleton />},
 );
 
 export default function Home() {
   const myElementRef = useRef();
   const userId = getLocalStorage("_ga");
-  // added
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
+    const worker = new Worker();
+    dispatch(setHomepageCardWorker(worker));
     const handleTouchStart = event => {
       if (event.touches.length > 1) {
         event.preventDefault();
@@ -138,20 +146,18 @@ export default function Home() {
     });
 
     return () => {
+      worker?.terminate();
       document.removeEventListener("touchstart", handleTouchStart);
     };
   }, []);
+
   useEffect(() => {
     if (userId !== "") {
       if (process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION") {
-        window?.gtag("js", new Date());
-        window?.gtag("config", "G-05PLBRM6KD", {
+        window?.gtag?.("config", "G-05PLBRM6KD", {
           user_id: userId,
         });
       }
-    } else {
-      process.env.NEXT_PUBLIC_PROD_ENV === "PRODUCTION" &&
-        window?.gtag("config", "G-05PLBRM6KD");
     }
   }, [userId]);
 
@@ -167,15 +173,18 @@ export default function Home() {
         <Header />
         <MenuList />
         <HeroBanner />
+
+        {/* {userId && <KycPending />} */}
+
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />
         <TrendingProducts params={"home-page"} />
+
         <OffersAndCoupons />
-        {/* <NewlyLaunched /> */}
         <RentNowBanner params={"home-page"} />
         <DownloadForMobile />
         <PreDesignCombos />
-        <HasselFreeServicesCards />
+        <HassleFreeServicesCards />
         <LimetedPreiodDiscount />
         <NewlyLaunched />
 

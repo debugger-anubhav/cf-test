@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect, useState, useRef, memo} from "react";
 import styles from "./style.module.css";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import {Close, Icons} from "@/assets/icon";
@@ -16,9 +16,9 @@ import {
 } from "@/store/Slices/categorySlice";
 import {useParams, useRouter} from "next/navigation";
 import {useAuthentication} from "@/hooks/checkAuthentication";
-import {Skeleton} from "@mui/material";
+import Skeleton from "@mui/material/Skeleton";
 
-export default function CommonDrawer({
+function CommonDrawer({
   DrawerName,
   Cities,
   data,
@@ -27,46 +27,75 @@ export default function CommonDrawer({
   setClick,
   toggleLoginModal,
 }) {
-  const {checkAuthentication} = useAuthentication();
   const dispatch = useDispatch();
   const params = useParams();
   const router = useRouter();
+
+  const {checkAuthentication} = useAuthentication();
+
   const homePageReduxData = useSelector(state => state.homePagedata);
   const cartItemsLength = useSelector(
     state => state.cartPageData.cartItems.length,
   );
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
-  const [state, setState] = React.useState({
+
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-  const [mobileCityDrawer, setMobileCityDrawer] = React.useState(false);
-  const [isLogin, setIsLogin] = React.useState();
-  const [cityNameShow, setCityNameShow] = React.useState(null);
+  const [mobileCityDrawer, setMobileCityDrawer] = useState(false);
+  const [isLogin, setIsLogin] = useState();
+  const [cityNameShow, setCityNameShow] = useState(null);
 
-  React.useEffect(() => {
+  const hoverRef = useRef("");
+
+  const cityId = getLocalStorage("cityId");
+
+  useEffect(() => {
     setIsLogin(reduxLoginState);
   }, [reduxLoginState]);
 
-  const handleresize = e => {
-    if (window.innerWidth < 640) {
-      // if (mobileCityDrawer) return
-      setMobileCityDrawer(true);
-    } else {
-      // if (!mobileCityDrawer) return
-      setMobileCityDrawer(false);
-    }
-  };
-
-  React.useEffect(() => {
+  useEffect(() => {
     handleresize();
+
+    const currentURL =
+      typeof window !== "undefined" ? window?.location?.href : "";
+    const urlParams = new URLSearchParams(currentURL.split("?")[1]);
+    const viaShopBy = urlParams.get("viaShopBy");
+    if (viaShopBy) {
+      if (DrawerName !== "menu") {
+        mobileCityDrawer
+          ? toggleDrawer("bottom", true)()
+          : toggleDrawer("left", true)();
+      }
+      if (DrawerName === "menu") {
+        mobileCityDrawer
+          ? toggleDrawer("bottom", false)()
+          : toggleDrawer("left", false)();
+      }
+    }
+
     window.addEventListener("resize", handleresize);
     return () => window.removeEventListener("resize", handleresize);
   }, []);
 
-  const hoverRef = React.useRef("");
+  useEffect(() => {
+    handleAuthentication();
+  }, [isLogin]);
+
+  useEffect(() => {
+    setCityNameShow(homePageReduxData?.cityName);
+  }, [homePageReduxData?.cityName]);
+
+  function handleresize() {
+    if (window.innerWidth < 640) {
+      setMobileCityDrawer(true);
+    } else {
+      setMobileCityDrawer(false);
+    }
+  }
 
   const toggleDrawer = (anchor, open) => event => {
     if (
@@ -80,23 +109,12 @@ export default function CommonDrawer({
     setState({...state, [anchor]: open});
   };
 
-  const cityId = getLocalStorage("cityId");
-
-  const handleAuthentication = async () => {
+  async function handleAuthentication() {
     const isAuth = await checkAuthentication();
     setIsLogin(isAuth);
-  };
-
-  React.useEffect(() => {
-    handleAuthentication();
-  }, [isLogin]);
-
-  React.useEffect(() => {
-    setCityNameShow(homePageReduxData?.cityName);
-  }, [homePageReduxData?.cityName]);
+  }
 
   const handleMenu = (e, item) => {
-    // const previousSubCategory = JSON.parse(localStorage.getItem("subCategory"));
     let previousSubCategory;
     if (typeof window !== "undefined") {
       previousSubCategory = getLocalStorage("subCategory");
@@ -125,9 +143,8 @@ export default function CommonDrawer({
     //   `/${homePageReduxData?.cityName.toLowerCase()}/${item?.seourl}`,
     // );toggleDrawe
   };
-  // const userId = decrypt(getLocalStorage("_ga"));
 
-  const handleCityChange = (city, index) => {
+  const handleCityChange = city => {
     dispatch(selectedCityId(city?.id));
     dispatch(selectedCityName(city?.list_value));
     toggleDrawer("bottom", false);
@@ -144,7 +161,6 @@ export default function CommonDrawer({
     DrawerName === "menu" ? (
       <div
         role="presentation"
-        // onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
         className={styles.drawer_wrapper}>
         <div
@@ -326,7 +342,7 @@ export default function CommonDrawer({
                   `}
                     key={index.toString()}
                     onClick={() => {
-                      if (cartItemsLength < 1) handleCityChange(city, index);
+                      if (cartItemsLength < 1) handleCityChange(city);
                       else {
                         // toggleDrawer("bottom", false);
                         setState({...state, left: false, bottom: false});
@@ -422,25 +438,6 @@ export default function CommonDrawer({
       </div>
     );
 
-  React.useEffect(() => {
-    const currentURL =
-      typeof window !== "undefined" ? window?.location?.href : "";
-    const urlParams = new URLSearchParams(currentURL.split("?")[1]);
-    const viaShopBy = urlParams.get("viaShopBy");
-    if (viaShopBy) {
-      if (DrawerName !== "menu") {
-        mobileCityDrawer
-          ? toggleDrawer("bottom", true)()
-          : toggleDrawer("left", true)();
-      }
-      if (DrawerName === "menu") {
-        mobileCityDrawer
-          ? toggleDrawer("bottom", false)()
-          : toggleDrawer("left", false)();
-      }
-    }
-  }, []);
-
   return (
     <div className={"flex"}>
       <div
@@ -471,6 +468,7 @@ export default function CommonDrawer({
                     src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/arrow-drop-down.svg"
                     alt="down-arrow"
                     className="w-6 h-6 flex justify-center items-center"
+                    loading="lazy"
                   />
                 )}
               </>
@@ -505,3 +503,5 @@ export default function CommonDrawer({
     </div>
   );
 }
+
+export default memo(CommonDrawer);

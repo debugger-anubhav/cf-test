@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "../style.module.css";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import {ArrowForw} from "@/assets/icon";
@@ -9,11 +9,7 @@ import {showToastNotification} from "@/components/Common/Notifications/toastUtil
 import {getLocalStorage} from "@/constants/constant";
 import {decrypt} from "@/hooks/cryptoUtils";
 
-const ModalContentForSettingProfile = ({
-  userId,
-  closeModal,
-  handleChangeRoute,
-}) => {
+const ModalContentForSettingProfile = ({closeModal, handleChangeRoute}) => {
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     email: Yup.string()
@@ -96,14 +92,7 @@ const ModalContentForSettingProfile = ({
               }
             </ErrorMessage>
 
-            <button
-              className={styles.yellow_proceed_button}
-              onClick={() => {
-                if (formik.isValid) {
-                  console.log(formik.values);
-                }
-              }}
-              type="submit">
+            <button className={styles.yellow_proceed_button} type="submit">
               Proceed <ArrowForw size={19} color={"#222"} />
             </button>
           </Form>
@@ -113,4 +102,4 @@ const ModalContentForSettingProfile = ({
   );
 };
 
-export default ModalContentForSettingProfile;
+export default memo(ModalContentForSettingProfile);

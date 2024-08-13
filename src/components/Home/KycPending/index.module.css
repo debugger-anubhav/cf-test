@@ -1,0 +1,174 @@
+.MainContainer {
+  /* @apply 3xl:px-[150px] macbook:px-[112px] xl:px-[80px] md:px-[60px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6; */
+  @apply w-full p-4 py-[30px] overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
+}
+
+.SubMainContainer {
+  @apply w-full px-5 py-5 md1:px-12 md1:py-12 border border-[#DDDDDF] rounded;
+}
+
+.Heading {
+  @apply font-Poppins font-medium text-[20px] leading-[30px] text-[#45454A];
+}
+
+.BoxSection {
+  @apply md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
+}
+
+.KycSection {
+  @apply w-full border rounded-lg md1:w-full ms:mb-4 md1:mb-[0];
+}
+
+.KycDetails {
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-custom-gradient-kyc border-b border-[#DDDDDF] py-3 px-[8px];
+}
+
+.KHeading {
+  @apply text-16 flex gap-[5px] items-center;
+}
+
+.KNumber {
+}
+
+.orderDetails {
+  @apply flex items-start gap-4 text-14 leading-[21px] font-normal text-[#5774AC] py-4 px-3;
+}
+
+.OrderLink {
+  @apply cursor-pointer flex flex-col items-start gap-1;
+}
+
+.LinkText {
+  @apply underline whitespace-nowrap text-14 leading-[21px];
+}
+
+.RaiseServicerequestSection {
+  @apply w-[50%] border rounded-lg mobile:w-full;
+}
+
+.RHeadingSection {
+  @apply rounded-lg rounded-b-none flex justify-between items-center bg-[#EDEDEE] border-b border-[#DDDDDF] py-3 px-[8px];
+}
+
+.RHeading {
+  @apply mobile:text-12 md1:text-16 font-Poppins;
+}
+
+.RLinkSection {
+  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
+}
+
+.RIconsSection {
+  @apply flex justify-around items-start pt-6;
+}
+
+.IconBox {
+  @apply cursor-pointer flex flex-col gap-2 items-center justify-center pb-5;
+}
+
+.IconBoxIcon {
+}
+
+.Icon {
+  @apply ml-0.5 h-4 w-4 text-[#597492];
+}
+
+.IconBoxText {
+  @apply w-[54px] text-center text-14 leading-[21px] font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
+}
+
+.images_wraper {
+  @apply flex flex-row gap-1 flex-wrap justify-center w-[80px] h-[80px] rounded-lg relative;
+}
+
+.counter_box {
+  @apply border border-71717A text-71717A text-12 flex justify-center items-center mobile:w-[25px] mobile:h-[25px] md1:w-[37px] md1:h-[37px] rounded-lg;
+}
+
+.sorted_text {
+  @apply flex h-[39px] items-center justify-between cursor-pointer px-4;
+}
+
+.option_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3;
+}
+
+.arrow_down {
+  @apply w-[12.8px] h-[13px] lg:w-4 lg:h-4;
+  transition: transform 330ms ease;
+}
+
+.arrow_up {
+  @apply w-[12.8px] h-[13px] lg:w-4 lg:h-4;
+  transition: transform 330ms ease;
+  transform: rotate(180deg);
+}
+
+.filter_text {
+  @apply font-Poppins text-12 md:text-14 font-medium leading-6 !text-71717A;
+}
+
+.filterbox {
+  @apply flex justify-between items-center gap-2 w-full;
+}
+
+/* .CarouselClass>.control-dots {
+    margin-top: 29px !important;
+    bottom: -8px !important;
+    background-color: #E2E4E8 !important;
+    width: fit-content !important;
+    border-radius: 10px !important;
+}
+
+.CarouselClass>.selected {
+    background-color: #5774AC !important;
+    margin: 1px 6px !important;
+} */
+
+.KycPendingICons {
+  @apply h-[19px] w-[19px];
+}
+
+.RestText {
+  @apply text-71717A whitespace-normal;
+}
+
+.CardTextStyle {
+  @apply mobile:text-12 md1:text-16;
+}
+
+.HeadingOfCard {
+  @apply text-14 leading-[18px] md1:text-16 md1:leading-6;
+}
+
+.headin_text {
+  @apply text-45454A font-Poppins text-20 font-medium leading-8 tracking-heading pb-[15px];
+}
+
+.mapped_filter_mobile {
+  @apply flex flex-col max-h-[335px] pt-[15px];
+}
+
+.single_filter_text {
+  @apply flex items-center justify-between min-h-[37px] cursor-pointer px-4;
+}
+
+.option_text {
+  @apply font-Poppins text-14 font-medium leading-6 text-71717A pr-3;
+}
+
+.see_more_text {
+  @apply text-[#597492] font-Poppins text-12 font-medium leading-6 underline px-4 cursor-pointer;
+}
+
+.btn_container {
+  @apply flex justify-center items-center gap-2.5 pr-6 pl-6 rounded-lg bg-F6B704 w-full sm:w-[196px] h-12 cursor-pointer;
+}
+
+.apply_btn {
+  @apply text-[#222] font-Poppins justify-center text-14 font-medium leading-6;
+}
+
+.HeaderIconImage {
+  @apply h-[25px] w-[25px] md1:h-[45px] md1:w-[45px];
+}

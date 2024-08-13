@@ -110,7 +110,7 @@ const CommonContainer = ({
             </p>
             {item?.status?.toLowerCase() === "pending" ? (
               <a
-                href={"https://wa.me/919205006188"}
+                href={"https://wa.me/919289322456"}
                 target="_blank"
                 rel="noopener  noreferrer"
                 aria-label="Talk to an agent">
@@ -194,7 +194,7 @@ const CommonContainer = ({
                 if (item.status === "Pending") router.push(`/cart`);
                 else {
                   dispatch(setOrderIdFromOrderPage(item.dealCodeNumber));
-                  router.push(`/documentation`);
+                  router.push(`/documentation?order_id=${item.dealCodeNumber}`);
                 }
               }}>
               <p className={styles.optional_txt}>
@@ -202,8 +202,8 @@ const CommonContainer = ({
                   {item.status === "Pending"
                     ? "Retry Payment"
                     : item.zoho_sub_status === "KYC In Progress"
-                    ? "Complete KYC now"
-                    : "Re-upload document(s)"}
+                      ? "Complete KYC now"
+                      : "Re-upload document(s)"}
                 </span>{" "}
                 to proceed with your order
               </p>

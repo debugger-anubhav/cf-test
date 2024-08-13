@@ -1,45 +1,45 @@
-import React, {useState} from "react";
+import React, {memo, useState} from "react";
 import styles from "./styles.module.css";
-import Image from "next/image";
+import Image from "@/components/Image";
 import {ForwardArrow} from "@/assets/icon";
 import {TryCityMaxBannerMobile, TryCityMaxBannerWeb} from "@/assets/images";
 import {Skeleton} from "@mui/material";
 import CityMaxDrawer from "./cityMaxDrawer";
-// import SideDrawer from "./sideDrawer";
+import Link from "next/link";
+
+const benefitsOfCity = [
+  {
+    id: 1,
+    img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/quality-products.svg",
+    title: "Quality products",
+    paragraph:
+      "Branded appliances and solid Sheesham Wood products in mint new condition",
+  },
+  {
+    id: 2,
+    img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-swap.svg",
+    title: "Free Swap",
+    paragraph:
+      "Swap any product or design anytime during the subscription period",
+  },
+  {
+    id: 3,
+    title: "Cancel anytime",
+    img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/cancel-anytime.svg",
+    paragraph:
+      "We will deduct 1 month's extra rent as a penalty and refund rest of the amount instantly",
+  },
+  {
+    id: 4,
+    img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/easy-on-wallet.svg",
+    title: "Easy on Wallet",
+    paragraph:
+      "You can pay subscription fee in one go or opt for our no cost EMI plan",
+  },
+];
 
 const TryCityMax = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const benefitsOfCity = [
-    {
-      id: 1,
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/quality-products.svg",
-      title: "Quality products",
-      paragraph:
-        "Branded appliances and solid Sheesham Wood products in mint new condition",
-    },
-    {
-      id: 2,
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/free-swap.svg",
-      title: "Free Swap",
-      paragraph:
-        "Swap any product or design anytime during the subscription period",
-    },
-    {
-      id: 3,
-      title: "Cancel anytime",
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/cancel-anytime.svg",
-      paragraph:
-        "We will deduct 1 month's extra rent as a penalty and refund rest of the amount instantly",
-    },
-    {
-      id: 4,
-      img: "https://d3juy0zp6vqec8.cloudfront.net/images/icons/easy-on-wallet.svg",
-      title: "Easy on Wallet",
-      paragraph:
-        "You can pay subscription fee in one go or opt for our no cost EMI plan",
-    },
-  ];
 
   const HandleToggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -49,7 +49,6 @@ const TryCityMax = () => {
       <div className={styles.main_wrapper}>
         <div className={styles.left_image_section}>
           <Image
-            loader={({src}) => src}
             src={TryCityMaxBannerWeb}
             alt="trycity"
             className={`hidden xl:flex ${styles.tryCity_image} `}
@@ -57,7 +56,6 @@ const TryCityMax = () => {
             height={720}
           />
           <Image
-            loader={({src}) => src}
             src={TryCityMaxBannerMobile}
             alt="trycity"
             className={`xl:hidden ${styles.tryCity_image}`}
@@ -74,7 +72,7 @@ const TryCityMax = () => {
             <br /> lifetime. Starting at just{" "}
             <span className={styles.rupeeIcon}>₹</span>2,999/month.
           </p>
-          <a
+          <Link
             href="/citymax"
             aria-label="Check our plans"
             target="_blank"
@@ -87,28 +85,25 @@ const TryCityMax = () => {
                 className={styles.forward_icon}
               />
             </div>
-          </a>
+          </Link>
           <div className={styles.benefits_of_city_wrapper}>
             <h2 className={styles.benefits_text}>Benefits of CityMax</h2>
             <hr className={styles.line} />
             <div className={styles.benefits_content}>
-              {benefitsOfCity?.map((item, index) => {
+              {benefitsOfCity.map(({img, id, paragraph, title}) => {
                 return (
-                  <div className={styles.card_wrapper} key={index.toString()}>
+                  <div className={styles.card_wrapper} key={id}>
                     <div className={`w-100 h-100 absolute z-10`} />
                     <Image
-                      loader={({src}) => src}
-                      src={item?.img}
+                      src={img}
                       className={`${styles.card_icon} relative z-[-1]`}
                       alt="card-icon"
                       loading="lazy"
                       width={40}
                       height={40}
                     />
-                    <h3 className={styles.benefit_title}>{item?.title}</h3>
-                    <p className={styles.benefit_paragraph}>
-                      {item?.paragraph}
-                    </p>
+                    <h3 className={styles.benefit_title}>{title}</h3>
+                    <p className={styles.benefit_paragraph}>{paragraph}</p>
                   </div>
                 );
               })}
@@ -131,7 +126,6 @@ const TryCityMax = () => {
               open={isDrawerOpen}
             />
 
-            {/* <SideDrawer /> */}
             <hr className={styles.underline} />
           </div>
         </div>
@@ -140,9 +134,9 @@ const TryCityMax = () => {
   );
 };
 
-export default TryCityMax;
+export default memo(TryCityMax);
 
-export const TryCityMaxSkeleton = () => {
+export const TryCityMaxSkeleton = memo(() => {
   return (
     <div className={styles.main_wrapper}>
       <div className="flex lg:hidden">
@@ -191,4 +185,4 @@ export const TryCityMaxSkeleton = () => {
       </div>
     </div>
   );
-};
+});

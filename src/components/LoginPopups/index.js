@@ -1,5 +1,5 @@
 import {Drawer} from "@mui/material";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, memo} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import Modal from "react-responsive-modal";
@@ -27,7 +27,9 @@ const LoginModal = ({
   isSetupProfile,
 }) => {
   const cookies = new Cookies();
+
   const dispatch = useDispatch();
+
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [modalCategory, setModalCategory] = useState("changeNumber");
   const [contact, setContact] = useState();
@@ -41,7 +43,8 @@ const LoginModal = ({
   const [disableVerify, setDisableVerify] = useState(false);
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
   const [proceedDisable, setProceedDisable] = useState(false);
-  React.useEffect(() => {
+
+  useEffect(() => {
     if (isSetupProfile) setModalCategory("setUpAccount");
     else setModalCategory("changeNumber");
   }, [isModalOpen]);
@@ -61,26 +64,26 @@ const LoginModal = ({
     };
   }, [startCountdown, countdown]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setProblemType(1);
     setCountdown(30);
   }, [isModalOpen]);
 
-  const handleresize = e => {
+  useEffect(() => {
+    handleresize();
+    window.addEventListener("resize", handleresize);
+    return () => {
+      window.removeEventListener("resize", handleresize);
+    };
+  }, []);
+
+  function handleresize() {
     if (window.innerWidth < 768) {
       setIsBottomShareDrawer(true);
     } else {
       setIsBottomShareDrawer(false);
     }
-  };
-  React.useEffect(() => {
-    handleresize();
-    window.addEventListener("resize", handleresize);
-    // setStartCountdown(false);
-    return () => {
-      window.removeEventListener("resize", handleresize);
-    };
-  }, []);
+  }
 
   const handleModalCategory = val => {
     setModalCategory(val);
@@ -106,10 +109,6 @@ const LoginModal = ({
   };
 
   const handleVerification = (otp, email) => {
-    // if (countdown === 0) {
-    //   setOtpError(
-    //     "Sorry, your OTP has timed out. Please request a new OTP to continue.",
-    //   );
     setDisableVerify(true);
     const body = {
       mobile_number: contact,
@@ -140,6 +139,7 @@ const LoginModal = ({
             setLocalStorage("_ga", encryptedData);
             setLocalStorage("user_name", response?.data?.data?.full_name);
             setLocalStorage("user_email", response?.data?.data?.email);
+            setLocalStorage("user_number", response?.data?.data?.mobile_number);
 
             if (setIsLogin) {
               setIsLogin(true);
@@ -288,88 +288,102 @@ const LoginModal = ({
   );
 };
 
-export default LoginModal;
+export default memo(LoginModal);
 
-const ModalContent = ({
-  modalCategory,
-  setModalCategory,
-  contact,
-  handleSentOtp,
-  setProblemType,
-  setOtp,
-  isLoginModal,
-  handleVerification,
-  otpError,
-  problemType,
-  countdown,
-  handleStartCountdown,
-  setStartCountdown,
-  otp,
-  userId,
-  closeModal,
-  handleChangeRoute,
-  emailArr,
-  handleMultipleEmails,
-  setCountdown,
-  setContact,
-  disableVerify,
-  proceedDisable,
-}) => (
-  <>
-    {modalCategory === "changeNumber" ? (
-      <ModalContentForNumber
-        setModalCategory={val => setModalCategory(val)}
-        setContact={e => setContact(e)}
-        handleSentOtp={handleSentOtp}
-        setProblemType={val => setProblemType(val)}
-        setOtp={e => setOtp(e)}
-        isLoginModal={isLoginModal}
-      />
-    ) : modalCategory === "verifyOtp" ? (
-      <ModalContentForVerifyOtp
-        contact={contact}
-        handleVerification={() => handleVerification(otp)}
-        otpError={otpError}
-        problemType={problemType}
-        setModalCategory={val => setModalCategory(val)}
-        countdown={countdown}
-        handleSentOtp={() => handleSentOtp(contact)}
-        handleStartCountdown={handleStartCountdown}
-        setStartCountdown={val => setStartCountdown(val)}
-        otp={otp}
-        setOtp={e => setOtp(e)}
-        setCountdown={val => setCountdown(val)}
-        disableVerify={disableVerify}
-      />
-    ) : modalCategory === "resendOtp" ? (
-      <ModalContentForResendOtp
-        countdown={countdown}
-        handleSentOtp={() => handleSentOtp(contact)}
-        handleStartCountdown={handleStartCountdown}
-        problemType={problemType}
-        setCountdown={val => setCountdown(val)}
-        setModalCategory={val => setModalCategory(val)}
-        setOtp={e => setOtp(e)}
-      />
-    ) : modalCategory === "additionalSupport" ? (
-      <ModalContentForAdditionalSupport
-        problemType={problemType}
-        setModalCategory={val => setModalCategory(val)}
-      />
-    ) : modalCategory === "multipleEmails" ? (
-      <ModalContentForMultipleEmails
-        contact={contact}
-        setModalCategory={val => setModalCategory(val)}
-        handleMultipleEmails={handleMultipleEmails}
-        data={emailArr}
-        proceedDisable={proceedDisable}
-      />
-    ) : modalCategory === "setUpAccount" ? (
-      <ModalContentForSettingProfile
-        userId={userId}
-        closeModal={closeModal}
-        handleChangeRoute={handleChangeRoute}
-      />
-    ) : null}
-  </>
+const ModalContent = memo(
+  ({
+    modalCategory,
+    setModalCategory,
+    contact,
+    handleSentOtp,
+    setProblemType,
+    setOtp,
+    isLoginModal,
+    handleVerification,
+    otpError,
+    problemType,
+    countdown,
+    handleStartCountdown,
+    setStartCountdown,
+    otp,
+    userId,
+    closeModal,
+    handleChangeRoute,
+    emailArr,
+    handleMultipleEmails,
+    setCountdown,
+    setContact,
+    disableVerify,
+    proceedDisable,
+  }) => {
+    if (modalCategory === "changeNumber") {
+      return (
+        <ModalContentForNumber
+          setModalCategory={val => setModalCategory(val)}
+          setContact={e => setContact(e)}
+          handleSentOtp={handleSentOtp}
+          setProblemType={val => setProblemType(val)}
+          setOtp={e => setOtp(e)}
+          isLoginModal={isLoginModal}
+        />
+      );
+    } else if (modalCategory === "verifyOtp") {
+      return (
+        <ModalContentForVerifyOtp
+          contact={contact}
+          handleVerification={() => handleVerification(otp)}
+          otpError={otpError}
+          problemType={problemType}
+          setModalCategory={val => setModalCategory(val)}
+          countdown={countdown}
+          handleSentOtp={() => handleSentOtp(contact)}
+          handleStartCountdown={handleStartCountdown}
+          setStartCountdown={val => setStartCountdown(val)}
+          otp={otp}
+          setOtp={e => setOtp(e)}
+          setCountdown={val => setCountdown(val)}
+          disableVerify={disableVerify}
+        />
+      );
+    } else if (modalCategory === "resendOtp") {
+      return (
+        <ModalContentForResendOtp
+          countdown={countdown}
+          handleSentOtp={() => handleSentOtp(contact)}
+          handleStartCountdown={handleStartCountdown}
+          problemType={problemType}
+          setCountdown={val => setCountdown(val)}
+          setModalCategory={val => setModalCategory(val)}
+          setOtp={e => setOtp(e)}
+        />
+      );
+    } else if (modalCategory === "additionalSupport") {
+      return (
+        <ModalContentForAdditionalSupport
+          problemType={problemType}
+          setModalCategory={val => setModalCategory(val)}
+        />
+      );
+    } else if (modalCategory === "multipleEmails") {
+      return (
+        <ModalContentForMultipleEmails
+          contact={contact}
+          setModalCategory={val => setModalCategory(val)}
+          handleMultipleEmails={handleMultipleEmails}
+          data={emailArr}
+          proceedDisable={proceedDisable}
+        />
+      );
+    } else if (modalCategory === "setUpAccount") {
+      return (
+        <ModalContentForSettingProfile
+          userId={userId}
+          closeModal={closeModal}
+          handleChangeRoute={handleChangeRoute}
+        />
+      );
+    } else {
+      return null;
+    }
+  },
 );

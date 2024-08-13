@@ -1,5 +1,5 @@
 .hero_banner_wrapper {
-  @apply 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6;
+  @apply 3xl:px-[150px] macbook:px-[112px] xl:px-[80px] md:px-[60px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6;
   /* @apply md:flex hidden 3xl:px-[160px] macbook:px-[122px] xl:px-[90px] md:px-[70px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center mt-6; */
 }
 .hero_banner_main {

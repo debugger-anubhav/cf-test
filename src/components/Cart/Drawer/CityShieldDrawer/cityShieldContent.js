@@ -50,8 +50,8 @@ const CityShieldContent = ({
       )}
 
       <p className={styles.protect}>
-        Protect your appliances and furniture worth upto{" "}
-        <span className={styles.rupeeIcon}>₹</span>70,000{" "}
+        Protect your appliances & furniture worth upto{" "}
+        <span className={styles.rupeeIcon}>₹</span>70K{" "}
       </p>
 
       {cityShieldOriginalPrice && (
@@ -84,10 +84,10 @@ const CityShieldContent = ({
                 index === 0
                   ? "w-[55px] lg:w-[80px]"
                   : index === 1
-                  ? "w-[65px] lg:w-[91px]"
-                  : index === 2
-                  ? "w-[50px] lg:w-[68px]"
-                  : "w-[75px] lg:w-[104px]"
+                    ? "w-[65px] lg:w-[91px]"
+                    : index === 2
+                      ? "w-[50px] lg:w-[68px]"
+                      : "w-[75px] lg:w-[104px]"
               } ${styles.benefits_label}`}>
               {item.label}
             </p>

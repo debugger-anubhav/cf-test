@@ -1,0 +1,126 @@
+.wrapper {
+  @apply mt-8 w-full pb-[120px] md:pb-0;
+}
+.heading {
+  @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
+}
+.label_input_style {
+  @apply bg-white border w-full lg:w-[502px] rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-71717A outline-none placeholder:text-16;
+}
+.label {
+  @apply text-71717A font-Poppins md:text-16 text-14;
+}
+.proceed {
+  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+}
+
+.detail_wapper {
+  @apply w-full flex flex-col my-6;
+}
+.btnGroupContainer {
+  @apply -mx-4 md:-mx-0;
+  box-shadow: none;
+}
+@media (max-width: 767px) {
+  .btnGroupContainer {
+    box-shadow: 0px -1px 4px 0px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.btnGroup {
+  @apply flex flex-col px-4 md:px-0 md:flex-row md:mt-8 bg-fff -mb-6 md:-mb-0 bottom-0 mt-4 md:static;
+}
+.doItLater {
+  @apply font-Poppins mt-4 md:mt-0 tracking-desc xl:tracking-0.3 text-14 lg:text-16 font-medium h-12 text-5774AC lg:h-14;
+}
+.header_wrapper {
+  @apply flex w-full justify-between items-center;
+}
+
+.selContainer {
+  @apply md:p-4 px-4 py-3 inline-block w-full md:w-auto;
+  border-radius: 12px;
+  border: 1px solid #dddddf;
+  min-width: 189px;
+}
+.selContainer:hover {
+  @apply border border-71717A;
+}
+.selHeading {
+  @apply capitalize text-14 tracking-desc md:tracking-0.3 md:text-16 text-222 font-Poppins flex items-center gap-2;
+}
+
+.selDivider {
+  @apply my-2 hidden md:block;
+}
+.selFooter {
+  @apply text-12 tracking-0.24 text-71717A font-Poppins ml-7 md:ml-0;
+}
+.formHeadingSecond {
+  @apply mt-8  flex flex-col md:block;
+}
+.selectionBox {
+  @apply mt-2;
+}
+.orBox {
+  @apply md:hidden flex justify-center items-center;
+  color: #71717a;
+  font-family: Poppins;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 16px;
+  margin: 10px 0;
+}
+
+.formInputFirst {
+  @apply mt-2 w-full;
+}
+
+.btnGroup {
+  @apply flex flex-col px-4 md:px-0 md:flex-row md:mt-8 bg-fff mb-0 mt-4 fixed w-full bottom-0 md:static;
+}
+
+.saveBtn {
+  @apply mt-3 md:mt-0 mb-4 md:mb-0 w-full;
+}
+
+.lableStyle {
+  @apply block;
+}
+.chooseFile {
+  @apply inline-block pl-2 max-w-[249px] lg:max-w-full lg:w-full truncate;
+}
+.input_wrapper {
+  @apply flex items-center w-full lg:w-fit;
+}
+.check_wrapper {
+  @apply items-center ml-2 cursor-pointer;
+  animation: slideIn 1.5s normal;
+}
+.showDeleteIcon {
+  @apply hidden w-5 h-5 justify-center items-center rounded-full bg-[#D96060] p-1;
+}
+.showCheckCircle {
+  @apply flex w-5 h-5;
+}
+.input_wrapper:hover .showDeleteIcon {
+  @apply flex;
+}
+.input_wrapper:hover .showCheckCircle {
+  @apply hidden;
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  99.999% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.sticky_btn_wrapper {
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-0 pb-6 w-full right-0;
+}

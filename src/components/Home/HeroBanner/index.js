@@ -1,110 +1,176 @@
 "use client";
-import React, {useEffect, useState} from "react";
+import React, {Fragment, useEffect, useMemo, useRef, useState} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import {Carousel} from "react-responsive-carousel";
 import styles from "./style.module.css";
 import {useSelector} from "react-redux";
-import {useRouter} from "next/navigation";
-import {
-  CityWiseBannerWebsite,
-  CityNameToId,
-  CityWiseBannerMobile,
-  CityWiseBannerTablet,
-} from "@/constants/constant";
+import {CldImage} from "next-cloudinary";
+import Head from "next/head";
+import Link from "next/link";
+import {CityNameToId, getLocalStorage} from "@/constants/constant";
+
+// const getCityPrimaryBanner = city => {
+//   switch (city) {
+//     case "Bangalore":
+//       return "bangalore_summer_sale_banner_fn2uvm.webp";
+
+//     case "Delhi":
+//     case "Gurgaon":
+//     case "Faridabad":
+//       return "delhi_summer_sale_banner_lxar3m.webp";
+
+//     case "Ghaziabad/Noida":
+//       return "ghaziabad_nodia_summer_sale_banner_uiwioc.webp";
+
+//     case "Pune":
+//       return "pune_summer_sale_banner_fal9gq.webp";
+
+//     case "Mumbai":
+//       return "mumbai_summer_sale_banner_rfmyuo.webp";
+
+//     case "Hyderabad":
+//       return "hyderabad_summer_sale_banner_xfyubv.webp";
+//   }
+// };
+
+const getCityPrimaryBanner = city => {
+  switch (city) {
+    case "Bangalore":
+      return "freedom_sale_banner_cev4dj.webp";
+
+    case "Delhi":
+    case "Gurgaon":
+    case "Faridabad":
+      return "freedom_sale_banner_cev4dj.webp";
+
+    case "Ghaziabad/Noida":
+      return "freedom_sale_ghz_noida_banner_w2gnuq.webp";
+
+    case "Pune":
+      return "freedom_sale_banner_cev4dj.webp";
+
+    case "Mumbai":
+      return "freedom_sale_banner_cev4dj.webp";
+
+    case "Hyderabad":
+      return "freedom_sale_banner_cev4dj.webp";
+  }
+};
+
+const banners = [
+  {
+    url: "appliance_banner_llwnir.webp",
+    link: "/home-appliances-rental",
+  },
+  {
+    url: "citymax_banner_os9nbn.webp",
+    link: "/citymax",
+  },
+  {
+    url: "discount_deals_banner_q7vjac.webp",
+    link: "/discount-deals",
+  },
+];
 
 const HeroBanner = () => {
-  const router = useRouter();
-  const homePageReduxData = useSelector(state => state.homePagedata);
-  const [showLinkForRentPage, setShowLinkForRentPage] = useState(
-    homePageReduxData.showAllRentLink,
-  );
+  const city = CityNameToId[getLocalStorage("cityId")];
+
+  const {cityName, showAllRentLink} =
+    useSelector(state => state.homePagedata) || {};
+
+  const [showLinkForRentPage, setShowLinkForRentPage] =
+    useState(showAllRentLink);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleRedirection = link => {
-    if (showLinkForRentPage && !link.includes("citymax")) {
-      router.push(
-        `/${homePageReduxData?.cityName
-          .replace(/\//g, "-")
-          ?.toLowerCase()}${link}`,
-      );
+  const timerId = useRef(undefined);
+
+  const completeBanners = useMemo(() => {
+    if (cityName) {
+      return [
+        {
+          url: getCityPrimaryBanner(city),
+          link: "/home-furniture-rental",
+        },
+        ...banners,
+      ];
     } else {
-      router.push(`${link}`);
+      return [...banners];
     }
-  };
+  }, [cityName]);
 
   useEffect(() => {
-    setShowLinkForRentPage(homePageReduxData.showAllRentLink);
-  }, [homePageReduxData.showAllRentLink]);
-
-  const banners = [
-    {
-      data: CityWiseBannerWebsite[CityNameToId[homePageReduxData?.cityName]],
-      width: "100%",
-      imgWidth: 1920,
-      imgHeight: 801,
-      className: "lg:flex hidden",
-    },
-    {
-      data: CityWiseBannerTablet[CityNameToId[homePageReduxData?.cityName]],
-      width: "100%",
-      imgWidth: 1024,
-      imgHeight: 427,
-      className: "hidden md:flex lg:hidden",
-    },
-    {
-      data: CityWiseBannerMobile[CityNameToId[homePageReduxData?.cityName]],
-      width: "100%",
-      imgWidth: 430,
-      imgHeight: 179,
-      className: "flex md:hidden",
-    },
-  ];
+    setShowLinkForRentPage(showAllRentLink);
+  }, [showAllRentLink]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex(prevIndex => (prevIndex + 1) % banners[0].data.length);
-    }, 3000); // Change the interval time as needed
+    if (completeBanners.length !== banners.length) {
+      setCurrentIndex(0);
+      timerId.current = setInterval(() => {
+        setCurrentIndex(prevIndex => (prevIndex + 1) % completeBanners.length);
+      }, 3000);
+    } else {
+      setCurrentIndex(1);
+    }
 
-    return () => clearInterval(interval);
-  }, [banners]);
+    return () => clearInterval(timerId.current);
+  }, [completeBanners]);
 
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
-      {banners?.map((banner, bannerIndex) => (
-        <div
-          key={bannerIndex.toString()}
-          className={`landing_page_carousel 
-          ${banner.className}
-        `}>
+      {completeBanners && (
+        <div className="landing_page_carousel">
           <Carousel
             showStatus={false}
-            showArrows={true}
+            showArrows
             showThumbs={false}
             selectedItem={currentIndex}
             onChange={index => setCurrentIndex(index)}
             swipeable
-            width={banner.width}>
-            {banner?.data?.map((item, i) => (
-              <div key={i.toString()}>
-                <div
-                  className="flex cursor-pointer"
-                  onClick={() => {
-                    handleRedirection(item.redirectionLink);
-                  }}>
-                  <img
-                    src={item.link}
-                    alt={item.alternate}
-                    className="cursor-pointer rounded-lg"
-                    width={banner.imgWidth}
-                    height={banner.imgHeight}
-                  />
-                </div>
-              </div>
-            ))}
+            width={"100%"}>
+            {completeBanners.map(({url, link}) => {
+              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+              return (
+                <Fragment key={link}>
+                  <Head>
+                    <link
+                      rel="preload"
+                      href={cloudinaryUrl}
+                      as="image"
+                      type="image/webp"
+                    />
+                  </Head>
+                  <Link
+                    href={
+                      showLinkForRentPage && !link.includes("citymax")
+                        ? `${cityName
+                            .replace(/\//g, "-")
+                            ?.toLowerCase()}${link}`
+                        : link
+                    }>
+                    <CldImage
+                      src={url}
+                      alt={""}
+                      sizes="(max-width: 640px) 100vw,
+                     (max-width: 768px) 75vw,
+                     (max-width: 1024px) 50vw,
+                     1920px"
+                      width={1920}
+                      improve={"50"}
+                      height={800}
+                      crop="scale"
+                      quality="auto:best"
+                      priority
+                      className="cursor-pointer rounded-lg"
+                      style={{pointerEvents: "all"}}
+                    />
+                  </Link>
+                </Fragment>
+              );
+            })}
           </Carousel>
         </div>
-      ))}
+      )}
     </div>
   );
 };

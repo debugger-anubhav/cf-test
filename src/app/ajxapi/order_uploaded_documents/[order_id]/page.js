@@ -11,7 +11,7 @@ const Documentspage = () => {
   return (
     <div className="large_layout">
       <AnnouncementBar />
-      <Header />
+      <Header page={"login"} />
       <MenuList />
       <Document />
       <Footer />

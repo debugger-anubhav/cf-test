@@ -10,6 +10,7 @@ import {
   PaymentAndBilling,
   ReferralProgram,
   WhyCityFurnish,
+  RefundAndCancellation,
 } from "./data";
 import SingleQuestion from "./singleQuestion";
 import {FaHeadset, FaPhoneAlt} from "react-icons/fa";
@@ -28,6 +29,7 @@ const Data = [
   "Our Services",
   "Why rent from Cityfurnish",
   "Referral Program",
+  "Refund & Cancellation",
 ];
 
 const MainWrapper = () => {
@@ -37,11 +39,11 @@ const MainWrapper = () => {
   const reduxLoginState = useSelector(state => state.homePagedata.isLogin);
   const [value, setValue] = useState(0);
   const [isDumy, setIsDumy] = useState(false);
-  const [faqData, setFaqData] = useState();
   const [openIndex, setOpenIndex] = useState(0);
   const [searchKeyword, setSearchKeyword] = useState();
   const [loginModal, setLoginModal] = useState(false);
   const [isLogin, setIsLogin] = useState();
+  const [faqData, setFaqData] = useState([]);
 
   const dynamicData = {
     0: HowItWorks,
@@ -50,6 +52,7 @@ const MainWrapper = () => {
     3: OurServices,
     4: WhyCityFurnish,
     5: ReferralProgram,
+    6: RefundAndCancellation,
   };
 
   useEffect(() => {
@@ -72,48 +75,32 @@ const MainWrapper = () => {
 
   useEffect(() => {
     const temp = [];
-    if (searchKeyword) {
-      // General.forEach(ele => {
-      //   if (ele?.que?.includes(searchKeyword)) {
-      //     temp.push(ele);
-      //   }
-      // });
-      HowItWorks.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
+    if (searchKeyword?.trim()) {
+      Object.values(dynamicData).forEach(dataArray => {
+        dataArray.forEach(item => {
+          const queContainsKeyword = item?.que
+            ?.toLowerCase()
+            .includes(searchKeyword.toLowerCase());
+          const ansContainsKeyword = item?.ans
+            ?.toLowerCase()
+            .includes(searchKeyword.toLowerCase());
+          const childresContainsKeyword =
+            item?.isChildren?.filter(ele =>
+              ele?.toLowerCase().includes(searchKeyword.toLowerCase()),
+            )?.length > 0;
+
+          if (
+            queContainsKeyword ||
+            ansContainsKeyword ||
+            childresContainsKeyword
+          ) {
+            temp.push(item);
+          }
+        });
       });
-      DeliveryAndInstalation.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      PaymentAndBilling.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      OurServices.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      WhyCityFurnish.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      ReferralProgram.forEach(ele => {
-        if (ele?.que?.toLowerCase().includes(searchKeyword)) {
-          temp.push(ele);
-        }
-      });
-      if (temp?.length) setFaqData(temp);
-      else setFaqData([]);
-    } else {
-      setFaqData(dynamicData[value]);
-    }
-  }, [searchKeyword]);
+      setFaqData([...temp]);
+    } else setFaqData(dynamicData[value]);
+  }, [searchKeyword, dynamicData, value]);
 
   useEffect(() => {
     setFaqData(dynamicData[value]);

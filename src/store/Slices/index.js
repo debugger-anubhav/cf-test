@@ -1,6 +1,18 @@
 import {getLocalStorage} from "@/constants/constant";
 import {createSlice} from "@reduxjs/toolkit";
 
+export const WorkersSlice = createSlice({
+  name: "workers",
+  initialState: {
+    homepageCardsWorker: null,
+  },
+  reducers: {
+    setHomepageCardWorker(state, action) {
+      state.homepageCardsWorker = action.payload;
+    },
+  },
+});
+
 export const HomepageSlice = createSlice({
   name: "HomePageData",
   initialState: {
@@ -289,6 +301,13 @@ export const KycPageSlice = createSlice({
   initialState: {
     orderId: "",
     cibilDocsData: "",
+    selectedDataForKyc: "",
+    kycScreenName: "selectOrderId",
+    selectedProfessionId: null,
+    stageId: null,
+    currentAddOpt: [],
+    pendingDashboardDetail: [],
+    progressPercent: 0,
   },
   reducers: {
     getOrderId(state, action) {
@@ -296,6 +315,28 @@ export const KycPageSlice = createSlice({
     },
     setCibilDocsData(state, action) {
       state.cibilDocsData = action.payload;
+    },
+    setSelectedDataForKyc(state, action) {
+      // console.log(action.payload, ",,,,,,,,,,,");
+      state.selectedDataForKyc = action.payload;
+    },
+    setKycScreenName(state, action) {
+      state.kycScreenName = action.payload;
+    },
+    setSelectedProfessionId(state, action) {
+      state.selectedProfessionId = action.payload;
+    },
+    setStageId(state, action) {
+      state.stageId = action.payload;
+    },
+    setCurrentAddOpt(state, action) {
+      state.currentAddOpt = action.payload;
+    },
+    setPendingDashboardDetail(state, action) {
+      state.pendingDashboardDetail = action.payload;
+    },
+    setProgressPercent(state, action) {
+      state.progressPercent = action.payload;
     },
   },
 });
@@ -441,7 +482,17 @@ export const {getUserName, getUserContact, getUserEmail} =
 
 export const {setRequestLoader} = ServiceRequestSlice.actions;
 
-export const {getOrderId, setCibilDocsData} = KycPageSlice.actions;
+export const {
+  getOrderId,
+  setCibilDocsData,
+  setSelectedDataForKyc,
+  setKycScreenName,
+  setSelectedProfessionId,
+  setStageId,
+  setCurrentAddOpt,
+  setPendingDashboardDetail,
+  setProgressPercent,
+} = KycPageSlice.actions;
 
 export const {getAvailableCoins, getCoinsState, setUsedCoins} =
   InvoiceSlice.actions;
@@ -459,3 +510,5 @@ export const {
 } = paymentSuccessSlice.actions;
 
 export const {setIsHalfYearlyState} = citymaxSlice.actions;
+
+export const {setHomepageCardWorker} = WorkersSlice.actions;

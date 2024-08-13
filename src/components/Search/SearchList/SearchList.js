@@ -17,7 +17,9 @@ import {DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {useRouter} from "next/navigation";
 import {BsEmojiFrown} from "react-icons/bs";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
+import RentFurnitureAndAppliances, {
+  RentFurnitureSkeleton,
+} from "@/components/Home/RentFurnitureAndAppliances";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import SortDropdown from "./SortDropdown";
 
@@ -33,6 +35,7 @@ const SearchList = () => {
   const router = useRouter();
   const [refreshState, setRefreshState] = useState(1);
   const dispatch = useDispatch();
+
   const reduxStateOfLoginPopup = useSelector(
     state => state.homePagedata.loginPopupState,
   );
@@ -45,7 +48,7 @@ const SearchList = () => {
   const city = getLocalStorage("cityId");
   const [searchData, setSearchData] = useState([]);
   const [isLogin, setIsLogin] = useState();
-
+  const userId = decrypt(getLocalStorage("_ga"));
   useEffect(() => {
     const url = window?.location.pathname.split("/");
     const key = url[url.length - 1].replace(/%20/g, " ");
@@ -67,9 +70,7 @@ const SearchList = () => {
       .get(
         endPoints.savedItems +
           `?cityId=${cityId}&userId=${
-            isValid
-              ? decrypt(getLocalStorage("_ga"))
-              : decryptBase64(getLocalStorage("tempUserID"))
+            isValid ? userId : decryptBase64(getLocalStorage("tempUserID"))
           }`,
       )
       .then(res => {
@@ -86,12 +87,11 @@ const SearchList = () => {
     const isValid = await checkAuthentication();
     setIsLogin(isValid);
 
-    isValid && getSavedItems(isValid);
+    userId && getSavedItems(isValid);
   };
 
   useEffect(() => {
-    const isValid = checkAuthentication();
-    isValid && getSavedItems();
+    userId && getSavedItems();
   }, [refreshState]);
 
   useEffect(() => {
@@ -136,126 +136,137 @@ const SearchList = () => {
   };
 
   return (
-    <div className={style.conatiner_wrapper}>
-      <div className={style.container}>
-        <ul className={style.listings}>
-          <li className={style.list}>
-            <a href="/">
-              <p className={`${style.route_text} cursor-pointer`}>Home</p>
-            </a>
-            <ForwardArrow size={12} color={"#71717A"} />
-          </li>
-          <li className={style.list}>
-            <p className={style.route_text}>
-              {`Search results for “${searchKey}”`}
-            </p>
-          </li>
-        </ul>
-      </div>
-
-      {/* sort by */}
-      <div className={style.sort_div_wrapper}>
-        <p className={style.sort_by_text}>Sort By</p>
-        <div className={`${style.filter} relative `}>
-          <div
-            className={style.filterbox}
-            onClick={() => {
-              toggleDropdownSort();
-            }}
-            ref={dropDownRefSort}>
-            <div className={style.filter_text_container}>
-              <p className={`${style.filter_text} !text-[#597492]`}>
-                {selectedOption}
+    <>
+      <div className={style.conatiner_wrapper}>
+        <div className={style.container}>
+          <ul className={style.listings}>
+            <li className={style.list}>
+              <a href="/">
+                <p className={`${style.route_text} cursor-pointer`}>Home</p>
+              </a>
+              <ForwardArrow size={12} color={"#71717A"} />
+            </li>
+            <li className={style.list}>
+              <p className={style.route_text}>
+                {`Search results for “${searchKey}”`}
               </p>
-            </div>
-            <div className="cursor-pointer">
-              <DownPopUpArrow
-                // size={20}
-                color={"#597492"}
-                className={sortOpen ? style.arrow_up : style.arrow_down}
-              />
+            </li>
+          </ul>
+        </div>
+
+        {/* sort by */}
+        <div className={style.sort_div_wrapper}>
+          <p className={style.sort_by_text}>Sort By</p>
+          <div className={`${style.filter} relative `}>
+            <div
+              className={style.filterbox}
+              onClick={() => {
+                toggleDropdownSort();
+              }}
+              ref={dropDownRefSort}>
+              <div className={style.filter_text_container}>
+                <p className={`${style.filter_text} !text-[#597492]`}>
+                  {selectedOption}
+                </p>
+              </div>
+              <div className="cursor-pointer">
+                <DownPopUpArrow
+                  // size={20}
+                  color={"#597492"}
+                  className={sortOpen ? style.arrow_up : style.arrow_down}
+                />
+              </div>
             </div>
           </div>
+
+          <SortDropdown
+            isDropdownOpen={sortOpen}
+            closeDropdown={() => setSortOpen(false)}
+            sortByText={sortByText}
+            handleSort={handleSort}
+            selectedOption={selectedOption}
+          />
         </div>
 
-        <SortDropdown
-          isDropdownOpen={sortOpen}
-          closeDropdown={() => setSortOpen(false)}
-          sortByText={sortByText}
-          handleSort={handleSort}
-          selectedOption={selectedOption}
-        />
-      </div>
+        {/* Horizontal line */}
+        <div className={style.horizontal_line_next}></div>
 
-      {/* Horizontal line */}
-      <div className={style.horizontal_line_next}></div>
-
-      {searchData?.length ? (
-        <div>
-          <InfiniteScroll
-            dataLength={searchData?.length}
-            next={() => {
-              if (pageNo < totalPage) {
-                setPageNo(prev => prev + 1);
-              }
-            }}
-            hasMore={true} // Replace with a condition based on your data source
-            className="!w-full !h-full"
-            style={{overflow: "visible"}}>
-            <div className={style.main_container}>
-              {searchData?.map((item, index) => {
-                return (
-                  <div
-                    className={`${style.card_box_product} child`}
-                    key={index.toString()}
-                    onClick={e => handleCardClick(e, item)}>
-                    <a
-                      href={
-                        !reduxStateOfLoginPopup &&
-                        `/things/${item.id}/${item.seourl}`
-                      }>
-                      <SearchCard
-                        productWidth={productCardWidth}
-                        cardImage={`${productImageBaseUrl}${
-                          item?.image?.split(",")[0]
-                        }`}
-                        productImageBaseUrl
-                        desc={item?.product_name}
-                        originalPrice={item?.price}
-                        soldOut={item?.pq_quantity > 0}
-                        currentPrice={item?.sale_price}
-                        isImageHeight={true}
-                        boxShadowHover={true}
-                        hoverCardImage={
-                          item?.image?.split(",")[1] !== ""
-                            ? productImageBaseUrl + item?.image?.split(",")[1]
-                            : productImageBaseUrl + item?.image?.split(",")[0]
-                        }
-                        showincludedItem={item?.product_label}
-                        discount={`${Math.round(
-                          ((item?.price - item?.sale_price) * 100) /
-                            item?.price,
-                        ).toFixed(0)}%`}
-                        productID={item?.id}
-                        refreshFunction={setRefreshState}
-                        isLogin={isLogin}
-                      />
-                    </a>
-                  </div>
-                );
-              })}
+        {searchData?.length ? (
+          <div>
+            <InfiniteScroll
+              dataLength={searchData?.length}
+              next={() => {
+                if (pageNo < totalPage) {
+                  setPageNo(prev => prev + 1);
+                }
+              }}
+              hasMore={true} // Replace with a condition based on your data source
+              className="!w-full !h-full"
+              style={{overflow: "visible"}}>
+              <div className={style.main_container}>
+                {searchData?.map((item, index) => {
+                  return (
+                    <div
+                      className={`${style.card_box_product} child`}
+                      key={index.toString()}
+                      onClick={e => handleCardClick(e, item)}>
+                      <a
+                        href={
+                          !reduxStateOfLoginPopup &&
+                          `/things/${item.id}/${item.seourl}`
+                        }>
+                        <SearchCard
+                          productWidth={productCardWidth}
+                          cardImage={`${productImageBaseUrl}${
+                            item?.image?.split(",")[0]
+                          }`}
+                          productImageBaseUrl
+                          desc={item?.product_name}
+                          originalPrice={item?.price}
+                          soldOut={item?.pq_quantity > 0}
+                          currentPrice={item?.sale_price}
+                          isImageHeight={true}
+                          boxShadowHover={true}
+                          hoverCardImage={
+                            item?.image?.split(",")[1] !== ""
+                              ? productImageBaseUrl + item?.image?.split(",")[1]
+                              : productImageBaseUrl + item?.image?.split(",")[0]
+                          }
+                          showincludedItem={item?.product_label}
+                          discount={`${Math.round(
+                            ((item?.price - item?.sale_price) * 100) /
+                              item?.price,
+                          ).toFixed(0)}%`}
+                          productID={item?.id}
+                          refreshFunction={setRefreshState}
+                          isLogin={isLogin}
+                        />
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
+            </InfiniteScroll>
+          </div>
+        ) : (
+          <div className={style.noContentContainer}>
+            <div>
+              <BsEmojiFrown className={style.noContentEmoji} color="#9A9AA2" />
+              <p className={style.noContentText}>
+                Oops! We don’t have any results for your query
+              </p>
             </div>
-          </InfiniteScroll>
-        </div>
+          </div>
+        )}
+      </div>
+      {searchData?.length ? (
+        ""
       ) : (
-        <div className={style.noContentContainer}>
-          <BsEmojiFrown className={style.noContentEmoji} color="#9A9AA2" />
-          <p className={style.noContentText}>
-            Oops! We don’t have any results for your query
-          </p>
+        <div className="mb-12 lg:mb-20">
+          <RentFurnitureAndAppliances params={"home-page"} />
         </div>
       )}
-    </div>
+    </>
   );
 };
 
@@ -263,7 +274,7 @@ export default SearchList;
 
 export const SearchListSkeleton = () => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 ">
       <RentFurnitureSkeleton />
     </div>
   );

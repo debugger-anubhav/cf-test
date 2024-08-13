@@ -1,5 +1,5 @@
 // "use client"
-import React from "react";
+import React, {memo} from "react";
 import styles from "./style.module.css";
 import {Close} from "@/assets/icon";
 import string from "@/constants/Constant.json";
@@ -15,22 +15,29 @@ const AnnouncementBar = () => {
         <div className={styles.announcement_bar_wrapper}>
           <div className={styles.announcement_bar_text}>
             <img
-              // src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
-              src="https://d3juy0zp6vqec8.cloudfront.net/images/fire.webp"
-              alt="beach"
-              className={styles.icons_style}
+              src="https://d3juy0zp6vqec8.cloudfront.net/images/icn-indian-flag.webp"
+              // src="https://d3juy0zp6vqec8.cloudfront.net/images/sun.webp"
+              alt="sun"
+              className={"xs:w-[22px] xs:h-[22px] w-[16px] h-[16px]"}
+              loading="lazy"
             />
-            <span className=" px-1 text-222">
+            <span className=" px-1 flex">
               {string.landing_page.announcement_bar}
+              <span>
+                <img
+                  // src="https://d3juy0zp6vqec8.cloudfront.net/images/beach.webp"
+                  src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                  alt="beach"
+                  className={`${styles.icons_style} mx-1`}
+                  loading="lazy"
+                />
+              </span>
+              Code:
             </span>
-            <span className="px-[2px] text-[#2581F7]">
+            <span className="px-[2px] text-[#000080] font-Poppins font-medium">
+              {/* <span className="px-[2px] text-[#103DB2]"> */}
               {string.landing_page.coupon_code}
             </span>
-            <img
-              src="https://d3juy0zp6vqec8.cloudfront.net/images/sun.webp"
-              alt="sun"
-              className={styles.icons_style}
-            />
           </div>
           <div
             className={styles.announcement_close_icon}
@@ -43,4 +50,4 @@ const AnnouncementBar = () => {
   );
 };
 
-export default AnnouncementBar;
+export default memo(AnnouncementBar);

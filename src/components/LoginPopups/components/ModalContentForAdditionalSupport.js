@@ -1,4 +1,4 @@
-import React from "react";
+import React, {memo} from "react";
 import styles from "../style.module.css";
 import {BackIcon, ForwardArrow, InformationIcon} from "@/assets/icon";
 
@@ -45,4 +45,4 @@ const ModalContentForAdditionalSupport = ({problemType, setModalCategory}) => {
   );
 };
 
-export default ModalContentForAdditionalSupport;
+export default memo(ModalContentForAdditionalSupport);
