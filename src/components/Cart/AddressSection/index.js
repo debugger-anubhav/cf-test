@@ -412,7 +412,7 @@ const AddressSection = () => {
               dispatch(setShoppingCartTab(0));
             }}>
             <BackIcon size={19} />
-            <p className={styles.head}>Go back to checkout</p>
+            <p className={styles.head}>Confirm address</p>
           </div>
 
           {addressArray.length > 0 &&
