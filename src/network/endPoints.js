@@ -49,6 +49,7 @@ export const endPoints = {
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
   categoryMetaData: "fc-city-category-datas/getCategoryPageData",
+  loginAdmin: "fc-kycs/loginAdmin",
   getHomeBanners: cityId => `fc-categories/getHomeBanners?cityId=${cityId} `,
   seoMetaData: (cityName, catId) =>
     `fc-city-category-seo-data/getSeoPageMetaData?cityName=${cityName}&categoryId=${catId}`,
@@ -58,6 +59,9 @@ export const endPoints = {
 
   getCategoryIdBySeoUrl: (key = "") =>
     `fc-categories/getCategoryIdBySeoUrl?seoUrl=${key}`,
+
+  getUserAdditionalDetails: orderId =>
+    `fc-kycs/getUserAdditionalDetails?orderId=${orderId}`,
 
   productPage: {
     completeTheLook: (id, cityId) =>
@@ -142,6 +146,9 @@ export const endPoints = {
     uploadCurrentAddressDocs: "fc-kycs/uploadCurrentAddressDocs",
     saveEducationalDetails: "fc-kycs/saveEducationalDetails",
     saveGstDetails: "fc-kycs/saveGstDetails",
+    uploadManuallyDoc: "fc-kycs/uploadDocsFromDashboard",
+    checkOldKyc: (userId, orderId) =>
+      `fc-kycs/getKycFlowStatus?userId=${userId}&orderId=${orderId}`,
   },
 
   cityshieldPage: {

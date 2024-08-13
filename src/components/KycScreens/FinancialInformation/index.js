@@ -5,12 +5,13 @@ import Image from "next/image";
 import uploading from "@/assets/common_icons/uploading.jpg";
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
-import {setKycScreenName, setStageId} from "@/store/Slices";
+import {setKycScreenName} from "@/store/Slices";
 import {
   BackIcon,
   CheckFillIcon,
   DeleteIcon,
   DeleteIconFilled,
+  InfoCircleIcon,
   OutlineArrowRight,
 } from "@/assets/icon";
 // import SelectionCircle from "@/components/Documentation/SelectionCircle/SelectionCircle";
@@ -19,53 +20,26 @@ import {getLocalStorage} from "@/constants/constant";
 import {useDispatch, useSelector} from "react-redux";
 import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
+import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
 
-const allowedFileTypes = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "application/pdf",
-];
-// const SelectionComp = ({
-//   headertext,
-//   duration,
-//   setIsSelected,
-//   type,
-//   showInner,
-// }) => {
-//   return (
-//     <div
-//       onClick={() => {
-//         setIsSelected(type);
-//       }}>
-//       <div className={`${styles.selHeading}`}>
-//         <SelectionCircle showInner={showInner} />
-//         <span className={`${styles.selHeadingTxt}`}>{headertext}</span>
-//       </div>
-//       <div className={`${styles.selDivider}`}>
-//         <hr />
-//       </div>
-//       <div className={`${styles.selFooter} w-max-[173px]`}>
-//         Required for <span className="font-medium">{duration}</span>
-//       </div>
-//     </div>
-//   );
-// };
+const allowedFileTypes = ["application/pdf"];
 
-const FinancialInfo = ({handleKycState}) => {
+const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
   const dispatch = useDispatch();
   const [docData, setDocsData] = useState();
   const [isSelected, setIsSelected] = useState();
   const [disableButton, setDisableButton] = useState(false);
   const [loader, setLoader] = useState(false);
+  const isReupload = uploadedDocsData?.length > 0;
 
   const kycSliceData = useSelector(state => state.kycPage);
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const stageId = kycSliceData.stageId;
+  // const stageId = kycSliceData.stageId;
 
   const userId = decrypt(getLocalStorage("_ga"));
   const professionId = kycSliceData.selectedProfessionId;
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const [formData, setFormData] = useState({
     financialDocumentProof: [],
@@ -85,29 +59,23 @@ const FinancialInfo = ({handleKycState}) => {
   };
 
   const handleFileInputChange = e => {
-    const file = e.target.files;
-    const temp = [...formData.financialDocumentProof];
-    const fileArray = Object.keys(file).map(key => {
-      return file[key];
-    });
-    const newArr = temp.concat(fileArray);
+    const fileArray = Array.from(e.target.files);
 
-    if (file) {
-      setFormData(prev => {
-        return {...prev, financialDocumentProof: newArr};
-      });
+    // Check if any of the files are not of the allowed type
+    if (fileArray.some(file => !allowedFileTypes.includes(file.type))) {
+      setFormErrors(prev => ({
+        ...prev,
+        financialDocumentProof:
+          "Please upload the document in PDF format only.",
+      }));
+    } else {
+      setFormErrors({financialDocumentProof: ""});
 
-      if (!allowedFileTypes.includes(newArr?.[0]?.type)) {
-        setFormErrors(prev => ({
-          ...prev,
-          financialDocumentProof: "Please select jpg,png, pdf or jpeg file",
-        }));
-      } else {
-        setFormErrors(prev => ({
-          ...prev,
-          financialDocumentProof: "",
-        }));
-      }
+      // Append new files to the existing files
+      setFormData(prev => ({
+        ...prev,
+        financialDocumentProof: [...prev.financialDocumentProof, ...fileArray],
+      }));
     }
   };
 
@@ -127,7 +95,10 @@ const FinancialInfo = ({handleKycState}) => {
     allData.append(
       "financialStatementProof",
       JSON.stringify({
-        doc_id: "cf_financial_statement",
+        doc_id:
+          professionId === 3 || professionId === 4
+            ? "nominee_financial_statement"
+            : "cf_financial_statement",
         subDocType: isSelected,
       }),
     );
@@ -136,28 +107,37 @@ const FinancialInfo = ({handleKycState}) => {
       allData.append("doc", formData.financialDocumentProof[i]);
     }
     allData.append("orderId", orderId);
-    allData.append("stageId", stageId);
+    allData.append("stageId", 2);
     baseInstance
       .post(endPoints.kycPage.uploadFinancialDocs, allData)
       .then(() => {
-        // if(pendingDashboardDetail.length>0){
-        //   pendingDashboardDetail?.[0]?.id===3
-        // }
-
-        const temp = pendingDashboardDetail?.filter(i => i.id === 6);
-        handleKycState(orderId);
-
-        if (professionId !== 5) {
-          dispatch(setKycScreenName("professionalDetails"));
-        } else if (temp.length > 0) {
-          dispatch(setKycScreenName("autoPay"));
-        } else {
-          dispatch(setKycScreenName("dashboard"));
-        }
-
-        dispatch(setStageId(3));
-        setDisableButton(false);
+        dashboardDetails().then(res => {
+          // const pendingStage = pendingDashboardDetail?.filter(
+          //   i => i.stage_status === 0 || i.stage_status === 3,
+          // );
+          const pendingStage = res.allKycStages?.filter(
+            i => i.stage_status === 0 || i.stage_status === 3,
+          );
+          showToastNotification("Financial docs uploaded successfully.", 1);
+          // console.log(pendingStage, "pendingStage");
+          if (pendingStage.length > 0) {
+            const ID = pendingStage?.[0]?.id;
+            if (ID === 3) {
+              dispatch(setKycScreenName("professionalDetails"));
+            }
+            if (ID === 6) {
+              dispatch(setKycScreenName("autoPay"));
+            }
+            if (ID === 7) {
+              dispatch(setKycScreenName("educationalDetails"));
+            }
+          } else {
+            dispatch(setKycScreenName("congratulation"));
+          }
+        });
         setLoader(false);
+        // dispatc(3));
+        setDisableButton(false);
       })
       .catch(err => {
         console.log(err?.message || "some error");
@@ -192,6 +172,19 @@ const FinancialInfo = ({handleKycState}) => {
           className={"cursor-pointer"}
         />
         Financial Information
+      </div>
+
+      <div>
+        {reject?.rejected_reason && reject?.stage_status === 3 && (
+          <div
+            className={`${commonStyles.rejected_docs_wrapper} flex !items-center !text-71717A`}>
+            <InfoCircleIcon color={"#71717A"} size={15} className={"mr-2"} />
+            <p className={`${commonStyles.rejected_doc_name} !text-71717A`}>
+              <span className="font-medium pr-1 ">Verification Rejected :</span>
+              Please re-upload {reject?.rejected_reason}
+            </p>
+          </div>
+        )}
       </div>
 
       <div className={`${styles.formHeadingSecond}`}>
@@ -329,6 +322,7 @@ const FinancialInfo = ({handleKycState}) => {
                 </span>
               </div>
             </label>
+
             {formData.financialDocumentProof.name && (
               <div className="flex cursor-pointer">
                 <span
@@ -344,7 +338,7 @@ const FinancialInfo = ({handleKycState}) => {
             multiple
             type="file"
             id="financialDoc"
-            accept="image/jpeg,image/jpg,image/png,application/pdf"
+            accept="application/pdf"
             style={{display: "none", cursor: "pointer"}}
             onChange={e => {
               handleFileInputChange(e);
@@ -360,14 +354,41 @@ const FinancialInfo = ({handleKycState}) => {
         </div>
       )}
 
+      {isReupload && (
+        <RejectedDocsComponent
+          array={uploadedDocsData}
+          docType={
+            professionId === 3 || professionId === 4
+              ? "nominee_financial_statement"
+              : "cf_financial_statement"
+          }
+        />
+      )}
+
+      <div className={styles.note}>
+        <span className="font-medium"> Note:</span> Please upload the document
+        in PDF format only.
+      </div>
+
       <button
         onClick={() => {
           submitHandler();
         }}
-        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
-        proceed
+        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"} !hidden md:!flex `}>
+        Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>
+
+      <div className={styles.sticky_btn_wrapper}>
+        <button
+          onClick={() => {
+            submitHandler();
+          }}
+          className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"}`}>
+          Proceed
+          <OutlineArrowRight color={"#222222"} />
+        </button>
+      </div>
       {loader && <LoaderComponent loading={loader} />}
     </div>
   );

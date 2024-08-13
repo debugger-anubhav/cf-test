@@ -12,17 +12,22 @@ import {decrypt} from "@/hooks/cryptoUtils";
 import {getLocalStorage} from "@/constants/constant";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import VerfiEmail from "./VerfiEmail";
+import docStyle from "../../DocumentsPage/style.module.css";
 import GstSdk from "../GstSdk";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
-export default function ProfessionalDetails() {
+export default function ProfessionalDetails({
+  getDashboardDetailsApi,
+  phoneNumber,
+  getDocsDetails,
+}) {
   const dispatch = useDispatch();
 
   const kycSliceData = useSelector(state => state.kycPage);
   const professionId = kycSliceData.selectedProfessionId;
-  const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
+  // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const orderId = kycSliceData.selectedDataForKyc.dealCodeNumber;
-  const stageId = kycSliceData.stageId;
   const userId = decrypt(getLocalStorage("_ga"));
 
   const nomineeRelation = [
@@ -33,8 +38,11 @@ export default function ProfessionalDetails() {
   ];
   const [email, setEmail] = useState("");
   const [recievedOtp, setRecievedOtp] = useState(null);
-  const [verifiedEmail, setVerifiedEmail] = useState(false);
+  const [verifiedEmail, setVerifiedEmail] = useState("no");
   const [openGstSdk, setOpenGstSdk] = useState(false);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [storeValues, setStoreValues] = useState(null);
+  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
 
   useEffect(() => {
     if (professionId === 2) {
@@ -48,13 +56,23 @@ export default function ProfessionalDetails() {
         companyName: Yup.string().required("Company name is required"),
         companyEmail: Yup.string()
           .email("Invalid email address")
-          .required("Email is required"),
+          .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Invalid email address")
+          .required("Company email id is required"),
       });
     } else if (professionId === 3 || professionId === 4) {
       return Yup.object().shape({
-        nomineeName: Yup.string().required("Nominee name is required"),
-        nomineeRelation: Yup.string().required("Nominee relation is required"),
+        nomineeName: Yup.string().required("Guardian’s name is required"),
+        nomineeRelation: Yup.string().required(
+          "Guardian’s relation is required",
+        ),
         nomineeNumber: Yup.string()
+          .test(
+            "not-same-as-phoneNumber",
+            "Guardian’s number should not be the same as the registered number",
+            function (value) {
+              return value !== phoneNumber;
+            },
+          )
           .test(
             "no-spaces-special-characters",
             "Please enter a valid 10 digit phone number without spaces or special characters",
@@ -70,7 +88,7 @@ export default function ProfessionalDetails() {
             10,
             "Oops! It looks like you entered too many digits. Please enter valid 10 digit number.",
           )
-          .required("Nominee number is required"),
+          .required("Guardian’s number is required"),
       });
     }
   };
@@ -84,43 +102,70 @@ export default function ProfessionalDetails() {
     } else if (professionId === 3 || professionId === 4) {
       return {
         nomineeName: "",
-        nomineeRelation: "",
+        nomineeRelation: selectedOption,
         nomineeNumber: "",
       };
     }
   };
 
   const saveProfessionalDetails = payload => {
-    const temp = pendingDashboardDetail?.filter(i => i.id === 6);
     baseInstance
       .post(endPoints.kycPage.saveKycProfessionalDetails, payload)
       .then(res => {
-        if (professionId === 4) {
-          dispatch(setKycScreenName("educationalDetails"));
-        } else if (temp.length > 0) {
-          dispatch(setKycScreenName("autoPay"));
-        } else {
-          dispatch(setKycScreenName("dashboard"));
-        }
-        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        setOpenModal(false);
+        getDashboardDetailsApi().then(res => {
+          const pendingStage = res.allKycStages?.filter(
+            i => i.stage_status === 0 || i.stage_status === 3,
+          );
+          // console.log(pendingStage, "pendingStage");
+          showToastNotification(
+            "Additional information updated successfully.",
+            1,
+          );
+          if (pendingStage.length > 0) {
+            const ID = pendingStage?.[0]?.id;
+            if (ID === 2) {
+              getDocsDetails(2);
+              dispatch(setKycScreenName("dashboard"));
+            }
+            if (ID === 6) {
+              dispatch(setKycScreenName("autoPay"));
+            }
+            if (ID === 7) {
+              dispatch(setKycScreenName("educationalDetails"));
+            }
+          } else {
+            dispatch(setKycScreenName("congratulation"));
+          }
+          window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        });
       })
       .catch(err => console.log(err));
   };
 
+  useEffect(() => {
+    if (verifiedEmail === "yes") {
+      handleSubmit(storeValues);
+    }
+  }, [verifiedEmail]);
+
   const handleSubmit = values => {
-    const payload = {
-      userId,
-      orderId,
-      stageId,
-      nomineeName: values?.nomineeName,
-      nomineeRelation: values?.nomineeRelation,
-      nomineePhoneNo: values?.nomineeNumber,
-      companyName: values?.companyName,
-      companyEmailId: values?.companyEmail,
-    };
-    if (professionId === 1 && !verifiedEmail) {
-      showToastNotification("verify email first", 3);
+    setShowSimpleLoader(true);
+    setStoreValues(values);
+    if (professionId === 1 && verifiedEmail === "no") {
+      handleEmailVerify();
     } else {
+      setOpenModal(false);
+      const payload = {
+        userId,
+        orderId,
+        stageId: 3,
+        nomineeName: values?.nomineeName,
+        nomineeRelation: values?.nomineeRelation,
+        nomineePhoneNo: values?.nomineeNumber,
+        companyName: values?.companyName,
+        companyEmailId: values?.companyEmail,
+      };
       saveProfessionalDetails(payload);
     }
   };
@@ -140,15 +185,23 @@ export default function ProfessionalDetails() {
         setRecievedOtp(res?.data?.data);
         if (res?.data?.data?.status) {
           setOpenModal(true);
+          setShowSimpleLoader(false);
         } else {
           showToastNotification(res?.data?.data?.message, 3);
+          setOpenModal(false);
+          setShowSimpleLoader(false);
         }
-        console.log(res?.data?.data?.status, "pppppppppp");
+      })
+      .catch(err => {
+        console.log(err);
+        setShowSimpleLoader(false);
       });
   };
 
   return (
     <div className={styles.wrapper}>
+      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
+
       {professionId !== 2 && (
         <>
           <div className={styles.heading}>
@@ -186,26 +239,23 @@ export default function ProfessionalDetails() {
                         />
                       </div>
                       <div className={styles.company_detail_wapper}>
-                        <label className={styles.label}>Company email ID</label>
+                        <label className={styles.label}>
+                          {" "}
+                          Company Email Id
+                        </label>
                         <div
                           className={`${styles.label_input_style} flex justify-between`}>
                           <Field
                             type="email"
                             id="companyEmail"
                             name="companyEmail"
-                            placeholder="Enter company email"
-                            className="outline-none"
+                            placeholder="Enter company email id"
+                            className="outline-none w-full"
                             onChange={e => {
                               setFieldValue("companyEmail", e.target.value);
                               setEmail(e.target.value);
                             }}
                           />
-                          <p
-                            className={`${styles.verifyTxt}
-                      ${!email ? "cursor-not-allowed" : "cursor-pointer"}`}
-                            onClick={email ? handleEmailVerify : null}>
-                            Verify
-                          </p>
                         </div>
                         <ErrorMessage
                           name="companyEmail"
@@ -224,7 +274,7 @@ export default function ProfessionalDetails() {
                           type="text"
                           id="nomineeName"
                           name="nomineeName"
-                          placeholder="Enter nominee’s name"
+                          placeholder="Enter Guardian’s name"
                           className={styles.label_input_style}
                         />
                         <ErrorMessage
@@ -242,17 +292,27 @@ export default function ProfessionalDetails() {
                           {nomineeRelation?.map((item, index) => {
                             return (
                               <div
-                                className={`flex gap-3 items-center cursor-pointer w-full lg:w-[502px] `}
+                                className={`${styles.label_input_style}`}
                                 key={index.toString()}>
-                                <Field
-                                  type="radio"
-                                  name="nomineeRelation"
-                                  value={item}
-                                  className={styles.radio_button}
-                                />
-                                <p className="border w-full border-DDDDDF md:p-4 p-3 rounded-xl md:text-16 text-14 font-Poppins tracking-0.3 leading-6 text-71717A">
-                                  {item}
-                                </p>
+                                <label className={docStyle.radio_container}>
+                                  <input
+                                    type="radio"
+                                    name="nomineeRelation"
+                                    value={item}
+                                    checked={selectedOption === item}
+                                    onChange={() => {
+                                      setSelectedOption(item);
+                                      setFieldValue("nomineeRelation", item);
+                                    }}
+                                    className={docStyle.radio_input}
+                                  />
+                                  <span
+                                    className={`${docStyle.radio_checkmark} `}></span>
+                                  <span
+                                    className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                                    {item}
+                                  </span>
+                                </label>
                               </div>
                             );
                           })}
@@ -265,7 +325,9 @@ export default function ProfessionalDetails() {
                       </div>
 
                       <div className={styles.company_detail_wapper}>
-                        <label className={styles.label}>Nominee’s number</label>
+                        <label className={styles.label}>
+                          Guardian’s number
+                        </label>
 
                         <div
                           className={`flex gap-2 items-center ${styles.label_input_style}`}>
@@ -279,8 +341,8 @@ export default function ProfessionalDetails() {
                             type="number"
                             id="nomineeNumber"
                             name="nomineeNumber"
-                            placeholder="Enter nominee’s number"
-                            className="outline-none"
+                            placeholder="Enter 10 digit number"
+                            className="outline-none placeholder:text-71717A"
                           />
                         </div>
                         <ErrorMessage
@@ -295,11 +357,25 @@ export default function ProfessionalDetails() {
 
                 <button
                   type="submit"
-                  className={`${styles.proceed} 
-            `}>
-                  proceed
+                  className={`${styles.proceed} !hidden md:!flex`}>
+                  Proceed
                   <OutlineArrowRight color={"#222222"} />
                 </button>
+
+                <div className={styles.sticky_btn_wrapper}>
+                  <button
+                    type="submit"
+                    // onClick={() => {
+                    //   if (professionId === 1 && !verifiedEmail) {
+                    //     // showToastNotification("verify email first", 3);
+                    //     handleEmailVerify();
+                    //   }
+                    // }}
+                    className={`${styles.proceed} `}>
+                    Proceed
+                    <OutlineArrowRight color={"#222222"} />
+                  </button>
+                </div>
               </Form>
             )}
           </Formik>
@@ -307,15 +383,22 @@ export default function ProfessionalDetails() {
       )}
 
       {professionId === 2 && openGstSdk && (
-        <GstSdk openGstSdk={openGstSdk} setOpenGstSdk={setOpenGstSdk} />
+        <GstSdk
+          openGstSdk={openGstSdk}
+          setOpenGstSdk={setOpenGstSdk}
+          getDashboardDetailsApi={getDashboardDetailsApi}
+        />
       )}
-      <VerfiEmail
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        email={email}
-        recievedOtp={recievedOtp}
-        setVerifiedEmail={setVerifiedEmail}
-      />
+      {openModal && (
+        <VerfiEmail
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          email={email}
+          recievedOtp={recievedOtp}
+          setVerifiedEmail={setVerifiedEmail}
+          handleSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 }

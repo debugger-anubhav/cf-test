@@ -43,11 +43,12 @@ import {LiaMoneyBillWaveSolid} from "react-icons/lia";
 import {Skeleton} from "@mui/material";
 import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
-import AffordabilityWidget from "@/components/Cart/ShoppingCartSection/AffordabilityWidget";
-import {razorpayKey} from "../../../../appConfig";
+// import AffordabilityWidget from "@/components/Cart/ShoppingCartSection/AffordabilityWidget";
+// import {razorpayKey} from "../../../../appConfig";
 import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {baseInstance} from "@/network/axios";
+import Banner from "../../Banner";
 
 const ProductDetails = ({params}) => {
   const {checkAuthentication} = useAuthentication();
@@ -572,6 +573,9 @@ const ProductDetails = ({params}) => {
           </div>
         ))}
       </div>
+
+      {prodDetails[0]?.banner && <Banner image={prodDetails[0]?.banner} />}
+
       <div className={styles.main_section}>
         <div
           className={`${styles.carousel_wrapper} ${
@@ -890,7 +894,7 @@ const ProductDetails = ({params}) => {
           {console.log(durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])}
           {console.log(durationArray[duration.currentIndex]?.attr_price * durationArray[duration.currentIndex]?.attr_name?.split(" ")[0])} */}
 
-          {durationArray.length > 0 && (
+          {/* {durationArray.length > 0 && (
             <AffordabilityWidget
               razorpayKey={razorpayKey}
               billBreakup={
@@ -898,7 +902,7 @@ const ProductDetails = ({params}) => {
                 durationArray[duration.currentIndex]?.attr_name?.split(" ")[0]
               }
             />
-          )}
+          )} */}
 
           <div className={styles.kyc_wrapper}>
             <div className={`w-100 h-100 absolute z-10`} />

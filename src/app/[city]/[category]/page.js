@@ -150,13 +150,11 @@ export default async function Page(params) {
               <TrendingProducts params={propParams} />
               <OffersAndCoupons />
               <RentNowBanner params={propParams} />
-
               <DownloadForMobile />
               <PreDesignCombos />
               <HasselFreeServicesCards />
               <LimetedPreiodDiscount />
               <NewlyLaunched />
-
               <TryCityMax />
               <CustomerRating />
               <MediaCoverage />

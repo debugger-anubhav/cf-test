@@ -6,10 +6,10 @@
   @apply grow pb-6 w-full relative md:ml-16;
 }
 .info_box {
-  @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8;
+  @apply w-full lg:w-[502px] flex p-4 border border-[#67AF7B] bg-[#F6FBF7] rounded-xl mb-8 items-center;
 }
 .info {
-  @apply text-71717A font-Poppins font-medium md:text-base text-14 md:leading-6 leading-5 tracking-0.3;
+  @apply pl-2 text-71717A font-Poppins font-medium md:text-base text-14 md:leading-6 leading-5 tracking-0.3;
 }
 .start_kyc_btn {
   @apply flex py-4 px-7 items-center gap-2  text-222 mt-6 font-Poppins font-medium text-14 md:text-base md:leading-6 leading-5 tracking-0.3 rounded-lg w-full md:w-fit justify-center;
@@ -28,11 +28,26 @@
   @apply text-71717A md:leading-6 leading-[21px] md:text-16 text-14 font-Poppins tracking-0.3 pt-3;
 }
 .qr_img {
-  @apply w-[180px] md:flex hidden;
+  @apply w-[180px] md1:flex hidden;
 }
 .track_btn_wrapper {
-  @apply flex md:hidden w-full gap-4;
+  @apply flex md1:hidden w-full gap-4;
 }
 .app_btn {
   @apply flex gap-2 text-base font-Poppins font-medium leading-6 text-222 border-[2px] border-71717A bg-white rounded-lg w-1/2 p-3 items-center justify-center;
+}
+
+.instruction_box {
+  @apply flex flex-col w-full lg:w-[502px] border border-DDDDDF rounded-xl p-4 mb-8;
+}
+
+.instruction_heading {
+  @apply flex font-Poppins text-71717A font-medium text-14 md:text-16 leading-5 tracking-0.3 mb-3;
+}
+
+.instruction_point {
+  @apply font-Poppins text-71717A text-12 md:text-14 leading-4 tracking-0.3;
+}
+.rightDrawer {
+  @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
 }

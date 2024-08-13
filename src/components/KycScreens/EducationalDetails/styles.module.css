@@ -1,17 +1,17 @@
 .wrapper {
-  @apply mt-8 w-full;
+  @apply mt-8 w-full pb-[120px] md:pb-0;
 }
 .heading {
   @apply font-Poppins md:text-24 text-18 whitespace-nowrap text-45454A font-medium tracking-0.3 flex gap-2  items-center;
 }
 .label_input_style {
-  @apply bg-white border w-full lg:w-[502px] rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-222 outline-none placeholder:text-16;
+  @apply bg-white border w-full lg:w-[502px] rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-71717A outline-none placeholder:text-16;
 }
 .label {
   @apply text-71717A font-Poppins md:text-16 text-14;
 }
 .proceed {
-  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] w-fit px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 
 .detail_wapper {
@@ -120,4 +120,7 @@
   100% {
     opacity: 1;
   }
+}
+.sticky_btn_wrapper {
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-0 pb-6 w-full right-0;
 }

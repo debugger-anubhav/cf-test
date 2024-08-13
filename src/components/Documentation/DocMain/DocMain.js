@@ -1,18 +1,13 @@
 import React, {useState, useEffect} from "react";
 import styles from "./DocMain.module.css";
 import MenuList from "@/components/Common/MenuList";
-
-// import DocumentaionInitialScreen from "../InitialScreen/Initialscreen";
 import DocSidebar from "../Sidebar/DocSidebar";
 import KycHeader from "../KycHeader/KycHeader";
-// import KYCGetCivilScore from "../KYCGetCivilScore/KYCGetCivilScore";
-// import KYCSalary from "../KYCSalary/KYCSalary";
-// import KYCAddress from "../KYCAddress/KYCAddress";
-// import KYCCard from "../KYCCard/KYCCard";
-// import KYC100 from "../KYC100/KYC100";
+
 import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {useDispatch, useSelector} from "react-redux";
+import SearchLoader from "../../KycScreens/Dashboard/SearchLoader";
 import {
   getOrderId,
   setKycScreenName,
@@ -27,16 +22,15 @@ import SelectOptDrawer from "../../KycScreens/SelecOptDrawer";
 import {Drawer} from "@mui/material";
 import WorkProfession from "../../KycScreens/WorkProfession";
 import DashboardComponent from "@/components/KycScreens/Dashboard/index";
-import FinancialInfo from "@/components/KycScreens/FinancialInformation/index";
 import PersonalDetails from "../../KycScreens/PersonalDetails/index";
-import ProfessionalDetails from "../../KycScreens/ProfessionalDetails";
-import EducationalDetails from "@/components/KycScreens/EducationalDetails";
-import AutoPay from "@/components/KycScreens/AutoPay";
 import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
+import HandleOldKyc from "../../KycScreens/HandleOldKyc";
+import {useRouter} from "next/navigation";
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const orderIdFromOrderpage = useSelector(state => state.order.orderId);
   const kycScreen = useSelector(state => state.kycPage);
@@ -46,6 +40,7 @@ const DocMain = () => {
   const [tenure, setTenure] = useState();
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
+  const [buttonName, setButtonName] = useState("Start my KYC now");
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -58,11 +53,6 @@ const DocMain = () => {
     kycScreen.selectedDataForKyc,
   );
   const [currentScreen, setCurrentScreen] = useState(kycScreen.kycScreenName);
-
-  // const handleGetOrderId = option => {
-  //   dispatch(getOrderId(option?.dealCodeNumber));
-  //   handleKycState(option?.dealCodeNumber);
-  // };
 
   const userid = decrypt(getLocalStorage("_ga"));
 
@@ -117,16 +107,26 @@ const DocMain = () => {
   const [loadingSkeleton, setLoadingSkeleton] = useState(true);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // const openModal = () => {
-  //   setOpenDrawer(true);
-  // };
   const userId = decrypt(getLocalStorage("_ga"));
-
   const fetchOrdersDetails = filter => {
     baseInstance
       .get(endPoints.kycPage.getOrderIds(userId))
       .then(res => {
         setOrdersData(res?.data?.data);
+
+        if (orderIdFromUrl) {
+          const filteredData = res?.data?.data?.filter(
+            i => i.dealCodeNumber === orderIdFromUrl,
+          );
+          if (filteredData) {
+            dispatch(setSelectedDataForKyc(filteredData?.[0]));
+            const index = res?.data?.data?.findIndex(
+              deal => deal.dealCodeNumber === filteredData?.[0]?.dealCodeNumber,
+            );
+            setSelectedOption(index);
+          }
+        }
+
         setLoadingSkeleton(false);
       })
       .catch(err => {
@@ -136,28 +136,43 @@ const DocMain = () => {
   };
 
   const handleStartKyc = () => {
-    if (orderIdFromUrl) {
-      checkSelectedProfession();
-    } else if (selectedOption === null) {
-      setOpenDrawer(true);
+    const order_id = selectedOrderId?.dealCodeNumber;
+
+    if (order_id) {
+      baseInstance
+        .get(endPoints.kycPage.checkOldKyc(userId, order_id))
+        .then(res => {
+          if (res?.data?.data?.newKycStatus) {
+            if (selectedOption === null) {
+              setOpenDrawer(true);
+            }
+
+            if (buttonName === "Check KYC status") {
+              dispatch(setKycScreenName("dashboard"));
+            } else {
+              dispatch(setKycScreenName("workProfession"));
+            }
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+          } else {
+            // console.log("show old kyc");
+            window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+            dispatch(setKycScreenName("oldKycFlow"));
+          }
+        })
+        .catch(err => console.log(err));
     } else {
-      checkSelectedProfession();
+      setOpenDrawer(true);
     }
   };
 
-  const checkSelectedProfession = () => {
-    let order_id = selectedOrderId?.dealCodeNumber;
-    if (orderIdFromUrl && !selectedOrderId) {
-      order_id = orderIdFromUrl;
-    }
+  const checkSelectedProfession = order_id => {
     baseInstance
       .get(endPoints.kycPage.checkProfessionSelected(userId, order_id))
       .then(res => {
-        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
         if (res?.data?.data?.status) {
-          dispatch(setKycScreenName("dashboard"));
+          setButtonName("Check KYC status");
         } else {
-          dispatch(setKycScreenName("workProfession"));
+          setButtonName("Start my KYC now");
         }
       })
       .catch(err => console.log(err));
@@ -197,6 +212,22 @@ const DocMain = () => {
     setSelectedOrderId(kycScreen.selectedDataForKyc);
   }, [kycScreen]);
 
+  useEffect(() => {
+    let order_id = selectedOrderId?.dealCodeNumber;
+    if (orderIdFromUrl && !selectedOrderId) {
+      order_id = orderIdFromUrl;
+    }
+    if (selectedOrderId) {
+      const newURL = new URL(window?.location?.href);
+      newURL?.searchParams?.set("order_id", order_id);
+      window?.history?.pushState({}, "", newURL.toString());
+    }
+
+    if (order_id) {
+      checkSelectedProfession(order_id);
+    }
+  }, [selectedOrderId]);
+
   return (
     <div>
       <MenuList hasMb={false} />
@@ -217,54 +248,33 @@ const DocMain = () => {
               />
               {/* //Info box  */}
               <div className={styles.info_box}>
+                <SearchLoader width={"40px"} height={"40px"} />
                 <p className={styles.info}>
                   Complete your KYC quickly for faster product delivery.
                 </p>
               </div>
 
-              {/* select box  */}
-              {/* <div onClick={() => setOpenDrawer(true)}>
-            {kycState === 0 ? (
-              <KYCGetCivilScore handleKycState={id => handleKycState(id)} />
-            ) : kycState === 1 ? (
-              <KYCSalary
-                cibilDocsData={cibilDocsData}
-                handleKycState={id => handleKycState(id)}
-              />
-            ) : kycState === 2 ? (
-              <KYCAddress
-                handleKycState={id => handleKycState(id)}
-                cibilDocsData={cibilDocsData}
-                step={
-                  isUpfrontPayment
-                    ? tenure >= 9
-                      ? 1
-                      : creditScore < 650
-                        ? 3
-                        : 2
-                    : creditScore < 650
-                      ? 2
-                      : 3
-                }
-              />
-            ) : kycState === 3 ? (
-              <KYCCard handleKycState={id => handleKycState(id)} />
-            ) : kycState === 4 ? (
-              <KYC100 handleKycState={id => handleKycState(id)} />
-            ) : (
-              <DocumentaionInitialScreen
-                handleKycState={option =>
-                  handleKycState(option?.dealCodeNumber)
-                }
-              />
-            )}
-          </div> */}
+              {/* insturction box  */}
+              <div className={styles.instruction_box}>
+                <div className={styles.instruction_heading}>
+                  Keep your documents handy
+                </div>
+                <p className={`${styles.instruction_point} pb-2`}>
+                  1. Pan card
+                </p>
+                <p className={styles.instruction_point}>
+                  2. Adhar card/ Passport/ Driving license/ Voter ID
+                </p>
+              </div>
+
               <div className="flex text-71717A font-Poppins md:text-base text-14 pb-1">
                 Select an order to view its documentation status
               </div>
-              <div onClick={() => setOpenDrawer(true)}>
-                <div className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer">
-                  {orderIdFromUrl ? (
+              <div>
+                <div
+                  className="flex justify-between items-center outline-none font-Poppins border border-[#dddddf] rounded-xl px-4 py-3 text-14 text-71717A w-full lg:w-[502px] cursor-pointer"
+                  onClick={() => setOpenDrawer(true)}>
+                  {orderIdFromUrl && selectedOption === null ? (
                     <span>#{orderIdFromUrl}</span>
                   ) : (
                     <span>
@@ -285,7 +295,8 @@ const DocMain = () => {
                   selectedOption === null ? "bg-FFDF85 " : "bg-btn-primary "
                 } ${orderIdFromUrl && "bg-btn-primary"}`}
                 onClick={handleStartKyc}>
-                Start my KYC now{" "}
+                {/* Start my KYC now{" "} */}
+                {buttonName}
                 <ArrowForw
                   color={"#222222"}
                   size={20}
@@ -312,7 +323,7 @@ const DocMain = () => {
                       }
                       width={40}
                       height={20}
-                      className="md:w-10 w-5 h-5 "
+                      className=" w-5 h-5 "
                       alt="mobile-icon"
                     />{" "}
                     Fast-Track Your Orders!
@@ -331,7 +342,13 @@ const DocMain = () => {
                   </p>
                 </div>
                 <div className={styles.track_btn_wrapper}>
-                  <button className={styles.app_btn}>
+                  <button
+                    className={styles.app_btn}
+                    onClick={() =>
+                      router.push(
+                        "https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice",
+                      )
+                    }>
                     <img
                       src={
                         "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/ios-icn.svg"
@@ -340,7 +357,13 @@ const DocMain = () => {
                     />
                     ios
                   </button>
-                  <button className={styles.app_btn}>
+                  <button
+                    className={styles.app_btn}
+                    onClick={() =>
+                      router.push(
+                        "https://cityfurnish.com/v1/get-app-on-devices/getAppOnDevice",
+                      )
+                    }>
                     <img
                       src={
                         "https://d3juy0zp6vqec8.cloudfront.net/images/cfnewicons/android-icn.svg"
@@ -354,14 +377,10 @@ const DocMain = () => {
             </>
           )}
 
-          {currentScreen === "dashboard" && <DashboardComponent />}
           {currentScreen === "currentAddress" && (
             <CurrentAddressProof cibilDocsData={cibilDocsData} />
           )}
           {currentScreen === "socialMedia" && <SocialMediaLogin />}
-          {currentScreen === "professionalDetails" && <ProfessionalDetails />}
-          {currentScreen === "educationalDetails" && <EducationalDetails />}
-          {currentScreen === "autoPay" && <AutoPay />}
 
           {currentScreen === "personalDetails" && (
             <div className="mt-8">
@@ -372,17 +391,17 @@ const DocMain = () => {
             </div>
           )}
 
-          {currentScreen === "financialInfo" && (
-            <div className="mt-8">
-              <FinancialInfo handleKycState={id => handleKycState(id)} />
-            </div>
+          {(currentScreen === "congratulation" ||
+            currentScreen === "financialInfo" ||
+            currentScreen === "educationalDetails" ||
+            currentScreen === "professionalDetails" ||
+            currentScreen === "autoPay" ||
+            currentScreen === "dashboard") && <DashboardComponent />}
+          {currentScreen === "oldKycFlow" && (
+            <HandleOldKyc
+              selectOrderIdForKyc={selectedOrderId?.dealCodeNumber}
+            />
           )}
-
-          {/* {currentScreen !== "selectOrderId" && (
-            <ProgressSection progress={progressPercentage} />
-          )} */}
-
-          {currentScreen === "congratulation" && <DashboardComponent />}
         </div>
 
         <div>
@@ -394,9 +413,7 @@ const DocMain = () => {
                 closeModal();
                 setOpenDrawer(false);
               }}
-              classes={{
-                paper: `${styles.common_drawer_wrapper} pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full rounded-t-[20px] md:rounded-none max-h-[90%] md:max-h-full overflow-visible`,
-              }}
+              classes={{paper: styles.rightDrawer}}
               transitionDuration={{enter: 400, exit: 200}}>
               <SelectOptDrawer
                 loadingSkeleton={loadingSkeleton}
