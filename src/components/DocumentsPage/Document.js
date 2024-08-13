@@ -9,6 +9,7 @@ import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
 import CurrentAddressProof from "../KycScreens/CurrentAddProof";
 import Image from "next/image";
 import ApproveConfirm from "./ApproveConfirm";
+import {showToastNotification} from "../Common/Notifications/toastUtils";
 // import SignIn from "./Signin";
 // import {useDispatch} from "react-redux";
 
@@ -44,6 +45,9 @@ const Document = () => {
       .get(endPoints.documentationApprove(orderId))
       .then(res => {
         setApiData(res?.data?.data);
+        if (!res?.data?.data?.status) {
+          showToastNotification(res?.data?.data?.message, 3);
+        }
       })
       .catch(err => console.log(err?.message || "some error"));
   };
