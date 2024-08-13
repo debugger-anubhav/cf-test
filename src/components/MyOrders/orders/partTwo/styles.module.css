@@ -89,4 +89,3 @@
 .need_help_txt {
   @apply text-5774AC text-14 xl:text-16 underline cursor-pointer tracking-desc xl:tracking-0.3 min-w-fit;
 }
-
