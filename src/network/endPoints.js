@@ -49,6 +49,7 @@ export const endPoints = {
   getFinacialDocList: "fc-cibil-require-docs/getFinancialDocLists",
   getAndSaveCibilScore: "fc-crif-scores/getAndSaveCibilScore",
   categoryMetaData: "fc-city-category-datas/getCategoryPageData",
+  loginAdmin: "fc-kycs/loginAdmin",
   getHomeBanners: cityId => `fc-categories/getHomeBanners?cityId=${cityId} `,
   seoMetaData: (cityName, catId) =>
     `fc-city-category-seo-data/getSeoPageMetaData?cityName=${cityName}&categoryId=${catId}`,

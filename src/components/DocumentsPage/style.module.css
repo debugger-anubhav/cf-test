@@ -145,3 +145,32 @@
 .credit_link {
   @apply text-5774AC cursor-pointer font-Poppins text-16 tracking-0.3 leading-6 underline ml-1;
 }
+
+.plain_btn {
+  @apply text-14 whitespace-nowrap lg:text-16 tracking-desc lg:tracking-0.3 px-8 lg:h-[56px] h-[48px] items-center w-full  bg-F6B704 text-222 font-medium font-Poppins flex rounded-lg justify-center mt-8;
+}
+.Approved_Btn {
+  @apply text-14 lg:text-16 whitespace-nowrap tracking-desc lg:tracking-0.3 lg:mt-8 mt-4 rounded-lg bg-white  font-medium  text-71717A w-full px-8 h-12 min-h-[3rem] lg:min-h-[3.5rem] lg:h-14 flex items-center justify-center gap-[10px] border-71717A  mb-4 outline-none font-Poppins mx-0 border-2;
+}
+.customModal {
+  @apply md:!pl-12 md:!pr-[89px] md:!py-12 w-full md:!w-[497px] !h-[216px] !rounded-none !outline-none !border-none;
+  top: 50% !important;
+  left: 50% !important ;
+  transform: translate(-50%, -50%) !important;
+}
+.customCloseButton {
+  @apply !top-12 !right-8 !outline-none !border-none !w-[25px] !h-[25px];
+}
+
+.modal_custom {
+  @apply !border-none !outline-none;
+}
+.label_input_style {
+  @apply bg-white border w-full  rounded-xl font-Poppins md:text-16 text-14 font-normal py-3 px-4 placeholder:text-71717A outline-none placeholder:text-16;
+}
+.label {
+  @apply text-71717A font-Poppins md:text-16 text-14;
+}
+.proceed {
+  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+}

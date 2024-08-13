@@ -260,18 +260,6 @@ export default function DashboardComponent() {
     getDashboardDetailsApi();
   }, []);
 
-  // useEffect(() => {
-  //   setOrderDate(dashboardDetails?.orderDate);
-  //   setDisableKycStatusBtn(dashboardDetails?.kycStatus === "Under Review");
-  //   setDisableKycStatusBtn(
-  //     dashboardDetails?.kycStatus === "Verified" &&
-  //       dashboardDetails?.zoho_sub_status !== "Delivery Scheduled",
-  //   );
-  //   setDisableKycStatusBtn(
-  //     dashboardDetails?.zoho_sub_status === "Out for Delivery",
-  //   );
-  // }, [dashboardDetails]);
-
   useEffect(() => {
     if (dashboardDetails) {
       setOrderDate(dashboardDetails.orderDate);

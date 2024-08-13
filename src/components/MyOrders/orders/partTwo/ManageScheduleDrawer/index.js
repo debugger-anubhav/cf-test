@@ -1,16 +1,17 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
-import {Close} from "@/assets/icon";
-import {Drawer} from "@mui/material";
+import { Close } from "@/assets/icon";
+import { Drawer } from "@mui/material";
 
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {format, parse} from "date-fns";
-import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import { baseInstance } from "@/network/axios";
+import { endPoints } from "@/network/endPoints";
+import { format, parse } from "date-fns";
+import { decrypt } from "@/hooks/cryptoUtils";
+import { getLocalStorage } from "@/constants/constant";
 
-const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
+const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
+
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -38,8 +39,13 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       deal_id: orderId,
       user_id: userId,
     };
+    const bodyA = {
+      deal_id: orderId,
+      user_id: userId,
+      zoho_case_id: ticketID
+    }
     baseInstance
-      .post(endPoints.myOrdersPage.getDeliverySlots, body)
+      .post(endPoints.myOrdersPage.getDeliverySlots, page === "PageSR" ? bodyA : body)
       .then(res => {
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
@@ -60,6 +66,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       slot: `${selectedDate} 09:00:00`,
       orderId,
       zohoCaseId: slotData?.zohoCaseId,
+      updateSRSlot: page == "PageSR" ? true : false
     };
     try {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
@@ -71,7 +78,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
 
   useEffect(() => {
     getDeliverySlots();
-  }, []);
+  }, [ticketID]);
 
   const ModalContent = () => (
     <>
@@ -97,9 +104,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
               }}>
               <div className={styles.outer_circle}>
                 <div
-                  className={`${
-                    selectedDate === item.date ? styles.inner_circle : ""
-                  }`}></div>
+                  className={`${selectedDate === item.date ? styles.inner_circle : ""
+                    }`}></div>
               </div>
               <p className={styles.date}>
                 {format(new Date(item?.date), "do")}
@@ -127,9 +133,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
         <button
           disabled={!selectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
-            styles.modify_btn
-          }`}>
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn
+            }`}>
           Modify
         </button>
       </div>
@@ -143,8 +148,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
           anchor={"bottom"}
           open={isModalOpen}
           onClose={closeModal}
-          classes={{paper: styles.bottomDrawer}}
-          transitionDuration={{enter: 200, exit: 200}}>
+          classes={{ paper: styles.bottomDrawer }}
+          transitionDuration={{ enter: 200, exit: 200 }}>
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
