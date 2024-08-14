@@ -203,17 +203,17 @@ const Document = () => {
             <h1 className={style.heading}>Order: #{orderId}</h1>
             <p className={style.sub_text}>
               Tenure:{" "}
-              <span className="text-222 pl-1">
+              <span className="text-222 px-1">
                 {apiData?.userData?.fc_subproducts?.attr_name}
               </span>
               . Paid:
-              <span className="text-222 pl-1">
+              <span className="text-222 px-1">
                 {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
               </span>
               {additionalData?.paypal_transaction_id && (
                 <>
                   . Payment Id:
-                  <span className="text-222 pl-1">
+                  <span className="text-222 px-1">
                     {additionalData?.paypal_transaction_id}
                   </span>{" "}
                 </>
@@ -221,7 +221,7 @@ const Document = () => {
               {additionalData?.paid_datetime && (
                 <>
                   . Paid on:
-                  <span className="text-222 pl-1">
+                  <span className="text-222 px-1">
                     {format(
                       new Date(additionalData?.paid_datetime),
                       "dd-MM-yyyy",
