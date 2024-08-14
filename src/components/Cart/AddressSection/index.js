@@ -450,7 +450,8 @@ const AddressSection = () => {
 
               <p className={styles.saved_address}>{primaryAddress?.address1}</p>
               <p className={styles.saved_address}>
-                {primaryAddress?.city}, {primaryAddress?.state}
+                {primaryAddress?.city}, {primaryAddress?.state} -{" "}
+                {primaryAddress?.postal_code}
               </p>
 
               {!cityName.includes(primaryAddress?.city) && (
@@ -603,44 +604,48 @@ const AddressSection = () => {
               </div>
             </div>
 
-            <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
-              <button
-                // disabled={
-                //   (isOfflineCustomer !== 1 && !primaryAddress) ||
-                //   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
-                // }
-                onClick={() => {
-                  if (
-                    (isOfflineCustomer !== 1 && !primaryAddress) ||
-                    (isOfflineCustomer !== 1 &&
-                      haveGstNumber &&
-                      gstNumber === "")
-                  ) {
-                    showToastNotification(
-                      "Please save your address before proceeding.",
-                      3,
-                    );
-                  } else if (isOfflineCustomer === 1) {
-                    setLoading(true);
-                    checkPostalCode("offlineCustomer");
-                    // checkCartQunatity("offlineCustomer");
-                  } else {
-                    setLoading(true);
-                    checkPostalCode(0);
-                  }
-                }}
-                className={`${
-                  isOfflineCustomer !== 1 &&
-                  haveGstNumber &&
-                  gstNumber === "" &&
-                  "!cursor-not-allowed"
-                } ${!primaryAddress && "!cursor-not-allowed"} ${
-                  otherStyles.proceed_button
-                }`}>
-                Proceed to Payment
-                <ArrowForw size={19} color={"#222"} />
-              </button>
-            </div>
+            {addressArray?.length > 0 &&
+            primaryAddress !== undefined &&
+            isOfflineCustomer !== 1 ? (
+              <div className="fixed lg:static bottom-0 left-0 w-full p-4 lg:p-0 shadow-sticky_btn lg:shadow-none bg-white ">
+                <button
+                  // disabled={
+                  //   (isOfflineCustomer !== 1 && !primaryAddress) ||
+                  //   (isOfflineCustomer !== 1 && haveGstNumber && gstNumber === "")
+                  // }
+                  onClick={() => {
+                    if (
+                      (isOfflineCustomer !== 1 && !primaryAddress) ||
+                      (isOfflineCustomer !== 1 &&
+                        haveGstNumber &&
+                        gstNumber === "")
+                    ) {
+                      showToastNotification(
+                        "Please save your address before proceeding.",
+                        3,
+                      );
+                    } else if (isOfflineCustomer === 1) {
+                      setLoading(true);
+                      checkPostalCode("offlineCustomer");
+                      // checkCartQunatity("offlineCustomer");
+                    } else {
+                      setLoading(true);
+                      checkPostalCode(0);
+                    }
+                  }}
+                  className={`${
+                    isOfflineCustomer !== 1 &&
+                    haveGstNumber &&
+                    gstNumber === "" &&
+                    "!cursor-not-allowed"
+                  } ${!primaryAddress && "!cursor-not-allowed"} ${
+                    otherStyles.proceed_button
+                  }`}>
+                  Proceed to Payment
+                  <ArrowForw size={19} color={"#222"} />
+                </button>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>

@@ -79,7 +79,7 @@
   @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
 }
 .save_btn {
-  @apply font-Poppins mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
+  @apply font-Poppins mt-8 bg-F6B704 font-medium text-222 rounded-lg text-14 xl:text-16 tracking-0.3 leading-normal w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
 }
 .right_div {
   @apply flex flex-col 4xl:flex-row gap-6 pb-[100px] lg:pb-0;
