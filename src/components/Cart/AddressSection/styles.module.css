@@ -38,7 +38,7 @@
   @apply mt-8 xl:mt-10;
 }
 .new_add_head {
-  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mb-4;
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 flex items-center;
 }
 .add_new_info {
   @apply rounded-lg py-1 px-2 mt-3 gap-1 flex items-center w-fit;
@@ -50,6 +50,9 @@
 }
 .form_field {
   @apply mt-4 w-full xl:w-[516px] macbook1:w-[537px];
+}
+.form_field_drawer {
+  @apply mt-4 w-full xl:w-[466px];
 }
 .form_label {
   @apply font-Poppins text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
@@ -164,3 +167,11 @@
     margin-right: -14.28%;
   }
 } */
+
+.btn {
+  @apply bg-fff  text-16 font-medium text-71717A flex gap-[10px] px-8 rounded-lg justify-center items-center h-14  w-full;
+  border: 2px solid var(--grey-grey-600, #71717a);
+}
+.btn_wrapper {
+  @apply bottom-4 py-4 xl:pt-8 xl:pb-6 w-full xl:w-[466px] bg-fff absolute;
+}
