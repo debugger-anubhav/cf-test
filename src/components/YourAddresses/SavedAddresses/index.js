@@ -102,7 +102,7 @@ const SavedAddress = ({setTab, editAddress}) => {
                 {item.address1}
               </p>
               <p className={styles.address}>
-                {item.city}, {item.state}
+                {item.city} - {item.state}
               </p>
             </div>
           );
