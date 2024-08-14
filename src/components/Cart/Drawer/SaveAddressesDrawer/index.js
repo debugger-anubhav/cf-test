@@ -173,12 +173,12 @@ export const AddressDrawerContent = ({
                     }`}></div>
                 </div>
                 <h2 className={styles.name}>
-                  {item.full_name}, {item.phone}
+                  {item?.full_name}, {item?.phone}
                 </h2>
               </div>
               <p className={`truncate ${styles.address}`}>{item.address1}</p>
               <p className={styles.address}>
-                {item.city}, {item.state}
+                {item?.city}, {item?.state} - {item?.postal_code}
               </p>
             </div>
           ))}
