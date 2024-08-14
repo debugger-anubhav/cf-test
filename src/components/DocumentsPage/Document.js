@@ -11,6 +11,7 @@ import Image from "next/image";
 import ApproveConfirm from "./ApproveConfirm";
 // import SignIn from "./Signin";
 // import {useDispatch} from "react-redux";
+import {format} from "date-fns";
 
 const Document = () => {
   // const dispatch = useDispatch();
@@ -209,6 +210,25 @@ const Document = () => {
               <span className="text-222 pl-1">
                 {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
               </span>
+              {additionalData?.paypal_transaction_id && (
+                <>
+                  . Payment Id:
+                  <span className="text-222 pl-1">
+                    {additionalData?.paypal_transaction_id}
+                  </span>{" "}
+                </>
+              )}
+              {additionalData?.paid_datetime && (
+                <>
+                  . Paid on:
+                  <span className="text-222 pl-1">
+                    {format(
+                      new Date(additionalData?.paid_datetime),
+                      "dd-MM-yyyy",
+                    )}
+                  </span>
+                </>
+              )}
             </p>
           </div>
           <div className={style.profession_row}>
@@ -224,7 +244,7 @@ const Document = () => {
           </div>
         </div>
 
-        <div className={`${style.top_div_wrapper} !items-end `}>
+        <div className={`${style.top_div_wrapper} !items-end mt-8`}>
           <div>
             <div className={style.sub_heading}>
               Documentation stage:
@@ -261,6 +281,23 @@ const Document = () => {
                     )}
                   </span>
                 </p>
+                <p className={style.sub_text}>
+                  Ticket Id:
+                  <span className="text-222 pl-1">
+                    {" "}
+                    {additionalData?.desk_ticket_id}
+                  </span>
+                </p>
+                <p className={style.sub_text}>
+                  Hyperverge -
+                  <a
+                    href={hypervergelink}
+                    target="_blank"
+                    className={`${style.credit_link}`}
+                    rel="noreferrer">
+                    Report link
+                  </a>
+                </p>
               </div>
             )}
           </div>
@@ -296,14 +333,6 @@ const Document = () => {
                 Report link
               </a>
             </p>
-
-            <a
-              href={hypervergelink}
-              target="_blank"
-              className={`${style.credit_link}`}
-              rel="noreferrer">
-              Hyperverge link
-            </a>
           </div>
         </div>
 
