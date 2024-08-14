@@ -3,7 +3,11 @@ import styles from "./styles.module.css";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import {PopUpArrow, DownPopUpArrow, ForwardArrow} from "@/assets/icon";
 import {cityUrl} from "../../../../appConfig";
-import {handleWheel, keyPressForContactField} from "@/constants/constant";
+import {
+  getLocalStorage,
+  handleWheel,
+  keyPressForContactField,
+} from "@/constants/constant";
 import OrderTypeDrawer from "./OrderTypeDrawer";
 import * as Yup from "yup";
 import {useSelector} from "react-redux";
@@ -21,9 +25,17 @@ export default function NewAddressForm({
   const isOfflineCustomer = useSelector(
     state => state.cartPageData.isOfflineCustomer,
   );
+  const phoneNumber = getLocalStorage("user_number");
   const validationSchema = Yup.object({
     fullName: Yup.string().required("Full name is required"),
     contactNumber: Yup.string()
+      .test(
+        "not-same-as-phoneNumber",
+        "Contact number should not be the same as the registered number",
+        function (value) {
+          return value !== phoneNumber;
+        },
+      )
       .test(
         "no-spaces-special-characters",
         "Please enter a valid 10 digit phone number without spaces or special characters",
