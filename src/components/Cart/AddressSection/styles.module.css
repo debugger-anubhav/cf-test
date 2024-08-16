@@ -35,10 +35,10 @@
   @apply text-12 xl:text-14 text-45454A tracking-desc truncate;
 }
 .new_address_wrapper {
-  @apply mt-8 xl:mt-10;
+  @apply mt-4;
 }
 .new_add_head {
-  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 mb-4;
+  @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 flex items-center;
 }
 .add_new_info {
   @apply rounded-lg py-1 px-2 mt-3 gap-1 flex items-center w-fit;
@@ -50,6 +50,9 @@
 }
 .form_field {
   @apply mt-4 w-full xl:w-[516px] macbook1:w-[537px];
+}
+.form_field_drawer {
+  @apply mt-4 w-full xl:w-[466px];
 }
 .form_label {
   @apply font-Poppins text-71717A text-14 xl:text-16 tracking-desc xl:tracking-0.3 leading-normal;
@@ -76,7 +79,7 @@
   @apply text-[#D96060] text-12 leading-4 tracking-0.24 mt-1;
 }
 .save_btn {
-  @apply font-Poppins mt-8 border-2 rounded-lg font-medium border-71717A text-71717A text-14 xl:text-16 tracking-0.3 leading-normal w-[200px] lg:w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
+  @apply font-Poppins mt-8 bg-F6B704 font-medium text-222 rounded-lg text-14 xl:text-16 tracking-0.3 leading-normal w-full xl:w-[516px] macbook:w-[537px] h-12 lg:h-14 flex justify-center items-center;
 }
 .right_div {
   @apply flex flex-col 4xl:flex-row gap-6 pb-[100px] lg:pb-0;
@@ -164,3 +167,10 @@
     margin-right: -14.28%;
   }
 } */
+
+.btn {
+  @apply bg-F6B704 font-medium text-222  text-16 flex gap-[10px] px-8 rounded-lg justify-center items-center h-14  w-full;
+}
+.btn_wrapper {
+  @apply bottom-4 py-4 xl:pt-8 lg:pb-6 w-full xl:w-[466px]  bg-white  absolute pb-28;
+}

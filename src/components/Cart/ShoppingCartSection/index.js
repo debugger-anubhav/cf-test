@@ -55,6 +55,7 @@ import Image from "next/image";
 import {RiSparklingFill} from "react-icons/ri";
 import {Skeleton} from "@mui/material";
 import Link from "next/link";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 const ShoppingCartSection = () => {
   const {checkAuthentication} = useAuthentication();
@@ -95,6 +96,7 @@ const ShoppingCartSection = () => {
   const [isDeletedProduct, setIsDeletedProduct] = useState(false);
   const [quantityButton, setQuantityButton] = useState("enable");
   const [minamountf, setMinamountf] = useState(0);
+  const [simpleLoader, setSimpleLoader] = useState(false);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const tempUserId = decryptBase64(getLocalStorage("tempUserID"));
@@ -380,8 +382,11 @@ const ShoppingCartSection = () => {
 
   const handleCheckLogin = () => {
     if (isLogin) {
+      setSimpleLoader(true);
       if (userDetails?.full_name && userDetails?.email) {
         dispatch(setShoppingCartTab(1));
+        window.scrollTo({top: 0, left: 0, behavior: "smooth"});
+        setSimpleLoader(false);
         const eventItems = [];
         cartItems?.forEach((product, index) => {
           const item = {
@@ -404,6 +409,7 @@ const ShoppingCartSection = () => {
       } else {
         setIsSetupProfile(true);
         toggleLoginModal();
+        setSimpleLoader(false);
       }
     } else toggleLoginModal();
   };
@@ -1112,6 +1118,7 @@ const ShoppingCartSection = () => {
                     // dispatch(setShoppingCartTab(1));
                     // CheckProductQuantity();
                   }}>
+                  {simpleLoader && <LoaderComponent loading={simpleLoader} />}
                   {isLogin
                     ? userDetails?.full_name && userDetails?.email
                       ? "Proceed"
