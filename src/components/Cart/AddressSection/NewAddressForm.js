@@ -85,6 +85,7 @@ export default function NewAddressForm({
     }),
     email: Yup.string()
       .email()
+      .required("Please enter a valid email address.")
       .when("offlineCustomer", {
         is: true,
         then: () =>
@@ -138,7 +139,8 @@ export default function NewAddressForm({
         }}>
         {formik => (
           <Form className={styles.form_wrapper}>
-            <div className={styles.form_wrapper}>
+            <div
+              className={`${styles.form_wrapper} ${saveAddDrawer ? "pb-6" : "pb-2"}`}>
               {isOfflineCustomer === 1 && (
                 <>
                   <div className={styles.form_field}>
@@ -438,7 +440,7 @@ export default function NewAddressForm({
                 <div className={styles.btn_wrapper}>
                   <button type="submit" className={`${styles.btn}`}>
                     Proceed
-                    <ForwardArrow color={"#71717A"} />
+                    <ForwardArrow color={"#222"} />
                   </button>
                 </div>
               )}

@@ -82,7 +82,7 @@ const AddressDrawer = ({
                 }
               }}>
               Proceed
-              <ForwardArrow color={"#71717A"} />
+              <ForwardArrow color={"#222"} />
             </button>
           </div>
         )}
