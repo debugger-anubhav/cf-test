@@ -35,7 +35,7 @@
   @apply text-12 xl:text-14 text-45454A tracking-desc truncate;
 }
 .new_address_wrapper {
-  @apply mt-8 xl:mt-10;
+  @apply mt-4;
 }
 .new_add_head {
   @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 flex items-center;
@@ -172,5 +172,5 @@
   @apply bg-F6B704 font-medium text-222  text-16 flex gap-[10px] px-8 rounded-lg justify-center items-center h-14  w-full;
 }
 .btn_wrapper {
-  @apply bottom-4 py-4 xl:pt-8 lg:pb-6 w-full xl:w-[466px]  bg-white  absolute pb-16;
+  @apply bottom-4 py-4 xl:pt-8 lg:pb-6 w-full xl:w-[466px]  bg-white  absolute pb-28;
 }
