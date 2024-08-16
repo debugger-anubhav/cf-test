@@ -9,9 +9,10 @@ import { endPoints } from "@/network/endPoints";
 import { format, parse } from "date-fns";
 import { decrypt } from "@/hooks/cryptoUtils";
 import { getLocalStorage } from "@/constants/constant";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
-
+  const [isLoading, setIsLoading] = useState(false);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -47,6 +48,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
     baseInstance
       .post(endPoints.myOrdersPage.getDeliverySlots, page === "PageSR" ? bodyA : body)
       .then(res => {
+        console.log(res?.data?.data, "Hello")
         setSlotdata(res?.data?.data);
         const inputTime = res?.data?.data?.time;
         if (inputTime) {
@@ -54,6 +56,10 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
           setScheduledTime(format(parsedTime, "h:mm a"));
         }
 
+        res?.data?.data?.srScheduledDatetime &&
+          setCurrentDate(
+            format(new Date(res?.data?.data?.srScheduledDatetime), "do MMM, yyyy"),
+          );
         res?.data?.data?.tmpDateMatch &&
           setCurrentDate(
             format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
@@ -62,6 +68,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
   };
 
   const updateSlot = async () => {
+    setIsLoading(true)
     const body = {
       slot: `${selectedDate} 09:00:00`,
       orderId,
@@ -73,6 +80,9 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
       closeModal();
     } catch (err) {
       console.log(err?.message || "some error");
+    } finally {
+      setIsLoading(false)
+      // window.location.reload(true)
     }
   };
 
@@ -86,6 +96,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>
           Current scheduled date: {currentDate} at {scheduledTime}
+          {console.log(currentDate, scheduledTime, "Dates")}
         </p>
         <p className={styles.desc}>
           Select to change slot as per your preference
@@ -135,7 +146,8 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
           onClick={() => updateSlot()}
           className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn
             }`}>
-          Modify
+          {isLoading && <div className={styles.spinner} />}
+          <span className={isLoading && "ml-4"}>Modify</span>
         </button>
       </div>
     </>
