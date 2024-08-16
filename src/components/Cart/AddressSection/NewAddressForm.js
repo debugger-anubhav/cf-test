@@ -389,7 +389,7 @@ export default function NewAddressForm({
                     }
                   </ErrorMessage>
                 </div>
-                <div className="lg:w-[48.5%]">
+                <div className="lg:w-[48.5%] mb-8 md:mb-0">
                   <p className={styles.form_label}>City</p>
                   <Field
                     readOnly
