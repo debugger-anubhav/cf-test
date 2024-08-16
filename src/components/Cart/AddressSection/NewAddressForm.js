@@ -140,7 +140,7 @@ export default function NewAddressForm({
         {formik => (
           <Form className={styles.form_wrapper}>
             <div
-              className={`${styles.form_wrapper} ${saveAddDrawer ? "pb-6" : "pb-2"}`}>
+              className={`overflow-y-scroll ${saveAddDrawer ? "pb-[170px]" : "pb-4"}`}>
               {isOfflineCustomer === 1 && (
                 <>
                   <div className={styles.form_field}>
