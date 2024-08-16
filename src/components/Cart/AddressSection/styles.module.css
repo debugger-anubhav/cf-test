@@ -35,7 +35,7 @@
   @apply text-12 xl:text-14 text-45454A tracking-desc truncate;
 }
 .new_address_wrapper {
-  @apply mt-8 xl:mt-10;
+  @apply mt-4;
 }
 .new_add_head {
   @apply text-45454A text-20 xl:text-24 font-medium leading-8 tracking-0.4 xl:tracking-0.48 flex items-center;

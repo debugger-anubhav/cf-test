@@ -285,9 +285,9 @@ const KycPending = () => {
     data?.length > 0 && (
       <div className={style.MainContainer}>
         <div className={style.SubMainContainer}>
-          <div className={style.Heading}>
+          {/* <div className={style.Heading}>
             {"Hi" + "," + localStorage.getItem("user_name").replace(/"/g, "")}
-          </div>
+          </div> */}
           <div className={style.BoxSection}>
             {!isHeightGreaterThan600 ? (
               <StyledCarousel
