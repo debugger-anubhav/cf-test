@@ -93,6 +93,7 @@ export default function GstSdk({
       .catch(err => {
         dispatch(setKycScreenName("dashboard"));
         console.log(err);
+        setShowSimpleLoaderforGst(false);
       });
     setOpenGstSdk(false);
   };
