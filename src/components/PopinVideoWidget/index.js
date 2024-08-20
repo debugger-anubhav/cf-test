@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import styles from "./index.module.css"
+import styles from "./style.module.css"
 import { BiSolidCameraMovie } from "react-icons/bi";
 
 const PopinVideoWidget = () => {
