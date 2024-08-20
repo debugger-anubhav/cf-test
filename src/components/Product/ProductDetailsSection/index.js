@@ -926,7 +926,7 @@ const ProductDetails = ({ params }) => {
               )}
             </button>
           </div>
-
+          {/* {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget />} */}
           {durationArray.length > 0 && (
             <div className={styles.emi_wrapper}>
               <RiSparklingFill size={16} color={"#597492"} />
