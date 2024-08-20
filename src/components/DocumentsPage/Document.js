@@ -9,11 +9,15 @@ import KycCommonDrawer from "../KycScreens/KycCommonDrawer";
 import CurrentAddressProof from "../KycScreens/CurrentAddProof";
 import Image from "next/image";
 import ApproveConfirm from "./ApproveConfirm";
-// import SignIn from "./Signin";
+import {showToastNotification} from "../Common/Notifications/toastUtils";
+import SignIn from "./Signin";
 // import {useDispatch} from "react-redux";
+import Cookies from "universal-cookie";
+import {format} from "date-fns";
 
 const Document = () => {
-  // const dispatch = useDispatch();
+  const cookies = new Cookies();
+  const adminToken = cookies.get("adminToken");
   const professionIconLink = process.env.NEXT_PUBLIC_IMAGE_CLOUDFRONT_BASE_URL;
   const params = useParams();
   const orderId = params?.order_id;
@@ -37,13 +41,24 @@ const Document = () => {
   ];
   const [addtionalInformation, setAddtionalInformation] = useState([]);
   const [hypervergelink, setHypervergelink] = useState("");
-  // const [showLogin, setShowLogin] = useState(true);
+  const [showLogin, setShowLogin] = useState(false);
+
+  useEffect(() => {
+    if (adminToken) {
+      setShowLogin(false);
+    } else {
+      setShowLogin(true);
+    }
+  }, [adminToken]);
 
   const documentApproveApiCall = () => {
     baseInstance
       .get(endPoints.documentationApprove(orderId))
       .then(res => {
         setApiData(res?.data?.data);
+        if (!res?.data?.data?.status) {
+          showToastNotification(res?.data?.data?.message, 3);
+        }
       })
       .catch(err => console.log(err?.message || "some error"));
   };
@@ -191,255 +206,287 @@ const Document = () => {
 
   return (
     <>
-      {/* {showLogin ? (
+      {showLogin ? (
         <div className="w-screen bg-slate-300 h-screen">
           <SignIn orderId={orderId} setShowLogin={setShowLogin} />
         </div>
-      ) : ( */}
-      <div className={style.conatiner_wrapper}>
-        <div className={`mt-[44px] ${style.top_div_wrapper}`}>
-          <div className={style.heading_row}>
-            <h1 className={style.heading}>Order: #{orderId}</h1>
-            <p className={style.sub_text}>
-              Tenure:{" "}
-              <span className="text-222 pl-1">
-                {apiData?.userData?.fc_subproducts?.attr_name}
-              </span>
-              . Paid:
-              <span className="text-222 pl-1">
-                {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
-              </span>
-            </p>
-          </div>
-          <div className={style.profession_row}>
-            <div className={style.profession_left}>
-              <Image
-                src={professionIconLink + additionalData?.profession_icon}
-                alt="icon"
-                width={24}
-                height={24}
-              />
-              Profession: {additionalData?.profession_name}
-            </div>
-          </div>
-        </div>
-
-        <div className={`${style.top_div_wrapper} !items-end `}>
-          <div>
-            <div className={style.sub_heading}>
-              Documentation stage:
-              {apiData?.userData?.zoho_sub_status === "KYC Rejected" ? (
-                <span className="pl-1 text-[#D96060]">
-                  {" "}
-                  {apiData?.userData?.zoho_sub_status}
+      ) : (
+        <div className={style.conatiner_wrapper}>
+          <div className={`mt-[44px] ${style.top_div_wrapper}`}>
+            <div className={style.heading_row}>
+              <h1 className={style.heading}>Order: #{orderId}</h1>
+              <p className={style.sub_text}>
+                Tenure:{" "}
+                <span className="text-222 px-1">
+                  {apiData?.userData?.fc_subproducts?.attr_name}
                 </span>
-              ) : (
-                <span className="pl-1">
-                  {" "}
-                  {apiData?.userData?.zoho_sub_status}
+                . Paid:
+                <span className="text-222 px-1">
+                  {apiData?.userData?.is_upfront === 0 ? "Monthly" : "Upfront"}
                 </span>
-              )}
-              {apiData?.autoPay === "true" && (
-                <div className={style.success_icon_div}>
-                  <FaCheck color={"white"} size="16" />
-                </div>
-              )}
-            </div>
-            {apiData?.autoPay && (
-              <div className={`${style.user_detail_box} mt-2`}>
-                <p className={style.sub_text}>
-                  Token Id:
-                  <span className="text-222 pl-1"> {apiData?.tokenId}</span>
-                </p>
-                <p className={style.sub_text}>
-                  ENACH status:
-                  <span className="text-222 pl-1">
-                    {apiData?.autoPay ? (
-                      <span className="text-[#2D9469]">Done</span>
-                    ) : (
-                      "Pending"
-                    )}
-                  </span>
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className={style.user_detail_box}>
-            <p className={style.sub_text}>
-              Name:{" "}
-              <span className="text-222 pl-1">
-                {apiData?.userData?.fc_user?.full_name}
-              </span>
-            </p>
-            <p className={style.sub_text}>
-              Contact no:{" "}
-              <span className="text-222 pl-1">
-                {apiData?.userData?.fc_user?.phone_no}
-              </span>
-            </p>
-            <p className={style.sub_text}>
-              Email Id:{" "}
-              <span className="text-222 pl-1">
-                {" "}
-                {apiData?.userData?.fc_user?.email}
-              </span>
-            </p>
-            <p className={style.sub_text}>
-              Credit Score:
-              <span className="text-222 pl-1">{apiData?.cibilScore}</span> -
-              <a
-                href={apiData?.siteUrl}
-                target="_blank"
-                className={`${style.credit_link}`}
-                rel="noreferrer">
-                Report link
-              </a>
-            </p>
-
-            <a
-              href={hypervergelink}
-              target="_blank"
-              className={`${style.credit_link}`}
-              rel="noreferrer">
-              Hyperverge link
-            </a>
-          </div>
-        </div>
-
-        <div className={style.table}>
-          <div className={style.tab_row}>
-            {tabsData?.map((item, index) => {
-              return (
-                <div
-                  key={index.toString()}
-                  className={`${index === activeTab ? style.active_tab_item : style.tab_item}`}
-                  onClick={() => {
-                    setActiveTab(index);
-                  }}>
-                  {item}
-                </div>
-              );
-            })}
-          </div>
-
-          {activeTab === 0 && (
-            <>
-              <div className={style.table_headers}>
-                <p className="col-span-5">Document Name</p>
-                <p className="col-span-4">Document Type</p>
-                <p className="col-span-2">Action</p>
-                <p className="col-span-1">Status</p>
-              </div>
-              <div className={style.table_body}>
-                {apiData ? (
+                {additionalData?.paypal_transaction_id && (
                   <>
-                    {apiData?.docsData?.map((item, index) => {
-                      return (
-                        <div
-                          key={item?.id}
-                          className={`${style.table_data} ${
-                            index < apiData?.docsData?.length - 1 &&
-                            "border-b-[1px] border-EDEDEE"
-                          }`}>
-                          <div className={`col-span-5 mr-4 ${style.body_cell}`}>
-                            {item?.doc_name}
-                          </div>
-                          <div className={`col-span-4 mr-4 ${style.body_cell}`}>
-                            {item?.doc_type}
-                          </div>
-                          <div className={`col-span-2 ${style.action_cell}`}>
-                            <button
-                              className={style.view_btn}
-                              onClick={() =>
-                                handleViewButtonClick(item?.image)
-                              }>
-                              View
-                            </button>
-                            {item?.status === 0 && (
-                              <div className={style.decision_btns}>
-                                <p
-                                  className={style.approve_btn}
-                                  onClick={() => {
-                                    // statusUpdateApiCall(item, 1)
-                                    setOpenApproveConfirmModal(true);
-                                  }}>
-                                  Approve
-                                </p>
-                                {openApproveConfirmModal && (
-                                  <ApproveConfirm
-                                    ApproveOpen={openApproveConfirmModal}
-                                    setApproveOpen={setOpenApproveConfirmModal}
-                                    statusUpdateApiCall={statusUpdateApiCall}
-                                    item={item}
-                                  />
-                                )}
-                                <p
-                                  className={style.reject_btn}
-                                  onClick={() => {
-                                    setOpenRejectDrawer(true);
-                                    setSelectedItem(item);
-                                  }}>
-                                  Reject
-                                </p>
-                              </div>
-                            )}
-                          </div>
-                          <div className={`col-span-1 ${style.body_cell}`}>
-                            <p className={style.final_status}>
-                              {item?.status === 0
-                                ? "Pending"
-                                : item?.status === 1
-                                  ? "Approved"
-                                  : "Rejected"}
-                            </p>
-                          </div>
-                        </div>
-                      );
-                    })}
+                    . Payment Id:
+                    <span className="text-222 px-1">
+                      {additionalData?.paypal_transaction_id}
+                    </span>{" "}
                   </>
+                )}
+                {additionalData?.paid_datetime && (
+                  <>
+                    . Paid on:
+                    <span className="text-222 px-1">
+                      {format(
+                        new Date(additionalData?.paid_datetime),
+                        "dd-MM-yyyy",
+                      )}
+                    </span>
+                  </>
+                )}
+              </p>
+            </div>
+            <div className={style.profession_row}>
+              <div className={style.profession_left}>
+                <Image
+                  src={professionIconLink + additionalData?.profession_icon}
+                  alt="icon"
+                  width={24}
+                  height={24}
+                />
+                Profession: {additionalData?.profession_name}
+              </div>
+            </div>
+          </div>
+
+          <div className={`${style.top_div_wrapper} !items-end mt-8`}>
+            <div>
+              <div className={style.sub_heading}>
+                Documentation stage:
+                {apiData?.userData?.zoho_sub_status === "KYC Rejected" ? (
+                  <span className="pl-1 text-[#D96060]">
+                    {" "}
+                    {apiData?.userData?.zoho_sub_status}
+                  </span>
                 ) : (
-                  <TableSkeleton />
+                  <span className="pl-1">
+                    {" "}
+                    {apiData?.userData?.zoho_sub_status}
+                  </span>
+                )}
+                {apiData?.autoPay === "true" && (
+                  <div className={style.success_icon_div}>
+                    <FaCheck color={"white"} size="16" />
+                  </div>
                 )}
               </div>
-            </>
-          )}
-          {activeTab === 1 && (
-            <div className={style.additional_detail}>
-              {addtionalInformation?.map((item, index) => {
+              {apiData?.autoPay && (
+                <div className={`${style.user_detail_box} mt-2`}>
+                  <p className={style.sub_text}>
+                    Token Id:
+                    <span className="text-222 pl-1"> {apiData?.tokenId}</span>
+                  </p>
+                  <p className={style.sub_text}>
+                    ENACH status:
+                    <span className="text-222 pl-1">
+                      {apiData?.autoPay ? (
+                        <span className="text-[#2D9469]">Done</span>
+                      ) : (
+                        "Pending"
+                      )}
+                    </span>
+                  </p>
+                  <p className={style.sub_text}>
+                    Ticket Id:
+                    <span className="text-222 pl-1">
+                      {" "}
+                      {additionalData?.desk_ticket_id}
+                    </span>
+                  </p>
+                  <p className={style.sub_text}>
+                    Hyperverge -
+                    <a
+                      href={hypervergelink}
+                      target="_blank"
+                      className={`${style.credit_link}`}
+                      rel="noreferrer">
+                      Report link
+                    </a>
+                  </p>
+                </div>
+              )}
+            </div>
+
+            <div className={style.user_detail_box}>
+              <p className={style.sub_text}>
+                Name:{" "}
+                <span className="text-222 pl-1">
+                  {apiData?.userData?.fc_user?.full_name}
+                </span>
+              </p>
+              <p className={style.sub_text}>
+                Contact no:{" "}
+                <span className="text-222 pl-1">
+                  {apiData?.userData?.fc_user?.phone_no}
+                </span>
+              </p>
+              <p className={style.sub_text}>
+                Email Id:{" "}
+                <span className="text-222 pl-1">
+                  {" "}
+                  {apiData?.userData?.fc_user?.email}
+                </span>
+              </p>
+              <p className={style.sub_text}>
+                Credit Score:
+                <span className="text-222 pl-1">{apiData?.cibilScore}</span> -
+                <a
+                  href={apiData?.siteUrl}
+                  target="_blank"
+                  className={`${style.credit_link}`}
+                  rel="noreferrer">
+                  Report link
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div className={style.table}>
+            <div className={style.tab_row}>
+              {tabsData?.map((item, index) => {
                 return (
-                  <div className={style.container} key={index.toString()}>
-                    <label className={style.label}>{item?.label}</label>
-                    <div className={style.value_box}>{item?.value}</div>
+                  <div
+                    key={index.toString()}
+                    className={`${index === activeTab ? style.active_tab_item : style.tab_item}`}
+                    onClick={() => {
+                      setActiveTab(index);
+                    }}>
+                    {item}
                   </div>
                 );
               })}
             </div>
-          )}
-          {activeTab === 2 && (
-            <div className="px-6 pb-6">
-              <CurrentAddressProof
-                showHeading={false}
-                apiData={apiData?.uploadingDocs}
-                orderId={orderId}
-                setActiveTab={setActiveTab}
-              />
-            </div>
-          )}
-          {openRejectDrawer && (
-            <KycCommonDrawer
-              content={drawerContent()}
-              changeState={setOpenRejectDrawer}
-              heading={"Reason for rejection"}
-            />
-          )}
 
-          {/* {signInOpen && (
+            {activeTab === 0 && (
+              <>
+                <div className={style.table_headers}>
+                  <p className="col-span-5">Document Name</p>
+                  <p className="col-span-4">Document Type</p>
+                  <p className="col-span-2">Action</p>
+                  <p className="col-span-1">Status</p>
+                </div>
+                <div className={style.table_body}>
+                  {apiData ? (
+                    <>
+                      {apiData?.docsData?.map((item, index) => {
+                        return (
+                          <div
+                            key={item?.id}
+                            className={`${style.table_data} ${
+                              index < apiData?.docsData?.length - 1 &&
+                              "border-b-[1px] border-EDEDEE"
+                            }`}>
+                            <div
+                              className={`col-span-5 mr-4 ${style.body_cell}`}>
+                              {item?.doc_name}
+                            </div>
+                            <div
+                              className={`col-span-4 mr-4 ${style.body_cell}`}>
+                              {item?.doc_type}
+                            </div>
+                            <div className={`col-span-2 ${style.action_cell}`}>
+                              <button
+                                className={style.view_btn}
+                                onClick={() =>
+                                  handleViewButtonClick(item?.image)
+                                }>
+                                View
+                              </button>
+                              {item?.status === 0 && (
+                                <div className={style.decision_btns}>
+                                  <p
+                                    className={style.approve_btn}
+                                    onClick={() => {
+                                      // statusUpdateApiCall(item, 1)
+                                      setOpenApproveConfirmModal(true);
+                                    }}>
+                                    Approve
+                                  </p>
+                                  {openApproveConfirmModal && (
+                                    <ApproveConfirm
+                                      ApproveOpen={openApproveConfirmModal}
+                                      setApproveOpen={
+                                        setOpenApproveConfirmModal
+                                      }
+                                      statusUpdateApiCall={statusUpdateApiCall}
+                                      item={item}
+                                    />
+                                  )}
+                                  <p
+                                    className={style.reject_btn}
+                                    onClick={() => {
+                                      setOpenRejectDrawer(true);
+                                      setSelectedItem(item);
+                                    }}>
+                                    Reject
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                            <div className={`col-span-1 ${style.body_cell}`}>
+                              <p className={style.final_status}>
+                                {item?.status === 0
+                                  ? "Pending"
+                                  : item?.status === 1
+                                    ? "Approved"
+                                    : "Rejected"}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <TableSkeleton />
+                  )}
+                </div>
+              </>
+            )}
+            {activeTab === 1 && (
+              <div className={style.additional_detail}>
+                {addtionalInformation?.map((item, index) => {
+                  return (
+                    <div className={style.container} key={index.toString()}>
+                      <label className={style.label}>{item?.label}</label>
+                      <div className={style.value_box}>{item?.value}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+            {activeTab === 2 && (
+              <div className="px-6 pb-6">
+                <CurrentAddressProof
+                  showHeading={false}
+                  apiData={apiData?.uploadingDocs}
+                  orderId={orderId}
+                  setActiveTab={setActiveTab}
+                />
+              </div>
+            )}
+            {openRejectDrawer && (
+              <KycCommonDrawer
+                content={drawerContent()}
+                changeState={setOpenRejectDrawer}
+                heading={"Reason for rejection"}
+              />
+            )}
+
+            {/* {signInOpen && (
           <SignIn signInOpen={signInOpen} setSignInOpen={setSignInOpen} />
         )} */}
+          </div>
         </div>
-      </div>
-      {/* )} */}
+      )}
     </>
   );
 };
