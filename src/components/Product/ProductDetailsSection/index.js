@@ -51,7 +51,8 @@ import { baseInstance } from "@/network/axios";
 import Banner from "../../Banner";
 import { IoVideocam } from "react-icons/io5";
 import { GoDotFill } from "react-icons/go";
-import { BiSolidCameraMovie } from "react-icons/bi";
+
+import PopinVideoWidget from "../../PopinVideoWidget"
 
 
 const ProductDetails = ({ params }) => {
@@ -525,6 +526,43 @@ const ProductDetails = ({ params }) => {
     window.open("https://www.wakefit.co/mattress/orthopaedic-memory-foam-mattress/WOMFM72366", "_blank")
   }
 
+  useEffect(() => {
+    const userNameFromLocalStorage = getLocalStorage("user_name");
+    const userNumberFromLocalStorage = getLocalStorage("user_number");
+    const userEmailFromLocalStorage = getLocalStorage("user_email");
+
+    // Create and append the widget script dynamically
+    const popIn = document.createElement('script');
+    popIn.setAttribute('src', 'https://widget01.popin.to/js/widget.js');
+    document.body.appendChild(popIn);
+
+    // Initialize the widget once the script is loaded
+    popIn.onload = () => {
+      if (window.popInWidgetInit) {
+        window.popInWidgetInit({
+          token: "12159",
+          mode: "hidden",
+          captured: {
+            name: userNameFromLocalStorage,
+            mobile: userNumberFromLocalStorage,
+            email: userEmailFromLocalStorage,
+          }
+        });
+      }
+    };
+
+    // Clean up script when component unmounts
+    return () => {
+      if (popIn) {
+        document.body.removeChild(popIn);
+      }
+    };
+  }, []);
+
+
+
+
+
   return (
     <div className={styles.main_container}>
       <ShareModal
@@ -863,15 +901,7 @@ const ProductDetails = ({ params }) => {
           </div>
 
           <div className="flex gap-2">
-            {prodDetails[0]?.preview_video === 1 && <button
-              onClick={handleLiveShop}
-              disabled={isLoading}
-              className={styles.btn1}
-              ref={addToCartButtonRef}>
-              <BiSolidCameraMovie color="Red" size={22} />
-              <span className="ml-2">Live Product Tour</span>
-              {/* <div className={styles.spinner} /> */}
-            </button>}
+            {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget />}
             <button
               onClick={
                 soldOut
