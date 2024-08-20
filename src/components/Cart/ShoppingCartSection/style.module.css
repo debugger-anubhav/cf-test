@@ -1,5 +1,5 @@
 .main_container {
-  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between pb-[120px] lg:pb-0;
+  @apply xl:pb-10 xl:pt-6 py-4 px-4 md:px-[70px] xl:px-[90px] macbook:px-[120px] 3xl:px-[160px] font-Poppins flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-36 macbook:gap-[214px] 4xl:gap-0 4xl:justify-between pb-[120px];
 }
 .left_div {
   @apply pb-6;
