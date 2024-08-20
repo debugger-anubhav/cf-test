@@ -19,7 +19,7 @@
 }
 
 .main_section {
-  @apply px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-2  flex flex-col lg:flex-row gap-6 -mt-4 md:mt-1 lg:mt-4;
+  @apply px-0 md:px-[70px] xl:px-[90px] macbook:px-[122px] 3xl:px-[160px] py-2 flex flex-col lg:flex-row gap-6 -mt-4 md:mt-1 lg:mt-4;
 }
 
 .prod_img {
@@ -147,6 +147,10 @@
   @apply cursor-pointer mt-12 bg-btn-primary hidden md:flex justify-center items-center w-full md:w-[440px] lg:w-full h-12 xl:h-14 rounded-lg text-16 text-222 font-medium;
 }
 
+.btn1 {
+  @apply cursor-pointer mt-12 border border-[#71717A] hidden md:flex justify-center items-center w-full md:w-[440px] lg:w-full h-12 xl:h-14 rounded-lg text-16 text-[#71717A] font-medium;
+}
+
 .emi_wrapper {
   @apply py-1 xl:py-2 px-[3px] xl:px-4 rounded-lg flex w-full md:w-[440px] lg:w-full items-center justify-center gap-1 xl:gap-2 mt-4;
   background: linear-gradient(138deg, #e8f0f6 0%, #fffaeb 99.38%);
@@ -170,13 +174,11 @@
 
 .city_shield_wrapper {
   @apply rounded-xl p-4 xl:p-6 w-full relative mt-12 cursor-pointer;
-  background: linear-gradient(
-    133deg,
-    #f1eeff 0%,
-    #f1eeff 44.79%,
-    rgba(167, 201, 233, 0) 72.92%,
-    #e5dffd 100%
-  );
+  background: linear-gradient(133deg,
+      #f1eeff 0%,
+      #f1eeff 44.79%,
+      rgba(167, 201, 233, 0) 72.92%,
+      #e5dffd 100%);
 }
 
 .getPeace_div {
