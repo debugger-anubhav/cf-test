@@ -174,11 +174,13 @@
 
 .city_shield_wrapper {
   @apply rounded-xl p-4 xl:p-6 w-full relative mt-12 cursor-pointer;
-  background: linear-gradient(133deg,
-      #f1eeff 0%,
-      #f1eeff 44.79%,
-      rgba(167, 201, 233, 0) 72.92%,
-      #e5dffd 100%);
+  background: linear-gradient(
+    133deg,
+    #f1eeff 0%,
+    #f1eeff 44.79%,
+    rgba(167, 201, 233, 0) 72.92%,
+    #e5dffd 100%
+  );
 }
 
 .getPeace_div {
