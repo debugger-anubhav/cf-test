@@ -12,9 +12,16 @@ import React from "react";
 // }
 
 import NotFoundCatchAll from "./[...not_found]/page";
-
+import ReduxProvider from "@/store/provider";
+import QueryProvider from "@/components/QueryProvider/QueryProvider";
 const NotFoundPage = () => {
-  return <NotFoundCatchAll />;
+  return (
+    <ReduxProvider>
+      <QueryProvider>
+        <NotFoundCatchAll />
+      </QueryProvider>
+    </ReduxProvider>
+  );
 };
 
 export default NotFoundPage;
