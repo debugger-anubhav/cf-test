@@ -168,7 +168,6 @@ export default function Home() {
         content="Rent Premium Furniture & Home Appliances Online - Cityfurnish"
       />
       <div ref={myElementRef} className="large_layout">
-        {/* {useChatScript()} */}
         <AnnouncementBar />
         <Header />
         <MenuList />

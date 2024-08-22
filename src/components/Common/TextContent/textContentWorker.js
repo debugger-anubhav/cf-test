@@ -7,7 +7,6 @@ self.addEventListener("message", ({data: {params, paramsCityId, type}}) => {
       params?.category === "appliances-rental" ||
       params?.category === "furniture-rental"
     ) {
-      console.log("1-HIT");
       baseInstance.get(endPoints.cityIdByCityName + params?.city).then(
         ({
           data: {

@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./style.module.css";
 import {Mail} from "@/assets/icon";
-// import { useChatScript } from "../../../../useChatScript";
 
 export default function ChatWithUs() {
   const handleButtonClick = () => {};
@@ -9,7 +8,6 @@ export default function ChatWithUs() {
   return (
     <>
       <div className={styles.main_container}>
-        {/* {showChat && useChatScript() } */}
         <div className={styles.sub_container}>
           <h2 className={styles.sub_paragraph}>Have a query? Need help?</h2>
           <h3 className={styles.sub_heading}>Chat with us</h3>
