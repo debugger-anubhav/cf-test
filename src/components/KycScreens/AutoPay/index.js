@@ -206,8 +206,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
                   item.includes("banking")
                     ? "emandate"
                     : item.includes("card")
-                    ? "card"
-                    : "upi",
+                      ? "card"
+                      : "upi",
                 );
               }}>
               <label className={docStyle.radio_container}>
@@ -222,8 +222,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
                       item.includes("banking")
                         ? "emandate"
                         : item.includes("card")
-                        ? "card"
-                        : "upi",
+                          ? "card"
+                          : "upi",
                     );
                   }}
                   className={docStyle.radio_input}
