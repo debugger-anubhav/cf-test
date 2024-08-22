@@ -25,7 +25,7 @@ import {CombineSectionSkeleton} from "@/components/Home/CombineSection";
 import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
-// import KycPending from "@/components/Home/KycPending";
+import KycPending from "@/components/Home/KycPending";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -174,7 +174,7 @@ export default function Home() {
         <MenuList />
         <HeroBanner />
 
-        {/* {userId && <KycPending />} */}
+        {userId && <KycPending />}
 
         <RentFurnitureAndAppliances params={"home-page"} />
         <RecentlyViewedProduct />

@@ -1,10 +1,11 @@
 .MainContainer {
   /* @apply 3xl:px-[150px] macbook:px-[112px] xl:px-[80px] md:px-[60px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6; */
-  @apply w-full p-4 py-[30px] overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
+  @apply w-full pb-2 overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
 }
 
 .SubMainContainer {
-  @apply w-full px-5 py-5 md1:px-12 md1:py-12 border border-[#DDDDDF] rounded;
+  @apply w-full;
+  /* @apply w-full px-5 py-5 md1:px-12 md1:py-12 border border-[#DDDDDF] rounded; */
 }
 
 .Heading {
@@ -12,7 +13,7 @@
 }
 
 .BoxSection {
-  @apply md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
+  @apply px-[16px] mobile:px-0 md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
 }
 
 .KycSection {
@@ -27,8 +28,7 @@
   @apply text-16 flex gap-[5px] items-center;
 }
 
-.KNumber {
-}
+.KNumber {}
 
 .orderDetails {
   @apply flex items-start gap-4 text-14 leading-[21px] font-normal text-[#5774AC] py-4 px-3;
@@ -43,7 +43,7 @@
 }
 
 .RaiseServicerequestSection {
-  @apply w-[50%] border rounded-lg mobile:w-full;
+  @apply w-[100%] border rounded-lg mobile:w-full;
 }
 
 .RHeadingSection {
@@ -51,11 +51,11 @@
 }
 
 .RHeading {
-  @apply mobile:text-12 md1:text-16 font-Poppins;
+  @apply text-12 mobile:text-12 md1:text-16 font-Poppins;
 }
 
 .RLinkSection {
-  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
+  @apply text-10 whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
 }
 
 .RIconsSection {
@@ -66,15 +66,14 @@
   @apply cursor-pointer flex flex-col gap-2 items-center justify-center pb-5;
 }
 
-.IconBoxIcon {
-}
+.IconBoxIcon {}
 
 .Icon {
   @apply ml-0.5 h-4 w-4 text-[#597492];
 }
 
 .IconBoxText {
-  @apply w-[54px] text-center text-14 leading-[21px] font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
+  @apply w-[54px] text-center text-12 leading-[21px] break-all mobile:break-normal  font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
 }
 
 .images_wraper {
