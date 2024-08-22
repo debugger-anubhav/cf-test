@@ -1,8 +1,8 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styles from "./style.module.css";
-import {Carousel} from "react-responsive-carousel";
+import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import {CustomNextArrow, CustomPrevArrow} from "./CustomArrows";
+import { CustomNextArrow, CustomPrevArrow } from "./CustomArrows";
 import {
   DeliveryTruck,
   Heart,
@@ -11,9 +11,9 @@ import {
   ShareIcon,
   VerifyIcon,
 } from "@/assets/icon";
-import {RiSparklingFill} from "react-icons/ri";
+import { RiSparklingFill } from "react-icons/ri";
 import string from "@/constants/Constant.json";
-import {ProductPageImages} from "@/assets/images";
+import { ProductPageImages } from "@/assets/images";
 import {
   HasselFreeDataForProductPage,
   getLocalStorage,
@@ -22,40 +22,40 @@ import {
   setLocalStorage,
 } from "@/constants/constant";
 import ServiceCard from "./ServiceCard";
-import {endPoints} from "@/network/endPoints";
+import { endPoints } from "@/network/endPoints";
 import "react-responsive-modal/styles.css";
 import CityshieldDrawer from "./CityshieldDrawer/CityshieldDrawer";
 import ShareModal from "./ShareDrawer/ShareModal";
 import StickyBottomBar from "./StickyBottomBar";
-import {format, addDays, getMonth} from "date-fns";
-import {useSelector, useDispatch} from "react-redux";
+import { format, addDays, getMonth } from "date-fns";
+import { useSelector, useDispatch } from "react-redux";
 import {
   addItemsToCart,
   getProductDetails,
   reduxSetModalState,
 } from "@/store/Slices";
-import {useMutation} from "@/hooks/useMutation";
-import {useRouter} from "next/navigation";
-import {useQuery} from "@/hooks/useQuery";
-import {addSaveditemID, addSaveditems} from "@/store/Slices/categorySlice";
+import { useMutation } from "@/hooks/useMutation";
+import { useRouter } from "next/navigation";
+import { useQuery } from "@/hooks/useQuery";
+import { addSaveditemID, addSaveditems } from "@/store/Slices/categorySlice";
 import SideDrawer from "../Drawer/Drawer";
-import {LiaMoneyBillWaveSolid} from "react-icons/lia";
-import {Skeleton} from "@mui/material";
-import {decrypt, decryptBase64} from "@/hooks/cryptoUtils";
-import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import { Skeleton } from "@mui/material";
+import { decrypt, decryptBase64 } from "@/hooks/cryptoUtils";
+import { showToastNotification } from "@/components/Common/Notifications/toastUtils";
 // import AffordabilityWidget from "@/components/Cart/ShoppingCartSection/AffordabilityWidget";
 // import {razorpayKey} from "../../../../appConfig";
 import LoginModal from "@/components/LoginPopups";
-import {useAuthentication} from "@/hooks/checkAuthentication";
-import {baseInstance} from "@/network/axios";
+import { useAuthentication } from "@/hooks/checkAuthentication";
+import { baseInstance } from "@/network/axios";
 import Banner from "../../Banner";
 // import {IoVideocam} from "react-icons/io5";
 // import {GoDotFill} from "react-icons/go";
 
 import PopinVideoWidget from "../../PopinVideoWidget";
 
-const ProductDetails = ({params}) => {
-  const {checkAuthentication} = useAuthentication();
+const ProductDetails = ({ params }) => {
+  const { checkAuthentication } = useAuthentication();
   const str = string.product_page;
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
@@ -63,14 +63,13 @@ const ProductDetails = ({params}) => {
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   const cityName = useSelector(state => state.homePagedata.cityName);
   const arr = [
-    {name: "Home", link: "/"},
+    { name: "Home", link: "/" },
     {
       name: prodDetails?.[0]?.category_name,
-      link: `/${cityName?.replace(/\//g, "-")?.toLowerCase()}/${
-        prodDetails?.[0]?.category_seourl
-      }`,
+      link: `/${cityName?.replace(/\//g, "-")?.toLowerCase()}/${prodDetails?.[0]?.category_seourl
+        }`,
     },
-    {name: prodDetails?.[0]?.product_name.replace(/-/g, " ")},
+    { name: prodDetails?.[0]?.product_name.replace(/-/g, " ") },
   ];
   const dispatch = useDispatch();
 
@@ -82,7 +81,7 @@ const ProductDetails = ({params}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [durationArray, setDurationArray] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [duration, setDuration] = useState({currentIndex: 0, value: ""});
+  const [duration, setDuration] = useState({ currentIndex: 0, value: "" });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -237,36 +236,36 @@ const ProductDetails = ({params}) => {
       .map(obj => obj.id)
       .includes(parseInt(params.productId))
       ? addwhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-                showToastNotification("Item added to the wishlist", 1);
-                window?.fbq("track", "AddToWishlist");
-              })
-              .catch(err => console.log(err?.message || "some error"));
-          })
-          .catch(err => console.log(err?.message || "some error"))
+        .then(res => {
+          getSavedItems()
+            .then(res => {
+              dispatch(addSaveditems(res?.data?.data));
+              const ids = res?.data?.data.map(item => {
+                return item?.id;
+              });
+              dispatch(addSaveditemID(ids));
+              showToastNotification("Item added to the wishlist", 1);
+              window?.fbq("track", "AddToWishlist");
+            })
+            .catch(err => console.log(err?.message || "some error"));
+        })
+        .catch(err => console.log(err?.message || "some error"))
       : removewhislistProduct()
-          .then(res => {
-            getSavedItems()
-              .then(res => {
-                dispatch(addSaveditems(res?.data?.data));
-                // addSaveditemID
+        .then(res => {
+          getSavedItems()
+            .then(res => {
+              dispatch(addSaveditems(res?.data?.data));
+              // addSaveditemID
 
-                const ids = res?.data?.data.map(item => {
-                  return item?.id;
-                });
-                dispatch(addSaveditemID(ids));
-                showToastNotification("Item removed from the wishlist", 2);
-              })
-              .catch(err => console.log(err?.message || "some error"));
-          })
-          .catch(err => console.log(err?.message || "some error"));
+              const ids = res?.data?.data.map(item => {
+                return item?.id;
+              });
+              dispatch(addSaveditemID(ids));
+              showToastNotification("Item removed from the wishlist", 2);
+            })
+            .catch(err => console.log(err?.message || "some error"));
+        })
+        .catch(err => console.log(err?.message || "some error"));
   };
 
   const handleWhislistCard = async e => {
@@ -282,19 +281,19 @@ const ProductDetails = ({params}) => {
     productId: params?.productId,
   };
 
-  const {mutateAsync: addwhislistProduct} = useMutation(
+  const { mutateAsync: addwhislistProduct } = useMutation(
     "add-wishlist",
     "POST",
     endPoints.addWishListProduct,
     data,
   );
 
-  const {refetch: getSavedItems} = useQuery(
+  const { refetch: getSavedItems } = useQuery(
     "saved-items",
     endPoints.savedItems,
     `?cityId=${cityId}&userId=${decrypt(getLocalStorage("_ga"))}`,
   );
-  const {mutateAsync: removewhislistProduct} = useMutation(
+  const { mutateAsync: removewhislistProduct } = useMutation(
     "remove-wishlist",
     "DELETE",
     endPoints.deleteWishListProduct,
@@ -315,7 +314,7 @@ const ProductDetails = ({params}) => {
     ((durationArray?.[0]?.attr_price -
       durationArray?.[duration.currentIndex]?.attr_price) *
       100) /
-      durationArray?.[0]?.attr_price,
+    durationArray?.[0]?.attr_price,
   ).toFixed(0);
 
   const cityShieldCurrentPrice =
@@ -327,9 +326,9 @@ const ProductDetails = ({params}) => {
   const cityShieldDiscount =
     cityShieldOriginalPrice > 0
       ? Math.round(
-          ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
-            cityShieldOriginalPrice,
-        ).toFixed(0)
+        ((cityShieldOriginalPrice - cityShieldCurrentPrice) * 100) /
+        cityShieldOriginalPrice,
+      ).toFixed(0)
       : 0;
 
   const isItemInCart = cartItems?.some(item => {
@@ -418,7 +417,7 @@ const ProductDetails = ({params}) => {
     cityId,
     productId: Number(params?.productId),
   };
-  const {mutateAsync: notifyAvailibility} = useMutation(
+  const { mutateAsync: notifyAvailibility } = useMutation(
     "notify-availability",
     "POST",
     endPoints.productPage.notifyAvailability,
@@ -589,8 +588,8 @@ const ProductDetails = ({params}) => {
           isItemInCart={isItemInCart}
           soldOut={soldOut}
           cartItems={cartItems}
-          // isSameTenure={isSameTenure}
-          // handleNotSameTenure={handleNotSameTenure}
+        // isSameTenure={isSameTenure}
+        // handleNotSameTenure={handleNotSameTenure}
         />
       )}
 
@@ -602,9 +601,8 @@ const ProductDetails = ({params}) => {
               target="_self"
               rel="noopener">
               <p
-                className={` ${
-                  index === arr.length - 1 ? "font-medium" : "font-normal"
-                } ${styles.crumpItem}`}
+                className={` ${index === arr.length - 1 ? "font-medium" : "font-normal"
+                  } ${styles.crumpItem}`}
                 onClick={() => {
                   setLocalStorage("subCategory", "All");
                 }}>
@@ -612,9 +610,8 @@ const ProductDetails = ({params}) => {
               </p>
             </a>
             <p
-              className={`${index === arr.length - 1 ? "hidden" : "flex"} ${
-                styles.crumpItem
-              }`}>{`>`}</p>
+              className={`${index === arr.length - 1 ? "hidden" : "flex"} ${styles.crumpItem
+                }`}>{`>`}</p>
           </div>
         ))}
       </div>
@@ -623,9 +620,8 @@ const ProductDetails = ({params}) => {
 
       <div className={styles.main_section}>
         <div
-          className={`${styles.carousel_wrapper} ${
-            loginModal ? "z-[-1]" : ""
-          }`.trim()}>
+          className={`${styles.carousel_wrapper} ${loginModal ? "z-[-1]" : ""
+            }`.trim()}>
           {prodDetails?.[0]?.purchased_in_one_day > 0 && (
             <div className={styles.info}>
               <InformationIcon color={"ffffff"} />
@@ -651,7 +647,7 @@ const ProductDetails = ({params}) => {
               return (
                 <li
                   className={styles.indicatorStyle}
-                  style={{background: isSelected ? "#597492" : "#ffffff"}}
+                  style={{ background: isSelected ? "#597492" : "#ffffff" }}
                   onClick={onClickHandler}
                   onKeyDown={onClickHandler}
                   value={index}
@@ -706,11 +702,10 @@ const ProductDetails = ({params}) => {
                 <>
                   {image && (
                     <div
-                      className={`${styles.thumbnail_img} ${
-                        index === selectedIndex
-                          ? "border-[#5F789D]"
-                          : "border-fff"
-                      }`}
+                      className={`${styles.thumbnail_img} ${index === selectedIndex
+                        ? "border-[#5F789D]"
+                        : "border-fff"
+                        }`}
                       key={index}
                       onClick={() => handleThumbnailClick(index)}>
                       <img
@@ -749,7 +744,7 @@ const ProductDetails = ({params}) => {
         <div className={styles.details_wrapper}>
           <div
             className={styles.header_div}
-            style={{justifyContent: "space-between"}}>
+            style={{ justifyContent: "space-between" }}>
             <h1 className={styles.item_name}>
               {prodDetails?.[0]?.product_name.replace(/-/g, " ")}
             </h1>
@@ -810,10 +805,10 @@ const ProductDetails = ({params}) => {
                 />
               </div>
             ) : (
-              <p className={styles.rating_txt} style={{color: "#63798D"}}>
+              <p className={styles.rating_txt} style={{ color: "#63798D" }}>
                 Get it by
                 {getMonth(addDays(new Date(), 3)) ===
-                getMonth(addDays(new Date(), 4)) ? (
+                  getMonth(addDays(new Date(), 4)) ? (
                   <span className="pl-1">
                     {format(addDays(new Date(), 3), "d")}-
                   </span>
@@ -841,11 +836,10 @@ const ProductDetails = ({params}) => {
               {durationArray.map((item, index) => (
                 <div key={index}>
                   <div
-                    className={`${
-                      duration.currentIndex === index
-                        ? "bg-[#597492] text-fff hover:!shadow-none"
-                        : "text-[#597492]"
-                    } ${styles.duration_circle}`}
+                    className={`${duration.currentIndex === index
+                      ? "bg-[#597492] text-fff hover:!shadow-none"
+                      : "text-[#597492]"
+                      } ${styles.duration_circle}`}
                     onClick={() =>
                       setDuration({
                         value: item.attr_name?.split(" ")[0],
@@ -869,15 +863,15 @@ const ProductDetails = ({params}) => {
                     </p>
                     {durationArray?.[duration.currentIndex]?.attr_price !==
                       durationArray?.[0]?.attr_price && (
-                      <p
-                        className={styles.originalPrice}
-                        style={{
-                          display: duration.value === "3" ? "none" : "flex",
-                        }}>
-                        <span className={styles.rupeeIcon}>₹</span>
-                        {durationArray?.[0]?.attr_price}
-                      </p>
-                    )}
+                        <p
+                          className={styles.originalPrice}
+                          style={{
+                            display: duration.value === "3" ? "none" : "flex",
+                          }}>
+                          <span className={styles.rupeeIcon}>₹</span>
+                          {durationArray?.[0]?.attr_price}
+                        </p>
+                      )}
 
                     {productDiscount > 0 && (
                       <div
@@ -902,7 +896,7 @@ const ProductDetails = ({params}) => {
           </div>
 
           <div className="flex gap-2">
-            {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget />}
+            {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget productID={prodDetails[0]?.id} />}
             <button
               onClick={
                 soldOut
