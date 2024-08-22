@@ -11,8 +11,10 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import {showToastNotification} from "../Common/Notifications/toastUtils";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
+import Cookies from "universal-cookie";
 
 export default function Signin({orderId, setShowLogin}) {
+  const cookies = new Cookies();
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -66,8 +68,7 @@ export default function Signin({orderId, setShowLogin}) {
       })
       .then(res => {
         if (res?.data?.data?.data?.token) {
-          console.log("first");
-          //   cookies.set("adminToken", res?.data?.data?.data?.token);
+          cookies.set("adminToken", res?.data?.data?.data?.token);
           setShowLogin(false);
         } else {
           showToastNotification(res?.data?.data?.message, 3);

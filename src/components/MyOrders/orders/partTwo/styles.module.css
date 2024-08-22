@@ -1,27 +1,35 @@
 .main_container {
   @apply font-Poppins w-full pb-6 pt-4 xl:mt-10 px-4 xl:p-0;
 }
+
 .header_wrapper {
   @apply flex flex-col xl:flex-row gap-4 xl:items-center xl:justify-between w-full;
 }
+
 .headers_left_div {
   @apply flex items-center gap-2 cursor-pointer hover:underline;
 }
+
 .headers_right_div {
   @apply flex items-center gap-1 w-fit xl:gap-2 rounded-lg bg-[#f3f5f8] px-2 py-1 min-w-fit;
 }
+
 .backArrow {
   @apply text-222 w-5 h-5 xl:w-6 xl:h-6;
 }
+
 .header {
   @apply text-45454A text-18 xl:text-24 font-medium leading-8 tracking-[-0.36] xl:tracking-0.48 min-w-fit;
 }
+
 .status_icon {
   @apply w-5 h-5 xl:w-6 xl:h-6;
 }
+
 .status {
   @apply text-45454A text-14 xl:text-16 font-medium tracking-desc xl:tracking-0.3 capitalize;
 }
+
 .sub_container {
   @apply flex-col xl:flex-row flex xl:justify-between w-full xl:mt-8 mt-5 gap-8;
 }
@@ -29,28 +37,35 @@
 .upper_map {
   @apply flex flex-col md:flex-row items-start gap-7 md:gap-4 lg:w-[500px] macbook1:w-[572px] 2xl:w-[600px] 3xl:w-[61%] 4xl:w-fit md:overflow-x-scroll;
 }
+
 .progress_map_item {
   @apply flex md:flex-col items-baseline md:items-center relative gap-[13px] md:gap-0;
 }
 
 .progress_circle {
-  @apply w-5 h-[19px] md:w-[22px] md:h-[22px] rounded-full  flex justify-center items-center;
+  @apply w-5 h-[19px] md:w-[22px] md:h-[22px] rounded-full flex justify-center items-center;
 }
+
 .active_status {
   @apply bg-71717A;
 }
+
 .inactive_status {
   @apply bg-[#2D9469] p-[7px] md:p-2;
 }
+
 .inner_circle {
   @apply bg-fff rounded-full w-full h-full;
 }
+
 .animated_circle {
   @apply !text-[#2D9469];
 }
+
 .check_icon {
   @apply text-fff w-[10px] h-[10px];
 }
+
 .line {
   @apply w-[2px] md:w-full h-[29px] md:!h-[2px] bg-EDEDEE absolute left-[9px] md:left-[69%] xl:left-[65%] top-full md:top-[11px];
 }
@@ -58,16 +73,19 @@
 .progress_status {
   @apply md:mt-2 md:text-center text-45454A md:text-71717A text-14 font-medium md:font-semibold leading-5 tracking-desc md:min-w-[73px] md:max-w-[73px] xl:max-w-[89px];
 }
+
 .drawer_button {
-  @apply flex justify-center items-center cursor-pointer w-[188px] xl:w-[232px] h-12 xl:h-14 rounded-lg border-71717A border-2 text-14 xl:text-16 text-71717A font-medium
-   leading-5;
+  @apply flex justify-center items-center cursor-pointer w-[188px] xl:w-[232px] h-12 xl:h-14 rounded-lg border-71717A border-2 text-14 xl:text-16 text-71717A font-medium leading-5;
 }
+
 .drawer_disabled_button {
   @apply !border-9A9AA2 !text-9A9AA2 cursor-default;
 }
+
 .sub_container_right_div {
   @apply flex flex-col gap-4 xl:items-center;
 }
+
 .need_help_txt {
   @apply text-5774AC text-14 xl:text-16 underline cursor-pointer tracking-desc xl:tracking-0.3 min-w-fit;
 }

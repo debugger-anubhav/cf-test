@@ -49,6 +49,10 @@ import LoginModal from "@/components/LoginPopups";
 import {useAuthentication} from "@/hooks/checkAuthentication";
 import {baseInstance} from "@/network/axios";
 import Banner from "../../Banner";
+// import {IoVideocam} from "react-icons/io5";
+// import {GoDotFill} from "react-icons/go";
+
+import PopinVideoWidget from "../../PopinVideoWidget";
 
 const ProductDetails = ({params}) => {
   const {checkAuthentication} = useAuthentication();
@@ -514,6 +518,47 @@ const ProductDetails = ({params}) => {
       setLoader(false);
     }, 500);
   }, []);
+
+  // const handleLiveShop = () => {
+  //   window.open(
+  //     "https://www.wakefit.co/mattress/orthopaedic-memory-foam-mattress/WOMFM72366",
+  //     "_blank",
+  //   );
+  // };
+
+  useEffect(() => {
+    const userNameFromLocalStorage = getLocalStorage("user_name");
+    const userNumberFromLocalStorage = getLocalStorage("user_number");
+    const userEmailFromLocalStorage = getLocalStorage("user_email");
+
+    // Create and append the widget script dynamically
+    const popIn = document.createElement("script");
+    popIn.setAttribute("src", "https://widget01.popin.to/js/widget.js");
+    document.body.appendChild(popIn);
+
+    // Initialize the widget once the script is loaded
+    popIn.onload = () => {
+      if (window.popInWidgetInit) {
+        window.popInWidgetInit({
+          token: "12159",
+          mode: "hidden",
+          captured: {
+            name: userNameFromLocalStorage,
+            mobile: userNumberFromLocalStorage,
+            email: userEmailFromLocalStorage,
+          },
+        });
+      }
+    };
+
+    // Clean up script when component unmounts
+    return () => {
+      if (popIn) {
+        document.body.removeChild(popIn);
+      }
+    };
+  }, []);
+
   return (
     <div className={styles.main_container}>
       <ShareModal
@@ -856,29 +901,33 @@ const ProductDetails = ({params}) => {
             )}
           </div>
 
-          <button
-            onClick={
-              soldOut
-                ? handleNotifyMe
-                : cartItems?.length === 0
-                  ? handleAddToCart
-                  : isItemInCart
-                    ? handleGoToCart
-                    : handleAddToCart
-            }
-            disabled={isLoading}
-            className={styles.btn}
-            ref={addToCartButtonRef}>
-            {isLoading ? (
-              <div className={styles.spinner} />
-            ) : soldOut ? (
-              "Notify me"
-            ) : isItemInCart ? (
-              "Go To Cart"
-            ) : (
-              "Add to Cart"
-            )}
-          </button>
+          <div className="flex gap-2">
+            {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget />}
+            <button
+              onClick={
+                soldOut
+                  ? handleNotifyMe
+                  : cartItems?.length === 0
+                    ? handleAddToCart
+                    : isItemInCart
+                      ? handleGoToCart
+                      : handleAddToCart
+              }
+              disabled={isLoading}
+              className={styles.btn}
+              ref={addToCartButtonRef}>
+              {isLoading ? (
+                <div className={styles.spinner} />
+              ) : soldOut ? (
+                "Notify me"
+              ) : isItemInCart ? (
+                "Go To Cart"
+              ) : (
+                "Add to Cart"
+              )}
+            </button>
+          </div>
+          {/* {prodDetails[0]?.preview_video === 1 && <PopinVideoWidget />} */}
           {durationArray.length > 0 && (
             <div className={styles.emi_wrapper}>
               <RiSparklingFill size={16} color={"#597492"} />

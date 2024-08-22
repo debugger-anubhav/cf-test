@@ -130,7 +130,7 @@ export const AddressDrawerContent = ({
         </div>
       )}
       {showAddForm ? (
-        <div className={`${styles.item_wrapper} w-full`}>
+        <div className={`${styles.item_wrapper} w-full !pb-0`}>
           <NewAddressForm
             saveAddDrawer={true}
             checkPostalCode={checkPostalCode}

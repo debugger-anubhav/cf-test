@@ -43,6 +43,7 @@ export default function ProfessionalDetails({
   const [selectedOption, setSelectedOption] = useState("");
   const [storeValues, setStoreValues] = useState(null);
   const [showSimpleLoader, setShowSimpleLoader] = useState(false);
+  const [showSimpleLoaderforGst, setShowSimpleLoaderforGst] = useState(false);
 
   useEffect(() => {
     if (professionId === 2) {
@@ -309,7 +310,11 @@ export default function ProfessionalDetails({
                                   <span
                                     className={`${docStyle.radio_checkmark} `}></span>
                                   <span
-                                    className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                                    className={`${
+                                      selectedOption === item
+                                        ? "!text-222"
+                                        : "!text-71717A"
+                                    }`}>
                                     {item}
                                   </span>
                                 </label>
@@ -387,7 +392,12 @@ export default function ProfessionalDetails({
           openGstSdk={openGstSdk}
           setOpenGstSdk={setOpenGstSdk}
           getDashboardDetailsApi={getDashboardDetailsApi}
+          showSimpleLoaderforGst={showSimpleLoaderforGst}
+          setShowSimpleLoaderforGst={setShowSimpleLoaderforGst}
         />
+      )}
+      {showSimpleLoaderforGst && (
+        <LoaderComponent loading={showSimpleLoaderforGst} />
       )}
       {openModal && (
         <VerfiEmail

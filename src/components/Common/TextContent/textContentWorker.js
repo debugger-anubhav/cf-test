@@ -17,27 +17,5 @@ self.addEventListener("message", ({data: {params, paramsCityId, type}}) => {
         },
       );
     }
-  } else {
-    if (params?.category === "appliances-rental") {
-      baseInstance
-        .get(
-          `${endPoints.seoAppliancesTextContent}?cityId=${paramsCityId}&categoryId=26`,
-        )
-        .then(({data: {data}}) => {
-          self.postMessage({data});
-        });
-    } else if (params?.category === "furniture-rental") {
-      baseInstance
-        .get(
-          `${endPoints.seoFurnitureTextContent}?cityId=${paramsCityId}&categoryId=27`,
-        )
-        .then(({data}) => {
-          self.postMessage({data});
-        });
-    } else {
-      baseInstance.get(endPoints.homePageTextContent).then(({data: {data}}) => {
-        self.postMessage({data});
-      });
-    }
   }
 });

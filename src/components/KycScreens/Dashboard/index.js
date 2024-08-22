@@ -36,6 +36,7 @@ import FinancialInfo from "../FinancialInformation";
 import EducationalDetails from "../EducationalDetails";
 import ProfessionalDetails from "../ProfessionalDetails";
 import AutoPay from "../AutoPay";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 // import CongratulationKyc from '../Congratulation/index'
 
@@ -69,6 +70,7 @@ export default function DashboardComponent() {
   const [docsDetailsData, setDocsDetailsData] = useState(null);
   const [activeTab, setactiveTab] = useState("kyc");
   const [disableKycStatusBtn, setDisableKycStatusBtn] = useState(false);
+  const [showSimpleLoaderforGst, setShowSimpleLoaderforGst] = useState(false);
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
@@ -742,7 +744,12 @@ export default function DashboardComponent() {
               openGstSdk={openGstSdk}
               setOpenGstSdk={setOpenGstSdk}
               getDashboardDetailsApi={getDashboardDetailsApi}
+              showSimpleLoaderforGst={showSimpleLoaderforGst}
+              setShowSimpleLoaderforGst={setShowSimpleLoaderforGst}
             />
+          )}
+          {showSimpleLoaderforGst && (
+            <LoaderComponent loading={showSimpleLoaderforGst} />
           )}
 
           {openDeliverySlot && (
