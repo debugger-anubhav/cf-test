@@ -197,8 +197,8 @@ const AddressSection = () => {
       type === "offlineCustomer"
         ? formikRef?.current?.values?.postalCode
         : type === "onlineCustomer"
-          ? values?.postalCode
-          : primaryAddress?.postal_code;
+        ? values?.postalCode
+        : primaryAddress?.postal_code;
     try {
       const res = await baseInstance.post(
         endPoints.yourAddressPage.postalCode,
