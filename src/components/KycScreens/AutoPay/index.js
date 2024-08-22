@@ -206,8 +206,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
                   item.includes("banking")
                     ? "emandate"
                     : item.includes("card")
-                      ? "card"
-                      : "upi",
+                    ? "card"
+                    : "upi",
                 );
               }}>
               <label className={docStyle.radio_container}>
@@ -222,15 +222,17 @@ export default function AutoPay({getDashboardDetailsApi}) {
                       item.includes("banking")
                         ? "emandate"
                         : item.includes("card")
-                          ? "card"
-                          : "upi",
+                        ? "card"
+                        : "upi",
                     );
                   }}
                   className={docStyle.radio_input}
                 />
                 <span className={`${docStyle.radio_checkmark} `}></span>
                 <span
-                  className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                  className={`${
+                    selectedOption === item ? "!text-222" : "!text-71717A"
+                  }`}>
                   {item}
                 </span>
               </label>

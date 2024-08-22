@@ -103,10 +103,10 @@ const CityshieldDrawer = ({
                     index === 0
                       ? "w-[55px] lg:w-[80px]"
                       : index === 1
-                        ? "w-[65px] lg:w-[91px]"
-                        : index === 2
-                          ? "w-[50px] lg:w-[68px]"
-                          : "w-[75px] lg:w-[104px]"
+                      ? "w-[65px] lg:w-[91px]"
+                      : index === 2
+                      ? "w-[50px] lg:w-[68px]"
+                      : "w-[75px] lg:w-[104px]"
                   } ${styles.benefits_label}`}>
                   {item.label}
                 </p>
