@@ -60,8 +60,6 @@ const ProductDetails = ({params}) => {
   const prodDetails = useSelector(
     state => state.productPageData.singleProductDetails,
   );
-  console.log(prodDetails[0], "Product Details");
-
   const cartItems = useSelector(state => state.cartPageData.cartItems);
   const cityName = useSelector(state => state.homePagedata.cityName);
   const arr = [

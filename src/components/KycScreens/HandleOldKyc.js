@@ -28,7 +28,6 @@ const HandleOldKyc = ({selectOrderIdForKyc}) => {
   const userid = decrypt(getLocalStorage("_ga"));
 
   const handleKycState = async orderId => {
-    console.log("commmmmmmmmmmmmmmmmmm");
     try {
       const response = await baseInstance.get(
         endPoints.kycPage.getKycTrack(userid, orderId),

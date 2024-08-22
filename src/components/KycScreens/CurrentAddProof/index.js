@@ -40,7 +40,6 @@ const CurrentAddressProof = ({
   // const [dropdownOpt, setDropdownOpt] = useState(
   //   currentAddOptions?.supported_docs?.split(","),
   // );
-  console.log(docsData);
   // const dataForSelectDrawer = apiData?.map(item => item.doc_name);
   const dataForSelectDrawer = apiData.map(item => ({
     doc_name: item.doc_name,
@@ -69,6 +68,7 @@ const CurrentAddressProof = ({
       .get(endPoints.addressProofList)
       .then(res => {
         setDocsData(res?.data?.data);
+        console.log(docsData);
       })
       .catch(err => console.log(err?.message || "some error"));
   };

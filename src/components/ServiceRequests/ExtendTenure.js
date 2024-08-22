@@ -18,7 +18,6 @@ function ExtendTenure({prevScreen, orderId, isHelpDrawer}) {
       const response = await baseInstance.get(
         endPoints.getRecurringIdFromOrderId(orderId),
       );
-      console.log(response, "responses");
       setRecurringId(response?.data?.data?.recurring_zo_id);
     } catch (error) {
       console.log(error?.message || "some error");
@@ -29,7 +28,6 @@ function ExtendTenure({prevScreen, orderId, isHelpDrawer}) {
   }, []);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
-  console.log(isSmallScreen, "issmalljnuiwehu");
 
   const handleresize = e => {
     if (window.innerWidth < 768) {
