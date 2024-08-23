@@ -44,7 +44,7 @@ export default function CrifTermsOfUseData() {
         </p>
         <p>{string.crif_terms_of_use.sixth_para}</p>
       </div>
-      <div className={styles.general_wrapper}>
+      <div className={`${styles.general_wrapper} !mb-16 lg:!mb-[84px]`}>
         <div className={`${styles.terms_of_use_general} !mb-8 !mt-8`}>
           {string.crif_terms_of_use.general?.map((item, index) => {
             return (
