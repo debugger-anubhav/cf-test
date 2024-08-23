@@ -177,7 +177,6 @@ export default async function Page(params) {
       </>
     );
   } else {
-    // console.log(metaData, data, "pp");
     redirect("/404");
   }
 }

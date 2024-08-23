@@ -68,7 +68,6 @@ export default function Signin({orderId, setShowLogin}) {
       })
       .then(res => {
         if (res?.data?.data?.data?.token) {
-          console.log("first");
           cookies.set("adminToken", res?.data?.data?.data?.token);
           setShowLogin(false);
         } else {

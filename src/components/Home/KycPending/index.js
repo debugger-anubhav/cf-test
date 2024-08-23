@@ -34,7 +34,7 @@ const KycPending = () => {
   const StyledCarousel = styled(Carousel)`
     .control-dots {
       margin-top: 29px !important;
-      bottom: -2px !important;
+      bottom: -19px !important;
       background-color: #e2e4e8 !important;
       width: fit-content !important;
       border-radius: 10px !important;

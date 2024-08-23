@@ -112,8 +112,6 @@ function CustomerPayment() {
       const res = await baseInstance.get(
         endPoints.addToCart.fetchCoins(userId),
       );
-      console.log(res);
-
       if (res?.data?.data?.length > 0) {
         const availAmount = parseInt(res?.data?.data?.[0]?.topup_amount);
         setTopupAmount(availAmount);

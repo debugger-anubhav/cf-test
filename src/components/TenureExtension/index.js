@@ -86,7 +86,6 @@ function TenureExtension() {
       const response = await baseInstance.get(
         endPoints.getDealCodeNumberFromRecId(params?.recurringId),
       );
-      console.log(response, "responses");
       setDealCodeNumber(response?.data?.data?.dealcodenumber);
       parentApi(response?.data?.data?.dealcodenumber);
     } catch (error) {

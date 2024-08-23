@@ -1,6 +1,6 @@
 .MainContainer {
   /* @apply 3xl:px-[150px] macbook:px-[112px] xl:px-[80px] md:px-[60px] px-4 w-full gap-2 2xl:justify-center 2xl:items-center md:mt-6; */
-  @apply w-full overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
+  @apply w-full pb-2 overflow-scroll mobile:overflow-hidden 4xl:p-[150px] 3xl:px-[150px] macbook1:px-[80px] macbook:px-28 cxl:px-[80px] md1:px-[60px] custom:px-[60px] mobile:px-4 ms:px-4;
 }
 
 .SubMainContainer {
@@ -13,7 +13,7 @@
 }
 
 .BoxSection {
-  @apply md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
+  @apply px-[16px] mobile:px-0 md1:flex md1:flex-row md1:gap-4 pt-[32px] ms:flex-col ms:gap-4 gap-4;
 }
 
 .KycSection {
@@ -44,7 +44,7 @@
 }
 
 .RaiseServicerequestSection {
-  @apply w-[50%] border rounded-lg mobile:w-full;
+  @apply w-[100%] border rounded-lg mobile:w-full;
 }
 
 .RHeadingSection {
@@ -52,11 +52,11 @@
 }
 
 .RHeading {
-  @apply mobile:text-12 md1:text-16 font-Poppins;
+  @apply text-12 mobile:text-12 md1:text-16 font-Poppins;
 }
 
 .RLinkSection {
-  @apply whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
+  @apply text-10 whitespace-nowrap cursor-pointer text-[#5774AC] font-Poppins mobile:text-12 md1:text-14 flex items-center;
 }
 
 .RIconsSection {
@@ -75,7 +75,7 @@
 }
 
 .IconBoxText {
-  @apply w-[54px] text-center text-14 leading-[21px] font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
+  @apply w-[54px] text-center text-12 leading-[21px] break-all mobile:break-normal  font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
 }
 
 .images_wraper {
