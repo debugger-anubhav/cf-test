@@ -35,7 +35,7 @@
 }
 
 .OrderLink {
-  @apply cursor-pointer flex flex-col items-start gap-1;
+  @apply flex flex-col items-start gap-1;
 }
 
 .LinkText {
@@ -73,7 +73,7 @@
 }
 
 .IconBoxText {
-  @apply w-[54px] text-center text-12 leading-[21px] break-all mobile:break-normal  font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
+  @apply w-[54px] text-center text-12 leading-[21px] break-all mobile:break-normal font-Poppins text-[#5774AC] mobile:text-12 md1:text-14;
 }
 
 .images_wraper {
