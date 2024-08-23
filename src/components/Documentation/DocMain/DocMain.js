@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+ import React, {useState, useEffect} from "react";
 import styles from "./DocMain.module.css";
 import MenuList from "@/components/Common/MenuList";
 import DocSidebar from "../Sidebar/DocSidebar";
@@ -318,7 +318,9 @@ const DocMain = () => {
                         }}>
                         Terms and Conditions
                       </span>
-                      <span className="text-[#D96060] ml-1 font-medium">*</span>
+                      <span className="text-[#D96060] ml-1 font-medium -mt-1">
+                        *
+                      </span>
                     </div>
                   </div>
                 )}
