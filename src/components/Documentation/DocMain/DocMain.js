@@ -279,6 +279,7 @@ const DocMain = () => {
 
               <div className="flex text-71717A font-Poppins md:text-base text-14 pb-1">
                 Select an order to view its documentation status
+                <span className="text-[#D96060] ml-1 font-medium mt-1 ">*</span>
               </div>
               <div>
                 <div
@@ -317,6 +318,9 @@ const DocMain = () => {
                           setTermDrawerOpen(true);
                         }}>
                         Terms and Conditions
+                      </span>
+                      <span className="text-[#D96060] ml-1 font-medium mt-1">
+                        *
                       </span>
                     </div>
                   </div>
