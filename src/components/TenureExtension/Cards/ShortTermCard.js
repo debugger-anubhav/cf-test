@@ -24,7 +24,6 @@ function ShortTermCard({
   setLoading,
   dealCodeNumber,
   isCityShieldApplied,
-  source,
 }) {
   const [cityShieldDrawerOpen, setCityShieldDrawerOpen] = useState(false);
   const [selectedOptionPer, setSelectedOptionPer] = useState(
@@ -101,7 +100,6 @@ function ShortTermCard({
         tenure: selectedOptionPer?.value,
         cf_value: isChecked && !apiData?.isCityShieldApplied ? 1 : 0,
         recurringId,
-        utm_source: source,
       },
     );
     if (!result) {

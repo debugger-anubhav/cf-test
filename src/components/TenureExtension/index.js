@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import styles from "./style.module.css";
-import {useParams, useRouter, useSearchParams} from "next/navigation";
+import {useParams, useRouter} from "next/navigation";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../Common/Loader/LoaderComponent";
 import LongTermCard from "./Cards/LongTermCard";
@@ -13,9 +13,6 @@ import {baseInstance} from "@/network/axios";
 function TenureExtension() {
   const params = useParams();
   const router = useRouter();
-
-  const source = useSearchParams().get("data");
-
   let currentUrl;
   if (typeof window !== "undefined") {
     currentUrl = window?.location?.href;
@@ -127,7 +124,6 @@ function TenureExtension() {
             setLoading={setLoading}
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
-            source={source}
           />
 
           <MidTermCard
@@ -138,7 +134,6 @@ function TenureExtension() {
             setLoading={setLoading}
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
-            source={source}
           />
           <ShortTermCard
             items={CardData[2]}
@@ -148,7 +143,6 @@ function TenureExtension() {
             setLoading={setLoading}
             dealCodeNumber={dealCodeNumber}
             isCityShieldApplied={isCityShieldApplied}
-            source={source}
           />
           {!currentUrl?.includes("?data=1") && (
             <MonthlyCard
@@ -158,7 +152,6 @@ function TenureExtension() {
               isCityShieldApplied={isCityShieldApplied}
               recurringId={params?.recurringId}
               setLoading={setLoading}
-              source={source}
             />
           )}
         </div>

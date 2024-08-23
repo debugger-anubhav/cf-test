@@ -28,7 +28,6 @@ export const MonthlyCard = ({
   setLoading,
   dealCodeNumber,
   isCityShieldApplied,
-  source,
 }) => {
   const DiscountPoints = [
     "No Discount",
@@ -129,7 +128,6 @@ export const MonthlyCard = ({
       cf_value: monthlyCardIsChecked && !apiData?.isCityShieldApplied ? 1 : 0,
       source: "extension",
       recurringId,
-      utm_source: source,
     });
     if (!result) {
       alert("Server error. Are you online?");
