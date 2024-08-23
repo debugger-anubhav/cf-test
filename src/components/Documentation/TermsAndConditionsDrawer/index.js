@@ -30,7 +30,7 @@ const TermsAndConditionsDrawer = ({toggleDrawer, open, isCivilScorePage}) => {
 
   const creditScoreTandC = [
     "By continuing, you agree to allow Cityfurnish India Private Limited to fetch your credit report from CRIF High Mark for the purpose of KYC verification. This consent shall be valid for a period of 6 months. ",
-    "By clicking the 'Proceed' button, you agree to CRIF High Mark Credit Score Terms of Use.",
+    "By clicking the 'Proceed' button, you agree to CRIF High Mark Credit Score",
     "You understand that you shall have the option to opt out/unsubscribe from the service by clicking here. Fetching report from the credit bureau will not impact your credit score.",
   ];
 
@@ -52,10 +52,23 @@ const TermsAndConditionsDrawer = ({toggleDrawer, open, isCivilScorePage}) => {
         <div className="">
           <h2 className={styles.header}>Terms and conditions</h2>
           <ul className={styles.map_wrapper}>
-            {termsAndConditions.map((item, index) => (
+            {termsAndConditions?.map((item, index) => (
               <div key={index} className={styles.point_wrapper}>
                 <div className={styles.dot}></div>
-                <li className={styles.list_item}>{item}</li>
+                {termsAndConditions === creditScoreTandC && index === 1 ? (
+                  <li className={styles.list_item}>
+                    {item}{" "}
+                    <a
+                      href="/pages/crif-terms-of-use"
+                      target="_blank"
+                      className="!text-5774AC underline">
+                      Terms of Use{" "}
+                    </a>
+                    .
+                  </li>
+                ) : (
+                  <li className={styles.list_item}>{item}</li>
+                )}
               </div>
             ))}
           </ul>
