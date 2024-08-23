@@ -51,3 +51,6 @@
 .rightDrawer {
   @apply pt-6 md:p-0 md:w-[530px] 3xl:w-[680px] w-full !rounded-t-[20px] md:!rounded-none !max-h-[90%] md:!max-h-full !overflow-visible;
 }
+.formTermsSection {
+  @apply w-full flex items-center;
+}

@@ -7,6 +7,7 @@ self.addEventListener("message", ({data: {params, paramsCityId, type}}) => {
       params?.category === "appliances-rental" ||
       params?.category === "furniture-rental"
     ) {
+      console.log("1-HIT");
       baseInstance.get(endPoints.cityIdByCityName + params?.city).then(
         ({
           data: {
@@ -16,28 +17,6 @@ self.addEventListener("message", ({data: {params, paramsCityId, type}}) => {
           self.postMessage({cityId: id});
         },
       );
-    }
-  } else {
-    if (params?.category === "appliances-rental") {
-      baseInstance
-        .get(
-          `${endPoints.seoAppliancesTextContent}?cityId=${paramsCityId}&categoryId=26`,
-        )
-        .then(({data: {data}}) => {
-          self.postMessage({data});
-        });
-    } else if (params?.category === "furniture-rental") {
-      baseInstance
-        .get(
-          `${endPoints.seoFurnitureTextContent}?cityId=${paramsCityId}&categoryId=27`,
-        )
-        .then(({data}) => {
-          self.postMessage({data});
-        });
-    } else {
-      baseInstance.get(endPoints.homePageTextContent).then(({data: {data}}) => {
-        self.postMessage({data});
-      });
     }
   }
 });

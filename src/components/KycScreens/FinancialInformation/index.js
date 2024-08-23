@@ -374,7 +374,9 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
         onClick={() => {
           submitHandler();
         }}
-        className={`${styles.proceed} ${disableButton && "!bg-[#FFDF85]"} !hidden md:!flex `}>
+        className={`${styles.proceed} ${
+          disableButton && "!bg-[#FFDF85]"
+        } !hidden md:!flex `}>
         Proceed
         <OutlineArrowRight color={"#222222"} />
       </button>

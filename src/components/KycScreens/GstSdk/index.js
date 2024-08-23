@@ -12,6 +12,8 @@ export default function GstSdk({
   getDashboardDetailsApi,
   openGstSdk,
   setOpenGstSdk,
+  showSimpleLoaderforGst,
+  setShowSimpleLoaderforGst,
 }) {
   const dispatch = useDispatch();
   const kycSliceData = useSelector(state => state.kycPage);
@@ -20,8 +22,6 @@ export default function GstSdk({
   const [selectedId, setSelectedId] = useState(
     `${userId}_${data?.dealCodeNumber}`,
   );
-  const [showSimpleLoader, setShowSimpleLoader] = useState(false);
-
   // const pendingDashboardDetail = kycSliceData.pendingDashboardDetail;
 
   const handler = HyperKycResult => {
@@ -47,12 +47,12 @@ export default function GstSdk({
   };
 
   const saveGstDetailsApi = details => {
-    setShowSimpleLoader(true);
+    setShowSimpleLoaderforGst(true);
     baseInstance
       .post(endPoints.kycPage.saveGstDetails, details)
       .then(res => {
         if (res?.data?.data?.data?.rejected) {
-          setShowSimpleLoader(false);
+          setShowSimpleLoaderforGst(false);
           showToastNotification(res?.data?.data?.message, 3);
           setOpenGstSdk(false);
           dispatch(setKycScreenName("dashboard"));
@@ -80,18 +80,20 @@ export default function GstSdk({
         }
 
         if (res?.data?.data?.status) {
-          setShowSimpleLoader(false);
+          setShowSimpleLoaderforGst(false);
           showToastNotification(res?.data?.data?.message, 1);
         }
         if (res?.data?.data?.data?.userCancelled) {
           setOpenGstSdk(false);
           dispatch(setKycScreenName("dashboard"));
         }
+        setShowSimpleLoaderforGst(false);
       })
 
       .catch(err => {
         dispatch(setKycScreenName("dashboard"));
         console.log(err);
+        setShowSimpleLoaderforGst(false);
       });
     setOpenGstSdk(false);
   };
@@ -159,7 +161,9 @@ export default function GstSdk({
           </div>
         </>
       )} */}
-      {showSimpleLoader && <LoaderComponent loading={showSimpleLoader} />}
+      {showSimpleLoaderforGst && (
+        <LoaderComponent loading={showSimpleLoaderforGst} />
+      )}
     </>
   );
 }
