@@ -27,6 +27,9 @@ import CurrentAddressProof from "../../KycScreens/CurrentAddProof/index";
 import SocialMediaLogin from "../../KycScreens/SocialMediaLogin";
 import HandleOldKyc from "../../KycScreens/HandleOldKyc";
 import {useRouter} from "next/navigation";
+import commonStyles from "../common.module.css";
+import TermsAndConditionsDrawer from "../TermsAndConditionsDrawer";
+
 // import ProgressSection from "@/components/KycScreens/ProgressBar";
 
 const DocMain = () => {
@@ -41,6 +44,8 @@ const DocMain = () => {
   const [creditScore, setCreditScore] = useState();
   const [cibilDocsData, setCibilDocsData] = useState();
   const [buttonName, setButtonName] = useState("Start my KYC now");
+  const [termDrawerOpen, setTermDrawerOpen] = useState(false);
+  const [acceptTermCondition, setAcceptTermCondition] = useState(false);
 
   const currentURL = typeof window !== "undefined" ? window.location.href : "";
 
@@ -241,6 +246,11 @@ const DocMain = () => {
 
           {currentScreen === "selectOrderId" && (
             <>
+              <TermsAndConditionsDrawer
+                open={termDrawerOpen}
+                toggleDrawer={bool => setTermDrawerOpen(bool)}
+                isCivilScorePage
+              />
               <KycHeader
                 progress={progress[kycState] || 0}
                 showBackIcon={showBackIcon[kycState]}
@@ -287,15 +297,50 @@ const DocMain = () => {
 
                   <DropDownArrow color={"#71717A"} size={20} />
                 </div>
+                {buttonName === "Start my KYC now" && (
+                  <div className="mt-3">
+                    <div className={`${styles.formTermsSection}`}>
+                      <input
+                        type="checkbox"
+                        // checked={}
+                        className={`${commonStyles.basicCheckBox}`}
+                        onChange={e => {
+                          setAcceptTermCondition(e.target.checked);
+                        }}
+                      />
+                      <span className={`${commonStyles.termsTxt}`}>
+                        I accept
+                      </span>
+                      <span
+                        className={`cursor-pointer ${commonStyles.termsTxt} ${commonStyles.conditionsTxt}`}
+                        onClick={() => {
+                          setTermDrawerOpen(true);
+                        }}>
+                        Terms and Conditions
+                      </span>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* start kyc button  */}
               <button
-                className={`${styles.start_kyc_btn} cursor-pointer ${
-                  selectedOption === null ? "bg-FFDF85 " : "bg-btn-primary "
-                } ${orderIdFromUrl && "bg-btn-primary"}`}
-                onClick={handleStartKyc}>
-                {/* Start my KYC now{" "} */}
+                className={`${styles.start_kyc_btn}  ${
+                  selectedOption === null
+                    ? "bg-FFDF85 cursor-not-allowed"
+                    : "bg-btn-primary cursor-pointer"
+                }
+                ${
+                  buttonName === "Start my KYC now" && !acceptTermCondition
+                    ? "!bg-FFDF85 !cursor-not-allowed"
+                    : "bg-btn-primary cursor-pointer"
+                }`}
+                //  ${orderIdFromUrl && "bg-btn-primary"}
+                onClick={() => {
+                  if (buttonName === "Start my KYC now") {
+                    if (acceptTermCondition) handleStartKyc();
+                  } else handleStartKyc();
+                }}>
                 {buttonName}
                 <ArrowForw
                   color={"#222222"}
