@@ -13,8 +13,10 @@ import {reduxSetModalState} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {format} from "date-fns";
 import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
-import ManageSchedule from "../MyOrders/orders/partTwo/ManageScheduleDrawer";
-import {EditIcon} from "@/assets/icon";
+import ManageSchedule from '../MyOrders/orders/partTwo/ManageScheduleDrawer'
+import { EditIcon } from "@/assets/icon";
+
+
 
 function PastRequests({pastRequestData, loadingSkeleton}) {
   const [rows, setRows] = useState(pastRequestData);
@@ -37,6 +39,44 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
     setTicketID(ticketId);
     toggleModal();
   };
+
+  // 'request_pickup':'request_pickup',
+  // 'pickup_and_refund':'Pickup and Refund',
+  // 'repair':'repair',
+  // 'installation':'installation',
+  // 'replacement':'replacement',
+  // 'upgrade':'upgrade',
+  // 'relocation':'relocation',
+  // 'switch':'switch'
+
+  const ShowPop = (value) => {
+    if (value === "request_pickup") {
+      return true
+    } else if (value === "pickup_and_refund") {
+      return true
+    }
+    else if (value === "repair") {
+      return true
+    }
+    else if (value === "installation") {
+      return true
+    }
+    else if (value === "replacement") {
+      return true
+    }
+    else if (value === "upgrade") {
+      return true
+    }
+    else if (value === "relocation") {
+      return true
+    }
+    else if (value === "switch") {
+      return true
+    } else {
+      return false
+    }
+  }
+
 
   return (
     <div>
@@ -89,25 +129,20 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                       {row?.zoho_case_id}
                     </TableCell>
                     <TableCell className={`${styles.tableCell} capitalize`}>
+                      {console.log(row?.request_type, "Hello")}
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      <span className="flex gap-2 whitespace-nowrap">
-                        {row?.scheduled_datetime
-                          ? `${format(
-                              new Date(row?.scheduled_datetime),
-                              "yyyy-MM-dd",
-                            )}`
-                          : "NA"}
-                        {row?.allowScheduleDate && (
-                          <span
-                            onClick={() =>
-                              handleClick(row?.order_id, row?.zoho_case_id)
-                            }
-                            className={"cursor-pointer"}>
-                            <EditIcon size={18} />{" "}
-                          </span>
-                        )}
+                      <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                        ? `${format(
+                          new Date(row?.scheduled_datetime),
+                          "yyyy-MM-dd",
+                        )}`
+                        : row?.srScheduledDatetime ? `${format(
+                          new Date(row?.srScheduledDatetime),
+                          "yyyy-MM-dd",
+                        )}` : "NA"}
+                        {ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>

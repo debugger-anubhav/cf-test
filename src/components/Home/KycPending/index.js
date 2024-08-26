@@ -192,7 +192,6 @@ const KycPending = () => {
     ];
 
     const userId = decrypt(getLocalStorage("_ga"));
-
     const handleKycData = async () => {
         const body = {
             userId,
@@ -342,8 +341,7 @@ const KycPending = () => {
                                                                     size={20}
                                                                     color={"#597492"}
                                                                     className={`!text-[#597492] ${sortOpen ? style.arrow_up : style.arrow_down
-                                                                        }`}
-                                                                />
+                                                                        }`} />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -738,8 +736,7 @@ const KycPending = () => {
                                                         onClick={() =>
                                                             router.push(
                                                                 `/documentation?order_id=${selectedOption}`,
-                                                            )
-                                                        }
+                                                            )}
                                                         className={
                                                             "flex items-center justify-center whitespace-nowrap !text-start"
                                                         }>
