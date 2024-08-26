@@ -872,7 +872,7 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
-              {arr[0]?.is_frp !== 1 && isLogin && isOfflineCustomer === 0 && (
+              {isLogin && isOfflineCustomer === 0 && (
                 <div className={styles.coins_div}>
                   <div className={styles.coins_left_div}>
                     <div>
