@@ -136,7 +136,10 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                           new Date(row?.scheduled_datetime),
                           "yyyy-MM-dd",
                         )}`
-                        : "NA"}
+                        : row?.srScheduledDatetime ? `${format(
+                          new Date(row?.srScheduledDatetime),
+                          "yyyy-MM-dd",
+                        )}` : "NA"}
                         {ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                       </span>
                     </TableCell>
