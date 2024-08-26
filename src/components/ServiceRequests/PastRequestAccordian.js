@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "../Payments/styles.module.css";
-import {Minus, Plus, EditIcon} from "@/assets/icon";
-import {format} from "date-fns";
+import { Minus, Plus, EditIcon } from "@/assets/icon";
+import { format } from "date-fns";
 import ManageSchedule from "../MyOrders/orders/partTwo/ManageScheduleDrawer";
-import {reduxSetModalState} from "@/store/Slices";
-import {useDispatch, useSelector} from "react-redux";
+import { reduxSetModalState } from "@/store/Slices";
+import { useDispatch, useSelector } from "react-redux";
 
-const PastRequestAccordian = ({pastRequestData}) => {
+const PastRequestAccordian = ({ pastRequestData }) => {
   const [rows, setRows] = useState(pastRequestData);
   const [indexOfActiveAcc, setIndexOfActiveAcc] = useState(null);
   const dispatch = useDispatch();
@@ -27,10 +27,38 @@ const PastRequestAccordian = ({pastRequestData}) => {
   };
 
   const handleClick = (value, ticketId) => {
-    setOrderID(value);
-    setTicketID(ticketId);
-    toggleModal();
-  };
+    setOrderID(value)
+    setTicketID(ticketId)
+    toggleModal()
+  }
+
+  const ShowPop = (value) => {
+    if (value === "request_pickup") {
+      return true
+    } else if (value === "pickup_and_refund") {
+      return true
+    }
+    else if (value === "repair") {
+      return true
+    }
+    else if (value === "installation") {
+      return true
+    }
+    else if (value === "replacement") {
+      return true
+    }
+    else if (value === "upgrade") {
+      return true
+    }
+    else if (value === "relocation") {
+      return true
+    }
+    else if (value === "switch") {
+      return true
+    } else {
+      return false
+    }
+  }
 
   return (
     <div>
@@ -42,9 +70,8 @@ const PastRequestAccordian = ({pastRequestData}) => {
             key={index.toString()}
             className={`${isActive && styles.active} ${isActive && "mt-4"}`}>
             <div
-              className={`${styles.past_request_accordian_wrapper} ${
-                isActive ? "pb-3 !pt-3 bg-F7F7F8" : "pb-6"
-              }`}
+              className={`${styles.past_request_accordian_wrapper} ${isActive ? "pb-3 !pt-3 bg-F7F7F8" : "pb-6"
+                }`}
               onClick={() => toggleAccordion(index)}>
               <p className={`${styles.tableHeaderCell}`}>
                 <span className="font-medium">Ticket Id: </span>
@@ -72,20 +99,24 @@ const PastRequestAccordian = ({pastRequestData}) => {
                 <div
                   className={`${styles.tableCell} flex items-center gap-1 whitespace-nowrap`}>
                   <span className="font-medium">Scheduled Date:</span>{" "}
-                  <span className="flex gap-2 whitespace-nowrap">
-                    {row?.scheduled_datetime
-                      ? `${format(
-                          new Date(row?.scheduled_datetime),
-                          "yyyy-MM-dd",
-                        )}`
-                      : "NA"}
-                    {row?.allowScheduleDate && (
-                      <span
-                        onClick={() => handleClick(row?.order_id)}
-                        className={"cursor-pointer"}>
-                        <EditIcon size={18} />{" "}
-                      </span>
-                    )}
+                  {/* <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                    ? `${format(
+                      new Date(row?.scheduled_datetime),
+                      "yyyy-MM-dd",
+                    )}`
+                    : "NA"}
+                    {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                  </span> */}
+                  <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                    ? `${format(
+                      new Date(row?.scheduled_datetime),
+                      "yyyy-MM-dd",
+                    )}`
+                    : row?.srScheduledDatetime ? `${format(
+                      new Date(row?.srScheduledDatetime),
+                      "yyyy-MM-dd",
+                    )}` : "NA"}
+                    {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                   </span>
                 </div>
                 <div className={styles.tableCell}>
@@ -119,9 +150,8 @@ const PastRequestAccordian = ({pastRequestData}) => {
             )}
             {index !== rows.length - 1 && (
               <div
-                className={`bg-EDEDEE h-[1px] w-full ${
-                  isActive && "mt-4"
-                }`}></div>
+                className={`bg-EDEDEE h-[1px] w-full ${isActive && "mt-4"
+                  }`}></div>
             )}
           </div>
         );
