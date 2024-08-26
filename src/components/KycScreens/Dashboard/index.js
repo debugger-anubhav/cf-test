@@ -37,6 +37,7 @@ import EducationalDetails from "../EducationalDetails";
 import ProfessionalDetails from "../ProfessionalDetails";
 import AutoPay from "../AutoPay";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
+import ProgressSection from "../ProgressBar";
 
 // import CongratulationKyc from '../Congratulation/index'
 
@@ -74,9 +75,9 @@ export default function DashboardComponent() {
   const [currentScreen, setCurrentScreen] = useState(
     kycSliceData.kycScreenName,
   );
-  const [progressNumber, setProgressNumber] = useState(
-    kycSliceData?.progressPercent,
-  );
+  // const [progressNumber, setProgressNumber] = useState(
+  //   kycSliceData?.progressPercent,
+  // );
   const [uploadedDocsData, setUploadedDocsData] = useState(null);
 
   const conditionallyDesc = item => {
@@ -292,7 +293,7 @@ export default function DashboardComponent() {
         ? Math.round((progress?.length / totalProgress) * 100)
         : 0;
     dispatch(setProgressPercent(progressPercentage));
-    setProgressNumber(progressPercentage);
+    // setProgressNumber(progressPercentage);
   }, [dashboardDetails]);
 
   useEffect(() => {
@@ -529,7 +530,7 @@ export default function DashboardComponent() {
               </div>
             </div>
 
-            <div className="sm:w-[240px] w-[200px]">
+            {/* <div className="sm:w-[240px] w-[200px] md:flex hidden">
               <div className={styles.progressBarContainer}>
                 <div
                   className={`${styles.progressBar} ${
@@ -552,6 +553,9 @@ export default function DashboardComponent() {
                   </div>
                 </div>
               </div>
+            </div> */}
+            <div className="sm:w-[240px] w-[200px] md:flex hidden">
+              <ProgressSection />
             </div>
           </div>
 
@@ -769,7 +773,9 @@ export default function DashboardComponent() {
               heading={"Change Profession?"}
             />
           )}
-
+          <div className="flex md:hidden">
+            <ProgressSection />
+          </div>
           {showQueDrawer && (
             <FinancialQueDrawer
               changeState={setShowQueDrawer}

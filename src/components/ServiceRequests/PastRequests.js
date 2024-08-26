@@ -13,10 +13,8 @@ import {reduxSetModalState} from "@/store/Slices";
 import {useDispatch, useSelector} from "react-redux";
 import {format} from "date-fns";
 import InvoicesSkeleton from "../Invoices/InvoicesSkeleton";
-import ManageSchedule from '../MyOrders/orders/partTwo/ManageScheduleDrawer'
-import { EditIcon } from "@/assets/icon";
-
-
+import ManageSchedule from "../MyOrders/orders/partTwo/ManageScheduleDrawer";
+import {EditIcon} from "@/assets/icon";
 
 function PastRequests({pastRequestData, loadingSkeleton}) {
   const [rows, setRows] = useState(pastRequestData);
@@ -49,31 +47,25 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
   // 'relocation':'relocation',
   // 'switch':'switch'
 
-  const ShowPop = (value) => {
+  const ShowPop = value => {
     if (value === "request_pickup") {
-      return true
+      return true;
     } else if (value === "pickup_and_refund") {
-      return true
-    }
-    else if (value === "repair") {
-      return true
-    }
-    else if (value === "installation") {
-      return true
-    }
-    else if (value === "replacement") {
-      return true
-    }
-    else if (value === "upgrade") {
-      return true
-    }
-    else if (value === "relocation") {
-      return true
-    }
-    else if (value === "switch") {
-      return true
+      return true;
+    } else if (value === "repair") {
+      return true;
+    } else if (value === "installation") {
+      return true;
+    } else if (value === "replacement") {
+      return true;
+    } else if (value === "upgrade") {
+      return true;
+    } else if (value === "relocation") {
+      return true;
+    } else if (value === "switch") {
+      return true;
     } else {
-      return false
+      return false;
     }
   }
 

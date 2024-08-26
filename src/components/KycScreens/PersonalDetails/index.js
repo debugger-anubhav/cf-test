@@ -22,7 +22,7 @@ import {useDispatch, useSelector} from "react-redux";
 import DoItLater from "@/components/Documentation/DoItLaterModal/DoItLater";
 import {reduxSetModalState, setKycScreenName} from "@/store/Slices";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
-
+import ProgressSection from "../ProgressBar/index";
 const PersonalDetails = ({handleKycState, cibilDocsData}) => {
   const dispatch = useDispatch();
 
@@ -345,15 +345,19 @@ const PersonalDetails = ({handleKycState, cibilDocsData}) => {
           </p>
         </div>
       )}
-
-      <div className={design.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => dispatch(setKycScreenName("selectOrderId"))}
-          className={"cursor-pointer"}
-        />
-        Personal details
+      <div className="flex w-full justify-between items-center">
+        <div className={design.heading}>
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => dispatch(setKycScreenName("selectOrderId"))}
+            className={"cursor-pointer"}
+          />
+          Personal details
+        </div>
+        <div>
+          <ProgressSection />
+        </div>
       </div>
       <div className={`${styles.formHeadingSecond}`}>
         <span className={`${commonStyles.formHeadings}`}>

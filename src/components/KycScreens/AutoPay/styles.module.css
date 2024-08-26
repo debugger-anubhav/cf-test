@@ -14,5 +14,5 @@
   @apply lg:w-6 lg:h-6 w-4 h-4 flex cursor-pointer;
 }
 .sticky_btn_wrapper {
-  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-0 pb-6 w-full right-0;
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-12 pb-6 w-full right-0;
 }
