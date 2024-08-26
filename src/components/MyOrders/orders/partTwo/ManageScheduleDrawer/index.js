@@ -4,13 +4,15 @@ import Modal from "react-responsive-modal";
 import {Close} from "@/assets/icon";
 import {Drawer} from "@mui/material";
 
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {format, parse} from "date-fns";
-import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import { baseInstance } from "@/network/axios";
+import { endPoints } from "@/network/endPoints";
+import { format, parse } from "date-fns";
+import { decrypt } from "@/hooks/cryptoUtils";
+import { getLocalStorage } from "@/constants/constant";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
-const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
+const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -50,6 +52,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
       )
       .then(res => {
         setSlotdata(res?.data?.data);
+        setSelectedDate(format(new Date(res?.data?.data?.srScheduledDatetime), "yyyy-MM-dd"),);
         const inputTime = res?.data?.data?.time;
         if (inputTime) {
           const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
@@ -60,21 +63,33 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
           setCurrentDate(
             format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
           );
+
+        res?.data?.data?.srScheduledDatetime &&
+          setCurrentDate(
+            format(new Date(res?.data?.data?.srScheduledDatetime), "do MMM, yyyy"),
+          );
       });
   };
 
   const updateSlot = async () => {
+
+    setIsLoading(true)
+
     const body = {
       slot: `${selectedDate} 09:00:00`,
       orderId,
       zohoCaseId: slotData?.zohoCaseId,
       updateSRSlot: page === "PageSR",
     };
+
     try {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
       closeModal();
     } catch (err) {
       console.log(err?.message || "some error");
+    } finally {
+      setIsLoading(false)
+      window.location.reload(true)
     }
   };
 
@@ -93,7 +108,6 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
           Select to change slot as per your preference
         </p>
       </div>
-
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred date:</p>
         <div className={styles.map_wrapper}>
@@ -136,10 +150,10 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
         <button
           disabled={!selectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
-            styles.modify_btn
-          }`}>
-          Modify
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn
+            }`}>
+          {isLoading && <div className={styles.spinner} />}
+          <span className={isLoading && "ml-4"}>Modify</span>
         </button>
       </div>
     </>
