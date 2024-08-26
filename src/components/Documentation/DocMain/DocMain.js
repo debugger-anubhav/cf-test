@@ -1,4 +1,4 @@
- import React, {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import styles from "./DocMain.module.css";
 import MenuList from "@/components/Common/MenuList";
 import DocSidebar from "../Sidebar/DocSidebar";
