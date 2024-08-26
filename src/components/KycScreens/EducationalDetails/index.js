@@ -20,6 +20,7 @@ import {baseInstance} from "@/network/axios";
 import {endPoints} from "@/network/endPoints";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
+import ProgressSection from "../ProgressBar";
 
 export default function EducationalDetails({getDashboardDetailsApi}) {
   const dispatch = useDispatch();
@@ -166,14 +167,19 @@ export default function EducationalDetails({getDashboardDetailsApi}) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header_wrapper}>
-        <div className={styles.heading}>
-          <BackIcon
-            color={"#222222"}
-            size={20}
-            onClick={() => dispatch(setKycScreenName("dashboard"))}
-            className={"cursor-pointer"}
-          />
-          Educational details
+        <div className="flex w-full justify-between items-center">
+          <div className={styles.heading}>
+            <BackIcon
+              color={"#222222"}
+              size={20}
+              onClick={() => dispatch(setKycScreenName("dashboard"))}
+              className={"cursor-pointer"}
+            />
+            Educational details
+          </div>
+          <div>
+            <ProgressSection />
+          </div>
         </div>
       </div>
 

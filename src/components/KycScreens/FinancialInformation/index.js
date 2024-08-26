@@ -22,6 +22,7 @@ import commonStyles from "@/components/Documentation/common.module.css";
 import LoaderComponent from "../../Common/Loader/LoaderComponent";
 import {showToastNotification} from "@/components/Common/Notifications/toastUtils";
 import RejectedDocsComponent from "@/components/Documentation/KYCAddress/RejectedDocsComponent";
+import ProgressSection from "../ProgressBar";
 
 const allowedFileTypes = ["application/pdf"];
 
@@ -164,16 +165,20 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
 
   return (
     <div className="mt-8 w-full md:w-auto">
-      <div className={styles.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={"cursor-pointer"}
-        />
-        Financial Information
+      <div className="flex w-full justify-between items-center">
+        <div className={styles.heading}>
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => dispatch(setKycScreenName("dashboard"))}
+            className={"cursor-pointer"}
+          />
+          Financial Information
+        </div>
+        <div>
+          <ProgressSection />
+        </div>
       </div>
-
       <div>
         {reject?.rejected_reason && reject?.stage_status === 3 && (
           <div
