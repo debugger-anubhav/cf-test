@@ -42,8 +42,10 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
     const bodyA = {
       deal_id: orderId,
       user_id: userId,
-      zoho_case_id: ticketID,
-    };
+      zoho_case_id: ticketID
+    }
+
+
     baseInstance
       .post(
         endPoints.myOrdersPage.getDeliverySlots,
