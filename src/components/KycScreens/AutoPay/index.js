@@ -230,7 +230,9 @@ export default function AutoPay({getDashboardDetailsApi}) {
                 />
                 <span className={`${docStyle.radio_checkmark} `}></span>
                 <span
-                  className={`${selectedOption === item ? "!text-222" : "!text-71717A"}`}>
+                  className={`${
+                    selectedOption === item ? "!text-222" : "!text-71717A"
+                  }`}>
                   {item}
                 </span>
               </label>

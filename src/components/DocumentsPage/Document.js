@@ -143,7 +143,11 @@ const Document = () => {
           </button>
           <button
             disabled={!selectRejectedReason}
-            className={`${style.yellow_btn} ${selectRejectedReason ? "bg-F6B704" : "bg-FFDF85 !cursor-not-allowed"}`}
+            className={`${style.yellow_btn} ${
+              selectRejectedReason
+                ? "bg-F6B704"
+                : "bg-FFDF85 !cursor-not-allowed"
+            }`}
             onClick={() => statusUpdateApiCall(selectedItem, 2)}>
             Reject
           </button>
@@ -313,7 +317,9 @@ const Document = () => {
               return (
                 <div
                   key={index.toString()}
-                  className={`${index === activeTab ? style.active_tab_item : style.tab_item}`}
+                  className={`${
+                    index === activeTab ? style.active_tab_item : style.tab_item
+                  }`}
                   onClick={() => {
                     setActiveTab(index);
                   }}>

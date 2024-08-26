@@ -36,6 +36,7 @@ import FinancialInfo from "../FinancialInformation";
 import EducationalDetails from "../EducationalDetails";
 import ProfessionalDetails from "../ProfessionalDetails";
 import AutoPay from "../AutoPay";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
 // import CongratulationKyc from '../Congratulation/index'
 
@@ -76,6 +77,7 @@ export default function DashboardComponent() {
     kycSliceData?.progressPercent,
   );
   const [uploadedDocsData, setUploadedDocsData] = useState(null);
+  const [showSimpleLoaderforGst, setShowSimpleLoaderforGst] = useState(false);
 
   const conditionallyDesc = item => {
     const additional = item.id === 3 ? item.stage_description.split("|") : "";
@@ -742,7 +744,12 @@ export default function DashboardComponent() {
               openGstSdk={openGstSdk}
               setOpenGstSdk={setOpenGstSdk}
               getDashboardDetailsApi={getDashboardDetailsApi}
+              showSimpleLoaderforGst={showSimpleLoaderforGst}
+              setShowSimpleLoaderforGst={setShowSimpleLoaderforGst}
             />
+          )}
+          {showSimpleLoaderforGst && (
+            <LoaderComponent loading={showSimpleLoaderforGst} />
           )}
 
           {openDeliverySlot && (

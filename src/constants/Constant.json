@@ -1,7 +1,7 @@
 {
   "landing_page": {
-    "announcement_bar": "Rent with freedom - 20% Off! ",
-    "coupon_code": "FREEDOM20",
+    "announcement_bar": "Rent with freedom - 25% Off! ",
+    "coupon_code": "FREEDOM25",
 
     "header": {
       "menuList1": [
@@ -280,6 +280,26 @@
       "The terms of Use stated herein shall only govern the Website and the mobile application of Cityfurnish shall be governed by a separate Terms of Use.",
       "Your use of the Website and services are governed by the following Terms of Use as applicable to the Website including the applicable policies which are incorporated herein by way of reference. If you transact on the Website, You shall be subject to the policies that are applicable to the Website for such transaction. By mere use of the Website, You shall be contracting with the Company and these terms and conditions including the policies constitute your binding obligations, with the Company.",
       "The terms of Use stated herein shall only govern the Website and the mobile application of Cityfurnish shall be governed by a separate Terms of Use."
+    ]
+  },
+  "crif_terms_of_use": {
+    "first_para": " I hereby appoint Cityfurnish India Pvt. Ltd. (hereinafter referred as “Company”), having its registered office at Flat No. 31, Ekta Govt. Employees Co-operative Group, Gurgaon - 122001, as my lawful agent to receive my credit report/credit history (“Credit Information”) from Credit Information Companies (“CICs”).",
+    "second_para": "I further authorize the Company to share with CICs, my personal information/details to procure my Credit Information on a monthly frequency and use the same to provide me with the fulfillment of my  KYC_ and attesting my creditworthiness (“Purpose”). ",
+    "third_para": "I understand and acknowledge that the CIC shall not be liable under law or equity, in any manner whatsoever, for providing my Credit Information to the Company and I will not raise any claim or objections against the CIC. ",
+    "fourth_para": "I confirm that this consent is given by my free will and not due to any solicitation by any person/entity.",
+    "fifth_para": "This consent/authorization shall be valid for (i) a maximum period of 06 (six) months, from the date of giving the same, (ii) satisfying the Purpose or (iii) until I withdraw my consent at any time, by informing the same to the Company, at their registered office address, website, assigned email id or mobile application, whichever is earlier. ",
+    "sixth_para": "In connection with submission of the application for my credit information (“Consumer Credit Information”) offered by CRIF High Mark Credit Information Services Pvt. Ltd (“CIC”) through Cityfurnish India Pvt. Ltd. (referred to as the “Company”) and delivery of the Consumer Credit Information to the Company, I hereby acknowledge and agree to the following: ",
+    "general": [
+      "1. The Company is my lawfully appointed agent and he / it has agreed to be my agent obtain my Credit Information Report and Credit Score from CRIF High Mark Credit Information Services Pvt. Ltd (CRIF High Mark)  for the purpose of fulfillment of my  KYC_ and attesting my creditworthiness and not for any other purposes. This consent shall be valid for a maximum period of 6 months or till such time the credit information is required to be retained to satisfy the purpose for  which it was intended, or I withdraw my consent to store such credit information, whichever is earlier",
+      "2. I hereby expressly grant unconditional consent to, and direct, CIC to deliver and / or transfer my Consumer Credit Information to the Company on my behalf. ",
+      "3. I shall not hold CIC  responsible or liable for any loss, claim, liability, or damage of any kind resulting from, arising out of, or in any way related to: (a) delivery of my Consumer Credit Information  to the Company; (b) any use, modification or disclosure by the Company  of the contents, in whole or in part, of my Consumer Credit Information, wherever authorized by me; (c) any breach of confidentiality or privacy in relation to delivery of my Consumer Credit Information  to the Company; ",
+      "4. I acknowledge and accept that: (a) CIC has not made any promises or representations to me in order to induce me to provide my Consumer Credit Information   or seek any consent or authorization in this regard; and (b) the implementation of the Agreement between CIC and the Company is solely the responsibility of the Company.",
+      "5. I agree that I may be required to record my consent / provide instructions electronically or physically as the case may be, and in all such cases I understand that by clicking on the 'I Accept' button below or signing this Consent physically, I am providing 'written instructions' to Company authorizing Company to obtain my Consumer Credit Information from my personal credit profile from CRIF High Mark. I further authorize Company to obtain such information solely to confirm my identity and display my Consumer Credit Information to me.  Further in all such cases by checking this box and clicking on the Authorize button or signing this Consent physically, I agree to the terms and conditions, acknowledge receipt of CIC privacy policy and agree to its terms, and confirm my authorization for Company to obtain my Consumer Credit Information.",
+      "6. I understand that in order to deliver the product to me, I hereby authorize Company, to obtain my Consumer Credit Information from CIC.",
+      "7. By submitting this registration form, I understand that I am providing express written instructions for Company to request and receive a copy of my consumer credit report and score from CIC.",
+      "8. I understand that the product is provided on an “as-is”, “as available” basis and CIC expressly disclaims all warranties, including the warranties of merchantability, fitness for a particular purpose, and non-infringement. ",
+      "9. I shall not sue or otherwise make or present any demand or claim, and I irrevocably, unconditionally and entirely release, waive and forever discharge CIC, its officers, directors, employees, agents, licensees, affiliates, successors and assigns, jointly and individually (hereinafter “Releasee”), from any and all manner of liabilities, claims, demands, losses, claims, suits, costs and expenses (including court costs and reasonable attorney fees) (“Losses”), whatsoever, in law or equity, whether known or unknown, which I ever had, now have, or in the future may have against the Releasee with respect to the submission of my Consumer Credit Information   and / or my decision to provide CIC with the authority to deliver my Consumer Credit Information  to the Company. I agree to defend, indemnify, and hold harmless the Releasee from and against any and all losses resulting from claims made against CIC by third parties arising from and in connection with this letter.",
+      "10. I agree that the terms of this confirmation letter shall be governed by the laws of India and shall be subject to the exclusive jurisdiction of the courts located in Mumbai in regard to any dispute arising hereof. "
     ]
   }
 }
