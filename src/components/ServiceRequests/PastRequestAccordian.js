@@ -99,12 +99,23 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                 <div
                   className={`${styles.tableCell} flex items-center gap-1 whitespace-nowrap`}>
                   <span className="font-medium">Scheduled Date:</span>{" "}
-                  <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                  {/* <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
                     ? `${format(
                       new Date(row?.scheduled_datetime),
                       "yyyy-MM-dd",
                     )}`
                     : "NA"}
+                    {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                  </span> */}
+                  <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                    ? `${format(
+                      new Date(row?.scheduled_datetime),
+                      "yyyy-MM-dd",
+                    )}`
+                    : row?.srScheduledDatetime ? `${format(
+                      new Date(row?.srScheduledDatetime),
+                      "yyyy-MM-dd",
+                    )}` : "NA"}
                     {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                   </span>
                 </div>
