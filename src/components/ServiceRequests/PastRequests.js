@@ -77,6 +77,17 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
     }
   }
 
+  /*
+  request_pickup
+  repair
+  pickup_and_refund
+  installation
+  replacement
+  upgrade
+  relocation
+  switch
+  */
+
 
   return (
     <div>
@@ -127,7 +138,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                       {row?.zoho_case_id}
                     </TableCell>
                     <TableCell className={`${styles.tableCell} capitalize`}>
-                      {console.log(row?.request_type, "Hello")}
+
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
@@ -140,7 +151,7 @@ function PastRequests({ pastRequestData, loadingSkeleton }) {
                           new Date(row?.srScheduledDatetime),
                           "yyyy-MM-dd",
                         )}` : "NA"}
-                        {ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                        {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>

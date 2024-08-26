@@ -29,9 +29,38 @@ const PastRequestAccordian = ({ pastRequestData }) => {
   };
 
   const handleClick = (value, ticketId) => {
+
     setOrderID(value)
     setTicketID(ticketId)
     toggleModal()
+  }
+
+  const ShowPop = (value) => {
+    if (value === "request_pickup") {
+      return true
+    } else if (value === "pickup_and_refund") {
+      return true
+    }
+    else if (value === "repair") {
+      return true
+    }
+    else if (value === "installation") {
+      return true
+    }
+    else if (value === "replacement") {
+      return true
+    }
+    else if (value === "upgrade") {
+      return true
+    }
+    else if (value === "relocation") {
+      return true
+    }
+    else if (value === "switch") {
+      return true
+    } else {
+      return false
+    }
   }
 
   return (
@@ -80,7 +109,7 @@ const PastRequestAccordian = ({ pastRequestData }) => {
                       "yyyy-MM-dd",
                     )}`
                     : "NA"}
-                    {row?.allowScheduleDate && <span onClick={() => handleClick(row?.order_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                    {ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
                   </span>
                 </div>
                 <div className={styles.tableCell}>

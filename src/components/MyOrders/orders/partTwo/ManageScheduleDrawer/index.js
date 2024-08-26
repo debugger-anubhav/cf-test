@@ -45,6 +45,8 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
       user_id: userId,
       zoho_case_id: ticketID
     }
+    console.log(page, "Page Value");
+
     baseInstance
       .post(endPoints.myOrdersPage.getDeliverySlots, page === "PageSR" ? bodyA : body)
       .then(res => {
