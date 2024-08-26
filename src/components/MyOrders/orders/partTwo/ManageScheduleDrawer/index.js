@@ -101,7 +101,7 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
       <h1 className={styles.modal_head}>Manage delivery slot</h1>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>
-          Current scheduled date: {currentDate} at {scheduledTime}
+          Current scheduled date:{" "}<span className="font-semibold"> {currentDate} at {scheduledTime}</span>
         </p>
         <p className={styles.desc}>
           Select to change slot as per your preference
