@@ -67,7 +67,7 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
     } else {
       return false;
     }
-  }
+  };
 
   /*
   request_pickup
@@ -79,7 +79,6 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
   relocation
   switch
   */
-
 
   return (
     <div>
@@ -135,16 +134,29 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
-                      <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
-                        ? `${format(
-                          new Date(row?.scheduled_datetime),
-                          "yyyy-MM-dd",
-                        )}`
-                        : row?.srScheduledDatetime ? `${format(
-                          new Date(row?.srScheduledDatetime),
-                          "yyyy-MM-dd",
-                        )}` : "NA"}
-                        {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                      <span className="flex gap-2 whitespace-nowrap">
+                        {row?.scheduled_datetime
+                          ? `${format(
+                              new Date(row?.scheduled_datetime),
+                              "yyyy-MM-dd",
+                            )}`
+                          : row?.srScheduledDatetime
+                            ? `${format(
+                                new Date(row?.srScheduledDatetime),
+                                "yyyy-MM-dd",
+                              )}`
+                            : "NA"}
+                        {(row?.scheduled_datetime ||
+                          row?.srScheduledDatetime) &&
+                          ShowPop(row?.request_type) && (
+                            <span
+                              onClick={() =>
+                                handleClick(row?.order_id, row?.zoho_case_id)
+                              }
+                              className={"cursor-pointer"}>
+                              <EditIcon size={18} />{" "}
+                            </span>
+                          )}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>
