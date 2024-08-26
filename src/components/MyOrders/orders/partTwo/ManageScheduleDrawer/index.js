@@ -1,16 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
-import {Close} from "@/assets/icon";
-import {Drawer} from "@mui/material";
+import { Close } from "@/assets/icon";
+import { Drawer } from "@mui/material";
 
-import {baseInstance} from "@/network/axios";
-import {endPoints} from "@/network/endPoints";
-import {format, parse} from "date-fns";
-import {decrypt} from "@/hooks/cryptoUtils";
-import {getLocalStorage} from "@/constants/constant";
+import { baseInstance } from "@/network/axios";
+import { endPoints } from "@/network/endPoints";
+import { format, parse } from "date-fns";
+import { decrypt } from "@/hooks/cryptoUtils";
+import { getLocalStorage } from "@/constants/constant";
+import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 
-const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
+const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
   const [selectedDate, setSelectedDate] = useState();
@@ -38,10 +40,18 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
       deal_id: orderId,
       user_id: userId,
     };
+    const bodyA = {
+      deal_id: orderId,
+      user_id: userId,
+      zoho_case_id: ticketID
+    }
+    console.log(page, "Page Value");
+
     baseInstance
-      .post(endPoints.myOrdersPage.getDeliverySlots, body)
+      .post(endPoints.myOrdersPage.getDeliverySlots, page === "PageSR" ? bodyA : body)
       .then(res => {
         setSlotdata(res?.data?.data);
+        setSelectedDate(format(new Date(res?.data?.data?.srScheduledDatetime), "yyyy-MM-dd"),);
         const inputTime = res?.data?.data?.time;
         if (inputTime) {
           const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
@@ -52,39 +62,51 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
           setCurrentDate(
             format(new Date(res?.data?.data?.tmpDateMatch), "do MMM, yyyy"),
           );
+
+        res?.data?.data?.srScheduledDatetime &&
+          setCurrentDate(
+            format(new Date(res?.data?.data?.srScheduledDatetime), "do MMM, yyyy"),
+          );
       });
   };
 
   const updateSlot = async () => {
+
+    setIsLoading(true)
+
     const body = {
       slot: `${selectedDate} 09:00:00`,
       orderId,
       zohoCaseId: slotData?.zohoCaseId,
+      updateSRSlot: page == "PageSR" ? true : false
     };
+
     try {
       await baseInstance.post(endPoints.myOrdersPage.updateSlot, body);
       closeModal();
     } catch (err) {
       console.log(err?.message || "some error");
+    } finally {
+      setIsLoading(false)
+      window.location.reload(true)
     }
   };
 
   useEffect(() => {
     getDeliverySlots();
-  }, []);
+  }, [ticketID]);
 
   const ModalContent = () => (
     <>
       <h1 className={styles.modal_head}>Manage delivery slot</h1>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>
-          Current scheduled date: {currentDate} at {scheduledTime}
+          Current scheduled date:{" "}<span className="font-semibold"> {currentDate} at {scheduledTime}</span>
         </p>
         <p className={styles.desc}>
           Select to change slot as per your preference
         </p>
       </div>
-
       <div className={styles.prefferd_wrapper}>
         <p className={styles.desc}>Preferred date:</p>
         <div className={styles.map_wrapper}>
@@ -97,9 +119,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
               }}>
               <div className={styles.outer_circle}>
                 <div
-                  className={`${
-                    selectedDate === item.date ? styles.inner_circle : ""
-                  }`}></div>
+                  className={`${selectedDate === item.date ? styles.inner_circle : ""
+                    }`}></div>
               </div>
               <p className={styles.date}>
                 {format(new Date(item?.date), "do")}
@@ -127,10 +148,10 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
         <button
           disabled={!selectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
-            styles.modify_btn
-          }`}>
-          Modify
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn
+            }`}>
+          {isLoading && <div className={styles.spinner} />}
+          <span className={isLoading && "ml-4"}>Modify</span>
         </button>
       </div>
     </>
@@ -143,8 +164,8 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId}) => {
           anchor={"bottom"}
           open={isModalOpen}
           onClose={closeModal}
-          classes={{paper: styles.bottomDrawer}}
-          transitionDuration={{enter: 200, exit: 200}}>
+          classes={{ paper: styles.bottomDrawer }}
+          transitionDuration={{ enter: 200, exit: 200 }}>
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
