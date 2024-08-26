@@ -14,8 +14,11 @@ import {Carousel} from "react-responsive-carousel";
 import {statusToImageMap} from "../../MyOrders/common/CommonContainer";
 import {format} from "date-fns";
 import styled from "@emotion/styled";
+import {setOrderIdFromOrderPage} from "@/store/Slices";
+import {useDispatch} from "react-redux";
 
 const KycPending = () => {
+  const dispatch = useDispatch();
   const [data, setData] = useState([]);
   const [sortOpen, setSortOpen] = useState(false);
   const dropDownRefSort = useRef(null);
@@ -31,7 +34,7 @@ const KycPending = () => {
   const StyledCarousel = styled(Carousel)`
     .control-dots {
       margin-top: 29px !important;
-      bottom: -2px !important;
+      bottom: -19px !important;
       background-color: #e2e4e8 !important;
       width: fit-content !important;
       border-radius: 10px !important;
@@ -230,6 +233,10 @@ const KycPending = () => {
     "out for delivery": "Out for Delivery",
   };
 
+  const handleKycOrder = () => {
+    dispatch(setOrderIdFromOrderPage(selectedOrder?.dealCodeNumber));
+  };
+
   return (
     data?.length > 0 && (
       <>
@@ -325,11 +332,6 @@ const KycPending = () => {
         )}
         <div className={style.MainContainer}>
           <div className={style.SubMainContainer}>
-            <div className={style.Heading}>
-              {"Hi" +
-                ", " +
-                localStorage.getItem("user_name").replace(/"/g, "")}
-            </div>
             <div className={style.BoxSection}>
               {!isHeightGreaterThan600 ? (
                 <StyledCarousel
@@ -446,14 +448,17 @@ const KycPending = () => {
                         {selectedOrder.zoho_sub_status?.toLowerCase() ===
                           "kyc in progress" && (
                           <a
-                            href={`/documentation?order_id=${selectedOption}`}
                             className={
                               "flex items-center justify-center whitespace-nowrap !text-start"
                             }>
                             <span>
-                              <span className={style.LinkText}>
-                                Complete KYC
-                              </span>{" "}
+                              <a
+                                href={`/documentation?order_id=${selectedOption}`}>
+                                {" "}
+                                <span className={style.LinkText}>
+                                  Complete KYC
+                                </span>
+                              </a>{" "}
                               <span className={style.RestText}>
                                 now to proceed with your order{" "}
                               </span>
@@ -479,7 +484,6 @@ const KycPending = () => {
                         {extendedStatus?.extendDisplay &&
                           selectedOrder.zoho_sub_status === "Delivered" && (
                             <a
-                              href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}
                               className={
                                 "flex items-center justify-center whitespace-nowrap !text-start"
                               }>
@@ -491,9 +495,12 @@ const KycPending = () => {
                                     "d MMMM, yyyy",
                                   )}`}{" "}
                                 </span>{" "}
-                                <span className={style.LinkText}>
-                                  Extend Subscription{" "}
-                                </span>
+                                <a
+                                  href={`/upfront_tenure_extension/${extendedStatus?.recurring_zo_id}`}>
+                                  <span className={style.LinkText}>
+                                    Extend Subscription{" "}
+                                  </span>
+                                </a>
                               </span>
                             </a>
                           )}
@@ -690,14 +697,19 @@ const KycPending = () => {
                         {selectedOrder.zoho_sub_status?.toLowerCase() ===
                           "kyc in progress" && (
                           <a
-                            href={`/documentation?order_id=${selectedOption}`}
                             className={
                               "flex items-center justify-center whitespace-nowrap !text-start"
                             }>
                             <span>
-                              <span className={style.LinkText}>
-                                Complete KYC
-                              </span>{" "}
+                              <a
+                                className={""}
+                                href={`/documentation?order_id=${selectedOption}`}>
+                                <span
+                                  onClick={() => handleKycOrder()}
+                                  className={style.LinkText}>
+                                  Complete KYC
+                                </span>
+                              </a>{" "}
                               <span className={style.RestText}>
                                 now to proceed with your order{" "}
                               </span>
@@ -749,7 +761,7 @@ const KycPending = () => {
                               : "/purchases"
                           }
                           className={
-                            "flex items-center justify-center whitespace-nowrap !text-start gap-1"
+                            "flex items-center justify-center whitespace-nowrap !text-start gap-1 w-fit"
                           }>
                           <span className={style.LinkText}>
                             {selectedOrder.zoho_sub_status === "Delivered"
