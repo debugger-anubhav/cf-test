@@ -15,6 +15,7 @@ import VerfiEmail from "./VerfiEmail";
 import docStyle from "../../DocumentsPage/style.module.css";
 import GstSdk from "../GstSdk";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
+import ProgressSection from "../ProgressBar";
 
 export default function ProfessionalDetails({
   getDashboardDetailsApi,
@@ -205,16 +206,20 @@ export default function ProfessionalDetails({
 
       {professionId !== 2 && (
         <>
-          <div className={styles.heading}>
-            <BackIcon
-              color={"#222222"}
-              size={20}
-              onClick={() => dispatch(setKycScreenName("dashboard"))}
-              className={"cursor-pointer"}
-            />
-            Additional information
+          <div className="flex w-full justify-between items-center">
+            <div className={styles.heading}>
+              <BackIcon
+                color={"#222222"}
+                size={20}
+                onClick={() => dispatch(setKycScreenName("dashboard"))}
+                className={"cursor-pointer"}
+              />
+              Additional information
+            </div>
+            <div>
+              <ProgressSection />
+            </div>
           </div>
-
           <Formik
             initialValues={initialValues()}
             validationSchema={getValidationSchema()}

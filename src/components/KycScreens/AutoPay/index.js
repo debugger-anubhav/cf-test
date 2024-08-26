@@ -10,6 +10,7 @@ import {endPoints} from "@/network/endPoints";
 import {RazorpayThemeColor, razorpayKey} from "../../../../appConfig";
 import LoaderComponent from "@/components/Common/Loader/LoaderComponent";
 import docStyle from "../../DocumentsPage/style.module.css";
+import ProgressSection from "../ProgressBar";
 
 const PaymentModeOpt = ["UPI", "Credit/Debit card", "Netbanking"];
 export default function AutoPay({getDashboardDetailsApi}) {
@@ -143,15 +144,19 @@ export default function AutoPay({getDashboardDetailsApi}) {
   return (
     <div className={styles.wrapper}>
       {loading && <LoaderComponent loading={loading} />}
-
-      <div className={styles.heading}>
-        <BackIcon
-          color={"#222222"}
-          size={20}
-          onClick={() => dispatch(setKycScreenName("dashboard"))}
-          className={"cursor-pointer"}
-        />
-        AutoPay
+      <div className="flex w-full justify-between items-center">
+        <div className={styles.heading}>
+          <BackIcon
+            color={"#222222"}
+            size={20}
+            onClick={() => dispatch(setKycScreenName("dashboard"))}
+            className={"cursor-pointer"}
+          />
+          AutoPay
+        </div>
+        <div>
+          <ProgressSection />
+        </div>
       </div>
       <div className="flex flex-col md:w-[50%] w-full gap-2 my-8">
         <p className={styles.label}>Choose your preferred payment mode</p>

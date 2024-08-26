@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./styles.module.css";
 import Modal from "react-responsive-modal";
-import { Close } from "@/assets/icon";
-import { Drawer } from "@mui/material";
+import {Close} from "@/assets/icon";
+import {Drawer} from "@mui/material";
 
-import { baseInstance } from "@/network/axios";
-import { endPoints } from "@/network/endPoints";
-import { format, parse } from "date-fns";
-import { decrypt } from "@/hooks/cryptoUtils";
-import { getLocalStorage } from "@/constants/constant";
+import {baseInstance} from "@/network/axios";
+import {endPoints} from "@/network/endPoints";
+import {format, parse} from "date-fns";
+import {decrypt} from "@/hooks/cryptoUtils";
+import {getLocalStorage} from "@/constants/constant";
 
-const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) => {
+const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isBottomShareDrawer, setIsBottomShareDrawer] = useState(false);
   const [slotData, setSlotdata] = useState();
@@ -51,7 +51,9 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
       )
       .then(res => {
         setSlotdata(res?.data?.data);
-        setSelectedDate(format(new Date(res?.data?.data?.srScheduledDatetime), "yyyy-MM-dd"),);
+        setSelectedDate(
+          format(new Date(res?.data?.data?.srScheduledDatetime), "yyyy-MM-dd"),
+        );
         const inputTime = res?.data?.data?.time;
         if (inputTime) {
           const parsedTime = parse(inputTime, "h:mm:ss a", new Date());
@@ -65,14 +67,16 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
 
         res?.data?.data?.srScheduledDatetime &&
           setCurrentDate(
-            format(new Date(res?.data?.data?.srScheduledDatetime), "do MMM, yyyy"),
+            format(
+              new Date(res?.data?.data?.srScheduledDatetime),
+              "do MMM, yyyy",
+            ),
           );
       });
   };
 
   const updateSlot = async () => {
-
-    setIsLoading(true)
+    setIsLoading(true);
 
     const body = {
       slot: `${selectedDate} 09:00:00`,
@@ -87,8 +91,8 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
     } catch (err) {
       console.log(err?.message || "some error");
     } finally {
-      setIsLoading(false)
-      window.location.reload(true)
+      setIsLoading(false);
+      window.location.reload(true);
     }
   };
 
@@ -119,8 +123,9 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
               }}>
               <div className={styles.outer_circle}>
                 <div
-                  className={`${selectedDate === item.date ? styles.inner_circle : ""
-                    }`}></div>
+                  className={`${
+                    selectedDate === item.date ? styles.inner_circle : ""
+                  }`}></div>
               </div>
               <p className={styles.date}>
                 {format(new Date(item?.date), "do")}
@@ -148,8 +153,9 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
         <button
           disabled={!selectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn
-            }`}>
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
+            styles.modify_btn
+          }`}>
           {isLoading && <div className={styles.spinner} />}
           <span className={isLoading && "ml-4"}>Modify</span>
         </button>
@@ -164,8 +170,8 @@ const ManageSchedule = ({ isModalOpen, closeModal, orderId, page, ticketID }) =>
           anchor={"bottom"}
           open={isModalOpen}
           onClose={closeModal}
-          classes={{ paper: styles.bottomDrawer }}
-          transitionDuration={{ enter: 200, exit: 200 }}>
+          classes={{paper: styles.bottomDrawer}}
+          transitionDuration={{enter: 200, exit: 200}}>
           <div className={styles.close_icon} onClick={closeModal}>
             <Close color={"#45454A"} size={24} className="cursor-pointer" />
           </div>
