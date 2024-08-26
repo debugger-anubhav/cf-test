@@ -129,7 +129,6 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                       {row?.zoho_case_id}
                     </TableCell>
                     <TableCell className={`${styles.tableCell} capitalize`}>
-                      {console.log(row?.request_type, "Hello")}
                       {row?.request_type.replace(/_/g, " ")}
                     </TableCell>
                     <TableCell className={styles.tableCell}>
