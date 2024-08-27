@@ -164,7 +164,7 @@ const FinancialInfo = ({dashboardDetails, uploadedDocsData, reject}) => {
   };
 
   return (
-    <div className="mt-8 w-full md:w-auto">
+    <div className="mt-8 w-full md:w-auto pb-[120px] md:pb-0">
       <div className="flex w-full justify-between items-center">
         <div className={styles.heading}>
           <BackIcon

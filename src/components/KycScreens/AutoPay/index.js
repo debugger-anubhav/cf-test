@@ -158,47 +158,8 @@ export default function AutoPay({getDashboardDetailsApi}) {
           <ProgressSection />
         </div>
       </div>
-      <div className="flex flex-col md:w-[50%] w-full gap-2 my-8">
+      <div className="flex flex-col md:w-[50%] w-full gap-2 my-8 pb-[120px] md:pb-0">
         <p className={styles.label}>Choose your preferred payment mode</p>
-        {/* {PaymentModeOpt?.map((item, index) => {
-          return (
-            <div
-              className={"flex gap-3 items-center cursor-pointer"}
-              key={index.toString()}
-              onClick={() => {
-                handleOptionChange(index);
-                setModeOfPayment(
-                  item.includes("banking")
-                    ? "emandate"
-                    : item.includes("card")
-                      ? "card"
-                      : "upi",
-                );
-              }}>
-              <input
-                type="radio"
-                className={styles.radio_button}
-                checked={selectedOption === index}
-                onChange={() => {
-                  handleOptionChange(index);
-                  setModeOfPayment(
-                    item.includes("banking")
-                      ? "emandate"
-                      : item.includes("card")
-                        ? "card"
-                        : "upi",
-                  );
-                }}
-              />
-              <label
-                className={
-                  "border w-full border-DDDDDF p-4 rounded-xl text-16 font-Poppins tracking-0.3 leading-6"
-                }>
-                {item}
-              </label>
-            </div>
-          );
-        })} */}
 
         {PaymentModeOpt?.map((item, index) => {
           return (

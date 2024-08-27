@@ -87,7 +87,7 @@
 }
 
 .proceed {
-  @apply mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-4 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 .heading_box {
   @apply py-3 px-4 font-Poppins border w-full lg:w-[502px] border-DDDDDF rounded-xl md:text-16 text-14 leading-6 tracking-0.3;
@@ -96,5 +96,5 @@
   @apply font-Poppins text-71717A text-14 leading-5 tracking-0.3 pt-4;
 }
 .sticky_btn_wrapper {
-  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-12 pb-6 w-full right-0;
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-[45px] pb-6 w-full right-0;
 }
