@@ -43,8 +43,8 @@ export default function GstSdk({
         const token = res?.data?.data?.result?.token;
         const config = new window.HyperKycConfig(
           token,
-          // "gst_backupflow",
-          "gst_web",
+          "gst_backupflow",
+          // "gst_in",
           selectedId,
         );
         window.HyperKYCModule.launch(config, handler);

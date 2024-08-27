@@ -14,7 +14,7 @@
   @apply text-71717A font-Poppins md:text-16 text-14;
 }
 .proceed {
-  @apply mt-0 lg:mt-6 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
+  @apply mt-0 lg:mt-4 rounded-lg bg-F6B704 font-medium text-222 lg:min-w-[223px] md:w-fit w-full px-8 h-12 xl:h-14 flex items-center justify-center gap-[10px];
 }
 .radio_button {
   @apply lg:w-5 lg:h-5 w-4 h-4 flex cursor-pointer;
@@ -23,5 +23,5 @@
   @apply text-[#5774AC] leading-6 -tracking-[2%] font-medium min-w-fit;
 }
 .sticky_btn_wrapper {
-  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-12 pb-6 w-full right-0;
+  @apply flex md:hidden p-4 bg-white fixed z-[111] bottom-[45px] pb-6 w-full right-0;
 }
