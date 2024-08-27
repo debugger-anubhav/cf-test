@@ -32,6 +32,28 @@ const PastRequestAccordian = ({pastRequestData}) => {
     toggleModal();
   };
 
+  const ShowPop = value => {
+    if (value === "request_pickup") {
+      return true;
+    } else if (value === "pickup_and_refund") {
+      return true;
+    } else if (value === "repair") {
+      return true;
+    } else if (value === "installation") {
+      return true;
+    } else if (value === "replacement") {
+      return true;
+    } else if (value === "upgrade") {
+      return true;
+    } else if (value === "relocation") {
+      return true;
+    } else if (value === "switch") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       {rows?.map((row, index) => {
@@ -72,20 +94,36 @@ const PastRequestAccordian = ({pastRequestData}) => {
                 <div
                   className={`${styles.tableCell} flex items-center gap-1 whitespace-nowrap`}>
                   <span className="font-medium">Scheduled Date:</span>{" "}
+                  {/* <span className="flex gap-2 whitespace-nowrap">{row?.scheduled_datetime
+                    ? `${format(
+                      new Date(row?.scheduled_datetime),
+                      "yyyy-MM-dd",
+                    )}`
+                    : "NA"}
+                    {(row?.scheduled_datetime || row?.srScheduledDatetime) && ShowPop(row?.request_type) && <span onClick={() => handleClick(row?.order_id, row?.zoho_case_id)} className={"cursor-pointer"} ><EditIcon size={18} /> </span>}
+                  </span> */}
                   <span className="flex gap-2 whitespace-nowrap">
                     {row?.scheduled_datetime
                       ? `${format(
                           new Date(row?.scheduled_datetime),
                           "yyyy-MM-dd",
                         )}`
-                      : "NA"}
-                    {row?.allowScheduleDate && (
-                      <span
-                        onClick={() => handleClick(row?.order_id)}
-                        className={"cursor-pointer"}>
-                        <EditIcon size={18} />{" "}
-                      </span>
-                    )}
+                      : row?.srScheduledDatetime
+                        ? `${format(
+                            new Date(row?.srScheduledDatetime),
+                            "yyyy-MM-dd",
+                          )}`
+                        : "NA"}
+                    {(row?.scheduled_datetime || row?.srScheduledDatetime) &&
+                      ShowPop(row?.request_type) && (
+                        <span
+                          onClick={() =>
+                            handleClick(row?.order_id, row?.zoho_case_id)
+                          }
+                          className={"cursor-pointer"}>
+                          <EditIcon size={18} />{" "}
+                        </span>
+                      )}
                   </span>
                 </div>
                 <div className={styles.tableCell}>

@@ -135,15 +135,17 @@ function PastRequests({pastRequestData, loadingSkeleton}) {
                                 "yyyy-MM-dd",
                               )}`
                             : "NA"}
-                        {ShowPop(row?.request_type) && (
-                          <span
-                            onClick={() =>
-                              handleClick(row?.order_id, row?.zoho_case_id)
-                            }
-                            className={"cursor-pointer"}>
-                            <EditIcon size={18} />{" "}
-                          </span>
-                        )}
+                        {(row?.scheduled_datetime ||
+                          row?.srScheduledDatetime) &&
+                          ShowPop(row?.request_type) && (
+                            <span
+                              onClick={() =>
+                                handleClick(row?.order_id, row?.zoho_case_id)
+                              }
+                              className={"cursor-pointer"}>
+                              <EditIcon size={18} />{" "}
+                            </span>
+                          )}
                       </span>
                     </TableCell>
                     <TableCell className={styles.tableCell}>

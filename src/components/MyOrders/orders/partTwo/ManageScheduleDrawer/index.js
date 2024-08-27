@@ -17,6 +17,7 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
   const [selectedDate, setSelectedDate] = useState();
   const [currentDate, setCurrentDate] = useState();
   const [scheduledTime, setScheduledTime] = useState();
+  const [formatedSelectedDate, setFormatedSelectedDate] = useState(null);
 
   const userId = decrypt(getLocalStorage("_ga"));
   const handleresize = e => {
@@ -33,6 +34,13 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
       window.removeEventListener("resize", handleresize); // Clean up when component unmounts
     };
   }, []);
+
+  useEffect(() => {
+    if (selectedDate) {
+      const temp = format(new Date(selectedDate), "do MMM, yyyy");
+      setFormatedSelectedDate(temp);
+    }
+  }, [selectedDate]);
 
   const getDeliverySlots = () => {
     const body = {
@@ -105,7 +113,11 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
       <h1 className={styles.modal_head}>Manage delivery slot</h1>
       <div className={styles.desc_wrapper}>
         <p className={styles.desc}>
-          Current scheduled date: {currentDate} at {scheduledTime}
+          Current scheduled date:{" "}
+          <span className="font-semibold">
+            {" "}
+            {currentDate} at {scheduledTime}
+          </span>
         </p>
         <p className={styles.desc}>
           Select to change slot as per your preference
@@ -151,11 +163,13 @@ const ManageSchedule = ({isModalOpen, closeModal, orderId, page, ticketID}) => {
           Cancel
         </button>
         <button
-          disabled={!selectedDate}
+          disabled={!selectedDate || currentDate === formatedSelectedDate}
           onClick={() => updateSlot()}
-          className={`${!selectedDate && "!bg-[#FFDF85]"} ${
-            styles.modify_btn
-          }`}>
+          className={`${!selectedDate && "!bg-[#FFDF85]"} ${styles.modify_btn}
+          ${
+            currentDate === formatedSelectedDate &&
+            "!bg-[#FFDF85] !cursor-not-allowed"
+          } !w-full`}>
           {isLoading && <div className={styles.spinner} />}
           <span className={isLoading && "ml-4"}>Modify</span>
         </button>

@@ -1,5 +1,5 @@
 .main_wrapper {
-  @apply flex md:w-[60%]  xl:w-[67%]  w-full  fixed bottom-0 right-0  md:right-[70px] xl:right-[90px] macbook:right-[120px]  flex-col md:hidden;
+  @apply flex md:w-[60%]  xl:w-[67%]  w-full  fixed bottom-0 right-0  md:right-[70px] xl:right-[90px] macbook:right-[120px]  flex-col md:hidden z-10;
 }
 .wrapper {
   background: linear-gradient(180deg, #5773ac 0%, #8653e9 100%);
@@ -12,7 +12,7 @@
   @apply h-[6px] bg-[#67AF7B];
 }
 .progressBarContainer {
-  @apply mt-2 mx-4 w-[95%] h-[6px];
+  @apply mt-2 mx-4 w-[92%] ms:w-[95%] h-[6px];
   background-color: #d9d9d9;
   margin-right: 149px !important;
 }
