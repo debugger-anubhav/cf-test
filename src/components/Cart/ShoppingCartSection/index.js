@@ -818,6 +818,7 @@ const ShoppingCartSection = () => {
 
           <div className={styles.right_div} id="rightDiv">
             <div>
+              {/* cityshield row */}
               <div className={styles.city_shield_div}>
                 <div className={styles.city_shield_head_div}>
                   <div className={styles.verify_icon_div}>
@@ -872,6 +873,7 @@ const ShoppingCartSection = () => {
                 </p>
               </div>
 
+              {/* coins row */}
               {isLogin && isOfflineCustomer === 0 && (
                 <div className={styles.coins_div}>
                   <div className={styles.coins_left_div}>
@@ -913,42 +915,44 @@ const ShoppingCartSection = () => {
                 </div>
               )}
 
-              {arr[0]?.is_frp !== 1 && (
-                <div
-                  className={`${styles.coupons_wrapper} border-[4px] border-green-700`}
-                  onClick={() => {
-                    if (isCouponApplied) {
-                      setIsCouponApplied(false);
-                      setCode("");
-                      dispatch(getCouponCodeUsed(""));
-                    } else {
-                      setCouponDrawerOpen(true);
-                    }
-                  }}>
-                  <p className={styles.offer_text}>
-                    {isCouponApplied ? `${code} applied` : "Apply Coupon"}
-                    <span>
-                      <Image
-                        loader={({src}) => src}
-                        src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
-                        alt="paty_icon"
-                        className="w-[24px] h-[24px] inline-block ml-2"
-                        loading="lazy"
-                        width={24}
-                        height={24}
-                      />
-                    </span>
-                  </p>
-                  {isCouponApplied ? (
-                    <p className={styles.remove_txt}>Remove</p>
-                  ) : (
-                    <div onClick={() => setCouponDrawerOpen(true)}>
-                      <ArrowForw color={"#3E688E"} className={styles.arrow} />
-                    </div>
-                  )}
-                </div>
-              )}
+              {/* coupon row  */}
+              {/* {arr[0]?.is_frp !== 1 && ( */}
+              <div
+                className={`${styles.coupons_wrapper} border-[4px] border-green-700`}
+                onClick={() => {
+                  if (isCouponApplied) {
+                    setIsCouponApplied(false);
+                    setCode("");
+                    dispatch(getCouponCodeUsed(""));
+                  } else {
+                    setCouponDrawerOpen(true);
+                  }
+                }}>
+                <p className={styles.offer_text}>
+                  {isCouponApplied ? `${code} applied` : "Apply Coupon"}
+                  <span>
+                    <Image
+                      loader={({src}) => src}
+                      src="https://d3juy0zp6vqec8.cloudfront.net/images/icons/party_popper.svg"
+                      alt="paty_icon"
+                      className="w-[24px] h-[24px] inline-block ml-2"
+                      loading="lazy"
+                      width={24}
+                      height={24}
+                    />
+                  </span>
+                </p>
+                {isCouponApplied ? (
+                  <p className={styles.remove_txt}>Remove</p>
+                ) : (
+                  <div onClick={() => setCouponDrawerOpen(true)}>
+                    <ArrowForw color={"#3E688E"} className={styles.arrow} />
+                  </div>
+                )}
+              </div>
+              {/* )} */}
 
+              {/* payment mode  */}
               {arr[0]?.is_frp !== 1 && showMonthlyToggle && (
                 <div className={styles.payment_mode}>
                   <h2 className={styles.pref_mode_head}>
