@@ -121,14 +121,20 @@ const HeroBanner = () => {
                     <CldImage
                       src={url}
                       alt={""}
-                      sizes="(max-width: 640px) 100vw,
-                     (max-width: 768px) 75vw,
-                     (max-width: 1024px) 50vw,
-                     1920px"
+                      //   sizes="(max-width: 640px) 100vw,
+                      //  (max-width: 768px) 75vw,
+                      //  (max-width: 1024px) 50vw,
+                      //  1920px"
                       width={1920}
                       height={800}
                       crop="scale"
-                      quality="auto:best"
+                      quality={
+                        typeof window !== "undefined"
+                          ? window.innerWidth <= 768
+                            ? "auto:low"
+                            : "auto:best"
+                          : "auto:best"
+                      }
                       priority={isFirst}
                       loading={isFirst ? "eager" : "lazy"}
                       className="cursor-pointer rounded-lg"
