@@ -12,24 +12,17 @@ import {CityNameToId, getLocalStorage} from "@/constants/constant";
 const getCityPrimaryBanner = city => {
   switch (city) {
     case "Bangalore":
-      return "freedom_sale_banner_gnirlr.webp";
-
     case "Delhi":
     case "Gurgaon":
     case "Faridabad":
-      return "freedom_sale_banner_gnirlr.webp";
-
-    case "Ghaziabad/Noida":
-      return "freedom_sale_ghz_noida_banner_dzomhm.webp";
-
     case "Pune":
-      return "freedom_sale_banner_gnirlr.webp";
-
     case "Mumbai":
-      return "freedom_sale_banner_gnirlr.webp";
-
     case "Hyderabad":
       return "freedom_sale_banner_gnirlr.webp";
+    case "Ghaziabad/Noida":
+      return "freedom_sale_ghz_noida_banner_dzomhm.webp";
+    default:
+      return null;
   }
 };
 
@@ -51,8 +44,7 @@ const banners = [
 const HeroBanner = () => {
   const city = CityNameToId[getLocalStorage("cityId")];
 
-  const {cityName, showAllRentLink} =
-    useSelector(state => state.homePagedata) || {};
+  const {cityName, showAllRentLink} = useSelector(state => state.homePagedata);
 
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
@@ -60,32 +52,30 @@ const HeroBanner = () => {
 
   const timerId = useRef(undefined);
 
-  const completeBanners = useMemo(() => {
-    if (cityName) {
-      return [
-        {
+  const dynamicBanner = useMemo(() => {
+    return cityName
+      ? {
           url: getCityPrimaryBanner(city),
           link: "/home-furniture-rental",
-        },
-        ...banners,
-      ];
-    } else {
-      return [...banners];
-    }
+        }
+      : null;
   }, [cityName]);
+
+  const completeBanners = useMemo(() => {
+    return dynamicBanner ? [dynamicBanner, ...banners] : [...banners];
+  }, [dynamicBanner]);
 
   useEffect(() => {
     setShowLinkForRentPage(showAllRentLink);
   }, [showAllRentLink]);
 
   useEffect(() => {
-    if (completeBanners.length !== banners.length) {
-      setCurrentIndex(0);
+    setCurrentIndex(0);
+
+    if (completeBanners.length > 1) {
       timerId.current = setInterval(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % completeBanners.length);
       }, 3000);
-    } else {
-      setCurrentIndex(1);
     }
 
     return () => clearInterval(timerId.current);
@@ -104,18 +94,22 @@ const HeroBanner = () => {
             onChange={index => setCurrentIndex(index)}
             swipeable
             width={"100%"}>
-            {completeBanners.map(({url, link}) => {
+            {completeBanners.map(({url, link}, index) => {
               const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+              const isFirst = index === 0;
+
               return (
                 <Fragment key={link}>
-                  <Head>
-                    <link
-                      rel="preload"
-                      href={cloudinaryUrl}
-                      as="image"
-                      type="image/webp"
-                    />
-                  </Head>
+                  {isFirst && (
+                    <Head>
+                      <link
+                        rel="preload"
+                        href={cloudinaryUrl}
+                        as="image"
+                        type="image/webp"
+                      />
+                    </Head>
+                  )}
                   <Link
                     href={
                       showLinkForRentPage && !link.includes("citymax")
@@ -132,11 +126,11 @@ const HeroBanner = () => {
                      (max-width: 1024px) 50vw,
                      1920px"
                       width={1920}
-                      improve={"50"}
                       height={800}
                       crop="scale"
                       quality="auto:best"
-                      priority
+                      priority={isFirst}
+                      loading={isFirst ? "eager" : "lazy"}
                       className="cursor-pointer rounded-lg"
                       style={{pointerEvents: "all"}}
                     />
