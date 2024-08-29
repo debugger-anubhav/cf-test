@@ -12,17 +12,24 @@ import {CityNameToId, getLocalStorage} from "@/constants/constant";
 const getCityPrimaryBanner = city => {
   switch (city) {
     case "Bangalore":
+      return "freedom_sale_banner_gnirlr.webp";
+
     case "Delhi":
     case "Gurgaon":
     case "Faridabad":
-    case "Pune":
-    case "Mumbai":
-    case "Hyderabad":
       return "freedom_sale_banner_gnirlr.webp";
+
     case "Ghaziabad/Noida":
       return "freedom_sale_ghz_noida_banner_dzomhm.webp";
-    default:
-      return null;
+
+    case "Pune":
+      return "freedom_sale_banner_gnirlr.webp";
+
+    case "Mumbai":
+      return "freedom_sale_banner_gnirlr.webp";
+
+    case "Hyderabad":
+      return "freedom_sale_banner_gnirlr.webp";
   }
 };
 
@@ -44,7 +51,8 @@ const banners = [
 const HeroBanner = () => {
   const city = CityNameToId[getLocalStorage("cityId")];
 
-  const {cityName, showAllRentLink} = useSelector(state => state.homePagedata);
+  const {cityName, showAllRentLink} =
+    useSelector(state => state.homePagedata) || {};
 
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
@@ -52,30 +60,32 @@ const HeroBanner = () => {
 
   const timerId = useRef(undefined);
 
-  const dynamicBanner = useMemo(() => {
-    return cityName
-      ? {
+  const completeBanners = useMemo(() => {
+    if (cityName) {
+      return [
+        {
           url: getCityPrimaryBanner(city),
           link: "/home-furniture-rental",
-        }
-      : null;
+        },
+        ...banners,
+      ];
+    } else {
+      return [...banners];
+    }
   }, [cityName]);
-
-  const completeBanners = useMemo(() => {
-    return dynamicBanner ? [dynamicBanner, ...banners] : [...banners];
-  }, [dynamicBanner]);
 
   useEffect(() => {
     setShowLinkForRentPage(showAllRentLink);
   }, [showAllRentLink]);
 
   useEffect(() => {
-    setCurrentIndex(0);
-
-    if (completeBanners.length > 1) {
+    if (completeBanners.length !== banners.length) {
+      setCurrentIndex(0);
       timerId.current = setInterval(() => {
         setCurrentIndex(prevIndex => (prevIndex + 1) % completeBanners.length);
       }, 3000);
+    } else {
+      setCurrentIndex(1);
     }
 
     return () => clearInterval(timerId.current);
@@ -94,22 +104,18 @@ const HeroBanner = () => {
             onChange={index => setCurrentIndex(index)}
             swipeable
             width={"100%"}>
-            {completeBanners.map(({url, link}, index) => {
+            {completeBanners.map(({url, link}) => {
               const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
-              const isFirst = index === 0;
-
               return (
                 <Fragment key={link}>
-                  {isFirst && (
-                    <Head>
-                      <link
-                        rel="preload"
-                        href={cloudinaryUrl}
-                        as="image"
-                        type="image/webp"
-                      />
-                    </Head>
-                  )}
+                  <Head>
+                    <link
+                      rel="preload"
+                      href={cloudinaryUrl}
+                      as="image"
+                      type="image/webp"
+                    />
+                  </Head>
                   <Link
                     href={
                       showLinkForRentPage && !link.includes("citymax")
@@ -121,22 +127,16 @@ const HeroBanner = () => {
                     <CldImage
                       src={url}
                       alt={""}
-                      //   sizes="(max-width: 640px) 100vw,
-                      //  (max-width: 768px) 75vw,
-                      //  (max-width: 1024px) 50vw,
-                      //  1920px"
+                      sizes="(max-width: 640px) 100vw,
+                     (max-width: 768px) 75vw,
+                     (max-width: 1024px) 50vw,
+                     1920px"
                       width={1920}
+                      improve={"50"}
                       height={800}
                       crop="scale"
-                      quality={
-                        typeof window !== "undefined"
-                          ? window.innerWidth <= 768
-                            ? "auto:low"
-                            : "auto:best"
-                          : "auto:best"
-                      }
-                      priority={isFirst}
-                      loading={isFirst ? "eager" : "lazy"}
+                      quality="auto:best"
+                      priority
                       className="cursor-pointer rounded-lg"
                       style={{pointerEvents: "all"}}
                     />
