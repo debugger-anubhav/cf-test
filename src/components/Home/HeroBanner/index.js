@@ -104,18 +104,20 @@ const HeroBanner = () => {
             onChange={index => setCurrentIndex(index)}
             swipeable
             width={"100%"}>
-            {completeBanners.map(({url, link}) => {
-              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/f_auto,q_auto,w_1920,h_800/${url}`;
+            {completeBanners.map(({url, link}, index) => {
+              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_3840,h_1600/f_auto/q_auto:best${url}`;
               return (
                 <Fragment key={link}>
-                  <Head>
-                    <link
-                      rel="preload"
-                      href={cloudinaryUrl}
-                      as="image"
-                      type="image/webp"
-                    />
-                  </Head>
+                  {index === 0 && (
+                    <Head>
+                      <link
+                        rel="preload"
+                        href={cloudinaryUrl}
+                        as="image"
+                        type="image/webp"
+                      />
+                    </Head>
+                  )}
                   <Link
                     href={
                       showLinkForRentPage && !link.includes("citymax")
@@ -136,7 +138,7 @@ const HeroBanner = () => {
                       height={800}
                       crop="scale"
                       quality="auto:best"
-                      priority
+                      priority={index === 0}
                       className="cursor-pointer rounded-lg"
                       style={{pointerEvents: "all"}}
                     />
