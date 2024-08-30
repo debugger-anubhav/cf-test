@@ -38,19 +38,21 @@ const RentFurnitureAndAppliances = loadable(
   },
 );
 
-const RecentlyViewedProduct = loadable(
-  () => import("@/components/Home/RecentlyViewedProduct"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
+// const RecentlyViewedProduct = loadable(
+//   () => import("@/components/Home/RecentlyViewedProduct"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
+// );
+import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+import TrendingProducts from "@/components/Home/TrendingProducts";
 
-const TrendingProducts = loadable(
-  () => import("@/components/Home/TrendingProducts"),
-  {
-    fallback: <ProductRowSkeleton />,
-  },
-);
+// const TrendingProducts = loadable(
+//   () => import("@/components/Home/TrendingProducts"),
+//   {
+//     fallback: <ProductRowSkeleton />,
+//   },
+// );
 
 const OffersAndCoupons = loadable(
   () => import("@/components/Home/OffersAndCoupons"),
@@ -160,6 +162,10 @@ export default function Home() {
       }
     }
   }, [userId]);
+
+  new PerformanceObserver(list => {
+    console.log("list", list);
+  }).observe({type: "largest-contentful-paint", buffered: true});
 
   return (
     <>
