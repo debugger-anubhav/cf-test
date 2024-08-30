@@ -171,7 +171,7 @@ export default function Home() {
         <AnnouncementBar />
         <Header />
         <MenuList />
-        <HeroBanner />
+        {/* <HeroBanner /> */}
 
         {userId && <KycPending />}
 
