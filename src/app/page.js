@@ -4,7 +4,7 @@ import React, {useEffect, useRef} from "react";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
-import HeroBanner from "@/components/Home/HeroBanner";
+// import HeroBanner from "@/components/Home/HeroBanner";
 
 import loadable from "@loadable/component";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
