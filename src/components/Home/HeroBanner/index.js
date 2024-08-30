@@ -7,31 +7,31 @@ import {useSelector} from "react-redux";
 import {CldImage} from "next-cloudinary";
 import Head from "next/head";
 import Link from "next/link";
-import {CityNameToId, getLocalStorage} from "@/constants/constant";
+// import {CityNameToId, getLocalStorage} from "@/constants/constant";
 
-const getCityPrimaryBanner = city => {
-  switch (city) {
-    case "Bangalore":
-      return "freedom_sale_banner_gnirlr.webp";
+// const getCityPrimaryBanner = city => {
+//   switch (city) {
+//     case "Bangalore":
+//       return "freedom_sale_banner_gnirlr.webp";
 
-    case "Delhi":
-    case "Gurgaon":
-    case "Faridabad":
-      return "freedom_sale_banner_gnirlr.webp";
+//     case "Delhi":
+//     case "Gurgaon":
+//     case "Faridabad":
+//       return "freedom_sale_banner_gnirlr.webp";
 
-    case "Ghaziabad/Noida":
-      return "freedom_sale_ghz_noida_banner_dzomhm.webp";
+//     case "Ghaziabad/Noida":
+//       return "freedom_sale_ghz_noida_banner_dzomhm.webp";
 
-    case "Pune":
-      return "freedom_sale_banner_gnirlr.webp";
+//     case "Pune":
+//       return "freedom_sale_banner_gnirlr.webp";
 
-    case "Mumbai":
-      return "freedom_sale_banner_gnirlr.webp";
+//     case "Mumbai":
+//       return "freedom_sale_banner_gnirlr.webp";
 
-    case "Hyderabad":
-      return "freedom_sale_banner_gnirlr.webp";
-  }
-};
+//     case "Hyderabad":
+//       return "freedom_sale_banner_gnirlr.webp";
+//   }
+// };
 
 const banners = [
   {
@@ -64,7 +64,7 @@ const banners = [
 ];
 
 const HeroBanner = () => {
-  const city = CityNameToId[getLocalStorage("cityId")];
+  // const city = CityNameToId[getLocalStorage("cityId")];
 
   const {cityName, showAllRentLink} =
     useSelector(state => state.homePagedata) || {};
