@@ -57,8 +57,23 @@ const HeroBanner = () => {
   const [showLinkForRentPage, setShowLinkForRentPage] =
     useState(showAllRentLink);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 600 : false,
+  );
+  const [isTab, setIsTab] = useState(
+    typeof window !== "undefined"
+      ? window.innerWidth > 600 && window.innerWidth <= 1024
+      : false,
+  );
 
   const timerId = useRef(undefined);
+
+  const handleResize = e => {
+    const {innerWidth} = e.target;
+    setIsMobile(innerWidth < 600);
+    setIsTab(innerWidth > 600 && innerWidth <= 1024);
+    console.log(innerWidth > 600 && innerWidth <= 1024);
+  };
 
   const completeBanners = useMemo(() => {
     if (cityName) {
@@ -91,6 +106,17 @@ const HeroBanner = () => {
     return () => clearInterval(timerId.current);
   }, [completeBanners]);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.addEventListener("resize", handleResize);
+
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
+
+  // console.log("is tab", isTab);
+  // console.log("is mobile", isMobile);
+
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
@@ -105,7 +131,8 @@ const HeroBanner = () => {
             swipeable
             width={"100%"}>
             {completeBanners.map(({url, link}, index) => {
-              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_3840,h_1600/f_auto/q_auto:best${url}`;
+              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_${isMobile ? 400 : isTab ? 600 : 1920},h_${isMobile ? 150 : isTab ? 260 : 800}/f_auto/q_auto:best${url}`;
+
               return (
                 <Fragment key={link}>
                   {index === 0 && (
@@ -129,14 +156,14 @@ const HeroBanner = () => {
                     <CldImage
                       src={url}
                       alt={""}
-                      sizes="(max-width: 640px) 100vw,
-                     (max-width: 768px) 75vw,
-                     (max-width: 1024px) 50vw,
-                     1920px"
-                      width={1920}
+                      // sizes="(max-width: 640px) 100vw,
+                      //  (max-width: 768px) 75vw,
+                      //  (max-width: 1024px) 50vw,
+                      //  1920px"
+                      width={isMobile ? 400 : isTab ? 600 : 1920}
                       improve={"50"}
-                      height={800}
-                      crop="scale"
+                      height={isMobile ? 150 : isTab ? 260 : 800}
+                      // crop="scale"
                       quality="auto:best"
                       priority={index === 0}
                       className="cursor-pointer rounded-lg"
