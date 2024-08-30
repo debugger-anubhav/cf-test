@@ -183,7 +183,7 @@ const HeroBanner = () => {
                         height={isMobile ? 150 : isTab ? 260 : 800}
                         // crop="scale"
                         quality="auto:best"
-                        priority={index === 0}
+                        priority
                         className="cursor-pointer rounded-lg"
                         style={{pointerEvents: "all"}}
                       />
