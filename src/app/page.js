@@ -4,8 +4,7 @@ import React, {useEffect, useRef} from "react";
 
 import AnnouncementBar from "@/components/Common/AnnouncementBar";
 import Header from "@/components/Common/Header";
-// import HeroBanner from "@/components/Home/HeroBanner";
-
+import HeroBanner from "@/components/Home/HeroBanner";
 import loadable from "@loadable/component";
 import {ProductRowSkeleton} from "@/components/Common/ProductRowSkeleton";
 import {RentFurnitureSkeleton} from "@/components/Home/RentFurnitureAndAppliances";
@@ -26,8 +25,6 @@ import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
 import KycPending from "@/components/Home/KycPending";
-// import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
-import TrendingProducts from "@/components/Home/TrendingProducts";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
   fallback: <ContentSkeleton />,
@@ -47,12 +44,12 @@ const RecentlyViewedProduct = loadable(
   },
 );
 
-// const TrendingProducts = loadable(
-//   () => import("@/components/Home/TrendingProducts"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const TrendingProducts = loadable(
+  () => import("@/components/Home/TrendingProducts"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 const OffersAndCoupons = loadable(
   () => import("@/components/Home/OffersAndCoupons"),
@@ -173,7 +170,7 @@ export default function Home() {
         <AnnouncementBar />
         <Header />
         <MenuList />
-        {/* <HeroBanner /> */}
+        <HeroBanner />
 
         {userId && <KycPending />}
 

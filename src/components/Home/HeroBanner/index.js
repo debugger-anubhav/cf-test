@@ -35,15 +35,30 @@ const getCityPrimaryBanner = city => {
 
 const banners = [
   {
-    url: "appliance_banner_llwnir.webp",
+    // url: "appliance_banner_llwnir.webp",
+    url: {
+      mobile: "banner1_mobile",
+      tab: "banner1_tab",
+      desktop: "banner1",
+    },
     link: "/home-appliances-rental",
   },
   {
-    url: "citymax_banner_os9nbn.webp",
+    // url: "citymax_banner_os9nbn.webp",
+    url: {
+      mobile: "banner2_mobile",
+      tab: "banner2_tab",
+      desktop: "banner2",
+    },
     link: "/citymax",
   },
   {
-    url: "discount_deals_banner_q7vjac.webp",
+    // url: "discount_deals_banner_q7vjac.webp",
+    url: {
+      mobile: "banner3_mobile",
+      tab: "banner3_tab",
+      desktop: "banner3",
+    },
     link: "/discount-deals",
   },
 ];
@@ -79,7 +94,12 @@ const HeroBanner = () => {
     if (cityName) {
       return [
         {
-          url: getCityPrimaryBanner(city),
+          // url: getCityPrimaryBanner(city),
+          url: {
+            mobile: "banner4_mobile",
+            tab: "banner4_tab",
+            desktop: "banner4",
+          },
           link: "/home-furniture-rental",
         },
         ...banners,
@@ -114,9 +134,6 @@ const HeroBanner = () => {
     }
   }, []);
 
-  // console.log("is tab", isTab);
-  // console.log("is mobile", isMobile);
-
   return (
     <div
       className={`${styles.hero_banner_wrapper} flex-col lg:min-h-[385px] min-h-[125px]`}>
@@ -130,49 +147,51 @@ const HeroBanner = () => {
             onChange={index => setCurrentIndex(index)}
             swipeable
             width={"100%"}>
-            {completeBanners.map(({url, link}, index) => {
-              const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_${isMobile ? 400 : isTab ? 600 : 1920},h_${isMobile ? 150 : isTab ? 260 : 800}/f_auto/q_auto:best${url}`;
+            {completeBanners.map(
+              ({url: {mobile, tab, desktop}, link}, index) => {
+                const cloudinaryUrl = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/e_improve:50/c_scale,w_${isMobile ? 400 : isTab ? 600 : 1920},h_${isMobile ? 150 : isTab ? 260 : 800}/f_auto/q_auto:best${isMobile ? mobile : isTab ? tab : desktop}`;
 
-              return (
-                <Fragment key={link}>
-                  {index === 0 && (
-                    <Head>
-                      <link
-                        rel="preload"
-                        href={cloudinaryUrl}
-                        as="image"
-                        type="image/webp"
+                return (
+                  <Fragment key={link}>
+                    {index === 0 && (
+                      <Head>
+                        <link
+                          rel="preload"
+                          href={cloudinaryUrl}
+                          as="image"
+                          type="image/webp"
+                        />
+                      </Head>
+                    )}
+                    <Link
+                      href={
+                        showLinkForRentPage && !link.includes("citymax")
+                          ? `${cityName
+                              .replace(/\//g, "-")
+                              ?.toLowerCase()}${link}`
+                          : link
+                      }>
+                      <CldImage
+                        src={isMobile ? mobile : isTab ? tab : desktop}
+                        alt={""}
+                        // sizes="(max-width: 640px) 100vw,
+                        //  (max-width: 768px) 75vw,
+                        //  (max-width: 1024px) 50vw,
+                        //  1920px"
+                        width={isMobile ? 400 : isTab ? 600 : 1920}
+                        improve={"50"}
+                        height={isMobile ? 150 : isTab ? 260 : 800}
+                        // crop="scale"
+                        quality="auto:best"
+                        priority={index === 0}
+                        className="cursor-pointer rounded-lg"
+                        style={{pointerEvents: "all"}}
                       />
-                    </Head>
-                  )}
-                  <Link
-                    href={
-                      showLinkForRentPage && !link.includes("citymax")
-                        ? `${cityName
-                            .replace(/\//g, "-")
-                            ?.toLowerCase()}${link}`
-                        : link
-                    }>
-                    <CldImage
-                      src={url}
-                      alt={""}
-                      // sizes="(max-width: 640px) 100vw,
-                      //  (max-width: 768px) 75vw,
-                      //  (max-width: 1024px) 50vw,
-                      //  1920px"
-                      width={isMobile ? 400 : isTab ? 600 : 1920}
-                      improve={"50"}
-                      height={isMobile ? 150 : isTab ? 260 : 800}
-                      // crop="scale"
-                      quality="auto:best"
-                      priority={index === 0}
-                      className="cursor-pointer rounded-lg"
-                      style={{pointerEvents: "all"}}
-                    />
-                  </Link>
-                </Fragment>
-              );
-            })}
+                    </Link>
+                  </Fragment>
+                );
+              },
+            )}
           </Carousel>
         </div>
       )}
