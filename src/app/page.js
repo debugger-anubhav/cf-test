@@ -26,7 +26,7 @@ import {setHomepageCardWorker} from "@/store/Slices";
 import Worker from "worker-loader!../constants/commonWorkers/homepageCardsWorker.js";
 import {useDispatch} from "react-redux";
 import KycPending from "@/components/Home/KycPending";
-import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
+// import RecentlyViewedProduct from "@/components/Home/RecentlyViewedProduct";
 import TrendingProducts from "@/components/Home/TrendingProducts";
 
 const TextContent = loadable(() => import("@/components/Common/TextContent"), {
@@ -40,12 +40,12 @@ const RentFurnitureAndAppliances = loadable(
   },
 );
 
-// const RecentlyViewedProduct = loadable(
-//   () => import("@/components/Home/RecentlyViewedProduct"),
-//   {
-//     fallback: <ProductRowSkeleton />,
-//   },
-// );
+const RecentlyViewedProduct = loadable(
+  () => import("@/components/Home/RecentlyViewedProduct"),
+  {
+    fallback: <ProductRowSkeleton />,
+  },
+);
 
 // const TrendingProducts = loadable(
 //   () => import("@/components/Home/TrendingProducts"),
@@ -162,10 +162,6 @@ export default function Home() {
       }
     }
   }, [userId]);
-
-  new PerformanceObserver(list => {
-    console.log("list", list);
-  }).observe({type: "largest-contentful-paint", buffered: true});
 
   return (
     <>

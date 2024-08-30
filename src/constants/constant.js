@@ -545,6 +545,7 @@ export function getLocalStorage(key) {
     return data === "undefined" ? null : JSON.parse(data);
   }
 }
+
 export function getLocalStorageString(key, value) {
   if (typeof window !== "undefined") {
     return window?.localStorage?.getItem(key);
